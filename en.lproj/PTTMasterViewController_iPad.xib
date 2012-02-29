@@ -1,0 +1,2024 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
+	<data>
+		<int key="IBDocument.SystemTarget">1280</int>
+		<string key="IBDocument.SystemVersion">12A128p</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2427</string>
+		<string key="IBDocument.AppKitVersion">1157.7</string>
+		<string key="IBDocument.HIToolboxVersion">599.00</string>
+		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
+			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+			<string key="NS.object.0">1420</string>
+		</object>
+		<array key="IBDocument.IntegratedClassDependencies">
+			<string>IBUIImageView</string>
+			<string>IBUILabel</string>
+			<string>IBUINavigationBar</string>
+			<string>IBProxyObject</string>
+			<string>IBUICustomObject</string>
+			<string>IBUIWindow</string>
+			<string>IBUITabBar</string>
+			<string>IBUINavigationItem</string>
+			<string>IBUISplitViewController</string>
+			<string>IBUITabBarItem</string>
+			<string>IBUITableViewController</string>
+			<string>IBUIView</string>
+			<string>IBUINavigationController</string>
+			<string>IBUIViewController</string>
+			<string>IBUITabBarController</string>
+		</array>
+		<array key="IBDocument.PluginDependencies">
+			<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+		</array>
+		<object class="NSMutableDictionary" key="IBDocument.Metadata">
+			<string key="NS.key.0">PluginDependencyRecalculationVersion</string>
+			<integer value="1" key="NS.object.0"/>
+		</object>
+		<array class="NSMutableArray" key="IBDocument.RootObjects" id="1000">
+			<object class="IBProxyObject" id="841351856">
+				<string key="IBProxiedObjectIdentifier">IBFilesOwner</string>
+				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+			</object>
+			<object class="IBProxyObject" id="371349661">
+				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
+				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+			</object>
+			<object class="IBUIViewController" id="290563590">
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+					<int key="IBUIStatusBarStyle">2</int>
+				</object>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics" id="1024792232">
+					<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>
+					<object class="NSMutableDictionary" key="IBUINormalizedOrientationToSizeMap">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<array key="dict.sortedKeys">
+							<integer value="1"/>
+							<integer value="3"/>
+						</array>
+						<array key="dict.values">
+							<string>{768, 1024}</string>
+							<string>{1024, 768}</string>
+						</array>
+					</object>
+					<string key="IBUITargetRuntime">IBIPadFramework</string>
+					<string key="IBUIDisplayName">iPad Full Screen</string>
+				</object>
+				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+			</object>
+			<object class="IBUITabBarController" id="628284502">
+				<object class="IBUISimulatedTabBarMetrics" key="IBUISimulatedBottomBarMetrics"/>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+					<int key="IBUIStatusBarStyle">2</int>
+				</object>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">1</int>
+					<int key="interfaceOrientation">1</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+				<bool key="IBUIHorizontal">NO</bool>
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="158962504">
+					<string key="IBUITitle">Train Track</string>
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="697147349">
+						<int key="IBUITag">92</int>
+						<string key="IBUITitle">PsyTrack Clinician Tools</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">trainTab.png</string>
+						</object>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<reference key="IBUIParentViewController" ref="628284502"/>
+					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+						<int key="IBUIStatusBarStyle">2</int>
+					</object>
+					<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+						<int key="IBUIInterfaceOrientation">1</int>
+						<int key="interfaceOrientation">1</int>
+					</object>
+					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					<bool key="IBUIHorizontal">NO</bool>
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="659888921">
+						<nil key="NSNextResponder"/>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrameSize">{0, 0}</string>
+						<string key="NSReuseIdentifierKey">_NS:453</string>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIBarStyle">1</int>
+						<object class="NSColor" key="IBUITintColor">
+							<int key="NSColorSpace">2</int>
+							<bytes key="NSRGB">MC4zMTc2NDcwNjk3IDAuNjIzNTI5NDM0MiAwLjc3NjQ3MDY2MTIAA</bytes>
+						</object>
+					</object>
+					<array class="NSMutableArray" key="IBUIViewControllers">
+						<object class="IBUIViewController" id="927215447">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="479963630">
+								<string key="IBUITitle">PsyTrack Clinician Tools</string>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							</object>
+							<reference key="IBUIParentViewController" ref="158962504"/>
+							<string key="IBUINibName">TrainTrackViewController_iPad</string>
+							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+								<int key="IBUIInterfaceOrientation">1</int>
+								<int key="interfaceOrientation">1</int>
+							</object>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							<bool key="IBUIHorizontal">NO</bool>
+						</object>
+					</array>
+				</object>
+				<array class="NSMutableArray" key="IBUIViewControllers">
+					<reference ref="158962504"/>
+					<object class="IBUINavigationController" id="228021384">
+						<string key="IBUITitle">Train Track</string>
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="613027942">
+							<int key="IBUITag">92</int>
+							<string key="IBUITitle">Reports</string>
+							<object class="NSCustomResource" key="IBUIImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">reportTab.png</string>
+							</object>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						</object>
+						<reference key="IBUIParentViewController" ref="628284502"/>
+						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+							<int key="IBUIStatusBarStyle">2</int>
+						</object>
+						<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+							<int key="IBUIInterfaceOrientation">1</int>
+							<int key="interfaceOrientation">1</int>
+						</object>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<bool key="IBUIHorizontal">NO</bool>
+						<object class="IBUINavigationBar" key="IBUINavigationBar" id="374553748">
+							<nil key="NSNextResponder"/>
+							<int key="NSvFlags">256</int>
+							<string key="NSFrameSize">{0, 0}</string>
+							<string key="NSReuseIdentifierKey">_NS:453</string>
+							<bool key="IBUIClipsSubviews">YES</bool>
+							<bool key="IBUIMultipleTouchEnabled">YES</bool>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							<int key="IBUIBarStyle">1</int>
+							<object class="NSColor" key="IBUITintColor">
+								<int key="NSColorSpace">2</int>
+								<bytes key="NSRGB">MC4zMTc2NDcwNjk3IDAuNjIzNTI5NDM0MiAwLjc3NjQ3MDY2MTIAA</bytes>
+							</object>
+						</object>
+						<array class="NSMutableArray" key="IBUIViewControllers">
+							<object class="IBUIViewController" id="309854875">
+								<string key="IBUITitle">Reports</string>
+								<object class="IBUINavigationItem" key="IBUINavigationItem" id="375426044">
+									<string key="IBUITitle">Reports</string>
+									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								</object>
+								<reference key="IBUIParentViewController" ref="228021384"/>
+								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+									<int key="IBUIInterfaceOrientation">1</int>
+									<int key="interfaceOrientation">1</int>
+								</object>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<bool key="IBUIHorizontal">NO</bool>
+							</object>
+						</array>
+					</object>
+				</array>
+				<object class="IBUITabBar" key="IBUITabBar" id="964951132">
+					<nil key="NSNextResponder"/>
+					<int key="NSvFlags">258</int>
+					<string key="NSFrame">{{0, 975}, {768, 49}}</string>
+					<string key="NSReuseIdentifierKey">_NS:475</string>
+					<object class="NSColor" key="IBUIBackgroundColor">
+						<int key="NSColorSpace">3</int>
+						<bytes key="NSWhite">MCAwAA</bytes>
+					</object>
+					<int key="IBUITag">1</int>
+					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+				</object>
+			</object>
+			<object class="IBUIWindow" id="555568809">
+				<reference key="NSNextResponder"/>
+				<int key="NSvFlags">1325</int>
+				<array class="NSMutableArray" key="NSSubviews">
+					<object class="IBUIView" id="854319316">
+						<reference key="NSNextResponder" ref="555568809"/>
+						<int key="NSvFlags">1325</int>
+						<array class="NSMutableArray" key="NSSubviews">
+							<object class="IBUILabel" id="53127511">
+								<reference key="NSNextResponder" ref="854319316"/>
+								<int key="NSvFlags">1325</int>
+								<string key="NSFrame">{{0, 34}, {355, 68}}</string>
+								<reference key="NSSuperview" ref="854319316"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="830115337"/>
+								<string key="NSReuseIdentifierKey">_NS:345</string>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUIContentMode">7</int>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<string key="IBUIText">PsyTrack</string>
+								<object class="NSColor" key="IBUITextColor" id="149473335">
+									<int key="NSColorSpace">6</int>
+									<string key="NSCatalogName">System</string>
+									<string key="NSColorName">controlBackgroundColor</string>
+									<object class="NSColor" key="NSColor">
+										<int key="NSColorSpace">3</int>
+										<bytes key="NSWhite">MC42NjY2NjY2NjY3AA</bytes>
+									</object>
+								</object>
+								<nil key="IBUIHighlightedColor"/>
+								<int key="IBUIBaselineAdjustment">1</int>
+								<float key="IBUIMinimumFontSize">10</float>
+								<int key="IBUITextAlignment">1</int>
+								<object class="IBUIFontDescription" key="IBUIFontDescription">
+									<string key="name">Optima-BoldItalic</string>
+									<string key="family">Optima</string>
+									<int key="traits">3</int>
+									<double key="pointSize">54</double>
+								</object>
+								<object class="NSFont" key="IBUIFont">
+									<string key="NSName">Optima-BoldItalic</string>
+									<double key="NSSize">54</double>
+									<int key="NSfFlags">16</int>
+								</object>
+							</object>
+							<object class="IBUILabel" id="830115337">
+								<reference key="NSNextResponder" ref="854319316"/>
+								<int key="NSvFlags">1293</int>
+								<string key="NSFrame">{{-1, 336}, {355, 85}}</string>
+								<reference key="NSSuperview" ref="854319316"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="648961861"/>
+								<string key="NSReuseIdentifierKey">_NS:345</string>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUIContentMode">7</int>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<string key="IBUIText">Clinician Tools</string>
+								<reference key="IBUITextColor" ref="149473335"/>
+								<nil key="IBUIHighlightedColor"/>
+								<int key="IBUIBaselineAdjustment">1</int>
+								<float key="IBUIMinimumFontSize">10</float>
+								<int key="IBUITextAlignment">1</int>
+								<object class="IBUIFontDescription" key="IBUIFontDescription">
+									<string key="name">SnellRoundhand-Bold</string>
+									<string key="family">Snell Roundhand</string>
+									<int key="traits">3</int>
+									<double key="pointSize">56</double>
+								</object>
+								<object class="NSFont" key="IBUIFont">
+									<string key="NSName">SnellRoundhand-Bold</string>
+									<double key="NSSize">56</double>
+									<int key="NSfFlags">16</int>
+								</object>
+							</object>
+							<object class="IBUIImageView" id="648961861">
+								<reference key="NSNextResponder" ref="854319316"/>
+								<int key="NSvFlags">1325</int>
+								<string key="NSFrame">{{27, 73}, {300, 298}}</string>
+								<reference key="NSSuperview" ref="854319316"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="824363260"/>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUIContentMode">4</int>
+								<bool key="IBUIMultipleTouchEnabled">YES</bool>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">colorTrain300.png</string>
+								</object>
+							</object>
+						</array>
+						<string key="NSFrame">{{207, 302}, {354, 421}}</string>
+						<reference key="NSSuperview" ref="555568809"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="53127511"/>
+						<string key="NSReuseIdentifierKey">_NS:212</string>
+						<object class="NSColor" key="IBUIBackgroundColor">
+							<int key="NSColorSpace">2</int>
+							<bytes key="NSRGB">MC4zODAzOTIxOTM4IDAuNjg2Mjc0NTI4NSAwLjgxOTYwNzkxMzUAA</bytes>
+						</object>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					</object>
+					<object class="IBUILabel" id="824363260">
+						<reference key="NSNextResponder" ref="555568809"/>
+						<int key="NSvFlags">1293</int>
+						<string key="NSFrame">{{207, 712}, {355, 73}}</string>
+						<reference key="NSSuperview" ref="555568809"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:345</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<int key="IBUIContentMode">7</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<string key="IBUIText">Developed by Dan Boice, M.S. PsycheWeb, LLC</string>
+						<object class="NSColor" key="IBUITextColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MCAwIDAAA</bytes>
+						</object>
+						<nil key="IBUIHighlightedColor"/>
+						<int key="IBUIBaselineAdjustment">1</int>
+						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUINumberOfLines">2</int>
+						<int key="IBUITextAlignment">1</int>
+						<int key="IBUILineBreakMode">0</int>
+						<object class="IBUIFontDescription" key="IBUIFontDescription">
+							<int key="type">1</int>
+							<double key="pointSize">23</double>
+						</object>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica</string>
+							<double key="NSSize">23</double>
+							<int key="NSfFlags">16</int>
+						</object>
+					</object>
+				</array>
+				<object class="NSPSMatrix" key="NSFrameMatrix"/>
+				<string key="NSFrameSize">{768, 1024}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="854319316"/>
+				<object class="NSColor" key="IBUIBackgroundColor">
+					<int key="NSColorSpace">2</int>
+					<bytes key="NSRGB">MC4zODAzOTIxOTM4IDAuNjg2Mjc0NTI4NSAwLjgxOTYwNzkxMzUAA</bytes>
+				</object>
+				<bool key="IBUIOpaque">NO</bool>
+				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+					<int key="IBUIStatusBarStyle">2</int>
+				</object>
+				<reference key="IBUISimulatedDestinationMetrics" ref="1024792232"/>
+				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+				<bool key="IBUIResizesToFullScreen">YES</bool>
+			</object>
+			<object class="IBUICustomObject" id="797642385">
+				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+			</object>
+			<object class="IBUISplitViewController" id="365470544">
+				<array key="IBUIToolbarItems" id="0"/>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+					<int key="IBUIStatusBarStyle">2</int>
+				</object>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">3</int>
+					<int key="interfaceOrientation">3</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+				<bool key="IBUIHorizontal">YES</bool>
+				<object class="IBUINavigationController" key="IBUIMasterViewController" id="412987008">
+					<reference key="IBUIParentViewController" ref="365470544"/>
+					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+						<int key="IBUIStatusBarStyle">2</int>
+					</object>
+					<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+						<int key="IBUIInterfaceOrientation">1</int>
+						<int key="interfaceOrientation">1</int>
+					</object>
+					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					<bool key="IBUIHorizontal">NO</bool>
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="68106942">
+						<nil key="NSNextResponder"/>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrameSize">{0, 0}</string>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIBarStyle">1</int>
+						<object class="NSColor" key="IBUITintColor">
+							<int key="NSColorSpace">2</int>
+							<bytes key="NSRGB">MC4zMTc2NDcwNjk3IDAuNjIzNTI5NDM0MiAwLjc3NjQ3MDY2MTIAA</bytes>
+						</object>
+					</object>
+					<array class="NSMutableArray" key="IBUIViewControllers">
+						<object class="IBUIViewController" id="590845234">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="454396157">
+								<string key="IBUITitle">Clients</string>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							</object>
+							<reference key="IBUIParentViewController" ref="412987008"/>
+							<string key="IBUINibName">ClientsRootViewController_iPad</string>
+							<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+								<int key="IBUIStatusBarStyle">2</int>
+							</object>
+							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+								<int key="IBUIInterfaceOrientation">1</int>
+								<int key="interfaceOrientation">1</int>
+							</object>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							<bool key="IBUIHorizontal">NO</bool>
+						</object>
+					</array>
+				</object>
+				<object class="IBUINavigationController" key="IBUIDetailViewController" id="436170034">
+					<reference key="IBUIParentViewController" ref="365470544"/>
+					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+						<int key="IBUIStatusBarStyle">2</int>
+					</object>
+					<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+						<int key="IBUIInterfaceOrientation">1</int>
+						<int key="interfaceOrientation">1</int>
+					</object>
+					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					<bool key="IBUIHorizontal">NO</bool>
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="266929885">
+						<nil key="NSNextResponder"/>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrameSize">{0, 0}</string>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIBarStyle">1</int>
+						<object class="NSColor" key="IBUITintColor">
+							<int key="NSColorSpace">2</int>
+							<bytes key="NSRGB">MC4zMTc2NDcwNjk3IDAuNjIzNTI5NDM0MiAwLjc3NjQ3MDY2MTIAA</bytes>
+						</object>
+					</object>
+					<array class="NSMutableArray" key="IBUIViewControllers">
+						<object class="IBUIViewController" id="691461788">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="643474363">
+								<string key="IBUITitle">Clients</string>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							</object>
+							<reference key="IBUIParentViewController" ref="436170034"/>
+							<string key="IBUINibName">ClientsDetailViewController_iPad</string>
+							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+								<int key="IBUIInterfaceOrientation">1</int>
+								<int key="interfaceOrientation">1</int>
+							</object>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							<bool key="IBUIHorizontal">NO</bool>
+						</object>
+					</array>
+				</object>
+			</object>
+			<object class="IBUISplitViewController" id="287106076">
+				<reference key="IBUIToolbarItems" ref="0"/>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+					<int key="IBUIStatusBarStyle">2</int>
+				</object>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">3</int>
+					<int key="interfaceOrientation">3</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+				<bool key="IBUIHorizontal">YES</bool>
+				<object class="IBUINavigationController" key="IBUIMasterViewController" id="215541794">
+					<reference key="IBUIParentViewController" ref="287106076"/>
+					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+						<int key="IBUIStatusBarStyle">2</int>
+					</object>
+					<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+						<int key="IBUIInterfaceOrientation">1</int>
+						<int key="interfaceOrientation">1</int>
+					</object>
+					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					<bool key="IBUIHorizontal">NO</bool>
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="161221687">
+						<nil key="NSNextResponder"/>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrameSize">{0, 0}</string>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIBarStyle">1</int>
+						<object class="NSColor" key="IBUITintColor">
+							<int key="NSColorSpace">2</int>
+							<bytes key="NSRGB">MC4zMTc2NDcwNjk3IDAuNjIzNTI5NDM0MiAwLjc3NjQ3MDY2MTIAA</bytes>
+						</object>
+					</object>
+					<array class="NSMutableArray" key="IBUIViewControllers">
+						<object class="IBUITableViewController" id="519119594">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="159979344">
+								<string key="IBUITitle">Clinicians</string>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							</object>
+							<reference key="IBUIParentViewController" ref="215541794"/>
+							<string key="IBUINibName">CliniciansRootViewController_iPad</string>
+							<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+								<int key="IBUIStatusBarStyle">2</int>
+							</object>
+							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+								<int key="IBUIInterfaceOrientation">1</int>
+								<int key="interfaceOrientation">1</int>
+							</object>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							<bool key="IBUIHorizontal">NO</bool>
+							<bool key="IBUIClearsSelectionOnViewWillAppear">NO</bool>
+						</object>
+					</array>
+				</object>
+				<object class="IBUINavigationController" key="IBUIDetailViewController" id="976404347">
+					<reference key="IBUIParentViewController" ref="287106076"/>
+					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+						<int key="IBUIStatusBarStyle">2</int>
+					</object>
+					<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+						<int key="IBUIInterfaceOrientation">1</int>
+						<int key="interfaceOrientation">1</int>
+					</object>
+					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					<bool key="IBUIHorizontal">NO</bool>
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="10654575">
+						<nil key="NSNextResponder"/>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrameSize">{0, 0}</string>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIBarStyle">1</int>
+						<object class="NSColor" key="IBUITintColor">
+							<int key="NSColorSpace">2</int>
+							<bytes key="NSRGB">MC4zMTc2NDcwNjk3IDAuNjIzNTI5NDM0MiAwLjc3NjQ3MDY2MTIAA</bytes>
+						</object>
+					</object>
+					<array class="NSMutableArray" key="IBUIViewControllers">
+						<object class="IBUIViewController" id="863196664">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="78135531">
+								<string key="IBUITitle">Clinicians</string>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							</object>
+							<reference key="IBUIParentViewController" ref="976404347"/>
+							<string key="IBUINibName">CliniciansDetailViewController_iPad</string>
+							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+								<int key="IBUIInterfaceOrientation">1</int>
+								<int key="interfaceOrientation">1</int>
+							</object>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							<bool key="IBUIHorizontal">NO</bool>
+						</object>
+					</array>
+				</object>
+			</object>
+			<object class="IBUISplitViewController" id="496736777">
+				<reference key="IBUIToolbarItems" ref="0"/>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+					<int key="IBUIStatusBarStyle">2</int>
+				</object>
+				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+					<int key="IBUIInterfaceOrientation">3</int>
+					<int key="interfaceOrientation">3</int>
+				</object>
+				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+				<bool key="IBUIHorizontal">YES</bool>
+				<object class="IBUINavigationController" key="IBUIMasterViewController" id="462666807">
+					<reference key="IBUIParentViewController" ref="496736777"/>
+					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+						<int key="IBUIStatusBarStyle">2</int>
+					</object>
+					<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+						<int key="IBUIInterfaceOrientation">1</int>
+						<int key="interfaceOrientation">1</int>
+					</object>
+					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					<bool key="IBUIHorizontal">NO</bool>
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="662907979">
+						<nil key="NSNextResponder"/>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrameSize">{0, 0}</string>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIBarStyle">1</int>
+						<object class="NSColor" key="IBUITintColor">
+							<int key="NSColorSpace">2</int>
+							<bytes key="NSRGB">MC4zMTc2NDcwNjk3IDAuNjIzNTI5NDM0MiAwLjc3NjQ3MDY2MTIAA</bytes>
+						</object>
+					</object>
+					<array class="NSMutableArray" key="IBUIViewControllers">
+						<object class="IBUIViewController" id="232209829">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="519066250">
+								<string key="IBUITitle">Reports</string>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							</object>
+							<reference key="IBUIParentViewController" ref="462666807"/>
+							<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+								<int key="IBUIStatusBarStyle">2</int>
+							</object>
+							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+								<int key="IBUIInterfaceOrientation">1</int>
+								<int key="interfaceOrientation">1</int>
+							</object>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							<bool key="IBUIHorizontal">NO</bool>
+						</object>
+					</array>
+				</object>
+				<object class="IBUINavigationController" key="IBUIDetailViewController" id="94483734">
+					<reference key="IBUIParentViewController" ref="496736777"/>
+					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+						<int key="IBUIStatusBarStyle">2</int>
+					</object>
+					<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+						<int key="IBUIInterfaceOrientation">1</int>
+						<int key="interfaceOrientation">1</int>
+					</object>
+					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					<bool key="IBUIHorizontal">NO</bool>
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="767791102">
+						<nil key="NSNextResponder"/>
+						<int key="NSvFlags">256</int>
+						<string key="NSFrameSize">{0, 0}</string>
+						<bool key="IBUIClipsSubviews">YES</bool>
+						<bool key="IBUIMultipleTouchEnabled">YES</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIBarStyle">1</int>
+						<object class="NSColor" key="IBUITintColor">
+							<int key="NSColorSpace">2</int>
+							<bytes key="NSRGB">MC4zMTc2NDcwNjk3IDAuNjIzNTI5NDM0MiAwLjc3NjQ3MDY2MTIAA</bytes>
+						</object>
+					</object>
+					<array class="NSMutableArray" key="IBUIViewControllers">
+						<object class="IBUIViewController" id="137948432">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="223194501">
+								<string key="IBUITitle">Reports</string>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							</object>
+							<reference key="IBUIParentViewController" ref="94483734"/>
+							<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
+								<int key="IBUIStatusBarStyle">2</int>
+							</object>
+							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
+								<int key="IBUIInterfaceOrientation">1</int>
+								<int key="interfaceOrientation">1</int>
+							</object>
+							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							<bool key="IBUIHorizontal">NO</bool>
+						</object>
+					</array>
+				</object>
+			</object>
+		</array>
+		<object class="IBObjectContainer" key="IBDocument.Objects">
+			<array class="NSMutableArray" key="connectionRecords">
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="797642385"/>
+					</object>
+					<int key="connectionID">148</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">clientsDetailViewController_iPad</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="691461788"/>
+					</object>
+					<int key="connectionID">125</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cliniciansDetailViewController_iPad</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="863196664"/>
+					</object>
+					<int key="connectionID">127</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cliniciansRootViewController_iPad</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="519119594"/>
+					</object>
+					<int key="connectionID">128</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">splitViewControllerClients</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="365470544"/>
+					</object>
+					<int key="connectionID">129</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">splitViewControllerClinicians</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="287106076"/>
+					</object>
+					<int key="connectionID">130</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">trainTrackViewController</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="927215447"/>
+					</object>
+					<int key="connectionID">171</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">navigationControllerTrainTrack</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="158962504"/>
+					</object>
+					<int key="connectionID">172</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">splitViewControllerReports</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="496736777"/>
+					</object>
+					<int key="connectionID">206</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">reportsRootViewController_iPad</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="232209829"/>
+					</object>
+					<int key="connectionID">209</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">reportsDetailViewController_iPad</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="137948432"/>
+					</object>
+					<int key="connectionID">212</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">clientsRootViewController_iPad</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="590845234"/>
+					</object>
+					<int key="connectionID">217</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">masterViewController</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="290563590"/>
+					</object>
+					<int key="connectionID">235</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">tabBarController</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="628284502"/>
+					</object>
+					<int key="connectionID">249</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">psyTrainTrackLabel</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="53127511"/>
+					</object>
+					<int key="connectionID">163</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">imageView</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="648961861"/>
+					</object>
+					<int key="connectionID">159</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">clinicianToolsLabel</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="830115337"/>
+					</object>
+					<int key="connectionID">165</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">window</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="555568809"/>
+					</object>
+					<int key="connectionID">253</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">viewController</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="290563590"/>
+					</object>
+					<int key="connectionID">257</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">developedByLabel</string>
+						<reference key="source" ref="797642385"/>
+						<reference key="destination" ref="824363260"/>
+					</object>
+					<int key="connectionID">164</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="287106076"/>
+						<reference key="destination" ref="863196664"/>
+					</object>
+					<int key="connectionID">139</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cliniciansDetailViewController_iPad</string>
+						<reference key="source" ref="519119594"/>
+						<reference key="destination" ref="863196664"/>
+					</object>
+					<int key="connectionID">135</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cliniciansRootViewController_iPad</string>
+						<reference key="source" ref="863196664"/>
+						<reference key="destination" ref="519119594"/>
+					</object>
+					<int key="connectionID">136</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="365470544"/>
+						<reference key="destination" ref="691461788"/>
+					</object>
+					<int key="connectionID">220</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">clientsRootViewController_iPad</string>
+						<reference key="source" ref="691461788"/>
+						<reference key="destination" ref="590845234"/>
+					</object>
+					<int key="connectionID">219</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">reportsDetailViewController_iPad</string>
+						<reference key="source" ref="232209829"/>
+						<reference key="destination" ref="137948432"/>
+					</object>
+					<int key="connectionID">213</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">reportsRootViewController_iPad</string>
+						<reference key="source" ref="137948432"/>
+						<reference key="destination" ref="232209829"/>
+					</object>
+					<int key="connectionID">214</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">clientsDetailViewController_iPad</string>
+						<reference key="source" ref="590845234"/>
+						<reference key="destination" ref="691461788"/>
+					</object>
+					<int key="connectionID">218</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">view</string>
+						<reference key="source" ref="290563590"/>
+						<reference key="destination" ref="854319316"/>
+					</object>
+					<int key="connectionID">248</int>
+				</object>
+			</array>
+			<object class="IBMutableOrderedSet" key="objectRecords">
+				<array key="orderedObjects">
+					<object class="IBObjectRecord">
+						<int key="objectID">0</int>
+						<reference key="object" ref="0"/>
+						<reference key="children" ref="1000"/>
+						<nil key="parent"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">-1</int>
+						<reference key="object" ref="841351856"/>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">File's Owner</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">-2</int>
+						<reference key="object" ref="371349661"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">6</int>
+						<reference key="object" ref="797642385"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">8</int>
+						<reference key="object" ref="555568809"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="854319316"/>
+							<reference ref="824363260"/>
+						</array>
+						<reference key="parent" ref="0"/>
+						<string key="objectName">Window</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">27</int>
+						<reference key="object" ref="628284502"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="964951132"/>
+							<reference ref="158962504"/>
+							<reference ref="228021384"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">28</int>
+						<reference key="object" ref="964951132"/>
+						<reference key="parent" ref="628284502"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">7</int>
+						<reference key="object" ref="287106076"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="976404347"/>
+							<reference ref="215541794"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">11</int>
+						<reference key="object" ref="215541794"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="161221687"/>
+							<reference ref="519119594"/>
+						</array>
+						<reference key="parent" ref="287106076"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">13</int>
+						<reference key="object" ref="519119594"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="159979344"/>
+						</array>
+						<reference key="parent" ref="215541794"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">14</int>
+						<reference key="object" ref="159979344"/>
+						<reference key="parent" ref="519119594"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">12</int>
+						<reference key="object" ref="161221687"/>
+						<reference key="parent" ref="215541794"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">10</int>
+						<reference key="object" ref="976404347"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="10654575"/>
+							<reference ref="863196664"/>
+						</array>
+						<reference key="parent" ref="287106076"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">16</int>
+						<reference key="object" ref="863196664"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="78135531"/>
+						</array>
+						<reference key="parent" ref="976404347"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">17</int>
+						<reference key="object" ref="78135531"/>
+						<reference key="parent" ref="863196664"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">15</int>
+						<reference key="object" ref="10654575"/>
+						<reference key="parent" ref="976404347"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">78</int>
+						<reference key="object" ref="365470544"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="412987008"/>
+							<reference ref="436170034"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">79</int>
+						<reference key="object" ref="412987008"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="68106942"/>
+							<reference ref="590845234"/>
+						</array>
+						<reference key="parent" ref="365470544"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">80</int>
+						<reference key="object" ref="436170034"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="691461788"/>
+							<reference ref="266929885"/>
+						</array>
+						<reference key="parent" ref="365470544"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">81</int>
+						<reference key="object" ref="691461788"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="643474363"/>
+						</array>
+						<reference key="parent" ref="436170034"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">82</int>
+						<reference key="object" ref="266929885"/>
+						<reference key="parent" ref="436170034"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">83</int>
+						<reference key="object" ref="643474363"/>
+						<reference key="parent" ref="691461788"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">85</int>
+						<reference key="object" ref="68106942"/>
+						<reference key="parent" ref="412987008"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">166</int>
+						<reference key="object" ref="158962504"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="659888921"/>
+							<reference ref="927215447"/>
+							<reference ref="697147349"/>
+						</array>
+						<reference key="parent" ref="628284502"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">167</int>
+						<reference key="object" ref="659888921"/>
+						<reference key="parent" ref="158962504"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">168</int>
+						<reference key="object" ref="927215447"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="479963630"/>
+						</array>
+						<reference key="parent" ref="158962504"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">169</int>
+						<reference key="object" ref="479963630"/>
+						<reference key="parent" ref="927215447"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">170</int>
+						<reference key="object" ref="697147349"/>
+						<reference key="parent" ref="158962504"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">173</int>
+						<reference key="object" ref="228021384"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="374553748"/>
+							<reference ref="309854875"/>
+							<reference ref="613027942"/>
+						</array>
+						<reference key="parent" ref="628284502"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">176</int>
+						<reference key="object" ref="374553748"/>
+						<reference key="parent" ref="228021384"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">175</int>
+						<reference key="object" ref="309854875"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="375426044"/>
+						</array>
+						<reference key="parent" ref="228021384"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">174</int>
+						<reference key="object" ref="613027942"/>
+						<reference key="parent" ref="228021384"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">177</int>
+						<reference key="object" ref="375426044"/>
+						<reference key="parent" ref="309854875"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">194</int>
+						<reference key="object" ref="496736777"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="462666807"/>
+							<reference ref="94483734"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">195</int>
+						<reference key="object" ref="462666807"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="662907979"/>
+							<reference ref="232209829"/>
+						</array>
+						<reference key="parent" ref="496736777"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">196</int>
+						<reference key="object" ref="94483734"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="767791102"/>
+							<reference ref="137948432"/>
+						</array>
+						<reference key="parent" ref="496736777"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">198</int>
+						<reference key="object" ref="767791102"/>
+						<reference key="parent" ref="94483734"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">201</int>
+						<reference key="object" ref="662907979"/>
+						<reference key="parent" ref="462666807"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">207</int>
+						<reference key="object" ref="232209829"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="519066250"/>
+						</array>
+						<reference key="parent" ref="462666807"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">208</int>
+						<reference key="object" ref="519066250"/>
+						<reference key="parent" ref="232209829"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">210</int>
+						<reference key="object" ref="137948432"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="223194501"/>
+						</array>
+						<reference key="parent" ref="94483734"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">211</int>
+						<reference key="object" ref="223194501"/>
+						<reference key="parent" ref="137948432"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">215</int>
+						<reference key="object" ref="590845234"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="454396157"/>
+						</array>
+						<reference key="parent" ref="412987008"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">216</int>
+						<reference key="object" ref="454396157"/>
+						<reference key="parent" ref="590845234"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">231</int>
+						<reference key="object" ref="290563590"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">229</int>
+						<reference key="object" ref="854319316"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="648961861"/>
+							<reference ref="830115337"/>
+							<reference ref="53127511"/>
+						</array>
+						<reference key="parent" ref="555568809"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">160</int>
+						<reference key="object" ref="53127511"/>
+						<reference key="parent" ref="854319316"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">158</int>
+						<reference key="object" ref="648961861"/>
+						<reference key="parent" ref="854319316"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">161</int>
+						<reference key="object" ref="830115337"/>
+						<reference key="parent" ref="854319316"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">162</int>
+						<reference key="object" ref="824363260"/>
+						<reference key="parent" ref="555568809"/>
+					</object>
+				</array>
+			</object>
+			<dictionary class="NSMutableDictionary" key="flattenedProperties">
+				<string key="-1.CustomClassName">UIApplication</string>
+				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="-2.CustomClassName">UIResponder</string>
+				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="11.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="12.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="13.CustomClassName">CliniciansRootViewController_iPad</string>
+				<string key="13.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="15.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="158.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="16.CustomClassName">CliniciansDetailViewController_iPad</string>
+				<string key="16.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="160.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="161.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="162.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="166.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="167.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="168.CustomClassName">TrainTrackViewController</string>
+				<string key="168.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="169.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="17.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="170.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="173.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="174.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="175.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="176.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="177.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="194.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="195.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="196.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="198.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="201.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="207.CustomClassName">ReportsRootViewController_iPad</string>
+				<string key="207.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="208.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="210.CustomClassName">ReportsDetailViewController_iPad</string>
+				<string key="210.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="211.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="215.CustomClassName">ClientsRootViewController_iPad</string>
+				<string key="215.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="216.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="229.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="231.CustomClassName">PTTMasterViewController_iPad</string>
+				<string key="231.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="27.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="28.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="6.CustomClassName">PTTAppDelegate</string>
+				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="78.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="79.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<dictionary class="NSMutableDictionary" key="8.IBAttributePlaceholdersKey"/>
+				<object class="NSMutableDictionary" key="8.IBLastUsedUIStatusBarStylesToTargetRuntimesMap">
+					<string key="NS.key.0">IBCocoaTouchFramework</string>
+					<integer value="1" key="NS.object.0"/>
+				</object>
+				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="80.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="81.CustomClassName">ClientsDetailViewController_iPad</string>
+				<string key="81.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="82.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="83.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="85.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+			</dictionary>
+			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
+			<nil key="activeLocalization"/>
+			<dictionary class="NSMutableDictionary" key="localizations"/>
+			<nil key="sourceID"/>
+			<int key="maxID">257</int>
+		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">ABNewPersonViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ABNewPersonViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ABPersonViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ABPersonViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">CasualAlertViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="labelContainerView">UIView</string>
+						<string key="myLabel">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="labelContainerView">
+							<string key="name">labelContainerView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="myLabel">
+							<string key="name">myLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CasualAlertViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ClientsDetailViewController_iPad</string>
+					<string key="superclassName">UITableViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">clientsRootViewController_iPad</string>
+						<string key="NS.object.0">ClientsRootViewController_iPad</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">clientsRootViewController_iPad</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">clientsRootViewController_iPad</string>
+							<string key="candidateClassName">ClientsRootViewController_iPad</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ClientsDetailViewController_iPad.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ClientsRootViewController_iPad</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="clientsDetailViewController_iPad">ClientsDetailViewController_iPad</string>
+						<string key="searchBar">UISearchBar</string>
+						<string key="tableModel">SCArrayOfObjectsModel</string>
+						<string key="tableView">UITableView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="clientsDetailViewController_iPad">
+							<string key="name">clientsDetailViewController_iPad</string>
+							<string key="candidateClassName">ClientsDetailViewController_iPad</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchBar">
+							<string key="name">searchBar</string>
+							<string key="candidateClassName">UISearchBar</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tableModel">
+							<string key="name">tableModel</string>
+							<string key="candidateClassName">SCArrayOfObjectsModel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tableView">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ClientsRootViewController_iPad.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ClientsSelectionCell</string>
+					<string key="superclassName">SCObjectSelectionCell</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="alreadySelectedClients">NSMutableSet</string>
+						<string key="clientObject">NSManagedObject</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="alreadySelectedClients">
+							<string key="name">alreadySelectedClients</string>
+							<string key="candidateClassName">NSMutableSet</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="clientObject">
+							<string key="name">clientObject</string>
+							<string key="candidateClassName">NSManagedObject</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ClientsSelectionCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ClientsViewController_iPhone</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="alreadySelectedClients">NSMutableSet</string>
+						<string key="clientCurrentlySelectedInReferringDetailview">NSManagedObject</string>
+						<string key="clientObjectSelectionCell">ClientsSelectionCell</string>
+						<string key="searchBar">UISearchBar</string>
+						<string key="sendingViewController">UIViewController</string>
+						<string key="tableView">UITableView</string>
+						<string key="totalClientsLabel">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="alreadySelectedClients">
+							<string key="name">alreadySelectedClients</string>
+							<string key="candidateClassName">NSMutableSet</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="clientCurrentlySelectedInReferringDetailview">
+							<string key="name">clientCurrentlySelectedInReferringDetailview</string>
+							<string key="candidateClassName">NSManagedObject</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="clientObjectSelectionCell">
+							<string key="name">clientObjectSelectionCell</string>
+							<string key="candidateClassName">ClientsSelectionCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchBar">
+							<string key="name">searchBar</string>
+							<string key="candidateClassName">UISearchBar</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="sendingViewController">
+							<string key="name">sendingViewController</string>
+							<string key="candidateClassName">UIViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tableView">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="totalClientsLabel">
+							<string key="name">totalClientsLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ClientsViewController_iPhone.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ClinicianViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="cancelAddNewAddressBookPerson:">id</string>
+						<string key="cancelButtonTappedInABPersonViewController:">id</string>
+						<string key="selectButtonTappedInABPersonController:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="cancelAddNewAddressBookPerson:">
+							<string key="name">cancelAddNewAddressBookPerson:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="cancelButtonTappedInABPersonViewController:">
+							<string key="name">cancelButtonTappedInABPersonViewController:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="selectButtonTappedInABPersonController:">
+							<string key="name">selectButtonTappedInABPersonController:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="currentDetailTableViewModel">SCTableViewModel</string>
+						<string key="personAddNewViewController">ABNewPersonViewController</string>
+						<string key="personVCFromSelectionList">ABPersonViewController</string>
+						<string key="searchBar">UISearchBar</string>
+						<string key="tableModel">SCArrayOfObjectsModel</string>
+						<string key="tableView">UITableView</string>
+						<string key="totalCliniciansLabel">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="currentDetailTableViewModel">
+							<string key="name">currentDetailTableViewModel</string>
+							<string key="candidateClassName">SCTableViewModel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="personAddNewViewController">
+							<string key="name">personAddNewViewController</string>
+							<string key="candidateClassName">ABNewPersonViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="personVCFromSelectionList">
+							<string key="name">personVCFromSelectionList</string>
+							<string key="candidateClassName">ABPersonViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchBar">
+							<string key="name">searchBar</string>
+							<string key="candidateClassName">UISearchBar</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tableModel">
+							<string key="name">tableModel</string>
+							<string key="candidateClassName">SCArrayOfObjectsModel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tableView">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="totalCliniciansLabel">
+							<string key="name">totalCliniciansLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ClinicianViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">CliniciansDetailViewController_iPad</string>
+					<string key="superclassName">UITableViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">cliniciansRootViewController_iPad</string>
+						<string key="NS.object.0">CliniciansRootViewController_iPad</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">cliniciansRootViewController_iPad</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">cliniciansRootViewController_iPad</string>
+							<string key="candidateClassName">CliniciansRootViewController_iPad</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CliniciansDetailViewController_iPad.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">CliniciansRootViewController_iPad</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="cancelAddNewAddressBookPerson:">id</string>
+						<string key="cancelButtonTappedInABPersonViewController:">id</string>
+						<string key="selectButtonTappedInABPersonController:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="cancelAddNewAddressBookPerson:">
+							<string key="name">cancelAddNewAddressBookPerson:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="cancelButtonTappedInABPersonViewController:">
+							<string key="name">cancelButtonTappedInABPersonViewController:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="selectButtonTappedInABPersonController:">
+							<string key="name">selectButtonTappedInABPersonController:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="cliniciansDetailViewController_iPad">CliniciansDetailViewController_iPad</string>
+						<string key="currentDetailTableViewModel">SCTableViewModel</string>
+						<string key="personAddNewViewController">ABNewPersonViewController</string>
+						<string key="personVCFromSelectionList">ABPersonViewController</string>
+						<string key="searchBar">UISearchBar</string>
+						<string key="tableModel">SCArrayOfObjectsModel</string>
+						<string key="tableView">UITableView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="cliniciansDetailViewController_iPad">
+							<string key="name">cliniciansDetailViewController_iPad</string>
+							<string key="candidateClassName">CliniciansDetailViewController_iPad</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="currentDetailTableViewModel">
+							<string key="name">currentDetailTableViewModel</string>
+							<string key="candidateClassName">SCTableViewModel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="personAddNewViewController">
+							<string key="name">personAddNewViewController</string>
+							<string key="candidateClassName">ABNewPersonViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="personVCFromSelectionList">
+							<string key="name">personVCFromSelectionList</string>
+							<string key="candidateClassName">ABPersonViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchBar">
+							<string key="name">searchBar</string>
+							<string key="candidateClassName">UISearchBar</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tableModel">
+							<string key="name">tableModel</string>
+							<string key="candidateClassName">SCArrayOfObjectsModel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tableView">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CliniciansRootViewController_iPad.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">LCYLockDigitView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/LCYLockDigitView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">LCYLockScreenViewController</string>
+					<string key="superclassName">LCYPasscodeInputViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="enterPassCodeBanner">UIView</string>
+						<string key="tryAgainMessageLabel">UILabel</string>
+						<string key="window">UIWindow</string>
+						<string key="wrongPassCodeBanner">UIView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="enterPassCodeBanner">
+							<string key="name">enterPassCodeBanner</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tryAgainMessageLabel">
+							<string key="name">tryAgainMessageLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="window">
+							<string key="name">window</string>
+							<string key="candidateClassName">UIWindow</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="wrongPassCodeBanner">
+							<string key="name">wrongPassCodeBanner</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/LCYLockScreenViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">LCYPasscodeInputViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="lockDigit_0">LCYLockDigitView</string>
+						<string key="lockDigit_1">LCYLockDigitView</string>
+						<string key="lockDigit_2">LCYLockDigitView</string>
+						<string key="lockDigit_3">LCYLockDigitView</string>
+						<string key="passCodeInputField">UITextField</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="lockDigit_0">
+							<string key="name">lockDigit_0</string>
+							<string key="candidateClassName">LCYLockDigitView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lockDigit_1">
+							<string key="name">lockDigit_1</string>
+							<string key="candidateClassName">LCYLockDigitView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lockDigit_2">
+							<string key="name">lockDigit_2</string>
+							<string key="candidateClassName">LCYLockDigitView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lockDigit_3">
+							<string key="name">lockDigit_3</string>
+							<string key="candidateClassName">LCYLockDigitView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="passCodeInputField">
+							<string key="name">passCodeInputField</string>
+							<string key="candidateClassName">UITextField</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/LCYPasscodeInputViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">NSMutableSet</string>
+					<string key="superclassName">NSSet</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/NSMutableSet.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PTTAppDelegate</string>
+					<string key="superclassName">UIResponder</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="casualAlertManager">CasualAlertViewController</string>
+						<string key="clientsDetailViewController_iPad">ClientsDetailViewController_iPad</string>
+						<string key="clientsRootViewController_iPad">ClientsRootViewController_iPad</string>
+						<string key="clientsViewController_iPhone">ClientsViewController_iPhone</string>
+						<string key="clinicianToolsLabel">UILabel</string>
+						<string key="clinicianViewController">ClinicianViewController</string>
+						<string key="cliniciansDetailViewController_iPad">CliniciansDetailViewController_iPad</string>
+						<string key="cliniciansRootViewController_iPad">CliniciansRootViewController_iPad</string>
+						<string key="developedByLabel">UILabel</string>
+						<string key="imageView">UIImageView</string>
+						<string key="lockScreenVC">LCYLockScreenViewController</string>
+						<string key="masterViewController">UIViewController</string>
+						<string key="navigationControllerTrainTrack">UINavigationController</string>
+						<string key="psyTrainTrackLabel">UILabel</string>
+						<string key="reportsDetailViewController_iPad">ReportsDetailViewController_iPad</string>
+						<string key="reportsRootViewController_iPad">ReportsRootViewController_iPad</string>
+						<string key="reportsViewController_iPhone">ReportsViewController_iPhone</string>
+						<string key="splitViewControllerClients">UISplitViewController</string>
+						<string key="splitViewControllerClinicians">UISplitViewController</string>
+						<string key="splitViewControllerReports">UISplitViewController</string>
+						<string key="tabBar">UITabBar</string>
+						<string key="tabBarController">UITabBarController</string>
+						<string key="tabBarControllerContainerView">UIView</string>
+						<string key="tabBarView">UIView</string>
+						<string key="trainTrackViewController">TrainTrackViewController</string>
+						<string key="viewController">UIViewController</string>
+						<string key="window">UIWindow</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="casualAlertManager">
+							<string key="name">casualAlertManager</string>
+							<string key="candidateClassName">CasualAlertViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="clientsDetailViewController_iPad">
+							<string key="name">clientsDetailViewController_iPad</string>
+							<string key="candidateClassName">ClientsDetailViewController_iPad</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="clientsRootViewController_iPad">
+							<string key="name">clientsRootViewController_iPad</string>
+							<string key="candidateClassName">ClientsRootViewController_iPad</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="clientsViewController_iPhone">
+							<string key="name">clientsViewController_iPhone</string>
+							<string key="candidateClassName">ClientsViewController_iPhone</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="clinicianToolsLabel">
+							<string key="name">clinicianToolsLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="clinicianViewController">
+							<string key="name">clinicianViewController</string>
+							<string key="candidateClassName">ClinicianViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="cliniciansDetailViewController_iPad">
+							<string key="name">cliniciansDetailViewController_iPad</string>
+							<string key="candidateClassName">CliniciansDetailViewController_iPad</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="cliniciansRootViewController_iPad">
+							<string key="name">cliniciansRootViewController_iPad</string>
+							<string key="candidateClassName">CliniciansRootViewController_iPad</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="developedByLabel">
+							<string key="name">developedByLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="imageView">
+							<string key="name">imageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lockScreenVC">
+							<string key="name">lockScreenVC</string>
+							<string key="candidateClassName">LCYLockScreenViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="masterViewController">
+							<string key="name">masterViewController</string>
+							<string key="candidateClassName">UIViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="navigationControllerTrainTrack">
+							<string key="name">navigationControllerTrainTrack</string>
+							<string key="candidateClassName">UINavigationController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="psyTrainTrackLabel">
+							<string key="name">psyTrainTrackLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="reportsDetailViewController_iPad">
+							<string key="name">reportsDetailViewController_iPad</string>
+							<string key="candidateClassName">ReportsDetailViewController_iPad</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="reportsRootViewController_iPad">
+							<string key="name">reportsRootViewController_iPad</string>
+							<string key="candidateClassName">ReportsRootViewController_iPad</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="reportsViewController_iPhone">
+							<string key="name">reportsViewController_iPhone</string>
+							<string key="candidateClassName">ReportsViewController_iPhone</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="splitViewControllerClients">
+							<string key="name">splitViewControllerClients</string>
+							<string key="candidateClassName">UISplitViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="splitViewControllerClinicians">
+							<string key="name">splitViewControllerClinicians</string>
+							<string key="candidateClassName">UISplitViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="splitViewControllerReports">
+							<string key="name">splitViewControllerReports</string>
+							<string key="candidateClassName">UISplitViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tabBar">
+							<string key="name">tabBar</string>
+							<string key="candidateClassName">UITabBar</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tabBarController">
+							<string key="name">tabBarController</string>
+							<string key="candidateClassName">UITabBarController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tabBarControllerContainerView">
+							<string key="name">tabBarControllerContainerView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tabBarView">
+							<string key="name">tabBarView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="trainTrackViewController">
+							<string key="name">trainTrackViewController</string>
+							<string key="candidateClassName">TrainTrackViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="viewController">
+							<string key="name">viewController</string>
+							<string key="candidateClassName">UIViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="window">
+							<string key="name">window</string>
+							<string key="candidateClassName">UIWindow</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PTTAppDelegate.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PTTMasterViewController_iPad</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="containerView">UIView</string>
+						<string key="tabBarController">UITabBarController</string>
+						<string key="window">UIWindow</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="containerView">
+							<string key="name">containerView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tabBarController">
+							<string key="name">tabBarController</string>
+							<string key="candidateClassName">UITabBarController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="window">
+							<string key="name">window</string>
+							<string key="candidateClassName">UIWindow</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PTTMasterViewController_iPad.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ReportsDetailViewController_iPad</string>
+					<string key="superclassName">UITableViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">reportsRootViewController_iPad</string>
+						<string key="NS.object.0">ReportsRootViewController_iPad</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">reportsRootViewController_iPad</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">reportsRootViewController_iPad</string>
+							<string key="candidateClassName">ReportsRootViewController_iPad</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ReportsDetailViewController_iPad.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ReportsRootViewController_iPad</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">reportsDetailViewController_iPad</string>
+						<string key="NS.object.0">ReportsDetailViewController_iPad</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">reportsDetailViewController_iPad</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">reportsDetailViewController_iPad</string>
+							<string key="candidateClassName">ReportsDetailViewController_iPad</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ReportsRootViewController_iPad.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ReportsViewController_iPhone</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ReportsViewController_iPhone.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCArrayOfItemsModel</string>
+					<string key="superclassName">SCTableViewModel</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCArrayOfItemsModel.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCArrayOfObjectsModel</string>
+					<string key="superclassName">SCArrayOfItemsModel</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCArrayOfObjectsModel.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCControlCell</string>
+					<string key="superclassName">SCTableViewCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCControlCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCLabelCell</string>
+					<string key="superclassName">SCControlCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCLabelCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCObjectSelectionCell</string>
+					<string key="superclassName">SCSelectionCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCObjectSelectionCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCSelectionCell</string>
+					<string key="superclassName">SCLabelCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCSelectionCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCTableViewCell</string>
+					<string key="superclassName">UITableViewCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCTableViewCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCTableViewModel</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCTableViewModel.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">TrainTrackViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="messageView">UIView</string>
+						<string key="tableView">UITableView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="messageView">
+							<string key="name">messageView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tableView">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/TrainTrackViewController.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
+		<int key="IBDocument.localizationMode">0</int>
+		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
+		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
+		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="colorTrain300.png">{300, 300}</string>
+			<string key="reportTab.png">{33, 33}</string>
+			<string key="trainTab.png">{30, 30}</string>
+		</dictionary>
+		<string key="IBCocoaTouchPluginVersion">1420</string>
+	</data>
+</archive>

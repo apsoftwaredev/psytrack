@@ -1,0 +1,227 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/DTAboutViewController/!svn/ver/83/trunk/Core/Source
+END
+AboutDocumentViewController.xib
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/DTAboutViewController/!svn/ver/82/trunk/Core/Source/AboutDocumentViewController.xib
+END
+DTButton.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/DTButton.h
+END
+NSString+Helpers.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/NSString+Helpers.h
+END
+DTPageControl.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/DTPageControl.h
+END
+UIView+Helpers.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/UIView+Helpers.h
+END
+DTApp.h
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/DTApp.h
+END
+DTButton.m
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/DTButton.m
+END
+DTAppScrollerView.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/DTAppScrollerView.h
+END
+NSString+Helpers.m
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/NSString+Helpers.m
+END
+DTPageControl.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/DTPageControl.m
+END
+UIView+Helpers.m
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/UIView+Helpers.m
+END
+DTApp.m
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/DTApp.m
+END
+DTLayoutDefinition.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/DTLayoutDefinition.h
+END
+DTAppScrollerView.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/DTAppScrollerView.m
+END
+BigProgressView.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/BigProgressView.h
+END
+GrayRoundRectView.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/GrayRoundRectView.h
+END
+DTLayoutDefinition.m
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/DTLayoutDefinition.m
+END
+BigProgressView.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/BigProgressView.m
+END
+DTSingleQuestionContentView.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/DTAboutViewController/!svn/ver/78/trunk/Core/Source/DTSingleQuestionContentView.h
+END
+GrayRoundRectView.m
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/GrayRoundRectView.m
+END
+DTSingleQuestionView.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/DTAboutViewController/!svn/ver/78/trunk/Core/Source/DTSingleQuestionView.h
+END
+DTSingleQuestionContentView.m
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/DTAboutViewController/!svn/ver/78/trunk/Core/Source/DTSingleQuestionContentView.m
+END
+DTAboutDocumentViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/DTAboutViewController/!svn/ver/82/trunk/Core/Source/DTAboutDocumentViewController.h
+END
+DTSingleQuestionView.m
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/DTAboutViewController/!svn/ver/81/trunk/Core/Source/DTSingleQuestionView.m
+END
+DTAboutViewController.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/DTAboutViewController.h
+END
+TouchyWebView.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/TouchyWebView.h
+END
+DTAboutDocumentViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/DTAboutViewController/!svn/ver/82/trunk/Core/Source/DTAboutDocumentViewController.m
+END
+DTAboutViewController.m
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/DTAboutViewController/!svn/ver/82/trunk/Core/Source/DTAboutViewController.m
+END
+DTFAQTable.h
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/DTFAQTable.h
+END
+TouchyWebView.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/TouchyWebView.m
+END
+UILabel+Helpers.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/UILabel+Helpers.h
+END
+DTFAQTable.m
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/DTAboutViewController/!svn/ver/77/trunk/Core/Source/DTFAQTable.m
+END
+UIImage+Helpers.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/UIImage+Helpers.h
+END
+DTInfoManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/DTInfoManager.h
+END
+UILabel+Helpers.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/UILabel+Helpers.m
+END
+DTInfoManager.m
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/DTInfoManager.m
+END
+UIImage+Helpers.m
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/DTAboutViewController/!svn/ver/70/trunk/Core/Source/UIImage+Helpers.m
+END

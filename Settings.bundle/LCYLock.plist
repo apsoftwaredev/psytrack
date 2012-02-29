@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>LCYLockSettings</key>
+	<dict>
+		<key>passCodeIsOn</key>
+		<false/>
+		<key>pw</key>
+		<string></string>
+		<key>screenLocked</key>
+		<false/>
+		<key>attempt</key>
+		<integer>0</integer>
+		<key>timer</key>
+		<false/>
+		<key>startupLock</key>
+		<false/>
+	</dict>
+	<key>StringsTable</key>
+	<string>LCYLock</string>
+	<key>Title</key>
+	<string></string>
+</dict>
+</plist>

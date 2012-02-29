@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PreferenceSpecifiers</key>
+	<array>
+		<dict>
+			<key>Title</key>
+			<string>iCloud</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>FooterText</key>
+			<string>iCloud must be enbled and have &quot;Documents and Data&quot; turned on in the iCloud settings (iOS &gt;5.0). </string>
+		</dict>
+		<dict>
+			<key>DefaultValue</key>
+			<true/>
+			<key>Key</key>
+			<string>icloud_preference</string>
+			<key>Title</key>
+			<string>Use iCloud</string>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Default Calendar Settings</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Calendar Name</string>
+			<key>Key</key>
+			<string>calendar_name</string>
+			<key>DefaultValue</key>
+			<string>Client Appointments</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Location</string>
+			<key>Key</key>
+			<string>calander_location</string>
+			<key>DefaultValue</key>
+			<string>The Clinic</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Default Address Book Settings</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>Group Name</string>
+			<key>Key</key>
+			<string>abgroup_name</string>
+			<key>DefaultValue</key>
+			<string>Clinicians</string>
+		</dict>
+	</array>
+	<key>StringsTable</key>
+	<string>Root</string>
+	<key>Title</key>
+	<string>psyTrack Settings</string>
+	<key>defaultCalendarIdentifier</key>
+	<string></string>
+	<key>address_book_group_identifier</key>
+	<integer>-1</integer>
+	<key>address_book_identifier</key>
+	<integer>0</integer>
+	<key>AddressBookContactIdentifier</key>
+	<string></string>
+	<key>address_book_group_name</key>
+	<string></string>
+</dict>
+</plist>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Rows</key>
+	<array>
+		<dict>
+			<key>ButtonStyle</key>
+			<integer>1</integer>
+			<key>Title</key>
+			<string>View Help</string>
+			<key>Type</key>
+			<string>Button</string>
+			<key>Action</key>
+			<string>PopupHelp</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>FAQ Table</string>
+			<key>Type</key>
+			<string>Table</string>
+			<key>RowsURL</key>
+			<string>file:faq.plist</string>
+			<key>UseTextViews</key>
+			<true/>
+			<key>ShowRows</key>
+			<integer>5</integer>
+			<key>RowHeight</key>
+			<string>60</string>
+		</dict>
+		<dict>
+			<key>ButtonStyle</key>
+			<integer>3</integer>
+			<key>Title</key>
+			<string>Email Support</string>
+			<key>Type</key>
+			<string>Button</string>
+			<key>ActionRows</key>
+			<array>
+				<dict>
+					<key>Title</key>
+					<string>Send Suggestions</string>
+					<key>Action</key>
+					<string>OpenMail|Dr. Touch &lt;oliver@drobnik.com&gt;|Feature Request|I have version $CFBundleVersion of $CFBundleDisplayName. I would like:</string>
+				</dict>
+				<dict>
+					<key>Title</key>
+					<string>Request Help</string>
+					<key>Action</key>
+					<string>OpenMail|Dr. Touch &lt;oliver@drobnik.com&gt;|Need Help|I have version $CFBundleVersion of $CFBundleDisplayName. I need help with:</string>
+				</dict>
+			</array>
+			<key>Action</key>
+			<string>ActionSheet</string>
+		</dict>
+	</array>
+</dict>
+</plist>

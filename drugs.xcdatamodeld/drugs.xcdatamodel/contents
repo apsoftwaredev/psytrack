@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="875" systemVersion="11A480e" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="DrugAppDocEntity" representedClassName="DrugAppDocEntity" syncable="YES">
+        <attribute name="actionType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="appDocID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="applNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="docDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="docTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="docType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="docUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="duplicateCounter" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="seqNo" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="DrugAppDocTypeLookupEntity" representedClassName="DrugAppDocTypeLookupEntity" syncable="YES">
+        <attribute name="appDocType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sortOrder" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="DrugApplicationEntity" representedClassName="DrugApplicationEntity" syncable="YES">
+        <attribute name="actionType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="applNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="applType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="chemical_Type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="currentPatentFlag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mostRecentLabelAvailableFlag" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orphan_Code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sponsorApplicant" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ther_Potential" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="DrugChemicalTypeLookupEntity" representedClassName="DrugChemicalTypeLookupEntity" syncable="YES">
+        <attribute name="chemicalTypeCode" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="chemicalTypeDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="chemicalTypeID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="DrugDocTypeLookupEntity" representedClassName="DrugDocTypeLookupEntity" syncable="YES">
+        <attribute name="docType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="docTypeDesc" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="DrugProductEntity" representedClassName="DrugProductEntity" syncable="YES">
+        <attribute name="activeIngredient" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="applNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dosage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="drugName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="form" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productMktStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="productNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="referenceDrug" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tECode" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="DrugProductTECodeEntity" representedClassName="DrugProductTECodeEntity" syncable="YES">
+        <attribute name="applNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productMktStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tECode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tESequence" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="DrugRegActionDateEntity" representedClassName="DrugRegActionDateEntity" syncable="YES">
+        <attribute name="actionDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="actionType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="applNo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="docType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="duplicateCounter" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="inDocTypeSeqNo" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="DrugReviewClassLookupEntity" representedClassName="DrugReviewClassLookupEntity" syncable="YES">
+        <attribute name="longDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reviewClassID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reviewCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shortDesc" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <configuration name="DrugsConfig">
+        <memberEntity name="DrugAppDocEntity"/>
+        <memberEntity name="DrugAppDocTypeLookupEntity"/>
+        <memberEntity name="DrugApplicationEntity"/>
+        <memberEntity name="DrugChemicalTypeLookupEntity"/>
+        <memberEntity name="DrugDocTypeLookupEntity"/>
+        <memberEntity name="DrugProductEntity"/>
+        <memberEntity name="DrugProductTECodeEntity"/>
+        <memberEntity name="DrugRegActionDateEntity"/>
+        <memberEntity name="DrugReviewClassLookupEntity"/>
+    </configuration>
+    <elements>
+        <element name="DrugAppDocEntity" positionX="160" positionY="192" width="128" height="180"/>
+        <element name="DrugAppDocTypeLookupEntity" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="DrugApplicationEntity" positionX="160" positionY="192" width="128" height="180"/>
+        <element name="DrugChemicalTypeLookupEntity" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="DrugDocTypeLookupEntity" positionX="160" positionY="192" width="128" height="75"/>
+        <element name="DrugProductEntity" positionX="160" positionY="192" width="128" height="180"/>
+        <element name="DrugProductTECodeEntity" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="DrugRegActionDateEntity" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="DrugReviewClassLookupEntity" positionX="160" positionY="192" width="128" height="105"/>
+    </elements>
+</model>

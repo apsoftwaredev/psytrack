@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>What if I forget my passphrase?</key>
+		<string>Currently the only way to get back in if you forget your passprhase is to reinstall the application, which may result in data loss. I encourage you to keep backups in icloud and save/print pdf reports.</string>
+	</dict>
+	<dict>
+		<key>How long does it take to receive a response to my email?</key>
+		<string>I am currently a one-man operation and I get many emails daily. I will try my best to your answer emails promptly if they pertain to the program. 
+I try my best to answer every support question.
+
+For support issues, email response time varies. I do try my best to answer as promptly as possible. If I don’t respond within a week, feel free to remind us with another email. I will try my best and I truly do care. </string>
+	</dict>
+	<dict>
+		<key>Any more Frequently Asked Questions?</key>
+		<string>I will add more frequently asked questions as they come in.  I you have a question that is frequently asked, I will add it here.  So please send me your questions.</string>
+	</dict>
+	<dict>
+		<key>How secure is the data? What if I loose my phone?</key>
+		<string> if you loose your device, you may be able to remotely wipe the data.  It is also recommended that you be very careful with any information that could identify a client and keep your phone secure.  It is recommended that you use the locking feature built into the device in additon to the in-app lock screen as this adds additional security.  We cannot guarantee that a sophisticated hacker would not be able to access the data even though the client sections are encrypted.  Therefore, it is important to keep the device secure and that you are careful about the information you save.  It is recommendended that you not save client names, addresses, or other personally identifiying information if you are taking your device out of a secure location.  For best security, us an ID code or initials instead client names and store the names with the ID codes nonelectronicly.</string>
+		<key>New item</key>
+		<string></string>
+	</dict>
+</array>
+</plist>

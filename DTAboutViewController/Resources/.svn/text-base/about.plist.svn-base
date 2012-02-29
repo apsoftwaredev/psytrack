@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Rows</key>
+	<array>
+		<dict>
+			<key>IgnoreCellInsets</key>
+			<true/>
+			<key>ImageURL</key>
+			<string>file:AboutHeader.png</string>
+			<key>Type</key>
+			<string>Image</string>
+		</dict>
+		<dict>
+			<key>TextStyle</key>
+			<integer>0</integer>
+			<key>Type</key>
+			<string>Text</string>
+			<key>Title</key>
+			<string>This app shows how you can simply add a plist to your existing project plus a couple of classes and you get a fully fledged about and in-app support functionality.
+			
+			There are even line breaks possible.</string>
+		</dict>
+		<dict>
+			<key>TextStyle</key>
+			<integer>1</integer>
+			<key>Type</key>
+			<string>Text</string>
+			<key>Title</key>
+			<string>Note: This text is bold.</string>
+		</dict>
+		<dict>
+			<key>ButtonStyle</key>
+			<integer>1</integer>
+			<key>Title</key>
+			<string>Support</string>
+			<key>Type</key>
+			<string>Button</string>
+			<key>ActionRows</key>
+			<array>
+				<dict>
+					<key>Title</key>
+					<string>Feature Request</string>
+					<key>Action</key>
+					<string>OpenMail|Dr. Touch &lt;oliver@drobnik.com&gt;|Feature Request|I have version $CFBundleVersion of $CFBundleDisplayName. I would like:</string>
+				</dict>
+				<dict>
+					<key>Title</key>
+					<string>Need Help</string>
+					<key>Action</key>
+					<string>OpenMail|Dr. Touch &lt;oliver@drobnik.com&gt;|Need Help|I have version $CFBundleVersion of $CFBundleDisplayName. I need help with:</string>
+				</dict>
+			</array>
+			<key>Action</key>
+			<string>ActionSheet</string>
+		</dict>
+		<dict>
+			<key>Title</key>
+			<string>Review in iTunes</string>
+			<key>Type</key>
+			<string>Button</string>
+			<key>ButtonStyle</key>
+			<integer>2</integer>
+			<key>Action</key>
+			<string>OpenReview|308590265</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>AppScroller</string>
+		</dict>
+		<dict>
+			<key>ActionRows</key>
+			<array>
+				<dict>
+					<key>Title</key>
+					<string>Follow on Twitter</string>
+					<key>Action</key>
+					<string>OpenTwitter|dr_touch</string>
+				</dict>
+				<dict>
+					<key>Action</key>
+					<string>OpenWebView|http://www.drobnik.com/touch</string>
+					<key>Title</key>
+					<string>Go to website</string>
+				</dict>
+				<dict>
+					<key>Title</key>
+					<string>Tell a Friend</string>
+					<key>Action</key>
+					<string>OpenMail||Great App|&lt;p&gt;Hi!&lt;/p&gt;&lt;p&gt;I discovered this great app!&lt;/p&gt;</string>
+				</dict>
+			</array>
+			<key>Action</key>
+			<string>ActionSheet</string>
+			<key>Title</key>
+			<string>Contact</string>
+			<key>Type</key>
+			<string>Button</string>
+			<key>ButtonStyle</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>Action</key>
+			<string>UnsupportedAction</string>
+			<key>Title</key>
+			<string>Unsupported Action</string>
+			<key>Type</key>
+			<string>Button</string>
+			<key>ButtonStyle</key>
+			<integer>4</integer>
+		</dict>
+
+	</array>
+</dict>
+</plist>

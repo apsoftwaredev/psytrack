@@ -1,0 +1,200 @@
+//
+//  DrugRegActionOverviewCell.m
+//  psyTrainTrack
+//
+//  Created by Daniel Boice on 1/5/12.
+//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//
+
+#import "DrugDocOverviewCell.h"
+#import "DrugAppDocsViewController.h"
+#import "WebViewDetailViewController.h"
+#import "PTTAppDelegate.h"
+#import "DrugDocTypeLookupEntity.h"
+#import "DrugActionDateViewController.h"
+
+@implementation DrugDocOverviewCell
+
+@synthesize dateField,docTypeField;
+
+
+-(void)performInitialization{
+    [super performInitialization];
+    
+    docTypeField.delegate=self;
+    self.delegate=self;
+
+}
+
+-(void)loadBindingsIntoCustomControls{
+
+    
+//    [super loadBindingsIntoCustomControls];
+//    
+//   
+
+    NSDateFormatter*dateFormatter=[[NSDateFormatter alloc]init];
+
+    [dateFormatter setDateFormat:@"M/d/yyyy"];
+    
+    
+    NSString *datePropertyString=[self.objectBindings valueForKey:@"bottom"];
+    
+  
+ 
+
+    NSDate *actionDate=[self.boundObject valueForKey:datePropertyString];
+    
+        
+    if (datePropertyString.length) {
+         dateField.text=[dateFormatter stringFromDate:actionDate];
+    }
+   
+    
+    
+    
+    
+//    NSLog(@"self bound object is %@",self.boundObject);
+    
+    NSString *keyPathStringForTopText=[self.objectBindings valueForKey:@"top"];
+    openNibNameString=[self.objectBindings valueForKey:@"openNib"];
+       
+    if ([openNibNameString isEqualToString:@"WebViewDetailViewController"]) 
+    {
+        NSString *docTypeString=(NSString *)[self.boundObject valueForKey:keyPathStringForTopText];
+        docTypeField.text=docTypeString;
+    }
+    else
+    {
+       
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"docType matches %@",
+        [self.boundObject valueForKey:@"docType"] ];
+       
+
+        NSArray *docTypeLookupArray=(NSArray *)[(DrugActionDateViewController *)self.ownerTableViewModel.delegate docTypesArray];
+        
+//           NSLog(@"doctype lookup arrya is %@",docTypeLookupArray);
+        
+      
+       
+        docTypeLookupArray=(NSArray *)[docTypeLookupArray filteredArrayUsingPredicate:predicate];
+        
+        if (docTypeLookupArray.count>0) {
+         
+           
+//            NSLog(@"fetched object is %@",fetchedObjects);
+            DrugDocTypeLookupEntity *docTypeLookup=(DrugDocTypeLookupEntity *)[docTypeLookupArray objectAtIndex:0];
+           
+         
+            
+            NSString *docTypeDescString=(NSString *)docTypeLookup.docTypeDesc;
+//            NSLog(@"docype desc string is %@",docTypeDescString);
+            docTypeField.text=docTypeDescString;
+        }
+        
+   
+      
+//        
+//        docTypeField.text=(NSString *)docTypeSet;
+//         NSLog(@"doc type lookup object is %@",docTypeSet);
+    }
+   
+    
+    
+//    docTypeLookup= actionDateObject.documentType.self;
+//    if (mutableArray.count>0) {
+//         docTypeLookup=[mutableArray objectAtIndex:0];
+//         docTypeField.text=docTypeLookup.docTypeDesc;
+//    }
+
+    
+   
+
+
+}
+
+-(void)willDisplayCell:(SCTableViewCell *)cell{
+
+
+    if (self.isSelected ) {
+        docTypeField.textColor=[UIColor whiteColor];
+        dateField.textColor=[UIColor whiteColor];
+    } 
+    else
+    {
+        docTypeField.textColor=[UIColor colorWithRed:0.185592 green:0.506495 blue:0.686239 alpha:1];
+        dateField.textColor=[UIColor blackColor];
+    
+    }
+
+}
+
+-(void)willSelectCell:(SCTableViewCell *)cell{
+
+
+    docTypeField.textColor=[UIColor whiteColor];
+    dateField.textColor=[UIColor whiteColor];
+
+
+}
+-(void)didSelectCell:(SCTableViewCell *)cell{
+    
+//    NSLog(@"text color is %@", docTypeField.textColor);
+    
+        
+   
+    if ([openNibNameString isEqualToString:@"WebViewDetailViewController"]) {
+        NSString *urlString=(NSString *)[self.boundObject valueForKey:@"docUrl"];
+        
+       
+        if (urlString.length) {
+            
+            WebViewDetailViewController *webDetailViewController=[[WebViewDetailViewController alloc]initWithNibName:openNibNameString bundle:nil urlString:urlString];
+            
+            [self.ownerTableViewModel.viewController.navigationController pushViewController:webDetailViewController animated:YES]; 
+           
+            
+        }
+        
+    }
+    else if ([openNibNameString isEqualToString:@"DrugAppDocsViewController"])
+    {
+        
+//        NSLog(@"bound object is %@",self.boundObject);
+        NSString *applNoString=[self.boundObject valueForKey:@"applNo"];
+        NSString *inDocSeqNoString=[self.boundObject valueForKey:@"inDocTypeSeqNo"];
+        
+//        UITabBarController *tabBarController=(UITabBarController *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate tabBarController];
+//        
+//        [tabBarController.tabBar setHidden:TRUE ];
+//
+        
+        DrugAppDocsViewController *drugAppDocsViewController=[[DrugAppDocsViewController alloc]initWithNibName:openNibNameString bundle:nil applNoString:applNoString inDocSeqNo:inDocSeqNoString];
+        
+        [self.ownerTableViewModel.viewController.navigationController pushViewController:drugAppDocsViewController animated:YES]; 
+       
+
+    }
+    [UIView beginAnimations:nil context:nil];
+       [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    [UIView setAnimationDuration:2];
+    self.highlighted=FALSE;
+    docTypeField.textColor=[UIColor colorWithRed:0.185592 green:0.506495 blue:0.686239 alpha:1];
+    dateField.textColor=[UIColor blackColor];
+       [UIView commitAnimations];
+   
+
+}
+
+-(void)didDeselectCell:(SCTableViewCell *)cell{
+
+    docTypeField.textColor=[UIColor colorWithRed:0.185592 green:0.506495 blue:0.686239 alpha:1];
+    dateField.textColor=[UIColor blackColor];
+    
+       
+
+}
+
+
+@end
