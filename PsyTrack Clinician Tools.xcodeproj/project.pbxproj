@@ -11,6 +11,7 @@
 		376E50C614F87D4F000B17E8 /* UIDownloadBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 376E50C514F87D4F000B17E8 /* UIDownloadBar.m */; };
 		376E50D014F8D2D5000B17E8 /* ia.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 376E50CF14F8D2D5000B17E8 /* ia.p12 */; };
 		3773F77114FD267000C36B75 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3773F77014FD267000C36B75 /* AudioToolbox.framework */; };
+		377E449814FEC20D00AE1316 /* SCTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 377E449714FEC20D00AE1316 /* SCTableViewModel.m */; };
 		378DED4214FE723400CF4F12 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 378DED4114FE723400CF4F12 /* Settings.bundle */; };
 		378DED7714FE72F000CF4F12 /* AboutDocumentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 378DED4414FE72F000CF4F12 /* AboutDocumentViewController.xib */; };
 		378DED7814FE72F000CF4F12 /* BigProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 378DED4614FE72F000CF4F12 /* BigProgressView.m */; };
@@ -111,11 +112,11 @@
 		378DEE5214FE76AA00CF4F12 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 378DEE4A14FE76AA00CF4F12 /* Icon.png */; };
 		378DEE5C14FE790C00CF4F12 /* drugs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 378DEE5814FE790C00CF4F12 /* drugs.xcdatamodeld */; };
 		378DEE5D14FE790C00CF4F12 /* psyTrainTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 378DEE5A14FE790C00CF4F12 /* psyTrainTrack.xcdatamodeld */; };
-		378DEE6314FE7D1700CF4F12 /* SCTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 378DEE6214FE7D1700CF4F12 /* SCTableViewModel.m */; };
 		37A5D9F114FBD680007BC72A /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A5D9F014FBD680007BC72A /* KeyEntity.m */; };
 		37BF64F514F2917D0065C607 /* NSDictionaryHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BF64F414F2917D0065C607 /* NSDictionaryHelpers.m */; };
 		37C8A82414F419B4002EA971 /* apns.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 37C8A82314F419B4002EA971 /* apns.p12 */; };
 		37D6B6FC14FDAB4900A3BA82 /* ClientEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D6B6FB14FDAB4900A3BA82 /* ClientEntity.m */; };
+		37F7CDD214FEC3EB00AD2C3A /* README in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CDD114FEC3EB00AD2C3A /* README */; };
 		B703DBB914EBF66600A921F2 /* PTTEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = B703DBB814EBF66600A921F2 /* PTTEncryption.m */; };
 		B7045C4614D43CA200752B23 /* padlock_click.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B7045C4514D43CA200752B23 /* padlock_click.m4a */; };
 		B7045C6414D5476600752B23 /* DrugWebViewActionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7045C6214D5476600752B23 /* DrugWebViewActionsViewController.m */; };
@@ -269,6 +270,8 @@
 		376E50C514F87D4F000B17E8 /* UIDownloadBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIDownloadBar.m; path = DownloadBar/UIDownloadBar.m; sourceTree = SOURCE_ROOT; };
 		376E50CF14F8D2D5000B17E8 /* ia.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ia.p12; sourceTree = SOURCE_ROOT; };
 		3773F77014FD267000C36B75 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		377E449614FEC20D00AE1316 /* SCTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCTableViewModel.h; path = "Sensible TableView/SCTableViewModel.h"; sourceTree = SOURCE_ROOT; };
+		377E449714FEC20D00AE1316 /* SCTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCTableViewModel.m; path = "Sensible TableView/SCTableViewModel.m"; sourceTree = SOURCE_ROOT; };
 		378DED4114FE723400CF4F12 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = SOURCE_ROOT; };
 		378DED4414FE72F000CF4F12 /* AboutDocumentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutDocumentViewController.xib; sourceTree = "<group>"; };
 		378DED4514FE72F000CF4F12 /* BigProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigProgressView.h; sourceTree = "<group>"; };
@@ -410,8 +413,6 @@
 		378DEE4A14FE76AA00CF4F12 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = SOURCE_ROOT; };
 		378DEE5914FE790C00CF4F12 /* drugs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = drugs.xcdatamodel; sourceTree = "<group>"; };
 		378DEE5B14FE790C00CF4F12 /* psyTrainTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = psyTrainTrack.xcdatamodel; sourceTree = "<group>"; };
-		378DEE6114FE7D1700CF4F12 /* SCTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCTableViewModel.h; path = "Sensible TableView/SCTableViewModel.h"; sourceTree = SOURCE_ROOT; };
-		378DEE6214FE7D1700CF4F12 /* SCTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCTableViewModel.m; path = "Sensible TableView/SCTableViewModel.m"; sourceTree = SOURCE_ROOT; };
 		37A5D9EF14FBD680007BC72A /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = SOURCE_ROOT; };
 		37A5D9F014FBD680007BC72A /* KeyEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyEntity.m; sourceTree = SOURCE_ROOT; };
 		37BF64F314F2917D0065C607 /* NSDictionaryHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryHelpers.h; sourceTree = SOURCE_ROOT; };
@@ -419,6 +420,7 @@
 		37C8A82314F419B4002EA971 /* apns.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = apns.p12; sourceTree = SOURCE_ROOT; };
 		37D6B6FA14FDAB4900A3BA82 /* ClientEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientEntity.h; sourceTree = SOURCE_ROOT; };
 		37D6B6FB14FDAB4900A3BA82 /* ClientEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientEntity.m; sourceTree = SOURCE_ROOT; };
+		37F7CDD114FEC3EB00AD2C3A /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		B703DBB714EBF66600A921F2 /* PTTEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTEncryption.h; sourceTree = SOURCE_ROOT; };
 		B703DBB814EBF66600A921F2 /* PTTEncryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTEncryption.m; sourceTree = SOURCE_ROOT; };
 		B7045C4514D43CA200752B23 /* padlock_click.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = padlock_click.m4a; sourceTree = SOURCE_ROOT; };
@@ -848,8 +850,8 @@
 		B72F342814CB5B3C00B8C935 /* Sensible TableView */ = {
 			isa = PBXGroup;
 			children = (
-				378DEE6114FE7D1700CF4F12 /* SCTableViewModel.h */,
-				378DEE6214FE7D1700CF4F12 /* SCTableViewModel.m */,
+				377E449614FEC20D00AE1316 /* SCTableViewModel.h */,
+				377E449714FEC20D00AE1316 /* SCTableViewModel.m */,
 				378DED9614FE738F00CF4F12 /* SCTableViewCell.m */,
 				378DED9714FE738F00CF4F12 /* SCTableViewSection.m */,
 				378DED9814FE738F00CF4F12 /* SCTableViewSection.h */,
@@ -870,7 +872,7 @@
 			);
 			name = "Sensible TableView";
 			path = "psyTrainTrack/Sensible TableView";
-			sourceTree = SOURCE_ROOT;
+			sourceTree = "<group>";
 		};
 		B7309BE81443A94E0089B01D /* Time */ = {
 			isa = PBXGroup;
@@ -1172,6 +1174,7 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
+				37F7CDD114FEC3EB00AD2C3A /* README */,
 				378DED4314FE72F000CF4F12 /* DTAboutViewController */,
 				B7CBE3C414EF1EC0001F2FB3 /* PsyTrack Clinician Tools.entitlements */,
 				B764788914DE6CED004EE572 /* Encrypted Resources */,
@@ -1217,8 +1220,8 @@
 		B79F48A4142BEF0D0085D47B /* psyTrack */ = {
 			isa = PBXGroup;
 			children = (
-				B7B24B2F149E926600402B24 /* Drug Data */,
 				B78CD5091431743B00C847F5 /* Main */,
+				B7B24B2F149E926600402B24 /* Drug Data */,
 				B78CD508143173D800C847F5 /* Shared */,
 				B78CD505143171DF00C847F5 /* Clients */,
 				B78CD4FF1431717100C847F5 /* Clinicians */,
@@ -1756,6 +1759,7 @@
 				378DEE5014FE76AA00CF4F12 /* Icon-72.png in Resources */,
 				378DEE5114FE76AA00CF4F12 /* Icon@2x.png in Resources */,
 				378DEE5214FE76AA00CF4F12 /* Icon.png in Resources */,
+				37F7CDD214FEC3EB00AD2C3A /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1882,7 +1886,7 @@
 				378DEDE214FE73AF00CF4F12 /* LCYTurnOffPasscodeStateMachine.m in Sources */,
 				378DEE5C14FE790C00CF4F12 /* drugs.xcdatamodeld in Sources */,
 				378DEE5D14FE790C00CF4F12 /* psyTrainTrack.xcdatamodeld in Sources */,
-				378DEE6314FE7D1700CF4F12 /* SCTableViewModel.m in Sources */,
+				377E449814FEC20D00AE1316 /* SCTableViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

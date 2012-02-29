@@ -914,6 +914,9 @@
 	{
 		[delegate aboutViewController:self performCustomAction:action withObject:object];
 	}
+    else {
+    
+    }
     
     
 }
@@ -926,9 +929,12 @@
 		NSString *command = [self.commandsForShowingActionSheet objectAtIndex:buttonIndex];
 		[self performAboutAction:command withObject:nil];
 	}
-    
+
     NSLog(@"button index %i", buttonIndex);
 }
+
+
+
 
 #pragma mark -
 #pragma mark DTAppScrollerView

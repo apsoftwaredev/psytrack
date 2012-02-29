@@ -18,7 +18,7 @@
 			<key>Type</key>
 			<string>Text</string>
 			<key>Title</key>
-			<string>psyTrainTrack  Clinician Tools version  $CFBundleVersion.</string>
+			<string>psyTrack  Clinician Tools version  $CFBundleVersion.</string>
 		</dict>
 		<dict>
 			<key>TextStyle</key>
@@ -26,13 +26,7 @@
 			<key>Type</key>
 			<string>Text</string>
 			<key>Title</key>
-			<string>Thank you for using psyTrack!  
-			
-			Your feedback is very much appreciated.  
-			
-If you need help with anything or experience any problems using psyTrainTrack, please send me an email and we will try to fix it or help you as soon as possible.  I love hearing from you.  I am constantly updating and upgrading it, so if you find any bugs please let me know.
-			
-			 psyTrainTrack is a product of PsycheWeb LLC, Copyright 2011, all rights reserved. psyTrainTrack was developed by Dan Boice, M.S.  Dan Boice has a masters degree in Psychology and is currently completing a doctorate degree in clinical psychology with an emphasis in neuropsychology.  He is interested in the integration of technology with clincial practice.  He is a fellow student of psychology.  He made this app primarily because he needed to use it himself. </string>
+			<string>psyTrack is a product of PsycheWeb LLC, Copyright 2011, all rights reserved. psyTrack was developed solely by Dan Boice, M.S.  Dan Boice has a Masters degree in Psychology and is currently completing a doctorate degree in clinical psychology with an emphasis in neuropsychology.  He is interested in the integration of technology with clinical practice. He has developed database applications for small business and state government.</string>
 		</dict>
 		<dict>
 			<key>ButtonStyle</key>
@@ -120,9 +114,7 @@ If you need help with anything or experience any problems using psyTrainTrack, p
 			<key>Type</key>
 			<string>Text</string>
 			<key>Title</key>
-			<string> Thank you to all those who supported and encouraged me as a made this app.  A special thanks to Dr. Shalene Kirkley Ph.D. for her encouragement and enthusiasim for pursuing the idea back in the first year of my doctorate program.   I have had a lot of fun making it and I am glad to finally be able to share it with all of you.   Thank you to Tarek at Sensible Table view for a great product and support, and thanks to Dr. Touch at Cocoanetics for his help with the DTAboutViewController.  Thank you to Krishna Kotecha for the starting point for the lock screen.  Thank you to Apple, Inc for a making all of this amazing technology possible.   
-			
-			</string>
+			<string> Thank you to all those who supported and encouraged me as a made this app.  A special thanks to Dr. Shalene Kirkley Ph.D. for her encouragement and enthusiasm for pursuing the idea back in the first year of my doctorate program.   I have had a lot of fun making it and I am glad to finally be able to share it with all of you.   Thank YOU for trying my app and hopefully writing a positive review for me.  I hope that you find it useful and enjoyable to use.  Thank you to Tarek at Sensible Table view for a great product and support, and thanks to Dr. Touch at Cocoanetics for his help with the DTAboutViewController.  Thank you to Krishna Kotecha for the starting point for the lock screen.  Thank you to Apple, Inc. and all its laborers around the world for a making all of this amazing technology possible.  And of course, a special thanks to my friends and family for their never-ending support throughout my life.   </string>
 		</dict>
 		<dict>
 			<key>TextStyle</key>
@@ -138,7 +130,25 @@ If you need help with anything or experience any problems using psyTrainTrack, p
 			<key>Type</key>
 			<string>Text</string>
 			<key>Title</key>
-			<string>THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</string>
+			<string>psyTrack Clinician Tools
+Developed by Dan Boice, M.S. Copyright (c) 2011-2012 
+</string>
+		</dict>
+		<dict>
+			<key>TextStyle</key>
+			<integer>0</integer>
+			<key>Type</key>
+			<string>Text</string>
+			<key>Title</key>
+			<string>LIMITATION OF LIABILITY:THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL PSYCHEWEB LLC BE LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OF OR INABILITY TO USE THE PRODUCT, INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF GOODWILL, WORK STOPPAGE, COMPUTER FAILURE OR MALFUNCTION, OR ANY AND ALL OTHER COMMERCIAL DAMAGES OR LOSSES, EVEN IF ADVISED OF THE POSSIBILITY THEREOF, AND REGARDLESS OF THE LEGAL OR EQUITABLE THEORY (CONTRACT, TORT OR OTHERWISE) UPON WHICH THE CLAIM IS BASED.</string>
+		</dict>
+		<dict>
+			<key>TextStyle</key>
+			<integer>0</integer>
+			<key>Type</key>
+			<string>Text</string>
+			<key>Title</key>
+			<string>PSYCHEWEB MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE, REGARDING THE PSYCHEWEB LLC SOFTWARE OR ITS USE AND OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.  BY USING THIS SOFTWARE YOU AGREE NOT TO HOLD PSYCHEWEB LLC RESPONSIBLE FOR ANY LOSS OR COMPROMISING OF DATA REGARDLESS OF THE REASON.</string>
 		</dict>
 	</array>
 </dict>

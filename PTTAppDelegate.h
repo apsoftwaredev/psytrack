@@ -1,10 +1,21 @@
-//
-//  PTTAppDelegate.h
-//  psyTrainTrack
-//
-//  Created by Daniel Boice on 9/22/11.
-//  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
-//
+/*
+ *  PTTAppDelegate.h
+ *  psyTrack
+ *  Version: 1.0
+ *
+ *
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *
+ *  Created by Daniel Boice on 9/22/11.
+ *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
+ *
+ *
+ *	This notice may not be removed from this file.
+ *
+ */
+
 
 #import <UIKit/UIKit.h>
 #import "LCYLockScreenViewController.h"
@@ -41,7 +52,18 @@ static NSString * const kPTTAddressBookGroupIdentifier=@"address_book_group_iden
 static NSString * const kPTTAddressBookGroupName=@"address_book_group_name";
 static NSString * const kPTTGloballyUniqueIdentifier=@"globally_unique_identifier";
 
+/****************************************************************************************/
+/*	class PTTAppDelegate	*/
+/****************************************************************************************/ 
+/**
+ This class is the delegate for the application.
+ 
+ psyTrack is an applicaion designed to help clinical psychologists, psychiatrists, and and other clinical trainees track their training hours for practicum, internship, or other licensing requirements.  It allows clinicians to keep a record of services provided to clients, including, tests administered and types of treatments provided.  It allows clinicians to track their continuing education hours and classes needed for certifications.  It allows clinicians to easily track additional user defined demographic information of thier clients as well other clinicians, which is needed for licensing and useful for therapist matching.  It allows clinicians to keep a record of their and other clinician's previous employment, publications, licences, and other curriculum vitae information.  It allows the clicinian to easily track client referrals to other clinicians.  It is integrated with the Apple Address book to allow connection with and importing of existing contacts.  It is also integrated with the Apple Calander and allows the clinician to easily schedule clients, using a secure client code.  It also provides a complete interface to the entire FDA drug database, which links to downloadable pdfs containing drug labeling, medication guides, and other information.  It allows the clinician to keep track of the medications prescribed to clients and any side effects.  It keeps track of disorders that the clinician is treating.  The database is encrypted using industry standard encryption and the application has an in-app locking screen for additonal security.  It is enabled for iCloud and works on iPhone, iPad, and iPod touch.  If iCloud is enabled, the database is synced accross devices.  It also provides additonal tools such as current age and Wechsler 30 day Month test age calculators, height and weight conversions.  The time tracking tools include a stopwatch and start and stop times, and allows adjust the times and record breaks, to compute a total service time. The application was designed by practicum student in a doctoral clinical psychology program.
+ 
+ Architecture:
+ 
 
+ */
 @interface PTTAppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate,LCYLockScreenDelegate,UIAlertViewDelegate>{
 
      ClientsRootViewController_iPad *clientsRootViewController_iPad;
