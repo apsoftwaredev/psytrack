@@ -20,7 +20,7 @@ Acknoledgements:
 
 TO DO:
 
-2.	Change the drug directory to the cache directory
+
 3.	Finish adding headers to the documents and cleaning up header files
 4.	fix the bug in the address book and calendar settings when renaming group
 5.	add the dates to the key entity and check if more than one record, add a the date to the client record on encrypt so it doesn’t get mixed up when using icloud, all the icloud stuff this all needs to be tested too.
@@ -60,3 +60,4 @@ additional features
 
 -Done 
 1.	Fix the drug database
+2.	Change the drug directory to the cache directory

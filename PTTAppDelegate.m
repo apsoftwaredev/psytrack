@@ -4426,7 +4426,7 @@ return YES;
 - (NSURL *)applicationDrugsDirectory
 {
     NSFileManager *fileManager=[[NSFileManager alloc]init];
-    NSString *dirToCreate = [NSString stringWithFormat:@"%@/drugDatabase",[NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES) lastObject]];
+    NSString *dirToCreate = [NSString stringWithFormat:@"%@/drugDatabase",[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject]];
     BOOL isDir=YES;
     NSError *error=[[NSError alloc]init];
     if(![fileManager fileExistsAtPath:dirToCreate isDirectory:&isDir])
