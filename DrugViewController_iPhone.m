@@ -485,7 +485,7 @@
     
     
     NSTimeInterval timeout=10.0;
-    NSURL *remoteFileURL=[NSURL URLWithString:@"http://psycheweb.com/psytrack/dFiles/dFile-001"];
+    NSURL *remoteFileURL=[NSURL URLWithString:@"http://psycheweb.com/psytrack/dFiles/dFile-001.zpk"];
     
     NSURLRequest *request =  [[NSURLRequest alloc] initWithURL:remoteFileURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeout];
 
@@ -673,7 +673,7 @@
         
 
 //        NSURL *drugsDirectory=(NSURL*)[appDelegate applicationDrugsDirectory];
-            self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://psycheweb.com/psytrack/dFiles/dFile-001"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:CGRectMake(0, 12, 115, 20)
+            self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://psycheweb.com/psytrack/dFiles/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:CGRectMake(0, 12, 115, 20)
                                          timeout:15 
                                         delegate:self];
         
@@ -728,7 +728,16 @@
 
    NSURL *drugsStoreURL = [[appDelegate applicationDrugsDirectory] URLByAppendingPathComponent:@"drugs.sqlite"];
     NSLog(@"drugsstore url is %@",drugsStoreURL);
-    [fileData writeToURL:drugsStoreURL atomically:YES];
+    
+    NSString *symetricString=@"8qfnbyfalVvdjf093uPmsdj30mz98fI6";
+    NSData *symetricData=[symetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
+    
+    NSData *decryptedData=[appDelegate decryptDataToPlainData:fileData usingSymetricKey:symetricData];
+    
+    if (decryptedData.length) {
+         [decryptedData writeToURL:drugsStoreURL atomically:YES];
+    }
+   
     
 
     if (drugsManagedObjectContext) {

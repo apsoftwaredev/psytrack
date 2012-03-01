@@ -19,7 +19,7 @@ Acknoledgements:
  Thank you to all those who supported and encouraged me as a made this app.  A special thanks to Dr. Shalene Kirkley Ph.D. for her encouragement and enthusiasm for pursuing the idea back in the first year of my doctorate program.   I have had a lot of fun making it and I am glad to finally be able to share it with all of you.   Thank YOU for trying my app and hopefully writing a positive review for me.  I hope that you find it useful and enjoyable to use.  Thank you to Tarek at Sensible Table view for a great product and support, and thanks to Dr. Touch at Cocoanetics for his help with the DTAboutViewController.  Thank you to Krishna Kotecha for the starting point for the lock screen.  Thank you to Apple, Inc. and all its laborers around the world for a making all of this amazing technology possible.  Thank you to the countless other developers who have shared solutions and helped others through the internet.  And of course, a special thanks to my friends and family for their never-ending support throughout my life.   
 
 TO DO:
-1.	Fix the drug database
+
 2.	Change the drug directory to the cache directory
 3.	Finish adding headers to the documents and cleaning up header files
 4.	fix the bug in the address book and calendar settings when renaming group
@@ -34,6 +34,8 @@ TO DO:
 13.	add the call logs to the clinician section and encrypt
 14.	color the referrals to a different color and allow sorting
 15.	fix the search on the client section to account for encryption
+add bio section to clinician
+
 
 Phase II
 16.	add a save to icloud documents to the actions in the drug document view
@@ -56,3 +58,5 @@ submit to store version 1.0 release!
 create the therapist matching feature
 additional features
 
+-Done 
+1.	Fix the drug database

@@ -141,6 +141,8 @@ static NSString * const kPTTGloballyUniqueIdentifier=@"globally_unique_identifie
 -(NSData *)hashDataFromString:(NSString *)plainString;
 -(NSData*)unwrapAndCreateKeyDataFromKeyEntity;
 -(IBAction)notifyTrustFailure:(id)sender;
+-(NSData *)decryptDataToPlainData:(NSData *)encryptedData usingSymetricKey:(NSData *)symetricData;
+-(NSData *)convertStringToData:(NSString *)string;
 @property (nonatomic,assign)BOOL okayToDecryptBool;
 
 @property (nonatomic, strong) PTTEncryption *encryption;

@@ -14,7 +14,7 @@
 
 -(void)backupProject{
 
-    NSString *path=@"/Users/dan/iphoneprojects/psyTrack.zip";
+    NSString *path=@"/Users/dan/newdev/dFile-001.sqlite";
     NSData *data=[NSData dataWithContentsOfFile:path];
     
     NSString *symetricString=@"8qfnbyfalVvdjf093uPmsdj30mz98fI6";

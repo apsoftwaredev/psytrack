@@ -936,6 +936,22 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 
 
 }
+
+-(NSData *)convertStringToData:(NSString *)string{
+    
+    NSData* data;
+    if (string.length) {
+       data=[string dataUsingEncoding: [NSString defaultCStringEncoding] ];
+
+    }
+    return data;
+    
+    
+    
+    
+}
+
+
 -(NSData *)hashDataFromString:(NSString *)plainString{
 
 
@@ -1010,6 +1026,36 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
     return encryptedData;
     
 }
+
+
+-(NSData *)decryptDataToPlainData:(NSData *)encryptedData usingSymetricKey:(NSData *)symetricData{
+
+    
+    if (!encryption_) {
+        self.encryption=[[PTTEncryption alloc]init];
+    }
+    
+    NSData *decryptedData;
+    if (encryptedData.length &&okayToDecryptBool_) {
+        
+        
+   
+        if (symetricData.length==32) {
+            
+            
+            decryptedData=(NSData *) [encryption_ doCipher:encryptedData key:symetricData context:kCCDecrypt padding:(CCOptions *) kCCOptionECBMode];
+            
+        }
+    }
+    
+    return decryptedData;
+
+
+
+
+
+}
+
 
 -(NSData *)decryptDataToPlainData:(NSData *)encryptedData{
     

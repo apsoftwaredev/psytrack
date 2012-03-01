@@ -988,6 +988,7 @@
 		B771C54314DAF3E4002D430E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				378DED4314FE72F000CF4F12 /* DTAboutViewController */,
 				378DEDB014FE73AF00CF4F12 /* LockScreen */,
 				37BF64F214F2912C0065C607 /* NSDictionary+Helpers */,
 				B72F342814CB5B3C00B8C935 /* Sensible TableView */,
@@ -1175,7 +1176,6 @@
 			isa = PBXGroup;
 			children = (
 				37F7CDD114FEC3EB00AD2C3A /* README */,
-				378DED4314FE72F000CF4F12 /* DTAboutViewController */,
 				B7CBE3C414EF1EC0001F2FB3 /* PsyTrack Clinician Tools.entitlements */,
 				B764788914DE6CED004EE572 /* Encrypted Resources */,
 				B771C54314DAF3E4002D430E /* Helpers */,
