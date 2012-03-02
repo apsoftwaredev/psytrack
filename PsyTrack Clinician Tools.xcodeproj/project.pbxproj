@@ -1203,6 +1203,7 @@
 		37F7CFCA1500602900AD2C3A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3767981815006A8100D0639D /* InfoPlist.strings */,
 				B7CBE3C414EF1EC0001F2FB3 /* PsyTrack Clinician Tools.entitlements */,
 				37F7CFCB150060D400AD2C3A /* main.m */,
 				37F7CFCD150060D400AD2C3A /* PsyTrack Clinician Tools-Prefix.pch */,
@@ -1279,7 +1280,6 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				3767981815006A8100D0639D /* InfoPlist.strings */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Helpers */,
 				37F7CE1B1500328E00AD2C3A /* psyTrack */,
