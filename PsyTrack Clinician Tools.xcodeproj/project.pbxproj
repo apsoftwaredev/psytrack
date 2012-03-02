@@ -844,18 +844,18 @@
 			isa = PBXGroup;
 			children = (
 				37F7CE3D1500518900AD2C3A /* Main */,
-				37F7CFCA1500602900AD2C3A /* Supporting Files */,
+				37F7CEC615005E3400AD2C3A /* Models */,
 				B764788914DE6CED004EE572 /* Encrypted Resources */,
+				37F7CE481500546300AD2C3A /* Demographic Info */,
+				37F7CE4C150054CE00AD2C3A /* Clients */,
+				37F7CE6D1500570500AD2C3A /* Clinicians */,
+				37F7CDDA1500312300AD2C3A /* Drugs */,
+				37F7CE8E1500589200AD2C3A /* Track */,
+				37F7CECF15005EC900AD2C3A /* Custom Cells */,
 				37F7CECD15005E9900AD2C3A /* Images */,
 				37F7CECE15005EAB00AD2C3A /* Sounds */,
-				37F7CEC615005E3400AD2C3A /* Models */,
-				37F7CECF15005EC900AD2C3A /* Custom Cells */,
 				37F7CEB315005D0700AD2C3A /* Reports */,
-				37F7CE8E1500589200AD2C3A /* Track */,
-				37F7CE6D1500570500AD2C3A /* Clinicians */,
-				37F7CE481500546300AD2C3A /* Demographic Info */,
-				37F7CDDA1500312300AD2C3A /* Drugs */,
-				37F7CE4C150054CE00AD2C3A /* Clients */,
+				37F7CFCA1500602900AD2C3A /* Supporting Files */,
 			);
 			name = psyTrack;
 			sourceTree = "<group>";

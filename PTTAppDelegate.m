@@ -90,7 +90,7 @@
     
 #if !__has_feature(objc_arc)
 
-    UIAlertView *anAlert = [[UIAlertView alloc] initWithTitle:@"Incompatable iPhone Operating System Version" message:@"This App Requires iOS 5.0 or higher, please upgrade in iTunes" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+    UIAlertView *anAlert = [[UIAlertView alloc] initWithTitle:@"Incompatable iOS Version" message:@"This App Requires iOS 5.0 or higher, please upgrade in iTunes" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
     anAlert.tag=1;
     [anAlert show];
 
@@ -190,7 +190,7 @@
    
     
                 
-    [self flashAppTrainAndTitleGraphics];
+//    [self flashAppTrainAndTitleGraphics];
     [self.tabBarController setDelegate:self];
                
 //       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{                          
