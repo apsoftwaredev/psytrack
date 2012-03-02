@@ -8,7 +8,7 @@
 
 #import "CasualAlertViewController.h"
 
-#import "UICasualAlertLabel.h"
+
 
 
 @interface CasualAlertViewController ()

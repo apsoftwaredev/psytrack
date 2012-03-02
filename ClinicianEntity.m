@@ -7,8 +7,8 @@
 //
 
 #import "ClinicianEntity.h"
-#import "MyInfoEntity.h"
-#import "TestingSessionDeliveredEntity.h"
+//#import "MyInfoEntity.h"
+//#import "TestingSessionDeliveredEntity.h"
 
 
 @implementation ClinicianEntity

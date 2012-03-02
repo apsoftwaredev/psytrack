@@ -64,6 +64,7 @@
 							<string key="NSResourceName">trainTab.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<reference key="IBUITabBar" ref="469336315"/>
 					</object>
 					<reference key="IBUIParentViewController" ref="79919200"/>
 					<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
@@ -118,6 +119,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<object class="IBUINavigationItem" key="IBUINavigationItem" id="44846140">
+								<reference key="IBUINavigationBar"/>
 								<string key="IBUITitle">PsyTrack Clinician Tools</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
@@ -144,6 +146,7 @@
 								<string key="NSResourceName">cliniciansTab.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<reference key="IBUITabBar" ref="469336315"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="79919200"/>
 						<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
@@ -205,6 +208,7 @@
 								<string key="NSResourceName">clientsTab.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<reference key="IBUITabBar" ref="469336315"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="79919200"/>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -253,6 +257,7 @@
 								<string key="NSResourceName">reportTab.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							<reference key="IBUITabBar" ref="469336315"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="79919200"/>
 						<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
@@ -312,13 +317,20 @@
 					<int key="NSvFlags">266</int>
 					<string key="NSFrame">{{0, 431}, {320, 49}}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSNextKeyView"/>
+					<reference key="NSWindow"/>
 					<string key="NSReuseIdentifierKey">_NS:473</string>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MCAwAA</bytes>
 					</object>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					<array class="NSMutableArray" key="IBUIItems">
+						<reference ref="477909472"/>
+						<reference ref="171150084"/>
+						<reference ref="129482932"/>
+						<reference ref="15593849"/>
+					</array>
+					<reference key="IBUISelectedItem" ref="477909472"/>
 				</object>
 			</object>
 			<object class="IBUIWindow" id="9796657">
@@ -837,7 +849,18 @@
 			<nil key="sourceID"/>
 			<int key="maxID">79</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">ClientsViewController_iPhone</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ClientsViewController_iPhone.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
