@@ -1,6 +1,6 @@
 /*
  *  DrugViewController_iPhone.h
- *  psyTrack
+ *  psyTrack Clinician Tools
  *  Version: 1.0
  *
  *

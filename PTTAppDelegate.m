@@ -1,6 +1,6 @@
 /*
  *  PTTAppDelegate.m
- *  psyTrack
+ *  psyTrack Clinician Tools
  *  Version: 1.0
  *
  *
@@ -47,7 +47,7 @@
 
 #import "NSDictionaryHelpers.h"
 
-#define kPTTAppSqliteFileName @"psyTrainTrack.sqlite"
+#define kPTTAppSqliteFileName @"psyTrack.sqlite"
 #define kPTTDrugDatabaseSqliteFileName @"drugs.sqlite"
 
 
@@ -74,7 +74,7 @@
 @synthesize imageView=_imageView;
 @synthesize masterViewController;
 
-@synthesize psyTrainTrackLabel,developedByLabel,clinicianToolsLabel;
+@synthesize psyTrackLabel,developedByLabel,clinicianToolsLabel;
 @synthesize lockScreenVC = lockScreenVC_;
 @synthesize casualAlertManager;
 @synthesize tabBarView;
@@ -166,7 +166,7 @@
                 self.splitViewControllerClinicians.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Clinicians" image:clininicansImage tag:90];
                 
                 UIImage *trainImage =[UIImage imageNamed:@"trainTab.png"];
-               self.navigationControllerTrainTrack.tabBarItem=[[UITabBarItem alloc] initWithTitle:@"psyTrainTrack" image:trainImage tag:91];
+               self.navigationControllerTrainTrack.tabBarItem=[[UITabBarItem alloc] initWithTitle:@"psyTrack" image:trainImage tag:91];
 
                 
                 UIImage *clientsImage =[UIImage imageNamed:@"clientsTab.png"];
@@ -1247,7 +1247,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
         else
         {
         self.imageView.transform      = CGAffineTransformIdentity;
-        self.psyTrainTrackLabel.transform = CGAffineTransformIdentity;
+        self.psyTrackLabel.transform = CGAffineTransformIdentity;
      
         self.clinicianToolsLabel.transform      = CGAffineTransformIdentity;
         self.developedByLabel.transform        = CGAffineTransformIdentity;
@@ -1288,14 +1288,14 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
        
         } else {
             self.imageView.transform      = CGAffineTransformMakeRotation(-M_PI);
-        self.psyTrainTrackLabel.transform      = CGAffineTransformMakeRotation(M_PI);
+        self.psyTrackLabel.transform      = CGAffineTransformMakeRotation(M_PI);
          self.clinicianToolsLabel.transform      = CGAffineTransformMakeRotation(M_PI);
          self.developedByLabel.transform      = CGAffineTransformMakeRotation(M_PI);
         //iPhone upside down
         
-            self.imageView.transform      = CGAffineTransformTranslate(self.psyTrainTrackLabel.transform,0,75);
+            self.imageView.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform,0,75);
 
-            self.psyTrainTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrainTrackLabel.transform,0,-130);
+            self.psyTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform,0,-130);
             
             
             self.developedByLabel.transform      = CGAffineTransformTranslate(self.developedByLabel.transform,0,340);
@@ -1360,14 +1360,14 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                    
                     //iphone left
                     self.imageView.transform      = CGAffineTransformMakeRotation(rotate);
-                self.psyTrainTrackLabel.transform =CGAffineTransformMakeRotation(rotate);
+                self.psyTrackLabel.transform =CGAffineTransformMakeRotation(rotate);
                  self.clinicianToolsLabel.transform =CGAffineTransformMakeRotation(rotate);
                 self.developedByLabel.transform =CGAffineTransformMakeRotation(rotate);                    
                     
                     self.imageView.transform      = CGAffineTransformTranslate(self.imageView.transform, 38, 0);
                   
                     
-                    self.psyTrainTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrainTrackLabel.transform,-64 , -99);
+                    self.psyTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform,-64 , -99);
                     
                     
                     self.clinicianToolsLabel.transform      = CGAffineTransformTranslate(self.clinicianToolsLabel.transform,135,98);
@@ -1441,7 +1441,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                else
                {
                    self.imageView.transform      = CGAffineTransformMakeRotation(rotate);
-                self.psyTrainTrackLabel.transform      = CGAffineTransformMakeRotation(rotate);
+                self.psyTrackLabel.transform      = CGAffineTransformMakeRotation(rotate);
                 
                 self.clinicianToolsLabel.transform      = CGAffineTransformMakeRotation(rotate);
                 self.developedByLabel.transform     = CGAffineTransformMakeRotation(rotate);
@@ -1449,7 +1449,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                    
                    self.imageView.transform      = CGAffineTransformTranslate(self.imageView.transform,-38, 0);
                    
-                   self.psyTrainTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrainTrackLabel.transform, 64, -99);
+                   self.psyTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform, 64, -99);
                    self.clinicianToolsLabel.transform      = CGAffineTransformTranslate(self.clinicianToolsLabel.transform,-135,98);
                    
                    self.developedByLabel.transform =CGAffineTransformTranslate(self.clinicianToolsLabel.transform,30,-30);
@@ -1483,7 +1483,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 //
 //    if (newStatusBarOrientation == UIInterfaceOrientationPortrait){
 //        self.imageView.transform      = CGAffineTransformIdentity;
-//        self.psyTrainTrackLabel.transform = CGAffineTransformIdentity;
+//        self.psyTrackLabel.transform = CGAffineTransformIdentity;
 //     
 //        self.clinicianToolsLabel.transform      = CGAffineTransformIdentity;
 //        self.developedByLabel.transform        = CGAffineTransformIdentity;
@@ -1491,7 +1491,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 //    else if (newStatusBarOrientation == UIInterfaceOrientationPortraitUpsideDown)
 //    {
 //        self.imageView.transform      = CGAffineTransformMakeRotation(-M_PI);
-//        self.psyTrainTrackLabel.transform      = CGAffineTransformMakeRotation(M_PI);
+//        self.psyTrackLabel.transform      = CGAffineTransformMakeRotation(M_PI);
 //         self.clinicianToolsLabel.transform      = CGAffineTransformMakeRotation(M_PI);
 //         self.developedByLabel.transform      = CGAffineTransformMakeRotation(M_PI);
 //        
@@ -1499,7 +1499,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 //        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 //        
 //            //ipad upside down
-//            self.psyTrainTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrainTrackLabel.transform,0,-275.0);
+//            self.psyTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform,0,-275.0);
 //        
 //        
 //        self.developedByLabel.transform      = CGAffineTransformTranslate(self.developedByLabel.transform,0,400);
@@ -1510,9 +1510,9 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 //        } else {
 //        //iPhone upside down
 //        
-//            self.imageView.transform      = CGAffineTransformTranslate(self.psyTrainTrackLabel.transform,0,75);
+//            self.imageView.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform,0,75);
 //
-//            self.psyTrainTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrainTrackLabel.transform,0,-130);
+//            self.psyTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform,0,-130);
 //            
 //            
 //            self.developedByLabel.transform      = CGAffineTransformTranslate(self.developedByLabel.transform,0,340);
@@ -1530,7 +1530,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 //          
 //                float rotate    = ((newStatusBarOrientation == UIInterfaceOrientationLandscapeLeft) ? -1:1) * (M_PI / 2.0);
 //                self.imageView.transform      = CGAffineTransformMakeRotation(rotate);
-//                self.psyTrainTrackLabel.transform =CGAffineTransformMakeRotation(rotate);
+//                self.psyTrackLabel.transform =CGAffineTransformMakeRotation(rotate);
 //                 self.clinicianToolsLabel.transform =CGAffineTransformMakeRotation(rotate);
 //                self.developedByLabel.transform =CGAffineTransformMakeRotation(rotate);
 //                
@@ -1542,7 +1542,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 //                    self.imageView.transform      = CGAffineTransformTranslate(self.imageView.transform, 140, -self.imageView.frame.origin.x);
 //                self.imageView.transform      = CGAffineTransformTranslate(self.imageView.transform,35, self.imageView.frame.origin.y);
 //                    
-//                self.psyTrainTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrainTrackLabel.transform,35 , -150);
+//                self.psyTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform,35 , -150);
 //                
 //
 //                    self.clinicianToolsLabel.transform      = CGAffineTransformTranslate(self.clinicianToolsLabel.transform,310,130);
@@ -1552,7 +1552,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 //                    } else
 //                        
 //                    {
-//                        self.psyTrainTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrainTrackLabel.transform,-130 , -140);
+//                        self.psyTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform,-130 , -140);
 //                        
 //                        
 //                        self.clinicianToolsLabel.transform      = CGAffineTransformTranslate(self.clinicianToolsLabel.transform,130,140);
@@ -1571,7 +1571,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 //                    self.imageView.transform      = CGAffineTransformTranslate(self.imageView.transform, 38, 0);
 //                  
 //                    
-//                    self.psyTrainTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrainTrackLabel.transform,-64 , -99);
+//                    self.psyTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform,-64 , -99);
 //                    
 //                    
 //                    self.clinicianToolsLabel.transform      = CGAffineTransformTranslate(self.clinicianToolsLabel.transform,135,98);
@@ -1586,7 +1586,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 //            
 //                float rotate    = ((newStatusBarOrientation == UIInterfaceOrientationLandscapeRight) ? 1:1) * (M_PI / 2.0);
 //                self.imageView.transform      = CGAffineTransformMakeRotation(rotate);
-//                self.psyTrainTrackLabel.transform      = CGAffineTransformMakeRotation(rotate);
+//                self.psyTrackLabel.transform      = CGAffineTransformMakeRotation(rotate);
 //                
 //                self.clinicianToolsLabel.transform      = CGAffineTransformMakeRotation(rotate);
 //                self.developedByLabel.transform     = CGAffineTransformMakeRotation(rotate);
@@ -1603,7 +1603,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 //                   
 //                  
 //                   
-//                   self.psyTrainTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrainTrackLabel.transform, 300,-126 );
+//                   self.psyTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform, 300,-126 );
 //                   ;
 //                    
 //                   
@@ -1618,7 +1618,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 //                   else
 //                       
 //                   {
-//                       self.psyTrainTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrainTrackLabel.transform,130 , -140);
+//                       self.psyTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform,130 , -140);
 //                       
 //                       
 //                       self.clinicianToolsLabel.transform      = CGAffineTransformTranslate(self.clinicianToolsLabel.transform,135,98);
@@ -1643,7 +1643,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 //                   
 //                   self.imageView.transform      = CGAffineTransformTranslate(self.imageView.transform,-38, 0);
 //                   
-//                   self.psyTrainTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrainTrackLabel.transform, 64, -99);
+//                   self.psyTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform, 64, -99);
 //                   self.clinicianToolsLabel.transform      = CGAffineTransformTranslate(self.clinicianToolsLabel.transform,-135,98);
 //                   
 //                   self.developedByLabel.transform =CGAffineTransformTranslate(self.clinicianToolsLabel.transform,30,-30);
@@ -1949,7 +1949,7 @@ duration:(NSTimeInterval)1.0];
 //    {
 //        return __managedObjectModel;
 //    }
-//    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"psyTrainTrack" withExtension:@"momd"];
+//    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"psyTrack" withExtension:@"momd"];
 //    __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
 //    return __managedObjectModel;
 //}
@@ -1985,7 +1985,7 @@ duration:(NSTimeInterval)1.0];
 //        return __persistentStoreCoordinator;
 //    }
 //    
-//    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"psyTrainTrack.sqlite"];
+//    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"psyTrack.sqlite"];
 //    
 //    NSError *error = nil;
 //    
@@ -4626,7 +4626,7 @@ return [self applicationDrugsDirectory].path;
 //    
 //    // prep the store path and bundle stuff here since NSBundle isn't totally thread safe
 //    NSPersistentStoreCoordinator* psc = persistentStoreCoordinator__;
-//	NSString *storePath = [[self applicationDocumentsDirectoryString] stringByAppendingPathComponent:@"psyTrainTrack.sqlite"];
+//	NSString *storePath = [[self applicationDocumentsDirectoryString] stringByAppendingPathComponent:@"psyTrack.sqlite"];
 //    
 //    // do this asynchronously since if this is the first time this particular device is syncing with preexisting
 //    // iCloud content it may take a long long time to download
@@ -4685,7 +4685,7 @@ return [self applicationDrugsDirectory].path;
 //            NSLog(@"No iCloud access setting up local store");
 //            
 //            
-//            NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"psyTrainTrack.sqlite"];
+//            NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"psyTrack.sqlite"];
 //            
 //            NSError *error = nil;
 //            
@@ -4745,7 +4745,7 @@ return [self applicationDrugsDirectory].path;
  
 
 
-    NSURL *storeURL = [[self applicationPTTDirectory] URLByAppendingPathComponent:[NSString stringWithFormat:@"psyTrainTrack.sqlite"]];
+    NSURL *storeURL = [[self applicationPTTDirectory] URLByAppendingPathComponent:[NSString stringWithFormat:@"psyTrack.sqlite"]];
     
     persistentStoreCoordinator__ = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
 
@@ -4779,7 +4779,7 @@ return [self applicationDrugsDirectory].path;
                       
             // this needs to match the entitlements and provisioning profile
             NSURL *cloudURL = [fileManager URLForUbiquityContainerIdentifier:nil];
-            NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"psyTrainTrack"];
+            NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"psyTrack"];
             if ([coreDataCloudContent length] != 0 ) {
                 // iCloud is available
                 cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
@@ -4787,7 +4787,7 @@ return [self applicationDrugsDirectory].path;
                 options = [NSDictionary dictionaryWithObjectsAndKeys:
                            [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
                            [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
-                           @"4R8ZH75936.com.psycheweb.psytraintrack", NSPersistentStoreUbiquitousContentNameKey,
+                           @"4R8ZH75936.com.psycheweb.psyTrack", NSPersistentStoreUbiquitousContentNameKey,
                            cloudURL, NSPersistentStoreUbiquitousContentURLKey,
                            nil];
                 
@@ -4866,7 +4866,7 @@ return [self applicationDrugsDirectory].path;
 
 -(void)flashAppTrainAndTitleGraphics{
      int duration=5;
-    if (self.psyTrainTrackLabel.alpha==1) {
+    if (self.psyTrackLabel.alpha==1) {
         duration=2;
        displayDevelopedByAttempt=3;
     }
@@ -4905,7 +4905,7 @@ return [self applicationDrugsDirectory].path;
     }
      displayDevelopedByAttempt=displayDevelopedByAttempt+1;
     self.clinicianToolsLabel.alpha=1;
-    self.psyTrainTrackLabel.alpha=1;
+    self.psyTrackLabel.alpha=1;
     self.imageView.alpha = 1;
     [UIView commitAnimations];
     
@@ -4913,7 +4913,7 @@ return [self applicationDrugsDirectory].path;
     [UIView setAnimationDuration:duration];
 	self.developedByLabel.alpha=0;
     self.clinicianToolsLabel.alpha=0;
-    self.psyTrainTrackLabel.alpha=0;
+    self.psyTrackLabel.alpha=0;
     self.imageView.alpha = 0.3;
     if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad)
     {

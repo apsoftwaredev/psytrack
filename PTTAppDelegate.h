@@ -1,6 +1,6 @@
 /*
  *  PTTAppDelegate.h
- *  psyTrack
+ *  psyTrack Clinician Tools
  *  Version: 1.0
  *
  *
@@ -160,7 +160,7 @@ static NSString * const kPTTGloballyUniqueIdentifier=@"globally_unique_identifie
 
 @property (nonatomic, strong) IBOutlet UITabBar *tabBar;
 @property (strong, nonatomic)IBOutlet UIImageView *imageView;
-@property (strong, nonatomic)IBOutlet UILabel *psyTrainTrackLabel;
+@property (strong, nonatomic)IBOutlet UILabel *psyTrackLabel;
 @property (strong, nonatomic)IBOutlet UILabel *clinicianToolsLabel;
 @property (strong, nonatomic)IBOutlet UILabel *developedByLabel;
 

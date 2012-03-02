@@ -1,13 +1,20 @@
-//
-//  TestAdministrationViewController_iPad.h
-//  psyTrainTrack
-//
-//  Created by Daniel Boice on 10/5/11.
-//  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
-//
-
-
-
+/*
+ *  TestAdministrationViewController_iPad.h
+ *  psyTrack Clinician Tools
+ *  Version: 1.0
+ *
+ *
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *
+ *  Created by Daniel Boice on 10/5/11.
+ *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
+ *
+ *
+ *	This notice may not be removed from this file.
+ *
+ */
 #import "SCTableViewModel.h"
 #import "StopwatchCell.h"
 #import "ClientPresentations_Shared.h"
@@ -43,7 +50,7 @@
     
  
 	EKEventStore *eventStore;
-	EKCalendar *psyTrainTrackCalendar;
+	EKCalendar *psyTrackCalendar;
 	NSMutableArray *eventsList;
     EKEventEditViewController *eventViewController;
 
@@ -64,7 +71,7 @@
 @property (nonatomic,strong)  ClientPresentations_Shared *clientPresentations_Shared;
 
 @property (nonatomic, strong) EKEventStore *eventStore;
-@property (nonatomic, strong) EKCalendar *psyTrainTrackCalendar;
+@property (nonatomic, strong) EKCalendar *psyTrackCalendar;
 @property (nonatomic, strong) NSMutableArray *eventsList;
 @property (nonatomic, strong) EKEventEditViewController *eventViewController;
 

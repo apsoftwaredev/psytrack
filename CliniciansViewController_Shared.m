@@ -1,11 +1,20 @@
-//
-//  CliniciansViewController_Shared.m
-//  psyTrainTrack
-//
-//  Created by Daniel Boice on 9/23/11.
-//  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
-//
-
+/*
+ *  CliniciansViewController_Shared.m
+ *  psyTrack Clinician Tools
+ *  Version: 1.0
+ *
+ *
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *
+ *  Created by Daniel Boice on 9/23/11.
+ *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
+ *
+ *
+ *	This notice may not be removed from this file.
+ *
+ */
 #import "CliniciansViewController_Shared.h"
 #import "PTTAppDelegate.h"
 #import "ButtonCell.h"
@@ -1039,11 +1048,11 @@
     SCCustomPropertyDefinition *viewPersonABBookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"ViewPersonABButton" withuiElementClass:[ButtonCell class] withObjectBindings:nil];
     [contactInformationDef addPropertyDefinition:viewPersonABBookButtonProperty]; 
     
-    SCPropertyGroup *contactInformationPsyTrainTrackGroup =[SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"addresses", @"phoneNumbers",@"emailAddresses", nil]];
+    SCPropertyGroup *contactInformationpsyTrackGroup =[SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"addresses", @"phoneNumbers",@"emailAddresses", nil]];
     
     SCPropertyGroup *contactInformationAddressbookButtonsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Addressbook Connection" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"LinkToAddressBookButton",@"AddOrEditAddressBookButton",@"ViewPersonABButton", nil ]];
     
-    [contactInformationDef.propertyGroups addGroup:contactInformationPsyTrainTrackGroup];
+    [contactInformationDef.propertyGroups addGroup:contactInformationpsyTrackGroup];
     [contactInformationDef.propertyGroups addGroup:contactInformationAddressbookButtonsGroup];
     
     //Create the class definition for Phone Entity
@@ -3169,7 +3178,7 @@
 
 
 
-//-(void)createPsyTrainTrackAddressBook {
+//-(void)createpsyTrackAddressBook {
 //    ABAddressBookRef addressBook;
 //    
 //    bool wantToSaveChanges = YES;

@@ -1,10 +1,22 @@
-//
-//  NSDictionaryHelpers.h
-//  PsyTrack Clinician Tools
-//
-//  Created by Daniel Boice on 2/20/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
-//
+/*
+ *  NSDictionaryHelpers.h
+ *  psyTrack Clinician Tools
+ *  Version: 1.0
+ *
+ *
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *
+ *  Created by Daniel Boice on 2/20/12.
+ *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
+ *
+ *
+ *	This notice may not be removed from this file.
+ *
+ */
+
+//this helper was downloaded from coccanetics.com website and edited slightly for ARC (bridges)
 
 #import <Foundation/Foundation.h>
 

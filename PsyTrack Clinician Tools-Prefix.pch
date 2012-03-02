@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'psyTrainTrack' target in the 'psyTrainTrack' project
+// Prefix header for all source files of the 'psyTrack' target in the 'psyTrack' project
 //
 
 #import <Availability.h>

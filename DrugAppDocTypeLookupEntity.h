@@ -1,6 +1,6 @@
 /*
  *  DrugAppDocTypeLookupEntity.h
- *  psyTrack
+ *  psyTrack Clinician Tools
  *  Version: 1.0
  *
  *

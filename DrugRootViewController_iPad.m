@@ -1,6 +1,6 @@
 /*
  *  DrugRootViewController_iPad.m
- *  psyTrack
+ *  psyTrack Clinician Tools
  *  Version: 1.0
  *
  *

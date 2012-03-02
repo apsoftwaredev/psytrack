@@ -6,6 +6,8 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //http://www.developers-life.com/progress-bar-download-file-on-iphone.html
 //https://github.com/sakrist/UIDownloadBar
+//edited by Dan Boice 2/28/2012
+
 
 #import "UIDownloadBar.h"
 #import "PTTAppDelegate.h"

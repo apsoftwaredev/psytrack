@@ -1,11 +1,20 @@
-//
-//  TestAdministrationViewController_iPad.m
-//  psyTrainTrack
-//
-//  Created by Daniel Boice on 10/5/11.
-//  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
-//
-
+/*
+ *  TestAdministrationViewController_iPad.m
+ *  psyTrack Clinician Tools
+ *  Version: 1.0
+ *
+ *
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *
+ *  Created by Daniel Boice on 10/5/11.
+ *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
+ *
+ *
+ *	This notice may not be removed from this file.
+ *
+ */
 #import "TestAdministrationsViewController_iPad.h"
 #import "PTTAppDelegate.h"
 #import "Time_Shared.h"
@@ -26,7 +35,7 @@
 @synthesize totalAdministrationsLabel;
 @synthesize stopwatchTextField;
 @synthesize clientPresentations_Shared;
-@synthesize eventsList,eventStore,eventViewController,psyTrainTrackCalendar;
+@synthesize eventsList,eventStore,eventViewController,psyTrackCalendar;
 //@synthesize managedObject;
 
 
@@ -53,7 +62,7 @@
     [super viewDidUnload];
 
     self.clientPresentations_Shared=nil;
-    self.psyTrainTrackCalendar=nil;
+    self.psyTrackCalendar=nil;
     self.eventStore=nil;
 
     self.eventsList=nil;
@@ -562,7 +571,7 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
         }
     }
     
-    self.psyTrainTrackCalendar=[ self eventEditViewControllerDefaultCalendarForNewEvents:nil];
+    self.psyTrackCalendar=[ self eventEditViewControllerDefaultCalendarForNewEvents:nil];
     
     
     
@@ -570,8 +579,8 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
     //                    for(id obj in calendars) { 
     //                    if([obj isKindOfClass:[EKCalendar class]]){
     //                        EKCalendar *calendar=(EKCalendar *)obj;
-    //                        if ([calendar.calendarIdentifier isEqualToString:self.psyTrainTrackCalendar.calendarIdentifier]) {
-    //                            self.psyTrainTrackCalendar=(EKCalendar *)calendar;
+    //                        if ([calendar.calendarIdentifier isEqualToString:self.psyTrackCalendar.calendarIdentifier]) {
+    //                            self.psyTrackCalendar=(EKCalendar *)calendar;
     //                          
     //                            break;
     // 
@@ -1410,13 +1419,13 @@ NSLog(@"value changed for row at index path");
                 addController.eventStore = self.eventStore;
                 thisEvent = (EKEvent *) addController.event;
               
-                if (!self.psyTrainTrackCalendar) {
+                if (!self.psyTrackCalendar) {
                     [thisEvent setCalendar:[self eventEditViewControllerDefaultCalendarForNewEvents:addController]];
                 }
                 else {
-                    [thisEvent setCalendar:self.psyTrainTrackCalendar];
+                    [thisEvent setCalendar:self.psyTrackCalendar];
                 }
-                NSLog(@"add new event calander %@",self.psyTrainTrackCalendar);
+                NSLog(@"add new event calander %@",self.psyTrackCalendar);
                 
                 [buttonCell commitDetailModelChanges:currentDetailTableViewModel];
                 
@@ -1516,15 +1525,15 @@ NSLog(@"value changed for row at index path");
     }
 
     
-   //    if (self.psyTrainTrackCalendar) {
+   //    if (self.psyTrackCalendar) {
 //        
-//        [thisEvent setCalendar:self.psyTrainTrackCalendar];
+//        [thisEvent setCalendar:self.psyTrackCalendar];
 //    }
 //    else {
 //        <#statements#>
 //    }
 //      thisEvent.calendar=[self.eventStore defaultCalendarForNewEvents];
-        NSLog(@"psytraintrackcalendar identifier %@",self.psyTrainTrackCalendar.calendarIdentifier);
+        NSLog(@"psyTrackcalendar identifier %@",self.psyTrackCalendar.calendarIdentifier);
 //      NSLog(@"event isidentifier %@",thisEvent.eventIdentifier);
     
 
@@ -1586,8 +1595,8 @@ NSLog(@"value changed for row at index path");
 //    }
 //    EKEvent *thisEvent = (EKEvent *) addController.event;
 //    thisEvent.title=@"Testing Title";
-////    thisEvent.calendar=self.psyTrainTrackCalendar;
-//    NSLog(@"psytraintrackcalendar identifier %@",self.psyTrainTrackCalendar.calendarIdentifier);
+////    thisEvent.calendar=self.psyTrackCalendar;
+//    NSLog(@"psyTrackcalendar identifier %@",self.psyTrackCalendar.calendarIdentifier);
 //    NSLog(@"event isidentifier %@",thisEvent.eventIdentifier);
 //   
 //    thisEvent.location=location;
@@ -1629,10 +1638,10 @@ NSLog(@"value changed for row at index path");
 			// If the new event is being added to the default calendar, then update its 
 			// eventsList.
 			
-            NSLog(@"self psytraintrack calendar %@",self.psyTrainTrackCalendar);
+            NSLog(@"self psyTrack calendar %@",self.psyTrackCalendar);
             NSLog(@"even calander is %@",thisEvent.calendar);
             
-            if (self.psyTrainTrackCalendar ==  thisEvent.calendar) {
+            if (self.psyTrackCalendar ==  thisEvent.calendar) {
 				[self.eventsList addObject:thisEvent];
 			}
 			[controller.eventStore saveEvent:controller.event span:EKSpanThisEvent error:&error];
@@ -1665,10 +1674,10 @@ NSLog(@"value changed for row at index path");
 			// If deleting an event from the currenly default calendar, then update its 
 			// eventsList.
 			
-            NSLog(@"self psytraintrack calendar %@",self.psyTrainTrackCalendar);
+            NSLog(@"self psyTrack calendar %@",self.psyTrackCalendar);
             NSLog(@"even calander is %@",thisEvent.calendar);
             
-            if (self.psyTrainTrackCalendar ==  thisEvent.calendar) {
+            if (self.psyTrackCalendar ==  thisEvent.calendar) {
 				[self.eventsList removeObject:thisEvent];
 			}
 			[controller.eventStore removeEvent:thisEvent span:EKSpanThisEvent error:&error];
@@ -1751,53 +1760,53 @@ NSLog(@"value changed for row at index path");
         {
         
             
-            self.psyTrainTrackCalendar =[self.eventStore calendarWithIdentifier:defaultCalendarIdentifier]; 
-              mySource =psyTrainTrackCalendar.source;
+            self.psyTrackCalendar =[self.eventStore calendarWithIdentifier:defaultCalendarIdentifier]; 
+              mySource =psyTrackCalendar.source;
             
         }
         else 
         {
             
-            self.psyTrainTrackCalendar = [EKCalendar calendarWithEventStore:self.eventStore];
+            self.psyTrackCalendar = [EKCalendar calendarWithEventStore:self.eventStore];
             
-            [[NSUserDefaults standardUserDefaults] setValue:psyTrainTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
+            [[NSUserDefaults standardUserDefaults] setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
         }
             
         if (defaultCalendarName.length) {
-            self.psyTrainTrackCalendar.title =defaultCalendarName;
+            self.psyTrackCalendar.title =defaultCalendarName;
         }
         
         else 
         {
             
-            self.psyTrainTrackCalendar.title=@"Client Appointments";
+            self.psyTrackCalendar.title=@"Client Appointments";
         }
-        self.psyTrainTrackCalendar.source = mySource;
+        self.psyTrackCalendar.source = mySource;
         
         
     }
  
 
         
-        NSLog(@"cal id = %@", self.psyTrainTrackCalendar.calendarIdentifier);
+        NSLog(@"cal id = %@", self.psyTrackCalendar.calendarIdentifier);
       
         NSError *error;
         
-        if (![self.eventStore saveCalendar:self.psyTrainTrackCalendar commit:YES error:&error ]) {
+        if (![self.eventStore saveCalendar:self.psyTrackCalendar commit:YES error:&error ]) {
             NSLog(@"something didn't go right");
         }
         else
         {
             NSLog(@"saved calendar");
-            [[NSUserDefaults standardUserDefaults]setValue:psyTrainTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
+            [[NSUserDefaults standardUserDefaults]setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
             //                 NSSet *calendars=(NSSet *)[localSource calendars];
             //                    for(id obj in calendars) { 
             //                    if([obj isKindOfClass:[EKCalendar class]]){
             //                        EKCalendar *calendar=(EKCalendar *)obj;
-            //                        if ([calendar.calendarIdentifier isEqualToString:self.psyTrainTrackCalendar.calendarIdentifier]) {
-            //                            self.psyTrainTrackCalendar=(EKCalendar *)calendar;
+            //                        if ([calendar.calendarIdentifier isEqualToString:self.psyTrackCalendar.calendarIdentifier]) {
+            //                            self.psyTrackCalendar=(EKCalendar *)calendar;
             //                          
             //                            break;
             //                        }
@@ -1808,7 +1817,7 @@ NSLog(@"value changed for row at index path");
         }
         
         
-        //            self.psyTrainTrackCalendar =(EKCalendar *)localSource cal
+        //            self.psyTrackCalendar =(EKCalendar *)localSource cal
     
     
     
@@ -1816,15 +1825,15 @@ NSLog(@"value changed for row at index path");
     
     
     
-    if (self.psyTrainTrackCalendar) {
-        NSLog(@"self %@",self.psyTrainTrackCalendar);
+    if (self.psyTrackCalendar) {
+        NSLog(@"self %@",self.psyTrackCalendar);
     }
     
 
     
     
     
-    EKCalendar *calendarForEdit = self.psyTrainTrackCalendar;
+    EKCalendar *calendarForEdit = self.psyTrackCalendar;
 	return calendarForEdit;
 }
 

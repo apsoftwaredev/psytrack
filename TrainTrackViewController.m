@@ -1,11 +1,20 @@
-//
-//  TrainTrackViewController.m
-//  psyTrainTrack
-//
-//  Created by Daniel Boice on 9/28/11.
-//  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
-//
-
+/*
+ *  TrainTrackViewController.m
+ *  psyTrack Clinician Tools
+ *  Version: 1.0
+ *
+ *
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *
+ *  Created by Daniel Boice on 9/28/11.
+ *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
+ *
+ *
+ *	This notice may not be removed from this file.
+ *
+ */
 #import "TrainTrackViewController.h"
 #import "PTTAppDelegate.h"
 #import "TestAdministrationsViewController_iPad.h"
@@ -667,7 +676,7 @@ clinicianDef.titlePropertyName=@"firstName;lastName";
 - (void)aboutViewController:(DTAboutViewController *)aboutViewController performCustomAction:(NSString *)action withObject:(id)object
 {
 	// demonstrate responding to an action that the controller does not know how to perform
-	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.psyTrainTrack.com/"]];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.psyTrack.com/"]];
 }
 
 - (UIView *)aboutViewController:(DTAboutViewController *)aboutViewController customViewForDictionary:(NSDictionary *)dictionary {

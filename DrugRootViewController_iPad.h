@@ -1,13 +1,6 @@
-//
-//  DrugRootViewController_iPad.h
-//  psyTrainTrack
-//
-//  Created by Daniel Boice on 12/19/11.
-//  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
-//
 /*
- *  DrugChemicalTypeLookupEntity.m
- *  psyTrack
+ *  DrugRootViewController_iPad.h
+ *  psyTrack Clinician Tools
  *  Version: 1.0
  *
  *
@@ -15,7 +8,7 @@
  *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
  *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
  *
- *  Created by Daniel Boice on  12/31/11.
+ *  Created by Daniel Boice on  12/19/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
  *
  *

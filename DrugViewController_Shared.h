@@ -1,7 +1,7 @@
 
 /*
  *  DrugViewController_Shared.h
- *  psyTrack
+ *  psyTrack Clinician Tools
  *  Version: 1.0
  *
  *

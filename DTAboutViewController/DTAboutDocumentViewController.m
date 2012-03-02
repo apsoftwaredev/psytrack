@@ -19,7 +19,7 @@
 
 - (id) initWithDocumentURL:(NSURL *)url
 {
-	NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"psyTrainTrack" ofType:@"bundle"];
+	NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"bundle"];
 	NSBundle *resourceBundle = [NSBundle bundleWithPath:bundlePath];
 	
 	self = [self initWithNibName:@"AboutDocumentViewController" bundle:resourceBundle];

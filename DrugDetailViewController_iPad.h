@@ -1,6 +1,6 @@
 /*
  *  DrugDetailViewController_iPad.h
- *  psyTrack
+ *  psyTrack Clinician Tools
  *  Version: 1.0
  *
  *

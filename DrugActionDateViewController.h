@@ -1,6 +1,6 @@
 /*
  *  DrugActionDateViewController.h
- *  psyTrack
+ *  psyTrack Clinician Tools
  *  Version: 1.0
  *
  *
