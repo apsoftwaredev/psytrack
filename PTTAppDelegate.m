@@ -189,7 +189,7 @@
     
    
     
-                
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];            
 //    [self flashAppTrainAndTitleGraphics];
     [self.tabBarController setDelegate:self];
                

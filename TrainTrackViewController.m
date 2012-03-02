@@ -244,7 +244,7 @@ clinicianDef.titlePropertyName=@"firstName;lastName";
     
     }
 
-
+    self.tableView.hidden=TRUE;
     
 }
 
