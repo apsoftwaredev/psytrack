@@ -189,7 +189,7 @@
     
    
     
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];            
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES];            
 //    [self flashAppTrainAndTitleGraphics];
     [self.tabBarController setDelegate:self];
                
@@ -1325,8 +1325,11 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                     
                     if ([[self.tabBarController.selectedViewController class] isSubclassOfClass:[UISplitViewController class]]) {
                     
-                     
-                        CGRect frame= CGRectMake(self.viewController.view.frame.origin.x,self.viewController.view.frame.origin.x, self.viewController.view.frame.size.width, self.viewController.view.frame.size.height);
+                 
+                        NSLog(@"tabbar selected item index landscape left is %i",self.tabBarController.selectedIndex);
+                        
+                        
+                        CGRect frame= CGRectMake(((self.window.frame.size.width-self.tabBarController.tabBar.frame.size.height)/2)-self.tabBarController.tabBar.frame.size.height- self.viewController.view.frame.size.height/2,(self.window.frame.size.height/2-self.viewController.view.frame.size.height/2)-160, self.viewController.view.frame.size.width, self.viewController.view.frame.size.height);     
                         
                         
 //                        [UIView animateWithDuration:secs delay:0.0 options:option
@@ -1339,7 +1342,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 
                         
                         self.viewController.view.frame      =frame;
-                        NSLog(@"landscape right split");
+                   
                         
                         NSLog(@"landscape left split");
                                         
@@ -1347,6 +1350,14 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                         
                     {
 //                        self.viewController.view.transform      = CGAffineTransformTranslate(self.viewController.view.transform,-130 , -140);
+                        
+                        
+                        
+                           CGRect frame= CGRectMake(((self.window.frame.size.width-self.tabBarController.tabBar.frame.size.height)/2)-self.tabBarController.tabBar.frame.size.height- self.viewController.view.frame.size.height/2,(self.window.frame.size.height/2-self.viewController.view.frame.size.height/2), self.viewController.view.frame.size.width, self.viewController.view.frame.size.height); 
+                      
+                        self.viewController.view.frame     =frame;
+
+                        
                         
                     NSLog(@"landscape left not split");
                     }
@@ -1397,7 +1408,10 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                        
                        NSLog(@"split view controller view controllers %@",splitViewController.viewControllers);
                        
-                        CGRect frame= CGRectMake(self.viewController.view.frame.origin.x,self.window.frame.size.height/2+self.viewController.view.frame.size.height-self.viewController.view.frame.size.width+50, self.viewController.view.frame.size.width, self.viewController.view.frame.size.height);
+                      
+                       
+                          
+                        CGRect frame= CGRectMake(((self.window.frame.size.width-self.tabBarController.tabBar.frame.size.height)/2)-self.tabBarController.tabBar.frame.size.height- self.viewController.view.frame.size.height/2,(self.window.frame.size.height/2-self.viewController.view.frame.size.height/2)+160, self.viewController.view.frame.size.width, self.viewController.view.frame.size.height);                           
                        
                        
                        //                        [UIView animateWithDuration:secs delay:0.0 options:option
@@ -1425,6 +1439,11 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 //                       self.viewController.view.transform     = CGAffineTransformTranslate(self.viewController.view.transform,130 , -140);
                        
                       NSLog(@"landscape right not split");
+                       
+                     
+                           CGRect frame= CGRectMake(((self.window.frame.size.width-self.tabBarController.tabBar.frame.size.height)/2)-self.tabBarController.tabBar.frame.size.height- self.viewController.view.frame.size.height/2,(self.window.frame.size.height/2-self.viewController.view.frame.size.height/2), self.viewController.view.frame.size.width, self.viewController.view.frame.size.height);                      
+                        self.viewController.view.frame      =frame;
+                       
                    }
                    
                    
