@@ -188,9 +188,11 @@
     clinicianToolsLabel.text=NSLocalizedStringWithDefaultValue(@"Clinician Tools" , @"Root", [NSBundle mainBundle], @"Clinician Tools", @"subname for the application");
     
    
+   
     
-//    [[UIApplication sharedApplication] setStatusBarHidden:YES];            
-//    [self flashAppTrainAndTitleGraphics];
+    
+            
+    [self flashAppTrainAndTitleGraphics];
     [self.tabBarController setDelegate:self];
                
 //       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{                          
