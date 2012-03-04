@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">12A128p</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2427</string>
-		<string key="IBDocument.AppKitVersion">1157.7</string>
-		<string key="IBDocument.HIToolboxVersion">599.00</string>
+		<string key="IBDocument.SystemVersion">11D50</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2177</string>
+		<string key="IBDocument.AppKitVersion">1138.32</string>
+		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1420</string>
+			<string key="NS.object.0">1173</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBUITableViewCell</string>
@@ -192,8 +192,54 @@
 								<reference key="IBUIFontDescription" ref="313928711"/>
 								<reference key="IBUIFont" ref="29328079"/>
 							</object>
+							<object class="IBUIButton" id="197142203">
+								<reference key="NSNextResponder" ref="670297729"/>
+								<int key="NSvFlags">289</int>
+								<string key="NSFrame">{{27, 87}, {95, 37}}</string>
+								<reference key="NSSuperview" ref="670297729"/>
+								<reference key="NSWindow"/>
+								<string key="NSReuseIdentifierKey">_NS:241</string>
+								<bool key="IBUIOpaque">NO</bool>
+								<int key="IBUITag">304</int>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+								<int key="IBUIButtonType">1</int>
+								<string key="IBUINormalTitle">Delete</string>
+								<reference key="IBUIHighlightedTitleColor" ref="94479429"/>
+								<object class="NSColor" key="IBUINormalTitleColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+								</object>
+								<reference key="IBUINormalTitleShadowColor" ref="581502761"/>
+								<reference key="IBUIFontDescription" ref="313928711"/>
+								<reference key="IBUIFont" ref="29328079"/>
+							</object>
+							<object class="IBUIButton" id="891984907">
+								<reference key="NSNextResponder" ref="670297729"/>
+								<int key="NSvFlags">289</int>
+								<string key="NSFrame">{{125, 87}, {190, 37}}</string>
+								<reference key="NSSuperview" ref="670297729"/>
+								<reference key="NSWindow"/>
+								<string key="NSReuseIdentifierKey">_NS:241</string>
+								<bool key="IBUIOpaque">NO</bool>
+								<int key="IBUITag">305</int>
+								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+								<int key="IBUIButtonType">1</int>
+								<string key="IBUINormalTitle">Import Group Contacts</string>
+								<reference key="IBUIHighlightedTitleColor" ref="94479429"/>
+								<object class="NSColor" key="IBUINormalTitleColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+								</object>
+								<reference key="IBUINormalTitleShadowColor" ref="581502761"/>
+								<reference key="IBUIFontDescription" ref="313928711"/>
+								<reference key="IBUIFont" ref="29328079"/>
+							</object>
 						</array>
-						<string key="NSFrameSize">{320, 86}</string>
+						<string key="NSFrameSize">{320, 126}</string>
 						<reference key="NSSuperview" ref="847683399"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="334380257"/>
@@ -209,7 +255,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{320, 87}</string>
+				<string key="NSFrameSize">{320, 127}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="670297729"/>
@@ -253,6 +299,8 @@
 							<reference ref="878258692"/>
 							<reference ref="884578721"/>
 							<reference ref="134794559"/>
+							<reference ref="197142203"/>
+							<reference ref="891984907"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -281,12 +329,23 @@
 						<reference key="object" ref="884578721"/>
 						<reference key="parent" ref="847683399"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">9</int>
+						<reference key="object" ref="197142203"/>
+						<reference key="parent" ref="847683399"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">10</int>
+						<reference key="object" ref="891984907"/>
+						<reference key="parent" ref="847683399"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="3.CustomClassName">SCControlCell</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -294,12 +353,13 @@
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="9.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">8</int>
+			<int key="maxID">10</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -325,6 +385,6 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">1420</string>
+		<string key="IBCocoaTouchPluginVersion">1173</string>
 	</data>
 </archive>

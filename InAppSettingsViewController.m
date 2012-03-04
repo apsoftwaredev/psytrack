@@ -65,9 +65,12 @@
         
     }
  
-    
-    if (!addressBook)
-        addressBook=ABAddressBookCreate();
+    @try {
+        ABAddressBookRef addressBook=ABAddressBookCreate();
+       
+  
+   
+
 	
 	
 	//Display all groups available in the Address Book
@@ -207,7 +210,18 @@
     tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self];
     
     [tableModel addSection:defaultCalendarSection];
-    [tableModel addSection:defaultABGroupSection];   
+    [tableModel addSection:defaultABGroupSection]; 
+        
+    }
+
+@catch (NSException *exception) {
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    [appDelegate displayNotification:@"Problem Connecting to the Address Book Occured" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+}
+@finally {
+    
+}
 }
 
 - (void)viewDidUnload
@@ -230,7 +244,7 @@
    dictionaryABGroupIdentifierValueForArrayOfStringsIndexKey=nil;
    dictionaryArrayOfStringsIndexForGroupIdentifierKey=nil;
     groupArray =nil;
-    CFRelease(addressBook);
+//    CFRelease(addressBook);
 
 }
 
@@ -547,7 +561,18 @@
 	
 	// Get the object associated with the cell
 //	NSManagedObject *managedObject = (NSManagedObject *)cell.boundObject;
-	
+    ABAddressBookRef addressBook;
+    @try {
+        addressBook =ABAddressBookCreate();
+    }
+    @catch (NSException *exception) {
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        [appDelegate displayNotification:@"Error Connecting to Address Book Occurred" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+        return;
+    }
+    @finally {
+    
+    
 	
 	switch (button.tag)
 	{
@@ -642,7 +667,7 @@
             
             NSLog(@"items array is %@",itemsArray);
             selectedItemString=groupNameString;
-                NSLog(@"group name string is %@",groupNameString);
+                NSLog(@"group name string is %@",selectedItemString);
                 aBGroupSelectionCell.items=itemsArray;
         
             aBGroupSelectionCell.label.text=groupNameString;
@@ -660,7 +685,7 @@
             NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
 			
             
-            NSLog(@"button 301 pressed group name string is %@ ",groupNameString);
+            NSLog(@"button add pressed group name string is %@ ",groupNameString);
             
             if (groupNameString && groupNameString.length ) {
                 
@@ -672,9 +697,9 @@
                 
               
                 
-                int groupCount=ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
+//                int groupCount=ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
                 
-                NSNumber *groupIdentifierNumber=(NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupIdentifier];
+//                
                 
 //                BOOL addNew=TRUE;
                 
@@ -684,11 +709,11 @@
                     
                     
 //                }
-                groupIdentifierNumber=(NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupIdentifier];
+//                groupIdentifierNumber=(NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupIdentifier];
                 
                 groupArray=[self addressBookGroupsArray];
                 
-                groupCount=groupArray.count;
+              int  groupCount=groupArray.count;
                 
                
                    
@@ -704,15 +729,15 @@
                
                
                 if (groupCount) {
-//                    groupIdentifierNumber=[dictionaryABGroupIdentifierValueForArrayOfStringsIndexKey valueForKey:(NSString *)[selectedIndex stringValue]];
+//                   NSNumber * groupIdentifierNumber=[dictionaryABGroupIdentifierValueForArrayOfStringsIndexKey valueForKey:(NSString *)[selectedIndex stringValue]];
 //                    
                     
                     
 //                    int groupIdentifierInt=[groupIdentifierNumber intValue];
-//                    
-//                    ABRecordRef CFGroupRecord=(ABRecordRef)ABAddressBookGetGroupWithRecordID((ABAddressBookRef )addressBook, (ABRecordID)groupIdentifierInt);
-//                    
                     
+//                    ABRecordRef CFGroupRecord=(ABRecordRef)ABAddressBookGetGroupWithRecordID((ABAddressBookRef )addressBook, (ABRecordID)groupIdentifierInt);
+////                    
+//                    
 //                    ABRecordSetValue((ABRecordRef) CFGroupRecord, (ABPropertyID) kABGroupNameProperty, (__bridge  CFStringRef)groupNameString, nil);
                     
                     
@@ -733,7 +758,7 @@
 //                        }
 //                        
 //                    }
-//                    
+                    NSNumber *groupIdentifierNumber=(NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupIdentifier];
                     aBGroupSelectionCell.items=groupArray;
                     selectedIndex=nil;
                     
@@ -745,6 +770,7 @@
 
                     aBGroupSelectionCell.label.text=groupNameString;
                     NSLog(@"group names are %@",aBGroupSelectionCell.items);
+                    NSLog(@"selected item index is %i",[selectedIndex intValue]);
                 }
             }
         }
@@ -792,7 +818,33 @@
         
         }
             break;
+            
+        case 304:
+        {
+            NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
+			NSLog(@"button 304 pressed group name string is %@ ",groupNameString);
+//            NSString *currentNameString=[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
+            
+            
+            
+        }    
+     
+            break;
+        case 305:
+        {
+            NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
+			NSLog(@"button 305 pressed group name string is %@ ",groupNameString);
+//            NSString *currentNameString=[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
+            
+            
+            
+        }    
+            break;  
     }
+if (addressBook) {
+    CFRelease(addressBook);
+}
+}    
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -959,6 +1011,10 @@
                 
             case 3:
             {
+                @try {
+                    ABAddressBookRef addressBook=ABAddressBookCreate();
+                
+                    
                 
                 if ([cell isKindOfClass:[SCSelectionCell class]]) {
                     SCSelectionCell *selectionCell=(SCSelectionCell *)cell;
@@ -988,34 +1044,55 @@
                         
                         if (groupCount) {
                             
-                            ABRecordRef CFGroup=(ABRecordRef)
-                            ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, groupIdentifier);
+                            NSLog(@"group identifier %i",groupIdentifier);
+                            NSLog(@"address book %@", addressBook);
+                    
                             
+                            ABRecordRef group;
+//                            NSLog(@"group is %@",group);
+
+                             group=(ABRecordRef)ABAddressBookGetGroupWithRecordID((ABAddressBookRef )addressBook, (ABRecordID)groupIdentifier);
                             
-                            CFStringRef CFGroupName=(CFStringRef )ABRecordCopyValue((ABRecordRef) CFGroup, (ABPropertyID) kABGroupNameProperty);
+                            if (group) {
+                            CFStringRef chosenGroupName=(CFStringRef) ABRecordCopyValue((ABRecordRef) group, (ABPropertyID) kABGroupNameProperty);
                             
-                            NSLog(@"group name set is %@",(__bridge NSString*)CFGroupName);
+                                
+                                                            NSLog(@"group name set is %@",(__bridge NSString *)chosenGroupName);
                             
-                            [[NSUserDefaults standardUserDefaults] setValue:(__bridge NSString *)CFGroupName forKey:kPTTAddressBookGroupName];
+                            [[NSUserDefaults standardUserDefaults] setValue:(__bridge NSString *)chosenGroupName forKey:kPTTAddressBookGroupName];
                             
                             
                             [[NSUserDefaults standardUserDefaults]synchronize];
                             
-                            [tableViewModel.modelKeyValues setValue:(__bridge NSString*)CFGroupName forKey:@"groupNameString"];
+                            [tableViewModel.modelKeyValues setValue:(__bridge NSString *)chosenGroupName forKey:@"groupNameString"];
                             
                             SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
                             SCTableViewCell *groupNameCell=(SCTableViewCell *)[section cellAtIndex:1];
                             UITextField *textField=(UITextField *)[groupNameCell viewWithTag:1];
-                            textField.text=(__bridge NSString *)CFGroupName;
+                            textField.text=(__bridge NSString *)chosenGroupName;
+                                CFRelease(chosenGroupName); 
+                                CFRelease(group);
+
+                            }
+
                             
-                            CFRelease(CFGroup);
-                            CFRelease(CFGroupName);
+                            
                         }
                     }
                     
                     
                 }
+                }
+                @catch (NSException *exception) {
+                    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                    
+                    [appDelegate displayNotification:@"Problem Connecting to Address Book Occured" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+                }
                 
+                @finally {
+                    
+                }  
+                 
             }
                 break;
             case 4:
@@ -1133,11 +1210,10 @@
 #pragma mark additonal Methods for working with address book
 -(NSArray *)addressBookGroupsArray{
 
+    ABAddressBookRef addressBook;
     @try {
         
-        if (!addressBook)
-            addressBook=ABAddressBookCreate();
-        
+        addressBook=ABAddressBookCreate();        
         
     }
     @catch (NSException *exception) {
@@ -1150,16 +1226,19 @@
     @finally 
     {
         
-        ABRecordRef group;
-        int groupIdentifier;
+        ABRecordRef group=nil;
+       
+        int groupIdentifier=-1;
         if ([[NSUserDefaults standardUserDefaults] objectForKey:kPTTAddressBookGroupName])
         {
+            
          groupIdentifier=(NSInteger )[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
         }
             
         if (groupIdentifier>0) {
+        
             
-            group=ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, groupIdentifier);
+          group=  ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, groupIdentifier);
             
         }
            
@@ -1332,7 +1411,7 @@
     if (groupCount) {
    
            CFArrayRef CFGroupsArray= (CFArrayRef )ABAddressBookCopyArrayOfAllGroups((ABAddressBookRef) addressBook);
-       NSLog(@"cggroups array %@",CFGroupsArray);
+       NSLog(@"cggroups array %@",(__bridge NSArray *) CFGroupsArray);
         
         if (CFGroupsArray) {
         
@@ -1344,6 +1423,7 @@
             ABRecordRef groupInCFArray;
 //            CFStringRef CFGroupName ;
             for (CFIndex i = 0; i < groupCount; i++) {
+               
                 groupInCFArray = CFArrayGetValueAtIndex(CFGroupsArray, i);
                 CFGroupName  = ABRecordCopyValue(groupInCFArray, kABGroupNameProperty);
                 int CFGroupID=ABRecordGetRecordID((ABRecordRef) groupInCFArray);
@@ -1357,8 +1437,7 @@
               [ dictionaryArrayOfStringsIndexForGroupIdentifierKey addEntriesFromDictionary:dicStringIndexValueForGroupIdendifierKey];
                
                
-                
-               
+             
             }     
          
             
@@ -1369,7 +1448,12 @@
         }
     
     }
-    
+        if (group) {
+            CFRelease(group);
+        }
+//        if (addressBook) {
+//            CFRelease(addressBook);
+//        }
         return allGroups;
     }
 }
@@ -1377,11 +1461,10 @@
 
 -(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew{
     
-   
+    ABAddressBookRef addressBook;
     @try 
     {
    
-    if (!addressBook)
         addressBook=ABAddressBookCreate();
     
         
@@ -1478,28 +1561,32 @@
                 
                 if ([[NSUserDefaults standardUserDefaults] objectForKey:kPTTAddressBookGroupIdentifier]) {
                      [[NSUserDefaults standardUserDefaults] setInteger:groupIdentifier forKey:kPTTAddressBookGroupIdentifier];
-                    
+                     [[NSUserDefaults standardUserDefaults]synchronize];
                     
                 }
                
+                if (group) {
+                    NSLog(@"group is %@",group);
+                }
                 
+                else {
+                    NSLog(@"no group");
+                } 
                 break;
             }
 //            CFRelease(CFGroupsCheckNameArray); 
 //            CFRelease(CFGroupNameCheck);
             
-            NSLog(@"group is %@",group);
-            
         }
-    
-        }
-        if (CFGroupsCheckNameArray) {
+     if (CFGroupsCheckNameArray) {
             CFRelease(CFGroupsCheckNameArray); 
         }
         
         if (CFGroupNameCheck) {
             CFRelease(CFGroupNameCheck);
         }
+        }
+       
         
         }
     
@@ -1577,7 +1664,9 @@
        
             [[NSUserDefaults standardUserDefaults] setInteger:(int )groupIdentifier forKey:kPTTAddressBookGroupIdentifier];
             
-            [[NSUserDefaults standardUserDefaults]synchronize];
+           [[NSUserDefaults standardUserDefaults] setValue:groupName forKey:kPTTAddressBookGroupName];  
+        
+        [[NSUserDefaults standardUserDefaults]synchronize];
        
 //        CFRelease(group);
     } 
@@ -1617,13 +1706,15 @@
     }
      
    
-      
+        if (addressBook) {
+            CFRelease(addressBook);
+        }
         
     
     }
-//    [[NSUserDefaults standardUserDefaults]  setValue:(NSString *)groupName forKey:kAddressBookGroupName];
-//    
-//    [[NSUserDefaults standardUserDefaults]synchronize];
+//    [[NSUserDefaults standardUserDefaults]  setValue:(NSString *)groupName forKey:kPTTAddressBookGroupName];
+    
+   
 
   
     

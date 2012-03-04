@@ -32,7 +32,7 @@
     NSMutableDictionary *dictionaryABGroupIdentifierValueForArrayOfStringsIndexKey;
     NSMutableDictionary *dictionaryArrayOfStringsIndexForGroupIdentifierKey;
     NSArray *groupArray;
-    ABAddressBookRef addressBook;
+
     
  
 }
