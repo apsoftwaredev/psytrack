@@ -1247,35 +1247,35 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                         clinician=(ClinicianEntity *) cellManagedObject;
                         
                 
-                        SCTableViewCell *cellAtOne=(SCTableViewCell *)[section cellAtIndex:1];
-                       
-                        UIView *viewLongerTextLabelView =(UIView *)[cellAtOne viewWithTag:51];
-                       NSLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
-                        if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
-                        {
-                            NSLog(@"first name");
-                            
-                            UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-                            NSLog(@"label tex is %@",firstNameLabel.text);
-                            if ([firstNameLabel.text isEqualToString:@"First Name:"]) {
-                                [cellAtOne commitChanges];
-                            } 
-                        }
-
-                        SCTableViewCell *cellAtThree=(SCTableViewCell *)[section cellAtIndex:3];
-                        
-                        UIView *lastNameLabelView =(UIView *)[cellAtThree viewWithTag:51];
-                        
-                        if ([lastNameLabelView isKindOfClass:[UILabel class]]) 
-                        {
-                            NSLog(@"last Name");
-                            
-                            UILabel *lastNameLabel =(UILabel *)lastNameLabelView;
-                             NSLog(@"label last nametex is %@",lastNameLabel.text);
-                            if ([lastNameLabel.text isEqualToString:@"Last Name:"]) {
-                                [cellAtThree commitChanges];
-                            } 
-                        }
+//                        SCTableViewCell *cellAtOne=(SCTableViewCell *)[section cellAtIndex:1];
+//                       
+//                        UIView *viewLongerTextLabelView =(UIView *)[cellAtOne viewWithTag:51];
+//                       NSLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
+//                        if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
+//                        {
+//                            NSLog(@"first name");
+//                            
+//                            UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
+//                            NSLog(@"label tex is %@",firstNameLabel.text);
+//                            if ([firstNameLabel.text isEqualToString:@"First Name:"]) {
+//                                [cellAtOne commitChanges];
+//                            } 
+//                        }
+//
+//                        SCTableViewCell *cellAtThree=(SCTableViewCell *)[section cellAtIndex:3];
+//                        
+//                        UIView *lastNameLabelView =(UIView *)[cellAtThree viewWithTag:51];
+//                        
+//                        if ([lastNameLabelView isKindOfClass:[UILabel class]]) 
+//                        {
+//                            NSLog(@"last Name");
+//                            
+//                            UILabel *lastNameLabel =(UILabel *)lastNameLabelView;
+//                             NSLog(@"label last nametex is %@",lastNameLabel.text);
+//                            if ([lastNameLabel.text isEqualToString:@"Last Name:"]) {
+//                                [cellAtThree commitChanges];
+//                            } 
+//                        }
                        
                             
                         
@@ -1284,7 +1284,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                         
                         
                         NSLog(@"clinician %@",clinician);
-                        
+                        for (NSInteger i=0; i<tableViewModel.sectionCount;i++) {
+                            SCTableViewSection *sectionAtIndex=(SCTableViewSection *)[tableViewModel sectionAtIndex:i];
+                            
+                            [sectionAtIndex commitCellChanges];
+                        }
+
                         [self evaluateWhichABViewControllerToShow];
                         
                     }
@@ -1777,9 +1782,26 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         NSLog(@"clinician first name is %@ and Clnician last name is %@",clinician.firstName,clinician.lastName);
         
-            ABRecordSetValue(existingPersonRef, kABPersonFirstNameProperty, (__bridge CFStringRef) clinician.firstName, nil) ; 
-       ABRecordSetValue(existingPersonRef, kABPersonLastNameProperty, (__bridge CFStringRef) clinician.lastName, nil) ; 
-        
+            if (clinician.firstName.length) {
+                ABRecordSetValue(existingPersonRef, kABPersonFirstNameProperty, (__bridge CFStringRef) clinician.firstName, nil) ; 
+            }
+            if (clinician.lastName.length) {
+                ABRecordSetValue(existingPersonRef, kABPersonLastNameProperty, (__bridge CFStringRef) clinician.lastName, nil) ; 
+            }
+            if (clinician.prefix.length) {
+                ABRecordSetValue(existingPersonRef, kABPersonPrefixProperty, (__bridge CFStringRef) clinician.prefix, nil) ; 
+            }
+            if (clinician.middleName.length) {
+                ABRecordSetValue(existingPersonRef, kABPersonMiddleNameProperty, (__bridge CFStringRef) clinician.middleName, nil) ; 
+            }
+            
+            if (clinician.suffix.length) {
+                ABRecordSetValue(existingPersonRef, kABPersonSuffixProperty, (__bridge CFStringRef) clinician.suffix, nil) ; 
+            }
+            
+            if (clinician.notes.length) {
+                ABRecordSetValue(existingPersonRef, kABPersonNoteProperty, (__bridge CFStringRef) clinician.notes, nil) ;
+            }
      
            
             [personAddNewViewController_ setAddressBook:addressBook];
@@ -2521,14 +2543,40 @@ NSLog(@"will show view controller %@",viewController);
                         CFStringRef recordRefMiddleName=ABRecordCopyValue((ABRecordRef) recordRef,( ABPropertyID) kABPersonMiddleNameProperty);
                         
                         
-                        
-                        
-                        [cell.boundObject setValue:(__bridge NSString*)recordRefPrefix forKey:@"prefix"];
-                        
-                        [cell.boundObject setValue:(__bridge NSString*)recordRefFirstName forKey:@"firstName"];
-                        [cell.boundObject setValue:(__bridge NSString*)recordRefMiddleName forKey:@"middleName"];
-                        [cell.boundObject setValue:(__bridge NSString*)recordRefLastName forKey:@"lastName"];
-                        [cell.boundObject setValue:(__bridge NSString*)recordRefSuffix forKey:@"suffix"];
+                if (recordRefPrefix && CFStringGetLength(recordRefPrefix)>0) 
+                {
+                    [cell.boundObject setValue:(__bridge NSString*)recordRefPrefix forKey:@"prefix"];
+                    
+                }
+                if (recordRefFirstName &&  CFStringGetLength(recordRefFirstName)>0) {                  
+                    [cell.boundObject setValue:(__bridge NSString*)recordRefFirstName forKey:@"firstName"];
+                }
+                if (recordRefMiddleName && CFStringGetLength(recordRefMiddleName)>0) {    
+                    [cell.boundObject setValue:(__bridge NSString*)recordRefMiddleName forKey:@"middleName"];
+                }
+                
+                if (recordRefLastName && CFStringGetLength(recordRefLastName)>0) {
+                    [cell.boundObject setValue:(__bridge NSString*)recordRefLastName forKey:@"lastName"];
+                }
+                if (recordRefSuffix && CFStringGetLength(recordRefSuffix)>0) {  
+                    [cell.boundObject setValue:(__bridge NSString*)recordRefSuffix forKey:@"suffix"];
+                }
+                NSString *notesStr=[cell.boundObject valueForKey:@"notes"];
+                
+                //so it doesn't copy over some notes they have already written
+                if (!notesStr.length) {
+                    CFStringRef recordRefNotes=ABRecordCopyValue((ABRecordRef) recordRef,( ABPropertyID) kABPersonNoteProperty);
+                    if (recordRefNotes && CFStringGetLength(recordRefNotes)>0) {  
+                        [cell.boundObject setValue:(__bridge NSString*)recordRefNotes forKey:@"notes"];
+                    }
+                    
+                    if (recordRefNotes) {
+                        CFRelease(recordRefNotes);
+                    }
+                }
+
+
+                
                         
                         if (recordRefPrefix) {
                             CFRelease(recordRefPrefix);
@@ -2884,14 +2932,37 @@ NSLog(@"cancel button clicked");
                 
                 
                 
+                if (recordRefPrefix && CFStringGetLength(recordRefPrefix)>0) 
+                {
+                    [cell.boundObject setValue:(__bridge NSString*)recordRefPrefix forKey:@"prefix"];
+                    
+                }
+                if (recordRefFirstName &&  CFStringGetLength(recordRefFirstName)>0) {                  
+                    [cell.boundObject setValue:(__bridge NSString*)recordRefFirstName forKey:@"firstName"];
+                }
+                if (recordRefMiddleName && CFStringGetLength(recordRefMiddleName)>0) {    
+                    [cell.boundObject setValue:(__bridge NSString*)recordRefMiddleName forKey:@"middleName"];
+                }
                 
-                [cell.boundObject setValue:(__bridge NSString*)recordRefPrefix forKey:@"prefix"];
+                if (recordRefLastName && CFStringGetLength(recordRefLastName)>0) {
+                    [cell.boundObject setValue:(__bridge NSString*)recordRefLastName forKey:@"lastName"];
+                }
+                if (recordRefSuffix && CFStringGetLength(recordRefSuffix)>0) {  
+                    [cell.boundObject setValue:(__bridge NSString*)recordRefSuffix forKey:@"suffix"];
+                }
+                NSString *notesStr=[cell.boundObject valueForKey:@"notes"];
                 
-                [cell.boundObject setValue:(__bridge NSString*)recordRefFirstName forKey:@"firstName"];
-                [cell.boundObject setValue:(__bridge NSString*)recordRefMiddleName forKey:@"middleName"];
-                [cell.boundObject setValue:(__bridge NSString*)recordRefLastName forKey:@"lastName"];
-                [cell.boundObject setValue:(__bridge NSString*)recordRefSuffix forKey:@"suffix"];
-                
+                //so it doesn't copy over some notes they have already written
+                if (!notesStr.length) {
+                    CFStringRef recordRefNotes=ABRecordCopyValue((ABRecordRef) recordRef,( ABPropertyID) kABPersonNoteProperty);
+                    if (recordRefNotes && CFStringGetLength(recordRefNotes)>0) {  
+                        [cell.boundObject setValue:(__bridge NSString*)recordRefNotes forKey:@"notes"];
+                    }
+                    
+                    if (recordRefNotes) {
+                        CFRelease(recordRefNotes);
+                    }
+                }
                 if (recordRefPrefix) {
                     CFRelease(recordRefPrefix);
                     
