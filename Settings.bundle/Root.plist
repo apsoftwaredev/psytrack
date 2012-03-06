@@ -79,5 +79,7 @@
 	<string></string>
 	<key>address_book_group_name</key>
 	<string></string>
+	<key>auto_add_clinician_to_group</key>
+	<true/>
 </dict>
 </plist>

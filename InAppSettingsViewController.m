@@ -106,7 +106,7 @@
 //        }
 //        
 //    }
-//
+
 //    
     
     self.eventStore = [[EKEventStore alloc] init];
@@ -138,10 +138,10 @@
     NSLog(@"group identifier is %i",groupIdentifier);
    
     int groupCount=ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
+        BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults] boolForKey:kPTAutoAddClinicianToGroup];
     
     
-    
-    if (groupIdentifier==-1||groupIdentifier==0||!groupCount) {
+    if ((groupIdentifier==-1||groupIdentifier==0||!groupCount)&&autoAddClinicianToGroup) {
         
         [ self changeABGroupNameTo:(NSString *)groupName addNew:NO];
         
@@ -177,8 +177,8 @@
 	
     //create the dictionary with the data bindings
     NSDictionary *groupNameDataBindings = [NSDictionary 
-                                          dictionaryWithObjects:[NSArray arrayWithObject:@"groupNameString"] 
-                                          forKeys:[NSArray arrayWithObject:@"1" ]]; // 1 is the control tag
+                                          dictionaryWithObjects:[NSArray arrayWithObjects:@"groupNameString",@"autoAddClinicianToGroup",nil] 
+                                          forKeys:[NSArray arrayWithObjects:@"1",@"2",nil ]]; // 1 is the control tag
 	
     //create the custom property definition
 //    SCCustomPropertyDefinition *nameDataProperty = [SCCustomPropertyDefinition definitionWithName:@"GroupNameData"
@@ -512,6 +512,7 @@
     if (indexPath.section==1 && cell.tag==4) {
         SCTableViewSection *section=(SCTableViewSection*)[tableViewModel sectionAtIndex:1];
        NSString *groupName=[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
+        BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
         if ([cell isKindOfClass:[SCControlCell class]]) {
 //            SCControlCell *controllCell=(SCControlCell *)cell;
             
@@ -521,7 +522,7 @@
             textField.textColor=selectionCell.label.textColor;
             
             [tableViewModel.modelKeyValues setValue:groupName forKey:@"groupNameString"];
-            
+            [tableViewModel.modelKeyValues setValue:[NSNumber numberWithBool:autoAddClinicianToGroup] forKey:@"autoAddClinicianToGroup"];
         }
         
     
@@ -823,10 +824,71 @@
         {
             NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
 			NSLog(@"button 304 pressed group name string is %@ ",groupNameString);
-//            NSString *currentNameString=[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
+//            
+            
+            ABAddressBookRef addressBook=ABAddressBookCreate();
+            
+            BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
+            
+            int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
+            
+            if (groupIdentifier!=-1) {
             
             
+                int CFGroupCount = ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
             
+                if (CFGroupCount>1 ||( !autoAddClinicianToGroup && CFGroupCount >0)) {
+                    
+                    
+                   
+                    ABRecordRef group=(ABRecordRef)ABAddressBookGetGroupWithRecordID(addressBook, groupIdentifier);
+                    bool   didRemove=NO;
+                
+                    if (group) {
+                        
+                        
+                        CFStringRef groupName=ABRecordCopyValue(group, kABGroupNameProperty);
+                        NSString *alertMessage=[NSString stringWithFormat:@"Do you wish to delete the %@ group from the address book?", (__bridge NSString *)groupName];
+                        UIAlertView *deleteConfirmAlert=[[UIAlertView alloc]initWithTitle:@"Remove Group From Address Book" message:alertMessage delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes, Delete it", nil];
+                        deleteConfirmAlert.tag=1;
+                        [deleteConfirmAlert show];
+//                        
+                    }
+                
+                    NSString *statusMessage=@"Removed Group from Address Book";
+                    
+//                CFArrayRef groups  = ABAddressBookCopyArrayOfAllGroups((ABAddressBookRef) addressBook);
+            //    
+            //    for(CFIndex i = 0;i<CFGroupCount;i++)
+            //    {
+            //        ABRecordRef ref = CFArrayGetValueAtIndex(groups, i);
+            //
+            //    
+            //     bool   didRemove=NO;
+            //      didRemove =  (bool)   ABAddressBookRemoveRecord((ABAddressBookRef) addressBook, (ABRecordRef) ref, nil);
+            //        
+            //    }
+            //    
+            //    BOOL wantToSaveChanges=TRUE;
+            //    if (ABAddressBookHasUnsavedChanges(addressBook)) {
+            //        
+            //        if (wantToSaveChanges) {
+            //            bool didSave=FALSE;
+            //            didSave = ABAddressBookSave(addressBook, nil);
+            //            
+            //            if (!didSave) {/* Handle error here. */  NSLog(@"addressbook did not save");}
+            //            else NSLog(@"addressbook saved");
+            //        } 
+            //        else {
+            //            NSLog(@"address book revert becaus no changes");
+            //            ABAddressBookRevert(addressBook);
+            //            
+            //        }
+            //        
+            //    }
+                }
+                
+            }
         }    
      
             break;
@@ -847,6 +909,118 @@ if (addressBook) {
 }    
 }
 
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    if (alertView.tag==1) 
+    {
+        ABAddressBookRef addressBook=ABAddressBookCreate();
+        
+        BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
+        
+        int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
+        
+        if (groupIdentifier!=-1) 
+        {
+            
+            
+            int CFGroupCount = ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
+            
+            if ((CFGroupCount>1 && autoAddClinicianToGroup)||( !autoAddClinicianToGroup && CFGroupCount >0)) {
+                
+                
+                
+                ABRecordRef group=(ABRecordRef)ABAddressBookGetGroupWithRecordID(addressBook, groupIdentifier);
+                bool   didRemove=NO;
+                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                if (group) {
+
+        
+        
+        
+                    didRemove =  (bool)   ABAddressBookRemoveRecord((ABAddressBookRef) addressBook, (ABRecordRef) group, nil);
+                    
+                    
+                    BOOL wantToSaveChanges=TRUE;
+                    bool didSave=FALSE;
+                    if (ABAddressBookHasUnsavedChanges(addressBook)) {
+                        
+                        if (wantToSaveChanges) {
+                            
+                            didSave = ABAddressBookSave(addressBook, nil);
+                            
+                            if (!didSave) {/* Handle error here. */  NSLog(@"addressbook did not save");}
+                            else NSLog(@"addressbook saved");
+                        } 
+                        else {
+                            NSLog(@"address book revert becaus no changes");
+                            ABAddressBookRevert(addressBook);
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    if (!didRemove ||!didSave) {
+                        
+                        
+
+                        [appDelegate displayNotification:@"Not able to remove the group" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+                    }
+                    else 
+                    {
+                        [appDelegate displayNotification:@"Group Successfully Removed" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+                        
+                        [[NSUserDefaults standardUserDefaults]setValue:@"" forKey:kPTTAddressBookGroupName];
+                        [[NSUserDefaults standardUserDefaults] setInteger:-1 forKey:kPTTAddressBookGroupIdentifier];
+                        [[NSUserDefaults standardUserDefaults ]synchronize];
+                        
+                        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:1];
+                        
+                        SCSelectionCell *selectionCell=(SCSelectionCell*)[section cellAtIndex:0];
+                        
+                        
+                        
+                        selectionCell.label.text=@"";
+                        
+                        SCTableViewCell *controlCell=(SCTableViewCell *)[section cellAtIndex:1];
+                        
+                        UITextField *textField=(UITextField *)[controlCell viewWithTag:1];
+                        textField.text=@"";
+                        
+                        
+                   
+                        
+                        NSMutableArray *mutableArray=[NSMutableArray arrayWithArray:selectionCell.items];
+                        if ([selectionCell.selectedItemIndex integerValue]<selectionCell.items.count) {
+                            [mutableArray removeObjectAtIndex:[selectionCell.selectedItemIndex integerValue]];
+                            selectionCell.selectedItemIndex=[NSNumber numberWithInt:-1];
+                            selectionCell.items=mutableArray;
+
+                        }
+                                                
+                    }
+   
+                }
+                else 
+                {
+                    [appDelegate displayNotification:@"Group not available to delete." forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+                }
+                
+            }
+           
+        }
+    if (buttonIndex==0) {
+        NSLog(@"button index is 0");
+        
+    }
+    else {
+        NSLog(@"button index is %i", buttonIndex);
+    }
+
+    }
+
+}
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
@@ -1097,6 +1271,17 @@ if (addressBook) {
                 break;
             case 4:
             {
+                if ([cell isKindOfClass:[SCControlCell class]]) {
+                
+                
+                NSLog(@"value changed for auto add is %i", [(NSNumber *)[tableViewModel.modelKeyValues valueForKey:@"autoAddClinicianToGroup"]boolValue]);
+                
+                    [[NSUserDefaults standardUserDefaults] setBool:[(NSNumber *)[tableViewModel.modelKeyValues valueForKey:@"autoAddClinicianToGroup"]boolValue] forKey:kPTAutoAddClinicianToGroup];
+                    [[NSUserDefaults standardUserDefaults]synchronize];
+                    //                        
+                    //                        [[NSUserDefaults standardUserDefaults]synchronize];
+                
+                }
                 
                 //                if ([cell isKindOfClass:[SCTextFieldCell class]]) {
                 //                   
@@ -1722,7 +1907,15 @@ if (addressBook) {
 
 
 
+-(void)importAllContactsInGroup{
 
+
+
+
+
+
+
+}
 
 
 

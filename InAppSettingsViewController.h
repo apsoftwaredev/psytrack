@@ -22,7 +22,7 @@
 #import <EventKit/EventKit.h>
 #import <EventKitUI/EventKitUI.h>
 
-@interface InAppSettingsViewController : UITableViewController <SCTableViewModelDelegate, EKCalendarChooserDelegate,ABPeoplePickerNavigationControllerDelegate>{
+@interface InAppSettingsViewController : UITableViewController <SCTableViewModelDelegate, EKCalendarChooserDelegate,ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate>{
 
     SCArrayOfObjectsModel *tableModel;
     EKEventStore *eventStore;
@@ -48,5 +48,5 @@
 - (EKCalendar *)defaultCalendarName;
 -(NSArray *)addressBookGroupsArray;
 -(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew;
-
+-(void)importAllContactsInGroup;
 @end

@@ -51,7 +51,7 @@ static NSString * const kAddressBookIdentifier=@"address_book_identifier";
 static NSString * const kPTTAddressBookGroupIdentifier=@"address_book_group_identifier";
 static NSString * const kPTTAddressBookGroupName=@"address_book_group_name";
 static NSString * const kPTTGloballyUniqueIdentifier=@"globally_unique_identifier";
-
+static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group";
 /****************************************************************************************/
 /*	class PTTAppDelegate	*/
 /****************************************************************************************/ 

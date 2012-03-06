@@ -34,14 +34,14 @@ NSManagedObjectContext *managedObjectContext;
     BOOL deletePressedOnce;
     SCTableViewModel *currentDetailTableViewModel;
     
-    
-    ABRecordRef existingPersonRef;
+     int existingPersonRecordID;
+//    ABRecordRef existingPersonRef;
     BOOL addExistingAfterPromptBool;
     
      ABPersonViewController *personVCFromSelectionList;
      ABNewPersonViewController *personAddNewViewController;
     ClinicianEntity *clinician;
-      ABAddressBookRef addressBook;
+//      ABAddressBookRef addressBook;
     
 }
 
@@ -61,7 +61,7 @@ NSManagedObjectContext *managedObjectContext;
 //-(void)showPersonViewControllerWithRecordIdentifier:(NSString *)recordIdentifier firstName:(NSString *)firstName lastName:(NSString *)lastName;
 
 -(void)evaluateWhichABViewControllerToShow;
--(void)showPersonViewControllerForABRecordRef:(ABRecordRef)recordRef;
+//-(void)showPersonViewControllerForABRecordRef:(ABRecordRef)recordRef;
 //-(void)showUnknownPersonViewControllerWithABRecordRef:(ABRecordRef )recordRef;
 -(void)showPeoplePickerController;
 -(IBAction)cancelAddNewAddressBookPerson:(id)sender;
@@ -70,5 +70,9 @@ NSManagedObjectContext *managedObjectContext;
 //-(IBAction)doneButtonTappedInABPersonViewController:(id)sender;
 -(void)resetABVariablesToNil;
 
+-(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew;
 
+-(void)showPersonViewControllerForRecordID:(int)recordID;
+
+-(BOOL)checkIfRecordIDInAddressBook:(int)recordID;
 @end

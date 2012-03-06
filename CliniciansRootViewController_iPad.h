@@ -38,14 +38,14 @@
     BOOL deletePressedOnce;
      SCTableViewModel *currentDetailTableViewModel;
     
-    
-    ABRecordRef existingPersonRef;
+     int existingPersonRecordID;
+//    ABRecordRef existingPersonRef;
     BOOL addExistingAfterPromptBool;
     
     ABPersonViewController *personVCFromSelectionList;
      ABNewPersonViewController *personAddNewViewController;
     ClinicianEntity *clinician;
-    ABAddressBookRef addressBook;
+//    ABAddressBookRef addressBook;
  
 }
 
@@ -71,7 +71,7 @@
 
 
 -(void)evaluateWhichABViewControllerToShow;
--(void)showPersonViewControllerForABRecordRef:(ABRecordRef)recordRef;
+//-(void)showPersonViewControllerForABRecordRef:(ABRecordRef)recordRef;
 //-(void)showUnknownPersonViewControllerWithABRecordRef:(ABRecordRef )recordRef;
 -(void)showPeoplePickerController;
 -(IBAction)cancelAddNewAddressBookPerson:(id)sender;
@@ -79,7 +79,7 @@
 -(IBAction)selectButtonTappedInABPersonController:(id)sender;
 //-(IBAction)doneButtonTappedInABPersonViewController:(id)sender;
 -(void)resetABVariablesToNil;
-
+-(void)showPersonViewControllerForRecordID:(int)recordID;
 
 
 

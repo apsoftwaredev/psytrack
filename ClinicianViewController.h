@@ -35,13 +35,14 @@
     SCTableViewModel *currentDetailTableViewModel;
    
 
-    ABRecordRef existingPersonRef;
+//    ABRecordRef existingPersonRef;
     BOOL addExistingAfterPromptBool;
+    int existingPersonRecordID;
   
      ABPersonViewController *personVCFromSelectionList;
      ABNewPersonViewController *personAddNewViewController;
     ClinicianEntity *clinician;
-      ABAddressBookRef addressBook;
+//      ABAddressBookRef addressBook;
 }
 
 @property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
@@ -57,7 +58,7 @@
 -(void)updateClinicianTotalLabel;
 
 -(void)evaluateWhichABViewControllerToShow;
--(void)showPersonViewControllerForABRecordRef:(ABRecordRef)recordRef;
+//-(void)showPersonViewControllerForABRecordRef:(ABRecordRef)recordRef;
 //-(void)showUnknownPersonViewControllerWithABRecordRef:(ABRecordRef )recordRef;
 -(void)showPeoplePickerController;
 -(IBAction)cancelAddNewAddressBookPerson:(id)sender;
@@ -66,9 +67,9 @@
 //-(IBAction)doneButtonTappedInABPersonViewController:(id)sender;
 -(void)resetABVariablesToNil;
 
+-(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew;
 
-
-
+-(void)showPersonViewControllerForRecordID:(int)recordID;
 
 #define degreesToRadian(x) (M_PI * (x) / 180.0)
 
