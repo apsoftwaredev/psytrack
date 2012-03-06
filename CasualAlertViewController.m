@@ -356,7 +356,7 @@ NSInteger intSort(id num1, id num2, void *context)
     
     
 
-    [UIView animateWithDuration:secs delay:0.0 options:option
+    [UIView animateWithDuration:2.5 delay:0.0 options:option
                      animations:^{
                          self.view.frame = CGRectMake(destination.x,destination.y, self.view.frame.size.width, self.view.frame.size.height);
                      }

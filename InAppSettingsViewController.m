@@ -18,6 +18,9 @@
 #import "InAppSettingsViewController.h"
 #import "PTTAppDelegate.h"
 #import "MySource.h"
+#import "ClinicianEntity.h"
+#import "CliniciansRootViewController_iPad.h"
+#import "ClinicianViewController.h"
 @interface InAppSettingsViewController ()
 
 @end
@@ -842,7 +845,7 @@
                     
                    
                     ABRecordRef group=(ABRecordRef)ABAddressBookGetGroupWithRecordID(addressBook, groupIdentifier);
-                    bool   didRemove=NO;
+                   
                 
                     if (group) {
                         
@@ -852,10 +855,11 @@
                         UIAlertView *deleteConfirmAlert=[[UIAlertView alloc]initWithTitle:@"Remove Group From Address Book" message:alertMessage delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes, Delete it", nil];
                         deleteConfirmAlert.tag=1;
                         [deleteConfirmAlert show];
-//                        
+//                      
+                        CFRelease(group);
                     }
                 
-                    NSString *statusMessage=@"Removed Group from Address Book";
+                  
                     
 //                CFArrayRef groups  = ABAddressBookCopyArrayOfAllGroups((ABAddressBookRef) addressBook);
             //    
@@ -896,6 +900,75 @@
         {
             NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
 			NSLog(@"button 305 pressed group name string is %@ ",groupNameString);
+            
+            int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
+            
+            if (groupIdentifier!=-1) {
+                
+                
+                int CFGroupCount = ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
+                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                
+                if (CFGroupCount>0) {
+                    
+                    
+                    
+                    ABRecordRef group=(ABRecordRef)ABAddressBookGetGroupWithRecordID(addressBook, groupIdentifier);
+                    CFArrayRef groupMembers;
+                    groupMembers=nil;
+                    
+                    if (group) {
+                        groupMembers =(CFArrayRef )ABGroupCopyArrayOfAllMembers(group);
+                    }
+                  
+                    int groupMembersCount=0;
+                    
+                    if (groupMembers) {
+                        groupMembersCount= CFArrayGetCount(groupMembers);
+                    }
+                    
+                    
+                    if (group && groupMembers &&groupMembersCount>0) {
+                        
+                        
+                        CFStringRef groupName=ABRecordCopyValue(group, kABGroupNameProperty);
+                        NSString *alertMessage;
+                        if (groupMembersCount==1) {
+                            alertMessage= [NSString stringWithFormat:@"Do you wish to import %i contact from the Address Book %@ group?",groupMembersCount, (__bridge NSString *)groupName];
+                        }
+                        else {
+                            alertMessage= [NSString stringWithFormat:@"Do you wish to import %i contacts from the Address Book %@ group?",groupMembersCount, (__bridge NSString *)groupName];
+                        }
+                       
+                        UIAlertView *deleteConfirmAlert=[[UIAlertView alloc]initWithTitle:@"Import Contacts" message:alertMessage delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+                        deleteConfirmAlert.tag=2;
+                        [deleteConfirmAlert show];
+                        
+                        
+                    
+                        //                        
+                    }
+                    else {
+                        
+                        
+                        
+                        [appDelegate displayNotification:@"This group does not have any members to import." forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+                        
+                    }
+                    
+                    if (group) {
+                        CFRelease(group);
+                    }
+                    if (groupMembers) {
+                        CFRelease(groupMembers);
+                    }
+                }
+                else {
+                    [appDelegate displayNotification:@"Unable to find Group. Must specify an existing Address Book group with members to import." forDuration:4.0 location:kPTTScreenLocationTop inView:nil];
+                }
+                
+            }
+            
 //            NSString *currentNameString=[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
             
             
@@ -903,9 +976,7 @@
         }    
             break;  
     }
-if (addressBook) {
-    CFRelease(addressBook);
-}
+
 }    
 }
 
@@ -914,6 +985,7 @@ if (addressBook) {
 
     if (alertView.tag==1) 
     {
+    if (buttonIndex==1) {
         ABAddressBookRef addressBook=ABAddressBookCreate();
         
         BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
@@ -1010,14 +1082,23 @@ if (addressBook) {
             }
            
         }
-    if (buttonIndex==0) {
-        NSLog(@"button index is 0");
+   
+        NSLog(@"button index is %i", buttonIndex);
         
     }
     else {
         NSLog(@"button index is %i", buttonIndex);
     }
 
+    }
+    
+    else if (alertView.tag==2){
+        
+        NSLog(@"button index is %i", buttonIndex);
+
+        if (buttonIndex==1) {
+            [self importAllContactsInGroup];
+        }
     }
 
 }
@@ -1891,10 +1972,7 @@ if (addressBook) {
     }
      
    
-        if (addressBook) {
-            CFRelease(addressBook);
-        }
-        
+                
     
     }
 //    [[NSUserDefaults standardUserDefaults]  setValue:(NSString *)groupName forKey:kPTTAddressBookGroupName];
@@ -1910,7 +1988,233 @@ if (addressBook) {
 -(void)importAllContactsInGroup{
 
 
+    ABAddressBookRef addressBook;
+    addressBook=nil;
+    addressBook=ABAddressBookCreate();
+    
+    int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
+    
+    ABRecordRef group;
+    if (groupIdentifier>-1) {
+        group=(ABRecordRef )ABAddressBookGetGroupWithRecordID(addressBook, groupIdentifier);
+    }
+    
+    
+    if (addressBook && group) {
+        CFArrayRef allPeopleInGroup=(CFArrayRef ) ABGroupCopyArrayOfAllMembers(group);
+        
+        int peopleInGroupCount=CFArrayGetCount(allPeopleInGroup);
+        NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+       
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext];
+        [fetchRequest setEntity:entity];
 
+        NSError *error = nil;
+        NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (fetchedObjects == nil) {
+            //error handler
+        }
+
+    
+        
+        if (peopleInGroupCount>0) {
+            ABRecordRef  recordRef;
+            
+            CFStringRef recordRefFirstName;
+            
+            CFStringRef recordRefLastName;
+            
+            CFStringRef recordRefPrefix;
+            
+            CFStringRef recordRefSuffix;
+            
+            CFStringRef recordRefMiddleName;
+            
+            CFStringRef recordRefNotes;
+            
+            int personID;;
+            NSPredicate *checkIfRecordIDExists;
+            NSArray *filteredArray;
+            int numberImported=0;
+            for (int i=0; i<peopleInGroupCount; i++) {
+                
+                recordRef=CFArrayGetValueAtIndex(allPeopleInGroup, i);
+                
+                recordRefFirstName=ABRecordCopyValue((ABRecordRef) recordRef,( ABPropertyID) kABPersonFirstNameProperty);
+                
+                recordRefLastName=ABRecordCopyValue((ABRecordRef) recordRef,( ABPropertyID) kABPersonLastNameProperty);
+                
+                recordRefPrefix=ABRecordCopyValue((ABRecordRef) recordRef,( ABPropertyID) kABPersonPrefixProperty);
+                
+                recordRefSuffix=ABRecordCopyValue((ABRecordRef) recordRef,( ABPropertyID) kABPersonSuffixProperty);
+                
+                recordRefMiddleName=ABRecordCopyValue((ABRecordRef) recordRef,( ABPropertyID) kABPersonMiddleNameProperty);
+                
+                recordRefNotes=ABRecordCopyValue((ABRecordRef) recordRef,( ABPropertyID) kABPersonNoteProperty);
+                
+                 personID=(int)ABRecordGetRecordID(recordRef);
+                checkIfRecordIDExists=[NSPredicate predicateWithFormat:@"aBRecordIdentifier == %@",[NSNumber numberWithInt:personID]];
+                
+                
+                
+               filteredArray= [fetchedObjects filteredArrayUsingPredicate:checkIfRecordIDExists];
+                
+                if (filteredArray.count==0 &&CFStringGetLength(recordRefFirstName)>0&&CFStringGetLength(recordRefLastName)>0) {
+                    
+                    ClinicianEntity *clinician=[[ClinicianEntity alloc]initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
+                    
+                    if (recordRefPrefix && CFStringGetLength(recordRefPrefix)>0) 
+                    {
+                        [clinician setValue:(__bridge NSString*)recordRefPrefix forKey:@"prefix"];
+                        
+                    }
+                    if (recordRefFirstName &&  CFStringGetLength(recordRefFirstName)>0) {                  
+                        [clinician setValue:(__bridge NSString*)recordRefFirstName forKey:@"firstName"];
+                    }
+                    if (recordRefMiddleName && CFStringGetLength(recordRefMiddleName)>0) {    
+                       [ clinician setValue:(__bridge NSString*)recordRefMiddleName forKey:@"middleName"];
+                    }
+                    
+                    if (recordRefLastName && CFStringGetLength(recordRefLastName)>0) {
+                        [clinician setValue:(__bridge NSString*)recordRefLastName forKey:@"lastName"];
+                    }
+                    if (recordRefSuffix && CFStringGetLength(recordRefSuffix)>0) {  
+                        [clinician setValue:(__bridge NSString*)recordRefSuffix forKey:@"suffix"];
+                    }
+                        
+                        
+                    if (recordRefNotes && CFStringGetLength(recordRefNotes)>0) {  
+                            [clinician setValue:(__bridge NSString*)recordRefNotes forKey:@"notes"];
+                    }
+                    
+                    if (personID ) {  
+                        [clinician setValue:[NSNumber numberWithInt:personID] forKey:@"aBRecordIdentifier"];
+                    }
+                    
+                    recordRef=nil;
+                    
+                    recordRefFirstName=nil;
+                    
+                    recordRefLastName=nil;
+                    
+                    recordRefPrefix=nil;
+                    
+                    recordRefSuffix=nil;
+                    
+                    recordRefMiddleName=nil;
+                    
+                    recordRefNotes=nil;
+                    
+                    personID=0;
+                    checkIfRecordIDExists=nil;
+                    filteredArray=nil; 
+                    
+                    numberImported++;
+              
+                }
+                
+                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                
+                if ([managedObjectContext hasChanges]) {
+                    [appDelegate saveContext];
+                }
+                
+                 int numberIgnored=peopleInGroupCount-numberImported;
+                NSString *messageStr;
+               
+                
+                if (peopleInGroupCount==numberIgnored) {
+                    if (peopleInGroupCount==1) {
+                        messageStr =[NSString stringWithFormat:@"The contact was not imported because it already exists in the database."] ;
+                    }
+                    else {
+                         messageStr =[NSString stringWithFormat:@"The contacts were not imported because they already exist in the database."] ;
+                    }
+                }
+                else 
+                {
+                    if (numberImported==1) 
+                    {
+                        messageStr =[NSString stringWithFormat:@"Imported %i contact.",numberImported] ;
+                    }else 
+                    {
+                         messageStr =[NSString stringWithFormat:@"Imported %i contacts.",numberImported] ;
+                    }
+                   
+                    
+                    if (numberIgnored>0) {
+                        
+                        if (numberIgnored==1) {
+                            messageStr=[messageStr stringByAppendingString:[NSString stringWithFormat:@" The contact was not imported because it already exists in the database"]];
+                        }
+                        else {
+                            messageStr=[messageStr stringByAppendingString:[NSString stringWithFormat:@" %i contacts were not imported because they already exist in the database",numberIgnored]];
+                        }
+                        
+                    }
+                }
+               
+                
+                
+                
+                
+                if ([SCHelper is_iPad]) {
+                    if (appDelegate.cliniciansRootViewController_iPad &&appDelegate.cliniciansRootViewController_iPad.tableModel) {
+                        [appDelegate.cliniciansRootViewController_iPad.tableModel reloadBoundValues];
+                        [appDelegate.cliniciansRootViewController_iPad.tableView reloadData];
+                        
+                        
+                    }
+                }
+                else {
+                    if (appDelegate.clinicianViewController &&appDelegate.clinicianViewController.tableModel) {
+                        [appDelegate.clinicianViewController.tableModel reloadBoundValues];
+                        [appDelegate.clinicianViewController.tableView reloadData];
+                    }
+                }
+                
+                
+                
+                [appDelegate displayNotification:messageStr forDuration:6.0 location:kPTTScreenLocationTop inView:nil];
+            }
+            
+            if (recordRef) {
+                CFRelease(recordRef);
+            }
+            if (recordRefNotes) {
+                CFRelease(recordRefNotes);
+            }
+                if (recordRefPrefix) {
+                    CFRelease(recordRefPrefix);
+                    
+                }
+                
+                if (recordRefFirstName) {
+                    CFRelease(recordRefFirstName);
+                }
+                if (recordRefMiddleName) {
+                    CFRelease(recordRefMiddleName);
+                }
+                
+                if (recordRefLastName) {
+                    CFRelease(recordRefLastName);
+                }
+                if (recordRefSuffix) {
+                    CFRelease(recordRefSuffix);
+                    
+                }
+                
+                
+
+                
+                
+                
+            
+        }
+        
+        
+    }
 
 
 
