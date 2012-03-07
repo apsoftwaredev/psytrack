@@ -21,7 +21,9 @@ Acknoledgements:
 TO DO:
 
 
-
+4. fix download bar bug
+5. fix interpersonal relationships
+6. change immigration history
 
 5.	add the dates to the key entity and check if more than one record, add a the date to the client record on encrypt so it doesn’t get mixed up when using icloud, all the icloud stuff this all needs to be tested too.
 6.	Finish the encryption of the remaining fields in the client section
@@ -49,6 +51,8 @@ Phase II
 24.	 add teaching experience
 25.	 add advising
 26.	add the existing hours section
+27. add fees
+28 add bio
 
 begin adding reports
 27.	set up the pdf writer
