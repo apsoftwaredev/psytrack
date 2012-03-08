@@ -32,8 +32,8 @@
     NSString *textFieldAndLableNibName=nil;
     NSString *scaleDataCellNibName=nil;
     if ([SCHelper is_iPad]) {
-        textFieldAndLableNibName=@"TextFieldAndLabelCell_iPad";
-        shortFieldCellNibName=@"ShortFieldCell_iPad";
+//        textFieldAndLableNibName=@"TextFieldAndLabelCell_iPad";
+//        shortFieldCellNibName=@"ShortFieldCell_iPad";
         scaleDataCellNibName=@"ScaleDataCell_iPad";
 
         
@@ -41,8 +41,8 @@
         
     } else
     {
-        textFieldAndLableNibName=@"TextFieldAndLabelCell_iPhone";
-        shortFieldCellNibName=@"ShortFieldCell_iPhone";
+//        textFieldAndLableNibName=@"TextFieldAndLabelCell_iPhone";
+//        shortFieldCellNibName=@"ShortFieldCell_iPhone";
         scaleDataCellNibName=@"ScaleDataCell_iPhone";       
     }
    

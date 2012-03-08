@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
 		<string key="IBDocument.SystemVersion">11D50</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2177</string>
 		<string key="IBDocument.AppKitVersion">1138.32</string>
 		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">933</string>
+			<string key="NS.object.0">1173</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -37,15 +37,14 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="244404204">
 						<reference key="NSNextResponder" ref="332840002"/>
-						<int key="NSvFlags">274</int>
+						<int key="NSvFlags">279</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUILabel" id="981321683">
 								<reference key="NSNextResponder" ref="244404204"/>
-								<int key="NSvFlags">258</int>
-								<string key="NSFrameSize">{637, 94}</string>
+								<int key="NSvFlags">279</int>
+								<string key="NSFrame">{{-0.5, 0}, {1024, 94}}</string>
 								<reference key="NSSuperview" ref="244404204"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -75,7 +74,7 @@
 								</object>
 							</object>
 						</array>
-						<string key="NSFrameSize">{637, 94}</string>
+						<string key="NSFrameSize">{1024, 94}</string>
 						<reference key="NSSuperview" ref="332840002"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="981321683"/>
@@ -91,7 +90,7 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{637, 94}</string>
+				<string key="NSFrameSize">{1024, 94}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="244404204"/>
@@ -222,6 +221,6 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">933</string>
+		<string key="IBCocoaTouchPluginVersion">1173</string>
 	</data>
 </archive>

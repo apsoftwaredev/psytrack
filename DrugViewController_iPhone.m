@@ -466,7 +466,7 @@
     
     
    
-    CGFloat  drugFileSize;
+    CGFloat  drugFileSize=0;
 	if ([[NSFileManager defaultManager] fileExistsAtPath:drugFileURL.path]) {
 		/* retrieve file attributes */
 		NSError *error=nil;

@@ -82,7 +82,7 @@
 
 - (NSString *) stringByUrlEncoding
 {
-	return (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,  (__bridge CFStringRef)self,  NULL,  (CFStringRef)@"!*'();:@&=+$,/?%#[]",  kCFStringEncodingUTF8) ;
+	return (__bridge_transfer NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,  (__bridge CFStringRef)self,  NULL,  (CFStringRef)@"!*'();:@&=+$,/?%#[]",  kCFStringEncodingUTF8) ;
 }
 
 - (NSComparisonResult)compareDesc:(NSString *)aString

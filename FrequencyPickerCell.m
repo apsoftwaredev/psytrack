@@ -294,7 +294,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    NSInteger returnInteger;
+    NSInteger returnInteger=0;
     
     if (component==0) {
         returnInteger= 100;
@@ -324,7 +324,7 @@
 -(CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component{
     
     
-    float returnFloat;
+    float returnFloat=0;
     
     if (component==0) {
         returnFloat= 40.0;

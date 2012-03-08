@@ -28,6 +28,9 @@
     __weak UILabel *myLabel_;
     __weak UIView *labelContainerView_;
     PTTAppDelegate *appDelegate;
+    NSInteger screenLocationToSetView;
+   
+
 }
 
 @property (nonatomic, strong) NSMutableDictionary *blockDictionary;

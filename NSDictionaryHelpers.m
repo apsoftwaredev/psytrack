@@ -30,7 +30,7 @@
 	// we check if it is the correct type and only return it if it is
 	if ([(__bridge id)plist isKindOfClass:[NSDictionary class]])
 	{
-		return (__bridge NSDictionary *)plist ;
+		return (__bridge_transfer  NSDictionary *)plist ;
 	}
 	else
 	{

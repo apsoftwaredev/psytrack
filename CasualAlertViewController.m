@@ -79,6 +79,8 @@ NSInteger intSort(id num1, id num2, void *context)
 
 -(void)displayRegularAlert:(NSString*)alertText forDuration:(float)seconds location:(NSInteger )screenLocation  inView:(UIView *)containerView {
 
+    screenLocationToSetView=screenLocation;
+    self.labelContainerView=containerView;
       NSLog(@"alert text is %@",alertText);
     durationSecondsFloat=seconds;
    
@@ -149,20 +151,29 @@ NSInteger intSort(id num1, id num2, void *context)
 //    }
 //    else 
 //    {
-         float additionalTopSpace,additionalBottomSpace;
+    float additionalTopSpace,additionalBottomSpace;
     CGRect appWindowFrame;
-    if (containerView) {
-        [containerView addSubview:self.view];
+    UIInterfaceOrientation currentOrientation = 
+    [UIApplication sharedApplication].statusBarOrientation;
+
+    if (labelContainerView_) {
+        [labelContainerView_ addSubview:self.view];
         
-        if ([containerView superclass]==[UIWindow class]) {
-            additionalTopSpace=additionalTopSpace+20;
-        }
-        additionalTopSpace =+self.view.frame.size.height;
+//        if ([labelContainerView_ superclass]==[UIWindow class]) {
+//            additionalTopSpace=additionalTopSpace+20;
+//            
+//            
+//        }
+       
+                
+            additionalTopSpace =+self.view.frame.size.height;
         
+        
+     
        
         
         additionalBottomSpace=0;
-        appWindowFrame=(CGRect )[containerView frame];
+        appWindowFrame=(CGRect )[labelContainerView_ frame];
     }
     else
     {
@@ -170,7 +181,18 @@ NSInteger intSort(id num1, id num2, void *context)
         [tabBarController.view addSubview:self.view];
         additionalTopSpace =32;
         additionalBottomSpace=49;
+     
         appWindowFrame=(CGRect )[appDelegate.window frame];
+        
+        
+        if ((currentOrientation==UIInterfaceOrientationLandscapeLeft||currentOrientation==UIInterfaceOrientationLandscapeRight)&&[[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+        
+            additionalTopSpace =32+10;
+         
+        
+        }
+        
+        
     }
         
          [UIView setAnimationDelegate:self];
@@ -180,7 +202,7 @@ NSInteger intSort(id num1, id num2, void *context)
        
     self.view.tag=645;
         appWindowFrame.size.height=appWindowFrame.size.height-additionalTopSpace;
-      
+    appWindowFrame.size.width=appWindowFrame.size.width;
 //        switch (screenLocation) {
 //            case kScreenLocationTop:
 //                 frame = CGRectMake(0,-94,appWindowFrame.size.width,94);
@@ -213,10 +235,7 @@ NSInteger intSort(id num1, id num2, void *context)
         
 //        CGRect myFrame=(CGRect) self.view.frame;
         [self.view setFrame:frame];
-       
-        
-       
-       
+            
         CGPoint stopPoint=[self makeStopPointForContainerSuperViewFrame:(CGRect)appWindowFrame  labelContainerFrame:(CGRect)myViewFrame location:(NSInteger )screenLocation addtionalTopSpace:(float)additionalTopSpace additionalBottomSpace:(float)additionalBottomSpace];
         
         
@@ -259,13 +278,127 @@ NSInteger intSort(id num1, id num2, void *context)
              
  }
 
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+
+
+    [self makeFrame];
+
+
+
+}
+-(void )makeFrame{
+
+    float additionalTopSpace,additionalBottomSpace;
+    CGRect appWindowFrame;
+    UIInterfaceOrientation currentOrientation = 
+    [UIApplication sharedApplication].statusBarOrientation;
+    
+    if (labelContainerView_) {
+        [labelContainerView_ addSubview:self.view];
+        
+//        if ([labelContainerView_ superclass]==[UIWindow class]) {
+//            additionalTopSpace=additionalTopSpace+20;
+//        
+//       
+//        
+//        
+//        }
+//        
+        
+        
+        
+            
+            additionalTopSpace =+self.view.frame.size.height-20;
+            
+            
+      
+        
+        
+        additionalBottomSpace=0;
+        appWindowFrame=(CGRect )[labelContainerView_ frame];
+    }
+    else
+    {
+        UITabBarController *tabBarController=(UITabBarController*)appDelegate.tabBarController;
+        [tabBarController.view addSubview:self.view];
+        additionalTopSpace =32;
+        additionalBottomSpace=49;
+        
+        appWindowFrame=(CGRect )[appDelegate.window frame];
+        
+        
+        if ((currentOrientation==UIInterfaceOrientationLandscapeLeft||currentOrientation==UIInterfaceOrientationLandscapeRight)&&[[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
+            
+            additionalTopSpace =32+10;
+            
+            
+        }
+        
+        
+    }
+    
+    [UIView setAnimationDelegate:self];
+    
+    
+    
+    
+    self.view.tag=645;
+    if (screenLocationToSetView==kPTTScreenLocationTop) {
+        appWindowFrame.size.height=appWindowFrame.size.height-additionalTopSpace;
+    }else if (screenLocationToSetView ==kPTTScreenLocationBottom) 
+    {
+        appWindowFrame.size.height=appWindowFrame.size.height+additionalBottomSpace;
+    }
+    
+    appWindowFrame.size.width=appWindowFrame.size.width;
+    //        switch (screenLocation) {
+    //            case kScreenLocationTop:
+    //                 frame = CGRectMake(0,-94,appWindowFrame.size.width,94);
+    //                 stopPoint= CGPointMake (0,65);
+    //                break;
+    //            case kScreenLocationMiddle:
+    //                 frame = CGRectMake(0,appWindowFrame.size.height/2-94/2,appWindowFrame.size.width,94);
+    //                stopPoint= CGPointMake (0,appWindowFrame.size.height/2-94/2);
+    //                break;
+    //            case kScreenLocationLeft:
+    //                frame = CGRectMake(-appWindowFrame.size.width,appWindowFrame.size.height/2-94/2,appWindowFrame.size.width,94);
+    //                stopPoint= CGPointMake (0,appWindowFrame.size.height/2-94/2);
+    //                break;
+    //            case kScreenLocationRight:
+    //                frame = CGRectMake(appWindowFrame.size.width,appWindowFrame.size.height/2-94/2,appWindowFrame.size.width,94);
+    //                stopPoint= CGPointMake (0,appWindowFrame.size.height/2-94/2);
+    //                break;
+    //            case kScreenLocationBottom:
+    //                frame = CGRectMake(0,appWindowFrame.size.height+94,appWindowFrame.size.width,94);
+    //                stopPoint= CGPointMake (0,appWindowFrame.size.height-49-94);
+    //                break;
+    //            default:
+    //                break;
+    //        }
+    
+    
+    CGRect myViewFrame=(CGRect ) self.view.frame;
+    
+    CGRect frame= [self makeFrameForContainerSuperViewFrame:(CGRect)appWindowFrame labelContainerFrame:(CGRect)myViewFrame location:(NSInteger )screenLocationToSetView];
+    
+    //        CGRect myFrame=(CGRect) self.view.frame;
+    [self.view setFrame:frame];
+
+
+
+
+
+
+
+
+}
+
 -(CGPoint )makeStopPointForContainerSuperViewFrame:(CGRect)superViewFrame labelContainerFrame:(CGRect)labelContainer location:(NSInteger )screenLocation addtionalTopSpace:(float)additionalTopSpace additionalBottomSpace:(float)additionalBottomSpace{
 
     
-    float labelContainerWidth,labelContainerHeight,superViewFrameWidth,superViewFrameHeight;
-    labelContainerWidth=labelContainer.size.width;
+    float labelContainerHeight,superViewFrameHeight;
     labelContainerHeight=labelContainer.size.height;
-    superViewFrameWidth=superViewFrame.size.width;
+   
     superViewFrameHeight=superViewFrame.size.height;
     CGPoint stopPoint;
     switch (screenLocation) {
@@ -305,13 +438,50 @@ NSInteger intSort(id num1, id num2, void *context)
     
     
    NSLog(@"interfacce orentation is %i",self.interfaceOrientation);
-    float labelContainerWidth,labelContainerHeight,superViewFrameWidth,superViewFrameHeight;
-    labelContainerWidth=labelContainer.size.width;
+    float labelContainerHeight,superViewFrameWidth,superViewFrameHeight;
+    
     labelContainerHeight=labelContainer.size.height;
     superViewFrameWidth=superViewFrame.size.width;
     superViewFrameHeight=superViewFrame.size.height;
     CGRect frame;
   
+    UIInterfaceOrientation currentOrientation = 
+    [UIApplication sharedApplication].statusBarOrientation;
+    
+    if (currentOrientation==UIInterfaceOrientationLandscapeLeft||currentOrientation==UIInterfaceOrientationLandscapeRight)
+    {
+        
+        
+        switch (screenLocation) 
+        {
+            case kPTTScreenLocationTop:
+                frame = CGRectMake(0,-labelContainerHeight,superViewFrameHeight+49,labelContainerHeight);
+                
+                break;
+            case kPTTScreenLocationMiddle:
+                frame = CGRectMake(0,superViewFrameWidth/2-labelContainerHeight/2,superViewFrameHeight+49,labelContainerHeight);
+                
+                break;
+            case kPTTScreenLocationLeft:
+                frame = CGRectMake(-superViewFrameHeight,superViewFrameWidth/2-labelContainerHeight/2,superViewFrameHeight+49,labelContainerHeight);
+                
+                break;
+            case kPTTScreenLocationRight:
+                frame = CGRectMake(superViewFrameWidth,superViewFrameWidth/2-labelContainerHeight/2,superViewFrameHeight+49,labelContainerHeight);
+                
+                break;
+            case kPTTScreenLocationBottom:
+                frame = CGRectMake(0,superViewFrameWidth+labelContainerHeight,superViewFrameWidth+49,labelContainerHeight);
+                
+                break;
+            default:
+                break;
+        }
+    }
+        else 
+    {
+        
+    
     switch (screenLocation) {
         case kPTTScreenLocationTop:
             frame = CGRectMake(0,-labelContainerHeight,superViewFrameWidth,labelContainerHeight);
@@ -337,7 +507,7 @@ NSInteger intSort(id num1, id num2, void *context)
             break;
     }
     
-
+    }
     
     
     

@@ -99,7 +99,7 @@
    
     NSInteger heightTallInchesOrCentemeters =(NSInteger )[[self.boundObject valueForKey:@"heightTall"] integerValue]; 
     float meters, centimeters,feet,inches;
-    NSInteger heightTallFtOrM;
+    NSInteger heightTallFtOrM=0;
     NSString *littleUnit;
     componentChanged=3;
     if ([bigUnit isEqualToString:@"ft"]) {
@@ -170,7 +170,7 @@
     NSInteger thirdComponent=[picker selectedRowInComponent:2];
     NSString *bigUnit = [self bigUnitForRow:[picker selectedRowInComponent:1]];
   
-    NSInteger heightTall;  //going to be centemeters or inches
+    NSInteger heightTall=0;  //going to be centemeters or inches
     if ([bigUnit isEqualToString:@"ft"]) {
         heightTall=(firstComponent*12)+thirdComponent;
     }
@@ -293,7 +293,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    NSInteger returnInteger;
+    NSInteger returnInteger=0;
    
    
     NSLog(@"component %i",component);
@@ -453,7 +453,7 @@
         NSInteger heighTallFtOrM=firstComponent;
         
         NSInteger heighTallInOrCm=thirdComponent;
-        BOOL convertToMetric;
+        BOOL convertToMetric=FALSE;
         NSLog(@"big unit is %@",bigUnit);
         NSLog(@"littleUnit is %@",littleUnit);
         if (component==1) {
@@ -509,7 +509,7 @@
         }
         
         if (convertToMetric) {
-            NSInteger inchesInteger;     
+            NSInteger inchesInteger=0;     
             inchesInteger=thirdComponent+(firstComponent *12);
             
             heighTallInOrCm=[self convertToCentemetersComponentFromInches:inchesInteger];
@@ -527,7 +527,7 @@
             
         }
         else if (convertToMetric==FALSE){
-            float inchesFloat,feetFloat,centemetersFloat;
+            float inchesFloat=0,feetFloat,centemetersFloat=0;
             NSInteger inchesInteger,feetInteger,centemetersInteger;
             centemetersInteger=thirdComponent+(firstComponent *100);
             

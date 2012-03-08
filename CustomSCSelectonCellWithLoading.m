@@ -30,7 +30,7 @@
     
     
     // create the view that will execute our animation
-    CGRect imageViewFrame=CGRectMake(18, 14, 36, 14);
+    CGRect imageViewFrame;
     if ([SCHelper is_iPad]) 
         imageViewFrame=CGRectMake(self.frame.size.width-110, (self.frame.size.height/2)-7, 45,14);
         else

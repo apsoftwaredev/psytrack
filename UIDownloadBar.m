@@ -17,7 +17,7 @@
 @synthesize DownloadRequest,
 DownloadConnection,
 receivedData,
-
+delegate,
 percentComplete,
 operationIsOK,
 appendIfExist,

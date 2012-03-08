@@ -462,29 +462,29 @@
     
     
     
-    
-    //define a gregorian calandar
-    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    
-    //define the calandar unit flags
-    NSUInteger unitFlags = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-    
-    //define the date components
-    NSDateComponents *dateComponents = [gregorianCalendar components:unitFlags
-                                                            fromDate:startTime
-                                                              toDate:endTime
-                                                             options:0];
-    
-    
-    
-    
-    float day, hour, minute, second;
-    day=[dateComponents day];
-    hour=[dateComponents hour];
-    minute=[dateComponents minute];
-    second= [dateComponents second];
-    
-  
+//    
+//    //define a gregorian calandar
+//    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+//    
+//    //define the calandar unit flags
+//    NSUInteger unitFlags = NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+//    
+//    //define the date components
+//    NSDateComponents *dateComponents = [gregorianCalendar components:unitFlags
+//                                                            fromDate:startTime
+//                                                              toDate:endTime
+//                                                             options:0];
+//    
+//    
+//    
+//    
+//    float day, hour, minute, second;
+//    day=[dateComponents day];
+//    hour=[dateComponents hour];
+//    minute=[dateComponents minute];
+//    second= [dateComponents second];
+//    
+//  
     
     
     //    }

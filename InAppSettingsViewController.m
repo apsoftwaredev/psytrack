@@ -146,7 +146,7 @@
     
     if ((groupIdentifier==-1||groupIdentifier==0||!groupCount)&&autoAddClinicianToGroup) {
         
-        [ self changeABGroupNameTo:(NSString *)groupName addNew:NO];
+        [ self changeABGroupNameTo:(NSString *)groupName addNew:NO checkExisting:YES];
         
         
     }
@@ -523,7 +523,7 @@
             SCSelectionCell *selectionCell=(SCSelectionCell *)[section cellAtIndex:0];
             textField.font=selectionCell.label.font;
             textField.textColor=selectionCell.label.textColor;
-            
+            NSLog(@"group name is %@", groupName);
             [tableViewModel.modelKeyValues setValue:groupName forKey:@"groupNameString"];
             [tableViewModel.modelKeyValues setValue:[NSNumber numberWithBool:autoAddClinicianToGroup] forKey:@"autoAddClinicianToGroup"];
         }
@@ -602,7 +602,7 @@
             
             if ([groupIdentifierNumber isEqualToNumber:[NSNumber numberWithInt:(int)-1]]||[groupIdentifierNumber isEqualToNumber:[NSNumber numberWithInt:(int)0]]||!groupCount) {
                 
-               [ self changeABGroupNameTo:nil addNew:YES];
+               [ self changeABGroupNameTo:nil addNew:YES checkExisting:NO];
                 
                 
             }
@@ -699,7 +699,7 @@
                 
                 NSNumber *selectedIndex=nil;
                 
-              
+                BOOL   autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
                 
 //                int groupCount=ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
                 
@@ -709,8 +709,12 @@
                 
 //                if (addNew||[groupIdentifierNumber isEqualToNumber:[NSNumber numberWithInt:(int)-1]]||[groupIdentifierNumber isEqualToNumber:[NSNumber numberWithInt:(int)0]]||!groupCount) {
                     
-                    [ self changeABGroupNameTo:groupNameString addNew:YES];
+                
+                [[NSUserDefaults standardUserDefaults]setBool:TRUE forKey:kPTAutoAddClinicianToGroup];
                     
+                [ self changeABGroupNameTo:groupNameString addNew:YES checkExisting:NO];
+                
+                [[NSUserDefaults standardUserDefaults] setBool:autoAddClinicianToGroup forKey:kPTAutoAddClinicianToGroup];
                     
 //                }
 //                groupIdentifierNumber=(NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupIdentifier];
@@ -768,8 +772,10 @@
                     
                     selectedIndex=(NSNumber *)[ dictionaryArrayOfStringsIndexForGroupIdentifierKey valueForKey:[groupIdentifierNumber stringValue]];
                     
+                    if (selectedIndex!=nil) {
+                        [aBGroupSelectionCell setSelectedItemIndex:selectedIndex];
+                    }
                     
-                    [aBGroupSelectionCell setSelectedItemIndex:selectedIndex];
                     
 
                     aBGroupSelectionCell.label.text=groupNameString;
@@ -831,7 +837,7 @@
             
             ABAddressBookRef addressBook=ABAddressBookCreate();
             
-            BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
+//            BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
             
             int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
             
@@ -840,7 +846,7 @@
             
                 int CFGroupCount = ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
             
-                if (CFGroupCount>1 ||( !autoAddClinicianToGroup && CFGroupCount >0)) {
+                if ( CFGroupCount >0) {
                     
                     
                    
@@ -988,7 +994,7 @@
     if (buttonIndex==1) {
         ABAddressBookRef addressBook=ABAddressBookCreate();
         
-        BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
+//        BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
         
         int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
         
@@ -998,7 +1004,7 @@
             
             int CFGroupCount = ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
             
-            if ((CFGroupCount>1 && autoAddClinicianToGroup)||( !autoAddClinicianToGroup && CFGroupCount >0)) {
+            if ( CFGroupCount >0) {
                 
                 
                 
@@ -1060,8 +1066,10 @@
                         UITextField *textField=(UITextField *)[controlCell viewWithTag:1];
                         textField.text=@"";
                         
-                        
-                   
+                        [tableModel.modelKeyValues setValue:@"" forKey:@"groupNameString"];
+                       [ tableModel.modelKeyValues setValue:[NSNumber numberWithBool:FALSE] forKey:@"autoAddClinicianToGroup"];
+                        [[NSUserDefaults standardUserDefaults]setBool:FALSE forKey:kPTAutoAddClinicianToGroup];
+                        [controlCell reloadBoundValue];
                         
                         NSMutableArray *mutableArray=[NSMutableArray arrayWithArray:selectionCell.items];
                         if ([selectionCell.selectedItemIndex integerValue]<selectionCell.items.count) {
@@ -1082,7 +1090,9 @@
             }
            
         }
-   
+        if (addressBook) {
+            CFRelease(addressBook);
+        }
         NSLog(@"button index is %i", buttonIndex);
         
     }
@@ -1293,7 +1303,7 @@
                         
                         int groupCount=ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
                         
-                        if (!groupCount) {[self changeABGroupNameTo:(NSString *)[NSString string] addNew:YES];}
+                        if (!groupCount) {[self changeABGroupNameTo:(NSString *)[NSString string] addNew:YES checkExisting:NO];}
                         
                         groupCount=ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
                         
@@ -1356,9 +1366,103 @@
                 
                 
                 NSLog(@"value changed for auto add is %i", [(NSNumber *)[tableViewModel.modelKeyValues valueForKey:@"autoAddClinicianToGroup"]boolValue]);
-                
-                    [[NSUserDefaults standardUserDefaults] setBool:[(NSNumber *)[tableViewModel.modelKeyValues valueForKey:@"autoAddClinicianToGroup"]boolValue] forKey:kPTAutoAddClinicianToGroup];
-                    [[NSUserDefaults standardUserDefaults]synchronize];
+                    BOOL autoAddClinicianToGroup=(BOOL)[(NSNumber *)[tableViewModel.modelKeyValues valueForKey:@"autoAddClinicianToGroup"]boolValue];
+                    
+                    BOOL autoAddCliniciansAlreadySet=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
+                    
+                    //so it runs only if the switch has changed.
+                    if (autoAddClinicianToGroup!=autoAddCliniciansAlreadySet) {
+                    
+                    [[NSUserDefaults standardUserDefaults] setBool:autoAddClinicianToGroup forKey:kPTAutoAddClinicianToGroup];
+                    
+                    
+                    if (autoAddClinicianToGroup) {
+                        
+                         NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
+                        
+                         [[NSUserDefaults standardUserDefaults] setBool:autoAddClinicianToGroup forKey:kPTAutoAddClinicianToGroup];
+                       
+                        [self changeABGroupNameTo:groupNameString addNew:NO checkExisting:YES];
+                        
+                        [self  tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath];
+                        [cell reloadBoundValue];
+                       [[NSUserDefaults standardUserDefaults] setBool:FALSE forKey:kPTAutoAddClinicianToGroup];
+                        
+                        groupArray=[self addressBookGroupsArray];
+                        
+                        [[NSUserDefaults standardUserDefaults] setBool:TRUE forKey:kPTAutoAddClinicianToGroup];
+                       
+                        
+                        
+                        int  groupCount=groupArray.count;
+                        
+                        
+                        
+                        
+                        
+                        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
+                        SCSelectionCell *aBGroupSelectionCell=(SCSelectionCell *)[section cellAtIndex:0];
+
+                        NSNumber *selectedIndex=nil;
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        if (groupCount) {
+                            //                   NSNumber * groupIdentifierNumber=[dictionaryABGroupIdentifierValueForArrayOfStringsIndexKey valueForKey:(NSString *)[selectedIndex stringValue]];
+                            //                    
+                            
+                            
+                            //                    int groupIdentifierInt=[groupIdentifierNumber intValue];
+                            
+                            //                    ABRecordRef CFGroupRecord=(ABRecordRef)ABAddressBookGetGroupWithRecordID((ABAddressBookRef )addressBook, (ABRecordID)groupIdentifierInt);
+                            ////                    
+                            //                    
+                            //                    ABRecordSetValue((ABRecordRef) CFGroupRecord, (ABPropertyID) kABGroupNameProperty, (__bridge  CFStringRef)groupNameString, nil);
+                            
+                            
+                            //                    BOOL wantToSaveChanges=TRUE;
+                            //                    if (ABAddressBookHasUnsavedChanges(addressBook)) {
+                            //                        
+                            //                        if (wantToSaveChanges) {
+                            //                            bool didSave=FALSE;
+                            //                            didSave = ABAddressBookSave(addressBook, nil);
+                            //                            
+                            //                            if (!didSave) {/* Handle error here. */  NSLog(@"addressbook did not save");}
+                            //                            else NSLog(@"addressbook saved");
+                            //                        } 
+                            //                        else {
+                            //                            NSLog(@"address book revert becaus no changes");
+                            //                            ABAddressBookRevert(addressBook);
+                            //                            
+                            //                        }
+                            //                        
+                            //                    }
+                            NSNumber *groupIdentifierNumber=(NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupIdentifier];
+                            aBGroupSelectionCell.items=groupArray;
+                            selectedIndex=nil;
+                            
+                            selectedIndex=(NSNumber *)[ dictionaryArrayOfStringsIndexForGroupIdentifierKey valueForKey:[groupIdentifierNumber stringValue]];
+                            
+                            if (selectedIndex!=nil) {
+                                [aBGroupSelectionCell setSelectedItemIndex:selectedIndex];
+                            }
+                            
+                            
+                            NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
+                            aBGroupSelectionCell.label.text=groupNameString;
+                            NSLog(@"group names are %@",aBGroupSelectionCell.items);
+                            NSLog(@"selected item index is %i",[selectedIndex intValue]);
+                        }
+
+                        
+                    }
+                    
+                    
+                    
                     //                        
                     //                        [[NSUserDefaults standardUserDefaults]synchronize];
                 
@@ -1405,8 +1509,8 @@
                 //                    //                    [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[tableViewModel indexPathForCell:groupSelectionCell]] withRowAnimation:(UITableViewRowAnimation)UITableViewRowAnimationRight];
                 //                    
                 //                }         
-                
-                
+                [[NSUserDefaults standardUserDefaults]synchronize];
+                }
             }
                 break;    
                 
@@ -1491,7 +1595,7 @@
     }
     @finally 
     {
-        
+        BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
         ABRecordRef group=nil;
        
         int groupIdentifier=-1;
@@ -1543,7 +1647,7 @@
         
         
         
-        if (!CFStringGetLength(CFGroupName)) {
+        if (!CFStringGetLength(CFGroupName) && autoAddClinicianToGroup) {
             NSString *clinicians=@"Clinicians";
             CFGroupName=(__bridge CFStringRef)clinicians;
             [[NSUserDefaults standardUserDefaults] setValue:(__bridge NSString*)CFGroupName forKeyPath:kPTTAddressBookGroupName];
@@ -1557,7 +1661,7 @@
             CFArrayRef CFGroupsCheckNameArray;
             CFStringRef CFGroupNameCheck ;
             ABRecordRef groupInCheckNameArray;
-            if (groupCount&&!group) {
+            if (groupCount&&!group ) {
                 
                 CFGroupsCheckNameArray= (CFArrayRef )ABAddressBookCopyArrayOfAllGroups((ABAddressBookRef) addressBook);
                 NSLog(@"cggroups array %@",CFGroupsCheckNameArray);
@@ -1604,7 +1708,7 @@
         
     
         
-        [self changeABGroupNameTo:(__bridge NSString*) CFGroupName addNew:YES];
+        [self changeABGroupNameTo:(__bridge NSString*) CFGroupName addNew:YES checkExisting:NO];
         groupIdentifier=(NSInteger )[(NSNumber *)[[NSUserDefaults standardUserDefaults]valueForKey:kPTTAddressBookGroupIdentifier]intValue];
         group=ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, groupIdentifier);
         
@@ -1666,7 +1770,7 @@
     
     if ([groupIdentifierNumber isEqualToNumber:[NSNumber numberWithInt:(int)-1]]||[groupIdentifierNumber isEqualToNumber:[NSNumber numberWithInt:(int)0]]||!groupCount) {
         
-        [ self changeABGroupNameTo:nil addNew:YES];
+        [ self changeABGroupNameTo:nil addNew:YES checkExisting:NO];
         
         
     }
@@ -1725,7 +1829,7 @@
 }
 
 
--(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew{
+-(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew checkExisting:(BOOL)checkExisting{
     
     ABAddressBookRef addressBook;
     @try 
@@ -1747,15 +1851,19 @@
     @finally 
     {
    
-        ABRecordRef group;
+        ABRecordRef group=nil;
         int groupIdentifier;
        int groupCount=ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
-        if (!groupName ||!groupName.length) {
+        BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
+        if ((!groupName ||!groupName.length||checkExisting)&&autoAddClinicianToGroup) {
             
             if ([[NSUserDefaults standardUserDefaults] objectForKey:kPTTAddressBookGroupName]) {
                 
-                groupName=(NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];  
+                if (!checkExisting) {
                 
+                    groupName=(NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];  
+                    
+                }
                 //        }
                 if (!groupName ||!groupName.length) {
                     groupName=@"Clinicians";
@@ -1794,9 +1902,9 @@
         
     
     //should not ad new
-    CFArrayRef CFGroupsCheckNameArray;
-    CFStringRef CFGroupNameCheck ;
-    ABRecordRef groupInCheckNameArray;
+    CFArrayRef CFGroupsCheckNameArray=nil;
+    CFStringRef CFGroupNameCheck =nil;
+    ABRecordRef groupInCheckNameArray=nil;
     if (groupCount) 
     {
         
@@ -1850,7 +1958,7 @@
         
         if (CFGroupNameCheck) {
             CFRelease(CFGroupNameCheck);
-        }
+        }  
         }
        
         
@@ -1869,7 +1977,7 @@
         
     }
     
-    if (!group ||addNew) {
+    if ((!group ||addNew) && autoAddClinicianToGroup) {
         
                
         if (!addressBook) {
@@ -1941,9 +2049,13 @@
     {
     
         BOOL wantToSaveChanges=TRUE;
-        groupIdentifier=ABRecordGetRecordID(group);
+       
+        if (group) {
+            groupIdentifier=ABRecordGetRecordID(group);
+        }
         
-        if (groupIdentifier>0) {
+        
+        if (groupIdentifier>-1) {
       
         [[NSUserDefaults standardUserDefaults] setInteger:(int )groupIdentifier forKey:kPTTAddressBookGroupIdentifier];
         
@@ -1994,7 +2106,7 @@
     
     int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
     
-    ABRecordRef group;
+    ABRecordRef group=nil;
     if (groupIdentifier>-1) {
         group=(ABRecordRef )ABAddressBookGetGroupWithRecordID(addressBook, groupIdentifier);
     }
@@ -2038,7 +2150,23 @@
             NSArray *filteredArray;
             int numberImported=0;
             for (int i=0; i<peopleInGroupCount; i++) {
+                recordRef=nil;
                 
+                recordRefFirstName=nil;
+                
+                recordRefLastName=nil;
+                
+                recordRefPrefix=nil;
+                
+                recordRefSuffix=nil;
+                
+                recordRefMiddleName=nil;
+                
+                recordRefNotes=nil;
+                
+                
+                checkIfRecordIDExists=nil;
+                filteredArray=nil; 
                 recordRef=CFArrayGetValueAtIndex(allPeopleInGroup, i);
                 
                 recordRefFirstName=ABRecordCopyValue((ABRecordRef) recordRef,( ABPropertyID) kABPersonFirstNameProperty);
@@ -2060,7 +2188,8 @@
                 
                filteredArray= [fetchedObjects filteredArrayUsingPredicate:checkIfRecordIDExists];
                 
-                if (filteredArray.count==0 &&CFStringGetLength(recordRefFirstName)>0&&CFStringGetLength(recordRefLastName)>0) {
+                if (filteredArray.count==0 &&CFStringGetLength(recordRefFirstName)>0&&CFStringGetLength(recordRefLastName)>0) 
+                {
                     
                     ClinicianEntity *clinician=[[ClinicianEntity alloc]initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
                     
@@ -2092,28 +2221,35 @@
                         [clinician setValue:[NSNumber numberWithInt:personID] forKey:@"aBRecordIdentifier"];
                     }
                     
-                    recordRef=nil;
                     
-                    recordRefFirstName=nil;
-                    
-                    recordRefLastName=nil;
-                    
-                    recordRefPrefix=nil;
-                    
-                    recordRefSuffix=nil;
-                    
-                    recordRefMiddleName=nil;
-                    
-                    recordRefNotes=nil;
-                    
-                    personID=0;
-                    checkIfRecordIDExists=nil;
-                    filteredArray=nil; 
                     
                     numberImported++;
               
                 }
+               
+                if (recordRefNotes) {
+                    CFRelease(recordRefNotes);
+                }
+                if (recordRefPrefix) {
+                    CFRelease(recordRefPrefix);
+                    
+                }
                 
+                if (recordRefFirstName) {
+                    CFRelease(recordRefFirstName);
+                }
+                if (recordRefMiddleName) {
+                    CFRelease(recordRefMiddleName);
+                }
+                
+                if (recordRefLastName) {
+                    CFRelease(recordRefLastName);
+                }
+                if (recordRefSuffix) {
+                    CFRelease(recordRefSuffix);
+                    
+                }
+            }
                 PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
                 
                 if ([managedObjectContext hasChanges]) {
@@ -2179,45 +2315,24 @@
                 [appDelegate displayNotification:messageStr forDuration:6.0 location:kPTTScreenLocationTop inView:nil];
             }
             
-            if (recordRef) {
-                CFRelease(recordRef);
-            }
-            if (recordRefNotes) {
-                CFRelease(recordRefNotes);
-            }
-                if (recordRefPrefix) {
-                    CFRelease(recordRefPrefix);
-                    
-                }
-                
-                if (recordRefFirstName) {
-                    CFRelease(recordRefFirstName);
-                }
-                if (recordRefMiddleName) {
-                    CFRelease(recordRefMiddleName);
-                }
-                
-                if (recordRefLastName) {
-                    CFRelease(recordRefLastName);
-                }
-                if (recordRefSuffix) {
-                    CFRelease(recordRefSuffix);
-                    
-                }
+
                 
                 
 
                 
                 
-                
+        if (allPeopleInGroup) {
+            CFRelease(allPeopleInGroup);
+        }  
             
-        }
+        
         
         
     }
 
-
-
+if (addressBook) {
+    CFRelease(addressBook);
+}
 
 }
 

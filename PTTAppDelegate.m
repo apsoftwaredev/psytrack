@@ -447,7 +447,7 @@ NSLog(@"data length is %i",[data length]);
     }
     
     
-    return (__bridge NSString *)string;
+    return (__bridge_transfer NSString *)string;
 }
 
 -(void)setLCYLockPlist{
@@ -2143,8 +2143,8 @@ duration:(NSTimeInterval)1.0];
 
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSUndoManager *undoManager=[[NSUndoManager alloc]init];
-    undoManager=(NSUndoManager *)__drugsManagedObjectContext.undoManager;
+//    NSUndoManager *undoManager=[[NSUndoManager alloc]init];
+//    undoManager=(NSUndoManager *)__drugsManagedObjectContext.undoManager;
 
     
     
@@ -3106,7 +3106,7 @@ duration:(NSTimeInterval)1.0];
 
 
 NSLog(@"completed setting up drug store opperation");
-    [__drugsManagedObjectContext setUndoManager:undoManager];
+//    [__drugsManagedObjectContext setUndoManager:undoManager];
 
     return TRUE;
 

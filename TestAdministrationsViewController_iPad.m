@@ -561,15 +561,15 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
     
 	self.eventsList = [[NSMutableArray alloc] initWithArray:0];
     // find local source
-    EKSource *localSource = nil;
-    for (EKSource *source in eventStore.sources){
-        if (source.sourceType == EKSourceTypeLocal)
-        {
-            localSource = source;
-            
-            break;
-        }
-    }
+//    EKSource *localSource = nil;
+//    for (EKSource *source in eventStore.sources){
+//        if (source.sourceType == EKSourceTypeLocal)
+//        {
+//            localSource = source;
+//            
+//            break;
+//        }
+//    }
     
     self.psyTrackCalendar=[ self eventEditViewControllerDefaultCalendarForNewEvents:nil];
     

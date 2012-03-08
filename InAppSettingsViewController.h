@@ -47,6 +47,6 @@
 
 - (EKCalendar *)defaultCalendarName;
 -(NSArray *)addressBookGroupsArray;
--(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew;
+-(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew checkExisting:(BOOL)checkExisting;
 -(void)importAllContactsInGroup;
 @end
