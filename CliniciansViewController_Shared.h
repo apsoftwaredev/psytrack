@@ -33,7 +33,8 @@ NSManagedObjectContext *managedObjectContext;
     
     BOOL deletePressedOnce;
     SCTableViewModel *currentDetailTableViewModel;
-    
+    UINavigationController *rootNavigationController;
+    UIViewController *rootViewController_;
      int existingPersonRecordID;
 //    ABRecordRef existingPersonRef;
     BOOL addExistingAfterPromptBool;
@@ -42,7 +43,8 @@ NSManagedObjectContext *managedObjectContext;
      ABNewPersonViewController *personAddNewViewController;
     ClinicianEntity *clinician;
 //      ABAddressBookRef addressBook;
-    
+
+    SCObjectSelectionCell *abGroupobjectSelectionCell;
 }
 
 
@@ -50,7 +52,7 @@ NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) IBOutlet ABPersonViewController *personVCFromSelectionList;
 @property (nonatomic, strong) IBOutlet ABNewPersonViewController *personAddNewViewController;
 
-
+@property (nonatomic, strong)  UIViewController *rootViewController;
 @property (nonatomic, strong) IBOutlet  SCTableViewModel *currentDetailTableViewModel;
 
 //@property (strong, nonatomic)IBOutlet SCArrayOfStringsSection *objectsSection;
@@ -75,4 +77,8 @@ NSManagedObjectContext *managedObjectContext;
 -(void)showPersonViewControllerForRecordID:(int)recordID;
 
 -(BOOL)checkIfRecordIDInAddressBook:(int)recordID;
+
+
+
+-(IBAction)abGroupsDoneButtonTapped:(id)sender;
 @end

@@ -339,7 +339,7 @@ clinicianDef.titlePropertyName=@"firstName;lastName";
  
             detailTableViewModel.delegate=cliniciansViewController_Shared;
             cliniciansViewController_Shared.currentDetailTableViewModel=detailTableViewModel;
-            
+            cliniciansViewController_Shared.rootViewController=tableViewModel.viewController;
         }
         
         

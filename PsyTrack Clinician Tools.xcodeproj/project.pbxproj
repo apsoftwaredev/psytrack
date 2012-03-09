@@ -266,6 +266,8 @@
 		B7D097F514BAC43E00C6065F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D097F414BAC43E00C6065F /* MessageUI.framework */; };
 		B7F877BB14C9A38900F00C0D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877B914C9A38900F00C0D /* EventKit.framework */; };
 		B7F877BC14C9A38900F00C0D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877BA14C9A38900F00C0D /* EventKitUI.framework */; };
+		E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B76150858D3005B798A /* ABGroupSelectionCell.m */; };
+		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -642,6 +644,10 @@
 		B7D097F414BAC43E00C6065F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B7F877B914C9A38900F00C0D /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		B7F877BA14C9A38900F00C0D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		E7516B75150858D3005B798A /* ABGroupSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABGroupSelectionCell.h; sourceTree = "<group>"; };
+		E7516B76150858D3005B798A /* ABGroupSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABGroupSelectionCell.m; sourceTree = "<group>"; };
+		E7516B7915085A23005B798A /* PTABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTABGroup.h; sourceTree = "<group>"; };
+		E7516B7A15085A23005B798A /* PTABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTABGroup.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1196,6 +1202,10 @@
 				37F7CF2315005F7E00AD2C3A /* TimePickerView.m */,
 				37F7CF2415005F7E00AD2C3A /* WeightPickerCell.h */,
 				37F7CF2515005F7E00AD2C3A /* WeightPickerCell.m */,
+				E7516B75150858D3005B798A /* ABGroupSelectionCell.h */,
+				E7516B76150858D3005B798A /* ABGroupSelectionCell.m */,
+				E7516B7915085A23005B798A /* PTABGroup.h */,
+				E7516B7A15085A23005B798A /* PTABGroup.m */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -1635,6 +1645,8 @@
 				37F7CFFD1500635900AD2C3A /* SCTableViewSection.m in Sources */,
 				37F7CFFE1500635900AD2C3A /* SCViewController.m in Sources */,
 				37F7D001150063CF00AD2C3A /* TabFile.m in Sources */,
+				E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */,
+				E7516B7B15085A23005B798A /* PTABGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,7 +23,10 @@
 #import "ClinicianEntity.h"
 #import "CliniciansRootViewController_iPad.h"
 #import "ClinicianViewController.h"
-
+//#import "ABGroupSelectionCell.h"
+#import "MySource.h"
+#import "PTABGroup.h"
+#import "ABGroupSelectionCell.h"
 
 
 @implementation CliniciansViewController_Shared
@@ -33,6 +36,7 @@
 @synthesize personVCFromSelectionList=personVCFromSelectionList_;
 @synthesize personAddNewViewController=personAddNewViewController_;
 @synthesize currentDetailTableViewModel;
+@synthesize rootViewController=rootViewController_;
 
 #pragma mark -
 #pragma Generate SCTableView classes and properties
@@ -1325,9 +1329,13 @@
     
     //add the property definition to the clinician class 
     [self.clinicianDef addPropertyDefinition:deleteABLinkButtonCellProperty];
-   
+  
+
     
     SCPropertyGroup *clinicianListPropertiesGroup=[SCPropertyGroup groupWithHeaderTitle:@"Clinician List Properties" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects: @"atMyCurrentSite", @"myCurrentSupervisor",@"myPastSupervisor", nil]];
+    
+    
+    
     
     SCPropertyGroup *credentialssGroup = [SCPropertyGroup groupWithHeaderTitle:@"Credentials" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"clinicianType",@"licenseNumbers", @"degrees", @"certifications",nil]];
     
@@ -1392,6 +1400,29 @@
     
     
     [self tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)indexPath.section detailTableViewModel:(SCTableViewModel *)detailTableViewModel];
+    
+    
+    if (tableViewModel.tag==1) {
+        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+        
+        NSLog(@"cell class is %@",[cell class]);
+        
+        NSLog(@"cell tag is %i",cell.tag);
+        if (cell.tag==429&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
+            
+            
+            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(abGroupsDoneButtonTapped:)];
+            
+            
+            detailTableViewModel.viewController.navigationItem.rightBarButtonItem = doneButton;
+            detailTableViewModel.tag=429;
+            
+        }
+        
+        
+    }
+    
+    
 }
 
 
@@ -1598,9 +1629,8 @@
             }  
                 
                 break;
-                
-                
-                
+           
+
             default:
                 break;
         }
@@ -1785,7 +1815,7 @@
             
             if (cell.tag==8 &&[cell isKindOfClass:[ButtonCell class]]&&![tableViewModel valuesAreValid]) {
                 PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-                [appDelegate displayNotification:@"Add First and Last Name Before Adding to Address Book" forDuration:3.0 location:kPTTScreenLocationTop inView:tableViewModel.modeledTableView.superview];
+                [appDelegate displayNotification:@"Add First and Last Name before Adding to Address Book or use the look up button to select the name." forDuration:3.0 location:kPTTScreenLocationTop inView:tableViewModel.modeledTableView.superview];
                 
             }
             UITextField *view =(UITextField *)[cell viewWithTag:50];
@@ -1799,6 +1829,20 @@
             
         }
             break;
+        
+        case 429:
+        {
+        NSLog(@"cell bound object class is %i",tableViewModel.tag);
+            SCTableViewCell *selectedCell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+            NSLog(@"cell class %@", selectedCell.class);
+            if ([selectedCell isKindOfClass:[SCTableViewCell class]]) {
+                NSLog(@"group cell");
+            }
+        
+        
+        }
+        
+        
         case 3:    
         {
             UIView *textViewView=(UIView *)[cell viewWithTag:80];
@@ -2088,10 +2132,15 @@
 //}
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-    if (tableViewModel.tag==0) {
+   
+    SCTableViewCell *cell=(SCTableViewCell*)[tableViewModel cellAtIndexPath:indexPath];
+    if (tableViewModel.tag==0||(tableViewModel.tag=1&&cell.tag==429)) {
         currentDetailTableViewModel=detailTableViewModel;
+        
+                
+        
     }
-    
+   
     //
     //
     //    if (tableViewModel.tag==1) {
@@ -2136,6 +2185,9 @@
     NSLog(@"tabelmodel section count is %i",tableViewModel.sectionCount);
     if (tableViewModel.tag==1 ) {
         NSLog(@"section index is %i",index);
+        
+        
+        
         if (index==6) {
             NSLog(@"cells in section is %i",section.cellCount);
             
@@ -2157,6 +2209,18 @@
                     
                 }
                 
+//                NSArray *addressBookGroupsArray=[NSArray arrayWithArray:[ self addressBookGroupsArray]];
+//                
+                
+              
+                
+                NSLog(@"client abrecordidntifier %i",[clinicianObject.aBRecordIdentifier intValue]);
+                NSLog(@"client abrecordidentifier %@",clinicianObject.aBRecordIdentifier);
+                abGroupobjectSelectionCell=[[ABGroupSelectionCell alloc]initWithClinician:(ClinicianEntity *)clinicianObject];    
+                
+                abGroupobjectSelectionCell.tag=429;
+               
+                [sectionOne addCell:abGroupobjectSelectionCell];
             }
             
             
@@ -2505,8 +2569,14 @@
 
 -(void)tableViewModelDidEndEditing:(SCTableViewModel *)tableViewModel{
     
-    
+   
     deletePressedOnce=NO;
+    
+    
+    
+    NSLog(@"did end editiong");
+    
+
     
 }
 -(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel willRemoveRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -2604,8 +2674,22 @@
         currentDetailTableViewModel=nil;
         [self resetABVariablesToNil];
     }
+//    if (tableViewModel.tag==1) {
+//        currentDetailTableViewModel=tableViewModel;
+//    }
     
 }
+
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDisappearForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+
+    if (tableViewModel.tag==1) {
+        currentDetailTableViewModel=tableViewModel;
+    }
+
+
+}
+
 //- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 //{
 //	// use "buttonIndex" to decide your action
@@ -4523,5 +4607,39 @@
     
     
 }
+
+-(IBAction)abGroupsDoneButtonTapped:(id)sender{
+    
+    
+    NSLog(@"done button pressed");
+    //    SCTableViewModel *ownerTableViewModel=(SCTableViewModel *)self.ownerTableViewModel;
+    
+    
+    NSLog(@"currenct detail tag is %i",currentDetailTableViewModel.tag);
+    if (currentDetailTableViewModel.tag=429 &&currentDetailTableViewModel.sectionCount) {
+        SCObjectSelectionSection *section=(SCObjectSelectionSection *)[currentDetailTableViewModel sectionAtIndex:0];
+        NSMutableSet *mutableSet= (NSMutableSet *) abGroupobjectSelectionCell.selectedItemsIndexes;
+        mutableSet=section.selectedItemsIndexes;
+        
+       
+        
+        
+    }
+    if(rootViewController_.navigationController)
+	{
+		// check if self is the rootViewController
+        
+        [rootViewController_.navigationController popViewControllerAnimated:YES];
+        
+        
+	}
+	else
+		[rootViewController_ dismissModalViewControllerAnimated:YES];
+    
+    
+    
+}
+
+
 
 @end

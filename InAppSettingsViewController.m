@@ -146,7 +146,7 @@
     
     if ((groupIdentifier==-1||groupIdentifier==0||!groupCount)&&autoAddClinicianToGroup) {
         
-        [ self changeABGroupNameTo:(NSString *)groupName addNew:NO checkExisting:YES];
+        [ self changeABGroupNameTo:(NSString *)groupName addNew:NO checkExisting:NO];
         
         
     }

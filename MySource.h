@@ -45,6 +45,8 @@
  
 */
 
+#import <AddressBook/AddressBook.h>
+
 @interface MySource : NSObject 
 {
 	// Name of an ABSource object
@@ -53,9 +55,11 @@
 	NSMutableArray *groups;
 }
 
-@property(nonatomic, retain) NSString *name;
-@property(nonatomic, retain) NSMutableArray *groups;
-
-- (id)initWithAllGroups:(NSMutableArray *)allGroups name:(NSString*)sourceName;
-
+//@property(nonatomic, retain) NSString *name;
+//@property(nonatomic, retain) NSMutableArray *groups;
+@property (nonatomic, strong) NSMutableArray *abGroupsMutArray;
+//- (id)initWithAllGroups:(NSMutableArray *)allGroups name:(NSString*)sourceName;
+//
+//-(NSArray *)addressBookGroupsArray;
+//-(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew checkExisting:(BOOL)checkExisting;
 @end
