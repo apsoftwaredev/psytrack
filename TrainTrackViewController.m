@@ -45,7 +45,7 @@
 @implementation TrainTrackViewController
 @synthesize tableView, tableModel=tableModel_;
 @synthesize messageView;
-@synthesize cliniciansViewController_Shared;
+@synthesize cliniciansViewController_Shared=cliniciansViewController_Shared_;
 //@synthesize appSettingsViewController;
 
 
@@ -98,11 +98,11 @@
     
     NSPredicate *myInfoPredicate=[NSPredicate predicateWithFormat:@"myInformation = %@", [NSNumber numberWithBool:YES]]; 
     
-    cliniciansViewController_Shared=[[CliniciansViewController_Shared alloc]init];
+   self.cliniciansViewController_Shared=[[CliniciansViewController_Shared alloc]init];
     
-    [cliniciansViewController_Shared setupTheCliniciansViewUsingSTV];
+    [cliniciansViewController_Shared_ setupTheCliniciansViewUsingSTV];
     
-    SCClassDefinition *clinicianDef=(SCClassDefinition *)cliniciansViewController_Shared.clinicianDef;
+    SCClassDefinition *clinicianDef=(SCClassDefinition *)cliniciansViewController_Shared_.clinicianDef;
 clinicianDef.titlePropertyName=@"firstName;lastName";
     
 //    SCSelectionCell *myInfoCell=[SCSelectionCell cellWithText:@"My Background Information" withBoundKey:@"myClinicianData" withValue:nil];
@@ -326,20 +326,28 @@ clinicianDef.titlePropertyName=@"firstName;lastName";
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    
+    
+   
 
     if (tableViewModel.tag==0) {
 //        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
         
         if (indexPath.section==0) {
+            
+        
+            
+            detailTableViewModel.tag = tableViewModel.tag+1;           
+            
             if([SCHelper is_iPad]){
                 [detailTableViewModel.modeledTableView setBackgroundView:nil];
                 [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
                 [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
             }
  
-            detailTableViewModel.delegate=cliniciansViewController_Shared;
-            cliniciansViewController_Shared.currentDetailTableViewModel=detailTableViewModel;
-            cliniciansViewController_Shared.rootViewController=tableViewModel.viewController;
+            detailTableViewModel.delegate=self.cliniciansViewController_Shared;
+            cliniciansViewController_Shared_.currentDetailTableViewModel=detailTableViewModel;
+            cliniciansViewController_Shared_.rootViewController=tableViewModel.viewController;
         }
         
         

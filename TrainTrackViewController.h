@@ -25,7 +25,7 @@
      SCArrayOfObjectsModel *tableModel_;
    UITableView *tableView;
     NSManagedObjectContext * managedObjectContext;
-    CliniciansViewController_Shared *cliniciansViewController_Shared;
+    CliniciansViewController_Shared *cliniciansViewController_Shared_;
 //    IASKAppSettingsViewController *appSettingsViewController;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

@@ -1432,7 +1432,8 @@
     
     detailTableViewModel.delegate = self;
     detailTableViewModel.tag = tableViewModel.tag+1;
-    
+    NSLog(@"detail table view model tag is %i",detailTableViewModel.tag);
+    NSLog(@"table view model tag is %i",tableViewModel.tag);
     if([SCHelper is_iPad]){
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
         [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
@@ -2569,7 +2570,7 @@
 
 -(void)tableViewModelDidEndEditing:(SCTableViewModel *)tableViewModel{
     
-   
+   NSLog(@"tableview model tag is %i",tableViewModel.tag);
     deletePressedOnce=NO;
     
     
@@ -2682,7 +2683,7 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDisappearForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-
+NSLog(@"table view model tag is %i",tableViewModel.tag);
     if (tableViewModel.tag==1) {
         currentDetailTableViewModel=tableViewModel;
     }
@@ -4636,7 +4637,7 @@
 	else
 		[rootViewController_ dismissModalViewControllerAnimated:YES];
     
-    
+
     
 }
 
