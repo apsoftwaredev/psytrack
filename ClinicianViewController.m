@@ -93,12 +93,11 @@
     // Set up the edit and add buttons.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
-    self.navigationItem.rightBarButtonItem = addButton;  
+   
 	// Get managedObjectContext from application delegate
     CliniciansViewController_Shared *clinicianViewController_Shared =[[CliniciansViewController_Shared alloc]init];
     [clinicianViewController_Shared setupTheCliniciansViewUsingSTV];
-    self.tableView.backgroundColor=[UIColor clearColor];
+    
     
     
           
@@ -113,9 +112,17 @@
     tableModel.editButtonItem = self.navigationItem.leftBarButtonItem;
     tableModel.allowMovingItems=TRUE;
     
-    tableModel.autoAssignDelegateForDetailModels=TRUE;
-    tableModel.autoAssignDataSourceForDetailModels=TRUE;
+    if (![SCHelper is_iPad]) {
+        tableModel.autoAssignDelegateForDetailModels=TRUE;
+        tableModel.autoAssignDataSourceForDetailModels=TRUE;
+        self.tableView.backgroundColor=[UIColor clearColor];
+        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+        self.navigationItem.rightBarButtonItem = addButton;  
+       
+    }
     
+    
+     [self updateClinicianTotalLabel];
     
     tableModel.autoSortSections = TRUE;
     
@@ -126,7 +133,7 @@
   
     
 
- [self updateClinicianTotalLabel];
+
     [(PTTAppDelegate *)[UIApplication sharedApplication].delegate application:[UIApplication sharedApplication]
                                                willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
                                                                      duration:5];
@@ -917,7 +924,32 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
 
 }
+-(void)setSectionHeaderColorWithSection:(SCTableViewSection *)section color:(UIColor *)color{
 
+
+    if(section.headerTitle !=nil)
+    {
+        
+        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 60)];
+        UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 40)];
+        
+        
+        headerLabel.backgroundColor = [UIColor clearColor];
+        headerLabel.textColor = color;
+        headerLabel.text=section.headerTitle;
+        [containerView addSubview:headerLabel];
+        
+        section.headerView = containerView;
+        
+        
+        
+    }
+    
+
+
+
+
+}
 
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
 {
@@ -959,26 +991,26 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     }
     
 
+    [self setSectionHeaderColorWithSection:(SCTableViewSection *)section color:[UIColor whiteColor]];
     
-    
-    if(section.headerTitle !=nil)
-    {
-       
-        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 60)];
-        UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 40)];
-        
-      
-        headerLabel.backgroundColor = [UIColor clearColor];
-        headerLabel.textColor = [UIColor whiteColor];
-        headerLabel.text=section.headerTitle;
-        [containerView addSubview:headerLabel];
-
-        section.headerView = containerView;
-      
-
-
-    }
-  
+//    if(section.headerTitle !=nil)
+//    {
+//       
+//        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 60)];
+//        UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 40)];
+//        
+//      
+//        headerLabel.backgroundColor = [UIColor clearColor];
+//        headerLabel.textColor = [UIColor whiteColor];
+//        headerLabel.text=section.headerTitle;
+//        [containerView addSubview:headerLabel];
+//
+//        section.headerView = containerView;
+//      
+//
+//
+//    }
+//  
 
     
 }
@@ -2317,9 +2349,12 @@ NSLog(@"will show view controller %@",viewController);
         
         UITableView *personViewTableView=(UITableView *)[viewController.view.subviews objectAtIndex:0];
 
+        if ([SCHelper is_iPad]) {
+            [personViewTableView setBackgroundView:nil];
+            [personViewTableView setBackgroundView:[[UIView alloc] init]];
+        }
        
-        //        [personViewTableView setBackgroundView:nil];
-//        [personViewTableView setBackgroundView:[[UIView alloc] init]];
+     
         [personViewTableView setBackgroundColor:UIColor.clearColor]; 
         
         [viewController.navigationController setDelegate:nil];

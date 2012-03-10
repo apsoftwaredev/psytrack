@@ -70,6 +70,11 @@
 -(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew;
 
 -(void)showPersonViewControllerForRecordID:(int)recordID;
+-(BOOL)checkIfRecordIDInAddressBook:(int)recordID;
+
+
+-(void)setSectionHeaderColorWithSection:(SCTableViewSection *)section color:(UIColor *)color;
+
 
 #define degreesToRadian(x) (M_PI * (x) / 180.0)
 
