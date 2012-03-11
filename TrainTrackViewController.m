@@ -21,7 +21,7 @@
 #import "DrugViewController_iPhone.h"
 #import "ClinicianEntity.h"
 #import "CustomSCSelectonCellWithLoading.h"
-#import "CliniciansViewController_Shared.h"
+//#import "CliniciansViewController_Shared.h"
 #import "LCYLockSettingsViewController.h"
 
 
@@ -43,9 +43,9 @@
 //#import "SupervisionGivenViewController.h"
 
 @implementation TrainTrackViewController
-@synthesize tableView, tableModel=tableModel_;
+
 @synthesize messageView;
-@synthesize cliniciansViewController_Shared=cliniciansViewController_Shared_;
+//@synthesize cliniciansViewController_Shared=cliniciansViewController_Shared_;
 //@synthesize appSettingsViewController;
 
 
@@ -53,40 +53,27 @@
 #pragma mark View lifecycle
 
 
-- (void) didReceiveMemoryWarning 
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    
-    [appDelegate displayMemoryWarning];
-
-    
-}
-
-
-
--(void)viewDidUnload{
-
-    [super viewDidUnload];
-    
-    self.cliniciansViewController_Shared=nil;
+//- (void) didReceiveMemoryWarning 
+//{
+//    // Releases the view if it doesn't have a superview.
+//    [super didReceiveMemoryWarning];
+//    
+//    // Release any cached data, images, etc. that aren't in use.
+//    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//    
+//    
+//    [appDelegate displayMemoryWarning];
+//
+//    
+//}
 
 
-}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-    // Gracefully handle reloading the view controller after a memory warning
-    tableModel_ = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
-    if(tableModel_)
-    {
-        [tableModel_ replaceModeledTableViewWith:self.tableView];
-        return;
-    }
+   
     
     UIImage *lockImage=[UIImage imageNamed:@"lock.png"];
 	UIBarButtonItem *stopButton = [[UIBarButtonItem alloc] initWithImage:lockImage style:UIBarButtonItemStyleDone target:self action:@selector(lockScreen:)];
@@ -94,16 +81,12 @@
     
     
     //Do some property definition customization for the Supervisor Class
-      managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-    
+//      managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+//    
     NSPredicate *myInfoPredicate=[NSPredicate predicateWithFormat:@"myInformation = %@", [NSNumber numberWithBool:YES]]; 
     
-   self.cliniciansViewController_Shared=[[CliniciansViewController_Shared alloc]init];
-    
-    [cliniciansViewController_Shared_ setupTheCliniciansViewUsingSTV];
-    
-    SCClassDefinition *clinicianDef=(SCClassDefinition *)cliniciansViewController_Shared_.clinicianDef;
-clinicianDef.titlePropertyName=@"firstName;lastName";
+   
+self.clinicianDef.titlePropertyName=@"firstName;lastName";
     
 //    SCSelectionCell *myInfoCell=[SCSelectionCell cellWithText:@"My Background Information" withBoundKey:@"myClinicianData" withValue:nil];
 //    myInfoCell.delegate=self;
@@ -177,10 +160,10 @@ clinicianDef.titlePropertyName=@"firstName;lastName";
     
     
     // Initialize tableModel_
-    tableModel_ = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self];
+    self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self];
 
     // Create an array of objects section
-    SCArrayOfObjectsSection *myInformationSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:@"My Information Track" withEntityClassDefinition:clinicianDef usingPredicate:myInfoPredicate];
+    SCArrayOfObjectsSection *myInformationSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:@"My Information Track" withEntityClassDefinition:self.clinicianDef usingPredicate:myInfoPredicate];
     
     
     
@@ -248,64 +231,67 @@ clinicianDef.titlePropertyName=@"firstName;lastName";
     
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    
-    return YES;
-    
-}
+//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+//{
+//    // Return YES for supported orientations
+//    
+//    return YES;
+//    
+//}
+//
+//- (void)tableViewModel:(SCTableViewModel *) tableViewModel willConfigureCell:(SCTableViewCell *) cell forRowAtIndexPath:(NSIndexPath *) indexPath
+//{
+//    [super tableViewModel:tableViewModel willConfigureCell:cell forRowAtIndexPath:indexPath];
+//    
+////    cell.backgroundColor=[UIColor whiteColor];
+////    cell.height= 45;
+////    cell.textLabel.lineBreakMode=UILineBreakModeCharacterWrap;
+////
+//    
+//}
 
-- (void)tableViewModel:(SCTableViewModel *) tableViewModel willConfigureCell:(SCTableViewCell *) cell forRowAtIndexPath:(NSIndexPath *) indexPath
-{
-    
-    cell.backgroundColor=[UIColor whiteColor];
-    cell.height= 45;
-    cell.textLabel.lineBreakMode=UILineBreakModeCharacterWrap;
-
-    
-}
-
--(void)tableViewModel:(SCTableViewModel *)tableViewModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-
-
-    if (tableViewModel.tag==0) {
-        switch (indexPath.section) {
-            case 0:
-            {
-                        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-                        
-                        ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
-                        
-                        cell.textLabel.text=clinicianObject.combinedName;
-                        
-                        
-                        
-                        
-                        NSLog(@"cellManagedObject%@",clinicianObject.combinedName);
-                    
-                        
-            }
-                break;
-                
-            default:
-                break;
-        }
-    }
-
-
-
-
-
-
-}
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//
+//    [super tableViewModel:tableViewModel willDisplayCell:cell forRowAtIndexPath:indexPath];
+//    if (tableViewModel.tag==0) {
+//        switch (indexPath.section) {
+//            case 0:
+//            {
+//                        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+//                        
+//                        ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
+//                        
+//                        cell.textLabel.text=clinicianObject.combinedName;
+//                        
+//                        
+//                        
+//                        
+//                        NSLog(@"cellManagedObject%@",clinicianObject.combinedName);
+//                    
+//                        
+//            }
+//                break;
+//                
+//            default:
+//                break;
+//        }
+//    }
+//
+//
+//
+//
+//
+//
+//}
 
 
 
 
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-
+   
+    [super tableViewModel:tableViewModel detailViewWillAppearForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
+    
     if (tableViewModel.tag==0) {
         if (detailTableViewModel.sectionCount>6) {
     
@@ -325,44 +311,44 @@ clinicianDef.titlePropertyName=@"firstName;lastName";
     }
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-    
-    
-   
-
-    if (tableViewModel.tag==0) {
-//        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-        
-        if (indexPath.section==0) {
-            
-        
-            
-            detailTableViewModel.tag = tableViewModel.tag+1;           
-            
-            if([SCHelper is_iPad]){
-                [detailTableViewModel.modeledTableView setBackgroundView:nil];
-                [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-                [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
-            }
- 
-            detailTableViewModel.delegate=self.cliniciansViewController_Shared;
-            cliniciansViewController_Shared_.currentDetailTableViewModel=detailTableViewModel;
-            cliniciansViewController_Shared_.rootViewController=tableViewModel.viewController;
-        }
-        
-        
-        
-    }
-
-
-
-
-
-}
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+//    
+//    
+//   
+//
+//    if (tableViewModel.tag==0) {
+////        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+//        
+//        if (indexPath.section==0) {
+//            
+//        
+//            
+//            detailTableViewModel.tag = tableViewModel.tag+1;           
+//            
+//            if([SCHelper is_iPad]){
+//                [detailTableViewModel.modeledTableView setBackgroundView:nil];
+//                [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+//                [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+//            }
+// 
+//            detailTableViewModel.delegate=self.cliniciansViewController_Shared;
+//            cliniciansViewController_Shared_.currentDetailTableViewModel=detailTableViewModel;
+//            cliniciansViewController_Shared_.rootViewController=tableViewModel.viewController;
+//        }
+//        
+//        
+//        
+//    }
+//
+//
+//
+//
+//
+//}
 
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
 {
-    
+    [super tableViewModel:tableViewModel didAddSectionAtIndex:index];
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
     if (tableViewModel.tag==0) {
       
@@ -413,27 +399,44 @@ clinicianDef.titlePropertyName=@"firstName;lastName";
     }
         
     }
-    if(section.headerTitle !=nil)
-    {
-        
-        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 60)];
-        UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 40)];
-        
-        
-        
-        
-        headerLabel.text = section.headerTitle;
-        
-        
-        headerLabel.backgroundColor = [UIColor clearColor];
-        headerLabel.textColor = [UIColor whiteColor];
-        
-        [containerView addSubview:headerLabel];
-        
-        section.headerView = containerView;
-        [self.tableView reloadData];
-        
-          }
+//    if(section.headerTitle !=nil)
+//    {
+//        
+//        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 60)];
+//        UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 40)];
+//        
+//        
+//        
+//        
+//        headerLabel.text = section.headerTitle;
+//        
+//        
+//        headerLabel.backgroundColor = [UIColor clearColor];
+//        headerLabel.textColor = [UIColor whiteColor];
+//        
+//        [containerView addSubview:headerLabel];
+//        
+//        section.headerView = containerView;
+//        [self.tableView reloadData];
+//        
+//          }
+}
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    
+    
+    
+    
+        detailTableViewModel.delegate = self;
+        detailTableViewModel.tag = tableViewModel.tag+1;
+     
+    if([SCHelper is_iPad]){   
+        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+    }
+    
+    
+    
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -445,6 +448,8 @@ clinicianDef.titlePropertyName=@"firstName;lastName";
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
     
     NSLog(@"index path section %i",indexPath.section);
+    if (tableViewModel.tag==0) {
+    
     switch (cell.tag) {
         
         case 0:
@@ -543,8 +548,16 @@ clinicianDef.titlePropertyName=@"firstName;lastName";
     }
 
         
-       
+    }     
+else {
+    if([section isKindOfClass:[SCArrayOfObjectsSection class]]){
         
+        SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
+        [arrayOfObjectsSection dispatchSelectRowAtIndexPathEvent:indexPath];
+        
+        
+    }
+}  
     
 //    
 //    if (cell.tag==2){

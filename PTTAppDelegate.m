@@ -100,7 +100,8 @@
     
     
  
-    
+    UIImage * sShot = [UIImage imageNamed:@"Dan Boice-46.jpg"];
+    UIImageWriteToSavedPhotosAlbum(sShot, nil, nil, nil);
     
     //    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

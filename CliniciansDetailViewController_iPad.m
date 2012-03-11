@@ -42,6 +42,11 @@
 
 - (void)addButtonTapped
 {
+    if (popoverController) {
+        [popoverController dismissPopoverAnimated:YES];
+        
+    }
+
 	[self.cliniciansRootViewController_iPad addButtonTapped];
 }
 

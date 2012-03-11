@@ -268,6 +268,7 @@
 		B7F877BC14C9A38900F00C0D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877BA14C9A38900F00C0D /* EventKitUI.framework */; };
 		E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B76150858D3005B798A /* ABGroupSelectionCell.m */; };
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
+		E7516BDC150BF9A2005B798A /* Dan Boice-46.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -648,6 +649,7 @@
 		E7516B76150858D3005B798A /* ABGroupSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABGroupSelectionCell.m; sourceTree = "<group>"; };
 		E7516B7915085A23005B798A /* PTABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTABGroup.h; sourceTree = "<group>"; };
 		E7516B7A15085A23005B798A /* PTABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTABGroup.m; sourceTree = "<group>"; };
+		E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Dan Boice-46.jpg"; path = "../../Pictures/childhood scans/Dan Boice-46.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1065,6 +1067,7 @@
 		37F7CECD15005E9900AD2C3A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */,
 				37B225501502861F0015D955 /* Default-Landscape~ipad.png */,
 				37B2254E150286170015D955 /* Default-Portrait~ipad.png */,
 				37B2254C150286040015D955 /* Default@2x.png */,
@@ -1523,6 +1526,7 @@
 				37B2254D150286040015D955 /* Default@2x.png in Resources */,
 				37B2254F150286170015D955 /* Default-Portrait~ipad.png in Resources */,
 				37B225511502861F0015D955 /* Default-Landscape~ipad.png in Resources */,
+				E7516BDC150BF9A2005B798A /* Dan Boice-46.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
