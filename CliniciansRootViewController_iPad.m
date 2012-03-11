@@ -67,7 +67,7 @@
     
 //    CFRelease(addressBook);
 //    CFRelease(existingPersonRef);
-    if (currentDetailTableViewModel) {
+    if (currentDetailTableViewModel_) {
         self.currentDetailTableViewModel=nil;
     }
     
@@ -422,7 +422,7 @@
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
 {
     if (detailTableViewModel.tag==1||detailTableViewModel.tag==0) {
-        currentDetailTableViewModel=detailTableViewModel;
+        self.currentDetailTableViewModel=detailTableViewModel;
     }
 
     
@@ -622,40 +622,53 @@
     NSLog(@"tableview model view controller is%@ ",[tableViewModel.viewController class]);
    NSLog(@"index is %i",index);
     NSLog(@"tabelmodel section count is %i",tableViewModel.sectionCount);
-    if ((tableViewModel.tag==0||tableViewModel.tag==1 )&&[tableViewModel.viewController isKindOfClass:[CliniciansDetailViewController_iPad class]]) {
+    if ((tableViewModel.tag==0||tableViewModel.tag==1 )&&[tableViewModel.viewController isKindOfClass:[CliniciansDetailViewController_iPad class]]) 
+    {
         NSLog(@"section index is %i",index);
        
         if (index==0) {
-            currentDetailTableViewModel=tableViewModel;
+            self.currentDetailTableViewModel=tableViewModel;
              tableViewModel.tag=1;
         }
-        if (index==6) {
-                NSLog(@"cells in section is %i",section.cellCount);
-               
-               
-               
-                SCTableViewSection *sectionOne=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-                SCTableViewCell *sectionOneClicianCell=(SCTableViewCell *)[sectionOne cellAtIndex:0];
-                NSManagedObject *cellManagedObject=(NSManagedObject *)sectionOneClicianCell.boundObject;
-                
-                if ([cellManagedObject isKindOfClass:[ClinicianEntity class]]) {
-                    ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
-                    
-                    
-                    NSLog(@"my information is %@",clinicianObject.myInformation);
-                    if ([clinicianObject.myInformation isEqualToNumber:[NSNumber numberWithBool:YES]]) {
-                        
-                        [tableViewModel removeSectionAtIndex:1];
-                        [tableViewModel removeSectionAtIndex:4];
-                        
-                    }
-
-                }
-                
-                                
-            
-        }
+        
+        
     }
+    [super tableViewModel:tableViewModel didAddSectionAtIndex:index];
+    
+//        if (index==6) {
+//                NSLog(@"cells in section is %i",section.cellCount);
+//               
+//               
+//               
+//                SCTableViewSection *sectionOne=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
+//                SCTableViewCell *sectionOneClicianCell=(SCTableViewCell *)[sectionOne cellAtIndex:0];
+//                NSManagedObject *cellManagedObject=(NSManagedObject *)sectionOneClicianCell.boundObject;
+//                
+//                if ([cellManagedObject isKindOfClass:[ClinicianEntity class]]) {
+//                    ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
+//                    
+//                    
+//                    NSLog(@"my information is %@",clinicianObject.myInformation);
+//                    if ([clinicianObject.myInformation isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+//                        
+//                        [tableViewModel removeSectionAtIndex:1];
+//                        [tableViewModel removeSectionAtIndex:4];
+//                        
+//                    }
+//                    NSLog(@"client abrecordidntifier %i",[clinicianObject.aBRecordIdentifier intValue]);
+//                    NSLog(@"client abrecordidentifier %@",clinicianObject.aBRecordIdentifier);
+//                    self.abGroupobjectSelectionCell=[[ABGroupSelectionCell alloc]initWithClinician:(ClinicianEntity *)clinicianObject];    
+//                    
+//                    abGroupobjectSelectionCell_.tag=429;
+//                    
+//                    [sectionOne addCell:abGroupobjectSelectionCell];
+//
+//                }
+//                
+//                                
+//            
+//        }
+//    }
     
  [self setSectionHeaderColorWithSection:(SCTableViewSection *)section color:[UIColor whiteColor]]; 
     

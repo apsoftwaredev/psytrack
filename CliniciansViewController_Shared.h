@@ -24,37 +24,40 @@ static NSInteger const kAlertTagFoundExistingPersonWithName = 1;
 static NSInteger const kAlertTagFoundExistingPeopleWithName = 2;
 
 
-@interface CliniciansViewController_Shared : NSObject < SCTableViewModelDataSource, SCTableViewModelDelegate , UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate> {
+@interface CliniciansViewController_Shared :  UIViewController <SCTableViewModelDataSource, SCTableViewModelDelegate,SCTableViewCellDelegate,UIAlertViewDelegate, UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate> {
 
    
 
 NSManagedObjectContext *managedObjectContext;
  
-    
+      __weak UITableView *tableView;
     BOOL deletePressedOnce;
-    SCTableViewModel *currentDetailTableViewModel;
+    SCTableViewModel *currentDetailTableViewModel_;
     UINavigationController *rootNavigationController;
     UIViewController *rootViewController_;
      int existingPersonRecordID;
 //    ABRecordRef existingPersonRef;
     BOOL addExistingAfterPromptBool;
     
+     SCArrayOfObjectsModel *tableModel_;
      ABPersonViewController *personVCFromSelectionList;
      ABNewPersonViewController *personAddNewViewController;
     ClinicianEntity *clinician;
 //      ABAddressBookRef addressBook;
 
-    SCObjectSelectionCell *abGroupobjectSelectionCell;
+    SCObjectSelectionCell *abGroupobjectSelectionCell_;
 }
 
 
 @property (strong ,nonatomic)IBOutlet SCClassDefinition *clinicianDef;
 @property (nonatomic, strong) IBOutlet ABPersonViewController *personVCFromSelectionList;
 @property (nonatomic, strong) IBOutlet ABNewPersonViewController *personAddNewViewController;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
+@property (nonatomic, strong) IBOutlet SCArrayOfObjectsModel *tableModel;
 @property (nonatomic, strong)  UIViewController *rootViewController;
 @property (nonatomic, strong) IBOutlet  SCTableViewModel *currentDetailTableViewModel;
-
+@property (nonatomic, strong)SCObjectSelectionCell *abGroupobjectSelectionCell;
 //@property (strong, nonatomic)IBOutlet SCArrayOfStringsSection *objectsSection;
 
 
@@ -78,6 +81,8 @@ NSManagedObjectContext *managedObjectContext;
 
 -(BOOL)checkIfRecordIDInAddressBook:(int)recordID;
 
+
+-(void)setSectionHeaderColorWithSection:(SCTableViewSection *)section color:(UIColor *)color;
 
 
 -(IBAction)abGroupsDoneButtonTapped:(id)sender;

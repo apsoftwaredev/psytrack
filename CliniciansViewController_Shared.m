@@ -35,22 +35,65 @@
 
 @synthesize personVCFromSelectionList=personVCFromSelectionList_;
 @synthesize personAddNewViewController=personAddNewViewController_;
-@synthesize currentDetailTableViewModel;
+@synthesize currentDetailTableViewModel=currentDetailTableViewModel_;
 @synthesize rootViewController=rootViewController_;
-
+@synthesize tableModel=tableModel_;
+@synthesize tableView;
+@synthesize abGroupobjectSelectionCell=abGroupobjectSelectionCell_;
 #pragma mark -
 #pragma Generate SCTableView classes and properties
 
--(id)setupTheCliniciansViewUsingSTV{
-	
+
+-(void)viewDidUnload{
+    //    [super viewDidUnload];
+   
+     self.tableModel=nil;
+    if (currentDetailTableViewModel_) {
+        self.currentDetailTableViewModel=nil;
+    }
     
-    //get the managed object context
-    managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-	
+    
+   
+    
+    if (personVCFromSelectionList_) {
+        self.personVCFromSelectionList=nil;
+    }
+    if (personAddNewViewController) {
+        self.personAddNewViewController=nil;
+    }
+    
+    //    CFRelease(addressBook);
+    //    CFRelease(existingPersonRef);
+    
+    
+}
+
+- (void) didReceiveMemoryWarning 
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc. that aren't in use.
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    [appDelegate displayMemoryWarning];
+    
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Gracefully handle reloading the view controller after a memory warning
+    self.tableModel = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
+    if(tableModel_)
+    {
+        [tableModel_ replaceModeledTableViewWith:self.tableView];
+        return;
+    }
+    
   
-      
     
-    
+    managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];   
     //set different custom cells nib names for iPhone and iPad
     NSString *shortFieldCellNibName=nil;
     NSString *textFieldAndLableNibName=nil;
@@ -1367,12 +1410,21 @@
     
     existingPersonRecordID=-1;
     
-    return self;
+   
     
     
 }
 
 
+#pragma mark -
+#pragma UIView methods
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    
+    return YES;
+    
+}
 
 
 
@@ -1429,12 +1481,11 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     
-    
-    detailTableViewModel.delegate = self;
-    detailTableViewModel.tag = tableViewModel.tag+1;
-    NSLog(@"detail table view model tag is %i",detailTableViewModel.tag);
-    NSLog(@"table view model tag is %i",tableViewModel.tag);
+   
     if([SCHelper is_iPad]){
+        detailTableViewModel.delegate = self;
+        detailTableViewModel.tag = tableViewModel.tag+1;
+
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
         [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
         [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
@@ -1464,7 +1515,9 @@
         
         UIView *viewShorterTextLabelView =(UIView *)[cell viewWithTag:35];
         UIView *viewLongerTextLabelView =(UIView *)[cell viewWithTag:51];
-        
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        if ([cellManagedObject.entity.name isEqualToString:@"ClinicianEntity"]) {
+     
         
         switch (cell.tag) 
         {
@@ -1635,6 +1688,7 @@
             default:
                 break;
         }
+        }
     }
     if (tableViewModel.tag==2) 
     {
@@ -1784,7 +1838,7 @@
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
 {
     if (tableViewModel.tag==0) {
-        currentDetailTableViewModel=detailTableViewModel;
+        self.currentDetailTableViewModel=detailTableViewModel;
     }
     
 //    SCObjectSection *objectSection = (SCObjectSection *)[detailTableViewModel sectionAtIndex:0];
@@ -2011,15 +2065,22 @@
             
         {
             NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+           
             
+            
+             if ([cellManagedObject.entity.name isEqualToString:@"ClinicianEntity"]) {
             ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
-            
+           
+           
+           
+                
+
             cell.textLabel.text=clinicianObject.combinedName;
+             NSLog(@"cellManagedObject%@",clinicianObject.combinedName);
+             }
             
             
-            
-            
-            NSLog(@"cellManagedObject%@",clinicianObject.combinedName);
+           
             
         }
             
@@ -2135,8 +2196,8 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
    
     SCTableViewCell *cell=(SCTableViewCell*)[tableViewModel cellAtIndexPath:indexPath];
-    if (tableViewModel.tag==0||(tableViewModel.tag=1&&cell.tag==429)) {
-        currentDetailTableViewModel=detailTableViewModel;
+    if (tableViewModel.tag==0||(tableViewModel.tag==1&&cell.tag==429)) {
+        self.currentDetailTableViewModel=detailTableViewModel;
         
                 
         
@@ -2174,7 +2235,32 @@
     
 }
 
-
+-(void)setSectionHeaderColorWithSection:(SCTableViewSection *)section color:(UIColor *)color{
+    
+    
+    if(section.headerTitle !=nil)
+    {
+        
+        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 60)];
+        UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 40)];
+        
+        
+        headerLabel.backgroundColor = [UIColor clearColor];
+        headerLabel.textColor = color;
+        headerLabel.text=section.headerTitle;
+        [containerView addSubview:headerLabel];
+        
+        section.headerView = containerView;
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+}
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
 {
     
@@ -2217,11 +2303,11 @@
                 
                 NSLog(@"client abrecordidntifier %i",[clinicianObject.aBRecordIdentifier intValue]);
                 NSLog(@"client abrecordidentifier %@",clinicianObject.aBRecordIdentifier);
-                abGroupobjectSelectionCell=[[ABGroupSelectionCell alloc]initWithClinician:(ClinicianEntity *)clinicianObject];    
+                self.abGroupobjectSelectionCell=[[ABGroupSelectionCell alloc]initWithClinician:(ClinicianEntity *)clinicianObject];    
                 
-                abGroupobjectSelectionCell.tag=429;
+                abGroupobjectSelectionCell_.tag=429;
                
-                [sectionOne addCell:abGroupobjectSelectionCell];
+                [sectionOne addCell:abGroupobjectSelectionCell_];
             }
             
             
@@ -2232,23 +2318,7 @@
     
     
     
-    if(section.headerTitle !=nil)
-    {
-        
-        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 60)];
-        UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 40)];
-        
-        
-        headerLabel.backgroundColor = [UIColor clearColor];
-        headerLabel.textColor = [UIColor whiteColor];
-        headerLabel.text=section.headerTitle;
-        [containerView addSubview:headerLabel];
-        
-        section.headerView = containerView;
-        
-        
-        
-    }
+    [self setSectionHeaderColorWithSection:(SCTableViewSection *)section color:[UIColor whiteColor]];
     
     
     
@@ -2530,8 +2600,8 @@
                             existingPersonRecordID=-1;
                             [cellManagedObject setNilValueForKey:@"aBRecordIdentifier"];
                             [cell commitChanges];
-                            [currentDetailTableViewModel reloadBoundValues];
-                            [currentDetailTableViewModel.modeledTableView reloadData];
+                            [currentDetailTableViewModel_ reloadBoundValues];
+                            [currentDetailTableViewModel_.modeledTableView reloadData];
                             
                             
                             
@@ -2580,86 +2650,86 @@
 
     
 }
--(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel willRemoveRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-    NSLog(@"delete sender is activated %@",cell.boundObject);
-    BOOL myInformation=(BOOL)[(NSNumber *)[cell.boundObject valueForKey:@"myInformation"]boolValue];
-    if (myInformation) {
-        PTTAppDelegate *appdelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-        UIView *notificationSuperView;
-        
-        
-        
-        
-        
-        if (!deletePressedOnce) {
-            
-            [appdelegate displayNotification:@"Can't Delete Your Own Record. Press Delete again to clear your information." forDuration:3.5 location:kPTTScreenLocationTop inView:notificationSuperView];
-            
-            deletePressedOnce=YES;
-        }
-        else
-        {
-            
-            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-            ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
-            
-            NSEntityDescription *entityDescription=(NSEntityDescription *) clinicianObject.entity;
-            
-            
-            NSArray *boundObjectKeys=(NSArray *)[entityDescription attributesByName] ;
-            NSLog(@"client entity keys %@",boundObjectKeys);
-            for (id attribute in boundObjectKeys){
-                BOOL setNil=YES;
-                if ([attribute isEqualToString:@"firstName"]) {
-                    [clinicianObject setValue:@"Enter Your" forKey:attribute];
-                    setNil=NO;
-                }
-                if ([attribute isEqualToString:@"lastName"]) {
-                    [clinicianObject setValue:@"Name Here" forKey:attribute];
-                    setNil=NO;
-                }
-                
-                if (setNil && ![attribute isEqualToString:@"myInformation"]&&![attribute isEqualToString:@"atMyCurrentSite"]&&![attribute isEqualToString:@"order"]) {
-                    [cellManagedObject setValue:nil forKey:attribute];
-                    NSLog(@"attribute %@",attribute);
-                }
-                
-            }
-            
-            
-            NSArray *relationshipsByName=(NSArray *)[entityDescription relationshipsByName] ;
-            NSLog(@"client entity keys %@",relationshipsByName);
-            
-            for (id relationship in relationshipsByName){
-                
-                
-                
-                
-                [clinicianObject setValue:nil forKey:relationship];
-                NSLog(@"set nil value for relationship %@",relationship);
-                
-                
-            }
-            
-            
-            [tableViewModel reloadBoundValues];
-            [tableViewModel.modeledTableView reloadData];
-            [appdelegate displayNotification:@"My Personal Information Cleared" forDuration:3.0 location:kPTTScreenLocationTop inView:notificationSuperView];
-            deletePressedOnce=NO;
-            NSLog(@"client entity keys after %@",cellManagedObject);
-        }
-        
-        return NO;
-    }
-    
-    return YES;
-}
+//-(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel willRemoveRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+//    NSLog(@"delete sender is activated %@",cell.boundObject);
+//    BOOL myInformation=(BOOL)[(NSNumber *)[cell.boundObject valueForKey:@"myInformation"]boolValue];
+//    if (myInformation) {
+//        PTTAppDelegate *appdelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//        UIView *notificationSuperView;
+//        
+//        
+//        
+//        
+//        
+//        if (!deletePressedOnce) {
+//            
+//            [appdelegate displayNotification:@"Can't Delete Your Own Record. Press Delete again to clear your information." forDuration:3.5 location:kPTTScreenLocationTop inView:notificationSuperView];
+//            
+//            deletePressedOnce=YES;
+//        }
+//        else
+//        {
+//            
+//            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+//            ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
+//            
+//            NSEntityDescription *entityDescription=(NSEntityDescription *) clinicianObject.entity;
+//            
+//            
+//            NSArray *boundObjectKeys=(NSArray *)[entityDescription attributesByName] ;
+//            NSLog(@"client entity keys %@",boundObjectKeys);
+//            for (id attribute in boundObjectKeys){
+//                BOOL setNil=YES;
+//                if ([attribute isEqualToString:@"firstName"]) {
+//                    [clinicianObject setValue:@"Enter Your" forKey:attribute];
+//                    setNil=NO;
+//                }
+//                if ([attribute isEqualToString:@"lastName"]) {
+//                    [clinicianObject setValue:@"Name Here" forKey:attribute];
+//                    setNil=NO;
+//                }
+//                
+//                if (setNil && ![attribute isEqualToString:@"myInformation"]&&![attribute isEqualToString:@"atMyCurrentSite"]&&![attribute isEqualToString:@"order"]) {
+//                    [cellManagedObject setValue:nil forKey:attribute];
+//                    NSLog(@"attribute %@",attribute);
+//                }
+//                
+//            }
+//            
+//            
+//            NSArray *relationshipsByName=(NSArray *)[entityDescription relationshipsByName] ;
+//            NSLog(@"client entity keys %@",relationshipsByName);
+//            
+//            for (id relationship in relationshipsByName){
+//                
+//                
+//                
+//                
+//                [clinicianObject setValue:nil forKey:relationship];
+//                NSLog(@"set nil value for relationship %@",relationship);
+//                
+//                
+//            }
+//            
+//            
+//            [tableViewModel reloadBoundValues];
+//            [tableViewModel.modeledTableView reloadData];
+//            [appdelegate displayNotification:@"My Personal Information Cleared" forDuration:3.0 location:kPTTScreenLocationTop inView:notificationSuperView];
+//            deletePressedOnce=NO;
+//            NSLog(@"client entity keys after %@",cellManagedObject);
+//        }
+//        
+//        return NO;
+//    }
+//    
+//    return YES;
+//}
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDisappearForSectionAtIndex:(NSUInteger)index{
     if (tableViewModel.tag==0) {
-        currentDetailTableViewModel=nil;
+        self.currentDetailTableViewModel=nil;
         [self resetABVariablesToNil];
     }
     
@@ -2672,7 +2742,7 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewDidDisappearForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (tableViewModel.tag==0) {
-        currentDetailTableViewModel=nil;
+        self.currentDetailTableViewModel=nil;
         [self resetABVariablesToNil];
     }
 //    if (tableViewModel.tag==1) {
@@ -2685,7 +2755,7 @@
 
 NSLog(@"table view model tag is %i",tableViewModel.tag);
     if (tableViewModel.tag==1) {
-        currentDetailTableViewModel=tableViewModel;
+        self.currentDetailTableViewModel=tableViewModel;
     }
 
 
@@ -2775,7 +2845,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
 	// Show the picker 
     
     
-	[currentDetailTableViewModel.viewController.navigationController presentModalViewController:peoplePicker animated:YES];
+	[currentDetailTableViewModel_.viewController.navigationController presentModalViewController:peoplePicker animated:YES];
     
 	
 }
@@ -3041,7 +3111,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
                 UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:personAddNewViewController_];	
                 
                 navController.delegate=self;
-                [[currentDetailTableViewModel.viewController navigationController] presentModalViewController:navController animated:YES];
+                [[currentDetailTableViewModel_.viewController navigationController] presentModalViewController:navController animated:YES];
                 
                 addExistingAfterPromptBool=FALSE;
                 //            [currentDetailTableViewModel.viewController.navigationController presentModalViewController:personToAddViewController animated:YES ];
@@ -3468,8 +3538,8 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
         
         personViewController.allowsEditing=YES;
         personViewController.view.tag=837;
-        [currentDetailTableViewModel.viewController.navigationController setDelegate:self];
-        [currentDetailTableViewModel.viewController.navigationController pushViewController:personViewController animated:YES];
+        [currentDetailTableViewModel_.viewController.navigationController setDelegate:self];
+        [currentDetailTableViewModel_.viewController.navigationController pushViewController:personViewController animated:YES];
         
         
         //        picker.personViewDelegate = self;
@@ -3727,7 +3797,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
         NSLog(@"existing person %@", recordRef);
         int aBRecordID=ABRecordGetRecordID((ABRecordRef) recordRef);
         NSLog(@"abrecord id is %i  ",aBRecordID);
-        SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
+        SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel_ sectionAtIndex:0];
         SCTableViewCell *cell =(SCTableViewCell *)[section cellAtIndex:1];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
@@ -3826,8 +3896,8 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
                     
                     
                     [cell commitChanges];
-                    [currentDetailTableViewModel reloadBoundValues];
-                    [currentDetailTableViewModel.modeledTableView reloadData];
+                    [currentDetailTableViewModel_ reloadBoundValues];
+                    [currentDetailTableViewModel_.modeledTableView reloadData];
                     clinician=(ClinicianEntity *) cellManagedObject;
                     
                 } 
@@ -3964,7 +4034,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
             {
                 NSLog(@"one index");
                 
-                SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
+                SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel_ sectionAtIndex:0];
                 SCTableViewCell *cell =(SCTableViewCell *)[section cellAtIndex:1];
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                 
@@ -3998,8 +4068,8 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
                                 
                                 [cell.boundObject setValue:[NSNumber numberWithInt:existingPersonRecordID ] forKey:@"aBRecordIdentifier"];
                                 [cell commitChanges];
-                                [currentDetailTableViewModel reloadBoundValues];
-                                [currentDetailTableViewModel.modeledTableView reloadData];
+                                [currentDetailTableViewModel_ reloadBoundValues];
+                                [currentDetailTableViewModel_.modeledTableView reloadData];
                                 
                             } 
                             
@@ -4100,7 +4170,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
     
     
     
-    SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
+    SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel_ sectionAtIndex:0];
     SCTableViewCell *cell =(SCTableViewCell *)[section cellAtIndex:1];
     NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
     
@@ -4223,8 +4293,8 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
                 
                 
                 [cell commitChanges];
-                [currentDetailTableViewModel reloadBoundValues];
-                [currentDetailTableViewModel.modeledTableView reloadData];
+                [currentDetailTableViewModel_ reloadBoundValues];
+                [currentDetailTableViewModel_.modeledTableView reloadData];
                 
             } 
         }
@@ -4246,7 +4316,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
     NSLog(@"cancel button pressed");
     [personAddNewViewController_.navigationController dismissViewControllerAnimated:YES completion:^{
         
-        currentDetailTableViewModel.viewController.navigationController.delegate =nil;
+        currentDetailTableViewModel_.viewController.navigationController.delegate =nil;
     }];
     
     
@@ -4616,10 +4686,10 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
     //    SCTableViewModel *ownerTableViewModel=(SCTableViewModel *)self.ownerTableViewModel;
     
     
-    NSLog(@"currenct detail tag is %i",currentDetailTableViewModel.tag);
-    if (currentDetailTableViewModel.tag=429 &&currentDetailTableViewModel.sectionCount) {
-        SCObjectSelectionSection *section=(SCObjectSelectionSection *)[currentDetailTableViewModel sectionAtIndex:0];
-        NSMutableSet *mutableSet= (NSMutableSet *) abGroupobjectSelectionCell.selectedItemsIndexes;
+    NSLog(@"currenct detail tag is %i",currentDetailTableViewModel_.tag);
+    if (currentDetailTableViewModel_.tag=429 &&currentDetailTableViewModel_.sectionCount) {
+        SCObjectSelectionSection *section=(SCObjectSelectionSection *)[currentDetailTableViewModel_ sectionAtIndex:0];
+        NSMutableSet *mutableSet= (NSMutableSet *) abGroupobjectSelectionCell_.selectedItemsIndexes;
         mutableSet=section.selectedItemsIndexes;
         
        

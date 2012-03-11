@@ -20,18 +20,17 @@
 #import "CliniciansViewController_Shared.h"
 //#import "IASKAppSettingsViewController.h"
 #import "DTAboutViewController.h"
-@interface TrainTrackViewController : UIViewController <SCTableViewModelDelegate,DTAboutViewControllerDelegate/*,IASKSettingsDelegate*/> {
+@interface TrainTrackViewController : CliniciansViewController_Shared <SCTableViewModelDelegate,DTAboutViewControllerDelegate/*,IASKSettingsDelegate*/> {
     
-     SCArrayOfObjectsModel *tableModel_;
-   UITableView *tableView;
-    NSManagedObjectContext * managedObjectContext;
-    CliniciansViewController_Shared *cliniciansViewController_Shared_;
+//     SCArrayOfObjectsModel *tableModel_;
+//   
+//    CliniciansViewController_Shared *cliniciansViewController_Shared_;
 //    IASKAppSettingsViewController *appSettingsViewController;
 }
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) SCArrayOfObjectsModel *tableModel;
+
+//@property (strong, nonatomic) SCArrayOfObjectsModel *tableModel;
 @property (strong, nonatomic) IBOutlet UIView *messageView;
-@property (nonatomic, strong)CliniciansViewController_Shared *cliniciansViewController_Shared;
+//@property (nonatomic, strong)CliniciansViewController_Shared *cliniciansViewController_Shared;
 //@property (nonatomic, retain) IASKAppSettingsViewController *appSettingsViewController;
 
 
