@@ -21,7 +21,9 @@ Acknoledgements:
 TO DO:
 
 
-4. fix download bar bug
+4. add adddress groups selection to clincian
+4. add existing hours
+4. fix download bar bug in iPad
 5. fix interpersonal relationships
 6. change immigration history
 
@@ -71,3 +73,4 @@ additional features
 4.  fix link contact to clinician, when link removed then looked up, crash
 4.  add delete group button to in app settings
 4.  add import contacts in group in app settings
+4. fix clinician hierarchy

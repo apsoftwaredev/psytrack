@@ -421,6 +421,23 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
 //        
 //          }
 }
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    
+    
+    
+    
+        detailTableViewModel.delegate = self;
+        detailTableViewModel.tag = tableViewModel.tag+1;
+     
+    if([SCHelper is_iPad]){   
+        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+    }
+    
+    
+    
+}
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
