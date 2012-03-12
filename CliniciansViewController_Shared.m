@@ -23,10 +23,10 @@
 #import "ClinicianEntity.h"
 #import "CliniciansRootViewController_iPad.h"
 #import "ClinicianViewController.h"
-//#import "ABGroupSelectionCell.h"
+
 #import "MySource.h"
 #import "PTABGroup.h"
-#import "ABGroupSelectionCell.h"
+
 
 
 @implementation CliniciansViewController_Shared
@@ -39,7 +39,11 @@
 @synthesize rootViewController=rootViewController_;
 @synthesize tableModel=tableModel_;
 @synthesize tableView;
-@synthesize abGroupobjectSelectionCell=abGroupobjectSelectionCell_;
+@synthesize abGroupObjectSelectionCell=abGroupObjectSelectionCell_;
+@synthesize personViewController=personViewController_;
+
+@synthesize iPadPersonBackgroundView=iPadPersonBackgroundView_;
+@synthesize peoplePickerNavigationController=peoplePickerNavigationController_;
 #pragma mark -
 #pragma Generate SCTableView classes and properties
 
@@ -53,12 +57,19 @@
     }
     
     
-   
+    
+    
+    if (self.iPadPersonBackgroundView) {
+        self.iPadPersonBackgroundView=nil;
+    }
     
     if (personVCFromSelectionList_) {
+        self.personVCFromSelectionList.view=nil;
         self.personVCFromSelectionList=nil;
+        
     }
     if (personAddNewViewController) {
+        personAddNewViewController.view=nil;
         self.personAddNewViewController=nil;
     }
     
@@ -1485,10 +1496,12 @@
     if([SCHelper is_iPad]){
         detailTableViewModel.delegate = self;
         detailTableViewModel.tag = tableViewModel.tag+1;
-
+        
+        UIView *view=[[UIView alloc]init];
+        [view setBackgroundColor:[UIColor clearColor]];
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
-        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+        [detailTableViewModel.modeledTableView setBackgroundView:view];
+         // Make the table view transparent
     }
     
     
@@ -2303,11 +2316,11 @@
                 
                 NSLog(@"client abrecordidntifier %i",[clinicianObject.aBRecordIdentifier intValue]);
                 NSLog(@"client abrecordidentifier %@",clinicianObject.aBRecordIdentifier);
-                self.abGroupobjectSelectionCell=[[ABGroupSelectionCell alloc]initWithClinician:(ClinicianEntity *)clinicianObject];    
+                self.abGroupObjectSelectionCell=[[ABGroupSelectionCell alloc]initWithClinician:(ClinicianEntity *)clinicianObject];    
                 
-                abGroupobjectSelectionCell_.tag=429;
+                abGroupObjectSelectionCell_.tag=429;
                
-                [sectionOne addCell:abGroupobjectSelectionCell_];
+                [sectionOne addCell:abGroupObjectSelectionCell_];
             }
             
             
@@ -2729,8 +2742,14 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDisappearForSectionAtIndex:(NSUInteger)index{
     if (tableViewModel.tag==0) {
+        if (![SCHelper is_iPad]) {
+        
+        currentDetailTableViewModel_.viewController.view=nil;
         self.currentDetailTableViewModel=nil;
+            
+        }
         [self resetABVariablesToNil];
+        
     }
     
     
@@ -2742,6 +2761,7 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewDidDisappearForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (tableViewModel.tag==0) {
+        currentDetailTableViewModel_.viewController.view=nil;
         self.currentDetailTableViewModel=nil;
         [self resetABVariablesToNil];
     }
@@ -2816,22 +2836,31 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
 -(void)showPeoplePickerController
 {
     
-	
-    ABPeoplePickerNavigationController *peoplePicker=[[ABPeoplePickerNavigationController alloc]init];
-    
-    peoplePicker.peoplePickerDelegate = self;
+	if (!self.peoplePickerNavigationController) {
+        self.peoplePickerNavigationController=[[ABPeoplePickerNavigationController alloc]init];
+
+    }
+    else {
+        
+        self.peoplePickerNavigationController=nil;
+        self.peoplePickerNavigationController.view=nil;
+        self.peoplePickerNavigationController=[[ABPeoplePickerNavigationController alloc]init];
+        
+    }
+        
+    peoplePickerNavigationController_.peoplePickerDelegate = self;
 	// Display only a person's phone, email, and birthdate
 	NSArray *displayedItems = [NSArray arrayWithObjects:[NSNumber numberWithInt:kABPersonPhoneProperty], 
                                [NSNumber numberWithInt:kABPersonEmailProperty],
                                [NSNumber numberWithInt:kABPersonBirthdayProperty], nil];
 	
 	
-	peoplePicker.displayedProperties = displayedItems;
+	peoplePickerNavigationController_.displayedProperties = displayedItems;
 	// Show the picker 
     
+
     
-    
-    [peoplePicker setPeoplePickerDelegate:self];
+    [peoplePickerNavigationController_ setPeoplePickerDelegate:self];
     
     
 	// Display only a person's phone, email, and birthdate
@@ -2845,7 +2874,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
 	// Show the picker 
     
     
-	[currentDetailTableViewModel_.viewController.navigationController presentModalViewController:peoplePicker animated:YES];
+	[currentDetailTableViewModel_.viewController.navigationController presentModalViewController:self.peoplePickerNavigationController animated:YES];
     
 	
 }
@@ -2982,9 +3011,24 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
         
         if (existingPersonRecordID==-1) {
             
-            CFStringRef name=(__bridge CFStringRef)[NSString stringWithFormat:@"%@ %@",clinician.firstName, clinician.lastName];
+          
             
-            CFArrayRef peopleWithNameArray= ABAddressBookCopyPeopleWithName((ABAddressBookRef) addressBook, (CFStringRef) name);
+           
+            
+            //crashes if try to release and show alert view
+            NSString *name=[NSString string];
+            name=(NSString *)[NSString stringWithFormat:@"%@ %@",clinician.firstName, clinician.lastName];
+            
+            CFArrayRef peopleWithNameArray=nil;
+            
+           
+            
+            ABAddressBookRef addressBookNew=nil;
+            addressBookNew=ABAddressBookCreate();
+            if (name.length && addressBookNew) {
+                 peopleWithNameArray= ABAddressBookCopyPeopleWithName((ABAddressBookRef) addressBookNew, (__bridge CFStringRef) name);
+            
+           
             
             
             NSLog(@" people with name array %@",peopleWithNameArray);
@@ -3024,7 +3068,15 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
                 
                 //            [self showUnknownPersonViewControllerWithABRecordRef:(ABRecordRef)person.recordRef];
                 
+                if (addressBookNew!=NULL) {
+                    CFRelease(addressBookNew);
+                }
+                
+                 name=NULL;
+                
             }
+               
+
             else if(peopleCount>1 && !addExistingAfterPromptBool)
             {
                 ABRecordRef  existingPersonRef=CFArrayGetValueAtIndex(peopleWithNameArray, 0);
@@ -3037,9 +3089,14 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
                 
                 NSString *lastName=(__bridge_transfer NSString *)CFLastName;
                 
-                CFRelease(CFFirstName);
-                CFRelease(CFLastName);
-                
+                if (CFFirstName!=NULL) {
+                    CFRelease(CFFirstName);
+                }
+                if (CFLastName!=NULL) {
+                    CFRelease(CFLastName);
+
+                }
+                               
                 
                 NSString *compositeName=[NSString stringWithFormat:@"%@ %@", firstName, lastName];  
                 NSString *alertMessage=[NSString stringWithFormat:@"Existing entries for %@ in the Address Book. Would you like to select an existing Address Book entry for this clinician?",compositeName];
@@ -3049,9 +3106,28 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
                 
                 alert.tag=kAlertTagFoundExistingPeopleWithName;
                 
+
                 
                 [alert show];
+                group=nil;
+                addressBook=nil;
+                if (addressBook!=NULL) {
+                    CFRelease(addressBook);
+                }
+                
+                if (addressBookNew!=NULL) {
+                    CFRelease(addressBookNew);
+                }
+                if (group!=NULL) {
+                    CFRelease(group);
+                    
+                }
+            
             }
+                
+                
+               
+            
             else
                 
             {
@@ -3085,6 +3161,10 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
                 }
 //                NSLog(@"group issdfsdf %@",group);
                 [personAddNewViewController_ setAddressBook:addressBook];
+                if (self.personAddNewViewController) {
+                    self.personAddNewViewController.view=nil;
+                    self.personAddNewViewController=nil;
+                }
                 self.personAddNewViewController=[[ABNewPersonViewController alloc]init];;
                 if (autoAddClinicianToGroup && group) {
                     personAddNewViewController_.parentGroup=group;
@@ -3115,13 +3195,23 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
                 
                 addExistingAfterPromptBool=FALSE;
                 //            [currentDetailTableViewModel.viewController.navigationController presentModalViewController:personToAddViewController animated:YES ];
+                if (group!=NULL) {
+                    CFRelease(group);
+                }  
                 
-                
-            }
-            if (group) {
-                CFRelease(group);
-            }       
             
+//            if (addressBook!=NULL) {
+//                CFRelease(addressBook);
+//            }
+//            if (addressBookNew!=NULL) {
+//                    CFRelease(addressBookNew);
+//                }
+            }
+            }
+//            if (addressBook==) {
+//                CFRelease(addressBook);
+//            }
+          
         }
         else
             
@@ -3129,10 +3219,12 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
             NSLog(@"existing record id is %i",existingPersonRecordID);
             
             [self showPersonViewControllerForRecordID:(int)existingPersonRecordID];
-            
+            if (addressBook!=NULL) {
+                CFRelease(addressBook);
+            } 
         }
         
-      
+   
     
 }
 
@@ -3529,17 +3621,52 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
         addressBook=ABAddressBookCreate();
         
 
-        ABRecordRef existingPerson=ABAddressBookGetPersonWithRecordID(addressBook, recordID);
+        ABRecordRef existingPerson=nil;
+        existingPerson=ABAddressBookGetPersonWithRecordID(addressBook, recordID);
+
         
+       
+        if (!self.personViewController) {
+            self.personViewController=[[ABPersonViewController alloc]init];
+        } 
+        else {
+            
+            if ([SCHelper is_iPad]) {
+           
+            self.personViewController=nil;
+            self.personViewController=[[ABPersonViewController alloc]init];
+            self.personViewController.view=nil;
+            
+                if (!iPadPersonBackgroundView_) {
+                    self.iPadPersonBackgroundView=[[UIView alloc]init];
+                }    
+           
+          
+                
+                
+            }
+            
+                
+            
+        }
+//        [self.personViewController.view setBackgroundColor:[UIColor clearColor]];
+        personViewController_.personViewDelegate = self;
+		personViewController_.displayedPerson = existingPerson;
         
-        ABPersonViewController *personViewController=[[ABPersonViewController alloc]init];;
-        personViewController.personViewDelegate = self;
-		personViewController.displayedPerson = existingPerson;
+        personViewController_.allowsEditing=YES;
+//        if (!self.iPadPersonBackgroundView) {
+//            self.iPadPersonBackgroundView=[[UIView alloc]init];
+//            iPadPersonBackgroundView_.tag=837;
+//            [iPadPersonBackgroundView_ setBackgroundColor:[UIColor clearColor]];
+//        }
+//        self.personViewController.view=self.iPadPersonBackgroundView;
+        if (personViewController_.view) {
+            self.personViewController.view.tag=837;
+
+        }
         
-        personViewController.allowsEditing=YES;
-        personViewController.view.tag=837;
-        [currentDetailTableViewModel_.viewController.navigationController setDelegate:self];
-        [currentDetailTableViewModel_.viewController.navigationController pushViewController:personViewController animated:YES];
+                [currentDetailTableViewModel_.viewController.navigationController setDelegate:self];
+        [currentDetailTableViewModel_.viewController.navigationController pushViewController:personViewController_ animated:YES];
         
         
         //        picker.personViewDelegate = self;
@@ -3547,7 +3674,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
         //		// Allow users to edit the person’s information
         //		picker.allowsEditing = YES;
         
-		
+        
 	}
 	
 	
@@ -3559,7 +3686,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
 
 -(void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker{
     
-    
+    peoplePicker.view=nil;
     [peoplePicker dismissViewControllerAnimated:YES completion:nil];
     
     
@@ -3604,12 +3731,23 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
         
         
         UITableView *personViewTableView=(UITableView *)[viewController.view.subviews objectAtIndex:0];
-        if ([SCHelper is_iPad]) {
-        [personViewTableView setBackgroundView:nil];
-        [personViewTableView setBackgroundView:[[UIView alloc] init]];
-        }
-        [personViewTableView setBackgroundColor:UIColor.clearColor]; 
         
+            
+        if ([SCHelper is_iPad]) {
+            [personViewTableView setBackgroundView:nil];
+            [personViewTableView setBackgroundView:self.iPadPersonBackgroundView];
+        }
+       
+     
+        [personViewTableView setBackgroundColor:UIColor.clearColor]; 
+        //        
+
+        
+            
+             
+        
+        personViewTableView.backgroundView.tag=837;
+      
         [viewController.navigationController setDelegate:nil];
         
         
@@ -3646,7 +3784,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
     //    }
     
     if ([viewController isKindOfClass:[ABPersonViewController class]]&& viewController.view.tag!=837 ) {
-        personVCFromSelectionList_  = (ABPersonViewController *)viewController;
+        self.personVCFromSelectionList  = (ABPersonViewController *)viewController;
         
         NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
         // create a spacer
@@ -3667,10 +3805,12 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
         
         NSLog(@"child view controllers are %@",viewController.view.subviews);
         UITableView *personViewTableView=(UITableView *)[viewController.view.subviews objectAtIndex:0];
-        if ([SCHelper is_iPad]) {
+        
+                        
+            
         [personViewTableView setBackgroundView:nil];
-        [personViewTableView setBackgroundView:[[UIView alloc] init]];
-        }
+        [personViewTableView setBackgroundView:[[UIView alloc]init]];
+      
         [personViewTableView setBackgroundColor:UIColor.clearColor]; 
         viewController.navigationItem.rightBarButtonItems=buttons;
         
@@ -3715,7 +3855,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
         
         BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults] boolForKey:kPTAutoAddClinicianToGroup];
         bool didSave=NO;
-        if (autoAddClinicianToGroup) 
+        if (autoAddClinicianToGroup||abGroupObjectSelectionCell_.selectedItemsIndexes.count) 
         {
             
             int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
@@ -3738,6 +3878,10 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
                 didSave=( bool )  ABAddressBookAddRecord(addressBookRef, group, nil);
                 NSLog(@"group is %@",group);
             }
+            
+            
+            
+            
         }
         else 
         {
@@ -3896,6 +4040,11 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
                     
                     
                     [cell commitChanges];
+                    abGroupObjectSelectionCell_.items=[abGroupObjectSelectionCell_ addressBookGroupsArray];
+                    
+                    [abGroupObjectSelectionCell_ addPersonToSelectedGroups];
+                    abGroupObjectSelectionCell_.synchWithABBeforeLoadBool=YES;
+
                     [currentDetailTableViewModel_ reloadBoundValues];
                     [currentDetailTableViewModel_.modeledTableView reloadData];
                     clinician=(ClinicianEntity *) cellManagedObject;
@@ -3916,6 +4065,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
     
     
     existingPersonRecordID =-1;
+    personAddNewViewController.view=nil;
     [personAddNewViewController_.navigationController dismissViewControllerAnimated:YES completion:nil];
     
     //    CFRelease(person);
@@ -4004,12 +4154,12 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
 //}
 
 
-// Does not allow users to perform default actions such as emailing a contact, when they select a contact property.
-- (BOOL)unknownPersonViewController:(ABUnknownPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person 
-						   property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
-{
-	return NO;
-}
+//// Does not allow users to perform default actions such as emailing a contact, when they select a contact property.
+//- (BOOL)unknownPersonViewController:(ABUnknownPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person 
+//						   property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
+//{
+//	return NO;
+//}
 
 #pragma mark -
 #pragma mark - UIAlertViewDelegate
@@ -4068,9 +4218,11 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
                                 
                                 [cell.boundObject setValue:[NSNumber numberWithInt:existingPersonRecordID ] forKey:@"aBRecordIdentifier"];
                                 [cell commitChanges];
+                                abGroupObjectSelectionCell_.synchWithABBeforeLoadBool=YES;
                                 [currentDetailTableViewModel_ reloadBoundValues];
                                 [currentDetailTableViewModel_.modeledTableView reloadData];
                                 
+                              
                             } 
                             
                         }
@@ -4158,7 +4310,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
     NSLog(@"cancel button clicked");
     NSLog(@"sender class is %@",[sender class]);
     if (personVCFromSelectionList_) {
-        [personVCFromSelectionList_ dismissViewControllerAnimated:YES completion:nil];
+        [self.personVCFromSelectionList dismissViewControllerAnimated:YES completion:nil];
     }
     
     
@@ -4325,13 +4477,23 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
 
 -(void)resetABVariablesToNil{
     
-    if (personAddNewViewController) {
-        personAddNewViewController_=nil;
+    if (self.personViewController) {
+        self.personViewController.view=nil;
+        self.personViewController=nil;
     }
-    if ( personVCFromSelectionList_) {
-        personVCFromSelectionList_=nil;
+    if (self.personAddNewViewController) {
+        self.personAddNewViewController.view=nil;
+        self.personAddNewViewController=nil;
     }
-    
+    if ( self.personVCFromSelectionList) {
+        self.personVCFromSelectionList.view=nil;
+        self.personVCFromSelectionList=nil;
+    }
+    if (self.peoplePickerNavigationController) {
+        self.peoplePickerNavigationController.view=nil;
+        self.peoplePickerNavigationController=nil;;
+        
+    }
     
     existingPersonRecordID=-1;
     addExistingAfterPromptBool=FALSE;
@@ -4689,23 +4851,23 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
     NSLog(@"currenct detail tag is %i",currentDetailTableViewModel_.tag);
     if (currentDetailTableViewModel_.tag=429 &&currentDetailTableViewModel_.sectionCount) {
         SCObjectSelectionSection *section=(SCObjectSelectionSection *)[currentDetailTableViewModel_ sectionAtIndex:0];
-        NSMutableSet *mutableSet= (NSMutableSet *) abGroupobjectSelectionCell_.selectedItemsIndexes;
+        NSMutableSet *mutableSet= (NSMutableSet *) abGroupObjectSelectionCell_.selectedItemsIndexes;
         mutableSet=section.selectedItemsIndexes;
         
        
         
         
     }
-    if(rootViewController_.navigationController)
+    if(tableModel_.viewController.navigationController)
 	{
 		// check if self is the rootViewController
         
-        [rootViewController_.navigationController popViewControllerAnimated:YES];
+        [tableModel_.viewController.navigationController popViewControllerAnimated:YES];
         
         
 	}
 	else
-		[rootViewController_ dismissModalViewControllerAnimated:YES];
+		[tableModel_.viewController dismissModalViewControllerAnimated:YES];
     
 
     

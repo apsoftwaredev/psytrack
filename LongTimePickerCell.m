@@ -174,7 +174,7 @@
     NSInteger firstComponent=[picker selectedRowInComponent:0];
     NSInteger secondComponent=[picker selectedRowInComponent:1];
     
-    NSInteger thirdComponent=[picker selectedRowInComponent:2];
+//    NSInteger thirdComponent=[picker selectedRowInComponent:2];
     [minuteFormatter setDateFormat:@"mm"];
     
    
@@ -234,7 +234,7 @@
 
 -(CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component{
     
-    float returnFloat;
+    float returnFloat=0;
     
     switch (component) {
         case 0:
@@ -261,7 +261,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    NSInteger returnInteger;
+    NSInteger returnInteger=0;
  
     switch (component) {
         case 0:

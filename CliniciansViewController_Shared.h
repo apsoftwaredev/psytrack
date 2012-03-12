@@ -19,7 +19,7 @@
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "ClinicianEntity.h"
-
+#import "ABGroupSelectionCell.h"
 static NSInteger const kAlertTagFoundExistingPersonWithName = 1;
 static NSInteger const kAlertTagFoundExistingPeopleWithName = 2;
 
@@ -42,22 +42,33 @@ NSManagedObjectContext *managedObjectContext;
      SCArrayOfObjectsModel *tableModel_;
      ABPersonViewController *personVCFromSelectionList;
      ABNewPersonViewController *personAddNewViewController;
+    ABPersonViewController *personViewController_;
+    ABPeoplePickerNavigationController *peoplePickerNavigationController_;
     ClinicianEntity *clinician;
 //      ABAddressBookRef addressBook;
 
-    SCObjectSelectionCell *abGroupobjectSelectionCell_;
+    ABGroupSelectionCell *abGroupObjectSelectionCell_;
+    
+    UIView *iPadPersonBackgroundView_;
 }
 
 
 @property (strong ,nonatomic)IBOutlet SCClassDefinition *clinicianDef;
+
+
+@property (strong ,nonatomic)UIView *iPadPersonBackgroundView;
+
 @property (nonatomic, strong) IBOutlet ABPersonViewController *personVCFromSelectionList;
 @property (nonatomic, strong) IBOutlet ABNewPersonViewController *personAddNewViewController;
+@property (nonatomic, strong) IBOutlet ABPersonViewController *personViewController;
+@property (nonatomic, strong) IBOutlet ABPeoplePickerNavigationController *peoplePickerNavigationController;
+
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) IBOutlet SCArrayOfObjectsModel *tableModel;
 @property (nonatomic, strong)  UIViewController *rootViewController;
 @property (nonatomic, strong) IBOutlet  SCTableViewModel *currentDetailTableViewModel;
-@property (nonatomic, strong)SCObjectSelectionCell *abGroupobjectSelectionCell;
+@property (nonatomic, strong)ABGroupSelectionCell *abGroupObjectSelectionCell;
 //@property (strong, nonatomic)IBOutlet SCArrayOfStringsSection *objectsSection;
 
 

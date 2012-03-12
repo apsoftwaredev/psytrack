@@ -1284,20 +1284,22 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
     addressBook=nil;
     addressBook=ABAddressBookCreate();
 
-    
+    ABRecordRef person=nil;
     BOOL exists=NO;
     if (recordID>0) {
         
-        ABRecordRef person=(ABRecordRef ) ABAddressBookGetPersonWithRecordID(addressBook, recordID);
         
+        person=(ABRecordRef ) ABAddressBookGetPersonWithRecordID(addressBook, recordID);
         if (person) {
             exists=YES;
-            CFRelease(person);
         } 
         
         
     }
-    
+  
+    if (addressBook) {
+        CFRelease(addressBook);
+    } 
     
     
     return exists;

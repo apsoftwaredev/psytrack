@@ -26,12 +26,13 @@
  NSArray *abGroupsArray;
 
     ClinicianEntity *clinician_;
+    BOOL synchWithABBeforeLoadBool_;
 }
 
 
 
 @property (nonatomic, strong)ClinicianEntity *clinician;
-
+@property (nonatomic, assign)BOOL synchWithABBeforeLoadBool;
 
 -(NSArray *)addressBookGroupsArray;
 -(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew;
@@ -40,6 +41,8 @@
 -(id)initWithClinician:(ClinicianEntity *)clinicianObject;
 -(BOOL)personContainedInGroupWithID:(int)groupID;
 -(void)addPersonToGroupWithID:(int)groupID;
-
+-(void)removePersonFromGroupWithID:(int)groupID;
+-(void)syncryonizeWithAddressBookGroups;
+-(void)addPersonToSelectedGroups;
 
 @end

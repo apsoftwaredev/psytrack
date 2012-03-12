@@ -5188,7 +5188,9 @@ return [self applicationDrugsDirectory].path;
 
     NSLog(@"alert text is  in app delegate is %@",alertText);
    
-    if (!casualAlertManager) {
+    
+    if (casualAlertManager) {
+        casualAlertManager.view=nil;
         casualAlertManager=nil;
     }
     self.casualAlertManager=[[CasualAlertViewController alloc] initWithNibName:@"CasualAlertViewController"  bundle:nil];

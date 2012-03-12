@@ -20,15 +20,16 @@
 #import "PTABGroup.h"
 @implementation ABGroupSelectionCell
 @synthesize  clinician=clinician_;
+@synthesize synchWithABBeforeLoadBool=synchWithABBeforeLoadBool_;
 
 -(id)initWithClinician:(ClinicianEntity *)clinicianObject
 {
-
+ self.clinician=clinicianObject;
 
     self=[super init];
     
     
-    self.clinician=clinicianObject;
+   
     return self;
 
 
@@ -53,9 +54,42 @@
     
     self.items=[self addressBookGroupsArray];
     
+       
+    self.synchWithABBeforeLoadBool=YES;
+
+        
+    NSLog(@"selected items %@",self.selectedItemsIndexes);
+    
 }
 
+-(void)syncryonizeWithAddressBookGroups{
 
+    
+    NSArray *groupItems=(NSArray *)self.items;
+    NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
+
+    NSLog(@"items are %@",self.items);
+    int groupCount=groupItems.count;
+
+    for (int i=0; i<groupCount; i++) {
+        
+        PTABGroup *ptGroup=[groupItems objectAtIndex:i];
+        NSLog(@"person id %i",ptGroup.recordID);
+        NSLog(@"clinician %@",clinician_.aBRecordIdentifier);
+        if ([self personContainedInGroupWithID:ptGroup.recordID]) {
+            if (![self.selectedItemsIndexes containsObject:[NSNumber numberWithInt:i]]) {
+                [self.selectedItemsIndexes addObject:[NSNumber numberWithInt:i]];
+            }
+            
+            
+        }
+        
+    }
+    synchWithABBeforeLoadBool_=NO;
+
+NSLog(@"selected items indexes is %@",self.selectedItemsIndexes);
+
+}
 
 -(void)loadBindingsIntoCustomControls{
 
@@ -68,7 +102,16 @@
 
 
 }
+
 -(void)loadBoundValueIntoControl{
+    
+    
+    if (synchWithABBeforeLoadBool_){
+        [self syncryonizeWithAddressBookGroups];
+    
+    
+    }
+    
     
     int groupCount=self.items.count;
     NSArray *groupItems=(NSArray *)self.items;
@@ -77,11 +120,11 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
     NSLog(@"items are %@",self.items);
     
     for (int i=0; i<groupCount; i++) {
-    
+    NSLog(@"selected items indexs is %@",self.selectedItemsIndexes);
         PTABGroup *ptGroup=[groupItems objectAtIndex:i];
         if ([self personContainedInGroupWithID:ptGroup.recordID]) {
             if (![self.selectedItemsIndexes containsObject:[NSNumber numberWithInt:i]]) {
-                [self.selectedItemsIndexes addObject:[NSNumber numberWithInt:i]];
+                [self removePersonFromGroupWithID:ptGroup.recordID];
             }
           
             
@@ -89,7 +132,11 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
         else 
         {
             if ([self.selectedItemsIndexes containsObject:[NSNumber numberWithInt:i]]) {
-                [self.selectedItemsIndexes removeObject:[NSNumber numberWithInt:i]];
+    
+                [self addPersonToGroupWithID:ptGroup.recordID];
+                
+                
+                
             }
         }
     
@@ -122,6 +169,38 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
     
 }
 
+-(void)addPersonToSelectedGroups{
+
+  
+        
+        if (self.selectedItemsIndexes.count>0 && ![clinician_.aBRecordIdentifier isEqualToNumber:[NSNumber numberWithInt: -1]]) 
+        {
+            
+            
+            for (NSNumber *selectedItemAtIndex in self.selectedItemsIndexes) {
+            NSLog(@"selected item at index is %i",[selectedItemAtIndex intValue]);
+                PTABGroup *ptABGroup=[self.items objectAtIndex:[selectedItemAtIndex intValue]];
+                
+                if (![self personContainedInGroupWithID:(int)ptABGroup]) {
+                    [self addPersonToGroupWithID:(int)ptABGroup.recordID];
+                }
+                
+                
+                
+            }
+        
+        
+        
+        }
+        
+        
+ 
+
+
+
+}
+
+
 -(void)addPersonToGroupWithID:(int)groupID
 {
     int clinicianABRecordIdentifier=[clinician_.aBRecordIdentifier intValue];
@@ -129,9 +208,160 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
         return;
     }
 
+    ABAddressBookRef addressBook=nil;
+    addressBook=ABAddressBookCreate();
+    
+    ABRecordRef person=ABAddressBookGetPersonWithRecordID(addressBook, clinicianABRecordIdentifier);
+    
+    if (person) 
+    {
+        
+                   
+            if (groupID>-1) 
+            {
+                
+                ABRecordRef group= ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, (ABRecordID) groupID);
+                
+                CFErrorRef error=nil;
+                if (group) {
+                bool didSave=( bool )  ABGroupAddMember(group, person,&error);
+            
+                if (error!=noErr) {
+                    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                    
+                   [ appDelegate displayNotification:[NSString stringWithFormat:@"Error adding to group occured: %@", (__bridge NSString *) CFErrorCopyDescription(error) ]forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+                }
+                BOOL wantToSaveChanges=YES;
+                if (didSave &&ABAddressBookHasUnsavedChanges(addressBook)) {
+                  
+                        
+                        if (wantToSaveChanges) {
+                            
+                            didSave = ABAddressBookSave(addressBook, nil);
+                            
+                            if (!didSave) 
+                            {
+                                /* Handle error here. */
+                            }
+                            
+                        } 
+                        else 
+                        {
+                            
+                            ABAddressBookRevert(addressBook);
+                            
+                        }
+                        
+                }
+                }
+                if (group) {
+                    CFRelease(group);
+                    
+                }
+                if (error) 
+                {
+                    CFRelease(error);
+                }
+                
+                NSLog(@"group is %@",group);
 
+            }
+                
+        }
+               
+        
+     
+    if (person) {
+        CFRelease(person);
+    }
+        
+} 
 
-}
+        
+        
+-(void)removePersonFromGroupWithID:(int)groupID
+{
+    int clinicianABRecordIdentifier=[clinician_.aBRecordIdentifier intValue];
+    if (clinicianABRecordIdentifier==-1) {
+        return;
+    }
+    
+    ABAddressBookRef addressBook=nil;
+    addressBook=ABAddressBookCreate();
+    ABRecordRef person=nil;
+    person=ABAddressBookGetPersonWithRecordID(addressBook, clinicianABRecordIdentifier);
+    
+    if (person) 
+    {
+        
+        
+        if (groupID>-1) 
+        {
+            ABRecordRef group=nil;
+             group= ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, (ABRecordID) groupID);
+            
+            CFErrorRef error=nil;
+            
+            if (group) {
+                    bool didRemove=( bool )  ABGroupRemoveMember(group, person,&error);
+            
+            if (error!=noErr) {
+                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                
+                [ appDelegate displayNotification:[NSString stringWithFormat:@"Error adding to group occured: %@", (__bridge NSString *) CFErrorCopyDescription(error) ]forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+            }
+            BOOL wantToSaveChanges=YES;
+            if (didRemove &&ABAddressBookHasUnsavedChanges(addressBook)) {
+                
+                
+                if (wantToSaveChanges) {
+                    bool didSave=NO;
+                    
+                    didSave = ABAddressBookSave(addressBook, nil);
+                    
+                    if (!didSave) 
+                    {
+                        /* Handle error here. */
+                    }
+                    
+                } 
+                else 
+                {
+                    
+                    ABAddressBookRevert(addressBook);
+                    
+                }
+                
+            }
+            }
+            if (group) {
+                CFRelease(group);
+                
+            }
+            if (error) 
+            {
+                CFRelease(error);
+            }
+            
+            NSLog(@"group is %@",group);
+            
+        }
+        
+    }
+    
+    
+    
+    if (person) {
+        CFRelease(person);
+    }
+    
+} 
+    
+        
+        
+                
+ 
+
 
 
 -(BOOL)personContainedInGroupWithID:(int)groupID{

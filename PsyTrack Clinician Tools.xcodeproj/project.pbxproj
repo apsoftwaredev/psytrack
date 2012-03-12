@@ -1139,6 +1139,10 @@
 			isa = PBXGroup;
 			children = (
 				376797F61500665D00D0639D /* ABGroupNameChangeCell.xib */,
+				E7516B75150858D3005B798A /* ABGroupSelectionCell.h */,
+				E7516B76150858D3005B798A /* ABGroupSelectionCell.m */,
+				E7516B7915085A23005B798A /* PTABGroup.h */,
+				E7516B7A15085A23005B798A /* PTABGroup.m */,
 				376797FC1500665D00D0639D /* LongTimePickerCell_iPhone.xib */,
 				376797FE1500665D00D0639D /* MyPickerView.xib */,
 				37F7CED015005F7E00AD2C3A /* BehaviorPickerCell.h */,
@@ -1205,10 +1209,6 @@
 				37F7CF2315005F7E00AD2C3A /* TimePickerView.m */,
 				37F7CF2415005F7E00AD2C3A /* WeightPickerCell.h */,
 				37F7CF2515005F7E00AD2C3A /* WeightPickerCell.m */,
-				E7516B75150858D3005B798A /* ABGroupSelectionCell.h */,
-				E7516B76150858D3005B798A /* ABGroupSelectionCell.m */,
-				E7516B7915085A23005B798A /* PTABGroup.h */,
-				E7516B7A15085A23005B798A /* PTABGroup.m */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
