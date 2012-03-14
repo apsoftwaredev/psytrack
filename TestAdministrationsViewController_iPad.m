@@ -529,10 +529,13 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
         tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
     }
     
- 
+    if ([SCHelper is_iPad]) {
+   
     [self.tableView setBackgroundView:nil];
     [self.tableView setBackgroundView:[[UIView alloc] init]];
-    [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+        
+    }
+        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
     
 
     self.view.backgroundColor=[UIColor clearColor];

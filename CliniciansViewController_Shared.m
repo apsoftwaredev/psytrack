@@ -4471,7 +4471,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
         currentDetailTableViewModel_.viewController.navigationController.delegate =nil;
     }];
     
-    
+   
     
 }
 

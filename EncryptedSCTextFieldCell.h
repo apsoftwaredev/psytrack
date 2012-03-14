@@ -16,16 +16,16 @@
  *
  */
 #import "SCTableViewCell.h"
-#import "PTTAppDelegate.h"
+
 @interface EncryptedSCTextFieldCell : SCTextFieldCell {
 
 
-    PTTAppDelegate *appDelegate;
+ 
 
 
 }
 
 
-@property (nonatomic,strong)NSString *testString;
+
 
 @end

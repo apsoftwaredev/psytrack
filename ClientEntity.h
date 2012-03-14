@@ -33,7 +33,7 @@
 @property (nonatomic, strong) NSSet *interventionsDelivered;
 @property (nonatomic, strong) NSManagedObject *clientAndMentalState;
 @property (nonatomic, strong) NSSet *diagnosis;
-
+@property (nonatomic, strong) NSDate * keyDate;
 @property (nonatomic, strong)  NSString *clientIDcodeDC;
 
 

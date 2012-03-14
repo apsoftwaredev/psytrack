@@ -46,7 +46,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
 	self.clientDef = [SCClassDefinition definitionWithEntityName:@"ClientEntity" 
                                                       withManagedObjectContext:managedObjectContext 
-                                                             withPropertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth", 
+                                                             withPropertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth", @"keyDate",
                                                                                 @"initials",  @"demographicInfo", @"dateAdded",@"currentClient",@"phoneNumbers", @"logs", @"medicationHistory",   
                                                                 @"notes",nil]];
 	
@@ -60,7 +60,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     clientIdCodePropertyDef.type=SCPropertyTypeCustom;
     clientIdCodePropertyDef.uiElementClass=[EncryptedSCTextFieldCell class];
     
-    NSDictionary *encryptedTextFieldCellKeyBindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObject:@"clientIDCode"] forKeys:[NSArray arrayWithObject:@"1"]];
+    NSDictionary *encryptedTextFieldCellKeyBindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"clientIDCode",@"keyDate",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32",nil]];
     
 
     clientIdCodePropertyDef.objectBindings=encryptedTextFieldCellKeyBindingsDictionary;
@@ -71,7 +71,8 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     self.clientDef.titlePropertyName = @"clientIDCode";	
     self.clientDef.keyPropertyName= @"clientIDCode";
     
-   
+    NSInteger indexOfKeyDate=(NSInteger )[self.clientDef indexOfPropertyDefinitionWithName:@"keyDate"];
+    [self.clientDef removePropertyDefinitionAtIndex:indexOfKeyDate];
     
     SCPropertyDefinition *clientDateOfBirthPropertyDef = [self.clientDef propertyDefinitionWithName:@"dateOfBirth"];
 	clientDateOfBirthPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 

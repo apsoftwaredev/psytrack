@@ -218,6 +218,8 @@
     
     // Instantiate the tabel model
 	tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withItems:drugsMutableArray withClassDefinition:drugDef];	
+    
+//    tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self];    
 //    
 //    
 //    
@@ -680,9 +682,18 @@
     if (!self.downloadBar) {
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
-
+        CGRect frame;
+        
+        if ([SCHelper is_iPad]) {
+           frame=CGRectMake(0, 12, 400, 30);
+        }
+        else {
+            frame=CGRectMake(0, 12, 115, 20);
+        }
+        
+        
 //        NSURL *drugsDirectory=(NSURL*)[appDelegate applicationDrugsDirectory];
-            self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://psycheweb.com/psytrack/dFiles/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:CGRectMake(0, 12, 115, 20)
+            self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://psycheweb.com/psytrack/dFiles/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
                                          timeout:15 
                                         delegate:self];
         
@@ -908,8 +919,8 @@
             
             
             
-            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-            dispatch_async(queue, ^{
+//            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
+//            dispatch_async(queue, ^{
                 
                 NSLog(@"beginning dispach 2");
                 
@@ -925,7 +936,7 @@
                 NSString *drugApplNo=(NSString *)[section.boundObject valueForKey:@"applNo"];
                 
                 NSLog(@"applNo is %@",drugApplNo);
-                DrugActionDateViewController * drugActionDateViewController_iPhone = [[DrugActionDateViewController alloc] initWithNibName:@"DrugActionDateViewController" bundle:nil withApplNo:drugApplNo];
+                DrugActionDateViewController * drugActionDateViewController_iPhone = [[DrugActionDateViewController alloc] initWithNibName:@"DrugActionDateViewController" bundle:[NSBundle mainBundle] withApplNo:drugApplNo];
                 
                 
                 
@@ -942,7 +953,7 @@
                 self.tableView.userInteractionEnabled=TRUE;
                 
                 
-            });
+//            });
             
             break;
         }    

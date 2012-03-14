@@ -64,7 +64,6 @@
 		378DEDE214FE73AF00CF4F12 /* LCYTurnOffPasscodeStateMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 378DEDCE14FE73AF00CF4F12 /* LCYTurnOffPasscodeStateMachine.m */; };
 		378DEDE314FE73AF00CF4F12 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 378DEDCF14FE73AF00CF4F12 /* LICENSE.txt */; };
 		378DEDE514FE73AF00CF4F12 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 378DEDD114FE73AF00CF4F12 /* README.markdown */; };
-		37A5D9F114FBD680007BC72A /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A5D9F014FBD680007BC72A /* KeyEntity.m */; };
 		37B2254B150285E30015D955 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B2254A150285E30015D955 /* Default.png */; };
 		37B2254D150286040015D955 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B2254C150286040015D955 /* Default@2x.png */; };
 		37B2254F150286170015D955 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B2254E150286170015D955 /* Default-Portrait~ipad.png */; };
@@ -269,6 +268,9 @@
 		E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B76150858D3005B798A /* ABGroupSelectionCell.m */; };
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 		E7516BDC150BF9A2005B798A /* Dan Boice-46.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */; };
+		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
+		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
+		E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -361,8 +363,6 @@
 		378DEDCE14FE73AF00CF4F12 /* LCYTurnOffPasscodeStateMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCYTurnOffPasscodeStateMachine.m; path = LockScreen/LCYTurnOffPasscodeStateMachine.m; sourceTree = SOURCE_ROOT; };
 		378DEDCF14FE73AF00CF4F12 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.txt; path = LockScreen/LICENSE.txt; sourceTree = SOURCE_ROOT; };
 		378DEDD114FE73AF00CF4F12 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.markdown; path = LockScreen/README.markdown; sourceTree = SOURCE_ROOT; };
-		37A5D9EF14FBD680007BC72A /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = SOURCE_ROOT; };
-		37A5D9F014FBD680007BC72A /* KeyEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyEntity.m; sourceTree = SOURCE_ROOT; };
 		37B2254A150285E30015D955 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		37B2254C150286040015D955 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		37B2254E150286170015D955 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
@@ -641,7 +641,6 @@
 		B79F489E142BEF0D0085D47B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B79F48A0142BEF0D0085D47B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B79F48A2142BEF0D0085D47B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		B7CBE3C414EF1EC0001F2FB3 /* PsyTrack Clinician Tools.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PsyTrack Clinician Tools.entitlements"; sourceTree = SOURCE_ROOT; };
 		B7D097F414BAC43E00C6065F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B7F877B914C9A38900F00C0D /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		B7F877BA14C9A38900F00C0D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
@@ -650,6 +649,13 @@
 		E7516B7915085A23005B798A /* PTABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTABGroup.h; sourceTree = "<group>"; };
 		E7516B7A15085A23005B798A /* PTABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTABGroup.m; sourceTree = "<group>"; };
 		E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Dan Boice-46.jpg"; path = "../../Pictures/childhood scans/Dan Boice-46.jpg"; sourceTree = "<group>"; };
+		E754D1A71510197E006CC903 /* PsyTrack Clinician Tools.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PsyTrack Clinician Tools.entitlements"; sourceTree = "<group>"; };
+		E7C0749D150E60B4009C5498 /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = "<group>"; };
+		E7C0749E150E60B4009C5498 /* KeyEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyEntity.m; sourceTree = "<group>"; };
+		E7C074A0150EE4DE009C5498 /* EncryptedSCDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCDateCell.h; sourceTree = "<group>"; };
+		E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCDateCell.m; sourceTree = "<group>"; };
+		E7C074A3150EE514009C5498 /* EncryptedSCTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCTextViewCell.h; sourceTree = "<group>"; };
+		E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCTextViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -916,6 +922,10 @@
 				37F7CE4E1500550D00AD2C3A /* ClientEntity.m */,
 				37F7CE4F1500550D00AD2C3A /* ClientsViewController_Shared.h */,
 				37F7CE501500550D00AD2C3A /* ClientsViewController_Shared.m */,
+				E7C074A0150EE4DE009C5498 /* EncryptedSCDateCell.h */,
+				E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */,
+				E7C074A3150EE514009C5498 /* EncryptedSCTextViewCell.h */,
+				E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */,
 			);
 			name = Clients;
 			sourceTree = "<group>";
@@ -1229,7 +1239,6 @@
 			isa = PBXGroup;
 			children = (
 				3767981815006A8100D0639D /* InfoPlist.strings */,
-				B7CBE3C414EF1EC0001F2FB3 /* PsyTrack Clinician Tools.entitlements */,
 				37F7CFCB150060D400AD2C3A /* main.m */,
 				37F7CFCD150060D400AD2C3A /* PsyTrack Clinician Tools-Prefix.pch */,
 				37F7CFCE150060D400AD2C3A /* Settings.bundle */,
@@ -1266,11 +1275,11 @@
 		B764788914DE6CED004EE572 /* Encrypted Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E7C0749D150E60B4009C5498 /* KeyEntity.h */,
+				E7C0749E150E60B4009C5498 /* KeyEntity.m */,
 				376798141500696800D0639D /* apns.p12 */,
 				376798151500696800D0639D /* ia.p12 */,
 				37BF64D414F19FD70065C607 /* Encryption Helper */,
-				37A5D9EF14FBD680007BC72A /* KeyEntity.h */,
-				37A5D9F014FBD680007BC72A /* KeyEntity.m */,
 				B703DBB714EBF66600A921F2 /* PTTEncryption.h */,
 				B703DBB814EBF66600A921F2 /* PTTEncryption.m */,
 			);
@@ -1305,6 +1314,7 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
+				E754D1A71510197E006CC903 /* PsyTrack Clinician Tools.entitlements */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Helpers */,
 				37F7CE1B1500328E00AD2C3A /* psyTrack */,
@@ -1539,7 +1549,6 @@
 			files = (
 				B703DBB914EBF66600A921F2 /* PTTEncryption.m in Sources */,
 				37BF64F514F2917D0065C607 /* NSDictionaryHelpers.m in Sources */,
-				37A5D9F114FBD680007BC72A /* KeyEntity.m in Sources */,
 				378DED7814FE72F000CF4F12 /* BigProgressView.m in Sources */,
 				378DED7914FE72F000CF4F12 /* DTAboutDocumentViewController.m in Sources */,
 				378DED7A14FE72F000CF4F12 /* DTAboutViewController.m in Sources */,
@@ -1651,6 +1660,9 @@
 				37F7D001150063CF00AD2C3A /* TabFile.m in Sources */,
 				E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */,
 				E7516B7B15085A23005B798A /* PTABGroup.m in Sources */,
+				E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */,
+				E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */,
+				E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2082,6 +2094,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2098,6 +2111,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2109,6 +2124,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2119,6 +2135,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2143,8 +2161,8 @@
 					"\"$(SDKROOT)/usr/lib/system\"",
 				);
 				PRODUCT_NAME = "PsyTrack Clinician Tools";
-				PROVISIONING_PROFILE = "E0491BDB-9C86-4592-A74E-3CD7901E9666";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E0491BDB-9C86-4592-A74E-3CD7901E9666";
+				PROVISIONING_PROFILE = "00336BA1-0CA8-4521-B926-90873823C1B8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "00336BA1-0CA8-4521-B926-90873823C1B8";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2167,8 +2185,8 @@
 					"\"$(SDKROOT)/usr/lib/system\"",
 				);
 				PRODUCT_NAME = "PsyTrack Clinician Tools";
-				PROVISIONING_PROFILE = "E0491BDB-9C86-4592-A74E-3CD7901E9666";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E0491BDB-9C86-4592-A74E-3CD7901E9666";
+				PROVISIONING_PROFILE = "00336BA1-0CA8-4521-B926-90873823C1B8";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "00336BA1-0CA8-4521-B926-90873823C1B8";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

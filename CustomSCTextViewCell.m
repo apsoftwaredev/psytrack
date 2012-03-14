@@ -29,8 +29,9 @@
 
 }
 
--(void)loadBindingsIntoCustomControls{
+-(void)loadBoundValueIntoControl{
 
+    [super loadBoundValueIntoControl];
     myLabel.text=[self.objectBindings valueForKey:@"label"];
     
     NSString *boundPropertyString=[self.objectBindings valueForKey:@"propertyNameString"];

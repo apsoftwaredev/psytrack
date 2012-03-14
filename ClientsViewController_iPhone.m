@@ -536,16 +536,18 @@ NSLog(@"table model class %@",[tableViewModel class]);
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         NSLog(@"cell text label text is %@",cell.textLabel);
         
-//        ClientEntity *clientObject=(ClientEntity *)cell.boundObject;
-//        
-//        NSLog(@"cell bound object is %@", cell.boundObject);
+        ClientEntity *clientObject=(ClientEntity *)cell.boundObject;
+        
+        NSLog(@"cell bound object is %@", cell.boundObject);
 //        
 //        cell.boundObject=clientObject;
 //        NSLog(@"cell bound object is %@", cell.boundObject);
         
 //     
-        NSData *clientIDCodeData=[cell.boundObject valueForKey:@"clientIDCode"];
-        cell.textLabel.text=[appDelegate convertDataToString:clientIDCodeData];
+        NSLog(@"cell bound object is %@",clientObject);
+  
+//        NSString *clientIDCodeData=[cell.boundObject valueForKey:@"clientIDCodeDC"];
+//        cell.textLabel.text=clientIDCodeData;
 //        cell.textLabel.text=clientObject.clientIDCode;
 //        NSLog(@"table model all keys %@",tableViewModel.modelKeyValues);
         

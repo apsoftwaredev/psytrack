@@ -347,9 +347,9 @@ NSLog(@"data length is %i",[data length]);
     return [symmetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
 }
 
--(NSData*)unwrapAndCreateKeyDataFromKeyEntity{
+-(NSMutableDictionary*)unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:(NSDate *)keyDate{
 
-
+    NSMutableDictionary *returnDictionary=[[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:[NSData data],[NSDate date], nil] forKeys:[NSArray arrayWithObjects:@"symetricData",@"keyDate", nil]];
     
     NSString *symetricStr;
     
@@ -364,6 +364,8 @@ NSLog(@"data length is %i",[data length]);
     rangeThree.length=9;
     rangeThree.location=0;
     NSString* symetricStringOne= [NSString stringWithFormat:@"qu1shZEM196kibsiBh7h%@hsiwoai4js",[self combSmString]];
+    
+    NSLog(@" combinesmetric string is %@",[self combSmString]);
     rangeOne.location=symetricStringOne.length-15;
     
     symetricStringOne=[symetricStringOne substringWithRange:rangeOne];
@@ -386,13 +388,32 @@ NSLog(@"data length is %i",[data length]);
         
     }
     KeyEntity *keyObject;
+    NSPredicate *keyDatePredicate;
+    if (keyDate) {
+        NSLog(@"key date is %@",keyDate);
+       keyDatePredicate=[NSPredicate predicateWithFormat:@"dateCreated == %@",keyDate];
+//        if (fetchedObjects.count) {
+//            fetchedObjects=[fetchedObjects filteredArrayUsingPredicate:keyDatePredicate];
+//        }
+    }
     if (fetchedObjects.count) 
     {
         keyObject=[fetchedObjects objectAtIndex:0];
+        NSLog(@"keydate is %@",keyObject.dateCreated);
     }
     NSData *unwrappedSymetricString;
     NSString *symetricStringThree;
     if (keyObject && keyObject.keyF) {
+        
+        if (keyObject.dateCreated) {
+            if ([returnDictionary.allKeys containsObject:@"keyDate"]) {
+                [returnDictionary setValue:keyObject.dateCreated forKey:@"keyDate"];
+            }
+        }
+        
+        NSDate *testDate=(NSDate *)[returnDictionary valueForKey:@"keyDate"];
+        
+        NSLog(@"key date test is %@",testDate);
      unwrappedSymetricString   =[encryption_ unwrapSymmetricKey:keyObject.keyF keyRef:nil useDefaultPrivateKey:YES];
         
          symetricStringThree=[self convertDataToString:unwrappedSymetricString];
@@ -423,8 +444,14 @@ NSLog(@"data length is %i",[data length]);
     NSData *symetricData=[symetricStr dataUsingEncoding: [NSString defaultCStringEncoding] ];
 
 
-    return symetricData;
+    if (symetricData.length &&[returnDictionary.allKeys containsObject:@"symetricData"]) {
+        
+        [returnDictionary setValue:symetricData forKey:@"symetricData"];
+       
+    } 
+NSLog(@"return dictionary right before return %@",returnDictionary);
 
+    return ( NSMutableDictionary*) returnDictionary;
 }
 
 
@@ -669,9 +696,9 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
                     
                     newKeyObject.keyF=wrappedNewKeyData;
                     newKeyObject.dataF=encryptedArchivedLockData;
-                    
+                    newKeyObject.dateCreated=[NSDate date];
                   
-                                       
+                                NSLog(@"newkey object is %@",newKeyObject.dateCreated);       
                     
                 }
                //4
@@ -927,6 +954,26 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 
 }
 
+-(NSData *)encryptDictionaryToData:(NSDictionary *)unencryptedDictionary{
+
+
+//    if (!encryption_) {
+//        self.encryption=[[PTTEncryption alloc]init];
+//    }
+//    BOOL success=FALSE;
+//    NSDictionary *symetricDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:nil];
+//    NSData *symetricData=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:nil];
+//    NSData * keyedArchiveData = [NSKeyedArchiver archivedDataWithRootObject:lockValuesDictionary_];
+//    
+//    NSData *encryptedArchivedLockData =(NSData *)[encryption_ doCipher:keyedArchiveData key:symetricData context:kCCEncrypt padding:(CCOptions *)kCCOptionPKCS7Padding];
+//
+//
+//
+
+    return [NSDictionary dictionary];
+}
+-(NSDictionary *)decryptDataToDictionary:(NSData*)encryptedData{}
+
 -(NSString *)convertDataToString:(NSData *)data{
     
     NSString* newStr;
@@ -972,8 +1019,9 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 
 
 }
--(NSData *)encryptStringToEncryptedData:(NSString *)plainTextStr{
+-(NSDictionary *)encryptStringToEncryptedData:(NSString *)plainTextStr{
 
+    NSMutableDictionary *returnDictionary=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSData data], [NSDate date], nil] forKeys:[NSArray arrayWithObjects:@"encryptedData", @"keyDate", nil]];
     if (!encryption_) {
         self.encryption=[[PTTEncryption alloc]init];
     }
@@ -982,8 +1030,17 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
     if (plainTextStr.length &&okayToDecryptBool_) {
     
        
-        
-        NSData *symetricData=[self unwrapAndCreateKeyDataFromKeyEntity];
+        NSDictionary *symetricDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:nil];
+        NSData *symetricData;
+        if ([symetricDictionary.allKeys containsObject:@"symetricData"]) {
+            symetricData =[symetricDictionary valueForKey:@"symetricData"];
+        }
+        if ([symetricDictionary objectForKey:@"keyDate"]) {
+            NSDate *keyDate=(NSDate *)[symetricDictionary valueForKey:@"keyDate"];
+            if (keyDate && [returnDictionary objectForKey:@"keyDate"]) {
+                [returnDictionary setValue:keyDate forKey:@"keyDate"];
+            }
+        }
     
         NSLog(@"symetric data length is %i",symetricData.length);
         if(symetricData.length==32){
@@ -992,41 +1049,66 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
     
             
 //            NSLog(@"keystring is %@",keyString);
-    
+           
     encryptedData=(NSData *) [encryption_ doCipher:data key:symetricData context:kCCEncrypt padding:(CCOptions *) kCCOptionPKCS7Padding];
+            
+            if (encryptedData.length) {
+                if ([returnDictionary.allKeys containsObject:@"encryptedData"]) {
+                    [returnDictionary setValue:encryptedData forKey:@"encryptedData"];
+                }
+                
+            }
     
     }
     }
-    return encryptedData;
+
+    return [NSDictionary dictionaryWithDictionary:returnDictionary];
 
 
 
 
 }
 
--(NSData *)encryptDataToEncryptedData:(NSData *) unencryptedData{
+-(NSDictionary *)encryptDataToEncryptedData:(NSData *) unencryptedData{
     
    
     if (!encryption_) {
         self.encryption=[[PTTEncryption alloc]init];
     }
-    
+    NSDictionary *returnDictionary=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSData data],[NSDate date], nil] forKeys:[NSArray arrayWithObjects:@"encryptedData",@"keyDate", nil]];
     NSData *encryptedData;
+    NSDate *keyDate;
     if (unencryptedData.length) {
   
+        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:nil];
+        NSData *symetricData;
         
-        NSData *symetricData=[self unwrapAndCreateKeyDataFromKeyEntity];
+        if ([symetricDataDictionary.allKeys valueForKey:@"symetricData"]) {
+            symetricData=[symetricDataDictionary valueForKey:@"symetricData"];
+        }
+        if ([symetricDataDictionary.allKeys valueForKey:@"keyDate"]) {
+            keyDate=[symetricDataDictionary valueForKey:@"keyDate"];
+        }
 
         if (symetricData.length==32) {
              encryptedData=(NSData *) [encryption_ doCipher:unencryptedData key:symetricData context:kCCEncrypt padding:(CCOptions *) kCCOptionPKCS7Padding];
         }
        
-    
+            
         
+    }
+    NSArray *returnDictionaryKeysArray=returnDictionary.allKeys;
+    if (encryptedData.length && [returnDictionaryKeysArray containsObject:@"encryptedData"]) {
+        
+        [returnDictionary setValue:encryptedData forKey:@"encryptedData"];
+        
+        if (keyDate&&[returnDictionaryKeysArray containsObject:@"keyDate"]) {
+            [returnDictionary setValue:keyDate forKey:@"keyDate"];
+        }
     }
 
     
-    return encryptedData;
+    return  [NSDictionary dictionaryWithDictionary:returnDictionary];
     
 }
 
@@ -1060,7 +1142,7 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 }
 
 
--(NSData *)decryptDataToPlainData:(NSData *)encryptedData{
+-(NSData *)decryptDataToPlainDataUsingKeyEntityWithDate:(NSDate *)keyDate encryptedData:(NSData *)encryptedData{
     
     
     if (!encryption_) {
@@ -1071,8 +1153,14 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
     if (encryptedData.length &&okayToDecryptBool_) {
   
      
+        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:keyDate];
+        NSData *symetricData;
         
-        NSData *symetricData=[self unwrapAndCreateKeyDataFromKeyEntity];
+        if ([symetricDataDictionary.allKeys containsObject:@"symetricData"]) {
+            symetricData=[symetricDataDictionary valueForKey:@"symetricData"];
+        }
+        
+
         if (symetricData.length==32) {
            
        
@@ -1086,7 +1174,7 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 }
 
 
--(NSString *)decyptString:(NSString *) encryptedString{
+-(NSString *)decyptString:(NSString *) encryptedString usingKeyWithDate:(NSDate *)keyDate{
     
     if (!encryption_) {
         self.encryption=[[PTTEncryption alloc]init];
@@ -1097,7 +1185,12 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
     
       
         
-        NSData *symetricData=[self unwrapAndCreateKeyDataFromKeyEntity];
+        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:keyDate];
+        NSData *symetricData;
+        
+        if ([symetricDataDictionary.allKeys valueForKey:@"symetricData"]) {
+            symetricData=[symetricDataDictionary valueForKey:@"symetricData"];
+        }
     if (symetricData.length==32) {
   
             NSData* data=[encryptedString dataUsingEncoding: [NSString defaultCStringEncoding] ];

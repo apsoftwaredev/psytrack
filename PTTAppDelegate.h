@@ -131,15 +131,19 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 - (NSURL *)applicationDrugsDirectory;
 -(NSString *)applicationDrugsPathString;
 
--(NSString *)decyptString:(NSString *) str;
--(NSData *)encryptDataToEncryptedData:(NSData *) unencryptedData;
--(NSData *)encryptStringToEncryptedData:(NSString *)plainTextStr;
+//-(NSString *)decyptString:(NSString *) str;
+-(NSString *)decyptString:(NSString *) encryptedString usingKeyWithDate:(NSDate *)keyDate;
+-(NSDictionary *)encryptDataToEncryptedData:(NSData *) unencryptedData;
+-(NSMutableDictionary *)encryptStringToEncryptedData:(NSString *)plainTextStr;
 -(NSString *)convertDataToString:(NSData *)data;
--(NSData *)decryptDataToPlainData:(NSData *) encryptedData;
+-(NSData *)decryptDataToPlainDataUsingKeyEntityWithDate:(NSDate *)keyDate encryptedData:(NSData *)encryptedData;
+//-(NSData *)decryptDataToPlainData:(NSData *) encryptedData;
+-(NSData *)encryptDictionaryToData:(NSDictionary *)unencryptedDictionary;
+-(NSDictionary *)decryptDataToDictionary:(NSData*)encryptedData;
 -(NSString *)generateRandomStringOfLength:(int )length;
 -(NSString *)combSmString;
 -(NSData *)hashDataFromString:(NSString *)plainString;
--(NSData*)unwrapAndCreateKeyDataFromKeyEntity;
+-(NSDictionary*)unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:(NSDate *)keyDate;
 -(IBAction)notifyTrustFailure:(id)sender;
 -(NSData *)decryptDataToPlainData:(NSData *)encryptedData usingSymetricKey:(NSData *)symetricData;
 -(NSData *)convertStringToData:(NSString *)string;

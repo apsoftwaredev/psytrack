@@ -479,14 +479,20 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
         }    
         case 13:
         {
-            if ([cell isKindOfClass:[CustomSCSelectonCellWithLoading class]]) {
-                CustomSCSelectonCellWithLoading * loadingCell=(CustomSCSelectonCellWithLoading *)cell;
-                loadingCell.imageView.hidden=FALSE;
-            }
             
-            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-            dispatch_async(queue, ^{
-                
+            
+                        
+//                if ([cell isKindOfClass:[CustomSCSelectonCellWithLoading class]]) {
+//                    CustomSCSelectonCellWithLoading * loadingCell=(CustomSCSelectonCellWithLoading *)cell;
+//                    loadingCell.imageView.hidden=FALSE;
+//                }
+            
+            
+            
+            
+           
+               
+//           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 
                 self.tableView.userInteractionEnabled=FALSE;
                 UITabBar *tabBar=(UITabBar *) [(PTTAppDelegate *)[UIApplication sharedApplication].delegate tabBar];
@@ -507,9 +513,9 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
                 self.tableView.userInteractionEnabled=TRUE;
                 
                
-            });
+//           });
 
-            
+//            dispatch_release(firstSerialQueue);
             
             
             break;

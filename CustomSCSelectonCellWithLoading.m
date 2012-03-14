@@ -70,13 +70,6 @@ self.imageView.autoresizingMask=UIViewAutoresizingFlexibleWidth;
 
 }
 
--(void)loadBindingsIntoCustomControls{
-
-    [super loadBindingsIntoCustomControls];
-    
- 
-
-}
 
 -(void)didSelectCell {
 

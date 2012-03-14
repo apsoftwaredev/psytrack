@@ -32,10 +32,21 @@
 @dynamic interventionsDelivered;
 @dynamic clientAndMentalState;
 @dynamic diagnosis;
+@dynamic keyDate;
 
 @dynamic clientIDcodeDC;
 
+-(void) awakeFromFetch{
+//PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 
+NSLog(@"client id code is %@",self.clientIDCode);
+
+
+
+
+
+
+}
 - (void) awakeFromInsert 
 {
     [super awakeFromInsert];
@@ -67,6 +78,8 @@
 //    [self didAccessValueForKey:@"clientIDCode"];
 }
 
+
+
 - (void)setClientIDCode:(NSString *)clientIDCode
 {
     
@@ -78,37 +91,124 @@
     [self willChangeValueForKey:@"clientIDCode"];
     
     
-      
-    NSData *encryptedData=[appDelegate encryptStringToEncryptedData:(NSString *)clientIDCode];
+        NSMutableDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)clientIDCode];
+     NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        NSData *encryptedData;
+        NSDate *encryptedKeyDate;
+        if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
+            encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
+            
+            
+            if ([encryptedDataDictionary.allKeys containsObject:@"keyDate"]) {
+                NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                
+                encryptedKeyDate=[encryptedDataDictionary valueForKey:@"keyDate"];
+                NSLog(@"key date is client entity %@",encryptedKeyDate);
+            }
+        }
+        
+        
     
     [self setPrimitiveValue:encryptedData forKey:@"clientIDCode"];     
     
     
     
-    [self didChangeValueForKey:@"value"];
+    [self didChangeValueForKey:@"clientIDCode"];
+        
+       
+        if (encryptedKeyDate) {
+            [self willChangeValueForKey:@"keyDate"]; 
+            
+        
+            [self setPrimitiveValue:encryptedKeyDate forKey:@"keyDate"];
+            
+            [self didChangeValueForKey:@"keyDate"];
+             NSLog(@"encrypted key date is %@",encryptedKeyDate);
+            
+        }
+       
+        
+    }
+}
+-(void)willSave{
+    
+    
+//    if (encryptedKeyDate) {
+//    [self willChangeValueForKey:@"keyDate"]; 
+//    
+//    
+//    [self setPrimitiveValue:encryptedKeyDate forKey:@"keyDate"];
+//    
+//    [self didChangeValueForKey:@"keyDate"];
+//    NSLog(@"encrypted key date is %@",encryptedKeyDate);
+//    
+//}
+
+
+}
+- (void)setPrimitiveStringValue:(NSString *)strValue forKey:(NSString *)key 
+{
+    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    if (appDelegate.okayToDecryptBool) {
+        
+        
+        [self willChangeValueForKey:@"clientIDCode"];
+        
+        
+        NSMutableDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue];
+        NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        NSData *encryptedData;
+        NSDate *encryptedKeyDate;
+        if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
+            encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
+            
+            
+            if ([encryptedDataDictionary.allKeys containsObject:@"keyDate"]) {
+                NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                
+                encryptedKeyDate=[encryptedDataDictionary valueForKey:@"keyDate"];
+                NSLog(@"key date is client entity %@",encryptedKeyDate);
+            }
+        }
+        
+        
+        
+        [self setPrimitiveValue:encryptedData forKey:key];     
+        
+        
+        
+        [self didChangeValueForKey:key];
+        
+        
+        
         
         
     }
 }
--(NSString *)clientIDCode{
+
+
+//-(NSString *)clientIDCode{
+////
+//PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 //
-PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-
-
-[self willAccessValueForKey:@"clientIDCode"];
-
-NSData *primitiveData=[self primitiveValueForKey:@"clientIDCode"];
-
-NSData *strData=[appDelegate decryptDataToPlainData:primitiveData];
-
-NSString *newStr=[appDelegate convertDataToString:strData];
-
-
-
-
-return newStr;
-
-}
+//
+//[self willAccessValueForKey:@"clientIDCode"];
+//
+//    
+//NSData *primitiveData=[self primitiveValueForKey:@"clientIDCode"];
+//
+//NSData *strData=[appDelegate decryptDataToPlainData:primitiveData];
+//
+//NSString *newStr=[appDelegate convertDataToString:strData];
+//
+//
+//
+//
+//return newStr;
+//
+//}
 
 
 @end
