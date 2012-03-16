@@ -133,8 +133,8 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 
 //-(NSString *)decyptString:(NSString *) str;
 -(NSString *)decyptString:(NSString *) encryptedString usingKeyWithDate:(NSDate *)keyDate;
--(NSDictionary *)encryptDataToEncryptedData:(NSData *) unencryptedData;
--(NSMutableDictionary *)encryptStringToEncryptedData:(NSString *)plainTextStr;
+-(NSDictionary *)encryptDataToEncryptedData:(NSData *) unencryptedData withKeyDate:(NSDate *)keyDateToSet;
+-(NSDictionary *)encryptStringToEncryptedData:(NSString *)plainTextStr withKeyDate:(NSDate *)keyDateToSet;
 -(NSString *)convertDataToString:(NSData *)data;
 -(NSData *)decryptDataToPlainDataUsingKeyEntityWithDate:(NSDate *)keyDate encryptedData:(NSData *)encryptedData;
 //-(NSData *)decryptDataToPlainData:(NSData *) encryptedData;
@@ -144,6 +144,7 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 -(NSString *)combSmString;
 -(NSData *)hashDataFromString:(NSString *)plainString;
 -(NSDictionary*)unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:(NSDate *)keyDate;
+-(NSDate *)convertDataToDate:(NSData *)data;
 -(IBAction)notifyTrustFailure:(id)sender;
 -(NSData *)decryptDataToPlainData:(NSData *)encryptedData usingSymetricKey:(NSData *)symetricData;
 -(NSData *)convertStringToData:(NSString *)string;

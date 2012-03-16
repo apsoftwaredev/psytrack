@@ -36,6 +36,12 @@
 @property (nonatomic, strong) NSDate * keyDate;
 @property (nonatomic, strong)  NSString *clientIDcodeDC;
 
+@property (nonatomic, strong) NSData *fData;
+
+@property (nonatomic, strong) NSString *tempClientIDCode;
+@property (nonatomic, strong) NSString *tempInitials;
+@property (nonatomic, strong) NSDate *tempDateOfBirth;
+@property (nonatomic, strong) NSString *tempNotes;
 
 @end
 
@@ -61,7 +67,19 @@
 - (void)addDiagnosis:(NSSet *)values;
 - (void)removeDiagnosis:(NSSet *)values;
 
--(NSData *)convertStringToEncryptedData:(NSString *) str;
--(NSString *)clientIDCode;
+
+- (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key ;
+- (void)setDateToPrimitiveData:(NSDate *)dateToConvert forKey:(NSString *)key;
+
+-(void)setInitials:(NSString *)initials;
+-(void)setNotes:(NSString *)notes;
+- (void)setClientIDCode:(NSString *)clientIDCode;
+
+-(void)setDateOfBirth:(NSDate *)dateOfBirth;
+
+//-(NSString *)initials;
+//-(NSString *)notes;
+-(NSString*)clientIDCode;
+-(NSDate *)dateOfBirth;
 
 @end

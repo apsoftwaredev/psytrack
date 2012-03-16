@@ -23,13 +23,13 @@ TO DO:
 
 
 
-
+4. add sources to addressbook
 5. fix interpersonal relationships
 6. change immigration history
 
 
-5.	add the dates to the key entity and check if more than one record, add a the date to the client record on encrypt so it doesn’t get mixed up when using icloud, all the icloud stuff this all needs to be tested too.
-6.	Finish the encryption of the remaining fields in the client section
+
+
 7.	Move the height and weight tracking to the client section and add blood pressure, call it vitals, and fix the bug in the height picker cell.
 8.	Add the disorder section
 9.	finish setting up the persistent store settings,
@@ -41,6 +41,7 @@ TO DO:
 15.	fix the search on the client section to account for encryption
 add bio section to clinician
 15. add existing hours
+15. extend date on encryption key
 
 Phase II
 16.	add a save to icloud documents to the actions in the drug document view
@@ -77,3 +78,6 @@ additional features
 4. fix clinician hierarchy
 4. add adddress groups selection to clincian
 4. fix download bar bug in iPad
+5.	add the dates to the key entity and check if more than one record, add a the date to the client record on encrypt so it doesn’t get mixed up when using icloud, all the icloud stuff this all needs to be tested too.
+6.	Finish the encryption of the remaining fields in the client section
+

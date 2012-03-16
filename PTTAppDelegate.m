@@ -972,7 +972,17 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 
     return [NSDictionary dictionary];
 }
--(NSDictionary *)decryptDataToDictionary:(NSData*)encryptedData{}
+//-(NSDictionary *)decryptDataToDictionary:(NSData*)encryptedData{}
+
+
+-(NSDate *)convertDataToDate:(NSData *)data{
+
+NSDate * restoredDate = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+
+    
+    return  restoredDate;
+}
+
 
 -(NSString *)convertDataToString:(NSData *)data{
     
@@ -1019,7 +1029,7 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 
 
 }
--(NSDictionary *)encryptStringToEncryptedData:(NSString *)plainTextStr{
+-(NSDictionary *)encryptStringToEncryptedData:(NSString *)plainTextStr withKeyDate:(NSDate *)keyDateToSet{
 
     NSMutableDictionary *returnDictionary=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSData data], [NSDate date], nil] forKeys:[NSArray arrayWithObjects:@"encryptedData", @"keyDate", nil]];
     if (!encryption_) {
@@ -1030,7 +1040,7 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
     if (plainTextStr.length &&okayToDecryptBool_) {
     
        
-        NSDictionary *symetricDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:nil];
+        NSDictionary *symetricDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:keyDateToSet];
         NSData *symetricData;
         if ([symetricDictionary.allKeys containsObject:@"symetricData"]) {
             symetricData =[symetricDictionary valueForKey:@"symetricData"];
@@ -1069,7 +1079,7 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 
 }
 
--(NSDictionary *)encryptDataToEncryptedData:(NSData *) unencryptedData{
+-(NSDictionary *)encryptDataToEncryptedData:(NSData *) unencryptedData withKeyDate:(NSDate *)keyDateToSet{
     
    
     if (!encryption_) {
@@ -1080,13 +1090,13 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
     NSDate *keyDate;
     if (unencryptedData.length) {
   
-        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:nil];
+        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:keyDateToSet];
         NSData *symetricData;
         
-        if ([symetricDataDictionary.allKeys valueForKey:@"symetricData"]) {
+        if ([symetricDataDictionary.allKeys containsObject:@"symetricData"]) {
             symetricData=[symetricDataDictionary valueForKey:@"symetricData"];
         }
-        if ([symetricDataDictionary.allKeys valueForKey:@"keyDate"]) {
+        if ([symetricDataDictionary.allKeys containsObject:@"keyDate"]) {
             keyDate=[symetricDataDictionary valueForKey:@"keyDate"];
         }
 

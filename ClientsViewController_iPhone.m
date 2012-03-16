@@ -533,18 +533,18 @@ NSLog(@"table model class %@",[tableViewModel class]);
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
     
     if (tableViewModel.tag==0) {
-        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-        NSLog(@"cell text label text is %@",cell.textLabel);
+//        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//        NSLog(@"cell text label text is %@",cell.textLabel);
         
-        ClientEntity *clientObject=(ClientEntity *)cell.boundObject;
+//        ClientEntity *clientObject=(ClientEntity *)cell.boundObject;
         
-        NSLog(@"cell bound object is %@", cell.boundObject);
+//        NSLog(@"cell bound object is %@", cell.boundObject);
 //        
 //        cell.boundObject=clientObject;
 //        NSLog(@"cell bound object is %@", cell.boundObject);
         
 //     
-        NSLog(@"cell bound object is %@",clientObject);
+//        NSLog(@"cell bound object is %@",clientObject);
   
 //        NSString *clientIDCodeData=[cell.boundObject valueForKey:@"clientIDCodeDC"];
 //        cell.textLabel.text=clientIDCodeData;

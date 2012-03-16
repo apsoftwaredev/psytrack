@@ -21,8 +21,8 @@
 #import "ButtonCell.h"
 #import "ClientEntity.h"
 #import "EncryptedSCTextFieldCell.h"
-
-
+#import "EncryptedSCDateCell.h"
+#import "EncryptedSCTextViewCell.h"
 @implementation ClientsViewController_Shared
 @synthesize clientDef;
 
@@ -60,13 +60,13 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     clientIdCodePropertyDef.type=SCPropertyTypeCustom;
     clientIdCodePropertyDef.uiElementClass=[EncryptedSCTextFieldCell class];
     
-    NSDictionary *encryptedTextFieldCellKeyBindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"clientIDCode",@"keyDate",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32",nil]];
+    NSDictionary *encryClientIDCodeTFCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"clientIDCode",@"keyDate",@"Client ID Code",@"clientIDCode",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
 
-    clientIdCodePropertyDef.objectBindings=encryptedTextFieldCellKeyBindingsDictionary;
+    clientIdCodePropertyDef.objectBindings=encryClientIDCodeTFCellKeyBindingsDic;
     clientIdCodePropertyDef.title=@"Client ID Code";
     clientIdCodePropertyDef.autoValidate=NO;
-    \
+  
     
     self.clientDef.titlePropertyName = @"clientIDCode";	
     self.clientDef.keyPropertyName= @"clientIDCode";
@@ -74,10 +74,38 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     NSInteger indexOfKeyDate=(NSInteger )[self.clientDef indexOfPropertyDefinitionWithName:@"keyDate"];
     [self.clientDef removePropertyDefinitionAtIndex:indexOfKeyDate];
     
+    SCPropertyDefinition *initialsPropertyDef  =[self.clientDef propertyDefinitionWithName:@"initials"];
+    
+    initialsPropertyDef.type=SCPropertyTypeCustom;
+    initialsPropertyDef.uiElementClass=[EncryptedSCTextFieldCell class];
+    
+    NSDictionary *encryInitialsTFCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"initials",@"keyDate",@"Initials",@"initials",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    
+    
+    initialsPropertyDef.objectBindings=encryInitialsTFCellKeyBindingsDic;
+    initialsPropertyDef.title=@"Initials";
+    initialsPropertyDef.autoValidate=NO;
+    
+    
+    
+    
+    
+     NSDictionary *encryDateOfBirthCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"dateOfBirth",@"keyDate",@"Date Of Birth",@"dateOfBirth",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32",@"33",@"34",nil]];
+////    
+//    
     SCPropertyDefinition *clientDateOfBirthPropertyDef = [self.clientDef propertyDefinitionWithName:@"dateOfBirth"];
-	clientDateOfBirthPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
-                                                                             datePickerMode:UIDatePickerModeDate 
-                                                              displayDatePickerInDetailView:NO];
+    clientDateOfBirthPropertyDef.type=SCPropertyTypeCustom;
+    clientDateOfBirthPropertyDef.uiElementClass=[EncryptedSCDateCell class];
+    clientDateOfBirthPropertyDef.objectBindings=encryDateOfBirthCellKeyBindingsDic;
+    
+    clientDateOfBirthPropertyDef.autoValidate=NO;
+    
+//    clientDateOfBirthPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+//                                                                             datePickerMode:UIDatePickerModeDate 
+//                                                              displayDatePickerInDetailView:NO];
+    
+    
+    
     SCPropertyDefinition *clientDateAddedPropertyDef = [self.clientDef propertyDefinitionWithName:@"dateAdded"];
 	clientDateAddedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
                                                                              datePickerMode:UIDatePickerModeDate 
@@ -93,8 +121,16 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                                                             allowDeletingItems:TRUE
                                                                                               allowMovingItems:FALSE];
     SCPropertyDefinition *clientNotesPropertyDef = [self.clientDef propertyDefinitionWithName:@"notes"];
-    clientNotesPropertyDef.type=SCPropertyTypeTextView;
+//    clientNotesPropertyDef.type=SCPropertyTypeTextView;
+    NSDictionary *encryNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32",@"33",@"34",nil]];
+    ////    
+    //    
+//    SCPropertyDefinition *clientDateOfBirthPropertyDef = [self.clientDef propertyDefinitionWithName:@"dateOfBirth"];
+    clientNotesPropertyDef.type=SCPropertyTypeCustom;
+    clientNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    clientNotesPropertyDef.objectBindings=encryNotesTVCellKeyBindingsDic;
     
+    clientDateOfBirthPropertyDef.autoValidate=NO;
 
     //Create a class definition for the phone NumberEntity
     SCClassDefinition *phoneDef = [SCClassDefinition definitionWithEntityName:@"PhoneEntity" 

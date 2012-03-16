@@ -26,20 +26,12 @@
     [super loadBoundValueIntoControl];
     
     
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
 
-    
-    NSData *encryptedData=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"1"]]; 
-    NSDate *keyDate=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"32"]];
-    
-    NSLog(@"key date is %@",keyDate);
-    NSData *decryptedData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:keyDate encryptedData:encryptedData];
-    
-    self.textView.text=[appDelegate convertDataToString:decryptedData];
-    
-    NSMutableString *textLabelStr=[NSMutableString string];
-    if ([self.objectBindings objectForKey:@"33"]) {
+    self.textView.text=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"34"]];
+    NSString *textLabelStr=[NSString string];
+    if ([objectBindings objectForKey:@"33"]) {
         textLabelStr=[self.objectBindings valueForKey:@"33"];
     }
     
@@ -48,7 +40,8 @@
     //    self.boundObject=self.testString;
     
     NSLog(@"bound object is %@",self.boundObject);
-    
+
+       
     
     
     }
