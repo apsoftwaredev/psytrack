@@ -19,7 +19,12 @@
 #import <CoreData/CoreData.h>
 
 
-@interface ClientEntity : NSManagedObject
+@interface ClientEntity : NSManagedObject{
+
+
+    BOOL saving;
+
+}
 
 @property (nonatomic, strong) NSNumber * order;
 @property (nonatomic, strong) NSString * notes;
@@ -34,9 +39,7 @@
 @property (nonatomic, strong) NSManagedObject *clientAndMentalState;
 @property (nonatomic, strong) NSSet *diagnosis;
 @property (nonatomic, strong) NSDate * keyDate;
-@property (nonatomic, strong)  NSString *clientIDcodeDC;
 
-@property (nonatomic, strong) NSData *fData;
 
 @property (nonatomic, strong) NSString *tempClientIDCode;
 @property (nonatomic, strong) NSString *tempInitials;

@@ -10,4 +10,7 @@
 
 @interface EncryptedSCTextViewCell : SCTextViewCell
 
+
+
+@property (nonatomic, strong) NSString *tempClientIDCode;
 @end

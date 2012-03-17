@@ -42,13 +42,6 @@
 
 
 
-@dynamic fData;
-
-
-
-@dynamic clientIDcodeDC;
-
-
 - (void) awakeFromInsert 
 {
     [super awakeFromInsert];
@@ -133,7 +126,10 @@
 //
 //}
 
+
+
 -(void)setInitials:(NSString *)initials{
+
 
 [self setStringToPrimitiveData:(NSString *)initials forKey:@"initials"];
 
@@ -154,7 +150,9 @@
     [self setStringToPrimitiveData:(NSString *)clientIDCode forKey:@"clientIDCode"];
     
     self.tempClientIDCode=clientIDCode;
-
+   
+    
+    
     
     
 } 
@@ -225,8 +223,20 @@
 //
 //
 //}
+-(void)willSave{
+
+    saving=TRUE;
 
 
+}
+
+
+-(void)didSave{
+
+
+    saving=FALSE;
+
+}
 - (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
 {
     
@@ -345,8 +355,13 @@
         
         
         NSData *primitiveData=[self primitiveValueForKey:@"initials"];
+        [self didAccessValueForKey:@"initials"];
         
-        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:self.keyDate encryptedData:primitiveData];
+        [self willAccessValueForKey:@"keyDate"];
+        NSDate *tmpKeyDate=self.keyDate;
+        [self didAccessValueForKey:@"keyDate"];
+        
+        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:tmpKeyDate encryptedData:primitiveData];
         
         tempStr=[appDelegate convertDataToString:strData];
         
@@ -376,6 +391,7 @@
 }
 -(NSString *)clientIDCode{
 //
+    
     NSString *tempStr;
     [self willAccessValueForKey:@"tempClientIDCode"];
     
@@ -384,15 +400,21 @@
         
         [self didAccessValueForKey:@"tempClientIDCode"];
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-
-
+        
+        
         [self willAccessValueForKey:@"clientIDCode"];
-
-            
+        
+        
         NSData *primitiveData=[self primitiveValueForKey:@"clientIDCode"];
-
-        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:self.keyDate encryptedData:primitiveData];
-
+        
+        [self didAccessValueForKey:@"clientIDCode"];
+        
+        [self willAccessValueForKey:@"keyDate"];
+        NSDate *tmpKeyDate=self.keyDate;
+        [self didAccessValueForKey:@"keyDate"];
+        
+        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:tmpKeyDate encryptedData:primitiveData];
+        
         tempStr=[appDelegate convertDataToString:strData];
         
         [self willChangeValueForKey:@"tempClientIDCode"];
@@ -407,11 +429,12 @@
         tempStr=self.tempClientIDCode;
         [self didAccessValueForKey:@"tempClientIDCode"];
     }
-
-
-
-
-return tempStr;
+    
+    
+    
+    
+    return tempStr;
+    
 
 }
 
@@ -433,7 +456,13 @@ return tempStr;
         
         NSData *primitiveData=[self primitiveValueForKey:@"notes"];
         
-        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:self.keyDate encryptedData:primitiveData];
+        [self didAccessValueForKey:@"notes"];
+        
+        [self willAccessValueForKey:@"keyDate"];
+        NSDate *tmpKeyDate=self.keyDate;
+        [self didAccessValueForKey:@"keyDate"];
+        
+        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:tmpKeyDate encryptedData:primitiveData];
         
         tempStr=[appDelegate convertDataToString:strData];
         
@@ -476,7 +505,13 @@ return tempStr;
         
         NSData *primitiveData=[self primitiveValueForKey:@"dateOfBirth"];
         
-        NSData *dateData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:self.keyDate encryptedData:primitiveData];
+        [self didAccessValueForKey:@"dateOfBirth"];
+        
+        [self willAccessValueForKey:@"keyDate"];
+        NSDate *tmpKeyDate=self.keyDate;
+        [self didAccessValueForKey:@"keyDate"];
+        
+        NSData *dateData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:tmpKeyDate encryptedData:primitiveData];
         
         
         newDate=[appDelegate convertDataToDate:dateData];
@@ -497,7 +532,7 @@ return tempStr;
     
     
     
-    return newDate;
+   
     
     NSLog(@"date valeu is %@",newDate);
     return newDate;

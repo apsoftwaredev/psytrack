@@ -66,7 +66,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     clientIdCodePropertyDef.objectBindings=encryClientIDCodeTFCellKeyBindingsDic;
     clientIdCodePropertyDef.title=@"Client ID Code";
     clientIdCodePropertyDef.autoValidate=NO;
-  
+
     
     self.clientDef.titlePropertyName = @"clientIDCode";	
     self.clientDef.keyPropertyName= @"clientIDCode";
@@ -127,10 +127,11 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //    
 //    SCPropertyDefinition *clientDateOfBirthPropertyDef = [self.clientDef propertyDefinitionWithName:@"dateOfBirth"];
     clientNotesPropertyDef.type=SCPropertyTypeCustom;
+    clientNotesPropertyDef.title=@"Notes";
     clientNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
     clientNotesPropertyDef.objectBindings=encryNotesTVCellKeyBindingsDic;
     
-    clientDateOfBirthPropertyDef.autoValidate=NO;
+    clientNotesPropertyDef.autoValidate=NO;
 
     //Create a class definition for the phone NumberEntity
     SCClassDefinition *phoneDef = [SCClassDefinition definitionWithEntityName:@"PhoneEntity" 

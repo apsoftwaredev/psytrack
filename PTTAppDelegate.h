@@ -94,6 +94,7 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
     BOOL okayToDecryptBool_;
      PTTEncryption *encryption_;
     NSString *trustResultFailureString;
+    BOOL addedPersistentStoreSuccess;
     
     
 }

@@ -535,17 +535,17 @@ NSLog(@"table model class %@",[tableViewModel class]);
     if (tableViewModel.tag==0) {
 //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 //        NSLog(@"cell text label text is %@",cell.textLabel);
-        
+//        
 //        ClientEntity *clientObject=(ClientEntity *)cell.boundObject;
-        
+//        
 //        NSLog(@"cell bound object is %@", cell.boundObject);
 //        
 //        cell.boundObject=clientObject;
 //        NSLog(@"cell bound object is %@", cell.boundObject);
-        
-//     
+//        
+////     
 //        NSLog(@"cell bound object is %@",clientObject);
-  
+//  
 //        NSString *clientIDCodeData=[cell.boundObject valueForKey:@"clientIDCodeDC"];
 //        cell.textLabel.text=clientIDCodeData;
 //        cell.textLabel.text=clientObject.clientIDCode;
@@ -711,7 +711,69 @@ NSLog(@"table model class %@",[tableViewModel class]);
 }
     
     
+-(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BOOL valid = TRUE;
+
+    //    SCTableViewCell *cell = [tableViewModel cellAtIndexPath:indexPath];
     
+    
+    //    
+    //    if (tableViewModel.tag==4) {
+    //        UILabel *emaiLabel=(UILabel *)[cell viewWithTag:51];
+    //        if (emaiLabel.text==@"Email Address:")
+    //        {
+    //            UITextField *emailField=(UITextField *)[cell viewWithTag:50];
+    //            
+    //            if(emailField.text.length){
+    //                valid=[self validateEmail:emailField.text];
+    //                
+    //                NSLog(@"testing email address");
+    //            }
+    //            else
+    //            {
+    //                valid=FALSE;
+    //            }
+    //        }
+    //        
+    //        
+    //        
+    //    }
+    
+    
+    NSLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
+    
+    if (tableViewModel.tag==1){
+        
+        
+        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
+        SCControlCell *clientIDCodeCell =(SCControlCell *)[section cellAtIndex:1];
+        
+        
+       
+        UITextField *clientIDCodeField =(UITextField *)[clientIDCodeCell viewWithTag:1];
+        
+        
+        if ( clientIDCodeField.text.length ) {
+            
+            valid=TRUE;
+            NSLog(@"first or last name is valid");
+            
+        }
+        else
+        {
+            valid=FALSE;
+        }
+    }
+    
+    
+    
+    
+    
+    return valid;
+}
+
+
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 

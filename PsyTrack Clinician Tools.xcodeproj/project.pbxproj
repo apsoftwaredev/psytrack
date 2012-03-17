@@ -265,6 +265,7 @@
 		B7D097F514BAC43E00C6065F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D097F414BAC43E00C6065F /* MessageUI.framework */; };
 		B7F877BB14C9A38900F00C0D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877B914C9A38900F00C0D /* EventKit.framework */; };
 		B7F877BC14C9A38900F00C0D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877BA14C9A38900F00C0D /* EventKitUI.framework */; };
+		E70B9EEC1512F62000492FF7 /* DemographicProfileEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EEB1512F62000492FF7 /* DemographicProfileEntity.m */; };
 		E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B76150858D3005B798A /* ABGroupSelectionCell.m */; };
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 		E7516BDC150BF9A2005B798A /* Dan Boice-46.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */; };
@@ -644,6 +645,8 @@
 		B7D097F414BAC43E00C6065F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B7F877B914C9A38900F00C0D /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		B7F877BA14C9A38900F00C0D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		E70B9EEA1512F62000492FF7 /* DemographicProfileEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicProfileEntity.h; sourceTree = "<group>"; };
+		E70B9EEB1512F62000492FF7 /* DemographicProfileEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicProfileEntity.m; sourceTree = "<group>"; };
 		E7516B75150858D3005B798A /* ABGroupSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABGroupSelectionCell.h; sourceTree = "<group>"; };
 		E7516B76150858D3005B798A /* ABGroupSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABGroupSelectionCell.m; sourceTree = "<group>"; };
 		E7516B7915085A23005B798A /* PTABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTABGroup.h; sourceTree = "<group>"; };
@@ -905,6 +908,8 @@
 		37F7CE481500546300AD2C3A /* Demographic Info */ = {
 			isa = PBXGroup;
 			children = (
+				E70B9EEA1512F62000492FF7 /* DemographicProfileEntity.h */,
+				E70B9EEB1512F62000492FF7 /* DemographicProfileEntity.m */,
 				37F7CE49150054B200AD2C3A /* DemographicDetailViewController_Shared.h */,
 				37F7CE4A150054B200AD2C3A /* DemographicDetailViewController_Shared.m */,
 			);
@@ -1663,6 +1668,7 @@
 				E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */,
 				E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */,
 				E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */,
+				E70B9EEC1512F62000492FF7 /* DemographicProfileEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

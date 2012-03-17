@@ -1,4 +1,4 @@
-/*
+ /*
  *  EncryptedSCTextFieldCell.m
  *  psyTrack Clinician Tools
  *  Version: 1.0
@@ -20,7 +20,7 @@
 #import "PTTAppDelegate.h"
 
 @implementation EncryptedSCTextFieldCell
-
+@synthesize clientIDCodeStr;
 -(void)performInitialization{
 
     [super performInitialization];
@@ -29,47 +29,69 @@
     self.textField.tag=1;
       
     self.autoValidateValue=NO;
+//    self.textLabel.text=[self.objectBindings valueForKey:@"33"];
 }
-
-
 
 
 -(void)loadBoundValueIntoControl{
-
+    
     [super loadBoundValueIntoControl];
-
+//    if (!self.clientIDCodeStr ||!self.clientIDCodeStr.length) {
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//        
+//        
+//        
+//        NSData *encryptedData=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"34"]]; 
+//        NSDate *keyDate=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"32"]];
+//        NSLog(@"encrypted data is %@",encryptedData);
+//        NSLog(@"key date is %@",keyDate);
+//        NSData *decryptedData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:keyDate encryptedData:encryptedData];
+//        
+//        NSLog(@"decyrpted data %@",decryptedData);
+//        self.clientIDCodeStr=[appDelegate convertDataToString:decryptedData];
+//        NSLog(@"temp string is %@",self.clientIDCodeStr);
+////        [self.boundObject setValue:keyDate forKey:@"keyDate"];
+//        
+//        
+//        //        textLabelStr=self.tempString;
+//        
+//    }
     
-//    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-// 
-//    NSData *encryptedData=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"1"]]; 
-//    NSDate *keyDate=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"32"]];
-//       
-//    NSLog(@"key date is %@",keyDate);
-//    NSData *decryptedData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:keyDate encryptedData:encryptedData];
+    
+    
+    
+    
+    
+    
+    
+    
     self.textField.text=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"34"]];
-    NSString *textLabelStr=[NSString string];
-    if ([objectBindings objectForKey:@"33"]) {
-       textLabelStr=[self.objectBindings valueForKey:@"33"];
-    }
     
-    self.textLabel.text=textLabelStr;
-
-//    self.boundObject=self.testString;
+    //    self.boundObject=self.testString;
     
     NSLog(@"bound object is %@",self.boundObject);
     
-//    SCTableViewModel *owTableViewModel=(SCTableViewModel *)self.ownerTableViewModel;
-//  
-//    
-//    UINavigationItem *navigationItem=(UINavigationItem *)owTableViewModel.viewController.navigationItem;
-//    
-//    navigationItem.title=self.textField.text;
-//    
-//    NSLog(@"navigation bar all keys title attributes %@", owTableViewModel.viewController.navigationItem.title
-//);     
+    //    SCTableViewModel *owTableViewModel=(SCTableViewModel *)self.ownerTableViewModel;
+    //  
+    //    
+    //    UINavigationItem *navigationItem=(UINavigationItem *)owTableViewModel.viewController.navigationItem;
+    //    
+    //    navigationItem.title=self.textField.text;
+    //    
+    //    NSLog(@"navigation bar all keys title attributes %@", owTableViewModel.viewController.navigationItem.title
+    //);     
     
 
+
 }
+
 
 
 //
@@ -90,19 +112,38 @@
 //	if(!self.needsCommit)
 //		return;
 //    
+//   
 //    
 //    
+//    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 //    
-//    
+//
 ////    NSString *plaintext=self.textField.text;
-////    
-////    NSData *encryptedData=[appDelegate encryptStringToEncryptedData:plaintext];
-////    
-////    //even though it says client ID code, some users may put in a name..
-////    
-////    [self.boundObject setValue:encryptedData forKey:@"clientIDCode"];
-////        
+////    NSLog(@"key bindings are %@",[self.ownerTableViewModel. allKeys]);
+//    self.clientIDCodeStr=self.textField.text;
+//    NSLog(@"textfield text is %@",self.clientIDCodeStr);
 //    
+//    NSDate *keyDate=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"32"]];
+//    
+//    NSLog(@"key date is %@",keyDate);
+//    
+//    NSDictionary *encryptedDictionary=[appDelegate encryptStringToEncryptedData:self.clientIDCodeStr withKeyDate:(NSDate*)keyDate];
+//    
+//    NSData *encryptedData=[encryptedDictionary valueForKey:@"encryptedData"];
+//   
+//    NSLog(@"encrypted data is %@",encryptedDictionary);
+//    
+//    NSLog(@"encrypete data is %@",encryptedData);
+//    
+//    //even though it says client ID code, some users may put in a name..
+//    
+//    [self.boundObject setValue:encryptedData forKey:[self.objectBindings valueForKey:@"34"]];
+//        NSLog(@"encrypted data is %@",[self.objectBindings valueForKey:@"34"]);
+//    
+//    keyDate=[encryptedDictionary valueForKey:@"keyDate"];
+//    
+//    NSLog(@"keydate is %@",keyDate);
+//    [self.boundObject setValue:keyDate forKey:@"keyDate"];
 //    
 ////    //    NSData *encryptedData=(NSData *)[self convertStringToEncryptedData:clientIDCode];
 ////    //    NSString* newStr = [[NSString alloc] initWithData:encryptedData encoding:NSASCIIStringEncoding];
@@ -112,17 +153,12 @@
 //   
 ////    self.boundObject setValue: forKey:<#(NSString *)#>
 //    
-//    [super commitChanges];
-//    
+//     [super commitChanges];
+//    NSLog(@"self bound object %@",self.boundObject);
 //    needsCommit=FALSE;
 //    
 //}
 
--(void)willChangeValueForKey:(NSString *)key
-{
 
-NSLog(@"will change value for key%@", key);
-
-}
 
 @end

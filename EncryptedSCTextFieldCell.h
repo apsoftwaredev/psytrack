@@ -24,7 +24,7 @@
 
 
 }
-
+@property (nonatomic, strong) NSString * clientIDCodeStr;
 
 
 

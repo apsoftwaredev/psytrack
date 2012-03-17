@@ -9,7 +9,7 @@
 #import "EncryptedSCTextViewCell.h"
 #import "PTTAppDelegate.h"
 @implementation EncryptedSCTextViewCell
-
+@synthesize tempClientIDCode;
 
 -(void)performInitialization{
     
@@ -30,12 +30,54 @@
     
 
     self.textView.text=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"34"]];
-    NSString *textLabelStr=[NSString string];
-    if ([objectBindings objectForKey:@"33"]) {
-        textLabelStr=[self.objectBindings valueForKey:@"33"];
-    }
+//    NSString *textLabelStr=[NSString string];
+//    if ([objectBindings objectForKey:@"33"]) {
+////        textLabelStr=[self.objectBindings valueForKey:@"33"];
+//        
+//        NSString *tempStr;
+//                
+//        
+//        if (!self.tempClientIDCode ||!self.tempClientIDCode.length) {
+//            
+//           
+//            
+//            
+//            
+//            
+//           
+//            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//            
+//            
+//          
+//            NSDate *keyDate=[self.boundObject valueForKey:@"keyDate"];
+//            NSData *primitiveData=[self.boundObject valueForKey:@"clientIDCode"];
+//            NSLog(@"primitive daa is %@",primitiveData);
+//            
+//            
+//            NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:keyDate encryptedData:primitiveData];
+//          
+//            tempStr=[appDelegate convertDataToString:strData];
+//            NSLog(@"temp string is %@",tempStr);
+//                       
+//            self.tempClientIDCode=tempStr;
+//        
+//            textLabelStr=tempStr;
+//            
+//        }
+//        else 
+//        {
+//            textLabelStr=self.tempClientIDCode;
+//            
+//        }
+//
+//        
+//        
+//        
+//        
+//        
+//    }
     
-    self.textLabel.text=textLabelStr;
+//    self.textLabel.text=[se;
     
     //    self.boundObject=self.testString;
     
