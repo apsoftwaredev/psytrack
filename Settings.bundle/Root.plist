@@ -73,8 +73,8 @@
 	<string></string>
 	<key>address_book_group_identifier</key>
 	<integer>-1</integer>
-	<key>address_book_identifier</key>
-	<integer>0</integer>
+	<key>address_book_source_identifier</key>
+	<integer>-1</integer>
 	<key>AddressBookContactIdentifier</key>
 	<string></string>
 	<key>address_book_group_name</key>

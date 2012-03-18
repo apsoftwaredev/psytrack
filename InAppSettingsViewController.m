@@ -21,12 +21,13 @@
 #import "ClinicianEntity.h"
 #import "CliniciansRootViewController_iPad.h"
 #import "ClinicianViewController.h"
+#import "ABSourcesSCObjectSelectionCell.h"
 @interface InAppSettingsViewController ()
 
 @end
 
 @implementation InAppSettingsViewController
-@synthesize eventsList,eventStore,eventViewController,psyTrackCalendar;
+@synthesize eventsList,eventStore,eventViewController,psyTrackCalendar,rootNavController;
 
 #pragma mark -
 #pragma mark LifeCycle
@@ -134,8 +135,28 @@
     [defaultCalendarSection addCell:defaultCalendarNameTextFieldCell]; 
     [defaultCalendarSection addCell:defaultCalendarLocationCell];
     
-   
-  
+        NSArray *sourcesArray=[self fetchArrayOfAddressBookSources];
+        NSNumber *selectedIndex=nil;
+        
+//        SCSelectionCell *sourcesSelectionCell=[[SCSelectionCell alloc]initWithText:@"Address Book Source" withBoundKey:nil withSelectedIndexValue:selectedIndex withItems: sourcesArray];
+        ABSourcesSCObjectSelectionCell *sourcesSelectionCell=[[ABSourcesSCObjectSelectionCell alloc]initWithText:@"Source" withBoundKey:@"name" withSelectedIndexValue:selectedIndex withItems:sourcesArray];
+        
+
+    
+        sourcesSelectionCell.allowAddingItems=NO;
+        sourcesSelectionCell.allowDeletingItems=NO;
+        sourcesSelectionCell.allowEditDetailView=NO;
+        sourcesSelectionCell.allowMovingItems=NO;
+        sourcesSelectionCell.allowMultipleSelection=NO;
+        sourcesSelectionCell.allowNoSelection=YES;
+        
+        sourcesSelectionCell.tag=4;
+        
+        SCTableViewSection *defaultSourceSection=[SCTableViewSection sectionWithHeaderTitle:@"Address Book Source" withFooterTitle:@"If you use iCloud to synchronize multiple devices and it is available, the default source should be iCloud. All devices should have the same source."];
+        [defaultSourceSection addCell:sourcesSelectionCell];
+       
+        
+        
     int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
     NSString *groupName=[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
     NSLog(@"group identifier is %i",groupIdentifier);
@@ -195,7 +216,7 @@
     
     groupNameUpdateCell.delegate=self;
     
-    groupNameUpdateCell.tag=4;
+    groupNameUpdateCell.tag=5;
 //    SCTextFieldCell *defaultABGroupNameTextFieldCell=[[SCTextFieldCell alloc]initWithText:@"Name" withPlaceholder:@"Group Name" withBoundKey:@"group_name" withTextFieldTextValue:groupName]; 
 //    
 //    defaultABGroupNameTextFieldCell.tag=4;
@@ -213,9 +234,15 @@
     tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self];
     
     [tableModel addSection:defaultCalendarSection];
+    [tableModel addSection:defaultSourceSection];
     [tableModel addSection:defaultABGroupSection]; 
         
+   
+        tableModel.autoAssignDataSourceForDetailModels=YES;
+        tableModel.autoAssignDelegateForDetailModels=YES;
     }
+    
+   
 
 @catch (NSException *exception) {
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -483,6 +510,202 @@
     
 }
 
+-(NSArray *)fetchArrayOfAddressBookSources{
+
+  
+
+    ABAddressBookRef addressBook=nil;
+    addressBook =ABAddressBookCreate();
+    
+    
+    
+    NSMutableArray *list = [NSMutableArray array];
+	
+	// Get all the sources from the address book
+	CFArrayRef allSources = ABAddressBookCopyArrayOfAllSources(addressBook);
+	
+	for (CFIndex i = 0; i < CFArrayGetCount(allSources); i++)
+    {
+		ABRecordRef aSource = CFArrayGetValueAtIndex(allSources,i);
+		
+		// Fetch all groups included in the current source
+		CFArrayRef result =nil; 
+       result= ABAddressBookCopyArrayOfAllGroupsInSource (addressBook, aSource);
+		
+		// The app displays a source if and only if it contains groups
+		if (CFArrayGetCount(result) > 0)
+		{
+			NSMutableArray *groups = [[NSMutableArray alloc] initWithArray:(__bridge_transfer NSArray *)result];
+			
+			// Fetch the source name
+			NSString *sourceName = [self nameForSource:aSource];
+            
+            //fetch source record ID
+            int sourceRecordID=[self recordIDForSource:aSource];
+            
+            
+			//Create a MySource object that contains the source name and all its groups
+			MySource *source = [[MySource alloc] initWithAllGroups:groups name:sourceName recordID:sourceRecordID];
+			
+			// Save the source object into the array
+			[list addObject:source];
+			
+		}
+		else {
+            if (result) {
+                CFRelease(result);
+            }
+        }
+        
+		
+    }
+	
+	CFRelease(allSources);
+    if (addressBook) {
+        CFRelease(addressBook);
+    }
+    return list;	
+
+    
+ 
+
+
+}
+
+-(NSNumber *)defaultABSourceInSourceArray:(NSArray *)sourceArray{
+
+    BOOL iCloudEnabled=(BOOL)[[NSUserDefaults standardUserDefaults] valueForKey:@"icloud_preference"];
+    
+    
+    NSURL *ubiq = [[NSFileManager defaultManager] 
+                   URLForUbiquityContainerIdentifier:nil];
+    
+    NSNumber *sourceIndex=[NSNumber numberWithInt:-1];
+   
+    if (sourceArray.count==1) {
+        sourceIndex=[NSNumber numberWithInt:0];
+        return sourceIndex;
+    }
+    
+    
+    int recordID=(int)[(NSNumber*)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookSourceIdentifier]
+                    intValue];
+    
+    
+    NSLog(@"source record id is %i",recordID);
+    if (recordID!=-1) {
+        for (MySource *source in sourceArray){
+            
+            if (source.sourceRecordID ==recordID)
+            {
+                sourceIndex = (NSNumber *)[NSNumber numberWithInt:[sourceArray indexOfObject:source]];
+
+                
+                //                NSLog(@"cloud source type is %@",source.sourceType);
+                return sourceIndex;
+                break;
+            }
+            
+            
+        }
+
+    }
+    if (sourceArray.count && (ubiq || iCloudEnabled)) {
+        NSLog(@"iCloud access at %@", ubiq);
+
+  
+        for (MySource *source in sourceArray){
+            
+            if ([source.name isEqualToString: @"iCloud"])
+            {
+               sourceIndex = (NSNumber *)[NSNumber numberWithInt:[sourceArray indexOfObject:source]];
+                
+                
+                //                NSLog(@"cloud source type is %@",source.sourceType);
+                
+                return sourceIndex;
+                break;
+            }
+            
+            
+        }
+        
+        
+    }
+
+if(sourceArray.count>1)
+{
+    return [NSNumber numberWithInt:0];
+                  
+}
+    
+    return sourceIndex;
+}
+
+
+// Return the name associated with the given identifier
+- (NSString *)nameForSourceWithIdentifier:(int)identifier
+{
+	switch (identifier)
+	{
+		case kABSourceTypeLocal:
+			return @"On My Device";
+			break;
+		case kABSourceTypeExchange:
+			return @"Exchange server";
+			break;
+		case kABSourceTypeExchangeGAL:
+			return @"Exchange Global Address List";
+			break;
+		case kABSourceTypeMobileMe:
+			return @"iCloud";
+			break;
+		case kABSourceTypeLDAP:
+			return @"LDAP server";
+			break;
+		case kABSourceTypeCardDAV:
+			return @"CardDAV server";
+			break;
+		case kABSourceTypeCardDAVSearch:
+			return @"Searchable CardDAV server";
+			break;
+		default:
+			break;
+	}
+	return nil;
+}
+
+
+// Return the name of a given source
+- (NSString *)nameForSource:(ABRecordRef)source
+{
+	// Fetch the source type
+	CFNumberRef sourceType = ABRecordCopyValue(source, kABSourceTypeProperty);
+	
+	// Fetch the name associated with the source type
+	NSString *sourceName = [self nameForSourceWithIdentifier:[(__bridge NSNumber*)sourceType intValue]];
+	CFStringRef sourceNameProperty=ABRecordCopyValue(source, kABSourceNameProperty);
+    if ( sourceNameProperty && CFStringGetLength(sourceNameProperty)) {
+        sourceName=[sourceName stringByAppendingFormat:@"(%@)",(__bridge NSString *)sourceNameProperty];
+    }
+    
+    if (sourceNameProperty) {
+          CFRelease(sourceNameProperty);
+    }
+  
+    CFRelease(sourceType);
+	return sourceName;
+}
+// Return the name of a given source
+- (int )recordIDForSource:(ABRecordRef)source
+{
+	// Fetch the source type
+	int sourceRecordID = ABRecordGetRecordID(source);
+	
+	// Fetch the name associated with the source type
+	
+	return sourceRecordID;
+}
 
 #pragma mark -
 #pragma mark configuring cells and sections
@@ -507,12 +730,35 @@
         section.headerView = containerView;
         
     }
+    
+    
+    if(section.footerTitle !=nil)
+    {
+        
+        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 100)];
+        UILabel *footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 100)];
+        
+        footerLabel.numberOfLines=6;
+        footerLabel.lineBreakMode=UILineBreakModeWordWrap;
+        footerLabel.backgroundColor = [UIColor clearColor];
+        footerLabel.textColor = [UIColor whiteColor];
+        footerLabel.tag=60;
+        footerLabel.text=section.footerTitle;
+        footerLabel.textAlignment=UITextAlignmentCenter;
+        section.footerHeight=(CGFloat)100;
+        [containerView addSubview:footerLabel];
+//        [footerLabel sizeToFit];
+        section.footerView = containerView;
+        
+    }
+
+    
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{ 
 
 
-    if (indexPath.section==1 && cell.tag==4) {
+    if (indexPath.section==2 && cell.tag==5) {
         SCTableViewSection *section=(SCTableViewSection*)[tableViewModel sectionAtIndex:1];
        NSString *groupName=[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
         BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
@@ -530,8 +776,39 @@
         
     
     }
+    
+    if (indexPath.section==1) {
+        if (cell.tag==4&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
+            SCObjectSelectionCell *objSelectionCell=(SCObjectSelectionCell *)cell;
+            [objSelectionCell setSelectedItemIndex:[self defaultABSourceInSourceArray:objSelectionCell.items]];
+            
+        }
+    }
+    NSArray *sourcesArray=[self fetchArrayOfAddressBookSources];
+    NSNumber *selectedIndex=nil;
+    if (sourcesArray.count) {
+        
+        selectedIndex=[self defaultABSourceInSourceArray:sourcesArray ];
+        NSLog(@"selected index is %@",selectedIndex);
+    }
 
 
+    if (tableViewModel.tag==429 ) {
+       
+          
+            NSLog(@"cell bound object is %@",cell.boundObject);
+            NSLog(@"cell bound object class is %@",[cell.boundObject class]);
+            NSLog(@"cell class is %@",[cell class]);
+            if ([cell.boundObject isKindOfClass:[MySource class]]) {
+                MySource *mySource=(MySource *)cell.boundObject;
+                NSLog(@"cell text label is %@",cell.textLabel.text);
+                cell.textLabel.text=mySource.name;
+                
+            }
+            
+        
+        
+    }
 
 
 
@@ -544,6 +821,36 @@
 #pragma mark -
 #pragma mark SCTableViewModelDelegate methods
 
+
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+
+    if (tableViewModel.tag==0) {
+        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+        
+        NSLog(@"cell class is %@",[cell class]);
+        
+        NSLog(@"cell tag is %i",cell.tag);
+        if (cell.tag==4&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
+            
+            
+            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(abSourcesDoneButtonTapped:)];
+            
+            
+            detailTableViewModel.viewController.navigationItem.rightBarButtonItem = doneButton;
+            detailTableViewModel.tag=429;
+            
+            currentDetailTableViewModel_=detailTableViewModel;
+            
+        }
+        
+        
+    }
+
+
+
+
+
+}
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
     if([SCHelper is_iPad]){
@@ -589,7 +896,7 @@
             if (groupNameString && groupNameString.length && ![groupNameString isEqualToString:currentNameString]) {
            
             [[NSUserDefaults standardUserDefaults]setValue:groupNameString forKey:kPTTAddressBookGroupName];
-            SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
+            SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:2];
             SCSelectionCell *aBGroupSelectionCell=(SCSelectionCell *)[section cellAtIndex:0];
             
             NSNumber *selectedIndex=(NSNumber *)[aBGroupSelectionCell selectedItemIndex];
@@ -694,7 +1001,7 @@
             if (groupNameString && groupNameString.length ) {
                 
                 [[NSUserDefaults standardUserDefaults]setValue:groupNameString forKey:kPTTAddressBookGroupName];
-                SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
+                SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:2];
                 SCSelectionCell *aBGroupSelectionCell=(SCSelectionCell *)[section cellAtIndex:0];
                 
                 NSNumber *selectedIndex=nil;
@@ -1156,38 +1463,45 @@
                     break;
             }
         }
-        if (indexPath.section==1) {
+                
+    }
+    else {
+        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+            SCObjectSelectionSection *objSelectionSection=(SCObjectSelectionSection *)section;
             
-            switch (cell.tag) {
-                    //                    case 3:
-                    //                    {
-                    //                        if ([cell isKindOfClass:[SCSelectionCell class]]) {
-                    //                            SCSelectionCell *selectionCell=(SCSelectionCell *)cell;
-                    //                            
-                    //                            selectionCell.items=[self addressBookGroupsArray];
-                    //                            
-                    //                        }                        
-                    //                        
-                    //                        
-                    //                    }
-                    
-                case 2:
-                {
-                    
-                    
-                    
-                }
-                    
-                    break;
-                    
-                default:
-                    break;
-            }
+            [objSelectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
         }
         
     }
     
-    
+}
+
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+
+//    if (tableViewModel.tag==1 &&tableViewModel.sectionCount) {
+//        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
+//        
+//        if (section.cellCount) {
+//            SCTableViewCell *cell=[section cellAtIndex:0];
+//           
+//            NSLog(@"cell bound object is %@",cell.boundObject);
+//            NSLog(@"cell bound object class is %@",[cell.boundObject class]);
+//            NSLog(@"cell class is %@",[cell class]);
+//            if ([cell.boundObject isKindOfClass:[MySource class]]) {
+//                MySource *mySource=(MySource *)cell.boundObject;
+//                NSLog(@"cell text label is %@",cell.textLabel.text);
+//                cell.textLabel.text=@"test";
+//                
+//            }
+//            
+//        }
+//        
+//    }
+
+
+
+
 }
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -1274,7 +1588,7 @@
             }
                 break;
                 
-            case 3:
+            case 4:
             {
                 @try {
                     ABAddressBookRef addressBook=ABAddressBookCreate();
@@ -1360,7 +1674,7 @@
                  
             }
                 break;
-            case 4:
+            case 5:
             {
                 if ([cell isKindOfClass:[SCControlCell class]]) {
                 
@@ -1400,7 +1714,7 @@
                         
                         
                         
-                        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
+                        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:2];
                         SCSelectionCell *aBGroupSelectionCell=(SCSelectionCell *)[section cellAtIndex:0];
 
                         NSNumber *selectedIndex=nil;
@@ -2339,10 +2653,32 @@ if (addressBook) {
 
 
 
+-(IBAction)abSourcesDoneButtonTapped:(id)sender{
 
 
+    
+//    if (currentDetailTableViewModel_.tag=429 &&currentDetailTableViewModel_.sectionCount) {
+//        SCObjectSelectionSection *section=(SCObjectSelectionSection *)[currentDetailTableViewModel_ sectionAtIndex:0];
+//        NSNumber *selectedIndex= (NSNumber *) sourcesObjSelectionCell_.selectedItemIndex;
+//        selectedIndex=section.selectedItemIndex;
+//        
+//        
+//        
+//        
+//    }
+    if(rootNavController)
+	{
+		// check if self is the rootViewController
+        
+        [tableModel.viewController.navigationController popViewControllerAnimated:YES];
+        
+        
+	}
+	else
+		[sourcesObjSelectionCell_.ownerTableViewModel.viewController dismissModalViewControllerAnimated:YES];
+    
 
-
+}
 
 
 

@@ -47,7 +47,7 @@ static NSInteger const kPTTScreenLocationLeft = 3;
 static NSInteger const kPTTScreenLocationRight = 4;
 static NSInteger const kPTTScreenLocationBottom = 5;
 
-static NSString * const kAddressBookIdentifier=@"address_book_identifier";
+static NSString * const kPTTAddressBookSourceIdentifier=@"address_book_source_identifier";
 static NSString * const kPTTAddressBookGroupIdentifier=@"address_book_group_identifier";
 static NSString * const kPTTAddressBookGroupName=@"address_book_group_name";
 static NSString * const kPTTGloballyUniqueIdentifier=@"globally_unique_identifier";
@@ -149,6 +149,8 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 -(IBAction)notifyTrustFailure:(id)sender;
 -(NSData *)decryptDataToPlainData:(NSData *)encryptedData usingSymetricKey:(NSData *)symetricData;
 -(NSData *)convertStringToData:(NSString *)string;
+
+-(IBAction)resaveLockDictionarySettings:(id)sender;
 @property (nonatomic,assign)BOOL okayToDecryptBool;
 
 @property (nonatomic, strong) PTTEncryption *encryption;

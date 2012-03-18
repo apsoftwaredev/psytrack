@@ -69,11 +69,11 @@
 
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-   
+    
+
     
     UIImage *lockImage=[UIImage imageNamed:@"lock.png"];
 	UIBarButtonItem *stopButton = [[UIBarButtonItem alloc] initWithImage:lockImage style:UIBarButtonItemStyleDone target:self action:@selector(lockScreen:)];
@@ -227,7 +227,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     
     }
 
-  
+//    [self.tableView reloadData];
     
 }
 
@@ -532,6 +532,8 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
             InAppSettingsViewController *inAppSettingsViewController = [[InAppSettingsViewController alloc] initWithNibName:@"InAppSettingsViewController" bundle:nil];
             
             [self.navigationController pushViewController:inAppSettingsViewController animated:YES];
+            
+            inAppSettingsViewController.rootNavController=self.navigationController;
             break;
         }    
         case 16:

@@ -33,10 +33,10 @@
     NSMutableDictionary *dictionaryArrayOfStringsIndexForGroupIdentifierKey;
     NSArray *groupArray;
 
-    
- 
+    SCTableViewModel *currentDetailTableViewModel_;
+    SCObjectSelectionCell *sourcesObjSelectionCell_;
 }
-
+@property (nonatomic, strong) UINavigationController *rootNavController;
 @property (nonatomic, strong) EKEventStore *eventStore;
 @property (nonatomic, strong) EKCalendar *psyTrackCalendar;
 @property (nonatomic, strong) NSMutableArray *eventsList;
@@ -49,4 +49,12 @@
 -(NSArray *)addressBookGroupsArray;
 -(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew checkExisting:(BOOL)checkExisting;
 -(void)importAllContactsInGroup;
+
+- (NSString *)nameForSourceWithIdentifier:(int)identifier;
+
+- (NSString *)nameForSource:(ABRecordRef)source;
+-(NSArray *)fetchArrayOfAddressBookSources;
+-(IBAction)abSourcesDoneButtonTapped:(id)sender;
+-(NSNumber *)defaultABSourceInSourceArray:(NSArray *)sourceArray;
+
 @end

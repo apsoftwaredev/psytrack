@@ -130,6 +130,11 @@
      name:@"trustFailureOccured"
      object:nil];
     
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(resaveLockDictionarySettings:)
+     name:@"RefetchAllDatabaseData"
+     object:nil];
     
     NSString *statusMessage;
 
@@ -5250,6 +5255,12 @@ return [self applicationDrugsDirectory].path;
     }
    
 } 
+
+-(IBAction)resaveLockDictionarySettings:(id)sender{
+
+    [self saveLockDictionarySettings];
+
+}
 -(BOOL)saveLockDictionarySettings{
 
     
@@ -5299,7 +5310,7 @@ return [self applicationDrugsDirectory].path;
                     
                     [[NSNotificationCenter defaultCenter]
                      addObserver:self
-                     selector:@selector(saveLockDictionarySettings:)
+                     selector:@selector(resaveLockDictionarySettings:)
                      name:@"RefetchAllDatabaseData"
                      object:nil];
                 }

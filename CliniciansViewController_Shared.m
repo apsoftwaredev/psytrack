@@ -1421,12 +1421,22 @@
     
     existingPersonRecordID=-1;
     
-   
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(reloadTableViewData:)
+     name:@"RefetchAllDatabaseData"
+     object:nil];
     
     
 }
 
 
+-(IBAction)reloadTableViewData:(id)sender{
+    
+    //    [self.tableModel reloadBoundValues ];
+    [self.tableView reloadData];
+    
+}
 #pragma mark -
 #pragma UIView methods
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -4873,6 +4883,177 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
     
 }
 
+-(int )defaultABSourceID{
+    
+    BOOL iCloudEnabled=(BOOL)[[NSUserDefaults standardUserDefaults] valueForKey:@"icloud_preference"];
+    
+    
+    NSURL *ubiq = [[NSFileManager defaultManager] 
+                   URLForUbiquityContainerIdentifier:nil];
+    
+    int sourceID=-1;
+    
+    ABAddressBookRef addressBook;
+    addressBook=nil;
+    
+    addressBook=ABAddressBookCreate();
+    
+    CFArrayRef allSourcesArray=ABAddressBookCopyArrayOfAllSources(addressBook);
+    ABRecordRef source=nil;
+    int sourcesCount=0;
+    if (allSourcesArray ) {
+        sourcesCount= CFArrayGetCount(allSourcesArray);
+    } 
+    if (sourcesCount==0) {
+        if (allSourcesArray) {
+             CFRelease(allSourcesArray);
+        }
+       
+        if (source) {
+            CFRelease(source);
+        }
+        if (addressBook) {
+            CFRelease(addressBook);
+        }
+        
+        return -1;
+    }
+    if (allSourcesArray && sourcesCount==1) {
+      
+        source=CFArrayGetValueAtIndex(allSourcesArray, 0);
+        ABRecordID sourceID=ABRecordGetRecordID(source);
+        
+        CFRelease(allSourcesArray);
+        if (source) {
+            CFRelease(source);
+        }
+        CFRelease(addressBook);
+        return sourceID;
+        
+    }
+    
+    
+    int recordID=(int)[(NSNumber*)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookSourceIdentifier]
+                       intValue];
+    
+    
+    NSLog(@"source record id is %i",recordID);
+    if (recordID!=-1) {
+        
+        source=ABAddressBookGetSourceWithRecordID(addressBook, recordID);
+        if (source) {
+            
+            CFRelease(source);
+            if (allSourcesArray) {
+                CFRelease(allSourcesArray);
+            }
+            CFRelease(addressBook);
+            
+            return recordID;
+        }
+        
+        
+    }
+    if (allSourcesArray && CFArrayGetCount(allSourcesArray) >1 && (ubiq || iCloudEnabled)) {
+        NSLog(@"iCloud access at %@", ubiq);
+        
+        
+        for (int i=0; i<sourcesCount ; i++){
+            // Fetch the source type
+            
+            source=CFArrayGetValueAtIndex(allSourcesArray, i);
+            CFNumberRef sourceType = ABRecordCopyValue(source, kABSourceTypeProperty);
+            
+            // Fetch the name associated with the source type
+            NSString *sourceName = [self nameForSourceWithIdentifier:[(__bridge NSNumber*)sourceType intValue]];
+            
+            
+            if ([sourceName isEqualToString: @"iCloud"])
+            {
+               sourceID=ABRecordGetRecordID(source);
+                
+                if (allSourcesArray) {
+                    CFRelease(allSourcesArray);
+                }
+                
+                if (source) {
+                    CFRelease(source);
+                }
+                if (addressBook) {
+                    CFRelease(addressBook);
+                }
+                
+                if (sourceType) {
+                    CFRelease(sourceType);
+                }
+                
+                //               
+                
+                return sourceID;
+                break;
+            }
+            
+            
+        }
+        
+        
+    }
+    
+    if(sourcesCount>1)
+    {
+        source= CFArrayGetValueAtIndex(allSourcesArray, 0);
+        sourceID=ABRecordGetRecordID(source);
+        if (allSourcesArray) {
+            CFRelease(allSourcesArray);
+        }
+        
+        if (source) {
+            CFRelease(source);
+        }
+        if (addressBook) {
+            CFRelease(addressBook);
+        }
+        
+        
 
+        
+        return sourceID;
+        
+    }
+    
+    return sourceID;
+}
+
+// Return the name associated with the given identifier
+- (NSString *)nameForSourceWithIdentifier:(int)identifier
+{
+	switch (identifier)
+	{
+		case kABSourceTypeLocal:
+			return @"On My Device";
+			break;
+		case kABSourceTypeExchange:
+			return @"Exchange server";
+			break;
+		case kABSourceTypeExchangeGAL:
+			return @"Exchange Global Address List";
+			break;
+		case kABSourceTypeMobileMe:
+			return @"iCloud";
+			break;
+		case kABSourceTypeLDAP:
+			return @"LDAP server";
+			break;
+		case kABSourceTypeCardDAV:
+			return @"CardDAV server";
+			break;
+		case kABSourceTypeCardDAVSearch:
+			return @"Searchable CardDAV server";
+			break;
+		default:
+			break;
+	}
+	return nil;
+}
 
 @end

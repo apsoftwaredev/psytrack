@@ -47,7 +47,12 @@
     
     
 }
-
+-(IBAction)reloadTableViewData:(id)sender{
+    
+    [self.tableModel reloadBoundValues ];
+    [self.tableView reloadData];
+    
+}
 
 
 - (void)viewDidLoad {

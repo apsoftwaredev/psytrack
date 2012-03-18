@@ -51,18 +51,19 @@
 #import "PTABGroup.h"
 
 @implementation MySource
-@synthesize /*name, groups,*/abGroupsMutArray;
+@synthesize name, /*groupsabGroupsMutArray,,*/sourceRecordID;
 
-//- (id)initWithAllGroups:(NSMutableArray *)allGroups name:(NSString*)sourceName
-//{
-//	self = [super init];
-//	if(self != nil) 
-//    {
+- (id)initWithAllGroups:(NSMutableArray *)allGroups name:(NSString*)sourceName recordID:(int)recordIDInt
+{
+	self = [super init];
+	if(self != nil) 
+    {
+        self.name = sourceName;
 //		self.groups = allGroups;
-//		self.name = sourceName;
-//    }
-//	return self;
-//}
+        self.sourceRecordID=recordIDInt;
+    }
+	return self;
+}
 
 
 - (id)init
