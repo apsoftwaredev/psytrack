@@ -11,7 +11,22 @@
 #import "PTTAppDelegate.h"
 @implementation ABSourcesSCObjectSelectionCell
 
+-(void)performInitialization{
 
+
+    [super performInitialization];
+    
+    self.allowAddingItems=NO;
+    self.allowDeletingItems=NO;
+    self.allowEditDetailView=NO;
+    self.allowMovingItems=NO;
+    self.allowMultipleSelection=NO;
+    self.allowNoSelection=NO;
+
+
+
+
+}
 
 -(void)loadBoundValueIntoControl{
     

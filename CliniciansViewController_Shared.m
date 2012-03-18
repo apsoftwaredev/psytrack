@@ -4611,10 +4611,14 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
     }
     @finally 
     {
-        
+        ABRecordRef source=nil;
+        int sourceID=[self defaultABSourceID];
+        source=ABAddressBookGetSourceWithRecordID(addressBook, sourceID);
         ABRecordRef group;
         int groupIdentifier;
-        int groupCount=ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
+        
+        CFArrayRef allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
+        int groupCount=CFArrayGetCount(allGroupsInSource);
         if (!groupName ||!groupName.length) {
             
             if ([[NSUserDefaults standardUserDefaults] objectForKey:kPTTAddressBookGroupName]) {
@@ -4659,18 +4663,18 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
                 
                 
                 //should not ad new
-                CFArrayRef CFGroupsCheckNameArray;
+              
                 CFStringRef CFGroupNameCheck ;
                 ABRecordRef groupInCheckNameArray;
                 if (groupCount) 
                 {
                     
-                    CFGroupsCheckNameArray= (CFArrayRef )ABAddressBookCopyArrayOfAllGroups((ABAddressBookRef) addressBook);
-                    NSLog(@"cggroups array %@",CFGroupsCheckNameArray);
+                   
+                    NSLog(@"cggroups array %@",allGroupsInSource);
                     
                     
                     for (CFIndex i = 0; i < groupCount; i++) {
-                        groupInCheckNameArray = CFArrayGetValueAtIndex(CFGroupsCheckNameArray, i);
+                        groupInCheckNameArray = CFArrayGetValueAtIndex(allGroupsInSource, i);
                         CFGroupNameCheck  = ABRecordCopyValue(groupInCheckNameArray, kABGroupNameProperty);
                         
                         
@@ -4709,8 +4713,8 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
                         //            CFRelease(CFGroupNameCheck);
                         
                     }
-                    if (CFGroupsCheckNameArray) {
-                        CFRelease(CFGroupsCheckNameArray); 
+                    if (allGroupsInSource) {
+                        CFRelease(allGroupsInSource); 
                     }
                     
                     if (CFGroupNameCheck) {
@@ -4743,7 +4747,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
             }
             //        ABRecordRef CFAddressBookGroupRecord =  ABGroupCreate ();
             
-            group=ABGroupCreate();
+            group=ABGroupCreateInSource(source);
             
             //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
             
@@ -4841,7 +4845,9 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
         
         
                
-        
+        if (source) {
+            CFRelease(source);
+        }
     }
     //    [[NSUserDefaults standardUserDefaults]  setValue:(NSString *)groupName forKey:kPTTAddressBookGroupName];
     

@@ -56,5 +56,5 @@
 -(NSArray *)fetchArrayOfAddressBookSources;
 -(IBAction)abSourcesDoneButtonTapped:(id)sender;
 -(NSNumber *)defaultABSourceInSourceArray:(NSArray *)sourceArray;
-
+-(int )defaultABSourceID;
 @end
