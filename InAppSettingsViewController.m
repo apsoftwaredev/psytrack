@@ -136,13 +136,13 @@
     [defaultCalendarSection addCell:defaultCalendarLocationCell];
     
         NSArray *sourcesArray=[self fetchArrayOfAddressBookSources];
-        NSNumber *selectedIndex=nil;
+       
         
 //        SCSelectionCell *sourcesSelectionCell=[[SCSelectionCell alloc]initWithText:@"Address Book Source" withBoundKey:nil withSelectedIndexValue:selectedIndex withItems: sourcesArray];
-        ABSourcesSCObjectSelectionCell *sourcesSelectionCell=[[ABSourcesSCObjectSelectionCell alloc]initWithText:@"Source" withBoundKey:@"name" withSelectedIndexValue:selectedIndex withItems:sourcesArray];
+        ABSourcesSCObjectSelectionCell *sourcesSelectionCell=[[ABSourcesSCObjectSelectionCell alloc]initWithText:@"Source" withBoundKey:@"name" withSelectedIndexValue:nil withItems:sourcesArray];
         
 
-    
+    NSLog(@"sources array is %@",sourcesArray);
         sourcesSelectionCell.allowAddingItems=NO;
         sourcesSelectionCell.allowDeletingItems=NO;
         sourcesSelectionCell.allowEditDetailView=NO;
@@ -152,7 +152,7 @@
         
         sourcesSelectionCell.tag=3;
         
-        SCTableViewSection *defaultSourceSection=[SCTableViewSection sectionWithHeaderTitle:@"Address Book Source" withFooterTitle:@"If you use iCloud to synchronize multiple devices and it is available, the default source should be iCloud. All devices should have the same source."];
+        SCTableViewSection *defaultSourceSection=[SCTableViewSection sectionWithHeaderTitle:@"Address Book Source" withFooterTitle:@"CardDAV server should be the default choice if you use iCloud to sychronize your address book across devices. All devices should use the same source."];
         [defaultSourceSection addCell:sourcesSelectionCell];
        
         
@@ -161,7 +161,19 @@
     NSString *groupName=[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
     NSLog(@"group identifier is %i",groupIdentifier);
    
-    int groupCount=ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
+        ABRecordRef source=nil;
+        int sourceID=[self defaultABSourceID];
+        
+        addressBook=nil;
+        addressBook=ABAddressBookCreate();
+        source=ABAddressBookGetSourceWithRecordID(addressBook, sourceID);
+        
+        
+        CFArrayRef allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
+        int groupCount=CFArrayGetCount(allGroupsInSource);
+
+        
+    
         BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults] boolForKey:kPTAutoAddClinicianToGroup];
     
     
@@ -222,7 +234,7 @@
 //    defaultABGroupNameTextFieldCell.tag=4;
 //    defaultABGroupNameTextFieldCell.delegate=self;
     
-    SCTableViewSection *defaultABGroupSection=[SCTableViewSection sectionWithHeaderTitle:@"Default Address Book Group Settings"];
+    SCTableViewSection *defaultABGroupSection=[SCTableViewSection sectionWithHeaderTitle:@"Default Address Book Group Settings" withFooterTitle:@"To change an existing name or to add a new group with a specified name, enter it in the name field, then tap the corresponding button."];
     
     
     [defaultABGroupSection addCell:defaultABGroupSelectionCell];
@@ -240,6 +252,10 @@
    
         tableModel.autoAssignDataSourceForDetailModels=YES;
         tableModel.autoAssignDelegateForDetailModels=YES;
+   
+        if (addressBook) {
+            CFRelease(addressBook);
+        }
     }
     
    
@@ -250,7 +266,7 @@
     [appDelegate displayNotification:@"Problem Connecting to the Address Book Occured" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
 }
 @finally {
-    
+   
 }
 }
 
@@ -577,8 +593,7 @@
     BOOL iCloudEnabled=(BOOL)[[NSUserDefaults standardUserDefaults] valueForKey:@"icloud_preference"];
     
     
-    NSURL *ubiq = [[NSFileManager defaultManager] 
-                   URLForUbiquityContainerIdentifier:nil];
+    
     
     NSNumber *sourceIndex=[NSNumber numberWithInt:-1];
    
@@ -610,8 +625,8 @@
         }
 
     }
-    if (sourceArray.count && (ubiq || iCloudEnabled)) {
-        NSLog(@"iCloud access at %@", ubiq);
+    if (sourceArray.count &&  iCloudEnabled) {
+//        NSLog(@"iCloud access at %@", ubiq);
 
   
         for (MySource *source in sourceArray){
@@ -658,7 +673,7 @@ if(sourceArray.count>1)
 			return @"Exchange Global Address List";
 			break;
 		case kABSourceTypeMobileMe:
-			return @"iCloud";
+			return @"Moblile Me";
 			break;
 		case kABSourceTypeLDAP:
 			return @"LDAP server";
@@ -780,8 +795,12 @@ if(sourceArray.count>1)
     if (indexPath.section==1) {
         if (cell.tag==3&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
             SCObjectSelectionCell *objSelectionCell=(SCObjectSelectionCell *)cell;
-            [objSelectionCell setSelectedItemIndex:[self defaultABSourceInSourceArray:objSelectionCell.items]];
+            NSNumber *setIndexNumber=[self defaultABSourceInSourceArray:objSelectionCell.items];
+            if ([setIndexNumber intValue]>-1) {
+                [objSelectionCell setSelectedItemIndex:setIndexNumber];
+            }
             
+        
         }
     }
     NSArray *sourcesArray=[self fetchArrayOfAddressBookSources];
@@ -872,7 +891,7 @@ if(sourceArray.count>1)
 	
 	// Get the object associated with the cell
 //	NSManagedObject *managedObject = (NSManagedObject *)cell.boundObject;
-    ABAddressBookRef addressBook;
+    ABAddressBookRef addressBook=nil;
     @try {
         addressBook =ABAddressBookCreate();
     }
@@ -932,8 +951,11 @@ if(sourceArray.count>1)
                 
             }
             
-           
+                CFRelease(addressBook);
             groupArray=[self addressBookGroupsArray];
+               ABAddressBookRef addressBook=  ABAddressBookCreate();
+                addressBook=ABAddressBookCreate();
+                
             groupCount=groupArray.count;
             if (groupCount) {
                 groupIdentifierNumber=[dictionaryABGroupIdentifierValueForArrayOfStringsIndexKey valueForKey:(NSString *)[selectedIndex stringValue]];
@@ -986,7 +1008,7 @@ if(sourceArray.count>1)
                 
 //                CFRelease(CFGroupRecord);
                 
-            
+                
             }
             }
         }
@@ -1025,10 +1047,10 @@ if(sourceArray.count>1)
                     
 //                }
 //                groupIdentifierNumber=(NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupIdentifier];
-                
+                addressBook=nil;
+              
                 groupArray=[self addressBookGroupsArray];
-                
-              int  groupCount=groupArray.count;
+                int  groupCount=groupArray.count;
                 
                
                    
@@ -1142,7 +1164,7 @@ if(sourceArray.count>1)
 			NSLog(@"button 304 pressed group name string is %@ ",groupNameString);
 //            
             
-            ABAddressBookRef addressBook=ABAddressBookCreate();
+            
             
 //            BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
             
@@ -1151,9 +1173,21 @@ if(sourceArray.count>1)
             if (groupIdentifier!=-1) {
             
             
-                int CFGroupCount = ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
+                ABRecordRef source=nil;
+                int sourceID=[self defaultABSourceID];
+                source=ABAddressBookGetSourceWithRecordID(addressBook, sourceID);
+                
+                
+                CFArrayRef allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
+                
+                int groupCount;
+                if (allGroupsInSource) {
+                    groupCount=CFArrayGetCount(allGroupsInSource);
+
+                }
+                             
             
-                if ( CFGroupCount >0) {
+                if ( groupCount >0) {
                     
                     
                    
@@ -1171,9 +1205,8 @@ if(sourceArray.count>1)
 //                      
                         CFRelease(group);
                     }
-                
-                  
                     
+                                        
 //                CFArrayRef groups  = ABAddressBookCopyArrayOfAllGroups((ABAddressBookRef) addressBook);
             //    
             //    for(CFIndex i = 0;i<CFGroupCount;i++)
@@ -1204,8 +1237,19 @@ if(sourceArray.count>1)
             //        
             //    }
                 }
+                if (source) {
+                    CFRelease(source);
+                }
                 
+                if (allGroupsInSource) {
+                    CFRelease(allGroupsInSource);
+                    
+                } 
+            
+               
+            
             }
+            
         }    
      
             break;
@@ -1219,10 +1263,22 @@ if(sourceArray.count>1)
             if (groupIdentifier!=-1) {
                 
                 
-                int CFGroupCount = ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
+                ABRecordRef source=nil;
+                int sourceID=[self defaultABSourceID];
+                source=ABAddressBookGetSourceWithRecordID(addressBook, sourceID);
+                
+                
+                CFArrayRef allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
+                
+                int groupCount;
+                if (allGroupsInSource) {
+                    groupCount=CFArrayGetCount(allGroupsInSource);
+                    
+                }
+
                 PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
                 
-                if (CFGroupCount>0) {
+                if (groupCount>0) {
                     
                     
                     
@@ -1287,9 +1343,13 @@ if(sourceArray.count>1)
             
             
         }    
-            break;  
-    }
-
+            break; 
+        
+        
+        }
+    addressBook=nil;
+    
+   
 }    
 }
 
@@ -1360,7 +1420,7 @@ if(sourceArray.count>1)
                         [[NSUserDefaults standardUserDefaults] setInteger:-1 forKey:kPTTAddressBookGroupIdentifier];
                         [[NSUserDefaults standardUserDefaults ]synchronize];
                         
-                        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:1];
+                        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:2];
                         
                         SCSelectionCell *selectionCell=(SCSelectionCell*)[section cellAtIndex:0];
                         
@@ -1387,7 +1447,7 @@ if(sourceArray.count>1)
                         }
                                                 
                     }
-   
+                    
                 }
                 else 
                 {
@@ -1591,6 +1651,8 @@ if(sourceArray.count>1)
             {
                 SCTableViewSection *groupsSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:2];
                 SCTableViewCell *groupsArraySelection=(SCTableViewCell*)[groupsSection cellAtIndex:0];
+                
+                
                 [groupsArraySelection reloadBoundValue];
                 [groupsArraySelection reloadInputViews];
                 
@@ -1627,12 +1689,26 @@ if(sourceArray.count>1)
                         
                         
                         
+                        ABRecordRef source=nil;
+                        int sourceID=[self defaultABSourceID];
+                        source=ABAddressBookGetSourceWithRecordID(addressBook, sourceID);
                         
                         
-                        int groupCount=ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
+                        CFArrayRef allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
+                        
+                        int groupCount;
+                        if (allGroupsInSource) {
+                            
+                            groupCount=CFArrayGetCount(allGroupsInSource);
+                            
+                        }
+
+                        
+                        
                         
                         if (!groupCount) {[self changeABGroupNameTo:(NSString *)[NSString string] addNew:YES checkExisting:NO];}
                         
+                         
                         groupCount=ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
                         
                         if (groupCount) {
@@ -1659,7 +1735,7 @@ if(sourceArray.count>1)
                             
                             [tableViewModel.modelKeyValues setValue:(__bridge NSString *)chosenGroupName forKey:@"groupNameString"];
                             
-                            SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
+                            SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:2];
                             SCTableViewCell *groupNameCell=(SCTableViewCell *)[section cellAtIndex:1];
                             UITextField *textField=(UITextField *)[groupNameCell viewWithTag:1];
                             textField.text=(__bridge NSString *)chosenGroupName;
@@ -1671,6 +1747,9 @@ if(sourceArray.count>1)
                             
                             
                         }
+                    }
+                    if (addressBook!=NULL) {
+                        CFRelease(addressBook);
                     }
                     
                     
@@ -1908,7 +1987,7 @@ if(sourceArray.count>1)
 #pragma mark additonal Methods for working with address book
 -(NSArray *)addressBookGroupsArray{
 
-    ABAddressBookRef addressBook;
+    ABAddressBookRef addressBook=nil;
     @try {
         
         addressBook=ABAddressBookCreate();        
@@ -1987,7 +2066,12 @@ if(sourceArray.count>1)
             //check to see if the group name exists already
            
         ABRecordRef source=nil;
+        
+        
         int sourceID=[self defaultABSourceID];
+        
+    
+        
         source=ABAddressBookGetSourceWithRecordID(addressBook, sourceID);
       
         
@@ -2044,10 +2128,12 @@ if(sourceArray.count>1)
     
       
     if (!group) {
-        
-    
-        
+                
         [self changeABGroupNameTo:(__bridge NSString*) CFGroupName addNew:YES checkExisting:NO];
+        
+      
+        
+        
         groupIdentifier=(NSInteger )[(NSNumber *)[[NSUserDefaults standardUserDefaults]valueForKey:kPTTAddressBookGroupIdentifier]intValue];
         group=ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, groupIdentifier);
         
@@ -2101,6 +2187,9 @@ if(sourceArray.count>1)
 //            
         
     } 
+        if (group!=NULL) {
+            CFRelease(group);
+        }
     // Get the ABSource object that contains this new group
     
    
@@ -2108,7 +2197,7 @@ if(sourceArray.count>1)
     NSNumber *groupIdentifierNumber=(NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupIdentifier];
     
     if ([groupIdentifierNumber isEqualToNumber:[NSNumber numberWithInt:(int)-1]]||[groupIdentifierNumber isEqualToNumber:[NSNumber numberWithInt:(int)0]]||!groupCount) {
-        
+               
         [ self changeABGroupNameTo:nil addNew:YES checkExisting:NO];
         
         
@@ -2116,7 +2205,9 @@ if(sourceArray.count>1)
     
     
     
-     groupCount=ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
+        allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
+        groupCount=CFArrayGetCount(allGroupsInSource);
+        
     if (groupCount) {
    
            allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
@@ -2157,9 +2248,7 @@ if(sourceArray.count>1)
         }
     
     }
-        if (group) {
-            CFRelease(group);
-        }
+        
         if (source) {
             CFRelease(source);
         }
@@ -2170,7 +2259,7 @@ if(sourceArray.count>1)
 
 -(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew checkExisting:(BOOL)checkExisting{
     
-    ABAddressBookRef addressBook;
+    ABAddressBookRef addressBook=nil;
     @try 
     {
    
@@ -2430,11 +2519,11 @@ if(sourceArray.count>1)
     }
        
     }
-     
+        if (addressBook) {
+            CFRelease(addressBook);
+        }
    
-        if (source) {
-            CFRelease(source);
-        }            
+         
     
     }
 //    [[NSUserDefaults standardUserDefaults]  setValue:(NSString *)groupName forKey:kPTTAddressBookGroupName];
@@ -2721,11 +2810,9 @@ if (addressBook) {
     
     BOOL iCloudEnabled=(BOOL)[[NSUserDefaults standardUserDefaults] valueForKey:@"icloud_preference"];
     
-    
-    NSURL *ubiq = [[NSFileManager defaultManager] 
-                   URLForUbiquityContainerIdentifier:nil];
-    
-    int sourceID=-1;
+    int returnID=-1;
+       int sourceID=-1;
+    BOOL continueChecking=YES;
     
     ABAddressBookRef addressBook;
     addressBook=nil;
@@ -2735,34 +2822,23 @@ if (addressBook) {
     CFArrayRef allSourcesArray=ABAddressBookCopyArrayOfAllSources(addressBook);
     ABRecordRef source=nil;
     int sourcesCount=0;
+    
     if (allSourcesArray ) {
         sourcesCount= CFArrayGetCount(allSourcesArray);
     } 
     if (sourcesCount==0) {
-        if (allSourcesArray) {
-            CFRelease(allSourcesArray);
-        }
         
-        if (source) {
-            CFRelease(source);
-        }
-        if (addressBook) {
-            CFRelease(addressBook);
-        }
-        
-        return -1;
-    }
-    if (allSourcesArray && sourcesCount==1) {
+        continueChecking=NO;
+        returnID=-1 ;
+    } 
+    if (continueChecking&& allSourcesArray && sourcesCount==1) {
         
         source=CFArrayGetValueAtIndex(allSourcesArray, 0);
         ABRecordID sourceID=ABRecordGetRecordID(source);
         
-        CFRelease(allSourcesArray);
-        if (source) {
-            CFRelease(source);
-        }
-        CFRelease(addressBook);
-        return sourceID;
+        continueChecking=NO;
+        returnID=sourceID;
+       
         
     }
     
@@ -2772,24 +2848,22 @@ if (addressBook) {
     
     
     NSLog(@"source record id is %i",recordID);
-    if (recordID!=-1) {
+    if (continueChecking && recordID!=-1) {
         
         source=ABAddressBookGetSourceWithRecordID(addressBook, recordID);
+
+       
         if (source) {
-            
-            CFRelease(source);
-            if (allSourcesArray) {
-                CFRelease(allSourcesArray);
-            }
-            CFRelease(addressBook);
-            
-            return recordID;
+            continueChecking=NO;
+            returnID=recordID;
         }
+            
+//        }
         
         
     }
-    if (allSourcesArray && CFArrayGetCount(allSourcesArray) >1 && (ubiq || iCloudEnabled)) {
-        NSLog(@"iCloud access at %@", ubiq);
+    if (continueChecking&& allSourcesArray && CFArrayGetCount(allSourcesArray) >1 &&  iCloudEnabled) {
+      
         
         
         for (int i=0; i<sourcesCount ; i++){
@@ -2798,32 +2872,24 @@ if (addressBook) {
             source=CFArrayGetValueAtIndex(allSourcesArray, i);
             CFNumberRef sourceType = ABRecordCopyValue(source, kABSourceTypeProperty);
             
+            
             // Fetch the name associated with the source type
             NSString *sourceName = [self nameForSourceWithIdentifier:[(__bridge NSNumber*)sourceType intValue]];
-            
+            if (sourceType) {
+                CFRelease(sourceType);
+            }
+
             
             if ([sourceName isEqualToString: @"iCloud"])
             {
                 sourceID=ABRecordGetRecordID(source);
                 
-                if (allSourcesArray) {
-                    CFRelease(allSourcesArray);
-                }
-                
-                if (source) {
-                    CFRelease(source);
-                }
-                if (addressBook) {
-                    CFRelease(addressBook);
-                }
-                
-                if (sourceType) {
-                    CFRelease(sourceType);
-                }
-                
+                                
+                               
                 //               
                 
-                return sourceID;
+                returnID=sourceID;
+                continueChecking=NO;
                 break;
             }
             
@@ -2833,29 +2899,24 @@ if (addressBook) {
         
     }
     
-    if(sourcesCount>1)
+    if(continueChecking&& sourcesCount>1)
     {
         source= CFArrayGetValueAtIndex(allSourcesArray, 0);
         sourceID=ABRecordGetRecordID(source);
-        if (allSourcesArray) {
-            CFRelease(allSourcesArray);
-        }
-        
-        if (source) {
-            CFRelease(source);
-        }
-        if (addressBook) {
-            CFRelease(addressBook);
-        }
-        
-        
-        
-        
-        return sourceID;
+        returnID=sourceID;        
         
     }
+    if (addressBook) {
+        CFRelease(addressBook);
+    }
     
-    return sourceID;
+    
+    if (allSourcesArray) {
+        CFRelease(allSourcesArray);
+    }
+    
+    
+    return returnID;
 }
 
 

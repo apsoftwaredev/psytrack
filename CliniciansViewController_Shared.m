@@ -4893,11 +4893,9 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
     
     BOOL iCloudEnabled=(BOOL)[[NSUserDefaults standardUserDefaults] valueForKey:@"icloud_preference"];
     
-    
-    NSURL *ubiq = [[NSFileManager defaultManager] 
-                   URLForUbiquityContainerIdentifier:nil];
-    
+    int returnID=-1;
     int sourceID=-1;
+    BOOL continueChecking=YES;
     
     ABAddressBookRef addressBook;
     addressBook=nil;
@@ -4907,34 +4905,23 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
     CFArrayRef allSourcesArray=ABAddressBookCopyArrayOfAllSources(addressBook);
     ABRecordRef source=nil;
     int sourcesCount=0;
+    
     if (allSourcesArray ) {
         sourcesCount= CFArrayGetCount(allSourcesArray);
     } 
     if (sourcesCount==0) {
-        if (allSourcesArray) {
-             CFRelease(allSourcesArray);
-        }
-       
-        if (source) {
-            CFRelease(source);
-        }
-        if (addressBook) {
-            CFRelease(addressBook);
-        }
         
-        return -1;
-    }
-    if (allSourcesArray && sourcesCount==1) {
-      
+        continueChecking=NO;
+        returnID=-1 ;
+    } 
+    if (continueChecking&& allSourcesArray && sourcesCount==1) {
+        
         source=CFArrayGetValueAtIndex(allSourcesArray, 0);
         ABRecordID sourceID=ABRecordGetRecordID(source);
         
-        CFRelease(allSourcesArray);
-        if (source) {
-            CFRelease(source);
-        }
-        CFRelease(addressBook);
-        return sourceID;
+        continueChecking=NO;
+        returnID=sourceID;
+        
         
     }
     
@@ -4944,24 +4931,22 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
     
     
     NSLog(@"source record id is %i",recordID);
-    if (recordID!=-1) {
+    if (continueChecking && recordID!=-1) {
         
         source=ABAddressBookGetSourceWithRecordID(addressBook, recordID);
+        
+        
         if (source) {
-            
-            CFRelease(source);
-            if (allSourcesArray) {
-                CFRelease(allSourcesArray);
-            }
-            CFRelease(addressBook);
-            
-            return recordID;
+            continueChecking=NO;
+            returnID=recordID;
         }
+        
+        //        }
         
         
     }
-    if (allSourcesArray && CFArrayGetCount(allSourcesArray) >1 && (ubiq || iCloudEnabled)) {
-        NSLog(@"iCloud access at %@", ubiq);
+    if (continueChecking&& allSourcesArray && CFArrayGetCount(allSourcesArray) >1 &&  iCloudEnabled) {
+        
         
         
         for (int i=0; i<sourcesCount ; i++){
@@ -4970,32 +4955,24 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
             source=CFArrayGetValueAtIndex(allSourcesArray, i);
             CFNumberRef sourceType = ABRecordCopyValue(source, kABSourceTypeProperty);
             
+            
             // Fetch the name associated with the source type
             NSString *sourceName = [self nameForSourceWithIdentifier:[(__bridge NSNumber*)sourceType intValue]];
+            if (sourceType) {
+                CFRelease(sourceType);
+            }
             
             
             if ([sourceName isEqualToString: @"iCloud"])
             {
-               sourceID=ABRecordGetRecordID(source);
+                sourceID=ABRecordGetRecordID(source);
                 
-                if (allSourcesArray) {
-                    CFRelease(allSourcesArray);
-                }
                 
-                if (source) {
-                    CFRelease(source);
-                }
-                if (addressBook) {
-                    CFRelease(addressBook);
-                }
-                
-                if (sourceType) {
-                    CFRelease(sourceType);
-                }
                 
                 //               
                 
-                return sourceID;
+                returnID=sourceID;
+                continueChecking=NO;
                 break;
             }
             
@@ -5005,36 +4982,33 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
         
     }
     
-    if(sourcesCount>1)
+    if(continueChecking&& sourcesCount>1)
     {
         source= CFArrayGetValueAtIndex(allSourcesArray, 0);
         sourceID=ABRecordGetRecordID(source);
-        if (allSourcesArray) {
-            CFRelease(allSourcesArray);
-        }
-        
-        if (source) {
-            CFRelease(source);
-        }
-        if (addressBook) {
-            CFRelease(addressBook);
-        }
-        
-        
-
-        
-        return sourceID;
+        returnID=sourceID;        
         
     }
+    if (addressBook) {
+        CFRelease(addressBook);
+    }
     
-    return sourceID;
+    
+    if (allSourcesArray) {
+        CFRelease(allSourcesArray);
+    }
+    
+    
+    return returnID;
 }
+
 
 // Return the name associated with the given identifier
 - (NSString *)nameForSourceWithIdentifier:(int)identifier
 {
 	switch (identifier)
 	{
+            
 		case kABSourceTypeLocal:
 			return @"On My Device";
 			break;
@@ -5045,7 +5019,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
 			return @"Exchange Global Address List";
 			break;
 		case kABSourceTypeMobileMe:
-			return @"iCloud";
+			return @"Mobile Me";
 			break;
 		case kABSourceTypeLDAP:
 			return @"LDAP server";

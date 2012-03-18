@@ -33,6 +33,7 @@
     NSMutableDictionary *dictionaryArrayOfStringsIndexForGroupIdentifierKey;
     NSArray *groupArray;
 
+//    ABAddressBookRef addressBook;
     SCTableViewModel *currentDetailTableViewModel_;
     SCObjectSelectionCell *sourcesObjSelectionCell_;
 }

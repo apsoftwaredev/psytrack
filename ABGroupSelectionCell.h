@@ -35,7 +35,7 @@
 @property (nonatomic, assign)BOOL synchWithABBeforeLoadBool;
 
 -(NSArray *)addressBookGroupsArray;
--(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew;
+-(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew checkExisting:(BOOL)checkExisting;
 
 
 -(id)initWithClinician:(ClinicianEntity *)clinicianObject;
