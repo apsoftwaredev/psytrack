@@ -22,7 +22,7 @@
 @interface ClientEntity : NSManagedObject{
 
 
-    BOOL saving;
+   
 
 }
 

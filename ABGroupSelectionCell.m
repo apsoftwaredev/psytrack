@@ -1318,13 +1318,14 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
             
             
             // Fetch the name associated with the source type
-            NSString *sourceName = [self nameForSourceWithIdentifier:[(__bridge NSNumber*)sourceType intValue]];
+//            NSString *sourceName = [self nameForSourceWithIdentifier:[(__bridge NSNumber*)sourceType intValue]];
             if (sourceType) {
                 CFRelease(sourceType);
             }
             
             
-            if ([sourceName isEqualToString: @"iCloud"])
+            if ([(__bridge NSNumber *)sourceType isEqualToNumber:[NSNumber numberWithInt:kABSourceTypeCardDAV]]) 
+
             {
                 sourceID=ABRecordGetRecordID(source);
                 

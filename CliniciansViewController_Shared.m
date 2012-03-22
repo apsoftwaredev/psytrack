@@ -4963,7 +4963,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
             }
             
             
-            if ([sourceName isEqualToString: @"iCloud"])
+            if ([sourceName isEqualToString: @"CardDAV server"])
             {
                 sourceID=ABRecordGetRecordID(source);
                 

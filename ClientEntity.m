@@ -223,20 +223,7 @@
 //
 //
 //}
--(void)willSave{
 
-    saving=TRUE;
-
-
-}
-
-
--(void)didSave{
-
-
-    saving=FALSE;
-
-}
 - (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
 {
     

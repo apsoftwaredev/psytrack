@@ -2880,7 +2880,7 @@ if (addressBook) {
             }
 
             
-            if ([sourceName isEqualToString: @"iCloud"])
+            if ([sourceName isEqualToString: @"CardDAV server"])
             {
                 sourceID=ABRecordGetRecordID(source);
                 

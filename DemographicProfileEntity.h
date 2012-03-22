@@ -13,9 +13,9 @@
 
 @interface DemographicProfileEntity : NSManagedObject
 
-@property (nonatomic, retain) NSData * sex;
+@property (nonatomic, retain) NSString * sex;
 @property (nonatomic, retain) NSString * sexualOrientation;
-@property (nonatomic, retain) NSData * profileNotes;
+@property (nonatomic, retain) NSString * profileNotes;
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSManagedObject *militaryService;
 @property (nonatomic, retain) NSManagedObject *educationLevel;
@@ -35,6 +35,10 @@
 @property (nonatomic, retain) NSSet *developmental;
 @property (nonatomic, retain) NSSet *significantLifeEvents;
 @property (nonatomic, retain) NSSet *races;
+@property (nonatomic, strong) NSDate * keyDate;
+
+@property (nonatomic, strong) NSString *tempProfileNotes;
+@property (nonatomic, strong) NSString *tempSex;
 @end
 
 @interface DemographicProfileEntity (CoreDataGeneratedAccessors)

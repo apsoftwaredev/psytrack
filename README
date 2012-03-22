@@ -36,6 +36,9 @@ TO DO:
 
 - fix interpersonal relationships
 - change immigration history
+-height selection picker not working in ipad
+- additional time in timer and time to subtract is not working
+- when navigating the people picker and canceled, the view went blank
 
 
 -	finish setting up the persistent store settings,

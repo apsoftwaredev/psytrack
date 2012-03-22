@@ -457,6 +457,68 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
         
     }
     
+    if (tableViewModel.tag==1 && ([cell isKindOfClass:[SCDateCell class]])) {
+        SCDateCell *dateCell=(SCDateCell *)cell;
+        [dateCell.datePicker setMaximumDate:[NSDate date]];
+        NSLog(@"date cell date is%@ ",dateCell.datePicker.date);
+        
+    }
+    SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+    if (tableViewModel.tag==3&&cell.tag==3) {
+        SCTableViewCell *cellOne=(SCTableViewCell *)[section cellAtIndex:0];        
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
+        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
+            
+        {
+            
+            UIButton *button=(UIButton *)[cell viewWithTag:300];
+            [button setTitle:@"Call Number" forState:UIControlStateNormal];
+        }
+        
+        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
+            
+        {
+            
+            UIButton *button=(UIButton *)[cell viewWithTag:300];
+            [button setTitle:@"Clear Discontinued" forState:UIControlStateNormal];
+        }
+        
+    }
+    
+    if (tableViewModel.tag==5 &&cell.tag==4&& tableViewModel.sectionCount >2) {
+        
+        NSLog(@"cell tag is %i",cell.tag);
+        NSLog(@"cell text is %@",cell.textLabel.text);
+        
+        SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
+        SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];        
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
+        NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
+        NSLog(@"cell  class is %@",[cellOne class]);
+        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
+            
+            
+            if ([cell isKindOfClass:[SCControlCell class]]) 
+            {
+                UIView *scaleView = [cell viewWithTag:70];
+                if ([scaleView isKindOfClass:[UISegmentedControl class]]) 
+                {
+                    
+                    UILabel *satisfactionLevelLabel =(UILabel *)[cell viewWithTag:71];
+                    satisfactionLevelLabel.text=@"Satisfaction With Drug:";
+                    
+                }
+                
+                
+            }
+            
+            
+            
+        }
+        
+        
+        
+    }
     
     
     if (tableViewModel.tag==4) {
@@ -1100,7 +1162,50 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //    
 //}
 
+-(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
 
+    BOOL valid = TRUE;
+    
+  
+    
+    
+    NSLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
+    
+    if (tableViewModel.tag==1){
+        
+        
+        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
+        SCControlCell *clientIDCodeCell =(SCControlCell *)[section cellAtIndex:0];
+        
+        
+        
+        UITextField *clientIDCodeField =(UITextField *)[clientIDCodeCell viewWithTag:1];
+        
+        NSLog(@"texxt field text is %@",clientIDCodeField.text);
+        if ( clientIDCodeField.text.length ) {
+            
+            valid=TRUE;
+            NSLog(@"first or last name is valid");
+            
+        }
+        else
+        {
+            valid=FALSE;
+        }
+    }
+    
+    
+    
+    
+    
+    return valid;
+
+
+
+
+
+
+}
 
 -(void)addWechlerAgeCellToSection:(SCTableViewSection *)section {
     

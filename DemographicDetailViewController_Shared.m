@@ -18,6 +18,8 @@
 #import "DemographicDetailViewController_Shared.h"
 #import "PTTAppDelegate.h"
 #import "TimeOfDayPickerCell.h"
+#import "EncryptedSCTextViewCell.h"
+#import "EncryptedSCSelectionCell.h"
 
 @implementation DemographicDetailViewController_Shared
 @synthesize demographicProfileDef;
@@ -28,8 +30,8 @@
     NSManagedObjectContext *managedObjectContext=[(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
     
     
-    NSString *shortFieldCellNibName=nil;
-    NSString *textFieldAndLableNibName=nil;
+//    NSString *shortFieldCellNibName=nil;
+//    NSString *textFieldAndLableNibName=nil;
     NSString *scaleDataCellNibName=nil;
     if ([SCHelper is_iPad]) {
 //        textFieldAndLableNibName=@"TextFieldAndLabelCell_iPad";
@@ -178,21 +180,48 @@
     
     //Do some property definition customization for the Demographic Profile Entity sex and Profile notes attributes
     SCPropertyDefinition *demographicSexPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"sex"];
-	demographicSexPropertyDef.title = @"Sex";
-    demographicSexPropertyDef.type = SCPropertyTypeSelection;
-	demographicSexPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Male", @"Female", @"Intersexual",@"F2M",@"M2F",@"Undisclosed", nil] 
-                                                               allowMultipleSelection:NO
-                                                                     allowNoSelection:NO
-                                                                autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
+//	demographicSexPropertyDef.title =
+//    demographicSexPropertyDef.type = SCPropertyTypeSelection;
+//	demographicSexPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Male", @"Female", @"Intersexual",@"F2M",@"M2F",@"Undisclosed", nil] 
+//                                                               allowMultipleSelection:NO
+//                                                                     allowNoSelection:NO
+//                                                                autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
+    
+    demographicSexPropertyDef.type=SCPropertyTypeCustom;
+    demographicSexPropertyDef.uiElementClass=[EncryptedSCSelectionCell class];
+    
+    NSDictionary *encryProfileSexTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"sex",@"keyDate",@"Sex",@"sex", nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    
+    
+    demographicSexPropertyDef.objectBindings=encryProfileSexTVCellKeyBindingsDic;
+    
+    demographicSexPropertyDef.autoValidate=NO;
+    
+    
+    
     
     SCPropertyDefinition *demSexualOrientationPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"sexualOrientation"];
 	demSexualOrientationPropertyDef.title = @"Sexual Orientation";
     demSexualOrientationPropertyDef.type = SCPropertyTypeSelection;
-	demSexualOrientationPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Asexual", @"Bisexual", @"Heterosexual",@"Homosexual", @"Undisclosed", nil] 
+	demSexualOrientationPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Asexual", @"Bisexual", @"Heterosexual",@"Gay", @"Lesbian",@"Uncertain/Questioning",@"Undisclosed", nil] 
                                                                      allowMultipleSelection:NO
                                                                            allowNoSelection:NO autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
     SCPropertyDefinition *demographicNotesPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"profileNotes"];
-    demographicNotesPropertyDef.type=SCPropertyTypeTextView;
+//    demographicNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+   
+    demographicNotesPropertyDef.type=SCPropertyTypeCustom;
+    demographicNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    
+    NSDictionary *encryProfileNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"profileNotes",@"keyDate",@"Notes",@"profileNotes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    
+    
+    demographicNotesPropertyDef.objectBindings=encryProfileNotesTVCellKeyBindingsDic;
+    demographicNotesPropertyDef.title=@"Notes";
+    demographicNotesPropertyDef.autoValidate=NO;
+    
+    
+    
     
     //Do some property definition customization for the Demographic Profile Entity gender attribute
     SCPropertyDefinition *demGenderPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"gender"];

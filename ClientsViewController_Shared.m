@@ -122,14 +122,14 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                                                               allowMovingItems:FALSE];
     SCPropertyDefinition *clientNotesPropertyDef = [self.clientDef propertyDefinitionWithName:@"notes"];
 //    clientNotesPropertyDef.type=SCPropertyTypeTextView;
-    NSDictionary *encryNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32",@"33",@"34",nil]];
+    NSDictionary *encryClientNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32",@"33",@"34",nil]];
     ////    
     //    
 //    SCPropertyDefinition *clientDateOfBirthPropertyDef = [self.clientDef propertyDefinitionWithName:@"dateOfBirth"];
     clientNotesPropertyDef.type=SCPropertyTypeCustom;
     clientNotesPropertyDef.title=@"Notes";
     clientNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    clientNotesPropertyDef.objectBindings=encryNotesTVCellKeyBindingsDic;
+    clientNotesPropertyDef.objectBindings=encryClientNotesTVCellKeyBindingsDic;
     
     clientNotesPropertyDef.autoValidate=NO;
 
@@ -160,6 +160,20 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //do some customizing of the phone number title, change it to "Number" to make it shorter
     SCPropertyDefinition *phoneNumberPropertyDef = [phoneDef propertyDefinitionWithName:@"phoneNumber"];
     phoneNumberPropertyDef.title = @"Number";
+    
+   
+    phoneNumberPropertyDef.type=SCPropertyTypeCustom;
+    phoneNumberPropertyDef.uiElementClass=[EncryptedSCTextFieldCell class];
+    
+    NSDictionary *encryPhoneNumberTFCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"phoneNumber",@"keyDate",@"Number",@"phoneNumber",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    
+    
+    phoneNumberPropertyDef.objectBindings=encryPhoneNumberTFCellKeyBindingsDic;
+//    phoneNumberPropertyDef.title=@"Phone Number";
+    phoneNumberPropertyDef.autoValidate=NO;
+    
+    
+    
     
     phoneDef.titlePropertyName=@"phoneName;phoneNumber";
 	
