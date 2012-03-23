@@ -203,7 +203,23 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //do some customizing of the log notes, change it to "Number" to make it shorter
     SCPropertyDefinition *logNotesPropertyDef = [logDef propertyDefinitionWithName:@"notes"];
    
-    logNotesPropertyDef.type=SCPropertyTypeTextView;
+    logNotesPropertyDef.title = @"Notes";
+    
+    
+    logNotesPropertyDef.type=SCPropertyTypeCustom;
+    logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    
+    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    
+    
+    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
+    //    phoneNumberPropertyDef.title=@"Phone Number";
+    logNotesPropertyDef.autoValidate=NO;
+
+    
+    
+    
+    
     logDef.titlePropertyName=@"dateTime;entryNotes";
     
     //Create the property definition for the dateTime property in the logDef class  definition

@@ -270,6 +270,7 @@
 		E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B76150858D3005B798A /* ABGroupSelectionCell.m */; };
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 		E7516BDC150BF9A2005B798A /* Dan Boice-46.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */; };
+		E75F7786151CC574002B10AE /* LogEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F7785151CC574002B10AE /* LogEntity.m */; };
 		E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */; };
 		E78480CA1518D7D800F48EA3 /* PhoneEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C91518D7D800F48EA3 /* PhoneEntity.m */; };
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
@@ -658,6 +659,8 @@
 		E7516B7A15085A23005B798A /* PTABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTABGroup.m; sourceTree = "<group>"; };
 		E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Dan Boice-46.jpg"; path = "../../Pictures/childhood scans/Dan Boice-46.jpg"; sourceTree = "<group>"; };
 		E754D1A71510197E006CC903 /* PsyTrack Clinician Tools.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PsyTrack Clinician Tools.entitlements"; sourceTree = "<group>"; };
+		E75F7784151CC574002B10AE /* LogEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogEntity.h; sourceTree = "<group>"; };
+		E75F7785151CC574002B10AE /* LogEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogEntity.m; sourceTree = "<group>"; };
 		E78480C41518C2E200F48EA3 /* EncryptedSCSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCSelectionCell.h; sourceTree = "<group>"; };
 		E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCSelectionCell.m; sourceTree = "<group>"; };
 		E78480C81518D7D800F48EA3 /* PhoneEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneEntity.h; sourceTree = "<group>"; };
@@ -917,8 +920,6 @@
 		37F7CE481500546300AD2C3A /* Demographic Info */ = {
 			isa = PBXGroup;
 			children = (
-				E70B9EEA1512F62000492FF7 /* DemographicProfileEntity.h */,
-				E70B9EEB1512F62000492FF7 /* DemographicProfileEntity.m */,
 				37F7CE49150054B200AD2C3A /* DemographicDetailViewController_Shared.h */,
 				37F7CE4A150054B200AD2C3A /* DemographicDetailViewController_Shared.m */,
 			);
@@ -928,14 +929,10 @@
 		37F7CE4C150054CE00AD2C3A /* Clients */ = {
 			isa = PBXGroup;
 			children = (
-				E78480C81518D7D800F48EA3 /* PhoneEntity.h */,
-				E78480C91518D7D800F48EA3 /* PhoneEntity.m */,
 				37F7CE6A150056F800AD2C3A /* EncryptedSCTextFieldCell.h */,
 				37F7CE6B150056F800AD2C3A /* EncryptedSCTextFieldCell.m */,
 				37F7CE541500553500AD2C3A /* iPhone */,
 				37F7CE531500552A00AD2C3A /* iPad */,
-				37F7CE4D1500550D00AD2C3A /* ClientEntity.h */,
-				37F7CE4E1500550D00AD2C3A /* ClientEntity.m */,
 				37F7CE4F1500550D00AD2C3A /* ClientsViewController_Shared.h */,
 				37F7CE501500550D00AD2C3A /* ClientsViewController_Shared.m */,
 				E7C074A0150EE4DE009C5498 /* EncryptedSCDateCell.h */,
@@ -977,8 +974,6 @@
 			children = (
 				37F7CE81150057E400AD2C3A /* iPhone */,
 				37F7CE741500574800AD2C3A /* iPad */,
-				37F7CE6E1500573E00AD2C3A /* ClinicianEntity.h */,
-				37F7CE6F1500573E00AD2C3A /* ClinicianEntity.m */,
 				37F7CE701500573E00AD2C3A /* CliniciansViewController_Shared.h */,
 				37F7CE711500573E00AD2C3A /* CliniciansViewController_Shared.m */,
 			);
@@ -1088,6 +1083,8 @@
 			children = (
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
 				37F7CEC915005E7100AD2C3A /* psyTrainTrack.xcdatamodeld */,
+				E75F7784151CC574002B10AE /* LogEntity.h */,
+				E75F7785151CC574002B10AE /* LogEntity.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1295,6 +1292,7 @@
 		B764788914DE6CED004EE572 /* Encrypted Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E75F7788151CED0C002B10AE /* Encrypted Model Subclasses */,
 				E7C0749D150E60B4009C5498 /* KeyEntity.h */,
 				E7C0749E150E60B4009C5498 /* KeyEntity.m */,
 				376798141500696800D0639D /* apns.p12 */,
@@ -1369,6 +1367,21 @@
 				B79F48A2142BEF0D0085D47B /* CoreData.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E75F7788151CED0C002B10AE /* Encrypted Model Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				37F7CE6E1500573E00AD2C3A /* ClinicianEntity.h */,
+				37F7CE6F1500573E00AD2C3A /* ClinicianEntity.m */,
+				37F7CE4D1500550D00AD2C3A /* ClientEntity.h */,
+				37F7CE4E1500550D00AD2C3A /* ClientEntity.m */,
+				E70B9EEA1512F62000492FF7 /* DemographicProfileEntity.h */,
+				E70B9EEB1512F62000492FF7 /* DemographicProfileEntity.m */,
+				E78480C81518D7D800F48EA3 /* PhoneEntity.h */,
+				E78480C91518D7D800F48EA3 /* PhoneEntity.m */,
+			);
+			name = "Encrypted Model Subclasses";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1687,6 +1700,7 @@
 				E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */,
 				E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */,
 				E78480CA1518D7D800F48EA3 /* PhoneEntity.m in Sources */,
+				E75F7786151CC574002B10AE /* LogEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

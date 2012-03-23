@@ -1570,7 +1570,7 @@ if(sourceArray.count>1)
     {
         SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
         
-        
+        NSLog(@"cell tag is %i",cell.tag);
         switch (cell.tag) {
             case 1:
             {

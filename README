@@ -28,7 +28,7 @@ TO DO:
 
 
 
-- finish encrypting remaining fields that should be secure.
+
 
 -	Finish adding the drug section to the client section
 -	Add the disorder section
@@ -96,3 +96,4 @@ begin adding reports
 6.	Finish the encryption of the remaining fields in the client section
 15.	fix the search on the client section to account for encryption
 4. add sources to addressbook
+- finish encrypting remaining fields that should be secure.

@@ -22,7 +22,7 @@
 #import "ButtonCell.h"
 #import "ClinicianEntity.h"
 #import "TrainTrackViewController.h"
-
+#import "EncryptedSCTextViewCell.h"
 
 @implementation CliniciansRootViewController_iPad
 @synthesize cliniciansDetailViewController_iPad=__cliniciansDetailViewController_iPad;
@@ -736,7 +736,37 @@
     
 //    SCObjectSection *objectSection = (SCObjectSection *)[tableViewModel sectionAtIndex:0];
 //    SCTextFieldCell *zipFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"zipCode"];
-    
+    if (tableViewModel.tag==3&& tableViewModel.sectionCount){
+        
+        
+        
+        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
+        
+        if (section.cellCount>1) {
+            SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
+            NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
+            
+            
+            if ([notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+                EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
+                
+                if (encryptedNoteCell.textView.text.length) 
+                {
+                    valid=TRUE;
+                }
+                else 
+                {
+                    valid=FALSE;
+                }
+                
+            }
+            
+            
+        }
+        
+        
+    }
+
     
    
     

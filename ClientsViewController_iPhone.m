@@ -22,7 +22,7 @@
 #import "ClientPresentations_Shared.h"
 #import "PTTEncryption.h"
 #import "EncryptedSCTextFieldCell.h"
-
+#import "EncryptedSCTextViewCell.h"
 
 
 @implementation ClientsViewController_iPhone
@@ -605,7 +605,7 @@ NSLog(@"table model class %@",[tableViewModel class]);
         {
             
             UIButton *button=(UIButton *)[cell viewWithTag:300];
-            [button setTitle:@"Clear Discontinued" forState:UIControlStateNormal];
+            [button setTitle:@"Clear Discontinued Date" forState:UIControlStateNormal];
         }
         
     }
@@ -766,7 +766,36 @@ NSLog(@"table model class %@",[tableViewModel class]);
         }
     }
     
-    
+    if (tableViewModel.tag==3&& tableViewModel.sectionCount){
+        
+        
+        
+        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
+        
+        if (section.cellCount>1) {
+            SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
+            NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
+        
+            
+            if ([notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+                EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
+                
+                if (encryptedNoteCell.textView.text.length) 
+                {
+                    valid=TRUE;
+                }
+                else 
+                {
+                    valid=FALSE;
+                }
+                
+            }
+            
+            
+        }
+        
+        
+    }
     
     
     
@@ -777,49 +806,49 @@ NSLog(@"table model class %@",[tableViewModel class]);
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
-    if (tableViewModel.tag==4 ) {
-        
-        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-        NSLog(@"section cell count is %i",section.cellCount);
-        NSLog(@"detailtableview model sectioncount %i",detailTableViewModel.sectionCount);
-        BOOL sectionContainsMedLog=FALSE;
-        
-        if (detailTableViewModel.sectionCount) {
-            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0]
-            ;
-            if (detailSectionZero.cellCount) {
-                
-                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-                
-                if (cellManagedObject&& [cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"])
-                {
-                    sectionContainsMedLog=TRUE;
-                }
-                
-            }
-            
-            
-            if (sectionContainsMedLog && section.cellCount==1 && detailTableViewModel.sectionCount) {
-                
-                SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
-                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-                
-                
-                
-                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-                NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-                NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
-                    
-                    [detailTableViewModel removeSectionAtIndex:1];
-                    
-                    
-                }
-                
-            }
-        }  
-    }       
+//    if (tableViewModel.tag==4 ) {
+//        
+//        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+//        NSLog(@"section cell count is %i",section.cellCount);
+//        NSLog(@"detailtableview model sectioncount %i",detailTableViewModel.sectionCount);
+//        BOOL sectionContainsMedLog=FALSE;
+//        
+//        if (detailTableViewModel.sectionCount) {
+//            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0]
+//            ;
+//            if (detailSectionZero.cellCount) {
+//                
+//                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
+//                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
+//                
+//                if (cellManagedObject&& [cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"])
+//                {
+//                    sectionContainsMedLog=TRUE;
+//                }
+//                
+//            }
+//            
+//            
+//            if (sectionContainsMedLog && section.cellCount==1 && detailTableViewModel.sectionCount) {
+//                
+//                SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
+//                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
+//                
+//                
+//                
+//                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
+//                NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
+//                NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
+//                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
+//                    
+//                    [detailTableViewModel removeSectionAtIndex:1];
+//                    
+//                    
+//                }
+//                
+//            }
+//        }  
+//    }       
 
 
 

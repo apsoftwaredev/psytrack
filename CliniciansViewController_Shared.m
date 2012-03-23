@@ -23,7 +23,7 @@
 #import "ClinicianEntity.h"
 #import "CliniciansRootViewController_iPad.h"
 #import "ClinicianViewController.h"
-
+#import "EncryptedSCTextViewCell.h"
 #import "MySource.h"
 #import "PTABGroup.h"
 
@@ -894,7 +894,7 @@
                                                          withManagedObjectContext:managedObjectContext 
                                                                 withPropertyNames:[NSArray arrayWithObjects: @"degrees", 
                                                                                    @"licenseNumbers", @"certifications",@"specialties",@"publications",@"orientationHistory",@"awards",@"memberships",@"influences",@"employments",
-                                                                                   @"demographicInfo",@"startedPracticing",@"clinicianType", @"atMyCurrentSite",  @"myCurrentSupervisor",@"myPastSupervisor",@"referrals",@"notes", nil]];
+                                                                                   @"demographicInfo",@"startedPracticing",@"clinicianType", @"atMyCurrentSite",  @"myCurrentSupervisor",@"myPastSupervisor",@"referrals",@"logs",@"bio",@"notes", nil]];
 	
     
     
@@ -1357,15 +1357,58 @@
 	
 	
     */
-	
-	SCPropertyDefinition *notesPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"notes"];
+    //Create a class definition for the logsEntity
+    SCClassDefinition *logDef = [SCClassDefinition definitionWithEntityName:@"LogEntity" 
+                                                   withManagedObjectContext:managedObjectContext
+                                                          withPropertyNames:[NSArray arrayWithObjects:@"dateTime",
+                                                                             @"notes",
+                                                                             nil]];
+    
+    
+    SCPropertyDefinition *logsPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"logs"];
+    logsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:logDef allowAddingItems:TRUE
+                                                                              allowDeletingItems:TRUE
+                                                                                allowMovingItems:FALSE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add New Log Entry"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
+    
+    //Do some property definition customization for the Log Entity defined in logDef
+    
+    //do some customizing of the log notes, change it to "Number" to make it shorter
+    SCPropertyDefinition *logNotesPropertyDef = [logDef propertyDefinitionWithName:@"notes"];
+    
+    logNotesPropertyDef.title = @"Notes";
+    
+    
+    logNotesPropertyDef.type=SCPropertyTypeCustom;
+    logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    
+    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    
+    
+    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
+    //    phoneNumberPropertyDef.title=@"Phone Number";
+    logNotesPropertyDef.autoValidate=NO;
+    
+    
+
+	SCPropertyDefinition *clinicianNotesPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"notes"];
     
     //override the auto title generation for the notes property definition and set it to blank, it will have the title in the header
-    notesPropertyDef.title=@"";
-	notesPropertyDef.type = SCPropertyTypeTextView;
-	
+    clinicianNotesPropertyDef.title=@"";
+        
     
-	
+    clinicianNotesPropertyDef.type=SCPropertyTypeCustom;
+    clinicianNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    
+    NSDictionary *encryClinicianNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    
+    
+    clinicianNotesPropertyDef.objectBindings=encryClinicianNotesTVCellKeyBindingsDic;
+    //    phoneNumberPropertyDef.title=@"Phone Number";
+    clinicianNotesPropertyDef.autoValidate=NO;
+
+	SCPropertyDefinition *clinicianBioPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"bio"];
+    
+	clinicianBioPropertyDef.type=SCPropertyTypeTextView;
 	SCPropertyDefinition *startedPracticingPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"startedPracticing"];
 	startedPracticingPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
 																			 datePickerMode:UIDatePickerModeDate 
@@ -1402,7 +1445,9 @@
     
 
     
-    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:@"Notes" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"notes", nil]];
+    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:@"Notes" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"notes",@"bio", nil]];
+    
+    SCPropertyGroup *logsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Logs" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"logs", nil]];
     
     [self.clinicianDef.propertyGroups addGroup:clinicianListPropertiesGroup];
     [self.clinicianDef.propertyGroups addGroup:credentialssGroup];
@@ -1411,7 +1456,7 @@
     // add the client Interaction property group to the clinician class definition. 
     [self.clinicianDef.propertyGroups addGroup:clientInteractionGroup];
     [self.clinicianDef.propertyGroups addGroup:notesGroup];
-     
+    [self.clinicianDef.propertyGroups addGroup:logsGroup]; 
 //    // Create and add the objects section
 //	objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil
 //																	withEntityClassDefinition:self.clinicianDef];
@@ -2108,7 +2153,35 @@
         }
             
             break;
-            
+        case 2:
+        {
+            NSManagedObject *managedObject = (NSManagedObject *)cell.boundObject;
+            //identify the if the cell has a managedObject
+            if (managedObject) {
+                
+                
+                
+                //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
+                if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
+                    
+                    NSLog(@"entity name is %@",managedObject.entity.name);
+                    //identify the Languages Spoken table
+                    if ([managedObject.entity.name isEqualToString:@"LogEntity"]) {
+                        //define and initialize a date formatter
+                        NSDateFormatter *dateTimeDateFormatter = [[NSDateFormatter alloc] init];
+                        
+                        //set the date format
+                        [dateTimeDateFormatter setDateFormat:@"ccc M/d/yy h:mm a"];
+                        
+                        NSDate *logDate=[managedObject valueForKey:@"dateTime"];
+                        NSString *notes=[managedObject valueForKey:@"notes"];
+                        
+                        cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateTimeDateFormatter stringFromDate:logDate],notes];
+                    }
+                }
+            }
+        } 
+            break;
         case 3:
             //this is a third level table
         {
@@ -2409,7 +2482,38 @@
     }
     
     
-       
+    if (tableViewModel.tag==3&& tableViewModel.sectionCount){
+        
+        
+        
+        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
+        
+        if (section.cellCount>1) {
+            SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
+            NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
+            
+            
+            if ([notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+                EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
+                
+                if (encryptedNoteCell.textView.text.length) 
+                {
+                    valid=TRUE;
+                }
+                else 
+                {
+                    valid=FALSE;
+                }
+                
+            }
+            
+            
+        }
+        
+        
+    }
+    
+    
     
     
     return valid;
@@ -2805,8 +2909,42 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
 //    
 //}
 
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewDidAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+
+    
+    [self tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:indexPath.section detailTableViewModel:(SCTableViewModel*) detailTableViewModel];
+    
 
 
+
+
+}
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewDidAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+
+
+    
+    if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount){
+        
+        
+        
+        SCTableViewSection *section=[detailTableViewModel sectionAtIndex:0];
+        
+        if (section.cellCount>1) {
+            SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
+            NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
+            
+            
+            if ([notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+                
+                [notesCell becomeFirstResponder];
+            }
+        }
+        
+    }
+
+
+
+}
 -(BOOL)checkIfRecordIDInAddressBook:(int)recordID{
 
 

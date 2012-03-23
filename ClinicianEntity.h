@@ -44,6 +44,7 @@
 @property (nonatomic, strong) NSNumber * myPastSupervisor;
 @property (nonatomic, strong) NSData * photo;
 @property (nonatomic, strong) NSDate * updatedTimeStamp;
+@property (nonatomic, strong) NSDate * keyDate;
 @property (nonatomic, strong) NSNumber *aBRecordIdentifier;
 @property (nonatomic, strong) NSString * suffix;
 @property (nonatomic, strong) NSNumber * myCurrentSupervisor;
@@ -80,6 +81,8 @@
 @property (nonatomic, strong) NSSet *referrals;
 @property (nonatomic, strong) NSSet *currentJobTitles;
 @property (nonatomic, strong) NSManagedObject *teachingExperience;
+
+@property (nonatomic, strong) NSString *tempNotes;
 
 
 @property (nonatomic, strong)  NSString *combinedName;
