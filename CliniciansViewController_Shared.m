@@ -3834,7 +3834,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
 
 -(void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker{
     
-    peoplePicker.view=nil;
+//    peoplePicker.view=nil;
     [peoplePicker dismissViewControllerAnimated:YES completion:nil];
     
     

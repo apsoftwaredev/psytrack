@@ -29,6 +29,7 @@ TO DO:
 
 
 
+- additional time in timer and time to subtract is not working
 
 -	Finish adding the drug section to the client section
 -	Add the disorder section
@@ -37,16 +38,18 @@ TO DO:
 - fix interpersonal relationships
 - change immigration history
 -height selection picker not working in ipad
-- additional time in timer and time to subtract is not working
-- when navigating the people picker and canceled, the view went blank
+
+
 
 
 -	finish setting up the persistent store settings,
 
 -	Fix the behavior observation section clean it up and eliminate unneeded
 -	 Add fees section to the client tab, keep it simple
--	add the call logs to the clinician section and encrypt
+
 -	color the referrals to a different color and allow sorting
+-change clinician type to allow additions deletions
+- changed prescriber clinician to searchable clinician list
 
 - add bio section to clinician
 - add existing hours
@@ -97,3 +100,5 @@ begin adding reports
 15.	fix the search on the client section to account for encryption
 4. add sources to addressbook
 - finish encrypting remaining fields that should be secure.
+-	add the call logs to the clinician section and encrypt
+- when navigating the people picker and canceled, the view went blank

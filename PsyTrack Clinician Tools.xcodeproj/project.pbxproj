@@ -929,18 +929,10 @@
 		37F7CE4C150054CE00AD2C3A /* Clients */ = {
 			isa = PBXGroup;
 			children = (
-				37F7CE6A150056F800AD2C3A /* EncryptedSCTextFieldCell.h */,
-				37F7CE6B150056F800AD2C3A /* EncryptedSCTextFieldCell.m */,
 				37F7CE541500553500AD2C3A /* iPhone */,
 				37F7CE531500552A00AD2C3A /* iPad */,
 				37F7CE4F1500550D00AD2C3A /* ClientsViewController_Shared.h */,
 				37F7CE501500550D00AD2C3A /* ClientsViewController_Shared.m */,
-				E7C074A0150EE4DE009C5498 /* EncryptedSCDateCell.h */,
-				E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */,
-				E7C074A3150EE514009C5498 /* EncryptedSCTextViewCell.h */,
-				E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */,
-				E78480C41518C2E200F48EA3 /* EncryptedSCSelectionCell.h */,
-				E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */,
 			);
 			name = Clients;
 			sourceTree = "<group>";
@@ -1292,6 +1284,7 @@
 		B764788914DE6CED004EE572 /* Encrypted Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E75F7789151CEEC6002B10AE /* Custom Cells For Encryption */,
 				E75F7788151CED0C002B10AE /* Encrypted Model Subclasses */,
 				E7C0749D150E60B4009C5498 /* KeyEntity.h */,
 				E7C0749E150E60B4009C5498 /* KeyEntity.m */,
@@ -1382,6 +1375,21 @@
 				E78480C91518D7D800F48EA3 /* PhoneEntity.m */,
 			);
 			name = "Encrypted Model Subclasses";
+			sourceTree = "<group>";
+		};
+		E75F7789151CEEC6002B10AE /* Custom Cells For Encryption */ = {
+			isa = PBXGroup;
+			children = (
+				37F7CE6A150056F800AD2C3A /* EncryptedSCTextFieldCell.h */,
+				37F7CE6B150056F800AD2C3A /* EncryptedSCTextFieldCell.m */,
+				E7C074A0150EE4DE009C5498 /* EncryptedSCDateCell.h */,
+				E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */,
+				E7C074A3150EE514009C5498 /* EncryptedSCTextViewCell.h */,
+				E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */,
+				E78480C41518C2E200F48EA3 /* EncryptedSCSelectionCell.h */,
+				E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */,
+			);
+			name = "Custom Cells For Encryption";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
