@@ -22,7 +22,7 @@
 #import "PTTAppDelegate.h"
 #import "ButtonCell.h"
 #import "EncryptedSCTextViewCell.h"
-
+#import "EncryptedSCTextFieldCell.h"
 
 @implementation ClientsRootViewController_iPad
 @synthesize clientsDetailViewController_iPad=_clientsDetailViewController_iPad;
@@ -161,10 +161,13 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
         detailTableViewModel.tag=tableViewModel.tag+1;
     }
     
+    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
+
     [detailTableViewModel.modeledTableView setBackgroundView:nil];
     [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
     [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-    
+    }
     detailTableViewModel.delegate=self;
     NSLog(@"detail model created for row at index path detailtable model tag is %i", detailTableViewModel.tag);
 }
@@ -183,13 +186,16 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    
+    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
 
     [detailTableViewModel.modeledTableView setBackgroundView:nil];
     [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
     [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
 
 
-
+    }
 }
 
 -(void) tableViewModel:(SCTableViewModel *)tableViewModel customButtonTapped:(UIButton *)button forRowWithIndexPath:(NSIndexPath *)indexPath{
@@ -271,10 +277,13 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
-    
+    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
+
     [detailTableViewModel.modeledTableView setBackgroundView:nil];
     [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
     [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
+    }
     NSLog(@"tabel veiw modoel %i",tableViewModel.tag);
     
 //    if (tableViewModel.tag==4 ) {
@@ -334,11 +343,13 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
     
     detailTableViewModel.delegate=self;
     
-    
+    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
+
     [detailTableViewModel.modeledTableView setBackgroundView:nil];
     [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
     [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-    
+    }
     NSLog(@"detail model created for row at index detailtable model tag is %i", detailTableViewModel.tag);
     
     if (tableViewModel.tag==4 ) {
@@ -491,15 +502,31 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
         
     }
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-    if (tableViewModel.tag==3&&cell.tag==3) {
+    if (tableViewModel.tag==3&&(cell.tag==1||cell.tag==2||cell.tag==3)) {
         SCTableViewCell *cellOne=(SCTableViewCell *)[section cellAtIndex:0];        
         NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
-        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
+        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"] ) 
             
         {
+            if ( [cell isKindOfClass:[ButtonCell class]]) {
+                UIButton *button=(UIButton *)[cell viewWithTag:300];
+                [button setTitle:@"Call Number" forState:UIControlStateNormal];
+                
+            }
             
-            UIButton *button=(UIButton *)[cell viewWithTag:300];
-            [button setTitle:@"Call Number" forState:UIControlStateNormal];
+            if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
+                EncryptedSCTextFieldCell *encryptedTextFieldCell=(EncryptedSCTextFieldCell *)cell;
+                
+                encryptedTextFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
+                
+            }
+            
+        if ( [cell isKindOfClass:[SCTextFieldCell class]]) {
+            SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
+            
+            textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
+            
+        }
         }
         
         if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"] && [cell isKindOfClass:[ButtonCell class]]) 

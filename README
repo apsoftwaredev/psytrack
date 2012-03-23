@@ -25,39 +25,40 @@ TO DO:
 
 
 
+-   change clinician type to allow additions deletions
+-   fix interpersonal relationships
+-	Move the height and weight tracking to the client section and add blood pressure, call it vitals, and fix the bug in the height picker cell.
+-   change immigration history
+-	color the referrals to a different color and allow sorting
 
-
-
-
-- additional time in timer and time to subtract is not working
 
 -	Finish adding the drug section to the client section
--	Add the disorder section
--	Move the height and weight tracking to the client section and add blood pressure, call it vitals, and fix the bug in the height picker cell.
 
-- fix interpersonal relationships
-- change immigration history
--height selection picker not working in ipad
+-	Add fees section to the client tab, keep it simple
+
+-	Add the disorder section
+
+-	Fix the behavior observation section clean it up and eliminate unneeded
 
 
 
 
 -	finish setting up the persistent store settings,
 
--	Fix the behavior observation section clean it up and eliminate unneeded
--	 Add fees section to the client tab, keep it simple
 
--	color the referrals to a different color and allow sorting
--change clinician type to allow additions deletions
-- changed prescriber clinician to searchable clinician list
 
-- add bio section to clinician
+
+
+
+-   changed prescriber clinician to searchable clinician list
+
+
 - add existing hours
 - extend date on encryption key
 - add presentations to clinician
-- add clinician type to the model
+
 - check clinician prefix when importing group contacts
-- change phone number to number field in client
+
 
 Phase II
 -	add a save to icloud documents to the actions in the drug document view
@@ -72,7 +73,7 @@ Phase II
 -	 add advising
 -	add the existing hours section
 -  add fees
--  add bio
+
 
 begin adding reports
 -	set up the pdf writer
@@ -102,3 +103,6 @@ begin adding reports
 - finish encrypting remaining fields that should be secure.
 -	add the call logs to the clinician section and encrypt
 - when navigating the people picker and canceled, the view went blank
+- add bio section to clinician
+- additional time in timer and time to subtract is not working
+-   change phone number to number field in client

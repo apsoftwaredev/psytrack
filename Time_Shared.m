@@ -328,11 +328,14 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
+    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
+
     [detailTableViewModel.modeledTableView setBackgroundView:nil];
     [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
     [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
     
-    
+    }
    
 }
 

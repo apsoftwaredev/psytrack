@@ -20,22 +20,22 @@
 
 @interface TimePickerCell : SCControlCell <UIPickerViewDataSource, UIPickerViewDelegate, SCTableViewCellDelegate>
 {
-    __weak UITextField *pickerField;
+     UITextField *pickerField;
 //    TimePickerView *timePickerView;
     NSDateFormatter *minuteFormatter;
     NSDateFormatter *hourFormatter;
     NSDateFormatter *hourMinFormatter;
     
-    __weak UIView *view;
+     UIView *view;
     NSDate *timeValue;
 
     
-    __weak UIPickerView *picker;
-    __weak UILabel *hourLabel;
+     UIPickerView *picker;
+     UILabel *hourLabel;
 
-    __weak UILabel *minLabel;
+     UILabel *minLabel;
 
-    __weak UILabel *dateLabel;
+    UILabel *dateLabel;
     NSString *boundObjectName;
     NSString *boundObjectTitle;
 }
@@ -43,17 +43,17 @@
 
 //@property (strong, nonatomic) IBOutlet TimePickerView *timePickerView;
 
-@property (weak, nonatomic) IBOutlet UIView *view;
+@property (strong, nonatomic) IBOutlet UIView *view;
 
 
 @property (nonatomic, strong) IBOutlet NSDate *timeValue;
-@property (nonatomic,weak) IBOutlet UIPickerView *picker;
-@property (weak, nonatomic)IBOutlet UILabel *hourLabel;
+@property (nonatomic,strong) IBOutlet UIPickerView *picker;
+@property (strong, nonatomic)IBOutlet UILabel *hourLabel;
 
-@property (weak, nonatomic)IBOutlet UILabel *minLabel;
-@property (weak, nonatomic)IBOutlet UITextField *pickerField;
-@property (weak, nonatomic)IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic)IBOutlet UIView *containerView;
+@property (strong, nonatomic)IBOutlet UILabel *minLabel;
+@property (strong, nonatomic)IBOutlet UITextField *pickerField;
+@property (strong, nonatomic)IBOutlet UILabel *dateLabel;
+@property (strong, nonatomic)IBOutlet UIView *containerView;
 
 - (NSString *)titleForRow:(NSInteger)row;
 - (NSInteger)rowForTitle:(NSString *)title;

@@ -176,14 +176,18 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     phoneDef.titlePropertyName=@"phoneName;phoneNumber";
-	
+	if (![SCHelper is_iPad]) {
+    
     SCCustomPropertyDefinition *callButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"CallButton" withuiElementClass:[ButtonCell class] withObjectBindings:nil];
     [phoneDef insertPropertyDefinition:callButtonProperty atIndex:3];
-    
+        
+    }
 //    SCPropertyGroup *phoneGroup = [SCPropertyGroup groupWithHeaderTitle:@"Phone Number" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"phoneName",@"phoneNumber",@"extention" @"CallButton", nil]];
 //    
 //    // add the phone property group
 //    [phoneDef.propertyGroups addGroup:phoneGroup];
+    
+   
     
     //Create a class definition for the logsEntity
     SCClassDefinition *logDef = [SCClassDefinition definitionWithEntityName:@"LogEntity" 

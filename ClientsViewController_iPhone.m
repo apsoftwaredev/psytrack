@@ -365,10 +365,17 @@ NSLog(@"cancel button Tapped");
 }
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
-    if([SCHelper is_iPad]){
+    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+       
+      
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
         [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
+            
+            
+       
+            
+            // Make the table view transparent
     }
 
 
@@ -589,15 +596,35 @@ NSLog(@"table model class %@",[tableViewModel class]);
         
     }
     
-    if (tableViewModel.tag==3&&cell.tag==3) {
+    if (tableViewModel.tag==3&&(cell.tag==1||cell.tag==2||cell.tag==3)) {
         SCTableViewCell *cellOne=(SCTableViewCell *)[section cellAtIndex:0];        
         NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
-        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
+        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"] ) 
         
         {
+            if ( ![SCHelper is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) {
+                UIButton *button=(UIButton *)[cell viewWithTag:300];
+                [button setTitle:@"Call Number" forState:UIControlStateNormal];
+
+            }
+        
+            NSLog(@"cell kind of class is %@",cell.class);
+            if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
+                EncryptedSCTextFieldCell *encryptedTextFieldCell=(EncryptedSCTextFieldCell *)cell;
+                
+                UITextField *textField=(UITextField *)encryptedTextFieldCell.textField;
+                
+                textField.keyboardType=UIKeyboardTypeNumberPad;
+                
+            }
             
-            UIButton *button=(UIButton *)[cell viewWithTag:300];
-            [button setTitle:@"Call Number" forState:UIControlStateNormal];
+            if ( [cell isKindOfClass:[SCTextFieldCell class]]) {
+                SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
+                
+                textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
+                
+            }
+        
         }
         
         if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"] && [cell isKindOfClass:[ButtonCell class]]) 

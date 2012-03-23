@@ -823,10 +823,13 @@
     else{
         detailTableViewModel.tag=tableViewModel.tag+1;
     }
+    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
+
     [detailTableViewModel.modeledTableView setBackgroundView:nil];
     [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
     [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-    
+    }
     detailTableViewModel.delegate=self;
     NSLog(@"detail model created for row at index path detailtable model tag is %i", detailTableViewModel.tag);
 }
@@ -840,12 +843,14 @@
     
     
     detailTableViewModel.delegate=self;
-    
+    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
+
     
     [detailTableViewModel.modeledTableView setBackgroundView:nil];
     [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
     [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-    
+    }
     NSLog(@"detail model created for row at index detailtable model tag is %i", detailTableViewModel.tag);
     
 }

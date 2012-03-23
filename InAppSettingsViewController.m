@@ -872,7 +872,9 @@ if(sourceArray.count>1)
 }
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
-    if([SCHelper is_iPad]){
+    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
+
         
         if (detailTableViewModel.modeledTableView.backgroundColor!=[UIColor clearColor]) {
             [detailTableViewModel.modeledTableView setBackgroundView:nil];

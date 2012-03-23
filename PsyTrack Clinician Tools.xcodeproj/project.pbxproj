@@ -271,6 +271,7 @@
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 		E7516BDC150BF9A2005B798A /* Dan Boice-46.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */; };
 		E75F7786151CC574002B10AE /* LogEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F7785151CC574002B10AE /* LogEntity.m */; };
+		E75F778C151CF463002B10AE /* TestingSessionDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F778B151CF463002B10AE /* TestingSessionDeliveredEntity.m */; };
 		E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */; };
 		E78480CA1518D7D800F48EA3 /* PhoneEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C91518D7D800F48EA3 /* PhoneEntity.m */; };
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
@@ -661,6 +662,8 @@
 		E754D1A71510197E006CC903 /* PsyTrack Clinician Tools.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PsyTrack Clinician Tools.entitlements"; sourceTree = "<group>"; };
 		E75F7784151CC574002B10AE /* LogEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogEntity.h; sourceTree = "<group>"; };
 		E75F7785151CC574002B10AE /* LogEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogEntity.m; sourceTree = "<group>"; };
+		E75F778A151CF463002B10AE /* TestingSessionDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingSessionDeliveredEntity.h; sourceTree = "<group>"; };
+		E75F778B151CF463002B10AE /* TestingSessionDeliveredEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingSessionDeliveredEntity.m; sourceTree = "<group>"; };
 		E78480C41518C2E200F48EA3 /* EncryptedSCSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCSelectionCell.h; sourceTree = "<group>"; };
 		E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCSelectionCell.m; sourceTree = "<group>"; };
 		E78480C81518D7D800F48EA3 /* PhoneEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneEntity.h; sourceTree = "<group>"; };
@@ -1047,6 +1050,8 @@
 		37F7CE9E1500598A00AD2C3A /* Test Administrations */ = {
 			isa = PBXGroup;
 			children = (
+				E75F778A151CF463002B10AE /* TestingSessionDeliveredEntity.h */,
+				E75F778B151CF463002B10AE /* TestingSessionDeliveredEntity.m */,
 				37F7CEA3150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib */,
 				37F7CEA0150059BC00AD2C3A /* TestAdministrationsViewController_iPad.h */,
 				37F7CEA1150059BC00AD2C3A /* TestAdministrationsViewController_iPad.m */,
@@ -1075,8 +1080,6 @@
 			children = (
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
 				37F7CEC915005E7100AD2C3A /* psyTrainTrack.xcdatamodeld */,
-				E75F7784151CC574002B10AE /* LogEntity.h */,
-				E75F7785151CC574002B10AE /* LogEntity.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1373,6 +1376,8 @@
 				E70B9EEB1512F62000492FF7 /* DemographicProfileEntity.m */,
 				E78480C81518D7D800F48EA3 /* PhoneEntity.h */,
 				E78480C91518D7D800F48EA3 /* PhoneEntity.m */,
+				E75F7784151CC574002B10AE /* LogEntity.h */,
+				E75F7785151CC574002B10AE /* LogEntity.m */,
 			);
 			name = "Encrypted Model Subclasses";
 			sourceTree = "<group>";
@@ -1709,6 +1714,7 @@
 				E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */,
 				E78480CA1518D7D800F48EA3 /* PhoneEntity.m in Sources */,
 				E75F7786151CC574002B10AE /* LogEntity.m in Sources */,
+				E75F778C151CF463002B10AE /* TestingSessionDeliveredEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

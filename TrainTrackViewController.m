@@ -429,7 +429,9 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
         detailTableViewModel.delegate = self;
         detailTableViewModel.tag = tableViewModel.tag+1;
      
-    if([SCHelper is_iPad]){   
+    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
+   
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
         [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
         [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent

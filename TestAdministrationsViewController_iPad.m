@@ -533,7 +533,7 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
    
     [self.tableView setBackgroundView:nil];
     [self.tableView setBackgroundView:[[UIView alloc] init]];
-        
+        [self.tableView setBackgroundColor:[UIColor clearColor]];
     }
         [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
     
@@ -705,12 +705,15 @@ NSLog(@"search list button clicked");
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
+    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
+
     [detailTableViewModel.modeledTableView setBackgroundView:nil];
     [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
     [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
    NSLog(@"tableviewmodel is %@",detailTableViewModel.debugDescription);
             
-        
+    }   
 
 }
 

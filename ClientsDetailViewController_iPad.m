@@ -60,11 +60,13 @@
     //set the right navigation bar button item to the defined add button
     self.navigationItem.rightBarButtonItem=self.addButtonItem;
     
-    
+    if(self.tableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
+
     [self.tableView setBackgroundView:nil];
     [self.tableView setBackgroundView:[[UIView alloc] init]];
     [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
-    
+    }
 }
 
 - (void)viewDidUnload {
