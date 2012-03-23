@@ -999,13 +999,38 @@
     
     [self.clinicianDef insertPropertyDefinition:credentialInitialsDataProperty atIndex:5];
     
+    //Create a class definition for the cliniciantypeEntity
+    SCClassDefinition *clinicianTypeDef = [SCClassDefinition definitionWithEntityName:@"ClinicianTypeEntity" 
+                                                        withManagedObjectContext:managedObjectContext
+                                                               withPropertyNames:[NSArray arrayWithObjects:@"clinicianType", nil]];
+    
+    //Do some property definition customization for the clinician Type Entity defined in clinicianTypeDef
+    
+    
+    
     SCPropertyDefinition *clinicianTypePropertyDef = [self.clinicianDef propertyDefinitionWithName:@"clinicianType"];
 	
-    clinicianTypePropertyDef.type = SCPropertyTypeSelection;
-	clinicianTypePropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Licensed Psychologist",@"Licensed Psychiatrist", @"(PCP) Primary Care Physician", @"Other Medical Specialist", @"Nurse Practicioner or Physician's Assistant",@"Other Licenesed (BHP) Behavioral Health Professional", @"Psychology Intern",@"Medical Intern", @"Unlicenced PsyD or PhD",@"Unlicensed M.D. or D.O.",  @"Other Unlicensed Master's Level", @"Practicum Student",@"Paraprofessional",nil] 
-                                                              allowMultipleSelection:NO
-                                                                    allowNoSelection:NO
-                                                               autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
+    
+    clinicianTypePropertyDef.type = SCPropertyTypeObjectSelection;
+    
+   
+    
+    SCObjectSelectionAttributes *clinicianTypeSelectionAttributes=[[SCObjectSelectionAttributes alloc]initWithItemsEntityClassDefinition:clinicianTypeDef allowMultipleSelection:YES allowNoSelection:YES];
+    
+    clinicianTypeSelectionAttributes.allowAddingItems=YES;
+    clinicianTypeSelectionAttributes.allowDeletingItems=YES;
+    clinicianTypeSelectionAttributes.allowMovingItems=YES;
+    clinicianTypeSelectionAttributes.allowEditingItems=YES;
+    clinicianTypeSelectionAttributes.allowMultipleSelection=YES;
+    clinicianTypeSelectionAttributes.allowNoSelection=YES;
+    
+    clinicianTypeSelectionAttributes.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add Clinician Type Definitions)"];
+    clinicianTypeSelectionAttributes.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Clinician Type Definition"];
+    clinicianTypePropertyDef.attributes = clinicianTypeSelectionAttributes;    
+//	clinicianTypePropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Licensed Psychologist",@"Licensed Psychiatrist", @"(PCP) Primary Care Physician", @"Other Medical Specialist", @"Nurse Practicioner or Physician's Assistant",@"Other Licenesed (BHP) Behavioral Health Professional", @"Psychology Intern",@"Medical Intern", @"Unlicenced PsyD or PhD",@"Unlicensed M.D. or D.O.",  @"Other Unlicensed Master's Level", @"Practicum Student",@"Paraprofessional",nil] 
+//                                                              allowMultipleSelection:NO
+//                                                                    allowNoSelection:NO
+//                                                               autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
     //Do some property definition customization for the clinician Class
     //create an array of objects definition for the referrals to-many relationship that with show up in a different view with a place holder element>.
     

@@ -25,7 +25,7 @@ TO DO:
 
 
 
--   change clinician type to allow additions deletions
+
 -   fix interpersonal relationships
 -	Move the height and weight tracking to the client section and add blood pressure, call it vitals, and fix the bug in the height picker cell.
 -   change immigration history
@@ -106,3 +106,4 @@ begin adding reports
 - add bio section to clinician
 - additional time in timer and time to subtract is not working
 -   change phone number to number field in client
+-   change clinician type to allow additions deletions
