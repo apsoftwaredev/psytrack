@@ -1026,7 +1026,9 @@
     
     clinicianTypeSelectionAttributes.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add Clinician Type Definitions)"];
     clinicianTypeSelectionAttributes.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Clinician Type Definition"];
-    clinicianTypePropertyDef.attributes = clinicianTypeSelectionAttributes;    
+    clinicianTypePropertyDef.attributes = clinicianTypeSelectionAttributes; 
+    
+    clinicianTypeDef.orderAttributeName=@"order";
 //	clinicianTypePropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Licensed Psychologist",@"Licensed Psychiatrist", @"(PCP) Primary Care Physician", @"Other Medical Specialist", @"Nurse Practicioner or Physician's Assistant",@"Other Licenesed (BHP) Behavioral Health Professional", @"Psychology Intern",@"Medical Intern", @"Unlicenced PsyD or PhD",@"Unlicensed M.D. or D.O.",  @"Other Unlicensed Master's Level", @"Practicum Student",@"Paraprofessional",nil] 
 //                                                              allowMultipleSelection:NO
 //                                                                    allowNoSelection:NO
