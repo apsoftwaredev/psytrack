@@ -488,156 +488,192 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
     NSLog(@"table view model tag is %i",tableViewModel.tag);
     NSLog(@"tableviewmodel tag is %i",tableViewModel.tag);
 
-    if ((tableViewModel.tag==1||tableViewModel.tag==0) && ([cell isKindOfClass:[SCDateCell class]])) {
-        SCDateCell *dateCell=(SCDateCell *)cell;
-        [dateCell.datePicker setMaximumDate:[NSDate date]];
-        NSLog(@"date cell date is%@ ",dateCell.datePicker.date);
         
-    }
+    NSLog(@"table view model tag is %i",tableViewModel.tag);
+    NSLog(@"tableviewmodel tag is %i",tableViewModel.tag);
     
-    if (tableViewModel.tag==1 && ([cell isKindOfClass:[SCDateCell class]])) {
-        SCDateCell *dateCell=(SCDateCell *)cell;
-        [dateCell.datePicker setMaximumDate:[NSDate date]];
-        NSLog(@"date cell date is%@ ",dateCell.datePicker.date);
-        
-    }
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-    if (tableViewModel.tag==3&&(cell.tag==1||cell.tag==2||cell.tag==3)) {
-        SCTableViewCell *cellOne=(SCTableViewCell *)[section cellAtIndex:0];        
-        NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
-        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"] ) 
-            
-        {
-            if ( [cell isKindOfClass:[ButtonCell class]]) {
-                UIButton *button=(UIButton *)[cell viewWithTag:300];
-                [button setTitle:@"Call Number" forState:UIControlStateNormal];
-                
-            }
-            
-            if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
-                EncryptedSCTextFieldCell *encryptedTextFieldCell=(EncryptedSCTextFieldCell *)cell;
-                
-                encryptedTextFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
-                
-            }
-            
-        if ( [cell isKindOfClass:[SCTextFieldCell class]]) {
-            SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
-            
-            textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
-            
-        }
-        }
-        
-        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
-            
+    switch (tableViewModel.tag) {
+        case 0:
         {
             
-            UIButton *button=(UIButton *)[cell viewWithTag:300];
-            [button setTitle:@"Clear Discontinued Date" forState:UIControlStateNormal];
+           if( [cell isKindOfClass:[SCDateCell class]]) {
+                SCDateCell *dateCell=(SCDateCell *)cell;
+                [dateCell.datePicker setMaximumDate:[NSDate date]];
+                NSLog(@"date cell date is%@ ",dateCell.datePicker.date);
+                
+            }
+
+            
+                        
         }
-        
-    }
-    
-    if (tableViewModel.tag==5 &&cell.tag==4&& tableViewModel.sectionCount >2) {
-        
-        NSLog(@"cell tag is %i",cell.tag);
-        NSLog(@"cell text is %@",cell.textLabel.text);
-        
-        SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
-        SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];        
-        NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
-        NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-        NSLog(@"cell  class is %@",[cellOne class]);
-        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
+            break;
+        case 1:
+        {
+            if ([cell isKindOfClass:[SCDateCell class]]) {
+                SCDateCell *dateCell=(SCDateCell *)cell;
+                [dateCell.datePicker setMaximumDate:[NSDate date]];
+                NSLog(@"date cell date is%@ ",dateCell.datePicker.date);
+                
+            }
             
-            
-            if ([cell isKindOfClass:[SCControlCell class]]) 
-            {
-                UIView *scaleView = [cell viewWithTag:70];
-                if ([scaleView isKindOfClass:[UISegmentedControl class]]) 
-                {
+        }
+            break;
+        case 3:
+        {
+           
+                SCTableViewCell *cellOne=(SCTableViewCell *)[section cellAtIndex:0];        
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
+                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]&& (cell.tag==1||cell.tag==2||cell.tag==3)  ) 
                     
-                    UILabel *satisfactionLevelLabel =(UILabel *)[cell viewWithTag:71];
-                    satisfactionLevelLabel.text=@"Satisfaction With Drug:";
+                {
+                    if ( ![SCHelper is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) {
+                        UIButton *button=(UIButton *)[cell viewWithTag:300];
+                        [button setTitle:@"Call Number" forState:UIControlStateNormal];
+                        
+                    }
+                    
+                    NSLog(@"cell kind of class is %@",cell.class);
+                    if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
+                        EncryptedSCTextFieldCell *encryptedTextFieldCell=(EncryptedSCTextFieldCell *)cell;
+                        
+                        UITextField *textField=(UITextField *)encryptedTextFieldCell.textField;
+                        
+                        textField.keyboardType=UIKeyboardTypeNumberPad;
+                        
+                    }
+                    
+                    if ( [cell isKindOfClass:[SCTextFieldCell class]]) {
+                        SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
+                        
+                        textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
+                        
+                    }
                     
                 }
+                
+                if (cell.tag==3&&cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
+                    
+                {
+                    
+                    UIButton *button=(UIButton *)[cell viewWithTag:300];
+                    [button setTitle:@"Clear Discontinued Date" forState:UIControlStateNormal];
+                }
+            NSLog(@"cell kind of class is %@",cell.class);
+                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]&&![SCHelper is_iPad]) 
+                    
+                {
+                    
+                    SCNumericTextFieldCell *textFieldCell=(SCNumericTextFieldCell *)cell;
+                    
+                    textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
+                
+                }
+            
+            
+        }
+            break;
+        case 4:
+        {
+            
+            
+            if (section.cellCount) {
+                SCTableViewCell *cellOne=(SCTableViewCell *)[section cellAtIndex:0];
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
+                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"])
+                {
+                    UIView *sliderView = [cell viewWithTag:14];
+                    
+                    if(cell.tag==3&&[sliderView isKindOfClass:[UISlider class]])
+                    {
+                        UISlider *sliderOne = (UISlider *)sliderView;
+                        UILabel *slabel = (UILabel *)[cell viewWithTag:10];
+                        
+                        slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
+                        UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+                        UIImage *sliderRightTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+                        [sliderOne setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
+                        [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
+                        [sliderOne setMinimumValue:-1.0];
+                        [sliderOne setMaximumValue:0];
+                    }
+                    
+                    if(cell.tag==4&&[sliderView isKindOfClass:[UISlider class]])
+                    {
+                        
+                        UISlider *sliderTwo = (UISlider *)sliderView;
+                        
+                        UILabel *slabelTwo = (UILabel *)[cell viewWithTag:10];
+                        UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+                        UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+                        [sliderTwo setMinimumTrackImage: sliderTwoLeftTrackImage forState: UIControlStateNormal];
+                        [sliderTwo setMaximumTrackImage: sliderTwoRightTrackImage forState: UIControlStateNormal];
+                        
+                        slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];        
+                        [sliderTwo setMinimumValue:0.0];
+                        [sliderTwo setMaximumValue: 1.0];
+                        
+                    }  
+                }
+                NSLog(@"entity name is %@",cellManagedObject.entity.name);
+                if (cell.tag==1 && cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"LanguageSpokenEntity"])
+                {
+                    
+                    UIView *scaleView = [cell viewWithTag:70];
+                    if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
+                        
+                        UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
+                        fluencyLevelLabel.text=@"Fluency Level:";
+                        
+                    }
+                }
+            }
+            
+        }
+            break;
+            
+        case 5:
+        {
+            if (cell.tag==4&& tableViewModel.sectionCount >2) {
+                
+                NSLog(@"cell tag is %i",cell.tag);
+                NSLog(@"cell text is %@",cell.textLabel.text);
+                
+                SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
+                SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];        
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
+                NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
+                NSLog(@"cell  class is %@",[cellOne class]);
+                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
+                    
+                    
+                    if ([cell isKindOfClass:[SCControlCell class]]) 
+                    {
+                        UIView *scaleView = [cell viewWithTag:70];
+                        if ([scaleView isKindOfClass:[UISegmentedControl class]]) 
+                        {
+                            
+                            UILabel *satisfactionLevelLabel =(UILabel *)[cell viewWithTag:71];
+                            satisfactionLevelLabel.text=@"Satisfaction With Drug:";
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    
+                }
+                
                 
                 
             }
             
-            
-            
         }
-        
-        
-        
-    }
-    
-    
-    if (tableViewModel.tag==4) {
-        
-        
-        UIView *sliderView = [cell viewWithTag:14];
-        UIView *scaleView = [cell viewWithTag:70];
-        
-        switch (cell.tag) {
-                
-            case 1:
-                
-                
-                if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
-                    
-                    UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
-                    fluencyLevelLabel.text=@"Fluency Level:";
-                    
-                }
-                
-                break;
-                
-                
-                
-            case 3:
-                
-                
-                if([sliderView isKindOfClass:[UISlider class]])
-                {
-                    UISlider *sliderOne = (UISlider *)sliderView;
-                    UILabel *slabel = (UILabel *)[cell viewWithTag:10];
-                    
-                    slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
-                    UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                    UIImage *sliderRightTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                    [sliderOne setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
-                    [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
-                    [sliderOne setMinimumValue:-1.0];
-                    [sliderOne setMaximumValue:0];
-                    
-                }
-                break;
-            case 4:
-                
-                if([sliderView isKindOfClass:[UISlider class]])
-                {
-                    
-                    UISlider *sliderTwo = (UISlider *)sliderView;
-                    
-                    UILabel *slabelTwo = (UILabel *)[cell viewWithTag:10];
-                    UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                    UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                    [sliderTwo setMinimumTrackImage: sliderTwoLeftTrackImage forState: UIControlStateNormal];
-                    [sliderTwo setMaximumTrackImage: sliderTwoRightTrackImage forState: UIControlStateNormal];
-                    
-                    slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];        
-                    [sliderTwo setMinimumValue:0.0];
-                    [sliderTwo setMaximumValue: 1.0];
-                    
-                }
-                
-                
-                break;
-        }
-        
+            break;
+            
+        default:
+            break;
     }
     
 }
