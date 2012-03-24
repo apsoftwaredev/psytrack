@@ -385,7 +385,7 @@
         [picker selectRow:secondComponentInteger inComponent:1 animated:YES];
         [picker selectRow:thirdComponentInteger inComponent:2 animated:YES];
        
-        [super cellValueChanged];
+        [self cellValueChanged];
     }else
     {
         

@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
 		<string key="IBDocument.SystemVersion">11D50</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
 		<string key="IBDocument.AppKitVersion">1138.32</string>
 		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">933</string>
+			<string key="NS.object.0">1181</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBUIWindow</string>
@@ -142,7 +142,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">PsyTrack Clinician Tools</string>
+								<string key="IBUIText">PsyTrack</string>
 								<object class="NSColor" key="IBUITextColor" id="574117213">
 									<int key="NSColorSpace">6</int>
 									<string key="NSCatalogName">System</string>
@@ -189,11 +189,11 @@
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<string key="name">SnellRoundhand-Bold</string>
 									<string key="family">Snell Roundhand</string>
-									<int key="traits">3</int>
+									<int key="traits">0</int>
 									<double key="pointSize">38</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">SnellRoundhand-Bold</string>
+									<string key="NSName">Helvetica</string>
 									<double key="NSSize">38</double>
 									<int key="NSfFlags">16</int>
 								</object>
@@ -735,6 +735,6 @@
 			<string key="NS.key.0">colorTrain300.png</string>
 			<string key="NS.object.0">{300, 300}</string>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">933</string>
+		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>
 </archive>

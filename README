@@ -27,8 +27,9 @@ TO DO:
 
 
 
+
 -   fix interpersonal relationships
--	Move the height and weight tracking to the client section and add blood pressure, call it vitals, and fix the bug in the height picker cell.
+
 
 -	color the referrals to a different color and allow sorting
 
@@ -109,3 +110,4 @@ begin adding reports
 -   change phone number to number field in client
 -   change clinician type to allow additions deletions
 -   change immigration history
+-	Move the height and weight tracking to the client section and add blood pressure, call it vitals, and fix the bug in the height picker cell.

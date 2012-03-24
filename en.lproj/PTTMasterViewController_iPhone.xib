@@ -111,11 +111,11 @@
 						<object class="IBUIViewController" id="65229887">
 							<string key="IBUITitle">Train Track</string>
 							<object class="IBUITabBarItem" key="IBUITabBarItem" id="831846449">
-								<string key="IBUITitle">PsyTrack Clinician Tools</string>
+								<string key="IBUITitle">PsyTrack</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<object class="IBUINavigationItem" key="IBUINavigationItem" id="44846140">
-								<string key="IBUITitle">PsyTrack Clinician Tools</string>
+								<string key="IBUITitle">PsyTrack</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 							<reference key="IBUIParentViewController" ref="629673383"/>
@@ -307,10 +307,9 @@
 					</object>
 				</array>
 				<object class="IBUITabBar" key="IBUITabBar" id="469336315">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">266</int>
 					<string key="NSFrame">{{0, 431}, {320, 49}}</string>
-					<reference key="NSSuperview"/>
 					<string key="NSReuseIdentifierKey">_NS:473</string>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
@@ -397,11 +396,11 @@
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<string key="name">SnellRoundhand-Bold</string>
 							<string key="family">Snell Roundhand</string>
-							<int key="traits">3</int>
+							<int key="traits">0</int>
 							<double key="pointSize">38</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">SnellRoundhand-Bold</string>
+							<string key="NSName">Helvetica</string>
 							<double key="NSSize">38</double>
 							<int key="NSfFlags">16</int>
 						</object>

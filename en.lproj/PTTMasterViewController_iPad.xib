@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">12A128p</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2427</string>
-		<string key="IBDocument.AppKitVersion">1157.7</string>
-		<string key="IBDocument.HIToolboxVersion">599.00</string>
+		<string key="IBDocument.SystemVersion">11D50</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
+		<string key="IBDocument.AppKitVersion">1138.32</string>
+		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1420</string>
+			<string key="NS.object.0">1181</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBUIImageView</string>
@@ -82,7 +82,7 @@
 					<string key="IBUITitle">Train Track</string>
 					<object class="IBUITabBarItem" key="IBUITabBarItem" id="697147349">
 						<int key="IBUITag">92</int>
-						<string key="IBUITitle">PsyTrack Clinician Tools</string>
+						<string key="IBUITitle">PsyTrack</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">trainTab.png</string>
@@ -116,7 +116,7 @@
 					<array class="NSMutableArray" key="IBUIViewControllers">
 						<object class="IBUIViewController" id="927215447">
 							<object class="IBUINavigationItem" key="IBUINavigationItem" id="479963630">
-								<string key="IBUITitle">PsyTrack Clinician Tools</string>
+								<string key="IBUITitle">PsyTrack</string>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
 							<reference key="IBUIParentViewController" ref="158962504"/>
@@ -186,10 +186,9 @@
 					</object>
 				</array>
 				<object class="IBUITabBar" key="IBUITabBar" id="964951132">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">258</int>
 					<string key="NSFrame">{{0, 975}, {768, 49}}</string>
-					<reference key="NSSuperview"/>
 					<string key="NSReuseIdentifierKey">_NS:475</string>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
@@ -200,7 +199,7 @@
 				</object>
 			</object>
 			<object class="IBUIWindow" id="555568809">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">1325</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="854319316">
@@ -266,11 +265,11 @@
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<string key="name">SnellRoundhand-Bold</string>
 									<string key="family">Snell Roundhand</string>
-									<int key="traits">3</int>
+									<int key="traits">0</int>
 									<double key="pointSize">56</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">SnellRoundhand-Bold</string>
+									<string key="NSName">Helvetica</string>
 									<double key="NSSize">56</double>
 									<int key="NSfFlags">16</int>
 								</object>
@@ -337,7 +336,6 @@
 				</array>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{768, 1024}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="854319316"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">2</int>
@@ -1296,6 +1294,6 @@
 			<string key="reportTab.png">{33, 33}</string>
 			<string key="trainTab.png">{30, 30}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1420</string>
+		<string key="IBCocoaTouchPluginVersion">1181</string>
 	</data>
 </archive>

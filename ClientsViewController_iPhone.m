@@ -864,6 +864,69 @@ NSLog(@"table model class %@",[tableViewModel class]);
         }        
     }
     
+    if (tableViewModel.tag==3&& tableViewModel.sectionCount){
+        
+        
+        
+        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
+        
+        if (section.cellCount>6) 
+        {
+            SCTableViewCell *cellSystolic=(SCTableViewCell *)[section cellAtIndex:3];
+            SCTableViewCell *cellDiastolic=(SCTableViewCell *)[section cellAtIndex:4];
+            SCTableViewCell *cellHeartRate=(SCTableViewCell *)[section cellAtIndex:5];
+             SCTableViewCell *cellTemperature=(SCTableViewCell *)[section cellAtIndex:6];
+            NSManagedObject *cellManagedObject=(NSManagedObject *)cellSystolic.boundObject;
+            NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
+            
+            if ([cellManagedObject.entity.name isEqualToString:@"VitalsEntity"]) {
+                SCTextFieldCell *cellSystolicTF=(SCTextFieldCell *)cellSystolic;
+                SCTextFieldCell *cellDiastolicTF=(SCTextFieldCell *)cellDiastolic;
+                SCTextFieldCell *cellHeartRateTF=(SCTextFieldCell *)cellHeartRate;
+                SCTextFieldCell *cellTemperatureTF=(SCTextFieldCell *)cellTemperature;
+                
+                                
+                NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];;
+                
+                NSNumber *systolicNumber=[numberFormatter numberFromString:cellSystolicTF.textField.text];
+                NSNumber *diastolicNumber=[numberFormatter numberFromString:cellDiastolicTF.textField.text];
+                NSNumber *heartRateNumber=[numberFormatter numberFromString:cellHeartRateTF.textField.text];
+                NSNumber *temperatureNumber=[numberFormatter numberFromString:cellTemperatureTF.textField.text];
+                
+                
+                
+                if (cellSystolicTF.textField.text.length && [cellSystolicTF.textField.text integerValue]<500 &&systolicNumber) {
+                    valid=YES;
+                }
+                else if (cellSystolicTF.textField.text.length||(cellSystolicTF.textField.text.length&&!systolicNumber)){
+                    valid=NO;
+                }
+                if (cellDiastolicTF.textField.text.length && [cellDiastolicTF.textField.text integerValue]<500 &&diastolicNumber) {
+                    valid=YES;
+                }
+                else if(cellDiastolicTF.textField.text.length||(cellDiastolicTF.textField.text.length&&!diastolicNumber)){
+                    valid=NO;
+                }
+                if (cellHeartRateTF.textField.text.length && [cellHeartRateTF.textField.text integerValue]<500 &&heartRateNumber) {
+                    valid=YES;
+                }
+                else if(cellHeartRateTF.textField.text.length ||(cellHeartRateTF.textField.text.length&&!heartRateNumber)){
+                    valid=NO;
+                }
+                
+                if (cellTemperatureTF.textField.text.length && [cellTemperatureTF.textField.text integerValue]< 130 &&temperatureNumber) {
+                    valid=YES;
+                }
+                else if(cellTemperatureTF.textField.text.length ||(!temperatureNumber && cellTemperatureTF.textField.text.length)){
+                    valid=NO;
+                }
+                
+            }
+        }        
+    }
+ 
+    
+    
     
     return valid;
 }
@@ -1252,6 +1315,51 @@ NSLog(@"table model class %@",[tableViewModel class]);
                                          
                         cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateTimeDateFormatter stringFromDate:logDate],notes];
                     }
+                    
+                    
+                    if ([managedObject.entity.name isEqualToString:@"VitalsEntity"]) {
+                        NSLog(@"the managed object entity is Vitals Entity");
+                        
+                        
+                        NSDate *dateTaken=(NSDate *)[cell.boundObject valueForKey:@"dateTaken"];
+                        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+                        
+                        [dateFormatter setDateFormat:@"ccc M/d/yy h:mm a"];
+                        
+                        
+                        NSString *dateTakenStr=[dateFormatter stringFromDate:dateTaken];
+                        NSNumber *systolic=[cell.boundObject valueForKey:@"systolicPressure"];
+                        NSNumber *diastolic=[cell.boundObject valueForKey:@"diastolicPressure"];
+                        NSNumber *heartRate=[cell.boundObject valueForKey:@"heartRate"];    
+                        NSNumber *temperature=[cell.boundObject valueForKey:@"temperature"];
+                        
+                        NSString *labelText=[NSString string];
+                        if (dateTakenStr.length &&systolic&& diastolic) {
+                            
+                            labelText=[dateTakenStr stringByAppendingFormat:@": %@/%@",[systolic stringValue],[diastolic stringValue]];
+                            
+                        }
+                        else if(dateTakenStr.length){
+                            labelText=dateTakenStr;
+                        }
+                        
+                        if (labelText.length&&heartRate) {
+                            labelText=[labelText stringByAppendingFormat:@"; %@ bpm",[heartRate stringValue]];
+                        }
+                        if (labelText.length&&temperature) {
+                            labelText=[labelText stringByAppendingFormat:@"; %@\u00B0",[temperature stringValue]];
+                        }
+                        
+                        
+                        cell.textLabel.text=labelText;
+                        //change the text color to red
+                        
+                        
+                        
+                    }
+                    
+                
+                    
                 }
             }
         }
@@ -1323,7 +1431,7 @@ NSLog(@"table model class %@",[tableViewModel class]);
                         
                     }
 
-                    
+                   
                 }
                 
             }

@@ -47,7 +47,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	self.clientDef = [SCClassDefinition definitionWithEntityName:@"ClientEntity" 
                                                       withManagedObjectContext:managedObjectContext 
                                                              withPropertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth", @"keyDate",
-                                                                                @"initials",  @"demographicInfo", @"dateAdded",@"currentClient",@"phoneNumbers", @"logs", @"medicationHistory",   
+                                                                                @"initials",  @"demographicInfo", @"dateAdded",@"currentClient",@"phoneNumbers", @"logs", @"medicationHistory", @"vitals",  
                                                                 @"notes",nil]];
 	
     
@@ -444,7 +444,98 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     // add the followup property group to the behavioralObservationsDef class. 
     [medicationReviewDef.propertyGroups addGroup:notesGroup];
     
-    SCPropertyGroup *clientInfoGroup = [SCPropertyGroup groupWithHeaderTitle:@"De-Identified Client Data" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth",@"initials",@"demographicInfo",@"dateAdded",@"currentClient",@"phoneNumbers", @"logs",@"medicationHistory",  @"notes", nil]];
+    
+    //Create a class definition for the vitals Entity
+    SCClassDefinition *vitalsDef = [SCClassDefinition definitionWithEntityName:@"VitalsEntity" 
+                                                        withManagedObjectContext:managedObjectContext
+                                                               withPropertyNames:[NSArray arrayWithObjects:@"dateTaken",@"systolicPressure",@"diastolicPressure", @"heartRate",@"temperature",@"heightTall", @"heightUnit",   @"weight",  @"weightUnit",  nil]];
+    
+    
+    
+    
+    
+    
+    
+    
+    //Create the property definition for the dateTaken property in the vitals class  definition
+    SCPropertyDefinition *dateTakenPropertyDef = [vitalsDef propertyDefinitionWithName:@"dateTaken"];
+    
+    dateTakenPropertyDef.type=SCPropertyTypeDate;
+    
+    //Do some property definition customization for the vitals Entity defined in vitalsDef
+    NSDictionary *heightPickerDataBindings = [NSDictionary 
+                                              dictionaryWithObjects:[NSArray arrayWithObjects:@"heightTall",@"Height",@"heightUnit",nil] 
+                                              forKeys:[NSArray arrayWithObjects:@"2", @"3",@"4", nil]]; // 1 is the control tags
+	
+    
+    NSString *heightPickerNibName;
+    if ([SCHelper is_iPad]) 
+        heightPickerNibName=[NSString stringWithString:@"HeightPickerCell_iPad"];
+    else
+        heightPickerNibName=[NSString stringWithString:@"HeightPickerCell_iPhone"];
+    
+    SCCustomPropertyDefinition *heightProperty = [SCCustomPropertyDefinition definitionWithName:@"HeightTall" withuiElementNibName:heightPickerNibName withObjectBindings:heightPickerDataBindings];
+	
+    
+    
+    [vitalsDef insertPropertyDefinition:heightProperty atIndex:1];
+    
+    NSDictionary *weightPickerDataBindings = [NSDictionary 
+                                              dictionaryWithObjects:[NSArray arrayWithObjects:@"weight",@"Weight",@"weightUnit",nil] 
+                                              forKeys:[NSArray arrayWithObjects:@"2", @"3",@"4", nil]]; // 1 is the control tags
+	
+    
+    
+    
+    [vitalsDef removePropertyDefinitionWithName:@"weight"];
+    [vitalsDef removePropertyDefinitionWithName:@"weightUnit"];
+    [vitalsDef removePropertyDefinitionWithName:@"heightTall"];
+    [vitalsDef removePropertyDefinitionWithName:@"heightUnit"];
+    
+    NSString *weightPickerNibName;
+    if ([SCHelper is_iPad]) 
+        weightPickerNibName=[NSString stringWithString:@"WeightPickerCell_iPad"];
+    else
+        weightPickerNibName=[NSString stringWithString:@"WeightPickerCell_iPhone"];
+    
+    SCCustomPropertyDefinition *weightProperty = [SCCustomPropertyDefinition definitionWithName:@"Weight" withuiElementNibName:weightPickerNibName withObjectBindings:weightPickerDataBindings];
+	
+    
+    [vitalsDef insertPropertyDefinition:weightProperty atIndex:1];
+    
+    //Create the property definition for the systolic pressure property in the vitalsDef class
+    SCPropertyDefinition *systolicPropertyDef = [vitalsDef propertyDefinitionWithName:@"systolicPressure"];
+    
+    systolicPropertyDef.autoValidate=NO;
+    
+    //Create the property definition for the diastolic pressure property in the vitalsDef class
+    SCPropertyDefinition *diastolicPropertyDef = [vitalsDef propertyDefinitionWithName:@"diastolicPressure"];
+    
+    diastolicPropertyDef.autoValidate=NO;
+    
+    //Create the property definition for the heart Rate property in the vitalsDef class
+    SCPropertyDefinition *heartRatePropertyDef = [vitalsDef propertyDefinitionWithName:@"heartRate"];
+    
+    heartRatePropertyDef.autoValidate=NO;
+    
+    //Create the property definition for the temperature property in the vitalsDef class
+    SCPropertyDefinition *temperaturePropertyDef = [vitalsDef propertyDefinitionWithName:@"temperature"];
+    
+    temperaturePropertyDef.autoValidate=NO;
+    
+    
+    //create an array of objects definition for the vitals to-many relationship that with show up in a different view  without a place holder element>.
+    
+    //Create the property definition for the vitals property
+    SCPropertyDefinition *vitalsPropertyDef = [self.clientDef propertyDefinitionWithName:@"vitals"];
+    vitalsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:vitalsDef
+                                                                                    allowAddingItems:YES
+                                                                                  allowDeletingItems:YES
+                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add vitals"]                                                      addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+    
+    
+    
+    SCPropertyGroup *clientInfoGroup = [SCPropertyGroup groupWithHeaderTitle:@"De-Identified Client Data" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth",@"initials",@"demographicInfo",@"dateAdded",@"currentClient",@"phoneNumbers", @"logs",@"medicationHistory", @"vitals", @"notes", nil]];
     
     
 

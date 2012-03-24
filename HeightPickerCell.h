@@ -21,17 +21,17 @@
 
 @interface HeightPickerCell : SCLabelCell <UIPickerViewDataSource, UIPickerViewDelegate>
 {
-    __weak UITextField *pickerField;
-    __weak UIPickerView *picker;
+     UITextField *pickerField;
+     UIPickerView *picker;
     int componentChanged;
     BOOL loadUnitsFromBoundObject;
-    __weak UIView *view;
+     UIView *view;
 }
 
 
-@property (nonatomic, weak ) IBOutlet UIView *view;
-@property (nonatomic, weak ) IBOutlet UIPickerView *picker;
-@property (nonatomic, weak ) IBOutlet UITextField *pickerField;
+@property (nonatomic, strong ) IBOutlet UIView *view;
+@property (nonatomic, strong ) IBOutlet UIPickerView *picker;
+@property (nonatomic, strong ) IBOutlet UITextField *pickerField;
 -(NSInteger) convertToMetersComponentFromInches:(NSInteger )inchesInteger;
 -(NSInteger )convertToCentemetersComponentFromInches:(NSInteger )inchesInteger;
 @end
