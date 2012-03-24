@@ -2,20 +2,21 @@
 //  DemographicProfileEntity.h
 //  PsyTrack Clinician Tools
 //
-//  Created by Daniel Boice on 3/15/12.
+//  Created by Daniel Boice on 3/23/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClientEntity, ClinicianEntity;
+@class ClientEntity, ClinicianEntity, ImmigrationHistoryEntity;
 
 @interface DemographicProfileEntity : NSManagedObject
 
 @property (nonatomic, retain) NSString * sex;
 @property (nonatomic, retain) NSString * sexualOrientation;
 @property (nonatomic, retain) NSString * profileNotes;
+@property (nonatomic, retain) NSDate * keyDate;
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSManagedObject *militaryService;
 @property (nonatomic, retain) NSManagedObject *educationLevel;
@@ -23,7 +24,7 @@
 @property (nonatomic, retain) ClientEntity *client;
 @property (nonatomic, retain) NSSet *disabilities;
 @property (nonatomic, retain) NSSet *spiritualBeliefs;
-@property (nonatomic, retain) NSManagedObject *immigrationHistory;
+@property (nonatomic, retain) NSSet *migrationHistory;
 @property (nonatomic, retain) ClinicianEntity *clinician;
 @property (nonatomic, retain) NSSet *interpersonal;
 @property (nonatomic, retain) NSManagedObject *gender;
@@ -35,10 +36,10 @@
 @property (nonatomic, retain) NSSet *developmental;
 @property (nonatomic, retain) NSSet *significantLifeEvents;
 @property (nonatomic, retain) NSSet *races;
-@property (nonatomic, strong) NSDate * keyDate;
 
-@property (nonatomic, strong) NSString *tempProfileNotes;
-@property (nonatomic, strong) NSString *tempSex;
+@property (nonatomic, retain) NSString * tempProfileNotes;
+@property (nonatomic, retain) NSString * tempSex;
+
 @end
 
 @interface DemographicProfileEntity (CoreDataGeneratedAccessors)
@@ -57,6 +58,11 @@
 - (void)removeSpiritualBeliefsObject:(NSManagedObject *)value;
 - (void)addSpiritualBeliefs:(NSSet *)values;
 - (void)removeSpiritualBeliefs:(NSSet *)values;
+
+- (void)addMigrationHistoryObject:(ImmigrationHistoryEntity *)value;
+- (void)removeMigrationHistoryObject:(ImmigrationHistoryEntity *)value;
+- (void)addMigrationHistory:(NSSet *)values;
+- (void)removeMigrationHistory:(NSSet *)values;
 
 - (void)addInterpersonalObject:(NSManagedObject *)value;
 - (void)removeInterpersonalObject:(NSManagedObject *)value;

@@ -60,7 +60,7 @@
                                                     withManagedObjectContext:managedObjectContext
                                                            withPropertyNames:[NSArray arrayWithObjects:@"profileNotes",@"sex",@"gender", @"sexualOrientation",
                                                                               @"disabilities",@"educationLevel",@"employmentStatus", @"ethnicities",@"languagesSpoken",
-                                                                              @"cultureGroups",@"immigrationHistory", @"interpersonal",  
+                                                                              @"cultureGroups",@"migrationHistory", @"interpersonal",  
                                                                               @"races",@"spiritualBeliefs",@"significantLifeEvents",@"militaryService", @"additionalVariables",nil]];
 	
     
@@ -72,10 +72,13 @@
     
     genderDef.orderAttributeName=@"order";
     //Create a class definition for Demographic Immigration History entity
-    SCClassDefinition *immigrationHistoryDef = [SCClassDefinition definitionWithEntityName:@"ImmigrationHistoryEntity" 
+    SCClassDefinition *migrationHistoryDef = [SCClassDefinition definitionWithEntityName:@"MigrationHistoryEntity" 
                                                                  withManagedObjectContext:managedObjectContext
-                                                                        withPropertyNames:[NSArray arrayWithObjects:@"immigrationHistory",@"notes",nil]];
-    immigrationHistoryDef.orderAttributeName=@"order";
+                                                                        withPropertyNames:[NSArray arrayWithObjects:@"migratedFrom",@"migratedTo",@"arrivedDate",@"notes",nil]];
+    
+       
+    
+    
     //Create a class definition for  Disablity entity
     SCClassDefinition *disabilityDef = [SCClassDefinition definitionWithEntityName:@"DisabilityEntity" 
                                                           withManagedObjectContext:managedObjectContext
@@ -410,26 +413,61 @@
     cultureGroupNamePropertyDef.type=SCPropertyTypeTextView;
     
     
+    //create an array of objects definition for the immigration History to-many relationship that with show up in a different view with  a place holder element>.
+    
+    //Create the property definition for the immigrationHistory property
+    SCPropertyDefinition *migrationHistoryPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"migrationHistory"];
+    migrationHistoryPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:migrationHistoryDef
+                                                                                    allowAddingItems:YES
+                                                                                  allowDeletingItems:YES
+                                                                                    allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap Here to Add New Migration History"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
     
     //Do some property definition customization for the Immigration History Entity attribute
-    SCPropertyDefinition *immigrationHistoryPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"immigrationHistory"];
+    SCPropertyDefinition *migrationFromPropertyDef = [migrationHistoryDef propertyDefinitionWithName:@"migratedFrom"];
+  
     
-   	immigrationHistoryPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *immigrationHistorySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:immigrationHistoryDef allowMultipleSelection:NO allowNoSelection:NO];
-    immigrationHistorySelectionAttribs.allowAddingItems = YES;
-    immigrationHistorySelectionAttribs.allowDeletingItems = YES;
-    immigrationHistorySelectionAttribs.allowMovingItems = YES;
-    immigrationHistorySelectionAttribs.allowEditingItems = YES;
-    immigrationHistorySelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add Immigration History Definitions)"];
-    immigrationHistorySelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Immigration History Definition"];
-    immigrationHistoryPropertyDef.attributes = immigrationHistorySelectionAttribs;
-    SCPropertyDefinition *immigrationHistoryNotesPropertyDef = [immigrationHistoryDef propertyDefinitionWithName:@"notes"];
-    immigrationHistoryNotesPropertyDef.type=SCPropertyTypeTextView;
-    SCPropertyDefinition *immigrationHistoryNamePropertyDef = [immigrationHistoryDef propertyDefinitionWithName:@"immigrationHistory"];
-    immigrationHistoryNamePropertyDef.type=SCPropertyTypeTextView;
+    migrationFromPropertyDef.type=SCPropertyTypeCustom;
+    migrationFromPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    
+    NSDictionary *encryMigrationFromTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"migratedFrom",@"keyDate",@"Migrated From",@"migratedFrom",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
+    migrationFromPropertyDef.objectBindings=encryMigrationFromTVCellKeyBindingsDic;
+    migrationFromPropertyDef.title=@"Migrated From";
+    migrationFromPropertyDef.autoValidate=NO;
     
+    
+    SCPropertyDefinition *migrationToPropertyDef = [migrationHistoryDef propertyDefinitionWithName:@"migratedTo"];
+    
+    migrationToPropertyDef.type=SCPropertyTypeCustom;
+    migrationToPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    
+    NSDictionary *encryMigrationToTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"migratedTo",@"keyDate",@"To",@"migratedTo",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    
+    
+    migrationToPropertyDef.objectBindings=encryMigrationToTVCellKeyBindingsDic;
+    migrationToPropertyDef.title=@"To";
+    migrationToPropertyDef.autoValidate=NO;
+    
+    SCPropertyDefinition *migrationHistoryNotesPropertyDef = [migrationHistoryDef propertyDefinitionWithName:@"notes"];
+    
+    migrationHistoryNotesPropertyDef.type=SCPropertyTypeCustom;
+    migrationHistoryNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    
+    NSDictionary *encryHistoryNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    
+    
+    migrationHistoryNotesPropertyDef.objectBindings=encryHistoryNotesTVCellKeyBindingsDic;
+    migrationHistoryNotesPropertyDef.title=@"Notes";
+    migrationHistoryNotesPropertyDef.autoValidate=NO;
+    
+    //Create the property definition for the arrivedDate property in the migration history class
+    SCPropertyDefinition *arrivedDatePropertyDef = [migrationHistoryDef propertyDefinitionWithName:@"arrivedDate"];
+    arrivedDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                      datePickerMode:UIDatePickerModeDate
+                                                       displayDatePickerInDetailView:NO];
+       
+    migrationHistoryDef.titlePropertyName=@"arrivedDate";
     //Do some property definition customization for the Demographic Profile Entity races relationship
     
     SCPropertyDefinition *demRacesPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"races"];

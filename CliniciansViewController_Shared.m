@@ -2243,7 +2243,37 @@
                             cell.textLabel.textColor=[UIColor redColor];
                         }
                     }
-                }
+                } 
+                    if ([managedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]) {
+                        NSLog(@"the managed object entity is Migration History Entity");
+                        
+                        
+                        NSDate *arrivedDate=(NSDate *)[cell.boundObject valueForKey:@"arrivedDate"];
+                        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+                        
+                        [dateFormatter setDateFormat:@"M/YYYY"];
+                        
+                        
+                        NSString *arrivedDateStr=[dateFormatter stringFromDate:arrivedDate];
+                        NSString *migratedFrom=[cell.boundObject valueForKey:@"migratedFrom"];
+                        NSString *migratedTo=[cell.boundObject valueForKey:@"migratedTo"];
+                        NSString *notes=[cell.boundObject valueForKey:@"notes"];    
+                        
+                        if (arrivedDateStr.length && migratedFrom.length&&migratedTo.length) {
+                            
+                            NSString * historyString=[arrivedDateStr stringByAppendingFormat:@":%@ to %@",migratedFrom,migratedTo];
+                            
+                            if (notes.length) 
+                            {
+                                historyString=[historyString stringByAppendingFormat:@"; %@",notes];
+                            }
+                            
+                            cell.textLabel.text=historyString;
+                            //change the text color to red
+                        }
+
+                    }
+                
             }
         }
             
@@ -2540,7 +2570,40 @@
         
     }
     
+    if (tableViewModel.tag==4&& tableViewModel.sectionCount){
+        
+        
+        
+        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
+        
+        if (section.cellCount>3) 
+        {
+            SCTableViewCell *cellFrom=(SCTableViewCell *)[section cellAtIndex:0];
+            SCTableViewCell *cellTo=(SCTableViewCell *)[section cellAtIndex:1];
+            SCTableViewCell *cellArrivedDate=(SCTableViewCell *)[section cellAtIndex:2];
+            NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
+            NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
+            
+            if ([cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+                
+                EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
+                EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
+                
+                NSLog(@"arrived date cell class is %@",[cellArrivedDate class]);
+                SCDateCell *arrivedDateCell=(SCDateCell *)cellArrivedDate;
+                
+                if (encryptedFrom.textView.text.length && encryptedTo.textView.text.length &&arrivedDateCell.label.text.length) {
+                    valid=YES;
+                }
+                else {
+                    valid=NO;
+                }
+                
+            }
+        }        
+    }
     
+
     
     
     return valid;
