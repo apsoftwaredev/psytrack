@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B79F4897142BEF0D0085D47B"
-               BuildableName = "PsyTrack Clinician Tools.app"
+               BuildableName = "PsyTrack.app"
                BlueprintName = "PsyTrack"
                ReferencedContainer = "container:PsyTrack.xcodeproj">
             </BuildableReference>
@@ -32,7 +32,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B79F4897142BEF0D0085D47B"
-            BuildableName = "PsyTrack Clinician Tools.app"
+            BuildableName = "PsyTrack.app"
             BlueprintName = "PsyTrack"
             ReferencedContainer = "container:PsyTrack.xcodeproj">
          </BuildableReference>
@@ -51,7 +51,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B79F4897142BEF0D0085D47B"
-            BuildableName = "PsyTrack Clinician Tools.app"
+            BuildableName = "PsyTrack.app"
             BlueprintName = "PsyTrack"
             ReferencedContainer = "container:PsyTrack.xcodeproj">
          </BuildableReference>
@@ -69,7 +69,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B79F4897142BEF0D0085D47B"
-            BuildableName = "PsyTrack Clinician Tools.app"
+            BuildableName = "PsyTrack.app"
             BlueprintName = "PsyTrack"
             ReferencedContainer = "container:PsyTrack.xcodeproj">
          </BuildableReference>

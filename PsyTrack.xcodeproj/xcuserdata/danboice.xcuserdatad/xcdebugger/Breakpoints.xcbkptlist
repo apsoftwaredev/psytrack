@@ -164,12 +164,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3194"
-         endingLineNumber = "3194"
-         landmarkName = "-evaluateWhichABViewControllerToShow"
+         startingLineNumber = "3299"
+         endingLineNumber = "3299"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -177,12 +177,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3182"
-         endingLineNumber = "3182"
-         landmarkName = "-evaluateWhichABViewControllerToShow"
+         startingLineNumber = "3287"
+         endingLineNumber = "3287"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -190,12 +190,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4097"
-         endingLineNumber = "4097"
-         landmarkName = "-newPersonViewController:didCompleteWithNewPerson:"
+         startingLineNumber = "4202"
+         endingLineNumber = "4202"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -203,12 +203,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4096"
-         endingLineNumber = "4096"
-         landmarkName = "-newPersonViewController:didCompleteWithNewPerson:"
+         startingLineNumber = "4201"
+         endingLineNumber = "4201"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -216,12 +216,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3379"
-         endingLineNumber = "3379"
-         landmarkName = "-evaluateWhichABViewControllerToShow"
+         startingLineNumber = "3484"
+         endingLineNumber = "3484"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -229,12 +229,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4475"
-         endingLineNumber = "4475"
-         landmarkName = "-alertView:clickedButtonAtIndex:"
+         startingLineNumber = "4580"
+         endingLineNumber = "4580"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -242,12 +242,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4477"
-         endingLineNumber = "4477"
-         landmarkName = "-alertView:clickedButtonAtIndex:"
+         startingLineNumber = "4582"
+         endingLineNumber = "4582"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -255,12 +255,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4219"
-         endingLineNumber = "4219"
-         landmarkName = "-newPersonViewController:didCompleteWithNewPerson:"
+         startingLineNumber = "4324"
+         endingLineNumber = "4324"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -268,12 +268,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3386"
-         endingLineNumber = "3386"
-         landmarkName = "-evaluateWhichABViewControllerToShow"
+         startingLineNumber = "3491"
+         endingLineNumber = "3491"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -320,12 +320,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354242907.261119"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2454"
-         endingLineNumber = "2454"
-         landmarkName = "-tableViewModel:didAddSectionAtIndex:"
+         startingLineNumber = "2543"
+         endingLineNumber = "2543"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -333,12 +333,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2622"
-         endingLineNumber = "2622"
-         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+         startingLineNumber = "2727"
+         endingLineNumber = "2727"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -346,11 +346,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354227619.115774"
+         timestampString = "354393014.317308"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1557"
-         endingLineNumber = "1557"
+         startingLineNumber = "1600"
+         endingLineNumber = "1600"
          landmarkName = "-tableViewModel:detailModelCreatedForRowAtIndexPath:detailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -359,12 +359,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354242907.261119"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2354"
-         endingLineNumber = "2354"
-         landmarkName = "-tableViewModel:detailViewWillAppearForRowAtIndexPath:withDetailTableViewModel:"
+         startingLineNumber = "2443"
+         endingLineNumber = "2443"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -372,12 +372,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2981"
-         endingLineNumber = "2981"
-         landmarkName = "-tableViewModel:detailViewWillDisappearForRowAtIndexPath:"
+         startingLineNumber = "3086"
+         endingLineNumber = "3086"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -385,11 +385,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354227619.115774"
+         timestampString = "354393014.317308"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1986"
-         endingLineNumber = "1986"
+         startingLineNumber = "2030"
+         endingLineNumber = "2030"
          landmarkName = "-tableViewModel:willSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -398,11 +398,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354227619.115774"
+         timestampString = "354393014.317308"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1989"
-         endingLineNumber = "1989"
+         startingLineNumber = "2033"
+         endingLineNumber = "2033"
          landmarkName = "-tableViewModel:willSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -411,12 +411,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2865"
-         endingLineNumber = "2865"
-         landmarkName = "-tableViewModelDidEndEditing:"
+         startingLineNumber = "2970"
+         endingLineNumber = "2970"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -424,12 +424,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354242907.261119"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2355"
-         endingLineNumber = "2355"
-         landmarkName = "-tableViewModel:detailViewWillAppearForRowAtIndexPath:withDetailTableViewModel:"
+         startingLineNumber = "2444"
+         endingLineNumber = "2444"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -437,12 +437,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354242907.261119"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2352"
-         endingLineNumber = "2352"
-         landmarkName = "-tableViewModel:detailViewWillAppearForRowAtIndexPath:withDetailTableViewModel:"
+         startingLineNumber = "2441"
+         endingLineNumber = "2441"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -489,12 +489,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354242907.261119"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2356"
-         endingLineNumber = "2356"
-         landmarkName = "-tableViewModel:detailViewWillAppearForRowAtIndexPath:withDetailTableViewModel:"
+         startingLineNumber = "2445"
+         endingLineNumber = "2445"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -541,11 +541,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354227619.115774"
+         timestampString = "354393014.317308"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2157"
-         endingLineNumber = "2157"
+         startingLineNumber = "2205"
+         endingLineNumber = "2205"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -554,11 +554,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354227619.115774"
+         timestampString = "354393014.317308"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1547"
-         endingLineNumber = "1547"
+         startingLineNumber = "1590"
+         endingLineNumber = "1590"
          landmarkName = "-tableViewModel:detailModelCreatedForRowAtIndexPath:detailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -567,11 +567,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354227619.115774"
+         timestampString = "354393014.317308"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1578"
-         endingLineNumber = "1578"
+         startingLineNumber = "1621"
+         endingLineNumber = "1621"
          landmarkName = "-tableViewModel:detailModelCreatedForSectionAtIndex:detailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -580,12 +580,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2619"
-         endingLineNumber = "2619"
-         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+         startingLineNumber = "2724"
+         endingLineNumber = "2724"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -593,12 +593,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5091"
-         endingLineNumber = "5091"
-         landmarkName = "-abGroupsDoneButtonTapped:"
+         startingLineNumber = "5196"
+         endingLineNumber = "5196"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -619,11 +619,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "353677410.771402"
+         timestampString = "354389809.160704"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "154"
-         endingLineNumber = "154"
+         startingLineNumber = "155"
+         endingLineNumber = "155"
          landmarkName = "-tableViewModel:searchBarSelectedScopeButtonIndexDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -645,11 +645,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354227619.115774"
+         timestampString = "354393014.317308"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1959"
-         endingLineNumber = "1959"
+         startingLineNumber = "2003"
+         endingLineNumber = "2003"
          landmarkName = "-tableViewModel:willSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -658,24 +658,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354227619.115774"
+         timestampString = "354393014.317308"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1935"
-         endingLineNumber = "1935"
+         startingLineNumber = "1979"
+         endingLineNumber = "1979"
          landmarkName = "-tableViewModel:detailViewWillAppearForSectionAtIndex:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354227619.115774"
+         timestampString = "354393014.317308"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1936"
-         endingLineNumber = "1936"
+         startingLineNumber = "1980"
+         endingLineNumber = "1980"
          landmarkName = "-tableViewModel:detailViewWillAppearForSectionAtIndex:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -710,12 +710,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354242907.261119"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2353"
-         endingLineNumber = "2353"
-         landmarkName = "-tableViewModel:detailViewWillAppearForRowAtIndexPath:withDetailTableViewModel:"
+         startingLineNumber = "2442"
+         endingLineNumber = "2442"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -801,12 +801,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4463"
-         endingLineNumber = "4463"
-         landmarkName = "-alertView:clickedButtonAtIndex:"
+         startingLineNumber = "4568"
+         endingLineNumber = "4568"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -827,12 +827,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4459"
-         endingLineNumber = "4459"
-         landmarkName = "-alertView:clickedButtonAtIndex:"
+         startingLineNumber = "4564"
+         endingLineNumber = "4564"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -853,12 +853,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3891"
-         endingLineNumber = "3891"
-         landmarkName = "-showPersonViewControllerForRecordID:"
+         startingLineNumber = "3996"
+         endingLineNumber = "3996"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -866,12 +866,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3367"
-         endingLineNumber = "3367"
-         landmarkName = "-evaluateWhichABViewControllerToShow"
+         startingLineNumber = "3472"
+         endingLineNumber = "3472"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -879,12 +879,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2951"
-         endingLineNumber = "2951"
-         landmarkName = "-tableViewModel:detailViewWillDisappearForSectionAtIndex:"
+         startingLineNumber = "3056"
+         endingLineNumber = "3056"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -892,12 +892,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2967"
-         endingLineNumber = "2967"
-         landmarkName = "-tableViewModel:detailViewDidDisappearForRowAtIndexPath:"
+         startingLineNumber = "3072"
+         endingLineNumber = "3072"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -905,12 +905,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3873"
-         endingLineNumber = "3873"
-         landmarkName = "-showPersonViewControllerForRecordID:"
+         startingLineNumber = "3978"
+         endingLineNumber = "3978"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -918,12 +918,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3250"
-         endingLineNumber = "3250"
-         landmarkName = "-evaluateWhichABViewControllerToShow"
+         startingLineNumber = "3355"
+         endingLineNumber = "3355"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -931,7 +931,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "353222055.569592"
+         timestampString = "354389535.413138"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "54"
@@ -944,12 +944,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3901"
-         endingLineNumber = "3901"
-         landmarkName = "-showPersonViewControllerForRecordID:"
+         startingLineNumber = "4006"
+         endingLineNumber = "4006"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -957,12 +957,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4716"
-         endingLineNumber = "4716"
-         landmarkName = "-resetABVariablesToNil"
+         startingLineNumber = "4821"
+         endingLineNumber = "4821"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1165,11 +1165,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354293924.163379"
+         timestampString = "354304593.25271"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "775"
-         endingLineNumber = "775"
+         startingLineNumber = "780"
+         endingLineNumber = "780"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1698,11 +1698,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354293618.540027"
+         timestampString = "354325245.718458"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1349"
-         endingLineNumber = "1349"
+         startingLineNumber = "1353"
+         endingLineNumber = "1353"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1711,16 +1711,16 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354293618.540027"
+         timestampString = "354325245.718458"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1337"
-         endingLineNumber = "1337"
+         startingLineNumber = "1341"
+         endingLineNumber = "1341"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "InAppSettingsViewController.m"
@@ -1733,7 +1733,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "InAppSettingsViewController.m"
@@ -1746,7 +1746,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "InAppSettingsViewController.m"
@@ -1763,11 +1763,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354293924.163379"
+         timestampString = "354304593.25271"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "828"
-         endingLineNumber = "828"
+         startingLineNumber = "833"
+         endingLineNumber = "833"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1776,11 +1776,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354293924.163379"
+         timestampString = "354304593.25271"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "842"
-         endingLineNumber = "842"
+         startingLineNumber = "847"
+         endingLineNumber = "847"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1789,12 +1789,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354242907.261119"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2542"
-         endingLineNumber = "2542"
-         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
+         startingLineNumber = "2631"
+         endingLineNumber = "2631"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1802,12 +1802,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354242907.261119"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2553"
-         endingLineNumber = "2553"
-         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
+         startingLineNumber = "2642"
+         endingLineNumber = "2642"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1815,12 +1815,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354242907.261119"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2548"
-         endingLineNumber = "2548"
-         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
+         startingLineNumber = "2637"
+         endingLineNumber = "2637"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1828,12 +1828,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354242907.261119"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2486"
-         endingLineNumber = "2486"
-         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
+         startingLineNumber = "2575"
+         endingLineNumber = "2575"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1854,12 +1854,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
-         timestampString = "354243122.924506"
+         timestampString = "354395344.18226"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3927"
-         endingLineNumber = "3927"
-         landmarkName = "-peoplePickerNavigationControllerDidCancel:"
+         startingLineNumber = "4032"
+         endingLineNumber = "4032"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1893,11 +1893,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354293924.163379"
+         timestampString = "354304593.25271"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "866"
-         endingLineNumber = "866"
+         startingLineNumber = "871"
+         endingLineNumber = "871"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1906,11 +1906,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354293924.163379"
+         timestampString = "354304593.25271"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "880"
-         endingLineNumber = "880"
+         startingLineNumber = "885"
+         endingLineNumber = "885"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1919,11 +1919,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354293924.163379"
+         timestampString = "354304593.25271"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "878"
-         endingLineNumber = "878"
+         startingLineNumber = "883"
+         endingLineNumber = "883"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1932,11 +1932,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354293924.163379"
+         timestampString = "354304593.25271"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "877"
-         endingLineNumber = "877"
+         startingLineNumber = "882"
+         endingLineNumber = "882"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1945,11 +1945,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354293924.163379"
+         timestampString = "354304593.25271"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "886"
-         endingLineNumber = "886"
+         startingLineNumber = "891"
+         endingLineNumber = "891"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1958,11 +1958,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354293924.163379"
+         timestampString = "354304593.25271"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "888"
-         endingLineNumber = "888"
+         startingLineNumber = "893"
+         endingLineNumber = "893"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1971,11 +1971,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354293924.163379"
+         timestampString = "354304593.25271"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "889"
-         endingLineNumber = "889"
+         startingLineNumber = "894"
+         endingLineNumber = "894"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1984,11 +1984,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354293924.163379"
+         timestampString = "354304593.25271"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "892"
-         endingLineNumber = "892"
+         startingLineNumber = "897"
+         endingLineNumber = "897"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1997,11 +1997,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354293924.163379"
+         timestampString = "354304593.25271"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1456"
-         endingLineNumber = "1456"
+         startingLineNumber = "1461"
+         endingLineNumber = "1461"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2010,11 +2010,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354293618.540027"
+         timestampString = "354325245.718458"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1424"
-         endingLineNumber = "1424"
+         startingLineNumber = "1428"
+         endingLineNumber = "1428"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2023,11 +2023,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354293618.540027"
+         timestampString = "354325245.718458"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1432"
-         endingLineNumber = "1432"
+         startingLineNumber = "1436"
+         endingLineNumber = "1436"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2036,11 +2036,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354293618.540027"
+         timestampString = "354325245.718458"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1439"
-         endingLineNumber = "1439"
+         startingLineNumber = "1443"
+         endingLineNumber = "1443"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2049,11 +2049,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354293618.540027"
+         timestampString = "354325245.718458"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1440"
-         endingLineNumber = "1440"
+         startingLineNumber = "1444"
+         endingLineNumber = "1444"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2101,25 +2101,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354293618.540027"
+         timestampString = "354325245.718458"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1447"
-         endingLineNumber = "1447"
+         startingLineNumber = "1451"
+         endingLineNumber = "1451"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354293670.426167"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "569"
-         endingLineNumber = "569"
-         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2133,6 +2120,331 @@
          startingLineNumber = "496"
          endingLineNumber = "496"
          landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsRootViewController_iPad.m"
+         timestampString = "354325245.718458"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1110"
+         endingLineNumber = "1110"
+         landmarkName = "-tableViewModel:searchBarSelectedScopeButtonIndexDidChange:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354304593.25271"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1175"
+         endingLineNumber = "1175"
+         landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354304593.25271"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1637"
+         endingLineNumber = "1637"
+         landmarkName = "-tableViewModel:searchBarSelectedScopeButtonIndexDidChange:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsRootViewController_iPad.m"
+         timestampString = "354303312.906451"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "522"
+         endingLineNumber = "522"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354304593.25271"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1405"
+         endingLineNumber = "1405"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354304593.25271"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1275"
+         endingLineNumber = "1275"
+         landmarkName = "-tableViewModel:willSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354304593.25271"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1158"
+         endingLineNumber = "1158"
+         landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354304593.25271"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1479"
+         endingLineNumber = "1479"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354303837.822074"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "538"
+         endingLineNumber = "538"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354304593.25271"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "647"
+         endingLineNumber = "647"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354304593.25271"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "609"
+         endingLineNumber = "609"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354304593.25271"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "606"
+         endingLineNumber = "606"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354304593.25271"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "614"
+         endingLineNumber = "614"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354304593.25271"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "660"
+         endingLineNumber = "660"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354304593.25271"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "659"
+         endingLineNumber = "659"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354304593.25271"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "640"
+         endingLineNumber = "640"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354304808.767358"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "608"
+         endingLineNumber = "608"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsSelectionCell.m"
+         timestampString = "354389431.262887"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "111"
+         endingLineNumber = "111"
+         landmarkName = "-didSelectCell"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsSelectionCell.m"
+         timestampString = "354390909.832643"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "33"
+         endingLineNumber = "33"
+         landmarkName = "-performInitialization"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsSelectionCell.m"
+         timestampString = "354390929.630323"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "63"
+         endingLineNumber = "63"
+         landmarkName = "-didSelectCell"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsSelectionCell.m"
+         timestampString = "354391026.36509"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "51"
+         endingLineNumber = "51"
+         landmarkName = "-willDisplay"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CliniciansViewController_Shared.m"
+         timestampString = "354393014.317308"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2042"
+         endingLineNumber = "2042"
+         landmarkName = "-tableViewModel:willSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CliniciansViewController_Shared.m"
+         timestampString = "354393014.317308"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2049"
+         endingLineNumber = "2049"
+         landmarkName = "-tableViewModel:willSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CliniciansViewController_Shared.m"
+         timestampString = "354393014.317308"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2050"
+         endingLineNumber = "2050"
+         landmarkName = "-tableViewModel:willSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CliniciansViewController_Shared.m"
+         timestampString = "354393014.317308"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2051"
+         endingLineNumber = "2051"
+         landmarkName = "-tableViewModel:willSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

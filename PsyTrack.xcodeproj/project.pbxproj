@@ -273,9 +273,11 @@
 		E75F778C151CF463002B10AE /* TestingSessionDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F778B151CF463002B10AE /* TestingSessionDeliveredEntity.m */; };
 		E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */; };
 		E78480CA1518D7D800F48EA3 /* PhoneEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C91518D7D800F48EA3 /* PhoneEntity.m */; };
+		E78DA68C151F9AE9004ABF29 /* ReferralEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA68B151F9AE9004ABF29 /* ReferralEntity.m */; };
 		E7912D0E151D332700E0609A /* DemographicProfileEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D0D151D332700E0609A /* DemographicProfileEntity.m */; };
 		E7912D17151D349E00E0609A /* MigrationHistoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D16151D349E00E0609A /* MigrationHistoryEntity.m */; };
 		E7912D1A151DF7DB00E0609A /* VitalsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D19151DF7DB00E0609A /* VitalsEntity.m */; };
+		E7912D1D151E441200E0609A /* InterpersonalEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D1C151E441200E0609A /* InterpersonalEntity.m */; };
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
 		E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */; };
@@ -668,12 +670,16 @@
 		E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCSelectionCell.m; sourceTree = "<group>"; };
 		E78480C81518D7D800F48EA3 /* PhoneEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneEntity.h; sourceTree = "<group>"; };
 		E78480C91518D7D800F48EA3 /* PhoneEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneEntity.m; sourceTree = "<group>"; };
+		E78DA68A151F9AE9004ABF29 /* ReferralEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferralEntity.h; sourceTree = "<group>"; };
+		E78DA68B151F9AE9004ABF29 /* ReferralEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferralEntity.m; sourceTree = "<group>"; };
 		E7912D0C151D332700E0609A /* DemographicProfileEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicProfileEntity.h; sourceTree = "<group>"; };
 		E7912D0D151D332700E0609A /* DemographicProfileEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicProfileEntity.m; sourceTree = "<group>"; };
 		E7912D15151D349E00E0609A /* MigrationHistoryEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MigrationHistoryEntity.h; sourceTree = "<group>"; };
 		E7912D16151D349E00E0609A /* MigrationHistoryEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MigrationHistoryEntity.m; sourceTree = "<group>"; };
 		E7912D18151DF7DA00E0609A /* VitalsEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VitalsEntity.h; sourceTree = "<group>"; };
 		E7912D19151DF7DB00E0609A /* VitalsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VitalsEntity.m; sourceTree = "<group>"; };
+		E7912D1B151E441200E0609A /* InterpersonalEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterpersonalEntity.h; sourceTree = "<group>"; };
+		E7912D1C151E441200E0609A /* InterpersonalEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterpersonalEntity.m; sourceTree = "<group>"; };
 		E7C0749D150E60B4009C5498 /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = "<group>"; };
 		E7C0749E150E60B4009C5498 /* KeyEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyEntity.m; sourceTree = "<group>"; };
 		E7C074A0150EE4DE009C5498 /* EncryptedSCDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCDateCell.h; sourceTree = "<group>"; };
@@ -1376,6 +1382,10 @@
 		E75F7788151CED0C002B10AE /* Encrypted Model Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				E78DA68A151F9AE9004ABF29 /* ReferralEntity.h */,
+				E78DA68B151F9AE9004ABF29 /* ReferralEntity.m */,
+				E7912D1B151E441200E0609A /* InterpersonalEntity.h */,
+				E7912D1C151E441200E0609A /* InterpersonalEntity.m */,
 				E7912D15151D349E00E0609A /* MigrationHistoryEntity.h */,
 				E7912D16151D349E00E0609A /* MigrationHistoryEntity.m */,
 				E7912D0C151D332700E0609A /* DemographicProfileEntity.h */,
@@ -1727,6 +1737,8 @@
 				E7912D0E151D332700E0609A /* DemographicProfileEntity.m in Sources */,
 				E7912D17151D349E00E0609A /* MigrationHistoryEntity.m in Sources */,
 				E7912D1A151DF7DB00E0609A /* VitalsEntity.m in Sources */,
+				E7912D1D151E441200E0609A /* InterpersonalEntity.m in Sources */,
+				E78DA68C151F9AE9004ABF29 /* ReferralEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

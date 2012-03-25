@@ -21,15 +21,23 @@ Acknoledgements:
 TO DO:
 
 
--   fix interpersonal relationships
 
-
--	color the referrals to a different color and allow sorting
-
+-   changed prescriber clinician to searchable clinician list
 
 -	Finish adding the drug section to the client section
 
--	Add fees section to the client tab, keep it simple
+
+- check danger to others
+
+-add hospitalizations
+-medication allergies
+
+
+
+
+
+
+-	Add billing section to the client tab, keep it simple, -add service codes
 
 -	Add the disorder section
 
@@ -45,14 +53,14 @@ TO DO:
 
 
 
--   changed prescriber clinician to searchable clinician list
+
 
 
 - add existing hours
 - extend date on encryption key
-- add presentations to clinician
 
-- check clinician prefix when importing group contacts
+
+
 
 
 Phase II
@@ -104,3 +112,7 @@ begin adding reports
 -   change clinician type to allow additions deletions
 -   change immigration history
 -	Move the height and weight tracking to the client section and add blood pressure, call it vitals, and fix the bug in the height picker cell.
+
+- check clinician prefix when importing group contacts
+-   fix interpersonal relationships
+-	color the referrals to a different color and allow sorting

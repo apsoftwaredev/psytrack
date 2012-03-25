@@ -95,7 +95,8 @@
         tableModel_.autoAssignDataSourceForDetailModels=TRUE;
         self.tableView.backgroundColor=[UIColor clearColor];
         UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
-        self.navigationItem.rightBarButtonItem = addButton;  
+        self.navigationItem.rightBarButtonItem = addButton; 
+        tableModel_.addButtonItem=self.navigationItem.rightBarButtonItem;
        
     }
     

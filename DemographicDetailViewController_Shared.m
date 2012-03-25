@@ -792,7 +792,7 @@
     interpersonalPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:interpersonalDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
-                                                                                    allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add relationship)"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add Interpersonal Relationship" ]addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                    allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add interpersonal relationship" ]addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
 
     //create an object selection for the relationship in the Interpersonal Entity 
     
@@ -803,8 +803,8 @@
     interpersonalPropertyDef.title =@"Interpersonal Relationships";
     
     //set the title property name
-    interpersonalDef.titlePropertyName=@"relationship.relationship";
-    
+    interpersonalDef.titlePropertyName=@"relationship.relationship;notes";
+    interpersonalDef.titlePropertyNameDelimiter=@" - ";
     //set the property definition type to objects selection
 	
     interpersonalRelationshipPropertyDef.type = SCPropertyTypeObjectSelection;
@@ -816,12 +816,13 @@
     interpersonalRelationshipSelectionAttribs.allowMovingItems = YES;
     interpersonalRelationshipSelectionAttribs.allowEditingItems = YES;
     
-    //add a placeholder element to tell the user what to do     when there are no other cells                                          
-    interpersonalRelationshipSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(tap + to add relationship definition)"];
-    
+
+//    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+//    interpersonalRelationshipSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(tap + to add relationship definition)"];
+//    
     
     //add an "Add New" element to appear when user clicks edit
-    interpersonalRelationshipSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Relationship Definition"];
+    interpersonalRelationshipSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Relationship Type"];
     
     //add the selection attributes to the property definition
     interpersonalRelationshipPropertyDef.attributes = interpersonalRelationshipSelectionAttribs;
@@ -830,45 +831,53 @@
     SCPropertyDefinition *interpersonalNotesPropertyDef = [interpersonalDef propertyDefinitionWithName:@"notes"];
     
        
-    //set the notes property definition type to a Text View Cell
-    interpersonalNotesPropertyDef.type = SCPropertyTypeTextView;
+    interpersonalNotesPropertyDef.type=SCPropertyTypeCustom;
+    interpersonalNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
     
-    NSDictionary *frequencyPickerDataBindings = [NSDictionary 
-                                              dictionaryWithObjects:[NSArray arrayWithObjects:@"contactFrequencyUnit",@"contactFrequencyNumber",@"contactFrequencyUnitLength",@"Contact Frequency",nil] 
-                                              forKeys:[NSArray arrayWithObjects:@"50", @"51",@"52", @"53", nil]]; // 2, 3, 4 are the control tags
-	
-    
-    NSString *frequencyPickerNibName;
-    if ([SCHelper is_iPad]) 
-        frequencyPickerNibName=[NSString stringWithString:@"FrequencyPickerCell_iPad"];
-    else
-        frequencyPickerNibName=[NSString stringWithString:@"FrequencyPickerCell_iPhone"];
-    
-    SCCustomPropertyDefinition *frequencyProperty = [SCCustomPropertyDefinition definitionWithName:@"ContactFrequency" withuiElementNibName:frequencyPickerNibName withObjectBindings:frequencyPickerDataBindings];
-	[interpersonalDef insertPropertyDefinition:frequencyProperty atIndex:1];
-    
-    NSString *longTimePickerCellNibName;
-    
-    if([SCHelper is_iPad])
-        longTimePickerCellNibName=[NSString stringWithString:@"LongTimePickerCell_iPad"];
-    else
-        longTimePickerCellNibName=[NSString stringWithString:@"LongTimePickerCell_iPhone"];
+    NSDictionary *encryInterpersonalNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
+    interpersonalNotesPropertyDef.objectBindings=encryInterpersonalNotesTVCellKeyBindingsDic;
+    interpersonalNotesPropertyDef.title=@"Notes";
+    interpersonalNotesPropertyDef.autoValidate=NO;
     
-    //create the dictionary with the data bindings
-    NSDictionary *durationDataBindings = [NSDictionary 
-                                                dictionaryWithObjects:[NSArray arrayWithObjects:@"duration",@"duration", @"Duration", nil ] 
-                                                forKeys:[NSArray arrayWithObjects:@"40" , @"41",@"42",   nil]]; // 40, 41,42 are the control tags
-	
-    //create the custom property definition for addtional time
-    SCCustomPropertyDefinition *durationPropertyDef = [SCCustomPropertyDefinition definitionWithName:@"Duration" withuiElementNibName:longTimePickerCellNibName  withObjectBindings:durationDataBindings];	
     
-    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
-    durationPropertyDef.autoValidate=FALSE;
-    
-       
-    [interpersonalDef insertPropertyDefinition:durationPropertyDef atIndex:2];
+//    NSDictionary *frequencyPickerDataBindings = [NSDictionary 
+//                                              dictionaryWithObjects:[NSArray arrayWithObjects:@"contactFrequencyUnit",@"contactFrequencyNumber",@"contactFrequencyUnitLength",@"Contact Frequency",nil] 
+//                                              forKeys:[NSArray arrayWithObjects:@"50", @"51",@"52", @"53", nil]]; // 2, 3, 4 are the control tags
+//	
+//    
+//    NSString *frequencyPickerNibName;
+//    if ([SCHelper is_iPad]) 
+//        frequencyPickerNibName=[NSString stringWithString:@"FrequencyPickerCell_iPad"];
+//    else
+//        frequencyPickerNibName=[NSString stringWithString:@"FrequencyPickerCell_iPhone"];
+//    
+//    SCCustomPropertyDefinition *frequencyProperty = [SCCustomPropertyDefinition definitionWithName:@"ContactFrequency" withuiElementNibName:frequencyPickerNibName withObjectBindings:frequencyPickerDataBindings];
+//	[interpersonalDef insertPropertyDefinition:frequencyProperty atIndex:1];
+//    
+//    NSString *longTimePickerCellNibName;
+//    
+//    if([SCHelper is_iPad])
+//        longTimePickerCellNibName=[NSString stringWithString:@"LongTimePickerCell_iPad"];
+//    else
+//        longTimePickerCellNibName=[NSString stringWithString:@"LongTimePickerCell_iPhone"];
+//    
+//    
+//    
+//    //create the dictionary with the data bindings
+//    NSDictionary *durationDataBindings = [NSDictionary 
+//                                                dictionaryWithObjects:[NSArray arrayWithObjects:@"duration",@"duration", @"Duration", nil ] 
+//                                                forKeys:[NSArray arrayWithObjects:@"40" , @"41",@"42",   nil]]; // 40, 41,42 are the control tags
+//	
+//    //create the custom property definition for addtional time
+//    SCCustomPropertyDefinition *durationPropertyDef = [SCCustomPropertyDefinition definitionWithName:@"Duration" withuiElementNibName:longTimePickerCellNibName  withObjectBindings:durationDataBindings];	
+//    
+//    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+//    durationPropertyDef.autoValidate=FALSE;
+//    
+//       
+//    [interpersonalDef insertPropertyDefinition:durationPropertyDef atIndex:2];
     
 //    SCCustomPropertyDefinition *titleProperty = [SCCustomPropertyDefinition definitionWithName:@"Time of Day" withuiElementClass:[ TimeOfDayPickerCell class] withObjectBindings:nil];
 //	[interpersonalDef insertPropertyDefinition:titleProperty atIndex:3];

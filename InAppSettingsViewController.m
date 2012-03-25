@@ -2629,7 +2629,7 @@ if(sourceArray.count>1)
                 
                filteredArray= [fetchedObjects filteredArrayUsingPredicate:checkIfRecordIDExists];
                 
-                if (filteredArray.count==0 &&CFStringGetLength(recordRefFirstName)>0&&CFStringGetLength(recordRefLastName)>0) 
+                if (filteredArray.count==0 &&recordRefFirstName && CFStringGetLength(recordRefFirstName)>0&&recordRefLastName && CFStringGetLength(recordRefLastName)>0) 
                 {
                     
                     ClinicianEntity *clinician=[[ClinicianEntity alloc]initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];

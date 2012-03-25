@@ -26,7 +26,7 @@
 #import "EncryptedSCTextViewCell.h"
 #import "MySource.h"
 #import "PTABGroup.h"
-
+#import "ClientsSelectionCell.h"
 
 
 @implementation CliniciansViewController_Shared
@@ -547,7 +547,7 @@
     licenseSelectionAttribs.allowDeletingItems = YES;
     licenseSelectionAttribs.allowMovingItems = YES;
     licenseSelectionAttribs.allowEditingItems = YES;
-    licenseSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define licneses)"];
+    licenseSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define licenses)"];
     licenseSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new License"];
     licenseNamePropertyDef.attributes = licenseSelectionAttribs;
 	
@@ -796,20 +796,20 @@
     
     orientationDescPropertyDef.title=@"Description";
      
-    /****************************************************************************************/
-    /*	BEGIN Class Definition and attributes for the Client Entity */
-    /****************************************************************************************/ 
-
-   //get the client setup from the clients View Controller Shared
-    
-    ClientsViewController_Shared *clientsViewController_Shared =[[ClientsViewController_Shared alloc]init];
-    
-    [clientsViewController_Shared setupTheClientsViewModelUsingSTV];  
-
-    /****************************************************************************************/
-    /*	END of Class Definition and attributes for the Client Entity */
-    /****************************************************************************************/
-    /*the client def will be used in the joined referral table */
+//    /****************************************************************************************/
+//    /*	BEGIN Class Definition and attributes for the Client Entity */
+//    /****************************************************************************************/ 
+//
+//   //get the client setup from the clients View Controller Shared
+//    
+//    ClientsViewController_Shared *clientsViewController_Shared =[[ClientsViewController_Shared alloc]init];
+//    
+//    [clientsViewController_Shared setupTheClientsViewModelUsingSTV];  
+//
+//    /****************************************************************************************/
+//    /*	END of Class Definition and attributes for the Client Entity */
+//    /****************************************************************************************/
+//    /*the client def will be used in the joined referral table */
 
  
     /****************************************************************************************/
@@ -824,6 +824,42 @@
     
     //Do some property definition customization for the referralDef Entity
     
+    NSInteger indexOfClientProperty=(NSInteger )[referralDef indexOfPropertyDefinitionWithName:@"client"];
+    [referralDef removePropertyDefinitionAtIndex:indexOfClientProperty];
+    
+    
+    /****************************************************************************************/
+    /*	BEGIN Class Definition and attributes for the Client Entity */
+    /****************************************************************************************/ 
+    
+    //get the client setup from the clients View Controller Shared
+    // Add a custom property that represents a custom cells for the description defined TextFieldAndLableCell.xib
+	
+    //create the dictionary with the data bindings
+    NSDictionary *clientDataBindings = [NSDictionary 
+                                        dictionaryWithObjects:[NSArray arrayWithObject:@"client"] 
+                                        forKeys:[NSArray arrayWithObject:@"1" ]]; // 1 are the control tags
+	
+    //create the custom property definition
+    SCCustomPropertyDefinition *clientDataProperty = [SCCustomPropertyDefinition definitionWithName:@"CLientData"
+                                                                                 withuiElementClass:[ClientsSelectionCell class] withObjectBindings:clientDataBindings];
+	
+    
+    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+    clientDataProperty.autoValidate=FALSE;
+    
+    
+    
+    
+    
+    /****************************************************************************************/
+    /*	END of Class Definition and attributes for the Client Entity */
+    /****************************************************************************************/
+    
+    //insert the custom property definition into the clientData class at index 
+    [referralDef insertPropertyDefinition:clientDataProperty atIndex:0];
+    
+
     //Create the property definition for the referralDate property in the referralDef Class
     SCPropertyDefinition *referralDatePropertyDef = [referralDef propertyDefinitionWithName:@"referralDate"];
      
@@ -837,8 +873,15 @@
     //create a property definition for the notes property in the referral class definition
     SCPropertyDefinition *referralNotesPropertyDef = [referralDef propertyDefinitionWithName:@"notes"];
     
-    //set the referralNotes property definition type to a Text View Cell
-    referralNotesPropertyDef.type = SCPropertyTypeTextView;
+    referralNotesPropertyDef.type=SCPropertyTypeCustom;
+    referralNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    
+    NSDictionary *encryReferralNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    
+    
+    referralNotesPropertyDef.objectBindings=encryReferralNotesTVCellKeyBindingsDic;
+    referralNotesPropertyDef.title=@"Notes";
+    referralNotesPropertyDef.autoValidate=NO;
     
     //Create the property definition for the referralInOrOut property in the referralDef class
     SCPropertyDefinition *referralInOrOutPropertyDef = [referralDef propertyDefinitionWithName:@"referralInOrOut"];
@@ -847,9 +890,9 @@
     referralInOrOutPropertyDef.type = SCPropertyTypeSegmented;
     
     //set the segmented attributes for the referralInOrOut property definition 
-    referralInOrOutPropertyDef.attributes = [SCSegmentedAttributes attributesWithSegmentTitlesArray:[NSArray arrayWithObjects:@"Referred To", @"Referred From" , nil]];
+    referralInOrOutPropertyDef.attributes = [SCSegmentedAttributes attributesWithSegmentTitlesArray:[NSArray arrayWithObjects:@"IN to Me", @"OUT to Clinician" , nil]];
     //override the auto title generation for the referralInOrOut property definition and set it to a custom title
-    referralInOrOutPropertyDef.title=@"Referal Info";
+    referralInOrOutPropertyDef.title=@"Referal";
     
     //set the order attributes name defined in the Referral Entity
     referralDef.orderAttributeName=@"order";
@@ -858,28 +901,28 @@
     //create an object selection for the client relationship in the referral Entity 
     
     //create a property definition
-    SCPropertyDefinition *clientReferredPropertyDef = [referralDef propertyDefinitionWithName:@"client"];
-    
+//    SCPropertyDefinition *clientReferredPropertyDef = [referralDef propertyDefinitionWithName:@"client"];
+//    
     //set the title property name
     referralDef.titlePropertyName=@"client.clientIDCode";
-    
-    //set the property definition type to objects selection
-	clientReferredPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *clientReferredSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:clientsViewController_Shared.clientDef allowMultipleSelection:NO allowNoSelection:NO];
-    
-    //set some addtional attributes                                             
-    clientReferredSelectionAttribs.allowAddingItems = YES;
-    clientReferredSelectionAttribs.allowDeletingItems = NO;
-    clientReferredSelectionAttribs.allowMovingItems = YES;
-    clientReferredSelectionAttribs.allowEditingItems = YES;
-
-    
- 
-    //add an "Add New" element to appear when user clicks edit
-    clientReferredSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Client"];
-    
-    //add the selection attributes to the property definition
-    clientReferredPropertyDef.attributes = clientReferredSelectionAttribs;
+    referralDef.keyPropertyName=@"referralDate";
+//    //set the property definition type to objects selection
+//	clientReferredPropertyDef.type = SCPropertyTypeObjectSelection;
+//    SCObjectSelectionAttributes *clientReferredSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:clientsViewController_Shared.clientDef allowMultipleSelection:NO allowNoSelection:NO];
+//    
+//    //set some addtional attributes                                             
+//    clientReferredSelectionAttribs.allowAddingItems = YES;
+//    clientReferredSelectionAttribs.allowDeletingItems = NO;
+//    clientReferredSelectionAttribs.allowMovingItems = YES;
+//    clientReferredSelectionAttribs.allowEditingItems = YES;
+//
+//    
+// 
+//    //add an "Add New" element to appear when user clicks edit
+//    clientReferredSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Client"];
+//    
+//    //add the selection attributes to the property definition
+//    clientReferredPropertyDef.attributes = clientReferredSelectionAttribs;
     
     /****************************************************************************************/
     /*	END of Class Definition and attributes for the Referral Entity */
@@ -1818,6 +1861,7 @@
             }
         }
     }
+
     if (tableViewModel.tag==4) 
     {
         
@@ -2001,6 +2045,10 @@
                 [textView becomeFirstResponder];
                 [textView resignFirstResponder];
             }
+            
+            NSLog(@"cell class is %@",[cell class]);
+                       
+            
             
         }
         default:
@@ -2205,6 +2253,47 @@
                         
                         cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateTimeDateFormatter stringFromDate:logDate],notes];
                     }
+                    if ([managedObject.entity.name isEqualToString:@"ReferralEntity"]) {
+                        //define and initialize a date formatter
+                        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                        
+                        //set the date format
+                        [dateFormatter setDateFormat:@"M/d/YYYY"];
+                        
+                        NSDate *referralDate=[managedObject valueForKey:@"referralDate"];
+                        NSString *clientIDCode=[managedObject valueForKeyPath:@"client.clientIDCode"];
+                        NSString *notes=[managedObject valueForKey:@"notes"];
+                        NSNumber *referralInfo=[managedObject valueForKey:@"referralInOrOut"];
+                    
+                        NSString *labelString=[NSString string];
+                      
+                        if (referralDate) {
+                            labelString=[[dateFormatter stringFromDate:referralDate] stringByAppendingString:@": "];
+                        }
+                        if (clientIDCode.length) {
+                            labelString=[labelString stringByAppendingFormat:@"%@", clientIDCode];
+                        }
+                        if (notes.length) {
+                            labelString=[labelString stringByAppendingFormat:@"; %@",notes];
+                        }
+                        if ([referralInfo isEqualToNumber:[NSNumber numberWithInteger:0]]) {
+                            cell.textLabel.textColor=[UIColor blueColor];
+                            labelString=[@"In" stringByAppendingFormat:@" %@",labelString];
+                        }
+                        else {
+                            labelString=[@"Out" stringByAppendingFormat:@" %@",labelString];
+                        }
+                        cell.textLabel.text=labelString;
+                        
+                        
+                        
+                        
+                        
+                    }
+
+                    
+                    
+                    
                 }
             }
         } 
@@ -2563,8 +2652,24 @@
                 }
                 
             }
-            
-            
+            SCTableViewCell *cellAtZero=(SCTableViewCell *)[section cellAtIndex:0];
+            if ([notesManagedObject.entity.name isEqualToString:@"ReferralEntity"]&&[cellAtZero isKindOfClass:[ClientsSelectionCell class]]) {
+                ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)cellAtZero;
+                SCDateCell *dateCell;
+                if ([notesCell isKindOfClass:[SCDateCell class]]) {
+                    dateCell=(SCDateCell *)notesCell;
+                }
+                if (clientSelectionCell.label.text.length && dateCell && dateCell.label.text.length) 
+                {
+                    valid=TRUE;
+                }
+                else 
+                {
+                    valid=FALSE;
+                }
+                
+            }
+
         }
         
         

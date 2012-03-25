@@ -521,20 +521,23 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
             break;
         case 3:
         {
-           
-                SCTableViewCell *cellOne=(SCTableViewCell *)[section cellAtIndex:0];        
-                NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]&& (cell.tag==1||cell.tag==2||cell.tag==3)  ) 
+            if (section.cellCount&&cell.boundObject) {
+                
+                
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
                     
                 {
-                    if ( ![SCHelper is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) {
+                    if ( ![SCHelper is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
+                    {
                         UIButton *button=(UIButton *)[cell viewWithTag:300];
                         [button setTitle:@"Call Number" forState:UIControlStateNormal];
                         
                     }
                     
                     NSLog(@"cell kind of class is %@",cell.class);
-                    if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
+                    if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]]) 
+                    {
                         EncryptedSCTextFieldCell *encryptedTextFieldCell=(EncryptedSCTextFieldCell *)cell;
                         
                         UITextField *textField=(UITextField *)encryptedTextFieldCell.textField;
@@ -543,7 +546,8 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                         
                     }
                     
-                    if ( [cell isKindOfClass:[SCTextFieldCell class]]) {
+                    if ( [cell isKindOfClass:[SCTextFieldCell class]]) 
+                    {
                         SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
                         
                         textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
@@ -559,19 +563,19 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                     UIButton *button=(UIButton *)[cell viewWithTag:300];
                     [button setTitle:@"Clear Discontinued Date" forState:UIControlStateNormal];
                 }
-            NSLog(@"cell kind of class is %@",cell.class);
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]&&![SCHelper is_iPad]) 
+                NSLog(@"cell kind of class is %@",cell.class);
+                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]) 
                     
                 {
                     
                     SCNumericTextFieldCell *textFieldCell=(SCNumericTextFieldCell *)cell;
                     
                     textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
-                
+                    
                 }
-            
-            
+            }
         }
+            break;
             break;
         case 4:
         {

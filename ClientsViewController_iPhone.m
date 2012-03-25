@@ -185,7 +185,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     self.tableModel.autoAssignDataSourceForDetailModels=TRUE;
     
     self.tableModel.delegate=self;
-        
+
     if([SCHelper is_iPad]){
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
@@ -602,19 +602,23 @@ NSLog(@"table model class %@",[tableViewModel class]);
             break;
         case 3:
         {
-            SCTableViewCell *cellOne=(SCTableViewCell *)[section cellAtIndex:0];        
-            NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
-            if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]&& (cell.tag==1||cell.tag==2||cell.tag==3)  ) 
+            if (section.cellCount&&cell.boundObject) {
+           
+                    
+            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+            if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
                 
             {
-                if ( ![SCHelper is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) {
+                if ( ![SCHelper is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
+                {
                     UIButton *button=(UIButton *)[cell viewWithTag:300];
                     [button setTitle:@"Call Number" forState:UIControlStateNormal];
                     
                 }
                 
                 NSLog(@"cell kind of class is %@",cell.class);
-                if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
+                if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]]) 
+                {
                     EncryptedSCTextFieldCell *encryptedTextFieldCell=(EncryptedSCTextFieldCell *)cell;
                     
                     UITextField *textField=(UITextField *)encryptedTextFieldCell.textField;
@@ -623,7 +627,8 @@ NSLog(@"table model class %@",[tableViewModel class]);
                     
                 }
                 
-                if ( [cell isKindOfClass:[SCTextFieldCell class]]) {
+                if ( [cell isKindOfClass:[SCTextFieldCell class]]) 
+                {
                     SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
                     
                     textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
@@ -649,7 +654,7 @@ NSLog(@"table model class %@",[tableViewModel class]);
                 textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
                 
             }
-
+            }
         }
             break;
         case 4:
