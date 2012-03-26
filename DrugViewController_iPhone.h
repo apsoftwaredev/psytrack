@@ -28,7 +28,8 @@
     UITableView *tableView;
     
 	SCArrayOfObjectsModel *tableModel;
- 
+    NSString *drugApplNo;
+    NSString *drugProductNo;
     BOOL isInDetailSubview;
     DrugNameObjectSelectionCell *drugObjectSelectionCell_;
     UIViewController *sendingViewController;
@@ -74,7 +75,7 @@
 -(IBAction)flashCheckingLabel:(id)sender;
 
 
--(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(DrugNameObjectSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController;
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(DrugNameObjectSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController applNo:(NSString *)applicationNumber productNo:(NSString *)productNumber;
 -(void)doneButtonTapped;
 -(void)cancelButtonTapped;
 @end

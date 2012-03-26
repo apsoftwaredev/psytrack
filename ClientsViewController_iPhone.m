@@ -23,7 +23,7 @@
 #import "PTTEncryption.h"
 #import "EncryptedSCTextFieldCell.h"
 #import "EncryptedSCTextViewCell.h"
-
+#import "DrugNameObjectSelectionCell.h"
 
 @implementation ClientsViewController_iPhone
 @synthesize searchBar;
@@ -1226,7 +1226,21 @@ NSLog(@"table model class %@",[tableViewModel class]);
         }
     }
     
-    
+    if (tableViewModel.tag==3&&[cell isKindOfClass:[DrugNameObjectSelectionCell class]]) {
+        DrugNameObjectSelectionCell *drugNameObjectSelectionCell=(DrugNameObjectSelectionCell *)cell;
+        
+        if (drugNameObjectSelectionCell.drugProduct) {
+            SCTableViewCell *drugNameCell=(SCTableViewCell*)[tableViewModel cellAfterCell:cell rewindIfLastCell:NO];
+            
+            if ([drugNameCell isKindOfClass:[SCTextFieldCell class]] ) {
+                SCTextFieldCell *textFieldCell=(SCTextFieldCell *)drugNameCell;
+                textFieldCell.textField.text=drugNameObjectSelectionCell.drugProduct.drugName;
+                
+            }
+                                                             
+        }
+        
+    }
     if (tableViewModel.tag==4){
         
         UIView *viewOne = [cell viewWithTag:14];
@@ -1695,6 +1709,48 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
         
     }
+    
+    if (tableViewModel.tag==3 &&index==0) {
+        
+        
+        if (section.cellCount) {
+            SCTableViewCell *cellOne=(SCTableViewCell *)[section cellAtIndex:1];
+            
+            NSManagedObject *cellOneBoundObject=(NSManagedObject *)cellOne.boundObject;
+            
+            NSLog(@"section bound object entity is %@",cellOneBoundObject);
+            NSLog(@"section bound object entity name is %@",cellOneBoundObject.entity.name);
+            if ([cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
+                
+                
+                section.footerTitle=@"Select the drug then add the current dosage in the Med Logs section.";
+            }
+            
+            
+        }
+    }
+    
+    if(section.footerTitle !=nil)
+    {
+        
+        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 100)];
+        UILabel *footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 100)];
+        footerLabel.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        footerLabel.numberOfLines=6;
+        footerLabel.lineBreakMode=UILineBreakModeWordWrap;
+        footerLabel.backgroundColor = [UIColor clearColor];
+        footerLabel.textColor = [UIColor whiteColor];
+        footerLabel.tag=60;
+        footerLabel.text=section.footerTitle;
+        footerLabel.textAlignment=UITextAlignmentCenter;
+        section.footerHeight=(CGFloat)100;
+        [containerView addSubview:footerLabel];
+        //        [footerLabel sizeToFit];
+        section.footerView = containerView;
+        
+    }
+
+    
 //    if (tableViewModel.tag==0) {
 //       
 //        

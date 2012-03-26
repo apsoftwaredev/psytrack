@@ -32,7 +32,7 @@
 - (void)willDisplay
 {
     
-    self.textLabel.text=@"Drug Name";
+    self.textLabel.text=@"Select Drug";
    
                
   
@@ -97,7 +97,16 @@
         drugViewControllerNibName=[NSString stringWithString:@"DrugViewController_iPhone"];
     
     
-    DrugViewController_iPhone *drugsViewContoller=[[DrugViewController_iPhone alloc]initWithNibName:drugViewControllerNibName bundle:[NSBundle mainBundle] isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController];
+    NSString *applicationNumber=[self.boundObject valueForKey:@"applNo"];
+    NSString *productNumber=[self.boundObject valueForKey:@"productNo"];
+    
+    
+    
+    
+   
+       
+    
+    DrugViewController_iPhone *drugsViewContoller=[[DrugViewController_iPhone alloc]initWithNibName:drugViewControllerNibName bundle:[NSBundle mainBundle] isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController applNo:(NSString *)applicationNumber productNo:(NSString *)productNumber];
     
        
     
@@ -107,13 +116,23 @@
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
             
+            
+            if(applicationNumber.length)
+            {
+                NSPredicate *predicate=[NSPredicate predicateWithFormat:@"applNo MATCHES %@",applicationNumber];
+                
+                objectSelectionSection.itemsPredicate=predicate;
+                [objectSelectionSection reloadBoundValues];
+                [drugsViewContoller.tableView reloadData];
+            }
+            
             if (drugProduct) {
                 
                 [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:drugProduct]]];
                 
                 
             } 
-            else {
+           
             
                 NSLog(@"self bound object is %@",self.boundObject);
                 NSString *drugName=[self.boundObject valueForKey:@"drugName"];
@@ -124,7 +143,7 @@
 
                 }
                                 
-            }
+            
             
             
             
@@ -288,6 +307,8 @@
             
             NSIndexPath *selfIndexPath=(NSIndexPath *) [self.ownerTableViewModel.modeledTableView indexPathForCell:self];
             [self.ownerTableViewModel valueChangedForRowAtIndexPath:selfIndexPath];
+            
+            
         }
         //         }
         //    }
@@ -311,9 +332,12 @@
     //    if((indexInt >= 0) &&(indexInt<=self.items.count+1)&&self.items.count>0){
     //        selectedObject = [self.items objectAtIndex:indexInt];
     
-    if (![drugProduct isDeleted]) {
+    if (drugProduct) {
         
         [self.boundObject setValue:drugProduct.drugName forKey:@"drugName"];
+        [self.boundObject setValue:drugProduct.applNo forKey:@"applNo"];
+         [self.boundObject setValue:drugProduct.productNo forKey:@"productNo"];
+        
     }
     else
     {

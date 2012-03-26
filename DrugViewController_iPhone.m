@@ -54,10 +54,12 @@
 
 
 
--(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(DrugNameObjectSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController{
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(DrugNameObjectSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController applNo:(NSString *)applicationNumber productNo:(NSString *)productNumber{
     
     self=[super initWithNibName:nibName bundle:bundle];
     
+    drugApplNo=applicationNumber;
+    drugProductNo=productNumber;
     
     isInDetailSubview=detailSubview;
     self.drugObjectSelectionCell=objectSelectionCell;
@@ -254,6 +256,9 @@
 //                                                         withClassDefinition:(SCClassDefinition *)classDefinition
 //                                                       useSCSelectionSection:(BOOL)_useSCSelectionSection];
 //        
+        
+        
+            
        tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withItems:drugsMutableArray withClassDefinition:drugDef useSCSelectionSection:YES];	
         
 //        [self.searchBar setSelectedScopeButtonIndex:1];
@@ -265,9 +270,11 @@
         [buttons addObject:doneButton];
         
         // create a spacer
-        UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
-                                       initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
-        [buttons addObject:editButton];
+        UIBarButtonItem* viewButton = [[UIBarButtonItem alloc]
+                                       initWithTitle:@"View" style:UIBarButtonItemStylePlain target:nil action:nil];
+        
+      
+        [buttons addObject:viewButton];
         
 //        [self editButtonItem];
         
@@ -289,6 +296,8 @@
         
         self.navigationItem.leftBarButtonItem=cancelButton;
         
+        //so you can tell that the it is in view mode
+        tableModel.allowMovingItems=YES;
         
     }
     else
@@ -296,11 +305,7 @@
         
        	tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withItems:drugsMutableArray withClassDefinition:drugDef];	
 	
-//        self.navigationItem.leftBarButtonItem = self.editButtonItem;
-//        self.tableModel.editButtonItem = self.navigationItem.leftBarButtonItem;
-////        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
-//        self.navigationItem.rightBarButtonItem = self.editButtonItem;
-//        self.tableModel.addButtonItem = self.navigationItem.rightBarButtonItem;
+        tableModel.allowMovingItems=NO;
         
     }
 
@@ -309,7 +314,7 @@
     
     tableModel.allowAddingItems=FALSE;
     tableModel.allowDeletingItems=FALSE;
-    tableModel.allowMovingItems=FALSE;
+    
     
     tableModel.autoAssignDelegateForDetailModels=TRUE;
     tableModel.autoAssignDataSourceForDetailModels=TRUE;
