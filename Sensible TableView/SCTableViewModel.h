@@ -1405,6 +1405,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope;
 	NSMutableSet *itemsSet;
 	BOOL sortItemsSetAscending;
 	NSString *searchPropertyName;
+  
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -1432,6 +1433,29 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope;
    withViewController:(UIViewController *)_viewController
    withItems:(NSMutableArray *)_items
    withClassDefinition:(SCClassDefinition *)classDefinition;
+
+/** 
+ Allocates and returns an initialized 'SCArrayOfObjectsModel' given a UITableView, UIViewController, 
+ and an array of objects.
+ 
+ @param _modeledTableView The UITableView to be bound to the model. 
+ @param _viewController The UIViewController to be bound to the model. _viewController must be
+ the view controller that contains the modeledTableView.
+ @param _items An array of objects that the model will use to generate its cells.
+ This array must be of type NSMutableArray, as it must support the model's add, delete, and
+ move operations. If you do not with to allow these operations on your array, you can either pass
+ an array using "[NSMutableArray arrayWithArray:myArray]", or you can disable the functionality
+ from the user interface by setting the allowAddingItems, allowDeletingItems, 
+ and allowMovingItems properties.
+ @param classDefinition The class definition of the class or entity of the objects in the objects array.
+ If the array contains more than one type of object, then their respective class definitions
+ must be added to the itemsClassDefinitions dictionary after initialization.
+ */
++ (id)tableViewModelWithTableView:(UITableView *)_modeledTableView
+               withViewController:(UIViewController *)_viewController
+                        withItems:(NSMutableArray *)_items
+              withClassDefinition:(SCClassDefinition *)classDefinition
+            useSCSelectionSection:(BOOL)_useSCSelectionSection;
 
 /** 
  Allocates and returns an initialized 'SCArrayOfObjectsModel' given a UITableView, UIViewController, 
@@ -1498,6 +1522,32 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope;
    withItems:(NSMutableArray *)_items
    withClassDefinition:(SCClassDefinition *)classDefinition;
    
+
+/** 
+ Returns an initialized 'SCArrayOfObjectsModel' given a UITableView, UIViewController, 
+ and an array of objects.
+ 
+ @param _modeledTableView The UITableView to be bound to the model. 
+ @param _viewController The UIViewController to be bound to the model. _viewController must be
+ the view controller that contains the modeledTableView.
+ @param _items An array of objects that the model will use to generate its cells.
+ This array must be of type NSMutableArray, as it must support the model's add, delete, and
+ move operations. If you do not with to allow these operations on your array, you can either pass
+ an array using "[NSMutableArray arrayWithArray:myArray]", or you can disable the functionality
+ from the user interface by setting the allowAddingItems, allowDeletingItems, 
+ and allowMovingItems properties.
+ @param classDefinition The class definition of the class or entity of the objects in the objects array.
+ If the array contains more than one type of object, then their respective class definitions
+ must be added to the itemsClassDefinitions dictionary after initialization.
+ */
+- (id)initWithTableView:(UITableView *)_modeledTableView
+     withViewController:(UIViewController *)_viewController
+              withItems:(NSMutableArray *)_items
+    withClassDefinition:(SCClassDefinition *)classDefinition
+useSCSelectionSection:(BOOL)_useSCSelectionSection;
+
+
+
 /** 
  Returns an initialized 'SCArrayOfObjectsModel' given a UITableView, UIViewController, 
  and a mutable set of objects. This method should only be used to create a model with the contents
@@ -1513,6 +1563,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope;
    withItemsSet:(NSMutableSet *)_itemsSet
    withClassDefinition:(SCClassDefinition *)classDefinition;
    
+
+
+
 #ifdef _COREDATADEFINES_H
 /** 
  Returns an initialized 'SCArrayOfObjectsModel' given a UITableView, UIViewController, 

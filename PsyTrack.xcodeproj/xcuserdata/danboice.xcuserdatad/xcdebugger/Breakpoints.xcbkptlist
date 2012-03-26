@@ -169,7 +169,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3299"
          endingLineNumber = "3299"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-evaluateWhichABViewControllerToShow"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -182,7 +182,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3287"
          endingLineNumber = "3287"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-evaluateWhichABViewControllerToShow"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -195,7 +195,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4202"
          endingLineNumber = "4202"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-newPersonViewController:didCompleteWithNewPerson:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -208,7 +208,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4201"
          endingLineNumber = "4201"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-newPersonViewController:didCompleteWithNewPerson:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -221,7 +221,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3484"
          endingLineNumber = "3484"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-evaluateWhichABViewControllerToShow"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -234,7 +234,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4580"
          endingLineNumber = "4580"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-alertView:clickedButtonAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -247,7 +247,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4582"
          endingLineNumber = "4582"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-alertView:clickedButtonAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -260,7 +260,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4324"
          endingLineNumber = "4324"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-newPersonViewController:didCompleteWithNewPerson:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -273,7 +273,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3491"
          endingLineNumber = "3491"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-evaluateWhichABViewControllerToShow"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -325,7 +325,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2543"
          endingLineNumber = "2543"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -338,7 +338,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2727"
          endingLineNumber = "2727"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -364,7 +364,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2443"
          endingLineNumber = "2443"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:detailViewWillAppearForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -377,7 +377,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3086"
          endingLineNumber = "3086"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:detailViewWillDisappearForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -416,7 +416,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2970"
          endingLineNumber = "2970"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModelDidEndEditing:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -429,7 +429,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2444"
          endingLineNumber = "2444"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:detailViewWillAppearForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -442,7 +442,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2441"
          endingLineNumber = "2441"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:detailViewWillAppearForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -494,7 +494,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2445"
          endingLineNumber = "2445"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:detailViewWillAppearForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -585,7 +585,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2724"
          endingLineNumber = "2724"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -598,7 +598,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "5196"
          endingLineNumber = "5196"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-abGroupsDoneButtonTapped:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -715,7 +715,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2442"
          endingLineNumber = "2442"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:detailViewWillAppearForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -806,7 +806,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4568"
          endingLineNumber = "4568"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-alertView:clickedButtonAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -832,7 +832,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4564"
          endingLineNumber = "4564"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-alertView:clickedButtonAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -858,7 +858,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3996"
          endingLineNumber = "3996"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-showPersonViewControllerForRecordID:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -871,7 +871,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3472"
          endingLineNumber = "3472"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-evaluateWhichABViewControllerToShow"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -884,7 +884,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3056"
          endingLineNumber = "3056"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:detailViewWillDisappearForSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -897,7 +897,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3072"
          endingLineNumber = "3072"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:detailViewDidDisappearForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -910,7 +910,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3978"
          endingLineNumber = "3978"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-showPersonViewControllerForRecordID:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -923,7 +923,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3355"
          endingLineNumber = "3355"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-evaluateWhichABViewControllerToShow"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -949,7 +949,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4006"
          endingLineNumber = "4006"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-showPersonViewControllerForRecordID:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -962,20 +962,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4821"
          endingLineNumber = "4821"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "DrugViewController_iPhone.m"
-         timestampString = "353256248.677264"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "220"
-         endingLineNumber = "220"
-         landmarkName = "-viewDidLoad"
+         landmarkName = "-resetABVariablesToNil"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -996,11 +983,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "353257575.1232"
+         timestampString = "354402631.189283"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "222"
-         endingLineNumber = "222"
+         startingLineNumber = "238"
+         endingLineNumber = "238"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1698,11 +1685,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354325245.718458"
+         timestampString = "354411613.97823"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1353"
-         endingLineNumber = "1353"
+         startingLineNumber = "1363"
+         endingLineNumber = "1363"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1711,11 +1698,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354325245.718458"
+         timestampString = "354411613.97823"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1341"
-         endingLineNumber = "1341"
+         startingLineNumber = "1351"
+         endingLineNumber = "1351"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1794,7 +1781,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2631"
          endingLineNumber = "2631"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1807,7 +1794,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2642"
          endingLineNumber = "2642"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1820,7 +1807,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2637"
          endingLineNumber = "2637"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1833,7 +1820,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2575"
          endingLineNumber = "2575"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1859,7 +1846,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4032"
          endingLineNumber = "4032"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkName = "-peoplePickerNavigationControllerDidCancel:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1997,11 +1984,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354304593.25271"
+         timestampString = "354412499.236765"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1461"
-         endingLineNumber = "1461"
+         startingLineNumber = "1472"
+         endingLineNumber = "1472"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2010,11 +1997,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354325245.718458"
+         timestampString = "354411613.97823"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1428"
-         endingLineNumber = "1428"
+         startingLineNumber = "1438"
+         endingLineNumber = "1438"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2023,11 +2010,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354325245.718458"
+         timestampString = "354411613.97823"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1436"
-         endingLineNumber = "1436"
+         startingLineNumber = "1446"
+         endingLineNumber = "1446"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2036,11 +2023,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354325245.718458"
+         timestampString = "354411613.97823"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1443"
-         endingLineNumber = "1443"
+         startingLineNumber = "1453"
+         endingLineNumber = "1453"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2049,11 +2036,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354325245.718458"
+         timestampString = "354411613.97823"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1444"
-         endingLineNumber = "1444"
+         startingLineNumber = "1454"
+         endingLineNumber = "1454"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2101,11 +2088,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354325245.718458"
+         timestampString = "354411613.97823"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1451"
-         endingLineNumber = "1451"
+         startingLineNumber = "1461"
+         endingLineNumber = "1461"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2114,11 +2101,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354293834.243654"
+         timestampString = "354411613.97823"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "496"
-         endingLineNumber = "496"
+         startingLineNumber = "499"
+         endingLineNumber = "499"
          landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2127,11 +2114,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354325245.718458"
+         timestampString = "354411613.97823"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1110"
-         endingLineNumber = "1110"
+         startingLineNumber = "1120"
+         endingLineNumber = "1120"
          landmarkName = "-tableViewModel:searchBarSelectedScopeButtonIndexDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2140,11 +2127,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354304593.25271"
+         timestampString = "354412499.236765"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1175"
-         endingLineNumber = "1175"
+         startingLineNumber = "1186"
+         endingLineNumber = "1186"
          landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2153,11 +2140,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354304593.25271"
+         timestampString = "354412499.236765"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1637"
-         endingLineNumber = "1637"
+         startingLineNumber = "1648"
+         endingLineNumber = "1648"
          landmarkName = "-tableViewModel:searchBarSelectedScopeButtonIndexDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2166,11 +2153,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
-         timestampString = "354303312.906451"
+         timestampString = "354411613.97823"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "522"
-         endingLineNumber = "522"
+         startingLineNumber = "525"
+         endingLineNumber = "525"
          landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2179,11 +2166,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354304593.25271"
+         timestampString = "354412499.236765"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1405"
-         endingLineNumber = "1405"
+         startingLineNumber = "1416"
+         endingLineNumber = "1416"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2192,11 +2179,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354304593.25271"
+         timestampString = "354412499.236765"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1275"
-         endingLineNumber = "1275"
+         startingLineNumber = "1286"
+         endingLineNumber = "1286"
          landmarkName = "-tableViewModel:willSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2205,11 +2192,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354304593.25271"
+         timestampString = "354412499.236765"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1158"
-         endingLineNumber = "1158"
+         startingLineNumber = "1169"
+         endingLineNumber = "1169"
          landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2218,11 +2205,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "354304593.25271"
+         timestampString = "354412499.236765"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1479"
-         endingLineNumber = "1479"
+         startingLineNumber = "1490"
+         endingLineNumber = "1490"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2445,6 +2432,175 @@
          startingLineNumber = "2051"
          endingLineNumber = "2051"
          landmarkName = "-tableViewModel:willSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Sensible TableView/SCTableViewModel.h"
+         timestampString = "354403678.833792"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1408"
+         endingLineNumber = "1408"
+         landmarkName = "@interface SCArrayOfObjectsModel"
+         landmarkType = "2">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Sensible TableView/SCTableViewModel.m"
+         timestampString = "354405235.682568"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1980"
+         endingLineNumber = "1980"
+         landmarkName = "+tableViewModelWithTableView:withViewController:withItems:withClassDefinition:useSCSelectionSection:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "354405801.270285"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "484"
+         endingLineNumber = "484"
+         landmarkName = "-tableViewModel:didSelectRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsRootViewController_iPad.m"
+         timestampString = "354411613.97823"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "495"
+         endingLineNumber = "495"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsRootViewController_iPad.m"
+         timestampString = "354411613.97823"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "401"
+         endingLineNumber = "401"
+         landmarkName = "-tableViewModel:detailModelCreatedForSectionAtIndex:detailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsRootViewController_iPad.m"
+         timestampString = "354408550.190174"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "190"
+         endingLineNumber = "190"
+         landmarkName = "-tableViewModel:detailViewWillAppearForSectionAtIndex:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsRootViewController_iPad.m"
+         timestampString = "354408634.891117"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "207"
+         endingLineNumber = "207"
+         landmarkName = "-tableViewModel:detailViewWillAppearForSectionAtIndex:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsRootViewController_iPad.m"
+         timestampString = "354409036.618983"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "199"
+         endingLineNumber = "199"
+         landmarkName = "-tableViewModel:detailViewWillAppearForSectionAtIndex:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsRootViewController_iPad.m"
+         timestampString = "354411159.339273"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "228"
+         endingLineNumber = "228"
+         landmarkName = "-tableViewModel:detailViewWillAppearForSectionAtIndex:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsRootViewController_iPad.m"
+         timestampString = "354411159.339273"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "230"
+         endingLineNumber = "230"
+         landmarkName = "-tableViewModel:detailViewWillAppearForSectionAtIndex:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsRootViewController_iPad.m"
+         timestampString = "354411159.339273"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "238"
+         endingLineNumber = "238"
+         landmarkName = "-tableViewModel:detailViewWillAppearForSectionAtIndex:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsRootViewController_iPad.m"
+         timestampString = "354411706.62768"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "355"
+         endingLineNumber = "355"
+         landmarkName = "-tableViewModel:detailViewWillAppearForRowAtIndexPath:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsRootViewController_iPad.m"
+         timestampString = "354411787.579385"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "356"
+         endingLineNumber = "356"
+         landmarkName = "-tableViewModel:detailViewWillAppearForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -20,7 +20,7 @@
 @interface ClientsSelectionCell : SCObjectSelectionCell {
 
 
-    __weak NSManagedObject *clientObject;
+     NSManagedObject *clientObject;
     BOOL hasChangedClients;
     NSDate *testDate;
 }
@@ -31,7 +31,7 @@
 @property (nonatomic, strong) NSDate *testDate;
 
 
-@property (nonatomic,weak)IBOutlet  NSManagedObject *clientObject;
+@property (nonatomic,strong)IBOutlet  NSManagedObject *clientObject;
 
 -(void)doneButtonTappedInDetailView:(NSObject *)selectedObject  withValue:(BOOL)hasValue;
 

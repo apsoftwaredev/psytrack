@@ -19,8 +19,8 @@
 #import "SCTableViewModel.h"
 #import "DrugViewController_Shared.h"
 #import "UIDownloadBar.h"
-
-
+#import "DrugNameObjectSelectionCell.h"
+#import "DrugProductEntity.h"
 @interface DrugViewController_iPhone : UIViewController <SCTableViewModelDelegate, SCTableViewCellDelegate,UIDownloadBarDelegate> {
     
     
@@ -29,6 +29,13 @@
     
 	SCArrayOfObjectsModel *tableModel;
  
+    BOOL isInDetailSubview;
+    DrugNameObjectSelectionCell *drugObjectSelectionCell_;
+    UIViewController *sendingViewController;
+  
+    NSManagedObject *drugCurrentlySelectedInReferringDetailview;
+    
+    
     DrugViewController_Shared *drugViewController_Shared;
     NSManagedObjectContext * drugsManagedObjectContext;
     UIDownloadBar *downloadBar_;
@@ -41,8 +48,10 @@
     NSMutableArray *drugsMutableArray;
     NSTimer *checkingTimer_;
     
+    DrugProductEntity *currentlySelectedDrug;
+    
 }
-
+@property (nonatomic, strong)  SCArrayOfObjectsModel *tableModel;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIDownloadBar *downloadBar;
@@ -55,11 +64,17 @@
 @property (nonatomic, strong) NSTimer *checkingTimer;
 
 
+@property (nonatomic, strong) DrugNameObjectSelectionCell *drugObjectSelectionCell;
+
 -(IBAction)downloadButtonTapped:(id)sender;
--(IBAction)CancelDownloadTapped:(id)sender;
+//-(IBAction)CancelDownloadTapped:(id)sender;
 - (CGFloat ) getLocalDrugFileSize;
 - (void) connectToRemoteDrugFile;
 -(IBAction)startCheckingForUpdate:(id)sender;
 -(IBAction)flashCheckingLabel:(id)sender;
 
+
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(DrugNameObjectSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController;
+-(void)doneButtonTapped;
+-(void)cancelButtonTapped;
 @end

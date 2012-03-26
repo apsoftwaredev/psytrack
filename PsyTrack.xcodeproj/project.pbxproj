@@ -274,6 +274,7 @@
 		E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */; };
 		E78480CA1518D7D800F48EA3 /* PhoneEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C91518D7D800F48EA3 /* PhoneEntity.m */; };
 		E78DA68C151F9AE9004ABF29 /* ReferralEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA68B151F9AE9004ABF29 /* ReferralEntity.m */; };
+		E78DA690151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA68F151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m */; };
 		E7912D0E151D332700E0609A /* DemographicProfileEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D0D151D332700E0609A /* DemographicProfileEntity.m */; };
 		E7912D17151D349E00E0609A /* MigrationHistoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D16151D349E00E0609A /* MigrationHistoryEntity.m */; };
 		E7912D1A151DF7DB00E0609A /* VitalsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D19151DF7DB00E0609A /* VitalsEntity.m */; };
@@ -672,6 +673,8 @@
 		E78480C91518D7D800F48EA3 /* PhoneEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneEntity.m; sourceTree = "<group>"; };
 		E78DA68A151F9AE9004ABF29 /* ReferralEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferralEntity.h; sourceTree = "<group>"; };
 		E78DA68B151F9AE9004ABF29 /* ReferralEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferralEntity.m; sourceTree = "<group>"; };
+		E78DA68E151FAC8A004ABF29 /* DrugNameObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugNameObjectSelectionCell.h; sourceTree = "<group>"; };
+		E78DA68F151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugNameObjectSelectionCell.m; sourceTree = "<group>"; };
 		E7912D0C151D332700E0609A /* DemographicProfileEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicProfileEntity.h; sourceTree = "<group>"; };
 		E7912D0D151D332700E0609A /* DemographicProfileEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicProfileEntity.m; sourceTree = "<group>"; };
 		E7912D15151D349E00E0609A /* MigrationHistoryEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MigrationHistoryEntity.h; sourceTree = "<group>"; };
@@ -1172,6 +1175,8 @@
 		37F7CECF15005EC900AD2C3A /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
+				E78DA68E151FAC8A004ABF29 /* DrugNameObjectSelectionCell.h */,
+				E78DA68F151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m */,
 				E70B9EFD15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.h */,
 				E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */,
 				376797F61500665D00D0639D /* ABGroupNameChangeCell.xib */,
@@ -1739,6 +1744,7 @@
 				E7912D1A151DF7DB00E0609A /* VitalsEntity.m in Sources */,
 				E7912D1D151E441200E0609A /* InterpersonalEntity.m in Sources */,
 				E78DA68C151F9AE9004ABF29 /* ReferralEntity.m in Sources */,
+				E78DA690151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

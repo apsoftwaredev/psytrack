@@ -1369,10 +1369,13 @@
 {
 	if( (self=[self initWithTableView:_modeledTableView withViewController:_viewController]) )
 	{
+    
 		self.items = _items;  // setter will generate sections
 	}
 	return self;
 }
+
+
 
 #ifndef ARC_ENABLED
 - (void)dealloc
@@ -1967,6 +1970,21 @@
 								withClassDefinition:classDefinition]);
 }
 
++ (id)tableViewModelWithTableView:(UITableView *)_modeledTableView
+               withViewController:(UIViewController *)_viewController
+                        withItems:(NSMutableArray *)_items
+              withClassDefinition:(SCClassDefinition *)classDefinition
+            useSCSelectionSection:(BOOL)_useSCSelectionSection
+{
+   
+	return SC_Autorelease([[[self class] alloc] initWithTableView:_modeledTableView withViewController:_viewController
+                                                        withItems:_items 
+                                              withClassDefinition:classDefinition
+                           useSCSelectionSection:_useSCSelectionSection
+                           ]);
+}
+
+
 #ifdef _COREDATADEFINES_H
 + (id)tableViewModelWithTableView:(UITableView *)_modeledTableView
 			   withViewController:(UIViewController *)_viewController
@@ -2043,6 +2061,29 @@ withEntityClassDefinition:(SCClassDefinition *)classDefinition
 	return self;
 }
 
+- (id)initWithTableView:(UITableView *)_modeledTableView
+	 withViewController:(UIViewController *)_viewController
+			  withItems:(NSMutableArray *)_items
+    withClassDefinition:(SCClassDefinition *)classDefinition 
+  useSCSelectionSection:(BOOL)_useSCSelectionSection{
+
+
+    if( (self=[self initWithTableView:_modeledTableView withViewController:_viewController]) )
+	{		
+		if(classDefinition)
+		{
+			[self.itemsClassDefinitions setValue:classDefinition forKey:classDefinition.className];
+		}
+		self.useSCObjectsSelectionSection=_useSCSelectionSection;
+        self.items = _items;  // setter will generate sections
+	}
+	return self;
+
+
+
+
+
+}
 - (id)initWithTableView:(UITableView *)_modeledTableView
 	 withViewController:(UIViewController *)_viewController
 		   withItemsSet:(NSMutableSet *)_itemsSet

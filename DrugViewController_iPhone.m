@@ -32,8 +32,8 @@
 @synthesize downloadCheckButton=downloadCheckButton_;
 @synthesize checkingTimer=checkingTimer_;
 @synthesize downloadBytesLabel=downloadBytesLabel_;
-
-
+@synthesize drugObjectSelectionCell=drugObjectSelectionCell_;
+@synthesize tableModel;
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -51,6 +51,23 @@
 //    return self;
 //    
 //} 
+
+
+
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(DrugNameObjectSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController{
+    
+    self=[super initWithNibName:nibName bundle:bundle];
+    
+    
+    isInDetailSubview=detailSubview;
+    self.drugObjectSelectionCell=objectSelectionCell;
+    
+    sendingViewController=viewController;
+    
+    
+    return self;
+    
+} 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Gracefully handle reloading the view controller after a memory warning
@@ -217,13 +234,76 @@
     } 
     
     // Instantiate the tabel model
-	tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withItems:drugsMutableArray withClassDefinition:drugDef];	
     
 //    tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self];    
 //    
 //    
 //    
 //    
+   
+    
+    
+    
+    if (isInDetailSubview) {
+        
+//         NSPredicate *currentClientsPredicate=[NSPredicate predicateWithFormat:@"applNo MATCHES %@",drugObjectSelectionCell_.d];
+//        
+//        tableModel=[[SCArrayOfObjectsModel alloc]tableViewModelWithTableView:(UITableView *)self.tableView
+//                                                          withViewController:(UIViewController *)self
+//                                                                   withItems:(NSMutableArray *)drugsMutableArray
+//                                                         withClassDefinition:(SCClassDefinition *)classDefinition
+//                                                       useSCSelectionSection:(BOOL)_useSCSelectionSection];
+//        
+       tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withItems:drugsMutableArray withClassDefinition:drugDef useSCSelectionSection:YES];	
+        
+//        [self.searchBar setSelectedScopeButtonIndex:1];
+       
+        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
+        
+        
+        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped)];
+        [buttons addObject:doneButton];
+        
+        // create a spacer
+        UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
+        [buttons addObject:editButton];
+        
+//        [self editButtonItem];
+        
+        
+        // create a standard "add" button
+//        UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
+//                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
+//        addButton.style = UIBarButtonItemStyleBordered;
+//        [buttons addObject:addButton];
+//        
+        
+        
+        // stick the buttons in the toolbar
+        self.navigationItem.rightBarButtonItems=buttons;
+        self.tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
+        
+        
+        UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
+        
+        self.navigationItem.leftBarButtonItem=cancelButton;
+        
+        
+    }
+    else
+    {
+        
+       	tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withItems:drugsMutableArray withClassDefinition:drugDef];	
+	
+//        self.navigationItem.leftBarButtonItem = self.editButtonItem;
+//        self.tableModel.editButtonItem = self.navigationItem.leftBarButtonItem;
+////        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+//        self.navigationItem.rightBarButtonItem = self.editButtonItem;
+//        self.tableModel.addButtonItem = self.navigationItem.rightBarButtonItem;
+        
+    }
+
     tableModel.searchBar = self.searchBar;
 	tableModel.searchPropertyName = @"drugName;activeIngredient";
     
@@ -231,8 +311,9 @@
     tableModel.allowDeletingItems=FALSE;
     tableModel.allowMovingItems=FALSE;
     
-   tableModel.autoAssignDelegateForDetailModels=TRUE;
-   tableModel.autoAssignDataSourceForDetailModels=TRUE;
+    tableModel.autoAssignDelegateForDetailModels=TRUE;
+    tableModel.autoAssignDataSourceForDetailModels=TRUE;
+    
 //    
 //     // Initialize tableModel
 //       
@@ -374,6 +455,107 @@
     [self connectToRemoteDrugFile];
 
 
+}
+
+-(void)cancelButtonTapped{
+    
+    NSLog(@"cancel button Tapped");
+    
+    NSLog(@"parent controller %@",[super parentViewController]);
+    
+    if(self.navigationController)
+	{
+		// check if self is the rootViewController
+		if([self.navigationController.viewControllers objectAtIndex:0] == self)
+		{
+			[self dismissModalViewControllerAnimated:YES];
+		}
+		else
+			[self.navigationController popViewControllerAnimated:YES];
+	}
+	else
+		[self dismissModalViewControllerAnimated:YES];
+    
+    
+}
+
+-(void)doneButtonTapped{
+    
+    NSLog(@"done Button tapped");
+    if (isInDetailSubview) {
+        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:0];
+        NSLog(@"section class is %@",[section class]);
+        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+            SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
+            
+            //            NSLog(@"test valie changed at index with cell index selected %i",[objectsSelectionSection.selectedItemIndex integerValue]) ;
+            //            if (clientObjectSelectionCell) {
+            
+            //                NSLog(@"objectsSelectionSection.selectedItemsIndexes.count %i",objectsSelectionSection.items.count);
+            
+            //                if ([objectsSelectionSection.selectedItemIndex integerValue]>=0&&[objectsSelectionSection.selectedItemIndex integerValue]<=objectsSelectionSection.items.count) {
+            //                    
+            NSIndexPath *cellIndexPath=objectsSelectionSection.selectedCellIndexPath;
+            
+            SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:cellIndexPath];
+            NSLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
+            
+            
+            
+            NSLog(@"selected item index%@",objectsSelectionSection.selectedItemIndex);
+            
+            if (objectsSelectionSection.cellCount>0) {
+                if (currentlySelectedDrug) {
+                    drugObjectSelectionCell_.drugProduct= currentlySelectedDrug;
+                    [drugObjectSelectionCell_  doneButtonTappedInDetailView:currentlySelectedDrug withValue:TRUE];
+                    
+                    
+                }
+                
+            }          
+            
+            
+            
+            
+            //            }
+            
+            //                    clientObjectSelectionCell.hasChangedClients=TRUE;
+            //                }
+            //                else{
+            //                
+            //                    [clientObjectSelectionCell doneButtonTappedInDetailView:nil withValue:NO];
+            //                
+            //                }
+            
+            
+            [self cancelButtonTapped];
+            
+        } 
+    }
+    //        else
+    //        {
+    //            clientObjectSelectionCell.items=[NSArray array];
+    //            [clientObjectSelectionCell doneButtonTappedInDetailView:nil withValue:NO];
+    //        }
+    //
+    //        
+    //        if(self.navigationController)
+    //        {
+    //            // check if self is the rootViewController
+    //            if([self.navigationController.viewControllers objectAtIndex:0] == self)
+    //            {
+    //                [self dismissModalViewControllerAnimated:YES];
+    //            }
+    //            else
+    //                [self.navigationController popViewControllerAnimated:YES];
+    //        }
+    //        else
+    //            [self dismissModalViewControllerAnimated:YES];
+    //        
+    //    }
+    //
+    
+    
 }
 
 -(IBAction)flashCheckingLabel:(id)sender{
@@ -893,11 +1075,25 @@
     }
 }
 
-
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    
+    SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+    if (tableViewModel.tag==0&&[section isKindOfClass:[SCObjectSelectionSection class]]) {
+        
+        //        SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
+        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+        
+        currentlySelectedDrug=(DrugProductEntity *)cell.boundObject;
+        NSLog(@"currently selected client is %@",currentlySelectedDrug);
+        
+        SCObjectSelectionSection *selectionSection=(SCObjectSelectionSection *)section;
+        
+        [selectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
+        return;
+
+    }
+  
     
     SCTableViewCell *cell =(SCTableViewCell *) [tableViewModel cellAtIndexPath:indexPath];
     

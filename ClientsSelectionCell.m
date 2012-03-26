@@ -32,7 +32,7 @@
 
     [super performInitialization];
     
-    self.delegate=self;
+    
      
     
 //    self.allowAddingItems = YES;

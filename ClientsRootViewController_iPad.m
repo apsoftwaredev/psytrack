@@ -189,13 +189,66 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
     
     if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
-
-    [detailTableViewModel.modeledTableView setBackgroundView:nil];
-    [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-
-
+        
+        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
     }
+    NSLog(@"tabel veiw modoel %i",tableViewModel.tag);
+    
+    if (tableViewModel.tag==4 ) {
+        
+        //this is so the second section will not appear if it is the second log, because that info does not pertain
+        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
+        NSLog(@"section cell count is %i",section.cellCount);
+        NSLog(@"detailtableview model sectioncount %i",detailTableViewModel.sectionCount);
+//        BOOL sectionContainsMedLog=FALSE;
+        
+        if (tableViewModel.sectionCount) {
+//            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0]
+            ;
+//            if (detailSectionZero.cellCount) {
+//                
+//                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
+//                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
+////                
+//                if (cellManagedObject&& [cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"])
+//                {
+//                    sectionContainsMedLog=TRUE;
+//                }
+//                
+//            }
+            SCTableViewCell *cell=tableViewModel.activeCell;
+            
+            
+                
+            
+            
+        
+            if (!cell ||([section indexForCell:cell]==0)) {
+                
+                SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
+                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
+                
+                
+                
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
+                NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
+                NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
+                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
+                    
+                    [detailTableViewModel removeSectionAtIndex:1];
+                    
+                    
+                }
+                else {
+                    [detailTableViewModel.modeledTableView reloadData];
+                }
+            }
+        }  
+    }       
+    
+
 }
 
 -(void) tableViewModel:(SCTableViewModel *)tableViewModel customButtonTapped:(UIButton *)button forRowWithIndexPath:(NSIndexPath *)indexPath{
@@ -239,7 +292,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
         
         if ([cellManagedObject.entity.name isEqualToString:@"MedicationEntity"]){
             
-            SCDateCell *discontinuedCell =(SCDateCell *) [section cellAtIndex:2];
+            SCDateCell *discontinuedCell =(SCDateCell *) [section cellAtIndex:3];
             
             
             NSLog(@"custom button tapped discontinued cell text is %@",discontinuedCell.textLabel.text);
@@ -277,61 +330,54 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
-    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+    if (tableViewModel.sectionCount) {
+        //            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0]
+        ;
+        //            if (detailSectionZero.cellCount) {
+        //                
+        //                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
+        //                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
+        ////                
+        //                if (cellManagedObject&& [cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"])
+        //                {
+        //                    sectionContainsMedLog=TRUE;
+        //                }
+        //                
+        //            }
+        SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];;
         
+        
+        
+        
+        
+        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+        
+        NSLog(@"index of cell is %i",[section indexForCell:cell]);
+        if (!cell ||(indexPath.row==0)) {
+            
+            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
+            SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
+            
+            
+            
+            NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
+            NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
+            NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
+            if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
+                
+                [detailTableViewModel removeSectionAtIndex:1];
+                
+                
+            }
+            else {
+                [detailTableViewModel.modeledTableView reloadData];
+            }
+        }
+    }  
+      
 
-    [detailTableViewModel.modeledTableView setBackgroundView:nil];
-    [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-    }
-    NSLog(@"tabel veiw modoel %i",tableViewModel.tag);
     
-//    if (tableViewModel.tag==4 ) {
-//        
-//        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-//        NSLog(@"section cell count is %i",section.cellCount);
-//        NSLog(@"detailtableview model sectioncount %i",detailTableViewModel.sectionCount);
-//        BOOL sectionContainsMedLog=FALSE;
-//        
-//        if (detailTableViewModel.sectionCount) {
-//            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0]
-//            ;
-//            if (detailSectionZero.cellCount) {
-//            
-//                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-//                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-//                
-//                if (cellManagedObject&& [cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"])
-//                {
-//                    sectionContainsMedLog=TRUE;
-//                }
-//                
-//            }
-//        
-//        
-//            if (sectionContainsMedLog && section.cellCount>1 && detailTableViewModel.sectionCount) {
-//                
-//                SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
-//                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-//                
-//                
-//                
-//                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-//                NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-//                NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
-//                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
-//                    
-//                    [detailTableViewModel removeSectionAtIndex:1];
-//                    
-//                    
-//                }
-//                
-//            }
-//        }  
-//    }       
-    
-
-
+   
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
@@ -352,50 +398,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
     }
     NSLog(@"detail model created for row at index detailtable model tag is %i", detailTableViewModel.tag);
     
-    if (tableViewModel.tag==4 ) {
-        
-        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
-        NSLog(@"section cell count is %i",section.cellCount);
-        NSLog(@"detailtableview model sectioncount %i",detailTableViewModel.sectionCount);
-        BOOL sectionContainsMedLog=FALSE;
-        
-        if (detailTableViewModel.sectionCount) {
-            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0]
-            ;
-            if (detailSectionZero.cellCount) {
-                
-                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-                
-                if (cellManagedObject&& [cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"])
-                {
-                    sectionContainsMedLog=TRUE;
-                }
-                
-            }
-            
-            
-            if (sectionContainsMedLog && section.cellCount>1 && detailTableViewModel.sectionCount) {
-                
-                SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
-                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-                
-                
-                
-                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-                NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-                NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
-                    
-                    [detailTableViewModel removeSectionAtIndex:1];
-                    
-                    
-                }
-                
-            }
-        }  
-    }       
-
+    
     
 }
 
@@ -532,7 +535,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                     {
                         UIButton *button=(UIButton *)[cell viewWithTag:300];
                         [button setTitle:@"Call Number" forState:UIControlStateNormal];
-                        
+                        break;
                     }
                     
                     NSLog(@"cell kind of class is %@",cell.class);
@@ -543,7 +546,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                         UITextField *textField=(UITextField *)encryptedTextFieldCell.textField;
                         
                         textField.keyboardType=UIKeyboardTypeNumberPad;
-                        
+                        break; 
                     }
                     
                     if ( [cell isKindOfClass:[SCTextFieldCell class]]) 
@@ -551,17 +554,19 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                         SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
                         
                         textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
-                        
+                        break; 
                     }
-                    
+                   
                 }
                 
-                if (cell.tag==3&&cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
+                if (cell.tag==4&&cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
                     
                 {
                     
                     UIButton *button=(UIButton *)[cell viewWithTag:300];
                     [button setTitle:@"Clear Discontinued Date" forState:UIControlStateNormal];
+                
+                    break;
                 }
                 NSLog(@"cell kind of class is %@",cell.class);
                 if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]) 
@@ -571,21 +576,22 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                     SCNumericTextFieldCell *textFieldCell=(SCNumericTextFieldCell *)cell;
                     
                     textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
-                    
+                    break;
                 }
             }
         }
-            break;
+           
             break;
         case 4:
         {
             
             
-            if (section.cellCount) {
-                SCTableViewCell *cellOne=(SCTableViewCell *)[section cellAtIndex:0];
-                NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
+            if (section.cellCount&&cell.boundObject) {
+
+              
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                 if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"])
-                {
+                    {
                     UIView *sliderView = [cell viewWithTag:14];
                     
                     if(cell.tag==3&&[sliderView isKindOfClass:[UISlider class]])
@@ -600,6 +606,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                         [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
                         [sliderOne setMinimumValue:-1.0];
                         [sliderOne setMaximumValue:0];
+                        break;
                     }
                     
                     if(cell.tag==4&&[sliderView isKindOfClass:[UISlider class]])
@@ -616,8 +623,9 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                         slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];        
                         [sliderTwo setMinimumValue:0.0];
                         [sliderTwo setMaximumValue: 1.0];
-                        
-                    }  
+                        break;
+                    } 
+                break;
                 }
                 NSLog(@"entity name is %@",cellManagedObject.entity.name);
                 if (cell.tag==1 && cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"LanguageSpokenEntity"])
@@ -628,10 +636,12 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                         
                         UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
                         fluencyLevelLabel.text=@"Fluency Level:";
-                        
+                        break;
                     }
+                    break;
                 }
             }
+        
             
         }
             break;
@@ -659,17 +669,17 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                             
                             UILabel *satisfactionLevelLabel =(UILabel *)[cell viewWithTag:71];
                             satisfactionLevelLabel.text=@"Satisfaction With Drug:";
-                            
+                            break; 
                         }
                         
                         
                     }
                     
                     
-                    
+                    break;
                 }
                 
-                
+            
                 
             }
             

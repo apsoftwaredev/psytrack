@@ -23,6 +23,8 @@
 #import "EncryptedSCTextFieldCell.h"
 #import "EncryptedSCDateCell.h"
 #import "EncryptedSCTextViewCell.h"
+#import "DrugNameObjectSelectionCell.h"
+
 @implementation ClientsViewController_Shared
 @synthesize clientDef;
 
@@ -275,8 +277,42 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     
+    //create a property definition for the drugName property in the medicationDef class
+    SCPropertyDefinition *drugNamePropertyDef = [medicationDef propertyDefinitionWithName:@"drugName"];
+    
+    //add a custom title
+    drugNamePropertyDef.title = @"Drug Name";
+    
+    /****************************************************************************************/
+    /*	BEGIN Class Definition and attributes for the Client Entity */
+    /****************************************************************************************/ 
+    
+    //get the client setup from the clients View Controller Shared
+    // Add a custom property that represents a custom cells for the description defined TextFieldAndLableCell.xib
+	
+    //create the dictionary with the data bindings
+    NSDictionary *drugNameDataBindings = [NSDictionary 
+                                        dictionaryWithObjects:[NSArray arrayWithObject:@"drugName"] 
+                                        forKeys:[NSArray arrayWithObject:@"1" ]]; // 1 are the control tags
+	
+    //create the custom property definition
+    SCCustomPropertyDefinition *drugNameDataProperty = [SCCustomPropertyDefinition definitionWithName:@"DrugNameData"
+                                                                                 withuiElementClass:[DrugNameObjectSelectionCell class] withObjectBindings:drugNameDataBindings];
+	
+    
+    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+    drugNameDataProperty.autoValidate=FALSE;
     
     
+    
+    
+    
+    /****************************************************************************************/
+    /*	END of Class Definition and attributes for the Client Entity */
+    /****************************************************************************************/
+    
+    //insert the custom property definition into the clientData class at index 
+    [medicationDef insertPropertyDefinition:drugNameDataProperty atIndex:0];
     
     SCPropertyDefinition *medicationsPropertyDef = [self.clientDef propertyDefinitionWithName:@"medicationHistory"];
     medicationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:medicationDef allowAddingItems:TRUE
@@ -317,7 +353,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                         displayDatePickerInDetailView:NO];
     
     SCCustomPropertyDefinition *clearDiscontinuedButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"clearDiscontinued" withuiElementClass:[ButtonCell class] withObjectBindings:nil];
-    [medicationDef insertPropertyDefinition:clearDiscontinuedButtonProperty atIndex:3];
+    [medicationDef insertPropertyDefinition:clearDiscontinuedButtonProperty atIndex:4];
     
     
     
