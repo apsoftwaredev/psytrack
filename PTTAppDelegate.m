@@ -64,6 +64,11 @@
 @synthesize drugsManagedObjectModel = __drugsManagedObjectModel;
 @synthesize drugsPersistentStoreCoordinator = __drugsPersistentStoreCoordinator;
 
+@synthesize disordersManagedObjectContext = __disordersManagedObjectContext;
+@synthesize disordersManagedObjectModel = __disordersManagedObjectModel;
+@synthesize disordersPersistentStoreCoordinator = __disordersPersistentStoreCoordinator;
+
+
 @synthesize splitViewControllerClients = _splitViewControllerClients;
 @synthesize splitViewControllerClinicians = _splitViewControllerClinicians;
 @synthesize navigationControllerTrainTrack = _navigationControllerTrainTrack;
@@ -2310,6 +2315,132 @@ duration:(NSTimeInterval)1.0];
     }
     
      return __drugsPersistentStoreCoordinator;
+}
+
+
+-(void)resetDisordersModel{
+    
+    __disordersManagedObjectModel=nil;
+    __disordersManagedObjectContext=nil;
+    __disordersPersistentStoreCoordinator=nil;
+    
+}
+
+- (NSManagedObjectContext *)disordersManagedObjectContext
+{
+    if (__disordersManagedObjectContext != nil)
+    {
+        return __disordersManagedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self disordersPersistentStoreCoordinator];
+    if (coordinator != nil)
+    {
+        __disordersManagedObjectContext = [[NSManagedObjectContext alloc] init];
+        [__disordersManagedObjectContext setPersistentStoreCoordinator:coordinator];
+    }
+    
+    
+    return __disordersManagedObjectContext;
+}
+
+
+/**
+ Returns the managed object model for the application.
+ If the model doesn't already exist, it is created from the application's model.
+ */
+- (NSManagedObjectModel *)disordersManagedObjectModel
+{
+    if (__disordersManagedObjectModel != nil)
+    {
+        return __disordersManagedObjectModel;
+    }
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"disorders" withExtension:@"momd"];
+    __disordersManagedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    
+    
+    return __disordersManagedObjectModel;
+}
+
+- (NSPersistentStoreCoordinator *)disorderPersistentStoreCoordinator
+{
+    if (__disordersPersistentStoreCoordinator != nil)
+    {
+        return __disordersPersistentStoreCoordinator;
+    }
+    
+    BOOL adddisorderData=TRUE;
+    
+    if (adddisorderData) {
+        
+        //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSString *disordersDatabase = [[self applicationDrugsPathString]stringByAppendingPathComponent:@"disorders.sqlite"];
+        
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        
+        //            NSUndoManager *undoManager=[[NSUndoManager alloc]init];
+        //            undoManager=(NSUndoManager *)__drugsManagedObjectContext.undoManager;
+        //            [__drugsManagedObjectContext setUndoManager:nil];
+        // If the expected store doesn't exist, copy the default store.
+        
+        if (![fileManager fileExistsAtPath:disordersDatabase]) {
+            NSString *disorderTextDocPath = [[NSBundle mainBundle] pathForResource:@"disorders" ofType:@"sqlite"];
+            NSLog(@"path to file%@", disordersDatabase);
+            if (disorderTextDocPath) {
+                
+                [fileManager copyItemAtPath:disorderTextDocPath toPath:disordersDatabase error:NULL];
+                
+                
+            }
+            
+        }
+        
+        //        if ([fileManager fileExistsAtPath:drugsDatabase]) {
+        NSError *disorderError = nil;
+        NSURL *disordersStoreURL = [[self applicationDrugsDirectory] URLByAppendingPathComponent:@"disorders.sqlite"];
+        __disordersPersistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self disordersManagedObjectModel]];
+        if (![__disordersPersistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:@"disordersConfig" URL:disordersStoreURL options:nil error:&disorderError])
+        {
+            /*
+             Replace this implementation with code to handle the error appropriately.
+             
+             abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
+             
+             Typical reasons for an error here include:
+             * The persistent store is not accessible;
+             * The schema for the persistent store is incompatible with current managed object model.
+             Check the error message to determine what the actual problem was.
+             
+             
+             If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
+             
+             If you encounter schema incompatibility errors during development, you can reduce their frequency by:
+             * Simply deleting the existing store:
+             [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
+             
+             * Performing automatic lightweight migration by passing the following dictionary as the options parameter: 
+             [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+             
+             Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
+             
+             */
+            NSLog(@"Unresolved error %@, %@", disorderError, [disorderError userInfo]);
+            abort();
+        }   
+        else 
+        {
+            NSLog(@"added persistent drug store");
+            
+            
+        }    
+        
+        
+        
+    }
+    
+    return __disordersPersistentStoreCoordinator;
 }
 
 -(BOOL)setUpDrugStore{
@@ -4635,6 +4766,27 @@ return YES;
     
     return drugUrl;
 }
+
+- (NSURL *)applicationDisordersDirectory
+{
+    NSFileManager *fileManager=[[NSFileManager alloc]init];
+    NSString *dirToCreate = [NSString stringWithFormat:@"%@/disorderDatabase",[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject]];
+    BOOL isDir=YES;
+    NSError *error=[[NSError alloc]init];
+    if(![fileManager fileExistsAtPath:dirToCreate isDirectory:&isDir])
+        if(![fileManager createDirectoryAtPath:dirToCreate withIntermediateDirectories:YES attributes:nil error:&error])
+            NSLog(@"Error: Create folder failed");
+    
+    
+    
+    NSURL *disorderUrl=[NSURL fileURLWithPath:dirToCreate isDirectory:YES];
+    
+    NSLog(@"disorder url is %@",disorderUrl.path);
+    
+    return disorderUrl;
+}
+
+
 - (NSURL *)applicationPTTDirectory
 {
     NSFileManager *fileManager=[[NSFileManager alloc]init];
@@ -4796,7 +4948,8 @@ return [self applicationDrugsDirectory].path;
     if (managedObjectModel__ != nil) {
         return managedObjectModel__;
     }
-    managedObjectModel__ = [NSManagedObjectModel mergedModelFromBundles:nil] ;    
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"psyTrainTrack" withExtension:@"momd"];
+    managedObjectModel__ = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];  
     return managedObjectModel__;
 }
 

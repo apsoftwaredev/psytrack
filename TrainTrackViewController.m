@@ -300,7 +300,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
         
       
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject; 
-        if ([cellManagedObject.entity.name isEqualToString:@"ClinicianEntity"]) {
+        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClinicianEntity"]) {
             [detailTableViewModel removeSectionAtIndex:1];
             [detailTableViewModel removeSectionAtIndex:4];
         }

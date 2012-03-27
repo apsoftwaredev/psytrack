@@ -677,7 +677,7 @@ NSLog(@"search list button clicked");
            
             NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
         NSLog(@"detail model class is %@",[detailTableViewModel class]);
-            if ([cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) 
+            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) 
             {
                 
                 time_Shared.tableModel=tableModel;
@@ -811,7 +811,7 @@ NSLog(@"search list button clicked");
         NSLog(@"cell class is %@",[cell class]);
         
         
-        if ([cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) 
+        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) 
         {
             if (tableViewModel.delegate!=clientPresentations_Shared) 
             {
@@ -965,7 +965,7 @@ NSLog(@"search list button clicked");
                 
                     NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                     NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
-                    if ([cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
+                    if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
                         
                         SCArrayOfObjectsSection *section=(SCArrayOfObjectsSection *)[tableViewModel sectionAtIndex:0];
                         NSMutableSet *mutableSet=[(NSMutableSet *)section.itemsSet mutableSetValueForKey:@"client"];
@@ -1022,7 +1022,7 @@ NSLog(@"search list button clicked");
         SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
-        if ([cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
+        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
             
         [detailTableViewModel.modeledTableView setEditing:YES animated:NO];
         }
@@ -1039,7 +1039,7 @@ NSLog(@"search list button clicked");
                 SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                 NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
-                if ([cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
+                if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
                     
                     SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
                     NSMutableSet *mutableSet=[(NSMutableSet *)arrayOfObjectsSection.itemsSet mutableSetValueForKey:@"client"];

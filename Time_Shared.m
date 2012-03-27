@@ -643,7 +643,7 @@
         if (indexPath.section==1) {
             
             
-            if ([cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) 
+            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) 
             {
                 
                 if (![cell viewWithTag:28]) {
@@ -671,7 +671,7 @@
     if (tableViewModel.tag==3) 
     {
         
-        if ([cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) {
+        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) {
             
                        
             
@@ -752,7 +752,7 @@
     if (tableViewModel.tag==3) 
     {
         NSManagedObject *sectionManagedObject=(NSManagedObject *)section.boundObject;
-        if ([sectionManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) {
+        if (sectionManagedObject && [sectionManagedObject.entity.name  isEqualToString:@"BreakTimeEntity"]) {
             
             switch (button.tag)
             {
@@ -919,7 +919,7 @@
     if(section.headerTitle !=nil)
     {
         
-        if (!(tableViewModel.tag ==2 && index==0 &&[sectionManagedObject.entity.name isEqualToString:@"TimeEntity"] )) 
+        if (!(tableViewModel.tag ==2 && index==0 &&sectionManagedObject && [sectionManagedObject.entity.name isEqualToString:@"TimeEntity"]) ) 
         {
             
             
@@ -957,7 +957,7 @@
         
     }
     
-    if((tableViewModel.tag==2 && index==0 &&[sectionManagedObject.entity.name isEqualToString:@"TimeEntity"])||(tableViewModel.tag==3 &&index==0 && [sectionManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]))
+    if((tableViewModel.tag==2 && index==0 &&sectionManagedObject && [sectionManagedObject.entity.name isEqualToString:@"TimeEntity"])||(tableViewModel.tag==3 &&index==0 && sectionManagedObject && [sectionManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]))
     {
         
         
@@ -1083,7 +1083,7 @@
         
        
         
-        if ([cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
+        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
            
             if (cell.tag>=0 && cell.tag<4) {
                 if ([cell isKindOfClass:[SCDateCell class]]){
@@ -1153,7 +1153,7 @@
         {
             
                         
-            if ([cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) 
+            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) 
             {
                
                 
@@ -1176,7 +1176,7 @@
           
         
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-        if ([cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) {
+        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) {
             
            
 //                    SCTableViewSection *section =(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
@@ -1261,7 +1261,7 @@ NSLog(@"did end editing");
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
        
         
-        if ([cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
+        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
             
             
             switch (cell.tag) {
@@ -1320,7 +1320,7 @@ NSLog(@"did end editing");
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
        
         
-        if ([cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) {
+        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) {
          
             
        

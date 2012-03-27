@@ -718,6 +718,27 @@ NSLog(@"table model class %@",[tableViewModel class]);
 
         case 5:
         {
+            
+            if (section.cellCount>0&&cell.boundObject) {
+
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+
+                NSLog(@"entity name is %@",cellManagedObject.entity.name);
+                if (cell.tag==1 && [cell isKindOfClass:[SCControlCell class]]&& cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
+                {
+                    
+                    UIView *scaleView = [cell viewWithTag:70];
+                    if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
+                        
+                        UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
+                        fluencyLevelLabel.text=@"Severity Level:";
+                        
+                    }
+                }
+
+            }
+            
+            
             if (cell.tag==4&& tableViewModel.sectionCount >2) {
                 
                 NSLog(@"cell tag is %i",cell.tag);
@@ -844,7 +865,7 @@ NSLog(@"table model class %@",[tableViewModel class]);
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
         
             
-            if ([notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
                 
                 if (encryptedNoteCell.textView.text.length) 
@@ -858,7 +879,20 @@ NSLog(@"table model class %@",[tableViewModel class]);
                 
             }
             
-            
+            //here it is not the notes cell
+            if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[notesCell isKindOfClass:[SCTextFieldCell class]]) {
+                SCTextFieldCell *drugNameCell=(SCTextFieldCell *)notesCell;
+                
+                if (drugNameCell.textField.text.length) 
+                {
+                    valid=TRUE;
+                }
+                else 
+                {
+                    valid=FALSE;
+                }
+                
+            }
             
             
             
@@ -882,7 +916,7 @@ NSLog(@"table model class %@",[tableViewModel class]);
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
           NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
-            if ([cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
                
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
@@ -916,7 +950,7 @@ NSLog(@"table model class %@",[tableViewModel class]);
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellSystolic.boundObject;
             NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
-            if ([cellManagedObject.entity.name isEqualToString:@"VitalsEntity"]) {
+            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"VitalsEntity"]) {
                 SCTextFieldCell *cellSystolicTF=(SCTextFieldCell *)cellSystolic;
                 SCTextFieldCell *cellDiastolicTF=(SCTextFieldCell *)cellDiastolic;
                 SCTextFieldCell *cellHeartRateTF=(SCTextFieldCell *)cellHeartRate;
@@ -1171,7 +1205,7 @@ NSLog(@"table model class %@",[tableViewModel class]);
         SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:0];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
-        if ([cellManagedObject.entity.name isEqualToString:@"MedicationEntity"]){
+        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"MedicationEntity"]){
             
             SCDateCell *discontinuedCell =(SCDateCell *) [section cellAtIndex:3];
            
@@ -1333,12 +1367,14 @@ NSLog(@"table model class %@",[tableViewModel class]);
                 cell.textLabel.text=[cell.boundObject valueForKey:@"clientIDCode"];
             }
         
-        
+            return;
         
         }
             break;
         case 1:
-            if (cell.tag==1) {
+        {
+            
+        if (cell.tag==1) {
                 
                 if ([cell isKindOfClass:[SCDateCell class]]) {
                     SCDateCell *dateCell=(SCDateCell *)cell;
@@ -1350,7 +1386,8 @@ NSLog(@"table model class %@",[tableViewModel class]);
                     }
                 }
             }
-
+            return;
+        }
             break;
         case 2:
         {
@@ -1370,16 +1407,56 @@ NSLog(@"table model class %@",[tableViewModel class]);
                         NSDateFormatter *dateTimeDateFormatter = [[NSDateFormatter alloc] init];
             
                         //set the date format
-                        [dateTimeDateFormatter setDateFormat:@"ccc M/d/yy h:mm a"];
+                        [dateTimeDateFormatter setDateFormat:@"ccc M/d/YY h:mm a"];
                         
                         NSDate *logDate=[managedObject valueForKey:@"dateTime"];
                         NSString *notes=[managedObject valueForKey:@"notes"];
                                          
                         cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateTimeDateFormatter stringFromDate:logDate],notes];
+                        return;
                     }
                     
+                    if ([managedObject.entity.name isEqualToString:@"MedicationEntity"]) {
+                        //define and initialize a date formatter
+                        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                        
+                        //set the date format
+                        [dateFormatter setDateFormat:@"M/d/YYYY"];
+                        
+                        NSDate *startedDate=[managedObject valueForKey:@"dateStarted"];
+                        NSDate *discontinued=[managedObject valueForKey:@"discontinued"];
+                        NSString *drugName=[managedObject valueForKey:@"drugName"];
+//                        NSString *notes=[managedObject valueForKey:@"notes"];
+                        
+                        NSString *labelString=[NSString string];
+                        if (drugName.length) {
+                            labelString=drugName;
+                        }
+                        if (startedDate) {
+                       
+                            NSString *startedDateStr=[dateFormatter stringFromDate:startedDate];
+                            if (labelString.length && startedDateStr.length) {
+                                labelString=[labelString stringByAppendingFormat:@"; started: %@",startedDateStr];
+                            }
+                            
+                        }
+                        if (discontinued) 
+                        {
+                       
+                            NSString *discontinueddDateStr=[dateFormatter stringFromDate:discontinued];
+                            if (labelString.length && discontinueddDateStr.length) {
+                                labelString=[labelString stringByAppendingFormat:@"; discontinued: %@",discontinueddDateStr];
+                            }
+                            
+                        }
+                        else {
+                            cell.textLabel.textColor=[UIColor blueColor];
+                        }
+                        cell.textLabel.text=labelString;
+                        return;
+                    }
                     
-                    if ([managedObject.entity.name isEqualToString:@"VitalsEntity"]) {
+                    if ([managedObject.entity.name  isEqualToString:@"VitalsEntity"]) {
                         NSLog(@"the managed object entity is Vitals Entity");
                         
                         
@@ -1416,7 +1493,7 @@ NSLog(@"table model class %@",[tableViewModel class]);
                         cell.textLabel.text=labelText;
                         //change the text color to red
                         
-                        
+                        return;
                         
                     }
                     
@@ -1459,6 +1536,7 @@ NSLog(@"table model class %@",[tableViewModel class]);
                             cell.textLabel.text=languageString;
                             //change the text color to red
                             cell.textLabel.textColor=[UIColor redColor];
+                            return;
                         }
                     }
                     NSLog(@"managed object entity name is %@",managedObject.entity.name);
@@ -1487,7 +1565,9 @@ NSLog(@"table model class %@",[tableViewModel class]);
                             }
                             
                             cell.textLabel.text=historyString;
-                            //change the text color to red
+                            
+                            return;
+                            
                         }
 
                         
@@ -1518,7 +1598,7 @@ NSLog(@"table model class %@",[tableViewModel class]);
                     NSLog(@"bound value is %f", sliderOne.value);
                     slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
                     
-                    
+                    return;
                     
                     
                 }     
@@ -1538,6 +1618,8 @@ NSLog(@"table model class %@",[tableViewModel class]);
                     
                     
                     slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];
+                    
+                    return;
                 }
                 
                 
@@ -1720,7 +1802,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             NSLog(@"section bound object entity is %@",cellOneBoundObject);
             NSLog(@"section bound object entity name is %@",cellOneBoundObject.entity.name);
-            if ([cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
+            if (cellOneBoundObject && [cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
                 
                 
                 section.footerTitle=@"Select the drug then add the current dosage in the Med Logs section.";

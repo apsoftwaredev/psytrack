@@ -1654,7 +1654,7 @@
         UIView *viewShorterTextLabelView =(UIView *)[cell viewWithTag:35];
         UIView *viewLongerTextLabelView =(UIView *)[cell viewWithTag:51];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-        if ([cellManagedObject.entity.name isEqualToString:@"ClinicianEntity"]) {
+        if (cellManagedObject&&[cellManagedObject.entity.name  isEqualToString:@"ClinicianEntity"]) {
      
         
         switch (cell.tag) 
@@ -2211,7 +2211,7 @@
            
             
             
-             if ([cellManagedObject.entity.name isEqualToString:@"ClinicianEntity"]) {
+             if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClinicianEntity"]) {
             ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
            
            
@@ -2235,13 +2235,13 @@
             if (managedObject) {
                 
                 
-                
+                NSLog(@"cell managed object is %@",[managedObject class]);
                 //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
                 if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
                     
-                    NSLog(@"entity name is %@",managedObject.entity.name);
+//                    NSLog(@"entity name is %@",managedObject.entity.name);
                     //identify the Languages Spoken table
-                    if ([managedObject.entity.name isEqualToString:@"LogEntity"]) {
+                    if (![NSStringFromClass([managedObject class])isEqualToString:@"PTABGroup"] &&[managedObject.entity.name isEqualToString:@"LogEntity"]) {
                         //define and initialize a date formatter
                         NSDateFormatter *dateTimeDateFormatter = [[NSDateFormatter alloc] init];
                         
@@ -2253,7 +2253,7 @@
                         
                         cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateTimeDateFormatter stringFromDate:logDate],notes];
                     }
-                    if ([managedObject.entity.name isEqualToString:@"ReferralEntity"]) {
+                    if (![NSStringFromClass([managedObject class])isEqualToString:@"PTABGroup"] &&[managedObject.entity.name isEqualToString:@"ReferralEntity"]) {
                         //define and initialize a date formatter
                         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
                         
@@ -2313,7 +2313,7 @@
                     
                     
                     //identify the Languages Spoken table
-                    if ([managedObject.entity.name isEqualToString:@"LanguageSpokenEntity"]) {
+                    if ([managedObject.entity.name  isEqualToString:@"LanguageSpokenEntity"]) {
                         NSLog(@"the managed object entity is Languag spoken Entity");
                         //get the value of the primaryLangugage attribute
                         NSNumber *primaryLanguageNumber=(NSNumber *)[managedObject valueForKey:@"primaryLanguage"];
@@ -2639,7 +2639,7 @@
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
             
             
-            if ([notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
                 
                 if (encryptedNoteCell.textView.text.length) 
@@ -2653,7 +2653,7 @@
                 
             }
             SCTableViewCell *cellAtZero=(SCTableViewCell *)[section cellAtIndex:0];
-            if ([notesManagedObject.entity.name isEqualToString:@"ReferralEntity"]&&[cellAtZero isKindOfClass:[ClientsSelectionCell class]]) {
+            if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"ReferralEntity"]&&[cellAtZero isKindOfClass:[ClientsSelectionCell class]]) {
                 ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)cellAtZero;
                 SCDateCell *dateCell;
                 if ([notesCell isKindOfClass:[SCDateCell class]]) {
@@ -2689,7 +2689,7 @@
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
             NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
-            if ([cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"] && [cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
@@ -3129,7 +3129,7 @@ NSLog(@"table view model tag is %i",tableViewModel.tag);
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
             
             
-            if ([notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (notesManagedObject &&[notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 [notesCell becomeFirstResponder];
             }

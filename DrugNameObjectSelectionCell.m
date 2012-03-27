@@ -116,32 +116,52 @@
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
             
+            NSLog(@"self bound object is %@",self.boundObject);
+            NSString *drugName=[self.boundObject valueForKey:@"drugName"];
             
-            if(applicationNumber.length)
+            
+            if (drugName.length) {
+                drugsViewContoller.searchBar.text=drugName;
+                
+            }
+            
+                        
+            if (drugProduct) 
             {
-                NSPredicate *predicate=[NSPredicate predicateWithFormat:@"applNo MATCHES %@",applicationNumber];
+                
+                [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:drugProduct]]];
+                
+                NSPredicate *predicate=[NSPredicate predicateWithFormat:@"applNo MATCHES %@",drugProduct.applNo];
                 
                 objectSelectionSection.itemsPredicate=predicate;
                 [objectSelectionSection reloadBoundValues];
                 [drugsViewContoller.tableView reloadData];
+                
+                if (drugProduct.drugName.length) {
+                    drugsViewContoller.searchBar.text=drugProduct.drugName;
+                }
+                
+                
             }
+            else if (applicationNumber.length)
+            {
             
-            if (drugProduct) {
+               
+                    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"applNo MATCHES %@",applicationNumber];
+                    
+                    objectSelectionSection.itemsPredicate=predicate;
+                    [objectSelectionSection reloadBoundValues];
+                    [drugsViewContoller.tableView reloadData];
                 
-                [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:drugProduct]]];
-                
-                
-            } 
+
+            
+            }
            
             
-                NSLog(@"self bound object is %@",self.boundObject);
-                NSString *drugName=[self.boundObject valueForKey:@"drugName"];
+               
 //                NSString *applNo=[self.boundObject valueForKey:@"applNo"];
                 
-                if (drugName.length) {
-                    drugsViewContoller.searchBar.text=drugName;
-
-                }
+                
                                 
             
             

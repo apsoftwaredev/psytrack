@@ -108,6 +108,11 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 @property (readonly, strong, nonatomic) NSManagedObjectContext *drugsManagedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *drugsManagedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *drugsPersistentStoreCoordinator;
+
+@property (readonly, strong, nonatomic) NSManagedObjectContext *disordersManagedObjectContext;
+@property (readonly, strong, nonatomic) NSManagedObjectModel *disordersManagedObjectModel;
+@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *disordersPersistentStoreCoordinator;
+
 @property (strong, nonatomic) IBOutlet UIView *tabBarView;
 @property (strong, nonatomic) IBOutlet UITabBarController *tabBarController;
 @property (weak, nonatomic)IBOutlet UIView *tabBarControllerContainerView;
@@ -115,6 +120,12 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 
 -(NSURL *)applicationDrugsFileURL;
 -(void)resetDrugsModel;
+
+-(NSURL *)applicationDisordersFileURL;
+-(void)resetDisordersModel;
+
+
+-(BOOL)setUpDrugStore;
 - (void)saveContext;
 + (NSString*)retrieveFromUserDefaults:(NSString*)key;
 -(void)flashAppTrainAndTitleGraphics;
@@ -125,7 +136,7 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 -(NSString *)setupLockDictionaryResultStr;
 -(NSString *)setupDefaultLockDictionaryResultStr;
 - (void)saveDrugsContext;
--(BOOL)setUpDrugStore;
+
 -(BOOL)copyDrugsToMainContext;
 
 -(void)displayMemoryWarning;

@@ -236,7 +236,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
                 NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
                 NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
+                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"] && detailTableViewModel.sectionCount>2) {
                     
                     [detailTableViewModel removeSectionAtIndex:1];
                     
@@ -266,7 +266,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
         SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:0];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
-        if ([cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]){
+        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]){
             
             SCTextFieldCell *phoneNumberCell =(SCTextFieldCell *) [section cellAtIndex:1];
             NSLog(@"custom button tapped");
@@ -291,7 +291,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
         SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:0];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
-        if ([cellManagedObject.entity.name isEqualToString:@"MedicationEntity"]){
+        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"]){
             
             SCDateCell *discontinuedCell =(SCDateCell *) [section cellAtIndex:3];
             
@@ -649,6 +649,26 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
             
         case 5:
         {
+            if (section.cellCount>0&&cell.boundObject) {
+                
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+                
+                NSLog(@"entity name is %@",cellManagedObject.entity.name);
+                if (cell.tag==1 && [cell isKindOfClass:[SCControlCell class]]&& cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
+                {
+                    
+                    UIView *scaleView = [cell viewWithTag:70];
+                    if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
+                        
+                        UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
+                        fluencyLevelLabel.text=@"Severity Level:";
+                        
+                    }
+                }
+                
+            }
+            
+            
             if (cell.tag==4&& tableViewModel.sectionCount >2) {
                 
                 NSLog(@"cell tag is %i",cell.tag);
@@ -855,7 +875,49 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                         NSString *notes=[managedObject valueForKey:@"notes"];
                         
                         cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateTimeDateFormatter stringFromDate:logDate],notes];
+                        return;
                     }
+                    
+                    if ([managedObject.entity.name isEqualToString:@"MedicationEntity"]) {
+                        //define and initialize a date formatter
+                        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                        
+                        //set the date format
+                        [dateFormatter setDateFormat:@"M/d/YYYY"];
+                        
+                        NSDate *startedDate=[managedObject valueForKey:@"dateStarted"];
+                        NSDate *discontinued=[managedObject valueForKey:@"discontinued"];
+                        NSString *drugName=[managedObject valueForKey:@"drugName"];
+                        //                        NSString *notes=[managedObject valueForKey:@"notes"];
+                        
+                        NSString *labelString=[NSString string];
+                        if (drugName.length) {
+                            labelString=drugName;
+                        }
+                        if (startedDate) {
+                            
+                            NSString *startedDateStr=[dateFormatter stringFromDate:startedDate];
+                            if (labelString.length && startedDateStr.length) {
+                                labelString=[labelString stringByAppendingFormat:@"; started: %@",startedDateStr];
+                            }
+                            
+                        }
+                        if (discontinued) 
+                        {
+                            
+                            NSString *discontinueddDateStr=[dateFormatter stringFromDate:discontinued];
+                            if (labelString.length && discontinueddDateStr.length) {
+                                labelString=[labelString stringByAppendingFormat:@"; discontinued: %@",discontinueddDateStr];
+                            }
+                            
+                        }
+                        else {
+                            cell.textLabel.textColor=[UIColor blueColor];
+                        }
+                        cell.textLabel.text=labelString;
+                        return;
+                    }
+                    
                     if ([managedObject.entity.name isEqualToString:@"VitalsEntity"]) {
                         NSLog(@"the managed object entity is Vitals Entity");
                         
@@ -893,7 +955,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                         cell.textLabel.text=labelText;
                         //change the text color to red
                         
-                        
+                        return;
                         
                     }
 
@@ -935,6 +997,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                             //change the text color to red
                             cell.textLabel.textColor=[UIColor redColor];
                         }
+                        return;
                     }
                     
                   
@@ -965,6 +1028,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                             cell.textLabel.text=historyString;
                             //change the text color to red
                         }
+                    return;
 
                     }
             
@@ -993,7 +1057,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                     slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
                     
                     
-                    
+                    return;
                     
                 }     
             }
@@ -1015,7 +1079,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                 }
                 
                 
-                
+                return;
                 
             }
             //identify the if the cell has a managedObject
@@ -1232,7 +1296,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             NSLog(@"section bound object entity is %@",cellOneBoundObject);
             NSLog(@"section bound object entity name is %@",cellOneBoundObject.entity.name);
-            if ([cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
+            if (cellOneBoundObject &&[cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
             
                 
                 section.footerTitle=@"Select the drug then add the current dosage in the Med Logs section.";
@@ -1441,7 +1505,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
             
             
-            if ([notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (notesManagedObject &&[ notesManagedObject.entity.name   isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
                 
                 if (encryptedNoteCell.textView.text.length) 
@@ -1454,9 +1518,51 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 }
                 
             }
-            
+            //here it is not the notes cell
+            if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[notesCell isKindOfClass:[SCTextFieldCell class]]) {
+                SCTextFieldCell *drugNameCell=(SCTextFieldCell *)notesCell;
+                
+                if (drugNameCell.textField.text.length) 
+                {
+                    valid=TRUE;
+                }
+                else 
+                {
+                    valid=FALSE;
+                }
+                
+            }
             
         }
+        
+        
+    }
+    if (tableViewModel.tag==5&& tableViewModel.sectionCount){
+        
+        
+        
+        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
+        
+        if (section.cellCount>0) {
+            SCTableViewCell *firstCell =(SCTableViewCell *)[section cellAtIndex:0];
+            NSManagedObject *firstCellManagedObject=(NSManagedObject *)firstCell.boundObject;
+            
+            NSLog(@"first cell class is %@",[firstCell class]);
+            
+            if (firstCellManagedObject &&[firstCellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"]&&[firstCell isKindOfClass:[SCObjectSelectionCell class]]) {
+                SCObjectSelectionCell *symptomCell=(SCObjectSelectionCell *)firstCell;
+                
+                if (symptomCell.label.text.length) 
+                {
+                    valid=TRUE;
+                }
+                else 
+                {
+                    valid=FALSE;
+                }
+                
+            }
+                  }
         
         
     }
@@ -1475,7 +1581,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
             NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
-            if ([cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (cellManagedObject && [cellManagedObject.entity.name  isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
@@ -1509,7 +1615,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellSystolic.boundObject;
             NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
-            if ([cellManagedObject.entity.name isEqualToString:@"VitalsEntity"]) {
+            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"VitalsEntity"]) {
                 SCTextFieldCell *cellSystolicTF=(SCTextFieldCell *)cellSystolic;
                 SCTextFieldCell *cellDiastolicTF=(SCTextFieldCell *)cellDiastolic;
                 SCTextFieldCell *cellHeartRateTF=(SCTextFieldCell *)cellHeartRate;

@@ -250,7 +250,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //Create a class definition for the medication Entity
     SCClassDefinition *medicationDef = [SCClassDefinition definitionWithEntityName:@"MedicationEntity" 
                                                    withManagedObjectContext:managedObjectContext
-                                                          withPropertyNames:[NSArray arrayWithObjects:@"drugName",@"dateStarted",  @"discontinued", @"symptomsTargeted",@"medLogs",
+                                                          withPropertyNames:[NSArray arrayWithObjects:@"drugName",@"dateStarted",  @"discontinued", @"symptomsTargeted",@"sideEffects",@"medLogs",
                                                                              @"notes",@"applNo", @"productNo",   
                                                                              nil]];
     
@@ -268,7 +268,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     [medicationDef removePropertyDefinitionAtIndex:productNoIndex];
     
     
-    SCClassDefinition *medicationReviewDef =[SCClassDefinition definitionWithEntityName:@"MedicationReviewEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects: @"logDate",@"prescriber",@"dosage",@"doseChange",@"sxChange",@"lastDose", @"adherance", @"nextReview", @"notes" , nil]];
+    SCClassDefinition *medicationReviewDef =[SCClassDefinition definitionWithEntityName:@"MedicationReviewEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects: @"logDate",@"prescriber",@"dosage",@"doseChange",@"sxChange",@"lastDose", @"adherance",@"sideEffects", @"nextReview", @"notes" , nil]];
     
     
     
@@ -324,9 +324,19 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //do some customizing of the medication notes
     SCPropertyDefinition *medicationNotesPropertyDef = [medicationDef propertyDefinitionWithName:@"notes"];
     
-    medicationNotesPropertyDef.type=SCPropertyTypeTextView;
-    medicationDef.titlePropertyName=@"drugName;dosage;dateStarted;discontinued";
+    medicationNotesPropertyDef.type=SCPropertyTypeCustom;
+    medicationNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    
+    NSDictionary *encryMedicationlNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    
+    
+    medicationNotesPropertyDef.objectBindings=encryMedicationlNotesTVCellKeyBindingsDic;
+    medicationNotesPropertyDef.title=@"Notes";
+    medicationNotesPropertyDef.autoValidate=NO;
+    
+    medicationDef.titlePropertyName=@"drugName";
     medicationDef.keyPropertyName=@"dateStarted";
+   
     
    
     //format the the date using a date formatter
@@ -355,6 +365,83 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     SCCustomPropertyDefinition *clearDiscontinuedButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"clearDiscontinued" withuiElementClass:[ButtonCell class] withObjectBindings:nil];
     [medicationDef insertPropertyDefinition:clearDiscontinuedButtonProperty atIndex:4];
     
+   
+    //Create a class definition for the Additional Symptoms Entity
+    SCClassDefinition *symptomDef = [SCClassDefinition definitionWithEntityName:@"AdditionalSymptomEntity" 
+                                                        withManagedObjectContext:managedObjectContext
+                                                               withPropertyNames:[NSArray arrayWithObjects:@"symptomName",   @"notes",@"onset",nil]];
+    
+//    SCClassDefinition *symptomDef = [SCClassDefinition definitionWithEntityName:@"AdditionalSymptomEntity" 
+//                                                       withManagedObjectContext:managedObjectContext
+//                                                autoGeneratePropertyDefinitions:YES];    
+    
+    
+    
+    //Do some property definition customization for the additional symptoms Entity defined in symptomsDef
+    NSString *scaleDataCellNibName=[NSString string];
+
+    if ([SCHelper is_iPad]) {
+        
+        scaleDataCellNibName=@"ScaleDataCell_iPad";
+    
+        
+    } else
+    {
+        
+        scaleDataCellNibName=@"ScaleDataCell_iPhone";       
+    }
+    
+    NSDictionary *severityLevelDataBindings = [NSDictionary 
+                                              dictionaryWithObjects:[NSArray arrayWithObject:@"severity"] 
+                                              forKeys:[NSArray arrayWithObject:@"70"]]; // 1 is the control tag
+	SCCustomPropertyDefinition *severityLevelDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SeverityData"
+                                                                                     withuiElementNibName:scaleDataCellNibName
+                                                                                       withObjectBindings:severityLevelDataBindings];
+	
+    
+    
+    [symptomDef insertPropertyDefinition:severityLevelDataProperty atIndex:1];
+    
+    SCPropertyDefinition *symptomsTargetedPropertyDef = [medicationDef propertyDefinitionWithName:@"symptomsTargeted"];
+    
+    
+    symptomsTargetedPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:symptomDef
+                                                                                              allowAddingItems:YES
+                                                                                            allowDeletingItems:YES
+                                                                                            allowMovingItems:YES expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add symptoms"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+    
+    
+    
+    //Create a class definition for the symptom NameEntity
+    SCClassDefinition *symptomNameDef = [SCClassDefinition definitionWithEntityName:@"AdditionalSymptomNameEntity" 
+                                                        withManagedObjectContext:managedObjectContext
+                                                               withPropertyNames:[NSArray arrayWithObjects:@"symptomName",@"symptomDescription" , nil]];
+    
+    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+       
+    SCPropertyDefinition *symptomNamePropertyDef = [symptomDef propertyDefinitionWithName:@"symptomName"];
+    symptomNamePropertyDef.type = SCPropertyTypeObjectSelection;
+    symptomNamePropertyDef.title=@"Symptom";
+	SCObjectSelectionAttributes *symptomNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:symptomNameDef allowMultipleSelection:NO allowNoSelection:NO];
+    symptomNameSelectionAttribs.allowAddingItems = YES;
+    symptomNameSelectionAttribs.allowDeletingItems = YES;
+    symptomNameSelectionAttribs.allowMovingItems = YES;
+    symptomNameSelectionAttribs.allowEditingItems = YES;
+    symptomNameSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap edit to add sypmtoms)"];
+    symptomNameSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add Symptom Definition"];
+    symptomNamePropertyDef.attributes = symptomNameSelectionAttribs;
+    SCPropertyDefinition *symptomDescriptionPropertyDef = [symptomNameDef propertyDefinitionWithName:@"symptomDescription"];
+    
+    symptomDescriptionPropertyDef.type=SCPropertyTypeTextView;
+    
+    symptomDef.titlePropertyName=@"symptomName.symptomName";
+    SCPropertyDefinition *symptomNotesPropertyDef = [symptomDef propertyDefinitionWithName:@"notes"];
+    symptomNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+
+    symptomDef.orderAttributeName=@"order";
+    
     
     
     SCPropertyDefinition *medLogsPropertyDef = [medicationDef propertyDefinitionWithName:@"medLogs"];
@@ -367,7 +454,17 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //do some customizing of the medication notes
     SCPropertyDefinition *medicationReviewNotesPropertyDef = [medicationReviewDef propertyDefinitionWithName:@"notes"];
     
-    medicationReviewNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    medicationReviewNotesPropertyDef.type=SCPropertyTypeCustom;
+    medicationReviewNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    
+    NSDictionary *encryMedicationlReviewNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    
+    
+    medicationReviewNotesPropertyDef.objectBindings=encryMedicationlReviewNotesTVCellKeyBindingsDic;
+    medicationReviewNotesPropertyDef.title=@"Notes";
+    medicationReviewNotesPropertyDef.autoValidate=NO;
+    
     medicationReviewDef.keyPropertyName=@"logDate";
     
     //Create the property definition for the date property in the medicatioReviewnDef class  definition
@@ -384,7 +481,30 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                                       datePickerMode:UIDatePickerModeDateAndTime
                                                        displayDatePickerInDetailView:NO];
     
+    //Create a class definition for the sideEffectEntity
+    SCClassDefinition *sideEffectDef = [SCClassDefinition definitionWithEntityName:@"SideEffectEntity" 
+                                                          withManagedObjectContext:managedObjectContext
+                                                                 withPropertyNames:[NSArray arrayWithObjects:@"effect", nil]];
     
+    //Do some property definition customization for the sideeffect Entity defined in sideEffectDef
+    
+    
+    SCPropertyDefinition *sideEffectsPropertyDef = [medicationReviewDef propertyDefinitionWithName:@"sideEffects"];
+    
+   	sideEffectsPropertyDef.type = SCPropertyTypeObjectSelection;
+	SCObjectSelectionAttributes *sideEffectsSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:sideEffectDef allowMultipleSelection:YES allowNoSelection:YES];
+    sideEffectsSelectionAttribs.allowAddingItems = YES;
+    sideEffectsSelectionAttribs.allowDeletingItems = YES;
+    sideEffectsSelectionAttribs.allowMovingItems = NO;
+    sideEffectsSelectionAttribs.allowEditingItems = YES;
+    sideEffectsSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap edit to add side effects)"];
+    sideEffectsSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new side effect definition"];
+    
+    
+    sideEffectDef.titlePropertyName=@"effect";
+    sideEffectsPropertyDef.attributes = sideEffectsSelectionAttribs;
+    
+
     
     //Create the property definition for the change property in the medicationReview class
     SCPropertyDefinition *sxChangePropertyDef = [medicationReviewDef propertyDefinitionWithName:@"sxChange"];
@@ -470,7 +590,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     //define a property group
-    SCPropertyGroup *followUpGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"doseChange",   @"sxChange",@"lastDose", @"adherance", @"satisfaction", nil]];
+    SCPropertyGroup *followUpGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"doseChange",   @"sxChange",@"lastDose", @"adherance",@"sideEffects", @"satisfaction", nil]];
     
     // add the followup property group to the medication Review class. 
     [medicationReviewDef.propertyGroups addGroup:followUpGroup];

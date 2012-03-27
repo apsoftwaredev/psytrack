@@ -321,7 +321,7 @@
 //        UIView *viewOne = [cell viewWithTag:51];
 //        UIView *viewSendReports =[cell viewWithTag:40];
         UIView *sliderView = [cell viewWithTag:14];
-//        UIView *scaleView = [cell viewWithTag:70];
+        UIView *scaleView = [cell viewWithTag:70];
         switch (cell.tag) {
 //            case 0:
 //                
@@ -332,9 +332,9 @@
 //                    
 //                }
 //                break;
-//            case 1:
-//                
-//                
+            case 1:
+                
+                
 //                if ([viewOne isKindOfClass:[UILabel class]]) {
 //                    
 //                    UILabel *emailLabel =(UILabel *)viewOne;
@@ -346,16 +346,16 @@
 //                    emailAddressField.autocapitalizationType=UITextAutocapitalizationTypeNone;
 //                    
 //                }
-//                
-//                if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
-//                    
-//                    UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
-//                    fluencyLevelLabel.text=@"Fluency Level:";
-//                    
-//                }
-//                
-//                break;
-//                
+                
+                if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
+                    
+                    UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
+                    fluencyLevelLabel.text=@"Fluency Level:";
+                    
+                }
+                
+                break;
+                
 //            case 2:
 //                if ([viewSendReports isKindOfClass:[UISwitch class]]) {
 //                    
@@ -365,7 +365,7 @@
 //                }
 //                
 //                break;
-                
+//                
                 
                 
             case 3:
@@ -635,39 +635,43 @@
     }
     [super tableViewModel:tableViewModel didAddSectionAtIndex:index];
     
-//        if (index==6) {
-//                NSLog(@"cells in section is %i",section.cellCount);
-//               
-//               
-//               
-//                SCTableViewSection *sectionOne=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-//                SCTableViewCell *sectionOneClicianCell=(SCTableViewCell *)[sectionOne cellAtIndex:0];
-//                NSManagedObject *cellManagedObject=(NSManagedObject *)sectionOneClicianCell.boundObject;
-//                
-//                if ([cellManagedObject isKindOfClass:[ClinicianEntity class]]) {
-//                    ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
-//                    
-//                    
-//                    NSLog(@"my information is %@",clinicianObject.myInformation);
-//                    if ([clinicianObject.myInformation isEqualToNumber:[NSNumber numberWithBool:YES]]) {
-//                        
-//                        [tableViewModel removeSectionAtIndex:1];
-//                        [tableViewModel removeSectionAtIndex:4];
-//                        
-//                    }
-//                    NSLog(@"client abrecordidntifier %i",[clinicianObject.aBRecordIdentifier intValue]);
-//                    NSLog(@"client abrecordidentifier %@",clinicianObject.aBRecordIdentifier);
-//                    self.abGroupobjectSelectionCell=[[ABGroupSelectionCell alloc]initWithClinician:(ClinicianEntity *)clinicianObject];    
-//                    
-//                    abGroupobjectSelectionCell_.tag=429;
-//                    
-//                    [sectionOne addCell:abGroupobjectSelectionCell];
-//
-//                }
-//                
-//                                
+//    if (index==6) {
+//        NSLog(@"cells in section is %i",section.cellCount);
+//        
+//        
+//        
+//        SCTableViewSection *sectionOne=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
+//        SCTableViewCell *sectionOneClicianCell=(SCTableViewCell *)[sectionOne cellAtIndex:0];
+//        NSManagedObject *cellManagedObject=(NSManagedObject *)sectionOneClicianCell.boundObject;
+//        
+//        if ([cellManagedObject isKindOfClass:[ClinicianEntity class]]) {
+//            ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
 //            
+//            
+//            NSLog(@"my information is %@",clinicianObject.myInformation);
+//            if ([clinicianObject.myInformation isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+//                
+//                [tableViewModel removeSectionAtIndex:1];
+//                [tableViewModel removeSectionAtIndex:4];
+//                
+//            }
+//            
+//            //                NSArray *addressBookGroupsArray=[NSArray arrayWithArray:[ self addressBookGroupsArray]];
+//            //                
+//            
+//            
+//            
+//            NSLog(@"client abrecordidntifier %i",[clinicianObject.aBRecordIdentifier intValue]);
+//            NSLog(@"client abrecordidentifier %@",clinicianObject.aBRecordIdentifier);
+//            self.abGroupObjectSelectionCell=[[ABGroupSelectionCell alloc]initWithClinician:(ClinicianEntity *)clinicianObject];    
+//            
+//            abGroupObjectSelectionCell_.tag=429;
+//            
+//            [sectionOne addCell:abGroupObjectSelectionCell_];
 //        }
+//        
+//        
+//        
 //    }
     
  [self setSectionHeaderColorWithSection:(SCTableViewSection *)section color:[UIColor whiteColor]]; 
@@ -747,7 +751,7 @@
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
             
             
-            if ([notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if ( notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
                 
                 if (encryptedNoteCell.textView.text.length) 
@@ -781,7 +785,7 @@
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
             NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
-            if ([cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
