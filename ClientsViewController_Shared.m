@@ -24,6 +24,7 @@
 #import "EncryptedSCDateCell.h"
 #import "EncryptedSCTextViewCell.h"
 #import "DrugNameObjectSelectionCell.h"
+#import "ClinicianSelectionCell.h"
 
 @implementation ClientsViewController_Shared
 @synthesize clientDef;
@@ -268,7 +269,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     [medicationDef removePropertyDefinitionAtIndex:productNoIndex];
     
     
-    SCClassDefinition *medicationReviewDef =[SCClassDefinition definitionWithEntityName:@"MedicationReviewEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects: @"logDate",@"prescriber",@"dosage",@"doseChange",@"sxChange",@"lastDose", @"adherance",@"sideEffects", @"nextReview", @"notes" , nil]];
+    SCClassDefinition *medicationReviewDef =[SCClassDefinition definitionWithEntityName:@"MedicationReviewEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects: @"logDate",@"dosage",@"doseChange",@"sxChange",@"lastDose", @"adherance",@"sideEffects", @"nextReview", @"notes" , nil]];
     
     
     
@@ -283,10 +284,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //add a custom title
     drugNamePropertyDef.title = @"Drug Name";
     
-    /****************************************************************************************/
-    /*	BEGIN Class Definition and attributes for the Client Entity */
-    /****************************************************************************************/ 
-    
+   
     //get the client setup from the clients View Controller Shared
     // Add a custom property that represents a custom cells for the description defined TextFieldAndLableCell.xib
 	
@@ -306,11 +304,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     
-    
-    /****************************************************************************************/
-    /*	END of Class Definition and attributes for the Client Entity */
-    /****************************************************************************************/
-    
+   
     //insert the custom property definition into the clientData class at index 
     [medicationDef insertPropertyDefinition:drugNameDataProperty atIndex:0];
     
@@ -550,29 +544,58 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
    
-    SCPropertyDefinition *prescriberPropertyDef = [medicationReviewDef propertyDefinitionWithName:@"prescriber"];
-    
-   	prescriberPropertyDef.type = SCPropertyTypeObjectSelection;
-    
-    SCClassDefinition *prescriberDef =[SCClassDefinition definitionWithEntityName:@"ClinicianEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
-    prescriberDef.titlePropertyName=@"lastName;firstName";
-    prescriberDef.titlePropertyNameDelimiter=@", ";
-    prescriberDef.keyPropertyName=@"lastName";
-    
-    SCPropertyGroup *prescriberNameGroup =[SCPropertyGroup groupWithHeaderTitle:@"Prescriber Name" withFooterTitle:@"Select this prescriber under the Clinician tab to add or view more details." withPropertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
-    
-    SCObjectSelectionAttributes *prescriberSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:prescriberDef allowMultipleSelection:NO allowNoSelection:NO];
-    prescriberSelectionAttribs.allowAddingItems = YES;
-    prescriberSelectionAttribs.allowDeletingItems = YES;
-    prescriberSelectionAttribs.allowMovingItems = YES;
-    prescriberSelectionAttribs.allowEditingItems = YES;
-    prescriberSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add prescribers)"];
-    prescriberSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New prescriber"];
-    prescriberPropertyDef.attributes = prescriberSelectionAttribs;
+//    SCPropertyDefinition *prescriberPropertyDef = [medicationReviewDef propertyDefinitionWithName:@"prescriber"];
     
     
-    [prescriberDef.propertyGroups addGroup:prescriberNameGroup];
+   
+    //get the client setup from the clients View Controller Shared
+    // Add a custom property that represents a custom cells for the description defined TextFieldAndLableCell.xib
+	
+    //create the dictionary with the data bindings
+    NSDictionary *clinicianDataBindings = [NSDictionary 
+                                          dictionaryWithObjects:[NSArray arrayWithObject:@"prescriber"] 
+                                          forKeys:[NSArray arrayWithObject:@"1" ]]; // 1 are the control tags
+	
+    //create the custom property definition
+    SCCustomPropertyDefinition *clinicianDataProperty = [SCCustomPropertyDefinition definitionWithName:@"PrescriberData"
+                                                                                   withuiElementClass:[ClinicianSelectionCell class] withObjectBindings:clinicianDataBindings];
+	
     
+    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+    clinicianDataProperty.autoValidate=FALSE;
+    
+    
+    
+    
+    
+    /****************************************************************************************/
+    /*	END of Class Definition and attributes for the Client Entity */
+    /****************************************************************************************/
+    
+    //insert the custom property definition into the clientData class at index 
+    [medicationReviewDef insertPropertyDefinition:clinicianDataProperty atIndex:1];
+    
+//   	prescriberPropertyDef.type = SCPropertyTypeObjectSelection;
+//    
+//    SCClassDefinition *prescriberDef =[SCClassDefinition definitionWithEntityName:@"ClinicianEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
+//    prescriberDef.titlePropertyName=@"lastName;firstName";
+//    prescriberDef.titlePropertyNameDelimiter=@", ";
+//    prescriberDef.keyPropertyName=@"lastName";
+//    
+//    SCPropertyGroup *prescriberNameGroup =[SCPropertyGroup groupWithHeaderTitle:@"Prescriber Name" withFooterTitle:@"Select this prescriber under the Clinician tab to add or view more details." withPropertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
+//    
+//    SCObjectSelectionAttributes *prescriberSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:prescriberDef allowMultipleSelection:NO allowNoSelection:NO];
+//    prescriberSelectionAttribs.allowAddingItems = YES;
+//    prescriberSelectionAttribs.allowDeletingItems = YES;
+//    prescriberSelectionAttribs.allowMovingItems = YES;
+//    prescriberSelectionAttribs.allowEditingItems = YES;
+//    prescriberSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add prescribers)"];
+//    prescriberSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New prescriber"];
+//    prescriberPropertyDef.attributes = prescriberSelectionAttribs;
+//    
+//    
+//    [prescriberDef.propertyGroups addGroup:prescriberNameGroup];
+//    
     
     
     //Create a property definition for the adherance property.

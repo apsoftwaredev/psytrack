@@ -37,6 +37,24 @@
 
 #pragma mark -
 #pragma mark View lifecycle
+
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController filterByPrescriber:(BOOL)prescriberFilter{
+    
+    self=[super initWithNibName:nibName bundle:bundle];
+    
+    filterByPrescriber=prescriberFilter;
+    isInDetailSubview=detailSubview;
+    clinicianObjectSelectionCell=objectSelectionCell;
+    
+    sendingViewController=viewController;
+    
+    
+    return self;
+    
+} 
+
+
+
 -(void)viewDidUnload{
     [super viewDidUnload];
    
@@ -78,16 +96,83 @@
 //    
 //    
     
-          
+    if (isInDetailSubview) {
+        
+        NSPredicate *prescriberFilter=nil;
+        if (filterByPrescriber) {
+            prescriberFilter=[NSPredicate predicateWithFormat:@"isPrescriber ==%@",[NSNumber numberWithBool: YES]];
+            
+            
+            NSString *scopeTitleAtOne= (NSString *)[self.searchBar.scopeButtonTitles objectAtIndex:1];
+            
+            scopeTitleAtOne=@"Prescribers";
+            
+            
+            self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"All Clinicians",@"Prescribers",@"At Current Site",nil];
+            
+        }
+        
+        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withEntityClassDefinition:self.clinicianDef usingPredicate:prescriberFilter useSCSelectionSection:YES];
+        
+        [self.searchBar setSelectedScopeButtonIndex:1];
+        tableModel_.allowDeletingItems=FALSE;
+        tableModel_.autoSelectNewItemCell=TRUE;
+        
+        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
+        
+        
+        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped)];
+        [buttons addObject:doneButton];
+        
+        // create a spacer
+        UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
+        [buttons addObject:editButton];
+        
+        [self editButtonItem];
+        
+        
+        // create a standard "add" button
+        UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
+        addButton.style = UIBarButtonItemStyleBordered;
+        [buttons addObject:addButton];
+        
+        
+        
+        // stick the buttons in the toolbar
+        self.navigationItem.rightBarButtonItems=buttons;
+        self.tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
+        self.tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:2];
+        
+        UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
+        
+        self.navigationItem.leftBarButtonItem=cancelButton;
+        
+        
+    }
+    else
+    {
+        
+        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
+                                                 withEntityClassDefinition:self.clinicianDef usingPredicate:nil useSCSelectionSection:FALSE];	
+        self.navigationItem.leftBarButtonItem = self.editButtonItem;
+        self.tableModel.editButtonItem = self.navigationItem.leftBarButtonItem;
+        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+        self.navigationItem.rightBarButtonItem = addButton;
+        self.tableModel.addButtonItem = self.navigationItem.rightBarButtonItem;
+        
+    }
+     
     
     // Instantiate the tabel model
-	self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self withEntityClassDefinition:self.clinicianDef];	
-    
+//	self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self withEntityClassDefinition:self.clinicianDef];	
+//    
     
     tableModel_.searchBar = self.searchBar;
 	tableModel_.searchPropertyName = @"firstName;lastName";
-    tableModel_.addButtonItem = self.navigationItem.rightBarButtonItem;
-    tableModel_.editButtonItem = self.navigationItem.leftBarButtonItem;
+//    tableModel_.addButtonItem = self.navigationItem.rightBarButtonItem;
+//    tableModel_.editButtonItem = self.navigationItem.leftBarButtonItem;
     tableModel_.allowMovingItems=TRUE;
     
     if (![SCHelper is_iPad]) {
@@ -109,7 +194,12 @@
     
     
    
-  
+    if([SCHelper is_iPad]){
+        [self.tableView setBackgroundView:nil];
+        [self.tableView setBackgroundView:[[UIView alloc] init]];
+        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+    }
+
     
 
 
@@ -117,13 +207,187 @@
                                                willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
                                                                      duration:5];
    
+       
    
 }
 
 
+-(void)cancelButtonTapped{
+    
+    NSLog(@"cancel button Tapped");
+    
+    NSLog(@"parent controller %@",[super parentViewController]);
+    
+    if(self.navigationController)
+	{
+		// check if self is the rootViewController
+		if([self.navigationController.viewControllers objectAtIndex:0] == self)
+		{
+			[self dismissModalViewControllerAnimated:YES];
+		}
+		else
+			[self.navigationController popViewControllerAnimated:YES];
+	}
+	else
+		[self dismissModalViewControllerAnimated:YES];
+    
+    
+}
 
 
 
+-(void)doneButtonTapped{
+    
+    NSLog(@"done Button tapped");
+    if (isInDetailSubview) {
+        SCTableViewSection *section=(SCTableViewSection *)[tableModel_ sectionAtIndex:0];
+        NSLog(@"section class is %@",[section class]);
+        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+            SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
+            
+            //            NSLog(@"test valie changed at index with cell index selected %i",[objectsSelectionSection.selectedItemIndex integerValue]) ;
+            //            if (clientObjectSelectionCell) {
+            
+            //                NSLog(@"objectsSelectionSection.selectedItemsIndexes.count %i",objectsSelectionSection.items.count);
+            
+            //                if ([objectsSelectionSection.selectedItemIndex integerValue]>=0&&[objectsSelectionSection.selectedItemIndex integerValue]<=objectsSelectionSection.items.count) {
+            //                    
+            NSIndexPath *cellIndexPath=objectsSelectionSection.selectedCellIndexPath;
+            
+            SCTableViewCell *cell=(SCTableViewCell *)[tableModel_ cellAtIndexPath:cellIndexPath];
+            NSLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
+            
+            
+            
+            NSLog(@"selected item index%@",objectsSelectionSection.selectedItemIndex);
+            
+            if (objectsSelectionSection.cellCount>0) {
+                if (currentlySelectedClinician) {
+                    clinicianObjectSelectionCell.clinicianObject=currentlySelectedClinician ;
+                    [clinicianObjectSelectionCell  doneButtonTappedInDetailView:currentlySelectedClinician withValue:TRUE];
+                    
+                    
+                }
+                
+            }          
+            
+            
+            
+            
+            //            }
+            
+            //                    clientObjectSelectionCell.hasChangedClients=TRUE;
+            //                }
+            //                else{
+            //                
+            //                    [clientObjectSelectionCell doneButtonTappedInDetailView:nil withValue:NO];
+            //                
+            //                }
+            
+            
+            [self cancelButtonTapped];
+            
+        } 
+    }
+    //        else
+    //        {
+    //            clientObjectSelectionCell.items=[NSArray array];
+    //            [clientObjectSelectionCell doneButtonTappedInDetailView:nil withValue:NO];
+    //        }
+    //
+    //        
+    //        if(self.navigationController)
+    //        {
+    //            // check if self is the rootViewController
+    //            if([self.navigationController.viewControllers objectAtIndex:0] == self)
+    //            {
+    //                [self dismissModalViewControllerAnimated:YES];
+    //            }
+    //            else
+    //                [self.navigationController popViewControllerAnimated:YES];
+    //        }
+    //        else
+    //            [self dismissModalViewControllerAnimated:YES];
+    //        
+    //    }
+    //
+    
+    
+}
+
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+    if (tableViewModel.tag==0&&[section isKindOfClass:[SCObjectSelectionSection class]]) {
+        
+        //        SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
+        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+        
+        currentlySelectedClinician=(ClinicianEntity *)cell.boundObject;
+        NSLog(@"currently selected client is %@",currentlySelectedClinician);
+    }
+    NSLog(@"table model class %@",[tableViewModel class]);
+    if ([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]]) {
+        SCArrayOfObjectsModel *arrayOfObjectsModel=(SCArrayOfObjectsModel *)tableViewModel;
+        
+        [arrayOfObjectsModel dispatchSelectRowAtIndexPathEvent:indexPath];
+        return;
+    }
+    
+    if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+        SCObjectSelectionSection *selectionSection=(SCObjectSelectionSection *)section;
+        
+        [selectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
+        return;
+    }
+    if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
+        SCArrayOfObjectsSection *selectionSection=(SCArrayOfObjectsSection *)section;
+        
+        [selectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
+        
+    }
+    NSLog(@"section class %@",[section class]);
+    
+    
+}
+
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    [super tableViewModel:tableViewModel willConfigureCell:cell forRowAtIndexPath:indexPath];
+
+    
+    if (tableViewModel.tag==0) {
+        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+       
+        SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)section;
+        //            int objectSelectionSectionItemsCount=(NSInteger ) objectSelectionSection.cellCount;
+        
+        
+        
+        if ([cell.boundObject isEqual:currentlySelectedClinician]) {
+            NSLog(@"currently selected client is %@",currentlySelectedClinician);
+            NSLog(@"cell bound object is %@",cell.boundObject);
+            NSLog(@"they are equal section cell count is %i", section.cellCount);
+            //            [objectSelectionSection setSelectedCellIndexPath:indexPath];
+            [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:currentlySelectedClinician]]];
+            
+        }
+        //        [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:currentlySelectedClient]]];
+        
+        
+        
+        //            [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:(NSInteger)[objectSelectionSection.items indexOfObject:managedObject]]]; 
+        
+        NSLog(@"index integer of object %i",[objectSelectionSection.items indexOfObject:currentlySelectedClinician]);
+        
+            
+        }
+        
+    }
+
+
+}
 //#pragma mark -
 //#pragma mark SCTableViewModelDataSource methods
 //
@@ -162,8 +426,22 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         switch (selectedScope) {
             case 1: //All
-               objectsModel.itemsPredicate = [NSPredicate predicateWithFormat:@"myCurrentSupervisor == %i OR myPastSupervisor==%i", TRUE, TRUE];
+            {
+                NSPredicate *scopeFilter=nil;
+                
+                if (filterByPrescriber) {
+                    scopeFilter=[NSPredicate predicateWithFormat:@"isPrescriber ==%@",[NSNumber numberWithBool: YES]];
+                }
+                else
+                {
+                    scopeFilter= [NSPredicate predicateWithFormat:@"myCurrentSupervisor == %i OR myPastSupervisor==%i", TRUE, TRUE];
+                    
+                }
+                objectsModel.itemsPredicate = scopeFilter;
+                
+                    
                 NSLog(@"case 1");
+            }
                 break;
             case 2: //Female
                 objectsModel.itemsPredicate = [NSPredicate predicateWithFormat:@"atMyCurrentSite == %i OR myInformation==%i", TRUE, TRUE];

@@ -24,7 +24,7 @@ TO DO:
 
 -   changed prescriber clinician to searchable clinician list
 
--	Finish adding the drug section to the client section
+
 
 
 - check danger to others
@@ -116,3 +116,4 @@ begin adding reports
 - check clinician prefix when importing group contacts
 -   fix interpersonal relationships
 -	color the referrals to a different color and allow sorting
+-	Finish adding the drug section to the client section

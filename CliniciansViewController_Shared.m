@@ -937,7 +937,7 @@
                                                          withManagedObjectContext:managedObjectContext 
                                                                 withPropertyNames:[NSArray arrayWithObjects: @"degrees", 
                                                                                    @"licenseNumbers", @"certifications",@"specialties",@"publications",@"orientationHistory",@"awards",@"memberships",@"influences",@"employments",
-                                                                                   @"demographicInfo",@"startedPracticing",@"clinicianType", @"atMyCurrentSite",  @"myCurrentSupervisor",@"myPastSupervisor",@"referrals",@"logs",@"bio",@"notes", nil]];
+                                                                                   @"demographicInfo",@"startedPracticing",@"clinicianType", @"atMyCurrentSite",  @"myCurrentSupervisor",@"myPastSupervisor",@"referrals",@"isPrescriber",@"logs",@"bio",@"notes", nil]];
 	
     
     
@@ -1504,7 +1504,7 @@
     
     
     
-    SCPropertyGroup *credentialssGroup = [SCPropertyGroup groupWithHeaderTitle:@"Credentials" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"clinicianType",@"licenseNumbers", @"degrees", @"certifications",nil]];
+    SCPropertyGroup *credentialssGroup = [SCPropertyGroup groupWithHeaderTitle:@"Credentials" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"clinicianType",@"licenseNumbers", @"degrees", @"certifications",@"isPrescriber",nil]];
     
     SCPropertyGroup *professionalHistoryGroup =[SCPropertyGroup groupWithHeaderTitle:@"Professional History" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"employments",@"publications", @"awards", @"memberships",nil]];
     
@@ -1645,6 +1645,7 @@
         
         cell.backgroundColor=[UIColor whiteColor];
         cell.height= 50;
+        
         
         
     }

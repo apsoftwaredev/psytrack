@@ -278,6 +278,7 @@
 		E78DA6931520B1AD004ABF29 /* icd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E78DA6911520B1AD004ABF29 /* icd.xcdatamodeld */; };
 		E78DA6991521D93E004ABF29 /* MedicationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA6981521D93E004ABF29 /* MedicationEntity.m */; };
 		E78DA69C1521DBD2004ABF29 /* MedicationReviewEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA69B1521DBD1004ABF29 /* MedicationReviewEntity.m */; };
+		E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA69E15227EA9004ABF29 /* ClinicianSelectionCell.m */; };
 		E7912D0E151D332700E0609A /* DemographicProfileEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D0D151D332700E0609A /* DemographicProfileEntity.m */; };
 		E7912D17151D349E00E0609A /* MigrationHistoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D16151D349E00E0609A /* MigrationHistoryEntity.m */; };
 		E7912D1A151DF7DB00E0609A /* VitalsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D19151DF7DB00E0609A /* VitalsEntity.m */; };
@@ -683,6 +684,8 @@
 		E78DA6981521D93E004ABF29 /* MedicationEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedicationEntity.m; sourceTree = "<group>"; };
 		E78DA69A1521DBD1004ABF29 /* MedicationReviewEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedicationReviewEntity.h; sourceTree = "<group>"; };
 		E78DA69B1521DBD1004ABF29 /* MedicationReviewEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedicationReviewEntity.m; sourceTree = "<group>"; };
+		E78DA69D15227EA9004ABF29 /* ClinicianSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianSelectionCell.h; sourceTree = "<group>"; };
+		E78DA69E15227EA9004ABF29 /* ClinicianSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicianSelectionCell.m; sourceTree = "<group>"; };
 		E7912D0C151D332700E0609A /* DemographicProfileEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicProfileEntity.h; sourceTree = "<group>"; };
 		E7912D0D151D332700E0609A /* DemographicProfileEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicProfileEntity.m; sourceTree = "<group>"; };
 		E7912D15151D349E00E0609A /* MigrationHistoryEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MigrationHistoryEntity.h; sourceTree = "<group>"; };
@@ -1184,6 +1187,8 @@
 		37F7CECF15005EC900AD2C3A /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
+				E78DA69D15227EA9004ABF29 /* ClinicianSelectionCell.h */,
+				E78DA69E15227EA9004ABF29 /* ClinicianSelectionCell.m */,
 				E78DA68E151FAC8A004ABF29 /* DrugNameObjectSelectionCell.h */,
 				E78DA68F151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m */,
 				E70B9EFD15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.h */,
@@ -1761,6 +1766,7 @@
 				E78DA6931520B1AD004ABF29 /* icd.xcdatamodeld in Sources */,
 				E78DA6991521D93E004ABF29 /* MedicationEntity.m in Sources */,
 				E78DA69C1521DBD2004ABF29 /* MedicationReviewEntity.m in Sources */,
+				E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

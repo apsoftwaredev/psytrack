@@ -20,7 +20,7 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "ClinicianEntity.h"
 #import "CliniciansViewController_Shared.h"
-
+#import "ClinicianSelectionCell.h"
 @interface ClinicianViewController : CliniciansViewController_Shared <SCTableViewModelDataSource, SCTableViewModelDelegate,SCTableViewCellDelegate,UIAlertViewDelegate, UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate> {
      
  
@@ -30,10 +30,12 @@
      UILabel *totalCliniciansLabel;
        
 
-   
-       
+    BOOL filterByPrescriber;
+    BOOL isInDetailSubview;
+    ClinicianSelectionCell *clinicianObjectSelectionCell;
+    UIViewController *sendingViewController;
     
-  
+    ClinicianEntity *currentlySelectedClinician;
     
 }
 
@@ -46,7 +48,13 @@
 
 
 -(void)updateClinicianTotalLabel;
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController filterByPrescriber:(BOOL)prescriberFilter;
 
+    
+    
+-(void)cancelButtonTapped;
+    
+   
 
 
 #define degreesToRadian(x) (M_PI * (x) / 180.0)
