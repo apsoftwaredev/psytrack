@@ -26,6 +26,7 @@
     self.dateFormatter=dateFormatterShort;
     
     self.datePicker.datePickerMode=UIDatePickerModeDate;
+    self.textLabel.textColor=[UIColor redColor];
 }
 
 -(void)loadBoundValueIntoControl{

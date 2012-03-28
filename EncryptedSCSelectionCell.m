@@ -24,6 +24,7 @@
     self.textLabel.text= @"Sex";
     
     self.autoValidateValue=NO;
+    self.textLabel.textColor=[UIColor redColor];
 }
 
 -(void)loadBoundValueIntoControl{

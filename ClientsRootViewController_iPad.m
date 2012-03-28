@@ -669,7 +669,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
             }
             
             
-            if (cell.tag==4&& tableViewModel.sectionCount >2) {
+            if (cell.tag==5&& tableViewModel.sectionCount >2) {
                 
                 NSLog(@"cell tag is %i",cell.tag);
                 NSLog(@"cell text is %@",cell.textLabel.text);

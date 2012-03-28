@@ -22,7 +22,7 @@ TO DO:
 
 
 
--   changed prescriber clinician to searchable clinician list
+
 
 
 
@@ -34,7 +34,7 @@ TO DO:
 
 
 
-
+- add existing hours
 
 
 -	Add billing section to the client tab, keep it simple, -add service codes
@@ -56,7 +56,7 @@ TO DO:
 
 
 
-- add existing hours
+
 - extend date on encryption key
 
 
@@ -117,3 +117,4 @@ begin adding reports
 -   fix interpersonal relationships
 -	color the referrals to a different color and allow sorting
 -	Finish adding the drug section to the client section
+-   changed prescriber clinician to searchable clinician list

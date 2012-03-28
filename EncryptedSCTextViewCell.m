@@ -19,6 +19,7 @@
     self.textView.tag=1;
     
     self.autoValidateValue=NO;
+    self.textLabel.textColor=[UIColor redColor];
 }
 
 -(void)loadBoundValueIntoControl{

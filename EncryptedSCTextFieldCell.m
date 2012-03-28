@@ -29,6 +29,7 @@
     self.textField.tag=1;
       
     self.autoValidateValue=NO;
+    self.textLabel.textColor=[UIColor redColor];
 //    self.textLabel.text=[self.objectBindings valueForKey:@"33"];
 }
 

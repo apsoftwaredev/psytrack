@@ -1087,11 +1087,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "EncryptedSCDateCell.m"
-         timestampString = "353563881.153466"
+         timestampString = "354637322.167969"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "49"
-         endingLineNumber = "49"
+         startingLineNumber = "50"
+         endingLineNumber = "50"
          landmarkName = "-loadBoundValueIntoControl"
          landmarkType = "5">
       </FileBreakpoint>
