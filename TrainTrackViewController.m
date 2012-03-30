@@ -23,7 +23,7 @@
 #import "CustomSCSelectonCellWithLoading.h"
 //#import "CliniciansViewController_Shared.h"
 #import "LCYLockSettingsViewController.h"
-
+#import "ExistingHoursViewController.h"
 
 #import "DTAboutViewController.h"
 #import "NSString+Helpers.h"
@@ -93,7 +93,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
 //    myInfoCell.tag=1;
 
     //Do some property definition customization for the Supervisor Class
-    SCSelectionCell *testAdministrationCell=[SCSelectionCell cellWithText:@"Testing Sessions" withBoundKey:@"testAdminstration" withValue:nil];
+    SCSelectionCell *testAdministrationCell=[SCSelectionCell cellWithText:@"Assessment" withBoundKey:@"testAdminstration" withValue:nil];
     testAdministrationCell.delegate=self;
     testAdministrationCell.tag=2;
     SCSelectionCell *interventionCell=[SCSelectionCell cellWithText:@"Psychotherapy" withBoundKey:@"psychotherapyCell" withValue:nil];
@@ -104,6 +104,8 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     indirectSupportCell.delegate=self;
     indirectSupportCell.tag=4;
     
+   
+    
     SCSelectionCell *supervisionReceivedCell=[SCSelectionCell cellWithText:@"Supervision Received" withBoundKey:@"supervisionReceived" withValue:nil];
     supervisionReceivedCell.delegate=self;
     supervisionReceivedCell.tag=5;
@@ -111,49 +113,53 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     supervisionGivenCell.delegate=self;
     supervisionGivenCell.tag=6;
     
+    SCSelectionCell *existingHoursCell=[SCSelectionCell cellWithText:@"Existing Hours" withBoundKey:@"existing" withValue:nil];
+    existingHoursCell.delegate=self;
+    existingHoursCell.tag=7;
+    
     SCSelectionCell *continuingEducationCell=[SCSelectionCell cellWithText:@"Continuing Education Credits" withBoundKey:@"continuingEducation" withValue:nil];
     continuingEducationCell.delegate=self;
-    continuingEducationCell.tag=7;
+    continuingEducationCell.tag=8;
 
     SCSelectionCell *certificationsCell=[SCSelectionCell cellWithText:@"Certifications" withBoundKey:@"certifications" withValue:nil];
     certificationsCell.delegate=self;
-    certificationsCell.tag=8;
+    certificationsCell.tag=9;
     
     SCSelectionCell *collegeCoursesCell=[SCSelectionCell cellWithText:@"College Courses" withBoundKey:@"collegeCourses" withValue:nil];
     collegeCoursesCell.delegate=self;
-    collegeCoursesCell.tag=9;
+    collegeCoursesCell.tag=10;
     
     SCSelectionCell *importantExamsCell=[SCSelectionCell cellWithText:@"Important Exams" withBoundKey:@"importantExams" withValue:nil];
     importantExamsCell.delegate=self;
-    importantExamsCell.tag=10;
+    importantExamsCell.tag=11;
     
     SCSelectionCell *teachingExperienceCell=[SCSelectionCell cellWithText:@"Teaching Experience" withBoundKey:@"teachingExperiences" withValue:nil];
     teachingExperienceCell.delegate=self;
-    teachingExperienceCell.tag=11;
+    teachingExperienceCell.tag=12;
     
     SCSelectionCell *advisingExperienceCell=[SCSelectionCell cellWithText:@"Advisors & Advisees" withBoundKey:@"advisingExperience" withValue:nil];
     advisingExperienceCell.delegate=self;
-    advisingExperienceCell.tag=12;
+    advisingExperienceCell.tag=13;
 
      CustomSCSelectonCellWithLoading *drugDatabaseCell=[CustomSCSelectonCellWithLoading cellWithText:@"Drug Database" withBoundKey:@"drugDatabase" withValue:nil];
     drugDatabaseCell.delegate=self;
-    drugDatabaseCell.tag=13;
+    drugDatabaseCell.tag=14;
 
     SCSelectionCell *lockPasscodeCell=[SCSelectionCell cellWithText:@"Lock Screen Settings" withBoundKey:@"lockSettings" withValue:nil];
     lockPasscodeCell.delegate=self;
-    lockPasscodeCell.tag=14;
+    lockPasscodeCell.tag=15;
 
     SCSelectionCell *otherAppSettingsCell=[SCSelectionCell cellWithText:@"Calander & Contacts" withBoundKey:@"otherSettings" withValue:nil];
     otherAppSettingsCell.delegate=self;
-    otherAppSettingsCell.tag=15;
+    otherAppSettingsCell.tag=16;
 
     SCSelectionCell *supportCell=[SCSelectionCell cellWithText:@"Support" withBoundKey:@"support" withValue:nil];
     supportCell.delegate=self;
-    supportCell.tag=16;
+    supportCell.tag=17;
     
     SCSelectionCell *aboutCell=[SCSelectionCell cellWithText:@"About" withBoundKey:@"about" withValue:nil];
     aboutCell.delegate=self;
-    aboutCell.tag=17;
+    aboutCell.tag=18;
     
     
     
@@ -182,6 +188,9 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     [supervisionSection addCell:supervisionReceivedCell];
     [supervisionSection addCell:supervisionGivenCell];
   	
+    SCTableViewSection *existingHoursSection = [SCTableViewSection sectionWithHeaderTitle:@"Existing Hours Track"];
+    [existingHoursSection addCell:existingHoursCell];
+
 	SCTableViewSection *formalEducationSection = [SCTableViewSection sectionWithHeaderTitle:@"Formal Education Track"];
     [formalEducationSection addCell:collegeCoursesCell];
     [formalEducationSection addCell:certificationsCell];
@@ -211,6 +220,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     [tableModel_ addSection:directSection];
     [tableModel_ addSection:indirectSection];
     [tableModel_ addSection:supervisionSection];
+    [tableModel_ addSection:existingHoursSection];
     [tableModel_ addSection:formalEducationSection];
     [tableModel_ addSection:importantExamsSection];
     [tableModel_ addSection:teachingAndAdvisingSection];
@@ -369,6 +379,15 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
                     }
                     
                 }
+                
+               
+                if (arrayOfObjectsSection.cellCount>1) {
+                    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                    
+                    [appDelegate saveContext];
+                    [arrayOfObjectsSection reloadBoundValues];
+                    [self.tableView reloadData];
+                }
             } 
             else if ([arrayOfObjectsSection.items count]==0)
             {
@@ -479,7 +498,15 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
             [self.navigationController pushViewController:testAdministrationsViewController_iPad animated:YES];
             break;
         }    
-        case 13:
+            
+        case 7:
+        {
+            ExistingHoursViewController *existingHoursViewController = [[ExistingHoursViewController alloc] initWithNibName:@"ExistingHoursViewController" bundle:[NSBundle mainBundle]];
+            
+            [self.navigationController pushViewController:existingHoursViewController animated:YES];
+            break;
+        }    
+        case 14:
         {
             
             
@@ -522,14 +549,14 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
             
             break;
         }    
-        case 14:
+        case 15:
         {
                        
             LCYLockSettingsViewController *lockSettingsVC = [[LCYLockSettingsViewController alloc] initWithNibName:@"LCYLockSettingsViewController" bundle:nil];
             [[self navigationController] pushViewController:lockSettingsVC animated:YES];            
             break;
         }    
-        case 15:
+        case 16:
         {
             InAppSettingsViewController *inAppSettingsViewController = [[InAppSettingsViewController alloc] initWithNibName:@"InAppSettingsViewController" bundle:nil];
             
@@ -538,7 +565,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
             inAppSettingsViewController.rootNavController=self.navigationController;
             break;
         }    
-        case 16:
+        case 17:
         {
             DTLayoutDefinition *supportLayout = [DTLayoutDefinition layoutNamed:@"support"];
 			DTAboutViewController *support =[[DTAboutViewController alloc] initWithLayout:supportLayout];
@@ -546,7 +573,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
 			[self.navigationController pushViewController:support animated:YES];
             break;
         }   
-        case 17:
+        case 18:
         {
             DTAboutViewController *about = [[DTAboutViewController alloc] initWithLayout:nil]; // default is @"about"
 			about.title	 = @"About";

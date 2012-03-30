@@ -121,7 +121,7 @@
                                    initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
     [buttons addObject:editButton];
     
-    [self editButtonItem];
+   
 
     
     // create a standard "add" button

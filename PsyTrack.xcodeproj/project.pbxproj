@@ -279,6 +279,8 @@
 		E78DA6991521D93E004ABF29 /* MedicationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA6981521D93E004ABF29 /* MedicationEntity.m */; };
 		E78DA69C1521DBD2004ABF29 /* MedicationReviewEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA69B1521DBD1004ABF29 /* MedicationReviewEntity.m */; };
 		E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA69E15227EA9004ABF29 /* ClinicianSelectionCell.m */; };
+		E78DA6A415252579004ABF29 /* ExistingHoursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA6A215252579004ABF29 /* ExistingHoursViewController.m */; };
+		E78DA6A515252579004ABF29 /* ExistingHoursViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78DA6A315252579004ABF29 /* ExistingHoursViewController.xib */; };
 		E7912D0E151D332700E0609A /* DemographicProfileEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D0D151D332700E0609A /* DemographicProfileEntity.m */; };
 		E7912D17151D349E00E0609A /* MigrationHistoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D16151D349E00E0609A /* MigrationHistoryEntity.m */; };
 		E7912D1A151DF7DB00E0609A /* VitalsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D19151DF7DB00E0609A /* VitalsEntity.m */; };
@@ -686,6 +688,9 @@
 		E78DA69B1521DBD1004ABF29 /* MedicationReviewEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedicationReviewEntity.m; sourceTree = "<group>"; };
 		E78DA69D15227EA9004ABF29 /* ClinicianSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianSelectionCell.h; sourceTree = "<group>"; };
 		E78DA69E15227EA9004ABF29 /* ClinicianSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicianSelectionCell.m; sourceTree = "<group>"; };
+		E78DA6A115252579004ABF29 /* ExistingHoursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursViewController.h; sourceTree = "<group>"; };
+		E78DA6A215252579004ABF29 /* ExistingHoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursViewController.m; sourceTree = "<group>"; };
+		E78DA6A315252579004ABF29 /* ExistingHoursViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController.xib; sourceTree = "<group>"; };
 		E7912D0C151D332700E0609A /* DemographicProfileEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicProfileEntity.h; sourceTree = "<group>"; };
 		E7912D0D151D332700E0609A /* DemographicProfileEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicProfileEntity.m; sourceTree = "<group>"; };
 		E7912D15151D349E00E0609A /* MigrationHistoryEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MigrationHistoryEntity.h; sourceTree = "<group>"; };
@@ -1029,6 +1034,7 @@
 		37F7CE8E1500589200AD2C3A /* Track */ = {
 			isa = PBXGroup;
 			children = (
+				E78DA6A015252511004ABF29 /* Existing Hours */,
 				37F7CEB015005C7300AD2C3A /* TrainTrackViewController.h */,
 				37F7CEB115005C7300AD2C3A /* TrainTrackViewController.m */,
 				37F7CEAA15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib */,
@@ -1440,6 +1446,16 @@
 			name = "Custom Cells For Encryption";
 			sourceTree = "<group>";
 		};
+		E78DA6A015252511004ABF29 /* Existing Hours */ = {
+			isa = PBXGroup;
+			children = (
+				E78DA6A115252579004ABF29 /* ExistingHoursViewController.h */,
+				E78DA6A215252579004ABF29 /* ExistingHoursViewController.m */,
+				E78DA6A315252579004ABF29 /* ExistingHoursViewController.xib */,
+			);
+			name = "Existing Hours";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1626,6 +1642,7 @@
 				37B2254F150286170015D955 /* Default-Portrait~ipad.png in Resources */,
 				37B225511502861F0015D955 /* Default-Landscape~ipad.png in Resources */,
 				E7516BDC150BF9A2005B798A /* Dan Boice-46.jpg in Resources */,
+				E78DA6A515252579004ABF29 /* ExistingHoursViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1767,6 +1784,7 @@
 				E78DA6991521D93E004ABF29 /* MedicationEntity.m in Sources */,
 				E78DA69C1521DBD2004ABF29 /* MedicationReviewEntity.m in Sources */,
 				E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */,
+				E78DA6A415252579004ABF29 /* ExistingHoursViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
