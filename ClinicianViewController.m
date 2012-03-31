@@ -242,9 +242,78 @@
     if (isInDetailSubview) {
         SCTableViewSection *section=(SCTableViewSection *)[tableModel_ sectionAtIndex:0];
         NSLog(@"section class is %@",[section class]);
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        if ([appDelegate managedObjectContext].hasChanges) {
+            [appDelegate saveContext];
+        }
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
             
+            
+            if (objectsSelectionSection.allowMultipleSelection) {
+                NSInteger sectionCount=tableModel_.sectionCount;
+                if (sectionCount&& !currentlySelectedCliniciansArray) {
+                    currentlySelectedCliniciansArray=[NSMutableArray array];
+                }
+                for (NSInteger i=0; i<sectionCount ; i++ ) {
+                    SCObjectSelectionSection *sectionAtIndex=(SCObjectSelectionSection *)[tableModel_ sectionAtIndex:i];
+                    
+                    
+                    
+                    NSEnumerator *enumerator = [sectionAtIndex.selectedItemsIndexes objectEnumerator];
+                    id setObject;
+                    while ((setObject = [enumerator nextObject]) != nil)
+                    {
+                        SCTableViewCell *selectedCell=(SCTableViewCell *)[sectionAtIndex cellAtIndex:(NSUInteger)[(NSNumber *)setObject integerValue]];
+                        
+                        if ([selectedCell.boundObject isKindOfClass:[ClinicianEntity class]]) {
+                            ClinicianEntity *clinicianObject=(ClinicianEntity *)selectedCell.boundObject;
+                            [currentlySelectedCliniciansArray addObject:clinicianObject];
+                            
+                            NSLog(@"currently selected clinicians array is %@",currentlySelectedCliniciansArray);
+                            
+                        }
+                        
+                    }
+                        
+                        
+                       
+                        
+                }
+                        
+               
+            NSLog(@"currently selected clinicians array is %@",currentlySelectedCliniciansArray);
+                
+                        
+                        NSLog(@"object selection section selected itemsindexes %@",objectsSelectionSection.selectedItemsIndexes);                    
+                        
+                        [clinicianObjectSelectionCell  doneButtonTappedInDetailView:nil selectedItems: currentlySelectedCliniciansArray withValue:TRUE];
+                        
+                   
+                
+                
+            }else {
+                NSIndexPath *cellIndexPath=objectsSelectionSection.selectedCellIndexPath;
+                
+                SCTableViewCell *cell=(SCTableViewCell *)[tableModel_ cellAtIndexPath:cellIndexPath];
+                NSLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
+                
+                
+                
+                NSLog(@"selected item index%@",objectsSelectionSection.selectedItemIndex);
+                
+                
+                if (currentlySelectedClinician) {
+                    clinicianObjectSelectionCell.clinicianObject=currentlySelectedClinician ;
+                    
+                    
+                    [clinicianObjectSelectionCell  doneButtonTappedInDetailView:currentlySelectedClinician selectedItems:nil withValue:TRUE];
+                    
+                } 
+                
+
+            }
             //            NSLog(@"test valie changed at index with cell index selected %i",[objectsSelectionSection.selectedItemIndex integerValue]) ;
             //            if (clientObjectSelectionCell) {
             
@@ -252,24 +321,9 @@
             
             //                if ([objectsSelectionSection.selectedItemIndex integerValue]>=0&&[objectsSelectionSection.selectedItemIndex integerValue]<=objectsSelectionSection.items.count) {
             //                    
-            NSIndexPath *cellIndexPath=objectsSelectionSection.selectedCellIndexPath;
-            
-            SCTableViewCell *cell=(SCTableViewCell *)[tableModel_ cellAtIndexPath:cellIndexPath];
-            NSLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
-            
-            
-            
-            NSLog(@"selected item index%@",objectsSelectionSection.selectedItemIndex);
-            
-            if (objectsSelectionSection.cellCount>0) {
-                if (currentlySelectedClinician) {
-                    clinicianObjectSelectionCell.clinicianObject=currentlySelectedClinician ;
-                    [clinicianObjectSelectionCell  doneButtonTappedInDetailView:currentlySelectedClinician withValue:TRUE];
-                    
-                    
-                }
+                           
                 
-            }          
+                     
             
             
             

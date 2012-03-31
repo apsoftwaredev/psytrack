@@ -36,7 +36,7 @@
     UIViewController *sendingViewController;
     
     ClinicianEntity *currentlySelectedClinician;
-    
+    NSMutableArray *currentlySelectedCliniciansArray;
 }
 
 @property (nonatomic, weak) IBOutlet UISearchBar *searchBar;

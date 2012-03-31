@@ -12,12 +12,15 @@
 
     ClinicianEntity *clinicianObject_;
     BOOL hasChangedClinicians_;
+    BOOL usePrescriber;
+    BOOL multiSelect;
+    
 
 }
 
 
 @property (nonatomic,strong)  ClinicianEntity *clinicianObject;
 @property (nonatomic, readwrite)  BOOL hasChangedClinicians;
--(void)doneButtonTappedInDetailView:(NSObject *)selectedObject  withValue:(BOOL)hasValue;
+-(void)doneButtonTappedInDetailView:(NSManagedObject *)selectedObject selectedItems:(NSArray *)selectedItems withValue:(BOOL)hasValue;
 
 @end

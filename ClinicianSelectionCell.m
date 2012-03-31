@@ -13,10 +13,15 @@
 @implementation ClinicianSelectionCell
 @synthesize clinicianObject=clinicianObject_;
 @synthesize hasChangedClinicians=hasChangedClinicians_;
+
+
 - (void)willDisplay
 {
     
-    self.textLabel.text=@"Prescriber";
+    NSString *textLabelStr=[self.objectBindings valueForKey:@"90"];
+    
+    
+    self.textLabel.text=textLabelStr;
     if (clinicianObject_) {
         self.label.text=(NSString *) clinicianObject_.combinedName;
         
@@ -28,7 +33,8 @@
 - (void)didSelectCell
 {
     
-    NSLog(@"client %@",[self.boundObject valueForKey:@"prescriber"]);
+    NSString *clinicianKeyStr=[self.objectBindings valueForKey:@"92"];
+    NSLog(@"client %@",[self.boundObject valueForKey:clinicianKeyStr]);
     
     
     
@@ -46,7 +52,7 @@
         clinicianViewControllerNibName=[NSString stringWithString:@"ClinicianViewController"];
     
     
-    ClinicianViewController *clinicianViewContoller=[[ClinicianViewController alloc]initWithNibName:clinicianViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController filterByPrescriber:(BOOL)YES];
+    ClinicianViewController *clinicianViewContoller=[[ClinicianViewController alloc]initWithNibName:clinicianViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController filterByPrescriber:(BOOL)usePrescriber];
     
     
     
@@ -58,6 +64,9 @@
         SCTableViewSection *section=(SCTableViewSection *)[clinicianViewContoller.tableModel sectionAtIndex:0];
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
+            
+            
+            objectSelectionSection.allowMultipleSelection=multiSelect;
             
             if (clinicianObject_) {
                 
@@ -82,6 +91,10 @@
     
     self.textLabel.text = nil;
     self.detailTextLabel.text = nil;
+    usePrescriber=(BOOL)[(NSNumber *)[self.objectBindings valueForKey:@"91"]boolValue];
+    multiSelect=(BOOL)[(NSNumber *)[self.objectBindings valueForKey:@"93"]boolValue];
+    
+    self.allowMultipleSelection=multiSelect;
     //    NSManagedObjectContext *managedObjectContext=(NSManagedObjectContext *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
     //    
     //    
@@ -105,8 +118,51 @@
     //      NSLog(@"self itmes are %@",self.items);
     //    
     //      
+    
+    NSLog(@"cell bound object is %@", self.boundObject);
     if (!hasChangedClinicians_) {
-        self.clinicianObject=(ClinicianEntity *)[self.boundObject valueForKey:@"prescriber"];
+        NSString *clinicianKeyStr=[self.objectBindings valueForKey:@"92"];
+        if (!multiSelect) 
+        {
+        
+            self.clinicianObject=(ClinicianEntity *)[self.boundObject valueForKey:clinicianKeyStr];
+            
+            if (clinicianObject_)
+            {
+                
+                self.label.text =(NSString *) clinicianObject_.combinedName; 
+                
+            }
+            else 
+            {
+                self.textLabel.text=[NSString string];
+            } 
+        
+        }
+        else 
+        {
+         
+       
+            NSString *clinicianKeyStr=[self.objectBindings valueForKey:@"92"];
+            NSMutableSet *cliniciansMutableSet=(NSMutableSet *)[self.boundObject mutableSetValueForKey:clinicianKeyStr];
+            
+            int i=0;
+            NSString *labelStr=[NSString string];
+            for (ClinicianEntity *clinician in [cliniciansMutableSet allObjects]) {
+               
+                if (i==0) {
+                    labelStr=clinician.combinedName;
+                } 
+                else {
+                    labelStr=[labelStr stringByAppendingFormat:@", %@",clinician.combinedName];
+                }
+                   
+                i++;
+                  
+            }
+            self.label.text=labelStr;
+            
+        }
     }
     
     //        
@@ -124,15 +180,7 @@
     //    if (!clientObject.isDeleted) {
     //        self.selectedItemIndex=(NSNumber*)[NSNumber numberWithInteger:[self.items indexOfObject:clientObject]];
     
-    if (clinicianObject_){
-        
-        
-        self.label.text =(NSString *) clinicianObject_.combinedName; 
-        
-    }
-    else {
-        self.textLabel.text=[NSString string];
-    }
+    
     
     //    }
     
@@ -162,11 +210,12 @@
 //
 //}
 
--(void)doneButtonTappedInDetailView:(NSManagedObject *)selectedObject withValue:(BOOL)hasValue{
+-(void)doneButtonTappedInDetailView:(NSManagedObject *)selectedObject selectedItems:(NSArray *)selectedItems withValue:(BOOL)hasValue{
     
     needsCommit=TRUE;
     
     self.clinicianObject=(ClinicianEntity *) selectedObject;
+    self.items=selectedItems;
     //    [self.boundObject setValue:selectedObject forKey:@"client"];
     
     
@@ -177,29 +226,62 @@
         
         
         
-        NSIndexPath *myIndexPath=(NSIndexPath *)[self.ownerTableViewModel indexPathForCell:self];
+//        NSIndexPath *myIndexPath=(NSIndexPath *)[self.ownerTableViewModel indexPathForCell:self];
+//        
+//        SCTableViewSection *clinicianSelectionCellOwnerSection=(SCTableViewSection *)[self.ownerTableViewModel sectionAtIndex:(NSInteger )myIndexPath.section ];
         
-        SCTableViewSection *clinicianSelectionCellOwnerSection=(SCTableViewSection *)[self.ownerTableViewModel sectionAtIndex:(NSInteger )myIndexPath.section ];
         
-        
-        
+        if (multiSelect) 
+        {
+            
+             NSString *labelTextStr=[NSString string];
+            if (self.items.count) 
+            {
                
-        if (clinicianObject_) {
+                for (int i=0; i<self.items.count; i++) 
+                {
+               
+                    id obj=[self.items objectAtIndex:i];
+                    if ([obj isKindOfClass:[ClinicianEntity class]]) {
+                        ClinicianEntity *clinicianObjectInItems=(ClinicianEntity *)obj;
+                        
+                        if (i==0) 
+                        {
+                            labelTextStr=clinicianObjectInItems.combinedName;
+                        }
+                        else 
+                        {
+                            labelTextStr=[labelTextStr stringByAppendingFormat:@", %@",clinicianObjectInItems.combinedName];
+                        }
+
+                    }  
+                                           
+                }
+            }
+            self.label.text=labelTextStr;
             
-            
-            self.label.text=clinicianObject_.combinedName;
-            
-            NSIndexPath *selfIndexPath=(NSIndexPath *) [self.ownerTableViewModel.modeledTableView indexPathForCell:self];
-            [self.ownerTableViewModel valueChangedForRowAtIndexPath:selfIndexPath];
         }
-        //         }
-        //    }
+            
+        
+            
+ 
+        else if (clinicianObject_)
+        {
+            
+                
+                self.label.text=clinicianObject_.combinedName;
+                
+                NSIndexPath *selfIndexPath=(NSIndexPath *) [self.ownerTableViewModel.modeledTableView indexPathForCell:self];
+                [self.ownerTableViewModel valueChangedForRowAtIndexPath:selfIndexPath];
+        }
         else
         {
-            self.label.text=[NSString string];
-            //         self.selectedItemIndex=[NSNumber numberWithInteger:-1];
+                self.label.text=[NSString string];
+                //         self.selectedItemIndex=[NSNumber numberWithInteger:-1];
         }
-    }
+        
+    }   
+    
 }
 // overrides superclass
 - (void)commitChanges
@@ -214,16 +296,42 @@
     //    if((indexInt >= 0) &&(indexInt<=self.items.count+1)&&self.items.count>0){
     //        selectedObject = [self.items objectAtIndex:indexInt];
     
-    if (![clinicianObject_ isDeleted]) {
+     NSString *clinicianKeyStr=[self.objectBindings valueForKey:@"92"];
+    
+    
+    if (multiSelect) {
+        NSMutableSet *cliniciansMutableSet=[NSMutableSet set];
+      
+        int itemsCount=self.items.count;
+        for (int i=0; i<itemsCount; i++) {
+            id obj=[self.items objectAtIndex:i];
+            if ([obj isKindOfClass:[ClinicianEntity class]]) {
+                ClinicianEntity *clinicianObjectInItems=(ClinicianEntity *)obj;
+                
+                [cliniciansMutableSet addObject:clinicianObjectInItems];
+                
+            }  
+        }
+        [self.boundObject setValue:cliniciansMutableSet forKey:clinicianKeyStr];
         
-        [self.boundObject setValue:clinicianObject_ forKey:@"prescriber"];
-    }
-    else
+    }else 
     {
-        [self.boundObject setNilValueForKey:@"prescriber"];
-        //        self.selectedItemIndex=[NSNumber numberWithInteger:-1];
+    
+        if (![clinicianObject_ isDeleted]) {
+            
+            [self.boundObject setValue:clinicianObject_ forKey:clinicianKeyStr];
+        }
+        else
+        {
+            [self.boundObject setNilValueForKey:clinicianKeyStr];
+            //        self.selectedItemIndex=[NSNumber numberWithInteger:-1];
+        }
+         
+        [super commitChanges];
     }
-    [super commitChanges];
+
+    [self setAutoValidateValue:NO];
+   
     self.hasChangedClinicians=FALSE ;
     
     needsCommit=FALSE;

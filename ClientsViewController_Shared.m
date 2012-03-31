@@ -553,8 +553,8 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	
     //create the dictionary with the data bindings
     NSDictionary *clinicianDataBindings = [NSDictionary 
-                                          dictionaryWithObjects:[NSArray arrayWithObject:@"prescriber"] 
-                                          forKeys:[NSArray arrayWithObject:@"1" ]]; // 1 are the control tags
+                                          dictionaryWithObjects:[NSArray arrayWithObjects:@"prescriber",@"Prescriber",[NSNumber numberWithBool:YES],@"prescriber",[NSNumber numberWithBool:NO],nil] 
+                                          forKeys:[NSArray arrayWithObjects:@"1",@"90",@"91",@"92",@"93",nil ]]; // 1 are the control tags
 	
     //create the custom property definition
     SCCustomPropertyDefinition *clinicianDataProperty = [SCCustomPropertyDefinition definitionWithName:@"PrescriberData"
