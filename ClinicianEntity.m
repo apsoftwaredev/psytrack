@@ -83,18 +83,22 @@
     NSLog(@"name values in entity are %@, %@, %@, %@, %@, %@", prefix, firstName, middleName, lastName,suffix, credentialInitials );
     
     
-    
+    [self willAccessValueForKey:@"prefix"];
     if (prefix.length) {
         combinedName=[prefix stringByAppendingString:@" "];
     } 
+    [self didAccessValueForKey:@"prefix"];
     
+     [self willAccessValueForKey:@"firstName"];
     if (firstName.length) {
         combinedName=[combinedName stringByAppendingString:firstName];
     }
+     [self didAccessValueForKey:@"firstName"];
     
-    
+     [self willAccessValueForKey:@"middleName"];
     if (middleName.length ) 
     {
+        
         NSString *middleInitial=[middleName substringToIndex:1];
         
         middleInitial=[middleInitial stringByAppendingString:@"."];
@@ -105,6 +109,9 @@
         
         
     }
+     [self didAccessValueForKey:@"middleName"];
+    [self willAccessValueForKey:@"lastName"];
+
     if (lastName.length  && combinedName.length ) 
     {
         
@@ -112,17 +119,21 @@
         combinedName=[combinedName stringByAppendingFormat:@" %@",lastName];
         
     }
+     [self didAccessValueForKey:@"lastName"];
+    [self willAccessValueForKey:@"suffix"];
     if (suffix.length  && combinedName.length) {
         
         combinedName=[combinedName stringByAppendingFormat:@" %@",suffix];
         
     }
-    
+     [self didAccessValueForKey:@"suffix"];
+    [self willAccessValueForKey:@"credentialInitials"];
     if (credentialInitials.length  && combinedName.length) {
         
         combinedName=[combinedName stringByAppendingFormat:@", %@", credentialInitials];
         
     }
+     [self didAccessValueForKey:@"credentialInitials"];
     NSLog(@"combined name values at end in entity are  %@",combinedName  );
     
     

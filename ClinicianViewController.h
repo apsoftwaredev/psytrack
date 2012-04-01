@@ -37,6 +37,7 @@
     
     ClinicianEntity *currentlySelectedClinician;
     NSMutableArray *currentlySelectedCliniciansArray;
+    NSPredicate *filterPredicate;
 }
 
 @property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
@@ -48,7 +49,7 @@
 
 
 -(void)updateClinicianTotalLabel;
--(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController filterByPrescriber:(BOOL)prescriberFilter;
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController withPredicate:(NSPredicate *)startPredicate  usePrescriber:(BOOL)usePresciberBool;
 
     
     

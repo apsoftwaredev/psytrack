@@ -38,11 +38,12 @@
 #pragma mark -
 #pragma mark View lifecycle
 
--(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController filterByPrescriber:(BOOL)prescriberFilter{
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController withPredicate:(NSPredicate *)startPredicate  usePrescriber:(BOOL)usePresciberBool{
     
     self=[super initWithNibName:nibName bundle:bundle];
     
-    filterByPrescriber=prescriberFilter;
+    filterByPrescriber=usePresciberBool;
+    filterPredicate=startPredicate;
     isInDetailSubview=detailSubview;
     clinicianObjectSelectionCell=objectSelectionCell;
     
@@ -98,25 +99,12 @@
     
     if (isInDetailSubview) {
         
-        NSPredicate *prescriberFilter=nil;
-        if (filterByPrescriber) {
-            prescriberFilter=[NSPredicate predicateWithFormat:@"isPrescriber ==%@",[NSNumber numberWithBool: YES]];
-            
-            
-            NSString *scopeTitleAtOne= (NSString *)[self.searchBar.scopeButtonTitles objectAtIndex:1];
-            
-            scopeTitleAtOne=@"Prescribers";
-            
-            
-            self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"All Clinicians",@"Prescribers",@"At Current Site",nil];
-            
-        }else {
-             prescriberFilter=[NSPredicate predicateWithFormat:@"myCurrentSupervisor == %i OR myPastSupervisor==%i", TRUE, TRUE];
+        
+        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withEntityClassDefinition:self.clinicianDef usingPredicate:filterPredicate useSCSelectionSection:YES];
+        if (filterPredicate) {
+            [self.searchBar setSelectedScopeButtonIndex:1];
         }
         
-        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withEntityClassDefinition:self.clinicianDef usingPredicate:prescriberFilter useSCSelectionSection:YES];
-        
-        [self.searchBar setSelectedScopeButtonIndex:1];
         tableModel_.allowDeletingItems=FALSE;
         tableModel_.autoSelectNewItemCell=TRUE;
         
@@ -266,6 +254,9 @@
                 NSInteger sectionCount=tableModel_.sectionCount;
                 if (sectionCount&& !currentlySelectedCliniciansArray) {
                     currentlySelectedCliniciansArray=[NSMutableArray array];
+                }
+                else {
+                    [currentlySelectedCliniciansArray removeAllObjects];
                 }
                 for (NSInteger i=0; i<sectionCount ; i++ ) {
                     SCObjectSelectionSection *sectionAtIndex=(SCObjectSelectionSection *)[tableModel_ sectionAtIndex:i];
@@ -602,8 +593,17 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             {
                 NSPredicate *scopeFilter=nil;
                 
-                if (filterByPrescriber) {
-                    scopeFilter=[NSPredicate predicateWithFormat:@"isPrescriber ==%@",[NSNumber numberWithBool: YES]];
+                if (filterPredicate &&isInDetailSubview) {
+                    
+                    scopeFilter=filterPredicate;
+                    if (filterByPrescriber) {
+                        NSString *scopeTitleAtOne= (NSString *)[self.searchBar.scopeButtonTitles objectAtIndex:1];
+                        
+                        scopeTitleAtOne=@"Prescribers";
+                        
+                        
+                        self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"All Clinicians",@"Prescribers",@"At Current Site",nil];
+                    }
                 }
                 else
                 {
@@ -1482,6 +1482,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
             
             objectSelectionSection.allowMultipleSelection=YES;
+            objectSelectionSection.allowNoSelection=YES;
         }
         
     }

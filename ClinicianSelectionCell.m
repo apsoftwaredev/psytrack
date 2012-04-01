@@ -22,9 +22,26 @@
     
     
     self.textLabel.text=textLabelStr;
-    if (clinicianObject_) {
+    if (!multiSelect && clinicianObject_) {
         self.label.text=(NSString *) clinicianObject_.combinedName;
         
+    }else if (multiSelect)
+    {
+        int i=0;
+        NSString *labelStr=[NSString string];
+        for (ClinicianEntity *clinician in cliniciansArray_) {
+            
+            if (i==0) {
+                labelStr=clinician.combinedName;
+            } 
+            else {
+                labelStr=[labelStr stringByAppendingFormat:@", %@",clinician.combinedName];
+            }
+            
+            i++;
+            
+        }
+        self.label.text=labelStr;
     }
     
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -52,7 +69,15 @@
         clinicianViewControllerNibName=[NSString stringWithString:@"ClinicianViewController"];
     
     
-    ClinicianViewController *clinicianViewContoller=[[ClinicianViewController alloc]initWithNibName:clinicianViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController filterByPrescriber:(BOOL)usePrescriber];
+    NSPredicate *predicate=nil;
+    if (usePrescriber) {
+        predicate=[NSPredicate predicateWithFormat:@"isPrescriber ==%@",[NSNumber numberWithBool: YES]];
+      
+    }
+
+    
+    
+    ClinicianViewController *clinicianViewContoller=[[ClinicianViewController alloc]initWithNibName:clinicianViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController  withPredicate:(NSPredicate *)predicate usePrescriber:(BOOL)NO];
     
     
     
@@ -174,19 +199,27 @@
        
             NSString *clinicianKeyStr=[self.objectBindings valueForKey:@"92"];
             NSMutableSet *cliniciansMutableSet=(NSMutableSet *)[self.boundObject mutableSetValueForKey:clinicianKeyStr];
+            self.cliniciansArray=[NSMutableArray arrayWithArray:[cliniciansMutableSet allObjects]];
+            NSLog(@"clinician array is %@",cliniciansArray_);
             
-            int i=0;
             NSString *labelStr=[NSString string];
-            for (ClinicianEntity *clinician in [cliniciansMutableSet allObjects]) {
+            for (int i=0; i<cliniciansArray_.count; i++) {
                
-                if (i==0) {
-                    labelStr=clinician.combinedName;
-                } 
-                else {
-                    labelStr=[labelStr stringByAppendingFormat:@", %@",clinician.combinedName];
+                id objectInArray=[cliniciansArray_ objectAtIndex:i];
+                if ([objectInArray isKindOfClass:[ClinicianEntity class]]) {
+                    ClinicianEntity *clinicianInArray=(ClinicianEntity *)objectInArray;
+                    [clinicianInArray willAccessValueForKey:@"combinedName"];
+                    if (i==0) {
+                        NSLog(@"combined name is %@",clinicianInArray.combinedName);
+                        labelStr=clinicianInArray.combinedName;
+                    } 
+                    else {
+                        labelStr=[labelStr stringByAppendingFormat:@", %@",clinicianInArray.combinedName];
+                    }
+
                 }
-                   
-                i++;
+                                   
+              
                   
             }
             self.label.text=labelStr;
@@ -244,6 +277,9 @@
     needsCommit=TRUE;
     
     self.clinicianObject=nil;
+    if (self.cliniciansArray.count) {
+        [self.cliniciansArray removeAllObjects];
+    }
     self.cliniciansArray=nil;
     self.clinicianObject=(ClinicianEntity *) selectedObject;
     self.cliniciansArray=[NSMutableArray arrayWithArray:selectedItems];
