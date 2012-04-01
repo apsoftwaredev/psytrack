@@ -13,7 +13,7 @@
 @implementation ClinicianSelectionCell
 @synthesize clinicianObject=clinicianObject_;
 @synthesize hasChangedClinicians=hasChangedClinicians_;
-
+@synthesize cliniciansArray=cliniciansArray_;
 
 - (void)willDisplay
 {
@@ -61,20 +61,49 @@
     
     [self.ownerTableViewModel.viewController.navigationController pushViewController:clinicianViewContoller animated:YES];
     if ([clinicianViewContoller.tableModel sectionCount]>0) {
-        SCTableViewSection *section=(SCTableViewSection *)[clinicianViewContoller.tableModel sectionAtIndex:0];
+        
+        for (int i=0; i<clinicianViewContoller.tableModel.sectionCount; i++) {
+        
+            SCTableViewSection *section=(SCTableViewSection *)[clinicianViewContoller.tableModel sectionAtIndex:i];
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
             
             
-            objectSelectionSection.allowMultipleSelection=multiSelect;
+           
+           
+            if (multiSelect) {
             
-            if (clinicianObject_) {
+                NSMutableSet *selectedIndexesSet=objectSelectionSection.selectedItemsIndexes;
+                objectSelectionSection.allowMultipleSelection=YES;
+                for (int p=0; p<self.cliniciansArray.count; p++) {
+                    int clinicianInSectionIndex;
+                    ClinicianEntity *clinicianInArray=[self.cliniciansArray objectAtIndex:p];
+                    if ([objectSelectionSection.items containsObject:clinicianInArray]) {
+                        clinicianInSectionIndex=(int )[objectSelectionSection.items indexOfObject:clinicianInArray];
+                        if (![objectSelectionSection.selectedItemsIndexes containsObject:[NSNumber numberWithInt:clinicianInSectionIndex]]) {
+                             [selectedIndexesSet addObject:[NSNumber numberWithInt:clinicianInSectionIndex]];
+                        }
+                       
+                    }
+                    
+                }
+            
+             
+                
+            }
+            else if (clinicianObject_) 
+            {
+           
+            
                 
                 [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:clinicianObject_]]];
                 
                 
             } 
+                
         }
+    }
+            
         
     }
     
@@ -214,8 +243,11 @@
     
     needsCommit=TRUE;
     
+    self.clinicianObject=nil;
+    self.cliniciansArray=nil;
     self.clinicianObject=(ClinicianEntity *) selectedObject;
-    self.items=selectedItems;
+    self.cliniciansArray=[NSMutableArray arrayWithArray:selectedItems];
+ 
     //    [self.boundObject setValue:selectedObject forKey:@"client"];
     
     
@@ -235,13 +267,13 @@
         {
             
              NSString *labelTextStr=[NSString string];
-            if (self.items.count) 
+            if (self.cliniciansArray.count) 
             {
                
-                for (int i=0; i<self.items.count; i++) 
+                for (int i=0; i<self.cliniciansArray.count; i++) 
                 {
                
-                    id obj=[self.items objectAtIndex:i];
+                    id obj=[self.cliniciansArray objectAtIndex:i];
                     if ([obj isKindOfClass:[ClinicianEntity class]]) {
                         ClinicianEntity *clinicianObjectInItems=(ClinicianEntity *)obj;
                         
@@ -302,9 +334,9 @@
     if (multiSelect) {
         NSMutableSet *cliniciansMutableSet=[NSMutableSet set];
       
-        int itemsCount=self.items.count;
+        int itemsCount=self.cliniciansArray.count;
         for (int i=0; i<itemsCount; i++) {
-            id obj=[self.items objectAtIndex:i];
+            id obj=[self.cliniciansArray objectAtIndex:i];
             if ([obj isKindOfClass:[ClinicianEntity class]]) {
                 ClinicianEntity *clinicianObjectInItems=(ClinicianEntity *)obj;
                 

@@ -54,8 +54,8 @@
     
 -(void)cancelButtonTapped;
     
-   
-
+-(void)setSelectedClinicians;
+-(void)createSelectedCliniciansArray;
 
 #define degreesToRadian(x) (M_PI * (x) / 180.0)
 

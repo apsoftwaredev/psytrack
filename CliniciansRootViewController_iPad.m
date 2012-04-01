@@ -115,6 +115,65 @@
 
 #pragma mark -
 #pragma SCTableViewModelDelegate methodds
+
+
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath{
+    [super tableViewModel:tableViewModel valueChangedForRowAtIndexPath:indexPath];
+       
+   
+    if (tableViewModel.tag==0||tableViewModel.tag==1) {
+        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+         NSLog(@"cell class is %@",cell.class);
+//        if (cell.tag<) {
+//            UIView *viewLong =[cell viewWithTag:51];
+//            if ([viewLong isKindOfClass:[UILabel class]]) {
+//                NSLog(@"last name");
+//                UILabel *lastNameLabel =(UILabel *)viewLong;
+//                if ([lastNameLabel.text isEqualToString:@"Last Name:"]) {
+//                    UITextField *lastNameField=(UITextField *)[cell viewWithTag:50];
+//                    NSString *lastNameStr=lastNameField.text;
+//                    if (lastNameStr.length) {
+//                        NSLog(@"current cell superview is %@",[tableModel_ indexPathForCell:currentTableViewCell]);
+                        SCTableViewSection *section=(SCTableViewSection *)[tableModel_ sectionAtIndex:[tableModel_ indexPathForCell:currentTableViewCell].section];
+//                        unsigned short lastNameFirstChar=[lastNameStr characterAtIndex:0];
+//                        if ((unsigned short)[section.headerTitle characterAtIndex:0]!=(unsigned short)lastNameFirstChar) {
+                            NSLog(@"they arent equal");
+                            
+        if (!addingClinician) {
+            [section commitCellChanges];
+            [tableModel_ reloadBoundValues];
+            [tableModel_.modeledTableView reloadData];
+            
+
+        }
+                                                    
+                     
+//                    r
+//                        }
+                        
+//                    }
+                    
+//
+//                }
+//                
+//                
+//            } 
+//            
+//        }
+
+    }
+NSLog(@"did end editing row");
+
+}
+
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDisappearForSectionAtIndex:(NSUInteger)index{
+
+    if (tableViewModel.tag==0||tableViewModel.tag==1) {
+        addingClinician=NO;
+        
+    }
+
+}
 - (void)tableViewModel:(SCTableViewModel *) tableViewModel willConfigureCell:(SCTableViewCell *) cell forRowAtIndexPath:(NSIndexPath *) indexPath
 {
     NSLog(@"table view model tag is %i", tableViewModel.tag);
@@ -442,7 +501,16 @@
     
     
 }
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+        if (tableViewModel.tag==0) {
+        currentTableViewCell=[tableViewModel cellAtIndexPath:indexPath];
+    }
 
+
+    [super tableViewModel:tableViewModel didSelectRowAtIndexPath:indexPath];
+
+
+}
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
     [super tableViewModel:tableViewModel willSelectRowAtIndexPath:indexPath];
@@ -875,7 +943,9 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     NSLog(@"detail model created for row at index");
     
-    
+    if (tableViewModel.tag==0) {
+        addingClinician=YES;
+    }
     detailTableViewModel.tag=tableViewModel.tag+1;
     
     

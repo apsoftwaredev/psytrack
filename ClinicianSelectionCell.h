@@ -14,11 +14,11 @@
     BOOL hasChangedClinicians_;
     BOOL usePrescriber;
     BOOL multiSelect;
-    
+    NSMutableArray *cliniciansArray_;
 
 }
 
-
+@property (nonatomic,strong) NSMutableArray *cliniciansArray;
 @property (nonatomic,strong)  ClinicianEntity *clinicianObject;
 @property (nonatomic, readwrite)  BOOL hasChangedClinicians;
 -(void)doneButtonTappedInDetailView:(NSManagedObject *)selectedObject selectedItems:(NSArray *)selectedItems withValue:(BOOL)hasValue;

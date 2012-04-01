@@ -31,10 +31,10 @@
 
     
 
-    
+    SCTableViewCell *currentTableViewCell;
     
 
-   
+    BOOL addingClinician;
     
     
   //    ABAddressBookRef addressBook;
