@@ -41,6 +41,7 @@
 @dynamic atMyCurrentSite;
 @dynamic notes;
 @dynamic myInformation;
+@dynamic isPrescriber;
 @dynamic logs;
 @dynamic awards;
 @dynamic supportDeliverySupervised;

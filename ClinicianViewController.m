@@ -46,9 +46,9 @@
     filterPredicate=startPredicate;
     isInDetailSubview=detailSubview;
     clinicianObjectSelectionCell=objectSelectionCell;
-    
+    currentlySelectedClinician=clinicianObjectSelectionCell.clinicianObject;
     sendingViewController=viewController;
-    
+  
     
     return self;
     
@@ -60,7 +60,18 @@
     [super viewDidUnload];
    
     
-   
+    totalCliniciansLabel=nil;
+    
+    self.tableView.backgroundView=nil;
+    filterByPrescriber=NO;
+    isInDetailSubview=NO;
+    clinicianObjectSelectionCell=nil;
+   sendingViewController=nil;
+    
+    currentlySelectedClinician=nil;
+    currentlySelectedCliniciansArray=nil;
+    filterPredicate=nil;
+  
  
   self.totalCliniciansLabel=nil;
     
@@ -99,7 +110,10 @@
     
     if (isInDetailSubview) {
         
-        
+      
+             self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withEntityClassDefinition:self.clinicianDef usingPredicate:filterPredicate useSCSelectionSection:YES];
+       
+       
         self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withEntityClassDefinition:self.clinicianDef usingPredicate:filterPredicate useSCSelectionSection:YES];
         if (filterPredicate) {
             [self.searchBar setSelectedScopeButtonIndex:1];
@@ -138,6 +152,16 @@
         UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
         
         self.navigationItem.leftBarButtonItem=cancelButton;
+        
+        if (filterByPrescriber) {
+//            NSString *scopeTitleAtOne= (NSString *)[self.searchBar.scopeButtonTitles objectAtIndex:1];
+//            
+//            scopeTitleAtOne=@"Prescribers";
+            
+            
+            self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"All Clinicians",@"Prescribers",@"At Current Site",nil];
+        }
+
         
         
     }
@@ -236,7 +260,7 @@
 -(void)doneButtonTapped{
     
     NSLog(@"done Button tapped");
-    if (isInDetailSubview) {
+    if (isInDetailSubview &&tableModel_.sectionCount) {
         SCTableViewSection *section=(SCTableViewSection *)[tableModel_ sectionAtIndex:0];
         NSLog(@"section class is %@",[section class]);
 //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -308,8 +332,8 @@
                 
                 
                 if (currentlySelectedClinician) {
-                    clinicianObjectSelectionCell.clinicianObject=currentlySelectedClinician ;
-                    
+//                    clinicianObjectSelectionCell.clinicianObject=currentlySelectedClinician ;
+                   
                     
                     [clinicianObjectSelectionCell  doneButtonTappedInDetailView:currentlySelectedClinician selectedItems:nil withValue:TRUE];
                     
@@ -372,6 +396,34 @@
     
 }
 
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel willSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+    if (tableViewModel.tag==0&&[section isKindOfClass:[SCObjectSelectionSection class]]) {
+        
+        //        SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
+        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+        
+        currentlySelectedClinician=(ClinicianEntity *)cell.boundObject;
+        SCObjectSelectionSection *selectionSection=(SCObjectSelectionSection *)section;
+        
+        if (!selectionSection.allowMultipleSelection) {
+            
+            for (int i=0; i<tableViewModel.sectionCount; i++) {
+
+                SCObjectSelectionSection *selectionSectionToSet=(SCObjectSelectionSection *)[tableViewModel sectionAtIndex:i];
+            
+                NSMutableSet *selectedIndexesSet=selectionSectionToSet.selectedItemsIndexes;
+                [selectedIndexesSet removeAllObjects];
+                
+                [selectionSectionToSet setSelectedItemIndex:[NSNumber numberWithInteger:-1]];
+            }
+        
+        
+        }
+
+    }
+
+}
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
@@ -381,8 +433,69 @@
         SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
         
         currentlySelectedClinician=(ClinicianEntity *)cell.boundObject;
-        NSLog(@"currently selected client is %@",currentlySelectedClinician);
-    }
+//        SCObjectSelectionSection *selectionSection=(SCObjectSelectionSection *)section;
+    } 
+//        if (!selectionSection.allowMultipleSelection) {
+//            
+//            for (int i=0; i<tableViewModel.sectionCount; i++) {
+//                SCObjectSelectionSection *selectionSectionToSet=(SCObjectSelectionSection *)[tableViewModel sectionAtIndex:i];
+////                NSLog(@"section inde and i is %i and %i",indexPath.section, i);
+////                if (indexPath.section !=i) {
+////                    [selectionSection.selectedItemsIndexes removeAllObjects];
+////                    [selectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:-1]];
+////                    //                    [tableViewModel.modeledTableView reloadData];
+////                    for (int p=0; p<selectionSection.cellCount; p++) {
+////                        SCTableViewCell *cell=(SCTableViewCell * )[selectionSection cellAtIndex:p];
+////                       
+////                        NSLog(@"celll calss is %@",[cell class]);
+////                        
+////                            [cell setSelected:NO animated:NO];
+////                            NSLog(@"cell row %i and section %i and i%i",indexPath.row,indexPath.section,i);
+////                            NSLog(@"image view is %@",cell.imageView);
+////                    
+////                      
+////                        
+//////                        [cell setSelected:NO];
+//////                        [cell setNeedsDisplay];
+//////                        [cell reloadInputViews];
+////                       
+////                        
+////                    }
+////                }
+////               
+//////                else {
+//////                    NSLog(@"index path row is %i",indexPath.row);
+//////                    [selectionSection.selectedItemsIndexes addObjectsFromArray:[NSArray arrayWithObject:[NSNumber numberWithInteger:indexPath.row]]];
+//////                    [selectionSection setSelectedItemIndex:[NSNumber numberWithInteger:indexPath.row]];
+////////                    
+//////                }
+////            
+////            }
+//            
+//            NSMutableSet *selectedIndexesSet=selectionSectionToSet.selectedItemsIndexes;
+//            
+//                if (i==1 &&indexPath.section!=i) {
+//                    [selectedIndexesSet removeAllObjects];
+////                    [selectionSectionToSet setSelectedCellIndexPath:nil];
+////                    [selectionSectionToSet setSelectedItemIndex:[NSNumber numberWithInteger:-1]];                    NSLog(@"selected items is %@",selectionSectionToSet.selectedItemsIndexes);
+////                    [cell setSelected:NO animated:YES];
+////                    [cell reloadInputViews];
+////                    [cell setNeedsDisplay ];
+////                    [cell setNeedsLayout];
+////                    NSLog(@"cellaccessory type is");
+////                  
+//                }
+////                SCTableViewCell *cellInSectionOne=(SCTab
+////           int clinicianInSectionIndex=(int )[selectionSectionToSet.items indexOfObject:currentlySelectedClinician];
+////            if (![selectionSection.selectedItemsIndexes containsObject:[NSNumber numberWithInt:clinicianInSectionIndex]]) 
+////            {
+////                [selectedIndexesSet addObject:[NSNumber numberWithInt:clinicianInSectionIndex]];
+////            }
+////        selectionSection setSelectedItemIndex:[selectionSection indexForCell:<#(SCTableViewCell *)#>
+//            }
+//        }      NSLog(@"currently selected client is %@",currentlySelectedClinician);
+//    }
+
     NSLog(@"table model class %@",[tableViewModel class]);
     if ([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]]) {
         SCArrayOfObjectsModel *arrayOfObjectsModel=(SCArrayOfObjectsModel *)tableViewModel;
@@ -393,8 +506,8 @@
     
     if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
         SCObjectSelectionSection *selectionSection=(SCObjectSelectionSection *)section;
-        
-        [selectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
+         [selectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
+      
         return;
     }
     if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
@@ -593,18 +706,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             {
                 NSPredicate *scopeFilter=nil;
                 
-                if (filterPredicate &&isInDetailSubview) {
+                if (filterByPrescriber&& isInDetailSubview) {
                     
-                    scopeFilter=filterPredicate;
-                    if (filterByPrescriber) {
-                        NSString *scopeTitleAtOne= (NSString *)[self.searchBar.scopeButtonTitles objectAtIndex:1];
-                        
-                        scopeTitleAtOne=@"Prescribers";
-                        
-                        
-                        self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"All Clinicians",@"Prescribers",@"At Current Site",nil];
-                    }
-                }
+                    scopeFilter=[NSPredicate predicateWithFormat:@"isPrescriber ==%@",[NSNumber numberWithBool: YES]];
+                                    }
                 else
                 {
                     scopeFilter= [NSPredicate predicateWithFormat:@"myCurrentSupervisor == %i OR myPastSupervisor==%i", TRUE, TRUE];
@@ -1475,17 +1580,28 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
     [super tableViewModel:tableViewModel didAddSectionAtIndex:index];
     
-    
-    if (isInDetailSubview) {
-        SCTableViewSection *section=[tableViewModel sectionAtIndex:index];
-        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+    SCTableViewSection *section=[tableViewModel sectionAtIndex:index];
+      if (isInDetailSubview &&!filterByPrescriber)
+      {
+        
+        if ([section isKindOfClass:[SCObjectSelectionSection class]]) 
+        {
             SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
             
             objectSelectionSection.allowMultipleSelection=YES;
             objectSelectionSection.allowNoSelection=YES;
         }
-        
+      }
+    else  if (isInDetailSubview && filterByPrescriber)
+    {
+            if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+                SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
+                
+                objectSelectionSection.allowMultipleSelection=NO;
+                objectSelectionSection.allowNoSelection=YES;
+            }
     }
+    
 
 
 }

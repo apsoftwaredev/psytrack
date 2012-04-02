@@ -488,7 +488,7 @@
                                            forKeys:[NSArray arrayWithObjects:@"1",@"90",@"91",@"92",@"93",nil ]]; // 1 are the control tags
 	
     //create the custom property definition
-    SCCustomPropertyDefinition *clinicianDataProperty = [SCCustomPropertyDefinition definitionWithName:@"PrescriberData"
+    SCCustomPropertyDefinition *clinicianDataProperty = [SCCustomPropertyDefinition definitionWithName:@"ClinicianData"
                                                                                     withuiElementClass:[ClinicianSelectionCell class] withObjectBindings:clinicianDataBindings];
 	
 
@@ -580,7 +580,7 @@
 
    
     //Create a class definition for the family and couplesEntity
-    SCClassDefinition *groupDef = [SCClassDefinition definitionWithEntityName:@"ExistingGroupEntity" 
+    SCClassDefinition *groupDef = [SCClassDefinition definitionWithEntityName:@"ExistingGroupPsychotherapyEntity" 
                                                                 withManagedObjectContext:managedObjectContext
                                                                        withPropertyNames:[NSArray arrayWithObjects:@"hours",@"demographics", nil]];
     

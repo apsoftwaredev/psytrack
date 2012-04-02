@@ -54,6 +54,7 @@
 @property (nonatomic, strong) NSDate * startedPracticing;
 @property (nonatomic, strong) NSString * prefix;
 @property (nonatomic, strong) NSNumber * atMyCurrentSite;
+@property (nonatomic, strong) NSNumber * isPrescriber;
 @property (nonatomic, strong) NSString * notes;
 @property (nonatomic, strong) NSNumber * myInformation;
 

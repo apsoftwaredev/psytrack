@@ -15,6 +15,7 @@
 @synthesize hasChangedClinicians=hasChangedClinicians_;
 @synthesize cliniciansArray=cliniciansArray_;
 
+
 - (void)willDisplay
 {
     
@@ -23,7 +24,7 @@
     
     self.textLabel.text=textLabelStr;
     if (!multiSelect && clinicianObject_) {
-        self.label.text=(NSString *) clinicianObject_.combinedName;
+        self.label.text=(NSString *) self.clinicianObject.combinedName;
         
     }else if (multiSelect)
     {
@@ -70,31 +71,66 @@
     
     
     NSPredicate *predicate=nil;
-    if (usePrescriber) {
-        predicate=[NSPredicate predicateWithFormat:@"isPrescriber ==%@",[NSNumber numberWithBool: YES]];
+    
+    
+    if ((usePrescriber &&(BOOL)[clinicianObject_.isPrescriber boolValue])||!(clinicianObject_ &&usePrescriber)) {
+        
+        BOOL startWithPrescriberFilter=YES;
+        
+        for (int i=0; i<cliniciansArray_.count; i++) {
+            ClinicianEntity *clinicianInArray=(ClinicianEntity *)[cliniciansArray_ objectAtIndex:i];
+            if (!clinicianInArray.isPrescriber|| clinicianInArray.isPrescriber==[NSNumber numberWithBool: NO]) {
+                startWithPrescriberFilter=NO;
+                break;
+                
+            }
+        }
+        if (!startWithPrescriberFilter) {
+             predicate=[NSPredicate predicateWithFormat:@"isPrescriber ==%@",[NSNumber numberWithBool: YES]];
+            
+            
+        }
+        
+       
+        
+                
       
+    }else if (clinicianObject_){
+        BOOL startWithMySupervisorFilter=YES;
+        
+             
+        if ([clinicianObject_.myCurrentSupervisor isEqualToNumber:[NSNumber numberWithBool:YES]]&&[clinicianObject_.myPastSupervisor isEqualToNumber:[NSNumber numberWithBool:YES]]&&[clinicianObject_.myInformation  isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+            startWithMySupervisorFilter=NO;
+            
+            
+        }
+        if (startWithMySupervisorFilter) {
+             predicate=[NSPredicate predicateWithFormat:@"myCurrentSupervisor == %i OR myPastSupervisor==%i", TRUE, TRUE];
+        }
+       
     }
 
+    BOOL prescriberBool=usePrescriber;
+    NSLog(@"use prescriberis %i",usePrescriber);
+    
+    ClinicianViewController *clinicianViewController=[[ClinicianViewController alloc]initWithNibName:clinicianViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController  withPredicate:(NSPredicate *)predicate usePrescriber:(BOOL)prescriberBool];
     
     
-    ClinicianViewController *clinicianViewContoller=[[ClinicianViewController alloc]initWithNibName:clinicianViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController  withPredicate:(NSPredicate *)predicate usePrescriber:(BOOL)NO];
     
     
     
     
-    
-    
-    [self.ownerTableViewModel.viewController.navigationController pushViewController:clinicianViewContoller animated:YES];
-    if ([clinicianViewContoller.tableModel sectionCount]>0) {
+    [self.ownerTableViewModel.viewController.navigationController pushViewController:clinicianViewController animated:YES];
+    if ([clinicianViewController.tableModel sectionCount]>0) {
         
-        for (int i=0; i<clinicianViewContoller.tableModel.sectionCount; i++) {
+        for (int i=0; i<clinicianViewController.tableModel.sectionCount; i++) {
         
-            SCTableViewSection *section=(SCTableViewSection *)[clinicianViewContoller.tableModel sectionAtIndex:i];
+            SCTableViewSection *section=(SCTableViewSection *)[clinicianViewController.tableModel sectionAtIndex:i];
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
             
             
-           
+            objectSelectionSection.allowNoSelection=YES;
            
             if (multiSelect) {
             
@@ -119,13 +155,16 @@
             else if (clinicianObject_) 
             {
            
-            
-                
+                objectSelectionSection.allowMultipleSelection=NO;
+    
+               
                 [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:clinicianObject_]]];
                 
                 
             } 
-                
+            else {
+                objectSelectionSection.allowMultipleSelection=NO;
+            }
         }
     }
             
@@ -210,7 +249,7 @@
                     ClinicianEntity *clinicianInArray=(ClinicianEntity *)objectInArray;
                     [clinicianInArray willAccessValueForKey:@"combinedName"];
                     if (i==0) {
-                        NSLog(@"combined name is %@",clinicianInArray.combinedName);
+                      
                         labelStr=clinicianInArray.combinedName;
                     } 
                     else {
@@ -272,7 +311,7 @@
 //
 //}
 
--(void)doneButtonTappedInDetailView:(NSManagedObject *)selectedObject selectedItems:(NSArray *)selectedItems withValue:(BOOL)hasValue{
+-(void)doneButtonTappedInDetailView:(ClinicianEntity *)selectedObject selectedItems:(NSArray *)selectedItems withValue:(BOOL)hasValue{
     
     needsCommit=TRUE;
     
@@ -333,10 +372,10 @@
         
             
  
-        else if (clinicianObject_)
+        else if (self.clinicianObject)
         {
             
-                
+                 NSLog(@"combined name is %@",clinicianObject_.combinedName);
                 self.label.text=clinicianObject_.combinedName;
                 
                 NSIndexPath *selfIndexPath=(NSIndexPath *) [self.ownerTableViewModel.modeledTableView indexPathForCell:self];
@@ -384,7 +423,7 @@
         
     }else 
     {
-    
+      NSLog(@"combined name is %@",clinicianObject_.combinedName);
         if (![clinicianObject_ isDeleted]) {
             
             [self.boundObject setValue:clinicianObject_ forKey:clinicianKeyStr];

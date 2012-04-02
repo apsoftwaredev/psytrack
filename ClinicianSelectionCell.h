@@ -8,6 +8,8 @@
 
 #import "SCTableViewCell.h"
 #import "ClinicianEntity.h"
+
+
 @interface ClinicianSelectionCell : SCObjectSelectionCell{
 
     ClinicianEntity *clinicianObject_;
