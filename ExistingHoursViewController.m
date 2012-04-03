@@ -411,77 +411,89 @@
                                                         withManagedObjectContext:managedObjectContext
                                                                withPropertyNames:[NSArray arrayWithObjects:@"intakeOrStructuredInterview", @"neuropsychologicalTestAdministration",@"otherAssessmentActivities",   @"psychodiagnosticTestAdministration",     @"demographics",@"notes",nil]];
     
+//    //Create a class definition for the existingAssessmentEntity
+//    SCClassDefinition *supervisionDef = [SCClassDefinition definitionWithEntityName:@"ExistingSupervisionEntity" 
+//                                                          withManagedObjectContext:managedObjectContext
+//                                                                 withPropertyNames:[NSArray arrayWithObjects:@"licensedSupervision", @"otherSupervision",nil]];
+//                                        
+//    
+//    //Create a class definition for the existingAssessmentEntity
+//    SCClassDefinition *supervisionLicencedDef = [SCClassDefinition definitionWithEntityName:@"ExistingLicensedSupervisionEntity" 
+//                                                           withManagedObjectContext:managedObjectContext
+//                                                                  withPropertyNames:[NSArray arrayWithObjects:@"groupHours", @"individualHours",@"licenseType",  @"notes",nil]];
+//    
+    
+    
+    
     //Create a class definition for the existingAssessmentEntity
     SCClassDefinition *supervisionDef = [SCClassDefinition definitionWithEntityName:@"ExistingSupervisionEntity" 
-                                                          withManagedObjectContext:managedObjectContext
-                                                                 withPropertyNames:[NSArray arrayWithObjects:@"licensedSupervision", @"otherSupervision",nil]];
-                                        
-    
-    //Create a class definition for the existingAssessmentEntity
-    SCClassDefinition *supervisionLicencedDef = [SCClassDefinition definitionWithEntityName:@"ExistingLicensedSupervisionEntity" 
-                                                           withManagedObjectContext:managedObjectContext
-                                                                  withPropertyNames:[NSArray arrayWithObjects:@"groupHours", @"individualHours",@"licenseType",  @"notes",nil]];
-    
-    
-    
-    
-    //Create a class definition for the existingAssessmentEntity
-    SCClassDefinition *supervisionOtherDef = [SCClassDefinition definitionWithEntityName:@"ExistingOtherSupervisionEntity" 
                                                                    withManagedObjectContext:managedObjectContext
-                                                                          withPropertyNames:[NSArray arrayWithObjects:@"groupHours", @"individualHours",@"otherSupervisionType",  @"notes",nil]];
+                                                                          withPropertyNames:[NSArray arrayWithObjects:@"supervisionType",@"groupHours", @"individualHours",  @"notes",nil]];
     
 
     
-    //Create the property definition for the assessment property in the existingHours class
-    SCPropertyDefinition *supervisionPropertyDef = [existingHoursDef propertyDefinitionWithName:@"supervision"];
-    
-    
+       
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     
     
-    supervisionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:supervisionDef
-                                                                                         allowAddingItems:NO
-                                                                                       allowDeletingItems:NO
-                                                                                         allowMovingItems:NO];
+    //create an array of objects definition for the supervision to-many relationship that with show up in the same view without a place holder element>.
     
-    //Create the property definition for the assessment property in the existingHours class
-    SCPropertyDefinition *supervisonLicensedPropertyDef = [supervisionDef propertyDefinitionWithName:@"licensedSupervision"];
+    //Create the property definition for the <#propertyName#> property
+    SCPropertyDefinition *supervisionPropertyDef = [existingHoursDef propertyDefinitionWithName:@"supervision"];
+    supervisionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:supervisionDef
+                                                                                    allowAddingItems:YES
+                                                                                  allowDeletingItems:YES
+                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add supervison hours"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
     
    
     
+    //create an object selection for the supervisionType relationship in the Supervision Entity 
+    
+    
+    //Create a class definition for the supervision TypeEntity
+    SCClassDefinition *supervisionTypeDef = [SCClassDefinition definitionWithEntityName:@"SupervisionTypeEntity" 
+                                                        withManagedObjectContext:managedObjectContext
+                                                               withPropertyNames:[NSArray arrayWithObjects:@"supervisionType", nil]];
+    
+    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+    //create a property definition
+   
+    SCPropertyDefinition *supervisionTypePropertyDef = [supervisionDef propertyDefinitionWithName:@"supervisionType"];
+    
+   
+    //set the title property name
+    supervisionDef.titlePropertyName=@"supervisionType.supervisionType";
+    
+    //set the property definition type to objects selection
+	
+    supervisionTypePropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *supervisionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:supervisionTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    
+    //set some addtional attributes
+    supervisionTypeSelectionAttribs.allowAddingItems = YES;
+    supervisionTypeSelectionAttribs.allowDeletingItems = YES;
+    supervisionTypeSelectionAttribs.allowMovingItems = YES;
+    supervisionTypeSelectionAttribs.allowEditingItems = YES;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    supervisionTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add new supervision type"];
+    
+    
+    //add an "Add New" element to appear when user clicks edit
+    supervisionTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New supervision type"];
+    
+    //add the selection attributes to the property definition
+    supervisionTypePropertyDef.attributes = supervisionTypeSelectionAttribs;
+    
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     
     
-    supervisonLicensedPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:supervisionLicencedDef
-                                                                                            allowAddingItems:NO
-                                                                                          allowDeletingItems:NO
-                                                                                              allowMovingItems:NO];
-    
-    
     //Create the property definition for the notes property in the genderDef class
-    SCPropertyDefinition *supervisionLicensedNotesPropertyDef = [supervisionLicencedDef propertyDefinitionWithName:@"notes"];
-    supervisionLicensedNotesPropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *supervisiondNotesPropertyDef = [supervisionDef propertyDefinitionWithName:@"notes"];
+    supervisiondNotesPropertyDef.type=SCPropertyTypeTextView;
     
-    
-    //Create the property definition for the assessment property in the existingHours class
-    SCPropertyDefinition *supervisonOtherPropertyDef = [supervisionDef propertyDefinitionWithName:@"otherSupervision"];
-    
-    
-    
-    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
-    
-    
-    supervisonOtherPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:supervisionOtherDef
-                                                                                              allowAddingItems:NO
-                                                                                            allowDeletingItems:NO
-                                                                                              allowMovingItems:NO];
-
-    //Create the property definition for the notes property in the genderDef class
-    SCPropertyDefinition *supervisionOtherNotesPropertyDef = [supervisionOtherDef propertyDefinitionWithName:@"notes"];
-    supervisionOtherNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-    
-    
+   
+      
     //create the dictionary with the data bindings
     NSDictionary *clinicianDataBindings = [NSDictionary 
                                            dictionaryWithObjects:[NSArray arrayWithObjects:@"supervisors",@"Supervisors",[NSNumber numberWithBool:NO],@"supervisors",[NSNumber numberWithBool:YES],nil] 
@@ -499,8 +511,8 @@
     
     
     //insert the custom property definition into the clientData class at index 
-    [supervisionLicencedDef insertPropertyDefinition:clinicianDataProperty atIndex:1];
-    [supervisionOtherDef insertPropertyDefinition:clinicianDataProperty atIndex:1];
+  
+    [supervisionDef insertPropertyDefinition:clinicianDataProperty atIndex:1];
                                         
     //Create the property definition for the assessment property in the existingHours class
     SCPropertyDefinition *assessmentsPropertyDef = [existingHoursDef propertyDefinitionWithName:@"assessment"];

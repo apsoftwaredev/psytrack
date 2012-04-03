@@ -57,7 +57,34 @@
     }
     
     
+   currentDetailTableViewModel_=nil;
+   rootNavigationController=nil;
+   rootViewController_=nil;
+  
+    //    ABRecordRef existingPersonRef;
+
     
+
+   
+   
+    if (personViewController_){
+    
+        self.personViewController.view=nil;
+        self.personViewController=nil;
+    };
+    if (peoplePickerNavigationController_) {
+        self.peoplePickerNavigationController=nil;
+        self.peoplePickerNavigationController.view=nil;
+    }
+    clinician=nil;
+    //      ABAddressBookRef addressBook;
+    
+    if (abGroupObjectSelectionCell_){
+    
+        self.abGroupObjectSelectionCell=nil;
+    };
+    
+   
     
     if (self.iPadPersonBackgroundView) {
         self.iPadPersonBackgroundView=nil;

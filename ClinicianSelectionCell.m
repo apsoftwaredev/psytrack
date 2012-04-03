@@ -73,19 +73,10 @@
     NSPredicate *predicate=nil;
     
     
-    if ((usePrescriber &&(BOOL)[clinicianObject_.isPrescriber boolValue])||!(clinicianObject_ &&usePrescriber)) {
+    if ( usePrescriber ) {
         
-        BOOL startWithPrescriberFilter=YES;
-        
-        for (int i=0; i<cliniciansArray_.count; i++) {
-            ClinicianEntity *clinicianInArray=(ClinicianEntity *)[cliniciansArray_ objectAtIndex:i];
-            if (!clinicianInArray.isPrescriber|| clinicianInArray.isPrescriber==[NSNumber numberWithBool: NO]) {
-                startWithPrescriberFilter=NO;
-                break;
-                
-            }
-        }
-        if (!startWithPrescriberFilter) {
+//        
+        if ((BOOL)[clinicianObject_.isPrescriber boolValue]) {
              predicate=[NSPredicate predicateWithFormat:@"isPrescriber ==%@",[NSNumber numberWithBool: YES]];
             
             
@@ -95,7 +86,7 @@
         
                 
       
-    }else if (clinicianObject_){
+    }else if (clinicianObject_ &&!usePrescriber){
         BOOL startWithMySupervisorFilter=YES;
         
              
@@ -109,11 +100,48 @@
         }
        
     }
-
-    BOOL prescriberBool=usePrescriber;
-    NSLog(@"use prescriberis %i",usePrescriber);
     
-    ClinicianViewController *clinicianViewController=[[ClinicianViewController alloc]initWithNibName:clinicianViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController  withPredicate:(NSPredicate *)predicate usePrescriber:(BOOL)prescriberBool];
+else if (cliniciansArray_ &&cliniciansArray_.count){
+    BOOL startWithSupervisorFilter=NO;
+    //        
+        for (int i=0; i<cliniciansArray_.count; i++) {
+            ClinicianEntity *clinicianInArray=(ClinicianEntity *)[cliniciansArray_ objectAtIndex:i];
+            if (([clinicianInArray.myCurrentSupervisor isEqualToNumber:(NSNumber *)[NSNumber numberWithBool: YES]]||  [clinicianInArray.myPastSupervisor isEqualToNumber:(NSNumber *)[NSNumber numberWithBool: YES]])) {
+                startWithSupervisorFilter=YES;
+               
+                
+            }else {
+                startWithSupervisorFilter=NO;
+                break;
+            }
+        }
+    
+    if (startWithSupervisorFilter) {
+        predicate=[NSPredicate predicateWithFormat:@"myCurrentSupervisor == %i OR myPastSupervisor==%i", TRUE, TRUE];
+    }
+}
+    NSLog(@"use prescriberis %i",usePrescriber);
+    ClinicianViewController *clinicianViewController=nil;
+   
+    
+    clinicianViewController=[[ClinicianViewController alloc]initWithNibName:clinicianViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController  withPredicate:(NSPredicate *)predicate usePrescriber:(BOOL)usePrescriber];
+    
+    
+    NSLog(@"view controllers is %@",self.ownerTableViewModel.viewController.navigationController.viewControllers);
+
+//    for ( int i=0;i< self.ownerTableViewModel.viewController.navigationController.viewControllers.count;i++) {
+//        id objectInArray=(id)[self.ownerTableViewModel.viewController.navigationController.viewControllers objectAtIndex:i];
+//        
+//               if ([objectInArray isKindOfClass:[ClinicianViewController class]]) {
+//            
+//            clinicianViewController=objectInArray;
+//            break;
+//        }
+//        
+//    }    
+    
+   
+   
     
     
     
@@ -121,6 +149,7 @@
     
     
     [self.ownerTableViewModel.viewController.navigationController pushViewController:clinicianViewController animated:YES];
+
     if ([clinicianViewController.tableModel sectionCount]>0) {
         
         for (int i=0; i<clinicianViewController.tableModel.sectionCount; i++) {
@@ -320,6 +349,7 @@
         [self.cliniciansArray removeAllObjects];
     }
     self.cliniciansArray=nil;
+   
     self.clinicianObject=(ClinicianEntity *) selectedObject;
     self.cliniciansArray=[NSMutableArray arrayWithArray:selectedItems];
  
