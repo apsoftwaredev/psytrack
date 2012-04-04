@@ -57,25 +57,19 @@
        
     self.synchWithABBeforeLoadBool=YES;
 
-        
-    NSLog(@"selected items %@",self.selectedItemsIndexes);
-    
 }
 
 -(void)syncryonizeWithAddressBookGroups{
 
     
     NSArray *groupItems=(NSArray *)self.items;
-    NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
-
-    NSLog(@"items are %@",self.items);
+   
     int groupCount=groupItems.count;
 
     for (int i=0; i<groupCount; i++) {
         
         PTABGroup *ptGroup=[groupItems objectAtIndex:i];
-        NSLog(@"person id %i",ptGroup.recordID);
-        NSLog(@"clinician %@",clinician_.aBRecordIdentifier);
+        
         if ([self personContainedInGroupWithID:ptGroup.recordID]) {
             if (![self.selectedItemsIndexes containsObject:[NSNumber numberWithInt:i]]) {
                 [self.selectedItemsIndexes addObject:[NSNumber numberWithInt:i]];
@@ -87,21 +81,10 @@
     }
     synchWithABBeforeLoadBool_=NO;
 
-NSLog(@"selected items indexes is %@",self.selectedItemsIndexes);
 
 }
 
--(void)loadBindingsIntoCustomControls{
 
-
-    NSLog(@" test");
-   
-    
-    
-
-
-
-}
 
 -(void)loadBoundValueIntoControl{
     
@@ -115,13 +98,10 @@ NSLog(@"selected items indexes is %@",self.selectedItemsIndexes);
     
     int groupCount=self.items.count;
     NSArray *groupItems=(NSArray *)self.items;
-NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
-    
-    NSLog(@"items are %@",self.items);
+
     
     for (int i=0; i<groupCount; i++) {
-    NSLog(@"selected items indexs is %@",self.selectedItemsIndexes);
-        PTABGroup *ptGroup=[groupItems objectAtIndex:i];
+      PTABGroup *ptGroup=[groupItems objectAtIndex:i];
         if ([self personContainedInGroupWithID:ptGroup.recordID]) {
             if (![self.selectedItemsIndexes containsObject:[NSNumber numberWithInt:i]]) {
                 [self removePersonFromGroupWithID:ptGroup.recordID];
@@ -143,8 +123,6 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
     
     }
     
-  NSLog(@"selected item indexes %@",self.selectedItemsIndexes);  
-    
     NSString *groupsList=[NSString string];
     for (NSInteger i=0;i<self.selectedItemsIndexes.count; i++) {
         
@@ -165,8 +143,6 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
     
    
     
-    NSLog(@"clinician is %@", self.clinician);
-    
 }
 
 -(void)addPersonToSelectedGroups{
@@ -178,8 +154,7 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
             
             
             for (NSNumber *selectedItemAtIndex in self.selectedItemsIndexes) {
-            NSLog(@"selected item at index is %i",[selectedItemAtIndex intValue]);
-                PTABGroup *ptABGroup=[self.items objectAtIndex:[selectedItemAtIndex intValue]];
+             PTABGroup *ptABGroup=[self.items objectAtIndex:[selectedItemAtIndex intValue]];
                 
                 if (![self personContainedInGroupWithID:(int)ptABGroup]) {
                     [self addPersonToGroupWithID:(int)ptABGroup.recordID];
@@ -263,8 +238,6 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
                     CFRelease(error);
                 }
                 
-                NSLog(@"group is %@",group);
-
             }
                 
         }
@@ -343,7 +316,7 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
                 CFRelease(error);
             }
             
-            NSLog(@"group is %@",group);
+           
             
         }
         
@@ -518,7 +491,7 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
             
         }
         
-        NSLog(@"group name is %@",CFGroupName);   
+       
         //check to see if the group name exists already
 //        int groupCount=ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
         CFArrayRef CFGroupsCheckNameArray=nil;
@@ -541,7 +514,7 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
         if (groupCount&&!group ) {
             
             CFGroupsCheckNameArray= (CFArrayRef )ABAddressBookCopyArrayOfAllGroups((ABAddressBookRef) addressBook);
-            NSLog(@"cggroups array %@",CFGroupsCheckNameArray);
+           
             
             
             for (CFIndex i = 0; i < groupCount; i++) {
@@ -555,7 +528,7 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
                                                                                   1
                                                                                   );
                 
-                NSLog(@"result is %ld and %d",result,kCFCompareEqualTo);
+                
                 if (result==0) {
                     group=groupInCheckNameArray;
                     break;
@@ -563,8 +536,7 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
                 //                    CFRelease(CFGroupsCheckNameArray); 
                 //                    CFRelease(CFGroupNameCheck);
                 
-                NSLog(@"group is %@",group);
-                
+                               
             }
         }
         
@@ -589,54 +561,7 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
             groupIdentifier=(NSInteger )[(NSNumber *)[[NSUserDefaults standardUserDefaults]valueForKey:kPTTAddressBookGroupIdentifier]intValue];
             group=ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, groupIdentifier);
             
-            //        //        ABRecordRef CFAddressBookGroupRecord =  ABGroupCreate ();
-            //        
-            //        group=ABGroupCreate();
-            //        
-            //        //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
-            //        
-            //        //        NSLog(@"group composite name is %@",groupRecord.compositeName);
-            //        
-            //        bool didSetGroupName=FALSE;
-            //        didSetGroupName= (bool) ABRecordSetValue (
-            //                                                  group,
-            //                                                  (ABPropertyID) kABGroupNameProperty,
-            //                                                  (__bridge CFStringRef)groupName  ,
-            //                                                  nil
-            //                                                  );  
-            //        //        NSLog(@"group record identifier is %i",groupRecord.recordID);
-            //        
-            //        BOOL wantToSaveChanges=TRUE;
-            //        if (ABAddressBookHasUnsavedChanges(addressBook)) {
-            //            
-            //            if (wantToSaveChanges) {
-            //                bool didSave=FALSE;
-            //                didSave = ABAddressBookSave(addressBook, nil);
-            //                
-            //                if (!didSave) {/* Handle error here. */}
-            //                
-            //            } 
-            //            else {
-            //                
-            //                ABAddressBookRevert(addressBook);
-            //                
-            //            }
-            //            
-            //        }
-            //        
-            //        //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
-            //        
-            //        NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
-            //
-            //        NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
-            //        groupIdentifier=ABRecordGetRecordID(group);
-            //        
-            //        
-            //        [[NSUserDefaults standardUserDefaults] setInteger:(int )groupIdentifier forKey:kPTTAddressBookGroupIdentifier];
-            //        
-            //        [[NSUserDefaults standardUserDefaults]synchronize];
-            //            
-            //            
+                   
             
         } 
         // Get the ABSource object that contains this new group
@@ -660,8 +585,7 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
 
         if (groupCount) {
             
-//            CFArrayRef CFGroupsArray= (CFArrayRef )ABAddressBookCopyArrayOfAllGroups((ABAddressBookRef) addressBook);
-            NSLog(@"cggroups array %@",(__bridge NSArray *) allGroupsInSource);
+
             
             if (allGroupsInSource) {
                 
@@ -690,7 +614,7 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
                 
                 CFRelease(allGroupsInSource);
                 
-                NSLog(@"array of group names %@",allGroups);
+                
                 abGroupsArray=allGroups;
             }
             
@@ -1061,10 +985,7 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
                 if (groupCount) 
                 {
                     
-                    
-                    NSLog(@"cggroups array %@",allGroupsInSource);
-                    
-                    
+                                        
                     for (CFIndex i = 0; i < groupCount; i++) {
                         groupInCheckNameArray = CFArrayGetValueAtIndex(allGroupsInSource, i);
                         CFGroupNameCheck  = ABRecordCopyValue(groupInCheckNameArray, kABGroupNameProperty);
@@ -1080,8 +1001,7 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
                         
                         NSString *checkNameStr=[NSString stringWithFormat:@"%@",(__bridge NSString*) CFGroupNameCheck];
                         
-                        NSLog(@"cfgroupname is %@",checkNameStr);
-                        NSLog(@"groupname Str is %@",groupName);
+                        
                         if ([checkNameStr isEqualToString:groupName]) {
                             group=groupInCheckNameArray;
                             groupIdentifier=ABRecordGetRecordID(group);
@@ -1093,11 +1013,11 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
                             }
                             
                             if (group) {
-                                NSLog(@"group is %@",group);
+                                
                             }
                             
                             else {
-                                NSLog(@"no group");
+                                
                             } 
                             break;
                         }
@@ -1165,8 +1085,8 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
                     bool didSave=FALSE;
                     didSave = ABAddressBookSave(addressBook, nil);
                     
-                    if (!didSave) {/* Handle error here. */  NSLog(@"addressbook did not save");}
-                    else NSLog(@"addresss book saved new group.");
+                    if (!didSave) {/* Handle error here. */ }
+                  
                     
                 } 
                 else {
@@ -1179,9 +1099,6 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
             
             //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
             
-            NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
-            
-            NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
             
             
             
@@ -1242,7 +1159,7 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
         
         
     }
-    //    [[NSUserDefaults standardUserDefaults]  setValue:(NSString *)groupName forKey:kPTTAddressBookGroupName];
+   
     
     
     
@@ -1291,7 +1208,7 @@ NSLog(@"selected item indexes %@",self.selectedItemsIndexes);
                        intValue];
     
     
-    NSLog(@"source record id is %i",recordID);
+  
     if (continueChecking && recordID!=-1) {
         
         source=ABAddressBookGetSourceWithRecordID(addressBook, recordID);

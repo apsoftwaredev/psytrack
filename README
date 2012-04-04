@@ -26,15 +26,15 @@ TO DO:
 
 
 
--fix prescriber start in medication logs
 
-- check danger to others
+
+
 
 -add hospitalizations
 -medication allergies
 
 
-- add existing hours
+
 
 
 -	Add billing section to the client tab, keep it simple, -add service codes
@@ -48,7 +48,7 @@ TO DO:
 
 -	finish setting up the persistent store settings,
 
-
+- consultations
 
 
 
@@ -118,3 +118,6 @@ begin adding reports
 -	color the referrals to a different color and allow sorting
 -	Finish adding the drug section to the client section
 -   changed prescriber clinician to searchable clinician list
+-fix prescriber start in medication logs
+- check danger to others
+- add existing hours

@@ -501,7 +501,13 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
             
         case 7:
         {
-            ExistingHoursViewController *existingHoursViewController = [[ExistingHoursViewController alloc] initWithNibName:@"ExistingHoursViewController" bundle:[NSBundle mainBundle]];
+            NSString *existingHoursViewControllerNibName=[NSString string];
+            if ([SCHelper is_iPad]) {
+                existingHoursViewControllerNibName=@"ExistingHoursViewController_iPad";
+            }else {
+                existingHoursViewControllerNibName=@"ExistingHoursViewController";
+            }
+            ExistingHoursViewController *existingHoursViewController = [[ExistingHoursViewController alloc] initWithNibName:existingHoursViewControllerNibName bundle:[NSBundle mainBundle]];
             
             [self.navigationController pushViewController:existingHoursViewController animated:YES];
             break;

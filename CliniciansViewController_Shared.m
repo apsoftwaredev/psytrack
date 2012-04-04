@@ -2286,7 +2286,7 @@
                         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
                         
                         //set the date format
-                        [dateFormatter setDateFormat:@"M/d/YYYY"];
+                        [dateFormatter setDateFormat:@"M/d/yyyy"];
                         
                         NSDate *referralDate=[managedObject valueForKey:@"referralDate"];
                         NSString *clientIDCode=[managedObject valueForKeyPath:@"client.clientIDCode"];
@@ -2368,7 +2368,7 @@
                         NSDate *arrivedDate=(NSDate *)[cell.boundObject valueForKey:@"arrivedDate"];
                         NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
                         
-                        [dateFormatter setDateFormat:@"M/YYYY"];
+                        [dateFormatter setDateFormat:@"M/yyyy"];
                         
                         
                         NSString *arrivedDateStr=[dateFormatter stringFromDate:arrivedDate];

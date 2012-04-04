@@ -59,10 +59,10 @@
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
     managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
     
-    // Set up the edit and add buttons.
+//    // Set up the edit and add buttons.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    
-  
+//    
+//  
     
     // Get managedObjectContext from application delegate
     demographicDetailViewController_Shared =[[DemographicDetailViewController_Shared alloc]init];
@@ -883,7 +883,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
                         
                         //set the date format
-                        [dateFormatter setDateFormat:@"M/d/YYYY"];
+                        [dateFormatter setDateFormat:@"M/d/yyyy"];
                         
                         NSDate *startedDate=[managedObject valueForKey:@"dateStarted"];
                         NSDate *discontinued=[managedObject valueForKey:@"discontinued"];
@@ -1008,7 +1008,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                         NSDate *arrivedDate=(NSDate *)[cell.boundObject valueForKey:@"arrivedDate"];
                         NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
                         
-                        [dateFormatter setDateFormat:@"M/YYYY"];
+                        [dateFormatter setDateFormat:@"M/yyyy"];
                         
                         
                         NSString *arrivedDateStr=[dateFormatter stringFromDate:arrivedDate];

@@ -83,8 +83,6 @@
     [super loadBindingsIntoCustomControls];
     
    
-    NSLog(@"object bindings are is %@",[self.objectBindings valueForKey:@"2"]);
-   NSLog(@"object bindings are is %@",[self.objectBindings valueForKey:@"3"]);
     bOPropertyName=(NSString *)[self.objectBindings valueForKey:@"2"];
     [pickerDataSource setupCustomPickerArrayWithPropertyName:bOPropertyName];
     [myPickerView reloadInputViews];
@@ -193,7 +191,7 @@
     label.textAlignment = UITextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
     label.font=[UIFont fontWithName:@"Helvetica-Bold" size:18];
- NSLog(@"label font is %@", label.font);
+
     return label;
 }
 

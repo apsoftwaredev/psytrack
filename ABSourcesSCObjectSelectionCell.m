@@ -55,10 +55,6 @@
         
  
     
-    NSLog(@"selected item indexes %@",self.selectedItemsIndexes);  
-    
-   
-   
         
        
    

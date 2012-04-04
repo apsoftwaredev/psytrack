@@ -1421,7 +1421,7 @@ NSLog(@"table model class %@",[tableViewModel class]);
                         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
                         
                         //set the date format
-                        [dateFormatter setDateFormat:@"M/d/YYYY"];
+                        [dateFormatter setDateFormat:@"M/d/yyyy"];
                         
                         NSDate *startedDate=[managedObject valueForKey:@"dateStarted"];
                         NSDate *discontinued=[managedObject valueForKey:@"discontinued"];
@@ -1547,7 +1547,7 @@ NSLog(@"table model class %@",[tableViewModel class]);
                         NSDate *arrivedDate=(NSDate *)[cell.boundObject valueForKey:@"arrivedDate"];
                         NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
                         
-                        [dateFormatter setDateFormat:@"M/YYYY"];
+                        [dateFormatter setDateFormat:@"M/yyyy"];
                         
                       
                         NSString *arrivedDateStr=[dateFormatter stringFromDate:arrivedDate];

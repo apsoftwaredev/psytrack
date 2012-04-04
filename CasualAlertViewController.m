@@ -81,7 +81,7 @@ NSInteger intSort(id num1, id num2, void *context)
 
     screenLocationToSetView=screenLocation;
     self.labelContainerView=containerView;
-      NSLog(@"alert text is %@",alertText);
+   
     durationSecondsFloat=seconds;
    
     [myLabel_  setText:alertText];
@@ -437,7 +437,6 @@ NSInteger intSort(id num1, id num2, void *context)
  
     
     
-   NSLog(@"interfacce orentation is %i",self.interfaceOrientation);
     float labelContainerHeight,superViewFrameWidth,superViewFrameHeight;
     
     labelContainerHeight=labelContainer.size.height;

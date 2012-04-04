@@ -9,7 +9,7 @@
 #import "ExistingHoursViewController.h"
 #import "PTTAppDelegate.h"
 #import "ClinicianSelectionCell.h"
-
+#import "EncryptedSCTextViewCell.h"
 @interface ExistingHoursViewController ()
 
 @end
@@ -56,6 +56,7 @@
     // stick the buttons in the toolbar
     self.navigationItem.rightBarButtonItems=buttons;
     
+   
     
 	// Get managedObjectContext from application delegate
    NSManagedObjectContext *managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
@@ -68,13 +69,51 @@
     
 
     SCClassDefinition *existingHoursDef =[SCClassDefinition definitionWithEntityName:@"ExistingHoursEntity"
-                                                            withManagedObjectContext:managedObjectContext autoGeneratePropertyDefinitions:YES];        
+                                                            withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"startDate", @"endDate", @"assessments", @"directInterventions", @"supervision",  @"supportActivities"     , @"notes",   nil]];        
     
 
+                                          
+                                          
+    
+    
+    //Create the property definition for the start date property in the existing Hours class  definition
+    SCPropertyDefinition *existingHoursStartDatePropertyDef = [existingHoursDef propertyDefinitionWithName:@"startDate"];
+    
+    //format the the date using a date formatter
+    //define and initialize a date formatter
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    //set the date format
+    [dateFormatter setDateFormat:@"MMM d, yyyy"];
+    //Set the date attributes in the existinghoursstartdate property definition and make it so the date picker appears in the same view.
+    existingHoursStartDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                   datePickerMode:UIDatePickerModeDate
+                                                    displayDatePickerInDetailView:NO];
+    
 
+    //Create the property definition for the endDate property in the existingHours class
+    SCPropertyDefinition *existingHoursEndDatePropertyDef = [existingHoursDef propertyDefinitionWithName:@"endDate"];
     
     
+    //Set the date attributes in the existinghours end date property definition and make it so the date picker appears in the same view.
+    existingHoursEndDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                                  datePickerMode:UIDatePickerModeDate
+                                                                   displayDatePickerInDetailView:NO];
     
+    //Create the property definition for the notes property in the existing hours class
+    SCPropertyDefinition *existingHoursNotesPropertyDef = [existingHoursDef propertyDefinitionWithName:@"notes"];
+    existingHoursNotesPropertyDef.type=SCPropertyTypeCustom;
+    existingHoursNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    
+    NSDictionary *encryProfileNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    
+    
+    existingHoursNotesPropertyDef.objectBindings=encryProfileNotesTVCellKeyBindingsDic;
+    existingHoursNotesPropertyDef.title=@"Notes";
+    existingHoursNotesPropertyDef.autoValidate=NO;
+    
+    existingHoursDef.keyPropertyName=@"startDate";
+
     //Create a class definition for the demographicsEntity
     SCClassDefinition *demographicsDef = [SCClassDefinition definitionWithEntityName:@"ExistingDemographicsEntity" 
                                                             withManagedObjectContext:managedObjectContext
@@ -99,7 +138,7 @@
     ageGroupPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingAgeGroupDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
-                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add age group"]  addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add age groups"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add age group"]  addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -124,7 +163,7 @@
     //set the property definition type to objects selection
 	
     ageGroupInExistingAgeGroupPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *ageGroupSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:ageGroupDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *ageGroupSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:ageGroupDef allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     ageGroupSelectionAttribs.allowAddingItems = YES;
@@ -162,7 +201,7 @@
     genderPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingGenderDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
-                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add gender"]  addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add genders"]   addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add gender"]  addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -189,7 +228,7 @@
     //set the property definition type to objects selection
 	
     genderInExistingGendersPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *genderSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:genderpDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *genderSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:genderpDef allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     genderSelectionAttribs.allowAddingItems = YES;
@@ -232,7 +271,7 @@
     ethnicityPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingEthnicitiesDef
                                                                                   allowAddingItems:YES
                                                                                 allowDeletingItems:YES
-                                                                                  allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add ethnicity"]  addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                  allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add ethnicities"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add ethnicity"]  addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -257,7 +296,7 @@
     //set the property definition type to objects selection
 	
     ethnicityInExistingEthnicityPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *ethnicitySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:ethnicitypDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *ethnicitySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:ethnicitypDef allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     ethnicitySelectionAttribs.allowAddingItems = YES;
@@ -296,7 +335,7 @@
     racePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingRaceDef
                                                                                      allowAddingItems:YES
                                                                                    allowDeletingItems:YES
-                                                                                     allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add race"]  addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                     allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add ethnicities"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add race"]  addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -321,7 +360,7 @@
     //set the property definition type to objects selection
 	
     raceInExistingRacePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *raceSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:raceDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *raceSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:raceDef allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     raceSelectionAttribs.allowAddingItems = YES;
@@ -362,7 +401,7 @@
     disabilityPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingDisabilityDef
                                                                                 allowAddingItems:YES
                                                                               allowDeletingItems:YES
-                                                                                allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add disability"]  addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add disabilities"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add disability"]  addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -388,7 +427,7 @@
     //set the property definition type to objects selection
 	
     disabilityInExistingDisabilityPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *disabilitySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:disabilityDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *disabilitySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:disabilityDef allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     disabilitySelectionAttribs.allowAddingItems = YES;
@@ -427,7 +466,7 @@
     sexualOrientationPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingSexualOrientationDef
                                                                                       allowAddingItems:YES
                                                                                     allowDeletingItems:YES
-                                                                                      allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add sexual orientation"]  addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                      allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add sexual orientations"]   addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add sexual orientation"]  addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
    
@@ -482,7 +521,7 @@
     supervisionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:supervisionDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
-                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add supervison hours"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add supervison hours"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add supervison hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
    
     
@@ -508,7 +547,7 @@
     //set the property definition type to objects selection
 	
     supervisionTypePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *supervisionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:supervisionTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *supervisionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:supervisionTypeDef allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     supervisionTypeSelectionAttribs.allowAddingItems = YES;
@@ -581,7 +620,7 @@
     supportActivitiesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:supportActivityDef
                                                                                        allowAddingItems:YES
                                                                                      allowDeletingItems:YES
-                                                                                       allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add support activity hours"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                       allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add support activity hours"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add support activity hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -605,7 +644,7 @@
     //set the property definition type to objects selection
 	
     supportActivityTypePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *supportActivityTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:supportActivityTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *supportActivityTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:supportActivityTypeDef allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     supportActivityTypeSelectionAttribs.allowAddingItems = YES;
@@ -664,7 +703,7 @@
     assessmentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:assessmentDef
                                                                                              allowAddingItems:YES
                                                                                            allowDeletingItems:YES
-                                                                                             allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add assessment hours"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                             allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add assessment hours"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add assessment hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -686,7 +725,7 @@
     //set the property definition type to objects selection
 	
     testingSessionTypePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *testingSessionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:testingSessionTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *testingSessionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:testingSessionTypeDef allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     testingSessionTypeSelectionAttribs.allowAddingItems = YES;
@@ -779,7 +818,7 @@
     existingInstrumentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingInstrumentDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
-                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add instruments"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -828,7 +867,7 @@
     //set the property definition type to objects selection
 	
     instrumentTypePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *instrumentTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:instrumentTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *instrumentTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:instrumentTypeDef allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     instrumentTypeSelectionAttribs.allowAddingItems = YES;
@@ -895,7 +934,7 @@
     existingBatteriesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingBatteryDef
                                                                                                allowAddingItems:YES
                                                                                              allowDeletingItems:YES
-                                                                                               allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add battery"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                               allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add batteries"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add battery"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -941,7 +980,7 @@
     batteryInstrumentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:instrumentDef
                                                                                                allowAddingItems:YES
                                                                                              allowDeletingItems:YES
-                                                                                               allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                               allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add instruments"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
    
@@ -981,7 +1020,7 @@
     directInterventionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:interventionDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
-                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add a direct intervention" ]addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add direct interventions"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add a direct intervention" ]addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -1020,7 +1059,7 @@
     //set the property definition type to objects selection
 	
     interventionTypePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *interventionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:interventionTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *interventionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:interventionTypeDef allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     interventionTypeSelectionAttribs.allowAddingItems = YES;
@@ -1101,15 +1140,21 @@
         tableModel_.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
     }
     
+   
     if ([SCHelper is_iPad]) {
         
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
         [self.tableView setBackgroundColor:[UIColor clearColor]];
     }
-    [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+    else {
+        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+    }
     
     
+//    UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
+//    
+//    self.navigationItem.leftBarButtonItem=cancelButton;
     self.view.backgroundColor=[UIColor clearColor];
     
     
@@ -1133,6 +1178,27 @@
     return YES;
 }
 
+-(void)cancelButtonTapped{
+    
+    NSLog(@"cancel button Tapped");
+    
+    NSLog(@"parent controller %@",[super parentViewController]);
+    
+    if(self.navigationController)
+	{
+		// check if self is the rootViewController
+		if([self.navigationController.viewControllers objectAtIndex:0] == self)
+		{
+			[self dismissModalViewControllerAnimated:YES];
+		}
+		else
+			[self.navigationController popViewControllerAnimated:YES];
+	}
+	else
+		[self dismissModalViewControllerAnimated:YES];
+    
+    
+}
 
 -(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
 BOOL valid=NO;
@@ -1170,8 +1236,11 @@ BOOL valid=NO;
        
     }
     
+    if ([cell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+        valid=YES;
+        
     
-       
+    }
     
     return valid;
 
@@ -1198,17 +1267,21 @@ BOOL valid=NO;
 }
 
 
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
+    [self tableViewModel:tableViewModel detailModelCreatedForSectionAtIndex:indexPath.section detailTableViewModel:detailTableViewModel];
+
+}
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
-    
-    
-    
-    detailTableViewModel.delegate = self;
-    detailTableViewModel.tag = tableViewModel.tag+1;
-    
-    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+//        if (!detailTableViewModel.viewController.navigationItem.leftBarButtonItem) {
+//            UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
+//            
+//            detailTableViewModel.viewController.navigationItem.leftBarButtonItem=cancelButton;
+//
+//    }
+       if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
         
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
@@ -1218,6 +1291,199 @@ BOOL valid=NO;
     
     
     
+}
+
+
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    NSManagedObject *managedObject=(NSManagedObject *)cell.boundObject;
+    
+    if (tableViewModel.tag==0) {
+    
+    if (managedObject) {
+        
+        
+        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+        //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
+        if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
+            
+            NSLog(@"entity name is %@",managedObject.entity.name);
+            //identify the Languages Spoken table
+            if ([managedObject.entity.name isEqualToString:@"ExistingHoursEntity"]) {
+                //define and initialize a date formatter
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                
+                //set the date format
+                [dateFormatter setDateFormat:@"M/d/yyyy"];
+                
+                NSDate *startDate=[managedObject valueForKey:@"startDate"];
+                NSDate *endDate=[managedObject valueForKey:@"endDate"];
+                
+//                NSString *notes=[managedObject valueForKey:@"notes"];
+                
+                NSMutableSet *assessmentHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"assessments.hours"];
+                
+                NSArray *assessmentHoursArray=[assessmentHoursSet allObjects];
+                NSLog(@"direct hours are %@",assessmentHoursArray);
+                NSNumber *assessmentSum = nil;
+                
+                for (NSNumber *assessmentHours in assessmentHoursArray) {
+                        NSLog(@"hours class is %@",[assessmentHours class]);
+                    
+                    if (!assessmentSum) 
+                    {
+                        assessmentSum =[NSNumber numberWithFloat:(float)[assessmentHours floatValue]];
+                    } else 
+                    {
+                        assessmentSum =[NSNumber numberWithFloat:[assessmentSum floatValue] + [assessmentHours floatValue]];
+                    }
+                }
+                NSMutableSet *interventionHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"directInterventions.hours"];
+                
+                NSArray *interventionHoursArray=[interventionHoursSet allObjects];
+                NSLog(@"direct hours are %@",assessmentHoursArray);
+                NSNumber *interventionSum = nil;
+                
+                for (NSNumber *interventionHours in interventionHoursArray) {
+                    NSLog(@"hours class is %@",[interventionHours class]);
+                    
+                    if (!interventionSum) 
+                    {
+                        interventionSum =[NSNumber numberWithFloat:(float)[interventionHours floatValue]];
+                    } else 
+                    {
+                        interventionSum =[NSNumber numberWithFloat:[interventionSum floatValue] + [interventionHours floatValue]];
+                    }
+                }
+                
+                NSMutableSet *supportHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supportActivities.hours"];
+                
+                NSArray *supportHoursArray=[supportHoursSet allObjects];
+                NSLog(@"direct hours are %@",supportHoursArray);
+                NSNumber *supportSum = nil;
+                
+                for (NSNumber *supportHours in supportHoursArray) {
+                    NSLog(@"hours class is %@",[supportHours class]);
+                    
+                    if (!supportSum) 
+                    {
+                        supportSum =[NSNumber numberWithFloat:(float)[supportHours floatValue]];
+                    } else 
+                    {
+                        supportSum =[NSNumber numberWithFloat:[supportSum floatValue] + [supportHours floatValue]];
+                    }
+                }
+                NSMutableSet *supervisionGroupHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supervision.groupHours"];
+                
+                NSArray *supervisionGroupHoursArray=[supervisionGroupHoursSet allObjects];
+                NSLog(@"direct hours are %@",supervisionGroupHoursArray);
+                NSNumber *supervisionGroupSum = nil;
+                
+                for (NSNumber *supervisionGroupHours in supervisionGroupHoursArray) {
+                    NSLog(@"hours class is %@",[supervisionGroupHours class]);
+                    
+                    if (!supervisionGroupSum) 
+                    {
+                        supervisionGroupSum =[NSNumber numberWithFloat:(float)[supervisionGroupHours floatValue]];
+                    } else 
+                    {
+                        supervisionGroupSum =[NSNumber numberWithFloat:[supervisionGroupSum floatValue] + [supervisionGroupHours floatValue]];
+                    }
+                }
+                NSMutableSet *supervisionIndividualHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supervision.individualHours"];
+                
+                NSArray *supervisionIndividualHoursArray=[supervisionIndividualHoursSet allObjects];
+                NSLog(@"direct hours are %@",supervisionIndividualHoursArray);
+                NSNumber *supervisionIndividualSum = nil;
+                
+                for (NSNumber *supervisionIndividualHours in supervisionIndividualHoursArray) {
+                    NSLog(@"hours class is %@",[supervisionIndividualHours class]);
+                    
+                    if (!supervisionIndividualSum) 
+                    {
+                        supervisionIndividualSum =[NSNumber numberWithFloat:(float)[supervisionIndividualHours floatValue]];
+                    } else 
+                    {
+                        supervisionIndividualSum =[NSNumber numberWithFloat:[supervisionIndividualSum floatValue] + [supervisionIndividualHours floatValue]];
+                    }
+                }
+
+               
+                float totalSum=[supervisionIndividualSum floatValue]+[supervisionGroupSum floatValue]+[supportSum floatValue]+[interventionSum floatValue]+[assessmentSum floatValue];
+                
+                
+              NSString * dateString=[[dateFormatter stringFromDate:startDate] stringByAppendingFormat:@" - %@",[dateFormatter stringFromDate:endDate]];
+                
+                UILabel *datesLabel=(UILabel *)[cell viewWithTag:71];
+                datesLabel.text=dateString;
+                
+                UILabel *interventionLabel=(UILabel *)[cell viewWithTag:72];
+                interventionLabel.text=[NSString stringWithFormat:@"%.2f Intervention",[interventionSum floatValue]];
+                
+                UILabel *assessmentLabel=(UILabel *)[cell viewWithTag:73];
+                assessmentLabel.text=[NSString stringWithFormat:@"%.2f Assessment",[assessmentSum floatValue]];
+                
+                 UILabel *supportLabel=(UILabel *)[cell viewWithTag:75];
+                supportLabel.text=[NSString stringWithFormat:@"%.2f Support",[supportSum floatValue]];
+                
+                UILabel *supervisionLabel=(UILabel *)[cell viewWithTag:74];
+                supervisionLabel.text=[NSString stringWithFormat:@"%.2f Supervision",[supervisionIndividualSum floatValue]+[supervisionGroupSum floatValue]];
+                
+
+                UILabel *totalLabel=(UILabel *)[cell viewWithTag:76];
+                totalLabel.text=[NSString stringWithFormat:@"%.2f Total",totalSum];
+                               
+                
+//                cell.textLabel.text=[NSString stringWithFormat:@"%@ - %@; %@ hrs Assessment; %@ hrs Intervention",[dateFormatter stringFromDate:startDate],[dateFormatter stringFromDate:endDate],assessmentSum, interventionSum];
+                
+                 cell.textLabel.text=@"";
+                return;
+            }
+
+        }}
+        
+    }
+
+
+
+
+
+}
+
+
+
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if (tableViewModel.tag==0) {
+        CGRect cellFrame=cell.frame;
+        cellFrame.size.height=100;
+    }
+
+
+
+
+
+
+
+}
+
+
+- (SCControlCell *)tableViewModel:(SCTableViewModel *)tableViewModel
+	  customCellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	
+    
+    // Create & return a custom cell based on the cell in ContactOverviewCell.xib
+	
+    
+    SCControlCell *actionOverviewCell=nil;
+    if (tableViewModel.tag==0) {
+        actionOverviewCell= [SCControlCell cellWithText:nil withBoundObject:nil withObjectBindings:nil
+                                            withNibName:@"ExistingHoursOverviewCell"];
+    }
+	 
+	
+	return actionOverviewCell;
 }
 
 @end

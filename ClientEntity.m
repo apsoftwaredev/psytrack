@@ -52,10 +52,13 @@
     [dateFormatter setDateFormat:@"H:m:ss yyyy M d"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"MST"]];
     NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
-    NSLog(@"reference date %@",referenceDate);
+   
+    [self willAccessValueForKey:@"dateAdded"];
     if ([(NSDate *)self.dateAdded isEqualToDate:referenceDate]) {
+        [self didAccessValueForKey:@"dateAdded"];
+        [self willChangeValueForKey:(NSString *)@"dateAdded"];
         self.dateAdded = [NSDate date];
-       
+        [self didChangeValueForKey:(NSString *)@"dateAdded"];
     }
     
 //    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -236,8 +239,7 @@
         
         
         NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyDate:self.keyDate];
-        NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
-        NSData *encryptedData;
+       NSData *encryptedData;
         NSDate *encryptedKeyDate;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
             encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
@@ -287,7 +289,7 @@
         NSData * dateData = [NSKeyedArchiver archivedDataWithRootObject:dateToConvert];
         
         NSDictionary *encryptedDataDictionary=[appDelegate encryptDataToEncryptedData:dateData withKeyDate:self.keyDate];
-        NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+       
         NSData *encryptedData;
         NSDate *encryptedKeyDate;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {

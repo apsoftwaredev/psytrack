@@ -36,9 +36,12 @@
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"MST"]];
     NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
     NSLog(@"reference date %@",referenceDate);
+    [self willAccessValueForKey:@"endDate"];
     if ([(NSDate *)self.dateTime isEqualToDate:referenceDate]) {
+        [self didAccessValueForKey:@"dateTime"];
+        [self willChangeValueForKey:(NSString *)@"dateTime"];
         self.dateTime = [NSDate date];
-        
+        [self didChangeValueForKey:(NSString *)@"dateTime"];
     }
 }
 

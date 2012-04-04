@@ -288,6 +288,9 @@
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
 		E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */; };
+		E7D3732C152C2EFA00121918 /* ExistingHoursEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */; };
+		E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */; };
+		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -705,6 +708,10 @@
 		E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCDateCell.m; sourceTree = "<group>"; };
 		E7C074A3150EE514009C5498 /* EncryptedSCTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCTextViewCell.h; sourceTree = "<group>"; };
 		E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCTextViewCell.m; sourceTree = "<group>"; };
+		E7D3732A152C2EFA00121918 /* ExistingHoursEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursEntity.h; sourceTree = "<group>"; };
+		E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursEntity.m; sourceTree = "<group>"; };
+		E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursOverviewCell.xib; sourceTree = "<group>"; };
+		E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController_iPad.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1407,6 +1414,8 @@
 		E75F7788151CED0C002B10AE /* Encrypted Model Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				E7D3732A152C2EFA00121918 /* ExistingHoursEntity.h */,
+				E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */,
 				E78DA69A1521DBD1004ABF29 /* MedicationReviewEntity.h */,
 				E78DA69B1521DBD1004ABF29 /* MedicationReviewEntity.m */,
 				E78DA6971521D93E004ABF29 /* MedicationEntity.h */,
@@ -1451,7 +1460,9 @@
 			children = (
 				E78DA6A115252579004ABF29 /* ExistingHoursViewController.h */,
 				E78DA6A215252579004ABF29 /* ExistingHoursViewController.m */,
+				E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */,
 				E78DA6A315252579004ABF29 /* ExistingHoursViewController.xib */,
+				E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */,
 			);
 			name = "Existing Hours";
 			sourceTree = "<group>";
@@ -1643,6 +1654,8 @@
 				37B225511502861F0015D955 /* Default-Landscape~ipad.png in Resources */,
 				E7516BDC150BF9A2005B798A /* Dan Boice-46.jpg in Resources */,
 				E78DA6A515252579004ABF29 /* ExistingHoursViewController.xib in Resources */,
+				E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */,
+				E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1785,6 +1798,7 @@
 				E78DA69C1521DBD2004ABF29 /* MedicationReviewEntity.m in Sources */,
 				E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */,
 				E78DA6A415252579004ABF29 /* ExistingHoursViewController.m in Sources */,
+				E7D3732C152C2EFA00121918 /* ExistingHoursEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

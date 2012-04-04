@@ -8,11 +8,11 @@
 
 #import "SCTableViewModel.h"
 
-@interface ExistingHoursViewController : UITableViewController <SCTableViewModelDelegate>{
+@interface ExistingHoursViewController : UITableViewController <SCTableViewModelDelegate,SCTableViewModelDataSource>{
 
 
     SCArrayOfObjectsModel *tableModel_;
 
 }
-
+-(void)cancelButtonTapped;
 @end
