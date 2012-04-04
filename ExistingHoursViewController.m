@@ -71,6 +71,10 @@
                                                             withManagedObjectContext:managedObjectContext autoGeneratePropertyDefinitions:YES];        
     
 
+
+    
+    
+    
     //Create a class definition for the demographicsEntity
     SCClassDefinition *demographicsDef = [SCClassDefinition definitionWithEntityName:@"ExistingDemographicsEntity" 
                                                             withManagedObjectContext:managedObjectContext
@@ -84,7 +88,11 @@
     SCClassDefinition *existingAgeGroupDef = [SCClassDefinition definitionWithEntityName:@"ExistingAgeGroupEntity" 
                                                         withManagedObjectContext:managedObjectContext
                                                                withPropertyNames:[NSArray arrayWithObjects:@"ageGroup",@"numberOfIndividuals",   nil]];
+    //Create the property definition for the numberofindividuals property in the existing age group class
+    SCPropertyDefinition *existingAgeGroupNumberPropertyDef = [existingAgeGroupDef propertyDefinitionWithName:@"numberOfIndividuals"];
     
+    existingAgeGroupNumberPropertyDef.title=@"Number of Individuals";
+    existingAgeGroupNumberPropertyDef.autoValidate=NO;
     //Do some property definition customization for the existingAgeGroupDef Entity defined in demographics
     //Create the property definition for the ageGroups property
     SCPropertyDefinition *ageGroupPropertyDef = [demographicsDef propertyDefinitionWithName:@"ageGroups"];
@@ -111,7 +119,8 @@
     //set the title property name
     ageGroupDef.titlePropertyName=@"ageGroup";
     
-    existingAgeGroupDef.titlePropertyName=@"ageGroup.ageGroup";
+    existingAgeGroupDef.titlePropertyName=@"ageGroup.ageGroup;numberOfIndividuals";
+    existingAgeGroupDef.titlePropertyNameDelimiter =@" - ";
     //set the property definition type to objects selection
 	
     ageGroupInExistingAgeGroupPropertyDef.type = SCPropertyTypeObjectSelection;
@@ -142,6 +151,11 @@
                                                                 withManagedObjectContext:managedObjectContext
                                                                        withPropertyNames:[NSArray arrayWithObjects:@"gender",@"numberOfIndividuals",   nil]];
     
+    
+    SCPropertyDefinition *existingGenderNumberPropertyDef = [existingGenderDef propertyDefinitionWithName:@"numberOfIndividuals"];
+    
+       existingGenderNumberPropertyDef.title=@"Number of Individuals";
+    existingGenderNumberPropertyDef.autoValidate=NO;
     //Do some property definition customization for the existingAgeGroupDef Entity defined in demographics
     //Create the property definition for the ageGroups property
     SCPropertyDefinition *genderPropertyDef = [demographicsDef propertyDefinitionWithName:@"genders"];
@@ -165,7 +179,9 @@
     SCPropertyDefinition *genderInExistingGendersPropertyDef = [existingGenderDef   propertyDefinitionWithName:@"gender"];
     
     
-    existingGenderDef.titlePropertyName=@"gender.genderName";
+    existingGenderDef.titlePropertyName=@"gender.genderName;numberOfIndividuals";
+    existingGenderDef.titlePropertyNameDelimiter =@" - ";
+
     
     //set the title property name
     genderpDef.titlePropertyName=@"genderName";
@@ -203,6 +219,13 @@
                                                               withManagedObjectContext:managedObjectContext
                                                                      withPropertyNames:[NSArray arrayWithObjects:@"ethnicity",@"numberOfIndividuals",   nil]];
     
+    
+    SCPropertyDefinition *existingEthnicitiesNumberPropertyDef = [existingEthnicitiesDef propertyDefinitionWithName:@"numberOfIndividuals"];
+    
+    
+    existingEthnicitiesNumberPropertyDef.autoValidate=NO;
+    
+     existingEthnicitiesNumberPropertyDef.title=@"Number of Individuals";
     //Do some property definition customization for the existingAgeGroupDef Entity defined in demographics
     //Create the property definition for the ageGroups property
     SCPropertyDefinition *ethnicityPropertyDef = [demographicsDef propertyDefinitionWithName:@"ethnicities"];
@@ -225,7 +248,8 @@
     //create a property definition
     SCPropertyDefinition *ethnicityInExistingEthnicityPropertyDef = [existingEthnicitiesDef   propertyDefinitionWithName:@"ethnicity"];
     
-    existingEthnicitiesDef.titlePropertyName=@"ethnicity.ethnicityName";
+    existingEthnicitiesDef.titlePropertyName=@"ethnicity.ethnicityName;numberOfIndividuals";
+    existingEthnicitiesDef.titlePropertyNameDelimiter =@" - ";
     
     //set the title property name
     ethnicitypDef.titlePropertyName=@"ethnicityName";
@@ -261,6 +285,11 @@
                                                                    withManagedObjectContext:managedObjectContext
                                                                           withPropertyNames:[NSArray arrayWithObjects:@"race",@"numberOfIndividuals",   nil]];
     
+    
+    SCPropertyDefinition *existingRaceNumberPropertyDef = [existingRaceDef propertyDefinitionWithName:@"numberOfIndividuals"];
+    
+     existingRaceNumberPropertyDef.title=@"Number of Individuals";
+    existingRaceNumberPropertyDef.autoValidate=NO;
     //Do some property definition customization for the existingAgeGroupDef Entity defined in demographics
     //Create the property definition for the ageGroups property
     SCPropertyDefinition *racePropertyDef = [demographicsDef propertyDefinitionWithName:@"races"];
@@ -283,7 +312,8 @@
     //create a property definition
     SCPropertyDefinition *raceInExistingRacePropertyDef = [existingRaceDef   propertyDefinitionWithName:@"race"];
     
-    existingRaceDef.titlePropertyName=@"race.raceName";
+    existingRaceDef.titlePropertyName=@"race.raceName;numberOfIndividuals";
+    existingRaceDef.titlePropertyNameDelimiter =@" - ";
     
     //set the title property name
     raceDef.titlePropertyName=@"raceName";
@@ -319,6 +349,13 @@
                                                             withManagedObjectContext:managedObjectContext
                                                                    withPropertyNames:[NSArray arrayWithObjects:@"disability",@"numberOfIndividuals",   nil]];
     
+    
+    SCPropertyDefinition *existingDisabilityNumberPropertyDef = [existingDisabilityDef propertyDefinitionWithName:@"numberOfIndividuals"];
+    
+    
+    existingDisabilityNumberPropertyDef.autoValidate=NO;
+   existingDisabilityNumberPropertyDef.title=@"Number of Individuals";
+    
     //Do some property definition customization for the existingAgeGroupDef Entity defined in demographics
     //Create the property definition for the ageGroups property
     SCPropertyDefinition *disabilityPropertyDef = [demographicsDef propertyDefinitionWithName:@"individualsWithDisabilities"];
@@ -341,9 +378,12 @@
     //create a property definition
     SCPropertyDefinition *disabilityInExistingDisabilityPropertyDef = [existingDisabilityDef   propertyDefinitionWithName:@"disability"];
     
-    existingDisabilityDef.titlePropertyName=@"disability.disabilityName";
+    existingDisabilityDef.titlePropertyName=@"disability.disabilityName;numberOfIndividuals";
+    existingDisabilityDef.titlePropertyNameDelimiter =@" - ";
+    
     //set the title property name
     disabilityDef.titlePropertyName=@"disabilityName";
+    disabilityDef.titlePropertyNameDelimiter =@" - ";
     
     //set the property definition type to objects selection
 	
@@ -376,6 +416,11 @@
                                                                   withManagedObjectContext:managedObjectContext
                                                                          withPropertyNames:[NSArray arrayWithObjects:@"sexualOrientation",@"numberOfIndividuals",   nil]];
     
+    SCPropertyDefinition *existingSONumberPropertyDef = [existingSexualOrientationDef propertyDefinitionWithName:@"numberOfIndividuals"];
+    
+    
+    existingSONumberPropertyDef.autoValidate=NO;
+    existingSONumberPropertyDef.title=@"Number of Individuals";
     //Do some property definition customization for the existingAgeGroupDef Entity defined in demographics
     //Create the property definition for the ageGroups property
     SCPropertyDefinition *sexualOrientationPropertyDef = [demographicsDef propertyDefinitionWithName:@"sexualOrientations"];
@@ -392,8 +437,8 @@
     
     
     //set the title property name
-    existingSexualOrientationDef.titlePropertyName=@"sexualOrientation";
-    
+    existingSexualOrientationDef.titlePropertyName=@"sexualOrientation;numberOfIndividuals";
+    existingSexualOrientationDef.titlePropertyNameDelimiter =@" - ";
     //set the property definition type to objects selection
 	
    
@@ -405,25 +450,7 @@
     
     
      
-    
-    //Create a class definition for the existingAssessmentEntity
-    SCClassDefinition *assessmentDef = [SCClassDefinition definitionWithEntityName:@"ExisitingAssessmentEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"intakeOrStructuredInterview", @"neuropsychologicalTestAdministration",@"otherAssessmentActivities",   @"psychodiagnosticTestAdministration",     @"demographics",@"notes",nil]];
-    
-//    //Create a class definition for the existingAssessmentEntity
-//    SCClassDefinition *supervisionDef = [SCClassDefinition definitionWithEntityName:@"ExistingSupervisionEntity" 
-//                                                          withManagedObjectContext:managedObjectContext
-//                                                                 withPropertyNames:[NSArray arrayWithObjects:@"licensedSupervision", @"otherSupervision",nil]];
-//                                        
-//    
-//    //Create a class definition for the existingAssessmentEntity
-//    SCClassDefinition *supervisionLicencedDef = [SCClassDefinition definitionWithEntityName:@"ExistingLicensedSupervisionEntity" 
-//                                                           withManagedObjectContext:managedObjectContext
-//                                                                  withPropertyNames:[NSArray arrayWithObjects:@"groupHours", @"individualHours",@"licenseType",  @"notes",nil]];
-//    
-    
-    
+
     
     //Create a class definition for the existingAssessmentEntity
     SCClassDefinition *supervisionDef = [SCClassDefinition definitionWithEntityName:@"ExistingSupervisionEntity" 
@@ -432,7 +459,17 @@
     
 
     
-       
+    SCPropertyDefinition *supervisionGroupNumberPropertyDef = [supervisionDef propertyDefinitionWithName:@"groupHours"];
+    
+    
+    supervisionGroupNumberPropertyDef.autoValidate=NO;
+    
+    SCPropertyDefinition *supervisionIndividualNumberPropertyDef = [supervisionDef propertyDefinitionWithName:@"individualHours"];
+    
+    
+    supervisionIndividualNumberPropertyDef.autoValidate=NO;
+    
+    
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     
     
@@ -440,6 +477,8 @@
     
     //Create the property definition for the <#propertyName#> property
     SCPropertyDefinition *supervisionPropertyDef = [existingHoursDef propertyDefinitionWithName:@"supervision"];
+    
+    supervisionPropertyDef.title=@"Supervision Types";
     supervisionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:supervisionDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
@@ -462,7 +501,9 @@
     
    
     //set the title property name
-    supervisionDef.titlePropertyName=@"supervisionType.supervisionType";
+    supervisionDef.titlePropertyName=@"supervisionType.supervisionType;groupHours;individualHours";
+    supervisionDef.titlePropertyNameDelimiter=@" - ";
+    
     
     //set the property definition type to objects selection
 	
@@ -507,24 +548,172 @@
     
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
-    clinicianDataProperty.autoValidate=FALSE;
+    clinicianDataProperty.autoValidate=TRUE;
     
     
     //insert the custom property definition into the clientData class at index 
   
     [supervisionDef insertPropertyDefinition:clinicianDataProperty atIndex:1];
-                                        
-    //Create the property definition for the assessment property in the existingHours class
-    SCPropertyDefinition *assessmentsPropertyDef = [existingHoursDef propertyDefinitionWithName:@"assessment"];
+                        
     
+    //Create a class definition for the existingAssessmentEntity
+    SCClassDefinition *supportActivityDef = [SCClassDefinition definitionWithEntityName:@"ExistingSupportActivityEntity" 
+                                                           withManagedObjectContext:managedObjectContext
+                                                                  withPropertyNames:[NSArray arrayWithObjects:@"supportActivityType",@"hours",  @"notes",nil]];
+    
+    
+    
+    
+    SCPropertyDefinition *supportActivityNumberPropertyDef = [supportActivityDef propertyDefinitionWithName:@"hours"];
+    
+    
+    supportActivityNumberPropertyDef.autoValidate=NO;
+    
+
+    
+    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+    
+    
+    //create an array of objects definition for the supervision to-many relationship that with show up in the same view without a place holder element>.
+    
+    //Create the property definition for the supportActivity property
+    SCPropertyDefinition *supportActivitiesPropertyDef = [existingHoursDef propertyDefinitionWithName:@"supportActivities"];
+    supportActivitiesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:supportActivityDef
+                                                                                       allowAddingItems:YES
+                                                                                     allowDeletingItems:YES
+                                                                                       allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add support activity hours"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+    
+    
+    
+    //create an object selection for the supervisionType relationship in the Supervision Entity 
+    
+    
+    //Create a class definition for the supervision TypeEntity
+    SCClassDefinition *supportActivityTypeDef = [SCClassDefinition definitionWithEntityName:@"SupportActivityTypeEntity" 
+                                                               withManagedObjectContext:managedObjectContext
+                                                                      withPropertyNames:[NSArray arrayWithObjects:@"supportActivityType", nil]];
+    
+    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+    //create a property definition
+    
+    SCPropertyDefinition *supportActivityTypePropertyDef = [supportActivityDef propertyDefinitionWithName:@"supportActivityType"];
+    
+    
+    //set the title property name
+    supportActivityDef.titlePropertyName=@"supportActivityType.supportActivityType;hours";
+    
+    //set the property definition type to objects selection
+	
+    supportActivityTypePropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *supportActivityTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:supportActivityTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    
+    //set some addtional attributes
+    supportActivityTypeSelectionAttribs.allowAddingItems = YES;
+    supportActivityTypeSelectionAttribs.allowDeletingItems = YES;
+    supportActivityTypeSelectionAttribs.allowMovingItems = YES;
+    supportActivityTypeSelectionAttribs.allowEditingItems = YES;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    supportActivityTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add new support activity type"];
+    
+    
+    //add an "Add New" element to appear when user clicks edit
+    supportActivityTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New support activity type"];
+    
+    //add the selection attributes to the property definition
+    supportActivityTypePropertyDef.attributes = supportActivityTypeSelectionAttribs;
+    
+    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+    
+    
+    //Create the property definition for the notes property in the genderDef class
+    SCPropertyDefinition *supportActivitydNotesPropertyDef = [supportActivityDef propertyDefinitionWithName:@"notes"];
+    supportActivitydNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+    //Create a class definition for the existingAssessmentEntity
+    SCClassDefinition *assessmentDef = [SCClassDefinition definitionWithEntityName:@"ExisitingAssessmentEntity" 
+                                                          withManagedObjectContext:managedObjectContext
+                                                                 withPropertyNames:[NSArray arrayWithObjects:@"assessmentType",@"hours",@"instruments",@"batteries", @"demographics",@"notes",nil]];
+    
+    
+    SCPropertyDefinition *assessmentNumberPropertyDef = [assessmentDef propertyDefinitionWithName:@"hours"];
+    
+    
+    assessmentNumberPropertyDef.autoValidate=NO;
+    
+    
+
+
+    //Create a class definition for the testingSessionTypeEntity
+    SCClassDefinition *testingSessionTypeDef = [SCClassDefinition definitionWithEntityName:@"TestingSessionTypeEntity" 
+                                                        withManagedObjectContext:managedObjectContext
+                                                               withPropertyNames:[NSArray arrayWithObjects:@"assessmentType", @"notes" , nil]];
+    
+    
+    
+    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+    
+    //Create the property definition for the assessment property in the existingHours class
+    SCPropertyDefinition *assessmentsPropertyDef = [existingHoursDef propertyDefinitionWithName:@"assessments"];
+    
+    assessmentsPropertyDef.title=@"Assessment Types";
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     
    
     assessmentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:assessmentDef
-                                                                                    allowAddingItems:NO
-                                                                                  allowDeletingItems:NO
-                                                                                    allowMovingItems:NO];
+                                                                                             allowAddingItems:YES
+                                                                                           allowDeletingItems:YES
+                                                                                             allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add assessment hours"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
     
+    
+    
+    //create an object selection for the supervisionType relationship in the Supervision Entity 
+    
+    
+  
+    
+    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+    //create a property definition
+    
+    SCPropertyDefinition *testingSessionTypePropertyDef = [assessmentDef propertyDefinitionWithName:@"assessmentType"];
+    
+    
+    //set the title property name
+    assessmentDef.titlePropertyName=@"assessmentType.assessmentType;hours";
+    assessmentDef.titlePropertyNameDelimiter=@" - ";
+    
+    //set the property definition type to objects selection
+	
+    testingSessionTypePropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *testingSessionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:testingSessionTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    
+    //set some addtional attributes
+    testingSessionTypeSelectionAttribs.allowAddingItems = YES;
+    testingSessionTypeSelectionAttribs.allowDeletingItems = YES;
+    testingSessionTypeSelectionAttribs.allowMovingItems = YES;
+    testingSessionTypeSelectionAttribs.allowEditingItems = YES;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    testingSessionTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add new assessment type"];
+    
+    
+    //add an "Add New" element to appear when user clicks edit
+    testingSessionTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New assessment type"];
+    
+    //add the selection attributes to the property definition
+    testingSessionTypePropertyDef.attributes = testingSessionTypeSelectionAttribs;
+    
+    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+    
+    
+    //Create the property definition for the notes property in the genderDef class
+    SCPropertyDefinition *assessmentTypeNotesPropertyDef = [testingSessionTypeDef propertyDefinitionWithName:@"notes"];
+    assessmentTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+
+    testingSessionTypeDef.orderAttributeName=@"order";
       
 
     
@@ -543,133 +732,256 @@
     assessmentNotesPropertyDef.type=SCPropertyTypeTextView;
     
 
-    
-    //Create a class definition for the psychotherapyEntity
-    SCClassDefinition *psychotherapyDef = [SCClassDefinition definitionWithEntityName:@"ExistingPsychotherapyEntity" 
+    //Create a class definition for the existing InstrumentsEntity
+    SCClassDefinition *existingInstrumentDef = [SCClassDefinition definitionWithEntityName:@"ExistingInstrumentEntity" 
                                                         withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"familyAndCouples", @"group", @"individual",  @"other"   , nil]];
+                                                                         withPropertyNames:[NSArray arrayWithObjects:@"instrument",@"numberAdminstered",@"numberOfReportsWritten",@"notes",  nil]];
     
     
-    //Create the property definition for the assessment property in the existingHours class
-    SCPropertyDefinition *psychotherapyPropertyDef = [existingHoursDef propertyDefinitionWithName:@"psychotherapy"];
     
     
-    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+    
+    SCPropertyDefinition *existingIAdministeredNumberPropertyDef = [existingInstrumentDef propertyDefinitionWithName:@"numberAdminstered"];
     
     
-    psychotherapyPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:psychotherapyDef
-                                                                                       allowAddingItems:NO
-                                                                                     allowDeletingItems:NO
-                                                                                       allowMovingItems:NO];
+    existingIAdministeredNumberPropertyDef.autoValidate=NO;
     
     
-    //Create a class definition for the family and couplesEntity
-    SCClassDefinition *familyAndCouplesDef = [SCClassDefinition definitionWithEntityName:@"ExistingFamilyCouplesEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"hours",@"demographics", nil]];
+    SCPropertyDefinition *existingIReportsNumberPropertyDef = [existingInstrumentDef propertyDefinitionWithName:@"numberOfReportsWritten"];
     
     
-        
-    //Create the property definition for the assessment property in the existingHours class
-    SCPropertyDefinition *familyAndCouplesPropertyDef = [psychotherapyDef propertyDefinitionWithName:@"familyAndCouples"];
+    existingIReportsNumberPropertyDef.autoValidate=NO;
     
-    //Create the property definition for the assessment property in the existingHours class
-    SCPropertyDefinition *familyAndCouplesDemPropertyDef = [familyAndCouplesDef propertyDefinitionWithName:@"demographics"];
-    
-    familyAndCouplesDemPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:demographicsDef
-                                                                                            allowAddingItems:NO
-                                                                                          allowDeletingItems:NO
-                                                                                            allowMovingItems:NO];
-    
-    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
-    
-    
-    familyAndCouplesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:familyAndCouplesDef
-                                                                                         allowAddingItems:NO
-                                                                                       allowDeletingItems:NO
-                                                                                         allowMovingItems:NO];
-    
+    existingIReportsNumberPropertyDef.title=@"Number of Reports Written";
 
+    
+    //Create a class definition for the instrument type Entity
+    SCClassDefinition *instrumentTypeDef = [SCClassDefinition definitionWithEntityName:@"InstrumentTypeEntity" 
+                                                        withManagedObjectContext:managedObjectContext
+                                                               withPropertyNames:[NSArray arrayWithObjects:@"instrumentType", @"notes" , nil]];
+    
+    
+    
+    
+    //Create a class definition for the Instrument Entity
+    SCClassDefinition *instrumentDef = [SCClassDefinition definitionWithEntityName:@"InstrumentEntity" 
+                                                        withManagedObjectContext:managedObjectContext
+                                                               withPropertyNames:[NSArray arrayWithObjects:@"instrumentName", @"acronym", @"instrumentType",    @"notes" , nil]];
+    
+    
+    
+    
+    
+    //create an array of objects definition for the existing instruments to-many relationship that with show up in a different view  without a place holder element>.
+    
+    //Create the property definition for the instruments property
+    SCPropertyDefinition *existingInstrumentsPropertyDef = [assessmentDef propertyDefinitionWithName:@"instruments"];
+    existingInstrumentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingInstrumentDef
+                                                                                    allowAddingItems:YES
+                                                                                  allowDeletingItems:YES
+                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+    
+    
+    
+    existingInstrumentDef.titlePropertyName=@"instrument.instrumentName;numberOfTimesUsed";
    
-    //Create a class definition for the family and couplesEntity
-    SCClassDefinition *groupDef = [SCClassDefinition definitionWithEntityName:@"ExistingGroupPsychotherapyEntity" 
-                                                                withManagedObjectContext:managedObjectContext
-                                                                       withPropertyNames:[NSArray arrayWithObjects:@"hours",@"demographics", nil]];
+    //create an object selection for the instrument relationship in the existing Instruments Entity 
+    
+    //create a property definition
+    SCPropertyDefinition *instrumentPropertyDef = [existingInstrumentDef propertyDefinitionWithName:@"instrument"];
+    
+ 
+    
+    //set the title property name
+    instrumentDef.titlePropertyName=@"instrumentName";
+    
+    //set the property definition type to objects selection
+	
+    instrumentPropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *instrumentSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:instrumentDef allowMultipleSelection:NO allowNoSelection:NO];
+    
+    //set some addtional attributes
+    instrumentSelectionAttribs.allowAddingItems = YES;
+    instrumentSelectionAttribs.allowDeletingItems = YES;
+    instrumentSelectionAttribs.allowMovingItems = NO;
+    instrumentSelectionAttribs.allowEditingItems = YES;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    instrumentSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add instruments"];
     
     
-    //instantiate the table model
+    //add an "Add New" element to appear when user clicks edit
+    instrumentSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Tap here to add new instrument"];
     
-    //Create the property definition for the assessment property in the existingHours class
-    SCPropertyDefinition *groupPropertyDef = [psychotherapyDef propertyDefinitionWithName:@"group"];
+    //add the selection attributes to the property definition
+    instrumentPropertyDef.attributes = instrumentSelectionAttribs;
+   
     
-    
-    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
-    
-    
-    groupPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:groupDef
-                                                                                            allowAddingItems:NO
-                                                                                          allowDeletingItems:NO
-                                                                                            allowMovingItems:NO];
-    
-    //Create the property definition for the assessment property in the existingHours class
-    SCPropertyDefinition *groupDemPropertyDef = [groupDef propertyDefinitionWithName:@"demographics"];
-    
-    groupDemPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:demographicsDef
-                                                                                               allowAddingItems:NO
-                                                                                             allowDeletingItems:NO
-                                                                                               allowMovingItems:NO];
-    
-    //Create a class definition for the family and couplesEntity
-    SCClassDefinition *individualDef = [SCClassDefinition definitionWithEntityName:@"ExistingIndivPsychotherapyEntity" 
-                                                     withManagedObjectContext:managedObjectContext
-                                                            withPropertyNames:[NSArray arrayWithObjects:@"hours",@"demographics", nil]];
+    //create a property definition
+    SCPropertyDefinition *instrumentTypePropertyDef = [instrumentDef propertyDefinitionWithName:@"instrumentType"];
     
     
-    //instantiate the table model
     
-    //Create the property definition for the assessment property in the existingHours class
-    SCPropertyDefinition *individualPropertyDef = [psychotherapyDef propertyDefinitionWithName:@"individual"];
+    //set the title property name
+    instrumentTypeDef.titlePropertyName=@"instrumentType";
+    
+    //set the property definition type to objects selection
+	
+    instrumentTypePropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *instrumentTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:instrumentTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    
+    //set some addtional attributes
+    instrumentTypeSelectionAttribs.allowAddingItems = YES;
+    instrumentTypeSelectionAttribs.allowDeletingItems = YES;
+    instrumentTypeSelectionAttribs.allowMovingItems = NO;
+    instrumentTypeSelectionAttribs.allowEditingItems = YES;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    instrumentTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add instrument types"];
     
     
-    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+    //add an "Add New" element to appear when user clicks edit
+    instrumentTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Tap here to add new instrument type"];
+    
+    //add the selection attributes to the property definition
+    instrumentTypePropertyDef.attributes = instrumentTypeSelectionAttribs;
     
     
-    individualPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:individualDef
-                                                                                 allowAddingItems:NO
-                                                                               allowDeletingItems:NO
-                                                                                 allowMovingItems:NO];
+    //Create the property definition for the notes property in the genderDef class
+    SCPropertyDefinition *existingInstrumentNotesPropertyDef = [existingInstrumentDef propertyDefinitionWithName:@"notes"];
+    existingInstrumentNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    //Create the property definition for the notes property in the genderDef class
+    SCPropertyDefinition *instrumentNotesPropertyDef = [instrumentDef propertyDefinitionWithName:@"notes"];
+    instrumentNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    //Create the property definition for the notes property in the genderDef class
+    SCPropertyDefinition *instrumentTypeNotesPropertyDef = [instrumentTypeDef propertyDefinitionWithName:@"notes"];
+    instrumentTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+
+    
+    //Create a class definition for the existing InstrumentsEntity
+    SCClassDefinition *existingBatteryDef = [SCClassDefinition definitionWithEntityName:@"ExistingBatteryEntity" 
+                                                                  withManagedObjectContext:managedObjectContext
+                                                                         withPropertyNames:[NSArray arrayWithObjects:@"battery",@"numberAdminstered",@"numberOfReportsWritten",@"notes",  nil]];
+    
+    
+    
+    SCPropertyDefinition *existingBAdministeredNumberPropertyDef = [existingBatteryDef propertyDefinitionWithName:@"numberAdminstered"];
+    
+    
+    existingBAdministeredNumberPropertyDef.autoValidate=NO;
+    
+    
+    SCPropertyDefinition *existingBReportsNumberPropertyDef = [existingBatteryDef propertyDefinitionWithName:@"numberOfReportsWritten"];
+    
+    
+    existingBReportsNumberPropertyDef.autoValidate=NO;
+    
     
 
 
-    //Create the property definition for the assessment property in the existingHours class
-    SCPropertyDefinition *individualDemPropertyDef = [individualDef propertyDefinitionWithName:@"demographics"];
     
-    individualDemPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:demographicsDef
-                                                                                    allowAddingItems:NO
-                                                                                  allowDeletingItems:NO
-                                                                                    allowMovingItems:NO];
+    //Create a class definition for the Instrument Entity
+    SCClassDefinition *batteryDef = [SCClassDefinition definitionWithEntityName:@"BatteryEntity" 
+                                                          withManagedObjectContext:managedObjectContext
+                                                                 withPropertyNames:[NSArray arrayWithObjects:@"batteryName", @"acronym", @"publisher",@"instruments", @"notes" , nil]];
     
+    
+
+    //Create the property definition for the instruments property
+    SCPropertyDefinition *existingBatteriesPropertyDef = [assessmentDef propertyDefinitionWithName:@"batteries"];
+    existingBatteriesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingBatteryDef
+                                                                                               allowAddingItems:YES
+                                                                                             allowDeletingItems:YES
+                                                                                               allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add battery"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+    
+    
+    
+    existingBatteryDef.titlePropertyName=@"battery.batteryName;numberAdminstered;numberOfReportsWritten";
+    existingRaceDef.titlePropertyNameDelimiter=@" - ";
+    //create an object selection for the instrument relationship in the existing Instruments Entity 
+    
+
+    
+    //create a property definition
+    SCPropertyDefinition *batteryPropertyDef = [existingBatteryDef propertyDefinitionWithName:@"battery"];
+    
+    
+    
+    //set the title property name
+    batteryDef.titlePropertyName=@"batteryName;acronym;numberAdminstered";
+    batteryDef.titlePropertyNameDelimiter=@" - ";
+    //set the property definition type to objects selection
+	
+    batteryPropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *batterySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:batteryDef allowMultipleSelection:NO allowNoSelection:NO];
+    
+    //set some addtional attributes
+    batterySelectionAttribs.allowAddingItems = YES;
+    batterySelectionAttribs.allowDeletingItems = YES;
+    batterySelectionAttribs.allowMovingItems = NO;
+    batterySelectionAttribs.allowEditingItems = YES;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    batterySelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add batteries"];
+    
+    
+    //add an "Add New" element to appear when user clicks edit
+    batterySelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Tap here to add new battery"];
+    
+    //add the selection attributes to the property definition
+    batteryPropertyDef.attributes = batterySelectionAttribs;
+    
+
+    //create a property definition
+    SCPropertyDefinition *batteryInstrumentsPropertyDef = [batteryDef propertyDefinitionWithName:@"instruments"];
+    
+    batteryInstrumentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:instrumentDef
+                                                                                               allowAddingItems:YES
+                                                                                             allowDeletingItems:YES
+                                                                                               allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+    
+    
+   
+    SCPropertyDefinition *existingBatteryNotesPropertyDef = [existingBatteryDef propertyDefinitionWithName:@"notes"];
+    existingBatteryNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    //Create the property definition for the notes property in the genderDef class
+    SCPropertyDefinition *batteryNotesPropertyDef = [batteryDef propertyDefinitionWithName:@"notes"];
+    batteryNotesPropertyDef.type=SCPropertyTypeTextView;
     
     //Create a class definition for the other psychotherapyEntity
-    SCClassDefinition *otherInterventionDef = [SCClassDefinition definitionWithEntityName:@"ExistingOtherInterventionEntity" 
+    SCClassDefinition *interventionDef = [SCClassDefinition definitionWithEntityName:@"ExistingInterventionEntity" 
                                                         withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects: @"type"  ,@"hours", @"demographics", nil]];
+                                                               withPropertyNames:[NSArray arrayWithObjects: @"interventionType"  ,@"hours", @"models",@"demographics",@"notes", nil]];
     
     
     
+    
+    SCPropertyDefinition *existingInterventionNumberPropertyDef = [interventionDef propertyDefinitionWithName:@"hours"];
+    
+    
+    existingInterventionNumberPropertyDef.autoValidate=NO;
+    
+    
+
     
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
-    
+    interventionDef.titlePropertyName=@"interventionType.interventionType;models.acronym;hours";
     
     //create an array of objects definition for the other psychotherapy to-many relationship that with show up in a different view  without a place holder element>.
     
     //Create the property definition for the other property
-    SCPropertyDefinition *otherPropertyDef = [psychotherapyDef propertyDefinitionWithName:@"other"];
-    otherPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:otherInterventionDef
+    SCPropertyDefinition *directInterventionPropertyDef = [existingHoursDef propertyDefinitionWithName:@"directInterventions"];
+    
+    directInterventionPropertyDef.title=@"Direct Intervention Types";
+    directInterventionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:interventionDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
-                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add other direct intervention" ]addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add a direct intervention" ]addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -678,9 +990,9 @@
     
     
     //Create the property definition for the assessment property in the existingHours class
-    SCPropertyDefinition *otherDemPropertyDef = [otherInterventionDef propertyDefinitionWithName:@"demographics"];
+    SCPropertyDefinition *interventionDemPropertyDef = [interventionDef propertyDefinitionWithName:@"demographics"];
     
-    otherDemPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:demographicsDef
+    interventionDemPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:demographicsDef
                                                                                          allowAddingItems:NO
                                                                                        allowDeletingItems:NO
                                                                                          allowMovingItems:NO];
@@ -688,43 +1000,89 @@
 
     
     //Create a class definition for the ExistingOtherInterventionType Entity
-    SCClassDefinition *otherInterventionTypeDef = [SCClassDefinition definitionWithEntityName:@"ExistingOtherInterventionTypeEntity" 
+    SCClassDefinition *interventionTypeDef = [SCClassDefinition definitionWithEntityName:@"InterventionTypeEntity" 
                                                         withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"interventionType", nil]];
+                                                               withPropertyNames:[NSArray arrayWithObjects:@"interventionType",@"notes",   nil]];
+    
+    
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     
     //create an object selection for the intervention Type relationship in the ExistingOtherInterventionTypeEntity Entity 
     
     //create a property definition
-    SCPropertyDefinition *otherInterventionTypePropertyDef = [otherInterventionDef propertyDefinitionWithName:@"type"];
+    SCPropertyDefinition *interventionTypePropertyDef = [interventionDef propertyDefinitionWithName:@"interventionType"];
     
         
     //set the title property name
-    otherInterventionTypeDef.titlePropertyName=@"interventionType";
+    interventionTypeDef.titlePropertyName=@"interventionType";
     
     //set the property definition type to objects selection
 	
-    otherInterventionTypePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *otherInterventionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:otherInterventionTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    interventionTypePropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *interventionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:interventionTypeDef allowMultipleSelection:NO allowNoSelection:NO];
     
     //set some addtional attributes
-    otherInterventionTypeSelectionAttribs.allowAddingItems = YES;
-    otherInterventionTypeSelectionAttribs.allowDeletingItems = YES;
-    otherInterventionTypeSelectionAttribs.allowMovingItems = YES;
-    otherInterventionTypeSelectionAttribs.allowEditingItems = YES;
+    interventionTypeSelectionAttribs.allowAddingItems = YES;
+    interventionTypeSelectionAttribs.allowDeletingItems = YES;
+    interventionTypeSelectionAttribs.allowMovingItems = YES;
+    interventionTypeSelectionAttribs.allowEditingItems = YES;
     
 
     //add an "Add New" element to appear when user clicks edit
-    otherInterventionTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new interveniton type"];
+    interventionTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new interveniton type"];
     
     //add an "Add New" element to appear when user clicks edit
-    otherInterventionTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add a new interveniton type"];
+    interventionTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add a new interveniton type"];
     
     //add the selection attributes to the property definition
-    otherInterventionTypePropertyDef.attributes = otherInterventionTypeSelectionAttribs;
+    interventionTypePropertyDef.attributes = interventionTypeSelectionAttribs;
     
-    otherInterventionTypeDef.orderAttributeName=@"order";
+    interventionTypeDef.orderAttributeName=@"order";
+    
+    SCPropertyDefinition *interventionNotesPropertyDef = [interventionDef propertyDefinitionWithName:@"notes"];
+    interventionNotesPropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *interventionTypeNotesPropertyDef = [interventionTypeDef propertyDefinitionWithName:@"notes"];
+    interventionTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+
+    //Create a class definition for the intervention ModelEntity
+    SCClassDefinition *interventionModelDef = [SCClassDefinition definitionWithEntityName:@"InterventionModelEntity" 
+                                                        withManagedObjectContext:managedObjectContext
+                                                               withPropertyNames:[NSArray arrayWithObjects: @"modelName",@"acronym",  @"evidenceBased",@"notes" , nil]];
+    
+    
+    
+    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+    //create an object selection for the models relationship in the Intervention Model Entity 
+    
+    //create a property definition
+    SCPropertyDefinition *interventionModelsPropertyDef = [interventionDef propertyDefinitionWithName:@"models"];
+    
+        //set the title property name
+    interventionModelDef.titlePropertyName=@"modelName;acronym";
+    interventionModelDef.titlePropertyNameDelimiter=@" - ";
+    //set the property definition type to objects selection
+	
+    interventionModelsPropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *interventionModelsSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:interventionModelDef allowMultipleSelection:YES allowNoSelection:YES];
+    
+    //set some addtional attributes
+    interventionModelsSelectionAttribs.allowAddingItems = YES;
+    interventionModelsSelectionAttribs.allowDeletingItems = YES;
+    interventionModelsSelectionAttribs.allowMovingItems = YES;
+    interventionModelsSelectionAttribs.allowEditingItems = YES;
+    
+      
+    //add an "Add New" element to appear when user clicks edit
+    interventionModelsSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap Edit to add new intervention model"];
+    
+    //add an "Add New" element to appear when user clicks edit
+    interventionModelsSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Tap here to add new intervention model"];
+    
+    //add the selection attributes to the property definition
+    interventionModelsPropertyDef.attributes = interventionModelsSelectionAttribs;
+    SCPropertyDefinition *interventionModelNotesPropertyDef = [interventionModelDef propertyDefinitionWithName:@"notes"];
+    interventionModelNotesPropertyDef.type=SCPropertyTypeTextView;
     
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
@@ -773,6 +1131,93 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
+}
+
+
+-(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
+BOOL valid=NO;
+    SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];
+    NSLog(@"cell class is %@",cell.class);
+    if ([cell isKindOfClass:[SCNumericTextFieldCell class]]) {
+        SCNumericTextFieldCell *numericCell=(SCNumericTextFieldCell *)cell;
+        
+        
+        
+        NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];
+        NSString *numberStr=[numericCell.textField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
+        NSNumber *number=[numberFormatter numberFromString:numberStr];
+        if (numberStr.length && [numberStr floatValue]<1000000 &&number) {
+            valid=YES;
+            
+            if ([numericCell.textLabel.text rangeOfString:@"Number"].location != NSNotFound) {
+                NSScanner* scan = [NSScanner scannerWithString:numberStr]; 
+                int val;         
+                
+                valid=[scan scanInt:&val] && [scan isAtEnd];
+                
+                
+            }
+            
+            
+        } 
+        
+        
+        
+        
+        
+       
+        
+       
+    }
+    
+    
+       
+    
+    return valid;
+
+
+
+}
+
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel didLayoutSubviewsForCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if([cell isKindOfClass:[SCNumericTextFieldCell class]])
+    {
+        SCNumericTextFieldCell *numericCell=(SCNumericTextFieldCell *)cell;
+        CGRect frame = numericCell.textLabel.frame;
+        frame.size.width = frame.size.width+100;
+        
+        numericCell.textLabel.frame = frame;
+        numericCell.textField.textAlignment=UITextAlignmentRight;
+        numericCell.textField.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin ;
+//       CGRect textFieldFrame=numericCell.textField.textInputView.frame;
+//        textFieldFrame.size.width=50;
+     
+    
+    }
+}
+
+
+
+
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    
+    
+    
+    
+    detailTableViewModel.delegate = self;
+    detailTableViewModel.tag = tableViewModel.tag+1;
+    
+    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
+        
+        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+    }
+    
+    
+    
 }
 
 @end

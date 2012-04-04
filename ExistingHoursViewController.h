@@ -8,7 +8,7 @@
 
 #import "SCTableViewModel.h"
 
-@interface ExistingHoursViewController : UITableViewController {
+@interface ExistingHoursViewController : UITableViewController <SCTableViewModelDelegate>{
 
 
     SCArrayOfObjectsModel *tableModel_;

@@ -310,7 +310,7 @@
                     id setObject;
                     while ((setObject = [enumerator nextObject]) != nil)
                     {
-                        if(![setObject isEqualToNumber:[NSNumber numberWithInteger:-1]]&&![setObject integerValue]<sectionAtIndex.cellCount){
+                        if(![setObject isEqualToNumber:[NSNumber numberWithInteger:-1]]&&[setObject integerValue]<sectionAtIndex.cellCount){
                         SCTableViewCell *selectedCell=(SCTableViewCell *)[sectionAtIndex cellAtIndex:(NSUInteger)[(NSNumber *)setObject integerValue]];
                         
                         if ([selectedCell.boundObject isKindOfClass:[ClinicianEntity class]]) {
