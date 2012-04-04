@@ -117,49 +117,53 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     existingHoursCell.delegate=self;
     existingHoursCell.tag=7;
     
+    SCSelectionCell *consultationsCell=[SCSelectionCell cellWithText:@"Consultations" withBoundKey:@"consultation" withValue:nil];
+    consultationsCell.delegate=self;
+    consultationsCell.tag=8;
+    
     SCSelectionCell *continuingEducationCell=[SCSelectionCell cellWithText:@"Continuing Education Credits" withBoundKey:@"continuingEducation" withValue:nil];
     continuingEducationCell.delegate=self;
-    continuingEducationCell.tag=8;
+    continuingEducationCell.tag=9;
 
     SCSelectionCell *certificationsCell=[SCSelectionCell cellWithText:@"Certifications" withBoundKey:@"certifications" withValue:nil];
     certificationsCell.delegate=self;
-    certificationsCell.tag=9;
+    certificationsCell.tag=10;
     
     SCSelectionCell *collegeCoursesCell=[SCSelectionCell cellWithText:@"College Courses" withBoundKey:@"collegeCourses" withValue:nil];
     collegeCoursesCell.delegate=self;
-    collegeCoursesCell.tag=10;
+    collegeCoursesCell.tag=11;
     
-    SCSelectionCell *importantExamsCell=[SCSelectionCell cellWithText:@"Important Exams" withBoundKey:@"importantExams" withValue:nil];
-    importantExamsCell.delegate=self;
-    importantExamsCell.tag=11;
+    SCSelectionCell *presentationsCell=[SCSelectionCell cellWithText:@"Presentations" withBoundKey:@"presentations" withValue:nil];
+    presentationsCell.delegate=self;
+    presentationsCell.tag=12;
     
     SCSelectionCell *teachingExperienceCell=[SCSelectionCell cellWithText:@"Teaching Experience" withBoundKey:@"teachingExperiences" withValue:nil];
     teachingExperienceCell.delegate=self;
-    teachingExperienceCell.tag=12;
+    teachingExperienceCell.tag=13;
     
     SCSelectionCell *advisingExperienceCell=[SCSelectionCell cellWithText:@"Advisors & Advisees" withBoundKey:@"advisingExperience" withValue:nil];
     advisingExperienceCell.delegate=self;
-    advisingExperienceCell.tag=13;
+    advisingExperienceCell.tag=14;
 
      CustomSCSelectonCellWithLoading *drugDatabaseCell=[CustomSCSelectonCellWithLoading cellWithText:@"Drug Database" withBoundKey:@"drugDatabase" withValue:nil];
     drugDatabaseCell.delegate=self;
-    drugDatabaseCell.tag=14;
+    drugDatabaseCell.tag=15;
 
     SCSelectionCell *lockPasscodeCell=[SCSelectionCell cellWithText:@"Lock Screen Settings" withBoundKey:@"lockSettings" withValue:nil];
     lockPasscodeCell.delegate=self;
-    lockPasscodeCell.tag=15;
+    lockPasscodeCell.tag=16;
 
     SCSelectionCell *otherAppSettingsCell=[SCSelectionCell cellWithText:@"Calander & Contacts" withBoundKey:@"otherSettings" withValue:nil];
     otherAppSettingsCell.delegate=self;
-    otherAppSettingsCell.tag=16;
+    otherAppSettingsCell.tag=17;
 
     SCSelectionCell *supportCell=[SCSelectionCell cellWithText:@"Support" withBoundKey:@"support" withValue:nil];
     supportCell.delegate=self;
-    supportCell.tag=17;
+    supportCell.tag=18;
     
     SCSelectionCell *aboutCell=[SCSelectionCell cellWithText:@"About" withBoundKey:@"about" withValue:nil];
     aboutCell.delegate=self;
-    aboutCell.tag=18;
+    aboutCell.tag=19;
     
     
     
@@ -191,17 +195,19 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     SCTableViewSection *existingHoursSection = [SCTableViewSection sectionWithHeaderTitle:@"Existing Hours Track"];
     [existingHoursSection addCell:existingHoursCell];
 
+    SCTableViewSection *consultationSection = [SCTableViewSection sectionWithHeaderTitle:@"Consultation Track"];
+    [consultationSection addCell:consultationsCell];
+    
 	SCTableViewSection *formalEducationSection = [SCTableViewSection sectionWithHeaderTitle:@"Formal Education Track"];
     [formalEducationSection addCell:collegeCoursesCell];
     [formalEducationSection addCell:certificationsCell];
 	
-    SCTableViewSection *importantExamsSection = [SCTableViewSection sectionWithHeaderTitle:@"Important Exams Track"];
-    [importantExamsSection addCell:importantExamsCell];
-
+   
     
     SCTableViewSection *teachingAndAdvisingSection = [SCTableViewSection sectionWithHeaderTitle:@"Teaching and Advising Track"];
     [teachingAndAdvisingSection addCell:teachingExperienceCell];
     [teachingAndAdvisingSection addCell:advisingExperienceCell];
+    [teachingAndAdvisingSection addCell:presentationsCell];
     
     SCTableViewSection *drugsDatabaseSection = [SCTableViewSection sectionWithHeaderTitle:@"Drug Database"];
     [drugsDatabaseSection addCell:drugDatabaseCell];
@@ -221,8 +227,8 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     [tableModel_ addSection:indirectSection];
     [tableModel_ addSection:supervisionSection];
     [tableModel_ addSection:existingHoursSection];
+    [tableModel_ addSection:consultationSection];
     [tableModel_ addSection:formalEducationSection];
-    [tableModel_ addSection:importantExamsSection];
     [tableModel_ addSection:teachingAndAdvisingSection];
     [tableModel_ addSection:drugsDatabaseSection];
     [tableModel_ addSection:preferencesSection];
@@ -512,7 +518,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
             [self.navigationController pushViewController:existingHoursViewController animated:YES];
             break;
         }    
-        case 14:
+        case 15:
         {
             
             
@@ -555,14 +561,14 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
             
             break;
         }    
-        case 15:
+        case 16:
         {
                        
             LCYLockSettingsViewController *lockSettingsVC = [[LCYLockSettingsViewController alloc] initWithNibName:@"LCYLockSettingsViewController" bundle:nil];
             [[self navigationController] pushViewController:lockSettingsVC animated:YES];            
             break;
         }    
-        case 16:
+        case 17:
         {
             InAppSettingsViewController *inAppSettingsViewController = [[InAppSettingsViewController alloc] initWithNibName:@"InAppSettingsViewController" bundle:nil];
             
@@ -571,7 +577,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
             inAppSettingsViewController.rootNavController=self.navigationController;
             break;
         }    
-        case 17:
+        case 18:
         {
             DTLayoutDefinition *supportLayout = [DTLayoutDefinition layoutNamed:@"support"];
 			DTAboutViewController *support =[[DTAboutViewController alloc] initWithLayout:supportLayout];
@@ -579,7 +585,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
 			[self.navigationController pushViewController:support animated:YES];
             break;
         }   
-        case 18:
+        case 19:
         {
             DTAboutViewController *about = [[DTAboutViewController alloc] initWithLayout:nil]; // default is @"about"
 			about.title	 = @"About";

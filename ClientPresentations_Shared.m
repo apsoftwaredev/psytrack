@@ -19,8 +19,7 @@
 #import "PTTAppDelegate.h"
 #import "ClientsViewController_Shared.h"
 #import "BehaviorPickerCell.h"
-#import "WeightPickerCell.h"
-#import "HeightPickerCell.h"
+#import "BOPickersDataSource.h"
 #import "ClientsSelectionCell.h"
 
 
@@ -38,12 +37,40 @@
     //Create a class definition for the ClientPresentationEntity
     self.clientPresentationDef = [SCClassDefinition definitionWithEntityName:@"ClientPresentationEntity" 
                                                         withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects: @"behavioralObservations", @"diagnoses"  ,@"medications",   @"clientsDesc",@"appitite", @"assessmentNotes", @"attitudeNotes", @"height", @"homicidality", @"improvement", @"interpersonalNotes", @"notableBehaviors", @"notableImagry",  @"orientedToBody", @"orientedToPerson", @"orientedToPlace", @"orientedToTime", @"otherRemarks",  @"plan", @"rapport", @"sensoryNotes", @"sleepHoursNightly", @"sleepQuality",  @"vision",   @"notes",    nil]];
+                                                               withPropertyNames:[NSArray arrayWithObjects: @"behavioralObservations",@"medications",   @"clientsDesc",@"appitite", @"assessmentNotes", @"attitudeNotes", @"homicidality", @"improvement", @"interpersonalNotes", @"notableBehaviors", @"notableImagry",  @"orientedToBody", @"orientedToPerson", @"orientedToPlace", @"orientedToTime", @"otherRemarks",  @"plan", @"rapport", @"sensoryNotes", @"sleepHoursNightly", @"sleepQuality",  @"vision",   @"notes",    nil]];
     
     
     self.clientPresentationDef.orderAttributeName=@"order";
     
+    //create a property definition for the sleep Quality property in the clientPresentations class
+    SCPropertyDefinition *sleepQualityPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"sleepQuality"];
+    
    
+    BOPickersDataSource *boPicker=[[BOPickersDataSource alloc]init];
+    //set the property type to selection
+    sleepQualityPropertyDef.type = SCPropertyTypeSelection;
+    
+    //set the selection attributes and define the list of items to be selected
+    sleepQualityPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithArray:[boPicker presentationDataWithPropertyName:@"sleepQuality"]] 
+                                                            allowMultipleSelection:YES
+                                                                  allowNoSelection:YES
+                                                             autoDismissDetailView:NO hideDetailViewNavigationBar:NO];
+   
+    //create a property definition for the sleep Quality property in the clientPresentations class
+    SCPropertyDefinition *visionPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"vision"];
+    
+    
+  
+    //set the property type to selection
+    visionPropertyDef.type = SCPropertyTypeSelection;
+    
+    //set the selection attributes and define the list of items to be selected
+    visionPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithArray:[boPicker presentationDataWithPropertyName:@"vision"]] 
+                                                             allowMultipleSelection:YES
+                                                                   allowNoSelection:YES
+                                                              autoDismissDetailView:NO hideDetailViewNavigationBar:NO];
+    
+
     //create a property definition for the orientated to place property in the cleintPresentation Def class
     SCPropertyDefinition *orientedToBodyPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"orientedToBody"];
     
@@ -111,40 +138,40 @@
     
     
     
-    NSDictionary *anxietyLevelScaleDataBindings = [NSDictionary 
-                                                   dictionaryWithObjects:[NSArray arrayWithObjects:@"anxietyLevel",@"Anxiety Level", nil] 
+    NSDictionary *stressLevelScaleDataBindings = [NSDictionary 
+                                                   dictionaryWithObjects:[NSArray arrayWithObjects:@"stressLevel",@"Stress Level", nil] 
                                                    forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
-    SCCustomPropertyDefinition *anxietyLevelScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"anxietyLevelScaleData"
+    SCCustomPropertyDefinition *stressLevelScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"stressLevelScaleData"
                                                                                           withuiElementNibName:scaleDataCellNibName
-                                                                                            withObjectBindings:anxietyLevelScaleDataBindings];
+                                                                                            withObjectBindings:stressLevelScaleDataBindings];
 	
     
     
-    [self.clientPresentationDef addPropertyDefinition:anxietyLevelScaleDataProperty];
+    [self.clientPresentationDef addPropertyDefinition:stressLevelScaleDataProperty];
     
-    NSDictionary *cooperativenessScaleDataBindings = [NSDictionary 
-                                                   dictionaryWithObjects:[NSArray arrayWithObjects:@"cooperativeness",@"Cooperativeness", nil ] 
+    NSDictionary *alianceScaleDataBindings = [NSDictionary 
+                                                   dictionaryWithObjects:[NSArray arrayWithObjects:@"aliance",@"Aliance", nil ] 
                                                    forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
-    SCCustomPropertyDefinition *cooperativenessScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"cooperativenessScaleData"
+    SCCustomPropertyDefinition *alianceScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"alianceScaleData"
                                                                                           withuiElementNibName:scaleDataCellNibName
-                                                                                            withObjectBindings:cooperativenessScaleDataBindings];
+                                                                                            withObjectBindings:alianceScaleDataBindings];
 	
     
     
-    [self.clientPresentationDef addPropertyDefinition:cooperativenessScaleDataProperty];
+    [self.clientPresentationDef addPropertyDefinition:alianceScaleDataProperty];
     
 
       
-    NSDictionary *depressionLevelScaleDataBindings = [NSDictionary 
-                                               dictionaryWithObjects:[NSArray arrayWithObjects:@"depressionLevel",@"Depression Level",nil] 
+    NSDictionary *happinessLevelScaleDataBindings = [NSDictionary 
+                                               dictionaryWithObjects:[NSArray arrayWithObjects:@"happinessLevel",@"Happiness Level",nil] 
                                                forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
-    SCCustomPropertyDefinition *depressionLevelScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"depressionLevelScaleData"
+    SCCustomPropertyDefinition *happinessLevelScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"happinessLevelScaleData"
                                                                                       withuiElementNibName:scaleDataCellNibName
-                                                                                        withObjectBindings:depressionLevelScaleDataBindings];
+                                                                                        withObjectBindings:happinessLevelScaleDataBindings];
 	
     
     
-    [self.clientPresentationDef addPropertyDefinition:depressionLevelScaleDataProperty];
+    [self.clientPresentationDef addPropertyDefinition:happinessLevelScaleDataProperty];
     
     NSDictionary *energyLevelScaleDataBindings = [NSDictionary 
                                                       dictionaryWithObjects:[NSArray arrayWithObjects:@"energyLevel",@"Energy Level", nil ] 
@@ -179,16 +206,16 @@
     
     [self.clientPresentationDef addPropertyDefinition:painLevelScaleDataProperty];
     
-    NSDictionary *pleasureInActivitiesScaleDataBindings = [NSDictionary 
-                                                dictionaryWithObjects:[NSArray arrayWithObjects:@"pleasureInActivities",@"Pleasure In Activities", nil ] 
+    NSDictionary *sexualSatisfactionScaleDataBindings = [NSDictionary 
+                                                dictionaryWithObjects:[NSArray arrayWithObjects:@"sexualSatisfaction",@"Sexual Satisfaction", nil ] 
                                                 forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
-    SCCustomPropertyDefinition *pleasureInActivitiesScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"pleasureInActivitiesScaleData"
+    SCCustomPropertyDefinition *sexualSatisfactionScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"sexualSatisfactionScaleData"
                                                                                        withuiElementNibName:scaleDataCellNibName
-                                                                                         withObjectBindings:pleasureInActivitiesScaleDataBindings];
+                                                                                         withObjectBindings:sexualSatisfactionScaleDataBindings];
 	
     
     
-    [self.clientPresentationDef addPropertyDefinition:pleasureInActivitiesScaleDataProperty];
+    [self.clientPresentationDef addPropertyDefinition:sexualSatisfactionScaleDataProperty];
     
     NSDictionary *trustScaleDataBindings = [NSDictionary 
                                                            dictionaryWithObjects:[NSArray arrayWithObjects:@"trust",@"Trust Level", nil ] 
@@ -212,16 +239,16 @@
     
     [self.clientPresentationDef addPropertyDefinition:symptomSeverityScaleDataProperty];
     
-    NSDictionary *warmthScaleDataBindings = [NSDictionary 
-                                                      dictionaryWithObjects:[NSArray arrayWithObjects:@"warmth",@"Degree of Warmth", nil ] 
+    NSDictionary *depthScaleDataBindings = [NSDictionary 
+                                                      dictionaryWithObjects:[NSArray arrayWithObjects:@"depth",@"Depth", nil ] 
                                                       forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
-    SCCustomPropertyDefinition *warmthScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"warmthScaleData"
+    SCCustomPropertyDefinition *depthScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"depthScaleData"
                                                                                              withuiElementNibName:scaleDataCellNibName
-                                                                                               withObjectBindings:warmthScaleDataBindings];
+                                                                                               withObjectBindings:depthScaleDataBindings];
 	
     
     
-    [self.clientPresentationDef addPropertyDefinition:warmthScaleDataProperty];
+    [self.clientPresentationDef addPropertyDefinition:depthScaleDataProperty];
     
     NSDictionary *suicidalityDataBindings = [NSDictionary 
                                              dictionaryWithObjects:[NSArray arrayWithObjects:@"suicideIdeation",@"suicidePlan",@"suicideMeans", @"suicideHistory",    nil ] 
@@ -311,11 +338,11 @@
     [self.clientPresentationDef.propertyGroups insertGroup:mainGroup atIndex:0];
     
     //define a property group
-    SCPropertyGroup *clientRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Client Ratings" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"comfortLevelscaleData", @"anxietyLevelScaleData", @"depressionLevelScaleData",  @"energyLevelScaleData",  @"hearingLevelScaleData",  @"painLevelScaleData", @"pleasureInActivitiesScaleData", @"trustScaleData",  @"symptomSeverityScaleData",  @"suicidalityData",       nil]];
+    SCPropertyGroup *clientRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Client Ratings" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"comfortLevelscaleData", @"stressLevelScaleData", @"happinessLevelScaleData",  @"energyLevelScaleData",  @"hearingLevelScaleData",  @"painLevelScaleData", @"sexualSatisfactionScaleData", @"trustScaleData",  @"symptomSeverityScaleData",  @"suicidalityData",       nil]];
     [self.clientPresentationDef.propertyGroups insertGroup:clientRatingsGroup atIndex:1];
     
     //define a property group
-    SCPropertyGroup *clinicianRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Clinician Ratings" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"cooperativenessScaleData", @"trustScaleData",   @"warmthScaleData",      nil]];
+    SCPropertyGroup *clinicianRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Clinician Ratings" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"alianceScaleData", @"trustScaleData",   @"depthScaleData",      nil]];
     [self.clientPresentationDef.propertyGroups insertGroup:clinicianRatingsGroup atIndex:2];
     
     //define a property group
@@ -503,42 +530,6 @@
     
 
        
-    NSDictionary *heightPickerDataBindings = [NSDictionary 
-                                              dictionaryWithObjects:[NSArray arrayWithObjects:@"heightTall",@"Height",@"heightUnit",nil] 
-                                              forKeys:[NSArray arrayWithObjects:@"2", @"3",@"4", nil]]; // 1 is the control tags
-	
-    
-    NSString *heightPickerNibName;
-    if ([SCHelper is_iPad]) 
-        heightPickerNibName=[NSString stringWithString:@"HeightPickerCell_iPad"];
-    else
-        heightPickerNibName=[NSString stringWithString:@"HeightPickerCell_iPhone"];
-    
-    SCCustomPropertyDefinition *heightProperty = [SCCustomPropertyDefinition definitionWithName:@"HeightTall" withuiElementNibName:heightPickerNibName withObjectBindings:heightPickerDataBindings];
-	[behavioralObservationsDef insertPropertyDefinition:heightProperty atIndex:0];
-    
-    NSDictionary *weightPickerDataBindings = [NSDictionary 
-                                        dictionaryWithObjects:[NSArray arrayWithObjects:@"weight",@"Weight",@"weightUnit",nil] 
-                                        forKeys:[NSArray arrayWithObjects:@"2", @"3",@"4", nil]]; // 1 is the control tags
-	
-    
-    
-   
-    [behavioralObservationsDef removePropertyDefinitionWithName:@"weight"];
-    [behavioralObservationsDef removePropertyDefinitionWithName:@"weightUnit"];
-     [behavioralObservationsDef removePropertyDefinitionWithName:@"heightTall"];
-     [behavioralObservationsDef removePropertyDefinitionWithName:@"heightUnit"];
-    
-    NSString *weightPickerNibName;
-    if ([SCHelper is_iPad]) 
-        weightPickerNibName=[NSString stringWithString:@"WeightPickerCell_iPad"];
-    else
-        weightPickerNibName=[NSString stringWithString:@"WeightPickerCell_iPhone"];
-    
-    SCCustomPropertyDefinition *weightProperty = [SCCustomPropertyDefinition definitionWithName:@"Weight" withuiElementNibName:weightPickerNibName withObjectBindings:weightPickerDataBindings];
-	[behavioralObservationsDef insertPropertyDefinition:weightProperty atIndex:1];
-    
-    
     //create the dictionary with the data bindings
     NSDictionary *pickerDataBindings = [NSDictionary 
                                         dictionaryWithObjects:[NSArray arrayWithObjects:@"facialExpressions",@"Facial Expressions",nil] 
@@ -557,14 +548,14 @@
     //create the dictionary with the data bindings
    
   
-//    anxietyLevel
+//    stressLevel
 //    appitite
 //    assessmentNotes
 //    attitudeNotes
 //    clientsDesc
 //    comfortLevel
-//    cooperativeness
-//    depressionLevel
+//    aliance
+//    happinessLevel
 //    energyLevel
 //    hearingLevel
 //    height
@@ -582,7 +573,7 @@
 //    otherRemarks
 //    painLevel
 //    plan
-//    pleasureInActivities
+//    sexualSatisfaction
 //    rapport
 //    sensoryNotes
 //    sleepHoursNightly
@@ -591,7 +582,7 @@
 //    symptomSeverity
 //    trust
 //    vision
-//    warmth
+//    depth
 //    weight
 //    weightUnit
     

@@ -84,7 +84,7 @@
     
    
     bOPropertyName=(NSString *)[self.objectBindings valueForKey:@"2"];
-    [pickerDataSource setupCustomPickerArrayWithPropertyName:bOPropertyName];
+    [pickerDataSource stringArrayForPropertyName:bOPropertyName];
     [myPickerView reloadInputViews];
     
     NSString *title = (NSString *)[self.boundObject valueForKey:(NSString *)bOPropertyName];

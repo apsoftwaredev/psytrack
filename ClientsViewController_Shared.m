@@ -50,7 +50,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	self.clientDef = [SCClassDefinition definitionWithEntityName:@"ClientEntity" 
                                                       withManagedObjectContext:managedObjectContext 
                                                              withPropertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth", @"keyDate",
-                                                                                @"initials",  @"demographicInfo", @"dateAdded",@"currentClient",@"phoneNumbers", @"logs", @"medicationHistory", @"vitals",  
+                                                                                @"initials",  @"demographicInfo", @"dateAdded",@"currentClient",@"phoneNumbers", @"logs", @"medicationHistory",@"diagnosesHistory", @"vitals",  
                                                                 @"notes",nil]];
 	
     
@@ -713,7 +713,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                                                     allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add vitals"]                                                      addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
     
     
-    
+    vitalsPropertyDef.title=@"Vitals/Height/Weight";
     SCPropertyGroup *clientInfoGroup = [SCPropertyGroup groupWithHeaderTitle:@"De-Identified Client Data" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth",@"initials",@"demographicInfo",@"dateAdded",@"currentClient",@"phoneNumbers", @"logs",@"medicationHistory", @"vitals", @"notes", nil]];
     
     

@@ -29,7 +29,7 @@
 
 
 
--(void)setupCustomPickerArrayWithPropertyName:(NSString *)propertyNameValue;
-
+-(NSArray *)stringArrayForPropertyName:(NSString *)propertyNameValue;
+-(NSArray *)presentationDataWithPropertyName:(NSString *)propertyNameValue;
 
 @end

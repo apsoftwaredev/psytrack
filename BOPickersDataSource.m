@@ -36,30 +36,29 @@
 }
 
 
-
--(void)setupCustomPickerArrayWithPropertyName:(NSString *)propertyNameValue
+-(NSArray *)stringArrayForPropertyName:(NSString *)propertyNameValue
 
 {
  
 
     
-    NSMutableArray *viewArray = [[NSMutableArray alloc] initWithObjects:@"", nil];
+    NSMutableArray *viewArray = [NSMutableArray array];
     
     if ([propertyNameValue isEqualToString:@"build"]) {
        [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
                                        @"emaciated", 
                                        @"sickley",@"malnourished", @"undernourished", @"very thin",@"thin", @"lean", @"wiry", @"slender", @"lanky", @"skinny",@"bony",@"petite",@"small-boned",@"average", @"weight proportionate to height", @"well nourished", @"healthy", @"large-boned", @"large-framed", @"stocky", @"chubby", @"heavy-set",@"heavy", @"formidable size", @"very large",@"enourmous",@"large round belly",   
                                        nil]];
-        self.customPickerArray=viewArray;
-        return;
+    
+        return viewArray;
     }
     if ([propertyNameValue isEqualToString:@"complexion"]) {
         [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
                                         @"normal/healthy",@"fair", 
                                        @"tanned", @"sunburned", @"jaundiced", @"sickly", @"pale", @"pallid",@"leathery",@"pimply",@"warty", @"shows negligect", @"mild scaring",@"heavy scaring" , @"numerous birthmarks",@"numerous moles", @"wringles",  
                                         nil]];
-        self.customPickerArray=viewArray;
-        return;
+    
+        return viewArray;
     }
 
     if ([propertyNameValue isEqualToString:@"face"]) {
@@ -67,8 +66,7 @@
                                         @"age appropriate",@"normal",@"appeared younger for age", 
                                         @"old-looking for true age",@"baby-faced", @"long-faced", @"odd shaped",   
                                         nil]];
-        self.customPickerArray=viewArray;
-        return;
+        return viewArray;
     }
 
     
@@ -78,8 +76,8 @@
                                         @"intense look",@"interested",@"confident", @"tense", @"fierce", @"worried",@"indrawn",@"frightened", 
                                         @"dazed",@"alarmed", @"terrified",@"sad", @"frowning", @"downcast", @"unsmiling", @"grimacing", @"forlorn",@"hopeless",@"slightly tearful",@"heavy tears",   @"sobbing",@"loud sobbing",@"moaning", @"apathetic", @"preoccupied",@"inattentive" , @"withdrawn", @"vacuous",@"vacant", @"detached", @"flat",@"mask-like",@"blank",   @"lacked spontaneous expression", @"expressionless", @"stiff",   @"frozen", @"rigid",@"calm",@"composed",@"relaxed",@"dreamy", @"sleepy", @"tired", @"smiling", @"cheerful", @"happy", @"delighted", @"silly grin", @"grinning", @"beaming",@"bright",@"unhappy",   @"angry", @"distrustful",@"disgusted",  @"contempt", @"defiant", @"snearing", @"scallowing", @"grim",@"dour",@"tight-lipped", @"sour", @"smug",
                                         nil]];
-        self.customPickerArray=[viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-        return;
+       
+        return [viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
 
     if ([propertyNameValue isEqualToString:@"eyes"]) {
@@ -88,8 +86,7 @@
                                         @"wide-set",@"almond-shapped", @"sunken", @"bloodshot",@"reddened",@"glassy", @"foggy",  
                                         @"bulging",@"hooded",@"sagging", @"puffy",   @"wide-eyed", @"cross-eyed", @"wall-eyed", @"disconjugate gaze", @"bright",@"staring", @"unblinking", @"glassy-eyed",@"vacant",@"penetrating",   @"piercing",@"vigilant",@"nervous", @"frequent blinking", @"unblinking",@"Mydriasis",@"fixed", @"constricted pupils",@"darting",@"squinting" , @"tired", @"twinkling",@"limpid", @"unusual", @"blank",@"dialated", @"unusual", @"beeting brows", @"heavy", @"raised", @"pulled together",@"pulled down",@"shaven",@"plucked",@"regular glasses", @"stylish glasses",@"half lenses", @"bifocals", @"reading glasses", @"contact lenses", @"colored contacts",   @"sunglasses", @"squinting", @"winking",@"broken glasses",@"large framed glasses",  
                                         nil]];
-        self.customPickerArray=[viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-        return;
+       return [viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     if ([propertyNameValue isEqualToString:@"eyeContact"]) {
         [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
@@ -97,8 +94,7 @@
                                         @"humerous", @"wry", @"conceited",@"condescending",@"angry",   @"casual",@"engaged", @"seductive",  
                                         @"serene",  
                                         nil]];
-        self.customPickerArray=[viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-        return;
+        return [viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     if ([propertyNameValue isEqualToString:@"hair"]) {
         [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
@@ -108,8 +104,7 @@
                                         nil]];
         
        
-        self.customPickerArray=[viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-        return;
+        return [viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     if ([propertyNameValue isEqualToString:@"beard"]) {
         [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
@@ -117,8 +112,7 @@
                                         @"several days' growth",@"wispy", @"scraggly", @"stubble",@"poorly maintained",@"well maintained", 
                                         @"stylish",@"neatly trimmed", @"full", @"closely trimmed", @"mutton chopps", @"goatee", @"chin beard", @"unbarbered", @"Van Dyke",@"Santa Clause Style",@"well maintained moustache",   @"handlebars",@"thin moustached",@"colonel", @"neat", @"scraggly",@"dirty" ,@"food in beard",           
                                         nil]];
-        self.customPickerArray=[viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-        return;
+        return [viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     if ([propertyNameValue isEqualToString:@"hygiene"]) {
         [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
@@ -126,8 +120,7 @@
                                         @"unremarkable",@"fair", @"marginal", @"poor",@"scruffy",@"neglected", 
                                         @"neat",@"tidy", @"meticulous", @"musty odor", @"noticable odor", @"offensive odor", @"strong odor",   @"excess cologne", @"excess perfume", @"smells of alcohol",@"smells of tobacco",@"tobacco stained fingers", @"several missing teeth", @"toothless", @"poor oral hygiene", @"good oral hygiene", @"dendutres", @"dental jewlery",@"braces",                    
                                         nil]];
-        self.customPickerArray=viewArray;
-        return;
+       return [viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     if ([propertyNameValue isEqualToString:@"skin"]) {
         [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
@@ -135,8 +128,7 @@
                                         @"dirty",@"bruises", @"cuts", @"abrasions",@"scabs",@"sores", 
                                         @"mild psoriasis",@"heavy psoriasis", @"acne", @"acne vulgaris scars",@"a few visible tatoos", @"many visible tatoos",          
                                         nil]];
-        self.customPickerArray=viewArray;
-        return;
+        return [viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     
     if ([propertyNameValue isEqualToString:@"dress"]) {
@@ -144,8 +136,7 @@
                                         @"appropriate for situation",@"presentable", 
                                         @"professional appearance",@"modestly attired", @"more suitable for younger",@"not suitable for age", @"overly casual", @"dressed to impress",   @"gym clothes", @"suggestable", @"attention seeking", @"outlandish", @"bizarre", @"filthy", @"grimy", @"dirty", @"smelly", @"dusty", @"musty", @"food-spotted", @"oily", @"rumpled", @"disheveled", @"neglected", @"wrong size", @"ill-fitted", @"unkempt", @"messy", @"slovenly",@"sloppy",@"baggy", @"bedraggled", @"raggedy", @"needing repair", @"threadbare", @"seedy", @"clean but worn", @"worn", @"shabby", @"tattered", @"torn", @"shows", @"unilateral neglect", @"unzipped", @"unbuttoned", @"plain",@"out of date", @"old-fashioned", @"regional", @"eccentric", @"grunge", @"prim", @"somber", @"all black", @"neat", @"careful dresser", @"overdressed", @"seductive", @"revealing", @"flashy", @"too tight-fitting", @"tasteless design", @"visible undergarments",@"swimming clothes", @"dress clothes", @"not wearing clothes", @"buttocks visible", @"breasts visible", @"not wearing shoes", @"not wearing shirt", @"tank top",@"undershirt as outerwear", @"bracelets", @"necklaces", @"cap", @"hat", @"cowboy hat", @"work boots", @"sneakers", @"slippers", @"flip-flops", @"sandals", @"high heeled shoes",@"dress shoes", @"t-shirt", @"jacket", @"vest", @"leather jacket", @"motorcycle gear", @"military boots", @"military uniform", @"medical clothes", @"work uniform",                                                    
                                         nil]];
-        self.customPickerArray=[viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-        return;
+        return [viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     
     if ([propertyNameValue isEqualToString:@"otherBehaviors"]) {
@@ -153,18 +144,16 @@
                                         @"fidgety",@"restless", 
                                         @"inappropriate laughter",@"inappropriate smiling", @"incongruent laughter",@"incongruent smiling", @"giggling", @"biting fingernails",   @"twittling fingers", @"odd noises", @"tapping", @"shaking", @"constant movement", @"audible sighs", @"hand wringing", @"frequent audible gas", @"deficating", @"urinating", @"bouncing", @"jumping", @"twirling", @"head banging", @"biting self", @"biting others", @"restrained", @"screaming", @"ignoring", @"masterbating", @"exercising",@"acrobatic movements",@"akathisia", @"akinesia", @"akinetic mutism", @"astasia abasia", @"ataxia", @"atonia", @"bradykinesia", @"cataplexy", @"catalepsy", @"catatonic excitement", @"catatonic posturing", @"catatonic rigidity", @"chorea", @"coprolalia", @"coprophagia", @"floccillation",@"tremors", @"twirling", @"waxy flexability",                                
                                         nil]];
-        self.customPickerArray=[viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-        return;
+        return [viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     if ([propertyNameValue isEqualToString:@"affect"]) {
         [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
                                         @"appropriate for situation",@"presentable", 
                                         @"professional appearance",@"modestly attired", @"more suitable for younger",@"not suitable for age", @"overly casual", @"dressed to impress",   @"gym clothes", @"suggestable", @"attention seeking", @"outlandish", @"bizarre", @"filthy", @"grimy", @"dirty", @"smelly", @"dusty", @"musty", @"food-spotted", @"oily", @"rumpled", @"disheveled", @"neglected", @"wrong size", @"ill-fitted", @"unkempt", @"messy", @"slovenly",@"sloppy",@"baggy", @"bedraggled", @"raggedy", @"needing repair", @"threadbare", @"seedy", @"clean but worn", @"worn", @"shabby", @"tattered", @"torn", @"shows", @"unilateral neglect", @"unzipped", @"unbuttoned", @"plain",@"out of date", @"old-fashioned", @"regional", @"eccentric", @"grunge", @"prim", @"somber", @"all black", @"neat", @"careful dresser", @"overdressed", @"seductive", @"revealing", @"flashy", @"too tight-fitting", @"tasteless design", @"visible undergarments",@"swimming clothes", @"dress clothes", @"not wearing clothes", @"buttocks visible", @"breasts visible", @"not wearing shoes", @"not wearing shirt", @"tank top",@"undershirt as outerwear",                                
                                         nil]];
-        self.customPickerArray=[viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
-        return;
+        return [viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
-
+    return viewArray;
 }
 
 -(NSArray *)bODataAppearanceWithPropertyName:(NSString *)propertyNameValue
@@ -172,7 +161,7 @@
 {
 
 
-    NSMutableArray *viewArray = [[NSMutableArray alloc] initWithObjects:@"", nil];
+    NSMutableArray *viewArray = [NSMutableArray array];
     
     if ([propertyNameValue isEqualToString:@"build"]) {
         [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
@@ -295,7 +284,7 @@
 
 -(NSArray *)bOMovementsDataWithPropertyName:(NSString *)propertyNameValue{
 
-    NSMutableArray *viewArray = [[NSMutableArray alloc] initWithObjects:@"", nil];
+    NSMutableArray *viewArray = [NSMutableArray array];
     
     if ([propertyNameValue isEqualToString:@"stereotypedMovements"]) {
         [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
@@ -353,9 +342,8 @@
 -(NSArray *)bOSpeechDataWithPropertyName:(NSString *)propertyNameValue{
 
 
-    NSMutableArray *viewArray = [[NSMutableArray alloc] initWithObjects:@"", nil];
-    
-    
+    NSMutableArray *viewArray = [NSMutableArray array];
+  
     
     if ([propertyNameValue isEqualToString:@"rate"]) {
         [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
@@ -399,7 +387,7 @@
 }
 -(NSArray *)presentationDataWithPropertyName:(NSString *)propertyNameValue{
 
-NSMutableArray *viewArray = [[NSMutableArray alloc] initWithObjects:@"", nil];
+NSMutableArray *viewArray = [NSMutableArray array];
 
     if ([propertyNameValue isEqualToString:@"vision"]) {
         [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
