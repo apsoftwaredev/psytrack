@@ -1795,7 +1795,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     if (tableViewModel.tag==3 &&index==0) {
         
         
-        if (section.cellCount) {
+        if (section.cellCount>0) {
             SCTableViewCell *cellOne=(SCTableViewCell *)[section cellAtIndex:1];
             
             NSManagedObject *cellOneBoundObject=(NSManagedObject *)cellOne.boundObject;

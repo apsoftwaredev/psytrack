@@ -32,6 +32,7 @@
     ClientsViewController_Shared *clientsViewController_Shared;
     SCArrayOfObjectsModel *tableModel;
     
+    
        
 }
 

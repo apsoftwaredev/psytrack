@@ -172,9 +172,9 @@
                                                  withEntityClassDefinition:self.clinicianDef usingPredicate:nil useSCSelectionSection:FALSE];	
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
         self.tableModel.editButtonItem = self.navigationItem.leftBarButtonItem;
-        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
-        self.navigationItem.rightBarButtonItem = addButton;
-        self.tableModel.addButtonItem = self.navigationItem.rightBarButtonItem;
+//        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+//        self.navigationItem.rightBarButtonItem = addButton;
+//        self.tableModel.addButtonItem = self.navigationItem.rightBarButtonItem;
         
         if (![SCHelper is_iPad]) {
             tableModel_.autoAssignDelegateForDetailModels=TRUE;

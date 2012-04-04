@@ -266,7 +266,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
         SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:0];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
-        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]){
+        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&section.cellCount>1){
             
             SCTextFieldCell *phoneNumberCell =(SCTextFieldCell *) [section cellAtIndex:1];
             NSLog(@"custom button tapped");
@@ -291,7 +291,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
         SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:0];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
-        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"]){
+        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&section.cellCount>3){
             
             SCDateCell *discontinuedCell =(SCDateCell *) [section cellAtIndex:3];
             
@@ -675,7 +675,8 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                 NSLog(@"cell text is %@",cell.textLabel.text);
                 
                 SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
-                SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];        
+                if (followUpSection.cellCount>0) {
+                                SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];        
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
                 NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
                 NSLog(@"cell  class is %@",[cellOne class]);
@@ -700,7 +701,9 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                     break;
                 }
                 
-            
+                    
+                }
+
                 
             }
             
@@ -1289,7 +1292,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     if (tableViewModel.tag==3 &&index==0) {
         
         
-        if (section.cellCount) {
+        if (section.cellCount>1) {
             SCTableViewCell *cellOne=(SCTableViewCell *)[section cellAtIndex:1];
             
             NSManagedObject *cellOneBoundObject=(NSManagedObject *)cellOne.boundObject;
@@ -1675,14 +1678,15 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(void)addWechlerAgeCellToSection:(SCTableViewSection *)section {
     
     
-    
+    if (section.cellCount>2) {
+   
     SCLabelCell *actualAgeCell=(SCLabelCell*)[section cellAtIndex:2];
     SCLabelCell *wechslerAgeCell=(SCLabelCell*)[section cellAtIndex:3];
     SCDateCell *birthdateCell=(SCDateCell *)[section cellAtIndex:1];
     
     actualAgeCell.label.text=[clientsViewController_Shared calculateActualAgeWithBirthdate:birthdateCell.datePicker.date];
     wechslerAgeCell.label.text=[clientsViewController_Shared calculateWechslerAgeWithBirthdate:birthdateCell.datePicker.date];
-    
+    }
 }
 
 #pragma mark -
