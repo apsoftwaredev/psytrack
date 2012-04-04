@@ -30,8 +30,8 @@ TO DO:
 
 
 
--add hospitalizations
--medication allergies
+
+
 
 
 
@@ -39,7 +39,7 @@ TO DO:
 
 -	Add billing section to the client tab, keep it simple, -add service codes
 
--	Add the disorder section
+-	Add the diagnoses section to client
 
 -	Fix the behavior observation section clean it up and eliminate unneeded
 
@@ -48,7 +48,7 @@ TO DO:
 
 -	finish setting up the persistent store settings,
 
-- consultations
+
 
 
 -need to fix calander so it doesn't add a new calader everytime it is installed
@@ -65,11 +65,13 @@ TO DO:
 
 Phase II
 -	add a save to icloud documents to the actions in the drug document view
--	 add the psychotherapy section
+-	 add the intervention section
 -	 add the indirect support section
 -	add the supervision received section
 -	 add the supervision given section
 -	 add college courses section
+- add consultations
+-add presentations
 -	add the certification section
 -	 add important exams section
 -	 add teaching experience
