@@ -50,7 +50,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	self.clientDef = [SCClassDefinition definitionWithEntityName:@"ClientEntity" 
                                                       withManagedObjectContext:managedObjectContext 
                                                              withPropertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth", @"keyDate",
-                                                                                @"initials",  @"demographicInfo", @"dateAdded",@"currentClient",@"phoneNumbers", @"logs", @"medicationHistory",@"diagnosesHistory", @"vitals",  
+                                                                                @"initials",  @"demographicInfo", @"dateAdded",@"currentClient",@"phoneNumbers", @"logs", @"medicationHistory",@"diagnoses", @"vitals",  
                                                                 @"notes",nil]];
 	
     
@@ -245,7 +245,13 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
 
     
-    
+    //Create a class definition for the medication Entity
+    SCClassDefinition *diagnosesDef = [SCClassDefinition definitionWithEntityName:@"DiagnosisHistoryEntity" 
+                                                          withManagedObjectContext:managedObjectContext
+                                                                 withPropertyNames:[NSArray arrayWithObjects:@"drugName",@"dateStarted",  @"discontinued", @"symptomsTargeted",@"sideEffects",@"medLogs",
+                                                                                    @"notes",@"applNo", @"productNo",   
+                                                                                    nil]];
+
     
     
     //Create a class definition for the medication Entity
