@@ -34,12 +34,53 @@
      NSManagedObjectContext *managedObjectContext= [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
     
     
-    //Create a class definition for the ClientPresentationEntity
+//    //Create a class definition for the ClientPresentationEntity
+//    self.clientPresentationDef = [SCClassDefinition definitionWithEntityName:@"ClientPresentationEntity" 
+//                                                        withManagedObjectContext:managedObjectContext
+//                                                               withPropertyNames:[NSArray arrayWithObjects: @"behavioralObservations",@"medications",   @"clientsDesc",@"appitite", @"assessmentNotes", @"attitudeNotes", @"homicidality", @"improvement", @"interpersonalNotes", @"notableBehaviors", @"notableImagry",  @"orientedToBody", @"orientedToPerson", @"orientedToPlace", @"orientedToTime", @"otherRemarks",  @"plan", @"rapport", @"sensoryNotes", @"sleepHoursNightly", @"sleepQuality",  @"vision"  @"notes",    nil]];
+    
     self.clientPresentationDef = [SCClassDefinition definitionWithEntityName:@"ClientPresentationEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects: @"behavioralObservations",@"medications",   @"clientsDesc",@"appitite", @"assessmentNotes", @"attitudeNotes", @"homicidality", @"improvement", @"interpersonalNotes", @"notableBehaviors", @"notableImagry",  @"orientedToBody", @"orientedToPerson", @"orientedToPlace", @"orientedToTime", @"otherRemarks",  @"plan", @"rapport", @"sensoryNotes", @"sleepHoursNightly", @"sleepQuality",  @"vision",   @"notes",    nil]];
+                                                    withManagedObjectContext:managedObjectContext
+                                                           autoGeneratePropertyDefinitions:YES];
+   
     
     
+    //Create the property definition for the affect Mood property in the client Presentatio class
+    SCPropertyDefinition *affectNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"affectNotes"];
+    
+    affectNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *assessmentNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"assessmentNotes"];
+    
+    assessmentNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *improvementPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"improvement"];
+    
+    improvementPropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *planPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"plan"];
+    
+    planPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *rapportPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"rapport"];
+    
+    rapportPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *sleepHoursNightlyPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"sleepHoursNightly"];
+    
+    sleepHoursNightlyPropertyDef.autoValidate=NO;
+    
+    //define a property group
+    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"affectNotes", @"appearanceNotes",  @"assessmentNotes", @"attentionNotes", @"attitudeNotes", @"improvement", @"interpersonalNotes", @"notableBehaviors", @"notableImagry",   @"plan",  @"rapport",  @"sensoryNotes", @"sleepHoursNightly",    @"sleepQuality",@"psychomotor", @"speechLanguage", @"vision",     nil ]];
+    [self.clientPresentationDef.propertyGroups addGroup:notesGroup];
+    
+    SCPropertyGroup *orientationGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"orientedToBody", @"orientedToPerson",  @"orientedToPlace", @"orientedToTime",    nil ]];
+    // add the notes property group to the clientpresentation class. 
+    [self.clientPresentationDef.propertyGroups addGroup:orientationGroup];
+    
+  //    
+//    
+//    
+//    
     self.clientPresentationDef.orderAttributeName=@"order";
     
     //create a property definition for the sleep Quality property in the clientPresentations class
@@ -56,6 +97,9 @@
                                                                   allowNoSelection:YES
                                                              autoDismissDetailView:NO hideDetailViewNavigationBar:NO];
    
+    
+    
+
     //create a property definition for the sleep Quality property in the clientPresentations class
     SCPropertyDefinition *visionPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"vision"];
     
@@ -73,7 +117,7 @@
 
     //create a property definition for the orientated to place property in the cleintPresentation Def class
     SCPropertyDefinition *orientedToBodyPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"orientedToBody"];
-    
+    orientedToBodyPropertyDef.title=@"Body";
     //set the property type to segmented
     orientedToBodyPropertyDef.type = SCPropertyTypeSegmented;
     
@@ -83,7 +127,7 @@
     
     //create a property definition for the orientated to place property in the cleintPresentation Def class
     SCPropertyDefinition *orientedToPersonPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"orientedToPerson"];
-    
+    orientedToPersonPropertyDef.title=@"Person";
     //set the property type to segmented
     orientedToPersonPropertyDef.type = SCPropertyTypeSegmented;
     
@@ -92,6 +136,7 @@
     
     //create a property definition for the orientated to place property in the cleintPresentation Def class
     SCPropertyDefinition *orientedToPlacePropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"orientedToPlace"];
+    orientedToPlacePropertyDef.title=@"Place";
     
     //set the property type to segmented
     orientedToPlacePropertyDef.type = SCPropertyTypeSegmented;
@@ -105,6 +150,7 @@
     //set the property type to segmented
     orientedToTimePropertyDef.type = SCPropertyTypeSegmented;
     
+    orientedToTimePropertyDef.title=@"Time";
     //set the selection attributes and define the list of items to be selected
     orientedToTimePropertyDef.attributes = [SCSegmentedAttributes attributesWithSegmentTitlesArray:[NSArray arrayWithObjects:@"Yes", @"No" , nil]];
     
@@ -123,7 +169,7 @@
         
     }
     
-    
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"comfortLevel"];
        
     NSDictionary *comfortLevelScaleDataBindings = [NSDictionary 
                                                dictionaryWithObjects:[NSArray arrayWithObjects:@"comfortLevel", @"Comfort Level",nil] 
@@ -137,7 +183,7 @@
     [self.clientPresentationDef addPropertyDefinition:comfortLevelscaleDataProperty];
     
     
-    
+      [self.clientPresentationDef removePropertyDefinitionWithName:@"stressLevel"];
     NSDictionary *stressLevelScaleDataBindings = [NSDictionary 
                                                    dictionaryWithObjects:[NSArray arrayWithObjects:@"stressLevel",@"Stress Level", nil] 
                                                    forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
@@ -149,19 +195,21 @@
     
     [self.clientPresentationDef addPropertyDefinition:stressLevelScaleDataProperty];
     
-    NSDictionary *alianceScaleDataBindings = [NSDictionary 
-                                                   dictionaryWithObjects:[NSArray arrayWithObjects:@"aliance",@"Aliance", nil ] 
+     [self.clientPresentationDef removePropertyDefinitionWithName:@"alliance"];
+    
+    NSDictionary *allianceScaleDataBindings = [NSDictionary 
+                                                   dictionaryWithObjects:[NSArray arrayWithObjects:@"alliance",@"Alliance", nil ] 
                                                    forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
-    SCCustomPropertyDefinition *alianceScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"alianceScaleData"
+    SCCustomPropertyDefinition *allianceScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"allianceScaleData"
                                                                                           withuiElementNibName:scaleDataCellNibName
-                                                                                            withObjectBindings:alianceScaleDataBindings];
+                                                                                            withObjectBindings:allianceScaleDataBindings];
 	
     
     
-    [self.clientPresentationDef addPropertyDefinition:alianceScaleDataProperty];
+    [self.clientPresentationDef addPropertyDefinition:allianceScaleDataProperty];
     
 
-      
+      [self.clientPresentationDef removePropertyDefinitionWithName:@"happinessLevel"]; 
     NSDictionary *happinessLevelScaleDataBindings = [NSDictionary 
                                                dictionaryWithObjects:[NSArray arrayWithObjects:@"happinessLevel",@"Happiness Level",nil] 
                                                forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
@@ -173,6 +221,7 @@
     
     [self.clientPresentationDef addPropertyDefinition:happinessLevelScaleDataProperty];
     
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"energyLevel"]; 
     NSDictionary *energyLevelScaleDataBindings = [NSDictionary 
                                                       dictionaryWithObjects:[NSArray arrayWithObjects:@"energyLevel",@"Energy Level", nil ] 
                                                      forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
@@ -183,7 +232,8 @@
     
     
     [self.clientPresentationDef addPropertyDefinition:energyLevelScaleDataProperty];
-    
+   
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"hearingLevel"]; 
     NSDictionary *hearingLevelScaleDataBindings = [NSDictionary 
                                                   dictionaryWithObjects:[NSArray arrayWithObjects:@"hearingLevel",@"Hearing Level", nil ] 
                                                   forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
@@ -195,6 +245,7 @@
     
     [self.clientPresentationDef addPropertyDefinition:hearingLevelScaleDataProperty];
     
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"painLevel"];
     NSDictionary *painLevelScaleDataBindings = [NSDictionary 
                                                    dictionaryWithObjects:[NSArray arrayWithObjects:@"painLevel",@"Pain Level", nil ] 
                                                    forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
@@ -206,6 +257,7 @@
     
     [self.clientPresentationDef addPropertyDefinition:painLevelScaleDataProperty];
     
+     [self.clientPresentationDef removePropertyDefinitionWithName:@"sexualSatisfaction"];
     NSDictionary *sexualSatisfactionScaleDataBindings = [NSDictionary 
                                                 dictionaryWithObjects:[NSArray arrayWithObjects:@"sexualSatisfaction",@"Sexual Satisfaction", nil ] 
                                                 forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
@@ -217,6 +269,8 @@
     
     [self.clientPresentationDef addPropertyDefinition:sexualSatisfactionScaleDataProperty];
     
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"trust"];
+
     NSDictionary *trustScaleDataBindings = [NSDictionary 
                                                            dictionaryWithObjects:[NSArray arrayWithObjects:@"trust",@"Trust Level", nil ] 
                                                            forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
@@ -227,6 +281,7 @@
     
     
     [self.clientPresentationDef addPropertyDefinition:trustScaleDataProperty];
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"symptomSeverity"];
     
     NSDictionary *symptomSeverityScaleDataBindings = [NSDictionary 
                                             dictionaryWithObjects:[NSArray arrayWithObjects:@"symptomSeverity",@"Symptom Severity", nil ] 
@@ -239,6 +294,7 @@
     
     [self.clientPresentationDef addPropertyDefinition:symptomSeverityScaleDataProperty];
     
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"depth"];
     NSDictionary *depthScaleDataBindings = [NSDictionary 
                                                       dictionaryWithObjects:[NSArray arrayWithObjects:@"depth",@"Depth", nil ] 
                                                       forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
@@ -249,7 +305,13 @@
     
     
     [self.clientPresentationDef addPropertyDefinition:depthScaleDataProperty];
-    
+     [self.clientPresentationDef removePropertyDefinitionWithName:@"suicideIdeation"];
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"suicidePlan"];
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"suicideMeans"];
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"suicideHistory"];
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"order"];
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"testSessionDelivered"];
+     [self.clientPresentationDef removePropertyDefinitionWithName:@"client"];
     NSDictionary *suicidalityDataBindings = [NSDictionary 
                                              dictionaryWithObjects:[NSArray arrayWithObjects:@"suicideIdeation",@"suicidePlan",@"suicideMeans", @"suicideHistory",    nil ] 
                                              forKeys:[NSArray arrayWithObjects:@"20",@"21",@"22",@"23",nil]]; // 20,21,22,23 are the binding keys 
@@ -332,17 +394,17 @@
     
     
     //define a property group
-    SCPropertyGroup *mainGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"CLientData", @"behavioralObservations", @"diagnoses"  ,@"medications", nil]];
+    SCPropertyGroup *mainGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"CLientData", nil]];
     
     // add the main property group to the clientPresentations class. 
     [self.clientPresentationDef.propertyGroups insertGroup:mainGroup atIndex:0];
     
     //define a property group
-    SCPropertyGroup *clientRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Client Ratings" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"comfortLevelscaleData", @"stressLevelScaleData", @"happinessLevelScaleData",  @"energyLevelScaleData",  @"hearingLevelScaleData",  @"painLevelScaleData", @"sexualSatisfactionScaleData", @"trustScaleData",  @"symptomSeverityScaleData",  @"suicidalityData",       nil]];
+    SCPropertyGroup *clientRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Subjective Ratings" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"comfortLevelscaleData", @"stressLevelScaleData", @"happinessLevelScaleData",  @"energyLevelScaleData",  @"hearingLevelScaleData",  @"painLevelScaleData", @"sexualSatisfactionScaleData", @"trustScaleData",  @"symptomSeverityScaleData",  @"suicidalityData",       nil]];
     [self.clientPresentationDef.propertyGroups insertGroup:clientRatingsGroup atIndex:1];
     
     //define a property group
-    SCPropertyGroup *clinicianRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Clinician Ratings" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"alianceScaleData", @"trustScaleData",   @"depthScaleData",      nil]];
+    SCPropertyGroup *clinicianRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Clinician Subjective Ratings" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"allianceScaleData",   @"depthScaleData",      nil]];
     [self.clientPresentationDef.propertyGroups insertGroup:clinicianRatingsGroup atIndex:2];
     
     //define a property group
@@ -356,77 +418,37 @@
     [self.clientPresentationDef.propertyGroups addGroup:clientPresentationNotesGroup];
     
 
-    
-    /****************************************************************************************/
-    /*	BEGIN Class Definition and attributes for the BehavioralObservations Entity */
-    /****************************************************************************************/ 
    
-    //Create a class definition for the behavioralObservations Entity
-    SCClassDefinition *behavioralObservationsDef = [SCClassDefinition definitionWithEntityName:@"BehavioralObservationsEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               autoGeneratePropertyDefinitions:YES];
-    
-    //Do some property definition customization for the BheavioralObservations Entity defined in behavioral Observations Entity
-    
-    
-    
-    /****************************************************************************************/
-    /*	END of Class Definition and attributes for the Behavioral Observations Entity */
-    /****************************************************************************************/
-  
-    SCPropertyDefinition *behavioralObservationsPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"behavioralObservations"];
-    behavioralObservationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:behavioralObservationsDef
-                                                                                    allowAddingItems:TRUE
-                                                                                  allowDeletingItems:TRUE
-                                                                                    allowMovingItems:FALSE];
-    
-    
-    
-    //Create a property definition for the activityLevel property.
-    SCPropertyDefinition *activityLevelPropertyDef = [behavioralObservationsDef propertyDefinitionWithName:@"activityLevel"];
-    
-    //set the activityLevel property definition type to a Text View Cell
-    activityLevelPropertyDef.type = SCPropertyTypeTextView;
-    
-    //Create a property definition for the affectNotes property.
-    SCPropertyDefinition *affectNotesPropertyDef = [behavioralObservationsDef propertyDefinitionWithName:@"affectNotes"];
-    
-    //set the affectNotes property definition type to a Text View Cell
-    affectNotesPropertyDef.type = SCPropertyTypeTextView;
     
     //Create a property definition for the appearanceNotes property.
-    SCPropertyDefinition *appearanceNotesPropertyDef = [behavioralObservationsDef propertyDefinitionWithName:@"appearanceNotes"];
+    SCPropertyDefinition *appearanceNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"appearanceNotes"];
     
     //set the appearanceNotes property definition type to a Text View Cell
     appearanceNotesPropertyDef.type = SCPropertyTypeTextView;
     
     
     //Create a property definition for the attentionNotes property.
-    SCPropertyDefinition *attentionNotesPropertyDef = [behavioralObservationsDef propertyDefinitionWithName:@"attentionNotes"];
+    SCPropertyDefinition *attentionNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"attentionNotes"];
     
     //set the attentionNotes property definition type to a Text View Cell
     attentionNotesPropertyDef.type = SCPropertyTypeTextView;
     
     //Create a property definition for the attitudeNotes property.
-    SCPropertyDefinition *attitudeNotesPropertyDef = [behavioralObservationsDef propertyDefinitionWithName:@"attitudeNotes"];
+    SCPropertyDefinition *attitudeNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"attitudeNotes"];
     
     //set the attitudeNotes property definition type to a Text View Cell
     attitudeNotesPropertyDef.type = SCPropertyTypeTextView;
     
     //Create a property definition for the languageNotes property.
-    SCPropertyDefinition *languageNotesPropertyDef = [behavioralObservationsDef propertyDefinitionWithName:@"languageNotes"];
+    SCPropertyDefinition *languageNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"speechLanguage"];
     
     //set the languageNotes property definition type to a Text View Cell
     languageNotesPropertyDef.type = SCPropertyTypeTextView;
     
-    //Create a property definition for the otherRemarks property.
-    SCPropertyDefinition *otherRemarksPropertyDef = [behavioralObservationsDef propertyDefinitionWithName:@"otherRemarks"];
     
-    //set the otherRemarks property definition type to a Text View Cell
-    otherRemarksPropertyDef.type = SCPropertyTypeTextView;
     
     //Create a property definition for the sensoryNotes property.
-    SCPropertyDefinition *sensoryNotesPropertyDef = [behavioralObservationsDef propertyDefinitionWithName:@"sensoryNotes"];
+    SCPropertyDefinition *sensoryNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"sensoryNotes"];
     
     //set the sensoryNotes property definition type to a Text View Cell
     sensoryNotesPropertyDef.type = SCPropertyTypeTextView;
@@ -434,112 +456,106 @@
   
     
     //Create a property definition for the notableBehaviors property.
-    SCPropertyDefinition *notableBehaviorsPropertyDef = [behavioralObservationsDef propertyDefinitionWithName:@"notableBehaviors"];
+    SCPropertyDefinition *notableBehaviorsPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"notableBehaviors"];
     
     //set the notableBehaviors property definition type to a Text View Cell
     notableBehaviorsPropertyDef.type = SCPropertyTypeTextView;
     
     //Create a property definition for the notableImagry property.
-    SCPropertyDefinition *notableImagryPropertyDef = [behavioralObservationsDef propertyDefinitionWithName:@"notableImagry"];
+    SCPropertyDefinition *notableImagryPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"notableImagry"];
     
     //set the notableImagry property definition type to a Text View Cell
     notableImagryPropertyDef.type = SCPropertyTypeTextView;
     
     //Create a property definition for the interpersonalNotes property.
-    SCPropertyDefinition *interpersonalNotesPropertyDef = [behavioralObservationsDef propertyDefinitionWithName:@"interpersonalNotes"];
+    SCPropertyDefinition *interpersonalNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"interpersonalNotes"];
     
     //set the interpersonalNotes property definition type to a Text View Cell
     interpersonalNotesPropertyDef.type = SCPropertyTypeTextView;
     
     
     //Create a property definition for the psychoMotorNotes property.
-    SCPropertyDefinition *psychomotorNotesPropertyDef = [behavioralObservationsDef propertyDefinitionWithName:@"psychomotorNotes"];
+    SCPropertyDefinition *psychomotorNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"psychomotor"];
     
     //set the psychoMotorNotes property definition type to a Text View Cell
     psychomotorNotesPropertyDef.type = SCPropertyTypeTextView;
     
     
-    //define a property group
-    SCPropertyGroup *affectNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"affectNotes"]];
-    
-    // add the affectNotes property group to the behavioralObservationsDef class. 
-    [behavioralObservationsDef.propertyGroups addGroup:affectNotesGroup];
-    
-    //define a property group
-    SCPropertyGroup *appearanceNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"appearanceNotes"]];
-    
-    // add the appearanceNotes property group to the behavioralObservationsDef class. 
-    [behavioralObservationsDef.propertyGroups addGroup:appearanceNotesGroup];
-    
-    
-      //define a property group
-    SCPropertyGroup *attentionNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"attentionNotes"]];
-    
-    // add the attentionNotes property group to the behavioralObservationsDef class. 
-    [behavioralObservationsDef.propertyGroups addGroup:attentionNotesGroup];
-    
-      //define a property group
-    SCPropertyGroup *attitudeNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"attitudeNotes"]];
-    
-    // add the attitudeNotes property group to the behavioralObservationsDef class. 
-    [behavioralObservationsDef.propertyGroups addGroup:attitudeNotesGroup];
-    
-        //define a property group
-    SCPropertyGroup *interpersonalNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"interpersonalNotes"]];
-    
-    // add the interpersonalNotes property group to the behavioralObservationsDef class. 
-    [behavioralObservationsDef.propertyGroups addGroup:interpersonalNotesGroup];
+//    //define a property group
+//    SCPropertyGroup *affectNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"affectNotes"]];
+//    
+//    // add the affectNotes property group to the behavioralObservationsDef class. 
+//    [behavioralObservationsDef.propertyGroups addGroup:affectNotesGroup];
+//    
+//    //define a property group
+//    SCPropertyGroup *appearanceNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"appearanceNotes"]];
+//    
+//    // add the appearanceNotes property group to the behavioralObservationsDef class. 
+//    [behavioralObservationsDef.propertyGroups addGroup:appearanceNotesGroup];
+//    
+//    
+//      //define a property group
+//    SCPropertyGroup *attentionNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"attentionNotes"]];
+//    
+//    // add the attentionNotes property group to the behavioralObservationsDef class. 
+//    [behavioralObservationsDef.propertyGroups addGroup:attentionNotesGroup];
+//    
+//      //define a property group
+//    SCPropertyGroup *attitudeNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"attitudeNotes"]];
+//    
+//    // add the attitudeNotes property group to the behavioralObservationsDef class. 
+//    [behavioralObservationsDef.propertyGroups addGroup:attitudeNotesGroup];
+//    
+//        //define a property group
+//    SCPropertyGroup *interpersonalNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"interpersonalNotes"]];
+//    
+//    // add the interpersonalNotes property group to the behavioralObservationsDef class. 
+//    [behavioralObservationsDef.propertyGroups addGroup:interpersonalNotesGroup];
+//   
+//      //define a property group
+//    SCPropertyGroup *languageNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"languageNotes"]];
+//    
+//    // add the languageNotes property group to the behavioralObservationsDef class. 
+//    [behavioralObservationsDef.propertyGroups addGroup:languageNotesGroup];
+//    
+//       //define a property group
+//    SCPropertyGroup *notableBehaviorsGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"notableBehaviors"]];
+//    
+//    // add the notableBehaviors property group to the behavioralObservationsDef class. 
+//    [behavioralObservationsDef.propertyGroups addGroup:notableBehaviorsGroup];
+//    
+//    
+//      //define a property group
+//    SCPropertyGroup *notableImagryGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"notableImagry"]];
+//   
+//    // add the notableImagry property group to the behavioralObservationsDef class. 
+//    [behavioralObservationsDef.propertyGroups addGroup:notableImagryGroup];
+//        //define a property group
+//    SCPropertyGroup *psychomotorNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"psychomotorNotes"]];
+//    
+//    // add the psychomotorNotes property group to the behavioralObservationsDef class. 
+//    [behavioralObservationsDef.propertyGroups addGroup:psychomotorNotesGroup];
+//   
+//      //define a property group
+//    SCPropertyGroup *sensoryNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"sensoryNotes"]];
+//    
+//    // add the sensoryNotes property group to the behavioralObservationsDef class. 
+//    [behavioralObservationsDef.propertyGroups addGroup:sensoryNotesGroup];
+//
    
-      //define a property group
-    SCPropertyGroup *languageNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"languageNotes"]];
-    
-    // add the languageNotes property group to the behavioralObservationsDef class. 
-    [behavioralObservationsDef.propertyGroups addGroup:languageNotesGroup];
-    
-       //define a property group
-    SCPropertyGroup *notableBehaviorsGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"notableBehaviors"]];
-    
-    // add the notableBehaviors property group to the behavioralObservationsDef class. 
-    [behavioralObservationsDef.propertyGroups addGroup:notableBehaviorsGroup];
-    
-    
-      //define a property group
-    SCPropertyGroup *notableImagryGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"notableImagry"]];
-   
-    // add the notableImagry property group to the behavioralObservationsDef class. 
-    [behavioralObservationsDef.propertyGroups addGroup:notableImagryGroup];
-        //define a property group
-    SCPropertyGroup *psychomotorNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"psychomotorNotes"]];
-    
-    // add the psychomotorNotes property group to the behavioralObservationsDef class. 
-    [behavioralObservationsDef.propertyGroups addGroup:psychomotorNotesGroup];
-   
-      //define a property group
-    SCPropertyGroup *sensoryNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"sensoryNotes"]];
-    
-    // add the sensoryNotes property group to the behavioralObservationsDef class. 
-    [behavioralObservationsDef.propertyGroups addGroup:sensoryNotesGroup];
-
-   
-    //define a property group
-    SCPropertyGroup *otherRemarksGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"otherRemarks"]];
-    
-    // add the otherRemarks property group to the behavioralObservationsDef class. 
-    [behavioralObservationsDef.propertyGroups addGroup:otherRemarksGroup];
-    
-    
+       
 
        
-    //create the dictionary with the data bindings
-    NSDictionary *pickerDataBindings = [NSDictionary 
-                                        dictionaryWithObjects:[NSArray arrayWithObjects:@"facialExpressions",@"Facial Expressions",nil] 
-                                        forKeys:[NSArray arrayWithObjects:@"2", @"3", nil]]; // 1 is the control tags
-	
-    
-    
-    
-    SCCustomPropertyDefinition *titleProperty = [SCCustomPropertyDefinition definitionWithName:@"Facial Expressions"withuiElementClass:[BehaviorPickerCell class] withObjectBindings:pickerDataBindings];
-	[behavioralObservationsDef insertPropertyDefinition:titleProperty atIndex:2];
+//    //create the dictionary with the data bindings
+//    NSDictionary *pickerDataBindings = [NSDictionary 
+//                                        dictionaryWithObjects:[NSArray arrayWithObjects:@"facialExpressions",@"Facial Expressions",nil] 
+//                                        forKeys:[NSArray arrayWithObjects:@"2", @"3", nil]]; // 1 is the control tags
+//	
+//    
+//    
+//    
+//    SCCustomPropertyDefinition *titleProperty = [SCCustomPropertyDefinition definitionWithName:@"Facial Expressions"withuiElementClass:[BehaviorPickerCell class] withObjectBindings:pickerDataBindings];
+//	[behavioralObservationsDef insertPropertyDefinition:titleProperty atIndex:2];
 	
     //create the dictionary with the data bindings
         
@@ -554,7 +570,7 @@
 //    attitudeNotes
 //    clientsDesc
 //    comfortLevel
-//    aliance
+//    alliance
 //    happinessLevel
 //    energyLevel
 //    hearingLevel
@@ -666,9 +682,9 @@ NSLog(@"detail view will appear for row at index path");
 NSLog(@"cell text is %@",cell.textLabel.text);
     NSLog(@"section is %i",indexPath.section);
     NSLog(@"tablemodel is %i",tableViewModel.tag);
-    if ((tableViewModel.tag==3 && indexPath.section==1 && [cell.textLabel.text isEqualToString:@"Wechsler Test Age"])||(tableViewModel.tag==3 && indexPath.section==1 && [cell.textLabel.text isEqualToString:@"Test Age"])) 
+    if ((tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Wechsler Test Age"])||(tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Test Age"])) 
     {
-        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
+        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         
         
         
@@ -689,7 +705,7 @@ NSLog(@"cell text is %@",cell.textLabel.text);
 
     NSLog(@"tableviewmodel tab is %i",tableViewModel.tag);
 
-    if (tableViewModel.tag==3&&index==1) 
+    if (tableViewModel.tag==3&&index==0) 
     {
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
         
@@ -752,8 +768,8 @@ if(section.headerTitle !=nil)
 
     SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
    
-    if (tableViewModel.tag==3&&indexPath.section==1&&cell.tag==0) {
-        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
+    if (tableViewModel.tag==3&&indexPath.section==0&&cell.tag==0) {
+        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         [self addWechlerAgeCellToSection:(SCTableViewSection *)section];
     }
 
@@ -765,8 +781,8 @@ if(section.headerTitle !=nil)
 -(void)addWechlerAgeCellToSection:(SCTableViewSection *)section {
     
     
-    SCLabelCell *actualAgeCell=(SCLabelCell*)[section cellAtIndex:4];
-    SCLabelCell *wechslerAgeCell=(SCLabelCell*)[section cellAtIndex:5];
+    SCLabelCell *actualAgeCell=(SCLabelCell*)[section cellAtIndex:1];
+    SCLabelCell *wechslerAgeCell=(SCLabelCell*)[section cellAtIndex:2];
 //    SCTableViewCell *clientCell=(SCTableViewCell *)[section cellAtIndex:0];
 //    SCTableViewCell *testDateCell=(SCTableViewCell*)[section cellAtIndex:3];
     ClientsViewController_Shared *clientsViewController_Shared=[[ClientsViewController_Shared alloc]init];

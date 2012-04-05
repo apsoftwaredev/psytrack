@@ -244,20 +244,28 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                     displayDatePickerInDetailView:NO];
     
 
-    
-    //Create a class definition for the medication Entity
-    SCClassDefinition *diagnosesDef = [SCClassDefinition definitionWithEntityName:@"DiagnosisHistoryEntity" 
-                                                          withManagedObjectContext:managedObjectContext
-                                                                 withPropertyNames:[NSArray arrayWithObjects:@"drugName",@"dateStarted",  @"discontinued", @"symptomsTargeted",@"sideEffects",@"medLogs",
-                                                                                    @"notes",@"applNo", @"productNo",   
-                                                                                    nil]];
-
-    
+//    
+//    //Create a class definition for the medication Entity
+//    SCClassDefinition *diagnosesDef = [SCClassDefinition definitionWithEntityName:@"DiagnosisHistoryEntity" 
+//                                                          withManagedObjectContext:managedObjectContext
+//                                                                 withPropertyNames:[NSArray arrayWithObjects:@"drugName",@"dateStarted",  @"discontinued", @"symptomsTargeted",@"sideEffects",@"medLogs",
+//                                                                                    @"notes",@"applNo", @"productNo",   
+//                                                                                    nil]];
+//
+//    axis
+//    dateDiagnosed
+//    dateRecovered
+//    notes
+//    onset
+//    order
+//    prognosis
+//    severity
+//    status
     
     //Create a class definition for the medication Entity
     SCClassDefinition *medicationDef = [SCClassDefinition definitionWithEntityName:@"MedicationEntity" 
                                                    withManagedObjectContext:managedObjectContext
-                                                          withPropertyNames:[NSArray arrayWithObjects:@"drugName",@"dateStarted",  @"discontinued", @"symptomsTargeted",@"sideEffects",@"medLogs",
+                                                          withPropertyNames:[NSArray arrayWithObjects:@"drugName",@"dateStarted",  @"discontinued", @"symptomsTargeted",@"medLogs",
                                                                              @"notes",@"applNo", @"productNo",   
                                                                              nil]];
     
@@ -720,7 +728,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     vitalsPropertyDef.title=@"Vitals/Height/Weight";
-    SCPropertyGroup *clientInfoGroup = [SCPropertyGroup groupWithHeaderTitle:@"De-Identified Client Data" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth",@"initials",@"demographicInfo",@"dateAdded",@"currentClient",@"phoneNumbers", @"logs",@"medicationHistory", @"vitals", @"notes", nil]];
+    SCPropertyGroup *clientInfoGroup = [SCPropertyGroup groupWithHeaderTitle:@"De-Identified Client Data" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth",@"initials",@"demographicInfo",@"dateAdded",@"currentClient",@"phoneNumbers", @"logs",@"medicationHistory",@"diagnoses", @"vitals", @"notes", nil]];
     
     
 

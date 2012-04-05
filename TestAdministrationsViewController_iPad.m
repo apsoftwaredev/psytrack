@@ -970,7 +970,7 @@ NSLog(@"search list button clicked");
                         SCArrayOfObjectsSection *section=(SCArrayOfObjectsSection *)[tableViewModel sectionAtIndex:0];
                         NSMutableSet *mutableSet=[(NSMutableSet *)section.itemsSet mutableSetValueForKey:@"client"];
                         
-                        SCArrayOfObjectsSection *mainSection=(SCArrayOfObjectsSection *)[detailTableViewModel sectionAtIndex:1];
+                        SCArrayOfObjectsSection *mainSection=(SCArrayOfObjectsSection *)[detailTableViewModel sectionAtIndex:0];
                         ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];
                         clientSelectionCell.alreadySelectedClients=mutableSet;
                        
@@ -984,7 +984,7 @@ NSLog(@"search list button clicked");
             
             else if ([cell.textLabel.text isEqualToString:@"tap + to add clients"]) 
             {
-                    SCArrayOfObjectsSection *mainSection=(SCArrayOfObjectsSection *)[detailTableViewModel sectionAtIndex:1];
+                    SCArrayOfObjectsSection *mainSection=(SCArrayOfObjectsSection *)[detailTableViewModel sectionAtIndex:0];
                     ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];
                     clientSelectionCell.alreadySelectedClients=[[NSMutableSet alloc]init];;
 
@@ -1044,7 +1044,7 @@ NSLog(@"search list button clicked");
                     SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
                     NSMutableSet *mutableSet=[(NSMutableSet *)arrayOfObjectsSection.itemsSet mutableSetValueForKey:@"client"];
                    
-                    SCArrayOfObjectsSection *mainSection=(SCArrayOfObjectsSection *)[detailTableViewModel sectionAtIndex:1];
+                    SCArrayOfObjectsSection *mainSection=(SCArrayOfObjectsSection *)[detailTableViewModel sectionAtIndex:0];
                     ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];
                     clientSelectionCell.alreadySelectedClients=mutableSet;
                    
@@ -1087,7 +1087,7 @@ NSLog(@"search list button clicked");
         
     }
   
-    if (tableViewModel.tag==3 && index==1) 
+    if (tableViewModel.tag==3 && index==0) 
     {
                 
         

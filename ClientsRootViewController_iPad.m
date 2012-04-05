@@ -1242,7 +1242,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     
    
-    if (tableViewModel.tag==1 &&index==0) {
+    if (tableViewModel.tag==1 &&index==0 &&section.cellCount>3) {
         [section insertCell:[SCLabelCell cellWithText:@"Age"] atIndex:2];
         [section insertCell:[SCLabelCell cellWithText:@"Wechsler Age"] atIndex:3];
         
@@ -1678,7 +1678,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(void)addWechlerAgeCellToSection:(SCTableViewSection *)section {
     
     
-    if (section.cellCount>2) {
+    if (section.cellCount>3) {
    
     SCLabelCell *actualAgeCell=(SCLabelCell*)[section cellAtIndex:2];
     SCLabelCell *wechslerAgeCell=(SCLabelCell*)[section cellAtIndex:3];

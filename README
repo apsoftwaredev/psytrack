@@ -41,7 +41,7 @@ TO DO:
 
 -	Add the diagnoses section to client
 
--	Fix the behavior observation section clean it up and eliminate unneeded
+
 
 
 
@@ -123,3 +123,4 @@ begin adding reports
 -fix prescriber start in medication logs
 - check danger to others
 - add existing hours
+-	Fix the behavior observation section clean it up and eliminate unneeded

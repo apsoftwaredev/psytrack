@@ -480,7 +480,7 @@
 		37F7CE911500592900AD2C3A /* Age.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Age.h; sourceTree = "<group>"; };
 		37F7CE921500592900AD2C3A /* Age.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Age.m; sourceTree = "<group>"; };
 		37F7CE931500592900AD2C3A /* ClientPresentations_Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientPresentations_Shared.h; sourceTree = "<group>"; };
-		37F7CE941500592900AD2C3A /* ClientPresentations_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientPresentations_Shared.m; sourceTree = "<group>"; };
+		37F7CE941500592900AD2C3A /* ClientPresentations_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClientPresentations_Shared.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		37F7CE981500596F00AD2C3A /* Time_Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Time_Shared.h; sourceTree = "<group>"; };
 		37F7CE991500596F00AD2C3A /* Time_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Time_Shared.m; sourceTree = "<group>"; };
 		37F7CE9A1500596F00AD2C3A /* TimeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeEntity.h; sourceTree = "<group>"; };
