@@ -169,7 +169,7 @@
 - (BOOL) authenticatePassCode: (NSString *) userInput;
 {
 	BOOL result = NO;
-	//NSLog(@"userInput: %@", userInput);
+	////NSLog(@"userInput: %@", userInput);
 	
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     NSDictionary *lockDictionary=(NSDictionary *)[appDelegate lockValuesDictionary];
@@ -201,7 +201,7 @@
 - (void) handleCompleteUserInput:(NSString *) userInput;
 {
 	[stateMachine_ transitionWithInput:userInput];
-	//NSLog(@"stateMachine_: %@", stateMachine_);
+	////NSLog(@"stateMachine_: %@", stateMachine_);
 	
 	if ([stateMachine_ gotCompletionState])
 	{

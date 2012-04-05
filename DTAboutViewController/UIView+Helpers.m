@@ -37,7 +37,7 @@
 	while ((anObject = [enumerator nextObject])) {
 		if( [anObject isKindOfClass: [ UIView class] ] )
 		{
-			NSLog(@"%@", anObject);
+			//NSLog(@"%@", anObject);
 			
 			[ anObject logSubviews];
 		}

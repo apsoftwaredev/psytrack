@@ -34,7 +34,7 @@
     [dateFormatter setDateFormat:@"H:m:ss yyyy M d"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"MST"]];
     NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
-    NSLog(@"reference date %@",referenceDate);
+    //NSLog(@"reference date %@",referenceDate);
     
     NSTimeInterval thirtyDays=60*60*24*30;
     NSDate *currentDate=[NSDate date];
@@ -69,7 +69,7 @@
         
         
         NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyDate:self.keyDate];
-        NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        //NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
         NSData *encryptedData;
         NSDate *encryptedKeyDate;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
@@ -77,10 +77,10 @@
             
             
             if ([encryptedDataDictionary.allKeys containsObject:@"keyDate"]) {
-                NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                //NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
                 
                 encryptedKeyDate=[encryptedDataDictionary valueForKey:@"keyDate"];
-                NSLog(@"key date is client entity %@",encryptedKeyDate);
+                //NSLog(@"key date is client entity %@",encryptedKeyDate);
             }
         }
         

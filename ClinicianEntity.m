@@ -81,7 +81,7 @@
    combinedName=[NSString string];
     
     
-    NSLog(@"name values in entity are %@, %@, %@, %@, %@, %@", prefix, firstName, middleName, lastName,suffix, credentialInitials );
+    //NSLog(@"name values in entity are %@, %@, %@, %@, %@, %@", prefix, firstName, middleName, lastName,suffix, credentialInitials );
     
     
     [self willAccessValueForKey:@"prefix"];
@@ -135,7 +135,7 @@
         
     }
      [self didAccessValueForKey:@"credentialInitials"];
-    NSLog(@"combined name values at end in entity are  %@",combinedName  );
+    //NSLog(@"combined name values at end in entity are  %@",combinedName  );
     
     
     
@@ -166,7 +166,7 @@
         
         
         NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyDate:self.keyDate];
-        NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        //NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
         NSData *encryptedData;
         NSDate *encryptedKeyDate;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
@@ -174,10 +174,10 @@
             
             
             if ([encryptedDataDictionary.allKeys containsObject:@"keyDate"]) {
-                NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                //NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
                 
                 encryptedKeyDate=[encryptedDataDictionary valueForKey:@"keyDate"];
-                NSLog(@"key date is client entity %@",encryptedKeyDate);
+                //NSLog(@"key date is client entity %@",encryptedKeyDate);
             }
         }
         

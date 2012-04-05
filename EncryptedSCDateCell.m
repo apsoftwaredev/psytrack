@@ -42,13 +42,13 @@
 //    NSDate *keyDate=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"32"]];
 //    
 //
-//    NSLog(@"key date is %@",keyDate);
+//    ////NSLog(@"key date is %@",keyDate);
 //    NSData *decryptedData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:keyDate encryptedData:encryptedData];
 //    
 //    if (decryptedData.length) {
         NSDate * restoredDate = [self.boundObject valueForKey:[self.objectBindings valueForKey:@"34"]];
     if (restoredDate) {
-            NSLog(@"restored date is %@",restoredDate);
+            //NSLog(@"restored date is %@",restoredDate);
         self.datePicker.date=restoredDate;
         self.label.text =[dateFormatter stringFromDate:restoredDate];
 } 
@@ -63,7 +63,7 @@
     
     //    self.boundObject=self.testString;
     
-    NSLog(@"bound object is %@",self.boundObject);
+    //NSLog(@"bound object is %@",self.boundObject);
     
     
     

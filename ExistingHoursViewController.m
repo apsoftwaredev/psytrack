@@ -1180,9 +1180,9 @@
 
 -(void)cancelButtonTapped{
     
-    NSLog(@"cancel button Tapped");
+    //NSLog(@"cancel button Tapped");
     
-    NSLog(@"parent controller %@",[super parentViewController]);
+    //NSLog(@"parent controller %@",[super parentViewController]);
     
     if(self.navigationController)
 	{
@@ -1203,7 +1203,7 @@
 -(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
 BOOL valid=NO;
     SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];
-    NSLog(@"cell class is %@",cell.class);
+    //NSLog(@"cell class is %@",cell.class);
     if ([cell isKindOfClass:[SCNumericTextFieldCell class]]) {
         SCNumericTextFieldCell *numericCell=(SCNumericTextFieldCell *)cell;
         
@@ -1307,7 +1307,7 @@ BOOL valid=NO;
         //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
         if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
             
-            NSLog(@"entity name is %@",managedObject.entity.name);
+            //NSLog(@"entity name is %@",managedObject.entity.name);
             //identify the Languages Spoken table
             if ([managedObject.entity.name isEqualToString:@"ExistingHoursEntity"]) {
                 //define and initialize a date formatter
@@ -1324,11 +1324,11 @@ BOOL valid=NO;
                 NSMutableSet *assessmentHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"assessments.hours"];
                 
                 NSArray *assessmentHoursArray=[assessmentHoursSet allObjects];
-                NSLog(@"direct hours are %@",assessmentHoursArray);
+                //NSLog(@"direct hours are %@",assessmentHoursArray);
                 NSNumber *assessmentSum = nil;
                 
                 for (NSNumber *assessmentHours in assessmentHoursArray) {
-                        NSLog(@"hours class is %@",[assessmentHours class]);
+                        //NSLog(@"hours class is %@",[assessmentHours class]);
                     
                     if (!assessmentSum) 
                     {
@@ -1341,11 +1341,11 @@ BOOL valid=NO;
                 NSMutableSet *interventionHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"directInterventions.hours"];
                 
                 NSArray *interventionHoursArray=[interventionHoursSet allObjects];
-                NSLog(@"direct hours are %@",assessmentHoursArray);
+                //NSLog(@"direct hours are %@",assessmentHoursArray);
                 NSNumber *interventionSum = nil;
                 
                 for (NSNumber *interventionHours in interventionHoursArray) {
-                    NSLog(@"hours class is %@",[interventionHours class]);
+                    //NSLog(@"hours class is %@",[interventionHours class]);
                     
                     if (!interventionSum) 
                     {
@@ -1359,11 +1359,11 @@ BOOL valid=NO;
                 NSMutableSet *supportHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supportActivities.hours"];
                 
                 NSArray *supportHoursArray=[supportHoursSet allObjects];
-                NSLog(@"direct hours are %@",supportHoursArray);
+                //NSLog(@"direct hours are %@",supportHoursArray);
                 NSNumber *supportSum = nil;
                 
                 for (NSNumber *supportHours in supportHoursArray) {
-                    NSLog(@"hours class is %@",[supportHours class]);
+                    //NSLog(@"hours class is %@",[supportHours class]);
                     
                     if (!supportSum) 
                     {
@@ -1376,11 +1376,11 @@ BOOL valid=NO;
                 NSMutableSet *supervisionGroupHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supervision.groupHours"];
                 
                 NSArray *supervisionGroupHoursArray=[supervisionGroupHoursSet allObjects];
-                NSLog(@"direct hours are %@",supervisionGroupHoursArray);
+                //NSLog(@"direct hours are %@",supervisionGroupHoursArray);
                 NSNumber *supervisionGroupSum = nil;
                 
                 for (NSNumber *supervisionGroupHours in supervisionGroupHoursArray) {
-                    NSLog(@"hours class is %@",[supervisionGroupHours class]);
+                    //NSLog(@"hours class is %@",[supervisionGroupHours class]);
                     
                     if (!supervisionGroupSum) 
                     {
@@ -1393,11 +1393,11 @@ BOOL valid=NO;
                 NSMutableSet *supervisionIndividualHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supervision.individualHours"];
                 
                 NSArray *supervisionIndividualHoursArray=[supervisionIndividualHoursSet allObjects];
-                NSLog(@"direct hours are %@",supervisionIndividualHoursArray);
+                //NSLog(@"direct hours are %@",supervisionIndividualHoursArray);
                 NSNumber *supervisionIndividualSum = nil;
                 
                 for (NSNumber *supervisionIndividualHours in supervisionIndividualHoursArray) {
-                    NSLog(@"hours class is %@",[supervisionIndividualHours class]);
+                    //NSLog(@"hours class is %@",[supervisionIndividualHours class]);
                     
                     if (!supervisionIndividualSum) 
                     {

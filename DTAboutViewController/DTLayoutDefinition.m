@@ -56,7 +56,7 @@ static NSMutableDictionary *_cachedLayouts = nil;
 		}
 		else
 		{
-			NSLog(@"Error reading attributes of file %@: %@", path, [error localizedDescription]);
+//			NSLog(@"Error reading attributes of file %@: %@", path, [error localizedDescription]);
 		
 			
 			return nil;
@@ -124,10 +124,10 @@ static NSMutableDictionary *_cachedLayouts = nil;
 			
 			[self performSelectorOnMainThread:@selector(updateDictionary:) withObject:tmpDictionary waitUntilDone:YES];
 		}
-		else
-		{
-			NSLog(@"Cannot update layout from URL %@", updateURL);
-		}
+//		else
+//		{
+//			NSLog(@"Cannot update layout from URL %@", updateURL);
+//		}
 	}
 	
 

@@ -52,7 +52,7 @@
 
 	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
 	NSString *passcodeToSave = (self.lockScreenPasscodeIsOn) ? self.lockScreenPasscode : @"" ;
-NSLog(@"passcodeToSave: %@", passcodeToSave);
+//NSLog(@"passcodeToSave: %@", passcodeToSave);
 	
 	[lockDictionary setObject:passcodeToSave forKey:K_LOCK_SCREEN_PASSCODE];
 	
@@ -63,11 +63,11 @@ NSLog(@"passcodeToSave: %@", passcodeToSave);
 //    [userDefaults setValue:self.lockScreenChallengePhrase forKey:K_LOCK_SCREEN_CHALLENGE_PHRASE];
 //    [userDefaults setValue:self.lockScreenChallengeResponse forKey:K_LOCK_SCREEN_LOCK_CHALLENGE_RESPONSE];
     
-    NSLog(@"lock screen pass code is on is%i",self.lockScreenPasscodeIsOn);
-    NSLog(@"lock screen screen locked is on is%i",self.lockScreenLocked);
-     NSLog(@"lock screen passcode to save is on is%@",self.lockScreenPasscode);
-    NSLog(@"lock screen lock screen attempt is on is%i",self.lockScreenPasscodeAttempt);
-     NSLog(@"lock screen lock screen attempt is on is%i",self.lockScreenLockAtStartup);
+    //NSLog(@"lock screen pass code is on is%i",self.lockScreenPasscodeIsOn);
+    //NSLog(@"lock screen screen locked is on is%i",self.lockScreenLocked);
+     //NSLog(@"lock screen passcode to save is on is%@",self.lockScreenPasscode);
+    //NSLog(@"lock screen lock screen attempt is on is%i",self.lockScreenPasscodeAttempt);
+     //NSLog(@"lock screen lock screen attempt is on is%i",self.lockScreenLockAtStartup);
     
 	BOOL result = [appDelegate saveLockDictionarySettings];
 	if (result)

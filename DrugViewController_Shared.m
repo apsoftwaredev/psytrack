@@ -68,7 +68,7 @@
         [(PTTAppDelegate *)[UIApplication sharedApplication].delegate  copyDrugsToMainContext]; 
          [(PTTAppDelegate *)[UIApplication sharedApplication].delegate saveContext];
     }
-         NSLog(@"copied to main complete");
+         //NSLog(@"copied to main complete");
     }
   
     BOOL takeOutQuotes=FALSE;
@@ -95,7 +95,7 @@
                 
                 
                 
-                //                NSLog(@"object at index %@",[tabFile objectAtIndex:z]);
+                //                //NSLog(@"object at index %@",[tabFile objectAtIndex:z]);
                 productMain.drugName=[productMain.drugName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
                 
                  productMain.dosage= [productMain.dosage stringByReplacingOccurrencesOfString:@"\"" withString:@""];
@@ -121,14 +121,14 @@
                 
                 
                 
-                //                NSLog(@"object at index %@",[tabFile objectAtIndex:z]);
+                //                //NSLog(@"object at index %@",[tabFile objectAtIndex:z]);
                 product.drugName=[product.drugName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
                 
                 product.dosage= [product.dosage stringByReplacingOccurrencesOfString:@"\"" withString:@""];
                 
             }
             
-            NSLog(@"took out quotes");
+            //NSLog(@"took out quotes");
 //        }  
        
     }   

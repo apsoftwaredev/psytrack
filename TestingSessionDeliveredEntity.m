@@ -42,7 +42,7 @@
     [dateFormatter setDateFormat:@"H:m:ss yyyy M d"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"MST"]];
     NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
-    NSLog(@"reference date %@",referenceDate);
+    //NSLog(@"reference date %@",referenceDate);
     if ([(NSDate *)self.dateOfTesting isEqualToDate:referenceDate]) {
         self.dateOfTesting = [NSDate date];
         

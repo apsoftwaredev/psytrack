@@ -608,7 +608,7 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
 searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     
-    NSLog(@"scope changed");
+    //NSLog(@"scope changed");
     
     
    
@@ -625,8 +625,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         [components setDay:0]; //reset the other components
         [components setYear:0]; //reset the other components
         NSDate *endDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
-       NSLog(@"start dtate %@",startDate);
-        NSLog(@"end date is %@", endDate);
+       //NSLog(@"start dtate %@",startDate);
+        //NSLog(@"end date is %@", endDate);
         
         NSPredicate *currentMonthPredicate = [NSPredicate predicateWithFormat:@"((dateOfTesting > %@) AND (dateOfTesting <= %@)) || (dateOfTesting = nil)",startDate,endDate];
         NSPredicate *paperworkIncompletePredicate = [NSPredicate predicateWithFormat:@"paperwork == %@",[NSNumber numberWithInteger: 0]];
@@ -637,17 +637,17 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         switch (selectedScope) {
             case 1: //Male
                 objectsModel.itemsPredicate = nil;
-                NSLog(@"case default");
+                //NSLog(@"case default");
                  break;
                
             case 2: //Male
                 objectsModel.itemsPredicate = paperworkIncompletePredicate;
-                NSLog(@"case paperwork Incomplete");
+                //NSLog(@"case paperwork Incomplete");
                 break;                
                 
             default:
                 objectsModel.itemsPredicate = currentMonthPredicate;
-                NSLog(@"case 1");
+                //NSLog(@"case 1");
                
                 
                 break;
@@ -661,7 +661,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(void)tableViewModelSearchBarResultsListButtonClicked:(SCArrayOfItemsModel *)tableViewModel{
 
 
-NSLog(@"search list button clicked");
+//NSLog(@"search list button clicked");
 
 
 }
@@ -675,8 +675,8 @@ NSLog(@"search list button clicked");
     {
                     
            
-            NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
-        NSLog(@"detail model class is %@",[detailTableViewModel class]);
+            //NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
+        //NSLog(@"detail model class is %@",[detailTableViewModel class]);
             if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) 
             {
                 
@@ -711,7 +711,7 @@ NSLog(@"search list button clicked");
     [detailTableViewModel.modeledTableView setBackgroundView:nil];
     [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
     [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
-   NSLog(@"tableviewmodel is %@",detailTableViewModel.debugDescription);
+   //NSLog(@"tableviewmodel is %@",detailTableViewModel.debugDescription);
             
     }   
 
@@ -719,15 +719,15 @@ NSLog(@"search list button clicked");
 
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//NSLog(@"table view tag is %i",tableViewModel.tag);
+////NSLog(@"table view tag is %i",tableViewModel.tag);
 //    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
 
     if(tableViewModel.tag==1 &&indexPath.section==0){
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-        NSLog(@"cell bound object is %@",cellManagedObject);
-        NSLog(@"cell.tag%i",cell.tag);
-        NSLog(@"section managed object is %@",cellManagedObject.entity.name);
+        //NSLog(@"cell bound object is %@",cellManagedObject);
+        //NSLog(@"cell.tag%i",cell.tag);
+        //NSLog(@"section managed object is %@",cellManagedObject.entity.name);
         switch (cell.tag) {
             case 0:
             {
@@ -770,7 +770,7 @@ NSLog(@"search list button clicked");
                     NSString *eventIdentifier=[cell.boundObject valueForKey:@"eventIdentifier"]; 
                 
                     
-                    NSLog(@"event Identifier %@", cell.boundObject);
+                    //NSLog(@"event Identifier %@", cell.boundObject);
                     NSString *buttonText;
                     if (eventIdentifier.length) {
                         buttonText=[NSString stringWithString:@"Edit This Calendar Event"];
@@ -799,16 +799,16 @@ NSLog(@"search list button clicked");
     if (tableViewModel.tag==3) {
  
         
-        NSLog(@"index path section is %i",indexPath.section);
+        //NSLog(@"index path section is %i",indexPath.section);
         //                if (indexPath.section==0) {
         //                    <#statements#>
         //                }
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-        NSLog(@"cell bound object is %@",cellManagedObject);
-        NSLog(@"cell.tag%i",cell.tag);
-        NSLog(@"section managed object is %@",cellManagedObject.entity.name);
-        NSLog(@"cell text is %@",cell.textLabel.text);
-        NSLog(@"cell class is %@",[cell class]);
+        //NSLog(@"cell bound object is %@",cellManagedObject);
+        //NSLog(@"cell.tag%i",cell.tag);
+        //NSLog(@"section managed object is %@",cellManagedObject.entity.name);
+        //NSLog(@"cell text is %@",cell.textLabel.text);
+        //NSLog(@"cell class is %@",[cell class]);
         
         
         if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) 
@@ -824,7 +824,7 @@ NSLog(@"search list button clicked");
                 
                 
                 
-                NSLog(@"delegate switched to client presentation shared");
+                //NSLog(@"delegate switched to client presentation shared");
                 
             }
             
@@ -885,7 +885,7 @@ NSLog(@"search list button clicked");
 //        
 //        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
 //        
-//        NSLog(@"section managed object is %@",cellManagedObject.entity.name);
+//        //NSLog(@"section managed object is %@",cellManagedObject.entity.name);
 //        if ([cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) 
 //        {
 //            if (tableViewModel.delegate!=clientPresentations_Shared) {
@@ -897,7 +897,7 @@ NSLog(@"search list button clicked");
 //                
 //                
 //                
-//                NSLog(@"delegate switched to client presentation shared");
+//                //NSLog(@"delegate switched to client presentation shared");
 //                
 //            }
 //            
@@ -955,7 +955,7 @@ NSLog(@"search list button clicked");
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         
                 
-        NSLog(@"tableview model data source %@",tableViewModel.dataSource);
+        //NSLog(@"tableview model data source %@",tableViewModel.dataSource);
         if (section.cellCount>0) 
         {
                SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:0];
@@ -964,7 +964,7 @@ NSLog(@"search list button clicked");
             {
                 
                     NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-                    NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
+                    //NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
                     if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
                         
                         SCArrayOfObjectsSection *section=(SCArrayOfObjectsSection *)[tableViewModel sectionAtIndex:0];
@@ -974,7 +974,7 @@ NSLog(@"search list button clicked");
                         ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];
                         clientSelectionCell.alreadySelectedClients=mutableSet;
                        
-                        NSLog(@"client items are12345 %@",mutableSet);
+                        //NSLog(@"client items are12345 %@",mutableSet);
                         clientSelectionCell.hasChangedClients=NO;
                         
                     }
@@ -1021,7 +1021,7 @@ NSLog(@"search list button clicked");
         
         SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-        NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
+        //NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
         if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
             
         [detailTableViewModel.modeledTableView setEditing:YES animated:NO];
@@ -1038,7 +1038,7 @@ NSLog(@"search list button clicked");
            
                 SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-                NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
+                //NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
                 if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
                     
                     SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
@@ -1048,7 +1048,7 @@ NSLog(@"search list button clicked");
                     ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];
                     clientSelectionCell.alreadySelectedClients=mutableSet;
                    
-                    NSLog(@"client items are12345 %@",mutableSet);
+                    //NSLog(@"client items are12345 %@",mutableSet);
                     
                 }
         } 
@@ -1134,15 +1134,15 @@ NSLog(@"search list button clicked");
             //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
             if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
                 
-                NSLog(@"entity name is %@",cellManagedObject.entity.name);
+                //NSLog(@"entity name is %@",cellManagedObject.entity.name);
                 //identify the Languages Spoken table
                 if ([cellManagedObject.entity.name isEqualToString:@"TestingSessionDeliveredEntity"]) {
-                    NSLog(@"the managed object entity is Languag spoken Entity");
+                    //NSLog(@"the managed object entity is Languag spoken Entity");
                     //get the value of the primaryLangugage attribute
                     NSNumber *paperworkNumber=(NSNumber *)[cellManagedObject valueForKey:@"paperwork"];
                     
                     
-                    NSLog(@"primary alanguage %@",  paperworkNumber);
+                    //NSLog(@"primary alanguage %@",  paperworkNumber);
                     //if the paperwork selection is Yes
                     if (paperworkNumber==[NSNumber numberWithInteger:0]) {
                         //set the text color to red
@@ -1151,7 +1151,7 @@ NSLog(@"search list button clicked");
                     
                     NSMutableSet *clientSet=[cellManagedObject mutableSetValueForKeyPath:@"clientPresentations.client.clientIDCode"];
                     
-                    NSLog(@"client set is %@",clientSet);
+                    //NSLog(@"client set is %@",clientSet);
                     
                     NSString *clientsString=[NSString string];
                     if ([clientSet count]) {
@@ -1186,7 +1186,7 @@ NSLog(@"search list button clicked");
                     
                     [cell.textLabel setText:cellTextString];
                     
-                    NSLog(@"cell text label text is %@",cell.textLabel.text);
+                    //NSLog(@"cell text label text is %@",cell.textLabel.text);
                     
                 }
             }
@@ -1204,12 +1204,12 @@ NSLog(@"search list button clicked");
             
         if (cell.tag==1)
         {
-            NSLog(@"cell is kind of class %@",[cell class]);
+            //NSLog(@"cell is kind of class %@",[cell class]);
             if ([cell isKindOfClass:[SCObjectCell class]]) 
             {
                 
                 totalTimeDate=(NSDate *)[cell.boundObject valueForKey:@"totalTime"];
-                NSLog(@"total time date in will display cell objects %@", totalTimeDate);
+                //NSLog(@"total time date in will display cell objects %@", totalTimeDate);
                 NSString *totalTimeString=[counterDateFormatter stringFromDate:totalTimeDate];
                 UILabel *totalTimeLabel=(UILabel *)[cell viewWithTag:28];
                 totalTimeLabel.text=totalTimeString;
@@ -1248,13 +1248,13 @@ NSLog(@"search list button clicked");
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath{
 
 
-NSLog(@"value changed for row at index path");
+//NSLog(@"value changed for row at index path");
 
    
     if (tableViewModel.tag==1) 
     {
         SCSelectionCell *cell=(SCSelectionCell *)[tableViewModel.modeledTableView cellForRowAtIndexPath:indexPath];
-        NSLog(@"cell.tag %i",cell.tag);
+        //NSLog(@"cell.tag %i",cell.tag);
         if (cell.tag==0) {
             if ([cell isKindOfClass:[SCDateCell class]]){
                 serviceDateCell=(SCDateCell *)cell;
@@ -1269,7 +1269,7 @@ NSLog(@"value changed for row at index path");
             
             
             
-            NSLog(@"cell is kind of class %@",[cell class]);
+            //NSLog(@"cell is kind of class %@",[cell class]);
             if ([cell isKindOfClass:[SCObjectCell class]]) 
             {
                
@@ -1382,12 +1382,12 @@ NSLog(@"value changed for row at index path");
     EKEvent *thisEvent;
 
     
-    NSLog(@"add event sender is %@",[sender superclass]);
+    //NSLog(@"add event sender is %@",[sender superclass]);
     if ([[sender class] isSubclassOfClass:[UIButton class]]) 
     {
         UIButton *button=(UIButton *)sender;
         UIView *buttonView=(UIView *)button.superview;
-        NSLog(@"button superview is %@",buttonView.superview);
+        //NSLog(@"button superview is %@",buttonView.superview);
         
         if ([buttonView.superview isKindOfClass:[ButtonCell class]]) 
         {
@@ -1396,7 +1396,7 @@ NSLog(@"value changed for row at index path");
             
             NSManagedObject *buttonManagedObject=(NSManagedObject *)buttonCell.boundObject;
             NSString *eventIdentifier=(NSString *)[buttonManagedObject valueForKey:@"eventIdentifier"];
-            NSLog(@"event identifier in add event %@",eventIdentifier);
+            //NSLog(@"event identifier in add event %@",eventIdentifier);
             if (eventIdentifier.length) {
                 if (!eventViewController) {
                
@@ -1431,7 +1431,7 @@ NSLog(@"value changed for row at index path");
                 else {
                     [thisEvent setCalendar:self.psyTrackCalendar];
                 }
-                NSLog(@"add new event calander %@",self.psyTrackCalendar);
+                //NSLog(@"add new event calander %@",self.psyTrackCalendar);
                 
                 [buttonCell commitDetailModelChanges:currentDetailTableViewModel];
                 
@@ -1439,14 +1439,14 @@ NSLog(@"value changed for row at index path");
                 
                 NSManagedObject *buttonCellManagedObject=(NSManagedObject *)buttonCell.boundObject;
                 
-                NSLog(@"button cell managed object is %@",buttonCellManagedObject);
+                //NSLog(@"button cell managed object is %@",buttonCellManagedObject);
                 
                 TimeEntity *timeEntity=(TimeEntity *)[buttonCellManagedObject valueForKey:@"time"];
                
                  NSDate *testDate=(NSDate *)[buttonCellManagedObject valueForKey:@"dateOfTesting"];
                 
                 NSDate *startTime=(NSDate *)[timeEntity valueForKey:@"startTime"];
-                NSLog(@"time entity is %@",timeEntity);
+                //NSLog(@"time entity is %@",timeEntity);
               
                 NSDate *endTime=(NSDate *)[timeEntity valueForKey:@"endTime"];
                 
@@ -1474,20 +1474,20 @@ NSLog(@"value changed for row at index path");
                 if (startTime && testDate) {
                      NSString *startDateString=[NSString stringWithFormat:@"%@ %@",[dateFormatterTime stringFromDate:startTime],[dateFormatterDate stringFromDate:testDate]];
                 
-                NSLog(@"startDateString is %@",startDateString);
+                //NSLog(@"startDateString is %@",startDateString);
                     
                     startTime=[dateFormatterCombined dateFromString:startDateString];
-                    NSLog(@"startTime is %@",startTime);
+                    //NSLog(@"startTime is %@",startTime);
                 }
                
                 if (endTime && testDate) {
                     NSString *endDateString=[NSString stringWithFormat:@"%@ %@",[dateFormatterTime stringFromDate:endTime],[dateFormatterDate stringFromDate:testDate]];
                     
-                    NSLog(@"startDateString is %@",endDateString);
+                    //NSLog(@"startDateString is %@",endDateString);
                     
                     endTime=[dateFormatterCombined dateFromString:endDateString];
                     
-                    NSLog(@"end time is %@", endTime);
+                    //NSLog(@"end time is %@", endTime);
                 }
                 
                 thisEvent.startDate=startTime;
@@ -1495,7 +1495,7 @@ NSLog(@"value changed for row at index path");
                 
                 NSMutableSet *clientSet=[buttonCellManagedObject mutableSetValueForKeyPath:@"clientPresentations.client.clientIDCode"];
                 
-                NSLog(@"client set is %@",clientSet);
+                //NSLog(@"client set is %@",clientSet);
                 
                 NSString *eventTitleString=[NSString stringWithString:@"Test Administration:"];
                 for (id obj in clientSet){
@@ -1511,7 +1511,7 @@ NSLog(@"value changed for row at index path");
                 UIViewController *currentTableModelViewController=(UIViewController *)currentDetailTableViewModel.viewController;
                
                 NSString *calenderLocation=[[NSUserDefaults standardUserDefaults] valueForKey:@"calander_location"];
-                NSLog(@"calander location is %@",calenderLocation);
+                //NSLog(@"calander location is %@",calenderLocation);
                 [thisEvent setLocation:calenderLocation];
                 
                   addController.editViewDelegate = self;
@@ -1539,8 +1539,8 @@ NSLog(@"value changed for row at index path");
 //        <#statements#>
 //    }
 //      thisEvent.calendar=[self.eventStore defaultCalendarForNewEvents];
-        NSLog(@"psyTrackcalendar identifier %@",self.psyTrackCalendar.calendarIdentifier);
-//      NSLog(@"event isidentifier %@",thisEvent.eventIdentifier);
+        //NSLog(@"psyTrackcalendar identifier %@",self.psyTrackCalendar.calendarIdentifier);
+//      //NSLog(@"event isidentifier %@",thisEvent.eventIdentifier);
     
 
 	// present EventsAddViewController as a modal view controller
@@ -1551,22 +1551,22 @@ NSLog(@"value changed for row at index path");
 //	
 //    // set the addController's event store to the current event store.
 //	addController.eventStore = self.eventStore;
-//   NSLog(@"sender button class is %@",[sender class]);
+//   //NSLog(@"sender button class is %@",[sender class]);
 //    
 //    if ([sender isKindOfClass:[UIButton class]]) {
-//        NSLog(@"is member of uiButton class");
+//        //NSLog(@"is member of uiButton class");
 //        
 //        UIButton *button=(UIButton *)sender;
 //        
 //       
 //        UIView *buttonSuperView =button.superview;
-//        NSLog(@"view super view is %@",buttonSuperView.superview);
+//        //NSLog(@"view super view is %@",buttonSuperView.superview);
 //        
 //        if ([buttonSuperView.superview isKindOfClass:[ButtonCell class]]) {
 //            ButtonCell *buttonCell=(ButtonCell *)buttonSuperView.superview;
 //            eventButtonBoundObject=(NSManagedObject *) buttonCell.boundObject;
 //            
-//            NSLog(@"button Cell bound object %@",buttonCell.boundObject);
+//            //NSLog(@"button Cell bound object %@",buttonCell.boundObject);
 //            NSString *eventIdentifier=[eventButtonBoundObject valueForKey:@"eventIdentifier"];
 //            
 //            if (eventIdentifier.length)
@@ -1602,8 +1602,8 @@ NSLog(@"value changed for row at index path");
 //    EKEvent *thisEvent = (EKEvent *) addController.event;
 //    thisEvent.title=@"Testing Title";
 ////    thisEvent.calendar=self.psyTrackCalendar;
-//    NSLog(@"psyTrackcalendar identifier %@",self.psyTrackCalendar.calendarIdentifier);
-//    NSLog(@"event isidentifier %@",thisEvent.eventIdentifier);
+//    //NSLog(@"psyTrackcalendar identifier %@",self.psyTrackCalendar.calendarIdentifier);
+//    //NSLog(@"event isidentifier %@",thisEvent.eventIdentifier);
 //   
 //    thisEvent.location=location;
 //    
@@ -1644,17 +1644,17 @@ NSLog(@"value changed for row at index path");
 			// If the new event is being added to the default calendar, then update its 
 			// eventsList.
 			
-            NSLog(@"self psyTrack calendar %@",self.psyTrackCalendar);
-            NSLog(@"even calander is %@",thisEvent.calendar);
+            //NSLog(@"self psyTrack calendar %@",self.psyTrackCalendar);
+            //NSLog(@"even calander is %@",thisEvent.calendar);
             
             if (self.psyTrackCalendar ==  thisEvent.calendar) {
 				[self.eventsList addObject:thisEvent];
 			}
 			[controller.eventStore saveEvent:controller.event span:EKSpanThisEvent error:&error];
 			
-            NSLog(@"section count is %i",currentDetailTableViewModel.sectionCount);
+            //NSLog(@"section count is %i",currentDetailTableViewModel.sectionCount);
                        
-            NSLog(@"cell bound object in save event is %@",cell.boundObject);
+            //NSLog(@"cell bound object in save event is %@",cell.boundObject);
            
             [cell.boundObject setValue:[controller.event eventIdentifier] forKey:@"eventIdentifier"];
             [cell commitChanges];
@@ -1664,10 +1664,10 @@ NSLog(@"value changed for row at index path");
                 UIButton *button=(UIButton *)buttonCell.button;
                 
                 [button setTitle:@"Edit Calendar Event" forState:UIControlStateNormal];
-                NSLog(@"cell identifier after reset button is %@",[cell.boundObject valueForKey:@"eventIdentifier"]);
+                //NSLog(@"cell identifier after reset button is %@",[cell.boundObject valueForKey:@"eventIdentifier"]);
             }
             
-            NSLog(@"event identifier controller .event.event identi %@", [cell.boundObject valueForKey:@"eventIdentifier"]);
+            //NSLog(@"event identifier controller .event.event identi %@", [cell.boundObject valueForKey:@"eventIdentifier"]);
            
             
         }
@@ -1680,8 +1680,8 @@ NSLog(@"value changed for row at index path");
 			// If deleting an event from the currenly default calendar, then update its 
 			// eventsList.
 			
-            NSLog(@"self psyTrack calendar %@",self.psyTrackCalendar);
-            NSLog(@"even calander is %@",thisEvent.calendar);
+            //NSLog(@"self psyTrack calendar %@",self.psyTrackCalendar);
+            //NSLog(@"even calander is %@",thisEvent.calendar);
             
             if (self.psyTrackCalendar ==  thisEvent.calendar) {
 				[self.eventsList removeObject:thisEvent];
@@ -1697,7 +1697,7 @@ NSLog(@"value changed for row at index path");
                 UIButton *button=(UIButton *)buttonCell.button;
                 
                 [button setTitle:@"Add Event To Calendar" forState:UIControlStateNormal];
-                NSLog(@"cell identifier after reset button is %@",[cell.boundObject valueForKey:@"eventIdentifier"]);
+                //NSLog(@"cell identifier after reset button is %@",[cell.boundObject valueForKey:@"eventIdentifier"]);
             }
 			break;
 			
@@ -1734,7 +1734,7 @@ NSLog(@"value changed for row at index path");
             if ([source.title isEqualToString: @"iCloud"])
             {
                 mySource = source;
-                //                NSLog(@"cloud source type is %@",source.sourceType);
+                //                //NSLog(@"cloud source type is %@",source.sourceType);
                 
                 break;
             }
@@ -1796,16 +1796,16 @@ NSLog(@"value changed for row at index path");
  
 
         
-        NSLog(@"cal id = %@", self.psyTrackCalendar.calendarIdentifier);
+        //NSLog(@"cal id = %@", self.psyTrackCalendar.calendarIdentifier);
       
         NSError *error;
         
         if (![self.eventStore saveCalendar:self.psyTrackCalendar commit:YES error:&error ]) {
-            NSLog(@"something didn't go right");
+            //NSLog(@"something didn't go right");
         }
         else
         {
-            NSLog(@"saved calendar");
+            //NSLog(@"saved calendar");
             [[NSUserDefaults standardUserDefaults]setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
             //                 NSSet *calendars=(NSSet *)[localSource calendars];
             //                    for(id obj in calendars) { 
@@ -1832,7 +1832,7 @@ NSLog(@"value changed for row at index path");
     
     
     if (self.psyTrackCalendar) {
-        NSLog(@"self %@",self.psyTrackCalendar);
+        //NSLog(@"self %@",self.psyTrackCalendar);
     }
     
 

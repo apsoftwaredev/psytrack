@@ -139,7 +139,7 @@
         if(_actionDateSet == nil) {
             // Handle the error
         }       
-            NSLog(@"ending dispach 1");
+//            NSLog(@"ending dispach 1");
         
   
 

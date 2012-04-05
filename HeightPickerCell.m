@@ -68,7 +68,7 @@
     
 //    [picker reloadInputViews];
      loadUnitsFromBoundObject=TRUE;
-    //    NSLog(@"picker subviews is %@",picker.subviews);
+    //    //NSLog(@"picker subviews is %@",picker.subviews);
     //    
 }
 
@@ -183,7 +183,7 @@
 //    float heightTall=[[NSString stringWithFormat:@"%f", inchesTall]floatValue]; 
     
  
-    NSLog(@"height is %i",heightTall);
+    //NSLog(@"height is %i",heightTall);
 
     [self.boundObject setValue:[NSNumber numberWithInteger:heightTall] forKey:@"heightTall"];
     [self.boundObject setValue:bigUnit forKey:@"heightUnit"];
@@ -296,7 +296,7 @@
     NSInteger returnInteger=0;
    
    
-    NSLog(@"component %i",component);
+    //NSLog(@"component %i",component);
     NSString *bigUnit,*littleUnit ;
     if (loadUnitsFromBoundObject) {
         bigUnit=(NSString *)[self.boundObject valueForKey:@"heightUnit"];
@@ -420,7 +420,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    NSLog(@"component changed is %i",component);
+    //NSLog(@"component changed is %i",component);
     
     if (component==0) {
          NSString *bigUnit = [self bigUnitForRow:[picker selectedRowInComponent:1]];
@@ -454,8 +454,8 @@
         
         NSInteger heighTallInOrCm=thirdComponent;
         BOOL convertToMetric=FALSE;
-        NSLog(@"big unit is %@",bigUnit);
-        NSLog(@"littleUnit is %@",littleUnit);
+        //NSLog(@"big unit is %@",bigUnit);
+        //NSLog(@"littleUnit is %@",littleUnit);
         if (component==1) {
            
             if ([bigUnit isEqualToString:@"ft"]) {
@@ -532,16 +532,16 @@
             centemetersInteger=thirdComponent+(firstComponent *100);
             
             inchesFloat=centemetersInteger*0.393700787;
-            NSLog(@"inches %f, centemeters %f",inchesFloat,centemetersFloat);
+            //NSLog(@"inches %f, centemeters %f",inchesFloat,centemetersFloat);
            
             feetFloat=inchesFloat/12;
             feetInteger=feetFloat;
             inchesFloat=feetFloat-feetInteger;
             inchesFloat=inchesFloat*12;
             
-            NSLog(@"inchecs float before round is %f",inchesFloat);
+            //NSLog(@"inchecs float before round is %f",inchesFloat);
             inchesFloat=roundf(inchesFloat);
-            NSLog(@"inches float after round it %f",inchesFloat);
+            //NSLog(@"inches float after round it %f",inchesFloat);
             
             inchesInteger=inchesFloat;
            
@@ -552,10 +552,10 @@
             heighTallFtOrM=feetInteger;
             
             
-            NSLog(@"inches float tallbig is %f",inchesFloat);
-            NSLog(@"inches integer is  talllittle is %i",inchesInteger);
-            NSLog(@"feet float %f",feetFloat);
-            NSLog(@"feet integer M %i",feetInteger);
+            //NSLog(@"inches float tallbig is %f",inchesFloat);
+            //NSLog(@"inches integer is  talllittle is %i",inchesInteger);
+            //NSLog(@"feet float %f",feetFloat);
+            //NSLog(@"feet integer M %i",feetInteger);
             
          
         
@@ -596,7 +596,7 @@
     if (metersFloat-metersInteger>0.995) {
         metersInteger++;
     }
-    NSLog(@"meters float are %i",metersInteger);
+    //NSLog(@"meters float are %i",metersInteger);
     
    
 
@@ -612,14 +612,14 @@
     centemetersFloat=inchesInteger * 2.54;
     NSInteger metersInteger, centemetersInteger;
     
-    NSLog(@"centementers are %f",centemetersFloat);
+    //NSLog(@"centementers are %f",centemetersFloat);
     
     metersFloat=centemetersFloat/100.0;
-    NSLog(@"meters float are %f",metersFloat);
+    //NSLog(@"meters float are %f",metersFloat);
     
     metersInteger=metersFloat;
     
-    NSLog(@"meters integer is %i",metersInteger);
+    //NSLog(@"meters integer is %i",metersInteger);
     
     
     centemetersFloat=(metersFloat-metersInteger)*100;
@@ -629,14 +629,14 @@
         centemetersInteger++;
     }
     
-    NSLog(@"centemeters float is %f",centemetersFloat);
-    NSLog(@"cenetmeters integeri is %i",centemetersInteger);
+    //NSLog(@"centemeters float is %f",centemetersFloat);
+    //NSLog(@"cenetmeters integeri is %i",centemetersInteger);
     
-//    NSLog(@"meters rounded %i", metersInteger);
+//    //NSLog(@"meters rounded %i", metersInteger);
 //    heighTallFtOrM=metersInteger;
 //    
 //    centemetersComponent=centemetersInteger;
-//    NSLog(@"centemeteres are %i",centemetersComponent);
+//    //NSLog(@"centemeteres are %i",centemetersComponent);
     
     
     

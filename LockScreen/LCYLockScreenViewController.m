@@ -72,7 +72,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
     
     
     if (![appDelegate saveLockDictionarySettings]) {
-        NSLog(@"error syncronizing user defaults");
+        //NSLog(@"error syncronizing user defaults");
     };
 	self.enterPassCodeBanner = nil;
 	self.wrongPassCodeBanner = nil;	
@@ -105,7 +105,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 //        int firstCharacter=[uuid characterAtIndex:0];
 //        int fifthCharacter=[uuid characterAtIndex:4];
 //        
-//        NSLog(@"first character is %i fifth Character is %i",firstCharacter, fifthCharacter);
+//        //NSLog(@"first character is %i fifth Character is %i",firstCharacter, fifthCharacter);
 //        
 //        NSString *firstNumberString=[NSString stringWithFormat:@"%i",firstCharacter]; 
 //        NSString *secondNumberString=[NSString stringWithFormat:@"%i",fifthCharacter]; 
@@ -117,7 +117,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 //        if (firstNumberString.length) {
 //            subStringOne=[firstNumberString substringFromIndex:firstNumberString.length-1];
 //            subIntOne=(int)[(NSString *)subStringOne intValue];
-//            NSLog(@"subint one is %i",subIntOne);
+//            //NSLog(@"subint one is %i",subIntOne);
 //        
 //        }
 //        if (subStringTwo.length) {
@@ -126,7 +126,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 //            subStringTwo=[secondNumberString substringFromIndex:secondNumberString.length-1];
 //            subIntTwo=(int)[(NSString *)subStringTwo intValue];
 //            
-//            NSLog(@"subint two is %i",subIntTwo);
+//            //NSLog(@"subint two is %i",subIntTwo);
 //            
 //        }
 //        
@@ -173,7 +173,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 //    
 //    NSDate *referenceDate=[dateFormatter dateFromString:@"06/06/2006"];
 //    
-//    NSLog(@"reference date is %@",[dateFormatter stringFromDate:referenceDate]);
+//    //NSLog(@"reference date is %@",[dateFormatter stringFromDate:referenceDate]);
 //    
 //    //define a gregorian calandar
 //    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -197,16 +197,16 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 //    
 //    
 //    
-//    NSLog(@"days is %i",PTTUnlockSeed+day+day%7);
+//    //NSLog(@"days is %i",PTTUnlockSeed+day+day%7);
 //    NSString *leftString=(NSString *)[NSString stringWithFormat:@"%i",PTTUnlockSeed+day+thirdNumber+2%7];
 //    NSString *middleRString=(NSString *)[NSString stringWithFormat:@"%i",PTTUnlockSeed+ninethNumber+day%6];
-//    NSLog(@"left string %@",leftString);
-//    NSLog(@"left string %i",leftString.length);
+//    //NSLog(@"left string %@",leftString);
+//    //NSLog(@"left string %i",leftString.length);
 //    NSString *middleLString=(NSString *)[NSString stringWithFormat:@"%i",PTTUnlockSeed+fifthNumber+day%3+2];
 //    NSString *rightString=(NSString *)[NSString stringWithFormat:@"%i",PTTUnlockSeed+day+seventhNumber+day/9] ;
 //    
 //    
-//    NSLog(@"right string is %@",rightString);
+//    //NSLog(@"right string is %@",rightString);
 //    NSString *shortLeftStr, *shortRightStr, *shortMiddleRStr, *shortMiddleLStr;
 //    
 //    
@@ -214,7 +214,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 //    shortRightStr = [rightString substringFromIndex:[rightString length]-1];
 //    shortMiddleLStr = [middleLString substringFromIndex:[middleLString length]-1];
 //    shortMiddleRStr = [middleRString substringFromIndex:[middleRString length]-1];
-//    NSLog(@"new string is %@",[[(NSString *) [shortLeftStr stringByAppendingString:shortRightStr]stringByAppendingString:shortMiddleLStr]stringByAppendingString:shortMiddleRStr]);
+//    //NSLog(@"new string is %@",[[(NSString *) [shortLeftStr stringByAppendingString:shortRightStr]stringByAppendingString:shortMiddleLStr]stringByAppendingString:shortMiddleRStr]);
 //    
 //    //just a pseudorandom string that can be generated based on date and the seed and text message number.  I can send a text message to the number to reset
 //    
@@ -223,14 +223,14 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 //    
 //    
 //    
-//    NSLog(@"alternate string%@",alternateString);
+//    //NSLog(@"alternate string%@",alternateString);
 //    //    NSRange range;
 //    //        range.length = 3;
 //    //    range.location=alternateUnlockString.length-2;
 //    //    
 //    
 //    
-//    NSLog(@"alternate unlok string %@",alternateString);
+//    //NSLog(@"alternate unlok string %@",alternateString);
 //        
 //    }
 //    }
@@ -244,19 +244,19 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 - (BOOL) authenticatePassCode: (NSString *) userInput;
 {
 	BOOL result = NO;
-	//NSLog(@"userInput: %@", userInput);
+	////NSLog(@"userInput: %@", userInput);
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
     NSMutableDictionary *lockDictionary=(NSMutableDictionary *)[appDelegate lockValuesDictionary];
 
      BOOL ableToSave=NO;
-   NSLog(@"lock dic value for key lock p hash %@",[lockDictionary valueForKey:K_LOCK_SCREEN_P_HSH]);
+   //NSLog(@"lock dic value for key lock p hash %@",[lockDictionary valueForKey:K_LOCK_SCREEN_P_HSH]);
     
-    NSLog(@"user input %@",userInput);
+    //NSLog(@"user input %@",userInput);
     
-    NSLog(@"userinput hash %@",[appDelegate hashDataFromString:[NSString stringWithFormat:@"%@asdj9emV3k30wer93",userInput]]);
+    //NSLog(@"userinput hash %@",[appDelegate hashDataFromString:[NSString stringWithFormat:@"%@asdj9emV3k30wer93",userInput]]);
     
-    NSLog(@"passcode is %@",[self passCode]);
+    //NSLog(@"passcode is %@",[self passCode]);
     //1
     if (userInput.length==4&& [userInput isEqualToString:[self passCode]]&&[[appDelegate hashDataFromString:[NSString stringWithFormat:@"%@asdj9emV3k30wer93",userInput]]isEqualToData:[lockDictionary valueForKey:K_LOCK_SCREEN_P_HSH]])
     {
@@ -311,7 +311,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
        
         
         userAttempts++;
-        NSLog(@"user attempts %i",userAttempts);
+        //NSLog(@"user attempts %i",userAttempts);
         
        
         //2
@@ -450,12 +450,12 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
         userAttempts=20;
     }
     isTimerOn_=FALSE;
-   NSLog(@"timer is %i",isTimerOn_);
+   //NSLog(@"timer is %i",isTimerOn_);
     
     if (lockDictionary&&[lockDictionary objectForKey:K_LOCK_SCREEN_TIMER_ON]) 
     {
     isTimerOn_=(BOOL)[(NSNumber *)[lockDictionary valueForKey:K_LOCK_SCREEN_TIMER_ON]boolValue];
-  NSLog(@"timer is %i",isTimerOn_);
+  //NSLog(@"timer is %i",isTimerOn_);
     }
     else {
         isTimerOn_=YES;
@@ -519,7 +519,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
     
     [lockDictionary setValue:[NSNumber numberWithBool:isTimerOn_] forKey:K_LOCK_SCREEN_TIMER_ON];
     if (![appDelegate saveLockDictionarySettings]) {
-        NSLog(@"unable to syncronize defaults");
+        //NSLog(@"unable to syncronize defaults");
     }
 }
 - (void) handleCompleteUserInput:(NSString *) userInput;

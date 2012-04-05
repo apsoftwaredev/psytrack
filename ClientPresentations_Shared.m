@@ -629,7 +629,7 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 
-NSLog(@"tableview model tag is %i",tableViewModel.tag);
+//NSLog(@"tableview model tag is %i",tableViewModel.tag);
     
  
 
@@ -666,7 +666,7 @@ NSLog(@"tableview model tag is %i",tableViewModel.tag);
 
 -(void)tableViewControllerDidDisappear:(SCTableViewController *)tableViewController cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped{
 
-NSLog(@"detail view will appear for row at index path");
+//NSLog(@"detail view will appear for row at index path");
 
 
 }
@@ -679,9 +679,9 @@ NSLog(@"detail view will appear for row at index path");
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 
 
-NSLog(@"cell text is %@",cell.textLabel.text);
-    NSLog(@"section is %i",indexPath.section);
-    NSLog(@"tablemodel is %i",tableViewModel.tag);
+//NSLog(@"cell text is %@",cell.textLabel.text);
+    //NSLog(@"section is %i",indexPath.section);
+    //NSLog(@"tablemodel is %i",tableViewModel.tag);
     if ((tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Wechsler Test Age"])||(tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Test Age"])) 
     {
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
@@ -703,7 +703,7 @@ NSLog(@"cell text is %@",cell.textLabel.text);
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index{
 
-    NSLog(@"tableviewmodel tab is %i",tableViewModel.tag);
+    //NSLog(@"tableviewmodel tab is %i",tableViewModel.tag);
 
     if (tableViewModel.tag==3&&index==0) 
     {
@@ -730,7 +730,7 @@ SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
 //    }
 
 
-NSLog(@"did add section at index header title is %@",section.headerTitle);
+//NSLog(@"did add section at index header title is %@",section.headerTitle);
 
 if(section.headerTitle !=nil)
 {
@@ -794,10 +794,10 @@ if(section.headerTitle !=nil)
         ClientsSelectionCell *clientObjectsSelectionCell=(ClientsSelectionCell *)clientCell;
         if (clientObjectsSelectionCell.clientObject) {
        
-        NSLog(@"client objects selection cell %@",[clientObjectsSelectionCell.clientObject valueForKey:@"dateOfBirth"]);
+        //NSLog(@"client objects selection cell %@",[clientObjectsSelectionCell.clientObject valueForKey:@"dateOfBirth"]);
         
 //        NSArray *array=[[NSArray alloc]init];
-       NSLog(@"cleint object %@",clientObjectsSelectionCell.clientObject);
+       //NSLog(@"cleint object %@",clientObjectsSelectionCell.clientObject);
 //        int itemsCount=clientObjectsSelectionCell.items.count;
 //        if (itemsCount>=0&&clientObjectsSelectionCell.clientObject) {
 ////            clientDateOfBirth=(NSDate *)[(NSArray *)[clientObjectsSelectionCell.items valueForKey:@"dateOfBirth"]lastObject];
@@ -820,14 +820,14 @@ if(section.headerTitle !=nil)
         
        
         
-        NSLog(@"client date of birth is %@",clientDateOfBirth);
+        //NSLog(@"client date of birth is %@",clientDateOfBirth);
     }
-    NSLog(@"client cell class is  %@", [clientCell class]);
+    //NSLog(@"client cell class is  %@", [clientCell class]);
         
     
-//    NSLog(@"client cell bound object %@",[clientManagedObject valueForKey:@"client.dateOfBirth"]);
-//   NSLog(@"client date of birth is %@", [clientCell.boundObject valueForKey:@"dateOfBirth"]);
-    NSLog(@"master model is %@",self.serviceDatePickerDate);
+//    //NSLog(@"client cell bound object %@",[clientManagedObject valueForKey:@"client.dateOfBirth"]);
+//   //NSLog(@"client date of birth is %@", [clientCell.boundObject valueForKey:@"dateOfBirth"]);
+    //NSLog(@"master model is %@",self.serviceDatePickerDate);
    
     if (serviceDatePickerDate && clientDateOfBirth) {
         wechslerAgeCell.label.text=(NSString *)[clientsViewController_Shared calculateWechslerAgeWithBirthdate:(NSDate *)clientDateOfBirth toDate:(NSDate *)serviceDatePickerDate];
@@ -858,7 +858,7 @@ if(section.headerTitle !=nil)
     
 }
 -(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
-NSLog(@"tablemodel tag in validate cell is %i",tableViewModel.tag);
+//NSLog(@"tablemodel tag in validate cell is %i",tableViewModel.tag);
 
     if (tableViewModel.tag==3){
         
@@ -867,7 +867,7 @@ NSLog(@"tablemodel tag in validate cell is %i",tableViewModel.tag);
         
         if ([cell isKindOfClass:[ClientsSelectionCell class]]) {
             ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)cell;
-            NSLog(@"client selection cell boud object is %@",clientSelectionCell.boundObject);
+            //NSLog(@"client selection cell boud object is %@",clientSelectionCell.boundObject);
             if (clientSelectionCell.clientObject) {
                 return YES;
             }

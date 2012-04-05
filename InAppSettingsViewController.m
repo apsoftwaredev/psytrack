@@ -100,11 +100,11 @@
 //            bool didSave=FALSE;
 //            didSave = ABAddressBookSave(addressBook, nil);
 //            
-//            if (!didSave) {/* Handle error here. */  NSLog(@"addressbook did not save");}
-//            else NSLog(@"addressbook saved");
+//            if (!didSave) {/* Handle error here. */  //NSLog(@"addressbook did not save");}
+//            else //NSLog(@"addressbook saved");
 //        } 
 //        else {
-//            NSLog(@"address book revert becaus no changes");
+//            //NSLog(@"address book revert becaus no changes");
 //            ABAddressBookRevert(addressBook);
 //            
 //        }
@@ -142,7 +142,7 @@
         ABSourcesSCObjectSelectionCell *sourcesSelectionCell=[[ABSourcesSCObjectSelectionCell alloc]initWithText:@"Source" withBoundKey:@"name" withSelectedIndexValue:nil withItems:sourcesArray];
         
 
-    NSLog(@"sources array is %@",sourcesArray);
+    //NSLog(@"sources array is %@",sourcesArray);
         sourcesSelectionCell.allowAddingItems=NO;
         sourcesSelectionCell.allowDeletingItems=NO;
         sourcesSelectionCell.allowEditDetailView=NO;
@@ -159,7 +159,7 @@
         
     int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
     NSString *groupName=[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
-    NSLog(@"group identifier is %i",groupIdentifier);
+    //NSLog(@"group identifier is %i",groupIdentifier);
    
         ABRecordRef source=nil;
         int sourceID=[self defaultABSourceID];
@@ -185,7 +185,7 @@
     }
     
     groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
- NSLog(@"group identifier is after add new is %i",groupIdentifier);
+ //NSLog(@"group identifier is after add new is %i",groupIdentifier);
   
     
     groupArray=[self addressBookGroupsArray];
@@ -343,7 +343,7 @@
             if ([source.title isEqualToString: @"iCloud"])
             {
                 mySource = source;
-//                NSLog(@"cloud source type is %@",source.sourceType);
+//                //NSLog(@"cloud source type is %@",source.sourceType);
                 
                 break;
             }
@@ -415,17 +415,17 @@
     
     
     
-    NSLog(@"cal id = %@", self.psyTrackCalendar.calendarIdentifier);
+    //NSLog(@"cal id = %@", self.psyTrackCalendar.calendarIdentifier);
     
     NSError *error;
     
     if (![self.eventStore saveCalendar:self.psyTrackCalendar commit:YES error:&error ]) 
     {
-        NSLog(@"something didn't go right");
+        //NSLog(@"something didn't go right");
     }
     else
     {
-        NSLog(@"saved calendar");
+        //NSLog(@"saved calendar");
         [[NSUserDefaults standardUserDefaults]setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
         //                 NSSet *calendars=(NSSet *)[localSource calendars];
         //                    for(id obj in calendars) { 
@@ -453,7 +453,7 @@
     
     if (self.psyTrackCalendar) 
     {
-        NSLog(@"self %@",self.psyTrackCalendar);
+        //NSLog(@"self %@",self.psyTrackCalendar);
     }
     
     
@@ -607,7 +607,7 @@
                     intValue];
     
     
-    NSLog(@"source record id is %i",recordID);
+    //NSLog(@"source record id is %i",recordID);
     if (recordID!=-1) {
         for (MySource *source in sourceArray){
             
@@ -616,7 +616,7 @@
                 sourceIndex = (NSNumber *)[NSNumber numberWithInt:[sourceArray indexOfObject:source]];
 
                 
-                //                NSLog(@"cloud source type is %@",source.sourceType);
+                //                //NSLog(@"cloud source type is %@",source.sourceType);
                 return sourceIndex;
                 break;
             }
@@ -626,7 +626,7 @@
 
     }
     if (sourceArray.count &&  iCloudEnabled) {
-//        NSLog(@"iCloud access at %@", ubiq);
+//        //NSLog(@"iCloud access at %@", ubiq);
 
   
         for (MySource *source in sourceArray){
@@ -636,7 +636,7 @@
                sourceIndex = (NSNumber *)[NSNumber numberWithInt:[sourceArray indexOfObject:source]];
                 
                 
-                //                NSLog(@"cloud source type is %@",source.sourceType);
+                //                //NSLog(@"cloud source type is %@",source.sourceType);
                 
                 return sourceIndex;
                 break;
@@ -784,7 +784,7 @@ if(sourceArray.count>1)
             SCSelectionCell *selectionCell=(SCSelectionCell *)[section cellAtIndex:0];
             textField.font=selectionCell.label.font;
             textField.textColor=selectionCell.label.textColor;
-            NSLog(@"group name is %@", groupName);
+            //NSLog(@"group name is %@", groupName);
             [tableViewModel.modelKeyValues setValue:groupName forKey:@"groupNameString"];
             [tableViewModel.modelKeyValues setValue:[NSNumber numberWithBool:autoAddClinicianToGroup] forKey:@"autoAddClinicianToGroup"];
         }
@@ -808,19 +808,19 @@ if(sourceArray.count>1)
     if (sourcesArray.count) {
         
         selectedIndex=[self defaultABSourceInSourceArray:sourcesArray ];
-        NSLog(@"selected index is %@",selectedIndex);
+        //NSLog(@"selected index is %@",selectedIndex);
     }
 
 
     if (tableViewModel.tag==429 ) {
        
           
-            NSLog(@"cell bound object is %@",cell.boundObject);
-            NSLog(@"cell bound object class is %@",[cell.boundObject class]);
-            NSLog(@"cell class is %@",[cell class]);
+            //NSLog(@"cell bound object is %@",cell.boundObject);
+            //NSLog(@"cell bound object class is %@",[cell.boundObject class]);
+            //NSLog(@"cell class is %@",[cell class]);
             if ([cell.boundObject isKindOfClass:[MySource class]]) {
                 MySource *mySource=(MySource *)cell.boundObject;
-                NSLog(@"cell text label is %@",cell.textLabel.text);
+                //NSLog(@"cell text label is %@",cell.textLabel.text);
                 cell.textLabel.text=mySource.name;
                 
             }
@@ -846,9 +846,9 @@ if(sourceArray.count>1)
     if (tableViewModel.tag==0) {
         SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
         
-        NSLog(@"cell class is %@",[cell class]);
+        //NSLog(@"cell class is %@",[cell class]);
         
-        NSLog(@"cell tag is %i",cell.tag);
+        //NSLog(@"cell tag is %i",cell.tag);
         if (cell.tag==3&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
             
             
@@ -911,7 +911,7 @@ if(sourceArray.count>1)
 		case 301:
         {
             NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
-			NSLog(@"button 301 pressed group name string is %@ ",groupNameString);
+			//NSLog(@"button 301 pressed group name string is %@ ",groupNameString);
              NSString *currentNameString=[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
             
             if (groupNameString && groupNameString.length && ![groupNameString isEqualToString:currentNameString]) {
@@ -937,7 +937,7 @@ if(sourceArray.count>1)
 
             
             if ([selectedIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
-                NSLog(@"nothing selected");
+                //NSLog(@"nothing selected");
                 
                
           
@@ -979,11 +979,11 @@ if(sourceArray.count>1)
                         bool didSave=FALSE;
                         didSave = ABAddressBookSave(addressBook, nil);
                         
-                        if (!didSave) {/* Handle error here. */  NSLog(@"addressbook did not save");}
-                        else NSLog(@"addressbook saved");
+//                        if (!didSave) {/* Handle error here. */  //NSLog(@"addressbook did not save");}
+//                        else //NSLog(@"addressbook saved");
                     } 
                     else {
-                        NSLog(@"address book revert becaus no changes");
+                        //NSLog(@"address book revert becaus no changes");
                         ABAddressBookRevert(addressBook);
                         
                     }
@@ -994,19 +994,19 @@ if(sourceArray.count>1)
                 
                 NSString *selectedItemString=(NSString *)[mutableArray objectAtIndex:[selectedIndex integerValue]];
                 
-            NSLog(@"selected item string %@",selectedItemString);
+            //NSLog(@"selected item string %@",selectedItemString);
             [mutableArray removeObjectAtIndex:[selectedIndex intValue]];
             [mutableArray insertObject:groupNameString atIndex:[selectedIndex intValue]];
             NSArray *itemsArray=[NSArray arrayWithArray:mutableArray];
                 
             
-            NSLog(@"items array is %@",itemsArray);
+            //NSLog(@"items array is %@",itemsArray);
             selectedItemString=groupNameString;
-                NSLog(@"group name string is %@",selectedItemString);
+                //NSLog(@"group name string is %@",selectedItemString);
                 aBGroupSelectionCell.items=itemsArray;
         
             aBGroupSelectionCell.label.text=groupNameString;
-                NSLog(@"group names are %@",aBGroupSelectionCell.items);
+                //NSLog(@"group names are %@",aBGroupSelectionCell.items);
                 
 //                CFRelease(CFGroupRecord);
                 
@@ -1020,7 +1020,7 @@ if(sourceArray.count>1)
             NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
 			
             
-            NSLog(@"button add pressed group name string is %@ ",groupNameString);
+            //NSLog(@"button add pressed group name string is %@ ",groupNameString);
             
             if (groupNameString && groupNameString.length ) {
                 
@@ -1087,11 +1087,11 @@ if(sourceArray.count>1)
 //                            bool didSave=FALSE;
 //                            didSave = ABAddressBookSave(addressBook, nil);
 //                            
-//                            if (!didSave) {/* Handle error here. */  NSLog(@"addressbook did not save");}
-//                            else NSLog(@"addressbook saved");
+//                            if (!didSave) {/* Handle error here. */  //NSLog(@"addressbook did not save");}
+//                            else //NSLog(@"addressbook saved");
 //                        } 
 //                        else {
-//                            NSLog(@"address book revert becaus no changes");
+//                            //NSLog(@"address book revert becaus no changes");
 //                            ABAddressBookRevert(addressBook);
 //                            
 //                        }
@@ -1110,8 +1110,8 @@ if(sourceArray.count>1)
                     
 
                     aBGroupSelectionCell.label.text=groupNameString;
-                    NSLog(@"group names are %@",aBGroupSelectionCell.items);
-                    NSLog(@"selected item index is %i",[selectedIndex intValue]);
+                    //NSLog(@"group names are %@",aBGroupSelectionCell.items);
+                    //NSLog(@"selected item index is %i",[selectedIndex intValue]);
                 }
             }
         }
@@ -1163,7 +1163,7 @@ if(sourceArray.count>1)
         case 304:
         {
             NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
-			NSLog(@"button 304 pressed group name string is %@ ",groupNameString);
+			//NSLog(@"button 304 pressed group name string is %@ ",groupNameString);
 //            
             
             
@@ -1228,11 +1228,11 @@ if(sourceArray.count>1)
             //            bool didSave=FALSE;
             //            didSave = ABAddressBookSave(addressBook, nil);
             //            
-            //            if (!didSave) {/* Handle error here. */  NSLog(@"addressbook did not save");}
-            //            else NSLog(@"addressbook saved");
+            //            if (!didSave) {/* Handle error here. */  //NSLog(@"addressbook did not save");}
+            //            else //NSLog(@"addressbook saved");
             //        } 
             //        else {
-            //            NSLog(@"address book revert becaus no changes");
+            //            //NSLog(@"address book revert becaus no changes");
             //            ABAddressBookRevert(addressBook);
             //            
             //        }
@@ -1258,7 +1258,7 @@ if(sourceArray.count>1)
         case 305:
         {
             NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
-			NSLog(@"button 305 pressed group name string is %@ ",groupNameString);
+			//NSLog(@"button 305 pressed group name string is %@ ",groupNameString);
             
             int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
             
@@ -1396,11 +1396,11 @@ if(sourceArray.count>1)
                             
                             didSave = ABAddressBookSave(addressBook, nil);
                             
-                            if (!didSave) {/* Handle error here. */  NSLog(@"addressbook did not save");}
-                            else NSLog(@"addressbook saved");
+//                            if (!didSave) {/* Handle error here. */  //NSLog(@"addressbook did not save");}
+//                            else //NSLog(@"addressbook saved");
                         } 
                         else {
-                            NSLog(@"address book revert becaus no changes");
+                            //NSLog(@"address book revert becaus no changes");
                             ABAddressBookRevert(addressBook);
                             
                         }
@@ -1462,18 +1462,18 @@ if(sourceArray.count>1)
         if (addressBook) {
             CFRelease(addressBook);
         }
-        NSLog(@"button index is %i", buttonIndex);
+        //NSLog(@"button index is %i", buttonIndex);
         
     }
-    else {
-        NSLog(@"button index is %i", buttonIndex);
-    }
+//    else {
+//        //NSLog(@"button index is %i", buttonIndex);
+//    }
 
     }
     
     else if (alertView.tag==2){
         
-        NSLog(@"button index is %i", buttonIndex);
+        //NSLog(@"button index is %i", buttonIndex);
 
         if (buttonIndex==1) {
             [self importAllContactsInGroup];
@@ -1547,12 +1547,12 @@ if(sourceArray.count>1)
 //        if (section.cellCount) {
 //            SCTableViewCell *cell=[section cellAtIndex:0];
 //           
-//            NSLog(@"cell bound object is %@",cell.boundObject);
-//            NSLog(@"cell bound object class is %@",[cell.boundObject class]);
-//            NSLog(@"cell class is %@",[cell class]);
+//            //NSLog(@"cell bound object is %@",cell.boundObject);
+//            //NSLog(@"cell bound object class is %@",[cell.boundObject class]);
+//            //NSLog(@"cell class is %@",[cell class]);
 //            if ([cell.boundObject isKindOfClass:[MySource class]]) {
 //                MySource *mySource=(MySource *)cell.boundObject;
-//                NSLog(@"cell text label is %@",cell.textLabel.text);
+//                //NSLog(@"cell text label is %@",cell.textLabel.text);
 //                cell.textLabel.text=@"test";
 //                
 //            }
@@ -1572,7 +1572,7 @@ if(sourceArray.count>1)
     {
         SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
         
-        NSLog(@"cell tag is %i",cell.tag);
+        //NSLog(@"cell tag is %i",cell.tag);
         switch (cell.tag) {
             case 1:
             {
@@ -1587,11 +1587,11 @@ if(sourceArray.count>1)
                     
                     if (![self.eventStore saveCalendar:self.psyTrackCalendar commit:YES error:&error ]) 
                     {
-                        NSLog(@"something didn't go right");
+                        //NSLog(@"something didn't go right");
                     }
                     else
                     {
-                        NSLog(@"saved calendar");
+                        //NSLog(@"saved calendar");
                         NSString *calenderIdentifier=self.psyTrackCalendar.calendarIdentifier;
                         [[NSUserDefaults standardUserDefaults] setValue:calenderIdentifier forKey:@"defaultCalendarIdentifier"];
                         [[NSUserDefaults standardUserDefaults] setValue:psyTrackCalendar.title forKey:@"calendar_name"];
@@ -1640,7 +1640,7 @@ if(sourceArray.count>1)
                     SCTextFieldCell *calendarLocationTextFieldCell=(SCTextFieldCell *)cell;
                     UITextField *caladnerLocationTextField=(UITextField *) calendarLocationTextFieldCell.textField;
                     
-                    NSLog(@"location text%@",caladnerLocationTextField.text);
+                    //NSLog(@"location text%@",caladnerLocationTextField.text);
                     [[NSUserDefaults standardUserDefaults] setValue:caladnerLocationTextField.text forKey:@"calander_location"];
                     
                     [[NSUserDefaults standardUserDefaults]synchronize];
@@ -1682,9 +1682,9 @@ if(sourceArray.count>1)
                         
                         groupIdentifier=(int)[(NSNumber *)[dictionaryABGroupIdentifierValueForArrayOfStringsIndexKey objectForKey:[[selectionCell selectedItemIndex]stringValue]]intValue];
                         
-                        NSLog(@"group strings index is keys are%@",[dictionaryABGroupIdentifierValueForArrayOfStringsIndexKey allKeys]);
+                        //NSLog(@"group strings index is keys are%@",[dictionaryABGroupIdentifierValueForArrayOfStringsIndexKey allKeys]);
                         
-                        NSLog(@"group identifiers keys are %@",[dictionaryArrayOfStringsIndexForGroupIdentifierKey allKeys]);
+                        //NSLog(@"group identifiers keys are %@",[dictionaryArrayOfStringsIndexForGroupIdentifierKey allKeys]);
                         [[NSUserDefaults standardUserDefaults] setInteger:groupIdentifier forKey:kPTTAddressBookGroupIdentifier];
                         
                         
@@ -1715,12 +1715,12 @@ if(sourceArray.count>1)
                         
                         if (groupCount) {
                             
-                            NSLog(@"group identifier %i",groupIdentifier);
-                            NSLog(@"address book %@", addressBook);
+                            //NSLog(@"group identifier %i",groupIdentifier);
+                            //NSLog(@"address book %@", addressBook);
                     
                             
                             ABRecordRef group;
-//                            NSLog(@"group is %@",group);
+//                            //NSLog(@"group is %@",group);
 
                              group=(ABRecordRef)ABAddressBookGetGroupWithRecordID((ABAddressBookRef )addressBook, (ABRecordID)groupIdentifier);
                             
@@ -1728,7 +1728,7 @@ if(sourceArray.count>1)
                             CFStringRef chosenGroupName=(CFStringRef) ABRecordCopyValue((ABRecordRef) group, (ABPropertyID) kABGroupNameProperty);
                             
                                 
-                                                            NSLog(@"group name set is %@",(__bridge NSString *)chosenGroupName);
+                                                            //NSLog(@"group name set is %@",(__bridge NSString *)chosenGroupName);
                             
                             [[NSUserDefaults standardUserDefaults] setValue:(__bridge NSString *)chosenGroupName forKey:kPTTAddressBookGroupName];
                             
@@ -1774,7 +1774,7 @@ if(sourceArray.count>1)
                 if ([cell isKindOfClass:[SCControlCell class]]) {
                 
                 
-                NSLog(@"value changed for auto add is %i", [(NSNumber *)[tableViewModel.modelKeyValues valueForKey:@"autoAddClinicianToGroup"]boolValue]);
+                //NSLog(@"value changed for auto add is %i", [(NSNumber *)[tableViewModel.modelKeyValues valueForKey:@"autoAddClinicianToGroup"]boolValue]);
                     BOOL autoAddClinicianToGroup=(BOOL)[(NSNumber *)[tableViewModel.modelKeyValues valueForKey:@"autoAddClinicianToGroup"]boolValue];
                     
                     BOOL autoAddCliniciansAlreadySet=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
@@ -1840,11 +1840,11 @@ if(sourceArray.count>1)
                             //                            bool didSave=FALSE;
                             //                            didSave = ABAddressBookSave(addressBook, nil);
                             //                            
-                            //                            if (!didSave) {/* Handle error here. */  NSLog(@"addressbook did not save");}
-                            //                            else NSLog(@"addressbook saved");
+                            //                            if (!didSave) {/* Handle error here. */  //NSLog(@"addressbook did not save");}
+                            //                            else //NSLog(@"addressbook saved");
                             //                        } 
                             //                        else {
-                            //                            NSLog(@"address book revert becaus no changes");
+                            //                            //NSLog(@"address book revert becaus no changes");
                             //                            ABAddressBookRevert(addressBook);
                             //                            
                             //                        }
@@ -1863,8 +1863,8 @@ if(sourceArray.count>1)
                             
                             NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
                             aBGroupSelectionCell.label.text=groupNameString;
-                            NSLog(@"group names are %@",aBGroupSelectionCell.items);
-                            NSLog(@"selected item index is %i",[selectedIndex intValue]);
+                            //NSLog(@"group names are %@",aBGroupSelectionCell.items);
+                            //NSLog(@"selected item index is %i",[selectedIndex intValue]);
                         }
 
                         
@@ -1883,7 +1883,7 @@ if(sourceArray.count>1)
                 //                    SCTextFieldCell *groupNameTextFieldCell=(SCTextFieldCell *)cell;
                 //                    UITextField *groupNameTextField=(UITextField *) groupNameTextFieldCell.textField;
                 //                  
-                //                    NSLog(@"groupName Field text%@",groupNameTextField.text);
+                //                    //NSLog(@"groupName Field text%@",groupNameTextField.text);
                 //                   
                 //                        
                 //                   
@@ -1903,7 +1903,7 @@ if(sourceArray.count>1)
                 //                            
                 //                        
                 //                        NSString *groupNameInStringsArray=(NSString *)[groupSelectionCell.items objectAtIndex: [groupSelectionCell.selectedItemIndex intValue] ];
-                //                        NSLog(@"group name in strig array is %@",groupNameInStringsArray);
+                //                        //NSLog(@"group name in strig array is %@",groupNameInStringsArray);
                 //                        
                 //                        groupNameInStringsArray =[[NSUserDefaults standardUserDefaults] valueForKey:kAddressBookGroupName];
                 //                        groupSelectionCell.label.text=groupNameTextField.text;
@@ -1962,7 +1962,7 @@ if(sourceArray.count>1)
 //    
 //    SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
 //    
-//    NSLog(@"cell tag is %i",cell.tag);
+//    //NSLog(@"cell tag is %i",cell.tag);
 //    if (indexPath.section==1 && cell.tag==4) {
 //           
 //    SCTableViewSection *section=(SCTableViewSection*)[tableViewModel sectionAtIndex:1];
@@ -2064,7 +2064,7 @@ if(sourceArray.count>1)
             
         }
                 
-           NSLog(@"group name is %@",CFGroupName);   
+           //NSLog(@"group name is %@",CFGroupName);   
             //check to see if the group name exists already
            
         ABRecordRef source=nil;
@@ -2089,7 +2089,7 @@ if(sourceArray.count>1)
             if (groupCount&&!group ) {
                 
                 
-                NSLog(@"cggroups array %@",allGroupsInSource);
+                //NSLog(@"cggroups array %@",allGroupsInSource);
                 
                 
                 for (CFIndex i = 0; i < groupCount; i++) {
@@ -2103,7 +2103,7 @@ if(sourceArray.count>1)
                                                                                       1
                                                                                       );
                     
-                    NSLog(@"result is %ld and %d",result,kCFCompareEqualTo);
+                    //NSLog(@"result is %ld and %d",result,kCFCompareEqualTo);
                     if (result==0) {
                         group=groupInCheckNameArray;
                         break;
@@ -2111,7 +2111,7 @@ if(sourceArray.count>1)
 //                    CFRelease(CFGroupsCheckNameArray); 
 //                    CFRelease(CFGroupNameCheck);
                     
-                    NSLog(@"group is %@",group);
+                    //NSLog(@"group is %@",group);
                     
                 }
             }
@@ -2145,7 +2145,7 @@ if(sourceArray.count>1)
 //        
 //        //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
 //        
-//        //        NSLog(@"group composite name is %@",groupRecord.compositeName);
+//        //        //NSLog(@"group composite name is %@",groupRecord.compositeName);
 //        
 //        bool didSetGroupName=FALSE;
 //        didSetGroupName= (bool) ABRecordSetValue (
@@ -2154,7 +2154,7 @@ if(sourceArray.count>1)
 //                                                  (__bridge CFStringRef)groupName  ,
 //                                                  nil
 //                                                  );  
-//        //        NSLog(@"group record identifier is %i",groupRecord.recordID);
+//        //        //NSLog(@"group record identifier is %i",groupRecord.recordID);
 //        
 //        BOOL wantToSaveChanges=TRUE;
 //        if (ABAddressBookHasUnsavedChanges(addressBook)) {
@@ -2176,9 +2176,9 @@ if(sourceArray.count>1)
 //        
 //        //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
 //        
-//        NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
+//        //NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
 //
-//        NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
+//        //NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
 //        groupIdentifier=ABRecordGetRecordID(group);
 //        
 //        
@@ -2213,7 +2213,7 @@ if(sourceArray.count>1)
     if (groupCount) {
    
            allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
-       NSLog(@"cggroups array %@",(__bridge NSArray *) allGroupsInSource);
+       //NSLog(@"cggroups array %@",(__bridge NSArray *) allGroupsInSource);
         
         if (allGroupsInSource) {
         
@@ -2243,7 +2243,7 @@ if(sourceArray.count>1)
             }     
          
             
-            NSLog(@"array of group names %@",allGroups);
+            //NSLog(@"array of group names %@",allGroups);
             CFRelease(allGroupsInSource);
     //        CFRelease(CFGroupName);
             
@@ -2348,7 +2348,7 @@ if(sourceArray.count>1)
     {
         
         
-        NSLog(@"cggroups array %@",allGroupsInSource);
+        //NSLog(@"cggroups array %@",allGroupsInSource);
         
         
         for (CFIndex i = 0; i < groupCount; i++) {
@@ -2366,8 +2366,8 @@ if(sourceArray.count>1)
             
             NSString *checkNameStr=[NSString stringWithFormat:@"%@",(__bridge NSString*) CFGroupNameCheck];
             
-           NSLog(@"cfgroupname is %@",checkNameStr);
-            NSLog(@"groupname Str is %@",groupName);
+           //NSLog(@"cfgroupname is %@",checkNameStr);
+            //NSLog(@"groupname Str is %@",groupName);
             if ([checkNameStr isEqualToString:groupName]) {
                 group=groupInCheckNameArray;
                 groupIdentifier=ABRecordGetRecordID(group);
@@ -2379,11 +2379,11 @@ if(sourceArray.count>1)
                 }
                
                 if (group) {
-                    NSLog(@"group is %@",group);
+                    //NSLog(@"group is %@",group);
                 }
                 
                 else {
-                    NSLog(@"no group");
+                    //NSLog(@"no group");
                 } 
                 break;
             }
@@ -2429,10 +2429,10 @@ if(sourceArray.count>1)
         
         //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
         
-        //        NSLog(@"group composite name is %@",groupRecord.compositeName);
+        //        //NSLog(@"group composite name is %@",groupRecord.compositeName);
         
         
-        //        NSLog(@"group record identifier is %i",groupRecord.recordID);
+        //        //NSLog(@"group record identifier is %i",groupRecord.recordID);
         
         bool didSetGroupName=FALSE;
         didSetGroupName= (bool) ABRecordSetValue (
@@ -2451,8 +2451,8 @@ if(sourceArray.count>1)
                 bool didSave=FALSE;
                 didSave = ABAddressBookSave(addressBook, nil);
                 
-                if (!didSave) {/* Handle error here. */  NSLog(@"addressbook did not save");}
-                else NSLog(@"addresss book saved new group.");
+//                if (!didSave) {/* Handle error here. */  //NSLog(@"addressbook did not save");}
+//                else //NSLog(@"addresss book saved new group.");
                 
             } 
             else {
@@ -2465,9 +2465,9 @@ if(sourceArray.count>1)
        
         //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
         
-        NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
+        //NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
         
-        NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
+        //NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
         
         
         
@@ -2849,7 +2849,7 @@ if (addressBook) {
                        intValue];
     
     
-    NSLog(@"source record id is %i",recordID);
+    //NSLog(@"source record id is %i",recordID);
     if (continueChecking && recordID!=-1) {
         
         source=ABAddressBookGetSourceWithRecordID(addressBook, recordID);

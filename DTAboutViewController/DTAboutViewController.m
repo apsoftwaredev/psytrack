@@ -182,7 +182,7 @@
 		}
 		else
 		{
-			NSLog(@"only file URL properly supported for type 'Image'");
+			//NSLog(@"only file URL properly supported for type 'Image'");
 			
 			NSData *data = [NSData dataWithContentsOfURL:imageURL];
 			UIImage *image = [UIImage imageWithData:data];
@@ -834,7 +834,7 @@
 	}
 	else
 	{
-		NSLog(@"Could not find row with title '%@'", button.titleLabel.text);
+		//NSLog(@"Could not find row with title '%@'", button.titleLabel.text);
 	}
 }
 
@@ -930,7 +930,7 @@
 		[self performAboutAction:command withObject:nil];
 	}
 
-    NSLog(@"button index %i", buttonIndex);
+    //NSLog(@"button index %i", buttonIndex);
 }
 
 

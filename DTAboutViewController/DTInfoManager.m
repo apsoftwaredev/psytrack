@@ -267,10 +267,10 @@ static DTInfoManager *_sharedInstance = nil;
 			
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"DTInfoManagerDictionaryUpdated" object:nil userInfo:nil];
 		}
-		else
-		{
-			NSLog(@"Cannot update dictionary from URL %@", updateURL);
-		}
+//		else
+//		{
+//			//NSLog(@"Cannot update dictionary from URL %@", updateURL);
+//		}
 	}
 	
 	

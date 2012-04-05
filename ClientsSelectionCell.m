@@ -60,7 +60,7 @@
 - (void)didSelectCell
 {
     
-    NSLog(@"client %@",[self.boundObject valueForKey:@"client"]);
+    ////NSLog(@"client %@",[self.boundObject valueForKey:@"client"]);
    
    
     
@@ -78,7 +78,7 @@
     
     
     
-//    NSLog(@"clientobject selection itemset %@",mutableSet);
+//    ////NSLog(@"clientobject selection itemset %@",mutableSet);
     
 //    SCObjectSelectionSection *objectSelectionSection=[SCObjectSelectionSection sectionWithHeaderTitle:nil withItemsSet:mutableSet withClassDefinition:clientsViewController_Shared.clientDef];
 //    
@@ -152,7 +152,7 @@
 
         
         
-        NSLog(@"already selected Clients are%@",self.alreadySelectedClients);
+        ////NSLog(@"already selected Clients are%@",self.alreadySelectedClients);
         
         
            
@@ -195,7 +195,7 @@
 //    NSError *error = nil;
 //    NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
 //    if (fetchedObjects == nil) {
-//        NSLog(@"no items");
+//        ////NSLog(@"no items");
 //    }
 //    NSMutableArray *arrayWithFetchedWithoutAlreadySelected=[NSMutableArray arrayWithArray:fetchedObjects];
    
@@ -204,7 +204,7 @@
     
 //    if (!hasChangedClients && [self.boundObject valueForKey:@"client"]) {
 //               
-//      NSLog(@"self itmes are %@",self.items);
+//      ////NSLog(@"self itmes are %@",self.items);
 //    
 //      
     if (!hasChangedClients) {
@@ -255,7 +255,7 @@
 //       
 //        
 //       clientIDCodeString = (NSString *)[clientObject valueForKey:@"clientIDCode"];
-//        NSLog(@"client id code %@",(NSString *)[clientObject valueForKey:@"clientIDCode"]);
+//        ////NSLog(@"client id code %@",(NSString *)[clientObject valueForKey:@"clientIDCode"]);
 //
 //    }
 // 
@@ -341,7 +341,7 @@
 
 -(void)didChange:(NSKeyValueChange)changeKind valuesAtIndexes:(NSIndexSet *)indexes forKey:(NSString *)key{
 
-NSLog(@"did change values for key");
+////NSLog(@"did change values for key");
 
 
 }

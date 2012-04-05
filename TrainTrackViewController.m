@@ -282,7 +282,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
 //                        
 //                        
 //                        
-//                        NSLog(@"cellManagedObject%@",clinicianObject.combinedName);
+//                        //NSLog(@"cellManagedObject%@",clinicianObject.combinedName);
 //                    
 //                        
 //            }
@@ -374,7 +374,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
             SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
              NSEntityDescription *clinicianEnitityDesc=[NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext];
             
-            NSLog(@"items count is %i",[arrayOfObjectsSection.itemsSet count]);
+            //NSLog(@"items count is %i",[arrayOfObjectsSection.itemsSet count]);
             if ([arrayOfObjectsSection.items count]>1) {
                
               
@@ -474,7 +474,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     SCTableViewCell *cell =(SCTableViewCell *) [tableViewModel cellAtIndexPath:indexPath];
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
     
-    NSLog(@"index path section %i",indexPath.section);
+    //NSLog(@"index path section %i",indexPath.section);
     if (tableViewModel.tag==0) {
     
     switch (cell.tag) {
@@ -482,7 +482,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
         case 0:
         {
             if (indexPath.section==0) {
-                 NSLog(@"selected zero");
+                 //NSLog(@"selected zero");
                 if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
                     SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
                     
@@ -714,7 +714,7 @@ else {
 {
 	PTTAppDelegate *appDelegate =  (PTTAppDelegate *)	[[UIApplication sharedApplication] delegate];
     
-	NSLog(@"app passcode is: %@", [appDelegate appLockPasscode]);	
+	//NSLog(@"app passcode is: %@", [appDelegate appLockPasscode]);	
 	
     [appDelegate lockApplication];
 //	if ([appDelegate isPasscodeOn])

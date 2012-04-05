@@ -52,13 +52,13 @@
 //          
 //            NSDate *keyDate=[self.boundObject valueForKey:@"keyDate"];
 //            NSData *primitiveData=[self.boundObject valueForKey:@"clientIDCode"];
-//            NSLog(@"primitive daa is %@",primitiveData);
+//            //NSLog(@"primitive daa is %@",primitiveData);
 //            
 //            
 //            NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:keyDate encryptedData:primitiveData];
 //          
 //            tempStr=[appDelegate convertDataToString:strData];
-//            NSLog(@"temp string is %@",tempStr);
+//            //NSLog(@"temp string is %@",tempStr);
 //                       
 //            self.tempClientIDCode=tempStr;
 //        
@@ -82,7 +82,7 @@
     
     //    self.boundObject=self.testString;
     
-    NSLog(@"bound object is %@",self.boundObject);
+    //NSLog(@"bound object is %@",self.boundObject);
 
        
     

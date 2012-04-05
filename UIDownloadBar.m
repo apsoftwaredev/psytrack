@@ -32,7 +32,7 @@ bytesReceived=bytesReceived_;
 - (void) forceContinue {
 	operationBreaked = NO;
 	
-	NSLog(@"%f",bytesReceived_);
+	//NSLog(@"%f",bytesReceived_);
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: downloadUrl];
 	
 	[request addValue: [NSString stringWithFormat: @"bytes=%.0f-", bytesReceived_ ] forHTTPHeaderField: @"Range"];	
@@ -78,13 +78,13 @@ bytesReceived=bytesReceived_;
 			self.progress = ((bytesReceived_/(float)expectedBytes)*100)/100;
 			percentComplete = self.progress*100;
 		}
-			//NSLog(@" Data receiving... Percent complete: %f", percentComplete);
+			////NSLog(@" Data receiving... Percent complete: %f", percentComplete);
 		
 		[self.delegate downloadBarUpdated:self];
 	
 	} else {
 		[connection cancel];
-		NSLog(@" STOP !!!!  Receiving data was stoped");
+		//NSLog(@" STOP !!!!  Receiving data was stoped");
 //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 //        
 //        [appDelegate displayNotification: @"Download stopped" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
@@ -100,29 +100,29 @@ bytesReceived=bytesReceived_;
 
 //- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 //	expectedBytes = [response expectedContentLength];
-//	NSLog(@"DID RECEIVE RESPONSE");
+//	//NSLog(@"DID RECEIVE RESPONSE");
 //}
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 	
-	NSLog(@"[DO::didReceiveData] %d operation", (int)self);
-	NSLog(@"[DO::didReceiveData] ddb: %.2f, wdb: %.2f, ratio: %.2f", 
-		  (float)bytesReceived_, 
-		  (float)expectedBytes,
-		  (float)bytesReceived_ / (float)expectedBytes);
+	//NSLog(@"[DO::didReceiveData] %d operation", (int)self);
+	//NSLog(@"[DO::didReceiveData] ddb: %.2f, wdb: %.2f, ratio: %.2f", 
+//		  (float)bytesReceived_, 
+//		  (float)expectedBytes,
+//		  (float)bytesReceived_ / (float)expectedBytes);
 	
 	NSHTTPURLResponse *r = (NSHTTPURLResponse*) response;
 	NSDictionary *headers = [r allHeaderFields];
-	NSLog(@"[DO::didReceiveResponse] response headers: %@", headers);
+	//NSLog(@"[DO::didReceiveResponse] response headers: %@", headers);
 	if (headers){
 		if ([headers objectForKey: @"Content-Range"]) {
 			NSString *contentRange = [headers objectForKey: @"Content-Range"];
-			NSLog(@"Content-Range: %@", contentRange);
+			//NSLog(@"Content-Range: %@", contentRange);
 			NSRange range = [contentRange rangeOfString: @"/"];
 			NSString *totalBytesCount = [contentRange substringFromIndex: range.location + 1];
 			expectedBytes = [totalBytesCount floatValue];
 		} else if ([headers objectForKey: @"Content-Length"]) {
-			NSLog(@"Content-Length: %@", [headers objectForKey: @"Content-Length"]);
+			//NSLog(@"Content-Length: %@", [headers objectForKey: @"Content-Length"]);
 			expectedBytes = [[headers objectForKey: @"Content-Length"] floatValue];
 		} else expectedBytes = -1;
 		
@@ -137,7 +137,7 @@ bytesReceived=bytesReceived_;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	[self.delegate downloadBar:self didFinishWithData:self.receivedData suggestedFilename:localFilename];
 	operationFinished = YES;
-	NSLog(@"Connection did finish loading...%@",localFilename);
+	//NSLog(@"Connection did finish loading...%@",localFilename);
    
     
     

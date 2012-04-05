@@ -36,7 +36,7 @@
     NSArray *sexSelectionArray=[NSArray arrayWithObjects:@"Male", @"Female", @"Intersexual",@"F2M",@"M2F",@"Undisclosed", nil];
     self.items=sexSelectionArray;
     
-    NSLog(@"value for cell is %@",[self.boundObject valueForKey:@"sex"]);
+    //NSLog(@"value for cell is %@",[self.boundObject valueForKey:@"sex"]);
     int selectedIndexInt=-1;
     if ([self.boundObject valueForKey:[self.objectBindings valueForKey:@"34"]]) {
         [self setSelectedItemIndex:[NSNumber numberWithInt:(int)[self.items indexOfObject:[self.boundObject valueForKey:[self.objectBindings valueForKey:@"34"]]]]];
@@ -71,13 +71,13 @@
     //          
     //            NSDate *keyDate=[self.boundObject valueForKey:@"keyDate"];
     //            NSData *primitiveData=[self.boundObject valueForKey:@"clientIDCode"];
-    //            NSLog(@"primitive daa is %@",primitiveData);
+    //            //NSLog(@"primitive daa is %@",primitiveData);
     //            
     //            
     //            NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:keyDate encryptedData:primitiveData];
     //          
     //            tempStr=[appDelegate convertDataToString:strData];
-    //            NSLog(@"temp string is %@",tempStr);
+    //            //NSLog(@"temp string is %@",tempStr);
     //                       
     //            self.tempClientIDCode=tempStr;
     //        
@@ -101,7 +101,7 @@
     
     //    self.boundObject=self.testString;
     
-    NSLog(@"bound object is %@",self.boundObject);
+    //NSLog(@"bound object is %@",self.boundObject);
     
     
     

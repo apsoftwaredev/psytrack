@@ -393,7 +393,7 @@
         
         startTime=[dateFormatClearSeconds dateFromString:[dateFormatter stringFromDate:startTime]];
         endTime=[dateFormatClearSeconds dateFromString:[dateFormatter stringFromDate:endTime]];
-        NSLog(@"start time %@ end time %@ additioanl time %@ time to subtract %@",startTime,endTime,additionalTime,timeToSubtract);
+        //NSLog(@"start time %@ end time %@ additioanl time %@ time to subtract %@",startTime,endTime,additionalTime,timeToSubtract);
 
         
     }
@@ -868,7 +868,7 @@
         //cut off miliseconds
         
         totalTimeString=[NSString stringWithFormat:@"%f",totalBreakTimeInterval];
-        NSLog(@"totoal time string is %@", totalTimeString);
+        //NSLog(@"totoal time string is %@", totalTimeString);
         
         NSRange range;
         range.length=6;
@@ -999,7 +999,7 @@
         
         //        section.footerView.autoresizingMask=;
         //        
-        //       NSLog(@"section width is is %f",section.footerView.frame.size.width;
+        //       //NSLog(@"section width is is %f",section.footerView.frame.size.width;
        
     }
     
@@ -1209,7 +1209,7 @@
 -(void)tableViewModelDidEndEditing:(SCTableViewModel *)tableViewModel{
 
 
-NSLog(@"did end editing");
+//NSLog(@"did end editing");
 
   
     
@@ -1233,7 +1233,7 @@ NSLog(@"did end editing");
 //            
 //            
 //            
-//            NSLog(@"cell is kind of class %@",[timeCell class]);
+//            //NSLog(@"cell is kind of class %@",[timeCell class]);
 //            if ([timeCell isKindOfClass:[SCObjectCell class]]) 
 //            {
 //                

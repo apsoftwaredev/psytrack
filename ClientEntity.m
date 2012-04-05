@@ -121,7 +121,7 @@
 //        }
 //        
 //    }
-//        //                    NSLog(@"lockvalues dictionary %@",[dictionaryFromDecryptedData allKeys]);
+//        //                    //NSLog(@"lockvalues dictionary %@",[dictionaryFromDecryptedData allKeys]);
 //        
 //        
 //
@@ -209,7 +209,7 @@
 //    self.dateOfBirth=nil;
 //    self.notes=nil;
 //    self.initials=nil;
-//    NSLog(@"fdata dictionary %@",fDataDictionary);
+//    //NSLog(@"fdata dictionary %@",fDataDictionary);
 //    
 //    
 //    
@@ -220,7 +220,7 @@
 ////    [self setPrimitiveValue:encryptedKeyDate forKey:@"keyDate"];
 ////    
 ////    [self didChangeValueForKey:@"keyDate"];
-////    NSLog(@"encrypted key date is %@",encryptedKeyDate);
+////    //NSLog(@"encrypted key date is %@",encryptedKeyDate);
 ////    
 ////}
 //
@@ -246,10 +246,10 @@
             
             
             if ([encryptedDataDictionary.allKeys containsObject:@"keyDate"]) {
-                NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                //NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
                 
                 encryptedKeyDate=[encryptedDataDictionary valueForKey:@"keyDate"];
-                NSLog(@"key date is client entity %@",encryptedKeyDate);
+                //NSLog(@"key date is client entity %@",encryptedKeyDate);
             }
         }
         
@@ -297,10 +297,10 @@
             
             
             if ([encryptedDataDictionary.allKeys containsObject:@"keyDate"]) {
-                NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                //NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
                 
                 encryptedKeyDate=[encryptedDataDictionary valueForKey:@"keyDate"];
-                NSLog(@"key date is client entity %@",encryptedKeyDate);
+                //NSLog(@"key date is client entity %@",encryptedKeyDate);
             }
         }
         
@@ -523,7 +523,7 @@
     
    
     
-    NSLog(@"date valeu is %@",newDate);
+    //NSLog(@"date valeu is %@",newDate);
     return newDate;
 
 

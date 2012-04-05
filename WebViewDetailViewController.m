@@ -57,7 +57,7 @@
      
         // Custom initialization
         documentWebURLString=documentURLString;
-//               NSLog(@"document url top string%@",documentWebURLString);
+//               //NSLog(@"document url top string%@",documentWebURLString);
 
     }
     return self;
@@ -77,16 +77,16 @@
    documentWebURLString=nil;
     documentWebURL=nil;
     
-//     NSLog(@"path to file%@", PDFDocumentOnDeviceURL.path);
+//     //NSLog(@"path to file%@", PDFDocumentOnDeviceURL.path);
     NSFileManager *fileManager=[[NSFileManager alloc]init];
     if([fileManager fileExistsAtPath:tmpPDF]) {
         
-//        NSLog(@"path to file%@", PDFDocumentOnDeviceURL.absoluteString);
+//        //NSLog(@"path to file%@", PDFDocumentOnDeviceURL.absoluteString);
         
         NSError *error=nil;
         
         if (![fileManager removeItemAtPath:tmpPDF error:&error]) {
-            NSLog(@"erroro occured %@",error);
+            //NSLog(@"erroro occured %@",error);
         }
         
         
@@ -148,7 +148,7 @@
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
-    NSLog(@"didReceiveMemoryWarning message sent to PrintPhotoViewController"); 
+    //NSLog(@"didReceiveMemoryWarning message sent to PrintPhotoViewController"); 
 }
 
 
@@ -220,16 +220,16 @@
     webView.backgroundColor = [UIColor blackColor];
    
    
-//    NSLog(@"formatted comma is %@",[documentWebURLString stringByReplacingOccurrencesOfString:@"," withString:[NSString stringWithFormat:@"%C",0x002C ]]);
+//    //NSLog(@"formatted comma is %@",[documentWebURLString stringByReplacingOccurrencesOfString:@"," withString:[NSString stringWithFormat:@"%C",0x002C ]]);
     
-//    NSLog(@"new formateted %@",[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
+//    //NSLog(@"new formateted %@",[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
 //           NSASCIIStringEncoding]);
     
 //    NSURL *targetURL = [NSURL URLWithString:(NSString *)[[(NSString*)[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
 //                                                         NSASCIIStringEncoding] stringByReplacingOccurrencesOfString:@"," withString:formattedComma]stringByReplacingOccurrencesOfString:@"\%22" withString:@""] ];
-//    NSLog(@"target URL string is %@",[(NSString*)[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
+//    //NSLog(@"target URL string is %@",[(NSString*)[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
 //                                                  NSASCIIStringEncoding] stringByReplacingOccurrencesOfString:@"," withString:formattedComma]);
-//    NSLog(@"target url is %@",documentWebURL);
+//    //NSLog(@"target url is %@",documentWebURL);
     
    
    
@@ -322,11 +322,11 @@
             
            
             
-            if (!completed && error)
-                
-                NSLog(@"FAILED! due to error in domain %@ with error code %u",
-                      
-                      error.domain, error.code);
+//            if (!completed && error)
+//                
+//                //NSLog(@"FAILED! due to error in domain %@ with error code %u",
+//                      
+//                      error.domain, error.code);
             
         };
         
@@ -410,14 +410,14 @@
             
             
                         
-            NSLog(@"temp file name is %@",tmpPDF);
+            //NSLog(@"temp file name is %@",tmpPDF);
             if (![fileData writeToFile:tmpPDF atomically:YES]) {
-                NSLog(@"writeToFile error");
+                //NSLog(@"writeToFile error");
                 
             }
             else {
                 
-                NSLog(@"Written!");
+                //NSLog(@"Written!");
             }
             
 
@@ -433,7 +433,7 @@
                 
                 break;
             default:
-                NSLog(@"cancel actionsheet tapped");
+                //NSLog(@"cancel actionsheet tapped");
                 break;
                 
         }

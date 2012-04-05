@@ -135,7 +135,7 @@
     if (cell.tag==2 &&[cell isKindOfClass:[SCSwitchCell class]]) {
         
         SCSwitchCell *switchCell=(SCSwitchCell *)cell;
-       NSLog(@"switch cell value %i",[switchCell.switchControl isOn]);
+       //NSLog(@"switch cell value %i",[switchCell.switchControl isOn]);
         
         if ([self passCodeLockIsOn]) {
             [self setLockedAtStartup: [switchCell.switchControl isOn]];
@@ -301,7 +301,7 @@ if(section.headerTitle !=nil)
         [lockDictionary setValue:newCode forKey:K_LOCK_SCREEN_PASSCODE];
         [lockDictionary setValue:[appDelegate hashDataFromString:[NSString stringWithFormat:@"%@asdj9emV3k30wer93",newCode]] forKey:K_LOCK_SCREEN_P_HSH];
      
-        NSLog(@"lock dictionary value for key lcok pw hash%@",[lockDictionary valueForKey:K_LOCK_SCREEN_P_HSH]);
+        //NSLog(@"lock dictionary value for key lcok pw hash%@",[lockDictionary valueForKey:K_LOCK_SCREEN_P_HSH]);
 	}
 
 	[appDelegate saveLockDictionarySettings];
@@ -313,7 +313,7 @@ if(section.headerTitle !=nil)
 #pragma mark LCYPassCodeEditorDelegate protocol implementation...
 - (void) passcodeEditor: (LCYPassCodeEditorViewController *) passcodeEditor newCode:(NSString *) newCode;
 {
-	NSLog(@"editor: %@ | newCode: %@", passcodeEditor, newCode);
+	//NSLog(@"editor: %@ | newCode: %@", passcodeEditor, newCode);
 	[self.navigationController dismissModalViewControllerAnimated:YES];
 	[self updatePasscodeSettings:newCode];	
 	[self.tableView reloadData];	

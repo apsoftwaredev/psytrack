@@ -251,9 +251,9 @@
 
 -(void)cancelButtonTapped{
     
-    NSLog(@"cancel button Tapped");
+    //NSLog(@"cancel button Tapped");
     
-    NSLog(@"parent controller %@",[super parentViewController]);
+    //NSLog(@"parent controller %@",[super parentViewController]);
     
    
     
@@ -277,10 +277,10 @@
 
 -(void)doneButtonTapped{
     
-    NSLog(@"done Button tapped");
+    //NSLog(@"done Button tapped");
     if (isInDetailSubview &&tableModel_.sectionCount) {
         SCTableViewSection *section=(SCTableViewSection *)[tableModel_ sectionAtIndex:0];
-        NSLog(@"section class is %@",[section class]);
+        //NSLog(@"section class is %@",[section class]);
 //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 //        
 //        if ([appDelegate managedObjectContext].hasChanges) {
@@ -294,7 +294,7 @@
             [objectsSelectionSection commitCellChanges];
             if (objectsSelectionSection.allowMultipleSelection) {
                 NSInteger sectionCount=tableModel_.sectionCount;
-                NSLog(@"section count is %i",sectionCount);
+                //NSLog(@"section count is %i",sectionCount);
                 if (sectionCount&& !currentlySelectedCliniciansArray) {
                     currentlySelectedCliniciansArray=[NSMutableArray array];
                 }
@@ -317,7 +317,7 @@
                             ClinicianEntity *clinicianObject=(ClinicianEntity *)selectedCell.boundObject;
                             [currentlySelectedCliniciansArray addObject:clinicianObject];
                             
-                            NSLog(@"currently selected clinicians array is %@",currentlySelectedCliniciansArray);
+                            //NSLog(@"currently selected clinicians array is %@",currentlySelectedCliniciansArray);
                             
                         }
                         
@@ -330,10 +330,10 @@
                 }
                         
                
-            NSLog(@"currently selected clinicians array is %@",currentlySelectedCliniciansArray);
+            //NSLog(@"currently selected clinicians array is %@",currentlySelectedCliniciansArray);
                 
                         
-                        NSLog(@"object selection section selected itemsindexes %@",objectsSelectionSection.selectedItemsIndexes);                    
+                        //NSLog(@"object selection section selected itemsindexes %@",objectsSelectionSection.selectedItemsIndexes);                    
                
                        
                 [clinicianObjectSelectionCell  doneButtonTappedInDetailView:nil selectedItems: currentlySelectedCliniciansArray withValue:TRUE];
@@ -348,11 +348,11 @@
 //                    <#statements#>
 //                }
 //                SCTableViewCell *cell=(SCTableViewCell *)[tableModel_ cellAtIndexPath:cellIndexPath];
-//                NSLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
+//                //NSLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
                 
                 
                 
-                NSLog(@"selected item index%@",objectsSelectionSection.selectedItemIndex);
+                //NSLog(@"selected item index%@",objectsSelectionSection.selectedItemIndex);
                 
                 
                 if (objectsSelectionSection.selectedItemIndex&&![objectsSelectionSection.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]] && [objectsSelectionSection.selectedItemIndex intValue]< objectsSelectionSection.items.count) {
@@ -368,10 +368,10 @@
                 currentlySelectedClinician=nil;
 
             }
-            //            NSLog(@"test valie changed at index with cell index selected %i",[objectsSelectionSection.selectedItemIndex integerValue]) ;
+            //            //NSLog(@"test valie changed at index with cell index selected %i",[objectsSelectionSection.selectedItemIndex integerValue]) ;
             //            if (clientObjectSelectionCell) {
             
-            //                NSLog(@"objectsSelectionSection.selectedItemsIndexes.count %i",objectsSelectionSection.items.count);
+            //                //NSLog(@"objectsSelectionSection.selectedItemsIndexes.count %i",objectsSelectionSection.items.count);
             
             //                if ([objectsSelectionSection.selectedItemIndex integerValue]>=0&&[objectsSelectionSection.selectedItemIndex integerValue]<=objectsSelectionSection.items.count) {
             //                    
@@ -456,7 +456,7 @@
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
      
 
-    NSLog(@"table model class %@",[tableViewModel class]);
+    //NSLog(@"table model class %@",[tableViewModel class]);
        
     if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
         SCObjectSelectionSection *selectionSection=(SCObjectSelectionSection *)section;
@@ -475,18 +475,18 @@
             
             if (!selectionSection.allowMultipleSelection) {
                 if (indexPath.row!= [selectionSection.selectedItemIndex integerValue]) {
-                    NSLog(@"cell is selected");
+                    //NSLog(@"cell is selected");
                     [selectionSection setSelectedItemIndex:[NSNumber numberWithInt:-1]];
                     
                 }
                 else {
-                    NSLog(@"cell not selected");
+                    //NSLog(@"cell not selected");
                     currentlySelectedClinician=nil;
                 }
             }
 //                for (int i=0; i<tableViewModel.sectionCount; i++) {
 //                    SCObjectSelectionSection *selectionSectionToSet=(SCObjectSelectionSection *)[tableViewModel sectionAtIndex:i];
-                    //                NSLog(@"section inde and i is %i and %i",indexPath.section, i);
+                    //                //NSLog(@"section inde and i is %i and %i",indexPath.section, i);
                     //                if (indexPath.section !=i) {
                     //                    [selectionSection.selectedItemsIndexes removeAllObjects];
                     //                    [selectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:-1]];
@@ -494,11 +494,11 @@
                     //                    for (int p=0; p<selectionSection.cellCount; p++) {
                     //                        SCTableViewCell *cell=(SCTableViewCell * )[selectionSection cellAtIndex:p];
                     //                       
-                    //                        NSLog(@"celll calss is %@",[cell class]);
+                    //                        //NSLog(@"celll calss is %@",[cell class]);
                     //                        
                     //                            [cell setSelected:NO animated:NO];
-                    //                            NSLog(@"cell row %i and section %i and i%i",indexPath.row,indexPath.section,i);
-                    //                            NSLog(@"image view is %@",cell.imageView);
+                    //                            //NSLog(@"cell row %i and section %i and i%i",indexPath.row,indexPath.section,i);
+                    //                            //NSLog(@"image view is %@",cell.imageView);
                     //                    
                     //                      
                     //                        
@@ -511,7 +511,7 @@
                     //                }
                     
                     //                else {
-                    //                    NSLog(@"index path row is %i",indexPath.row);
+                    //                    //NSLog(@"index path row is %i",indexPath.row);
                     //                    [selectionSection.selectedItemsIndexes addObjectsFromArray:[NSArray arrayWithObject:[NSNumber numberWithInteger:indexPath.row]]];
                     //                    [selectionSection setSelectedItemIndex:[NSNumber numberWithInteger:indexPath.row]];
                     ////                    
@@ -524,7 +524,7 @@
 //                    if (indexPath.section==i) {
 //                        [selectedIndexesSet removeAllObjects];
 //                        //                    [selectionSectionToSet setSelectedCellIndexPath:nil];
-//                    [selectionSectionToSet setSelectedItemIndex:[NSNumber numberWithInteger:-1]];                    NSLog(@"selected items is %@",selectionSectionToSet.selectedItemsIndexes);
+//                    [selectionSectionToSet setSelectedItemIndex:[NSNumber numberWithInteger:-1]];                    //NSLog(@"selected items is %@",selectionSectionToSet.selectedItemsIndexes);
 //                        
 //                        if (selectionSection.cellCount) {
 //                            for (int p=0; p<selectionSection.cellCount; p++) {
@@ -537,7 +537,7 @@
 //                        //                    [cell reloadInputViews];
 //                        //                    [cell setNeedsDisplay ];
 //                        //                    [cell setNeedsLayout];
-//                        //                    NSLog(@"cellaccessory type is");
+//                        //                    //NSLog(@"cellaccessory type is");
 //                        //                  
 //                    }
                     //                SCTableViewCell *cellInSectionOne=(SCTab
@@ -548,7 +548,7 @@
                     //            }
                     //        selectionSection setSelectedItemIndex:[selectionSection indexForCell:<#(SCTableViewCell *)#>
                     //            }
-//                }      NSLog(@"currently selected client is %@",currentlySelectedClinician);
+//                }      //NSLog(@"currently selected client is %@",currentlySelectedClinician);
 //            }
         } 
        
@@ -568,7 +568,7 @@
         [selectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
         
     }
-    NSLog(@"section class %@",[section class]);
+    //NSLog(@"section class %@",[section class]);
     
     
 }
@@ -588,13 +588,13 @@
         
         
         if (currentlySelectedClinician&&[cell.boundObject isEqual:currentlySelectedClinician]) {
-            NSLog(@"currently selected client is %@",currentlySelectedClinician);
-            NSLog(@"cell bound object is %@",cell.boundObject);
-            NSLog(@"they are equal section cell count is %i", section.cellCount);
+            //NSLog(@"currently selected client is %@",currentlySelectedClinician);
+            //NSLog(@"cell bound object is %@",cell.boundObject);
+            //NSLog(@"they are equal section cell count is %i", section.cellCount);
             //            [objectSelectionSection setSelectedCellIndexPath:indexPath];
             [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:currentlySelectedClinician]]];
             
-            NSLog(@"index integer of object %i",[objectSelectionSection.items indexOfObject:currentlySelectedClinician]);
+            //NSLog(@"index integer of object %i",[objectSelectionSection.items indexOfObject:currentlySelectedClinician]);
             
         }
         //        [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:currentlySelectedClient]]];
@@ -638,7 +638,7 @@
 -(void)setSelectedClinicians{
     if (isInDetailSubview) {
         SCTableViewSection *section=(SCTableViewSection *)[tableModel_ sectionAtIndex:0];
-        NSLog(@"section class is %@",[section class]);
+        //NSLog(@"section class is %@",[section class]);
         //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         //        
         //        if ([appDelegate managedObjectContext].hasChanges) {
@@ -653,7 +653,7 @@
             
             if (objectSelectionSection.allowMultipleSelection) 
             {
-                NSLog(@"currentlyselected clinicians in set selected are %@",currentlySelectedCliniciansArray);
+                //NSLog(@"currentlyselected clinicians in set selected are %@",currentlySelectedCliniciansArray);
                 if (currentlySelectedCliniciansArray.count) {
                     
                      NSMutableSet *selectedIndexesSet=objectSelectionSection.selectedItemsIndexes;
@@ -678,7 +678,7 @@
 
     if (isInDetailSubview) {
         SCTableViewSection *section=(SCTableViewSection *)[tableModel_ sectionAtIndex:0];
-        NSLog(@"section class is %@",[section class]);
+        //NSLog(@"section class is %@",[section class]);
         //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         //        
         //        if ([appDelegate managedObjectContext].hasChanges) {
@@ -717,7 +717,7 @@
                             ClinicianEntity *clinicianObject=(ClinicianEntity *)selectedCell.boundObject;
                             [currentlySelectedCliniciansArray addObject:clinicianObject];
                             
-                            NSLog(@"currently selected clinicians array is %@",currentlySelectedCliniciansArray);
+                            //NSLog(@"currently selected clinicians array is %@",currentlySelectedCliniciansArray);
                             
                         }
                         
@@ -729,10 +729,10 @@
                 }
             
             
-            NSLog(@"currently selected clinicians array is %@",currentlySelectedCliniciansArray);
+            //NSLog(@"currently selected clinicians array is %@",currentlySelectedCliniciansArray);
             
             
-            NSLog(@"object selection section selected itemsindexes %@",objectsSelectionSection.selectedItemsIndexes);                    
+            //NSLog(@"object selection section selected itemsindexes %@",objectsSelectionSection.selectedItemsIndexes);                    
             
                         
             }}}   
@@ -746,7 +746,7 @@
 searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     [self createSelectedCliniciansArray];
-    NSLog(@"scope changed");
+    //NSLog(@"scope changed");
     if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
     {
         SCArrayOfObjectsModel *objectsModel = (SCArrayOfObjectsModel *)tableViewModel;
@@ -771,18 +771,18 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 objectsModel.itemsPredicate = scopeFilter;
                 
                     
-                NSLog(@"case 1");
+                //NSLog(@"case 1");
             }
                 break;
             case 2: //Female
                 objectsModel.itemsPredicate = [NSPredicate predicateWithFormat:@"atMyCurrentSite == %i OR myInformation==%i", TRUE, TRUE];
                 
-                NSLog(@"case 2");
+                //NSLog(@"case 2");
                 break;                
   
             default:
                  objectsModel.itemsPredicate = nil;
-                NSLog(@"case default");
+                //NSLog(@"case default");
                 
                 break;
         }
@@ -821,7 +821,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                case 0:
 //                    if ([viewShorterTextLabelView isKindOfClass:[UILabel class]]) 
 //                    {
-//                        NSLog(@"prefix");
+//                        //NSLog(@"prefix");
 //                        UILabel *titleLabel =(UILabel *)viewShorterTextLabelView;
 //                        
 //                        titleLabel.text=@"Prefix:";
@@ -830,7 +830,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                case 1:
 //                    if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
 //                    {
-//                        NSLog(@"first name");
+//                        //NSLog(@"first name");
 //                       
 //                        UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
 //                        firstNameLabel.text=@"First Name:";  
@@ -840,7 +840,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                case 2:
 //                    if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
 //                    {
-//                        NSLog(@"middle name");
+//                        //NSLog(@"middle name");
 //                        
 //                        UILabel *middleNameLabel =(UILabel *)viewLongerTextLabelView;
 //                        middleNameLabel.text=@"Middle Name:";
@@ -851,7 +851,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                    if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
 //                    {
 //                       
-//                        NSLog(@"last name");
+//                        //NSLog(@"last name");
 //                        UILabel *lastNameLabel =(UILabel *)viewLongerTextLabelView;
 //                        lastNameLabel.text=@"Last Name:";
 //
@@ -861,7 +861,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                    if ([viewShorterTextLabelView isKindOfClass:[UILabel class]]) 
 //                    {
 //                       
-//                        NSLog(@"suffix");
+//                        //NSLog(@"suffix");
 //                       UILabel *suffixLabel =(UILabel *)viewShorterTextLabelView;
 //                        suffixLabel.text=@"Suffix:";
 //                    } 
@@ -871,7 +871,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                    if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
 //                    {
 //                        
-//                        NSLog(@"credential Intials");
+//                        //NSLog(@"credential Intials");
 //                        UILabel *credentialInitialsLabel =(UILabel *)viewLongerTextLabelView;
 //                        credentialInitialsLabel.text=@"Credential Initials:";
 //                    } 
@@ -888,8 +888,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                      
 //                          int addressBookRecordIdentifier=(int )[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"]intValue]; 
 //                            
-//                            NSLog(@"addressbook identifier is %i",addressBookRecordIdentifier);
-//                            NSLog(@"addressbook Identifier %@", cell.boundObject);
+//                            //NSLog(@"addressbook identifier is %i",addressBookRecordIdentifier);
+//                            //NSLog(@"addressbook Identifier %@", cell.boundObject);
 //                            NSString *buttonText;
 //                        
 //                        
@@ -920,7 +920,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                            
 //                            ButtonCell *buttonCell=(ButtonCell *)cell;
 //                            UIView *view=[buttonCell viewWithTag:300];
-//                        NSLog(@"view class is %@",[view.superclass class]);
+//                        //NSLog(@"view class is %@",[view.superclass class]);
 //                            if ([view.superclass isSubclassOfClass:[UIButton class]]) {
 //                                UIButton *button=(UIButton *)view;
 //                                [button setTitle:buttonText forState:UIControlStateNormal];
@@ -940,8 +940,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                   
 //                    int addressBookRecordIdentifier=(int )[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"]intValue]; 
 //                    
-//                    NSLog(@"addressbook identifier is %i",addressBookRecordIdentifier);
-//                    NSLog(@"addressbook Identifier %@", cell.boundObject);
+//                    //NSLog(@"addressbook identifier is %i",addressBookRecordIdentifier);
+//                    //NSLog(@"addressbook Identifier %@", cell.boundObject);
 //                    NSString *buttonText;
 //                    
 //                    
@@ -971,7 +971,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                    
 //                    ButtonCell *buttonCell=(ButtonCell *)cell;
 //                    UIView *view=[buttonCell viewWithTag:300];
-//                    NSLog(@"view class is %@",[view.superclass class]);
+//                    //NSLog(@"view class is %@",[view.superclass class]);
 //                    if ([view.superclass isSubclassOfClass:[UIButton class]]) {
 //                        UIButton *button=(UIButton *)view;
 //                        [button setTitle:buttonText forState:UIControlStateNormal];
@@ -1001,7 +1001,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                case 0:
 //                
 //                    {    
-//                        NSLog(@"cell tag is %i",3);
+//                        //NSLog(@"cell tag is %i",3);
 //                        [button setTitle:@"Look Up In Address book" forState:UIControlStateNormal];
 //                        
 //                                   
@@ -1011,7 +1011,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                case 1:
 //                    
 //                {    
-//                    NSLog(@"cell tag is %i",4);
+//                    //NSLog(@"cell tag is %i",4);
 //                    [button setTitle:@"Add Or Edit in Address Book" forState:UIControlStateNormal];
 //                    
 //                }
@@ -1149,7 +1149,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 //-(void)tableViewModel:(SCTableViewModel *)tableViewModel willSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 //{
-//    NSLog(@"table bies slkjd %i", tableViewModel.tag);
+//    //NSLog(@"table bies slkjd %i", tableViewModel.tag);
 //    SCTableViewCell *cell =tableViewModel.activeCell;
 //    deletePressedOnce=NO;
 //    switch (tableViewModel.tag) {
@@ -1268,7 +1268,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //        
 //    } 
 // 
-//        NSLog(@"name values %@, %@, %@, %@, %@, %@", self.nameTitle, self.firstName, self.middleName, self.lastName,self.suffix, self.credentialIntitials );
+//        //NSLog(@"name values %@, %@, %@, %@, %@, %@", self.nameTitle, self.firstName, self.middleName, self.lastName,self.suffix, self.credentialIntitials );
 //        
 //
 //    
@@ -1311,7 +1311,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //        fullName=[fullName stringByAppendingFormat:@", %@", self.credentialIntitials];
 //
 //    }
-//     NSLog(@"name values %@",fullName  );
+//     //NSLog(@"name values %@",fullName  );
 //      
 //    
 //
@@ -1328,8 +1328,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //{
 //    SCTableViewSection *section =[tableViewModel sectionAtIndex:0];
 //           
-//    NSLog(@"section header title %@", section.headerTitle);
-//    NSLog(@"table model tag is %i", tableViewModel.tag);
+//    //NSLog(@"section header title %@", section.headerTitle);
+//    //NSLog(@"table model tag is %i", tableViewModel.tag);
 //   
 //     
 //    switch (tableViewModel.tag) {
@@ -1347,7 +1347,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //            
 //           
 //            
-//            NSLog(@"cellManagedObject%@",clinicianObject.combinedName);
+//            //NSLog(@"cellManagedObject%@",clinicianObject.combinedName);
 //                
 //        }
 //
@@ -1369,12 +1369,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //               
 //                    //identify the Languages Spoken table
 //                   if ([managedObject.entity.name isEqualToString:@"LanguageSpokenEntity"]) {
-//                       NSLog(@"the managed object entity is Languag spoken Entity");
+//                       //NSLog(@"the managed object entity is Languag spoken Entity");
 //                       //get the value of the primaryLangugage attribute
 //                       NSNumber *primaryLanguageNumber=(NSNumber *)[managedObject valueForKey:@"primaryLanguage"];
 //                       
 //                                                               
-//                       NSLog(@"primary alanguage %@",  primaryLanguageNumber);
+//                       //NSLog(@"primary alanguage %@",  primaryLanguageNumber);
 //                       //if the primaryLanguage selection is Yes
 //                       if (primaryLanguageNumber==[NSNumber numberWithInteger:0]) {
 //                           //get the language
@@ -1398,16 +1398,16 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //            //this is a fourth level detail view
 //            if (cell.tag==3)
 //            {
-//                    NSLog(@"cell tag is %i", cell.tag);
+//                    //NSLog(@"cell tag is %i", cell.tag);
 //                    UIView *viewOne = [cell viewWithTag:14];
 //                    
 //                    if([viewOne isKindOfClass:[UISlider class]])
 //                    {
 //                        UISlider *sliderOne = (UISlider *)viewOne;
 //                        UILabel *slabel = (UILabel *)[cell viewWithTag:10];
-//                        NSLog(@"detail will appear for row at index path label text%@",slabel.text);
+//                        //NSLog(@"detail will appear for row at index path label text%@",slabel.text);
 //                        
-//                        NSLog(@"bound value is %f", sliderOne.value);
+//                        //NSLog(@"bound value is %f", sliderOne.value);
 //                        slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
 //                        
 //                        
@@ -1418,13 +1418,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //            }
 //            if (cell.tag==4)
 //            {
-//                NSLog(@"cell tag is ");
+//                //NSLog(@"cell tag is ");
 //                    UIView *viewTwo = [cell viewWithTag:14];
 //                    if([viewTwo isKindOfClass:[UISlider class]])
 //                    {
 //                        
 //                        
-//                        NSLog(@"cell tag is %i", cell.tag);
+//                        //NSLog(@"cell tag is %i", cell.tag);
 //                        
 //                        
 //                        UISlider *sliderTwo = (UISlider *)viewTwo;
@@ -1472,14 +1472,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //        [self fullName:nil tableViewModel:tableViewModel cell:nil getNameValues:YES];
 //    }
 //    
-//    NSLog(@"detail table view model%i",detailTableViewModel.tag);
+//    //NSLog(@"detail table view model%i",detailTableViewModel.tag);
 //    if (tableViewModel.tag==0 ) {
 //        SCTableViewCell *cell =(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
 //        
 //        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
 //        
 //        ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
-//        NSLog(@"my information is %@",clinicianObject.myInformation);
+//        //NSLog(@"my information is %@",clinicianObject.myInformation);
 //        if ([clinicianObject.myInformation isEqualToNumber:[NSNumber numberWithBool:YES]]) {
 //            if (tableViewModel.sectionCount>3) {
 //            
@@ -1503,14 +1503,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 // 
 //    SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
 //   
-//    NSLog(@"tableview model tag is %i",tableViewModel.tag);
-//    NSLog(@"tableview model view controller is%@ ",[tableViewModel.viewController class]);
-//    NSLog(@"index is %i",index);
-//    NSLog(@"tabelmodel section count is %i",tableViewModel.sectionCount);
+//    //NSLog(@"tableview model tag is %i",tableViewModel.tag);
+//    //NSLog(@"tableview model view controller is%@ ",[tableViewModel.viewController class]);
+//    //NSLog(@"index is %i",index);
+//    //NSLog(@"tabelmodel section count is %i",tableViewModel.sectionCount);
 //    if (tableViewModel.tag==1 ) {
-//        NSLog(@"section index is %i",index);
+//        //NSLog(@"section index is %i",index);
 //        if (index==6) {
-//            NSLog(@"cells in section is %i",section.cellCount);
+//            //NSLog(@"cells in section is %i",section.cellCount);
 //            
 //            
 //            
@@ -1522,7 +1522,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
 //                
 //                
-//                NSLog(@"my information is %@",clinicianObject.myInformation);
+//                //NSLog(@"my information is %@",clinicianObject.myInformation);
 //                if ([clinicianObject.myInformation isEqualToNumber:[NSNumber numberWithBool:YES]]) {
 //                    
 //                    [tableViewModel removeSectionAtIndex:1];
@@ -1675,7 +1675,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////            if(emailField.text.length){
 ////                    valid=[self validateEmail:emailField.text];
 ////                    
-////                    NSLog(@"testing email address");
+////                    //NSLog(@"testing email address");
 ////            }
 ////            else
 ////            {
@@ -1688,7 +1688,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////    }
 //    
 //    
-//    NSLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
+//    //NSLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
 //    
 //    if (tableViewModel.tag==1){
 // 
@@ -1697,16 +1697,16 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //       SCControlCell *firstNameCell =(SCControlCell *)[section cellAtIndex:1];
 //        SCControlCell *lastNameCell =(SCControlCell *)[section cellAtIndex:3];
 //         
-//        NSLog(@"last Name cell tag is %i", lastNameCell.tag);
+//        //NSLog(@"last Name cell tag is %i", lastNameCell.tag);
 //        UITextField *lastNameField =(UITextField *)[lastNameCell viewWithTag:50];
 //        UITextField *firstNameField =(UITextField *)[firstNameCell viewWithTag:50];
-//        NSLog(@"first name field %@",firstNameField.text);
-//        NSLog(@"last name field %@",lastNameField.text);
+//        //NSLog(@"first name field %@",firstNameField.text);
+//        //NSLog(@"last name field %@",lastNameField.text);
 //        
 //        if ( firstNameField.text.length && lastNameField.text.length) {
 //                    
 //            valid=TRUE;
-//            NSLog(@"first or last name is valid");
+//            //NSLog(@"first or last name is valid");
 //                    
 //        }
 //        else
@@ -1788,33 +1788,33 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //  
 //    SCTableViewSection *section =[tableViewModel sectionAtIndex:indexPath.section];
 //    SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-//    NSLog(@"custom button tapped");
+//    //NSLog(@"custom button tapped");
 //    
 //    
 //    if (tableViewModel.tag==1) {
-//        NSLog(@"table model tag is %i",2);
-//        NSLog(@"the cell tag is %i",cell.tag);
+//        //NSLog(@"table model tag is %i",2);
+//        //NSLog(@"the cell tag is %i",cell.tag);
 //        switch (cell.tag)
 //        {
 ////            case 0:
 ////            {
-////                NSLog(@"cell tag is %i",0);
+////                //NSLog(@"cell tag is %i",0);
 ////                
 ////
 ////               
 ////             
 ////                
 //////                NSManagedObject *managedObject =nil;
-//////                NSLog(@"the managed object is %@", 
+//////                //NSLog(@"the managed object is %@", 
 //////                      tableModel.items);   
 ////              
 ////                
 ////               
 ////                
-//////                NSLog(@"the managed object is %@", 
+//////                //NSLog(@"the managed object is %@", 
 ////////                    self.presentedViewController.parentViewController );
 //////                
-//////                NSLog(@"the managed object context is %@", managedObjectContext);
+//////                //NSLog(@"the managed object context is %@", managedObjectContext);
 ////////                [self showPeoplePickerController];
 ////                
 ////                
@@ -1825,14 +1825,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////                
 ////            case 1:
 ////            {
-////                NSLog(@"cell tag is %i",1);
+////                //NSLog(@"cell tag is %i",1);
 //////                [self showPersonViewController ];   
 ////                break;
 ////            }    
 ////                
 ////            case 2:
 ////            {
-////                NSLog(@"cell tag is %i",2);
+////                //NSLog(@"cell tag is %i",2);
 ////                
 //////                [self showNewPersonViewController];
 ////                
@@ -1841,7 +1841,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////            }    
 //            case 8:
 //            {
-//                NSLog(@"cell tag is %i",2);
+//                //NSLog(@"cell tag is %i",2);
 //                if ([cell isKindOfClass:[ButtonCell class]]) {
 //              
 //                
@@ -1857,13 +1857,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////                        SCTableViewCell *cellAtOne=(SCTableViewCell *)[section cellAtIndex:1];
 ////                       
 ////                        UIView *viewLongerTextLabelView =(UIView *)[cellAtOne viewWithTag:51];
-////                       NSLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
+////                       //NSLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
 ////                        if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
 ////                        {
-////                            NSLog(@"first name");
+////                            //NSLog(@"first name");
 ////                            
 ////                            UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-////                            NSLog(@"label tex is %@",firstNameLabel.text);
+////                            //NSLog(@"label tex is %@",firstNameLabel.text);
 ////                            if ([firstNameLabel.text isEqualToString:@"First Name:"]) {
 ////                                [cellAtOne commitChanges];
 ////                            } 
@@ -1875,10 +1875,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////                        
 ////                        if ([lastNameLabelView isKindOfClass:[UILabel class]]) 
 ////                        {
-////                            NSLog(@"last Name");
+////                            //NSLog(@"last Name");
 ////                            
 ////                            UILabel *lastNameLabel =(UILabel *)lastNameLabelView;
-////                             NSLog(@"label last nametex is %@",lastNameLabel.text);
+////                             //NSLog(@"label last nametex is %@",lastNameLabel.text);
 ////                            if ([lastNameLabel.text isEqualToString:@"Last Name:"]) {
 ////                                [cellAtThree commitChanges];
 ////                            } 
@@ -1890,7 +1890,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////                        clinician=(ClinicianEntity *) cellManagedObject;
 //                        
 //                        
-//                        NSLog(@"clinician %@",clinician);
+//                        //NSLog(@"clinician %@",clinician);
 //                        for (NSInteger i=0; i<tableViewModel.sectionCount;i++) {
 //                            SCTableViewSection *sectionAtIndex=(SCTableViewSection *)[tableViewModel sectionAtIndex:i];
 //                            
@@ -1907,7 +1907,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                break;
 //            }    
 //            case 9:
-//            {   NSLog(@"cell tag is %i",2);
+//            {   //NSLog(@"cell tag is %i",2);
 //                if ([cell isKindOfClass:[ButtonCell class]]) {
 //                    
 //                    
@@ -1921,8 +1921,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                        
 //                        int addressBookRecordIdentifier=(int )[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"]intValue]; 
 //                        
-//                        NSLog(@"addressbook identifier is %i",addressBookRecordIdentifier);
-//                        NSLog(@"addressbook Identifier %@", cell.boundObject);
+//                        //NSLog(@"addressbook identifier is %i",addressBookRecordIdentifier);
+//                        //NSLog(@"addressbook Identifier %@", cell.boundObject);
 //                    
 //                        
 //                        
@@ -1972,7 +1972,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //    if (tableViewModel.tag==4) {
 //  
 //        SCTextFieldCell *phoneNumberCell =(SCTextFieldCell *) [section cellAtIndex:1];
-//        NSLog(@"custom button tapped");
+//        //NSLog(@"custom button tapped");
 //        if (phoneNumberCell.textField.text.length) {
 //            
 //        
@@ -1999,7 +1999,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel willRemoveRowAtIndexPath:(NSIndexPath *)indexPath{
 
     SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-  NSLog(@"delete sender is activated %@",cell.boundObject);
+  //NSLog(@"delete sender is activated %@",cell.boundObject);
     BOOL myInformation=(BOOL)[(NSNumber *)[cell.boundObject valueForKey:@"myInformation"]boolValue];
     if (myInformation) {
         PTTAppDelegate *appdelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -2025,7 +2025,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             
             NSArray *boundObjectKeys=(NSArray *)[entityDescription attributesByName] ;
-         NSLog(@"client entity keys %@",boundObjectKeys);
+         //NSLog(@"client entity keys %@",boundObjectKeys);
             for (id attribute in boundObjectKeys){
                 BOOL setNil=YES;
                 if ([attribute isEqualToString:@"firstName"]) {
@@ -2039,14 +2039,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
                 if (setNil && ![attribute isEqualToString:@"myInformation"]&&![attribute isEqualToString:@"atMyCurrentSite"]&&![attribute isEqualToString:@"order"]) {
                     [cellManagedObject setValue:nil forKey:attribute];
-                      NSLog(@"attribute %@",attribute);
+                      //NSLog(@"attribute %@",attribute);
                 }
           
             }
             
             
             NSArray *relationshipsByName=(NSArray *)[entityDescription relationshipsByName] ;
-            NSLog(@"client entity keys %@",relationshipsByName);
+            //NSLog(@"client entity keys %@",relationshipsByName);
             
             for (id relationship in relationshipsByName){
              
@@ -2054,7 +2054,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
          
                     [clinicianObject setValue:nil forKey:relationship];
-                    NSLog(@"set nil value for relationship %@",relationship);
+                    //NSLog(@"set nil value for relationship %@",relationship);
               
                 
             }
@@ -2064,7 +2064,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             [tableViewModel.modeledTableView reloadData];
             [appdelegate displayNotification:@"My Personal Information Cleared" forDuration:3.0 location:kPTTScreenLocationTop inView:notificationSuperView];
             deletePressedOnce=NO;
-            NSLog(@"client entity keys after %@",cellManagedObject);
+            //NSLog(@"client entity keys after %@",cellManagedObject);
         }
        
         return NO;
@@ -2209,7 +2209,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //    
 //    BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults] boolForKey:kPTAutoAddClinicianToGroup];
 //   
-//    NSLog(@"group Name %@",groupName);
+//    //NSLog(@"group Name %@",groupName);
 ////    
 ////    
 //    
@@ -2219,7 +2219,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //        
 //        
 //    }
-////    NSLog(@"clinicianrecord identifier is %i",clinicianRecordIdentifier);
+////    //NSLog(@"clinicianrecord identifier is %i",clinicianRecordIdentifier);
 //  
 //        
 //   
@@ -2227,7 +2227,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //// 
 ////     }
 ////    
-////    NSLog(@"existingPerson_ record id %@",existingPersonRef);
+////    //NSLog(@"existingPerson_ record id %@",existingPersonRef);
 //    
 //    if (!groupName.length) {
 //        groupName=@"Clinicians";
@@ -2261,7 +2261,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////        
 ////        //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
 ////        
-////        //        NSLog(@"group composite name is %@",groupRecord.compositeName);
+////        //        //NSLog(@"group composite name is %@",groupRecord.compositeName);
 ////       
 ////        bool didSetGroupName=FALSE;
 ////        didSetGroupName= (bool) ABRecordSetValue (
@@ -2270,7 +2270,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////                               (__bridge CFStringRef)groupName  ,
 ////                              nil
 ////                               );  
-////        //        NSLog(@"group record identifier is %i",groupRecord.recordID);
+////        //        //NSLog(@"group record identifier is %i",groupRecord.recordID);
 ////      
 ////        BOOL wantToSaveChanges=TRUE;
 ////        if (ABAddressBookHasUnsavedChanges(addressBook)) {
@@ -2294,9 +2294,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //        
 //        //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
 //        
-////        NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
+////        //NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
 ////        
-////        NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
+////        //NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
 ////        
 ////        
 ////        [[NSUserDefaults standardUserDefaults] setInteger:(NSInteger )ABRecordGetRecordID(group) forKey:kPTTAddressBookGroupIdentifier];
@@ -2312,7 +2312,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //       CFArrayRef peopleWithNameArray= ABAddressBookCopyPeopleWithName((ABAddressBookRef) addressBook, (CFStringRef) name);
 //            
 //      
-//        NSLog(@" people with name array %@",peopleWithNameArray);
+//        //NSLog(@" people with name array %@",peopleWithNameArray);
 //       
 //        int peopleCount=CFArrayGetCount((CFArrayRef) peopleWithNameArray);
 //        if (peopleCount==1  && !addExistingAfterPromptBool  ) {
@@ -2340,8 +2340,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                                                           delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Link to Existing", @"Create New", nil];
 //            
 //            alert.tag=kAlertTagFoundExistingPersonWithName;
-//                NSLog(@"composite name is %@",compositeName);
-//            NSLog(@"alert message is %@",alertMessage);
+//                //NSLog(@"composite name is %@",compositeName);
+//            //NSLog(@"alert message is %@",alertMessage);
 //           
 //            [alert show];
 ////            CFRelease(name);
@@ -2387,7 +2387,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //    //    ABPerson *person=(ABPerson *)personRecord;
 //            
 //        
-//        NSLog(@"clinician first name is %@ and Clnician last name is %@",clinician.firstName,clinician.lastName);
+//        //NSLog(@"clinician first name is %@ and Clnician last name is %@",clinician.firstName,clinician.lastName);
 //        
 //            if (clinician.firstName.length) {
 //                ABRecordSetValue(existingPersonRef, kABPersonFirstNameProperty, (__bridge CFStringRef) clinician.firstName, nil) ; 
@@ -2414,7 +2414,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //            [personAddNewViewController_ setAddressBook:addressBook];
 //            self.personAddNewViewController=[[ABNewPersonViewController alloc]init];;
 //            if (autoAddClinicianToGroup &&group) {
-//                 NSLog(@"group issdfsdf %@",group);
+//                 //NSLog(@"group issdfsdf %@",group);
 //                 personAddNewViewController_.parentGroup=group;
 //            }
 //           
@@ -2449,7 +2449,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //    else
 //    
 //    {
-//        NSLog(@"existing record id is %i",existingPersonRecordID);
+//        //NSLog(@"existing record id is %i",existingPersonRecordID);
 //    
 //        [self showPersonViewControllerForRecordID:(int)existingPersonRecordID];
 //    
@@ -2467,7 +2467,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //        
 ////        recordIdentifier=(__bridge NSString)CFRecordID;
 //        
-////        NSLog(@"record identifier is %i",CFRecordID);
+////        //NSLog(@"record identifier is %i",CFRecordID);
 ////        CFErrorRef error = NULL;
 ////        
 ////
@@ -2481,10 +2481,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////        
 ////        group se
 ////            
-////        NSLog(@"abrecrod didset value is %i",didSet);
-////            NSLog(@"group record %@",CFAddressBookGroupRecord);
+////        //NSLog(@"abrecrod didset value is %i",didSet);
+////            //NSLog(@"group record %@",CFAddressBookGroupRecord);
 ////        
-////         NSLog(@" record id is %i",CFRecordID);
+////         //NSLog(@" record id is %i",CFRecordID);
 ////        
 ////       
 ////       didSet= (bool) ABAddressBookAddRecord (
@@ -2494,15 +2494,15 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////                                     );
 ////        
 ////        
-////        NSLog(@"address book add record didset value is %i",didSet);
-////         NSLog(@" record id is %i",CFRecordID);
+////        //NSLog(@"address book add record didset value is %i",didSet);
+////         //NSLog(@" record id is %i",CFRecordID);
 ////        
 ////        CFRecordID= (ABRecordID) ABRecordGetRecordID (
 ////                                                      (ABRecordRef) CFAddressBookGroupRecord
 ////                                                      );
 ////        
 ////        
-////        NSLog(@" record id is %i",CFRecordID);
+////        //NSLog(@" record id is %i",CFRecordID);
 ////       
 ////        if (ABAddressBookHasUnsavedChanges(addressBook)) {
 ////            
@@ -2510,16 +2510,16 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////                didSave = (bool) ABAddressBookSave(addressBook, &error);
 ////                
 ////                if (didSave) {
-////                    NSLog(@"did save is %i",didSave);
+////                    //NSLog(@"did save is %i",didSave);
 ////                    
 ////                    
-////                    NSLog(@" record id is %i",CFRecordID);
+////                    //NSLog(@" record id is %i",CFRecordID);
 ////                    CFRecordID= (ABRecordID) ABRecordGetRecordID (
 ////                                                                  (ABRecordRef) CFAddressBookGroupRecord
 ////                                                                  );
 ////                    
 ////                    
-////                    NSLog(@" record id is %i",CFRecordID);
+////                    //NSLog(@" record id is %i",CFRecordID);
 ////                    
 ////                    groupIdentifier=(ABRecordID)CFRecordID;
 ////                    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInteger:groupIdentifier] forKeyPath:@"addressBookGroupIdentifier"];
@@ -2571,7 +2571,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////    NSArray *groupsArray=(__bridge NSArray*)CFGroupsArray;
 ////    
 ////    
-////    NSLog(@"groups array %@",groupsArray);
+////    //NSLog(@"groups array %@",groupsArray);
 //    
 ////    if (![groupsArray containsObject:grou) {
 ////        <#statements#>
@@ -2627,11 +2627,11 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////
 ////
 ////NSMutableArray *peopleMutable= (__bridge NSMutableArray*) CFPeopleMutable;
-////NSLog(@"people mutable is %@",peopleMutable);
+//////NSLog(@"people mutable is %@",peopleMutable);
 ////NSString *predicateString = [NSString stringWithFormat:@"[SELF] contains %",CFShortFullName];
 ////    NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:predicateString];
 ////    NSArray *names = [peopleMutable filteredArrayUsingPredicate:searchPredicate];
-////    NSLog(@"names are %@", names);
+////    //NSLog(@"names are %@", names);
 ////	 CFArrayRef *CFPeopleWithName = (CFArrayRef *)ABRecordCopyCompositeName( CFShortFullName);
 ////    NSArray *nsPeopleWithCompositeArray=(NSArray *)CFPeopleWithName;
 ////
@@ -2891,15 +2891,15 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //       
 //    // stick the buttons in the toolbar
 //    
-//    NSLog(@"people picker view controllers are %@",peoplePicker.viewControllers); 
+//    //NSLog(@"people picker view controllers are %@",peoplePicker.viewControllers); 
 //    
 //    UIViewController *membersViewController=(UIViewController *)[peoplePicker.viewControllers objectAtIndex:1];
 //    
-//    NSLog(@"modal view controler is %@",membersViewController.modalViewController);
+//    //NSLog(@"modal view controler is %@",membersViewController.modalViewController);
 //    
 //    membersViewController.navigationController.delegate=self;
 //    
-//    NSLog(@"members view controller navigation controller viewcontrollers are %@",membersViewController.navigationController.viewControllers);
+//    //NSLog(@"members view controller navigation controller viewcontrollers are %@",membersViewController.navigationController.viewControllers);
 //   
 //    
 //    for (UIViewController *viewController in membersViewController.navigationController.viewControllers) {
@@ -2915,10 +2915,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //-(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
 //
 //
-//NSLog(@"will show view controller %@",viewController);
+////NSLog(@"will show view controller %@",viewController);
 //    
 //    
-//    NSLog(@"will show view controller %@",viewController);
+//    //NSLog(@"will show view controller %@",viewController);
 //    if (viewController.view.tag==837) {
 //        
 //        
@@ -2939,7 +2939,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //
 //    
 ////    if (viewController.view.tag==900) {
-////        NSLog(@"view controller tag is 900 and class is %@",[viewController class]);
+////        //NSLog(@"view controller tag is 900 and class is %@",[viewController class]);
 ////        
 ////        if ([viewController isKindOfClass:[ABNewPersonViewController class]]) {
 ////           
@@ -2987,7 +2987,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //        [buttons addObject:selectButton];
 //        
 //    
-//        NSLog(@"child view controllers are %@",viewController.view.subviews);
+//        //NSLog(@"child view controllers are %@",viewController.view.subviews);
 //        UITableView *personViewTableView=(UITableView *)[viewController.view.subviews objectAtIndex:0];
 ////        [personViewTableView setBackgroundView:nil];
 ////        [personViewTableView setBackgroundView:[[UIView alloc] init]];
@@ -3056,7 +3056,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                    
 //                    ABGroupAddMember(group, person, nil);
 //                        didSave=( bool )  ABAddressBookAddRecord(addressBookRef, group, nil);
-//                         NSLog(@"group is %@",group);
+//                         //NSLog(@"group is %@",group);
 //                }
 //        }
 //        else 
@@ -3073,7 +3073,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //               
 //                
 //               
-//                NSLog(@"did save group add member %i ",didSave); 
+//                //NSLog(@"did save group add member %i ",didSave); 
 //                
 //
 //                if (ABAddressBookHasUnsavedChanges(addressBookRef)) {
@@ -3099,24 +3099,24 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //            
 //    
 ////        if ([addressBook_ hasUnsavedChanges]) {
-////            NSLog(@"displayed person is %@ and %@",personAddNewViewController_, personAddNewViewController_.displayedPerson);
+////            //NSLog(@"displayed person is %@ and %@",personAddNewViewController_, personAddNewViewController_.displayedPerson);
 ////            existingPerson_=[addressBook personWithRecordRef:personAddNewViewController_.displayedPerson];
 ////            
 ////            didSave= [addressBook addRecord:(ABRecord *)existingPerson_];
-////            NSLog(@"didsave is equal to %i",didSave);
+////            //NSLog(@"didsave is equal to %i",didSave);
 ////            didSave= [addressBook save];
 ////            
 ////
 ////        }
 //       
 //    
-////    NSLog(@"didsave addressbook is %i",didSave);
+////    //NSLog(@"didsave addressbook is %i",didSave);
 //    
 //   
 //    ABRecordRef recordRef=personAddNewViewController_.displayedPerson;             
-//    NSLog(@"existing person %@", recordRef);
+//    //NSLog(@"existing person %@", recordRef);
 //    int aBRecordID=ABRecordGetRecordID((ABRecordRef) recordRef);
-//    NSLog(@"abrecord id is %i  ",aBRecordID);
+//    //NSLog(@"abrecord id is %i  ",aBRecordID);
 //    SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
 //    SCTableViewCell *cell =(SCTableViewCell *)[section cellAtIndex:1];
 //    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
@@ -3129,13 +3129,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //        
 //        
 //        UIView *viewLongerTextLabelView =(UIView *)[cell viewWithTag:51];
-//        NSLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
+//        //NSLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
 //        if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
 //        {
-//            NSLog(@"first name");
+//            //NSLog(@"first name");
 //            
 //            UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-//            NSLog(@"label tex is %@",firstNameLabel.text);
+//            //NSLog(@"label tex is %@",firstNameLabel.text);
 //            
 //            if (aBRecordID &&[firstNameLabel.text isEqualToString:@"First Name:"]) 
 //            {
@@ -3229,7 +3229,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //    }
 //    else
 //    {
-//        NSLog(@"cancel button pressed");
+//        //NSLog(@"cancel button pressed");
 //    }
 //  
 //   
@@ -3247,7 +3247,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //    
 //    
 ////    [newPersonViewController dismissViewControllerAnimated:YES completion:nil];
-////        NSLog(@"person record %@",newPersonViewController.navigationItem.leftBarButtonItem;
+////        //NSLog(@"person record %@",newPersonViewController.navigationItem.leftBarButtonItem;
 //    
 //   
 //        
@@ -3263,10 +3263,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////        ABRecordID recordID=(ABRecordID )existingPerson_.recordID;
 ////
 ////        
-////        NSLog(@"person identifier is %i", recordID);
+////        //NSLog(@"person identifier is %i", recordID);
 ////            existingPerson_=(ABPerson *)[addressBook personWithRecordID:recordID];
 ////            [clinician setValue:[NSNumber numberWithInt:recordID] forKey:@"aBRecordIdentifier"];        
-////            NSLog(@"person to display is %@",existingPerson_.recordRef);
+////            //NSLog(@"person to display is %@",existingPerson_.recordRef);
 ////            SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
 ////            SCTableViewCell *cell =(SCTableViewCell *)[section cellAtIndex:1];
 ////            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
@@ -3279,13 +3279,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////                
 ////                
 ////                UIView *viewLongerTextLabelView =(UIView *)[cell viewWithTag:51];
-////                NSLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
+////                //NSLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
 ////                if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
 ////                {
-////                    NSLog(@"first name");
+////                    //NSLog(@"first name");
 ////                    
 ////                    UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-////                    NSLog(@"label tex is %@",firstNameLabel.text);
+////                    //NSLog(@"label tex is %@",firstNameLabel.text);
 ////                    
 ////                    if (recordID &&[firstNameLabel.text isEqualToString:@"First Name:"]) {
 ////                        
@@ -3341,7 +3341,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //    if (actionSheet.tag==kAlertTagFoundExistingPersonWithName) {
 //        switch (buttonIndex) {
 //            case 0:
-//                NSLog(@"zero index");
+//                //NSLog(@"zero index");
 //                // on main thread in delegate method -alertView:clickedButtonAtIndex:
 //                // (do something with choosen buttonIndex)
 //             
@@ -3350,7 +3350,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                break;
 //            case 1:
 //            {
-//                NSLog(@"one index");
+//                //NSLog(@"one index");
 //                
 //                SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
 //                SCTableViewCell *cell =(SCTableViewCell *)[section cellAtIndex:1];
@@ -3364,17 +3364,17 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                   
 //                    
 //                    UIView *viewLongerTextLabelView =(UIView *)[cell viewWithTag:51];
-//                    NSLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
+//                    //NSLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
 //                    if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
 //                    {
-//                        NSLog(@"first name");
+//                        //NSLog(@"first name");
 //                        
 //                        UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-//                        NSLog(@"label tex is %@",firstNameLabel.text);
+//                        //NSLog(@"label tex is %@",firstNameLabel.text);
 //                        
 //                        
 //                                   
-//                        NSLog(@"existing person %i", existingPersonRecordID);
+//                        //NSLog(@"existing person %i", existingPersonRecordID);
 //                        if (existingPersonRecordID!=-1) {
 //                           
 //                            
@@ -3401,7 +3401,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //            }
 //                break;
 //            case 2:
-//                NSLog(@"two index");
+//                //NSLog(@"two index");
 //                [self resetABVariablesToNil];
 //                addExistingAfterPromptBool=TRUE;
 //                [self evaluateWhichABViewControllerToShow];
@@ -3416,7 +3416,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //    if (actionSheet.tag==kAlertTagFoundExistingPeopleWithName) {
 //        switch (buttonIndex) {
 //            case 0:
-//                NSLog(@"zero index");
+//                //NSLog(@"zero index");
 //                // on main thread in delegate method -alertView:clickedButtonAtIndex:
 //                // (do something with choosen buttonIndex)
 //                
@@ -3425,37 +3425,37 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                break;
 //            case 1:
 //            {
-////                NSLog(@"one index");
+////                //NSLog(@"one index");
 ////                ABAddressBook *aBtoFilter=[[ABAddressBook alloc]init];
 ////                
 ////                NSArray *arrayWithAllPeople=[aBtoFilter allPeople];
 ////                
-////                NSLog(@"array with all people is %@",arrayWithAllPeople);
+////                //NSLog(@"array with all people is %@",arrayWithAllPeople);
 ////                NSArray *arrayWithCompositeName=[aBtoFilter allPeopleWithName:existingPerson.compositeName];
 ////               
 ////                
-////               NSLog(@"array with all people with composite name is %@",arrayWithCompositeName);
+////               //NSLog(@"array with all people with composite name is %@",arrayWithCompositeName);
 ////                
 ////                
 ////                for (ABPerson *personInArray in arrayWithAllPeople) {
 ////                    
-////                     NSLog(@"person composite name is %@",personInArray.compositeName);
+////                     //NSLog(@"person composite name is %@",personInArray.compositeName);
 ////                    if (![personInArray.firstName isEqualToString:existingPerson.firstName]||![personInArray.lastName isEqualToString:existingPerson.lastName]) {
-////                     NSLog(@"person composite name to remove is %@",personInArray.compositeName);
+////                     //NSLog(@"person composite name to remove is %@",personInArray.compositeName);
 ////                         [aBtoFilter removeRecord:(ABRecord *)personInArray];
 ////                        
 ////                    }    
 ////                   
 ////                    
 ////                }
-////                NSLog(@"abtofilter all people %@",[aBtoFilter allPeople]);
+////                //NSLog(@"abtofilter all people %@",[aBtoFilter allPeople]);
 //                                    
 //                    [self showPeoplePickerController];
 //               
 //            }
 //                break;
 //            case 2:
-//                NSLog(@"two index");
+//                //NSLog(@"two index");
 //                
 //                [self resetABVariablesToNil];
 //                addExistingAfterPromptBool=TRUE;
@@ -3473,8 +3473,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //
 //-(IBAction)cancelButtonTappedInABPersonViewController:(id)sender{
 //    
-//NSLog(@"cancel button clicked");
-//    NSLog(@"sender class is %@",[sender class]);
+////NSLog(@"cancel button clicked");
+//    //NSLog(@"sender class is %@",[sender class]);
 //    if (personVCFromSelectionList_) {
 //        [personVCFromSelectionList_ dismissViewControllerAnimated:YES completion:nil];
 //    }
@@ -3518,13 +3518,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //        
 //        
 //        
-//        NSLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
+//        //NSLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
 //        if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
 //        {
-//            NSLog(@"first name");
+//            //NSLog(@"first name");
 //            
 //            UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-//            NSLog(@"label tex is %@",firstNameLabel.text);
+//            //NSLog(@"label tex is %@",firstNameLabel.text);
 //            
 //            ABRecordRef recordRef=personVCFromSelectionList_.displayedPerson;
 //            int aBRecordID=ABRecordGetRecordID((ABRecordRef)recordRef);
@@ -3623,13 +3623,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //    }
 //    
 //    
-//    NSLog(@"selectButton Tapped");
+//    //NSLog(@"selectButton Tapped");
 //}
 //
 //
 //-(IBAction)cancelAddNewAddressBookPerson:(id)sender{
 //
-//    NSLog(@"cancel button pressed");
+//    //NSLog(@"cancel button pressed");
 //   [personAddNewViewController_.navigationController dismissViewControllerAnimated:YES completion:^{
 //        
 //    currentDetailTableViewModel.viewController.navigationController.delegate =nil;
@@ -3655,37 +3655,37 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //
 ////-(IBAction)doneButtonTappedInABPersonViewController:(id)sender{
 ////    
-////    NSLog(@"done button pressed");
+////    //NSLog(@"done button pressed");
 ////   
 ////
 ////    
 ////    bool didSave=NO;
 ////  
 ////    
-////    NSLog(@"displayed person is %@ and %@",personAddNewViewController_, personAddNewViewController_.displayedPerson);
+////    //NSLog(@"displayed person is %@ and %@",personAddNewViewController_, personAddNewViewController_.displayedPerson);
 ////    existingPerson_=[addressBook_ personWithRecordRef:personAddNewViewController_.displayedPerson];
 ////    
 ////    didSave= [addressBook_ addRecord:(ABRecord *)existingPerson_];
-////     NSLog(@"didsave is equal to %i",didSave);
+////     //NSLog(@"didsave is equal to %i",didSave);
 ////   didSave= [addressBook_ save];
 ////    
 ////   
 ////  
-////   NSLog(@"didsave addressbook is %i",didSave);
+////   //NSLog(@"didsave addressbook is %i",didSave);
 ////    
-////    NSLog(@"existing person properties description %@",[existingPerson_ description]);
-////    NSLog(@"existing person observation info%@",existingPerson_.observationInfo);
-////    NSLog(@"existing person class%@ ",  [existingPerson_ class]);
+////    //NSLog(@"existing person properties description %@",[existingPerson_ description]);
+////    //NSLog(@"existing person observation info%@",existingPerson_.observationInfo);
+////    //NSLog(@"existing person class%@ ",  [existingPerson_ class]);
 ////    
-////    NSLog(@"existing person %@",[existingPerson_ accessibilityValue]);
-////    NSLog(@"existing person %@",[existingPerson_ dictionaryWithValuesForKeys:[NSArray array]]);
+////    //NSLog(@"existing person %@",[existingPerson_ accessibilityValue]);
+////    //NSLog(@"existing person %@",[existingPerson_ dictionaryWithValuesForKeys:[NSArray array]]);
 ////    
 ////    
-////    NSLog(@"existing person observation info %@",[personAddNewViewController_ observationInfo]);
+////    //NSLog(@"existing person observation info %@",[personAddNewViewController_ observationInfo]);
 ////    ABRecordRef recordRef=personAddNewViewController_.displayedPerson;             
-////    NSLog(@"existing person %@", recordRef);
+////    //NSLog(@"existing person %@", recordRef);
 ////    int aBRecordID=existingPerson_.recordID;
-////    NSLog(@"abrecord id is %i  ",aBRecordID);
+////    //NSLog(@"abrecord id is %i  ",aBRecordID);
 ////    SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
 ////    SCTableViewCell *cell =(SCTableViewCell *)[section cellAtIndex:1];
 ////    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
@@ -3698,13 +3698,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////        
 ////        
 ////        UIView *viewLongerTextLabelView =(UIView *)[cell viewWithTag:51];
-////        NSLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
+////        //NSLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
 ////        if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
 ////        {
-////            NSLog(@"first name");
+////            //NSLog(@"first name");
 ////            
 ////            UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-////            NSLog(@"label tex is %@",firstNameLabel.text);
+////            //NSLog(@"label tex is %@",firstNameLabel.text);
 ////            
 ////            if (aBRecordID &&[firstNameLabel.text isEqualToString:@"First Name:"]) 
 ////            {
@@ -3812,7 +3812,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                {
 //                    
 //                    CFGroupsCheckNameArray= (CFArrayRef )ABAddressBookCopyArrayOfAllGroups((ABAddressBookRef) addressBook);
-//                    NSLog(@"cggroups array %@",CFGroupsCheckNameArray);
+//                    //NSLog(@"cggroups array %@",CFGroupsCheckNameArray);
 //                    
 //                    
 //                    for (CFIndex i = 0; i < groupCount; i++) {
@@ -3830,8 +3830,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                        
 //                        NSString *checkNameStr=[NSString stringWithFormat:@"%@",(__bridge NSString*) CFGroupNameCheck];
 //                        
-//                        NSLog(@"cfgroupname is %@",checkNameStr);
-//                        NSLog(@"groupname Str is %@",groupName);
+//                        //NSLog(@"cfgroupname is %@",checkNameStr);
+//                        //NSLog(@"groupname Str is %@",groupName);
 //                        if ([checkNameStr isEqualToString:groupName]) {
 //                            group=groupInCheckNameArray;
 //                            groupIdentifier=ABRecordGetRecordID(group);
@@ -3843,11 +3843,11 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                            }
 //                            
 //                            if (group) {
-//                                NSLog(@"group is %@",group);
+//                                //NSLog(@"group is %@",group);
 //                            }
 //                            
 //                            else {
-//                                NSLog(@"no group");
+//                                //NSLog(@"no group");
 //                            } 
 //                            break;
 //                        }
@@ -3893,10 +3893,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //            
 //            //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
 //            
-//            //        NSLog(@"group composite name is %@",groupRecord.compositeName);
+//            //        //NSLog(@"group composite name is %@",groupRecord.compositeName);
 //            
 //            
-//            //        NSLog(@"group record identifier is %i",groupRecord.recordID);
+//            //        //NSLog(@"group record identifier is %i",groupRecord.recordID);
 //            
 //            bool didSetGroupName=FALSE;
 //            didSetGroupName= (bool) ABRecordSetValue (
@@ -3915,8 +3915,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //                    bool didSave=FALSE;
 //                    didSave = ABAddressBookSave(addressBook, nil);
 //                    
-//                    if (!didSave) {/* Handle error here. */  NSLog(@"addressbook did not save");}
-//                    else NSLog(@"addresss book saved new group.");
+//                    if (!didSave) {/* Handle error here. */  //NSLog(@"addressbook did not save");}
+//                    else //NSLog(@"addresss book saved new group.");
 //                    
 //                } 
 //                else {
@@ -3929,9 +3929,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //            
 //            //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
 //            
-//            NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
+//            //NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
 //            
-//            NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
+//            //NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
 //            
 //            
 //            
