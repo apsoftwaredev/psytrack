@@ -51,7 +51,7 @@
 - (void)didSelectCell
 {
     
-    NSString *clinicianKeyStr=[self.objectBindings valueForKey:@"92"];
+//    NSString *clinicianKeyStr=[self.objectBindings valueForKey:@"92"];
     //NSLog(@"client %@",[self.boundObject valueForKey:clinicianKeyStr]);
     
     

@@ -50,7 +50,7 @@
 
 @property (nonatomic, copy) NSString* passCode;
 
--(NSString *)textMessageResetGenerator:(NSString *)textMessageNumber;
+//-(NSString *)textMessageResetGenerator:(NSString *)textMessageNumber;
 -(void)resetTimer;
 -(void)turnOnTimer;
 - (void) showBanner: (UIView *) bannerView;

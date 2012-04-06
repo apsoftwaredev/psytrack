@@ -122,7 +122,7 @@
        
    
     if (tableViewModel.tag==0||tableViewModel.tag==1) {
-        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+//        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
          //NSLog(@"cell class is %@",cell.class);
 //        if (cell.tag<) {
 //            UIView *viewLong =[cell viewWithTag:51];

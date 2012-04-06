@@ -62,7 +62,7 @@
 @property (nonatomic,assign)int sourceRecordID;
 @property(nonatomic, strong) NSString *name;
 //@property(nonatomic, strong) NSMutableArray *groups;
-@property (nonatomic, strong) NSMutableArray *abGroupsMutArray;
+//@property (nonatomic, strong) NSMutableArray *abGroupsMutArray;
 - (id)initWithAllGroups:(NSMutableArray *)allGroups name:(NSString*)sourceName recordID:(int)recordIDInt;
 //
 //-(NSArray *)addressBookGroupsArray;

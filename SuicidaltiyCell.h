@@ -40,10 +40,7 @@
 -(IBAction)meansButtonTapped:(id)sender;
 -(IBAction)historyButtonTapped:(id)sender;
 
--(IBAction)ideationOnButtonTapped:(id)sender;
--(IBAction)planOnButtonTapped:(id)sender;
--(IBAction)meansOnButtonTapped:(id)sender;
--(IBAction)historyOnButtonTapped:(id)sender;
+
 
 -(void)toggleButtons:(UIButton *)button;
 -(void)checkSuicideRisk;

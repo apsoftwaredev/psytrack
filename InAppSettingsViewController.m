@@ -1162,7 +1162,7 @@ if(sourceArray.count>1)
             
         case 304:
         {
-            NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
+//            NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
 			//NSLog(@"button 304 pressed group name string is %@ ",groupNameString);
 //            
             
@@ -1257,7 +1257,7 @@ if(sourceArray.count>1)
             break;
         case 305:
         {
-            NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
+//            NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
 			//NSLog(@"button 305 pressed group name string is %@ ",groupNameString);
             
             int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];

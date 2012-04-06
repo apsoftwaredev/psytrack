@@ -724,7 +724,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
 
     if(tableViewModel.tag==1 &&indexPath.section==0){
-        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+//        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         //NSLog(@"cell bound object is %@",cellManagedObject);
         //NSLog(@"cell.tag%i",cell.tag);
         //NSLog(@"section managed object is %@",cellManagedObject.entity.name);

@@ -121,7 +121,7 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 -(NSURL *)applicationDrugsFileURL;
 -(void)resetDrugsModel;
 
--(NSURL *)applicationDisordersFileURL;
+//-(NSURL *)applicationDisordersFileURL;
 -(void)resetDisordersModel;
 
 
@@ -151,7 +151,7 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 -(NSData *)decryptDataToPlainDataUsingKeyEntityWithDate:(NSDate *)keyDate encryptedData:(NSData *)encryptedData;
 //-(NSData *)decryptDataToPlainData:(NSData *) encryptedData;
 -(NSData *)encryptDictionaryToData:(NSDictionary *)unencryptedDictionary;
--(NSDictionary *)decryptDataToDictionary:(NSData*)encryptedData;
+//-(NSDictionary *)decryptDataToDictionary:(NSData*)encryptedData;
 -(NSString *)generateRandomStringOfLength:(int )length;
 -(NSString *)combSmString;
 -(NSData *)hashDataFromString:(NSString *)plainString;
@@ -161,7 +161,7 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 -(NSData *)decryptDataToPlainData:(NSData *)encryptedData usingSymetricKey:(NSData *)symetricData;
 -(NSData *)convertStringToData:(NSString *)string;
 
--(IBAction)resaveLockDictionarySettings:(id)sender;
+//-(IBAction)resaveLockDictionarySettings:(id)sender;
 @property (nonatomic,assign)BOOL okayToDecryptBool;
 
 @property (nonatomic, strong) PTTEncryption *encryption;
@@ -199,10 +199,10 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 - (void) lockScreen: (LCYLockScreenViewController *) lockScreen unlockedApp: (BOOL) unlocked;
 -(LCYAppSettings *) appSettings;
 
-+(BOOL)getUseiCloud;
+//+(BOOL)getUseiCloud;
 
 + (NSString *)GetUUID;
-
+-(void)setLCYLockPlist;
 -(NSData*)getSymetricData;
 @end
 
@@ -219,7 +219,7 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 
 -(BOOL)saveLockDictionarySettings;
 -(NSString *)lockSettingsFilePath;
--(void)setLCYLockPlist;
+
 
 
 @end

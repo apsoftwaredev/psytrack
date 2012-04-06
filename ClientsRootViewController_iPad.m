@@ -351,7 +351,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
         
         
         
-        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+//        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
         
         //NSLog(@"index of cell is %i",[section indexForCell:cell]);
         if (!cell ||(indexPath.row==0)) {

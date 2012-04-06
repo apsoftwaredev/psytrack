@@ -353,7 +353,7 @@
 
     NSString* symmetricString= [NSString stringWithFormat:@"qu1shZEM196kibsiBh7h%@hsiwoai4js",[self combSmString]];
     //NSLog(@"semetric string is %@",symmetricString);
-    NSData *data=[symmetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
+//    NSData *data=[symmetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
     
 //NSLog(@"data length is %i",[data length]);
     return [symmetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
@@ -432,9 +432,7 @@
             }
         }
         
-        NSDate *testDate=(NSDate *)[returnDictionary valueForKey:@"keyDate"];
-        
-        //NSLog(@"key date test is %@",testDate);
+    
      unwrappedSymetricString   =[encryption_ unwrapSymmetricKey:keyObject.keyF keyRef:nil useDefaultPrivateKey:YES];
         
          symetricStringThree=[self convertDataToString:unwrappedSymetricString];
@@ -717,18 +715,14 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
     
     
     
-    NSDictionary *testEncoding=[NSKeyedUnarchiver unarchiveObjectWithData:encodedData];
-    
-    //NSLog(@"test encoding dictionary %@",[testEncoding allKeys]);
+   
     NSData *wrapedSymmetricKey;
     if (symetricData.length==32) {
   
         wrapedSymmetricKey=[encryption_ encryptData:symetricData keyRef:nil useDefaultPublicKey:YES];
         
     }
-    NSString* newStr = [[NSString alloc] initWithData:wrapedSymmetricKey encoding:NSASCIIStringEncoding];;
     
-    //NSLog(@"newstring is %@",newStr);
     if (![wrapedSymmetricKey length]) {
         statusMessage=@"Check for a software update";
     }
@@ -1584,7 +1578,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                    if ([self.tabBarController.selectedViewController class]==[UISplitViewController class]) 
                    {
                    
-                       UISplitViewController *splitViewController=(UISplitViewController*) self.tabBarController.selectedViewController;
+//                       UISplitViewController *splitViewController=(UISplitViewController*) self.tabBarController.selectedViewController;
                        
                        //NSLog(@"split view controller view controllers %@",splitViewController.viewControllers);
                        

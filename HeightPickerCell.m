@@ -527,7 +527,7 @@
             
         }
         else if (convertToMetric==FALSE){
-            float inchesFloat=0,feetFloat,centemetersFloat=0;
+            float inchesFloat=0,feetFloat;
             NSInteger inchesInteger,feetInteger,centemetersInteger;
             centemetersInteger=thirdComponent+(firstComponent *100);
             

@@ -72,7 +72,7 @@ NSManagedObjectContext *managedObjectContext;
 //@property (strong, nonatomic)IBOutlet SCArrayOfStringsSection *objectsSection;
 
 
--(id)setupTheCliniciansViewUsingSTV;
+
 
 //-(void)showPersonViewControllerWithRecordIdentifier:(NSString *)recordIdentifier firstName:(NSString *)firstName lastName:(NSString *)lastName;
 

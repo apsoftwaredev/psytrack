@@ -500,9 +500,9 @@
             
             //                if ([objectsSelectionSection.selectedItemIndex integerValue]>=0&&[objectsSelectionSection.selectedItemIndex integerValue]<=objectsSelectionSection.items.count) {
             //                    
-            NSIndexPath *cellIndexPath=objectsSelectionSection.selectedCellIndexPath;
+//            NSIndexPath *cellIndexPath=objectsSelectionSection.selectedCellIndexPath;
             
-            SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:cellIndexPath];
+//            SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:cellIndexPath];
             //NSLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
             
             
@@ -1131,10 +1131,7 @@
                 
                 SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
                 
-                NSManagedObject *sectionManagedObject=(NSManagedObject *)section.boundObject;
-                //NSLog(@"section managed object%@",sectionManagedObject);
-                
-                NSString *drugApplNo=(NSString *)[section.boundObject valueForKey:@"applNo"];
+                drugApplNo=(NSString *)[section.boundObject valueForKey:@"applNo"];
                 
                 //NSLog(@"applNo is %@",drugApplNo);
                 DrugActionDateViewController * drugActionDateViewController_iPhone = [[DrugActionDateViewController alloc] initWithNibName:@"DrugActionDateViewController" bundle:[NSBundle mainBundle] withApplNo:drugApplNo];

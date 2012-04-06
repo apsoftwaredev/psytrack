@@ -309,7 +309,7 @@ NSString* trustResultDescribe( SecTrustResultType result ) {
                    
                     //5
                     if (status==noErr) {
-                   NSLog(@"trust result string is %@",trustResultDescribe(trustResult));
+//                   NSLog(@"trust result string is %@",trustResultDescribe(trustResult));
                         switch(trustResult) {
                             case kSecTrustResultProceed:
                                 // Accepted by user keychain setting explicitly
@@ -504,10 +504,10 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
         
             
         }
-        else 
-        {
-            NSLog(@"public key is nil");
-        }
+//        else 
+//        {
+//            NSLog(@"public key is nil");
+//        }
         
         
     }
@@ -542,8 +542,8 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
                                 &cipherBufferSize
 								);
 	
-	if (sanityCheck!=noErr) 
-        NSLog(@"Error encrypting, OSStatus == %ld.", sanityCheck );
+//	if (sanityCheck!=noErr) 
+//        NSLog(@"Error encrypting, OSStatus == %ld.", sanityCheck );
  
 	
 	// Build up cipher text blob.
@@ -571,7 +571,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
             BOOL proceed=[self identityAndTrustResult];
             
             if (!proceed ||privateKeyRef==nil) {
-                NSLog(@"was not able to verify security information");
+//                NSLog(@"was not able to verify security information");
                 return nil;
                 
             }
@@ -582,10 +582,10 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
             
             
         }
-        else 
-        {
-            NSLog(@"private key is nil");
-        }
+//        else 
+//        {
+//            NSLog(@"private key is nil");
+//        }
         
         
     }
@@ -660,7 +660,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
         
         if (!proceed ||privateKeyRef==nil) 
         {
-            NSLog(@"was not able to verify security information");
+//            NSLog(@"was not able to verify security information");
             return nil;
             
         }
@@ -745,12 +745,12 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
 	LOGGING_FACILITY(plainText != nil, @"PlainText object cannot be nil." );
 	LOGGING_FACILITY(symmetricKey != nil, @"Symmetric key object cannot be nil." );
 	LOGGING_FACILITY(pkcs7 != NULL, @"CCOptions * pkcs7 cannot be NULL." );
-	NSLog(@"semetric key length is %i",[symmetricKey length]);
-    NSLog(@"max blowfish key length is%i",kChosenCipherKeySize);
+//	NSLog(@"semetric key length is %i",[symmetricKey length]);
+//    NSLog(@"max blowfish key length is%i",kChosenCipherKeySize);
     
     LOGGING_FACILITY([symmetricKey length] == kChosenCipherKeySize, @"Disjoint choices for key size." );
 
-        NSLog(@"semetric key length is %i, kchosenchyper size is %i",[symmetricKey length],kChosenCipherKeySize);
+//        NSLog(@"semetric key length is %i, kchosenchyper size is %i",[symmetricKey length],kChosenCipherKeySize);
     if ([symmetricKey length]!=kChosenCipherKeySize) {
         return nil;
     }
@@ -841,7 +841,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
 	if (bufferPtr) free(bufferPtr);
 }
 @catch (NSException *exception) {
-        NSLog(@"exception name:%@ reason: %@ userInfo is %@",exception.name,exception.reason,exception.userInfo);
+//        NSLog(@"exception name:%@ reason: %@ userInfo is %@",exception.name,exception.reason,exception.userInfo);
     }
 @finally {
         
@@ -882,7 +882,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
             
             if (!proceed ||privateKeyRef==nil) 
             {
-                NSLog(@"was not able to verify security information");
+//                NSLog(@"was not able to verify security information");
                 return nil;
                 
             }

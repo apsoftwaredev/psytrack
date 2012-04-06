@@ -318,7 +318,7 @@
     //set the order attributes name defined in the Employment Title Entity
     employmentTitleDef.orderAttributeName=@"order";
     
-    SCClassDefinition *employmentPositionDef = [SCClassDefinition definitionWithEntityName:@"EmploymentPositionEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects: @"jobTitle",@"nonClinicalclinicians",@"department",@"startedDate", @"endedDate", @"notes", nil]];
+    SCClassDefinition *employmentPositionDef = [SCClassDefinition definitionWithEntityName:@"EmploymentPositionEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects: @"jobTitle",@"department",@"startedDate", @"endedDate", @"notes", nil]];
     
     //set the order attributes name defined in the Employment Position Entity
     employmentPositionDef.orderAttributeName=@"order";
@@ -327,52 +327,52 @@
     SCPropertyDefinition *employmentPositionDepartmentPropertyDef = [employmentPositionDef propertyDefinitionWithName:@"department"];
     employmentPositionDepartmentPropertyDef.type=SCPropertyTypeTextView;
     
-    SCPropertyGroup *nonClinicalSupNameGroup = [SCPropertyGroup groupWithHeaderTitle:@"clinician of My clinician Name" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"title", @"firstName",@"middleName",@"lastName",@"suffix",@"credentialInitials", nil]];
+//    SCPropertyGroup *nonClinicalSupNameGroup = [SCPropertyGroup groupWithHeaderTitle:@"clinician of My clinician Name" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"title", @"firstName",@"middleName",@"lastName",@"suffix",@"credentialInitials", nil]];
+//    
     
-    
-    SCPropertyGroup *nonClinicalSupDatesGroup = [SCPropertyGroup groupWithHeaderTitle:@"Supervision Dates" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"started",@"ended", nil]];
+//    SCPropertyGroup *nonClinicalSupDatesGroup = [SCPropertyGroup groupWithHeaderTitle:@"Supervision Dates" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"started",@"ended", nil]];
     
 //    SCPropertyGroup *nonClinicalSupContactGroup = [SCPropertyGroup groupWithHeaderTitle:@"Contact Information" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"addresses", @"phoneNumbers",@"emailAddresses", nil]];
     
-    SCPropertyGroup *nonClinicalSupNotesGroup = [SCPropertyGroup groupWithHeaderTitle:@"Notes" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"notes"]];
+//    SCPropertyGroup *nonClinicalSupNotesGroup = [SCPropertyGroup groupWithHeaderTitle:@"Notes" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"notes"]];
     
-    SCPropertyGroupArray *nonClinicalSupervisorPropetyGroupArray=[[SCPropertyGroupArray alloc]init];
-    [nonClinicalSupervisorPropetyGroupArray addGroup:nonClinicalSupNameGroup];
-    [nonClinicalSupervisorPropetyGroupArray addGroup:nonClinicalSupDatesGroup];
+//    SCPropertyGroupArray *nonClinicalSupervisorPropetyGroupArray=[[SCPropertyGroupArray alloc]init];
+//    [nonClinicalSupervisorPropetyGroupArray addGroup:nonClinicalSupNameGroup];
+//    [nonClinicalSupervisorPropetyGroupArray addGroup:nonClinicalSupDatesGroup];
 //    [nonClinicalSupervisorPropetyGroupArray addGroup:nonClinicalSupContactGroup];
-    [nonClinicalSupervisorPropetyGroupArray addGroup:nonClinicalSupNotesGroup];
+//    [nonClinicalSupervisorPropetyGroupArray addGroup:nonClinicalSupNotesGroup];
     
-    SCClassDefinition *nonClinicalSupervisorDef =[SCClassDefinition definitionWithEntityName:@"NonClinicalSupervisorEntity" withManagedObjectContext:managedObjectContext withPropertyGroups:nonClinicalSupervisorPropetyGroupArray];
+//    SCClassDefinition *nonClinicalSupervisorDef =[SCClassDefinition definitionWithEntityName:@"NonClinicalSupervisorEntity" withManagedObjectContext:managedObjectContext withPropertyGroups:nonClinicalSupervisorPropetyGroupArray];
     
     //set the order attributes name defined in the Non Clinical  Entity
-    nonClinicalSupervisorDef.orderAttributeName=@"order";
-    nonClinicalSupervisorDef.titlePropertyName=@"title;firstName;lastName;credendialInitials";
-    SCPropertyDefinition *nonClinicalSupervisorPropertyDef = [employmentPositionDef propertyDefinitionWithName:@"nonClinicalSupervisors"];
-    
-    nonClinicalSupervisorPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:nonClinicalSupervisorDef
-                                                                                                allowAddingItems:TRUE
-                                                                                              allowDeletingItems:TRUE
-                                                                                                allowMovingItems:TRUE];
-    
+//    nonClinicalSupervisorDef.orderAttributeName=@"order";
+//    nonClinicalSupervisorDef.titlePropertyName=@"title;firstName;lastName;credendialInitials";
+//    SCPropertyDefinition *nonClinicalSupervisorPropertyDef = [employmentPositionDef propertyDefinitionWithName:@"nonClinicalSupervisors"];
+//    
+//    nonClinicalSupervisorPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:nonClinicalSupervisorDef
+//                                                                                                allowAddingItems:TRUE
+//                                                                                              allowDeletingItems:TRUE
+//                                                                                                allowMovingItems:TRUE];
+//    
     
     //override the auto title generation for the nonClinicalSupervisor property definition and set it to a custom title
-    nonClinicalSupervisorPropertyDef.title=@"Supervisors";
-    SCPropertyDefinition *nonClinicalSupervisorNotesPropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"notes"];
-    nonClinicalSupervisorNotesPropertyDef.type=SCPropertyTypeTextView;
-    nonClinicalSupervisorNotesPropertyDef.title=nil;
+//    nonClinicalSupervisorPropertyDef.title=@"Supervisors";
+//    SCPropertyDefinition *nonClinicalSupervisorNotesPropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"notes"];
+//    nonClinicalSupervisorNotesPropertyDef.type=SCPropertyTypeTextView;
+//    nonClinicalSupervisorNotesPropertyDef.title=nil;
+//    
+//    
+//    SCPropertyDefinition *nonClinicalSupStartedDatePropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"started"];
+//	nonClinicalSupStartedDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+//                                                                                     datePickerMode:UIDatePickerModeDate 
+//                                                                      displayDatePickerInDetailView:NO];
     
     
-    SCPropertyDefinition *nonClinicalSupStartedDatePropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"started"];
-	nonClinicalSupStartedDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
-                                                                                     datePickerMode:UIDatePickerModeDate 
-                                                                      displayDatePickerInDetailView:NO];
     
-    
-    
-    SCPropertyDefinition *nonClinicalSupEndedDatePropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"ended"];
-	nonClinicalSupEndedDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
-                                                                                   datePickerMode:UIDatePickerModeDate 
-                                                                    displayDatePickerInDetailView:NO];
+//    SCPropertyDefinition *nonClinicalSupEndedDatePropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"ended"];
+//	nonClinicalSupEndedDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+//                                                                                   datePickerMode:UIDatePickerModeDate 
+//                                                                    displayDatePickerInDetailView:NO];
     
     
     
@@ -430,7 +430,7 @@
     
     
     
-    SCClassDefinition *employerDef = [SCClassDefinition definitionWithEntityName:@"EmployerEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"employerName", @"addresses", @"phoneNumbers",@"notes", nil]];
+    SCClassDefinition *employerDef = [SCClassDefinition definitionWithEntityName:@"EmployerEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"employerName",@"notes", nil]];
     
     //set the order attributes name defined in the Employer Entity    
     employerDef.orderAttributeName=@"order";
@@ -969,7 +969,7 @@
     
     
     self.clinicianDef.titlePropertyName = @"firstName;lastName";	
-    self.clinicianDef.keyPropertyName = @"firstName;lastName";
+    self.clinicianDef.keyPropertyName = @"lastName";
    	self.clinicianDef.orderAttributeName = @"order";
     
    

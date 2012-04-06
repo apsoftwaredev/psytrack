@@ -291,9 +291,9 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 
 //                if ([objectsSelectionSection.selectedItemIndex integerValue]>=0&&[objectsSelectionSection.selectedItemIndex integerValue]<=objectsSelectionSection.items.count) {
 //                    
-            NSIndexPath *cellIndexPath=objectsSelectionSection.selectedCellIndexPath;
+//            NSIndexPath *cellIndexPath=objectsSelectionSection.selectedCellIndexPath;
             
-                    SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:cellIndexPath];
+//                    SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:cellIndexPath];
       //NSLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
             
                     
@@ -1025,7 +1025,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
         
         
         
-        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+//        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
         
         //NSLog(@"index of cell is %i",[section indexForCell:cell]);
         if (!cell ||(indexPath.row==0)) {
