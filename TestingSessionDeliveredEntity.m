@@ -16,7 +16,7 @@
 @dynamic eventIdentifier;
 @dynamic notes;
 @dynamic order;
-@dynamic dateOfTesting;
+@dynamic dateOfService;
 @dynamic paperwork;
 @dynamic supervisor;
 @dynamic trainingType;
@@ -43,8 +43,8 @@
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"MST"]];
     NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
     //NSLog(@"reference date %@",referenceDate);
-    if ([(NSDate *)self.dateOfTesting isEqualToDate:referenceDate]) {
-        self.dateOfTesting = [NSDate date];
+    if ([(NSDate *)self.dateOfService isEqualToDate:referenceDate]) {
+        self.dateOfService = [NSDate date];
         
     }
 }

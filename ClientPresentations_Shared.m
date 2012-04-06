@@ -44,7 +44,7 @@
                                                            autoGeneratePropertyDefinitions:YES];
    
     
-    
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"interventionDelivered"];
     //Create the property definition for the affect Mood property in the client Presentatio class
     SCPropertyDefinition *affectNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"affectNotes"];
     

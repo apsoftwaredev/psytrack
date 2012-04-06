@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSString * eventIdentifier;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSDate * dateOfTesting;
+@property (nonatomic, retain) NSDate * dateOfService;
 @property (nonatomic, retain) NSNumber * paperwork;
 @property (nonatomic, retain) ClinicianEntity *supervisor;
 @property (nonatomic, retain) NSManagedObject *trainingType;

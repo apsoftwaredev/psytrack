@@ -49,9 +49,9 @@
     NSManagedObject *eventButtonBoundObject;
 
 
+    NSString *eventTitleString;
 
-
-
+    NSString *tableModelClassDefEntity;
 
 
 }

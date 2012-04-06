@@ -162,25 +162,15 @@
   
     [self.searchBar setSelectedScopeButtonIndex:2];
     // Initialize tableModel
-    if (self.navigationItem.rightBarButtonItems.count>1) {
-        
-        tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
-    }
-    
-    
-    
-    if (self.navigationItem.rightBarButtonItems.count >0)
-    {
-        tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
-    }
-    
+
     if ([SCHelper is_iPad]) {
         
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
-        [self.tableView setBackgroundColor:[UIColor clearColor]];
     }
-    [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+        [self.tableView setBackgroundColor:[UIColor clearColor]];
+    
+    
     
     
     self.view.backgroundColor=[UIColor clearColor];
@@ -633,7 +623,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
     }
     
-    if (tableViewModel.tag==3 && tableViewModel.sectionCount) {
+    if (tableViewModel.tag==3 && tableViewModel.sectionCount&&index==0) {
         
         
       
@@ -655,7 +645,6 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         }
 }
 }
-
 
 
 
@@ -690,7 +679,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
                 //NSLog(@"entity name is %@",cellManagedObject.entity.name);
                 //identify the Languages Spoken table
-                if ([cellManagedObject.entity.name isEqualToString:@"TestingSessionDeliveredEntity"]) {
+                if ([cellManagedObject.entity.name isEqualToString:tableModelClassDefEntity]) {
                     //NSLog(@"the managed object entity is Languag spoken Entity");
                     //get the value of the primaryLangugage attribute
                     NSNumber *paperworkNumber=(NSNumber *)[cellManagedObject valueForKey:@"paperwork"];
@@ -796,6 +785,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     
 }
+
 
 
 
@@ -978,7 +968,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
                 //NSLog(@"client set is %@",clientSet);
                 
-                NSString *eventTitleString=[NSString stringWithString:@"Test Administration:"];
+               
                 for (id obj in clientSet){
                     eventTitleString=[eventTitleString stringByAppendingFormat:@" %@,",obj];
                     
