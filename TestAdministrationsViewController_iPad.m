@@ -156,7 +156,7 @@
     
     
     SCClassDefinition *testSessionDeliveredDef =[SCClassDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
-                                                                   withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"dateOfTesting",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType", @"certificationsCredited",   @"degreesCredited",  @"licenseNumbersCredited", @"relatedSupportTime", @"supervisor", @"testsAdministered",   @"trainingType", @"treatmentSetting",  @"eventIdentifier",     nil]];        
+                                                                   withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType", @"certificationsCredited",   @"degreesCredited",  @"licenseNumbersCredited", @"relatedSupportTime", @"supervisor", @"testsAdministered",   @"trainingType", @"treatmentSetting",  @"eventIdentifier",     nil]];        
     
     
     
@@ -177,17 +177,17 @@
     NSInteger eventIdentifierPropertyIndex = [testSessionDeliveredDef indexOfPropertyDefinitionWithName:@"eventIdentifier"];
     [testSessionDeliveredDef removePropertyDefinitionAtIndex:eventIdentifierPropertyIndex];
 
-    SCPropertyDefinition *dateOfTestingPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"dateOfTesting"];
-	dateOfTestingPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+    SCPropertyDefinition *dateOfServicePropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"dateOfService"];
+	dateOfServicePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
                                                                               datePickerMode:UIDatePickerModeDate 
                                                                displayDatePickerInDetailView:YES];
     
-    dateOfTestingPropertyDef.title=@"Testing Date";
+    dateOfServicePropertyDef.title=@"Testing Date";
     SCPropertyDefinition *notesPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"notes"];
     notesPropertyDef.type=SCPropertyTypeTextView;
     
-    testSessionDeliveredDef.titlePropertyName=@"dateOfTesting";
-    testSessionDeliveredDef.keyPropertyName=@"dateOfTesting";
+    testSessionDeliveredDef.titlePropertyName=@"dateOfService";
+    testSessionDeliveredDef.keyPropertyName=@"dateOfService";
     
     
     //add a button to add an event to the calandar
@@ -200,7 +200,7 @@
     //add the property definition to the test administration detail view  
     [testSessionDeliveredDef addPropertyDefinition:eventButtonProperty];
     //define a property group
-    SCPropertyGroup *eventGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"dateOfTesting",@"time",@"clientPresentations", @"EventButtonCell",nil]];
+    SCPropertyGroup *eventGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"dateOfService",@"time",@"clientPresentations", @"EventButtonCell",nil]];
     
     // add the event Group property group to the behavioralObservationsDef class. 
     [testSessionDeliveredDef.propertyGroups addGroup:eventGroup];
@@ -542,7 +542,7 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
     
     tableModel.autoSortSections = TRUE;  
     tableModel.searchBar = self.searchBar;
-	tableModel.searchPropertyName = @"dateOfTesting";
+	tableModel.searchPropertyName = @"dateOfService";
     
     tableModel.allowMovingItems=TRUE;
     
@@ -628,7 +628,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
        //NSLog(@"start dtate %@",startDate);
         //NSLog(@"end date is %@", endDate);
         
-        NSPredicate *currentMonthPredicate = [NSPredicate predicateWithFormat:@"((dateOfTesting > %@) AND (dateOfTesting <= %@)) || (dateOfTesting = nil)",startDate,endDate];
+        NSPredicate *currentMonthPredicate = [NSPredicate predicateWithFormat:@"((dateOfService > %@) AND (dateOfService <= %@)) || (dateOfService = nil)",startDate,endDate];
         NSPredicate *paperworkIncompletePredicate = [NSPredicate predicateWithFormat:@"paperwork == %@",[NSNumber numberWithInteger: 0]];
         
         
@@ -1126,7 +1126,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         //set the date format
         [dateFormatter setDateFormat:@"MMM d, yyyy"];
         //Set the date attributes in the  property definition and make it so the date picker appears 
-        cell.textLabel.text= [dateFormatter stringFromDate:[cellManagedObject valueForKey:@"dateOfTesting"]];
+        cell.textLabel.text= [dateFormatter stringFromDate:[cellManagedObject valueForKey:@"dateOfService"]];
         if (cellManagedObject) {
             
             
@@ -1443,7 +1443,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
                 TimeEntity *timeEntity=(TimeEntity *)[buttonCellManagedObject valueForKey:@"time"];
                
-                 NSDate *testDate=(NSDate *)[buttonCellManagedObject valueForKey:@"dateOfTesting"];
+                 NSDate *testDate=(NSDate *)[buttonCellManagedObject valueForKey:@"dateOfService"];
                 
                 NSDate *startTime=(NSDate *)[timeEntity valueForKey:@"startTime"];
                 //NSLog(@"time entity is %@",timeEntity);

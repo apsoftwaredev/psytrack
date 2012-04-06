@@ -291,6 +291,7 @@
 		E7D3732C152C2EFA00121918 /* ExistingHoursEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */; };
 		E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */; };
 		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
+		E7E1A63D152E873500C227E8 /* ServicesViewController_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -712,6 +713,8 @@
 		E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursEntity.m; sourceTree = "<group>"; };
 		E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursOverviewCell.xib; sourceTree = "<group>"; };
 		E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController_iPad.xib; sourceTree = "<group>"; };
+		E7E1A63A152E873500C227E8 /* ServicesViewController_Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicesViewController_Shared.h; sourceTree = "<group>"; };
+		E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicesViewController_Shared.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1041,6 +1044,7 @@
 		37F7CE8E1500589200AD2C3A /* Track */ = {
 			isa = PBXGroup;
 			children = (
+				E7E1A638152E86C600C227E8 /* Services */,
 				E78DA6A015252511004ABF29 /* Existing Hours */,
 				37F7CEB015005C7300AD2C3A /* TrainTrackViewController.h */,
 				37F7CEB115005C7300AD2C3A /* TrainTrackViewController.m */,
@@ -1467,6 +1471,15 @@
 			name = "Existing Hours";
 			sourceTree = "<group>";
 		};
+		E7E1A638152E86C600C227E8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E7E1A63A152E873500C227E8 /* ServicesViewController_Shared.h */,
+				E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1799,6 +1812,7 @@
 				E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */,
 				E78DA6A415252579004ABF29 /* ExistingHoursViewController.m in Sources */,
 				E7D3732C152C2EFA00121918 /* ExistingHoursEntity.m in Sources */,
+				E7E1A63D152E873500C227E8 /* ServicesViewController_Shared.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
