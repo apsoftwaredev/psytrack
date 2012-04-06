@@ -1044,8 +1044,11 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 
 
 -(NSDate *)convertDataToDate:(NSData *)data{
+    NSDate * restoredDate=nil;
+    if (data) {
+        restoredDate = [NSKeyedUnarchiver unarchiveObjectWithData:data];
 
-NSDate * restoredDate = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
 
     
     return  restoredDate;

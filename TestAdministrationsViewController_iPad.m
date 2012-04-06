@@ -156,7 +156,7 @@
     
     
     SCClassDefinition *testSessionDeliveredDef =[SCClassDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
-                                                                   withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"dateOfTesting",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"administrationType", @"certificationsCredited",   @"degreesCredited",  @"licenseNumbersCredited", @"relatedSupportTime", @"supervisor", @"testsAdministered",   @"trainingType", @"treatmentSetting",  @"eventIdentifier",     nil]];        
+                                                                   withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"dateOfTesting",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType", @"certificationsCredited",   @"degreesCredited",  @"licenseNumbersCredited", @"relatedSupportTime", @"supervisor", @"testsAdministered",   @"trainingType", @"treatmentSetting",  @"eventIdentifier",     nil]];        
     
     
     
@@ -213,7 +213,7 @@
     [testSessionDeliveredDef.propertyGroups addGroup:peopleGroup];
     
     
-    SCPropertyGroup *detailsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Administration Details" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"testsAdministered",@"administrationType",@"treatmentSetting",@"trainingType", @"relatedSupportTime", nil]];
+    SCPropertyGroup *detailsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Administration Details" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"testsAdministered",@"assessmentType",@"treatmentSetting",@"trainingType", @"relatedSupportTime", nil]];
     
     
     [testSessionDeliveredDef.propertyGroups addGroup:detailsGroup]; 
@@ -234,10 +234,10 @@
    	supervivisorPropertyDef.type = SCPropertyTypeObjectSelection;
     
     SCClassDefinition *supervisorDef =[SCClassDefinition definitionWithEntityName:@"ClinicianEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
-    supervisorDef.titlePropertyName=@"title;firstName;lastName;suffix;credentialInitials";
+    supervisorDef.titlePropertyName=@"prefix;firstName;lastName;suffix;credentialInitials";
     supervisorDef.orderAttributeName=@"order";
     
-    SCPropertyGroup *supervisorNameGroup =[SCPropertyGroup groupWithHeaderTitle:@"Supervisor Name" withFooterTitle:@"Select this clinician under the Clicician tab to add or view more details." withPropertyNames:[NSArray arrayWithObjects:@"title",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
+    SCPropertyGroup *supervisorNameGroup =[SCPropertyGroup groupWithHeaderTitle:@"Supervisor Name" withFooterTitle:@"Select this clinician under the Clicician tab to add or view more details." withPropertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
     
     
     
@@ -266,7 +266,7 @@
     
     
     
-    SCClassDefinition *testAdministeredDef =[SCClassDefinition definitionWithEntityName:@"TestAdministeredEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"testName" ,@"scores",@"notes", nil]];
+    SCClassDefinition *testAdministeredDef =[SCClassDefinition definitionWithEntityName:@"TestAdministeredEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"psychTestName" ,@"scores",@"notes", nil]];
     
     
     
@@ -282,9 +282,9 @@
     
     
     
-    testAdministeredDef.titlePropertyName=@"testName.acronym";
+    testAdministeredDef.titlePropertyName=@"psychTestName.acronym";
     
-    SCClassDefinition *testNameDef=[SCClassDefinition definitionWithEntityName:@"testNameEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"testName", @"acronym",@"testType", @"notes", nil]];
+    SCClassDefinition *testNameDef=[SCClassDefinition definitionWithEntityName:@"InstrumentEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"instrumentName", @"acronym",@"instrumentType", @"notes", nil]];
     
     
     testNameDef.titlePropertyName=@"acronym";
@@ -293,7 +293,7 @@
     
     
     
-    SCPropertyDefinition *testNamePropertyDef=[testAdministeredDef propertyDefinitionWithName:@"testName"];
+    SCPropertyDefinition *testNamePropertyDef=[testAdministeredDef propertyDefinitionWithName:@"psychTestName"];
     testNamePropertyDef.type =SCPropertyTypeObjectSelection;
     
     SCObjectSelectionAttributes *testNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:testNameDef allowMultipleSelection:NO allowNoSelection:NO];
@@ -311,7 +311,7 @@
     
     //testTypeEntity is in a one to many relationship with testNameEntity.
     
-    SCClassDefinition *testTypeDef=[SCClassDefinition definitionWithEntityName:@"testTypeEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"testType", @"notes", nil]];
+    SCClassDefinition *testTypeDef=[SCClassDefinition definitionWithEntityName:@"InstrumentTypeEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"instrumentType", @"notes", nil]];
     
     
     
@@ -319,7 +319,7 @@
     
     
     
-    SCPropertyDefinition *testTypePropertyDef=[testNameDef propertyDefinitionWithName:@"testType"];
+    SCPropertyDefinition *testTypePropertyDef=[testNameDef propertyDefinitionWithName:@"instrumentType"];
     testTypePropertyDef.type =SCPropertyTypeObjectSelection;
     
     SCObjectSelectionAttributes *testTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:testTypeDef allowMultipleSelection:NO allowNoSelection:NO];
@@ -337,7 +337,7 @@
     
     
     
-    SCClassDefinition *testScoredDef =[SCClassDefinition definitionWithEntityName:@"testScoreEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"scoreName" ,@"score",@"notes", nil]];
+    SCClassDefinition *testScoredDef =[SCClassDefinition definitionWithEntityName:@"TestScoreEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"scoreName" ,@"score",@"notes", nil]];
     
     
     
@@ -362,7 +362,7 @@
     
     
     
-    testAdministeredDef.titlePropertyName=@"testName.acronym";
+    testAdministeredDef.titlePropertyName=@"psychTestName.acronym";
     
     
     
@@ -371,7 +371,7 @@
     
     
     
-    SCClassDefinition *testSessionTypeDef=[SCClassDefinition definitionWithEntityName:@"testingSessionTypeEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"administrationType", @"notes", nil]];
+    SCClassDefinition *testSessionTypeDef=[SCClassDefinition definitionWithEntityName:@"TestingSessionTypeEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"assessmentType", @"notes", nil]];
     
     
     
@@ -380,7 +380,7 @@
     
     
     
-    SCPropertyDefinition *testingSessionTypePropertyDef=[testSessionDeliveredDef propertyDefinitionWithName:@"administrationType"];
+    SCPropertyDefinition *testingSessionTypePropertyDef=[testSessionDeliveredDef propertyDefinitionWithName:@"assessmentType"];
     testingSessionTypePropertyDef.type =SCPropertyTypeObjectSelection;
     
     SCObjectSelectionAttributes *testSessionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:testSessionTypeDef allowMultipleSelection:NO allowNoSelection:NO];
@@ -392,7 +392,7 @@
     testSessionTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Administration Type"];
     testingSessionTypePropertyDef.attributes = testSessionTypeSelectionAttribs;
     
-    SCPropertyDefinition *testSessionTypePropertyDef=[testSessionTypeDef propertyDefinitionWithName:@"administrationType"];
+    SCPropertyDefinition *testSessionTypePropertyDef=[testSessionTypeDef propertyDefinitionWithName:@"assessmentType"];
     testSessionTypePropertyDef.type=SCPropertyTypeTextView;
     SCPropertyDefinition *testSessionTypeNotesPropertyDef=[testSessionTypeDef propertyDefinitionWithName:@"notes"];
     testSessionTypeNotesPropertyDef.type=SCPropertyTypeTextView;
