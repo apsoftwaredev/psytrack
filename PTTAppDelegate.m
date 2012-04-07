@@ -1345,8 +1345,8 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 	NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
 	NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-	//NSLog(@"Register URL: %@", url);
-	//NSLog(@"Return Data: %@", returnData);
+	NSLog(@"Register URL: %@", url);
+	NSLog(@"Return Data: %@", returnData);
 	
 #endif
 }
@@ -1370,18 +1370,18 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 	
 #if !TARGET_IPHONE_SIMULATOR
     
-	//NSLog(@"remote notification: %@",[userInfo description]);
+	NSLog(@"remote notification: %@",[userInfo description]);
 	NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
 	
 	NSString *alert = [apsInfo objectForKey:@"alert"];
-	//NSLog(@"Received Push Alert: %@", alert);
+	NSLog(@"Received Push Alert: %@", alert);
 	
 	NSString *sound = [apsInfo objectForKey:@"sound"];
-	//NSLog(@"Received Push Sound: %@", sound);
+    NSLog(@"Received Push Sound: %@", sound);
 	AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 	
 	NSString *badge = [apsInfo objectForKey:@"badge"];
-	//NSLog(@"Received Push Badge: %@", badge);
+	NSLog(@"Received Push Badge: %@", badge);
 	application.applicationIconBadgeNumber = [[apsInfo objectForKey:@"badge"] integerValue];
 	
 #endif
@@ -2048,7 +2048,7 @@ duration:(NSTimeInterval)1.0];
         
         else
         {
-            //NSLog(@"saved successfully");
+            NSLog(@"saved successfully");
         
         }      
         
@@ -5099,20 +5099,20 @@ return [self applicationDrugsDirectory].path;
    
      //NSLog(@"user default preference for icloud is %i",[[NSUserDefaults standardUserDefaults] boolForKey:@"icloud_preference"]);
     
-    //NSLog(@"icloud user info %@",[[NSUbiquitousKeyValueStore defaultStore].dictionaryRepresentation allKeys]);
-    BOOL useriCloudPref=[[NSUserDefaults standardUserDefaults] boolForKey:@"icloud_preference"];
+    NSLog(@"icloud user info %@",[[NSUbiquitousKeyValueStore defaultStore].dictionaryRepresentation allKeys]);
+    //BOOL useriCloudPref=[[NSUserDefaults standardUserDefaults] boolForKey:@"icloud_preference"];
     
     NSURL *ubiq = [[NSFileManager defaultManager] 
                    URLForUbiquityContainerIdentifier:nil];
-    if ( ubiq && useriCloudPref) {
-        //NSLog(@"iCloud access at %@", ubiq);
+    if ( ubiq ) {
+        NSLog(@"iCloud access at %@", ubiq);
         // TODO: Load document... 
         
-        //NSLog(@"user default preference for icloud is %i",[[NSUserDefaults standardUserDefaults] boolForKey:@"icloud_preference"]);
+        NSLog(@"user default preference for icloud is %i",[[NSUserDefaults standardUserDefaults] boolForKey:@"icloud_preference"]);
         
         
     } else {
-        //NSLog(@"No iCloud access");
+        NSLog(@"No iCloud access");
     }
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -5142,7 +5142,7 @@ return [self applicationDrugsDirectory].path;
                            [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
                            [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
                            nil];
-                //NSLog(@"icloud is not available");
+                NSLog(@"icloud is not available");
                 
             }
             
@@ -5150,7 +5150,7 @@ return [self applicationDrugsDirectory].path;
             [psc lock];
             if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
             {
-                //NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
                 abort();
             }
             [psc unlock];
@@ -5166,8 +5166,9 @@ return [self applicationDrugsDirectory].path;
                      [self saveContext];
                 }
                 
-                //NSLog(@"store url path %@",[storeURL path]);
-                //NSLog(@"asynchronously added persistent store!");
+                NSLog(@"store url path %@",[storeURL path]);
+                NSLog(@"persisitant store %@",persistentStoreCoordinator__.persistentStores);
+                NSLog(@"asynchronously added persistent store!");
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData" object:self userInfo:nil];
                
                 addedPersistentStoreSuccess=YES;

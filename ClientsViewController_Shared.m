@@ -227,7 +227,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     
-    logDef.titlePropertyName=@"dateTime;entryNotes";
+    logDef.titlePropertyName=@"dateTime;notes";
     
     //Create the property definition for the dateTime property in the logDef class  definition
     SCPropertyDefinition *dateTimePropertyDef = [logDef propertyDefinitionWithName:@"dateTime"];
