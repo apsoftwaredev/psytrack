@@ -100,8 +100,8 @@
 //            bool didSave=FALSE;
 //            didSave = ABAddressBookSave(addressBook, nil);
 //            
-//            if (!didSave) {/* Handle error here. */  //NSLog(@"addressbook did not save");}
-//            else //NSLog(@"addressbook saved");
+////            if (!didSave) {/* Handle error here. */  //NSLog(@"addressbook did not save");}
+////            else //NSLog(@"addressbook saved");
 //        } 
 //        else {
 //            //NSLog(@"address book revert becaus no changes");
@@ -117,7 +117,9 @@
     
 	self.eventsList = [[NSMutableArray alloc] initWithArray:0];
 
-    
+//        for (EKCalendar *calenderToREmove in self.eventStore.calendars) {
+//            [self.eventStore removeCalendar:calenderToREmove commit:YES error:nil];
+//        }
     SCLabelCell *defaultCalendarLabelCell=[[SCLabelCell alloc]initWithText:@"Calendar" withBoundKey:@"default_Calendar" withLabelTextValue:(NSString *)[(EKCalendar *)[self defaultCalendarName] title]];
     defaultCalendarLabelCell.tag=0;
     
@@ -335,9 +337,9 @@
     EKSource *mySource = nil;
   
     
-    BOOL iCloudEnabled=(BOOL)[[NSUserDefaults standardUserDefaults] valueForKey:@"icloud_preference"];
+//    BOOL iCloudEnabled=(BOOL)[[NSUserDefaults standardUserDefaults] valueForKey:@"icloud_preference"];
   
-    if (iCloudEnabled) {
+    
         for (EKSource *source in eventStore.sources){
             
             if ([source.title isEqualToString: @"iCloud"])
@@ -352,7 +354,7 @@
         }
         
         
-    }
+
      
     if (!mySource) {
         
@@ -391,11 +393,24 @@
       
         {
             
-            self.psyTrackCalendar = [EKCalendar calendarWithEventStore:self.eventStore];
+            for (EKCalendar *calanderInStore in eventStore.calendars) {
+                if ([calanderInStore.title isEqualToString:@"Client Appointments"]) {
+                    self.psyTrackCalendar=calanderInStore;
+                    break;
+                }
+            }
             
-            [[NSUserDefaults standardUserDefaults] setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-             self.psyTrackCalendar.source = mySource;
+            //try again
+            if (!self.psyTrackCalendar) {
+                
+                self.psyTrackCalendar = [EKCalendar calendarWithEventStore:self.eventStore];
+            
+                [[NSUserDefaults standardUserDefaults] setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                self.psyTrackCalendar.source = mySource;
+                
+            }
+
             
         }
         

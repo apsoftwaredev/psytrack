@@ -35,7 +35,7 @@
 @dynamic myCurrentSupervisor;
 @dynamic thisIsMyInfo;
 @dynamic order;
-@dynamic credentialInitials;
+
 @dynamic startedPracticing;
 @dynamic prefix;
 @dynamic atMyCurrentSite;
@@ -124,17 +124,11 @@
     [self willAccessValueForKey:@"suffix"];
     if (suffix.length  && combinedName.length) {
         
-        combinedName=[combinedName stringByAppendingFormat:@" %@",suffix];
+        combinedName=[combinedName stringByAppendingFormat:@", %@",suffix];
         
     }
      [self didAccessValueForKey:@"suffix"];
-    [self willAccessValueForKey:@"credentialInitials"];
-    if (credentialInitials.length  && combinedName.length) {
-        
-        combinedName=[combinedName stringByAppendingFormat:@", %@", credentialInitials];
-        
-    }
-     [self didAccessValueForKey:@"credentialInitials"];
+    
     //NSLog(@"combined name values at end in entity are  %@",combinedName  );
     
     

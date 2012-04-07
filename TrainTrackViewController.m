@@ -372,7 +372,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
         
         if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
             SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
-             NSEntityDescription *clinicianEnitityDesc=[NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext];
+            
             
             //NSLog(@"items count is %i",[arrayOfObjectsSection.itemsSet count]);
             if ([arrayOfObjectsSection.items count]>1) {
@@ -395,18 +395,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
                     [self.tableView reloadData];
                 }
             } 
-            else if ([arrayOfObjectsSection.items count]==0)
-            {
-                 ClinicianEntity *myClinicianInfoObject=[[ClinicianEntity alloc]initWithEntity:clinicianEnitityDesc insertIntoManagedObjectContext:managedObjectContext];
-                
-                myClinicianInfoObject.myInformation=[NSNumber numberWithBool:TRUE];
-                
-                myClinicianInfoObject.firstName=@"Enter Your";
-                myClinicianInfoObject.lastName=@"Name Here";
-                [arrayOfObjectsSection addNewItem:myClinicianInfoObject];
-
-            
-            }
+          
                 
 //               //                
 //                SCSelectionCell *selectionCell=[[SCSelectionCell alloc]initWithText:@"My Information" withBoundKey:@"myClinicianDataCell" withLabelTextValue:nil];
@@ -507,7 +496,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
             
         case 7:
         {
-            NSString *existingHoursViewControllerNibName=[NSString string];
+            NSString *existingHoursViewControllerNibName=nil;
             if ([SCHelper is_iPad]) {
                 existingHoursViewControllerNibName=@"ExistingHoursViewController_iPad";
             }else {

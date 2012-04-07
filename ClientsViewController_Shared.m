@@ -298,7 +298,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //add a custom title
     drugNamePropertyDef.title = @"Drug Name";
     
-   
+
     //get the client setup from the clients View Controller Shared
     // Add a custom property that represents a custom cells for the description defined TextFieldAndLableCell.xib
 	
@@ -314,7 +314,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
     drugNameDataProperty.autoValidate=FALSE;
-    
+
     
     
     
@@ -386,7 +386,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     //Do some property definition customization for the additional symptoms Entity defined in symptomsDef
-    NSString *scaleDataCellNibName=[NSString string];
+    NSString *scaleDataCellNibName=nil;
 
     if ([SCHelper is_iPad]) {
         

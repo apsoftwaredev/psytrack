@@ -29,7 +29,7 @@
      NSString * firstName;
    
    NSString * suffix;
-   NSString * credentialInitials;
+ 
     NSString * prefix;
 
 
@@ -50,7 +50,7 @@
 @property (nonatomic, strong) NSNumber * myCurrentSupervisor;
 @property (nonatomic, strong) NSNumber * thisIsMyInfo;
 @property (nonatomic, strong) NSNumber * order;
-@property (nonatomic, strong) NSString * credentialInitials;
+
 @property (nonatomic, strong) NSDate * startedPracticing;
 @property (nonatomic, strong) NSString * prefix;
 @property (nonatomic, strong) NSNumber * atMyCurrentSite;

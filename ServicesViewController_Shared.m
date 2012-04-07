@@ -54,6 +54,21 @@
     
     [super viewDidUnload];
     
+    
+    self.view=nil;
+
+   
+ 
+    managedObjectContext=nil;
+   
+    tableModel=nil;
+    
+  
+   eventTitleString=nil;
+    
+  tableModelClassDefEntity=nil;
+    
+
     self.clientPresentations_Shared=nil;
     self.psyTrackCalendar=nil;
     self.eventStore=nil;
@@ -88,6 +103,7 @@
     
     
     eventButtonBoundObject=nil;
+    
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -102,7 +118,7 @@
     }
     
     
-    
+   
     NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
     
     
@@ -222,6 +238,13 @@
 }
 
 
+//-(void)didMoveToParentViewController:(UIViewController *)parent{
+//
+//NSLog(@"will move to parent %@",parent);
+//    if (!parent) {
+//        [self viewDidUnload];
+//    }
+//}
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

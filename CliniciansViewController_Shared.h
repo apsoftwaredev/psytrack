@@ -86,7 +86,7 @@ NSManagedObjectContext *managedObjectContext;
 //-(IBAction)doneButtonTappedInABPersonViewController:(id)sender;
 -(void)resetABVariablesToNil;
 
--(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew;
+
 
 -(void)showPersonViewControllerForRecordID:(int)recordID;
 
@@ -100,4 +100,5 @@ NSManagedObjectContext *managedObjectContext;
 
 -(IBAction)reloadTableViewData:(id)sender;
 -(int )defaultABSourceID;
+-(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew checkExisting:(BOOL)checkExisting;
 @end

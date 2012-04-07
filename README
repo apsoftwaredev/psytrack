@@ -26,10 +26,12 @@ TO DO:
 
 
 
--too much memory
+-too much memory, may be okay
 -generating new enter your name on every resart
 -icloud not working
+
 -drug name deleting when leave view
+
 -drug name staying with no selection
 -auto add medlog date
 -prescriber list not defauted when prescriber
@@ -133,3 +135,4 @@ begin adding reports
 - check danger to others
 - add existing hours
 -	Fix the behavior observation section clean it up and eliminate unneeded
+-client id code validation

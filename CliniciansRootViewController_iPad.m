@@ -223,19 +223,19 @@
                 } 
                 break;
             case 4:
-                if ([viewShort isKindOfClass:[UILabel class]]) {
+                if ([viewLong isKindOfClass:[UILabel class]]) {
                     //NSLog(@"suffix");
-                    UILabel *suffixLabel =(UILabel *)viewShort;
+                    UILabel *suffixLabel =(UILabel *)viewLong;
                     suffixLabel.text=@"Suffix:";
                 } 
                 break;
                 
             case 5:
-                if ([viewLong isKindOfClass:[UILabel class]]) {
-                    //NSLog(@"credential Intials");
-                    UILabel *credentialInitialsLabel =(UILabel *)viewLong;
-                    credentialInitialsLabel.text=@"Credential Initials:";
-                } 
+//                if ([viewLong isKindOfClass:[UILabel class]]) {
+//                    //NSLog(@"credential Intials");
+//                    UILabel *credentialInitialsLabel =(UILabel *)viewLong;
+//                    credentialInitialsLabel.text=@"Credential Initials:";
+//                } 
                 break;
                 if ([cell  isKindOfClass:[ButtonCell class]]) 
                 {
@@ -263,7 +263,7 @@
                     }
                 } 
                 
-            case 8:
+            case 7:
                 if ([cell  isKindOfClass:[ButtonCell class]]) 
                 {
                     
@@ -316,7 +316,7 @@
                 break;
                 
                 
-            case 9:
+            case 8:
                 //this is the root table
                 
                 

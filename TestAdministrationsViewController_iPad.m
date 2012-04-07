@@ -140,11 +140,11 @@
     
    	supervivisorPropertyDef.type = SCPropertyTypeObjectSelection;
     
-    SCClassDefinition *supervisorDef =[SCClassDefinition definitionWithEntityName:@"ClinicianEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
-    supervisorDef.titlePropertyName=@"prefix;firstName;lastName;suffix;credentialInitials";
+    SCClassDefinition *supervisorDef =[SCClassDefinition definitionWithEntityName:@"ClinicianEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix", nil]];
+    supervisorDef.titlePropertyName=@"prefix;firstName;lastName;suffix";
     supervisorDef.orderAttributeName=@"order";
     
-    SCPropertyGroup *supervisorNameGroup =[SCPropertyGroup groupWithHeaderTitle:@"Supervisor Name" withFooterTitle:@"Select this clinician under the Clicician tab to add or view more details." withPropertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
+    SCPropertyGroup *supervisorNameGroup =[SCPropertyGroup groupWithHeaderTitle:@"Supervisor Name" withFooterTitle:@"Select this clinician under the Clicician tab to add or view more details." withPropertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix", nil]];
     
     
     

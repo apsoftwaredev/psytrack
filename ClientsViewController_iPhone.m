@@ -828,26 +828,34 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
     
     //NSLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
     
-    if (tableViewModel.tag==1){
+    if (tableViewModel.tag==1&&tableViewModel.sectionCount){
         
         
         SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
-        SCControlCell *clientIDCodeCell =(SCControlCell *)[section cellAtIndex:1];
+        if (section.cellCount) {
         
-        
-       
-        UITextField *clientIDCodeField =(UITextField *)[clientIDCodeCell viewWithTag:1];
-        
-        
-        if ( clientIDCodeField.text.length ) {
             
-            valid=TRUE;
-            //NSLog(@"first or last name is valid");
-            
-        }
-        else
-        {
-            valid=FALSE;
+            SCTableViewCell *clientIDCodeCell =(SCTableViewCell *)[section cellAtIndex:0];
+      
+        
+            if ([clientIDCodeCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
+                EncryptedSCTextFieldCell *clientIDCodeEncryptedCell =(EncryptedSCTextFieldCell *)clientIDCodeCell;
+                
+                if ( clientIDCodeEncryptedCell.textField.text.length ) {
+                    
+                    valid=TRUE;
+                    //NSLog(@"first or last name is valid");
+                    
+                }
+                else
+                {
+                    valid=FALSE;
+                }
+                
+            }
+        
+        
+        
         }
     }
     
@@ -1269,6 +1277,16 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             if ([drugNameCell isKindOfClass:[SCTextFieldCell class]] ) {
                 SCTextFieldCell *textFieldCell=(SCTextFieldCell *)drugNameCell;
                 textFieldCell.textField.text=drugNameObjectSelectionCell.drugProduct.drugName;
+                NSManagedObject *drugNameManagedObject=(NSManagedObject *)drugNameCell.boundObject;
+                NSString *drugName=drugNameObjectSelectionCell.drugProduct.drugName;
+                
+                
+                if (drugName && drugName.length) {
+                    [drugNameManagedObject setValue:(NSString *) drugNameObjectSelectionCell.drugProduct.drugName forKey:(NSString *)@"drugName"];
+                }
+                
+                
+                
                 
             }
                                                              

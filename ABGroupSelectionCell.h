@@ -44,5 +44,5 @@
 -(void)removePersonFromGroupWithID:(int)groupID;
 -(void)syncryonizeWithAddressBookGroups;
 -(void)addPersonToSelectedGroups;
-
+-(int )defaultABSourceID;
 @end

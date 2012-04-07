@@ -1474,29 +1474,37 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     //NSLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
     
-    if (tableViewModel.tag==1){
+    if (tableViewModel.tag==1&&tableViewModel.sectionCount){
         
         
         SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
-        SCControlCell *clientIDCodeCell =(SCControlCell *)[section cellAtIndex:0];
-        
-        
-        
-        UITextField *clientIDCodeField =(UITextField *)[clientIDCodeCell viewWithTag:1];
-        
-        //NSLog(@"texxt field text is %@",clientIDCodeField.text);
-        if ( clientIDCodeField.text.length ) {
+        if (section.cellCount) {
             
-            valid=TRUE;
-            //NSLog(@"first or last name is valid");
             
-        }
-        else
-        {
-            valid=FALSE;
+            SCTableViewCell *clientIDCodeCell =(SCTableViewCell *)[section cellAtIndex:0];
+            
+            
+            if ([clientIDCodeCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
+                EncryptedSCTextFieldCell *clientIDCodeEncryptedCell =(EncryptedSCTextFieldCell *)clientIDCodeCell;
+                
+                if ( clientIDCodeEncryptedCell.textField.text.length ) {
+                    
+                    valid=TRUE;
+                    //NSLog(@"first or last name is valid");
+                    
+                }
+                else
+                {
+                    valid=FALSE;
+                }
+                
+            }
+            
+            
+            
         }
     }
-    
+
     if (tableViewModel.tag==3&& tableViewModel.sectionCount){
         
         

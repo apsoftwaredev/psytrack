@@ -292,6 +292,7 @@
 		E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */; };
 		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
 		E7E1A63D152E873500C227E8 /* ServicesViewController_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */; };
+		E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A6441530C18900C227E8 /* ShortFieldCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -715,6 +716,8 @@
 		E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController_iPad.xib; sourceTree = "<group>"; };
 		E7E1A63A152E873500C227E8 /* ServicesViewController_Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicesViewController_Shared.h; sourceTree = "<group>"; };
 		E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicesViewController_Shared.m; sourceTree = "<group>"; };
+		E7E1A6431530C18900C227E8 /* ShortFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortFieldCell.h; sourceTree = "<group>"; };
+		E7E1A6441530C18900C227E8 /* ShortFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortFieldCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1281,6 +1284,8 @@
 				37F7CF2315005F7E00AD2C3A /* TimePickerView.m */,
 				37F7CF2415005F7E00AD2C3A /* WeightPickerCell.h */,
 				37F7CF2515005F7E00AD2C3A /* WeightPickerCell.m */,
+				E7E1A6431530C18900C227E8 /* ShortFieldCell.h */,
+				E7E1A6441530C18900C227E8 /* ShortFieldCell.m */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -1813,6 +1818,7 @@
 				E78DA6A415252579004ABF29 /* ExistingHoursViewController.m in Sources */,
 				E7D3732C152C2EFA00121918 /* ExistingHoursEntity.m in Sources */,
 				E7E1A63D152E873500C227E8 /* ServicesViewController_Shared.m in Sources */,
+				E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

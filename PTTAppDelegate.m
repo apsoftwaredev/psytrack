@@ -819,7 +819,28 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
                     
                 }
                //4
-                       
+                 NSFetchRequest *myInfoFetchRequest = [[NSFetchRequest alloc] init];
+                
+                NSEntityDescription *clinicianEnitityDesc=[NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext__];
+                
+                NSPredicate *myInfoPredicate=[NSPredicate predicateWithFormat:@"myInformation==%@",[NSNumber numberWithBool:YES]];
+                
+                [myInfoFetchRequest setPredicate:myInfoPredicate];
+                [myInfoFetchRequest setEntity:clinicianEnitityDesc];
+                
+                NSError *myInfoError = nil;
+                NSArray *myInfoFetchedObjects = [managedObjectContext__ executeFetchRequest:myInfoFetchRequest error:&myInfoError];
+                if (!myInfoFetchedObjects.count) {
+                    ClinicianEntity *myClinicianInfoObject=[[ClinicianEntity alloc]initWithEntity:clinicianEnitityDesc insertIntoManagedObjectContext:managedObjectContext__];
+                    
+                    myClinicianInfoObject.myInformation=[NSNumber numberWithBool:TRUE];
+                    
+                    myClinicianInfoObject.firstName=@"Enter Your";
+                    myClinicianInfoObject.lastName=@"Name Here";
+                }
+                
+                
+       
 
 
             }
@@ -2042,7 +2063,7 @@ duration:(NSTimeInterval)1.0];
              */
                     
             
-            //NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         } 
         

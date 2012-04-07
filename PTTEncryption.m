@@ -542,8 +542,8 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
                                 &cipherBufferSize
 								);
 	
-//	if (sanityCheck!=noErr) 
-//        NSLog(@"Error encrypting, OSStatus == %ld.", sanityCheck );
+	if (sanityCheck!=noErr) 
+        NSLog(@"Error encrypting, OSStatus == %ld.", sanityCheck );
  
 	
 	// Build up cipher text blob.
@@ -684,7 +684,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
                                 &signedHashBytesSize
 								);
 	
-	LOGGING_FACILITY1( sanityCheck == noErr, @"Problem signing the SHA1 hash, OSStatus == %d.", sanityCheck );
+//	LOGGING_FACILITY1( sanityCheck == noErr, @"Problem signing the SHA1 hash, OSStatus == %d.", sanityCheck );
 	
 	// Build up signed SHA1 blob.
 	signedHash = [NSData dataWithBytes:(const void *)signedHashBytes length:(NSUInteger)signedHashBytesSize];
