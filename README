@@ -27,9 +27,9 @@ TO DO:
 
 
 -too much memory, may be okay
--generating new enter your name on every resart
--icloud not working
 
+-icloud not working
+-phonenumber in client validation
 -drug name deleting when leave view
 
 -drug name staying with no selection
@@ -136,3 +136,4 @@ begin adding reports
 - add existing hours
 -	Fix the behavior observation section clean it up and eliminate unneeded
 -client id code validation
+-generating new enter your name on every resart

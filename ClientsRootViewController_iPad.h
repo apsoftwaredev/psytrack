@@ -46,7 +46,7 @@
 // Method called by DetailViewController
 - (void)addButtonTapped;
 -(void)addWechlerAgeCellToSection:(SCTableViewSection *)section;
-
+-(BOOL)checkStringIsNumber:(NSString *)str;
 @end
 
 

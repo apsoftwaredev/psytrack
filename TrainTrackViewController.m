@@ -72,7 +72,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(reloadTableViewData:)
+     name:@"RefetchAllDatabaseData"
+     object:nil];
 
     
     UIImage *lockImage=[UIImage imageNamed:@"lock.png"];
@@ -242,11 +246,18 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     
     
     }
-
+ 
+    
+    [self.tableView reloadData];
 //    [self.tableView reloadData];
     
 }
-
+#pragma mark Notifications
+- (void)reloadTableViewData:(NSNotification *)notification
+{
+    [tableModel_ reloadBoundValues ];
+//	[tableModel_.modeledTableView reloadData];
+}
 //- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 //{
 //    // Return YES for supported orientations

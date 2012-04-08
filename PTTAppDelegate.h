@@ -118,6 +118,7 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 @property (weak, nonatomic)IBOutlet UIView *tabBarControllerContainerView;
 @property (weak, nonatomic)IBOutlet UIViewController *viewController;
 
+- (void)initializeiCloudAccess ;
 -(NSURL *)applicationDrugsFileURL;
 -(void)resetDrugsModel;
 

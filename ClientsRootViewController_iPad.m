@@ -1465,6 +1465,30 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //    
 //}
 
+-(BOOL)checkStringIsNumber:(NSString *)str{
+    BOOL valid=YES;
+    NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];
+    NSString *numberStr=[str stringByReplacingOccurrencesOfString:@"," withString:@""];
+    NSNumber *number=[numberFormatter numberFromString:numberStr];
+    if (numberStr.length && [numberStr floatValue]<1000000 &&number) {
+        valid=YES;
+        
+        if ([str rangeOfString:@"Number"].location != NSNotFound) {
+            NSScanner* scan = [NSScanner scannerWithString:numberStr]; 
+            int val;         
+            
+            valid=[scan scanInt:&val] && [scan isAtEnd];
+            
+            
+        }
+        
+        
+    } 
+    
+    return valid;
+    
+}
+
 -(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     BOOL valid = TRUE;
@@ -1544,6 +1568,21 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
             }
             
+            if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
+                EncryptedSCTextFieldCell *phoneNumberCell=(EncryptedSCTextFieldCell *)notesCell;
+                
+                if (phoneNumberCell.textField.text.length) 
+                {
+                    valid=TRUE;
+                    valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
+                }
+                else 
+                {
+                    valid=FALSE;
+                }
+                
+            }
+
         }
         
         

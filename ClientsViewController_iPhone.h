@@ -63,7 +63,7 @@
 
 -(void)cancelButtonTapped;
 
-
+-(BOOL)checkStringIsNumber:(NSString *)str;
 
 @end
 
