@@ -121,6 +121,35 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+   
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(reloadTableModel:)
+     name:@"ReloadTableModel"
+     object:nil];
+    if ([appDelegate persistentStoreCoordinator].persistentStores.count) {
+        [self performSelector:@selector(reloadTableModel:)];
+    }
+
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad &&self.tableView) {
+        
+        [self.tableView setBackgroundView:nil];
+        [self.tableView setBackgroundView:[[UIView alloc] init]];
+        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+        
+        
+    }
+    
+    //    [self.tableView reloadData];
+    //    [self.tableView reloadData];
+    
+}
+
+- (IBAction)reloadTableModel: (id)sender{
+   
     // Gracefully handle reloading the view controller after a memory warning
     self.tableModel = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
     if(tableModel_)
@@ -129,7 +158,6 @@
         return;
     }
     
-  
     
     managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];   
     //set different custom cells nib names for iPhone and iPad
@@ -1563,22 +1591,10 @@
     
     existingPersonRecordID=-1;
     
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(reloadTableViewData:)
-     name:@"RefetchAllDatabaseData"
-     object:nil];
-    
-    
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"DoneLoadingCliniciansShared" object:self userInfo:nil];
 }
 
 
--(IBAction)reloadTableViewData:(id)sender{
-    
-    //    [self.tableModel reloadBoundValues ];
-    [self.tableView reloadData];
-    
-}
 #pragma mark -
 #pragma UIView methods
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -2027,7 +2043,7 @@
         case 1:
         {
             
-            if (cell.tag==8 &&[cell isKindOfClass:[ButtonCell class]]&&![tableViewModel valuesAreValid]) {
+            if (cell.tag==7 &&[cell isKindOfClass:[ButtonCell class]]&&![tableViewModel valuesAreValid]) {
                 PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
                 [appDelegate displayNotification:@"Add First and Last Name before Adding to Address Book or use the look up button to select the name." forDuration:3.0 location:kPTTScreenLocationTop inView:tableViewModel.modeledTableView.superview];
                 

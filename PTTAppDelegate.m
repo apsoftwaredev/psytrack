@@ -47,6 +47,9 @@
 
 #import "NSDictionaryHelpers.h"
 
+
+
+#import "Reachability.h"
 #define kPTTAppSqliteFileName @"psyTrack.sqlite"
 #define kPTTDrugDatabaseSqliteFileName @"drugs.sqlite"
 
@@ -101,7 +104,23 @@
 
     
 #endif
+    // Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the
+    // method "reachabilityChanged" will be called. 
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
+    hostReach = [Reachability reachabilityWithHostName: @"www.apple.com"];
+	[hostReach startNotifier];
+	[self updateInterfaceWithReachability: hostReach];
+	
+    internetReach = [Reachability reachabilityForInternetConnection] ;
+	[internetReach startNotifier];
+	[self updateInterfaceWithReachability: internetReach];
     
+    wifiReach = [Reachability reachabilityForLocalWiFi] ;
+	[wifiReach startNotifier];
+	[self updateInterfaceWithReachability: wifiReach];
+
+	
+
     [self initializeiCloudAccess];
     
  
@@ -127,7 +146,7 @@
     
     //NSLog(@"user defaults are %@",[[NSUserDefaults standardUserDefaults].dictionaryRepresentation allKeys]);
     
-    self.encryption=[[PTTEncryption alloc]init];
+   
   
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -135,33 +154,17 @@
      name:@"trustFailureOccured"
      object:nil];
     
+  
+    
     [[NSNotificationCenter defaultCenter]
      addObserver:self
-     selector:@selector(resaveLockDictionarySettings:)
-     name:@"RefetchAllDatabaseData"
+     selector:@selector(loadDatabaseData:)
+     name:@"persistentStoreAdded"
      object:nil];
-    
-    NSString *statusMessage;
-
-   retrievedEncryptedDataFile=NO;
-    
-    statusMessage=[self setupLockDictionaryResultStr];
-    
-    // if the file is not found, then this is the first time or there is a problem and database will reset
-    //NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess);
-    //NSLog(@"retrieved encrypted data file is %i",retrievedEncryptedDataFile);
    
-    if (!encryptedLockDictionarySuccess &&!retrievedEncryptedDataFile) {
    
-        statusMessage=[self setupDefaultLockDictionaryResultStr];
-    }
-    else 
-    if(retrievedEncryptedDataFile && !encryptedLockDictionarySuccess)
-    { statusMessage=@"Error in Loading Security Settings Occured";
-        self.okayToDecryptBool=FALSE;
-    }
-        
-
+    
+   
     //NSLog(@"lcock dictionary is %@",[lockValuesDictionary_ allKeys]);
     
 
@@ -226,40 +229,12 @@
 //               
 //           }
 //       });
-    if (!(retrievedEncryptedDataFile && !encryptedLockDictionarySuccess)||(encryptedLockDictionarySuccess|| setupDatabase)) {
    
     [self.window addSubview:self.tabBarController.view];
-        self.okayToDecryptBool=YES; 
-    }
-    else {
-        statusMessage=@"Error in Loading Security Settings Occured";
-    }
-    
-//    NSInteger screenLocationForMessage=kPTTScreenLocationTop;
-    
-    //NSLog(@"app is locked:  %i  app is locked at startup%i passcode is on %i",[self isAppLocked],[self isLockedAtStartup],[self isPasscodeOn]);
-    
-    
-    if ((retrievedEncryptedDataFile && !encryptedLockDictionarySuccess)||([self isPasscodeOn]&&([self isAppLocked]||[self isLockedAtStartup]))) {
-        [self lockApplication];
-        
-    }
-    
     [self.window makeKeyAndVisible];
-    if (statusMessage.length) {
-        
-        UIView *containerView=nil;
-        if (okayToDecryptBool_==NO) {
-            containerView=self.window;
-        }
-        [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:containerView];
-        
-    }
     
-    if (trustResultFailureString.length) {
-         [self displayNotification:trustResultFailureString forDuration:8.0 location:kPTTScreenLocationMiddle inView:self.window];
-    }
-    
+    persistentStoreCoordinator__=[self persistentStoreCoordinator];
+        
    
 #if !TARGET_IPHONE_SIMULATOR
     // Add registration for remote notifications
@@ -276,6 +251,104 @@
     return YES;
 }
 
+
+-(void)loadDatabaseData:(id)sender
+{
+    self.encryption=[[PTTEncryption alloc]init];
+    NSString *statusMessage;
+    retrievedEncryptedDataFile=NO;
+    
+    statusMessage=[self setupLockDictionaryResultStr];
+    
+    // if the file is not found, then this is the first time or there is a problem and database will reset
+    //NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess);
+    //NSLog(@"retrieved encrypted data file is %i",retrievedEncryptedDataFile);
+    
+    if (!encryptedLockDictionarySuccess &&!retrievedEncryptedDataFile) {
+        
+        statusMessage=[self setupDefaultLockDictionaryResultStr];
+    }
+    else 
+        if(retrievedEncryptedDataFile && !encryptedLockDictionarySuccess)
+        { statusMessage=@"Error in Loading Security Settings Occured";
+            self.okayToDecryptBool=FALSE;
+        }
+    
+
+
+    if (!(retrievedEncryptedDataFile && !encryptedLockDictionarySuccess)||(encryptedLockDictionarySuccess|| setupDatabase)) {
+        
+       
+        self.okayToDecryptBool=YES; 
+    }
+    else {
+        statusMessage=@"Error in Loading Security Settings Occured";
+    }
+    
+    //    NSInteger screenLocationForMessage=kPTTScreenLocationTop;
+    
+    //NSLog(@"app is locked:  %i  app is locked at startup%i passcode is on %i",[self isAppLocked],[self isLockedAtStartup],[self isPasscodeOn]);
+    
+    
+    if ((retrievedEncryptedDataFile && !encryptedLockDictionarySuccess)||([self isPasscodeOn]&&([self isAppLocked]||[self isLockedAtStartup]))) {
+        [self lockApplication];
+        
+    }
+
+    if (statusMessage.length) {
+        
+        UIView *containerView=nil;
+        if (okayToDecryptBool_==NO) {
+            containerView=self.window;
+        }
+        [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:containerView];
+        
+    }
+    
+    if (trustResultFailureString.length) {
+        [self displayNotification:trustResultFailureString forDuration:8.0 location:kPTTScreenLocationMiddle inView:self.window];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableModel" object:self userInfo:nil];
+    
+}
+- (void) updateInterfaceWithReachability: (Reachability*) curReach
+{
+    if(curReach == hostReach)
+	{
+		
+//        NetworkStatus netStatus = [curReach currentReachabilityStatus];
+        BOOL connectionRequired= [curReach connectionRequired];
+        
+       
+        NSString* baseLabel=  @"";
+        if(connectionRequired)
+        {
+            baseLabel=  @"Cellular data network is available.\n  Internet traffic will be routed through it after a connection is established.";
+        }
+        else
+        {
+            baseLabel=  @"Cellular data network is active.\n  Internet traffic will be routed through it.";
+        }
+      
+    }
+	if(curReach == internetReach)
+	{	
+//		[self configureTextField: internetConnectionStatusField imageView: internetConnectionIcon reachability: curReach];
+	}
+	if(curReach == wifiReach)
+	{	
+//		[self configureTextField: localWiFiConnectionStatusField imageView: localWiFiConnectionIcon reachability: curReach];
+	}
+	
+}
+
+//Called by Reachability whenever status changes.
+- (void) reachabilityChanged: (NSNotification* )note
+{
+	Reachability* curReach = [note object];
+	NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+	[self updateInterfaceWithReachability: curReach];
+}
 
 
 -(IBAction)notifyTrustFailure:(id)sender{
@@ -790,7 +863,7 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
             }
             //3
             //3
-            if (managedObjectContext__) 
+            if (managedObjectContext__ &&persistentStoreCoordinator__) 
             {
           
                 NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -4968,6 +5041,7 @@ return [self applicationDrugsDirectory].path;
     }];
 }
 
+
 /**
  Returns the managed object model for the application.
  If the model doesn't already exist, it is created by merging all of the models found in the application bundle.
@@ -5107,6 +5181,18 @@ return [self applicationDrugsDirectory].path;
 //    
 //    return persistentStoreCoordinator__;
 //}
+
+-(BOOL)reachable {
+    Reachability *r = [Reachability reachabilityWithHostName:@"google.com"];
+    NetworkStatus internetStatus = [r currentReachabilityStatus];
+    if(internetStatus == NotReachable) {
+        return NO;
+    }
+    return YES;
+}
+
+
+
 /**
  Returns the persistent store coordinator for the application.
  If the coordinator doesn't already exist, it is created and the application's store added to it.
@@ -5133,20 +5219,36 @@ return [self applicationDrugsDirectory].path;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSFileManager *fileManager = [NSFileManager defaultManager];
         
+               
         NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
         // this needs to match the entitlements and provisioning profile
         NSURL *cloudURL = [fileManager URLForUbiquityContainerIdentifier:nil];
         NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"psyTrack"];
-        cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
+        NSDictionary* options;
+        if ([coreDataCloudContent length] != 0 &&[self reachable]) {
+                // iCloud is available
+                cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
+            NSLog(@"icloud user info %@",[[NSUbiquitousKeyValueStore defaultStore].dictionaryRepresentation allKeys]);
+
+                options = [NSDictionary dictionaryWithObjectsAndKeys:@"4R8ZH75936.com.psycheweb.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];                
+                
+            } else {
+                // iCloud is not available
+                options = [NSDictionary dictionaryWithObjectsAndKeys:
+                           [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                           [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
+                           nil];
+
+                NSLog(@"icloud is not available");
+                
+            }
+
+        
+       
         
         //  The API to turn on Core Data iCloud support here.
-        NSDictionary* options;
-        if (cloudURL) {
-           options = [NSDictionary dictionaryWithObjectsAndKeys:@"4R8ZH75936.com.psycheweb.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];
-
-        }else {
-            options=nil;
-        }
+       
+        
                 
         NSError *error = nil;
         
@@ -5172,7 +5274,12 @@ return [self applicationDrugsDirectory].path;
         // NSFetchedResultsController to -performFetch again now there is a real store
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"asynchronously added persistent store!");
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData" object:self userInfo:nil];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"persistentStoreAdded" object:self userInfo:nil];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData" object:self userInfo:nil];
+            
+            
+            
         });
     });
     

@@ -32,7 +32,7 @@
 @property (strong, nonatomic) IBOutlet UIView *messageView;
 //@property (nonatomic, strong)CliniciansViewController_Shared *cliniciansViewController_Shared;
 //@property (nonatomic, retain) IASKAppSettingsViewController *appSettingsViewController;
-
+- (void)loadTableModel:(id)sender;
 
 @end
 

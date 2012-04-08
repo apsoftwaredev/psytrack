@@ -273,6 +273,8 @@
 		E75F778C151CF463002B10AE /* TestingSessionDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F778B151CF463002B10AE /* TestingSessionDeliveredEntity.m */; };
 		E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */; };
 		E78480CA1518D7D800F48EA3 /* PhoneEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C91518D7D800F48EA3 /* PhoneEntity.m */; };
+		E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E78A8D1A1531EDF10099FE5B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */; };
 		E78DA68C151F9AE9004ABF29 /* ReferralEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA68B151F9AE9004ABF29 /* ReferralEntity.m */; };
 		E78DA690151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA68F151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m */; };
 		E78DA6931520B1AD004ABF29 /* icd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E78DA6911520B1AD004ABF29 /* icd.xcdatamodeld */; };
@@ -682,6 +684,9 @@
 		E78480C81518D7D800F48EA3 /* PhoneEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneEntity.h; sourceTree = "<group>"; };
 		E78480C91518D7D800F48EA3 /* PhoneEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneEntity.m; sourceTree = "<group>"; };
 		E78A8D101531DCB30099FE5B /* PsyTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PsyTrack.entitlements; sourceTree = "<group>"; };
+		E78A8D191531EDF10099FE5B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		E78A8D1A1531EDF10099FE5B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E78DA68A151F9AE9004ABF29 /* ReferralEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferralEntity.h; sourceTree = "<group>"; };
 		E78DA68B151F9AE9004ABF29 /* ReferralEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferralEntity.m; sourceTree = "<group>"; };
 		E78DA68E151FAC8A004ABF29 /* DrugNameObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugNameObjectSelectionCell.h; sourceTree = "<group>"; };
@@ -725,6 +730,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */,
 				3773F77114FD267000C36B75 /* AudioToolbox.framework in Frameworks */,
 				B78E053214E6B4A300890EA4 /* Security.framework in Frameworks */,
 				B78E04AE14E1F75D00890EA4 /* QuartzCore.framework in Frameworks */,
@@ -1368,6 +1374,8 @@
 		B771C54314DAF3E4002D430E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E78A8D191531EDF10099FE5B /* Reachability.h */,
+				E78A8D1A1531EDF10099FE5B /* Reachability.m */,
 				37F7CFFF150063CE00AD2C3A /* TabFile.h */,
 				37F7D000150063CE00AD2C3A /* TabFile.m */,
 				37F7CFE11500635900AD2C3A /* Sensible TableView */,
@@ -1403,6 +1411,7 @@
 		B79F489B142BEF0D0085D47B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */,
 				3773F77014FD267000C36B75 /* AudioToolbox.framework */,
 				B78E053114E6B49E00890EA4 /* Security.framework */,
 				B78E04B014E1F79A00890EA4 /* CoreFoundation.framework */,
@@ -1819,6 +1828,7 @@
 				E7D3732C152C2EFA00121918 /* ExistingHoursEntity.m in Sources */,
 				E7E1A63D152E873500C227E8 /* ServicesViewController_Shared.m in Sources */,
 				E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */,
+				E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

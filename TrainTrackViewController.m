@@ -74,28 +74,43 @@
   
     [[NSNotificationCenter defaultCenter]
      addObserver:self
-     selector:@selector(reloadTableViewData:)
-     name:@"RefetchAllDatabaseData"
+     selector:@selector(loadTableModel:)
+     name:@"DoneLoadingCliniciansShared"
      object:nil];
 
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        
+        [self.tableView setBackgroundView:nil];
+        [self.tableView setBackgroundView:[[UIView alloc] init]];
+        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+        
+        
+    }
+
     
-    UIImage *lockImage=[UIImage imageNamed:@"lock.png"];
+//    [self.tableView reloadData];
+//    [self.tableView reloadData];
+    
+}
+#pragma mark Notifications
+- (void)loadTableModel:(id)sender;
+{    UIImage *lockImage=[UIImage imageNamed:@"lock.png"];
 	UIBarButtonItem *stopButton = [[UIBarButtonItem alloc] initWithImage:lockImage style:UIBarButtonItemStyleDone target:self action:@selector(lockScreen:)];
     self.navigationItem.rightBarButtonItem = stopButton;
     
     
     //Do some property definition customization for the Supervisor Class
-//      managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-//    
+    //      managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    //    
     NSPredicate *myInfoPredicate=[NSPredicate predicateWithFormat:@"myInformation = %@", [NSNumber numberWithBool:YES]]; 
     
-   
-self.clinicianDef.titlePropertyName=@"firstName;lastName";
     
-//    SCSelectionCell *myInfoCell=[SCSelectionCell cellWithText:@"My Background Information" withBoundKey:@"myClinicianData" withValue:nil];
-//    myInfoCell.delegate=self;
-//    myInfoCell.tag=1;
-
+    self.clinicianDef.titlePropertyName=@"firstName;lastName";
+    
+    //    SCSelectionCell *myInfoCell=[SCSelectionCell cellWithText:@"My Background Information" withBoundKey:@"myClinicianData" withValue:nil];
+    //    myInfoCell.delegate=self;
+    //    myInfoCell.tag=1;
+    
     //Do some property definition customization for the Supervisor Class
     SCSelectionCell *testAdministrationCell=[SCSelectionCell cellWithText:@"Assessment" withBoundKey:@"testAdminstration" withValue:nil];
     testAdministrationCell.delegate=self;
@@ -108,7 +123,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     indirectSupportCell.delegate=self;
     indirectSupportCell.tag=4;
     
-   
+    
     
     SCSelectionCell *supervisionReceivedCell=[SCSelectionCell cellWithText:@"Supervision Received" withBoundKey:@"supervisionReceived" withValue:nil];
     supervisionReceivedCell.delegate=self;
@@ -128,7 +143,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     SCSelectionCell *continuingEducationCell=[SCSelectionCell cellWithText:@"Continuing Education Credits" withBoundKey:@"continuingEducation" withValue:nil];
     continuingEducationCell.delegate=self;
     continuingEducationCell.tag=9;
-
+    
     SCSelectionCell *certificationsCell=[SCSelectionCell cellWithText:@"Certifications" withBoundKey:@"certifications" withValue:nil];
     certificationsCell.delegate=self;
     certificationsCell.tag=10;
@@ -148,19 +163,19 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     SCSelectionCell *advisingExperienceCell=[SCSelectionCell cellWithText:@"Advisors & Advisees" withBoundKey:@"advisingExperience" withValue:nil];
     advisingExperienceCell.delegate=self;
     advisingExperienceCell.tag=14;
-
-     CustomSCSelectonCellWithLoading *drugDatabaseCell=[CustomSCSelectonCellWithLoading cellWithText:@"Drug Database" withBoundKey:@"drugDatabase" withValue:nil];
+    
+    CustomSCSelectonCellWithLoading *drugDatabaseCell=[CustomSCSelectonCellWithLoading cellWithText:@"Drug Database" withBoundKey:@"drugDatabase" withValue:nil];
     drugDatabaseCell.delegate=self;
     drugDatabaseCell.tag=15;
-
+    
     SCSelectionCell *lockPasscodeCell=[SCSelectionCell cellWithText:@"Lock Screen Settings" withBoundKey:@"lockSettings" withValue:nil];
     lockPasscodeCell.delegate=self;
     lockPasscodeCell.tag=16;
-
+    
     SCSelectionCell *otherAppSettingsCell=[SCSelectionCell cellWithText:@"Calander & Contacts" withBoundKey:@"otherSettings" withValue:nil];
     otherAppSettingsCell.delegate=self;
     otherAppSettingsCell.tag=17;
-
+    
     SCSelectionCell *supportCell=[SCSelectionCell cellWithText:@"Support" withBoundKey:@"support" withValue:nil];
     supportCell.delegate=self;
     supportCell.tag=18;
@@ -175,13 +190,13 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     
     // Initialize tableModel_
     self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self];
-
+    
     // Create an array of objects section
     SCArrayOfObjectsSection *myInformationSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:@"My Information Track" withEntityClassDefinition:self.clinicianDef usingPredicate:myInfoPredicate];
     
     
     
-//    [myInformationSection addCell:myInfoCell];
+    //    [myInformationSection addCell:myInfoCell];
 	
 	// Create an array of objects section
     SCTableViewSection *directSection = [SCTableViewSection sectionWithHeaderTitle:@"Direct Client Contact Track" ];
@@ -198,7 +213,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
   	
     SCTableViewSection *existingHoursSection = [SCTableViewSection sectionWithHeaderTitle:@"Existing Hours Track"];
     [existingHoursSection addCell:existingHoursCell];
-
+    
     SCTableViewSection *consultationSection = [SCTableViewSection sectionWithHeaderTitle:@"Consultation Track"];
     [consultationSection addCell:consultationsCell];
     
@@ -206,7 +221,7 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     [formalEducationSection addCell:collegeCoursesCell];
     [formalEducationSection addCell:certificationsCell];
 	
-   
+    
     
     SCTableViewSection *teachingAndAdvisingSection = [SCTableViewSection sectionWithHeaderTitle:@"Teaching and Advising Track"];
     [teachingAndAdvisingSection addCell:teachingExperienceCell];
@@ -238,25 +253,10 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
     [tableModel_ addSection:preferencesSection];
     [tableModel_ addSection:supportAndAboutSection];
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
     
-        [self.tableView setBackgroundView:nil];
-        [self.tableView setBackgroundView:[[UIView alloc] init]];
-        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
-    
-    
-    }
- 
-    
-    [self.tableView reloadData];
-//    [self.tableView reloadData];
-    
-}
-#pragma mark Notifications
-- (void)reloadTableViewData:(NSNotification *)notification
-{
-    [tableModel_ reloadBoundValues ];
-//	[tableModel_.modeledTableView reloadData];
+//    [tableModel_ reloadBoundValues ];
+    [tableModel_.modeledTableView reloadData];
+
 }
 //- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 //{
@@ -402,8 +402,8 @@ self.clinicianDef.titlePropertyName=@"firstName;lastName";
                     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
                     
                     [appDelegate saveContext];
-                    [arrayOfObjectsSection reloadBoundValues];
-                    [self.tableView reloadData];
+                    [tableModel_ reloadBoundValues];
+                    [tableModel_.modeledTableView reloadData];
                 }
             } 
           

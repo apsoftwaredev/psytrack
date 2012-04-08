@@ -65,5 +65,6 @@
 
 -(BOOL)checkStringIsNumber:(NSString *)str;
 
+- (void)reloadTableViewData;
 @end
 

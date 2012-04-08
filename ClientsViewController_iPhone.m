@@ -59,6 +59,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 } 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Gracefully handle reloading the view controller after a memory warning
     tableModel = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
     if(tableModel)
@@ -66,7 +67,31 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         [tableModel replaceModeledTableViewWith:self.tableView];
         return;
     }
+
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(reloadTableViewData:)
+     name:@"RefetchAllDatabaseData"
+     object:nil];
     
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        
+        [self.tableView setBackgroundView:nil];
+        [self.tableView setBackgroundView:[[UIView alloc] init]];
+        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+        
+        
+    }
+    
+    
+    //    [self.tableView reloadData];
+    //    [self.tableView reloadData];
+    
+}
+
+- (void)reloadTableViewData {
+
+       
     // listen for key-value store changes externally from the cloud
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updateCloudItems:)
@@ -199,6 +224,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
              duration:5];
     
+    [self.tableModel.modeledTableView reloadData];
 }
 -(void)viewDidUnload{
     [super viewDidUnload];
