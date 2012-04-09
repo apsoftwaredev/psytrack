@@ -44,7 +44,7 @@
 @property (nonatomic, strong) NSNumber * myPastSupervisor;
 @property (nonatomic, strong) NSData * photo;
 @property (nonatomic, strong) NSDate * updatedTimeStamp;
-@property (nonatomic, strong) NSDate * keyDate;
+@property (nonatomic, strong) NSString * keyString;
 @property (nonatomic, strong) NSNumber *aBRecordIdentifier;
 @property (nonatomic, strong) NSString * suffix;
 @property (nonatomic, strong) NSNumber * myCurrentSupervisor;

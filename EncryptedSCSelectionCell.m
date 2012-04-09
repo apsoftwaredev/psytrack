@@ -69,12 +69,12 @@
     //            
     //            
     //          
-    //            NSDate *keyDate=[self.boundObject valueForKey:@"keyDate"];
+    //            NSDate *keyString=[self.boundObject valueForKey:@"keyString"];
     //            NSData *primitiveData=[self.boundObject valueForKey:@"clientIDCode"];
     //            //NSLog(@"primitive daa is %@",primitiveData);
     //            
     //            
-    //            NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:keyDate encryptedData:primitiveData];
+    //            NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:keyString encryptedData:primitiveData];
     //          
     //            tempStr=[appDelegate convertDataToString:strData];
     //            //NSLog(@"temp string is %@",tempStr);

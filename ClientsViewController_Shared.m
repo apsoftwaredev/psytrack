@@ -49,7 +49,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
 	self.clientDef = [SCClassDefinition definitionWithEntityName:@"ClientEntity" 
                                                       withManagedObjectContext:managedObjectContext 
-                                                             withPropertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth", @"keyDate",
+                                                             withPropertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth", @"keyString",
                                                                                 @"initials",  @"demographicInfo", @"dateAdded",@"currentClient",@"phoneNumbers", @"logs", @"medicationHistory",@"diagnoses", @"vitals",  
                                                                 @"notes",nil]];
 	
@@ -63,7 +63,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     clientIdCodePropertyDef.type=SCPropertyTypeCustom;
     clientIdCodePropertyDef.uiElementClass=[EncryptedSCTextFieldCell class];
     
-    NSDictionary *encryClientIDCodeTFCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"clientIDCode",@"keyDate",@"Client ID Code",@"clientIDCode",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryClientIDCodeTFCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"clientIDCode",@"keyString",@"Client ID Code",@"clientIDCode",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
 
     clientIdCodePropertyDef.objectBindings=encryClientIDCodeTFCellKeyBindingsDic;
@@ -74,15 +74,15 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     self.clientDef.titlePropertyName = @"clientIDCode";	
     self.clientDef.keyPropertyName= @"clientIDCode";
     
-    NSInteger indexOfKeyDate=(NSInteger )[self.clientDef indexOfPropertyDefinitionWithName:@"keyDate"];
-    [self.clientDef removePropertyDefinitionAtIndex:indexOfKeyDate];
+    NSInteger indexOfkeyString=(NSInteger )[self.clientDef indexOfPropertyDefinitionWithName:@"keyString"];
+    [self.clientDef removePropertyDefinitionAtIndex:indexOfkeyString];
     
     SCPropertyDefinition *initialsPropertyDef  =[self.clientDef propertyDefinitionWithName:@"initials"];
     
     initialsPropertyDef.type=SCPropertyTypeCustom;
     initialsPropertyDef.uiElementClass=[EncryptedSCTextFieldCell class];
     
-    NSDictionary *encryInitialsTFCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"initials",@"keyDate",@"Initials",@"initials",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryInitialsTFCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"initials",@"keyString",@"Initials",@"initials",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     initialsPropertyDef.objectBindings=encryInitialsTFCellKeyBindingsDic;
@@ -93,7 +93,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     
-     NSDictionary *encryDateOfBirthCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"dateOfBirth",@"keyDate",@"Date Of Birth",@"dateOfBirth",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32",@"33",@"34",nil]];
+     NSDictionary *encryDateOfBirthCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"dateOfBirth",@"keyString",@"Date Of Birth",@"dateOfBirth",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32",@"33",@"34",nil]];
 ////    
 //    
     SCPropertyDefinition *clientDateOfBirthPropertyDef = [self.clientDef propertyDefinitionWithName:@"dateOfBirth"];
@@ -125,7 +125,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                                                               allowMovingItems:FALSE];
     SCPropertyDefinition *clientNotesPropertyDef = [self.clientDef propertyDefinitionWithName:@"notes"];
 //    clientNotesPropertyDef.type=SCPropertyTypeTextView;
-    NSDictionary *encryClientNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32",@"33",@"34",nil]];
+    NSDictionary *encryClientNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32",@"33",@"34",nil]];
     ////    
     //    
 //    SCPropertyDefinition *clientDateOfBirthPropertyDef = [self.clientDef propertyDefinitionWithName:@"dateOfBirth"];
@@ -168,7 +168,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     phoneNumberPropertyDef.type=SCPropertyTypeCustom;
     phoneNumberPropertyDef.uiElementClass=[EncryptedSCTextFieldCell class];
     
-    NSDictionary *encryPhoneNumberTFCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"phoneNumber",@"keyDate",@"Number",@"phoneNumber",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryPhoneNumberTFCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"phoneNumber",@"keyString",@"Number",@"phoneNumber",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     phoneNumberPropertyDef.objectBindings=encryPhoneNumberTFCellKeyBindingsDic;
@@ -216,7 +216,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     logNotesPropertyDef.type=SCPropertyTypeCustom;
     logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
     
-    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
@@ -335,7 +335,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     medicationNotesPropertyDef.type=SCPropertyTypeCustom;
     medicationNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
     
-    NSDictionary *encryMedicationlNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryMedicationlNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     medicationNotesPropertyDef.objectBindings=encryMedicationlNotesTVCellKeyBindingsDic;
@@ -466,7 +466,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     medicationReviewNotesPropertyDef.type=SCPropertyTypeCustom;
     medicationReviewNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
     
-    NSDictionary *encryMedicationlReviewNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryMedicationlReviewNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     medicationReviewNotesPropertyDef.objectBindings=encryMedicationlReviewNotesTVCellKeyBindingsDic;

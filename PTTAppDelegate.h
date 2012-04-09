@@ -126,7 +126,7 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 
 //-(NSURL *)applicationDisordersFileURL;
 -(void)resetDisordersModel;
-
++ (PTTAppDelegate *)appDelegate ;
 
 -(BOOL)setUpDrugStore;
 - (void)saveContext;
@@ -147,18 +147,18 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 -(NSString *)applicationDrugsPathString;
 
 //-(NSString *)decyptString:(NSString *) str;
--(NSString *)decyptString:(NSString *) encryptedString usingKeyWithDate:(NSDate *)keyDate;
--(NSDictionary *)encryptDataToEncryptedData:(NSData *) unencryptedData withKeyDate:(NSDate *)keyDateToSet;
--(NSDictionary *)encryptStringToEncryptedData:(NSString *)plainTextStr withKeyDate:(NSDate *)keyDateToSet;
+-(NSString *)decyptString:(NSString *) encryptedString usingKeyString:(NSString *)keyString;
+-(NSDictionary *)encryptDataToEncryptedData:(NSData *) unencryptedData withKeyString:(NSString *)keyStringToSet;
+-(NSDictionary *)encryptStringToEncryptedData:(NSString *)plainTextStr withKeyString:(NSString *)keyStringToSet;
 -(NSString *)convertDataToString:(NSData *)data;
--(NSData *)decryptDataToPlainDataUsingKeyEntityWithDate:(NSDate *)keyDate encryptedData:(NSData *)encryptedData;
+-(NSData *)decryptDataToPlainDataUsingKeyEntityWithString:(NSString *)keyString encryptedData:(NSData *)encryptedData;
 //-(NSData *)decryptDataToPlainData:(NSData *) encryptedData;
 -(NSData *)encryptDictionaryToData:(NSDictionary *)unencryptedDictionary;
 //-(NSDictionary *)decryptDataToDictionary:(NSData*)encryptedData;
 -(NSString *)generateRandomStringOfLength:(int )length;
 -(NSString *)combSmString;
 -(NSData *)hashDataFromString:(NSString *)plainString;
--(NSDictionary*)unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:(NSDate *)keyDate;
+-(NSDictionary*)unwrapAndCreateKeyDataFromKeyEntitywithKeyString:(NSString *)keyString;
 -(NSDate *)convertDataToDate:(NSData *)data;
 -(IBAction)notifyTrustFailure:(id)sender;
 -(NSData *)decryptDataToPlainData:(NSData *)encryptedData usingSymetricKey:(NSData *)symetricData;

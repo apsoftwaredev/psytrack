@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSDate * dateTime;
-@property (nonatomic, retain) NSDate * keyDate;
+@property (nonatomic, retain) NSString * keyString;
 @property (nonatomic, retain) ClientEntity *client;
 @property (nonatomic, retain) NSManagedObject *advisingGiven;
 @property (nonatomic, retain) NSManagedObject *advisor;

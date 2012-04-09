@@ -13,6 +13,6 @@
 
 @dynamic keyF;
 @dynamic dataF;
-@dynamic dateCreated;
+@dynamic keyString;
 
 @end

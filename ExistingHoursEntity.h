@@ -15,7 +15,7 @@
 @property (nonatomic, retain) NSDate * endDate;
 @property (nonatomic, retain) NSDate * startDate;
 @property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * keyDate;
+@property (nonatomic, retain) NSString * keyString;
 @property (nonatomic, retain) NSSet *supportActivities;
 @property (nonatomic, retain) NSSet *assessments;
 @property (nonatomic, retain) NSSet *supervision;

@@ -105,7 +105,7 @@
     existingHoursNotesPropertyDef.type=SCPropertyTypeCustom;
     existingHoursNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
     
-    NSDictionary *encryProfileNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryProfileNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     existingHoursNotesPropertyDef.objectBindings=encryProfileNotesTVCellKeyBindingsDic;

@@ -22,7 +22,7 @@
 @property (nonatomic, retain) NSNumber * sxChange;
 @property (nonatomic, retain) NSDate * logDate;
 @property (nonatomic, retain) NSDate * lastDose;
-@property (nonatomic, retain) NSDate * keyDate;
+@property (nonatomic, retain) NSString * keyString;
 @property (nonatomic, retain) MedicationEntity *medication;
 @property (nonatomic, retain) NSSet *sideEffects;
 @property (nonatomic, retain) ClinicianEntity *prescriber;

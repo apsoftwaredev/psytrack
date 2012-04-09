@@ -50,15 +50,15 @@
 //        
 //        
 //        NSData *encryptedData=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"34"]]; 
-//        NSDate *keyDate=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"32"]];
+//        NSDate *keyString=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"32"]];
 //        //NSLog(@"encrypted data is %@",encryptedData);
-//        //NSLog(@"key date is %@",keyDate);
-//        NSData *decryptedData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:keyDate encryptedData:encryptedData];
+//        //NSLog(@"key date is %@",keyString);
+//        NSData *decryptedData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:keyString encryptedData:encryptedData];
 //        
 //        //NSLog(@"decyrpted data %@",decryptedData);
 //        self.clientIDCodeStr=[appDelegate convertDataToString:decryptedData];
 //        //NSLog(@"temp string is %@",self.clientIDCodeStr);
-////        [self.boundObject setValue:keyDate forKey:@"keyDate"];
+////        [self.boundObject setValue:keyString forKey:@"keyString"];
 //        
 //        
 //        //        textLabelStr=self.tempString;
@@ -124,11 +124,11 @@
 //    self.clientIDCodeStr=self.textField.text;
 //    //NSLog(@"textfield text is %@",self.clientIDCodeStr);
 //    
-//    NSDate *keyDate=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"32"]];
+//    NSDate *keyString=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"32"]];
 //    
-//    //NSLog(@"key date is %@",keyDate);
+//    //NSLog(@"key date is %@",keyString);
 //    
-//    NSDictionary *encryptedDictionary=[appDelegate encryptStringToEncryptedData:self.clientIDCodeStr withKeyDate:(NSDate*)keyDate];
+//    NSDictionary *encryptedDictionary=[appDelegate encryptStringToEncryptedData:self.clientIDCodeStr withkeyString:(NSDate*)keyString];
 //    
 //    NSData *encryptedData=[encryptedDictionary valueForKey:@"encryptedData"];
 //   
@@ -141,10 +141,10 @@
 //    [self.boundObject setValue:encryptedData forKey:[self.objectBindings valueForKey:@"34"]];
 //        //NSLog(@"encrypted data is %@",[self.objectBindings valueForKey:@"34"]);
 //    
-//    keyDate=[encryptedDictionary valueForKey:@"keyDate"];
+//    keyString=[encryptedDictionary valueForKey:@"keyString"];
 //    
-//    //NSLog(@"keydate is %@",keyDate);
-//    [self.boundObject setValue:keyDate forKey:@"keyDate"];
+//    //NSLog(@"keyString is %@",keyString);
+//    [self.boundObject setValue:keyString forKey:@"keyString"];
 //    
 ////    //    NSData *encryptedData=(NSData *)[self convertStringToEncryptedData:clientIDCode];
 ////    //    NSString* newStr = [[NSString alloc] initWithData:encryptedData encoding:NSASCIIStringEncoding];

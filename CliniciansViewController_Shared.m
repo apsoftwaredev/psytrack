@@ -1004,7 +1004,7 @@
     referralNotesPropertyDef.type=SCPropertyTypeCustom;
     referralNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
     
-    NSDictionary *encryReferralNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryReferralNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     referralNotesPropertyDef.objectBindings=encryReferralNotesTVCellKeyBindingsDic;
@@ -1579,7 +1579,7 @@
     logNotesPropertyDef.type=SCPropertyTypeCustom;
     logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
     
-    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
@@ -1597,7 +1597,7 @@
     clinicianNotesPropertyDef.type=SCPropertyTypeCustom;
     clinicianNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
     
-    NSDictionary *encryClinicianNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryClinicianNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     clinicianNotesPropertyDef.objectBindings=encryClinicianNotesTVCellKeyBindingsDic;
@@ -1873,7 +1873,7 @@
                         UIButton *button=(UIButton *)view;
                         [button setTitle:buttonText forState:UIControlStateNormal];
                         [button addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-                        [button setEnabled:[tableViewModel valuesAreValid]];
+                        
                         
                     }
                 } 
@@ -2107,65 +2107,6 @@
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel willSelectRowAtIndexPath:(NSIndexPath *)indexPath 
-{
-    //NSLog(@"table bies slkjd %i", tableViewModel.tag);
-    SCTableViewCell *cell =[tableViewModel cellAtIndexPath:indexPath];
-    deletePressedOnce=NO;
-    switch (tableViewModel.tag) {
-        case 1:
-        {
-            
-            if (cell.tag==7 &&[cell isKindOfClass:[ButtonCell class]]&&![tableViewModel valuesAreValid]) {
-                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-                [appDelegate displayNotification:@"Add First and Last Name before Adding to Address Book or use the look up button to select the name." forDuration:8.0 location:kPTTScreenLocationTop inView:tableViewModel.viewController.view.superview];
-                
-            }
-            if (cell.tag<7) {
-            UITextField *view =(UITextField *)[cell viewWithTag:50];
-            
-            [view becomeFirstResponder];
-            [view resignFirstResponder]; 
-            
-            }
-            
-            
-            
-        }
-            break;
-        
-        case 429:
-        {
-        //NSLog(@"cell bound object class is %i",tableViewModel.tag);
-            SCTableViewCell *selectedCell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-            //NSLog(@"cell class %@", selectedCell.class);
-            if ([selectedCell isKindOfClass:[SCTableViewCell class]]) {
-                //NSLog(@"group cell");
-            }
-        
-        
-        }
-        
-        
-        case 3:    
-        {
-            UIView *textViewView=(UIView *)[cell viewWithTag:80];
-            if ([textViewView isKindOfClass:[UITextView class]]) {
-                UITextView *textView=(UITextView *)textViewView;
-                [textView becomeFirstResponder];
-                [textView resignFirstResponder];
-            }
-            
-            //NSLog(@"cell class is %@",[cell class]);
-                       
-            
-            
-        }
-        default:
-            break;
-    }
-    
-}
 //-(NSString *)fullName:(NSString *)fullName tableViewModel:(SCTableViewModel *)tableViewModel cell:(SCTableViewCell *)cell getNameValues:(BOOL)getNameValues{
 //    
 //        
@@ -2840,21 +2781,7 @@
     SCTableViewCell *cell = [tableViewModel cellAtIndexPath:IndexPath];
     
     
-    if (tableViewModel.tag==1) {
-        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
-        SCTableViewCell *buttonTableViewCell=(SCTableViewCell *)[section cellAtIndex:8];
-        if ([buttonTableViewCell isKindOfClass:[ButtonCell class]]) {
-            ButtonCell * buttonCell =(ButtonCell *)buttonTableViewCell;
-            
-            UIButton *button=(UIButton *)[buttonCell viewWithTag:300];
-            
-            [button setEnabled:[tableViewModel valuesAreValid]];
-        }
-        
-        
-        
-    }
-    
+  
     
     
     
@@ -2998,7 +2925,8 @@
                         
                         
                         //NSLog(@"clinician %@",clinician);
-                        
+                        if ([tableViewModel valuesAreValid]) {
+                       
                         for (NSInteger i=0; i<tableViewModel.sectionCount;i++) {
                             SCTableViewSection *sectionAtIndex=(SCTableViewSection *)[tableViewModel sectionAtIndex:i];
                             
@@ -3006,7 +2934,12 @@
                         }
                         
                         [self evaluateWhichABViewControllerToShow];
+                            
+                        } 
                         
+                        else {
+                            [[PTTAppDelegate appDelegate] displayNotification:@"A first and last name before adding or use look up.."  forDuration:8.0 location:kPTTScreenLocationTop inView:tableViewModel.viewController.view.superview];
+                        }
                     }
                     
                     

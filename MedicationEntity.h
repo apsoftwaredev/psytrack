@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSDate * discontinued;
 @property (nonatomic, retain) NSString * drugName;
 @property (nonatomic, retain) NSString * productNo;
-@property (nonatomic, retain) NSDate * keyDate;
+@property (nonatomic, retain) NSString * keyString;
 @property (nonatomic, retain) ClientEntity *client;
 @property (nonatomic, retain) NSSet *medLogs;
 @property (nonatomic, retain) NSSet *symptomsTargeted;

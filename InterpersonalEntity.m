@@ -15,15 +15,13 @@
 @dynamic contactFrequencyUnitLength;
 @dynamic notes;
 @dynamic duration;
-@dynamic keyDate;
+@dynamic keyString;
 @dynamic contactFrequencyUnit;
 @dynamic contactFrequencyNumber;
 @dynamic demographicProfile;
 @dynamic relationship;
 
 @synthesize tempNotes;
-
-
 
 
 - (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
@@ -37,19 +35,19 @@
         
         
         
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyDate:self.keyDate];
+        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
         //NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
         NSData *encryptedData;
-        NSDate *encryptedKeyDate;
+        NSString *encryptedKeyString;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
             encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
             
             
-            if ([encryptedDataDictionary.allKeys containsObject:@"keyDate"]) {
+            if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
                 //NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
                 
-                encryptedKeyDate=[encryptedDataDictionary valueForKey:@"keyDate"];
-                //NSLog(@"key date is client entity %@",encryptedKeyDate);
+                encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
+                //NSLog(@"key date is client entity %@",encryptedkeyString);
             }
         }
         
@@ -61,11 +59,12 @@
         }
         
         
-        
-        if (![encryptedKeyDate isEqualToDate:self.keyDate]) {
-            [self willChangeValueForKey:@"keyDate"];
-            [self setPrimitiveValue:encryptedKeyDate forKey:@"keyDate"];
-            [self didChangeValueForKey:@"keyDate"];
+        [self willAccessValueForKey:@"keyString"];
+        if (![encryptedKeyString isEqualToString:self.keyString]) {
+            [self didAccessValueForKey:@"keyString"];
+            [self willChangeValueForKey:@"keyString"];
+            [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
+            [self didChangeValueForKey:@"keyString"];
             
         }
         
@@ -94,11 +93,11 @@
         NSData *primitiveData=[self primitiveValueForKey:@"notes"];
         [self didAccessValueForKey:@"notes"];
         
-        [self willAccessValueForKey:@"keyDate"];
-        NSDate *tmpKeyDate=self.keyDate;
-        [self didAccessValueForKey:@"keyDate"];
+        [self willAccessValueForKey:@"keyString"];
+        NSString *tmpKeyString=self.keyString;
+        [self didAccessValueForKey:@"keyString"];
         
-        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:tmpKeyDate encryptedData:primitiveData];
+        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
         
         tempStr=[appDelegate convertDataToString:strData];
         
@@ -132,6 +131,5 @@
     
     self.tempNotes=notes;
 }
-
 
 @end

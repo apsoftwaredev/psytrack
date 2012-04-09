@@ -32,7 +32,7 @@
 @dynamic interventionsDelivered;
 @dynamic clientAndMentalState;
 @dynamic diagnosis;
-@dynamic keyDate;
+@dynamic keyString;
 
 
 @synthesize tempClientIDCode;
@@ -227,6 +227,7 @@
 //
 //}
 
+
 - (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
 {
     
@@ -238,18 +239,19 @@
         
         
         
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyDate:self.keyDate];
-       NSData *encryptedData;
-        NSDate *encryptedKeyDate;
+        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
+        //NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        NSData *encryptedData;
+        NSString *encryptedKeyString;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
             encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
             
             
-            if ([encryptedDataDictionary.allKeys containsObject:@"keyDate"]) {
+            if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
                 //NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
                 
-                encryptedKeyDate=[encryptedDataDictionary valueForKey:@"keyDate"];
-                //NSLog(@"key date is client entity %@",encryptedKeyDate);
+                encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
+                //NSLog(@"key date is client entity %@",encryptedkeyString);
             }
         }
         
@@ -261,11 +263,12 @@
         }
         
         
-        
-        if (![encryptedKeyDate isEqualToDate:self.keyDate]) {
-            [self willChangeValueForKey:@"keyDate"];
-            [self setPrimitiveValue:encryptedKeyDate forKey:@"keyDate"];
-            [self didChangeValueForKey:@"keyDate"];
+        [self willAccessValueForKey:@"keyString"];
+        if (![encryptedKeyString isEqualToString:self.keyString]) {
+            [self didAccessValueForKey:@"keyString"];
+            [self willChangeValueForKey:@"keyString"];
+            [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
+            [self didChangeValueForKey:@"keyString"];
             
         }
         
@@ -275,58 +278,59 @@
         
         
     }
+}
+-(NSString *)notes{
+    
+    NSString *tempStr;
+    [self willAccessValueForKey:@"tempNotes"];
+    
+    
+    if (!self.tempNotes ||!self.tempNotes.length) {
+        
+        [self didAccessValueForKey:@"tempNotes"];
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        
+        [self willAccessValueForKey:@"notes"];
+        
+        
+        NSData *primitiveData=[self primitiveValueForKey:@"notes"];
+        [self didAccessValueForKey:@"notes"];
+        
+        [self willAccessValueForKey:@"keyString"];
+        NSString *tmpKeyString=self.keyString;
+        [self didAccessValueForKey:@"keyString"];
+        
+        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
+        
+        tempStr=[appDelegate convertDataToString:strData];
+        
+        [self willChangeValueForKey:@"tempNotes"];
+        
+        self.tempNotes=tempStr;
+        [self didChangeValueForKey:@"tempNotes"];
+        
+        
+    }
+    else 
+    {
+        tempStr=self.tempNotes;
+        [self didAccessValueForKey:@"tempNotes"];
+    }
+    
+    
+    
+    
+    return tempStr;
+    
+    
+    
+    
+    
+    
 }
 
-- (void)setDateToPrimitiveData:(NSDate *)dateToConvert forKey:(NSString *)key 
-{
-    
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    if (appDelegate.okayToDecryptBool) {
-        
-        
-       
-        NSData * dateData = [NSKeyedArchiver archivedDataWithRootObject:dateToConvert];
-        
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptDataToEncryptedData:dateData withKeyDate:self.keyDate];
-       
-        NSData *encryptedData;
-        NSDate *encryptedKeyDate;
-        if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
-            encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
-            
-            
-            if ([encryptedDataDictionary.allKeys containsObject:@"keyDate"]) {
-                //NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
-                
-                encryptedKeyDate=[encryptedDataDictionary valueForKey:@"keyDate"];
-                //NSLog(@"key date is client entity %@",encryptedKeyDate);
-            }
-        }
-        
-        
-        if (encryptedData.length) {
-             [self willChangeValueForKey:key];
-             [self setPrimitiveValue:encryptedData forKey:key];
-             [self didChangeValueForKey:key];
-        }
-          
-        
-        
-        if (![encryptedKeyDate isEqualToDate:self.keyDate]) {
-            [self willChangeValueForKey:@"keyDate"];
-            [self setPrimitiveValue:encryptedKeyDate forKey:@"keyDate"];
-            [self didChangeValueForKey:@"keyDate"];
-            
-        }
-       
-        
-        
-        
-        
-        
-    }
-}
+
 
 -(NSString *)initials{
 
@@ -346,11 +350,11 @@
         NSData *primitiveData=[self primitiveValueForKey:@"initials"];
         [self didAccessValueForKey:@"initials"];
         
-        [self willAccessValueForKey:@"keyDate"];
-        NSDate *tmpKeyDate=self.keyDate;
-        [self didAccessValueForKey:@"keyDate"];
+        [self willAccessValueForKey:@"keyString"];
+        NSString *tmpKeyString=self.keyString;
+        [self didAccessValueForKey:@"keyString"];
         
-        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:tmpKeyDate encryptedData:primitiveData];
+        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
         
         tempStr=[appDelegate convertDataToString:strData];
         
@@ -398,11 +402,11 @@
         
         [self didAccessValueForKey:@"clientIDCode"];
         
-        [self willAccessValueForKey:@"keyDate"];
-        NSDate *tmpKeyDate=self.keyDate;
-        [self didAccessValueForKey:@"keyDate"];
+        [self willAccessValueForKey:@"keyString"];
+        NSString *tmpKeyString=self.keyString;
+        [self didAccessValueForKey:@"keyString"];
         
-        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:tmpKeyDate encryptedData:primitiveData];
+        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
         
         tempStr=[appDelegate convertDataToString:strData];
         
@@ -428,52 +432,6 @@
 }
 
 
--(NSString *)notes{
-    //
-    NSString *tempStr;
-    [self willAccessValueForKey:@"tempNotes"];
-    
-    
-    if (!self.tempNotes ||!self.tempNotes.length) {
-        
-        [self didAccessValueForKey:@"tempNotes"];
-        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-        
-        
-        [self willAccessValueForKey:@"notes"];
-        
-        
-        NSData *primitiveData=[self primitiveValueForKey:@"notes"];
-        
-        [self didAccessValueForKey:@"notes"];
-        
-        [self willAccessValueForKey:@"keyDate"];
-        NSDate *tmpKeyDate=self.keyDate;
-        [self didAccessValueForKey:@"keyDate"];
-        
-        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:tmpKeyDate encryptedData:primitiveData];
-        
-        tempStr=[appDelegate convertDataToString:strData];
-        
-        [self willChangeValueForKey:@"tempNotes"];
-        
-        self.tempNotes=tempStr;
-        [self didChangeValueForKey:@"tempNotes"];
-        
-        
-    }
-    else 
-    {
-        tempStr=self.tempNotes;
-        [self didAccessValueForKey:@"tempNotes"];
-    }
-    
-    
-    
-    
-    return tempStr;
-    
-}
 
 
 
@@ -496,11 +454,11 @@
         
         [self didAccessValueForKey:@"dateOfBirth"];
         
-        [self willAccessValueForKey:@"keyDate"];
-        NSDate *tmpKeyDate=self.keyDate;
-        [self didAccessValueForKey:@"keyDate"];
+        [self willAccessValueForKey:@"keyString"];
+        NSString *tmpKeyString=self.keyString;
+        [self didAccessValueForKey:@"keyString"];
         
-        NSData *dateData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:tmpKeyDate encryptedData:primitiveData];
+        NSData *dateData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
         
         
         newDate=[appDelegate convertDataToDate:dateData];

@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * extention;
 @property (nonatomic, retain) NSString * phoneNumber;
-@property (nonatomic, retain) NSDate   * keyDate;
+@property (nonatomic, retain) NSString   * keyString;
 @property (nonatomic, retain) ClientEntity *client;
 
 @property (nonatomic, strong) NSString *tempPhoneNumber;

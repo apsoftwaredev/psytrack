@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSNumber * referralInOrOut;
-@property (nonatomic, retain) NSDate * keyDate;
+@property (nonatomic, retain) NSString * keyString;
 @property (nonatomic, retain) ClinicianEntity *clinician;
 @property (nonatomic, retain) ClientEntity *client;
 

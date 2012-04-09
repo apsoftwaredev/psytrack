@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSDate * arrivedDate;
 @property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * keyDate;
+@property (nonatomic, retain) NSString * keyString;
 @property (nonatomic, retain) NSString * migratedFrom;
 @property (nonatomic, retain) NSString  * migratedTo;
 @property (nonatomic, retain) DemographicProfileEntity *demographicProfile;

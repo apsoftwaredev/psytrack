@@ -193,7 +193,7 @@
     demographicSexPropertyDef.type=SCPropertyTypeCustom;
     demographicSexPropertyDef.uiElementClass=[EncryptedSCSelectionCell class];
     
-    NSDictionary *encryProfileSexTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"sex",@"keyDate",@"Sex",@"sex", nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryProfileSexTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"sex",@"keyString",@"Sex",@"sex", nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     demographicSexPropertyDef.objectBindings=encryProfileSexTVCellKeyBindingsDic;
@@ -216,7 +216,7 @@
     demographicNotesPropertyDef.type=SCPropertyTypeCustom;
     demographicNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
     
-    NSDictionary *encryProfileNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"profileNotes",@"keyDate",@"Notes",@"profileNotes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryProfileNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"profileNotes",@"keyString",@"Notes",@"profileNotes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     demographicNotesPropertyDef.objectBindings=encryProfileNotesTVCellKeyBindingsDic;
@@ -429,7 +429,7 @@
     migrationFromPropertyDef.type=SCPropertyTypeCustom;
     migrationFromPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
     
-    NSDictionary *encryMigrationFromTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"migratedFrom",@"keyDate",@"Migrated From",@"migratedFrom",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryMigrationFromTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"migratedFrom",@"keyString",@"Migrated From",@"migratedFrom",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     migrationFromPropertyDef.objectBindings=encryMigrationFromTVCellKeyBindingsDic;
@@ -442,7 +442,7 @@
     migrationToPropertyDef.type=SCPropertyTypeCustom;
     migrationToPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
     
-    NSDictionary *encryMigrationToTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"migratedTo",@"keyDate",@"To",@"migratedTo",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryMigrationToTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"migratedTo",@"keyString",@"To",@"migratedTo",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     migrationToPropertyDef.objectBindings=encryMigrationToTVCellKeyBindingsDic;
@@ -454,7 +454,7 @@
     migrationHistoryNotesPropertyDef.type=SCPropertyTypeCustom;
     migrationHistoryNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
     
-    NSDictionary *encryHistoryNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryHistoryNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     migrationHistoryNotesPropertyDef.objectBindings=encryHistoryNotesTVCellKeyBindingsDic;
@@ -834,7 +834,7 @@
     interpersonalNotesPropertyDef.type=SCPropertyTypeCustom;
     interpersonalNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
     
-    NSDictionary *encryInterpersonalNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyDate",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    NSDictionary *encryInterpersonalNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
     
     
     interpersonalNotesPropertyDef.objectBindings=encryInterpersonalNotesTVCellKeyBindingsDic;

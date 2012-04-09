@@ -91,6 +91,9 @@
 @synthesize encryption=encryption_;
 @synthesize okayToDecryptBool=okayToDecryptBool_;
 
++ (PTTAppDelegate *)appDelegate {
+	return (PTTAppDelegate *)[[UIApplication sharedApplication] delegate];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -104,6 +107,9 @@
 
     
 #endif
+   
+//    
+    NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
     // Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the
     // method "reachabilityChanged" will be called. 
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
@@ -325,6 +331,7 @@
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableModel" object:self userInfo:nil];
+   NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
       
 }
 - (void) updateInterfaceWithReachability: (Reachability*) curReach
@@ -448,9 +455,9 @@
     return [symmetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
 }
 
--(NSMutableDictionary*)unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:(NSDate *)keyDate{
+-(NSMutableDictionary*)unwrapAndCreateKeyDataFromKeyEntitywithKeyString:(NSString *)keyString{
 
-    NSMutableDictionary *returnDictionary=[[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:[NSData data],[NSDate date], nil] forKeys:[NSArray arrayWithObjects:@"symetricData",@"keyDate", nil]];
+    NSMutableDictionary *returnDictionary=[[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:[NSData data],[self generateExposedKey], nil] forKeys:[NSArray arrayWithObjects:@"symetricData",@"keyString", nil]];
     
     NSString *symetricStr;
     
@@ -482,18 +489,18 @@
         [self displayNotification:@"Error Accessing the database occured" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
     }
     KeyEntity *keyObject;
-    NSPredicate *keyDatePredicate;
-    if (keyDate) {
-        //NSLog(@"key date is %@",keyDate);
-       keyDatePredicate=[NSPredicate predicateWithFormat:@"dateCreated == %@",keyDate];
+    NSPredicate *keyStringPredicate;
+    if (keyString) {
+        //NSLog(@"key date is %@",keyString);
+       keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString == %@",keyString];
 //        if (fetchedObjects.count) {
-//            fetchedObjects=[fetchedObjects filteredArrayUsingPredicate:keyDatePredicate];
+//            fetchedObjects=[fetchedObjects filteredArrayUsingPredicate:keyStringPredicate];
 //        }
     }
     if (fetchedObjects.count) 
     {
         keyObject=[fetchedObjects objectAtIndex:0];
-        //NSLog(@"keydate is %@",keyObject.dateCreated);
+        //NSLog(@"keyString is %@",keyObject.dateCreated);
     }
     else {
         [self setupDefaultLockDictionaryResultStr];
@@ -515,9 +522,9 @@
     NSString *symetricStringThree;
     if (keyObject && keyObject.keyF) {
         
-        if (keyObject.dateCreated) {
-            if ([returnDictionary.allKeys containsObject:@"keyDate"]) {
-                [returnDictionary setValue:keyObject.dateCreated forKey:@"keyDate"];
+        if (keyObject.keyString) {
+            if ([returnDictionary.allKeys containsObject:@"keyString"]) {
+                [returnDictionary setValue:keyObject.keyString forKey:@"keyString"];
             }
         }
         
@@ -527,7 +534,7 @@
          symetricStringThree=[self convertDataToString:unwrappedSymetricString];
     }
     NSString *symetricStringTwo;
-    if (keyObject.dataF && ![keyObject.dateCreated isEqualToDate:keyDate]) {
+    if (keyObject.dataF && ![keyObject.keyString isEqualToString:keyString]) {
         
               
         NSData *symetricData=[self getSymetricData];
@@ -744,7 +751,17 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 
 }
 
+-(NSString *)generateExposedKey{
 
+    NSLog(@" generate exposed key time interval is %f",NSTimeIntervalSince1970);
+NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
+
+    NSString *returnStr=[NSString stringWithFormat:@"%f%@",[[NSDate date] timeIntervalSince1970],[self generateRandomStringOfLength:10]];
+    
+    NSLog(@"return exposed key is %@",returnStr);
+    
+    return returnStr;
+}
 
 -(NSString *)setupDefaultLockDictionaryResultStr{
     
@@ -788,11 +805,11 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
    
         if (!self.lockValuesDictionary) {
 
-    NSArray *lockKeys=[NSArray arrayWithObjects:K_LOCK_SCREEN_PASSCODE_IS_ON, K_LOCK_SCREEN_PASSCODE, K_LOCK_SCREEN_ATTEMPT,  K_LOCK_SCREEN_LOCK_AT_STARTUP,K_LOCK_SCREEN_TIMER_ON,K_LOCK_SCREEN_LOCKED, K_LOCK_SCREEN_P_HSH  ,K_LOCK_SCREEN_DF_HASH,K_LOCK_SCREEN_RAN, K_LOCK_SCREEN_CREATE_DATE,nil];
+    NSArray *lockKeys=[NSArray arrayWithObjects:K_LOCK_SCREEN_PASSCODE_IS_ON, K_LOCK_SCREEN_PASSCODE, K_LOCK_SCREEN_ATTEMPT,  K_LOCK_SCREEN_LOCK_AT_STARTUP,K_LOCK_SCREEN_TIMER_ON,K_LOCK_SCREEN_LOCKED, K_LOCK_SCREEN_P_HSH  ,K_LOCK_SCREEN_DF_HASH,K_LOCK_SCREEN_RAN, K_LOCK_SCREEN_CREATE_KEY,nil];
     
     
     //NSLog(@"hash string is %@",hashStr);
-    NSArray *lockValues=[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],[NSString string],[NSNumber numberWithInteger:0],[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],[NSString stringWithFormat:@"%@asdj9emV3k30wer93",@""],hashStr,[self generateRandomStringOfLength:21],[NSDate date], nil];
+    NSArray *lockValues=[NSArray arrayWithObjects:[NSNumber numberWithBool:NO],[NSString string],[NSNumber numberWithInteger:0],[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],[NSString stringWithFormat:@"%@asdj9emV3k30wer93",@""],hashStr,[self generateRandomStringOfLength:21],[self generateExposedKey ], nil];
     
     self.lockValuesDictionary=[NSMutableDictionary dictionaryWithObjects:lockValues forKeys:lockKeys];
         }
@@ -902,7 +919,7 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
                     
                     newKeyObject.keyF=wrappedNewKeyData;
                     newKeyObject.dataF=encryptedArchivedLockData;
-                    newKeyObject.dateCreated=[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_DATE];
+                    newKeyObject.keyString=[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY];
                   
                                 //NSLog(@"newkey object is %@",newKeyObject.dateCreated);       
                     
@@ -1037,15 +1054,15 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
     
 
         
-        NSData *wrapedSymmetricKey;
+        NSData *wrapedSymetricKey;
         if (symetricData.length==32) {
         
-            wrapedSymmetricKey =[encryption_ encryptData:symetricData keyRef:nil useDefaultPublicKey:YES];
+            wrapedSymetricKey =[encryption_ encryptData:symetricData keyRef:nil useDefaultPublicKey:YES];
             
         }
-        //NSLog(@"wrapped symetrick key length is %i",[wrapedSymmetricKey length]);
+        //NSLog(@"wrapped symetric key length is %i",[wrapedSymmetricKey length]);
         
-        if (![wrapedSymmetricKey length]) {
+        if (![wrapedSymetricKey length]) {
             
             statusMessage=@"Security key needs to be updated.  Check for an software update.";
         }
@@ -1210,9 +1227,9 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 
 
 }
--(NSDictionary *)encryptStringToEncryptedData:(NSString *)plainTextStr withKeyDate:(NSDate *)keyDateToSet{
+-(NSDictionary *)encryptStringToEncryptedData:(NSString *)plainTextStr withKeyString:(NSString *)keyStringToSet{
 
-    NSMutableDictionary *returnDictionary=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSData data], [NSDate date], nil] forKeys:[NSArray arrayWithObjects:@"encryptedData", @"keyDate", nil]];
+    NSMutableDictionary *returnDictionary=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSData data], [self generateExposedKey], nil] forKeys:[NSArray arrayWithObjects:@"encryptedData", @"keyString", nil]];
     if (!encryption_) {
         self.encryption=[[PTTEncryption alloc]init];
     }
@@ -1221,15 +1238,15 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
     if (plainTextStr.length &&okayToDecryptBool_) {
     
        
-        NSDictionary *symetricDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:keyDateToSet];
+        NSDictionary *symetricDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyString:keyStringToSet];
         NSData *symetricData;
         if ([symetricDictionary.allKeys containsObject:@"symetricData"]) {
             symetricData =[symetricDictionary valueForKey:@"symetricData"];
         }
-        if ([symetricDictionary objectForKey:@"keyDate"]) {
-            NSDate *keyDate=(NSDate *)[symetricDictionary valueForKey:@"keyDate"];
-            if (keyDate && [returnDictionary objectForKey:@"keyDate"]) {
-                [returnDictionary setValue:keyDate forKey:@"keyDate"];
+        if ([symetricDictionary objectForKey:@"keyString"]) {
+            NSString *keyString=(NSString *)[symetricDictionary valueForKey:@"keyString"];
+            if (keyString && [returnDictionary objectForKey:@"keyString"]) {
+                [returnDictionary setValue:keyString forKey:@"keyString"];
             }
         }
     
@@ -1260,25 +1277,25 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 
 }
 
--(NSDictionary *)encryptDataToEncryptedData:(NSData *) unencryptedData withKeyDate:(NSDate *)keyDateToSet{
+-(NSDictionary *)encryptDataToEncryptedData:(NSData *) unencryptedData withKeyString:(NSString *)keyStringToSet{
     
    
     if (!encryption_) {
         self.encryption=[[PTTEncryption alloc]init];
     }
-    NSDictionary *returnDictionary=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSData data],[NSDate date], nil] forKeys:[NSArray arrayWithObjects:@"encryptedData",@"keyDate", nil]];
+    NSDictionary *returnDictionary=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSData data],[self generateExposedKey], nil] forKeys:[NSArray arrayWithObjects:@"encryptedData",@"keyString", nil]];
     NSData *encryptedData;
-    NSDate *keyDate;
+    NSString *keyString;
     if (unencryptedData.length) {
   
-        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:keyDateToSet];
+        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyString:keyStringToSet];
         NSData *symetricData;
         
         if ([symetricDataDictionary.allKeys containsObject:@"symetricData"]) {
             symetricData=[symetricDataDictionary valueForKey:@"symetricData"];
         }
-        if ([symetricDataDictionary.allKeys containsObject:@"keyDate"]) {
-            keyDate=[symetricDataDictionary valueForKey:@"keyDate"];
+        if ([symetricDataDictionary.allKeys containsObject:@"keyString"]) {
+            keyString=[symetricDataDictionary valueForKey:@"keyString"];
         }
 
         if (symetricData.length==32) {
@@ -1293,8 +1310,8 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
         
         [returnDictionary setValue:encryptedData forKey:@"encryptedData"];
         
-        if (keyDate&&[returnDictionaryKeysArray containsObject:@"keyDate"]) {
-            [returnDictionary setValue:keyDate forKey:@"keyDate"];
+        if (keyString&&[returnDictionaryKeysArray containsObject:@"keyString"]) {
+            [returnDictionary setValue:keyString forKey:@"keyString"];
         }
     }
 
@@ -1333,7 +1350,7 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 }
 
 
--(NSData *)decryptDataToPlainDataUsingKeyEntityWithDate:(NSDate *)keyDate encryptedData:(NSData *)encryptedData{
+-(NSData *)decryptDataToPlainDataUsingKeyEntityWithString:(NSString *)keyString encryptedData:(NSData *)encryptedData{
     
     
     if (!encryption_) {
@@ -1344,7 +1361,7 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
     if (encryptedData.length &&okayToDecryptBool_) {
   
      
-        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:keyDate];
+        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyString:keyString];
         NSData *symetricData;
         
         if ([symetricDataDictionary.allKeys containsObject:@"symetricData"]) {
@@ -1365,7 +1382,7 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
 }
 
 
--(NSString *)decyptString:(NSString *) encryptedString usingKeyWithDate:(NSDate *)keyDate{
+-(NSString *)decyptString:(NSString *) encryptedString usingKeyString:(NSString *)keyString{
     
     if (!encryption_) {
         self.encryption=[[PTTEncryption alloc]init];
@@ -1376,7 +1393,7 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
     
       
         
-        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:keyDate];
+        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyString:keyString];
         NSData *symetricData;
         
         if ([symetricDataDictionary.allKeys valueForKey:@"symetricData"]) {
@@ -5681,7 +5698,7 @@ return [self applicationDrugsDirectory].path;
             //4
             if (!fetchedObjects.count) 
             {
-                if (!persistentStoreCoordinator__.persistentStores.count) 
+                if (![self persistentStoreCoordinator ].persistentStores.count) 
                 {
                     
                     
@@ -5707,14 +5724,14 @@ return [self applicationDrugsDirectory].path;
             }
             else {
                 
-                NSLog(@"lock values dictionary lock screen creat date %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_DATE]);
+                NSLog(@"lock values dictionary lock screen creat date %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]);
                 NSLog(@"fetched objects are %@",fetchedObjects);
                 
-                NSPredicate *keyDatePredicate=[NSPredicate predicateWithFormat:@"dateCreated == %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_DATE]];
-                //NSLog(@"lock screen date is %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_DATE]);
+                NSPredicate *keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString == %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]];
+                //NSLog(@"lock screen date is %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]);
                 NSFetchRequest *newFetchRequest=[[NSFetchRequest alloc]init];
                 
-                [newFetchRequest setPredicate:keyDatePredicate];
+                [newFetchRequest setPredicate:keyStringPredicate];
                 
                 
                 fetchedObjects=[managedObjectContext__ executeFetchRequest:fetchRequest error:&error];

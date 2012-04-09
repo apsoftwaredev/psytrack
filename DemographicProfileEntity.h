@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSString * sex;
 @property (nonatomic, retain) NSString * sexualOrientation;
 @property (nonatomic, retain) NSString * profileNotes;
-@property (nonatomic, retain) NSDate * keyDate;
+@property (nonatomic, retain) NSString * keyString;
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSManagedObject *militaryService;
 @property (nonatomic, retain) NSManagedObject *educationLevel;

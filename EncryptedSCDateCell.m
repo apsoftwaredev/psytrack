@@ -39,11 +39,11 @@
     
     
 //    NSData *encryptedData=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"1"]]; 
-//    NSDate *keyDate=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"32"]];
+//    NSDate *keyString=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"32"]];
 //    
 //
-//    ////NSLog(@"key date is %@",keyDate);
-//    NSData *decryptedData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:keyDate encryptedData:encryptedData];
+//    ////NSLog(@"key date is %@",keyString);
+//    NSData *decryptedData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:keyString encryptedData:encryptedData];
 //    
 //    if (decryptedData.length) {
         NSDate * restoredDate = [self.boundObject valueForKey:[self.objectBindings valueForKey:@"34"]];

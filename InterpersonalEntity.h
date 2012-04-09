@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSNumber * contactFrequencyUnitLength;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSDate * duration;
-@property (nonatomic, retain) NSDate * keyDate;
+@property (nonatomic, retain) NSString * keyString;
 @property (nonatomic, retain) NSString * contactFrequencyUnit;
 @property (nonatomic, retain) NSNumber * contactFrequencyNumber;
 @property (nonatomic, retain) DemographicProfileEntity *demographicProfile;

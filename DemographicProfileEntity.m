@@ -17,7 +17,7 @@
 @dynamic sex;
 @dynamic sexualOrientation;
 @dynamic profileNotes;
-@dynamic keyDate;
+@dynamic keyString;
 @dynamic order;
 @dynamic militaryService;
 @dynamic educationLevel;
@@ -66,20 +66,19 @@
         
         
         
-        
-        
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyDate:self.keyDate];
+       
+        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
         //NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
         NSData *encryptedData;
-        NSDate *encryptedKeyDate;
+        NSString *encryptedKeyString;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
             encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
             
             
-            if ([encryptedDataDictionary.allKeys containsObject:@"keyDate"]) {
+            if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
                 //NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
                 
-                encryptedKeyDate=[encryptedDataDictionary valueForKey:@"keyDate"];
+                encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
                 //NSLog(@"key date is client entity %@",encryptedKeyDate);
             }
         }
@@ -93,10 +92,10 @@
         
         
         
-        if (![encryptedKeyDate isEqualToDate:self.keyDate]) {
-            [self willChangeValueForKey:@"keyDate"];
-            [self setPrimitiveValue:encryptedKeyDate forKey:@"keyDate"];
-            [self didChangeValueForKey:@"keyDate"];
+        if (![encryptedKeyString isEqualToString:(NSString *)self.keyString]) {
+            [self willChangeValueForKey:@"keyString"];
+            [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
+            [self didChangeValueForKey:@"keyString"];
             
         }
         
@@ -127,11 +126,11 @@
         
         [self didAccessValueForKey:@"profileNotes"];
         
-        [self willAccessValueForKey:@"keyDate"];
-        NSDate *tmpKeyDate=self.keyDate;
-        [self didAccessValueForKey:@"keyDate"];
+        [self willAccessValueForKey:@"keyString"];
+        NSString *tmpKeyString=self.keyString;
+        [self didAccessValueForKey:@"keyString"];
         
-        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:tmpKeyDate encryptedData:primitiveData];
+        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
         
         tempStr=[appDelegate convertDataToString:strData];
         
@@ -176,11 +175,11 @@
         
         [self didAccessValueForKey:@"sex"];
         
-        [self willAccessValueForKey:@"keyDate"];
-        NSDate *tmpKeyDate=self.keyDate;
-        [self didAccessValueForKey:@"keyDate"];
+        [self willAccessValueForKey:@"keyString"];
+        NSString *tmpKeyString=self.keyString;
+        [self didAccessValueForKey:@"keyString"];
         
-        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:tmpKeyDate encryptedData:primitiveData];
+        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
         
         tempStr=[appDelegate convertDataToString:strData];
         
