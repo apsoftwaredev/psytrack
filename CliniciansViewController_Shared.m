@@ -121,35 +121,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-   
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(reloadTableModel:)
-     name:@"ReloadTableModel"
-     object:nil];
-    if ([appDelegate persistentStoreCoordinator].persistentStores.count) {
-        [self performSelector:@selector(reloadTableModel:)];
-    }
-
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad &&self.tableView) {
-        
-        [self.tableView setBackgroundView:nil];
-        [self.tableView setBackgroundView:[[UIView alloc] init]];
-        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
-        
-        
-    }
-    
-    //    [self.tableView reloadData];
-    //    [self.tableView reloadData];
-    
-}
-
-- (IBAction)reloadTableModel: (id)sender{
-   
     // Gracefully handle reloading the view controller after a memory warning
     self.tableModel = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
     if(tableModel_)
@@ -158,6 +130,35 @@
         return;
     }
     
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    if ([appDelegate persistentStoreCoordinator].persistentStores.count) {
+        [self reloadTableModel:nil];
+    }
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(reloadTableModel:)
+     name:@"ReloadTableModel"
+     object:nil];
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        
+        [self.tableView setBackgroundView:nil];
+        [self.tableView setBackgroundView:[[UIView alloc] init]];
+        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+        
+        
+    }
+    
+    
+//    [self.tableView reloadData];
+    //    [self.tableView reloadData];
+    
+}
+
+- (IBAction)reloadTableModel: (id)sender{
+   
+  
     
     managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];   
     //set different custom cells nib names for iPhone and iPad
@@ -569,7 +570,7 @@
     //Create a class definition for Degree entity
 	SCClassDefinition *licenseNumberDef = [SCClassDefinition definitionWithEntityName:@"LicenseNumberEntity" 
                                                              withManagedObjectContext:managedObjectContext
-                                                                    withPropertyNames:[NSArray arrayWithObjects:@"licenseName",@"licenseNumber",@"status",
+                                                                    withPropertyNames:[NSArray arrayWithObjects:@"licenseName",@"governingBody",@"licenseNumber",@"status",
                                                                                        @"renewDate",@"notes", nil]];
     
     
@@ -585,10 +586,22 @@
     //Create a class definition for License entity
 	SCClassDefinition *licenseDef = [SCClassDefinition definitionWithEntityName:@"LicenseEntity" 
 													   withManagedObjectContext:managedObjectContext
-															  withPropertyNames:[NSArray arrayWithObjects:@"title",@"governingBody",
-																				 @"country",@"notes",nil]];
+															  withPropertyNames:[NSArray arrayWithObjects:@"title",@"notes",nil]];
 	
 	
+    
+    //Create a class definition for the governingBody Entity
+    SCClassDefinition *governingBodyDef = [SCClassDefinition definitionWithEntityName:@"GoverningBodyEntity" 
+                                                        withManagedObjectContext:managedObjectContext
+                                                               withPropertyNames:[NSArray arrayWithObjects:@"body",@"country", nil]];
+    
+    //Create a class definition for the country Entity
+    SCClassDefinition *countryDef = [SCClassDefinition definitionWithEntityName:@"CountryEntity" 
+                                                        withManagedObjectContext:managedObjectContext
+                                                               withPropertyNames:[NSArray arrayWithObjects:@"country",@"code", nil]];
+    
+
+    
         //set the order attributes name defined in the License Entity
     licenseDef.orderAttributeName=@"order";
     SCPropertyDefinition *licenseNamePropertyDef = [licenseNumberDef propertyDefinitionWithName:@"licenseName"];
@@ -606,7 +619,7 @@
     licenseSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new License"];
     licenseNamePropertyDef.attributes = licenseSelectionAttribs;
 	
-    licenseNumberDef.titlePropertyName=@"licenseName.title";
+    licenseNumberDef.titlePropertyName=@"licenseName.title;governingBody.body";
     
     SCPropertyDefinition *licenseNumberNotesPropertyDef = [licenseNumberDef propertyDefinitionWithName:@"notes"];
 	licenseNumberNotesPropertyDef.type = SCPropertyTypeTextView;
@@ -617,7 +630,67 @@
     SCPropertyDefinition *licenseTitlePropertyDef = [licenseDef propertyDefinitionWithName:@"title"];
 	licenseTitlePropertyDef.type = SCPropertyTypeTextView;
     
+    //create an object selection for the governingBody relationship in the LicenseNuber Entity 
     
+    //create a property definition
+    SCPropertyDefinition *governingBodyPropertyDef = [licenseNumberDef propertyDefinitionWithName:@"governingBody"];
+ 
+    //set the title property name
+    governingBodyDef.titlePropertyName=@"body";
+    
+    
+    //set the property definition type to objects selection
+	
+    governingBodyPropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *governingBodySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:governingBodyDef allowMultipleSelection:NO allowNoSelection:YES];
+    
+    //set some addtional attributes
+    governingBodySelectionAttribs.allowAddingItems = YES;
+    governingBodySelectionAttribs.allowDeletingItems = YES;
+    governingBodySelectionAttribs.allowMovingItems = NO;
+    governingBodySelectionAttribs.allowEditingItems = YES;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    governingBodySelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(tap edit to add govering Bodies)"];
+    
+    
+    //add an "Add New" element to appear when user clicks edit
+    governingBodySelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New governing body"];
+    
+    //add the selection attributes to the property definition
+    governingBodyPropertyDef.attributes = governingBodySelectionAttribs;
+    
+    
+    //create an object selection for the country relationship in the governing Body Entity 
+    
+    //create a property definition
+    SCPropertyDefinition *countryPropertyDef = [governingBodyDef propertyDefinitionWithName:@"country"];
+    
+   
+    
+    //set the title property name
+    countryDef.titlePropertyName=@"country";
+    
+    //set the property definition type to objects selection
+	countryDef.keyPropertyName=@"country";
+    countryPropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *countrySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:countryDef allowMultipleSelection:NO allowNoSelection:YES];
+    
+    //set some addtional attributes
+    countrySelectionAttribs.allowAddingItems = YES;
+    countrySelectionAttribs.allowDeletingItems = YES;
+    countrySelectionAttribs.allowMovingItems = NO;
+    countrySelectionAttribs.allowEditingItems = YES;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    countrySelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(tap edit to add countries)"];
+    
+    
+    //add an "Add New" element to appear when user clicks edit
+    countrySelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Country"];
+    
+    //add the selection attributes to the property definition
+    countryPropertyDef.attributes = countrySelectionAttribs;
     
     //Create a class definition for Certification entity
 	SCClassDefinition *certificationDef = [SCClassDefinition definitionWithEntityName:@"CertificationEntity" 
@@ -1590,7 +1663,7 @@
 //    objectsSection.itemsAccessoryType = UITableViewCellAccessoryNone;
     
     existingPersonRecordID=-1;
-    
+   
      [[NSNotificationCenter defaultCenter] postNotificationName:@"DoneLoadingCliniciansShared" object:self userInfo:nil];
 }
 
@@ -2037,7 +2110,7 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
     //NSLog(@"table bies slkjd %i", tableViewModel.tag);
-    SCTableViewCell *cell =tableViewModel.activeCell;
+    SCTableViewCell *cell =[tableViewModel cellAtIndexPath:indexPath];
     deletePressedOnce=NO;
     switch (tableViewModel.tag) {
         case 1:
@@ -2045,15 +2118,16 @@
             
             if (cell.tag==7 &&[cell isKindOfClass:[ButtonCell class]]&&![tableViewModel valuesAreValid]) {
                 PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-                [appDelegate displayNotification:@"Add First and Last Name before Adding to Address Book or use the look up button to select the name." forDuration:3.0 location:kPTTScreenLocationTop inView:tableViewModel.modeledTableView.superview];
+                [appDelegate displayNotification:@"Add First and Last Name before Adding to Address Book or use the look up button to select the name." forDuration:8.0 location:kPTTScreenLocationTop inView:tableViewModel.viewController.view.superview];
                 
             }
+            if (cell.tag<7) {
             UITextField *view =(UITextField *)[cell viewWithTag:50];
             
             [view becomeFirstResponder];
             [view resignFirstResponder]; 
             
-            
+            }
             
             
             
@@ -2231,7 +2305,6 @@
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel 
        willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SCTableViewSection *section =[tableViewModel sectionAtIndex:0];
     
     //NSLog(@"section header title %@", section.headerTitle);
     //NSLog(@"table model tag is %i", tableViewModel.tag);
@@ -2269,7 +2342,10 @@
             NSManagedObject *managedObject = (NSManagedObject *)cell.boundObject;
             //identify the if the cell has a managedObject
             if (managedObject) {
-                
+                if (tableViewModel.sectionCount) {
+                    
+                    SCTableViewSection *section =[tableViewModel sectionAtIndex:0];
+                    
                 
                 //NSLog(@"cell managed object is %@",[managedObject class]);
                 //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
@@ -2328,7 +2404,7 @@
                     }
 
                     
-                    
+                }  
                     
                 }
             }
@@ -2339,6 +2415,10 @@
         {
             NSManagedObject *managedObject = (NSManagedObject *)cell.boundObject;
             
+            if (tableViewModel.sectionCount) {
+                
+                SCTableViewSection *section =[tableViewModel sectionAtIndex:0];
+                
             //identify the if the cell has a managedObject
             if (managedObject) {
                 
@@ -2398,7 +2478,7 @@
                         }
 
                     }
-                
+            }
             }
         }
             

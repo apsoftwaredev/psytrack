@@ -400,8 +400,8 @@ NSMutableArray *viewArray = [NSMutableArray array];
 
     if ([propertyNameValue isEqualToString:@"sleepQuality"]) {
         [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
-                                        @"good/normal", 
-                                        @"difficulty falling asleep",@"Difficulty Staying Asleep", @"Early Morning Awakening", @"Frequent Napping",@"Undesired Schedule", @"Sleeps Too Much", @"Sleepy While Awake", @"Difficulty Waking Up", @"\"Sleeop Attacks\"",    
+                                        @"Good/normal", 
+                                        @"Difficulty Falling Asleep",@"Difficulty Staying Asleep", @"Early Morning Awakening", @"Frequent Napping",@"Undesired Schedule", @"Sleeps Too Much", @"Sleepy While Awake", @"Difficulty Waking Up", @"\"Sleep Attacks\"",    
                                         nil]];
         
         return [viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];

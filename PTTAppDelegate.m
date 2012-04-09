@@ -163,7 +163,11 @@
      object:nil];
    
    
-    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(resaveLockDictionarySettings:)
+     name:@"ReloadTableModel"
+     object:nil];
    
     //NSLog(@"lcock dictionary is %@",[lockValuesDictionary_ allKeys]);
     
@@ -229,12 +233,12 @@
 //               
 //           }
 //       });
-   
+    tabBarController.tabBar.userInteractionEnabled=NO;
     [self.window addSubview:self.tabBarController.view];
     [self.window makeKeyAndVisible];
-    
+    [self displayNotification:@"Establishing connection for database. One moment please..." forDuration:0.0 location:kPTTScreenLocationTop inView:nil];
     persistentStoreCoordinator__=[self persistentStoreCoordinator];
-        
+     
    
 #if !TARGET_IPHONE_SIMULATOR
     // Add registration for remote notifications
@@ -254,6 +258,8 @@
 
 -(void)loadDatabaseData:(id)sender
 {
+    
+
     self.encryption=[[PTTEncryption alloc]init];
     NSString *statusMessage;
     retrievedEncryptedDataFile=NO;
@@ -300,16 +306,26 @@
         UIView *containerView=nil;
         if (okayToDecryptBool_==NO) {
             containerView=self.window;
+            
+        }else 
+        {
+             tabBarController.tabBar.userInteractionEnabled=YES;
         }
         [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:containerView];
         
+    }else if (![self isAppLocked]) {
+        
+        statusMessage=@"Welcome. Ready to use now.";
+        [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:nil];
+        tabBarController.tabBar.userInteractionEnabled=YES; 
     }
     
     if (trustResultFailureString.length) {
         [self displayNotification:trustResultFailureString forDuration:8.0 location:kPTTScreenLocationMiddle inView:self.window];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableModel" object:self userInfo:nil];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableModel" object:self userInfo:nil];
+      
 }
 - (void) updateInterfaceWithReachability: (Reachability*) curReach
 {
@@ -5647,7 +5663,7 @@ return [self applicationDrugsDirectory].path;
         //3
         if (managedObjectContext__) 
         {
-            
+            [self saveContext];
             NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
             NSEntityDescription *keyEntity = [NSEntityDescription entityForName:@"KeyEntity" inManagedObjectContext:managedObjectContext__];
             [fetchRequest setEntity:keyEntity];
@@ -5657,22 +5673,22 @@ return [self applicationDrugsDirectory].path;
             //4
             
             KeyEntity *keyObject;
-            if (fetchedObjects == nil) 
-            {
-                                
-            }
-            //4
+//            if (fetchedObjects == nil) 
+//            {
+//                                
+//            }
+//            //4
             //4
             if (!fetchedObjects.count) 
             {
-                if (!addedPersistentStoreSuccess) 
+                if (!persistentStoreCoordinator__.persistentStores.count) 
                 {
                     
                     
                     [[NSNotificationCenter defaultCenter]
                      addObserver:self
                      selector:@selector(resaveLockDictionarySettings:)
-                     name:@"RefetchAllDatabaseData"
+                     name:@"ReloadTableModel"
                      object:nil];
                 }
                 else {
@@ -5690,10 +5706,19 @@ return [self applicationDrugsDirectory].path;
                 
             }
             else {
-                NSPredicate *keyDatePredicate=[NSPredicate predicateWithFormat:@"dateCreated= %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_DATE]];
-                //NSLog(@"lock screen date is %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_DATE]);
-                fetchedObjects=[fetchedObjects filteredArrayUsingPredicate:keyDatePredicate];
                 
+                NSLog(@"lock values dictionary lock screen creat date %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_DATE]);
+                NSLog(@"fetched objects are %@",fetchedObjects);
+                
+                NSPredicate *keyDatePredicate=[NSPredicate predicateWithFormat:@"dateCreated == %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_DATE]];
+                //NSLog(@"lock screen date is %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_DATE]);
+                NSFetchRequest *newFetchRequest=[[NSFetchRequest alloc]init];
+                
+                [newFetchRequest setPredicate:keyDatePredicate];
+                
+                
+                fetchedObjects=[managedObjectContext__ executeFetchRequest:fetchRequest error:&error];
+                NSLog(@"fetched objects are %@",fetchedObjects);
                 if(fetchedObjects.count){
                     keyObject=[fetchedObjects objectAtIndex:0];
                     keyObject.dataF=encryptedArchivedLockData;
@@ -5702,14 +5727,14 @@ return [self applicationDrugsDirectory].path;
                 else 
                 {
                     
-                    [self displayNotification:@"Error: Unable to save settings." forDuration:3.0 location:kPTTScreenLocationTop inView:nil];                  
+                    [self displayNotification:@"Error 789: Unable to save settings." forDuration:3.0 location:kPTTScreenLocationTop inView:nil];                  
                         
                 }
             }
     
             //4
             
-            [self saveContext];
+            
             
         }
         //3
@@ -5723,7 +5748,7 @@ return [self applicationDrugsDirectory].path;
     else 
     {
         success=NO;
-        NSString *alertText=[NSString stringWithString:@"Unable to Save Lock Settings" ];
+        NSString *alertText=[NSString stringWithString:@"Error 790: Unable to Save Lock Settings" ];
         
         [self displayNotification:alertText forDuration:3.0 location:kPTTScreenLocationTop  inView:nil];
        

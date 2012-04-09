@@ -57,7 +57,7 @@
     
 -(void)setSelectedClinicians;
 -(void)createSelectedCliniciansArray;
-- (void)reloadClinicianTableModel;
+
 #define degreesToRadian(x) (M_PI * (x) / 180.0)
 
 @end
