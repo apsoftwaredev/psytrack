@@ -481,7 +481,16 @@
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"KeyEntity" inManagedObjectContext:[self managedObjectContext]];
     [fetchRequest setEntity:entity];
-    
+    NSPredicate *keyStringPredicate;
+    if (keyString.length) {
+        //NSLog(@"key date is %@",keyString);
+        keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",keyString];
+        //        if (fetchedObjects.count) {
+        //            fetchedObjects=[fetchedObjects filteredArrayUsingPredicate:keyStringPredicate];
+        //        }
+         [fetchRequest setPredicate:keyStringPredicate];
+    }
+   
     NSError *error = nil;
     NSArray *fetchedObjects = [managedObjectContext__ executeFetchRequest:fetchRequest error:&error];
     if (fetchedObjects == nil) 
@@ -489,14 +498,7 @@
         [self displayNotification:@"Error Accessing the database occured" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
     }
     KeyEntity *keyObject;
-    NSPredicate *keyStringPredicate;
-    if (keyString) {
-        //NSLog(@"key date is %@",keyString);
-       keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString == %@",keyString];
-//        if (fetchedObjects.count) {
-//            fetchedObjects=[fetchedObjects filteredArrayUsingPredicate:keyStringPredicate];
-//        }
-    }
+    
     if (fetchedObjects.count) 
     {
         keyObject=[fetchedObjects objectAtIndex:0];
@@ -1310,7 +1312,7 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
         
         [returnDictionary setValue:encryptedData forKey:@"encryptedData"];
         
-        if (keyString&&[returnDictionaryKeysArray containsObject:@"keyString"]) {
+        if (keyString.length &&[returnDictionaryKeysArray containsObject:@"keyString"]) {
             [returnDictionary setValue:keyString forKey:@"keyString"];
         }
     }
@@ -5727,7 +5729,7 @@ return [self applicationDrugsDirectory].path;
                 NSLog(@"lock values dictionary lock screen creat date %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]);
                 NSLog(@"fetched objects are %@",fetchedObjects);
                 
-                NSPredicate *keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString == %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]];
+                NSPredicate *keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]];
                 //NSLog(@"lock screen date is %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]);
                 NSFetchRequest *newFetchRequest=[[NSFetchRequest alloc]init];
                 
