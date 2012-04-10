@@ -486,5 +486,59 @@
 
 
 }
+- (void)setDateToPrimitiveData:(NSDate *)dateToConvert forKey:(NSString *)key 
+{
+
+PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+
+if (appDelegate.okayToDecryptBool) {
+    
+    
+    
+         
+          
+        NSData * dateData = [NSKeyedArchiver archivedDataWithRootObject:dateToConvert];
+    
+   
+           NSDictionary *encryptedDataDictionary=[appDelegate encryptDataToEncryptedData:dateData withKeyString:self.keyString];
+    NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+    NSData *encryptedData;
+    NSString *encryptedKeyString;
+    if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
+        encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
+        
+        
+        if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
+            NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+            
+            encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
+            NSLog(@"key date is client entity %@",encryptedKeyString);
+        }
+    }
+    
+    
+            if (encryptedData.length) {
+                     [self willChangeValueForKey:key];
+                     [self setPrimitiveValue:encryptedData forKey:key];
+                     [self didChangeValueForKey:key];
+                }
+             
+           
+    [self willAccessValueForKey:self.keyString];
+        if (![encryptedKeyString isEqualToString:self.keyString]) {
+            [self didAccessValueForKey:@"keyString"];
+                    [self willChangeValueForKey:@"keyString"];
+                    [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
+                    [self didChangeValueForKey:@"keyString"];
+                    
+                }
+          
+            
+            
+        
+    
+    
+       }
+}
 
 @end

@@ -473,7 +473,7 @@ NSLog(@"keystring is %@",keyString);
     rangeThree.location=0;
     NSString* symetricStringOne= [NSString stringWithFormat:@"qu1shZEM196kibsiBh7h%@hsiwoai4js",[self combSmString]];
     
-    //NSLog(@" combinesmetric string is %@",[self combSmString]);
+    NSLog(@" combinesmetric string is %@",[self combSmString]);
     rangeOne.location=symetricStringOne.length-15;
     
     symetricStringOne=[symetricStringOne substringWithRange:rangeOne];
@@ -482,7 +482,7 @@ NSLog(@"keystring is %@",keyString);
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"KeyEntity" inManagedObjectContext:[self managedObjectContext]];
     [fetchRequest setEntity:entity];
     NSPredicate *keyStringPredicate;
-    if (keyString.length) {
+    if (keyString&&keyString.length) {
         //NSLog(@"key date is %@",keyString);
         keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",keyString];
         //        if (fetchedObjects.count) {
@@ -526,6 +526,7 @@ NSLog(@"keystring is %@",keyString);
         
         if (keyObject.keyString) {
             if ([returnDictionary.allKeys containsObject:@"keyString"]) {
+                
                 [returnDictionary setValue:keyObject.keyString forKey:@"keyString"];
             }
         }
@@ -860,7 +861,7 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
     {
         setupDatabase=(BOOL)[encryptedArchivedLockData writeToFile:encryptedDataPath atomically:YES];
         
-        //NSLog(@"setup database is %i",setupDatabase);
+        NSLog(@"setup database is %i",setupDatabase);
     }
             
     
