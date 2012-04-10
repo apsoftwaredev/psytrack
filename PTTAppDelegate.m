@@ -456,8 +456,8 @@
 }
 
 -(NSMutableDictionary*)unwrapAndCreateKeyDataFromKeyEntitywithKeyString:(NSString *)keyString{
-
-    NSMutableDictionary *returnDictionary=[[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:[NSData data],[self generateExposedKey], nil] forKeys:[NSArray arrayWithObjects:@"symetricData",@"keyString", nil]];
+NSLog(@"keystring is %@",keyString);
+    NSMutableDictionary *returnDictionary=[[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:[NSData data],[NSString string], nil] forKeys:[NSArray arrayWithObjects:@"symetricData",@"keyString", nil]];
     
     NSString *symetricStr;
     
@@ -538,7 +538,8 @@
     NSString *symetricStringTwo;
     if (keyObject.dataF && ![keyObject.keyString isEqualToString:keyString]) {
         
-              
+              NSLog(@"key object keystring is %@",keyObject.keyString);
+        NSLog(@"keystring object is %@",keyString);
         NSData *symetricData=[self getSymetricData];
         NSData *hash; 
         //NSLog(@"symetric data lenthg %i",symetricData.length);
@@ -666,7 +667,7 @@
         [returnDictionary setValue:symetricData forKey:@"symetricData"];
        
     } 
-//NSLog(@"return dictionary right before return %@",returnDictionary);
+//NSLog(@"return dictionary right   before return %@",returnDictionary);
 
     return ( NSMutableDictionary*) returnDictionary;
 }
@@ -815,7 +816,7 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
     
     self.lockValuesDictionary=[NSMutableDictionary dictionaryWithObjects:lockValues forKeys:lockKeys];
         }
-    //NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
+NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
     //        [lockValuesDictionary_ setValue:[NSString stringWithUTF8String:[hash bytes]]
     // forKey:@"pw_hash"];
     
@@ -922,8 +923,8 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
                     newKeyObject.keyF=wrappedNewKeyData;
                     newKeyObject.dataF=encryptedArchivedLockData;
                     newKeyObject.keyString=[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY];
-                  
-                                //NSLog(@"newkey object is %@",newKeyObject.dateCreated);       
+                
+                                NSLog(@"newkey object is %@",newKeyObject.keyString);       
                     
                 }
                //4
@@ -948,7 +949,7 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
                 }
                 
                 
-       
+                [self saveContext];
 
 
             }
@@ -1062,7 +1063,7 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
             wrapedSymetricKey =[encryption_ encryptData:symetricData keyRef:nil useDefaultPublicKey:YES];
             
         }
-        //NSLog(@"wrapped symetric key length is %i",[wrapedSymmetricKey length]);
+        NSLog(@"wrapped symetric key length is %i",[wrapedSymetricKey length]);
         
         if (![wrapedSymetricKey length]) {
             
@@ -5672,6 +5673,7 @@ return [self applicationDrugsDirectory].path;
     
     if ([encryptedArchivedLockData length]) {
         success= (BOOL)[encryptedArchivedLockData writeToFile:[self lockSettingsFilePath] atomically:YES];
+        NSLog(@"success is %i",success);
         [self setLCYLockPlist];
         
         if (!managedObjectContext__) 
@@ -5741,7 +5743,8 @@ return [self applicationDrugsDirectory].path;
                 if(fetchedObjects.count){
                     keyObject=[fetchedObjects objectAtIndex:0];
                     keyObject.dataF=encryptedArchivedLockData;
-                    
+                   NSLog(@"key entity is %@",keyObject);
+                    [self saveContext];
                 }
                 else 
                 {
@@ -5782,7 +5785,7 @@ return [self applicationDrugsDirectory].path;
     NSString *encryptedFileName=@"ptdata.001";
     
     
-    return [[self applicationSupportPath] stringByAppendingPathComponent:encryptedFileName];
+    return [[self applicationPTTDirectory].path stringByAppendingPathComponent:encryptedFileName];
 
 }
 

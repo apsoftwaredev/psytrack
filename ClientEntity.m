@@ -405,7 +405,7 @@
         [self willAccessValueForKey:@"keyString"];
         NSString *tmpKeyString=self.keyString;
         [self didAccessValueForKey:@"keyString"];
-        
+        if(tmpKeyString && tmpKeyString.length){
         NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
         
         tempStr=[appDelegate convertDataToString:strData];
@@ -414,7 +414,7 @@
         
         self.tempClientIDCode=tempStr;
         [self didChangeValueForKey:@"tempClientIDCode"];
-        
+        }
         
     }
     else 
