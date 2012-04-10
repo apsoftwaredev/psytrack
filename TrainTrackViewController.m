@@ -71,30 +71,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(loadTableModel:)
-     name:@"DoneLoadingCliniciansShared"
-     object:nil];
+    // Gracefully handle reloading the view controller after a memory warning
 
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        
-        [self.tableView setBackgroundView:nil];
-        [self.tableView setBackgroundView:[[UIView alloc] init]];
-        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
-        
-        
-    }
+   
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+//        
+//        [self.tableView setBackgroundView:nil];
+//        [self.tableView setBackgroundView:[[UIView alloc] init]];
+//        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+//        
+//        
+//    }
 
-    
-//    [self.tableView reloadData];
-//    [self.tableView reloadData];
-    
-}
-#pragma mark Notifications
-- (void)loadTableModel:(id)sender;
-{    UIImage *lockImage=[UIImage imageNamed:@"lock.png"];
+
+    UIImage *lockImage=[UIImage imageNamed:@"lock.png"];
 	UIBarButtonItem *stopButton = [[UIBarButtonItem alloc] initWithImage:lockImage style:UIBarButtonItemStyleDone target:self action:@selector(lockScreen:)];
     self.navigationItem.rightBarButtonItem = stopButton;
     
@@ -107,84 +97,82 @@
     
     self.clinicianDef.titlePropertyName=@"firstName;lastName";
     
-    //    SCSelectionCell *myInfoCell=[SCSelectionCell cellWithText:@"My Background Information" withBoundKey:@"myClinicianData" withValue:nil];
-    //    myInfoCell.delegate=self;
-    //    myInfoCell.tag=1;
+//    SCSelectionCell *myInfoCell=[SCSelectionCell cellWithText:@"My Background Information" withBoundKey:@"myClinicianData" withValue:nil];
+//    myInfoCell.delegate=self;
+//    myInfoCell.tag=1;
     
     //Do some property definition customization for the Supervisor Class
-    SCSelectionCell *testAdministrationCell=[SCSelectionCell cellWithText:@"Assessment" withBoundKey:@"testAdminstration" withValue:nil];
-    testAdministrationCell.delegate=self;
+    SCTableViewCell *testAdministrationCell=[SCTableViewCell cellWithText:@"Assessment" withBoundKey:@"testAdminstrationCell" withValue:nil];
+   
     testAdministrationCell.tag=2;
-    SCSelectionCell *interventionCell=[SCSelectionCell cellWithText:@"Psychotherapy" withBoundKey:@"psychotherapyCell" withValue:nil];
-    interventionCell.delegate=self;
+    SCTableViewCell *interventionCell=[SCTableViewCell cellWithText:@"Psychotherapy" withBoundKey:@"psychotherapyCell" withValue:nil];
+  
     interventionCell.tag=3;
     
-    SCSelectionCell *indirectSupportCell=[SCSelectionCell cellWithText:@"Indirect Support" withBoundKey:@"indirects" withValue:nil];
-    indirectSupportCell.delegate=self;
+    SCTableViewCell *indirectSupportCell=[SCTableViewCell cellWithText:@"Indirect Support" withBoundKey:@"indirectSupportCell" withValue:nil];
+
     indirectSupportCell.tag=4;
     
     
     
-    SCSelectionCell *supervisionReceivedCell=[SCSelectionCell cellWithText:@"Supervision Received" withBoundKey:@"supervisionReceived" withValue:nil];
-    supervisionReceivedCell.delegate=self;
+    SCTableViewCell *supervisionReceivedCell=[SCTableViewCell cellWithText:@"Supervision Received" withBoundKey:@"supervisionReceivedCell" withValue:nil];
+ 
     supervisionReceivedCell.tag=5;
-    SCSelectionCell *supervisionGivenCell=[SCSelectionCell cellWithText:@"Supervision Given" withBoundKey:@"supervisionGiven" withValue:nil];
-    supervisionGivenCell.delegate=self;
+    SCTableViewCell *supervisionGivenCell=[SCTableViewCell cellWithText:@"Supervision Given" withBoundKey:@"supervisionGivenCell" withValue:nil];
+
     supervisionGivenCell.tag=6;
     
-    SCSelectionCell *existingHoursCell=[SCSelectionCell cellWithText:@"Existing Hours" withBoundKey:@"existing" withValue:nil];
-    existingHoursCell.delegate=self;
+    SCTableViewCell *existingHoursCell=[SCTableViewCell cellWithText:@"Existing Hours" withBoundKey:@"existingHoursCell" withValue:nil];
+
     existingHoursCell.tag=7;
     
-    SCSelectionCell *consultationsCell=[SCSelectionCell cellWithText:@"Consultations" withBoundKey:@"consultation" withValue:nil];
-    consultationsCell.delegate=self;
+    SCTableViewCell *consultationsCell=[SCTableViewCell cellWithText:@"Consultations" withBoundKey:@"consultationCell" withValue:nil];
+ 
     consultationsCell.tag=8;
     
-    SCSelectionCell *continuingEducationCell=[SCSelectionCell cellWithText:@"Continuing Education Credits" withBoundKey:@"continuingEducation" withValue:nil];
-    continuingEducationCell.delegate=self;
+    SCTableViewCell *continuingEducationCell=[SCTableViewCell cellWithText:@"Continuing Education Credits" withBoundKey:@"continuingEducationCell" withValue:nil];
+
     continuingEducationCell.tag=9;
     
-    SCSelectionCell *certificationsCell=[SCSelectionCell cellWithText:@"Certifications" withBoundKey:@"certifications" withValue:nil];
-    certificationsCell.delegate=self;
+    SCTableViewCell *certificationsCell=[SCTableViewCell cellWithText:@"Certifications" withBoundKey:@"certificationsCell" withValue:nil];
+
     certificationsCell.tag=10;
     
-    SCSelectionCell *collegeCoursesCell=[SCSelectionCell cellWithText:@"College Courses" withBoundKey:@"collegeCourses" withValue:nil];
-    collegeCoursesCell.delegate=self;
+    SCTableViewCell *collegeCoursesCell=[SCTableViewCell cellWithText:@"College Courses" withBoundKey:@"collegeCoursesCell" withValue:nil];
+   
     collegeCoursesCell.tag=11;
     
-    SCSelectionCell *presentationsCell=[SCSelectionCell cellWithText:@"Presentations" withBoundKey:@"presentations" withValue:nil];
-    presentationsCell.delegate=self;
+    SCTableViewCell *presentationsCell=[SCTableViewCell cellWithText:@"Presentations" withBoundKey:@"presentationsCell" withValue:nil];
+
     presentationsCell.tag=12;
     
-    SCSelectionCell *teachingExperienceCell=[SCSelectionCell cellWithText:@"Teaching Experience" withBoundKey:@"teachingExperiences" withValue:nil];
-    teachingExperienceCell.delegate=self;
+    SCTableViewCell *teachingExperienceCell=[SCTableViewCell cellWithText:@"Teaching Experience" withBoundKey:@"teachingExperiencesCell" withValue:nil];
+ 
     teachingExperienceCell.tag=13;
     
-    SCSelectionCell *advisingExperienceCell=[SCSelectionCell cellWithText:@"Advisors & Advisees" withBoundKey:@"advisingExperience" withValue:nil];
-    advisingExperienceCell.delegate=self;
+    SCTableViewCell *advisingExperienceCell=[SCTableViewCell cellWithText:@"Advisors & Advisees" withBoundKey:@"advisingExperienceCell" withValue:nil];
+   
     advisingExperienceCell.tag=14;
     
-    CustomSCSelectonCellWithLoading *drugDatabaseCell=[CustomSCSelectonCellWithLoading cellWithText:@"Drug Database" withBoundKey:@"drugDatabase" withValue:nil];
-    drugDatabaseCell.delegate=self;
+    CustomSCSelectonCellWithLoading *drugDatabaseCell=[CustomSCSelectonCellWithLoading cellWithText:@"Drug Database" withBoundKey:@"drugDatabaseCell" withValue:nil];
+  
     drugDatabaseCell.tag=15;
     
-    SCSelectionCell *lockPasscodeCell=[SCSelectionCell cellWithText:@"Lock Screen Settings" withBoundKey:@"lockSettings" withValue:nil];
-    lockPasscodeCell.delegate=self;
+    SCTableViewCell *lockPasscodeCell=[SCTableViewCell cellWithText:@"Lock Screen Settings" withBoundKey:@"lockSettingsCell" withValue:nil];
+  
     lockPasscodeCell.tag=16;
     
-    SCSelectionCell *otherAppSettingsCell=[SCSelectionCell cellWithText:@"Calander & Contacts" withBoundKey:@"otherSettings" withValue:nil];
-    otherAppSettingsCell.delegate=self;
+    SCTableViewCell *otherAppSettingsCell=[SCTableViewCell cellWithText:@"Calander & Contacts" withBoundKey:@"otherSettingsCell" withValue:nil];
+    
     otherAppSettingsCell.tag=17;
     
-    SCSelectionCell *supportCell=[SCSelectionCell cellWithText:@"Support" withBoundKey:@"support" withValue:nil];
-    supportCell.delegate=self;
+    SCTableViewCell *supportCell=[SCTableViewCell cellWithText:@"Support" withBoundKey:@"supportCell" withValue:nil];
+
     supportCell.tag=18;
     
-    SCSelectionCell *aboutCell=[SCSelectionCell cellWithText:@"About" withBoundKey:@"about" withValue:nil];
-    aboutCell.delegate=self;
+    SCTableViewCell *aboutCell=[SCTableViewCell cellWithText:@"About" withBoundKey:@"aboutCell" withValue:nil];
+
     aboutCell.tag=19;
-    
-    
     
     
     
@@ -195,6 +183,7 @@
     SCArrayOfObjectsSection *myInformationSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:@"My Information Track" withEntityClassDefinition:self.clinicianDef usingPredicate:myInfoPredicate];
     
     
+   
     
     //    [myInformationSection addCell:myInfoCell];
 	
@@ -240,6 +229,7 @@
     [supportAndAboutSection addCell:supportCell];
     [supportAndAboutSection addCell:aboutCell];
     
+ 
     
     [tableModel_ addSection:myInformationSection];
     [tableModel_ addSection:directSection];
@@ -253,11 +243,8 @@
     [tableModel_ addSection:preferencesSection];
     [tableModel_ addSection:supportAndAboutSection];
     
-    
-//    [tableModel_ reloadBoundValues ];
-    [tableModel_.modeledTableView reloadData];
-
 }
+
 //- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 //{
 //    // Return YES for supported orientations

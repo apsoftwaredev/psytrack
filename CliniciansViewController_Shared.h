@@ -98,7 +98,7 @@ NSManagedObjectContext *managedObjectContext;
 
 -(IBAction)abGroupsDoneButtonTapped:(id)sender;
 
-- (IBAction)reloadTableModel: (id)sender;
+
 
 -(int )defaultABSourceID;
 -(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew checkExisting:(BOOL)checkExisting;

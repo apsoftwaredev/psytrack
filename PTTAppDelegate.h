@@ -41,6 +41,8 @@
 
 @class PTTEncryption;
 @class Reachability;
+@class KeychainItemWrapper;
+
 static NSInteger const kPTTScreenLocationTop = 1;
 static NSInteger const kPTTScreenLocationMiddle = 2;
 static NSInteger const kPTTScreenLocationLeft = 3;
@@ -99,6 +101,8 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
     Reachability* hostReach;
     Reachability* internetReach;
     Reachability* wifiReach;
+    
+    KeychainItemWrapper *passwordItem;
 }
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;
@@ -119,6 +123,7 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 @property (strong, nonatomic) IBOutlet UITabBarController *tabBarController;
 @property (weak, nonatomic)IBOutlet UIView *tabBarControllerContainerView;
 @property (weak, nonatomic)IBOutlet UIViewController *viewController;
+@property (nonatomic, retain) KeychainItemWrapper *passwordItem;
 -(void)loadDatabaseData:(id)sender;
 - (void)initializeiCloudAccess ;
 -(NSURL *)applicationDrugsFileURL;

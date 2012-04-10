@@ -49,7 +49,7 @@
 
 
 -(void)viewDidUnload{
-    //    [super viewDidUnload];
+       [super viewDidUnload];
    
      self.tableModel=nil;
     if (currentDetailTableViewModel_) {
@@ -133,15 +133,9 @@
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
     if ([appDelegate persistentStoreCoordinator].persistentStores.count) {
-        [self reloadTableModel:nil];
-    }
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(reloadTableModel:)
-     name:@"ReloadTableModel"
-     object:nil];
-    
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        
+   
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad &&[self.tableView backgroundColor]!=[UIColor clearColor]) {
         
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
@@ -150,14 +144,6 @@
         
     }
     
-    
-//    [self.tableView reloadData];
-    //    [self.tableView reloadData];
-    
-}
-
-- (IBAction)reloadTableModel: (id)sender{
-   
   
     
     managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];   
@@ -1663,8 +1649,8 @@
 //    objectsSection.itemsAccessoryType = UITableViewCellAccessoryNone;
     
     existingPersonRecordID=-1;
-   
-     [[NSNotificationCenter defaultCenter] postNotificationName:@"DoneLoadingCliniciansShared" object:self userInfo:nil];
+    }
+    
 }
 
 
@@ -2578,9 +2564,11 @@
             //NSLog(@"cells in section is %i",section.cellCount);
             
             
+            if (tableViewModel.sectionCount) {
             
             SCTableViewSection *sectionOne=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-            SCTableViewCell *sectionOneClicianCell=(SCTableViewCell *)[sectionOne cellAtIndex:0];
+                if (sectionOne.cellCount) {
+                SCTableViewCell *sectionOneClicianCell=(SCTableViewCell *)[sectionOne cellAtIndex:0];
             NSManagedObject *cellManagedObject=(NSManagedObject *)sectionOneClicianCell.boundObject;
             
             if ([cellManagedObject isKindOfClass:[ClinicianEntity class]]) {
@@ -2608,8 +2596,8 @@
                
                 [sectionOne addCell:abGroupObjectSelectionCell_];
             }
-            
-            
+                }
+            }
             
         }
     }
@@ -2661,9 +2649,12 @@
     
     if (tableViewModel.tag==1){
         
-        
+        if (tableViewModel.sectionCount) {
+       
         SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
-        SCControlCell *firstNameCell =(SCControlCell *)[section cellAtIndex:1];
+            if (section.cellCount>3) {
+           
+            SCControlCell *firstNameCell =(SCControlCell *)[section cellAtIndex:1];
         SCControlCell *lastNameCell =(SCControlCell *)[section cellAtIndex:3];
         
         //NSLog(@"last Name cell tag is %i", lastNameCell.tag);
@@ -2681,6 +2672,8 @@
         else
         {
             valid=FALSE;
+        }
+        }
         }
     }
     
@@ -2709,6 +2702,8 @@
                 }
                 
             }
+            if (section.cellCount) {
+            
             SCTableViewCell *cellAtZero=(SCTableViewCell *)[section cellAtIndex:0];
             if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"ReferralEntity"]&&[cellAtZero isKindOfClass:[ClientsSelectionCell class]]) {
                 ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)cellAtZero;
@@ -2726,7 +2721,7 @@
                 }
                 
             }
-
+            }
         }
         
         
@@ -4124,7 +4119,7 @@
     
     
     //NSLog(@"will show view controller %@",viewController);
-    if (viewController.view.tag==837) {
+    if (viewController.view.tag==837 &&viewController.view.subviews.count) {
         
         
         UITableView *personViewTableView=(UITableView *)[viewController.view.subviews objectAtIndex:0];

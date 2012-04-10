@@ -287,6 +287,7 @@
 		E7912D17151D349E00E0609A /* MigrationHistoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D16151D349E00E0609A /* MigrationHistoryEntity.m */; };
 		E7912D1A151DF7DB00E0609A /* VitalsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D19151DF7DB00E0609A /* VitalsEntity.m */; };
 		E7912D1D151E441200E0609A /* InterpersonalEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D1C151E441200E0609A /* InterpersonalEntity.m */; };
+		E7B0A5B815347C430027F637 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B0A5B715347C430027F637 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
 		E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */; };
@@ -709,6 +710,8 @@
 		E7912D19151DF7DB00E0609A /* VitalsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VitalsEntity.m; sourceTree = "<group>"; };
 		E7912D1B151E441200E0609A /* InterpersonalEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterpersonalEntity.h; sourceTree = "<group>"; };
 		E7912D1C151E441200E0609A /* InterpersonalEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterpersonalEntity.m; sourceTree = "<group>"; };
+		E7B0A5B615347C430027F637 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		E7B0A5B715347C430027F637 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		E7C0749D150E60B4009C5498 /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = "<group>"; };
 		E7C0749E150E60B4009C5498 /* KeyEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyEntity.m; sourceTree = "<group>"; };
 		E7C074A0150EE4DE009C5498 /* EncryptedSCDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCDateCell.h; sourceTree = "<group>"; };
@@ -1374,6 +1377,8 @@
 		B771C54314DAF3E4002D430E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				E7B0A5B615347C430027F637 /* KeychainItemWrapper.h */,
+				E7B0A5B715347C430027F637 /* KeychainItemWrapper.m */,
 				E78A8D191531EDF10099FE5B /* Reachability.h */,
 				E78A8D1A1531EDF10099FE5B /* Reachability.m */,
 				37F7CFFF150063CE00AD2C3A /* TabFile.h */,
@@ -1504,6 +1509,7 @@
 				B79F4894142BEF0D0085D47B /* Sources */,
 				B79F4895142BEF0D0085D47B /* Frameworks */,
 				B79F4896142BEF0D0085D47B /* Resources */,
+				E7B0A5AC153462770027F637 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1688,6 +1694,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E7B0A5AC153462770027F637 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/myfile.h",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"#define addSmtricStr @\"iEn8ioesfec3\"\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B79F4894142BEF0D0085D47B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -1829,6 +1852,7 @@
 				E7E1A63D152E873500C227E8 /* ServicesViewController_Shared.m in Sources */,
 				E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */,
 				E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */,
+				E7B0A5B815347C430027F637 /* KeychainItemWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

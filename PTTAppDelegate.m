@@ -15,6 +15,7 @@
  *	This notice may not be removed from this file.
  *
  */
+
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
@@ -48,8 +49,11 @@
 #import "NSDictionaryHelpers.h"
 
 
-
+#import "KeychainItemWrapper.h"
 #import "Reachability.h"
+
+#import <Security/Security.h>
+
 #define kPTTAppSqliteFileName @"psyTrack.sqlite"
 #define kPTTDrugDatabaseSqliteFileName @"drugs.sqlite"
 
@@ -90,6 +94,7 @@
 @synthesize lockValuesDictionary=lockValuesDictionary_;
 @synthesize encryption=encryption_;
 @synthesize okayToDecryptBool=okayToDecryptBool_;
+@synthesize passwordItem=passwordItem;
 
 + (PTTAppDelegate *)appDelegate {
 	return (PTTAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -168,12 +173,7 @@
      name:@"persistentStoreAdded"
      object:nil];
    
-   
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(resaveLockDictionarySettings:)
-     name:@"ReloadTableModel"
-     object:nil];
+ 
    
     //NSLog(@"lcock dictionary is %@",[lockValuesDictionary_ allKeys]);
     
@@ -240,9 +240,9 @@
 //           }
 //       });
     tabBarController.tabBar.userInteractionEnabled=NO;
-    [self.window addSubview:self.tabBarController.view];
+   
     [self.window makeKeyAndVisible];
-    [self displayNotification:@"Establishing connection for database. One moment please..." forDuration:0.0 location:kPTTScreenLocationTop inView:nil];
+    [self displayNotification:@"Establishing connection for database. One moment please..." forDuration:0.0 location:kPTTScreenLocationTop inView:self.window];
     persistentStoreCoordinator__=[self persistentStoreCoordinator];
      
    
@@ -273,8 +273,8 @@
     statusMessage=[self setupLockDictionaryResultStr];
     
     // if the file is not found, then this is the first time or there is a problem and database will reset
-    //NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess);
-    //NSLog(@"retrieved encrypted data file is %i",retrievedEncryptedDataFile);
+NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess);
+    NSLog(@"retrieved encrypted data file is %i",retrievedEncryptedDataFile);
     
     if (!encryptedLockDictionarySuccess &&!retrievedEncryptedDataFile) {
         
@@ -323,13 +323,15 @@
         
         statusMessage=@"Welcome. Ready to use now.";
         [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:nil];
-        tabBarController.tabBar.userInteractionEnabled=YES; 
+        tabBarController.tabBar.userInteractionEnabled=YES;
+        [self.window addSubview:self.tabBarController.view];
+        
     }
     
     if (trustResultFailureString.length) {
         [self displayNotification:trustResultFailureString forDuration:8.0 location:kPTTScreenLocationMiddle inView:self.window];
     }
-    
+    [self saveLockDictionarySettings];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableModel" object:self userInfo:nil];
    NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
       
@@ -446,9 +448,20 @@
 
 -(NSData *)getSymetricData{
 
-
-    NSString* symmetricString= [NSString stringWithFormat:@"qu1shZEM196kibsiBh7h%@hsiwoai4js",[self combSmString]];
-    //NSLog(@"semetric string is %@",symmetricString);
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"Password" accessGroup:nil];
+	self.passwordItem = wrapper;
+    NSString *password=[self.passwordItem objectForKey:(__bridge_transfer id)kSecValueData];
+//    BOOL falseData=YES;
+    if ( passwordItem && (!password ||!password.length)) {
+       
+        [self.passwordItem setObject:[self generateRandomStringOfLength:30] forKey:(__bridge id) kSecValueData];
+    }
+    password=(NSString *)[passwordItem objectForKey:(__bridge_transfer id)kSecValueData];
+    NSLog(@"password item is %@",password );
+    NSString* symmetricString= [NSString stringWithFormat:@"%@%@",password,[self combSmString]];
+    NSLog(@"semetric string is %@",symmetricString);
+    NSLog(@"semetric string length is %i",symmetricString.length);
+    NSLog(@"pasword item length is %i", password.length);    
 //    NSData *data=[symmetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
     
 //NSLog(@"data length is %i",[data length]);
@@ -581,7 +594,7 @@ NSLog(@"keystring is %@",keyString);
             
             
             NSDictionary *dictionaryFromDecryptedData=[NSKeyedUnarchiver unarchiveObjectWithData:decryptedLockData];
-            
+            NSLog(@"dictionary from decryped data is %@",dictionaryFromDecryptedData);
             if (dictionaryFromDecryptedData) {
                 
                 
@@ -760,7 +773,7 @@ if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LO
     NSLog(@" generate exposed key time interval is %f",NSTimeIntervalSince1970);
 NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
 
-    NSString *returnStr=[NSString stringWithFormat:@"%f%@",[[NSDate date] timeIntervalSince1970],[self generateRandomStringOfLength:10]];
+    NSString *returnStr=[NSString stringWithFormat:@"%f%@",[[NSDate date] timeIntervalSince1970],[self generateRandomStringOfLength:3]];
     
     NSLog(@"return exposed key is %@",returnStr);
     
@@ -821,7 +834,7 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
     //        [lockValuesDictionary_ setValue:[NSString stringWithUTF8String:[hash bytes]]
     // forKey:@"pw_hash"];
     
-    NSData * encodedData = [NSKeyedArchiver archivedDataWithRootObject:lockValuesDictionary_];
+    NSData * encodedData = [NSKeyedArchiver archivedDataWithRootObject:self.lockValuesDictionary];
     
     
     
@@ -1047,10 +1060,9 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
     
     NSData *retrievedEncryptedData=[NSData dataWithContentsOfFile:encryptedDataPath];
     
-    
-
-   
-    if (retrievedEncryptedData) {
+    NSLog(@"retrieved encrypted data is %@",retrievedEncryptedData);
+        NSLog(@"retrieved encrypted data file path is %@",encryptedDataPath);
+   if (retrievedEncryptedData) {
         
         retrievedEncryptedDataFile=YES;
                
@@ -1076,11 +1088,11 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
             decryptedLockData =(NSData *)[encryption_ doCipher:retrievedEncryptedData key:symetricData context:kCCDecrypt padding:(CCOptions *) kCCOptionPKCS7Padding];
             
             
-//            //NSLog(@"decrypted Lock data is %@",decryptedLockData);
+            NSLog(@"decrypted Lock data is %@",decryptedLockData);
 //            
-//            NSString* newStr = [[NSString alloc] initWithData:decryptedLockData encoding:NSASCIIStringEncoding];;
+            NSString* newStr = [[NSString alloc] initWithData:decryptedLockData encoding:NSASCIIStringEncoding];;
 //            
-//            //NSLog(@"newstring is %@",newStr);
+            NSLog(@"newstring is %@",newStr);
             if (decryptedLockData) {
                 
                 
@@ -3548,7 +3560,7 @@ duration:(NSTimeInterval)1.0];
 
     NSString *addStr=[NSString stringWithFormat:@"%@",addSmtricStr];
 
-
+NSLog(@"gui %@",[PTTAppDelegate GetUUID]);
    
         int firstCharacter=[addStr characterAtIndex:0];
         int fifthCharacter=[addStr characterAtIndex:4];
@@ -5668,10 +5680,17 @@ return [self applicationDrugsDirectory].path;
     BOOL success=FALSE;
     
     NSData *symetricData=[self getSymetricData];
-    NSData * keyedArchiveData = [NSKeyedArchiver archivedDataWithRootObject:lockValuesDictionary_];
+    NSLog(@"lock values dictionary before archive %@",self.lockValuesDictionary);
+    NSData * keyedArchiveData = [NSKeyedArchiver archivedDataWithRootObject:self.lockValuesDictionary];
+    
+    
+    NSLog(@"lock vlaues dictionary after archive is %@",keyedArchiveData);
+    NSDictionary *dictionaryFromDecryptedData=[NSKeyedUnarchiver unarchiveObjectWithData:keyedArchiveData];
+    NSLog(@"dictionary from decryped data is %@",dictionaryFromDecryptedData);
     
     NSData *encryptedArchivedLockData =(NSData *)[encryption_ doCipher:keyedArchiveData key:symetricData context:kCCEncrypt padding:(CCOptions *)kCCOptionPKCS7Padding];
     
+    NSLog(@"encrypted archived locck data is %@",encryptedArchivedLockData);
     if ([encryptedArchivedLockData length]) {
         success= (BOOL)[encryptedArchivedLockData writeToFile:[self lockSettingsFilePath] atomically:YES];
         NSLog(@"success is %i",success);
