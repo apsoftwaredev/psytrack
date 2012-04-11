@@ -1742,15 +1742,7 @@
 - (void)tableViewModel:(SCTableViewModel *) tableViewModel willConfigureCell:(SCTableViewCell *) cell forRowAtIndexPath:(NSIndexPath *) indexPath
 {
     
-    if (tableViewModel.tag==0) 
-    {
-        
-        cell.backgroundColor=[UIColor whiteColor];
-        cell.height= 50;
-        
-        
-        
-    }
+
     if (tableViewModel.tag==1) 
     {
         

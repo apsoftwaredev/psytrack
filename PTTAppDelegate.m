@@ -2040,8 +2040,8 @@ duration:(NSTimeInterval)1.0];
            case 2:
                if (trainTrackViewController ) {
                    [self saveContext];
-                   [trainTrackViewController.tableModel reloadBoundValues];
-                   [trainTrackViewController tableViewModel:(SCTableViewModel *)[trainTrackViewController tableModel] didAddSectionAtIndex:(NSInteger)0];
+//                   [trainTrackViewController.tableModel reloadBoundValues];
+//                   [trainTrackViewController tableViewModel:(SCTableViewModel *)[trainTrackViewController tableModel] didAddSectionAtIndex:(NSInteger)0];
                    
                }
                break;
@@ -2087,7 +2087,7 @@ duration:(NSTimeInterval)1.0];
                   
                    
                   
-                   [trainTrackViewController tableViewModel:(SCTableViewModel *)[trainTrackViewController tableModel] didAddSectionAtIndex:(NSInteger)0];
+//                   [trainTrackViewController tableViewModel:(SCTableViewModel *)[trainTrackViewController tableModel] didAddSectionAtIndex:(NSInteger)0];
                    
                }
                break;
@@ -5502,7 +5502,7 @@ return [self applicationDrugsDirectory].path;
                 
             clientsViewController_iPhone.totalClientsLabel.alpha=0;
             }
-            self.trainTrackViewController.tableView.alpha=0;
+//            self.trainTrackViewController.tableView.alpha=0;
             
         }
     
@@ -5527,7 +5527,7 @@ return [self applicationDrugsDirectory].path;
         clientsViewController_iPhone.totalClientsLabel.alpha=1;
         //NSLog(@"totoal clinicians label%@", [clientsViewController_iPhone class]);
         
-        self.trainTrackViewController.tableView.alpha=1;
+//        self.trainTrackViewController.tableView.alpha=1;
        
         
     }

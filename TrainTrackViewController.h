@@ -16,17 +16,18 @@
  *
  */
 #import <UIKit/UIKit.h>
-#import "SCTableViewModel.h"
+//#import "SCTableViewModel.h"
 #import "CliniciansViewController_Shared.h"
 //#import "IASKAppSettingsViewController.h"
 #import "DTAboutViewController.h"
-@interface TrainTrackViewController : CliniciansViewController_Shared <SCTableViewModelDelegate,DTAboutViewControllerDelegate/*,IASKSettingsDelegate*/> {
+@interface TrainTrackViewController : UIViewController < UITableViewDataSource, UITableViewDelegate , DTAboutViewControllerDelegate /* ,IASKSettingsDelegate  */>{
     
 //     SCArrayOfObjectsModel *tableModel_;
 //   
 //    CliniciansViewController_Shared *cliniciansViewController_Shared_;
 //    IASKAppSettingsViewController *appSettingsViewController;
 }
+@property (nonatomic, strong) UITableView *myTableView;
 
 //@property (strong, nonatomic) SCArrayOfObjectsModel *tableModel;
 @property (strong, nonatomic) IBOutlet UIView *messageView;
