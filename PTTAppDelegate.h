@@ -54,6 +54,10 @@ static NSString * const kPTTAddressBookGroupIdentifier=@"address_book_group_iden
 static NSString * const kPTTAddressBookGroupName=@"address_book_group_name";
 static NSString * const kPTTGloballyUniqueIdentifier=@"globally_unique_identifier";
 static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group";
+static NSString * const kPTCurrentKeyDictionary=@"current_key_dictonary";
+static NSString * const kPTCurrentKeyDate=@"current_key_date";
+
+
 /****************************************************************************************/
 /*	class PTTAppDelegate	*/
 /****************************************************************************************/ 
@@ -103,6 +107,7 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
     Reachability* wifiReach;
     
     KeychainItemWrapper *passwordItem;
+    NSTimer *checkKeyEntityTimer;
 }
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;

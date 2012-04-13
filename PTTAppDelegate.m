@@ -130,7 +130,12 @@
 	[wifiReach startNotifier];
 	[self updateInterfaceWithReachability: wifiReach];
 
-	
+	NSUbiquitousKeyValueStore* store = [NSUbiquitousKeyValueStore defaultStore];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateKVStoreItems:)
+                                                 name:NSUbiquitousKeyValueStoreDidChangeExternallyNotification
+                                               object:store];
+    [store synchronize];
 
     [self initializeiCloudAccess];
     
@@ -261,7 +266,153 @@
     return YES;
 }
 
+- (void)updateKVStoreItems:(NSNotification*)notification {
+    // Get the list of keys that changed.
+    NSDictionary* userInfo = [notification userInfo];
+    NSNumber* reasonForChange = [userInfo objectForKey:NSUbiquitousKeyValueStoreChangeReasonKey];
+    NSInteger reason = -1;
+    
+    // If a reason could not be determined, do not update anything.
+    if (!reasonForChange)
+        return;
+    
+    // Update only for changes from the server.
+    reason = [reasonForChange integerValue];
+    if ((reason == NSUbiquitousKeyValueStoreServerChange) ||
+        (reason == NSUbiquitousKeyValueStoreInitialSyncChange)) {
+        // If something is changing externally, get the changes
+        // and update the corresponding keys locally.
+        NSArray* changedKeys = [userInfo objectForKey:NSUbiquitousKeyValueStoreChangedKeysKey];
+        NSUbiquitousKeyValueStore* store = [NSUbiquitousKeyValueStore defaultStore];
+        NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+        
+        // This loop assumes you are using the same key names in both
+        // the user defaults database and the iCloud key-value store
+        for (NSString* key in changedKeys) {
+            id value = [store objectForKey:key];
+            [userDefaults setObject:value forKey:key];
+            
+//            if ([key isEqualToString:@"current_key_string"]) {
+//                if (!checkKeyEntityTimer) {
+//                
+//                checkKeyEntityTimer = [NSTimer scheduledTimerWithTimeInterval:5.0
+//                                                         target:self
+//                                                       selector:@selector(checkKeyEntity)
+//                                                       userInfo:NULL
+//                                                        repeats:YES];
+//                [checkKeyEntityTimer fire];
+//                    
+//                }
+//            }
+            
+        }
+    }
+}
 
+
+
+
+//-(void)checkKeyEntity {
+//
+//    NSLog(@"lock values dictionary lock screen creat date %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]);
+//    
+//    
+//    NSPredicate *keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]];
+//    //NSLog(@"lock screen date is %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]);
+//    NSFetchRequest *newFetchRequest=[[NSFetchRequest alloc]init];
+//    
+//    [newFetchRequest setPredicate:keyStringPredicate];
+//    
+//    NSError *error=nil;
+//    NSArray *fetchedObjects=[managedObjectContext__ executeFetchRequest:newFetchRequest error:&error];
+//    NSLog(@"fetched objects are %@",fetchedObjects);
+//    if(fetchedObjects.count){
+//       KeyEntity *keyObject=[fetchedObjects objectAtIndex:0];
+//        if ([keyObject.keyDate isEqualToDate:(NSDate *)[(NSDictionary *)[[NSUserDefaults standardUserDefaults]valueForKey:kPTCurrentKeyDictionary] valueForKey:kPTCurrentKeyDate] ] ) {
+//            [checkKeyEntityTimer invalidate];
+//            checkKeyEntityTimer=nil;
+//            if (!lockValuesDictionary_) {
+//                [self setupLockDictionaryResultStr];
+//                
+//                
+//            }
+//            
+//            NSData *decryptedLockData;
+//            decryptedLockData =(NSData *) [self decryptDataToPlainDataUsingKeyEntityWithString:(NSString *)keyObject.keyString encryptedData:(NSData *)keyObject.dataF];
+//        
+//            
+//           
+//            
+//            NSLog(@"decrypted Lock data is %@",decryptedLockData);
+//            //            
+//            NSString* newStr = [[NSString alloc] initWithData:decryptedLockData encoding:NSASCIIStringEncoding];;
+//            //            
+//            NSLog(@"newstring is %@",newStr);
+//            if (decryptedLockData) {
+//                
+//                
+//                NSDictionary *dictionaryFromDecryptedData=[NSKeyedUnarchiver unarchiveObjectWithData:decryptedLockData];
+//                
+//                if (dictionaryFromDecryptedData) {
+//                    
+//                    
+//                    //                    //NSLog(@"lockvalues dictionary %@",[dictionaryFromDecryptedData allKeys]);
+//                    
+//                    id obj = [dictionaryFromDecryptedData objectForKey:K_LOCK_SCREEN_PASSCODE];
+//                    
+//                    if (obj) {
+//                        // use obj
+//                        
+//                        NSString *pHash= [NSString stringWithFormat:@"%@asdj9emV3k30wer93",@""];
+//                        NSString *checkHash=[dictionaryFromDecryptedData valueForKey:K_LOCK_SCREEN_P_HSH];
+//                        
+//                        //                        //NSLog(@"check hash string is %@",checkHash);
+//                        //                        //NSLog(@"hash str is %@",hashStr);
+//                        if (checkHash && [checkHash isEqualToString:pHash]) {
+//                            
+//                            [lockValuesDictionary_ setValue:[dictionaryFromDecryptedData valueForKey:K_LOCK_SCREEN_PASSCODE] forKey:K_LOCK_SCREEN_PASSCODE];
+//                            [self displayNotification:@"Passcode Updated" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+//                            
+//                        }
+//                        else {
+//                            [self displayNotification:@"Problem updating Passcode occured" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+//                        }
+//                        
+//                        
+//                        
+//                    } 
+//                    
+//                    
+//                    
+//                    
+//                }
+//                else
+//                    statusMessage=@"Unable to load necessary security data";
+//            }
+//            else
+//                statusMessage=@"Unable to load necessary security data";
+//            
+//            
+//        }
+//
+//            
+//            lockValuesDictionary_ setValue:(NSString *)[(NSDictionary *)[[NSUserDefaults standardUserDefaults]valueForKey:kPTCurrentKeyDictionary] valueForKey:keyObject.da]  forUndefinedKey:<#(NSString *)#>                                 
+//            
+//        }
+//        NSLog(@"key entity is %@",keyObject);
+//        [self saveContext];
+//    }
+//    else 
+//    {
+//        
+//        [self displayNotification:@"Error 789: Unable to save settings." forDuration:3.0 location:kPTTScreenLocationTop inView:nil];                  
+//        
+//    }
+//
+//
+//
+//
+//}
 -(void)loadDatabaseData:(id)sender
 {
     
@@ -5549,6 +5700,9 @@ return [self applicationDrugsDirectory].path;
 		[lockScreenVC_.view removeFromSuperview];
 		self.lockScreenVC = nil;
          tabBar.userInteractionEnabled=TRUE; 
+        if (![self.window.subviews containsObject:tabBarController.view]) {
+            [self.window addSubview:tabBarController.view];
+        }
         
 	}
 }
@@ -5754,11 +5908,11 @@ return [self applicationDrugsDirectory].path;
                 NSPredicate *keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]];
                 //NSLog(@"lock screen date is %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]);
                 NSFetchRequest *newFetchRequest=[[NSFetchRequest alloc]init];
-                
+                [newFetchRequest setEntity:keyEntity];
                 [newFetchRequest setPredicate:keyStringPredicate];
                 
                 
-                fetchedObjects=[managedObjectContext__ executeFetchRequest:fetchRequest error:&error];
+                fetchedObjects=[managedObjectContext__ executeFetchRequest:newFetchRequest error:&error];
                 NSLog(@"fetched objects are %@",fetchedObjects);
                 if(fetchedObjects.count){
                     keyObject=[fetchedObjects objectAtIndex:0];

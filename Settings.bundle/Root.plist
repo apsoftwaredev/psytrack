@@ -81,5 +81,12 @@
 	<string></string>
 	<key>auto_add_clinician_to_group</key>
 	<true/>
+	<key>current_key_dictonary</key>
+	<dict>
+		<key>current_key_date</key>
+		<string></string>
+		<key>current_key_string</key>
+		<date>2012-04-13T02:57:38Z</date>
+	</dict>
 </dict>
 </plist>

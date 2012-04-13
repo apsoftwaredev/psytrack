@@ -14,5 +14,5 @@
 @dynamic keyF;
 @dynamic dataF;
 @dynamic keyString;
-
+@dynamic keyDate;
 @end

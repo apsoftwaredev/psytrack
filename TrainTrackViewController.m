@@ -248,7 +248,7 @@
     
     NSInteger result = 0;
     if ([tableView isEqual:self.myTableView]){
-        result = 9;
+        result = 11;
     }
     return result;
     
@@ -289,18 +289,25 @@
                 break;
             }
             case 7:{
-                result = 1;
+                result = 2;
                 break;
             }
             case 8:{
-                result = 2;
+                result = 1;
                 break;
             }
             case 9:{
                 result = 2;
                 break;
-            }    
+            }
                 
+            case 10:{
+                result = 2;
+                break;
+            }
+           default:
+                break;
+                  
         }
     }
     return result;
@@ -331,10 +338,102 @@
                       initWithStyle:UITableViewCellStyleDefault
                       reuseIdentifier:TableViewCellIdentifier];
         }
+      
         
-        result.textLabel.text = [NSString stringWithFormat:@"Section %ld, Cell %ld",
-                                 (long)indexPath.section,
-                                 (long)indexPath.row];
+        
+            switch (indexPath.section) {
+                case 0:
+                {
+                    if (indexPath.row==0)result.textLabel.text=@"My Information";
+                
+                }
+                    break;
+                
+                case 1:
+                {
+                    if (indexPath.row==0)result.textLabel.text=@"Assessments";
+
+                    if (indexPath.row==1)result.textLabel.text=@"Interventions";
+
+                    
+                }
+                    break;
+                case 2:
+                {
+                    if (indexPath.row==0)result.textLabel.text=@"Support Activities";
+                    
+                }
+                    break;
+                case 3:
+                {
+                    if (indexPath.row==0)result.textLabel.text=@"Supervision Received";
+                    if (indexPath.row==1)result.textLabel.text=@"Supervision Given";
+                    
+                    
+                }
+                    break;
+                case 4:
+                {
+                    if (indexPath.row==0)result.textLabel.text=@"Existing Hours";
+                  
+                    
+                }
+                    break;
+                case 5:
+                {
+                    if (indexPath.row==0)result.textLabel.text=@"Consultations";
+                    
+                    
+                }
+                    break;
+                    
+                case 6:
+                {
+                    if (indexPath.row==0)result.textLabel.text=@"Continuing Education Credits";
+
+                    if (indexPath.row==1)result.textLabel.text=@"Certifications";
+
+                    
+                }
+                    break;
+                    
+                case 7:
+                {
+                     if (indexPath.row==0)result.textLabel.text=@"Courses Taught";
+                     if (indexPath.row==1)result.textLabel.text=@"Presentations";
+                    
+                }
+                    break;
+                case 8:
+                {
+                    result.textLabel.text=@"Drug Database";
+                    
+                }
+                    break;
+                    
+                case 9:
+                {
+                    if (indexPath.row==0)result.textLabel.text=@"Lock Screen Settings";
+                    if (indexPath.row==1)result.textLabel.text=@"Calander and Address Book";
+                    
+
+                  
+                }
+                    break;
+                   
+                case 10:
+                {
+                
+                    if (indexPath.row==0)result.textLabel.text=@"Support";
+                    if (indexPath.row==1)result.textLabel.text=@"About";
+                
+                }
+                default:
+                    break;
+            }
+        
+        result.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
         
     }
     
@@ -342,7 +441,192 @@
     
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
+
+
+
+
+
+
+
+    switch (indexPath.section) {
+        case 0:
+        {
+            //@"My Information"
+//            if (indexPath.row==0){};
+            
+        }
+            break;
+            
+        case 1:
+        {
+            //@"Assessments "
+            if (indexPath.row==0){
+                TestAdministrationsViewController_iPad *testAdministrationsViewController_iPad = [[TestAdministrationsViewController_iPad alloc] initWithNibName:@"TestAdministrationsViewController_iPad" bundle:nil];
+                
+                [self.navigationController pushViewController:testAdministrationsViewController_iPad animated:YES];
+                break;
+            };
+            //interventions
+//            if (indexPath.row==1){};
+            
+            
+        }
+            break;
+        case 2:
+        {
+            //@"Support Activities"
+//            if (indexPath.row==0){};
+            
+        }
+            break;
+        case 3:
+        {
+            //@"Supervision Received"
+//            if (indexPath.row==0);
+            
+            //@"Supervision Given
+//            if (indexPath.row==1);
+            
+            
+        }
+            break;
+        case 4:
+        {
+            //@"Existing Hours"
+            if (indexPath.row==0){
+                NSString *existingHoursViewControllerNibName=nil;
+                if ([SCHelper is_iPad]) {
+                    existingHoursViewControllerNibName=@"ExistingHoursViewController_iPad";
+                }else {
+                    existingHoursViewControllerNibName=@"ExistingHoursViewController";
+                }
+                ExistingHoursViewController *existingHoursViewController = [[ExistingHoursViewController alloc] initWithNibName:existingHoursViewControllerNibName bundle:[NSBundle mainBundle]];
+                
+                [self.navigationController pushViewController:existingHoursViewController animated:YES];
+                break;
+            }  
+            
+            
+        }
+            break;
+        case 5:
+        {
+            //@"Consultations"
+//            if (indexPath.row==0);
+            
+            
+        }
+            break;
+            
+        case 6:
+        {
+            //@"Continuing Education Credits"
+//            if (indexPath.row==0);
+            
+            //@"Certifications"
+//            if (indexPath.row==1);
+            
+            
+        }
+            break;
+            
+        case 7:
+        {
+            //@"Courses Taught"
+//            if (indexPath.row==0);
+            
+            //@"Presentations"
+//            if (indexPath.row==1);
+            
+        }
+            break;
+        case 8:
+        {
+            //@"Drug Database"
+            UITabBar *tabBar=(UITabBar *) [(PTTAppDelegate *)[UIApplication sharedApplication].delegate tabBar];
+            tabBar.userInteractionEnabled=FALSE;            
+            
+            DrugViewController_iPhone *drugViewController_iPhone = [[DrugViewController_iPhone alloc] initWithNibName:@"DrugViewController_iPhone" bundle:nil];
+            
+            [self.navigationController pushViewController:drugViewController_iPhone animated:YES];
+            
+            tabBar.userInteractionEnabled=TRUE;
+           
+            
+        }
+            break;
+            
+        case 9:
+        {
+            //@"Lock Screen Settings"
+            if (indexPath.row==0){
+            
+                LCYLockSettingsViewController *lockSettingsVC = [[LCYLockSettingsViewController alloc] initWithNibName:@"LCYLockSettingsViewController" bundle:nil];
+                [[self navigationController] pushViewController:lockSettingsVC animated:YES];            
+                break;
+            
+            };
+            //@"Calander and Address Book"
+            if (indexPath.row==1){
+            
+            
+                InAppSettingsViewController *inAppSettingsViewController = [[InAppSettingsViewController alloc] initWithNibName:@"InAppSettingsViewController" bundle:nil];
+                
+                [self.navigationController pushViewController:inAppSettingsViewController animated:YES];
+                
+                inAppSettingsViewController.rootNavController=self.navigationController;
+            
+            
+            };
+            
+            
+            
+        }
+            break;
+            
+        case 10:
+        {
+            //@"Support"
+            if (indexPath.row==0){
+                DTLayoutDefinition *supportLayout = [DTLayoutDefinition layoutNamed:@"support"];
+                DTAboutViewController *support =[[DTAboutViewController alloc] initWithLayout:supportLayout];
+                support.title = @"Support";
+                [self.navigationController pushViewController:support animated:YES];
+
+            
+            };
+            
+            //@"About"
+            if (indexPath.row==1){
+            
+                DTAboutViewController *about = [[DTAboutViewController alloc] initWithLayout:nil]; // default is @"about"
+                about.title	 = @"About";
+                about.delegate = self;
+                [self.navigationController pushViewController:about animated:YES];
+            
+            
+            };
+            
+        }
+        default:
+            break;
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
 - (void)viewDidLoad{
     [super viewDidLoad];
@@ -403,78 +687,11 @@
     
 }
 
-- (NSString *) tableView:(UITableView *)tableView 
- titleForHeaderInSection:(NSInteger)section{
-    
-    NSString *result = nil;
-    
-    if ([tableView isEqual:self.myTableView] &&
-        section == 0){
-        result = @"Section 1 Header";
-    }
-    
-    return result;
-    
-}
 
-- (NSString *) tableView:(UITableView *)tableView 
- titleForFooterInSection:(NSInteger)section{
-    
-    NSString *result = nil;
-    
-    if ([tableView isEqual:self.myTableView] &&
-        section == 0){
-        result = @"Section 1 Footer";
-    }
-    
-    return result;
-    
-}
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 
-    ////	// Create an array of objects section
-    ////    SCTableViewSection *directSection = [SCTableViewSection sectionWithHeaderTitle:@"Direct Client Contact Track" ];
-    ////    [directSection addCell:testAdministrationCell];
-    ////    [directSection addCell:interventionCell];
-    ////    
-    ////    
-    ////	SCTableViewSection *indirectSection = [SCTableViewSection sectionWithHeaderTitle:@"Indirect Client Support Activities Track"];
-    ////	[indirectSection addCell:indirectSupportCell];
-    ////    
-    ////    SCTableViewSection *supervisionSection = [SCTableViewSection sectionWithHeaderTitle:@"Direct Supervision Track"];
-    ////    [supervisionSection addCell:supervisionReceivedCell];
-    ////    [supervisionSection addCell:supervisionGivenCell];
-    ////  	
-    ////    SCTableViewSection *existingHoursSection = [SCTableViewSection sectionWithHeaderTitle:@"Existing Hours Track"];
-    ////    [existingHoursSection addCell:existingHoursCell];
-    ////    
-    ////    SCTableViewSection *consultationSection = [SCTableViewSection sectionWithHeaderTitle:@"Consultation Track"];
-    ////    [consultationSection addCell:consultationsCell];
-    ////    
-    ////	SCTableViewSection *formalEducationSection = [SCTableViewSection sectionWithHeaderTitle:@"Formal Education Track"];
-    ////    [formalEducationSection addCell:collegeCoursesCell];
-    ////    [formalEducationSection addCell:certificationsCell];
-    ////	
-    ////    
-    ////    
-    ////    SCTableViewSection *teachingAndAdvisingSection = [SCTableViewSection sectionWithHeaderTitle:@"Teaching and Advising Track"];
-    ////    [teachingAndAdvisingSection addCell:teachingExperienceCell];
-    ////    [teachingAndAdvisingSection addCell:advisingExperienceCell];
-    ////    [teachingAndAdvisingSection addCell:presentationsCell];
-    ////    
-    ////    SCTableViewSection *drugsDatabaseSection = [SCTableViewSection sectionWithHeaderTitle:@"Drug Database"];
-    ////    [drugsDatabaseSection addCell:drugDatabaseCell];
-    ////    
-    ////    SCTableViewSection *preferencesSection = [SCTableViewSection sectionWithHeaderTitle:@"Preferences Track"];
-    ////    [preferencesSection addCell:lockPasscodeCell];
-    ////    [preferencesSection addCell:otherAppSettingsCell];
-    ////    
-    ////    
-    ////    SCTableViewSection *supportAndAboutSection = [SCTableViewSection sectionWithHeaderTitle:@"Support and About Track"];
-    ////    [supportAndAboutSection addCell:supportCell];
-    ////    [supportAndAboutSection addCell:aboutCell];
-    ////    
+    
     NSString *headerTitle=nil;
     switch (section) {
         case 0:
@@ -493,18 +710,21 @@
             headerTitle=@"Existing Hours Track";
             break;
         case 5:
-            headerTitle=@"Formal Education Track";
+            headerTitle=@"Consultations";
             break;
         case 6:
-            headerTitle=@"Teaching and Advising Track";
+            headerTitle=@"Formal Education Track";
             break;
         case 7:
-            headerTitle=@"Drug Database";
+            headerTitle=@"Teaching and Advising Track";
             break;
         case 8:
-            headerTitle=@"Preferences Track";
+            headerTitle=@"Drug Database";
             break;
         case 9:
+            headerTitle=@"Preferences Track";
+            break;
+        case 10:
             headerTitle=@"Support and About Track";
             break;
   

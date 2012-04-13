@@ -15,5 +15,5 @@
 @property (nonatomic, retain) NSData * keyF;
 @property (nonatomic, retain) NSData * dataF;
 @property (nonatomic, retain) NSString * keyString;
-
+@property (nonatomic, retain) NSDate *keyDate;
 @end
