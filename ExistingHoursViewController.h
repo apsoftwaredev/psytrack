@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-#import "SCTableViewModel.h"
+
 
 @interface ExistingHoursViewController : UITableViewController <SCTableViewModelDelegate,SCTableViewModelDataSource>{
 

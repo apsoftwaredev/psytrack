@@ -15,17 +15,17 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewModel.h"
+
 
 
 @interface ClientsViewController_Shared : NSObject /*<SCTableViewModelDelegate>*/{
 
 NSManagedObjectContext *managedObjectContext;
-    SCClassDefinition *clientDef;
+    SCEntityDefinition *clientDef;
 
 }
 
-@property (strong,nonatomic) SCClassDefinition *clientDef;
+@property (strong,nonatomic) SCEntityDefinition *clientDef;
 
 
 -(id)setupTheClientsViewModelUsingSTV;

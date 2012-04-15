@@ -10,7 +10,7 @@
 
 #import "LCYPassCodeEditorViewController.h"
 
-#import "SCTableViewModel.h"
+#import <UIKit/UIKit.h>
 
 @interface LCYLockSettingsViewController : UITableViewController  <LCYPassCodeEditorDelegate,SCTableViewModelDelegate>
 {

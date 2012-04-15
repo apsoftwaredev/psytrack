@@ -49,12 +49,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    self.tableModel = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
-    if(tableModel)
-    {
-        [self.tableModel replaceModeledTableViewWith:self.tableView];
-        return;
-    }
+    
     
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
     managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
@@ -84,14 +79,10 @@
     
     
      NSPredicate *currentClientsPredicate=[NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
-    
-    
-   self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
-                                             withEntityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:currentClientsPredicate];	
-  
-
 
     
+   self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView                                         entityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:currentClientsPredicate];	
+
    	
     
     self.tableModel.searchBar = self.searchBar;
@@ -475,7 +466,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
 //    
 //}
 
-//- (SCControlCell *)tableViewModel:(SCTableViewModel *)tableViewModel
+//- (SCCustomCell *)tableViewModel:(SCTableViewModel *)tableViewModel
 //	  customCellForRowAtIndexPath:(NSIndexPath *)indexPath
 //{
 //    SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
@@ -532,7 +523,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                 if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
                     
                 {
-                    if ( ![SCHelper is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
+                    if ( ![SCUtilities is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
                     {
                         UIButton *button=(UIButton *)[cell viewWithTag:300];
                         [button setTitle:@"Call Number" forState:UIControlStateNormal];
@@ -654,7 +645,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                 
                 //NSLog(@"entity name is %@",cellManagedObject.entity.name);
-                if (cell.tag==1 && [cell isKindOfClass:[SCControlCell class]]&& cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
+                if (cell.tag==1 && [cell isKindOfClass:[SCCustomCell class]]&& cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
                 {
                     
                     UIView *scaleView = [cell viewWithTag:70];
@@ -683,7 +674,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                 if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                     
                     
-                    if ([cell isKindOfClass:[SCControlCell class]]) 
+                    if ([cell isKindOfClass:[SCCustomCell class]]) 
                     {
                         UIView *scaleView = [cell viewWithTag:70];
                         if ([scaleView isKindOfClass:[UISegmentedControl class]]) 

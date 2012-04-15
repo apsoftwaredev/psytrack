@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-#import "SCTableViewModel.h"
+#import <UIKit/UIKit.h>
 #import "StopwatchCell.h"
 #import "ClientPresentations_Shared.h"
 #import <EventKit/EventKit.h>
@@ -14,7 +14,7 @@
 
 @class Time_Shared;
 
-@interface ServicesViewController_Shared : UIViewController <SCTableViewModelDataSource, SCTableViewModelDelegate,SCTableViewCellDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate>
+@interface ServicesViewController_Shared : UIViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate>
 {
     Time_Shared *time_Shared;
     ClientPresentations_Shared *clientPresentations_Shared;

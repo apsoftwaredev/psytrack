@@ -72,13 +72,6 @@
 } 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Gracefully handle reloading the view controller after a memory warning
-    tableModel = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
-    if(tableModel)
-    {
-        [tableModel replaceModeledTableViewWith:self.tableView];
-        return;
-   }
    
 	
     // Set up the edit and add buttons.
@@ -120,9 +113,9 @@
     drugsManagedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate drugsManagedObjectContext];
     //Create a class definition for Client entity
 	
-    SCClassDefinition *drugDef = [SCClassDefinition definitionWithEntityName:@"DrugProductEntity" 
-                                      withManagedObjectContext:drugsManagedObjectContext 
-                                             withPropertyNames:[NSArray arrayWithObject: @"tECode"]];
+    SCEntityDefinition *drugDef = [SCEntityDefinition definitionWithEntityName:@"DrugProductEntity" 
+                                      managedObjectContext:drugsManagedObjectContext 
+                                             propertyNames:[NSArray arrayWithObject: @"tECode"]];
     
     
     
@@ -134,8 +127,8 @@
 	
     //create the custom property definition
     SCCustomPropertyDefinition *drugNameDataDataProperty = [SCCustomPropertyDefinition definitionWithName:@"DrugNameData"
-                                                                                     withuiElementNibName:@"CustomSCTextViewCell_iPhone" 
-                                                                                       withObjectBindings:customCellDrugNameDataBindings];
+                                                                                     uiElementNibName:@"CustomSCTextViewCell_iPhone" 
+                                                                                       objectBindings:customCellDrugNameDataBindings];
 	
     
     
@@ -149,8 +142,8 @@
 	
     //create the custom property definition
     SCCustomPropertyDefinition *activeIngredientDataProperty = [SCCustomPropertyDefinition definitionWithName:@"ActiveIngredientData"
-                                                                                         withuiElementNibName:@"CustomSCTextViewCell_iPhone" 
-                                                                                           withObjectBindings:customCellActiveIngredientDataBindings];
+                                                                                         uiElementNibName:@"CustomSCTextViewCell_iPhone" 
+                                                                                           objectBindings:customCellActiveIngredientDataBindings];
 	
     
     
@@ -164,8 +157,8 @@
 	
     //create the custom property definition
     SCCustomPropertyDefinition *dosageDataProperty = [SCCustomPropertyDefinition definitionWithName:@"dosageData"
-                                                                               withuiElementNibName:@"CustomSCTextViewCell_iPhone" 
-                                                                                 withObjectBindings:dosageDataBindings];
+                                                                               uiElementNibName:@"CustomSCTextViewCell_iPhone" 
+                                                                                 objectBindings:dosageDataBindings];
 	
     
     
@@ -180,8 +173,8 @@
 	
     //create the custom property definition
     SCCustomPropertyDefinition *formDataProperty = [SCCustomPropertyDefinition definitionWithName:@"FormData"
-                                                                             withuiElementNibName:@"CustomSCTextViewCell_iPhone" 
-                                                                               withObjectBindings:formDataBindings];
+                                                                             uiElementNibName:@"CustomSCTextViewCell_iPhone" 
+                                                                               objectBindings:formDataBindings];
 	
     
     
@@ -253,13 +246,13 @@
 //        tableModel=[[SCArrayOfObjectsModel alloc]tableViewModelWithTableView:(UITableView *)self.tableView
 //                                                          withViewController:(UIViewController *)self
 //                                                                   withItems:(NSMutableArray *)drugsMutableArray
-//                                                         withClassDefinition:(SCClassDefinition *)classDefinition
+//                                                         withClassDefinition:(SCEntityDefinition *)classDefinition
 //                                                       useSCSelectionSection:(BOOL)_useSCSelectionSection];
 //        
         
         
             
-       tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withItems:drugsMutableArray withClassDefinition:drugDef useSCSelectionSection:YES];	
+       tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withItems:drugsMutableArray withClassDefinition:drugDef useSCSelectionSection:YES];	
         
 //        [self.searchBar setSelectedScopeButtonIndex:1];
        
@@ -303,7 +296,7 @@
     else
     {
         
-       	tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withItems:drugsMutableArray withClassDefinition:drugDef];	
+       	tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView items:drugsMutableArray itemsDefinition:drugDef];	
 	
         tableModel.allowMovingItems=NO;
         
@@ -382,7 +375,7 @@
     
     
     
-    if([SCHelper is_iPad]){
+    if([SCUtilities is_iPad]){
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
         [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
@@ -871,7 +864,7 @@
         
         CGRect frame;
         
-        if ([SCHelper is_iPad]) {
+        if ([SCUtilities is_iPad]) {
            frame=CGRectMake(0, 12, 400, 30);
         }
         else {
@@ -996,8 +989,8 @@
         productFetchedObjects=nil;
         
         
-        
-        tableModel.items=drugsMutableArray;
+        NSArray *itemsArray=(NSArray *)tableModel.items;
+        itemsArray=drugsMutableArray;
         //NSLog(@"drugsMutable array count is %i",drugsMutableArray.count);
     } 
     
@@ -1059,7 +1052,7 @@
 
 
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {
     
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
@@ -1068,8 +1061,8 @@
     if (tableViewModel.tag==1 &&index==0) {
         if (section.cellCount<5) {
      
-        CustomSCSelectonCellWithLoading *drugActionDatesCell=[CustomSCSelectonCellWithLoading cellWithText:@"Drug Documents" withBoundKey:@"drugActionDates" withValue:nil];
-        drugActionDatesCell.delegate=self;
+        CustomSCSelectonCellWithLoading *drugActionDatesCell=[CustomSCSelectonCellWithLoading cellWithText:@"Drug Documents"];
+//        drugActionDatesCell.delegate=self;
         drugActionDatesCell.tag=14;
         
         
@@ -1094,7 +1087,7 @@
         
         SCObjectSelectionSection *selectionSection=(SCObjectSelectionSection *)section;
         
-        [selectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
+        [selectionSection dispatchEventSelectRowAtIndexPath:indexPath];
         return;
 
     }
@@ -1169,7 +1162,7 @@
             SCTableViewSection *section = [tableModel sectionAtIndex:0];
             if([section isKindOfClass:[SCArrayOfObjectsSection class]])
             {
-                [(SCArrayOfObjectsSection *)section dispatchSelectRowAtIndexPathEvent:indexPath];
+                [(SCArrayOfObjectsSection *)section dispatchEventSelectRowAtIndexPath:indexPath];
             }
             
         }
@@ -1183,7 +1176,7 @@
 }
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
-    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
 
         [detailTableViewModel.modeledTableView setBackgroundView:nil];

@@ -15,7 +15,7 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewModel.h"
+
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "ClinicianEntity.h"
@@ -24,7 +24,7 @@ static NSInteger const kAlertTagFoundExistingPersonWithName = 1;
 static NSInteger const kAlertTagFoundExistingPeopleWithName = 2;
 
 
-@interface CliniciansViewController_Shared :  UIViewController <SCTableViewModelDataSource, SCTableViewModelDelegate,SCTableViewCellDelegate,UIAlertViewDelegate, UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate> {
+@interface CliniciansViewController_Shared :  SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate,UIAlertViewDelegate, UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate> {
 
    
 
@@ -53,7 +53,7 @@ NSManagedObjectContext *managedObjectContext;
 }
 
 
-@property (strong ,nonatomic)IBOutlet SCClassDefinition *clinicianDef;
+@property (strong ,nonatomic)IBOutlet SCEntityDefinition *clinicianDef;
 
 
 @property (strong ,nonatomic)UIView *iPadPersonBackgroundView;
@@ -63,7 +63,6 @@ NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) IBOutlet ABPersonViewController *personViewController;
 @property (nonatomic, strong) IBOutlet ABPeoplePickerNavigationController *peoplePickerNavigationController;
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) IBOutlet SCArrayOfObjectsModel *tableModel;
 @property (nonatomic, strong)  UIViewController *rootViewController;

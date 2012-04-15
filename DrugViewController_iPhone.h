@@ -16,12 +16,12 @@
  *
  */
 #import <UIKit/UIKit.h>
-#import "SCTableViewModel.h"
+
 #import "DrugViewController_Shared.h"
 #import "UIDownloadBar.h"
 #import "DrugNameObjectSelectionCell.h"
 #import "DrugProductEntity.h"
-@interface DrugViewController_iPhone : UIViewController <SCTableViewModelDelegate, SCTableViewCellDelegate,UIDownloadBarDelegate> {
+@interface DrugViewController_iPhone : UIViewController <SCTableViewModelDelegate, UIDownloadBarDelegate> {
     
     
   	UISearchBar *searchBar;

@@ -15,9 +15,10 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewCell.h"
+#import <UIKit/UIKit.h>
+
 #import <AddressBook/AddressBook.h>
-#import "SCTableViewModel.h"
+
 #import "ClinicianEntity.h"
 
 @interface ABGroupSelectionCell : SCObjectSelectionCell {

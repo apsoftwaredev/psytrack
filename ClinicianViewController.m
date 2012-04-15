@@ -85,8 +85,7 @@
 }
 
 
-    // Gracefully handle reloading the view controller after a memory warning
-
+   
 //    
 //   
 //    
@@ -107,9 +106,7 @@
 
 - (void)viewDidLoad {
         [super viewDidLoad];
-// Gracefully handle reloading the view controller after a memory warning
-
-//    
+   
 //    existingPersonRecordID=-1;
 //    
 //    managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
@@ -191,7 +188,7 @@
 //        self.navigationItem.rightBarButtonItem = addButton;
 //        self.tableModel.addButtonItem = self.navigationItem.rightBarButtonItem;
         
-        if (![SCHelper is_iPad]) {
+        if (![SCUtilities is_iPad]) {
             tableModel_.autoAssignDelegateForDetailModels=TRUE;
             tableModel_.autoAssignDataSourceForDetailModels=TRUE;
             self.tableView.backgroundColor=[UIColor clearColor];
@@ -225,7 +222,7 @@
     
     
    
-    if([SCHelper is_iPad]){
+    if([SCUtilities is_iPad]){
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
         [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
@@ -1240,12 +1237,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //            suffix=nil;
 //            credentialIntitials=nil; 
 //            SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-//            SCControlCell *titleCell=(SCControlCell *)[section cellAtIndex:0];
-//            SCControlCell *firstNameCell=(SCControlCell *)[section cellAtIndex:1];
-//            SCControlCell *middleNameCell=(SCControlCell *)[section cellAtIndex:2];
-//            SCControlCell *lastNameCell=(SCControlCell *)[section cellAtIndex:3];
-//            SCControlCell *suffixCell=(SCControlCell *)[section cellAtIndex:4];
-//            SCControlCell *credentialInitialsCell=(SCControlCell *)[section cellAtIndex:5];
+//            SCCustomCell *titleCell=(SCCustomCell *)[section cellAtIndex:0];
+//            SCCustomCell *firstNameCell=(SCCustomCell *)[section cellAtIndex:1];
+//            SCCustomCell *middleNameCell=(SCCustomCell *)[section cellAtIndex:2];
+//            SCCustomCell *lastNameCell=(SCCustomCell *)[section cellAtIndex:3];
+//            SCCustomCell *suffixCell=(SCCustomCell *)[section cellAtIndex:4];
+//            SCCustomCell *credentialInitialsCell=(SCCustomCell *)[section cellAtIndex:5];
 //            
 //            
 //                  
@@ -1709,8 +1706,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 // 
 //        
 //        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
-//       SCControlCell *firstNameCell =(SCControlCell *)[section cellAtIndex:1];
-//        SCControlCell *lastNameCell =(SCControlCell *)[section cellAtIndex:3];
+//       SCCustomCell *firstNameCell =(SCCustomCell *)[section cellAtIndex:1];
+//        SCCustomCell *lastNameCell =(SCCustomCell *)[section cellAtIndex:3];
 //         
 //        //NSLog(@"last Name cell tag is %i", lastNameCell.tag);
 //        UITextField *lastNameField =(UITextField *)[lastNameCell viewWithTag:50];
@@ -2939,7 +2936,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //        
 //        UITableView *personViewTableView=(UITableView *)[viewController.view.subviews objectAtIndex:0];
 //
-//        if ([SCHelper is_iPad]) {
+//        if ([SCUtilities is_iPad]) {
 //            [personViewTableView setBackgroundView:nil];
 //            [personViewTableView setBackgroundView:[[UIView alloc] init]];
 //        }

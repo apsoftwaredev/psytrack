@@ -35,13 +35,11 @@
     
     
 //    //Create a class definition for the ClientPresentationEntity
-//    self.clientPresentationDef = [SCClassDefinition definitionWithEntityName:@"ClientPresentationEntity" 
-//                                                        withManagedObjectContext:managedObjectContext
-//                                                               withPropertyNames:[NSArray arrayWithObjects: @"behavioralObservations",@"medications",   @"clientsDesc",@"appitite", @"assessmentNotes", @"attitudeNotes", @"homicidality", @"improvement", @"interpersonalNotes", @"notableBehaviors", @"notableImagry",  @"orientedToBody", @"orientedToPerson", @"orientedToPlace", @"orientedToTime", @"otherRemarks",  @"plan", @"rapport", @"sensoryNotes", @"sleepHoursNightly", @"sleepQuality",  @"vision"  @"notes",    nil]];
+//    self.clientPresentationDef = [SCEntityDefinition definitionWithEntityName:@"ClientPresentationEntity" 
+//                                                        managedObjectContext:managedObjectContext
+//                                                               propertyNames:[NSArray arrayWithObjects: @"behavioralObservations",@"medications",   @"clientsDesc",@"appitite", @"assessmentNotes", @"attitudeNotes", @"homicidality", @"improvement", @"interpersonalNotes", @"notableBehaviors", @"notableImagry",  @"orientedToBody", @"orientedToPerson", @"orientedToPlace", @"orientedToTime", @"otherRemarks",  @"plan", @"rapport", @"sensoryNotes", @"sleepHoursNightly", @"sleepQuality",  @"vision"  @"notes",    nil]];
     
-    self.clientPresentationDef = [SCClassDefinition definitionWithEntityName:@"ClientPresentationEntity" 
-                                                    withManagedObjectContext:managedObjectContext
-                                                           autoGeneratePropertyDefinitions:YES];
+    self.clientPresentationDef = [SCEntityDefinition definitionWithEntityName:@"ClientPresentationEntity" managedObjectContext:managedObjectContext autoGeneratePropertyDefinitions:YES];
    
     
     [self.clientPresentationDef removePropertyDefinitionWithName:@"interventionDelivered"];
@@ -70,10 +68,10 @@
     sleepHoursNightlyPropertyDef.autoValidate=NO;
     
     //define a property group
-    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"affectNotes", @"appearanceNotes",  @"assessmentNotes", @"attentionNotes", @"attitudeNotes", @"improvement", @"interpersonalNotes", @"notableBehaviors", @"notableImagry",   @"plan",  @"rapport",  @"sensoryNotes", @"sleepHoursNightly",    @"sleepQuality",@"psychomotor", @"speechLanguage", @"vision",     nil ]];
+    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"affectNotes", @"appearanceNotes",  @"assessmentNotes", @"attentionNotes", @"attitudeNotes", @"improvement", @"interpersonalNotes", @"notableBehaviors", @"notableImagry",   @"plan",  @"rapport",  @"sensoryNotes", @"sleepHoursNightly",    @"sleepQuality",@"psychomotor", @"speechLanguage", @"vision",     nil ]];
     [self.clientPresentationDef.propertyGroups addGroup:notesGroup];
     
-    SCPropertyGroup *orientationGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"orientedToBody", @"orientedToPerson",  @"orientedToPlace", @"orientedToTime",    nil ]];
+    SCPropertyGroup *orientationGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"orientedToBody", @"orientedToPerson",  @"orientedToPlace", @"orientedToTime",    nil ]];
     // add the notes property group to the clientpresentation class. 
     [self.clientPresentationDef.propertyGroups addGroup:orientationGroup];
     
@@ -158,7 +156,7 @@
     
     
     NSString *scaleDataCellNibName=nil;
-    if ([SCHelper is_iPad]) {
+    if ([SCUtilities is_iPad]) {
         scaleDataCellNibName=@"ScaleDataCell_iPad";
                 
     } else
@@ -175,8 +173,8 @@
                                                dictionaryWithObjects:[NSArray arrayWithObjects:@"comfortLevel", @"Comfort Level",nil] 
                                               forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
     SCCustomPropertyDefinition *comfortLevelscaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"comfortLevelscaleData"
-                                                                                      withuiElementNibName:scaleDataCellNibName
-                                                                                        withObjectBindings:comfortLevelScaleDataBindings];
+                                                                                      uiElementNibName:scaleDataCellNibName
+                                                                                        objectBindings:comfortLevelScaleDataBindings];
 	
     
     
@@ -188,8 +186,8 @@
                                                    dictionaryWithObjects:[NSArray arrayWithObjects:@"stressLevel",@"Stress Level", nil] 
                                                    forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
     SCCustomPropertyDefinition *stressLevelScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"stressLevelScaleData"
-                                                                                          withuiElementNibName:scaleDataCellNibName
-                                                                                            withObjectBindings:stressLevelScaleDataBindings];
+                                                                                          uiElementNibName:scaleDataCellNibName
+                                                                                            objectBindings:stressLevelScaleDataBindings];
 	
     
     
@@ -201,8 +199,8 @@
                                                    dictionaryWithObjects:[NSArray arrayWithObjects:@"alliance",@"Alliance", nil ] 
                                                    forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
     SCCustomPropertyDefinition *allianceScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"allianceScaleData"
-                                                                                          withuiElementNibName:scaleDataCellNibName
-                                                                                            withObjectBindings:allianceScaleDataBindings];
+                                                                                          uiElementNibName:scaleDataCellNibName
+                                                                                            objectBindings:allianceScaleDataBindings];
 	
     
     
@@ -214,8 +212,8 @@
                                                dictionaryWithObjects:[NSArray arrayWithObjects:@"happinessLevel",@"Happiness Level",nil] 
                                                forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
     SCCustomPropertyDefinition *happinessLevelScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"happinessLevelScaleData"
-                                                                                      withuiElementNibName:scaleDataCellNibName
-                                                                                        withObjectBindings:happinessLevelScaleDataBindings];
+                                                                                      uiElementNibName:scaleDataCellNibName
+                                                                                        objectBindings:happinessLevelScaleDataBindings];
 	
     
     
@@ -226,8 +224,8 @@
                                                       dictionaryWithObjects:[NSArray arrayWithObjects:@"energyLevel",@"Energy Level", nil ] 
                                                      forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
     SCCustomPropertyDefinition *energyLevelScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"energyLevelScaleData"
-                                                                                             withuiElementNibName:scaleDataCellNibName
-                                                                                               withObjectBindings:energyLevelScaleDataBindings];
+                                                                                             uiElementNibName:scaleDataCellNibName
+                                                                                               objectBindings:energyLevelScaleDataBindings];
 	
     
     
@@ -238,8 +236,8 @@
                                                   dictionaryWithObjects:[NSArray arrayWithObjects:@"hearingLevel",@"Hearing Level", nil ] 
                                                   forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
     SCCustomPropertyDefinition *hearingLevelScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"hearingLevelScaleData"
-                                                                                         withuiElementNibName:scaleDataCellNibName
-                                                                                           withObjectBindings:hearingLevelScaleDataBindings];
+                                                                                         uiElementNibName:scaleDataCellNibName
+                                                                                           objectBindings:hearingLevelScaleDataBindings];
 	
     
     
@@ -250,8 +248,8 @@
                                                    dictionaryWithObjects:[NSArray arrayWithObjects:@"painLevel",@"Pain Level", nil ] 
                                                    forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
     SCCustomPropertyDefinition *painLevelScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"painLevelScaleData"
-                                                                                          withuiElementNibName:scaleDataCellNibName
-                                                                                            withObjectBindings:painLevelScaleDataBindings];
+                                                                                          uiElementNibName:scaleDataCellNibName
+                                                                                            objectBindings:painLevelScaleDataBindings];
 	
     
     
@@ -262,8 +260,8 @@
                                                 dictionaryWithObjects:[NSArray arrayWithObjects:@"sexualSatisfaction",@"Sexual Satisfaction", nil ] 
                                                 forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
     SCCustomPropertyDefinition *sexualSatisfactionScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"sexualSatisfactionScaleData"
-                                                                                       withuiElementNibName:scaleDataCellNibName
-                                                                                         withObjectBindings:sexualSatisfactionScaleDataBindings];
+                                                                                       uiElementNibName:scaleDataCellNibName
+                                                                                         objectBindings:sexualSatisfactionScaleDataBindings];
 	
     
     
@@ -275,8 +273,8 @@
                                                            dictionaryWithObjects:[NSArray arrayWithObjects:@"trust",@"Trust Level", nil ] 
                                                            forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
     SCCustomPropertyDefinition *trustScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"trustScaleData"
-                                                                                                  withuiElementNibName:scaleDataCellNibName
-                                                                                                    withObjectBindings:trustScaleDataBindings];
+                                                                                                  uiElementNibName:scaleDataCellNibName
+                                                                                                    objectBindings:trustScaleDataBindings];
 	
     
     
@@ -287,8 +285,8 @@
                                             dictionaryWithObjects:[NSArray arrayWithObjects:@"symptomSeverity",@"Symptom Severity", nil ] 
                                             forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
     SCCustomPropertyDefinition *symptomSeverityScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"symptomSeverityScaleData"
-                                                                                   withuiElementNibName:scaleDataCellNibName
-                                                                                     withObjectBindings:symptomSeverityScaleDataBindings];
+                                                                                   uiElementNibName:scaleDataCellNibName
+                                                                                     objectBindings:symptomSeverityScaleDataBindings];
 	
     
     
@@ -299,8 +297,8 @@
                                                       dictionaryWithObjects:[NSArray arrayWithObjects:@"depth",@"Depth", nil ] 
                                                       forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
     SCCustomPropertyDefinition *depthScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"depthScaleData"
-                                                                                             withuiElementNibName:scaleDataCellNibName
-                                                                                               withObjectBindings:depthScaleDataBindings];
+                                                                                             uiElementNibName:scaleDataCellNibName
+                                                                                               objectBindings:depthScaleDataBindings];
 	
     
     
@@ -316,8 +314,8 @@
                                              dictionaryWithObjects:[NSArray arrayWithObjects:@"suicideIdeation",@"suicidePlan",@"suicideMeans", @"suicideHistory",    nil ] 
                                              forKeys:[NSArray arrayWithObjects:@"20",@"21",@"22",@"23",nil]]; // 20,21,22,23 are the binding keys 
     SCCustomPropertyDefinition *suicidalityDataProperty = [SCCustomPropertyDefinition definitionWithName:@"suicidalityData"
-                                                                                    withuiElementNibName:@"SuicidalityCell"
-                                                                                      withObjectBindings:suicidalityDataBindings];
+                                                                                    uiElementNibName:@"SuicidalityCell"
+                                                                                      objectBindings:suicidalityDataBindings];
 	
     
     
@@ -353,7 +351,7 @@
 	
     //create the custom property definition
     SCCustomPropertyDefinition *clientDataProperty = [SCCustomPropertyDefinition definitionWithName:@"CLientData"
-                                                                                 withuiElementClass:[ClientsSelectionCell class] withObjectBindings:clientDataBindings];
+                                                                                 withuiElementClass:[ClientsSelectionCell class] objectBindings:clientDataBindings];
 	
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
@@ -394,25 +392,25 @@
     
     
     //define a property group
-    SCPropertyGroup *mainGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"CLientData", nil]];
+    SCPropertyGroup *mainGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"CLientData", nil]];
     
     // add the main property group to the clientPresentations class. 
     [self.clientPresentationDef.propertyGroups insertGroup:mainGroup atIndex:0];
     
     //define a property group
-    SCPropertyGroup *clientRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Subjective Ratings" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"comfortLevelscaleData", @"stressLevelScaleData", @"happinessLevelScaleData",  @"energyLevelScaleData",  @"hearingLevelScaleData",  @"painLevelScaleData", @"sexualSatisfactionScaleData", @"trustScaleData",  @"symptomSeverityScaleData",  @"suicidalityData",       nil]];
+    SCPropertyGroup *clientRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Subjective Ratings" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"comfortLevelscaleData", @"stressLevelScaleData", @"happinessLevelScaleData",  @"energyLevelScaleData",  @"hearingLevelScaleData",  @"painLevelScaleData", @"sexualSatisfactionScaleData", @"trustScaleData",  @"symptomSeverityScaleData",  @"suicidalityData",       nil]];
     [self.clientPresentationDef.propertyGroups insertGroup:clientRatingsGroup atIndex:1];
     
     //define a property group
-    SCPropertyGroup *clinicianRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Clinician Subjective Ratings" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"allianceScaleData",   @"depthScaleData",      nil]];
+    SCPropertyGroup *clinicianRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Clinician Subjective Ratings" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"allianceScaleData",   @"depthScaleData",      nil]];
     [self.clientPresentationDef.propertyGroups insertGroup:clinicianRatingsGroup atIndex:2];
     
     //define a property group
-    SCPropertyGroup *clientDescGroup = [SCPropertyGroup groupWithHeaderTitle:@"Client's Description of Problem" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"clientsDesc", nil]];
+    SCPropertyGroup *clientDescGroup = [SCPropertyGroup groupWithHeaderTitle:@"Client's Description of Problem" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"clientsDesc", nil]];
     [self.clientPresentationDef.propertyGroups addGroup:clientDescGroup];
     
     //define a property group
-    SCPropertyGroup *clientPresentationNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"notes", nil]];
+    SCPropertyGroup *clientPresentationNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"notes", nil]];
     
     // add the clientPresentationNotesGroup property group to the clientPresentation class. 
     [self.clientPresentationDef.propertyGroups addGroup:clientPresentationNotesGroup];
@@ -482,62 +480,62 @@
     
     
 //    //define a property group
-//    SCPropertyGroup *affectNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"affectNotes"]];
+//    SCPropertyGroup *affectNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"affectNotes"]];
 //    
 //    // add the affectNotes property group to the behavioralObservationsDef class. 
 //    [behavioralObservationsDef.propertyGroups addGroup:affectNotesGroup];
 //    
 //    //define a property group
-//    SCPropertyGroup *appearanceNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"appearanceNotes"]];
+//    SCPropertyGroup *appearanceNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"appearanceNotes"]];
 //    
 //    // add the appearanceNotes property group to the behavioralObservationsDef class. 
 //    [behavioralObservationsDef.propertyGroups addGroup:appearanceNotesGroup];
 //    
 //    
 //      //define a property group
-//    SCPropertyGroup *attentionNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"attentionNotes"]];
+//    SCPropertyGroup *attentionNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"attentionNotes"]];
 //    
 //    // add the attentionNotes property group to the behavioralObservationsDef class. 
 //    [behavioralObservationsDef.propertyGroups addGroup:attentionNotesGroup];
 //    
 //      //define a property group
-//    SCPropertyGroup *attitudeNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"attitudeNotes"]];
+//    SCPropertyGroup *attitudeNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"attitudeNotes"]];
 //    
 //    // add the attitudeNotes property group to the behavioralObservationsDef class. 
 //    [behavioralObservationsDef.propertyGroups addGroup:attitudeNotesGroup];
 //    
 //        //define a property group
-//    SCPropertyGroup *interpersonalNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"interpersonalNotes"]];
+//    SCPropertyGroup *interpersonalNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"interpersonalNotes"]];
 //    
 //    // add the interpersonalNotes property group to the behavioralObservationsDef class. 
 //    [behavioralObservationsDef.propertyGroups addGroup:interpersonalNotesGroup];
 //   
 //      //define a property group
-//    SCPropertyGroup *languageNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"languageNotes"]];
+//    SCPropertyGroup *languageNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"languageNotes"]];
 //    
 //    // add the languageNotes property group to the behavioralObservationsDef class. 
 //    [behavioralObservationsDef.propertyGroups addGroup:languageNotesGroup];
 //    
 //       //define a property group
-//    SCPropertyGroup *notableBehaviorsGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"notableBehaviors"]];
+//    SCPropertyGroup *notableBehaviorsGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"notableBehaviors"]];
 //    
 //    // add the notableBehaviors property group to the behavioralObservationsDef class. 
 //    [behavioralObservationsDef.propertyGroups addGroup:notableBehaviorsGroup];
 //    
 //    
 //      //define a property group
-//    SCPropertyGroup *notableImagryGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"notableImagry"]];
+//    SCPropertyGroup *notableImagryGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"notableImagry"]];
 //   
 //    // add the notableImagry property group to the behavioralObservationsDef class. 
 //    [behavioralObservationsDef.propertyGroups addGroup:notableImagryGroup];
 //        //define a property group
-//    SCPropertyGroup *psychomotorNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"psychomotorNotes"]];
+//    SCPropertyGroup *psychomotorNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"psychomotorNotes"]];
 //    
 //    // add the psychomotorNotes property group to the behavioralObservationsDef class. 
 //    [behavioralObservationsDef.propertyGroups addGroup:psychomotorNotesGroup];
 //   
 //      //define a property group
-//    SCPropertyGroup *sensoryNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"sensoryNotes"]];
+//    SCPropertyGroup *sensoryNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"sensoryNotes"]];
 //    
 //    // add the sensoryNotes property group to the behavioralObservationsDef class. 
 //    [behavioralObservationsDef.propertyGroups addGroup:sensoryNotesGroup];
@@ -554,7 +552,7 @@
 //    
 //    
 //    
-//    SCCustomPropertyDefinition *titleProperty = [SCCustomPropertyDefinition definitionWithName:@"Facial Expressions"withuiElementClass:[BehaviorPickerCell class] withObjectBindings:pickerDataBindings];
+//    SCCustomPropertyDefinition *titleProperty = [SCCustomPropertyDefinition definitionWithName:@"Facial Expressions"withuiElementClass:[BehaviorPickerCell class] objectBindings:pickerDataBindings];
 //	[behavioralObservationsDef insertPropertyDefinition:titleProperty atIndex:2];
 	
     //create the dictionary with the data bindings
@@ -615,7 +613,7 @@
 
     detailTableViewModel.delegate=self;
 
-    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
 
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
@@ -639,7 +637,7 @@
         if ([scaleView isKindOfClass:[UISegmentedControl class]]) 
         {
         
-            SCControlCell *controlCell=(SCControlCell *)cell;
+            SCCustomCell *controlCell=(SCCustomCell *)cell;
             UILabel *label =(UILabel *)[cell viewWithTag:71];
             NSString *propertyNameString=[controlCell.objectBindings valueForKey:@"2"];
             label.text=propertyNameString;
@@ -688,8 +686,8 @@
         
         
         
-        //        SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Age" withBoundObject:nil withPropertyName:@"Age"];
-        //        SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Wechsler Age" withBoundObject:nil withPropertyName:@"WechslerAge"];
+        //        SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Age" boundObject:nil withPropertyName:@"Age"];
+        //        SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Wechsler Age" boundObject:nil withPropertyName:@"WechslerAge"];
         //        
         //        [section addCell:actualAge];
         //        [section addCell:wechslerAge];
@@ -711,8 +709,8 @@
         
        
       
-            SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" withBoundObject:nil withPropertyName:@"TestAge"];
-            SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Wechsler Test Age" withBoundObject:nil withPropertyName:@"WechslerTestAge"];
+            SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" boundObject:nil propertyName:@"TestAge"];
+            SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Wechsler Test Age" boundObject:nil propertyName:@"WechslerTestAge"];
             
             [section addCell:actualAge];
             [section addCell:wechslerAge];

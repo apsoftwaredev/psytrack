@@ -17,7 +17,7 @@
  */
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "SCTableViewModel.h"
+
 #import "ClientsViewController_Shared.h"
 #import "DemographicDetailViewController_Shared.h"
 

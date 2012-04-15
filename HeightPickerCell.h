@@ -15,9 +15,9 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewModel.h"
-#import "MyPickerView.h"
 
+#import "MyPickerView.h"
+#import <UIKit/UIKit.h>
 
 @interface HeightPickerCell : SCLabelCell <UIPickerViewDataSource, UIPickerViewDelegate>
 {

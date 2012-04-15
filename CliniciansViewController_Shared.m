@@ -122,13 +122,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Gracefully handle reloading the view controller after a memory warning
-    self.tableModel = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
-    if(tableModel_)
-    {
-        [tableModel_ replaceModeledTableViewWith:self.tableView];
-        return;
-    }
+   
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
@@ -152,7 +146,7 @@
     NSString *textFieldAndLableNibName=nil;
     NSString *scaleDataCellNibName=nil;
     NSString *switchAndLabelCellName=nil;
-    if ([SCHelper is_iPad]) {
+    if ([SCUtilities is_iPad]) {
         
         textFieldAndLableNibName=@"TextFieldAndLabelCell_iPad";
         shortFieldCellNibName=@"ShortFieldCell_iPad";
@@ -189,13 +183,10 @@
   
 	
     
-    SCClassDefinition *degreeDef = [SCClassDefinition definitionWithEntityName:@"DegreeEntity" 
-													  withManagedObjectContext:managedObjectContext
-															 withPropertyNames:[NSArray arrayWithObjects:@"degree",
-																				@"school", @"dateAwarded",@"notes",nil]];
+        SCEntityDefinition *degreeDef = [SCEntityDefinition definitionWithEntityName:@"DegreeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"degree",
+                                                                                                                                                              @"school", @"dateAwarded",@"notes",nil]];
 	
-    
-    
+  
     
     //set the order attributes name defined in the Degree Entity
     degreeDef.orderAttributeName=@"order";
@@ -226,7 +217,7 @@
     /*	BEGIN Class Definition and attributes for the Degree Name Entity */
     /****************************************************************************************/ 
   
-    SCClassDefinition *degreeNameDef = [SCClassDefinition definitionWithEntityName:@"DegreeNameEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"degreeName", @"notes",nil]];
+    SCEntityDefinition *degreeNameDef = [SCEntityDefinition definitionWithEntityName:@"DegreeNameEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"degreeName", @"notes",nil]];
     
     
     //set the order attributes name defined in the DegreeName Entity
@@ -265,7 +256,7 @@
     /*	BEGIN Class Definition and attributes for the School Entity */
     /****************************************************************************************/ 
       
-    SCClassDefinition *schoolNameDef = [SCClassDefinition definitionWithEntityName:@"SchoolEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"schoolName", nil]];
+    SCEntityDefinition *schoolNameDef = [SCEntityDefinition definitionWithEntityName:@"SchoolEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"schoolName", nil]];
     
     //set the order attributes name defined in the School Name Entity
       schoolNameDef.orderAttributeName=@"order";
@@ -308,9 +299,9 @@
     
     
     //Create a class definition for Influence entity
-	SCClassDefinition *influenceDef = [SCClassDefinition definitionWithEntityName:@"InfluenceEntity" 
-                                                         withManagedObjectContext:managedObjectContext
-                                                                withPropertyNames:[NSArray arrayWithObjects:@"influence",@"notes", nil]];
+	SCEntityDefinition *influenceDef = [SCEntityDefinition definitionWithEntityName:@"InfluenceEntity" 
+                                                         managedObjectContext:managedObjectContext
+                                                                propertyNames:[NSArray arrayWithObjects:@"influence",@"notes", nil]];
     
         //set the order attributes name defined in the influence Entity
     influenceDef.orderAttributeName=@"order";
@@ -321,19 +312,19 @@
     influenceNamePropertyDef.type=SCPropertyTypeTextView;
     
     //Create a class definition for Employment entity
-	SCClassDefinition *employmentDef = [SCClassDefinition definitionWithEntityName:@"EmploymentEntity" 
-                                                          withManagedObjectContext:managedObjectContext
-                                                                 withPropertyNames:[NSArray arrayWithObjects:@"employer",@"positions",@"dateStarted",
+	SCEntityDefinition *employmentDef = [SCEntityDefinition definitionWithEntityName:@"EmploymentEntity" 
+                                                          managedObjectContext:managedObjectContext
+                                                                 propertyNames:[NSArray arrayWithObjects:@"employer",@"positions",@"dateStarted",
                                                                                     @"dateEnded",@"notes", nil]];
 	
     //set the order attributes name defined in the Employment Entity
     employmentDef.orderAttributeName=@"order";
-    SCClassDefinition *employmentTitleDef = [SCClassDefinition definitionWithEntityName:@"EmploymentTitleEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"jobTitle", @"desc", nil]];
+    SCEntityDefinition *employmentTitleDef = [SCEntityDefinition definitionWithEntityName:@"EmploymentTitleEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"jobTitle", @"desc", nil]];
     
     //set the order attributes name defined in the Employment Title Entity
     employmentTitleDef.orderAttributeName=@"order";
     
-    SCClassDefinition *employmentPositionDef = [SCClassDefinition definitionWithEntityName:@"EmploymentPositionEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects: @"jobTitle",@"department",@"startedDate", @"endedDate", @"notes", nil]];
+    SCEntityDefinition *employmentPositionDef = [SCEntityDefinition definitionWithEntityName:@"EmploymentPositionEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects: @"jobTitle",@"department",@"startedDate", @"endedDate", @"notes", nil]];
     
     //set the order attributes name defined in the Employment Position Entity
     employmentPositionDef.orderAttributeName=@"order";
@@ -342,14 +333,14 @@
     SCPropertyDefinition *employmentPositionDepartmentPropertyDef = [employmentPositionDef propertyDefinitionWithName:@"department"];
     employmentPositionDepartmentPropertyDef.type=SCPropertyTypeTextView;
     
-//    SCPropertyGroup *nonClinicalSupNameGroup = [SCPropertyGroup groupWithHeaderTitle:@"clinician of My clinician Name" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"title", @"firstName",@"middleName",@"lastName",@"suffix",@"credentialInitials", nil]];
+//    SCPropertyGroup *nonClinicalSupNameGroup = [SCPropertyGroup groupWithHeaderTitle:@"clinician of My clinician Name" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"title", @"firstName",@"middleName",@"lastName",@"suffix",@"credentialInitials", nil]];
 //    
     
-//    SCPropertyGroup *nonClinicalSupDatesGroup = [SCPropertyGroup groupWithHeaderTitle:@"Supervision Dates" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"started",@"ended", nil]];
+//    SCPropertyGroup *nonClinicalSupDatesGroup = [SCPropertyGroup groupWithHeaderTitle:@"Supervision Dates" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"started",@"ended", nil]];
     
-//    SCPropertyGroup *nonClinicalSupContactGroup = [SCPropertyGroup groupWithHeaderTitle:@"Contact Information" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"addresses", @"phoneNumbers",@"emailAddresses", nil]];
+//    SCPropertyGroup *nonClinicalSupContactGroup = [SCPropertyGroup groupWithHeaderTitle:@"Contact Information" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"addresses", @"phoneNumbers",@"emailAddresses", nil]];
     
-//    SCPropertyGroup *nonClinicalSupNotesGroup = [SCPropertyGroup groupWithHeaderTitle:@"Notes" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"notes"]];
+//    SCPropertyGroup *nonClinicalSupNotesGroup = [SCPropertyGroup groupWithHeaderTitle:@"Notes" footerTitle:nil propertyNames:[NSArray arrayWithObject:@"notes"]];
     
 //    SCPropertyGroupArray *nonClinicalSupervisorPropetyGroupArray=[[SCPropertyGroupArray alloc]init];
 //    [nonClinicalSupervisorPropetyGroupArray addGroup:nonClinicalSupNameGroup];
@@ -357,7 +348,7 @@
 //    [nonClinicalSupervisorPropetyGroupArray addGroup:nonClinicalSupContactGroup];
 //    [nonClinicalSupervisorPropetyGroupArray addGroup:nonClinicalSupNotesGroup];
     
-//    SCClassDefinition *nonClinicalSupervisorDef =[SCClassDefinition definitionWithEntityName:@"NonClinicalSupervisorEntity" withManagedObjectContext:managedObjectContext withPropertyGroups:nonClinicalSupervisorPropetyGroupArray];
+//    SCEntityDefinition *nonClinicalSupervisorDef =[SCEntityDefinition definitionWithEntityName:@"NonClinicalSupervisorEntity" managedObjectContext:managedObjectContext withPropertyGroups:nonClinicalSupervisorPropetyGroupArray];
     
     //set the order attributes name defined in the Non Clinical  Entity
 //    nonClinicalSupervisorDef.orderAttributeName=@"order";
@@ -445,7 +436,7 @@
     
     
     
-    SCClassDefinition *employerDef = [SCClassDefinition definitionWithEntityName:@"EmployerEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"employerName",@"notes", nil]];
+    SCEntityDefinition *employerDef = [SCEntityDefinition definitionWithEntityName:@"EmployerEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"employerName",@"notes", nil]];
     
     //set the order attributes name defined in the Employer Entity    
     employerDef.orderAttributeName=@"order";
@@ -488,9 +479,9 @@
     
     
     //Create a class definition for Award entity
-	SCClassDefinition *awardDef = [SCClassDefinition definitionWithEntityName:@"AwardEntity" 
-                                                     withManagedObjectContext:managedObjectContext
-                                                            withPropertyNames:[NSArray arrayWithObjects:@"awardName",@"dateAwarded",@"desc", nil]];
+	SCEntityDefinition *awardDef = [SCEntityDefinition definitionWithEntityName:@"AwardEntity" 
+                                                     managedObjectContext:managedObjectContext
+                                                            propertyNames:[NSArray arrayWithObjects:@"awardName",@"dateAwarded",@"desc", nil]];
     
     //set the order attributes name defined in the Award Entity    
     awardDef.orderAttributeName=@"order";
@@ -506,15 +497,15 @@
     awardNamePropertyDef.type=SCPropertyTypeTextView;
     
     //Create a class definition for Membership entity
-	SCClassDefinition *membershipDef = [SCClassDefinition definitionWithEntityName:@"MembershipEntity" 
-                                                          withManagedObjectContext:managedObjectContext
-                                                                 withPropertyNames:[NSArray arrayWithObjects:@"organization",@"memberSince",@"renewDate",@"desc", nil]];
+	SCEntityDefinition *membershipDef = [SCEntityDefinition definitionWithEntityName:@"MembershipEntity" 
+                                                          managedObjectContext:managedObjectContext
+                                                                 propertyNames:[NSArray arrayWithObjects:@"organization",@"memberSince",@"renewDate",@"desc", nil]];
     
     //set the order attributes name defined in the Membership Entity   
     membershipDef.orderAttributeName=@"order";
-    SCClassDefinition *membershipOrganizationDef = [SCClassDefinition definitionWithEntityName:@"MembershipOrganizationEntity" 
-                                                                      withManagedObjectContext:managedObjectContext
-                                                                             withPropertyNames:[NSArray arrayWithObjects:@"organization",@"notes", nil]];
+    SCEntityDefinition *membershipOrganizationDef = [SCEntityDefinition definitionWithEntityName:@"MembershipOrganizationEntity" 
+                                                                      managedObjectContext:managedObjectContext
+                                                                             propertyNames:[NSArray arrayWithObjects:@"organization",@"notes", nil]];
     
     //set the order attributes name defined in the Membership Organization Entity    
     membershipOrganizationDef.orderAttributeName=@"order";
@@ -554,9 +545,9 @@
     
     membershipDescPropertyDef.type=SCPropertyTypeTextView;
     //Create a class definition for Degree entity
-	SCClassDefinition *licenseNumberDef = [SCClassDefinition definitionWithEntityName:@"LicenseNumberEntity" 
-                                                             withManagedObjectContext:managedObjectContext
-                                                                    withPropertyNames:[NSArray arrayWithObjects:@"licenseName",@"governingBody",@"licenseNumber",@"status",
+	SCEntityDefinition *licenseNumberDef = [SCEntityDefinition definitionWithEntityName:@"LicenseNumberEntity" 
+                                                             managedObjectContext:managedObjectContext
+                                                                    propertyNames:[NSArray arrayWithObjects:@"licenseName",@"governingBody",@"licenseNumber",@"status",
                                                                                        @"renewDate",@"notes", nil]];
     
     
@@ -570,21 +561,21 @@
     
     
     //Create a class definition for License entity
-	SCClassDefinition *licenseDef = [SCClassDefinition definitionWithEntityName:@"LicenseEntity" 
-													   withManagedObjectContext:managedObjectContext
-															  withPropertyNames:[NSArray arrayWithObjects:@"title",@"notes",nil]];
+	SCEntityDefinition *licenseDef = [SCEntityDefinition definitionWithEntityName:@"LicenseEntity" 
+													   managedObjectContext:managedObjectContext
+															  propertyNames:[NSArray arrayWithObjects:@"title",@"notes",nil]];
 	
 	
     
     //Create a class definition for the governingBody Entity
-    SCClassDefinition *governingBodyDef = [SCClassDefinition definitionWithEntityName:@"GoverningBodyEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"body",@"country", nil]];
+    SCEntityDefinition *governingBodyDef = [SCEntityDefinition definitionWithEntityName:@"GoverningBodyEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"body",@"country", nil]];
     
     //Create a class definition for the country Entity
-    SCClassDefinition *countryDef = [SCClassDefinition definitionWithEntityName:@"CountryEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"country",@"code", nil]];
+    SCEntityDefinition *countryDef = [SCEntityDefinition definitionWithEntityName:@"CountryEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"country",@"code", nil]];
     
 
     
@@ -679,26 +670,26 @@
     countryPropertyDef.attributes = countrySelectionAttribs;
     
     //Create a class definition for Certification entity
-	SCClassDefinition *certificationDef = [SCClassDefinition definitionWithEntityName:@"CertificationEntity" 
-															 withManagedObjectContext:managedObjectContext
-																	withPropertyNames:[NSArray arrayWithObjects:@"certificationName",@"certifiedBy",@"completeDate",@"notes",
+	SCEntityDefinition *certificationDef = [SCEntityDefinition definitionWithEntityName:@"CertificationEntity" 
+															 managedObjectContext:managedObjectContext
+																	propertyNames:[NSArray arrayWithObjects:@"certificationName",@"certifiedBy",@"completeDate",@"notes",
 																					   nil]];	
     //set the order attributes name defined in the Certification Entity	
     certificationDef.orderAttributeName=@"order";
     
     //Create a class definition for Certification entity
-	SCClassDefinition *certificationNameDef = [SCClassDefinition definitionWithEntityName:@"CertificationNameEntity" 
-                                                                 withManagedObjectContext:managedObjectContext
-                                                                        withPropertyNames:[NSArray arrayWithObjects:@"certName",@"desc",
+	SCEntityDefinition *certificationNameDef = [SCEntityDefinition definitionWithEntityName:@"CertificationNameEntity" 
+                                                                 managedObjectContext:managedObjectContext
+                                                                        propertyNames:[NSArray arrayWithObjects:@"certName",@"desc",
                                                                                            nil]];	
     
     //set the order attributes name defined in the Certification Name Entity
     certificationNameDef.orderAttributeName=@"order";
     
     //Create a class definition for Certification Authority entity
-	SCClassDefinition *certificationAuthorityDef = [SCClassDefinition definitionWithEntityName:@"CertificationAuthorityEntity" 
-                                                                      withManagedObjectContext:managedObjectContext
-                                                                             withPropertyNames:[NSArray arrayWithObjects:@"certAuthority",@"notes",
+	SCEntityDefinition *certificationAuthorityDef = [SCEntityDefinition definitionWithEntityName:@"CertificationAuthorityEntity" 
+                                                                      managedObjectContext:managedObjectContext
+                                                                             propertyNames:[NSArray arrayWithObjects:@"certAuthority",@"notes",
                                                                                                 nil]];	
  
     //set the order attributes name defined in the Certification Authority Entity
@@ -761,9 +752,9 @@
     
     
 	//Create a class definition for Specialty entity
-	SCClassDefinition *specialtyDef = [SCClassDefinition definitionWithEntityName:@"SpecialtyEntity" 
-														 withManagedObjectContext:managedObjectContext
-																withPropertyNames:[NSArray arrayWithObjects: @"specialty", @"startDate",@"notes",
+	SCEntityDefinition *specialtyDef = [SCEntityDefinition definitionWithEntityName:@"SpecialtyEntity" 
+														 managedObjectContext:managedObjectContext
+																propertyNames:[NSArray arrayWithObjects: @"specialty", @"startDate",@"notes",
 																				   nil]];	
 	
     
@@ -775,9 +766,9 @@
                                                                displayDatePickerInDetailView:NO];
     
     
-    SCClassDefinition *specialtyNameDef = [SCClassDefinition definitionWithEntityName:@"SpecialtyNameEntity" 
-                                                             withManagedObjectContext:managedObjectContext
-                                                                    withPropertyNames:[NSArray arrayWithObjects: @"specialtyName",@"desc",
+    SCEntityDefinition *specialtyNameDef = [SCEntityDefinition definitionWithEntityName:@"SpecialtyNameEntity" 
+                                                             managedObjectContext:managedObjectContext
+                                                                    propertyNames:[NSArray arrayWithObjects: @"specialtyName",@"desc",
                                                                                        nil]];	
     
     //set the order attributes name defined in the Specialty Name Entity
@@ -814,17 +805,17 @@
     
     
     //Create a class definition for Publication entity
-	SCClassDefinition *publicationDef = [SCClassDefinition definitionWithEntityName:@"PublicationEntity" 
-                                                           withManagedObjectContext:managedObjectContext
-                                                                  withPropertyNames:[NSArray arrayWithObjects:@"publicationTitle",@"authors",@"datePublished", @"publisher",@"volume", @"pageNumbers",@"publicationType",@"notes",
+	SCEntityDefinition *publicationDef = [SCEntityDefinition definitionWithEntityName:@"PublicationEntity" 
+                                                           managedObjectContext:managedObjectContext
+                                                                  propertyNames:[NSArray arrayWithObjects:@"publicationTitle",@"authors",@"datePublished", @"publisher",@"volume", @"pageNumbers",@"publicationType",@"notes",
                                                                                      nil]];
     
     //set the order attributes name defined in the Publication Entity    
     publicationDef.orderAttributeName=@"order";
     publicationDef.titlePropertyName=@"publicationTitle;datePublished";
-    SCClassDefinition *publicationTypeDef = [SCClassDefinition definitionWithEntityName:@"PublicationTypeEntity" 
-                                                               withManagedObjectContext:managedObjectContext
-                                                                      withPropertyNames:[NSArray arrayWithObjects: @"publicationType",
+    SCEntityDefinition *publicationTypeDef = [SCEntityDefinition definitionWithEntityName:@"PublicationTypeEntity" 
+                                                               managedObjectContext:managedObjectContext
+                                                                      propertyNames:[NSArray arrayWithObjects: @"publicationType",
                                                                                          nil]];
     
     
@@ -864,17 +855,17 @@
     
     
     //Create a class definition for Orientation History entity
-	SCClassDefinition *orientationHistoryDef = [SCClassDefinition definitionWithEntityName:@"OrientationHistoryEntity" 
-                                                                  withManagedObjectContext:managedObjectContext
-                                                                         withPropertyNames:[NSArray arrayWithObjects:@"orientation",@"dateAdopted",@"endDate", @"notes",
+	SCEntityDefinition *orientationHistoryDef = [SCEntityDefinition definitionWithEntityName:@"OrientationHistoryEntity" 
+                                                                  managedObjectContext:managedObjectContext
+                                                                         propertyNames:[NSArray arrayWithObjects:@"orientation",@"dateAdopted",@"endDate", @"notes",
                                                                                             nil]];
     
     //set the order attributes name defined in the (theoretical)Orientation Entity  
     orientationHistoryDef.orderAttributeName=@"order";
     //Create a class definition for Orientation entity
-    SCClassDefinition *orientationDef = [SCClassDefinition definitionWithEntityName:@"OrientationEntity" 
-                                                           withManagedObjectContext:managedObjectContext
-                                                                  withPropertyNames:[NSArray arrayWithObjects: @"orientation", @"desc",
+    SCEntityDefinition *orientationDef = [SCEntityDefinition definitionWithEntityName:@"OrientationEntity" 
+                                                           managedObjectContext:managedObjectContext
+                                                                  propertyNames:[NSArray arrayWithObjects: @"orientation", @"desc",
                                                                                      nil]];
     
     //set the order attributes name defined in the Orientation Entity  
@@ -932,9 +923,9 @@
     /* one clinician can have many client referrals */
     
     //Create a class definition for ReferralEntity to track the referrals
-    SCClassDefinition *referralDef = [SCClassDefinition definitionWithEntityName:@"ReferralEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"client",@"referralDate",@"referralInOrOut", @"notes", nil]];
+    SCEntityDefinition *referralDef = [SCEntityDefinition definitionWithEntityName:@"ReferralEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"client",@"referralDate",@"referralInOrOut", @"notes", nil]];
     
     //Do some property definition customization for the referralDef Entity
     
@@ -956,7 +947,7 @@
 	
     //create the custom property definition
     SCCustomPropertyDefinition *clientDataProperty = [SCCustomPropertyDefinition definitionWithName:@"CLientData"
-                                                                                 withuiElementClass:[ClientsSelectionCell class] withObjectBindings:clientDataBindings];
+                                                                                 withuiElementClass:[ClientsSelectionCell class] objectBindings:clientDataBindings];
 	
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
@@ -1047,9 +1038,9 @@
     /****************************************************************************************/ 
     
     //Create a class definition for clinician entity
-	self.clinicianDef = [SCClassDefinition definitionWithEntityName:@"ClinicianEntity" 
-                                                         withManagedObjectContext:managedObjectContext 
-                                                                withPropertyNames:[NSArray arrayWithObjects: @"degrees", 
+	self.clinicianDef = [SCEntityDefinition definitionWithEntityName:@"ClinicianEntity" 
+                                                         managedObjectContext:managedObjectContext 
+                                                                propertyNames:[NSArray arrayWithObjects: @"degrees", 
                                                                                    @"licenseNumbers", @"certifications",@"specialties",@"publications",@"orientationHistory",@"awards",@"memberships",@"influences",@"employments",
                                                                                    @"demographicInfo",@"startedPracticing",@"clinicianType", @"atMyCurrentSite",  @"myCurrentSupervisor",@"myPastSupervisor",@"referrals",@"isPrescriber",@"logs",@"bio",@"notes", nil]];
 	
@@ -1068,8 +1059,8 @@
                                        dictionaryWithObjects:[NSArray arrayWithObjects:@"prefix",[NSNumber numberWithBool:YES],nil]
                                        forKeys:[NSArray arrayWithObjects:@"34",@"70",nil]]; // 1 & 2 are the control tags
 	SCCustomPropertyDefinition *titleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"TitleData"
-                                                                              withuiElementNibName:shortFieldCellNibName 
-                                                                                withObjectBindings:titleDataBindings];
+                                                                              uiElementNibName:shortFieldCellNibName 
+                                                                                objectBindings:titleDataBindings];
 	
     
     
@@ -1083,8 +1074,8 @@
                                            dictionaryWithObjects:[NSArray arrayWithObject:@"firstName"] 
                                            forKeys:[NSArray arrayWithObject:@"50"]]; // 1 & 2 are the control tags
 	SCCustomPropertyDefinition *firstNameDataProperty = [SCCustomPropertyDefinition definitionWithName:@"FirstNameData"
-                                                                                  withuiElementNibName:textFieldAndLableNibName 
-                                                                                    withObjectBindings:firstNameDataBindings];
+                                                                                  uiElementNibName:textFieldAndLableNibName 
+                                                                                    objectBindings:firstNameDataBindings];
 	
     
     
@@ -1100,8 +1091,8 @@
 	
     
     SCCustomPropertyDefinition *middleNameDataProperty = [SCCustomPropertyDefinition definitionWithName:@"MiddleNameData"
-                                                                                   withuiElementNibName:textFieldAndLableNibName 
-                                                                                     withObjectBindings:middleNameDataBindings];
+                                                                                   uiElementNibName:textFieldAndLableNibName 
+                                                                                     objectBindings:middleNameDataBindings];
 	
     
     
@@ -1117,8 +1108,8 @@
                                           dictionaryWithObjects:[NSArray arrayWithObject:@"lastName"] 
                                           forKeys:[NSArray arrayWithObject:@"50"]]; // 1 & 2 are the control tags
 	SCCustomPropertyDefinition *lastNameDataProperty = [SCCustomPropertyDefinition definitionWithName:@"LastNameData"
-                                                                                 withuiElementNibName:textFieldAndLableNibName 
-                                                                                   withObjectBindings:lastNameDataBindings];
+                                                                                 uiElementNibName:textFieldAndLableNibName 
+                                                                                   objectBindings:lastNameDataBindings];
 	
     
     
@@ -1132,8 +1123,8 @@
                                         dictionaryWithObjects:[NSArray arrayWithObject:@"suffix"] 
                                         forKeys:[NSArray arrayWithObject:@"50"]]; // 1 & 2 are the control tags
 	SCCustomPropertyDefinition *suffixDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SuffixData"
-                                                                               withuiElementNibName:textFieldAndLableNibName 
-                                                                                 withObjectBindings:suffixDataBindings];
+                                                                               uiElementNibName:textFieldAndLableNibName 
+                                                                                 objectBindings:suffixDataBindings];
 	
     
     
@@ -1147,8 +1138,8 @@
 //	
 //    
 //    SCCustomPropertyDefinition *credentialInitialsDataProperty = [SCCustomPropertyDefinition definitionWithName:@"CredentialInitialsData"
-//                                                                                           withuiElementNibName:textFieldAndLableNibName 
-//                                                                                             withObjectBindings:credentialInitialsDataBindings];
+//                                                                                           uiElementNibName:textFieldAndLableNibName 
+//                                                                                             objectBindings:credentialInitialsDataBindings];
 //	
 //    
 //    
@@ -1157,9 +1148,9 @@
 //    [self.clinicianDef insertPropertyDefinition:credentialInitialsDataProperty atIndex:5];
     
     //Create a class definition for the cliniciantypeEntity
-    SCClassDefinition *clinicianTypeDef = [SCClassDefinition definitionWithEntityName:@"ClinicianTypeEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"clinicianType", nil]];
+    SCEntityDefinition *clinicianTypeDef = [SCEntityDefinition definitionWithEntityName:@"ClinicianTypeEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"clinicianType", nil]];
     
     //Do some property definition customization for the clinician Type Entity defined in clinicianTypeDef
     
@@ -1271,36 +1262,36 @@
     /*
     
     //Create the class definitions for contactInformation Entity
-    SCClassDefinition *contactInformationDef = [SCClassDefinition definitionWithEntityName:@"ContactInformationEntity" 
-                                                                  withManagedObjectContext:managedObjectContext
-                                                                         withPropertyNames:[NSArray arrayWithObjects:@"addresses", @"phoneNumbers",@"emailAddresses", nil]];	
+    SCEntityDefinition *contactInformationDef = [SCEntityDefinition definitionWithEntityName:@"ContactInformationEntity" 
+                                                                  managedObjectContext:managedObjectContext
+                                                                         propertyNames:[NSArray arrayWithObjects:@"addresses", @"phoneNumbers",@"emailAddresses", nil]];	
     
     
     //Create link to Addressbook
     
     
-    SCCustomPropertyDefinition *linkToAddressBookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"LinkToAddressBookButton" withuiElementClass:[ButtonCell class] withObjectBindings:nil];
+    SCCustomPropertyDefinition *linkToAddressBookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"LinkToAddressBookButton" withuiElementClass:[ButtonCell class] objectBindings:nil];
     [contactInformationDef addPropertyDefinition:linkToAddressBookButtonProperty];                                                         
     
     
-    SCCustomPropertyDefinition *addOrEditContactInAddressbookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"AddOrEditAddressBookButton" withuiElementClass:[ButtonCell class] withObjectBindings:nil];
+    SCCustomPropertyDefinition *addOrEditContactInAddressbookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"AddOrEditAddressBookButton" withuiElementClass:[ButtonCell class] objectBindings:nil];
     [contactInformationDef addPropertyDefinition:addOrEditContactInAddressbookButtonProperty];  
     
     
-    SCCustomPropertyDefinition *viewPersonABBookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"ViewPersonABButton" withuiElementClass:[ButtonCell class] withObjectBindings:nil];
+    SCCustomPropertyDefinition *viewPersonABBookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"ViewPersonABButton" withuiElementClass:[ButtonCell class] objectBindings:nil];
     [contactInformationDef addPropertyDefinition:viewPersonABBookButtonProperty]; 
     
-    SCPropertyGroup *contactInformationpsyTrackGroup =[SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"addresses", @"phoneNumbers",@"emailAddresses", nil]];
+    SCPropertyGroup *contactInformationpsyTrackGroup =[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"addresses", @"phoneNumbers",@"emailAddresses", nil]];
     
-    SCPropertyGroup *contactInformationAddressbookButtonsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Addressbook Connection" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"LinkToAddressBookButton",@"AddOrEditAddressBookButton",@"ViewPersonABButton", nil ]];
+    SCPropertyGroup *contactInformationAddressbookButtonsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Addressbook Connection" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"LinkToAddressBookButton",@"AddOrEditAddressBookButton",@"ViewPersonABButton", nil ]];
     
     [contactInformationDef.propertyGroups addGroup:contactInformationpsyTrackGroup];
     [contactInformationDef.propertyGroups addGroup:contactInformationAddressbookButtonsGroup];
     
     //Create the class definition for Phone Entity
-    SCClassDefinition *phoneDef = [SCClassDefinition definitionWithEntityName:@"PhoneEntity" 
-													 withManagedObjectContext:managedObjectContext
-															withPropertyNames:[NSArray arrayWithObjects:@"phoneName",@"phoneNumber",
+    SCEntityDefinition *phoneDef = [SCEntityDefinition definitionWithEntityName:@"PhoneEntity" 
+													 managedObjectContext:managedObjectContext
+															propertyNames:[NSArray arrayWithObjects:@"phoneName",@"phoneNumber",
 																			   @"extention",@"privatePhone",
                                                                                
                                                                                nil]];	
@@ -1309,18 +1300,18 @@
     phoneDef.orderAttributeName=@"order";
     
     //Create a class definition for Address entity
-	SCClassDefinition *addressDef = [SCClassDefinition definitionWithEntityName:@"AddressEntity" 
-													   withManagedObjectContext:managedObjectContext															
-                                                              withPropertyNames:[NSArray arrayWithObjects:@"addressName",@"postOfficeBox",@"streeetAddressOne",@"streetAddressTwo",										 @"city",@"stateOrProvince",@"country",@"zipCode",@"notes",	@"privateAddress",													  nil]];	
+	SCEntityDefinition *addressDef = [SCEntityDefinition definitionWithEntityName:@"AddressEntity" 
+													   managedObjectContext:managedObjectContext															
+                                                              propertyNames:[NSArray arrayWithObjects:@"addressName",@"postOfficeBox",@"streeetAddressOne",@"streetAddressTwo",										 @"city",@"stateOrProvince",@"country",@"zipCode",@"notes",	@"privateAddress",													  nil]];	
 	
     
     //set the addressDef order attribute name
     addressDef.orderAttributeName=@"order";
     
     //Create a class definition for Email Entity
-	SCClassDefinition *emailDef = [SCClassDefinition definitionWithEntityName:@"EmailEntity" 
-													 withManagedObjectContext:managedObjectContext
-															withPropertyNames:[NSArray arrayWithObject:@"privateEmail"]];
+	SCEntityDefinition *emailDef = [SCEntityDefinition definitionWithEntityName:@"EmailEntity" 
+													 managedObjectContext:managedObjectContext
+															propertyNames:[NSArray arrayWithObject:@"privateEmail"]];
     
     //set the emailDef order attribute Name
     emailDef.orderAttributeName=@"order";
@@ -1347,9 +1338,9 @@
     
     phoneDef.titlePropertyName=@"phoneName;phoneNumber";
 	
-    SCCustomPropertyDefinition *callButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"CallButton" withuiElementClass:[ButtonCell class] withObjectBindings:nil];
+    SCCustomPropertyDefinition *callButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"CallButton" withuiElementClass:[ButtonCell class] objectBindings:nil];
     [phoneDef insertPropertyDefinition:callButtonProperty atIndex:3];
-    SCPropertyGroup *phoneGroup = [SCPropertyGroup groupWithHeaderTitle:@"Phone Number" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"phoneName",@"phoneNumber",@"extention",@"privatePhone", @"CallButton", nil]];
+    SCPropertyGroup *phoneGroup = [SCPropertyGroup groupWithHeaderTitle:@"Phone Number" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"phoneName",@"phoneNumber",@"extention",@"privatePhone", @"CallButton", nil]];
     
     // add the phone property group
     [phoneDef.propertyGroups addGroup:phoneGroup];
@@ -1403,8 +1394,8 @@
                                        dictionaryWithObjects:[NSArray arrayWithObject:@"desc"] 
                                        forKeys:[NSArray arrayWithObjects:@"50", nil]]; // 1,2,3 are the control tags
 	SCCustomPropertyDefinition *emailDescDataProperty = [SCCustomPropertyDefinition definitionWithName:@"EmailDescData"
-                                                                                  withuiElementNibName:textFieldAndLableNibName 
-                                                                                    withObjectBindings:emailDescBindings];
+                                                                                  uiElementNibName:textFieldAndLableNibName 
+                                                                                    objectBindings:emailDescBindings];
 	
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
@@ -1418,8 +1409,8 @@
                                           dictionaryWithObjects:[NSArray arrayWithObject:@"emailAddress"] 
                                           forKeys:[NSArray arrayWithObjects:@"50", nil]]; // 1,2,3 are the control tags
 	SCCustomPropertyDefinition *emailAddressDataProperty = [SCCustomPropertyDefinition definitionWithName:@"EmailAddressData"
-                                                                                     withuiElementNibName:textFieldAndLableNibName 
-                                                                                       withObjectBindings:emailAddressBindings];
+                                                                                     uiElementNibName:textFieldAndLableNibName 
+                                                                                       objectBindings:emailAddressBindings];
 	
     
     
@@ -1433,8 +1424,8 @@
                                               dictionaryWithObjects:[NSArray arrayWithObject:@"sendReports"] 
                                               forKeys:[NSArray arrayWithObjects:@"40", nil]]; // 1,2,3 are the control tags
 	SCCustomPropertyDefinition *emailSendReportsDataProperty = [SCCustomPropertyDefinition definitionWithName:@"EmailSendReportsData"
-                                                                                         withuiElementNibName:switchAndLabelCellName 
-                                                                                           withObjectBindings:emailSendReportsBindings];
+                                                                                         uiElementNibName:switchAndLabelCellName 
+                                                                                           objectBindings:emailSendReportsBindings];
 	
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
     emailSendReportsDataProperty.autoValidate=FALSE;
@@ -1542,9 +1533,9 @@
 	
     */
     //Create a class definition for the logsEntity
-    SCClassDefinition *logDef = [SCClassDefinition definitionWithEntityName:@"LogEntity" 
-                                                   withManagedObjectContext:managedObjectContext
-                                                          withPropertyNames:[NSArray arrayWithObjects:@"dateTime",
+    SCEntityDefinition *logDef = [SCEntityDefinition definitionWithEntityName:@"LogEntity" 
+                                                   managedObjectContext:managedObjectContext
+                                                          propertyNames:[NSArray arrayWithObjects:@"dateTime",
                                                                              @"notes",
                                                                              nil]];
     
@@ -1600,38 +1591,38 @@
     
     
     //create a custom property definition for the addressbook button cell
-    SCCustomPropertyDefinition *addressBookRecordButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"addressBookButtonCell" withuiElementClass:[ButtonCell class] withObjectBindings:nil];
+    SCCustomPropertyDefinition *addressBookRecordButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"addressBookButtonCell" withuiElementClass:[ButtonCell class] objectBindings:nil];
     
     //add the property definition to the clinician class 
     [self.clinicianDef addPropertyDefinition:addressBookRecordButtonProperty];
     
     //create a custom property definition for the delete addressbook link button cell
-    SCCustomPropertyDefinition *deleteABLinkButtonCellProperty = [SCCustomPropertyDefinition definitionWithName:@"deleteABLinkButtonCell" withuiElementClass:[ButtonCell class] withObjectBindings:nil];
+    SCCustomPropertyDefinition *deleteABLinkButtonCellProperty = [SCCustomPropertyDefinition definitionWithName:@"deleteABLinkButtonCell" withuiElementClass:[ButtonCell class] objectBindings:nil];
     
     //add the property definition to the clinician class 
     [self.clinicianDef addPropertyDefinition:deleteABLinkButtonCellProperty];
   
 
     
-    SCPropertyGroup *clinicianListPropertiesGroup=[SCPropertyGroup groupWithHeaderTitle:@"Clinician List Properties" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects: @"atMyCurrentSite", @"myCurrentSupervisor",@"myPastSupervisor", nil]];
+    SCPropertyGroup *clinicianListPropertiesGroup=[SCPropertyGroup groupWithHeaderTitle:@"Clinician List Properties" footerTitle:nil propertyNames:[NSArray arrayWithObjects: @"atMyCurrentSite", @"myCurrentSupervisor",@"myPastSupervisor", nil]];
     
     
     
     
-    SCPropertyGroup *credentialssGroup = [SCPropertyGroup groupWithHeaderTitle:@"Credentials" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"clinicianType",@"licenseNumbers", @"degrees", @"certifications",@"isPrescriber",nil]];
+    SCPropertyGroup *credentialssGroup = [SCPropertyGroup groupWithHeaderTitle:@"Credentials" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"clinicianType",@"licenseNumbers", @"degrees", @"certifications",@"isPrescriber",nil]];
     
-    SCPropertyGroup *professionalHistoryGroup =[SCPropertyGroup groupWithHeaderTitle:@"Professional History" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"employments",@"publications", @"awards", @"memberships",nil]];
+    SCPropertyGroup *professionalHistoryGroup =[SCPropertyGroup groupWithHeaderTitle:@"Professional History" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"employments",@"publications", @"awards", @"memberships",nil]];
     
-    SCPropertyGroup *theoreticalDevelopmentGroup =[SCPropertyGroup groupWithHeaderTitle:@"Theoretical Development" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"specialties",@"influences", @"orientationHistory",nil]];
+    SCPropertyGroup *theoreticalDevelopmentGroup =[SCPropertyGroup groupWithHeaderTitle:@"Theoretical Development" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"specialties",@"influences", @"orientationHistory",nil]];
 //    //define a property group
-    SCPropertyGroup *clientInteractionGroup = [SCPropertyGroup groupWithHeaderTitle:@"Client Interaction" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"referrals",nil]];
+    SCPropertyGroup *clientInteractionGroup = [SCPropertyGroup groupWithHeaderTitle:@"Client Interaction" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"referrals",nil]];
     
     
 
     
-    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:@"Notes" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"notes",@"bio", nil]];
+    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:@"Notes" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"notes",@"bio", nil]];
     
-    SCPropertyGroup *logsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Logs" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"logs", nil]];
+    SCPropertyGroup *logsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Logs" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"logs", nil]];
     
     [self.clinicianDef.propertyGroups addGroup:clinicianListPropertiesGroup];
     [self.clinicianDef.propertyGroups addGroup:credentialssGroup];
@@ -1720,7 +1711,7 @@
     
     
    
-    if([SCHelper is_iPad]){
+    if([SCUtilities is_iPad]){
         detailTableViewModel.delegate = self;
         detailTableViewModel.tag = tableViewModel.tag+1;
         
@@ -2123,12 +2114,12 @@
 //            suffix=nil;
 //            credentialIntitials=nil; 
 //            SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-//            SCControlCell *titleCell=(SCControlCell *)[section cellAtIndex:0];
-//            SCControlCell *firstNameCell=(SCControlCell *)[section cellAtIndex:1];
-//            SCControlCell *middleNameCell=(SCControlCell *)[section cellAtIndex:2];
-//            SCControlCell *lastNameCell=(SCControlCell *)[section cellAtIndex:3];
-//            SCControlCell *suffixCell=(SCControlCell *)[section cellAtIndex:4];
-//            SCControlCell *credentialInitialsCell=(SCControlCell *)[section cellAtIndex:5];
+//            SCCustomCell *titleCell=(SCCustomCell *)[section cellAtIndex:0];
+//            SCCustomCell *firstNameCell=(SCCustomCell *)[section cellAtIndex:1];
+//            SCCustomCell *middleNameCell=(SCCustomCell *)[section cellAtIndex:2];
+//            SCCustomCell *lastNameCell=(SCCustomCell *)[section cellAtIndex:3];
+//            SCCustomCell *suffixCell=(SCCustomCell *)[section cellAtIndex:4];
+//            SCCustomCell *credentialInitialsCell=(SCCustomCell *)[section cellAtIndex:5];
 //            
 //            
 //                  
@@ -2646,8 +2637,8 @@
         SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
             if (section.cellCount>3) {
            
-            SCControlCell *firstNameCell =(SCControlCell *)[section cellAtIndex:1];
-        SCControlCell *lastNameCell =(SCControlCell *)[section cellAtIndex:3];
+            SCCustomCell *firstNameCell =(SCCustomCell *)[section cellAtIndex:1];
+        SCCustomCell *lastNameCell =(SCCustomCell *)[section cellAtIndex:3];
         
         //NSLog(@"last Name cell tag is %i", lastNameCell.tag);
         UITextField *lastNameField =(UITextField *)[lastNameCell viewWithTag:50];
@@ -3087,7 +3078,7 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDisappearForSectionAtIndex:(NSUInteger)index{
     if (tableViewModel.tag==0) {
-        if (![SCHelper is_iPad]) {
+        if (![SCUtilities is_iPad]) {
         
         currentDetailTableViewModel_.viewController.view=nil;
         self.currentDetailTableViewModel=nil;
@@ -4015,7 +4006,7 @@
         } 
         else {
             
-            if ([SCHelper is_iPad]) {
+            if ([SCUtilities is_iPad]) {
            
             self.personViewController=nil;
             self.personViewController=[[ABPersonViewController alloc]init];
@@ -4117,7 +4108,7 @@
         UITableView *personViewTableView=(UITableView *)[viewController.view.subviews objectAtIndex:0];
         
             
-        if ([SCHelper is_iPad]) {
+        if ([SCUtilities is_iPad]) {
             [personViewTableView setBackgroundView:nil];
             [personViewTableView setBackgroundView:self.iPadPersonBackgroundView];
         }

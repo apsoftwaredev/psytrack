@@ -377,8 +377,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3127"
          endingLineNumber = "3127"
-         landmarkName = "-tableViewModel:detailViewWillDisappearForRowAtIndexPath:"
-         landmarkType = "5">
+         landmarkName = "@implementation CliniciansViewController_Shared"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -390,8 +390,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3006"
          endingLineNumber = "3006"
-         landmarkName = "-tableViewModelDidEndEditing:"
-         landmarkType = "5">
+         landmarkName = "@implementation CliniciansViewController_Shared"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1326,7 +1326,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2820"
          endingLineNumber = "2820"
-         landmarkName = "-abSourcesDoneButtonTapped:"
+         landmarkName = "-defaultABSourceID"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1675,7 +1675,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4073"
          endingLineNumber = "4073"
-         landmarkName = "-peoplePickerNavigationControllerDidCancel:"
+         landmarkName = "-peoplePickerNavigationController:shouldContinueAfterSelectingPerson:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2273,8 +2273,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "402"
          endingLineNumber = "402"
-         landmarkName = "-tableViewModel:detailModelCreatedForSectionAtIndex:detailTableViewModel:"
-         landmarkType = "5">
+         landmarkName = "@implementation ClientsRootViewController_iPad"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -2546,8 +2546,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "179"
          endingLineNumber = "179"
-         landmarkName = "-tableViewModel:sectionHeaderTitleForItem:AtIndex:"
-         landmarkType = "5">
+         landmarkName = "@implementation ClientsRootViewController_iPad"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -2611,8 +2611,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1730"
          endingLineNumber = "1730"
-         landmarkName = "-addWechlerAgeCellToSection:"
-         landmarkType = "5">
+         landmarkName = "@implementation ClientsRootViewController_iPad"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -2623,9 +2623,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1744"
-         endingLineNumber = "1744"
-         landmarkName = "-addButtonTapped"
-         landmarkType = "5">
+         endingLineNumber = "1744">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -3378,7 +3376,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1245"
          endingLineNumber = "1245"
-         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
+         landmarkName = "-tableViewModel:didLayoutSubviewsForCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -3442,9 +3440,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1486"
-         endingLineNumber = "1486"
-         landmarkName = "-tableViewModel:customCellForRowAtIndexPath:"
-         landmarkType = "5">
+         endingLineNumber = "1486">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

@@ -48,7 +48,7 @@
     
     self.picker.frame = pickerFrame;
     
-    if([SCHelper is_iPad])
+    if([SCUtilities is_iPad])
 		self.view.backgroundColor = [UIColor colorWithRed:32.0f/255 green:35.0f/255 blue:42.0f/255 alpha:1];
 	else
 		self.view.backgroundColor = [UIColor colorWithRed:41.0f/255 green:42.0f/255 blue:57.0f/255 alpha:1];
@@ -252,7 +252,7 @@
 -(CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component{
     
     
-    if ([SCHelper is_iPad]) 
+    if ([SCUtilities is_iPad]) 
         return  95.0;
     else
         return 50.0;

@@ -53,14 +53,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    // Gracefully handle reloading the view controller after a memory warning
-    tableModel = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
-    if(tableModel)
-    {
-        [tableModel replaceModeledTableViewWith:self.tableView];
-        return;
-    }
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+       if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
@@ -154,7 +147,7 @@
         
         sourcesSelectionCell.tag=3;
         
-        SCTableViewSection *defaultSourceSection=[SCTableViewSection sectionWithHeaderTitle:@"Address Book Source" withFooterTitle:@"CardDAV server should be the default choice if you use iCloud to sychronize your address book across devices. All devices should use the same source."];
+        SCTableViewSection *defaultSourceSection=[SCTableViewSection sectionWithHeaderTitle:@"Address Book Source" footerTitle:@"CardDAV server should be the default choice if you use iCloud to sychronize your address book across devices. All devices should use the same source."];
         [defaultSourceSection addCell:sourcesSelectionCell];
        
         
@@ -220,12 +213,12 @@
 	
     //create the custom property definition
 //    SCCustomPropertyDefinition *nameDataProperty = [SCCustomPropertyDefinition definitionWithName:@"GroupNameData"
-//                                                                                 withuiElementNibName:@"TextFieldWithUpdateButtonCell"
-//                                                                                   withObjectBindings:groupNameDataBindings];
+//                                                                                 uiElementNibName:@"TextFieldWithUpdateButtonCell"
+//                                                                                   objectBindings:groupNameDataBindings];
 //	
     
 
-    SCControlCell *groupNameUpdateCell = [SCControlCell cellWithText:nil withKeyBindings:groupNameDataBindings withNibName:@"ABGroupNameChangeCell"];
+    SCCustomCell *groupNameUpdateCell = [SCCustomCell cellWithText:nil keyBindings:groupNameDataBindings nibName:@"ABGroupNameChangeCell"];
 	
     
     groupNameUpdateCell.delegate=self;
@@ -236,7 +229,7 @@
 //    defaultABGroupNameTextFieldCell.tag=4;
 //    defaultABGroupNameTextFieldCell.delegate=self;
     
-    SCTableViewSection *defaultABGroupSection=[SCTableViewSection sectionWithHeaderTitle:@"Default Address Book Group Settings" withFooterTitle:@"To change an existing name or to add a new group with a specified name, enter it in the name field, then tap the corresponding button."];
+    SCTableViewSection *defaultABGroupSection=[SCTableViewSection sectionWithHeaderTitle:@"Default Address Book Group Settings" footerTitle:@"To change an existing name or to add a new group with a specified name, enter it in the name field, then tap the corresponding button."];
     
     
     [defaultABGroupSection addCell:defaultABGroupSelectionCell];
@@ -792,8 +785,8 @@ if(sourceArray.count>1)
         SCTableViewSection *section=(SCTableViewSection*)[tableViewModel sectionAtIndex:1];
        NSString *groupName=[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
         BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
-        if ([cell isKindOfClass:[SCControlCell class]]) {
-//            SCControlCell *controllCell=(SCControlCell *)cell;
+        if ([cell isKindOfClass:[SCCustomCell class]]) {
+//            SCCustomCell *controllCell=(SCCustomCell *)cell;
             
             UITextField *textField=(UITextField *)[cell viewWithTag:1];
             SCSelectionCell *selectionCell=(SCSelectionCell *)[section cellAtIndex:0];
@@ -887,7 +880,7 @@ if(sourceArray.count>1)
 }
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
-    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
 
         
@@ -1786,7 +1779,7 @@ if(sourceArray.count>1)
                 break;
             case 5:
             {
-                if ([cell isKindOfClass:[SCControlCell class]]) {
+                if ([cell isKindOfClass:[SCCustomCell class]]) {
                 
                 
                 //NSLog(@"value changed for auto add is %i", [(NSNumber *)[tableViewModel.modelKeyValues valueForKey:@"autoAddClinicianToGroup"]boolValue]);
@@ -2751,7 +2744,7 @@ if(sourceArray.count>1)
                 
                 
                 
-                if ([SCHelper is_iPad]) {
+                if ([SCUtilities is_iPad]) {
                     if (appDelegate.cliniciansRootViewController_iPad &&appDelegate.cliniciansRootViewController_iPad.tableModel) {
                         [appDelegate.cliniciansRootViewController_iPad.tableModel reloadBoundValues];
                         [appDelegate.cliniciansRootViewController_iPad.tableView reloadData];

@@ -65,7 +65,7 @@ addStopwatch=(NSDate *)[self.boundObject valueForKey:@"addStopwatch"];
 
 
 
--(void)customButtonTapped:(UIButton *)button forCell:(SCControlCell *)cell{
+-(void)customButtonTapped:(UIButton *)button forCell:(SCCustomCell *)cell{
 
 
 ////NSLog(@"custom button tapped in stopwatch cell");

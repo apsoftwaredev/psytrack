@@ -16,12 +16,12 @@
  *
  */
 
-#import "SCTableViewModel.h"
+#import <UIKit/UIKit.h>
 #import "ClientsViewController_Shared.h"
 #import "ClientsSelectionCell.h"
 #import "ClientEntity.h"
 
-@interface ClientsViewController_iPhone : UIViewController <  SCTableViewModelDataSource, SCTableViewModelDelegate,SCTableViewCellDelegate, SCTableViewControllerDelegate, UIAlertViewDelegate> {
+@interface ClientsViewController_iPhone : SCViewController <  SCTableViewModelDataSource, SCTableViewModelDelegate, SCTableViewControllerDelegate, UIAlertViewDelegate> {
     
 //    UISearchDisplayController *searchDisplayController;
   	 UISearchBar *searchBar;

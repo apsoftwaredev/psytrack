@@ -67,13 +67,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 
 - (void)viewDidLoad {
     [super viewDidLoad];      
-    // Gracefully handle reloading the view controller after a memory warning
-    tableModel = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
-    if(tableModel)
-    {
-        [tableModel replaceModeledTableViewWith:self.tableView];
-        return;
-    }
+    
     
     
     // listen for key-value store changes externally from the cloud
@@ -213,7 +207,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     self.tableModel.delegate=self;
 
-    if([SCHelper is_iPad]){
+    if([SCUtilities is_iPad]){
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
         [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
@@ -393,7 +387,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 }
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
-    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
        
       
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
@@ -478,7 +472,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 //    
 //}
 
-//- (SCControlCell *)tableViewModel:(SCTableViewModel *)tableViewModel
+//- (SCCustomCell *)tableViewModel:(SCTableViewModel *)tableViewModel
 //	  customCellForRowAtIndexPath:(NSIndexPath *)indexPath
 //{
 //    SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
@@ -637,7 +631,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
                 
             {
-                if ( ![SCHelper is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
+                if ( ![SCUtilities is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
                 {
                     UIButton *button=(UIButton *)[cell viewWithTag:300];
                     [button setTitle:@"Call Number" forState:UIControlStateNormal];
@@ -752,7 +746,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
 
                 //NSLog(@"entity name is %@",cellManagedObject.entity.name);
-                if (cell.tag==1 && [cell isKindOfClass:[SCControlCell class]]&& cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
+                if (cell.tag==1 && [cell isKindOfClass:[SCCustomCell class]]&& cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
                 {
                     
                     UIView *scaleView = [cell viewWithTag:70];
@@ -780,7 +774,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                     
                     
-                    if ([cell isKindOfClass:[SCControlCell class]]) 
+                    if ([cell isKindOfClass:[SCCustomCell class]]) 
                     {
                         UIView *scaleView = [cell viewWithTag:70];
                         if ([scaleView isKindOfClass:[UISegmentedControl class]]) 

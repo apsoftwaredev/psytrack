@@ -34,7 +34,8 @@
     
     //    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     NSArray *sexSelectionArray=[NSArray arrayWithObjects:@"Male", @"Female", @"Intersexual",@"F2M",@"M2F",@"Undisclosed", nil];
-    self.items=sexSelectionArray;
+    NSArray *itemsArray=(NSArray *)self.items;
+    itemsArray =sexSelectionArray;
     
     //NSLog(@"value for cell is %@",[self.boundObject valueForKey:@"sex"]);
     int selectedIndexInt=-1;

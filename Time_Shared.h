@@ -17,7 +17,7 @@
  */
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "SCTableViewModel.h"
+
 #import "StopwatchCell.h"
 
 @interface Time_Shared : NSObject <SCViewControllerDelegate, SCTableViewModelDataSource, SCTableViewModelDelegate,UIGestureRecognizerDelegate,SCTableViewCellDelegate>{
@@ -66,7 +66,7 @@
 //@property (strong, nonatomic) IBOutlet NSDate *referenceDate;
 //@property (strong, nonatomic) IBOutlet  NSManagedObject *managedObject;
 
-@property (strong, nonatomic) IBOutlet SCClassDefinition *timeDef;
+@property (strong, nonatomic) IBOutlet SCEntityDefinition *timeDef;
 -(id)setupTheTimeViewUsingSTV;
 -(void)calculateTime;
 -(NSString *)tableViewModel:(SCTableViewModel *)tableViewModel calculateBreakTimeForRowAtIndexPath:(NSIndexPath *)indexPath withBoundValues:(BOOL)useBoundValues;

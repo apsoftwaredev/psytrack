@@ -21,17 +21,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    
-    // Gracefully handle reloading the view controller after a memory warning
-    tableModel_ = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
-    if(tableModel_)
-    {
-        [tableModel_ replaceModeledTableViewWith:self.tableView];
-        return;
-    }
-    
-    
+        
     
     NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
     
@@ -68,8 +58,8 @@
     navtitle.title=@"Existing Hours";
     
 
-    SCClassDefinition *existingHoursDef =[SCClassDefinition definitionWithEntityName:@"ExistingHoursEntity"
-                                                            withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"startDate", @"endDate", @"assessments", @"directInterventions", @"supervision",  @"supportActivities"     , @"notes",   nil]];        
+    SCEntityDefinition *existingHoursDef =[SCEntityDefinition definitionWithEntityName:@"ExistingHoursEntity"
+                                                            managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"startDate", @"endDate", @"assessments", @"directInterventions", @"supervision",  @"supportActivities"     , @"notes",   nil]];        
     
 
                                           
@@ -115,18 +105,18 @@
     existingHoursDef.keyPropertyName=@"startDate";
 
     //Create a class definition for the demographicsEntity
-    SCClassDefinition *demographicsDef = [SCClassDefinition definitionWithEntityName:@"ExistingDemographicsEntity" 
-                                                            withManagedObjectContext:managedObjectContext
-                                                                   withPropertyNames:[NSArray arrayWithObjects:@"ageGroups", @"ethnicities", @"genders", @"individualsWithDisabilities",  @"races",  @"sexualOrientations",  nil]];
+    SCEntityDefinition *demographicsDef = [SCEntityDefinition definitionWithEntityName:@"ExistingDemographicsEntity" 
+                                                            managedObjectContext:managedObjectContext
+                                                                   propertyNames:[NSArray arrayWithObjects:@"ageGroups", @"ethnicities", @"genders", @"individualsWithDisabilities",  @"races",  @"sexualOrientations",  nil]];
     
     
     //create an array of objects definition for the ageGroups to-many relationship that with show up in a different view with  a place holder element>.
     
     
     //Create a class definition for the ageGroupsEntity
-    SCClassDefinition *existingAgeGroupDef = [SCClassDefinition definitionWithEntityName:@"ExistingAgeGroupEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"ageGroup",@"numberOfIndividuals",   nil]];
+    SCEntityDefinition *existingAgeGroupDef = [SCEntityDefinition definitionWithEntityName:@"ExistingAgeGroupEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"ageGroup",@"numberOfIndividuals",   nil]];
     //Create the property definition for the numberofindividuals property in the existing age group class
     SCPropertyDefinition *existingAgeGroupNumberPropertyDef = [existingAgeGroupDef propertyDefinitionWithName:@"numberOfIndividuals"];
     
@@ -143,9 +133,9 @@
     
     
     //Create a class definition for the ageGroupEntity
-    SCClassDefinition *ageGroupDef = [SCClassDefinition definitionWithEntityName:@"AgeGroupEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"ageGroup", nil]];
+    SCEntityDefinition *ageGroupDef = [SCEntityDefinition definitionWithEntityName:@"AgeGroupEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"ageGroup", nil]];
     
     
     ageGroupDef.orderAttributeName=@"order";
@@ -186,9 +176,9 @@
     
     
     //Create a class definition for the ageGroupsEntity
-    SCClassDefinition *existingGenderDef = [SCClassDefinition definitionWithEntityName:@"ExistingGenderEntity" 
-                                                                withManagedObjectContext:managedObjectContext
-                                                                       withPropertyNames:[NSArray arrayWithObjects:@"gender",@"numberOfIndividuals",   nil]];
+    SCEntityDefinition *existingGenderDef = [SCEntityDefinition definitionWithEntityName:@"ExistingGenderEntity" 
+                                                                managedObjectContext:managedObjectContext
+                                                                       propertyNames:[NSArray arrayWithObjects:@"gender",@"numberOfIndividuals",   nil]];
     
     
     SCPropertyDefinition *existingGenderNumberPropertyDef = [existingGenderDef propertyDefinitionWithName:@"numberOfIndividuals"];
@@ -206,9 +196,9 @@
     
     
     //Create a class definition for the ageGroupEntity
-    SCClassDefinition *genderpDef = [SCClassDefinition definitionWithEntityName:@"GenderEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"genderName",@"notes", nil]];
+    SCEntityDefinition *genderpDef = [SCEntityDefinition definitionWithEntityName:@"GenderEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"genderName",@"notes", nil]];
     
     
     genderpDef.orderAttributeName=@"order";
@@ -254,9 +244,9 @@
     
     
     //Create a class definition for the ageGroupsEntity
-    SCClassDefinition *existingEthnicitiesDef = [SCClassDefinition definitionWithEntityName:@"ExistingEthnicityEntity" 
-                                                              withManagedObjectContext:managedObjectContext
-                                                                     withPropertyNames:[NSArray arrayWithObjects:@"ethnicity",@"numberOfIndividuals",   nil]];
+    SCEntityDefinition *existingEthnicitiesDef = [SCEntityDefinition definitionWithEntityName:@"ExistingEthnicityEntity" 
+                                                              managedObjectContext:managedObjectContext
+                                                                     propertyNames:[NSArray arrayWithObjects:@"ethnicity",@"numberOfIndividuals",   nil]];
     
     
     SCPropertyDefinition *existingEthnicitiesNumberPropertyDef = [existingEthnicitiesDef propertyDefinitionWithName:@"numberOfIndividuals"];
@@ -276,9 +266,9 @@
     
     
     //Create a class definition for the ageGroupEntity
-    SCClassDefinition *ethnicitypDef = [SCClassDefinition definitionWithEntityName:@"EthnicityEntity" 
-                                                       withManagedObjectContext:managedObjectContext
-                                                              withPropertyNames:[NSArray arrayWithObjects:@"ethnicityName",@"notes", nil]];
+    SCEntityDefinition *ethnicitypDef = [SCEntityDefinition definitionWithEntityName:@"EthnicityEntity" 
+                                                       managedObjectContext:managedObjectContext
+                                                              propertyNames:[NSArray arrayWithObjects:@"ethnicityName",@"notes", nil]];
     
     
     ethnicitypDef.orderAttributeName=@"order";
@@ -320,9 +310,9 @@
 
     
     //Create a class definition for the ageGroupsEntity
-    SCClassDefinition *existingRaceDef = [SCClassDefinition definitionWithEntityName:@"ExistingRaceEntity" 
-                                                                   withManagedObjectContext:managedObjectContext
-                                                                          withPropertyNames:[NSArray arrayWithObjects:@"race",@"numberOfIndividuals",   nil]];
+    SCEntityDefinition *existingRaceDef = [SCEntityDefinition definitionWithEntityName:@"ExistingRaceEntity" 
+                                                                   managedObjectContext:managedObjectContext
+                                                                          propertyNames:[NSArray arrayWithObjects:@"race",@"numberOfIndividuals",   nil]];
     
     
     SCPropertyDefinition *existingRaceNumberPropertyDef = [existingRaceDef propertyDefinitionWithName:@"numberOfIndividuals"];
@@ -340,9 +330,9 @@
     
     
     //Create a class definition for the ageGroupEntity
-    SCClassDefinition *raceDef = [SCClassDefinition definitionWithEntityName:@"RaceEntity" 
-                                                          withManagedObjectContext:managedObjectContext
-                                                                 withPropertyNames:[NSArray arrayWithObjects:@"raceName",@"notes", nil]];
+    SCEntityDefinition *raceDef = [SCEntityDefinition definitionWithEntityName:@"RaceEntity" 
+                                                          managedObjectContext:managedObjectContext
+                                                                 propertyNames:[NSArray arrayWithObjects:@"raceName",@"notes", nil]];
     
     
     raceDef.orderAttributeName=@"order";
@@ -384,9 +374,9 @@
     
 
     //Create a class definition for the ageGroupsEntity
-    SCClassDefinition *existingDisabilityDef = [SCClassDefinition definitionWithEntityName:@"ExistingDisabilityEntity" 
-                                                            withManagedObjectContext:managedObjectContext
-                                                                   withPropertyNames:[NSArray arrayWithObjects:@"disability",@"numberOfIndividuals",   nil]];
+    SCEntityDefinition *existingDisabilityDef = [SCEntityDefinition definitionWithEntityName:@"ExistingDisabilityEntity" 
+                                                            managedObjectContext:managedObjectContext
+                                                                   propertyNames:[NSArray arrayWithObjects:@"disability",@"numberOfIndividuals",   nil]];
     
     
     SCPropertyDefinition *existingDisabilityNumberPropertyDef = [existingDisabilityDef propertyDefinitionWithName:@"numberOfIndividuals"];
@@ -406,9 +396,9 @@
     
     
     //Create a class definition for the ageGroupEntity
-    SCClassDefinition *disabilityDef = [SCClassDefinition definitionWithEntityName:@"DisabilityEntity" 
-                                                     withManagedObjectContext:managedObjectContext
-                                                            withPropertyNames:[NSArray arrayWithObjects:@"disabilityName",@"notes", nil]];
+    SCEntityDefinition *disabilityDef = [SCEntityDefinition definitionWithEntityName:@"DisabilityEntity" 
+                                                     managedObjectContext:managedObjectContext
+                                                            propertyNames:[NSArray arrayWithObjects:@"disabilityName",@"notes", nil]];
     
     
     disabilityDef.orderAttributeName=@"order";
@@ -451,9 +441,9 @@
     
     
     //Create a class definition for the ageGroupsEntity
-    SCClassDefinition *existingSexualOrientationDef = [SCClassDefinition definitionWithEntityName:@"ExistingSexualOrientationEntity" 
-                                                                  withManagedObjectContext:managedObjectContext
-                                                                         withPropertyNames:[NSArray arrayWithObjects:@"sexualOrientation",@"numberOfIndividuals",   nil]];
+    SCEntityDefinition *existingSexualOrientationDef = [SCEntityDefinition definitionWithEntityName:@"ExistingSexualOrientationEntity" 
+                                                                  managedObjectContext:managedObjectContext
+                                                                         propertyNames:[NSArray arrayWithObjects:@"sexualOrientation",@"numberOfIndividuals",   nil]];
     
     SCPropertyDefinition *existingSONumberPropertyDef = [existingSexualOrientationDef propertyDefinitionWithName:@"numberOfIndividuals"];
     
@@ -492,9 +482,9 @@
 
     
     //Create a class definition for the existingAssessmentEntity
-    SCClassDefinition *supervisionDef = [SCClassDefinition definitionWithEntityName:@"ExistingSupervisionEntity" 
-                                                                   withManagedObjectContext:managedObjectContext
-                                                                          withPropertyNames:[NSArray arrayWithObjects:@"supervisionType",@"groupHours", @"individualHours",  @"notes",nil]];
+    SCEntityDefinition *supervisionDef = [SCEntityDefinition definitionWithEntityName:@"ExistingSupervisionEntity" 
+                                                                   managedObjectContext:managedObjectContext
+                                                                          propertyNames:[NSArray arrayWithObjects:@"supervisionType",@"groupHours", @"individualHours",  @"notes",nil]];
     
 
     
@@ -529,9 +519,9 @@
     
     
     //Create a class definition for the supervision TypeEntity
-    SCClassDefinition *supervisionTypeDef = [SCClassDefinition definitionWithEntityName:@"SupervisionTypeEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"supervisionType", nil]];
+    SCEntityDefinition *supervisionTypeDef = [SCEntityDefinition definitionWithEntityName:@"SupervisionTypeEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"supervisionType", nil]];
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     //create a property definition
@@ -581,7 +571,7 @@
 	
     //create the custom property definition
     SCCustomPropertyDefinition *clinicianDataProperty = [SCCustomPropertyDefinition definitionWithName:@"ClinicianData"
-                                                                                    withuiElementClass:[ClinicianSelectionCell class] withObjectBindings:clinicianDataBindings];
+                                                                                    withuiElementClass:[ClinicianSelectionCell class] objectBindings:clinicianDataBindings];
 	
 
     
@@ -596,9 +586,9 @@
                         
     
     //Create a class definition for the existingAssessmentEntity
-    SCClassDefinition *supportActivityDef = [SCClassDefinition definitionWithEntityName:@"ExistingSupportActivityEntity" 
-                                                           withManagedObjectContext:managedObjectContext
-                                                                  withPropertyNames:[NSArray arrayWithObjects:@"supportActivityType",@"hours",  @"notes",nil]];
+    SCEntityDefinition *supportActivityDef = [SCEntityDefinition definitionWithEntityName:@"ExistingSupportActivityEntity" 
+                                                           managedObjectContext:managedObjectContext
+                                                                  propertyNames:[NSArray arrayWithObjects:@"supportActivityType",@"hours",  @"notes",nil]];
     
     
     
@@ -628,9 +618,9 @@
     
     
     //Create a class definition for the supervision TypeEntity
-    SCClassDefinition *supportActivityTypeDef = [SCClassDefinition definitionWithEntityName:@"SupportActivityTypeEntity" 
-                                                               withManagedObjectContext:managedObjectContext
-                                                                      withPropertyNames:[NSArray arrayWithObjects:@"supportActivityType", nil]];
+    SCEntityDefinition *supportActivityTypeDef = [SCEntityDefinition definitionWithEntityName:@"SupportActivityTypeEntity" 
+                                                               managedObjectContext:managedObjectContext
+                                                                      propertyNames:[NSArray arrayWithObjects:@"supportActivityType", nil]];
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     //create a property definition
@@ -671,9 +661,9 @@
     
     
     //Create a class definition for the existingAssessmentEntity
-    SCClassDefinition *assessmentDef = [SCClassDefinition definitionWithEntityName:@"ExisitingAssessmentEntity" 
-                                                          withManagedObjectContext:managedObjectContext
-                                                                 withPropertyNames:[NSArray arrayWithObjects:@"assessmentType",@"hours",@"instruments",@"batteries", @"demographics",@"notes",nil]];
+    SCEntityDefinition *assessmentDef = [SCEntityDefinition definitionWithEntityName:@"ExisitingAssessmentEntity" 
+                                                          managedObjectContext:managedObjectContext
+                                                                 propertyNames:[NSArray arrayWithObjects:@"assessmentType",@"hours",@"instruments",@"batteries", @"demographics",@"notes",nil]];
     
     
     SCPropertyDefinition *assessmentNumberPropertyDef = [assessmentDef propertyDefinitionWithName:@"hours"];
@@ -685,9 +675,9 @@
 
 
     //Create a class definition for the testingSessionTypeEntity
-    SCClassDefinition *testingSessionTypeDef = [SCClassDefinition definitionWithEntityName:@"TestingSessionTypeEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"assessmentType", @"notes" , nil]];
+    SCEntityDefinition *testingSessionTypeDef = [SCEntityDefinition definitionWithEntityName:@"TestingSessionTypeEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"assessmentType", @"notes" , nil]];
     
     
     
@@ -772,9 +762,9 @@
     
 
     //Create a class definition for the existing InstrumentsEntity
-    SCClassDefinition *existingInstrumentDef = [SCClassDefinition definitionWithEntityName:@"ExistingInstrumentEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                                         withPropertyNames:[NSArray arrayWithObjects:@"instrument",@"numberAdminstered",@"numberOfReportsWritten",@"notes",  nil]];
+    SCEntityDefinition *existingInstrumentDef = [SCEntityDefinition definitionWithEntityName:@"ExistingInstrumentEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                                         propertyNames:[NSArray arrayWithObjects:@"instrument",@"numberAdminstered",@"numberOfReportsWritten",@"notes",  nil]];
     
     
     
@@ -795,17 +785,17 @@
 
     
     //Create a class definition for the instrument type Entity
-    SCClassDefinition *instrumentTypeDef = [SCClassDefinition definitionWithEntityName:@"InstrumentTypeEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"instrumentType", @"notes" , nil]];
+    SCEntityDefinition *instrumentTypeDef = [SCEntityDefinition definitionWithEntityName:@"InstrumentTypeEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"instrumentType", @"notes" , nil]];
     
     
     
     
     //Create a class definition for the Instrument Entity
-    SCClassDefinition *instrumentDef = [SCClassDefinition definitionWithEntityName:@"InstrumentEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"instrumentName", @"acronym", @"instrumentType",    @"notes" , nil]];
+    SCEntityDefinition *instrumentDef = [SCEntityDefinition definitionWithEntityName:@"InstrumentEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"instrumentName", @"acronym", @"instrumentType",    @"notes" , nil]];
     
     
     
@@ -901,9 +891,9 @@
 
     
     //Create a class definition for the existing InstrumentsEntity
-    SCClassDefinition *existingBatteryDef = [SCClassDefinition definitionWithEntityName:@"ExistingBatteryEntity" 
-                                                                  withManagedObjectContext:managedObjectContext
-                                                                         withPropertyNames:[NSArray arrayWithObjects:@"battery",@"numberAdminstered",@"numberOfReportsWritten",@"notes",  nil]];
+    SCEntityDefinition *existingBatteryDef = [SCEntityDefinition definitionWithEntityName:@"ExistingBatteryEntity" 
+                                                                  managedObjectContext:managedObjectContext
+                                                                         propertyNames:[NSArray arrayWithObjects:@"battery",@"numberAdminstered",@"numberOfReportsWritten",@"notes",  nil]];
     
     
     
@@ -923,9 +913,9 @@
 
     
     //Create a class definition for the Instrument Entity
-    SCClassDefinition *batteryDef = [SCClassDefinition definitionWithEntityName:@"BatteryEntity" 
-                                                          withManagedObjectContext:managedObjectContext
-                                                                 withPropertyNames:[NSArray arrayWithObjects:@"batteryName", @"acronym", @"publisher",@"instruments", @"notes" , nil]];
+    SCEntityDefinition *batteryDef = [SCEntityDefinition definitionWithEntityName:@"BatteryEntity" 
+                                                          managedObjectContext:managedObjectContext
+                                                                 propertyNames:[NSArray arrayWithObjects:@"batteryName", @"acronym", @"publisher",@"instruments", @"notes" , nil]];
     
     
 
@@ -992,9 +982,9 @@
     batteryNotesPropertyDef.type=SCPropertyTypeTextView;
     
     //Create a class definition for the other psychotherapyEntity
-    SCClassDefinition *interventionDef = [SCClassDefinition definitionWithEntityName:@"ExistingInterventionEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects: @"interventionType"  ,@"hours", @"models",@"demographics",@"notes", nil]];
+    SCEntityDefinition *interventionDef = [SCEntityDefinition definitionWithEntityName:@"ExistingInterventionEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects: @"interventionType"  ,@"hours", @"models",@"demographics",@"notes", nil]];
     
     
     
@@ -1039,9 +1029,9 @@
 
     
     //Create a class definition for the ExistingOtherInterventionType Entity
-    SCClassDefinition *interventionTypeDef = [SCClassDefinition definitionWithEntityName:@"InterventionTypeEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"interventionType",@"notes",   nil]];
+    SCEntityDefinition *interventionTypeDef = [SCEntityDefinition definitionWithEntityName:@"InterventionTypeEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"interventionType",@"notes",   nil]];
     
     
     
@@ -1085,9 +1075,9 @@
     interventionTypeNotesPropertyDef.type=SCPropertyTypeTextView;
 
     //Create a class definition for the intervention ModelEntity
-    SCClassDefinition *interventionModelDef = [SCClassDefinition definitionWithEntityName:@"InterventionModelEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects: @"modelName",@"acronym",  @"evidenceBased",@"notes" , nil]];
+    SCEntityDefinition *interventionModelDef = [SCEntityDefinition definitionWithEntityName:@"InterventionModelEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects: @"modelName",@"acronym",  @"evidenceBased",@"notes" , nil]];
     
     
     
@@ -1141,7 +1131,7 @@
     }
     
    
-    if ([SCHelper is_iPad]) {
+    if ([SCUtilities is_iPad]) {
         
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
@@ -1281,7 +1271,7 @@ BOOL valid=NO;
 //            detailTableViewModel.viewController.navigationItem.leftBarButtonItem=cancelButton;
 //
 //    }
-       if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+       if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
         
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
@@ -1468,7 +1458,7 @@ BOOL valid=NO;
 }
 
 
-- (SCControlCell *)tableViewModel:(SCTableViewModel *)tableViewModel
+- (SCCustomCell *)tableViewModel:(SCTableViewModel *)tableViewModel
 	  customCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	
@@ -1476,10 +1466,10 @@ BOOL valid=NO;
     // Create & return a custom cell based on the cell in ContactOverviewCell.xib
 	
     
-    SCControlCell *actionOverviewCell=nil;
+    SCCustomCell *actionOverviewCell=nil;
     if (tableViewModel.tag==0) {
-        actionOverviewCell= [SCControlCell cellWithText:nil withBoundObject:nil withObjectBindings:nil
-                                            withNibName:@"ExistingHoursOverviewCell"];
+        actionOverviewCell= [SCCustomCell cellWithText:nil boundObject:nil objectBindings:nil
+                                            nibName:@"ExistingHoursOverviewCell"];
     }
 	 
 	

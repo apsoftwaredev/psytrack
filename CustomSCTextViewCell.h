@@ -15,9 +15,9 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewCell.h"
+#import <UIKit/UIKit.h>
 
-@interface CustomSCTextViewCell : SCControlCell
+@interface CustomSCTextViewCell : SCCustomCell
 
 
 @property (nonatomic, weak)IBOutlet UITextView *myTextView;

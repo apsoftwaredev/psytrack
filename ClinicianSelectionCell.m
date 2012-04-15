@@ -64,7 +64,7 @@
     
     NSString *clinicianViewControllerNibName;
     
-    if ([SCHelper is_iPad]) 
+    if ([SCUtilities is_iPad]) 
         clinicianViewControllerNibName=[NSString stringWithString:@"ClinicianViewController"];
     else
         clinicianViewControllerNibName=[NSString stringWithString:@"ClinicianViewController"];

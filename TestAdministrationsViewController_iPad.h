@@ -16,10 +16,10 @@
  *
  */
 
-
+#import <UIKit/UIKit.h>
 #import "ServicesViewController_Shared.h"
 
-@interface TestAdministrationsViewController_iPad : ServicesViewController_Shared < /*UINavigationControllerDelegate SCViewControllerDelegate,*/ SCTableViewModelDataSource, SCTableViewModelDelegate,/*UIGestureRecognizerDelegate,*/SCTableViewCellDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate> {
+@interface TestAdministrationsViewController_iPad : ServicesViewController_Shared < /*UINavigationControllerDelegate SCViewControllerDelegate,*/ SCTableViewModelDataSource, SCTableViewModelDelegate,/*UIGestureRecognizerDelegate,*/ EKEventEditViewDelegate , UINavigationControllerDelegate> {
     
    
 }

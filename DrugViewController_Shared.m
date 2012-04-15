@@ -136,9 +136,9 @@
    
         
         
-    self.drugDef = [SCClassDefinition definitionWithEntityName:@"DrugProductEntity" 
-                                        withManagedObjectContext:drugsManagedObjectContext 
-                                        withPropertyNames:[NSArray arrayWithObject: @"tECode"]];
+    self.drugDef = [SCEntityDefinition definitionWithEntityName:@"DrugProductEntity" 
+                                        managedObjectContext:drugsManagedObjectContext 
+                                        propertyNames:[NSArray arrayWithObject: @"tECode"]];
    
    
    
@@ -150,8 +150,8 @@
 	
     //create the custom property definition
     SCCustomPropertyDefinition *drugNameDataDataProperty = [SCCustomPropertyDefinition definitionWithName:@"DrugNameData"
-                                                                                         withuiElementNibName:@"CustomSCTextViewCell_iPhone" 
-                                                                                           withObjectBindings:customCellDrugNameDataBindings];
+                                                                                         uiElementNibName:@"CustomSCTextViewCell_iPhone" 
+                                                                                           objectBindings:customCellDrugNameDataBindings];
 	
     
     
@@ -165,8 +165,8 @@
 	
     //create the custom property definition
     SCCustomPropertyDefinition *activeIngredientDataProperty = [SCCustomPropertyDefinition definitionWithName:@"ActiveIngredientData"
-                                                                                         withuiElementNibName:@"CustomSCTextViewCell_iPhone" 
-                                                                                           withObjectBindings:customCellActiveIngredientDataBindings];
+                                                                                         uiElementNibName:@"CustomSCTextViewCell_iPhone" 
+                                                                                           objectBindings:customCellActiveIngredientDataBindings];
 	
     
     
@@ -180,8 +180,8 @@
 	
     //create the custom property definition
     SCCustomPropertyDefinition *dosageDataProperty = [SCCustomPropertyDefinition definitionWithName:@"dosageData"
-                                                                             withuiElementNibName:@"CustomSCTextViewCell_iPhone" 
-                                                                               withObjectBindings:dosageDataBindings];
+                                                                             uiElementNibName:@"CustomSCTextViewCell_iPhone" 
+                                                                               objectBindings:dosageDataBindings];
 	
     
     
@@ -196,8 +196,8 @@
 	
     //create the custom property definition
     SCCustomPropertyDefinition *formDataProperty = [SCCustomPropertyDefinition definitionWithName:@"FormData"
-                                                                                     withuiElementNibName:@"CustomSCTextViewCell_iPhone" 
-                                                                                       withObjectBindings:formDataBindings];
+                                                                                     uiElementNibName:@"CustomSCTextViewCell_iPhone" 
+                                                                                       objectBindings:formDataBindings];
 	
     
     

@@ -108,7 +108,7 @@
     
     NSString *clientViewControllerNibName;
     
-    if ([SCHelper is_iPad]) 
+    if ([SCUtilities is_iPad]) 
         clientViewControllerNibName=[NSString stringWithString:@"ClientsViewController_iPad"];
     else
         clientViewControllerNibName=[NSString stringWithString:@"ClientsViewController_iPhone"];

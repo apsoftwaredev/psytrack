@@ -15,10 +15,11 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewModel.h"
+
+#import <UIKit/UIKit.h>
 #import "TimePickerView.h"
 
-@interface LongTimePickerCell : SCControlCell <UIPickerViewDataSource, UIPickerViewDelegate, SCTableViewCellDelegate>
+@interface LongTimePickerCell : SCCustomCell <UIPickerViewDataSource, UIPickerViewDelegate>
 {
     __weak UITextField *pickerField;
     //    TimePickerView *timePickerView;

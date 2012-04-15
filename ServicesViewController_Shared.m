@@ -108,15 +108,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-    // Gracefully handle reloading the view controller after a memory warning
-    tableModel = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
-    if(tableModel)
-    {
-        [tableModel replaceModeledTableViewWith:self.tableView];
-        return;
-    }
-    
+   
     
    
     NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
@@ -179,7 +171,7 @@
     [self.searchBar setSelectedScopeButtonIndex:2];
     // Initialize tableModel
 
-    if ([SCHelper is_iPad]) {
+    if ([SCUtilities is_iPad]) {
         
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
@@ -346,7 +338,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
-    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
         
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
@@ -658,8 +650,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         {
             //if change the cell text then update the method that sets the age with the new cell text
-            SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" withBoundObject:nil withPropertyName:@"Age"];
-            SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Wechsler Test Age" withBoundObject:nil withPropertyName:@"WechslerAge"];
+            SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" boundObject:nil labelTextPropertyName:@"Age"];
+            SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Wechlsler Test Age" boundObject:nil labelTextPropertyName:@"WechslerAge"];
             actualAge.label.text=[NSString stringWithString: @"0y 0m"];
             wechslerAge.label.text=[NSString stringWithFormat:@"%iy %im",0,0];
             [section addCell:actualAge];

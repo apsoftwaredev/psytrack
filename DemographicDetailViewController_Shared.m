@@ -33,7 +33,7 @@
 //    NSString *shortFieldCellNibName=nil;
 //    NSString *textFieldAndLableNibName=nil;
     NSString *scaleDataCellNibName=nil;
-    if ([SCHelper is_iPad]) {
+    if ([SCUtilities is_iPad]) {
 //        textFieldAndLableNibName=@"TextFieldAndLabelCell_iPad";
 //        shortFieldCellNibName=@"ShortFieldCell_iPad";
         scaleDataCellNibName=@"ScaleDataCell_iPad";
@@ -56,9 +56,9 @@
     
     //start Demographic Profile setup
     //Create a class definition for Demographic Profile entity
-	self.demographicProfileDef = [SCClassDefinition definitionWithEntityName:@"DemographicProfileEntity" 
-                                                    withManagedObjectContext:managedObjectContext
-                                                           withPropertyNames:[NSArray arrayWithObjects:@"profileNotes",@"sex",@"gender", @"sexualOrientation",
+	self.demographicProfileDef = [SCEntityDefinition definitionWithEntityName:@"DemographicProfileEntity" 
+                                                    managedObjectContext:managedObjectContext
+                                                           propertyNames:[NSArray arrayWithObjects:@"profileNotes",@"sex",@"gender", @"sexualOrientation",
                                                                               @"disabilities",@"educationLevel",@"employmentStatus", @"ethnicities",@"languagesSpoken",
                                                                               @"cultureGroups",@"migrationHistory", @"interpersonal",  
                                                                               @"races",@"spiritualBeliefs",@"significantLifeEvents",@"militaryService", @"additionalVariables",nil]];
@@ -66,58 +66,58 @@
     
     
     //Create a class definition for Demographic Gender entity
-    SCClassDefinition *genderDef = [SCClassDefinition definitionWithEntityName:@"GenderEntity" 
-                                                      withManagedObjectContext:managedObjectContext
-                                                             withPropertyNames:[NSArray arrayWithObjects:@"genderName",@"notes",nil]];
+    SCEntityDefinition *genderDef = [SCEntityDefinition definitionWithEntityName:@"GenderEntity" 
+                                                      managedObjectContext:managedObjectContext
+                                                             propertyNames:[NSArray arrayWithObjects:@"genderName",@"notes",nil]];
     
     genderDef.orderAttributeName=@"order";
     //Create a class definition for Demographic Immigration History entity
-    SCClassDefinition *migrationHistoryDef = [SCClassDefinition definitionWithEntityName:@"MigrationHistoryEntity" 
-                                                                 withManagedObjectContext:managedObjectContext
-                                                                        withPropertyNames:[NSArray arrayWithObjects:@"migratedFrom",@"migratedTo",@"arrivedDate",@"notes",nil]];
+    SCEntityDefinition *migrationHistoryDef = [SCEntityDefinition definitionWithEntityName:@"MigrationHistoryEntity" 
+                                                                 managedObjectContext:managedObjectContext
+                                                                        propertyNames:[NSArray arrayWithObjects:@"migratedFrom",@"migratedTo",@"arrivedDate",@"notes",nil]];
     
        
     
     
     //Create a class definition for  Disablity entity
-    SCClassDefinition *disabilityDef = [SCClassDefinition definitionWithEntityName:@"DisabilityEntity" 
-                                                          withManagedObjectContext:managedObjectContext
-                                                                 withPropertyNames:[NSArray arrayWithObjects:@"disabilityName",@"notes",nil]];
+    SCEntityDefinition *disabilityDef = [SCEntityDefinition definitionWithEntityName:@"DisabilityEntity" 
+                                                          managedObjectContext:managedObjectContext
+                                                                 propertyNames:[NSArray arrayWithObjects:@"disabilityName",@"notes",nil]];
     disabilityDef.orderAttributeName=@"order";
     //Create a class definition for Education Level entity
-    SCClassDefinition *educationLevelDef = [SCClassDefinition definitionWithEntityName:@"EducationLevelEntity" 
-                                                              withManagedObjectContext:managedObjectContext
-                                                                     withPropertyNames:[NSArray arrayWithObjects:@"educationLevel",@"notes",nil]];
+    SCEntityDefinition *educationLevelDef = [SCEntityDefinition definitionWithEntityName:@"EducationLevelEntity" 
+                                                              managedObjectContext:managedObjectContext
+                                                                     propertyNames:[NSArray arrayWithObjects:@"educationLevel",@"notes",nil]];
     educationLevelDef.orderAttributeName=@"order";
     //Create a class definition for Employment Status entity
-    SCClassDefinition *employmentStatuslDef = [SCClassDefinition definitionWithEntityName:@"EmploymentStatusEntity" 
-                                                                 withManagedObjectContext:managedObjectContext
-                                                                        withPropertyNames:[NSArray arrayWithObjects:@"employmentStatus",@"notes",nil]];
+    SCEntityDefinition *employmentStatuslDef = [SCEntityDefinition definitionWithEntityName:@"EmploymentStatusEntity" 
+                                                                 managedObjectContext:managedObjectContext
+                                                                        propertyNames:[NSArray arrayWithObjects:@"employmentStatus",@"notes",nil]];
     
     employmentStatuslDef.orderAttributeName=@"order";
     //Create a class definition for Ethnicity entity
-    SCClassDefinition *ethnicitylDef = [SCClassDefinition definitionWithEntityName:@"EthnicityEntity" 
-                                                          withManagedObjectContext:managedObjectContext
-                                                                 withPropertyNames:[NSArray arrayWithObjects:
+    SCEntityDefinition *ethnicitylDef = [SCEntityDefinition definitionWithEntityName:@"EthnicityEntity" 
+                                                          managedObjectContext:managedObjectContext
+                                                                 propertyNames:[NSArray arrayWithObjects:
                                                                                     @"ethnicityName",@"notes",nil]]; 
     ethnicitylDef.orderAttributeName=@"order";
     //Create a class definition for Culture Group entity
-    SCClassDefinition *cultureGroupDef = [SCClassDefinition definitionWithEntityName:@"CultureGroupEntity" 
-                                                            withManagedObjectContext:managedObjectContext
-                                                                   withPropertyNames:[NSArray arrayWithObjects:@"cultureName",@"notes",nil]];  
+    SCEntityDefinition *cultureGroupDef = [SCEntityDefinition definitionWithEntityName:@"CultureGroupEntity" 
+                                                            managedObjectContext:managedObjectContext
+                                                                   propertyNames:[NSArray arrayWithObjects:@"cultureName",@"notes",nil]];  
     
     //Create a class definition for Languages Spoken entity
-    SCClassDefinition *languageSpokenDef = [SCClassDefinition definitionWithEntityName:@"LanguageSpokenEntity" 
-                                                              withManagedObjectContext:managedObjectContext
-                                                                     withPropertyNames:[NSArray arrayWithObjects:@"language", @"primaryLanguage", @"nativeSpeaker", @"onlyLanguage", @"startedSpeaking", @"notes", nil]];  
+    SCEntityDefinition *languageSpokenDef = [SCEntityDefinition definitionWithEntityName:@"LanguageSpokenEntity" 
+                                                              managedObjectContext:managedObjectContext
+                                                                     propertyNames:[NSArray arrayWithObjects:@"language", @"primaryLanguage", @"nativeSpeaker", @"onlyLanguage", @"startedSpeaking", @"notes", nil]];  
     
     
     
     languageSpokenDef.orderAttributeName=@"order";
     //Create a class definition for Language entity
-    SCClassDefinition *languageDef = [SCClassDefinition definitionWithEntityName:@"LanguageEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"language",@"notes",nil]];  
+    SCEntityDefinition *languageDef = [SCEntityDefinition definitionWithEntityName:@"LanguageEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"language",@"notes",nil]];  
     
     
     languageDef.orderAttributeName=@"order";
@@ -125,21 +125,21 @@
     
     
     //Create a class definition for Race entity
-    SCClassDefinition *raceDef = [SCClassDefinition definitionWithEntityName:@"RaceEntity" 
-                                                    withManagedObjectContext:managedObjectContext
-                                                           withPropertyNames:[NSArray arrayWithObjects:@"raceName",@"notes",nil]];  
+    SCEntityDefinition *raceDef = [SCEntityDefinition definitionWithEntityName:@"RaceEntity" 
+                                                    managedObjectContext:managedObjectContext
+                                                           propertyNames:[NSArray arrayWithObjects:@"raceName",@"notes",nil]];  
     
     //Create a class definition for Spiritual Belief entity
-    SCClassDefinition *spiritualBeliefDef = [SCClassDefinition definitionWithEntityName:@"SpiritualBeliefEntity" 
-                                                               withManagedObjectContext:managedObjectContext
-                                                                      withPropertyNames:[NSArray arrayWithObjects:@"beliefName",@"notes",nil]];  
+    SCEntityDefinition *spiritualBeliefDef = [SCEntityDefinition definitionWithEntityName:@"SpiritualBeliefEntity" 
+                                                               managedObjectContext:managedObjectContext
+                                                                      propertyNames:[NSArray arrayWithObjects:@"beliefName",@"notes",nil]];  
     
     
     spiritualBeliefDef.orderAttributeName=@"order";
     //Create a class definition for Significant Life Event entity
-    SCClassDefinition *significantLifeEventDef = [SCClassDefinition definitionWithEntityName:@"SignificantLifeEventEntity" 
-                                                                    withManagedObjectContext:managedObjectContext
-                                                                           withPropertyNames:[NSArray arrayWithObjects:@"eventType",@"desc",nil]];  
+    SCEntityDefinition *significantLifeEventDef = [SCEntityDefinition definitionWithEntityName:@"SignificantLifeEventEntity" 
+                                                                    managedObjectContext:managedObjectContext
+                                                                           propertyNames:[NSArray arrayWithObjects:@"eventType",@"desc",nil]];  
     
     
     significantLifeEventDef.orderAttributeName=@"order";
@@ -149,9 +149,9 @@
     
     
     //Create a class definition for Additional Variables entity 
-    SCClassDefinition *additionalVariableDef = [SCClassDefinition definitionWithEntityName:@"AdditionalVariableEntity" 
-                                                                  withManagedObjectContext:managedObjectContext
-                                                                         withPropertyNames:[NSArray arrayWithObjects:@"variableName",@"selectedValue",@"stringValue",@"timeValue",@"dateValue",@"timeValueTwo", @"notes",nil]];  
+    SCEntityDefinition *additionalVariableDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalVariableEntity" 
+                                                                  managedObjectContext:managedObjectContext
+                                                                         propertyNames:[NSArray arrayWithObjects:@"variableName",@"selectedValue",@"stringValue",@"timeValue",@"dateValue",@"timeValueTwo", @"notes",nil]];  
     
     
     
@@ -163,9 +163,9 @@
     
     additionalVariableDef.orderAttributeName=@"order";
     //Create a class definition for Additional Variable Name entity
-    SCClassDefinition *additionalVariableNameDef = [SCClassDefinition definitionWithEntityName:@"AdditionalVariableNameEntity" 
-                                                                      withManagedObjectContext:managedObjectContext
-                                                                             withPropertyNames:[NSArray arrayWithObjects:@"variableName",@"notes",nil]]; 
+    SCEntityDefinition *additionalVariableNameDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalVariableNameEntity" 
+                                                                      managedObjectContext:managedObjectContext
+                                                                             propertyNames:[NSArray arrayWithObjects:@"variableName",@"notes",nil]]; 
     
     
     
@@ -173,9 +173,9 @@
     
     additionalVariableNameDef.orderAttributeName=@"order";
     
-    SCClassDefinition *additionalVariableValueDef = [SCClassDefinition definitionWithEntityName:@"AdditionalVariableValueEntity" 
-                                                                       withManagedObjectContext:managedObjectContext
-                                                                              withPropertyNames:[NSArray arrayWithObjects:@"variableValue",@"notes",nil]]; 
+    SCEntityDefinition *additionalVariableValueDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalVariableValueEntity" 
+                                                                       managedObjectContext:managedObjectContext
+                                                                              propertyNames:[NSArray arrayWithObjects:@"variableValue",@"notes",nil]]; 
     
     
     additionalVariableValueDef.orderAttributeName=@"order";
@@ -361,8 +361,8 @@
                                               dictionaryWithObjects:[NSArray arrayWithObject:@"fluencyLevel"] 
                                               forKeys:[NSArray arrayWithObject:@"70"]]; // 1 is the control tag
 	SCCustomPropertyDefinition *fluencyLevelDataProperty = [SCCustomPropertyDefinition definitionWithName:@"FluencyData"
-                                                                                     withuiElementNibName:scaleDataCellNibName
-                                                                                       withObjectBindings:fluencyLevelDataBindings];
+                                                                                     uiElementNibName:scaleDataCellNibName
+                                                                                       objectBindings:fluencyLevelDataBindings];
 	
     
     
@@ -513,9 +513,9 @@
     
     //Create a class definition for Military History entity
     
-    SCClassDefinition *militaryServiceDef = [SCClassDefinition definitionWithEntityName:@"MilitaryServiceEntity" 
-                                                               withManagedObjectContext:managedObjectContext
-                                                                      withPropertyNames:[NSArray arrayWithObjects:@"highestRank",@"awards",@"exposureToCombat", @"serviceDisability",@"tsClearance", @"serviceHistory",@"militarySpecialties", @"notes", nil]];  
+    SCEntityDefinition *militaryServiceDef = [SCEntityDefinition definitionWithEntityName:@"MilitaryServiceEntity" 
+                                                               managedObjectContext:managedObjectContext
+                                                                      propertyNames:[NSArray arrayWithObjects:@"highestRank",@"awards",@"exposureToCombat", @"serviceDisability",@"tsClearance", @"serviceHistory",@"militarySpecialties", @"notes", nil]];  
     
     
     militaryServiceDef.orderAttributeName=@"order";
@@ -529,9 +529,9 @@
     
     
   
-    SCClassDefinition *militaryServiceDatesDef = [SCClassDefinition definitionWithEntityName:@"MilitaryServiceDatesEntity" 
-                                                                    withManagedObjectContext:managedObjectContext
-                                                                           withPropertyNames:[NSArray arrayWithObjects:@"branch",@"officerOrEnlisted",@"dischargeType",@"dateJoined",@"dateDischarged",  @"notes", nil]];  
+    SCEntityDefinition *militaryServiceDatesDef = [SCEntityDefinition definitionWithEntityName:@"MilitaryServiceDatesEntity" 
+                                                                    managedObjectContext:managedObjectContext
+                                                                           propertyNames:[NSArray arrayWithObjects:@"branch",@"officerOrEnlisted",@"dischargeType",@"dateJoined",@"dateDischarged",  @"notes", nil]];  
     
     
     militaryServiceDatesDef.titlePropertyNameDelimiter=@", ";
@@ -629,7 +629,7 @@
     militaryServiceDatesNotesPropertyDef.type=SCPropertyTypeTextView;
     
     NSString*militarySpecialtiesPropName=@"militarySpecialties";
-    if ([SCHelper is_iPad]) {
+    if ([SCUtilities is_iPad]) {
         SCPropertyDefinition *militaryServiceSpecialtiesPropertyDef = [militaryServiceDatesDef propertyDefinitionWithName:militarySpecialtiesPropName];
         militaryServiceSpecialtiesPropertyDef.type=SCPropertyTypeTextView;
     }
@@ -641,8 +641,8 @@
                                                      dictionaryWithObjects:[NSArray arrayWithObject:@"militarySpecialties"] 
                                                      forKeys:[NSArray arrayWithObject:@"80"]]; // 1 is the control tag
         SCCustomPropertyDefinition *militarySpecialtiesDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SpecialtiesTextView"
-                                                                                                withuiElementNibName:@"TextViewAndLabelCell_iPhone"
-                                                                                                  withObjectBindings:militarySpecialtiesBindings];
+                                                                                                uiElementNibName:@"TextViewAndLabelCell_iPhone"
+                                                                                                  objectBindings:militarySpecialtiesBindings];
         
         
         [militaryServiceDef addPropertyDefinition:militarySpecialtiesDataProperty];
@@ -652,12 +652,12 @@
     }
     
     // Create a special group for military Records
-    SCPropertyGroup *militaryRecordGroup = [SCPropertyGroup groupWithHeaderTitle:@"Service Record" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"serviceHistory", nil]];
+    SCPropertyGroup *militaryRecordGroup = [SCPropertyGroup groupWithHeaderTitle:@"Service Record" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"serviceHistory", nil]];
     
     [militaryServiceDef.propertyGroups insertGroup:militaryRecordGroup atIndex:0];
     
     // Create a special group for rest of service related variables
-    SCPropertyGroup *militaryServiceGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"awards",@"exposureToCombat", @"highestRank",@"serviceDisability",@"tsClearance",militarySpecialtiesPropName, @"notes", nil]];
+    SCPropertyGroup *militaryServiceGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"awards",@"exposureToCombat", @"highestRank",@"serviceDisability",@"tsClearance",militarySpecialtiesPropName, @"notes", nil]];
     
     [militaryServiceDef.propertyGroups insertGroup:militaryServiceGroup atIndex:1];
     
@@ -718,8 +718,8 @@
                                        dictionaryWithObjects:[NSArray arrayWithObject:@"scale"] 
                                        forKeys:[NSArray arrayWithObject:@"70"]]; // 1 is the control tag
 	SCCustomPropertyDefinition *scaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"ScaleData"
-                                                                              withuiElementNibName:scaleDataCellNibName
-                                                                                withObjectBindings:scaleDataBindings];
+                                                                              uiElementNibName:scaleDataCellNibName
+                                                                                objectBindings:scaleDataBindings];
 	
     
     
@@ -727,7 +727,7 @@
     NSDictionary *sliderOneDataBindings = [NSDictionary 
                                            dictionaryWithObjects:[NSArray arrayWithObject:@"sliderOne"] 
                                            forKeys:[NSArray arrayWithObject:@"14"]]; // 1 is the control tag
-	SCCustomPropertyDefinition *sliderOneDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SliderOneData"                                                                                  withuiElementNibName:@"SliderOneDataCell_iPhone" withObjectBindings:sliderOneDataBindings];
+	SCCustomPropertyDefinition *sliderOneDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SliderOneData"                                                                                  uiElementNibName:@"SliderOneDataCell_iPhone" objectBindings:sliderOneDataBindings];
 	
     
     
@@ -737,8 +737,8 @@
                                            dictionaryWithObjects:[NSArray arrayWithObject:@"sliderTwo"] 
                                            forKeys:[NSArray arrayWithObject:@"14"]]; // 1 is the control tag
 	SCCustomPropertyDefinition *sliderTwoDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SliderTwoData"
-                                                                                  withuiElementNibName:@"SliderOneDataCell_iPhone" 
-                                                                                    withObjectBindings:sliderTwoDataBindings];
+                                                                                  uiElementNibName:@"SliderOneDataCell_iPhone" 
+                                                                                    objectBindings:sliderTwoDataBindings];
 	
     
     [additionalVariableDef insertPropertyDefinition:sliderTwoDataProperty atIndex:4];
@@ -774,14 +774,14 @@
     
         
     //Create a class definition for the interpersonalEntity
-    SCClassDefinition *interpersonalDef = [SCClassDefinition definitionWithEntityName:@"InterpersonalEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"relationship", @"notes"   , nil]];
+    SCEntityDefinition *interpersonalDef = [SCEntityDefinition definitionWithEntityName:@"InterpersonalEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"relationship", @"notes"   , nil]];
     
     //Create a class definition for the relationshipEntity
-    SCClassDefinition *relationshipDef = [SCClassDefinition definitionWithEntityName:@"RelationshipEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"relationship" , nil]];
+    SCEntityDefinition *relationshipDef = [SCEntityDefinition definitionWithEntityName:@"RelationshipEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"relationship" , nil]];
     
 
     
@@ -848,17 +848,17 @@
 //	
 //    
 //    NSString *frequencyPickerNibName;
-//    if ([SCHelper is_iPad]) 
+//    if ([SCUtilities is_iPad]) 
 //        frequencyPickerNibName=[NSString stringWithString:@"FrequencyPickerCell_iPad"];
 //    else
 //        frequencyPickerNibName=[NSString stringWithString:@"FrequencyPickerCell_iPhone"];
 //    
-//    SCCustomPropertyDefinition *frequencyProperty = [SCCustomPropertyDefinition definitionWithName:@"ContactFrequency" withuiElementNibName:frequencyPickerNibName withObjectBindings:frequencyPickerDataBindings];
+//    SCCustomPropertyDefinition *frequencyProperty = [SCCustomPropertyDefinition definitionWithName:@"ContactFrequency" uiElementNibName:frequencyPickerNibName objectBindings:frequencyPickerDataBindings];
 //	[interpersonalDef insertPropertyDefinition:frequencyProperty atIndex:1];
 //    
 //    NSString *longTimePickerCellNibName;
 //    
-//    if([SCHelper is_iPad])
+//    if([SCUtilities is_iPad])
 //        longTimePickerCellNibName=[NSString stringWithString:@"LongTimePickerCell_iPad"];
 //    else
 //        longTimePickerCellNibName=[NSString stringWithString:@"LongTimePickerCell_iPhone"];
@@ -871,7 +871,7 @@
 //                                                forKeys:[NSArray arrayWithObjects:@"40" , @"41",@"42",   nil]]; // 40, 41,42 are the control tags
 //	
 //    //create the custom property definition for addtional time
-//    SCCustomPropertyDefinition *durationPropertyDef = [SCCustomPropertyDefinition definitionWithName:@"Duration" withuiElementNibName:longTimePickerCellNibName  withObjectBindings:durationDataBindings];	
+//    SCCustomPropertyDefinition *durationPropertyDef = [SCCustomPropertyDefinition definitionWithName:@"Duration" uiElementNibName:longTimePickerCellNibName  objectBindings:durationDataBindings];	
 //    
 //    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
 //    durationPropertyDef.autoValidate=FALSE;
@@ -879,7 +879,7 @@
 //       
 //    [interpersonalDef insertPropertyDefinition:durationPropertyDef atIndex:2];
     
-//    SCCustomPropertyDefinition *titleProperty = [SCCustomPropertyDefinition definitionWithName:@"Time of Day" withuiElementClass:[ TimeOfDayPickerCell class] withObjectBindings:nil];
+//    SCCustomPropertyDefinition *titleProperty = [SCCustomPropertyDefinition definitionWithName:@"Time of Day" withuiElementClass:[ TimeOfDayPickerCell class] objectBindings:nil];
 //	[interpersonalDef insertPropertyDefinition:titleProperty atIndex:3];
 
     

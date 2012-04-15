@@ -71,9 +71,7 @@
 //
 //- (void)viewDidLoad {
 //    [super viewDidLoad];
-//    // Gracefully handle reloading the view controller after a memory warning
-//
-//   
+//   //   
 ////    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 ////        
 ////        [self.tableView setBackgroundView:nil];
@@ -497,7 +495,7 @@
             //@"Existing Hours"
             if (indexPath.row==0){
                 NSString *existingHoursViewControllerNibName=nil;
-                if ([SCHelper is_iPad]) {
+                if ([SCUtilities is_iPad]) {
                     existingHoursViewControllerNibName=@"ExistingHoursViewController_iPad";
                 }else {
                     existingHoursViewControllerNibName=@"ExistingHoursViewController";
@@ -842,7 +840,7 @@ return headerView;
 //            
 //            detailTableViewModel.tag = tableViewModel.tag+1;           
 //            
-//            if([SCHelper is_iPad]){
+//            if([SCUtilities is_iPad]){
 //                [detailTableViewModel.modeledTableView setBackgroundView:nil];
 //                [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
 //                [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
@@ -944,7 +942,7 @@ return headerView;
         detailTableViewModel.delegate = self;
         detailTableViewModel.tag = tableViewModel.tag+1;
      
-    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
    
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
@@ -977,7 +975,7 @@ return headerView;
                     SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
                     
                     
-                    [arrayOfObjectsSection dispatchSelectRowAtIndexPathEvent:indexPath];
+                    [arrayOfObjectsSection dispatchEventSelectRowAtIndexPath:indexPath];
                 }
             
             
@@ -998,7 +996,7 @@ return headerView;
         case 7:
         {
             NSString *existingHoursViewControllerNibName=nil;
-            if ([SCHelper is_iPad]) {
+            if ([SCUtilities is_iPad]) {
                 existingHoursViewControllerNibName=@"ExistingHoursViewController_iPad";
             }else {
                 existingHoursViewControllerNibName=@"ExistingHoursViewController";
@@ -1092,7 +1090,7 @@ else {
     if([section isKindOfClass:[SCArrayOfObjectsSection class]]){
         
         SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
-        [arrayOfObjectsSection dispatchSelectRowAtIndexPathEvent:indexPath];
+        [arrayOfObjectsSection dispatchEventSelectRowAtIndexPath:indexPath];
         
         
     }

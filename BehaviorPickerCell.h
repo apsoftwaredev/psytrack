@@ -15,7 +15,7 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewModel.h"
+#import <UIKit/UIKit.h>
 #import "MyPickerView.h"
 #import "BOPickersDataSource.h"
 

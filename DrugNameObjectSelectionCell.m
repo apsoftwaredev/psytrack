@@ -91,7 +91,7 @@
     
     NSString *drugViewControllerNibName;
     
-    if ([SCHelper is_iPad]) 
+    if ([SCUtilities is_iPad]) 
         drugViewControllerNibName=[NSString stringWithString:@"DrugViewController_iPhone"];
     else
         drugViewControllerNibName=[NSString stringWithString:@"DrugViewController_iPhone"];

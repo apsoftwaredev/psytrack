@@ -15,9 +15,9 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewCell.h"
+#import <UIKit/UIKit.h>
 
-@interface SuicidaltiyCell : SCControlCell <SCTableViewCellDelegate>{
+@interface SuicidaltiyCell : SCCustomCell <SCTableViewCellDelegate>{
     BOOL suicidePlan;
     BOOL suicideIdeation;
     BOOL suicideMeans;

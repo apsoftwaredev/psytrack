@@ -68,13 +68,6 @@
 
     [super viewDidLoad];
     
-    // Gracefully handle reloading the view controller after a memory warning
-    tableModel = [[SCModelCenter sharedModelCenter] modelForViewController:self];
-    if(tableModel)
-    {
-        [tableModel replaceModeledTableViewWith:self.tableView];
-        return;
-    }
     
     UIImage *lockImage=[UIImage imageNamed:@"lock.png"];
 	UIBarButtonItem *stopButton = [[UIBarButtonItem alloc] initWithImage:lockImage style:UIBarButtonItemStyleDone target:self action:@selector(lockApplication)];
@@ -100,19 +93,24 @@
 //    
     
 
-
-    SCSwitchCell *passCodeOnOffSwitchCell=[[SCSwitchCell alloc] initWithText:@"Passcode" withBoundKey:@"lock_screen_passcode_is_on" withValue:[NSNumber numberWithBool:(BOOL)[self passCodeLockIsOn]]];
+    SCSwitchCell *passCodeOnOffSwitchCell =[[SCSwitchCell alloc] initWithText:@"Passcode"];
+    passCodeOnOffSwitchCell.switchControl.on=(BOOL)[self passCodeLockIsOn];
+    
+//    SCSwitchCell *passCodeOnOffSwitchCell=[[SCSwitchCell alloc] initWithText:@"Passcode" withBoundKey:@"lock_screen_passcode_is_on" withValue:[NSNumber numberWithBool:(BOOL)[self passCodeLockIsOn]]];
     passCodeOnOffSwitchCell.tag=1;
-    SCSwitchCell *lockOnStartUpSwitchCell=[[SCSwitchCell alloc] initWithText:@"Lock on Startup" withBoundKey:@"lock_screen_lock_at_startup" withSwitchOnValue:[NSNumber numberWithBool:[self isLockedAtStartup]]];
+    
+    SCSwitchCell *lockOnStartUpSwitchCell=[[SCSwitchCell alloc] initWithText:@"Lock on Startup"];
+    lockOnStartUpSwitchCell.switchControl.on=[self isLockedAtStartup];
+//    SCSwitchCell *lockOnStartUpSwitchCell=[[SCSwitchCell alloc] initWithText:@"Lock on Startup" withBoundKey:@"lock_screen_lock_at_startup" withSwitchOnValue:[NSNumber numberWithBool:[self isLockedAtStartup]]];
     lockOnStartUpSwitchCell.tag=2;
     // Create an array of objects section
    
-    SCTextFieldCell *oldEncryptionString=[SCTextFieldCell cellWithText:@"Old" withBoundKey:@"old_encryption_string" withValue:nil];
-    
+//    SCTextFieldCell *oldEncryptionString=[SCTextFieldCell cellWithText:@"Old" withBoundKey:@"old_encryption_string" withValue:nil];
+SCTextFieldCell *oldEncryptionString=[SCTextFieldCell cellWithText:@"Old"];    
     oldEncryptionString.textField.secureTextEntry=YES;
-    SCTextFieldCell *newEncryptionString=[SCTextFieldCell cellWithText:@"New" withBoundKey:@"new_encryption_string" withValue:nil];
+    SCTextFieldCell *newEncryptionString=[SCTextFieldCell cellWithText:@"New"];
     newEncryptionString.textField.secureTextEntry=YES;
-    SCTextFieldCell *confirmEncryptionString=[SCTextFieldCell cellWithText:@"Confirm" withBoundKey:@"confirm_encryption_string" withValue:nil];
+    SCTextFieldCell *confirmEncryptionString=[SCTextFieldCell cellWithText:@"Confirm" ];
   
     confirmEncryptionString.textField.secureTextEntry=YES;
     SCTableViewSection *settingsSection=[SCTableViewSection sectionWithHeaderTitle:@"Lock Screen Settings"];
@@ -126,7 +124,7 @@
     
     
     // Initialize tableModel
-    tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView withViewController:self];
+    tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView];
 
     [tableModel addSection:settingsSection];
     [tableModel addSection:encryptionStringSection];
@@ -164,7 +162,7 @@
 
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index{
 
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
 if(section.headerTitle !=nil)
@@ -195,15 +193,27 @@ if(section.headerTitle !=nil)
    
   
                  BOOL passCodeIsOn=[self passCodeLockIsOn];
-                 
-    [tableModel.modelKeyValues setValue:[NSNumber numberWithBool:passCodeIsOn] forKey:@"lock_screen_passcode_is_on"];
-                 if (!passCodeIsOn) {
-                     [tableModel.modelKeyValues setValue:[NSNumber numberWithBool:passCodeIsOn] forKey:@"lock_screen_lock_at_startup"];
-                     
+    if (tableModel.sectionCount) {
+        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:0];
+        if (section.cellCount) {
+            SCSwitchCell *switchCell=(SCSwitchCell *)[section cellAtIndex:0];
+            [switchCell.switchControl setOn:passCodeIsOn];
+            if (!passCodeIsOn) {
+                
+                if (section.cellCount>1) {
+                    SCSwitchCell *startUpSwitchCell=(SCSwitchCell *)[section cellAtIndex:1];
+                    [startUpSwitchCell.switchControl setOn:passCodeIsOn] ;
                     
-//                                        
-                 }
+
+                }
+                                
+                //                                        
+            }
             [tableModel.modeledTableView reloadData];
+        }
+        
+    }
+   
                  
        
 
@@ -217,7 +227,7 @@ if(section.headerTitle !=nil)
 {
 
     NSString *passCodeEditorNibName;
-    if ([SCHelper is_iPad])
+    if ([SCUtilities is_iPad])
        passCodeEditorNibName=[NSString stringWithString:@"LCYPassCodeEditorViewController_iPad"];
     else 
      passCodeEditorNibName=[NSString stringWithString:@"LCYPassCodeEditorViewController_iPhone"];

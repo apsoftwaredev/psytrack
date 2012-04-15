@@ -15,8 +15,8 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewModel.h"
 
+#import <UIKit/UIKit.h>
 
 @interface DrugActionDateViewController : UITableViewController <SCTableViewModelDataSource, SCTableViewModelDelegate>{
     
