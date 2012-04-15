@@ -238,7 +238,7 @@
         
         
         
-        
+        [self willAccessValueForKey:@"keyString"];
         NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
         //NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
         NSData *encryptedData;
@@ -255,7 +255,7 @@
             }
         }
         
-        
+        NSLog(@"encrypted data %@",encryptedData);
         if (encryptedData.length) {
             [self willChangeValueForKey:key];
             [self setPrimitiveValue:encryptedData forKey:key];
@@ -399,7 +399,7 @@
         
         
         NSData *primitiveData=[self primitiveValueForKey:@"clientIDCode"];
-        
+        NSLog(@"primitive data %@",primitiveData);
         [self didAccessValueForKey:@"clientIDCode"];
         
         [self willAccessValueForKey:@"keyString"];

@@ -64,7 +64,7 @@
 -(void)cancelButtonTapped;
 
 -(BOOL)checkStringIsNumber:(NSString *)str;
-
+-(void)refreshData;
 
 @end
 

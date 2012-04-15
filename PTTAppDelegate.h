@@ -56,7 +56,7 @@ static NSString * const kPTTGloballyUniqueIdentifier=@"globally_unique_identifie
 static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group";
 static NSString * const kPTCurrentKeyDictionary=@"current_key_dictonary";
 static NSString * const kPTCurrentKeyDate=@"current_key_date";
-
+static NSString * const kPTiCloudPreference=@"icloud_preference";
 
 /****************************************************************************************/
 /*	class PTTAppDelegate	*/
@@ -106,7 +106,8 @@ static NSString * const kPTCurrentKeyDate=@"current_key_date";
     Reachability* internetReach;
     Reachability* wifiReach;
     
-    KeychainItemWrapper *passwordItem;
+    KeychainItemWrapper *passwordItem_;
+    KeychainItemWrapper *passCodeItem_;
     NSTimer *checkKeyEntityTimer;
 }
 
@@ -129,6 +130,7 @@ static NSString * const kPTCurrentKeyDate=@"current_key_date";
 @property (weak, nonatomic)IBOutlet UIView *tabBarControllerContainerView;
 @property (weak, nonatomic)IBOutlet UIViewController *viewController;
 @property (nonatomic, retain) KeychainItemWrapper *passwordItem;
+@property (nonatomic, retain) KeychainItemWrapper *passCodeItem;
 -(void)loadDatabaseData:(id)sender;
 - (void)initializeiCloudAccess ;
 -(NSURL *)applicationDrugsFileURL;
@@ -137,7 +139,7 @@ static NSString * const kPTCurrentKeyDate=@"current_key_date";
 //-(NSURL *)applicationDisordersFileURL;
 -(void)resetDisordersModel;
 + (PTTAppDelegate *)appDelegate ;
-
+- (NSURL *)applicationPTFileDirectory;
 -(BOOL)setUpDrugStore;
 - (void)saveContext;
 + (NSString*)retrieveFromUserDefaults:(NSString*)key;
@@ -149,7 +151,7 @@ static NSString * const kPTCurrentKeyDate=@"current_key_date";
 -(NSString *)setupLockDictionaryResultStr;
 -(NSString *)setupDefaultLockDictionaryResultStr;
 - (void)saveDrugsContext;
-
+- (NSNumber *)iCloudPreferenceFromUserDefaults;
 -(BOOL)copyDrugsToMainContext;
 
 -(void)displayMemoryWarning;
@@ -216,7 +218,7 @@ static NSString * const kPTCurrentKeyDate=@"current_key_date";
 
 + (NSString *)GetUUID;
 -(void)setLCYLockPlist;
--(NSData*)getSymetricData;
+-(NSData*)getLocalSymetricData;
 @end
 
 

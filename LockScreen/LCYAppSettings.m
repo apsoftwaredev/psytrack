@@ -8,7 +8,7 @@
 // Edited by Dan Boice 1/20/2012
 #import "LCYAppSettings.h"
 #import "PTTAppDelegate.h"
-
+#import "KeychainItemWrapper.h"
 @interface LCYAppSettings()
 - (void) updateProperties;
 @end
@@ -52,10 +52,18 @@
 
 	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
 	NSString *passcodeToSave = (self.lockScreenPasscodeIsOn) ? self.lockScreenPasscode : @"" ;
-//NSLog(@"passcodeToSave: %@", passcodeToSave);
+NSLog(@"passcodeToSave: %@", passcodeToSave);
 	
 	[lockDictionary setObject:passcodeToSave forKey:K_LOCK_SCREEN_PASSCODE];
+	KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"Passcode" accessGroup:nil];
 	
+    NSString *password=[wrapper objectForKey:(__bridge_transfer id)kSecValueData];
+    //    BOOL falseData=YES;
+    if ( wrapper && (!password ||!password.length)) {
+        
+        [wrapper setObject:passcodeToSave forKey:(__bridge id) kSecValueData];
+    }
+
     [lockDictionary setValue:[NSNumber numberWithBool:self.lockScreenLocked] forKey:K_LOCK_SCREEN_LOCKED];
     [lockDictionary setValue:[NSNumber numberWithInteger:self.lockScreenPasscodeAttempt] forKey:K_LOCK_SCREEN_ATTEMPT];
     [lockDictionary setValue:[NSNumber numberWithBool:self.lockScreenTimerOn] forKey:K_LOCK_SCREEN_TIMER_ON];

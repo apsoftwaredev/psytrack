@@ -10,6 +10,7 @@
 
 #import "LCYAppSettings.h"
 #import "PTTAppDelegate.h"
+#import "ButtonCell.h"
 
 @interface LCYLockSettingsViewController()
 - (void) handleTogglePasscode;
@@ -106,17 +107,29 @@
     lockOnStartUpSwitchCell.tag=2;
     // Create an array of objects section
    
-   
+    SCTextFieldCell *oldEncryptionString=[SCTextFieldCell cellWithText:@"Old" withBoundKey:@"old_encryption_string" withValue:nil];
+    
+    oldEncryptionString.textField.secureTextEntry=YES;
+    SCTextFieldCell *newEncryptionString=[SCTextFieldCell cellWithText:@"New" withBoundKey:@"new_encryption_string" withValue:nil];
+    newEncryptionString.textField.secureTextEntry=YES;
+    SCTextFieldCell *confirmEncryptionString=[SCTextFieldCell cellWithText:@"Confirm" withBoundKey:@"confirm_encryption_string" withValue:nil];
   
+    confirmEncryptionString.textField.secureTextEntry=YES;
     SCTableViewSection *settingsSection=[SCTableViewSection sectionWithHeaderTitle:@"Lock Screen Settings"];
     [settingsSection addCell:passCodeOnOffSwitchCell];
      [settingsSection addCell:lockOnStartUpSwitchCell];
    
+    SCTableViewSection *encryptionStringSection=[SCTableViewSection sectionWithHeaderTitle:@"Encryption String"];
+    [encryptionStringSection addCell:oldEncryptionString];
+    [encryptionStringSection addCell:newEncryptionString];
+    [encryptionStringSection addCell:confirmEncryptionString];
+    
+    
     // Initialize tableModel
     tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView withViewController:self];
 
     [tableModel addSection:settingsSection];
-
+    [tableModel addSection:encryptionStringSection];
 }
 
 

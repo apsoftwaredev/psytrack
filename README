@@ -42,6 +42,13 @@ TO DO:
 -add event title
 -incomplete paperwork not red
 -two my infos showing up
+-weight conversion not correct 320 lbs to kg
+-referrals clinician selection cell crash
+-existing hours number fields label covering field, instruments
+-change existing hours to have the total hours in the badge view
+-existing hours back button disappears
+-symptom description iphone
+-test administration client selection validation, cant save.
 
 -dosage number validation and keyboard
 -	Add the diagnoses section to client

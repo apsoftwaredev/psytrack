@@ -42,7 +42,6 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 #pragma mark -
 #pragma mark View lifecycle
 
-
 -(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClientsSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController{
 
     self=[super initWithNibName:nibName bundle:bundle];
@@ -58,7 +57,12 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 
 } 
 
-    
+-(void)refreshData{
+
+
+    [tableModel reloadBoundValues];
+    [tableModel.modeledTableView reloadData];
+}
 
 
 - (void)viewDidLoad {
@@ -174,9 +178,27 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                                                  withEntityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:currentClientsPredicate useSCSelectionSection:FALSE];	
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
         self.tableModel.editButtonItem = self.navigationItem.leftBarButtonItem;
-        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
-        self.navigationItem.rightBarButtonItem = addButton;
-        self.tableModel.addButtonItem = self.navigationItem.rightBarButtonItem;
+        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
+        
+        // create a standard "add" button
+        UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
+        addButton.style = UIBarButtonItemStyleBordered;
+
+       
+        
+        // create a spacer
+        UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshData)];
+        [buttons addObject:refreshButton];
+        
+       
+        
+        
+               [buttons addObject:addButton];
+        self.navigationItem.rightBarButtonItems=buttons;
+        
+        self.tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
     
     }
    
