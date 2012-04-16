@@ -32,7 +32,7 @@
     NSMutableDictionary *dictionaryABGroupIdentifierValueForArrayOfStringsIndexKey;
     NSMutableDictionary *dictionaryArrayOfStringsIndexForGroupIdentifierKey;
     NSArray *groupArray;
-
+    NSMutableDictionary *_valuesDictionary;
 //    ABAddressBookRef addressBook;
     SCTableViewModel *currentDetailTableViewModel_;
     SCObjectSelectionCell *sourcesObjSelectionCell_;

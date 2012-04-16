@@ -125,7 +125,7 @@
     //Do some property definition customization for the existingAgeGroupDef Entity defined in demographics
     //Create the property definition for the ageGroups property
     SCPropertyDefinition *ageGroupPropertyDef = [demographicsDef propertyDefinitionWithName:@"ageGroups"];
-    ageGroupPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingAgeGroupDef
+    ageGroupPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:existingAgeGroupDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
                                                                                     allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add age groups"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add age group"]  addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
@@ -153,7 +153,7 @@
     //set the property definition type to objects selection
 	
     ageGroupInExistingAgeGroupPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *ageGroupSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:ageGroupDef allowMultipleSelection:NO allowNoSelection:YES];
+    SCObjectSelectionAttributes *ageGroupSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:ageGroupDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     ageGroupSelectionAttribs.allowAddingItems = YES;
@@ -188,7 +188,7 @@
     //Do some property definition customization for the existingAgeGroupDef Entity defined in demographics
     //Create the property definition for the ageGroups property
     SCPropertyDefinition *genderPropertyDef = [demographicsDef propertyDefinitionWithName:@"genders"];
-    genderPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingGenderDef
+    genderPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:existingGenderDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
                                                                                     allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add genders"]   addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add gender"]  addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
@@ -218,7 +218,7 @@
     //set the property definition type to objects selection
 	
     genderInExistingGendersPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *genderSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:genderpDef allowMultipleSelection:NO allowNoSelection:YES];
+    SCObjectSelectionAttributes *genderSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:genderpDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     genderSelectionAttribs.allowAddingItems = YES;
@@ -258,7 +258,7 @@
     //Do some property definition customization for the existingAgeGroupDef Entity defined in demographics
     //Create the property definition for the ageGroups property
     SCPropertyDefinition *ethnicityPropertyDef = [demographicsDef propertyDefinitionWithName:@"ethnicities"];
-    ethnicityPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingEthnicitiesDef
+    ethnicityPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:existingEthnicitiesDef
                                                                                   allowAddingItems:YES
                                                                                 allowDeletingItems:YES
                                                                                   allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add ethnicities"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add ethnicity"]  addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
@@ -286,7 +286,7 @@
     //set the property definition type to objects selection
 	
     ethnicityInExistingEthnicityPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *ethnicitySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:ethnicitypDef allowMultipleSelection:NO allowNoSelection:YES];
+    SCObjectSelectionAttributes *ethnicitySelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:ethnicitypDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     ethnicitySelectionAttribs.allowAddingItems = YES;
@@ -322,7 +322,7 @@
     //Do some property definition customization for the existingAgeGroupDef Entity defined in demographics
     //Create the property definition for the ageGroups property
     SCPropertyDefinition *racePropertyDef = [demographicsDef propertyDefinitionWithName:@"races"];
-    racePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingRaceDef
+    racePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:existingRaceDef
                                                                                      allowAddingItems:YES
                                                                                    allowDeletingItems:YES
                                                                                      allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add ethnicities"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add race"]  addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
@@ -350,7 +350,7 @@
     //set the property definition type to objects selection
 	
     raceInExistingRacePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *raceSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:raceDef allowMultipleSelection:NO allowNoSelection:YES];
+    SCObjectSelectionAttributes *raceSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:raceDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     raceSelectionAttribs.allowAddingItems = YES;
@@ -388,7 +388,7 @@
     //Do some property definition customization for the existingAgeGroupDef Entity defined in demographics
     //Create the property definition for the ageGroups property
     SCPropertyDefinition *disabilityPropertyDef = [demographicsDef propertyDefinitionWithName:@"individualsWithDisabilities"];
-    disabilityPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingDisabilityDef
+    disabilityPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:existingDisabilityDef
                                                                                 allowAddingItems:YES
                                                                               allowDeletingItems:YES
                                                                                 allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add disabilities"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add disability"]  addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
@@ -417,7 +417,7 @@
     //set the property definition type to objects selection
 	
     disabilityInExistingDisabilityPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *disabilitySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:disabilityDef allowMultipleSelection:NO allowNoSelection:YES];
+    SCObjectSelectionAttributes *disabilitySelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:disabilityDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     disabilitySelectionAttribs.allowAddingItems = YES;
@@ -453,7 +453,7 @@
     //Do some property definition customization for the existingAgeGroupDef Entity defined in demographics
     //Create the property definition for the ageGroups property
     SCPropertyDefinition *sexualOrientationPropertyDef = [demographicsDef propertyDefinitionWithName:@"sexualOrientations"];
-    sexualOrientationPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingSexualOrientationDef
+    sexualOrientationPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:existingSexualOrientationDef
                                                                                       allowAddingItems:YES
                                                                                     allowDeletingItems:YES
                                                                                       allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add sexual orientations"]   addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add sexual orientation"]  addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
@@ -508,7 +508,7 @@
     SCPropertyDefinition *supervisionPropertyDef = [existingHoursDef propertyDefinitionWithName:@"supervision"];
     
     supervisionPropertyDef.title=@"Supervision Types";
-    supervisionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:supervisionDef
+    supervisionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supervisionDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
                                                                                     allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add supervison hours"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add supervison hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
@@ -537,7 +537,7 @@
     //set the property definition type to objects selection
 	
     supervisionTypePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *supervisionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:supervisionTypeDef allowMultipleSelection:NO allowNoSelection:YES];
+    SCObjectSelectionAttributes *supervisionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:supervisionTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     supervisionTypeSelectionAttribs.allowAddingItems = YES;
@@ -571,7 +571,7 @@
 	
     //create the custom property definition
     SCCustomPropertyDefinition *clinicianDataProperty = [SCCustomPropertyDefinition definitionWithName:@"ClinicianData"
-                                                                                    withuiElementClass:[ClinicianSelectionCell class] objectBindings:clinicianDataBindings];
+                                                                                    uiElementClass:[ClinicianSelectionCell class] objectBindings:clinicianDataBindings];
 	
 
     
@@ -607,7 +607,7 @@
     
     //Create the property definition for the supportActivity property
     SCPropertyDefinition *supportActivitiesPropertyDef = [existingHoursDef propertyDefinitionWithName:@"supportActivities"];
-    supportActivitiesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:supportActivityDef
+    supportActivitiesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supportActivityDef
                                                                                        allowAddingItems:YES
                                                                                      allowDeletingItems:YES
                                                                                        allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add support activity hours"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add support activity hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
@@ -634,7 +634,7 @@
     //set the property definition type to objects selection
 	
     supportActivityTypePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *supportActivityTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:supportActivityTypeDef allowMultipleSelection:NO allowNoSelection:YES];
+    SCObjectSelectionAttributes *supportActivityTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:supportActivityTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     supportActivityTypeSelectionAttribs.allowAddingItems = YES;
@@ -690,7 +690,7 @@
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     
    
-    assessmentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:assessmentDef
+    assessmentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:assessmentDef
                                                                                              allowAddingItems:YES
                                                                                            allowDeletingItems:YES
                                                                                              allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add assessment hours"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add assessment hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
@@ -715,7 +715,7 @@
     //set the property definition type to objects selection
 	
     testingSessionTypePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *testingSessionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:testingSessionTypeDef allowMultipleSelection:NO allowNoSelection:YES];
+    SCObjectSelectionAttributes *testingSessionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:testingSessionTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     testingSessionTypeSelectionAttribs.allowAddingItems = YES;
@@ -750,7 +750,7 @@
     //Create the property definition for the assessment property in the existingHours class
     SCPropertyDefinition *assessmentDemPropertyDef = [assessmentDef propertyDefinitionWithName:@"demographics"];
     
-    assessmentDemPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:demographicsDef
+    assessmentDemPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:demographicsDef
                                                                                                allowAddingItems:NO
                                                                                              allowDeletingItems:NO
                                                                                                allowMovingItems:NO];
@@ -805,7 +805,7 @@
     
     //Create the property definition for the instruments property
     SCPropertyDefinition *existingInstrumentsPropertyDef = [assessmentDef propertyDefinitionWithName:@"instruments"];
-    existingInstrumentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingInstrumentDef
+    existingInstrumentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:existingInstrumentDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
                                                                                     allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add instruments"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
@@ -827,7 +827,7 @@
     //set the property definition type to objects selection
 	
     instrumentPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *instrumentSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:instrumentDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *instrumentSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:instrumentDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     
     //set some addtional attributes
     instrumentSelectionAttribs.allowAddingItems = YES;
@@ -857,7 +857,7 @@
     //set the property definition type to objects selection
 	
     instrumentTypePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *instrumentTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:instrumentTypeDef allowMultipleSelection:NO allowNoSelection:YES];
+    SCObjectSelectionAttributes *instrumentTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:instrumentTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     instrumentTypeSelectionAttribs.allowAddingItems = YES;
@@ -921,7 +921,7 @@
 
     //Create the property definition for the instruments property
     SCPropertyDefinition *existingBatteriesPropertyDef = [assessmentDef propertyDefinitionWithName:@"batteries"];
-    existingBatteriesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:existingBatteryDef
+    existingBatteriesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:existingBatteryDef
                                                                                                allowAddingItems:YES
                                                                                              allowDeletingItems:YES
                                                                                                allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add batteries"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add battery"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
@@ -945,7 +945,7 @@
     //set the property definition type to objects selection
 	
     batteryPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *batterySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:batteryDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *batterySelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:batteryDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     
     //set some addtional attributes
     batterySelectionAttribs.allowAddingItems = YES;
@@ -967,7 +967,7 @@
     //create a property definition
     SCPropertyDefinition *batteryInstrumentsPropertyDef = [batteryDef propertyDefinitionWithName:@"instruments"];
     
-    batteryInstrumentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:instrumentDef
+    batteryInstrumentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentDef
                                                                                                allowAddingItems:YES
                                                                                              allowDeletingItems:YES
                                                                                                allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add instruments"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
@@ -1007,7 +1007,7 @@
     SCPropertyDefinition *directInterventionPropertyDef = [existingHoursDef propertyDefinitionWithName:@"directInterventions"];
     
     directInterventionPropertyDef.title=@"Direct Intervention Types";
-    directInterventionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:interventionDef
+    directInterventionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:interventionDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
                                                                                     allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add direct interventions"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add a direct intervention" ]addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
@@ -1021,7 +1021,7 @@
     //Create the property definition for the assessment property in the existingHours class
     SCPropertyDefinition *interventionDemPropertyDef = [interventionDef propertyDefinitionWithName:@"demographics"];
     
-    interventionDemPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:demographicsDef
+    interventionDemPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:demographicsDef
                                                                                          allowAddingItems:NO
                                                                                        allowDeletingItems:NO
                                                                                          allowMovingItems:NO];
@@ -1049,7 +1049,7 @@
     //set the property definition type to objects selection
 	
     interventionTypePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *interventionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:interventionTypeDef allowMultipleSelection:NO allowNoSelection:YES];
+    SCObjectSelectionAttributes *interventionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:interventionTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     interventionTypeSelectionAttribs.allowAddingItems = YES;
@@ -1093,7 +1093,7 @@
     //set the property definition type to objects selection
 	
     interventionModelsPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *interventionModelsSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:interventionModelDef allowMultipleSelection:YES allowNoSelection:YES];
+    SCObjectSelectionAttributes *interventionModelsSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:interventionModelDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
     
     //set some addtional attributes
     interventionModelsSelectionAttribs.allowAddingItems = YES;
@@ -1116,8 +1116,7 @@
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     
-    tableModel_ = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
-										withEntityClassDefinition:existingHoursDef];
+    tableModel_ = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView  										entityDefinition:existingHoursDef];
     if (self.navigationItem.rightBarButtonItems.count>1) {
         
         tableModel_.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];

@@ -17,7 +17,7 @@
  */
 #import <UIKit/UIKit.h>
 
-@interface CustomSCTextViewCell : SCCustomCell
+@interface CustomSCTextViewCell : SCControlCell
 
 
 @property (nonatomic, weak)IBOutlet UITextView *myTextView;

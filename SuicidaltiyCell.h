@@ -17,7 +17,7 @@
  */
 #import <UIKit/UIKit.h>
 
-@interface SuicidaltiyCell : SCCustomCell <SCTableViewCellDelegate>{
+@interface SuicidaltiyCell : SCControlCell {
     BOOL suicidePlan;
     BOOL suicideIdeation;
     BOOL suicideMeans;

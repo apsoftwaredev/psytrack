@@ -276,17 +276,17 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         switch (selectedScope) {
             case 1: //Male
-                objectsModel.itemsPredicate = nil;
+//                objectsModel.itemsPredicate = nil;
                 //NSLog(@"case default");
                 break;
                 
             case 2: //Male
-                objectsModel.itemsPredicate = paperworkIncompletePredicate;
+//                objectsModel.itemsPredicate = paperworkIncompletePredicate;
                 //NSLog(@"case paperwork Incomplete");
                 break;                
                 
             default:
-                objectsModel.itemsPredicate = currentMonthPredicate;
+//                objectsModel.itemsPredicate = currentMonthPredicate;
                 //NSLog(@"case 1");
                 
                 
@@ -465,7 +465,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDisappearForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
     
@@ -494,7 +494,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     
 }
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     currentDetailTableViewModel=detailTableViewModel;
     
@@ -519,7 +519,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
                     
                     SCArrayOfObjectsSection *section=(SCArrayOfObjectsSection *)[tableViewModel sectionAtIndex:0];
-                    NSMutableSet *mutableSet=[(NSMutableSet *)section.itemsSet mutableSetValueForKey:@"client"];
+                    NSMutableSet *mutableSet=[(NSMutableSet *)section.items mutableSetValueForKey:@"client"];
                     
                     SCArrayOfObjectsSection *mainSection=(SCArrayOfObjectsSection *)[detailTableViewModel sectionAtIndex:0];
                     ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];
@@ -561,7 +561,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     if (tableViewModel.tag==0||tableViewModel.tag==1) {
         currentDetailTableViewModel=detailTableViewModel;
         
@@ -593,7 +593,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
                 
                 SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
-                NSMutableSet *mutableSet=[(NSMutableSet *)arrayOfObjectsSection.itemsSet mutableSetValueForKey:@"client"];
+                NSMutableSet *mutableSet=[(NSMutableSet *)arrayOfObjectsSection.items mutableSetValueForKey:@"client"];
                 
                 SCArrayOfObjectsSection *mainSection=(SCArrayOfObjectsSection *)[detailTableViewModel sectionAtIndex:0];
                 ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];

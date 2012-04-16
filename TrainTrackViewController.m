@@ -803,9 +803,9 @@ return headerView;
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
    
-//    [super tableViewModel:tableViewModel detailViewWillAppearForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
+//    [super tableViewModel:tableViewModel detailViewWillPresentForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
 //    
     if (tableViewModel.tag==0) {
         if (detailTableViewModel.sectionCount>6) {

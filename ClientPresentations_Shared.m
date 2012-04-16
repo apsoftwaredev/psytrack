@@ -351,7 +351,7 @@
 	
     //create the custom property definition
     SCCustomPropertyDefinition *clientDataProperty = [SCCustomPropertyDefinition definitionWithName:@"CLientData"
-                                                                                 withuiElementClass:[ClientsSelectionCell class] objectBindings:clientDataBindings];
+                                                                                 uiElementClass:[ClientsSelectionCell class] objectBindings:clientDataBindings];
 	
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
@@ -552,7 +552,7 @@
 //    
 //    
 //    
-//    SCCustomPropertyDefinition *titleProperty = [SCCustomPropertyDefinition definitionWithName:@"Facial Expressions"withuiElementClass:[BehaviorPickerCell class] objectBindings:pickerDataBindings];
+//    SCCustomPropertyDefinition *titleProperty = [SCCustomPropertyDefinition definitionWithName:@"Facial Expressions"uiElementClass:[BehaviorPickerCell class] objectBindings:pickerDataBindings];
 //	[behavioralObservationsDef insertPropertyDefinition:titleProperty atIndex:2];
 	
     //create the dictionary with the data bindings
@@ -699,7 +699,7 @@
 
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index{
 
     //NSLog(@"tableviewmodel tab is %i",tableViewModel.tag);
 
@@ -709,8 +709,10 @@
         
        
       
-            SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" boundObject:nil propertyName:@"TestAge"];
-            SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Wechsler Test Age" boundObject:nil propertyName:@"WechslerTestAge"];
+            SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" boundObject:nil labelTextPropertyName:@"TestAge"]
+        ;
+       
+            SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Wechsler Test Age" boundObject:nil labelTextPropertyName:@"WechslerTestAge"];
             
             [section addCell:actualAge];
             [section addCell:wechslerAge];

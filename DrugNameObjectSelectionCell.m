@@ -133,7 +133,7 @@
                 
                 NSPredicate *predicate=[NSPredicate predicateWithFormat:@"applNo MATCHES %@",drugProduct.applNo];
                 
-                objectSelectionSection.itemsPredicate=predicate;
+//                objectSelectionSection.itemsPredicate=predicate;
                 [objectSelectionSection reloadBoundValues];
                 [drugsViewContoller.tableView reloadData];
                 
@@ -149,7 +149,7 @@
                
                     NSPredicate *predicate=[NSPredicate predicateWithFormat:@"applNo MATCHES %@",applicationNumber];
                     
-                    objectSelectionSection.itemsPredicate=predicate;
+//                    objectSelectionSection.itemsPredicate=predicate;
                     [objectSelectionSection reloadBoundValues];
                     [drugsViewContoller.tableView reloadData];
                 

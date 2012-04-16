@@ -51,8 +51,8 @@
     
     self.textLabel.text=@"Address Book Groups";
     
-    
-    self.items=[self addressBookGroupsArray];
+    NSArray *itemsArray=(NSArray *)self.items;
+    itemsArray=[self addressBookGroupsArray];
     
        
     self.synchWithABBeforeLoadBool=YES;

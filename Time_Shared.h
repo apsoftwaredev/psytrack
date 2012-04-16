@@ -20,7 +20,7 @@
 
 #import "StopwatchCell.h"
 
-@interface Time_Shared : NSObject <SCViewControllerDelegate, SCTableViewModelDataSource, SCTableViewModelDelegate,UIGestureRecognizerDelegate,SCTableViewCellDelegate>{
+@interface Time_Shared : NSObject <SCViewControllerDelegate, SCTableViewModelDataSource, SCTableViewModelDelegate,UIGestureRecognizerDelegate>{
 
 
 

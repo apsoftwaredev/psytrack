@@ -126,7 +126,8 @@
             
        
        
-        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withEntityClassDefinition:self.clinicianDef usingPredicate:filterPredicate useSCSelectionSection:YES];
+//        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withEntityClassDefinition:self.clinicianDef usingPredicate:filterPredicate useSCSelectionSection:YES];
+        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:self.clinicianDef];
         if (filterPredicate) {
             [self.searchBar setSelectedScopeButtonIndex:1];
         }
@@ -180,8 +181,11 @@
     else
     {
                 
-        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
-                                                 withEntityClassDefinition:self.clinicianDef usingPredicate:nil useSCSelectionSection:FALSE];	
+//        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
+//                                                 withEntityClassDefinition:self.clinicianDef usingPredicate:nil useSCSelectionSection:FALSE];	
+        
+        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView
+                                                 entityDefinition:self.clinicianDef];
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
         self.tableModel.editButtonItem = self.navigationItem.leftBarButtonItem;
 //        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
@@ -472,7 +476,7 @@
        
     if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
         SCObjectSelectionSection *selectionSection=(SCObjectSelectionSection *)section;
-         [selectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
+         [selectionSection dispatchEventSelectRowAtIndexPath:indexPath];
         if (tableViewModel.tag==0) {
             
             //        SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
@@ -570,14 +574,14 @@
     if ([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]]) {
         SCArrayOfObjectsModel *arrayOfObjectsModel=(SCArrayOfObjectsModel *)tableViewModel;
         
-        [arrayOfObjectsModel dispatchSelectRowAtIndexPathEvent:indexPath];
+        [arrayOfObjectsModel dispatchEventSelectRowAtIndexPath:indexPath];
         return;
     }
 
     if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
         SCArrayOfObjectsSection *selectionSection=(SCArrayOfObjectsSection *)section;
         
-        [selectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
+        [selectionSection dispatchEventSelectRowAtIndexPath:indexPath];
         
     }
     //NSLog(@"section class %@",[section class]);
@@ -780,20 +784,20 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     scopeFilter= [NSPredicate predicateWithFormat:@"myCurrentSupervisor == %i OR myPastSupervisor==%i", TRUE, TRUE];
                     
                 }
-                objectsModel.itemsPredicate = scopeFilter;
+//                objectsModel.itemsPredicate = scopeFilter;
                 
                     
                 //NSLog(@"case 1");
             }
                 break;
             case 2: //Female
-                objectsModel.itemsPredicate = [NSPredicate predicateWithFormat:@"atMyCurrentSite == %i OR myInformation==%i", TRUE, TRUE];
+//                objectsModel.itemsPredicate = [NSPredicate predicateWithFormat:@"atMyCurrentSite == %i OR myInformation==%i", TRUE, TRUE];
                 
                 //NSLog(@"case 2");
                 break;                
   
             default:
-                 objectsModel.itemsPredicate = nil;
+//                 objectsModel.itemsPredicate = nil;
                 //NSLog(@"case default");
                 
                 break;
@@ -1146,7 +1150,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 
 
-//- (void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
+//- (void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
 //{
 //    if (tableViewModel.tag==0) {
 //        currentDetailTableViewModel_=detailTableViewModel;
@@ -1472,7 +1476,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //    
 //}
 
-//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 //    if (tableViewModel.tag==0) {
 //         currentDetailTableViewModel=detailTableViewModel;
 //    }
@@ -2085,7 +2089,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     return YES;
 }
     
-//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDisappearForSectionAtIndex:(NSUInteger)index{
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDismissForSectionAtIndex:(NSUInteger)index{
 //    if (tableViewModel.tag==0) {
 //        self.currentDetailTableViewModel=nil;
 //        [self resetABVariablesToNil];

@@ -119,7 +119,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	currentClientPropertyDef.attributes = [SCSegmentedAttributes attributesWithSegmentTitlesArray:[NSArray arrayWithObjects:@"Yes", @"No", nil]];
     
     SCPropertyDefinition *demographicProfilePropertyDef = [self.clientDef propertyDefinitionWithName:@"demographicInfo"];
-    demographicProfilePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:demographicDetailViewController_Shared.demographicProfileDef
+    demographicProfilePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:demographicDetailViewController_Shared.demographicProfileDef
                                                                                               allowAddingItems:TRUE
                                                                                             allowDeletingItems:TRUE
                                                                                               allowMovingItems:FALSE];
@@ -149,7 +149,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     //Create the property definition for the phoneNumbers property
     SCPropertyDefinition *phoneNumbersPropertyDef = [self.clientDef propertyDefinitionWithName:@"phoneNumbers"];
-    phoneNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:phoneDef allowAddingItems:TRUE
+    phoneNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:phoneDef allowAddingItems:TRUE
                                                                                       allowDeletingItems:TRUE
                                                                                         allowMovingItems:FALSE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add New Phone Number"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
     
@@ -183,7 +183,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     phoneDef.titlePropertyName=@"phoneName;phoneNumber";
 	if (![SCUtilities is_iPad]) {
     
-    SCCustomPropertyDefinition *callButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"CallButton" withuiElementClass:[ButtonCell class] objectBindings:nil];
+    SCCustomPropertyDefinition *callButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"CallButton" uiElementClass:[ButtonCell class] objectBindings:nil];
     [phoneDef insertPropertyDefinition:callButtonProperty atIndex:3];
         
     }
@@ -203,7 +203,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     SCPropertyDefinition *logsPropertyDef = [self.clientDef propertyDefinitionWithName:@"logs"];
-    logsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:logDef allowAddingItems:TRUE
+    logsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:logDef allowAddingItems:TRUE
                                                                                       allowDeletingItems:TRUE
                                                                                         allowMovingItems:FALSE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add New Log Entry"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
     
@@ -311,7 +311,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	
     //create the custom property definition
     SCCustomPropertyDefinition *drugNameDataProperty = [SCCustomPropertyDefinition definitionWithName:@"DrugNameData"
-                                                                                 withuiElementClass:[DrugNameObjectSelectionCell class] objectBindings:drugNameDataBindings];
+                                                                                 uiElementClass:[DrugNameObjectSelectionCell class] objectBindings:drugNameDataBindings];
 	
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
@@ -325,7 +325,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     [medicationDef insertPropertyDefinition:drugNameDataProperty atIndex:0];
     
     SCPropertyDefinition *medicationsPropertyDef = [self.clientDef propertyDefinitionWithName:@"medicationHistory"];
-    medicationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:medicationDef allowAddingItems:TRUE
+    medicationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:medicationDef allowAddingItems:TRUE
                                                                               allowDeletingItems:TRUE
                                                                                 allowMovingItems:FALSE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add New Medication Entry"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
     
@@ -372,7 +372,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                                        datePickerMode:UIDatePickerModeDate
                                                         displayDatePickerInDetailView:NO];
     
-    SCCustomPropertyDefinition *clearDiscontinuedButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"clearDiscontinued" withuiElementClass:[ButtonCell class] objectBindings:nil];
+    SCCustomPropertyDefinition *clearDiscontinuedButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"clearDiscontinued" uiElementClass:[ButtonCell class] objectBindings:nil];
     [medicationDef insertPropertyDefinition:clearDiscontinuedButtonProperty atIndex:4];
     
    
@@ -415,7 +415,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     SCPropertyDefinition *symptomsTargetedPropertyDef = [medicationDef propertyDefinitionWithName:@"symptomsTargeted"];
     
     
-    symptomsTargetedPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:symptomDef
+    symptomsTargetedPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:symptomDef
                                                                                               allowAddingItems:YES
                                                                                             allowDeletingItems:YES
                                                                                             allowMovingItems:YES expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add symptoms"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
@@ -432,7 +432,9 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     SCPropertyDefinition *symptomNamePropertyDef = [symptomDef propertyDefinitionWithName:@"symptomName"];
     symptomNamePropertyDef.type = SCPropertyTypeObjectSelection;
     symptomNamePropertyDef.title=@"Symptom";
-	SCObjectSelectionAttributes *symptomNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:symptomNameDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *symptomNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:symptomNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    
+ 
     symptomNameSelectionAttribs.allowAddingItems = YES;
     symptomNameSelectionAttribs.allowDeletingItems = YES;
     symptomNameSelectionAttribs.allowMovingItems = YES;
@@ -455,7 +457,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     SCPropertyDefinition *medLogsPropertyDef = [medicationDef propertyDefinitionWithName:@"medLogs"];
-    medLogsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:medicationReviewDef allowAddingItems:TRUE
+    medLogsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:medicationReviewDef allowAddingItems:TRUE
                                                                                      allowDeletingItems:TRUE
                                                                                        allowMovingItems:FALSE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add New Medication Log Entry"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
     
@@ -502,7 +504,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     SCPropertyDefinition *sideEffectsPropertyDef = [medicationReviewDef propertyDefinitionWithName:@"sideEffects"];
     
    	sideEffectsPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *sideEffectsSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:sideEffectDef allowMultipleSelection:YES allowNoSelection:YES];
+	SCObjectSelectionAttributes *sideEffectsSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:sideEffectDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
     sideEffectsSelectionAttribs.allowAddingItems = YES;
     sideEffectsSelectionAttribs.allowDeletingItems = YES;
     sideEffectsSelectionAttribs.allowMovingItems = NO;
@@ -574,7 +576,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	
     //create the custom property definition
     SCCustomPropertyDefinition *clinicianDataProperty = [SCCustomPropertyDefinition definitionWithName:@"PrescriberData"
-                                                                                   withuiElementClass:[ClinicianSelectionCell class] objectBindings:clinicianDataBindings];
+                                                                                   uiElementClass:[ClinicianSelectionCell class] objectBindings:clinicianDataBindings];
 	
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
@@ -600,7 +602,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 //    
 //    SCPropertyGroup *prescriberNameGroup =[SCPropertyGroup groupWithHeaderTitle:@"Prescriber Name" footerTitle:@"Select this prescriber under the Clinician tab to add or view more details." propertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
 //    
-//    SCObjectSelectionAttributes *prescriberSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:prescriberDef allowMultipleSelection:NO allowNoSelection:NO];
+//    SCObjectSelectionAttributes *prescriberSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:prescriberDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
 //    prescriberSelectionAttribs.allowAddingItems = YES;
 //    prescriberSelectionAttribs.allowDeletingItems = YES;
 //    prescriberSelectionAttribs.allowMovingItems = YES;
@@ -723,7 +725,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     //Create the property definition for the vitals property
     SCPropertyDefinition *vitalsPropertyDef = [self.clientDef propertyDefinitionWithName:@"vitals"];
-    vitalsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:vitalsDef
+    vitalsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:vitalsDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
                                                                                     allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add vitals"]                                                      addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	

@@ -102,7 +102,7 @@
     //create a custom property definition for the Button Cell
     
     NSDictionary *buttonCellObjectBinding=[NSDictionary dictionaryWithObject:@"eventIdentifier" forKey:@"event_identifier"];
-    SCCustomPropertyDefinition *eventButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"EventButtonCell" withuiElementClass:[ButtonCell class] objectBindings:buttonCellObjectBinding];
+    SCCustomPropertyDefinition *eventButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"EventButtonCell" uiElementClass:[ButtonCell class] objectBindings:buttonCellObjectBinding];
     
     //add the property definition to the test administration detail view  
     [testSessionDeliveredDef addPropertyDefinition:eventButtonProperty];
@@ -152,7 +152,7 @@
     
     [supervisorDef.propertyGroups addGroup:supervisorNameGroup];
     
-    SCObjectSelectionAttributes *supervisorSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:supervisorDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *supervisorSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:supervisorDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     supervisorSelectionAttribs.allowAddingItems = YES;
     supervisorSelectionAttribs.allowDeletingItems = YES;
     supervisorSelectionAttribs.allowMovingItems = YES;
@@ -183,7 +183,7 @@
     SCPropertyDefinition *testAdministeredNotesPropertyDef=[testAdministeredDef propertyDefinitionWithName:@"notes"];
     testAdministeredNotesPropertyDef.type=SCPropertyTypeTextView;
     
-    testsAdministeredPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:testAdministeredDef
+    testsAdministeredPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:testAdministeredDef
                                                              allowAddingItems:TRUE
                                                            allowDeletingItems:TRUE
                                                              allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Tests Administered)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:TRUE addNewObjectuiElementExistsInEditingMode:FALSE];
@@ -204,7 +204,7 @@
     SCPropertyDefinition *testNamePropertyDef=[testAdministeredDef propertyDefinitionWithName:@"psychTestName"];
     testNamePropertyDef.type =SCPropertyTypeObjectSelection;
     
-    SCObjectSelectionAttributes *testNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:testNameDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *testNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:testNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     testNameSelectionAttribs.allowAddingItems = YES;
     testNameSelectionAttribs.allowDeletingItems = YES;
     testNameSelectionAttribs.allowMovingItems = YES;
@@ -230,7 +230,7 @@
     SCPropertyDefinition *testTypePropertyDef=[testNameDef propertyDefinitionWithName:@"instrumentType"];
     testTypePropertyDef.type =SCPropertyTypeObjectSelection;
     
-    SCObjectSelectionAttributes *testTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:testTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *testTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:testTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     testTypeSelectionAttribs.allowAddingItems = YES;
     testTypeSelectionAttribs.allowDeletingItems = YES;
     testTypeSelectionAttribs.allowMovingItems = YES;
@@ -263,7 +263,7 @@
     
     
     SCPropertyDefinition *testAdministeredScoresPropertyDef=[testAdministeredDef propertyDefinitionWithName:@"scores"];
-    testAdministeredScoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:testScoredDef
+    testAdministeredScoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:testScoredDef
                                                        allowAddingItems:TRUE
                                                      allowDeletingItems:TRUE
                                                        allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Test Scores)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:TRUE addNewObjectuiElementExistsInEditingMode:FALSE];
@@ -291,7 +291,7 @@
     SCPropertyDefinition *testingSessionTypePropertyDef=[testSessionDeliveredDef propertyDefinitionWithName:@"assessmentType"];
     testingSessionTypePropertyDef.type =SCPropertyTypeObjectSelection;
     
-    SCObjectSelectionAttributes *testSessionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:testSessionTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *testSessionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:testSessionTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     testSessionTypeSelectionAttribs.allowAddingItems = YES;
     testSessionTypeSelectionAttribs.allowDeletingItems = YES;
     testSessionTypeSelectionAttribs.allowMovingItems = YES;
@@ -320,7 +320,7 @@
     SCPropertyDefinition *sessionTreatmentSettingPropertyDef=[testSessionDeliveredDef propertyDefinitionWithName:@"treatmentSetting"];
     sessionTreatmentSettingPropertyDef.type =SCPropertyTypeObjectSelection;
     
-    SCObjectSelectionAttributes *treatmentSettingSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:psychTreatmentSettingDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *treatmentSettingSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:psychTreatmentSettingDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     treatmentSettingSelectionAttribs.allowAddingItems = YES;
     treatmentSettingSelectionAttribs.allowDeletingItems = YES;
     treatmentSettingSelectionAttribs.allowMovingItems = YES;
@@ -354,7 +354,7 @@
     SCPropertyDefinition *sessionTrainingTypePropertyDef=[testSessionDeliveredDef propertyDefinitionWithName:@"trainingType"];
     sessionTrainingTypePropertyDef.type =SCPropertyTypeObjectSelection;
     
-    SCObjectSelectionAttributes *trainingTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:trainingTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *trainingTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trainingTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     trainingTypeSelectionAttribs.allowAddingItems = YES;
     trainingTypeSelectionAttribs.allowDeletingItems = YES;
     trainingTypeSelectionAttribs.allowMovingItems = YES;
@@ -376,7 +376,7 @@
 
     
     SCPropertyDefinition *timePropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"time"];
-timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:time_Shared.timeDef
+timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:time_Shared.timeDef
                                                                                               allowAddingItems:TRUE
                                                                                             allowDeletingItems:TRUE
                                                                                               allowMovingItems:FALSE];
@@ -393,7 +393,7 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
     //Create the property definition for the clientPresentations property
     
     SCPropertyDefinition *clientPresentationsPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"clientPresentations"];
-    clientPresentationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:clientPresentations_Shared.clientPresentationDef
+    clientPresentationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientPresentations_Shared.clientPresentationDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
                                                                                     allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"tap + to add clients"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];	
@@ -413,9 +413,10 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
     
     
      NSPredicate *paperworkIncompletePredicate = [NSPredicate predicateWithFormat:@"paperwork == %@",[NSNumber numberWithInteger: 0]];
-     tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
-										withEntityClassDefinition:testSessionDeliveredDef usingPredicate:paperworkIncompletePredicate];
-    
+//     tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
+//										withEntityClassDefinition:testSessionDeliveredDef usingPredicate:paperworkIncompletePredicate];
+    tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView 
+										entityDefinition:testSessionDeliveredDef];
     [self.searchBar setSelectedScopeButtonIndex:2];
     // Initialize tableModel
     if (self.navigationItem.rightBarButtonItems.count>1) {

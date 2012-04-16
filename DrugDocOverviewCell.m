@@ -31,7 +31,7 @@
     [super performInitialization];
     
     docTypeField.delegate=self;
-    self.delegate=self;
+//    self.delegate=self;
 
 }
 

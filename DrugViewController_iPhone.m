@@ -252,7 +252,9 @@
         
         
             
-       tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withItems:drugsMutableArray withClassDefinition:drugDef useSCSelectionSection:YES];	
+//       tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withItems:drugsMutableArray withClassDefinition:drugDef useSCSelectionSection:YES];	
+        
+        tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView items:drugsMutableArray itemsDefinition:drugDef];	
         
 //        [self.searchBar setSelectedScopeButtonIndex:1];
        

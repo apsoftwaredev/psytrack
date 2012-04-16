@@ -78,11 +78,13 @@
 
     
     
-     NSPredicate *currentClientsPredicate=[NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
+//     NSPredicate *currentClientsPredicate=[NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
 
     
-   self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView                                         entityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:currentClientsPredicate];	
-
+//   self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView                                         entityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:currentClientsPredicate];	
+//
+    self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:clientsViewController_Shared.clientDef];	
+    
    	
     
     self.tableModel.searchBar = self.searchBar;
@@ -103,7 +105,7 @@
 
     self.tableModel.delegate=self;
     
-
+    self.tableModel.detailViewController=self.clientsDetailViewController_iPad;
     
 //        
 }
@@ -117,25 +119,25 @@
 }
 
 
-
-#pragma mark -
-#pragma mark SCTableViewModelDataSource methods
-
-// Return a custom detail model that will be used instead of Sensible TableView's auto generated one
-- (SCTableViewModel *)tableViewModel:(SCTableViewModel *)tableViewModel
-customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	
-    
-    SCArrayOfObjectsModel *detailModel = [SCArrayOfObjectsModel tableViewModelWithTableView:self.clientsDetailViewController_iPad.tableView
-                                                                         withViewController:self.clientsDetailViewController_iPad];
-    detailModel.delegate=self;
-    
-    
-   
-    
-	return detailModel;
-}
+//
+//#pragma mark -
+//#pragma mark SCTableViewModelDataSource methods
+//
+//// Return a custom detail model that will be used instead of Sensible TableView's auto generated one
+//- (SCTableViewModel *)tableViewModel:(SCTableViewModel *)tableViewModel
+//customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//	
+//    
+//    SCArrayOfObjectsModel *detailModel = [SCArrayOfObjectsModel tableViewModelWithTableView:self.clientsDetailViewController_iPad.tableView
+//                                                                         withViewController:self.clientsDetailViewController_iPad];
+//    detailModel.delegate=self;
+//    
+//    
+//   
+//    
+//	return detailModel;
+//}
 
 
 
@@ -177,7 +179,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
 	return [[objectName substringToIndex:1] uppercaseString];
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
@@ -320,7 +322,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
     if (tableViewModel.sectionCount) {
         //            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0]
@@ -731,7 +733,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
         DrugNameObjectSelectionCell *drugNameObjectSelectionCell=(DrugNameObjectSelectionCell *)cell;
         
         if (drugNameObjectSelectionCell.drugProduct) {
-            SCTableViewCell *drugNameCell=(SCTableViewCell*)[tableViewModel cellAfterCell:cell rewindIfLastCell:NO];
+            SCTableViewCell *drugNameCell=(SCTableViewCell*)[tableViewModel cellAfterCell:cell rewind:NO];
             
             if ([drugNameCell isKindOfClass:[SCTextFieldCell class]] ) {
                 SCTextFieldCell *textFieldCell=(SCTextFieldCell *)drugNameCell;
@@ -1178,12 +1180,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         switch (selectedScope) {
             case 0: //current
-                objectsModel.itemsPredicate = [NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
+//                objectsModel.itemsPredicate = [NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
                 //NSLog(@"case 1");
                 break;
                 
             default:
-                objectsModel.itemsPredicate = nil;
+//                objectsModel.itemsPredicate = nil;
                 //NSLog(@"case default");
                 
                 break;
@@ -1732,7 +1734,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 - (void)addButtonTapped
 {
-    [tableModel dispatchAddNewItemEvent];
+    [tableModel dispatchEventAddNewItem];
 }
 
 

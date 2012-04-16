@@ -126,8 +126,11 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         
     if (isInDetailSubview) {
       
-        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withEntityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:nil useSCSelectionSection:YES];
+//        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withEntityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:nil useSCSelectionSection:YES];
      
+        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:clientsViewController_Shared.clientDef ];
+        
+        
         [self.searchBar setSelectedScopeButtonIndex:1];
         tableModel.allowDeletingItems=FALSE;
         tableModel.autoSelectNewItemCell=TRUE;
@@ -168,8 +171,13 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     else
     {
         
-        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
-                                                 withEntityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:currentClientsPredicate useSCSelectionSection:FALSE];	
+//        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
+//                                                 withEntityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:currentClientsPredicate useSCSelectionSection:FALSE];
+        
+        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView
+                                                                            entityDefinition:clientsViewController_Shared.clientDef];
+        
+        
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
         self.tableModel.editButtonItem = self.navigationItem.leftBarButtonItem;
         NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
@@ -198,7 +206,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
    
     self.tableModel.searchBar = self.searchBar;
 	self.tableModel.searchPropertyName = @"clientIDCode;notes";
-    self.tableModel.sortItemsSetAscending=TRUE;
+//    self.tableModel.sortItemsSetAscending=TRUE;
    
     self.tableModel.allowMovingItems=TRUE;
     
@@ -516,20 +524,20 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
     if ([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]]) {
         SCArrayOfObjectsModel *arrayOfObjectsModel=(SCArrayOfObjectsModel *)tableViewModel;
         
-        [arrayOfObjectsModel dispatchSelectRowAtIndexPathEvent:indexPath];
+        [arrayOfObjectsModel dispatchEventSelectRowAtIndexPath:indexPath];
         return;
     }
 
     if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
         SCObjectSelectionSection *selectionSection=(SCObjectSelectionSection *)section;
         
-        [selectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
+        [selectionSection dispatchEventSelectRowAtIndexPath:indexPath];
         return;
     }
     if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
         SCArrayOfObjectsSection *selectionSection=(SCArrayOfObjectsSection *)section;
         
-        [selectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
+        [selectionSection dispatchEventSelectRowAtIndexPath:indexPath];
         
     }
     //NSLog(@"section class %@",[section class]);
@@ -539,7 +547,9 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 -(void)tableViewModelCoreDataObjectsLoaded:(SCArrayOfItemsModel *)tableViewModel{
 
     if(isInDetailSubview){
-    [tableViewModel.items removeObjectsInArray:[NSArray arrayWithArray:[clientObjectSelectionCell.alreadySelectedClients allObjects]]];
+        NSMutableArray *itemsArray=(NSMutableArray *)tableViewModel.items;
+        
+    [itemsArray removeObjectsInArray:[NSArray arrayWithArray:[clientObjectSelectionCell.alreadySelectedClients allObjects]]];
     }
     
 
@@ -1093,7 +1103,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 }
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     if (tableViewModel.sectionCount) {
         //            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0]
@@ -1142,7 +1152,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
     
     if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
@@ -1354,7 +1364,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
         DrugNameObjectSelectionCell *drugNameObjectSelectionCell=(DrugNameObjectSelectionCell *)cell;
         
         if (drugNameObjectSelectionCell.drugProduct) {
-            SCTableViewCell *drugNameCell=(SCTableViewCell*)[tableViewModel cellAfterCell:cell rewindIfLastCell:NO];
+            SCTableViewCell *drugNameCell=(SCTableViewCell*)[tableViewModel cellAfterCell:cell rewind:NO];
             
             if ([drugNameCell isKindOfClass:[SCTextFieldCell class]] ) {
                 SCTextFieldCell *textFieldCell=(SCTextFieldCell *)drugNameCell;
@@ -1829,12 +1839,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         switch (selectedScope) {
             case 0: //current
-                objectsModel.itemsPredicate = [NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
+//                objectsModel.itemsPredicate = [NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
                 //NSLog(@"case 1");
                 break;
                 
             default:
-                objectsModel.itemsPredicate = nil;
+//                objectsModel.itemsPredicate = nil;
                 //NSLog(@"case default");
                 
                 break;
@@ -1874,7 +1884,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 }
 
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {
     
     

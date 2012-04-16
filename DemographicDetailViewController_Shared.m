@@ -230,7 +230,8 @@
     SCPropertyDefinition *demGenderPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"gender"];
     
    	demGenderPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *genderSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:genderDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *genderSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:genderDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO]; 
+  
     genderSelectionAttribs.allowAddingItems = YES;
     genderSelectionAttribs.allowDeletingItems = YES;
     genderSelectionAttribs.allowMovingItems = YES;
@@ -246,7 +247,8 @@
     SCPropertyDefinition *demDisabilitiesPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"disabilities"];
     
    	demDisabilitiesPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *disabilitySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:disabilityDef allowMultipleSelection:YES allowNoSelection:NO];
+	
+    SCObjectSelectionAttributes *disabilitySelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:disabilityDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO]; 
     disabilitySelectionAttribs.allowAddingItems = YES;
     disabilitySelectionAttribs.allowDeletingItems = YES;
     disabilitySelectionAttribs.allowMovingItems = YES;
@@ -264,7 +266,8 @@
     SCPropertyDefinition *demEducationLevelPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"educationLevel"];
     
    	demEducationLevelPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *educationLevelSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:educationLevelDef allowMultipleSelection:NO allowNoSelection:NO];
+	     SCObjectSelectionAttributes *educationLevelSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:educationLevelDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO]; 
+    
     educationLevelSelectionAttribs.allowAddingItems = YES;
     educationLevelSelectionAttribs.allowDeletingItems = YES;
     educationLevelSelectionAttribs.allowMovingItems = YES;
@@ -281,7 +284,7 @@
     SCPropertyDefinition *demEmploymentStatusPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"employmentStatus"];
     //Do some property definition customization for the Demographic Profile Entity Employment Status relationship
    	demEmploymentStatusPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *employmentStatusSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:employmentStatuslDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *employmentStatusSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:employmentStatuslDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     employmentStatusSelectionAttribs.allowAddingItems = YES;
     employmentStatusSelectionAttribs.allowDeletingItems = YES;
     employmentStatusSelectionAttribs.allowMovingItems = YES;
@@ -299,7 +302,7 @@
     SCPropertyDefinition *demEthnicitiesPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"ethnicities"];
     
    	demEthnicitiesPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *ethnicitiesSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:ethnicitylDef allowMultipleSelection:YES allowNoSelection:NO];
+	SCObjectSelectionAttributes *ethnicitiesSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:ethnicitylDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO];
     ethnicitiesSelectionAttribs.allowAddingItems = YES;
     ethnicitiesSelectionAttribs.allowDeletingItems = YES;
     ethnicitiesSelectionAttribs.allowMovingItems = YES;
@@ -316,7 +319,7 @@
     SCPropertyDefinition *significantLifeEventPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"significantLifeEvents"];
     
    	significantLifeEventPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *significantLESelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:significantLifeEventDef allowMultipleSelection:YES allowNoSelection:NO];
+	SCObjectSelectionAttributes *significantLESelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:significantLifeEventDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO];
     significantLESelectionAttribs.allowAddingItems = YES;
     significantLESelectionAttribs.allowDeletingItems = YES;
     significantLESelectionAttribs.allowMovingItems = YES;
@@ -334,14 +337,14 @@
     SCPropertyDefinition *demLanguagesSpokenPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"languagesSpoken"];
     
     
-    demLanguagesSpokenPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:languageSpokenDef
+    demLanguagesSpokenPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:languageSpokenDef
                                                                                               allowAddingItems:TRUE
                                                                                             allowDeletingItems:TRUE
                                                                                               allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
     
     SCPropertyDefinition *languagePropertyDef = [languageSpokenDef propertyDefinitionWithName:@"language"];
     languagePropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *languageSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:languageDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *languageSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:languageDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     languageSelectionAttribs.allowAddingItems = YES;
     languageSelectionAttribs.allowDeletingItems = YES;
     languageSelectionAttribs.allowMovingItems = YES;
@@ -399,7 +402,7 @@
     SCPropertyDefinition *demCultureGroupsPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"cultureGroups"];
     
    	demCultureGroupsPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *cultureGroupSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:cultureGroupDef allowMultipleSelection:YES allowNoSelection:NO];
+	SCObjectSelectionAttributes *cultureGroupSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:cultureGroupDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO];
     cultureGroupSelectionAttribs.allowAddingItems = YES;
     cultureGroupSelectionAttribs.allowDeletingItems = YES;
     cultureGroupSelectionAttribs.allowMovingItems = YES;
@@ -417,11 +420,11 @@
     
     //Create the property definition for the immigrationHistory property
     SCPropertyDefinition *migrationHistoryPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"migrationHistory"];
-    migrationHistoryPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:migrationHistoryDef
+    migrationHistoryPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:migrationHistoryDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
                                                                                     allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap Here to Add New Migration History"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
-    
+ 
     //Do some property definition customization for the Immigration History Entity attribute
     SCPropertyDefinition *migrationFromPropertyDef = [migrationHistoryDef propertyDefinitionWithName:@"migratedFrom"];
   
@@ -473,7 +476,7 @@
     SCPropertyDefinition *demRacesPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"races"];
     
    	demRacesPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *racesSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:raceDef allowMultipleSelection:YES allowNoSelection:NO];
+	SCObjectSelectionAttributes *racesSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:raceDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO];
     racesSelectionAttribs.allowAddingItems = YES;
     racesSelectionAttribs.allowDeletingItems = YES;
     racesSelectionAttribs.allowMovingItems = YES;
@@ -494,7 +497,7 @@
     SCPropertyDefinition *demSpiritualBeliefsPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"spiritualBeliefs"];
     
    	demSpiritualBeliefsPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *spiritualBeliefSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:spiritualBeliefDef allowMultipleSelection:YES allowNoSelection:NO];
+	SCObjectSelectionAttributes *spiritualBeliefSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:spiritualBeliefDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO];
     spiritualBeliefSelectionAttribs.allowAddingItems = YES;
     spiritualBeliefSelectionAttribs.allowDeletingItems = YES;
     spiritualBeliefSelectionAttribs.allowMovingItems = YES;
@@ -521,7 +524,7 @@
     militaryServiceDef.orderAttributeName=@"order";
     
     SCPropertyDefinition *demMilitaryServicePropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"militaryService"];
-    demMilitaryServicePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:militaryServiceDef
+    demMilitaryServicePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:militaryServiceDef
                                                                                               allowAddingItems:FALSE
                                                                                             allowDeletingItems:FALSE
                                                                                               allowMovingItems:FALSE];
@@ -542,7 +545,7 @@
     
     SCPropertyDefinition *serviceHistoryPropertyDef = [militaryServiceDef propertyDefinitionWithName:@"serviceHistory"];
     
-	serviceHistoryPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:militaryServiceDatesDef
+	serviceHistoryPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:militaryServiceDatesDef
                                                                                           allowAddingItems:YES
                                                                                         allowDeletingItems:YES
                                                                                           allowMovingItems:YES
@@ -671,14 +674,15 @@
     
     SCPropertyDefinition *additionalVariablesPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"additionalVariables"];
     
-    additionalVariablesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:additionalVariableDef
-                                                                                               allowAddingItems:TRUE
-                                                                                             allowDeletingItems:TRUE
-                                                                                               allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
-    
+    additionalVariablesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:additionalVariableDef allowAddingItems:TRUE
+                                                                                        allowDeletingItems:TRUE
+                                                                                          allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];                 ;	
+
     SCPropertyDefinition *additionalVariableNamePropertyDef = [additionalVariableDef propertyDefinitionWithName:@"variableName"];
     additionalVariableNamePropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *variableNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:additionalVariableNameDef allowMultipleSelection:NO allowNoSelection:NO];
+	
+    
+    SCObjectSelectionAttributes *variableNameSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:additionalVariableNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     variableNameSelectionAttribs.allowAddingItems = YES;
     variableNameSelectionAttribs.allowDeletingItems = YES;
     variableNameSelectionAttribs.allowMovingItems = YES;
@@ -693,7 +697,7 @@
     SCPropertyDefinition *additionalVariableValuePropertyDef = [additionalVariableDef propertyDefinitionWithName:@"selectedValue"];
     additionalVariableValuePropertyDef.title=@"Selected Value(s)";
     additionalVariableValuePropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *variableValueSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:additionalVariableValueDef allowMultipleSelection:YES allowNoSelection:YES];
+	SCObjectSelectionAttributes *variableValueSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:additionalVariableValueDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
     variableValueSelectionAttribs.allowAddingItems = YES;
     variableValueSelectionAttribs.allowDeletingItems = YES;
     variableValueSelectionAttribs.allowMovingItems = YES;
@@ -789,7 +793,7 @@
     
     //Create the property definition for the interpersonal property
     SCPropertyDefinition *interpersonalPropertyDef = [demographicProfileDef propertyDefinitionWithName:@"interpersonal"];
-    interpersonalPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:interpersonalDef
+    interpersonalPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:interpersonalDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
                                                                                     allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add interpersonal relationship" ]addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
@@ -808,7 +812,7 @@
     //set the property definition type to objects selection
 	
     interpersonalRelationshipPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *interpersonalRelationshipSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:relationshipDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *interpersonalRelationshipSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:relationshipDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     
     //set some addtional attributes
     interpersonalRelationshipSelectionAttribs.allowAddingItems = YES;
@@ -879,7 +883,7 @@
 //       
 //    [interpersonalDef insertPropertyDefinition:durationPropertyDef atIndex:2];
     
-//    SCCustomPropertyDefinition *titleProperty = [SCCustomPropertyDefinition definitionWithName:@"Time of Day" withuiElementClass:[ TimeOfDayPickerCell class] objectBindings:nil];
+//    SCCustomPropertyDefinition *titleProperty = [SCCustomPropertyDefinition definitionWithName:@"Time of Day" uiElementClass:[ TimeOfDayPickerCell class] objectBindings:nil];
 //	[interpersonalDef insertPropertyDefinition:titleProperty atIndex:3];
 
     

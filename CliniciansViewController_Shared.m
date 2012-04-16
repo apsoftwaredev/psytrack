@@ -38,7 +38,7 @@
 @synthesize currentDetailTableViewModel=currentDetailTableViewModel_;
 @synthesize rootViewController=rootViewController_;
 @synthesize tableModel=tableModel_;
-@synthesize tableView;
+//@synthesize tableView;
 @synthesize abGroupObjectSelectionCell=abGroupObjectSelectionCell_;
 @synthesize personViewController=personViewController_;
 
@@ -226,7 +226,7 @@
     
 
 	degreePropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *degreeNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:degreeNameDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *degreeNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:degreeNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     degreeNameSelectionAttribs.allowAddingItems = YES;
     degreeNameSelectionAttribs.allowDeletingItems = YES;
     degreeNameSelectionAttribs.allowMovingItems = YES;
@@ -268,7 +268,7 @@
     //set the property type to selection
     schoolPropertyDef.type = SCPropertyTypeObjectSelection;
 	//set some addtional attributes
-    SCObjectSelectionAttributes *schoolSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:schoolNameDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *schoolSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:schoolNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     schoolSelectionAttribs.allowAddingItems = YES;
     schoolSelectionAttribs.allowDeletingItems = YES;
     schoolSelectionAttribs.allowMovingItems = YES;
@@ -355,7 +355,7 @@
 //    nonClinicalSupervisorDef.titlePropertyName=@"title;firstName;lastName;credendialInitials";
 //    SCPropertyDefinition *nonClinicalSupervisorPropertyDef = [employmentPositionDef propertyDefinitionWithName:@"nonClinicalSupervisors"];
 //    
-//    nonClinicalSupervisorPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:nonClinicalSupervisorDef
+//    nonClinicalSupervisorPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:nonClinicalSupervisorDef
 //                                                                                                allowAddingItems:TRUE
 //                                                                                              allowDeletingItems:TRUE
 //                                                                                                allowMovingItems:TRUE];
@@ -387,7 +387,7 @@
     
     
 	employmentTitlePropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *employmentTitlesSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:employmentTitleDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *employmentTitlesSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:employmentTitleDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     employmentTitlesSelectionAttribs.allowAddingItems = YES;
     employmentTitlesSelectionAttribs.allowDeletingItems = YES;
     employmentTitlesSelectionAttribs.allowMovingItems = YES;
@@ -444,7 +444,7 @@
     
  
 	employmentEmployerNamePropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *employerSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:employerDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *employerSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:employerDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     employerSelectionAttribs.allowAddingItems = YES;
     employerSelectionAttribs.allowDeletingItems = YES;
     employerSelectionAttribs.allowMovingItems = YES;
@@ -513,7 +513,7 @@
     SCPropertyDefinition *organizationNamePropertyDef = [membershipDef propertyDefinitionWithName:@"organization"];
     
 	organizationNamePropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *organizationSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:membershipOrganizationDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *organizationSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:membershipOrganizationDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     organizationSelectionAttribs.allowAddingItems = YES;
     organizationSelectionAttribs.allowDeletingItems = YES;
     organizationSelectionAttribs.allowMovingItems = YES;
@@ -587,7 +587,7 @@
     licenseNamePropertyDef.title =@"License";
 	//override the auto title generation for the <#name#> property definition and set it to a custom title
     licenseNamePropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *licenseSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:licenseDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *licenseSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:licenseDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     licenseSelectionAttribs.allowAddingItems = YES;
     licenseSelectionAttribs.allowDeletingItems = YES;
     licenseSelectionAttribs.allowMovingItems = YES;
@@ -619,7 +619,7 @@
     //set the property definition type to objects selection
 	
     governingBodyPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *governingBodySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:governingBodyDef allowMultipleSelection:NO allowNoSelection:YES];
+    SCObjectSelectionAttributes *governingBodySelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:governingBodyDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     governingBodySelectionAttribs.allowAddingItems = YES;
@@ -651,7 +651,7 @@
     //set the property definition type to objects selection
 	countryDef.keyPropertyName=@"country";
     countryPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *countrySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:countryDef allowMultipleSelection:NO allowNoSelection:YES];
+    SCObjectSelectionAttributes *countrySelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:countryDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     countrySelectionAttribs.allowAddingItems = YES;
@@ -710,7 +710,7 @@
     SCPropertyDefinition *certificationNamePropertyDef = [certificationDef propertyDefinitionWithName:@"certificationName"];
     certificationNamePropertyDef.title =@"Certification";
 	certificationNamePropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *certSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:certificationNameDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *certSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:certificationNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     certSelectionAttribs.allowAddingItems = YES;
     certSelectionAttribs.allowDeletingItems = YES;
     certSelectionAttribs.allowMovingItems = YES;
@@ -731,7 +731,7 @@
     SCPropertyDefinition *certificationAuthorityPropertyDef = [certificationDef propertyDefinitionWithName:@"certifiedBy"];
     
 	certificationAuthorityPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *certAuthoritySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:certificationAuthorityDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *certAuthoritySelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:certificationAuthorityDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     certAuthoritySelectionAttribs.allowAddingItems = YES;
     certAuthoritySelectionAttribs.allowDeletingItems = YES;
     certAuthoritySelectionAttribs.allowMovingItems = YES;
@@ -780,7 +780,7 @@
     
     specialtyDef.titlePropertyName=@"specialty.specialtyName";
 	specialtyPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *specialtySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:specialtyNameDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *specialtySelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:specialtyNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     specialtySelectionAttribs.allowAddingItems = YES;
     specialtySelectionAttribs.allowDeletingItems = YES;
     specialtySelectionAttribs.allowMovingItems = YES;
@@ -824,7 +824,7 @@
     SCPropertyDefinition *publicationTypePropertyDef = [publicationDef propertyDefinitionWithName:@"publicationType"];
     
 	publicationTypePropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *publicationSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:publicationTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *publicationSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:publicationTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     publicationSelectionAttribs.allowAddingItems = YES;
     publicationSelectionAttribs.allowDeletingItems = YES;
     publicationSelectionAttribs.allowMovingItems = YES;
@@ -874,7 +874,7 @@
     SCPropertyDefinition *orientationPropertyDef = [orientationHistoryDef propertyDefinitionWithName:@"orientation"];
     
 	orientationPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *orientationSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:orientationDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *orientationSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:orientationDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     orientationSelectionAttribs.allowAddingItems = YES;
     orientationSelectionAttribs.allowDeletingItems = YES;
     orientationSelectionAttribs.allowMovingItems = YES;
@@ -947,7 +947,7 @@
 	
     //create the custom property definition
     SCCustomPropertyDefinition *clientDataProperty = [SCCustomPropertyDefinition definitionWithName:@"CLientData"
-                                                                                 withuiElementClass:[ClientsSelectionCell class] objectBindings:clientDataBindings];
+                                                                                 uiElementClass:[ClientsSelectionCell class] objectBindings:clientDataBindings];
 	
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
@@ -1013,7 +1013,7 @@
     referralDef.keyPropertyName=@"referralDate";
 //    //set the property definition type to objects selection
 //	clientReferredPropertyDef.type = SCPropertyTypeObjectSelection;
-//    SCObjectSelectionAttributes *clientReferredSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:clientsViewController_Shared.clientDef allowMultipleSelection:NO allowNoSelection:NO];
+//    SCObjectSelectionAttributes *clientReferredSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:clientsViewController_Shared.clientDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
 //    
 //    //set some addtional attributes                                             
 //    clientReferredSelectionAttribs.allowAddingItems = YES;
@@ -1163,7 +1163,7 @@
     
    
     
-    SCObjectSelectionAttributes *clinicianTypeSelectionAttributes=[[SCObjectSelectionAttributes alloc]initWithItemsEntityClassDefinition:clinicianTypeDef allowMultipleSelection:YES allowNoSelection:YES];
+    SCObjectSelectionAttributes *clinicianTypeSelectionAttributes=[[SCObjectSelectionAttributes alloc]initWithObjectsEntityDefinition:clinicianTypeDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
     
     clinicianTypeSelectionAttributes.allowAddingItems=YES;
     clinicianTypeSelectionAttributes.allowDeletingItems=YES;
@@ -1186,13 +1186,13 @@
     
     //Create the property definition for the referrals property
  SCPropertyDefinition *clinicianReferralsPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"referrals"];
-    clinicianReferralsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:referralDef
+    clinicianReferralsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:referralDef
                                                                                   allowAddingItems:TRUE
                                                                                  allowDeletingItems:TRUE
                                                                                     allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
     
     SCPropertyDefinition *degreesPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"degrees"];
-	degreesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:degreeDef
+	degreesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:degreeDef
 																				   allowAddingItems:TRUE
 																				 allowDeletingItems:TRUE
 																				   allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
@@ -1200,7 +1200,7 @@
     
     
     SCPropertyDefinition *publicationsPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"publications"];
-	publicationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:publicationDef
+	publicationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:publicationDef
                                                                                         allowAddingItems:TRUE
                                                                                       allowDeletingItems:TRUE
                                                                                         allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
@@ -1208,12 +1208,12 @@
     
     
     SCPropertyDefinition *awardsPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"awards"];
-	awardsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:awardDef
+	awardsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:awardDef
                                                                                   allowAddingItems:TRUE
                                                                                 allowDeletingItems:TRUE
                                                                                   allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
     SCPropertyDefinition *licenseNumbersPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"licenseNumbers"];
-	licenseNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:licenseNumberDef
+	licenseNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:licenseNumberDef
                                                                                           allowAddingItems:TRUE
                                                                                         allowDeletingItems:TRUE
                                                                                           allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
@@ -1221,7 +1221,7 @@
     
     
     SCPropertyDefinition *orientationHistoryPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"orientationHistory"];
-	orientationHistoryPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:orientationHistoryDef
+	orientationHistoryPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:orientationHistoryDef
                                                                                               allowAddingItems:TRUE
                                                                                             allowDeletingItems:TRUE
                                                                                               allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
@@ -1232,7 +1232,7 @@
     
     
     SCPropertyDefinition *membershipsPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"memberships"];
-	membershipsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:membershipDef
+	membershipsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:membershipDef
                                                                                        allowAddingItems:TRUE
                                                                                      allowDeletingItems:TRUE
                                                                                        allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
@@ -1240,12 +1240,12 @@
     
     
     SCPropertyDefinition *influencesPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"influences"];
-	influencesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:influenceDef
+	influencesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:influenceDef
                                                                                       allowAddingItems:TRUE
                                                                                     allowDeletingItems:TRUE
                                                                                       allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
     SCPropertyDefinition *employmentPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"employments"];
-	employmentPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:employmentDef
+	employmentPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:employmentDef
                                                                                       allowAddingItems:TRUE
                                                                                     allowDeletingItems:TRUE
                                                                                       allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
@@ -1270,15 +1270,15 @@
     //Create link to Addressbook
     
     
-    SCCustomPropertyDefinition *linkToAddressBookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"LinkToAddressBookButton" withuiElementClass:[ButtonCell class] objectBindings:nil];
+    SCCustomPropertyDefinition *linkToAddressBookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"LinkToAddressBookButton" uiElementClass:[ButtonCell class] objectBindings:nil];
     [contactInformationDef addPropertyDefinition:linkToAddressBookButtonProperty];                                                         
     
     
-    SCCustomPropertyDefinition *addOrEditContactInAddressbookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"AddOrEditAddressBookButton" withuiElementClass:[ButtonCell class] objectBindings:nil];
+    SCCustomPropertyDefinition *addOrEditContactInAddressbookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"AddOrEditAddressBookButton" uiElementClass:[ButtonCell class] objectBindings:nil];
     [contactInformationDef addPropertyDefinition:addOrEditContactInAddressbookButtonProperty];  
     
     
-    SCCustomPropertyDefinition *viewPersonABBookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"ViewPersonABButton" withuiElementClass:[ButtonCell class] objectBindings:nil];
+    SCCustomPropertyDefinition *viewPersonABBookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"ViewPersonABButton" uiElementClass:[ButtonCell class] objectBindings:nil];
     [contactInformationDef addPropertyDefinition:viewPersonABBookButtonProperty]; 
     
     SCPropertyGroup *contactInformationpsyTrackGroup =[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"addresses", @"phoneNumbers",@"emailAddresses", nil]];
@@ -1338,7 +1338,7 @@
     
     phoneDef.titlePropertyName=@"phoneName;phoneNumber";
 	
-    SCCustomPropertyDefinition *callButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"CallButton" withuiElementClass:[ButtonCell class] objectBindings:nil];
+    SCCustomPropertyDefinition *callButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"CallButton" uiElementClass:[ButtonCell class] objectBindings:nil];
     [phoneDef insertPropertyDefinition:callButtonProperty atIndex:3];
     SCPropertyGroup *phoneGroup = [SCPropertyGroup groupWithHeaderTitle:@"Phone Number" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"phoneName",@"phoneNumber",@"extention",@"privatePhone", @"CallButton", nil]];
     
@@ -1380,7 +1380,7 @@
     addressNotesPropertyDef.type=SCPropertyTypeTextView;
     
     SCPropertyDefinition *addressesPropertyDef = [contactInformationDef propertyDefinitionWithName:@"addresses"];
-	addressesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:addressDef
+	addressesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:addressDef
 																					 allowAddingItems:TRUE
 																				   allowDeletingItems:TRUE
 																					 allowMovingItems:FALSE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Addresses)"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
@@ -1445,7 +1445,7 @@
     
     
     SCPropertyDefinition *contactInformationPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"contactInformation"];
-    contactInformationPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:contactInformationDef
+    contactInformationPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:contactInformationDef
                                                                                               allowAddingItems:FALSE
                                                                                             allowDeletingItems:FALSE
                                                                                               allowMovingItems:FALSE];
@@ -1458,25 +1458,25 @@
     //end Contact Information
    
     SCPropertyDefinition *employerAddressesPropertyDef = [employerDef propertyDefinitionWithName:@"addresses"];
-    employerAddressesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:addressDef
+    employerAddressesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:addressDef
                                                                                              allowAddingItems:TRUE
                                                                                            allowDeletingItems:TRUE
                                                                                              allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"Tap + To Add Addresses"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
     
     SCPropertyDefinition *employerPhoneNumbersPropertyDef = [employerDef propertyDefinitionWithName:@"phoneNumbers"];
-    employerPhoneNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:phoneDef
+    employerPhoneNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:phoneDef
                                                                                                 allowAddingItems:TRUE
                                                                                               allowDeletingItems:TRUE
                                                                                                 allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Phone Numbers)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
     
     SCPropertyDefinition *nonClinicalSupAddressesPropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"addresses"];
-    nonClinicalSupAddressesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:addressDef
+    nonClinicalSupAddressesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:addressDef
                                                                                                    allowAddingItems:TRUE
                                                                                                  allowDeletingItems:TRUE
                                                                                                    allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Addresses)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
     
     SCPropertyDefinition *nonClinialSupPhoneNumbersPropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"phoneNumbers"];
-    nonClinialSupPhoneNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:phoneDef
+    nonClinialSupPhoneNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:phoneDef
                                                                                                      allowAddingItems:TRUE
                                                                                                    allowDeletingItems:TRUE
                                                                                                      allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Phone numbers)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
@@ -1484,48 +1484,48 @@
     
     
     SCPropertyDefinition *nonClinialSupEmailsPropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"emailAddresses"];
-    nonClinialSupEmailsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:emailDef
+    nonClinialSupEmailsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:emailDef
                                                                                                allowAddingItems:TRUE
                                                                                              allowDeletingItems:TRUE
                                                                                                allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Email addresses)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
     */
     SCPropertyDefinition *employmentPositionPropertyDef = [employmentDef propertyDefinitionWithName:@"positions"];
-    employmentPositionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:employmentPositionDef
+    employmentPositionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:employmentPositionDef
                                                                                               allowAddingItems:TRUE
                                                                                             allowDeletingItems:TRUE
                                                                                               allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Positions)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
 	SCPropertyDefinition *licensesPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"licenses"];
-	licensesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:licenseDef
+	licensesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:licenseDef
 																					allowAddingItems:TRUE
 																				  allowDeletingItems:TRUE
 																					allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Licenses)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
     SCPropertyDefinition *certificationsPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"certifications"];
-	certificationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:certificationDef
+	certificationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:certificationDef
 																						  allowAddingItems:TRUE
 																						allowDeletingItems:TRUE
 																						  allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Certifications)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
 	
 	SCPropertyDefinition *specialtiesPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"specialties"];
-    specialtiesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:specialtyDef
+    specialtiesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:specialtyDef
                                                                                        allowAddingItems:TRUE
                                                                                      allowDeletingItems:TRUE
                                                                                        allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Specialties)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
 	
     SCPropertyDefinition *demographicProfilePropertyDef = [self.clinicianDef propertyDefinitionWithName:@"demographicInfo"];
-    demographicProfilePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:demographicDetailViewController_Shared.demographicProfileDef
+    demographicProfilePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:demographicDetailViewController_Shared.demographicProfileDef
                                                                                               allowAddingItems:FALSE
                                                                                             allowDeletingItems:FALSE
                                                                                               allowMovingItems:FALSE];
 	
     /*
 	SCPropertyDefinition *phoneNumbersPropertyDef = [contactInformationDef propertyDefinitionWithName:@"phoneNumbers"];
-	phoneNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:phoneDef
+	phoneNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:phoneDef
 																						allowAddingItems:TRUE
 																					  allowDeletingItems:TRUE
 																						allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Phone Numbers)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
 	
 	SCPropertyDefinition *emailsPropertyDef = [contactInformationDef propertyDefinitionWithName:@"emailAddresses"];
-	emailsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:emailDef
+	emailsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:emailDef
 																				  allowAddingItems:TRUE
 																				allowDeletingItems:TRUE
 																				  allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Email addresses)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
@@ -1541,7 +1541,7 @@
     
     
     SCPropertyDefinition *logsPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"logs"];
-    logsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:logDef allowAddingItems:TRUE
+    logsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:logDef allowAddingItems:TRUE
                                                                               allowDeletingItems:TRUE
                                                                                 allowMovingItems:FALSE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add New Log Entry"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
     
@@ -1591,13 +1591,13 @@
     
     
     //create a custom property definition for the addressbook button cell
-    SCCustomPropertyDefinition *addressBookRecordButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"addressBookButtonCell" withuiElementClass:[ButtonCell class] objectBindings:nil];
+    SCCustomPropertyDefinition *addressBookRecordButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"addressBookButtonCell" uiElementClass:[ButtonCell class] objectBindings:nil];
     
     //add the property definition to the clinician class 
     [self.clinicianDef addPropertyDefinition:addressBookRecordButtonProperty];
     
     //create a custom property definition for the delete addressbook link button cell
-    SCCustomPropertyDefinition *deleteABLinkButtonCellProperty = [SCCustomPropertyDefinition definitionWithName:@"deleteABLinkButtonCell" withuiElementClass:[ButtonCell class] objectBindings:nil];
+    SCCustomPropertyDefinition *deleteABLinkButtonCellProperty = [SCCustomPropertyDefinition definitionWithName:@"deleteABLinkButtonCell" uiElementClass:[ButtonCell class] objectBindings:nil];
     
     //add the property definition to the clinician class 
     [self.clinicianDef addPropertyDefinition:deleteABLinkButtonCellProperty];
@@ -2052,7 +2052,7 @@
 
 
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
 {
     if (tableViewModel.tag==0) {
         self.currentDetailTableViewModel=detailTableViewModel;
@@ -2461,7 +2461,7 @@
 //    
 //}
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
    
     SCTableViewCell *cell=(SCTableViewCell*)[tableViewModel cellAtIndexPath:indexPath];
     if (tableViewModel.tag==0||(tableViewModel.tag==1&&cell.tag==429)) {
@@ -3076,7 +3076,7 @@
 //    return YES;
 //}
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDisappearForSectionAtIndex:(NSUInteger)index{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDismissForSectionAtIndex:(NSUInteger)index{
     if (tableViewModel.tag==0) {
         if (![SCUtilities is_iPad]) {
         
@@ -3112,7 +3112,7 @@
     
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDisappearForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
 
 //NSLog(@"table view model tag is %i",tableViewModel.tag);
     if (tableViewModel.tag==1) {
@@ -4415,7 +4415,8 @@
                     
                     
                     [cell commitChanges];
-                    abGroupObjectSelectionCell_.items=[abGroupObjectSelectionCell_ addressBookGroupsArray];
+                    NSArray *itemsArray=(NSArray *)abGroupObjectSelectionCell_.items;
+                    itemsArray=[abGroupObjectSelectionCell_ addressBookGroupsArray];
                     
                     [abGroupObjectSelectionCell_ addPersonToSelectedGroups];
                     abGroupObjectSelectionCell_.synchWithABBeforeLoadBool=YES;

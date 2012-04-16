@@ -105,7 +105,7 @@
 //    }
 
 //    
-    
+    _valuesDictionary = [NSMutableDictionary dictionary];
     self.eventStore = [[EKEventStore alloc] init];
     
 	self.eventsList = [[NSMutableArray alloc] initWithArray:0];
@@ -113,15 +113,22 @@
 //        for (EKCalendar *calenderToREmove in self.eventStore.calendars) {
 //            [self.eventStore removeCalendar:calenderToREmove commit:YES error:nil];
 //        }
-    SCLabelCell *defaultCalendarLabelCell=[[SCLabelCell alloc]initWithText:@"Calendar" withBoundKey:@"default_Calendar" withLabelTextValue:(NSString *)[(EKCalendar *)[self defaultCalendarName] title]];
+    SCLabelCell *defaultCalendarLabelCell=[[SCLabelCell alloc]initWithText:@"Calendar" boundObject:_valuesDictionary labelTextPropertyName: (NSString *)[(EKCalendar *)[self defaultCalendarName] title]];
     defaultCalendarLabelCell.tag=0;
     
-    SCTextFieldCell *defaultCalendarNameTextFieldCell=[[SCTextFieldCell alloc]initWithText:@"Name" withPlaceholder:@"Calendar Name" withBoundKey:@"calendar_name" withTextFieldTextValue:(NSString *)psyTrackCalendar.title]; 
+//    SCTextFieldCell *defaultCalendarNameTextFieldCell=[[SCTextFieldCell alloc]initWithText:@"Name" withPlaceholder:@"Calendar Name" withBoundKey:@"calendar_name" withTextFieldTextValue:(NSString *)psyTrackCalendar.title]; 
+//    
+        SCTextFieldCell *defaultCalendarNameTextFieldCell=[[SCTextFieldCell alloc]initWithText:@"Name" placeholder:@"Calander Name" boundObject:_valuesDictionary textFieldTextPropertyName:@"calendar_name" ]; 
+        defaultCalendarNameTextFieldCell.textField.text=psyTrackCalendar.title;
     
     defaultCalendarNameTextFieldCell.tag=1;
         defaultCalendarNameTextFieldCell.textField.textAlignment=UITextAlignmentRight;
-     SCTextFieldCell *defaultCalendarLocationCell=[[SCTextFieldCell alloc]initWithText:@"Location" withPlaceholder:@"Default Location" withBoundKey:@"location_name" withTextFieldTextValue:(NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:@"calander_location"]]; 
-    
+//     SCTextFieldCell *defaultCalendarLocationCell=[[SCTextFieldCell alloc]initWithText:@"Location" withPlaceholder:@"Default Location" withBoundKey:@"location_name" withTextFieldTextValue:(NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:@"calander_location"]]; 
+//        SCTextFieldCell *defaultCalendarLocationCell=[[SCTextFieldCell alloc]initWithText:@"Location" placeholder:@"Default Location" boundKey:@"location_name" textFieldTextValue:(NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:@"calander_location"]]; 
+
+        SCTextFieldCell *defaultCalendarLocationCell=[[SCTextFieldCell alloc]initWithText:@"Location" placeholder:@"Default Location" boundObject:_valuesDictionary textFieldTextPropertyName:@"location_name"];
+        defaultCalendarLocationCell.textField.text=(NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:@"calander_location"];
+        
     defaultCalendarLocationCell.tag=2;
         defaultCalendarLocationCell.textField.textAlignment=UITextAlignmentRight;
     
@@ -134,7 +141,7 @@
        
         
 //        SCSelectionCell *sourcesSelectionCell=[[SCSelectionCell alloc]initWithText:@"Address Book Source" withBoundKey:nil withSelectedIndexValue:selectedIndex withItems: sourcesArray];
-        ABSourcesSCObjectSelectionCell *sourcesSelectionCell=[[ABSourcesSCObjectSelectionCell alloc]initWithText:@"Source" withBoundKey:@"name" withSelectedIndexValue:nil withItems:sourcesArray];
+        ABSourcesSCObjectSelectionCell *sourcesSelectionCell=[[ABSourcesSCObjectSelectionCell alloc]initWithText:@"Source" boundObject:_valuesDictionary selectedIndexesPropertyName:@"sources" items:sourcesArray allowMultipleSelection:NO];
         
 
     //NSLog(@"sources array is %@",sourcesArray);
@@ -188,10 +195,10 @@
     NSNumber *selectedItemIndexNumber = (NSNumber *)[dictionaryArrayOfStringsIndexForGroupIdentifierKey objectForKey:[[NSNumber numberWithInt:groupIdentifier]stringValue]];
    
     
-    SCSelectionCell *defaultABGroupSelectionCell=[[SCSelectionCell alloc]initWithText:@"Group" withBoundKey:@"aBGroup" withSelectedIndexValue:selectedItemIndexNumber withItems:groupArray]; 
+    SCSelectionCell *defaultABGroupSelectionCell=[[SCSelectionCell alloc]initWithText:@"Group" boundObject:_valuesDictionary selectedIndexPropertyName:@"group" items:groupArray]; 
     
     
-    
+        [defaultABGroupSelectionCell setSelectedItemIndex:selectedItemIndexNumber];
     defaultABGroupSelectionCell.allowMultipleSelection=NO;
     defaultABGroupSelectionCell.allowAddingItems=NO;
     defaultABGroupSelectionCell.allowDeletingItems=NO;
@@ -199,7 +206,7 @@
     defaultABGroupSelectionCell.allowNoSelection=NO;
     defaultABGroupSelectionCell.autoDismissDetailView=YES;
     defaultABGroupSelectionCell.tag=4;
-    defaultABGroupSelectionCell.delegate=self;
+   
     
 //    NSString *groupName=[(NSString *)[NSUserDefaults standardUserDefaults]valueForKey:kAddressBookGroupName];
     
@@ -218,10 +225,10 @@
 //	
     
 
-    SCCustomCell *groupNameUpdateCell = [SCCustomCell cellWithText:nil keyBindings:groupNameDataBindings nibName:@"ABGroupNameChangeCell"];
-	
+//    SCCustomCell *groupNameUpdateCell = [SCCustomCell cellWithText:nil keyBindings:groupNameDataBindings nibName:@"ABGroupNameChangeCell"];
+   SCCustomCell *groupNameUpdateCell = [SCCustomCell cellWithText:nil boundObject:nil objectBindings:groupNameDataBindings nibName:@"ABGroupNameChangeCell"];	
     
-    groupNameUpdateCell.delegate=self;
+//    groupNameUpdateCell.delegate=self;
     
     groupNameUpdateCell.tag=5;
 //    SCTextFieldCell *defaultABGroupNameTextFieldCell=[[SCTextFieldCell alloc]initWithText:@"Name" withPlaceholder:@"Group Name" withBoundKey:@"group_name" withTextFieldTextValue:groupName]; 
@@ -238,7 +245,7 @@
     
     
     // Initialize tableModel
-    tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self];
+    tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView];
     
     [tableModel addSection:defaultCalendarSection];
     [tableModel addSection:defaultSourceSection];
@@ -276,7 +283,7 @@
     self.eventsList=nil;
     self.eventViewController=nil;
     
-    
+    _valuesDictionary=nil;
    tableModel=nil;
  
 	
@@ -793,8 +800,8 @@ if(sourceArray.count>1)
             textField.font=selectionCell.label.font;
             textField.textColor=selectionCell.label.textColor;
             //NSLog(@"group name is %@", groupName);
-            [tableViewModel.modelKeyValues setValue:groupName forKey:@"groupNameString"];
-            [tableViewModel.modelKeyValues setValue:[NSNumber numberWithBool:autoAddClinicianToGroup] forKey:@"autoAddClinicianToGroup"];
+            [_valuesDictionary setValue:groupName forKey:@"groupNameString"];
+            [_valuesDictionary setValue:[NSNumber numberWithBool:autoAddClinicianToGroup] forKey:@"autoAddClinicianToGroup"];
         }
         
     
@@ -878,7 +885,7 @@ if(sourceArray.count>1)
 
 
 }
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
     if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
@@ -918,7 +925,7 @@ if(sourceArray.count>1)
 	{
 		case 301:
         {
-            NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
+            NSString *groupNameString = (NSString *)[_valuesDictionary valueForKey:@"groupNameString"];
 			//NSLog(@"button 301 pressed group name string is %@ ",groupNameString);
              NSString *currentNameString=[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
             
@@ -1011,7 +1018,8 @@ if(sourceArray.count>1)
             //NSLog(@"items array is %@",itemsArray);
             selectedItemString=groupNameString;
                 //NSLog(@"group name string is %@",selectedItemString);
-                aBGroupSelectionCell.items=itemsArray;
+                NSArray *groupSelectionCellItems=(NSArray *)aBGroupSelectionCell.items;
+                groupSelectionCellItems=itemsArray;
         
             aBGroupSelectionCell.label.text=groupNameString;
                 //NSLog(@"group names are %@",aBGroupSelectionCell.items);
@@ -1025,7 +1033,7 @@ if(sourceArray.count>1)
             break;
         case 302:
         {
-            NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
+            NSString *groupNameString = (NSString *)[_valuesDictionary valueForKey:@"groupNameString"];
 			
             
             //NSLog(@"button add pressed group name string is %@ ",groupNameString);
@@ -1106,7 +1114,8 @@ if(sourceArray.count>1)
 //                        
 //                    }
                     NSNumber *groupIdentifierNumber=(NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupIdentifier];
-                    aBGroupSelectionCell.items=groupArray;
+                    NSArray *abGroupSelectionCellItems=(NSArray *)aBGroupSelectionCell.items;
+                    abGroupSelectionCellItems=groupArray;
                     selectedIndex=nil;
                     
                     selectedIndex=(NSNumber *)[ dictionaryArrayOfStringsIndexForGroupIdentifierKey valueForKey:[groupIdentifierNumber stringValue]];
@@ -1443,8 +1452,8 @@ if(sourceArray.count>1)
                         UITextField *textField=(UITextField *)[controlCell viewWithTag:1];
                         textField.text=@"";
                         
-                        [tableModel.modelKeyValues setValue:@"" forKey:@"groupNameString"];
-                       [ tableModel.modelKeyValues setValue:[NSNumber numberWithBool:FALSE] forKey:@"autoAddClinicianToGroup"];
+                        [_valuesDictionary setValue:@"" forKey:@"groupNameString"];
+                       [ _valuesDictionary setValue:[NSNumber numberWithBool:FALSE] forKey:@"autoAddClinicianToGroup"];
                         [[NSUserDefaults standardUserDefaults]setBool:FALSE forKey:kPTAutoAddClinicianToGroup];
                         [controlCell reloadBoundValue];
                         
@@ -1452,7 +1461,8 @@ if(sourceArray.count>1)
                         if ([selectionCell.selectedItemIndex integerValue]<selectionCell.items.count) {
                             [mutableArray removeObjectAtIndex:[selectionCell.selectedItemIndex integerValue]];
                             selectionCell.selectedItemIndex=[NSNumber numberWithInt:-1];
-                            selectionCell.items=mutableArray;
+                            NSArray *selectionCellItems=(NSArray *)selectionCell.items;
+                            selectionCellItems=mutableArray;
 
                         }
                                                 
@@ -1540,7 +1550,7 @@ if(sourceArray.count>1)
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objSelectionSection=(SCObjectSelectionSection *)section;
             
-            [objSelectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
+            [objSelectionSection dispatchEventSelectRowAtIndexPath:indexPath];
         }
         
     }
@@ -1743,7 +1753,7 @@ if(sourceArray.count>1)
                             
                             [[NSUserDefaults standardUserDefaults]synchronize];
                             
-                            [tableViewModel.modelKeyValues setValue:(__bridge NSString *)chosenGroupName forKey:@"groupNameString"];
+                            [_valuesDictionary setValue:(__bridge NSString *)chosenGroupName forKey:@"groupNameString"];
                             
                             SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:2];
                             SCTableViewCell *groupNameCell=(SCTableViewCell *)[section cellAtIndex:1];
@@ -1783,7 +1793,7 @@ if(sourceArray.count>1)
                 
                 
                 //NSLog(@"value changed for auto add is %i", [(NSNumber *)[tableViewModel.modelKeyValues valueForKey:@"autoAddClinicianToGroup"]boolValue]);
-                    BOOL autoAddClinicianToGroup=(BOOL)[(NSNumber *)[tableViewModel.modelKeyValues valueForKey:@"autoAddClinicianToGroup"]boolValue];
+                    BOOL autoAddClinicianToGroup=(BOOL)[(NSNumber *)[_valuesDictionary valueForKey:@"autoAddClinicianToGroup"]boolValue];
                     
                     BOOL autoAddCliniciansAlreadySet=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
                     
@@ -1795,7 +1805,7 @@ if(sourceArray.count>1)
                     
                     if (autoAddClinicianToGroup) {
                         
-                         NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
+                         NSString *groupNameString = (NSString *)[_valuesDictionary valueForKey:@"groupNameString"];
                         
                          [[NSUserDefaults standardUserDefaults] setBool:autoAddClinicianToGroup forKey:kPTAutoAddClinicianToGroup];
                        
@@ -1859,7 +1869,8 @@ if(sourceArray.count>1)
                             //                        
                             //                    }
                             NSNumber *groupIdentifierNumber=(NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupIdentifier];
-                            aBGroupSelectionCell.items=groupArray;
+                            NSArray * aBGroupSelectionCellItems=aBGroupSelectionCell.items;
+                            aBGroupSelectionCellItems=groupArray;
                             selectedIndex=nil;
                             
                             selectedIndex=(NSNumber *)[ dictionaryArrayOfStringsIndexForGroupIdentifierKey valueForKey:[groupIdentifierNumber stringValue]];
@@ -1869,7 +1880,7 @@ if(sourceArray.count>1)
                             }
                             
                             
-                            NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
+                            NSString *groupNameString = (NSString *)[_valuesDictionary valueForKey:@"groupNameString"];
                             aBGroupSelectionCell.label.text=groupNameString;
                             //NSLog(@"group names are %@",aBGroupSelectionCell.items);
                             //NSLog(@"selected item index is %i",[selectedIndex intValue]);

@@ -261,13 +261,11 @@
 		E7516BDC150BF9A2005B798A /* Dan Boice-46.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */; };
 		E75DF7C6153B2E2700F1F01A /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E75DF7C3153B2DE600F1F01A /* libSTV+CoreData.a */; };
 		E75DF7D3153B2E8700F1F01A /* libSTV+iCloud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E75DF7D0153B2E5B00F1F01A /* libSTV+iCloud.a */; };
-		E75DF7D9153B30A700F1F01A /* STV+CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75DF7D8153B30A700F1F01A /* STV+CoreData.framework */; };
-		E75DF7DB153B341200F1F01A /* SensibleTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75DF7DA153B341200F1F01A /* SensibleTableView.framework */; };
-		E75DF7DD153B343500F1F01A /* STV+iCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E75DF7DC153B343500F1F01A /* STV+iCloud.framework */; };
 		E75F7786151CC574002B10AE /* LogEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F7785151CC574002B10AE /* LogEntity.m */; };
 		E75F778C151CF463002B10AE /* TestingSessionDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F778B151CF463002B10AE /* TestingSessionDeliveredEntity.m */; };
 		E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */; };
 		E78480CA1518D7D800F48EA3 /* PhoneEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C91518D7D800F48EA3 /* PhoneEntity.m */; };
+		E7890347153BAB4B00AC52E7 /* SensibleTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7890346153BAB4B00AC52E7 /* SensibleTableView.framework */; };
 		E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E78A8D1A1531EDF10099FE5B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */; };
 		E78DA68C151F9AE9004ABF29 /* ReferralEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA68B151F9AE9004ABF29 /* ReferralEntity.m */; };
@@ -700,9 +698,6 @@
 		E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Dan Boice-46.jpg"; path = "../../Pictures/childhood scans/Dan Boice-46.jpg"; sourceTree = "<group>"; };
 		E75DF7BA153B2DE500F1F01A /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3-1.0 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E75DF7C7153B2E5B00F1F01A /* STV+iCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+iCloud.xcodeproj"; path = "../../Downloads/STV 3-1.0 Pro/Source Code/STV+iCloud/STV+iCloud.xcodeproj"; sourceTree = "<group>"; };
-		E75DF7D8153B30A700F1F01A /* STV+CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "STV+CoreData.framework"; path = "../../Downloads/STV 3-1.0 Pro/Static Frameworks/STV+CoreData.framework"; sourceTree = "<group>"; };
-		E75DF7DA153B341200F1F01A /* SensibleTableView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SensibleTableView.framework; sourceTree = "<group>"; };
-		E75DF7DC153B343500F1F01A /* STV+iCloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "STV+iCloud.framework"; sourceTree = "<group>"; };
 		E75F7784151CC574002B10AE /* LogEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogEntity.h; sourceTree = "<group>"; };
 		E75F7785151CC574002B10AE /* LogEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogEntity.m; sourceTree = "<group>"; };
 		E75F778A151CF463002B10AE /* TestingSessionDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingSessionDeliveredEntity.h; sourceTree = "<group>"; };
@@ -711,6 +706,7 @@
 		E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCSelectionCell.m; sourceTree = "<group>"; };
 		E78480C81518D7D800F48EA3 /* PhoneEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneEntity.h; sourceTree = "<group>"; };
 		E78480C91518D7D800F48EA3 /* PhoneEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneEntity.m; sourceTree = "<group>"; };
+		E7890346153BAB4B00AC52E7 /* SensibleTableView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SensibleTableView.framework; sourceTree = "<group>"; };
 		E78A8D101531DCB30099FE5B /* PsyTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PsyTrack.entitlements; sourceTree = "<group>"; };
 		E78A8D191531EDF10099FE5B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		E78A8D1A1531EDF10099FE5B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -778,9 +774,7 @@
 				B79F489F142BEF0D0085D47B /* Foundation.framework in Frameworks */,
 				B79F48A1142BEF0D0085D47B /* CoreGraphics.framework in Frameworks */,
 				B79F48A3142BEF0D0085D47B /* CoreData.framework in Frameworks */,
-				E75DF7D9153B30A700F1F01A /* STV+CoreData.framework in Frameworks */,
-				E75DF7DB153B341200F1F01A /* SensibleTableView.framework in Frameworks */,
-				E75DF7DD153B343500F1F01A /* STV+iCloud.framework in Frameworks */,
+				E7890347153BAB4B00AC52E7 /* SensibleTableView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1426,9 +1420,7 @@
 		B79F489B142BEF0D0085D47B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E75DF7DC153B343500F1F01A /* STV+iCloud.framework */,
-				E75DF7DA153B341200F1F01A /* SensibleTableView.framework */,
-				E75DF7D8153B30A700F1F01A /* STV+CoreData.framework */,
+				E7890346153BAB4B00AC52E7 /* SensibleTableView.framework */,
 				E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */,
 				3773F77014FD267000C36B75 /* AudioToolbox.framework */,
 				B78E053114E6B49E00890EA4 /* Security.framework */,

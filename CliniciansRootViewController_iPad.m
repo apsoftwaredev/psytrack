@@ -35,6 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationBarType = SCNavigationBarTypeAddRightEditLeft;
   
    
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
@@ -50,7 +51,7 @@
    
 //      
   self.tableModel.delegate=self;
-   
+    self.tableViewModel.detailViewController=self.cliniciansDetailViewController_iPad;
   
 }
 
@@ -166,7 +167,7 @@
 
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDisappearForSectionAtIndex:(NSUInteger)index{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDismissForSectionAtIndex:(NSUInteger)index{
 
     if (tableViewModel.tag==0||tableViewModel.tag==1) {
         addingClinician=NO;
@@ -478,7 +479,7 @@
 }
 
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
 {
     if (detailTableViewModel.tag==1||detailTableViewModel.tag==0) {
         self.currentDetailTableViewModel=detailTableViewModel;
@@ -682,7 +683,7 @@
 //    
 //    
 //}
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {
     
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
@@ -878,7 +879,7 @@
     return valid;
 }
 
-//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 //    if (tableViewModel.tag==0) {
 //        currentDetailTableViewModel=detailTableViewModel;
 //    }
@@ -1280,7 +1281,7 @@
 //           {
 //               SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
 //               
-//               [arrayOfObjectsSection dispatchSelectRowAtIndexPathEvent:indexPath];
+//               [arrayOfObjectsSection dispatchEventSelectRowAtIndexPath:indexPath];
 //           }
 //            [appdelegate displayNotification:@"My Personal Information Cleared" forDuration:3.0 location:kPTTScreenLocationTop inView:self.view];
 //            deletePressedOnce=NO;
@@ -1351,28 +1352,28 @@
 
 
 
-#pragma mark -
-#pragma mark SCTableViewModelDataSource methods
-
-// Return a custom detail model that will be used instead of Sensible TableView's auto generated one
-- (SCTableViewModel *)tableViewModel:(SCTableViewModel *)tableViewModel
-customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	
-    
-     SCArrayOfObjectsModel *detailModel = [SCArrayOfObjectsModel tableViewModelWithTableView:self.cliniciansDetailViewController_iPad.tableView
-															   withViewController:self.cliniciansDetailViewController_iPad];
-    detailModel.delegate=self;
-  
-  
-	return detailModel;
-}
+//#pragma mark -
+//#pragma mark SCTableViewModelDataSource methods
+//
+//// Return a custom detail model that will be used instead of Sensible TableView's auto generated one
+//- (SCTableViewModel *)tableViewModel:(SCTableViewModel *)tableViewModel
+//customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//	
+//    
+//     SCArrayOfObjectsModel *detailModel = [SCArrayOfObjectsModel tableViewModelWithTableView:self.cliniciansDetailViewController_iPad.tableView
+//															   withViewController:self.cliniciansDetailViewController_iPad];
+//    detailModel.delegate=self;
+//  
+//  
+//	return detailModel;
+//}
 
 
 
 
 //
-//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDisappearForSectionAtIndex:(NSUInteger)index{
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDismissForSectionAtIndex:(NSUInteger)index{
 //    if (tableViewModel.tag==0) {
 //        currentDetailTableViewModel=nil;
 //        [self resetABVariablesToNil];
@@ -1399,7 +1400,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     
-    [self.tableModel dispatchAddNewItemEvent];
+    [self.tableModel dispatchEventAddNewItem];
 }
 //- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 //{

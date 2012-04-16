@@ -159,7 +159,7 @@
    
        
     //create a custom property definition for the Button Cell
-    SCCustomPropertyDefinition *buttonProperty = [SCCustomPropertyDefinition definitionWithName:@"buttonCell" withuiElementClass:[ButtonCell class] objectBindings:nil];
+    SCCustomPropertyDefinition *buttonProperty = [SCCustomPropertyDefinition definitionWithName:@"buttonCell" uiElementClass:[ButtonCell class] objectBindings:nil];
 
     //add the property definition to the timeDef class 
     [self.timeDef insertPropertyDefinition:buttonProperty atIndex:4];
@@ -205,7 +205,7 @@
     
        
     
-    breaksPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:breakTimeDef
+    breaksPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:breakTimeDef
                                                                                   allowAddingItems:YES
                                                                                 allowDeletingItems:YES
                                                                                   allowMovingItems:YES
@@ -227,7 +227,7 @@
     
     
     breakTimeReasonPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *breakTimeReasonSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:breakTimeReasonDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *breakTimeReasonSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:breakTimeReasonDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     breakTimeReasonSelectionAttribs.allowAddingItems = YES;
     breakTimeReasonSelectionAttribs.allowDeletingItems = YES;
     breakTimeReasonSelectionAttribs.allowMovingItems = YES;
@@ -284,7 +284,7 @@
     [breakTimeDef insertPropertyDefinition:breakUndefinedTimePropertyDef atIndex:3];
     
      //create a custom property definition for the Button Cell
-    SCCustomPropertyDefinition *buttonBreakTimeClearPropertyDef = [SCCustomPropertyDefinition definitionWithName:@"buttonBreakTimeClearCell" withuiElementClass:[ButtonCell class] objectBindings:nil];
+    SCCustomPropertyDefinition *buttonBreakTimeClearPropertyDef = [SCCustomPropertyDefinition definitionWithName:@"buttonBreakTimeClearCell" uiElementClass:[ButtonCell class] objectBindings:nil];
     
     [breakTimeDef insertPropertyDefinition:buttonBreakTimeClearPropertyDef atIndex:4];
     
@@ -797,7 +797,7 @@
 
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     if (detailTableViewModel.tag==2) {
         [detailTableViewModel.modeledTableView setEditing:YES animated:NO];
@@ -808,7 +808,7 @@
     
     
 }
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     
     if (detailTableViewModel.tag==2) {
@@ -838,7 +838,7 @@
     [dateFormatClearSeconds setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     [dateFormatClearSeconds setDateFormat:@"H:mm"];
     
-    for(id obj in arrayOfObjectsSection.itemsSet) { 
+    for(id obj in arrayOfObjectsSection.items) { 
         
         breakStartTime=(NSDate *)[obj valueForKey:@"startTime"];
         breakEndTime=(NSDate *)[obj valueForKey:@"endTime"];
@@ -908,7 +908,7 @@
 
 }
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {
     
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];

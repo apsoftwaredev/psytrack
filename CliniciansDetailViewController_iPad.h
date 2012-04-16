@@ -20,7 +20,7 @@
 
 @class CliniciansRootViewController_iPad;
 
-@interface CliniciansDetailViewController_iPad : UITableViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate, SCTableViewModelDelegate> {
+@interface CliniciansDetailViewController_iPad : SCTableViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate, SCTableViewModelDelegate> {
     
     CliniciansRootViewController_iPad *cliniciansRootViewController_iPad;
     UIPopoverController *popoverController;

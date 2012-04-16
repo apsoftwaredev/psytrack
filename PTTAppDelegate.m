@@ -210,7 +210,7 @@
                 tabBarController.viewControllers = controllers;
                 self.tabBarController.delegate=self;
                 self.splitViewControllerClients.view.backgroundColor=[UIColor clearColor];
-              
+       
                 self.splitViewControllerClinicians.view.backgroundColor=[UIColor clearColor];
                 //NSLog(@"window background color is %@", self.window.backgroundColor);
 //                
