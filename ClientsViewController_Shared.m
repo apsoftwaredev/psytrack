@@ -119,6 +119,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	currentClientPropertyDef.attributes = [SCSegmentedAttributes attributesWithSegmentTitlesArray:[NSArray arrayWithObjects:@"Yes", @"No", nil]];
     
     SCPropertyDefinition *demographicProfilePropertyDef = [self.clientDef propertyDefinitionWithName:@"demographicInfo"];
+   
     demographicProfilePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:demographicDetailViewController_Shared.demographicProfileDef
                                                                                               allowAddingItems:TRUE
                                                                                             allowDeletingItems:TRUE

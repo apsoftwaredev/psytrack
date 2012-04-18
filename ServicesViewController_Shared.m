@@ -79,7 +79,7 @@
     time_Shared=nil;
     
     searchBar=nil;
-    tableView=nil;
+//    tableView=nil;
     
     
     

@@ -2462,9 +2462,11 @@
 //}
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-   
-    SCTableViewCell *cell=(SCTableViewCell*)[tableViewModel cellAtIndexPath:indexPath];
-    if (tableViewModel.tag==0||(tableViewModel.tag==1&&cell.tag==429)) {
+    SCTableViewCell *cell = nil;
+    if(indexPath.row != NSNotFound)
+        cell = [tableViewModel cellAtIndexPath:indexPath];
+
+    if (cell && (tableViewModel.tag==0||(tableViewModel.tag==1&&cell.tag==429))) {
         self.currentDetailTableViewModel=detailTableViewModel;
         
                 
@@ -2529,7 +2531,7 @@
     
     
 }
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {
     
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
@@ -2629,10 +2631,10 @@
     
     
     //NSLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
-    
+  if (tableViewModel.sectionCount) {  
     if (tableViewModel.tag==1){
         
-        if (tableViewModel.sectionCount) {
+        
        
         SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
             if (section.cellCount>3) {
@@ -2657,11 +2659,11 @@
             valid=FALSE;
         }
         }
-        }
+        
     }
     
     
-    if (tableViewModel.tag==3&& tableViewModel.sectionCount){
+    if (tableViewModel.tag==3){
         
         
         
@@ -2710,7 +2712,7 @@
         
     }
     
-    if (tableViewModel.tag==4&& tableViewModel.sectionCount){
+    if (tableViewModel.tag==4){
         
         
         
@@ -2743,7 +2745,7 @@
         }        
     }
     
-
+  }
     
     
     return valid;
@@ -2904,8 +2906,8 @@
                         
                         //NSLog(@"clinician %@",clinician);
                         if ([tableViewModel valuesAreValid]) {
-                       
-                        for (NSInteger i=0; i<tableViewModel.sectionCount;i++) {
+                            int sectionCount=tableViewModel.sectionCount;
+                        for (NSInteger i=0; i<sectionCount;i++) {
                             SCTableViewSection *sectionAtIndex=(SCTableViewSection *)[tableViewModel sectionAtIndex:i];
                             
                             [sectionAtIndex commitCellChanges];
@@ -4075,7 +4077,8 @@
     // stick the buttons in the toolbar
     
     //NSLog(@"people picker view controllers are %@",peoplePicker.viewControllers); 
-    
+    if (peoplePicker.viewControllers.count) {
+   
     UIViewController *membersViewController=(UIViewController *)[peoplePicker.viewControllers objectAtIndex:1];
     
     //NSLog(@"modal view controler is %@",membersViewController.modalViewController);
@@ -4087,6 +4090,7 @@
     
     for (UIViewController *viewController in membersViewController.navigationController.viewControllers) {
         viewController.view.tag=789;
+    }
     }
     //    peoplePicker.viewControllers.navigationItem.rightBarButtonItems=buttons;
     
@@ -4179,6 +4183,8 @@
         
         
         //NSLog(@"child view controllers are %@",viewController.view.subviews);
+        if (viewController.view.subviews.count) {
+       
         UITableView *personViewTableView=(UITableView *)[viewController.view.subviews objectAtIndex:0];
         
                         
@@ -4191,6 +4197,8 @@
         
         
         viewController.navigationItem.rightBarButtonItems=buttons;
+            
+        }
         
     }
 }

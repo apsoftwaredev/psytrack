@@ -259,13 +259,12 @@
 		E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B76150858D3005B798A /* ABGroupSelectionCell.m */; };
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 		E7516BDC150BF9A2005B798A /* Dan Boice-46.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */; };
-		E75DF7C6153B2E2700F1F01A /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E75DF7C3153B2DE600F1F01A /* libSTV+CoreData.a */; };
-		E75DF7D3153B2E8700F1F01A /* libSTV+iCloud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E75DF7D0153B2E5B00F1F01A /* libSTV+iCloud.a */; };
+		E75E1F08153D9E61005E8681 /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E75E1F05153D9E47005E8681 /* libSTV+CoreData.a */; };
+		E75E1F15153DEF2C005E8681 /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E75E1F12153DEF18005E8681 /* libSensibleTableView.a */; };
 		E75F7786151CC574002B10AE /* LogEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F7785151CC574002B10AE /* LogEntity.m */; };
 		E75F778C151CF463002B10AE /* TestingSessionDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F778B151CF463002B10AE /* TestingSessionDeliveredEntity.m */; };
 		E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */; };
 		E78480CA1518D7D800F48EA3 /* PhoneEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C91518D7D800F48EA3 /* PhoneEntity.m */; };
-		E7890347153BAB4B00AC52E7 /* SensibleTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7890346153BAB4B00AC52E7 /* SensibleTableView.framework */; };
 		E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E78A8D1A1531EDF10099FE5B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */; };
 		E78DA68C151F9AE9004ABF29 /* ReferralEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA68B151F9AE9004ABF29 /* ReferralEntity.m */; };
@@ -280,7 +279,6 @@
 		E7912D17151D349E00E0609A /* MigrationHistoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D16151D349E00E0609A /* MigrationHistoryEntity.m */; };
 		E7912D1A151DF7DB00E0609A /* VitalsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D19151DF7DB00E0609A /* VitalsEntity.m */; };
 		E7912D1D151E441200E0609A /* InterpersonalEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D1C151E441200E0609A /* InterpersonalEntity.m */; };
-		E7951A5F153B1AF8001325A4 /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7951A5C153B1A63001325A4 /* libSensibleTableView.a */; };
 		E7B0A5B815347C430027F637 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B0A5B715347C430027F637 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
@@ -293,44 +291,30 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E75DF7C2153B2DE600F1F01A /* PBXContainerItemProxy */ = {
+		E75E1F04153D9E47005E8681 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E75DF7BA153B2DE500F1F01A /* STV+CoreData.xcodeproj */;
+			containerPortal = E75E1EFC153D9E47005E8681 /* STV+CoreData.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DBE737C414FC66D40076D2B6;
 			remoteInfo = "STV+CoreData";
 		};
-		E75DF7C4153B2E0C00F1F01A /* PBXContainerItemProxy */ = {
+		E75E1F06153D9E53005E8681 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E75DF7BA153B2DE500F1F01A /* STV+CoreData.xcodeproj */;
+			containerPortal = E75E1EFC153D9E47005E8681 /* STV+CoreData.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
 			remoteInfo = "STV+CoreData";
 		};
-		E75DF7CF153B2E5B00F1F01A /* PBXContainerItemProxy */ = {
+		E75E1F11153DEF18005E8681 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E75DF7C7153B2E5B00F1F01A /* STV+iCloud.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DB1B6E2F152D726800948079;
-			remoteInfo = "STV+iCloud";
-		};
-		E75DF7D1153B2E6B00F1F01A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E75DF7C7153B2E5B00F1F01A /* STV+iCloud.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = DB1B6E2E152D726800948079;
-			remoteInfo = "STV+iCloud";
-		};
-		E7951A5B153B1A63001325A4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E7951A53153B1A62001325A4 /* SensibleTableView.xcodeproj */;
+			containerPortal = E75E1F09153DEF17005E8681 /* SensibleTableView.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DBE7373014F99E580076D2B6;
 			remoteInfo = SensibleTableView;
 		};
-		E7951A5D153B1ACA001325A4 /* PBXContainerItemProxy */ = {
+		E75E1F13153DEF23005E8681 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E7951A53153B1A62001325A4 /* SensibleTableView.xcodeproj */;
+			containerPortal = E75E1F09153DEF17005E8681 /* SensibleTableView.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = DBE7372F14F99E580076D2B6;
 			remoteInfo = SensibleTableView;
@@ -696,8 +680,8 @@
 		E7516B7915085A23005B798A /* PTABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTABGroup.h; sourceTree = "<group>"; };
 		E7516B7A15085A23005B798A /* PTABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTABGroup.m; sourceTree = "<group>"; };
 		E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Dan Boice-46.jpg"; path = "../../Pictures/childhood scans/Dan Boice-46.jpg"; sourceTree = "<group>"; };
-		E75DF7BA153B2DE500F1F01A /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3-1.0 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
-		E75DF7C7153B2E5B00F1F01A /* STV+iCloud.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+iCloud.xcodeproj"; path = "../../Downloads/STV 3-1.0 Pro/Source Code/STV+iCloud/STV+iCloud.xcodeproj"; sourceTree = "<group>"; };
+		E75E1EFC153D9E47005E8681 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3.0.2 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
+		E75E1F09153DEF17005E8681 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.0.2 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
 		E75F7784151CC574002B10AE /* LogEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogEntity.h; sourceTree = "<group>"; };
 		E75F7785151CC574002B10AE /* LogEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogEntity.m; sourceTree = "<group>"; };
 		E75F778A151CF463002B10AE /* TestingSessionDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingSessionDeliveredEntity.h; sourceTree = "<group>"; };
@@ -706,7 +690,6 @@
 		E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCSelectionCell.m; sourceTree = "<group>"; };
 		E78480C81518D7D800F48EA3 /* PhoneEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneEntity.h; sourceTree = "<group>"; };
 		E78480C91518D7D800F48EA3 /* PhoneEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneEntity.m; sourceTree = "<group>"; };
-		E7890346153BAB4B00AC52E7 /* SensibleTableView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SensibleTableView.framework; sourceTree = "<group>"; };
 		E78A8D101531DCB30099FE5B /* PsyTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PsyTrack.entitlements; sourceTree = "<group>"; };
 		E78A8D191531EDF10099FE5B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		E78A8D1A1531EDF10099FE5B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -733,7 +716,6 @@
 		E7912D19151DF7DB00E0609A /* VitalsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VitalsEntity.m; sourceTree = "<group>"; };
 		E7912D1B151E441200E0609A /* InterpersonalEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterpersonalEntity.h; sourceTree = "<group>"; };
 		E7912D1C151E441200E0609A /* InterpersonalEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterpersonalEntity.m; sourceTree = "<group>"; };
-		E7951A53153B1A62001325A4 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.0 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
 		E7B0A5B615347C430027F637 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		E7B0A5B715347C430027F637 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		E7C0749D150E60B4009C5498 /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = "<group>"; };
@@ -757,9 +739,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E75DF7D3153B2E8700F1F01A /* libSTV+iCloud.a in Frameworks */,
-				E75DF7C6153B2E2700F1F01A /* libSTV+CoreData.a in Frameworks */,
-				E7951A5F153B1AF8001325A4 /* libSensibleTableView.a in Frameworks */,
+				E75E1F15153DEF2C005E8681 /* libSensibleTableView.a in Frameworks */,
+				E75E1F08153D9E61005E8681 /* libSTV+CoreData.a in Frameworks */,
 				E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */,
 				3773F77114FD267000C36B75 /* AudioToolbox.framework in Frameworks */,
 				B78E053214E6B4A300890EA4 /* Security.framework in Frameworks */,
@@ -774,7 +755,6 @@
 				B79F489F142BEF0D0085D47B /* Foundation.framework in Frameworks */,
 				B79F48A1142BEF0D0085D47B /* CoreGraphics.framework in Frameworks */,
 				B79F48A3142BEF0D0085D47B /* CoreData.framework in Frameworks */,
-				E7890347153BAB4B00AC52E7 /* SensibleTableView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1397,9 +1377,8 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				E75DF7C7153B2E5B00F1F01A /* STV+iCloud.xcodeproj */,
-				E75DF7BA153B2DE500F1F01A /* STV+CoreData.xcodeproj */,
-				E7951A53153B1A62001325A4 /* SensibleTableView.xcodeproj */,
+				E75E1F09153DEF17005E8681 /* SensibleTableView.xcodeproj */,
+				E75E1EFC153D9E47005E8681 /* STV+CoreData.xcodeproj */,
 				E78A8D101531DCB30099FE5B /* PsyTrack.entitlements */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Helpers */,
@@ -1420,7 +1399,6 @@
 		B79F489B142BEF0D0085D47B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E7890346153BAB4B00AC52E7 /* SensibleTableView.framework */,
 				E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */,
 				3773F77014FD267000C36B75 /* AudioToolbox.framework */,
 				B78E053114E6B49E00890EA4 /* Security.framework */,
@@ -1439,18 +1417,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E75DF7BB153B2DE500F1F01A /* Products */ = {
+		E75E1EFD153D9E47005E8681 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E75DF7C3153B2DE600F1F01A /* libSTV+CoreData.a */,
+				E75E1F05153D9E47005E8681 /* libSTV+CoreData.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E75DF7C8153B2E5B00F1F01A /* Products */ = {
+		E75E1F0A153DEF17005E8681 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E75DF7D0153B2E5B00F1F01A /* libSTV+iCloud.a */,
+				E75E1F12153DEF18005E8681 /* libSensibleTableView.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1511,14 +1489,6 @@
 			name = "Existing Hours";
 			sourceTree = "<group>";
 		};
-		E7951A54153B1A62001325A4 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E7951A5C153B1A63001325A4 /* libSensibleTableView.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		E7E1A638152E86C600C227E8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -1543,9 +1513,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				E75DF7D2153B2E6B00F1F01A /* PBXTargetDependency */,
-				E75DF7C5153B2E0C00F1F01A /* PBXTargetDependency */,
-				E7951A5E153B1ACA001325A4 /* PBXTargetDependency */,
+				E75E1F14153DEF23005E8681 /* PBXTargetDependency */,
+				E75E1F07153D9E53005E8681 /* PBXTargetDependency */,
 			);
 			name = PsyTrack;
 			productName = psyTrainTrack;
@@ -1573,16 +1542,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = E7951A54153B1A62001325A4 /* Products */;
-					ProjectRef = E7951A53153B1A62001325A4 /* SensibleTableView.xcodeproj */;
+					ProductGroup = E75E1F0A153DEF17005E8681 /* Products */;
+					ProjectRef = E75E1F09153DEF17005E8681 /* SensibleTableView.xcodeproj */;
 				},
 				{
-					ProductGroup = E75DF7BB153B2DE500F1F01A /* Products */;
-					ProjectRef = E75DF7BA153B2DE500F1F01A /* STV+CoreData.xcodeproj */;
-				},
-				{
-					ProductGroup = E75DF7C8153B2E5B00F1F01A /* Products */;
-					ProjectRef = E75DF7C7153B2E5B00F1F01A /* STV+iCloud.xcodeproj */;
+					ProductGroup = E75E1EFD153D9E47005E8681 /* Products */;
+					ProjectRef = E75E1EFC153D9E47005E8681 /* STV+CoreData.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1593,25 +1558,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E75DF7C3153B2DE600F1F01A /* libSTV+CoreData.a */ = {
+		E75E1F05153D9E47005E8681 /* libSTV+CoreData.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libSTV+CoreData.a";
-			remoteRef = E75DF7C2153B2DE600F1F01A /* PBXContainerItemProxy */;
+			remoteRef = E75E1F04153D9E47005E8681 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E75DF7D0153B2E5B00F1F01A /* libSTV+iCloud.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libSTV+iCloud.a";
-			remoteRef = E75DF7CF153B2E5B00F1F01A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E7951A5C153B1A63001325A4 /* libSensibleTableView.a */ = {
+		E75E1F12153DEF18005E8681 /* libSensibleTableView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSensibleTableView.a;
-			remoteRef = E7951A5B153B1A63001325A4 /* PBXContainerItemProxy */;
+			remoteRef = E75E1F11153DEF18005E8681 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1919,20 +1877,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E75DF7C5153B2E0C00F1F01A /* PBXTargetDependency */ = {
+		E75E1F07153D9E53005E8681 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "STV+CoreData";
-			targetProxy = E75DF7C4153B2E0C00F1F01A /* PBXContainerItemProxy */;
+			targetProxy = E75E1F06153D9E53005E8681 /* PBXContainerItemProxy */;
 		};
-		E75DF7D2153B2E6B00F1F01A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "STV+iCloud";
-			targetProxy = E75DF7D1153B2E6B00F1F01A /* PBXContainerItemProxy */;
-		};
-		E7951A5E153B1ACA001325A4 /* PBXTargetDependency */ = {
+		E75E1F14153DEF23005E8681 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SensibleTableView;
-			targetProxy = E7951A5D153B1ACA001325A4 /* PBXContainerItemProxy */;
+			targetProxy = E75E1F13153DEF23005E8681 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

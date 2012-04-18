@@ -502,19 +502,19 @@
     
     
 }
--(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-        if (tableViewModel.tag==0) {
-        currentTableViewCell=[tableViewModel cellAtIndexPath:indexPath];
-    }
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//        if (tableViewModel.tag==0) {
+//        currentTableViewCell=[tableViewModel cellAtIndexPath:indexPath];
+//    }
 
 
-    [super tableViewModel:tableViewModel didSelectRowAtIndexPath:indexPath];
+//    [super tableViewModel:tableViewModel didSelectRowAtIndexPath:indexPath];
 
 
-}
--(void)tableViewModel:(SCTableViewModel *)tableViewModel willSelectRowAtIndexPath:(NSIndexPath *)indexPath 
-{
-    [super tableViewModel:tableViewModel willSelectRowAtIndexPath:indexPath];
+//}
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel willSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+//{
+//    [super tableViewModel:tableViewModel willSelectRowAtIndexPath:indexPath];
     //NSLog(@"table bies slkjd %i", tableViewModel.tag);
 //    switch (tableViewModel.tag) {
 //            
@@ -553,8 +553,8 @@
 //               default:
 //            break;
 //    }
-    
-}
+//    
+//}
 //- (void)tableViewModel:(SCTableViewModel *)tableViewModel 
 //       willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 //{

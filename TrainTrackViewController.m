@@ -637,7 +637,7 @@
     self.myTableView = 
     [[UITableView alloc] initWithFrame:self.view.bounds
                                  style:UITableViewStyleGrouped];
-    self.myTableView.backgroundColor=[UIColor clearColor];
+//    self.myTableView.backgroundColor=[UIColor clearColor];
     self.myTableView.dataSource = self;
     self.myTableView.delegate=self;
     /* Make sure our table view resizes correctly */
@@ -646,6 +646,15 @@
     UIViewAutoresizingFlexibleHeight;
     
     [self.view addSubview:self.myTableView];
+    if ([SCUtilities is_iPad]) {
+        
+        [self.myTableView setBackgroundView:nil];
+        [self.myTableView setBackgroundView:[[UIView alloc] init]];
+        [self.myTableView setBackgroundColor:[UIColor clearColor]];
+    }
+    
+    
+   
     
 }
 
@@ -658,6 +667,8 @@
 :(UIInterfaceOrientation)interfaceOrientation{
     return YES;
 }
+
+
 
 - (CGFloat)     tableView:(UITableView *)tableView 
  heightForHeaderInSection:(NSInteger)section{
