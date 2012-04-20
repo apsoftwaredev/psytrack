@@ -56,15 +56,17 @@
     
     //start Demographic Profile setup
     //Create a class definition for Demographic Profile entity
-	self.demographicProfileDef = [SCEntityDefinition definitionWithEntityName:@"DemographicProfileEntity" 
-                                                    managedObjectContext:managedObjectContext
-                                                           propertyNames:[NSArray arrayWithObjects:@"profileNotes",@"sex",@"gender", @"sexualOrientation",
-                                                                              @"disabilities",@"educationLevel",@"employmentStatus", @"ethnicities",@"languagesSpoken",
-                                                                              @"cultureGroups",@"migrationHistory", @"interpersonal",  
-                                                                              @"races",@"spiritualBeliefs",@"significantLifeEvents",@"militaryService", @"additionalVariables",nil]];
+//	self.demographicProfileDef = [SCEntityDefinition definitionWithEntityName:@"DemographicProfileEntity" 
+//                                                    managedObjectContext:managedObjectContext
+//                                                           propertyNames:[NSArray arrayWithObjects:@"profileNotes",@"sex",@"gender", @"sexualOrientation",
+//                                                                              @"disabilities",@"educationLevel",@"employmentStatus", @"ethnicities",@"languagesSpoken",
+//                                                                              @"cultureGroups",@"migrationHistory", @"interpersonal",  
+//                                                                              @"races",@"spiritualBeliefs",@"significantLifeEvents",@"militaryService", @"additionalVariables",nil]];
 	
-    
-    
+    self.demographicProfileDef = [SCEntityDefinition definitionWithEntityName:@"DemographicProfileEntity" 
+                                                         managedObjectContext:managedObjectContext
+                                                                autoGeneratePropertyDefinitions:YES];
+     
     //Create a class definition for Demographic Gender entity
     SCEntityDefinition *genderDef = [SCEntityDefinition definitionWithEntityName:@"GenderEntity" 
                                                       managedObjectContext:managedObjectContext
