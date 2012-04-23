@@ -649,6 +649,12 @@
     
     [self.view addSubview:self.myTableView];
     
+    if([SCHelper is_iPad]){
+        [self.myTableView setBackgroundView:nil];
+        [self.myTableView setBackgroundView:[[UIView alloc] init]];
+        [self.myTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+    }
+    
 }
 
 - (void)viewDidUnload{
