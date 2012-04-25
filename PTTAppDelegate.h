@@ -26,8 +26,7 @@
 
 @class ClientsRootViewController_iPad;
 @class ClientsDetailViewController_iPad;
-@class CliniciansRootViewController_iPad;
-@class CliniciansDetailViewController_iPad;
+
 @class ClientsViewController_iPhone;
 @class ClinicianViewController;
 
@@ -74,8 +73,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 
      ClientsRootViewController_iPad *clientsRootViewController_iPad;
     ClientsDetailViewController_iPad *clientsDetailViewController_iPad;
-     CliniciansRootViewController_iPad *cliniciansRootViewController_iPad;
-	 CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad;
+     
      TrainTrackViewController *trainTrackViewController;
      ClientsViewController_iPhone *clientsViewController_iPhone;
      ClinicianViewController *clinicianViewController;
@@ -109,6 +107,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
     KeychainItemWrapper *passwordItem_;
     KeychainItemWrapper *passCodeItem_;
     NSTimer *checkKeyEntityTimer;
+    NSTimer *displayConnectingTimer;
 }
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;
@@ -128,7 +127,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 @property (strong, nonatomic) IBOutlet UIView *tabBarView;
 @property (strong, nonatomic) IBOutlet UITabBarController *tabBarController;
 @property (weak, nonatomic)IBOutlet UIView *tabBarControllerContainerView;
-@property (weak, nonatomic)IBOutlet UIViewController *viewController;
+@property (weak, nonatomic)IBOutlet UIView *viewController;
 @property (nonatomic, retain) KeychainItemWrapper *passwordItem;
 @property (nonatomic, retain) KeychainItemWrapper *passCodeItem;
 -(void)loadDatabaseData:(id)sender;
@@ -183,8 +182,6 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 @property (nonatomic, strong) IBOutlet UIViewController *masterViewController;
 @property (nonatomic, strong) IBOutlet ClientsRootViewController_iPad *clientsRootViewController_iPad;
 @property (nonatomic, strong) IBOutlet ClientsDetailViewController_iPad *clientsDetailViewController_iPad;
-@property (nonatomic, strong) IBOutlet CliniciansRootViewController_iPad *cliniciansRootViewController_iPad;
-@property (nonatomic, strong) IBOutlet CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad;
 @property (nonatomic, strong) IBOutlet TrainTrackViewController *trainTrackViewController;
 @property (nonatomic, strong) IBOutlet ClinicianViewController *clinicianViewController;
 @property (nonatomic, strong) IBOutlet ClientsViewController_iPhone *clientsViewController_iPhone;

@@ -739,7 +739,7 @@ if(sourceArray.count>1)
 
 #pragma mark -
 #pragma mark configuring cells and sections
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {
     
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
@@ -2755,20 +2755,20 @@ if(sourceArray.count>1)
                 
                 
                 
-                if ([SCUtilities is_iPad]) {
-                    if (appDelegate.cliniciansRootViewController_iPad &&appDelegate.cliniciansRootViewController_iPad.tableModel) {
-                        [appDelegate.cliniciansRootViewController_iPad.tableModel reloadBoundValues];
-                        [appDelegate.cliniciansRootViewController_iPad.tableView reloadData];
-                        
-                        
-                    }
-                }
-                else {
-                    if (appDelegate.clinicianViewController &&appDelegate.clinicianViewController.tableModel) {
-                        [appDelegate.clinicianViewController.tableModel reloadBoundValues];
-                        [appDelegate.clinicianViewController.tableView reloadData];
-                    }
-                }
+//                if ([SCUtilities is_iPad]) {
+//                    if (appDelegate.cliniciansRootViewController_iPad &&appDelegate.cliniciansRootViewController_iPad.tableModel) {
+//                        [appDelegate.cliniciansRootViewController_iPad.tableModel reloadBoundValues];
+//                        [appDelegate.cliniciansRootViewController_iPad.tableView reloadData];
+//                        
+//                        
+//                    }
+//                }
+//                else {
+//                    if (appDelegate.clinicianViewController &&appDelegate.clinicianViewController.tableModel) {
+//                        [appDelegate.clinicianViewController.tableModel reloadBoundValues];
+//                        [appDelegate.clinicianViewController.tableView reloadData];
+//                    }
+//                }
                 
                 
                 

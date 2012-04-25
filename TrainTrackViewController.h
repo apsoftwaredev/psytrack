@@ -20,7 +20,7 @@
 #import "CliniciansViewController_Shared.h"
 //#import "IASKAppSettingsViewController.h"
 #import "DTAboutViewController.h"
-@interface TrainTrackViewController : UIViewController < UITableViewDataSource, UITableViewDelegate , DTAboutViewControllerDelegate /* ,IASKSettingsDelegate  */>{
+@interface TrainTrackViewController : SCViewController < UITableViewDataSource, UITableViewDelegate , DTAboutViewControllerDelegate /* ,IASKSettingsDelegate  */>{
     
 //     SCArrayOfObjectsModel *tableModel_;
 //   

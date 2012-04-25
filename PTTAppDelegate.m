@@ -24,6 +24,8 @@
 #import "ClientsViewController_iPhone.h"
 #import "ClientsRootViewController_iPad.h"
 #import "CliniciansRootViewController_iPad.h"
+#import "CliniciansDetailViewController_iPad.h"
+#import "CliniciansViewController_Shared.h"
 #import "TrainTrackViewController.h"
 #import "TestAdministrationsViewController_iPad.h"
 #import "TabFile.h"
@@ -81,7 +83,7 @@
 @synthesize navigationControllerTrainTrack = _navigationControllerTrainTrack;
 @synthesize splitViewControllerReports = _splitViewControllerReports;
 @synthesize tabBarController, tabBar, tabBarControllerContainerView;
-@synthesize clientsDetailViewController_iPad,clientsRootViewController_iPad,cliniciansRootViewController_iPad,cliniciansDetailViewController_iPad, trainTrackViewController, clientsViewController_iPhone, clinicianViewController;
+@synthesize clientsDetailViewController_iPad,clientsRootViewController_iPad, trainTrackViewController, clientsViewController_iPhone, clinicianViewController;
 @synthesize reportsRootViewController_iPad, reportsDetailViewController_iPad,reportsViewController_iPhone;
 @synthesize imageView=_imageView;
 @synthesize masterViewController;
@@ -135,7 +137,8 @@
                                              selector:@selector(updateKVStoreItems:)
                                                  name:NSUbiquitousKeyValueStoreDidChangeExternallyNotification
                                                object:store];
-    [store synchronize];
+   
+       [store synchronize];
 
     [self initializeiCloudAccess];
     
@@ -191,10 +194,38 @@
             
                 
                 
-                [self.window addSubview:self.viewController.view];
+                [self.window addSubview:self.viewController];
 //                 [self.masterViewController.view addSubview:self.tabBarController.view];  
                  UIImage *clininicansImage =[UIImage imageNamed:@"cliniciansTab.png"];
-                self.splitViewControllerClinicians.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Clinicians" image:clininicansImage tag:90];
+                
+        
+        
+        
+        CliniciansRootViewController_iPad *cliniciansRootViewController = [[CliniciansRootViewController_iPad alloc]initWithNibName:@"CliniciansRootViewController_iPad" bundle:[NSBundle mainBundle]];
+        
+        CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad=[[CliniciansDetailViewController_iPad alloc]initWithNibName:@"CliniciansDetailViewController_iPad" bundle:[NSBundle mainBundle]];
+        
+        
+        
+        
+        //        
+        // Establish the master-detail relationship between the models
+        cliniciansRootViewController.tableViewModel.detailViewController = cliniciansDetailViewController_iPad;
+        
+        // Wrap the view controllers into navigation controllers
+        UINavigationController *clinicianRootNav = [[UINavigationController alloc] initWithRootViewController:cliniciansRootViewController];
+        UINavigationController *clinicianDetailNav = [[UINavigationController alloc] initWithRootViewController:cliniciansDetailViewController_iPad];
+        
+        // Crea the split view and add it to the window
+        UISplitViewController *cliniciansSplitViewController = [[UISplitViewController alloc] init];
+        cliniciansSplitViewController.viewControllers = [NSArray arrayWithObjects:clinicianRootNav, clinicianDetailNav, nil];
+        cliniciansSplitViewController.delegate = cliniciansDetailViewController_iPad;
+
+        
+        
+        cliniciansSplitViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Clinicians" image:clininicansImage tag:90];
+        
+        
                 
                 UIImage *trainImage =[UIImage imageNamed:@"trainTab.png"];
                self.navigationControllerTrainTrack.tabBarItem=[[UITabBarItem alloc] initWithTitle:@"psyTrack" image:trainImage tag:91];
@@ -205,13 +236,15 @@
                
                 UIImage *reportsImage =[UIImage imageNamed:@"reportTab.png"];
                 self.splitViewControllerReports.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Reports" image:reportsImage tag:92];
-                
-                NSArray *controllers = [NSArray arrayWithObjects:self.navigationControllerTrainTrack,self.splitViewControllerClinicians, self.splitViewControllerClients,  self.splitViewControllerReports,/*other controllers go here */ nil];
+       
+        
+   
+                NSArray *controllers = [NSArray arrayWithObjects:self.navigationControllerTrainTrack,cliniciansSplitViewController, self.splitViewControllerClients,  self.splitViewControllerReports,/*other controllers go here */ nil];
                 tabBarController.viewControllers = controllers;
                 self.tabBarController.delegate=self;
                 self.splitViewControllerClients.view.backgroundColor=[UIColor clearColor];
        
-                self.splitViewControllerClinicians.view.backgroundColor=[UIColor clearColor];
+                cliniciansSplitViewController.view.backgroundColor=[UIColor clearColor];
                 //NSLog(@"window background color is %@", self.window.backgroundColor);
 //                
             }
@@ -223,7 +256,7 @@
     
     
             
-    [self flashAppTrainAndTitleGraphics];
+   
     [self.tabBarController setDelegate:self];
                
 //       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{                          
@@ -245,11 +278,19 @@
 //           }
 //       });
     tabBarController.tabBar.userInteractionEnabled=NO;
-   
+    [UIApplication sharedApplication].statusBarHidden = NO;
+    [UIApplication sharedApplication].statusBarStyle=UIStatusBarStyleBlackTranslucent;
     [self.window makeKeyAndVisible];
     [self displayNotification:@"Establishing connection for database. One moment please..." forDuration:0.0 location:kPTTScreenLocationTop inView:self.window];
+    displayConnectingTimer=[NSTimer scheduledTimerWithTimeInterval:0.5
+                                                            target:self
+                                                          selector:@selector(changeEstablishingConnectionMessage)
+                                                          userInfo:NULL
+                                                           repeats:YES];
+    
+    
     persistentStoreCoordinator__=[self persistentStoreCoordinator];
-     
+   
    
 #if !TARGET_IPHONE_SIMULATOR
     // Add registration for remote notifications
@@ -266,8 +307,70 @@
     return YES;
 }
 
+-(void)changeEstablishingConnectionMessage{
+
+    UIView *messageView=nil;
+    for (UIView *view in self.window.subviews) {
+        if (view.tag==645) {
+            messageView=view;
+            break;
+        }
+    }
+    
+    if (messageView) {
+         
+       
+            UIView *containerView=[messageView viewWithTag:655];
+            
+            if (containerView) {
+                UILabel *label=(UILabel *)[containerView viewWithTag:656];
+                NSString *labelText=(NSString *)label.text;
+                
+                NSLog(@"label text length is %i",labelText.length);
+                if ([[label.text substringToIndex:12]isEqualToString:@"Establishing"]) {
+               
+             
+                NSString *message=@"Establishing connection for database. One moment please";
+                
+                switch (labelText.length) {
+                    case 55:
+                        message=[message stringByAppendingString:@"."];
+                        break;
+                    case 56:
+                        message=[message stringByAppendingString:@".."];
+                        break;
+                    case 57:
+                        message=[message stringByAppendingString:@"..."];
+                        break;
+                    case 58:
+                        message=[message substringToIndex:55];
+                        break;
+                    default:
+                        break;
+                }
+                
+                label.text=message;
+                
+                    
+                } 
+                else {
+                    [displayConnectingTimer invalidate];
+                }
+            }
+            
+        
+    }
+   
+    else {
+        [displayConnectingTimer invalidate];
+    }
+
+
+}
 - (void)updateKVStoreItems:(NSNotification*)notification {
     // Get the list of keys that changed.
+    
+   
     NSDictionary* userInfo = [notification userInfo];
     NSNumber* reasonForChange = [userInfo objectForKey:NSUbiquitousKeyValueStoreChangeReasonKey];
     NSInteger reason = -1;
@@ -467,6 +570,8 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
         }else 
         {
              tabBarController.tabBar.userInteractionEnabled=YES;
+            [self.window addSubview:self.tabBarController.view];
+             [self flashAppTrainAndTitleGraphics];
         }
         [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:containerView];
         
@@ -476,6 +581,7 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
         [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:nil];
         tabBarController.tabBar.userInteractionEnabled=YES;
         [self.window addSubview:self.tabBarController.view];
+         [self flashAppTrainAndTitleGraphics];
         
     }
     
@@ -1171,21 +1277,21 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
             if (managedObjectContext__ &&persistentStoreCoordinator__) 
             {
           
-                NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+//                NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
                 NSEntityDescription *keyEntity = [NSEntityDescription entityForName:@"KeyEntity" inManagedObjectContext:managedObjectContext__];
-                [fetchRequest setEntity:keyEntity];
-
-                NSError *error = nil;
-                NSArray *fetchedObjects = [managedObjectContext__ executeFetchRequest:fetchRequest error:&error];
-                //4
-                if (fetchedObjects == nil) 
-                {
-                    return  statusMessage=[statusMessage stringByAppendingString:error.localizedFailureReason];
-                }
-                //4
-                //4
-                if (!fetchedObjects.count) 
-                {
+//                [fetchRequest setEntity:keyEntity];
+//
+//                NSError *error = nil;
+//                NSArray *fetchedObjects = [managedObjectContext__ executeFetchRequest:fetchRequest error:&error];
+//                //4
+//                if (fetchedObjects == nil) 
+//                {
+//                    return  statusMessage=[statusMessage stringByAppendingString:error.localizedFailureReason];
+//                }
+//                //4
+//                //4
+//                if (!fetchedObjects.count) 
+//                {
                      
                     KeyEntity *newKeyObject=[[KeyEntity alloc]initWithEntity:keyEntity insertIntoManagedObjectContext:managedObjectContext__];
                     
@@ -1195,7 +1301,7 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
                 
                                 NSLog(@"newkey object is %@",newKeyObject.keyString);       
                     
-                }
+//                }
                //4
                  NSFetchRequest *myInfoFetchRequest = [[NSFetchRequest alloc] init];
                 
@@ -1803,9 +1909,9 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         
-            self.viewController.view.transform      = CGAffineTransformIdentity;
+            self.viewController.transform      = CGAffineTransformIdentity;
             
-            CGRect frame= CGRectMake(self.window.frame.size.width/2 - self.viewController.view.frame.size.width/2,self.window.frame.size.height/2-self.viewController.view.frame.size.height/2, self.viewController.view.frame.size.width, self.viewController.view.frame.size.height);
+            CGRect frame= CGRectMake(self.window.frame.size.width/2 - self.viewController.frame.size.width/2,self.window.frame.size.height/2-self.viewController.frame.size.height/2, self.viewController.frame.size.width, self.viewController.frame.size.height);
             
             
             //                        [UIView animateWithDuration:secs delay:0.0 options:option
@@ -1817,7 +1923,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
             //                                         }];
             
             
-            self.viewController.view.frame      =frame;
+            self.viewController.frame      =frame;
             
         
         }
@@ -1841,9 +1947,9 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         
             //ipad upside down
-           self.viewController.view.transform       = CGAffineTransformMakeRotation(-M_PI);
+           self.viewController.transform       = CGAffineTransformMakeRotation(-M_PI);
            
-            CGRect frame= CGRectMake(self.window.frame.size.width/2 - self.viewController.view.frame.size.width/2,self.window.frame.size.height/2-self.viewController.view.frame.size.height/2, self.viewController.view.frame.size.width, self.viewController.view.frame.size.height);
+            CGRect frame= CGRectMake(self.window.frame.size.width/2 - self.viewController.frame.size.width/2,self.window.frame.size.height/2-self.viewController.frame.size.height/2, self.viewController.frame.size.width, self.viewController.frame.size.height);
             
             
             //                        [UIView animateWithDuration:secs delay:0.0 options:option
@@ -1855,7 +1961,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
             //                                         }];
             
             
-            self.viewController.view.frame      =frame;
+            self.viewController.frame      =frame;
 
             
             
@@ -1895,7 +2001,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                 
                 
                 if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-                    self.viewController.view.transform      = CGAffineTransformMakeRotation(rotate);
+                    self.viewController.transform      = CGAffineTransformMakeRotation(rotate);
 
                    
                     
@@ -1906,7 +2012,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                         //NSLog(@"tabbar selected item index landscape left is %i",self.tabBarController.selectedIndex);
                         
                         
-                        CGRect frame= CGRectMake(((self.window.frame.size.width-self.tabBarController.tabBar.frame.size.height)/2)-self.tabBarController.tabBar.frame.size.height- self.viewController.view.frame.size.height/2,(self.window.frame.size.height/2-self.viewController.view.frame.size.height/2)-160, self.viewController.view.frame.size.width, self.viewController.view.frame.size.height);     
+                        CGRect frame= CGRectMake(((self.window.frame.size.width-self.tabBarController.tabBar.frame.size.height)/2)-self.tabBarController.tabBar.frame.size.height- self.viewController.frame.size.height/2,(self.window.frame.size.height/2-self.viewController.frame.size.height/2)-160, self.viewController.frame.size.width, self.viewController.frame.size.height);     
                         
                         
 //                        [UIView animateWithDuration:secs delay:0.0 options:option
@@ -1918,7 +2024,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 //                                         }];
 
                         
-                        self.viewController.view.frame      =frame;
+                        self.viewController.frame      =frame;
                    
                         
                         //NSLog(@"landscape left split");
@@ -1930,9 +2036,9 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                         
                         
                         
-                           CGRect frame= CGRectMake(((self.window.frame.size.width-self.tabBarController.tabBar.frame.size.height)/2)-self.tabBarController.tabBar.frame.size.height- self.viewController.view.frame.size.height/2,(self.window.frame.size.height/2-self.viewController.view.frame.size.height/2), self.viewController.view.frame.size.width, self.viewController.view.frame.size.height); 
+                           CGRect frame= CGRectMake(((self.window.frame.size.width-self.tabBarController.tabBar.frame.size.height)/2)-self.tabBarController.tabBar.frame.size.height- self.viewController.frame.size.height/2,(self.window.frame.size.height/2-self.viewController.frame.size.height/2), self.viewController.frame.size.width, self.viewController.frame.size.height); 
                       
-                        self.viewController.view.frame     =frame;
+                        self.viewController.frame     =frame;
 
                         
                         
@@ -1976,7 +2082,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                                 
                 if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) 
                {
-                 self.viewController.view.transform      = CGAffineTransformMakeRotation(rotate);
+                 self.viewController.transform      = CGAffineTransformMakeRotation(rotate);
                    
                    if ([self.tabBarController.selectedViewController class]==[UISplitViewController class]) 
                    {
@@ -1988,7 +2094,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                       
                        
                           
-                        CGRect frame= CGRectMake(((self.window.frame.size.width-self.tabBarController.tabBar.frame.size.height)/2)-self.tabBarController.tabBar.frame.size.height- self.viewController.view.frame.size.height/2,(self.window.frame.size.height/2-self.viewController.view.frame.size.height/2)+160, self.viewController.view.frame.size.width, self.viewController.view.frame.size.height);                           
+                        CGRect frame= CGRectMake(((self.window.frame.size.width-self.tabBarController.tabBar.frame.size.height)/2)-self.tabBarController.tabBar.frame.size.height- self.viewController.frame.size.height/2,(self.window.frame.size.height/2-self.viewController.frame.size.height/2)+160, self.viewController.frame.size.width, self.viewController.frame.size.height);                           
                        
                        
                        //                        [UIView animateWithDuration:secs delay:0.0 options:option
@@ -2000,7 +2106,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                        //                                         }];
                        
                        
-                       self.viewController.view.frame      =frame;
+                       self.viewController.frame      =frame;
                        
                        
 //                   self.viewController.view.transform      = CGAffineTransformTranslate(self.viewController.view.transform, 140, self.imageView.frame.origin.x);
@@ -2018,8 +2124,8 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                       //NSLog(@"landscape right not split");
                        
                      
-                           CGRect frame= CGRectMake(((self.window.frame.size.width-self.tabBarController.tabBar.frame.size.height)/2)-self.tabBarController.tabBar.frame.size.height- self.viewController.view.frame.size.height/2,(self.window.frame.size.height/2-self.viewController.view.frame.size.height/2), self.viewController.view.frame.size.width, self.viewController.view.frame.size.height);                      
-                        self.viewController.view.frame      =frame;
+                           CGRect frame= CGRectMake(((self.window.frame.size.width-self.tabBarController.tabBar.frame.size.height)/2)-self.tabBarController.tabBar.frame.size.height- self.viewController.frame.size.height/2,(self.window.frame.size.height/2-self.viewController.frame.size.height/2), self.viewController.frame.size.width, self.viewController.frame.size.height);                      
+                        self.viewController.frame      =frame;
                        
                    }
                    
@@ -2279,7 +2385,7 @@ duration:(NSTimeInterval)1.0];
            case 0:
                if (clinicianViewController ) {
                    [self saveContext];
-                   [clinicianViewController.tableModel reloadBoundValues];
+                   [clinicianViewController.tableViewModel reloadBoundValues];
                    [clinicianViewController.tableView reloadData];
                    [clinicianViewController updateClinicianTotalLabel];
                }
@@ -2314,15 +2420,15 @@ duration:(NSTimeInterval)1.0];
        
        switch (tabBarControllerSelected.selectedIndex) {
            case 0:
-               if (cliniciansRootViewController_iPad) {
-                   if ([managedObjectContext__ hasChanges]) 
-                       [self saveContext];
-                   
-                   [cliniciansRootViewController_iPad.tableModel reloadBoundValues];
-                   [cliniciansRootViewController_iPad.tableView reloadData];
-                   //           [clinicianViewController updateClinicianTotalLabel];
-               }
-               
+//               if (cliniciansRootViewController_iPad) {
+//                   if ([managedObjectContext__ hasChanges]) 
+//                       [self saveContext];
+//                   
+//                   [cliniciansRootViewController_iPad.tableModel reloadBoundValues];
+//                   [cliniciansRootViewController_iPad.tableView reloadData];
+//                   //           [clinicianViewController updateClinicianTotalLabel];
+//               }
+//               
                break;
            case 1:
                if (clientsRootViewController_iPad) {
@@ -5551,14 +5657,17 @@ return [self applicationDrugsDirectory].path;
         NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"psyTrack"];
         NSDictionary* options;
         BOOL useriCloudChoice=(BOOL)[[self iCloudPreferenceFromUserDefaults]boolValue];
-      
-        if (useriCloudChoice&&[coreDataCloudContent length] != 0 &&[self reachable]) {
+        BOOL useiCloud=YES;
+        if (useiCloud&&useriCloudChoice&&[coreDataCloudContent length] != 0 &&[self reachable]) {
                 // iCloud is available
                 cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
             NSLog(@"icloud user info %@",cloudURL);
-
-                options = [NSDictionary dictionaryWithObjectsAndKeys:@"4R8ZH75936.com.psycheweb.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];                
-                
+            NSFileManager * filemanager=[[NSFileManager alloc]init];
+          NSArray *cloudURLContents=  [filemanager contentsOfDirectoryAtPath:[cloudURL path] error:nil];
+            NSLog(@"contents of cloud url %@",cloudURLContents);
+            
+                options = [NSDictionary dictionaryWithObjectsAndKeys:@"4R8ZH75936.com.psycheweb.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil]; 
+             
             } else {
                 // iCloud is not available
                 options = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -5581,6 +5690,25 @@ return [self applicationDrugsDirectory].path;
         
         [psc lock];
         if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
+            
+            
+            NSError *removeError=nil;
+
+            NSLog(@"items at cloud ural %@",[[NSFileManager defaultManager] contentsAtPath:cloudURL.path]);
+            
+            if (cloudURL) {
+                [[NSFileManager defaultManager] removeItemAtURL:cloudURL error:&removeError];
+                [self displayNotification:@"An unresolved error occured while setting up iCloud. Try restarting." forDuration:0 location:kPTTScreenLocationTop inView:self.window];
+            
+                if (removeError) {
+                    
+                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kPTiCloudPreference];
+                    
+                }
+            }
+            
+            
+            
             /*
              Replace this implementation with code to handle the error appropriately.
              
@@ -5592,8 +5720,23 @@ return [self applicationDrugsDirectory].path;
              Check the error message to determine what the actual problem was.
              */
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
+//            abort();
         }    
+        
+//        NSPersistentStore* store = [psc.persistentStores objectAtIndex:0];
+//        
+//        NSError* errorChangeStore;
+//        
+//        if (&useriCloudChoice&&[coreDataCloudContent length] != 0 &&[self reachable]){
+//       
+//        options = [NSDictionary dictionaryWithObjectsAndKeys:@"4R8ZH75936.com.psycheweb.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil]; 
+//        if (![self.persistentStoreCoordinator migratePersistentStore:store toURL:storeUrl options:options withType:NSSQLiteStoreType error:&errorChangeStore])
+//        {
+//            NSLog(@"Error migrating data: %@, %@", errorChangeStore, [errorChangeStore userInfo]);
+//            //abort();
+//        }
+//        [fileManager removeItemAtURL:[[self applicationPTTDirectory] URLByAppendingPathComponent:@"psyTrack.sqlite"] error:nil];
+//        }
         [psc unlock];
         
         // tell the UI on the main thread we finally added the store and then
@@ -5612,7 +5755,52 @@ return [self applicationDrugsDirectory].path;
     
     return persistentStoreCoordinator__;
 }
-
+//-(void) onChangeiCloudSync
+//{
+//    PTTAppDelegate* appDelegate = (PTTAppDelegate*) [[UIApplication sharedApplication] delegate];
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    
+//    if ([iCloudUtility iCloudEnabled])
+//    {
+//        NSURL *storeUrl = [[appDelegate applicationDocumentsDirectory] URLByAppendingPathComponent:@"psyTrack.sqlite"];
+//        NSURL *cloudURL = [fileManager URLForUbiquityContainerIdentifier:nil];
+//        NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"data"];
+//        cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
+//        
+//        //  The API to turn on Core Data iCloud support here.
+//        NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:@"com.yourcompany.yourapp.coredata", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];
+//        
+//        NSPersistentStore* store = [appDelegate.persistentStoreCoordinator.persistentStores objectAtIndex:0];
+//        NSError* error;
+//        if (![appDelegate.persistentStoreCoordinator migratePersistentStore:store toURL:storeUrl options:options withType:NSSQLiteStoreType error:&error])
+//        {
+//            NSLog(@"Error migrating data: %@, %@", error, [error userInfo]);
+//            //abort();
+//        }
+//        [fileManager removeItemAtURL:[[appDelegate applicationDocumentsDirectory] URLByAppendingPathComponent:@"YourApp.sqlite"] error:nil];
+//        [appDelegate resetStore];
+//    }
+//    else
+//    {
+//        NSURL *storeUrl = [[appDelegate applicationDocumentsDirectory] URLByAppendingPathComponent:@"YourApp.sqlite"];
+//        
+//        //  The API to turn on Core Data iCloud support here.
+//        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+//                                 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
+//                                 nil];
+//        
+//        NSPersistentStore* store = [appDelegate.persistentStoreCoordinator.persistentStores objectAtIndex:0];
+//        NSError* error;
+//        if (![appDelegate.persistentStoreCoordinator migratePersistentStore:store toURL:storeUrl options:options withType:NSSQLiteStoreType error:&error])
+//        {
+//            NSLog(@"Error migrating data: %@, %@", error, [error userInfo]);
+//            //abort();
+//        }
+//        [fileManager removeItemAtURL:[[appDelegate applicationDocumentsDirectory] URLByAppendingPathComponent:@"YourApp2.sqlite"] error:nil];
+//        [appDelegate resetStore];
+//    }
+//}
 
 //- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 //{
@@ -6033,38 +6221,49 @@ return [self applicationDrugsDirectory].path;
                 
                 NSLog(@"lock values dictionary lock screen creat date %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]);
                 NSLog(@"fetched objects are %@",fetchedObjects);
-                NSPredicate *keyStringPredicate;
-                if ([lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]) {
-                     keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]];
+//                NSPredicate *keyStringPredicate;
+                
+                KeyEntity *testKey=[fetchedObjects objectAtIndex:0];
+                NSLog(@"test key is %@",testKey);
+                
+                NSString *createKeyString=[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY];
+                if (createKeyString &&createKeyString.length) {
+//                     keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]];
+                    
+                    for (KeyEntity *keyObjectInArray in fetchedObjects) {
+                        NSLog(@"keyobject in array keystring is %@",keyObjectInArray.keyString);
+                        NSLog(@"create key is %@",createKeyString);
+                        if ([keyObjectInArray.keyString isEqualToString:createKeyString]) {
+                            
+                            keyObject=keyObjectInArray;
+                            break;
+                        }
+                    }
+                    
                 }
+                
+        
                
                 //NSLog(@"lock screen date is %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]);
-                NSFetchRequest *newFetchRequest=[[NSFetchRequest alloc]init];
-                if (keyEntity) {
-                    [newFetchRequest setEntity:keyEntity];
-                }
+                symetricData=[self getSharedSymetricData];
+                NSData *encryptedArchivedLockForSharedData =(NSData *)[encryption_ doCipher:keyedArchiveData key:symetricData context:kCCEncrypt padding:(CCOptions *)kCCOptionPKCS7Padding];
                 
-                if (keyStringPredicate) {
-                     [newFetchRequest setPredicate:keyStringPredicate];
-                }
-               
-                
-                
-                fetchedObjects=[managedObjectContext__ executeFetchRequest:newFetchRequest error:&error];
-                NSLog(@"fetched objects are %@",fetchedObjects);
-                if(fetchedObjects.count){
+                if(keyObject){
+   
                     
-                    symetricData=[self getSharedSymetricData];
-                    NSData *encryptedArchivedLockForSharedData =(NSData *)[encryption_ doCipher:keyedArchiveData key:symetricData context:kCCEncrypt padding:(CCOptions *)kCCOptionPKCS7Padding];
-                    
-                    
-                    keyObject=[fetchedObjects objectAtIndex:0];
+//                    keyObject=[fetchedObjects objectAtIndex:0];
                     keyObject.dataF=encryptedArchivedLockForSharedData;
                    NSLog(@"key entity is %@",keyObject);
                     [self saveContext];
                 }
                 else 
                 {
+                
+                    KeyEntity *newKey=[[KeyEntity alloc]initWithEntity:keyEntity insertIntoManagedObjectContext:managedObjectContext__];
+                    
+                    newKey.dataF=encryptedArchivedLockForSharedData;
+                    newKey.keyString=createKeyString;
+                    
                     
                     [self displayNotification:@"Error 789: Unable to save settings." forDuration:3.0 location:kPTTScreenLocationTop inView:nil];                  
                         

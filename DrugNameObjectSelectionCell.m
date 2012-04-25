@@ -111,65 +111,65 @@
        
     
     [self.ownerTableViewModel.viewController.navigationController pushViewController:drugsViewContoller animated:YES];
-    if ([drugsViewContoller.tableModel sectionCount]>0) {
-        SCTableViewSection *section=(SCTableViewSection *)[drugsViewContoller.tableModel sectionAtIndex:0];
-        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
-            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
-            
-            //NSLog(@"self bound object is %@",self.boundObject);
-            NSString *drugName=[self.boundObject valueForKey:@"drugName"];
-            
-            
-            if (drugName.length) {
-                drugsViewContoller.searchBar.text=drugName;
-                
-            }
-            
-                        
-            if (drugProduct) 
-            {
-                
-                [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:drugProduct]]];
-                
-                NSPredicate *predicate=[NSPredicate predicateWithFormat:@"applNo MATCHES %@",drugProduct.applNo];
-                
-//                objectSelectionSection.itemsPredicate=predicate;
-                [objectSelectionSection reloadBoundValues];
-                [drugsViewContoller.tableView reloadData];
-                
-                if (drugProduct.drugName.length) {
-                    drugsViewContoller.searchBar.text=drugProduct.drugName;
-                }
-                
-                
-            }
-            else if (applicationNumber.length)
-            {
-            
-               
-                    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"applNo MATCHES %@",applicationNumber];
-                    
-//                    objectSelectionSection.itemsPredicate=predicate;
-                    [objectSelectionSection reloadBoundValues];
-                    [drugsViewContoller.tableView reloadData];
-                
-
-            
-            }
-           
-            
-               
-//                NSString *applNo=[self.boundObject valueForKey:@"applNo"];
-                
-                
-                                
-            
-            
-            
-            
-        }
-        
-    }
+//    if ([drugsViewContoller.tableModel sectionCount]>0) {
+//        SCTableViewSection *section=(SCTableViewSection *)[drugsViewContoller.tableModel sectionAtIndex:0];
+//        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+//            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
+//            
+//            //NSLog(@"self bound object is %@",self.boundObject);
+//            NSString *drugName=[self.boundObject valueForKey:@"drugName"];
+//            
+//            
+//            if (drugName.length) {
+//                drugsViewContoller.searchBar.text=drugName;
+//                
+//            }
+//            
+//                        
+//            if (drugProduct) 
+//            {
+//                
+//                [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:drugProduct]]];
+//                
+//                NSPredicate *predicate=[NSPredicate predicateWithFormat:@"applNo MATCHES %@",drugProduct.applNo];
+//                
+////                objectSelectionSection.itemsPredicate=predicate;
+//                [objectSelectionSection reloadBoundValues];
+//                [drugsViewContoller.tableView reloadData];
+//                
+//                if (drugProduct.drugName.length) {
+//                    drugsViewContoller.searchBar.text=drugProduct.drugName;
+//                }
+//                
+//                
+//            }
+//            else if (applicationNumber.length)
+//            {
+//            
+//               
+//                    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"applNo MATCHES %@",applicationNumber];
+//                    
+////                    objectSelectionSection.itemsPredicate=predicate;
+//                    [objectSelectionSection reloadBoundValues];
+//                    [drugsViewContoller.tableView reloadData];
+//                
+//
+//            
+//            }
+//           
+//            
+//               
+////                NSString *applNo=[self.boundObject valueForKey:@"applNo"];
+//                
+//                
+//                                
+//            
+//            
+//            
+//            
+//        }
+//        
+//    }
     
     //    SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionAttributes
     

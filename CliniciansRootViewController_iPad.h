@@ -18,15 +18,13 @@
 
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+
 #import "ClinicianViewController.h"
-
-#import "CliniciansViewController_Shared.h"
-
-
 
 #define addSmNr 338
 
-@class CliniciansDetailViewController_iPad;
+//@class CliniciansDetailViewController_iPad;
 @interface CliniciansRootViewController_iPad : ClinicianViewController <SCTableViewModelDataSource, SCTableViewModelDelegate , UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate,UITableViewDelegate > {
 
     
@@ -42,7 +40,7 @@
 }
 
 
-@property (nonatomic, strong) IBOutlet CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad;
+//@property (nonatomic, strong) IBOutlet CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad;
 
 
 
@@ -54,7 +52,7 @@
 
 
 // Method called by DetailViewController
-- (void)addButtonTapped;
+//- (void)addButtonTapped;
 
 
 //-(void)showPersonViewControllerWithRecordIdentifier:(NSString *)recordIdentifier firstName:(NSString *)firstName lastName:(NSString *)lastName;

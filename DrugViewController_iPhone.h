@@ -21,13 +21,13 @@
 #import "UIDownloadBar.h"
 #import "DrugNameObjectSelectionCell.h"
 #import "DrugProductEntity.h"
-@interface DrugViewController_iPhone : UIViewController <SCTableViewModelDelegate, UIDownloadBarDelegate> {
+@interface DrugViewController_iPhone : SCViewController <SCTableViewModelDataSource, UIDownloadBarDelegate> {
     
     
   	UISearchBar *searchBar;
-    UITableView *tableView;
+//    UITableView *tableView;
     
-	SCArrayOfObjectsModel *tableModel;
+//	SCArrayOfObjectsModel *tableModel;
     NSString *drugApplNo;
     NSString *drugProductNo;
     BOOL isInDetailSubview;
@@ -52,9 +52,9 @@
     DrugProductEntity *currentlySelectedDrug;
     
 }
-@property (nonatomic, strong)  SCArrayOfObjectsModel *tableModel;
+//@property (nonatomic, strong)  SCArrayOfObjectsModel *tableModel;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
+//@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIDownloadBar *downloadBar;
 @property (nonatomic, strong) IBOutlet UILabel *downloadLabel;
 @property (nonatomic, strong) IBOutlet UILabel *downloadBytesLabel;

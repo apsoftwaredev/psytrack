@@ -16,16 +16,19 @@
  *
  */
 #import "CliniciansRootViewController_iPad.h"
-#import "CliniciansDetailViewController_iPad.h"
+
 
 #import "PTTAppDelegate.h"
 #import "ButtonCell.h"
 #import "ClinicianEntity.h"
 #import "TrainTrackViewController.h"
 #import "EncryptedSCTextViewCell.h"
+#import "CliniciansDetailViewController_iPad.h"
+
+#import "CliniciansViewController_Shared.h"
 
 @implementation CliniciansRootViewController_iPad
-@synthesize cliniciansDetailViewController_iPad=__cliniciansDetailViewController_iPad;
+//@synthesize cliniciansDetailViewController_iPad=__cliniciansDetailViewController_iPad;
 
 
 
@@ -35,24 +38,44 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationBarType = SCNavigationBarTypeAddRightEditLeft;
-  
-   
+    self.navigationBarType = SCNavigationBarTypeEditLeft;
+    
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
+//    [self.popoverController.contentViewController.view setBackgroundColor:];
     managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
    
+    
     // Set up the edit and add buttons.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
       
     [self.tableView setBackgroundView:nil];
     [self.tableView setBackgroundView:[[UIView alloc] init]];
-    self.tableView.backgroundColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]; // Make the table view application backgound color (turquose)
-   
+       
 //      
-  self.tableModel.delegate=self;
-    self.tableViewModel.detailViewController=self.cliniciansDetailViewController_iPad;
-  
+  self.tableViewModel.delegate=self;
+   
+
+
+    [self.view setBackgroundColor:[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]];
+    
+    objectsModel.addButtonItem=objectsModel.detailViewController.navigationItem.rightBarButtonItem;
+    
+    objectsModel.addButtonItem = self.addButton;
+	objectsModel.itemsAccessoryType = UITableViewCellAccessoryNone;
+    objectsModel.detailViewControllerOptions.modalPresentationStyle = UIModalPresentationPageSheet;
+    objectsModel.detailViewController=self.tableViewModel.detailViewController;
+    CliniciansDetailViewController_iPad *clinicianDetailViewController=(CliniciansDetailViewController_iPad *)objectsModel.detailViewController;
+    
+    clinicianDetailViewController.navigationBarType=SCNavigationBarTypeAddRight;
+    
+    objectsModel.addButtonItem=clinicianDetailViewController.navigationItem.rightBarButtonItem;
+    self.tableView.backgroundColor=[UIColor clearColor]; // Make the table view application backgound color (turquose)
+
+//    self.tableView.backgroundColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]; // Make the table view application backgound color (turquose)
+
+    self.tableViewModel = objectsModel;
+   
 }
 
 
@@ -60,7 +83,7 @@
 -(void)viewDidUnload{
     [super viewDidUnload];
     
-    self.tableModel=nil;
+//    self.tableModel=nil;
     
     
     
@@ -105,13 +128,13 @@
 //}
 //#pragma mark -
 //#pragma UIView methods
-//- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-//{
-//    // Return YES for supported orientations
-//  
-//        return YES;
-//  
-//}
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+  
+        return YES;
+  
+}
 
 
 #pragma mark -
@@ -134,16 +157,16 @@
 //                    UITextField *lastNameField=(UITextField *)[cell viewWithTag:50];
 //                    NSString *lastNameStr=lastNameField.text;
 //                    if (lastNameStr.length) {
-//                        //NSLog(@"current cell superview is %@",[tableModel_ indexPathForCell:currentTableViewCell]);
-                        SCTableViewSection *section=(SCTableViewSection *)[tableModel_ sectionAtIndex:[tableModel_ indexPathForCell:currentTableViewCell].section];
+//                        //NSLog(@"current cell superview is %@",[self.tableViewModel indexPathForCell:currentTableViewCell]);
+                        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:[self.tableViewModel indexPathForCell:currentTableViewCell].section];
 //                        unsigned short lastNameFirstChar=[lastNameStr characterAtIndex:0];
 //                        if ((unsigned short)[section.headerTitle characterAtIndex:0]!=(unsigned short)lastNameFirstChar) {
                             //NSLog(@"they arent equal");
                             
         if (!addingClinician) {
             [section commitCellChanges];
-            [tableModel_ reloadBoundValues];
-            [tableModel_.modeledTableView reloadData];
+            [self.tableViewModel reloadBoundValues];
+            [self.tableViewModel.modeledTableView reloadData];
             
 
         }
@@ -167,9 +190,9 @@
 
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDismissForSectionAtIndex:(NSUInteger)index{
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewDidDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    if (tableViewModel.tag==0||tableViewModel.tag==1) {
+    if (tableModel.tag==0||tableModel.tag==1) {
         addingClinician=NO;
         
     }
@@ -479,29 +502,37 @@
 }
 
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
-{
-    if (detailTableViewModel.tag==1||detailTableViewModel.tag==0) {
-        self.currentDetailTableViewModel=detailTableViewModel;
-    }
-
-    
-    SCObjectSection *objectSection = (SCObjectSection *)[detailTableViewModel sectionAtIndex:0];
-    SCTextFieldCell *zipFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"zipCode"];
-    zipFieldCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-    SCTextFieldCell *postOfficeBoxFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"postOfficeBox"];
-    postOfficeBoxFieldCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-    
-    SCTextFieldCell *phoneNumberFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"phoneNumber"];
-    phoneNumberFieldCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation; 
-    
-    SCTextFieldCell *extentionFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"extention"];
-    extentionFieldCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation; 
-    
-    
-    
-    
-}
+//- (void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
+//{
+//    [super tableViewModel:tableViewModel detailViewWillPresentForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
+//    
+////    if (detailTableViewModel.tag==1||detailTableViewModel.tag==0) {
+////        self.currentDetailTableViewModel=detailTableViewModel;
+////    }
+//
+//    
+////    SCObjectSection *objectSection = (SCObjectSection *)[detailTableViewModel sectionAtIndex:0];
+////    SCTextFieldCell *zipFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"zipCode"];
+////    zipFieldCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+////    SCTextFieldCell *postOfficeBoxFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"postOfficeBox"];
+////    postOfficeBoxFieldCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+////    
+////    SCTextFieldCell *phoneNumberFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"phoneNumber"];
+////    phoneNumberFieldCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation; 
+////    
+////    SCTextFieldCell *extentionFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"extention"];
+////    extentionFieldCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation; 
+//    
+//    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+//        
+//        
+//        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+//        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+//        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
+//    }
+//    
+//    
+//}
 //-(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //        if (tableViewModel.tag==0) {
 //        currentTableViewCell=[tableViewModel cellAtIndexPath:indexPath];
@@ -919,7 +950,10 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
-    
+    if (tableViewModel.tag==0 && ![detailTableViewModel.viewController isKindOfClass:[CliniciansDetailViewController_iPad class]]) {
+        addingClinician=YES;
+    }
+
     if (tableViewModel.tag==0) {
         
         
@@ -929,13 +963,13 @@
     else{
         detailTableViewModel.tag=tableViewModel.tag+1;
     }
-    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-        
-
-    [detailTableViewModel.modeledTableView setBackgroundView:nil];
-    [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-    }
+//    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+//        
+//
+//    [detailTableViewModel.modeledTableView setBackgroundView:nil];
+//    [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+//    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
+//    }
     detailTableViewModel.delegate=self;
     //NSLog(@"detail model created for row at index path detailtable model tag is %i", detailTableViewModel.tag);
 }
@@ -1396,12 +1430,12 @@
 #pragma mark -
 #pragma button actions
 
-- (void)addButtonTapped
-{
-    
-    
-    [self.tableModel dispatchEventAddNewItem];
-}
+//- (void)addButtonTapped
+//{
+//    
+//    SCArrayOfObjectsModel *objectsModel=(SCArrayOfObjectsModel *)
+//    [self.tableViewModel dispatchEventAddNewItem];
+//}
 //- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 //{
 //	// use "buttonIndex" to decide your action

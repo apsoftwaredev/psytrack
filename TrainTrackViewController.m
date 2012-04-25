@@ -547,8 +547,14 @@
             tabBar.userInteractionEnabled=FALSE;            
             
             DrugViewController_iPhone *drugViewController_iPhone = [[DrugViewController_iPhone alloc] initWithNibName:@"DrugViewController_iPhone" bundle:nil];
+//            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
             
-            [self.navigationController pushViewController:drugViewController_iPhone animated:YES];
+           NSLog(@"view controller is %@",self.tableViewModel);
+            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:drugViewController_iPhone];	
+            
+            
+            [[self navigationController] presentModalViewController:navController animated:YES];
+            
             
             tabBar.userInteractionEnabled=TRUE;
            
@@ -650,12 +656,9 @@
         
         [self.myTableView setBackgroundView:nil];
         [self.myTableView setBackgroundView:[[UIView alloc] init]];
-        [self.myTableView setBackgroundColor:[UIColor clearColor]];
+        
     }
-    
-    
-   
-    
+       [self.myTableView setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)viewDidUnload{
@@ -663,12 +666,13 @@
     self.myTableView = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation
-:(UIInterfaceOrientation)interfaceOrientation{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    
     return YES;
+    
 }
-
-
 
 - (CGFloat)     tableView:(UITableView *)tableView 
  heightForHeaderInSection:(NSInteger)section{

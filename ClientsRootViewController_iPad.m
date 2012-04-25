@@ -85,7 +85,27 @@
 //
     self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:clientsViewController_Shared.clientDef];	
     
-   	
+    NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
+    
+    // create a standard "add" button
+    UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
+                                  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
+    addButton.style = UIBarButtonItemStyleBordered;
+    
+    
+    
+    // create a spacer
+    UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshData)];
+    [buttons addObject:refreshButton];
+    
+    
+    
+    
+    [buttons addObject:addButton];
+    self.navigationItem.rightBarButtonItems=buttons;
+    
+    self.tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
     
     self.tableModel.searchBar = self.searchBar;
 	self.tableModel.searchPropertyName = @"clientIDCode;notes";
@@ -97,8 +117,8 @@
     
     [self.tableView setBackgroundView:nil];
     [self.tableView setBackgroundView:[[UIView alloc] init]];
-    self.tableView.backgroundColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]; // Make the table view application backgound color (turquose)
     
+    self.tableView.backgroundColor=[UIColor clearColor];
     
 //    tableModel.autoSortSections = TRUE;  
     self.tableModel.sectionIndexTitles = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", nil];
@@ -106,11 +126,18 @@
     self.tableModel.delegate=self;
     
     self.tableModel.detailViewController=self.clientsDetailViewController_iPad;
-    
+    self.tableView.backgroundColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]; // Make the table view application backgound color (turquose)
+      
 //        
 }
 
+-(void)refreshData{
     
+    
+    [tableModel reloadBoundValues];
+    [tableModel.modeledTableView reloadData];
+}
+  
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -170,6 +197,8 @@
 
 - (NSString *)tableViewModel:(SCArrayOfItemsModel *)tableViewModel sectionHeaderTitleForItem:(NSObject *)item AtIndex:(NSUInteger)index
 {
+    if (tableViewModel.tag==0) {
+   
 	// Cast not technically neccessary, done just for clarity
 	NSManagedObject *managedObject = (NSManagedObject *)item;
 	
@@ -177,6 +206,10 @@
 	
 	// Return first charcter of objectName
 	return [[objectName substringToIndex:1] uppercaseString];
+    }
+    else {
+        return nil;
+    }
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{

@@ -24,9 +24,9 @@
 @interface ClinicianViewController : CliniciansViewController_Shared <SCTableViewModelDataSource, SCTableViewModelDelegate,UIAlertViewDelegate, UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate> {
      
  
-  	__weak UISearchBar *searchBar;
+  	 UISearchBar *searchBar;
   
-//	 SCArrayOfObjectsModel *tableModel;
+	 SCArrayOfObjectsModel *objectsModel;
      UILabel *totalCliniciansLabel;
        
 
@@ -40,13 +40,13 @@
     NSPredicate *filterPredicate;
 }
 
-@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
 
 @property (nonatomic, strong) IBOutlet UILabel *totalCliniciansLabel;
 
 
 
-
+//@property (nonatomic,strong)IBOutlet SCArrayOfObjectsModel *objectsModel;
 
 -(void)updateClinicianTotalLabel;
 -(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController withPredicate:(NSPredicate *)startPredicate  usePrescriber:(BOOL)usePresciberBool;

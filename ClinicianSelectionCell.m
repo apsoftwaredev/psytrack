@@ -150,11 +150,11 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
     
     [self.ownerTableViewModel.viewController.navigationController pushViewController:clinicianViewController animated:YES];
 
-    if ([clinicianViewController.tableModel sectionCount]>0) {
+    if ([clinicianViewController.tableViewModel sectionCount]>0) {
         
-        for (int i=0; i<clinicianViewController.tableModel.sectionCount; i++) {
+        for (int i=0; i<clinicianViewController.tableViewModel.sectionCount; i++) {
         
-            SCTableViewSection *section=(SCTableViewSection *)[clinicianViewController.tableModel sectionAtIndex:i];
+            SCTableViewSection *section=(SCTableViewSection *)[clinicianViewController.tableViewModel sectionAtIndex:i];
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
             

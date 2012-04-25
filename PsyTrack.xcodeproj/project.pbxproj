@@ -279,6 +279,12 @@
 		E7912D17151D349E00E0609A /* MigrationHistoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D16151D349E00E0609A /* MigrationHistoryEntity.m */; };
 		E7912D1A151DF7DB00E0609A /* VitalsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D19151DF7DB00E0609A /* VitalsEntity.m */; };
 		E7912D1D151E441200E0609A /* InterpersonalEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D1C151E441200E0609A /* InterpersonalEntity.m */; };
+		E7919B281547001F001161A9 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B271547001F001161A9 /* Icon-72@2x.png */; };
+		E7919B3015470EDB001161A9 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */; };
+		E7919B3215470F01001161A9 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */; };
+		E7A92483154765FA0080B35D /* PsyTrack Clinician Tools-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7A92482154765FA0080B35D /* PsyTrack Clinician Tools-Info.plist */; };
+		E7A92491154853760080B35D /* DrugTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7A92490154853760080B35D /* DrugTestViewController.xib */; };
+		E7A9249315485E6C0080B35D /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E7A9249215485E6C0080B35D /* blueArrow.png */; };
 		E7B0A5B815347C430027F637 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B0A5B715347C430027F637 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
@@ -716,6 +722,12 @@
 		E7912D19151DF7DB00E0609A /* VitalsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VitalsEntity.m; sourceTree = "<group>"; };
 		E7912D1B151E441200E0609A /* InterpersonalEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterpersonalEntity.h; sourceTree = "<group>"; };
 		E7912D1C151E441200E0609A /* InterpersonalEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterpersonalEntity.m; sourceTree = "<group>"; };
+		E7919B271547001F001161A9 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		E7A92482154765FA0080B35D /* PsyTrack Clinician Tools-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PsyTrack Clinician Tools-Info.plist"; sourceTree = "<group>"; };
+		E7A92490154853760080B35D /* DrugTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrugTestViewController.xib; sourceTree = "<group>"; };
+		E7A9249215485E6C0080B35D /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
 		E7B0A5B615347C430027F637 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		E7B0A5B715347C430027F637 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		E7C0749D150E60B4009C5498 /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = "<group>"; };
@@ -910,6 +922,7 @@
 				37F7CDED150031F100AD2C3A /* DrugWebViewActionsViewController.m */,
 				37F7CE42150051EA00AD2C3A /* WebViewDetailViewController.h */,
 				37F7CE43150051EA00AD2C3A /* WebViewDetailViewController.m */,
+				E7A92490154853760080B35D /* DrugTestViewController.xib */,
 			);
 			name = Drugs;
 			sourceTree = "<group>";
@@ -1153,6 +1166,10 @@
 		37F7CECD15005E9900AD2C3A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E7A9249215485E6C0080B35D /* blueArrow.png */,
+				E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */,
+				E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */,
+				E7919B271547001F001161A9 /* Icon-72@2x.png */,
 				E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */,
 				37B225501502861F0015D955 /* Default-Landscape~ipad.png */,
 				37B2254E150286170015D955 /* Default-Portrait~ipad.png */,
@@ -1377,6 +1394,7 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
+				E7A92482154765FA0080B35D /* PsyTrack Clinician Tools-Info.plist */,
 				E75E1F09153DEF17005E8681 /* SensibleTableView.xcodeproj */,
 				E75E1EFC153D9E47005E8681 /* STV+CoreData.xcodeproj */,
 				E78A8D101531DCB30099FE5B /* PsyTrack.entitlements */,
@@ -1508,7 +1526,6 @@
 				B79F4894142BEF0D0085D47B /* Sources */,
 				B79F4895142BEF0D0085D47B /* Frameworks */,
 				B79F4896142BEF0D0085D47B /* Resources */,
-				E7B0A5AC153462770027F637 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1716,27 +1733,16 @@
 				E78DA6A515252579004ABF29 /* ExistingHoursViewController.xib in Resources */,
 				E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */,
 				E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */,
+				E7919B281547001F001161A9 /* Icon-72@2x.png in Resources */,
+				E7919B3015470EDB001161A9 /* Default-Landscape@2x~ipad.png in Resources */,
+				E7919B3215470F01001161A9 /* Default-Portrait@2x~ipad.png in Resources */,
+				E7A92483154765FA0080B35D /* PsyTrack Clinician Tools-Info.plist in Resources */,
+				E7A92491154853760080B35D /* DrugTestViewController.xib in Resources */,
+				E7A9249315485E6C0080B35D /* blueArrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		E7B0A5AC153462770027F637 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/myfile.h",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo \"#define addSmtricStr @\"iEn8ioesfec3\"\"";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B79F4894142BEF0D0085D47B /* Sources */ = {

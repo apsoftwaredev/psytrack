@@ -79,7 +79,7 @@
 }
 -(IBAction)reloadTableViewData:(id)sender{
     
-    [self.tableModel reloadBoundValues ];
+    [self.tableViewModel reloadBoundValues ];
     [self.tableView reloadData];
     
 }
@@ -118,8 +118,8 @@
 //    CliniciansViewController_Shared *clinicianViewController_Shared =[[CliniciansViewController_Shared alloc]init];
 //    [clinicianViewController_Shared setupTheCliniciansViewUsingSTV];
 //    
-//    
     
+    objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef];
     if (isInDetailSubview) {
         
       
@@ -127,13 +127,13 @@
        
        
 //        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withEntityClassDefinition:self.clinicianDef usingPredicate:filterPredicate useSCSelectionSection:YES];
-        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:self.clinicianDef];
+//      objectsModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:self.clinicianDef];
         if (filterPredicate) {
             [self.searchBar setSelectedScopeButtonIndex:1];
         }
         
-        tableModel_.allowDeletingItems=FALSE;
-        tableModel_.autoSelectNewItemCell=TRUE;
+        objectsModel.allowDeletingItems=FALSE;
+        objectsModel.autoSelectNewItemCell=TRUE;
         
         NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
         
@@ -159,8 +159,8 @@
         
         // stick the buttons in the toolbar
         self.navigationItem.rightBarButtonItems=buttons;
-        self.tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
-        self.tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:2];
+        objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
+        objectsModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:2];
 
         UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
         
@@ -184,24 +184,36 @@
 //        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
 //                                                 withEntityClassDefinition:self.clinicianDef usingPredicate:nil useSCSelectionSection:FALSE];	
         
-        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView
-                                                 entityDefinition:self.clinicianDef];
-        self.navigationItem.leftBarButtonItem = self.editButtonItem;
-        self.tableModel.editButtonItem = self.navigationItem.leftBarButtonItem;
-        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
-        self.navigationItem.rightBarButtonItem = addButton;
-        self.tableModel.addButtonItem = self.navigationItem.rightBarButtonItem;
+//        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView
+//                                                 entityDefinition:self.clinicianDef];
         
+        self.navigationItem.leftBarButtonItem = self.editButtonItem;
+        objectsModel.editButtonItem = self.navigationItem.leftBarButtonItem;
+//        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+//        self.navigationItem.rightBarButtonItem = addButton;
+        objectsModel.addButtonItem = self.navigationItem.rightBarButtonItem;
+        objectsModel.autoAssignDelegateForDetailModels=TRUE;
+        objectsModel.autoAssignDataSourceForDetailModels=TRUE;
         if (![SCUtilities is_iPad]) {
-            tableModel_.autoAssignDelegateForDetailModels=TRUE;
-            tableModel_.autoAssignDataSourceForDetailModels=TRUE;
+            
             self.tableView.backgroundColor=[UIColor clearColor];
             UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
             self.navigationItem.rightBarButtonItem = addButton; 
-            tableModel_.addButtonItem=self.navigationItem.rightBarButtonItem;
+        
+            
+            objectsModel.addButtonItem=self.navigationItem.rightBarButtonItem;
+            
+            
             
         }
-    tableModel_.sectionIndexTitles = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", nil];
+     
+        
+    objectsModel.sectionIndexTitles = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", nil];
+    
+     objectsModel.autoSortSections = TRUE;
+        self.clinicianDef.keyPropertyName=@"firstName";
+        self.clinicianDef.titlePropertyName = @"firstName;lastName";
+    
     }
      
     
@@ -209,22 +221,43 @@
 //	self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self withEntityClassDefinition:self.clinicianDef];	
 //    
     
-    tableModel_.searchBar = self.searchBar;
-	tableModel_.searchPropertyName = @"firstName;lastName";
-//    tableModel_.addButtonItem = self.navigationItem.rightBarButtonItem;
-//    tableModel_.editButtonItem = self.navigationItem.leftBarButtonItem;
-    tableModel_.allowMovingItems=TRUE;
+    
+	objectsModel.searchPropertyName = @"firstName;lastName";
+//    objectsModel.addButtonItem = self.navigationItem.rightBarButtonItem;
+//    objectsModel.editButtonItem = self.navigationItem.leftBarButtonItem;
+    objectsModel.allowMovingItems=TRUE;
+    
+    
+	objectsModel.searchBar = self.searchBar;
+    objectsModel.addButtonItem = self.addButton;
+    
+	
+    
+    // Replace the default model with the new objectsModel
+    //    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"drugName Matches %@",@"a"];
+    objectsModel.enablePullToRefresh = TRUE;
+    objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
+    
+    
+//    SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"firstName" sortAscending:YES filterPredicate:nil];
     
    
+//    dataFetchOptions.batchStartingOffset=10;
+//    dataFetchOptions.batchSize=10;
+//    
+//    
+//    objectsModel.dataFetchOptions=dataFetchOptions;
+    
+   
+ 
     
     
      [self updateClinicianTotalLabel];
     
-    tableModel_.autoSortSections = TRUE;
+   
     
-	
-    
-    
+	    
+
    
     if([SCUtilities is_iPad]){
         [self.tableView setBackgroundView:nil];
@@ -239,7 +272,7 @@
                                                willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
                                                                      duration:5];
    
-    [self.tableModel.modeledTableView reloadData];  
+//    [self.tableModel.modeledTableView reloadData];  
    
 }
 #pragma mark -
@@ -264,6 +297,10 @@
     }
 
 }
+  
+
+
+
 
 -(void)cancelButtonTapped{
     
@@ -294,8 +331,8 @@
 -(void)doneButtonTappedL{
     
     //NSLog(@"done Button tapped");
-    if (isInDetailSubview &&tableModel_.sectionCount) {
-        SCTableViewSection *section=(SCTableViewSection *)[tableModel_ sectionAtIndex:0];
+    if (isInDetailSubview &&self.tableViewModel.sectionCount) {
+        SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
         //NSLog(@"section class is %@",[section class]);
 //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 //        
@@ -309,7 +346,7 @@
             
             [objectsSelectionSection commitCellChanges];
             if (objectsSelectionSection.allowMultipleSelection) {
-                NSInteger sectionCount=tableModel_.sectionCount;
+                NSInteger sectionCount=self.tableViewModel.sectionCount;
                 //NSLog(@"section count is %i",sectionCount);
                 if (sectionCount&& !currentlySelectedCliniciansArray) {
                     currentlySelectedCliniciansArray=[NSMutableArray array];
@@ -318,7 +355,7 @@
                     [currentlySelectedCliniciansArray removeAllObjects];
                 }
                 for (NSInteger i=0; i<sectionCount ; i++ ) {
-                    SCObjectSelectionSection *sectionAtIndex=(SCObjectSelectionSection *)[tableModel_ sectionAtIndex:i];
+                    SCObjectSelectionSection *sectionAtIndex=(SCObjectSelectionSection *)[self.tableViewModel sectionAtIndex:i];
                     
                     
                     
@@ -363,7 +400,7 @@
 //                if (cellIndexPath.row) {
 //                    <#statements#>
 //                }
-//                SCTableViewCell *cell=(SCTableViewCell *)[tableModel_ cellAtIndexPath:cellIndexPath];
+//                SCTableViewCell *cell=(SCTableViewCell *)[self.tableViewModel cellAtIndexPath:cellIndexPath];
 //                //NSLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
                 
                 
@@ -657,7 +694,7 @@
 
 -(void)setSelectedClinicians{
     if (isInDetailSubview) {
-        SCTableViewSection *section=(SCTableViewSection *)[tableModel_ sectionAtIndex:0];
+        SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
         //NSLog(@"section class is %@",[section class]);
         //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         //        
@@ -667,9 +704,9 @@
         
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) 
         {
-            for (int i=0; i<tableModel_.sectionCount; i++) {
+            for (int i=0; i<self.tableViewModel.sectionCount; i++) {
            
-                SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)[tableModel_ sectionAtIndex:i];
+                SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)[self.tableViewModel sectionAtIndex:i];
             
             if (objectSelectionSection.allowMultipleSelection) 
             {
@@ -697,7 +734,7 @@
 -(void)createSelectedCliniciansArray{
 
     if (isInDetailSubview) {
-        SCTableViewSection *section=(SCTableViewSection *)[tableModel_ sectionAtIndex:0];
+        SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
         //NSLog(@"section class is %@",[section class]);
         //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         //        
@@ -723,10 +760,10 @@
                             
                 
 
-                NSInteger sectionCount=tableModel_.sectionCount;
+                NSInteger sectionCount=self.tableViewModel.sectionCount;
                 
                 for (NSInteger p=0; p<sectionCount ; p++ ) {
-                    SCObjectSelectionSection *sectionAtIndex=(SCObjectSelectionSection *)[tableModel_ sectionAtIndex:p];
+                    SCObjectSelectionSection *sectionAtIndex=(SCObjectSelectionSection *)[self.tableViewModel sectionAtIndex:p];
                                        NSEnumerator *enumerator = [sectionAtIndex.selectedItemsIndexes objectEnumerator];
                     id setObject;
                     while ((setObject = [enumerator nextObject]) != nil)
@@ -1605,13 +1642,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(void)updateClinicianTotalLabel{
 
  
-    if (tableModel_.tag==0) 
+    if (self.tableViewModel.tag==0) 
     {
         int cellCount=0;
-        if (tableModel_.sectionCount >0){
+        if (self.tableViewModel.sectionCount >0){
             
-            for (int i=0; i<tableModel_.sectionCount; i++) {
-                SCTableViewSection *section=(SCTableViewSection *)[tableModel_ sectionAtIndex:i];
+            for (int i=0; i<self.tableViewModel.sectionCount; i++) {
+                SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:i];
                 cellCount=cellCount+section.cellCount;
                 
             }
@@ -1654,6 +1691,33 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     [super tableViewModel:tableViewModel didAddSectionAtIndex:index];
     
     SCTableViewSection *section=[tableViewModel sectionAtIndex:index];
+    
+    if (tableViewModel.tag==0) {
+        NSLog(@"t %@",section.class);
+    
+        if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
+      
+        SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
+        arrayOfObjectsSection.fetchItemsCell=[SCFetchItemsCell cellWithText:@"Load More..."];
+        
+   
+    
+    SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"firstName" sortAscending:YES filterPredicate:nil];
+    
+    
+    dataFetchOptions.batchStartingOffset=2;
+    dataFetchOptions.batchSize=2;
+    
+    
+    arrayOfObjectsSection.dataFetchOptions=dataFetchOptions;
+        [arrayOfObjectsSection.dataFetchOptions sort];
+            
+        }
+    }
+    
+    
+    
+
       if (isInDetailSubview &&!filterByPrescriber)
       {
         

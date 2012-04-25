@@ -37,7 +37,7 @@
 @synthesize personAddNewViewController=personAddNewViewController_;
 @synthesize currentDetailTableViewModel=currentDetailTableViewModel_;
 @synthesize rootViewController=rootViewController_;
-@synthesize tableModel=tableModel_;
+//@synthesize tableModel=tableModel_;
 //@synthesize tableView;
 @synthesize abGroupObjectSelectionCell=abGroupObjectSelectionCell_;
 @synthesize personViewController=personViewController_;
@@ -51,7 +51,7 @@
 -(void)viewDidUnload{
        [super viewDidUnload];
    
-     self.tableModel=nil;
+//     self.tableModel=nil;
     if (currentDetailTableViewModel_) {
         self.currentDetailTableViewModel=nil;
     }
@@ -2251,6 +2251,7 @@
         {
             NSManagedObject *managedObject = (NSManagedObject *)cell.boundObject;
             //identify the if the cell has a managedObject
+        NSLog(@"bound object store is %@",cell.boundObject);
             if (managedObject) {
                 if (tableViewModel.sectionCount) {
                     
@@ -2263,7 +2264,7 @@
                     
 //                    //NSLog(@"entity name is %@",managedObject.entity.name);
                     //identify the Languages Spoken table
-                    if (![NSStringFromClass([managedObject class])isEqualToString:@"PTABGroup"] &&[managedObject.entity.name isEqualToString:@"LogEntity"]) {
+                    if (![NSStringFromClass([managedObject class])isEqualToString:@"PTABGroup"] &&![managedObject isKindOfClass:[SCTableViewCell class]]&&[managedObject.entity.name isEqualToString:@"LogEntity"]) {
                         //define and initialize a date formatter
                         NSDateFormatter *dateTimeDateFormatter = [[NSDateFormatter alloc] init];
                         
@@ -2275,7 +2276,7 @@
                         
                         cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateTimeDateFormatter stringFromDate:logDate],notes];
                     }
-                    if (![NSStringFromClass([managedObject class])isEqualToString:@"PTABGroup"] &&[managedObject.entity.name isEqualToString:@"ReferralEntity"]) {
+                    if (![NSStringFromClass([managedObject class])isEqualToString:@"PTABGroup"]&& ![managedObject isKindOfClass:[SCTableViewCell class]]&&[managedObject.entity.name isEqualToString:@"ReferralEntity"]) {
                         //define and initialize a date formatter
                         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
                         
@@ -2473,6 +2474,15 @@
         
     }
    
+    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
+        
+        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+        [detailTableViewModel.modeledTableView setBackgroundColor:[UIColor clearColor]]; 
+       
+       
+    }
     //
     //
     //    if (tableViewModel.tag==1) {
@@ -2595,6 +2605,7 @@
     
     
 }
+
 
 
 
@@ -5526,16 +5537,16 @@
         
         
     }
-    if(tableModel_.viewController.navigationController)
+    if(self.tableViewModel.viewController.navigationController)
 	{
 		// check if self is the rootViewController
         
-        [tableModel_.viewController.navigationController popViewControllerAnimated:YES];
+        [self.tableViewModel.viewController.navigationController popViewControllerAnimated:YES];
         
         
 	}
 	else
-		[tableModel_.viewController dismissModalViewControllerAnimated:YES];
+		[self.tableViewModel.viewController dismissModalViewControllerAnimated:YES];
     
 
     

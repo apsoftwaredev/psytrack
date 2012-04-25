@@ -1151,7 +1151,11 @@
     
     tableModel_.autoAssignDelegateForDetailModels=TRUE;
     tableModel_.autoAssignDataSourceForDetailModels=TRUE;
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadBoundValues:)
+                                                 name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
+                                               object:nil];
+
     
 }
 
