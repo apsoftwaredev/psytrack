@@ -1714,11 +1714,13 @@
     if([SCUtilities is_iPad]){
         detailTableViewModel.delegate = self;
         detailTableViewModel.tag = tableViewModel.tag+1;
-        
-        UIView *view=[[UIView alloc]init];
-        [view setBackgroundColor:[UIColor clearColor]];
-        [detailTableViewModel.modeledTableView setBackgroundView:nil];
-        [detailTableViewModel.modeledTableView setBackgroundView:view];
+        if (detailTableViewModel.modeledTableView.backgroundColor!=[UIColor clearColor]) {
+            UIView *view=[[UIView alloc]init];
+            [view setBackgroundColor:[UIColor clearColor]];
+            [detailTableViewModel.modeledTableView setBackgroundView:nil];
+            [detailTableViewModel.modeledTableView setBackgroundView:view];
+        }
+       
          // Make the table view transparent
     }
     
@@ -3155,7 +3157,13 @@
     [self tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:indexPath.section detailTableViewModel:(SCTableViewModel*) detailTableViewModel];
     
 
-
+    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
+        [detailTableViewModel.viewController.view setBackgroundColor:[UIColor clearColor]];
+        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
+    }
 
 
 }

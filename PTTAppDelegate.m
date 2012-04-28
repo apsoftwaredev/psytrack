@@ -216,6 +216,12 @@
         UINavigationController *clinicianRootNav = [[UINavigationController alloc] initWithRootViewController:cliniciansRootViewController];
         UINavigationController *clinicianDetailNav = [[UINavigationController alloc] initWithRootViewController:cliniciansDetailViewController_iPad];
         
+        clinicianRootNav.navigationBar.opaque=YES;
+        clinicianRootNav.navigationBar.tintColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0];
+        
+        clinicianDetailNav.navigationBar.opaque=YES;
+        clinicianDetailNav.navigationBar.tintColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0];
+        
         // Crea the split view and add it to the window
         UISplitViewController *cliniciansSplitViewController = [[UISplitViewController alloc] init];
         cliniciansSplitViewController.viewControllers = [NSArray arrayWithObjects:clinicianRootNav, clinicianDetailNav, nil];
