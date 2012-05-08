@@ -256,11 +256,11 @@
 		B7F877BB14C9A38900F00C0D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877B914C9A38900F00C0D /* EventKit.framework */; };
 		B7F877BC14C9A38900F00C0D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877BA14C9A38900F00C0D /* EventKitUI.framework */; };
 		E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */; };
+		E73CBAF615501A2A00B7FBB9 /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E73CBAE7155019E700B7FBB9 /* libSensibleTableView.a */; };
+		E73CBB0515501C4C00B7FBB9 /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E73CBB0215501C3600B7FBB9 /* libSTV+CoreData.a */; };
 		E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B76150858D3005B798A /* ABGroupSelectionCell.m */; };
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 		E7516BDC150BF9A2005B798A /* Dan Boice-46.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */; };
-		E75E1F08153D9E61005E8681 /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E75E1F05153D9E47005E8681 /* libSTV+CoreData.a */; };
-		E75E1F15153DEF2C005E8681 /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E75E1F12153DEF18005E8681 /* libSensibleTableView.a */; };
 		E75F7786151CC574002B10AE /* LogEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F7785151CC574002B10AE /* LogEntity.m */; };
 		E75F778C151CF463002B10AE /* TestingSessionDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F778B151CF463002B10AE /* TestingSessionDeliveredEntity.m */; };
 		E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */; };
@@ -282,7 +282,6 @@
 		E7919B281547001F001161A9 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B271547001F001161A9 /* Icon-72@2x.png */; };
 		E7919B3015470EDB001161A9 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */; };
 		E7919B3215470F01001161A9 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */; };
-		E7A92483154765FA0080B35D /* PsyTrack Clinician Tools-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7A92482154765FA0080B35D /* PsyTrack Clinician Tools-Info.plist */; };
 		E7A92491154853760080B35D /* DrugTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7A92490154853760080B35D /* DrugTestViewController.xib */; };
 		E7A9249315485E6C0080B35D /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E7A9249215485E6C0080B35D /* blueArrow.png */; };
 		E7B0A5B815347C430027F637 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B0A5B715347C430027F637 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -297,33 +296,33 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E75E1F04153D9E47005E8681 /* PBXContainerItemProxy */ = {
+		E73CBAE6155019E700B7FBB9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E75E1EFC153D9E47005E8681 /* STV+CoreData.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DBE737C414FC66D40076D2B6;
-			remoteInfo = "STV+CoreData";
-		};
-		E75E1F06153D9E53005E8681 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E75E1EFC153D9E47005E8681 /* STV+CoreData.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
-			remoteInfo = "STV+CoreData";
-		};
-		E75E1F11153DEF18005E8681 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E75E1F09153DEF17005E8681 /* SensibleTableView.xcodeproj */;
+			containerPortal = E73CBADE155019E600B7FBB9 /* SensibleTableView.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DBE7373014F99E580076D2B6;
 			remoteInfo = SensibleTableView;
 		};
-		E75E1F13153DEF23005E8681 /* PBXContainerItemProxy */ = {
+		E73CBAF215501A0F00B7FBB9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E75E1F09153DEF17005E8681 /* SensibleTableView.xcodeproj */;
+			containerPortal = E73CBADE155019E600B7FBB9 /* SensibleTableView.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = DBE7372F14F99E580076D2B6;
 			remoteInfo = SensibleTableView;
+		};
+		E73CBB0115501C3600B7FBB9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E73CBAF915501C3600B7FBB9 /* STV+CoreData.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DBE737C414FC66D40076D2B6;
+			remoteInfo = "STV+CoreData";
+		};
+		E73CBB0315501C4400B7FBB9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E73CBAF915501C3600B7FBB9 /* STV+CoreData.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
+			remoteInfo = "STV+CoreData";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -681,13 +680,13 @@
 		B7F877BA14C9A38900F00C0D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		E70B9EFD15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSourcesSCObjectSelectionCell.h; sourceTree = "<group>"; };
 		E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSourcesSCObjectSelectionCell.m; sourceTree = "<group>"; };
+		E73CBADE155019E600B7FBB9 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.0.4 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
+		E73CBAF915501C3600B7FBB9 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3-1.0.4 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E7516B75150858D3005B798A /* ABGroupSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABGroupSelectionCell.h; sourceTree = "<group>"; };
 		E7516B76150858D3005B798A /* ABGroupSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABGroupSelectionCell.m; sourceTree = "<group>"; };
 		E7516B7915085A23005B798A /* PTABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTABGroup.h; sourceTree = "<group>"; };
 		E7516B7A15085A23005B798A /* PTABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTABGroup.m; sourceTree = "<group>"; };
 		E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Dan Boice-46.jpg"; path = "../../Pictures/childhood scans/Dan Boice-46.jpg"; sourceTree = "<group>"; };
-		E75E1EFC153D9E47005E8681 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3.0.2 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
-		E75E1F09153DEF17005E8681 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.0.2 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
 		E75F7784151CC574002B10AE /* LogEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogEntity.h; sourceTree = "<group>"; };
 		E75F7785151CC574002B10AE /* LogEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogEntity.m; sourceTree = "<group>"; };
 		E75F778A151CF463002B10AE /* TestingSessionDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingSessionDeliveredEntity.h; sourceTree = "<group>"; };
@@ -725,7 +724,6 @@
 		E7919B271547001F001161A9 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
-		E7A92482154765FA0080B35D /* PsyTrack Clinician Tools-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PsyTrack Clinician Tools-Info.plist"; sourceTree = "<group>"; };
 		E7A92490154853760080B35D /* DrugTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrugTestViewController.xib; sourceTree = "<group>"; };
 		E7A9249215485E6C0080B35D /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
 		E7B0A5B615347C430027F637 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
@@ -751,8 +749,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E75E1F15153DEF2C005E8681 /* libSensibleTableView.a in Frameworks */,
-				E75E1F08153D9E61005E8681 /* libSTV+CoreData.a in Frameworks */,
+				E73CBB0515501C4C00B7FBB9 /* libSTV+CoreData.a in Frameworks */,
+				E73CBAF615501A2A00B7FBB9 /* libSensibleTableView.a in Frameworks */,
 				E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */,
 				3773F77114FD267000C36B75 /* AudioToolbox.framework in Frameworks */,
 				B78E053214E6B4A300890EA4 /* Security.framework in Frameworks */,
@@ -1394,9 +1392,8 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				E7A92482154765FA0080B35D /* PsyTrack Clinician Tools-Info.plist */,
-				E75E1F09153DEF17005E8681 /* SensibleTableView.xcodeproj */,
-				E75E1EFC153D9E47005E8681 /* STV+CoreData.xcodeproj */,
+				E73CBAF915501C3600B7FBB9 /* STV+CoreData.xcodeproj */,
+				E73CBADE155019E600B7FBB9 /* SensibleTableView.xcodeproj */,
 				E78A8D101531DCB30099FE5B /* PsyTrack.entitlements */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Helpers */,
@@ -1435,18 +1432,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E75E1EFD153D9E47005E8681 /* Products */ = {
+		E73CBADF155019E600B7FBB9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E75E1F05153D9E47005E8681 /* libSTV+CoreData.a */,
+				E73CBAE7155019E700B7FBB9 /* libSensibleTableView.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E75E1F0A153DEF17005E8681 /* Products */ = {
+		E73CBAFA15501C3600B7FBB9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E75E1F12153DEF18005E8681 /* libSensibleTableView.a */,
+				E73CBB0215501C3600B7FBB9 /* libSTV+CoreData.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1530,8 +1527,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				E75E1F14153DEF23005E8681 /* PBXTargetDependency */,
-				E75E1F07153D9E53005E8681 /* PBXTargetDependency */,
+				E73CBB0415501C4400B7FBB9 /* PBXTargetDependency */,
+				E73CBAF315501A0F00B7FBB9 /* PBXTargetDependency */,
 			);
 			name = PsyTrack;
 			productName = psyTrainTrack;
@@ -1559,12 +1556,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = E75E1F0A153DEF17005E8681 /* Products */;
-					ProjectRef = E75E1F09153DEF17005E8681 /* SensibleTableView.xcodeproj */;
+					ProductGroup = E73CBADF155019E600B7FBB9 /* Products */;
+					ProjectRef = E73CBADE155019E600B7FBB9 /* SensibleTableView.xcodeproj */;
 				},
 				{
-					ProductGroup = E75E1EFD153D9E47005E8681 /* Products */;
-					ProjectRef = E75E1EFC153D9E47005E8681 /* STV+CoreData.xcodeproj */;
+					ProductGroup = E73CBAFA15501C3600B7FBB9 /* Products */;
+					ProjectRef = E73CBAF915501C3600B7FBB9 /* STV+CoreData.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1575,18 +1572,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E75E1F05153D9E47005E8681 /* libSTV+CoreData.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libSTV+CoreData.a";
-			remoteRef = E75E1F04153D9E47005E8681 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E75E1F12153DEF18005E8681 /* libSensibleTableView.a */ = {
+		E73CBAE7155019E700B7FBB9 /* libSensibleTableView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSensibleTableView.a;
-			remoteRef = E75E1F11153DEF18005E8681 /* PBXContainerItemProxy */;
+			remoteRef = E73CBAE6155019E700B7FBB9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E73CBB0215501C3600B7FBB9 /* libSTV+CoreData.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libSTV+CoreData.a";
+			remoteRef = E73CBB0115501C3600B7FBB9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1736,7 +1733,6 @@
 				E7919B281547001F001161A9 /* Icon-72@2x.png in Resources */,
 				E7919B3015470EDB001161A9 /* Default-Landscape@2x~ipad.png in Resources */,
 				E7919B3215470F01001161A9 /* Default-Portrait@2x~ipad.png in Resources */,
-				E7A92483154765FA0080B35D /* PsyTrack Clinician Tools-Info.plist in Resources */,
 				E7A92491154853760080B35D /* DrugTestViewController.xib in Resources */,
 				E7A9249315485E6C0080B35D /* blueArrow.png in Resources */,
 			);
@@ -1883,15 +1879,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E75E1F07153D9E53005E8681 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "STV+CoreData";
-			targetProxy = E75E1F06153D9E53005E8681 /* PBXContainerItemProxy */;
-		};
-		E75E1F14153DEF23005E8681 /* PBXTargetDependency */ = {
+		E73CBAF315501A0F00B7FBB9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SensibleTableView;
-			targetProxy = E75E1F13153DEF23005E8681 /* PBXContainerItemProxy */;
+			targetProxy = E73CBAF215501A0F00B7FBB9 /* PBXContainerItemProxy */;
+		};
+		E73CBB0415501C4400B7FBB9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "STV+CoreData";
+			targetProxy = E73CBB0315501C4400B7FBB9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
