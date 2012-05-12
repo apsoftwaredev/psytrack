@@ -337,7 +337,7 @@
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">50</int>
+					<int key="connectionID">57</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -346,7 +346,7 @@
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">48</int>
+					<int key="connectionID">56</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -454,7 +454,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">55</int>
+			<int key="maxID">57</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -462,11 +462,21 @@
 					<string key="className">DrugViewController_iPhone</string>
 					<string key="superclassName">SCViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="ContinueDownloadTapped:">id</string>
+						<string key="StopDownloadTapped:">id</string>
 						<string key="downloadButtonTapped:">id</string>
 						<string key="flashCheckingLabel:">id</string>
 						<string key="startCheckingForUpdate:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="ContinueDownloadTapped:">
+							<string key="name">ContinueDownloadTapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="StopDownloadTapped:">
+							<string key="name">StopDownloadTapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="downloadButtonTapped:">
 							<string key="name">downloadButtonTapped:</string>
 							<string key="candidateClassName">id</string>

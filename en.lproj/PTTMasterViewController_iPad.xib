@@ -304,6 +304,7 @@
 							<int key="NSColorSpace">2</int>
 							<bytes key="NSRGB">MC4zODAzOTIxOTM4IDAuNjg2Mjc0NTI4NSAwLjgxOTYwNzkxMzUAA</bytes>
 						</object>
+						<int key="IBUITag">5</int>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
 				</array>

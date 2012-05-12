@@ -21,7 +21,7 @@
 #import "UIDownloadBar.h"
 #import "DrugNameObjectSelectionCell.h"
 #import "DrugProductEntity.h"
-@interface DrugViewController_iPhone : SCViewController <SCTableViewModelDataSource, UIDownloadBarDelegate> {
+@interface DrugViewController_iPhone : SCViewController <SCTableViewModelDataSource, UIDownloadBarDelegate,UISearchBarDelegate > {
     
     
   	UISearchBar *searchBar;
@@ -73,8 +73,8 @@
 - (void) connectToRemoteDrugFile;
 -(IBAction)startCheckingForUpdate:(id)sender;
 -(IBAction)flashCheckingLabel:(id)sender;
-
-
+-(IBAction)StopDownloadTapped:(id)sender;
+-(IBAction)ContinueDownloadTapped:(id)sender;
 -(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(DrugNameObjectSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController applNo:(NSString *)applicationNumber productNo:(NSString *)productNumber;
 -(void)doneButtonTapped;
 -(void)cancelButtonTapped;

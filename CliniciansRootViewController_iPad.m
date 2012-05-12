@@ -17,7 +17,7 @@
  */
 #import "CliniciansRootViewController_iPad.h"
 
-
+#import "LogoBackgroundViewController.h"
 #import "PTTAppDelegate.h"
 #import "ButtonCell.h"
 #import "ClinicianEntity.h"
@@ -70,8 +70,8 @@
     clinicianDetailViewController.navigationBarType=SCNavigationBarTypeAddRight;
     
     objectsModel.addButtonItem=clinicianDetailViewController.navigationItem.rightBarButtonItem;
-    self.tableView.backgroundColor=[UIColor clearColor]; // Make the table view application backgound color (turquose)
-
+//    self.tableView.backgroundColor=[UIColor clearColor]; // Make the table view application backgound color (turquose)
+  
 //    self.tableView.backgroundColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]; // Make the table view application backgound color (turquose)
 
     self.tableViewModel = objectsModel;
@@ -954,6 +954,7 @@
         addingClinician=YES;
     }
 
+    detailTableViewModel.theme=[SCTheme themeWithPath:@"ClearBackgroundTheme.sct"];
 //    if (tableViewModel.tag==0) {
 //        
 //        
@@ -963,15 +964,15 @@
 //    else{
 //        detailTableViewModel.tag=tableViewModel.tag+1;
 //    }
-    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-        [detailTableViewModel.viewController.view setBackgroundColor:[UIColor clearColor]];
-        
-        detailTableViewModel.modeledTableView.backgroundView.backgroundColor=[UIColor clearColor];
-
+//    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+//        [detailTableViewModel.viewController.view setBackgroundColor:[UIColor clearColor]];
+//        
+//        detailTableViewModel.modeledTableView.backgroundView.backgroundColor=[UIColor clearColor];
+//
 //    [detailTableViewModel.modeledTableView setBackgroundView:nil];
 //    [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-    }
+//    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
+//    }
     detailTableViewModel.delegate=self;
     //NSLog(@"detail model created for row at index path detailtable model tag is %i", detailTableViewModel.tag);
 }
@@ -988,17 +989,41 @@
     
     detailTableViewModel.delegate=self;
     if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+//        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
-        detailTableViewModel.viewController.view.backgroundColor=[UIColor clearColor];
-    
-//    [detailTableViewModel.modeledTableView setBackgroundView:nil];
-//    [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
+        
+        detailTableViewModel.theme = [SCTheme themeWithPath:@"ClearBackgroundTheme.sct"];
+        
+        
+//        detailTableViewModel.viewController.view.backgroundColor=[UIColor clearColor];
+//    
+////    [detailTableViewModel.modeledTableView setBackgroundView:nil];
+////    [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+//    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
     }
     //NSLog(@"detail model created for row at index detailtable model tag is %i", detailTableViewModel.tag);
     
 }
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath  withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    if(indexPath.row == NSNotFound)
+    {
+        [detailTableViewModel.modeledTableView setBackgroundColor:(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor];
+        
+//        UIViewController *logoViewController=[[LogoBackgroundViewController alloc]initWithNibName:@"LogoBackgroundViewController" bundle:[NSBundle mainBundle] ]; 
+        
+        
+    }
+
+    
+//[logoViewController loadView ];
+//[detailTableViewModel.modeledTableView setBackgroundView:logoViewController.view ];
+
+
+}
 
 - (NSString *)tableViewModel:(SCArrayOfItemsModel *)tableViewModel sectionHeaderTitleForItem:(NSObject *)item AtIndex:(NSUInteger)index
 {

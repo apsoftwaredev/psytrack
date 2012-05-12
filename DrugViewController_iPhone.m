@@ -199,37 +199,37 @@
     drugDef.titlePropertyName=@"drugName;dosage"; 
     
     drugDef.keyPropertyName=@"drugName";
-//    if (drugsManagedObjectContext) {
-//   
-//    NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:drugsManagedObjectContext];
-//    
-//    
-//    NSFetchRequest *productFetchRequest = [[NSFetchRequest alloc] init];
-//   
-//    
-//    
-//    [productFetchRequest setEntity:productEntityDesc];
-//    
-//    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"drugName"
-//                                                                   ascending:YES];
-//   NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-//    
+    if (drugsManagedObjectContext) {
+   
+    NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:drugsManagedObjectContext];
     
-//    [productFetchRequest setSortDescriptors:sortDescriptors];
-//
-//   
-//    NSError *productError = nil;
-//        NSArray *productFetchedObjects;
-//        
-//        if ([drugsManagedObjectContext countForFetchRequest:productFetchRequest error:&productError]) {
-//       
-//        productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:productFetchRequest error:&productError];
-//            
-//        }
-//    drugsMutableArray=[NSMutableArray arrayWithArray:productFetchedObjects];
-//    productFetchedObjects=nil;
-//    } 
-//    NSLog(@"drugsmutable array %i",drugsMutableArray.count);
+    
+    NSFetchRequest *productFetchRequest = [[NSFetchRequest alloc] init];
+   
+    
+    
+    [productFetchRequest setEntity:productEntityDesc];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"drugName"
+                                                                   ascending:YES];
+   NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
+    
+    [productFetchRequest setSortDescriptors:sortDescriptors];
+
+   
+    NSError *productError = nil;
+        NSArray *productFetchedObjects;
+        
+        if ([drugsManagedObjectContext countForFetchRequest:productFetchRequest error:&productError]) {
+       
+        productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:productFetchRequest error:&productError];
+            
+        }
+    drugsMutableArray=[NSMutableArray arrayWithArray:productFetchedObjects];
+    productFetchedObjects=nil;
+    } 
+    NSLog(@"drugsmutable array %i",drugsMutableArray.count);
     // Instantiate the tabel model
     
 //    tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self];    
@@ -237,12 +237,12 @@
 //    
 //    
 //    
-    SCArrayOfObjectsModel *objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:drugDef];
+    SCArrayOfObjectsModel *objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView items:drugsMutableArray itemsDefinition:drugDef];
 	objectsModel.searchBar = self.searchBar;
 	objectsModel.searchPropertyName = @"drugName";
 	objectsModel.addButtonItem = self.addButton;
   
-	
+	self.searchBar.delegate=self;
     
     // Replace the default model with the new objectsModel
 //    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"drugName Matches %@",@"a"];
@@ -250,16 +250,16 @@
     objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
    
     
-    SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"drugName" sortAscending:YES filterPredicate:nil];
-   
-  
- 
-    dataFetchOptions.batchSize=10;
-
- 
-    objectsModel.dataFetchOptions=dataFetchOptions;
+//    SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"drugName" sortAscending:YES filterPredicate:nil];
+//   
+//  
+// 
+//    dataFetchOptions.batchSize=10;
+//
+// 
+//    objectsModel.dataFetchOptions=dataFetchOptions;
     self.tableViewModel = objectsModel;
-  
+//    [self.tableViewModel reloadBoundValues];
 //    if (isInDetailSubview) {
 //        
 //         NSPredicate *currentClientsPredicate=[NSPredicate predicateWithFormat:@"applNo MATCHES %@",drugObjectSelectionCell_.d];
@@ -452,23 +452,23 @@
     
     
 }
-
--(NSArray *)tableViewModel:(SCArrayOfItemsModel *)tableModel customSearchResultForSearchText:(NSString *)searchText autoSearchResults:(NSArray *)autoSearchResults{
-
-    NSArray *array=[NSArray array];
-    
-    if ([searchText isEqualToString:@""]){
-        
-        return array;
-    
-    
-    }
-    else {
-        return autoSearchResults;
-    }
-
-
-}
+//-()sea
+//-(NSArray *)tableViewModel:(SCArrayOfItemsModel *)tableModel customSearchResultForSearchText:(NSString *)searchText autoSearchResults:(NSArray *)autoSearchResults{
+//
+//    NSArray *array=[NSArray array];
+//    
+//    if ([searchText isEqualToString:@""]){
+//        
+//        return array;
+//    
+//    
+//    }
+//    else {
+//        return autoSearchResults;
+//    }
+//
+//
+//}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

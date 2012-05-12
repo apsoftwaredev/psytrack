@@ -33,12 +33,8 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
     
-    if (self.tableView.backgroundView.backgroundColor!=[UIColor clearColor]) {
-        [self.tableView setBackgroundView:nil];
-        [self.tableView setBackgroundView:[[UIView alloc] init]];
-        [self.tableView setBackgroundColor:UIColor.clearColor];
-    }
-   
+    // Set the view controller's theme
+    self.tableViewModel.theme = [SCTheme themeWithPath:@"ClearBackgroundTheme.sct"];
 }
 
 - (void)viewDidUnload {

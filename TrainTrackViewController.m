@@ -550,10 +550,12 @@
 //            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
             
            NSLog(@"view controller is %@",self.tableViewModel);
-            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:drugViewController_iPhone];	
+//            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:drugViewController_iPhone];	
             
+//            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
             
-            [[self navigationController] presentModalViewController:navController animated:YES];
+
+            [self.navigationController pushViewController:drugViewController_iPhone animated:YES];
             
             
             tabBar.userInteractionEnabled=TRUE;
