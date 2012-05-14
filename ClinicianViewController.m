@@ -186,7 +186,7 @@
         
 //        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView
 //                                                 entityDefinition:self.clinicianDef];
-        
+         self.navigationBarType = SCNavigationBarTypeEditLeft;
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
         objectsModel.editButtonItem = self.navigationItem.leftBarButtonItem;
 //        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
@@ -197,8 +197,8 @@
         if (![SCUtilities is_iPad]) {
             
             self.tableView.backgroundColor=[UIColor clearColor];
-            UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
-            self.navigationItem.rightBarButtonItem = addButton; 
+//            UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+//            self.navigationItem.rightBarButtonItem = addButton; 
         
             
             objectsModel.addButtonItem=self.navigationItem.rightBarButtonItem;
@@ -210,8 +210,8 @@
         
     objectsModel.sectionIndexTitles = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", nil];
     
-     objectsModel.autoSortSections = TRUE;
-        self.clinicianDef.keyPropertyName=@"firstName";
+//     objectsModel.autoSortSections = TRUE;
+//        self.clinicianDef.keyPropertyName=@"firstName";
         self.clinicianDef.titlePropertyName = @"firstName;lastName";
     
     }

@@ -53,7 +53,7 @@
     [self.tableView setBackgroundView:[[UIView alloc] init]];
        
 //      
-  self.tableViewModel.delegate=self;
+//  self.tableViewModel.delegate=self;
    
 
 
@@ -158,15 +158,22 @@
 //                    NSString *lastNameStr=lastNameField.text;
 //                    if (lastNameStr.length) {
 //                        //NSLog(@"current cell superview is %@",[self.tableViewModel indexPathForCell:currentTableViewCell]);
-                        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:[self.tableViewModel indexPathForCell:currentTableViewCell].section];
+                        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:[tableViewModel.masterModel indexPathForCell:currentTableViewCell].section];
 //                        unsigned short lastNameFirstChar=[lastNameStr characterAtIndex:0];
 //                        if ((unsigned short)[section.headerTitle characterAtIndex:0]!=(unsigned short)lastNameFirstChar) {
-                            //NSLog(@"they arent equal");
-                            
-        if (!addingClinician) {
+            
+        //NSLog(@"they arent equal");
+        
+        SCTableViewCell *cell=nil;
+        if (indexPath.row !=NSNotFound) {
+           cell =(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+        }  
+        NSLog(@"selection cell %@",[cell class]);
+        
+        if (!addingClinician && tableViewModel.tag==1&&cell&&![cell isKindOfClass:[SCArrayOfObjectsCell class]]&&indexPath.section==0) {
             [section commitCellChanges];
-            [self.tableViewModel reloadBoundValues];
-            [self.tableViewModel.modeledTableView reloadData];
+            [tableViewModel.masterModel reloadBoundValues];
+            [tableViewModel.masterModel.modeledTableView reloadData];
             
 
         }
@@ -189,15 +196,16 @@
 //NSLog(@"did end editing row");
 
 }
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
 
--(void)tableViewModel:(SCTableViewModel *)tableModel detailViewDidDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    if (tableModel.tag==0||tableModel.tag==1) {
+    if (tableModel.tag==0) {
         addingClinician=NO;
         
     }
 
+
 }
+
 - (void)tableViewModel:(SCTableViewModel *) tableViewModel willConfigureCell:(SCTableViewCell *) cell forRowAtIndexPath:(NSIndexPath *) indexPath
 {
     //NSLog(@"table view model tag is %i", tableViewModel.tag);
@@ -973,7 +981,7 @@
 //    [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
 //    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
 //    }
-    detailTableViewModel.delegate=self;
+//    detailTableViewModel.delegate=self;
     //NSLog(@"detail model created for row at index path detailtable model tag is %i", detailTableViewModel.tag);
 }
 
@@ -987,7 +995,7 @@
     detailTableViewModel.tag=tableViewModel.tag+1;
     
     
-    detailTableViewModel.delegate=self;
+//    detailTableViewModel.delegate=self;
     if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
 //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
@@ -1006,19 +1014,44 @@
 }
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath  withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
+    
+    [super tableViewModel:tableModel detailViewWillPresentForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-    
-    if(indexPath.row == NSNotFound)
+    if (tableModel.tag==0 && indexPath.row==NSNotFound) {
+        addingClinician=YES;
+    }
+   
+
+    UIColor *backgroundColor=nil;
+    if(indexPath.row==NSNotFound|| tableModel.tag>0)
     {
-        [detailTableViewModel.modeledTableView setBackgroundColor:(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor];
+       backgroundColor=(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor;
+    }
+    else {
+        backgroundColor=[UIColor clearColor];
+    }
+        
+        if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
+            
+                [detailTableViewModel.modeledTableView setBackgroundView:nil];
+                UIView *view=[[UIView alloc]init];
+                [detailTableViewModel.modeledTableView setBackgroundView:view];
+                [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
+                
+            
+        }
+        
         
 //        UIViewController *logoViewController=[[LogoBackgroundViewController alloc]initWithNibName:@"LogoBackgroundViewController" bundle:[NSBundle mainBundle] ]; 
         
         
-    }
 
     
+    
+
+    
+
 //[logoViewController loadView ];
 //[detailTableViewModel.modeledTableView setBackgroundView:logoViewController.view ];
 

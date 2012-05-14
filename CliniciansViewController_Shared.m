@@ -183,11 +183,12 @@
   
 	
     
-        SCEntityDefinition *degreeDef = [SCEntityDefinition definitionWithEntityName:@"DegreeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"degree",
+        SCEntityDefinition *degreeDef = [SCEntityDefinition definitionWithEntityName:@"DegreeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"degree",@"majors", @"minors", 
                                                                                                                                                               @"school", @"dateAwarded",@"notes",nil]];
 	
   
-    
+       
+
     //set the order attributes name defined in the Degree Entity
     degreeDef.orderAttributeName=@"order";
     
@@ -251,7 +252,72 @@
     /****************************************************************************************/
     /*	END of Class Definition and attributes for the Degree Name Entity */
     /****************************************************************************************/
-   
+    /****************************************************************************************/
+    /*	BEGIN Class Definition and attributes for the Degree Majors Entity */
+    /****************************************************************************************/ 
+        
+        SCEntityDefinition *degreeMajorDef=[SCEntityDefinition definitionWithEntityName:@"DegreeSubjectEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObject:@"subject"]];
+    
+        
+        //set the order attributes name defined in the DegreeName Entity
+    
+        SCPropertyDefinition *degreeMajorsPropertyDef = [degreeDef propertyDefinitionWithName:@"majors"];
+      
+        
+        degreeMajorsPropertyDef.type = SCPropertyTypeObjectSelection;
+        SCObjectSelectionAttributes *degreeMajorsSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:degreeMajorDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO];
+        degreeMajorsSelectionAttribs.allowAddingItems = YES;
+        degreeMajorsSelectionAttribs.allowDeletingItems = YES;
+        degreeMajorsSelectionAttribs.allowMovingItems = NO;
+        degreeMajorsSelectionAttribs.allowEditingItems = YES;
+        degreeMajorsSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define Majors)"];
+        degreeMajorsSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Major"];
+        degreeMajorsPropertyDef.attributes = degreeMajorsSelectionAttribs;
+       
+        
+        
+        //Create the property definition for the degree name property in the DegreeName Entity
+        SCPropertyDefinition *degreeMajorPropertyDef = [degreeMajorDef propertyDefinitionWithName:@"subject"];
+        
+        //set the degreeNamePropertyDef property definition type to a Text View Cell
+        degreeMajorPropertyDef.type=SCPropertyTypeTextView;
+//
+//        
+//        
+    /****************************************************************************************/
+    /*	END Class Definition and attributes for the Degree Majors Entity */
+    /****************************************************************************************/ 
+        /****************************************************************************************/
+        /*	BEGIN Class Definition and attributes for the Degree Minors Entity */
+        /****************************************************************************************/ 
+        
+        SCEntityDefinition *degreeMinorDef=[SCEntityDefinition definitionWithEntityName:@"DegreeSubjectEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObject:@"subject"]];
+        
+        
+        //set the order attributes name defined in the DegreeName Entity
+      
+        SCPropertyDefinition *degreeMinorsPropertyDef = [degreeDef propertyDefinitionWithName:@"minors"];
+        
+        
+        degreeMinorsPropertyDef.type = SCPropertyTypeObjectSelection;
+        SCObjectSelectionAttributes *degreeMinorsSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:degreeMinorDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO];
+        degreeMinorsSelectionAttribs.allowAddingItems = YES;
+        degreeMinorsSelectionAttribs.allowDeletingItems = YES;
+        degreeMinorsSelectionAttribs.allowMovingItems = NO;
+        degreeMinorsSelectionAttribs.allowEditingItems = YES;
+        degreeMinorsSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define Minors)"];
+        degreeMinorsSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Minor"];
+        degreeMinorsPropertyDef.attributes = degreeMinorsSelectionAttribs;
+        
+        //Create the property definition for the degree name property in the DegreeName Entity
+        SCPropertyDefinition *degreeMinorPropertyDef = [degreeMinorDef propertyDefinitionWithName:@"subject"];
+        
+        //set the degreeNamePropertyDef property definition type to a Text View Cell
+        degreeMinorPropertyDef.type=SCPropertyTypeTextView;
+        
+        /****************************************************************************************/
+        /*	END Class Definition and attributes for the Degree Minors Entity */
+        /****************************************************************************************/     
     /****************************************************************************************/
     /*	BEGIN Class Definition and attributes for the School Entity */
     /****************************************************************************************/ 
@@ -676,7 +742,7 @@
 																					   nil]];	
     //set the order attributes name defined in the Certification Entity	
     certificationDef.orderAttributeName=@"order";
-    
+  
     //Create a class definition for Certification entity
 	SCEntityDefinition *certificationNameDef = [SCEntityDefinition definitionWithEntityName:@"CertificationNameEntity" 
                                                                  managedObjectContext:managedObjectContext
@@ -1680,7 +1746,7 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     
-    [self tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)indexPath.section detailTableViewModel:(SCTableViewModel *)detailTableViewModel];
+//    [self tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)indexPath.section detailTableViewModel:(SCTableViewModel *)detailTableViewModel];
     
     
     if (tableViewModel.tag==1) {
@@ -1707,26 +1773,20 @@
 }
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-    
-    
-   
-    if([SCUtilities is_iPad]){
-        detailTableViewModel.delegate = self;
-        detailTableViewModel.tag = tableViewModel.tag+1;
-        if (detailTableViewModel.modeledTableView.backgroundColor!=[UIColor clearColor]) {
-            UIView *view=[[UIView alloc]init];
-            [view setBackgroundColor:[UIColor clearColor]];
-            [detailTableViewModel.modeledTableView setBackgroundView:nil];
-            [detailTableViewModel.modeledTableView setBackgroundView:view];
-        }
-       
-         // Make the table view transparent
-    }
-    
-    
-    
-}
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+//    
+//    
+//   
+//    if([SCUtilities is_iPad]){
+//        detailTableViewModel.delegate = self;
+//        detailTableViewModel.tag = tableViewModel.tag+1;
+//               
+//         // Make the table view transparent
+//    }
+//    
+//    
+//    
+//}
 
 #pragma mark -
 #pragma SCTableViewModelDelegate methods same as clinicianView Controller
@@ -2315,6 +2375,33 @@
                         
                         
                     }
+                    if (![NSStringFromClass([managedObject class])isEqualToString:@"PTABGroup"]&& ![managedObject isKindOfClass:[SCTableViewCell class]]&&[managedObject.entity.name isEqualToString:@"DegreeEntity"]) {
+                        //define and initialize a date formatter
+                        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                        
+                        //set the date format
+                        [dateFormatter setDateFormat:@"M/yyyy"];
+                        
+                        NSDate *dateAwarded=[managedObject valueForKey:@"dateAwarded"];
+                        NSString *degree=[managedObject valueForKeyPath:@"degree.degreeName"];
+                        
+                        
+                        NSString *labelString=[NSString string];
+                        
+                        if (degree.length) {
+                            labelString=degree;
+                        }
+                        if (dateAwarded) {
+                            labelString=[labelString stringByAppendingFormat:@" %@", [dateFormatter stringFromDate:dateAwarded]];
+                        }
+                        
+                        cell.textLabel.text=labelString;
+                        
+                        
+                        
+                        
+                        
+                    }
 
                     
                 }  
@@ -2476,15 +2563,7 @@
         
     }
    
-    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-        
-        
-        [detailTableViewModel.modeledTableView setBackgroundView:nil];
-        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-        [detailTableViewModel.modeledTableView setBackgroundColor:[UIColor clearColor]]; 
-       
-       
-    }
+    
     //
     //
     //    if (tableViewModel.tag==1) {
@@ -3129,6 +3208,7 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
 
+    
 //NSLog(@"table view model tag is %i",tableViewModel.tag);
     if (tableViewModel.tag==1) {
         self.currentDetailTableViewModel=tableViewModel;
@@ -3154,16 +3234,38 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewDidAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
     
-    [self tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:indexPath.section detailTableViewModel:(SCTableViewModel*) detailTableViewModel];
     
-
-    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+    if (indexPath.row==NSNotFound && detailTableViewModel.tag==3&& detailTableViewModel.sectionCount){
         
-        [detailTableViewModel.viewController.view setBackgroundColor:[UIColor clearColor]];
-        [detailTableViewModel.modeledTableView setBackgroundView:nil];
-        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
+        
+        
+        SCTableViewSection *section=[detailTableViewModel sectionAtIndex:0];
+        
+        if (section.cellCount>1) {
+            SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
+            NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
+            
+            
+            if (notesManagedObject &&[notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+                
+                [notesCell becomeFirstResponder];
+            }
+        }
+        
     }
+
+    
+    
+//    [self tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:indexPath.section detailTableViewModel:(SCTableViewModel*) detailTableViewModel];
+//    
+//
+//    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+//        
+//        [detailTableViewModel.viewController.view setBackgroundColor:[UIColor clearColor]];
+//        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+//        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+//        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
+//    }
 
 
 }

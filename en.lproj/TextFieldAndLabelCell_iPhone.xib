@@ -51,6 +51,7 @@
 								<string key="NSFrame">{{15, 5}, {270, 21}}</string>
 								<reference key="NSSuperview" ref="526183771"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="538559653"/>
 								<string key="NSReuseIdentifierKey">_NS:121</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -125,6 +126,7 @@
 						<string key="NSFrameSize">{300, 66}</string>
 						<reference key="NSSuperview" ref="837778508"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="755955422"/>
 						<string key="NSReuseIdentifierKey">_NS:315</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -142,6 +144,10 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="526183771"/>
 				<string key="NSReuseIdentifierKey">_NS:304</string>
+				<object class="NSColor" key="IBUIBackgroundColor">
+					<int key="NSColorSpace">2</int>
+					<bytes key="NSRGB">MC4zMTc2NDcwNjk3IDAuNjIzNTI5NDM0MiAwLjc3NjQ3MDY2MTIAA</bytes>
+				</object>
 				<bool key="IBUIOpaque">NO</bool>
 				<float key="IBUIAlpha">0.30000001192092896</float>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -214,7 +220,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>SCControlCell</string>
+					<string>SCCustomCell</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -237,14 +243,6 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBPartialClassDescription">
-					<string key="className">SCControlCell</string>
-					<string key="superclassName">SCCustomCell</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SCControlCell.h</string>
-					</object>
-				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">SCCustomCell</string>
 					<string key="superclassName">SCTableViewCell</string>
