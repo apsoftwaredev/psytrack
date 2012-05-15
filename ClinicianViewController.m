@@ -186,7 +186,14 @@
         
 //        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView
 //                                                 entityDefinition:self.clinicianDef];
-         self.navigationBarType = SCNavigationBarTypeEditLeft;
+        
+        if ([SCUtilities is_iPad]) {
+            self.navigationBarType = SCNavigationBarTypeEditLeft;
+        }
+        else {
+            self.navigationBarType = SCNavigationBarTypeAddRightEditLeft;
+        }
+        
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
         objectsModel.editButtonItem = self.navigationItem.leftBarButtonItem;
 //        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];

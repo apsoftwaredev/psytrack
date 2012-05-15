@@ -14,7 +14,7 @@
  *
  *	This notice may not be removed from this file.
  *
- */#import "CliniciansRootViewController_iPad.h"
+ */
 #import "CliniciansDetailViewController_iPad.h"
 #import "PTTAppDelegate.h"
 

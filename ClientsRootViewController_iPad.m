@@ -26,12 +26,12 @@
 #import "DrugNameObjectSelectionCell.h"
 
 @implementation ClientsRootViewController_iPad
-@synthesize clientsDetailViewController_iPad=_clientsDetailViewController_iPad;
+//@synthesize clientsDetailViewController_iPad=_clientsDetailViewController_iPad;
 
 @synthesize managedObjectContext=_managedObjectContext;
-@synthesize tableView=_tableView;
+//@synthesize tableView=_tableView;
 @synthesize searchBar;
-@synthesize tableModel;
+//@synthesize tableModel;
 
 
 
@@ -43,7 +43,7 @@
 
     [super viewDidUnload];
     
-    self.tableModel=nil;
+//    self.tableModel=nil;
 
 }
 - (void)viewDidLoad {
@@ -54,8 +54,8 @@
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
     managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
     
-//    // Set up the edit and add buttons.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+////    // Set up the edit and add buttons.
+//    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 //    
 //  
     
@@ -76,67 +76,90 @@
     
     [clientsViewController_Shared setupTheClientsViewModelUsingSTV];       
 
+    objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:clientsViewController_Shared.clientDef];
+    if ([SCUtilities is_iPad]) {
+        self.navigationBarType = SCNavigationBarTypeEditLeft;
+    }
+    else {
+        self.navigationBarType = SCNavigationBarTypeAddRightEditLeft;
+    }
+    
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    objectsModel.editButtonItem = self.navigationItem.leftBarButtonItem;
+    //        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+    //        self.navigationItem.rightBarButtonItem = addButton;
+    objectsModel.addButtonItem = self.navigationItem.rightBarButtonItem;
+    objectsModel.autoAssignDelegateForDetailModels=TRUE;
+    objectsModel.autoAssignDataSourceForDetailModels=TRUE;
+    if (![SCUtilities is_iPad]) {
+        
+        self.tableView.backgroundColor=[UIColor clearColor];
+        //            UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+        //            self.navigationItem.rightBarButtonItem = addButton; 
+        
+        
+        objectsModel.addButtonItem=self.navigationItem.rightBarButtonItem;
+        
+        
+        
+    }
     
     
-//     NSPredicate *currentClientsPredicate=[NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
+   
+    //     objectsModel.autoSortSections = TRUE;
+    //        self.clinicianDef.keyPropertyName=@"firstName";
+       
 
-    
-//   self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView                                         entityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:currentClientsPredicate];	
-//
-    self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:clientsViewController_Shared.clientDef];	
-    
-    NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
-    
-    // create a standard "add" button
-    UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
-                                  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
-    addButton.style = UIBarButtonItemStyleBordered;
-    
-    
-    
-    // create a spacer
-    UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
-                                      initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshData)];
-    [buttons addObject:refreshButton];
-    
-    
-    
-    
-    [buttons addObject:addButton];
-    self.navigationItem.rightBarButtonItems=buttons;
-    
-    self.tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
-    
-    self.tableModel.searchBar = self.searchBar;
-	self.tableModel.searchPropertyName = @"clientIDCode;notes";
-    
-    self.tableModel.editButtonItem = self.navigationItem.leftBarButtonItem;
-//    tableModel.autoAssignDelegateForDetailModels=TRUE;
-//    tableModel.autoAssignDataSourceForDetailModels=TRUE;
-    self.tableModel.allowMovingItems=TRUE;
-    
+
+
+// Instantiate the tabel model
+//	self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self withEntityClassDefinition:self.clinicianDef];	
+//    
     [self.tableView setBackgroundView:nil];
     [self.tableView setBackgroundView:[[UIView alloc] init]];
-    
-    self.tableView.backgroundColor=[UIColor clearColor];
-    
-//    tableModel.autoSortSections = TRUE;  
-    self.tableModel.sectionIndexTitles = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", nil];
 
-    self.tableModel.delegate=self;
+[self.view setBackgroundColor:[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]];
+
+
+    objectsModel.searchBar = self.searchBar;
+    objectsModel.addButtonItem = self.addButton;
+
+
+
+// Replace the default model with the new objectsModel
+//    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"drugName Matches %@",@"a"];
+objectsModel.enablePullToRefresh = TRUE;
+objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
+
+
+//    SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"firstName" sortAscending:YES filterPredicate:nil];
+
+
+//    dataFetchOptions.batchStartingOffset=10;
+//    dataFetchOptions.batchSize=10;
+//    
+//    
+//    objectsModel.dataFetchOptions=dataFetchOptions;
+    objectsModel.addButtonItem=objectsModel.detailViewController.navigationItem.rightBarButtonItem;
     
-    self.tableModel.detailViewController=self.clientsDetailViewController_iPad;
-    self.tableView.backgroundColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]; // Make the table view application backgound color (turquose)
-      
+//    objectsModel.addButtonItem = self.addButton;
+	objectsModel.itemsAccessoryType = UITableViewCellAccessoryNone;
+    objectsModel.detailViewControllerOptions.modalPresentationStyle = UIModalPresentationPageSheet;
+    objectsModel.detailViewController=self.tableViewModel.detailViewController;
+    ClientsDetailViewController_iPad *clientDetailViewController=(ClientsDetailViewController_iPad *)objectsModel.detailViewController;
+    
+    clientDetailViewController.navigationBarType=SCNavigationBarTypeAddRight;
+    
+    objectsModel.addButtonItem=clientDetailViewController.navigationItem.rightBarButtonItem;
+    //    self.tableView.backgroundColor=[UIColor clearColor]; // Make the table view application backgound color (turquose)
+    
+    //    self.tableView.backgroundColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]; // Make the table view application backgound color (turquose)
+    
+    self.tableViewModel = objectsModel;
 //        
 }
 
--(void)refreshData{
-    
-    
-    [tableModel reloadBoundValues];
-    [tableModel.modeledTableView reloadData];
-}
+
   
 
 
@@ -169,29 +192,29 @@
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+////    
+////    
+//    if (tableViewModel.tag==0) {
+//        
+//        
+//        detailTableViewModel.tag=2;
+//        
+//    }
+//    else{
+//        detailTableViewModel.tag=tableViewModel.tag+1;
+//    }
 //    
-//    
-    if (tableViewModel.tag==0) {
-        
-        
-        detailTableViewModel.tag=2;
-        
-    }
-    else{
-        detailTableViewModel.tag=tableViewModel.tag+1;
-    }
-    
-    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-        
-
-    [detailTableViewModel.modeledTableView setBackgroundView:nil];
-    [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-    }
-    detailTableViewModel.delegate=self;
-    //NSLog(@"detail model created for row at index path detailtable model tag is %i", detailTableViewModel.tag);
-}
+//    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+//        
+//
+//    [detailTableViewModel.modeledTableView setBackgroundView:nil];
+//    [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+//    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
+//    }
+//    detailTableViewModel.delegate=self;
+//    //NSLog(@"detail model created for row at index path detailtable model tag is %i", detailTableViewModel.tag);
+//}
 //
 
 
@@ -214,13 +237,13 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
-    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-        
-        
-        [detailTableViewModel.modeledTableView setBackgroundView:nil];
-        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-    }
+//    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+//        
+//        
+//        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+//        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+//        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
+//    }
     //NSLog(@"tabel veiw modoel %i",tableViewModel.tag);
     
     if (tableViewModel.tag==4 ) {
@@ -269,7 +292,7 @@
                     
                 }
                 else {
-                    [detailTableViewModel.modeledTableView reloadData];
+//                    [detailTableViewModel.modeledTableView reloadData];
                 }
             }
         }  
@@ -355,9 +378,32 @@
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    
+    UIColor *backgroundColor=nil;
+    if(indexPath.row==NSNotFound|| tableModel.tag>0)
+    {
+        backgroundColor=(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor;
+    }
+    else {
+        backgroundColor=[UIColor clearColor];
+    }
+    
+    if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
+        
+        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+        UIView *view=[[UIView alloc]init];
+        [detailTableViewModel.modeledTableView setBackgroundView:view];
+        [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
+        
+        
+    }
+    
 
-    if (tableViewModel.sectionCount) {
+    if (tableModel.sectionCount) {
         //            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0]
         ;
         //            if (detailSectionZero.cellCount) {
@@ -371,7 +417,11 @@
         //                }
         //                
         //            }
-        SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];;
+        SCTableViewCell *cell=nil;
+        if (indexPath.row!=NSNotFound) {
+            cell=[tableModel cellAtIndexPath:indexPath];
+        }
+      
         
         
         
@@ -397,7 +447,7 @@
                 
             }
             else {
-                [detailTableViewModel.modeledTableView reloadData];
+//                [detailTableViewModel.modeledTableView reloadData];
             }
         }
     }  
@@ -1187,7 +1237,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     //NSLog(@"scope changed");
     if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
     {
-        SCArrayOfObjectsModel *objectsModel = (SCArrayOfObjectsModel *)tableViewModel;
+//        SCArrayOfObjectsModel *objectsModel = (SCArrayOfObjectsModel *)tableViewModel;
         //        if (objectsModel.sectionCount>0) {
         //       SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         //        
@@ -1225,10 +1275,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         }
         
         
-        [tableViewModel reloadBoundValues];
-        
-        
-        [tableViewModel.modeledTableView reloadData];
+//        [tableViewModel reloadBoundValues];
+//        
+//        
+//        [tableViewModel.modeledTableView reloadData];
         
      
         //         if (objectsModel.sectionCount>0) {
@@ -1258,17 +1308,17 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 }
 
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
+- (void)tableViewModel:(SCTableViewModel *)tableModel didAddSectionAtIndex:(NSUInteger)index
 {
     
-    SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
+    SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:index];
     if ([section.headerTitle isEqualToString:@"De-Identified Client Data"]) {
-        tableViewModel.tag=1;
+        tableModel.tag=1;
     }
     
     
    
-    if (tableViewModel.tag==1 &&index==0 &&section.cellCount>3) {
+    if (tableModel.tag==1 &&index==0 &&section.cellCount>3) {
         [section insertCell:[SCLabelCell cellWithText:@"Age"] atIndex:2];
         [section insertCell:[SCLabelCell cellWithText:@"Wechsler Age"] atIndex:3];
         
@@ -1315,7 +1365,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     //                }
     //
     //    }
-    if (tableViewModel.tag==3 &&index==0) {
+    if (tableModel.tag==3 &&index==0) {
         
         
         if (section.cellCount>1) {
@@ -1762,13 +1812,6 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     }
 }
 
-#pragma mark -
-#pragma button actions
-
-- (void)addButtonTapped
-{
-    [tableModel dispatchEventAddNewItem];
-}
 
 
 @end

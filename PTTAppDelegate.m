@@ -22,7 +22,9 @@
 #import "PTTAppDelegate.h"
 #import "ClinicianViewController.h"
 #import "ClientsViewController_iPhone.h"
+
 #import "ClientsRootViewController_iPad.h"
+#import "ClientsDetailViewController_iPad.h"
 #import "CliniciansRootViewController_iPad.h"
 #import "CliniciansDetailViewController_iPad.h"
 #import "CliniciansViewController_Shared.h"
@@ -78,12 +80,11 @@
 @synthesize disordersPersistentStoreCoordinator = __disordersPersistentStoreCoordinator;
 
 
-@synthesize splitViewControllerClients = _splitViewControllerClients;
-@synthesize splitViewControllerClinicians = _splitViewControllerClinicians;
+
 @synthesize navigationControllerTrainTrack = _navigationControllerTrainTrack;
 @synthesize splitViewControllerReports = _splitViewControllerReports;
 @synthesize tabBarController, tabBar, tabBarControllerContainerView;
-@synthesize clientsDetailViewController_iPad,clientsRootViewController_iPad, trainTrackViewController, clientsViewController_iPhone, clinicianViewController;
+@synthesize  trainTrackViewController, clientsViewController_iPhone, clinicianViewController;
 @synthesize reportsRootViewController_iPad, reportsDetailViewController_iPad,reportsViewController_iPhone;
 @synthesize imageView=_imageView;
 @synthesize masterViewController;
@@ -238,17 +239,59 @@
 
                 
                 UIImage *clientsImage =[UIImage imageNamed:@"clientsTab.png"];
-                self.splitViewControllerClients.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Clients" image:clientsImage tag:89];
+                
+        
+        
+        ClientsRootViewController_iPad *clientsRootViewController = [[ClientsRootViewController_iPad alloc]initWithNibName:@"ClientsRootViewController_iPad" bundle:[NSBundle mainBundle]];
+        
+        ClientsDetailViewController_iPad *clientsDetailViewController=[[ClientsDetailViewController_iPad alloc]initWithNibName:@"ClientsDetailViewController_iPad" bundle:[NSBundle mainBundle]];
+        
+        
+        
+        
+        //        
+        // Establish the master-detail relationship between the models
+        clientsRootViewController.tableViewModel.detailViewController = clientsDetailViewController;
+        
+        // Wrap the view controllers into navigation controllers
+        UINavigationController *clientsRootNav = [[UINavigationController alloc] initWithRootViewController:clientsRootViewController];
+        UINavigationController *clientsDetailNav = [[UINavigationController alloc] initWithRootViewController:clientsDetailViewController];
+        
+        clientsRootNav.navigationBar.opaque=YES;
+        clientsRootNav.navigationBar.tintColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0];
+        
+        clientsDetailNav.navigationBar.opaque=YES;
+        clientsDetailNav.navigationBar.tintColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0];
+        
+        // Crea the split view and add it to the window
+        UISplitViewController *clientsSplitViewController = [[UISplitViewController alloc] init];
+        clientsSplitViewController.viewControllers = [NSArray arrayWithObjects:clientsRootNav, clientsDetailNav, nil];
+        clientsSplitViewController.delegate = clientsDetailViewController;
+        
+        
+        
+        clientsSplitViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Clients" image:clientsImage tag:90];
+        
+        
+               
+        
+        
+        
+
+        
+        
+        
+        
                
                 UIImage *reportsImage =[UIImage imageNamed:@"reportTab.png"];
                 self.splitViewControllerReports.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Reports" image:reportsImage tag:92];
        
         
    
-                NSArray *controllers = [NSArray arrayWithObjects:self.navigationControllerTrainTrack,cliniciansSplitViewController, self.splitViewControllerClients,  self.splitViewControllerReports,/*other controllers go here */ nil];
+                NSArray *controllers = [NSArray arrayWithObjects:self.navigationControllerTrainTrack,cliniciansSplitViewController, clientsSplitViewController,  self.splitViewControllerReports,/*other controllers go here */ nil];
                 tabBarController.viewControllers = controllers;
                 self.tabBarController.delegate=self;
-                self.splitViewControllerClients.view.backgroundColor=[UIColor clearColor];
+               clientsSplitViewController.view.backgroundColor=[UIColor clearColor];
        
                 cliniciansSplitViewController.view.backgroundColor=[UIColor clearColor];
                 //NSLog(@"window background color is %@", self.window.backgroundColor);
@@ -829,6 +872,60 @@ NSLog(@"string to hash is %@%@",password,passcode);
     return data;
 }
 
+-(NSString *)getSharedSymetricString{
+    
+    NSString *password=[NSString stringWithString:@"o6fjZ4dhvKIUYVmaqnNJIPCBE2"];
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+	
+    
+    NSString *passcode;
+    
+    NSData *passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
+    if (passcodeData) {
+        passcode = [[NSString alloc] initWithData:passcodeData
+                                         encoding:NSUTF8StringEncoding];
+        NSLog(@"passcode is %@",passcode);
+    } 
+    else {
+        [wrapper newSearchDictionary:@"Passcode"];
+        [wrapper createKeychainValue:@"8327" forIdentifier:@"Passcode"];
+        NSData *passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
+        
+        NSLog(@"passcoede data is %@",[self convertDataToString:passcodeData]);
+        passcode=(NSString *)[self convertDataToString:passcodeData];
+        NSLog(@"passcode data is %@",passcode);
+    }
+    NSLog(@"string to hash is %@%@",password,passcode);
+    
+    NSData *hashOfPasscodeAndPassword= [encryption_ getHashBytes:[self convertStringToData:[NSString stringWithFormat:@"%@%@",password,passcode]]];
+    
+    
+    NSLog(@"passcode item is %@",hashOfPasscodeAndPassword );
+    
+    NSString *hashOfPasscodeAndPasswordStr=[self convertDataToString:hashOfPasscodeAndPassword];
+    
+    NSLog(@"hash of passcode and passowrd Str length is %@",hashOfPasscodeAndPasswordStr);
+    if (hashOfPasscodeAndPasswordStr.length>30) {
+        hashOfPasscodeAndPasswordStr=[hashOfPasscodeAndPasswordStr substringToIndex:29];
+        NSLog(@"hash of passcode and passowrd Str length is %i",hashOfPasscodeAndPasswordStr.length);
+    }
+    else {
+        int hashOFPasscodeAndPasswordStrLength=hashOfPasscodeAndPasswordStr.length;
+        for (int i=0; i<30-hashOFPasscodeAndPasswordStrLength; i++) {
+            hashOfPasscodeAndPasswordStr=[hashOfPasscodeAndPasswordStr stringByAppendingString:@"6"];
+        }
+        NSLog(@"hashofpasscode and password str is %@",hashOfPasscodeAndPasswordStr);
+    }
+    NSString* symmetricString= [NSString stringWithFormat:@"%@%@",hashOfPasscodeAndPasswordStr,[self combSmString]];
+    NSLog(@"semetric string is %@",symmetricString);
+    NSLog(@"semetric string length is %i",symmetricString.length);
+    
+    NSData *data=[NSData dataWithBytes:(const void *)symmetricString length:32 ];
+    
+    NSLog(@"data length is %i",[data length]);
+    return symmetricString;
+}
 
 
 
@@ -848,9 +945,10 @@ NSLog(@"keystring is %@",keyString);
     
     rangeThree.length=9;
     rangeThree.location=0;
-    NSString* symetricStringOne= [NSString stringWithFormat:@"qu1shZEM196kibsiBh7h%@hsiwoai4js",[self combSmString]];
-    
-    NSLog(@" combinesmetric string is %@",[self combSmString]);
+//    NSString* symetricStringOne= [NSString stringWithFormat:@"qu1shZEM196kibsiBh7h%@hsiwoai4js",[self combSmString]];
+    NSString* symetricStringOne= [self getSharedSymetricString];
+    NSLog(@"symetricstring one is %@",symetricStringOne);
+   
     rangeOne.location=symetricStringOne.length-15;
     
     symetricStringOne=[symetricStringOne substringWithRange:rangeOne];
@@ -858,7 +956,8 @@ NSLog(@"keystring is %@",keyString);
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"KeyEntity" inManagedObjectContext:[self managedObjectContext]];
     [fetchRequest setEntity:entity];
-    NSPredicate *keyStringPredicate;
+    NSPredicate *keyStringPredicate=nil;
+    KeyEntity *keyObject=nil;
     if (keyString&&keyString.length) {
         //NSLog(@"key date is %@",keyString);
         keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",keyString];
@@ -877,13 +976,15 @@ NSLog(@"keystring is %@",keyString);
     {
         [self displayNotification:@"Error Accessing the database occured" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
     }
-    KeyEntity *keyObject;
+    
     
     if (fetchedObjects.count) 
     {
+        NSLog(@"fetched objects cound %@",fetchedObjects);
         keyObject=[fetchedObjects objectAtIndex:0];
         //NSLog(@"keyString is %@",keyObject.dateCreated);
     }
+    
     else {
         [self setupDefaultLockDictionaryResultStr];
         fetchedObjects = [managedObjectContext__ executeFetchRequest:fetchRequest error:&error];
@@ -897,13 +998,18 @@ NSLog(@"keystring is %@",keyString);
         }
     }
     
-    
+      
     
     
     NSData *unwrappedSymetricString;
     NSString *symetricStringThree;
-    if (keyObject && keyObject.keyF) {
+    
+    if (keyObject ) {
+        [keyObject willAccessValueForKey:@"keyF"];
+        if (keyObject.keyF) {
+            
         
+            [keyObject willAccessValueForKey:@"keyString"];
         if (keyObject.keyString) {
             if ([returnDictionary.allKeys containsObject:@"keyString"]) {
                 
@@ -911,12 +1017,13 @@ NSLog(@"keystring is %@",keyString);
             }
         }
         
-    
+        }
      unwrappedSymetricString   =[encryption_ unwrapSymmetricKey:keyObject.keyF keyRef:nil useDefaultPrivateKey:YES];
-        
+        [keyObject didAccessValueForKey:@"keyF"];
          symetricStringThree=[self convertDataToString:unwrappedSymetricString];
     }
     NSString *symetricStringTwo;
+    [keyObject willAccessValueForKey:@"dataF"];
     if (keyObject.dataF && ![keyObject.keyString isEqualToString:keyString]) {
         
               NSLog(@"key object keystring is %@",keyObject.keyString);
@@ -1031,8 +1138,16 @@ NSLog(@"keystring is %@",keyString);
     
     NSLog(@"symetric string %@",symetricStr);
     NSLog(@"@Symetrick string lenght is %i",symetricStr.length);
-        NSData *data=[symetricStringOne dataUsingEncoding: [NSString defaultCStringEncoding] ];
     
+    NSInteger symetricStrLength=symetricStr.length;
+    
+    for (int i=0; i<32-symetricStrLength; i++) {
+        symetricStr=[symetricStr stringByAppendingString:@"6"];
+    }
+    symetricStr=[symetricStr substringToIndex:32];
+        NSData *data=[symetricStringOne dataUsingEncoding: [NSString defaultCStringEncoding] ];
+    NSLog(@"symetric string %@",symetricStr);
+    NSLog(@"@Symetrick string lenght is %i",symetricStr.length);
     
     
     NSLog(@"data length is %i",[data length]);
@@ -1169,7 +1284,7 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
     // for setting up and accessing the dataf attribute in the KeyEntity
     
             
-    NSData *symetricData=[self getLocalSymetricData];
+    NSData *symetricData=[self getSharedSymetricData];
     
     NSData *hash=[encryption_ getHashBytes:symetricData];
     
@@ -1179,7 +1294,8 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
     
     //NSLog(@"newstring is %@",hashStr);
     
-    
+    symetricData=nil;
+    symetricData=[self getLocalSymetricData];
     
     
     
@@ -1406,7 +1522,7 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
   
     
     
-    NSData *symetricData=[self getLocalSymetricData];
+    NSData *symetricData=[self getSharedSymetricData];
         NSData *hash; 
          //NSLog(@"symetric data lenthg %i",symetricData.length);
         if (symetricData.length==32) {
@@ -1420,7 +1536,8 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
     //NSLog(@"newstring is %@",hashStr);
     
     
-    
+        symetricData=nil;
+        symetricData=[self getLocalSymetricData];
     
     
     NSString *encryptedDataPath = [self lockSettingsFilePath];
@@ -1621,18 +1738,18 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
     if (plainTextStr.length &&okayToDecryptBool_) {
     
        
-//        NSDictionary *symetricDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyString:keyStringToSet];
-//        NSLog(@"symetric dictionary is %@",symetricDictionary);
-        NSData *symetricData=[self getSharedSymetricData];
-//        if ([symetricDictionary.allKeys containsObject:@"symetricData"]) {
-//            symetricData =[symetricDictionary valueForKey:@"symetricData"];
-//        }
-//        if ([symetricDictionary objectForKey:@"keyString"]) {
-//            NSString *keyString=(NSString *)[self];
-//            if (keyString && [returnDictionary objectForKey:@"keyString"]) {
-//                [returnDictionary setValue:keyString forKey:@"keyString"];
-//            }
-//        }
+        NSDictionary *symetricDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyString:keyStringToSet];
+        NSLog(@"symetric dictionary is %@",symetricDictionary);
+        NSData *symetricData=nil;
+        if ([symetricDictionary.allKeys containsObject:@"symetricData"]) {
+            symetricData =[symetricDictionary valueForKey:@"symetricData"];
+        }
+        if ([symetricDictionary objectForKey:@"keyString"]) {
+            NSString *keyString=(NSString *)[symetricDictionary valueForKey:@"keyString"];
+            if (keyString && [returnDictionary objectForKey:@"keyString"]) {
+                [returnDictionary setValue:keyString forKey:@"keyString"];
+            }
+        }
     
         NSLog(@"symetric data length is %i",symetricData.length);
         if(symetricData.length==32){
@@ -1745,12 +1862,12 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
     if (encryptedData.length &&okayToDecryptBool_) {
   
      
-//        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyString:keyString];
-        NSData *symetricData=[self getSharedSymetricData];
+        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyString:keyString];
+        NSData *symetricData=nil;
         NSLog(@"symetric dictionary is %@",symetricData);
-//        if ([symetricDataDictionary.allKeys containsObject:@"symetricData"]) {
-//            symetricData=[symetricDataDictionary valueForKey:@"symetricData"];
-//        }
+        if ([symetricDataDictionary.allKeys containsObject:@"symetricData"]) {
+            symetricData=[symetricDataDictionary valueForKey:@"symetricData"];
+        }
         
 
         if (symetricData.length==32) {
@@ -1777,13 +1894,13 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
     
       
         
-//        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyString:keyString];
-        NSData *symetricData=[self getSharedSymetricData];
+        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyString:keyString];
+        NSData *symetricData=nil;
         NSLog(@"symetric dictionary is %@",symetricData);
         
-//        if ([symetricDataDictionary.allKeys valueForKey:@"symetricData"]) {
-//            symetricData=[symetricDataDictionary valueForKey:@"symetricData"];
-//        }
+        if ([symetricDataDictionary.allKeys valueForKey:@"symetricData"]) {
+            symetricData=[symetricDataDictionary valueForKey:@"symetricData"];
+        }
     if (symetricData.length==32) {
   
             NSData* data=[encryptedString dataUsingEncoding: [NSString defaultCStringEncoding] ];
@@ -2437,16 +2554,16 @@ duration:(NSTimeInterval)1.0];
 //               
                break;
            case 1:
-               if (clientsRootViewController_iPad) {
-                if ([managedObjectContext__ hasChanges]) 
-                   [self saveContext];
-                   //       
-                   //      
-                   [clientsRootViewController_iPad.tableModel reloadBoundValues];
-                   [clientsRootViewController_iPad.tableView reloadData];
-                   
-                   //           [clientsRootViewController_iPad updateClientsTotalLabel];
-               }
+//               if (clientsRootViewController_iPad) {
+//                if ([managedObjectContext__ hasChanges]) 
+//                   [self saveContext];
+//                   //       
+//                   //      
+//                   [clientsRootViewController_iPad.tableViewModel.masterModel reloadBoundValues];
+//                   [clientsRootViewController_iPad.tableViewModel.masterModel.modeledTableView reloadData];
+//                   
+//                   //           [clientsRootViewController_iPad updateClientsTotalLabel];
+//               }
                break;
                
            case 2:
@@ -6239,11 +6356,13 @@ return [self applicationDrugsDirectory].path;
                     for (KeyEntity *keyObjectInArray in fetchedObjects) {
                         NSLog(@"keyobject in array keystring is %@",keyObjectInArray.keyString);
                         NSLog(@"create key is %@",createKeyString);
+                        [keyObjectInArray willAccessValueForKey:@"keyString"];
                         if ([keyObjectInArray.keyString isEqualToString:createKeyString]) {
                             
                             keyObject=keyObjectInArray;
                             break;
                         }
+                        [keyObjectInArray didAccessValueForKey:@"keyString"];
                     }
                     
                 }
@@ -6251,6 +6370,7 @@ return [self applicationDrugsDirectory].path;
         
                
                 //NSLog(@"lock screen date is %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]);
+                symetricData=nil;
                 symetricData=[self getSharedSymetricData];
                 NSData *encryptedArchivedLockForSharedData =(NSData *)[encryption_ doCipher:keyedArchiveData key:symetricData context:kCCEncrypt padding:(CCOptions *)kCCOptionPKCS7Padding];
                 

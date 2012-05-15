@@ -122,18 +122,17 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     // Initialize tableModel
     
     NSPredicate *currentClientsPredicate=[NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
-    
-        
+    SCArrayOfObjectsModel *objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:self.clientsViewController_Shared.clientDef];
     if (isInDetailSubview) {
       
 //        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withEntityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:nil useSCSelectionSection:YES];
      
-        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:clientsViewController_Shared.clientDef ];
+//        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:clientsViewController_Shared.clientDef ];
         
         
         [self.searchBar setSelectedScopeButtonIndex:1];
-        tableModel.allowDeletingItems=FALSE;
-        tableModel.autoSelectNewItemCell=TRUE;
+        objectsModel.allowDeletingItems=FALSE;
+        objectsModel.autoSelectNewItemCell=TRUE;
         
         NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
         
@@ -159,8 +158,8 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         
         // stick the buttons in the toolbar
         self.navigationItem.rightBarButtonItems=buttons;
-        self.tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
-        self.tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:2];
+        objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
+        objectsModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:2];
         
         UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
         
@@ -179,41 +178,48 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
-        self.tableModel.editButtonItem = self.navigationItem.leftBarButtonItem;
-        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
-        
-        // create a standard "add" button
-        UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
-                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
-        addButton.style = UIBarButtonItemStyleBordered;
-
-       
-        
-        // create a spacer
-        UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
-                                       initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshData)];
-        [buttons addObject:refreshButton];
-        
-       
-        
-        
-               [buttons addObject:addButton];
-        self.navigationItem.rightBarButtonItems=buttons;
-        
-        self.tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
+        objectsModel.editButtonItem = self.navigationItem.leftBarButtonItem;
+//        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
+//        
+//        // create a standard "add" button
+//        UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
+//                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
+//        addButton.style = UIBarButtonItemStyleBordered;
+//
+//       
+//        
+//        // create a spacer
+//        UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
+//                                       initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshData)];
+//        [buttons addObject:refreshButton];
+//        
+//       
+//        
+//        
+//               [buttons addObject:addButton];
+//        self.navigationItem.rightBarButtonItems=buttons;
+        self.navigationBarType = SCNavigationBarTypeAddRightEditLeft;
+        self.navigationItem.leftBarButtonItem = self.editButtonItem;
+        objectsModel.editButtonItem = self.navigationItem.leftBarButtonItem;
+        //        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+        //        self.navigationItem.rightBarButtonItem = addButton;
+        objectsModel.addButtonItem = self.navigationItem.rightBarButtonItem;
+//        objectsModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
     
     }
-   
-    self.tableModel.searchBar = self.searchBar;
-	self.tableModel.searchPropertyName = @"clientIDCode;notes";
+    objectsModel.enablePullToRefresh = TRUE;
+    objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
+
+    objectsModel.searchBar = self.searchBar;
+	objectsModel.searchPropertyName = @"clientIDCode;notes";
 //    self.tableModel.sortItemsSetAscending=TRUE;
    
-    self.tableModel.allowMovingItems=TRUE;
+    objectsModel.allowMovingItems=TRUE;
     
-    self.tableModel.autoAssignDelegateForDetailModels=TRUE;
-    self.tableModel.autoAssignDataSourceForDetailModels=TRUE;
+    objectsModel.autoAssignDelegateForDetailModels=TRUE;
+    objectsModel.autoAssignDataSourceForDetailModels=TRUE;
     
-    self.tableModel.delegate=self;
+//    objectsModel.delegate=self;
 
     if([SCUtilities is_iPad]){
         [self.tableView setBackgroundView:nil];
@@ -228,7 +234,10 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
              duration:5];
    
-    [self.tableModel.modeledTableView reloadData];
+//    [self.tableModel.modeledTableView reloadData];
+    
+    
+    self.tableViewModel=objectsModel;
 }
 -(void)viewDidUnload{
     [super viewDidUnload];

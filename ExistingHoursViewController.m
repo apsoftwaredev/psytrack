@@ -507,11 +507,11 @@
     //Create the property definition for the <#propertyName#> property
     SCPropertyDefinition *supervisionPropertyDef = [existingHoursDef propertyDefinitionWithName:@"supervision"];
     
-    supervisionPropertyDef.title=@"Supervision Types";
+//    supervisionPropertyDef.title=@"Supervision Types";
     supervisionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supervisionDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
-                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add supervison hours"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add supervison hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                    allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add supervison hours"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add supervison hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
    
     
@@ -542,7 +542,7 @@
     //set some addtional attributes
     supervisionTypeSelectionAttribs.allowAddingItems = YES;
     supervisionTypeSelectionAttribs.allowDeletingItems = YES;
-    supervisionTypeSelectionAttribs.allowMovingItems = YES;
+    supervisionTypeSelectionAttribs.allowMovingItems = NO;
     supervisionTypeSelectionAttribs.allowEditingItems = YES;
     
     //add a placeholder element to tell the user what to do     when there are no other cells                                          
@@ -610,7 +610,7 @@
     supportActivitiesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supportActivityDef
                                                                                        allowAddingItems:YES
                                                                                      allowDeletingItems:YES
-                                                                                       allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add support activity hours"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add support activity hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                       allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add support activity hours"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add support activity hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -686,14 +686,14 @@
     //Create the property definition for the assessment property in the existingHours class
     SCPropertyDefinition *assessmentsPropertyDef = [existingHoursDef propertyDefinitionWithName:@"assessments"];
     
-    assessmentsPropertyDef.title=@"Assessment Types";
+//    assessmentsPropertyDef.title=@"Assessment Types";
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     
    
     assessmentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:assessmentDef
                                                                                              allowAddingItems:YES
                                                                                            allowDeletingItems:YES
-                                                                                             allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add assessment hours"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add assessment hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                             allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add assessment hours"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add assessment hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -808,7 +808,7 @@
     existingInstrumentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:existingInstrumentDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
-                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add instruments"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                    allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add instruments"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -924,7 +924,7 @@
     existingBatteriesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:existingBatteryDef
                                                                                                allowAddingItems:YES
                                                                                              allowDeletingItems:YES
-                                                                                               allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add batteries"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add battery"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                               allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add batteries"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add battery"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -970,7 +970,7 @@
     batteryInstrumentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentDef
                                                                                                allowAddingItems:YES
                                                                                              allowDeletingItems:YES
-                                                                                               allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add instruments"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                               allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add instruments"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
    
@@ -1006,11 +1006,11 @@
     //Create the property definition for the other property
     SCPropertyDefinition *directInterventionPropertyDef = [existingHoursDef propertyDefinitionWithName:@"directInterventions"];
     
-    directInterventionPropertyDef.title=@"Direct Intervention Types";
+//    directInterventionPropertyDef.title=@"Direct Intervention Types";
     directInterventionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:interventionDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
-                                                                                    allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add direct interventions"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add a direct intervention" ]addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                    allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add direct interventions"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add a direct intervention" ]addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -1260,29 +1260,35 @@ BOOL valid=NO;
 }
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-
-    [self tableViewModel:tableViewModel detailModelCreatedForSectionAtIndex:indexPath.section detailTableViewModel:detailTableViewModel];
-
-}
-
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-    
-//        if (!detailTableViewModel.viewController.navigationItem.leftBarButtonItem) {
-//            UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
-//            
-//            detailTableViewModel.viewController.navigationItem.leftBarButtonItem=cancelButton;
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 //
-//    }
-       if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-        
-        
-        [detailTableViewModel.modeledTableView setBackgroundView:nil];
-        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+//    [self tableViewModel:tableViewModel detailModelCreatedForSectionAtIndex:indexPath.section detailTableViewModel:detailTableViewModel];
+//
+//}
+
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+
+    UIColor *backgroundColor=nil;
+    if(indexPath.row==NSNotFound|| tableModel.tag>0)
+    {
+        backgroundColor=(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor;
+    }
+    else {
+        backgroundColor=[UIColor clearColor];
     }
     
-    
+    if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
+        
+        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+        UIView *view=[[UIView alloc]init];
+        [detailTableViewModel.modeledTableView setBackgroundView:view];
+        [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
+        
+        
+    }
     
 }
 
@@ -1461,8 +1467,7 @@ BOOL valid=NO;
 }
 
 
-- (SCCustomCell *)tableViewModel:(SCTableViewModel *)tableViewModel
-	  customCellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (SCCustomCell *)tableViewModel:(SCTableViewModel *)tableModel cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	
     
@@ -1470,7 +1475,7 @@ BOOL valid=NO;
 	
     
     SCCustomCell *actionOverviewCell=nil;
-    if (tableViewModel.tag==0) {
+    if (tableModel.tag==0) {
         actionOverviewCell= [SCCustomCell cellWithText:nil boundObject:nil objectBindings:nil
                                             nibName:@"ExistingHoursOverviewCell"];
     }
