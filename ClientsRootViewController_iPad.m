@@ -433,13 +433,20 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
         if (!cell ||(indexPath.row==0)) {
             
             SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
+            
+            if (detailSectionZero.cellCount) {
+              
             SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
             
             
             
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-            //NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-            //NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
+
+                NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
+                
+                if ([cellManagedObject respondsToSelector:@selector(entity)]) {
+               
+                
             if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
                 
                 [detailTableViewModel removeSectionAtIndex:1];
@@ -448,6 +455,8 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
             }
             else {
 //                [detailTableViewModel.modeledTableView reloadData];
+            }
+            }
             }
         }
     }  
@@ -605,7 +614,10 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                 
                 
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
+                
+                if (cellManagedObject&&[cellManagedObject respondsToSelector:@selector(entity)]) {
+                
+                    if ([cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
                     
                 {
                     if ( ![SCUtilities is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
@@ -636,7 +648,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                    
                 }
                 
-                if (cell.tag==4&&cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
+                if (cell.tag==4&&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
                     
                 {
                     
@@ -646,7 +658,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                     break;
                 }
                 //NSLog(@"cell kind of class is %@",cell.class);
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]) 
+                if ([cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]) 
                     
                 {
                     
@@ -655,7 +667,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                     textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
                     break;
                 }
-            }
+                }}
         }
            
             break;
@@ -664,10 +676,12 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
             
             
             if (section.cellCount&&cell.boundObject) {
-
-              
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"])
+                
+                if (cellManagedObject&&[cellManagedObject respondsToSelector:@selector(entity)]) {
+              
+               
+                if ([cellManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"])
                     {
                     UIView *sliderView = [cell viewWithTag:14];
                     
@@ -721,6 +735,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
         
             
         }
+        }
             break;
             
         case 5:
@@ -729,8 +744,9 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                 
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                 
+                if (cellManagedObject&&[cellManagedObject respondsToSelector:@selector(entity)]) { 
                 //NSLog(@"entity name is %@",cellManagedObject.entity.name);
-                if (cell.tag==1 && [cell isKindOfClass:[SCCustomCell class]]&& cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
+                if (cell.tag==1 && [cell isKindOfClass:[SCCustomCell class]]&& [cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
                 {
                     
                     UIView *scaleView = [cell viewWithTag:70];
@@ -782,7 +798,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 
                 
             }
-            
+            } 
         }
             break;
             
@@ -934,7 +950,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
         {
             
             //identify the if the cell has a managedObject
-            if (managedObject) {
+            if (managedObject &&[managedObject respondsToSelector:@selector(entity)]) {
                 
                 
                 
@@ -1049,7 +1065,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
             
             
             //identify the if the cell has a managedObject
-            if (managedObject) {
+            if (managedObject && [managedObject respondsToSelector:@selector(entity)]) {
                 
                 
                 
@@ -1162,7 +1178,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                 
             }
             //identify the if the cell has a managedObject
-            if (managedObject) {
+            if (managedObject && [managedObject respondsToSelector:@selector(entity)]) {
                 
                 
                 
@@ -1375,7 +1391,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             //NSLog(@"section bound object entity is %@",cellOneBoundObject);
             //NSLog(@"section bound object entity name is %@",cellOneBoundObject.entity.name);
-            if (cellOneBoundObject &&[cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
+            if (cellOneBoundObject &&[cellOneBoundObject respondsToSelector:@selector(entity)] &&[cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
             
                 
                 section.footerTitle=@"Select the drug then add the current dosage in the Med Logs section.";
@@ -1615,6 +1631,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
             
+            if (notesManagedObject && [notesManagedObject respondsToSelector:@selector(entity)]) {
             
             if (notesManagedObject &&[ notesManagedObject.entity.name   isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
@@ -1658,7 +1675,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 }
                 
             }
-
+            }
         }
         
         
@@ -1675,7 +1692,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             //NSLog(@"first cell class is %@",[firstCell class]);
             
-            if (firstCellManagedObject &&[firstCellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"]&&[firstCell isKindOfClass:[SCObjectSelectionCell class]]) {
+            if (firstCellManagedObject &&[firstCellManagedObject respondsToSelector:@selector(entity)]&&[firstCellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"]&&[firstCell isKindOfClass:[SCObjectSelectionCell class]]) {
                 SCObjectSelectionCell *symptomCell=(SCObjectSelectionCell *)firstCell;
                 
                 if (symptomCell.label.text.length) 
@@ -1707,7 +1724,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
             //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
-            if (cellManagedObject && [cellManagedObject.entity.name  isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (cellManagedObject &&  [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject.entity.name  isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
@@ -1741,7 +1758,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellSystolic.boundObject;
             //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
-            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"VitalsEntity"]) {
+            if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"]) {
                 SCTextFieldCell *cellSystolicTF=(SCTextFieldCell *)cellSystolic;
                 SCTextFieldCell *cellDiastolicTF=(SCTextFieldCell *)cellDiastolic;
                 SCTextFieldCell *cellHeartRateTF=(SCTextFieldCell *)cellHeartRate;

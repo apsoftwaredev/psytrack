@@ -27,7 +27,8 @@
 #import "MySource.h"
 #import "PTABGroup.h"
 #import "ClientsSelectionCell.h"
-
+#import "LookupRemoveLinkButtonCell.h"
+#import "AddViewABLinkButtonCell.h"
 
 @implementation CliniciansViewController_Shared
 //@synthesize objectsSection;
@@ -1578,10 +1579,7 @@
                                                                                        allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Specialties)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
 	
     SCPropertyDefinition *demographicProfilePropertyDef = [self.clinicianDef propertyDefinitionWithName:@"demographicInfo"];
-    demographicProfilePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:demographicDetailViewController_Shared.demographicProfileDef
-                                                                                              allowAddingItems:FALSE
-                                                                                            allowDeletingItems:FALSE
-                                                                                              allowMovingItems:FALSE];
+    demographicProfilePropertyDef.attributes = [SCObjectAttributes attributesWithObjectDefinition:demographicDetailViewController_Shared.demographicProfileDef];
 	
     /*
 	SCPropertyDefinition *phoneNumbersPropertyDef = [contactInformationDef propertyDefinitionWithName:@"phoneNumbers"];
@@ -1657,13 +1655,13 @@
     
     
     //create a custom property definition for the addressbook button cell
-    SCCustomPropertyDefinition *addressBookRecordButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"addressBookButtonCell" uiElementClass:[ButtonCell class] objectBindings:nil];
+    SCCustomPropertyDefinition *addressBookRecordButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"addressBookButtonCell" uiElementClass:[AddViewABLinkButtonCell class] objectBindings:nil];
     
     //add the property definition to the clinician class 
     [self.clinicianDef addPropertyDefinition:addressBookRecordButtonProperty];
     
     //create a custom property definition for the delete addressbook link button cell
-    SCCustomPropertyDefinition *deleteABLinkButtonCellProperty = [SCCustomPropertyDefinition definitionWithName:@"deleteABLinkButtonCell" uiElementClass:[ButtonCell class] objectBindings:nil];
+    SCCustomPropertyDefinition *deleteABLinkButtonCellProperty = [SCCustomPropertyDefinition definitionWithName:@"deleteABLinkButtonCell" uiElementClass:[LookupRemoveLinkButtonCell class] objectBindings:nil];
     
     //add the property definition to the clinician class 
     [self.clinicianDef addPropertyDefinition:deleteABLinkButtonCellProperty];
@@ -1860,18 +1858,15 @@
                 
                 
             case 7:
-                if ([cell  isKindOfClass:[ButtonCell class]]) 
+                if ([cell  isKindOfClass:[AddViewABLinkButtonCell class]]) 
                 {
                     
                     
                     
-                    
+                    AddViewABLinkButtonCell *addViewButtonCell=(AddViewABLinkButtonCell *)cell;
                     
                     int addressBookRecordIdentifier=(int )[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"]intValue]; 
                     
-                    //NSLog(@"addressbook identifier is %i",addressBookRecordIdentifier);
-                    //NSLog(@"addressbook Identifier %@", cell.boundObject);
-                    NSString *buttonText;
                     
                     if (addressBookRecordIdentifier!=-1 && ![self checkIfRecordIDInAddressBook:addressBookRecordIdentifier]) {
                         addressBookRecordIdentifier=-1;
@@ -1879,34 +1874,18 @@
                     }
                     
                     
-                    
                     if (addressBookRecordIdentifier!=-1) {
-                        buttonText=[NSString stringWithString:@"Edit Address Book Record"];
                         
-                        
-                        
-                        
-                        
-                        
-                        
+                        [addViewButtonCell toggleButtonsWithButtonOneHidden:YES];
                         
                     }
                     else 
                     {
-                        buttonText=[NSString stringWithString:@"Add to Address Book"];
+                       [addViewButtonCell toggleButtonsWithButtonOneHidden:NO];
                     }
                     
                     
-                    ButtonCell *buttonCell=(ButtonCell *)cell;
-                    UIView *view=[buttonCell viewWithTag:300];
-                    //NSLog(@"view class is %@",[view.superclass class]);
-                    if ([view.superclass isSubclassOfClass:[UIButton class]]) {
-                        UIButton *button=(UIButton *)view;
-                        [button setTitle:buttonText forState:UIControlStateNormal];
-                        [button addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
-                        
-                        
-                    }
+                    
                 } 
                 break;
                 
@@ -1916,48 +1895,35 @@
                 
                 
             { 
-                
+                if ([cell isKindOfClass:[LookupRemoveLinkButtonCell class]]) {
+               
                 int addressBookRecordIdentifier=(int )[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"]intValue]; 
                 
                 //NSLog(@"addressbook identifier is %i",addressBookRecordIdentifier);
                 //NSLog(@"addressbook Identifier %@", cell.boundObject);
-                NSString *buttonText;
+//                NSString *buttonText;
                 
             
-                if (addressBookRecordIdentifier!=-1 && ![self checkIfRecordIDInAddressBook:addressBookRecordIdentifier]) {
-                    addressBookRecordIdentifier=-1;
-                    [cell.boundObject setValue:[NSNumber numberWithInt:-1 ]forKey:@"aBRecordIdentifier"];
-                }
+                LookupRemoveLinkButtonCell *addViewButtonCell=(LookupRemoveLinkButtonCell *)cell;
+                
                 
                 
                 
                 if (addressBookRecordIdentifier!=-1) {
-                    buttonText=[NSString stringWithString:@"Remove Address Book Link"];
                     
-                    
-                    
-                    
-                    
-                    
-                    
+                    [addViewButtonCell toggleButtonsWithButtonOneHidden:YES];
                     
                 }
                 else 
                 {
-                    buttonText=[NSString stringWithString:@"Look Up In Address Book"];
+                    [addViewButtonCell toggleButtonsWithButtonOneHidden:NO];
                 }
                 
                 
-                ButtonCell *buttonCell=(ButtonCell *)cell;
-                UIView *view=[buttonCell viewWithTag:300];
-                //NSLog(@"view class is %@",[view.superclass class]);
-                if ([view.superclass isSubclassOfClass:[UIButton class]]) {
-                    UIButton *button=(UIButton *)view;
-                    [button setTitle:buttonText forState:UIControlStateNormal];
-                    [button addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
                     
-                    
-                }
+                } 
+                
+                
             }  
                 
                 break;
@@ -2420,7 +2386,7 @@
                 SCTableViewSection *section =[tableViewModel sectionAtIndex:0];
                 
             //identify the if the cell has a managedObject
-            if (managedObject) {
+            if (managedObject&&[managedObject respondsToSelector:@selector(entity)]) {
                 
                 
                 
@@ -2429,6 +2395,7 @@
                     
                     
                     //identify the Languages Spoken table
+                    
                     if ([managedObject.entity.name  isEqualToString:@"LanguageSpokenEntity"]) {
                         //NSLog(@"the managed object entity is Languag spoken Entity");
                         //get the value of the primaryLangugage attribute
@@ -2678,7 +2645,7 @@
         }
     }
     
-    
+
     
     
     [self setSectionHeaderColorWithSection:(SCTableViewSection *)section color:[UIColor whiteColor]];
@@ -2765,6 +2732,7 @@
             SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
             
+            if (notesManagedObject&&[notesManagedObject respondsToSelector:@selector(entity)]) {
             
             if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
@@ -2798,7 +2766,7 @@
                 }
                 
             }
-            }
+            }}
         }
         
         
@@ -2818,7 +2786,7 @@
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
             //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
-            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"] && [cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"] && [cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
@@ -2948,14 +2916,14 @@
             case 7:
             {
                 //NSLog(@"cell tag is %i",2);
-                if ([cell isKindOfClass:[ButtonCell class]]) {
+                if ([cell isKindOfClass:[AddViewABLinkButtonCell class]]) {
                     
                     
                     
                     NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                     
                     NSEntityDescription *entityDesctipion=[NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext];
-                    if ([cellManagedObject.entity isKindOfEntity:entityDesctipion]) {
+                    if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity isKindOfEntity:entityDesctipion]) {
                         clinician=nil;
                         clinician=(ClinicianEntity *) cellManagedObject;
                         
@@ -3021,14 +2989,14 @@
             }    
             case 8:
             {   //NSLog(@"cell tag is %i",2);
-                if ([cell isKindOfClass:[ButtonCell class]]) {
+                if ([cell isKindOfClass:[LookupRemoveLinkButtonCell class]]) {
                     
                     
                     
                     NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                     
                     NSEntityDescription *entityDesctipion=[NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext];
-                    if ([cellManagedObject.entity isKindOfEntity:entityDesctipion]) {   
+                    if (cellManagedObject&& [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject.entity isKindOfEntity:entityDesctipion]) {   
                         
                         
                         
@@ -3041,13 +3009,36 @@
                             
                             
                             existingPersonRecordID=-1;
-                            [cellManagedObject setNilValueForKey:@"aBRecordIdentifier"];
+                            [cellManagedObject setValue:[NSNumber numberWithInt:existingPersonRecordID] forKey:@"aBRecordIdentifier"];
                             [cell commitChanges];
                             [currentDetailTableViewModel_ reloadBoundValues];
                             [currentDetailTableViewModel_.modeledTableView reloadData];
                             
+                                                       
+                            SCTableViewSection *sectionOne=[currentDetailTableViewModel_ sectionAtIndex:0];
                             
+                            SCTableViewCell *addEditABLinkButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:7];
                             
+                            if ([addEditABLinkButtonCell isKindOfClass:[AddViewABLinkButtonCell class]]) {
+                                AddViewABLinkButtonCell *addEditButtonCell=(AddViewABLinkButtonCell *)addEditABLinkButtonCell;
+                                
+                              
+                                    [addEditButtonCell toggleButtonsWithButtonOneHidden:NO];
+                             
+                               
+                            }
+                            SCTableViewCell *lookupRemoveABButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:8];
+                            
+                            if ([lookupRemoveABButtonCell isKindOfClass:[LookupRemoveLinkButtonCell class]]) {
+                                LookupRemoveLinkButtonCell *lookUpRemoveButtonCell=(LookupRemoveLinkButtonCell *)lookupRemoveABButtonCell;
+                                
+                              
+                                    [lookUpRemoveButtonCell toggleButtonsWithButtonOneHidden:NO];
+                              
+                               
+                               
+                            }
+
                             
                         }
                         else
@@ -3246,7 +3237,7 @@
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
             
             
-            if (notesManagedObject &&[notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (notesManagedObject &&[notesManagedObject respondsToSelector:@selector(entity)]&&[notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 [notesCell becomeFirstResponder];
             }
@@ -3284,7 +3275,7 @@
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
             
             
-            if (notesManagedObject &&[notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (notesManagedObject &&[notesManagedObject respondsToSelector:@selector(entity)]&&[notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 [notesCell becomeFirstResponder];
             }
@@ -4450,7 +4441,9 @@
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
         NSEntityDescription *entityDesctipion=[NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext];
-        if ([cellManagedObject.entity isKindOfEntity:entityDesctipion]) {
+        
+       
+        if ([cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity isKindOfEntity:entityDesctipion]) {
             
             
             
@@ -4553,6 +4546,36 @@
                     [currentDetailTableViewModel_ reloadBoundValues];
                     [currentDetailTableViewModel_.modeledTableView reloadData];
                     clinician=(ClinicianEntity *) cellManagedObject;
+                    
+                    
+                    SCTableViewSection *sectionOne=[currentDetailTableViewModel_ sectionAtIndex:0];
+                    
+                    SCTableViewCell *addEditABLinkButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:7];
+                    
+                    if ([addEditABLinkButtonCell isKindOfClass:[AddViewABLinkButtonCell class]]) {
+                        AddViewABLinkButtonCell *addEditButtonCell=(AddViewABLinkButtonCell *)addEditABLinkButtonCell;
+                        
+                        if (aBRecordID!=-1) {
+                            [addEditButtonCell toggleButtonsWithButtonOneHidden:YES];
+                        }
+                        else {
+                            [addEditButtonCell toggleButtonsWithButtonOneHidden:NO];
+                        }
+                    }
+                    
+                    
+                    SCTableViewCell *lookupRemoveABButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:8];
+                    
+                    if ([lookupRemoveABButtonCell isKindOfClass:[LookupRemoveLinkButtonCell class]]) {
+                        LookupRemoveLinkButtonCell *lookUpRemoveButtonCell=(LookupRemoveLinkButtonCell *)lookupRemoveABButtonCell;
+                        
+                        if (aBRecordID!=-1) {
+                            [lookUpRemoveButtonCell toggleButtonsWithButtonOneHidden:YES];
+                        }
+                        else {
+                            [lookUpRemoveButtonCell toggleButtonsWithButtonOneHidden:NO];
+                        }
+                    }
                     
                 } 
             }
@@ -4694,7 +4717,7 @@
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                 
                 NSEntityDescription *entityDesctipion=[NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext];
-                if ([cellManagedObject.entity isKindOfEntity:entityDesctipion]) {
+                if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity isKindOfEntity:entityDesctipion]) {
                     
                     
                     
@@ -4832,7 +4855,7 @@
     NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
     
     NSEntityDescription *entityDesctipion=[NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext];
-    if ([cellManagedObject.entity isKindOfEntity:entityDesctipion]) {
+    if (cellManagedObject&&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity isKindOfEntity:entityDesctipion]) {
         
         
         
@@ -4952,6 +4975,38 @@
                 [cell commitChanges];
                 [currentDetailTableViewModel_ reloadBoundValues];
                 [currentDetailTableViewModel_.modeledTableView reloadData];
+                
+                SCTableViewSection *sectionOne=[currentDetailTableViewModel_ sectionAtIndex:0];
+                
+                SCTableViewCell *addEditABLinkButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:7];
+                
+                if ([addEditABLinkButtonCell isKindOfClass:[AddViewABLinkButtonCell class]]) {
+                    AddViewABLinkButtonCell *addEditButtonCell=(AddViewABLinkButtonCell *)addEditABLinkButtonCell;
+                    
+                    if (aBRecordID!=-1) {
+                        [addEditButtonCell toggleButtonsWithButtonOneHidden:YES];
+                    }
+                    else {
+                        [addEditButtonCell toggleButtonsWithButtonOneHidden:NO];
+                    }
+                }
+                
+                
+                SCTableViewCell *lookupRemoveABButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:8];
+                
+                if ([lookupRemoveABButtonCell isKindOfClass:[LookupRemoveLinkButtonCell class]]) {
+                    LookupRemoveLinkButtonCell *lookUpRemoveButtonCell=(LookupRemoveLinkButtonCell *)lookupRemoveABButtonCell;
+                    
+                    if (aBRecordID!=-1) {
+                        [lookUpRemoveButtonCell toggleButtonsWithButtonOneHidden:YES];
+                    }
+                    else {
+                        [lookUpRemoveButtonCell toggleButtonsWithButtonOneHidden:NO];
+                    }
+                }
+
+                
+                
                 
             } 
         }

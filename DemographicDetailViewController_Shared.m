@@ -67,6 +67,9 @@
                                                          managedObjectContext:managedObjectContext
                                                                 autoGeneratePropertyDefinitions:YES];
      
+    [self.demographicProfileDef removePropertyDefinitionWithName:@"order"];
+    [self.demographicProfileDef removePropertyDefinitionWithName:@"keyString"];
+    
     //Create a class definition for Demographic Gender entity
     SCEntityDefinition *genderDef = [SCEntityDefinition definitionWithEntityName:@"GenderEntity" 
                                                       managedObjectContext:managedObjectContext

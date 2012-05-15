@@ -129,8 +129,11 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
      
 //        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:clientsViewController_Shared.clientDef ];
         
-        
+        if (searchBar.scopeButtonTitles.count>1) {
+       
         [self.searchBar setSelectedScopeButtonIndex:1];
+            
+        }
         objectsModel.allowDeletingItems=FALSE;
         objectsModel.autoSelectNewItemCell=TRUE;
         
@@ -647,7 +650,10 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
            
                     
             NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-            if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
+            
+            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]) {
+                
+                if ([cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
                 
             {
                 if ( ![SCUtilities is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
@@ -678,7 +684,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 
             }
             
-            if (cell.tag==4&&cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
+            if (cell.tag==4&&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
                 
             {
                 
@@ -686,7 +692,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 [button setTitle:@"Clear Discontinued Date" forState:UIControlStateNormal];
             }
             //NSLog(@"cell kind of class is %@",cell.class);
-            if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]) 
+            if ([cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]) 
                 
             {
                 
@@ -695,7 +701,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
                 
             }
-            }
+            }}
         }
             break;
         case 4:
@@ -705,7 +711,9 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             if (section.cellCount&&cell.boundObject) {
 //            SCTableViewCell *cellOne=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
             NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"])
+                
+            if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]) {
+                    if ([cellManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"])
                 {
                      UIView *sliderView = [cell viewWithTag:14];
                     
@@ -741,7 +749,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                     }  
                 }
                 //NSLog(@"entity name is %@",cellManagedObject.entity.name);
-                if (cell.tag==1 && cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"LanguageSpokenEntity"])
+                if (cell.tag==1 && [cellManagedObject.entity.name isEqualToString:@"LanguageSpokenEntity"])
                 {
                
                     UIView *scaleView = [cell viewWithTag:70];
@@ -752,7 +760,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                         
                     }
                 }
-            }
+            }}
         
         }
             break;
@@ -763,9 +771,10 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             if (section.cellCount>0&&cell.boundObject) {
 
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-
+                if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]) {
+               
                 //NSLog(@"entity name is %@",cellManagedObject.entity.name);
-                if (cell.tag==1 && [cell isKindOfClass:[SCCustomCell class]]&& cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
+                if (cell.tag==1 && [cell isKindOfClass:[SCCustomCell class]] &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
                 {
                     
                     UIView *scaleView = [cell viewWithTag:70];
@@ -790,7 +799,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
                 //NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
                 //NSLog(@"cell  class is %@",[cellOne class]);
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
+                if ([cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                     
                     
                     if ([cell isKindOfClass:[SCCustomCell class]]) 
@@ -810,7 +819,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                     
                     
                 }
-                
+            }
                 
                 
             }
@@ -934,8 +943,9 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
         
+            if (notesManagedObject &&[notesManagedObject respondsToSelector:@selector(entity)]) {
             
-            if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if ( [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
                 
                 if (encryptedNoteCell.textView.text.length) 
@@ -950,7 +960,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             }
             
             //here it is not the notes cell
-            if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[notesCell isKindOfClass:[SCTextFieldCell class]]) {
+            if ([notesManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[notesCell isKindOfClass:[SCTextFieldCell class]]) {
                 SCTextFieldCell *drugNameCell=(SCTextFieldCell *)notesCell;
                 
                 if (drugNameCell.textField.text.length) 
@@ -964,8 +974,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 
             }
             
-            if (notesManagedObject )
-            {
+            
                 if ([notesManagedObject.entity.name isEqualToString:@"PhoneEntity"]){
                     
                     
@@ -1001,8 +1010,8 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 
                      }
                 }
-            } 
-                
+            
+            }  
             }
         
             
@@ -1025,7 +1034,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
           //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
-            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)] &&[cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
                
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
@@ -1059,7 +1068,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellSystolic.boundObject;
             //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
-            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"VitalsEntity"]) {
+            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)] &&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"]) {
                 SCTextFieldCell *cellSystolicTF=(SCTextFieldCell *)cellSystolic;
                 SCTextFieldCell *cellDiastolicTF=(SCTextFieldCell *)cellDiastolic;
                 SCTextFieldCell *cellHeartRateTF=(SCTextFieldCell *)cellHeartRate;
@@ -1147,7 +1156,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
             //NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
             //NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
-            if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
+            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
                 
                 [detailTableViewModel removeSectionAtIndex:1];
                 
@@ -1212,7 +1221,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
                 //NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
                 //NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
+                if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
                     
                     [detailTableViewModel removeSectionAtIndex:1];
                     
@@ -1286,8 +1295,9 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
         SCTableViewSection *section =[tableViewModel sectionAtIndex:indexPath.section];
         SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:0];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-
-        if ([cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]){
+        if ([cellManagedObject respondsToSelector:@selector(entity)]) {
+        
+        if ([cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&section.cellCount>1){
         
         SCTextFieldCell *phoneNumberCell =(SCTextFieldCell *) [section cellAtIndex:1];
         //NSLog(@"custom button tapped");
@@ -1306,13 +1316,8 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             
         }
     }
-}
-    
-    
-    if (tableViewModel.tag==3) {
-        SCTableViewSection *section =[tableViewModel sectionAtIndex:indexPath.section];
-        SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:0];
-        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+
+      
         
         if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"MedicationEntity"]){
             
@@ -1333,7 +1338,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 
             
         }
-    }
+        }}
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -1512,7 +1517,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
         {
             
             //identify the if the cell has a managedObject
-            if (managedObject) {
+            if (managedObject &&[managedObject respondsToSelector:@selector(entity)]) {
                 
                 
                 
@@ -1629,7 +1634,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             
             
             //identify the if the cell has a managedObject
-            if (managedObject) {
+            if (managedObject &&[managedObject respondsToSelector:@selector(entity)]) {
                 
                 
                 
@@ -1748,7 +1753,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             
        
             //identify the if the cell has a managedObject
-            if (managedObject) {
+            if (managedObject &&[managedObject respondsToSelector:@selector(entity)]) {
                 
                 
                 
@@ -1914,14 +1919,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     if (tableViewModel.tag==3 &&index==0) {
         
         
-        if (section.cellCount>0) {
+        if (section.cellCount>1) {
             SCTableViewCell *cellOne=(SCTableViewCell *)[section cellAtIndex:1];
             
             NSManagedObject *cellOneBoundObject=(NSManagedObject *)cellOne.boundObject;
             
             //NSLog(@"section bound object entity is %@",cellOneBoundObject);
             //NSLog(@"section bound object entity name is %@",cellOneBoundObject.entity.name);
-            if (cellOneBoundObject && [cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
+            if (cellOneBoundObject &&[cellOneBoundObject respondsToSelector:@selector(entity)] && [cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
                 
                 
                 section.footerTitle=@"Select the drug then add the current dosage in the Med Logs section.";
@@ -2170,14 +2175,16 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 -(void)addWechlerAgeCellToSection:(SCTableViewSection *)section {
 
-
+    if (section.cellCount>3) {
+    
     SCLabelCell *actualAgeCell=(SCLabelCell*)[section cellAtIndex:2];
     SCLabelCell *wechslerAgeCell=(SCLabelCell*)[section cellAtIndex:3];
     SCDateCell *birthdateCell=(SCDateCell *)[section cellAtIndex:1];
 
     actualAgeCell.label.text=[clientsViewController_Shared calculateActualAgeWithBirthdate:birthdateCell.datePicker.date];
     wechslerAgeCell.label.text=[clientsViewController_Shared calculateWechslerAgeWithBirthdate:birthdateCell.datePicker.date];
-
+        
+    }
 }
 
 #pragma mark - Cloud support

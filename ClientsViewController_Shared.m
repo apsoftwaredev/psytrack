@@ -120,10 +120,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     SCPropertyDefinition *demographicProfilePropertyDef = [self.clientDef propertyDefinitionWithName:@"demographicInfo"];
    
-    demographicProfilePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:demographicDetailViewController_Shared.demographicProfileDef
-                                                                                              allowAddingItems:TRUE
-                                                                                            allowDeletingItems:TRUE
-                                                                                              allowMovingItems:FALSE];
+    demographicProfilePropertyDef.attributes = [SCObjectAttributes attributesWithObjectDefinition:demographicDetailViewController_Shared.demographicProfileDef];
     SCPropertyDefinition *clientNotesPropertyDef = [self.clientDef propertyDefinitionWithName:@"notes"];
 //    clientNotesPropertyDef.type=SCPropertyTypeTextView;
     NSDictionary *encryClientNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32",@"33",@"34",nil]];
