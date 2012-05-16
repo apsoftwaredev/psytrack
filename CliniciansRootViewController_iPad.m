@@ -151,7 +151,7 @@
         }  
         NSLog(@"selection cell %@",[cell class]);
         
-        if (!addingClinician && tableViewModel.tag==1&&cell&&![cell isKindOfClass:[SCArrayOfObjectsCell class]]&&indexPath.section==0) {
+        if (!addingClinician && tableViewModel.tag==1&&cell&&indexPath.section==0&&![cell isKindOfClass:[SCArrayOfObjectsCell class]]&&![cell isKindOfClass:[SCObjectCell class]]) {
             [section commitCellChanges];
             [tableViewModel.masterModel reloadBoundValues];
             [tableViewModel.masterModel.modeledTableView reloadData];

@@ -160,10 +160,10 @@
     
       [[NSUserDefaults standardUserDefaults] registerDefaults:settingsDictionary];
     
-        if (![[NSUserDefaults standardUserDefaults] synchronize])
+    [[NSUserDefaults standardUserDefaults] synchronize];
         //NSLog(@"not successful in writing the default prefs");
 
-    
+            
     //NSLog(@"user defaults are %@",[[NSUserDefaults standardUserDefaults].dictionaryRepresentation allKeys]);
     
    
@@ -338,7 +338,7 @@
                                                            repeats:YES];
     
     
-    persistentStoreCoordinator__=[self persistentStoreCoordinator];
+    managedObjectContext__=[self managedObjectContext];
    
    
 #if !TARGET_IPHONE_SIMULATOR
@@ -418,8 +418,6 @@
 }
 - (void)updateKVStoreItems:(NSNotification*)notification {
     // Get the list of keys that changed.
-    
-   
     NSDictionary* userInfo = [notification userInfo];
     NSNumber* reasonForChange = [userInfo objectForKey:NSUbiquitousKeyValueStoreChangeReasonKey];
     NSInteger reason = -1;
@@ -443,24 +441,9 @@
         for (NSString* key in changedKeys) {
             id value = [store objectForKey:key];
             [userDefaults setObject:value forKey:key];
-            
-//            if ([key isEqualToString:@"current_key_string"]) {
-//                if (!checkKeyEntityTimer) {
-//                
-//                checkKeyEntityTimer = [NSTimer scheduledTimerWithTimeInterval:5.0
-//                                                         target:self
-//                                                       selector:@selector(checkKeyEntity)
-//                                                       userInfo:NULL
-//                                                        repeats:YES];
-//                [checkKeyEntityTimer fire];
-//                    
-//                }
-//            }
-            
         }
     }
 }
-
 
 
 
@@ -581,7 +564,8 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
     
     if (!encryptedLockDictionarySuccess &&!retrievedEncryptedDataFile) {
         
-        statusMessage=[self setupDefaultLockDictionaryResultStr];
+        statusMessage=[self setupDefaultLockDictionaryResultStrWithNewDeviceFile:YES];
+       
     }
     else 
         if(retrievedEncryptedDataFile && !encryptedLockDictionarySuccess)
@@ -595,6 +579,7 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
         
        
         self.okayToDecryptBool=YES; 
+         [self setupMyInfoRecord];
     }
     else {
         statusMessage=@"Error in Loading Security Settings Occured";
@@ -934,6 +919,15 @@ NSLog(@"keystring is %@",keyString);
     NSMutableDictionary *returnDictionary=[[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObjects:[NSData data],[NSString string], nil] forKeys:[NSArray arrayWithObjects:@"symetricData",@"keyString", nil]];
     
     NSString *symetricStr;
+    if (keyString &&keyString.length) {
+        [returnDictionary setValue:keyString forKey:@"keyString"];
+    }
+    else {
+        if ([lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_CREATE_KEY]) {
+            [returnDictionary setValue:[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY] forKey:@"keyString"];
+        }
+        
+    }
     
     //    //NSLog(@"semetric string is %@",symetricStringOne);
     NSRange rangeOne,rangeTwo,rangeThree;
@@ -958,36 +952,59 @@ NSLog(@"keystring is %@",keyString);
     [fetchRequest setEntity:entity];
     NSPredicate *keyStringPredicate=nil;
     KeyEntity *keyObject=nil;
-    if (keyString&&keyString.length) {
+    NSString *predicateStr=[NSString string];
+    if (!keyString||!keyString.length) 
+    {
+        if ([lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_CREATE_KEY]) {
+            predicateStr=[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY];
+        }
+    }
+    else 
+    {
+        predicateStr=keyString;
+    }
+    if (predicateStr) {
+     
         //NSLog(@"key date is %@",keyString);
-        keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",keyString];
+        keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",predicateStr];
         //        if (fetchedObjects.count) {
         //            fetchedObjects=[fetchedObjects filteredArrayUsingPredicate:keyStringPredicate];
         //        }
-        if (keyStringPredicate) {
+        if (keyStringPredicate) 
+        {
             [fetchRequest setPredicate:keyStringPredicate];
         } 
-        
+ 
     }
    
-    NSError *error = nil;
-    NSArray *fetchedObjects = [managedObjectContext__ executeFetchRequest:fetchRequest error:&error];
-    if (fetchedObjects == nil) 
+        NSError *error = nil;
+        NSArray *fetchedObjects = [managedObjectContext__ executeFetchRequest:fetchRequest error:&error];
+        if (fetchedObjects == nil) 
+        {
+            [self displayNotification:@"Error Accessing the database occured" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+        }
+        
+        
+        if (fetchedObjects.count) 
+        {
+            NSLog(@"fetched objects cound %@",fetchedObjects);
+            keyObject=[fetchedObjects objectAtIndex:0];
+            //NSLog(@"keyString is %@",keyObject.dateCreated);
+        }
+  
+    else 
     {
-        [self displayNotification:@"Error Accessing the database occured" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
-    }
+        [self setupDefaultLockDictionaryResultStrWithNewDeviceFile:NO];
+        
     
     
-    if (fetchedObjects.count) 
-    {
-        NSLog(@"fetched objects cound %@",fetchedObjects);
-        keyObject=[fetchedObjects objectAtIndex:0];
-        //NSLog(@"keyString is %@",keyObject.dateCreated);
-    }
+    //        if (fetchedObjects.count) {
+    //            fetchedObjects=[fetchedObjects filteredArrayUsingPredicate:keyStringPredicate];
+    //        }
+        
+        NSError *error = nil;
+        fetchedObjects = [managedObjectContext__ executeFetchRequest:fetchRequest error:&error];      
     
-    else {
-        [self setupDefaultLockDictionaryResultStr];
-        fetchedObjects = [managedObjectContext__ executeFetchRequest:fetchRequest error:&error];
         if (fetchedObjects == nil) 
         {
             [self displayNotification:@"Error Accessing the database occured" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
@@ -996,9 +1013,16 @@ NSLog(@"keystring is %@",keyString);
         {
             [self displayNotification:@"Unable to retrieve security key needed to decrypt data" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
         }
-    }
-    
-      
+        else 
+        {
+        
+        
+                NSLog(@"fetched objects cound %@",fetchedObjects);
+            
+                keyObject=[fetchedObjects objectAtIndex:0];
+                //NSLog(@"keyString is %@",keyObject.dateCreated);
+        }
+    }  
     
     
     NSData *unwrappedSymetricString;
@@ -1010,18 +1034,20 @@ NSLog(@"keystring is %@",keyString);
             
         
             [keyObject willAccessValueForKey:@"keyString"];
-        if (keyObject.keyString) {
-            if ([returnDictionary.allKeys containsObject:@"keyString"]) {
-                
-                [returnDictionary setValue:keyObject.keyString forKey:@"keyString"];
+            if (keyObject.keyString) {
+                if ([returnDictionary.allKeys containsObject:@"keyString"]) {
+                    
+                    [returnDictionary setValue:keyObject.keyString forKey:@"keyString"];
+                }
             }
-        }
         
-        }
-     unwrappedSymetricString   =[encryption_ unwrapSymmetricKey:keyObject.keyF keyRef:nil useDefaultPrivateKey:YES];
+        
+            unwrappedSymetricString   =[encryption_ unwrapSymmetricKey:keyObject.keyF keyRef:nil useDefaultPrivateKey:YES];
         [keyObject didAccessValueForKey:@"keyF"];
-         symetricStringThree=[self convertDataToString:unwrappedSymetricString];
-    }
+        symetricStringThree=[self convertDataToString:unwrappedSymetricString];
+        }
+    
+    
     NSString *symetricStringTwo;
     [keyObject willAccessValueForKey:@"dataF"];
     if (keyObject.dataF && ![keyObject.keyString isEqualToString:keyString]) {
@@ -1152,7 +1178,7 @@ NSLog(@"keystring is %@",keyString);
     
     NSLog(@"data length is %i",[data length]);
    
-
+        }
  
     
     NSData *symetricData=[symetricStr dataUsingEncoding: [NSString defaultCStringEncoding] ];
@@ -1262,7 +1288,7 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
     return returnStr;
 }
 
--(NSString *)setupDefaultLockDictionaryResultStr{
+-(NSString *)setupDefaultLockDictionaryResultStrWithNewDeviceFile:(BOOL)createDiviceFile{
     
      NSString *statusMessage;
     if (!retrievedEncryptedDataFile) {
@@ -1293,10 +1319,24 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
     NSString* hashStr = [[NSString alloc] initWithData:hash encoding:NSASCIIStringEncoding];
     
     //NSLog(@"newstring is %@",hashStr);
-    
-    symetricData=nil;
-    symetricData=[self getLocalSymetricData];
-    
+        
+        NSData *wrapedSymmetricKey;
+        if (symetricData.length==32) {
+            
+            wrapedSymmetricKey=[encryption_ encryptData:symetricData keyRef:nil useDefaultPublicKey:YES];
+            
+        }
+        
+        if (![wrapedSymmetricKey length]) {
+            statusMessage=@"Check for a software update";
+        }
+        
+        NSData * encodedData;
+    if (createDiviceFile ||!self.lockValuesDictionary) {
+        
+        NSData *localSymetricData=[self getLocalSymetricData];
+
+     
     
     
     NSString *encryptedDataPath = [self lockSettingsFilePath];
@@ -1317,29 +1357,20 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
     //        [lockValuesDictionary_ setValue:[NSString stringWithUTF8String:[hash bytes]]
     // forKey:@"pw_hash"];
     
-    NSData * encodedData = [NSKeyedArchiver archivedDataWithRootObject:self.lockValuesDictionary];
+    encodedData = [NSKeyedArchiver archivedDataWithRootObject:self.lockValuesDictionary];
     
     
     
    
-    NSData *wrapedSymmetricKey;
-    if (symetricData.length==32) {
-  
-        wrapedSymmetricKey=[encryption_ encryptData:symetricData keyRef:nil useDefaultPublicKey:YES];
-        
-    }
     
-    if (![wrapedSymmetricKey length]) {
-        statusMessage=@"Check for a software update";
-    }
-    NSData* encryptedArchivedLockData; 
+    NSData* encryptedLocalArchivedLockData; 
     
-    if (symetricData.length==32) {
-        encryptedArchivedLockData =(NSData *)[encryption_ doCipher:encodedData key:symetricData context:kCCEncrypt padding:(CCOptions *)kCCOptionPKCS7Padding];
+    if (localSymetricData.length==32) {
+        encryptedLocalArchivedLockData =(NSData *)[encryption_ doCipher:encodedData key:localSymetricData context:kCCEncrypt padding:(CCOptions *)kCCOptionPKCS7Padding];
     
     }
     
-       
+        localSymetricData=nil;
     
     //        NSData *dataFromDictionary=[NSData dataWithBytesNoCopy:(void *) length:lockValuesDictionary_ b
     
@@ -1352,17 +1383,17 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
     //        
     //        //NSLog(@"encrypted lock data is %@", encryptedArchivedLockData);
     
-    
-    if ([encryptedArchivedLockData length]) 
+        
+    if ( [encryptedLocalArchivedLockData length]) 
     {
-        setupDatabase=(BOOL)[encryptedArchivedLockData writeToFile:encryptedDataPath atomically:YES];
+        setupDatabase=(BOOL)[encryptedLocalArchivedLockData writeToFile:encryptedDataPath atomically:YES];
         
         NSLog(@"setup database is %i",setupDatabase);
     }
-            
-    
+        encryptedLocalArchivedLockData=nil;
+    }        
     //1
-    if (!setupDatabase) 
+    if (!setupDatabase && createDiviceFile) 
     {
         statusMessage=@"Unable to write data to file. Please check to see if you have adequate memory and disk space.  If the problem persists contact support.";
     }
@@ -1372,6 +1403,10 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
     //1
     {
         
+        if (!encodedData) {
+             encodedData = [NSKeyedArchiver archivedDataWithRootObject:self.lockValuesDictionary];
+        }
+       
         //create a unique key
         
         NSString *newRandomString=[self generateRandomStringOfLength:15];
@@ -1385,7 +1420,17 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
         
         //inset it into managed object context into key database
         
+        
+        NSData* encryptedArchivedLockData; 
+        
+        if (symetricData.length==32) {
+            encryptedArchivedLockData =(NSData *)[encryption_ doCipher:encodedData key:symetricData context:kCCEncrypt padding:(CCOptions *)kCCOptionPKCS7Padding];
             
+        }
+        
+        symetricData=nil;
+        
+        
         //2
         if ([wrappedNewKeyData length]) 
         {
@@ -1425,26 +1470,7 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
                     
 //                }
                //4
-                 NSFetchRequest *myInfoFetchRequest = [[NSFetchRequest alloc] init];
-                
-                NSEntityDescription *clinicianEnitityDesc=[NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext__];
-                
-                NSPredicate *myInfoPredicate=[NSPredicate predicateWithFormat:@"myInformation==%@",[NSNumber numberWithBool:YES]];
-                
-                [myInfoFetchRequest setPredicate:myInfoPredicate];
-                [myInfoFetchRequest setEntity:clinicianEnitityDesc];
-                
-                NSError *myInfoError = nil;
-                NSArray *myInfoFetchedObjects = [managedObjectContext__ executeFetchRequest:myInfoFetchRequest error:&myInfoError];
-                if (!myInfoFetchedObjects.count) {
-                    ClinicianEntity *myClinicianInfoObject=[[ClinicianEntity alloc]initWithEntity:clinicianEnitityDesc insertIntoManagedObjectContext:managedObjectContext__];
-                    
-                    myClinicianInfoObject.myInformation=[NSNumber numberWithBool:TRUE];
-                    
-                    myClinicianInfoObject.firstName=@"Enter Your";
-                    myClinicianInfoObject.lastName=@"Name Here";
-                }
-                
+                                
                 
                 [self saveContext];
 
@@ -1494,7 +1520,52 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
 
 }
 }
+-(void)setupMyInfoRecord{
 
+    if ([self managedObjectContext]) {
+    
+    NSFetchRequest *myInfoFetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *clinicianEnitityDesc=[NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext__];
+    
+    NSPredicate *myInfoPredicate=[NSPredicate predicateWithFormat:@"myInformation==%@",[NSNumber numberWithBool:YES]];
+    
+    [myInfoFetchRequest setPredicate:myInfoPredicate];
+    [myInfoFetchRequest setEntity:clinicianEnitityDesc];
+    
+    NSError *myInfoError = nil;
+    NSArray *myInfoFetchedObjects = [managedObjectContext__ executeFetchRequest:myInfoFetchRequest error:&myInfoError];
+    if (!myInfoFetchedObjects.count) {
+        ClinicianEntity *myClinicianInfoObject=[[ClinicianEntity alloc]initWithEntity:clinicianEnitityDesc insertIntoManagedObjectContext:managedObjectContext__];
+        
+        myClinicianInfoObject.myInformation=[NSNumber numberWithBool:TRUE];
+        
+        myClinicianInfoObject.firstName=@"Enter Your";
+        myClinicianInfoObject.lastName=@"Name Here";
+    }
+    else if (myInfoFetchedObjects.count>1){
+        
+        for (int i=0;i<myInfoFetchedObjects.count-1; i++) {
+            ClinicianEntity *myClinicianInfoObject=[myInfoFetchedObjects objectAtIndex:i];
+            [myClinicianInfoObject willAccessValueForKey:@"firstName"];
+            if ([myClinicianInfoObject.firstName isEqualToString:@"Enter Your"]) {
+                [managedObjectContext__ deleteObject:myClinicianInfoObject];
+            }
+            
+            
+            
+        }
+        
+    }
+    }
+
+
+
+
+
+
+
+}
 -(NSString *)setupLockDictionaryResultStr{
 
     if (lockValuesDictionary_ && [lockValuesDictionary_ allKeys].count==6) {
@@ -1789,15 +1860,15 @@ NSLog(@"lock values dictionary %@",[lockValuesDictionary_ allKeys]);
     NSString *keyString;
     if (unencryptedData.length) {
   
-//        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyString:keyStringToSet];
-        NSData *symetricData=[self getSharedSymetricData];
+        NSDictionary *symetricDataDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyString:keyStringToSet];
+        NSData *symetricData=nil;
          NSLog(@"symetric dictionary is %@",symetricData);
-//        if ([symetricDataDictionary.allKeys containsObject:@"symetricData"]) {
-//            symetricData=[symetricDataDictionary valueForKey:@"symetricData"];
-//        }
-//        if ([symetricDataDictionary.allKeys containsObject:@"keyString"]) {
-//            keyString=[symetricDataDictionary valueForKey:@"keyString"];
-//        }
+        if ([symetricDataDictionary.allKeys containsObject:@"symetricData"]) {
+            symetricData=[symetricDataDictionary valueForKey:@"symetricData"];
+        }
+        if ([symetricDataDictionary.allKeys containsObject:@"keyString"]) {
+            keyString=[symetricDataDictionary valueForKey:@"keyString"];
+        }
 
         if (symetricData.length==32) {
              encryptedData=(NSData *) [encryption_ doCipher:unencryptedData key:symetricData context:kCCEncrypt padding:(CCOptions *) kCCOptionPKCS7Padding];
@@ -5878,6 +5949,15 @@ return [self applicationDrugsDirectory].path;
     
     return persistentStoreCoordinator__;
 }
+
+
+
+
+
+
+
+
+
 //-(void) onChangeiCloudSync
 //{
 //    PTTAppDelegate* appDelegate = (PTTAppDelegate*) [[UIApplication sharedApplication] delegate];
@@ -6328,7 +6408,7 @@ return [self applicationDrugsDirectory].path;
                 }
                 else {
                     NSString *status;
-                    status=[self setupDefaultLockDictionaryResultStr];
+                    status=[self setupDefaultLockDictionaryResultStrWithNewDeviceFile:NO];
                     
                     //NSLog(@"status %@", status);
 
@@ -6457,8 +6537,6 @@ return [self applicationDrugsDirectory].path;
 
 
 }
-
-
 
 
 

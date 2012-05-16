@@ -178,6 +178,7 @@
     //set up the demographic view
     [demographicDetailViewController_Shared setupTheDemographicView];
     
+        [demographicDetailViewController_Shared.demographicProfileDef removePropertyDefinitionWithName:@"clinician"];
     /****************************************************************************************/
     /*	BEGIN Class Definition and attributes for the Degree Entity */
     /****************************************************************************************/ 
@@ -3181,7 +3182,7 @@
 } 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewDidDisappearForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (tableViewModel.tag==0) {
+    if (tableViewModel.tag==0&&![SCUtilities is_iPad]) {
         currentDetailTableViewModel_.viewController.view=nil;
         self.currentDetailTableViewModel=nil;
         [self resetABVariablesToNil];
@@ -3189,7 +3190,7 @@
        
         
        
-        [tableViewModel.modeledTableView reloadData];
+        [tableViewModel.masterModel.modeledTableView reloadData];
     }
 //    if (tableViewModel.tag==1) {
 //        currentDetailTableViewModel=tableViewModel;

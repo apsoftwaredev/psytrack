@@ -41,7 +41,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     DemographicDetailViewController_Shared *demographicDetailViewController_Shared =[[DemographicDetailViewController_Shared alloc]init];
     
     [demographicDetailViewController_Shared setupTheDemographicView];
-
+    [demographicDetailViewController_Shared.demographicProfileDef removePropertyDefinitionWithName:@"client"];
     
     //Create a class definition for Client entity
     
