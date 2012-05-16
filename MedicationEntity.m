@@ -33,7 +33,7 @@
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-    if (appDelegate.okayToDecryptBool) {
+    if (appDelegate.okayToDecryptBool && strValue && strValue.length) {
         
         
         
@@ -97,6 +97,9 @@
         NSData *primitiveData=[self primitiveValueForKey:@"notes"];
         [self didAccessValueForKey:@"notes"];
         
+        if (!primitiveData ||!primitiveData.length) {
+            return nil;
+        }
         [self willAccessValueForKey:@"keyString"];
         NSString *tmpKeyString=self.keyString;
         [self didAccessValueForKey:@"keyString"];
