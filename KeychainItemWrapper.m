@@ -222,6 +222,20 @@ Keychain API expects as a validly constructed container class.
     }
     return NO;
 }
+- (BOOL)createKeychainValueWithData:(NSData *)data forIdentifier:(NSString *)identifier {
+    NSMutableDictionary *dictionary = [self newSearchDictionary:identifier];
+    
+   
+    [dictionary setObject:data forKey:(id)kSecValueData];
+	
+    OSStatus status = SecItemAdd((CFDictionaryRef)dictionary, NULL);
+    [dictionary release];
+	
+    if (status == errSecSuccess) {
+        return YES;
+    }
+    return NO;
+}
 - (BOOL)updateKeychainValue:(NSString *)password forIdentifier:(NSString *)identifier {
     
     NSMutableDictionary *searchDictionary = [self newSearchDictionary:identifier];
@@ -240,7 +254,24 @@ Keychain API expects as a validly constructed container class.
     }
     return NO;
 }
-
+- (BOOL)updateKeychainValueWithData:(NSData *)data forIdentifier:(NSString *)identifier {
+    
+    NSMutableDictionary *searchDictionary = [self newSearchDictionary:identifier];
+    NSMutableDictionary *updateDictionary = [[NSMutableDictionary alloc] init];
+    
+    [updateDictionary setObject:data forKey:(id)kSecValueData];
+	
+    OSStatus status = SecItemUpdate((CFDictionaryRef)searchDictionary,
+                                    (CFDictionaryRef)updateDictionary);
+    
+    [searchDictionary release];
+    [updateDictionary release];
+	
+    if (status == errSecSuccess) {
+        return YES;
+    }
+    return NO;
+}
 
 - (void)deleteKeychainValue:(NSString *)identifier {
 	
