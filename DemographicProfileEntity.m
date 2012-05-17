@@ -62,7 +62,7 @@
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-    if (appDelegate.okayToDecryptBool&& strValue&& strValue.length) {
+    if (strValue&& strValue.length&&![appDelegate isAppLocked] ) {
         
         
         
@@ -125,7 +125,7 @@
         NSData *primitiveData=[self primitiveValueForKey:@"profileNotes"];
         
         [self didAccessValueForKey:@"profileNotes"];
-        if (!primitiveData ||!primitiveData.length) {
+        if (!primitiveData ||!primitiveData.length||[appDelegate isAppLocked] ) {
             return nil;
         }
         [self willAccessValueForKey:@"keyString"];
@@ -176,7 +176,7 @@
         NSData *primitiveData=[self primitiveValueForKey:@"sex"];
         
         [self didAccessValueForKey:@"sex"];
-        if (!primitiveData ||!primitiveData.length) {
+        if (!primitiveData ||!primitiveData.length||[appDelegate isAppLocked] ) {
             return nil;
         }
         [self willAccessValueForKey:@"keyString"];
