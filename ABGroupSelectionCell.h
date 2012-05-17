@@ -28,13 +28,15 @@
 
     ClinicianEntity *clinician_;
     BOOL synchWithABBeforeLoadBool_;
+    SCObjectSelectionCell *objectSelectionCell_;
+    NSMutableArray *abGroupsArray_;
 }
 
 
-
+@property (nonatomic, strong) NSMutableArray *abGroupsArray;
 @property (nonatomic, strong)ClinicianEntity *clinician;
 @property (nonatomic, assign)BOOL synchWithABBeforeLoadBool;
-
+@property (nonatomic,strong)IBOutlet SCObjectSelectionCell *objectSelectionCell;
 -(NSArray *)addressBookGroupsArray;
 -(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew checkExisting:(BOOL)checkExisting;
 

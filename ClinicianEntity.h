@@ -18,7 +18,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MyInfoEntity, TestingSessionDeliveredEntity;
+@class MyInfoEntity, TestingSessionDeliveredEntity,PTABGroup;
 
 @interface ClinicianEntity : NSManagedObject {
 
@@ -32,7 +32,7 @@
  
     NSString * prefix;
 
-
+    NSMutableSet *tempABGroupSet;
 
 
 }
@@ -87,6 +87,8 @@
 
 
 @property (nonatomic, strong)  NSString *combinedName;
+
+@property (nonatomic, strong) NSSet *abGroups;
 @end
 
 @interface ClinicianEntity (CoreDataGeneratedAccessors)
@@ -175,5 +177,6 @@
 - (void)removeCurrentJobTitlesObject:(NSManagedObject *)value;
 - (void)addCurrentJobTitles:(NSSet *)values;
 - (void)removeCurrentJobTitles:(NSSet *)values;
+
 
 @end

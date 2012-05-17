@@ -107,6 +107,8 @@
 - (void)viewDidLoad {
         [super viewDidLoad];
    
+
+
     
     objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef];
     if (isInDetailSubview) {
@@ -229,7 +231,7 @@
     objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
     
     
- 
+
     
     
      [self updateClinicianTotalLabel];

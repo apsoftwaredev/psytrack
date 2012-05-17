@@ -50,6 +50,7 @@ NSManagedObjectContext *managedObjectContext;
     ABGroupSelectionCell *abGroupObjectSelectionCell_;
     
     UIView *iPadPersonBackgroundView_;
+  
 }
 
 

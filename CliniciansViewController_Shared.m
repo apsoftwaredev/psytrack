@@ -26,6 +26,7 @@
 #import "EncryptedSCTextViewCell.h"
 #import "MySource.h"
 #import "PTABGroup.h"
+#import "ABGroupSelectionCell.h"
 #import "ClientsSelectionCell.h"
 #import "LookupRemoveLinkButtonCell.h"
 #import "AddViewABLinkButtonCell.h"
@@ -179,6 +180,19 @@
     [demographicDetailViewController_Shared setupTheDemographicView];
     
         [demographicDetailViewController_Shared.demographicProfileDef removePropertyDefinitionWithName:@"clinician"];
+        
+        
+        self.clinicianDef=[SCEntityDefinition definitionWithEntityName:@"ClinicianEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects: @"degrees", 
+                                                                                                                                                   @"licenseNumbers", @"certifications",@"specialties",@"publications",@"orientationHistory",@"awards",@"memberships",@"influences",@"employments",
+                                                                                                                                                   @"demographicInfo",@"startedPracticing",@"clinicianType", @"atMyCurrentSite",  @"myCurrentSupervisor",@"myPastSupervisor",@"referrals",@"isPrescriber",@"logs",@"bio",@"notes",@"abGroups", nil]];
+        
+        
+        
+        
+        
+        
+        self.clinicianDef.titlePropertyName = @"firstName;lastName";	
+        self.clinicianDef.keyPropertyName = @"lastName";
     /****************************************************************************************/
     /*	BEGIN Class Definition and attributes for the Degree Entity */
     /****************************************************************************************/ 
@@ -1106,16 +1120,13 @@
     /****************************************************************************************/ 
     
     //Create a class definition for clinician entity
-	self.clinicianDef = [SCEntityDefinition definitionWithEntityName:@"ClinicianEntity" 
-                                                         managedObjectContext:managedObjectContext 
-                                                                propertyNames:[NSArray arrayWithObjects: @"degrees", 
-                                                                                   @"licenseNumbers", @"certifications",@"specialties",@"publications",@"orientationHistory",@"awards",@"memberships",@"influences",@"employments",
-                                                                                   @"demographicInfo",@"startedPracticing",@"clinicianType", @"atMyCurrentSite",  @"myCurrentSupervisor",@"myPastSupervisor",@"referrals",@"isPrescriber",@"logs",@"bio",@"notes", nil]];
+//	self.clinicianDef = [SCEntityDefinition definitionWithEntityName:@"ClinicianEntity" 
+//                                                         managedObjectContext:managedObjectContext 
+//                                                                propertyNames:[NSArray arrayWithObjects: @"degrees", 
+//                                                                                   @"licenseNumbers", @"certifications",@"specialties",@"publications",@"orientationHistory",@"awards",@"memberships",@"influences",@"employments",
+//                                                                                   @"demographicInfo",@"startedPracticing",@"clinicianType", @"atMyCurrentSite",  @"myCurrentSupervisor",@"myPastSupervisor",@"referrals",@"isPrescriber",@"logs",@"bio",@"notes",@"", nil]];
 	
-    
-    
-    self.clinicianDef.titlePropertyName = @"firstName;lastName";	
-    self.clinicianDef.keyPropertyName = @"lastName";
+        
    	self.clinicianDef.orderAttributeName = @"order";
     
    
@@ -1667,8 +1678,43 @@
     //add the property definition to the clinician class 
     [self.clinicianDef addPropertyDefinition:deleteABLinkButtonCellProperty];
   
-
-    
+        SCEntityDefinition *abGroupsDef=[SCEntityDefinition definitionWithEntityName:@"AddressBookGroupEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"groupName",@"recordID", nil]];
+        
+        
+        SCPropertyDefinition *abGroupsPropertyDef=[self.clinicianDef propertyDefinitionWithName:@"abGroups"];
+        
+        abGroupsPropertyDef.type=SCPropertyTypeObjectSelection;
+        
+        SCObjectSelectionAttributes *abGroupSelectionAttribs=[[SCObjectSelectionAttributes alloc]initWithObjectsEntityDefinition:abGroupsDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES] ;
+        abGroupSelectionAttribs.allowAddingItems=YES;
+        abGroupSelectionAttribs.allowDeletingItems=YES;
+        abGroupSelectionAttribs.allowEditingItems=YES;
+        abGroupSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Add Address Book Groups"];
+        abGroupSelectionAttribs.placeholderuiElement=[SCTableViewCell cellWithText:@"Tap Edit to add new address book groups"];
+        
+        abGroupsPropertyDef.attributes=abGroupSelectionAttribs;
+        abGroupsPropertyDef.title=@"Address Book Groups";
+        
+        
+////        
+//       abClassDefinition.titlePropertyName=@"groupName";
+//        abClassDefinition.keyPropertyName=@"recordID";
+//        SCPropertyDefinition *abGroupPropertyDef=[self.clinicianDef propertyDefinitionWithName:@"abGroups"];    
+//    
+//      
+//        abGroupPropertyDef.title=@"Address Book Groups";
+//        
+//        abGroupPropertyDef.type=SCPropertyTypeObjectSelection;
+//        
+//        abGroupPropertyDef.uiElementClass=[ABGroupSelectionCell class];
+//      
+//    
+//        SCObjectSelectionAttributes *abGroupSelectionAttribs = [SCObjectSelectionAttributes attributesWithSelectionObjects:nil objectsDefinition:abClassDefinition allowMultipleSelection:YES allowNoSelection:YES];
+//      
+//        
+//        abGroupPropertyDef.attributes=abGroupSelectionAttribs;
+//        
+        
     SCPropertyGroup *clinicianListPropertiesGroup=[SCPropertyGroup groupWithHeaderTitle:@"Clinician List Properties" footerTitle:nil propertyNames:[NSArray arrayWithObjects: @"atMyCurrentSite", @"myCurrentSupervisor",@"myPastSupervisor", nil]];
     
     
@@ -1748,25 +1794,25 @@
 //    [self tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)indexPath.section detailTableViewModel:(SCTableViewModel *)detailTableViewModel];
     
     
-    if (tableViewModel.tag==1) {
-        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-        
-        //NSLog(@"cell class is %@",[cell class]);
-        
-        //NSLog(@"cell tag is %i",cell.tag);
-        if (cell.tag==429&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
-            
-            
-            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(abGroupsDoneButtonTapped:)];
-            
-            
-            detailTableViewModel.viewController.navigationItem.rightBarButtonItem = doneButton;
-            detailTableViewModel.tag=429;
-            
-        }
-        
-        
-    }
+//    if (tableViewModel.tag==1) {
+//        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+//        
+//        //NSLog(@"cell class is %@",[cell class]);
+//        
+//        //NSLog(@"cell tag is %i",cell.tag);
+////        if (cell.tag==429&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
+////            
+////            
+////            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(abGroupsDoneButtonTapped:)];
+////            
+////            
+////            detailTableViewModel.viewController.navigationItem.rightBarButtonItem = doneButton;
+////            detailTableViewModel.tag=429;
+////            
+////        }
+//        
+//        
+//    }
     
     
 }
@@ -1856,9 +1902,9 @@
                 break;
                 
             
+             
                 
-                
-            case 7:
+            case 8:
                 if ([cell  isKindOfClass:[AddViewABLinkButtonCell class]]) 
                 {
                     
@@ -1891,7 +1937,7 @@
                 break;
                 
                 
-            case 8:
+            case 9:
                 //this is the root table
                 
                 
@@ -1928,8 +1974,18 @@
             }  
                 
                 break;
-           
-
+            case 10:
+            {
+                if ([cell isKindOfClass:[ABGroupSelectionCell class]]) {
+                    ABGroupSelectionCell *abGroupSelectionCell=(ABGroupSelectionCell *)cell;
+                    
+                    abGroupSelectionCell.clinician=clinician;
+                }
+                
+                
+                
+            }
+                break; 
             default:
                 break;
         }
@@ -2630,15 +2686,23 @@
 //                NSArray *addressBookGroupsArray=[NSArray arrayWithArray:[ self addressBookGroupsArray]];
 //                
                 
-              
+               
+                
                 
                 //NSLog(@"client abrecordidntifier %i",[clinicianObject.aBRecordIdentifier intValue]);
                 //NSLog(@"client abrecordidentifier %@",clinicianObject.aBRecordIdentifier);
-                self.abGroupObjectSelectionCell=[[ABGroupSelectionCell alloc]initWithClinician:(ClinicianEntity *)clinicianObject];    
-                
-                abGroupObjectSelectionCell_.tag=429;
-               
-                [sectionOne addCell:abGroupObjectSelectionCell_];
+//                self.abGroupObjectSelectionCell=[[ABGroupSelectionCell alloc]initWithClinician:(ClinicianEntity *)clinicianObject];   
+//                
+//              
+//                SCClassDefinition *abGroupsDef=[SCClassDefinition definitionWithClass:[PTABGroup class] propertyNames:[NSArray arrayWithObjects:@"groupName",@"recordID", nil]];
+//                
+//                [abGroupObjectSelectionCell_ setSelectionItemsStore:[abGroupsDef generateCompatibleDataStore]];
+//                
+//               
+//                
+//                abGroupObjectSelectionCell_.tag=429;
+//               
+//                [sectionOne addCell:abGroupObjectSelectionCell_];
             }
                 }
             }
@@ -2654,8 +2718,6 @@
     
     
 }
-
-
 
 
 
@@ -2914,7 +2976,7 @@
                 //                
                 //                break;
                 //            }    
-            case 7:
+            case 8:
             {
                 //NSLog(@"cell tag is %i",2);
                 if ([cell isKindOfClass:[AddViewABLinkButtonCell class]]) {
@@ -2988,7 +3050,7 @@
                 }
                 break;
             }    
-            case 8:
+            case 9:
             {   //NSLog(@"cell tag is %i",2);
                 if ([cell isKindOfClass:[LookupRemoveLinkButtonCell class]]) {
                     
@@ -3018,7 +3080,7 @@
                                                        
                             SCTableViewSection *sectionOne=[currentDetailTableViewModel_ sectionAtIndex:0];
                             
-                            SCTableViewCell *addEditABLinkButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:7];
+                            SCTableViewCell *addEditABLinkButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:8];
                             
                             if ([addEditABLinkButtonCell isKindOfClass:[AddViewABLinkButtonCell class]]) {
                                 AddViewABLinkButtonCell *addEditButtonCell=(AddViewABLinkButtonCell *)addEditABLinkButtonCell;
@@ -3028,7 +3090,7 @@
                              
                                
                             }
-                            SCTableViewCell *lookupRemoveABButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:8];
+                            SCTableViewCell *lookupRemoveABButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:9];
                             
                             if ([lookupRemoveABButtonCell isKindOfClass:[LookupRemoveLinkButtonCell class]]) {
                                 LookupRemoveLinkButtonCell *lookUpRemoveButtonCell=(LookupRemoveLinkButtonCell *)lookupRemoveABButtonCell;
@@ -4351,7 +4413,7 @@
         
         BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults] boolForKey:kPTAutoAddClinicianToGroup];
         bool didSave=NO;
-        if (autoAddClinicianToGroup||abGroupObjectSelectionCell_.selectedItemsIndexes.count) 
+        if (autoAddClinicianToGroup||abGroupObjectSelectionCell_.abGroupsArray.count) 
         {
             
             int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
@@ -4538,7 +4600,7 @@
                     
                     
                     [cell commitChanges];
-                    NSArray *itemsArray=(NSArray *)abGroupObjectSelectionCell_.items;
+                    NSArray *itemsArray=(NSArray *)abGroupObjectSelectionCell_.abGroupsArray;
                     itemsArray=[abGroupObjectSelectionCell_ addressBookGroupsArray];
                     
                     [abGroupObjectSelectionCell_ addPersonToSelectedGroups];
@@ -4551,7 +4613,7 @@
                     
                     SCTableViewSection *sectionOne=[currentDetailTableViewModel_ sectionAtIndex:0];
                     
-                    SCTableViewCell *addEditABLinkButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:7];
+                    SCTableViewCell *addEditABLinkButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:8];
                     
                     if ([addEditABLinkButtonCell isKindOfClass:[AddViewABLinkButtonCell class]]) {
                         AddViewABLinkButtonCell *addEditButtonCell=(AddViewABLinkButtonCell *)addEditABLinkButtonCell;
@@ -4565,7 +4627,7 @@
                     }
                     
                     
-                    SCTableViewCell *lookupRemoveABButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:8];
+                    SCTableViewCell *lookupRemoveABButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:9];
                     
                     if ([lookupRemoveABButtonCell isKindOfClass:[LookupRemoveLinkButtonCell class]]) {
                         LookupRemoveLinkButtonCell *lookUpRemoveButtonCell=(LookupRemoveLinkButtonCell *)lookupRemoveABButtonCell;
@@ -4979,7 +5041,7 @@
                 
                 SCTableViewSection *sectionOne=[currentDetailTableViewModel_ sectionAtIndex:0];
                 
-                SCTableViewCell *addEditABLinkButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:7];
+                SCTableViewCell *addEditABLinkButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:8];
                 
                 if ([addEditABLinkButtonCell isKindOfClass:[AddViewABLinkButtonCell class]]) {
                     AddViewABLinkButtonCell *addEditButtonCell=(AddViewABLinkButtonCell *)addEditABLinkButtonCell;
@@ -4993,7 +5055,7 @@
                 }
                 
                 
-                SCTableViewCell *lookupRemoveABButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:8];
+                SCTableViewCell *lookupRemoveABButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:9];
                 
                 if ([lookupRemoveABButtonCell isKindOfClass:[LookupRemoveLinkButtonCell class]]) {
                     LookupRemoveLinkButtonCell *lookUpRemoveButtonCell=(LookupRemoveLinkButtonCell *)lookupRemoveABButtonCell;
@@ -5696,7 +5758,7 @@
     //NSLog(@"currenct detail tag is %i",currentDetailTableViewModel_.tag);
     if (currentDetailTableViewModel_.tag=429 &&currentDetailTableViewModel_.sectionCount) {
         SCObjectSelectionSection *section=(SCObjectSelectionSection *)[currentDetailTableViewModel_ sectionAtIndex:0];
-        NSMutableSet *mutableSet= (NSMutableSet *) abGroupObjectSelectionCell_.selectedItemsIndexes;
+        NSMutableSet *mutableSet= (NSMutableSet *) abGroupObjectSelectionCell_.objectSelectionCell.selectedItemsIndexes;
         mutableSet=section.selectedItemsIndexes;
         
        

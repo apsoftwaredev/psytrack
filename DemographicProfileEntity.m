@@ -176,7 +176,7 @@
         NSData *primitiveData=[self primitiveValueForKey:@"sex"];
         
         [self didAccessValueForKey:@"sex"];
-        if (!primitiveData ||!primitiveData.length||[appDelegate isAppLocked] ) {
+        if (!primitiveData ||!primitiveData.length) {
             return nil;
         }
         [self willAccessValueForKey:@"keyString"];

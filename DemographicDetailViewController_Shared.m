@@ -189,11 +189,11 @@
     //Do some property definition customization for the Demographic Profile Entity sex and Profile notes attributes
     SCPropertyDefinition *demographicSexPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"sex"];
 //	demographicSexPropertyDef.title =
-//    demographicSexPropertyDef.type = SCPropertyTypeSelection;
-//	demographicSexPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Male", @"Female", @"Intersexual",@"F2M",@"M2F",@"Undisclosed", nil] 
-//                                                               allowMultipleSelection:NO
-//                                                                     allowNoSelection:NO
-//                                                                autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
+    demographicSexPropertyDef.type = SCPropertyTypeSelection;
+	demographicSexPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Male", @"Female", @"Intersexual",@"F2M",@"M2F",@"Undisclosed", nil] 
+                                                               allowMultipleSelection:NO
+                                                                     allowNoSelection:NO
+                                                                autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
     
     demographicSexPropertyDef.type=SCPropertyTypeCustom;
     demographicSexPropertyDef.uiElementClass=[EncryptedSCSelectionCell class];
