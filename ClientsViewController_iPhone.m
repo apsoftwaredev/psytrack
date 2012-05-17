@@ -1903,7 +1903,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
-     if (tableViewModel.tag==1 &&index==0 &&section.cellCount>3) {
+     if ( tableViewModel.tag==1 &&index==0 &&section.cellCount>3) {
        
 //         NSString* newStr = [[NSString alloc] initWithData:[tableViewModel.modelKeyValues valueForKey:@"clientIDCode"] encoding:NSASCIIStringEncoding];
 //         [section insertCell:[[SCTextFieldCell alloc] initWithText:@"clientIDCode" withBoundKey:@"clientIDCode" withValue:newStr]  atIndex:0];

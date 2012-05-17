@@ -476,11 +476,11 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     medicationReviewNotesPropertyDef.autoValidate=NO;
     
     medicationReviewDef.keyPropertyName=@"logDate";
-    
+    medicationReviewDef.titlePropertyName=@"logDate";
     //Create the property definition for the date property in the medicatioReviewnDef class  definition
     SCPropertyDefinition *medLogDatePropertyDef = [medicationReviewDef propertyDefinitionWithName:@"logDate"];
     
-    medLogDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:medDateFormatter
+    medLogDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateTimeDateFormatter
                                                                        datePickerMode:UIDatePickerModeDate
                                                         displayDatePickerInDetailView:NO];
     
