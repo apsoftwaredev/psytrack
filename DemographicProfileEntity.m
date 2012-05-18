@@ -66,8 +66,8 @@
         
         
         
-       
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
+        [self willAccessValueForKey:@"keyString"];
+        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:nil];
         //NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
         NSData *encryptedData;
         NSString *encryptedKeyString;

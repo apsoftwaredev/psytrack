@@ -199,37 +199,37 @@
     drugDef.titlePropertyName=@"drugName;dosage"; 
     
     drugDef.keyPropertyName=@"drugName";
-    if (drugsManagedObjectContext) {
-   
-    NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:drugsManagedObjectContext];
-    
-    
-    NSFetchRequest *productFetchRequest = [[NSFetchRequest alloc] init];
-   
-    
-    
-    [productFetchRequest setEntity:productEntityDesc];
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"drugName"
-                                                                   ascending:YES];
-   NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    
-    
-    [productFetchRequest setSortDescriptors:sortDescriptors];
-
-   
-    NSError *productError = nil;
-        NSArray *productFetchedObjects;
-        
-        if ([drugsManagedObjectContext countForFetchRequest:productFetchRequest error:&productError]) {
-       
-        productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:productFetchRequest error:&productError];
-            
-        }
-    drugsMutableArray=[NSMutableArray arrayWithArray:productFetchedObjects];
-    productFetchedObjects=nil;
-    } 
-    NSLog(@"drugsmutable array %i",drugsMutableArray.count);
+//    if (drugsManagedObjectContext) {
+//   
+//    NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:drugsManagedObjectContext];
+//    
+//    
+//    NSFetchRequest *productFetchRequest = [[NSFetchRequest alloc] init];
+//   
+//    
+//    
+//    [productFetchRequest setEntity:productEntityDesc];
+//    
+//    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"drugName"
+//                                                                   ascending:YES];
+//   NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+//    
+//    
+//    [productFetchRequest setSortDescriptors:sortDescriptors];
+//
+//   
+//    NSError *productError = nil;
+//        NSArray *productFetchedObjects;
+//        
+//        if ([drugsManagedObjectContext countForFetchRequest:productFetchRequest error:&productError]) {
+//       
+//        productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:productFetchRequest error:&productError];
+//            
+//        }
+//    drugsMutableArray=[NSMutableArray arrayWithArray:productFetchedObjects];
+//    productFetchedObjects=nil;
+//    } 
+//    NSLog(@"drugsmutable array %i",drugsMutableArray.count);
     // Instantiate the tabel model
     
 //    tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self];    
@@ -237,7 +237,9 @@
 //    
 //    
 //    
-    SCArrayOfObjectsModel *objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView items:drugsMutableArray itemsDefinition:drugDef];
+    
+    
+    SCArrayOfObjectsModel *objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:drugDef];
 	objectsModel.searchBar = self.searchBar;
 	objectsModel.searchPropertyName = @"drugName";
 	objectsModel.addButtonItem = self.addButton;
@@ -250,14 +252,14 @@
     objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
    
     
-//    SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"drugName" sortAscending:YES filterPredicate:nil];
-//   
-//  
-// 
-//    dataFetchOptions.batchSize=10;
-//
-// 
-//    objectsModel.dataFetchOptions=dataFetchOptions;
+    SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"drugName" sortAscending:YES filterPredicate:nil];
+   
+  
+ 
+    dataFetchOptions.batchSize=10;
+
+ 
+    objectsModel.dataFetchOptions=dataFetchOptions;
     self.tableViewModel = objectsModel;
 //    [self.tableViewModel reloadBoundValues];
 //    if (isInDetailSubview) {
