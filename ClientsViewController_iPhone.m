@@ -2065,33 +2065,33 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 }
 
 
-//-(void)tableViewModel:(SCTableViewModel *)tableViewModel didInsertRowAtIndexPath:(NSIndexPath *)indexPath
-//
-//{
-//    
-//    if (tableViewModel.tag==0) {
-//        //NSLog(@"did iset row for index path");
-//   
-//       
-//            if(isInDetailSubview)
-//            {
-//                SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-//                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-//                NSMutableArray *mutableArray=(NSMutableArray *)[NSMutableArray arrayWithArray:clientObjectSelectionCell.items];
-//                [mutableArray addObject:cellManagedObject];
-//                
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel didInsertRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+    
+    if (tableViewModel.tag==0) {
+        //NSLog(@"did iset row for index path");
+   
+        [self updateClientsTotalLabel];
+            if(isInDetailSubview)
+            {
+                SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+                NSMutableArray *mutableArray=(NSMutableArray *)[NSMutableArray arrayWithArray:clientObjectSelectionCell.items];
+                [mutableArray addObject:cellManagedObject];
+                
 //                clientObjectSelectionCell.items=mutableArray;
-//            }
-//            
-//    }
-//        
-//        
-//        
-//        
-//
-//    
-//}
-//
+            }
+            
+    }
+        
+        
+        
+        
+
+    
+}
+
 
 
 //

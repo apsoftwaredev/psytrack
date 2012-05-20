@@ -415,35 +415,47 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDef
      NSPredicate *paperworkIncompletePredicate = [NSPredicate predicateWithFormat:@"paperwork == %@",[NSNumber numberWithInteger: 0]];
 //     tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
 //										withEntityClassDefinition:testSessionDeliveredDef usingPredicate:paperworkIncompletePredicate];
-    tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView 
-										entityDefinition:testSessionDeliveredDef];
+    SCArrayOfObjectsModel *objectModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:testSessionDeliveredDef filterPredicate:paperworkIncompletePredicate];
+    
+//    self.tableViewModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView 
+//										entityDefinition:testSessionDeliveredDef];
     [self.searchBar setSelectedScopeButtonIndex:2];
     // Initialize tableModel
-    if (self.navigationItem.rightBarButtonItems.count>1) {
-        
-        tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
-    }
-
+//    if (self.navigationItem.rightBarButtonItems.count>1) {
+//        
+//        objectModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
+//    }
+//
+//   
+//    
+//    if (self.navigationItem.rightBarButtonItems.count >0)
+//    {
+//        self.tableViewModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
+//    }
+    
    
-    
-    if (self.navigationItem.rightBarButtonItems.count >0)
-    {
-        tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
-    }
-    
+     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
+     NSLog(@"self.navigationItem.rightBarButtonItems are %@",self.buttonsToolbar.items);
+   
+       objectModel.editButtonItem = self.editButton;;
+        
+        objectModel.addButtonItem = self.addButton;
 
+    
+    
     self.view.backgroundColor=[UIColor clearColor];
     
-    tableModel.autoSortSections = TRUE;  
-    tableModel.searchBar = self.searchBar;
-	tableModel.searchPropertyName = @"dateOfService";
+    objectModel.autoSortSections = TRUE;  
+   objectModel.searchBar = self.searchBar;
+	objectModel.searchPropertyName = @"dateOfService";
     
-    tableModel.allowMovingItems=TRUE;
+    objectModel.allowMovingItems=TRUE;
     
-    tableModel.autoAssignDelegateForDetailModels=TRUE;
-    tableModel.autoAssignDataSourceForDetailModels=TRUE;
+    objectModel.autoAssignDelegateForDetailModels=TRUE;
+    objectModel.autoAssignDataSourceForDetailModels=TRUE;
     
-    [self updateAdministrationTotalLabel];
+    self.tableViewModel=objectModel;
+    [self updateAdministrationTotalLabel:self.tableViewModel];
 
   
         
@@ -465,29 +477,29 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDef
     
     if (tableViewModel.tag==0) {
         
-        [self totalAdministrationsLabel];
+        [self updateAdministrationTotalLabel:tableViewModel];
         
     }
     
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel didRemoveSectionAtIndex:(NSInteger)index{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel didRemoveSectionAtIndex:(NSUInteger)index{
     
     if (tableViewModel.tag==0) {
         
-        [self totalAdministrationsLabel];
+        [self updateAdministrationTotalLabel:tableViewModel];
         
     }
     
     
 }
 
--(void)updateAdministrationTotalLabel{
+-(void)updateAdministrationTotalLabel:(SCTableViewModel *)tableModel{
     
-    
-    if (tableModel.tag==0) 
-    {
+    if (tableModel.tag==0) {
+   
         int cellCount=0;
+    NSLog(@" table view model section count is %i",tableModel.sectionCount);
         if (tableModel.sectionCount >0){
             
             for (int i=0; i<tableModel.sectionCount; i++) {
@@ -507,8 +519,9 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDef
             self.totalAdministrationsLabel.text=[NSString stringWithFormat:@"Total Administrations: %i", cellCount];
         }
         
+   
+        
     }
-    
     
     
     
@@ -518,15 +531,15 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDef
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel didInsertRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableViewModel:(SCTableViewModel *)tableModel didInsertRowAtIndexPath:(NSIndexPath *)indexPath{
     
 //    [self tableViewModel:(SCTableViewModel *)tableViewModel testFetchForRowAtIndexPath:(NSIndexPath *) indexPath];
     
        
-    if (tableViewModel.tag==0) 
+    if (tableModel.tag==0) 
     {
         
-        [self totalAdministrationsLabel];
+        [self updateAdministrationTotalLabel:tableModel];
     }
     
     

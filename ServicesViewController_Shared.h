@@ -14,16 +14,16 @@
 
 @class Time_Shared;
 
-@interface ServicesViewController_Shared : UIViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate>
+@interface ServicesViewController_Shared : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate>
 {
     Time_Shared *time_Shared;
     ClientPresentations_Shared *clientPresentations_Shared;
     UISearchBar *searchBar;
-    UITableView *tableView;
+//    UITableView *tableView;
     NSManagedObjectContext *managedObjectContext;
     __weak UILabel *totalAdministrationsLabel;
     
-    SCArrayOfObjectsModel *tableModel;
+//    SCArrayOfObjectsModel *tableModel;
     
     
     BOOL viewControllerOpen;
@@ -63,7 +63,7 @@
 
 
 @property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+//@property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UILabel *totalAdministrationsLabel;
 //@property (nonatomic, strong) IBOutlet NSManagedObject *managedObject;
 @property (nonatomic, weak) IBOutlet UITextField *stopwatchTextField;

@@ -61,7 +61,7 @@
  
     managedObjectContext=nil;
    
-    tableModel=nil;
+  
     
   
    eventTitleString=nil;
@@ -83,7 +83,7 @@
     
     
     
-    tableModel=nil;
+  
     
     
     
@@ -111,30 +111,33 @@
    
     
    
-    NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
+//    NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
+//    
+//    
+//    
+//    
+//    
+//    // create a spacer
+//    UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
+//                                   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
+//    [buttons addObject:editButton];
+//    
+//    
+//    
+//    
+//    // create a standard "add" button
+//    UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
+//                                  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
+//    addButton.style = UIBarButtonItemStyleBordered;
+//    [buttons addObject:addButton];
+//    
+//    // stick the buttons in the toolbar
+//    self.navigationItem.rightBarButtonItems=buttons;
     
-    
-    
-    
-    
-    // create a spacer
-    UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
-                                   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
-    [buttons addObject:editButton];
-    
-    
-    
-    
-    // create a standard "add" button
-    UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
-                                  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
-    addButton.style = UIBarButtonItemStyleBordered;
-    [buttons addObject:addButton];
-    
-    // stick the buttons in the toolbar
-    self.navigationItem.rightBarButtonItems=buttons;
-    
-    
+ 
+       
+
+   
     
     
     
@@ -299,12 +302,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
-    [self tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger )indexPath.section detailTableViewModel:(SCTableViewModel *)detailTableViewModel];
-    SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+    [self tableViewModel:(SCTableViewModel *)tableModel detailModelCreatedForSectionAtIndex:(NSUInteger )indexPath.section detailTableViewModel:(SCTableViewModel *)detailTableViewModel];
+    SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
     NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-    if (detailTableViewModel.tag==2 ||tableViewModel.tag==2) 
+    if (detailTableViewModel.tag==2 ||tableModel.tag==2) 
     {
         
         
@@ -313,7 +316,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) 
         {
             
-            time_Shared.tableModel=tableModel;
+            time_Shared.tableModel=self.tableViewModel;
             detailTableViewModel.delegate=time_Shared;
             time_Shared.tableModel=detailTableViewModel;
             
@@ -440,7 +443,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         {
             if (tableViewModel.delegate!=clientPresentations_Shared) 
             {
-                clientPresentations_Shared.tableModel=tableModel;
+                clientPresentations_Shared.tableModel=self.tableViewModel;
                 tableViewModel.delegate=clientPresentations_Shared;
                 if (serviceDateCell.label.text.length) 
                 {
