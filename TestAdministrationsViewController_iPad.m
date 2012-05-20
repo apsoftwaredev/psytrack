@@ -376,10 +376,7 @@
 
     
     SCPropertyDefinition *timePropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"time"];
-timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:time_Shared.timeDef
-                                                                                              allowAddingItems:TRUE
-                                                                                            allowDeletingItems:TRUE
-                                                                                              allowMovingItems:FALSE];
+timePropertyDef.attributes = [SCObjectAttributes attributesWithObjectDefinition:time_Shared.timeDef];
     
     timePropertyDef.title=@"Testing Time";
     

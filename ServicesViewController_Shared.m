@@ -163,7 +163,7 @@
     
     [time_Shared setupTheTimeViewUsingSTV];
     
-    
+    time_Shared.delegate=time_Shared;
 
     clientPresentations_Shared=[[ClientPresentations_Shared alloc]init];
     
@@ -305,26 +305,29 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     [self tableViewModel:(SCTableViewModel *)tableModel detailModelCreatedForSectionAtIndex:(NSUInteger )indexPath.section detailTableViewModel:(SCTableViewModel *)detailTableViewModel];
-    SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
-    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-    if (detailTableViewModel.tag==2 ||tableModel.tag==2) 
-    {
-        
-        
-        //NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
-        //NSLog(@"detail model class is %@",[detailTableViewModel class]);
-        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) 
+    if (indexPath.row!=NSNotFound) {
+        SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        if (detailTableViewModel.tag==2 ||tableModel.tag==1) 
         {
             
-            time_Shared.tableModel=self.tableViewModel;
-            detailTableViewModel.delegate=time_Shared;
-            time_Shared.tableModel=detailTableViewModel;
             
+            //NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
+            //NSLog(@"detail model class is %@",[detailTableViewModel class]);
+            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)] &&[cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) 
+            {
+                
+                
+                
+                time_Shared.tableViewModel=detailTableViewModel;
+                time_Shared.tableViewModel.delegate=time_Shared;
+//                tableModel.detailViewController=time_Shared;
+            }
             
-        }
-        
-    }    
-    
+        }    
+
+    }
+       
     
     
     
@@ -561,11 +564,38 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
 }
 
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailModelConfiguredForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-    if (tableViewModel.tag==0||tableViewModel.tag==1) {
+    if (indexPath.row!=NSNotFound) {
+        SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        if (detailTableViewModel.tag==2 ||tableModel.tag==1) 
+        {
+            
+            
+            //NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
+            //NSLog(@"detail model class is %@",[detailTableViewModel class]);
+            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)] &&[cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) 
+            {
+                
+                
+                
+                time_Shared.tableViewModel=detailTableViewModel;
+                time_Shared.tableViewModel.delegate=time_Shared;
+                //                tableModel.detailViewController=time_Shared;
+            }
+            
+        }    
+        
+    }
+
+
+}
+
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    if (tableModel.tag==0||tableModel.tag==1) {
         currentDetailTableViewModel=detailTableViewModel;
         
     }
@@ -573,7 +603,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     if (detailTableViewModel.tag==2) {
         
-        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+        SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         //NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
         if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
@@ -582,15 +612,15 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         }
     }
     
-    if (tableViewModel.tag==2 && tableViewModel.sectionCount ==1) {
+    if (tableModel.tag==2 && tableModel.sectionCount ==1) {
         
         
-        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
+        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:0];
         
         if (section.cellCount>0) 
         {
             
-            SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+            SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
             NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
             //NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
             if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
@@ -610,7 +640,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 }
 
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {
     
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];

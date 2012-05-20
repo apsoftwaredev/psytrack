@@ -26,7 +26,7 @@
 @synthesize timeDef;
 
 @synthesize footerLabel,totalTimeHeaderLabel;
-@synthesize tableModel;
+//@synthesize detailTableModel=detailTableModel_;
 @synthesize totalTimeDate;
 
 
@@ -312,7 +312,7 @@
     
     referenceDate=[counterDateFormatter dateFromString:@"00:00:00"];
     
-    
+    self.delegate=self;
 
     
     return  self;
@@ -353,7 +353,7 @@
     
     
     
-        SCTableViewSection *section=[tableModel sectionAtIndex:0];
+        SCTableViewSection *section=[self.tableViewModel sectionAtIndex:0];
         
    
         SCDateCell *startTimeCell =(SCDateCell *)[section cellAtIndex:0];
@@ -643,7 +643,7 @@
         if (indexPath.section==1) {
             
             
-            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) 
+            if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) 
             {
                 
                 if (![cell viewWithTag:28]) {
@@ -824,7 +824,7 @@
 
 -(NSTimeInterval ) totalBreakTimeInterval{
     
-    SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)[ tableModel sectionAtIndex:1];
+    SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)[ self.tableViewModel sectionAtIndex:1];
  
   
     NSDate *breakStartTime, *breakEndTime,*breakUndefinedTime;
@@ -839,10 +839,22 @@
     [dateFormatClearSeconds setDateFormat:@"H:mm"];
     
     for(id obj in arrayOfObjectsSection.items) { 
+        NSLog(@"items are %@",arrayOfObjectsSection.items);
+        NSLog(@"object in section is%@",obj);
+        if ([obj isKindOfClass:[SCTableViewCell class]]) {
+            SCTableViewCell *cell=(SCTableViewCell *)obj;
+            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+            
+            NSLog(@"cell managed object class is %@",cellManagedObject.class);
+            if ([cellManagedObject respondsToSelector:@selector(entity)]) {
+                breakStartTime=(NSDate *)[obj valueForKey:@"startTime"];
+                breakEndTime=(NSDate *)[obj valueForKey:@"endTime"];
+                breakUndefinedTime=(NSDate *)[obj valueForKey:@"undefinedTime"];
+            }
+        }
         
-        breakStartTime=(NSDate *)[obj valueForKey:@"startTime"];
-        breakEndTime=(NSDate *)[obj valueForKey:@"endTime"];
-        breakUndefinedTime=(NSDate *)[obj valueForKey:@"undefinedTime"];
+        
+       
         
        
         if (breakStartTime && breakStartTime != referenceDate &&breakEndTime &&breakEndTime!=referenceDate) {
@@ -919,7 +931,7 @@
     if(section.headerTitle !=nil)
     {
         
-        if (!(tableViewModel.tag ==2 && index==0 &&sectionManagedObject && [sectionManagedObject.entity.name isEqualToString:@"TimeEntity"]) ) 
+        if (!(tableViewModel.tag ==2 && index==0 &&sectionManagedObject &&[sectionManagedObject respondsToSelector:@selector(entity)] &&[sectionManagedObject.entity.name isEqualToString:@"TimeEntity"]) ) 
         {
             
             
@@ -1083,7 +1095,7 @@
         
        
         
-        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
+        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
            
             if (cell.tag>=0 && cell.tag<4) {
                 if ([cell isKindOfClass:[SCDateCell class]]){
@@ -1153,7 +1165,7 @@
         {
             
                         
-            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) 
+            if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) 
             {
                
                 
@@ -1457,7 +1469,7 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForSectionAtIndex:(NSUInteger)index{
     
     
-    if(tableModel.tag==2 &&index==1)
+    if(self.tableViewModel.tag==2 &&index==1)
         [self calculateTime];
 
     
@@ -1465,10 +1477,10 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didRemoveRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    if(tableModel.tag==2 &&indexPath.section==1)
+    if(self.tableViewModel.tag==2 &&indexPath.section==1)
     {
         [self calculateTime];
-        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:1];
+        SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:1];
         UILabel *breakSectionHeaderLabel=(UILabel *)[section.headerView viewWithTag:60];
         
         
