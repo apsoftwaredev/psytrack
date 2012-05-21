@@ -254,6 +254,7 @@
 		B7F877BB14C9A38900F00C0D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877B914C9A38900F00C0D /* EventKit.framework */; };
 		B7F877BC14C9A38900F00C0D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877BA14C9A38900F00C0D /* EventKitUI.framework */; };
 		E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */; };
+		E71E26AD1569C3920004A793 /* BreakTimeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E71E26AC1569C3920004A793 /* BreakTimeEntity.m */; };
 		E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B76150858D3005B798A /* ABGroupSelectionCell.m */; };
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 		E7516BDC150BF9A2005B798A /* Dan Boice-46.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */; };
@@ -680,6 +681,8 @@
 		B7F877BA14C9A38900F00C0D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		E70B9EFD15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSourcesSCObjectSelectionCell.h; sourceTree = "<group>"; };
 		E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSourcesSCObjectSelectionCell.m; sourceTree = "<group>"; };
+		E71E26AB1569C3920004A793 /* BreakTimeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakTimeEntity.h; sourceTree = "<group>"; };
+		E71E26AC1569C3920004A793 /* BreakTimeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakTimeEntity.m; sourceTree = "<group>"; };
 		E7516B75150858D3005B798A /* ABGroupSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABGroupSelectionCell.h; sourceTree = "<group>"; };
 		E7516B76150858D3005B798A /* ABGroupSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABGroupSelectionCell.m; sourceTree = "<group>"; };
 		E7516B7915085A23005B798A /* PTABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTABGroup.h; sourceTree = "<group>"; };
@@ -1168,6 +1171,8 @@
 				E7516B7A15085A23005B798A /* PTABGroup.m */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
 				37F7CEC915005E7100AD2C3A /* psyTrainTrack.xcdatamodeld */,
+				E71E26AB1569C3920004A793 /* BreakTimeEntity.h */,
+				E71E26AC1569C3920004A793 /* BreakTimeEntity.m */,
 				E78DA6911520B1AD004ABF29 /* icd.xcdatamodeld */,
 			);
 			name = Models;
@@ -1893,6 +1898,7 @@
 				E7FB3AAD1562A4E4000A6782 /* TwoButtonCell.m in Sources */,
 				E7FB3AB31562C867000A6782 /* AddViewABLinkButtonCell.m in Sources */,
 				E7FB3AB61562C888000A6782 /* LookupRemoveLinkButtonCell.m in Sources */,
+				E71E26AD1569C3920004A793 /* BreakTimeEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

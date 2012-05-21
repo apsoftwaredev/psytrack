@@ -52,7 +52,23 @@
     NSString *eventTitleString;
 
     NSString *tableModelClassDefEntity;
-
+    
+    NSTimer *timer;
+    
+    
+    __weak UITextField *stopwatchTextField;
+    StopwatchCell *stopwatchCell;
+    SCTableViewSection *timeSection;
+    UILabel *footerLabel;
+    UILabel *totalTimeHeaderLabel;
+    
+    
+    NSDate *startTime;
+    NSDate *endTime;
+    NSDate *additionalTime;
+    NSDate *timeToSubtract;
+   
+    SCTableViewSection *breakTimeSection;
 
 }
 
@@ -76,7 +92,16 @@
 
 //- (NSArray *) fetchEventsForToday;
 - (IBAction) addEvent:(id)sender;
+@property (strong, nonatomic) IBOutlet  UILabel *totalTimeHeaderLabel;
+@property (strong, nonatomic) IBOutlet  UILabel *footerLabel;
+@property (strong, nonatomic)   NSDate *totalTimeDate;
+@property (strong, nonatomic) IBOutlet SCEntityDefinition *timeDef;
 
-
+-(void)calculateTime;
+-(NSString *)tableViewModel:(SCTableViewModel *)tableViewModel calculateBreakTimeForRowAtIndexPath:(NSIndexPath *)indexPath withBoundValues:(BOOL)useBoundValues;
+-(IBAction)stopwatchStop:(id)sender;
+-(IBAction)stopwatchReset:(id)sender;
+-(void)willDisappear;
+-(NSTimeInterval ) totalBreakTimeInterval;
 
 @end
