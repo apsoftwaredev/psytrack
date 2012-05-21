@@ -451,6 +451,10 @@ timePropertyDef.attributes = [SCObjectAttributes attributesWithObjectDefinition:
     objectModel.autoAssignDelegateForDetailModels=TRUE;
     objectModel.autoAssignDataSourceForDetailModels=TRUE;
     
+    
+    objectModel.enablePullToRefresh = TRUE;
+    objectModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
+    
     self.tableViewModel=objectModel;
     [self updateAdministrationTotalLabel:self.tableViewModel];
 

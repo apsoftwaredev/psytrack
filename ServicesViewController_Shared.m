@@ -397,7 +397,8 @@
     
     
  
-    
+    // Set the view controller's theme
+    self.tableViewModel.theme = [SCTheme themeWithPath:@"ClearBackgroundTheme.sct"];
    
     
    
@@ -419,7 +420,7 @@
         [self.tableView setBackgroundColor:[UIColor clearColor]];
     
     
-    
+  
     
     self.view.backgroundColor=[UIColor clearColor];
     
@@ -936,6 +937,29 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
     }
     
+    if ([SCUtilities is_iPad]) {
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+
+        UIColor *backgroundColor=nil;
+        if(indexPath.row==NSNotFound|| tableModel.tag>0)
+        {
+            backgroundColor=(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor;
+        }
+        else {
+            backgroundColor=[UIColor clearColor];
+        }
+        
+        if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
+            
+            [detailTableViewModel.modeledTableView setBackgroundView:nil];
+            UIView *view=[[UIView alloc]init];
+            [detailTableViewModel.modeledTableView setBackgroundView:view];
+            [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
+            
+            
+        }
+    }
     
     if (detailTableViewModel.tag==2||detailTableViewModel.tag==3) {
         if (tableModel.sectionCount>1)
