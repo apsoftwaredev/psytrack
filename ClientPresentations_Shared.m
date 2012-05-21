@@ -44,11 +44,11 @@
     
     [self.clientPresentationDef removePropertyDefinitionWithName:@"interventionDelivered"];
     //Create the property definition for the affect Mood property in the client Presentatio class
-    SCPropertyDefinition *affectNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"affectNotes"];
+    SCPropertyDefinition *affectNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"affect"];
     
     affectNotesPropertyDef.type=SCPropertyTypeTextView;
     
-    SCPropertyDefinition *assessmentNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"assessmentNotes"];
+    SCPropertyDefinition *assessmentNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"assessment"];
     
     assessmentNotesPropertyDef.type=SCPropertyTypeTextView;
     
@@ -68,7 +68,7 @@
     sleepHoursNightlyPropertyDef.autoValidate=NO;
     
     //define a property group
-    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"affectNotes", @"appearanceNotes",  @"assessmentNotes", @"attentionNotes", @"attitudeNotes", @"improvement", @"interpersonalNotes", @"notableBehaviors", @"notableImagry",   @"plan",  @"rapport",  @"sensoryNotes", @"sleepHoursNightly",    @"sleepQuality",@"psychomotor", @"speechLanguage", @"vision",     nil ]];
+    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"affect", @"appearance",  @"assessment", @"attention", @"attitude", @"improvement", @"interpersonal", @"behaviors", @"imagry",   @"plan",  @"rapport",  @"sensory", @"sleepHoursNightly",    @"sleepQuality",@"psychomotor", @"speechLanguage", @"vision", @"cultural",    nil ]];
     [self.clientPresentationDef.propertyGroups addGroup:notesGroup];
     
     SCPropertyGroup *orientationGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"orientedToBody", @"orientedToPerson",  @"orientedToPlace", @"orientedToTime",    nil ]];
@@ -166,7 +166,19 @@
 
         
     }
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"happinessLevel"]; 
+    NSDictionary *happinessLevelScaleDataBindings = [NSDictionary 
+                                                     dictionaryWithObjects:[NSArray arrayWithObjects:@"happinessLevel",@"Happiness Level",nil] 
+                                                     forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
+    SCCustomPropertyDefinition *happinessLevelScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"happinessLevelScaleData"
+                                                                                                uiElementNibName:scaleDataCellNibName
+                                                                                                  objectBindings:happinessLevelScaleDataBindings];
+	
     
+    
+    [self.clientPresentationDef addPropertyDefinition:happinessLevelScaleDataProperty];
+    
+
     [self.clientPresentationDef removePropertyDefinitionWithName:@"comfortLevel"];
        
     NSDictionary *comfortLevelScaleDataBindings = [NSDictionary 
@@ -193,6 +205,55 @@
     
     [self.clientPresentationDef addPropertyDefinition:stressLevelScaleDataProperty];
     
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"liabilityRisk"];
+    NSDictionary *liabilityRiskScaleDataBindings = [NSDictionary 
+                                                  dictionaryWithObjects:[NSArray arrayWithObjects:@"liabilityRisk",@"Liability Risk Level", nil] 
+                                                  forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
+    SCCustomPropertyDefinition *liabilityRiskScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"liabilityRiskScaleData"
+                                                                                             uiElementNibName:scaleDataCellNibName
+                                                                                               objectBindings:liabilityRiskScaleDataBindings];
+	
+    
+    
+    [self.clientPresentationDef addPropertyDefinition:liabilityRiskScaleDataProperty];
+    
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"safetyRisk"];
+    NSDictionary *safetyRiskScaleDataBindings = [NSDictionary 
+                                                    dictionaryWithObjects:[NSArray arrayWithObjects:@"safetyRisk",@"Safety Risk Level", nil] 
+                                                    forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
+    SCCustomPropertyDefinition *safetyRiskScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"safetyRiskScaleData"
+                                                                                               uiElementNibName:scaleDataCellNibName
+                                                                                                 objectBindings:safetyRiskScaleDataBindings];
+	
+    
+    
+    [self.clientPresentationDef addPropertyDefinition:safetyRiskScaleDataProperty];
+    
+    
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"progressClinician"];
+    NSDictionary *progressClinicianScaleDataBindings = [NSDictionary 
+                                                 dictionaryWithObjects:[NSArray arrayWithObjects:@"progressClinician",@"Progress (Clinician)", nil] 
+                                                 forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
+    SCCustomPropertyDefinition *progressClinicianScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"progressClinicianScaleData"
+                                                                                            uiElementNibName:scaleDataCellNibName
+                                                                                              objectBindings:progressClinicianScaleDataBindings];
+	
+    
+    
+    [self.clientPresentationDef addPropertyDefinition:progressClinicianScaleDataProperty];
+    
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"progressClient"];
+    NSDictionary *progressClientScaleDataBindings = [NSDictionary 
+                                                        dictionaryWithObjects:[NSArray arrayWithObjects:@"progressClient",@"Progress (Client)", nil] 
+                                                        forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
+    SCCustomPropertyDefinition *progressClientScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"progressClientScaleData"
+                                                                                                   uiElementNibName:scaleDataCellNibName
+                                                                                                     objectBindings:progressClientScaleDataBindings];
+	
+    
+    
+    [self.clientPresentationDef addPropertyDefinition:progressClientScaleDataProperty];
+
      [self.clientPresentationDef removePropertyDefinitionWithName:@"alliance"];
     
     NSDictionary *allianceScaleDataBindings = [NSDictionary 
@@ -207,19 +268,7 @@
     [self.clientPresentationDef addPropertyDefinition:allianceScaleDataProperty];
     
 
-      [self.clientPresentationDef removePropertyDefinitionWithName:@"happinessLevel"]; 
-    NSDictionary *happinessLevelScaleDataBindings = [NSDictionary 
-                                               dictionaryWithObjects:[NSArray arrayWithObjects:@"happinessLevel",@"Happiness Level",nil] 
-                                               forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
-    SCCustomPropertyDefinition *happinessLevelScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"happinessLevelScaleData"
-                                                                                      uiElementNibName:scaleDataCellNibName
-                                                                                        objectBindings:happinessLevelScaleDataBindings];
-	
-    
-    
-    [self.clientPresentationDef addPropertyDefinition:happinessLevelScaleDataProperty];
-    
-    [self.clientPresentationDef removePropertyDefinitionWithName:@"energyLevel"]; 
+        [self.clientPresentationDef removePropertyDefinitionWithName:@"energyLevel"]; 
     NSDictionary *energyLevelScaleDataBindings = [NSDictionary 
                                                       dictionaryWithObjects:[NSArray arrayWithObjects:@"energyLevel",@"Energy Level", nil ] 
                                                      forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
@@ -231,18 +280,30 @@
     
     [self.clientPresentationDef addPropertyDefinition:energyLevelScaleDataProperty];
    
-    [self.clientPresentationDef removePropertyDefinitionWithName:@"hearingLevel"]; 
-    NSDictionary *hearingLevelScaleDataBindings = [NSDictionary 
-                                                  dictionaryWithObjects:[NSArray arrayWithObjects:@"hearingLevel",@"Hearing Level", nil ] 
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"communicativeAbility"]; 
+    NSDictionary *communicativeAbilityScaleDataBindings = [NSDictionary 
+                                                  dictionaryWithObjects:[NSArray arrayWithObjects:@"communicativeAbility",@"Communicative Ability", nil ] 
                                                   forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
-    SCCustomPropertyDefinition *hearingLevelScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"hearingLevelScaleData"
+    SCCustomPropertyDefinition *commnicativeAbilityScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"communicativeAbilityScaleData"
                                                                                          uiElementNibName:scaleDataCellNibName
-                                                                                           objectBindings:hearingLevelScaleDataBindings];
+                                                                                           objectBindings:communicativeAbilityScaleDataBindings];
 	
     
     
-    [self.clientPresentationDef addPropertyDefinition:hearingLevelScaleDataProperty];
+    [self.clientPresentationDef addPropertyDefinition:commnicativeAbilityScaleDataProperty];
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"hopeLevel"]; 
     
+    NSDictionary *hopeLevelScaleDataBindings = [NSDictionary 
+                                                           dictionaryWithObjects:[NSArray arrayWithObjects:@"hopeLevel",@"Hope Level", nil ] 
+                                                           forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
+    SCCustomPropertyDefinition *hopeLevelScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"hopeLevelScaleData"
+                                                                                                     uiElementNibName:scaleDataCellNibName
+                                                                                                       objectBindings:hopeLevelScaleDataBindings];
+	
+    
+    
+    [self.clientPresentationDef addPropertyDefinition:hopeLevelScaleDataProperty];
+
     [self.clientPresentationDef removePropertyDefinitionWithName:@"painLevel"];
     NSDictionary *painLevelScaleDataBindings = [NSDictionary 
                                                    dictionaryWithObjects:[NSArray arrayWithObjects:@"painLevel",@"Pain Level", nil ] 
@@ -257,7 +318,7 @@
     
      [self.clientPresentationDef removePropertyDefinitionWithName:@"sexualSatisfaction"];
     NSDictionary *sexualSatisfactionScaleDataBindings = [NSDictionary 
-                                                dictionaryWithObjects:[NSArray arrayWithObjects:@"sexualSatisfaction",@"Sexual Satisfaction", nil ] 
+                                                dictionaryWithObjects:[NSArray arrayWithObjects:@"sexualSatisfaction",@"Sex Life Satisfaction Level", nil ] 
                                                 forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
     SCCustomPropertyDefinition *sexualSatisfactionScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"sexualSatisfactionScaleData"
                                                                                        uiElementNibName:scaleDataCellNibName
@@ -267,18 +328,18 @@
     
     [self.clientPresentationDef addPropertyDefinition:sexualSatisfactionScaleDataProperty];
     
-    [self.clientPresentationDef removePropertyDefinitionWithName:@"trust"];
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"copingLevel"];
 
-    NSDictionary *trustScaleDataBindings = [NSDictionary 
-                                                           dictionaryWithObjects:[NSArray arrayWithObjects:@"trust",@"Trust Level", nil ] 
+    NSDictionary *copingLevelScaleDataBindings = [NSDictionary 
+                                                           dictionaryWithObjects:[NSArray arrayWithObjects:@"copingLevel",@"Coping Level", nil ] 
                                                            forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
-    SCCustomPropertyDefinition *trustScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"trustScaleData"
+    SCCustomPropertyDefinition *copingLevelScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"copingLevelScaleData"
                                                                                                   uiElementNibName:scaleDataCellNibName
-                                                                                                    objectBindings:trustScaleDataBindings];
+                                                                                                    objectBindings:copingLevelScaleDataBindings];
 	
     
     
-    [self.clientPresentationDef addPropertyDefinition:trustScaleDataProperty];
+    [self.clientPresentationDef addPropertyDefinition:copingLevelScaleDataProperty];
     [self.clientPresentationDef removePropertyDefinitionWithName:@"symptomSeverity"];
     
     NSDictionary *symptomSeverityScaleDataBindings = [NSDictionary 
@@ -309,10 +370,15 @@
     [self.clientPresentationDef removePropertyDefinitionWithName:@"suicideHistory"];
     [self.clientPresentationDef removePropertyDefinitionWithName:@"order"];
     [self.clientPresentationDef removePropertyDefinitionWithName:@"testSessionDelivered"];
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"homicideIdeation"];
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"homicidePlan"];
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"homicideMeans"];
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"homicideHistory"];
+    
      [self.clientPresentationDef removePropertyDefinitionWithName:@"client"];
     NSDictionary *suicidalityDataBindings = [NSDictionary 
-                                             dictionaryWithObjects:[NSArray arrayWithObjects:@"suicideIdeation",@"suicidePlan",@"suicideMeans", @"suicideHistory",    nil ] 
-                                             forKeys:[NSArray arrayWithObjects:@"20",@"21",@"22",@"23",nil]]; // 20,21,22,23 are the binding keys 
+                                             dictionaryWithObjects:[NSArray arrayWithObjects:@"suicideIdeation",@"suicidePlan",@"suicideMeans", @"suicideHistory", @"suicide",   nil ] 
+                                             forKeys:[NSArray arrayWithObjects:@"20",@"21",@"22",@"23",@"31",nil]]; // 20,21,22,23 are the binding keys 
     SCCustomPropertyDefinition *suicidalityDataProperty = [SCCustomPropertyDefinition definitionWithName:@"suicidalityData"
                                                                                     uiElementNibName:@"SuicidalityCell"
                                                                                       objectBindings:suicidalityDataBindings];
@@ -320,6 +386,21 @@
     
     
     [self.clientPresentationDef addPropertyDefinition:suicidalityDataProperty];
+   
+    
+    NSDictionary *homicidalityDataBindings = [NSDictionary 
+                                             dictionaryWithObjects:[NSArray arrayWithObjects:@"homicideIdeation",@"homicidePlan",@"homicideMeans", @"homicideHistory", @"homicide",   nil ] 
+                                             forKeys:[NSArray arrayWithObjects:@"20",@"21",@"22",@"23",@"31",nil]]; // 20,21,22,23 are the binding keys 
+    SCCustomPropertyDefinition *homicidalityDataProperty = [SCCustomPropertyDefinition definitionWithName:@"homicidalityData"
+                                                                                        uiElementNibName:@"SuicidalityCell"
+                                                                                          objectBindings:homicidalityDataBindings];
+	
+    
+    
+    [self.clientPresentationDef addPropertyDefinition:homicidalityDataProperty];
+    
+
+    
     
     //Create a property definition for the clientDesc property.
     SCPropertyDefinition *clientDescPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"clientsDesc"];
@@ -385,7 +466,7 @@
 	
     
     //Create the property definition for the notes property in the clientPresentation class
-    SCPropertyDefinition *clientPresentationNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"notes"];
+    SCPropertyDefinition *clientPresentationNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"otherNotes"];
     
     //set the clientPresentationNotesPropertyDef property definition type to a Text View Cell
     clientPresentationNotesPropertyDef.type = SCPropertyTypeTextView;
@@ -398,11 +479,11 @@
     [self.clientPresentationDef.propertyGroups insertGroup:mainGroup atIndex:0];
     
     //define a property group
-    SCPropertyGroup *clientRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Subjective Ratings" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"comfortLevelscaleData", @"stressLevelScaleData", @"happinessLevelScaleData",  @"energyLevelScaleData",  @"hearingLevelScaleData",  @"painLevelScaleData", @"sexualSatisfactionScaleData", @"trustScaleData",  @"symptomSeverityScaleData",  @"suicidalityData",       nil]];
+    SCPropertyGroup *clientRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Subjective Ratings" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"happinessLevelScaleData",@"progressClientScaleData",@"comfortLevelscaleData", @"stressLevelScaleData",  @"copingLevelScaleData", @"hopeLevelScaleData", @"energyLevelScaleData",  @"communicativeAbilityScaleData",  @"painLevelScaleData", @"sexualSatisfactionScaleData",  @"symptomSeverityScaleData",  @"suicidalityData", @"homicidalityData",      nil]];
     [self.clientPresentationDef.propertyGroups insertGroup:clientRatingsGroup atIndex:1];
     
     //define a property group
-    SCPropertyGroup *clinicianRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Clinician Subjective Ratings" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"allianceScaleData",   @"depthScaleData",      nil]];
+    SCPropertyGroup *clinicianRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Clinician Subjective Ratings" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"allianceScaleData", @"progressClinicianScaleData",  @"depthScaleData", @"safetyRisk",@"liabilityRiskScaleData", @"safetyRiskScaleData",    nil]];
     [self.clientPresentationDef.propertyGroups insertGroup:clinicianRatingsGroup atIndex:2];
     
     //define a property group
@@ -410,7 +491,7 @@
     [self.clientPresentationDef.propertyGroups addGroup:clientDescGroup];
     
     //define a property group
-    SCPropertyGroup *clientPresentationNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"notes", nil]];
+    SCPropertyGroup *clientPresentationNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"otherNotes", nil]];
     
     // add the clientPresentationNotesGroup property group to the clientPresentation class. 
     [self.clientPresentationDef.propertyGroups addGroup:clientPresentationNotesGroup];
@@ -419,20 +500,24 @@
    
     
     //Create a property definition for the appearanceNotes property.
-    SCPropertyDefinition *appearanceNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"appearanceNotes"];
+    SCPropertyDefinition *appearanceNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"appearance"];
     
     //set the appearanceNotes property definition type to a Text View Cell
     appearanceNotesPropertyDef.type = SCPropertyTypeTextView;
     
     
     //Create a property definition for the attentionNotes property.
-    SCPropertyDefinition *attentionNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"attentionNotes"];
-    
+    SCPropertyDefinition *attentionNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"attention"];
     //set the attentionNotes property definition type to a Text View Cell
     attentionNotesPropertyDef.type = SCPropertyTypeTextView;
     
+    //Create a property definition for the cultural property.
+    SCPropertyDefinition *culturalPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"cultural"];
+    //set the cultural property definition type to a Text View Cell
+    culturalPropertyDef.type = SCPropertyTypeTextView;
+    
     //Create a property definition for the attitudeNotes property.
-    SCPropertyDefinition *attitudeNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"attitudeNotes"];
+    SCPropertyDefinition *attitudeNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"attitude"];
     
     //set the attitudeNotes property definition type to a Text View Cell
     attitudeNotesPropertyDef.type = SCPropertyTypeTextView;
@@ -454,19 +539,19 @@
   
     
     //Create a property definition for the notableBehaviors property.
-    SCPropertyDefinition *notableBehaviorsPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"notableBehaviors"];
+    SCPropertyDefinition *notableBehaviorsPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"behaviors"];
     
     //set the notableBehaviors property definition type to a Text View Cell
     notableBehaviorsPropertyDef.type = SCPropertyTypeTextView;
     
     //Create a property definition for the notableImagry property.
-    SCPropertyDefinition *notableImagryPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"notableImagry"];
+    SCPropertyDefinition *notableImagryPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"imagry"];
     
     //set the notableImagry property definition type to a Text View Cell
     notableImagryPropertyDef.type = SCPropertyTypeTextView;
     
     //Create a property definition for the interpersonalNotes property.
-    SCPropertyDefinition *interpersonalNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"interpersonalNotes"];
+    SCPropertyDefinition *interpersonalNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"interpersonal"];
     
     //set the interpersonalNotes property definition type to a Text View Cell
     interpersonalNotesPropertyDef.type = SCPropertyTypeTextView;
@@ -594,7 +679,7 @@
 //    sleepQuality
 //    suicidality
 //    symptomSeverity
-//    trust
+//    copingLevel
 //    vision
 //    depth
 //    weight
@@ -842,8 +927,12 @@ if(section.headerTitle !=nil)
         else if (!clientDateOfBirth)
         {
         
+            if (wechslerAgeCell&&[wechslerAgeCell respondsToSelector:@selector(label) ]) {
+            
             wechslerAgeCell.label.text=[NSString stringWithString:@"no birthdate"];
             actualAgeCell.label.text=[NSString stringWithString:@"no birthdate"];
+                
+            }
         }
         else
         {

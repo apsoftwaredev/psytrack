@@ -17,12 +17,20 @@
  */
 #import <UIKit/UIKit.h>
 
-@interface SuicidaltiyCell : SCControlCell {
+@interface SuicidaltiyCell : SCCustomCell {
     BOOL suicidePlan;
     BOOL suicideIdeation;
     BOOL suicideMeans;
     BOOL suicideHistory;
     NSTimer *timer;
+    
+    
+    NSString *historyKeyString;
+    NSString *ideationKeyString;
+    NSString *planKeyString;
+    NSString *meansKeyString;
+    
+    
 }
 
 
@@ -35,6 +43,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *planOnButton;
 @property (weak, nonatomic) IBOutlet UIButton *meansOnButton;
 @property (weak, nonatomic) IBOutlet UIButton *historyOnButton;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
 -(IBAction)ideationButtonTapped:(id)sender;
 -(IBAction)planButtonTapped:(id)sender;
 -(IBAction)meansButtonTapped:(id)sender;

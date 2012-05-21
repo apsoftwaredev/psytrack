@@ -18,7 +18,7 @@
 #import "SuicidaltiyCell.h"
 
 @implementation SuicidaltiyCell
-@synthesize ideationButton,meansButton,planButton,historyButton,ideationOnButton,meansOnButton,planOnButton,historyOnButton;
+@synthesize ideationButton,meansButton,planButton,historyButton,ideationOnButton,meansOnButton,planOnButton,historyOnButton,titleLabel;
 
 
 - (void)performInitialization 
@@ -34,13 +34,25 @@
 {
     [super loadBindingsIntoCustomControls];
     
+    NSString *riskType=[self.objectBindings valueForKey:@"31"];
     
+    if ([riskType isEqualToString:@"suicide"]) {
+        self.titleLabel.text=@"Suicide";
     
+    }
+    else if ([riskType isEqualToString:@"homicide"]) {
+        self.titleLabel.text=@"Homicide";
+    }
+    
+    historyKeyString=[riskType stringByAppendingString:@"History"];
+    ideationKeyString =[riskType stringByAppendingString:@"Ideation"];
+    planKeyString=[riskType stringByAppendingString:@"Plan"];
+    meansKeyString=[riskType stringByAppendingString:@"Means"];
        
-   suicideHistory = [[self.boundObject valueForKey:@"suicideHistory"]boolValue];
-    suicideMeans = [[self.boundObject valueForKey:@"suicideMeans"]boolValue];
-    suicideIdeation = [[self.boundObject valueForKey:@"suicideIdeation"]boolValue];
-    suicidePlan = [[self.boundObject valueForKey:@"suicidePlan"]boolValue];
+   suicideHistory = [[self.boundObject valueForKey:historyKeyString]boolValue];
+    suicideMeans = [[self.boundObject valueForKey:meansKeyString]boolValue];
+    suicideIdeation = [[self.boundObject valueForKey:ideationKeyString]boolValue];
+    suicidePlan = [[self.boundObject valueForKey:planKeyString]boolValue];
     
     ideationOnButton.hidden=!suicideIdeation;
     meansOnButton.hidden=!suicideMeans;
@@ -166,7 +178,7 @@
 		return;
 	
 	
-    NSDictionary *suicideDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithBool:suicidePlan],  [NSNumber numberWithBool:suicideIdeation], [NSNumber numberWithBool:suicideMeans],[NSNumber numberWithBool:suicideHistory], nil] forKeys:[NSArray arrayWithObjects:@"suicidePlan", @"suicideIdeation", @"suicideMeans", @"suicideHistory", nil]];
+    NSDictionary *suicideDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSNumber numberWithBool:suicidePlan],  [NSNumber numberWithBool:suicideIdeation], [NSNumber numberWithBool:suicideMeans],[NSNumber numberWithBool:suicideHistory], nil] forKeys:[NSArray arrayWithObjects:planKeyString, ideationKeyString, meansKeyString, historyKeyString, nil]];
     
     [self.boundObject setValuesForKeysWithDictionary:suicideDictionary];  
     //    NSDictionary *observerDictionary=[NSDictionary dictionaryWithObject:addStopwatch forKey:@"addStopwatch"];
