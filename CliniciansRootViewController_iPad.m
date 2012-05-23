@@ -654,33 +654,13 @@
 
     
     [super tableViewModel:tableModel detailViewWillPresentForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
+ 
     if (tableModel.tag==0 && indexPath.row==NSNotFound) {
         addingClinician=YES;
     }
    
 
-    UIColor *backgroundColor=nil;
-    if(indexPath.row==NSNotFound|| tableModel.tag>0)
-    {
-       backgroundColor=(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor;
-    }
-    else {
-        backgroundColor=[UIColor clearColor];
-    }
-        
-        if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
             
-                [detailTableViewModel.modeledTableView setBackgroundView:nil];
-                UIView *view=[[UIView alloc]init];
-                [detailTableViewModel.modeledTableView setBackgroundView:view];
-                [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
-                
-            
-        }
-        
-        
 //        UIViewController *logoViewController=[[LogoBackgroundViewController alloc]initWithNibName:@"LogoBackgroundViewController" bundle:[NSBundle mainBundle] ]; 
         
         

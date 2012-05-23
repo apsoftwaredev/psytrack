@@ -283,7 +283,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     [medicationDef removePropertyDefinitionAtIndex:productNoIndex];
     
     
-    SCEntityDefinition *medicationReviewDef =[SCEntityDefinition definitionWithEntityName:@"MedicationReviewEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects: @"logDate",@"dosage",@"doseChange",@"sxChange",@"lastDose", @"adherance",@"sideEffects", @"nextReview", @"notes" , nil]];
+    SCEntityDefinition *medicationReviewDef =[SCEntityDefinition definitionWithEntityName:@"MedicationReviewEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects: @"logDate",@"dosage",@"doseChange",@"sxChange",@"lastDose", @"adherence",@"sideEffects", @"nextReview", @"notes" , nil]];
     
     
     
@@ -370,9 +370,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                                        datePickerMode:UIDatePickerModeDate
                                                         displayDatePickerInDetailView:NO];
     
-    SCCustomPropertyDefinition *clearDiscontinuedButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"clearDiscontinued" uiElementClass:[ButtonCell class] objectBindings:nil];
-    [medicationDef insertPropertyDefinition:clearDiscontinuedButtonProperty atIndex:4];
-    
+       
    
     //Create a class definition for the Additional Symptoms Entity
     SCEntityDefinition *symptomDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalSymptomEntity" 
@@ -480,7 +478,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //Create the property definition for the date property in the medicatioReviewnDef class  definition
     SCPropertyDefinition *medLogDatePropertyDef = [medicationReviewDef propertyDefinitionWithName:@"logDate"];
     
-    medLogDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateTimeDateFormatter
+    medLogDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
                                                                        datePickerMode:UIDatePickerModeDate
                                                         displayDatePickerInDetailView:NO];
     
@@ -614,22 +612,22 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 //    
     
     
-    //Create a property definition for the adherance property.
-    SCPropertyDefinition *adherancePropertyDef = [medicationReviewDef propertyDefinitionWithName:@"adherance"];
+    //Create a property definition for the adherence property.
+    SCPropertyDefinition *adherencePropertyDef = [medicationReviewDef propertyDefinitionWithName:@"adherence"];
     
-    //set the adherance property definition type to a selectiong Cell
-    adherancePropertyDef.type = SCPropertyTypeSelection;
+    //set the adherence property definition type to a selectiong Cell
+    adherencePropertyDef.type = SCPropertyTypeSelection;
     
        
     //set the selection attributes and define the list of items to be selected
-    adherancePropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Refuses", @"Poor", @"Needs Assistance",@"Frequently Forgets",@"Adequate",@"Good",@"Excellent", nil] 
+    adherencePropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Refuses", @"Poor", @"Needs Assistance",@"Frequently Forgets",@"Adequate",@"Good",@"Excellent", nil] 
                                                             allowMultipleSelection:YES
                                                                   allowNoSelection:YES
                                                              autoDismissDetailView:NO hideDetailViewNavigationBar:NO];
     
     
     //define a property group
-    SCPropertyGroup *followUpGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"doseChange",   @"sxChange",@"lastDose", @"adherance",@"sideEffects", @"satisfaction", nil]];
+    SCPropertyGroup *followUpGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"doseChange",   @"sxChange",@"lastDose", @"adherence",@"sideEffects", @"satisfaction", nil]];
     
     // add the followup property group to the medication Review class. 
     [medicationReviewDef.propertyGroups addGroup:followUpGroup];

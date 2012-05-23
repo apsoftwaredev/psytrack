@@ -690,13 +690,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 
             }
             
-            if (cell.tag==4&&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
-                
-            {
-                
-                UIButton *button=(UIButton *)[cell viewWithTag:300];
-                [button setTitle:@"Clear Discontinued Date" forState:UIControlStateNormal];
-            }
+            
             //NSLog(@"cell kind of class is %@",cell.class);
             if ([cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]) 
                 
@@ -1325,25 +1319,6 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 
       
         
-        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"MedicationEntity"]){
-            
-            SCDateCell *discontinuedCell =(SCDateCell *) [section cellAtIndex:3];
-           
-           
-            //NSLog(@"custom button tapped discontinued cell text is %@",discontinuedCell.textLabel.text);
-            //NSLog(@"key bindings value is %@",[discontinuedCell.keyBindings valueForKey:@"discontinued"]);
-            //NSLog(@"tabel model key bindings value is");
-            
-            if (discontinuedCell.label.text.length) {
-            
-                [discontinuedCell.boundObject setNilValueForKey:@"discontinued"];
-                [discontinuedCell reloadBoundValue]; 
-                
-            }
-                               
-                
-            
-        }
         }}
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

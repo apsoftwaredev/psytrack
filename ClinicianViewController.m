@@ -62,12 +62,12 @@
     
     totalCliniciansLabel=nil;
     
-    self.tableView.backgroundView=nil;
+   
     filterByPrescriber=NO;
     isInDetailSubview=NO;
     clinicianObjectSelectionCell=nil;
    sendingViewController=nil;
-    self.view=nil;
+ ;
     currentlySelectedClinician=nil;
     currentlySelectedCliniciansArray=nil;
     filterPredicate=nil;
@@ -113,8 +113,25 @@
    
     if (isInDetailSubview) {
         objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef]; 
-      
-      
+        objectsModel.tag=0;
+        objectsModel.delegate=self;
+       PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+            [self.view setBackgroundColor:appDelegate.window.backgroundColor];
+            // Set the view controller's theme
+        
+        
+        if ([SCUtilities is_iPad]) {
+            
+            
+            [objectsModel.modeledTableView setBackgroundView:nil];
+            UIView *view=[[UIView alloc]init];
+            [objectsModel.modeledTableView setBackgroundView:view];
+        }
+        
+        [objectsModel.modeledTableView setBackgroundColor:appDelegate.window.backgroundColor];
+        self.tableViewModel.theme = [SCTheme themeWithPath:@"ClearBackgroundTheme.sct"];
+
+        
        
 
         if (filterPredicate) {
@@ -127,7 +144,7 @@
         NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
         
         
-        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped)];
+        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTappedInDetailSubView)];
         [buttons addObject:doneButton];
         
         // create a spacer
@@ -381,11 +398,11 @@
 
 
 
--(void)doneButtonTappedL{
+-(void)doneButtonTappedInDetailSubView{
     
     //NSLog(@"done Button tapped");
-    if (isInDetailSubview &&self.tableViewModel.sectionCount) {
-        SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
+    if (isInDetailSubview &&objectsModel.sectionCount) {
+        SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:0];
         //NSLog(@"section class is %@",[section class]);
 //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 //        
@@ -726,9 +743,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     //NSLog(@"scope changed");
     if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
     {
-        SCArrayOfObjectsModel *objectsModel = (SCArrayOfObjectsModel *)tableViewModel;
-    
         
+    
+        SCDataFetchOptions *dataFetchOptions=(SCDataFetchOptions *)objectsModel.dataFetchOptions;
         [self.searchBar setSelectedScopeButtonIndex:selectedScope];
         
         switch (selectedScope) {
@@ -745,20 +762,22 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     scopeFilter= [NSPredicate predicateWithFormat:@"myCurrentSupervisor == %i OR myPastSupervisor==%i", TRUE, TRUE];
                     
                 }
-//                objectsModel.itemsPredicate = scopeFilter;
+                
+                [dataFetchOptions setFilterPredicate:scopeFilter];
+               
                 
                     
                 //NSLog(@"case 1");
             }
                 break;
-            case 2: //Female
-//                objectsModel.itemsPredicate = [NSPredicate predicateWithFormat:@"atMyCurrentSite == %i OR myInformation==%i", TRUE, TRUE];
+            case 2: 
+               [dataFetchOptions setFilterPredicate:(NSPredicate *)[NSPredicate predicateWithFormat:@"atMyCurrentSite == %i OR myInformation==%i", TRUE, TRUE]];
                 
                 //NSLog(@"case 2");
                 break;                
   
             default:
-//                 objectsModel.itemsPredicate = nil;
+                 [dataFetchOptions setFilterPredicate:nil];
                 //NSLog(@"case default");
                 
                 break;
@@ -799,7 +818,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(void)updateClinicianTotalLabel{
 
  
-    if (self.tableViewModel.tag==0) 
+    if (objectsModel.tag==0) 
     {
         int cellCount=0;
         if (self.tableViewModel.sectionCount >0){
@@ -843,13 +862,17 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index{
+-(void)tableViewModel:(SCTableViewModel *)tableModel didAddSectionAtIndex:(NSUInteger)index{
 
-    [super tableViewModel:tableViewModel didAddSectionAtIndex:index];
+    [super tableViewModel:tableModel didAddSectionAtIndex:index];
     
-    SCTableViewSection *section=[tableViewModel sectionAtIndex:index];
+    SCTableViewSection *section=[tableModel sectionAtIndex:index];
     
-    if (tableViewModel.tag==0) {
+    if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+        tableModel.delegate=self;
+    }
+    
+    if (tableModel.tag==0) {
         NSLog(@"t %@",section.class);
     
         if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {

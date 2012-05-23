@@ -1157,6 +1157,10 @@
                                                object:nil];
 
     
+    tableModel_.enablePullToRefresh = YES;
+    tableModel_.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
+    
+    
 }
 
 - (void)viewDidUnload

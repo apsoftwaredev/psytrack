@@ -485,59 +485,6 @@
     return YES;
 }
 
-- (void)tableViewModel:(SCArrayOfItemsModel *)tableViewModel
-searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
-{
-    
-    //NSLog(@"scope changed");
-    
-    
-    
-    
-    if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
-    {
-        SCArrayOfObjectsModel *objectsModel = (SCArrayOfObjectsModel *)tableViewModel;
-        
-        NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit ) fromDate:[NSDate date]];
-        //create a date with these components
-        NSDate *startDate = [calendar dateFromComponents:components];
-        [components setMonth:1];
-        [components setDay:0]; //reset the other components
-        [components setYear:0]; //reset the other components
-        NSDate *endDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
-        //NSLog(@"start dtate %@",startDate);
-        //NSLog(@"end date is %@", endDate);
-        
-        NSPredicate *currentMonthPredicate = [NSPredicate predicateWithFormat:@"((dateOfService > %@) AND (dateOfService <= %@)) || (dateOfService = nil)",startDate,endDate];
-        NSPredicate *paperworkIncompletePredicate = [NSPredicate predicateWithFormat:@"paperwork == %@",[NSNumber numberWithInteger: 0]];
-        
-        
-        [self.searchBar setSelectedScopeButtonIndex:selectedScope];
-        
-        switch (selectedScope) {
-            case 1: //Male
-//                objectsModel.itemsPredicate = nil;
-                //NSLog(@"case default");
-                break;
-                
-            case 2: //Male
-//                objectsModel.itemsPredicate = paperworkIncompletePredicate;
-                //NSLog(@"case paperwork Incomplete");
-                break;                
-                
-            default:
-//                objectsModel.itemsPredicate = currentMonthPredicate;
-                //NSLog(@"case 1");
-                
-                
-                break;
-        }
-        [objectsModel reloadBoundValues];
-        [objectsModel.modeledTableView reloadData]; 
-            }
-}
-
 
 
 
@@ -1183,16 +1130,17 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         [dateFormatter setDateFormat:@"MMM d, yyyy"];
         //Set the date attributes in the  property definition and make it so the date picker appears 
         cell.textLabel.text= [dateFormatter stringFromDate:[cellManagedObject valueForKey:@"dateOfService"]];
-        if (cellManagedObject) {
+        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]) {
             
             
             
             //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
             if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
                 
-                //NSLog(@"entity name is %@",cellManagedObject.entity.name);
+            NSLog(@"entity name is %@",cellManagedObject.entity.name);
                 //identify the Languages Spoken table
-                if ([cellManagedObject.entity.name isEqualToString:tableModelClassDefEntity]) {
+                
+                if ([cellManagedObject.entity.name isEqualToString:@"TestingSessionDeliveredEntity"]) {
                     //NSLog(@"the managed object entity is Languag spoken Entity");
                     //get the value of the primaryLangugage attribute
                     NSNumber *paperworkNumber=(NSNumber *)[cellManagedObject valueForKey:@"paperwork"];

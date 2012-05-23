@@ -51,7 +51,7 @@ NSManagedObjectContext *managedObjectContext;
     
     UIView *iPadPersonBackgroundView_;
     BOOL addingClinician;
-  
+  BOOL isInDetailSubview;
 }
 
 

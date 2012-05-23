@@ -21,7 +21,7 @@
 #import "ClinicianEntity.h"
 #import "CliniciansViewController_Shared.h"
 #import "ClinicianSelectionCell.h"
-@interface ClinicianViewController : CliniciansViewController_Shared <SCTableViewModelDataSource, SCTableViewModelDelegate,UIAlertViewDelegate, UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate> {
+@interface ClinicianViewController : CliniciansViewController_Shared <SCTableViewModelDataSource, SCTableViewModelDelegate,SCViewControllerDelegate, UIAlertViewDelegate, UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate> {
      
  
   	 UISearchBar *searchBar;
@@ -29,7 +29,7 @@
 	 SCArrayOfObjectsModel *objectsModel;
      UILabel *totalCliniciansLabel;
        
-    BOOL isInDetailSubview;
+    
     BOOL filterByPrescriber;
    
     ClinicianSelectionCell *clinicianObjectSelectionCell;

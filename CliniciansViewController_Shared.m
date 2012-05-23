@@ -2577,48 +2577,58 @@
 //    
 //}
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     SCTableViewCell *cell = nil;
     if(indexPath.row != NSNotFound)
-        cell = [tableViewModel cellAtIndexPath:indexPath];
+        cell = [tableModel cellAtIndexPath:indexPath];
 
-    if (cell && (tableViewModel.tag==0||(tableViewModel.tag==1&&cell.tag==429))) {
+    if (cell && (tableModel.tag==0||(tableModel.tag==1&&cell.tag==429))) {
         self.currentDetailTableViewModel=detailTableViewModel;
         
                 
         
     }
-   
+    detailTableViewModel.delegate=self;
+    if ([SCUtilities is_iPad]) {
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+
+    UIColor *backgroundColor=nil;
+    if(indexPath.row==NSNotFound|| tableModel.tag>0||isInDetailSubview)
+    {
+        backgroundColor=(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor;
+       
+    }
+    else {
+        
+        
+       
+        backgroundColor=[UIColor clearColor];
+    }
     
-    //
-    //
-    //    if (tableViewModel.tag==1) {
-    //       
-    //        [self fullName:nil tableViewModel:tableViewModel cell:nil getNameValues:YES];
-    //    }
-    //    
-    //    //NSLog(@"detail table view model%i",detailTableViewModel.tag);
-    //    if (tableViewModel.tag==0 ) {
-    //        SCTableViewCell *cell =(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-    //        
-    //        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-    //        
-    //        ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
-    //        //NSLog(@"my information is %@",clinicianObject.myInformation);
-    //        if ([clinicianObject.myInformation isEqualToNumber:[NSNumber numberWithBool:YES]]) {
-    //            if (tableViewModel.sectionCount>3) {
-    //            
-    //            [detailTableViewModel removeSectionAtIndex:1];
-    //            [detailTableViewModel removeSectionAtIndex:4];
-    //            }
-    //        }
-    //      
-    //        
-    //        
-    //    }
-    //                                  
-    //                                      
+    if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
+        
+        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+        UIView *view=[[UIView alloc]init];
+        [detailTableViewModel.modeledTableView setBackgroundView:view];
+        [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
+        
+        
+    }
     
+        
+    }                              
+    if (isInDetailSubview&&detailTableViewModel.tag==1) {
+        for (int i=0; i<detailTableViewModel.sectionCount; i++) {
+            
+            SCTableViewSection *sectionAtIndex=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:i];
+            
+            [self setSectionHeaderColorWithSection:sectionAtIndex color:[UIColor whiteColor]];
+            
+            
+            
+        }
+    }
     
 }
 
@@ -2648,16 +2658,16 @@
     
     
 }
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
+- (void)tableViewModel:(SCTableViewModel *)tablewModel didAddSectionAtIndex:(NSUInteger)index
 {
     
-    SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
+    SCTableViewSection *section = [tablewModel sectionAtIndex:index];
     
     //NSLog(@"tableview model tag is %i",tableViewModel.tag);
     //NSLog(@"tableview model view controller is%@ ",[tableViewModel.viewController class]);
     //NSLog(@"index is %i",index);
     //NSLog(@"tabelmodel section count is %i",tableViewModel.sectionCount);
-    if (tableViewModel.tag==1 ) {
+    if (tablewModel.tag==1 ) {
         //NSLog(@"section index is %i",index);
         
         
@@ -2666,10 +2676,11 @@
             //NSLog(@"cells in section is %i",section.cellCount);
             
             
-            if (tableViewModel.sectionCount) {
+            if (tablewModel.sectionCount) {
             
-            SCTableViewSection *sectionOne=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-                if (sectionOne.cellCount) {
+            SCTableViewSection *sectionOne=(SCTableViewSection *)[tablewModel sectionAtIndex:0];
+                if (sectionOne.cellCount) 
+                {
                 SCTableViewCell *sectionOneClicianCell=(SCTableViewCell *)[sectionOne cellAtIndex:0];
             NSManagedObject *cellManagedObject=(NSManagedObject *)sectionOneClicianCell.boundObject;
             
@@ -2680,8 +2691,8 @@
                 //NSLog(@"my information is %@",clinicianObject.myInformation);
                 if ([clinicianObject.myInformation isEqualToNumber:[NSNumber numberWithBool:YES]]) {
                     
-                    [tableViewModel removeSectionAtIndex:1];
-                    [tableViewModel removeSectionAtIndex:4];
+                    [tablewModel removeSectionAtIndex:1];
+                    [tablewModel removeSectionAtIndex:4];
                     
                 }
                 
@@ -2705,19 +2716,20 @@
 //                abGroupObjectSelectionCell_.tag=429;
 //               
 //                [sectionOne addCell:abGroupObjectSelectionCell_];
+//            }
+//                }
+//            }
+//            
+//        }
+    
             }
-                }
-            }
-            
         }
+            }}
+    
     }
-    
-
-    
-    
     [self setSectionHeaderColorWithSection:(SCTableViewSection *)section color:[UIColor whiteColor]];
-    
-    
+           
+            
     
 }
 
@@ -4303,7 +4315,7 @@
             [personViewTableView setBackgroundView:self.iPadPersonBackgroundView];
         }
        
-        if (addingClinician) {
+        if (addingClinician||isInDetailSubview) {
             
             
 

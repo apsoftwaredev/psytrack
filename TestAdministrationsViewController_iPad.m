@@ -467,6 +467,66 @@ timePropertyDef.attributes = [SCObjectAttributes attributesWithObjectDefinition:
 
 
 
+- (void)tableViewModel:(SCArrayOfItemsModel *)tableViewModel
+searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+{
+    
+    //NSLog(@"scope changed");
+    
+    
+    
+    
+    if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
+    {
+        SCArrayOfObjectsModel *objectsModel = (SCArrayOfObjectsModel *)tableViewModel;
+        
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit ) fromDate:[NSDate date]];
+        //create a date with these components
+        NSDate *startDate = [calendar dateFromComponents:components];
+        [components setMonth:1];
+        [components setDay:0]; //reset the other components
+        [components setYear:0]; //reset the other components
+        NSDate *endDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
+        //NSLog(@"start dtate %@",startDate);
+        //NSLog(@"end date is %@", endDate);
+        
+        NSPredicate *currentMonthPredicate = [NSPredicate predicateWithFormat:@"((dateOfService > %@) AND (dateOfService <= %@)) || (dateOfService = nil)",startDate,endDate];
+        NSPredicate *paperworkIncompletePredicate = [NSPredicate predicateWithFormat:@"paperwork == %@",[NSNumber numberWithInteger: 0]];
+        
+        
+        [self.searchBar setSelectedScopeButtonIndex:selectedScope];
+        
+        switch (selectedScope) {
+            case 1: //all
+                
+                
+                [objectsModel.dataFetchOptions setFilterPredicate:nil];
+//             
+                break;
+                
+            case 2: //case paperwork Incomplete
+                [objectsModel.dataFetchOptions setFilterPredicate:paperworkIncompletePredicate];
+                
+                
+                
+                
+                break;                
+                
+            default://current month
+                
+                [objectsModel.dataFetchOptions setFilterPredicate:currentMonthPredicate];
+                
+               
+                
+                
+                break;
+        }
+        [objectsModel reloadBoundValues];
+        [objectsModel.modeledTableView reloadData]; 
+    }
+}
+
 
 
 
