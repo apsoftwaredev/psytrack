@@ -112,7 +112,7 @@
     
    
     if (isInDetailSubview) {
-        objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef useSelectionSection:YES]; 
+        objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef]; 
       
       
        
@@ -245,6 +245,9 @@
         [self.tableView setBackgroundView:[[UIView alloc] init]];
         [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
     }
+    else {
+        self.tableViewModel=objectsModel;
+    }
 
     
 
@@ -252,9 +255,12 @@
     [(PTTAppDelegate *)[UIApplication sharedApplication].delegate application:[UIApplication sharedApplication]
                                                willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
                                                                      duration:5];
-   
-//    [self.tableModel.modeledTableView reloadData];  
-   
+    if (isInDetailSubview) {
+        [self.tableViewModel reloadBoundValues];
+        [self.tableViewModel.modeledTableView reloadData];  
+
+    }
+    
 }
 #pragma mark -
 #pragma mark SCTableViewModelDataSource methods
@@ -280,8 +286,74 @@
 }
   
 
+-(void)viewDidAppear:(BOOL)animated{
+
+    if ( self.selectMyInformationOnLoad) {
+        [self selectMyInformation];
+        
+        self.selectMyInformationOnLoad=NO;
+        
+        
+    }
 
 
+}
+-(void)selectMyInformation{
+
+
+  
+    NSInteger sectionCount=self.tableViewModel.sectionCount;
+    
+    
+    for (int i=0; i< sectionCount; i++) {
+        
+        SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:i];
+        BOOL foundMyInformation=NO;
+        if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
+            SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection*)section;
+            
+            for (int p=0; p< arrayOfObjectsSection.cellCount; p++) {
+                SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:p];
+                
+                NSManagedObject *cellManagedObject=(NSManagedObject *) cell.boundObject;
+                
+                
+                if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"ClinicianEntity"]) {
+                    
+                    BOOL myInformation=[(NSNumber *)[cellManagedObject valueForKey:@"myInformation"]boolValue];
+                    
+                    if (myInformation) {
+                        [self.tableViewModel setActiveCell:cell];
+                        
+                        [arrayOfObjectsSection dispatchEventSelectRowAtIndexPath:[self.tableViewModel indexPathForCell:cell]];
+                        foundMyInformation=YES;
+                        break;
+                        
+                    }
+                    
+                }
+                
+                
+            }
+            
+            
+        }
+        if (foundMyInformation) {
+            break;
+        }
+    }
+    
+    
+
+
+
+
+
+
+
+
+
+}
 
 -(void)cancelButtonTapped{
     
@@ -458,32 +530,38 @@
 }
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+////    
+//    SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+////     
+//
+//    if ([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]]) {
+//        SCArrayOfObjectsModel *arrayOfObjectsModel=(SCArrayOfObjectsModel *)tableViewModel;
+//        
+//        [arrayOfObjectsModel dispatchEventSelectRowAtIndexPath:indexPath];
+//        return;
+//    }
+//
+//    if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
+//        SCArrayOfObjectsSection *selectionSection=(SCArrayOfObjectsSection *)section;
+//        
+//        [selectionSection dispatchEventSelectRowAtIndexPath:indexPath];
+//        return;
+//    }
+//    if ([section isKindOfClass:[SCSelectionSection class]]) {
+//        SCSelectionSection *selectionSection=(SCSelectionSection *)section;
+//        [selectionSection dispatchEventSelectRowAtIndexPath:indexPath];
+//        return;
+//    }
 //    
-    SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-//     
-
-    if ([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]]) {
-        SCArrayOfObjectsModel *arrayOfObjectsModel=(SCArrayOfObjectsModel *)tableViewModel;
-        
-        [arrayOfObjectsModel dispatchEventSelectRowAtIndexPath:indexPath];
-        return;
-    }
-
-    if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
-        SCArrayOfObjectsSection *selectionSection=(SCArrayOfObjectsSection *)section;
-        
-        [selectionSection dispatchEventSelectRowAtIndexPath:indexPath];
-        
-    }
-    
-    
-   NSLog(@"tablemodel class is %@",tableViewModel.class);
-    
-    NSLog(@"section class %@",[section class]);
 //    
 //    
-}
+//   NSLog(@"tablemodel class is %@",tableViewModel.class);
+//    
+//    NSLog(@"section class %@",[section class]);
+////    
+////    
+//}
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 

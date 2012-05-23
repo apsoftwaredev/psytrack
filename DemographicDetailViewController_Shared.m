@@ -20,7 +20,7 @@
 #import "TimeOfDayPickerCell.h"
 #import "EncryptedSCTextViewCell.h"
 #import "EncryptedSCSelectionCell.h"
-
+#import "BOPickersDataSource.h"
 @implementation DemographicDetailViewController_Shared
 @synthesize demographicProfileDef;
 
@@ -65,11 +65,20 @@
 	
     self.demographicProfileDef = [SCEntityDefinition definitionWithEntityName:@"DemographicProfileEntity" 
                                                          managedObjectContext:managedObjectContext
-                                                                autoGeneratePropertyDefinitions:YES];
+                                                                propertyNames:[NSArray arrayWithObjects:@"profileNotes",@"sex",@"gender", @"sexualOrientation",
+                                                                               @"disabilities",@"ethnicities",@"languagesSpoken",
+                                                                               @"cultureGroups",
+                                                                                @"races",@"spiritualBeliefs",@"significantLifeEvents",@"militaryService", @"educationLevel",@"employmentStatus", @"migrationHistory", @"interpersonal",  
+                                                                              @"hearing",@"vision",@"additionalVariables",nil]];
      
-    [self.demographicProfileDef removePropertyDefinitionWithName:@"order"];
-    [self.demographicProfileDef removePropertyDefinitionWithName:@"keyString"];
-    
+//    [self.demographicProfileDef removePropertyDefinitionWithName:@"order"];
+//    [self.demographicProfileDef removePropertyDefinitionWithName:@"keyString"];
+//    SCPropertyGroup *sharedPropertyGroup=[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"profileNotes",@"sex",@"gender", @"sexualOrientation",
+//                                                                                                                                                                                                @"disabilities",@"educationLevel",@"employmentStatus", @"ethnicities",@"languagesSpoken",
+//                                                                                                                                                                                                @"cultureGroups",@"migrationHistory", @"interpersonal",  
+//                                                                                                                                                                                                @"races",@"spiritualBeliefs",@"significantLifeEvents",@"militaryService", @"hearing",@"vision",@"additionalVariables",nil]];
+//    
+//    [self.demographicProfileDef.propertyGroups addGroup:sharedPropertyGroup];
     //Create a class definition for Demographic Gender entity
     SCEntityDefinition *genderDef = [SCEntityDefinition definitionWithEntityName:@"GenderEntity" 
                                                       managedObjectContext:managedObjectContext
@@ -849,6 +858,46 @@
     interpersonalNotesPropertyDef.objectBindings=encryInterpersonalNotesTVCellKeyBindingsDic;
     interpersonalNotesPropertyDef.title=@"Notes";
     interpersonalNotesPropertyDef.autoValidate=NO;
+    
+//       BOPickersDataSource *boPicker=[[BOPickersDataSource alloc]init];
+    
+    
+    //create a property definition for the sleep Quality property in the clientPresentations class
+    SCPropertyDefinition *visionPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"vision"];
+    
+    
+    
+    //set the property type to selection
+    visionPropertyDef.type = SCPropertyTypeSelection;
+    
+    //set the selection attributes and define the list of items to be selected
+    visionPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:
+                                                                               @"good/normal", @"contacts",@"glasses",
+                                                                               @"Mildly Nearsighted",@"Moderately Nearsighted", @"Very Nearsighted", @"Mildly Farsighted",@"Moderately Farsighted", @"Very Farsighted", @"Reading Glasses", @"Astigmatism", @"Legally Blind Corrected",@"Color Blind ",@"Completely Blind",    
+                                                                               nil]
+                                                       allowMultipleSelection:YES
+                                                             allowNoSelection:YES
+                                                        autoDismissDetailView:NO hideDetailViewNavigationBar:NO];
+    
+    //create a property definition for the sleep Quality property in the clientPresentations class
+    SCPropertyDefinition *hearingPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"hearing"];
+    
+    
+    
+    //set the property type to selection
+    hearingPropertyDef.type = SCPropertyTypeSelection;
+    
+    //set the selection attributes and define the list of items to be selected
+    hearingPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:
+                                                                                @"good/normal right",@"good/normal left", @"hearing aid right",@"hearing aid left",@"mild difficulty right",@"moderate difficulty right",@"severe difficulty right",@"mild difficulty left",@"moderate difficulty left",@"severe difficulty left",@"deaf",    
+                                                                                nil]
+                                                       allowMultipleSelection:YES
+                                                             allowNoSelection:YES
+                                                        autoDismissDetailView:NO hideDetailViewNavigationBar:NO];
+    
+    
+
+    
     
     
 //    NSDictionary *frequencyPickerDataBindings = [NSDictionary 

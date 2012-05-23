@@ -752,11 +752,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
         }
         
-    }
-
-    if (tableViewModel.tag==3) {
-        
-        
+            
         
         
         
@@ -782,8 +778,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         
     }
-    
-    
+
   }
 
 
@@ -936,7 +931,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         currentDetailTableViewModel=detailTableViewModel;
         
     }
-    
+    NSLog(@"tableviewmodel tag is %i",tableModel.tag);
+
     if ([SCUtilities is_iPad]) {
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
@@ -1556,7 +1552,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
     } 
     
-
+    
+    
+    
+    
+    
+        
+    
     
 }
 

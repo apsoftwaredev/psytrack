@@ -76,6 +76,10 @@
 //    self.tableView.backgroundColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]; // Make the table view application backgound color (turquose)
 
     self.tableViewModel = objectsModel;
+    
+    
+  
+   
    
 }
 
@@ -233,7 +237,7 @@
                 
                 
                 
-            case 7:
+            case 8:
                 if ([cell  isKindOfClass:[AddViewABLinkButtonCell class]]) 
                 {
                     
@@ -266,7 +270,7 @@
                 break;
                 
                 
-            case 8:
+            case 9:
                 //this is the root table
                 
                 

@@ -24,11 +24,12 @@
 //#import "CliniciansViewController_Shared.h"
 #import "LCYLockSettingsViewController.h"
 #import "ExistingHoursViewController.h"
-
+#import "CliniciansRootViewController_iPad.h"
 #import "DTAboutViewController.h"
 #import "NSString+Helpers.h"
 #import "InAppSettingsViewController.h"
-
+#import "ClinicianViewController.h"
+#import "CliniciansDetailViewController_iPad.h"
 //#import "UICasualAlert.h"
 //#import <MessageUI/MessageUI.h>
 //
@@ -442,20 +443,91 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
 
+    if (indexPath.section==0 &&indexPath.row==0) 
+        {
+            //@"My Information"
+           
+                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                
+            if (![SCUtilities is_iPad]) {
+           
+                UINavigationController *navController=nil;
+                for (navController in appDelegate.tabBarController.viewControllers) {
+                    if ([navController.title isEqualToString:@"Clinicians"]) {
+                        
+                        [appDelegate.clinicianViewController setSelectMyInformationOnLoad:YES];
+                        [appDelegate.tabBarController setSelectedViewController:navController];
+                        
+                        break;
+                    }
+                }            
+                
+            }               
+            else
+            {
+                UISplitViewController *splitView=nil;
+                CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad=nil;
+                CliniciansRootViewController_iPad *cliniciansRootViewController_iPad=nil;
+                UIPopoverController *popoverController=nil;
+                for (splitView in appDelegate.tabBarController.viewControllers) {
+                    if ([splitView.title isEqualToString:@"Clinicians"]) {
+                        
+                        for (UINavigationController *navController in splitView.viewControllers) {
+                            if ([navController.title isEqualToString:@"ClinicianRoot"]) {
+                                cliniciansRootViewController_iPad=(CliniciansRootViewController_iPad *)[navController.viewControllers objectAtIndex:0];
+                                
+                                
+                                [cliniciansRootViewController_iPad setSelectMyInformationOnLoad:YES];
+                                
+                            }
+                            else if ([navController.title isEqualToString:@"ClinicianDetail"]) 
+                            {
+                                    
+                                
+                                cliniciansDetailViewController_iPad=(CliniciansDetailViewController_iPad *)[navController.viewControllers objectAtIndex:0];
+                                
+                                if (cliniciansDetailViewController_iPad.popoverController) {
+                                    popoverController=cliniciansDetailViewController_iPad.popoverController;
+                                }
+                                
+                            }
+                            
+                            
+                            
+                            
+                        }
+                        
+                        
+                        [appDelegate.clinicianViewController setSelectMyInformationOnLoad:YES];
+                        [appDelegate.tabBarController setSelectedViewController:splitView];
+                        
+                        
+//                        NSLog(@"barbutton item action is %@",barButtonItem.action);
+                    
+                      
+                      
+                        
+                        
+                        
+                        break;
+                    }
+                }
+                
+            }  
+    
+    
+        }
+            
+        
 
+    
 
 
 
 
 
     switch (indexPath.section) {
-        case 0:
-        {
-            //@"My Information"
-//            if (indexPath.row==0){};
-            
-        }
-            break;
+      
             
         case 1:
         {

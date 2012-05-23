@@ -24,7 +24,7 @@ static NSInteger const kAlertTagFoundExistingPersonWithName = 1;
 static NSInteger const kAlertTagFoundExistingPeopleWithName = 2;
 
 
-@interface CliniciansViewController_Shared :  SCViewController <SCTableViewModelDataSource,SCTableViewModelDelegate,UIAlertViewDelegate,UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate> {
+@interface CliniciansViewController_Shared :  SCViewController <SCTableViewModelDataSource,SCTableViewModelDelegate,UIAlertViewDelegate,UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate,UITableViewDelegate> {
 
    
 
@@ -50,6 +50,7 @@ NSManagedObjectContext *managedObjectContext;
     ABGroupSelectionCell *abGroupObjectSelectionCell_;
     
     UIView *iPadPersonBackgroundView_;
+    BOOL addingClinician;
   
 }
 
@@ -64,6 +65,7 @@ NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) IBOutlet ABPersonViewController *personViewController;
 @property (nonatomic, strong) IBOutlet ABPeoplePickerNavigationController *peoplePickerNavigationController;
 
+@property (nonatomic,assign)BOOL selectMyInformationOnLoad;
 
 //@property (nonatomic, strong) IBOutlet SCArrayOfObjectsModel *tableModel;
 @property (nonatomic, strong)  UIViewController *rootViewController;

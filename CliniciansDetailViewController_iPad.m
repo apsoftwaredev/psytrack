@@ -53,7 +53,7 @@
     
     barButtonItem.title = @"Clinicians";
     self.navigationItem.leftBarButtonItem = barButtonItem;
-	
+
     self.popoverController = pc;
 }
 

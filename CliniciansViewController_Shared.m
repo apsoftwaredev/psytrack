@@ -47,6 +47,7 @@
 
 @synthesize iPadPersonBackgroundView=iPadPersonBackgroundView_;
 @synthesize peoplePickerNavigationController=peoplePickerNavigationController_;
+@synthesize selectMyInformationOnLoad;
 #pragma mark -
 #pragma Generate SCTableView classes and properties
 
@@ -59,7 +60,7 @@
         self.currentDetailTableViewModel=nil;
     }
     
-    
+   
    currentDetailTableViewModel_=nil;
    rootNavigationController=nil;
    rootViewController_=nil;
@@ -2927,7 +2928,7 @@
 //    SCTableViewSection *section =[tableViewModel sectionAtIndex:indexPath.section];
     SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
     //NSLog(@"custom button tapped");
-    
+    currentDetailTableViewModel_=tableViewModel;
     
     if (tableViewModel.tag==1) {
         //NSLog(@"table model tag is %i",2);
@@ -3036,7 +3037,7 @@
                             
                             [sectionAtIndex commitCellChanges];
                         }
-                        
+                           
                         [self evaluateWhichABViewControllerToShow];
                             
                         } 
@@ -3426,7 +3427,7 @@
     //	abToDisplay.peoplePicker.displayedProperties=displayedItems;
 	// Show the picker 
     
-    
+    NSLog(@"current detailtableviewmodel is %i",currentDetailTableViewModel_.tag);
 	[currentDetailTableViewModel_.viewController.navigationController presentModalViewController:self.peoplePickerNavigationController animated:YES];
     
 	
@@ -4275,26 +4276,44 @@
 }
 
 
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+
+    UIView *view=[[UIView alloc]init];
+    view.backgroundColor=[UIColor redColor];
+    return view;
+}
+
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
     
     
     //NSLog(@"will show view controller %@",viewController);
     
-    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     //NSLog(@"will show view controller %@",viewController);
     if (viewController.view.tag==837 &&viewController.view.subviews.count) {
         
         
         UITableView *personViewTableView=(UITableView *)[viewController.view.subviews objectAtIndex:0];
         
-            
+      
+      
+        
         if ([SCUtilities is_iPad]) {
             [personViewTableView setBackgroundView:nil];
             [personViewTableView setBackgroundView:self.iPadPersonBackgroundView];
         }
        
-     
-        [personViewTableView setBackgroundColor:UIColor.clearColor]; 
+        if (addingClinician) {
+            
+            
+
+            
+            [personViewTableView setBackgroundColor:appDelegate.window.backgroundColor]; 
+        }
+        else {
+             [personViewTableView setBackgroundColor:UIColor.clearColor];
+        }
+        
         //        
 
         
@@ -4367,8 +4386,12 @@
             
         [personViewTableView setBackgroundView:nil];
         [personViewTableView setBackgroundView:[[UIView alloc]init]];
-      
-        [personViewTableView setBackgroundColor:UIColor.clearColor]; 
+            if (addingClinician) {
+                [personViewTableView setBackgroundColor:appDelegate.window.backgroundColor]; 
+            }else {
+                [personViewTableView setBackgroundColor:UIColor.clearColor]; 
+            }
+        
         viewController.navigationItem.rightBarButtonItems=buttons;
         
         
@@ -4814,6 +4837,7 @@
                                 [currentDetailTableViewModel_ reloadBoundValues];
                                 [currentDetailTableViewModel_.modeledTableView reloadData];
                                 
+                                
                               
                             } 
                             
@@ -4823,6 +4847,36 @@
                     
                     
                     [self showPersonViewControllerForRecordID:(int)existingPersonRecordID];
+                    
+                    
+                    SCTableViewSection *sectionOne=[currentDetailTableViewModel_ sectionAtIndex:0];
+                    
+                    SCTableViewCell *addEditABLinkButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:8];
+                    
+                    if ([addEditABLinkButtonCell isKindOfClass:[AddViewABLinkButtonCell class]]) {
+                        AddViewABLinkButtonCell *addEditButtonCell=(AddViewABLinkButtonCell *)addEditABLinkButtonCell;
+                        
+                        
+                        [addEditButtonCell toggleButtonsWithButtonOneHidden:YES];
+                        
+                        
+                    }
+                    SCTableViewCell *lookupRemoveABButtonCell= (SCTableViewCell *)[sectionOne cellAtIndex:9];
+                    
+                    if ([lookupRemoveABButtonCell isKindOfClass:[LookupRemoveLinkButtonCell class]]) {
+                        LookupRemoveLinkButtonCell *lookUpRemoveButtonCell=(LookupRemoveLinkButtonCell *)lookupRemoveABButtonCell;
+                        
+                        
+                        [lookUpRemoveButtonCell toggleButtonsWithButtonOneHidden:YES];
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
                 }
             }
                 break;

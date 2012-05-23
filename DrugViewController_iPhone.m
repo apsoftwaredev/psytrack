@@ -717,7 +717,7 @@
     
     
     NSTimeInterval timeout=10.0;
-    NSURL *remoteFileURL=[NSURL URLWithString:@"http://psycheweb.com/psytrack/dFiles/dFile-001.zpk"];
+    NSURL *remoteFileURL=[NSURL URLWithString:@"https://psytrack.com/dFiles/dFile-001.zpk"];
     
     NSURLRequest *request =  [[NSURLRequest alloc] initWithURL:remoteFileURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeout];
 

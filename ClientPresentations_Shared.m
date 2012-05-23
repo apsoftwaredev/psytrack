@@ -63,12 +63,12 @@
     
     rapportPropertyDef.type=SCPropertyTypeTextView;
     
-    SCPropertyDefinition *sleepHoursNightlyPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"sleepHoursNightly"];
+//    SCPropertyDefinition *sleepHoursNightlyPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"sleepHoursNightly"];
     
-    sleepHoursNightlyPropertyDef.autoValidate=NO;
+//    sleepHoursNightlyPropertyDef.autoValidate=NO;
     
     //define a property group
-    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"affect", @"appearance",  @"assessment", @"attention", @"attitude", @"improvement", @"interpersonal", @"behaviors", @"imagry",   @"plan",  @"rapport",  @"sensory", @"sleepHoursNightly",    @"sleepQuality",@"psychomotor", @"speechLanguage", @"vision", @"cultural",    nil ]];
+    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"affect", @"appearance",  @"assessment", @"attention", @"attitude", @"improvement", @"interpersonal", @"behaviors", @"imagry",   @"plan",  @"rapport",  @"sensory", @"sleepHoursNightly",    @"sleepQuality",@"psychomotor", @"speechLanguage",  @"cultural",  @"additionalVariables",  nil ]];
     [self.clientPresentationDef.propertyGroups addGroup:notesGroup];
     
     SCPropertyGroup *orientationGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"orientedToBody", @"orientedToPerson",  @"orientedToPlace", @"orientedToTime",    nil ]];
@@ -98,21 +98,7 @@
     
     
 
-    //create a property definition for the sleep Quality property in the clientPresentations class
-    SCPropertyDefinition *visionPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"vision"];
-    
-    
   
-    //set the property type to selection
-    visionPropertyDef.type = SCPropertyTypeSelection;
-    
-    //set the selection attributes and define the list of items to be selected
-    visionPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithArray:[boPicker presentationDataWithPropertyName:@"vision"]] 
-                                                             allowMultipleSelection:YES
-                                                                   allowNoSelection:YES
-                                                              autoDismissDetailView:NO hideDetailViewNavigationBar:NO];
-    
-
     //create a property definition for the orientated to place property in the cleintPresentation Def class
     SCPropertyDefinition *orientedToBodyPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"orientedToBody"];
     orientedToBodyPropertyDef.title=@"Body";
@@ -353,6 +339,20 @@
     
     [self.clientPresentationDef addPropertyDefinition:symptomSeverityScaleDataProperty];
     
+    [self.clientPresentationDef removePropertyDefinitionWithName:@"openness"];
+    
+    NSDictionary *opennessScaleDataBindings = [NSDictionary 
+                                                      dictionaryWithObjects:[NSArray arrayWithObjects:@"openness",@"Level of Openness", nil ] 
+                                                      forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
+    SCCustomPropertyDefinition *opennessScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"opennessScaleData"
+                                                                                                 uiElementNibName:scaleDataCellNibName
+                                                                                                   objectBindings:opennessScaleDataBindings];
+	
+    
+    
+    [self.clientPresentationDef addPropertyDefinition:opennessScaleDataProperty];
+    
+    
     [self.clientPresentationDef removePropertyDefinitionWithName:@"depth"];
     NSDictionary *depthScaleDataBindings = [NSDictionary 
                                                       dictionaryWithObjects:[NSArray arrayWithObjects:@"depth",@"Depth", nil ] 
@@ -411,8 +411,149 @@
     //override the auto title generation for the clientDesc property definition and set it to a custom title
     clientDescPropertyDef.title=@"";
     
+    //Create a class definition for Additional Variables entity 
+    SCEntityDefinition *additionalVariableDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalVariableEntity" 
+                                                                        managedObjectContext:managedObjectContext
+                                                                               propertyNames:[NSArray arrayWithObjects:@"variableName",@"selectedValue",@"stringValue",@"timeValue",@"dateValue",@"timeValueTwo", @"notes",nil]];  
     
     
+    
+    
+    
+    
+    
+    
+    
+    additionalVariableDef.orderAttributeName=@"order";
+    //Create a class definition for Additional Variable Name entity
+    SCEntityDefinition *additionalVariableNameDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalVariableNameEntity" 
+                                                                            managedObjectContext:managedObjectContext
+                                                                                   propertyNames:[NSArray arrayWithObjects:@"variableName",@"notes",nil]]; 
+    
+    
+    
+    
+    
+    additionalVariableNameDef.orderAttributeName=@"order";
+    
+    SCEntityDefinition *additionalVariableValueDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalVariableValueEntity" 
+                                                                             managedObjectContext:managedObjectContext
+                                                                                    propertyNames:[NSArray arrayWithObjects:@"variableValue",@"notes",nil]]; 
+    
+    
+    additionalVariableValueDef.orderAttributeName=@"order";
+    
+
+    SCPropertyDefinition *additionalVariablesPropertyDef = [clientPresentationDef propertyDefinitionWithName:@"additionalVariables"];
+    
+    additionalVariablesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:additionalVariableDef allowAddingItems:TRUE
+                                                                                        allowDeletingItems:TRUE
+                                                                                          allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];                 ;	
+    
+    SCPropertyDefinition *additionalVariableNamePropertyDef = [additionalVariableDef propertyDefinitionWithName:@"variableName"];
+    additionalVariableNamePropertyDef.type = SCPropertyTypeObjectSelection;
+	
+    
+    SCObjectSelectionAttributes *variableNameSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:additionalVariableNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    variableNameSelectionAttribs.allowAddingItems = YES;
+    variableNameSelectionAttribs.allowDeletingItems = YES;
+    variableNameSelectionAttribs.allowMovingItems = YES;
+    variableNameSelectionAttribs.allowEditingItems = YES;
+    variableNameSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add Variable Name Definitions)"];
+    variableNameSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add Variable Name Definition"];
+    additionalVariableNamePropertyDef.attributes = variableNameSelectionAttribs;
+    SCPropertyDefinition *additionalVariableNameNotesPropertyDef = [additionalVariableNameDef propertyDefinitionWithName:@"notes"];
+    additionalVariableNameNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+    SCPropertyDefinition *additionalVariableValuePropertyDef = [additionalVariableDef propertyDefinitionWithName:@"selectedValue"];
+    additionalVariableValuePropertyDef.title=@"Selected Value(s)";
+    additionalVariableValuePropertyDef.type = SCPropertyTypeObjectSelection;
+	SCObjectSelectionAttributes *variableValueSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:additionalVariableValueDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
+    variableValueSelectionAttribs.allowAddingItems = YES;
+    variableValueSelectionAttribs.allowDeletingItems = YES;
+    variableValueSelectionAttribs.allowMovingItems = YES;
+    variableValueSelectionAttribs.allowEditingItems = YES;
+    variableValueSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add Variable Value Definitions)"];
+    variableValueSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add Variable Value Definition"];
+    additionalVariableValuePropertyDef.attributes = variableValueSelectionAttribs;
+    SCPropertyDefinition *additionalVariableValueNotesPropertyDef = [additionalVariableValueDef propertyDefinitionWithName:@"notes"];
+    additionalVariableValueNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+    
+    
+    
+    SCPropertyDefinition *additionalVariableNotesPropertyDef = [additionalVariableDef propertyDefinitionWithName:@"notes"];
+    additionalVariableNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *additionalVariableStingValuePropertyDef = [additionalVariableDef propertyDefinitionWithName:@"stringValue"];
+    additionalVariableStingValuePropertyDef.type=SCPropertyTypeTextView;
+    
+    NSDictionary *scaleDataBindings = [NSDictionary 
+                                       dictionaryWithObjects:[NSArray arrayWithObject:@"scale"] 
+                                       forKeys:[NSArray arrayWithObject:@"70"]]; // 1 is the control tag
+	SCCustomPropertyDefinition *scaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"ScaleData"
+                                                                                  uiElementNibName:scaleDataCellNibName
+                                                                                    objectBindings:scaleDataBindings];
+	
+    
+    
+    [additionalVariableDef insertPropertyDefinition:scaleDataProperty atIndex:2];
+    NSDictionary *sliderOneDataBindings = [NSDictionary 
+                                           dictionaryWithObjects:[NSArray arrayWithObject:@"sliderOne"] 
+                                           forKeys:[NSArray arrayWithObject:@"14"]]; // 1 is the control tag
+	SCCustomPropertyDefinition *sliderOneDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SliderOneData"                                                                                  uiElementNibName:@"SliderOneDataCell_iPhone" objectBindings:sliderOneDataBindings];
+	
+    
+    
+    [additionalVariableDef insertPropertyDefinition:sliderOneDataProperty atIndex:3];
+    
+    NSDictionary *sliderTwoDataBindings = [NSDictionary 
+                                           dictionaryWithObjects:[NSArray arrayWithObject:@"sliderTwo"] 
+                                           forKeys:[NSArray arrayWithObject:@"14"]]; // 1 is the control tag
+	SCCustomPropertyDefinition *sliderTwoDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SliderTwoData"
+                                                                                      uiElementNibName:@"SliderOneDataCell_iPhone" 
+                                                                                        objectBindings:sliderTwoDataBindings];
+	
+    
+    [additionalVariableDef insertPropertyDefinition:sliderTwoDataProperty atIndex:4];
+    
+    
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"MMM dd, yyyy"];
+    
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc] init];
+	[timeFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    
+    
+    SCPropertyDefinition *additionalVariableDateValuePropertyDef = [additionalVariableDef propertyDefinitionWithName:@"dateValue"];
+	additionalVariableDateValuePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                                       datePickerMode:UIDatePickerModeDate 
+                                                                        displayDatePickerInDetailView:NO];
+    
+    SCPropertyDefinition *additionalVariableTimeValuePropertyDef = [additionalVariableDef propertyDefinitionWithName:@"timeValue"];
+	additionalVariableTimeValuePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:timeFormatter datePickerMode:UIDatePickerModeTime displayDatePickerInDetailView:NO];
+    
+    
+    NSDateFormatter *dateTimeFormatter = [[NSDateFormatter alloc] init];
+	[dateTimeFormatter setDateFormat:@"yyyy-MM-dd 'at' HH:mm"];
+    
+	
+    
+    
+    SCPropertyDefinition *timeValueTwoPropertyDef = [additionalVariableDef propertyDefinitionWithName:@"timeValueTwo"];
+    timeValueTwoPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateTimeFormatter datePickerMode:UIDatePickerModeDateAndTime displayDatePickerInDetailView:NO];
+    
+    
+    timeValueTwoPropertyDef.title=@"Date & Time";
+    
+    additionalVariableDef.titlePropertyName=@"variableName.variableName";
+    
+    
+
     
    
     
@@ -479,11 +620,11 @@
     [self.clientPresentationDef.propertyGroups insertGroup:mainGroup atIndex:0];
     
     //define a property group
-    SCPropertyGroup *clientRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Subjective Ratings" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"happinessLevelScaleData",@"progressClientScaleData",@"comfortLevelscaleData", @"stressLevelScaleData",  @"copingLevelScaleData", @"hopeLevelScaleData", @"energyLevelScaleData",  @"communicativeAbilityScaleData",  @"painLevelScaleData", @"sexualSatisfactionScaleData",  @"symptomSeverityScaleData",  @"suicidalityData", @"homicidalityData",      nil]];
+    SCPropertyGroup *clientRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Subjective Ratings" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"happinessLevelScaleData",@"progressClientScaleData",@"comfortLevelscaleData", @"stressLevelScaleData",  @"copingLevelScaleData", @"hopeLevelScaleData", @"energyLevelScaleData",    @"painLevelScaleData", @"sexualSatisfactionScaleData",  @"symptomSeverityScaleData",  @"suicidalityData", @"homicidalityData",      nil]];
     [self.clientPresentationDef.propertyGroups insertGroup:clientRatingsGroup atIndex:1];
     
     //define a property group
-    SCPropertyGroup *clinicianRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Clinician Subjective Ratings" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"allianceScaleData", @"progressClinicianScaleData",  @"depthScaleData", @"safetyRisk",@"liabilityRiskScaleData", @"safetyRiskScaleData",    nil]];
+    SCPropertyGroup *clinicianRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Clinician Subjective Ratings" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"allianceScaleData",@"communicativeAbilityScaleData", @"opennessScaleData",@"progressClinicianScaleData",  @"depthScaleData", @"safetyRisk",@"liabilityRiskScaleData", @"safetyRiskScaleData",    nil]];
     [self.clientPresentationDef.propertyGroups insertGroup:clinicianRatingsGroup atIndex:2];
     
     //define a property group
@@ -739,7 +880,64 @@
     }
     
 
- 
+    if (tableViewModel.tag==5) 
+    {
+        
+        
+        //        UIView *viewOne = [cell viewWithTag:51];
+        //        UIView *viewSendReports =[cell viewWithTag:40];
+        UIView *sliderView = [cell viewWithTag:14];
+        
+        
+        switch (cell.tag) 
+        {
+            case 3:
+                
+                
+                if([sliderView isKindOfClass:[UISlider class]])
+                {
+                    UISlider *sliderOne = (UISlider *)sliderView;
+                    UILabel *slabel = (UILabel *)[cell viewWithTag:10];
+                    
+                    slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
+                    UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+                    UIImage *sliderRightTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+                    [sliderOne setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
+                    [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
+                    [sliderOne setMinimumValue:-1.0];
+                    [sliderOne setMaximumValue:0];
+                    
+                }
+                break;
+            case 4:
+                
+                if([sliderView isKindOfClass:[UISlider class]])
+                {
+                    
+                    UISlider *sliderTwo = (UISlider *)sliderView;
+                    
+                    UILabel *slabelTwo = (UILabel *)[cell viewWithTag:10];
+                    UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+                    UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+                    [sliderTwo setMinimumTrackImage: sliderTwoLeftTrackImage forState: UIControlStateNormal];
+                    [sliderTwo setMaximumTrackImage: sliderTwoRightTrackImage forState: UIControlStateNormal];
+                    
+                    slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];        
+                    [sliderTwo setMinimumValue:0.0];
+                    [sliderTwo setMaximumValue: 1.0];
+                    
+                }
+                
+                
+                break;
+                
+            default:
+                break;
+                
+                
+        }
+        
+    }
  
 
 
@@ -858,6 +1056,36 @@ if(section.headerTitle !=nil)
         [self addWechlerAgeCellToSection:(SCTableViewSection *)section];
     }
 
+    if (tableViewModel.tag==5){
+        SCTableViewCell *cell = [tableViewModel cellAtIndexPath:indexPath];
+        if (cell.tag==3)
+        {
+            UIView *viewOne = [cell viewWithTag:14];
+            
+            if([viewOne isKindOfClass:[UISlider class]])
+            {
+                UISlider *sliderOne = (UISlider *)viewOne;
+                UILabel *sOnelabel = (UILabel *)[cell viewWithTag:10];
+                
+                sOnelabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
+            }
+        }  
+        if (cell.tag==4)
+        {        
+            UIView *viewTwo =[cell viewWithTag:14];
+            if([viewTwo isKindOfClass:[UISlider class]])
+            {    
+                UISlider *sliderTwo = (UISlider *)viewTwo;
+                UILabel *sTwolabel = (UILabel *)[cell viewWithTag:10];
+                
+                sTwolabel.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];
+            }
+            
+            
+            
+        }
+        
+    }
 
 
 

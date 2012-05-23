@@ -24,6 +24,7 @@
 #import "EncryptedSCTextFieldCell.h"
 #import "EncryptedSCTextViewCell.h"
 #import "DrugNameObjectSelectionCell.h"
+#import "SCArrayOfObjectsModel+CoreData+SelectionSection.h"
 
 @implementation ClientsViewController_iPhone
 @synthesize searchBar;
@@ -122,13 +123,11 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     // Initialize tableModel
     
     NSPredicate *currentClientsPredicate=[NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
-    SCArrayOfObjectsModel *objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:self.clientsViewController_Shared.clientDef];
+    SCArrayOfObjectsModel *objectsModel = nil;
     if (isInDetailSubview) {
-      
-//        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withEntityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:nil useSCSelectionSection:YES];
-     
-//        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:clientsViewController_Shared.clientDef ];
-        
+       self.navigationBarType=SCNavigationBarTypeNone; 
+
+        objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView entityDefinition:self.clientsViewController_Shared.clientDef];
         if (searchBar.scopeButtonTitles.count>1) {
        
         [self.searchBar setSelectedScopeButtonIndex:1];
@@ -137,10 +136,11 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         objectsModel.allowDeletingItems=FALSE;
         objectsModel.autoSelectNewItemCell=TRUE;
         
-        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
+        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:3];
         
         
-        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped)];
+        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTappedInDetailView)];
+        
         [buttons addObject:doneButton];
         
         // create a spacer
@@ -167,17 +167,21 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
         
         self.navigationItem.leftBarButtonItem=cancelButton;
+              
 
         
     }
     else
     {
+      
+        objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:self.clientsViewController_Shared.clientDef filterPredicate:currentClientsPredicate];
+        
         
 //        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
 //                                                 withEntityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:currentClientsPredicate useSCSelectionSection:FALSE];
         
-        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView
-                                                                            entityDefinition:clientsViewController_Shared.clientDef];
+//        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView
+//                                                                            entityDefinition:clientsViewController_Shared.clientDef];
         
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
@@ -317,11 +321,13 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 }
 
 
--(void)doneButtonTapped{
+-(void)doneButtonTappedInDetailView{
 
     //NSLog(@"done Button tapped");
     if (isInDetailSubview) {
-        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:0];
+        if (self.tableViewModel.sectionCount) {
+       
+        SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
         //NSLog(@"section class is %@",[section class]);
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
@@ -392,7 +398,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 //        
 //    }
 //
-
+    }
 
 }
 

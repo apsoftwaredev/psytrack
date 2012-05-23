@@ -25,7 +25,7 @@
 @implementation ClientsSelectionCell
 @synthesize alreadySelectedClients;
 @synthesize hasChangedClients;
-@synthesize clientObject;
+@synthesize clientObject=clientObject;
 @synthesize testDate;
 
 -(void) performInitialization{

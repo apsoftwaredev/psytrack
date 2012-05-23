@@ -216,11 +216,12 @@
         // Wrap the view controllers into navigation controllers
         UINavigationController *clinicianRootNav = [[UINavigationController alloc] initWithRootViewController:cliniciansRootViewController];
         UINavigationController *clinicianDetailNav = [[UINavigationController alloc] initWithRootViewController:cliniciansDetailViewController_iPad];
-        
+        clinicianRootNav.title=@"ClinicianRoot";
         clinicianRootNav.navigationBar.opaque=YES;
         clinicianRootNav.navigationBar.tintColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0];
         
         clinicianDetailNav.navigationBar.opaque=YES;
+        clinicianDetailNav.title=@"ClinicianDetail";
         clinicianDetailNav.navigationBar.tintColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0];
         
         // Crea the split view and add it to the window
@@ -228,7 +229,7 @@
         cliniciansSplitViewController.viewControllers = [NSArray arrayWithObjects:clinicianRootNav, clinicianDetailNav, nil];
         cliniciansSplitViewController.delegate = cliniciansDetailViewController_iPad;
 
-        
+        cliniciansSplitViewController.title=@"Clinicians";
         
         cliniciansSplitViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Clinicians" image:clininicansImage tag:90];
         
@@ -268,7 +269,7 @@
         clientsSplitViewController.viewControllers = [NSArray arrayWithObjects:clientsRootNav, clientsDetailNav, nil];
         clientsSplitViewController.delegate = clientsDetailViewController;
         
-        
+        clientsSplitViewController.title=@"Clients";
         
         clientsSplitViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Clients" image:clientsImage tag:90];
         
@@ -2472,12 +2473,12 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
 	// Build URL String for Registration
 	// !!! CHANGE "www.mywebsite.com" TO YOUR WEBSITE. Leave out the http://
 	// !!! SAMPLE: "secure.awesomeapp.com"
-	NSString *host = @"www.psycheweb.com";
+	NSString *host = @"www.psytrack.com";
 	
 	// !!! CHANGE "/apns.php?" TO THE PATH TO WHERE apns.php IS INSTALLED 
 	// !!! ( MUST START WITH / AND END WITH ? ). 
 	// !!! SAMPLE: "/path/to/apns.php?"
-	NSString *urlString = [NSString stringWithFormat:@"/psytrack/apns/apns.php?task=%@&appname=%@&appversion=%@&deviceuid=%@&devicetoken=%@&devicename=%@&devicemodel=%@&deviceversion=%@&pushbadge=%@&pushalert=%@&pushsound=%@", @"register", appName,appVersion, deviceUuid, deviceToken, deviceName, deviceModel, deviceSystemVersion, pushBadge, pushAlert, pushSound];
+	NSString *urlString = [NSString stringWithFormat:@"/apns/apns.php?task=%@&appname=%@&appversion=%@&deviceuid=%@&devicetoken=%@&devicename=%@&devicemodel=%@&deviceversion=%@&pushbadge=%@&pushalert=%@&pushsound=%@", @"register", appName,appVersion, deviceUuid, deviceToken, deviceName, deviceModel, deviceSystemVersion, pushBadge, pushAlert, pushSound];
 	
 	// Register the Device Data
 	// !!! CHANGE "http" TO "https" IF YOU ARE USING HTTPS PROTOCOL

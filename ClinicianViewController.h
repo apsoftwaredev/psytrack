@@ -29,9 +29,9 @@
 	 SCArrayOfObjectsModel *objectsModel;
      UILabel *totalCliniciansLabel;
        
-
-    BOOL filterByPrescriber;
     BOOL isInDetailSubview;
+    BOOL filterByPrescriber;
+   
     ClinicianSelectionCell *clinicianObjectSelectionCell;
     UIViewController *sendingViewController;
     
@@ -52,7 +52,7 @@
 -(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController withPredicate:(NSPredicate *)startPredicate  usePrescriber:(BOOL)usePresciberBool;
 
     
-    
+-(void)selectMyInformation;
 -(void)cancelButtonTapped;
     
 -(void)setSelectedClinicians;
