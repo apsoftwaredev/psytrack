@@ -138,7 +138,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     SCEntityDefinition *phoneDef = [SCEntityDefinition definitionWithEntityName:@"PhoneEntity" 
                                                         managedObjectContext:managedObjectContext
                                                                propertyNames:[NSArray arrayWithObjects:@"phoneName",
-                                                                            @"phoneNumber", @"extention", nil]];
+                                                                            @"phoneNumber", @"extension", nil]];
                        
     
     //Do some property definition customization for the phone Entity defined in phoneDef
@@ -185,7 +185,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     [phoneDef insertPropertyDefinition:callButtonProperty atIndex:3];
         
     }
-//    SCPropertyGroup *phoneGroup = [SCPropertyGroup groupWithHeaderTitle:@"Phone Number" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"phoneName",@"phoneNumber",@"extention" @"CallButton", nil]];
+//    SCPropertyGroup *phoneGroup = [SCPropertyGroup groupWithHeaderTitle:@"Phone Number" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"phoneName",@"phoneNumber",@"extension" @"CallButton", nil]];
 //    
 //    // add the phone property group
 //    [phoneDef.propertyGroups addGroup:phoneGroup];

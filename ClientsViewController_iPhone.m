@@ -936,88 +936,142 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
         
         SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
         
-            
-        
-        
         if (section.cellCount>1) {
             SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
-        
-            if (notesManagedObject &&[notesManagedObject respondsToSelector:@selector(entity)]) {
             
-            if ( [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
-                EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
+            if (notesManagedObject && [notesManagedObject respondsToSelector:@selector(entity)]) {
                 
-                if (encryptedNoteCell.textView.text.length) 
-                {
-                    valid=TRUE;
+                if ([ notesManagedObject.entity.name   isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+                    EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
+                    
+                    if (encryptedNoteCell.textView.text.length) 
+                    {
+                        valid=TRUE;
+                    }
+                    else 
+                    {
+                        valid=FALSE;
+                    }
+                    
+                } 
+                
+                
+                //here it is not the notes cell
+                if ([notesManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[notesCell isKindOfClass:[SCTextFieldCell class]]) {
+                    SCTextFieldCell *drugNameCell=(SCTextFieldCell *)notesCell;
+                    
+                    if (drugNameCell.textField.text.length) 
+                    {
+                        valid=TRUE;
+                    }
+                    else 
+                    {
+                        valid=FALSE;
+                    }
+                    
                 }
-                else 
-                {
-                    valid=FALSE;
+                
+                if ([notesManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
+                    EncryptedSCTextFieldCell *phoneNumberCell=(EncryptedSCTextFieldCell *)notesCell;
+                    
+                    if (phoneNumberCell.textField.text.length) 
+                    {
+                        valid=TRUE;
+                        valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
+                    }
+                    else 
+                    {
+                        valid=FALSE;
+                    }
+                    
                 }
                 
             }
             
-            //here it is not the notes cell
-            if ([notesManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[notesCell isKindOfClass:[SCTextFieldCell class]]) {
-                SCTextFieldCell *drugNameCell=(SCTextFieldCell *)notesCell;
-                
-                if (drugNameCell.textField.text.length) 
-                {
-                    valid=TRUE;
-                }
-                else 
-                {
-                    valid=FALSE;
-                }
-                
-            }
             
             
-                if ([notesManagedObject.entity.name isEqualToString:@"PhoneEntity"]){
+            if (section.cellCount>6) 
+            {
+                
+                //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
+                
+                
+                SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+                
+                if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&[cell isKindOfClass:[SCTextFieldCell class]]) {
+                    SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
+                    NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];;
                     
-                    
-                    if ([notesCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
-                    
-               
-                        EncryptedSCTextFieldCell *phoneNumberCell=(EncryptedSCTextFieldCell *)notesCell;
+                    NSNumber *number=[numberFormatter numberFromString:textFieldCell.textField.text];
+                    NSLog(@"cell tag is %i",cell.tag);
+                    NSLog(@"text inpou is %@",textFieldCell.textField.text);
+                    if (textFieldCell.textField.text.length) {
                         
-                        if (phoneNumberCell.textField.text.length&&phoneNumberCell.textField.text.length<20) 
-                        {
-                            valid=TRUE;
-                            valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
-                        }
-                        else 
-                        {
-                            valid=FALSE;
-                        }
+                        switch (cell.tag) {
+                            case 3:
+                            {
+                                if ([textFieldCell.textField.text integerValue]<500 &&number) {
+                                    valid=YES;
+                                }
+                                else {
+                                    valid=NO;
+                                }
+                            }
+                                break;
+                            case 4:
+                            {
+                                if ([textFieldCell.textField.text integerValue]<500 &&number) {
+                                    valid=YES;
+                                }
+                                else {
+                                    valid=NO;
+                                }
+                            }
+                                break;
+                            case 5:
+                            {
+                                if ( [textFieldCell.textField.text integerValue]<500 &&number) {
+                                    valid=YES;
+                                }
+                                else {
+                                    valid=NO;
+                                }
+                                
+                            }
+                                break;
+                            case 6:
+                            {
+                                if ([textFieldCell.textField.text integerValue]< 130 &&number) {
+                                    valid=YES;
+                                }
+                                else {
+                                    valid=NO;
+                                }
+                                
+                            }
+                                break;
+                            default:
+                                break;
+                        }                    
                         
-                    } 
+                        
+                    }
                     
-                     if ([notesCell isKindOfClass:[SCNumericTextFieldCell class]]) {
-                         EncryptedSCTextFieldCell *phoneNumberCell=(EncryptedSCTextFieldCell *)notesCell;
-                         if (phoneNumberCell.textField.text.length&&phoneNumberCell.textField.text.length<20) 
-                         {
-                             valid=TRUE;
-                             valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
-                         }
-                         else 
-                         {
-                             valid=FALSE;
-                         }
-
-
-                     }
+                    
+                    
+                    
+                    
                 }
+            }        
             
-            }  
-            }
-        
             
-        
-        
-        
+            
+            
+            
+            
+        }
     }
     
     if (tableViewModel.tag==4&& tableViewModel.sectionCount){
@@ -1053,68 +1107,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
         }        
     }
     
-    if (tableViewModel.tag==3&& tableViewModel.sectionCount){
         
-        
-        
-        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
-        
-        if (section.cellCount>6) 
-        {
-            SCTableViewCell *cellSystolic=(SCTableViewCell *)[section cellAtIndex:3];
-            SCTableViewCell *cellDiastolic=(SCTableViewCell *)[section cellAtIndex:4];
-            SCTableViewCell *cellHeartRate=(SCTableViewCell *)[section cellAtIndex:5];
-             SCTableViewCell *cellTemperature=(SCTableViewCell *)[section cellAtIndex:6];
-            NSManagedObject *cellManagedObject=(NSManagedObject *)cellSystolic.boundObject;
-            //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
-            
-            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)] &&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"]) {
-                SCTextFieldCell *cellSystolicTF=(SCTextFieldCell *)cellSystolic;
-                SCTextFieldCell *cellDiastolicTF=(SCTextFieldCell *)cellDiastolic;
-                SCTextFieldCell *cellHeartRateTF=(SCTextFieldCell *)cellHeartRate;
-                SCTextFieldCell *cellTemperatureTF=(SCTextFieldCell *)cellTemperature;
-                
-                                
-                NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];;
-                
-                NSNumber *systolicNumber=[numberFormatter numberFromString:cellSystolicTF.textField.text];
-                NSNumber *diastolicNumber=[numberFormatter numberFromString:cellDiastolicTF.textField.text];
-                NSNumber *heartRateNumber=[numberFormatter numberFromString:cellHeartRateTF.textField.text];
-                NSNumber *temperatureNumber=[numberFormatter numberFromString:cellTemperatureTF.textField.text];
-                
-                
-                
-                if (cellSystolicTF.textField.text.length && [cellSystolicTF.textField.text integerValue]<500 &&systolicNumber) {
-                    valid=YES;
-                }
-                else if (cellSystolicTF.textField.text.length||(cellSystolicTF.textField.text.length&&!systolicNumber)){
-                    valid=NO;
-                }
-                if (cellDiastolicTF.textField.text.length && [cellDiastolicTF.textField.text integerValue]<500 &&diastolicNumber) {
-                    valid=YES;
-                }
-                else if(cellDiastolicTF.textField.text.length||(cellDiastolicTF.textField.text.length&&!diastolicNumber)){
-                    valid=NO;
-                }
-                if (cellHeartRateTF.textField.text.length && [cellHeartRateTF.textField.text integerValue]<500 &&heartRateNumber) {
-                    valid=YES;
-                }
-                else if(cellHeartRateTF.textField.text.length ||(cellHeartRateTF.textField.text.length&&!heartRateNumber)){
-                    valid=NO;
-                }
-                
-                if (cellTemperatureTF.textField.text.length && [cellTemperatureTF.textField.text integerValue]< 130 &&temperatureNumber) {
-                    valid=YES;
-                }
-                else if(cellTemperatureTF.textField.text.length ||(!temperatureNumber && cellTemperatureTF.textField.text.length)){
-                    valid=NO;
-                }
-                
-            }
-        }        
-    }
- 
-    
     
     
     return valid;

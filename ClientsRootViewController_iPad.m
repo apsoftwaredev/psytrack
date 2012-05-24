@@ -1653,62 +1653,74 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             if (section.cellCount>6) 
             {
-                SCTableViewCell *cellSystolic=(SCTableViewCell *)[section cellAtIndex:3];
-                SCTableViewCell *cellDiastolic=(SCTableViewCell *)[section cellAtIndex:4];
-                SCTableViewCell *cellHeartRate=(SCTableViewCell *)[section cellAtIndex:5];
-                SCTableViewCell *cellTemperature=(SCTableViewCell *)[section cellAtIndex:6];
-                NSManagedObject *cellManagedObject=(NSManagedObject *)cellSystolic.boundObject;
+            
                 //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
                 
-                if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"]) {
-                    
-                    
-                                       
-                    
-                    
-                    
-                    
-                    
-                    SCTextFieldCell *cellSystolicTF=(SCTextFieldCell *)cellSystolic;
-                    SCTextFieldCell *cellDiastolicTF=(SCTextFieldCell *)cellDiastolic;
-                    SCTextFieldCell *cellHeartRateTF=(SCTextFieldCell *)cellHeartRate;
-                    SCTextFieldCell *cellTemperatureTF=(SCTextFieldCell *)cellTemperature;
-                    
+                
+                SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+                
+                if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&[cell isKindOfClass:[SCTextFieldCell class]]) {
+                    SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
                     NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];;
                     
-                    NSNumber *systolicNumber=[numberFormatter numberFromString:cellSystolicTF.textField.text];
-                    NSNumber *diastolicNumber=[numberFormatter numberFromString:cellDiastolicTF.textField.text];
-                    NSNumber *heartRateNumber=[numberFormatter numberFromString:cellHeartRateTF.textField.text];
-                    NSNumber *temperatureNumber=[numberFormatter numberFromString:cellTemperatureTF.textField.text];
+                    NSNumber *number=[numberFormatter numberFromString:textFieldCell.textField.text];
+                    NSLog(@"cell tag is %i",cell.tag);
+                    NSLog(@"text inpou is %@",textFieldCell.textField.text);
+                    if (textFieldCell.textField.text.length) {
+                   
+                    switch (cell.tag) {
+                        case 3:
+                        {
+                            if ([textFieldCell.textField.text integerValue]<500 &&number) {
+                                valid=YES;
+                            }
+                            else {
+                                valid=NO;
+                            }
+                        }
+                            break;
+                        case 4:
+                        {
+                            if ([textFieldCell.textField.text integerValue]<500 &&number) {
+                                valid=YES;
+                            }
+                            else {
+                                valid=NO;
+                            }
+                        }
+                            break;
+                        case 5:
+                        {
+                            if ( [textFieldCell.textField.text integerValue]<500 &&number) {
+                                valid=YES;
+                            }
+                            else {
+                                valid=NO;
+                            }
+                        
+                        }
+                            break;
+                        case 6:
+                        {
+                            if ([textFieldCell.textField.text integerValue]< 130 &&number) {
+                                valid=YES;
+                            }
+                            else {
+                                valid=NO;
+                            }
+                        
+                        }
+                            break;
+                        default:
+                            break;
+                    }                    
+                    
+                        
+                    }
                     
                     
-                    
-                    if (cellSystolicTF.textField.text.length && [cellSystolicTF.textField.text integerValue]<500 &&systolicNumber) {
-                        valid=YES;
-                    }
-                    else if (cellSystolicTF.textField.text.length||(cellSystolicTF.textField.text.length&&!systolicNumber)){
-                        valid=NO;
-                    }
-                    if (cellDiastolicTF.textField.text.length && [cellDiastolicTF.textField.text integerValue]<500 &&diastolicNumber) {
-                        valid=YES;
-                    }
-                    else if(cellDiastolicTF.textField.text.length||(cellDiastolicTF.textField.text.length&&!diastolicNumber)){
-                        valid=NO;
-                    }
-                    if (cellHeartRateTF.textField.text.length && [cellHeartRateTF.textField.text integerValue]<500 &&heartRateNumber) {
-                        valid=YES;
-                    }
-                    else if(cellHeartRateTF.textField.text.length ||(cellHeartRateTF.textField.text.length&&!heartRateNumber)){
-                        valid=NO;
-                    }
-                    
-                    if (cellTemperatureTF.textField.text.length && [cellTemperatureTF.textField.text integerValue]< 130 &&temperatureNumber) {
-                        valid=YES;
-                    }
-                    else if(cellTemperatureTF.textField.text.length ||(!temperatureNumber && cellTemperatureTF.textField.text.length)){
-                        valid=NO;
-                    }
-                    
+                                        
                     
                     
                 }
