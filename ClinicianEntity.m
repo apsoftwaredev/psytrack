@@ -49,7 +49,7 @@
 @dynamic supportDeliverySupervised;
 @dynamic specialties;
 @dynamic publications;
-@dynamic myInfo;
+
 @dynamic psyTestingSessionsSupervised;
 @dynamic medicationPrescribed;
 @dynamic influences;

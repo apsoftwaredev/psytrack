@@ -129,7 +129,7 @@
         }
         
         [objectsModel.modeledTableView setBackgroundColor:appDelegate.window.backgroundColor];
-        self.tableViewModel.theme = [SCTheme themeWithPath:@"ClearBackgroundTheme.sct"];
+        objectsModel.theme = [SCTheme themeWithPath:@"ClearBackgroundTheme.sct"];
 
         
        
@@ -137,7 +137,8 @@
         if (filterPredicate) {
             [self.searchBar setSelectedScopeButtonIndex:1];
         }
-        
+
+        objectsModel.autoAssignDelegateForDetailModels;
         objectsModel.allowDeletingItems=FALSE;
         objectsModel.autoSelectNewItemCell=TRUE;
         

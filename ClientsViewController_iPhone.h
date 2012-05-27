@@ -39,7 +39,7 @@
     SCTableViewModel *medicationReviewTableViewModel;
     int searchStringLength;
     BOOL reloadTableView;
-    
+    SCArrayOfObjectsModel *objectsModel;
     ClientEntity *currentlySelectedClient;
 }
 

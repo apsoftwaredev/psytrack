@@ -280,6 +280,8 @@
 		E7919B281547001F001161A9 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B271547001F001161A9 /* Icon-72@2x.png */; };
 		E7919B3015470EDB001161A9 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */; };
 		E7919B3215470F01001161A9 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */; };
+		E79AB6EB15718369009CE87A /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E79AB6E81571834E009CE87A /* libSensibleTableView.a */; };
+		E79AB6F81571839A009CE87A /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E79AB6F515718382009CE87A /* libSTV+CoreData.a */; };
 		E7A21370155B34CD005CF154 /* LogoBackgroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A2136E155B34CD005CF154 /* LogoBackgroundViewController.m */; };
 		E7A21371155B34CD005CF154 /* LogoBackgroundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7A2136F155B34CD005CF154 /* LogoBackgroundViewController.xib */; };
 		E7A5D7081559EB26000F248F /* ClearBackgroundTheme.sct in Resources */ = {isa = PBXBuildFile; fileRef = E7A5D7071559EB26000F248F /* ClearBackgroundTheme.sct */; };
@@ -294,38 +296,36 @@
 		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
 		E7E1A63D152E873500C227E8 /* ServicesViewController_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */; };
 		E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A6441530C18900C227E8 /* ShortFieldCell.m */; };
-		E7FB3A9C156287D1000A6782 /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7FB3A99156287BC000A6782 /* libSensibleTableView.a */; };
-		E7FB3AA915628803000A6782 /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7FB3AA6156287EB000A6782 /* libSTV+CoreData.a */; };
 		E7FB3AAD1562A4E4000A6782 /* TwoButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */; };
 		E7FB3AB31562C867000A6782 /* AddViewABLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB21562C867000A6782 /* AddViewABLinkButtonCell.m */; };
 		E7FB3AB61562C888000A6782 /* LookupRemoveLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB51562C888000A6782 /* LookupRemoveLinkButtonCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E7FB3A98156287BC000A6782 /* PBXContainerItemProxy */ = {
+		E79AB6E71571834E009CE87A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E7FB3A90156287BB000A6782 /* SensibleTableView.xcodeproj */;
+			containerPortal = E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DBE7373014F99E580076D2B6;
 			remoteInfo = SensibleTableView;
 		};
-		E7FB3A9A156287C9000A6782 /* PBXContainerItemProxy */ = {
+		E79AB6E91571835C009CE87A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E7FB3A90156287BB000A6782 /* SensibleTableView.xcodeproj */;
+			containerPortal = E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = DBE7372F14F99E580076D2B6;
 			remoteInfo = SensibleTableView;
 		};
-		E7FB3AA5156287EB000A6782 /* PBXContainerItemProxy */ = {
+		E79AB6F415718382009CE87A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E7FB3A9D156287EA000A6782 /* STV+CoreData.xcodeproj */;
+			containerPortal = E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DBE737C414FC66D40076D2B6;
 			remoteInfo = "STV+CoreData";
 		};
-		E7FB3AA7156287FA000A6782 /* PBXContainerItemProxy */ = {
+		E79AB6F61571838D009CE87A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E7FB3A9D156287EA000A6782 /* STV+CoreData.xcodeproj */;
+			containerPortal = E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
 			remoteInfo = "STV+CoreData";
@@ -728,6 +728,8 @@
 		E7919B271547001F001161A9 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.0.6 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
+		E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3.0.6 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E7A2136D155B34CD005CF154 /* LogoBackgroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoBackgroundViewController.h; sourceTree = "<group>"; };
 		E7A2136E155B34CD005CF154 /* LogoBackgroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoBackgroundViewController.m; sourceTree = "<group>"; };
 		E7A2136F155B34CD005CF154 /* LogoBackgroundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogoBackgroundViewController.xib; sourceTree = "<group>"; };
@@ -750,8 +752,6 @@
 		E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicesViewController_Shared.m; sourceTree = "<group>"; };
 		E7E1A6431530C18900C227E8 /* ShortFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortFieldCell.h; sourceTree = "<group>"; };
 		E7E1A6441530C18900C227E8 /* ShortFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortFieldCell.m; sourceTree = "<group>"; };
-		E7FB3A90156287BB000A6782 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.0.5 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
-		E7FB3A9D156287EA000A6782 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3.0.5 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E7FB3AAB1562A4E3000A6782 /* TwoButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoButtonCell.h; sourceTree = "<group>"; };
 		E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoButtonCell.m; sourceTree = "<group>"; };
 		E7FB3AB11562C867000A6782 /* AddViewABLinkButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewABLinkButtonCell.h; sourceTree = "<group>"; };
@@ -765,8 +765,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7FB3AA915628803000A6782 /* libSTV+CoreData.a in Frameworks */,
-				E7FB3A9C156287D1000A6782 /* libSensibleTableView.a in Frameworks */,
+				E79AB6F81571839A009CE87A /* libSTV+CoreData.a in Frameworks */,
+				E79AB6EB15718369009CE87A /* libSensibleTableView.a in Frameworks */,
 				E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */,
 				3773F77114FD267000C36B75 /* AudioToolbox.framework in Frameworks */,
 				B78E053214E6B4A300890EA4 /* Security.framework in Frameworks */,
@@ -1418,8 +1418,8 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				E7FB3A9D156287EA000A6782 /* STV+CoreData.xcodeproj */,
-				E7FB3A90156287BB000A6782 /* SensibleTableView.xcodeproj */,
+				E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */,
+				E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */,
 				E78A8D101531DCB30099FE5B /* PsyTrack.entitlements */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Helpers */,
@@ -1514,6 +1514,22 @@
 			name = "Existing Hours";
 			sourceTree = "<group>";
 		};
+		E79AB6E01571834E009CE87A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E79AB6E81571834E009CE87A /* libSensibleTableView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E79AB6ED15718382009CE87A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E79AB6F515718382009CE87A /* libSTV+CoreData.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E7E1A638152E86C600C227E8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -1521,22 +1537,6 @@
 				E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */,
 			);
 			name = Services;
-			sourceTree = "<group>";
-		};
-		E7FB3A91156287BB000A6782 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E7FB3A99156287BC000A6782 /* libSensibleTableView.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E7FB3A9E156287EA000A6782 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E7FB3AA6156287EB000A6782 /* libSTV+CoreData.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1553,8 +1553,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				E7FB3AA8156287FA000A6782 /* PBXTargetDependency */,
-				E7FB3A9B156287C9000A6782 /* PBXTargetDependency */,
+				E79AB6F71571838D009CE87A /* PBXTargetDependency */,
+				E79AB6EA1571835C009CE87A /* PBXTargetDependency */,
 			);
 			name = PsyTrack;
 			productName = psyTrainTrack;
@@ -1582,12 +1582,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = E7FB3A91156287BB000A6782 /* Products */;
-					ProjectRef = E7FB3A90156287BB000A6782 /* SensibleTableView.xcodeproj */;
+					ProductGroup = E79AB6E01571834E009CE87A /* Products */;
+					ProjectRef = E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */;
 				},
 				{
-					ProductGroup = E7FB3A9E156287EA000A6782 /* Products */;
-					ProjectRef = E7FB3A9D156287EA000A6782 /* STV+CoreData.xcodeproj */;
+					ProductGroup = E79AB6ED15718382009CE87A /* Products */;
+					ProjectRef = E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1598,18 +1598,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E7FB3A99156287BC000A6782 /* libSensibleTableView.a */ = {
+		E79AB6E81571834E009CE87A /* libSensibleTableView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSensibleTableView.a;
-			remoteRef = E7FB3A98156287BC000A6782 /* PBXContainerItemProxy */;
+			remoteRef = E79AB6E71571834E009CE87A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E7FB3AA6156287EB000A6782 /* libSTV+CoreData.a */ = {
+		E79AB6F515718382009CE87A /* libSTV+CoreData.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libSTV+CoreData.a";
-			remoteRef = E7FB3AA5156287EB000A6782 /* PBXContainerItemProxy */;
+			remoteRef = E79AB6F415718382009CE87A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -1911,15 +1911,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E7FB3A9B156287C9000A6782 /* PBXTargetDependency */ = {
+		E79AB6EA1571835C009CE87A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SensibleTableView;
-			targetProxy = E7FB3A9A156287C9000A6782 /* PBXContainerItemProxy */;
+			targetProxy = E79AB6E91571835C009CE87A /* PBXContainerItemProxy */;
 		};
-		E7FB3AA8156287FA000A6782 /* PBXTargetDependency */ = {
+		E79AB6F71571838D009CE87A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "STV+CoreData";
-			targetProxy = E7FB3AA7156287FA000A6782 /* PBXContainerItemProxy */;
+			targetProxy = E79AB6F61571838D009CE87A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

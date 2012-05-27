@@ -1,38 +1,38 @@
-/*
- *  ClinicianEntity.h
- *  psyTrack Clinician Tools
- *  Version: 1.0
- *
- *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
- *
- *  Created by Daniel Boice on 1/16/12.
- *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
- *
- *
- *	This notice may not be removed from this file.
- *
- */
+ /*
+   *  ClinicianEntity.h
+   *  psyTrack Clinician Tools
+   *  Version: 1.0
+   *
+   *
+   *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
+   *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
+   *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
+   *
+   *  Created by Daniel Boice on 1/16/12.
+   *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
+   *
+   *
+   *	This notice may not be removed from this file.
+   *
+   */
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class MyInfoEntity, TestingSessionDeliveredEntity,PTABGroup;
+@class  TestingSessionDeliveredEntity,PTABGroup;
 
 @interface ClinicianEntity : NSManagedObject {
 
 
- NSString * lastName;
- 
-  NSString * middleName;
-     NSString * firstName;
-   
-   NSString * suffix;
- 
-    NSString * prefix;
+	NSString * lastName;
 
-    NSMutableSet *tempABGroupSet;
+	NSString * middleName;
+	NSString * firstName;
+
+	NSString * suffix;
+
+	NSString * prefix;
+
+	NSMutableSet *tempABGroupSet;
 
 
 }
@@ -63,7 +63,7 @@
 @property (nonatomic, strong) NSSet *supportDeliverySupervised;
 @property (nonatomic, strong) NSSet *specialties;
 @property (nonatomic, strong) NSSet *publications;
-@property (nonatomic, strong) MyInfoEntity *myInfo;
+
 @property (nonatomic, strong) NSSet *psyTestingSessionsSupervised;
 @property (nonatomic, strong) NSManagedObject *medicationPrescribed;
 @property (nonatomic, strong) NSSet *influences;

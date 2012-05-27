@@ -244,7 +244,7 @@
 	objectsModel.searchPropertyName = @"drugName";
 	objectsModel.addButtonItem = self.addButton;
   
-	self.searchBar.delegate=self;
+//	self.searchBar.delegate=self;
     
     // Replace the default model with the new objectsModel
 //    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"drugName Matches %@",@"a"];

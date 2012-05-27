@@ -1222,50 +1222,50 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     //NSLog(@"scope changed");
     if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
     {
-//        SCArrayOfObjectsModel *objectsModel = (SCArrayOfObjectsModel *)tableViewModel;
-        //        if (objectsModel.sectionCount>0) {
-        //       SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-        //        
-        //        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
-        //            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)section;
-        //            
-        //                
-        //               
-        //                SCTableViewCell *cell=(SCTableViewCell *)[objectsModel cellAtIndexPath: objectSelectionSection.selectedCellIndexPath];
-        //                
-        //                
-        //                currentlySelectedClient= (ClientEntity *) cell.boundObject;
-        //                
-        //                
-        //                
-        //            
-        //            
-        //            
-        //        }
-        //        }
         
+//        if (objectsModel.sectionCount>0) {
+//            SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
+//            
+//            if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+//                SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)section;
+//                
+//                
+//                
+//                SCTableViewCell *cell=(SCTableViewCell *)[objectsModel cellAtIndexPath: objectSelectionSection.selectedCellIndexPath];
+//                
+//                
+//                currentlySelectedClient= (ClientEntity *) cell.boundObject;
+//                
+//                
+//                
+//                
+//                
+//                
+//            }
+//        }
+        SCDataFetchOptions *dataFetchOptions=(SCDataFetchOptions *)objectsModel.dataFetchOptions;
         [self.searchBar setSelectedScopeButtonIndex:selectedScope];
         
         switch (selectedScope) {
             case 0: //current
-//                objectsModel.itemsPredicate = [NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
+                dataFetchOptions.filterPredicate = [NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
                 //NSLog(@"case 1");
                 break;
                 
             default:
-//                objectsModel.itemsPredicate = nil;
+                dataFetchOptions.filterPredicate = nil;
                 //NSLog(@"case default");
                 
                 break;
         }
         
         
-//        [tableViewModel reloadBoundValues];
-//        
-//        
-//        [tableViewModel.modeledTableView reloadData];
+        [objectsModel reloadBoundValues];
         
-     
+        
+        [objectsModel.modeledTableView reloadData];
+        
+        
         //         if (objectsModel.sectionCount>0) {
         //        if (isInDetailSubview) {
         //        
