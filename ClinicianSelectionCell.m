@@ -124,7 +124,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
     ClinicianViewController *clinicianViewController=nil;
    
     
-    clinicianViewController=[[ClinicianViewController alloc]initWithNibName:clinicianViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController  withPredicate:(NSPredicate *)predicate usePrescriber:(BOOL)usePrescriber];
+    clinicianViewController=[[ClinicianViewController alloc]initWithNibName:clinicianViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController  withPredicate:(NSPredicate *)predicate usePrescriber:(BOOL)usePrescriber allowMultipleSelection:(BOOL)multiSelect];
     
     
     //NSLog(@"view controllers is %@",self.ownerTableViewModel.viewController.navigationController.viewControllers);

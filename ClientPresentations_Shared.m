@@ -875,7 +875,7 @@
         
         
         [clientsSelectionCell setTestDate:serviceDatePickerDate];
-        
+        clientsSelectionCell.addAgeCells=YES;
         
     }
     

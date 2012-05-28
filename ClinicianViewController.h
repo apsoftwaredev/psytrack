@@ -31,7 +31,7 @@
        
     
     BOOL filterByPrescriber;
-   
+    BOOL allowMultipleSelection;
     ClinicianSelectionCell *clinicianObjectSelectionCell;
     UIViewController *sendingViewController;
     
@@ -49,7 +49,7 @@
 //@property (nonatomic,strong)IBOutlet SCArrayOfObjectsModel *objectsModel;
 
 -(void)updateClinicianTotalLabel;
--(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController withPredicate:(NSPredicate *)startPredicate  usePrescriber:(BOOL)usePresciberBool;
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController withPredicate:(NSPredicate *)startPredicate  usePrescriber:(BOOL)usePresciberBool allowMultipleSelection:(BOOL)allowMultiSelect;
 
     
 -(void)selectMyInformation;

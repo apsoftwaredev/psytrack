@@ -28,9 +28,9 @@
 
 @implementation ClientsViewController_iPhone
 @synthesize searchBar;
-@synthesize tableView;
+//@synthesize tableView;
 @synthesize totalClientsLabel;
-@synthesize tableModel;
+//@synthesize tableModel;
 @synthesize isInDetailSubview;
 @synthesize clientObjectSelectionCell;
 @synthesize sendingViewController;
@@ -61,8 +61,8 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 -(void)refreshData{
     
     
-    [tableModel reloadBoundValues];
-    [tableModel.modeledTableView reloadData];
+    [objectsModel reloadBoundValues];
+    [objectsModel.modeledTableView reloadData];
 }
 
 
@@ -265,8 +265,8 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 -(void)viewDidUnload{
     [super viewDidUnload];
     self.clientsViewController_Shared =nil;
-    self.tableModel=nil;
-    
+ 
+    objectsModel=nil;
     
     
 }
@@ -2047,13 +2047,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(void)updateClientsTotalLabel{
     
     
-    if (tableModel.tag==0) 
+    if (objectsModel.tag==0) 
     {
         int cellCount=0;
-        if (tableModel.sectionCount >0){
+        if (objectsModel.sectionCount >0){
             
-            for (int i=0; i<tableModel.sectionCount; i++) {
-                SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:i];
+            for (int i=0; i<objectsModel.sectionCount; i++) {
+                SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:i];
                 cellCount=cellCount+section.cellCount;
                 
             }

@@ -2392,6 +2392,7 @@
                         }
                         else {
                             labelString=[@"Out" stringByAppendingFormat:@" %@",labelString];
+                            cell.textLabel.textColor=[UIColor blackColor];
                         }
                         cell.textLabel.text=labelString;
                         
@@ -2593,7 +2594,7 @@
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
 
-    UIColor *backgroundColor=nil;
+    UIColor *backgroundColor=[UIColor clearColor];
     if(indexPath.row==NSNotFound|| tableModel.tag>0||isInDetailSubview)
     {
         backgroundColor=(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor;
@@ -4398,7 +4399,7 @@
             
         [personViewTableView setBackgroundView:nil];
         [personViewTableView setBackgroundView:[[UIView alloc]init]];
-            if (addingClinician) {
+            if (addingClinician||isInDetailSubview) {
                 [personViewTableView setBackgroundColor:appDelegate.window.backgroundColor]; 
             }else {
                 [personViewTableView setBackgroundColor:UIColor.clearColor]; 

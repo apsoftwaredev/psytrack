@@ -237,7 +237,7 @@
 //    
 //    
 //    
-    
+
     
     SCArrayOfObjectsModel *objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:drugDef];
 	objectsModel.searchBar = self.searchBar;
@@ -255,148 +255,92 @@
     SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"drugName" sortAscending:YES filterPredicate:nil];
    
   
- 
+    dataFetchOptions.batchStartingOffset=0;
     dataFetchOptions.batchSize=10;
-
+    objectsModel.dataStore.storeMode=SCStoreModeAsynchronous;
  
     objectsModel.dataFetchOptions=dataFetchOptions;
+   
+    [objectsModel reloadBoundValues];
+    
     self.tableViewModel = objectsModel;
 //    [self.tableViewModel reloadBoundValues];
-//    if (isInDetailSubview) {
-//        
+    if (isInDetailSubview) {
+        
 //         NSPredicate *currentClientsPredicate=[NSPredicate predicateWithFormat:@"applNo MATCHES %@",drugObjectSelectionCell_.d];
-//        
+        
 //        tableModel=[[SCArrayOfObjectsModel alloc]tableViewModelWithTableView:(UITableView *)self.tableView
 //                                                          withViewController:(UIViewController *)self
 //                                                                   withItems:(NSMutableArray *)drugsMutableArray
 //                                                         withClassDefinition:(SCEntityDefinition *)classDefinition
 //                                                       useSCSelectionSection:(BOOL)_useSCSelectionSection];
-//        
+        
         
         
             
 //       tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withItems:drugsMutableArray withClassDefinition:drugDef useSCSelectionSection:YES];	
-        
+//        
 //        tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView items:drugsMutableArray itemsDefinition:drugDef];	
-//        
-////        [self.searchBar setSelectedScopeButtonIndex:1];
-//       
-//        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
-//        
-//        
-//        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped)];
-//        [buttons addObject:doneButton];
-//        
-//        // create a spacer
-//        UIBarButtonItem* viewButton = [[UIBarButtonItem alloc]
-//                                       initWithTitle:@"View" style:UIBarButtonItemStylePlain target:nil action:nil];
-//        
-//      
-//        [buttons addObject:viewButton];
-//        
-////        [self editButtonItem];
-//        
-//        
-//        // create a standard "add" button
-////        UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
+        
+//        [self.searchBar setSelectedScopeButtonIndex:1];
+       
+        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
+        
+        
+        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped)];
+        [buttons addObject:doneButton];
+        
+        // create a spacer
+        UIBarButtonItem* viewButton = [[UIBarButtonItem alloc]
+                                       initWithTitle:@"View" style:UIBarButtonItemStylePlain target:nil action:nil];
+        
+      
+        [buttons addObject:viewButton];
+        
+//        [self editButtonItem];
+        
+        
+        // create a standard "add" button
+//        UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
 ////                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
 ////        addButton.style = UIBarButtonItemStyleBordered;
 ////        [buttons addObject:addButton];
 ////        
-//        
-//        
-//        // stick the buttons in the toolbar
-//        self.navigationItem.rightBarButtonItems=buttons;
-//        self.tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
-//        
-//        
-//        UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
-//        
-//        self.navigationItem.leftBarButtonItem=cancelButton;
-//        
-//        //so you can tell that the it is in view mode
-//        tableModel.allowMovingItems=YES;
-//        
-//    }
-//    else
-//    {
-//        
-//       	tableModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:drugDef];
-//	
-//        tableModel.allowMovingItems=NO;
-//        
-//    }
-//
-//    tableModel.searchBar = self.searchBar;
-//	tableModel.searchPropertyName = @"drugName;activeIngredient";
-//    
-//    tableModel.allowAddingItems=FALSE;
-//    tableModel.allowDeletingItems=FALSE;
-//
-//    
-//    tableModel.autoAssignDelegateForDetailModels=TRUE;
-//    tableModel.autoAssignDataSourceForDetailModels=TRUE;
-//    self.tableViewModel=tableModel;
-//    
-//     // Initialize tableModel
-//       
-    //	
+        
+        
+        // stick the buttons in the toolbar
+        self.navigationItem.rightBarButtonItems=buttons;
+        objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
+        
+        
+        UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
+        
+        self.navigationItem.leftBarButtonItem=cancelButton;
+        
+        //so you can tell that the it is in view mode
+        objectsModel.allowMovingItems=YES;
+        
+    }
+    else
+    {
+        
     
-    // Initialize tableModel
-//    if (isInDetailSubview) {
-//        
-//        
-//        
-//        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
-//        
-//        
-//        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped)];
-//        [buttons addObject:doneButton];
-//        
-//        // create a spacer
-//        UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
-//                                       initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
-//        [buttons addObject:editButton];
-//        
-//        [self editButtonItem];
-//        
-//        
-//        // create a standard "add" button
-//        UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
-//                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
-//        addButton.style = UIBarButtonItemStyleBordered;
-//        [buttons addObject:addButton];
-//        
-//        
-//        
-//        // stick the buttons in the toolbar
-//        self.navigationItem.rightBarButtonItems=buttons;
-//        self.tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
-//        self.tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:2];
-//        
-//        UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
-//        
-//        self.navigationItem.leftBarButtonItem=cancelButton;
-//        
-//        
-//    }
-//    else
-//    {
-//        if (self.navigationItem.rightBarButtonItems.count>1) {
-//            
-//            tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
-//        }
-//        
-//        
-//        
-//        if (self.navigationItem.rightBarButtonItems.count >0)
-//        {
-//            tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
-//        }
-//        
-//
-//        
-//    }
+    
+        if (self.navigationItem.rightBarButtonItems.count>1) {
+            
+            objectsModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
+        }
+        
+        
+        
+        if (self.navigationItem.rightBarButtonItems.count >0)
+        {
+            objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
+        }
+        
+
+        
+    }
     
     
     
@@ -407,41 +351,6 @@
     }
     
     
-//    [self updateClientsTotalLabel];
-    
-//    [(PTTAppDelegate *)[UIApplication sharedApplication].delegate application:[UIApplication sharedApplication]
-//                                               willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
-//                                                                     duration:5];
-//    
-    
-//    [self startCheckingForUpdate];
-    
-    
-//    self.downloadLabel.text=@"Checking...";
-//   
-//    [checkingTimer_ invalidate];
-//    checkingTimer_=nil;
-//    checkingTimer_  = [NSTimer scheduledTimerWithTimeInterval:2.5
-//                                                           target:self
-//                                                     selector:@selector(flashCheckingLabel:)
-//                                                         userInfo:NULL
-//                                                          repeats:YES];
- 
-
-    
-//   self.downloadBytesLabel.hidden=NO;
-//   self.downloadBytesLabel.text=@"100\%";
-//    NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:1];
-//    // create a spacer
-//    //    UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
-//    //                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
-//    
-//    
-//    
-//    // create a standard "add" button
-//    [buttons addObject:self.downloadBytesLabel];
-//    
-//    self.navigationItem.rightBarButtonItems=buttons;
 
     
     CGFloat localDbBytes=(CGFloat )[self getLocalDrugFileSize];
@@ -454,6 +363,7 @@
     
     
 }
+
 //-()sea
 //-(NSArray *)tableViewModel:(SCArrayOfItemsModel *)tableModel customSearchResultForSearchText:(NSString *)searchText autoSearchResults:(NSArray *)autoSearchResults{
 //
@@ -1098,7 +1008,7 @@
 {
     
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
-    
+   
     //NSLog(@"cell count is %i",section.cellCount);
     if (tableViewModel.tag==1 &&index==0) {
         if (section.cellCount<5) {
@@ -1141,11 +1051,15 @@
                 case 14:
         {
             
-            if ([cell isKindOfClass:[CustomSCSelectonCellWithLoading class]]) {
-                CustomSCSelectonCellWithLoading * loadingCell=(CustomSCSelectonCellWithLoading *)cell;
-                loadingCell.imageView.hidden=FALSE;
-            }
             
+             
+                
+                
+                
+                
+               
+                
+                
             
             
             

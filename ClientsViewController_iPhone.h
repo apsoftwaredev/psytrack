@@ -25,8 +25,8 @@
     
 //    UISearchDisplayController *searchDisplayController;
   	 UISearchBar *searchBar;
-    UITableView *tableView;
-	 SCArrayOfObjectsModel *tableModel;
+//    UITableView *tableView;
+//	 SCArrayOfObjectsModel *tableModel;
      UILabel *totalClientsLabel;
 
     NSManagedObjectContext *managedObjectContext;
@@ -44,12 +44,12 @@
 }
 
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
+//@property (nonatomic, strong) IBOutlet UITableView *tableView;
 //@property (nonatomic, strong) IBOutlet UITableView *searchResultsTableView;
 
 //@property (nonatomic, strong)IBOutlet UISearchDisplayController *searchDisplayController;
 @property (nonatomic, strong) IBOutlet UILabel *totalClientsLabel;
-@property (nonatomic, strong)  SCArrayOfObjectsModel *tableModel;
+//@property (nonatomic, strong)  SCArrayOfObjectsModel *tableModel;
 @property (nonatomic, strong)  ClientsViewController_Shared *clientsViewController_Shared;
 @property (nonatomic, readwrite) BOOL isInDetailSubview;
 @property (nonatomic,strong) IBOutlet ClientsSelectionCell *clientObjectSelectionCell;

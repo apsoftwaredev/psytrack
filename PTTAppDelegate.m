@@ -3029,7 +3029,7 @@ duration:(NSTimeInterval)1.0];
                if (clientsViewController_iPhone ) {
                    [self saveContext];
                       
-                   [clientsViewController_iPhone.tableModel reloadBoundValues];
+                   [clientsViewController_iPhone.tableViewModel reloadBoundValues];
                    [clientsViewController_iPhone updateClientsTotalLabel];
                }
 

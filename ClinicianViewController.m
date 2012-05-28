@@ -38,7 +38,7 @@
 #pragma mark -
 #pragma mark View lifecycle
 
--(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController withPredicate:(NSPredicate *)startPredicate  usePrescriber:(BOOL)usePresciberBool{
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController withPredicate:(NSPredicate *)startPredicate  usePrescriber:(BOOL)usePresciberBool allowMultipleSelection:(BOOL)allowMultiSelect{
     
     self=[super initWithNibName:nibName bundle:bundle];
     
@@ -48,7 +48,7 @@
     clinicianObjectSelectionCell=objectSelectionCell;
     currentlySelectedClinician=clinicianObjectSelectionCell.clinicianObject;
     sendingViewController=viewController;
-  
+    allowMultipleSelection=allowMultiSelect;
     
     return self;
     
@@ -138,7 +138,7 @@
             [self.searchBar setSelectedScopeButtonIndex:1];
         }
 
-        objectsModel.autoAssignDelegateForDetailModels;
+        objectsModel.autoAssignDelegateForDetailModels=YES;
         objectsModel.allowDeletingItems=FALSE;
         objectsModel.autoSelectNewItemCell=TRUE;
         
@@ -416,7 +416,7 @@
             SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
             
             [objectsSelectionSection commitCellChanges];
-            if (objectsSelectionSection.allowMultipleSelection) {
+            if (allowMultipleSelection) {
                 NSInteger sectionCount=self.tableViewModel.sectionCount;
                 //NSLog(@"section count is %i",sectionCount);
                 if (sectionCount&& !currentlySelectedCliniciansArray) {
@@ -646,7 +646,7 @@
            
                 SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)[self.tableViewModel sectionAtIndex:i];
             
-            if (objectSelectionSection.allowMultipleSelection) 
+            if (allowMultipleSelection) 
             {
                 //NSLog(@"currentlyselected clinicians in set selected are %@",currentlySelectedCliniciansArray);
                 if (currentlySelectedCliniciansArray.count) {
@@ -686,7 +686,7 @@
             SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
             
             
-            if (objectsSelectionSection.allowMultipleSelection) 
+            if (allowMultipleSelection) 
             {
                 if (currentlySelectedCliniciansArray&& currentlySelectedCliniciansArray.count) {
                     [currentlySelectedCliniciansArray removeAllObjects];
@@ -822,10 +822,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     if (objectsModel.tag==0) 
     {
         int cellCount=0;
-        if (self.tableViewModel.sectionCount >0){
+        if (objectsModel.sectionCount >0){
             
-            for (int i=0; i<self.tableViewModel.sectionCount; i++) {
-                SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:i];
+            for (int i=0; i<objectsModel.sectionCount; i++) {
+                SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:i];
                 cellCount=cellCount+section.cellCount;
                 
             }
@@ -899,25 +899,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     
 
-      if (isInDetailSubview &&!filterByPrescriber)
+      if (isInDetailSubview &&[section isKindOfClass:[SCObjectSelectionSection class]])
       {
         
-        if ([section isKindOfClass:[SCObjectSelectionSection class]]) 
-        {
+        
             SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
             
-            objectSelectionSection.allowMultipleSelection=YES;
-            objectSelectionSection.allowNoSelection=YES;
-        }
-      }
-    else  if (isInDetailSubview && filterByPrescriber)
-    {
-            if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
-                SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
-                
-                objectSelectionSection.allowMultipleSelection=NO;
-                objectSelectionSection.allowNoSelection=YES;
-            }
+            objectSelectionSection.allowMultipleSelection=allowMultipleSelection;
+      
     }
     
 

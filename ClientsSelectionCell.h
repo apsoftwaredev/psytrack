@@ -23,6 +23,7 @@
      NSManagedObject *clientObject;
     BOOL hasChangedClients;
     NSDate *testDate;
+    BOOL addAgeCells_;
 }
 
 
@@ -30,7 +31,7 @@
 @property (nonatomic, readwrite)  BOOL hasChangedClients;
 @property (nonatomic, strong) NSDate *testDate;
 
-
+@property (nonatomic, assign) BOOL addAgeCells;
 @property (nonatomic,strong)IBOutlet  NSManagedObject *clientObject;
 
 -(void)doneButtonTappedInDetailView:(NSObject *)selectedObject  withValue:(BOOL)hasValue;

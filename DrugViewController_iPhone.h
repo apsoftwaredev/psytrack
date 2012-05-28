@@ -21,7 +21,7 @@
 #import "UIDownloadBar.h"
 #import "DrugNameObjectSelectionCell.h"
 #import "DrugProductEntity.h"
-@interface DrugViewController_iPhone : SCViewController <SCTableViewModelDataSource, UIDownloadBarDelegate,UISearchBarDelegate > {
+@interface DrugViewController_iPhone : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, UIDownloadBarDelegate > {
     
     
   	UISearchBar *searchBar;

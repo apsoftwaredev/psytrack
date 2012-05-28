@@ -19,6 +19,7 @@
 #import "PTTAppDelegate.h"
 #import "Time_Shared.h"
 #import "ButtonCell.h"
+#import "ClinicianSelectionCell.h"
 
 
 
@@ -59,7 +60,7 @@
     
     UIViewController *navtitle=self.navigationController.topViewController;
     
-    navtitle.title=@"Testing Sessions";
+    navtitle.title=@"Assessments";
     
     
     SCEntityDefinition *testSessionDeliveredDef =[SCEntityDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
@@ -113,7 +114,7 @@
     [testSessionDeliveredDef.propertyGroups addGroup:eventGroup];
        
    
-    SCPropertyGroup *peopleGroup =[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"supervisor",@"paperwork",   @"notes",nil]];
+    SCPropertyGroup *peopleGroup =[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"SupervisorData",@"paperwork",   @"notes",nil]];
     
     
     
@@ -137,29 +138,57 @@
     [testSessionDeliveredDef.propertyGroups addGroup:creditsGroup];
     
     
-    SCPropertyDefinition *supervivisorPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"supervisor"];
+ 
+    [testSessionDeliveredDef removePropertyDefinitionWithName:@"supervisor"];
     
-   	supervivisorPropertyDef.type = SCPropertyTypeObjectSelection;
+    //create the dictionary with the data bindings
+    NSDictionary *clinicianDataBindings = [NSDictionary 
+                                           dictionaryWithObjects:[NSArray arrayWithObjects:@"supervisor",@"Supervisor",[NSNumber numberWithBool:NO],@"supervisor",[NSNumber numberWithBool:NO],nil] 
+                                           forKeys:[NSArray arrayWithObjects:@"1",@"90",@"91",@"92",@"93",nil ]]; // 1 are the control tags
+	
+    //create the custom property definition
+    SCCustomPropertyDefinition *clinicianDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SupervisorData"
+                                                                                        uiElementClass:[ClinicianSelectionCell class] objectBindings:clinicianDataBindings];
+	
     
-    SCEntityDefinition *supervisorDef =[SCEntityDefinition definitionWithEntityName:@"ClinicianEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix", nil]];
-    supervisorDef.titlePropertyName=@"prefix;firstName;lastName;suffix";
-    supervisorDef.orderAttributeName=@"order";
-    
-    SCPropertyGroup *supervisorNameGroup =[SCPropertyGroup groupWithHeaderTitle:@"Supervisor Name" footerTitle:@"Select this clinician under the Clicician tab to add or view more details." propertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix", nil]];
+    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+    clinicianDataProperty.autoValidate=FALSE;
     
     
+     [testSessionDeliveredDef insertPropertyDefinition:clinicianDataProperty atIndex:1];
     
     
-    [supervisorDef.propertyGroups addGroup:supervisorNameGroup];
+    /****************************************************************************************/
+    /*	END of Class Definition and attributes for the Client Entity */
+    /****************************************************************************************/
     
-    SCObjectSelectionAttributes *supervisorSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:supervisorDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-    supervisorSelectionAttribs.allowAddingItems = YES;
-    supervisorSelectionAttribs.allowDeletingItems = YES;
-    supervisorSelectionAttribs.allowMovingItems = YES;
-    supervisorSelectionAttribs.allowEditingItems = YES;
-    supervisorSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Supervisors)"];
-    supervisorSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Supervisor"];
-    supervivisorPropertyDef.attributes = supervisorSelectionAttribs;
+    //insert the custom property definition into the clientData class at index 
+   
+    
+
+    
+    
+//   	supervivisorPropertyDef.type = SCPropertyTypeObjectSelection;
+//    
+//    SCEntityDefinition *supervisorDef =[SCEntityDefinition definitionWithEntityName:@"ClinicianEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix", nil]];
+//    supervisorDef.titlePropertyName=@"prefix;firstName;lastName;suffix";
+//    supervisorDef.orderAttributeName=@"order";
+//    
+//    SCPropertyGroup *supervisorNameGroup =[SCPropertyGroup groupWithHeaderTitle:@"Supervisor Name" footerTitle:@"Select this clinician under the Clicician tab to add or view more details." propertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix", nil]];
+//    
+    
+    
+    
+//    [supervisorDef.propertyGroups addGroup:supervisorNameGroup];
+//    
+//    SCObjectSelectionAttributes *supervisorSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:supervisorDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+//    supervisorSelectionAttribs.allowAddingItems = YES;
+//    supervisorSelectionAttribs.allowDeletingItems = YES;
+//    supervisorSelectionAttribs.allowMovingItems = YES;
+//    supervisorSelectionAttribs.allowEditingItems = YES;
+//    supervisorSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Supervisors)"];
+//    supervisorSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Supervisor"];
+//    supervivisorPropertyDef.attributes = supervisorSelectionAttribs;
     
     SCPropertyDefinition *clientsPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"clients"];
     

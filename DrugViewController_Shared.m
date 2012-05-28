@@ -51,24 +51,24 @@
    
    
     
-    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-
+//    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+//
     
-    NSEntityDescription *appEntityDescMain=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:managedObjectContext];
-    
-    
-    NSFetchRequest *appFetchRequestMain = [[NSFetchRequest alloc] init];
-    
-    [appFetchRequestMain setEntity:appEntityDescMain];
-    NSError *appMainError = nil;
-    NSArray *appFetchedObjectsMain = [managedObjectContext executeFetchRequest:appFetchRequestMain error:&appMainError];
-    
-    NSInteger appFetchedObjectsCountMain= appFetchedObjectsMain.count;
-    if (appFetchedObjectsCountMain==0) {
-        [(PTTAppDelegate *)[UIApplication sharedApplication].delegate  copyDrugsToMainContext]; 
-         [(PTTAppDelegate *)[UIApplication sharedApplication].delegate saveContext];
-    }
-         //NSLog(@"copied to main complete");
+//    NSEntityDescription *appEntityDescMain=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:managedObjectContext];
+//    
+//    
+//    NSFetchRequest *appFetchRequestMain = [[NSFetchRequest alloc] init];
+//    
+//    [appFetchRequestMain setEntity:appEntityDescMain];
+//    NSError *appMainError = nil;
+//    NSArray *appFetchedObjectsMain = [managedObjectContext executeFetchRequest:appFetchRequestMain error:&appMainError];
+//    
+//    NSInteger appFetchedObjectsCountMain= appFetchedObjectsMain.count;
+//    if (appFetchedObjectsCountMain==0) {
+//        [(PTTAppDelegate *)[UIApplication sharedApplication].delegate  copyDrugsToMainContext]; 
+//         [(PTTAppDelegate *)[UIApplication sharedApplication].delegate saveContext];
+//    }
+//         //NSLog(@"copied to main complete");
     }
   
     BOOL takeOutQuotes=FALSE;

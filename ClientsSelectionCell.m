@@ -27,6 +27,7 @@
 @synthesize hasChangedClients;
 @synthesize clientObject=clientObject;
 @synthesize testDate;
+@synthesize addAgeCells=addAgeCells_;
 
 -(void) performInitialization{
 
@@ -122,8 +123,8 @@
         
         
         [self.ownerTableViewModel.viewController.navigationController pushViewController:clientsViewContoller animated:YES];
-    if ([clientsViewContoller.tableModel sectionCount]>0) {
-        SCTableViewSection *section=(SCTableViewSection *)[clientsViewContoller.tableModel sectionAtIndex:0];
+    if ([clientsViewContoller.tableViewModel sectionCount]>0) {
+        SCTableViewSection *section=(SCTableViewSection *)[clientsViewContoller.tableViewModel sectionAtIndex:0];
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
             
@@ -278,8 +279,8 @@
         hasChangedClients=hasValue;
 
     
-    
-    NSIndexPath *myIndexPath=(NSIndexPath *)[self.ownerTableViewModel indexPathForCell:self];
+        if (addAgeCells_) {
+        NSIndexPath *myIndexPath=(NSIndexPath *)[self.ownerTableViewModel indexPathForCell:self];
     
     SCTableViewSection *clientSelectionCellOwnerSection=(SCTableViewSection *)[self.ownerTableViewModel sectionAtIndex:(NSInteger )myIndexPath.section ];
     
@@ -290,9 +291,10 @@
     clientPresentationsShared.serviceDatePickerDate=(NSDate *)testDate;
     
     [clientPresentationsShared addWechlerAgeCellToSection:clientSelectionCellOwnerSection];
-    
-    
-    if (clientObject) {
+            
+        }
+        
+        if (clientObject) {
     
 
              self.label.text=[clientObject valueForKeyPath:@"clientIDCode"];
