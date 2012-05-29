@@ -146,7 +146,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 -(NSURL *)applicationSupportURL;
 -(NSString *)applicationSupportPath;
 -(NSString *)setupLockDictionaryResultStr;
--(NSString *)setupDefaultLockDictionaryResultStr;
+
 - (void)saveDrugsContext;
 - (NSNumber *)iCloudPreferenceFromUserDefaults;
 -(BOOL)copyDrugsToMainContext;
@@ -156,7 +156,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 -(NSString *)applicationDrugsPathString;
 
 //-(NSString *)decyptString:(NSString *) str;
--(NSString *)decyptString:(NSString *) encryptedString usingKeyString:(NSString *)keyString;
+//-(NSString *)decyptString:(NSString *) encryptedString usingKeyString:(NSString *)keyString;
 -(NSDictionary *)encryptDataToEncryptedData:(NSData *) unencryptedData withKeyString:(NSString *)keyStringToSet;
 -(NSDictionary *)encryptStringToEncryptedData:(NSString *)plainTextStr withKeyString:(NSString *)keyStringToSet;
 -(NSString *)convertDataToString:(NSData *)data;
@@ -167,7 +167,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 -(NSString *)generateRandomStringOfLength:(int )length;
 -(NSString *)combSmString;
 -(NSData *)hashDataFromString:(NSString *)plainString;
--(NSDictionary*)unwrapAndCreateKeyDataFromKeyEntitywithKeyString:(NSString *)keyString;
+
 -(NSDate *)convertDataToDate:(NSData *)data;
 -(IBAction)notifyTrustFailure:(id)sender;
 -(NSData *)decryptDataToPlainData:(NSData *)encryptedData usingSymetricKey:(NSData *)symetricData;

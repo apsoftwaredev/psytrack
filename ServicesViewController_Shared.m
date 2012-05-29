@@ -707,8 +707,8 @@
         {
             if (tableViewModel.delegate!=clientPresentations_Shared) 
             {
-                SCArrayOfObjectsModel *arrayOfObjectsModel=(SCArrayOfObjectsModel *)self.tableViewModel;
-                clientPresentations_Shared.tableModel=arrayOfObjectsModel;
+//                SCArrayOfObjectsModel *arrayOfObjectsModel=(SCArrayOfObjectsModel *)self.tableViewModel;
+//                clientPresentations_Shared.tableModel=arrayOfObjectsModel;
                 tableViewModel.delegate=clientPresentations_Shared;
                 if (serviceDateCell.label.text.length) 
                 {
@@ -793,28 +793,46 @@
                 
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                 //NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
-                if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
+                if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
                     
-                    SCArrayOfObjectsSection *section=(SCArrayOfObjectsSection *)[tableViewModel sectionAtIndex:0];
-                    NSMutableSet *mutableSet=[(NSMutableSet *)section.items mutableSetValueForKey:@"client"];
+                    SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)[tableViewModel sectionAtIndex:0];
+                    NSMutableSet *mutableSet=[(NSMutableSet *)arrayOfObjectsSection.items mutableSetValueForKey:@"client"];
                     
+                    NSLog(@"mutable set is %@",mutableSet);
                     SCArrayOfObjectsSection *mainSection=(SCArrayOfObjectsSection *)[detailTableViewModel sectionAtIndex:0];
-                    ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];
-                    clientSelectionCell.alreadySelectedClients=mutableSet;
-                    
-                    //NSLog(@"client items are12345 %@",mutableSet);
-                    clientSelectionCell.hasChangedClients=NO;
-                    
+                    if (mainSection.cellCount) {
+                        SCTableViewCell *cellAtZero=(SCTableViewCell *)[mainSection cellAtIndex:0];
+                        
+                        if ([cellAtZero isKindOfClass:[ClientsSelectionCell class]]) {
+                            ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];
+                            clientSelectionCell.alreadySelectedClients=mutableSet;
+                            
+                            //NSLog(@"client items are12345 %@",mutableSet);
+                            clientSelectionCell.hasChangedClients=NO;
+                        }
+                       
+
+                    }
+                                        
                 }
                 
             }
             
             
-            else if ([cell.textLabel.text isEqualToString:@"tap + to add clients"]) 
+            else if ([cell.textLabel.text isEqualToString:@"tap + to add clients"]&&detailTableViewModel.sectionCount) 
             {
+               
                 SCArrayOfObjectsSection *mainSection=(SCArrayOfObjectsSection *)[detailTableViewModel sectionAtIndex:0];
-                ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];
-                clientSelectionCell.alreadySelectedClients=[[NSMutableSet alloc]init];;
+                if (mainSection.cellCount) {
+                    SCTableViewCell *cellAtZero=(SCTableViewCell *)[mainSection cellAtIndex:0];
+                    
+                    if ([cellAtZero isKindOfClass:[ClientsSelectionCell class]]) {
+                        ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];
+                        clientSelectionCell.alreadySelectedClients=[NSMutableSet set];
+                    }
+                  
+                }
+            
                 
             }
             
@@ -944,14 +962,30 @@
             SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
             NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
             //NSLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
-            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
+            if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)] &&[cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
                 
                 SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
                 NSMutableSet *mutableSet=[(NSMutableSet *)arrayOfObjectsSection.items mutableSetValueForKey:@"client"];
                 
+                NSLog(@"mutable set is %@",mutableSet);
+                if (detailTableViewModel.sectionCount) {
+               
                 SCArrayOfObjectsSection *mainSection=(SCArrayOfObjectsSection *)[detailTableViewModel sectionAtIndex:0];
-                ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];
-                clientSelectionCell.alreadySelectedClients=mutableSet;
+                if (mainSection.cellCount) {
+                    SCTableViewCell *cellAtZero=(SCTableViewCell *)[mainSection cellAtIndex:0];
+                    
+                    if ([cellAtZero isKindOfClass:[ClientsSelectionCell class]]) {
+                        ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];
+                        clientSelectionCell.alreadySelectedClients=mutableSet;
+                        
+                        //NSLog(@"client items are12345 %@",mutableSet);
+                        clientSelectionCell.hasChangedClients=NO;
+                    }
+                    
+                    
+                }
+                    
+                }
                 
                 //NSLog(@"client items are12345 %@",mutableSet);
                 

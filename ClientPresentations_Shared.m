@@ -21,11 +21,11 @@
 #import "BehaviorPickerCell.h"
 #import "BOPickersDataSource.h"
 #import "ClientsSelectionCell.h"
-
+#import "InstrumentEntity.h"
 
 @implementation ClientPresentations_Shared
 @synthesize clientPresentationDef;
-@synthesize tableModel;
+//@synthesize tableModel;
 @synthesize serviceDatePickerDate;
 
 
@@ -827,6 +827,144 @@
 //    weightUnit
     
     
+    
+    //Create a class definition for the instrument Score Entity
+    SCEntityDefinition *instrumentScoreDef = [SCEntityDefinition definitionWithEntityName:@"InstrumentScoreEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects: @"scoreName" ,@"rawScore", @"scaledScore", @"standardScore", @"percentile", @"tScore",   @"zScore" ,@"baseRate",  @"confidence", @"cIFloor", @"cICeiling",  @"notes" ,    nil]];
+    
+    
+    
+    
+    
+    
+    
+        
+       
+    
+    SCEntityDefinition *instrumentDef=[SCEntityDefinition definitionWithEntityName:@"InstrumentEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"acronym", @"instrumentName", @"publisher", @"ages", @"sampleSize",@"scoreNames",@"notes"     , nil]];
+    
+    
+    SCEntityDefinition *clientInstrumentScoresDef=[SCEntityDefinition definitionWithEntityName:@"ClientInstrumentScoresEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"instrument", @"scores"  ,@"notes",   nil]];
+    
+    
+    SCEntityDefinition *instrumentScoreNameDef=[SCEntityDefinition definitionWithEntityName:@"InstrumentScoreNameEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"scoreName", @"abbreviatedName", @"notes"   , nil]];
+   
+    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+    
+    
+   
+    SCPropertyDefinition *clientInstrumentNotesPropertyDef = [clientInstrumentScoresDef propertyDefinitionWithName:@"notes"];    
+    
+    
+    clientInstrumentNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *instrumentNotesPropertyDef = [instrumentDef propertyDefinitionWithName:@"notes"];    
+    
+    instrumentNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *scoreNotesPropertyDef = [instrumentScoreDef propertyDefinitionWithName:@"notes"];    
+    
+    
+    scoreNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *instrumentScoreNameNotesPropertyDef = [instrumentScoreNameDef propertyDefinitionWithName:@"notes"];    
+    
+    
+    instrumentScoreNameNotesPropertyDef.type=SCPropertyTypeTextView;
+
+    
+    //Create the property definition for the instrument Scores property
+    SCPropertyDefinition *clientInstrumentScoresPropertyDef = [clientPresentationDef propertyDefinitionWithName:@"instrumentScores"];
+    
+    clientInstrumentScoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientInstrumentScoresDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:NO];	
+    
+    
+    SCPropertyDefinition *instrumentPropertyDef=[clientInstrumentScoresDef propertyDefinitionWithName:@"instrument"];
+    
+   
+    //set the title property name
+    instrumentDef.titlePropertyName=@"acronym";
+    
+    //set the property definition type to objects selection
+	
+    instrumentPropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *instrumentSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:instrumentDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    
+    //set some addtional attributes
+    instrumentSelectionAttribs.allowAddingItems = YES;
+    instrumentSelectionAttribs.allowDeletingItems = YES;
+    instrumentSelectionAttribs.allowMovingItems = NO;
+    instrumentSelectionAttribs.allowEditingItems = YES;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    instrumentSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add Instruments)"];
+    
+    
+    //add an "Add New" element to appear when user clicks edit
+    instrumentSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new instrument"];
+    
+    //add the selection attributes to the property definition
+    instrumentPropertyDef.attributes = instrumentSelectionAttribs;
+    
+    SCPropertyDefinition *scoreNameInInstrumentPropertyDef=[instrumentDef propertyDefinitionWithName:@"scoreNames"];
+    
+    
+   
+   
+   
+    
+    scoreNameInInstrumentPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentScoreNameDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"(Define score names)"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to define score name"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	    
+    
+    
+    SCPropertyDefinition *scoresPropertyDef=[clientInstrumentScoresDef propertyDefinitionWithName:@"scores"];
+   
+   
+    //set the title property name
+    instrumentScoreDef.titlePropertyName=@"scores.scoreName.abbreviatedName";
+    
+   
+   
+    scoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentScoreDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:NO expandContentInCurrentView:YES placeholderuiElement:[SCTableViewCell cellWithText:@"(add scores)"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new score"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+    
+    
+    
+    
+    SCPropertyDefinition *instrumentScoreNameInScoresPropertyDef=[instrumentScoreDef propertyDefinitionWithName:@"scoreName"];
+    
+  
+    
+    //set the title property name
+    instrumentScoreNameDef.titlePropertyName=@"abbreviatedName";
+    
+    //set the property definition type to objects selection
+	
+    
+    
+    
+    instrumentScoreNameInScoresPropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *instrumentScoreNameInScoresSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:instrumentScoreNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    
+    //set some addtional attributes
+    instrumentScoreNameInScoresSelectionAttribs.allowAddingItems = NO;
+    instrumentScoreNameInScoresSelectionAttribs.allowDeletingItems = NO;
+    instrumentScoreNameInScoresSelectionAttribs.allowMovingItems = NO;
+    instrumentScoreNameInScoresSelectionAttribs.allowEditingItems = NO;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    instrumentScoreNameInScoresSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(define score names under instruments)"];
+    
+    
+    //add an "Add New" element to appear when user clicks edit
+    instrumentScoreNameInScoresSelectionAttribs.addNewObjectuiElement = nil;
+    
+    //add the selection attributes to the property definition
+    instrumentScoreNameInScoresPropertyDef.attributes = instrumentScoreNameInScoresSelectionAttribs;
+    
+    
+    SCPropertyGroup *instrumentGroup = [SCPropertyGroup groupWithHeaderTitle:@"Instruments" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"instrumentScores",    nil]];
+    [self.clientPresentationDef.propertyGroups insertGroup:instrumentGroup atIndex:1];
+    
+    
+    
     return  self;
 
 }
@@ -1029,7 +1167,33 @@ if(section.headerTitle !=nil)
 }
         
         
+    
+    NSLog(@"section class is %@",section.class);
+    if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
+        SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
+        NSManagedObject *sectionManagedObject=(NSManagedObject *)arrayOfObjectsSection.boundObject;
         
+        NSLog(@"section managed object is %@",sectionManagedObject);
+               if (sectionManagedObject && [sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString: @"InstrumentScoreEntity"] ) {
+            
+           
+                  
+                  
+                   NSLog(@"instrument is %@",selectedInstrument);
+            if (selectedInstrument) {
+              
+            NSPredicate *instrumentPredicate=[NSPredicate predicateWithFormat:@"instrument== %@",[sectionManagedObject valueForKey:@"instrument"]];
+            
+            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"scoreName" sortAscending:YES filterPredicate:instrumentPredicate];
+            
+            arrayOfObjectsSection.dataFetchOptions=dataFetchOptions;  
+                [arrayOfObjectsSection reloadBoundValues];
+            }
+        }
+        
+    }
+    
+    
         
         
    
@@ -1051,6 +1215,21 @@ if(section.headerTitle !=nil)
 
     SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
    
+    NSLog(@"tableviewmodel tag %i",tableViewModel.tag);
+    
+    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+    NSLog(@"cell tag %i",cell.tag);
+    if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"ClientInstrumentScoresEntity"] && [cell isKindOfClass:[SCObjectSelectionCell class]]&&cell.tag==0) {
+        
+        SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+        
+        NSLog(@"object selection cell items is %@",objectSelectionCell.items);
+        if (objectSelectionCell.items.count) {
+            selectedInstrument=[objectSelectionCell.items objectAtIndex:0];
+        }
+        NSLog(@"cell class is %@",cell.class);
+    }
+    
     if (tableViewModel.tag==3&&indexPath.section==0&&cell.tag==0) {
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         [self addWechlerAgeCellToSection:(SCTableViewSection *)section];

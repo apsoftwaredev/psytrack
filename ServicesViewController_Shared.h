@@ -101,7 +101,7 @@
 -(NSString *)tableViewModel:(SCTableViewModel *)tableViewModel calculateBreakTimeForRowAtIndexPath:(NSIndexPath *)indexPath withBoundValues:(BOOL)useBoundValues;
 -(IBAction)stopwatchStop:(id)sender;
 -(IBAction)stopwatchReset:(id)sender;
--(void)willDisappear;
+
 -(NSTimeInterval ) totalBreakTimeInterval;
 
 @end

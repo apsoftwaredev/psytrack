@@ -683,7 +683,7 @@
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) 
         {
             
-            SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
+//            SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
             
             
             if (allowMultipleSelection) 

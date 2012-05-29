@@ -27,7 +27,7 @@
 }
 
 
-@property (nonatomic, strong) IBOutlet NSMutableSet *alreadySelectedClients;
+@property (nonatomic, strong)  NSMutableSet *alreadySelectedClients;
 @property (nonatomic, readwrite)  BOOL hasChangedClients;
 @property (nonatomic, strong) NSDate *testDate;
 

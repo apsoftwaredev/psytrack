@@ -2390,7 +2390,7 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
     return decryptedData;  
     
 }
-
+/*
 -(NSString *)decyptString:(NSString *) encryptedString usingKeyString:(NSString *)keyString{
     
     if ([self isAppLocked]) {
@@ -2426,7 +2426,7 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
     return newStr;
     
 }
-
+*/
 
 
 /* 
