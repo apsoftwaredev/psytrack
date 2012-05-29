@@ -734,7 +734,7 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
+    currentDetailTableViewModel=tableViewModel;
         
     if (tableViewModel.tag==0) {
         serviceDateCell=nil;
@@ -874,6 +874,9 @@
 //}
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    
+    [self tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForSectionAtIndex:(NSUInteger)indexPath.section withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel];
+    
     if (tableModel.tag==0||tableModel.tag==1) {
         currentDetailTableViewModel=detailTableViewModel;
         
@@ -1631,7 +1634,7 @@
                     
                     //NSLog(@"startDateString is %@",endDateString);
                     
-                    calanderEndTime=[dateFormatterCombined dateFromString:endDateString];
+                    endTime=[dateFormatterCombined dateFromString:endDateString];
                     
                     //NSLog(@"end time is %@", endTime);
                 }
@@ -1641,14 +1644,20 @@
                 
                 NSMutableSet *clientSet=[buttonCellManagedObject mutableSetValueForKeyPath:@"clientPresentations.client.clientIDCode"];
                 
-                //NSLog(@"client set is %@",clientSet);
+                NSLog(@"client set is %@",clientSet);
                 
-               
-                for (id obj in clientSet){
-                    eventTitleString=[eventTitleString stringByAppendingFormat:@" %@,",obj];
+               eventTitleString=@"Test Administration:";
+                for (NSString * idCode in clientSet){
+                    
+                       
+                        eventTitleString=[eventTitleString stringByAppendingFormat:@" %@,",idCode];
+                 
+                    
                     
                     
                 }
+                
+                NSLog(@"event title string is %@",eventTitleString);
                 if ( [eventTitleString length] > 0)
                     eventTitleString = [eventTitleString substringToIndex:[eventTitleString length] - 1];
                 
@@ -1666,6 +1675,8 @@
                 //                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
                 //                
                 //                UITabBarController *tabBarController=[appDelegate tabBarController];
+                
+                NSLog(@"curretnt tableviewmodel tag is %i",currentDetailTableViewModel.tag);
                 currentTableModelViewController.navigationController.delegate=self;
                 [currentTableModelViewController.navigationController presentModalViewController:addController animated:YES];
                 

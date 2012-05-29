@@ -2604,11 +2604,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359489532.823206"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1106"
-         endingLineNumber = "1106"
+         startingLineNumber = "1109"
+         endingLineNumber = "1109"
          landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4669,11 +4669,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1205"
-         endingLineNumber = "1205"
+         startingLineNumber = "1208"
+         endingLineNumber = "1208"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4708,11 +4708,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359489532.823206"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "971"
-         endingLineNumber = "971"
+         startingLineNumber = "974"
+         endingLineNumber = "974"
          landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4773,11 +4773,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1931"
-         endingLineNumber = "1931"
+         startingLineNumber = "1942"
+         endingLineNumber = "1942"
          landmarkName = "-calculateTime"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4799,11 +4799,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1938"
-         endingLineNumber = "1938"
+         startingLineNumber = "1949"
+         endingLineNumber = "1949"
          landmarkName = "-calculateTime"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4812,11 +4812,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1942"
-         endingLineNumber = "1942"
+         startingLineNumber = "1953"
+         endingLineNumber = "1953"
          landmarkName = "-calculateTime"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4825,11 +4825,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1944"
-         endingLineNumber = "1944"
+         startingLineNumber = "1955"
+         endingLineNumber = "1955"
          landmarkName = "-calculateTime"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4838,11 +4838,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1961"
-         endingLineNumber = "1961"
+         startingLineNumber = "1972"
+         endingLineNumber = "1972"
          landmarkName = "-calculateTime"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4851,11 +4851,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1978"
-         endingLineNumber = "1978"
+         startingLineNumber = "1989"
+         endingLineNumber = "1989"
          landmarkName = "-calculateTime"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4864,11 +4864,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1982"
-         endingLineNumber = "1982"
+         startingLineNumber = "1993"
+         endingLineNumber = "1993"
          landmarkName = "-calculateTime"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4877,11 +4877,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2039"
-         endingLineNumber = "2039"
+         startingLineNumber = "2050"
+         endingLineNumber = "2050"
          landmarkName = "-calculateTime"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4890,11 +4890,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2073"
-         endingLineNumber = "2073"
+         startingLineNumber = "2084"
+         endingLineNumber = "2084"
          landmarkName = "-calculateTime"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4903,11 +4903,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359489532.823206"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "907"
-         endingLineNumber = "907"
+         startingLineNumber = "910"
+         endingLineNumber = "910"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4916,20 +4916,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359489532.823206"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "918"
-         endingLineNumber = "918"
-         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ServicesViewController_Shared.m"
-         timestampString = "359489532.823206"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "921"
@@ -4942,20 +4929,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359489532.823206"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "923"
-         endingLineNumber = "923"
-         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ServicesViewController_Shared.m"
-         timestampString = "359489532.823206"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "924"
@@ -4968,11 +4942,37 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1323"
-         endingLineNumber = "1323"
+         startingLineNumber = "926"
+         endingLineNumber = "926"
+         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359936911.361263"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "927"
+         endingLineNumber = "927"
+         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359936911.361263"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1326"
+         endingLineNumber = "1326"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4981,11 +4981,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1328"
-         endingLineNumber = "1328"
+         startingLineNumber = "1331"
+         endingLineNumber = "1331"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4994,11 +4994,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2599"
-         endingLineNumber = "2599"
+         startingLineNumber = "2610"
+         endingLineNumber = "2610"
          landmarkName = "-tableViewModel:didRemoveRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5007,11 +5007,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2472"
-         endingLineNumber = "2472"
+         startingLineNumber = "2483"
+         endingLineNumber = "2483"
          landmarkName = "-tableViewModel:itemEditedForSectionAtIndexPath:item:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5020,11 +5020,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2454"
-         endingLineNumber = "2454"
+         startingLineNumber = "2465"
+         endingLineNumber = "2465"
          landmarkName = "-tableViewModel:itemAddedForSectionAtIndexPath:item:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5033,11 +5033,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2461"
-         endingLineNumber = "2461"
+         startingLineNumber = "2472"
+         endingLineNumber = "2472"
          landmarkName = "-tableViewModel:itemAddedForSectionAtIndexPath:item:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5046,20 +5046,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2204"
-         endingLineNumber = "2204"
-         landmarkName = "-totalBreakTimeInterval"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2215"
@@ -5072,11 +5059,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2297"
-         endingLineNumber = "2297"
+         startingLineNumber = "2226"
+         endingLineNumber = "2226"
          landmarkName = "-totalBreakTimeInterval"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5085,11 +5072,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2241"
-         endingLineNumber = "2241"
+         startingLineNumber = "2308"
+         endingLineNumber = "2308"
          landmarkName = "-totalBreakTimeInterval"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5098,11 +5085,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2314"
-         endingLineNumber = "2314"
+         startingLineNumber = "2252"
+         endingLineNumber = "2252"
+         landmarkName = "-totalBreakTimeInterval"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359937129.697119"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2325"
+         endingLineNumber = "2325"
          landmarkName = "-totalBreakTimeString"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5111,11 +5111,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1364"
-         endingLineNumber = "1364"
+         startingLineNumber = "1367"
+         endingLineNumber = "1367"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5124,11 +5124,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1332"
-         endingLineNumber = "1332"
+         startingLineNumber = "1335"
+         endingLineNumber = "1335"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5137,11 +5137,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359489532.823206"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "990"
-         endingLineNumber = "990"
+         startingLineNumber = "993"
+         endingLineNumber = "993"
          landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5150,11 +5150,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359937129.697119"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1927"
-         endingLineNumber = "1927"
+         startingLineNumber = "1938"
+         endingLineNumber = "1938"
          landmarkName = "-calculateTime"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5163,33 +5163,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1217"
-         endingLineNumber = "1217"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1329"
-         endingLineNumber = "1329"
-         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1220"
@@ -5202,63 +5176,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1405"
-         endingLineNumber = "1405"
-         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2479"
-         endingLineNumber = "2479"
-         landmarkName = "-tableViewModel:itemEditedForSectionAtIndexPath:item:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2473"
-         endingLineNumber = "2473"
-         landmarkName = "-tableViewModel:itemEditedForSectionAtIndexPath:item:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2471"
-         endingLineNumber = "2471"
-         landmarkName = "-tableViewModel:itemEditedForSectionAtIndexPath:item:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1228"
-         endingLineNumber = "1228"
+         startingLineNumber = "1332"
+         endingLineNumber = "1332"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5267,11 +5189,89 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1410"
-         endingLineNumber = "1410"
+         startingLineNumber = "1223"
+         endingLineNumber = "1223"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359936911.361263"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1408"
+         endingLineNumber = "1408"
+         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359937129.697119"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2490"
+         endingLineNumber = "2490"
+         landmarkName = "-tableViewModel:itemEditedForSectionAtIndexPath:item:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359937129.697119"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2484"
+         endingLineNumber = "2484"
+         landmarkName = "-tableViewModel:itemEditedForSectionAtIndexPath:item:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359937129.697119"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2482"
+         endingLineNumber = "2482"
+         landmarkName = "-tableViewModel:itemEditedForSectionAtIndexPath:item:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359936911.361263"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1231"
+         endingLineNumber = "1231"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359936911.361263"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1413"
+         endingLineNumber = "1413"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5293,11 +5293,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490025.055318"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1509"
-         endingLineNumber = "1509"
+         startingLineNumber = "1512"
+         endingLineNumber = "1512"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5319,11 +5319,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359489532.823206"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "881"
-         endingLineNumber = "881"
+         startingLineNumber = "884"
+         endingLineNumber = "884"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5553,11 +5553,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359489988.536399"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1133"
-         endingLineNumber = "1133"
+         startingLineNumber = "1136"
+         endingLineNumber = "1136"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5566,11 +5566,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ServicesViewController_Shared.m"
-         timestampString = "359490037.686134"
+         timestampString = "359936911.361263"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1143"
-         endingLineNumber = "1143"
+         startingLineNumber = "1146"
+         endingLineNumber = "1146"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5962,6 +5962,97 @@
          startingLineNumber = "419"
          endingLineNumber = "419"
          landmarkName = "-doneButtonTappedInDetailSubView"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359936911.361263"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1645"
+         endingLineNumber = "1645"
+         landmarkName = "-addEvent:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359936911.361263"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1655"
+         endingLineNumber = "1655"
+         landmarkName = "-addEvent:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359936911.361263"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1653"
+         endingLineNumber = "1653"
+         landmarkName = "-addEvent:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359937129.697119"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1681"
+         endingLineNumber = "1681"
+         landmarkName = "-addEvent:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359936911.361263"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "877"
+         endingLineNumber = "877"
+         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359936911.361263"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "882"
+         endingLineNumber = "882"
+         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ServicesViewController_Shared.m"
+         timestampString = "359936911.361263"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "881"
+         endingLineNumber = "881"
+         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
