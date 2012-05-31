@@ -22,7 +22,9 @@
 #import "BOPickersDataSource.h"
 #import "ClientsSelectionCell.h"
 #import "InstrumentEntity.h"
-
+#import "InstrumentScoreNameEntity.h"
+#import "InstrumentScoreEntity.h"
+#import "ClientInstrumentScoresEntity.h"
 @implementation ClientPresentations_Shared
 @synthesize clientPresentationDef;
 //@synthesize tableModel;
@@ -887,7 +889,7 @@
     //set the property definition type to objects selection
 	
     instrumentPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *instrumentSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:instrumentDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    SCObjectSelectionAttributes *instrumentSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:instrumentDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     
     //set some addtional attributes
     instrumentSelectionAttribs.allowAddingItems = YES;
@@ -964,6 +966,21 @@
     [self.clientPresentationDef.propertyGroups insertGroup:instrumentGroup atIndex:1];
     
     
+    SCPropertyGroup *instrumentInClientInstrumentScoresPropertyGroup=[SCPropertyGroup groupWithHeaderTitle:@"Add instrument before scores" footerTitle:@"If you change the instrument, the scores added under a different instrument will be removed." propertyNames:[NSArray arrayWithObject:@"instrument"]];
+    
+    [clientInstrumentScoresDef.propertyGroups addGroup:instrumentInClientInstrumentScoresPropertyGroup];
+    
+    SCPropertyGroup *scoresInClientInstrumentScoresPropertyGroup=[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"scores"]];
+    
+    [clientInstrumentScoresDef.propertyGroups addGroup:scoresInClientInstrumentScoresPropertyGroup];
+    
+    
+    
+    SCPropertyGroup *notesInClientInstrumentScoresPropertyGroup=[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"notes"]];
+    
+    [clientInstrumentScoresDef.propertyGroups addGroup:notesInClientInstrumentScoresPropertyGroup];
+    
+
     
     return  self;
 
@@ -1166,40 +1183,261 @@ if(section.headerTitle !=nil)
     
 }
         
+    if(section.footerTitle !=nil)
+    {
+        float width=300;
+        float height=60;
+        float leftPad=10;
+        if ([SCUtilities is_iPad]) {
+            
+                
+                width=550;
+                height=40;
+            leftPad=70;
+            
+        }
+        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(leftPad, 0, width, 90)];
+        UILabel *footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftPad, 20, width, height)];
+        footerLabel.backgroundColor = [UIColor clearColor];
+        footerLabel.text = section.footerTitle;
+//        [footerLabel sizeToFit];
+        footerLabel.textColor = [UIColor whiteColor];
+        [footerLabel setNumberOfLines:5];
+        [footerLabel setTextAlignment:UITextAlignmentCenter];
+        [footerLabel setLineBreakMode:UILineBreakModeWordWrap];
+        footerLabel.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        [containerView addSubview:footerLabel];
+        section.footerView = containerView;
         
+        
+    }   
     
+      
+        
+        
+   
+}
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
+NSLog(@"tablemodeltag is %i",tableModel.tag);
+    if (selectedInstrument && tableModel.tag==4) {
+        selectedInstrument=nil;
+    }
+
+
+
+}
+
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+
+    if ( detailTableViewModel.sectionCount) {
+       
+        SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
+        
     NSLog(@"section class is %@",section.class);
     if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
         SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
         NSManagedObject *sectionManagedObject=(NSManagedObject *)arrayOfObjectsSection.boundObject;
         
         NSLog(@"section managed object is %@",sectionManagedObject);
-               if (sectionManagedObject && [sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString: @"InstrumentScoreEntity"] ) {
+        if (sectionManagedObject && [sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString: @"InstrumentScoreEntity"] ) {
             
-           
-                  
-                  
-                   NSLog(@"instrument is %@",selectedInstrument);
-            if (selectedInstrument) {
-              
-            NSPredicate *instrumentPredicate=[NSPredicate predicateWithFormat:@"instrument== %@",[sectionManagedObject valueForKey:@"instrument"]];
             
-            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"scoreName" sortAscending:YES filterPredicate:instrumentPredicate];
             
-            arrayOfObjectsSection.dataFetchOptions=dataFetchOptions;  
-                [arrayOfObjectsSection reloadBoundValues];
+            
+            NSLog(@"instrument is %@",selectedInstrument);
+            if (selectedInstrument &&arrayOfObjectsSection.cellCount) {
+             
+                
+//                for (int i=0; i<arrayOfObjectsSection.cellCount; i++) {
+//                    SCTableViewCell *cell=(SCTableViewCell *)[arrayOfObjectsSection cellAtIndex:i];
+//                    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+//                    NSLog(@"cell managed object is %@",cellManagedObject);
+//                    if (cellManagedObject&& [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"InstrumentScoreNameEntity"]) {
+//                        
+//                        InstrumentScoreNameEntity *instrumentScoreName=(InstrumentScoreNameEntity*)cellManagedObject;
+//                        
+//                        InstrumentEntity *instrument=(InstrumentEntity *)instrumentScoreName.instrument;
+//                        
+//                        if (![instrument isEqual:selectedInstrument]) {
+//                            
+//                             
+//                            [arrayOfObjectsSection removeCellAtIndex:i];
+//                            
+//                        }
+//                        
+//                    }
+//                    
+//                    
+//                    
+//                }
+//                
+//                [arrayOfObjectsSection removeSpecialCellsFromItems];
+//                
+//            }
+//            else {
+//                NSObject *instrumentObject=[sectionManagedObject valueForKeyPath:@"clientInstrumentScore.instrument"];
+//                
+//                
+//                NSLog(@"instrument object is %@",instrumentObject);
+//                
+//               
+//                if (instrumentObject &&arrayOfObjectsSection.cellCount) {
+//                    
+//                    
+//                    for (int i=0; i<arrayOfObjectsSection.cellCount; i++) {
+//                        SCTableViewCell *cell=(SCTableViewCell *)[arrayOfObjectsSection cellAtIndex:i];
+//                        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+//                        NSLog(@"cell managed object is %@",cellManagedObject);
+//                        if (cellManagedObject&& [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"InstrumentScoreNameEntity"]) {
+//                            
+//                            InstrumentScoreNameEntity *instrumentScoreName=(InstrumentScoreNameEntity*)cellManagedObject;
+//                            
+//                            InstrumentEntity *instrument=(InstrumentEntity *)instrumentScoreName.instrument;
+//                            
+//                            if ([instrumentObject isKindOfClass:[InstrumentEntity class]]) {
+//                                if (![instrument isEqual:instrumentObject]) {
+//                                
+//                                    [arrayOfObjectsSection removeCellAtIndex:i];
+//                                    i--;
+//                                }
+//                            }
+//                            
+//                            
+//                            
+//                        }
+//                        
+//                        
+//                        
+//                    }
+                    
+                    
+                    
+                
+                    
+//                }
+                NSObject *instrumentObject=[sectionManagedObject valueForKeyPath:@"clientInstrumentScore.instrument"];
+                if (!instrumentObject && !selectedInstrument){
+                    
+                    [arrayOfObjectsSection removeAllCells];
+                    SCTableViewCell *placeholderCell=[SCTableViewCell cellWithText:@"Select an instrument with score names first"];
+                    [arrayOfObjectsSection addCell:placeholderCell];
+                    [arrayOfObjectsSection setAllowRowSelection:NO];
+                    [placeholderCell setSelectable:NO];
+                }
+                
+                
+                
+                
+                
+                
             }
         }
         
     }
+    else if ([section isKindOfClass:[SCObjectSection class]]){
     
-    
+        SCObjectSection *objectSection=(SCObjectSection *)section;
         
+        NSLog(@"object section bound object is %@",objectSection.boundObject);
         
-   
+        NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+        
+       
+        
+
+        if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"InstrumentScoreEntity"]&&objectSection.cellCount) {
+            
+            SCTableViewCell *cellAtOne=(SCTableViewCell *)[objectSection cellAtIndex:0];
+            if ([cellAtOne isKindOfClass:[SCObjectSelectionCell class]]) {
+                SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtOne;
+                
+                NSLog(@"object selection cell %@",objectSelectionCell);
+                
+                NSLog(@"object selection cell items %@",objectSelectionCell.items);
+                
+                NSMutableArray *mutableArray=[NSMutableArray arrayWithArray:objectSelectionCell.items];
+                
+                NSLog(@"mutable array is %@",mutableArray);
+                
+                NSObject *instrumentObject=[sectionManagedObject valueForKeyPath:@"clientInstrumentScore.instrument"];
+                
+                
+                NSLog(@"instrument object is %@",instrumentObject);
+                
+//                if (instrumentObject && mutableArray.count) {
+//                    
+//                    
+//                    for (int i=0; i<mutableArray.count; i++) {
+//                        
+//                        NSManagedObject *itemManagedObject=(NSManagedObject *)[mutableArray objectAtIndex:i];
+//                        NSLog(@"cell managed object is %@",itemManagedObject);
+//                        if (itemManagedObject&& [itemManagedObject respondsToSelector:@selector(entity)]&&[itemManagedObject.entity.name isEqualToString:@"InstrumentScoreNameEntity"]) {
+//                            
+//                            InstrumentScoreNameEntity *instrumentScoreName=(InstrumentScoreNameEntity*)itemManagedObject;
+//                            
+//                            InstrumentEntity *instrument=(InstrumentEntity *)instrumentScoreName.instrument;
+//                            
+//                            if ([instrumentObject isKindOfClass:[InstrumentEntity class]]) {
+//                                if (![instrument isEqual:instrumentObject]) {
+//                                    
+//                                    if ([objectSelectionCell.selectedItemIndex integerValue]==i) {
+//                                        objectSelectionCell.selectedItemIndex=nil;
+//                                        
+//                                        InstrumentScoreEntity *instrumentScoreEntity=(InstrumentScoreEntity *)cellAtOne.boundObject;
+//                                        
+//                                        
+//                                        instrumentScoreEntity.scoreName=nil ;
+//                                        objectSelectionCell.autoValidateValue=NO;
+//                                        
+//                                    } 
+//                                   
+//                                }
+//                            }
+//                            
+//                            
+//                            
+//                        }
+//                    }
+                    
+                    if (selectedInstrument||(instrumentObject&&[instrumentObject isKindOfClass:[InstrumentEntity class]])) {
+                        if (!selectedInstrument) {
+                            selectedInstrument=(InstrumentEntity *) instrumentObject;
+                        }
+                        
+                        
+                        if (selectedInstrument.instrumentName.length) {
+                        
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                  @"instrument.instrumentName like %@",selectedInstrument.instrumentName]; 
+                        
+                        SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"abbreviatedName" sortAscending:YES filterPredicate:predicate];
+                        
+                        objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                            
+                        }
+                        
+                    }
+                    else {
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                  @"instrument.instrumentName = nil"]; 
+                        
+                        SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"abbreviatedName" sortAscending:YES filterPredicate:predicate];
+                        
+                        objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                    }
+                                
+                        
+                    }
+
+                
+                
+            }
+            
+    }}
+
+
+
 }
-
-
 //- (void)tableViewModel:(SCTableViewModel *)tableViewModel didLayoutSubviewsForCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 //{
 //    if([cell isKindOfClass:[SCSelectionCell class]])
@@ -1223,9 +1461,62 @@ if(section.headerTitle !=nil)
         
         SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
         
-        NSLog(@"object selection cell items is %@",objectSelectionCell.items);
-        if (objectSelectionCell.items.count) {
-            selectedInstrument=[objectSelectionCell.items objectAtIndex:0];
+        NSLog(@"object selection cell items is %@",objectSelectionCell.selectedItemIndex);
+        if ([objectSelectionCell.selectedItemIndex intValue]>-1) {
+            selectedInstrument=[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+            
+           
+            
+            NSLog(@"cell managed object class is %@",cellManagedObject.class);
+            if ([cellManagedObject isKindOfClass:[ClientInstrumentScoresEntity class]]) {
+//                ClientInstrumentScoresEntity *clientInstrumentScoresEntity=(ClientInstrumentScoresEntity *)cellManagedObject;
+                
+                BOOL shouldRemoveCells=NO;
+                if (tableViewModel.sectionCount>1) {
+                    SCTableViewSection *sectionAtOne=[tableViewModel sectionAtIndex:1];
+                    NSLog(@"cell at one is %@",sectionAtOne.class);
+                    if ([sectionAtOne isKindOfClass:[SCArrayOfObjectsSection class]]) {
+                        SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)sectionAtOne;
+                        
+                        for (int i=0; i<arrayOfObjectsSection.cellCount; i++) {
+                            SCTableViewCell *cellAtIndex=(SCTableViewCell *)[arrayOfObjectsSection cellAtIndex:i];
+                            
+                            NSManagedObject *cellAtIndexManagedObject=(NSManagedObject *)cellAtIndex.boundObject;
+                            
+                            NSLog(@"celatindexmanaged object is %@",cellAtIndexManagedObject);
+                            if (cellAtIndexManagedObject && [cellAtIndexManagedObject respondsToSelector:@selector(entity)] &&[cellAtIndexManagedObject.entity.name isEqualToString:@"InstrumentScoreEntity"]) {
+                                
+                                NSString *instrumentScoreNameInstrument=[cellAtIndexManagedObject valueForKeyPath:@"scoreName.instrument.instrumentName"];
+                                
+                                NSLog(@"instrument score name Instrument %@",instrumentScoreNameInstrument);
+                                
+                                if (![selectedInstrument.instrumentName isEqualToString:instrumentScoreNameInstrument]) {
+                                    shouldRemoveCells=YES;
+                                    break;
+                                }
+                                
+                                
+                            }
+                            
+                        }
+                    }
+                    
+                }
+                
+                
+                
+                if (shouldRemoveCells) {
+                
+               NSMutableSet *mutableSet=(NSMutableSet *) [cellManagedObject mutableSetValueForKey:@"scores"];
+                [mutableSet removeAllObjects];
+                [objectSelectionCell commitChanges];
+                [tableViewModel reloadBoundValues];
+                [tableViewModel.modeledTableView reloadData];
+                    
+                }
+            }
+            
+            
         }
         NSLog(@"cell class is %@",cell.class);
     }
@@ -1371,6 +1662,33 @@ if(section.headerTitle !=nil)
         }
 
     }
+    
+    SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+    if ([section isKindOfClass:[SCObjectSection class]]){
+        
+        SCObjectSection *objectSection=(SCObjectSection *)section;
+        
+        NSLog(@"object section bound object is %@",objectSection.boundObject);
+        
+        NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+        
+        
+        
+        
+        if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"InstrumentScoreEntity"]) {
+            SCTableViewCell *cellAtOne=(SCTableViewCell *)[objectSection cellAtIndex:0];
+            if ([cellAtOne isKindOfClass:[SCObjectSelectionCell class]]) {
+                SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtOne;
+                
+                if (objectSelectionCell.label.text.length) {
+                    return YES;
+                }
+                
+                
+                
+    
+            }}}
+    
     return NO;
 }
 
