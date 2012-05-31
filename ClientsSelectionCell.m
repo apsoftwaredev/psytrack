@@ -183,7 +183,7 @@
 {
     [super loadBindingsIntoCustomControls];
   
-    self.textLabel.text = nil;
+    self.label.text = nil;
     self.detailTextLabel.text = nil;
 //    NSManagedObjectContext *managedObjectContext=(NSManagedObjectContext *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
 //    
@@ -234,7 +234,7 @@
     
 }
     else {
-        self.textLabel.text=[NSString string];
+        self.label.text=[NSString string];
     }
         
 //    }

@@ -1590,9 +1590,10 @@
                     
                     //                  
                 }
+                
                 [currentDetailTableViewModel.viewController.navigationController presentModalViewController:eventViewController animated:YES];
                 eventViewController.editViewDelegate=self;
-                
+            
                 
             }
             
@@ -1673,9 +1674,15 @@
                     //NSLog(@"end time is %@", endTime);
                 }
                 
-                thisEvent.startDate=calanderStartTime;
-                thisEvent.endDate=calanderEndTime;
-                
+                if (calanderStartTime&&calanderEndTime) {
+                    thisEvent.startDate=calanderStartTime;
+                    thisEvent.endDate=calanderEndTime;
+
+                }else {
+                    thisEvent.startDate=[NSDate date];
+                    thisEvent.endDate=[NSDate dateWithTimeIntervalSinceNow:60*60];
+                }
+                                
                 NSMutableSet *clientSet=[buttonCellManagedObject mutableSetValueForKeyPath:@"clientPresentations.client.clientIDCode"];
                 
                 NSLog(@"client set is %@",clientSet);
@@ -1712,6 +1719,7 @@
                 
                 NSLog(@"curretnt tableviewmodel tag is %i",currentDetailTableViewModel.tag);
                 currentTableModelViewController.navigationController.delegate=self;
+            
                 [currentTableModelViewController.navigationController presentModalViewController:addController animated:YES];
                 
                 

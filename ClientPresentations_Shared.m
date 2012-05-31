@@ -843,8 +843,7 @@
     
     SCEntityDefinition *instrumentScoreNameDef=[SCEntityDefinition definitionWithEntityName:@"InstrumentScoreNameEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"scoreName", @"abbreviatedName", @"notes"   , nil]];
    
-    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
-    
+
     
    
     SCPropertyDefinition *clientInstrumentNotesPropertyDef = [clientInstrumentScoresDef propertyDefinitionWithName:@"notes"];    
@@ -870,15 +869,15 @@
     //Create the property definition for the instrument Scores property
     SCPropertyDefinition *clientInstrumentScoresPropertyDef = [clientPresentationDef propertyDefinitionWithName:@"instrumentScores"];
     
-    clientInstrumentScoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientInstrumentScoresDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:NO];	
+    clientInstrumentScoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientInstrumentScoresDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES];	
     
     clientInstrumentScoresDef.titlePropertyName=@"instrument.instrumentName";
     SCPropertyDefinition *instrumentPropertyDef=[clientInstrumentScoresDef propertyDefinitionWithName:@"instrument"];
     
-   
+   clientInstrumentScoresDef.orderAttributeName=@"order";
     //set the title property name
     instrumentDef.titlePropertyName=@"acronym";
-    
+    instrumentDef.orderAttributeName=@"order";
     //set the property definition type to objects selection
 	
     instrumentPropertyDef.type = SCPropertyTypeObjectSelection;
@@ -887,7 +886,7 @@
     //set some addtional attributes
     instrumentSelectionAttribs.allowAddingItems = YES;
     instrumentSelectionAttribs.allowDeletingItems = YES;
-    instrumentSelectionAttribs.allowMovingItems = NO;
+    instrumentSelectionAttribs.allowMovingItems = YES;
     instrumentSelectionAttribs.allowEditingItems = YES;
     
     //add a placeholder element to tell the user what to do     when there are no other cells                                          
@@ -981,22 +980,7 @@
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
-
-    detailTableViewModel.delegate=self;
-
-    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-        
-
-        [detailTableViewModel.modeledTableView setBackgroundView:nil];
-        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
-    
-    
-    }
-
-}
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 
@@ -1110,7 +1094,7 @@
 //NSLog(@"cell text is %@",cell.textLabel.text);
     //NSLog(@"section is %i",indexPath.section);
     //NSLog(@"tablemodel is %i",tableViewModel.tag);
-    if ((tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Wechsler Test Age"])||(tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Test Age"])) 
+    if ((tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Wechlsler Test Age"])||(tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Test Age"])) 
     {
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         
@@ -1132,7 +1116,7 @@ if (tableViewModel.tag==5&&tableViewModel.sectionCount>1&&indexPath.section==1){
     
     
     NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-    NSLog(@"cell managed object is %@",cellManagedObject);
+  
     
     if ([cellManagedObject isKindOfClass:[InstrumentScoreEntity class]]) {
         InstrumentScoreEntity *instrumentScoreEntity=(InstrumentScoreEntity*)cellManagedObject;
@@ -1196,7 +1180,7 @@ if (tableViewModel.tag==5&&tableViewModel.sectionCount>1&&indexPath.section==1){
             
             [section addCell:actualAge];
             [section addCell:wechslerAge];
-            [section reloadBoundValues];
+            
        
         }
     
@@ -1255,12 +1239,11 @@ if(section.headerTitle !=nil)
     }   
     
       
-        
-        
-   
+       
 }
+
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
-NSLog(@"tablemodeltag is %i",tableModel.tag);
+
     if (selectedInstrument && tableModel.tag==4) {
         selectedInstrument=nil;
     }
@@ -1275,88 +1258,21 @@ NSLog(@"tablemodeltag is %i",tableModel.tag);
        
         SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
         
-    NSLog(@"section class is %@",section.class);
+   
     if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
         SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
         NSManagedObject *sectionManagedObject=(NSManagedObject *)arrayOfObjectsSection.boundObject;
         
-        NSLog(@"section managed object is %@",sectionManagedObject);
+        
         if (sectionManagedObject && [sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString: @"InstrumentScoreEntity"] ) {
             
             
             
             
-            NSLog(@"instrument is %@",selectedInstrument);
             if (selectedInstrument &&arrayOfObjectsSection.cellCount) {
              
                 
-//                for (int i=0; i<arrayOfObjectsSection.cellCount; i++) {
-//                    SCTableViewCell *cell=(SCTableViewCell *)[arrayOfObjectsSection cellAtIndex:i];
-//                    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-//                    NSLog(@"cell managed object is %@",cellManagedObject);
-//                    if (cellManagedObject&& [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"InstrumentScoreNameEntity"]) {
-//                        
-//                        InstrumentScoreNameEntity *instrumentScoreName=(InstrumentScoreNameEntity*)cellManagedObject;
-//                        
-//                        InstrumentEntity *instrument=(InstrumentEntity *)instrumentScoreName.instrument;
-//                        
-//                        if (![instrument isEqual:selectedInstrument]) {
-//                            
-//                             
-//                            [arrayOfObjectsSection removeCellAtIndex:i];
-//                            
-//                        }
-//                        
-//                    }
-//                    
-//                    
-//                    
-//                }
-//                
-//                [arrayOfObjectsSection removeSpecialCellsFromItems];
-//                
-//            }
-//            else {
-//                NSObject *instrumentObject=[sectionManagedObject valueForKeyPath:@"clientInstrumentScore.instrument"];
-//                
-//                
-//                NSLog(@"instrument object is %@",instrumentObject);
-//                
-//               
-//                if (instrumentObject &&arrayOfObjectsSection.cellCount) {
-//                    
-//                    
-//                    for (int i=0; i<arrayOfObjectsSection.cellCount; i++) {
-//                        SCTableViewCell *cell=(SCTableViewCell *)[arrayOfObjectsSection cellAtIndex:i];
-//                        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-//                        NSLog(@"cell managed object is %@",cellManagedObject);
-//                        if (cellManagedObject&& [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"InstrumentScoreNameEntity"]) {
-//                            
-//                            InstrumentScoreNameEntity *instrumentScoreName=(InstrumentScoreNameEntity*)cellManagedObject;
-//                            
-//                            InstrumentEntity *instrument=(InstrumentEntity *)instrumentScoreName.instrument;
-//                            
-//                            if ([instrumentObject isKindOfClass:[InstrumentEntity class]]) {
-//                                if (![instrument isEqual:instrumentObject]) {
-//                                
-//                                    [arrayOfObjectsSection removeCellAtIndex:i];
-//                                    i--;
-//                                }
-//                            }
-//                            
-//                            
-//                            
-//                        }
-//                        
-//                        
-//                        
-//                    }
-                    
-                    
-                    
-                
-                    
-//                }
+
                 NSObject *instrumentObject=[sectionManagedObject valueForKeyPath:@"clientInstrumentScore.instrument"];
                 if (!instrumentObject && !selectedInstrument){
                     
@@ -1380,8 +1296,7 @@ NSLog(@"tablemodeltag is %i",tableModel.tag);
     
         SCObjectSection *objectSection=(SCObjectSection *)section;
         
-        NSLog(@"object section bound object is %@",objectSection.boundObject);
-        
+       
         NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
         
        
@@ -1393,53 +1308,9 @@ NSLog(@"tablemodeltag is %i",tableModel.tag);
             if ([cellAtOne isKindOfClass:[SCObjectSelectionCell class]]) {
                 SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtOne;
                 
-                NSLog(@"object selection cell %@",objectSelectionCell);
-                
-                NSLog(@"object selection cell items %@",objectSelectionCell.items);
-                
-                NSMutableArray *mutableArray=[NSMutableArray arrayWithArray:objectSelectionCell.items];
-                
-                NSLog(@"mutable array is %@",mutableArray);
-                
-                NSObject *instrumentObject=[sectionManagedObject valueForKeyPath:@"clientInstrumentScore.instrument"];
-                
-                
-                NSLog(@"instrument object is %@",instrumentObject);
-                
-//                if (instrumentObject && mutableArray.count) {
-//                    
-//                    
-//                    for (int i=0; i<mutableArray.count; i++) {
-//                        
-//                        NSManagedObject *itemManagedObject=(NSManagedObject *)[mutableArray objectAtIndex:i];
-//                        NSLog(@"cell managed object is %@",itemManagedObject);
-//                        if (itemManagedObject&& [itemManagedObject respondsToSelector:@selector(entity)]&&[itemManagedObject.entity.name isEqualToString:@"InstrumentScoreNameEntity"]) {
-//                            
-//                            InstrumentScoreNameEntity *instrumentScoreName=(InstrumentScoreNameEntity*)itemManagedObject;
-//                            
-//                            InstrumentEntity *instrument=(InstrumentEntity *)instrumentScoreName.instrument;
-//                            
-//                            if ([instrumentObject isKindOfClass:[InstrumentEntity class]]) {
-//                                if (![instrument isEqual:instrumentObject]) {
-//                                    
-//                                    if ([objectSelectionCell.selectedItemIndex integerValue]==i) {
-//                                        objectSelectionCell.selectedItemIndex=nil;
-//                                        
-//                                        InstrumentScoreEntity *instrumentScoreEntity=(InstrumentScoreEntity *)cellAtOne.boundObject;
-//                                        
-//                                        
-//                                        instrumentScoreEntity.scoreName=nil ;
-//                                        objectSelectionCell.autoValidateValue=NO;
-//                                        
-//                                    } 
-//                                   
-//                                }
-//                            }
-//                            
-//                            
-//                            
-//                        }
-//                    }
+                                
+               
+               NSObject *instrumentObject=[sectionManagedObject valueForKeyPath:@"clientInstrumentScore.instrument"];
                     
                     if (selectedInstrument||(instrumentObject&&[instrumentObject isKindOfClass:[InstrumentEntity class]])) {
                         if (!selectedInstrument) {
@@ -1503,9 +1374,11 @@ NSLog(@"tablemodeltag is %i",tableModel.tag);
             
         }
     }
-
-
+    
+    
 }
+
+
 //- (void)tableViewModel:(SCTableViewModel *)tableViewModel didLayoutSubviewsForCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 //{
 //    if([cell isKindOfClass:[SCSelectionCell class]])
@@ -1521,28 +1394,29 @@ NSLog(@"tablemodeltag is %i",tableModel.tag);
 
     SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
    
-    NSLog(@"tableviewmodel tag %i",tableViewModel.tag);
+   
     
     NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-    NSLog(@"cell tag %i",cell.tag);
+  
     if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"ClientInstrumentScoresEntity"] && [cell isKindOfClass:[SCObjectSelectionCell class]]&&cell.tag==0) {
         
         SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
         
-        NSLog(@"object selection cell items is %@",objectSelectionCell.selectedItemIndex);
+      
         if ([objectSelectionCell.selectedItemIndex intValue]>-1) {
             selectedInstrument=[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
             
-           
+            UINavigationItem *navigationItem=(UINavigationItem *)tableViewModel.viewController.navigationItem;
             
-            NSLog(@"cell managed object class is %@",cellManagedObject.class);
+            navigationItem.title=selectedInstrument.instrumentName;
+            
             if ([cellManagedObject isKindOfClass:[ClientInstrumentScoresEntity class]]) {
-//                ClientInstrumentScoresEntity *clientInstrumentScoresEntity=(ClientInstrumentScoresEntity *)cellManagedObject;
+
                 
                 BOOL shouldRemoveCells=NO;
                 if (tableViewModel.sectionCount>1) {
                     SCTableViewSection *sectionAtOne=[tableViewModel sectionAtIndex:1];
-                    NSLog(@"cell at one is %@",sectionAtOne.class);
+                    
                     if ([sectionAtOne isKindOfClass:[SCArrayOfObjectsSection class]]) {
                         SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)sectionAtOne;
                         
@@ -1551,12 +1425,11 @@ NSLog(@"tablemodeltag is %i",tableModel.tag);
                             
                             NSManagedObject *cellAtIndexManagedObject=(NSManagedObject *)cellAtIndex.boundObject;
                             
-                            NSLog(@"celatindexmanaged object is %@",cellAtIndexManagedObject);
-                            if (cellAtIndexManagedObject && [cellAtIndexManagedObject respondsToSelector:@selector(entity)] &&[cellAtIndexManagedObject.entity.name isEqualToString:@"InstrumentScoreEntity"]) {
+                           if (cellAtIndexManagedObject && [cellAtIndexManagedObject respondsToSelector:@selector(entity)] &&[cellAtIndexManagedObject.entity.name isEqualToString:@"InstrumentScoreEntity"]) {
                                 
                                 NSString *instrumentScoreNameInstrument=[cellAtIndexManagedObject valueForKeyPath:@"scoreName.instrument.instrumentName"];
                                 
-                                NSLog(@"instrument score name Instrument %@",instrumentScoreNameInstrument);
+                                
                                 
                                 if (![selectedInstrument.instrumentName isEqualToString:instrumentScoreNameInstrument]) {
                                     shouldRemoveCells=YES;
@@ -1578,9 +1451,7 @@ NSLog(@"tablemodeltag is %i",tableModel.tag);
                NSMutableSet *mutableSet=(NSMutableSet *) [cellManagedObject mutableSetValueForKey:@"scores"];
                 [mutableSet removeAllObjects];
                 [objectSelectionCell commitChanges];
-                    UINavigationItem *navigationItem=(UINavigationItem *)tableViewModel.viewController.navigationItem;
                     
-                    navigationItem.title=selectedInstrument.instrumentName;
                     
 
                     
@@ -1592,12 +1463,12 @@ NSLog(@"tablemodeltag is %i",tableModel.tag);
             
             
         }
-        NSLog(@"cell class is %@",cell.class);
+        
     }
     
     if (tableViewModel.tag==3&&indexPath.section==0&&cell.tag==0) {
-        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-        [self addWechlerAgeCellToSection:(SCTableViewSection *)section];
+        SCTableViewSection *sectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
+        [self addWechlerAgeCellToSection:(SCTableViewSection *)sectionZero];
     }
 
     if (tableViewModel.tag==5){
@@ -1637,8 +1508,8 @@ NSLog(@"tablemodeltag is %i",tableModel.tag);
 }
 -(void)addWechlerAgeCellToSection:(SCTableViewSection *)section {
     
-    
-    SCLabelCell *actualAgeCell=(SCLabelCell*)[section cellAtIndex:1];
+    if (section.cellCount>2) {
+       SCLabelCell *actualAgeCell=(SCLabelCell*)[section cellAtIndex:1];
     SCLabelCell *wechslerAgeCell=(SCLabelCell*)[section cellAtIndex:2];
 //    SCTableViewCell *clientCell=(SCTableViewCell *)[section cellAtIndex:0];
 //    SCTableViewCell *testDateCell=(SCTableViewCell*)[section cellAtIndex:3];
@@ -1714,6 +1585,12 @@ NSLog(@"tablemodeltag is %i",tableModel.tag);
        
     
     }
+        [wechslerAgeCell setNeedsLayout];
+        [wechslerAgeCell setNeedsDisplay];
+        [actualAgeCell setNeedsLayout];
+        [actualAgeCell setNeedsDisplay];
+    }
+
 //    actualAgeCell.label.text=[clientsViewController_Shared calculateActualAgeWithBirthdate:birthdateCell.datePicker.date];
 //    
     
