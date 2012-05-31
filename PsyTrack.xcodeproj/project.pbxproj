@@ -297,10 +297,10 @@
 		E7E1A63D152E873500C227E8 /* ServicesViewController_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */; };
 		E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A6441530C18900C227E8 /* ShortFieldCell.m */; };
 		E7F1E6F81575916F00D4A638 /* InstrumentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E6F71575916F00D4A638 /* InstrumentEntity.m */; };
-		E7F1E70015765E3900D4A638 /* ipad-menubar-right.png in Resources */ = {isa = PBXBuildFile; fileRef = E7F1E6FF15765E3900D4A638 /* ipad-menubar-right.png */; };
 		E7F1E703157662EB00D4A638 /* InstrumentScoreNameEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E702157662EB00D4A638 /* InstrumentScoreNameEntity.m */; };
 		E7F1E7061576966000D4A638 /* InstrumentScoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E7051576966000D4A638 /* InstrumentScoreEntity.m */; };
 		E7F1E7091576D17100D4A638 /* ClientInstrumentScoresEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */; };
+		E7F1E73115775BA400D4A638 /* ipad-menubar-right.png in Resources */ = {isa = PBXBuildFile; fileRef = E7F1E73015775BA400D4A638 /* ipad-menubar-right.png */; };
 		E7FB3AAD1562A4E4000A6782 /* TwoButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */; };
 		E7FB3AB31562C867000A6782 /* AddViewABLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB21562C867000A6782 /* AddViewABLinkButtonCell.m */; };
 		E7FB3AB61562C888000A6782 /* LookupRemoveLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB51562C888000A6782 /* LookupRemoveLinkButtonCell.m */; };
@@ -759,13 +759,13 @@
 		E7E1A6441530C18900C227E8 /* ShortFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortFieldCell.m; sourceTree = "<group>"; };
 		E7F1E6F61575916F00D4A638 /* InstrumentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentEntity.h; sourceTree = "<group>"; };
 		E7F1E6F71575916F00D4A638 /* InstrumentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentEntity.m; sourceTree = "<group>"; };
-		E7F1E6FF15765E3900D4A638 /* ipad-menubar-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ipad-menubar-right.png"; path = "../../Desktop/ipad-menubar-right.png"; sourceTree = "<group>"; };
 		E7F1E701157662EB00D4A638 /* InstrumentScoreNameEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentScoreNameEntity.h; sourceTree = "<group>"; };
 		E7F1E702157662EB00D4A638 /* InstrumentScoreNameEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentScoreNameEntity.m; sourceTree = "<group>"; };
 		E7F1E7041576966000D4A638 /* InstrumentScoreEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentScoreEntity.h; sourceTree = "<group>"; };
 		E7F1E7051576966000D4A638 /* InstrumentScoreEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentScoreEntity.m; sourceTree = "<group>"; };
 		E7F1E7071576D17100D4A638 /* ClientInstrumentScoresEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientInstrumentScoresEntity.h; sourceTree = "<group>"; };
 		E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientInstrumentScoresEntity.m; sourceTree = "<group>"; };
+		E7F1E73015775BA400D4A638 /* ipad-menubar-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-menubar-right.png"; sourceTree = "<group>"; };
 		E7FB3AAB1562A4E3000A6782 /* TwoButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoButtonCell.h; sourceTree = "<group>"; };
 		E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoButtonCell.m; sourceTree = "<group>"; };
 		E7FB3AB11562C867000A6782 /* AddViewABLinkButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewABLinkButtonCell.h; sourceTree = "<group>"; };
@@ -1001,7 +1001,6 @@
 		37F7CE3D1500518900AD2C3A /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				E7F1E6FF15765E3900D4A638 /* ipad-menubar-right.png */,
 				37F7CE1C1500334800AD2C3A /* PTTMasterViewController_iPad.xib */,
 				37F7CE1E1500334800AD2C3A /* PTTMasterViewController_iPhone.xib */,
 				37F7CE201500334800AD2C3A /* PTTAppDelegate.h */,
@@ -1209,6 +1208,7 @@
 		37F7CECD15005E9900AD2C3A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E7F1E73015775BA400D4A638 /* ipad-menubar-right.png */,
 				E7A9249215485E6C0080B35D /* blueArrow.png */,
 				E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */,
 				E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */,
@@ -1786,7 +1786,7 @@
 				E7A9249315485E6C0080B35D /* blueArrow.png in Resources */,
 				E7A5D7081559EB26000F248F /* ClearBackgroundTheme.sct in Resources */,
 				E7A21371155B34CD005CF154 /* LogoBackgroundViewController.xib in Resources */,
-				E7F1E70015765E3900D4A638 /* ipad-menubar-right.png in Resources */,
+				E7F1E73115775BA400D4A638 /* ipad-menubar-right.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

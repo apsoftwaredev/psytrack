@@ -73,7 +73,7 @@
     SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"affect", @"appearance",  @"assessment", @"attention", @"attitude", @"improvement", @"interpersonal", @"behaviors", @"imagry",   @"plan",  @"rapport",  @"sensory", @"sleepHoursNightly",    @"sleepQuality",@"psychomotor", @"speechLanguage",  @"cultural",  @"additionalVariables",  nil ]];
     [self.clientPresentationDef.propertyGroups addGroup:notesGroup];
     
-    SCPropertyGroup *orientationGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"orientedToBody", @"orientedToPerson",  @"orientedToPlace", @"orientedToTime",    nil ]];
+    SCPropertyGroup *orientationGroup = [SCPropertyGroup groupWithHeaderTitle:@"Client Orientation" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"orientedToBody", @"orientedToPerson",  @"orientedToPlace", @"orientedToTime",    nil ]];
     // add the notes property group to the clientpresentation class. 
     [self.clientPresentationDef.propertyGroups addGroup:orientationGroup];
     
@@ -835,13 +835,6 @@
     
     
     
-    
-    
-    
-    
-        
-       
-    
     SCEntityDefinition *instrumentDef=[SCEntityDefinition definitionWithEntityName:@"InstrumentEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"acronym", @"instrumentName", @"publisher", @"ages", @"sampleSize",@"scoreNames",@"notes"     , nil]];
     
     
@@ -879,7 +872,7 @@
     
     clientInstrumentScoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientInstrumentScoresDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:NO];	
     
-    
+    clientInstrumentScoresDef.titlePropertyName=@"instrument.instrumentName";
     SCPropertyDefinition *instrumentPropertyDef=[clientInstrumentScoresDef propertyDefinitionWithName:@"instrument"];
     
    
@@ -914,18 +907,17 @@
    
    
     
-    scoreNameInInstrumentPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentScoreNameDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"(Define score names)"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to define score name"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	    
+    scoreNameInInstrumentPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentScoreNameDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"(Define score names)"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to define score name"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	    
     
     
     SCPropertyDefinition *scoresPropertyDef=[clientInstrumentScoresDef propertyDefinitionWithName:@"scores"];
    
    
     //set the title property name
-    instrumentScoreDef.titlePropertyName=@"scores.scoreName.abbreviatedName";
+    instrumentScoreDef.titlePropertyName=@"scoreName.abbreviatedName;rawScore;scaledScore;standardScore;percentile;tScore;cIFloor;cICeiling";
     
-   
-   
-    scoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentScoreDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:NO expandContentInCurrentView:YES placeholderuiElement:[SCTableViewCell cellWithText:@"(add scores)"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new score"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+      
+    scoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentScoreDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:NO expandContentInCurrentView:YES placeholderuiElement:[SCTableViewCell cellWithText:@"(add scores)"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new score"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:NO];	
     
     
     
@@ -949,7 +941,7 @@
     instrumentScoreNameInScoresSelectionAttribs.allowAddingItems = NO;
     instrumentScoreNameInScoresSelectionAttribs.allowDeletingItems = NO;
     instrumentScoreNameInScoresSelectionAttribs.allowMovingItems = NO;
-    instrumentScoreNameInScoresSelectionAttribs.allowEditingItems = NO;
+    instrumentScoreNameInScoresSelectionAttribs.allowEditingItems = YES;
     
     //add a placeholder element to tell the user what to do     when there are no other cells                                          
     instrumentScoreNameInScoresSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(define score names under instruments)"];
@@ -1134,7 +1126,57 @@
         
     }
 
+if (tableViewModel.tag==5&&tableViewModel.sectionCount>1&&indexPath.section==1){
 
+    
+    
+    
+    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+    NSLog(@"cell managed object is %@",cellManagedObject);
+    
+    if ([cellManagedObject isKindOfClass:[InstrumentScoreEntity class]]) {
+        InstrumentScoreEntity *instrumentScoreEntity=(InstrumentScoreEntity*)cellManagedObject;
+        
+        NSString *textStr=(NSString *)[instrumentScoreEntity valueForKeyPath:@"scoreName.abbreviatedName"];
+        
+        if (instrumentScoreEntity.rawScore) {
+            textStr=[textStr stringByAppendingFormat:@" RS:%.1f",[instrumentScoreEntity.rawScore floatValue]];
+        }
+        
+        if (instrumentScoreEntity.scaledScore) {
+            textStr=[textStr stringByAppendingFormat:@" ScS:%i",[instrumentScoreEntity.scaledScore integerValue]];
+        }
+        if (instrumentScoreEntity.standardScore) {
+            textStr=[textStr stringByAppendingFormat:@" StS:%.0f",[instrumentScoreEntity.standardScore floatValue]];
+        }
+        if (instrumentScoreEntity.percentile) {
+            textStr=[textStr stringByAppendingFormat:@" P:%.0f%%",[instrumentScoreEntity.percentile floatValue]];
+        }
+        if (instrumentScoreEntity.tScore) {
+            textStr=[textStr stringByAppendingFormat:@" tS:%.0f",[instrumentScoreEntity.tScore floatValue]];
+        }
+        if (instrumentScoreEntity.zScore) {
+            textStr=[textStr stringByAppendingFormat:@" zS:%.2f",[instrumentScoreEntity.zScore floatValue]];
+        }
+        if (instrumentScoreEntity.baseRate) {
+            textStr=[textStr stringByAppendingFormat:@" BR:%.1f",[instrumentScoreEntity.baseRate floatValue]];
+        }
+        if (instrumentScoreEntity.cIFloor&&instrumentScoreEntity.cICeiling &&instrumentScoreEntity.confidence) {
+            textStr=[textStr stringByAppendingFormat:@" C:%.0f%% %.1f-%.1f",[instrumentScoreEntity.confidence floatValue],[instrumentScoreEntity.cIFloor floatValue],[instrumentScoreEntity.cICeiling floatValue]];
+        }
+        
+        cell.textLabel.text=textStr;
+    }
+    
+
+    
+    
+
+
+
+}
+    
+    
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index{
@@ -1408,11 +1450,14 @@ NSLog(@"tablemodeltag is %i",tableModel.tag);
                         if (selectedInstrument.instrumentName.length) {
                         
                         NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                                  @"instrument.instrumentName like %@",selectedInstrument.instrumentName]; 
+                                                  @"instrument.instrumentName like %@",[NSString stringWithString:(NSString *) selectedInstrument.instrumentName]]; 
                         
                         SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"abbreviatedName" sortAscending:YES filterPredicate:predicate];
                         
                         objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                            
+                            [objectSelectionCell reloadBoundValue];
+                            NSLog(@"objectselection cell %@",objectSelectionCell.items);
                             
                         }
                         
@@ -1435,6 +1480,29 @@ NSLog(@"tablemodeltag is %i",tableModel.tag);
             
     }}
 
+    if ([SCUtilities is_iPad]) {
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        
+        UIColor *backgroundColor=nil;
+        if(indexPath.row==NSNotFound|| tableModel.tag>0)
+        {
+            backgroundColor=(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor;
+        }
+        else {
+            backgroundColor=[UIColor clearColor];
+        }
+        
+        if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
+            
+            [detailTableViewModel.modeledTableView setBackgroundView:nil];
+            UIView *view=[[UIView alloc]init];
+            [detailTableViewModel.modeledTableView setBackgroundView:view];
+            [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
+            
+            
+        }
+    }
 
 
 }
@@ -1510,6 +1578,12 @@ NSLog(@"tablemodeltag is %i",tableModel.tag);
                NSMutableSet *mutableSet=(NSMutableSet *) [cellManagedObject mutableSetValueForKey:@"scores"];
                 [mutableSet removeAllObjects];
                 [objectSelectionCell commitChanges];
+                    UINavigationItem *navigationItem=(UINavigationItem *)tableViewModel.viewController.navigationItem;
+                    
+                    navigationItem.title=selectedInstrument.instrumentName;
+                    
+
+                    
                 [tableViewModel reloadBoundValues];
                 [tableViewModel.modeledTableView reloadData];
                     

@@ -356,7 +356,7 @@
     CGFloat localDbBytes=(CGFloat )[self getLocalDrugFileSize];
     UINavigationItem *navigationItem=(UINavigationItem *)self.navigationItem;
     
-    navigationItem.title=[NSString stringWithFormat:@"Drugs %0.1f MB", localDbBytes/1048576];;
+    navigationItem.title=[NSString stringWithFormat:@"Drugs %0.1f MB", localDbBytes/1048576];
     
 
     
