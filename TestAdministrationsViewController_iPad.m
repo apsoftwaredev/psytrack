@@ -64,7 +64,7 @@
     
     
     SCEntityDefinition *testSessionDeliveredDef =[SCEntityDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
-                                                                   managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType", @"certificationsCredited",   @"degreesCredited",  @"licenseNumbersCredited", @"relatedSupportTime", @"supervisor", @"testsAdministered",   @"trainingType", @"treatmentSetting",  @"eventIdentifier",     nil]];        
+                                                                   managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType",     @"supervisor", @"testsAdministered",   @"trainingType", @"treatmentSetting",  @"eventIdentifier",     nil]];        
     
     
     

@@ -845,6 +845,48 @@
     //add the selection attributes to the property definition
     instrumentPropertyDef.attributes = instrumentSelectionAttribs;
    
+    //Create a class definition for the instrument publisher Entity
+    SCEntityDefinition *instrumentPublisherDef = [SCEntityDefinition definitionWithEntityName:@"InstrumentPublisherEntity" 
+                                                                         managedObjectContext:managedObjectContext
+                                                                                propertyNames:[NSArray arrayWithObjects:@"publisherName", @"notes" , nil]];
+    
+    
+    
+    //create a property definition
+    SCPropertyDefinition *instrumentPublisherPropertyDef = [instrumentDef propertyDefinitionWithName:@"publisher"];
+    
+    
+    
+    //set the title property name
+    instrumentPublisherDef.titlePropertyName=@"publisherName";
+    instrumentPublisherDef.orderAttributeName=@"order";
+    //set the property definition Publisher to objects selection
+	
+    instrumentPublisherPropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *instrumentPublisherSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:instrumentPublisherDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    
+    //set some addtional attributes
+    instrumentPublisherSelectionAttribs.allowAddingItems = YES;
+    instrumentPublisherSelectionAttribs.allowDeletingItems = YES;
+    instrumentPublisherSelectionAttribs.allowMovingItems = YES;
+    instrumentPublisherSelectionAttribs.allowEditingItems = YES;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    instrumentPublisherSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add instrument publishers"];
+    
+    
+    //add an "Add New" element to appear when user clicks edit
+    instrumentPublisherSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Tap here to add new instrument Publisher"];
+    
+    //add the selection attributes to the property definition
+    instrumentPublisherPropertyDef.attributes = instrumentPublisherSelectionAttribs;
+    
+    //Create the property definition for the notes property in the genderDef class
+    SCPropertyDefinition *instrumentPublisherNotesPropertyDef = [instrumentPublisherDef propertyDefinitionWithName:@"notes"];
+    instrumentPublisherNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+
     
     //create a property definition
     SCPropertyDefinition *instrumentTypePropertyDef = [instrumentDef propertyDefinitionWithName:@"instrumentType"];
@@ -932,10 +974,10 @@
     //Create a class definition for the Instrument Entity
     SCEntityDefinition *batteryDef = [SCEntityDefinition definitionWithEntityName:@"BatteryEntity" 
                                                           managedObjectContext:managedObjectContext
-                                                                 propertyNames:[NSArray arrayWithObjects:@"batteryName", @"acronym", @"publisher",@"instruments", @"notes" , nil]];
+                                                                 propertyNames:[NSArray arrayWithObjects:@"batteryName", @"acronym", @"publisher",@"instruments",@"sampleSize", @"ages",   @"notes" , nil]];
     
     
-
+    
     //Create the property definition for the instruments property
     SCPropertyDefinition *existingBatteriesPropertyDef = [assessmentDef propertyDefinitionWithName:@"batteries"];
     existingBatteriesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:existingBatteryDef
@@ -981,6 +1023,18 @@
     batteryPropertyDef.attributes = batterySelectionAttribs;
     
 
+    //create a property definition
+    SCPropertyDefinition *batteryPublisherPropertyDef = [batteryDef propertyDefinitionWithName:@"publisher"];
+    
+    
+    
+   //set the property definition Publisher to objects selection
+	
+    batteryPublisherPropertyDef.type = SCPropertyTypeObjectSelection;
+    //add the selection attributes to the property definition
+    batteryPublisherPropertyDef.attributes = instrumentPublisherSelectionAttribs;
+        
+    
     //create a property definition
     SCPropertyDefinition *batteryInstrumentsPropertyDef = [batteryDef propertyDefinitionWithName:@"instruments"];
     
@@ -1292,8 +1346,10 @@ BOOL valid=NO;
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
 
-    UIColor *backgroundColor=nil;
-    if(indexPath.row==NSNotFound|| tableModel.tag>0)
+   
+    if ([SCUtilities is_iPad]) {
+         UIColor *backgroundColor=nil;
+       if(indexPath.row==NSNotFound|| tableModel.tag>0)
     {
         backgroundColor=(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor;
     }
@@ -1310,7 +1366,9 @@ BOOL valid=NO;
         
         
     }
-    
+        
+    }
+
 }
 
 
