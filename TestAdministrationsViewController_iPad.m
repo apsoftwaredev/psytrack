@@ -64,7 +64,7 @@
     
     
     SCEntityDefinition *testSessionDeliveredDef =[SCEntityDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
-                                                                   managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType",     @"supervisor", @"testsAdministered",   @"trainingType", @"treatmentSetting",  @"eventIdentifier",     nil]];        
+                                                                   managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType",     @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]];        
     
     
     
@@ -199,111 +199,6 @@
     //During a testing session (PsyTestingSessionDeliveredEntity), the examiner may administer many different tests (PsyTestAdministeredEntity). The testing session may be a group administration or individual administration, and may be considered neuropsych testing or other types of testing (testingSessionTypeEntity).  The tests administered may break down into several score indexes (PsyTestScoreEntity).  The individual tests may be any differnt type of test, including personality test, intelligence test, neuropsych batteries, etc(PsyTestTypeEntity).  For example, a neuropsch testing session on a particular day may include personality tests, memory tests, achievement tests, intelligence tests, and neuropsych battery of tests.  The session includes the overall time of the testing session and includes the other details such as the client and supervisor where the credits are applied.//
     
     
-    SCPropertyDefinition *testsAdministeredPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"testsAdministered"];
-    
-    
-    
-    SCEntityDefinition *testAdministeredDef =[SCEntityDefinition definitionWithEntityName:@"TestAdministeredEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"psychTestName" ,@"scores",@"notes", nil]];
-    
-    
-    
-    
-    testAdministeredDef.orderAttributeName = @"order";
-    SCPropertyDefinition *testAdministeredNotesPropertyDef=[testAdministeredDef propertyDefinitionWithName:@"notes"];
-    testAdministeredNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-    testsAdministeredPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:testAdministeredDef
-                                                             allowAddingItems:TRUE
-                                                           allowDeletingItems:TRUE
-                                                             allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Tests Administered)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:TRUE addNewObjectuiElementExistsInEditingMode:FALSE];
-    
-    
-    
-    testAdministeredDef.titlePropertyName=@"psychTestName.acronym";
-    
-    SCEntityDefinition *testNameDef=[SCEntityDefinition definitionWithEntityName:@"InstrumentEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"instrumentName", @"acronym",@"instrumentType", @"notes", nil]];
-    
-    
-    testNameDef.titlePropertyName=@"acronym";
-    
-    testNameDef.orderAttributeName=@"order";
-    
-    
-    
-    SCPropertyDefinition *testNamePropertyDef=[testAdministeredDef propertyDefinitionWithName:@"psychTestName"];
-    testNamePropertyDef.type =SCPropertyTypeObjectSelection;
-    
-    SCObjectSelectionAttributes *testNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:testNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-    testNameSelectionAttribs.allowAddingItems = YES;
-    testNameSelectionAttribs.allowDeletingItems = YES;
-    testNameSelectionAttribs.allowMovingItems = YES;
-    testNameSelectionAttribs.allowEditingItems = YES;
-    testNameSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Test Names)"];
-    testNameSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Test Name"];
-    testNamePropertyDef.attributes = testNameSelectionAttribs;
-    
-        SCPropertyDefinition *testNameNotesPropertyDef=[testNameDef propertyDefinitionWithName:@"notes"];
-    testNameNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-    
-    //testTypeEntity is in a one to many relationship with testNameEntity.
-    
-    SCEntityDefinition *testTypeDef=[SCEntityDefinition definitionWithEntityName:@"InstrumentTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"instrumentType", @"notes", nil]];
-    
-    
-    
-    testTypeDef.orderAttributeName=@"order";
-    
-    
-    
-    SCPropertyDefinition *testTypePropertyDef=[testNameDef propertyDefinitionWithName:@"instrumentType"];
-    testTypePropertyDef.type =SCPropertyTypeObjectSelection;
-    
-    SCObjectSelectionAttributes *testTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:testTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-    testTypeSelectionAttribs.allowAddingItems = YES;
-    testTypeSelectionAttribs.allowDeletingItems = YES;
-    testTypeSelectionAttribs.allowMovingItems = YES;
-    testTypeSelectionAttribs.allowEditingItems = YES;
-    testTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Test Types)"];
-    testTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Test Type"];
-    testTypePropertyDef.attributes = testTypeSelectionAttribs;
-    
-   
-    SCPropertyDefinition *testTypeNotesPropertyDef=[testTypeDef propertyDefinitionWithName:@"notes"];
-    testTypeNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-    
-    
-    SCEntityDefinition *testScoredDef =[SCEntityDefinition definitionWithEntityName:@"TestScoreEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"scoreName" ,@"score",@"notes", nil]];
-    
-    
-    
-    
-    testScoredDef.orderAttributeName = @"order";
-    
-    
-    SCPropertyDefinition *testScoredNotesPropertyDef=[testScoredDef propertyDefinitionWithName:@"notes"];
-    testScoredNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-    SCPropertyDefinition *testScoredNamePropertyDef=[testScoredDef propertyDefinitionWithName:@"scoreName"];
-    testScoredNamePropertyDef.type=SCPropertyTypeTextView;
-    testScoredNamePropertyDef.title=@"Score Name/Index";
-    testScoredDef.titlePropertyName=@"scoreName;score";
-    
-    
-    SCPropertyDefinition *testAdministeredScoresPropertyDef=[testAdministeredDef propertyDefinitionWithName:@"scores"];
-    testAdministeredScoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:testScoredDef
-                                                       allowAddingItems:TRUE
-                                                     allowDeletingItems:TRUE
-                                                       allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Test Scores)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:TRUE addNewObjectuiElementExistsInEditingMode:FALSE];
-    
-    
-    
-    testAdministeredDef.titlePropertyName=@"psychTestName.acronym";
-    
-    
-    
-    
     
     
     
@@ -334,39 +229,7 @@
     SCPropertyDefinition *testSessionTypeNotesPropertyDef=[testSessionTypeDef propertyDefinitionWithName:@"notes"];
     testSessionTypeNotesPropertyDef.type=SCPropertyTypeTextView;
     
-    //treatment setting start
-    SCEntityDefinition *psychTreatmentSettingDef=[SCEntityDefinition definitionWithEntityName:@"TreatmentSettingEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"settingType", @"notes", nil]];
-    
-    
-    
-    
-    
-    psychTreatmentSettingDef.orderAttributeName=@"order";
-    
-    
-    //treatment setting is a place or setting where the treatment takes place (e.g., hospital, community mental health clinic, day program
-    
-    SCPropertyDefinition *sessionTreatmentSettingPropertyDef=[testSessionDeliveredDef propertyDefinitionWithName:@"treatmentSetting"];
-    sessionTreatmentSettingPropertyDef.type =SCPropertyTypeObjectSelection;
-    
-    SCObjectSelectionAttributes *treatmentSettingSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:psychTreatmentSettingDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-    treatmentSettingSelectionAttribs.allowAddingItems = YES;
-    treatmentSettingSelectionAttribs.allowDeletingItems = YES;
-    treatmentSettingSelectionAttribs.allowMovingItems = YES;
-    treatmentSettingSelectionAttribs.allowEditingItems = YES;
-    treatmentSettingSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Treatment Settings)"];
-    treatmentSettingSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Treatment Setting"];
-    sessionTreatmentSettingPropertyDef.attributes = treatmentSettingSelectionAttribs;
-    
-    SCPropertyDefinition *treatmentSettingTypePropertyDef=[psychTreatmentSettingDef propertyDefinitionWithName:@"settingType"];
-    treatmentSettingTypePropertyDef.type=SCPropertyTypeTextView;
-    SCPropertyDefinition *treatmentSettingNotesPropertyDef=[psychTreatmentSettingDef propertyDefinitionWithName:@"notes"];
-    treatmentSettingNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-    
-    
-    //treatment setting end    
-    
+   
     //Training Type  start
     SCEntityDefinition *trainingTypeDef=[SCEntityDefinition definitionWithEntityName:@"TrainingTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"trainingType",@"selectedByDefault", @"notes", nil]];
     

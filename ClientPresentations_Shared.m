@@ -869,7 +869,7 @@
     //Create the property definition for the instrument Scores property
     SCPropertyDefinition *clientInstrumentScoresPropertyDef = [clientPresentationDef propertyDefinitionWithName:@"instrumentScores"];
     
-    clientInstrumentScoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientInstrumentScoresDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES];	
+    clientInstrumentScoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientInstrumentScoresDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new instrument scores"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
     
     clientInstrumentScoresDef.titlePropertyName=@"instrument.instrumentName";
     SCPropertyDefinition *instrumentPropertyDef=[clientInstrumentScoresDef propertyDefinitionWithName:@"instrument"];
@@ -1042,7 +1042,7 @@
     
   
     
-    SCPropertyGroup *instrumentInClientInstrumentScoresPropertyGroup=[SCPropertyGroup groupWithHeaderTitle:@"Add instrument before scores" footerTitle:@"If you change the instrument, the scores added under a different instrument will be removed." propertyNames:[NSArray arrayWithObject:@"instrument"]];
+    SCPropertyGroup *instrumentInClientInstrumentScoresPropertyGroup=[SCPropertyGroup groupWithHeaderTitle:@"Select instrument before scores" footerTitle:@"If you change the instrument, the scores added under a different instrument will be removed." propertyNames:[NSArray arrayWithObject:@"instrument"]];
     
     [clientInstrumentScoresDef.propertyGroups addGroup:instrumentInClientInstrumentScoresPropertyGroup];
     

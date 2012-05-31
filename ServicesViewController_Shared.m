@@ -493,8 +493,9 @@
     ////NSLog(@"table view tag is %i",tableViewModel.tag);
     //    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
     
-    
-    if(tableViewModel.tag==1 &&indexPath.section==0){
+    NSLog(@"tab tag %i",tableViewModel.tag);
+    NSLog(@"indext path section is %i", indexPath.section);
+    if(tableViewModel.tag==1 &&indexPath.section==1){
         //        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         //NSLog(@"cell bound object is %@",cellManagedObject);
         //NSLog(@"cell.tag%i",cell.tag);
@@ -537,7 +538,7 @@
             case 3:
             {
                 if ([cell isKindOfClass:[ButtonCell class]]) {
-                    
+                    NSLog(@"eventidentifier bound object %@",cell.boundObject);
                     NSString *eventIdentifier=[cell.boundObject valueForKey:@"eventIdentifier"]; 
                     
                     
@@ -1590,7 +1591,7 @@
                     
                     //                  
                 }
-                
+            
                 [currentDetailTableViewModel.viewController.navigationController presentModalViewController:eventViewController animated:YES];
                 eventViewController.editViewDelegate=self;
             
@@ -1712,13 +1713,13 @@
                 
                 addController.editViewDelegate = self;
                 addController.view.tag=837;
-                addController.modalViewController.navigationController.delegate=self;
+//                addController.modalViewController.navigationController.delegate=self;
                 //                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
                 //                
                 //                UITabBarController *tabBarController=[appDelegate tabBarController];
                 
                 NSLog(@"curretnt tableviewmodel tag is %i",currentDetailTableViewModel.tag);
-                currentTableModelViewController.navigationController.delegate=self;
+//                currentTableModelViewController.navigationController.delegate=self;
             
                 [currentTableModelViewController.navigationController presentModalViewController:addController animated:YES];
                 
@@ -1742,7 +1743,7 @@
 	
 	NSError *error = nil;
 	EKEvent *thisEvent = controller.event;
-	SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
+	SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:1];
     SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:3];
     
 	switch (action) {
@@ -1774,6 +1775,7 @@
             //NSLog(@"cell bound object in save event is %@",cell.boundObject);
             
             [cell.boundObject setValue:[controller.event eventIdentifier] forKey:@"eventIdentifier"];
+            NSLog(@"cell bound object is %@",cell.boundObject);
             [cell commitChanges];
             [cell reloadBoundValue];
             if ([cell isKindOfClass:[ButtonCell class]]) {
