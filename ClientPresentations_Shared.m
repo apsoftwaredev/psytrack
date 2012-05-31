@@ -835,7 +835,7 @@
     
     
     
-    SCEntityDefinition *instrumentDef=[SCEntityDefinition definitionWithEntityName:@"InstrumentEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"acronym", @"instrumentName", @"publisher", @"ages", @"sampleSize",@"scoreNames",@"notes"     , nil]];
+    SCEntityDefinition *instrumentDef=[SCEntityDefinition definitionWithEntityName:@"InstrumentEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"acronym", @"instrumentName",@"instrumentType", @"publisher", @"ages", @"sampleSize",@"scoreNames",@"notes"     , nil]];
     
     
     SCEntityDefinition *clientInstrumentScoresDef=[SCEntityDefinition definitionWithEntityName:@"ClientInstrumentScoresEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"instrument", @"scores"  ,@"notes",   nil]];
@@ -907,6 +907,48 @@
    
     
     scoreNameInInstrumentPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentScoreNameDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"(Define score names)"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to define score name"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	    
+    
+    
+    
+    //Create a class definition for the instrument type Entity
+    SCEntityDefinition *instrumentTypeDef = [SCEntityDefinition definitionWithEntityName:@"InstrumentTypeEntity" 
+                                                                    managedObjectContext:managedObjectContext
+                                                                           propertyNames:[NSArray arrayWithObjects:@"instrumentType", @"notes" , nil]];
+    
+
+    
+    //create a property definition
+    SCPropertyDefinition *instrumentTypePropertyDef = [instrumentDef propertyDefinitionWithName:@"instrumentType"];
+    
+    
+    
+    //set the title property name
+    instrumentTypeDef.titlePropertyName=@"instrumentType";
+    
+    //set the property definition type to objects selection
+	
+    instrumentTypePropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *instrumentTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:instrumentTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    
+    //set some addtional attributes
+    instrumentTypeSelectionAttribs.allowAddingItems = YES;
+    instrumentTypeSelectionAttribs.allowDeletingItems = YES;
+    instrumentTypeSelectionAttribs.allowMovingItems = NO;
+    instrumentTypeSelectionAttribs.allowEditingItems = YES;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    instrumentTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add instrument types"];
+    
+    
+    //add an "Add New" element to appear when user clicks edit
+    instrumentTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Tap here to add new instrument type"];
+    
+    //add the selection attributes to the property definition
+    instrumentTypePropertyDef.attributes = instrumentTypeSelectionAttribs;
+    
+    //Create the property definition for the notes property in the genderDef class
+    SCPropertyDefinition *instrumentTypeNotesPropertyDef = [instrumentTypeDef propertyDefinitionWithName:@"notes"];
+    instrumentTypeNotesPropertyDef.type=SCPropertyTypeTextView;
     
     
     SCPropertyDefinition *scoresPropertyDef=[clientInstrumentScoresDef propertyDefinitionWithName:@"scores"];

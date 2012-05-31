@@ -795,7 +795,7 @@
     //Create a class definition for the Instrument Entity
     SCEntityDefinition *instrumentDef = [SCEntityDefinition definitionWithEntityName:@"InstrumentEntity" 
                                                         managedObjectContext:managedObjectContext
-                                                               propertyNames:[NSArray arrayWithObjects:@"instrumentName", @"acronym", @"instrumentType",    @"notes" , nil]];
+                                                               propertyNames:[NSArray arrayWithObjects:@"acronym",@"instrumentName",  @"publisher",@"ages",@"sampleSize",@"instrumentType",  @"scoreNames",  @"notes" , nil]];
     
     
     
@@ -888,7 +888,24 @@
     SCPropertyDefinition *instrumentTypeNotesPropertyDef = [instrumentTypeDef propertyDefinitionWithName:@"notes"];
     instrumentTypeNotesPropertyDef.type=SCPropertyTypeTextView;
     
+    SCEntityDefinition *instrumentScoreNameDef=[SCEntityDefinition definitionWithEntityName:@"InstrumentScoreNameEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"scoreName", @"abbreviatedName", @"notes"   , nil]];
+    
+    SCPropertyDefinition *instrumentScoreNameNotesPropertyDef = [instrumentScoreNameDef propertyDefinitionWithName:@"notes"];    
+    
+    
+    instrumentScoreNameNotesPropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *scoreNameInInstrumentPropertyDef=[instrumentDef propertyDefinitionWithName:@"scoreNames"];
+    
+    
+    
+    
+    
+    
+    scoreNameInInstrumentPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentScoreNameDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"(Define score names)"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to define score name"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	    
+    
+    
 
+    
     
     //Create a class definition for the existing InstrumentsEntity
     SCEntityDefinition *existingBatteryDef = [SCEntityDefinition definitionWithEntityName:@"ExistingBatteryEntity" 
