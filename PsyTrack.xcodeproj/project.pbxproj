@@ -125,7 +125,7 @@
 		37F7CE9C1500596F00AD2C3A /* Time_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE991500596F00AD2C3A /* Time_Shared.m */; };
 		37F7CE9D1500596F00AD2C3A /* TimeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE9B1500596F00AD2C3A /* TimeEntity.m */; };
 		37F7CEA2150059BC00AD2C3A /* TestAdministrationsViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEA1150059BC00AD2C3A /* TestAdministrationsViewController_iPad.m */; };
-		37F7CEA7150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEA3150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib */; };
+		37F7CEA7150059D900AD2C3A /* TimeTrackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEA3150059D900AD2C3A /* TimeTrackViewController.xib */; };
 		37F7CEAE15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEAA15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib */; };
 		37F7CEAF15005C5F00AD2C3A /* TrainTrackViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEAC15005C5F00AD2C3A /* TrainTrackViewController_iPhone.xib */; };
 		37F7CEB215005C7300AD2C3A /* TrainTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEB115005C7300AD2C3A /* TrainTrackViewController.m */; };
@@ -293,7 +293,7 @@
 		E7D3732C152C2EFA00121918 /* ExistingHoursEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */; };
 		E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */; };
 		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
-		E7E1A63D152E873500C227E8 /* ServicesViewController_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */; };
+		E7E1A63D152E873500C227E8 /* TimeTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */; };
 		E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A6441530C18900C227E8 /* ShortFieldCell.m */; };
 		E7F1E6F81575916F00D4A638 /* InstrumentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E6F71575916F00D4A638 /* InstrumentEntity.m */; };
 		E7F1E703157662EB00D4A638 /* InstrumentScoreNameEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E702157662EB00D4A638 /* InstrumentScoreNameEntity.m */; };
@@ -528,7 +528,7 @@
 		37F7CE9B1500596F00AD2C3A /* TimeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeEntity.m; sourceTree = "<group>"; };
 		37F7CEA0150059BC00AD2C3A /* TestAdministrationsViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestAdministrationsViewController_iPad.h; sourceTree = "<group>"; };
 		37F7CEA1150059BC00AD2C3A /* TestAdministrationsViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAdministrationsViewController_iPad.m; sourceTree = "<group>"; };
-		37F7CEA4150059D900AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TestAdministrationsViewController_iPad.xib; sourceTree = "<group>"; };
+		37F7CEA4150059D900AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TimeTrackViewController.xib; sourceTree = "<group>"; };
 		37F7CEAB15005C5F00AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TrainTrackViewController_iPad.xib; sourceTree = "<group>"; };
 		37F7CEAD15005C5F00AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TrainTrackViewController_iPhone.xib; sourceTree = "<group>"; };
 		37F7CEB015005C7300AD2C3A /* TrainTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainTrackViewController.h; sourceTree = "<group>"; };
@@ -752,8 +752,8 @@
 		E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursEntity.m; sourceTree = "<group>"; };
 		E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursOverviewCell.xib; sourceTree = "<group>"; };
 		E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController_iPad.xib; sourceTree = "<group>"; };
-		E7E1A63A152E873500C227E8 /* ServicesViewController_Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicesViewController_Shared.h; sourceTree = "<group>"; };
-		E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicesViewController_Shared.m; sourceTree = "<group>"; };
+		E7E1A63A152E873500C227E8 /* TimeTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTrackViewController.h; sourceTree = "<group>"; };
+		E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTrackViewController.m; sourceTree = "<group>"; };
 		E7E1A6431530C18900C227E8 /* ShortFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortFieldCell.h; sourceTree = "<group>"; };
 		E7E1A6441530C18900C227E8 /* ShortFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortFieldCell.m; sourceTree = "<group>"; };
 		E7F1E6F61575916F00D4A638 /* InstrumentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentEntity.h; sourceTree = "<group>"; };
@@ -1163,7 +1163,6 @@
 			children = (
 				E7F1E75E157824B300D4A638 /* TestingSessionDeliveredEntity.h */,
 				E7F1E75F157824B300D4A638 /* TestingSessionDeliveredEntity.m */,
-				37F7CEA3150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib */,
 				37F7CEA0150059BC00AD2C3A /* TestAdministrationsViewController_iPad.h */,
 				37F7CEA1150059BC00AD2C3A /* TestAdministrationsViewController_iPad.m */,
 			);
@@ -1561,8 +1560,9 @@
 			children = (
 				E7F1E7611578254000D4A638 /* ServiceEntity.h */,
 				E7F1E7621578254000D4A638 /* ServiceEntity.m */,
-				E7E1A63A152E873500C227E8 /* ServicesViewController_Shared.h */,
-				E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */,
+				E7E1A63A152E873500C227E8 /* TimeTrackViewController.h */,
+				E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */,
+				37F7CEA3150059D900AD2C3A /* TimeTrackViewController.xib */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -1683,7 +1683,7 @@
 				37F7CE7F150057C300AD2C3A /* CliniciansDetailViewController_iPad.xib in Resources */,
 				37F7CE80150057C300AD2C3A /* CliniciansRootViewController_iPad.xib in Resources */,
 				37F7CE84150057FC00AD2C3A /* ClinicianViewController.xib in Resources */,
-				37F7CEA7150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib in Resources */,
+				37F7CEA7150059D900AD2C3A /* TimeTrackViewController.xib in Resources */,
 				37F7CEAE15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib in Resources */,
 				37F7CEAF15005C5F00AD2C3A /* TrainTrackViewController_iPhone.xib in Resources */,
 				37F7CEBA15005D6700AD2C3A /* ReportsDetailViewController_iPad.xib in Resources */,
@@ -1923,7 +1923,7 @@
 				E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */,
 				E78DA6A415252579004ABF29 /* ExistingHoursViewController.m in Sources */,
 				E7D3732C152C2EFA00121918 /* ExistingHoursEntity.m in Sources */,
-				E7E1A63D152E873500C227E8 /* ServicesViewController_Shared.m in Sources */,
+				E7E1A63D152E873500C227E8 /* TimeTrackViewController.m in Sources */,
 				E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */,
 				E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */,
 				E7B0A5B815347C430027F637 /* KeychainItemWrapper.m in Sources */,
@@ -2142,12 +2142,12 @@
 			name = ClinicianViewController.xib;
 			sourceTree = "<group>";
 		};
-		37F7CEA3150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib */ = {
+		37F7CEA3150059D900AD2C3A /* TimeTrackViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				37F7CEA4150059D900AD2C3A /* en */,
 			);
-			name = TestAdministrationsViewController_iPad.xib;
+			name = TimeTrackViewController.xib;
 			sourceTree = "<group>";
 		};
 		37F7CEAA15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib */ = {

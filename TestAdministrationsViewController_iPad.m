@@ -162,41 +162,13 @@
     /*	END of Class Definition and attributes for the Client Entity */
     /****************************************************************************************/
     
-    //insert the custom property definition into the clientData class at index 
-   
-    
-
-    
-    
-//   	supervivisorPropertyDef.type = SCPropertyTypeObjectSelection;
-//    
-//    SCEntityDefinition *supervisorDef =[SCEntityDefinition definitionWithEntityName:@"ClinicianEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix", nil]];
-//    supervisorDef.titlePropertyName=@"prefix;firstName;lastName;suffix";
-//    supervisorDef.orderAttributeName=@"order";
-//    
-//    SCPropertyGroup *supervisorNameGroup =[SCPropertyGroup groupWithHeaderTitle:@"Supervisor Name" footerTitle:@"Select this clinician under the Clicician tab to add or view more details." propertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix", nil]];
-//    
-    
-    
-    
-//    [supervisorDef.propertyGroups addGroup:supervisorNameGroup];
-//    
-//    SCObjectSelectionAttributes *supervisorSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:supervisorDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-//    supervisorSelectionAttribs.allowAddingItems = YES;
-//    supervisorSelectionAttribs.allowDeletingItems = YES;
-//    supervisorSelectionAttribs.allowMovingItems = YES;
-//    supervisorSelectionAttribs.allowEditingItems = YES;
-//    supervisorSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Supervisors)"];
-//    supervisorSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Supervisor"];
-//    supervivisorPropertyDef.attributes = supervisorSelectionAttribs;
-    
+  
     SCPropertyDefinition *clientsPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"clients"];
     
    	clientsPropertyDef.type = SCPropertyTypeObjectSelection;
     
     
     
-    //During a testing session (PsyTestingSessionDeliveredEntity), the examiner may administer many different tests (PsyTestAdministeredEntity). The testing session may be a group administration or individual administration, and may be considered neuropsych testing or other types of testing (testingSessionTypeEntity).  The tests administered may break down into several score indexes (PsyTestScoreEntity).  The individual tests may be any differnt type of test, including personality test, intelligence test, neuropsych batteries, etc(PsyTestTypeEntity).  For example, a neuropsch testing session on a particular day may include personality tests, memory tests, achievement tests, intelligence tests, and neuropsych battery of tests.  The session includes the overall time of the testing session and includes the other details such as the client and supervisor where the credits are applied.//
     
     
     

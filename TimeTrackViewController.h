@@ -1,5 +1,5 @@
 //
-//  ServicesViewController_Shared.h
+//  TimeTrackViewController.h
 //  PsyTrack
 //
 //  Created by Daniel Boice on 4/5/12.
@@ -14,7 +14,16 @@
 
 @class Time_Shared;
 
-@interface ServicesViewController_Shared : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate>
+typedef enum {
+    kTrackAssessmentSetup,
+    kTrackInterventionSetup,
+    kTrackSupportSetup,
+    kTrackSupervisionReceivedSetup,
+    kTrackSupervisionGivenSetup,
+} PTrackControllerSetup;
+
+
+@interface TimeTrackViewController : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate>
 {
     Time_Shared *time_Shared;
     ClientPresentations_Shared *clientPresentations_Shared;
@@ -25,7 +34,7 @@
     
 //    SCArrayOfObjectsModel *tableModel;
     
-    
+    PTrackControllerSetup currentControllerSetup;
     BOOL viewControllerOpen;
     
     NSDateFormatter *counterDateFormatter;
@@ -76,8 +85,6 @@
 
 
 
-
-
 @property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
 //@property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UILabel *totalAdministrationsLabel;
@@ -103,5 +110,5 @@
 -(IBAction)stopwatchReset:(id)sender;
 
 -(NSTimeInterval ) totalBreakTimeInterval;
-
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle trackSetup:(PTrackControllerSetup )setupType;
 @end

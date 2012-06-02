@@ -17,9 +17,9 @@
  */
 
 #import <UIKit/UIKit.h>
-#import "ServicesViewController_Shared.h"
+#import "TimeTrackViewController.h"
 
-@interface TestAdministrationsViewController_iPad : ServicesViewController_Shared < UINavigationControllerDelegate, SCViewControllerDelegate, SCTableViewModelDataSource, SCTableViewModelDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate> {
+@interface TestAdministrationsViewController_iPad : TimeTrackViewController < UINavigationControllerDelegate, SCViewControllerDelegate, SCTableViewModelDataSource, SCTableViewModelDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate> {
     
    
 }
