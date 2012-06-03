@@ -182,8 +182,12 @@ NSInteger intSort(id num1, id num2, void *context)
         additionalTopSpace =32;
         additionalBottomSpace=49;
      
-        appWindowFrame=(CGRect )[appDelegate.window frame];
-        
+        if ((currentOrientation==UIInterfaceOrientationLandscapeLeft||currentOrientation==UIInterfaceOrientationLandscapeRight)){
+            appWindowFrame=CGRectMake(appDelegate.window.frame.origin.x, appDelegate.window.frame.origin.y, appDelegate.window.frame.size.height, appDelegate.window.frame.size.width);
+        }
+        else {
+            appWindowFrame=appDelegate.window.frame;
+        }
         
         if ((currentOrientation==UIInterfaceOrientationLandscapeLeft||currentOrientation==UIInterfaceOrientationLandscapeRight)&&[[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
         
@@ -454,7 +458,14 @@ NSInteger intSort(id num1, id num2, void *context)
         switch (screenLocation) 
         {
             case kPTTScreenLocationTop:
-                frame = CGRectMake(0,-labelContainerHeight,superViewFrameHeight+49,labelContainerHeight);
+                
+                if (currentOrientation==UIInterfaceOrientationLandscapeRight) {
+                    frame = CGRectMake(labelContainerHeight,-labelContainer.size.height,superViewFrameHeight+49,labelContainerHeight);
+                }
+                else {
+                    frame = CGRectMake(labelContainerHeight,-labelContainer.size.height,superViewFrameHeight+49,labelContainerHeight);
+                }
+                
                 
                 break;
             case kPTTScreenLocationMiddle:
@@ -483,6 +494,7 @@ NSInteger intSort(id num1, id num2, void *context)
     
     switch (screenLocation) {
         case kPTTScreenLocationTop:
+           
             frame = CGRectMake(0,-labelContainerHeight,superViewFrameWidth,labelContainerHeight);
            
             break;

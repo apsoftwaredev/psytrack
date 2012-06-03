@@ -15,23 +15,23 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewModel.h"
+#import <UIKit/UIKit.h>
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "ClinicianEntity.h"
 #import "CliniciansViewController_Shared.h"
 #import "ClinicianSelectionCell.h"
-@interface ClinicianViewController : CliniciansViewController_Shared <SCTableViewModelDataSource, SCTableViewModelDelegate,SCTableViewCellDelegate,UIAlertViewDelegate, UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate> {
+@interface ClinicianViewController : CliniciansViewController_Shared <SCTableViewModelDataSource, SCTableViewModelDelegate,SCViewControllerDelegate, UIAlertViewDelegate, UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate> {
      
  
-  	__weak UISearchBar *searchBar;
+  	 UISearchBar *searchBar;
   
-//	 SCArrayOfObjectsModel *tableModel;
+	 SCArrayOfObjectsModel *objectsModel;
      UILabel *totalCliniciansLabel;
        
-
+    
     BOOL filterByPrescriber;
-    BOOL isInDetailSubview;
+    BOOL allowMultipleSelection;
     ClinicianSelectionCell *clinicianObjectSelectionCell;
     UIViewController *sendingViewController;
     
@@ -40,19 +40,19 @@
     NSPredicate *filterPredicate;
 }
 
-@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
 
 @property (nonatomic, strong) IBOutlet UILabel *totalCliniciansLabel;
 
 
 
-
+//@property (nonatomic,strong)IBOutlet SCArrayOfObjectsModel *objectsModel;
 
 -(void)updateClinicianTotalLabel;
--(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController withPredicate:(NSPredicate *)startPredicate  usePrescriber:(BOOL)usePresciberBool;
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController withPredicate:(NSPredicate *)startPredicate  usePrescriber:(BOOL)usePresciberBool allowMultipleSelection:(BOOL)allowMultiSelect;
 
     
-    
+-(void)selectMyInformation;
 -(void)cancelButtonTapped;
     
 -(void)setSelectedClinicians;

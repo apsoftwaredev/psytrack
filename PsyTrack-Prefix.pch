@@ -13,3 +13,8 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
 #endif
+
+#import <SensibleTableView/SensibleTableView.h>
+#import <STV+iCloud/STV+iCloud.h>
+#import <STV+CoreData/STV+CoreData.h>
+

@@ -17,21 +17,21 @@
  */
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "SCTableViewModel.h"
+
 #import "StopwatchCell.h"
 
-@interface Time_Shared : NSObject <SCViewControllerDelegate, SCTableViewModelDataSource, SCTableViewModelDelegate,UIGestureRecognizerDelegate,SCTableViewCellDelegate>{
+@interface Time_Shared : SCViewController <SCViewControllerDelegate, SCTableViewModelDataSource, SCTableViewModelDelegate,UIGestureRecognizerDelegate>{
 
 
 
     NSTimer *timer;
-    SCTableViewModel *tableModel;
+    
 
-    __weak UITextField *stopwatchTextField;
-    __weak StopwatchCell *stopwatchCell;
+     UITextField *stopwatchTextField;
+     StopwatchCell *stopwatchCell;
     SCTableViewSection *timeSection;
-    __weak UILabel *footerLabel;
-    __weak UILabel *totalTimeHeaderLabel;
+     UILabel *footerLabel;
+     UILabel *totalTimeHeaderLabel;
     
     BOOL viewControllerOpen;
     NSDate *startTime;
@@ -47,9 +47,9 @@
     
 }
 
-@property (strong, nonatomic) IBOutlet SCTableViewModel *tableModel;
-@property (weak, nonatomic) IBOutlet  UILabel *totalTimeHeaderLabel;
-@property (weak, nonatomic) IBOutlet  UILabel *footerLabel;
+//@property (strong, nonatomic) IBOutlet SCTableViewModel *detailTableModel;
+@property (strong, nonatomic) IBOutlet  UILabel *totalTimeHeaderLabel;
+@property (strong, nonatomic) IBOutlet  UILabel *footerLabel;
 @property (strong, nonatomic)   NSDate *totalTimeDate;
 
 //@property (readwrite, nonatomic) IBOutlet NSTimeInterval pauseInterval;
@@ -66,7 +66,7 @@
 //@property (strong, nonatomic) IBOutlet NSDate *referenceDate;
 //@property (strong, nonatomic) IBOutlet  NSManagedObject *managedObject;
 
-@property (strong, nonatomic) IBOutlet SCClassDefinition *timeDef;
+@property (strong, nonatomic) IBOutlet SCEntityDefinition *timeDef;
 -(id)setupTheTimeViewUsingSTV;
 -(void)calculateTime;
 -(NSString *)tableViewModel:(SCTableViewModel *)tableViewModel calculateBreakTimeForRowAtIndexPath:(NSIndexPath *)indexPath withBoundValues:(BOOL)useBoundValues;

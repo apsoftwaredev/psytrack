@@ -64,7 +64,7 @@
     
     NSString *clinicianViewControllerNibName;
     
-    if ([SCHelper is_iPad]) 
+    if ([SCUtilities is_iPad]) 
         clinicianViewControllerNibName=[NSString stringWithString:@"ClinicianViewController"];
     else
         clinicianViewControllerNibName=[NSString stringWithString:@"ClinicianViewController"];
@@ -124,7 +124,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
     ClinicianViewController *clinicianViewController=nil;
    
     
-    clinicianViewController=[[ClinicianViewController alloc]initWithNibName:clinicianViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController  withPredicate:(NSPredicate *)predicate usePrescriber:(BOOL)usePrescriber];
+    clinicianViewController=[[ClinicianViewController alloc]initWithNibName:clinicianViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController  withPredicate:(NSPredicate *)predicate usePrescriber:(BOOL)usePrescriber allowMultipleSelection:(BOOL)multiSelect];
     
     
     //NSLog(@"view controllers is %@",self.ownerTableViewModel.viewController.navigationController.viewControllers);
@@ -150,11 +150,11 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
     
     [self.ownerTableViewModel.viewController.navigationController pushViewController:clinicianViewController animated:YES];
 
-    if ([clinicianViewController.tableModel sectionCount]>0) {
+    if ([clinicianViewController.tableViewModel sectionCount]>0) {
         
-        for (int i=0; i<clinicianViewController.tableModel.sectionCount; i++) {
+        for (int i=0; i<clinicianViewController.tableViewModel.sectionCount; i++) {
         
-            SCTableViewSection *section=(SCTableViewSection *)[clinicianViewController.tableModel sectionAtIndex:i];
+            SCTableViewSection *section=(SCTableViewSection *)[clinicianViewController.tableViewModel sectionAtIndex:i];
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
             

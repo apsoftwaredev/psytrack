@@ -233,7 +233,7 @@
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-    if (appDelegate.okayToDecryptBool) {
+    if (strValue&& strValue.length) {
         
         
         
@@ -296,6 +296,9 @@
         
         NSData *primitiveData=[self primitiveValueForKey:@"notes"];
         [self didAccessValueForKey:@"notes"];
+        if (!primitiveData ||!primitiveData.length ) {
+            return nil;
+        }
         
         [self willAccessValueForKey:@"keyString"];
         NSString *tmpKeyString=self.keyString;
@@ -350,6 +353,10 @@
         NSData *primitiveData=[self primitiveValueForKey:@"initials"];
         [self didAccessValueForKey:@"initials"];
         
+        if (!primitiveData ||!primitiveData.length) {
+            return nil;
+        }
+        
         [self willAccessValueForKey:@"keyString"];
         NSString *tmpKeyString=self.keyString;
         [self didAccessValueForKey:@"keyString"];
@@ -400,6 +407,10 @@
         
         NSData *primitiveData=[self primitiveValueForKey:@"clientIDCode"];
         NSLog(@"primitive data %@",primitiveData);
+       
+        if (!primitiveData ||!primitiveData.length) {
+            return nil;
+        }
         [self didAccessValueForKey:@"clientIDCode"];
         
         [self willAccessValueForKey:@"keyString"];
@@ -453,7 +464,9 @@
         NSData *primitiveData=[self primitiveValueForKey:@"dateOfBirth"];
         
         [self didAccessValueForKey:@"dateOfBirth"];
-        
+        if (!primitiveData ||!primitiveData.length) {
+            return nil;
+        }
         [self willAccessValueForKey:@"keyString"];
         NSString *tmpKeyString=self.keyString;
         [self didAccessValueForKey:@"keyString"];
@@ -491,7 +504,7 @@
 
 PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 
-if (appDelegate.okayToDecryptBool) {
+if (appDelegate.okayToDecryptBool && dateToConvert) {
     
     
     

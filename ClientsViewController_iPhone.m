@@ -24,12 +24,13 @@
 #import "EncryptedSCTextFieldCell.h"
 #import "EncryptedSCTextViewCell.h"
 #import "DrugNameObjectSelectionCell.h"
+#import "SCArrayOfObjectsModel+CoreData+SelectionSection.h"
 
 @implementation ClientsViewController_iPhone
 @synthesize searchBar;
-@synthesize tableView;
+//@synthesize tableView;
 @synthesize totalClientsLabel;
-@synthesize tableModel;
+//@synthesize tableModel;
 @synthesize isInDetailSubview;
 @synthesize clientObjectSelectionCell;
 @synthesize sendingViewController;
@@ -43,10 +44,10 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 #pragma mark View lifecycle
 
 -(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClientsSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController{
-
+    
     self=[super initWithNibName:nibName bundle:bundle];
     
-
+    
     isInDetailSubview=detailSubview;
     clientObjectSelectionCell=objectSelectionCell;
     
@@ -54,26 +55,20 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     
     return self;
-
+    
 } 
 
 -(void)refreshData{
-
-
-    [tableModel reloadBoundValues];
-    [tableModel.modeledTableView reloadData];
+    
+    
+    [objectsModel reloadBoundValues];
+    [objectsModel.modeledTableView reloadData];
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];      
-    // Gracefully handle reloading the view controller after a memory warning
-    tableModel = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
-    if(tableModel)
-    {
-        [tableModel replaceModeledTableViewWith:self.tableView];
-        return;
-    }
+    
     
     
     // listen for key-value store changes externally from the cloud
@@ -90,20 +85,20 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     //
     // Important note: be careful not to call synchronize or any set calls
     // in quick succession, or you will be throttled.
-
-	
+    
+    
     // Set up the edit and add buttons.
-
-   
-    
-   
-//    
     
     
-	
-	// Get managedObjectContext from application delegate
-	managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-	
+    
+    
+    //    
+    
+    
+    
+    // Get managedObjectContext from application delegate
+    managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    
     
     
     
@@ -113,35 +108,41 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     [clientsViewController_Shared setupTheClientsViewModelUsingSTV];    
     
-
-	self.tableView.backgroundColor=[UIColor clearColor];
+    
+    self.tableView.backgroundColor=[UIColor clearColor];
     
     
     
     
     // Instantiate the tabel model
-	
+    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
 
+    
     //	
     
     // Initialize tableModel
     
     NSPredicate *currentClientsPredicate=[NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
-    
-        
+    objectsModel = nil;
     if (isInDetailSubview) {
-      
-        self.tableModel=  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self withEntityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:nil useSCSelectionSection:YES];
-     
-        [self.searchBar setSelectedScopeButtonIndex:1];
-        tableModel.allowDeletingItems=FALSE;
-        tableModel.autoSelectNewItemCell=TRUE;
+        self.navigationBarType=SCNavigationBarTypeNone; 
         
-        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
+        objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView entityDefinition:self.clientsViewController_Shared.clientDef];
+        if (searchBar.scopeButtonTitles.count>1) {
+            
+            [self.searchBar setSelectedScopeButtonIndex:1];
+            
+        }
+        objectsModel.allowDeletingItems=FALSE;
+        objectsModel.autoSelectNewItemCell=TRUE;
+        
+        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:3];
         
         
-        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped)];
+        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTappedInDetailView)];
+        
         [buttons addObject:doneButton];
         
         // create a spacer
@@ -158,83 +159,116 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         addButton.style = UIBarButtonItemStyleBordered;
         [buttons addObject:addButton];
         
-       
+        
         
         // stick the buttons in the toolbar
         self.navigationItem.rightBarButtonItems=buttons;
-        self.tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
-        self.tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:2];
+        objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
+        objectsModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:2];
         
         UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
         
         self.navigationItem.leftBarButtonItem=cancelButton;
-
+        
+        objectsModel.delegate=self;
+        
         
     }
     else
     {
         
-        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
-                                                 withEntityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:currentClientsPredicate useSCSelectionSection:FALSE];	
+        objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:self.clientsViewController_Shared.clientDef filterPredicate:currentClientsPredicate];
+        
+        
+        //        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
+        //                                                 withEntityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:currentClientsPredicate useSCSelectionSection:FALSE];
+        
+        //        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView
+        //                                                                            entityDefinition:clientsViewController_Shared.clientDef];
+        
+        
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
-        self.tableModel.editButtonItem = self.navigationItem.leftBarButtonItem;
-        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
+        objectsModel.editButtonItem = self.navigationItem.leftBarButtonItem;
+        //        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
+        //        
+        //        // create a standard "add" button
+        //        UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
+        //                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
+        //        addButton.style = UIBarButtonItemStyleBordered;
+        //
+        //       
+        //        
+        //        // create a spacer
+        //        UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
+        //                                       initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshData)];
+        //        [buttons addObject:refreshButton];
+        //        
+        //       
+        //        
+        //        
+        //               [buttons addObject:addButton];
+        //        self.navigationItem.rightBarButtonItems=buttons;
+        self.navigationBarType = SCNavigationBarTypeAddRightEditLeft;
+        self.navigationItem.leftBarButtonItem = self.editButtonItem;
+        objectsModel.editButtonItem = self.navigationItem.leftBarButtonItem;
+        //        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+        //        self.navigationItem.rightBarButtonItem = addButton;
+        objectsModel.addButtonItem = self.navigationItem.rightBarButtonItem;
+        //        objectsModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
         
-        // create a standard "add" button
-        UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
-                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
-        addButton.style = UIBarButtonItemStyleBordered;
-
-       
-        
-        // create a spacer
-        UIBarButtonItem* refreshButton = [[UIBarButtonItem alloc]
-                                       initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshData)];
-        [buttons addObject:refreshButton];
-        
-       
-        
-        
-               [buttons addObject:addButton];
-        self.navigationItem.rightBarButtonItems=buttons;
-        
-        self.tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
-    
     }
-   
-    self.tableModel.searchBar = self.searchBar;
-	self.tableModel.searchPropertyName = @"clientIDCode;notes";
-    self.tableModel.sortItemsSetAscending=TRUE;
-   
-    self.tableModel.allowMovingItems=TRUE;
+    objectsModel.enablePullToRefresh = TRUE;
+    objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
     
-    self.tableModel.autoAssignDelegateForDetailModels=TRUE;
-    self.tableModel.autoAssignDataSourceForDetailModels=TRUE;
+    objectsModel.searchBar = self.searchBar;
+    objectsModel.searchPropertyName = @"clientIDCode;notes";
+    //    self.tableModel.sortItemsSetAscending=TRUE;
     
-    self.tableModel.delegate=self;
-
-    if([SCHelper is_iPad]){
+    objectsModel.allowMovingItems=TRUE;
+    
+    objectsModel.autoAssignDelegateForDetailModels=TRUE;
+    objectsModel.autoAssignDataSourceForDetailModels=TRUE;
+    
+    //    objectsModel.delegate=self;
+    
+    if([SCUtilities is_iPad]){
+        
+        UIColor *backgroundColor=nil;
+        
+        if (isInDetailSubview) {
+            backgroundColor=appDelegate.window.backgroundColor;
+        }
+        else {
+            backgroundColor=[UIColor clearColor];
+        }
+        
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
-        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+        [self.tableView setBackgroundColor:backgroundColor]; // Make the table view transparent
+        self.view.backgroundColor=backgroundColor;
+    }else {
+         [self.view setBackgroundColor:[UIColor clearColor]];
     }
-    
+   
     
     [self updateClientsTotalLabel];
     
     [(PTTAppDelegate *)[UIApplication sharedApplication].delegate application:[UIApplication sharedApplication]
-willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
-             duration:5];
-   
-    [self.tableModel.modeledTableView reloadData];
+                                               willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
+                                                                     duration:5];
+    
+    //    [self.tableModel.modeledTableView reloadData];
+    
+    
+    self.tableViewModel=objectsModel;
 }
 -(void)viewDidUnload{
     [super viewDidUnload];
     self.clientsViewController_Shared =nil;
-    self.tableModel=nil;
-
-
-
+ 
+    objectsModel=nil;
+    
+    
 }
 - (void) didReceiveMemoryWarning 
 {
@@ -245,17 +279,17 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
     
-   [appDelegate displayMemoryWarning];
-
+    [appDelegate displayMemoryWarning];
+    
     
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
- 
-        return YES;
-   
+    
+    return YES;
+    
 }
 
 
@@ -271,142 +305,144 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 
 
 -(void)cancelButtonTapped{
-
-//NSLog(@"cancel button Tapped");
-
+    
+    //NSLog(@"cancel button Tapped");
+    
     //NSLog(@"parent controller %@",[super parentViewController]);
     
     if(self.navigationController)
-	{
-		// check if self is the rootViewController
-		if([self.navigationController.viewControllers objectAtIndex:0] == self)
-		{
-			[self dismissModalViewControllerAnimated:YES];
-		}
-		else
-			[self.navigationController popViewControllerAnimated:YES];
-	}
-	else
-		[self dismissModalViewControllerAnimated:YES];
-   
-
+    {
+        // check if self is the rootViewController
+        if([self.navigationController.viewControllers objectAtIndex:0] == self)
+        {
+            [self dismissModalViewControllerAnimated:YES];
+        }
+        else
+            [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+        [self dismissModalViewControllerAnimated:YES];
+    
+    
 }
 
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     SCTableViewCell *cell =(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
     
     [cell setSelected:FALSE];
-
-
+    
+    
 }
 
 
--(void)doneButtonTapped{
-
+-(void)doneButtonTappedInDetailView{
+    
     //NSLog(@"done Button tapped");
     if (isInDetailSubview) {
-        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:0];
-        //NSLog(@"section class is %@",[section class]);
-        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
-            SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
+        if (self.tableViewModel.sectionCount) {
             
-//            //NSLog(@"test valie changed at index with cell index selected %i",[objectsSelectionSection.selectedItemIndex integerValue]) ;
-//            if (clientObjectSelectionCell) {
+            SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
+            //NSLog(@"section class is %@",[section class]);
+            if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+                SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
                 
-//                //NSLog(@"objectsSelectionSection.selectedItemsIndexes.count %i",objectsSelectionSection.items.count);
+                //            //NSLog(@"test valie changed at index with cell index selected %i",[objectsSelectionSection.selectedItemIndex integerValue]) ;
+                //            if (clientObjectSelectionCell) {
                 
-//                if ([objectsSelectionSection.selectedItemIndex integerValue]>=0&&[objectsSelectionSection.selectedItemIndex integerValue]<=objectsSelectionSection.items.count) {
-//                    
-//            NSIndexPath *cellIndexPath=objectsSelectionSection.selectedCellIndexPath;
-            
-//                    SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:cellIndexPath];
-      //NSLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
-            
+                //                //NSLog(@"objectsSelectionSection.selectedItemsIndexes.count %i",objectsSelectionSection.items.count);
+                
+                //                if ([objectsSelectionSection.selectedItemIndex integerValue]>=0&&[objectsSelectionSection.selectedItemIndex integerValue]<=objectsSelectionSection.items.count) {
+                //                    
+                //            NSIndexPath *cellIndexPath=objectsSelectionSection.selectedCellIndexPath;
+                
+                //                    SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:cellIndexPath];
+                //NSLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
+                
+                
+                
+                //NSLog(@"selected item index%@",objectsSelectionSection.selectedItemIndex);
+                
+                if (objectsSelectionSection.cellCount>0) {
+                    if (currentlySelectedClient) {
+                        clientObjectSelectionCell.clientObject=currentlySelectedClient ;
+                        [clientObjectSelectionCell  doneButtonTappedInDetailView:currentlySelectedClient withValue:TRUE];
+                        
+                        
+                    }
                     
-            
-            //NSLog(@"selected item index%@",objectsSelectionSection.selectedItemIndex);
-            
-            if (objectsSelectionSection.cellCount>0) {
-                if (currentlySelectedClient) {
-                                    clientObjectSelectionCell.clientObject=currentlySelectedClient ;
-                [clientObjectSelectionCell  doneButtonTappedInDetailView:currentlySelectedClient withValue:TRUE];
-                    
-                    
-                }
-
-            }          
-            
-                
-            
-
-//            }
-            
-//                    clientObjectSelectionCell.hasChangedClients=TRUE;
-//                }
-//                else{
-//                
-//                    [clientObjectSelectionCell doneButtonTappedInDetailView:nil withValue:NO];
-//                
-//                }
+                }          
                 
                 
-            [self cancelButtonTapped];
-         
+                
+                
+                //            }
+                
+                //                    clientObjectSelectionCell.hasChangedClients=TRUE;
+                //                }
+                //                else{
+                //                
+                //                    [clientObjectSelectionCell doneButtonTappedInDetailView:nil withValue:NO];
+                //                
+                //                }
+                
+                
+                [self cancelButtonTapped];
+                
             } 
         }
-//        else
-//        {
-//            clientObjectSelectionCell.items=[NSArray array];
-//            [clientObjectSelectionCell doneButtonTappedInDetailView:nil withValue:NO];
-//        }
-//
-//        
-//        if(self.navigationController)
-//        {
-//            // check if self is the rootViewController
-//            if([self.navigationController.viewControllers objectAtIndex:0] == self)
-//            {
-//                [self dismissModalViewControllerAnimated:YES];
-//            }
-//            else
-//                [self.navigationController popViewControllerAnimated:YES];
-//        }
-//        else
-//            [self dismissModalViewControllerAnimated:YES];
-//        
-//    }
-//
-
-
+        //        else
+        //        {
+        //            clientObjectSelectionCell.items=[NSArray array];
+        //            [clientObjectSelectionCell doneButtonTappedInDetailView:nil withValue:NO];
+        //        }
+        //
+        //        
+        //        if(self.navigationController)
+        //        {
+        //            // check if self is the rootViewController
+        //            if([self.navigationController.viewControllers objectAtIndex:0] == self)
+        //            {
+        //                [self dismissModalViewControllerAnimated:YES];
+        //            }
+        //            else
+        //                [self.navigationController popViewControllerAnimated:YES];
+        //        }
+        //        else
+        //            [self dismissModalViewControllerAnimated:YES];
+        //        
+        //    }
+        //
+    }
+    
 }
 
 #pragma mark -
 #pragma mark SCTableViewModelDataSource methods
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-
+    
     [self tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)indexPath.section detailTableViewModel:(SCTableViewModel *)detailTableViewModel];
-
-
+    
+    
 }
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-
-    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-       
-      
+    
+    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+        
+        
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
         [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
         [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-            
-            
-       
-            
-            // Make the table view transparent
+        
+        
+        
+        
+        // Make the table view transparent
     }
-
-
+    
+    
 }
 //-(void)tableViewModelSearchBarCancelButtonClicked:(SCArrayOfItemsModel *)tableViewModel{
 //    
@@ -478,7 +514,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 //    
 //}
 
-//- (SCControlCell *)tableViewModel:(SCTableViewModel *)tableViewModel
+//- (SCCustomCell *)tableViewModel:(SCTableViewModel *)tableViewModel
 //	  customCellForRowAtIndexPath:(NSIndexPath *)indexPath
 //{
 //    SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
@@ -489,68 +525,70 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 //}
 
 -(void)tableViewModel:(SCArrayOfItemsModel *)tableViewModel sectionGenerated:(SCTableViewSection *)section atIndex:(NSInteger)index{
-
-
-//NSLog(@"section generaged is %@",[section class]);
+    
+    
+    //NSLog(@"section generaged is %@",[section class]);
     if (tableViewModel.tag==0&&[section isKindOfClass:[SCObjectSelectionSection class]]) {
         SCObjectSelectionSection *objSelectionSection=(SCObjectSelectionSection *)section;
         objSelectionSection.autoSelectNewItemCell=TRUE;
         objSelectionSection.maximumSelections=1;
         
         
-   
-     
         
         
-//        objSelectionSection.allowNoSelection=TRUE;
+        
+        
+        //        objSelectionSection.allowNoSelection=TRUE;
     }
-
-
+    
+    
 }
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
     if (tableViewModel.tag==0&&[section isKindOfClass:[SCObjectSelectionSection class]]) {
         
-//        SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
+        //        SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
         SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-       
+        
         currentlySelectedClient=(ClientEntity *)cell.boundObject;
         //NSLog(@"currently selected client is %@",currentlySelectedClient);
     }
-//NSLog(@"table model class %@",[tableViewModel class]);
+    //NSLog(@"table model class %@",[tableViewModel class]);
     if ([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]]) {
         SCArrayOfObjectsModel *arrayOfObjectsModel=(SCArrayOfObjectsModel *)tableViewModel;
         
-        [arrayOfObjectsModel dispatchSelectRowAtIndexPathEvent:indexPath];
+        [arrayOfObjectsModel dispatchEventSelectRowAtIndexPath:indexPath];
         return;
     }
-
+    
     if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
         SCObjectSelectionSection *selectionSection=(SCObjectSelectionSection *)section;
         
-        [selectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
+        [selectionSection dispatchEventSelectRowAtIndexPath:indexPath];
         return;
     }
     if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
         SCArrayOfObjectsSection *selectionSection=(SCArrayOfObjectsSection *)section;
         
-        [selectionSection dispatchSelectRowAtIndexPathEvent:indexPath];
+        [selectionSection dispatchEventSelectRowAtIndexPath:indexPath];
         
     }
     //NSLog(@"section class %@",[section class]);
-
-
+    
+    
 }
 -(void)tableViewModelCoreDataObjectsLoaded:(SCArrayOfItemsModel *)tableViewModel{
-
+    
     if(isInDetailSubview){
-    [tableViewModel.items removeObjectsInArray:[NSArray arrayWithArray:[clientObjectSelectionCell.alreadySelectedClients allObjects]]];
+        NSMutableArray *itemsArray=(NSMutableArray *)tableViewModel.items;
+        
+        [itemsArray removeObjectsInArray:[NSArray arrayWithArray:[clientObjectSelectionCell.alreadySelectedClients allObjects]]];
     }
     
-
     
-//[tableViewModel.modelKeyValues setValue:[NSString string] forKey:@"clientIDCode" ];
+    
+    //[tableViewModel.modelKeyValues setValue:[NSString string] forKey:@"clientIDCode" ];
     
 }
 
@@ -564,30 +602,30 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 {
     //NSLog(@"table view model tag is %i",tableViewModel.tag);
     //NSLog(@"tableviewmodel tag is %i",tableViewModel.tag);
-   
+    
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
     switch (tableViewModel.tag) {
         case 0:
         {
             
-                //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-                //        //NSLog(@"cell text label text is %@",cell.textLabel);
-                //        
-                //        ClientEntity *clientObject=(ClientEntity *)cell.boundObject;
-                //        
-                //        //NSLog(@"cell bound object is %@", cell.boundObject);
-                //        
-                //        cell.boundObject=clientObject;
-                //        //NSLog(@"cell bound object is %@", cell.boundObject);
-                //        
-                ////     
-                //        //NSLog(@"cell bound object is %@",clientObject);
-                //  
-                //        NSString *clientIDCodeData=[cell.boundObject valueForKey:@"clientIDCodeDC"];
-                //        cell.textLabel.text=clientIDCodeData;
-                //        cell.textLabel.text=clientObject.clientIDCode;
-                //        //NSLog(@"table model all keys %@",tableViewModel.modelKeyValues);
-                
+            //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+            //        //NSLog(@"cell text label text is %@",cell.textLabel);
+            //        
+            //        ClientEntity *clientObject=(ClientEntity *)cell.boundObject;
+            //        
+            //        //NSLog(@"cell bound object is %@", cell.boundObject);
+            //        
+            //        cell.boundObject=clientObject;
+            //        //NSLog(@"cell bound object is %@", cell.boundObject);
+            //        
+            ////     
+            //        //NSLog(@"cell bound object is %@",clientObject);
+            //  
+            //        NSString *clientIDCodeData=[cell.boundObject valueForKey:@"clientIDCodeDC"];
+            //        cell.textLabel.text=clientIDCodeData;
+            //        cell.textLabel.text=clientObject.clientIDCode;
+            //        //NSLog(@"table model all keys %@",tableViewModel.modelKeyValues);
+            
             if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
                 
                 SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)section;
@@ -614,7 +652,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 
                 
             }
-
+            
         }
             break;
         case 1:
@@ -625,64 +663,61 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 //NSLog(@"date cell date is%@ ",dateCell.datePicker.date);
                 
             }
-
+            
         }
             break;
         case 3:
         {
             if (section.cellCount&&cell.boundObject) {
-           
+                
+                
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+                
+                if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]) {
                     
-            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-            if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
-                
-            {
-                if ( ![SCHelper is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
-                {
-                    UIButton *button=(UIButton *)[cell viewWithTag:300];
-                    [button setTitle:@"Call Number" forState:UIControlStateNormal];
+                    if ([cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
+                        
+                    {
+                        if ( ![SCUtilities is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
+                        {
+                            UIButton *button=(UIButton *)[cell viewWithTag:300];
+                            [button setTitle:@"Call Number" forState:UIControlStateNormal];
+                            
+                        }
+                        
+                        //NSLog(@"cell kind of class is %@",cell.class);
+                        if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]]) 
+                        {
+                            EncryptedSCTextFieldCell *encryptedTextFieldCell=(EncryptedSCTextFieldCell *)cell;
+                            
+                            UITextField *textField=(UITextField *)encryptedTextFieldCell.textField;
+                            
+                            textField.keyboardType=UIKeyboardTypeNumberPad;
+                            
+                        }
+                        
+                        if ( [cell isKindOfClass:[SCTextFieldCell class]]) 
+                        {
+                            SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
+                            
+                            textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
+                            
+                        }
+                        
+                    }
                     
-                }
-                
-                //NSLog(@"cell kind of class is %@",cell.class);
-                if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]]) 
-                {
-                    EncryptedSCTextFieldCell *encryptedTextFieldCell=(EncryptedSCTextFieldCell *)cell;
                     
-                    UITextField *textField=(UITextField *)encryptedTextFieldCell.textField;
-                    
-                    textField.keyboardType=UIKeyboardTypeNumberPad;
-                    
-                }
-                
-                if ( [cell isKindOfClass:[SCTextFieldCell class]]) 
-                {
-                    SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
-                    
-                    textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
-                    
-                }
-                
-            }
-            
-            if (cell.tag==4&&cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
-                
-            {
-                
-                UIButton *button=(UIButton *)[cell viewWithTag:300];
-                [button setTitle:@"Clear Discontinued Date" forState:UIControlStateNormal];
-            }
-            //NSLog(@"cell kind of class is %@",cell.class);
-            if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]) 
-                
-            {
-                
-                SCNumericTextFieldCell *textFieldCell=(SCNumericTextFieldCell *)cell;
-                
-                textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
-                
-            }
-            }
+                    //NSLog(@"cell kind of class is %@",cell.class);
+                    if ([cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]) 
+                        
+                    {
+                        
+                        SCNumericTextFieldCell *textFieldCell=(SCNumericTextFieldCell *)cell;
+                        
+                        textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
+                        
+                    }
+                }}
         }
             break;
         case 4:
@@ -690,137 +725,140 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             
             
             if (section.cellCount&&cell.boundObject) {
-//            SCTableViewCell *cellOne=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"])
-                {
-                     UIView *sliderView = [cell viewWithTag:14];
-                    
+                //            SCTableViewCell *cellOne=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+                
+                if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]) {
+                    if ([cellManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"])
+                    {
+                        UIView *sliderView = [cell viewWithTag:14];
+                        
                         if(cell.tag==3&&[sliderView isKindOfClass:[UISlider class]])
-                    {
-                        UISlider *sliderOne = (UISlider *)sliderView;
-                        UILabel *slabel = (UILabel *)[cell viewWithTag:10];
+                        {
+                            UISlider *sliderOne = (UISlider *)sliderView;
+                            UILabel *slabel = (UILabel *)[cell viewWithTag:10];
+                            
+                            slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
+                            UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+                            UIImage *sliderRightTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+                            [sliderOne setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
+                            [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
+                            [sliderOne setMinimumValue:-1.0];
+                            [sliderOne setMaximumValue:0];
+                        }
                         
-                        slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
-                        UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                        UIImage *sliderRightTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                        [sliderOne setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
-                        [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
-                        [sliderOne setMinimumValue:-1.0];
-                        [sliderOne setMaximumValue:0];
+                        if(cell.tag==4&&[sliderView isKindOfClass:[UISlider class]])
+                        {
+                            
+                            UISlider *sliderTwo = (UISlider *)sliderView;
+                            
+                            UILabel *slabelTwo = (UILabel *)[cell viewWithTag:10];
+                            UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+                            UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+                            [sliderTwo setMinimumTrackImage: sliderTwoLeftTrackImage forState: UIControlStateNormal];
+                            [sliderTwo setMaximumTrackImage: sliderTwoRightTrackImage forState: UIControlStateNormal];
+                            
+                            slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];        
+                            [sliderTwo setMinimumValue:0.0];
+                            [sliderTwo setMaximumValue: 1.0];
+                            
+                        }  
                     }
-                        
-                    if(cell.tag==4&&[sliderView isKindOfClass:[UISlider class]])
+                    //NSLog(@"entity name is %@",cellManagedObject.entity.name);
+                    if (cell.tag==1 && [cellManagedObject.entity.name isEqualToString:@"LanguageSpokenEntity"])
                     {
                         
-                        UISlider *sliderTwo = (UISlider *)sliderView;
-                        
-                        UILabel *slabelTwo = (UILabel *)[cell viewWithTag:10];
-                        UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                        UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                        [sliderTwo setMinimumTrackImage: sliderTwoLeftTrackImage forState: UIControlStateNormal];
-                        [sliderTwo setMaximumTrackImage: sliderTwoRightTrackImage forState: UIControlStateNormal];
-                        
-                        slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];        
-                        [sliderTwo setMinimumValue:0.0];
-                        [sliderTwo setMaximumValue: 1.0];
-                        
-                    }  
-                }
-                //NSLog(@"entity name is %@",cellManagedObject.entity.name);
-                if (cell.tag==1 && cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"LanguageSpokenEntity"])
-                {
-               
-                    UIView *scaleView = [cell viewWithTag:70];
-                    if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
-                        
-                        UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
-                        fluencyLevelLabel.text=@"Fluency Level:";
-                        
+                        UIView *scaleView = [cell viewWithTag:70];
+                        if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
+                            
+                            UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
+                            fluencyLevelLabel.text=@"Fluency Level:";
+                            
+                        }
                     }
-                }
-            }
-        
+                }}
+            
         }
             break;
-
+            
         case 5:
         {
             
             if (section.cellCount>0&&cell.boundObject) {
-
+                
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-
-                //NSLog(@"entity name is %@",cellManagedObject.entity.name);
-                if (cell.tag==1 && [cell isKindOfClass:[SCControlCell class]]&& cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
-                {
+                if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]) {
                     
-                    UIView *scaleView = [cell viewWithTag:70];
-                    if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
-                        
-                        UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
-                        fluencyLevelLabel.text=@"Severity Level:";
-                        
-                    }
-                }
-
-            }
-            
-            
-            if (cell.tag==5&& tableViewModel.sectionCount >2) {
-                
-                //NSLog(@"cell tag is %i",cell.tag);
-                //NSLog(@"cell text is %@",cell.textLabel.text);
-                
-                SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
-                SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];        
-                NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
-                //NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-                //NSLog(@"cell  class is %@",[cellOne class]);
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
-                    
-                    
-                    if ([cell isKindOfClass:[SCControlCell class]]) 
+                    //NSLog(@"entity name is %@",cellManagedObject.entity.name);
+                    if (cell.tag==1 && [cell isKindOfClass:[SCCustomCell class]] &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
                     {
+                        
                         UIView *scaleView = [cell viewWithTag:70];
-                        if ([scaleView isKindOfClass:[UISegmentedControl class]]) 
-                        {
+                        if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
                             
-                            UILabel *satisfactionLevelLabel =(UILabel *)[cell viewWithTag:71];
-                            satisfactionLevelLabel.text=@"Satisfaction With Drug:";
+                            UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
+                            fluencyLevelLabel.text=@"Severity Level:";
+                            
+                        }
+                    }
+                    
+                }
+                
+                
+                if (cell.tag==5&& tableViewModel.sectionCount >2) {
+                    
+                    //NSLog(@"cell tag is %i",cell.tag);
+                    //NSLog(@"cell text is %@",cell.textLabel.text);
+                    
+                    SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
+                    SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];        
+                    NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
+                    //NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
+                    //NSLog(@"cell  class is %@",[cellOne class]);
+                    if ([cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
+                        
+                        
+                        if ([cell isKindOfClass:[SCCustomCell class]]) 
+                        {
+                            UIView *scaleView = [cell viewWithTag:70];
+                            if ([scaleView isKindOfClass:[UISegmentedControl class]]) 
+                            {
+                                
+                                UILabel *satisfactionLevelLabel =(UILabel *)[cell viewWithTag:71];
+                                satisfactionLevelLabel.text=@"Satisfaction With Drug:";
+                                
+                            }
+                            
                             
                         }
                         
                         
+                        
                     }
-                    
-                    
-                    
                 }
                 
                 
-                
             }
-
+            
         }
             break;
-
+            
         default:
             break;
     }
     
     
     
-  
-       
-        
-        
-            
-        
-        
-   
-        
-        
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 -(BOOL)checkStringIsNumber:(NSString *)str{
     BOOL valid=YES;
@@ -841,14 +879,14 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
         
         
     } 
-
+    
     return valid;
-
+    
 }
 -(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BOOL valid = TRUE;
-
+    
     //    SCTableViewCell *cell = [tableViewModel cellAtIndexPath:indexPath];
     
     
@@ -864,7 +902,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
     //                
     //                //NSLog(@"testing email address");
     //            }
-    //            else
+    //             else
     //            {
     //                valid=FALSE;
     //            }
@@ -882,11 +920,11 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
         
         SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
         if (section.cellCount) {
-        
+            
             
             SCTableViewCell *clientIDCodeCell =(SCTableViewCell *)[section cellAtIndex:0];
-      
-        
+            
+            
             if ([clientIDCodeCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
                 EncryptedSCTextFieldCell *clientIDCodeEncryptedCell =(EncryptedSCTextFieldCell *)clientIDCodeCell;
                 
@@ -902,9 +940,9 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 }
                 
             }
-        
-        
-        
+            
+            
+            
         }
     }
     
@@ -914,88 +952,142 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
         
         SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
         
-            
-        
-        
         if (section.cellCount>1) {
             SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
-        
             
-            if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
-                EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
+            if (notesManagedObject && [notesManagedObject respondsToSelector:@selector(entity)]) {
                 
-                if (encryptedNoteCell.textView.text.length) 
-                {
-                    valid=TRUE;
+                if ([ notesManagedObject.entity.name   isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+                    EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
+                    
+                    if (encryptedNoteCell.textView.text.length) 
+                    {
+                        valid=TRUE;
+                    }
+                    else 
+                    {
+                        valid=FALSE;
+                    }
+                    
+                } 
+                
+                
+                //here it is not the notes cell
+                if ([notesManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[notesCell isKindOfClass:[SCTextFieldCell class]]) {
+                    SCTextFieldCell *drugNameCell=(SCTextFieldCell *)notesCell;
+                    
+                    if (drugNameCell.textField.text.length) 
+                    {
+                        valid=TRUE;
+                    }
+                    else 
+                    {
+                        valid=FALSE;
+                    }
+                    
                 }
-                else 
-                {
-                    valid=FALSE;
+                
+                if ([notesManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
+                    EncryptedSCTextFieldCell *phoneNumberCell=(EncryptedSCTextFieldCell *)notesCell;
+                    
+                    if (phoneNumberCell.textField.text.length) 
+                    {
+                        valid=TRUE;
+                        valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
+                    }
+                    else 
+                    {
+                        valid=FALSE;
+                    }
+                    
                 }
                 
             }
             
-            //here it is not the notes cell
-            if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[notesCell isKindOfClass:[SCTextFieldCell class]]) {
-                SCTextFieldCell *drugNameCell=(SCTextFieldCell *)notesCell;
-                
-                if (drugNameCell.textField.text.length) 
-                {
-                    valid=TRUE;
-                }
-                else 
-                {
-                    valid=FALSE;
-                }
-                
-            }
             
-            if (notesManagedObject )
+            
+            if (section.cellCount>6) 
             {
-                if ([notesManagedObject.entity.name isEqualToString:@"PhoneEntity"]){
-                    
-                    
-                    if ([notesCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
-                    
-               
-                        EncryptedSCTextFieldCell *phoneNumberCell=(EncryptedSCTextFieldCell *)notesCell;
-                        
-                        if (phoneNumberCell.textField.text.length&&phoneNumberCell.textField.text.length<20) 
-                        {
-                            valid=TRUE;
-                            valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
-                        }
-                        else 
-                        {
-                            valid=FALSE;
-                        }
-                        
-                    } 
-                    
-                     if ([notesCell isKindOfClass:[SCNumericTextFieldCell class]]) {
-                         EncryptedSCTextFieldCell *phoneNumberCell=(EncryptedSCTextFieldCell *)notesCell;
-                         if (phoneNumberCell.textField.text.length&&phoneNumberCell.textField.text.length<20) 
-                         {
-                             valid=TRUE;
-                             valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
-                         }
-                         else 
-                         {
-                             valid=FALSE;
-                         }
-
-
-                     }
-                }
-            } 
                 
-            }
-        
+                //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
+                
+                
+                SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+                
+                if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&[cell isKindOfClass:[SCTextFieldCell class]]) {
+                    SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
+                    NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];;
+                    
+                    NSNumber *number=[numberFormatter numberFromString:textFieldCell.textField.text];
+                    NSLog(@"cell tag is %i",cell.tag);
+                    NSLog(@"text inpou is %@",textFieldCell.textField.text);
+                    if (textFieldCell.textField.text.length) {
+                        
+                        switch (cell.tag) {
+                            case 3:
+                            {
+                                if ([textFieldCell.textField.text integerValue]<500 &&number) {
+                                    valid=YES;
+                                }
+                                else {
+                                    valid=NO;
+                                }
+                            }
+                                break;
+                            case 4:
+                            {
+                                if ([textFieldCell.textField.text integerValue]<500 &&number) {
+                                    valid=YES;
+                                }
+                                else {
+                                    valid=NO;
+                                }
+                            }
+                                break;
+                            case 5:
+                            {
+                                if ( [textFieldCell.textField.text integerValue]<500 &&number) {
+                                    valid=YES;
+                                }
+                                else {
+                                    valid=NO;
+                                }
+                                
+                            }
+                                break;
+                            case 6:
+                            {
+                                if ([textFieldCell.textField.text integerValue]< 130 &&number) {
+                                    valid=YES;
+                                }
+                                else {
+                                    valid=NO;
+                                }
+                                
+                            }
+                                break;
+                            default:
+                                break;
+                        }                    
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                }
+            }        
             
-        
-        
-        
+            
+            
+            
+            
+            
+        }
     }
     
     if (tableViewModel.tag==4&& tableViewModel.sectionCount){
@@ -1010,10 +1102,10 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             SCTableViewCell *cellTo=(SCTableViewCell *)[section cellAtIndex:1];
             SCTableViewCell *cellArrivedDate=(SCTableViewCell *)[section cellAtIndex:2];
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
-          //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
+            //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
-            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
-               
+            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)] &&[cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+                
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
                 
@@ -1026,72 +1118,11 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 else {
                     valid=NO;
                 }
-
+                
             }
         }        
     }
     
-    if (tableViewModel.tag==3&& tableViewModel.sectionCount){
-        
-        
-        
-        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
-        
-        if (section.cellCount>6) 
-        {
-            SCTableViewCell *cellSystolic=(SCTableViewCell *)[section cellAtIndex:3];
-            SCTableViewCell *cellDiastolic=(SCTableViewCell *)[section cellAtIndex:4];
-            SCTableViewCell *cellHeartRate=(SCTableViewCell *)[section cellAtIndex:5];
-             SCTableViewCell *cellTemperature=(SCTableViewCell *)[section cellAtIndex:6];
-            NSManagedObject *cellManagedObject=(NSManagedObject *)cellSystolic.boundObject;
-            //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
-            
-            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"VitalsEntity"]) {
-                SCTextFieldCell *cellSystolicTF=(SCTextFieldCell *)cellSystolic;
-                SCTextFieldCell *cellDiastolicTF=(SCTextFieldCell *)cellDiastolic;
-                SCTextFieldCell *cellHeartRateTF=(SCTextFieldCell *)cellHeartRate;
-                SCTextFieldCell *cellTemperatureTF=(SCTextFieldCell *)cellTemperature;
-                
-                                
-                NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];;
-                
-                NSNumber *systolicNumber=[numberFormatter numberFromString:cellSystolicTF.textField.text];
-                NSNumber *diastolicNumber=[numberFormatter numberFromString:cellDiastolicTF.textField.text];
-                NSNumber *heartRateNumber=[numberFormatter numberFromString:cellHeartRateTF.textField.text];
-                NSNumber *temperatureNumber=[numberFormatter numberFromString:cellTemperatureTF.textField.text];
-                
-                
-                
-                if (cellSystolicTF.textField.text.length && [cellSystolicTF.textField.text integerValue]<500 &&systolicNumber) {
-                    valid=YES;
-                }
-                else if (cellSystolicTF.textField.text.length||(cellSystolicTF.textField.text.length&&!systolicNumber)){
-                    valid=NO;
-                }
-                if (cellDiastolicTF.textField.text.length && [cellDiastolicTF.textField.text integerValue]<500 &&diastolicNumber) {
-                    valid=YES;
-                }
-                else if(cellDiastolicTF.textField.text.length||(cellDiastolicTF.textField.text.length&&!diastolicNumber)){
-                    valid=NO;
-                }
-                if (cellHeartRateTF.textField.text.length && [cellHeartRateTF.textField.text integerValue]<500 &&heartRateNumber) {
-                    valid=YES;
-                }
-                else if(cellHeartRateTF.textField.text.length ||(cellHeartRateTF.textField.text.length&&!heartRateNumber)){
-                    valid=NO;
-                }
-                
-                if (cellTemperatureTF.textField.text.length && [cellTemperatureTF.textField.text integerValue]< 130 &&temperatureNumber) {
-                    valid=YES;
-                }
-                else if(cellTemperatureTF.textField.text.length ||(!temperatureNumber && cellTemperatureTF.textField.text.length)){
-                    valid=NO;
-                }
-                
-            }
-        }        
-    }
- 
     
     
     
@@ -1099,7 +1130,30 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 }
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    
+    
+    
+    if([SCUtilities is_iPad]){
+        
+        UIColor *backgroundColor=nil;
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+
+        if (isInDetailSubview) {
+            backgroundColor=appDelegate.window.backgroundColor;
+        }
+        else {
+            backgroundColor=[UIColor clearColor];
+        }
+        
+        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+        [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor]; // Make the table view transparent
+        self.totalClientsLabel.backgroundColor=backgroundColor;
+    }
+    
+    
     
     if (tableViewModel.sectionCount) {
         //            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0]
@@ -1121,7 +1175,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
         
         
         
-//        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+        //        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
         
         //NSLog(@"index of cell is %i",[section indexForCell:cell]);
         if (!cell ||(indexPath.row==0)) {
@@ -1134,7 +1188,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
             //NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
             //NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
-            if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
+            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
                 
                 [detailTableViewModel removeSectionAtIndex:1];
                 
@@ -1145,11 +1199,11 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
             }
         }
     }  
-
+    
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    
     
     if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
@@ -1199,7 +1253,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
                 //NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
                 //NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
+                if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
                     
                     [detailTableViewModel removeSectionAtIndex:1];
                     
@@ -1213,122 +1267,99 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
     }       
     
     
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
 }
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForSectionAtIndex:(NSUInteger)index{
-
+    
     if (tableViewModel.tag==0) {
         
-//        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
-//        
-//        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
-//            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
-//            SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:objectSelectionSection.selectedCellIndexPath];
-//             NSManagedObject  *object;
-//            if (cell.boundObject && [cell isSelected]) {
-//                object =(NSManagedObject *)cell.boundObject;
-//                [tableViewModel reloadBoundValues];
-//                [self.tableView reloadData];
-//                
-//               
-//                [objectSelectionSection setSelectedItemIndex: [NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:object]]];
-//            
-//            }
-//           
-//        }
-//        else 
-//        {
-//            [tableViewModel reloadBoundValues];
-//            [self.tableView reloadData];
-//        }
-            
-           [self updateClientsTotalLabel];
-            
+        //        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
+        //        
+        //        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+        //            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
+        //            SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:objectSelectionSection.selectedCellIndexPath];
+        //             NSManagedObject  *object;
+        //            if (cell.boundObject && [cell isSelected]) {
+        //                object =(NSManagedObject *)cell.boundObject;
+        //                [tableViewModel reloadBoundValues];
+        //                [self.tableView reloadData];
+        //                
+        //               
+        //                [objectSelectionSection setSelectedItemIndex: [NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:object]]];
+        //            
+        //            }
+        //           
+        //        }
+        //        else 
+        //        {
+        //            [tableViewModel reloadBoundValues];
+        //            [self.tableView reloadData];
+        //        }
+        
+        [self updateClientsTotalLabel];
+        
     }
-        //NSLog(@"table view model tag is %i",tableViewModel.tag);
-        
-        
-      
-          
-        
+    //NSLog(@"table view model tag is %i",tableViewModel.tag);
     
-
-
+    
+    
+    
+    
+    
+    
+    
 }
 -(void) tableViewModel:(SCTableViewModel *)tableViewModel customButtonTapped:(UIButton *)button forRowWithIndexPath:(NSIndexPath *)indexPath{
     
-   
+    
     //NSLog(@"custom button tapped");
     
     
-            
-        
-  
-    if (tableViewModel.tag==3) {
-        SCTableViewSection *section =[tableViewModel sectionAtIndex:indexPath.section];
-        SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:0];
-        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-
-        if ([cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]){
-        
-        SCTextFieldCell *phoneNumberCell =(SCTextFieldCell *) [section cellAtIndex:1];
-        //NSLog(@"custom button tapped");
-        if (phoneNumberCell.textField.text.length) {
-            
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Call Phone Number:" message:phoneNumberCell.textField.text
-                                                           delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-            
-            alert.tag=1;
-            
-            
-            
-            [alert show];
-            
-            
-        }
-    }
-}
+    
     
     
     if (tableViewModel.tag==3) {
         SCTableViewSection *section =[tableViewModel sectionAtIndex:indexPath.section];
         SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:0];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-        
-        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"MedicationEntity"]){
+        if ([cellManagedObject respondsToSelector:@selector(entity)]) {
             
-            SCDateCell *discontinuedCell =(SCDateCell *) [section cellAtIndex:3];
-           
-           
-            //NSLog(@"custom button tapped discontinued cell text is %@",discontinuedCell.textLabel.text);
-            //NSLog(@"key bindings value is %@",[discontinuedCell.keyBindings valueForKey:@"discontinued"]);
-            //NSLog(@"tabel model key bindings value is");
-            
-            if (discontinuedCell.label.text.length) {
-            
-                [discontinuedCell.boundObject setNilValueForKey:@"discontinued"];
-                [discontinuedCell reloadBoundValue]; 
+            if ([cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&section.cellCount>1){
                 
+                SCTextFieldCell *phoneNumberCell =(SCTextFieldCell *) [section cellAtIndex:1];
+                //NSLog(@"custom button tapped");
+                if (phoneNumberCell.textField.text.length) {
+                    
+                    
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Call Phone Number:" message:phoneNumberCell.textField.text
+                                                                   delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+                    
+                    alert.tag=1;
+                    
+                    
+                    
+                    [alert show];
+                    
+                    
+                }
             }
-                               
-                
             
-        }
-    }
+            
+            
+        }}
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	// use "buttonIndex" to decide your action
-	//
+    // use "buttonIndex" to decide your action
+    //
     
     if (alertView.tag==1) {
-       
+        
         if (buttonIndex==1) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel:" stringByAppendingString:alertView.message]]];
         }
@@ -1340,19 +1371,19 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 {
     SCTableViewCell *cell = [tableViewModel cellAtIndexPath:IndexPath];
     
- 
-   
+    
+    
     
     if (tableViewModel.tag==1&&cell.tag==1) {
-    
+        
         if ([cell isKindOfClass:[SCDateCell class]]) {
             SCDateCell *dateCell=(SCDateCell *)cell;
-        
-            if (dateCell.datePicker.date){
             
+            if (dateCell.datePicker.date){
+                
                 [self addWechlerAgeCellToSection:[tableViewModel sectionAtIndex:0]];
-
-        }
+                
+            }
         }
     }
     
@@ -1360,7 +1391,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
         DrugNameObjectSelectionCell *drugNameObjectSelectionCell=(DrugNameObjectSelectionCell *)cell;
         
         if (drugNameObjectSelectionCell.drugProduct) {
-            SCTableViewCell *drugNameCell=(SCTableViewCell*)[tableViewModel cellAfterCell:cell rewindIfLastCell:NO];
+            SCTableViewCell *drugNameCell=(SCTableViewCell*)[tableViewModel cellAfterCell:cell rewind:NO];
             
             if ([drugNameCell isKindOfClass:[SCTextFieldCell class]] ) {
                 SCTextFieldCell *textFieldCell=(SCTextFieldCell *)drugNameCell;
@@ -1377,7 +1408,7 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
                 
                 
             }
-                                                             
+            
         }
         
     }
@@ -1458,347 +1489,347 @@ willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrien
 {
     
     if ([tableViewModel sectionCount]) {
-  
-    SCTableViewSection *section =[tableViewModel sectionAtIndex:0];
-    
-    //NSLog(@"section header title %@", section.headerTitle);
-    //NSLog(@"table model tag is %i", tableViewModel.tag);
-    NSManagedObject *managedObject = (NSManagedObject *)cell.boundObject;
-    
-    switch (tableViewModel.tag) {
-            
-        case 0:
-        {
-            if (isInDetailSubview) {
-                cell.textLabel.text=[cell.boundObject valueForKey:@"clientIDCode"];
-            }
         
-            return;
+        SCTableViewSection *section =[tableViewModel sectionAtIndex:0];
         
-        }
-            break;
-        case 1:
-        {
-            
-        if (cell.tag==1) {
+        //NSLog(@"section header title %@", section.headerTitle);
+        //NSLog(@"table model tag is %i", tableViewModel.tag);
+        NSManagedObject *managedObject = (NSManagedObject *)cell.boundObject;
+        
+        switch (tableViewModel.tag) {
                 
-                if ([cell isKindOfClass:[SCDateCell class]]) {
-                    SCDateCell *dateCell=(SCDateCell *)cell;
+            case 0:
+            {
+                if (isInDetailSubview) {
+                    cell.textLabel.text=[cell.boundObject valueForKey:@"clientIDCode"];
+                }
+                
+                return;
+                
+            }
+                break;
+            case 1:
+            {
+                
+                if (cell.tag==1) {
                     
-                    if (dateCell.datePicker.date){
+                    if ([cell isKindOfClass:[SCDateCell class]]) {
+                        SCDateCell *dateCell=(SCDateCell *)cell;
                         
-                        [self addWechlerAgeCellToSection:[tableViewModel sectionAtIndex:0]];
-                        
+                        if (dateCell.datePicker.date){
+                            
+                            [self addWechlerAgeCellToSection:[tableViewModel sectionAtIndex:0]];
+                            
+                        }
                     }
                 }
+                return;
             }
-            return;
-        }
-            break;
-        case 2:
-        {
-            
-            //identify the if the cell has a managedObject
-            if (managedObject) {
+                break;
+            case 2:
+            {
                 
-                
-                
-                //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
-                if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
+                //identify the if the cell has a managedObject
+                if (managedObject &&[managedObject respondsToSelector:@selector(entity)]) {
                     
-                    //NSLog(@"entity name is %@",managedObject.entity.name);
-                    //identify the Languages Spoken table
-                    if ([managedObject.entity.name isEqualToString:@"LogEntity"]) {
-                        //define and initialize a date formatter
-                        NSDateFormatter *dateTimeDateFormatter = [[NSDateFormatter alloc] init];
-            
-                        //set the date format
-                        [dateTimeDateFormatter setDateFormat:@"ccc M/d/YY h:mm a"];
-                        
-                        NSDate *logDate=[managedObject valueForKey:@"dateTime"];
-                        NSString *notes=[managedObject valueForKey:@"notes"];
-                                         
-                        cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateTimeDateFormatter stringFromDate:logDate],notes];
-                        return;
-                    }
                     
-                    if ([managedObject.entity.name isEqualToString:@"MedicationEntity"]) {
-                        //define and initialize a date formatter
-                        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                    
+                    //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
+                    if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
                         
-                        //set the date format
-                        [dateFormatter setDateFormat:@"M/d/yyyy"];
-                        
-                        NSDate *startedDate=[managedObject valueForKey:@"dateStarted"];
-                        NSDate *discontinued=[managedObject valueForKey:@"discontinued"];
-                        NSString *drugName=[managedObject valueForKey:@"drugName"];
-//                        NSString *notes=[managedObject valueForKey:@"notes"];
-                        
-                        NSString *labelString=[NSString string];
-                        if (drugName.length) {
-                            labelString=drugName;
-                        }
-                        if (startedDate) {
-                       
-                            NSString *startedDateStr=[dateFormatter stringFromDate:startedDate];
-                            if (labelString.length && startedDateStr.length) {
-                                labelString=[labelString stringByAppendingFormat:@"; started: %@",startedDateStr];
-                            }
+                        //NSLog(@"entity name is %@",managedObject.entity.name);
+                        //identify the Languages Spoken table
+                        if ([managedObject.entity.name isEqualToString:@"LogEntity"]) {
+                            //define and initialize a date formatter
+                            NSDateFormatter *dateTimeDateFormatter = [[NSDateFormatter alloc] init];
                             
-                        }
-                        if (discontinued) 
-                        {
-                       
-                            NSString *discontinueddDateStr=[dateFormatter stringFromDate:discontinued];
-                            if (labelString.length && discontinueddDateStr.length) {
-                                labelString=[labelString stringByAppendingFormat:@"; discontinued: %@",discontinueddDateStr];
-                            }
+                            //set the date format
+                            [dateTimeDateFormatter setDateFormat:@"ccc M/d/YY h:mm a"];
                             
-                        }
-                        else {
-                            cell.textLabel.textColor=[UIColor blueColor];
-                        }
-                        cell.textLabel.text=labelString;
-                        return;
-                    }
-                    
-                    if ([managedObject.entity.name  isEqualToString:@"VitalsEntity"]) {
-                        //NSLog(@"the managed object entity is Vitals Entity");
-                        
-                        
-                        NSDate *dateTaken=(NSDate *)[cell.boundObject valueForKey:@"dateTaken"];
-                        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-                        
-                        [dateFormatter setDateFormat:@"ccc M/d/yy h:mm a"];
-                        
-                        
-                        NSString *dateTakenStr=[dateFormatter stringFromDate:dateTaken];
-                        NSNumber *systolic=[cell.boundObject valueForKey:@"systolicPressure"];
-                        NSNumber *diastolic=[cell.boundObject valueForKey:@"diastolicPressure"];
-                        NSNumber *heartRate=[cell.boundObject valueForKey:@"heartRate"];    
-                        NSNumber *temperature=[cell.boundObject valueForKey:@"temperature"];
-                        
-                        NSString *labelText=[NSString string];
-                        if (dateTakenStr.length &&systolic&& diastolic) {
+                            NSDate *logDate=[managedObject valueForKey:@"dateTime"];
+                            NSString *notes=[managedObject valueForKey:@"notes"];
                             
-                            labelText=[dateTakenStr stringByAppendingFormat:@": %@/%@",[systolic stringValue],[diastolic stringValue]];
-                            
-                        }
-                        else if(dateTakenStr.length){
-                            labelText=dateTakenStr;
-                        }
-                        
-                        if (labelText.length&&heartRate) {
-                            labelText=[labelText stringByAppendingFormat:@"; %@ bpm",[heartRate stringValue]];
-                        }
-                        if (labelText.length&&temperature) {
-                            labelText=[labelText stringByAppendingFormat:@"; %@\u00B0",[temperature stringValue]];
-                        }
-                        
-                        
-                        cell.textLabel.text=labelText;
-                        //change the text color to red
-                        
-                        return;
-                        
-                    }
-                    
-                
-                    
-                }
-            }
-        }
-            
-            break;
-        case 3:
-            //this is a third level table
-            
-            
-            
-            //identify the if the cell has a managedObject
-            if (managedObject) {
-                
-                
-                
-                //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
-                if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
-                    
-                    
-                    //identify the Languages Spoken table
-                    if ([managedObject.entity.name isEqualToString:@"LanguageSpokenEntity"]) {
-                        //NSLog(@"the managed object entity is Languag spoken Entity");
-                        //get the value of the primaryLangugage attribute
-                        NSNumber *primaryLanguageNumber=(NSNumber *)[managedObject valueForKey:@"primaryLanguage"];
-                        
-                        
-                        //NSLog(@"primary alanguage %@",  primaryLanguageNumber);
-                        //if the primaryLanguage selection is Yes
-                        if (primaryLanguageNumber==[NSNumber numberWithInteger:0]) {
-                            //get the language
-                            NSString *languageString =cell.textLabel.text;
-                            //add (Primary) after the language
-                            languageString=[languageString stringByAppendingString:@" (Primary)"];
-                            //set the cell textlable text to the languageString -the language with (Primary) after it 
-                            cell.textLabel.text=languageString;
-                            //change the text color to red
-                            cell.textLabel.textColor=[UIColor redColor];
+                            cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateTimeDateFormatter stringFromDate:logDate],notes];
                             return;
                         }
-                    }
-                    //NSLog(@"managed object entity name is %@",managedObject.entity.name);
-                    if ([managedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]) {
-                        //NSLog(@"the managed object entity is Migration History Entity");
                         
-                        
-                        NSDate *arrivedDate=(NSDate *)[cell.boundObject valueForKey:@"arrivedDate"];
-                        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-                        
-                        [dateFormatter setDateFormat:@"M/yyyy"];
-                        
-                      
-                        NSString *arrivedDateStr=[dateFormatter stringFromDate:arrivedDate];
-                        NSString *migratedFrom=[cell.boundObject valueForKey:@"migratedFrom"];
-                        NSString *migratedTo=[cell.boundObject valueForKey:@"migratedTo"];
-                        NSString *notes=[cell.boundObject valueForKey:@"notes"];    
+                        if ([managedObject.entity.name isEqualToString:@"MedicationEntity"]) {
+                            //define and initialize a date formatter
+                            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
                             
-                        if (arrivedDateStr.length && migratedFrom.length&&migratedTo.length) {
+                            //set the date format
+                            [dateFormatter setDateFormat:@"M/d/yyyy"];
                             
-                              NSString * historyString=[arrivedDateStr stringByAppendingFormat:@":%@ to %@",migratedFrom,migratedTo];
-                           
-                            if (notes.length) 
+                            NSDate *startedDate=[managedObject valueForKey:@"dateStarted"];
+                            NSDate *discontinued=[managedObject valueForKey:@"discontinued"];
+                            NSString *drugName=[managedObject valueForKey:@"drugName"];
+                            //                        NSString *notes=[managedObject valueForKey:@"notes"];
+                            
+                            NSString *labelString=[NSString string];
+                            if (drugName.length) {
+                                labelString=drugName;
+                            }
+                            if (startedDate) {
+                                
+                                NSString *startedDateStr=[dateFormatter stringFromDate:startedDate];
+                                if (labelString.length && startedDateStr.length) {
+                                    labelString=[labelString stringByAppendingFormat:@"; started: %@",startedDateStr];
+                                }
+                                
+                            }
+                            if (discontinued) 
                             {
-                                historyString=[historyString stringByAppendingFormat:@"; %@",notes];
+                                
+                                NSString *discontinueddDateStr=[dateFormatter stringFromDate:discontinued];
+                                if (labelString.length && discontinueddDateStr.length) {
+                                    labelString=[labelString stringByAppendingFormat:@"; discontinued: %@",discontinueddDateStr];
+                                }
+                                
+                            }
+                            else {
+                                cell.textLabel.textColor=[UIColor blueColor];
+                            }
+                            cell.textLabel.text=labelString;
+                            return;
+                        }
+                        
+                        if ([managedObject.entity.name  isEqualToString:@"VitalsEntity"]) {
+                            //NSLog(@"the managed object entity is Vitals Entity");
+                            
+                            
+                            NSDate *dateTaken=(NSDate *)[cell.boundObject valueForKey:@"dateTaken"];
+                            NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+                            
+                            [dateFormatter setDateFormat:@"ccc M/d/yy h:mm a"];
+                            
+                            
+                            NSString *dateTakenStr=[dateFormatter stringFromDate:dateTaken];
+                            NSNumber *systolic=[cell.boundObject valueForKey:@"systolicPressure"];
+                            NSNumber *diastolic=[cell.boundObject valueForKey:@"diastolicPressure"];
+                            NSNumber *heartRate=[cell.boundObject valueForKey:@"heartRate"];    
+                            NSNumber *temperature=[cell.boundObject valueForKey:@"temperature"];
+                            
+                            NSString *labelText=[NSString string];
+                            if (dateTakenStr.length &&systolic&& diastolic) {
+                                
+                                labelText=[dateTakenStr stringByAppendingFormat:@": %@/%@",[systolic stringValue],[diastolic stringValue]];
+                                
+                            }
+                            else if(dateTakenStr.length){
+                                labelText=dateTakenStr;
                             }
                             
-                            cell.textLabel.text=historyString;
+                            if (labelText.length&&heartRate) {
+                                labelText=[labelText stringByAppendingFormat:@"; %@ bpm",[heartRate stringValue]];
+                            }
+                            if (labelText.length&&temperature) {
+                                labelText=[labelText stringByAppendingFormat:@"; %@\u00B0",[temperature stringValue]];
+                            }
+                            
+                            
+                            cell.textLabel.text=labelText;
+                            //change the text color to red
                             
                             return;
                             
                         }
-
+                        
+                        
                         
                     }
-
-                   
+                }
+            }
+                
+                break;
+            case 3:
+                //this is a third level table
+                
+                
+                
+                //identify the if the cell has a managedObject
+                if (managedObject &&[managedObject respondsToSelector:@selector(entity)]) {
+                    
+                    
+                    
+                    //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
+                    if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
+                        
+                        
+                        //identify the Languages Spoken table
+                        if ([managedObject.entity.name isEqualToString:@"LanguageSpokenEntity"]) {
+                            //NSLog(@"the managed object entity is Languag spoken Entity");
+                            //get the value of the primaryLangugage attribute
+                            NSNumber *primaryLanguageNumber=(NSNumber *)[managedObject valueForKey:@"primaryLanguage"];
+                            
+                            
+                            //NSLog(@"primary alanguage %@",  primaryLanguageNumber);
+                            //if the primaryLanguage selection is Yes
+                            if (primaryLanguageNumber==[NSNumber numberWithInteger:0]) {
+                                //get the language
+                                NSString *languageString =cell.textLabel.text;
+                                //add (Primary) after the language
+                                languageString=[languageString stringByAppendingString:@" (Primary)"];
+                                //set the cell textlable text to the languageString -the language with (Primary) after it 
+                                cell.textLabel.text=languageString;
+                                //change the text color to red
+                                cell.textLabel.textColor=[UIColor redColor];
+                                return;
+                            }
+                        }
+                        //NSLog(@"managed object entity name is %@",managedObject.entity.name);
+                        if ([managedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]) {
+                            //NSLog(@"the managed object entity is Migration History Entity");
+                            
+                            
+                            NSDate *arrivedDate=(NSDate *)[cell.boundObject valueForKey:@"arrivedDate"];
+                            NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+                            
+                            [dateFormatter setDateFormat:@"M/yyyy"];
+                            
+                            
+                            NSString *arrivedDateStr=[dateFormatter stringFromDate:arrivedDate];
+                            NSString *migratedFrom=[cell.boundObject valueForKey:@"migratedFrom"];
+                            NSString *migratedTo=[cell.boundObject valueForKey:@"migratedTo"];
+                            NSString *notes=[cell.boundObject valueForKey:@"notes"];    
+                            
+                            if (arrivedDateStr.length && migratedFrom.length&&migratedTo.length) {
+                                
+                                NSString * historyString=[arrivedDateStr stringByAppendingFormat:@":%@ to %@",migratedFrom,migratedTo];
+                                
+                                if (notes.length) 
+                                {
+                                    historyString=[historyString stringByAppendingFormat:@"; %@",notes];
+                                }
+                                
+                                cell.textLabel.text=historyString;
+                                
+                                return;
+                                
+                            }
+                            
+                            
+                        }
+                        
+                        
+                    }
+                    
                 }
                 
-            }
-            
-            
-            break;
-            
-        case 4:
-            //this is a fourth level detail view
-            
-            if (cell.tag==3) {
                 
-                //NSLog(@"cell tag is %i", cell.tag);
-                UIView *viewOne = [cell viewWithTag:14];
+                break;
                 
-                if([viewOne isKindOfClass:[UISlider class]])
-                {
-                    UISlider *sliderOne = (UISlider *)viewOne;
-                    UILabel *slabel = (UILabel *)[cell viewWithTag:10];
-                    //NSLog(@"detail will appear for row at index path label text%@",slabel.text);
-                    
-                    //NSLog(@"bound value is %f", sliderOne.value);
-                    slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
-                    
-                    return;
-                    
-                    
-                }     
-            }
-            if (cell.tag==4){
-                //NSLog(@"cell tag is ");
-                UIView *viewTwo = [cell viewWithTag:14];
-                if([viewTwo isKindOfClass:[UISlider class]])
-                {
-                    
+            case 4:
+                //this is a fourth level detail view
+                
+                if (cell.tag==3) {
                     
                     //NSLog(@"cell tag is %i", cell.tag);
+                    UIView *viewOne = [cell viewWithTag:14];
+                    
+                    if([viewOne isKindOfClass:[UISlider class]])
+                    {
+                        UISlider *sliderOne = (UISlider *)viewOne;
+                        UILabel *slabel = (UILabel *)[cell viewWithTag:10];
+                        //NSLog(@"detail will appear for row at index path label text%@",slabel.text);
+                        
+                        //NSLog(@"bound value is %f", sliderOne.value);
+                        slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
+                        
+                        return;
+                        
+                        
+                    }     
+                }
+                if (cell.tag==4){
+                    //NSLog(@"cell tag is ");
+                    UIView *viewTwo = [cell viewWithTag:14];
+                    if([viewTwo isKindOfClass:[UISlider class]])
+                    {
+                        
+                        
+                        //NSLog(@"cell tag is %i", cell.tag);
+                        
+                        
+                        UISlider *sliderTwo = (UISlider *)viewTwo;
+                        UILabel *slabelTwo = (UILabel *)[cell viewWithTag:10];
+                        
+                        
+                        slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];
+                        
+                        return;
+                    }
                     
                     
-                    UISlider *sliderTwo = (UISlider *)viewTwo;
-                    UILabel *slabelTwo = (UILabel *)[cell viewWithTag:10];
                     
                     
-                    slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];
-                    
-                    return;
                 }
                 
                 
-                
-                
-            }
-            
-       
-            //identify the if the cell has a managedObject
-            if (managedObject) {
-                
-                
-                
-                //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
-                if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
+                //identify the if the cell has a managedObject
+                if (managedObject &&[managedObject respondsToSelector:@selector(entity)]) {
                     
-                    //NSLog(@"entity name is %@",managedObject.entity.name);
-                    //identify the Languages Spoken table
-                    if ([managedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
-                        //define and initialize a date formatter
-                        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                    
+                    
+                    //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
+                    if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
                         
-                        //set the date format
-                        [dateFormatter setDateFormat:@"M/d/yy"];
-                        
-                        NSInteger doseChange=(NSInteger )[(NSNumber *)[cell.boundObject valueForKey:@"doseChange"] integerValue];
-                        
-                        NSString *doseChangeString;
-                        switch (doseChange) {
-                            case 0:
-                                doseChangeString=[NSString stringWithString:@"No Change"];
-                                break;
-                            case 1:
-                                doseChangeString=[NSString stringWithString:@"Decrease to"];
-                                break;  
-                            case 2:
-                                doseChangeString=[NSString stringWithString:@"Increase to"];
-                                break;
+                        //NSLog(@"entity name is %@",managedObject.entity.name);
+                        //identify the Languages Spoken table
+                        if ([managedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
+                            //define and initialize a date formatter
+                            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                            
+                            //set the date format
+                            [dateFormatter setDateFormat:@"M/d/yy"];
+                            
+                            NSInteger doseChange=(NSInteger )[(NSNumber *)[cell.boundObject valueForKey:@"doseChange"] integerValue];
+                            
+                            NSString *doseChangeString;
+                            switch (doseChange) {
+                                case 0:
+                                    doseChangeString=[NSString stringWithString:@"No Change"];
+                                    break;
+                                case 1:
+                                    doseChangeString=[NSString stringWithString:@"Decrease to"];
+                                    break;  
+                                case 2:
+                                    doseChangeString=[NSString stringWithString:@"Increase to"];
+                                    break;
+                                    
+                                default:
+                                    break;
+                            }
+                            NSString *notes=(NSString *)[cell.boundObject valueForKey:@"notes"];
+                            NSDate *logDate=(NSDate *)[cell.boundObject valueForKey:@"logDate"];
+                            NSString *dosage=(NSString *)[cell.boundObject valueForKey:@"dosage"];
+                            if (doseChangeString &&doseChangeString.length) {
+                                cell.textLabel.text=[NSString stringWithFormat:@"%@: %@ %@",[dateFormatter stringFromDate:logDate],doseChangeString,dosage];
+                            }
+                            else
+                            {
                                 
-                            default:
-                                break;
+                                cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateFormatter stringFromDate:logDate],dosage];
+                            }
+                            
+                            if (notes &&notes.length) {
+                                cell.textLabel.text=[cell.textLabel.text stringByAppendingFormat:@", %@",notes];
+                            }
+                            
                         }
-                        NSString *notes=(NSString *)[cell.boundObject valueForKey:@"notes"];
-                        NSDate *logDate=(NSDate *)[cell.boundObject valueForKey:@"logDate"];
-                        NSString *dosage=(NSString *)[cell.boundObject valueForKey:@"dosage"];
-                        if (doseChangeString &&doseChangeString.length) {
-                            cell.textLabel.text=[NSString stringWithFormat:@"%@: %@ %@",[dateFormatter stringFromDate:logDate],doseChangeString,dosage];
-                        }
-                        else
-                        {
-                        
-                             cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateFormatter stringFromDate:logDate],dosage];
-                        }
-                        
-                        if (notes &&notes.length) {
-                            cell.textLabel.text=[cell.textLabel.text stringByAppendingFormat:@", %@",notes];
-                        }
-                        
                     }
                 }
-            }
-            break;
+                break;
             default:
-            break;
+                break;
+        }
+        
+        
+        
+        
     }
     
     
     
-      
-    }
-    
-   
-
     
 }
 
@@ -1809,106 +1840,106 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     //NSLog(@"scope changed");
     if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
     {
-        SCArrayOfObjectsModel *objectsModel = (SCArrayOfObjectsModel *)tableViewModel;
-//        if (objectsModel.sectionCount>0) {
-//       SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-//        
-//        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
-//            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)section;
-//            
-//                
-//               
-//                SCTableViewCell *cell=(SCTableViewCell *)[objectsModel cellAtIndexPath: objectSelectionSection.selectedCellIndexPath];
-//                
-//                
-//                currentlySelectedClient= (ClientEntity *) cell.boundObject;
-//                
-//                
-//                
-//            
-//            
-//            
-//        }
-//        }
         
+        if (objectsModel.sectionCount>0) {
+       SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
+        
+        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)section;
+            
+                
+               
+                SCTableViewCell *cell=(SCTableViewCell *)[objectsModel cellAtIndexPath: objectSelectionSection.selectedCellIndexPath];
+                
+                
+                currentlySelectedClient= (ClientEntity *) cell.boundObject;
+                
+                
+                
+            
+            
+            
+        }
+        }
+         SCDataFetchOptions *dataFetchOptions=(SCDataFetchOptions *)objectsModel.dataFetchOptions;
         [self.searchBar setSelectedScopeButtonIndex:selectedScope];
         
         switch (selectedScope) {
             case 0: //current
-                objectsModel.itemsPredicate = [NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
+                dataFetchOptions.filterPredicate = [NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
                 //NSLog(@"case 1");
                 break;
                 
             default:
-                objectsModel.itemsPredicate = nil;
+                dataFetchOptions.filterPredicate = nil;
                 //NSLog(@"case default");
                 
                 break;
         }
         
-   
-        [tableViewModel reloadBoundValues];
-       
-       
-      [tableViewModel.modeledTableView reloadData];
-                    
-        [self updateClientsTotalLabel];
-//         if (objectsModel.sectionCount>0) {
-//        if (isInDetailSubview) {
-//        
-//        if (currentlySelectedClient) {
-//           SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-//            if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
-//                
-//            
-//                SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)section;
-//                
-//
-//                
-//                [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:currentlySelectedClient]]];
-//                
-//                
-//            }
-//            
-//        }
-//        
-//            
-//        }
         
-//    }
+        [objectsModel reloadBoundValues];
+        
+        
+        [objectsModel.modeledTableView reloadData];
+        
+        [self updateClientsTotalLabel];
+        //         if (objectsModel.sectionCount>0) {
+        //        if (isInDetailSubview) {
+        //        
+        //        if (currentlySelectedClient) {
+        //           SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
+        //            if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+        //                
+        //            
+        //                SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)section;
+        //                
+        //
+        //                
+        //                [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:currentlySelectedClient]]];
+        //                
+        //                
+        //            }
+        //            
+        //        }
+        //        
+        //            
+        //        }
+        
+        //    }
     }
 }
 
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {
     
     
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
-     if (tableViewModel.tag==1 &&index==0 &&section.cellCount>3) {
-       
-//         NSString* newStr = [[NSString alloc] initWithData:[tableViewModel.modelKeyValues valueForKey:@"clientIDCode"] encoding:NSASCIIStringEncoding];
-//         [section insertCell:[[SCTextFieldCell alloc] initWithText:@"clientIDCode" withBoundKey:@"clientIDCode" withValue:newStr]  atIndex:0];
-         
-         [section insertCell:[SCLabelCell cellWithText:@"Age"] atIndex:2];
+    if ( tableViewModel.tag==1 &&index==0 &&section.cellCount>3) {
+        
+        //         NSString* newStr = [[NSString alloc] initWithData:[tableViewModel.modelKeyValues valueForKey:@"clientIDCode"] encoding:NSASCIIStringEncoding];
+        //         [section insertCell:[[SCTextFieldCell alloc] initWithText:@"clientIDCode" withBoundKey:@"clientIDCode" withValue:newStr]  atIndex:0];
+        
+        [section insertCell:[SCLabelCell cellWithText:@"Age"] atIndex:2];
         [section insertCell:[SCLabelCell cellWithText:@"Wechsler Age"] atIndex:3];
         
-       
-    
+        
+        
         
     }
     
     if (tableViewModel.tag==3 &&index==0) {
         
         
-        if (section.cellCount>0) {
+        if (section.cellCount>1) {
             SCTableViewCell *cellOne=(SCTableViewCell *)[section cellAtIndex:1];
             
             NSManagedObject *cellOneBoundObject=(NSManagedObject *)cellOne.boundObject;
             
             //NSLog(@"section bound object entity is %@",cellOneBoundObject);
             //NSLog(@"section bound object entity name is %@",cellOneBoundObject.entity.name);
-            if (cellOneBoundObject && [cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
+            if (cellOneBoundObject &&[cellOneBoundObject respondsToSelector:@selector(entity)] && [cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
                 
                 
                 section.footerTitle=@"Select the drug then add the current dosage in the Med Logs section.";
@@ -1937,48 +1968,48 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         section.footerView = containerView;
         
     }
-
     
-//    if (tableViewModel.tag==0) {
-//       
-//        
-//        //NSLog(@"test%@", section.class);
-//        
-//        if (searchBar.text.length !=searchStringLength) {
-//            
-//            if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
-//                //NSLog(@"test");
-//                
-//               
-//                SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
-//                SCObjectSelectionSection *objectsSelectionSection=[[SCObjectSelectionSection alloc]initWithHeaderTitle:nil withItemsSet:arrayOfObjectsSection.itemsSet withClassDefinition:clientsViewController_Shared.clientDef];
-//                
-//                 searchStringLength=searchBar.text.length;
-//                reloadTableView=TRUE;
-//                section=nil;
-//                
-//                section=(SCObjectSelectionSection*) objectsSelectionSection;
-//                [tableViewModel addSection:section ];
-//                tableViewModel.delegate=self;
-//                //NSLog(@"section %@",[section class]);
-//                
-//                    
-//            }
-//               
-//               
-//            
-//            
-//            
-//        }
-//        else if(reloadTableView==TRUE)
-//                {
-//                
-//                    reloadTableView=FALSE;
-//                
-//                }
-//
-//    }
-       
+    
+    //    if (tableViewModel.tag==0) {
+    //       
+    //        
+    //        //NSLog(@"test%@", section.class);
+    //        
+    //        if (searchBar.text.length !=searchStringLength) {
+    //            
+    //            if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
+    //                //NSLog(@"test");
+    //                
+    //               
+    //                SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
+    //                SCObjectSelectionSection *objectsSelectionSection=[[SCObjectSelectionSection alloc]initWithHeaderTitle:nil withItemsSet:arrayOfObjectsSection.itemsSet withClassDefinition:clientsViewController_Shared.clientDef];
+    //                
+    //                 searchStringLength=searchBar.text.length;
+    //                reloadTableView=TRUE;
+    //                section=nil;
+    //                
+    //                section=(SCObjectSelectionSection*) objectsSelectionSection;
+    //                [tableViewModel addSection:section ];
+    //                tableViewModel.delegate=self;
+    //                //NSLog(@"section %@",[section class]);
+    //                
+    //                    
+    //            }
+    //               
+    //               
+    //            
+    //            
+    //            
+    //        }
+    //        else if(reloadTableView==TRUE)
+    //                {
+    //                
+    //                    reloadTableView=FALSE;
+    //                
+    //                }
+    //
+    //    }
+    
     //NSLog(@"tablemodel data source %@",[section class]);
     
     //NSLog(@"did add section at index header title is %@",section.headerTitle);
@@ -1990,10 +2021,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         headerLabel.text = section.headerTitle;
         headerLabel.textColor = [UIColor whiteColor];
-      
+        
         headerLabel.backgroundColor = [UIColor clearColor];
         
-       
+        
         [containerView addSubview:headerLabel];
         section.headerView = containerView;
         
@@ -2016,13 +2047,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(void)updateClientsTotalLabel{
     
     
-    if (tableModel.tag==0) 
+    if (objectsModel.tag==0) 
     {
         int cellCount=0;
-        if (tableModel.sectionCount >0){
+        if (objectsModel.sectionCount >0){
             
-            for (int i=0; i<tableModel.sectionCount; i++) {
-                SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:i];
+            for (int i=0; i<objectsModel.sectionCount; i++) {
+                SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:i];
                 cellCount=cellCount+section.cellCount;
                 
             }
@@ -2047,33 +2078,33 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 }
 
 
-//-(void)tableViewModel:(SCTableViewModel *)tableViewModel didInsertRowAtIndexPath:(NSIndexPath *)indexPath
-//
-//{
-//    
-//    if (tableViewModel.tag==0) {
-//        //NSLog(@"did iset row for index path");
-//   
-//       
-//            if(isInDetailSubview)
-//            {
-//                SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-//                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-//                NSMutableArray *mutableArray=(NSMutableArray *)[NSMutableArray arrayWithArray:clientObjectSelectionCell.items];
-//                [mutableArray addObject:cellManagedObject];
-//                
-//                clientObjectSelectionCell.items=mutableArray;
-//            }
-//            
-//    }
-//        
-//        
-//        
-//        
-//
-//    
-//}
-//
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel didInsertRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
+    
+    if (tableViewModel.tag==0) {
+        //NSLog(@"did iset row for index path");
+        
+        [self updateClientsTotalLabel];
+        if(isInDetailSubview)
+        {
+            SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+            NSMutableArray *mutableArray=(NSMutableArray *)[NSMutableArray arrayWithArray:clientObjectSelectionCell.items];
+            [mutableArray addObject:cellManagedObject];
+            
+            //                clientObjectSelectionCell.items=mutableArray;
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+}
+
 
 
 //
@@ -2156,15 +2187,17 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 
 -(void)addWechlerAgeCellToSection:(SCTableViewSection *)section {
-
-
-    SCLabelCell *actualAgeCell=(SCLabelCell*)[section cellAtIndex:2];
-    SCLabelCell *wechslerAgeCell=(SCLabelCell*)[section cellAtIndex:3];
-    SCDateCell *birthdateCell=(SCDateCell *)[section cellAtIndex:1];
-
-    actualAgeCell.label.text=[clientsViewController_Shared calculateActualAgeWithBirthdate:birthdateCell.datePicker.date];
-    wechslerAgeCell.label.text=[clientsViewController_Shared calculateWechslerAgeWithBirthdate:birthdateCell.datePicker.date];
-
+    
+    if (section.cellCount>3) {
+        
+        SCLabelCell *actualAgeCell=(SCLabelCell*)[section cellAtIndex:2];
+        SCLabelCell *wechslerAgeCell=(SCLabelCell*)[section cellAtIndex:3];
+        SCDateCell *birthdateCell=(SCDateCell *)[section cellAtIndex:1];
+        
+        actualAgeCell.label.text=[clientsViewController_Shared calculateActualAgeWithBirthdate:birthdateCell.datePicker.date];
+        wechslerAgeCell.label.text=[clientsViewController_Shared calculateWechslerAgeWithBirthdate:birthdateCell.datePicker.date];
+        
+    }
 }
 
 #pragma mark - Cloud support

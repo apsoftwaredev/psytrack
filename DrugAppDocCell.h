@@ -15,7 +15,7 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewCell.h"
+#import <UIKit/UIKit.h>
 
 @interface DrugAppDocCell : SCLabelCell 
 

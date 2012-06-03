@@ -20,7 +20,7 @@
 #import "TimeOfDayPickerCell.h"
 #import "EncryptedSCTextViewCell.h"
 #import "EncryptedSCSelectionCell.h"
-
+#import "BOPickersDataSource.h"
 @implementation DemographicDetailViewController_Shared
 @synthesize demographicProfileDef;
 
@@ -33,7 +33,7 @@
 //    NSString *shortFieldCellNibName=nil;
 //    NSString *textFieldAndLableNibName=nil;
     NSString *scaleDataCellNibName=nil;
-    if ([SCHelper is_iPad]) {
+    if ([SCUtilities is_iPad]) {
 //        textFieldAndLableNibName=@"TextFieldAndLabelCell_iPad";
 //        shortFieldCellNibName=@"ShortFieldCell_iPad";
         scaleDataCellNibName=@"ScaleDataCell_iPad";
@@ -56,68 +56,82 @@
     
     //start Demographic Profile setup
     //Create a class definition for Demographic Profile entity
-	self.demographicProfileDef = [SCClassDefinition definitionWithEntityName:@"DemographicProfileEntity" 
-                                                    withManagedObjectContext:managedObjectContext
-                                                           withPropertyNames:[NSArray arrayWithObjects:@"profileNotes",@"sex",@"gender", @"sexualOrientation",
-                                                                              @"disabilities",@"educationLevel",@"employmentStatus", @"ethnicities",@"languagesSpoken",
-                                                                              @"cultureGroups",@"migrationHistory", @"interpersonal",  
-                                                                              @"races",@"spiritualBeliefs",@"significantLifeEvents",@"militaryService", @"additionalVariables",nil]];
+//	self.demographicProfileDef = [SCEntityDefinition definitionWithEntityName:@"DemographicProfileEntity" 
+//                                                    managedObjectContext:managedObjectContext
+//                                                           propertyNames:[NSArray arrayWithObjects:@"profileNotes",@"sex",@"gender", @"sexualOrientation",
+//                                                                              @"disabilities",@"educationLevel",@"employmentStatus", @"ethnicities",@"languagesSpoken",
+//                                                                              @"cultureGroups",@"migrationHistory", @"interpersonal",  
+//                                                                              @"races",@"spiritualBeliefs",@"significantLifeEvents",@"militaryService", @"additionalVariables",nil]];
 	
-    
-    
+    self.demographicProfileDef = [SCEntityDefinition definitionWithEntityName:@"DemographicProfileEntity" 
+                                                         managedObjectContext:managedObjectContext
+                                                                propertyNames:[NSArray arrayWithObjects:@"profileNotes",@"sex",@"gender", @"sexualOrientation",
+                                                                               @"disabilities",@"ethnicities",@"languagesSpoken",
+                                                                               @"cultureGroups",
+                                                                                @"races",@"spiritualBeliefs",@"significantLifeEvents",@"militaryService", @"educationLevel",@"employmentStatus", @"migrationHistory", @"interpersonal",  
+                                                                              @"hearing",@"vision",@"additionalVariables",nil]];
+     
+//    [self.demographicProfileDef removePropertyDefinitionWithName:@"order"];
+//    [self.demographicProfileDef removePropertyDefinitionWithName:@"keyString"];
+//    SCPropertyGroup *sharedPropertyGroup=[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"profileNotes",@"sex",@"gender", @"sexualOrientation",
+//                                                                                                                                                                                                @"disabilities",@"educationLevel",@"employmentStatus", @"ethnicities",@"languagesSpoken",
+//                                                                                                                                                                                                @"cultureGroups",@"migrationHistory", @"interpersonal",  
+//                                                                                                                                                                                                @"races",@"spiritualBeliefs",@"significantLifeEvents",@"militaryService", @"hearing",@"vision",@"additionalVariables",nil]];
+//    
+//    [self.demographicProfileDef.propertyGroups addGroup:sharedPropertyGroup];
     //Create a class definition for Demographic Gender entity
-    SCClassDefinition *genderDef = [SCClassDefinition definitionWithEntityName:@"GenderEntity" 
-                                                      withManagedObjectContext:managedObjectContext
-                                                             withPropertyNames:[NSArray arrayWithObjects:@"genderName",@"notes",nil]];
+    SCEntityDefinition *genderDef = [SCEntityDefinition definitionWithEntityName:@"GenderEntity" 
+                                                      managedObjectContext:managedObjectContext
+                                                             propertyNames:[NSArray arrayWithObjects:@"genderName",@"notes",nil]];
     
     genderDef.orderAttributeName=@"order";
     //Create a class definition for Demographic Immigration History entity
-    SCClassDefinition *migrationHistoryDef = [SCClassDefinition definitionWithEntityName:@"MigrationHistoryEntity" 
-                                                                 withManagedObjectContext:managedObjectContext
-                                                                        withPropertyNames:[NSArray arrayWithObjects:@"migratedFrom",@"migratedTo",@"arrivedDate",@"notes",nil]];
+    SCEntityDefinition *migrationHistoryDef = [SCEntityDefinition definitionWithEntityName:@"MigrationHistoryEntity" 
+                                                                 managedObjectContext:managedObjectContext
+                                                                        propertyNames:[NSArray arrayWithObjects:@"migratedFrom",@"migratedTo",@"arrivedDate",@"notes",nil]];
     
        
     
     
     //Create a class definition for  Disablity entity
-    SCClassDefinition *disabilityDef = [SCClassDefinition definitionWithEntityName:@"DisabilityEntity" 
-                                                          withManagedObjectContext:managedObjectContext
-                                                                 withPropertyNames:[NSArray arrayWithObjects:@"disabilityName",@"notes",nil]];
+    SCEntityDefinition *disabilityDef = [SCEntityDefinition definitionWithEntityName:@"DisabilityEntity" 
+                                                          managedObjectContext:managedObjectContext
+                                                                 propertyNames:[NSArray arrayWithObjects:@"disabilityName",@"notes",nil]];
     disabilityDef.orderAttributeName=@"order";
     //Create a class definition for Education Level entity
-    SCClassDefinition *educationLevelDef = [SCClassDefinition definitionWithEntityName:@"EducationLevelEntity" 
-                                                              withManagedObjectContext:managedObjectContext
-                                                                     withPropertyNames:[NSArray arrayWithObjects:@"educationLevel",@"notes",nil]];
+    SCEntityDefinition *educationLevelDef = [SCEntityDefinition definitionWithEntityName:@"EducationLevelEntity" 
+                                                              managedObjectContext:managedObjectContext
+                                                                     propertyNames:[NSArray arrayWithObjects:@"educationLevel",@"notes",nil]];
     educationLevelDef.orderAttributeName=@"order";
     //Create a class definition for Employment Status entity
-    SCClassDefinition *employmentStatuslDef = [SCClassDefinition definitionWithEntityName:@"EmploymentStatusEntity" 
-                                                                 withManagedObjectContext:managedObjectContext
-                                                                        withPropertyNames:[NSArray arrayWithObjects:@"employmentStatus",@"notes",nil]];
+    SCEntityDefinition *employmentStatuslDef = [SCEntityDefinition definitionWithEntityName:@"EmploymentStatusEntity" 
+                                                                 managedObjectContext:managedObjectContext
+                                                                        propertyNames:[NSArray arrayWithObjects:@"employmentStatus",@"notes",nil]];
     
     employmentStatuslDef.orderAttributeName=@"order";
     //Create a class definition for Ethnicity entity
-    SCClassDefinition *ethnicitylDef = [SCClassDefinition definitionWithEntityName:@"EthnicityEntity" 
-                                                          withManagedObjectContext:managedObjectContext
-                                                                 withPropertyNames:[NSArray arrayWithObjects:
+    SCEntityDefinition *ethnicitylDef = [SCEntityDefinition definitionWithEntityName:@"EthnicityEntity" 
+                                                          managedObjectContext:managedObjectContext
+                                                                 propertyNames:[NSArray arrayWithObjects:
                                                                                     @"ethnicityName",@"notes",nil]]; 
     ethnicitylDef.orderAttributeName=@"order";
     //Create a class definition for Culture Group entity
-    SCClassDefinition *cultureGroupDef = [SCClassDefinition definitionWithEntityName:@"CultureGroupEntity" 
-                                                            withManagedObjectContext:managedObjectContext
-                                                                   withPropertyNames:[NSArray arrayWithObjects:@"cultureName",@"notes",nil]];  
+    SCEntityDefinition *cultureGroupDef = [SCEntityDefinition definitionWithEntityName:@"CultureGroupEntity" 
+                                                            managedObjectContext:managedObjectContext
+                                                                   propertyNames:[NSArray arrayWithObjects:@"cultureName",@"notes",nil]];  
     
     //Create a class definition for Languages Spoken entity
-    SCClassDefinition *languageSpokenDef = [SCClassDefinition definitionWithEntityName:@"LanguageSpokenEntity" 
-                                                              withManagedObjectContext:managedObjectContext
-                                                                     withPropertyNames:[NSArray arrayWithObjects:@"language", @"primaryLanguage", @"nativeSpeaker", @"onlyLanguage", @"startedSpeaking", @"notes", nil]];  
+    SCEntityDefinition *languageSpokenDef = [SCEntityDefinition definitionWithEntityName:@"LanguageSpokenEntity" 
+                                                              managedObjectContext:managedObjectContext
+                                                                     propertyNames:[NSArray arrayWithObjects:@"language", @"primaryLanguage", @"nativeSpeaker", @"onlyLanguage", @"startedSpeaking", @"notes", nil]];  
     
     
     
     languageSpokenDef.orderAttributeName=@"order";
     //Create a class definition for Language entity
-    SCClassDefinition *languageDef = [SCClassDefinition definitionWithEntityName:@"LanguageEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"language",@"notes",nil]];  
+    SCEntityDefinition *languageDef = [SCEntityDefinition definitionWithEntityName:@"LanguageEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"language",@"notes",nil]];  
     
     
     languageDef.orderAttributeName=@"order";
@@ -125,21 +139,21 @@
     
     
     //Create a class definition for Race entity
-    SCClassDefinition *raceDef = [SCClassDefinition definitionWithEntityName:@"RaceEntity" 
-                                                    withManagedObjectContext:managedObjectContext
-                                                           withPropertyNames:[NSArray arrayWithObjects:@"raceName",@"notes",nil]];  
+    SCEntityDefinition *raceDef = [SCEntityDefinition definitionWithEntityName:@"RaceEntity" 
+                                                    managedObjectContext:managedObjectContext
+                                                           propertyNames:[NSArray arrayWithObjects:@"raceName",@"notes",nil]];  
     
     //Create a class definition for Spiritual Belief entity
-    SCClassDefinition *spiritualBeliefDef = [SCClassDefinition definitionWithEntityName:@"SpiritualBeliefEntity" 
-                                                               withManagedObjectContext:managedObjectContext
-                                                                      withPropertyNames:[NSArray arrayWithObjects:@"beliefName",@"notes",nil]];  
+    SCEntityDefinition *spiritualBeliefDef = [SCEntityDefinition definitionWithEntityName:@"SpiritualBeliefEntity" 
+                                                               managedObjectContext:managedObjectContext
+                                                                      propertyNames:[NSArray arrayWithObjects:@"beliefName",@"notes",nil]];  
     
     
     spiritualBeliefDef.orderAttributeName=@"order";
     //Create a class definition for Significant Life Event entity
-    SCClassDefinition *significantLifeEventDef = [SCClassDefinition definitionWithEntityName:@"SignificantLifeEventEntity" 
-                                                                    withManagedObjectContext:managedObjectContext
-                                                                           withPropertyNames:[NSArray arrayWithObjects:@"eventType",@"desc",nil]];  
+    SCEntityDefinition *significantLifeEventDef = [SCEntityDefinition definitionWithEntityName:@"SignificantLifeEventEntity" 
+                                                                    managedObjectContext:managedObjectContext
+                                                                           propertyNames:[NSArray arrayWithObjects:@"eventType",@"desc",nil]];  
     
     
     significantLifeEventDef.orderAttributeName=@"order";
@@ -149,9 +163,9 @@
     
     
     //Create a class definition for Additional Variables entity 
-    SCClassDefinition *additionalVariableDef = [SCClassDefinition definitionWithEntityName:@"AdditionalVariableEntity" 
-                                                                  withManagedObjectContext:managedObjectContext
-                                                                         withPropertyNames:[NSArray arrayWithObjects:@"variableName",@"selectedValue",@"stringValue",@"timeValue",@"dateValue",@"timeValueTwo", @"notes",nil]];  
+    SCEntityDefinition *additionalVariableDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalVariableEntity" 
+                                                                  managedObjectContext:managedObjectContext
+                                                                         propertyNames:[NSArray arrayWithObjects:@"variableName",@"selectedValue",@"stringValue",@"timeValue",@"dateValue",@"timeValueTwo", @"notes",nil]];  
     
     
     
@@ -163,9 +177,9 @@
     
     additionalVariableDef.orderAttributeName=@"order";
     //Create a class definition for Additional Variable Name entity
-    SCClassDefinition *additionalVariableNameDef = [SCClassDefinition definitionWithEntityName:@"AdditionalVariableNameEntity" 
-                                                                      withManagedObjectContext:managedObjectContext
-                                                                             withPropertyNames:[NSArray arrayWithObjects:@"variableName",@"notes",nil]]; 
+    SCEntityDefinition *additionalVariableNameDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalVariableNameEntity" 
+                                                                      managedObjectContext:managedObjectContext
+                                                                             propertyNames:[NSArray arrayWithObjects:@"variableName",@"notes",nil]]; 
     
     
     
@@ -173,9 +187,9 @@
     
     additionalVariableNameDef.orderAttributeName=@"order";
     
-    SCClassDefinition *additionalVariableValueDef = [SCClassDefinition definitionWithEntityName:@"AdditionalVariableValueEntity" 
-                                                                       withManagedObjectContext:managedObjectContext
-                                                                              withPropertyNames:[NSArray arrayWithObjects:@"variableValue",@"notes",nil]]; 
+    SCEntityDefinition *additionalVariableValueDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalVariableValueEntity" 
+                                                                       managedObjectContext:managedObjectContext
+                                                                              propertyNames:[NSArray arrayWithObjects:@"variableValue",@"notes",nil]]; 
     
     
     additionalVariableValueDef.orderAttributeName=@"order";
@@ -184,11 +198,11 @@
     //Do some property definition customization for the Demographic Profile Entity sex and Profile notes attributes
     SCPropertyDefinition *demographicSexPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"sex"];
 //	demographicSexPropertyDef.title =
-//    demographicSexPropertyDef.type = SCPropertyTypeSelection;
-//	demographicSexPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Male", @"Female", @"Intersexual",@"F2M",@"M2F",@"Undisclosed", nil] 
-//                                                               allowMultipleSelection:NO
-//                                                                     allowNoSelection:NO
-//                                                                autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
+    demographicSexPropertyDef.type = SCPropertyTypeSelection;
+	demographicSexPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Male", @"Female", @"Intersexual",@"F2M",@"M2F",@"Undisclosed", nil] 
+                                                               allowMultipleSelection:NO
+                                                                     allowNoSelection:NO
+                                                                autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
     
     demographicSexPropertyDef.type=SCPropertyTypeCustom;
     demographicSexPropertyDef.uiElementClass=[EncryptedSCSelectionCell class];
@@ -230,7 +244,8 @@
     SCPropertyDefinition *demGenderPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"gender"];
     
    	demGenderPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *genderSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:genderDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *genderSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:genderDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO]; 
+  
     genderSelectionAttribs.allowAddingItems = YES;
     genderSelectionAttribs.allowDeletingItems = YES;
     genderSelectionAttribs.allowMovingItems = YES;
@@ -246,7 +261,8 @@
     SCPropertyDefinition *demDisabilitiesPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"disabilities"];
     
    	demDisabilitiesPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *disabilitySelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:disabilityDef allowMultipleSelection:YES allowNoSelection:NO];
+	
+    SCObjectSelectionAttributes *disabilitySelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:disabilityDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO]; 
     disabilitySelectionAttribs.allowAddingItems = YES;
     disabilitySelectionAttribs.allowDeletingItems = YES;
     disabilitySelectionAttribs.allowMovingItems = YES;
@@ -264,7 +280,8 @@
     SCPropertyDefinition *demEducationLevelPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"educationLevel"];
     
    	demEducationLevelPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *educationLevelSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:educationLevelDef allowMultipleSelection:NO allowNoSelection:NO];
+	     SCObjectSelectionAttributes *educationLevelSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:educationLevelDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO]; 
+    
     educationLevelSelectionAttribs.allowAddingItems = YES;
     educationLevelSelectionAttribs.allowDeletingItems = YES;
     educationLevelSelectionAttribs.allowMovingItems = YES;
@@ -281,7 +298,7 @@
     SCPropertyDefinition *demEmploymentStatusPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"employmentStatus"];
     //Do some property definition customization for the Demographic Profile Entity Employment Status relationship
    	demEmploymentStatusPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *employmentStatusSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:employmentStatuslDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *employmentStatusSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:employmentStatuslDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     employmentStatusSelectionAttribs.allowAddingItems = YES;
     employmentStatusSelectionAttribs.allowDeletingItems = YES;
     employmentStatusSelectionAttribs.allowMovingItems = YES;
@@ -299,7 +316,7 @@
     SCPropertyDefinition *demEthnicitiesPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"ethnicities"];
     
    	demEthnicitiesPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *ethnicitiesSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:ethnicitylDef allowMultipleSelection:YES allowNoSelection:NO];
+	SCObjectSelectionAttributes *ethnicitiesSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:ethnicitylDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO];
     ethnicitiesSelectionAttribs.allowAddingItems = YES;
     ethnicitiesSelectionAttribs.allowDeletingItems = YES;
     ethnicitiesSelectionAttribs.allowMovingItems = YES;
@@ -316,7 +333,7 @@
     SCPropertyDefinition *significantLifeEventPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"significantLifeEvents"];
     
    	significantLifeEventPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *significantLESelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:significantLifeEventDef allowMultipleSelection:YES allowNoSelection:NO];
+	SCObjectSelectionAttributes *significantLESelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:significantLifeEventDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO];
     significantLESelectionAttribs.allowAddingItems = YES;
     significantLESelectionAttribs.allowDeletingItems = YES;
     significantLESelectionAttribs.allowMovingItems = YES;
@@ -334,14 +351,14 @@
     SCPropertyDefinition *demLanguagesSpokenPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"languagesSpoken"];
     
     
-    demLanguagesSpokenPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:languageSpokenDef
+    demLanguagesSpokenPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:languageSpokenDef
                                                                                               allowAddingItems:TRUE
                                                                                             allowDeletingItems:TRUE
                                                                                               allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
     
     SCPropertyDefinition *languagePropertyDef = [languageSpokenDef propertyDefinitionWithName:@"language"];
     languagePropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *languageSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:languageDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *languageSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:languageDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     languageSelectionAttribs.allowAddingItems = YES;
     languageSelectionAttribs.allowDeletingItems = YES;
     languageSelectionAttribs.allowMovingItems = YES;
@@ -361,8 +378,8 @@
                                               dictionaryWithObjects:[NSArray arrayWithObject:@"fluencyLevel"] 
                                               forKeys:[NSArray arrayWithObject:@"70"]]; // 1 is the control tag
 	SCCustomPropertyDefinition *fluencyLevelDataProperty = [SCCustomPropertyDefinition definitionWithName:@"FluencyData"
-                                                                                     withuiElementNibName:scaleDataCellNibName
-                                                                                       withObjectBindings:fluencyLevelDataBindings];
+                                                                                     uiElementNibName:scaleDataCellNibName
+                                                                                       objectBindings:fluencyLevelDataBindings];
 	
     
     
@@ -399,7 +416,7 @@
     SCPropertyDefinition *demCultureGroupsPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"cultureGroups"];
     
    	demCultureGroupsPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *cultureGroupSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:cultureGroupDef allowMultipleSelection:YES allowNoSelection:NO];
+	SCObjectSelectionAttributes *cultureGroupSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:cultureGroupDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO];
     cultureGroupSelectionAttribs.allowAddingItems = YES;
     cultureGroupSelectionAttribs.allowDeletingItems = YES;
     cultureGroupSelectionAttribs.allowMovingItems = YES;
@@ -417,11 +434,11 @@
     
     //Create the property definition for the immigrationHistory property
     SCPropertyDefinition *migrationHistoryPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"migrationHistory"];
-    migrationHistoryPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:migrationHistoryDef
+    migrationHistoryPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:migrationHistoryDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
                                                                                     allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap Here to Add New Migration History"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
-    
+ 
     //Do some property definition customization for the Immigration History Entity attribute
     SCPropertyDefinition *migrationFromPropertyDef = [migrationHistoryDef propertyDefinitionWithName:@"migratedFrom"];
   
@@ -473,7 +490,7 @@
     SCPropertyDefinition *demRacesPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"races"];
     
    	demRacesPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *racesSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:raceDef allowMultipleSelection:YES allowNoSelection:NO];
+	SCObjectSelectionAttributes *racesSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:raceDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO];
     racesSelectionAttribs.allowAddingItems = YES;
     racesSelectionAttribs.allowDeletingItems = YES;
     racesSelectionAttribs.allowMovingItems = YES;
@@ -494,7 +511,7 @@
     SCPropertyDefinition *demSpiritualBeliefsPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"spiritualBeliefs"];
     
    	demSpiritualBeliefsPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *spiritualBeliefSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:spiritualBeliefDef allowMultipleSelection:YES allowNoSelection:NO];
+	SCObjectSelectionAttributes *spiritualBeliefSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:spiritualBeliefDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO];
     spiritualBeliefSelectionAttribs.allowAddingItems = YES;
     spiritualBeliefSelectionAttribs.allowDeletingItems = YES;
     spiritualBeliefSelectionAttribs.allowMovingItems = YES;
@@ -513,15 +530,15 @@
     
     //Create a class definition for Military History entity
     
-    SCClassDefinition *militaryServiceDef = [SCClassDefinition definitionWithEntityName:@"MilitaryServiceEntity" 
-                                                               withManagedObjectContext:managedObjectContext
-                                                                      withPropertyNames:[NSArray arrayWithObjects:@"highestRank",@"awards",@"exposureToCombat", @"serviceDisability",@"tsClearance", @"serviceHistory",@"militarySpecialties", @"notes", nil]];  
+    SCEntityDefinition *militaryServiceDef = [SCEntityDefinition definitionWithEntityName:@"MilitaryServiceEntity" 
+                                                               managedObjectContext:managedObjectContext
+                                                                      propertyNames:[NSArray arrayWithObjects:@"highestRank",@"awards",@"exposureToCombat", @"serviceDisability",@"tsClearance", @"serviceHistory",@"militarySpecialties", @"notes", nil]];  
     
     
     militaryServiceDef.orderAttributeName=@"order";
     
     SCPropertyDefinition *demMilitaryServicePropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"militaryService"];
-    demMilitaryServicePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:militaryServiceDef
+    demMilitaryServicePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:militaryServiceDef
                                                                                               allowAddingItems:FALSE
                                                                                             allowDeletingItems:FALSE
                                                                                               allowMovingItems:FALSE];
@@ -529,9 +546,9 @@
     
     
   
-    SCClassDefinition *militaryServiceDatesDef = [SCClassDefinition definitionWithEntityName:@"MilitaryServiceDatesEntity" 
-                                                                    withManagedObjectContext:managedObjectContext
-                                                                           withPropertyNames:[NSArray arrayWithObjects:@"branch",@"officerOrEnlisted",@"dischargeType",@"dateJoined",@"dateDischarged",  @"notes", nil]];  
+    SCEntityDefinition *militaryServiceDatesDef = [SCEntityDefinition definitionWithEntityName:@"MilitaryServiceDatesEntity" 
+                                                                    managedObjectContext:managedObjectContext
+                                                                           propertyNames:[NSArray arrayWithObjects:@"branch",@"officerOrEnlisted",@"dischargeType",@"dateJoined",@"dateDischarged",  @"notes", nil]];  
     
     
     militaryServiceDatesDef.titlePropertyNameDelimiter=@", ";
@@ -542,7 +559,7 @@
     
     SCPropertyDefinition *serviceHistoryPropertyDef = [militaryServiceDef propertyDefinitionWithName:@"serviceHistory"];
     
-	serviceHistoryPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:militaryServiceDatesDef
+	serviceHistoryPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:militaryServiceDatesDef
                                                                                           allowAddingItems:YES
                                                                                         allowDeletingItems:YES
                                                                                           allowMovingItems:YES
@@ -629,7 +646,7 @@
     militaryServiceDatesNotesPropertyDef.type=SCPropertyTypeTextView;
     
     NSString*militarySpecialtiesPropName=@"militarySpecialties";
-    if ([SCHelper is_iPad]) {
+    if ([SCUtilities is_iPad]) {
         SCPropertyDefinition *militaryServiceSpecialtiesPropertyDef = [militaryServiceDatesDef propertyDefinitionWithName:militarySpecialtiesPropName];
         militaryServiceSpecialtiesPropertyDef.type=SCPropertyTypeTextView;
     }
@@ -641,8 +658,8 @@
                                                      dictionaryWithObjects:[NSArray arrayWithObject:@"militarySpecialties"] 
                                                      forKeys:[NSArray arrayWithObject:@"80"]]; // 1 is the control tag
         SCCustomPropertyDefinition *militarySpecialtiesDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SpecialtiesTextView"
-                                                                                                withuiElementNibName:@"TextViewAndLabelCell_iPhone"
-                                                                                                  withObjectBindings:militarySpecialtiesBindings];
+                                                                                                uiElementNibName:@"TextViewAndLabelCell_iPhone"
+                                                                                                  objectBindings:militarySpecialtiesBindings];
         
         
         [militaryServiceDef addPropertyDefinition:militarySpecialtiesDataProperty];
@@ -652,12 +669,12 @@
     }
     
     // Create a special group for military Records
-    SCPropertyGroup *militaryRecordGroup = [SCPropertyGroup groupWithHeaderTitle:@"Service Record" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"serviceHistory", nil]];
+    SCPropertyGroup *militaryRecordGroup = [SCPropertyGroup groupWithHeaderTitle:@"Service Record" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"serviceHistory", nil]];
     
     [militaryServiceDef.propertyGroups insertGroup:militaryRecordGroup atIndex:0];
     
     // Create a special group for rest of service related variables
-    SCPropertyGroup *militaryServiceGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"awards",@"exposureToCombat", @"highestRank",@"serviceDisability",@"tsClearance",militarySpecialtiesPropName, @"notes", nil]];
+    SCPropertyGroup *militaryServiceGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"awards",@"exposureToCombat", @"highestRank",@"serviceDisability",@"tsClearance",militarySpecialtiesPropName, @"notes", nil]];
     
     [militaryServiceDef.propertyGroups insertGroup:militaryServiceGroup atIndex:1];
     
@@ -671,14 +688,15 @@
     
     SCPropertyDefinition *additionalVariablesPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"additionalVariables"];
     
-    additionalVariablesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:additionalVariableDef
-                                                                                               allowAddingItems:TRUE
-                                                                                             allowDeletingItems:TRUE
-                                                                                               allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
-    
+    additionalVariablesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:additionalVariableDef allowAddingItems:TRUE
+                                                                                        allowDeletingItems:TRUE
+                                                                                          allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];                 ;	
+
     SCPropertyDefinition *additionalVariableNamePropertyDef = [additionalVariableDef propertyDefinitionWithName:@"variableName"];
     additionalVariableNamePropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *variableNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:additionalVariableNameDef allowMultipleSelection:NO allowNoSelection:NO];
+	
+    
+    SCObjectSelectionAttributes *variableNameSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:additionalVariableNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     variableNameSelectionAttribs.allowAddingItems = YES;
     variableNameSelectionAttribs.allowDeletingItems = YES;
     variableNameSelectionAttribs.allowMovingItems = YES;
@@ -693,7 +711,7 @@
     SCPropertyDefinition *additionalVariableValuePropertyDef = [additionalVariableDef propertyDefinitionWithName:@"selectedValue"];
     additionalVariableValuePropertyDef.title=@"Selected Value(s)";
     additionalVariableValuePropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *variableValueSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:additionalVariableValueDef allowMultipleSelection:YES allowNoSelection:YES];
+	SCObjectSelectionAttributes *variableValueSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:additionalVariableValueDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
     variableValueSelectionAttribs.allowAddingItems = YES;
     variableValueSelectionAttribs.allowDeletingItems = YES;
     variableValueSelectionAttribs.allowMovingItems = YES;
@@ -718,8 +736,8 @@
                                        dictionaryWithObjects:[NSArray arrayWithObject:@"scale"] 
                                        forKeys:[NSArray arrayWithObject:@"70"]]; // 1 is the control tag
 	SCCustomPropertyDefinition *scaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"ScaleData"
-                                                                              withuiElementNibName:scaleDataCellNibName
-                                                                                withObjectBindings:scaleDataBindings];
+                                                                              uiElementNibName:scaleDataCellNibName
+                                                                                objectBindings:scaleDataBindings];
 	
     
     
@@ -727,7 +745,7 @@
     NSDictionary *sliderOneDataBindings = [NSDictionary 
                                            dictionaryWithObjects:[NSArray arrayWithObject:@"sliderOne"] 
                                            forKeys:[NSArray arrayWithObject:@"14"]]; // 1 is the control tag
-	SCCustomPropertyDefinition *sliderOneDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SliderOneData"                                                                                  withuiElementNibName:@"SliderOneDataCell_iPhone" withObjectBindings:sliderOneDataBindings];
+	SCCustomPropertyDefinition *sliderOneDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SliderOneData"                                                                                  uiElementNibName:@"SliderOneDataCell_iPhone" objectBindings:sliderOneDataBindings];
 	
     
     
@@ -737,8 +755,8 @@
                                            dictionaryWithObjects:[NSArray arrayWithObject:@"sliderTwo"] 
                                            forKeys:[NSArray arrayWithObject:@"14"]]; // 1 is the control tag
 	SCCustomPropertyDefinition *sliderTwoDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SliderTwoData"
-                                                                                  withuiElementNibName:@"SliderOneDataCell_iPhone" 
-                                                                                    withObjectBindings:sliderTwoDataBindings];
+                                                                                  uiElementNibName:@"SliderOneDataCell_iPhone" 
+                                                                                    objectBindings:sliderTwoDataBindings];
 	
     
     [additionalVariableDef insertPropertyDefinition:sliderTwoDataProperty atIndex:4];
@@ -774,14 +792,14 @@
     
         
     //Create a class definition for the interpersonalEntity
-    SCClassDefinition *interpersonalDef = [SCClassDefinition definitionWithEntityName:@"InterpersonalEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"relationship", @"notes"   , nil]];
+    SCEntityDefinition *interpersonalDef = [SCEntityDefinition definitionWithEntityName:@"InterpersonalEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"relationship", @"notes"   , nil]];
     
     //Create a class definition for the relationshipEntity
-    SCClassDefinition *relationshipDef = [SCClassDefinition definitionWithEntityName:@"RelationshipEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"relationship" , nil]];
+    SCEntityDefinition *relationshipDef = [SCEntityDefinition definitionWithEntityName:@"RelationshipEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"relationship" , nil]];
     
 
     
@@ -789,7 +807,7 @@
     
     //Create the property definition for the interpersonal property
     SCPropertyDefinition *interpersonalPropertyDef = [demographicProfileDef propertyDefinitionWithName:@"interpersonal"];
-    interpersonalPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:interpersonalDef
+    interpersonalPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:interpersonalDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
                                                                                     allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add interpersonal relationship" ]addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
@@ -808,7 +826,7 @@
     //set the property definition type to objects selection
 	
     interpersonalRelationshipPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *interpersonalRelationshipSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:relationshipDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *interpersonalRelationshipSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:relationshipDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     
     //set some addtional attributes
     interpersonalRelationshipSelectionAttribs.allowAddingItems = YES;
@@ -841,6 +859,46 @@
     interpersonalNotesPropertyDef.title=@"Notes";
     interpersonalNotesPropertyDef.autoValidate=NO;
     
+//       BOPickersDataSource *boPicker=[[BOPickersDataSource alloc]init];
+    
+    
+    //create a property definition for the sleep Quality property in the clientPresentations class
+    SCPropertyDefinition *visionPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"vision"];
+    
+    
+    
+    //set the property type to selection
+    visionPropertyDef.type = SCPropertyTypeSelection;
+    
+    //set the selection attributes and define the list of items to be selected
+    visionPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:
+                                                                               @"good/normal", @"contacts",@"glasses",
+                                                                               @"Mildly Nearsighted",@"Moderately Nearsighted", @"Very Nearsighted", @"Mildly Farsighted",@"Moderately Farsighted", @"Very Farsighted", @"Reading Glasses", @"Astigmatism", @"Legally Blind Corrected",@"Color Blind ",@"Completely Blind",    
+                                                                               nil]
+                                                       allowMultipleSelection:YES
+                                                             allowNoSelection:YES
+                                                        autoDismissDetailView:NO hideDetailViewNavigationBar:NO];
+    
+    //create a property definition for the sleep Quality property in the clientPresentations class
+    SCPropertyDefinition *hearingPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"hearing"];
+    
+    
+    
+    //set the property type to selection
+    hearingPropertyDef.type = SCPropertyTypeSelection;
+    
+    //set the selection attributes and define the list of items to be selected
+    hearingPropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:
+                                                                                @"good/normal right",@"good/normal left", @"hearing aid right",@"hearing aid left",@"mild difficulty right",@"moderate difficulty right",@"severe difficulty right",@"mild difficulty left",@"moderate difficulty left",@"severe difficulty left",@"deaf",    
+                                                                                nil]
+                                                       allowMultipleSelection:YES
+                                                             allowNoSelection:YES
+                                                        autoDismissDetailView:NO hideDetailViewNavigationBar:NO];
+    
+    
+
+    
+    
     
 //    NSDictionary *frequencyPickerDataBindings = [NSDictionary 
 //                                              dictionaryWithObjects:[NSArray arrayWithObjects:@"contactFrequencyUnit",@"contactFrequencyNumber",@"contactFrequencyUnitLength",@"Contact Frequency",nil] 
@@ -848,17 +906,17 @@
 //	
 //    
 //    NSString *frequencyPickerNibName;
-//    if ([SCHelper is_iPad]) 
+//    if ([SCUtilities is_iPad]) 
 //        frequencyPickerNibName=[NSString stringWithString:@"FrequencyPickerCell_iPad"];
 //    else
 //        frequencyPickerNibName=[NSString stringWithString:@"FrequencyPickerCell_iPhone"];
 //    
-//    SCCustomPropertyDefinition *frequencyProperty = [SCCustomPropertyDefinition definitionWithName:@"ContactFrequency" withuiElementNibName:frequencyPickerNibName withObjectBindings:frequencyPickerDataBindings];
+//    SCCustomPropertyDefinition *frequencyProperty = [SCCustomPropertyDefinition definitionWithName:@"ContactFrequency" uiElementNibName:frequencyPickerNibName objectBindings:frequencyPickerDataBindings];
 //	[interpersonalDef insertPropertyDefinition:frequencyProperty atIndex:1];
 //    
 //    NSString *longTimePickerCellNibName;
 //    
-//    if([SCHelper is_iPad])
+//    if([SCUtilities is_iPad])
 //        longTimePickerCellNibName=[NSString stringWithString:@"LongTimePickerCell_iPad"];
 //    else
 //        longTimePickerCellNibName=[NSString stringWithString:@"LongTimePickerCell_iPhone"];
@@ -871,7 +929,7 @@
 //                                                forKeys:[NSArray arrayWithObjects:@"40" , @"41",@"42",   nil]]; // 40, 41,42 are the control tags
 //	
 //    //create the custom property definition for addtional time
-//    SCCustomPropertyDefinition *durationPropertyDef = [SCCustomPropertyDefinition definitionWithName:@"Duration" withuiElementNibName:longTimePickerCellNibName  withObjectBindings:durationDataBindings];	
+//    SCCustomPropertyDefinition *durationPropertyDef = [SCCustomPropertyDefinition definitionWithName:@"Duration" uiElementNibName:longTimePickerCellNibName  objectBindings:durationDataBindings];	
 //    
 //    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
 //    durationPropertyDef.autoValidate=FALSE;
@@ -879,7 +937,7 @@
 //       
 //    [interpersonalDef insertPropertyDefinition:durationPropertyDef atIndex:2];
     
-//    SCCustomPropertyDefinition *titleProperty = [SCCustomPropertyDefinition definitionWithName:@"Time of Day" withuiElementClass:[ TimeOfDayPickerCell class] withObjectBindings:nil];
+//    SCCustomPropertyDefinition *titleProperty = [SCCustomPropertyDefinition definitionWithName:@"Time of Day" uiElementClass:[ TimeOfDayPickerCell class] objectBindings:nil];
 //	[interpersonalDef insertPropertyDefinition:titleProperty atIndex:3];
 
     

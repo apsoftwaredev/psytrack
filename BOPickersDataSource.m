@@ -391,7 +391,7 @@ NSMutableArray *viewArray = [NSMutableArray array];
 
     if ([propertyNameValue isEqualToString:@"vision"]) {
         [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
-                                        @"good/normal", 
+                                        @"good/normal", @"contacts",@"glasses",
                                         @"Mildly Nearsighted",@"Moderately Nearsighted", @"Very Nearsighted", @"Mildly Farsighted",@"Moderately Farsighted", @"Very Farsighted", @"Reading Glasses", @"Astigmatism", @"Legally Blind Corrected",@"Color Blind ",@"Completely Blind",    
                                         nil]];
         
@@ -406,6 +406,16 @@ NSMutableArray *viewArray = [NSMutableArray array];
         
         return [viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
+    
+    if ([propertyNameValue isEqualToString:@"hearing"]) {
+        [viewArray addObjectsFromArray:[NSArray arrayWithObjects:
+                                        @"good/normal right",@"good/normal left", @"hearing aid right",@"hearing aid left",@"mild difficulty right",@"moderate difficulty right",@"severe difficulty right",@"mild difficulty left",@"moderate difficulty left",@"severe difficulty left",@"deaf",    
+                                        nil]];
+        
+        return [viewArray sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    }
+
+    
     return viewArray;
 }
 

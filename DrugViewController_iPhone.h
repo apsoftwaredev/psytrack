@@ -16,18 +16,18 @@
  *
  */
 #import <UIKit/UIKit.h>
-#import "SCTableViewModel.h"
+
 #import "DrugViewController_Shared.h"
 #import "UIDownloadBar.h"
 #import "DrugNameObjectSelectionCell.h"
 #import "DrugProductEntity.h"
-@interface DrugViewController_iPhone : UIViewController <SCTableViewModelDelegate, SCTableViewCellDelegate,UIDownloadBarDelegate> {
+@interface DrugViewController_iPhone : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, UIDownloadBarDelegate > {
     
     
   	UISearchBar *searchBar;
-    UITableView *tableView;
+//    UITableView *tableView;
     
-	SCArrayOfObjectsModel *tableModel;
+//	SCArrayOfObjectsModel *tableModel;
     NSString *drugApplNo;
     NSString *drugProductNo;
     BOOL isInDetailSubview;
@@ -52,9 +52,9 @@
     DrugProductEntity *currentlySelectedDrug;
     
 }
-@property (nonatomic, strong)  SCArrayOfObjectsModel *tableModel;
+//@property (nonatomic, strong)  SCArrayOfObjectsModel *tableModel;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
+//@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIDownloadBar *downloadBar;
 @property (nonatomic, strong) IBOutlet UILabel *downloadLabel;
 @property (nonatomic, strong) IBOutlet UILabel *downloadBytesLabel;
@@ -73,8 +73,8 @@
 - (void) connectToRemoteDrugFile;
 -(IBAction)startCheckingForUpdate:(id)sender;
 -(IBAction)flashCheckingLabel:(id)sender;
-
-
+-(IBAction)StopDownloadTapped:(id)sender;
+-(IBAction)ContinueDownloadTapped:(id)sender;
 -(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(DrugNameObjectSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController applNo:(NSString *)applicationNumber productNo:(NSString *)productNumber;
 -(void)doneButtonTapped;
 -(void)cancelButtonTapped;

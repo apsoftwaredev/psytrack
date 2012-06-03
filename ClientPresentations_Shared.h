@@ -17,21 +17,21 @@
  */
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "SCTableViewModel.h"
+#import "InstrumentEntity.h"
 
-@interface ClientPresentations_Shared : NSObject <SCTableViewModelDelegate,SCTableViewControllerDelegate>{
+@interface ClientPresentations_Shared : NSObject <SCTableViewModelDelegate,SCTableViewModelDataSource, SCTableViewControllerDelegate>{
 
 
-     SCArrayOfObjectsModel *tableModel;
+//     SCArrayOfObjectsModel *tableModel;
 
-     SCClassDefinition *clientPresentationDef;
-
+     SCEntityDefinition *clientPresentationDef;
+    InstrumentEntity *selectedInstrument;
 
 }
 
 
-@property (strong, nonatomic) IBOutlet SCClassDefinition *clientPresentationDef;
-@property (strong, nonatomic) IBOutlet SCArrayOfObjectsModel *tableModel;
+@property (strong, nonatomic) IBOutlet SCEntityDefinition *clientPresentationDef;
+//@property (strong, nonatomic) IBOutlet SCArrayOfObjectsModel *tableModel;
 
 @property (strong, nonatomic)IBOutlet NSDate *serviceDatePickerDate;
 

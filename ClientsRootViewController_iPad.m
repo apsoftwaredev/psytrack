@@ -1,5 +1,5 @@
 /*
- *  ClientViewController_iPad.m
+ *  ClientRootViewController_iPad.m
  *  psyTrack Clinician Tools
  *  Version: 1.0
  *
@@ -26,12 +26,12 @@
 #import "DrugNameObjectSelectionCell.h"
 
 @implementation ClientsRootViewController_iPad
-@synthesize clientsDetailViewController_iPad=_clientsDetailViewController_iPad;
+//@synthesize clientsDetailViewController_iPad=_clientsDetailViewController_iPad;
 
 @synthesize managedObjectContext=_managedObjectContext;
-@synthesize tableView=_tableView;
+//@synthesize tableView=_tableView;
 @synthesize searchBar;
-@synthesize tableModel;
+//@synthesize tableModel;
 
 
 
@@ -43,24 +43,19 @@
 
     [super viewDidUnload];
     
-    self.tableModel=nil;
+//    self.tableModel=nil;
 
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    self.tableModel = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
-    if(tableModel)
-    {
-        [self.tableModel replaceModeledTableViewWith:self.tableView];
-        return;
-    }
+    
     
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
     managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
     
-//    // Set up the edit and add buttons.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+////    // Set up the edit and add buttons.
+//    self.navigationItem.leftBarButtonItem = self.editButtonItem;
 //    
 //  
     
@@ -81,43 +76,91 @@
     
     [clientsViewController_Shared setupTheClientsViewModelUsingSTV];       
 
+    objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:clientsViewController_Shared.clientDef];
+    if ([SCUtilities is_iPad]) {
+        self.navigationBarType = SCNavigationBarTypeEditLeft;
+    }
+    else {
+        self.navigationBarType = SCNavigationBarTypeAddRightEditLeft;
+    }
+    
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    objectsModel.editButtonItem = self.navigationItem.leftBarButtonItem;
+    //        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+    //        self.navigationItem.rightBarButtonItem = addButton;
+    objectsModel.addButtonItem = self.navigationItem.rightBarButtonItem;
+    objectsModel.autoAssignDelegateForDetailModels=TRUE;
+    objectsModel.autoAssignDataSourceForDetailModels=TRUE;
+    if (![SCUtilities is_iPad]) {
+        
+        self.tableView.backgroundColor=[UIColor clearColor];
+        //            UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
+        //            self.navigationItem.rightBarButtonItem = addButton; 
+        
+        
+        objectsModel.addButtonItem=self.navigationItem.rightBarButtonItem;
+        
+        
+        
+    }
     
     
-     NSPredicate *currentClientsPredicate=[NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
-    
-    
-   self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
-                                             withEntityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:currentClientsPredicate];	
-  
+   
+    //     objectsModel.autoSortSections = TRUE;
+    //        self.clinicianDef.keyPropertyName=@"firstName";
+       
 
 
-    
-   	
-    
-    self.tableModel.searchBar = self.searchBar;
-	self.tableModel.searchPropertyName = @"clientIDCode;notes";
-    
-    self.tableModel.editButtonItem = self.navigationItem.leftBarButtonItem;
-//    tableModel.autoAssignDelegateForDetailModels=TRUE;
-//    tableModel.autoAssignDataSourceForDetailModels=TRUE;
-    self.tableModel.allowMovingItems=TRUE;
-    
+
+// Instantiate the tabel model
+//	self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self withEntityClassDefinition:self.clinicianDef];	
+//    
     [self.tableView setBackgroundView:nil];
     [self.tableView setBackgroundView:[[UIView alloc] init]];
-    self.tableView.backgroundColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]; // Make the table view application backgound color (turquose)
-    
-    
-//    tableModel.autoSortSections = TRUE;  
-    self.tableModel.sectionIndexTitles = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", nil];
 
-    self.tableModel.delegate=self;
-    
+[self.view setBackgroundColor:[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]];
 
+
+    objectsModel.searchBar = self.searchBar;
+    objectsModel.addButtonItem = self.addButton;
+
+
+
+// Replace the default model with the new objectsModel
+//    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"drugName Matches %@",@"a"];
+objectsModel.enablePullToRefresh = TRUE;
+objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
+
+
+//    SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"firstName" sortAscending:YES filterPredicate:nil];
+
+
+//    dataFetchOptions.batchStartingOffset=10;
+//    dataFetchOptions.batchSize=10;
+//    
+//    
+//    objectsModel.dataFetchOptions=dataFetchOptions;
+    objectsModel.addButtonItem=objectsModel.detailViewController.navigationItem.rightBarButtonItem;
     
+//    objectsModel.addButtonItem = self.addButton;
+	objectsModel.itemsAccessoryType = UITableViewCellAccessoryNone;
+    objectsModel.detailViewControllerOptions.modalPresentationStyle = UIModalPresentationPageSheet;
+    objectsModel.detailViewController=self.tableViewModel.detailViewController;
+    ClientsDetailViewController_iPad *clientDetailViewController=(ClientsDetailViewController_iPad *)objectsModel.detailViewController;
+    
+    clientDetailViewController.navigationBarType=SCNavigationBarTypeAddRight;
+    
+    objectsModel.addButtonItem=clientDetailViewController.navigationItem.rightBarButtonItem;
+    //    self.tableView.backgroundColor=[UIColor clearColor]; // Make the table view application backgound color (turquose)
+    
+    //    self.tableView.backgroundColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]; // Make the table view application backgound color (turquose)
+    
+    self.tableViewModel = objectsModel;
 //        
 }
 
-    
+
+  
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -126,57 +169,59 @@
 }
 
 
-
-#pragma mark -
-#pragma mark SCTableViewModelDataSource methods
-
-// Return a custom detail model that will be used instead of Sensible TableView's auto generated one
-- (SCTableViewModel *)tableViewModel:(SCTableViewModel *)tableViewModel
-customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	
-    
-    SCArrayOfObjectsModel *detailModel = [SCArrayOfObjectsModel tableViewModelWithTableView:self.clientsDetailViewController_iPad.tableView
-                                                                         withViewController:self.clientsDetailViewController_iPad];
-    detailModel.delegate=self;
-    
-    
-   
-    
-	return detailModel;
-}
-
-
-
-
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+//
+//#pragma mark -
+//#pragma mark SCTableViewModelDataSource methods
+//
+//// Return a custom detail model that will be used instead of Sensible TableView's auto generated one
+//- (SCTableViewModel *)tableViewModel:(SCTableViewModel *)tableViewModel
+//customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//	
+//    
+//    SCArrayOfObjectsModel *detailModel = [SCArrayOfObjectsModel tableViewModelWithTableView:self.clientsDetailViewController_iPad.tableView
+//                                                                         withViewController:self.clientsDetailViewController_iPad];
+//    detailModel.delegate=self;
 //    
 //    
-    if (tableViewModel.tag==0) {
-        
-        
-        detailTableViewModel.tag=2;
-        
-    }
-    else{
-        detailTableViewModel.tag=tableViewModel.tag+1;
-    }
-    
-    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-        
+//   
+//    
+//	return detailModel;
+//}
 
-    [detailTableViewModel.modeledTableView setBackgroundView:nil];
-    [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-    }
-    detailTableViewModel.delegate=self;
-    //NSLog(@"detail model created for row at index path detailtable model tag is %i", detailTableViewModel.tag);
-}
+
+
+
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+////    
+////    
+//    if (tableViewModel.tag==0) {
+//        
+//        
+//        detailTableViewModel.tag=2;
+//        
+//    }
+//    else{
+//        detailTableViewModel.tag=tableViewModel.tag+1;
+//    }
+//    
+//    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+//        
+//
+//    [detailTableViewModel.modeledTableView setBackgroundView:nil];
+//    [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+//    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
+//    }
+//    detailTableViewModel.delegate=self;
+//    //NSLog(@"detail model created for row at index path detailtable model tag is %i", detailTableViewModel.tag);
+//}
 //
 
 
 - (NSString *)tableViewModel:(SCArrayOfItemsModel *)tableViewModel sectionHeaderTitleForItem:(NSObject *)item AtIndex:(NSUInteger)index
 {
+    if (tableViewModel.tag==0) {
+   
 	// Cast not technically neccessary, done just for clarity
 	NSManagedObject *managedObject = (NSManagedObject *)item;
 	
@@ -184,17 +229,21 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
 	
 	// Return first charcter of objectName
 	return [[objectName substringToIndex:1] uppercaseString];
+    }
+    else {
+        return nil;
+    }
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
-    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-        
-        
-        [detailTableViewModel.modeledTableView setBackgroundView:nil];
-        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-    }
+//    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+//        
+//        
+//        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+//        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+//        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
+//    }
     //NSLog(@"tabel veiw modoel %i",tableViewModel.tag);
     
     if (tableViewModel.tag==4 ) {
@@ -243,7 +292,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                     
                 }
                 else {
-                    [detailTableViewModel.modeledTableView reloadData];
+//                    [detailTableViewModel.modeledTableView reloadData];
                 }
             }
         }  
@@ -286,32 +335,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
             }
         }
     }
-    if (tableViewModel.tag==3) {
-        SCTableViewSection *section =[tableViewModel sectionAtIndex:indexPath.section];
-        SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:0];
-        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-        
-        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&section.cellCount>3){
-            
-            SCDateCell *discontinuedCell =(SCDateCell *) [section cellAtIndex:3];
-            
-            
-            //NSLog(@"custom button tapped discontinued cell text is %@",discontinuedCell.textLabel.text);
-            //NSLog(@"key bindings value is %@",[discontinuedCell.keyBindings valueForKey:@"discontinued"]);
-            //NSLog(@"tabel model key bindings value is");
-            
-            if (discontinuedCell.label.text.length) {
-                
-                [discontinuedCell.boundObject setNilValueForKey:@"discontinued"];
-                [discontinuedCell reloadBoundValue]; 
-                
-            }
-            
-            
-            
-        }
-    }
-
+    
 }
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -329,53 +353,92 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    
+    UIColor *backgroundColor=nil;
+    if(indexPath.row==NSNotFound|| tableModel.tag>0)
+    {
+        backgroundColor=(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor;
+    }
+    else {
+        backgroundColor=[UIColor clearColor];
+    }
+    
+    if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
+        
+        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+        UIView *view=[[UIView alloc]init];
+        [detailTableViewModel.modeledTableView setBackgroundView:view];
+        [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
+        
+        
+    }
+    
 
-    if (tableViewModel.sectionCount) {
-        //            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0]
-        ;
-        //            if (detailSectionZero.cellCount) {
-        //                
-        //                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-        //                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-        ////                
-        //                if (cellManagedObject&& [cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"])
-        //                {
-        //                    sectionContainsMedLog=TRUE;
-        //                }
-        //                
-        //            }
-        SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];;
-        
-        
-        
-        
-        
-//        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-        
-        //NSLog(@"index of cell is %i",[section indexForCell:cell]);
-        if (!cell ||(indexPath.row==0)) {
-            
-            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
-            SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-            
-            
-            
-            NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-            //NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-            //NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
-            if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
-                
-                [detailTableViewModel removeSectionAtIndex:1];
-                
-                
-            }
-            else {
-                [detailTableViewModel.modeledTableView reloadData];
-            }
-        }
-    }  
-      
+//    if (tableModel.tag==4&&tableModel.sectionCount ) {
+//        //            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0]
+////        ;
+//        //            if (detailSectionZero.cellCount) {
+//        //                
+//        //                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
+//        //                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
+//        ////                
+//        //                if (cellManagedObject&& [cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"])
+//        //                {
+//        //                    sectionContainsMedLog=TRUE;
+//        //                }
+//        //                
+//        //            }
+//        SCTableViewCell *cell=nil;
+//        if (indexPath.row!=NSNotFound) {
+//            cell=[tableModel cellAtIndexPath:indexPath];
+//        }
+//      
+//        
+//        
+//        
+//        
+//        
+//        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:0];
+//        
+//        //NSLog(@"index of cell is %i",[section indexForCell:cell]);
+//        if ((!cell &&section.cellCount==1) ||(indexPath.row==0)) {
+//            
+//            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
+//            
+//            if (detailSectionZero.cellCount) {
+//              
+//            SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
+//            
+//            
+//            
+//            NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
+//
+//                NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
+//                
+//                if ([cellManagedObject respondsToSelector:@selector(entity)]) {
+//               
+//                
+//                    if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2 ) {
+//                        
+//                        SCTableViewSection *sectionOne=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:1];
+//                        
+//                        [sectionOne removeAllCells];
+//                        [detailTableViewModel removeSectionAtIndex:1];
+//                        
+//                        
+//                    }
+//                    else {
+//        //                [detailTableViewModel.modeledTableView reloadData];
+//                    }
+//                }
+//            }
+//        }
+//    }  
+//      
 
     
    
@@ -475,7 +538,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
 //    
 //}
 
-//- (SCControlCell *)tableViewModel:(SCTableViewModel *)tableViewModel
+//- (SCCustomCell *)tableViewModel:(SCTableViewModel *)tableViewModel
 //	  customCellForRowAtIndexPath:(NSIndexPath *)indexPath
 //{
 //    SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
@@ -529,10 +592,13 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                 
                 
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
+                
+                if (cellManagedObject&&[cellManagedObject respondsToSelector:@selector(entity)]) {
+                
+                    if ([cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
                     
                 {
-                    if ( ![SCHelper is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
+                    if ( ![SCUtilities is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
                     {
                         UIButton *button=(UIButton *)[cell viewWithTag:300];
                         [button setTitle:@"Call Number" forState:UIControlStateNormal];
@@ -560,17 +626,8 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                    
                 }
                 
-                if (cell.tag==4&&cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"] && [cell isKindOfClass:[ButtonCell class]]) 
-                    
-                {
-                    
-                    UIButton *button=(UIButton *)[cell viewWithTag:300];
-                    [button setTitle:@"Clear Discontinued Date" forState:UIControlStateNormal];
                 
-                    break;
-                }
-                //NSLog(@"cell kind of class is %@",cell.class);
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]) 
+                if ([cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]) 
                     
                 {
                     
@@ -579,7 +636,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                     textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
                     break;
                 }
-            }
+                }}
         }
            
             break;
@@ -588,10 +645,12 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
             
             
             if (section.cellCount&&cell.boundObject) {
-
-              
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"])
+                
+                if (cellManagedObject&&[cellManagedObject respondsToSelector:@selector(entity)]) {
+              
+               
+                if ([cellManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"])
                     {
                     UIView *sliderView = [cell viewWithTag:14];
                     
@@ -645,6 +704,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
         
             
         }
+        }
             break;
             
         case 5:
@@ -653,18 +713,19 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                 
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                 
+                if (cellManagedObject&&[cellManagedObject respondsToSelector:@selector(entity)]) { 
                 //NSLog(@"entity name is %@",cellManagedObject.entity.name);
-                if (cell.tag==1 && [cell isKindOfClass:[SCControlCell class]]&& cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
-                {
-                    
-                    UIView *scaleView = [cell viewWithTag:70];
-                    if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
+                    if (cell.tag==1 && [cell isKindOfClass:[SCCustomCell class]]&& [cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
+                    {
                         
-                        UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
-                        fluencyLevelLabel.text=@"Severity Level:";
-                        
+                        UIView *scaleView = [cell viewWithTag:70];
+                        if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
+                            
+                            UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
+                            fluencyLevelLabel.text=@"Severity Level:";
+                            
+                        }
                     }
-                }
                 
             }
             
@@ -680,10 +741,10 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
                 //NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
                 //NSLog(@"cell  class is %@",[cellOne class]);
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
+                if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                     
                     
-                    if ([cell isKindOfClass:[SCControlCell class]]) 
+                    if ([cell isKindOfClass:[SCCustomCell class]]) 
                     {
                         UIView *scaleView = [cell viewWithTag:70];
                         if ([scaleView isKindOfClass:[UISegmentedControl class]]) 
@@ -706,7 +767,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
 
                 
             }
-            
+            } 
         }
             break;
             
@@ -740,7 +801,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
         DrugNameObjectSelectionCell *drugNameObjectSelectionCell=(DrugNameObjectSelectionCell *)cell;
         
         if (drugNameObjectSelectionCell.drugProduct) {
-            SCTableViewCell *drugNameCell=(SCTableViewCell*)[tableViewModel cellAfterCell:cell rewindIfLastCell:NO];
+            SCTableViewCell *drugNameCell=(SCTableViewCell*)[tableViewModel cellAfterCell:cell rewind:NO];
             
             if ([drugNameCell isKindOfClass:[SCTextFieldCell class]] ) {
                 SCTextFieldCell *textFieldCell=(SCTextFieldCell *)drugNameCell;
@@ -858,7 +919,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
         {
             
             //identify the if the cell has a managedObject
-            if (managedObject) {
+            if (managedObject &&[managedObject respondsToSelector:@selector(entity)]) {
                 
                 
                 
@@ -973,7 +1034,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
             
             
             //identify the if the cell has a managedObject
-            if (managedObject) {
+            if (managedObject && [managedObject respondsToSelector:@selector(entity)]) {
                 
                 
                 
@@ -1086,7 +1147,7 @@ customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
                 
             }
             //identify the if the cell has a managedObject
-            if (managedObject) {
+            if (managedObject && [managedObject respondsToSelector:@selector(entity)]) {
                 
                 
                 
@@ -1161,50 +1222,50 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     //NSLog(@"scope changed");
     if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
     {
-        SCArrayOfObjectsModel *objectsModel = (SCArrayOfObjectsModel *)tableViewModel;
-        //        if (objectsModel.sectionCount>0) {
-        //       SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-        //        
-        //        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
-        //            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)section;
-        //            
-        //                
-        //               
-        //                SCTableViewCell *cell=(SCTableViewCell *)[objectsModel cellAtIndexPath: objectSelectionSection.selectedCellIndexPath];
-        //                
-        //                
-        //                currentlySelectedClient= (ClientEntity *) cell.boundObject;
-        //                
-        //                
-        //                
-        //            
-        //            
-        //            
-        //        }
-        //        }
         
+//        if (objectsModel.sectionCount>0) {
+//            SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
+//            
+//            if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+//                SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)section;
+//                
+//                
+//                
+//                SCTableViewCell *cell=(SCTableViewCell *)[objectsModel cellAtIndexPath: objectSelectionSection.selectedCellIndexPath];
+//                
+//                
+//                currentlySelectedClient= (ClientEntity *) cell.boundObject;
+//                
+//                
+//                
+//                
+//                
+//                
+//            }
+//        }
+        SCDataFetchOptions *dataFetchOptions=(SCDataFetchOptions *)objectsModel.dataFetchOptions;
         [self.searchBar setSelectedScopeButtonIndex:selectedScope];
         
         switch (selectedScope) {
             case 0: //current
-                objectsModel.itemsPredicate = [NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
+                dataFetchOptions.filterPredicate = [NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
                 //NSLog(@"case 1");
                 break;
                 
             default:
-                objectsModel.itemsPredicate = nil;
+                dataFetchOptions.filterPredicate = nil;
                 //NSLog(@"case default");
                 
                 break;
         }
         
         
-        [tableViewModel reloadBoundValues];
+        [objectsModel reloadBoundValues];
         
         
-        [tableViewModel.modeledTableView reloadData];
+        [objectsModel.modeledTableView reloadData];
         
-     
+        
         //         if (objectsModel.sectionCount>0) {
         //        if (isInDetailSubview) {
         //        
@@ -1232,17 +1293,17 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 }
 
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
+- (void)tableViewModel:(SCTableViewModel *)tableModel didAddSectionAtIndex:(NSUInteger)index
 {
     
-    SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
+    SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:index];
     if ([section.headerTitle isEqualToString:@"De-Identified Client Data"]) {
-        tableViewModel.tag=1;
+        tableModel.tag=1;
     }
     
     
    
-    if (tableViewModel.tag==1 &&index==0 &&section.cellCount>3) {
+    if (tableModel.tag==1 &&index==0 &&section.cellCount>3) {
         [section insertCell:[SCLabelCell cellWithText:@"Age"] atIndex:2];
         [section insertCell:[SCLabelCell cellWithText:@"Wechsler Age"] atIndex:3];
         
@@ -1289,7 +1350,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     //                }
     //
     //    }
-    if (tableViewModel.tag==3 &&index==0) {
+    if (tableModel.tag==3 &&index==0) {
         
         
         if (section.cellCount>1) {
@@ -1299,7 +1360,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             //NSLog(@"section bound object entity is %@",cellOneBoundObject);
             //NSLog(@"section bound object entity name is %@",cellOneBoundObject.entity.name);
-            if (cellOneBoundObject &&[cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
+            if (cellOneBoundObject &&[cellOneBoundObject respondsToSelector:@selector(entity)] &&[cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
             
                 
                 section.footerTitle=@"Select the drug then add the current dosage in the Med Logs section.";
@@ -1539,53 +1600,138 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
             
+            if (notesManagedObject && [notesManagedObject respondsToSelector:@selector(entity)]) {
             
-            if (notesManagedObject &&[ notesManagedObject.entity.name   isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
-                EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
-                
-                if (encryptedNoteCell.textView.text.length) 
-                {
-                    valid=TRUE;
-                }
-                else 
-                {
-                    valid=FALSE;
-                }
-                
-            }
-            //here it is not the notes cell
-            if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[notesCell isKindOfClass:[SCTextFieldCell class]]) {
-                SCTextFieldCell *drugNameCell=(SCTextFieldCell *)notesCell;
-                
-                if (drugNameCell.textField.text.length) 
-                {
-                    valid=TRUE;
-                }
-                else 
-                {
-                    valid=FALSE;
-                }
-                
-            }
+                if ([ notesManagedObject.entity.name   isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+                    EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
+                    
+                    if (encryptedNoteCell.textView.text.length) 
+                    {
+                        valid=TRUE;
+                    }
+                    else 
+                    {
+                        valid=FALSE;
+                    }
+                    
+                } 
             
-            if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
-                EncryptedSCTextFieldCell *phoneNumberCell=(EncryptedSCTextFieldCell *)notesCell;
-                
-                if (phoneNumberCell.textField.text.length) 
-                {
-                    valid=TRUE;
-                    valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
+    
+                //here it is not the notes cell
+                if ([notesManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[notesCell isKindOfClass:[SCTextFieldCell class]]) {
+                    SCTextFieldCell *drugNameCell=(SCTextFieldCell *)notesCell;
+                    
+                    if (drugNameCell.textField.text.length) 
+                    {
+                        valid=TRUE;
+                    }
+                    else 
+                    {
+                        valid=FALSE;
+                    }
+                    
                 }
-                else 
-                {
-                    valid=FALSE;
+            
+                if ([notesManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
+                    EncryptedSCTextFieldCell *phoneNumberCell=(EncryptedSCTextFieldCell *)notesCell;
+                    
+                    if (phoneNumberCell.textField.text.length) 
+                    {
+                        valid=TRUE;
+                        valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
+                    }
+                    else 
+                    {
+                        valid=FALSE;
+                    }
+                    
                 }
-                
+            
             }
+        
+            
+            
+            if (section.cellCount>6) 
+            {
+            
+                //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
+                
+                
+                SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+                
+                if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&[cell isKindOfClass:[SCTextFieldCell class]]) {
+                    SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
+                    NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];;
+                    
+                    NSNumber *number=[numberFormatter numberFromString:textFieldCell.textField.text];
+                    NSLog(@"cell tag is %i",cell.tag);
+                    NSLog(@"text inpou is %@",textFieldCell.textField.text);
+                    if (textFieldCell.textField.text.length) {
+                   
+                    switch (cell.tag) {
+                        case 3:
+                        {
+                            if ([textFieldCell.textField.text integerValue]<500 &&number) {
+                                valid=YES;
+                            }
+                            else {
+                                valid=NO;
+                            }
+                        }
+                            break;
+                        case 4:
+                        {
+                            if ([textFieldCell.textField.text integerValue]<500 &&number) {
+                                valid=YES;
+                            }
+                            else {
+                                valid=NO;
+                            }
+                        }
+                            break;
+                        case 5:
+                        {
+                            if ( [textFieldCell.textField.text integerValue]<500 &&number) {
+                                valid=YES;
+                            }
+                            else {
+                                valid=NO;
+                            }
+                        
+                        }
+                            break;
+                        case 6:
+                        {
+                            if ([textFieldCell.textField.text integerValue]< 130 &&number) {
+                                valid=YES;
+                            }
+                            else {
+                                valid=NO;
+                            }
+                        
+                        }
+                            break;
+                        default:
+                            break;
+                    }                    
+                    
+                        
+                    }
+                    
+                    
+                                        
+                    
+                    
+                }
+            }        
 
+            
+            
+            
+            
+            
         }
-        
-        
     }
     if (tableViewModel.tag==5&& tableViewModel.sectionCount){
         
@@ -1599,7 +1745,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             //NSLog(@"first cell class is %@",[firstCell class]);
             
-            if (firstCellManagedObject &&[firstCellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"]&&[firstCell isKindOfClass:[SCObjectSelectionCell class]]) {
+            if (firstCellManagedObject &&[firstCellManagedObject respondsToSelector:@selector(entity)]&&[firstCellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"]&&[firstCell isKindOfClass:[SCObjectSelectionCell class]]) {
                 SCObjectSelectionCell *symptomCell=(SCObjectSelectionCell *)firstCell;
                 
                 if (symptomCell.label.text.length) 
@@ -1631,7 +1777,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
             //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
-            if (cellManagedObject && [cellManagedObject.entity.name  isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (cellManagedObject &&  [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject.entity.name  isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
@@ -1650,67 +1796,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         }        
     }
     
-    if (tableViewModel.tag==3&& tableViewModel.sectionCount){
-        
-        
-        
-        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
-        
-        if (section.cellCount>6) 
-        {
-            SCTableViewCell *cellSystolic=(SCTableViewCell *)[section cellAtIndex:3];
-            SCTableViewCell *cellDiastolic=(SCTableViewCell *)[section cellAtIndex:4];
-            SCTableViewCell *cellHeartRate=(SCTableViewCell *)[section cellAtIndex:5];
-            SCTableViewCell *cellTemperature=(SCTableViewCell *)[section cellAtIndex:6];
-            NSManagedObject *cellManagedObject=(NSManagedObject *)cellSystolic.boundObject;
-            //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
-            
-            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"VitalsEntity"]) {
-                SCTextFieldCell *cellSystolicTF=(SCTextFieldCell *)cellSystolic;
-                SCTextFieldCell *cellDiastolicTF=(SCTextFieldCell *)cellDiastolic;
-                SCTextFieldCell *cellHeartRateTF=(SCTextFieldCell *)cellHeartRate;
-                SCTextFieldCell *cellTemperatureTF=(SCTextFieldCell *)cellTemperature;
-                
-                NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];;
-                
-                NSNumber *systolicNumber=[numberFormatter numberFromString:cellSystolicTF.textField.text];
-                NSNumber *diastolicNumber=[numberFormatter numberFromString:cellDiastolicTF.textField.text];
-                NSNumber *heartRateNumber=[numberFormatter numberFromString:cellHeartRateTF.textField.text];
-                NSNumber *temperatureNumber=[numberFormatter numberFromString:cellTemperatureTF.textField.text];
-                
-                
-                
-                if (cellSystolicTF.textField.text.length && [cellSystolicTF.textField.text integerValue]<500 &&systolicNumber) {
-                    valid=YES;
-                }
-                else if (cellSystolicTF.textField.text.length||(cellSystolicTF.textField.text.length&&!systolicNumber)){
-                    valid=NO;
-                }
-                if (cellDiastolicTF.textField.text.length && [cellDiastolicTF.textField.text integerValue]<500 &&diastolicNumber) {
-                    valid=YES;
-                }
-                else if(cellDiastolicTF.textField.text.length||(cellDiastolicTF.textField.text.length&&!diastolicNumber)){
-                    valid=NO;
-                }
-                if (cellHeartRateTF.textField.text.length && [cellHeartRateTF.textField.text integerValue]<500 &&heartRateNumber) {
-                    valid=YES;
-                }
-                else if(cellHeartRateTF.textField.text.length ||(cellHeartRateTF.textField.text.length&&!heartRateNumber)){
-                    valid=NO;
-                }
-                
-                if (cellTemperatureTF.textField.text.length && [cellTemperatureTF.textField.text integerValue]< 130 &&temperatureNumber) {
-                    valid=YES;
-                }
-                else if(cellTemperatureTF.textField.text.length ||(!temperatureNumber && cellTemperatureTF.textField.text.length)){
-                    valid=NO;
-                }
-                
-                
-                
-            }
-        }        
-    }
+
     
     
     return valid;
@@ -1736,13 +1822,6 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     }
 }
 
-#pragma mark -
-#pragma button actions
-
-- (void)addButtonTapped
-{
-    [tableModel dispatchAddNewItemEvent];
-}
 
 
 @end

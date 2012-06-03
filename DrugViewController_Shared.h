@@ -19,7 +19,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import "SCTableViewModel.h"
+
 
 
 @interface DrugViewController_Shared : NSObject <SCTableViewModelDelegate>{
@@ -28,7 +28,7 @@
     
 }
 
-@property (strong,nonatomic)IBOutlet SCClassDefinition *drugDef;
+@property (strong,nonatomic)IBOutlet SCEntityDefinition *drugDef;
 @property (strong , nonatomic) IBOutlet NSArray *drugsArray;
 
 -(id)setupTheDrugsViewModelUsingSTV;

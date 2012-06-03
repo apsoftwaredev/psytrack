@@ -15,10 +15,10 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewCell.h"
 
+#import <UIKit/UIKit.h>
 
-@interface ButtonCell : SCControlCell
+@interface ButtonCell : SCCustomCell
 {
     UIButton *button_;
     NSString *buttonText;

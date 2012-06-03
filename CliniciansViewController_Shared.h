@@ -15,7 +15,7 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewModel.h"
+
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "ClinicianEntity.h"
@@ -24,13 +24,13 @@ static NSInteger const kAlertTagFoundExistingPersonWithName = 1;
 static NSInteger const kAlertTagFoundExistingPeopleWithName = 2;
 
 
-@interface CliniciansViewController_Shared :  UIViewController <SCTableViewModelDataSource, SCTableViewModelDelegate,SCTableViewCellDelegate,UIAlertViewDelegate, UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate> {
+@interface CliniciansViewController_Shared :  SCViewController <SCTableViewModelDataSource,SCTableViewModelDelegate,UIAlertViewDelegate,UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate,UITableViewDelegate> {
 
    
 
 NSManagedObjectContext *managedObjectContext;
  
-      __weak UITableView *tableView;
+//      __weak UITableView *tableView;
     BOOL deletePressedOnce;
     SCTableViewModel *currentDetailTableViewModel_;
     UINavigationController *rootNavigationController;
@@ -39,7 +39,7 @@ NSManagedObjectContext *managedObjectContext;
 //    ABRecordRef existingPersonRef;
     BOOL addExistingAfterPromptBool;
     
-     SCArrayOfObjectsModel *tableModel_;
+//     SCArrayOfObjectsModel *tableModel_;
      ABPersonViewController *personVCFromSelectionList;
      ABNewPersonViewController *personAddNewViewController;
     ABPersonViewController *personViewController_;
@@ -50,10 +50,12 @@ NSManagedObjectContext *managedObjectContext;
     ABGroupSelectionCell *abGroupObjectSelectionCell_;
     
     UIView *iPadPersonBackgroundView_;
+    BOOL addingClinician;
+  BOOL isInDetailSubview;
 }
 
 
-@property (strong ,nonatomic)IBOutlet SCClassDefinition *clinicianDef;
+@property (strong ,nonatomic)IBOutlet SCEntityDefinition *clinicianDef;
 
 
 @property (strong ,nonatomic)UIView *iPadPersonBackgroundView;
@@ -63,9 +65,9 @@ NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) IBOutlet ABPersonViewController *personViewController;
 @property (nonatomic, strong) IBOutlet ABPeoplePickerNavigationController *peoplePickerNavigationController;
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic,assign)BOOL selectMyInformationOnLoad;
 
-@property (nonatomic, strong) IBOutlet SCArrayOfObjectsModel *tableModel;
+//@property (nonatomic, strong) IBOutlet SCArrayOfObjectsModel *tableModel;
 @property (nonatomic, strong)  UIViewController *rootViewController;
 @property (nonatomic, strong) IBOutlet  SCTableViewModel *currentDetailTableViewModel;
 @property (nonatomic, strong)ABGroupSelectionCell *abGroupObjectSelectionCell;

@@ -26,7 +26,7 @@
 @synthesize timeDef;
 
 @synthesize footerLabel,totalTimeHeaderLabel;
-@synthesize tableModel;
+//@synthesize detailTableModel=detailTableModel_;
 @synthesize totalTimeDate;
 
 
@@ -89,9 +89,9 @@
 	[additionalTimeFormatter setDateFormat:@"H:mm"];
     [additionalTimeFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     //Create a class definition for the TimeEntity
-    self.timeDef = [SCClassDefinition definitionWithEntityName:@"TimeEntity" 
-                                                    withManagedObjectContext:managedObjectContext
-                                                           withPropertyNames:[NSArray arrayWithObjects:@"startTime", @"endTime", @"breaks", @"notes"    , nil]];
+    self.timeDef = [SCEntityDefinition definitionWithEntityName:@"TimeEntity" 
+                                                    managedObjectContext:managedObjectContext
+                                                           propertyNames:[NSArray arrayWithObjects:@"startTime", @"endTime", @"breaks", @"notes"    , nil]];
     
     //Do some property definition customization for the Time Entity defined in timeDef
     //Create the property definition for the startTime property in the timeDef class  definition
@@ -107,7 +107,7 @@
         
     NSString *timePickerCellNibName;
     
-    if([SCHelper is_iPad])
+    if([SCUtilities is_iPad])
         timePickerCellNibName=[NSString stringWithString:@"TimePickerCell_iPad"];
     else
         timePickerCellNibName=[NSString stringWithString:@"TimePickerCell"];
@@ -120,7 +120,7 @@
                                                     forKeys:[NSArray arrayWithObjects:@"40" , @"41",@"42",   nil]]; // 40, 41,42 are the control tags
 	
     //create the custom property definition for addtional time
-    SCCustomPropertyDefinition *additionalTimePropertyDef = [SCCustomPropertyDefinition definitionWithName:@"AdditionalTime" withuiElementNibName:timePickerCellNibName  withObjectBindings:additionalTimeDataBindings];	
+    SCCustomPropertyDefinition *additionalTimePropertyDef = [SCCustomPropertyDefinition definitionWithName:@"AdditionalTime" uiElementNibName:timePickerCellNibName  objectBindings:additionalTimeDataBindings];	
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
     additionalTimePropertyDef.autoValidate=FALSE;
@@ -134,7 +134,7 @@
                                                     forKeys:[NSArray arrayWithObjects:@"40" , @"41",@"42",   nil]]; // 40, 41,42 are the control tags
 	
     //create the custom property definition
-    SCCustomPropertyDefinition *subtractTimePropertyDef = [SCCustomPropertyDefinition definitionWithName:@"SubtractTime" withuiElementNibName:timePickerCellNibName  withObjectBindings:subtractTimeDataBindings];	
+    SCCustomPropertyDefinition *subtractTimePropertyDef = [SCCustomPropertyDefinition definitionWithName:@"SubtractTime" uiElementNibName:timePickerCellNibName  objectBindings:subtractTimeDataBindings];	
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
     subtractTimePropertyDef.autoValidate=NO;
@@ -159,7 +159,7 @@
    
        
     //create a custom property definition for the Button Cell
-    SCCustomPropertyDefinition *buttonProperty = [SCCustomPropertyDefinition definitionWithName:@"buttonCell" withuiElementClass:[ButtonCell class] withObjectBindings:nil];
+    SCCustomPropertyDefinition *buttonProperty = [SCCustomPropertyDefinition definitionWithName:@"buttonCell" uiElementClass:[ButtonCell class] objectBindings:nil];
 
     //add the property definition to the timeDef class 
     [self.timeDef insertPropertyDefinition:buttonProperty atIndex:4];
@@ -167,8 +167,8 @@
     
     //create the custom property definition
     SCCustomPropertyDefinition *stopwatchDataProperty = [SCCustomPropertyDefinition definitionWithName:@"StopwatchData"
-                                                                                  withuiElementNibName:@"StopwatchCell" 
-                                                                                    withObjectBindings:stopwatchDataBindings];
+                                                                                  uiElementNibName:@"StopwatchCell" 
+                                                                                    objectBindings:stopwatchDataBindings];
 	
     
     
@@ -180,18 +180,18 @@
     
     
     //Create a class definition for the BreakTimeEntity
-    SCClassDefinition *breakTimeDef = [SCClassDefinition definitionWithEntityName:@"BreakTimeEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"reason", @"startTime", @"endTime", @"breakNotes",       nil]];
+    SCEntityDefinition *breakTimeDef = [SCEntityDefinition definitionWithEntityName:@"BreakTimeEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"reason", @"startTime", @"endTime", @"breakNotes",       nil]];
     
   
 //     timeDef.requireEditingModeToEditPropertyValues = TRUE; // lock all property values until put in editing mode
     
     breakTimeDef.orderAttributeName=@"order";
     //Create a class definition for the BreakTimeReasonEntity
-    SCClassDefinition *breakTimeReasonDef = [SCClassDefinition definitionWithEntityName:@"BreakTimeReasonEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"breakName",nil]];
+    SCEntityDefinition *breakTimeReasonDef = [SCEntityDefinition definitionWithEntityName:@"BreakTimeReasonEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"breakName",nil]];
     
     
     breakTimeReasonDef.orderAttributeName=@"order";
@@ -205,7 +205,7 @@
     
        
     
-    breaksPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:breakTimeDef
+    breaksPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:breakTimeDef
                                                                                   allowAddingItems:YES
                                                                                 allowDeletingItems:YES
                                                                                   allowMovingItems:YES
@@ -227,7 +227,7 @@
     
     
     breakTimeReasonPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *breakTimeReasonSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:breakTimeReasonDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *breakTimeReasonSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:breakTimeReasonDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     breakTimeReasonSelectionAttribs.allowAddingItems = YES;
     breakTimeReasonSelectionAttribs.allowDeletingItems = YES;
     breakTimeReasonSelectionAttribs.allowMovingItems = YES;
@@ -274,7 +274,7 @@
                                           forKeys:[NSArray arrayWithObjects:@"40" , @"41",@"42",   nil]]; // 40, 41,42 are the control tags
 	
     //create the custom property definition
-    SCCustomPropertyDefinition *breakUndefinedTimePropertyDef = [SCCustomPropertyDefinition definitionWithName:@"BreakAdditionalTime" withuiElementNibName:timePickerCellNibName  withObjectBindings:breakUndefinedTimeDataBindings];	
+    SCCustomPropertyDefinition *breakUndefinedTimePropertyDef = [SCCustomPropertyDefinition definitionWithName:@"BreakAdditionalTime" uiElementNibName:timePickerCellNibName  objectBindings:breakUndefinedTimeDataBindings];	
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
     breakUndefinedTimePropertyDef.autoValidate=YES;
@@ -284,20 +284,20 @@
     [breakTimeDef insertPropertyDefinition:breakUndefinedTimePropertyDef atIndex:3];
     
      //create a custom property definition for the Button Cell
-    SCCustomPropertyDefinition *buttonBreakTimeClearPropertyDef = [SCCustomPropertyDefinition definitionWithName:@"buttonBreakTimeClearCell" withuiElementClass:[ButtonCell class] withObjectBindings:nil];
+    SCCustomPropertyDefinition *buttonBreakTimeClearPropertyDef = [SCCustomPropertyDefinition definitionWithName:@"buttonBreakTimeClearCell" uiElementClass:[ButtonCell class] objectBindings:nil];
     
     [breakTimeDef insertPropertyDefinition:buttonBreakTimeClearPropertyDef atIndex:4];
     
 
     
     
-    SCPropertyGroup *timeGroup=[SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"startTime", @"endTime" ,@"AdditionalTime", @"SubtractTime", @"buttonCell",   @"StopwatchData",     nil]];
+    SCPropertyGroup *timeGroup=[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"startTime", @"endTime" ,@"AdditionalTime", @"SubtractTime", @"buttonCell",   @"StopwatchData",     nil]];
 
-    SCPropertyGroup *breaksGroup=[SCPropertyGroup groupWithHeaderTitle:@"Breaks" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"breaks"]];
+    SCPropertyGroup *breaksGroup=[SCPropertyGroup groupWithHeaderTitle:@"Breaks" footerTitle:nil propertyNames:[NSArray arrayWithObject:@"breaks"]];
     
-    SCPropertyGroup *notesGroup=[SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"notes"]];
+    SCPropertyGroup *notesGroup=[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"notes"]];
     
-    SCPropertyGroup *breakNotesGroup=[SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"breakNotes"]];
+    SCPropertyGroup *breakNotesGroup=[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"breakNotes"]];
    
     [timeDef.propertyGroups addGroup:timeGroup];
     [timeDef.propertyGroups addGroup:breaksGroup];
@@ -312,7 +312,7 @@
     
     referenceDate=[counterDateFormatter dateFromString:@"00:00:00"];
     
-    
+    self.delegate=self;
 
     
     return  self;
@@ -328,7 +328,7 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
-    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
 
     [detailTableViewModel.modeledTableView setBackgroundView:nil];
@@ -353,7 +353,7 @@
     
     
     
-        SCTableViewSection *section=[tableModel sectionAtIndex:0];
+        SCTableViewSection *section=[self.tableViewModel sectionAtIndex:0];
         
    
         SCDateCell *startTimeCell =(SCDateCell *)[section cellAtIndex:0];
@@ -643,7 +643,7 @@
         if (indexPath.section==1) {
             
             
-            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) 
+            if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) 
             {
                 
                 if (![cell viewWithTag:28]) {
@@ -797,7 +797,7 @@
 
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     if (detailTableViewModel.tag==2) {
         [detailTableViewModel.modeledTableView setEditing:YES animated:NO];
@@ -808,7 +808,7 @@
     
     
 }
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     
     if (detailTableViewModel.tag==2) {
@@ -824,7 +824,7 @@
 
 -(NSTimeInterval ) totalBreakTimeInterval{
     
-    SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)[ tableModel sectionAtIndex:1];
+    SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)[ self.tableViewModel sectionAtIndex:1];
  
   
     NSDate *breakStartTime, *breakEndTime,*breakUndefinedTime;
@@ -838,11 +838,23 @@
     [dateFormatClearSeconds setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     [dateFormatClearSeconds setDateFormat:@"H:mm"];
     
-    for(id obj in arrayOfObjectsSection.itemsSet) { 
+    for(id obj in arrayOfObjectsSection.items) { 
+        NSLog(@"items are %@",arrayOfObjectsSection.items);
+        NSLog(@"object in section is%@",obj);
+        if ([obj isKindOfClass:[SCTableViewCell class]]) {
+            SCTableViewCell *cell=(SCTableViewCell *)obj;
+            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+            
+            NSLog(@"cell managed object class is %@",cellManagedObject.class);
+            if ([cellManagedObject respondsToSelector:@selector(entity)]) {
+                breakStartTime=(NSDate *)[obj valueForKey:@"startTime"];
+                breakEndTime=(NSDate *)[obj valueForKey:@"endTime"];
+                breakUndefinedTime=(NSDate *)[obj valueForKey:@"undefinedTime"];
+            }
+        }
         
-        breakStartTime=(NSDate *)[obj valueForKey:@"startTime"];
-        breakEndTime=(NSDate *)[obj valueForKey:@"endTime"];
-        breakUndefinedTime=(NSDate *)[obj valueForKey:@"undefinedTime"];
+        
+       
         
        
         if (breakStartTime && breakStartTime != referenceDate &&breakEndTime &&breakEndTime!=referenceDate) {
@@ -908,7 +920,7 @@
 
 }
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {
     
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
@@ -919,7 +931,7 @@
     if(section.headerTitle !=nil)
     {
         
-        if (!(tableViewModel.tag ==2 && index==0 &&sectionManagedObject && [sectionManagedObject.entity.name isEqualToString:@"TimeEntity"]) ) 
+        if (!(tableViewModel.tag ==2 && index==0 &&sectionManagedObject &&[sectionManagedObject respondsToSelector:@selector(entity)] &&[sectionManagedObject.entity.name isEqualToString:@"TimeEntity"]) ) 
         {
             
             
@@ -1083,7 +1095,7 @@
         
        
         
-        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
+        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
            
             if (cell.tag>=0 && cell.tag<4) {
                 if ([cell isKindOfClass:[SCDateCell class]]){
@@ -1153,7 +1165,7 @@
         {
             
                         
-            if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) 
+            if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) 
             {
                
                 
@@ -1457,7 +1469,7 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForSectionAtIndex:(NSUInteger)index{
     
     
-    if(tableModel.tag==2 &&index==1)
+    if(self.tableViewModel.tag==2 &&index==1)
         [self calculateTime];
 
     
@@ -1465,10 +1477,10 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didRemoveRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    if(tableModel.tag==2 &&indexPath.section==1)
+    if(self.tableViewModel.tag==2 &&indexPath.section==1)
     {
         [self calculateTime];
-        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:1];
+        SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:1];
         UILabel *breakSectionHeaderLabel=(UILabel *)[section.headerView viewWithTag:60];
         
         

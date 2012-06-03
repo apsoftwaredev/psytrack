@@ -15,7 +15,7 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewModel.h"
+
 
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
@@ -32,7 +32,7 @@
     NSMutableDictionary *dictionaryABGroupIdentifierValueForArrayOfStringsIndexKey;
     NSMutableDictionary *dictionaryArrayOfStringsIndexForGroupIdentifierKey;
     NSArray *groupArray;
-
+    NSMutableDictionary *_valuesDictionary;
 //    ABAddressBookRef addressBook;
     SCTableViewModel *currentDetailTableViewModel_;
     SCObjectSelectionCell *sourcesObjSelectionCell_;

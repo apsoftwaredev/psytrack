@@ -75,7 +75,7 @@
     }
 
     
-    [self.boundObject setValue:self.datePicker.date forKey:[objectBindings valueForKey:@"34"]];
+    [self.boundObject setValue:self.datePicker.date forKey:[_objectBindings valueForKey:@"34"]];
     
     
     needsCommit=false;

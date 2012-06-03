@@ -84,7 +84,7 @@
 
 #define kChosenCipherBlockSize	 kCCBlockSizeAES128
 #define kChosenCipherKeySize	kCCKeySizeAES256
-#define kChosenDigestLength		CC_SHA1_DIGEST_LENGTH
+#define kChosenDigestLength		CC_SHA256_DIGEST_LENGTH
 
 // Global constants for padding schemes.
 #define	kPKCS1					11

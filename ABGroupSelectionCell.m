@@ -21,12 +21,16 @@
 @implementation ABGroupSelectionCell
 @synthesize  clinician=clinician_;
 @synthesize synchWithABBeforeLoadBool=synchWithABBeforeLoadBool_;
-
+@synthesize objectSelectionCell=objectSelectionCell_;
+@synthesize abGroupsArray=abGroupsArray_;
 -(id)initWithClinician:(ClinicianEntity *)clinicianObject
 {
  self.clinician=clinicianObject;
 
-    self=[super init];
+    [self syncryonizeWithAddressBookGroups];
+    self.abGroupsArray=[NSArray arrayWithArray:[self addressBookGroupsArray]];
+
+    self=[super initWithText:@"Address Book Groups"];
     
     
    
@@ -36,26 +40,26 @@
 }
 
 -(void)performInitialization{
+ 
+  
+//self.abGroupsArray=[NSArray arrayWithArray:[self addressBookGroupsArray]];
 
-
+    NSLog(@"abgroups array is %@",self.abGroupsArray);
     [super performInitialization];
-
-
-    
-    self.allowAddingItems=NO;
+     
+   
+    self.customCell=YES;
+       
+    self.allowAddingItems=YES;
     self.allowDeletingItems=NO;
     self.allowEditDetailView=NO;
     self.allowMovingItems=NO;
-    self.allowMultipleSelection=YES;
+    
     self.allowNoSelection=YES;
     
-    self.textLabel.text=@"Address Book Groups";
+  
     
-    
-    self.items=[self addressBookGroupsArray];
-    
-       
-    self.synchWithABBeforeLoadBool=YES;
+   
 
 }
 
@@ -71,8 +75,8 @@
         PTABGroup *ptGroup=[groupItems objectAtIndex:i];
         
         if ([self personContainedInGroupWithID:ptGroup.recordID]) {
-            if (![self.selectedItemsIndexes containsObject:[NSNumber numberWithInt:i]]) {
-                [self.selectedItemsIndexes addObject:[NSNumber numberWithInt:i]];
+            if (![objectSelectionCell_.selectedItemsIndexes containsObject:[NSNumber numberWithInt:i]]) {
+                [objectSelectionCell_.selectedItemsIndexes addObject:[NSNumber numberWithInt:i]];
             }
             
             
@@ -86,60 +90,69 @@
 
 
 
--(void)loadBoundValueIntoControl{
+-(NSArray*)items{
     
-    
-    if (synchWithABBeforeLoadBool_){
-        [self syncryonizeWithAddressBookGroups];
-    
-    
-    }
-    
-    
-    int groupCount=self.items.count;
-    NSArray *groupItems=(NSArray *)self.items;
+   
+//    if (synchWithABBeforeLoadBool_){
+//        [self syncryonizeWithAddressBookGroups];
+//    
+//    
+//    }
+    NSLog(@"items array is %@",self.abGroupsArray);
 
+    return self.abGroupsArray;
     
-    for (int i=0; i<groupCount; i++) {
-      PTABGroup *ptGroup=[groupItems objectAtIndex:i];
-        if ([self personContainedInGroupWithID:ptGroup.recordID]) {
-            if (![self.selectedItemsIndexes containsObject:[NSNumber numberWithInt:i]]) {
-                [self removePersonFromGroupWithID:ptGroup.recordID];
-            }
-          
-            
-        }
-        else 
-        {
-            if ([self.selectedItemsIndexes containsObject:[NSNumber numberWithInt:i]]) {
-    
-                [self addPersonToGroupWithID:ptGroup.recordID];
-                
-                
-                
-            }
-        }
-    
-    
-    }
-    
-    NSString *groupsList=[NSString string];
-    for (NSInteger i=0;i<self.selectedItemsIndexes.count; i++) {
-        
-        NSInteger p=(int)[(NSNumber *)[(NSArray *)[self.selectedItemsIndexes allObjects] objectAtIndex:i]intValue];
-        PTABGroup *ptABGroup=[self.items objectAtIndex:p];
-        
-        if (!groupsList.length) {
-            groupsList=[NSString stringWithFormat:@"%@",ptABGroup.groupName];
-        }
-        else {
-            groupsList=[groupsList stringByAppendingFormat:@", %@",ptABGroup.groupName];
-        }
-        
-    }
-
-    self.label.text=groupsList;
-    
+   
+//    NSMutableArray *groupsArray=[NSMutableArray arrayWithArray:[self addressBookGroupsArray]];
+//     NSLog(@"items array is %@",groupsArray);
+//    return groupsArray;
+   
+//    NSMutableArray *itemsArray=(NSMutableArray *)self.items;
+//    itemsArray=groupsArray;
+//    
+//    NSLog(@"items array is %@",itemsArray);
+//    int groupCount=self.items.count;
+//    NSLog(@" group count is %i",groupCount);
+//    for (int i=0; i<groupCount; i++) {
+//      PTABGroup *ptGroup=[itemsArray objectAtIndex:i];
+//        if ([self personContainedInGroupWithID:ptGroup.recordID]) {
+//            if (![self.selectedItemsIndexes containsObject:[NSNumber numberWithInt:i]]) {
+//                [self removePersonFromGroupWithID:ptGroup.recordID];
+//            }
+//          
+//            
+//        }
+//        else 
+//        {
+//            if ([self.selectedItemsIndexes containsObject:[NSNumber numberWithInt:i]]) {
+//    
+//                [self addPersonToGroupWithID:ptGroup.recordID];
+//                
+//                
+//                
+//            }
+//        }
+//    
+//    
+//    }
+//    
+//    NSString *groupsList=[NSString string];
+//    for (NSInteger i=0;i<self.selectedItemsIndexes.count; i++) {
+//        
+//        NSInteger p=(int)[(NSNumber *)[(NSArray *)[self.selectedItemsIndexes allObjects] objectAtIndex:i]intValue];
+//        PTABGroup *ptABGroup=[self.items objectAtIndex:p];
+//        
+//        if (!groupsList.length) {
+//            groupsList=[NSString stringWithFormat:@"%@",ptABGroup.groupName];
+//        }
+//        else {
+//            groupsList=[groupsList stringByAppendingFormat:@", %@",ptABGroup.groupName];
+//        }
+//        
+//    }
+//
+//    self.label.text=groupsList;
+//    
     
    
     
@@ -149,11 +162,11 @@
 
   
         
-        if (self.selectedItemsIndexes.count>0 && ![clinician_.aBRecordIdentifier isEqualToNumber:[NSNumber numberWithInt: -1]]) 
+        if (objectSelectionCell_.selectedItemsIndexes.count>0 && ![clinician_.aBRecordIdentifier isEqualToNumber:[NSNumber numberWithInt: -1]]) 
         {
             
             
-            for (NSNumber *selectedItemAtIndex in self.selectedItemsIndexes) {
+            for (NSNumber *selectedItemAtIndex in objectSelectionCell_.selectedItemsIndexes) {
              PTABGroup *ptABGroup=[self.items objectAtIndex:[selectedItemAtIndex intValue]];
                 
                 if (![self personContainedInGroupWithID:(int)ptABGroup]) {

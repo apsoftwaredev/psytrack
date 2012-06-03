@@ -6,7 +6,8 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-#import "SCTableViewCell.h"
+#import <UIKit/UIKit.h>
+
 
 @interface ABSourcesSCObjectSelectionCell : SCObjectSelectionCell
 

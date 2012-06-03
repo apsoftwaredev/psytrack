@@ -16,7 +16,7 @@
  *
  */
 #import "EncryptedSCTextFieldCell.h"
-#import "SCTableViewModel.h"
+
 #import "PTTAppDelegate.h"
 
 @implementation EncryptedSCTextFieldCell

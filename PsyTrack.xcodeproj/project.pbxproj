@@ -72,8 +72,6 @@
 		37F7CDD214FEC3EB00AD2C3A /* README in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CDD114FEC3EB00AD2C3A /* README */; };
 		37F7CDEF150031F100AD2C3A /* DrugActionDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CDDC150031F100AD2C3A /* DrugActionDateViewController.m */; };
 		37F7CDF1150031F100AD2C3A /* DrugAppDocsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CDDF150031F100AD2C3A /* DrugAppDocsViewController.m */; };
-		37F7CDF3150031F100AD2C3A /* DrugDetailViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CDE2150031F100AD2C3A /* DrugDetailViewController_iPad.m */; };
-		37F7CDF5150031F100AD2C3A /* DrugRootViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CDE5150031F100AD2C3A /* DrugRootViewController_iPad.m */; };
 		37F7CDF7150031F100AD2C3A /* DrugsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CDE8150031F100AD2C3A /* DrugsTableViewController.m */; };
 		37F7CDF8150031F100AD2C3A /* DrugViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CDEA150031F100AD2C3A /* DrugViewController_iPhone.m */; };
 		37F7CDFA150031F100AD2C3A /* DrugWebViewActionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CDED150031F100AD2C3A /* DrugWebViewActionsViewController.m */; };
@@ -127,7 +125,7 @@
 		37F7CE9C1500596F00AD2C3A /* Time_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE991500596F00AD2C3A /* Time_Shared.m */; };
 		37F7CE9D1500596F00AD2C3A /* TimeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE9B1500596F00AD2C3A /* TimeEntity.m */; };
 		37F7CEA2150059BC00AD2C3A /* TestAdministrationsViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEA1150059BC00AD2C3A /* TestAdministrationsViewController_iPad.m */; };
-		37F7CEA7150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEA3150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib */; };
+		37F7CEA7150059D900AD2C3A /* TimeTrackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEA3150059D900AD2C3A /* TimeTrackViewController.xib */; };
 		37F7CEAE15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEAA15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib */; };
 		37F7CEAF15005C5F00AD2C3A /* TrainTrackViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEAC15005C5F00AD2C3A /* TrainTrackViewController_iPhone.xib */; };
 		37F7CEB215005C7300AD2C3A /* TrainTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEB115005C7300AD2C3A /* TrainTrackViewController.m */; };
@@ -241,16 +239,6 @@
 		37F7CFD1150060D400AD2C3A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CFCE150060D400AD2C3A /* Settings.bundle */; };
 		37F7CFDD1500624000AD2C3A /* CasualAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CFDB1500624000AD2C3A /* CasualAlertViewController.xib */; };
 		37F7CFE0150062DE00AD2C3A /* CasualAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CFDF150062DE00AD2C3A /* CasualAlertViewController.m */; };
-		37F7CFF51500635900AD2C3A /* LICENSE AGREEMENT.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CFE21500635900AD2C3A /* LICENSE AGREEMENT.rtf */; };
-		37F7CFF61500635900AD2C3A /* SCBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CFE41500635900AD2C3A /* SCBadgeView.m */; };
-		37F7CFF71500635900AD2C3A /* SCClassDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CFE61500635900AD2C3A /* SCClassDefinition.m */; };
-		37F7CFF81500635900AD2C3A /* SCGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CFE81500635900AD2C3A /* SCGlobals.m */; };
-		37F7CFF91500635900AD2C3A /* SCPropertyAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CFEA1500635900AD2C3A /* SCPropertyAttributes.m */; };
-		37F7CFFA1500635900AD2C3A /* SCTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CFEC1500635900AD2C3A /* SCTableViewCell.m */; };
-		37F7CFFB1500635900AD2C3A /* SCTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CFEE1500635900AD2C3A /* SCTableViewController.m */; };
-		37F7CFFC1500635900AD2C3A /* SCTableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CFF01500635900AD2C3A /* SCTableViewModel.m */; };
-		37F7CFFD1500635900AD2C3A /* SCTableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CFF21500635900AD2C3A /* SCTableViewSection.m */; };
-		37F7CFFE1500635900AD2C3A /* SCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CFF41500635900AD2C3A /* SCViewController.m */; };
 		37F7D001150063CF00AD2C3A /* TabFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7D000150063CE00AD2C3A /* TabFile.m */; };
 		B703DBB914EBF66600A921F2 /* PTTEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = B703DBB814EBF66600A921F2 /* PTTEncryption.m */; };
 		B78C594B14D7669B005E5462 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B78C594914D7669A005E5462 /* AddressBook.framework */; };
@@ -266,11 +254,12 @@
 		B7F877BB14C9A38900F00C0D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877B914C9A38900F00C0D /* EventKit.framework */; };
 		B7F877BC14C9A38900F00C0D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877BA14C9A38900F00C0D /* EventKitUI.framework */; };
 		E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */; };
+		E71E26AD1569C3920004A793 /* BreakTimeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E71E26AC1569C3920004A793 /* BreakTimeEntity.m */; };
+		E71E26C7156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E71E26C6156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m */; };
 		E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B76150858D3005B798A /* ABGroupSelectionCell.m */; };
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 		E7516BDC150BF9A2005B798A /* Dan Boice-46.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */; };
 		E75F7786151CC574002B10AE /* LogEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F7785151CC574002B10AE /* LogEntity.m */; };
-		E75F778C151CF463002B10AE /* TestingSessionDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F778B151CF463002B10AE /* TestingSessionDeliveredEntity.m */; };
 		E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */; };
 		E78480CA1518D7D800F48EA3 /* PhoneEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C91518D7D800F48EA3 /* PhoneEntity.m */; };
 		E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E78A8D1A1531EDF10099FE5B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -283,11 +272,21 @@
 		E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA69E15227EA9004ABF29 /* ClinicianSelectionCell.m */; };
 		E78DA6A415252579004ABF29 /* ExistingHoursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA6A215252579004ABF29 /* ExistingHoursViewController.m */; };
 		E78DA6A515252579004ABF29 /* ExistingHoursViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78DA6A315252579004ABF29 /* ExistingHoursViewController.xib */; };
+		E7910012157BF99300E4F73D /* SupportActivityDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7910011157BF99300E4F73D /* SupportActivityDeliveredEntity.m */; };
 		E7912D0E151D332700E0609A /* DemographicProfileEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D0D151D332700E0609A /* DemographicProfileEntity.m */; };
 		E7912D17151D349E00E0609A /* MigrationHistoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D16151D349E00E0609A /* MigrationHistoryEntity.m */; };
 		E7912D1A151DF7DB00E0609A /* VitalsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D19151DF7DB00E0609A /* VitalsEntity.m */; };
 		E7912D1D151E441200E0609A /* InterpersonalEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D1C151E441200E0609A /* InterpersonalEntity.m */; };
-		E799F3FC1541B44300A2596F /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E799F3FB1541B44300A2596F /* Icon-72@2x.png */; };
+		E7919B281547001F001161A9 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B271547001F001161A9 /* Icon-72@2x.png */; };
+		E7919B3015470EDB001161A9 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */; };
+		E7919B3215470F01001161A9 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */; };
+		E79AB6EB15718369009CE87A /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E79AB6E81571834E009CE87A /* libSensibleTableView.a */; };
+		E79AB6F81571839A009CE87A /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E79AB6F515718382009CE87A /* libSTV+CoreData.a */; };
+		E7A21370155B34CD005CF154 /* LogoBackgroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A2136E155B34CD005CF154 /* LogoBackgroundViewController.m */; };
+		E7A21371155B34CD005CF154 /* LogoBackgroundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7A2136F155B34CD005CF154 /* LogoBackgroundViewController.xib */; };
+		E7A5D7081559EB26000F248F /* ClearBackgroundTheme.sct in Resources */ = {isa = PBXBuildFile; fileRef = E7A5D7071559EB26000F248F /* ClearBackgroundTheme.sct */; };
+		E7A92491154853760080B35D /* DrugTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7A92490154853760080B35D /* DrugTestViewController.xib */; };
+		E7A9249315485E6C0080B35D /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E7A9249215485E6C0080B35D /* blueArrow.png */; };
 		E7B0A5B815347C430027F637 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B0A5B715347C430027F637 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
@@ -295,9 +294,50 @@
 		E7D3732C152C2EFA00121918 /* ExistingHoursEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */; };
 		E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */; };
 		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
-		E7E1A63D152E873500C227E8 /* ServicesViewController_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */; };
+		E7E1A63D152E873500C227E8 /* TimeTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */; };
 		E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A6441530C18900C227E8 /* ShortFieldCell.m */; };
+		E7F1E6F81575916F00D4A638 /* InstrumentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E6F71575916F00D4A638 /* InstrumentEntity.m */; };
+		E7F1E703157662EB00D4A638 /* InstrumentScoreNameEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E702157662EB00D4A638 /* InstrumentScoreNameEntity.m */; };
+		E7F1E7061576966000D4A638 /* InstrumentScoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E7051576966000D4A638 /* InstrumentScoreEntity.m */; };
+		E7F1E7091576D17100D4A638 /* ClientInstrumentScoresEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */; };
+		E7F1E73115775BA400D4A638 /* ipad-menubar-right.png in Resources */ = {isa = PBXBuildFile; fileRef = E7F1E73015775BA400D4A638 /* ipad-menubar-right.png */; };
+		E7F1E760157824B300D4A638 /* TestingSessionDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E75F157824B300D4A638 /* TestingSessionDeliveredEntity.m */; };
+		E7F1E7631578254000D4A638 /* ServiceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E7621578254000D4A638 /* ServiceEntity.m */; };
+		E7FB3AAD1562A4E4000A6782 /* TwoButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */; };
+		E7FB3AB31562C867000A6782 /* AddViewABLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB21562C867000A6782 /* AddViewABLinkButtonCell.m */; };
+		E7FB3AB61562C888000A6782 /* LookupRemoveLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB51562C888000A6782 /* LookupRemoveLinkButtonCell.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E79AB6E71571834E009CE87A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DBE7373014F99E580076D2B6;
+			remoteInfo = SensibleTableView;
+		};
+		E79AB6E91571835C009CE87A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = DBE7372F14F99E580076D2B6;
+			remoteInfo = SensibleTableView;
+		};
+		E79AB6F415718382009CE87A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DBE737C414FC66D40076D2B6;
+			remoteInfo = "STV+CoreData";
+		};
+		E79AB6F61571838D009CE87A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
+			remoteInfo = "STV+CoreData";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		376797F71500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ABGroupNameChangeCell.xib; sourceTree = "<group>"; };
@@ -400,10 +440,6 @@
 		37F7CDDC150031F100AD2C3A /* DrugActionDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugActionDateViewController.m; sourceTree = "<group>"; };
 		37F7CDDE150031F100AD2C3A /* DrugAppDocsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugAppDocsViewController.h; sourceTree = "<group>"; };
 		37F7CDDF150031F100AD2C3A /* DrugAppDocsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugAppDocsViewController.m; sourceTree = "<group>"; };
-		37F7CDE1150031F100AD2C3A /* DrugDetailViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugDetailViewController_iPad.h; sourceTree = "<group>"; };
-		37F7CDE2150031F100AD2C3A /* DrugDetailViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugDetailViewController_iPad.m; sourceTree = "<group>"; };
-		37F7CDE4150031F100AD2C3A /* DrugRootViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugRootViewController_iPad.h; sourceTree = "<group>"; };
-		37F7CDE5150031F100AD2C3A /* DrugRootViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugRootViewController_iPad.m; sourceTree = "<group>"; };
 		37F7CDE7150031F100AD2C3A /* DrugsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugsTableViewController.h; sourceTree = "<group>"; };
 		37F7CDE8150031F100AD2C3A /* DrugsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugsTableViewController.m; sourceTree = "<group>"; };
 		37F7CDE9150031F100AD2C3A /* DrugViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugViewController_iPhone.h; sourceTree = "<group>"; };
@@ -453,7 +489,7 @@
 		37F7CE4D1500550D00AD2C3A /* ClientEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientEntity.h; sourceTree = "<group>"; };
 		37F7CE4E1500550D00AD2C3A /* ClientEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientEntity.m; sourceTree = "<group>"; };
 		37F7CE4F1500550D00AD2C3A /* ClientsViewController_Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientsViewController_Shared.h; sourceTree = "<group>"; };
-		37F7CE501500550D00AD2C3A /* ClientsViewController_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientsViewController_Shared.m; sourceTree = "<group>"; };
+		37F7CE501500550D00AD2C3A /* ClientsViewController_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClientsViewController_Shared.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		37F7CE551500556900AD2C3A /* ClientsDetailViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientsDetailViewController_iPad.h; sourceTree = "<group>"; };
 		37F7CE561500556900AD2C3A /* ClientsRootViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientsRootViewController_iPad.h; sourceTree = "<group>"; };
 		37F7CE58150055B100AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ClientsDetailViewController_iPad.xib; sourceTree = "<group>"; };
@@ -461,9 +497,9 @@
 		37F7CE5C150055B100AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ClientsViewController_iPad.xib; sourceTree = "<group>"; };
 		37F7CE61150055CE00AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ClientsViewController_iPhone.xib; sourceTree = "<group>"; };
 		37F7CE631500561900AD2C3A /* ClientsViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientsViewController_iPhone.h; sourceTree = "<group>"; };
-		37F7CE641500561900AD2C3A /* ClientsViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientsViewController_iPhone.m; sourceTree = "<group>"; };
+		37F7CE641500561900AD2C3A /* ClientsViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClientsViewController_iPhone.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		37F7CE661500563200AD2C3A /* ClientsDetailViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientsDetailViewController_iPad.m; sourceTree = "<group>"; };
-		37F7CE671500563200AD2C3A /* ClientsRootViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientsRootViewController_iPad.m; sourceTree = "<group>"; };
+		37F7CE671500563200AD2C3A /* ClientsRootViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClientsRootViewController_iPad.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		37F7CE6A150056F800AD2C3A /* EncryptedSCTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCTextFieldCell.h; sourceTree = "<group>"; };
 		37F7CE6B150056F800AD2C3A /* EncryptedSCTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCTextFieldCell.m; sourceTree = "<group>"; };
 		37F7CE6E1500573E00AD2C3A /* ClinicianEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianEntity.h; sourceTree = "<group>"; };
@@ -493,7 +529,7 @@
 		37F7CE9B1500596F00AD2C3A /* TimeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeEntity.m; sourceTree = "<group>"; };
 		37F7CEA0150059BC00AD2C3A /* TestAdministrationsViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestAdministrationsViewController_iPad.h; sourceTree = "<group>"; };
 		37F7CEA1150059BC00AD2C3A /* TestAdministrationsViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAdministrationsViewController_iPad.m; sourceTree = "<group>"; };
-		37F7CEA4150059D900AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TestAdministrationsViewController_iPad.xib; sourceTree = "<group>"; };
+		37F7CEA4150059D900AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TimeTrackViewController.xib; sourceTree = "<group>"; };
 		37F7CEAB15005C5F00AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TrainTrackViewController_iPad.xib; sourceTree = "<group>"; };
 		37F7CEAD15005C5F00AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TrainTrackViewController_iPhone.xib; sourceTree = "<group>"; };
 		37F7CEB015005C7300AD2C3A /* TrainTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainTrackViewController.h; sourceTree = "<group>"; };
@@ -516,7 +552,7 @@
 		37F7CED415005F7E00AD2C3A /* ButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonCell.h; sourceTree = "<group>"; };
 		37F7CED515005F7E00AD2C3A /* ButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonCell.m; sourceTree = "<group>"; };
 		37F7CED615005F7E00AD2C3A /* ClientsSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientsSelectionCell.h; sourceTree = "<group>"; };
-		37F7CED715005F7E00AD2C3A /* ClientsSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientsSelectionCell.m; sourceTree = "<group>"; };
+		37F7CED715005F7E00AD2C3A /* ClientsSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClientsSelectionCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		37F7CED815005F7E00AD2C3A /* CustomSCSelectonCellWithLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSCSelectonCellWithLoading.h; sourceTree = "<group>"; };
 		37F7CED915005F7E00AD2C3A /* CustomSCSelectonCellWithLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSCSelectonCellWithLoading.m; sourceTree = "<group>"; };
 		37F7CEDA15005F7E00AD2C3A /* CustomSCTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSCTextViewCell.h; sourceTree = "<group>"; };
@@ -634,25 +670,6 @@
 		37F7CFDC1500624000AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CasualAlertViewController.xib; sourceTree = "<group>"; };
 		37F7CFDE150062DE00AD2C3A /* CasualAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CasualAlertViewController.h; sourceTree = "<group>"; };
 		37F7CFDF150062DE00AD2C3A /* CasualAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CasualAlertViewController.m; sourceTree = "<group>"; };
-		37F7CFE21500635900AD2C3A /* LICENSE AGREEMENT.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "LICENSE AGREEMENT.rtf"; sourceTree = "<group>"; };
-		37F7CFE31500635900AD2C3A /* SCBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCBadgeView.h; sourceTree = "<group>"; };
-		37F7CFE41500635900AD2C3A /* SCBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCBadgeView.m; sourceTree = "<group>"; };
-		37F7CFE51500635900AD2C3A /* SCClassDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCClassDefinition.h; sourceTree = "<group>"; };
-		37F7CFE61500635900AD2C3A /* SCClassDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCClassDefinition.m; sourceTree = "<group>"; };
-		37F7CFE71500635900AD2C3A /* SCGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCGlobals.h; sourceTree = "<group>"; };
-		37F7CFE81500635900AD2C3A /* SCGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCGlobals.m; sourceTree = "<group>"; };
-		37F7CFE91500635900AD2C3A /* SCPropertyAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCPropertyAttributes.h; sourceTree = "<group>"; };
-		37F7CFEA1500635900AD2C3A /* SCPropertyAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCPropertyAttributes.m; sourceTree = "<group>"; };
-		37F7CFEB1500635900AD2C3A /* SCTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewCell.h; sourceTree = "<group>"; };
-		37F7CFEC1500635900AD2C3A /* SCTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewCell.m; sourceTree = "<group>"; };
-		37F7CFED1500635900AD2C3A /* SCTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewController.h; sourceTree = "<group>"; };
-		37F7CFEE1500635900AD2C3A /* SCTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewController.m; sourceTree = "<group>"; };
-		37F7CFEF1500635900AD2C3A /* SCTableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewModel.h; sourceTree = "<group>"; };
-		37F7CFF01500635900AD2C3A /* SCTableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewModel.m; sourceTree = "<group>"; };
-		37F7CFF11500635900AD2C3A /* SCTableViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTableViewSection.h; sourceTree = "<group>"; };
-		37F7CFF21500635900AD2C3A /* SCTableViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTableViewSection.m; sourceTree = "<group>"; };
-		37F7CFF31500635900AD2C3A /* SCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCViewController.h; sourceTree = "<group>"; };
-		37F7CFF41500635900AD2C3A /* SCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCViewController.m; sourceTree = "<group>"; };
 		37F7CFFF150063CE00AD2C3A /* TabFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabFile.h; sourceTree = "<group>"; };
 		37F7D000150063CE00AD2C3A /* TabFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabFile.m; sourceTree = "<group>"; };
 		B703DBB714EBF66600A921F2 /* PTTEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTEncryption.h; sourceTree = SOURCE_ROOT; };
@@ -672,6 +689,10 @@
 		B7F877BA14C9A38900F00C0D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		E70B9EFD15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSourcesSCObjectSelectionCell.h; sourceTree = "<group>"; };
 		E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSourcesSCObjectSelectionCell.m; sourceTree = "<group>"; };
+		E71E26AB1569C3920004A793 /* BreakTimeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakTimeEntity.h; sourceTree = "<group>"; };
+		E71E26AC1569C3920004A793 /* BreakTimeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakTimeEntity.m; sourceTree = "<group>"; };
+		E71E26C5156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCArrayOfObjectsModel+CoreData+SelectionSection.h"; sourceTree = "<group>"; };
+		E71E26C6156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SCArrayOfObjectsModel+CoreData+SelectionSection.m"; sourceTree = "<group>"; };
 		E7516B75150858D3005B798A /* ABGroupSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABGroupSelectionCell.h; sourceTree = "<group>"; };
 		E7516B76150858D3005B798A /* ABGroupSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABGroupSelectionCell.m; sourceTree = "<group>"; };
 		E7516B7915085A23005B798A /* PTABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTABGroup.h; sourceTree = "<group>"; };
@@ -679,8 +700,6 @@
 		E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Dan Boice-46.jpg"; path = "../../Pictures/childhood scans/Dan Boice-46.jpg"; sourceTree = "<group>"; };
 		E75F7784151CC574002B10AE /* LogEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogEntity.h; sourceTree = "<group>"; };
 		E75F7785151CC574002B10AE /* LogEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogEntity.m; sourceTree = "<group>"; };
-		E75F778A151CF463002B10AE /* TestingSessionDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingSessionDeliveredEntity.h; sourceTree = "<group>"; };
-		E75F778B151CF463002B10AE /* TestingSessionDeliveredEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingSessionDeliveredEntity.m; sourceTree = "<group>"; };
 		E78480C41518C2E200F48EA3 /* EncryptedSCSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCSelectionCell.h; sourceTree = "<group>"; };
 		E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCSelectionCell.m; sourceTree = "<group>"; };
 		E78480C81518D7D800F48EA3 /* PhoneEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneEntity.h; sourceTree = "<group>"; };
@@ -703,6 +722,8 @@
 		E78DA6A115252579004ABF29 /* ExistingHoursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursViewController.h; sourceTree = "<group>"; };
 		E78DA6A215252579004ABF29 /* ExistingHoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursViewController.m; sourceTree = "<group>"; };
 		E78DA6A315252579004ABF29 /* ExistingHoursViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController.xib; sourceTree = "<group>"; };
+		E7910010157BF99300E4F73D /* SupportActivityDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupportActivityDeliveredEntity.h; sourceTree = "<group>"; };
+		E7910011157BF99300E4F73D /* SupportActivityDeliveredEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupportActivityDeliveredEntity.m; sourceTree = "<group>"; };
 		E7912D0C151D332700E0609A /* DemographicProfileEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicProfileEntity.h; sourceTree = "<group>"; };
 		E7912D0D151D332700E0609A /* DemographicProfileEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicProfileEntity.m; sourceTree = "<group>"; };
 		E7912D15151D349E00E0609A /* MigrationHistoryEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MigrationHistoryEntity.h; sourceTree = "<group>"; };
@@ -711,7 +732,17 @@
 		E7912D19151DF7DB00E0609A /* VitalsEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VitalsEntity.m; sourceTree = "<group>"; };
 		E7912D1B151E441200E0609A /* InterpersonalEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterpersonalEntity.h; sourceTree = "<group>"; };
 		E7912D1C151E441200E0609A /* InterpersonalEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterpersonalEntity.m; sourceTree = "<group>"; };
-		E799F3FB1541B44300A2596F /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		E7919B271547001F001161A9 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.0.6 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
+		E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3.0.6 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
+		E7A2136D155B34CD005CF154 /* LogoBackgroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoBackgroundViewController.h; sourceTree = "<group>"; };
+		E7A2136E155B34CD005CF154 /* LogoBackgroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoBackgroundViewController.m; sourceTree = "<group>"; };
+		E7A2136F155B34CD005CF154 /* LogoBackgroundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogoBackgroundViewController.xib; sourceTree = "<group>"; };
+		E7A5D7071559EB26000F248F /* ClearBackgroundTheme.sct */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ClearBackgroundTheme.sct; sourceTree = "<group>"; };
+		E7A92490154853760080B35D /* DrugTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrugTestViewController.xib; sourceTree = "<group>"; };
+		E7A9249215485E6C0080B35D /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
 		E7B0A5B615347C430027F637 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		E7B0A5B715347C430027F637 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		E7C0749D150E60B4009C5498 /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = "<group>"; };
@@ -724,10 +755,29 @@
 		E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursEntity.m; sourceTree = "<group>"; };
 		E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursOverviewCell.xib; sourceTree = "<group>"; };
 		E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController_iPad.xib; sourceTree = "<group>"; };
-		E7E1A63A152E873500C227E8 /* ServicesViewController_Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicesViewController_Shared.h; sourceTree = "<group>"; };
-		E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicesViewController_Shared.m; sourceTree = "<group>"; };
+		E7E1A63A152E873500C227E8 /* TimeTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTrackViewController.h; sourceTree = "<group>"; };
+		E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTrackViewController.m; sourceTree = "<group>"; };
 		E7E1A6431530C18900C227E8 /* ShortFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortFieldCell.h; sourceTree = "<group>"; };
 		E7E1A6441530C18900C227E8 /* ShortFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortFieldCell.m; sourceTree = "<group>"; };
+		E7F1E6F61575916F00D4A638 /* InstrumentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentEntity.h; sourceTree = "<group>"; };
+		E7F1E6F71575916F00D4A638 /* InstrumentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentEntity.m; sourceTree = "<group>"; };
+		E7F1E701157662EB00D4A638 /* InstrumentScoreNameEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentScoreNameEntity.h; sourceTree = "<group>"; };
+		E7F1E702157662EB00D4A638 /* InstrumentScoreNameEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentScoreNameEntity.m; sourceTree = "<group>"; };
+		E7F1E7041576966000D4A638 /* InstrumentScoreEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentScoreEntity.h; sourceTree = "<group>"; };
+		E7F1E7051576966000D4A638 /* InstrumentScoreEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentScoreEntity.m; sourceTree = "<group>"; };
+		E7F1E7071576D17100D4A638 /* ClientInstrumentScoresEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientInstrumentScoresEntity.h; sourceTree = "<group>"; };
+		E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientInstrumentScoresEntity.m; sourceTree = "<group>"; };
+		E7F1E73015775BA400D4A638 /* ipad-menubar-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-menubar-right.png"; sourceTree = "<group>"; };
+		E7F1E75E157824B300D4A638 /* TestingSessionDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingSessionDeliveredEntity.h; sourceTree = "<group>"; };
+		E7F1E75F157824B300D4A638 /* TestingSessionDeliveredEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingSessionDeliveredEntity.m; sourceTree = "<group>"; };
+		E7F1E7611578254000D4A638 /* ServiceEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceEntity.h; sourceTree = "<group>"; };
+		E7F1E7621578254000D4A638 /* ServiceEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceEntity.m; sourceTree = "<group>"; };
+		E7FB3AAB1562A4E3000A6782 /* TwoButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoButtonCell.h; sourceTree = "<group>"; };
+		E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoButtonCell.m; sourceTree = "<group>"; };
+		E7FB3AB11562C867000A6782 /* AddViewABLinkButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewABLinkButtonCell.h; sourceTree = "<group>"; };
+		E7FB3AB21562C867000A6782 /* AddViewABLinkButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewABLinkButtonCell.m; sourceTree = "<group>"; };
+		E7FB3AB41562C888000A6782 /* LookupRemoveLinkButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookupRemoveLinkButtonCell.h; sourceTree = "<group>"; };
+		E7FB3AB51562C888000A6782 /* LookupRemoveLinkButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookupRemoveLinkButtonCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -735,6 +785,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E79AB6F81571839A009CE87A /* libSTV+CoreData.a in Frameworks */,
+				E79AB6EB15718369009CE87A /* libSensibleTableView.a in Frameworks */,
 				E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */,
 				3773F77114FD267000C36B75 /* AudioToolbox.framework in Frameworks */,
 				B78E053214E6B4A300890EA4 /* Security.framework in Frameworks */,
@@ -892,10 +944,6 @@
 				37F7CDDC150031F100AD2C3A /* DrugActionDateViewController.m */,
 				37F7CDDE150031F100AD2C3A /* DrugAppDocsViewController.h */,
 				37F7CDDF150031F100AD2C3A /* DrugAppDocsViewController.m */,
-				37F7CDE1150031F100AD2C3A /* DrugDetailViewController_iPad.h */,
-				37F7CDE2150031F100AD2C3A /* DrugDetailViewController_iPad.m */,
-				37F7CDE4150031F100AD2C3A /* DrugRootViewController_iPad.h */,
-				37F7CDE5150031F100AD2C3A /* DrugRootViewController_iPad.m */,
 				37F7CDE7150031F100AD2C3A /* DrugsTableViewController.h */,
 				37F7CDE8150031F100AD2C3A /* DrugsTableViewController.m */,
 				37F7CDE9150031F100AD2C3A /* DrugViewController_iPhone.h */,
@@ -904,6 +952,7 @@
 				37F7CDED150031F100AD2C3A /* DrugWebViewActionsViewController.m */,
 				37F7CE42150051EA00AD2C3A /* WebViewDetailViewController.h */,
 				37F7CE43150051EA00AD2C3A /* WebViewDetailViewController.m */,
+				E7A92490154853760080B35D /* DrugTestViewController.xib */,
 			);
 			name = Drugs;
 			sourceTree = "<group>";
@@ -962,6 +1011,12 @@
 				37F7CE1E1500334800AD2C3A /* PTTMasterViewController_iPhone.xib */,
 				37F7CE201500334800AD2C3A /* PTTAppDelegate.h */,
 				37F7CE211500334800AD2C3A /* PTTAppDelegate.m */,
+				E7A5D7071559EB26000F248F /* ClearBackgroundTheme.sct */,
+				E7A2136D155B34CD005CF154 /* LogoBackgroundViewController.h */,
+				E7A2136E155B34CD005CF154 /* LogoBackgroundViewController.m */,
+				E7A2136F155B34CD005CF154 /* LogoBackgroundViewController.xib */,
+				E71E26C5156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.h */,
+				E71E26C6156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -1109,9 +1164,8 @@
 		37F7CE9E1500598A00AD2C3A /* Test Administrations */ = {
 			isa = PBXGroup;
 			children = (
-				E75F778A151CF463002B10AE /* TestingSessionDeliveredEntity.h */,
-				E75F778B151CF463002B10AE /* TestingSessionDeliveredEntity.m */,
-				37F7CEA3150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib */,
+				E7F1E75E157824B300D4A638 /* TestingSessionDeliveredEntity.h */,
+				E7F1E75F157824B300D4A638 /* TestingSessionDeliveredEntity.m */,
 				37F7CEA0150059BC00AD2C3A /* TestAdministrationsViewController_iPad.h */,
 				37F7CEA1150059BC00AD2C3A /* TestAdministrationsViewController_iPad.m */,
 			);
@@ -1137,8 +1191,20 @@
 		37F7CEC615005E3400AD2C3A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E7516B7915085A23005B798A /* PTABGroup.h */,
+				E7516B7A15085A23005B798A /* PTABGroup.m */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
 				37F7CEC915005E7100AD2C3A /* psyTrainTrack.xcdatamodeld */,
+				E7F1E7071576D17100D4A638 /* ClientInstrumentScoresEntity.h */,
+				E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */,
+				E7F1E7041576966000D4A638 /* InstrumentScoreEntity.h */,
+				E7F1E7051576966000D4A638 /* InstrumentScoreEntity.m */,
+				E7F1E701157662EB00D4A638 /* InstrumentScoreNameEntity.h */,
+				E7F1E702157662EB00D4A638 /* InstrumentScoreNameEntity.m */,
+				E7F1E6F61575916F00D4A638 /* InstrumentEntity.h */,
+				E7F1E6F71575916F00D4A638 /* InstrumentEntity.m */,
+				E71E26AB1569C3920004A793 /* BreakTimeEntity.h */,
+				E71E26AC1569C3920004A793 /* BreakTimeEntity.m */,
 				E78DA6911520B1AD004ABF29 /* icd.xcdatamodeld */,
 			);
 			name = Models;
@@ -1147,7 +1213,11 @@
 		37F7CECD15005E9900AD2C3A /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				E799F3FB1541B44300A2596F /* Icon-72@2x.png */,
+				E7F1E73015775BA400D4A638 /* ipad-menubar-right.png */,
+				E7A9249215485E6C0080B35D /* blueArrow.png */,
+				E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */,
+				E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */,
+				E7919B271547001F001161A9 /* Icon-72@2x.png */,
 				E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */,
 				37B225501502861F0015D955 /* Default-Landscape~ipad.png */,
 				37B2254E150286170015D955 /* Default-Portrait~ipad.png */,
@@ -1228,8 +1298,6 @@
 				376797F61500665D00D0639D /* ABGroupNameChangeCell.xib */,
 				E7516B75150858D3005B798A /* ABGroupSelectionCell.h */,
 				E7516B76150858D3005B798A /* ABGroupSelectionCell.m */,
-				E7516B7915085A23005B798A /* PTABGroup.h */,
-				E7516B7A15085A23005B798A /* PTABGroup.m */,
 				376797FC1500665D00D0639D /* LongTimePickerCell_iPhone.xib */,
 				376797FE1500665D00D0639D /* MyPickerView.xib */,
 				37F7CED015005F7E00AD2C3A /* BehaviorPickerCell.h */,
@@ -1238,6 +1306,12 @@
 				37F7CED315005F7E00AD2C3A /* BOPickersDataSource.m */,
 				37F7CED415005F7E00AD2C3A /* ButtonCell.h */,
 				37F7CED515005F7E00AD2C3A /* ButtonCell.m */,
+				E7FB3AAB1562A4E3000A6782 /* TwoButtonCell.h */,
+				E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */,
+				E7FB3AB11562C867000A6782 /* AddViewABLinkButtonCell.h */,
+				E7FB3AB21562C867000A6782 /* AddViewABLinkButtonCell.m */,
+				E7FB3AB41562C888000A6782 /* LookupRemoveLinkButtonCell.h */,
+				E7FB3AB51562C888000A6782 /* LookupRemoveLinkButtonCell.m */,
 				37F7CED615005F7E00AD2C3A /* ClientsSelectionCell.h */,
 				37F7CED715005F7E00AD2C3A /* ClientsSelectionCell.m */,
 				37F7CED815005F7E00AD2C3A /* CustomSCSelectonCellWithLoading.h */,
@@ -1325,32 +1399,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		37F7CFE11500635900AD2C3A /* Sensible TableView */ = {
-			isa = PBXGroup;
-			children = (
-				37F7CFE21500635900AD2C3A /* LICENSE AGREEMENT.rtf */,
-				37F7CFE31500635900AD2C3A /* SCBadgeView.h */,
-				37F7CFE41500635900AD2C3A /* SCBadgeView.m */,
-				37F7CFE51500635900AD2C3A /* SCClassDefinition.h */,
-				37F7CFE61500635900AD2C3A /* SCClassDefinition.m */,
-				37F7CFE71500635900AD2C3A /* SCGlobals.h */,
-				37F7CFE81500635900AD2C3A /* SCGlobals.m */,
-				37F7CFE91500635900AD2C3A /* SCPropertyAttributes.h */,
-				37F7CFEA1500635900AD2C3A /* SCPropertyAttributes.m */,
-				37F7CFEB1500635900AD2C3A /* SCTableViewCell.h */,
-				37F7CFEC1500635900AD2C3A /* SCTableViewCell.m */,
-				37F7CFED1500635900AD2C3A /* SCTableViewController.h */,
-				37F7CFEE1500635900AD2C3A /* SCTableViewController.m */,
-				37F7CFEF1500635900AD2C3A /* SCTableViewModel.h */,
-				37F7CFF01500635900AD2C3A /* SCTableViewModel.m */,
-				37F7CFF11500635900AD2C3A /* SCTableViewSection.h */,
-				37F7CFF21500635900AD2C3A /* SCTableViewSection.m */,
-				37F7CFF31500635900AD2C3A /* SCViewController.h */,
-				37F7CFF41500635900AD2C3A /* SCViewController.m */,
-			);
-			path = "Sensible TableView";
-			sourceTree = "<group>";
-		};
 		B764788914DE6CED004EE572 /* Encrypted Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1386,7 +1434,6 @@
 				E78A8D1A1531EDF10099FE5B /* Reachability.m */,
 				37F7CFFF150063CE00AD2C3A /* TabFile.h */,
 				37F7D000150063CE00AD2C3A /* TabFile.m */,
-				37F7CFE11500635900AD2C3A /* Sensible TableView */,
 				37F7CE3E150051A900AD2C3A /* Download Bar */,
 				378DED4314FE72F000CF4F12 /* DTAboutViewController */,
 				378DEDB014FE73AF00CF4F12 /* LockScreen */,
@@ -1399,6 +1446,8 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
+				E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */,
+				E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */,
 				E78A8D101531DCB30099FE5B /* PsyTrack.entitlements */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Helpers */,
@@ -1493,11 +1542,32 @@
 			name = "Existing Hours";
 			sourceTree = "<group>";
 		};
+		E79AB6E01571834E009CE87A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E79AB6E81571834E009CE87A /* libSensibleTableView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E79AB6ED15718382009CE87A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E79AB6F515718382009CE87A /* libSTV+CoreData.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E7E1A638152E86C600C227E8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E7E1A63A152E873500C227E8 /* ServicesViewController_Shared.h */,
-				E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */,
+				E7910010157BF99300E4F73D /* SupportActivityDeliveredEntity.h */,
+				E7910011157BF99300E4F73D /* SupportActivityDeliveredEntity.m */,
+				E7F1E7611578254000D4A638 /* ServiceEntity.h */,
+				E7F1E7621578254000D4A638 /* ServiceEntity.m */,
+				E7E1A63A152E873500C227E8 /* TimeTrackViewController.h */,
+				E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */,
+				37F7CEA3150059D900AD2C3A /* TimeTrackViewController.xib */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -1516,6 +1586,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				E79AB6F71571838D009CE87A /* PBXTargetDependency */,
+				E79AB6EA1571835C009CE87A /* PBXTargetDependency */,
 			);
 			name = PsyTrack;
 			productName = psyTrainTrack;
@@ -1541,12 +1613,39 @@
 			mainGroup = B79F488D142BEF0C0085D47B;
 			productRefGroup = B79F4899142BEF0D0085D47B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E79AB6E01571834E009CE87A /* Products */;
+					ProjectRef = E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */;
+				},
+				{
+					ProductGroup = E79AB6ED15718382009CE87A /* Products */;
+					ProjectRef = E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B79F4897142BEF0D0085D47B /* PsyTrack */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		E79AB6E81571834E009CE87A /* libSensibleTableView.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSensibleTableView.a;
+			remoteRef = E79AB6E71571834E009CE87A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E79AB6F515718382009CE87A /* libSTV+CoreData.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libSTV+CoreData.a";
+			remoteRef = E79AB6F415718382009CE87A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B79F4896142BEF0D0085D47B /* Resources */ = {
@@ -1589,7 +1688,7 @@
 				37F7CE7F150057C300AD2C3A /* CliniciansDetailViewController_iPad.xib in Resources */,
 				37F7CE80150057C300AD2C3A /* CliniciansRootViewController_iPad.xib in Resources */,
 				37F7CE84150057FC00AD2C3A /* ClinicianViewController.xib in Resources */,
-				37F7CEA7150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib in Resources */,
+				37F7CEA7150059D900AD2C3A /* TimeTrackViewController.xib in Resources */,
 				37F7CEAE15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib in Resources */,
 				37F7CEAF15005C5F00AD2C3A /* TrainTrackViewController_iPhone.xib in Resources */,
 				37F7CEBA15005D6700AD2C3A /* ReportsDetailViewController_iPad.xib in Resources */,
@@ -1674,7 +1773,6 @@
 				37F7CFC915005FFC00AD2C3A /* padlock_click.m4a in Resources */,
 				37F7CFD1150060D400AD2C3A /* Settings.bundle in Resources */,
 				37F7CFDD1500624000AD2C3A /* CasualAlertViewController.xib in Resources */,
-				37F7CFF51500635900AD2C3A /* LICENSE AGREEMENT.rtf in Resources */,
 				376798041500665D00D0639D /* ABGroupNameChangeCell.xib in Resources */,
 				376798051500665D00D0639D /* InAppSettingsViewController.xib in Resources */,
 				376798071500665D00D0639D /* LongTimePickerCell_iPhone.xib in Resources */,
@@ -1691,7 +1789,14 @@
 				E78DA6A515252579004ABF29 /* ExistingHoursViewController.xib in Resources */,
 				E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */,
 				E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */,
-				E799F3FC1541B44300A2596F /* Icon-72@2x.png in Resources */,
+				E7919B281547001F001161A9 /* Icon-72@2x.png in Resources */,
+				E7919B3015470EDB001161A9 /* Default-Landscape@2x~ipad.png in Resources */,
+				E7919B3215470F01001161A9 /* Default-Portrait@2x~ipad.png in Resources */,
+				E7A92491154853760080B35D /* DrugTestViewController.xib in Resources */,
+				E7A9249315485E6C0080B35D /* blueArrow.png in Resources */,
+				E7A5D7081559EB26000F248F /* ClearBackgroundTheme.sct in Resources */,
+				E7A21371155B34CD005CF154 /* LogoBackgroundViewController.xib in Resources */,
+				E7F1E73115775BA400D4A638 /* ipad-menubar-right.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1736,8 +1841,6 @@
 				378DEDE214FE73AF00CF4F12 /* LCYTurnOffPasscodeStateMachine.m in Sources */,
 				37F7CDEF150031F100AD2C3A /* DrugActionDateViewController.m in Sources */,
 				37F7CDF1150031F100AD2C3A /* DrugAppDocsViewController.m in Sources */,
-				37F7CDF3150031F100AD2C3A /* DrugDetailViewController_iPad.m in Sources */,
-				37F7CDF5150031F100AD2C3A /* DrugRootViewController_iPad.m in Sources */,
 				37F7CDF7150031F100AD2C3A /* DrugsTableViewController.m in Sources */,
 				37F7CDF8150031F100AD2C3A /* DrugViewController_iPhone.m in Sources */,
 				37F7CDFA150031F100AD2C3A /* DrugWebViewActionsViewController.m in Sources */,
@@ -1803,15 +1906,6 @@
 				37F7CF5015005F7E00AD2C3A /* WeightPickerCell.m in Sources */,
 				37F7CFCF150060D400AD2C3A /* main.m in Sources */,
 				37F7CFE0150062DE00AD2C3A /* CasualAlertViewController.m in Sources */,
-				37F7CFF61500635900AD2C3A /* SCBadgeView.m in Sources */,
-				37F7CFF71500635900AD2C3A /* SCClassDefinition.m in Sources */,
-				37F7CFF81500635900AD2C3A /* SCGlobals.m in Sources */,
-				37F7CFF91500635900AD2C3A /* SCPropertyAttributes.m in Sources */,
-				37F7CFFA1500635900AD2C3A /* SCTableViewCell.m in Sources */,
-				37F7CFFB1500635900AD2C3A /* SCTableViewController.m in Sources */,
-				37F7CFFC1500635900AD2C3A /* SCTableViewModel.m in Sources */,
-				37F7CFFD1500635900AD2C3A /* SCTableViewSection.m in Sources */,
-				37F7CFFE1500635900AD2C3A /* SCViewController.m in Sources */,
 				37F7D001150063CF00AD2C3A /* TabFile.m in Sources */,
 				E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */,
 				E7516B7B15085A23005B798A /* PTABGroup.m in Sources */,
@@ -1822,7 +1916,6 @@
 				E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */,
 				E78480CA1518D7D800F48EA3 /* PhoneEntity.m in Sources */,
 				E75F7786151CC574002B10AE /* LogEntity.m in Sources */,
-				E75F778C151CF463002B10AE /* TestingSessionDeliveredEntity.m in Sources */,
 				E7912D0E151D332700E0609A /* DemographicProfileEntity.m in Sources */,
 				E7912D17151D349E00E0609A /* MigrationHistoryEntity.m in Sources */,
 				E7912D1A151DF7DB00E0609A /* VitalsEntity.m in Sources */,
@@ -1835,14 +1928,40 @@
 				E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */,
 				E78DA6A415252579004ABF29 /* ExistingHoursViewController.m in Sources */,
 				E7D3732C152C2EFA00121918 /* ExistingHoursEntity.m in Sources */,
-				E7E1A63D152E873500C227E8 /* ServicesViewController_Shared.m in Sources */,
+				E7E1A63D152E873500C227E8 /* TimeTrackViewController.m in Sources */,
 				E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */,
 				E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */,
 				E7B0A5B815347C430027F637 /* KeychainItemWrapper.m in Sources */,
+				E7A21370155B34CD005CF154 /* LogoBackgroundViewController.m in Sources */,
+				E7FB3AAD1562A4E4000A6782 /* TwoButtonCell.m in Sources */,
+				E7FB3AB31562C867000A6782 /* AddViewABLinkButtonCell.m in Sources */,
+				E7FB3AB61562C888000A6782 /* LookupRemoveLinkButtonCell.m in Sources */,
+				E71E26AD1569C3920004A793 /* BreakTimeEntity.m in Sources */,
+				E71E26C7156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m in Sources */,
+				E7F1E6F81575916F00D4A638 /* InstrumentEntity.m in Sources */,
+				E7F1E703157662EB00D4A638 /* InstrumentScoreNameEntity.m in Sources */,
+				E7F1E7061576966000D4A638 /* InstrumentScoreEntity.m in Sources */,
+				E7F1E7091576D17100D4A638 /* ClientInstrumentScoresEntity.m in Sources */,
+				E7F1E760157824B300D4A638 /* TestingSessionDeliveredEntity.m in Sources */,
+				E7F1E7631578254000D4A638 /* ServiceEntity.m in Sources */,
+				E7910012157BF99300E4F73D /* SupportActivityDeliveredEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E79AB6EA1571835C009CE87A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SensibleTableView;
+			targetProxy = E79AB6E91571835C009CE87A /* PBXContainerItemProxy */;
+		};
+		E79AB6F71571838D009CE87A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "STV+CoreData";
+			targetProxy = E79AB6F61571838D009CE87A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		376797F61500665D00D0639D /* ABGroupNameChangeCell.xib */ = {
@@ -2029,12 +2148,12 @@
 			name = ClinicianViewController.xib;
 			sourceTree = "<group>";
 		};
-		37F7CEA3150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib */ = {
+		37F7CEA3150059D900AD2C3A /* TimeTrackViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				37F7CEA4150059D900AD2C3A /* en */,
 			);
-			name = TestAdministrationsViewController_iPad.xib;
+			name = TimeTrackViewController.xib;
 			sourceTree = "<group>";
 		};
 		37F7CEAA15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib */ = {
@@ -2326,6 +2445,11 @@
 				CODE_SIGN_ENTITLEMENTS = PsyTrack.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Downloads/STV 3-1.0 Pro/Static Frameworks\"",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -2335,6 +2459,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/lib/system\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/A\"",
 				);
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "";
@@ -2350,6 +2476,11 @@
 				CODE_SIGN_ENTITLEMENTS = PsyTrack.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Downloads/STV 3-1.0 Pro/Static Frameworks\"",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
@@ -2359,6 +2490,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/lib/system\"",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/A\"",
 				);
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "";

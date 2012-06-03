@@ -16,10 +16,10 @@
  *
  */
 
+#import <UIKit/UIKit.h>
+#import "TimeTrackViewController.h"
 
-#import "ServicesViewController_Shared.h"
-
-@interface TestAdministrationsViewController_iPad : ServicesViewController_Shared < /*UINavigationControllerDelegate SCViewControllerDelegate,*/ SCTableViewModelDataSource, SCTableViewModelDelegate,/*UIGestureRecognizerDelegate,*/SCTableViewCellDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate> {
+@interface TestAdministrationsViewController_iPad : TimeTrackViewController < UINavigationControllerDelegate, SCViewControllerDelegate, SCTableViewModelDataSource, SCTableViewModelDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate> {
     
    
 }
@@ -27,7 +27,7 @@
 
 
 
--(void)updateAdministrationTotalLabel;
+
 
 
 @end

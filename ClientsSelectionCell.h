@@ -15,7 +15,7 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewCell.h"
+#import <UIKit/UIKit.h>
 
 @interface ClientsSelectionCell : SCObjectSelectionCell {
 
@@ -23,14 +23,15 @@
      NSManagedObject *clientObject;
     BOOL hasChangedClients;
     NSDate *testDate;
+    BOOL addAgeCells_;
 }
 
 
-@property (nonatomic, strong) IBOutlet NSMutableSet *alreadySelectedClients;
+@property (nonatomic, strong)  NSMutableSet *alreadySelectedClients;
 @property (nonatomic, readwrite)  BOOL hasChangedClients;
 @property (nonatomic, strong) NSDate *testDate;
 
-
+@property (nonatomic, assign) BOOL addAgeCells;
 @property (nonatomic,strong)IBOutlet  NSManagedObject *clientObject;
 
 -(void)doneButtonTappedInDetailView:(NSObject *)selectedObject  withValue:(BOOL)hasValue;

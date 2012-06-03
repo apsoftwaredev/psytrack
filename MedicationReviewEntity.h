@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSNumber * doseChange;
 @property (nonatomic, retain) NSDate * nextReview;
-@property (nonatomic, retain) NSString * adherance;
+@property (nonatomic, retain) NSString * adherence;
 @property (nonatomic, retain) NSString * dosage;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSNumber * satisfaction;

@@ -15,7 +15,7 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewModel.h"
+
 #import "MyPickerView.h"
 
 

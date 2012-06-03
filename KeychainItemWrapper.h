@@ -76,5 +76,6 @@ static NSString *serviceName = @"com.psycheweb.psytrack.cliniciantools";
 - (void)deleteKeychainValue:(NSString *)identifier ;
 // Initializes and resets the default generic keychain item data.
 - (void)resetKeychainItem;
-
+- (BOOL)createKeychainValueWithData:(NSData *)data forIdentifier:(NSString *)identifier;
+- (BOOL)updateKeychainValueWithData:(NSData *)data forIdentifier:(NSString *)identifier;
 @end

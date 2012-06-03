@@ -41,15 +41,15 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     DemographicDetailViewController_Shared *demographicDetailViewController_Shared =[[DemographicDetailViewController_Shared alloc]init];
     
     [demographicDetailViewController_Shared setupTheDemographicView];
-
+    [demographicDetailViewController_Shared.demographicProfileDef removePropertyDefinitionWithName:@"client"];
     
     //Create a class definition for Client entity
     
    
     
-	self.clientDef = [SCClassDefinition definitionWithEntityName:@"ClientEntity" 
-                                                      withManagedObjectContext:managedObjectContext 
-                                                             withPropertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth", @"keyString",
+	self.clientDef = [SCEntityDefinition definitionWithEntityName:@"ClientEntity" 
+                                                      managedObjectContext:managedObjectContext 
+                                                             propertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth", @"keyString",
                                                                                 @"initials",  @"demographicInfo", @"dateAdded",@"currentClient",@"phoneNumbers", @"logs", @"medicationHistory",@"diagnoses", @"vitals",  
                                                                 @"notes",nil]];
 	
@@ -119,10 +119,8 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	currentClientPropertyDef.attributes = [SCSegmentedAttributes attributesWithSegmentTitlesArray:[NSArray arrayWithObjects:@"Yes", @"No", nil]];
     
     SCPropertyDefinition *demographicProfilePropertyDef = [self.clientDef propertyDefinitionWithName:@"demographicInfo"];
-    demographicProfilePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:demographicDetailViewController_Shared.demographicProfileDef
-                                                                                              allowAddingItems:TRUE
-                                                                                            allowDeletingItems:TRUE
-                                                                                              allowMovingItems:FALSE];
+   
+    demographicProfilePropertyDef.attributes = [SCObjectAttributes attributesWithObjectDefinition:demographicDetailViewController_Shared.demographicProfileDef];
     SCPropertyDefinition *clientNotesPropertyDef = [self.clientDef propertyDefinitionWithName:@"notes"];
 //    clientNotesPropertyDef.type=SCPropertyTypeTextView;
     NSDictionary *encryClientNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32",@"33",@"34",nil]];
@@ -137,17 +135,19 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     clientNotesPropertyDef.autoValidate=NO;
 
     //Create a class definition for the phone NumberEntity
-    SCClassDefinition *phoneDef = [SCClassDefinition definitionWithEntityName:@"PhoneEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"phoneName",@"phoneNumber", @"extention", nil]];
-                                        
+    SCEntityDefinition *phoneDef = [SCEntityDefinition definitionWithEntityName:@"PhoneEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"phoneName",
+                                                                            @"phoneNumber", @"extension", nil]];
+                       
+    
     //Do some property definition customization for the phone Entity defined in phoneDef
     
     //create an array of objects definition for the phoneNumber to-many relationship that with show up in a different view with a place holder element>.
     
     //Create the property definition for the phoneNumbers property
     SCPropertyDefinition *phoneNumbersPropertyDef = [self.clientDef propertyDefinitionWithName:@"phoneNumbers"];
-    phoneNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:phoneDef allowAddingItems:TRUE
+    phoneNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:phoneDef allowAddingItems:TRUE
                                                                                       allowDeletingItems:TRUE
                                                                                         allowMovingItems:FALSE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add New Phone Number"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
     
@@ -179,13 +179,13 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     phoneDef.titlePropertyName=@"phoneName;phoneNumber";
-	if (![SCHelper is_iPad]) {
+	if (![SCUtilities is_iPad]) {
     
-    SCCustomPropertyDefinition *callButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"CallButton" withuiElementClass:[ButtonCell class] withObjectBindings:nil];
+    SCCustomPropertyDefinition *callButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"CallButton" uiElementClass:[ButtonCell class] objectBindings:nil];
     [phoneDef insertPropertyDefinition:callButtonProperty atIndex:3];
         
     }
-//    SCPropertyGroup *phoneGroup = [SCPropertyGroup groupWithHeaderTitle:@"Phone Number" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"phoneName",@"phoneNumber",@"extention" @"CallButton", nil]];
+//    SCPropertyGroup *phoneGroup = [SCPropertyGroup groupWithHeaderTitle:@"Phone Number" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"phoneName",@"phoneNumber",@"extension" @"CallButton", nil]];
 //    
 //    // add the phone property group
 //    [phoneDef.propertyGroups addGroup:phoneGroup];
@@ -193,15 +193,15 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
    
     
     //Create a class definition for the logsEntity
-    SCClassDefinition *logDef = [SCClassDefinition definitionWithEntityName:@"LogEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                          withPropertyNames:[NSArray arrayWithObjects:@"dateTime",
+    SCEntityDefinition *logDef = [SCEntityDefinition definitionWithEntityName:@"LogEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                          propertyNames:[NSArray arrayWithObjects:@"dateTime",
                                                                              @"notes",
                                                                               nil]];
     
     
     SCPropertyDefinition *logsPropertyDef = [self.clientDef propertyDefinitionWithName:@"logs"];
-    logsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:logDef allowAddingItems:TRUE
+    logsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:logDef allowAddingItems:TRUE
                                                                                       allowDeletingItems:TRUE
                                                                                         allowMovingItems:FALSE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add New Log Entry"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
     
@@ -246,9 +246,9 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 
 //    
 //    //Create a class definition for the medication Entity
-//    SCClassDefinition *diagnosesDef = [SCClassDefinition definitionWithEntityName:@"DiagnosisHistoryEntity" 
-//                                                          withManagedObjectContext:managedObjectContext
-//                                                                 withPropertyNames:[NSArray arrayWithObjects:@"drugName",@"dateStarted",  @"discontinued", @"symptomsTargeted",@"sideEffects",@"medLogs",
+//    SCEntityDefinition *diagnosesDef = [SCEntityDefinition definitionWithEntityName:@"DiagnosisHistoryEntity" 
+//                                                          managedObjectContext:managedObjectContext
+//                                                                 propertyNames:[NSArray arrayWithObjects:@"drugName",@"dateStarted",  @"discontinued", @"symptomsTargeted",@"sideEffects",@"medLogs",
 //                                                                                    @"notes",@"applNo", @"productNo",   
 //                                                                                    nil]];
 //
@@ -263,9 +263,9 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 //    status
     
     //Create a class definition for the medication Entity
-    SCClassDefinition *medicationDef = [SCClassDefinition definitionWithEntityName:@"MedicationEntity" 
-                                                   withManagedObjectContext:managedObjectContext
-                                                          withPropertyNames:[NSArray arrayWithObjects:@"drugName",@"dateStarted",  @"discontinued", @"symptomsTargeted",@"medLogs",
+    SCEntityDefinition *medicationDef = [SCEntityDefinition definitionWithEntityName:@"MedicationEntity" 
+                                                   managedObjectContext:managedObjectContext
+                                                          propertyNames:[NSArray arrayWithObjects:@"drugName",@"dateStarted",  @"discontinued", @"symptomsTargeted",@"medLogs",
                                                                              @"notes",@"applNo", @"productNo",   
                                                                              nil]];
     
@@ -283,7 +283,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     [medicationDef removePropertyDefinitionAtIndex:productNoIndex];
     
     
-    SCClassDefinition *medicationReviewDef =[SCClassDefinition definitionWithEntityName:@"MedicationReviewEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects: @"logDate",@"dosage",@"doseChange",@"sxChange",@"lastDose", @"adherance",@"sideEffects", @"nextReview", @"notes" , nil]];
+    SCEntityDefinition *medicationReviewDef =[SCEntityDefinition definitionWithEntityName:@"MedicationReviewEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects: @"logDate",@"dosage",@"doseChange",@"sxChange",@"lastDose", @"adherence",@"sideEffects", @"nextReview", @"notes" , nil]];
     
     
     
@@ -309,7 +309,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	
     //create the custom property definition
     SCCustomPropertyDefinition *drugNameDataProperty = [SCCustomPropertyDefinition definitionWithName:@"DrugNameData"
-                                                                                 withuiElementClass:[DrugNameObjectSelectionCell class] withObjectBindings:drugNameDataBindings];
+                                                                                 uiElementClass:[DrugNameObjectSelectionCell class] objectBindings:drugNameDataBindings];
 	
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
@@ -323,7 +323,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     [medicationDef insertPropertyDefinition:drugNameDataProperty atIndex:0];
     
     SCPropertyDefinition *medicationsPropertyDef = [self.clientDef propertyDefinitionWithName:@"medicationHistory"];
-    medicationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:medicationDef allowAddingItems:TRUE
+    medicationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:medicationDef allowAddingItems:TRUE
                                                                               allowDeletingItems:TRUE
                                                                                 allowMovingItems:FALSE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add New Medication Entry"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
     
@@ -370,17 +370,15 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                                        datePickerMode:UIDatePickerModeDate
                                                         displayDatePickerInDetailView:NO];
     
-    SCCustomPropertyDefinition *clearDiscontinuedButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"clearDiscontinued" withuiElementClass:[ButtonCell class] withObjectBindings:nil];
-    [medicationDef insertPropertyDefinition:clearDiscontinuedButtonProperty atIndex:4];
-    
+       
    
     //Create a class definition for the Additional Symptoms Entity
-    SCClassDefinition *symptomDef = [SCClassDefinition definitionWithEntityName:@"AdditionalSymptomEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"symptomName",   @"notes",@"onset",nil]];
+    SCEntityDefinition *symptomDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalSymptomEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"symptomName",   @"notes",@"onset",nil]];
     
-//    SCClassDefinition *symptomDef = [SCClassDefinition definitionWithEntityName:@"AdditionalSymptomEntity" 
-//                                                       withManagedObjectContext:managedObjectContext
+//    SCEntityDefinition *symptomDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalSymptomEntity" 
+//                                                       managedObjectContext:managedObjectContext
 //                                                autoGeneratePropertyDefinitions:YES];    
     
     
@@ -388,7 +386,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //Do some property definition customization for the additional symptoms Entity defined in symptomsDef
     NSString *scaleDataCellNibName=nil;
 
-    if ([SCHelper is_iPad]) {
+    if ([SCUtilities is_iPad]) {
         
         scaleDataCellNibName=@"ScaleDataCell_iPad";
     
@@ -403,8 +401,8 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                               dictionaryWithObjects:[NSArray arrayWithObject:@"severity"] 
                                               forKeys:[NSArray arrayWithObject:@"70"]]; // 1 is the control tag
 	SCCustomPropertyDefinition *severityLevelDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SeverityData"
-                                                                                     withuiElementNibName:scaleDataCellNibName
-                                                                                       withObjectBindings:severityLevelDataBindings];
+                                                                                     uiElementNibName:scaleDataCellNibName
+                                                                                       objectBindings:severityLevelDataBindings];
 	
     
     
@@ -413,7 +411,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     SCPropertyDefinition *symptomsTargetedPropertyDef = [medicationDef propertyDefinitionWithName:@"symptomsTargeted"];
     
     
-    symptomsTargetedPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:symptomDef
+    symptomsTargetedPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:symptomDef
                                                                                               allowAddingItems:YES
                                                                                             allowDeletingItems:YES
                                                                                             allowMovingItems:YES expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add symptoms"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
@@ -421,16 +419,18 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     //Create a class definition for the symptom NameEntity
-    SCClassDefinition *symptomNameDef = [SCClassDefinition definitionWithEntityName:@"AdditionalSymptomNameEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"symptomName",@"symptomDescription" , nil]];
+    SCEntityDefinition *symptomNameDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalSymptomNameEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"symptomName",@"symptomDescription" , nil]];
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
        
     SCPropertyDefinition *symptomNamePropertyDef = [symptomDef propertyDefinitionWithName:@"symptomName"];
     symptomNamePropertyDef.type = SCPropertyTypeObjectSelection;
     symptomNamePropertyDef.title=@"Symptom";
-	SCObjectSelectionAttributes *symptomNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:symptomNameDef allowMultipleSelection:NO allowNoSelection:NO];
+	SCObjectSelectionAttributes *symptomNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:symptomNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    
+ 
     symptomNameSelectionAttribs.allowAddingItems = YES;
     symptomNameSelectionAttribs.allowDeletingItems = YES;
     symptomNameSelectionAttribs.allowMovingItems = YES;
@@ -453,7 +453,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     SCPropertyDefinition *medLogsPropertyDef = [medicationDef propertyDefinitionWithName:@"medLogs"];
-    medLogsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:medicationReviewDef allowAddingItems:TRUE
+    medLogsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:medicationReviewDef allowAddingItems:TRUE
                                                                                      allowDeletingItems:TRUE
                                                                                        allowMovingItems:FALSE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add New Medication Log Entry"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
     
@@ -474,11 +474,11 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     medicationReviewNotesPropertyDef.autoValidate=NO;
     
     medicationReviewDef.keyPropertyName=@"logDate";
-    
+    medicationReviewDef.titlePropertyName=@"logDate";
     //Create the property definition for the date property in the medicatioReviewnDef class  definition
     SCPropertyDefinition *medLogDatePropertyDef = [medicationReviewDef propertyDefinitionWithName:@"logDate"];
     
-    medLogDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:medDateFormatter
+    medLogDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
                                                                        datePickerMode:UIDatePickerModeDate
                                                         displayDatePickerInDetailView:NO];
     
@@ -490,9 +490,9 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                        displayDatePickerInDetailView:NO];
     
     //Create a class definition for the sideEffectEntity
-    SCClassDefinition *sideEffectDef = [SCClassDefinition definitionWithEntityName:@"SideEffectEntity" 
-                                                          withManagedObjectContext:managedObjectContext
-                                                                 withPropertyNames:[NSArray arrayWithObjects:@"effect", nil]];
+    SCEntityDefinition *sideEffectDef = [SCEntityDefinition definitionWithEntityName:@"SideEffectEntity" 
+                                                          managedObjectContext:managedObjectContext
+                                                                 propertyNames:[NSArray arrayWithObjects:@"effect", nil]];
     
     //Do some property definition customization for the sideeffect Entity defined in sideEffectDef
     
@@ -500,7 +500,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     SCPropertyDefinition *sideEffectsPropertyDef = [medicationReviewDef propertyDefinitionWithName:@"sideEffects"];
     
    	sideEffectsPropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *sideEffectsSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:sideEffectDef allowMultipleSelection:YES allowNoSelection:YES];
+	SCObjectSelectionAttributes *sideEffectsSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:sideEffectDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
     sideEffectsSelectionAttribs.allowAddingItems = YES;
     sideEffectsSelectionAttribs.allowDeletingItems = YES;
     sideEffectsSelectionAttribs.allowMovingItems = NO;
@@ -533,7 +533,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     doseChangePropertyDef.attributes = [SCSegmentedAttributes attributesWithSegmentTitlesArray:[NSArray arrayWithObjects:@"None",@"Decrease", @"Increase"  , nil]];
     
     NSString *satisfactionDataCellNibName;
-    if ([SCHelper is_iPad]) {
+    if ([SCUtilities is_iPad]) {
        satisfactionDataCellNibName= @"ScaleDataCell_iPad";
     }
     else
@@ -546,8 +546,8 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	
     
     SCCustomPropertyDefinition *satisfactionLevelDataProperty = [SCCustomPropertyDefinition definitionWithName:@"satisfaction"
-                                                                                     withuiElementNibName:satisfactionDataCellNibName
-                                                                                       withObjectBindings:satisfactionLevelDataBindings];
+                                                                                     uiElementNibName:satisfactionDataCellNibName
+                                                                                       objectBindings:satisfactionLevelDataBindings];
     
     
     
@@ -572,7 +572,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	
     //create the custom property definition
     SCCustomPropertyDefinition *clinicianDataProperty = [SCCustomPropertyDefinition definitionWithName:@"PrescriberData"
-                                                                                   withuiElementClass:[ClinicianSelectionCell class] withObjectBindings:clinicianDataBindings];
+                                                                                   uiElementClass:[ClinicianSelectionCell class] objectBindings:clinicianDataBindings];
 	
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
@@ -591,14 +591,14 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
 //   	prescriberPropertyDef.type = SCPropertyTypeObjectSelection;
 //    
-//    SCClassDefinition *prescriberDef =[SCClassDefinition definitionWithEntityName:@"ClinicianEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
+//    SCEntityDefinition *prescriberDef =[SCEntityDefinition definitionWithEntityName:@"ClinicianEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
 //    prescriberDef.titlePropertyName=@"lastName;firstName";
 //    prescriberDef.titlePropertyNameDelimiter=@", ";
 //    prescriberDef.keyPropertyName=@"lastName";
 //    
-//    SCPropertyGroup *prescriberNameGroup =[SCPropertyGroup groupWithHeaderTitle:@"Prescriber Name" withFooterTitle:@"Select this prescriber under the Clinician tab to add or view more details." withPropertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
+//    SCPropertyGroup *prescriberNameGroup =[SCPropertyGroup groupWithHeaderTitle:@"Prescriber Name" footerTitle:@"Select this prescriber under the Clinician tab to add or view more details." propertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
 //    
-//    SCObjectSelectionAttributes *prescriberSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:prescriberDef allowMultipleSelection:NO allowNoSelection:NO];
+//    SCObjectSelectionAttributes *prescriberSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:prescriberDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
 //    prescriberSelectionAttribs.allowAddingItems = YES;
 //    prescriberSelectionAttribs.allowDeletingItems = YES;
 //    prescriberSelectionAttribs.allowMovingItems = YES;
@@ -612,36 +612,36 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 //    
     
     
-    //Create a property definition for the adherance property.
-    SCPropertyDefinition *adherancePropertyDef = [medicationReviewDef propertyDefinitionWithName:@"adherance"];
+    //Create a property definition for the adherence property.
+    SCPropertyDefinition *adherencePropertyDef = [medicationReviewDef propertyDefinitionWithName:@"adherence"];
     
-    //set the adherance property definition type to a selectiong Cell
-    adherancePropertyDef.type = SCPropertyTypeSelection;
+    //set the adherence property definition type to a selectiong Cell
+    adherencePropertyDef.type = SCPropertyTypeSelection;
     
        
     //set the selection attributes and define the list of items to be selected
-    adherancePropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Refuses", @"Poor", @"Needs Assistance",@"Frequently Forgets",@"Adequate",@"Good",@"Excellent", nil] 
+    adherencePropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Refuses", @"Poor", @"Needs Assistance",@"Frequently Forgets",@"Adequate",@"Good",@"Excellent", nil] 
                                                             allowMultipleSelection:YES
                                                                   allowNoSelection:YES
                                                              autoDismissDetailView:NO hideDetailViewNavigationBar:NO];
     
     
     //define a property group
-    SCPropertyGroup *followUpGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"doseChange",   @"sxChange",@"lastDose", @"adherance",@"sideEffects", @"satisfaction", nil]];
+    SCPropertyGroup *followUpGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"doseChange",   @"sxChange",@"lastDose", @"adherence",@"sideEffects", @"satisfaction", nil]];
     
     // add the followup property group to the medication Review class. 
     [medicationReviewDef.propertyGroups addGroup:followUpGroup];
     
-    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObject:@"notes"]];
+    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"notes"]];
     
     // add the followup property group to the behavioralObservationsDef class. 
     [medicationReviewDef.propertyGroups addGroup:notesGroup];
     
     
     //Create a class definition for the vitals Entity
-    SCClassDefinition *vitalsDef = [SCClassDefinition definitionWithEntityName:@"VitalsEntity" 
-                                                        withManagedObjectContext:managedObjectContext
-                                                               withPropertyNames:[NSArray arrayWithObjects:@"dateTaken",@"systolicPressure",@"diastolicPressure", @"heartRate",@"temperature",@"heightTall", @"heightUnit",   @"weight",  @"weightUnit",  nil]];
+    SCEntityDefinition *vitalsDef = [SCEntityDefinition definitionWithEntityName:@"VitalsEntity" 
+                                                        managedObjectContext:managedObjectContext
+                                                               propertyNames:[NSArray arrayWithObjects:@"dateTaken",@"systolicPressure",@"diastolicPressure", @"heartRate",@"temperature",@"heightTall", @"heightUnit",   @"weight",  @"weightUnit",  nil]];
     
     
     
@@ -662,12 +662,12 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	
     
     NSString *heightPickerNibName;
-    if ([SCHelper is_iPad]) 
+    if ([SCUtilities is_iPad]) 
         heightPickerNibName=[NSString stringWithString:@"HeightPickerCell_iPad"];
     else
         heightPickerNibName=[NSString stringWithString:@"HeightPickerCell_iPhone"];
     
-    SCCustomPropertyDefinition *heightProperty = [SCCustomPropertyDefinition definitionWithName:@"HeightTall" withuiElementNibName:heightPickerNibName withObjectBindings:heightPickerDataBindings];
+    SCCustomPropertyDefinition *heightProperty = [SCCustomPropertyDefinition definitionWithName:@"HeightTall" uiElementNibName:heightPickerNibName objectBindings:heightPickerDataBindings];
 	
     
     
@@ -686,12 +686,12 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     [vitalsDef removePropertyDefinitionWithName:@"heightUnit"];
     
     NSString *weightPickerNibName;
-    if ([SCHelper is_iPad]) 
+    if ([SCUtilities is_iPad]) 
         weightPickerNibName=[NSString stringWithString:@"WeightPickerCell_iPad"];
     else
         weightPickerNibName=[NSString stringWithString:@"WeightPickerCell_iPhone"];
     
-    SCCustomPropertyDefinition *weightProperty = [SCCustomPropertyDefinition definitionWithName:@"Weight" withuiElementNibName:weightPickerNibName withObjectBindings:weightPickerDataBindings];
+    SCCustomPropertyDefinition *weightProperty = [SCCustomPropertyDefinition definitionWithName:@"Weight" uiElementNibName:weightPickerNibName objectBindings:weightPickerDataBindings];
 	
     
     [vitalsDef insertPropertyDefinition:weightProperty atIndex:1];
@@ -721,14 +721,14 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     //Create the property definition for the vitals property
     SCPropertyDefinition *vitalsPropertyDef = [self.clientDef propertyDefinitionWithName:@"vitals"];
-    vitalsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:vitalsDef
+    vitalsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:vitalsDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
                                                                                     allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add vitals"]                                                      addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     vitalsPropertyDef.title=@"Vitals/Height/Weight";
-    SCPropertyGroup *clientInfoGroup = [SCPropertyGroup groupWithHeaderTitle:@"De-Identified Client Data" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth",@"initials",@"demographicInfo",@"dateAdded",@"currentClient",@"phoneNumbers", @"logs",@"medicationHistory",@"diagnoses", @"vitals", @"notes", nil]];
+    SCPropertyGroup *clientInfoGroup = [SCPropertyGroup groupWithHeaderTitle:@"De-Identified Client Data" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth",@"initials",@"demographicInfo",@"dateAdded",@"currentClient",@"phoneNumbers", @"logs",@"medicationHistory",@"diagnoses", @"vitals", @"notes", nil]];
     
     
 

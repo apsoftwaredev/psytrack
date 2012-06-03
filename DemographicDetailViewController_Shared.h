@@ -16,7 +16,7 @@
  *
  */
 #import <UIKit/UIKit.h>
-#import "SCTableViewModel.h"
+
 
 
 @interface DemographicDetailViewController_Shared : NSObject{
@@ -26,7 +26,7 @@
 }
 
 
-@property (strong,nonatomic)IBOutlet SCClassDefinition *demographicProfileDef;
+@property (strong,nonatomic)IBOutlet SCEntityDefinition *demographicProfileDef;
 
 
 -(id)setupTheDemographicView;

@@ -45,7 +45,7 @@
 
     self.picker.frame = pickerFrame;
   
-    if([SCHelper is_iPad])
+    if([SCUtilities is_iPad])
 		self.view.backgroundColor = [UIColor colorWithRed:32.0f/255 green:35.0f/255 blue:42.0f/255 alpha:1];
 	else
 		self.view.backgroundColor = [UIColor colorWithRed:41.0f/255 green:42.0f/255 blue:57.0f/255 alpha:1];

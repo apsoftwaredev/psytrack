@@ -18,19 +18,34 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@class CliniciansRootViewController_iPad;
 
-@interface CliniciansDetailViewController_iPad : UITableViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate, SCTableViewModelDelegate> {
-    
-    CliniciansRootViewController_iPad *cliniciansRootViewController_iPad;
+@interface CliniciansDetailViewController_iPad : SCTableViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> 
+{
     UIPopoverController *popoverController;
-    UITableView *tableView;
-	UIBarButtonItem *addButtonItem;
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*<UIPopoverControllerDelegate, UISplitViewControllerDelegate, SCTableViewModelDelegate> */
+    
+//    CliniciansRootViewController_iPad *cliniciansRootViewController_iPad;
+//    UIPopoverController *popoverController;
+//    UITableView *tableView;
+//	UIBarButtonItem *addButtonItem;
 
 }
-
+/*
 @property (nonatomic,strong) IBOutlet CliniciansRootViewController_iPad *cliniciansRootViewController_iPad;
 
 @property (nonatomic, strong) UIBarButtonItem *addButtonItem;
-
+*/
 @end

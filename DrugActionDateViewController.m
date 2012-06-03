@@ -42,13 +42,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Gracefully handle reloading the view controller after a memory warning
-    tableModel = (SCArrayOfObjectsModel *)[[SCModelCenter sharedModelCenter] modelForViewController:self];
-    if(tableModel)
-    {
-        [tableModel replaceModeledTableViewWith:self.tableView];
-        return;
-    }
     
 	
     // Set up the edit and add buttons.
@@ -160,20 +153,24 @@
     
     
     
-    SCClassDefinition *actionDateDef=[SCClassDefinition definitionWithEntityName:@"DrugRegActionDateEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"actionDate", @"docType", nil]];
+    SCEntityDefinition *actionDateDef=[SCEntityDefinition definitionWithEntityName:@"DrugRegActionDateEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"actionDate", @"docType", nil]];
     
 
 //    NSMutableArray *mutableArray=[NSMutableArray arrayWithArray:fetchedObjects];
     
     actionDateDef.keyPropertyName=@"actionDate";
     
-    SCArrayOfObjectsSection *section=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"USFDA Actions" withItems:[NSMutableArray arrayWithArray:fetchedObjectsArray]];
+
+    
+    SCArrayOfObjectsSection *section=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"USFDA Actions" items:[NSMutableArray arrayWithArray:fetchedObjectsArray] itemsDefinition:nil];
+    
+   
     section.allowDeletingItems=FALSE;
     section.allowEditDetailView=FALSE;
     section.allowMovingItems=FALSE;
     section.allowAddingItems=FALSE;
     
-    section.sortItemsSetAscending=FALSE;
+//    section.sortItemsSetAscending=FALSE;
        
      
    
@@ -181,7 +178,7 @@
     
     
     // Instantiate the tabel model
-	tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self];	
+	tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView];	
     
     [tableModel addSection:section];
         
@@ -258,7 +255,7 @@
     //    
     
     
-    if([SCHelper is_iPad]){
+    if([SCUtilities is_iPad]){
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
         [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
@@ -285,7 +282,7 @@
 #pragma mark -
 #pragma mark SCTableViewModelDataSource methods
 
-- (SCControlCell *)tableViewModel:(SCTableViewModel *)tableViewModel
+- (SCCustomCell *)tableViewModel:(SCTableViewModel *)tableViewModel
 	  customCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	
@@ -297,14 +294,15 @@
     NSDictionary *actionOverviewBindings = [NSDictionary 
                                             dictionaryWithObjects:[NSArray arrayWithObjects:@"actionDate", @"docTypeDesc",@"actionDate",@"DrugAppDocsViewController",   nil] 
                                             forKeys:[NSArray arrayWithObjects:@"1",  @"top",@"bottom",@"openNib",nil]]; // 1,2,3 are the control tags
-	SCControlCell *actionOverviewCell = [SCControlCell cellWithText:nil withBoundObject:nil withObjectBindings:actionOverviewBindings
-                                                        withNibName:@"DrugDocOverviewCell_iPhone"];
+	SCCustomCell *actionOverviewCell = [SCCustomCell cellWithText:nil boundObject:nil objectBindings:actionOverviewBindings nibName:@"DrugDocOverviewCell_iPhone"];
 	
+
+   
 	return actionOverviewCell;
 }
 
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {
     
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];

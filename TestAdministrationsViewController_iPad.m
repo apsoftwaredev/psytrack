@@ -19,6 +19,7 @@
 #import "PTTAppDelegate.h"
 #import "Time_Shared.h"
 #import "ButtonCell.h"
+#import "ClinicianSelectionCell.h"
 
 
 
@@ -59,11 +60,11 @@
     
     UIViewController *navtitle=self.navigationController.topViewController;
     
-    navtitle.title=@"Testing Sessions";
+    navtitle.title=@"Assessments";
     
     
-    SCClassDefinition *testSessionDeliveredDef =[SCClassDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
-                                                                   withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType", @"certificationsCredited",   @"degreesCredited",  @"licenseNumbersCredited", @"relatedSupportTime", @"supervisor", @"testsAdministered",   @"trainingType", @"treatmentSetting",  @"eventIdentifier",     nil]];        
+    SCEntityDefinition *testSessionDeliveredDef =[SCEntityDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
+                                                                   managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType",     @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]];        
     
     
     
@@ -102,26 +103,27 @@
     //create a custom property definition for the Button Cell
     
     NSDictionary *buttonCellObjectBinding=[NSDictionary dictionaryWithObject:@"eventIdentifier" forKey:@"event_identifier"];
-    SCCustomPropertyDefinition *eventButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"EventButtonCell" withuiElementClass:[ButtonCell class] withObjectBindings:buttonCellObjectBinding];
+    SCCustomPropertyDefinition *eventButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"EventButtonCell" uiElementClass:[ButtonCell class] objectBindings:buttonCellObjectBinding];
     
     //add the property definition to the test administration detail view  
     [testSessionDeliveredDef addPropertyDefinition:eventButtonProperty];
     //define a property group
-    SCPropertyGroup *eventGroup = [SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"dateOfService",@"time",@"clientPresentations", @"EventButtonCell",nil]];
+    SCPropertyGroup *eventGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"dateOfService",@"time",@"clientPresentations", @"EventButtonCell",nil]];
     
     // add the event Group property group to the behavioralObservationsDef class. 
     [testSessionDeliveredDef.propertyGroups addGroup:eventGroup];
        
    
-    SCPropertyGroup *peopleGroup =[SCPropertyGroup groupWithHeaderTitle:nil withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"supervisor",@"paperwork",   @"notes",nil]];
+    SCPropertyGroup *peopleGroup =[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"SupervisorData",@"paperwork",   @"notes",nil]];
     
     
     
     [testSessionDeliveredDef.propertyGroups addGroup:peopleGroup];
     
     
-    SCPropertyGroup *detailsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Administration Details" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"testsAdministered",@"assessmentType",@"treatmentSetting",@"trainingType", @"relatedSupportTime", nil]];
+    SCPropertyGroup *detailsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Administration Details" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"testsAdministered",@"assessmentType",@"treatmentSetting",@"trainingType", @"relatedSupportTime", nil]];
     
+   
     
     [testSessionDeliveredDef.propertyGroups addGroup:detailsGroup]; 
     
@@ -130,155 +132,50 @@
     SCPropertyDefinition *licenseNumbersCreditedPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"licenseNumbersCredited"];
     licenseNumbersCreditedPropertyDef.title=@"Licenses Credited";
     
-    SCPropertyGroup *creditsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Credits" withFooterTitle:nil withPropertyNames:[NSArray arrayWithObjects:@"degreesCredited",@"certificationsCredited",@"licenseNumbersCredited",nil]];
+    SCPropertyGroup *creditsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Credits" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"degreesCredited",@"certificationsCredited",@"licenseNumbersCredited",nil]];
     
     
     [testSessionDeliveredDef.propertyGroups addGroup:creditsGroup];
     
     
-    SCPropertyDefinition *supervivisorPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"supervisor"];
+ 
+    [testSessionDeliveredDef removePropertyDefinitionWithName:@"supervisor"];
     
-   	supervivisorPropertyDef.type = SCPropertyTypeObjectSelection;
+    //create the dictionary with the data bindings
+    NSDictionary *clinicianDataBindings = [NSDictionary 
+                                           dictionaryWithObjects:[NSArray arrayWithObjects:@"supervisor",@"Supervisor",[NSNumber numberWithBool:NO],@"supervisor",[NSNumber numberWithBool:NO],nil] 
+                                           forKeys:[NSArray arrayWithObjects:@"1",@"90",@"91",@"92",@"93",nil ]]; // 1 are the control tags
+	
+    //create the custom property definition
+    SCCustomPropertyDefinition *clinicianDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SupervisorData"
+                                                                                        uiElementClass:[ClinicianSelectionCell class] objectBindings:clinicianDataBindings];
+	
     
-    SCClassDefinition *supervisorDef =[SCClassDefinition definitionWithEntityName:@"ClinicianEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix", nil]];
-    supervisorDef.titlePropertyName=@"prefix;firstName;lastName;suffix";
-    supervisorDef.orderAttributeName=@"order";
-    
-    SCPropertyGroup *supervisorNameGroup =[SCPropertyGroup groupWithHeaderTitle:@"Supervisor Name" withFooterTitle:@"Select this clinician under the Clicician tab to add or view more details." withPropertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix", nil]];
+    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+    clinicianDataProperty.autoValidate=FALSE;
     
     
+     [testSessionDeliveredDef insertPropertyDefinition:clinicianDataProperty atIndex:1];
     
     
-    [supervisorDef.propertyGroups addGroup:supervisorNameGroup];
+    /****************************************************************************************/
+    /*	END of Class Definition and attributes for the Client Entity */
+    /****************************************************************************************/
     
-    SCObjectSelectionAttributes *supervisorSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:supervisorDef allowMultipleSelection:NO allowNoSelection:NO];
-    supervisorSelectionAttribs.allowAddingItems = YES;
-    supervisorSelectionAttribs.allowDeletingItems = YES;
-    supervisorSelectionAttribs.allowMovingItems = YES;
-    supervisorSelectionAttribs.allowEditingItems = YES;
-    supervisorSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Supervisors)"];
-    supervisorSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Supervisor"];
-    supervivisorPropertyDef.attributes = supervisorSelectionAttribs;
-    
+  
     SCPropertyDefinition *clientsPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"clients"];
     
    	clientsPropertyDef.type = SCPropertyTypeObjectSelection;
     
     
     
-    //During a testing session (PsyTestingSessionDeliveredEntity), the examiner may administer many different tests (PsyTestAdministeredEntity). The testing session may be a group administration or individual administration, and may be considered neuropsych testing or other types of testing (testingSessionTypeEntity).  The tests administered may break down into several score indexes (PsyTestScoreEntity).  The individual tests may be any differnt type of test, including personality test, intelligence test, neuropsych batteries, etc(PsyTestTypeEntity).  For example, a neuropsch testing session on a particular day may include personality tests, memory tests, achievement tests, intelligence tests, and neuropsych battery of tests.  The session includes the overall time of the testing session and includes the other details such as the client and supervisor where the credits are applied.//
-    
-    
-    SCPropertyDefinition *testsAdministeredPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"testsAdministered"];
-    
-    
-    
-    SCClassDefinition *testAdministeredDef =[SCClassDefinition definitionWithEntityName:@"TestAdministeredEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"psychTestName" ,@"scores",@"notes", nil]];
-    
-    
-    
-    
-    testAdministeredDef.orderAttributeName = @"order";
-    SCPropertyDefinition *testAdministeredNotesPropertyDef=[testAdministeredDef propertyDefinitionWithName:@"notes"];
-    testAdministeredNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-    testsAdministeredPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:testAdministeredDef
-                                                             allowAddingItems:TRUE
-                                                           allowDeletingItems:TRUE
-                                                             allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Tests Administered)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:TRUE addNewObjectuiElementExistsInEditingMode:FALSE];
-    
-    
-    
-    testAdministeredDef.titlePropertyName=@"psychTestName.acronym";
-    
-    SCClassDefinition *testNameDef=[SCClassDefinition definitionWithEntityName:@"InstrumentEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"instrumentName", @"acronym",@"instrumentType", @"notes", nil]];
-    
-    
-    testNameDef.titlePropertyName=@"acronym";
-    
-    testNameDef.orderAttributeName=@"order";
-    
-    
-    
-    SCPropertyDefinition *testNamePropertyDef=[testAdministeredDef propertyDefinitionWithName:@"psychTestName"];
-    testNamePropertyDef.type =SCPropertyTypeObjectSelection;
-    
-    SCObjectSelectionAttributes *testNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:testNameDef allowMultipleSelection:NO allowNoSelection:NO];
-    testNameSelectionAttribs.allowAddingItems = YES;
-    testNameSelectionAttribs.allowDeletingItems = YES;
-    testNameSelectionAttribs.allowMovingItems = YES;
-    testNameSelectionAttribs.allowEditingItems = YES;
-    testNameSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Test Names)"];
-    testNameSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Test Name"];
-    testNamePropertyDef.attributes = testNameSelectionAttribs;
-    
-        SCPropertyDefinition *testNameNotesPropertyDef=[testNameDef propertyDefinitionWithName:@"notes"];
-    testNameNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-    
-    //testTypeEntity is in a one to many relationship with testNameEntity.
-    
-    SCClassDefinition *testTypeDef=[SCClassDefinition definitionWithEntityName:@"InstrumentTypeEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"instrumentType", @"notes", nil]];
-    
-    
-    
-    testTypeDef.orderAttributeName=@"order";
-    
-    
-    
-    SCPropertyDefinition *testTypePropertyDef=[testNameDef propertyDefinitionWithName:@"instrumentType"];
-    testTypePropertyDef.type =SCPropertyTypeObjectSelection;
-    
-    SCObjectSelectionAttributes *testTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:testTypeDef allowMultipleSelection:NO allowNoSelection:NO];
-    testTypeSelectionAttribs.allowAddingItems = YES;
-    testTypeSelectionAttribs.allowDeletingItems = YES;
-    testTypeSelectionAttribs.allowMovingItems = YES;
-    testTypeSelectionAttribs.allowEditingItems = YES;
-    testTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Test Types)"];
-    testTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Test Type"];
-    testTypePropertyDef.attributes = testTypeSelectionAttribs;
-    
-   
-    SCPropertyDefinition *testTypeNotesPropertyDef=[testTypeDef propertyDefinitionWithName:@"notes"];
-    testTypeNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-    
-    
-    SCClassDefinition *testScoredDef =[SCClassDefinition definitionWithEntityName:@"TestScoreEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"scoreName" ,@"score",@"notes", nil]];
-    
-    
-    
-    
-    testScoredDef.orderAttributeName = @"order";
-    
-    
-    SCPropertyDefinition *testScoredNotesPropertyDef=[testScoredDef propertyDefinitionWithName:@"notes"];
-    testScoredNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-    SCPropertyDefinition *testScoredNamePropertyDef=[testScoredDef propertyDefinitionWithName:@"scoreName"];
-    testScoredNamePropertyDef.type=SCPropertyTypeTextView;
-    testScoredNamePropertyDef.title=@"Score Name/Index";
-    testScoredDef.titlePropertyName=@"scoreName;score";
-    
-    
-    SCPropertyDefinition *testAdministeredScoresPropertyDef=[testAdministeredDef propertyDefinitionWithName:@"scores"];
-    testAdministeredScoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:testScoredDef
-                                                       allowAddingItems:TRUE
-                                                     allowDeletingItems:TRUE
-                                                       allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Test Scores)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:TRUE addNewObjectuiElementExistsInEditingMode:FALSE];
-    
-    
-    
-    testAdministeredDef.titlePropertyName=@"psychTestName.acronym";
     
     
     
     
     
     
-    
-    
-    SCClassDefinition *testSessionTypeDef=[SCClassDefinition definitionWithEntityName:@"TestingSessionTypeEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"assessmentType", @"notes", nil]];
+    SCEntityDefinition *testSessionTypeDef=[SCEntityDefinition definitionWithEntityName:@"TestingSessionTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"assessmentType", @"notes", nil]];
     
     
     
@@ -290,7 +187,7 @@
     SCPropertyDefinition *testingSessionTypePropertyDef=[testSessionDeliveredDef propertyDefinitionWithName:@"assessmentType"];
     testingSessionTypePropertyDef.type =SCPropertyTypeObjectSelection;
     
-    SCObjectSelectionAttributes *testSessionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:testSessionTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *testSessionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:testSessionTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     testSessionTypeSelectionAttribs.allowAddingItems = YES;
     testSessionTypeSelectionAttribs.allowDeletingItems = YES;
     testSessionTypeSelectionAttribs.allowMovingItems = YES;
@@ -304,41 +201,9 @@
     SCPropertyDefinition *testSessionTypeNotesPropertyDef=[testSessionTypeDef propertyDefinitionWithName:@"notes"];
     testSessionTypeNotesPropertyDef.type=SCPropertyTypeTextView;
     
-    //treatment setting start
-    SCClassDefinition *psychTreatmentSettingDef=[SCClassDefinition definitionWithEntityName:@"TreatmentSettingEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"settingType", @"notes", nil]];
-    
-    
-    
-    
-    
-    psychTreatmentSettingDef.orderAttributeName=@"order";
-    
-    
-    //treatment setting is a place or setting where the treatment takes place (e.g., hospital, community mental health clinic, day program
-    
-    SCPropertyDefinition *sessionTreatmentSettingPropertyDef=[testSessionDeliveredDef propertyDefinitionWithName:@"treatmentSetting"];
-    sessionTreatmentSettingPropertyDef.type =SCPropertyTypeObjectSelection;
-    
-    SCObjectSelectionAttributes *treatmentSettingSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:psychTreatmentSettingDef allowMultipleSelection:NO allowNoSelection:NO];
-    treatmentSettingSelectionAttribs.allowAddingItems = YES;
-    treatmentSettingSelectionAttribs.allowDeletingItems = YES;
-    treatmentSettingSelectionAttribs.allowMovingItems = YES;
-    treatmentSettingSelectionAttribs.allowEditingItems = YES;
-    treatmentSettingSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Treatment Settings)"];
-    treatmentSettingSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Treatment Setting"];
-    sessionTreatmentSettingPropertyDef.attributes = treatmentSettingSelectionAttribs;
-    
-    SCPropertyDefinition *treatmentSettingTypePropertyDef=[psychTreatmentSettingDef propertyDefinitionWithName:@"settingType"];
-    treatmentSettingTypePropertyDef.type=SCPropertyTypeTextView;
-    SCPropertyDefinition *treatmentSettingNotesPropertyDef=[psychTreatmentSettingDef propertyDefinitionWithName:@"notes"];
-    treatmentSettingNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-    
-    
-    //treatment setting end    
-    
+   
     //Training Type  start
-    SCClassDefinition *trainingTypeDef=[SCClassDefinition definitionWithEntityName:@"TrainingTypeEntity" withManagedObjectContext:managedObjectContext withPropertyNames:[NSArray arrayWithObjects:@"trainingType",@"selectedByDefault", @"notes", nil]];
+    SCEntityDefinition *trainingTypeDef=[SCEntityDefinition definitionWithEntityName:@"TrainingTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"trainingType",@"selectedByDefault", @"notes", nil]];
     
     
     
@@ -353,7 +218,7 @@
     SCPropertyDefinition *sessionTrainingTypePropertyDef=[testSessionDeliveredDef propertyDefinitionWithName:@"trainingType"];
     sessionTrainingTypePropertyDef.type =SCPropertyTypeObjectSelection;
     
-    SCObjectSelectionAttributes *trainingTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithItemsEntityClassDefinition:trainingTypeDef allowMultipleSelection:NO allowNoSelection:NO];
+    SCObjectSelectionAttributes *trainingTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trainingTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     trainingTypeSelectionAttribs.allowAddingItems = YES;
     trainingTypeSelectionAttribs.allowDeletingItems = YES;
     trainingTypeSelectionAttribs.allowMovingItems = YES;
@@ -375,10 +240,7 @@
 
     
     SCPropertyDefinition *timePropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"time"];
-timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:time_Shared.timeDef
-                                                                                              allowAddingItems:TRUE
-                                                                                            allowDeletingItems:TRUE
-                                                                                              allowMovingItems:FALSE];
+timePropertyDef.attributes = [SCObjectAttributes attributesWithObjectDefinition:self.timeDef];
     
     timePropertyDef.title=@"Testing Time";
     
@@ -392,7 +254,7 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
     //Create the property definition for the clientPresentations property
     
     SCPropertyDefinition *clientPresentationsPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"clientPresentations"];
-    clientPresentationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectClassDefinition:clientPresentations_Shared.clientPresentationDef
+    clientPresentationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientPresentations_Shared.clientPresentationDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
                                                                                     allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"tap + to add clients"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];	
@@ -412,36 +274,53 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
     
     
      NSPredicate *paperworkIncompletePredicate = [NSPredicate predicateWithFormat:@"paperwork == %@",[NSNumber numberWithInteger: 0]];
-     tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
-										withEntityClassDefinition:testSessionDeliveredDef usingPredicate:paperworkIncompletePredicate];
+//     tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
+//										withEntityClassDefinition:testSessionDeliveredDef usingPredicate:paperworkIncompletePredicate];
+    SCArrayOfObjectsModel *objectModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:testSessionDeliveredDef filterPredicate:paperworkIncompletePredicate];
     
+//    self.tableViewModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView 
+//										entityDefinition:testSessionDeliveredDef];
     [self.searchBar setSelectedScopeButtonIndex:2];
     // Initialize tableModel
-    if (self.navigationItem.rightBarButtonItems.count>1) {
-        
-        tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
-    }
-
+//    if (self.navigationItem.rightBarButtonItems.count>1) {
+//        
+//        objectModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
+//    }
+//
+//   
+//    
+//    if (self.navigationItem.rightBarButtonItems.count >0)
+//    {
+//        self.tableViewModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
+//    }
+    
    
-    
-    if (self.navigationItem.rightBarButtonItems.count >0)
-    {
-        tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
-    }
-    
+     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
+     NSLog(@"self.navigationItem.rightBarButtonItems are %@",self.buttonsToolbar.items);
+   
+       objectModel.editButtonItem = self.editButton;;
+        
+        objectModel.addButtonItem = self.addButton;
 
+    
+    
     self.view.backgroundColor=[UIColor clearColor];
     
-    tableModel.autoSortSections = TRUE;  
-    tableModel.searchBar = self.searchBar;
-	tableModel.searchPropertyName = @"dateOfService";
+    objectModel.autoSortSections = TRUE;  
+   objectModel.searchBar = self.searchBar;
+	objectModel.searchPropertyName = @"dateOfService";
     
-    tableModel.allowMovingItems=TRUE;
+    objectModel.allowMovingItems=TRUE;
     
-    tableModel.autoAssignDelegateForDetailModels=TRUE;
-    tableModel.autoAssignDataSourceForDetailModels=TRUE;
+    objectModel.autoAssignDelegateForDetailModels=TRUE;
+    objectModel.autoAssignDataSourceForDetailModels=TRUE;
     
-    [self updateAdministrationTotalLabel];
+    
+    objectModel.enablePullToRefresh = TRUE;
+    objectModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
+    
+    self.tableViewModel=objectModel;
+    [self updateAdministrationTotalLabel:self.tableViewModel];
 
   
         
@@ -451,6 +330,66 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
 
 
 
+
+- (void)tableViewModel:(SCArrayOfItemsModel *)tableViewModel
+searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+{
+    
+    //NSLog(@"scope changed");
+    
+    
+    
+    
+    if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
+    {
+        SCArrayOfObjectsModel *objectsModel = (SCArrayOfObjectsModel *)tableViewModel;
+        
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit ) fromDate:[NSDate date]];
+        //create a date with these components
+        NSDate *startDate = [calendar dateFromComponents:components];
+        [components setMonth:1];
+        [components setDay:0]; //reset the other components
+        [components setYear:0]; //reset the other components
+        NSDate *endDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
+        //NSLog(@"start dtate %@",startDate);
+        //NSLog(@"end date is %@", endDate);
+        
+        NSPredicate *currentMonthPredicate = [NSPredicate predicateWithFormat:@"((dateOfService > %@) AND (dateOfService <= %@)) || (dateOfService = nil)",startDate,endDate];
+        NSPredicate *paperworkIncompletePredicate = [NSPredicate predicateWithFormat:@"paperwork == %@",[NSNumber numberWithInteger: 0]];
+        
+        
+        [self.searchBar setSelectedScopeButtonIndex:selectedScope];
+        
+        switch (selectedScope) {
+            case 1: //all
+                
+                
+                [objectsModel.dataFetchOptions setFilterPredicate:nil];
+//             
+                break;
+                
+            case 2: //case paperwork Incomplete
+                [objectsModel.dataFetchOptions setFilterPredicate:paperworkIncompletePredicate];
+                
+                
+                
+                
+                break;                
+                
+            default://current month
+                
+                [objectsModel.dataFetchOptions setFilterPredicate:currentMonthPredicate];
+                
+               
+                
+                
+                break;
+        }
+        [objectsModel reloadBoundValues];
+        [objectsModel.modeledTableView reloadData]; 
+    }
+}
 
 
 
@@ -463,29 +402,29 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
     
     if (tableViewModel.tag==0) {
         
-        [self totalAdministrationsLabel];
+        [self updateAdministrationTotalLabel:tableViewModel];
         
     }
     
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel didRemoveSectionAtIndex:(NSInteger)index{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel didRemoveSectionAtIndex:(NSUInteger)index{
     
     if (tableViewModel.tag==0) {
         
-        [self totalAdministrationsLabel];
+        [self updateAdministrationTotalLabel:tableViewModel];
         
     }
     
     
 }
 
--(void)updateAdministrationTotalLabel{
+-(void)updateAdministrationTotalLabel:(SCTableViewModel *)tableModel{
     
-    
-    if (tableModel.tag==0) 
-    {
+    if (tableModel.tag==0) {
+   
         int cellCount=0;
+    NSLog(@" table view model section count is %i",tableModel.sectionCount);
         if (tableModel.sectionCount >0){
             
             for (int i=0; i<tableModel.sectionCount; i++) {
@@ -505,8 +444,9 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
             self.totalAdministrationsLabel.text=[NSString stringWithFormat:@"Total Administrations: %i", cellCount];
         }
         
+   
+        
     }
-    
     
     
     
@@ -516,15 +456,15 @@ timePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectCla
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel didInsertRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableViewModel:(SCTableViewModel *)tableModel didInsertRowAtIndexPath:(NSIndexPath *)indexPath{
     
 //    [self tableViewModel:(SCTableViewModel *)tableViewModel testFetchForRowAtIndexPath:(NSIndexPath *) indexPath];
     
        
-    if (tableViewModel.tag==0) 
+    if (tableModel.tag==0) 
     {
         
-        [self totalAdministrationsLabel];
+        [self updateAdministrationTotalLabel:tableModel];
     }
     
     

@@ -15,64 +15,32 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "ClientsRootViewController_iPad.h"
+
 #import "ClientsDetailViewController_iPad.h"
 
 #import "PTTAppDelegate.h"
 
 
-@interface ClientsDetailViewController_iPad ()
-
-@property (nonatomic, strong) UIPopoverController *popoverController;
-
-- (void)addButtonTapped;
-
-@end
 
 
 
 @implementation ClientsDetailViewController_iPad
 
-@synthesize addButtonItem;
 
-@synthesize popoverController;
-@synthesize clientsRootViewController_iPad=__clientsRootViewController_iPad;
 
-#pragma mark -
-#pragma mark Private Methods
-
-- (void)addButtonTapped
-{
-	[self.clientsRootViewController_iPad addButtonTapped];
-}
 
 #pragma mark -
 #pragma mark View lifecycle
 
 - (void)viewDidLoad {
+	[super viewDidLoad];
     
-    //create an add button
-    UIBarButtonItem *_addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addButtonTapped)];
-	
-    //set the add button outlet defined in the header to item to the created add button
-    self.addButtonItem = _addButton;
-    
-    //set the right navigation bar button item to the defined add button
-    self.navigationItem.rightBarButtonItem=self.addButtonItem;
-    
-    if(self.tableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-        
-
-    [self.tableView setBackgroundView:nil];
-    [self.tableView setBackgroundView:[[UIView alloc] init]];
-    [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
-    }
+    // Set the view controller's theme
+    self.tableViewModel.theme = [SCTheme themeWithPath:@"ClearBackgroundTheme.sct"];
 }
 
 - (void)viewDidUnload {
-	
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
+	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 	self.popoverController = nil;
 }
@@ -89,7 +57,6 @@
     self.navigationItem.leftBarButtonItem = barButtonItem;
 	
     self.popoverController = pc;
-    
 }
 
 
@@ -111,22 +78,10 @@
 }
 
 
-- (void) didReceiveMemoryWarning 
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    
-    
-    
-    [appDelegate displayMemoryWarning];
- 
-    
-    
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
 }
+
+
 
 
 @end

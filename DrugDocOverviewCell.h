@@ -15,9 +15,9 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewCell.h"
+#import <UIKit/UIKit.h>
 
-@interface DrugDocOverviewCell : SCControlCell <SCTableViewCellDelegate> {
+@interface DrugDocOverviewCell : SCCustomCell  {
 
     __weak UITextField *docTypeField;
     __weak UITextField *dateField;

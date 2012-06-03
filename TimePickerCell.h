@@ -15,10 +15,10 @@
  *	This notice may not be removed from this file.
  *
  */
-#import "SCTableViewModel.h"
+
 #import "TimePickerView.h"
 
-@interface TimePickerCell : SCControlCell <UIPickerViewDataSource, UIPickerViewDelegate, SCTableViewCellDelegate>
+@interface TimePickerCell : SCCustomCell <UIPickerViewDataSource, UIPickerViewDelegate>
 {
      UITextField *pickerField;
 //    TimePickerView *timePickerView;

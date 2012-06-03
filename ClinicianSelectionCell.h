@@ -5,8 +5,8 @@
 //  Created by Daniel Boice on 3/27/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
+#import <UIKit/UIKit.h>
 
-#import "SCTableViewCell.h"
 #import "ClinicianEntity.h"
 
 

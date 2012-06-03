@@ -1,36 +1,20 @@
 //
 //  TestingSessionDeliveredEntity.m
-//  PsyTrack Clinician Tools
+//  PsyTrack
 //
-//  Created by Daniel Boice on 3/23/12.
+//  Created by Daniel Boice on 5/31/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
 #import "TestingSessionDeliveredEntity.h"
-#import "ClinicianEntity.h"
 #import "TimeEntity.h"
 
 
 @implementation TestingSessionDeliveredEntity
 
-@dynamic eventIdentifier;
-@dynamic notes;
-@dynamic order;
-@dynamic dateOfService;
-@dynamic paperwork;
-@dynamic supervisor;
-@dynamic trainingType;
-@dynamic administrationType;
-@dynamic time;
-@dynamic relatedSupportTime;
-@dynamic licenseNumbersCredited;
-@dynamic degreesCredited;
+@dynamic assessmentType;
 @dynamic clientPresentations;
-@dynamic treatmentSetting;
-@dynamic testsAdministered;
-@dynamic site;
-@dynamic certificationsCredited;
-
+@dynamic time;
 
 - (void) awakeFromInsert 
 {
@@ -43,8 +27,13 @@
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"MST"]];
     NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
     //NSLog(@"reference date %@",referenceDate);
+    [self willAccessValueForKey:@"dateOfService"];
     if ([(NSDate *)self.dateOfService isEqualToDate:referenceDate]) {
+        [self didAccessValueForKey:@"dateOfService"];
+        
+        [self willChangeValueForKey:@"dateOfService"];
         self.dateOfService = [NSDate date];
+        [self didChangeValueForKey:@"dateOfService"];
         
     }
 }

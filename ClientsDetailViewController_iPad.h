@@ -19,19 +19,12 @@
 #import <CoreData/CoreData.h>
 
 
-@class ClientsRootViewController_iPad;
-
-@interface ClientsDetailViewController_iPad : UITableViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate, SCTableViewModelDelegate> {
-    
-	ClientsRootViewController_iPad *clientsRootViewController_iPad;
+@interface ClientsDetailViewController_iPad : SCTableViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> 
+{
     UIPopoverController *popoverController;
-    UITableView *tableView;
-	UIBarButtonItem *addButtonItem;
     
-}
+    
+}   
 
-@property (nonatomic,strong) IBOutlet ClientsRootViewController_iPad *clientsRootViewController_iPad;
-
-@property (nonatomic, strong) UIBarButtonItem *addButtonItem;
 
 @end

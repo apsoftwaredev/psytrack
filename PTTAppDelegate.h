@@ -24,10 +24,8 @@
 
 
 
-@class ClientsRootViewController_iPad;
-@class ClientsDetailViewController_iPad;
-@class CliniciansRootViewController_iPad;
-@class CliniciansDetailViewController_iPad;
+
+
 @class ClientsViewController_iPhone;
 @class ClinicianViewController;
 
@@ -72,10 +70,8 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
  */
 @interface PTTAppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate,LCYLockScreenDelegate,UIAlertViewDelegate>{
 
-     ClientsRootViewController_iPad *clientsRootViewController_iPad;
-    ClientsDetailViewController_iPad *clientsDetailViewController_iPad;
-     CliniciansRootViewController_iPad *cliniciansRootViewController_iPad;
-	 CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad;
+    
+     
      TrainTrackViewController *trainTrackViewController;
      ClientsViewController_iPhone *clientsViewController_iPhone;
      ClinicianViewController *clinicianViewController;
@@ -109,6 +105,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
     KeychainItemWrapper *passwordItem_;
     KeychainItemWrapper *passCodeItem_;
     NSTimer *checkKeyEntityTimer;
+    NSTimer *displayConnectingTimer;
 }
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;
@@ -128,7 +125,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 @property (strong, nonatomic) IBOutlet UIView *tabBarView;
 @property (strong, nonatomic) IBOutlet UITabBarController *tabBarController;
 @property (weak, nonatomic)IBOutlet UIView *tabBarControllerContainerView;
-@property (weak, nonatomic)IBOutlet UIViewController *viewController;
+@property (weak, nonatomic)IBOutlet UIView *viewController;
 @property (nonatomic, retain) KeychainItemWrapper *passwordItem;
 @property (nonatomic, retain) KeychainItemWrapper *passCodeItem;
 -(void)loadDatabaseData:(id)sender;
@@ -149,7 +146,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 -(NSURL *)applicationSupportURL;
 -(NSString *)applicationSupportPath;
 -(NSString *)setupLockDictionaryResultStr;
--(NSString *)setupDefaultLockDictionaryResultStr;
+
 - (void)saveDrugsContext;
 - (NSNumber *)iCloudPreferenceFromUserDefaults;
 -(BOOL)copyDrugsToMainContext;
@@ -159,7 +156,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 -(NSString *)applicationDrugsPathString;
 
 //-(NSString *)decyptString:(NSString *) str;
--(NSString *)decyptString:(NSString *) encryptedString usingKeyString:(NSString *)keyString;
+//-(NSString *)decyptString:(NSString *) encryptedString usingKeyString:(NSString *)keyString;
 -(NSDictionary *)encryptDataToEncryptedData:(NSData *) unencryptedData withKeyString:(NSString *)keyStringToSet;
 -(NSDictionary *)encryptStringToEncryptedData:(NSString *)plainTextStr withKeyString:(NSString *)keyStringToSet;
 -(NSString *)convertDataToString:(NSData *)data;
@@ -170,7 +167,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 -(NSString *)generateRandomStringOfLength:(int )length;
 -(NSString *)combSmString;
 -(NSData *)hashDataFromString:(NSString *)plainString;
--(NSDictionary*)unwrapAndCreateKeyDataFromKeyEntitywithKeyString:(NSString *)keyString;
+
 -(NSDate *)convertDataToDate:(NSData *)data;
 -(IBAction)notifyTrustFailure:(id)sender;
 -(NSData *)decryptDataToPlainData:(NSData *)encryptedData usingSymetricKey:(NSData *)symetricData;
@@ -181,10 +178,6 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 
 @property (nonatomic, strong) PTTEncryption *encryption;
 @property (nonatomic, strong) IBOutlet UIViewController *masterViewController;
-@property (nonatomic, strong) IBOutlet ClientsRootViewController_iPad *clientsRootViewController_iPad;
-@property (nonatomic, strong) IBOutlet ClientsDetailViewController_iPad *clientsDetailViewController_iPad;
-@property (nonatomic, strong) IBOutlet CliniciansRootViewController_iPad *cliniciansRootViewController_iPad;
-@property (nonatomic, strong) IBOutlet CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad;
 @property (nonatomic, strong) IBOutlet TrainTrackViewController *trainTrackViewController;
 @property (nonatomic, strong) IBOutlet ClinicianViewController *clinicianViewController;
 @property (nonatomic, strong) IBOutlet ClientsViewController_iPhone *clientsViewController_iPhone;
@@ -199,8 +192,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 @property (strong, nonatomic)IBOutlet UILabel *developedByLabel;
 
 
-@property (strong, nonatomic) IBOutlet UISplitViewController *splitViewControllerClients;
-@property (weak, nonatomic) IBOutlet UISplitViewController *splitViewControllerClinicians;
+
 @property (weak, nonatomic) IBOutlet UINavigationController *navigationControllerTrainTrack;
 @property (weak, nonatomic) IBOutlet UISplitViewController *splitViewControllerReports;
 #define degreesToRadian(x) (M_PI * (x) / 180.0)

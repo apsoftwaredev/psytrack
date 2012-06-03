@@ -17,18 +17,19 @@
  */
 #import "TrainTrackViewController.h"
 #import "PTTAppDelegate.h"
-#import "TestAdministrationsViewController_iPad.h"
+#import "TimeTrackViewController.h"
 #import "DrugViewController_iPhone.h"
 #import "ClinicianEntity.h"
 #import "CustomSCSelectonCellWithLoading.h"
 //#import "CliniciansViewController_Shared.h"
 #import "LCYLockSettingsViewController.h"
 #import "ExistingHoursViewController.h"
-
+#import "CliniciansRootViewController_iPad.h"
 #import "DTAboutViewController.h"
 #import "NSString+Helpers.h"
 #import "InAppSettingsViewController.h"
-
+#import "ClinicianViewController.h"
+#import "CliniciansDetailViewController_iPad.h"
 //#import "UICasualAlert.h"
 //#import <MessageUI/MessageUI.h>
 //
@@ -71,9 +72,7 @@
 //
 //- (void)viewDidLoad {
 //    [super viewDidLoad];
-//    // Gracefully handle reloading the view controller after a memory warning
-//
-//   
+//   //   
 ////    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 ////        
 ////        [self.tableView setBackgroundView:nil];
@@ -444,31 +443,104 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
 
+    if (indexPath.section==0 &&indexPath.row==0) 
+        {
+            //@"My Information"
+           
+                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                
+            if (![SCUtilities is_iPad]) {
+           
+                UINavigationController *navController=nil;
+                for (navController in appDelegate.tabBarController.viewControllers) {
+                    if ([navController.title isEqualToString:@"Clinicians"]) {
+                        
+                        [appDelegate.clinicianViewController setSelectMyInformationOnLoad:YES];
+                        [appDelegate.tabBarController setSelectedViewController:navController];
+                        
+                        break;
+                    }
+                }            
+                
+            }               
+            else
+            {
+                UISplitViewController *splitView=nil;
+                CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad=nil;
+                CliniciansRootViewController_iPad *cliniciansRootViewController_iPad=nil;
+                UIPopoverController *popoverController=nil;
+                for (splitView in appDelegate.tabBarController.viewControllers) {
+                    if ([splitView.title isEqualToString:@"Clinicians"]) {
+                        
+                        for (UINavigationController *navController in splitView.viewControllers) {
+                            if ([navController.title isEqualToString:@"ClinicianRoot"]) {
+                                cliniciansRootViewController_iPad=(CliniciansRootViewController_iPad *)[navController.viewControllers objectAtIndex:0];
+                                
+                                
+                                [cliniciansRootViewController_iPad setSelectMyInformationOnLoad:YES];
+                                
+                            }
+                            else if ([navController.title isEqualToString:@"ClinicianDetail"]) 
+                            {
+                                    
+                                
+                                cliniciansDetailViewController_iPad=(CliniciansDetailViewController_iPad *)[navController.viewControllers objectAtIndex:0];
+                                
+                                if (cliniciansDetailViewController_iPad.popoverController) {
+                                    popoverController=cliniciansDetailViewController_iPad.popoverController;
+                                }
+                                
+                            }
+                            
+                            
+                            
+                            
+                        }
+                        
+                        
+                        [appDelegate.clinicianViewController setSelectMyInformationOnLoad:YES];
+                        [appDelegate.tabBarController setSelectedViewController:splitView];
+                        
+                        
+//                        NSLog(@"barbutton item action is %@",barButtonItem.action);
+                    
+                      
+                      
+                        
+                        
+                        
+                        break;
+                    }
+                }
+                
+            }  
+    
+    
+        }
+            
+        
 
+    
 
 
 
 
 
     switch (indexPath.section) {
-        case 0:
-        {
-            //@"My Information"
-//            if (indexPath.row==0){};
-            
-        }
-            break;
+      
             
         case 1:
         {
             //@"Assessments "
             if (indexPath.row==0){
-                TestAdministrationsViewController_iPad *testAdministrationsViewController_iPad = [[TestAdministrationsViewController_iPad alloc] initWithNibName:@"TestAdministrationsViewController_iPad" bundle:nil];
-                
-                [self.navigationController pushViewController:testAdministrationsViewController_iPad animated:YES];
+                [self LoadTimeTrackViewControllerWithSetup:(PTrackControllerSetup)kTrackAssessmentSetup];
                 break;
             };
-            //interventions
+            
+            if (indexPath.row==1) {
+                [self LoadTimeTrackViewControllerWithSetup:(PTrackControllerSetup)kTrackInterventionSetup];
+                break;
+            }            //interventions
 //            if (indexPath.row==1){};
             
             
@@ -477,18 +549,22 @@
         case 2:
         {
             //@"Support Activities"
-//            if (indexPath.row==0){};
+            //            if (indexPath.row==0){
+            [self LoadTimeTrackViewControllerWithSetup:(PTrackControllerSetup)kTrackSupportSetup];
+            break;
+        
             
         }
             break;
         case 3:
         {
             //@"Supervision Received"
-//            if (indexPath.row==0);
+            if (indexPath.row==0)
+                [self LoadTimeTrackViewControllerWithSetup:(PTrackControllerSetup)kTrackSupervisionReceivedSetup];
             
             //@"Supervision Given
-//            if (indexPath.row==1);
-            
+            if (indexPath.row==1)
+                [self LoadTimeTrackViewControllerWithSetup:(PTrackControllerSetup)kTrackSupervisionGivenSetup];
             
         }
             break;
@@ -497,7 +573,7 @@
             //@"Existing Hours"
             if (indexPath.row==0){
                 NSString *existingHoursViewControllerNibName=nil;
-                if ([SCHelper is_iPad]) {
+                if ([SCUtilities is_iPad]) {
                     existingHoursViewControllerNibName=@"ExistingHoursViewController_iPad";
                 }else {
                     existingHoursViewControllerNibName=@"ExistingHoursViewController";
@@ -549,8 +625,16 @@
             tabBar.userInteractionEnabled=FALSE;            
             
             DrugViewController_iPhone *drugViewController_iPhone = [[DrugViewController_iPhone alloc] initWithNibName:@"DrugViewController_iPhone" bundle:nil];
+//            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
             
+           NSLog(@"view controller is %@",self.tableViewModel);
+//            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:drugViewController_iPhone];	
+            
+//            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+            
+
             [self.navigationController pushViewController:drugViewController_iPhone animated:YES];
+            
             
             tabBar.userInteractionEnabled=TRUE;
            
@@ -639,7 +723,7 @@
     self.myTableView = 
     [[UITableView alloc] initWithFrame:self.view.bounds
                                  style:UITableViewStyleGrouped];
-    self.myTableView.backgroundColor=[UIColor clearColor];
+//    self.myTableView.backgroundColor=[UIColor clearColor];
     self.myTableView.dataSource = self;
     self.myTableView.delegate=self;
     /* Make sure our table view resizes correctly */
@@ -648,13 +732,13 @@
     UIViewAutoresizingFlexibleHeight;
     
     [self.view addSubview:self.myTableView];
-    
-    if([SCHelper is_iPad]){
+    if ([SCUtilities is_iPad]) {
+        
         [self.myTableView setBackgroundView:nil];
         [self.myTableView setBackgroundView:[[UIView alloc] init]];
-        [self.myTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+        
     }
-    
+       [self.myTableView setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)viewDidUnload{
@@ -662,9 +746,12 @@
     self.myTableView = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation
-:(UIInterfaceOrientation)interfaceOrientation{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    
     return YES;
+    
 }
 
 - (CGFloat)     tableView:(UITableView *)tableView 
@@ -754,6 +841,17 @@
     [headerView addSubview:label];
 return headerView;  
 }
+
+
+-(void)LoadTimeTrackViewControllerWithSetup:(PTrackControllerSetup )timeTrackSetup{
+
+    TimeTrackViewController *timeTrackViewController = [[TimeTrackViewController alloc] initWithNibName:@"TimeTrackViewController" bundle:nil trackSetup:timeTrackSetup];
+    
+    [self.navigationController pushViewController:timeTrackViewController animated:YES];
+
+
+
+}
 //- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 //{
 //    // Return YES for supported orientations
@@ -811,9 +909,9 @@ return headerView;
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
    
-//    [super tableViewModel:tableViewModel detailViewWillAppearForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
+//    [super tableViewModel:tableViewModel detailViewWillPresentForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
 //    
     if (tableViewModel.tag==0) {
         if (detailTableViewModel.sectionCount>6) {
@@ -848,7 +946,7 @@ return headerView;
 //            
 //            detailTableViewModel.tag = tableViewModel.tag+1;           
 //            
-//            if([SCHelper is_iPad]){
+//            if([SCUtilities is_iPad]){
 //                [detailTableViewModel.modeledTableView setBackgroundView:nil];
 //                [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
 //                [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
@@ -950,7 +1048,7 @@ return headerView;
         detailTableViewModel.delegate = self;
         detailTableViewModel.tag = tableViewModel.tag+1;
      
-    if([SCHelper is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
    
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
@@ -962,147 +1060,147 @@ return headerView;
     
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    
-    
-    
-    SCTableViewCell *cell =(SCTableViewCell *) [tableViewModel cellAtIndexPath:indexPath];
-    SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-    
-    //NSLog(@"index path section %i",indexPath.section);
-    if (tableViewModel.tag==0) {
-    
-    switch (cell.tag) {
-        
-        case 0:
-        {
-            if (indexPath.section==0) {
-                 //NSLog(@"selected zero");
-                if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
-                    SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
-                    
-                    
-                    [arrayOfObjectsSection dispatchSelectRowAtIndexPathEvent:indexPath];
-                }
-            
-            
-            }
-          
-        }  
-         break;
-        
-        
-        case 2:
-        {
-            TestAdministrationsViewController_iPad *testAdministrationsViewController_iPad = [[TestAdministrationsViewController_iPad alloc] initWithNibName:@"TestAdministrationsViewController_iPad" bundle:nil];
-            
-            [self.navigationController pushViewController:testAdministrationsViewController_iPad animated:YES];
-            break;
-        }    
-            
-        case 7:
-        {
-            NSString *existingHoursViewControllerNibName=nil;
-            if ([SCHelper is_iPad]) {
-                existingHoursViewControllerNibName=@"ExistingHoursViewController_iPad";
-            }else {
-                existingHoursViewControllerNibName=@"ExistingHoursViewController";
-            }
-            ExistingHoursViewController *existingHoursViewController = [[ExistingHoursViewController alloc] initWithNibName:existingHoursViewControllerNibName bundle:[NSBundle mainBundle]];
-            
-            [self.navigationController pushViewController:existingHoursViewController animated:YES];
-            break;
-        }    
-        case 15:
-        {
-            
-            
-                        
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//
+//    
+//    
+//    
+//    SCTableViewCell *cell =(SCTableViewCell *) [tableViewModel cellAtIndexPath:indexPath];
+//    SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+//    
+//    //NSLog(@"index path section %i",indexPath.section);
+//    if (tableViewModel.tag==0) {
+//    
+//    switch (cell.tag) {
+//        
+//        case 0:
+//        {
+//            if (indexPath.section==0) {
+//                 //NSLog(@"selected zero");
+//                if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
+//                    SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
+//                    
+//                    
+//                    [arrayOfObjectsSection dispatchEventSelectRowAtIndexPath:indexPath];
+//                }
+//            
+//            
+//            }
+//          
+//        }  
+//         break;
+//        
+//        
+//        case 2:
+//        {
+//            TestAdministrationsViewController_iPad *testAdministrationsViewController_iPad = [[TestAdministrationsViewController_iPad alloc] initWithNibName:@"TestAdministrationsViewController_iPad" bundle:nil];
+//            
+//            [self.navigationController pushViewController:testAdministrationsViewController_iPad animated:YES];
+//            break;
+//        }    
+//            
+//        case 7:
+//        {
+//            NSString *existingHoursViewControllerNibName=nil;
+//            if ([SCUtilities is_iPad]) {
+//                existingHoursViewControllerNibName=@"ExistingHoursViewController_iPad";
+//            }else {
+//                existingHoursViewControllerNibName=@"ExistingHoursViewController";
+//            }
+//            ExistingHoursViewController *existingHoursViewController = [[ExistingHoursViewController alloc] initWithNibName:existingHoursViewControllerNibName bundle:[NSBundle mainBundle]];
+//            
+//            [self.navigationController pushViewController:existingHoursViewController animated:YES];
+//            break;
+//        }    
+//        case 15:
+//        {
+//            
+//            
+//                        
+////                if ([cell isKindOfClass:[CustomSCSelectonCellWithLoading class]]) {
+////                    CustomSCSelectonCellWithLoading * loadingCell=(CustomSCSelectonCellWithLoading *)cell;
+////                    loadingCell.imageView.hidden=FALSE;
+////                }
+//            
+//            
+//            
+//            
+//           
+//               
+////           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//                
+////                self.tableView.userInteractionEnabled=FALSE;
+//                UITabBar *tabBar=(UITabBar *) [(PTTAppDelegate *)[UIApplication sharedApplication].delegate tabBar];
+//                tabBar.userInteractionEnabled=FALSE;            
+//            
+//            DrugViewController_iPhone *drugViewController_iPhone = [[DrugViewController_iPhone alloc] initWithNibName:@"DrugViewController_iPhone" bundle:nil];
+//            
+//            [self.navigationController pushViewController:drugViewController_iPhone animated:YES];
+//           
 //                if ([cell isKindOfClass:[CustomSCSelectonCellWithLoading class]]) {
 //                    CustomSCSelectonCellWithLoading * loadingCell=(CustomSCSelectonCellWithLoading *)cell;
-//                    loadingCell.imageView.hidden=FALSE;
+//                    loadingCell.imageView.hidden=TRUE;
+//                    [loadingCell setSelected:FALSE];
+//                    [loadingCell setHighlighted:FALSE animated:YES];
+//                    
 //                }
-            
-            
-            
-            
-           
-               
-//           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                
-//                self.tableView.userInteractionEnabled=FALSE;
-                UITabBar *tabBar=(UITabBar *) [(PTTAppDelegate *)[UIApplication sharedApplication].delegate tabBar];
-                tabBar.userInteractionEnabled=FALSE;            
-            
-            DrugViewController_iPhone *drugViewController_iPhone = [[DrugViewController_iPhone alloc] initWithNibName:@"DrugViewController_iPhone" bundle:nil];
-            
-            [self.navigationController pushViewController:drugViewController_iPhone animated:YES];
-           
-                if ([cell isKindOfClass:[CustomSCSelectonCellWithLoading class]]) {
-                    CustomSCSelectonCellWithLoading * loadingCell=(CustomSCSelectonCellWithLoading *)cell;
-                    loadingCell.imageView.hidden=TRUE;
-                    [loadingCell setSelected:FALSE];
-                    [loadingCell setHighlighted:FALSE animated:YES];
-                    
-                }
-                tabBar.userInteractionEnabled=TRUE;
-//                self.tableView.userInteractionEnabled=TRUE;
-                
-               
-//           });
-
-//            dispatch_release(firstSerialQueue);
-            
-            
-            break;
-        }    
-        case 16:
-        {
-                       
-            LCYLockSettingsViewController *lockSettingsVC = [[LCYLockSettingsViewController alloc] initWithNibName:@"LCYLockSettingsViewController" bundle:nil];
-            [[self navigationController] pushViewController:lockSettingsVC animated:YES];            
-            break;
-        }    
-        case 17:
-        {
-            InAppSettingsViewController *inAppSettingsViewController = [[InAppSettingsViewController alloc] initWithNibName:@"InAppSettingsViewController" bundle:nil];
-            
-            [self.navigationController pushViewController:inAppSettingsViewController animated:YES];
-            
-            inAppSettingsViewController.rootNavController=self.navigationController;
-            break;
-        }    
-        case 18:
-        {
-            DTLayoutDefinition *supportLayout = [DTLayoutDefinition layoutNamed:@"support"];
-			DTAboutViewController *support =[[DTAboutViewController alloc] initWithLayout:supportLayout];
-			support.title = @"Support";
-			[self.navigationController pushViewController:support animated:YES];
-            break;
-        }   
-        case 19:
-        {
-            DTAboutViewController *about = [[DTAboutViewController alloc] initWithLayout:nil]; // default is @"about"
-			about.title	 = @"About";
-			about.delegate = self;
-			[self.navigationController pushViewController:about animated:YES];
-        }   
-        default:
-            break;
-    }
-
-        
-    }     
-else {
-    if([section isKindOfClass:[SCArrayOfObjectsSection class]]){
-        
-        SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
-        [arrayOfObjectsSection dispatchSelectRowAtIndexPathEvent:indexPath];
-        
-        
-    }
-}  
+//                tabBar.userInteractionEnabled=TRUE;
+////                self.tableView.userInteractionEnabled=TRUE;
+//                
+//               
+////           });
+//
+////            dispatch_release(firstSerialQueue);
+//            
+//            
+//            break;
+//        }    
+//        case 16:
+//        {
+//                       
+//            LCYLockSettingsViewController *lockSettingsVC = [[LCYLockSettingsViewController alloc] initWithNibName:@"LCYLockSettingsViewController" bundle:nil];
+//            [[self navigationController] pushViewController:lockSettingsVC animated:YES];            
+//            break;
+//        }    
+//        case 17:
+//        {
+//            InAppSettingsViewController *inAppSettingsViewController = [[InAppSettingsViewController alloc] initWithNibName:@"InAppSettingsViewController" bundle:nil];
+//            
+//            [self.navigationController pushViewController:inAppSettingsViewController animated:YES];
+//            
+//            inAppSettingsViewController.rootNavController=self.navigationController;
+//            break;
+//        }    
+//        case 18:
+//        {
+//            DTLayoutDefinition *supportLayout = [DTLayoutDefinition layoutNamed:@"support"];
+//			DTAboutViewController *support =[[DTAboutViewController alloc] initWithLayout:supportLayout];
+//			support.title = @"Support";
+//			[self.navigationController pushViewController:support animated:YES];
+//            break;
+//        }   
+//        case 19:
+//        {
+//            DTAboutViewController *about = [[DTAboutViewController alloc] initWithLayout:nil]; // default is @"about"
+//			about.title	 = @"About";
+//			about.delegate = self;
+//			[self.navigationController pushViewController:about animated:YES];
+//        }   
+//        default:
+//            break;
+//    }
+//
+//        
+//    }     
+//else {
+//    if([section isKindOfClass:[SCArrayOfObjectsSection class]]){
+//        
+//        SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
+//        [arrayOfObjectsSection dispatchEventSelectRowAtIndexPath:indexPath];
+//        
+//        
+//    }
+//}  
     
 //    
 //    if (cell.tag==2){
@@ -1133,7 +1231,7 @@ else {
 //        [supervisionGivenViewController release];
 //        
  
-   }
+//   }
 //
 //- (IASKAppSettingsViewController*)appSettingsViewController {
 //	if (!appSettingsViewController) {

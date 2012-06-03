@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-#import "SCTableViewModel.h"
+#import <UIKit/UIKit.h>
 
-@interface ShortFieldCell : SCControlCell<UIPickerViewDataSource, UIPickerViewDelegate>
+@interface ShortFieldCell : SCCustomCell<UIPickerViewDataSource, UIPickerViewDelegate>
 {
     BOOL useTitlePicker;
   

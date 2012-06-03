@@ -62,12 +62,12 @@
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-    if (appDelegate.okayToDecryptBool) {
+    if (strValue&& strValue.length ) {
         
         
         
-       
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
+        [self willAccessValueForKey:@"keyString"];
+        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:nil];
         //NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
         NSData *encryptedData;
         NSString *encryptedKeyString;
@@ -125,7 +125,9 @@
         NSData *primitiveData=[self primitiveValueForKey:@"profileNotes"];
         
         [self didAccessValueForKey:@"profileNotes"];
-        
+        if (!primitiveData ||!primitiveData.length ) {
+            return nil;
+        }
         [self willAccessValueForKey:@"keyString"];
         NSString *tmpKeyString=self.keyString;
         [self didAccessValueForKey:@"keyString"];
@@ -174,7 +176,9 @@
         NSData *primitiveData=[self primitiveValueForKey:@"sex"];
         
         [self didAccessValueForKey:@"sex"];
-        
+        if (!primitiveData ||!primitiveData.length) {
+            return nil;
+        }
         [self willAccessValueForKey:@"keyString"];
         NSString *tmpKeyString=self.keyString;
         [self didAccessValueForKey:@"keyString"];

@@ -21,12 +21,16 @@
 
 @synthesize tempNotes,tempMigratedFrom,tempMigratedTo;
 
+
+
+
+
 - (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
 {
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-    if (appDelegate.okayToDecryptBool) {
+    if ( strValue && strValue.length) {
         
         
         
@@ -89,7 +93,9 @@
         
         NSData *primitiveData=[self primitiveValueForKey:@"notes"];
         [self didAccessValueForKey:@"notes"];
-        
+        if (!primitiveData ||!primitiveData.length ) {
+            return nil;
+        }
         [self willAccessValueForKey:@"keyString"];
         NSString *tmpKeyString=self.keyString;
         [self didAccessValueForKey:@"keyString"];
@@ -147,7 +153,9 @@
         
         NSData *primitiveData=[self primitiveValueForKey:@"migratedFrom"];
         [self didAccessValueForKey:@"migratedFrom"];
-        
+        if (!primitiveData ||!primitiveData.length||[appDelegate isAppLocked] ) {
+            return nil;
+        }
         [self willAccessValueForKey:@"keyString"];
         NSString *tmpKeyString=self.keyString;
         [self didAccessValueForKey:@"keyString"];
@@ -203,7 +211,9 @@
         
         NSData *primitiveData=[self primitiveValueForKey:@"migratedTo"];
         [self didAccessValueForKey:@"migratedTo"];
-        
+        if (!primitiveData ||!primitiveData.length||[appDelegate isAppLocked] ) {
+            return nil;
+        }
         [self willAccessValueForKey:@"keyString"];
         NSString *tmpKeyString=self.keyString;
         [self didAccessValueForKey:@"keyString"];

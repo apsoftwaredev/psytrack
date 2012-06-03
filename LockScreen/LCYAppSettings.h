@@ -17,7 +17,7 @@ static NSString * const K_LOCK_SCREEN_LOCK_AT_STARTUP= @"lock_screen_lock_at_sta
 static NSString * const K_LOCK_SCREEN_P_HSH= @"pw_hash";
 static NSString * const K_LOCK_SCREEN_DF_HASH= @"df_hash";
 static NSString * const K_LOCK_SCREEN_RAN= @"ran_st";
-static NSString * const K_LOCK_SCREEN_CREATE_KEY= @"create_key";
+static NSString * const K_LOCK_SCREEN_CURRENT_KEYSTRING= @"current_keyString";
 @interface LCYAppSettings : NSObject 
 {
 	BOOL lockScreenPasscodeIsOn_;

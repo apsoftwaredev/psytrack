@@ -30,9 +30,9 @@
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
-			<object class="IBUIView" id="993926565">
+			<object class="IBUIView" id="360946475">
 				<reference key="NSNextResponder"/>
-				<int key="NSvFlags">310</int>
+				<int key="NSvFlags">287</int>
 				<string key="NSFrameSize">{768, 1004}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
@@ -50,7 +50,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">view</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="993926565"/>
+						<reference key="destination" ref="360946475"/>
 					</object>
 					<int key="connectionID">12</int>
 				</object>
@@ -76,7 +76,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">11</int>
-						<reference key="object" ref="993926565"/>
+						<reference key="object" ref="360946475"/>
 						<reference key="parent" ref="0"/>
 					</object>
 				</array>

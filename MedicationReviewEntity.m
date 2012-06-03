@@ -15,7 +15,7 @@
 
 @dynamic doseChange;
 @dynamic nextReview;
-@dynamic adherance;
+@dynamic adherence;
 @dynamic dosage;
 @dynamic notes;
 @dynamic satisfaction;
@@ -31,12 +31,36 @@
 
 
 
+
+- (void) awakeFromInsert 
+{
+    [super awakeFromInsert];
+    
+    //set the default date to the current date if it isn't already set to another date, assuming the client wasn't added on june 6, 2006 at 11:11:11 AM MST
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    
+    [dateFormatter setDateFormat:@"H:m:ss yyyy M d"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"MST"]];
+    NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
+    //NSLog(@"reference date %@",referenceDate);
+    [self willAccessValueForKey:@"logDate"];
+    if ([(NSDate *)self.logDate isEqualToDate:referenceDate]) {
+        [self didAccessValueForKey:@"logDate"];
+        [self willChangeValueForKey:(NSString *)@"logDate"];
+        self.logDate = [NSDate date];
+        [self didChangeValueForKey:(NSString *)@"logDate"];
+    }
+}
+
+
+
+
 - (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
 {
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-    if (appDelegate.okayToDecryptBool) {
+    if (strValue && strValue.length ) {
         
         
         
@@ -100,6 +124,9 @@
         NSData *primitiveData=[self primitiveValueForKey:@"notes"];
         [self didAccessValueForKey:@"notes"];
         
+        if (!primitiveData ||!primitiveData.length ) {
+            return nil;
+        }
         [self willAccessValueForKey:@"keyString"];
         NSString *tmpKeyString=self.keyString;
         [self didAccessValueForKey:@"keyString"];

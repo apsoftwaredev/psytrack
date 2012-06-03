@@ -1,12 +1,12 @@
 //
-//  ServicesViewController_Shared.h
+//  TimeTrackViewController.h
 //  PsyTrack
 //
 //  Created by Daniel Boice on 4/5/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-#import "SCTableViewModel.h"
+#import <UIKit/UIKit.h>
 #import "StopwatchCell.h"
 #import "ClientPresentations_Shared.h"
 #import <EventKit/EventKit.h>
@@ -14,18 +14,27 @@
 
 @class Time_Shared;
 
-@interface ServicesViewController_Shared : UIViewController <SCTableViewModelDataSource, SCTableViewModelDelegate,SCTableViewCellDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate>
+typedef enum {
+    kTrackAssessmentSetup,
+    kTrackInterventionSetup,
+    kTrackSupportSetup,
+    kTrackSupervisionReceivedSetup,
+    kTrackSupervisionGivenSetup,
+} PTrackControllerSetup;
+
+
+@interface TimeTrackViewController : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate>
 {
     Time_Shared *time_Shared;
     ClientPresentations_Shared *clientPresentations_Shared;
     UISearchBar *searchBar;
-    UITableView *tableView;
+//    UITableView *tableView;
     NSManagedObjectContext *managedObjectContext;
     __weak UILabel *totalAdministrationsLabel;
     
-    SCArrayOfObjectsModel *tableModel;
+//    SCArrayOfObjectsModel *tableModel;
     
-    
+    PTrackControllerSetup currentControllerSetup;
     BOOL viewControllerOpen;
     
     NSDateFormatter *counterDateFormatter;
@@ -52,7 +61,23 @@
     NSString *eventTitleString;
 
     NSString *tableModelClassDefEntity;
-
+    
+    NSTimer *timer;
+    
+    
+    __weak UITextField *stopwatchTextField;
+    StopwatchCell *stopwatchCell;
+    SCTableViewSection *timeSection;
+    UILabel *footerLabel;
+    UILabel *totalTimeHeaderLabel;
+    
+    
+    NSDate *startTime;
+    NSDate *endTime;
+    NSDate *additionalTime;
+    NSDate *timeToSubtract;
+   
+    SCTableViewSection *breakTimeSection;
 
 }
 
@@ -60,10 +85,8 @@
 
 
 
-
-
 @property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+//@property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UILabel *totalAdministrationsLabel;
 //@property (nonatomic, strong) IBOutlet NSManagedObject *managedObject;
 @property (nonatomic, weak) IBOutlet UITextField *stopwatchTextField;
@@ -76,7 +99,16 @@
 
 //- (NSArray *) fetchEventsForToday;
 - (IBAction) addEvent:(id)sender;
+@property (strong, nonatomic) IBOutlet  UILabel *totalTimeHeaderLabel;
+@property (strong, nonatomic) IBOutlet  UILabel *footerLabel;
+@property (strong, nonatomic)   NSDate *totalTimeDate;
+@property (strong, nonatomic) IBOutlet SCEntityDefinition *timeDef;
 
+-(void)calculateTime;
+-(NSString *)tableViewModel:(SCTableViewModel *)tableViewModel calculateBreakTimeForRowAtIndexPath:(NSIndexPath *)indexPath withBoundValues:(BOOL)useBoundValues;
+-(IBAction)stopwatchStop:(id)sender;
+-(IBAction)stopwatchReset:(id)sender;
 
-
+-(NSTimeInterval ) totalBreakTimeInterval;
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle trackSetup:(PTrackControllerSetup )setupType;
 @end

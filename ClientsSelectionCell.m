@@ -25,8 +25,9 @@
 @implementation ClientsSelectionCell
 @synthesize alreadySelectedClients;
 @synthesize hasChangedClients;
-@synthesize clientObject;
+@synthesize clientObject=clientObject;
 @synthesize testDate;
+@synthesize addAgeCells=addAgeCells_;
 
 -(void) performInitialization{
 
@@ -108,7 +109,7 @@
     
     NSString *clientViewControllerNibName;
     
-    if ([SCHelper is_iPad]) 
+    if ([SCUtilities is_iPad]) 
         clientViewControllerNibName=[NSString stringWithString:@"ClientsViewController_iPad"];
     else
         clientViewControllerNibName=[NSString stringWithString:@"ClientsViewController_iPhone"];
@@ -122,8 +123,8 @@
         
         
         [self.ownerTableViewModel.viewController.navigationController pushViewController:clientsViewContoller animated:YES];
-    if ([clientsViewContoller.tableModel sectionCount]>0) {
-        SCTableViewSection *section=(SCTableViewSection *)[clientsViewContoller.tableModel sectionAtIndex:0];
+    if ([clientsViewContoller.tableViewModel sectionCount]>0) {
+        SCTableViewSection *section=(SCTableViewSection *)[clientsViewContoller.tableViewModel sectionAtIndex:0];
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
             
@@ -182,7 +183,7 @@
 {
     [super loadBindingsIntoCustomControls];
   
-    self.textLabel.text = nil;
+    self.label.text = nil;
     self.detailTextLabel.text = nil;
 //    NSManagedObjectContext *managedObjectContext=(NSManagedObjectContext *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
 //    
@@ -233,7 +234,7 @@
     
 }
     else {
-        self.textLabel.text=[NSString string];
+        self.label.text=[NSString string];
     }
         
 //    }
@@ -278,8 +279,8 @@
         hasChangedClients=hasValue;
 
     
-    
-    NSIndexPath *myIndexPath=(NSIndexPath *)[self.ownerTableViewModel indexPathForCell:self];
+        if (addAgeCells_) {
+        NSIndexPath *myIndexPath=(NSIndexPath *)[self.ownerTableViewModel indexPathForCell:self];
     
     SCTableViewSection *clientSelectionCellOwnerSection=(SCTableViewSection *)[self.ownerTableViewModel sectionAtIndex:(NSInteger )myIndexPath.section ];
     
@@ -290,9 +291,10 @@
     clientPresentationsShared.serviceDatePickerDate=(NSDate *)testDate;
     
     [clientPresentationsShared addWechlerAgeCellToSection:clientSelectionCellOwnerSection];
-    
-    
-    if (clientObject) {
+            
+        }
+        
+        if (clientObject) {
     
 
              self.label.text=[clientObject valueForKeyPath:@"clientIDCode"];
