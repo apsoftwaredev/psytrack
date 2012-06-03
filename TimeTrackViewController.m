@@ -425,7 +425,29 @@
         
     SCEntityDefinition *timeTrackEntity=nil;
     
-     SCPropertyGroup *detailsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Administration Details" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"trainingType", nil]];
+    NSString *detailsHeaderStr=nil;
+    
+    switch (currentControllerSetup) {
+        case kTrackAssessmentSetup:
+            detailsHeaderStr=@"Administration Details";
+            break;
+        case kTrackInterventionSetup:
+            detailsHeaderStr=@"Intervention Details";
+            break;
+        case kTrackSupportSetup:
+            detailsHeaderStr=@"Support Activity Details";
+            break;
+        case kTrackSupervisionGivenSetup:
+            detailsHeaderStr=@"Supervision Given Details";
+            break;
+        case kTrackSupervisionReceivedSetup:
+            detailsHeaderStr=@"Supervision Received Details";
+            break;
+        
+        default:
+            break;
+    }
+     SCPropertyGroup *detailsGroup =[SCPropertyGroup groupWithHeaderTitle:detailsHeaderStr footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"trainingType", nil]];
     
     
     switch (currentControllerSetup) {
