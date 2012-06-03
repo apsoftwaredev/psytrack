@@ -422,11 +422,65 @@
     
     UIViewController *navtitle=self.navigationController.topViewController;
     
-    navtitle.title=@"Assessments";
+        
+    SCEntityDefinition *timeTrackEntity=nil;
+    
+     SCPropertyGroup *detailsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Administration Details" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"trainingType", nil]];
     
     
-    SCEntityDefinition *testSessionDeliveredDef =[SCEntityDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
+    switch (currentControllerSetup) {
+        case kTrackAssessmentSetup:
+        {
+            navtitle.title=@"Assessments";
+            
+
+            timeTrackEntity =[SCEntityDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
                                                                          managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType",     @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]];        
+            
+            [detailsGroup insertPropertyName:@"assessmentType" atIndex:0];
+        }
+            break;
+        case kTrackInterventionSetup:
+           
+            navtitle.title=@"Interventions";
+            
+            timeTrackEntity =[SCEntityDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
+                                                     managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType",     @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]];  
+            break;
+            
+        case kTrackSupportSetup:
+            
+            navtitle.title=@"Indirect Support";
+            
+            timeTrackEntity =[SCEntityDefinition definitionWithEntityName:@"SupportActivityDeliveredEntity"
+                                                     managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"supportActivityType",     @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]]; 
+            
+            [detailsGroup insertPropertyName:@"supportActivityType" atIndex:0];
+            break;
+            
+        case kTrackSupervisionGivenSetup:
+            
+            navtitle.title=@"Supervision Given";
+            
+            timeTrackEntity =[SCEntityDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
+                                                     managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType",     @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]];  
+            break;
+            
+        case kTrackSupervisionReceivedSetup:
+            navtitle.title=@"Supervision Received";
+            
+            timeTrackEntity =[SCEntityDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
+                                                     managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType",     @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]];  
+            break;
+            
+            
+            
+        default:
+            break;
+    }
+    
+    
+       
     
     
     
@@ -442,22 +496,20 @@
     
     
     
+    NSInteger eventIdentifierPropertyIndex = [timeTrackEntity indexOfPropertyDefinitionWithName:@"eventIdentifier"];
+    [timeTrackEntity removePropertyDefinitionAtIndex:eventIdentifierPropertyIndex];
     
-    
-    NSInteger eventIdentifierPropertyIndex = [testSessionDeliveredDef indexOfPropertyDefinitionWithName:@"eventIdentifier"];
-    [testSessionDeliveredDef removePropertyDefinitionAtIndex:eventIdentifierPropertyIndex];
-    
-    SCPropertyDefinition *dateOfServicePropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"dateOfService"];
+    SCPropertyDefinition *dateOfServicePropertyDef = [timeTrackEntity propertyDefinitionWithName:@"dateOfService"];
 	dateOfServicePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
                                                                          datePickerMode:UIDatePickerModeDate 
                                                           displayDatePickerInDetailView:YES];
     
-    dateOfServicePropertyDef.title=@"Testing Date";
-    SCPropertyDefinition *notesPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"notes"];
+   
+    SCPropertyDefinition *notesPropertyDef = [timeTrackEntity propertyDefinitionWithName:@"notes"];
     notesPropertyDef.type=SCPropertyTypeTextView;
     
-    testSessionDeliveredDef.titlePropertyName=@"dateOfService";
-    testSessionDeliveredDef.keyPropertyName=@"dateOfService";
+    timeTrackEntity.titlePropertyName=@"dateOfService";
+    timeTrackEntity.keyPropertyName=@"dateOfService";
     
     
     //add a button to add an event to the calandar
@@ -468,40 +520,39 @@
     SCCustomPropertyDefinition *eventButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"EventButtonCell" uiElementClass:[ButtonCell class] objectBindings:buttonCellObjectBinding];
     
     //add the property definition to the test administration detail view  
-    [testSessionDeliveredDef addPropertyDefinition:eventButtonProperty];
+    [timeTrackEntity addPropertyDefinition:eventButtonProperty];
     //define a property group
     SCPropertyGroup *eventGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"dateOfService",@"time",@"clientPresentations", @"EventButtonCell",nil]];
     
     // add the event Group property group to the behavioralObservationsDef class. 
-    [testSessionDeliveredDef.propertyGroups addGroup:eventGroup];
+    [timeTrackEntity.propertyGroups addGroup:eventGroup];
     
     
     SCPropertyGroup *peopleGroup =[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"SupervisorData",@"paperwork",   @"notes",nil]];
     
     
     
-    [testSessionDeliveredDef.propertyGroups addGroup:peopleGroup];
+    [timeTrackEntity.propertyGroups addGroup:peopleGroup];
     
     
-    SCPropertyGroup *detailsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Administration Details" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"testsAdministered",@"assessmentType",@"treatmentSetting",@"trainingType", @"relatedSupportTime", nil]];
+   
+    
+       
+    [timeTrackEntity.propertyGroups addGroup:detailsGroup]; 
     
     
     
-    [testSessionDeliveredDef.propertyGroups addGroup:detailsGroup]; 
-    
-    
-    
-    SCPropertyDefinition *licenseNumbersCreditedPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"licenseNumbersCredited"];
+    SCPropertyDefinition *licenseNumbersCreditedPropertyDef = [timeTrackEntity propertyDefinitionWithName:@"licenseNumbersCredited"];
     licenseNumbersCreditedPropertyDef.title=@"Licenses Credited";
     
     SCPropertyGroup *creditsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Credits" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"degreesCredited",@"certificationsCredited",@"licenseNumbersCredited",nil]];
     
     
-    [testSessionDeliveredDef.propertyGroups addGroup:creditsGroup];
+    [timeTrackEntity.propertyGroups addGroup:creditsGroup];
     
     
     
-    [testSessionDeliveredDef removePropertyDefinitionWithName:@"supervisor"];
+    [timeTrackEntity removePropertyDefinitionWithName:@"supervisor"];
     
     //create the dictionary with the data bindings
     NSDictionary *clinicianDataBindings = [NSDictionary 
@@ -517,7 +568,7 @@
     clinicianDataProperty.autoValidate=FALSE;
     
     
-    [testSessionDeliveredDef insertPropertyDefinition:clinicianDataProperty atIndex:1];
+    [timeTrackEntity insertPropertyDefinition:clinicianDataProperty atIndex:1];
     
     
     /****************************************************************************************/
@@ -525,7 +576,7 @@
     /****************************************************************************************/
     
     
-    SCPropertyDefinition *clientsPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"clients"];
+    SCPropertyDefinition *clientsPropertyDef = [timeTrackEntity propertyDefinitionWithName:@"clients"];
     
    	clientsPropertyDef.type = SCPropertyTypeObjectSelection;
     
@@ -535,35 +586,7 @@
     
     
     
-    
-    
-    SCEntityDefinition *testSessionTypeDef=[SCEntityDefinition definitionWithEntityName:@"TestingSessionTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"assessmentType", @"notes", nil]];
-    
-    
-    
-    
-    testSessionTypeDef.orderAttributeName=@"order";
-    
-    
-    
-    SCPropertyDefinition *testingSessionTypePropertyDef=[testSessionDeliveredDef propertyDefinitionWithName:@"assessmentType"];
-    testingSessionTypePropertyDef.type =SCPropertyTypeObjectSelection;
-    
-    SCObjectSelectionAttributes *testSessionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:testSessionTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-    testSessionTypeSelectionAttribs.allowAddingItems = YES;
-    testSessionTypeSelectionAttribs.allowDeletingItems = YES;
-    testSessionTypeSelectionAttribs.allowMovingItems = YES;
-    testSessionTypeSelectionAttribs.allowEditingItems = YES;
-    testSessionTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Administration Types)"];
-    testSessionTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Administration Type"];
-    testingSessionTypePropertyDef.attributes = testSessionTypeSelectionAttribs;
-    
-    SCPropertyDefinition *testSessionTypePropertyDef=[testSessionTypeDef propertyDefinitionWithName:@"assessmentType"];
-    testSessionTypePropertyDef.type=SCPropertyTypeTextView;
-    SCPropertyDefinition *testSessionTypeNotesPropertyDef=[testSessionTypeDef propertyDefinitionWithName:@"notes"];
-    testSessionTypeNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-    
+      
     //Training Type  start
     SCEntityDefinition *trainingTypeDef=[SCEntityDefinition definitionWithEntityName:@"TrainingTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"trainingType",@"selectedByDefault", @"notes", nil]];
     
@@ -577,7 +600,7 @@
     
     
     
-    SCPropertyDefinition *sessionTrainingTypePropertyDef=[testSessionDeliveredDef propertyDefinitionWithName:@"trainingType"];
+    SCPropertyDefinition *sessionTrainingTypePropertyDef=[timeTrackEntity propertyDefinitionWithName:@"trainingType"];
     sessionTrainingTypePropertyDef.type =SCPropertyTypeObjectSelection;
     
     SCObjectSelectionAttributes *trainingTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trainingTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
@@ -601,10 +624,8 @@
     
     
     
-    SCPropertyDefinition *timePropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"time"];
+    SCPropertyDefinition *timePropertyDef = [timeTrackEntity propertyDefinitionWithName:@"time"];
     timePropertyDef.attributes = [SCObjectAttributes attributesWithObjectDefinition:self.timeDef];
-    
-    timePropertyDef.title=@"Testing Time";
     
     
     
@@ -615,16 +636,15 @@
     
     //Create the property definition for the clientPresentations property
     
-    SCPropertyDefinition *clientPresentationsPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"clientPresentations"];
+    SCPropertyDefinition *clientPresentationsPropertyDef = [timeTrackEntity propertyDefinitionWithName:@"clientPresentations"];
     clientPresentationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientPresentations_Shared.clientPresentationDef
                                                                                           allowAddingItems:YES
                                                                                         allowDeletingItems:YES
                                                                                           allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"tap + to add clients"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];	
     
-    clientPresentationsPropertyDef.title=@"Clients Tested";
-    
+   
     //Create the property definition for the papwerwork property in the testsessiondelivered class
-    SCPropertyDefinition *paperworkPropertyDef = [testSessionDeliveredDef propertyDefinitionWithName:@"paperwork"];
+    SCPropertyDefinition *paperworkPropertyDef = [timeTrackEntity propertyDefinitionWithName:@"paperwork"];
     
     //set the property definition type to segmented
     paperworkPropertyDef.type = SCPropertyTypeSegmented;
@@ -637,11 +657,11 @@
     
     NSPredicate *paperworkIncompletePredicate = [NSPredicate predicateWithFormat:@"paperwork == %@",[NSNumber numberWithInteger: 0]];
     //     tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
-    //										withEntityClassDefinition:testSessionDeliveredDef usingPredicate:paperworkIncompletePredicate];
-    SCArrayOfObjectsModel *objectModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:testSessionDeliveredDef filterPredicate:paperworkIncompletePredicate];
+    //										withEntityClassDefinition:timeTrackEntity usingPredicate:paperworkIncompletePredicate];
+    SCArrayOfObjectsModel *objectModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:timeTrackEntity filterPredicate:paperworkIncompletePredicate];
     
     //    self.tableViewModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView 
-    //										entityDefinition:testSessionDeliveredDef];
+    //										entityDefinition:timeTrackEntity];
     [self.searchBar setSelectedScopeButtonIndex:2];
     // Initialize tableModel
     //    if (self.navigationItem.rightBarButtonItems.count>1) {
@@ -655,6 +675,126 @@
     //    {
     //        self.tableViewModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
     //    }
+    
+    SCEntityDefinition *siteDef=[SCEntityDefinition definitionWithEntityName:@"SupportActivityTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"supportActivityType", @"notes", nil]];
+    
+    
+    
+    defaultSite
+    ended
+    location
+    notes
+    started
+    supportActivityTypeDef.orderAttributeName=@"order";
+    
+    
+    
+    SCPropertyDefinition *supportActivityTypePropertyDef=[timeTrackEntity propertyDefinitionWithName:@"supportActivityType"];
+    supportActivityTypePropertyDef.type =SCPropertyTypeObjectSelection;
+    
+    SCObjectSelectionAttributes *supportActivityTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:supportActivityTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    supportActivityTypeSelectionAttribs.allowAddingItems = YES;
+    supportActivityTypeSelectionAttribs.allowDeletingItems = YES;
+    supportActivityTypeSelectionAttribs.allowMovingItems = YES;
+    supportActivityTypeSelectionAttribs.allowEditingItems = YES;
+    supportActivityTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Support Activity Types)"];
+    supportActivityTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Support Activity Type"];
+    supportActivityTypePropertyDef.attributes = supportActivityTypeSelectionAttribs;
+    
+    SCPropertyDefinition *supportActivityTypeStrPropertyDef=[supportActivityTypeDef propertyDefinitionWithName:@"supportActivityType"];
+    supportActivityTypeStrPropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *supportActivityTypeNotesPropertyDef=[supportActivityTypeDef propertyDefinitionWithName:@"notes"];
+    supportActivityTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+    
+    switch (currentControllerSetup) {
+        case kTrackAssessmentSetup:
+        {
+            dateOfServicePropertyDef.title=@"Testing Date";
+            timePropertyDef.title=@"Testing Time";
+            clientPresentationsPropertyDef.title=@"Clients Tested";
+            
+           
+            
+            SCEntityDefinition *testSessionTypeDef=[SCEntityDefinition definitionWithEntityName:@"TestingSessionTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"assessmentType", @"notes", nil]];
+            
+            
+            
+            
+            testSessionTypeDef.orderAttributeName=@"order";
+            
+            
+            
+            SCPropertyDefinition *testingSessionTypePropertyDef=[timeTrackEntity propertyDefinitionWithName:@"assessmentType"];
+            testingSessionTypePropertyDef.type =SCPropertyTypeObjectSelection;
+            
+            SCObjectSelectionAttributes *testSessionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:testSessionTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+            testSessionTypeSelectionAttribs.allowAddingItems = YES;
+            testSessionTypeSelectionAttribs.allowDeletingItems = YES;
+            testSessionTypeSelectionAttribs.allowMovingItems = YES;
+            testSessionTypeSelectionAttribs.allowEditingItems = YES;
+            testSessionTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Assessment Types)"];
+            testSessionTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Administration Type"];
+            testingSessionTypePropertyDef.attributes = testSessionTypeSelectionAttribs;
+            
+            SCPropertyDefinition *testSessionTypePropertyDef=[testSessionTypeDef propertyDefinitionWithName:@"assessmentType"];
+            testSessionTypePropertyDef.type=SCPropertyTypeTextView;
+            SCPropertyDefinition *testSessionTypeNotesPropertyDef=[testSessionTypeDef propertyDefinitionWithName:@"notes"];
+            testSessionTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+        } 
+
+            break;
+        case kTrackSupportSetup:
+        {
+            dateOfServicePropertyDef.title=@"Service Date";
+            
+            timePropertyDef.title=@"Indirect Time";
+            clientPresentationsPropertyDef.title=@"Clients Served";
+            
+             self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"Current Month",@"All Items",@"Incomplete",nil];
+            
+            SCEntityDefinition *supportActivityTypeDef=[SCEntityDefinition definitionWithEntityName:@"SupportActivityTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"supportActivityType", @"notes", nil]];
+            
+            
+            
+            
+            supportActivityTypeDef.orderAttributeName=@"order";
+            
+            
+            
+            SCPropertyDefinition *supportActivityTypePropertyDef=[timeTrackEntity propertyDefinitionWithName:@"supportActivityType"];
+            supportActivityTypePropertyDef.type =SCPropertyTypeObjectSelection;
+            
+            SCObjectSelectionAttributes *supportActivityTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:supportActivityTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+            supportActivityTypeSelectionAttribs.allowAddingItems = YES;
+            supportActivityTypeSelectionAttribs.allowDeletingItems = YES;
+            supportActivityTypeSelectionAttribs.allowMovingItems = YES;
+            supportActivityTypeSelectionAttribs.allowEditingItems = YES;
+            supportActivityTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Support Activity Types)"];
+            supportActivityTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Support Activity Type"];
+            supportActivityTypePropertyDef.attributes = supportActivityTypeSelectionAttribs;
+            
+            SCPropertyDefinition *supportActivityTypeStrPropertyDef=[supportActivityTypeDef propertyDefinitionWithName:@"supportActivityType"];
+            supportActivityTypeStrPropertyDef.type=SCPropertyTypeTextView;
+            SCPropertyDefinition *supportActivityTypeNotesPropertyDef=[supportActivityTypeDef propertyDefinitionWithName:@"notes"];
+            supportActivityTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+        } 
+            
+            break;
+    
+        default:
+            break;
+    }
+   
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];

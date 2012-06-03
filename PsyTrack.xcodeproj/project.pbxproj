@@ -272,6 +272,7 @@
 		E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA69E15227EA9004ABF29 /* ClinicianSelectionCell.m */; };
 		E78DA6A415252579004ABF29 /* ExistingHoursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA6A215252579004ABF29 /* ExistingHoursViewController.m */; };
 		E78DA6A515252579004ABF29 /* ExistingHoursViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78DA6A315252579004ABF29 /* ExistingHoursViewController.xib */; };
+		E7910012157BF99300E4F73D /* SupportActivityDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7910011157BF99300E4F73D /* SupportActivityDeliveredEntity.m */; };
 		E7912D0E151D332700E0609A /* DemographicProfileEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D0D151D332700E0609A /* DemographicProfileEntity.m */; };
 		E7912D17151D349E00E0609A /* MigrationHistoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D16151D349E00E0609A /* MigrationHistoryEntity.m */; };
 		E7912D1A151DF7DB00E0609A /* VitalsEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7912D19151DF7DB00E0609A /* VitalsEntity.m */; };
@@ -721,6 +722,8 @@
 		E78DA6A115252579004ABF29 /* ExistingHoursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursViewController.h; sourceTree = "<group>"; };
 		E78DA6A215252579004ABF29 /* ExistingHoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursViewController.m; sourceTree = "<group>"; };
 		E78DA6A315252579004ABF29 /* ExistingHoursViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController.xib; sourceTree = "<group>"; };
+		E7910010157BF99300E4F73D /* SupportActivityDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupportActivityDeliveredEntity.h; sourceTree = "<group>"; };
+		E7910011157BF99300E4F73D /* SupportActivityDeliveredEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupportActivityDeliveredEntity.m; sourceTree = "<group>"; };
 		E7912D0C151D332700E0609A /* DemographicProfileEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicProfileEntity.h; sourceTree = "<group>"; };
 		E7912D0D151D332700E0609A /* DemographicProfileEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicProfileEntity.m; sourceTree = "<group>"; };
 		E7912D15151D349E00E0609A /* MigrationHistoryEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MigrationHistoryEntity.h; sourceTree = "<group>"; };
@@ -1558,6 +1561,8 @@
 		E7E1A638152E86C600C227E8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				E7910010157BF99300E4F73D /* SupportActivityDeliveredEntity.h */,
+				E7910011157BF99300E4F73D /* SupportActivityDeliveredEntity.m */,
 				E7F1E7611578254000D4A638 /* ServiceEntity.h */,
 				E7F1E7621578254000D4A638 /* ServiceEntity.m */,
 				E7E1A63A152E873500C227E8 /* TimeTrackViewController.h */,
@@ -1939,6 +1944,7 @@
 				E7F1E7091576D17100D4A638 /* ClientInstrumentScoresEntity.m in Sources */,
 				E7F1E760157824B300D4A638 /* TestingSessionDeliveredEntity.m in Sources */,
 				E7F1E7631578254000D4A638 /* ServiceEntity.m in Sources */,
+				E7910012157BF99300E4F73D /* SupportActivityDeliveredEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
