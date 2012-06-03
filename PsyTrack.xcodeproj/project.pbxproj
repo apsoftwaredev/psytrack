@@ -125,7 +125,7 @@
 		37F7CE9C1500596F00AD2C3A /* Time_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE991500596F00AD2C3A /* Time_Shared.m */; };
 		37F7CE9D1500596F00AD2C3A /* TimeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE9B1500596F00AD2C3A /* TimeEntity.m */; };
 		37F7CEA2150059BC00AD2C3A /* TestAdministrationsViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEA1150059BC00AD2C3A /* TestAdministrationsViewController_iPad.m */; };
-		37F7CEA7150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEA3150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib */; };
+		37F7CEA7150059D900AD2C3A /* TimeTrackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEA3150059D900AD2C3A /* TimeTrackViewController.xib */; };
 		37F7CEAE15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEAA15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib */; };
 		37F7CEAF15005C5F00AD2C3A /* TrainTrackViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEAC15005C5F00AD2C3A /* TrainTrackViewController_iPhone.xib */; };
 		37F7CEB215005C7300AD2C3A /* TrainTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEB115005C7300AD2C3A /* TrainTrackViewController.m */; };
@@ -260,7 +260,6 @@
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 		E7516BDC150BF9A2005B798A /* Dan Boice-46.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */; };
 		E75F7786151CC574002B10AE /* LogEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F7785151CC574002B10AE /* LogEntity.m */; };
-		E75F778C151CF463002B10AE /* TestingSessionDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F778B151CF463002B10AE /* TestingSessionDeliveredEntity.m */; };
 		E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */; };
 		E78480CA1518D7D800F48EA3 /* PhoneEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C91518D7D800F48EA3 /* PhoneEntity.m */; };
 		E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E78A8D1A1531EDF10099FE5B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -294,13 +293,15 @@
 		E7D3732C152C2EFA00121918 /* ExistingHoursEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */; };
 		E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */; };
 		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
-		E7E1A63D152E873500C227E8 /* ServicesViewController_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */; };
+		E7E1A63D152E873500C227E8 /* TimeTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */; };
 		E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A6441530C18900C227E8 /* ShortFieldCell.m */; };
 		E7F1E6F81575916F00D4A638 /* InstrumentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E6F71575916F00D4A638 /* InstrumentEntity.m */; };
 		E7F1E703157662EB00D4A638 /* InstrumentScoreNameEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E702157662EB00D4A638 /* InstrumentScoreNameEntity.m */; };
 		E7F1E7061576966000D4A638 /* InstrumentScoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E7051576966000D4A638 /* InstrumentScoreEntity.m */; };
 		E7F1E7091576D17100D4A638 /* ClientInstrumentScoresEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */; };
 		E7F1E73115775BA400D4A638 /* ipad-menubar-right.png in Resources */ = {isa = PBXBuildFile; fileRef = E7F1E73015775BA400D4A638 /* ipad-menubar-right.png */; };
+		E7F1E760157824B300D4A638 /* TestingSessionDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E75F157824B300D4A638 /* TestingSessionDeliveredEntity.m */; };
+		E7F1E7631578254000D4A638 /* ServiceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E7621578254000D4A638 /* ServiceEntity.m */; };
 		E7FB3AAD1562A4E4000A6782 /* TwoButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */; };
 		E7FB3AB31562C867000A6782 /* AddViewABLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB21562C867000A6782 /* AddViewABLinkButtonCell.m */; };
 		E7FB3AB61562C888000A6782 /* LookupRemoveLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB51562C888000A6782 /* LookupRemoveLinkButtonCell.m */; };
@@ -527,7 +528,7 @@
 		37F7CE9B1500596F00AD2C3A /* TimeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeEntity.m; sourceTree = "<group>"; };
 		37F7CEA0150059BC00AD2C3A /* TestAdministrationsViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestAdministrationsViewController_iPad.h; sourceTree = "<group>"; };
 		37F7CEA1150059BC00AD2C3A /* TestAdministrationsViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAdministrationsViewController_iPad.m; sourceTree = "<group>"; };
-		37F7CEA4150059D900AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TestAdministrationsViewController_iPad.xib; sourceTree = "<group>"; };
+		37F7CEA4150059D900AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TimeTrackViewController.xib; sourceTree = "<group>"; };
 		37F7CEAB15005C5F00AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TrainTrackViewController_iPad.xib; sourceTree = "<group>"; };
 		37F7CEAD15005C5F00AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TrainTrackViewController_iPhone.xib; sourceTree = "<group>"; };
 		37F7CEB015005C7300AD2C3A /* TrainTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainTrackViewController.h; sourceTree = "<group>"; };
@@ -698,8 +699,6 @@
 		E7516BDB150BF9A2005B798A /* Dan Boice-46.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "Dan Boice-46.jpg"; path = "../../Pictures/childhood scans/Dan Boice-46.jpg"; sourceTree = "<group>"; };
 		E75F7784151CC574002B10AE /* LogEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogEntity.h; sourceTree = "<group>"; };
 		E75F7785151CC574002B10AE /* LogEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogEntity.m; sourceTree = "<group>"; };
-		E75F778A151CF463002B10AE /* TestingSessionDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingSessionDeliveredEntity.h; sourceTree = "<group>"; };
-		E75F778B151CF463002B10AE /* TestingSessionDeliveredEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingSessionDeliveredEntity.m; sourceTree = "<group>"; };
 		E78480C41518C2E200F48EA3 /* EncryptedSCSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCSelectionCell.h; sourceTree = "<group>"; };
 		E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCSelectionCell.m; sourceTree = "<group>"; };
 		E78480C81518D7D800F48EA3 /* PhoneEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneEntity.h; sourceTree = "<group>"; };
@@ -753,8 +752,8 @@
 		E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursEntity.m; sourceTree = "<group>"; };
 		E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursOverviewCell.xib; sourceTree = "<group>"; };
 		E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController_iPad.xib; sourceTree = "<group>"; };
-		E7E1A63A152E873500C227E8 /* ServicesViewController_Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServicesViewController_Shared.h; sourceTree = "<group>"; };
-		E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServicesViewController_Shared.m; sourceTree = "<group>"; };
+		E7E1A63A152E873500C227E8 /* TimeTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTrackViewController.h; sourceTree = "<group>"; };
+		E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTrackViewController.m; sourceTree = "<group>"; };
 		E7E1A6431530C18900C227E8 /* ShortFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortFieldCell.h; sourceTree = "<group>"; };
 		E7E1A6441530C18900C227E8 /* ShortFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortFieldCell.m; sourceTree = "<group>"; };
 		E7F1E6F61575916F00D4A638 /* InstrumentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentEntity.h; sourceTree = "<group>"; };
@@ -766,6 +765,10 @@
 		E7F1E7071576D17100D4A638 /* ClientInstrumentScoresEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientInstrumentScoresEntity.h; sourceTree = "<group>"; };
 		E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientInstrumentScoresEntity.m; sourceTree = "<group>"; };
 		E7F1E73015775BA400D4A638 /* ipad-menubar-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-menubar-right.png"; sourceTree = "<group>"; };
+		E7F1E75E157824B300D4A638 /* TestingSessionDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingSessionDeliveredEntity.h; sourceTree = "<group>"; };
+		E7F1E75F157824B300D4A638 /* TestingSessionDeliveredEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingSessionDeliveredEntity.m; sourceTree = "<group>"; };
+		E7F1E7611578254000D4A638 /* ServiceEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceEntity.h; sourceTree = "<group>"; };
+		E7F1E7621578254000D4A638 /* ServiceEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceEntity.m; sourceTree = "<group>"; };
 		E7FB3AAB1562A4E3000A6782 /* TwoButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoButtonCell.h; sourceTree = "<group>"; };
 		E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoButtonCell.m; sourceTree = "<group>"; };
 		E7FB3AB11562C867000A6782 /* AddViewABLinkButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewABLinkButtonCell.h; sourceTree = "<group>"; };
@@ -1158,9 +1161,8 @@
 		37F7CE9E1500598A00AD2C3A /* Test Administrations */ = {
 			isa = PBXGroup;
 			children = (
-				E75F778A151CF463002B10AE /* TestingSessionDeliveredEntity.h */,
-				E75F778B151CF463002B10AE /* TestingSessionDeliveredEntity.m */,
-				37F7CEA3150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib */,
+				E7F1E75E157824B300D4A638 /* TestingSessionDeliveredEntity.h */,
+				E7F1E75F157824B300D4A638 /* TestingSessionDeliveredEntity.m */,
 				37F7CEA0150059BC00AD2C3A /* TestAdministrationsViewController_iPad.h */,
 				37F7CEA1150059BC00AD2C3A /* TestAdministrationsViewController_iPad.m */,
 			);
@@ -1556,8 +1558,11 @@
 		E7E1A638152E86C600C227E8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E7E1A63A152E873500C227E8 /* ServicesViewController_Shared.h */,
-				E7E1A63B152E873500C227E8 /* ServicesViewController_Shared.m */,
+				E7F1E7611578254000D4A638 /* ServiceEntity.h */,
+				E7F1E7621578254000D4A638 /* ServiceEntity.m */,
+				E7E1A63A152E873500C227E8 /* TimeTrackViewController.h */,
+				E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */,
+				37F7CEA3150059D900AD2C3A /* TimeTrackViewController.xib */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -1678,7 +1683,7 @@
 				37F7CE7F150057C300AD2C3A /* CliniciansDetailViewController_iPad.xib in Resources */,
 				37F7CE80150057C300AD2C3A /* CliniciansRootViewController_iPad.xib in Resources */,
 				37F7CE84150057FC00AD2C3A /* ClinicianViewController.xib in Resources */,
-				37F7CEA7150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib in Resources */,
+				37F7CEA7150059D900AD2C3A /* TimeTrackViewController.xib in Resources */,
 				37F7CEAE15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib in Resources */,
 				37F7CEAF15005C5F00AD2C3A /* TrainTrackViewController_iPhone.xib in Resources */,
 				37F7CEBA15005D6700AD2C3A /* ReportsDetailViewController_iPad.xib in Resources */,
@@ -1906,7 +1911,6 @@
 				E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */,
 				E78480CA1518D7D800F48EA3 /* PhoneEntity.m in Sources */,
 				E75F7786151CC574002B10AE /* LogEntity.m in Sources */,
-				E75F778C151CF463002B10AE /* TestingSessionDeliveredEntity.m in Sources */,
 				E7912D0E151D332700E0609A /* DemographicProfileEntity.m in Sources */,
 				E7912D17151D349E00E0609A /* MigrationHistoryEntity.m in Sources */,
 				E7912D1A151DF7DB00E0609A /* VitalsEntity.m in Sources */,
@@ -1919,7 +1923,7 @@
 				E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */,
 				E78DA6A415252579004ABF29 /* ExistingHoursViewController.m in Sources */,
 				E7D3732C152C2EFA00121918 /* ExistingHoursEntity.m in Sources */,
-				E7E1A63D152E873500C227E8 /* ServicesViewController_Shared.m in Sources */,
+				E7E1A63D152E873500C227E8 /* TimeTrackViewController.m in Sources */,
 				E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */,
 				E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */,
 				E7B0A5B815347C430027F637 /* KeychainItemWrapper.m in Sources */,
@@ -1933,6 +1937,8 @@
 				E7F1E703157662EB00D4A638 /* InstrumentScoreNameEntity.m in Sources */,
 				E7F1E7061576966000D4A638 /* InstrumentScoreEntity.m in Sources */,
 				E7F1E7091576D17100D4A638 /* ClientInstrumentScoresEntity.m in Sources */,
+				E7F1E760157824B300D4A638 /* TestingSessionDeliveredEntity.m in Sources */,
+				E7F1E7631578254000D4A638 /* ServiceEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2136,12 +2142,12 @@
 			name = ClinicianViewController.xib;
 			sourceTree = "<group>";
 		};
-		37F7CEA3150059D900AD2C3A /* TestAdministrationsViewController_iPad.xib */ = {
+		37F7CEA3150059D900AD2C3A /* TimeTrackViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				37F7CEA4150059D900AD2C3A /* en */,
 			);
-			name = TestAdministrationsViewController_iPad.xib;
+			name = TimeTrackViewController.xib;
 			sourceTree = "<group>";
 		};
 		37F7CEAA15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib */ = {

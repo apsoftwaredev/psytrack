@@ -835,7 +835,7 @@
     
     
     
-    SCEntityDefinition *instrumentDef=[SCEntityDefinition definitionWithEntityName:@"InstrumentEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"acronym", @"instrumentName", @"publisher", @"ages", @"sampleSize",@"scoreNames",@"notes"     , nil]];
+    SCEntityDefinition *instrumentDef=[SCEntityDefinition definitionWithEntityName:@"InstrumentEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"acronym", @"instrumentName",@"instrumentType", @"publisher", @"ages", @"sampleSize",@"scoreNames",@"notes"     , nil]];
     
     
     SCEntityDefinition *clientInstrumentScoresDef=[SCEntityDefinition definitionWithEntityName:@"ClientInstrumentScoresEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"instrument", @"scores"  ,@"notes",   nil]];
@@ -869,7 +869,7 @@
     //Create the property definition for the instrument Scores property
     SCPropertyDefinition *clientInstrumentScoresPropertyDef = [clientPresentationDef propertyDefinitionWithName:@"instrumentScores"];
     
-    clientInstrumentScoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientInstrumentScoresDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES];	
+    clientInstrumentScoresPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientInstrumentScoresDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new instrument scores"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
     
     clientInstrumentScoresDef.titlePropertyName=@"instrument.instrumentName";
     SCPropertyDefinition *instrumentPropertyDef=[clientInstrumentScoresDef propertyDefinitionWithName:@"instrument"];
@@ -907,6 +907,93 @@
    
     
     scoreNameInInstrumentPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentScoreNameDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"(Define score names)"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to define score name"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	    
+    
+    
+    
+    //Create a class definition for the instrument type Entity
+    SCEntityDefinition *instrumentTypeDef = [SCEntityDefinition definitionWithEntityName:@"InstrumentTypeEntity" 
+                                                                    managedObjectContext:managedObjectContext
+                                                                           propertyNames:[NSArray arrayWithObjects:@"instrumentType", @"notes" , nil]];
+    
+
+    
+    //create a property definition
+    SCPropertyDefinition *instrumentTypePropertyDef = [instrumentDef propertyDefinitionWithName:@"instrumentType"];
+    
+    
+    
+    //set the title property name
+    instrumentTypeDef.titlePropertyName=@"instrumentType";
+    
+    //set the property definition type to objects selection
+	
+    instrumentTypePropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *instrumentTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:instrumentTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    
+    //set some addtional attributes
+    instrumentTypeSelectionAttribs.allowAddingItems = YES;
+    instrumentTypeSelectionAttribs.allowDeletingItems = YES;
+    instrumentTypeSelectionAttribs.allowMovingItems = NO;
+    instrumentTypeSelectionAttribs.allowEditingItems = YES;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    instrumentTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add instrument types"];
+    
+    
+    //add an "Add New" element to appear when user clicks edit
+    instrumentTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Tap here to add new instrument type"];
+    
+    //add the selection attributes to the property definition
+    instrumentTypePropertyDef.attributes = instrumentTypeSelectionAttribs;
+    
+    //Create the property definition for the notes property in the genderDef class
+    SCPropertyDefinition *instrumentTypeNotesPropertyDef = [instrumentTypeDef propertyDefinitionWithName:@"notes"];
+    instrumentTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+    
+    //Create a class definition for the instrument type Entity
+    SCEntityDefinition *instrumentPublisherDef = [SCEntityDefinition definitionWithEntityName:@"InstrumentPublisherEntity" 
+                                                                    managedObjectContext:managedObjectContext
+                                                                           propertyNames:[NSArray arrayWithObjects:@"publisherName", @"notes" , nil]];
+    
+    
+    
+    //create a property definition
+    SCPropertyDefinition *instrumentPublisherPropertyDef = [instrumentDef propertyDefinitionWithName:@"publisher"];
+    
+    
+    
+    //set the title property name
+    instrumentPublisherDef.titlePropertyName=@"publisherName";
+    instrumentPublisherDef.orderAttributeName=@"order";
+    //set the property definition Publisher to objects selection
+	
+    instrumentPublisherPropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *instrumentPublisherSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:instrumentPublisherDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    
+    //set some addtional attributes
+    instrumentPublisherSelectionAttribs.allowAddingItems = YES;
+    instrumentPublisherSelectionAttribs.allowDeletingItems = YES;
+    instrumentPublisherSelectionAttribs.allowMovingItems = YES;
+    instrumentPublisherSelectionAttribs.allowEditingItems = YES;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    instrumentPublisherSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add instrument publishers"];
+    
+    
+    //add an "Add New" element to appear when user clicks edit
+    instrumentPublisherSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Tap here to add new instrument Publisher"];
+    
+    //add the selection attributes to the property definition
+    instrumentPublisherPropertyDef.attributes = instrumentPublisherSelectionAttribs;
+    
+    //Create the property definition for the notes property in the genderDef class
+    SCPropertyDefinition *instrumentPublisherNotesPropertyDef = [instrumentPublisherDef propertyDefinitionWithName:@"notes"];
+    instrumentPublisherNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+
+    
     
     
     SCPropertyDefinition *scoresPropertyDef=[clientInstrumentScoresDef propertyDefinitionWithName:@"scores"];
@@ -953,11 +1040,9 @@
     instrumentScoreNameInScoresPropertyDef.attributes = instrumentScoreNameInScoresSelectionAttribs;
     
     
-    SCPropertyGroup *instrumentGroup = [SCPropertyGroup groupWithHeaderTitle:@"Instruments" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"instrumentScores",    nil]];
-    [self.clientPresentationDef.propertyGroups insertGroup:instrumentGroup atIndex:1];
+  
     
-    
-    SCPropertyGroup *instrumentInClientInstrumentScoresPropertyGroup=[SCPropertyGroup groupWithHeaderTitle:@"Add instrument before scores" footerTitle:@"If you change the instrument, the scores added under a different instrument will be removed." propertyNames:[NSArray arrayWithObject:@"instrument"]];
+    SCPropertyGroup *instrumentInClientInstrumentScoresPropertyGroup=[SCPropertyGroup groupWithHeaderTitle:@"Select instrument before scores" footerTitle:@"If you change the instrument, the scores added under a different instrument will be removed." propertyNames:[NSArray arrayWithObject:@"instrument"]];
     
     [clientInstrumentScoresDef.propertyGroups addGroup:instrumentInClientInstrumentScoresPropertyGroup];
     
@@ -972,6 +1057,74 @@
     [clientInstrumentScoresDef.propertyGroups addGroup:notesInClientInstrumentScoresPropertyGroup];
     
 
+    
+    //Create a class definition for the Instrument Entity
+    SCEntityDefinition *batteryDef = [SCEntityDefinition definitionWithEntityName:@"BatteryEntity" 
+                                                             managedObjectContext:managedObjectContext
+                                                                    propertyNames:[NSArray arrayWithObjects:@"batteryName", @"acronym", @"publisher",@"instruments", @"sampleSize", @"ages",@"notes" , nil]];
+    
+
+    
+    //create a property definition
+    SCPropertyDefinition *batteryPropertyDef = [clientPresentationDef propertyDefinitionWithName:@"batteries"];
+    
+    
+    
+    //set the title property name
+    batteryDef.titlePropertyName=@"batteryName;acronym";
+    batteryDef.titlePropertyNameDelimiter=@" - ";
+    batteryDef.orderAttributeName=@"order";
+    //set the property definition type to objects selection
+	
+    batteryPropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *batterySelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:batteryDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
+    
+    //set some addtional attributes
+    batterySelectionAttribs.allowAddingItems = YES;
+    batterySelectionAttribs.allowDeletingItems = YES;
+    batterySelectionAttribs.allowMovingItems = YES;
+    batterySelectionAttribs.allowEditingItems = YES;
+    
+    //add a placeholder element to tell the user what to do     when there are no other cells                                          
+    batterySelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add batteries"];
+    
+    
+    //add an "Add New" element to appear when user clicks edit
+    batterySelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Tap here to add new battery"];
+    
+    //add the selection attributes to the property definition
+    batteryPropertyDef.attributes = batterySelectionAttribs;
+    
+    
+    //create a property definition
+    SCPropertyDefinition *batteryPublisherPropertyDef = [batteryDef propertyDefinitionWithName:@"publisher"];
+    
+    
+    
+    //set the property definition Publisher to objects selection
+	
+    batteryPublisherPropertyDef.type = SCPropertyTypeObjectSelection;
+    //add the selection attributes to the property definition
+    batteryPublisherPropertyDef.attributes = instrumentPublisherSelectionAttribs;
+    
+    
+    //create a property definition
+    SCPropertyDefinition *batteryInstrumentsPropertyDef = [batteryDef propertyDefinitionWithName:@"instruments"];
+    
+    batteryInstrumentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentDef
+                                                                                         allowAddingItems:YES
+                                                                                       allowDeletingItems:YES
+                                                                                         allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add instruments"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
+    
+    
+    
+   
+    //Create the property definition for the notes property in the genderDef class
+    SCPropertyDefinition *batteryNotesPropertyDef = [batteryDef propertyDefinitionWithName:@"notes"];
+    batteryNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyGroup *instrumentGroup = [SCPropertyGroup groupWithHeaderTitle:@"Instruments" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"instrumentScores",@"batteries",    nil]];
+    [self.clientPresentationDef.propertyGroups insertGroup:instrumentGroup atIndex:1];
     
     return  self;
 
