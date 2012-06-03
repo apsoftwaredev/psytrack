@@ -676,36 +676,7 @@
     //        self.tableViewModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
     //    }
     
-    SCEntityDefinition *siteDef=[SCEntityDefinition definitionWithEntityName:@"SupportActivityTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"supportActivityType", @"notes", nil]];
-    
-    
-    
-    defaultSite
-    ended
-    location
-    notes
-    started
-    supportActivityTypeDef.orderAttributeName=@"order";
-    
-    
-    
-    SCPropertyDefinition *supportActivityTypePropertyDef=[timeTrackEntity propertyDefinitionWithName:@"supportActivityType"];
-    supportActivityTypePropertyDef.type =SCPropertyTypeObjectSelection;
-    
-    SCObjectSelectionAttributes *supportActivityTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:supportActivityTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-    supportActivityTypeSelectionAttribs.allowAddingItems = YES;
-    supportActivityTypeSelectionAttribs.allowDeletingItems = YES;
-    supportActivityTypeSelectionAttribs.allowMovingItems = YES;
-    supportActivityTypeSelectionAttribs.allowEditingItems = YES;
-    supportActivityTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Support Activity Types)"];
-    supportActivityTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Support Activity Type"];
-    supportActivityTypePropertyDef.attributes = supportActivityTypeSelectionAttribs;
-    
-    SCPropertyDefinition *supportActivityTypeStrPropertyDef=[supportActivityTypeDef propertyDefinitionWithName:@"supportActivityType"];
-    supportActivityTypeStrPropertyDef.type=SCPropertyTypeTextView;
-    SCPropertyDefinition *supportActivityTypeNotesPropertyDef=[supportActivityTypeDef propertyDefinitionWithName:@"notes"];
-    supportActivityTypeNotesPropertyDef.type=SCPropertyTypeTextView;
-    
+
     
     
     switch (currentControllerSetup) {
