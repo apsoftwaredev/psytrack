@@ -447,7 +447,7 @@
         default:
             break;
     }
-     SCPropertyGroup *detailsGroup =[SCPropertyGroup groupWithHeaderTitle:detailsHeaderStr footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"trainingType", nil]];
+     SCPropertyGroup *detailsGroup =[SCPropertyGroup groupWithHeaderTitle:detailsHeaderStr footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"trainingType",@"site", nil]];
     
     
     switch (currentControllerSetup) {
@@ -460,6 +460,7 @@
                                                                          managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType",     @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]];        
             
             [detailsGroup insertPropertyName:@"assessmentType" atIndex:0];
+           
         }
             break;
         case kTrackInterventionSetup:
@@ -478,6 +479,7 @@
                                                      managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"supportActivityType",     @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]]; 
             
             [detailsGroup insertPropertyName:@"supportActivityType" atIndex:0];
+            
             break;
             
         case kTrackSupervisionGivenSetup:
@@ -699,8 +701,45 @@
     //    }
     
 
+    SCEntityDefinition *siteDef=[SCEntityDefinition definitionWithEntityName:@"SiteEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"siteName", @"location", @"started",@"ended",@"notes",@"defaultSite", nil]];
     
     
+    
+    
+    
+    
+    
+    
+    
+    siteDef.orderAttributeName=@"order";
+    
+    
+    
+    SCPropertyDefinition *sitePropertyDef=[timeTrackEntity propertyDefinitionWithName:@"site"];
+    sitePropertyDef.type =SCPropertyTypeObjectSelection;
+    
+    SCObjectSelectionAttributes *siteSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:siteDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    siteSelectionAttribs.allowAddingItems = YES;
+    siteSelectionAttribs.allowDeletingItems = YES;
+    siteSelectionAttribs.allowMovingItems = YES;
+    siteSelectionAttribs.allowEditingItems = YES;
+    siteSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Sites)"];
+    siteSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Site"];
+    sitePropertyDef.attributes = siteSelectionAttribs;
+    
+    SCPropertyDefinition *siteNamePropertyDef=[siteDef propertyDefinitionWithName:@"siteName"];
+    siteNamePropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *siteNotesPropertyDef=[siteDef propertyDefinitionWithName:@"notes"];
+    siteNotesPropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *siteStartedPropertyDef = [siteDef propertyDefinitionWithName:@"started"];
+	siteStartedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                         datePickerMode:UIDatePickerModeDate 
+                                                          displayDatePickerInDetailView:YES];
+    
+    SCPropertyDefinition *siteEndedPropertyDef = [siteDef propertyDefinitionWithName:@"ended"];
+	siteEndedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                       datePickerMode:UIDatePickerModeDate 
+                                                        displayDatePickerInDetailView:YES];
     switch (currentControllerSetup) {
         case kTrackAssessmentSetup:
         {
@@ -991,6 +1030,36 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     if (tableModel.tag==0) {
         
+        NSString *emptyLabelTextStr=nil;
+        NSString *totalLabelTextStr=nil;
+        switch (currentControllerSetup) {
+            case kTrackAssessmentSetup:
+                emptyLabelTextStr=@"Tap + To Add Administrations";
+                totalLabelTextStr=@"Total Administrations: ";
+                break;
+            case kTrackInterventionSetup:
+                emptyLabelTextStr=@"Tap + To Add Interventions";
+                totalLabelTextStr=@"Total Interventions: ";
+                break;
+            case kTrackSupportSetup:
+                emptyLabelTextStr=@"Tap + To Add Indirect Support Activties";
+                 totalLabelTextStr=@"Total Indirect Support Activities: ";
+                break;
+            case kTrackSupervisionGivenSetup:
+                emptyLabelTextStr=@"Tap + To Add Supervision Given";
+                 totalLabelTextStr=@"Total Supervision Sessions Given: ";
+                break;
+            
+            case kTrackSupervisionReceivedSetup:
+                emptyLabelTextStr=@"Tap + To Add Supervision Received";
+                 totalLabelTextStr=@"Total Supervision Sessions Received: ";
+                break;
+            
+            default:
+                break;
+        }
+        
+        
         int cellCount=0;
         NSLog(@" table view model section count is %i",tableModel.sectionCount);
         if (tableModel.sectionCount >0){
@@ -1005,11 +1074,11 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         }
         if (cellCount==0)
         {
-            self.totalAdministrationsLabel.text=@"Tap + To Add Administrations";
+            self.totalAdministrationsLabel.text=emptyLabelTextStr;
         }
         else
         {
-            self.totalAdministrationsLabel.text=[NSString stringWithFormat:@"Total Administrations: %i", cellCount];
+            self.totalAdministrationsLabel.text=[NSString stringWithFormat:@"%@%i", totalLabelTextStr, cellCount];
         }
         
         
@@ -1047,7 +1116,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     NSLog(@"tab tag %i",tableViewModel.tag);
     NSLog(@"indext path section is %i", indexPath.section);
-    if(tableViewModel.tag==1 &&indexPath.section==1){
+    if(tableViewModel.tag==1 &&indexPath.section==0){
         //        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         //NSLog(@"cell bound object is %@",cellManagedObject);
         //NSLog(@"cell.tag%i",cell.tag);
@@ -1673,14 +1742,17 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     }
     
 
-    if (tableViewModel.tag==3 && tableViewModel.sectionCount&&index==0) {
+    if (tableViewModel.tag==3 && tableViewModel.sectionCount&&index==3) {
         
         
       
-        SCTableViewSection *sectionOne=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-        SCTableViewCell *sectionOneClicianCell=(SCTableViewCell *)[sectionOne cellAtIndex:0];
-        NSManagedObject *cellManagedObject=(NSManagedObject *)sectionOneClicianCell.boundObject;        
+        SCTableViewSection *sectionOne=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
         
+        NSLog(@"cell count is %i",sectionOne.cellCount);
+        SCTableViewCell *sectionOneClicianCell=(SCTableViewCell *)[sectionOne cellAtIndex:0];
+        NSManagedObject *cellManagedObject=(NSManagedObject *)sectionOneClicianCell.boundObject;  
+        NSLog(@"cell class is %@", sectionOneClicianCell.class);
+        NSLog(@"cell managed object is %@",cellManagedObject);
         if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) 
         
         {
@@ -1689,8 +1761,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Wechlsler Test Age" boundObject:nil labelTextPropertyName:@"WechslerAge"];
             actualAge.label.text=[NSString stringWithString: @"0y 0m"];
             wechslerAge.label.text=[NSString stringWithFormat:@"%iy %im",0,0];
-            [section addCell:actualAge];
-            [section addCell:wechslerAge];
+            [sectionOne addCell:actualAge];
+            [sectionOne addCell:wechslerAge];
         
         }
 }

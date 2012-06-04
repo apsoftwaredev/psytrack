@@ -1685,11 +1685,15 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
     }
     else if (myInfoFetchedObjects.count>1){
         
-        for (int i=0;i<myInfoFetchedObjects.count-1; i++) {
+        for (int i=0;i<myInfoFetchedObjects.count; i++) {
             ClinicianEntity *myClinicianInfoObject=[myInfoFetchedObjects objectAtIndex:i];
             [myClinicianInfoObject willAccessValueForKey:@"firstName"];
             if ([myClinicianInfoObject.firstName isEqualToString:@"Enter Your"]) {
-                [managedObjectContext__ deleteObject:myClinicianInfoObject];
+                if (myInfoFetchedObjects.count>1) {
+                     [managedObjectContext__ deleteObject:myClinicianInfoObject];
+                    
+                }
+               
             }
             
             

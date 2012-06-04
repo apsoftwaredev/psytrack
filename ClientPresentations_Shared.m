@@ -583,7 +583,7 @@
     
     
     //insert the custom property definition into the clientData class at index 
-    [self.clientPresentationDef addPropertyDefinition:clientDataProperty];
+    [self.clientPresentationDef insertPropertyDefinition:clientDataProperty atIndex:0];
 
     
     
@@ -785,8 +785,8 @@
 	
     //create the dictionary with the data bindings
         
-    [mainGroup addPropertyName:@"Age"];
-    [mainGroup addPropertyName:@"WechslerAge"];
+//    [mainGroup addPropertyName:@"Age"];
+//    [mainGroup addPropertyName:@"WechslerAge"];
     //create the dictionary with the data bindings
    
   
@@ -1247,9 +1247,9 @@
 //NSLog(@"cell text is %@",cell.textLabel.text);
     //NSLog(@"section is %i",indexPath.section);
     //NSLog(@"tablemodel is %i",tableViewModel.tag);
-    if ((tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Wechlsler Test Age"])||(tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Test Age"])) 
+    if ((tableViewModel.tag==3 && indexPath.section==1 && [cell.textLabel.text isEqualToString:@"Wechlsler Test Age"])||(tableViewModel.tag==3 && indexPath.section==1 && [cell.textLabel.text isEqualToString:@"Test Age"])) 
     {
-        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
+        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
         
         
         
