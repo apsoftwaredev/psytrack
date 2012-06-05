@@ -1,25 +1,25 @@
 //
-//  ServiceEntity.m
+//  TimeTrackEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 5/31/12.
+//  Created by Daniel Boice on 6/5/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-#import "ServiceEntity.h"
+#import "TimeTrackEntity.h"
 #import "ClinicianEntity.h"
 
 
-@implementation ServiceEntity
+@implementation TimeTrackEntity
 
+@dynamic order;
+@dynamic notes;
 @dynamic dateOfService;
 @dynamic eventIdentifier;
-@dynamic notes;
-@dynamic order;
 @dynamic paperwork;
-@dynamic serviceCode;
 @dynamic site;
 @dynamic supervisor;
+@dynamic serviceCode;
 @dynamic trainingType;
 
 @end

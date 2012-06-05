@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "ServiceEntity.h"
+#import "TimeTrackEntity.h"
 
 @class TimeEntity;
 
-@interface TestingSessionDeliveredEntity : ServiceEntity
+@interface TestingSessionDeliveredEntity : TimeTrackEntity
 
 @property (nonatomic, retain) NSManagedObject *assessmentType;
 @property (nonatomic, retain) NSSet *clientPresentations;

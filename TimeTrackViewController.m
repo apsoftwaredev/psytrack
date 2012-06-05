@@ -405,12 +405,6 @@
    
     
    
-
-    clientPresentations_Shared=[[ClientPresentations_Shared alloc]init];
-    
-    [clientPresentations_Shared setupUsingSTV];
-    
-  
   
     
     
@@ -487,7 +481,10 @@
             navtitle.title=@"Supervision Given";
             
             timeTrackEntity =[SCEntityDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
-                                                     managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType",     @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]];  
+                                                     managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",  @"notes", @"paperwork", @"studentsPresent",   @"supervisionType",  @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]];  
+            
+             [detailsGroup insertPropertyName:@"supervisionType" atIndex:0];
+            
             break;
             
         case kTrackSupervisionReceivedSetup:
@@ -657,16 +654,42 @@
     
     
     //create an array of objects definition for the clientPresentation to-many relationship that with show up in a different view  without a place holder element>.
+    SCPropertyDefinition *clientPresentationsPropertyDef =nil;
+    SCPropertyDefinition *supervisionFeedbackPropertyDef=nil;
     
     //Create the property definition for the clientPresentations property
+    if (currentControllerSetup==kTrackAssessmentSetup||currentControllerSetup==kTrackInterventionSetup||currentControllerSetup==kTrackSupportSetup) {
+        
+        clientPresentations_Shared=[[ClientPresentations_Shared alloc]init];
+        
+        [clientPresentations_Shared setupUsingSTV];
+        
+        
+
+        
+           clientPresentationsPropertyDef = [timeTrackEntity propertyDefinitionWithName:@"clientPresentations"];
+            clientPresentationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientPresentations_Shared.clientPresentationDef
+                                                                                                  allowAddingItems:YES
+                                                                                                allowDeletingItems:YES
+                                                                                                  allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"tap + to add clients"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];	
+        
+        }
+    else {
+        
+        
+        SCEntityDefinition *supervisionFeedbackDef=[SCEntityDefinition definitionWithEntityName:@"SupervisionFeedbackEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"client", @"feedback", @"topic",  nil]];
+        
+        SCEntityDefinition *feedbackTopicDef=[SCEntityDefinition definitionWithEntityName:@"FeedbackTopicEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"topic", nil]];                                                   
+                                            
+             feedbackTopicDef.orderAttributeName=@"order";                                      
+        
+        supervisionFeedbackPropertyDef=[timeTrackEntity propertyDefinitionWithName:@"supervisionFeedback"];
+        clientPresentationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supervisionFeedbackDef
+                                                                                              allowAddingItems:YES
+                                                                                            allowDeletingItems:YES
+                                                                                              allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"tap + to add feedback"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];
+    }
     
-    SCPropertyDefinition *clientPresentationsPropertyDef = [timeTrackEntity propertyDefinitionWithName:@"clientPresentations"];
-    clientPresentationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientPresentations_Shared.clientPresentationDef
-                                                                                          allowAddingItems:YES
-                                                                                        allowDeletingItems:YES
-                                                                                          allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"tap + to add clients"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];	
-    
-   
     //Create the property definition for the papwerwork property in the testsessiondelivered class
     SCPropertyDefinition *paperworkPropertyDef = [timeTrackEntity propertyDefinitionWithName:@"paperwork"];
     
