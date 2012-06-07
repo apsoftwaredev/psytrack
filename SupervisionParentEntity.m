@@ -15,6 +15,6 @@
 @dynamic studentsPresent;
 @dynamic supervisionFeedback;
 @dynamic supervisionType;
-@dynamic supervisionModel;
+@dynamic modelsUsed;
 
 @end

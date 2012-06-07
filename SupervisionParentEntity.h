@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSSet *studentsPresent;
 @property (nonatomic, retain) NSSet *supervisionFeedback;
 @property (nonatomic, retain) NSManagedObject *supervisionType;
-@property (nonatomic, retain) NSSet *supervisionModel;
+@property (nonatomic, retain) NSSet *modelsUsed;
 @end
 
 @interface SupervisionParentEntity (CoreDataGeneratedAccessors)
@@ -32,9 +32,9 @@
 - (void)addSupervisionFeedback:(NSSet *)values;
 - (void)removeSupervisionFeedback:(NSSet *)values;
 
-- (void)addSupervisionModelObject:(NSManagedObject *)value;
-- (void)removeSupervisionModelObject:(NSManagedObject *)value;
-- (void)addSupervisionModel:(NSSet *)values;
-- (void)removeSupervisionModel:(NSSet *)values;
+- (void)addModelsUsedObject:(NSManagedObject *)value;
+- (void)removeModelsUsedObject:(NSManagedObject *)value;
+- (void)addModelsUsed:(NSSet *)values;
+- (void)removeModelsUsed:(NSSet *)values;
 
 @end
