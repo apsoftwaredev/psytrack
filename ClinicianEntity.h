@@ -1,100 +1,77 @@
- /*
-   *  ClinicianEntity.h
-   *  psyTrack Clinician Tools
-   *  Version: 1.0
-   *
-   *
-   *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
-   *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
-   *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
-   *
-   *  Created by Daniel Boice on 1/16/12.
-   *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
-   *
-   *
-   *	This notice may not be removed from this file.
-   *
-   */
+//
+//  ClinicianEntity.h
+//  PsyTrack
+//
+//  Created by Daniel Boice on 6/7/12.
+//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//
+
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class  TestingSessionDeliveredEntity,PTABGroup;
+@class DemographicProfileEntity, LogEntity, MedicationReviewEntity, ReferralEntity, SupervisionParentEntity, TimeTrackEntity;
 
-@interface ClinicianEntity : NSManagedObject {
+@interface ClinicianEntity : NSManagedObject{
 
-
-	NSString * lastName;
-
-	NSString * middleName;
-	NSString * firstName;
-
-	NSString * suffix;
-
-	NSString * prefix;
-
-	NSMutableSet *tempABGroupSet;
-
+NSMutableSet *tempABGroupSet;
 
 }
 
-@property (nonatomic, strong) NSString * lastName;
-@property (nonatomic, strong) NSString * clinicianType;
-@property (nonatomic, strong) NSString * middleName;
-@property (nonatomic, strong) NSString * firstName;
-@property (nonatomic, strong) NSNumber * myPastSupervisor;
-@property (nonatomic, strong) NSData * photo;
-@property (nonatomic, strong) NSDate * updatedTimeStamp;
-@property (nonatomic, strong) NSString * keyString;
-@property (nonatomic, strong) NSNumber *aBRecordIdentifier;
-@property (nonatomic, strong) NSString * suffix;
-@property (nonatomic, strong) NSNumber * myCurrentSupervisor;
-@property (nonatomic, strong) NSNumber * thisIsMyInfo;
-@property (nonatomic, strong) NSNumber * order;
-
-@property (nonatomic, strong) NSDate * startedPracticing;
-@property (nonatomic, strong) NSString * prefix;
-@property (nonatomic, strong) NSNumber * atMyCurrentSite;
-@property (nonatomic, strong) NSNumber * isPrescriber;
-@property (nonatomic, strong) NSString * notes;
-@property (nonatomic, strong) NSNumber * myInformation;
-
-@property (nonatomic, strong) NSSet *logs;
-@property (nonatomic, strong) NSSet *awards;
-@property (nonatomic, strong) NSSet *supportDeliverySupervised;
-@property (nonatomic, strong) NSSet *specialties;
-@property (nonatomic, strong) NSSet *publications;
-
-@property (nonatomic, strong) NSSet *psyTestingSessionsSupervised;
-@property (nonatomic, strong) NSManagedObject *medicationPrescribed;
-@property (nonatomic, strong) NSSet *influences;
-@property (nonatomic, strong) NSSet *supervisionGiven;
-@property (nonatomic, strong) NSManagedObject *myAdvisor;
-@property (nonatomic, strong) NSSet *interventionsSupervised;
-@property (nonatomic, strong) NSSet *orientationHistory;
-@property (nonatomic, strong) NSSet *degrees;
-@property (nonatomic, strong) NSManagedObject *advisingGiven;
-@property (nonatomic, strong) NSManagedObject *demographicInfo;
-@property (nonatomic, strong) NSManagedObject *contactInformation;
-@property (nonatomic, strong) NSSet *employments;
-@property (nonatomic, strong) NSSet *certifications;
-@property (nonatomic, strong) NSSet *licenseNumbers;
-@property (nonatomic, strong) NSSet *memberships;
-@property (nonatomic, strong) NSSet *referrals;
-@property (nonatomic, strong) NSSet *currentJobTitles;
-@property (nonatomic, strong) NSManagedObject *teachingExperience;
+@property (nonatomic, retain) NSString * lastName;
+@property (nonatomic, retain) NSNumber * aBRecordIdentifier;
+@property (nonatomic, retain) NSString * middleName;
+@property (nonatomic, retain) NSString * firstName;
+@property (nonatomic, retain) NSNumber * myPastSupervisor;
+@property (nonatomic, retain) NSString * website;
+@property (nonatomic, retain) NSString * suffix;
+@property (nonatomic, retain) NSNumber * myCurrentSupervisor;
+@property (nonatomic, retain) NSString * prefix;
+@property (nonatomic, retain) NSNumber * order;
+@property (nonatomic, retain) NSString * keyString;
+@property (nonatomic, retain) NSString * bio;
+@property (nonatomic, retain) NSNumber * myInformation;
+@property (nonatomic, retain) NSDate * startedPracticing;
+@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSNumber * atMyCurrentSite;
+@property (nonatomic, retain) NSNumber * isPrescriber;
+@property (nonatomic, retain) NSSet *logs;
+@property (nonatomic, retain) NSSet *awards;
+@property (nonatomic, retain) NSSet *clinicianType;
+@property (nonatomic, retain) NSSet *specialties;
+@property (nonatomic, retain) NSSet *publications;
+@property (nonatomic, retain) MedicationReviewEntity *medicationPrescribed;
+@property (nonatomic, retain) NSSet *abGroups;
+@property (nonatomic, retain) NSSet *influences;
+@property (nonatomic, retain) NSSet *supervisedTime;
+@property (nonatomic, retain) NSManagedObject *diagnoser;
+@property (nonatomic, retain) NSManagedObject *myAdvisor;
+@property (nonatomic, retain) NSSet *site;
+@property (nonatomic, retain) NSManagedObject *existingSupervision;
+@property (nonatomic, retain) NSSet *orientationHistory;
+@property (nonatomic, retain) NSSet *degrees;
+@property (nonatomic, retain) NSManagedObject *advisingGiven;
+@property (nonatomic, retain) DemographicProfileEntity *demographicInfo;
+@property (nonatomic, retain) NSSet *employments;
+@property (nonatomic, retain) NSSet *certifications;
+@property (nonatomic, retain) NSSet *licenseNumbers;
+@property (nonatomic, retain) NSSet *memberships;
+@property (nonatomic, retain) NSSet *referrals;
+@property (nonatomic, retain) NSManagedObject *advisingReceived;
+@property (nonatomic, retain) NSSet *currentJobTitles;
+@property (nonatomic, retain) NSManagedObject *teachingExperience;
+@property (nonatomic, retain) NSSet *supervisionSessionsPresent;
 
 @property (nonatomic, strong) NSString *tempNotes;
-
-
 @property (nonatomic, strong)  NSString *combinedName;
 
-@property (nonatomic, strong) NSSet *abGroups;
+
+
 @end
 
 @interface ClinicianEntity (CoreDataGeneratedAccessors)
 
-- (void)addLogsObject:(NSManagedObject *)value;
-- (void)removeLogsObject:(NSManagedObject *)value;
+- (void)addLogsObject:(LogEntity *)value;
+- (void)removeLogsObject:(LogEntity *)value;
 - (void)addLogs:(NSSet *)values;
 - (void)removeLogs:(NSSet *)values;
 
@@ -103,10 +80,10 @@
 - (void)addAwards:(NSSet *)values;
 - (void)removeAwards:(NSSet *)values;
 
-- (void)addSupportDeliverySupervisedObject:(NSManagedObject *)value;
-- (void)removeSupportDeliverySupervisedObject:(NSManagedObject *)value;
-- (void)addSupportDeliverySupervised:(NSSet *)values;
-- (void)removeSupportDeliverySupervised:(NSSet *)values;
+- (void)addClinicianTypeObject:(NSManagedObject *)value;
+- (void)removeClinicianTypeObject:(NSManagedObject *)value;
+- (void)addClinicianType:(NSSet *)values;
+- (void)removeClinicianType:(NSSet *)values;
 
 - (void)addSpecialtiesObject:(NSManagedObject *)value;
 - (void)removeSpecialtiesObject:(NSManagedObject *)value;
@@ -118,25 +95,25 @@
 - (void)addPublications:(NSSet *)values;
 - (void)removePublications:(NSSet *)values;
 
-- (void)addPsyTestingSessionsSupervisedObject:(TestingSessionDeliveredEntity *)value;
-- (void)removePsyTestingSessionsSupervisedObject:(TestingSessionDeliveredEntity *)value;
-- (void)addPsyTestingSessionsSupervised:(NSSet *)values;
-- (void)removePsyTestingSessionsSupervised:(NSSet *)values;
+- (void)addAbGroupsObject:(NSManagedObject *)value;
+- (void)removeAbGroupsObject:(NSManagedObject *)value;
+- (void)addAbGroups:(NSSet *)values;
+- (void)removeAbGroups:(NSSet *)values;
 
 - (void)addInfluencesObject:(NSManagedObject *)value;
 - (void)removeInfluencesObject:(NSManagedObject *)value;
 - (void)addInfluences:(NSSet *)values;
 - (void)removeInfluences:(NSSet *)values;
 
-- (void)addSupervisionGivenObject:(NSManagedObject *)value;
-- (void)removeSupervisionGivenObject:(NSManagedObject *)value;
-- (void)addSupervisionGiven:(NSSet *)values;
-- (void)removeSupervisionGiven:(NSSet *)values;
+- (void)addSupervisedTimeObject:(TimeTrackEntity *)value;
+- (void)removeSupervisedTimeObject:(TimeTrackEntity *)value;
+- (void)addSupervisedTime:(NSSet *)values;
+- (void)removeSupervisedTime:(NSSet *)values;
 
-- (void)addInterventionsSupervisedObject:(NSManagedObject *)value;
-- (void)removeInterventionsSupervisedObject:(NSManagedObject *)value;
-- (void)addInterventionsSupervised:(NSSet *)values;
-- (void)removeInterventionsSupervised:(NSSet *)values;
+- (void)addSiteObject:(NSManagedObject *)value;
+- (void)removeSiteObject:(NSManagedObject *)value;
+- (void)addSite:(NSSet *)values;
+- (void)removeSite:(NSSet *)values;
 
 - (void)addOrientationHistoryObject:(NSManagedObject *)value;
 - (void)removeOrientationHistoryObject:(NSManagedObject *)value;
@@ -168,8 +145,8 @@
 - (void)addMemberships:(NSSet *)values;
 - (void)removeMemberships:(NSSet *)values;
 
-- (void)addReferralsObject:(NSManagedObject *)value;
-- (void)removeReferralsObject:(NSManagedObject *)value;
+- (void)addReferralsObject:(ReferralEntity *)value;
+- (void)removeReferralsObject:(ReferralEntity *)value;
 - (void)addReferrals:(NSSet *)values;
 - (void)removeReferrals:(NSSet *)values;
 
@@ -178,5 +155,9 @@
 - (void)addCurrentJobTitles:(NSSet *)values;
 - (void)removeCurrentJobTitles:(NSSet *)values;
 
+- (void)addSupervisionSessionsPresentObject:(SupervisionParentEntity *)value;
+- (void)removeSupervisionSessionsPresentObject:(SupervisionParentEntity *)value;
+- (void)addSupervisionSessionsPresent:(NSSet *)values;
+- (void)removeSupervisionSessionsPresent:(NSSet *)values;
 
 @end

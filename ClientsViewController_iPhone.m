@@ -43,11 +43,11 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 #pragma mark -
 #pragma mark View lifecycle
 
--(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClientsSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController{
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClientsSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController allowMultipleSelection:(BOOL)allowMultiSelect{
     
     self=[super initWithNibName:nibName bundle:bundle];
     
-    
+    allowMultipleSelection=allowMultiSelect;
     isInDetailSubview=detailSubview;
     clientObjectSelectionCell=objectSelectionCell;
     
@@ -340,58 +340,126 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 -(void)doneButtonTappedInDetailView{
     
     //NSLog(@"done Button tapped");
-    if (isInDetailSubview) {
-        if (self.tableViewModel.sectionCount) {
+    if (isInDetailSubview &&objectsModel.sectionCount) {
+        SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:0];
+        //NSLog(@"section class is %@",[section class]);
+        //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        //        
+        //        if ([appDelegate managedObjectContext].hasChanges) {
+        //            [appDelegate saveContext];
+        //        }
+        
+        
+        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+            SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
             
-            SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
-            //NSLog(@"section class is %@",[section class]);
-            if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
-                SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
+            [objectsSelectionSection commitCellChanges];
+            if (allowMultipleSelection) {
+                NSInteger sectionCount=self.tableViewModel.sectionCount;
+                //NSLog(@"section count is %i",sectionCount);
+                if (sectionCount&& !currentlySelectedClientsArray) {
+                    currentlySelectedClientsArray=[NSMutableArray array];
+                }
+                else {
+                    [currentlySelectedClientsArray removeAllObjects];
+                }
+                for (NSInteger i=0; i<sectionCount ; i++ ) {
+                    SCObjectSelectionSection *sectionAtIndex=(SCObjectSelectionSection *)[self.tableViewModel sectionAtIndex:i];
+                    
+                    
+                    
+                    NSEnumerator *enumerator = [sectionAtIndex.selectedItemsIndexes objectEnumerator];
+                    id setObject;
+                    while ((setObject = [enumerator nextObject]) != nil)
+                    {
+                        if(![setObject isEqualToNumber:[NSNumber numberWithInteger:-1]]&&[setObject integerValue]<sectionAtIndex.cellCount){
+                            SCTableViewCell *selectedCell=(SCTableViewCell *)[sectionAtIndex cellAtIndex:(NSUInteger)[(NSNumber *)setObject integerValue]];
+                            
+                            if ([selectedCell.boundObject isKindOfClass:[ClientEntity class]]) {
+                                ClientEntity *clientnObject=(ClientEntity *)selectedCell.boundObject;
+                                [currentlySelectedClientsArray addObject:clientnObject];
+                                
+                                //NSLog(@"currently selected clinicians array is %@",currentlySelectedClientsArray);
+                                
+                            }
+                            
+                        }
+                    }
+                    
+                    
+                    
+                    
+                }
                 
-                //            //NSLog(@"test valie changed at index with cell index selected %i",[objectsSelectionSection.selectedItemIndex integerValue]) ;
-                //            if (clientObjectSelectionCell) {
                 
-                //                //NSLog(@"objectsSelectionSection.selectedItemsIndexes.count %i",objectsSelectionSection.items.count);
+                //NSLog(@"currently selected clinicians array is %@",currentlySelectedClientsArray);
                 
-                //                if ([objectsSelectionSection.selectedItemIndex integerValue]>=0&&[objectsSelectionSection.selectedItemIndex integerValue]<=objectsSelectionSection.items.count) {
-                //                    
-                //            NSIndexPath *cellIndexPath=objectsSelectionSection.selectedCellIndexPath;
                 
-                //                    SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:cellIndexPath];
-                //NSLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
+                //NSLog(@"object selection section selected itemsindexes %@",objectsSelectionSection.selectedItemsIndexes);                    
+                
+                
+                [clientObjectSelectionCell  doneButtonTappedInDetailView:(NSObject *)nil selectedClients:(NSArray *)currentlySelectedClientsArray withValue:(BOOL)YES];
+                
+                
+                
+                
+            }else {
+                //                NSIndexPath *cellIndexPath=objectsSelectionSection.selectedCellIndexPath;
+                
+                //                if (cellIndexPath.row) {
+                //                    <#statements#>
+                //                }
+                //                SCTableViewCell *cell=(SCTableViewCell *)[self.tableViewModel cellAtIndexPath:cellIndexPath];
+                //                //NSLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
                 
                 
                 
                 //NSLog(@"selected item index%@",objectsSelectionSection.selectedItemIndex);
                 
-                if (objectsSelectionSection.cellCount>0) {
-                    if (currentlySelectedClient) {
-                        clientObjectSelectionCell.clientObject=currentlySelectedClient ;
-                        [clientObjectSelectionCell  doneButtonTappedInDetailView:currentlySelectedClient withValue:TRUE];
-                        
-                        
-                    }
+                
+                if (objectsSelectionSection.selectedItemIndex&&![objectsSelectionSection.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]] && [objectsSelectionSection.selectedItemIndex intValue]< objectsSelectionSection.items.count) {
+                    currentlySelectedClient=(ClientEntity *)[objectsSelectionSection.items objectAtIndex:[objectsSelectionSection.selectedItemIndex intValue]];
                     
-                }          
+                }
+                else {
+                    currentlySelectedClient=nil;
+                }
+                [clientObjectSelectionCell  doneButtonTappedInDetailView:(NSObject *)currentlySelectedClient selectedClients:nil withValue:(BOOL)YES];
                 
                 
+                currentlySelectedClient=nil;
                 
-                
-                //            }
-                
-                //                    clientObjectSelectionCell.hasChangedClients=TRUE;
-                //                }
-                //                else{
-                //                
-                //                    [clientObjectSelectionCell doneButtonTappedInDetailView:nil withValue:NO];
-                //                
-                //                }
-                
-                
-                [self cancelButtonTapped];
-                
-            } 
-        }
+            }
+            //            //NSLog(@"test valie changed at index with cell index selected %i",[objectsSelectionSection.selectedItemIndex integerValue]) ;
+            //            if (clientObjectSelectionCell) {
+            
+            //                //NSLog(@"objectsSelectionSection.selectedItemsIndexes.count %i",objectsSelectionSection.items.count);
+            
+            //                if ([objectsSelectionSection.selectedItemIndex integerValue]>=0&&[objectsSelectionSection.selectedItemIndex integerValue]<=objectsSelectionSection.items.count) {
+            //                    
+            
+            
+            
+            
+            
+            
+            
+            //            }
+            
+            //                    clientObjectSelectionCell.hasChangedClients=TRUE;
+            //                }
+            //                else{
+            //                
+            //                    [clientObjectSelectionCell doneButtonTappedInDetailView:nil withValue:NO];
+            //                
+            //                }
+            
+            
+           
+            
+        
+    }
+
         //        else
         //        {
         //            clientObjectSelectionCell.items=[NSArray array];
@@ -415,8 +483,116 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         //    }
         //
     }
+     [self cancelButtonTapped];
+}
+
+-(void)setSelectedClients{
+    if (isInDetailSubview) {
+        SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
+        //NSLog(@"section class is %@",[section class]);
+        //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        //        
+        //        if ([appDelegate managedObjectContext].hasChanges) {
+        //            [appDelegate saveContext];
+        //        }
+        
+        if ([section isKindOfClass:[SCObjectSelectionSection class]]) 
+        {
+            for (int i=0; i<self.tableViewModel.sectionCount; i++) {
+                
+                SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)[self.tableViewModel sectionAtIndex:i];
+                
+                if (allowMultipleSelection) 
+                {
+                    //NSLog(@"currentlyselected clinicians in set selected are %@",currentlySelectedCliniciansArray);
+                    if (currentlySelectedClientsArray.count) {
+                        
+                        NSMutableSet *selectedIndexesSet=objectSelectionSection.selectedItemsIndexes;
+                        for (int p=0; p<currentlySelectedClientsArray.count; p++) {
+                            int clientInSectionIndex;
+                            ClientEntity *clientInArray=[currentlySelectedClientsArray objectAtIndex:p];
+                            if ([objectSelectionSection.items containsObject:clientInArray]) {
+                                clientInSectionIndex=(int )[objectSelectionSection.items indexOfObject:clientInArray];
+                                
+                                [selectedIndexesSet addObject:[NSNumber numberWithInt:clientInSectionIndex]];
+                                
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                }
+            }}}
+}
+
+-(void)createSelectedClientsArray{
+    
+    if (isInDetailSubview) {
+        SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
+        //NSLog(@"section class is %@",[section class]);
+        //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        //        
+        //        if ([appDelegate managedObjectContext].hasChanges) {
+        //            [appDelegate saveContext];
+        //        }
+        
+        if ([section isKindOfClass:[SCObjectSelectionSection class]]) 
+        {
+            
+            //            SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
+            
+            
+            if (allowMultipleSelection) 
+            {
+                if (currentlySelectedClientsArray&& currentlySelectedClientsArray.count) {
+                    [currentlySelectedClientsArray removeAllObjects];
+                    
+                }
+                else if(!currentlySelectedClientsArray){
+                    currentlySelectedClientsArray=[NSMutableArray array];
+                }
+                
+                
+                
+                NSInteger sectionCount=self.tableViewModel.sectionCount;
+                
+                for (NSInteger p=0; p<sectionCount ; p++ ) {
+                    SCObjectSelectionSection *sectionAtIndex=(SCObjectSelectionSection *)[self.tableViewModel sectionAtIndex:p];
+                    NSEnumerator *enumerator = [sectionAtIndex.selectedItemsIndexes objectEnumerator];
+                    id setObject;
+                    while ((setObject = [enumerator nextObject]) != nil)
+                    {
+                        SCTableViewCell *selectedCell=(SCTableViewCell *)[sectionAtIndex cellAtIndex:(NSUInteger)[(NSNumber *)setObject integerValue]];
+                        
+                        if ([selectedCell.boundObject isKindOfClass:[ClientEntity class]]) {
+                            ClientEntity *clientObject=(ClientEntity *)selectedCell.boundObject;
+                            [currentlySelectedClientsArray addObject:clientObject];
+                            
+                            //NSLog(@"currently selected clinicians array is %@",currentlySelectedCliniciansArray);
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    
+                    
+                }
+                
+                
+                //NSLog(@"currently selected clinicians array is %@",currentlySelectedCliniciansArray);
+                
+                
+                //NSLog(@"object selection section selected itemsindexes %@",objectsSelectionSection.selectedItemsIndexes);                    
+                
+                
+            }}}   
+    
+    
     
 }
+
 
 #pragma mark -
 #pragma mark SCTableViewModelDataSource methods
@@ -1836,6 +2012,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 - (void)tableViewModel:(SCArrayOfItemsModel *)tableViewModel
 searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
+     [self createSelectedClientsArray];
     
     //NSLog(@"scope changed");
     if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
@@ -1884,6 +2061,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         [objectsModel.modeledTableView reloadData];
         
         [self updateClientsTotalLabel];
+         [self setSelectedClients];
         //         if (objectsModel.sectionCount>0) {
         //        if (isInDetailSubview) {
         //        
@@ -1916,6 +2094,21 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
+    
+    
+    if (isInDetailSubview &&tableViewModel.tag==0&&[section isKindOfClass:[SCObjectSelectionSection class]])
+    {
+        
+        
+        SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
+        
+        objectSelectionSection.allowMultipleSelection=allowMultipleSelection;
+        
+    }
+    
+
+    
+    
     if ( tableViewModel.tag==1 &&index==0 &&section.cellCount>3) {
         
         //         NSString* newStr = [[NSString alloc] initWithData:[tableViewModel.modelKeyValues valueForKey:@"clientIDCode"] encoding:NSASCIIStringEncoding];

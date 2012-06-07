@@ -1,39 +1,41 @@
-/*
- *  ClientEntity.m
- *  psyTrack Clinician Tools
- *  Version: 1.0
- *
- *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
- *
- *  Created by Daniel Boice on 11/22/11.
- *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
- *
- *
- *	This notice may not be removed from this file.
- *
- */
+//
+//  ClientEntity.m
+//  PsyTrack
+//
+//  Created by Daniel Boice on 6/7/12.
+//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//
+
 #import "ClientEntity.h"
-#import "PTTEncryption.h"
+#import "DemographicProfileEntity.h"
+#import "LogEntity.h"
+#import "MedicationEntity.h"
+#import "PhoneEntity.h"
+#import "ReferralEntity.h"
+#import "VitalsEntity.h"
 #import "PTTAppDelegate.h"
+
 @implementation ClientEntity
 
-@dynamic order;
-@dynamic notes;
-@dynamic dateOfBirth;
 @dynamic clientIDCode;
 @dynamic initials;
-@dynamic dateAdded;
-@dynamic demographicInfo;
-@dynamic referrals;
-@dynamic supportActivitiesDelivered;
-@dynamic interventionsDelivered;
-@dynamic clientAndMentalState;
-@dynamic diagnosis;
+@dynamic dateOfBirth;
 @dynamic keyString;
-
+@dynamic fData;
+@dynamic notes;
+@dynamic order;
+@dynamic dateAdded;
+@dynamic currentClient;
+@dynamic medicationHistory;
+@dynamic diagnoses;
+@dynamic vitals;
+@dynamic accomodations;
+@dynamic demographicInfo;
+@dynamic logs;
+@dynamic phoneNumbers;
+@dynamic supervisonFeedback;
+@dynamic clientPresentations;
+@dynamic referrals;
 
 @synthesize tempClientIDCode;
 @synthesize tempInitials;
@@ -52,7 +54,7 @@
     [dateFormatter setDateFormat:@"H:m:ss yyyy M d"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"MST"]];
     NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
-   
+    
     [self willAccessValueForKey:@"dateAdded"];
     if ([(NSDate *)self.dateAdded isEqualToDate:referenceDate]) {
         [self didAccessValueForKey:@"dateAdded"];
@@ -61,19 +63,19 @@
         [self didChangeValueForKey:(NSString *)@"dateAdded"];
     }
     
-//    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    //    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
     
-//    [self willAccessValueForKey:@"clientIDCode"];
-//    
-//    NSData *primitiveData=[self primitiveValueForKey:@"clientIDCode"];
-//    
-//    NSData *strData=[appDelegate decryptDataToPlainData:primitiveData];
-//    
-//    NSString *newStr=[appDelegate convertDataToString:strData];
-//    
-//    self.clientIDCode=newStr;
-//    [self didAccessValueForKey:@"clientIDCode"];
+    //    [self willAccessValueForKey:@"clientIDCode"];
+    //    
+    //    NSData *primitiveData=[self primitiveValueForKey:@"clientIDCode"];
+    //    
+    //    NSData *strData=[appDelegate decryptDataToPlainData:primitiveData];
+    //    
+    //    NSString *newStr=[appDelegate convertDataToString:strData];
+    //    
+    //    self.clientIDCode=newStr;
+    //    [self didAccessValueForKey:@"clientIDCode"];
 }
 
 //-(void)awakeFromFetch{
@@ -132,17 +134,17 @@
 
 
 -(void)setInitials:(NSString *)initials{
-
-
-[self setStringToPrimitiveData:(NSString *)initials forKey:@"initials"];
-
+    
+    
+    [self setStringToPrimitiveData:(NSString *)initials forKey:@"initials"];
+    
     self.tempInitials=initials;
-
+    
 }
 -(void)setNotes:(NSString *)notes{
-
-[self setStringToPrimitiveData:(NSString *)notes forKey:@"notes"];
-
+    
+    [self setStringToPrimitiveData:(NSString *)notes forKey:@"notes"];
+    
     self.tempNotes=notes;
 }
 
@@ -153,7 +155,7 @@
     [self setStringToPrimitiveData:(NSString *)clientIDCode forKey:@"clientIDCode"];
     
     self.tempClientIDCode=clientIDCode;
-   
+    
     
     
     
@@ -161,10 +163,10 @@
 } 
 
 -(void)setDateOfBirth:(NSDate *)dateOfBirth{
-
+    
     [self setDateToPrimitiveData:(NSDate *)dateOfBirth forKey:(NSString *)@"dateOfBirth" ];
     self.tempDateOfBirth=dateOfBirth;
-
+    
 }
 //-(void){
 //
@@ -336,7 +338,7 @@
 
 
 -(NSString *)initials{
-
+    
     NSString *tempStr;
     [self willAccessValueForKey:@"tempInitials"];
     
@@ -382,15 +384,15 @@
     
     
     return tempStr;
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    
 }
 -(NSString *)clientIDCode{
-//
+    //
     
     NSString *tempStr;
     [self willAccessValueForKey:@"tempClientIDCode"];
@@ -407,7 +409,7 @@
         
         NSData *primitiveData=[self primitiveValueForKey:@"clientIDCode"];
         NSLog(@"primitive data %@",primitiveData);
-       
+        
         if (!primitiveData ||!primitiveData.length) {
             return nil;
         }
@@ -417,14 +419,14 @@
         NSString *tmpKeyString=self.keyString;
         [self didAccessValueForKey:@"keyString"];
         if(tmpKeyString && tmpKeyString.length){
-        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
-        
-        tempStr=[appDelegate convertDataToString:strData];
-        
-        [self willChangeValueForKey:@"tempClientIDCode"];
-        
-        self.tempClientIDCode=tempStr;
-        [self didChangeValueForKey:@"tempClientIDCode"];
+            NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
+            
+            tempStr=[appDelegate convertDataToString:strData];
+            
+            [self willChangeValueForKey:@"tempClientIDCode"];
+            
+            self.tempClientIDCode=tempStr;
+            [self didChangeValueForKey:@"tempClientIDCode"];
         }
         
     }
@@ -439,7 +441,7 @@
     
     return tempStr;
     
-
+    
 }
 
 
@@ -492,66 +494,65 @@
     
     
     
-   
+    
     
     //NSLog(@"date valeu is %@",newDate);
     return newDate;
-
-
+    
+    
 }
 - (void)setDateToPrimitiveData:(NSDate *)dateToConvert forKey:(NSString *)key 
 {
-
-PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-
-if (appDelegate.okayToDecryptBool && dateToConvert) {
     
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-    
-         
-          
+    if (appDelegate.okayToDecryptBool && dateToConvert) {
+        
+        
+        
+        
+        
         NSData * dateData = [NSKeyedArchiver archivedDataWithRootObject:dateToConvert];
-    
-   
-           NSDictionary *encryptedDataDictionary=[appDelegate encryptDataToEncryptedData:dateData withKeyString:self.keyString];
-    NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
-    NSData *encryptedData;
-    NSString *encryptedKeyString;
-    if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
-        encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
         
         
-        if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
-            NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+        NSDictionary *encryptedDataDictionary=[appDelegate encryptDataToEncryptedData:dateData withKeyString:self.keyString];
+        NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        NSData *encryptedData;
+        NSString *encryptedKeyString;
+        if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
+            encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
             
-            encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
-            NSLog(@"key date is client entity %@",encryptedKeyString);
+            
+            if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
+                NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                
+                encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
+                NSLog(@"key date is client entity %@",encryptedKeyString);
+            }
         }
-    }
-    
-    
-            if (encryptedData.length) {
-                     [self willChangeValueForKey:key];
-                     [self setPrimitiveValue:encryptedData forKey:key];
-                     [self didChangeValueForKey:key];
-                }
-             
-           
-    [self willAccessValueForKey:self.keyString];
+        
+        
+        if (encryptedData.length) {
+            [self willChangeValueForKey:key];
+            [self setPrimitiveValue:encryptedData forKey:key];
+            [self didChangeValueForKey:key];
+        }
+        
+        
+        [self willAccessValueForKey:self.keyString];
         if (![encryptedKeyString isEqualToString:self.keyString]) {
             [self didAccessValueForKey:@"keyString"];
-                    [self willChangeValueForKey:@"keyString"];
-                    [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
-                    [self didChangeValueForKey:@"keyString"];
-                    
-                }
-          
+            [self willChangeValueForKey:@"keyString"];
+            [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
+            [self didChangeValueForKey:@"keyString"];
             
-            
+        }
         
-    
-    
-       }
+        
+        
+        
+        
+        
+    }
 }
-
 @end

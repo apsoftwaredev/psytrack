@@ -1025,10 +1025,9 @@
     // Add a custom property that represents a custom cells for the description defined TextFieldAndLableCell.xib
 	
     //create the dictionary with the data bindings
-    NSDictionary *clientDataBindings = [NSDictionary 
-                                        dictionaryWithObjects:[NSArray arrayWithObject:@"client"] 
-                                        forKeys:[NSArray arrayWithObject:@"1" ]]; // 1 are the control tags
-	
+        NSDictionary *clientDataBindings = [NSDictionary 
+                                            dictionaryWithObjects:[NSArray arrayWithObjects:@"client",@"Client",@"client",[NSNumber numberWithBool:NO],nil] 
+                                            forKeys:[NSArray arrayWithObjects:@"1",@"90",@"92",@"93",nil ]];
     //create the custom property definition
     SCCustomPropertyDefinition *clientDataProperty = [SCCustomPropertyDefinition definitionWithName:@"CLientData"
                                                                                  uiElementClass:[ClientsSelectionCell class] objectBindings:clientDataBindings];

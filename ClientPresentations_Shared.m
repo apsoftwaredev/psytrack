@@ -570,8 +570,8 @@
 	
     //create the dictionary with the data bindings
     NSDictionary *clientDataBindings = [NSDictionary 
-                                          dictionaryWithObjects:[NSArray arrayWithObject:@"client"] 
-                                          forKeys:[NSArray arrayWithObject:@"1" ]]; // 1 are the control tags
+                                          dictionaryWithObjects:[NSArray arrayWithObjects:@"client",@"Client",@"client",[NSNumber numberWithBool:NO],nil] 
+                                        forKeys:[NSArray arrayWithObjects:@"1",@"90",@"92",@"93",nil ]]; // 1 are the control tags
 	
     //create the custom property definition
     SCCustomPropertyDefinition *clientDataProperty = [SCCustomPropertyDefinition definitionWithName:@"CLientData"

@@ -1,74 +1,92 @@
-/*
- *  ClientEntity.h
- *  psyTrack Clinician Tools
- *  Version: 1.0
- *
- *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
- *
- *  Created by Daniel Boice on 11/22/11.
- *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
- *
- *
- *	This notice may not be removed from this file.
- *
- */
+//
+//  ClientEntity.h
+//  PsyTrack
+//
+//  Created by Daniel Boice on 6/7/12.
+//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//
+
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class DemographicProfileEntity, LogEntity, MedicationEntity, PhoneEntity, ReferralEntity, VitalsEntity;
 
-@interface ClientEntity : NSManagedObject{
+@interface ClientEntity : NSManagedObject
 
-
-   
-
-}
-
-@property (nonatomic, strong) NSNumber * order;
-@property (nonatomic, strong) NSString * notes;
-@property (nonatomic, strong) NSDate * dateOfBirth;
-@property (nonatomic, strong) NSString * clientIDCode;
-@property (nonatomic, strong) NSString * initials;
-@property (nonatomic, strong) NSDate * dateAdded;
-@property (nonatomic, strong) NSManagedObject *demographicInfo;
-@property (nonatomic, strong) NSSet *referrals;
-@property (nonatomic, strong) NSSet *supportActivitiesDelivered;
-@property (nonatomic, strong) NSSet *interventionsDelivered;
-@property (nonatomic, strong) NSManagedObject *clientAndMentalState;
-@property (nonatomic, strong) NSSet *diagnosis;
-@property (nonatomic, strong) NSString * keyString;
-
+@property (nonatomic, retain) NSString * clientIDCode;
+@property (nonatomic, retain) NSString * initials;
+@property (nonatomic, retain) id dateOfBirth;
+@property (nonatomic, retain) NSString * keyString;
+@property (nonatomic, retain) NSData * fData;
+@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSNumber * order;
+@property (nonatomic, retain) NSDate * dateAdded;
+@property (nonatomic, retain) NSNumber * currentClient;
+@property (nonatomic, retain) NSSet *medicationHistory;
+@property (nonatomic, retain) NSSet *diagnoses;
+@property (nonatomic, retain) NSSet *vitals;
+@property (nonatomic, retain) NSSet *accomodations;
+@property (nonatomic, retain) DemographicProfileEntity *demographicInfo;
+@property (nonatomic, retain) NSSet *logs;
+@property (nonatomic, retain) NSSet *phoneNumbers;
+@property (nonatomic, retain) NSSet *supervisonFeedback;
+@property (nonatomic, retain) NSSet *clientPresentations;
+@property (nonatomic, retain) NSSet *referrals;
 
 @property (nonatomic, strong) NSString *tempClientIDCode;
 @property (nonatomic, strong) NSString *tempInitials;
 @property (nonatomic, strong) NSDate *tempDateOfBirth;
 @property (nonatomic, strong) NSString *tempNotes;
 
+
 @end
 
 @interface ClientEntity (CoreDataGeneratedAccessors)
 
-- (void)addReferralsObject:(NSManagedObject *)value;
-- (void)removeReferralsObject:(NSManagedObject *)value;
+- (void)addMedicationHistoryObject:(MedicationEntity *)value;
+- (void)removeMedicationHistoryObject:(MedicationEntity *)value;
+- (void)addMedicationHistory:(NSSet *)values;
+- (void)removeMedicationHistory:(NSSet *)values;
+
+- (void)addDiagnosesObject:(NSManagedObject *)value;
+- (void)removeDiagnosesObject:(NSManagedObject *)value;
+- (void)addDiagnoses:(NSSet *)values;
+- (void)removeDiagnoses:(NSSet *)values;
+
+- (void)addVitalsObject:(VitalsEntity *)value;
+- (void)removeVitalsObject:(VitalsEntity *)value;
+- (void)addVitals:(NSSet *)values;
+- (void)removeVitals:(NSSet *)values;
+
+- (void)addAccomodationsObject:(NSManagedObject *)value;
+- (void)removeAccomodationsObject:(NSManagedObject *)value;
+- (void)addAccomodations:(NSSet *)values;
+- (void)removeAccomodations:(NSSet *)values;
+
+- (void)addLogsObject:(LogEntity *)value;
+- (void)removeLogsObject:(LogEntity *)value;
+- (void)addLogs:(NSSet *)values;
+- (void)removeLogs:(NSSet *)values;
+
+- (void)addPhoneNumbersObject:(PhoneEntity *)value;
+- (void)removePhoneNumbersObject:(PhoneEntity *)value;
+- (void)addPhoneNumbers:(NSSet *)values;
+- (void)removePhoneNumbers:(NSSet *)values;
+
+- (void)addSupervisonFeedbackObject:(NSManagedObject *)value;
+- (void)removeSupervisonFeedbackObject:(NSManagedObject *)value;
+- (void)addSupervisonFeedback:(NSSet *)values;
+- (void)removeSupervisonFeedback:(NSSet *)values;
+
+- (void)addClientPresentationsObject:(NSManagedObject *)value;
+- (void)removeClientPresentationsObject:(NSManagedObject *)value;
+- (void)addClientPresentations:(NSSet *)values;
+- (void)removeClientPresentations:(NSSet *)values;
+
+- (void)addReferralsObject:(ReferralEntity *)value;
+- (void)removeReferralsObject:(ReferralEntity *)value;
 - (void)addReferrals:(NSSet *)values;
 - (void)removeReferrals:(NSSet *)values;
-
-- (void)addSupportActivitiesDeliveredObject:(NSManagedObject *)value;
-- (void)removeSupportActivitiesDeliveredObject:(NSManagedObject *)value;
-- (void)addSupportActivitiesDelivered:(NSSet *)values;
-- (void)removeSupportActivitiesDelivered:(NSSet *)values;
-
-- (void)addInterventionsDeliveredObject:(NSManagedObject *)value;
-- (void)removeInterventionsDeliveredObject:(NSManagedObject *)value;
-- (void)addInterventionsDelivered:(NSSet *)values;
-- (void)removeInterventionsDelivered:(NSSet *)values;
-
-- (void)addDiagnosisObject:(NSManagedObject *)value;
-- (void)removeDiagnosisObject:(NSManagedObject *)value;
-- (void)addDiagnosis:(NSSet *)values;
-- (void)removeDiagnosis:(NSSet *)values;
 
 
 - (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key ;

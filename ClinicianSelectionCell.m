@@ -159,7 +159,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
             SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
             
             
-            objectSelectionSection.allowNoSelection=YES;
+            
            
             if (multiSelect) {
             
@@ -257,7 +257,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
             }
             else 
             {
-                self.textLabel.text=[NSString string];
+                self.label.text=[NSString string];
             } 
         
         }

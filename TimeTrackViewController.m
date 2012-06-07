@@ -417,9 +417,10 @@
     UIViewController *navtitle=self.navigationController.topViewController;
     
         
-    SCEntityDefinition *timeTrackEntity=nil;
+   
     
     NSString *detailsHeaderStr=nil;
+    
     
     switch (currentControllerSetup) {
         case kTrackAssessmentSetup:
@@ -442,16 +443,63 @@
             break;
     }
      SCPropertyGroup *detailsGroup =[SCPropertyGroup groupWithHeaderTitle:detailsHeaderStr footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"trainingType",@"site", nil]];
+  
+    //define a property group
+    SCPropertyGroup *eventGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"dateOfService",@"time", @"EventButtonCell",nil]];
+    
+  
+    
+    SCPropertyGroup *peopleGroup =[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"SupervisorData",  @"notes",nil]];
     
     
+
+    
+    NSMutableArray *timeTrackPropertyNamesArray=[NSMutableArray arrayWithObjects:@"dateOfService",  @"time",  @"notes", @"paperwork",  @"supervisor",    @"trainingType", @"site",  @"eventIdentifier", nil];
+    
+    if (currentControllerSetup==kTrackAssessmentSetup||currentControllerSetup==kTrackInterventionSetup||currentControllerSetup==kTrackSupportSetup) {
+        
+        [timeTrackPropertyNamesArray addObject:@"clientPresentations"];
+        [timeTrackPropertyNamesArray addObject:@"serviceCode"]; 
+        
+        [eventGroup insertPropertyName:@"clientPresentations" atIndex:2];
+        [peopleGroup addPropertyName:@"paperwork"];
+        [detailsGroup addPropertyName:@"serviceCode"];
+        
+        
+        
+        
+        
+    }
+    else {
+        
+        
+        
+        
+        
+        [timeTrackPropertyNamesArray addObject:@"studentsPresent"];
+        [timeTrackPropertyNamesArray addObject:@"supervisionFeedback"];
+        [timeTrackPropertyNamesArray addObject:@"supervisionType"];
+        
+        [detailsGroup insertPropertyName:@"supervisionType" atIndex:0];
+        [eventGroup insertPropertyName:@"supervisionFeedback" atIndex:2];
+        [detailsGroup insertPropertyName:@"StudentsPresentData" atIndex:2];
+
+        [detailsGroup insertPropertyName:@"modelsUsed" atIndex:3];
+
+        
+        
+    }
+    NSString *trackEntityName=nil;
     switch (currentControllerSetup) {
         case kTrackAssessmentSetup:
         {
             navtitle.title=@"Assessments";
             
-
-            timeTrackEntity =[SCEntityDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
-                                                                         managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType",     @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]];        
+           
+            [timeTrackPropertyNamesArray addObject:@"assessmentType"];
+            
+            trackEntityName= @"TestingSessionDeliveredEntity";
+                                                                
             
             [detailsGroup insertPropertyName:@"assessmentType" atIndex:0];
            
@@ -461,16 +509,27 @@
            
             navtitle.title=@"Interventions";
             
-            timeTrackEntity =[SCEntityDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
-                                                     managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType",     @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]];  
+            
+            
+            [timeTrackPropertyNamesArray addObject:@"interventionType"];
+            
+            [timeTrackPropertyNamesArray addObject:@"modelsUsed"];
+            
+            trackEntityName=@"InterventionDeliveredEntity";
+                                                     
+            
+             [detailsGroup insertPropertyName:@"interventionType" atIndex:2];
+            [detailsGroup insertPropertyName:@"modelsUsed" atIndex:1];
+            
             break;
             
         case kTrackSupportSetup:
             
             navtitle.title=@"Indirect Support";
             
-            timeTrackEntity =[SCEntityDefinition definitionWithEntityName:@"SupportActivityDeliveredEntity"
-                                                     managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"supportActivityType",     @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]]; 
+            trackEntityName= @"SupportActivityDeliveredEntity";
+            
+            [timeTrackPropertyNamesArray addObject:@"supportActivityType"];
             
             [detailsGroup insertPropertyName:@"supportActivityType" atIndex:0];
             
@@ -480,18 +539,23 @@
             
             navtitle.title=@"Supervision Given";
             
-            timeTrackEntity =[SCEntityDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
-                                                     managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",  @"notes", @"paperwork", @"studentsPresent",   @"supervisionType",  @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]];  
+           trackEntityName= @"SupervisionGivenEntity";
+                                                     
             
-             [detailsGroup insertPropertyName:@"supervisionType" atIndex:0];
+            [timeTrackPropertyNamesArray addObject:@"modelsUsed"];
             
+            
+            
+                        
             break;
             
         case kTrackSupervisionReceivedSetup:
             navtitle.title=@"Supervision Received";
             
-            timeTrackEntity =[SCEntityDefinition definitionWithEntityName:@"TestingSessionDeliveredEntity"
-                                                     managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"dateOfService",  @"time",@"clientPresentations",  @"notes", @"paperwork", @"assessmentType",     @"supervisor",    @"trainingType", @"site",  @"eventIdentifier",     nil]];  
+            
+            trackEntityName= @"SupervisionReceivedEntity";
+            
+            [timeTrackPropertyNamesArray addObject:@"modelsUsed"];
             break;
             
             
@@ -501,7 +565,11 @@
     }
     
     
-       
+    SCEntityDefinition *timeTrackEntityDef=[SCEntityDefinition definitionWithEntityName:trackEntityName managedObjectContext:managedObjectContext propertyNames:timeTrackPropertyNamesArray];
+    
+    
+    // add the event Group property group to the behavioralObservationsDef class. 
+    [timeTrackEntityDef.propertyGroups addGroup:eventGroup];
     
     
     
@@ -515,22 +583,20 @@
     
     
     
+    NSInteger eventIdentifierPropertyIndex = [timeTrackEntityDef indexOfPropertyDefinitionWithName:@"eventIdentifier"];
+    [timeTrackEntityDef removePropertyDefinitionAtIndex:eventIdentifierPropertyIndex];
     
-    
-    NSInteger eventIdentifierPropertyIndex = [timeTrackEntity indexOfPropertyDefinitionWithName:@"eventIdentifier"];
-    [timeTrackEntity removePropertyDefinitionAtIndex:eventIdentifierPropertyIndex];
-    
-    SCPropertyDefinition *dateOfServicePropertyDef = [timeTrackEntity propertyDefinitionWithName:@"dateOfService"];
+    SCPropertyDefinition *dateOfServicePropertyDef = [timeTrackEntityDef propertyDefinitionWithName:@"dateOfService"];
 	dateOfServicePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
                                                                          datePickerMode:UIDatePickerModeDate 
                                                           displayDatePickerInDetailView:YES];
     
    
-    SCPropertyDefinition *notesPropertyDef = [timeTrackEntity propertyDefinitionWithName:@"notes"];
+    SCPropertyDefinition *notesPropertyDef = [timeTrackEntityDef propertyDefinitionWithName:@"notes"];
     notesPropertyDef.type=SCPropertyTypeTextView;
     
-    timeTrackEntity.titlePropertyName=@"dateOfService";
-    timeTrackEntity.keyPropertyName=@"dateOfService";
+    timeTrackEntityDef.titlePropertyName=@"dateOfService";
+    timeTrackEntityDef.keyPropertyName=@"dateOfService";
     
     
     //add a button to add an event to the calandar
@@ -541,39 +607,29 @@
     SCCustomPropertyDefinition *eventButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"EventButtonCell" uiElementClass:[ButtonCell class] objectBindings:buttonCellObjectBinding];
     
     //add the property definition to the test administration detail view  
-    [timeTrackEntity addPropertyDefinition:eventButtonProperty];
-    //define a property group
-    SCPropertyGroup *eventGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"dateOfService",@"time",@"clientPresentations", @"EventButtonCell",nil]];
-    
-    // add the event Group property group to the behavioralObservationsDef class. 
-    [timeTrackEntity.propertyGroups addGroup:eventGroup];
-    
-    
-    SCPropertyGroup *peopleGroup =[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"SupervisorData",@"paperwork",   @"notes",nil]];
-    
-    
-    
-    [timeTrackEntity.propertyGroups addGroup:peopleGroup];
+    [timeTrackEntityDef addPropertyDefinition:eventButtonProperty];
+       
+    [timeTrackEntityDef.propertyGroups addGroup:peopleGroup];
     
     
    
     
        
-    [timeTrackEntity.propertyGroups addGroup:detailsGroup]; 
+    [timeTrackEntityDef.propertyGroups addGroup:detailsGroup]; 
     
     
     
-    SCPropertyDefinition *licenseNumbersCreditedPropertyDef = [timeTrackEntity propertyDefinitionWithName:@"licenseNumbersCredited"];
+    SCPropertyDefinition *licenseNumbersCreditedPropertyDef = [timeTrackEntityDef propertyDefinitionWithName:@"licenseNumbersCredited"];
     licenseNumbersCreditedPropertyDef.title=@"Licenses Credited";
     
     SCPropertyGroup *creditsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Credits" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"degreesCredited",@"certificationsCredited",@"licenseNumbersCredited",nil]];
     
     
-    [timeTrackEntity.propertyGroups addGroup:creditsGroup];
+    [timeTrackEntityDef.propertyGroups addGroup:creditsGroup];
     
     
     
-    [timeTrackEntity removePropertyDefinitionWithName:@"supervisor"];
+    [timeTrackEntityDef removePropertyDefinitionWithName:@"supervisor"];
     
     //create the dictionary with the data bindings
     NSDictionary *clinicianDataBindings = [NSDictionary 
@@ -589,7 +645,7 @@
     clinicianDataProperty.autoValidate=FALSE;
     
     
-    [timeTrackEntity insertPropertyDefinition:clinicianDataProperty atIndex:1];
+    [timeTrackEntityDef insertPropertyDefinition:clinicianDataProperty atIndex:1];
     
     
     /****************************************************************************************/
@@ -597,7 +653,7 @@
     /****************************************************************************************/
     
     
-    SCPropertyDefinition *clientsPropertyDef = [timeTrackEntity propertyDefinitionWithName:@"clients"];
+    SCPropertyDefinition *clientsPropertyDef = [timeTrackEntityDef propertyDefinitionWithName:@"clients"];
     
    	clientsPropertyDef.type = SCPropertyTypeObjectSelection;
     
@@ -621,7 +677,7 @@
     
     
     
-    SCPropertyDefinition *sessionTrainingTypePropertyDef=[timeTrackEntity propertyDefinitionWithName:@"trainingType"];
+    SCPropertyDefinition *sessionTrainingTypePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"trainingType"];
     sessionTrainingTypePropertyDef.type =SCPropertyTypeObjectSelection;
     
     SCObjectSelectionAttributes *trainingTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trainingTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
@@ -645,7 +701,7 @@
     
     
     
-    SCPropertyDefinition *timePropertyDef = [timeTrackEntity propertyDefinitionWithName:@"time"];
+    SCPropertyDefinition *timePropertyDef = [timeTrackEntityDef propertyDefinitionWithName:@"time"];
     timePropertyDef.attributes = [SCObjectAttributes attributesWithObjectDefinition:self.timeDef];
     
     
@@ -656,10 +712,12 @@
     //create an array of objects definition for the clientPresentation to-many relationship that with show up in a different view  without a place holder element>.
     SCPropertyDefinition *clientPresentationsPropertyDef =nil;
     SCPropertyDefinition *supervisionFeedbackPropertyDef=nil;
-    
+    NSPredicate *modelPredicate=nil;
     //Create the property definition for the clientPresentations property
     if (currentControllerSetup==kTrackAssessmentSetup||currentControllerSetup==kTrackInterventionSetup||currentControllerSetup==kTrackSupportSetup) {
         
+         [self.searchBar setSelectedScopeButtonIndex:2];
+         modelPredicate = [NSPredicate predicateWithFormat:@"paperwork == %@",[NSNumber numberWithInteger: 0]];
         clientPresentations_Shared=[[ClientPresentations_Shared alloc]init];
         
         [clientPresentations_Shared setupUsingSTV];
@@ -667,31 +725,172 @@
         
 
         
-           clientPresentationsPropertyDef = [timeTrackEntity propertyDefinitionWithName:@"clientPresentations"];
+           clientPresentationsPropertyDef = [timeTrackEntityDef propertyDefinitionWithName:@"clientPresentations"];
             clientPresentationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientPresentations_Shared.clientPresentationDef
                                                                                                   allowAddingItems:YES
                                                                                                 allowDeletingItems:YES
                                                                                                   allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"tap + to add clients"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];	
         
+        
+        SCEntityDefinition *serviceCodeDef=[SCEntityDefinition definitionWithEntityName:@"ServiceCodeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"code",@"name", @"notes", nil]];
+        
+        
+        
+        
+        serviceCodeDef.orderAttributeName=@"order";
+        
+        
+        
+        SCPropertyDefinition *serviceCodePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"serviceCode"];
+        serviceCodePropertyDef.type =SCPropertyTypeObjectSelection;
+        
+        SCObjectSelectionAttributes *serviceCodeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:serviceCodeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+        serviceCodeSelectionAttribs.allowAddingItems = YES;
+        serviceCodeSelectionAttribs.allowDeletingItems = YES;
+        serviceCodeSelectionAttribs.allowMovingItems = YES;
+        serviceCodeSelectionAttribs.allowEditingItems = YES;
+        serviceCodeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap edit to add service code)"];
+        serviceCodeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText: @"Add new service code"];
+        serviceCodePropertyDef.attributes = serviceCodeSelectionAttribs;
+        
+        SCPropertyDefinition *serviceCodeNamePropertyDef=[serviceCodeDef propertyDefinitionWithName:@"name"];
+        serviceCodeNamePropertyDef.type=SCPropertyTypeTextView;
+        SCPropertyDefinition *serviceCodeNotesPropertyDef=[serviceCodeDef propertyDefinitionWithName:@"notes"];
+        serviceCodeNotesPropertyDef.type=SCPropertyTypeTextView;
+        
+
+        
+        
+        
         }
     else {
         
+         [self.searchBar setSelectedScopeButtonIndex:0];
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit ) fromDate:[NSDate date]];
+        //create a date with these components
+        NSDate *startDate = [calendar dateFromComponents:components];
+        [components setMonth:1];
+        [components setDay:0]; //reset the other components
+        [components setYear:0]; //reset the other components
+        NSDate *endDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
+        modelPredicate = [NSPredicate predicateWithFormat:@"((dateOfService > %@) AND (dateOfService <= %@)) || (dateOfService = nil)",startDate,endDate];
         
-        SCEntityDefinition *supervisionFeedbackDef=[SCEntityDefinition definitionWithEntityName:@"SupervisionFeedbackEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"client", @"feedback", @"topic",  nil]];
+        SCEntityDefinition *supervisionFeedbackDef=[SCEntityDefinition definitionWithEntityName:@"SupervisionFeedbackEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects: @"topic",@"clients", @"feedback",  nil]];
         
         SCEntityDefinition *feedbackTopicDef=[SCEntityDefinition definitionWithEntityName:@"FeedbackTopicEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"topic", nil]];                                                   
                                             
              feedbackTopicDef.orderAttributeName=@"order";                                      
         
-        supervisionFeedbackPropertyDef=[timeTrackEntity propertyDefinitionWithName:@"supervisionFeedback"];
-        clientPresentationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supervisionFeedbackDef
+        supervisionFeedbackPropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"supervisionFeedback"];
+        supervisionFeedbackPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supervisionFeedbackDef
                                                                                               allowAddingItems:YES
                                                                                             allowDeletingItems:YES
                                                                                               allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"tap + to add feedback"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];
+        
+        
+       SCPropertyDefinition *feedbackStrPropertyDef=[supervisionFeedbackDef propertyDefinitionWithName:@"feedback"];
+        feedbackStrPropertyDef.type=SCPropertyTypeTextView;
+        
+        //create the dictionary with the data bindings
+        NSDictionary *studentsPresentDataBindings = [NSDictionary 
+                                               dictionaryWithObjects:[NSArray arrayWithObjects:@"studentsPresent",@"Students Present",[NSNumber numberWithBool:NO],@"studentsPresent",[NSNumber numberWithBool:YES],nil] 
+                                               forKeys:[NSArray arrayWithObjects:@"1",@"90",@"91",@"92",@"93",nil ]]; // 1 are the control tags
+        
+        //create the custom property definition
+        SCCustomPropertyDefinition *studentsPresentDataProperty = [SCCustomPropertyDefinition definitionWithName:@"StudentsPresentData"
+                                                                                            uiElementClass:[ClinicianSelectionCell class] objectBindings:studentsPresentDataBindings];
+        
+        
+        //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+        studentsPresentDataProperty.autoValidate=FALSE;
+        
+        [timeTrackEntityDef removePropertyDefinitionWithName:@"studentsPresent"];
+        
+        [timeTrackEntityDef addPropertyDefinition:(SCPropertyDefinition *)studentsPresentDataProperty];
+        
+        
+        //create the dictionary with the data bindings
+        NSDictionary *clientsDataBindings = [NSDictionary 
+                                            dictionaryWithObjects:[NSArray arrayWithObjects:@"clients",@"Clients",@"clients",[NSNumber numberWithBool:YES],nil] 
+                                            forKeys:[NSArray arrayWithObjects:@"1",@"90",@"92",@"93",nil ]]; // 1 are the control tags
+        
+        //create the custom property definition
+        SCCustomPropertyDefinition *clientsDataProperty = [SCCustomPropertyDefinition definitionWithName:@"CLientsData"
+                                                                                         uiElementClass:[ClientsSelectionCell class] objectBindings:clientsDataBindings];
+        
+        
+        //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+        clientsDataProperty.autoValidate=FALSE;
+        
+        
+        //insert the custom property definition into the clientData class at index 
+        [supervisionFeedbackDef removePropertyDefinitionWithName:@"clients"];
+        [supervisionFeedbackDef insertPropertyDefinition:clientsDataProperty atIndex:0];
+
+        
+                
+        
+        SCPropertyDefinition *feedbackTopicPropertyDef=[supervisionFeedbackDef propertyDefinitionWithName:@"topic"];
+        feedbackTopicPropertyDef.type =SCPropertyTypeObjectSelection;
+        
+        SCObjectSelectionAttributes *feedbackTopicSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:feedbackTopicDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+        feedbackTopicSelectionAttribs.allowAddingItems = YES;
+        feedbackTopicSelectionAttribs.allowDeletingItems = YES;
+        feedbackTopicSelectionAttribs.allowMovingItems = YES;
+        feedbackTopicSelectionAttribs.allowEditingItems = YES;
+        feedbackTopicSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap edit to add feedback topic)"];
+        feedbackTopicSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText: @"Add new feedback topic"];
+        feedbackTopicPropertyDef.attributes = feedbackTopicSelectionAttribs;
+        
+        SCPropertyDefinition *feedbackTopicNamePropertyDef=[feedbackTopicDef propertyDefinitionWithName:@"topic"];
+        feedbackTopicNamePropertyDef.type=SCPropertyTypeTextView;
+        SCPropertyDefinition *feedbackTopicNotesPropertyDef=[feedbackTopicDef propertyDefinitionWithName:@"notes"];
+        feedbackTopicNotesPropertyDef.type=SCPropertyTypeTextView;
+        feedbackTopicDef.keyPropertyName=@"topic";
+        feedbackTopicDef.titlePropertyName=@"topic";
+        supervisionFeedbackDef.titlePropertyName=@"topic.topic";
+        
     }
     
+    if (currentControllerSetup!=kTrackAssessmentSetup&&currentControllerSetup!=kTrackSupportSetup) {
+   
+        NSString *modelEntityName=nil;
+        NSArray *modelAttributeNames=[NSArray arrayWithObjects:@"modelName" ,@"acronym", @"evidenceBased", @"notes",nil];
+        
+        if (currentControllerSetup==kTrackInterventionSetup) {
+        
+            modelEntityName=@"InterventionModelEntity";
+        
+        }else if (currentControllerSetup==kTrackSupervisionReceivedSetup||currentControllerSetup==kTrackSupervisionGivenSetup){
+             modelEntityName=@"SupervisionModelEntity";
+        }
+       SCEntityDefinition *modelDef=[SCEntityDefinition definitionWithEntityName:modelEntityName managedObjectContext:managedObjectContext propertyNames:modelAttributeNames];
+        
+        //Do some property definition customization for the Demographic Profile Entity disabilities relationship
+        SCPropertyDefinition *modelUsedPropertyDef = [timeTrackEntityDef propertyDefinitionWithName:@"modelsUsed"];
+        
+        modelUsedPropertyDef.type = SCPropertyTypeObjectSelection;
+        
+        SCObjectSelectionAttributes *modelUsedSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:modelDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:NO]; 
+        modelUsedSelectionAttribs.allowAddingItems = YES;
+        modelUsedSelectionAttribs.allowDeletingItems = YES;
+        modelUsedSelectionAttribs.allowMovingItems = YES;
+        modelUsedSelectionAttribs.allowEditingItems = YES;
+        modelUsedSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add Model Definitions)"];
+        modelUsedSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Model Definition"];
+        modelUsedPropertyDef.attributes = modelUsedSelectionAttribs;
+        SCPropertyDefinition *modelUsedNotesPropertyDef = [modelDef propertyDefinitionWithName:@"notes"];
+        modelUsedNotesPropertyDef.type=SCPropertyTypeTextView;
+        SCPropertyDefinition *modelNamePropertyDef = [modelDef propertyDefinitionWithName:@"modelName"];
+        modelNamePropertyDef.type=SCPropertyTypeTextView;
+        
+        
+        
+        
+    }
     //Create the property definition for the papwerwork property in the testsessiondelivered class
-    SCPropertyDefinition *paperworkPropertyDef = [timeTrackEntity propertyDefinitionWithName:@"paperwork"];
+    SCPropertyDefinition *paperworkPropertyDef = [timeTrackEntityDef propertyDefinitionWithName:@"paperwork"];
     
     //set the property definition type to segmented
     paperworkPropertyDef.type = SCPropertyTypeSegmented;
@@ -701,15 +900,15 @@
     
     
     
-    
-    NSPredicate *paperworkIncompletePredicate = [NSPredicate predicateWithFormat:@"paperwork == %@",[NSNumber numberWithInteger: 0]];
+  
+  
     //     tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
     //										withEntityClassDefinition:timeTrackEntity usingPredicate:paperworkIncompletePredicate];
-    SCArrayOfObjectsModel *objectModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:timeTrackEntity filterPredicate:paperworkIncompletePredicate];
+    SCArrayOfObjectsModel *objectModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:timeTrackEntityDef filterPredicate:modelPredicate];
     
     //    self.tableViewModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView 
     //										entityDefinition:timeTrackEntity];
-    [self.searchBar setSelectedScopeButtonIndex:2];
+   
     // Initialize tableModel
     //    if (self.navigationItem.rightBarButtonItems.count>1) {
     //        
@@ -724,12 +923,12 @@
     //    }
     
 
-    SCEntityDefinition *siteDef=[SCEntityDefinition definitionWithEntityName:@"SiteEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"siteName", @"location", @"started",@"ended",@"notes",@"defaultSite", nil]];
+    SCEntityDefinition *siteDef=[SCEntityDefinition definitionWithEntityName:@"SiteEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"siteName", @"location",@"settingType", @"started",@"ended",@"notes",@"defaultSite", nil]];
     
     
     
     
-    
+    SCEntityDefinition *settingTypeDef=[SCEntityDefinition definitionWithEntityName:@"SiteSettingTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects: @"settingTypeName", @"notes",nil]];
     
     
     
@@ -738,7 +937,7 @@
     
     
     
-    SCPropertyDefinition *sitePropertyDef=[timeTrackEntity propertyDefinitionWithName:@"site"];
+    SCPropertyDefinition *sitePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"site"];
     sitePropertyDef.type =SCPropertyTypeObjectSelection;
     
     SCObjectSelectionAttributes *siteSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:siteDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
@@ -763,42 +962,71 @@
 	siteEndedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
                                                                        datePickerMode:UIDatePickerModeDate 
                                                         displayDatePickerInDetailView:YES];
+    
+    settingTypeDef.orderAttributeName=@"order";
+    
+    
+    
+    SCPropertyDefinition *settingTypePropertyDef=[siteDef propertyDefinitionWithName:@"settingType"];
+    settingTypePropertyDef.type =SCPropertyTypeObjectSelection;
+    
+    SCObjectSelectionAttributes *settingTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:settingTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    settingTypeSelectionAttribs.allowAddingItems = YES;
+    settingTypeSelectionAttribs.allowDeletingItems = YES;
+    settingTypeSelectionAttribs.allowMovingItems = YES;
+    settingTypeSelectionAttribs.allowEditingItems = YES;
+    settingTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap edit to add setting type)"];
+    settingTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText: @"Add new setting type"];
+    settingTypePropertyDef.attributes = settingTypeSelectionAttribs;
+    
+    SCPropertyDefinition *settingTypeNamePropertyDef=[settingTypeDef propertyDefinitionWithName:@"settingTypeName"];
+    settingTypeNamePropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *settingTypeNotesPropertyDef=[settingTypeDef propertyDefinitionWithName:@"notes"];
+    settingTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+
+    
+    
+    NSString *typePropertyNameString=nil;
+    NSString *typeEntityNameString=nil;
+    NSString *typeDescriptionString=nil;
     switch (currentControllerSetup) {
         case kTrackAssessmentSetup:
         {
-            dateOfServicePropertyDef.title=@"Testing Date";
+            dateOfServicePropertyDef.title=@"Test Date";
             timePropertyDef.title=@"Testing Time";
             clientPresentationsPropertyDef.title=@"Clients Tested";
             
            
             
-            SCEntityDefinition *testSessionTypeDef=[SCEntityDefinition definitionWithEntityName:@"TestingSessionTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"assessmentType", @"notes", nil]];
+          
             
             
+            typeEntityNameString =@"TestingSessionTypeEntity";
+            typePropertyNameString=@"assessmentType";
+            typeDescriptionString=@"assessment type";
+                        
             
             
-            testSessionTypeDef.orderAttributeName=@"order";
-            
-            
-            
-            SCPropertyDefinition *testingSessionTypePropertyDef=[timeTrackEntity propertyDefinitionWithName:@"assessmentType"];
-            testingSessionTypePropertyDef.type =SCPropertyTypeObjectSelection;
-            
-            SCObjectSelectionAttributes *testSessionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:testSessionTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-            testSessionTypeSelectionAttribs.allowAddingItems = YES;
-            testSessionTypeSelectionAttribs.allowDeletingItems = YES;
-            testSessionTypeSelectionAttribs.allowMovingItems = YES;
-            testSessionTypeSelectionAttribs.allowEditingItems = YES;
-            testSessionTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Assessment Types)"];
-            testSessionTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Administration Type"];
-            testingSessionTypePropertyDef.attributes = testSessionTypeSelectionAttribs;
-            
-            SCPropertyDefinition *testSessionTypePropertyDef=[testSessionTypeDef propertyDefinitionWithName:@"assessmentType"];
-            testSessionTypePropertyDef.type=SCPropertyTypeTextView;
-            SCPropertyDefinition *testSessionTypeNotesPropertyDef=[testSessionTypeDef propertyDefinitionWithName:@"notes"];
-            testSessionTypeNotesPropertyDef.type=SCPropertyTypeTextView;
         } 
 
+            break;
+        case kTrackInterventionSetup:
+        {
+            dateOfServicePropertyDef.title=@"Service Date";
+            
+            timePropertyDef.title=@"Direct Time";
+            clientPresentationsPropertyDef.title=@"Clients Served";
+            
+            self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"Current Month",@"All Items",@"Incomplete",nil];
+            
+            typeEntityNameString =@"InterventionTypeEntity";
+            typePropertyNameString=@"interventionType";
+              typeDescriptionString=@"intervention type";
+           
+        } 
+            
             break;
         case kTrackSupportSetup:
         {
@@ -809,39 +1037,64 @@
             
              self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"Current Month",@"All Items",@"Incomplete",nil];
             
-            SCEntityDefinition *supportActivityTypeDef=[SCEntityDefinition definitionWithEntityName:@"SupportActivityTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"supportActivityType", @"notes", nil]];
             
+            typeEntityNameString =@"SupportActivityTypeEntity";
+            typePropertyNameString=@"supportActivityType";
+              typeDescriptionString=@"support activity type";
+
             
-            
-            
-            supportActivityTypeDef.orderAttributeName=@"order";
-            
-            
-            
-            SCPropertyDefinition *supportActivityTypePropertyDef=[timeTrackEntity propertyDefinitionWithName:@"supportActivityType"];
-            supportActivityTypePropertyDef.type =SCPropertyTypeObjectSelection;
-            
-            SCObjectSelectionAttributes *supportActivityTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:supportActivityTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-            supportActivityTypeSelectionAttribs.allowAddingItems = YES;
-            supportActivityTypeSelectionAttribs.allowDeletingItems = YES;
-            supportActivityTypeSelectionAttribs.allowMovingItems = YES;
-            supportActivityTypeSelectionAttribs.allowEditingItems = YES;
-            supportActivityTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Support Activity Types)"];
-            supportActivityTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Support Activity Type"];
-            supportActivityTypePropertyDef.attributes = supportActivityTypeSelectionAttribs;
-            
-            SCPropertyDefinition *supportActivityTypeStrPropertyDef=[supportActivityTypeDef propertyDefinitionWithName:@"supportActivityType"];
-            supportActivityTypeStrPropertyDef.type=SCPropertyTypeTextView;
-            SCPropertyDefinition *supportActivityTypeNotesPropertyDef=[supportActivityTypeDef propertyDefinitionWithName:@"notes"];
-            supportActivityTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+
         } 
             
             break;
-    
+      
         default:
+        {
+            dateOfServicePropertyDef.title=@"Supervision Date";
+            
+            timePropertyDef.title=@"Supervision Time";
+            supervisionFeedbackPropertyDef.title=@"Feedback Topics";
+            
+            self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"Current Month",@"All Items",nil];
+            
+            
+            typeEntityNameString =@"SupervisionTypeEntity";
+            typePropertyNameString=@"supervisionType";
+              typeDescriptionString=@"supervision type";
+
+        
+        
+        
+        
+        
+        }
             break;
     }
-   
+    SCEntityDefinition *trackTypeDef=[SCEntityDefinition definitionWithEntityName:typeEntityNameString managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:typePropertyNameString, @"notes", nil]];
+    
+    
+    
+    
+    trackTypeDef.orderAttributeName=@"order";
+    
+    
+    
+    SCPropertyDefinition *trackTypePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:typePropertyNameString];
+    trackTypePropertyDef.type =SCPropertyTypeObjectSelection;
+    
+    SCObjectSelectionAttributes *trackTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trackTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    trackTypeSelectionAttribs.allowAddingItems = YES;
+    trackTypeSelectionAttribs.allowDeletingItems = YES;
+    trackTypeSelectionAttribs.allowMovingItems = YES;
+    trackTypeSelectionAttribs.allowEditingItems = YES;
+    trackTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithFormat:@"(Tap edit to add %@)",typeDescriptionString]];
+    trackTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:[NSString stringWithFormat: @"Add new %@",typeDescriptionString]];
+    trackTypePropertyDef.attributes = trackTypeSelectionAttribs;
+    
+    SCPropertyDefinition *trackTypeStrPropertyDef=[trackTypeDef propertyDefinitionWithName:typePropertyNameString];
+   trackTypeStrPropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *trackTypeNotesPropertyDef=[trackTypeDef propertyDefinitionWithName:@"notes"];
+    trackTypeNotesPropertyDef.type=SCPropertyTypeTextView;
     
     
     
@@ -881,7 +1134,7 @@
     
 
   
-    [self.searchBar setSelectedScopeButtonIndex:2];
+    
     // Initialize tableModel
 
     if ([SCUtilities is_iPad]) {
@@ -974,21 +1227,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     {
         SCArrayOfObjectsModel *objectsModel = (SCArrayOfObjectsModel *)tableViewModel;
         
-        NSCalendar *calendar = [NSCalendar currentCalendar];
-        NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit ) fromDate:[NSDate date]];
-        //create a date with these components
-        NSDate *startDate = [calendar dateFromComponents:components];
-        [components setMonth:1];
-        [components setDay:0]; //reset the other components
-        [components setYear:0]; //reset the other components
-        NSDate *endDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
+       
         //NSLog(@"start dtate %@",startDate);
         //NSLog(@"end date is %@", endDate);
         
-        NSPredicate *currentMonthPredicate = [NSPredicate predicateWithFormat:@"((dateOfService > %@) AND (dateOfService <= %@)) || (dateOfService = nil)",startDate,endDate];
-        NSPredicate *paperworkIncompletePredicate = [NSPredicate predicateWithFormat:@"paperwork == %@",[NSNumber numberWithInteger: 0]];
-        
-        
+       
+               
         [self.searchBar setSelectedScopeButtonIndex:selectedScope];
         
         switch (selectedScope) {
@@ -1000,18 +1244,32 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 break;
                 
             case 2: //case paperwork Incomplete
-                [objectsModel.dataFetchOptions setFilterPredicate:paperworkIncompletePredicate];
+               
+            {
+                NSPredicate *paperworkIncompletePredicate = [NSPredicate predicateWithFormat:@"paperwork == %@",[NSNumber numberWithInteger: 0]];
                 
+
+                [objectsModel.dataFetchOptions setFilterPredicate:paperworkIncompletePredicate];
+            }   
                 
                 
                 
                 break;                
                 
             default://current month
-                
+            {
+                NSCalendar *calendar = [NSCalendar currentCalendar];
+                NSDateComponents *components = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit ) fromDate:[NSDate date]];
+                //create a date with these components
+                NSDate *startDate = [calendar dateFromComponents:components];
+                [components setMonth:1];
+                [components setDay:0]; //reset the other components
+                [components setYear:0]; //reset the other components
+                NSDate *endDate = [calendar dateByAddingComponents:components toDate:startDate options:0];
+                NSPredicate *currentMonthPredicate = [NSPredicate predicateWithFormat:@"((dateOfService > %@) AND (dateOfService <= %@)) || (dateOfService = nil)",startDate,endDate];
                 [objectsModel.dataFetchOptions setFilterPredicate:currentMonthPredicate];
                 
-                
+            }   
                 
                 
                 break;
@@ -1139,7 +1397,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     NSLog(@"tab tag %i",tableViewModel.tag);
     NSLog(@"indext path section is %i", indexPath.section);
-    if(tableViewModel.tag==1 &&indexPath.section==0){
+    if(tableViewModel.tag==1 &&(indexPath.section==0||indexPath.section==1)){
         //        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         //NSLog(@"cell bound object is %@",cellManagedObject);
         //NSLog(@"cell.tag%i",cell.tag);
@@ -1824,8 +2082,22 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
             NSLog(@"entity name is %@",cellManagedObject.entity.name);
                 //identify the Languages Spoken table
-                
-                if ([cellManagedObject.entity.name isEqualToString:@"TestingSessionDeliveredEntity"]) {
+                NSString *mainEntityString=[NSString string];
+                switch (currentControllerSetup) {
+                    case kTrackAssessmentSetup:
+                        mainEntityString=@"TestingSessionDeliveredEntity";
+                        break;
+                    case kTrackInterventionSetup:
+                        mainEntityString=@"InterventionDeliveredEntity";
+                        break;
+                    case kTrackSupportSetup:
+                        mainEntityString=@"SupportActivityDeliveredEntity";
+                        break;
+                    default:
+                        break;
+                }
+                NSString *cellTextString=[cell.textLabel text];
+                if ([cellManagedObject.entity.name isEqualToString:mainEntityString]) {
                     //NSLog(@"the managed object entity is Languag spoken Entity");
                     //get the value of the primaryLangugage attribute
                     NSNumber *paperworkNumber=(NSNumber *)[cellManagedObject valueForKey:@"paperwork"];
@@ -1852,7 +2124,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                         
                     }
                     
-                    NSString *cellTextString=[cell.textLabel text];
+                    
                     if ( [clientsString length] > 1){
                         clientsString = [clientsString substringToIndex:[clientsString length] - 1];
                         clientsString =[clientsString substringFromIndex:1]; 
@@ -1862,7 +2134,58 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                         }
                     }
                     
+                }
+                else 
+                {
                     
+                    switch (currentControllerSetup) {
+                        case kTrackSupervisionReceivedSetup:
+                        {
+                            ClinicianEntity *supervisor=(ClinicianEntity *)[cellManagedObject valueForKey:@"supervisor"];
+                            
+                            if (supervisor) {
+                                cellTextString=[cellTextString stringByAppendingFormat:@": %@",supervisor.combinedName];
+                                
+                                
+                            }
+                        }
+                            break;
+                        case kTrackSupervisionGivenSetup:
+                        {
+                            NSMutableSet *studentsSet=[cellManagedObject mutableSetValueForKey:@"studentsPresent"];
+                            NSString *superviseesString=[NSString string];
+                            if ([studentsSet count]) {
+                                for (id obj in studentsSet)
+                                {
+                                    if ([obj isKindOfClass:[ClinicianEntity class]])
+                                    {
+                                        
+                                        ClinicianEntity *student=(ClinicianEntity *)obj;
+                                        
+                                        superviseesString=[superviseesString stringByAppendingFormat:@" %@,",student.combinedName];
+                                        
+
+                                    }
+                                                                        
+                                }
+                                if ( [superviseesString length] > 1){
+                                    
+                                    if (cellTextString.length) {
+                                        cellTextString=[cellTextString stringByAppendingFormat:@":%@ ",superviseesString];
+                                        
+                                    }
+                                } 
+                            }
+                        
+                        
+                        }
+                            break;    
+                        default:
+                            break;
+                    }
+                    
+                    
+                }
                     
                     NSString *notesString=[cellManagedObject valueForKey:@"notes"];
                     
@@ -1877,7 +2200,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     
                     //NSLog(@"cell text label text is %@",cell.textLabel.text);
                     
-                }
+                
             }
             
         }
@@ -2330,25 +2653,132 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     thisEvent.startDate=[NSDate date];
                     thisEvent.endDate=[NSDate dateWithTimeIntervalSinceNow:60*60];
                 }
-                                
-                NSMutableSet *clientSet=[buttonCellManagedObject mutableSetValueForKeyPath:@"clientPresentations.client.clientIDCode"];
                 
-                NSLog(@"client set is %@",clientSet);
-                
-               eventTitleString=@"Test Administration:";
-                for (NSString * idCode in clientSet){
-                    
-                       
-                        eventTitleString=[eventTitleString stringByAppendingFormat:@" %@,",idCode];
                  
-                    
-                    
-                    
+                switch (currentControllerSetup) {
+                    case kTrackAssessmentSetup:
+                        eventTitleString=@"Test Administration:";
+                        break;
+                    case kTrackInterventionSetup:
+                        eventTitleString=@"Intervention:";
+                        break;
+                    case kTrackSupportSetup:
+                        eventTitleString=@"Indirect Support:";
+                        break;
+                    case kTrackSupervisionGivenSetup:
+                        eventTitleString=@"Supervision Given to";
+                        break;
+                    case kTrackSupervisionReceivedSetup:
+                        eventTitleString=@"Supervision from";
+                        break;
+    
+                    default:
+                        break;
                 }
                 
+                
+                 
+                if (currentControllerSetup==kTrackAssessmentSetup||currentControllerSetup==kTrackInterventionSetup||currentControllerSetup==kTrackSupportSetup) {
+                    
+                   
+                    NSMutableSet *clientSet=[buttonCellManagedObject mutableSetValueForKeyPath:@"clientPresentations.client.clientIDCode"];
+                    for (NSString * idCode in clientSet){
+                        
+                        
+                        eventTitleString=[eventTitleString stringByAppendingFormat:@" %@,",idCode];
+                        
+                        
+                        
+                        
+                    }
+
+
+                }
+                else {
+                    SCTableViewModel *tableModel=buttonCell.ownerTableViewModel;
+                    
+                                        
+                    switch (currentControllerSetup) {
+                        case kTrackSupervisionReceivedSetup:
+                        {
+                            
+                            SCTableViewSection *section=[tableModel sectionAtIndex:1]; 
+                            
+                            NSLog(@"section class is %@",section.class);
+                            if ([section isKindOfClass:[SCObjectSection class]]) {
+                                SCObjectSection *objectSection=(SCObjectSection *)section;
+                                
+                                [objectSection commitCellChanges];
+                                
+                            }
+
+                            ClinicianEntity *supervisor=(ClinicianEntity *)[buttonCellManagedObject valueForKey:@"supervisor"];
+                            
+                            if (supervisor) {
+                                eventTitleString=[eventTitleString stringByAppendingFormat:@" %@",supervisor.combinedName];
+                                
+                                
+                            }
+                        }
+                            break;
+                        case kTrackSupervisionGivenSetup:
+                        {
+                            SCTableViewSection *section=[tableModel sectionAtIndex:2]; 
+                            
+                            NSLog(@"section class is %@",section.class);
+                            if ([section isKindOfClass:[SCObjectSection class]]) {
+                                SCObjectSection *objectSection=(SCObjectSection *)section;
+                                
+                                [objectSection commitCellChanges];
+                                
+                            }
+                            NSMutableSet *studentsSet=[buttonCellManagedObject mutableSetValueForKey:@"studentsPresent"];
+                            NSString *superviseesString=[NSString string];
+                            if ([studentsSet count]) {
+                                for (id obj in studentsSet)
+                                {
+                                    if ([obj isKindOfClass:[ClinicianEntity class]])
+                                    {
+                                        
+                                        ClinicianEntity *student=(ClinicianEntity *)obj;
+                                        
+                                        superviseesString=[superviseesString stringByAppendingFormat:@" %@,",student.combinedName];
+                                        
+                                        
+                                    }
+                                    
+                                }
+                                 superviseesString = [superviseesString substringToIndex:[superviseesString length] - 1];
+                                if ( [superviseesString length] > 1){
+                                    
+                                    if (eventTitleString.length) {
+                                        eventTitleString=[eventTitleString stringByAppendingFormat:@":%@ ",superviseesString];
+                                        
+                                    }
+                                    
+                                    thisEvent.notes=[NSString stringWithFormat:@"Supervision given to: %@", superviseesString];
+                                    
+                                } 
+                            }
+                            
+                            
+                        }
+                            break;    
+                        default:
+                            break;
+                    }
+
+                    
+                                                         
+                }
+                               
+                
+                
+               
+                               
                 NSLog(@"event title string is %@",eventTitleString);
                 if ( [eventTitleString length] > 0)
-                    eventTitleString = [eventTitleString substringToIndex:[eventTitleString length] - 1];
+                   
                 
                 thisEvent.title=(NSString *) eventTitleString;
                 

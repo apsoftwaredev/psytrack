@@ -28,14 +28,14 @@
 @synthesize clientObject=clientObject;
 @synthesize testDate;
 @synthesize addAgeCells=addAgeCells_;
+@synthesize clientsArray=clientsArray_;
 
 -(void) performInitialization{
 
     [super performInitialization];
     
     
-     
-    
+   
 //    self.allowAddingItems = YES;
 //    self.allowDeletingItems = NO;
 //    self.allowMovingItems = YES;
@@ -49,10 +49,30 @@
 - (void)willDisplay
 {
     
-    self.textLabel.text=@"Client";
-    if (clientObject) {
-        self.label.text=(NSString *) [clientObject valueForKey:@"clientIDCode" ];
+    NSString *textLabelStr=[self.objectBindings valueForKey:@"90"];
+    
+    NSLog(@"text labvel st is %@",textLabelStr);
+    self.textLabel.text=textLabelStr;
+    if (!multiSelect && clientObject) {
+        self.label.text=(NSString *) self.clientObject.clientIDCode;
         
+    }else if (multiSelect)
+    {
+        int i=0;
+        NSString *labelStr=[NSString string];
+        for (ClientEntity *client in self.clientsArray) {
+            
+            if (i==0) {
+                labelStr=client.clientIDCode;
+            } 
+            else {
+                labelStr=[labelStr stringByAppendingFormat:@", %@",client.clientIDCode];
+            }
+            
+            i++;
+            
+        }
+        self.label.text=labelStr;
     }
     
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -115,7 +135,7 @@
         clientViewControllerNibName=[NSString stringWithString:@"ClientsViewController_iPhone"];
 
         
-        ClientsViewController_iPhone *clientsViewContoller=[[ClientsViewController_iPhone alloc]initWithNibName:clientViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController];
+        ClientsViewController_iPhone *clientsViewContoller=[[ClientsViewController_iPhone alloc]initWithNibName:clientViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController allowMultipleSelection:multiSelect];
         
    
     
@@ -128,15 +148,50 @@
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
             
-            if (clientObject) {
-           
-            [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:clientObject]]];
-            
+               
+                        
+                       
+                        
+                        if (multiSelect) {
+                            
+                            NSMutableSet *selectedIndexesSet=objectSelectionSection.selectedItemsIndexes;
+                            objectSelectionSection.allowMultipleSelection=YES;
+                            for (int p=0; p<self.clientsArray.count; p++) {
+                                int clientInSectionIndex;
+                                ClientEntity *clientInArray=[self.clientsArray objectAtIndex:p];
+                                if ([objectSelectionSection.items containsObject:clientInArray]) {
+                                    clientInSectionIndex=(int )[objectSelectionSection.items indexOfObject:clientInArray];
+                                    if (![objectSelectionSection.selectedItemsIndexes containsObject:[NSNumber numberWithInt:clientInSectionIndex]]) {
+                                        [selectedIndexesSet addObject:[NSNumber numberWithInt:clientInSectionIndex]];
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                            
+                            
+                        }
+                        else if (clientObject) 
+                        {
+                            
+                            objectSelectionSection.allowMultipleSelection=NO;
+                            
+                            
+                            [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:clientObject]]];
+                            
+                            
+                        } 
+                        else {
+                            objectSelectionSection.allowMultipleSelection=NO;
+                        }
+                    }
+                }
                 
-            } 
-        }
+                
+      
         
-    }
+
     
 //    SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionAttributes
         
@@ -167,76 +222,99 @@
 }
 
 
-//override superclass
-//override superclass
-- (void)cellValueChanged
-{	
- 
-    
-//	self.label.text = [self clientIDCodeStringUsingBoundObject:YES];
-	
-	[super cellValueChanged];
-}
+
 
 
 - (void)loadBindingsIntoCustomControls
 {
     [super loadBindingsIntoCustomControls];
   
+      
     self.label.text = nil;
     self.detailTextLabel.text = nil;
-//    NSManagedObjectContext *managedObjectContext=(NSManagedObjectContext *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-//    
-//    
-//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-//    
-//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ClientEntity" inManagedObjectContext:managedObjectContext];
-//    [fetchRequest setEntity:entity];
-//    
-//    NSError *error = nil;
-//    NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-//    if (fetchedObjects == nil) {
-//        ////NSLog(@"no items");
-//    }
-//    NSMutableArray *arrayWithFetchedWithoutAlreadySelected=[NSMutableArray arrayWithArray:fetchedObjects];
    
+    multiSelect=(BOOL)[(NSNumber *)[self.objectBindings valueForKey:@"93"]boolValue];
+    
+    self.allowMultipleSelection=multiSelect;
+    //    NSManagedObjectContext *managedObjectContext=(NSManagedObjectContext *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    //    
+    //    
+    //    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    //    
+    //    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ClientEntity" inManagedObjectContext:managedObjectContext];
+    //    [fetchRequest setEntity:entity];
+    //    
+    //    NSError *error = nil;
+    //    NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    //    if (fetchedObjects == nil) {
+    //        //NSLog(@"no items");
+    //    }
+    //    NSMutableArray *arrayWithFetchedWithoutAlreadySelected=[NSMutableArray arrayWithArray:fetchedObjects];
     
     
     
-//    if (!hasChangedClients && [self.boundObject valueForKey:@"client"]) {
-//               
-//      ////NSLog(@"self itmes are %@",self.items);
-//    
-//      
+    
+    //    if (!hasChangedClients && [self.boundObject valueForKey:@"client"]) {
+    //               
+    //      //NSLog(@"self itmes are %@",self.items);
+    //    
+    //      
+    
+    //NSLog(@"cell bound object is %@", self.boundObject);
     if (!hasChangedClients) {
-         clientObject=(NSManagedObject *)[self.boundObject valueForKey:@"client"];
+        NSString *clientKeyStr=[self.objectBindings valueForKey:@"92"];
+        if (!multiSelect) 
+        {
+            
+            self.clientObject=(ClientEntity *)[self.boundObject valueForKey:clientKeyStr];
+            
+            if (clientObject)
+            {
+              
+                self.label.text =(NSString *) clientObject.clientIDCode; 
+                
+            }
+            else 
+            {
+                self.label.text=[NSString string];
+            } 
+            
+        }
+        else 
+        {
+            
+            
+            
+            NSMutableSet *clientsMutableSet=(NSMutableSet *)[self.boundObject mutableSetValueForKey:clientKeyStr];
+            self.clientsArray=[NSMutableArray arrayWithArray:[clientsMutableSet allObjects]];
+            //NSLog(@"clinician array is %@",cliniciansArray_);
+            
+            NSString *labelStr=[NSString string];
+            for (int i=0; i<self.clientsArray.count; i++) {
+                
+                id objectInArray=[self.clientsArray objectAtIndex:i];
+                if ([objectInArray isKindOfClass:[ClientEntity class]]) {
+                    ClientEntity *clientInArray=(ClientEntity *)objectInArray;
+                    [clientInArray willAccessValueForKey:@"clientIDCode"];
+                    if (i==0) {
+                        
+                        labelStr=clientInArray.clientIDCode;
+                    } 
+                    else {
+                        labelStr=[labelStr stringByAppendingFormat:@", %@",clientInArray.clientIDCode];
+                    }
+                    
+                }
+                
+                
+                
+            }
+            NSLog(@"label string is %@",labelStr);
+            self.label.text=labelStr;
+            
+        }
     }
-       
-//        
-//    }
-//           }
-//   
-//        if(!hasChangedClients){
-//        for(id obj in alreadySelectedClients) { 
-//            if(obj!=clientObject)
-//                [arrayWithFetchedWithoutAlreadySelected removeObject:obj];
-//            
-//        }
-//    }
-//    self.items=arrayWithFetchedWithoutAlreadySelected;
-//    if (!clientObject.isDeleted) {
-//        self.selectedItemIndex=(NSNumber*)[NSNumber numberWithInteger:[self.items indexOfObject:clientObject]];
-       
-    if (clientObject){
-        
-        
-        self.label.text =(NSString *) [clientObject valueForKeyPath:@"clientIDCode" ]; 
-    
-}
-    else {
-        self.label.text=[NSString string];
-    }
-        
+  
 //    }
     
 
@@ -265,18 +343,79 @@
 //
 //}
 
--(void)doneButtonTappedInDetailView:(NSManagedObject *)selectedObject withValue:(BOOL)hasValue{
+-(void)doneButtonTappedInDetailView:(NSObject *)selectedObject selectedClients:(NSArray *)selectedClients withValue:(BOOL)hasValue{
 
     needsCommit=TRUE;
+    needsCommit=TRUE;
     
-    clientObject=selectedObject;
+    self.clientObject=nil;
+    if (self.clientsArray.count) {
+        [self.clientsArray removeAllObjects];
+    }
+    self.clientsArray=nil;
+    
+    self.clientObject=(ClientEntity *) selectedObject;
+    self.clientsArray=[NSMutableArray arrayWithArray:selectedClients];
+    
+    //    [self.boundObject setValue:selectedObject forKey:@"client"];
+    
+    clientObject=(ClientEntity *) selectedObject;
 //    [self.boundObject setValue:selectedObject forKey:@"client"];
     
    
     if (hasValue) {
-        
- 
         hasChangedClients=hasValue;
+        
+        if (multiSelect) 
+        {
+            
+            NSString *labelTextStr=[NSString string];
+            if (self.clientsArray.count) 
+            {
+                
+                for (int i=0; i<self.clientsArray.count; i++) 
+                {
+                    
+                    id obj=[self.clientsArray objectAtIndex:i];
+                    if ([obj isKindOfClass:[ClientEntity class]]) {
+                        ClientEntity *clientObjectInItems=(ClientEntity *)obj;
+                        
+                        if (i==0) 
+                        {
+                            labelTextStr=clientObjectInItems.clientIDCode;
+                        }
+                        else 
+                        {
+                            labelTextStr=[labelTextStr stringByAppendingFormat:@", %@",clientObjectInItems.clientIDCode];
+                        }
+                        
+                    }  
+                    
+                }
+            }
+            self.label.text=labelTextStr;
+        }
+        
+        
+        
+        
+        else if (clientObject) {
+            
+            
+            self.label.text=clientObject.clientIDCode;
+            
+            NSIndexPath *selfIndexPath=(NSIndexPath *) [self.ownerTableViewModel.modeledTableView indexPathForCell:self];
+            [self.ownerTableViewModel valueChangedForRowAtIndexPath:selfIndexPath];
+        }
+        else
+        {
+            self.label.text=[NSString string];
+            //         self.selectedItemIndex=[NSNumber numberWithInteger:-1];
+        }
+
+
+ 
+        
 
     
         if (addAgeCells_) {
@@ -294,21 +433,9 @@
             
         }
         
-        if (clientObject) {
-    
-
-             self.label.text=[clientObject valueForKeyPath:@"clientIDCode"];
-
-            NSIndexPath *selfIndexPath=(NSIndexPath *) [self.ownerTableViewModel.modeledTableView indexPathForCell:self];
-             [self.ownerTableViewModel valueChangedForRowAtIndexPath:selfIndexPath];
-    }
-//         }
+       //         }
 //    }
-    else
-    {
-         self.label.text=[NSString string];
-//         self.selectedItemIndex=[NSNumber numberWithInteger:-1];
-    }
+    
     }
 }
 // overrides superclass
@@ -316,37 +443,56 @@
 {
 	if(!self.needsCommit)
 		return;
-   
     
-//    NSObject *selectedObject = nil;
-//    int indexInt = [self.selectedItemIndex intValue] ;
     
-//    if((indexInt >= 0) &&(indexInt<=self.items.count+1)&&self.items.count>0){
-//        selectedObject = [self.items objectAtIndex:indexInt];
-
-    if (![clientObject isDeleted]) {
-       
-    [self.boundObject setValue:clientObject forKey:@"client"];
-    }
-    else
+    //    NSObject *selectedObject = nil;
+    //    int indexInt = [self.selectedItemIndex intValue] ;
+    
+    //    if((indexInt >= 0) &&(indexInt<=self.items.count+1)&&self.items.count>0){
+    //        selectedObject = [self.items objectAtIndex:indexInt];
+    
+    NSString *clientKeyStr=[self.objectBindings valueForKey:@"92"];
+    
+    
+    if (multiSelect) {
+        NSMutableSet *clientsMutableSet=[NSMutableSet set];
+        
+        int itemsCount=self.clientsArray.count;
+        for (int i=0; i<itemsCount; i++) {
+            id obj=[self.clientsArray objectAtIndex:i];
+            if ([obj isKindOfClass:[ClientEntity class]]) {
+                ClientEntity *clientObjectInItems=(ClientEntity *)obj;
+                
+                [clientsMutableSet addObject:clientObjectInItems];
+                
+            }  
+        }
+        [self.boundObject setValue:clientsMutableSet forKey:clientKeyStr];
+        
+    }else 
     {
-        [self.boundObject setNilValueForKey:@"client"];
-//        self.selectedItemIndex=[NSNumber numberWithInteger:-1];
+        //NSLog(@"combined name is %@",clinicianObject_.combinedName);
+        if (![clientObject isDeleted]) {
+            
+            [self.boundObject setValue:clientObject forKey:clientKeyStr];
+        }
+        else
+        {
+            [self.boundObject setNilValueForKey:clientKeyStr];
+            //        self.selectedItemIndex=[NSNumber numberWithInteger:-1];
+        }
+        
+        [super commitChanges];
     }
-    [super commitChanges];
-    hasChangedClients=FALSE ;
-
+    
+    [self setAutoValidateValue:NO];
+    
+    self.hasChangedClients=FALSE ;
+    
     needsCommit=FALSE;
    
 }
 
-
--(void)didChange:(NSKeyValueChange)changeKind valuesAtIndexes:(NSIndexSet *)indexes forKey:(NSString *)key{
-
-////NSLog(@"did change values for key");
-
-
-}
 
 
 @end

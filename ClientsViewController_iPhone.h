@@ -33,6 +33,7 @@
     ClientsViewController_Shared *clientsViewController_Shared;
     BOOL isInDetailSubview;
      ClientsSelectionCell *clientObjectSelectionCell;
+    BOOL allowMultipleSelection;
      UIViewController *sendingViewController;
      NSMutableSet *alreadySelectedClients;
      NSManagedObject *clientCurrentlySelectedInReferringDetailview;
@@ -41,6 +42,7 @@
     BOOL reloadTableView;
     SCArrayOfObjectsModel *objectsModel;
     ClientEntity *currentlySelectedClient;
+    NSMutableArray *currentlySelectedClientsArray;
 }
 
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
@@ -59,7 +61,7 @@
 -(void)updateClientsTotalLabel;
 
 -(void)addWechlerAgeCellToSection:(SCTableViewSection *)section;
--(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(SCObjectSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController;
+-(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(SCObjectSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController allowMultipleSelection:(BOOL)allowMultiSelect;
 
 -(void)cancelButtonTapped;
 

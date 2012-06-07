@@ -16,25 +16,28 @@
  *
  */
 #import <UIKit/UIKit.h>
-
+#import "ClientEntity.h"
 @interface ClientsSelectionCell : SCObjectSelectionCell {
 
 
-     NSManagedObject *clientObject;
+     ClientEntity *clientObject;
     BOOL hasChangedClients;
     NSDate *testDate;
     BOOL addAgeCells_;
+    
+    BOOL multiSelect;
+    NSMutableArray *clientsArray_;
 }
 
-
+@property (nonatomic,strong) NSMutableArray *clientsArray;
 @property (nonatomic, strong)  NSMutableSet *alreadySelectedClients;
 @property (nonatomic, readwrite)  BOOL hasChangedClients;
 @property (nonatomic, strong) NSDate *testDate;
 
 @property (nonatomic, assign) BOOL addAgeCells;
-@property (nonatomic,strong)IBOutlet  NSManagedObject *clientObject;
+@property (nonatomic,strong)IBOutlet  ClientEntity *clientObject;
 
--(void)doneButtonTappedInDetailView:(NSObject *)selectedObject  withValue:(BOOL)hasValue;
+-(void)doneButtonTappedInDetailView:(NSObject *)selectedObject selectedClients:(NSArray *)selectedClients withValue:(BOOL)hasValue;
 
 //-(NSString *)clientIDCodeString;
 @end

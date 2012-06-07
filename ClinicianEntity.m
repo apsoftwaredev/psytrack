@@ -1,76 +1,67 @@
-/*
- *  ClinicianEntity.m
- *  psyTrack Clinician Tools
- *  Version: 1.0
- *
- *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
- *
- *  Created by Daniel Boice on 1/16/12.
- *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
- *
- *
- *	This notice may not be removed from this file.
- *
- */
+//
+//  ClinicianEntity.m
+//  PsyTrack
+//
+//  Created by Daniel Boice on 6/7/12.
+//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//
+
 #import "ClinicianEntity.h"
+#import "DemographicProfileEntity.h"
+#import "LogEntity.h"
+#import "MedicationReviewEntity.h"
+#import "ReferralEntity.h"
+#import "SupervisionParentEntity.h"
+#import "TimeTrackEntity.h"
 #import "PTTAppDelegate.h"
-#import "PTABGroup.h"
 #import <AddressBook/AddressBook.h>
-//#import "MyInfoEntity.h"
-//#import "TestingSessionDeliveredEntity.h"
-
-
+#import "PTABGroup.h"
 @implementation ClinicianEntity
 
 @dynamic lastName;
-@dynamic clinicianType;
+@dynamic aBRecordIdentifier;
 @dynamic middleName;
 @dynamic firstName;
 @dynamic myPastSupervisor;
-@dynamic photo;
-@dynamic updatedTimeStamp;
-@dynamic aBRecordIdentifier;
+@dynamic website;
 @dynamic suffix;
 @dynamic myCurrentSupervisor;
-@dynamic thisIsMyInfo;
-@dynamic order;
-
-@dynamic startedPracticing;
 @dynamic prefix;
-@dynamic atMyCurrentSite;
-@dynamic notes;
+@dynamic order;
+@dynamic keyString;
+@dynamic bio;
 @dynamic myInformation;
+@dynamic startedPracticing;
+@dynamic notes;
+@dynamic atMyCurrentSite;
 @dynamic isPrescriber;
 @dynamic logs;
 @dynamic awards;
-@dynamic supportDeliverySupervised;
+@dynamic clinicianType;
 @dynamic specialties;
 @dynamic publications;
-
-@dynamic psyTestingSessionsSupervised;
 @dynamic medicationPrescribed;
+@dynamic abGroups;
 @dynamic influences;
-@dynamic supervisionGiven;
+@dynamic supervisedTime;
+@dynamic diagnoser;
 @dynamic myAdvisor;
-@dynamic interventionsSupervised;
+@dynamic site;
+@dynamic existingSupervision;
 @dynamic orientationHistory;
 @dynamic degrees;
 @dynamic advisingGiven;
 @dynamic demographicInfo;
-@dynamic contactInformation;
 @dynamic employments;
 @dynamic certifications;
 @dynamic licenseNumbers;
 @dynamic memberships;
 @dynamic referrals;
+@dynamic advisingReceived;
 @dynamic currentJobTitles;
 @dynamic teachingExperience;
-@dynamic keyString;
+@dynamic supervisionSessionsPresent;
 
-@synthesize  abGroups;
 
 @synthesize combinedName;
 
@@ -80,32 +71,32 @@
 
 
 -(NSString *)combinedName{
-
-
     
-   combinedName=[NSString string];
+    
+    
+    combinedName=[NSString string];
     
     
     //NSLog(@"name values in entity are %@, %@, %@, %@, %@, %@", prefix, firstName, middleName, lastName,suffix, credentialInitials );
     
     
     [self willAccessValueForKey:@"prefix"];
-    if (prefix.length) {
-        combinedName=[prefix stringByAppendingString:@" "];
+    if (self.prefix.length) {
+        combinedName=[self.prefix stringByAppendingString:@" "];
     } 
     [self didAccessValueForKey:@"prefix"];
     
-     [self willAccessValueForKey:@"firstName"];
-    if (firstName.length) {
-        combinedName=[combinedName stringByAppendingString:firstName];
+    [self willAccessValueForKey:@"firstName"];
+    if (self.firstName.length) {
+        combinedName=[combinedName stringByAppendingString:self.firstName];
     }
-     [self didAccessValueForKey:@"firstName"];
+    [self didAccessValueForKey:@"firstName"];
     
-     [self willAccessValueForKey:@"middleName"];
-    if (middleName.length ) 
+    [self willAccessValueForKey:@"middleName"];
+    if (self.middleName.length ) 
     {
         
-        NSString *middleInitial=[middleName substringToIndex:1];
+        NSString *middleInitial=[self.middleName substringToIndex:1];
         
         middleInitial=[middleInitial stringByAppendingString:@"."];
         
@@ -115,35 +106,35 @@
         
         
     }
-     [self didAccessValueForKey:@"middleName"];
+    [self didAccessValueForKey:@"middleName"];
     [self willAccessValueForKey:@"lastName"];
-
-    if (lastName.length  && combinedName.length ) 
+    
+    if (self.lastName.length  && combinedName.length ) 
     {
         
         
-        combinedName=[combinedName stringByAppendingFormat:@" %@",lastName];
+        combinedName=[combinedName stringByAppendingFormat:@" %@",self.lastName];
         
     }
-     [self didAccessValueForKey:@"lastName"];
+    [self didAccessValueForKey:@"lastName"];
     [self willAccessValueForKey:@"suffix"];
-    if (suffix.length  && combinedName.length) {
+    if (self.suffix.length  && combinedName.length) {
         
-        combinedName=[combinedName stringByAppendingFormat:@", %@",suffix];
+        combinedName=[combinedName stringByAppendingFormat:@", %@",self.suffix];
         
     }
-     [self didAccessValueForKey:@"suffix"];
+    [self didAccessValueForKey:@"suffix"];
     
     //NSLog(@"combined name values at end in entity are  %@",combinedName  );
     
     
     
- 
     
     
-
+    
+    
     return combinedName;
-
+    
 }
 
 
@@ -259,7 +250,7 @@
 }
 
 -(NSSet *)abGroupsold{
-  
+    
     if (tempABGroupSet) {
         return tempABGroupSet;
     }
@@ -955,5 +946,7 @@
 	}
 	return nil;
 }
+
+
 
 @end

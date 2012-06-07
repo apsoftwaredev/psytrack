@@ -2,20 +2,20 @@
 //  TestingSessionDeliveredEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 5/31/12.
+//  Created by Daniel Boice on 6/6/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "TimeTrackEntity.h"
+#import "ServiceParentEntity.h"
 
 @class TimeEntity;
 
-@interface TestingSessionDeliveredEntity : TimeTrackEntity
+@interface TestingSessionDeliveredEntity : ServiceParentEntity
 
-@property (nonatomic, retain) NSManagedObject *assessmentType;
 @property (nonatomic, retain) NSSet *clientPresentations;
+@property (nonatomic, retain) NSManagedObject *assessmentType;
 @property (nonatomic, retain) TimeEntity *time;
 @end
 
