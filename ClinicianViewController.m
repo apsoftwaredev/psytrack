@@ -256,7 +256,7 @@
    
     //change back button image
        
-    if(![SCUtilities is_iPad]||isInDetailSubview){
+    if(![SCUtilities is_iPad]){
      
         objectsModel.theme=[SCTheme themeWithPath:@"mapper-iPhone.ptt"];
         self.tableViewModel=objectsModel;
@@ -266,6 +266,14 @@
         
         
         
+    }else if (isInDetailSubview){
+        objectsModel.theme=[SCTheme themeWithPath:@"mapper-ipad-full.ptt"];
+        self.tableViewModel=objectsModel;
+        UIImage *menueBarImage=[UIImage imageNamed:@"ipad-menubar-right.png"];
+        [self.searchBar setBackgroundImage:menueBarImage];
+        [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+        
+
     }
 
     

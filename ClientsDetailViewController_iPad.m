@@ -37,6 +37,7 @@
     
     // Set the view controller's theme
     self.tableViewModel.theme = [SCTheme themeWithPath:@"mapper-ipad-detail.ptt"];
+    
 }
 
 - (void)viewDidUnload {

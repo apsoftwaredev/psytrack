@@ -1187,28 +1187,31 @@
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     
-    tableModel_ = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView  										entityDefinition:existingHoursDef];
+    objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView  										entityDefinition:existingHoursDef];
     if (self.navigationItem.rightBarButtonItems.count>1) {
         
-        tableModel_.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
+        objectsModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
     }
     
     
     
     if (self.navigationItem.rightBarButtonItems.count >0)
     {
-        tableModel_.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
+        objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
     }
     
-   
-    if ([SCUtilities is_iPad]) {
+    if(![SCUtilities is_iPad]){
         
-        [self.tableView setBackgroundView:nil];
-        [self.tableView setBackgroundView:[[UIView alloc] init]];
-        [self.tableView setBackgroundColor:[UIColor clearColor]];
-    }
-    else {
-        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+        objectsModel.theme=[SCTheme themeWithPath:@"mapper-iPhone.ptt"];
+       
+       
+        
+        
+    }else {
+        objectsModel.theme=[SCTheme themeWithPath:@"mapper-ipad-full.ptt"];
+      
+       
+        
     }
     
     
@@ -1218,19 +1221,20 @@
     self.view.backgroundColor=[UIColor clearColor];
     
     
-    tableModel_.allowMovingItems=TRUE;
+    objectsModel.allowMovingItems=TRUE;
     
-    tableModel_.autoAssignDelegateForDetailModels=TRUE;
-    tableModel_.autoAssignDataSourceForDetailModels=TRUE;
+    objectsModel.autoAssignDelegateForDetailModels=TRUE;
+    objectsModel.autoAssignDataSourceForDetailModels=TRUE;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadBoundValues:)
                                                  name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
                                                object:nil];
 
     
-    tableModel_.enablePullToRefresh = YES;
-    tableModel_.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
+    objectsModel.enablePullToRefresh = YES;
+    objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
     
+    self.tableViewModel=objectsModel;
     
 }
 
@@ -1348,26 +1352,42 @@ BOOL valid=NO;
 
    
     if ([SCUtilities is_iPad]) {
-         UIColor *backgroundColor=nil;
-       if(indexPath.row==NSNotFound|| tableModel.tag>0)
-    {
-        backgroundColor=(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor;
-    }
-    else {
-        backgroundColor=[UIColor clearColor];
-    }
-    
-    if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
-        
-        [detailTableViewModel.modeledTableView setBackgroundView:nil];
-        UIView *view=[[UIView alloc]init];
-        [detailTableViewModel.modeledTableView setBackgroundView:view];
-        [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
+        //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         
-    }
+        UIColor *backgroundColor=[UIColor clearColor];
+        UIImage *backgroundImage=nil;
+        if(indexPath.row==NSNotFound|| tableModel.tag>0)
+        {
+            backgroundImage=[UIImage imageNamed:@"iPad-background-blue.png"];
+            backgroundColor=(UIColor *)(UIView *)(UIWindow *)[UIColor colorWithPatternImage:backgroundImage];
+            
+        }
+        else {
+            
+            
+            
+            backgroundColor=[UIColor clearColor];
+            
+            
+        }
         
+        if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
+            
+            [detailTableViewModel.modeledTableView setBackgroundView:nil];
+            UIView *view=[[UIView alloc]init];
+            [detailTableViewModel.modeledTableView setBackgroundView:view];
+            [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
+            
+            
+            
+            
+        }
+        
+        UIImage *menuBarBackground=[UIImage imageNamed:@"ipad-menubar-right.png"];
+        [detailTableViewModel.viewController.navigationController.navigationBar setBackgroundImage:menuBarBackground forBarMetrics:UIBarMetricsDefault];
     }
+
 
 }
 

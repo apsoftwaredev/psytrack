@@ -75,6 +75,14 @@
   
 //    self.tableView.backgroundColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]; // Make the table view application backgound color (turquose)
 
+   
+    UIImage *menueBarImage=[UIImage imageNamed:@"ipad-menubar-left.png"];
+    [self.searchBar setBackgroundImage:menueBarImage];
+    [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+    
+    
+    
+    
     self.tableViewModel = objectsModel;
     
     

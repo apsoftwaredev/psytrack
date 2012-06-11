@@ -1679,7 +1679,7 @@
     //add the property definition to the clinician class 
     [self.clinicianDef addPropertyDefinition:deleteABLinkButtonCellProperty];
   
-        SCEntityDefinition *abGroupsDef=[SCEntityDefinition definitionWithEntityName:@"AddressBookGroupEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"groupName",@"recordID", nil]];
+        SCEntityDefinition *abGroupsDef=[SCEntityDefinition definitionWithEntityName:@"AddressBookGroupEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"groupName", @"addressBookSync",nil]];
         
         
         SCPropertyDefinition *abGroupsPropertyDef=[self.clinicianDef propertyDefinitionWithName:@"abGroups"];
@@ -1690,12 +1690,13 @@
         abGroupSelectionAttribs.allowAddingItems=YES;
         abGroupSelectionAttribs.allowDeletingItems=YES;
         abGroupSelectionAttribs.allowEditingItems=YES;
-        abGroupSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Add Address Book Groups"];
-        abGroupSelectionAttribs.placeholderuiElement=[SCTableViewCell cellWithText:@"Tap Edit to add new address book groups"];
+        abGroupSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Add Group"];
+        abGroupSelectionAttribs.placeholderuiElement=[SCTableViewCell cellWithText:@"Tap Edit to add new groups"];
         
         abGroupsPropertyDef.attributes=abGroupSelectionAttribs;
         abGroupsPropertyDef.title=@"Address Book Groups";
         
+       
         
 ////        
 //       abClassDefinition.titlePropertyName=@"groupName";
@@ -2590,13 +2591,14 @@
     }
     detailTableViewModel.delegate=self;
     if ([SCUtilities is_iPad]) {
-        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
 
     UIColor *backgroundColor=[UIColor clearColor];
     if(indexPath.row==NSNotFound|| tableModel.tag>0||isInDetailSubview)
     {
-        backgroundColor=(UIColor *)(UIView *)(UIWindow *)appDelegate.window.backgroundColor;
+        UIImage *backgroundImage=[UIImage imageNamed:@"iPad-background-blue.png"];
+        backgroundColor=(UIColor *)(UIView *)(UIWindow *)[UIColor colorWithPatternImage:backgroundImage];
        
     }
     else {

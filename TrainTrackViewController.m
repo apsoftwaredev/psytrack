@@ -751,7 +751,7 @@
     
     [navBar setBackgroundImage:navBarBackgroundImage forBarMetrics:UIBarMetricsDefault];
     
-    
+    self.tableView.hidden=YES;
 }
 
 - (void)viewDidUnload{

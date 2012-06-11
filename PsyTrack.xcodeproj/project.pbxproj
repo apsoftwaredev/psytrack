@@ -415,6 +415,9 @@
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
 		E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */; };
+		E7C182ED1585FDD800B6703F /* trainTabwhite.png in Resources */ = {isa = PBXBuildFile; fileRef = E7C182EB1585FDD800B6703F /* trainTabwhite.png */; };
+		E7C182EE1585FDD800B6703F /* trainTabwhite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7C182EC1585FDD800B6703F /* trainTabwhite@2x.png */; };
+		E7C182F61586163E00B6703F /* iOS Simulator Screen shot Jun 11, 2012 5.03.36 AM.png in Resources */ = {isa = PBXBuildFile; fileRef = E7C182F51586163E00B6703F /* iOS Simulator Screen shot Jun 11, 2012 5.03.36 AM.png */; };
 		E7D3732C152C2EFA00121918 /* ExistingHoursEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */; };
 		E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */; };
 		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
@@ -1004,6 +1007,9 @@
 		E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCDateCell.m; sourceTree = "<group>"; };
 		E7C074A3150EE514009C5498 /* EncryptedSCTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCTextViewCell.h; sourceTree = "<group>"; };
 		E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCTextViewCell.m; sourceTree = "<group>"; };
+		E7C182EB1585FDD800B6703F /* trainTabwhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = trainTabwhite.png; path = Images/trainTabwhite.png; sourceTree = "<group>"; };
+		E7C182EC1585FDD800B6703F /* trainTabwhite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "trainTabwhite@2x.png"; path = "Images/trainTabwhite@2x.png"; sourceTree = "<group>"; };
+		E7C182F51586163E00B6703F /* iOS Simulator Screen shot Jun 11, 2012 5.03.36 AM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iOS Simulator Screen shot Jun 11, 2012 5.03.36 AM.png"; sourceTree = "<group>"; };
 		E7D3732A152C2EFA00121918 /* ExistingHoursEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursEntity.h; sourceTree = "<group>"; };
 		E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursEntity.m; sourceTree = "<group>"; };
 		E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursOverviewCell.xib; sourceTree = "<group>"; };
@@ -1462,6 +1468,8 @@
 		37F7CECD15005E9900AD2C3A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E7C182EB1585FDD800B6703F /* trainTabwhite.png */,
+				E7C182EC1585FDD800B6703F /* trainTabwhite@2x.png */,
 				E798A14315858329006B9DBD /* social-network.png */,
 				E798A14115858307006B9DBD /* ipad-social-network.png */,
 				E798A13D15858264006B9DBD /* ipad-social-network@2x.png */,
@@ -1836,6 +1844,7 @@
 		E798A03215845941006B9DBD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E7C182F51586163E00B6703F /* iOS Simulator Screen shot Jun 11, 2012 5.03.36 AM.png */,
 				E798A124158539A2006B9DBD /* ipad-menubar-full.png */,
 				E798A125158539A4006B9DBD /* ipad-menubar-full@2x.png */,
 				E798A12015853495006B9DBD /* iPad-background-blue-plain.png */,
@@ -2319,6 +2328,9 @@
 				E798A140158582DA006B9DBD /* social-network@2x.png in Resources */,
 				E798A14215858308006B9DBD /* ipad-social-network.png in Resources */,
 				E798A14415858329006B9DBD /* social-network.png in Resources */,
+				E7C182ED1585FDD800B6703F /* trainTabwhite.png in Resources */,
+				E7C182EE1585FDD800B6703F /* trainTabwhite@2x.png in Resources */,
+				E7C182F61586163E00B6703F /* iOS Simulator Screen shot Jun 11, 2012 5.03.36 AM.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

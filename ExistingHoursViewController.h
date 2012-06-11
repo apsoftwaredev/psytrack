@@ -8,10 +8,10 @@
 
 
 
-@interface ExistingHoursViewController : UITableViewController <SCTableViewModelDelegate,SCTableViewModelDataSource>{
+@interface ExistingHoursViewController : SCTableViewController <SCTableViewModelDelegate,SCTableViewModelDataSource>{
 
 
-    SCArrayOfObjectsModel *tableModel_;
+    SCArrayOfObjectsModel *objectsModel;
 
 }
 -(void)cancelButtonTapped;

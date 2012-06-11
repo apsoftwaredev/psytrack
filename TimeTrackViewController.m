@@ -982,7 +982,7 @@
   
     //     tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
     //										withEntityClassDefinition:timeTrackEntity usingPredicate:paperworkIncompletePredicate];
-    SCArrayOfObjectsModel *objectModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:timeTrackEntityDef filterPredicate:modelPredicate];
+    SCArrayOfObjectsModel *objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:timeTrackEntityDef filterPredicate:modelPredicate];
     
     //    self.tableViewModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView 
     //										entityDefinition:timeTrackEntity];
@@ -1186,28 +1186,49 @@
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
     NSLog(@"self.navigationItem.rightBarButtonItems are %@",self.buttonsToolbar.items);
     
-    objectModel.editButtonItem = self.editButton;;
+    objectsModel.editButtonItem = self.editButton;;
     
-    objectModel.addButtonItem = self.addButton;
+    objectsModel.addButtonItem = self.addButton;
     
     
     
     self.view.backgroundColor=[UIColor clearColor];
     
-    objectModel.autoSortSections = TRUE;  
-    objectModel.searchBar = self.searchBar;
-	objectModel.searchPropertyName = @"dateOfService";
+    objectsModel.autoSortSections = TRUE;  
+    objectsModel.searchBar = self.searchBar;
+	objectsModel.searchPropertyName = @"dateOfService";
     
-    objectModel.allowMovingItems=TRUE;
+    objectsModel.allowMovingItems=TRUE;
     
-    objectModel.autoAssignDelegateForDetailModels=TRUE;
-    objectModel.autoAssignDataSourceForDetailModels=TRUE;
+    objectsModel.autoAssignDelegateForDetailModels=TRUE;
+    objectsModel.autoAssignDataSourceForDetailModels=TRUE;
     
     
-    objectModel.enablePullToRefresh = TRUE;
-    objectModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
+    objectsModel.enablePullToRefresh = TRUE;
+    objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
     
-    self.tableViewModel=objectModel;
+    
+    
+    if(![SCUtilities is_iPad]){
+        
+        objectsModel.theme=[SCTheme themeWithPath:@"mapper-iPhone.ptt"];
+       
+        UIImage *menueBarImage=[UIImage imageNamed:@"menubar.png"];
+        [self.searchBar setBackgroundImage:menueBarImage];
+        [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+        
+        
+        
+    }else {
+        objectsModel.theme=[SCTheme themeWithPath:@"mapper-ipad-full.ptt"];
+      
+        UIImage *menueBarImage=[UIImage imageNamed:@"ipad-menubar-right.png"];
+        [self.searchBar setBackgroundImage:menueBarImage];
+        [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+        
+        
+    }
+    self.tableViewModel=objectsModel;
     [self updateAdministrationTotalLabel:self.tableViewModel];
     
    
@@ -1225,7 +1246,7 @@
     }
         
     SCTheme *theme=[SCTheme themeWithPath:detailThemeNameStr];
-    objectModel.theme=theme;
+    objectsModel.theme=theme;
     
 
   
@@ -1886,18 +1907,25 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
     }
     NSLog(@"tableviewmodel tag is %i",tableModel.tag);
-
     if ([SCUtilities is_iPad]) {
-        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
-
-        UIColor *backgroundColor=nil;
+        
+        UIColor *backgroundColor=[UIColor clearColor];
+        UIImage *backgroundImage=nil;
         if(indexPath.row==NSNotFound|| tableModel.tag>0)
         {
-            backgroundColor=(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor;
+            backgroundImage=[UIImage imageNamed:@"iPad-background-blue.png"];
+            backgroundColor=(UIColor *)(UIView *)(UIWindow *)[UIColor colorWithPatternImage:backgroundImage];
+            
         }
         else {
+            
+            
+            
             backgroundColor=[UIColor clearColor];
+            
+            
         }
         
         if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
@@ -1908,9 +1936,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
             
             
+            
+            
         }
+        
+        UIImage *menuBarBackground=[UIImage imageNamed:@"ipad-menubar-right.png"];
+        [detailTableViewModel.viewController.navigationController.navigationBar setBackgroundImage:menuBarBackground forBarMetrics:UIBarMetricsDefault];
     }
-    
     if (detailTableViewModel.tag==2||detailTableViewModel.tag==3) {
         if (tableModel.sectionCount>1)
         {

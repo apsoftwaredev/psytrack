@@ -193,7 +193,7 @@
 
        
         tabBarImageNameStr=@"ipad-tabbar-right.png";
-            backgroundPattern=[UIImage imageNamed:@"iPad-background-blue.png"]; 
+            backgroundPattern=[UIImage imageNamed:@"iPad-background-blue-plain.png"]; 
                 
                 
                 [self.window addSubview:self.viewController];
@@ -242,7 +242,7 @@
                 
                 UIImage *clientsImage =[UIImage imageNamed:@"clientsTab.png"];
                 
-        
+       
         
         ClientsRootViewController_iPad *clientsRootViewController = [[ClientsRootViewController_iPad alloc]initWithNibName:@"ClientsRootViewController_iPad" bundle:[NSBundle mainBundle]];
         
@@ -305,7 +305,7 @@
         [UIApplication sharedApplication].statusBarStyle=UIStatusBarStyleBlackTranslucent;
         
         backgroundPattern=[UIImage imageNamed:@"bg-blue.png"];
-         tabBarImageNameStr=@"tabbar-right.png";
+         tabBarImageNameStr=@"tabbar.png";
     }
     
     clinicianToolsLabel.text=NSLocalizedStringWithDefaultValue(@"Clinician Tools" , @"Root", [NSBundle mainBundle], @"Clinician Tools", @"subname for the application");
@@ -314,8 +314,8 @@
    
     
     
-            
-   
+      [[UITabBar appearance] setTintColor:[UIColor whiteColor]];       
+    [[UITabBar appearance] setSelectedImageTintColor:[UIColor blueColor]]; 
     [self.tabBarController setDelegate:self];
                
 //       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{                          
@@ -337,7 +337,7 @@
 //           }
 //       });
     tabBarController.tabBar.userInteractionEnabled=NO;
-    [UIApplication sharedApplication].statusBarHidden = NO;
+    [UIApplication sharedApplication].statusBarHidden = YES;
     
     self.colorSwitcher = [[ColorSwitcher alloc] initWithScheme:@"blue"];
     
@@ -407,8 +407,8 @@
                                        forState:UIControlStateNormal];
     [[UISlider appearance] setThumbImage:thumbImage 
                                 forState:UIControlStateNormal];
-    
-    
+
+       
 }
 
 
@@ -677,6 +677,7 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
         tabBarController.tabBar.userInteractionEnabled=YES;
         [self.window addSubview:self.tabBarController.view];
          [self flashAppTrainAndTitleGraphics];
+    
         
     }
     

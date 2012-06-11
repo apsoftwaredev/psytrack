@@ -26,6 +26,19 @@
 		<string>Icon-72@2x.png</string>
 		<string>Default-Landscape@2x~ipad.png</string>
 		<string>Default-Portrait@2x~ipad.png</string>
+		<string>Default-Portrait~ipad.png</string>
+		<string>Default-Landscape~ipad.png</string>
+		<string>Default@2x.png</string>
+		<string>Default@2x.png</string>
+		<string>Default-Portrait@2x~ipad.png</string>
+		<string>Default@2x.png</string>
+		<string>Default@2x.png</string>
+		<string>Default@2x.png</string>
+		<string>Default-Landscape@2x~ipad.png</string>
+		<string>Default-Portrait@2x~ipad.png</string>
+		<string>Default-Portrait~ipad.png</string>
+		<string>Default-Landscape@2x~ipad.png</string>
+		<string>Default-Landscape~ipad.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -49,6 +62,19 @@
 				<string>Icon-72@2x.png</string>
 				<string>Default-Landscape@2x~ipad.png</string>
 				<string>Default-Portrait@2x~ipad.png</string>
+				<string>Default-Portrait~ipad.png</string>
+				<string>Default-Landscape~ipad.png</string>
+				<string>Default@2x.png</string>
+				<string>Default@2x.png</string>
+				<string>Default-Portrait@2x~ipad.png</string>
+				<string>Default@2x.png</string>
+				<string>Default@2x.png</string>
+				<string>Default@2x.png</string>
+				<string>Default-Landscape@2x~ipad.png</string>
+				<string>Default-Portrait@2x~ipad.png</string>
+				<string>Default-Portrait~ipad.png</string>
+				<string>Default-Landscape@2x~ipad.png</string>
+				<string>Default-Landscape~ipad.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<false/>
@@ -83,6 +109,8 @@
 	<string>PTTMasterViewController_iPhone</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>PTTMasterViewController_iPad</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -97,7 +125,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UIStatusBarHidden</key>
-	<true/>
 </dict>
 </plist>
