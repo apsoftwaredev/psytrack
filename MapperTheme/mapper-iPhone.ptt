@@ -1,0 +1,16 @@
+
+UINavigationBar
+{
+    backgroundImage: "menubar.png";
+}
+
+navigationItemTitleLabel
+{
+    backgroundColor: clearColor;
+    font: Helvetica-Bold 20;
+    shadowColor: blackColor;
+    textColor: whiteColor;
+    textAlignment: UITextAlignmentCenter;
+}
+
+

@@ -129,7 +129,7 @@
         }
         
         [objectsModel.modeledTableView setBackgroundColor:appDelegate.window.backgroundColor];
-        objectsModel.theme = [SCTheme themeWithPath:@"ClearBackgroundTheme.sct"];
+       
 
         
        
@@ -254,17 +254,18 @@
      [self updateClinicianTotalLabel];
     
    
-    
-	    
-
-   
-    if([SCUtilities is_iPad]){
-        [self.tableView setBackgroundView:nil];
-        [self.tableView setBackgroundView:[[UIView alloc] init]];
-        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
-    }
-    else {
+    //change back button image
+       
+    if(![SCUtilities is_iPad]||isInDetailSubview){
+     
+        objectsModel.theme=[SCTheme themeWithPath:@"mapper-iPhone.ptt"];
         self.tableViewModel=objectsModel;
+        UIImage *menueBarImage=[UIImage imageNamed:@"menubar.png"];
+        [self.searchBar setBackgroundImage:menueBarImage];
+        [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+        
+        
+        
     }
 
     

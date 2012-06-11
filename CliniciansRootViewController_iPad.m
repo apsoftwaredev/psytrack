@@ -58,8 +58,8 @@
    
 
 
-    [self.view setBackgroundColor:[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]];
-    
+   
+
     objectsModel.addButtonItem=objectsModel.detailViewController.navigationItem.rightBarButtonItem;
     
     objectsModel.addButtonItem = self.addButton;

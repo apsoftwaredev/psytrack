@@ -458,10 +458,18 @@
     
     if (currentControllerSetup==kTrackAssessmentSetup||currentControllerSetup==kTrackInterventionSetup||currentControllerSetup==kTrackSupportSetup) {
         
-        [timeTrackPropertyNamesArray addObject:@"clientPresentations"];
+        if (currentControllerSetup!=kTrackSupportSetup) {
+            [timeTrackPropertyNamesArray addObject:@"clientPresentations"];
+            [eventGroup insertPropertyName:@"clientPresentations" atIndex:2];
+        }
+        else {
+            [eventGroup insertPropertyName:@"supportActivityClients" atIndex:2];
+        }
+        
+        
         [timeTrackPropertyNamesArray addObject:@"serviceCode"]; 
         
-        [eventGroup insertPropertyName:@"clientPresentations" atIndex:2];
+        
         [peopleGroup addPropertyName:@"paperwork"];
         [detailsGroup addPropertyName:@"serviceCode"];
         
@@ -498,7 +506,7 @@
            
             [timeTrackPropertyNamesArray addObject:@"assessmentType"];
             
-            trackEntityName= @"TestingSessionDeliveredEntity";
+            trackEntityName= kTrackAssessmentEntityName;
                                                                 
             
             [detailsGroup insertPropertyName:@"assessmentType" atIndex:0];
@@ -515,7 +523,7 @@
             
             [timeTrackPropertyNamesArray addObject:@"modelsUsed"];
             
-            trackEntityName=@"InterventionDeliveredEntity";
+            trackEntityName=kTrackInterventionEntityName;
                                                      
             
              [detailsGroup insertPropertyName:@"interventionType" atIndex:2];
@@ -527,9 +535,10 @@
             
             navtitle.title=@"Indirect Support";
             
-            trackEntityName= @"SupportActivityDeliveredEntity";
+            trackEntityName= kTrackSupportEntityName;
             
             [timeTrackPropertyNamesArray addObject:@"supportActivityType"];
+            [timeTrackPropertyNamesArray addObject:@"supportActivityClients"];
             
             [detailsGroup insertPropertyName:@"supportActivityType" atIndex:0];
             
@@ -539,7 +548,7 @@
             
             navtitle.title=@"Supervision Given";
             
-           trackEntityName= @"SupervisionGivenEntity";
+           trackEntityName= kTrackSupervisionGivenEntityName;
                                                      
             
             [timeTrackPropertyNamesArray addObject:@"modelsUsed"];
@@ -553,7 +562,7 @@
             navtitle.title=@"Supervision Received";
             
             
-            trackEntityName= @"SupervisionReceivedEntity";
+            trackEntityName= kTrackSupervisionReceivedEntityName;
             
             [timeTrackPropertyNamesArray addObject:@"modelsUsed"];
             break;
@@ -718,15 +727,84 @@
         
          [self.searchBar setSelectedScopeButtonIndex:2];
          modelPredicate = [NSPredicate predicateWithFormat:@"paperwork == %@",[NSNumber numberWithInteger: 0]];
-        clientPresentations_Shared=[[ClientPresentations_Shared alloc]init];
-        
-        [clientPresentations_Shared setupUsingSTV];
         
         
+        
+        NSString *clientsPropertyNameStr=nil;
+        SCEntityDefinition *clientsEntityDefinition=nil;
+        if (currentControllerSetup== kTrackSupportSetup) {
+            
+            clientsEntityDefinition=[SCEntityDefinition definitionWithEntityName:@"SupportActivityClientEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"notes", nil]];
+            clientsPropertyNameStr=@"supportActivityClients";
+            clientsEntityDefinition.titlePropertyName=@"client.clientIDCode";
+ 
+                [clientsEntityDefinition removePropertyDefinitionWithName:@"supportActivityDelivered"];
+            /****************************************************************************************/
+            /*	BEGIN Class Definition and attributes for the Client Entity */
+            /****************************************************************************************/ 
+            
+            //get the client setup from the clients View Controller Shared
+            // Add a custom property that represents a custom cells for the description defined TextFieldAndLableCell.xib
+            
+            //create the dictionary with the data bindings
+            NSDictionary *clientDataBindings = [NSDictionary 
+                                                dictionaryWithObjects:[NSArray arrayWithObjects:@"client",@"Client",@"client",[NSNumber numberWithBool:NO],nil] 
+                                                forKeys:[NSArray arrayWithObjects:@"1",@"90",@"92",@"93",nil ]]; // 1 are the control tags
+            
+            //create the custom property definition
+            SCCustomPropertyDefinition *clientDataProperty = [SCCustomPropertyDefinition definitionWithName:@"CLientData"
+                                                                                             uiElementClass:[ClientsSelectionCell class] objectBindings:clientDataBindings];
+            
+            
+            //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+            clientDataProperty.autoValidate=FALSE;
+            
+            
+            //insert the custom property definition into the clientData class at index 
+            [clientsEntityDefinition insertPropertyDefinition:clientDataProperty atIndex:0];
+            
+            
+            
+            
+            /****************************************************************************************/
+            /*	END of Class Definition and attributes for the Client Entity */
+            /****************************************************************************************/
+            /*the client def will be used in the joined clientPresentations table */
+            
+            
+            //Create the property definition for the notes property in the clientPresentation class
+            SCPropertyDefinition *supportActivityClientNotesPropertyDef = [clientsEntityDefinition propertyDefinitionWithName:@"notes"];
+            
+            //set the clientPresentationNotesPropertyDef property definition type to a Text View Cell
+            supportActivityClientNotesPropertyDef.type = SCPropertyTypeTextView;
+            
+            
+           
+            
+            //define a property group
+            SCPropertyGroup *supportActivityNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"notes", nil]];
+            
+            // add the main property group to the clientPresentations class. 
+            [clientsEntityDefinition.propertyGroups addGroup:supportActivityNotesGroup];
+            
+
+            
+            
+        }
+        else {
+            clientPresentations_Shared=[[ClientPresentations_Shared alloc]init];
+            
+            [clientPresentations_Shared setupUsingSTV];
+            
+            clientsEntityDefinition=clientPresentations_Shared.clientPresentationDef;
+            clientsPropertyNameStr=@"clientPresentations";
+    
+        }
+               
 
         
-           clientPresentationsPropertyDef = [timeTrackEntityDef propertyDefinitionWithName:@"clientPresentations"];
-            clientPresentationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientPresentations_Shared.clientPresentationDef
+           clientPresentationsPropertyDef = [timeTrackEntityDef propertyDefinitionWithName:clientsPropertyNameStr];
+            clientPresentationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientsEntityDefinition
                                                                                                   allowAddingItems:YES
                                                                                                 allowDeletingItems:YES
                                                                                                   allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"tap + to add clients"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];	
@@ -740,7 +818,7 @@
         serviceCodeDef.orderAttributeName=@"order";
         
         
-        
+        serviceCodeDef.titlePropertyName=@"code;name";
         SCPropertyDefinition *serviceCodePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"serviceCode"];
         serviceCodePropertyDef.type =SCPropertyTypeObjectSelection;
         
@@ -1132,19 +1210,24 @@
     self.tableViewModel=objectModel;
     [self updateAdministrationTotalLabel:self.tableViewModel];
     
-
-  
-    
-    // Initialize tableModel
-
+   
+     // Initialize tableModel
+    NSString *detailThemeNameStr=nil;
     if ([SCUtilities is_iPad]) {
-        
+         detailThemeNameStr=@"mapper-ipad-full.ppt";
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
     }
+    else {
+        
         [self.tableView setBackgroundColor:[UIColor clearColor]];
+        detailThemeNameStr=@"mapper-phone.ptt";
+    }
+        
+    SCTheme *theme=[SCTheme themeWithPath:detailThemeNameStr];
+    objectModel.theme=theme;
     
-    
+
   
     
     self.view.backgroundColor=[UIColor clearColor];
@@ -2021,32 +2104,39 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         //       //NSLog(@"section width is is %f",section.footerView.frame.size.width;
         
     }
-    
+    NSLog(@"index is %i",index);
 
-    if (tableViewModel.tag==3 && tableViewModel.sectionCount&&index==3) {
+    if (tableViewModel.tag==3 && tableViewModel.sectionCount&&index==1) {
         
         
       
-        SCTableViewSection *sectionOne=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
+        SCTableViewSection *sectionOne=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         
-        NSLog(@"cell count is %i",sectionOne.cellCount);
-        SCTableViewCell *sectionOneClicianCell=(SCTableViewCell *)[sectionOne cellAtIndex:0];
-        NSManagedObject *cellManagedObject=(NSManagedObject *)sectionOneClicianCell.boundObject;  
-        NSLog(@"cell class is %@", sectionOneClicianCell.class);
-        NSLog(@"cell managed object is %@",cellManagedObject);
-        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) 
+        if ([section isKindOfClass:[SCObjectSection class]]) {
+            SCObjectSection *objectSection=(SCObjectSection *)section;
+            
+            NSManagedObject *objectSectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+            
+            if (objectSectionManagedObject&&[objectSectionManagedObject respondsToSelector:@selector(entity)] &&([objectSectionManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]||[objectSectionManagedObject.entity.name isEqualToString:@"SupportActivityClientEntity"])) {
+              
+                NSLog(@"object section managed obeject entity %@",objectSectionManagedObject.entity.name);
+                //if change the cell text then update the method that sets the age with the new cell text
+                SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" boundObject:nil labelTextPropertyName:@"Age"];
+                SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Wechlsler Test Age" boundObject:nil labelTextPropertyName:@"WechslerAge"];
+                actualAge.label.text=[NSString stringWithString: @"0y 0m"];
+                wechslerAge.label.text=[NSString stringWithFormat:@"%iy %im",0,0];
+                [sectionOne addCell:actualAge];
+                [sectionOne addCell:wechslerAge];
+            } 
         
-        {
-            //if change the cell text then update the method that sets the age with the new cell text
-            SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" boundObject:nil labelTextPropertyName:@"Age"];
-            SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Wechlsler Test Age" boundObject:nil labelTextPropertyName:@"WechslerAge"];
-            actualAge.label.text=[NSString stringWithString: @"0y 0m"];
-            wechslerAge.label.text=[NSString stringWithFormat:@"%iy %im",0,0];
-            [sectionOne addCell:actualAge];
-            [sectionOne addCell:wechslerAge];
         
         }
-}
+        
+       
+           
+        
+        
+    }
 }
 
 
@@ -2085,13 +2175,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 NSString *mainEntityString=[NSString string];
                 switch (currentControllerSetup) {
                     case kTrackAssessmentSetup:
-                        mainEntityString=@"TestingSessionDeliveredEntity";
+                        mainEntityString=kTrackAssessmentEntityName;
                         break;
                     case kTrackInterventionSetup:
-                        mainEntityString=@"InterventionDeliveredEntity";
+                        mainEntityString=kTrackInterventionEntityName;
                         break;
                     case kTrackSupportSetup:
-                        mainEntityString=@"SupportActivityDeliveredEntity";
+                        mainEntityString=kTrackSupportEntityName;
                         break;
                     default:
                         break;
@@ -2109,8 +2199,15 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                         //set the text color to red
                         cell.textLabel.textColor=[UIColor redColor];
                     }
+                    NSString *pathStr=nil;
+                    if (currentControllerSetup== kTrackSupportSetup) {
+                        pathStr=@"supportActivityClients.client.clientIDCode";
+                    }
+                    else {
+                        pathStr=@"clientPresentations.client.clientIDCode";
+                    }
                     
-                    NSMutableSet *clientSet=[cellManagedObject mutableSetValueForKeyPath:@"clientPresentations.client.clientIDCode"];
+                    NSMutableSet *clientSet=[cellManagedObject mutableSetValueForKeyPath:pathStr];
                     
                     //NSLog(@"client set is %@",clientSet);
                     
@@ -2351,28 +2448,47 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) {
+        if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]) {
+       
+            if ( [cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) {
             
-            
-            //                    SCTableViewSection *section =(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-            //                   
-//            if (!tableViewModel.modeledTableView.editing) {
-//                [tableViewModel didTapEditButtonItem];
-//                [tableViewModel.modeledTableView setEditing:TRUE]; 
-//                
-//            }
-            
-            
-            
-            
-            
-            
-            if(cell.tag>0 && cell.tag<4 && indexPath.section==0) 
-            {
-                breakTimeTotalHeaderLabel.text=[self tableViewModel:tableViewModel calculateBreakTimeForRowAtIndexPath:indexPath withBoundValues:YES];
                 
+                //                    SCTableViewSection *section =(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+                //                   
+    //            if (!tableViewModel.modeledTableView.editing) {
+    //                [tableViewModel didTapEditButtonItem];
+    //                [tableViewModel.modeledTableView setEditing:TRUE]; 
+    //                
+    //            }
+                
+                
+                
+                
+                
+                
+                if(cell.tag>0 && cell.tag<4 && indexPath.section==0) 
+                {
+                    breakTimeTotalHeaderLabel.text=[self tableViewModel:tableViewModel calculateBreakTimeForRowAtIndexPath:indexPath withBoundValues:YES];
+                    
+                }
             }
+          
+            
+            if ( [cellManagedObject.entity.name isEqualToString:@"SupportActivityClientEntity"]) 
+            {
+                SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
+                
+                [self displayAgeInAgeCells:section];
+            
+            
+            }
+            
         }
+        
+        
+        
+               
+        
         
     }
     
@@ -2496,14 +2612,24 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
-        
-        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) {
+        if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]) { 
+            if ( [cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) {
+                
+                
+                
+                if (cell.tag==1||cell.tag==2||cell.tag==3)
+                    breakTimeTotalHeaderLabel.text=[self tableViewModel:tableViewModel calculateBreakTimeForRowAtIndexPath:indexPath withBoundValues:NO];
+            }
             
-            
-            
-            if (cell.tag==1||cell.tag==2||cell.tag==3)
-                breakTimeTotalHeaderLabel.text=[self tableViewModel:tableViewModel calculateBreakTimeForRowAtIndexPath:indexPath withBoundValues:NO];
-        }
+            if ( [cellManagedObject.entity.name isEqualToString:@"SupportActivityClientEntity"]) 
+            {
+                SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
+                
+                [self displayAgeInAgeCells:section];
+                
+                
+            }
+        }   
         currentDetailTableViewModel=tableViewModel;
 
     } 
@@ -2691,6 +2817,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                         
                         
                     }
+                    eventTitleString = [eventTitleString substringToIndex:[eventTitleString length] - 1];
 
 
                 }
@@ -3725,6 +3852,102 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 }
 
 
+-(void)displayAgeInAgeCells:(SCTableViewSection *)section {
+    
+    if (section.cellCount>2) {
+        
+        
+        SCLabelCell *actualAgeCell=(SCLabelCell*)[section cellAtIndex:1];
+        SCLabelCell *wechslerAgeCell=(SCLabelCell*)[section cellAtIndex:2];
+        
+        if (![actualAgeCell isKindOfClass:[SCLabelCell class]]||![wechslerAgeCell isKindOfClass:[SCLabelCell class]]) {
+            return;
+        }
+        
+        //    SCTableViewCell *clientCell=(SCTableViewCell *)[section cellAtIndex:0];
+        //    SCTableViewCell *testDateCell=(SCTableViewCell*)[section cellAtIndex:3];
+        ClientsViewController_Shared *clientsViewController_Shared=[[ClientsViewController_Shared alloc]init];
+        
+        SCTableViewCell *clientCell=(SCTableViewCell *)[section cellAtIndex:0];
+        
+        NSDate *clientDateOfBirth=nil;    
+        if ([clientCell isKindOfClass:[ClientsSelectionCell class]]) {
+            ClientsSelectionCell *clientObjectsSelectionCell=(ClientsSelectionCell *)clientCell;
+            if (clientObjectsSelectionCell.clientObject) {
+                
+                //NSLog(@"client objects selection cell %@",[clientObjectsSelectionCell.clientObject valueForKey:@"dateOfBirth"]);
+                
+                //        NSArray *array=[[NSArray alloc]init];
+                //NSLog(@"cleint object %@",clientObjectsSelectionCell.clientObject);
+                //        int itemsCount=clientObjectsSelectionCell.items.count;
+                //        if (itemsCount>=0&&clientObjectsSelectionCell.clientObject) {
+                ////            clientDateOfBirth=(NSDate *)[(NSArray *)[clientObjectsSelectionCell.items valueForKey:@"dateOfBirth"]lastObject];
+                
+                
+                
+                
+                NSManagedObject *clientObject=(NSManagedObject *)clientObjectsSelectionCell.clientObject;
+                clientDateOfBirth=(NSDate *)[clientObject valueForKey:@"dateOfBirth"];
+                
+            }else{
+                NSString *noClientString=[NSString stringWithString:@"choose client"];
+                wechslerAgeCell.label.text=noClientString; 
+                actualAgeCell.label.text=noClientString;
+                return;
+                
+            }
+            
+            
+            
+            
+            
+            //NSLog(@"client date of birth is %@",clientDateOfBirth);
+        }
+        //NSLog(@"client cell class is  %@", [clientCell class]);
+        
+        
+        //    //NSLog(@"client cell bound object %@",[clientManagedObject valueForKey:@"client.dateOfBirth"]);
+        //   //NSLog(@"client date of birth is %@", [clientCell.boundObject valueForKey:@"dateOfBirth"]);
+        //NSLog(@"master model is %@",self.serviceDatePickerDate);
+        
+        if (serviceDateCell.datePicker.date && clientDateOfBirth) {
+            wechslerAgeCell.label.text=(NSString *)[clientsViewController_Shared calculateWechslerAgeWithBirthdate:(NSDate *)clientDateOfBirth toDate:(NSDate *)serviceDateCell.datePicker.date];
+            actualAgeCell.label.text=(NSString *)[clientsViewController_Shared calculateActualAgeWithBirthdate:(NSDate *)clientDateOfBirth toDate:(NSDate *)serviceDateCell.datePicker.date];
+        }
+        else
+        {
+            if (!serviceDateCell.datePicker.date) {
+                wechslerAgeCell.label.text=[NSString stringWithString:@"no test date"];
+                actualAgeCell.label.text=[NSString stringWithString:@"no test date"];
+            }
+            else if (!clientDateOfBirth)
+            {
+                
+                if (wechslerAgeCell&&[wechslerAgeCell respondsToSelector:@selector(label) ]) {
+                    
+                    wechslerAgeCell.label.text=[NSString stringWithString:@"no birthdate"];
+                    actualAgeCell.label.text=[NSString stringWithString:@"no birthdate"];
+                    
+                }
+            }
+            else
+            {
+                wechslerAgeCell.label.text=[NSString stringWithString:@"0y 0m"];
+                actualAgeCell.label.text=[NSString stringWithString:@"0y 0m"];
+            }
+            
+            
+        }
+        [wechslerAgeCell setNeedsLayout];
+        [wechslerAgeCell setNeedsDisplay];
+        [actualAgeCell setNeedsLayout];
+        [actualAgeCell setNeedsDisplay];
+    }
+    
+    //    actualAgeCell.label.text=[clientsViewController_Shared calculateActualAgeWithBirthdate:birthdateCell.datePicker.date];
+    //    
+    
+}
 
 
 

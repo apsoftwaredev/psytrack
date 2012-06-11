@@ -118,9 +118,11 @@
     [self.tableView setBackgroundView:nil];
     [self.tableView setBackgroundView:[[UIView alloc] init]];
 
-[self.view setBackgroundColor:[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]];
-
-
+    UIImage *backgroundImage=[UIImage imageNamed:@"ipad-bg-left-blue.png"];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:backgroundImage]];
+    
+    // Set the view controller's theme
+  
     objectsModel.searchBar = self.searchBar;
     objectsModel.addButtonItem = self.addButton;
 
@@ -660,10 +662,10 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                         UILabel *slabel = (UILabel *)[cell viewWithTag:10];
                         
                         slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
-                        UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                        UIImage *sliderRightTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                        [sliderOne setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
-                        [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
+//                        UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+//                        UIImage *sliderRightTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+//                        [sliderOne setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
+//                        [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
                         [sliderOne setMinimumValue:-1.0];
                         [sliderOne setMaximumValue:0];
                         break;
@@ -675,10 +677,10 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                         UISlider *sliderTwo = (UISlider *)sliderView;
                         
                         UILabel *slabelTwo = (UILabel *)[cell viewWithTag:10];
-                        UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                        UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                        [sliderTwo setMinimumTrackImage: sliderTwoLeftTrackImage forState: UIControlStateNormal];
-                        [sliderTwo setMaximumTrackImage: sliderTwoRightTrackImage forState: UIControlStateNormal];
+//                        UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+//                        UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+//                        [sliderTwo setMinimumTrackImage: sliderTwoLeftTrackImage forState: UIControlStateNormal];
+//                        [sliderTwo setMaximumTrackImage: sliderTwoRightTrackImage forState: UIControlStateNormal];
                         
                         slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];        
                         [sliderTwo setMinimumValue:0.0];

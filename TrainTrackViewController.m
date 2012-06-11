@@ -732,13 +732,26 @@
     UIViewAutoresizingFlexibleHeight;
     
     [self.view addSubview:self.myTableView];
+    NSString *menuBarImageNameStr=nil;
     if ([SCUtilities is_iPad]) {
         
         [self.myTableView setBackgroundView:nil];
         [self.myTableView setBackgroundView:[[UIView alloc] init]];
-        
+        menuBarImageNameStr=@"ipad-menubar-full.png";
     }
-       [self.myTableView setBackgroundColor:[UIColor clearColor]];
+    else {
+        [self.myTableView setBackgroundColor:[UIColor clearColor]];
+        menuBarImageNameStr=@"menubar.png"; 
+
+    }
+          UIImage *navBarBackgroundImage=[UIImage imageNamed:menuBarImageNameStr];
+    
+
+    UINavigationBar *navBar=(UINavigationBar *)self.navigationController.navigationBar;
+    
+    [navBar setBackgroundImage:navBarBackgroundImage forBarMetrics:UIBarMetricsDefault];
+    
+    
 }
 
 - (void)viewDidUnload{

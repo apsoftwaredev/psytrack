@@ -22,6 +22,12 @@ typedef enum {
     kTrackSupervisionGivenSetup,
 } PTrackControllerSetup;
 
+static NSString * const kTrackAssessmentEntityName=@"TestingSessionDeliveredEntity";
+static NSString * const kTrackInterventionEntityName=@"InterventionDeliveredEntity";
+static NSString * const kTrackSupportEntityName=@"SupportActivityDeliveredEntity";
+static NSString * const kTrackSupervisionGivenEntityName=@"SupervisionGivenEntity";
+static NSString * const kTrackSupervisionReceivedEntityName=@"SupervisionReceivedEntity";
+
 
 @interface TimeTrackViewController : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate>
 {

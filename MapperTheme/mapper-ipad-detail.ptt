@@ -1,0 +1,14 @@
+
+UINavigationBar
+{
+    backgroundImage: "ipad-menubar-right.png";
+
+}
+
+UITableView
+{
+    backgroundColor:clearColor;
+    
+}
+
+

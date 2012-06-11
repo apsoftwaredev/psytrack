@@ -2093,10 +2093,10 @@
                     UILabel *slabel = (UILabel *)[cell viewWithTag:10];
                     
                     slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
-                    UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                    UIImage *sliderRightTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                    [sliderOne setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
-                    [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
+//                    UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+//                    UIImage *sliderRightTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+//                    [sliderOne setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
+//                    [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
                     [sliderOne setMinimumValue:-1.0];
                     [sliderOne setMaximumValue:0];
                     
@@ -2110,10 +2110,10 @@
                     UISlider *sliderTwo = (UISlider *)sliderView;
                     
                     UILabel *slabelTwo = (UILabel *)[cell viewWithTag:10];
-                    UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                    UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                    [sliderTwo setMinimumTrackImage: sliderTwoLeftTrackImage forState: UIControlStateNormal];
-                    [sliderTwo setMaximumTrackImage: sliderTwoRightTrackImage forState: UIControlStateNormal];
+//                    UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+//                    UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+//                    [sliderTwo setMinimumTrackImage: sliderTwoLeftTrackImage forState: UIControlStateNormal];
+//                    [sliderTwo setMaximumTrackImage: sliderTwoRightTrackImage forState: UIControlStateNormal];
                     
                     slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];        
                     [sliderTwo setMinimumValue:0.0];
@@ -2596,7 +2596,7 @@
     UIColor *backgroundColor=[UIColor clearColor];
     if(indexPath.row==NSNotFound|| tableModel.tag>0||isInDetailSubview)
     {
-        backgroundColor=(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor;
+        backgroundColor=(UIColor *)(UIView *)(UIWindow *)appDelegate.window.backgroundColor;
        
     }
     else {
@@ -4288,12 +4288,6 @@
 }
 
 
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-
-    UIView *view=[[UIView alloc]init];
-    view.backgroundColor=[UIColor redColor];
-    return view;
-}
 
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
     

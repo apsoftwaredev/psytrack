@@ -45,6 +45,7 @@
    
     
     [self.clientPresentationDef removePropertyDefinitionWithName:@"interventionDelivered"];
+
     //Create the property definition for the affect Mood property in the client Presentatio class
     SCPropertyDefinition *affectNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"affect"];
     
@@ -1244,12 +1245,12 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 
 
-//NSLog(@"cell text is %@",cell.textLabel.text);
-    //NSLog(@"section is %i",indexPath.section);
-    //NSLog(@"tablemodel is %i",tableViewModel.tag);
-    if ((tableViewModel.tag==3 && indexPath.section==1 && [cell.textLabel.text isEqualToString:@"Wechlsler Test Age"])||(tableViewModel.tag==3 && indexPath.section==1 && [cell.textLabel.text isEqualToString:@"Test Age"])) 
+NSLog(@"cell text is %@",cell.textLabel.text);
+NSLog(@"section is %i",indexPath.section);
+NSLog(@"tablemodel is %i",tableViewModel.tag);
+    if ((tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Wechlsler Test Age"])||(tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Test Age"])) 
     {
-        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
+        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         
         
         
@@ -1260,6 +1261,7 @@
         //        [section addCell:wechslerAge];
         //        [section reloadBoundValues];
         [self addWechlerAgeCellToSection:(SCTableViewSection *)section];
+        
         
     }
 
@@ -1547,9 +1549,7 @@ if(section.headerTitle !=nil)
 
     SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
    
-   
-    
-    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+       NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
   
     if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"ClientInstrumentScoresEntity"] && [cell isKindOfClass:[SCObjectSelectionCell class]]&&cell.tag==0) {
         
@@ -1619,9 +1619,15 @@ if(section.headerTitle !=nil)
         
     }
     
-    if (tableViewModel.tag==3&&indexPath.section==0&&cell.tag==0) {
+    if (tableViewModel.tag==3) {
         SCTableViewSection *sectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-        [self addWechlerAgeCellToSection:(SCTableViewSection *)sectionZero];
+        
+//        if (indexPath.section==0&&cell.tag==0) {
+            [self addWechlerAgeCellToSection:(SCTableViewSection *)sectionZero];
+            
+//        }
+        
+        
     }
 
     if (tableViewModel.tag==5){

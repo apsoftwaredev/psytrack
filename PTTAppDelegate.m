@@ -98,7 +98,7 @@
 @synthesize encryption=encryption_;
 @synthesize okayToDecryptBool=okayToDecryptBool_;
 @synthesize passwordItem=passwordItem_,passCodeItem=passCodeItem_;
-
+@synthesize colorSwitcher;
 + (PTTAppDelegate *)appDelegate {
 	return (PTTAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
@@ -187,12 +187,13 @@
     //NSLog(@"lcock dictionary is %@",[lockValuesDictionary_ allKeys]);
     
 
-  
+    UIImage *backgroundPattern=nil;
+    NSString *tabBarImageNameStr=nil;
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 
        
-        
-            
+        tabBarImageNameStr=@"ipad-tabbar-right.png";
+            backgroundPattern=[UIImage imageNamed:@"iPad-background-blue.png"]; 
                 
                 
                 [self.window addSubview:self.viewController];
@@ -295,11 +296,16 @@
                clientsSplitViewController.view.backgroundColor=[UIColor clearColor];
        
                 cliniciansSplitViewController.view.backgroundColor=[UIColor clearColor];
+        
+       
                 //NSLog(@"window background color is %@", self.window.backgroundColor);
 //                
             }
     else {
         [UIApplication sharedApplication].statusBarStyle=UIStatusBarStyleBlackTranslucent;
+        
+        backgroundPattern=[UIImage imageNamed:@"bg-blue.png"];
+         tabBarImageNameStr=@"tabbar-right.png";
     }
     
     clinicianToolsLabel.text=NSLocalizedStringWithDefaultValue(@"Clinician Tools" , @"Root", [NSBundle mainBundle], @"Clinician Tools", @"subname for the application");
@@ -333,6 +339,16 @@
     tabBarController.tabBar.userInteractionEnabled=NO;
     [UIApplication sharedApplication].statusBarHidden = NO;
     
+    self.colorSwitcher = [[ColorSwitcher alloc] initWithScheme:@"blue"];
+    
+    [self customizeGlobalTheme];
+
+    UIImage *tabBarBackgroundImage=[UIImage imageNamed:tabBarImageNameStr];
+    
+    [tabBarController.tabBar setBackgroundImage:tabBarBackgroundImage];
+    
+     [self.window setBackgroundColor:[UIColor colorWithPatternImage:backgroundPattern]];
+    
     [self.window makeKeyAndVisible];
     [self displayNotification:@"Configuring iCloud database settings. One moment please..." forDuration:0.0 location:kPTTScreenLocationTop inView:self.window];
     displayConnectingTimer=[NSTimer scheduledTimerWithTimeInterval:0.5
@@ -359,6 +375,45 @@
     
     return YES;
 }
+
+
+- (void)customizeGlobalTheme
+{
+    UIImage *navBarImage = [colorSwitcher getImageWithName:@"menubar"];
+    
+    [[UINavigationBar appearance] setBackgroundImage:navBarImage 
+                                       forBarMetrics:UIBarMetricsDefault];
+    
+    
+    UIImage *barButton = [[colorSwitcher getImageWithName:@"bar-button"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
+    
+    [[UIBarButtonItem appearance] setBackgroundImage:barButton forState:UIControlStateNormal 
+                                          barMetrics:UIBarMetricsDefault];
+    
+    UIImage *backButton = [[colorSwitcher getImageWithName:@"back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,15,0,8)];
+    
+    
+    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButton forState:UIControlStateNormal 
+                                                    barMetrics:UIBarMetricsDefault];
+    
+    
+    UIImage *minImage = [colorSwitcher getImageWithName:@"slider-fill"];
+    UIImage *maxImage = [UIImage imageNamed:@"slider-track.png"];
+    UIImage *thumbImage = [UIImage imageNamed:@"slider-handle.png"];
+    
+    [[UISlider appearance] setMaximumTrackImage:maxImage 
+                                       forState:UIControlStateNormal];
+    [[UISlider appearance] setMinimumTrackImage:minImage 
+                                       forState:UIControlStateNormal];
+    [[UISlider appearance] setThumbImage:thumbImage 
+                                forState:UIControlStateNormal];
+    
+    
+}
+
+
+
+
 
 -(void)changeEstablishingConnectionMessage{
 

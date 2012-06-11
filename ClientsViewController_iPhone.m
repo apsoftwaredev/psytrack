@@ -228,7 +228,8 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     objectsModel.autoAssignDelegateForDetailModels=TRUE;
     objectsModel.autoAssignDataSourceForDetailModels=TRUE;
-    
+    // Set the view controller's theme
+
     //    objectsModel.delegate=self;
     
     if([SCUtilities is_iPad]){
@@ -915,10 +916,10 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                             UILabel *slabel = (UILabel *)[cell viewWithTag:10];
                             
                             slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
-                            UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                            UIImage *sliderRightTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                            [sliderOne setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
-                            [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
+//                            UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+//                            UIImage *sliderRightTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+//                            [sliderOne setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
+//                            [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
                             [sliderOne setMinimumValue:-1.0];
                             [sliderOne setMaximumValue:0];
                         }
@@ -929,10 +930,10 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                             UISlider *sliderTwo = (UISlider *)sliderView;
                             
                             UILabel *slabelTwo = (UILabel *)[cell viewWithTag:10];
-                            UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                            UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                            [sliderTwo setMinimumTrackImage: sliderTwoLeftTrackImage forState: UIControlStateNormal];
-                            [sliderTwo setMaximumTrackImage: sliderTwoRightTrackImage forState: UIControlStateNormal];
+//                            UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+//                            UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
+//                            [sliderTwo setMinimumTrackImage: sliderTwoLeftTrackImage forState: UIControlStateNormal];
+//                            [sliderTwo setMaximumTrackImage: sliderTwoRightTrackImage forState: UIControlStateNormal];
                             
                             slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];        
                             [sliderTwo setMinimumValue:0.0];

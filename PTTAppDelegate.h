@@ -19,7 +19,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LCYLockScreenViewController.h"
-
+#import "ColorSwitcher.h"
 #define addSmtricStr @"iEn8ioesfec3"
 
 
@@ -109,6 +109,9 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 }
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;
+@property (nonatomic, retain) ColorSwitcher *colorSwitcher;
+
+- (void)customizeGlobalTheme;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
