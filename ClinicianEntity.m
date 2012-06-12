@@ -41,7 +41,7 @@
 @dynamic specialties;
 @dynamic publications;
 @dynamic medicationPrescribed;
-@dynamic abGroups;
+@dynamic groups;
 @dynamic influences;
 @dynamic supervisedTime;
 @dynamic diagnoser;

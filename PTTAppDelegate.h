@@ -239,7 +239,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 
 -(void)displayNotification:(NSString *)alertText forDuration:(float)seconds location:(NSInteger )screenLocation inView:(UIView *)viewSuperview;
 
-
+-(void)displayNotification:(NSString *)alertText;
 
 @end
 

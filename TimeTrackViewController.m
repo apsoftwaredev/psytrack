@@ -1908,15 +1908,15 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     }
     NSLog(@"tableviewmodel tag is %i",tableModel.tag);
     if ([SCUtilities is_iPad]) {
-        //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         
-        UIColor *backgroundColor=[UIColor clearColor];
-        UIImage *backgroundImage=nil;
+        UIColor *backgroundColor=nil;
+     
         if(indexPath.row==NSNotFound|| tableModel.tag>0)
         {
-            backgroundImage=[UIImage imageNamed:@"iPad-background-blue.png"];
-            backgroundColor=(UIColor *)(UIView *)(UIWindow *)[UIColor colorWithPatternImage:backgroundImage];
+          
+            backgroundColor=(UIColor *)appDelegate.window.backgroundColor;
             
         }
         else {
@@ -1940,8 +1940,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
         }
         
-        UIImage *menuBarBackground=[UIImage imageNamed:@"ipad-menubar-right.png"];
-        [detailTableViewModel.viewController.navigationController.navigationBar setBackgroundImage:menuBarBackground forBarMetrics:UIBarMetricsDefault];
+      
     }
     if (detailTableViewModel.tag==2||detailTableViewModel.tag==3) {
         if (tableModel.sectionCount>1)

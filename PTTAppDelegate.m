@@ -29,7 +29,7 @@
 #import "CliniciansDetailViewController_iPad.h"
 #import "CliniciansViewController_Shared.h"
 #import "TrainTrackViewController.h"
-#import "TestAdministrationsViewController_iPad.h"
+
 #import "TabFile.h"
 
 #import "DrugProductEntity.h"
@@ -193,7 +193,7 @@
 
        
         tabBarImageNameStr=@"ipad-tabbar-right.png";
-            backgroundPattern=[UIImage imageNamed:@"iPad-background-blue-plain.png"]; 
+            backgroundPattern=[UIImage imageNamed:@"ipad-background-blue-plain-small.png"]; 
                 
                 
                 [self.window addSubview:self.viewController];
@@ -379,7 +379,40 @@
 
 - (void)customizeGlobalTheme
 {
-    UIImage *navBarImage = [colorSwitcher getImageWithName:@"menubar"];
+    
+    NSString *menuBarImageName=nil;
+    
+   
+    
+    NSString *sliderFillImageName=nil;
+    NSString *sliderTrackImageName=nil;
+    
+    NSString *sliderHandleImageName=nil;
+    
+    if ([SCUtilities is_iPad]) {
+        menuBarImageName=@"ipad-menubar-full";
+        
+       
+        
+        sliderFillImageName=@"ipad-slider-fill.png";
+        sliderTrackImageName=@"ipad-slider-track.png";
+        
+        sliderHandleImageName=@"ipad-slider-handle.png";
+    }
+    else {
+        menuBarImageName=@"menubar";
+        
+        
+        
+        sliderFillImageName=@"slider-fill.png";
+        sliderTrackImageName=@"slider-track.png";
+        
+        sliderHandleImageName=@"slider-handle.png";
+    }
+    
+    
+    
+    UIImage *navBarImage = [colorSwitcher getImageWithName:menuBarImageName];
     
     [[UINavigationBar appearance] setBackgroundImage:navBarImage 
                                        forBarMetrics:UIBarMetricsDefault];
@@ -397,9 +430,9 @@
                                                     barMetrics:UIBarMetricsDefault];
     
     
-    UIImage *minImage = [colorSwitcher getImageWithName:@"slider-fill"];
-    UIImage *maxImage = [UIImage imageNamed:@"slider-track.png"];
-    UIImage *thumbImage = [UIImage imageNamed:@"slider-handle.png"];
+    UIImage *minImage = [colorSwitcher getImageWithName:sliderFillImageName];
+    UIImage *maxImage = [UIImage imageNamed:sliderTrackImageName];
+    UIImage *thumbImage = [UIImage imageNamed:sliderHandleImageName];
     
     [[UISlider appearance] setMaximumTrackImage:maxImage 
                                        forState:UIControlStateNormal];
@@ -7059,7 +7092,11 @@ return [self applicationDrugsDirectory].path;
 }
 
 
+-(void)displayNotification:(NSString *)alertText{
 
+    [self displayNotification:(NSString *)alertText forDuration:(float)3.0 location:(NSInteger )kPTTScreenLocationTop   inView:nil];
+
+}
 
 
 @end

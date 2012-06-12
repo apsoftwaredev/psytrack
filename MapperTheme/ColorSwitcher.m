@@ -26,6 +26,7 @@
         [processedImages setObject:[UIImage imageNamed:@"menubar.png"] forKey:@"menubar"];
         [processedImages setObject:[UIImage imageNamed:@"slider-fill.png"] forKey:@"slider-fill"];
         [processedImages setObject:[UIImage imageNamed:@"tabbar.png"] forKey:@"tabbar"];
+        [processedImages setObject:[UIImage imageNamed:@"ipad-menubar-full.png"] forKey:@"ipad-menubar-full"];
         [processedImages setObject:[UIImage imageNamed:@"ipad-menubar-left.png"] forKey:@"ipad-menubar-left"];
         [processedImages setObject:[UIImage imageNamed:@"ipad-menubar-right.png"] forKey:@"ipad-menubar-right"];
         [processedImages setObject:[UIImage imageNamed:@"ipad-tabbar-left.png"] forKey:@"ipad-tabbar-left"];

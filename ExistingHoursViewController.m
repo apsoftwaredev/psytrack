@@ -1355,13 +1355,17 @@ BOOL valid=NO;
         //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         
-        UIColor *backgroundColor=[UIColor clearColor];
-        UIImage *backgroundImage=nil;
+        UIColor *backgroundColor=nil;
+        
         if(indexPath.row==NSNotFound|| tableModel.tag>0)
         {
-            backgroundImage=[UIImage imageNamed:@"iPad-background-blue.png"];
-            backgroundColor=(UIColor *)(UIView *)(UIWindow *)[UIColor colorWithPatternImage:backgroundImage];
+//            backgroundImage=[UIImage imageNamed:@"iPad-background-blue.png"];
+            backgroundColor=(UIColor *)(UIWindow *)appDelegate.window.backgroundColor;
             
+            
+            
+            UIImage *menuBarBackground=[UIImage imageNamed:@"ipad-menubar-right.png"];
+            [detailTableViewModel.viewController.navigationController.navigationBar setBackgroundImage:menuBarBackground forBarMetrics:UIBarMetricsDefault];
         }
         else {
             
@@ -1384,8 +1388,7 @@ BOOL valid=NO;
             
         }
         
-        UIImage *menuBarBackground=[UIImage imageNamed:@"ipad-menubar-right.png"];
-        [detailTableViewModel.viewController.navigationController.navigationBar setBackgroundImage:menuBarBackground forBarMetrics:UIBarMetricsDefault];
+       
     }
 
 

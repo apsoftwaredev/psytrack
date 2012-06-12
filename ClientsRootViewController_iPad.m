@@ -360,15 +360,15 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
     
     
     if ([SCUtilities is_iPad]) {
-        //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         
-        UIColor *backgroundColor=[UIColor clearColor];
-        UIImage *backgroundImage=nil;
+        UIColor *backgroundColor=nil;
+    
         if(indexPath.row==NSNotFound|| tableModel.tag>0)
         {
-           backgroundImage=[UIImage imageNamed:@"iPad-background-blue.png"];
-            backgroundColor=(UIColor *)(UIView *)(UIWindow *)[UIColor colorWithPatternImage:backgroundImage];
+           
+            backgroundColor=(UIColor *)appDelegate.window.backgroundColor;
             
         }
         else {

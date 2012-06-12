@@ -247,7 +247,7 @@
     
     NSInteger result = 0;
     if ([tableView isEqual:self.myTableView]){
-        result = 11;
+        result = 12;
     }
     return result;
     
@@ -296,11 +296,15 @@
                 break;
             }
             case 9:{
+                result = 1;
+                break;
+            }
+            case 10:{
                 result = 2;
                 break;
             }
-                
-            case 10:{
+    
+            case 11:{
                 result = 2;
                 break;
             }
@@ -413,14 +417,21 @@
                 case 9:
                 {
                     if (indexPath.row==0)result.textLabel.text=@"Lock Screen Settings";
-                    if (indexPath.row==1)result.textLabel.text=@"Calander and Address Book";
+                    
                     
 
                   
                 }
                     break;
-                   
                 case 10:
+                {
+                    
+                    if (indexPath.row==0)result.textLabel.text=@"Clinician Groups";
+                    if (indexPath.row==1)result.textLabel.text=@"Client Groups";
+                    
+                } 
+                    break;
+                case 11:
                 {
                 
                     if (indexPath.row==0)result.textLabel.text=@"Support";
@@ -652,25 +663,33 @@
                 break;
             
             };
+                       
+            
+            
+        }
+            break;
+        case 10:
+        {
+            //@"Clinician Groups"
             //@"Calander and Address Book"
-            if (indexPath.row==1){
-            
-            
+            if (indexPath.row==0){
+                
+                
                 InAppSettingsViewController *inAppSettingsViewController = [[InAppSettingsViewController alloc] initWithNibName:@"InAppSettingsViewController" bundle:nil];
                 
                 [self.navigationController pushViewController:inAppSettingsViewController animated:YES];
                 
                 inAppSettingsViewController.rootNavController=self.navigationController;
-            
-            
+                
+                
             };
+
             
-            
-            
+                       
         }
             break;
-            
-        case 10:
+           
+        case 11:
         {
             //@"Support"
             if (indexPath.row==0){
@@ -816,7 +835,7 @@
             headerTitle=@"Existing Hours Track";
             break;
         case 5:
-            headerTitle=@"Consultations";
+            headerTitle=@"Consultations Track";
             break;
         case 6:
             headerTitle=@"Formal Education Track";
@@ -825,12 +844,15 @@
             headerTitle=@"Teaching and Advising Track";
             break;
         case 8:
-            headerTitle=@"Drug Database";
+            headerTitle=@"Drug Database Track";
             break;
         case 9:
             headerTitle=@"Preferences Track";
             break;
         case 10:
+            headerTitle=@"Groups Track";
+            break;
+        case 11:
             headerTitle=@"Support and About Track";
             break;
   

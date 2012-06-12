@@ -861,7 +861,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didInsertRowAtIndexPath:(NSIndexPath *)indexPath
 
 {
+    [super tableViewModel:tableViewModel didInsertRowAtIndexPath:indexPath];
     
+        
     if (tableViewModel.tag==0) {
         
         [self updateClinicianTotalLabel];

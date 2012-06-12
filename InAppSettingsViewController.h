@@ -22,9 +22,9 @@
 #import <EventKit/EventKit.h>
 #import <EventKitUI/EventKitUI.h>
 
-@interface InAppSettingsViewController : UITableViewController <SCTableViewModelDelegate, EKCalendarChooserDelegate,ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate>{
+@interface InAppSettingsViewController : SCViewController <SCTableViewModelDelegate, EKCalendarChooserDelegate,ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate>{
 
-    SCArrayOfObjectsModel *tableModel;
+    SCArrayOfObjectsModel *objectsModel;
     EKEventStore *eventStore;
 	EKCalendar *psyTrackCalendar;
 	NSMutableArray *eventsList;
@@ -36,6 +36,9 @@
 //    ABAddressBookRef addressBook;
     SCTableViewModel *currentDetailTableViewModel_;
     SCObjectSelectionCell *sourcesObjSelectionCell_;
+    
+    ABAddressBookRef addressBook;
+    ABRecordRef source;
 }
 @property (nonatomic, strong) UINavigationController *rootNavController;
 @property (nonatomic, strong) EKEventStore *eventStore;
@@ -48,7 +51,6 @@
 
 - (EKCalendar *)defaultCalendarName;
 -(NSArray *)addressBookGroupsArray;
--(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew checkExisting:(BOOL)checkExisting;
 -(void)importAllContactsInGroup;
 
 - (NSString *)nameForSourceWithIdentifier:(int)identifier;

@@ -40,7 +40,7 @@ NSMutableSet *tempABGroupSet;
 @property (nonatomic, retain) NSSet *specialties;
 @property (nonatomic, retain) NSSet *publications;
 @property (nonatomic, retain) MedicationReviewEntity *medicationPrescribed;
-@property (nonatomic, retain) NSSet *abGroups;
+@property (nonatomic, retain) NSSet *groups;
 @property (nonatomic, retain) NSSet *influences;
 @property (nonatomic, retain) NSSet *supervisedTime;
 @property (nonatomic, retain) NSManagedObject *diagnoser;
@@ -95,10 +95,10 @@ NSMutableSet *tempABGroupSet;
 - (void)addPublications:(NSSet *)values;
 - (void)removePublications:(NSSet *)values;
 
-- (void)addAbGroupsObject:(NSManagedObject *)value;
-- (void)removeAbGroupsObject:(NSManagedObject *)value;
-- (void)addAbGroups:(NSSet *)values;
-- (void)removeAbGroups:(NSSet *)values;
+- (void)addGroupsObject:(NSManagedObject *)value;
+- (void)removeGroupsObject:(NSManagedObject *)value;
+- (void)addGroups:(NSSet *)values;
+- (void)removeGroups:(NSSet *)values;
 
 - (void)addInfluencesObject:(NSManagedObject *)value;
 - (void)removeInfluencesObject:(NSManagedObject *)value;
