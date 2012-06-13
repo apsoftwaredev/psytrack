@@ -39,6 +39,8 @@
     
     ABAddressBookRef addressBook;
     ABRecordRef source;
+    int groupRecordIDToDelete;
+    UIView *detailViewSuperview;
 }
 @property (nonatomic, strong) UINavigationController *rootNavController;
 @property (nonatomic, strong) EKEventStore *eventStore;

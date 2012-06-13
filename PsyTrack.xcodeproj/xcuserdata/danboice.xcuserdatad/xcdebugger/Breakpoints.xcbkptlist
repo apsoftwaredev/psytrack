@@ -8,63 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "InAppSettingsViewController.m"
-         timestampString = "361233429.863925"
+         timestampString = "361246581.001369"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1141"
-         endingLineNumber = "1141"
-         landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "InAppSettingsViewController.m"
-         timestampString = "361233429.863925"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1146"
-         endingLineNumber = "1146"
-         landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "InAppSettingsViewController.m"
-         timestampString = "361233429.863925"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1219"
-         endingLineNumber = "1219"
-         landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "InAppSettingsViewController.m"
-         timestampString = "361233429.863925"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1230"
-         endingLineNumber = "1230"
-         landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "InAppSettingsViewController.m"
-         timestampString = "361233429.863925"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2575"
-         endingLineNumber = "2575"
+         startingLineNumber = "2527"
+         endingLineNumber = "2527"
          landmarkName = "-changeABGroupNameFrom:To:addNew:checkExisting:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -190,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "InAppSettingsViewController.m"
-         timestampString = "361233429.863925"
+         timestampString = "361246581.001369"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2815"
-         endingLineNumber = "2815"
+         startingLineNumber = "2767"
+         endingLineNumber = "2767"
          landmarkName = "-importAllContactsInGroup"
          landmarkType = "5">
       </FileBreakpoint>
@@ -203,11 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "InAppSettingsViewController.m"
-         timestampString = "361233429.863925"
+         timestampString = "361246581.001369"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2390"
-         endingLineNumber = "2390"
+         startingLineNumber = "2342"
+         endingLineNumber = "2342"
          landmarkName = "@implementation InAppSettingsViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -914,11 +862,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "InAppSettingsViewController.m"
-         timestampString = "361233429.863925"
+         timestampString = "361246581.001369"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2990"
-         endingLineNumber = "2990"
+         startingLineNumber = "2942"
+         endingLineNumber = "2942"
          landmarkName = "-abSourcesDoneButtonTapped:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -927,11 +875,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "InAppSettingsViewController.m"
-         timestampString = "361233429.863925"
+         timestampString = "361246581.001369"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3011"
-         endingLineNumber = "3011"
+         startingLineNumber = "2963"
+         endingLineNumber = "2963"
          landmarkName = "-defaultABSourceID"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6817,6 +6765,45 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1006"
          endingLineNumber = "1006"
+         landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "InAppSettingsViewController.m"
+         timestampString = "361246357.666197"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1417"
+         endingLineNumber = "1417"
+         landmarkName = "-alertView:clickedButtonAtIndex:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "InAppSettingsViewController.m"
+         timestampString = "361244845.1361"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1216"
+         endingLineNumber = "1216"
+         landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "InAppSettingsViewController.m"
+         timestampString = "361244855.824157"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1152"
+         endingLineNumber = "1152"
          landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
