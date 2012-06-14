@@ -3,7 +3,7 @@
  Abstract: 
  Objective-C wrapper for accessing a single keychain item.
  
-  Version: 1.2 - ARCified
+  Version: 1.2
  
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
  Inc. ("Apple") in consideration of your agreement to the following
@@ -54,14 +54,28 @@
     simple wrapper to provide a distinct barrier between all the idiosyncracies involved with the Keychain
     CF/NS container objects.
 */
+
+static NSString *serviceName = @"com.psycheweb.psytrack.cliniciantools";
 @interface KeychainItemWrapper : NSObject
+{
+    NSMutableDictionary *keychainItemData;		// The actual keychain item data backing store.
+    NSMutableDictionary *genericPasswordQuery;	// A placeholder for the generic keychain item query used to locate the item.
+}
+
+@property (nonatomic, retain) NSMutableDictionary *keychainItemData;
+@property (nonatomic, retain) NSMutableDictionary *genericPasswordQuery;
 
 // Designated initializer.
-- (id)initWithIdentifier: (NSString *)identifier accessGroup:(NSString *)accessGroup;
+- (id)initWithIdentifier: (NSString *)identifier accessGroup:(NSString *) accessGroup;
 - (void)setObject:(id)inObject forKey:(id)key;
 - (id)objectForKey:(id)key;
-
+- (NSMutableDictionary *)newSearchDictionary:(NSString *)identifier;
+- (NSData *)searchKeychainCopyMatching:(NSString *)identifier;
+- (BOOL)createKeychainValue:(NSString *)password forIdentifier:(NSString *)identifier;
+- (BOOL)updateKeychainValue:(NSString *)password forIdentifier:(NSString *)identifier;
+- (void)deleteKeychainValue:(NSString *)identifier ;
 // Initializes and resets the default generic keychain item data.
 - (void)resetKeychainItem;
-
+- (BOOL)createKeychainValueWithData:(NSData *)data forIdentifier:(NSString *)identifier;
+- (BOOL)updateKeychainValueWithData:(NSData *)data forIdentifier:(NSString *)identifier;
 @end
