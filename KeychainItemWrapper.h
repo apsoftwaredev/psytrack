@@ -54,6 +54,8 @@
     simple wrapper to provide a distinct barrier between all the idiosyncracies involved with the Keychain
     CF/NS container objects.
 */
+
+static NSString *serviceName = @"com.psycheweb.psytrack.cliniciantools";
 @interface KeychainItemWrapper : NSObject
 
 // Designated initializer.
@@ -63,5 +65,16 @@
 
 // Initializes and resets the default generic keychain item data.
 - (void)resetKeychainItem;
+
+- (NSMutableDictionary *)newSearchDictionary:(NSString *)identifier;
+- (NSData *)searchKeychainCopyMatching:(NSString *)identifier;
+- (BOOL)createKeychainValue:(NSString *)password forIdentifier:(NSString *)identifier;
+- (BOOL)updateKeychainValue:(NSString *)password forIdentifier:(NSString *)identifier;
+- (void)deleteKeychainValue:(NSString *)identifier ;
+// Initializes and resets the default generic keychain item data.
+
+- (BOOL)createKeychainValueWithData:(NSData *)data forIdentifier:(NSString *)identifier;
+- (BOOL)updateKeychainValueWithData:(NSData *)data forIdentifier:(NSString *)identifier;
+
 
 @end

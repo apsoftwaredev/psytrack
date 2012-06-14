@@ -288,11 +288,11 @@ if(section.headerTitle !=nil)
 
 - (void) setLockedAtStartup:(BOOL)value;
 {
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    NSMutableDictionary *lockDictionary=(NSMutableDictionary *)[appDelegate lockValuesDictionary];
     
-	[lockDictionary setValue:[NSNumber numberWithBool:value] forKey:K_LOCK_SCREEN_LOCK_AT_STARTUP];
-    [appDelegate saveLockDictionarySettings];
+    LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
+	
+    appSettings.lockScreenLockAtStartup=value;
+    
     
 }
 
@@ -300,9 +300,8 @@ if(section.headerTitle !=nil)
 - (NSString *) currentPasscode;
 {
 	PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    NSMutableDictionary *lockDictionary=(NSMutableDictionary *)[appDelegate lockValuesDictionary];
-    
-	return [lockDictionary valueForKey: K_LOCK_SCREEN_PASSCODE];		
+   
+	return [appDelegate passCodeItem];		
 }
 
 - (void) updatePasscodeSettings: (NSString *) newCode;

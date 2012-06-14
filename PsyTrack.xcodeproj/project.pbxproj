@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		376798041500665D00D0639D /* ABGroupNameChangeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376797F61500665D00D0639D /* ABGroupNameChangeCell.xib */; };
-		376798051500665D00D0639D /* InAppSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376797F81500665D00D0639D /* InAppSettingsViewController.xib */; };
+		376798051500665D00D0639D /* ClinicianGroupsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376797F81500665D00D0639D /* ClinicianGroupsViewController.xib */; };
 		376798071500665D00D0639D /* LongTimePickerCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376797FC1500665D00D0639D /* LongTimePickerCell_iPhone.xib */; };
 		376798081500665D00D0639D /* MyPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376797FE1500665D00D0639D /* MyPickerView.xib */; };
 		3767980A1500665D00D0639D /* WebViewDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376798021500665D00D0639D /* WebViewDetailViewController.xib */; };
@@ -116,7 +116,7 @@
 		37F7CE80150057C300AD2C3A /* CliniciansRootViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CE7D150057C300AD2C3A /* CliniciansRootViewController_iPad.xib */; };
 		37F7CE84150057FC00AD2C3A /* ClinicianViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CE82150057FC00AD2C3A /* ClinicianViewController.xib */; };
 		37F7CE871500582600AD2C3A /* ClinicianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE861500582600AD2C3A /* ClinicianViewController.m */; };
-		37F7CE8C1500588900AD2C3A /* InAppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE891500588900AD2C3A /* InAppSettingsViewController.m */; };
+		37F7CE8C1500588900AD2C3A /* ClinicianGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE891500588900AD2C3A /* ClinicianGroupsViewController.m */; };
 		37F7CE8D1500588900AD2C3A /* MySource.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE8B1500588900AD2C3A /* MySource.m */; };
 		37F7CE951500592900AD2C3A /* Age.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE921500592900AD2C3A /* Age.m */; };
 		37F7CE961500592900AD2C3A /* ClientPresentations_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE941500592900AD2C3A /* ClientPresentations_Shared.m */; };
@@ -228,6 +228,9 @@
 		E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B76150858D3005B798A /* ABGroupSelectionCell.m */; };
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 		E75F7786151CC574002B10AE /* LogEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F7785151CC574002B10AE /* LogEntity.m */; };
+		E761986C1589070400C5BB8F /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E761986B1589070400C5BB8F /* KeychainItemWrapper.m */; };
+		E7619874158946B100C5BB8F /* ClientGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7619872158946B100C5BB8F /* ClientGroupsViewController.m */; };
+		E7619875158946B100C5BB8F /* ClientGroupsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7619873158946B100C5BB8F /* ClientGroupsViewController.xib */; };
 		E76984DE158636C200D760A6 /* ClinicianGroupEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E76984DD158636C200D760A6 /* ClinicianGroupEntity.m */; };
 		E76984E115869C2C00D760A6 /* ipad-background-blue-plain-small.png in Resources */ = {isa = PBXBuildFile; fileRef = E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */; };
 		E76984E215869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E76984E015869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png */; };
@@ -314,7 +317,6 @@
 		E7A5D7081559EB26000F248F /* DetailViewControllerTheme.ptt in Resources */ = {isa = PBXBuildFile; fileRef = E7A5D7071559EB26000F248F /* DetailViewControllerTheme.ptt */; };
 		E7A92491154853760080B35D /* DrugTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7A92490154853760080B35D /* DrugTestViewController.xib */; };
 		E7A9249315485E6C0080B35D /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E7A9249215485E6C0080B35D /* blueArrow.png */; };
-		E7B0A5B815347C430027F637 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B0A5B715347C430027F637 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
 		E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */; };
@@ -365,7 +367,7 @@
 
 /* Begin PBXFileReference section */
 		376797F71500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ABGroupNameChangeCell.xib; sourceTree = "<group>"; };
-		376797F91500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InAppSettingsViewController.xib; sourceTree = "<group>"; };
+		376797F91500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ClinicianGroupsViewController.xib; sourceTree = "<group>"; };
 		376797FD1500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LongTimePickerCell_iPhone.xib; sourceTree = "<group>"; };
 		376797FF1500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MyPickerView.xib; sourceTree = "<group>"; };
 		376798031500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/WebViewDetailViewController.xib; sourceTree = "<group>"; };
@@ -535,8 +537,8 @@
 		37F7CE83150057FC00AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ClinicianViewController.xib; sourceTree = "<group>"; };
 		37F7CE851500582600AD2C3A /* ClinicianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianViewController.h; sourceTree = "<group>"; };
 		37F7CE861500582600AD2C3A /* ClinicianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicianViewController.m; sourceTree = "<group>"; };
-		37F7CE881500588900AD2C3A /* InAppSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppSettingsViewController.h; sourceTree = "<group>"; };
-		37F7CE891500588900AD2C3A /* InAppSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppSettingsViewController.m; sourceTree = "<group>"; };
+		37F7CE881500588900AD2C3A /* ClinicianGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianGroupsViewController.h; sourceTree = "<group>"; };
+		37F7CE891500588900AD2C3A /* ClinicianGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicianGroupsViewController.m; sourceTree = "<group>"; };
 		37F7CE8A1500588900AD2C3A /* MySource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySource.h; sourceTree = "<group>"; };
 		37F7CE8B1500588900AD2C3A /* MySource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySource.m; sourceTree = "<group>"; };
 		37F7CE911500592900AD2C3A /* Age.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Age.h; sourceTree = "<group>"; };
@@ -689,6 +691,11 @@
 		E7516B7A15085A23005B798A /* PTABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTABGroup.m; sourceTree = "<group>"; };
 		E75F7784151CC574002B10AE /* LogEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogEntity.h; sourceTree = "<group>"; };
 		E75F7785151CC574002B10AE /* LogEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogEntity.m; sourceTree = "<group>"; };
+		E761986B1589070400C5BB8F /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KeychainItemWrapper.m; path = MapperTheme/KeychainItemWrapper.m; sourceTree = "<group>"; };
+		E761986D15890C2E00C5BB8F /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		E7619871158946B100C5BB8F /* ClientGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientGroupsViewController.h; sourceTree = "<group>"; };
+		E7619872158946B100C5BB8F /* ClientGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientGroupsViewController.m; sourceTree = "<group>"; };
+		E7619873158946B100C5BB8F /* ClientGroupsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientGroupsViewController.xib; sourceTree = "<group>"; };
 		E76984DC158636C200D760A6 /* ClinicianGroupEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianGroupEntity.h; sourceTree = "<group>"; };
 		E76984DD158636C200D760A6 /* ClinicianGroupEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicianGroupEntity.m; sourceTree = "<group>"; };
 		E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-background-blue-plain-small.png"; sourceTree = "<group>"; };
@@ -803,8 +810,6 @@
 		E7A5D7071559EB26000F248F /* DetailViewControllerTheme.ptt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DetailViewControllerTheme.ptt; sourceTree = "<group>"; };
 		E7A92490154853760080B35D /* DrugTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrugTestViewController.xib; sourceTree = "<group>"; };
 		E7A9249215485E6C0080B35D /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
-		E7B0A5B615347C430027F637 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
-		E7B0A5B715347C430027F637 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		E7C0749D150E60B4009C5498 /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = "<group>"; };
 		E7C0749E150E60B4009C5498 /* KeyEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyEntity.m; sourceTree = "<group>"; };
 		E7C074A0150EE4DE009C5498 /* EncryptedSCDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCDateCell.h; sourceTree = "<group>"; };
@@ -1191,11 +1196,14 @@
 			children = (
 				E76984EB15879E5300D760A6 /* ClientGroupEntity.h */,
 				E76984EC15879E5300D760A6 /* ClientGroupEntity.m */,
-				376797F81500665D00D0639D /* InAppSettingsViewController.xib */,
-				37F7CE881500588900AD2C3A /* InAppSettingsViewController.h */,
-				37F7CE891500588900AD2C3A /* InAppSettingsViewController.m */,
+				376797F81500665D00D0639D /* ClinicianGroupsViewController.xib */,
+				37F7CE881500588900AD2C3A /* ClinicianGroupsViewController.h */,
+				37F7CE891500588900AD2C3A /* ClinicianGroupsViewController.m */,
 				37F7CE8A1500588900AD2C3A /* MySource.h */,
 				37F7CE8B1500588900AD2C3A /* MySource.m */,
+				E7619871158946B100C5BB8F /* ClientGroupsViewController.h */,
+				E7619872158946B100C5BB8F /* ClientGroupsViewController.m */,
+				E7619873158946B100C5BB8F /* ClientGroupsViewController.xib */,
 			);
 			name = "In App Settings";
 			sourceTree = "<group>";
@@ -1449,8 +1457,8 @@
 			isa = PBXGroup;
 			children = (
 				E798A02F15845941006B9DBD /* MapperTheme */,
-				E7B0A5B615347C430027F637 /* KeychainItemWrapper.h */,
-				E7B0A5B715347C430027F637 /* KeychainItemWrapper.m */,
+				E761986D15890C2E00C5BB8F /* KeychainItemWrapper.h */,
+				E761986B1589070400C5BB8F /* KeychainItemWrapper.m */,
 				E78A8D191531EDF10099FE5B /* Reachability.h */,
 				E78A8D1A1531EDF10099FE5B /* Reachability.m */,
 				37F7CFFF150063CE00AD2C3A /* TabFile.h */,
@@ -1857,7 +1865,7 @@
 				37F7CFD1150060D400AD2C3A /* Settings.bundle in Resources */,
 				37F7CFDD1500624000AD2C3A /* CasualAlertViewController.xib in Resources */,
 				376798041500665D00D0639D /* ABGroupNameChangeCell.xib in Resources */,
-				376798051500665D00D0639D /* InAppSettingsViewController.xib in Resources */,
+				376798051500665D00D0639D /* ClinicianGroupsViewController.xib in Resources */,
 				376798071500665D00D0639D /* LongTimePickerCell_iPhone.xib in Resources */,
 				376798081500665D00D0639D /* MyPickerView.xib in Resources */,
 				3767980A1500665D00D0639D /* WebViewDetailViewController.xib in Resources */,
@@ -1924,6 +1932,7 @@
 				E798A1311585593D006B9DBD /* mapper-ipad-full.ptt in Resources */,
 				E76984E115869C2C00D760A6 /* ipad-background-blue-plain-small.png in Resources */,
 				E76984E215869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png in Resources */,
+				E7619875158946B100C5BB8F /* ClientGroupsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1995,7 +2004,7 @@
 				37F7CE791500578B00AD2C3A /* CliniciansDetailViewController_iPad.m in Sources */,
 				37F7CE7A1500578B00AD2C3A /* CliniciansRootViewController_iPad.m in Sources */,
 				37F7CE871500582600AD2C3A /* ClinicianViewController.m in Sources */,
-				37F7CE8C1500588900AD2C3A /* InAppSettingsViewController.m in Sources */,
+				37F7CE8C1500588900AD2C3A /* ClinicianGroupsViewController.m in Sources */,
 				37F7CE8D1500588900AD2C3A /* MySource.m in Sources */,
 				37F7CE951500592900AD2C3A /* Age.m in Sources */,
 				37F7CE961500592900AD2C3A /* ClientPresentations_Shared.m in Sources */,
@@ -2055,7 +2064,6 @@
 				E7E1A63D152E873500C227E8 /* TimeTrackViewController.m in Sources */,
 				E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */,
 				E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */,
-				E7B0A5B815347C430027F637 /* KeychainItemWrapper.m in Sources */,
 				E7A21370155B34CD005CF154 /* LogoBackgroundViewController.m in Sources */,
 				E7FB3AAD1562A4E4000A6782 /* TwoButtonCell.m in Sources */,
 				E7FB3AB31562C867000A6782 /* AddViewABLinkButtonCell.m in Sources */,
@@ -2079,6 +2087,8 @@
 				E798A13A15857D6C006B9DBD /* ColorSwitcher.m in Sources */,
 				E76984DE158636C200D760A6 /* ClinicianGroupEntity.m in Sources */,
 				E76984ED15879E5300D760A6 /* ClientGroupEntity.m in Sources */,
+				E761986C1589070400C5BB8F /* KeychainItemWrapper.m in Sources */,
+				E7619874158946B100C5BB8F /* ClientGroupsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2106,12 +2116,12 @@
 			name = ABGroupNameChangeCell.xib;
 			sourceTree = "<group>";
 		};
-		376797F81500665D00D0639D /* InAppSettingsViewController.xib */ = {
+		376797F81500665D00D0639D /* ClinicianGroupsViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				376797F91500665D00D0639D /* en */,
 			);
-			name = InAppSettingsViewController.xib;
+			name = ClinicianGroupsViewController.xib;
 			sourceTree = "<group>";
 		};
 		376797FC1500665D00D0639D /* LongTimePickerCell_iPhone.xib */ = {

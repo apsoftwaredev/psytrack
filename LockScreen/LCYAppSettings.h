@@ -19,29 +19,31 @@ static NSString * const K_LOCK_SCREEN_DF_HASH= @"df_hash";
 static NSString * const K_LOCK_SCREEN_RAN= @"ran_st";
 static NSString * const K_LOCK_SCREEN_CURRENT_KEYSTRING= @"current_keyString";
 @interface LCYAppSettings : NSObject 
-{
-	BOOL lockScreenPasscodeIsOn_;
-	NSString *lockScreenPasscode_;
-//    NSString *lockScreenChallengePhrase_;
-//    NSString *lockScreenChallengeResponse_;
-	NSInteger lockScreenUserPasscodeAttempt_;
-    BOOL lockScreenLocked_;
-    BOOL lockScreenTimerOn_;
-   BOOL lockScreenLockAtStartup_;
-}
 
-@property (nonatomic, assign) BOOL lockScreenPasscodeIsOn;
-@property (nonatomic, assign) BOOL lockScreenLocked;
-@property (nonatomic, assign) NSInteger lockScreenPasscodeAttempt;
-@property (nonatomic, strong) NSString *lockScreenPasscode;
-//@property (nonatomic, retain) NSString *lockScreenChallengePhrase;
-//@property (nonatomic, retain) NSString *lockScreenChallengeResponse;
 
-@property (nonatomic, assign) BOOL lockScreenTimerOn;
-@property (nonatomic, assign) BOOL lockScreenLockAtStartup;
 
-- (void) updateProperties;
-- (BOOL) synchronize;
--(BOOL)saveSettings;
+-(BOOL)setPasscodeDataWithString:(NSString *)passcodeString;
+
+
+-(BOOL)setLockScreenLocked:(BOOL)lockScreenLocked;
+
+-(BOOL)setLockScreenIsOn:(BOOL)lockScreenIsOn;
+
+-(BOOL)setLockScreenAttempt:(int)attempt;
+
+
+-(BOOL)setLockScreenStartup:(BOOL)lockOnStartup;
+
+-(BOOL)setLockScreenTimerOn:(BOOL)timerOn;
+
+-(NSData *)passcodeData;
+
+- (BOOL) isPasscodeOn;
+- (BOOL) isLockedAtStartup;
+
+
+
+-(BOOL)isAppLocked;
+-(BOOL)isLockedTimerOn;
 
 @end

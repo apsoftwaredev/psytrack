@@ -1680,7 +1680,7 @@
     //add the property definition to the clinician class 
     [self.clinicianDef addPropertyDefinition:deleteABLinkButtonCellProperty];
   
-        SCEntityDefinition *abGroupsDef=[SCEntityDefinition definitionWithEntityName:@"ClinicianGroupEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"groupName", @"addressBookSync",nil]];
+        SCEntityDefinition *abGroupsDef=[SCEntityDefinition definitionWithEntityName:@"ClinicianGroupEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"groupName", @"addressBookSync",@"addNewClinicians",nil]];
         
         
         SCPropertyDefinition *abGroupsPropertyDef=[self.clinicianDef propertyDefinitionWithName:@"groups"];
@@ -1917,24 +1917,27 @@
                     
                     int addressBookRecordIdentifier=(int )[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"]intValue]; 
                     
+                   ;
                     
-                    if (addressBookRecordIdentifier!=-1 && ![self checkIfRecordIDInAddressBook:addressBookRecordIdentifier]) {
-                        addressBookRecordIdentifier=-1;
-                        [cell.boundObject setValue:[NSNumber numberWithInt:-1 ]forKey:@"aBRecordIdentifier"];
-                    }
-                    
-                    
-                    if (addressBookRecordIdentifier!=-1) {
                         
-                        [addViewButtonCell toggleButtonsWithButtonOneHidden:YES];
+                        if (addressBookRecordIdentifier!=-1 && ![self checkIfRecordIDInAddressBook:addressBookRecordIdentifier]) {
+                            addressBookRecordIdentifier=-1;
+                            [cell.boundObject setValue:[NSNumber numberWithInt:-1 ]forKey:@"aBRecordIdentifier"];
+                        }
+                       
+
                         
-                    }
-                    else 
-                    {
-                       [addViewButtonCell toggleButtonsWithButtonOneHidden:NO];
-                    }
+                        if (addressBookRecordIdentifier!=-1) {
+                            
+                            [addViewButtonCell toggleButtonsWithButtonOneHidden:YES];
+                            
+                        }
+                        else 
+                        {
+                           [addViewButtonCell toggleButtonsWithButtonOneHidden:NO];
+                        }
                     
-                    
+                  
                     
                 } 
                 break;
@@ -2596,7 +2599,7 @@
         
 
     UIColor *backgroundColor=[UIColor clearColor];
-    if(indexPath.row==NSNotFound|| tableModel.tag>0||isInDetailSubview)
+    if(indexPath.row==NSNotFound|| tableModel.tag>0 ||isInDetailSubview)
     {
        
         backgroundColor=(UIColor *)appDelegate.window.backgroundColor;
@@ -2906,12 +2909,20 @@
         if (cellManagedObject&& [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject isKindOfClass:[ClinicianEntity class]]) {
             ClinicianEntity *clinicianBoundToCell=(ClinicianEntity *)cellManagedObject;
             
-            [self synchronizeAddressBookGroupsForClinician:clinicianBoundToCell];
+        
             
+                            
+                [self synchronizeAddressBookGroupsForClinician:clinicianBoundToCell];
+                
+            }
+  
         }
         
         
-    }
+        
+        
+        
+ 
 
 
 
@@ -2928,9 +2939,21 @@
         
         if (cellManagedObject&& [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject isKindOfClass:[ClinicianEntity class]]) {
             ClinicianEntity *clinicianBoundToCell=(ClinicianEntity *)cellManagedObject;
+          
+           
+           
             
-            [self synchronizeAddressBookGroupsForClinician:clinicianBoundToCell];
             
+                                
+                [self synchronizeAddressBookGroupsForClinician:clinicianBoundToCell];
+     
+                    
+               
+            
+            
+           
+            
+     
         }
         
         
@@ -3086,9 +3109,12 @@
                             [sectionAtIndex commitCellChanges];
                         }
                            
-                        [self evaluateWhichABViewControllerToShow];
-                            
+                        
+                           
+                            [self evaluateWhichABViewControllerToShow];
+                        
                         } 
+                        
                         
                         else {
                             [[PTTAppDelegate appDelegate] displayNotification:@"A first and last name before adding or use look up.."  forDuration:8.0 location:kPTTScreenLocationTop inView:tableViewModel.viewController.view.superview];
@@ -3399,19 +3425,21 @@
 
 
 }
--(BOOL)checkIfRecordIDInAddressBook:(int)recordID{
+-(BOOL)checkIfRecordIDInAddressBook:(int)recordID {
 
 
-    ABAddressBookRef addressBook;
-    addressBook=nil;
-    addressBook=ABAddressBookCreate();
+    ABAddressBookRef addressBookCheck=nil;
+    if (!addressBookCheck) {
+        addressBookCheck=ABAddressBookCreate();
+    }
     
-
     
     BOOL exists=NO;
+    if (addressBookCheck) {
+   
     if (recordID>0) {
   
-        ABRecordRef person=(ABRecordRef ) ABAddressBookGetPersonWithRecordID(addressBook, recordID);
+        ABRecordRef person=(ABRecordRef ) ABAddressBookGetPersonWithRecordID(addressBookCheck, recordID);
 
         if (person) {
             exists=YES;
@@ -3420,7 +3448,9 @@
         
         
     }
-    
+   
+        addressBookCheck=nil;
+    }
         
     return exists;
 
@@ -3490,31 +3520,12 @@
 
 -(void)evaluateWhichABViewControllerToShow
 {
-	// Fetch the address book 
-    //	ABAddressBookRef addressBook = ABAddressBookCreate();
+	
+   
+   
     
-    
-    ABAddressBookRef addressBook;
-    addressBook=nil;
-    addressBook=ABAddressBookCreate();
 
-    //    
-    //    
-    //
-    //    // Search for the person named "Appleseed" in the address book
-    //	
-    //    
-    
-    
-    
-    NSString *groupName=(NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
-    int groupIdentifier=(NSInteger )[(NSNumber *)[[NSUserDefaults standardUserDefaults]valueForKey:kPTTAddressBookGroupIdentifier]intValue];
-    
-    BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults] boolForKey:kPTAutoAddClinicianToGroup];
-    
-    //NSLog(@"group Name %@",groupName);
-    //    
-    //    
+  
     
     existingPersonRecordID=[(NSNumber *)clinician.aBRecordIdentifier intValue];
     if (existingPersonRecordID!=-1&&![self checkIfRecordIDInAddressBook:(int)existingPersonRecordID]) {
@@ -3533,105 +3544,32 @@
         //    
         //    //NSLog(@"existingPerson_ record id %@",existingPersonRef);
         
-        if (!groupName.length) {
-            groupName=@"Clinicians";
-            [[NSUserDefaults standardUserDefaults] setValue:groupName forKeyPath:kPTTAddressBookGroupName];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }  
-        
-        ABRecordRef group;
-    
-        group=nil;
-  
-        if (groupIdentifier>-1) {
-            group=ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, groupIdentifier);
-            
-        }
-        
-        if (!group && autoAddClinicianToGroup) {
-            
-            [self changeABGroupNameTo:groupName addNew:NO checkExisting:(BOOL)YES];
-            
-            groupIdentifier=(NSInteger )[(NSNumber *)[[NSUserDefaults standardUserDefaults]valueForKey:kPTTAddressBookGroupIdentifier]intValue];
-            
-            if (groupIdentifier>-1) {
-                group=ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, groupIdentifier);
-                
-            }
-            
-            
-            
-            //        ABRecordRef CFAddressBookGroupRecord =  ABGroupCreate ();
-            
-            //        group=ABGroupCreate();
-            //        
-            //        //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
-            //        
-            //        //        //NSLog(@"group composite name is %@",groupRecord.compositeName);
-            //       
-            //        bool didSetGroupName=FALSE;
-            //        didSetGroupName= (bool) ABRecordSetValue (
-            //                              group,
-            //                               (ABPropertyID) kABGroupNameProperty,
-            //                               (__bridge CFStringRef)groupName  ,
-            //                              nil
-            //                               );  
-            //        //        //NSLog(@"group record identifier is %i",groupRecord.recordID);
-            //      
-            //        BOOL wantToSaveChanges=TRUE;
-            //        if (ABAddressBookHasUnsavedChanges(addressBook)) {
-            //            
-            //            if (wantToSaveChanges) 
-            //            {
-            //                bool didSave=FALSE;
-            //                didSave = ABAddressBookSave(addressBook, nil);
-            //                
-            //                if (!didSave) {/* Handle error here. */}
-            //           
-            //            } 
-            //            else 
-            //            {
-            //                
-            //                ABAddressBookRevert(addressBook);
-            //                
-            //            }
-            //            
-            //        }
-            
-            //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
-            
-            //        //NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
-            //        
-            //        //NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
-            //        
-            //        
-            //        [[NSUserDefaults standardUserDefaults] setInteger:(NSInteger )ABRecordGetRecordID(group) forKey:kPTTAddressBookGroupIdentifier];
-            //        
-            //        [[NSUserDefaults standardUserDefaults]synchronize];
-            
-        }
         
         if (existingPersonRecordID==-1) {
+   
             
-          
-            
-           
             
             //crashes if try to release and show alert view
             NSString *name=[NSString string];
             name=(NSString *)[NSString stringWithFormat:@"%@ %@",clinician.firstName, clinician.lastName];
             
+            NSLog(@"name string is %@",name);
             CFArrayRef peopleWithNameArray=nil;
             
            
             
-            ABAddressBookRef addressBookNew=nil;
-            addressBookNew=ABAddressBookCreate();
-            if (name.length && addressBookNew) {
-                 peopleWithNameArray= ABAddressBookCopyPeopleWithName((ABAddressBookRef) addressBookNew, (__bridge CFStringRef) name);
-            
            
+            if (name.length) {
+                
+                ABAddressBookRef addressBookForPeopleArray=nil;
+                addressBookForPeopleArray=ABAddressBookCreate();
+                 
+                if (addressBookForPeopleArray) {
+               
+                peopleWithNameArray= ABAddressBookCopyPeopleWithName((ABAddressBookRef) addressBookForPeopleArray, (__bridge CFStringRef) name);
             
+                    addressBookForPeopleArray=nil;
+                }
             
             //NSLog(@" people with name array %@",peopleWithNameArray);
             
@@ -3670,12 +3608,9 @@
                 
                 //            [self showUnknownPersonViewControllerWithABRecordRef:(ABRecordRef)person.recordRef];
                 
-                if (addressBookNew!=NULL) {
-                    CFRelease(addressBookNew);
-                }
-                
+                                
                  name=NULL;
-                
+            
             }
                
 
@@ -3711,19 +3646,10 @@
 
                 
                 [alert show];
-                group=nil;
-                addressBook=nil;
-                if (addressBook!=NULL) {
-                    CFRelease(addressBook);
-                }
+             
+               
                 
-                if (addressBookNew!=NULL) {
-                    CFRelease(addressBookNew);
-                }
-                if (group!=NULL) {
-                    CFRelease(group);
-                    
-                }
+                
             
             }
                 
@@ -3733,7 +3659,7 @@
             else
                 
             {
-                
+               
                 
                 ABRecordRef  existingPersonRef=ABPersonCreate();
                 
@@ -3762,16 +3688,13 @@
                     ABRecordSetValue(existingPersonRef, kABPersonNoteProperty, (__bridge CFStringRef) clinician.notes, nil) ;
                 }
 //                //NSLog(@"group issdfsdf %@",group);
-                [personAddNewViewController_ setAddressBook:addressBook];
+                [personAddNewViewController_ setAddressBook:addressBookForPeopleArray];
                 if (self.personAddNewViewController) {
                     self.personAddNewViewController.view=nil;
                     self.personAddNewViewController=nil;
                 }
                 self.personAddNewViewController=[[ABNewPersonViewController alloc]init];;
-                if (autoAddClinicianToGroup && group) {
-                    personAddNewViewController_.parentGroup=group;
-                }
-                
+               
                
                 
                 personAddNewViewController_.newPersonViewDelegate=self;
@@ -3796,11 +3719,7 @@
                 [[currentDetailTableViewModel_.viewController navigationController] presentModalViewController:navController animated:YES];
                 
                 addExistingAfterPromptBool=FALSE;
-                //            [currentDetailTableViewModel.viewController.navigationController presentModalViewController:personToAddViewController animated:YES ];
-                if (group!=NULL) {
-                    CFRelease(group);
-                }  
-                
+                //            [currentDetailTableViewModel.viewController.navigationController presentModalViewController:                
             
 //            if (addressBook!=NULL) {
 //                CFRelease(addressBook);
@@ -3821,13 +3740,13 @@
             //NSLog(@"existing record id is %i",existingPersonRecordID);
             
             [self showPersonViewControllerForRecordID:(int)existingPersonRecordID];
-            if (addressBook!=NULL) {
-                CFRelease(addressBook);
-            } 
+            
+     
         }
-        
+     
+       
    
-    
+
 }
 
 
@@ -4215,18 +4134,15 @@
 -(void)showPersonViewControllerForRecordID:(int)recordID
 {
 	
-    
-    if (recordID) {
-        
-        ABAddressBookRef addressBook;
-        addressBook=nil;
-        addressBook=ABAddressBookCreate();
-        
+    ABAddressBookRef addressBookForShowPerson=ABAddressBookCreate();
+        if (addressBookForShowPerson) {
+      
+                
 
         ABRecordRef existingPerson=nil;
-        existingPerson=ABAddressBookGetPersonWithRecordID(addressBook, recordID);
+        existingPerson=ABAddressBookGetPersonWithRecordID(addressBookForShowPerson, recordID);
 
-        
+            
        
         if (!self.personViewController) {
             self.personViewController=[[ABPersonViewController alloc]init];
@@ -4475,90 +4391,91 @@
     
     
     if (person) {
-        ABAddressBookRef addressBookRef=personAddNewViewController_.addressBook;
-        
-        BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults] boolForKey:kPTAutoAddClinicianToGroup];
-        bool didSave=NO;
-        if (autoAddClinicianToGroup||abGroupObjectSelectionCell_.abGroupsArray.count) 
-        {
-            
-            int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
-            
-            if (groupIdentifier==-1) {
-                
-                [self changeABGroupNameTo:nil addNew:YES checkExisting:(BOOL)YES];
-                
-            }
-            
-            groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
-            
-            
-            if (groupIdentifier>-1) 
-            {
-                
-                ABRecordRef group= ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBookRef, (ABRecordID) groupIdentifier);
-                
-                ABGroupAddMember(group, person, nil);
-                didSave=( bool )  ABAddressBookAddRecord(addressBookRef, group, nil);
-                //NSLog(@"group is %@",group);
-            }
-            
-            
-            
-            
-        }
-        else 
-        {
-            
-            didSave=(bool) ABAddressBookAddRecord(addressBookRef, person, nil);
-        }
-        
-        
-        
-        
-        
-        BOOL wantToSaveChanges=YES;
-        
-        
-        
-        //NSLog(@"did save group add member %i ",didSave); 
-        
-        
-        if (ABAddressBookHasUnsavedChanges(addressBookRef)) {
-            
-            if (wantToSaveChanges) {
-                
-                didSave = ABAddressBookSave(addressBookRef, nil);
-                
-                if (!didSave) 
-                {
-                    /* Handle error here. */
-                }
-                
-            } 
-            else 
-            {
-                
-                ABAddressBookRevert(addressBookRef);
-                
-            }
-            
-        }
-        
-        
-        //        if ([addressBook_ hasUnsavedChanges]) {
-        //            //NSLog(@"displayed person is %@ and %@",personAddNewViewController_, personAddNewViewController_.displayedPerson);
-        //            existingPerson_=[addressBook personWithRecordRef:personAddNewViewController_.displayedPerson];
-        //            
-        //            didSave= [addressBook addRecord:(ABRecord *)existingPerson_];
-        //            //NSLog(@"didsave is equal to %i",didSave);
-        //            didSave= [addressBook save];
-        //            
-        //
-        //        }
-        
-        
-        //    //NSLog(@"didsave addressbook is %i",didSave);
+//        
+//        addressBook=personAddNewViewController_.addressBook;
+//        
+//        BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults] boolForKey:kPTAutoAddClinicianToGroup];
+//        bool didSave=NO;
+//        if (autoAddClinicianToGroup||abGroupObjectSelectionCell_.abGroupsArray.count) 
+//        {
+//            
+//            int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
+//            
+//            if (groupIdentifier==-1) {
+//                
+//                [self changeABGroupNameTo:nil addNew:YES checkExisting:(BOOL)YES];
+//                
+//            }
+//            
+//            groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
+//            
+//            
+//            if (groupIdentifier>-1) 
+//            {
+//                
+//                ABRecordRef group= ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, (ABRecordID) groupIdentifier);
+//                
+//                ABGroupAddMember(group, person, nil);
+//                didSave=( bool )  ABAddressBookAddRecord(addressBook, group, nil);
+//                //NSLog(@"group is %@",group);
+//            }
+//            
+//            
+//            
+//            
+//        }
+//        else 
+//        {
+//            
+//            didSave=(bool) ABAddressBookAddRecord(addressBook, person, nil);
+//        }
+//        
+//        
+//        
+//        
+//        
+//        BOOL wantToSaveChanges=YES;
+//        
+//        
+//        
+//        //NSLog(@"did save group add member %i ",didSave); 
+//        
+//        
+//        if (ABAddressBookHasUnsavedChanges(addressBook)) {
+//            
+//            if (wantToSaveChanges) {
+//                
+//                didSave = ABAddressBookSave(addressBook, nil);
+//                
+//                if (!didSave) 
+//                {
+//                    /* Handle error here. */
+//                }
+//                
+//            } 
+//            else 
+//            {
+//                
+//                ABAddressBookRevert(addressBook);
+//                
+//            }
+//            
+//        }
+//        
+//        
+//        //        if ([addressBook_ hasUnsavedChanges]) {
+//        //            //NSLog(@"displayed person is %@ and %@",personAddNewViewController_, personAddNewViewController_.displayedPerson);
+//        //            existingPerson_=[addressBook personWithRecordRef:personAddNewViewController_.displayedPerson];
+//        //            
+//        //            didSave= [addressBook addRecord:(ABRecord *)existingPerson_];
+//        //            //NSLog(@"didsave is equal to %i",didSave);
+//        //            didSave= [addressBook save];
+//        //            
+//        //
+//        //        }
+//        
+//        
+//        //    //NSLog(@"didsave addressbook is %i",didSave);
         
         
         ABRecordRef recordRef=personAddNewViewController_.displayedPerson;             
@@ -4666,11 +4583,11 @@
                     
                     
                     [cell commitChanges];
-                    NSArray *itemsArray=(NSArray *)abGroupObjectSelectionCell_.abGroupsArray;
-                    itemsArray=[abGroupObjectSelectionCell_ addressBookGroupsArray];
-                    
-                    [abGroupObjectSelectionCell_ addPersonToSelectedGroups];
-                    abGroupObjectSelectionCell_.synchWithABBeforeLoadBool=YES;
+//                    NSArray *itemsArray=(NSArray *)abGroupObjectSelectionCell_.abGroupsArray;
+//                    itemsArray=[abGroupObjectSelectionCell_ addressBookGroupsArray];
+//                    
+//                    [abGroupObjectSelectionCell_ addPersonToSelectedGroups];
+//                    abGroupObjectSelectionCell_.synchWithABBeforeLoadBool=YES;
 
                     [currentDetailTableViewModel_ reloadBoundValues];
                     [currentDetailTableViewModel_.modeledTableView reloadData];
@@ -4886,10 +4803,11 @@
                         }
                     }
                     
-                    
+                   
                     
                     [self showPersonViewControllerForRecordID:(int)existingPersonRecordID];
                     
+
                     
                     SCTableViewSection *sectionOne=[currentDetailTableViewModel_ sectionAtIndex:0];
                     
@@ -4926,8 +4844,10 @@
                 //NSLog(@"two index");
                 [self resetABVariablesToNil];
                 addExistingAfterPromptBool=TRUE;
+                
                 [self evaluateWhichABViewControllerToShow];
                 
+
                 break;
             default:
                 break;
@@ -4981,8 +4901,9 @@
                 
                 [self resetABVariablesToNil];
                 addExistingAfterPromptBool=TRUE;
-                [self evaluateWhichABViewControllerToShow];
                 
+                [self evaluateWhichABViewControllerToShow];
+               
                 
                 break;
             default:
@@ -5301,14 +5222,33 @@
 //    
 //}
 
--(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew checkExisting:(BOOL)checkExisting{
+-(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew checkExisting:(BOOL)checkExisting {
+     
+   
+    ABRecordRef source=nil;
     
-    ABAddressBookRef addressBook=nil;
-    @try 
-    {
-        
-        addressBook=ABAddressBookCreate();
-        
+       
+       
+                   
+            
+            int sourceID=[self defaultABSourceID];
+           
+            
+            ABAddressBookRef addressBookToChangOrAddName=nil;
+
+            @try 
+    
+            { 
+                       
+                if (!source) {
+
+                addressBookToChangOrAddName=ABAddressBookCreate();
+            if (!source) {
+                source=ABAddressBookGetSourceWithRecordID(addressBookToChangOrAddName, sourceID);
+            }
+            
+            
+        }
         
     }
     
@@ -5318,17 +5258,24 @@
         
         
         [appDelegate displayNotification:@"Not able to access address book" forDuration:3.0 location:kPTTScreenLocationTop inView:appDelegate.window];
+        
+        if (source) {
+            CFRelease(source);
+        }
+        if (addressBookToChangOrAddName) {
+            CFRelease(addressBookToChangOrAddName);
+        }
         return;
     }
     @finally 
     {
-        ABRecordRef source=nil;
-        int sourceID=[self defaultABSourceID];
-        source=ABAddressBookGetSourceWithRecordID(addressBook, sourceID);
+        if (addressBookToChangOrAddName &&source) {
+       
+            
         ABRecordRef group;
         int groupIdentifier;
         
-        CFArrayRef allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
+        CFArrayRef allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBookToChangOrAddName, source);
         int groupCount=CFArrayGetCount(allGroupsInSource);
         
         
@@ -5371,7 +5318,7 @@
                 
                 if (!addNew&&groupIdentifier>-1)
                 {
-                    group=ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, groupIdentifier);
+                    group=ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBookToChangOrAddName, groupIdentifier);
                     
                 }
                 
@@ -5433,9 +5380,7 @@
                         //            CFRelease(CFGroupNameCheck);
                         
                     }
-                    if (allGroupsInSource) {
-                        CFRelease(allGroupsInSource); 
-                    }
+                   
                     
                     if (CFGroupNameCheck) {
                         CFRelease(CFGroupNameCheck);
@@ -5446,7 +5391,9 @@
             }
             
         }
-        
+    if (allGroupsInSource) {
+        CFRelease(allGroupsInSource); 
+    }
         
         
         
@@ -5454,14 +5401,14 @@
         
         if (!addNew && !group && groupIdentifier>0 && groupCount>0 && ![groupIdentifierNumber isEqualToNumber:[NSNumber numberWithInt:(int)-1]]  && ![groupIdentifierNumber isEqualToNumber:[NSNumber numberWithInt:(int)0]]) {
             
-            group=ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, groupIdentifier);
+            group=ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBookToChangOrAddName, groupIdentifier);
             
         }
         
         if ((!group ||addNew) && autoAddClinicianToGroup) {
             
             
-            if (!addressBook) {
+            if (!addressBookToChangOrAddName) {
                 
                 return;
             }
@@ -5484,14 +5431,14 @@
                                                       nil
                                                       );  
             
-            ABAddressBookAddRecord((ABAddressBookRef) addressBook, (ABRecordRef) group, nil);
+            ABAddressBookAddRecord((ABAddressBookRef) addressBookToChangOrAddName, (ABRecordRef) group, nil);
             
             BOOL wantToSaveChanges=TRUE;
-            if (ABAddressBookHasUnsavedChanges(addressBook)) {
+            if (ABAddressBookHasUnsavedChanges(addressBookToChangOrAddName)) {
                 
                 if (wantToSaveChanges) {
                     bool didSave=FALSE;
-                    didSave = ABAddressBookSave(addressBook, nil);
+                    didSave = ABAddressBookSave(addressBookToChangOrAddName, nil);
                     
                     //                if (!didSave) {/* Handle error here. */  //NSLog(@"addressbook did not save");}
                     //                else //NSLog(@"addresss book saved new group.");
@@ -5499,7 +5446,7 @@
                 } 
                 else {
                     
-                    ABAddressBookRevert(addressBook);
+                    ABAddressBookRevert(addressBookToChangOrAddName);
                     
                 }
                 
@@ -5543,18 +5490,18 @@
                 [[NSUserDefaults standardUserDefaults]synchronize];
                 
             }
-            if (ABAddressBookHasUnsavedChanges(addressBook)) {
+            if (ABAddressBookHasUnsavedChanges(addressBookToChangOrAddName)) {
                 
                 if (wantToSaveChanges) {
                     bool didSave=FALSE;
-                    didSave = ABAddressBookSave(addressBook, nil);
+                    didSave = ABAddressBookSave(addressBookToChangOrAddName, nil);
                     
                     if (!didSave) {/* Handle error here. */}
                     
                 } 
                 else {
                     
-                    ABAddressBookRevert(addressBook);
+                    ABAddressBookRevert(addressBookToChangOrAddName);
                     
                 }
                 
@@ -5563,21 +5510,25 @@
             }
             
         }
-        if (addressBook) {
-            CFRelease(addressBook);
-        }
-        
-        
+       
+      if(group)
+          CFRelease(group);
+                
         
     }
     //    [[NSUserDefaults standardUserDefaults]  setValue:(NSString *)groupName forKey:kPTTAddressBookGroupName];
     
+    } 
     
-    
-    
-    
+    if (addressBookToChangOrAddName) {
+        CFRelease(addressBookToChangOrAddName);
+    }
+    if (source) {
+        CFRelease(source);
+    }
+
 }
--(BOOL)personWithRecordID:(int)personID ContainedInGroupWithID:(int)groupID{
+-(BOOL)personWithRecordID:(int)personID containedInGroupWithID:(int)groupID {
     
     int clinicianABRecordIdentifier=personID;
     if (clinicianABRecordIdentifier==-1) {
@@ -5586,15 +5537,15 @@
         
         return NO;
     }
-    
+    ABAddressBookRef addressBookToCheckPerson=nil;
+    addressBookToCheckPerson=ABAddressBookCreate();
     
     BOOL personExistsInGroup=NO;
-    ABAddressBookRef addressBook=nil;
-    addressBook=ABAddressBookCreate();
-    
+        if (addressBookToCheckPerson) {
+       
     ABRecordRef group=nil;
     
-    group=ABAddressBookGetGroupWithRecordID(addressBook, groupID);
+    group=ABAddressBookGetGroupWithRecordID(addressBookToCheckPerson, groupID);
     
     
     
@@ -5648,288 +5599,115 @@
     }
     
     
-    
+    } 
+    if (addressBookToCheckPerson) {
+        addressBookToCheckPerson=nil;
+    }
     return personExistsInGroup;
     
 }
 
--(NSArray *)addressBookGroupsArray{
+-(NSArray *)addressBookGroupsArrayWithAddressBook:(ABAddressBookRef )addressBook source:(ABRecordRef )source{
     
-    ABAddressBookRef addressBook=nil;
-    @try {
+    
+    //NSLog(@"group name is %@",CFGroupName);   
+    //check to see if the group name exists already
+  
+    NSMutableArray *allGroups=nil;
+    if (addressBook) {
+    
+    
+       
+    CFArrayRef allGroupsInSource=NULL;
+    allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
+    int groupCount=CFArrayGetCount(allGroupsInSource);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
         
-        addressBook=ABAddressBookCreate();        
+    
+    if (groupCount) {
         
-    }
-    @catch (NSException *exception) {
-        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-        
-        
-        [appDelegate displayNotification:@"Not able to access Address Book" forDuration:3.0 location:kPTTScreenLocationTop inView:appDelegate.window];
-        return nil;
-    }
-    @finally 
-    {
-        BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
-        ABRecordRef group=nil;
-        
-        int groupIdentifier=-1;
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:kPTTAddressBookGroupName])
-        {
-            
-            groupIdentifier=(NSInteger )[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
-        }
-        
-        if (groupIdentifier>0) {
-            
-            
-            group=  ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, groupIdentifier);
-            
-        }
+     
         
         
+        //NSLog(@"cggroups array %@",(__bridge NSArray *) allGroupsInSource);
         
-        
-        
-        CFStringRef CFGroupName;
-        
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:kPTTAddressBookGroupName]) {
-            
-            CFGroupName=(__bridge CFStringRef)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];  
-            
-        }
-        else {
-            @try {
-                NSString *userDefaultName=[PTTAppDelegate retrieveFromUserDefaults:@"abgroup_name"];
-                
-                
-                CFGroupName=(__bridge_retained  CFStringRef)userDefaultName;
-                
-            }
-            @catch (NSException *exception) {
-                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-                
-                
-                [appDelegate displayNotification:@"Unable to access addressbook settings" forDuration:3.0 location:kPTTScreenLocationTop inView:appDelegate.window];
-            }
-            @finally {
-                
-            }
+        if (allGroupsInSource) {
             
             
-        }
-        
-        
-        
-        
-        if ((!CFGroupName || !CFStringGetLength(CFGroupName) )&& autoAddClinicianToGroup) {
-            NSString *clinicians=@"Clinicians";
-            CFGroupName=(__bridge CFStringRef)clinicians;
-            [[NSUserDefaults standardUserDefaults] setValue:(__bridge NSString*)CFGroupName forKeyPath:kPTTAddressBookGroupName];
-            [[NSUserDefaults standardUserDefaults] synchronize];
             
-        }
-        
-        //NSLog(@"group name is %@",CFGroupName);   
-        //check to see if the group name exists already
-        
-        ABRecordRef source=nil;
-        
-        
-        int sourceID=[self defaultABSourceID];
-        
-        
-        
-        source=ABAddressBookGetSourceWithRecordID(addressBook, sourceID);
-        
-        
-        CFArrayRef allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
-        int groupCount=CFArrayGetCount(allGroupsInSource);
-        
-        
-        
-        
-        
-        CFStringRef CFGroupNameCheck ;
-        ABRecordRef groupInCheckNameArray;
-        if (groupCount&&!group ) {
+            allGroups = [[NSMutableArray alloc] init];
             
             
-            //NSLog(@"cggroups array %@",allGroupsInSource);
-            
-            
+            //            CFStringRef CFGroupName ;
             for (CFIndex i = 0; i < groupCount; i++) {
-                groupInCheckNameArray = CFArrayGetValueAtIndex(allGroupsInSource, i);
-                CFGroupNameCheck  = ABRecordCopyValue(groupInCheckNameArray, kABGroupNameProperty);
                 
                 
-                CFComparisonResult result=  (CFComparisonResult) CFStringCompare (
-                                                                                  ( CFStringRef)CFGroupName,
-                                                                                  (CFStringRef) CFGroupNameCheck,
-                                                                                  1
-                                                                                  );
                 
-                //NSLog(@"result is %ld and %d",result,kCFCompareEqualTo);
-                if (result==0) {
-                    group=groupInCheckNameArray;
-                    break;
-                }
-                //                    CFRelease(CFGroupsCheckNameArray); 
-                //                    CFRelease(CFGroupNameCheck);
+                ABRecordRef groupInCFArray = CFArrayGetValueAtIndex(allGroupsInSource, i);
                 
-                //NSLog(@"group is %@",group);
+                CFStringRef cfGroupName=nil;
                 
-            }
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        NSMutableArray *allGroups;
-        
-        
-        
-        
-        if (!group) {
-            
-            [self changeABGroupNameTo:(__bridge NSString*) CFGroupName addNew:YES checkExisting:YES];
+                cfGroupName  = ABRecordCopyValue(groupInCFArray, kABGroupNameProperty);
+                int CFGroupID=ABRecordGetRecordID((ABRecordRef) groupInCFArray);
+                
+                PTABGroup *ptGroup=[[PTABGroup alloc]initWithName:(__bridge  NSString*)cfGroupName recordID:CFGroupID];
+                
+                [allGroups addObject:ptGroup];
+                
+                CFRelease(groupInCFArray);
+                
+                CFRelease(cfGroupName);
+            }     
             
             
             
+           
             
-            groupIdentifier=(NSInteger )[(NSNumber *)[[NSUserDefaults standardUserDefaults]valueForKey:kPTTAddressBookGroupIdentifier]intValue];
-            group=ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, groupIdentifier);
-            
-            //        //        ABRecordRef CFAddressBookGroupRecord =  ABGroupCreate ();
-            //        
-            //        group=ABGroupCreate();
-            //        
-            //        //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
-            //        
-            //        //        //NSLog(@"group composite name is %@",groupRecord.compositeName);
-            //        
-            //        bool didSetGroupName=FALSE;
-            //        didSetGroupName= (bool) ABRecordSetValue (
-            //                                                  group,
-            //                                                  (ABPropertyID) kABGroupNameProperty,
-            //                                                  (__bridge CFStringRef)groupName  ,
-            //                                                  nil
-            //                                                  );  
-            //        //        //NSLog(@"group record identifier is %i",groupRecord.recordID);
-            //        
-            //        BOOL wantToSaveChanges=TRUE;
-            //        if (ABAddressBookHasUnsavedChanges(addressBook)) {
-            //            
-            //            if (wantToSaveChanges) {
-            //                bool didSave=FALSE;
-            //                didSave = ABAddressBookSave(addressBook, nil);
-            //                
-            //                if (!didSave) {/* Handle error here. */}
-            //                
-            //            } 
-            //            else {
-            //                
-            //                ABAddressBookRevert(addressBook);
-            //                
-            //            }
-            //            
-            //        }
-            //        
-            //        //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
-            //        
-            //        //NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
-            //
-            //        //NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
-            //        groupIdentifier=ABRecordGetRecordID(group);
-            //        
-            //        
-            //        [[NSUserDefaults standardUserDefaults] setInteger:(int )groupIdentifier forKey:kPTTAddressBookGroupIdentifier];
-            //        
-            //        [[NSUserDefaults standardUserDefaults]synchronize];
-            //            
-            //            
-            
-        } 
-        if (group!=NULL) {
-            CFRelease(group);
-        }
-        // Get the ABSource object that contains this new group
-        
-        
-        
-        NSNumber *groupIdentifierNumber=(NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupIdentifier];
-        
-        if ([groupIdentifierNumber isEqualToNumber:[NSNumber numberWithInt:(int)-1]]||[groupIdentifierNumber isEqualToNumber:[NSNumber numberWithInt:(int)0]]||!groupCount) {
-            
-            [ self changeABGroupNameTo:nil addNew:NO checkExisting:YES];
             
             
         }
         
-        
-        
-        allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
-        groupCount=CFArrayGetCount(allGroupsInSource);
-        
-        if (groupCount) {
-            
-            allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
-            //NSLog(@"cggroups array %@",(__bridge NSArray *) allGroupsInSource);
-            
-            if (allGroupsInSource) {
-                
-                
-                
-                allGroups = [[NSMutableArray alloc] init];
-                
-                
-                //            CFStringRef CFGroupName ;
-                for (CFIndex i = 0; i < groupCount; i++) {
-                    
-                    
-                    
-                    ABRecordRef groupInCFArray = CFArrayGetValueAtIndex(allGroupsInSource, i);
-                    CFGroupName  = ABRecordCopyValue(groupInCFArray, kABGroupNameProperty);
-                    int CFGroupID=ABRecordGetRecordID((ABRecordRef) groupInCFArray);
-                    
-                    PTABGroup *ptGroup=[[PTABGroup alloc]initWithName:(__bridge_transfer  NSString*)CFGroupName recordID:CFGroupID];
-                    
-                    [allGroups addObject:ptGroup];
-                    
-                    CFRelease(groupInCFArray);
-                }     
-                
-                
-                
-                CFRelease(allGroupsInSource);
-                
-                
-               
-            }
-            
-        }
-        
-        //        if (addressBook) {
-        //            CFRelease(addressBook);
-        //        }
-        
-        return allGroups;
     }
+    if(allGroupsInSource)
+        CFRelease(allGroupsInSource);
+
+    } 
+    
+    return allGroups;
+    
     
 }
-
 -(void)synchronizeAddressBookGroupsForClinician:(ClinicianEntity *)clinicianToSync {
 
-
+   
+  
+        
+        ABRecordRef source=nil;
+   
+       int sourceID=[self defaultABSourceID];
+       
+    
+    ABAddressBookRef addressBookToSyncronize=ABAddressBookCreate();
+    if (addressBookToSyncronize) {
+   
+            source=ABAddressBookGetSourceWithRecordID(addressBookToSyncronize, sourceID);
+     
+        
+   
 
 
     NSSet *clinicianGroups=clinicianToSync.groups;
-    NSArray *ptABGroupsArray=[NSArray arrayWithArray:(NSArray *)[self addressBookGroupsArray]];
+    NSArray *ptABGroupsArray=[NSArray arrayWithArray:(NSArray *)[self addressBookGroupsArrayWithAddressBook:addressBookToSyncronize source:source]];
     
    
     
@@ -5952,8 +5730,9 @@
             }
             
             if (!abGroupArrayContainsName) {
-                [self changeABGroupNameTo:clinicianGroup.groupName addNew:YES checkExisting:NO];
-                ptABGroupsArray=[NSArray arrayWithArray:(NSArray *)[self addressBookGroupsArray]];
+                [self changeABGroupNameTo:clinicianGroup.groupName addNew:YES checkExisting:NO ];
+                ptABGroupsArray=nil;
+                ptABGroupsArray=[NSArray arrayWithArray:(NSArray *)[self addressBookGroupsArrayWithAddressBook:addressBookToSyncronize source:source]];
                 
                 for (PTABGroup *group in ptABGroupsArray){
                     if ([group.groupName isEqualToString:clinicianGroup.groupName]) {
@@ -5971,15 +5750,14 @@
             if (abGroupArrayContainsName&& clinicianToSync.aBRecordIdentifier && ![clinicianToSync.aBRecordIdentifier isEqualToNumber:[NSNumber numberWithInt:-1]]) {
                 
            
-                           
-                
-                if (![self personWithRecordID:[clinicianToSync.aBRecordIdentifier intValue] ContainedInGroupWithID:abGroupWithClinicianGroupName.recordID]) {
+               
+                 
+                if (![self personWithRecordID:[clinicianToSync.aBRecordIdentifier intValue] containedInGroupWithID:abGroupWithClinicianGroupName.recordID ]) {
                     
-                    [self addPersonWithRecordID:[clinicianToSync.aBRecordIdentifier intValue] toGroupWithID:abGroupWithClinicianGroupName.recordID];
+                    [self addPersonWithRecordID:[clinicianToSync.aBRecordIdentifier intValue] toGroupWithID:abGroupWithClinicianGroupName.recordID ];
                     
                 }  
-                
-                
+        
           
             }
                 
@@ -5988,9 +5766,12 @@
         }
     }
 
+        if (source) {
+            CFRelease(source);
 
-
-
+        }
+           }
+    
 
 
 
@@ -6002,11 +5783,16 @@
     if (clinicianABRecordIdentifier==-1) {
         return;
     }
+
     
-    ABAddressBookRef addressBook=nil;
-    addressBook=ABAddressBookCreate();
+    ABAddressBookRef addressBookToAddNewPerson=nil;
     
-    ABRecordRef person=ABAddressBookGetPersonWithRecordID(addressBook, clinicianABRecordIdentifier);
+    addressBookToAddNewPerson=ABAddressBookCreate();
+    
+    
+    if (addressBookToAddNewPerson) {
+    
+    ABRecordRef person=ABAddressBookGetPersonWithRecordID(addressBookToAddNewPerson, clinicianABRecordIdentifier);
     
     if (person) 
     {
@@ -6015,7 +5801,7 @@
         if (groupID>-1) 
         {
             
-            ABRecordRef group= ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, (ABRecordID) groupID);
+            ABRecordRef group= ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBookToAddNewPerson, (ABRecordID) groupID);
             
             CFErrorRef error=nil;
             if (group) {
@@ -6027,12 +5813,12 @@
                     [ appDelegate displayNotification:[NSString stringWithFormat:@"Error adding to group occured: %@", (__bridge NSString *) CFErrorCopyDescription(error) ]forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
                 }
                 BOOL wantToSaveChanges=YES;
-                if (didSave &&ABAddressBookHasUnsavedChanges(addressBook)) {
+                if (didSave &&ABAddressBookHasUnsavedChanges(addressBookToAddNewPerson)) {
                     
                     
                     if (wantToSaveChanges) {
                         
-                        didSave = ABAddressBookSave(addressBook, nil);
+                        didSave = ABAddressBookSave(addressBookToAddNewPerson, nil);
                         
                         if (!didSave) 
                         {
@@ -6043,7 +5829,7 @@
                     else 
                     {
                         
-                        ABAddressBookRevert(addressBook);
+                        ABAddressBookRevert(addressBookToAddNewPerson);
                         
                     }
                     
@@ -6066,23 +5852,25 @@
     
     if (person) {
         CFRelease(person);
-    }
-    
+    }        
+    } 
+    addressBookToAddNewPerson=nil;
 } 
 
 
 
--(void)removePersonWithRecordID:(int)personID FromGroupWithID:(int)groupID
-{
+-(void)removePersonWithRecordID:(int)personID FromGroupWithID:(int)groupID {
     int clinicianABRecordIdentifier=personID;
     if (clinicianABRecordIdentifier==-1) {
         return;
     }
     
-    ABAddressBookRef addressBook=nil;
-    addressBook=ABAddressBookCreate();
-    ABRecordRef person=nil;
-    person=ABAddressBookGetPersonWithRecordID(addressBook, clinicianABRecordIdentifier);
+    ABAddressBookRef addressBookToRemovePerson=nil;
+    addressBookToRemovePerson=ABAddressBookCreate();
+        if (addressBookToRemovePerson) {
+       
+        ABRecordRef person=nil;
+    person=ABAddressBookGetPersonWithRecordID(addressBookToRemovePerson, clinicianABRecordIdentifier);
     
     if (person) 
     {
@@ -6091,7 +5879,7 @@
         if (groupID>-1) 
         {
             ABRecordRef group=nil;
-            group= ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, (ABRecordID) groupID);
+            group= ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBookToRemovePerson, (ABRecordID) groupID);
             
             CFErrorRef error=nil;
             
@@ -6104,13 +5892,13 @@
                     [ appDelegate displayNotification:[NSString stringWithFormat:@"Error adding to group occured: %@", (__bridge NSString *) CFErrorCopyDescription(error) ]forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
                 }
                 BOOL wantToSaveChanges=YES;
-                if (didRemove &&ABAddressBookHasUnsavedChanges(addressBook)) {
+                if (didRemove &&ABAddressBookHasUnsavedChanges(addressBookToRemovePerson)) {
                     
                     
                     if (wantToSaveChanges) {
                         bool didSave=NO;
                         
-                        didSave = ABAddressBookSave(addressBook, nil);
+                        didSave = ABAddressBookSave(addressBookToRemovePerson, nil);
                         
                         if (!didSave) 
                         {
@@ -6121,7 +5909,7 @@
                     else 
                     {
                         
-                        ABAddressBookRevert(addressBook);
+                        ABAddressBookRevert(addressBookToRemovePerson);
                         
                     }
                     
@@ -6142,12 +5930,18 @@
         
     }
     
-    
+            
     
     if (person) {
         CFRelease(person);
     }
-    
+          
+        } 
+
+    if (addressBookToRemovePerson) {
+        addressBookToRemovePerson=nil;
+    }
+
 } 
 
 
@@ -6452,19 +6246,26 @@
 
 -(int )defaultABSourceID{
     
+    ABAddressBookRef addressBookToGetSource;
+    addressBookToGetSource=ABAddressBookCreate();
+    
+    
+     
     BOOL iCloudEnabled=(BOOL)[[NSUserDefaults standardUserDefaults] valueForKey:@"icloud_preference"];
     
     int returnID=-1;
     int sourceID=-1;
     BOOL continueChecking=YES;
+   
     
-    ABAddressBookRef addressBook;
-    addressBook=nil;
-    
-    addressBook=ABAddressBookCreate();
-    
-    CFArrayRef allSourcesArray=ABAddressBookCopyArrayOfAllSources(addressBook);
-    ABRecordRef source=nil;
+    if (addressBookToGetSource) {
+    CFArrayRef allSourcesArray=ABAddressBookCopyArrayOfAllSources(addressBookToGetSource);
+
+      
+  
+   
+ 
+ 
     int sourcesCount=0;
     
     if (allSourcesArray ) {
@@ -6475,10 +6276,12 @@
         continueChecking=NO;
         returnID=-1 ;
     } 
+        
+        ABRecordRef abSource=nil;
     if (continueChecking&& allSourcesArray && sourcesCount==1) {
         
-        source=CFArrayGetValueAtIndex(allSourcesArray, 0);
-        ABRecordID sourceID=ABRecordGetRecordID(source);
+        abSource=CFArrayGetValueAtIndex(allSourcesArray, 0);
+        ABRecordID sourceID=ABRecordGetRecordID(abSource);
         
         continueChecking=NO;
         returnID=sourceID;
@@ -6494,10 +6297,10 @@
     //NSLog(@"source record id is %i",recordID);
     if (continueChecking && recordID!=-1) {
         
-        source=ABAddressBookGetSourceWithRecordID(addressBook, recordID);
+        abSource=ABAddressBookGetSourceWithRecordID(addressBookToGetSource, recordID);
         
         
-        if (source) {
+        if (abSource) {
             continueChecking=NO;
             returnID=recordID;
         }
@@ -6513,8 +6316,8 @@
         for (int i=0; i<sourcesCount ; i++){
             // Fetch the source type
             
-            source=CFArrayGetValueAtIndex(allSourcesArray, i);
-            CFNumberRef sourceType = ABRecordCopyValue(source, kABSourceTypeProperty);
+            abSource=CFArrayGetValueAtIndex(allSourcesArray, i);
+            CFNumberRef sourceType = ABRecordCopyValue(abSource, kABSourceTypeProperty);
             
             
             // Fetch the name associated with the source type
@@ -6526,7 +6329,7 @@
             
             if ([sourceName isEqualToString: @"CardDAV server"])
             {
-                sourceID=ABRecordGetRecordID(source);
+                sourceID=ABRecordGetRecordID(abSource);
                 
                 
                 
@@ -6545,21 +6348,27 @@
     
     if(continueChecking&& sourcesCount>1)
     {
-        source= CFArrayGetValueAtIndex(allSourcesArray, 0);
-        sourceID=ABRecordGetRecordID(source);
+        abSource= CFArrayGetValueAtIndex(allSourcesArray, 0);
+        sourceID=ABRecordGetRecordID(abSource);
         returnID=sourceID;        
         
     }
-    if (addressBook) {
-        CFRelease(addressBook);
+        if (abSource) {
+            CFRelease(abSource);
+        }     
+      
+          if (allSourcesArray) {
+              CFRelease(allSourcesArray);
+          }
+        
+    }
+    if (addressBookToGetSource) {
+        addressBookToGetSource=nil;
     }
     
     
-    if (allSourcesArray) {
-        CFRelease(allSourcesArray);
-    }
     
-    
+
     return returnID;
 }
 

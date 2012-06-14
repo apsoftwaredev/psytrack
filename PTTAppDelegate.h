@@ -87,7 +87,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
       CasualAlertViewController *casualAlertManager;
     
     
-    NSMutableDictionary *lockValuesDictionary_;
+   
     
     BOOL encryptedLockDictionarySuccess;
     
@@ -200,7 +200,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 @property (weak, nonatomic) IBOutlet UISplitViewController *splitViewControllerReports;
 #define degreesToRadian(x) (M_PI * (x) / 180.0)
 
-@property (nonatomic, strong) NSMutableDictionary *lockValuesDictionary;
+
 @property (nonatomic, strong) IBOutlet LCYLockScreenViewController *lockScreenVC;
 @property (nonatomic, strong)IBOutlet CasualAlertViewController *casualAlertManager;
 
@@ -227,7 +227,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 -(void)displayWrongPassword;
 - (void) setLockedAtStartup:(BOOL)value;
 
--(BOOL)saveLockDictionarySettings;
+
 -(NSString *)lockSettingsFilePath;
 
 

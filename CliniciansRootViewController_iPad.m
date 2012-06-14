@@ -48,11 +48,13 @@
     
     // Set up the edit and add buttons.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
+
       
     [self.tableView setBackgroundView:nil];
     [self.tableView setBackgroundView:[[UIView alloc] init]];
-       
+    [self.view setBackgroundColor:appDelegate.window.backgroundColor];
 //      
 //  self.tableViewModel.delegate=self;
    
@@ -255,12 +257,12 @@
                     
                     int addressBookRecordIdentifier=(int )[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"]intValue]; 
                     
-                    
-                    if (addressBookRecordIdentifier!=-1 && ![self checkIfRecordIDInAddressBook:addressBookRecordIdentifier]) {
+                    ABAddressBookRef addressBook=ABAddressBookCreate();
+                    if (addressBookRecordIdentifier!=-1 && ![self checkIfRecordIDInAddressBook:addressBookRecordIdentifier addressBook:(ABAddressBookRef)addressBook]) {
                         addressBookRecordIdentifier=-1;
                         [cell.boundObject setValue:[NSNumber numberWithInt:-1 ]forKey:@"aBRecordIdentifier"];
                     }
-                    
+                    CFRelease(addressBook);
                     
                     if (addressBookRecordIdentifier!=-1) {
                         
@@ -631,8 +633,6 @@
         addingClinician=YES;
     }
 
-    detailTableViewModel.theme=[SCTheme themeWithPath:@"ClearBackgroundTheme.sct"];
-
 }
 
 
@@ -645,18 +645,7 @@
     detailTableViewModel.tag=tableViewModel.tag+1;
     
     
-//    detailTableViewModel.delegate=self;
-    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-//        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-        
-        
-        detailTableViewModel.theme = [SCTheme themeWithPath:@"ClearBackgroundTheme.sct"];
-        
-        
-
-    }
-    //NSLog(@"detail model created for row at index detailtable model tag is %i", detailTableViewModel.tag);
-    
+  
 }
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath  withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
@@ -698,15 +687,17 @@
 
 
 
--(BOOL)checkIfRecordIDInAddressBook:(int)recordID{
+-(BOOL)checkIfRecordIDInAddressBook:(int)recordID addressBook:(ABAddressBookRef )addressBook{
     
-    
-    ABAddressBookRef addressBook;
     addressBook=nil;
-    addressBook=ABAddressBookCreate();
-
-    ABRecordRef person=nil;
+    if (!addressBook) {
+        addressBook=ABAddressBookCreate();
+    }
     BOOL exists=NO;
+    if (addressBook) {
+    
+    ABRecordRef person=nil;
+    
     if (recordID>0) {
         
         
@@ -718,10 +709,12 @@
         
     }
   
+    
+    } 
+    
     if (addressBook) {
         CFRelease(addressBook);
     } 
-    
     
     return exists;
     

@@ -1655,7 +1655,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     
                     if (phoneNumberCell.textField.text.length) 
                     {
-                        valid=TRUE;
+                      
                         valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
                     }
                     else 

@@ -14,5 +14,5 @@
     SCArrayOfObjectsModel *objectsModel;
 
 }
--(void)cancelButtonTapped;
+//-(void)cancelButtonTapped;
 @end

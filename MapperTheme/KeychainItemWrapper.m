@@ -92,11 +92,11 @@ Keychain API expects as a validly constructed container class.
 @end
 
 @implementation KeychainItemWrapper
+
 {
     NSMutableDictionary *keychainItemData;		// The actual keychain item data backing store.
     NSMutableDictionary *genericPasswordQuery;	// A placeholder for the generic keychain item query used to locate the item.
 }
-
 - (id)initWithIdentifier: (NSString *)identifier accessGroup:(NSString *) accessGroup;
 {
     if (self = [super init])
@@ -168,6 +168,120 @@ Keychain API expects as a validly constructed container class.
     
 	return self;
 }
+
+
+
+
+- (NSMutableDictionary *)newSearchDictionary:(NSString *)identifier {
+    
+    NSMutableDictionary *searchDictionary = [[NSMutableDictionary alloc] init];  
+	
+    [searchDictionary setObject:(__bridge id)kSecClassGenericPassword forKey:(__bridge id)kSecClass];
+	
+    NSData *encodedIdentifier = [identifier dataUsingEncoding:NSUTF8StringEncoding];
+    [searchDictionary setObject:encodedIdentifier forKey:(__bridge id)kSecAttrGeneric];
+    [searchDictionary setObject:encodedIdentifier forKey:(__bridge id)kSecAttrAccount];
+    [searchDictionary setObject:serviceName forKey:(__bridge id)kSecAttrService];
+	
+    return searchDictionary; 
+}
+
+- (NSData *)searchKeychainCopyMatching:(NSString *)identifier {
+    NSMutableDictionary *searchDictionary = [self newSearchDictionary:identifier];
+	
+    // Add search attributes
+    [searchDictionary setObject:(__bridge id)kSecMatchLimitOne forKey:(__bridge id)kSecMatchLimit];
+	
+    // Add search return types
+    [searchDictionary setObject:(id)kCFBooleanTrue forKey:(__bridge id)kSecReturnData];
+	
+    CFDataRef result = NULL;
+    OSStatus status = SecItemCopyMatching((__bridge CFDictionaryRef)searchDictionary,
+                                         (CFTypeRef *)&result);
+	
+    if (status!=0) {
+        NSLog(@"status is %ld",status);
+    }
+    NSData *resultData=[NSData dataWithBytes:(const void *)result length:CFDataGetLength(result)];
+    if (result) {
+         CFRelease(result);
+    }
+   
+    
+    return resultData;
+}
+
+- (BOOL)createKeychainValue:(NSString *)password forIdentifier:(NSString *)identifier {
+    NSMutableDictionary *dictionary = [self newSearchDictionary:identifier];
+    
+    NSData *passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
+    [dictionary setObject:passwordData forKey:(__bridge id)kSecValueData];
+	
+    OSStatus status = SecItemAdd((__bridge CFDictionaryRef)dictionary, NULL);
+  
+	
+    if (status == errSecSuccess) {
+        return YES;
+    }
+    return NO;
+}
+- (BOOL)createKeychainValueWithData:(NSData *)data forIdentifier:(NSString *)identifier {
+    NSMutableDictionary *dictionary = [self newSearchDictionary:identifier];
+    
+    
+    [dictionary setObject:data forKey:(__bridge id)kSecValueData];
+	
+    OSStatus status = SecItemAdd((__bridge CFDictionaryRef)dictionary, NULL);
+ 
+	
+    if (status == errSecSuccess) {
+        return YES;
+    }
+    return NO;
+}
+- (BOOL)updateKeychainValue:(NSString *)password forIdentifier:(NSString *)identifier {
+    
+    NSMutableDictionary *searchDictionary = [self newSearchDictionary:identifier];
+    NSMutableDictionary *updateDictionary = [[NSMutableDictionary alloc] init];
+    NSData *passwordData = [password dataUsingEncoding:NSUTF8StringEncoding];
+    [updateDictionary setObject:passwordData forKey:(__bridge id)kSecValueData];
+	
+    OSStatus status = SecItemUpdate((__bridge CFDictionaryRef)searchDictionary,
+                                    (__bridge CFDictionaryRef)updateDictionary);
+    
+  
+	
+    if (status == errSecSuccess) {
+        return YES;
+    }
+    return NO;
+}
+- (BOOL)updateKeychainValueWithData:(NSData *)data forIdentifier:(NSString *)identifier {
+    
+    NSMutableDictionary *searchDictionary = [self newSearchDictionary:identifier];
+    NSMutableDictionary *updateDictionary = [[NSMutableDictionary alloc] init];
+    
+    [updateDictionary setObject:data forKey:(__bridge id)kSecValueData];
+	
+    OSStatus status = SecItemUpdate((__bridge CFDictionaryRef)searchDictionary,
+                                    (__bridge CFDictionaryRef)updateDictionary);
+    
+
+	
+    if (status == errSecSuccess) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)deleteKeychainValue:(NSString *)identifier {
+	
+    NSMutableDictionary *searchDictionary = [self newSearchDictionary:identifier];
+    SecItemDelete((__bridge CFDictionaryRef)searchDictionary);
+  
+}
+
+
 
 - (void)setObject:(id)inObject forKey:(id)key 
 {

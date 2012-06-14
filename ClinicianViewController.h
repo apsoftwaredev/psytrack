@@ -53,7 +53,7 @@
 
     
 -(void)selectMyInformation;
--(void)cancelButtonTapped;
+//-(void)cancelButtonTapped;
     
 -(void)setSelectedClinicians;
 -(void)createSelectedCliniciansArray;

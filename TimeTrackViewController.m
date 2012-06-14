@@ -400,13 +400,6 @@
     
     
  
-    // Set the view controller's theme
-    self.tableViewModel.theme = [SCTheme themeWithPath:@"ClearBackgroundTheme.sct"];
-   
-    
-   
-  
-    
     
 	
 	// Get managedObjectContext from application delegate

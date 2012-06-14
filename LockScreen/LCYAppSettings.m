@@ -9,98 +9,262 @@
 #import "LCYAppSettings.h"
 #import "PTTAppDelegate.h"
 #import "KeychainItemWrapper.h"
-@interface LCYAppSettings()
-- (void) updateProperties;
-@end
+#import "PTTEncryption.h"
 
 @implementation LCYAppSettings
 
-@synthesize lockScreenPasscodeIsOn = lockScreenPasscodeIsOn_;
-@synthesize lockScreenPasscode = lockScreenPasscode_;
-@synthesize lockScreenLocked=lockScreenLocked_;
-@synthesize lockScreenPasscodeAttempt=lockScreenPasscodeAttempt_;
-@synthesize lockScreenTimerOn=lockScreenTimerOn_;
-@synthesize lockScreenLockAtStartup=lockScreenLockAtStartup_;
 //@synthesize lockScreenChallengePhrase=lockScreenChallengePhrase_;
 //@synthesize lockScreenChallengeResponse=lockScreenChallengeResponse_;
 
 
 
-- (id) init;
-{
-	if ( (self = [super init]) )
-	{
-		[self updateProperties];
-	}
-	return self;
-}
 
-- (BOOL) saveSettings
-{
-        BOOL result=FALSE;
-        [self updateProperties];
-        result=[self synchronize];
-        return result;
 
-}
-- (BOOL) synchronize
-{
+-(BOOL)setPasscodeDataWithString:(NSString *)passcodeString{
+
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-   NSMutableDictionary* lockDictionary=(NSMutableDictionary *)[appDelegate lockValuesDictionary];
+  	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
+	NSString *passcodeToSave = (passcodeString) ? [NSString stringWithFormat:@"%@kdieJsi3ea18ki" ,passcodeString ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
+    NSLog(@"passcodeToSave: %@", passcodeToSave);
+	
+	
     
-    [lockDictionary setValue:[NSNumber numberWithBool:self.lockScreenPasscodeIsOn] forKey:K_LOCK_SCREEN_PASSCODE_IS_ON];
-
-	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
-	NSString *passcodeToSave = (self.lockScreenPasscodeIsOn) ? self.lockScreenPasscode : @"" ;
-NSLog(@"passcodeToSave: %@", passcodeToSave);
-	
-	[lockDictionary setObject:passcodeToSave forKey:K_LOCK_SCREEN_PASSCODE];
-	KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] initWithIdentifier:@"Passcode" accessGroup:nil];
-	
-    NSString *password=[wrapper objectForKey:(__bridge_transfer id)kSecValueData];
-    //    BOOL falseData=YES;
-    if ( wrapper && (!password ||!password.length)) {
+    
+    BOOL success=NO;
+    NSData *passcodeData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE];
+    
+    
+    PTTEncryption *encryption=(PTTEncryption *)[appDelegate encryption];
+    if (!passcodeData) {
         
-        [wrapper setObject:passcodeToSave forKey:(__bridge id) kSecValueData];
+        [wrapper newSearchDictionary:K_LOCK_SCREEN_PASSCODE];
+        success= [wrapper createKeychainValueWithData:[encryption getHashBytes:[appDelegate convertStringToData: passcodeToSave]] forIdentifier:K_LOCK_SCREEN_PASSCODE];
+        //           passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
+        
+        
+    }
+    else {
+        success= [wrapper updateKeychainValueWithData:[encryption getHashBytes:[appDelegate convertStringToData: passcodeToSave]] forIdentifier:K_LOCK_SCREEN_PASSCODE];
     }
 
-    [lockDictionary setValue:[NSNumber numberWithBool:self.lockScreenLocked] forKey:K_LOCK_SCREEN_LOCKED];
-    [lockDictionary setValue:[NSNumber numberWithInteger:self.lockScreenPasscodeAttempt] forKey:K_LOCK_SCREEN_ATTEMPT];
-    [lockDictionary setValue:[NSNumber numberWithBool:self.lockScreenTimerOn] forKey:K_LOCK_SCREEN_TIMER_ON];
-    [lockDictionary setValue:[NSNumber numberWithBool:self.lockScreenLockAtStartup] forKey:K_LOCK_SCREEN_LOCK_AT_STARTUP];
-//    [userDefaults setValue:self.lockScreenChallengePhrase forKey:K_LOCK_SCREEN_CHALLENGE_PHRASE];
-//    [userDefaults setValue:self.lockScreenChallengeResponse forKey:K_LOCK_SCREEN_LOCK_CHALLENGE_RESPONSE];
+
+    passcodeString=nil;
+    passcodeData=nil;
+    passcodeToSave=nil;
+    wrapper=nil;
     
-    //NSLog(@"lock screen pass code is on is%i",self.lockScreenPasscodeIsOn);
-    //NSLog(@"lock screen screen locked is on is%i",self.lockScreenLocked);
-     //NSLog(@"lock screen passcode to save is on is%@",self.lockScreenPasscode);
-    //NSLog(@"lock screen lock screen attempt is on is%i",self.lockScreenPasscodeAttempt);
-     //NSLog(@"lock screen lock screen attempt is on is%i",self.lockScreenLockAtStartup);
+    return success;
+
+
+}
+
+
+-(BOOL)setLockScreenLocked:(BOOL)lockScreenLocked{
     
-	BOOL result = [appDelegate saveLockDictionarySettings];
-	if (result)
-	{
-		[self updateProperties];
-	}
-	return result;
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    
+  
+    BOOL success=NO;
+    
+   
+    NSData *lockScreenLockedData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_LOCKED];
+    
+    if (!lockScreenLockedData) {
+        
+        [wrapper newSearchDictionary:K_LOCK_SCREEN_LOCKED];
+        success= [wrapper createKeychainValue:[NSString stringWithFormat:@"%i", lockScreenLocked] forIdentifier:K_LOCK_SCREEN_LOCKED];
+    }else  {
+        success= [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",lockScreenLocked] forIdentifier:K_LOCK_SCREEN_LOCKED];
+        
+    } 
+
+    wrapper=nil;
+    lockScreenLockedData=nil;
+    
+    return success;
+    
+    
+}
+
+-(BOOL)setLockScreenIsOn:(BOOL)lockScreenIsOn{
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    
+   
+    
+    BOOL success=NO;
+    
+    
+    NSData *pascodeOnData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE_IS_ON];
+    if (!pascodeOnData) {
+        
+        [wrapper newSearchDictionary:K_LOCK_SCREEN_PASSCODE_IS_ON];
+        success=  [wrapper createKeychainValue:[NSString stringWithFormat:@"%i", lockScreenIsOn] forIdentifier:K_LOCK_SCREEN_PASSCODE_IS_ON];
+        
+        
+    }else  {
+        success=  [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",lockScreenIsOn] forIdentifier:K_LOCK_SCREEN_PASSCODE_IS_ON];
+        
+    }
+    
+    pascodeOnData=nil;
+    wrapper=nil;
+    
+    
+    return success;
+    
+    
+}
+
+-(BOOL)setLockScreenAttempt:(int)attempt{
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    
+    // as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
+	
+    BOOL success=NO;
+    
+    
+    NSData *lockScreenAttemptData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_ATTEMPT];
+    if (!lockScreenAttemptData) {
+        
+        [wrapper newSearchDictionary:K_LOCK_SCREEN_ATTEMPT];
+        success= [wrapper createKeychainValue:[NSString stringWithFormat:@"%i",attempt] forIdentifier:K_LOCK_SCREEN_ATTEMPT];
+        
+        
+    }else  {
+        success=  [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",attempt] forIdentifier:K_LOCK_SCREEN_ATTEMPT];
+    }
+    
+    
+    lockScreenAttemptData=nil;
+    wrapper=nil;
+    
+    return success;
+    
+    
+}
+
+
+-(BOOL)setLockScreenStartup:(BOOL)lockOnStartup{
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    
+    // as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
+	
+    BOOL success=NO;
+    
+    
+    
+    
+    NSData *lockScreenStartupData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_LOCK_AT_STARTUP];
+    if (!lockScreenStartupData) {
+        
+        [wrapper newSearchDictionary:K_LOCK_SCREEN_LOCK_AT_STARTUP];
+        success= [wrapper createKeychainValue:[NSString stringWithFormat:@"%i", lockOnStartup] forIdentifier:K_LOCK_SCREEN_LOCK_AT_STARTUP];
+        
+    }else  {
+        success= [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",lockOnStartup] forIdentifier:K_LOCK_SCREEN_LOCK_AT_STARTUP];
+    }
+    
+    
+    lockScreenStartupData=nil;
+    wrapper=nil;
+    
+    return success;
+    
+    
+}
+
+-(BOOL)setLockScreenTimerOn:(BOOL)timerOn{
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    
+    // as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
+	
+    BOOL success=NO;
+    
+    
+    
+    
+    
+    NSData *lockScreenTimerOnData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_TIMER_ON];
+    if (!lockScreenTimerOnData) {
+        
+        [wrapper newSearchDictionary:K_LOCK_SCREEN_TIMER_ON];
+        success= [wrapper createKeychainValue:[NSString stringWithFormat:@"%i", timerOn] forIdentifier:K_LOCK_SCREEN_TIMER_ON];
+        
+    }else  {
+        success=  [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",timerOn] forIdentifier:K_LOCK_SCREEN_TIMER_ON];
+    }
+    
+    lockScreenTimerOnData=nil;
+    wrapper=nil;
+    
+    return success;
+    
+    
+}
+
+-(NSData *)passcodeData{
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+   
+    return [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE];
+    
+    
+}
+
+
+- (BOOL) isPasscodeOn
+{	
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+
+    NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE_IS_ON];
+    
+    return (BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];
+    
+}
+- (BOOL) isLockedAtStartup
+{	
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+
+    NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_LOCK_AT_STARTUP];
+    
+    return (BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];
 }
 
 
 
-- (void) updateProperties;
-{
-	NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];	
-	self.lockScreenPasscodeIsOn = [userDefaults boolForKey:K_LOCK_SCREEN_PASSCODE_IS_ON];
-	lockScreenPasscode_ = [userDefaults stringForKey:K_LOCK_SCREEN_PASSCODE];	
-    self.lockScreenLocked= [userDefaults boolForKey:K_LOCK_SCREEN_LOCKED];
-    self.lockScreenPasscodeAttempt=[userDefaults integerForKey:K_LOCK_SCREEN_ATTEMPT];
-    self.lockScreenTimerOn=[userDefaults boolForKey:K_LOCK_SCREEN_TIMER_ON];
-    self.lockScreenLockAtStartup=[userDefaults boolForKey:K_LOCK_SCREEN_LOCK_AT_STARTUP];
-//    self.lockScreenChallengePhrase=[userDefaults stringForKey:K_LOCK_SCREEN_CHALLENGE_PHRASE];
-//    self.lockScreenChallengeResponse=[userDefaults stringForKey:K_LOCK_SCREEN_LOCK_CHALLENGE_RESPONSE];
+-(BOOL)isAppLocked{
     
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+
+    NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_LOCKED];
+    
+    return (BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];	
     
 }
+-(BOOL)isLockedTimerOn{
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+
+    NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_TIMER_ON];
+    
+    return (BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];	
+    
+}
+
+
 
 
 @end

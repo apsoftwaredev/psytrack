@@ -1250,27 +1250,27 @@
     return YES;
 }
 
--(void)cancelButtonTapped{
-    
-    //NSLog(@"cancel button Tapped");
-    
-    //NSLog(@"parent controller %@",[super parentViewController]);
-    
-    if(self.navigationController)
-	{
-		// check if self is the rootViewController
-		if([self.navigationController.viewControllers objectAtIndex:0] == self)
-		{
-			[self dismissModalViewControllerAnimated:YES];
-		}
-		else
-			[self.navigationController popViewControllerAnimated:YES];
-	}
-	else
-		[self dismissModalViewControllerAnimated:YES];
-    
-    
-}
+//-(void)cancelButtonTapped{
+//    
+//    //NSLog(@"cancel button Tapped");
+//    
+//    //NSLog(@"parent controller %@",[super parentViewController]);
+//    
+//    if(self.navigationController)
+//	{
+//		// check if self is the rootViewController
+//		if([self.navigationController.viewControllers objectAtIndex:0] == self)
+//		{
+//			[self dismissModalViewControllerAnimated:YES];
+//		}
+//		else
+//			[self.navigationController popViewControllerAnimated:YES];
+//	}
+//	else
+//		[self dismissModalViewControllerAnimated:YES];
+//    
+//    
+//}
 
 -(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
 BOOL valid=NO;

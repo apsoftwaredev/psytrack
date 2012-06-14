@@ -32,6 +32,7 @@
 @property (nonatomic, retain) NSSet *supervisonFeedback;
 @property (nonatomic, retain) NSSet *clientPresentations;
 @property (nonatomic, retain) NSSet *referrals;
+@property (nonatomic, retain) NSSet *groups;
 
 @property (nonatomic, strong) NSString *tempClientIDCode;
 @property (nonatomic, strong) NSString *tempInitials;
@@ -87,6 +88,11 @@
 - (void)removeReferralsObject:(ReferralEntity *)value;
 - (void)addReferrals:(NSSet *)values;
 - (void)removeReferrals:(NSSet *)values;
+
+- (void)addGroupssObject:(ReferralEntity *)value;
+- (void)removeGroupssObject:(ReferralEntity *)value;
+- (void)addGroups:(NSSet *)values;
+- (void)removeGroups:(NSSet *)values;
 
 
 - (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key ;

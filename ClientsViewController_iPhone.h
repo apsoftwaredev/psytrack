@@ -63,7 +63,7 @@
 -(void)addWechlerAgeCellToSection:(SCTableViewSection *)section;
 -(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(SCObjectSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController allowMultipleSelection:(BOOL)allowMultiSelect;
 
--(void)cancelButtonTapped;
+//-(void)cancelButtonTapped;
 
 -(BOOL)checkStringIsNumber:(NSString *)str;
 -(void)refreshData;

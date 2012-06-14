@@ -6,8 +6,12 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-#import "SCTableViewController.h"
 
-@interface ClientGroupsViewController : SCTableViewController
+@interface ClientGroupsViewController : SCTableViewController <SCTableViewControllerDelegate, SCTableViewModelDelegate>{
+
+    SCArrayOfItemsModel *objectsModel;
+
+
+}
 
 @end

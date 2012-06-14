@@ -14,6 +14,7 @@
 #import "ReferralEntity.h"
 #import "VitalsEntity.h"
 #import "PTTAppDelegate.h"
+#import "ClientGroupEntity.h"
 
 @implementation ClientEntity
 
@@ -36,11 +37,15 @@
 @dynamic supervisonFeedback;
 @dynamic clientPresentations;
 @dynamic referrals;
+@dynamic groups;
 
 @synthesize tempClientIDCode;
 @synthesize tempInitials;
 @synthesize tempDateOfBirth;
 @synthesize tempNotes;
+
+
+
 
 
 
@@ -62,6 +67,35 @@
         self.dateAdded = [NSDate date];
         [self didChangeValueForKey:(NSString *)@"dateAdded"];
     }
+    
+    
+    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+NSEntityDescription *entity = [NSEntityDescription entityForName:@"ClientGroupEntity" inManagedObjectContext:managedObjectContext];
+[fetchRequest setEntity:entity];
+
+NSPredicate *predicate = [NSPredicate predicateWithFormat:@"addNewClients == %@", [NSNumber numberWithBool:YES]];
+[fetchRequest setPredicate:predicate];
+
+NSError *error = nil;
+NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+if (fetchedObjects) {
+    [self willAccessValueForKey:@"groups"];
+    NSMutableSet *groupsMutableSet=(NSMutableSet *)[self mutableSetValueForKey:@"groups"];
+    [self didAccessValueForKey:@"groups"];
+    
+    for (ClientGroupEntity *clientGroup in fetchedObjects) {
+        [self willChangeValueForKey:@"groups"];
+        [groupsMutableSet addObject:clientGroup];
+        [self didChangeValueForKey:@"groups"];
+        
+        
+    }
+}
+
+
+    
+    
     
     //    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     

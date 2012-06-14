@@ -1,5 +1,5 @@
 /*
- *  InAppSettingsViewController.h
+ *  ClinicianGroupsViewController.h
  *  psyTrack Clinician Tools
  *  Version: 1.0
  *
@@ -22,7 +22,9 @@
 #import <EventKit/EventKit.h>
 #import <EventKitUI/EventKitUI.h>
 
-@interface InAppSettingsViewController : SCViewController <SCTableViewModelDelegate, EKCalendarChooserDelegate,ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate>{
+
+
+@interface ClinicianGroupsViewController : SCViewController <SCTableViewModelDelegate, EKCalendarChooserDelegate,ABPeoplePickerNavigationControllerDelegate, UIAlertViewDelegate>{
 
     SCArrayOfObjectsModel *objectsModel;
     EKEventStore *eventStore;
@@ -39,9 +41,10 @@
     
     ABAddressBookRef addressBook;
     ABRecordRef source;
-    int groupRecordIDToDelete;
+    int groupRecordIDToDeleteOrImport;
     UIView *detailViewSuperview;
-}
+    
+  }
 @property (nonatomic, strong) UINavigationController *rootNavController;
 @property (nonatomic, strong) EKEventStore *eventStore;
 @property (nonatomic, strong) EKCalendar *psyTrackCalendar;

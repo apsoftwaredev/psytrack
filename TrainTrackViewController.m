@@ -27,9 +27,10 @@
 #import "CliniciansRootViewController_iPad.h"
 #import "DTAboutViewController.h"
 #import "NSString+Helpers.h"
-#import "InAppSettingsViewController.h"
+#import "ClinicianGroupsViewController.h"
 #import "ClinicianViewController.h"
 #import "CliniciansDetailViewController_iPad.h"
+#import "ClientGroupsViewController.h"
 //#import "UICasualAlert.h"
 //#import <MessageUI/MessageUI.h>
 //
@@ -671,20 +672,32 @@
         case 10:
         {
             //@"Clinician Groups"
-            //@"Calander and Address Book"
+           
+            
             if (indexPath.row==0){
                 
                 
-                InAppSettingsViewController *inAppSettingsViewController = [[InAppSettingsViewController alloc] initWithNibName:@"InAppSettingsViewController" bundle:nil];
+                ClinicianGroupsViewController *clinicianGroupsViewController = [[ClinicianGroupsViewController alloc] initWithNibName:@"ClinicianGroupsViewController" bundle:[NSBundle mainBundle] ];
                 
-                [self.navigationController pushViewController:inAppSettingsViewController animated:YES];
+                [self.navigationController pushViewController:clinicianGroupsViewController animated:YES];
                 
-                inAppSettingsViewController.rootNavController=self.navigationController;
+                clinicianGroupsViewController.rootNavController=self.navigationController;
                 
                 
             };
 
-            
+            //@"Clinician Groups"
+          
+            if (indexPath.row==1){
+                
+                
+                ClientGroupsViewController *clientGroupsViewController = [[ClientGroupsViewController alloc] initWithNibName:@"ClientGroupsViewController" bundle:[NSBundle mainBundle]];
+                
+                [self.navigationController pushViewController:clientGroupsViewController animated:YES];
+                
+                               
+            };
+
                        
         }
             break;

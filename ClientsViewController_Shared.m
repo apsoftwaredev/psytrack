@@ -51,7 +51,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                       managedObjectContext:managedObjectContext 
                                                              propertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth", @"keyString",
                                                                                 @"initials",  @"demographicInfo", @"dateAdded",@"currentClient",@"phoneNumbers", @"logs", @"medicationHistory",@"diagnoses", @"vitals",  
-                                                                @"notes",nil]];
+                                                                @"notes",@"groups",nil]];
 	
     
     
@@ -731,10 +731,30 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     SCPropertyGroup *clientInfoGroup = [SCPropertyGroup groupWithHeaderTitle:@"De-Identified Client Data" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth",@"initials",@"demographicInfo",@"dateAdded",@"currentClient",@"phoneNumbers", @"logs",@"medicationHistory",@"diagnoses", @"vitals", @"notes", nil]];
     
     
+    SCEntityDefinition *clientGroupDef=[SCEntityDefinition definitionWithEntityName:@"ClientGroupEntity" managedObjectContext:managedObjectContext propertyNamesString:@"Client Group:(groupName,addNewClients)"];
+    
+    SCPropertyDefinition *groupsPropertyDef=[self.clientDef propertyDefinitionWithName:@"groups"];
+    
+   
+    groupsPropertyDef.type=SCPropertyTypeObjectSelection;
+    
+    SCObjectSelectionAttributes *clientGroupSelectionAttribs=[[SCObjectSelectionAttributes alloc]initWithObjectsEntityDefinition:clientGroupDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES] ;
+    clientGroupSelectionAttribs.allowAddingItems=YES;
+    clientGroupSelectionAttribs.allowDeletingItems=YES;
+    clientGroupSelectionAttribs.allowEditingItems=YES;
+    clientGroupSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Add Group"];
+    clientGroupSelectionAttribs.placeholderuiElement=[SCTableViewCell cellWithText:@"Tap Edit to add new groups"];
+    
+    groupsPropertyDef.attributes=clientGroupSelectionAttribs;
+    groupsPropertyDef.title=@"Groups";
+    
+    SCPropertyGroup *groupsGroup=[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"groups"]];
+    
+
 
     
     [self.clientDef.propertyGroups addGroup:clientInfoGroup];
-
+    [self.clientDef.propertyGroups addGroup:groupsGroup];
 //    self.clientDef.orderAttributeName=@"order";
     
 

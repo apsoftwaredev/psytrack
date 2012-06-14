@@ -166,7 +166,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
         objectsModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:2];
         
-        UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
+        UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTappedInDetalView)];
         
         self.navigationItem.leftBarButtonItem=cancelButton;
         
@@ -305,7 +305,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 
 
 
--(void)cancelButtonTapped{
+-(void)cancelButtonTappedInDetalView{
     
     //NSLog(@"cancel button Tapped");
     
@@ -484,7 +484,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         //    }
         //
     }
-     [self cancelButtonTapped];
+     [self cancelButtonTappedInDetalView];
 }
 
 -(void)setSelectedClients{
@@ -1170,7 +1170,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     
                     if (phoneNumberCell.textField.text.length) 
                     {
-                        valid=TRUE;
+                        
                         valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
                     }
                     else 

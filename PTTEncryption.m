@@ -614,7 +614,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
                                 &keyBufferSize
 								);
 	
-	LOGGING_FACILITY1( sanityCheck == noErr, @"Error decrypting, OSStatus == %ul.", sanityCheck );
+	LOGGING_FACILITY1( sanityCheck == noErr, @"Error decrypting, OSStatus == %ld", sanityCheck );
 	
 	// Build up plain text blob.
 	key = [NSData dataWithBytes:(const void *)keyBuffer length:(NSUInteger)keyBufferSize];

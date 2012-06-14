@@ -46,7 +46,7 @@
 #import "LCYAppSettings.h"
 
 #import "CasualAlertViewController.h"
-#import "InAppSettingsViewController.h"
+#import "ClinicianGroupsViewController.h"
 #import "PTTEncryption.h"
 #import "KeyEntity.h"
 
@@ -94,7 +94,7 @@
 @synthesize casualAlertManager;
 @synthesize tabBarView;
 @synthesize viewController;
-@synthesize lockValuesDictionary=lockValuesDictionary_;
+
 @synthesize encryption=encryption_;
 @synthesize okayToDecryptBool=okayToDecryptBool_;
 @synthesize passwordItem=passwordItem_,passCodeItem=passCodeItem_;
@@ -123,15 +123,15 @@
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
     hostReach = [Reachability reachabilityWithHostName: @"www.apple.com"];
 	[hostReach startNotifier];
-	[self updateInterfaceWithReachability: hostReach];
+//	[self updateInterfaceWithReachability: hostReach];
 	
     internetReach = [Reachability reachabilityForInternetConnection] ;
 	[internetReach startNotifier];
-	[self updateInterfaceWithReachability: internetReach];
+//	[self updateInterfaceWithReachability: internetReach];
     
     wifiReach = [Reachability reachabilityForLocalWiFi] ;
 	[wifiReach startNotifier];
-	[self updateInterfaceWithReachability: wifiReach];
+//	[self updateInterfaceWithReachability: wifiReach];
 
 	NSUbiquitousKeyValueStore* store = [NSUbiquitousKeyValueStore defaultStore];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -722,43 +722,43 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
    NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
       
 }
-- (void) updateInterfaceWithReachability: (Reachability*) curReach
-{
-    if(curReach == hostReach)
-	{
-		
-//        NetworkStatus netStatus = [curReach currentReachabilityStatus];
-        BOOL connectionRequired= [curReach connectionRequired];
-        
-       
-        NSString* baseLabel=  @"";
-        if(connectionRequired)
-        {
-            baseLabel=  @"Cellular data network is available.\n  Internet traffic will be routed through it after a connection is established.";
-        }
-        else
-        {
-            baseLabel=  @"Cellular data network is active.\n  Internet traffic will be routed through it.";
-        }
-      
-    }
-	if(curReach == internetReach)
-	{	
-//		[self configureTextField: internetConnectionStatusField imageView: internetConnectionIcon reachability: curReach];
-	}
-	if(curReach == wifiReach)
-	{	
-//		[self configureTextField: localWiFiConnectionStatusField imageView: localWiFiConnectionIcon reachability: curReach];
-	}
-	
-}
+//- (void) updateInterfaceWithReachability: (Reachability*) curReach
+//{
+//    if(curReach == hostReach)
+//	{
+//		
+////        NetworkStatus netStatus = [curReach currentReachabilityStatus];
+//        BOOL connectionRequired= [curReach connectionRequired];
+//        
+//       
+//        NSString* baseLabel=  @"";
+//        if(connectionRequired)
+//        {
+//            baseLabel=  @"Cellular data network is available.\n  Internet traffic will be routed through it after a connection is established.";
+//        }
+//        else
+//        {
+//            baseLabel=  @"Cellular data network is active.\n  Internet traffic will be routed through it.";
+//        }
+//      
+//    }
+////	if(curReach == internetReach)
+////	{	
+//////		[self configureTextField: internetConnectionStatusField imageView: internetConnectionIcon reachability: curReach];
+////	}
+////	if(curReach == wifiReach)
+////	{	
+//////		[self configureTextField: localWiFiConnectionStatusField imageView: localWiFiConnectionIcon reachability: curReach];
+////	}
+//	
+//}
 
 //Called by Reachability whenever status changes.
 - (void) reachabilityChanged: (NSNotification* )note
 {
 	Reachability* curReach = [note object];
 	NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
-	[self updateInterfaceWithReachability: curReach];
+//	[self updateInterfaceWithReachability: curReach];
 }
 
 
@@ -6795,15 +6795,7 @@ return [self applicationDrugsDirectory].path;
     return (BOOL)[(NSString * )[self convertDataToString:lockedData]boolValue];
 }
 
-- (void) setLockedAtStartup:(BOOL)value
-{	
-    
-    if ([lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LOCK_AT_STARTUP]) {
-        [lockValuesDictionary_ setValue:[NSNumber numberWithBool:value] forKey:K_LOCK_SCREEN_LOCK_AT_STARTUP];
-        
-    }
-      
-}
+
 
 -(BOOL)isAppLocked{
 
@@ -6823,16 +6815,7 @@ return [self applicationDrugsDirectory].path;
     return (BOOL)[(NSString * )[self convertDataToString:lockedData]boolValue];	
     
 }
-- (NSString *) appLockPasscode
-{
-    if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_PASSCODE]) {
-        return (NSString *)[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_PASSCODE];
-    }
-    else {
-        return [NSString string];
-    }
-	
-}
+
 
 -(void)displayWrongPassword{
 

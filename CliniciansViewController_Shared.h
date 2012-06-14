@@ -52,6 +52,11 @@ NSManagedObjectContext *managedObjectContext;
     UIView *iPadPersonBackgroundView_;
     BOOL addingClinician;
   BOOL isInDetailSubview;
+    
+   
+   
+    
+    
 }
 
 
@@ -78,7 +83,7 @@ NSManagedObjectContext *managedObjectContext;
 
 //-(void)showPersonViewControllerWithRecordIdentifier:(NSString *)recordIdentifier firstName:(NSString *)firstName lastName:(NSString *)lastName;
 
--(void)evaluateWhichABViewControllerToShow;
+
 //-(void)showPersonViewControllerForABRecordRef:(ABRecordRef)recordRef;
 //-(void)showUnknownPersonViewControllerWithABRecordRef:(ABRecordRef )recordRef;
 -(void)showPeoplePickerController;
@@ -89,10 +94,6 @@ NSManagedObjectContext *managedObjectContext;
 -(void)resetABVariablesToNil;
 
 
-
--(void)showPersonViewControllerForRecordID:(int)recordID;
-
--(BOOL)checkIfRecordIDInAddressBook:(int)recordID;
 
 
 -(void)setSectionHeaderColorWithSection:(SCTableViewSection *)section color:(UIColor *)color;
