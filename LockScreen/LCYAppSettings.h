@@ -41,7 +41,7 @@ static NSString * const K_LOCK_SCREEN_CURRENT_KEYSTRING= @"current_keyString";
 - (BOOL) isPasscodeOn;
 - (BOOL) isLockedAtStartup;
 
-
+- (NSInteger) numberOfUnlockAttempts;
 
 -(BOOL)isAppLocked;
 -(BOOL)isLockedTimerOn;

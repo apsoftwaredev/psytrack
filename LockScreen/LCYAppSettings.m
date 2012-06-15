@@ -117,7 +117,7 @@
     
 }
 
--(BOOL)setLockScreenAttempt:(int)attempt{
+-(BOOL)setLockScreenAttempt:(NSInteger)attempt{
     
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
     
@@ -264,7 +264,52 @@
     
 }
 
-
-
+- (NSInteger) numberOfUnlockAttempts
+{	
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_ATTEMPT];
+    NSInteger numberOfAttempts=0;
+    if (lockedData) {
+        NSString *numberStr=(NSString * )[appDelegate convertDataToString:lockedData];
+        
+        if ([self checkStringIsNumber:numberStr]) {
+            numberOfAttempts=[numberStr integerValue];
+        }
+        else {
+            numberOfAttempts=20;
+        }
+    }
+    else {
+        numberOfAttempts=20;
+    }
+    return numberOfAttempts;
+    
+}
+-(BOOL)checkStringIsNumber:(NSString *)str{
+    BOOL valid=YES;
+    NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];
+    NSString *numberStr=[str stringByReplacingOccurrencesOfString:@"," withString:@""];
+    NSNumber *number=[numberFormatter numberFromString:numberStr];
+    if (numberStr.length && [numberStr floatValue]<1000000 &&number) {
+        valid=YES;
+        
+        if ([str rangeOfString:@"Number"].location != NSNotFound) {
+            NSScanner* scan = [NSScanner scannerWithString:numberStr]; 
+            int val;         
+            
+            valid=[scan scanInt:&val] && [scan isAtEnd];
+            
+            
+        }
+        
+        
+    } 
+    
+    return valid;
+    
+}
 
 @end

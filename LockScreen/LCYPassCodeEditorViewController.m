@@ -13,6 +13,7 @@
 #import "LCYSetPasscodeStateMachine.h"
 #import "LCYAppSettings.h"
 #import "PTTAppDelegate.h"
+#import "PTTEncryption.h"
 
 @interface LCYPassCodeEditorViewController(InputHandling)
 
@@ -170,10 +171,14 @@
 {
 	BOOL result = NO;
 	////NSLog(@"userInput: %@", userInput);
-	
+	LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    NSDictionary *lockDictionary=(NSDictionary *)[appDelegate lockValuesDictionary];
-    if ( [userInput isEqualToString:[self passCode]] &&[appDelegate hashDataFromString:[NSString stringWithFormat:@"%@asdj9emV3k30wer93",userInput]]==[lockDictionary valueForKey:K_LOCK_SCREEN_P_HSH]) 
+    
+
+    NSString *passcodeToCheck = (userInput) ? [NSString stringWithFormat:@"%@kdieJsi3ea18ki" ,userInput ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
+    PTTEncryption *encryption=[[PTTEncryption alloc]init];
+    
+    if ( [ (NSData *)[encryption getHashBytes:[appDelegate convertStringToData: passcodeToCheck]] isEqualToData:[appSettings passcodeData]] ) 
 	
 	{
 		result = YES;

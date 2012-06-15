@@ -9,6 +9,7 @@
 #import "LCYLockScreenViewController.h"
 #import "LCYAppSettings.h"
 #import "PTTAppDelegate.h"
+#import "PTTEncryption.h"
 
 static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 
@@ -68,12 +69,9 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 - (void) viewDidUnload 
 {
     [super viewDidUnload];
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
     
-    if (![appDelegate saveLockDictionarySettings]) {
-        //NSLog(@"error syncronizing user defaults");
-    };
+    
 	self.enterPassCodeBanner = nil;
 	self.wrongPassCodeBanner = nil;	
   
@@ -247,40 +245,39 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 	////NSLog(@"userInput: %@", userInput);
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-    NSMutableDictionary *lockDictionary=(NSMutableDictionary *)[appDelegate lockValuesDictionary];
+         BOOL ableToSave=NO;
 
-     BOOL ableToSave=NO;
-   //NSLog(@"lock dic value for key lock p hash %@",[lockDictionary valueForKey:K_LOCK_SCREEN_P_HSH]);
+    LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
+   
     
-    //NSLog(@"user input %@",userInput);
+    NSString *passcodeToCheck = (userInput) ? [NSString stringWithFormat:@"%@kdieJsi3ea18ki" ,userInput ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
+    PTTEncryption *encryption=[[PTTEncryption alloc]init];
     
-    //NSLog(@"userinput hash %@",[appDelegate hashDataFromString:[NSString stringWithFormat:@"%@asdj9emV3k30wer93",userInput]]);
+    if ( [ (NSData *)[encryption getHashBytes:[appDelegate convertStringToData: passcodeToCheck]] isEqualToData:[appSettings passcodeData]] ) 
+ 
     
-    //NSLog(@"passcode is %@",[self passCode]);
-    //1
-    if (userInput.length==4&& [userInput isEqualToString:[self passCode]]&&[[appDelegate hashDataFromString:[NSString stringWithFormat:@"%@asdj9emV3k30wer93",userInput]]isEqualToData:[lockDictionary valueForKey:K_LOCK_SCREEN_P_HSH]])
     {
         result = YES;
        
        //2
-        if (lockDictionary) {
+        if (appSettings) 
+        {
             ableToSave=YES;
             //3
-            if ([lockDictionary objectForKey:K_LOCK_SCREEN_ATTEMPT]) {
-                NSInteger userAttempts=0;
+            NSInteger userAttempts=0;
                 
-                 [lockDictionary setValue:[NSNumber numberWithInteger:userAttempts] forKey:K_LOCK_SCREEN_ATTEMPT];
+                 [appSettings setLockScreenAttempt:userAttempts];
                
-            } 
+             
             
             //3
                 isLocked_=NO;
             //3
-            if (lockDictionary && [[lockDictionary allKeys ]containsObject:K_LOCK_SCREEN_LOCKED]) {
-                [lockDictionary setValue:[NSNumber numberWithBool:isLocked_] forKey:K_LOCK_SCREEN_LOCKED ];
+            
+                [appSettings setLockScreenIsOn:isLocked_];
             
                 
-            }
+           
             //3
         }
         //2
@@ -295,16 +292,12 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
         
         if (ableToSave==YES) {
         
-        [appDelegate saveLockDictionarySettings];
-            
+            AudioServicesPlaySystemSound (soundFileObject);
             
         }
-        AudioServicesPlaySystemSound (soundFileObject);
-            
-    }
     //1
         
-    
+    }
     else 
     {
        
@@ -315,32 +308,29 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
         
        
         //2
-        if (lockDictionary&& [lockDictionary objectForKey:K_LOCK_SCREEN_ATTEMPT]) {
-            [lockDictionary setValue:[NSNumber numberWithInteger:userAttempts] forKey:K_LOCK_SCREEN_ATTEMPT];
+        
+           ableToSave= [appSettings setLockScreenAttempt:userAttempts];
             
-             [appDelegate saveLockDictionarySettings];
-            ableToSave=YES;
-        }
+     
+           
+       
        //2
    
         //2
-        if (userAttempts>3 ||ableToSave==NO) {
-           
-            [self turnOnTimer];
-            
-            
-            
-           
-            
-           
-        }
-        //2
-        else 
-        {
-            [self.enterPassCodeBanner removeFromSuperview];		
-            [self showBanner:self.wrongPassCodeBanner];
-            [self resetUIState];
-        }
+            if (userAttempts>3 ||ableToSave==NO) 
+            {
+               
+                [self turnOnTimer];
+         
+               
+            }
+            //2
+            else 
+            {
+                [self.enterPassCodeBanner removeFromSuperview];		
+                [self showBanner:self.wrongPassCodeBanner];
+                [self resetUIState];
+            }
         //2
   
        
@@ -357,8 +347,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 
 -(void)turnOnTimer{
 
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-     NSMutableDictionary *lockDictionary=(NSMutableDictionary *)[appDelegate lockValuesDictionary];
+    LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
     
     [self.enterPassCodeBanner removeFromSuperview];		
     [self showBanner:self.wrongPassCodeBanner];
@@ -370,36 +359,34 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
     
         isTimerOn_=TRUE;
         BOOL success=NO;
-    if (lockDictionary ){
+    if (appSettings ){
         
         
         
-        if ([lockDictionary objectForKey:K_LOCK_SCREEN_LOCKED]) {
+        
     
-    [lockDictionary setValue:[NSNumber numberWithBool:isLocked_] forKey:K_LOCK_SCREEN_LOCKED];
-            success=YES;
+        success= [appSettings setLockScreenLocked:isLocked_];
+        
 
     }
         else {
             success=NO;
         }
    
-    if (success && [lockDictionary objectForKey:K_LOCK_SCREEN_PASSCODE_IS_ON]){    
+    if (success && [appSettings isPasscodeOn]){    
         
-        [lockDictionary setValue:[NSNumber numberWithBool:isTimerOn_] forKey:K_LOCK_SCREEN_TIMER_ON];
-        success=YES;
+       success= [appSettings setLockScreenTimerOn:isTimerOn_];
+      
         
     }  
     else {
         success=NO;
     }
         
-}
-    if (success==YES) {
-       success= [appDelegate saveLockDictionarySettings];
-    }
+
+    
    
-    if (success==NO) {
+    if (!success) {
         userAttempts=userAttempts +20;
     }
     
@@ -408,14 +395,14 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
         tryAgainMessageLabel_.text=@"App Locked For 1 Minute";
         
     }
-    else if (userAttempts >5 && userAttempts <20){
+    else if (userAttempts >5 && userAttempts <10){
         tryAgainMessageLabel_.text =[NSString stringWithFormat:@"App Locked For %i minutes",userAttempts];
         timeInterval=userAttempts *60;
         
-    }else if (userAttempts>19){
+    }else if (userAttempts>9){
         tryAgainMessageLabel_.text =[NSString stringWithFormat:@"Too many unlock attempts. App locked."];
 
-        timeInterval=(userAttempts *60)+(172800);
+        timeInterval=(userAttempts*60 *60)+(172800);
     }
     
     if (!timer_) {
@@ -432,35 +419,27 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 
 
 }
+
+
 -(void)viewDidLoad{
 
     [super viewDidLoad];
-     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    NSMutableDictionary *lockDictionary=(NSMutableDictionary *)[appDelegate lockValuesDictionary];
+    LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
     
         
-    userAttempts=0;
+   
     
-    if (lockDictionary&&[lockDictionary objectForKey:K_LOCK_SCREEN_ATTEMPT]) 
-    {
-        userAttempts=[(NSNumber *)[lockDictionary valueForKey:K_LOCK_SCREEN_ATTEMPT]integerValue];
-    }
-    else 
-    {
-        userAttempts=20;
-    }
+    
+        userAttempts=[appSettings numberOfUnlockAttempts];
+    
+   
     isTimerOn_=FALSE;
    //NSLog(@"timer is %i",isTimerOn_);
     
-    if (lockDictionary&&[lockDictionary objectForKey:K_LOCK_SCREEN_TIMER_ON]) 
-    {
-    isTimerOn_=(BOOL)[(NSNumber *)[lockDictionary valueForKey:K_LOCK_SCREEN_TIMER_ON]boolValue];
+   
+    isTimerOn_=(BOOL)[appSettings isLockedTimerOn];
   //NSLog(@"timer is %i",isTimerOn_);
-    }
-    else {
-        isTimerOn_=YES;
-    }
-    
+       
     
     
     if (isTimerOn_) {
@@ -479,9 +458,9 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
     
     
     isLocked_=TRUE;
-    [lockDictionary setValue:[NSNumber numberWithBool:isLocked_] forKey:K_LOCK_SCREEN_LOCKED];
     
-    [appDelegate saveLockDictionarySettings];
+    [appSettings setLockScreenLocked:isLocked_];
+   
     // Create the URL for the source audio file. The URLForResource:withExtension: method is
     //    new in iOS 4.0.
     NSURL *padlockClick   = [[NSBundle mainBundle] URLForResource: @"padlock_click"
@@ -515,12 +494,9 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
     timer_=nil;
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    NSMutableDictionary *lockDictionary=(NSMutableDictionary *)[appDelegate lockValuesDictionary];
+    LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
+    [appSettings setLockScreenIsOn:isTimerOn_];
     
-    [lockDictionary setValue:[NSNumber numberWithBool:isTimerOn_] forKey:K_LOCK_SCREEN_TIMER_ON];
-    if (![appDelegate saveLockDictionarySettings]) {
-        //NSLog(@"unable to syncronize defaults");
-    }
 }
 - (void) handleCompleteUserInput:(NSString *) userInput;
 {
