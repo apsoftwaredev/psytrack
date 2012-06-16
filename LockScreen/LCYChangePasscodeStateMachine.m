@@ -7,8 +7,9 @@
 //
 // Edited by Dan Boice 1/20/2012
 #import "LCYChangePasscodeStateMachine.h"
-
-
+#import "PTTEncryption.h"
+#import "PTTAppDelegate.h"
+#import "LCYAppSettings.h"
 NSString* NSStringFromLCYChangePasscodeStates (LCYChangePasscodeStates state)
 {
 	NSString *result = nil;
@@ -106,10 +107,19 @@ NSString* NSStringFromLCYChangePasscodeStates (LCYChangePasscodeStates state)
 
 - (void) transitionWithInput:(NSString *) input;
 {
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
+    PTTEncryption *encryption=[[PTTEncryption alloc]init];
+    NSString *passcodeToSave = (input) ? [NSString stringWithFormat:@"%@kdieJsi3ea18ki" ,input ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
 	switch (state_) 
 	{
 		case LCYChangePasscodeStatesConfirmExistingPassword:
-			if ([self.existingPasscode isEqualToString:input])
+        {
+            
+           
+           
+			if ([[appSettings passcodeData] isEqualToData:[encryption getHashBytes:[appDelegate convertStringToData: passcodeToSave]]])
 			{
 				[self successTransition];
 			}
@@ -117,15 +127,16 @@ NSString* NSStringFromLCYChangePasscodeStates (LCYChangePasscodeStates state)
 			{
 				[self failTransition];
 			}
+        }
 			break;
 			
 		case LCYChangePasscodeStatesGetNewPassword:
-			self.theNewPasscode = input;
+			self.theNewPasscode = [encryption getHashBytes:[appDelegate convertStringToData: passcodeToSave]];
 			[self successTransition];
 			break;
 			
 		case LCYChangePasscodeStatesConfirmNewPassword:
-			if ([self.theNewPasscode isEqualToString:input])
+			if ([self.theNewPasscode isEqualToData:[encryption getHashBytes:[appDelegate convertStringToData: passcodeToSave]]])
 			{
 				[self successTransition];
 			}

@@ -27,8 +27,8 @@ static NSString * const K_LOCK_SCREEN_CURRENT_KEYSTRING= @"current_keyString";
 
 -(BOOL)setLockScreenLocked:(BOOL)lockScreenLocked;
 
--(BOOL)setLockScreenIsOn:(BOOL)lockScreenIsOn;
-
+-(BOOL)setLockScreenPasscodeIsOn:(BOOL)lockScreenIsOn;
+-(BOOL)setPasscodeDataWithData:(NSData *)passcodeDataToSave;
 -(BOOL)setLockScreenAttempt:(int)attempt;
 
 

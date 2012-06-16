@@ -212,7 +212,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 //+(BOOL)getUseiCloud;
 
 + (NSString *)GetUUID;
--(void)setLCYLockPlist;
+
 -(NSData*)getLocalSymetricData;
 @end
 
@@ -222,10 +222,10 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 - (BOOL) isPasscodeOn;
 - (BOOL) isLockedAtStartup;
 -(BOOL)isLockedTimerOn;
-- (NSString *) appLockPasscode;
+
 - (void) lockApplication;
 -(void)displayWrongPassword;
-- (void) setLockedAtStartup:(BOOL)value;
+
 
 
 -(NSString *)lockSettingsFilePath;

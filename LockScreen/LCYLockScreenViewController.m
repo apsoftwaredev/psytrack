@@ -274,7 +274,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
                 isLocked_=NO;
             //3
             
-                [appSettings setLockScreenIsOn:isLocked_];
+                [appSettings setLockScreenLocked:isLocked_];
             
                 
            
@@ -493,9 +493,8 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
     isTimerOn_=FALSE;
     timer_=nil;
     
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
-    [appSettings setLockScreenIsOn:isTimerOn_];
+    [appSettings setLockScreenTimerOn:isTimerOn_];
     
 }
 - (void) handleCompleteUserInput:(NSString *) userInput;

@@ -189,9 +189,9 @@ if(section.headerTitle !=nil)
 }
 -(IBAction)updatePasscodeOnSwichCell{
 
+   
     
    
-  
                  BOOL passCodeIsOn=[self passCodeLockIsOn];
     if (tableModel.sectionCount) {
         SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:0];
@@ -291,49 +291,48 @@ if(section.headerTitle !=nil)
     
     LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
 	
-    appSettings.lockScreenLockAtStartup=value;
+    [appSettings setLockScreenStartup:value];
     
     
 }
 
 
-- (NSString *) currentPasscode;
+- (NSData *) currentPasscode;
 {
-	PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-   
-	return [appDelegate passCodeItem];		
+    
+	LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
+	return [appSettings passcodeData];		
 }
 
-- (void) updatePasscodeSettings: (NSString *) newCode;
+- (void) updatePasscodeSettings: (NSData *) newCode;
 {
-	PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    NSMutableDictionary *lockDictionary=(NSMutableDictionary *)[appDelegate lockValuesDictionary];
-    
+	
+    LCYAppSettings *appSettings=[[LCYAppSettings alloc]init]; 
 	if (newCode == nil)
 	{
-        [lockDictionary setValue:[NSNumber numberWithBool:NO] forKey:K_LOCK_SCREEN_PASSCODE_IS_ON];
-		
+        
+        
+        
+		[appSettings setLockScreenPasscodeIsOn:NO];
 		
         
 	}
 	else 
 	{
         
-		 [lockDictionary setValue:[NSNumber numberWithBool:YES] forKey:K_LOCK_SCREEN_PASSCODE_IS_ON];
-        [lockDictionary setValue:newCode forKey:K_LOCK_SCREEN_PASSCODE];
-        [lockDictionary setValue:[appDelegate hashDataFromString:[NSString stringWithFormat:@"%@asdj9emV3k30wer93",newCode]] forKey:K_LOCK_SCREEN_P_HSH];
-     
-        //NSLog(@"lock dictionary value for key lcok pw hash%@",[lockDictionary valueForKey:K_LOCK_SCREEN_P_HSH]);
+        [appSettings setLockScreenPasscodeIsOn:YES];
+		[appSettings setPasscodeDataWithData:newCode];
+        
 	}
 
-	[appDelegate saveLockDictionarySettings];
+	
     
     [self performSelector:@selector(updatePasscodeOnSwichCell)];
 }
 
 #pragma mark -
 #pragma mark LCYPassCodeEditorDelegate protocol implementation...
-- (void) passcodeEditor: (LCYPassCodeEditorViewController *) passcodeEditor newCode:(NSString *) newCode;
+- (void) passcodeEditor: (LCYPassCodeEditorViewController *) passcodeEditor newCode:(NSData *) newCode;
 {
 	//NSLog(@"editor: %@ | newCode: %@", passcodeEditor, newCode);
 	[self.navigationController dismissModalViewControllerAnimated:YES];

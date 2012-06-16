@@ -5,7 +5,8 @@
 // Edited by Dan Boice 1/20/2012
 #import "LCYTurnOffPasscodeStateMachine.h"
 #import "PTTAppDelegate.h"
-
+#import "LCYAppSettings.h"
+#import "PTTEncryption.h"
 
 NSString * NSStringFromLCYTurnOffPasscodeStates (LCYTurnOffPasscodeStates state)
 {
@@ -82,17 +83,20 @@ NSString * NSStringFromLCYTurnOffPasscodeStates (LCYTurnOffPasscodeStates state)
 
 - (void) transitionWithInput:(NSString *) input;
 {
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
+    PTTEncryption *encryption=[[PTTEncryption alloc]init];
+    NSString *passcodeToSave = (input) ? [NSString stringWithFormat:@"%@kdieJsi3ea18ki" ,input ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
 	switch (state_) 
 	{
 		case LCYTurnOffPasscodeStatesConfirmExistingPassword:
-			if ([self.existingPasscode isEqualToString:input])
+			if ([[appSettings passcodeData] isEqualToData:[encryption getHashBytes:[appDelegate convertStringToData: passcodeToSave]]])
 			{
 				[self successTransition];
 			}
 			else 
 			{
-                
-                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
                 [appDelegate lockApplication];
                 [appDelegate displayWrongPassword];
 				[self failTransition];

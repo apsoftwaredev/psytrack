@@ -4,8 +4,9 @@
 //
 // Edited by Dan Boice 1/20/2012
 #import "LCYSetPasscodeStateMachine.h"
-
-
+#import "PTTAppDelegate.h"
+#import "LCYAppSettings.h"
+#import "PTTEncryption.h"
 NSString* NSStringFromLCYSetPasscodeStates (LCYSetPasscodeStates state)
 {
 	NSString *result = nil;
@@ -91,15 +92,20 @@ NSString* NSStringFromLCYSetPasscodeStates (LCYSetPasscodeStates state)
 
 - (void) transitionWithInput:(NSString *) input;
 {
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+ 
+    PTTEncryption *encryption=[[PTTEncryption alloc]init];
+    NSString *passcodeToSave = (input) ? [NSString stringWithFormat:@"%@kdieJsi3ea18ki" ,input ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
 	switch (state_) 
 	{			
 		case LCYSetPasscodeStatesGetNewPassword:
-			self.theNewPasscode = input;
+			self.theNewPasscode = [encryption getHashBytes:[appDelegate convertStringToData: passcodeToSave]];
 			[self successTransition];
 			break;
 			
 		case LCYSetPasscodeStatesConfirmNewPassword:
-			if ([self.theNewPasscode isEqualToString:input])
+			if ([self.theNewPasscode isEqualToData:[encryption getHashBytes:[appDelegate convertStringToData: passcodeToSave]]])
 			{
 				[self successTransition];
 			}

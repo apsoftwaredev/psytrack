@@ -107,11 +107,11 @@ const int PASSCODE_INPUT_HANDLER_PASSCODE_LENGTH = 4;
 
 - (void) updateLockDigitsForKeyPress;
 {
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
+   
+    LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
 
     BOOL isTimerOn_=FALSE;
-    isTimerOn_=(BOOL)[[[appDelegate lockValuesDictionary] valueForKey:K_LOCK_SCREEN_TIMER_ON] boolValue];
+    isTimerOn_=(BOOL)[appSettings isLockedTimerOn];
 	if (isTimerOn_) {
        
         [self adjustLockDigitsForDeletePress];

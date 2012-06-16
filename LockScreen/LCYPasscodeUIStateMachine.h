@@ -13,8 +13,8 @@
 
 }
 
-@property (nonatomic, copy) NSString* theNewPasscode;
-@property (nonatomic, copy) NSString* existingPasscode;
+@property (nonatomic, copy) NSData* theNewPasscode;
+@property (nonatomic, copy) NSData* existingPasscode;
 @property (nonatomic, readonly) NSString *currentErrorText;
 
 - (NSString *) currentPromptText;

@@ -1338,44 +1338,7 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
     return (__bridge_transfer NSString *)string;
 }
 
--(void)setLCYLockPlist{
 
-// bit.ly/zpnxI6 file
-
-    NSString * lcyLockPath=[[NSBundle mainBundle] pathForResource:@"LCYLock"
-                                                           ofType:@"plist"];
-    
-    if (![[NSUserDefaults standardUserDefaults]objectForKey:@"passCodeIsOn"]) {
-        NSDictionary * lcyLockValuesDict=[NSDictionary dictionaryWithContentsOfFile:lcyLockPath];
-        [[NSUserDefaults standardUserDefaults] registerDefaults:lcyLockValuesDict];
-    }
-   
-if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_ATTEMPT]) {
-    [[NSUserDefaults standardUserDefaults]setValue:[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_ATTEMPT]  forKey:@"attempt"];
-}
-
-
-
-if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_PASSCODE]&&[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_PASSCODE]) {
-    
-    int randomNumber = (arc4random() % 9999) + 1000;
-    
-    [[NSUserDefaults standardUserDefaults] setValue:[NSString stringWithFormat:@"%i", randomNumber]  forKey:@"pw"];
-}
-if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_ATTEMPT]) {
-    [[NSUserDefaults standardUserDefaults]setValue:[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_ATTEMPT]  forKey:@"screenLocked"];
-}
-if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_TIMER_ON]) {
-    [[NSUserDefaults standardUserDefaults]setValue:[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_TIMER_ON]  forKey:@"timer"];
-}
-    
-if (lockValuesDictionary_ &&[lockValuesDictionary_ objectForKey:K_LOCK_SCREEN_LOCK_AT_STARTUP]) {
-    [[NSUserDefaults standardUserDefaults]setValue:[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_LOCK_AT_STARTUP]  forKey:@"startupLock"];
-}
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
-}
 -(NSString *)generateRandomStringOfLength:(int )length{
 
 
@@ -1801,9 +1764,7 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
 }
 -(NSString *)setupLockDictionaryResultStr{
 
-    if (lockValuesDictionary_ && [lockValuesDictionary_ allKeys].count==6) {
-        return @"Lock settings loaded";
-    }
+   
     
     
     
@@ -1898,7 +1859,7 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
     
     NSString* newStr;
     if (data.length) {
-        newStr = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+        newStr = [[NSString alloc] initWithData:data encoding:[NSString defaultCStringEncoding]];
     }
     return newStr;
 
@@ -6837,7 +6798,7 @@ return [self applicationDrugsDirectory].path;
         
 		self.lockScreenVC = [[LCYLockScreenViewController alloc] initWithNibName:lockScreenNibName bundle:[NSBundle mainBundle]];
         
-		self.lockScreenVC.passCode = [self appLockPasscode];
+		
 		self.lockScreenVC.delegate = self;
          tabBar.userInteractionEnabled=FALSE;
 	}

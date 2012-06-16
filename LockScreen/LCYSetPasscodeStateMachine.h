@@ -16,12 +16,12 @@ typedef enum
 @interface LCYSetPasscodeStateMachine : LCYPasscodeUIStateMachine 
 {
 	LCYSetPasscodeStates state_;
-	NSString *theNewPasscode_;	
+	NSData *theNewPasscode_;	
 	NSString *currentErrorText_;
 }
 
 
-@property (nonatomic, copy) NSString* theNewPasscode;
+@property (nonatomic, copy) NSData* theNewPasscode;
 
 @property (nonatomic, readonly) NSString *currentErrorText;
 

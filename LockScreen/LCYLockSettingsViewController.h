@@ -21,11 +21,11 @@
 // LCYPassCodeEditorDelegate protocol...
 
 
-- (void) passcodeEditor: (LCYPassCodeEditorViewController *) passcodeEditor newCode:(NSString *) newCode;
+- (void) passcodeEditor: (LCYPassCodeEditorViewController *) passcodeEditor newCode:(NSData *) newCode;
 
 - (BOOL) passCodeLockIsOn;
-- (NSString *) currentPasscode;
-- (void) updatePasscodeSettings: (NSString *) newCode;
+- (NSData *) currentPasscode;
+- (void) updatePasscodeSettings: (NSData *) newCode;
 - (void) lockApplication;
 -(IBAction)updatePasscodeOnSwichCell;
 
