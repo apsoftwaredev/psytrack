@@ -467,6 +467,11 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
    
     // Create the URL for the source audio file. The URLForResource:withExtension: method is
     //    new in iOS 4.0.
+    
+    BOOL shouldPlayPadlockClick=(BOOL)[[NSUserDefaults standardUserDefaults]boolForKey:K_LOCK_SCREEN_PADLOCK_SOUND_IS_ON];
+    
+    if (shouldPlayPadlockClick) {
+    
     NSURL *padlockClick   = [[NSBundle mainBundle] URLForResource: @"padlock_click"
                                                     withExtension: @"m4a"];
     
@@ -482,7 +487,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 
     AudioServicesPlaySystemSound (soundFileObject);
   
-  
+    }
   
     [self.passCodeInputField becomeFirstResponder];
 

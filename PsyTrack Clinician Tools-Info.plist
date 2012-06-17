@@ -109,6 +109,10 @@
 	<string>PTTMasterViewController_iPhone</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>PTTMasterViewController_iPad</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Monaco.dfont</string>
+	</array>
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>

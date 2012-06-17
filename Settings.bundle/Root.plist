@@ -5,40 +5,6 @@
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
-			<key>Title</key>
-			<string>iCloud</string>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>FooterText</key>
-			<string>iCloud must be enbled and have &quot;Documents and Data&quot; turned on in the iCloud settings (iOS &gt;5.0). </string>
-		</dict>
-		<dict>
-			<key>DefaultValue</key>
-			<true/>
-			<key>Key</key>
-			<string>icloud_preference</string>
-			<key>Title</key>
-			<string>Use iCloud</string>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>Default Calendar Settings</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Calendar Name</string>
-			<key>Key</key>
-			<string>calendar_name</string>
-			<key>DefaultValue</key>
-			<string>Client Appointments</string>
-		</dict>
-		<dict>
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
@@ -47,22 +13,6 @@
 			<string>calander_location</string>
 			<key>DefaultValue</key>
 			<string>The Clinic</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>Default Address Book Settings</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Group Name</string>
-			<key>Key</key>
-			<string>abgroup_name</string>
-			<key>DefaultValue</key>
-			<string>Clinicians</string>
 		</dict>
 	</array>
 	<key>StringsTable</key>
@@ -88,5 +38,7 @@
 		<key>current_key_string</key>
 		<date>2012-04-13T02:57:38Z</date>
 	</dict>
+	<key>lock_screen_padlock_sound_is_on</key>
+	<true/>
 </dict>
 </plist>

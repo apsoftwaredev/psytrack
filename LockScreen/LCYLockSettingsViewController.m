@@ -133,16 +133,16 @@
 //    SCSwitchCell *passCodeOnOffSwitchCell=[[SCSwitchCell alloc] initWithText:@"Passcode" withBoundKey:@"lock_screen_passcode_is_on" withValue:[NSNumber numberWithBool:(BOOL)[self passCodeLockIsOn]]];
     passCodeOnOffSwitchCell.tag=1;
     
-    SCSwitchCell *lockOnStartUpSwitchCell=[[SCSwitchCell alloc] initWithText:@"Lock on Startup"  boundObject:K_LOCK_SCREEN_LOCK_AT_STARTUP switchOnPropertyName:@"LockAtStartupSwitch"];
+    SCSwitchCell *lockOnStartUpSwitchCell=[[SCSwitchCell alloc] initWithText:@"Lock on Startup"  boundObject:K_LOCK_SCREEN_LOCK_AT_STARTUP switchOnPropertyName:nil];
     lockOnStartUpSwitchCell.switchControl.on=[self isLockedAtStartup];
 //    SCSwitchCell *lockOnStartUpSwitchCell=[[SCSwitchCell alloc] initWithText:@"Lock on Startup" withBoundKey:@"lock_screen_lock_at_startup" withSwitchOnValue:[NSNumber numberWithBool:[self isLockedAtStartup]]];
     lockOnStartUpSwitchCell.tag=2;
     // Create an array of objects section
    
-    SCSwitchCell *lockSoundSwitchCell=[[SCSwitchCell alloc] initWithText:@"Lock on Startup"  boundObject:K_LOCK_SCREEN_PADLOCK_CLICK_SOUND switchOnPropertyName:@"PadlockClickSwich"];
+    SCSwitchCell *lockSoundSwitchCell=[[SCSwitchCell alloc] initWithText:@"Padlock Sound"  boundObject:K_LOCK_SCREEN_PADLOCK_SOUND_IS_ON switchOnPropertyName:nil];
     
-    
-    
+    lockSoundSwitchCell.switchControl.on=[[NSUserDefaults standardUserDefaults]boolForKey:K_LOCK_SCREEN_PADLOCK_SOUND_IS_ON];
+    lockSoundSwitchCell.tag=4;
 //    SCTextFieldCell *oldEncryptionString=[SCTextFieldCell cellWithText:@"Old" withBoundKey:@"old_encryption_string" withValue:nil];
     
    
@@ -155,7 +155,7 @@
     SCArrayOfObjectsSection *settingsSection=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Lock Screen Settings"];
     [settingsSection addCell:passCodeOnOffSwitchCell];
      [settingsSection addCell:lockOnStartUpSwitchCell];
-   
+    [settingsSection addCell:lockSoundSwitchCell];
 //    
         
     
@@ -182,6 +182,32 @@
     if (cell.tag==1 &&[cell isKindOfClass:[SCSwitchCell class]]) {
         [self handleTogglePasscode];
         
+       
+             
+            
+            if (![self passCodeLockIsOn]) {
+                
+                [self setLockedAtStartup:NO];
+                 if (tableViewModel.sectionCount>1) {
+                     SCTableViewSection *sectionAtOne=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
+                
+                     SCTableViewCell *cellAtOne=(SCTableViewCell *)[sectionAtOne cellAtIndex:1];
+                     
+                     if ([cellAtOne isKindOfClass:[SCSwitchCell class]]) {
+                         SCSwitchCell *lockedAtStartupSwitchCell=(SCSwitchCell *)cellAtOne;
+                         
+                         [lockedAtStartupSwitchCell.switchControl setOn:NO];
+                         
+                         
+                         
+                     }
+                     
+                 }
+                
+            }
+            
+        
+        
     }
     
     if (cell.tag==2 &&[cell isKindOfClass:[SCSwitchCell class]]) {
@@ -194,27 +220,33 @@
         }
         else {
              [self handleTogglePasscode];
+            
         }
         
         
     }
 
-    if ([cell isKindOfClass:[EncryptionTokenCell class]]) {
-
-        EncryptionTokenCell *encryptionTokenCell=(EncryptionTokenCell *)cell;
+    if (cell.tag==4 &&[cell isKindOfClass:[SCSwitchCell class]]) {
         
-            UISwitch *viewTokenSwitch=(UISwitch *)encryptionTokenCell.viewTokenSwitch;
-            
-            if (viewTokenSwitch.on) {
-                
-                
-                
-                
-            }
-            
+        SCSwitchCell *switchCell=(SCSwitchCell *)cell;
+        //NSLog(@"switch cell value %i",[switchCell.switchControl isOn]);
+        
+        [[NSUserDefaults standardUserDefaults]setBool:switchCell.switchControl.on forKey:K_LOCK_SCREEN_PADLOCK_SOUND_IS_ON];
         
         
     }
+
+//    if ([cell isKindOfClass:[EncryptionTokenCell class]]) {
+//
+//        EncryptionTokenCell *encryptionTokenCell=(EncryptionTokenCell *)cell;
+//        
+//           
+//            
+//           
+//            
+//        
+//        
+//    }
 
 }
 
@@ -228,12 +260,62 @@
         EncryptionTokenCell *encryptionTokenCell=(EncryptionTokenCell *)cell;
         
         switch (button.tag) {
+            
+            
+            case 401:
+            {
+                //get shared token and view it
+               
+                
+                UIView *textFieldView=(UIView *)[cell viewWithTag:400];
+                if ([textFieldView isKindOfClass:[UITextField class]]) {
+                    UITextField *tokenTextField=(UITextField *)textFieldView;
+                    [tokenTextField setSecureTextEntry:NO];
+                    
+                    LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
+                    
+                    NSString *sharedToken=  [appSettings currentSharedTokenString];
+                    
+                    if ([sharedToken isEqualToString:@"wMbq-zvD2-6p"]) {
+                        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                        
+                        [appDelegate displayNotification:@"Current token not yet set."];
+
+                        
+                    }
+                    else {
+                         tokenTextField.text=sharedToken;
+                    }
+                   
+                    
+                    
+                }
+                
+                
+                
+            }
+                break;
+            
+            
             case 402:
             {
             //generate new token
-            
-            
-            
+                LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
+                
+                
+                
+                UIView *textFieldView=(UIView *)[cell viewWithTag:400];
+                if ([textFieldView isKindOfClass:[UITextField class]]) {
+                    UITextField *tokenTextField=(UITextField *)textFieldView;
+                    [tokenTextField setText:[appSettings generateToken]];
+                    
+                    
+                    
+                    
+                }
+                
+                
+               
             }
                 break;
             case 403:
@@ -295,9 +377,9 @@ if(section.headerTitle !=nil)
     
    
                  BOOL passCodeIsOn=[self passCodeLockIsOn];
-    if (objectsModel.sectionCount >0) {
+    if (objectsModel.sectionCount >1) {
        
-        SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:0];
+        SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:1];
         if (section.cellCount) {
             SCSwitchCell *switchCell=(SCSwitchCell *)[section cellAtIndex:0];
             [switchCell.switchControl setOn:passCodeIsOn];

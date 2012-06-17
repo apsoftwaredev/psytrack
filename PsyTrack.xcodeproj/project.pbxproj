@@ -227,6 +227,7 @@
 		E71E26C7156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E71E26C6156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m */; };
 		E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DD158E28DC00CE1AF4 /* menubar-full.png */; };
 		E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */; };
+		E74167EA158E782900CE1AF4 /* Monaco.dfont in Resources */ = {isa = PBXBuildFile; fileRef = E74167E5158E739300CE1AF4 /* Monaco.dfont */; };
 		E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B76150858D3005B798A /* ABGroupSelectionCell.m */; };
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 		E7577FA9158C1DAF0044D344 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -692,6 +693,7 @@
 		E71E26C6156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SCArrayOfObjectsModel+CoreData+SelectionSection.m"; sourceTree = "<group>"; };
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
 		E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full@2x.png"; sourceTree = "<group>"; };
+		E74167E5158E739300CE1AF4 /* Monaco.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = Monaco.dfont; sourceTree = "<group>"; };
 		E7516B75150858D3005B798A /* ABGroupSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABGroupSelectionCell.h; sourceTree = "<group>"; };
 		E7516B76150858D3005B798A /* ABGroupSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABGroupSelectionCell.m; sourceTree = "<group>"; };
 		E7516B7915085A23005B798A /* PTABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTABGroup.h; sourceTree = "<group>"; };
@@ -1435,6 +1437,7 @@
 		37F7CFCA1500602900AD2C3A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E74167E5158E739300CE1AF4 /* Monaco.dfont */,
 				3767981815006A8100D0639D /* InfoPlist.strings */,
 				37F7CFCB150060D400AD2C3A /* main.m */,
 				37F7CFCD150060D400AD2C3A /* PsyTrack-Prefix.pch */,
@@ -1788,6 +1791,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E74167EA158E782900CE1AF4 /* Monaco.dfont in Resources */,
 				378DED7714FE72F000CF4F12 /* AboutDocumentViewController.xib in Resources */,
 				378DED8714FE72F000CF4F12 /* about.plist in Resources */,
 				378DED8814FE72F000CF4F12 /* app_violator.png in Resources */,

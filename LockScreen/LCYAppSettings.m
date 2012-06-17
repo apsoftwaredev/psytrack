@@ -58,6 +58,10 @@
 
 
 }
+
+
+
+
 -(BOOL)setPasscodeDataWithData:(NSData *)passcodeDataToSave{
     
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
@@ -89,6 +93,46 @@
     
     
 }
+
+
+-(BOOL)setTokenDataWithString:(NSString *)tokenString{
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+  	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
+	 NSLog(@"tokenToSave: %@", tokenString);
+	
+	
+    
+    
+    BOOL success=NO;
+    NSData *tokenData = [wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN];
+    
+    
+    
+    if (!tokenData) {
+        
+        [wrapper newSearchDictionary:K_CURRENT_SHARED_TOKEN];
+        success= [wrapper createKeychainValueWithData:[appDelegate convertStringToData: tokenString] forIdentifier:K_CURRENT_SHARED_TOKEN];
+        //           passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
+        
+        
+    }
+    else {
+        success= [wrapper updateKeychainValueWithData:[appDelegate convertStringToData: tokenString] forIdentifier:K_CURRENT_SHARED_TOKEN];
+    }
+    
+    
+    tokenString=nil;
+ 
+  
+    wrapper=nil;
+    
+    return success;
+    
+    
+}
+
 
 
 -(BOOL)setLockScreenLocked:(BOOL)lockScreenLocked{
@@ -252,7 +296,16 @@
     
     
 }
+-(NSString *)currentSharedTokenString{
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
 
+    return [appDelegate convertDataToString:(NSData *) [wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN]];
+    
+    
+}
 
 - (BOOL) isPasscodeOn
 {	
@@ -348,5 +401,17 @@
     return valid;
     
 }
+-(NSString *)generateToken{
 
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    NSString *tokenString=[appDelegate generateRandomStringOfLength:4];
+    tokenString=[tokenString stringByAppendingFormat:@"-%@",[appDelegate generateRandomStringOfLength:4]];
+    tokenString=[tokenString stringByAppendingFormat:@"-%@",[appDelegate generateRandomStringOfLength:4]];
+
+
+    return tokenString;
+
+
+}
 @end

@@ -934,7 +934,8 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
 -(BOOL)setupDefaultSymetricData:(BOOL)reset{
     
    
-      
+  
+    
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
 	
    
@@ -943,8 +944,7 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
         NSData *passcodeData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE];
         if (!passcodeData&&!reset) {
        
-            [wrapper newSearchDictionary:K_LOCK_SCREEN_PASSCODE];
-           success= [wrapper createKeychainValueWithData:[encryption_ getHashBytes:[self convertStringToData: @"o6fjZ4dhvKIUYVmaqnNJIPCBE2"]] forIdentifier:K_LOCK_SCREEN_PASSCODE];
+            success= [wrapper createKeychainValueWithData:[encryption_ getHashBytes:[self convertStringToData: @"o6fjZ4dhvKIUYVmaqnNJIPCBE2"]] forIdentifier:K_LOCK_SCREEN_PASSCODE];
 //           passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
             
            
@@ -955,6 +955,23 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
         else {
             success=YES;
         }
+    
+    NSData *tokenData = [wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN];
+    if (!tokenData&&!reset) {
+        
+        success= [wrapper createKeychainValueWithData:[self convertStringToData:@"wMbq-zvD2-6p"] forIdentifier:K_CURRENT_SHARED_TOKEN];
+        //           passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
+        
+        
+    }
+    else if (reset){
+        success= [wrapper updateKeychainValueWithData:[self convertStringToData:@"wMbq-zvD2-6p"] forIdentifier:K_LOCK_SCREEN_PASSCODE];
+    }
+    else {
+        success=YES;
+    }
+    
+    
     
 //    NSLog(@"passcode data length is %i",passcodeData.length);
 //    NSString *passcode=(NSString *)[self convertDataToString:passcodeData];

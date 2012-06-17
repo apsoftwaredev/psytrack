@@ -9,7 +9,7 @@
 #import "EncryptionTokenCell.h"
 
 @implementation EncryptionTokenCell
-@synthesize setKeyButton,tokenField,viewTokenSwitch,generateNewButton,
+@synthesize setKeyButton,tokenField=tokenField_,viewTokenButton,generateNewButton,
 validateCurrentPasswordLabel,validateEncryptionTokenLabel,
 validateNewPasswordLabel,validateReenterNewPasswordLabel;
 
@@ -29,7 +29,8 @@ validateNewPasswordLabel,validateReenterNewPasswordLabel;
 -(void)performInitialization{
 
 
-  
+    
+    [tokenField_ setFont:[UIFont fontWithName:@"Monaco" size:24]];
 
 }
 

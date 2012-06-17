@@ -11,9 +11,9 @@
 @interface EncryptionTokenCell : SCCustomCell{
 
 
-    UITextField *tokenField_;
+   __weak UITextField *tokenField_;
     UIButton *setKeyButton_;
-    UISwitch *viewTokenSwitch_;
+    UIButton *viewTokenButton_;
      UIButton *generateNewButton_;
     UILabel *validateCurrentPasswordLabel_;
     UILabel *validateNewPasswordLabel_;
@@ -23,7 +23,7 @@
 
 @property (nonatomic, weak) IBOutlet UITextField *tokenField;
 @property (nonatomic, weak) IBOutlet UIButton *setKeyButton;
-@property (nonatomic, weak) IBOutlet UISwitch *viewTokenSwitch;
+@property (nonatomic, weak) IBOutlet UIButton *viewTokenButton;
 @property (nonatomic, weak) IBOutlet UIButton *generateNewButton;
 @property (nonatomic, weak) IBOutlet UILabel *validateCurrentPasswordLabel;
 @property (nonatomic, weak) IBOutlet UILabel *validateNewPasswordLabel;

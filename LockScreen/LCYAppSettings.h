@@ -29,7 +29,7 @@ static NSString * const K_LOCK_SCREEN_PADLOCK_SOUND_IS_ON=@"lock_screen_padlock_
 
 
 -(BOOL)setPasscodeDataWithString:(NSString *)passcodeString;
-
+-(BOOL)setTokenDataWithString:(NSString *)tokenString;
 
 -(BOOL)setLockScreenLocked:(BOOL)lockScreenLocked;
 
@@ -51,5 +51,7 @@ static NSString * const K_LOCK_SCREEN_PADLOCK_SOUND_IS_ON=@"lock_screen_padlock_
 
 -(BOOL)isAppLocked;
 -(BOOL)isLockedTimerOn;
+-(NSString *)generateToken;
+-(NSString *)currentSharedTokenString;
 
 @end
