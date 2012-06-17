@@ -86,11 +86,9 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 	[super viewWillAppear: animated];
 	[self showBanner:self.enterPassCodeBanner];
 	
-	// iOS 3.0 compatibility: change the background colour to one that is available on earlier versions of the OS...
-	if (![UIColor respondsToSelector:@selector(scrollViewTexturedBackgroundColor)])
-	{
-		self.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
-	}
+    
+
+	
 }
 //-(NSString *)textMessageResetGenerator:(NSString *)textMessageNumber{
 //
@@ -426,7 +424,13 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
     [super viewDidLoad];
     LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
     
+   
         
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        self.view.backgroundColor=appDelegate.window.backgroundColor;
+        
+    
    
     
     

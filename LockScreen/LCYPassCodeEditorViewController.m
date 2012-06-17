@@ -100,6 +100,16 @@
     
 }
 
+
+-(void)viewDidLoad{
+
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    self.view.backgroundColor=appDelegate.window.backgroundColor;
+
+
+
+}
 #pragma mark -
 #pragma mark Set up code
 

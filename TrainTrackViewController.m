@@ -773,7 +773,7 @@
     }
     else {
         [self.myTableView setBackgroundColor:[UIColor clearColor]];
-        menuBarImageNameStr=@"menubar.png"; 
+        menuBarImageNameStr=@"menubar-full.png"; 
 
     }
           UIImage *navBarBackgroundImage=[UIImage imageNamed:menuBarImageNameStr];

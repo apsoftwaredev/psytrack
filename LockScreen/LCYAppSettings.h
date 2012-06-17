@@ -18,6 +18,12 @@ static NSString * const K_LOCK_SCREEN_P_HSH= @"pw_hash";
 static NSString * const K_LOCK_SCREEN_DF_HASH= @"df_hash";
 static NSString * const K_LOCK_SCREEN_RAN= @"ran_st";
 static NSString * const K_LOCK_SCREEN_CURRENT_KEYSTRING= @"current_keyString";
+static NSString * const K_CURRENT_SHARED_TOKEN= @"current_shared_token";
+static NSString * const K_OLD_SHARED_TOKEN=@"old_shared_token";
+static NSString * const K_LOCK_SCREEN_PADLOCK_SOUND_IS_ON=@"lock_screen_padlock_sound_is_on";
+
+
+
 @interface LCYAppSettings : NSObject 
 
 

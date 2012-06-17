@@ -12,10 +12,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LCYLockSettingsViewController : UITableViewController  <LCYPassCodeEditorDelegate,SCTableViewModelDelegate>
+@interface LCYLockSettingsViewController : SCTableViewController  <LCYPassCodeEditorDelegate,SCTableViewModelDelegate>
 {
 	NSArray *sectionTitles_;
-    SCTableViewModel *tableModel;
+    SCArrayOfObjectsModel *objectsModel;
+     NSMutableDictionary *valuesDictionary_;
 }
 
 // LCYPassCodeEditorDelegate protocol...

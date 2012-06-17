@@ -225,9 +225,14 @@
 		E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */; };
 		E71E26AD1569C3920004A793 /* BreakTimeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E71E26AC1569C3920004A793 /* BreakTimeEntity.m */; };
 		E71E26C7156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E71E26C6156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m */; };
+		E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DD158E28DC00CE1AF4 /* menubar-full.png */; };
+		E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */; };
 		E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B76150858D3005B798A /* ABGroupSelectionCell.m */; };
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 		E7577FA9158C1DAF0044D344 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E7577FAC158D13B50044D344 /* EncryptionTokenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7577FAB158D13B50044D344 /* EncryptionTokenCell.m */; };
+		E7577FAE158D15250044D344 /* EncryptionTokenCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7577FAD158D15250044D344 /* EncryptionTokenCell_iPhone.xib */; };
+		E7577FB0158D34D70044D344 /* EncryptionTokenCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7577FAF158D34D70044D344 /* EncryptionTokenCell_iPad.xib */; };
 		E75F7786151CC574002B10AE /* LogEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F7785151CC574002B10AE /* LogEntity.m */; };
 		E7619874158946B100C5BB8F /* ClientGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7619872158946B100C5BB8F /* ClientGroupsViewController.m */; };
 		E7619875158946B100C5BB8F /* ClientGroupsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7619873158946B100C5BB8F /* ClientGroupsViewController.xib */; };
@@ -685,12 +690,18 @@
 		E71E26AC1569C3920004A793 /* BreakTimeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakTimeEntity.m; sourceTree = "<group>"; };
 		E71E26C5156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCArrayOfObjectsModel+CoreData+SelectionSection.h"; sourceTree = "<group>"; };
 		E71E26C6156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SCArrayOfObjectsModel+CoreData+SelectionSection.m"; sourceTree = "<group>"; };
+		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
+		E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full@2x.png"; sourceTree = "<group>"; };
 		E7516B75150858D3005B798A /* ABGroupSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABGroupSelectionCell.h; sourceTree = "<group>"; };
 		E7516B76150858D3005B798A /* ABGroupSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABGroupSelectionCell.m; sourceTree = "<group>"; };
 		E7516B7915085A23005B798A /* PTABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTABGroup.h; sourceTree = "<group>"; };
 		E7516B7A15085A23005B798A /* PTABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTABGroup.m; sourceTree = "<group>"; };
 		E7577FA7158C1DAE0044D344 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
+		E7577FAA158D13B50044D344 /* EncryptionTokenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptionTokenCell.h; sourceTree = "<group>"; };
+		E7577FAB158D13B50044D344 /* EncryptionTokenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptionTokenCell.m; sourceTree = "<group>"; };
+		E7577FAD158D15250044D344 /* EncryptionTokenCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EncryptionTokenCell_iPhone.xib; sourceTree = "<group>"; };
+		E7577FAF158D34D70044D344 /* EncryptionTokenCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EncryptionTokenCell_iPad.xib; sourceTree = "<group>"; };
 		E75F7784151CC574002B10AE /* LogEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogEntity.h; sourceTree = "<group>"; };
 		E75F7785151CC574002B10AE /* LogEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogEntity.m; sourceTree = "<group>"; };
 		E7619871158946B100C5BB8F /* ClientGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientGroupsViewController.h; sourceTree = "<group>"; };
@@ -959,6 +970,7 @@
 				378DEDC714FE73AF00CF4F12 /* LCYPasscodeInputViewController.h */,
 				378DEDC814FE73AF00CF4F12 /* LCYPasscodeInputViewController.m */,
 				378DEDC914FE73AF00CF4F12 /* LCYPasscodeUIStateMachine.h */,
+				37BF64F214F2912C0065C607 /* NSDictionary+Helpers */,
 				378DEDCA14FE73AF00CF4F12 /* LCYPasscodeUIStateMachine.m */,
 				378DEDCB14FE73AF00CF4F12 /* LCYSetPasscodeStateMachine.h */,
 				378DEDCC14FE73AF00CF4F12 /* LCYSetPasscodeStateMachine.m */,
@@ -1400,6 +1412,10 @@
 				37F7CF2515005F7E00AD2C3A /* WeightPickerCell.m */,
 				E7E1A6431530C18900C227E8 /* ShortFieldCell.h */,
 				E7E1A6441530C18900C227E8 /* ShortFieldCell.m */,
+				E7577FAA158D13B50044D344 /* EncryptionTokenCell.h */,
+				E7577FAB158D13B50044D344 /* EncryptionTokenCell.m */,
+				E7577FAD158D15250044D344 /* EncryptionTokenCell_iPhone.xib */,
+				E7577FAF158D34D70044D344 /* EncryptionTokenCell_iPad.xib */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -1466,7 +1482,6 @@
 				37F7CE3E150051A900AD2C3A /* Download Bar */,
 				378DED4314FE72F000CF4F12 /* DTAboutViewController */,
 				378DEDB014FE73AF00CF4F12 /* LockScreen */,
-				37BF64F214F2912C0065C607 /* NSDictionary+Helpers */,
 				B771C53814DAEEC3002D430E /* UICasualAlert */,
 			);
 			name = Helpers;
@@ -1612,6 +1627,8 @@
 		E798A03215845941006B9DBD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E74167DD158E28DC00CE1AF4 /* menubar-full.png */,
+				E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */,
 				E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */,
 				E76984E015869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png */,
 				E798A124158539A2006B9DBD /* ipad-menubar-full.png */,
@@ -1933,6 +1950,10 @@
 				E76984E115869C2C00D760A6 /* ipad-background-blue-plain-small.png in Resources */,
 				E76984E215869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png in Resources */,
 				E7619875158946B100C5BB8F /* ClientGroupsViewController.xib in Resources */,
+				E7577FAE158D15250044D344 /* EncryptionTokenCell_iPhone.xib in Resources */,
+				E7577FB0158D34D70044D344 /* EncryptionTokenCell_iPad.xib in Resources */,
+				E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */,
+				E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2089,6 +2110,7 @@
 				E76984ED15879E5300D760A6 /* ClientGroupEntity.m in Sources */,
 				E7619874158946B100C5BB8F /* ClientGroupsViewController.m in Sources */,
 				E7577FA9158C1DAF0044D344 /* KeychainItemWrapper.m in Sources */,
+				E7577FAC158D13B50044D344 /* EncryptionTokenCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2604,11 +2626,11 @@
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/lib/system\"",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/A\"",
 				);
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2640,6 +2662,7 @@
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

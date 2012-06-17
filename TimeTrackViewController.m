@@ -1206,7 +1206,7 @@
         
         objectsModel.theme=[SCTheme themeWithPath:@"mapper-iPhone.ptt"];
        
-        UIImage *menueBarImage=[UIImage imageNamed:@"menubar.png"];
+        UIImage *menueBarImage=[UIImage imageNamed:@"menubar-full.png"];
         [self.searchBar setBackgroundImage:menueBarImage];
         [self.searchBar setScopeBarBackgroundImage:menueBarImage];
         

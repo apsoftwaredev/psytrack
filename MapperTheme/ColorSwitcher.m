@@ -23,7 +23,7 @@
         self.processedImages = [NSMutableDictionary dictionary];
         self.modifiedImages = [NSMutableDictionary dictionary];
         
-        [processedImages setObject:[UIImage imageNamed:@"menubar.png"] forKey:@"menubar"];
+        [processedImages setObject:[UIImage imageNamed:@"menubar-full.png"] forKey:@"menubar-full"];
         [processedImages setObject:[UIImage imageNamed:@"slider-fill.png"] forKey:@"slider-fill"];
         [processedImages setObject:[UIImage imageNamed:@"tabbar.png"] forKey:@"tabbar"];
         [processedImages setObject:[UIImage imageNamed:@"ipad-menubar-full.png"] forKey:@"ipad-menubar-full"];

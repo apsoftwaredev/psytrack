@@ -400,7 +400,7 @@
         sliderHandleImageName=@"ipad-slider-handle.png";
     }
     else {
-        menuBarImageName=@"menubar";
+        menuBarImageName=@"menubar-full";
         
         
         
@@ -689,6 +689,8 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
 //        
 //    }
 
+    BOOL isAppLocked=[self isAppLocked];
+    BOOL isLockedAtStartup=[self isLockedAtStartup];
     if (statusMessage.length) {
         
         UIView *containerView=nil;
@@ -703,7 +705,7 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
         }
         [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:containerView];
         
-    }else if (![self isAppLocked]) {
+    }else if (!isAppLocked &&!isLockedAtStartup) {
         
         statusMessage=@"Welcome. Ready to use now.";
         [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:nil];
@@ -712,6 +714,11 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
          [self flashAppTrainAndTitleGraphics];
     
         
+    } else if(isAppLocked||isLockedAtStartup) {
+            
+        [self lockApplication];
+        [self displayNotification:@"Application Locked."  forDuration:3.0 location:kPTTScreenLocationTop inView:self.window];
+        [self flashAppTrainAndTitleGraphics];
     }
     
     if (trustResultFailureString.length) {
@@ -1402,6 +1409,27 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
         statusMessage=@"Lock Settings Reset.";
         
     }
+    
+    
+    NSData *tokenData = [wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN];
+    if (!tokenData) {
+        
+        [wrapper newSearchDictionary:K_CURRENT_SHARED_TOKEN];
+        [wrapper createKeychainValue:[NSString stringWithFormat:@"kd8934ngolKjhv7yknlk"] forIdentifier:K_CURRENT_SHARED_TOKEN];
+               
+    }else if(reset) {
+        
+        
+        
+        [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",NO] forIdentifier:K_CURRENT_SHARED_TOKEN];
+        
+        
+        
+        statusMessage=@"Lock Settings Reset.";
+        
+    }
+    
+    
     
     NSData *currentKeyStringData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_CURRENT_KEYSTRING];
     if (!currentKeyStringData) {
@@ -6705,18 +6733,28 @@ return [self applicationDrugsDirectory].path;
 #pragma mark -
 #pragma mark LockScreenAppDelegate implementation
 
-- (void) lockScreen: (LCYLockScreenViewController *) lockScreen unlockedApp: (BOOL) unlocked;
+- (void) lockScreen: (LCYLockScreenViewController *) lockScreen unlockedApp: (BOOL) unlocked
 {
 	if (unlocked)
 	{
 		[lockScreenVC_.view removeFromSuperview];
 		self.lockScreenVC = nil;
-         tabBar.userInteractionEnabled=TRUE; 
+        ; 
         if (![self.window.subviews containsObject:tabBarController.view]) {
             [self.window addSubview:tabBarController.view];
         }
+    self.tabBarController.view.hidden=NO;
+    self.tabBarController.tabBar.userInteractionEnabled=YES;
+    
+    for (UIViewController *viewControllerInArray in tabBarController.viewControllers) {
+        viewControllerInArray.view.userInteractionEnabled=YES;
+    }
         
-	}
+        LCYAppSettings *appsettings=[[LCYAppSettings alloc]init];
+        
+        [appsettings setLockScreenLocked:NO];
+        
+}
 }
 
 #pragma mark -
@@ -6728,7 +6766,7 @@ return [self applicationDrugsDirectory].path;
 	{
         return appSettings_;
     }
-	
+
 	appSettings_ = [[LCYAppSettings alloc] init];
 	return appSettings_;
 }
@@ -6787,7 +6825,8 @@ return [self applicationDrugsDirectory].path;
 - (void) lockApplication
 {
     BOOL passcodeON=[self isPasscodeOn];
-	if (! lockScreenVC_ && passcodeON)
+    BOOL isLockedAtStartup= [self isLockedAtStartup];
+	if (! lockScreenVC_ && (passcodeON ||isLockedAtStartup))
 	{
         NSString *lockScreenNibName;
         if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad)
@@ -6800,16 +6839,31 @@ return [self applicationDrugsDirectory].path;
         
 		
 		self.lockScreenVC.delegate = self;
-         tabBar.userInteractionEnabled=FALSE;
+       
+        
+
+        
+        
+        
 	}
 	
-    if (passcodeON) 
+    if (passcodeON||isLockedAtStartup) 
     {
 //        [self.window addSubview:lockScreenVC_.window];
 //        [self.lockScreenVC loadView];
 
         [self.window addSubview:self.lockScreenVC.view];
      
+        self.tabBarController.view.hidden=YES;
+        self.tabBarController.tabBar.userInteractionEnabled=NO;
+        
+        for (UIViewController *viewControllerInArray in tabBarController.viewControllers) {
+            viewControllerInArray.view.userInteractionEnabled=NO;
+        }
+        LCYAppSettings *appsettings=[[LCYAppSettings alloc]init];
+        
+        [appsettings setLockScreenLocked:YES];
+        
         if ([self isLockedTimerOn]) {
             [self displayWrongPassword];
         }

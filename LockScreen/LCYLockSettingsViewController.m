@@ -11,6 +11,8 @@
 #import "LCYAppSettings.h"
 #import "PTTAppDelegate.h"
 #import "ButtonCell.h"
+#import "EncryptionTokenCell.h"
+#import "LCYAppSettings.h"
 
 @interface LCYLockSettingsViewController()
 - (void) handleTogglePasscode;
@@ -53,6 +55,13 @@
 
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    
+    return YES;
+    
+}
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -82,11 +91,36 @@
         
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
-        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
-        
+               
         
     }
-//    NSString * lcyLockPath=[[NSBundle mainBundle] pathForResource:@"LCYLock"
+    [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+    valuesDictionary_ = [NSMutableDictionary dictionary];
+
+    
+    NSString *encryptionTokenCellNibName=nil;
+    
+    if ([SCUtilities is_iPad]) {
+        encryptionTokenCellNibName=@"EncryptionTokenCell_iPhone";
+    }
+    else {
+        encryptionTokenCellNibName=@"EncryptionTokenCell_iPhone";
+    }
+    
+  
+    NSDictionary *tokenObjectBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"viewTokenSwitch",@"generateButton",@"applyButton",nil] forKeys:[NSArray arrayWithObjects:@"401",@"402",@"403",nil]];
+    
+    EncryptionTokenCell *encrytptionTokenCell=[EncryptionTokenCell cellWithText:nil boundObject: valuesDictionary_
+ objectBindings:tokenObjectBindingsDic nibName:encryptionTokenCellNibName];
+    encrytptionTokenCell.tag=3;
+    
+    SCArrayOfObjectsSection *encryptionStringSection=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Encryption String"];
+    
+    [encryptionStringSection addCell:encrytptionTokenCell];
+    
+    
+    
+    //    NSString * lcyLockPath=[[NSBundle mainBundle] pathForResource:@"LCYLock"
 //                                                           ofType:@"plist"];
 //    
 //    NSDictionary * lcyLockValuesDict=[NSDictionary dictionaryWithContentsOfFile:lcyLockPath];
@@ -99,35 +133,42 @@
 //    SCSwitchCell *passCodeOnOffSwitchCell=[[SCSwitchCell alloc] initWithText:@"Passcode" withBoundKey:@"lock_screen_passcode_is_on" withValue:[NSNumber numberWithBool:(BOOL)[self passCodeLockIsOn]]];
     passCodeOnOffSwitchCell.tag=1;
     
-    SCSwitchCell *lockOnStartUpSwitchCell=[[SCSwitchCell alloc] initWithText:@"Lock on Startup"];
+    SCSwitchCell *lockOnStartUpSwitchCell=[[SCSwitchCell alloc] initWithText:@"Lock on Startup"  boundObject:K_LOCK_SCREEN_LOCK_AT_STARTUP switchOnPropertyName:@"LockAtStartupSwitch"];
     lockOnStartUpSwitchCell.switchControl.on=[self isLockedAtStartup];
 //    SCSwitchCell *lockOnStartUpSwitchCell=[[SCSwitchCell alloc] initWithText:@"Lock on Startup" withBoundKey:@"lock_screen_lock_at_startup" withSwitchOnValue:[NSNumber numberWithBool:[self isLockedAtStartup]]];
     lockOnStartUpSwitchCell.tag=2;
     // Create an array of objects section
    
+    SCSwitchCell *lockSoundSwitchCell=[[SCSwitchCell alloc] initWithText:@"Lock on Startup"  boundObject:K_LOCK_SCREEN_PADLOCK_CLICK_SOUND switchOnPropertyName:@"PadlockClickSwich"];
+    
+    
+    
 //    SCTextFieldCell *oldEncryptionString=[SCTextFieldCell cellWithText:@"Old" withBoundKey:@"old_encryption_string" withValue:nil];
-SCTextFieldCell *oldEncryptionString=[SCTextFieldCell cellWithText:@"Old"];    
-    oldEncryptionString.textField.secureTextEntry=YES;
-    SCTextFieldCell *newEncryptionString=[SCTextFieldCell cellWithText:@"New"];
-    newEncryptionString.textField.secureTextEntry=YES;
-    SCTextFieldCell *confirmEncryptionString=[SCTextFieldCell cellWithText:@"Confirm" ];
-  
-    confirmEncryptionString.textField.secureTextEntry=YES;
-    SCTableViewSection *settingsSection=[SCTableViewSection sectionWithHeaderTitle:@"Lock Screen Settings"];
+    
+   
+   
+    
+   
+
+    
+    
+    SCArrayOfObjectsSection *settingsSection=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Lock Screen Settings"];
     [settingsSection addCell:passCodeOnOffSwitchCell];
      [settingsSection addCell:lockOnStartUpSwitchCell];
    
-    SCTableViewSection *encryptionStringSection=[SCTableViewSection sectionWithHeaderTitle:@"Encryption String"];
-    [encryptionStringSection addCell:oldEncryptionString];
-    [encryptionStringSection addCell:newEncryptionString];
-    [encryptionStringSection addCell:confirmEncryptionString];
-    
+//    
+        
     
     // Initialize tableModel
-    tableModel = [[SCTableViewModel alloc] initWithTableView:self.tableView];
+    objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView];
 
-    [tableModel addSection:settingsSection];
-    [tableModel addSection:encryptionStringSection];
+    [objectsModel addSection:encryptionStringSection];
+
+
+     [objectsModel addSection:settingsSection];
+  
+         
+    self.tableViewModel=objectsModel;
 }
 
 
@@ -158,10 +199,71 @@ SCTextFieldCell *oldEncryptionString=[SCTextFieldCell cellWithText:@"Old"];
         
     }
 
+    if ([cell isKindOfClass:[EncryptionTokenCell class]]) {
 
+        EncryptionTokenCell *encryptionTokenCell=(EncryptionTokenCell *)cell;
+        
+            UISwitch *viewTokenSwitch=(UISwitch *)encryptionTokenCell.viewTokenSwitch;
+            
+            if (viewTokenSwitch.on) {
+                
+                
+                
+                
+            }
+            
+        
+        
+    }
 
 }
 
+
+-(void)tableViewModel:(SCTableViewModel *)tableModel customButtonTapped:(UIButton *)button forRowWithIndexPath:(NSIndexPath *)indexPath{
+
+    SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
+    
+    if ([cell isKindOfClass:[EncryptionTokenCell class]]) {
+        
+        EncryptionTokenCell *encryptionTokenCell=(EncryptionTokenCell *)cell;
+        
+        switch (button.tag) {
+            case 402:
+            {
+            //generate new token
+            
+            
+            
+            }
+                break;
+            case 403:
+            {
+                //Change password
+                
+                encryptionTokenCell.validateCurrentPasswordLabel.hidden=NO;
+                encryptionTokenCell.validateNewPasswordLabel.hidden=NO;
+                encryptionTokenCell.validateReenterNewPasswordLabel.hidden=NO;
+                
+            }
+                break;
+            case 404:
+            {
+                //apply token and password to fields
+                
+                
+                
+            }
+                break;
+            default:
+                break;
+        }
+        
+    }
+    
+
+
+
+}
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index{
 
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
@@ -183,7 +285,7 @@ if(section.headerTitle !=nil)
     [containerView addSubview:headerLabel];
     
     section.headerView = containerView;
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
     
 }
 }
@@ -193,8 +295,9 @@ if(section.headerTitle !=nil)
     
    
                  BOOL passCodeIsOn=[self passCodeLockIsOn];
-    if (tableModel.sectionCount) {
-        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:0];
+    if (objectsModel.sectionCount >0) {
+       
+        SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:0];
         if (section.cellCount) {
             SCSwitchCell *switchCell=(SCSwitchCell *)[section cellAtIndex:0];
             [switchCell.switchControl setOn:passCodeIsOn];
@@ -209,7 +312,7 @@ if(section.headerTitle !=nil)
                                 
                 //                                        
             }
-            [tableModel.modeledTableView reloadData];
+            [objectsModel.modeledTableView reloadData];
         }
         
     }

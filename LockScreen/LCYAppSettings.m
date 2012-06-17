@@ -94,8 +94,6 @@
 -(BOOL)setLockScreenLocked:(BOOL)lockScreenLocked{
     
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
 
   
     BOOL success=NO;
@@ -106,9 +104,9 @@
     if (!lockScreenLockedData) {
         
         [wrapper newSearchDictionary:K_LOCK_SCREEN_LOCKED];
-        success= [wrapper createKeychainValueWithData:[appDelegate convertStringToData:(NSString *)[NSString stringWithFormat:@"%i", lockScreenLocked]] forIdentifier:K_LOCK_SCREEN_LOCKED];
+        success= [wrapper createKeychainValue:[NSString stringWithFormat:@"%i", lockScreenLocked] forIdentifier:K_LOCK_SCREEN_LOCKED];
     }else  {
-        success= [wrapper updateKeychainValueWithData:(NSData *)[appDelegate convertStringToData:(NSString *)[NSString stringWithFormat:@"%i",lockScreenLocked]] forIdentifier:K_LOCK_SCREEN_LOCKED];
+        success= [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",lockScreenLocked] forIdentifier:K_LOCK_SCREEN_LOCKED];
         
     } 
 
@@ -160,8 +158,7 @@
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
     
     // as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
-	PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
+	
 
     BOOL success=NO;
     
@@ -170,11 +167,11 @@
     if (!lockScreenAttemptData) {
         
         [wrapper newSearchDictionary:K_LOCK_SCREEN_ATTEMPT];
-        success= [wrapper createKeychainValueWithData:[appDelegate convertStringToData:[NSString stringWithFormat:@"%i",attempt]] forIdentifier:K_LOCK_SCREEN_ATTEMPT];
+        success= [wrapper createKeychainValue:[NSString stringWithFormat:@"%i",attempt] forIdentifier:K_LOCK_SCREEN_ATTEMPT];
         
         
     }else  {
-        success=  [wrapper updateKeychainValueWithData:[appDelegate convertStringToData:(NSString *)[NSString stringWithFormat:@"%i",attempt]] forIdentifier:K_LOCK_SCREEN_ATTEMPT];
+        success=  [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",attempt] forIdentifier:K_LOCK_SCREEN_ATTEMPT];
     }
     
     
@@ -190,9 +187,7 @@
 -(BOOL)setLockScreenStartup:(BOOL)lockOnStartup{
     
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-
+   
     // as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
 	
     BOOL success=NO;
@@ -204,10 +199,10 @@
     if (!lockScreenStartupData) {
         
         [wrapper newSearchDictionary:K_LOCK_SCREEN_LOCK_AT_STARTUP];
-        success= [wrapper createKeychainValueWithData:[appDelegate convertStringToData:[NSString stringWithFormat:@"%i", lockOnStartup]] forIdentifier:K_LOCK_SCREEN_LOCK_AT_STARTUP];
+        success= [wrapper createKeychainValue:[NSString stringWithFormat:@"%i", lockOnStartup] forIdentifier:K_LOCK_SCREEN_LOCK_AT_STARTUP];
         
     }else  {
-        success= [wrapper updateKeychainValueWithData: [appDelegate convertStringToData:(NSString *)[NSString stringWithFormat:@"%i",lockOnStartup]] forIdentifier:K_LOCK_SCREEN_LOCK_AT_STARTUP];
+        success= [wrapper updateKeychainValue: [NSString stringWithFormat:@"%i",lockOnStartup] forIdentifier:K_LOCK_SCREEN_LOCK_AT_STARTUP];
     }
     
     
