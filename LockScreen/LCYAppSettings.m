@@ -137,7 +137,7 @@
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
   	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
-	NSString *passwordToSave = (passwordString) ? [NSString stringWithFormat:@"%@kdieJsi3ea18ki" ,passwordString ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
+	NSString *passwordToSave = (passwordString) ? [NSString stringWithFormat:@"%@iJsi3" ,passwordString ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
     NSLog(@"passcodeToSave: %@", passwordToSave);
 	
 	
@@ -172,7 +172,43 @@
     
 }
 
+-(BOOL)setPasscodeHintWithString:(NSString *)hintString{
 
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+  	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
+    NSLog(@"tokenToSave: %@", hintString);
+	
+	
+    
+    
+    BOOL success=NO;
+    NSData *hintData = [wrapper searchKeychainCopyMatching:K_PASSOWRD_HINT];
+    
+    
+    
+    if (!hintData) {
+        
+        [wrapper newSearchDictionary:K_PASSOWRD_HINT];
+        success= [wrapper createKeychainValueWithData:[appDelegate convertStringToData: hintString] forIdentifier:K_PASSOWRD_HINT];
+        //           passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
+        
+        
+    }
+    else {
+        success= [wrapper updateKeychainValueWithData:[appDelegate convertStringToData: hintString] forIdentifier:K_PASSOWRD_HINT];
+    }
+    
+   
+    
+    return success;
+
+
+
+
+
+
+}
 
 -(BOOL)setLockScreenLocked:(BOOL)lockScreenLocked{
     
@@ -331,21 +367,108 @@
     
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
    
-    return [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE];
+    NSData *currentPasscodeData=[wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE];
+    if (!currentPasscodeData) {
+        return [NSData data];
+    }
+    else {
+        return currentPasscodeData;
+    }
+    
     
     
 }
+
+
+-(NSData *)defaultPasscodeData{
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    PTTEncryption *encryption=(PTTEncryption *)appDelegate.encryption;
+    NSString *defaultPasscode=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
+    NSData *defaultPasscodeData=[encryption getHashBytes:[appDelegate convertStringToData:defaultPasscode]];
+    if(!defaultPasscodeData)
+        return [NSData data];
+    else {
+        return defaultPasscodeData;
+    }
+}
+-(BOOL)passCodeDataIsEqualToDefaultPasscodeData{
+    
+    if ([[self passcodeData] isEqualToData:[self defaultPasscodeData]]) {
+        return  YES;
+    }
+    else {
+        return NO;
+    }
+    
+    
+    
+}
+
 
 -(NSData *)passwordData{
     
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
     
-    return [wrapper searchKeychainCopyMatching:K_PASSWORD_CURRENT];
+    NSData *currentPasswordData=[wrapper searchKeychainCopyMatching:K_PASSWORD_CURRENT];
+    if (!currentPasswordData) {
+        return [NSData data];
+    }
+    else {
+        return currentPasswordData;
+    }
     
     
 }
 
 
+-(NSString *)hintString{
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+
+    NSData *currentHintData=[wrapper searchKeychainCopyMatching:K_PASSOWRD_HINT];
+    if (!currentHintData) {
+        return [NSData data];
+    }
+    else {
+        return [appDelegate convertDataToString: currentHintData];
+    }
+    
+    
+}
+
+
+
+-(NSData *)defaultPasswordData{
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+
+    PTTEncryption *encryption=(PTTEncryption *)appDelegate.encryption;
+NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
+    NSData *defaultPasswordData=[encryption getHashBytes:[appDelegate convertStringToData:defaultPassword]];
+    if(!defaultPasswordData)
+        return [NSData data];
+    else {
+        return defaultPasswordData;
+    }
+}
+
+
+-(BOOL)passwordDataIsEqualToDefaultPasswordData{
+
+    if ([[self passwordData] isEqualToData:[self defaultPasswordData]]) {
+        return  YES;
+    }
+    else {
+        return NO;
+    }
+
+
+
+}
 -(NSString *)currentSharedTokenString{
     
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
@@ -353,6 +476,37 @@
     
 
     return [appDelegate convertDataToString:(NSData *) [wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN]];
+    
+    
+}
+
+
+-(NSData *)defaultSharedTokenData{
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    
+    NSString *defaultSharedTokenStr=@"wMbq-zvD2-6p";
+    NSData *defaultSharedTokenData=[appDelegate convertStringToData:defaultSharedTokenStr];
+    if(!defaultSharedTokenData)
+        return [NSData data];
+    else {
+        return defaultSharedTokenData;
+    }
+}
+
+
+-(BOOL)currentSharedTokenDataIsEqualToDefaultSharedTokenData{
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+
+    if ([[appDelegate convertStringToData:[self currentSharedTokenString]] isEqualToData:[self defaultSharedTokenData]]) {
+        return  YES;
+    }
+    else {
+        return NO;
+    }
+    
     
     
 }

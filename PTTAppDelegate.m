@@ -938,7 +938,7 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
     
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
 	
-   
+    reset=YES;
     BOOL success;
     
         NSData *passcodeData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE];
@@ -965,7 +965,7 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
         
     }
     else if (reset){
-        success= [wrapper updateKeychainValueWithData:[self convertStringToData:@"wMbq-zvD2-6p"] forIdentifier:K_LOCK_SCREEN_PASSCODE];
+        success= [wrapper updateKeychainValueWithData:[self convertStringToData:@"wMbq-zvD2-6p"] forIdentifier:K_CURRENT_SHARED_TOKEN];
     }
     else {
         success=YES;
@@ -1417,7 +1417,7 @@ NSLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
     
     NSString *statusMessage;
     
-
+    reset=YES;
     
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
 	

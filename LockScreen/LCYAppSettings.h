@@ -23,7 +23,7 @@ static NSString * const K_OLD_SHARED_TOKEN=@"old_shared_token";
 static NSString * const K_LOCK_SCREEN_PADLOCK_SOUND_IS_ON=@"lock_screen_padlock_sound_is_on";
 static NSString * const K_PASSWORD_CURRENT=@"current_password_hash";
 static NSString * const K_PASSWORD_OLD=@"old_password_hash";
-
+static NSString * const K_PASSOWRD_HINT=@"password_hint";
 
 
 @interface LCYAppSettings : NSObject 
@@ -39,16 +39,21 @@ static NSString * const K_PASSWORD_OLD=@"old_password_hash";
 -(BOOL)setPasscodeDataWithData:(NSData *)passcodeDataToSave;
 -(BOOL)setLockScreenAttempt:(int)attempt;
 
+-(BOOL)setPasscodeHintWithString:(NSString *)hintString;
+
+-(BOOL)passCodeDataIsEqualToDefaultPasscodeData;
+-(BOOL)passwordDataIsEqualToDefaultPasswordData;
+-(BOOL)currentSharedTokenDataIsEqualToDefaultSharedTokenData;
 
 -(BOOL)setLockScreenStartup:(BOOL)lockOnStartup;
 
 -(BOOL)setLockScreenTimerOn:(BOOL)timerOn;
-
+-(NSData *)defaultPasswordData;
 -(NSData *)passcodeData;
 -(NSData *)passwordData;
 - (BOOL) isPasscodeOn;
 - (BOOL) isLockedAtStartup;
-
+-(NSString *)hintString;
 - (NSInteger) numberOfUnlockAttempts;
 
 -(BOOL)isAppLocked;

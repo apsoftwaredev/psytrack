@@ -20,7 +20,7 @@
 
 - (void) handleTogglePasscode;
 
-enum  {KTokenCellTokenField = 400, kTokenCellViewButton, kTokenCellGenerateNewRandom, kTokenCellPasswordCurrent, kTokenCellPasswordNew, kTokenCellPasswordReenter, kTokenCellChangePasswordButton,
+enum  {KTokenCellTokenField = 400, kTokenCellViewButton, kTokenCellGenerateNewRandom, kTokenCellPasswordCurrent, kTokenCellPasswordNew, kTokenCellPasswordReenter, 
 kTokenCellApplyChangesButton};
 
 enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTokenCellValidationNewPassword,kTokenCellValidationReenterPassword};
@@ -28,6 +28,7 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
 
 
 @implementation LCYLockSettingsViewController
+@synthesize clearValuesTimer=clearValuesTimer_;
 
 - (id) initWithNibName: (NSString *) nibNameOrNil bundle: (NSBundle *) nibBundleOrNil
 {
@@ -116,7 +117,7 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
     }
     
   
-    NSDictionary *tokenObjectBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"viewTokenSwitch",@"generateButton",@"applyButton",nil] forKeys:[NSArray arrayWithObjects:@"401",@"402",@"403",nil]];
+    NSDictionary *tokenObjectBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"token",@"viewToken",@"generateButton",@"currentPassword",@"newPassword",@"reenterPassword",@"applyChangesButton",@"validateTokenButton",@"validateCurrentPasswordButton",@"validateNewPasswordButton", @"validateReenterPasswordButton",    nil] forKeys:[NSArray arrayWithObjects:@"400",@"401",@"402",@"403",@"404",@"405",@"406",@"500", @"501", @"502", @"503",     nil]];
     
     EncryptionTokenCell *encrytptionTokenCell=[EncryptionTokenCell cellWithText:nil boundObject: valuesDictionary_
  objectBindings:tokenObjectBindingsDic nibName:encryptionTokenCellNibName];
@@ -184,7 +185,24 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
 #pragma mark SCTableViewModelDelegate delegate
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    timeOfLastUserInput=[NSDate date];
+    
+    
+    if (!clearValuesTimer_) {
+        
+            NSTimeInterval clearUserInputInSeconds=600.0;    
+           
+       
+        
+        self.clearValuesTimer=[NSTimer scheduledTimerWithTimeInterval:clearUserInputInSeconds
+                                                               target:self
+                                                             selector:@selector(clearUserInput)
+                                                             userInfo:NULL
+                                                              repeats:YES];
+     
+    
+    }
+    
     SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
     
     if (cell.tag==1 &&[cell isKindOfClass:[SCSwitchCell class]]) {
@@ -267,10 +285,12 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
         
         EncryptionTokenCell *encryptionTokenCell=(EncryptionTokenCell *)cell;
         
+        NSLog(@"apply changes tag is %i",kTokenCellApplyChangesButton);
+        
         switch (button.tag) {
             
             
-            case 401:
+            case kTokenCellViewButton:
             {
                 //get shared token and view it
                
@@ -287,8 +307,8 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
                     if ([sharedToken isEqualToString:@"wMbq-zvD2-6p"]) {
                         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
                         
-                        [appDelegate displayNotification:@"Current token not yet set."];
-
+                        [appDelegate displayNotification:@"The token has not been set yet."];
+                        
                         
                     }
                     else 
@@ -296,36 +316,14 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
                          
                         NSLog(@"token password tag is %i",kTokenCellPasswordCurrent);
                         
-                        UIView *currentPasswordFieldView=(UIView *)[cell viewWithTag:kTokenCellPasswordCurrent];
-                        NSLog(@"token password class is %@",currentPasswordFieldView.class);
-                        if ([currentPasswordFieldView isKindOfClass:[UITextField class]]) {
-                            UITextField *currentPasswordTextField=(UITextField *)currentPasswordFieldView;
-                            
-                            if (currentPasswordTextField.text.length&&[self authenticatePassword:currentPasswordTextField.text]) {
-                                 tokenTextField.text=sharedToken;
-                            }  
-                            
-                            else 
-                            {
-                                
-                                UIView *currentPasswordValidationView=(UIView *)[cell viewWithTag:kTokenCellValidationCurrentPassword];
-                                
-                                NSLog(@"currentpassword validation vie class is %@",currentPasswordValidationView.superclass);
-                                if ([currentPasswordValidationView.class isSubclassOfClass:[UIButton class]]) {
-                                    UIButton *currentPasswordValidationButton=(UIButton *)currentPasswordValidationView;
-                                    currentPasswordValidationButton.hidden=NO;
-                                    
-                                    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-                                    
-
-                                    [appDelegate displayNotification:@"Please enter the current password."];
-                                }
-                                
-                            }
-                            
-                            
-                        }
+                    
                         
+                        if ([self validatePasswordsFromEncrytpionTokenCell:encryptionTokenCell buttonTapped:kTokenCellViewButton]) {
+                            
+                            tokenTextField.text=[appSettings currentSharedTokenString];
+                            
+                            
+                        }                        
                                                                     
                     }
                                                                        
@@ -343,7 +341,7 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
                 break;
             
             
-            case 402:
+            case kTokenCellGenerateNewRandom:
             {
             //generate new token
                 LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
@@ -364,13 +362,50 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
                
             }
                 break;
-            case 403:
+            case kTokenCellApplyChangesButton:
             {
                 //Change password
                 
-                encryptionTokenCell.validateCurrentPasswordButton.hidden=NO;
-                encryptionTokenCell.validateNewPasswordButton.hidden=NO;
-                encryptionTokenCell.validateReenterNewPasswordButton.hidden=NO;
+                if ([self validatePasswordsFromEncrytpionTokenCell:encryptionTokenCell buttonTapped:kTokenCellApplyChangesButton]) {
+                    
+                    UIView *textFieldView=(UIView *)[cell viewWithTag:KTokenCellTokenField];
+                    if ([textFieldView isKindOfClass:[UITextField class]]) {
+                        UITextField *tokenTextField=(UITextField *)textFieldView; 
+                         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                        
+                        NSString *displayMessage=nil;
+                        if (tokenTextField.text.length<12) {
+                            
+                           
+                            encryptionTokenCell.validateEncryptionTokenButton.hidden=NO;
+                             encryptionTokenCell.validateCurrentPasswordButton.hidden=NO;
+                            displayMessage= @"Token must be at least 12 characters in length";
+                          
+                           
+                        }
+                        else {
+                            LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
+                            
+                            [appSettings setTokenDataWithString:tokenTextField.text];
+                            
+                            displayMessage=@"Changes applied successfully.";  
+                            encryptionTokenCell.validateEncryptionTokenButton.hidden=YES;
+                            encryptionTokenCell.validateCurrentPasswordButton.hidden=YES;
+                            encryptionTokenCell.validateNewPasswordButton.hidden=YES;
+                            encryptionTokenCell.validateReenterNewPasswordButton.hidden=YES;
+                            encryptionTokenCell.tokenField.text=@"";
+                            encryptionTokenCell.passwordFieldNew.text=@"";
+                            encryptionTokenCell.passowrdFieldReenter.text=@"";
+                            encryptionTokenCell.passwordFieldCurrent.text=@"";
+                           
+                        }
+                        
+                        
+                        [appDelegate displayNotification:displayMessage];
+                        
+                    }
+                    
+                }
                 
             }
                 break;
@@ -392,6 +427,7 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
 
 
 }
+
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index{
 
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
@@ -428,10 +464,13 @@ if(section.headerTitle !=nil)
     
     LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
     
-    
+    if (userInput && !userInput.length) {
+        userInput=nil;
+    }
     NSString *passwordToCheck = (userInput) ? [NSString stringWithFormat:@"%@kdieJsi3ea18ki" ,userInput ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
     PTTEncryption *encryption=[[PTTEncryption alloc]init];
     
+    NSLog(@"password to check %@",passwordToCheck);
     if ( [ (NSData *)[encryption getHashBytes:[appDelegate convertStringToData: passwordToCheck]] isEqualToData:[appSettings passwordData]] ) 
         
         
@@ -444,7 +483,306 @@ if(section.headerTitle !=nil)
     
 }
 
+-(BOOL)validatePasswordsFromEncrytpionTokenCell:(EncryptionTokenCell*)encryptionTokenCell buttonTapped:(int)buttonTapped{
 
+    // the button tapped is the view button, it returnes a yes if the password provided is valid otherwise returnes no and displays validation warnings.  If a password has not been set it requests to set a new password first.
+    
+    //if the button tapped is the apply button, there are changes, and the token and password are valid, it sets the new token and password
+    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+
+    LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
+    PTTEncryption *encryption=(PTTEncryption *)appDelegate.encryption;
+    
+    BOOL valid=NO;
+
+    UIView *currentTokenView=[(UIView *)encryptionTokenCell viewWithTag:KTokenCellTokenField];
+    
+    UITextField *currentTokenTextField=nil;
+    
+    if ([currentTokenView isKindOfClass:[UITextField class]]) {
+        currentTokenTextField=(UITextField *)currentTokenView;
+        
+    }
+    UIView *currentPasswordView=[(UIView *)encryptionTokenCell viewWithTag:kTokenCellPasswordCurrent];
+    
+    UITextField *currentPasswordTextField=nil;
+
+    if ([currentPasswordView isKindOfClass:[UITextField class]]) {
+        currentPasswordTextField=(UITextField *)currentPasswordView;
+  
+    }
+    UIView *newPasswordView=[(UIView *)encryptionTokenCell viewWithTag:kTokenCellPasswordNew];
+    
+    UITextField *newPasswordTextField=nil;
+    
+    if ([newPasswordView isKindOfClass:[UITextField class]]) {
+        newPasswordTextField=(UITextField *)newPasswordView;
+    }
+    UIView *reenterPasswordView=[(UIView *)encryptionTokenCell viewWithTag:kTokenCellPasswordReenter];
+    
+    UITextField *reenterPasswordTextField=nil;
+    
+    if ([reenterPasswordView isKindOfClass:[UITextField class]]) {
+       reenterPasswordTextField=(UITextField *)reenterPasswordView;
+    }
+    
+    UIView *validateTokenButtonView=[(UIView *)encryptionTokenCell viewWithTag:kTokenCellValidationTokenField];
+    UIButton *validateTokenButton=nil;
+NSLog(@"validate token button view superclass%@",validateTokenButtonView.superclass);
+    if ([validateTokenButtonView.class isSubclassOfClass:[UIButton class]]) {
+        validateTokenButton=(UIButton *)validateTokenButtonView;
+    }
+    
+    UIView *validateCurrentPasswowrdButtonView=[(UIView *)encryptionTokenCell viewWithTag:kTokenCellValidationCurrentPassword];
+    UIButton *validateCurrentPasswordButton=nil;
+    if ([validateCurrentPasswowrdButtonView.class isSubclassOfClass:[UIButton class]]) {
+        validateCurrentPasswordButton=(UIButton *)validateCurrentPasswowrdButtonView;
+    }
+    UIView *validateNewPasswordButtonView=[(UIView *)encryptionTokenCell viewWithTag:kTokenCellValidationNewPassword];
+    UIButton *validateNewPasswordButton=nil;
+    if ([validateNewPasswordButtonView.class isSubclassOfClass:[UIButton class]]) {
+        validateNewPasswordButton=(UIButton *)validateNewPasswordButtonView;
+    }
+    
+    UIView *validateReenterPasswordButtonView=[(UIView *)encryptionTokenCell viewWithTag:kTokenCellValidationReenterPassword];
+    UIButton *validateReenterPasswordButton=nil;
+    if ([validateReenterPasswordButtonView.class isSubclassOfClass:[UIButton class]]) {
+        validateReenterPasswordButton=(UIButton *)validateReenterPasswordButtonView;
+    }
+    
+    
+    validateNewPasswordButton.hidden=YES;
+    validateReenterPasswordButton.hidden=YES;
+    validateTokenButton.hidden=YES;
+    validateCurrentPasswordButton.hidden=YES;
+    
+    NSString *tokenFieldStr=currentTokenTextField.text;
+    NSString *currentPasswordAttemptStr=currentPasswordTextField.text;
+    NSString *newPassword=newPasswordTextField.text;
+    NSString *reenterPassword=reenterPasswordTextField.text;
+
+    BOOL currentPasswordMatchesPasswordAttempt=NO;
+    
+    if (currentPasswordAttemptStr.length>5&&[[appSettings passwordData] isEqualToData:[encryption getHashBytes:[appDelegate convertStringToData:[NSString stringWithFormat:@"%@kdieJsi3ea18ki" ,currentPasswordAttemptStr ]]]]) {
+        currentPasswordMatchesPasswordAttempt=YES;
+        
+        
+        
+    }
+    
+    if (buttonTapped==kTokenCellApplyChangesButton&& currentPasswordMatchesPasswordAttempt&&!((newPasswordTextField.text.length||reenterPasswordTextField.text.length)||[newPassword isEqualToString:currentPasswordAttemptStr]) &&[[appSettings currentSharedTokenString]isEqualToString:currentTokenTextField.text]) {
+        [appDelegate displayNotification:@"Nothing Changed"];
+        validateTokenButton.hidden=YES;
+        validateCurrentPasswordButton.hidden=YES;
+        validateNewPasswordButton.hidden=YES;
+        validateReenterPasswordButton.hidden=YES;
+        
+        return NO;
+    }
+   
+    BOOL okayToSetNewPassword=NO;
+    
+       
+    
+    
+    if (!currentPasswordAttemptStr.length) {
+     
+       
+        if ([appSettings passwordDataIsEqualToDefaultPasswordData] ) 
+        {
+            okayToSetNewPassword=YES;
+            
+            
+            
+            
+        }
+        else 
+        {
+            validateCurrentPasswordButton.hidden=NO;
+            [appDelegate displayNotification:@"Please enter the current password."];
+            [encryptionTokenCell.passwordFieldCurrent becomeFirstResponder];
+            return NO;
+        }
+        
+        
+    }
+    //length is greater than zero
+    else if (!currentPasswordMatchesPasswordAttempt) {
+            
+        
+        currentPasswordTextField.text=@"";
+        if ([appSettings passwordDataIsEqualToDefaultPasswordData]) {
+            [appDelegate displayNotification:@"The password has not been set yet for this device."];
+            validateCurrentPasswordButton.hidden=YES;
+            validateNewPasswordButton.hidden=NO;
+            validateReenterPasswordButton.hidden=NO;
+            
+        }
+            
+        else {
+        validateCurrentPasswordButton.hidden=NO;
+            if ([appSettings isPasscodeOn]) {
+                [appDelegate lockApplication];
+                [appDelegate displayNotification:@"Encryption password attept failed. Please enter the current four digit lock screen passcode." forDuration:5.0 location:kPTTScreenLocationTop inView:appDelegate.window];
+              
+                
+            }
+            else {
+                 [appDelegate displayNotification:@"Password entered is incorrect."];
+            }
+        }
+            return NO;
+    }
+    else if (currentPasswordMatchesPasswordAttempt && !newPassword.length&&!reenterPassword.length ){
+        
+       
+        validateCurrentPasswordButton.hidden=YES;
+        validateNewPasswordButton.hidden=YES;
+        validateReenterPasswordButton.hidden=YES;
+        
+        return YES;
+    }
+    
+    if (okayToSetNewPassword||currentPasswordMatchesPasswordAttempt) {
+        if (buttonTapped==kTokenCellApplyChangesButton) {
+            BOOL setNewPassword=NO;
+            NSString *displayMessage=nil;
+            if ([newPassword isEqualToString:reenterPassword]) {
+                
+                if (newPassword.length<5) {
+                    
+                    displayMessage=@"Please enter a new password at least six characters.";
+                    validateNewPasswordButton.hidden=NO;
+                    validateReenterPasswordButton.hidden=NO;
+                    
+                }else 
+                {
+                    setNewPassword=YES;
+                    
+                    
+                }                
+                
+            }
+            else 
+            {
+                displayMessage=@"The new passwords entered do not match.";
+                newPasswordTextField.text=@"";
+                reenterPasswordTextField.text=@"";
+                validateNewPasswordButton.hidden=NO;
+                validateReenterPasswordButton.hidden=NO;
+            }
+            
+            
+            
+            
+            if (setNewPassword) {
+                
+        
+                if (tokenFieldStr.length<12) {
+                    validateTokenButton.hidden=NO;
+                    [appDelegate displayNotification:@"Token must be at least 12 characters."];
+                    return NO;
+                } 
+                else {
+                    
+                    
+                    
+                    if (tokenFieldStr.length>16) {
+                        validateTokenButton.hidden=NO;
+                        [appDelegate displayNotification:@"Token must be at less than 16 characters."];
+                        return NO;
+                        
+                    }
+                    
+                    if (newPassword.length>18) {
+                        validateNewPasswordButton.hidden=NO;
+                        validateReenterPasswordButton.hidden=NO;
+                        newPasswordTextField.text=@"";
+                        reenterPasswordTextField.text=@"";
+                        
+                        [appDelegate displayNotification:@"New password should be less than 18 characters."];
+                        
+                        return NO;
+                        
+                    }
+                    
+                    setNewPassword=[appSettings setPasswordCurrentDataWithString:(NSString *)newPassword];
+                    
+                    
+                    if (!setNewPassword) {
+                        displayMessage=@"Error saving password";
+                    }
+                    else {
+                        displayMessage=@"New password set";
+                        validateCurrentPasswordButton.hidden=YES;
+                        validateNewPasswordButton.hidden=YES;
+                        validateReenterPasswordButton.hidden=YES;
+                        currentPasswordTextField.text=@"";
+                        
+                        
+                        
+                    }
+
+                    
+                }
+                
+                
+        
+                                
+               
+            
+            
+            
+            }
+            else 
+            {
+                
+                validateNewPasswordButton.hidden=NO;
+                validateReenterPasswordButton.hidden=NO;
+                
+            }
+            
+            if (displayMessage.length) {
+                [appDelegate displayNotification:displayMessage];
+                return setNewPassword;
+            }
+            
+            
+        } 
+        
+        
+        else if(okayToSetNewPassword && buttonTapped == kTokenCellViewButton && !currentPasswordMatchesPasswordAttempt)
+        {
+            
+            
+            validateNewPasswordButton.hidden=NO;
+            validateReenterPasswordButton.hidden=NO;
+            [appDelegate displayNotification:@"Please create a new password and store it in a safe location first."];
+            return NO;
+        }
+        else if (currentPasswordMatchesPasswordAttempt&&buttonTapped==kTokenCellViewButton){
+            validateNewPasswordButton.hidden=YES;
+            validateTokenButton.hidden=YES;
+            validateNewPasswordButton.hidden=YES;
+            validateReenterPasswordButton.hidden=YES;
+            
+            return YES;
+            
+            
+        }
+
+    }
+    
+    
+    
+    
+    
+    
+    return valid;
+
+}
 -(IBAction)updatePasscodeOnSwichCell{
 
    
@@ -599,6 +937,40 @@ if(section.headerTitle !=nil)
 	[self.tableView reloadData];	
 }
 
+-(void)clearUserInput{
+NSLog(@"clear user input fired");
+    if (objectsModel.sectionCount) {
+        SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:0];
+        if (section.cellCount && [section isKindOfClass:[SCArrayOfObjectsSection class]]) {
+            SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
+            
+            SCTableViewCell *cell=(SCTableViewCell *)[arrayOfObjectsSection cellAtIndex:0];
+            if ([cell isKindOfClass:[EncryptionTokenCell class]]) {
+                EncryptionTokenCell *encryptionTokenCell=(EncryptionTokenCell *)cell;
+                
+                NSTimeInterval timeSinceLastUserImput=[timeOfLastUserInput timeIntervalSinceNow];
+                NSTimeInterval timeToClearFields=-599.0;
+                if (timeSinceLastUserImput<timeToClearFields) {
+                    encryptionTokenCell.tokenField.text=@"";
+                    encryptionTokenCell.passwordFieldCurrent.text=@"";
+                    encryptionTokenCell.passwordFieldNew.text=@"";
+                    encryptionTokenCell.passowrdFieldReenter.text=@"";
+                    encryptionTokenCell.validateEncryptionTokenButton.hidden=YES;
+                    encryptionTokenCell.validateCurrentPasswordButton.hidden=YES;
+                    encryptionTokenCell.validateNewPasswordButton.hidden=YES;
+                    encryptionTokenCell.validateReenterNewPasswordButton.hidden=YES;
+                    [clearValuesTimer_ invalidate];
+                    self.clearValuesTimer=nil;
+                }
+                
+            }
+            
+            
+        }
+        
+    }
 
+
+}
 @end
 

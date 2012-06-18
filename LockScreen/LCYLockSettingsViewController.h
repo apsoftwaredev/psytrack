@@ -17,11 +17,13 @@
 	NSArray *sectionTitles_;
     SCArrayOfObjectsModel *objectsModel;
      NSMutableDictionary *valuesDictionary_;
+    NSTimer *clearValuesTimer_;
+    NSDate *timeOfLastUserInput;
 }
 
 // LCYPassCodeEditorDelegate protocol...
 
-
+@property (nonatomic, strong) NSTimer *clearValuesTimer;
 - (void) passcodeEditor: (LCYPassCodeEditorViewController *) passcodeEditor newCode:(NSData *) newCode;
 
 - (BOOL) passCodeLockIsOn;

@@ -12,6 +12,9 @@
 
 
    __weak UITextField *tokenField_;
+    __weak UITextField *passwordFieldCurrent_;
+    __weak UITextField *passwordFieldNew_;
+    __weak UITextField *passwordFieldReenter_;
     UIButton *setKeyButton_;
     UIButton *viewTokenButton_;
      UIButton *generateNewButton_;
@@ -29,6 +32,9 @@
 @property (nonatomic, weak) IBOutlet UIButton *validateNewPasswordButton;
 @property (nonatomic, weak) IBOutlet UIButton *validateReenterNewPasswordButton;
 @property (nonatomic, weak) IBOutlet UIButton *validateEncryptionTokenButton;
+@property (nonatomic, weak) IBOutlet UITextField *passwordFieldCurrent;
+@property (nonatomic, weak) IBOutlet UITextField *passwordFieldNew;
+@property (nonatomic, weak) IBOutlet UITextField *passowrdFieldReenter;
 
 
 
