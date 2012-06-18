@@ -15,20 +15,20 @@
     UIButton *setKeyButton_;
     UIButton *viewTokenButton_;
      UIButton *generateNewButton_;
-    UILabel *validateCurrentPasswordLabel_;
-    UILabel *validateNewPasswordLabel_;
-    UILabel *validateReenterNewPasswordLabel_;
-    UILabel *validateEncryptionTokenLabel_;
+    UIButton *validateCurrentPasswordButton_;
+    UIButton *validateNewPasswordButton_;
+    UIButton *validateReenterNewPasswordButton_;
+    UIButton *validateEncryptionTokenButton_;
 }
 
 @property (nonatomic, weak) IBOutlet UITextField *tokenField;
 @property (nonatomic, weak) IBOutlet UIButton *setKeyButton;
 @property (nonatomic, weak) IBOutlet UIButton *viewTokenButton;
 @property (nonatomic, weak) IBOutlet UIButton *generateNewButton;
-@property (nonatomic, weak) IBOutlet UILabel *validateCurrentPasswordLabel;
-@property (nonatomic, weak) IBOutlet UILabel *validateNewPasswordLabel;
-@property (nonatomic, weak) IBOutlet UILabel *validateReenterNewPasswordLabel;
-@property (nonatomic, weak) IBOutlet UILabel *validateEncryptionTokenLabel;;
+@property (nonatomic, weak) IBOutlet UIButton *validateCurrentPasswordButton;
+@property (nonatomic, weak) IBOutlet UIButton *validateNewPasswordButton;
+@property (nonatomic, weak) IBOutlet UIButton *validateReenterNewPasswordButton;
+@property (nonatomic, weak) IBOutlet UIButton *validateEncryptionTokenButton;
 
 
 

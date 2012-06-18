@@ -970,7 +970,21 @@ NSLog(@"encrypted lock dictionary success is %i",encryptedLockDictionarySuccess)
     else {
         success=YES;
     }
-    
+    NSData *passwordData = [wrapper searchKeychainCopyMatching:K_PASSWORD_CURRENT];
+    if (!passwordData&&!reset) {
+        
+        success= [wrapper createKeychainValueWithData:[encryption_ getHashBytes:[self convertStringToData: @"o6fjZ4dhvKIUYVmaqnNJIPCBE2"]] forIdentifier:K_PASSWORD_CURRENT];
+        //           passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
+        
+        
+    }
+    else if (reset){
+        success= [wrapper updateKeychainValueWithData:[encryption_ getHashBytes:[self convertStringToData: @"o6fjZ4dhvKIUYVmaqnNJIPCBE2"]] forIdentifier:K_PASSWORD_CURRENT];
+    }
+    else {
+        success=YES;
+    }
+
     
     
 //    NSLog(@"passcode data length is %i",passcodeData.length);

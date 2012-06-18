@@ -290,7 +290,11 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
         
         if (ableToSave==YES) {
         
-            AudioServicesPlaySystemSound (soundFileObject);
+            BOOL playSound=[[NSUserDefaults standardUserDefaults]boolForKey:K_LOCK_SCREEN_PADLOCK_SOUND_IS_ON];
+            if (playSound) {
+                 AudioServicesPlaySystemSound (soundFileObject);
+            }
+           
             
         }
     //1

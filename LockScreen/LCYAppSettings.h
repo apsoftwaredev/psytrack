@@ -21,6 +21,8 @@ static NSString * const K_LOCK_SCREEN_CURRENT_KEYSTRING= @"current_keyString";
 static NSString * const K_CURRENT_SHARED_TOKEN= @"current_shared_token";
 static NSString * const K_OLD_SHARED_TOKEN=@"old_shared_token";
 static NSString * const K_LOCK_SCREEN_PADLOCK_SOUND_IS_ON=@"lock_screen_padlock_sound_is_on";
+static NSString * const K_PASSWORD_CURRENT=@"current_password_hash";
+static NSString * const K_PASSWORD_OLD=@"old_password_hash";
 
 
 
@@ -30,7 +32,7 @@ static NSString * const K_LOCK_SCREEN_PADLOCK_SOUND_IS_ON=@"lock_screen_padlock_
 
 -(BOOL)setPasscodeDataWithString:(NSString *)passcodeString;
 -(BOOL)setTokenDataWithString:(NSString *)tokenString;
-
+-(BOOL)setPasswordCurrentDataWithString:(NSString *)passwordString;
 -(BOOL)setLockScreenLocked:(BOOL)lockScreenLocked;
 
 -(BOOL)setLockScreenPasscodeIsOn:(BOOL)lockScreenIsOn;
@@ -43,7 +45,7 @@ static NSString * const K_LOCK_SCREEN_PADLOCK_SOUND_IS_ON=@"lock_screen_padlock_
 -(BOOL)setLockScreenTimerOn:(BOOL)timerOn;
 
 -(NSData *)passcodeData;
-
+-(NSData *)passwordData;
 - (BOOL) isPasscodeOn;
 - (BOOL) isLockedAtStartup;
 

@@ -132,6 +132,45 @@
     
     
 }
+-(BOOL)setPasswordCurrentDataWithString:(NSString *)passwordString{
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+  	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
+	NSString *passwordToSave = (passwordString) ? [NSString stringWithFormat:@"%@kdieJsi3ea18ki" ,passwordString ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
+    NSLog(@"passcodeToSave: %@", passwordToSave);
+	
+	
+    
+    
+    BOOL success=NO;
+    NSData *passwordData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE];
+    
+    
+    PTTEncryption *encryption=(PTTEncryption *)[appDelegate encryption];
+    if (!passwordData) {
+        
+        [wrapper newSearchDictionary:K_LOCK_SCREEN_PASSCODE];
+        success= [wrapper createKeychainValueWithData:[encryption getHashBytes:[appDelegate convertStringToData: passwordToSave]] forIdentifier:K_PASSWORD_CURRENT];
+        //           passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
+        
+        
+    }
+    else {
+        success= [wrapper updateKeychainValueWithData:[encryption getHashBytes:[appDelegate convertStringToData: passwordToSave]] forIdentifier:K_PASSWORD_CURRENT];
+    }
+    
+    
+    passwordString=nil;
+    passwordData=nil;
+    passwordToSave=nil;
+    wrapper=nil;
+    
+    return success;    
+    
+    
+    
+}
 
 
 
@@ -296,6 +335,17 @@
     
     
 }
+
+-(NSData *)passwordData{
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    
+    return [wrapper searchKeychainCopyMatching:K_PASSWORD_CURRENT];
+    
+    
+}
+
+
 -(NSString *)currentSharedTokenString{
     
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
