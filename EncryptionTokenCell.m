@@ -11,7 +11,7 @@
 @implementation EncryptionTokenCell
 @synthesize setKeyButton,tokenField=tokenField_,viewTokenButton,generateNewButton,
 validateCurrentPasswordButton,validateEncryptionTokenButton,
-validateNewPasswordButton,validateReenterNewPasswordButton,passwordFieldCurrent, passwordFieldNew,passowrdFieldReenter;
+validateNewPasswordButton,validateReenterNewPasswordButton,passwordFieldCurrent, passwordFieldNew,passowrdFieldReenter,hintField;
 
 
 - (id)initWithFrame:(CGRect)frame

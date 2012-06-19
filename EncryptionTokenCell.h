@@ -15,6 +15,7 @@
     __weak UITextField *passwordFieldCurrent_;
     __weak UITextField *passwordFieldNew_;
     __weak UITextField *passwordFieldReenter_;
+    __weak UITextField *hintField_;
     UIButton *setKeyButton_;
     UIButton *viewTokenButton_;
      UIButton *generateNewButton_;
@@ -36,6 +37,6 @@
 @property (nonatomic, weak) IBOutlet UITextField *passwordFieldNew;
 @property (nonatomic, weak) IBOutlet UITextField *passowrdFieldReenter;
 
-
+@property (nonatomic, weak) IBOutlet UITextField *hintField;
 
 @end

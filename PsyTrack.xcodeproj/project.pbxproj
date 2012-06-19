@@ -978,8 +978,8 @@
 				378DEDCC14FE73AF00CF4F12 /* LCYSetPasscodeStateMachine.m */,
 				378DEDCD14FE73AF00CF4F12 /* LCYTurnOffPasscodeStateMachine.h */,
 				378DEDCE14FE73AF00CF4F12 /* LCYTurnOffPasscodeStateMachine.m */,
-				378DEDCF14FE73AF00CF4F12 /* LICENSE.txt */,
 				378DEDD114FE73AF00CF4F12 /* README.markdown */,
+				378DEDCF14FE73AF00CF4F12 /* LICENSE.txt */,
 			);
 			path = LockScreen;
 			sourceTree = SOURCE_ROOT;

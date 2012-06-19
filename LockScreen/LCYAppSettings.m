@@ -181,7 +181,9 @@
 	
 	
     
-    
+    if (!hintString.length) {
+        hintString=@"VoidDoNotUseThisString876";
+    }
     BOOL success=NO;
     NSData *hintData = [wrapper searchKeychainCopyMatching:K_PASSOWRD_HINT];
     
@@ -431,10 +433,15 @@
 
     NSData *currentHintData=[wrapper searchKeychainCopyMatching:K_PASSOWRD_HINT];
     if (!currentHintData) {
-        return [NSData data];
+        return [NSString string];
     }
     else {
-        return [appDelegate convertDataToString: currentHintData];
+        NSString *returnString=[appDelegate convertDataToString: currentHintData];
+        if ([returnString isEqualToString:@"VoidDoNotUseThisString876"]) 
+        {
+            returnString=[NSString string];
+        } 
+        return returnString;
     }
     
     
