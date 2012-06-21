@@ -250,6 +250,10 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
     
     NSString *passcodeToCheck = (userInput) ? [NSString stringWithFormat:@"%@kdieJsi3ea18ki" ,userInput ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
     PTTEncryption *encryption=[[PTTEncryption alloc]init];
+    NSLog(@"check data is %@",[encryption getHashBytes:[appDelegate convertStringToData: passcodeToCheck]] );
+
+    NSLog(@"passcode data is %@",[appSettings passcodeData]);
+    
     
     if ( [ (NSData *)[encryption getHashBytes:[appDelegate convertStringToData: passcodeToCheck]] isEqualToData:[appSettings passcodeData]] ) 
  

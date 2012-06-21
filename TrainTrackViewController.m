@@ -417,7 +417,7 @@
                     
                 case 9:
                 {
-                    if (indexPath.row==0)result.textLabel.text=@"Lock Screen Settings";
+                    if (indexPath.row==0)result.textLabel.text=@"Lock Screen and Passwowrds";
                     
                     
 
@@ -860,7 +860,7 @@
             headerTitle=@"Drug Database Track";
             break;
         case 9:
-            headerTitle=@"Preferences Track";
+            headerTitle=@"Security Track";
             break;
         case 10:
             headerTitle=@"Groups Track";

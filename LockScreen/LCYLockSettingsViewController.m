@@ -365,8 +365,16 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
             case kTokenCellApplyChangesButtonTag:
             {
                 //Change password
+                LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
+                BOOL shouldChangeToken=NO;
+                if (![encryptionTokenCell.tokenField.text isEqualToString:[appSettings currentSharedTokenString]]) {
+                    shouldChangeToken=YES;
+                }
                 
-                if ([self validatePasswordsFromEncrytpionTokenCell:encryptionTokenCell buttonTapped:kTokenCellApplyChangesButtonTag]) {
+                BOOL passwordsAreValid=[self validatePasswordsFromEncrytpionTokenCell:encryptionTokenCell buttonTapped:kTokenCellApplyChangesButtonTag];
+                
+                if (passwordsAreValid&&shouldChangeToken) {
+                   
                     
                     UIView *textFieldView=(UIView *)[cell viewWithTag:KTokenCellTokenFieldTag];
                     if ([textFieldView isKindOfClass:[UITextField class]]) {
@@ -384,27 +392,51 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
                            
                         }
                         else {
-                            LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
+                            
                             
                             [appSettings setTokenDataWithString:tokenTextField.text];
+                            [appDelegate setChangedToken:YES];
+                            if ([appSettings rekeyKeyEntityKeys]) {
+                                displayMessage=@"Changes applied successfully.";  
+                                encryptionTokenCell.validateEncryptionTokenButton.hidden=YES;
+                                encryptionTokenCell.validateCurrentPasswordButton.hidden=YES;
+                                encryptionTokenCell.validateNewPasswordButton.hidden=YES;
+                                encryptionTokenCell.validateReenterNewPasswordButton.hidden=YES;
+                                encryptionTokenCell.tokenField.text=@"";
+                                encryptionTokenCell.passwordFieldNew.text=@"";
+                                encryptionTokenCell.passowrdFieldReenter.text=@"";
+                                encryptionTokenCell.passwordFieldCurrent.text=@"";
+                            }
+                            else {
+                                displayMessage=@"Error occured in saving new encrytion data."; 
+                            }
                             
-                            displayMessage=@"Changes applied successfully.";  
-                            encryptionTokenCell.validateEncryptionTokenButton.hidden=YES;
-                            encryptionTokenCell.validateCurrentPasswordButton.hidden=YES;
-                            encryptionTokenCell.validateNewPasswordButton.hidden=YES;
-                            encryptionTokenCell.validateReenterNewPasswordButton.hidden=YES;
-                            encryptionTokenCell.tokenField.text=@"";
-                            encryptionTokenCell.passwordFieldNew.text=@"";
-                            encryptionTokenCell.passowrdFieldReenter.text=@"";
-                            encryptionTokenCell.passwordFieldCurrent.text=@"";
+                           
                            
                         }
                         
                         
                         [appDelegate displayNotification:displayMessage];
-                        
+                    
                     }
                     
+                }
+                else if (passwordsAreValid && !shouldChangeToken){
+                    NSString *displayMessage=nil;
+                    if ([appSettings rekeyKeyEntityKeys]) {
+                        displayMessage=@"Changes applied successfully.";  
+                        encryptionTokenCell.validateEncryptionTokenButton.hidden=YES;
+                        encryptionTokenCell.validateCurrentPasswordButton.hidden=YES;
+                        encryptionTokenCell.validateNewPasswordButton.hidden=YES;
+                        encryptionTokenCell.validateReenterNewPasswordButton.hidden=YES;
+                        encryptionTokenCell.tokenField.text=@"";
+                        encryptionTokenCell.passwordFieldNew.text=@"";
+                        encryptionTokenCell.passowrdFieldReenter.text=@"";
+                        encryptionTokenCell.passwordFieldCurrent.text=@"";
+                    }
+                    else {
+                        displayMessage=@"Error occured in saving new encrytion data."; 
+                    }
                 }
                 
             }
@@ -512,6 +544,8 @@ if(section.headerTitle !=nil)
     
     BOOL valid=NO;
 
+    appDelegate.changedPassword=NO;
+    appDelegate.changedToken=NO;
     
     UITextField * currentTokenTextField=(UITextField *)encryptionTokenCell.tokenField;
         
@@ -665,7 +699,7 @@ if(section.headerTitle !=nil)
             }
             else 
             {
-                displayMessage=@"The new passwords entered do not match.";
+                displayMessage=@"The new passwords you entered did not match.";
                 newPasswordTextField.text=@"";
                 reenterPasswordTextField.text=@"";
                 validateNewPasswordButton.hidden=NO;
@@ -716,6 +750,7 @@ if(section.headerTitle !=nil)
                         displayMessage=@"Error saving password";
                     }
                     else {
+                        appDelegate.changedPassword=YES;
                         
                         NSString *passwordHint=encryptionTokenCell.hintField.text;
                         BOOL setHint=NO;
@@ -967,7 +1002,7 @@ NSLog(@"clear user input fired");
                 EncryptionTokenCell *encryptionTokenCell=(EncryptionTokenCell *)cell;
                 
                 NSTimeInterval timeSinceLastUserImput=[timeOfLastUserInput timeIntervalSinceNow];
-                NSTimeInterval timeToClearFields=-599.0;
+                NSTimeInterval timeToClearFields=-580.0;
                 if (timeSinceLastUserImput<timeToClearFields) {
                     encryptionTokenCell.tokenField.text=@"";
                     encryptionTokenCell.passwordFieldCurrent.text=@"";

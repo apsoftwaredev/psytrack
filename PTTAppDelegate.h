@@ -87,7 +87,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
       CasualAlertViewController *casualAlertManager;
     
     
-   
+  
     
     BOOL encryptedLockDictionarySuccess;
     
@@ -102,8 +102,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
     Reachability* internetReach;
     Reachability* wifiReach;
     
-    KeychainItemWrapper *passwordItem_;
-    KeychainItemWrapper *passCodeItem_;
+   
     NSTimer *checkKeyEntityTimer;
     NSTimer *displayConnectingTimer;
 }
@@ -170,16 +169,20 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 -(NSString *)generateRandomStringOfLength:(int )length;
 -(NSString *)combSmString;
 -(NSData *)hashDataFromString:(NSString *)plainString;
-
+-(NSData *)getOldSharedSymetricData;
 -(NSDate *)convertDataToDate:(NSData *)data;
 -(IBAction)notifyTrustFailure:(id)sender;
+-(NSData *)encryptDataToEncryptedData:(NSData *) unencryptedData;
 -(NSData *)decryptDataToPlainData:(NSData *)encryptedData usingSymetricKey:(NSData *)symetricData;
 -(NSData *)convertStringToData:(NSString *)string;
+-(NSData *)getSharedSymetricData;
 
+-(NSString *)generateExposedKey;
 //-(IBAction)resaveLockDictionarySettings:(id)sender;
 @property (nonatomic,assign)BOOL okayToDecryptBool;
 
 @property (nonatomic, strong) PTTEncryption *encryption;
+
 @property (nonatomic, strong) IBOutlet UIViewController *masterViewController;
 @property (nonatomic, strong) IBOutlet TrainTrackViewController *trainTrackViewController;
 @property (nonatomic, strong) IBOutlet ClinicianViewController *clinicianViewController;
@@ -194,7 +197,8 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 @property (strong, nonatomic)IBOutlet UILabel *clinicianToolsLabel;
 @property (strong, nonatomic)IBOutlet UILabel *developedByLabel;
 
-
+@property (nonatomic, assign) BOOL changedPassword;
+@property (nonatomic, assign) BOOL changedToken;
 
 @property (weak, nonatomic) IBOutlet UINavigationController *navigationControllerTrainTrack;
 @property (weak, nonatomic) IBOutlet UISplitViewController *splitViewControllerReports;

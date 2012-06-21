@@ -10,7 +10,7 @@
 #import "PTTAppDelegate.h"
 #import "KeychainItemWrapper.h"
 #import "PTTEncryption.h"
-
+#import "KeyEntity.h"
 @implementation LCYAppSettings
 
 //@synthesize lockScreenChallengePhrase=lockScreenChallengePhrase_;
@@ -81,6 +81,8 @@
         
     }
     else {
+        NSLog(@"passcode data to save %@",passcodeDataToSave);
+        
         success= [wrapper updateKeychainValueWithData:passcodeDataToSave forIdentifier:K_LOCK_SCREEN_PASSCODE];
     }
     
@@ -103,29 +105,79 @@
 	 NSLog(@"tokenToSave: %@", tokenString);
 	
 	
-    
+    NSLog(@" shared symetric data before change is %@",[appDelegate getSharedSymetricData]);
     
     BOOL success=NO;
-    NSData *tokenData = [wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN];
+    NSData *oldTokenData = [wrapper searchKeychainCopyMatching:K_OLD_SHARED_TOKEN];
     
+    BOOL oldTokenKeychainItemExists=NO;
+    BOOL tokenKeychainItemExists=NO;
     
+    if (!oldTokenData) {
+        
+        [wrapper newSearchDictionary:K_OLD_SHARED_TOKEN];
+        success= [wrapper createKeychainValueWithData:[appDelegate convertStringToData:tokenString] forIdentifier:K_OLD_SHARED_TOKEN];
+        //           passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
+        
+        if (success) {
+            oldTokenKeychainItemExists=YES;
+        }
+    }
+    else {
+        oldTokenKeychainItemExists=YES;
+    }
+    
+    NSData *tokenData =[NSData dataWithData: [wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN]];
+    
+    NSLog(@"current shared token is %@",[appDelegate convertDataToString:tokenData]);
     
     if (!tokenData) {
         
         [wrapper newSearchDictionary:K_CURRENT_SHARED_TOKEN];
-        success= [wrapper createKeychainValueWithData:[appDelegate convertStringToData: tokenString] forIdentifier:K_CURRENT_SHARED_TOKEN];
+        success= [wrapper createKeychainValueWithData:[appDelegate convertStringToData:tokenString] forIdentifier:K_CURRENT_SHARED_TOKEN];
+        
+        tokenData = [NSData dataWithData:(NSData *)[wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN]];
         //           passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
         
         
+        if (success) {
+            tokenKeychainItemExists=YES;
+        }
+        
+    }else {
+        tokenKeychainItemExists=YES;
     }
-    else {
+    
+    
+    
+    if (tokenKeychainItemExists && oldTokenKeychainItemExists && tokenData) {
+        success=NO;
+        success= [wrapper updateKeychainValueWithData:tokenData forIdentifier:K_OLD_SHARED_TOKEN];
+    }
+    
+    
+    if (success && tokenKeychainItemExists) {
+        
         success= [wrapper updateKeychainValueWithData:[appDelegate convertStringToData: tokenString] forIdentifier:K_CURRENT_SHARED_TOKEN];
     }
     
     
+   oldTokenData =[wrapper searchKeychainCopyMatching:K_OLD_SHARED_TOKEN];
+    
+
+    
+    
+    NSLog(@"old shared token is %@",[appDelegate convertDataToString:oldTokenData]);
+    
+    NSData *newTokenData=[wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN];
+
+    NSLog(@"new token data is %@",[appDelegate convertDataToString:newTokenData]);
+    
+    tokenData=nil;
+    
     tokenString=nil;
- 
-  
+ NSLog(@"old shared symetric data is %@",[appDelegate getOldSharedSymetricData]);
+  NSLog(@"new shared symetric data is %@",[appDelegate getSharedSymetricData]);
     wrapper=nil;
     
     return success;
@@ -139,38 +191,179 @@
   	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
 	NSString *passwordToSave = (passwordString) ? [NSString stringWithFormat:@"%@iJsi3" ,passwordString ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
     NSLog(@"passcodeToSave: %@", passwordToSave);
-	
+	NSLog(@"current password data is %@",[appDelegate getSharedSymetricData]);
 	
     
     
     BOOL success=NO;
-    NSData *passwordData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE];
+    BOOL oldPasscodeKeychainItemExists=NO;
+    BOOL passwordKeychainItemExists=NO;
+    
+    NSData *oldPasswordData =[wrapper searchKeychainCopyMatching:K_PASSWORD_OLD];
     
     
     PTTEncryption *encryption=(PTTEncryption *)[appDelegate encryption];
-    if (!passwordData) {
+    if (!oldPasswordData) {
         
-        [wrapper newSearchDictionary:K_LOCK_SCREEN_PASSCODE];
-        success= [wrapper createKeychainValueWithData:[encryption getHashBytes:[appDelegate convertStringToData: passwordToSave]] forIdentifier:K_PASSWORD_CURRENT];
+        [wrapper newSearchDictionary:K_PASSWORD_OLD];
+        success= [wrapper createKeychainValueWithData:[encryption getHashBytes:[appDelegate convertStringToData: passwordToSave]] forIdentifier:K_PASSWORD_OLD];
         //           passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
         
-        
+        if (success) {
+            oldPasscodeKeychainItemExists=YES;
+        }
     }
     else {
+        oldPasscodeKeychainItemExists=YES;
+    }
+    
+    NSData *passwordData = [NSData dataWithData:[wrapper searchKeychainCopyMatching:K_PASSWORD_CURRENT]];
+    
+    
+    
+    if (!passwordData) {
+        success=NO;
+        [wrapper newSearchDictionary:K_PASSWORD_CURRENT];
+        success= [wrapper createKeychainValueWithData:[encryption getHashBytes:[appDelegate convertStringToData: passwordToSave]] forIdentifier:K_PASSWORD_CURRENT];
+        
+        passwordData =[NSData dataWithData: [wrapper searchKeychainCopyMatching:K_PASSWORD_CURRENT]];
+        //           passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
+        
+        if (success) {
+            passwordKeychainItemExists=YES;
+        }
+    }else {
+        passwordKeychainItemExists=YES;
+    }
+    
+    
+    oldPasswordData =[wrapper searchKeychainCopyMatching:K_PASSWORD_OLD];
+
+    if (oldPasswordData) {
+   
+        success= [wrapper updateKeychainValueWithData:passwordData forIdentifier:K_PASSWORD_OLD];
+    }
+
+    NSLog(@"old passowrd data is %@",oldPasswordData);
+    passwordData =[wrapper searchKeychainCopyMatching:K_PASSWORD_CURRENT];
+    if (passwordData) {
+    
         success= [wrapper updateKeychainValueWithData:[encryption getHashBytes:[appDelegate convertStringToData: passwordToSave]] forIdentifier:K_PASSWORD_CURRENT];
     }
     
-    
-    passwordString=nil;
-    passwordData=nil;
-    passwordToSave=nil;
-    wrapper=nil;
-    
+    NSLog(@"current passowrd data is %@",passwordData);
+       
     return success;    
     
     
     
 }
+
+
+
+-(BOOL)updateOldPasswordWithCurrentPassword{
+
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+   
+  	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
+	
+
+    NSData *oldPasswordData =[wrapper searchKeychainCopyMatching:K_PASSWORD_OLD];
+    
+    
+   
+    BOOL oldPasscodeKeychainItemExists=NO;
+    BOOL passwordKeychainItemExists=NO;
+    BOOL success=NO;
+    
+    if (!oldPasswordData) {
+        
+        return NO;
+    
+    }
+    else {
+        oldPasscodeKeychainItemExists=YES;
+    }
+    
+    NSData *passwordData = [NSData dataWithData:(NSData *)[wrapper searchKeychainCopyMatching:K_PASSWORD_CURRENT]];
+    
+    
+    
+    if (!passwordData) {
+        return NO;        
+        
+    }else {
+        passwordKeychainItemExists=YES;
+    }
+    
+    
+    oldPasswordData =[wrapper searchKeychainCopyMatching:K_PASSWORD_OLD];
+    
+    if (oldPasswordData) {
+        
+        success= [wrapper updateKeychainValueWithData:passwordData forIdentifier:K_PASSWORD_OLD];
+    }
+
+
+
+    
+    return success;
+
+}
+
+
+-(BOOL)updateOldTokenWithCurrentToken{
+    
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    
+  	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
+	
+    
+    NSData *oldTokenData =[wrapper searchKeychainCopyMatching:K_OLD_SHARED_TOKEN];
+    
+    
+    
+    BOOL oldTokenKeychainItemExists=NO;
+    BOOL tokenKeychainItemExists=NO;
+    BOOL success=NO;
+    
+    if (!oldTokenData) {
+        
+        return NO;
+        
+    }
+    else {
+        oldTokenKeychainItemExists=YES;
+    }
+    
+    NSData *tokenData = [NSData dataWithData:(NSData *)[wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN]];
+    
+    
+    
+    if (!tokenData) {
+        return NO;        
+        
+    }else {
+        tokenKeychainItemExists=YES;
+    }
+    
+    
+    oldTokenData =[wrapper searchKeychainCopyMatching:K_OLD_SHARED_TOKEN];
+    
+    if (oldTokenData) {
+        
+        success= [wrapper updateKeychainValueWithData:tokenData forIdentifier:K_OLD_SHARED_TOKEN];
+    }
+    
+    
+    
+    
+    return success;
+    
+}
+
 
 -(BOOL)setPasscodeHintWithString:(NSString *)hintString{
 
@@ -370,6 +563,8 @@
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
    
     NSData *currentPasscodeData=[wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE];
+    
+    NSLog(@"passocde data is %@",currentPasscodeData);
     if (!currentPasscodeData) {
         return [NSData data];
     }
@@ -424,7 +619,20 @@
     
 }
 
-
+-(NSData *)oldPasswordData{
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    
+    NSData *oldPasswordData=[wrapper searchKeychainCopyMatching:K_PASSWORD_OLD];
+    if (!oldPasswordData) {
+        return [NSData data];
+    }
+    else {
+        return oldPasswordData;
+    }
+    
+    
+}
 -(NSString *)hintString{
     
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
@@ -486,7 +694,16 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     
     
 }
-
+-(NSString *)oldSharedTokenString{
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    return [appDelegate convertDataToString:(NSData *) [wrapper searchKeychainCopyMatching:K_OLD_SHARED_TOKEN]];
+    
+    
+}
 
 -(NSData *)defaultSharedTokenData{
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -625,4 +842,161 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
 
 
 }
+
+-(BOOL)rekeyKeyEntityKeys{
+    
+    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//    PTTEncryption *encryption=(PTTEncryption *)appDelegate.encryption;
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    
+    [appDelegate saveContext];
+    
+    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    
+ 
+    BOOL changedPassword=appDelegate.changedPassword;
+    BOOL changedToken=appDelegate.changedToken;
+    
+    
+    if (changedToken&&!changedPassword) {
+        [self updateOldPasswordWithCurrentPassword];
+    }
+    if (changedPassword &&!changedToken) {
+        [self updateOldTokenWithCurrentToken];
+    }
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *keyEntity = [NSEntityDescription entityForName:@"KeyEntity" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:keyEntity];
+    
+     
+    NSError *error = nil;
+    NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    //4
+    NSLog(@"error is %@",error);
+    if (error) {
+        return NO;
+    }
+    
+       NSLog(@"fetched objects are %@",fetchedObjects);
+   
+    
+    NSData *sharedSymetricData=[appDelegate getSharedSymetricData];
+    if (fetchedObjects.count) 
+    {
+        
+        
+        NSLog(@"fetched objects are %@",fetchedObjects);
+        //                NSPredicate *keyStringPredicate;
+        
+        KeyEntity *testKey=[fetchedObjects objectAtIndex:0];
+        NSLog(@"test key is %@",testKey);
+        
+               
+        
+        //                     keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]];
+        NSData *oldSharedSymetricData=[appDelegate getOldSharedSymetricData];
+     
+        for (KeyEntity *keyObjectInArray in fetchedObjects) {
+           
+            
+            
+                      
+                       
+            [keyObjectInArray willAccessValueForKey:@"dataF"];
+            NSLog(@"data f is %@",keyObjectInArray.dataF);
+            NSData *dataF=[NSData dataWithData:keyObjectInArray.dataF];
+            [keyObjectInArray didAccessValueForKey:@"dataF"];
+            NSLog(@"dataf is %@",dataF);
+            
+            NSLog(@"old shared symetric data is %@",oldSharedSymetricData);
+            NSLog(@"new shared symetric data is %@", sharedSymetricData);
+            NSData *symetricDataEncryptedWithOld=[appDelegate decryptDataToPlainData:dataF usingSymetricKey:oldSharedSymetricData];
+            NSLog(@"old shared symetric data is %@",oldSharedSymetricData);
+            NSLog(@"symetric data decrypted %@",symetricDataEncryptedWithOld);
+            [keyObjectInArray didAccessValueForKey:@"dataF"];
+            NSData *symetricData=nil;
+            
+            if (symetricDataEncryptedWithOld) {
+                 symetricData=[appDelegate encryptDataToEncryptedData:symetricDataEncryptedWithOld];
+            }
+            [keyObjectInArray willAccessValueForKey:@"keyString"];
+            NSLog(@"keystring in array is %@",keyObjectInArray.keyString);
+            [keyObjectInArray didAccessValueForKey:@"keyString"];
+            
+            NSLog(@" decrypted symetric data is %@",[appDelegate decryptDataToPlainData:symetricData usingSymetricKey:sharedSymetricData]);
+            NSLog(@"shared synetric dat is %@",sharedSymetricData);                                         
+            
+            
+            if (symetricData) {
+                [keyObjectInArray willChangeValueForKey:@"dataF"];
+                keyObjectInArray.dataF =[NSData dataWithData: symetricData];
+                [keyObjectInArray didChangeValueForKey:@"dataF"];
+                
+            }
+           
+           
+        }
+        
+        
+                   
+
+    }
+    
+   
+    
+    
+    NSData *  currentKeyStringData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_CURRENT_KEYSTRING];
+    BOOL success=NO;
+    
+    NSString *newKeyString=[NSString string];
+    NSMutableArray * fetchedObjectsKeyStrings=[fetchedObjects mutableArrayValueForKey:@"keyString"];
+   
+    NSLog(@"keystrings array i s%@",fetchedObjectsKeyStrings);
+    
+    do {
+        newKeyString =[appDelegate generateExposedKey];
+    } while ([fetchedObjectsKeyStrings containsObject:newKeyString]);
+    
+    
+    if (!currentKeyStringData) {
+       
+        success= [wrapper createKeychainValue:newKeyString forIdentifier:K_LOCK_SCREEN_CURRENT_KEYSTRING];
+        currentKeyStringData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_CURRENT_KEYSTRING];
+        
+    }else  
+    {
+        success=  [wrapper updateKeychainValue:newKeyString forIdentifier:K_LOCK_SCREEN_CURRENT_KEYSTRING];
+    }
+        
+    if (success) {
+   
+        KeyEntity *newKeyObject=[[KeyEntity alloc] initWithEntity:keyEntity insertIntoManagedObjectContext:managedObjectContext];
+        [newKeyObject willChangeValueForKey:@"keyString"];
+        newKeyObject.keyString=newKeyString ;
+        [newKeyObject didChangeValueForKey:@"keyString"];
+        
+        
+//        symetricData=[encryption wrapSymmetricKey:symetricData keyRef:nil useDefaultPublicKey:YES];
+        sharedSymetricData=[NSData  dataWithData:(NSData *)[appDelegate getSharedSymetricData]];
+       NSData * newSymetricData=[appDelegate encryptDataToEncryptedData:sharedSymetricData];
+        NSLog(@"symetric data is %@",newSymetricData);
+        [newKeyObject willChangeValueForKey:@"dataF"];
+        newKeyObject.dataF=[NSData dataWithData:(NSData *) newSymetricData];
+        [newKeyObject didChangeValueForKey:@"dataF"];
+        newSymetricData=nil;
+            
+    }
+    
+    sharedSymetricData=nil;
+    
+   
+    
+    return YES;
+
+
+
+}
+
+
 @end

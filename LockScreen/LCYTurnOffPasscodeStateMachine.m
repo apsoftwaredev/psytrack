@@ -133,7 +133,7 @@ NSString * NSStringFromLCYTurnOffPasscodeStates (LCYTurnOffPasscodeStates state)
 	return (state_ == LCYTurnOffPasscodeStatesDone);
 }
 
-- (NSString *) theNewPasscode;
+- (NSData *) theNewPasscode;
 {
 	return nil;
 }

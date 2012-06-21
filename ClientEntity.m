@@ -277,8 +277,8 @@ if (fetchedObjects) {
         [self willAccessValueForKey:@"keyString"];
         NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
         //NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
-        NSData *encryptedData;
-        NSString *encryptedKeyString;
+        NSData *encryptedData=nil;
+        NSString *encryptedKeyString=nil;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
             encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
             
@@ -455,8 +455,11 @@ if (fetchedObjects) {
         if(tmpKeyString && tmpKeyString.length){
             NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
             
+            NSLog(@"temp string is %@",strData);
+
             tempStr=[appDelegate convertDataToString:strData];
             
+            NSLog(@"temp string is %@",tempStr);
             [self willChangeValueForKey:@"tempClientIDCode"];
             
             self.tempClientIDCode=tempStr;

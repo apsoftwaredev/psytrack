@@ -73,6 +73,8 @@
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
 
+
+
 /* Begin global declarations */
 
 // Global constants used for symmetric key algorithm choice and
@@ -141,6 +143,9 @@ NSString* trustResultDescribe( SecTrustResultType result );
 - (SecKeyRef)getPrivateKeyRef;
 - (CFTypeRef)getPersistentKeyRefWithKeyRef:(SecKeyRef)keyRef;
 - (SecKeyRef)getKeyRefWithPersistentKeyRef:(CFTypeRef)persistentRef;
+
+
+
 
 
 @end
