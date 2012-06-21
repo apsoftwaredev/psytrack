@@ -82,7 +82,7 @@
                                                                    datePickerMode:UIDatePickerModeDate
                                                     displayDatePickerInDetailView:NO];
     
-
+    existingHoursStartDatePropertyDef.autoValidate=NO;
     //Create the property definition for the endDate property in the existingHours class
     SCPropertyDefinition *existingHoursEndDatePropertyDef = [existingHoursDef propertyDefinitionWithName:@"endDate"];
     
@@ -92,6 +92,7 @@
                                                                                   datePickerMode:UIDatePickerModeDate
                                                                    displayDatePickerInDetailView:NO];
     
+    existingHoursEndDatePropertyDef.autoValidate=NO;
     //Create the property definition for the notes property in the existing hours class
     SCPropertyDefinition *existingHoursNotesPropertyDef = [existingHoursDef propertyDefinitionWithName:@"notes"];
     existingHoursNotesPropertyDef.type=SCPropertyTypeCustom;
@@ -1336,6 +1337,99 @@
 BOOL valid=NO;
     SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];
     //NSLog(@"cell class is %@",cell.class);
+    
+    if (tableViewModel.tag==1) {
+        NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+        
+        NSLog(@"cell class is %@",cell.class);
+        NSLog(@"cell tag is %i",cell.tag);
+        if ([cell isKindOfClass:[SCDateCell class]]) {
+            SCDateCell *dateCell=(SCDateCell *)cell;
+            
+            SCTableViewCell *otherCell=nil;
+            SCDateCell *otherDateCell=nil;
+            NSDate *startDate=nil;
+            NSDate *endDate=nil;
+            
+            if ( cell.tag==0) {
+                
+            
+                otherCell=(SCTableViewCell *)[tableViewModel cellAfterCell:dateCell rewind:NO];
+            
+                
+            }
+            else if (cell.tag==1){
+                SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+                otherCell=(SCTableViewCell *)[section cellAtIndex:0];
+            
+                
+            }
+            
+            if ([otherCell isKindOfClass:[SCDateCell class]]) {
+                otherDateCell=(SCDateCell *) otherCell;
+            }
+           
+            if (cell.tag==0) {
+                startDate=dateCell.datePicker.date;
+                endDate=otherDateCell.datePicker.date;
+            } else if (cell.tag==1) {
+                startDate=otherDateCell.datePicker.date;
+                endDate=dateCell.datePicker.date;
+            }
+            
+            NSLog(@"start dat is %@ and enddate is %@",startDate, endDate);
+            if (startDate && endDate) {
+            
+            if ( ([startDate compare:endDate]) == NSOrderedDescending ) {
+                [appDelegate displayNotification:@"Invalid: The start date is after the end date" forDuration:kPTTScreenLocationTop location:kPTTScreenLocationTop inView:appDelegate.window];
+                return NO;
+            }
+            
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+            NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExistingHoursEntity" inManagedObjectContext:managedObjectContext];
+            [fetchRequest setEntity:entity];
+            
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"((startDate >= %@) AND (endDate <= %@)) OR ((startDate < %@) AND ((endDate < %@ )AND (endDate > %@) )) OR ((startDate < %@) AND (endDate > %@)   )", startDate, endDate, startDate, endDate,startDate, startDate,endDate];
+            [fetchRequest setPredicate:predicate];
+            
+            NSError *error = nil;
+            NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+            if (!fetchedObjects.count) {
+                
+                valid=YES;
+            }
+            else {
+               
+              
+                    [appDelegate displayNotification:@"Existing hours already defined for this date range" forDuration:kPTTScreenLocationTop location:kPTTScreenLocationTop inView:appDelegate.window];
+              
+                
+            }
+
+            
+            }   
+            
+            
+        }
+        
+        
+        if ([cell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            valid=YES;
+            
+            
+        }
+
+
+
+        
+        
+        
+        
+    }
+    
     if ([cell isKindOfClass:[SCNumericTextFieldCell class]]) {
         SCNumericTextFieldCell *numericCell=(SCNumericTextFieldCell *)cell;
         
@@ -1368,12 +1462,7 @@ BOOL valid=NO;
        
     }
     
-    if ([cell isKindOfClass:[EncryptedSCTextViewCell class]]) {
-        valid=YES;
-        
-    
-    }
-    
+       
     return valid;
 
 
