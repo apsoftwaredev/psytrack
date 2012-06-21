@@ -1074,6 +1074,7 @@
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     interventionDef.titlePropertyName=@"interventionType.interventionType;interventionSubType.interventionSubType;hours";
+    interventionDef.titlePropertyNameDelimiter=@" - ";
     
     //create an array of objects definition for the other psychotherapy to-many relationship that with show up in a different view  without a place holder element>.
     
@@ -1474,10 +1475,9 @@ BOOL valid=NO;
     if([cell isKindOfClass:[SCNumericTextFieldCell class]])
     {
         SCNumericTextFieldCell *numericCell=(SCNumericTextFieldCell *)cell;
-        CGRect frame = numericCell.textLabel.frame;
-        frame.size.width = frame.size.width+100;
         
-        numericCell.textLabel.frame = frame;
+        
+        [numericCell.textLabel sizeToFit];
         numericCell.textField.textAlignment=UITextAlignmentRight;
         numericCell.textField.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin ;
 //       CGRect textFieldFrame=numericCell.textField.textInputView.frame;

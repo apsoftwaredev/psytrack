@@ -24,16 +24,11 @@ TO DO:
 
 
 
--items predicate
 
--too much memory, may be okay
-
--icloud not working
--phonenumber in client validation
 -drug name deleting when leave view
 -number fields in existing hours, text label covers field
 -drug name staying with no selection
--auto add medlog date
+
 -prescriber list not defauted when prescriber
 -systolic pressure validation iphone
 -temperature allow decimal
@@ -144,3 +139,5 @@ begin adding reports
 -	Fix the behavior observation section clean it up and eliminate unneeded
 -client id code validation
 -generating new enter your name on every resart
+
+-auto add medlog date

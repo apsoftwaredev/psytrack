@@ -285,11 +285,11 @@
                 break;
             }
             case 6:{
-                result = 2;
+                result = 3;
                 break;
             }
             case 7:{
-                result = 2;
+                result = 3;
                 break;
             }
             case 8:{
@@ -297,11 +297,11 @@
                 break;
             }
             case 9:{
-                result = 1;
+                result = 2;
                 break;
             }
             case 10:{
-                result = 2;
+                result = 1;
                 break;
             }
     
@@ -395,7 +395,8 @@
                 {
                     if (indexPath.row==0)result.textLabel.text=@"Continuing Education Credits";
 
-                    if (indexPath.row==1)result.textLabel.text=@"Certifications";
+                    if (indexPath.row==1)result.textLabel.text=@"Courses Taken";
+                    if (indexPath.row==2)result.textLabel.text=@"Conferences Attended";
 
                     
                 }
@@ -405,6 +406,7 @@
                 {
                      if (indexPath.row==0)result.textLabel.text=@"Courses Taught";
                      if (indexPath.row==1)result.textLabel.text=@"Presentations";
+                    if (indexPath.row==2)result.textLabel.text=@"Advising";
                     
                 }
                     break;
@@ -417,18 +419,18 @@
                     
                 case 9:
                 {
-                    if (indexPath.row==0)result.textLabel.text=@"Lock Screen and Encryption";
                     
                     
+                    if (indexPath.row==0)result.textLabel.text=@"Clinician Groups";
+                    if (indexPath.row==1)result.textLabel.text=@"Client Groups";
 
                   
                 }
                     break;
                 case 10:
                 {
+                    if (indexPath.row==0)result.textLabel.text=@"Lock Screen and Encryption";
                     
-                    if (indexPath.row==0)result.textLabel.text=@"Clinician Groups";
-                    if (indexPath.row==1)result.textLabel.text=@"Client Groups";
                     
                 } 
                     break;
@@ -656,23 +658,8 @@
             
         case 9:
         {
-            //@"Lock Screen Settings"
-            if (indexPath.row==0){
-            
-                LCYLockSettingsViewController *lockSettingsVC = [[LCYLockSettingsViewController alloc] initWithNibName:@"LCYLockSettingsViewController" bundle:nil];
-                [[self navigationController] pushViewController:lockSettingsVC animated:YES];            
-                break;
-            
-            };
-                       
-            
-            
-        }
-            break;
-        case 10:
-        {
             //@"Clinician Groups"
-           
+            
             
             if (indexPath.row==0){
                 
@@ -685,9 +672,9 @@
                 
                 
             };
-
+            
             //@"Clinician Groups"
-          
+            
             if (indexPath.row==1){
                 
                 
@@ -695,10 +682,26 @@
                 
                 [self.navigationController pushViewController:clientGroupsViewController animated:YES];
                 
-                               
+                
             };
+            
 
-                       
+                        
+            
+        }
+            break;
+        case 10:
+        {
+            //@"Lock Screen Settings"
+            if (indexPath.row==0){
+                
+                LCYLockSettingsViewController *lockSettingsVC = [[LCYLockSettingsViewController alloc] initWithNibName:@"LCYLockSettingsViewController" bundle:nil];
+                [[self navigationController] pushViewController:lockSettingsVC animated:YES];            
+                break;
+                
+            };
+            
+                 
         }
             break;
            
@@ -851,7 +854,7 @@
             headerTitle=@"Consultations Track";
             break;
         case 6:
-            headerTitle=@"Formal Education Track";
+            headerTitle=@"Education Track";
             break;
         case 7:
             headerTitle=@"Teaching and Advising Track";
@@ -860,10 +863,11 @@
             headerTitle=@"Drug Database Track";
             break;
         case 9:
-            headerTitle=@"Security Track";
+            headerTitle=@"Groups Track";
+            
             break;
         case 10:
-            headerTitle=@"Groups Track";
+            headerTitle=@"Security Track";
             break;
         case 11:
             headerTitle=@"Support and About Track";
