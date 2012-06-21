@@ -11,7 +11,7 @@
 #import "ClientPresentations_Shared.h"
 #import <EventKit/EventKit.h>
 #import <EventKitUI/EventKitUI.h>
-
+#import "InterventionTypeEntity.h"
 @class Time_Shared;
 
 typedef enum {
@@ -84,7 +84,8 @@ static NSString * const kTrackSupervisionReceivedEntityName=@"SupervisionReceive
     NSDate *timeToSubtract;
    
     SCTableViewSection *breakTimeSection;
-
+    InterventionTypeEntity *selectedInterventionType;
+    
 }
 
 

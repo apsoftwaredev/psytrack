@@ -745,8 +745,8 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
 	LOGGING_FACILITY(plainText != nil, @"PlainText object cannot be nil." );
 	LOGGING_FACILITY(symmetricKey != nil, @"Symmetric key object cannot be nil." );
 	LOGGING_FACILITY(pkcs7 != NULL, @"CCOptions * pkcs7 cannot be NULL." );
-	NSLog(@"semetric key length is %i",[symmetricKey length]);
-    NSLog(@"max blowfish key length is%i",kChosenCipherKeySize);
+//	NSLog(@"semetric key length is %i",[symmetricKey length]);
+//    NSLog(@"max blowfish key length is%i",kChosenCipherKeySize);
     
     LOGGING_FACILITY([symmetricKey length] == kChosenCipherKeySize, @"Disjoint choices for key size." );
 

@@ -417,7 +417,7 @@
                     
                 case 9:
                 {
-                    if (indexPath.row==0)result.textLabel.text=@"Lock Screen and Passwowrds";
+                    if (indexPath.row==0)result.textLabel.text=@"Lock Screen and Encryption";
                     
                     
 

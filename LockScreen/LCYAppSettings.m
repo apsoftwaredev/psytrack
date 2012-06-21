@@ -26,7 +26,7 @@
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
   	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
 	NSString *passcodeToSave = (passcodeString) ? [NSString stringWithFormat:@"%@kdieJsi3ea18ki" ,passcodeString ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
-    NSLog(@"passcodeToSave: %@", passcodeToSave);
+
 	
 	
     
@@ -353,7 +353,7 @@
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
   	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
-    NSLog(@"tokenToSave: %@", hintString);
+   
 	
 	
     

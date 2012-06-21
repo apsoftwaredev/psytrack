@@ -1673,7 +1673,7 @@
         [fetchRequest setEntity:keyEntity];
         NSPredicate *   keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",keyString];
         
-        NSLog(@"keystring is %@",keyString);
+        
         [fetchRequest setPredicate: keyStringPredicate];   
         NSError *error = nil;
         NSArray *fetchedObjects = [managedObjectContext__ executeFetchRequest:fetchRequest error:&error];
@@ -1681,8 +1681,7 @@
         
         
         
-        NSLog(@"fetched objects count is %i",fetchedObjects.count);
-        
+       
         
         KeyEntity *keyObject=nil;
      
@@ -1693,8 +1692,7 @@
            
             
             for (KeyEntity *keyObjectInArray in fetchedObjects) {
-                NSLog(@"keyobject in array keystring is %@",keyObjectInArray.keyString);
-                NSLog(@"create key is %@",keyString);
+                
                 [keyObjectInArray willAccessValueForKey:@"keyString"];
                 if ([keyObjectInArray.keyString isEqualToString:keyString]) {
                     
@@ -5341,7 +5339,7 @@ return [self applicationDrugsDirectory].path;
              URLForUbiquityContainerIdentifier:nil] != nil)
             NSLog(@"iCloud is available\n");
         else
-            NSLog(@"This tutorial requires iCloud, but it is not available.\n");
+            NSLog(@"iCloud not available.\n");
     });
 }
 

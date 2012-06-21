@@ -242,6 +242,8 @@
 		E76984E115869C2C00D760A6 /* ipad-background-blue-plain-small.png in Resources */ = {isa = PBXBuildFile; fileRef = E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */; };
 		E76984E215869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E76984E015869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png */; };
 		E76984ED15879E5300D760A6 /* ClientGroupEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E76984EC15879E5300D760A6 /* ClientGroupEntity.m */; };
+		E772E4AA159397B200478A3E /* InterventionTypeSubtypeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E772E4A9159397B200478A3E /* InterventionTypeSubtypeEntity.m */; };
+		E772E4AD1593987E00478A3E /* InterventionTypeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E772E4AC1593987E00478A3E /* InterventionTypeEntity.m */; };
 		E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */; };
 		E78480CA1518D7D800F48EA3 /* PhoneEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C91518D7D800F48EA3 /* PhoneEntity.m */; };
 		E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E78A8D1A1531EDF10099FE5B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -717,6 +719,10 @@
 		E76984E015869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-background-blue-plain-small@2x.png"; sourceTree = "<group>"; };
 		E76984EB15879E5300D760A6 /* ClientGroupEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientGroupEntity.h; sourceTree = "<group>"; };
 		E76984EC15879E5300D760A6 /* ClientGroupEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientGroupEntity.m; sourceTree = "<group>"; };
+		E772E4A8159397B200478A3E /* InterventionTypeSubtypeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterventionTypeSubtypeEntity.h; sourceTree = "<group>"; };
+		E772E4A9159397B200478A3E /* InterventionTypeSubtypeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterventionTypeSubtypeEntity.m; sourceTree = "<group>"; };
+		E772E4AB1593987E00478A3E /* InterventionTypeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterventionTypeEntity.h; sourceTree = "<group>"; };
+		E772E4AC1593987E00478A3E /* InterventionTypeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterventionTypeEntity.m; sourceTree = "<group>"; };
 		E78480C41518C2E200F48EA3 /* EncryptedSCSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCSelectionCell.h; sourceTree = "<group>"; };
 		E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCSelectionCell.m; sourceTree = "<group>"; };
 		E78480C81518D7D800F48EA3 /* PhoneEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneEntity.h; sourceTree = "<group>"; };
@@ -1203,12 +1209,12 @@
 				37F7CEAC15005C5F00AD2C3A /* TrainTrackViewController_iPhone.xib */,
 				37F7CE971500594E00AD2C3A /* Time */,
 				37F7CE901500591000AD2C3A /* Client Presentations */,
-				37F7CE8F150058D300AD2C3A /* In App Settings */,
+				37F7CE8F150058D300AD2C3A /* Groups */,
 			);
 			name = Track;
 			sourceTree = "<group>";
 		};
-		37F7CE8F150058D300AD2C3A /* In App Settings */ = {
+		37F7CE8F150058D300AD2C3A /* Groups */ = {
 			isa = PBXGroup;
 			children = (
 				E76984EB15879E5300D760A6 /* ClientGroupEntity.h */,
@@ -1222,7 +1228,7 @@
 				E7619872158946B100C5BB8F /* ClientGroupsViewController.m */,
 				E7619873158946B100C5BB8F /* ClientGroupsViewController.xib */,
 			);
-			name = "In App Settings";
+			name = Groups;
 			sourceTree = "<group>";
 		};
 		37F7CE901500591000AD2C3A /* Client Presentations */ = {
@@ -1270,6 +1276,10 @@
 				E7516B7A15085A23005B798A /* PTABGroup.m */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
 				37F7CEC915005E7100AD2C3A /* psyTrainTrack.xcdatamodeld */,
+				E772E4AB1593987E00478A3E /* InterventionTypeEntity.h */,
+				E772E4AC1593987E00478A3E /* InterventionTypeEntity.m */,
+				E772E4A8159397B200478A3E /* InterventionTypeSubtypeEntity.h */,
+				E772E4A9159397B200478A3E /* InterventionTypeSubtypeEntity.m */,
 				E7F1E7071576D17100D4A638 /* ClientInstrumentScoresEntity.h */,
 				E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */,
 				E7F1E7041576966000D4A638 /* InstrumentScoreEntity.h */,
@@ -2119,6 +2129,8 @@
 				E7619874158946B100C5BB8F /* ClientGroupsViewController.m in Sources */,
 				E7577FA9158C1DAF0044D344 /* KeychainItemWrapper.m in Sources */,
 				E7577FAC158D13B50044D344 /* EncryptionTokenCell.m in Sources */,
+				E772E4AA159397B200478A3E /* InterventionTypeSubtypeEntity.m in Sources */,
+				E772E4AD1593987E00478A3E /* InterventionTypeEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

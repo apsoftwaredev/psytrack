@@ -18,7 +18,7 @@
 #import "TimePickerCell.h"
 
 #import "ClinicianSelectionCell.h"
-
+#import "InterventionTypeSubtypeEntity.h"
 
 @interface TimeTrackViewController ()
 
@@ -39,6 +39,7 @@
 @synthesize  footerLabel=footerLabel;
 @synthesize totalTimeDate=totalTimeDate;
 @synthesize timeDef;
+
 //@synthesize managedObject;
 
 
@@ -513,13 +514,14 @@
             
             
             [timeTrackPropertyNamesArray addObject:@"interventionType"];
-            
+            [timeTrackPropertyNamesArray addObject:@"subtype"];
             [timeTrackPropertyNamesArray addObject:@"modelsUsed"];
             
             trackEntityName=kTrackInterventionEntityName;
                                                      
             
              [detailsGroup insertPropertyName:@"interventionType" atIndex:2];
+            [detailsGroup insertPropertyName:@"subtype" atIndex:3];
             [detailsGroup insertPropertyName:@"modelsUsed" atIndex:1];
             
             break;
@@ -1170,7 +1172,53 @@
     
     
     
-    
+    if (currentControllerSetup==kTrackInterventionSetup) {
+        
+     
+        NSString * subTypePropertyNameString=@"interventionSubtype";
+        NSString * subTypeDescriptionString=@"intervention subtype";
+        NSString * subTypeEntityNameString=@"InterventionTypeSubtypeEntity";
+        
+        SCEntityDefinition *trackSubTypeDef=[SCEntityDefinition definitionWithEntityName:subTypeEntityNameString managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:subTypePropertyNameString, @"notes", nil]];
+        
+        
+        
+        
+        trackSubTypeDef.orderAttributeName=@"order";
+        
+        
+        
+        SCPropertyDefinition *trackSubTypePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"subtype"];
+        trackSubTypePropertyDef.type =SCPropertyTypeObjectSelection;
+        
+        SCObjectSelectionAttributes *trackSubTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trackSubTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+        trackSubTypeSelectionAttribs.allowAddingItems = NO;
+        trackSubTypeSelectionAttribs.allowDeletingItems = NO;
+        trackSubTypeSelectionAttribs.allowMovingItems = YES;
+        trackSubTypeSelectionAttribs.allowEditingItems = YES;
+        trackSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Add subtypes under intervention type)"]];
+        
+        trackSubTypePropertyDef.attributes = trackSubTypeSelectionAttribs;
+        
+        SCPropertyDefinition *trackSubTypeStrPropertyDef=[trackSubTypeDef propertyDefinitionWithName:subTypePropertyNameString];
+        trackSubTypeStrPropertyDef.type=SCPropertyTypeTextView;
+        SCPropertyDefinition *trackSubTypeNotesPropertyDef=[trackSubTypeDef propertyDefinitionWithName:@"notes"];
+        trackSubTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+        
+        
+        
+        SCPropertyDefinition *trackTypeSubtypePropertyDef=[SCPropertyDefinition definitionWithName:@"subtypes" title:@"Subtypes" type:SCPropertyTypeArrayOfObjects];
+        
+        [trackTypeDef addPropertyDefinition:trackTypeSubtypePropertyDef];
+        
+        trackTypeSubtypePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:trackSubTypeDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new intervention subtype"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+        
+       
+       
+        
+        
+
+    }
     
     
     
@@ -1737,6 +1785,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     currentDetailTableViewModel=tableViewModel;
         
     if (tableViewModel.tag==0) {
+        selectedInterventionType=nil;
         serviceDateCell=nil;
         self.eventViewController=nil;
         if (clientPresentations_Shared) {
@@ -1935,7 +1984,82 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
       
     }
-    if (detailTableViewModel.tag==2||detailTableViewModel.tag==3) {
+    //start
+    
+    
+    
+    if (currentControllerSetup==kTrackInterventionSetup&& detailTableViewModel.tag==1&& detailTableViewModel.sectionCount>2) {
+        
+        SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:2];
+        
+        
+        
+        if ([section isKindOfClass:[SCObjectSection class]]){
+            
+            SCObjectSection *objectSection=(SCObjectSection *)section;
+            
+            
+            NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+            
+            
+            
+            
+            if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"InterventionDeliveredEntity"]&&objectSection.cellCount>4) {
+                
+                SCTableViewCell *cellAtFour=(SCTableViewCell *)[objectSection cellAtIndex:4];
+                if ([cellAtFour isKindOfClass:[SCObjectSelectionCell class]]) {
+                    SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtFour;
+                    
+                    
+                    NSLog(@"section managed object is %@",sectionManagedObject);
+                    NSObject *interventionTypeObject=[sectionManagedObject valueForKeyPath:@"interventionType"];
+                    
+                    if (indexPath.row!=NSNotFound &&( selectedInterventionType||(interventionTypeObject&&[interventionTypeObject isKindOfClass:[InterventionTypeEntity class]]))) {
+                        if (!selectedInterventionType) {
+                            selectedInterventionType=(InterventionTypeEntity *)interventionTypeObject;
+                        }
+                        
+                        
+                        if (selectedInterventionType.interventionType.length) {
+                            
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                      @"interventionType.interventionType like %@",[NSString stringWithString:(NSString *) selectedInterventionType.interventionType]]; 
+                            
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"interventionSubtype" sortAscending:YES filterPredicate:predicate];
+                            
+                            objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                            
+                            [objectSelectionCell reloadBoundValue];
+                            NSLog(@"objectselection cell %@",objectSelectionCell.items);
+                            
+                        }
+                        
+                    }
+                    else {
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                  @"interventionType.interventionType = nil"]; 
+                        
+                        SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"interventionSubtype" sortAscending:YES filterPredicate:predicate];
+                        
+                        objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                    }
+                    
+                    
+                }
+                
+                
+                
+            }
+            
+        }}
+    
+    
+    
+    
+    ///end
+
+    
+       if (detailTableViewModel.tag==2||detailTableViewModel.tag==3) {
         if (tableModel.sectionCount>1)
         {
             SCTableViewSection *sectionOne=nil;
@@ -2563,6 +2687,75 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
             }
         }
+        
+        
+        
+        
+        //begin
+        
+       
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        NSLog(@"cell tag is %i",cell.tag);
+        NSLog(@"cell managed object is %@",cellManagedObject);
+        if (currentControllerSetup==kTrackInterventionSetup&& cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"InterventionDeliveredEntity"] && [cell isKindOfClass:[SCObjectSelectionCell class]]&& cell.tag==3) {
+            
+            SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+            
+            
+            if ([objectSelectionCell.selectedItemIndex intValue]>-1) {
+              NSManagedObject *selectedInterventionTypeManagedObject =[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                if ([selectedInterventionTypeManagedObject isKindOfClass:[InterventionTypeEntity class]]) {
+                    selectedInterventionType=(InterventionTypeEntity *) selectedInterventionTypeManagedObject;
+                
+                
+                
+                    SCTableViewCell *subtypeCell=(SCTableViewCell *)[tableViewModel cellAfterCell:objectSelectionCell rewind:NO];
+                    
+                    if ([subtypeCell isKindOfClass:[SCObjectSelectionCell class]]) {
+                   
+                    
+                        SCObjectSelectionCell *subytypeObjectSelectionCell=(SCObjectSelectionCell *)subtypeCell;
+                    
+                        if (selectedInterventionType.interventionType.length) {
+                            
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                      @"interventionType.interventionType like %@",[NSString stringWithString:(NSString *) selectedInterventionType.interventionType]]; 
+                            
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"interventionSubtype" sortAscending:YES filterPredicate:predicate];
+                            
+                            subytypeObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                            
+                            [subytypeObjectSelectionCell reloadBoundValue];
+                            NSLog(@"objectselection cell %@",subytypeObjectSelectionCell.items);
+                            
+                        }
+
+                    }
+                
+                
+                }
+               
+                
+                                    
+               
+
+                
+                
+                
+            }
+                
+                
+           
+            
+        }
+
+        
+        
+        
+        //end
+        
+        
+        
             }
     
     

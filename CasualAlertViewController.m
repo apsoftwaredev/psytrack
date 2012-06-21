@@ -179,8 +179,8 @@ NSInteger intSort(id num1, id num2, void *context)
     {
         UITabBarController *tabBarController=(UITabBarController*)appDelegate.tabBarController;
         [tabBarController.view addSubview:self.view];
-        additionalTopSpace =32;
-        additionalBottomSpace=49;
+        additionalTopSpace =50;
+        additionalBottomSpace=100;
      
         if ((currentOrientation==UIInterfaceOrientationLandscapeLeft||currentOrientation==UIInterfaceOrientationLandscapeRight)){
             appWindowFrame=CGRectMake(appDelegate.window.frame.origin.x, appDelegate.window.frame.origin.y, appDelegate.window.frame.size.height, appDelegate.window.frame.size.width);
@@ -191,7 +191,7 @@ NSInteger intSort(id num1, id num2, void *context)
         
         if ((currentOrientation==UIInterfaceOrientationLandscapeLeft||currentOrientation==UIInterfaceOrientationLandscapeRight)&&[[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){
         
-            additionalTopSpace =32+10;
+            additionalTopSpace =60;
          
         
         }
