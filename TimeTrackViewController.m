@@ -1175,8 +1175,7 @@
     if (currentControllerSetup==kTrackInterventionSetup) {
         
      
-        NSString * subTypePropertyNameString=@"interventionSubtype";
-        NSString * subTypeDescriptionString=@"intervention subtype";
+        NSString * subTypePropertyNameString=@"interventionSubType";
         NSString * subTypeEntityNameString=@"InterventionTypeSubtypeEntity";
         
         SCEntityDefinition *trackSubTypeDef=[SCEntityDefinition definitionWithEntityName:subTypeEntityNameString managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:subTypePropertyNameString, @"notes", nil]];
@@ -1207,7 +1206,7 @@
         
         
         
-        SCPropertyDefinition *trackTypeSubtypePropertyDef=[SCPropertyDefinition definitionWithName:@"subtypes" title:@"Subtypes" type:SCPropertyTypeArrayOfObjects];
+        SCPropertyDefinition *trackTypeSubtypePropertyDef=[SCPropertyDefinition definitionWithName:@"subTypes" title:@"Subtypes" type:SCPropertyTypeArrayOfObjects];
         
         [trackTypeDef addPropertyDefinition:trackTypeSubtypePropertyDef];
         
@@ -2025,7 +2024,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                             NSPredicate *predicate = [NSPredicate predicateWithFormat:
                                                       @"interventionType.interventionType like %@",[NSString stringWithString:(NSString *) selectedInterventionType.interventionType]]; 
                             
-                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"interventionSubtype" sortAscending:YES filterPredicate:predicate];
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"interventionSubType" sortAscending:YES filterPredicate:predicate];
                             
                             objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                             
@@ -2039,7 +2038,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                         NSPredicate *predicate = [NSPredicate predicateWithFormat:
                                                   @"interventionType.interventionType = nil"]; 
                         
-                        SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"interventionSubtype" sortAscending:YES filterPredicate:predicate];
+                        SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"interventionSubType" sortAscending:YES filterPredicate:predicate];
                         
                         objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                     }
@@ -2721,7 +2720,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                             NSPredicate *predicate = [NSPredicate predicateWithFormat:
                                                       @"interventionType.interventionType like %@",[NSString stringWithString:(NSString *) selectedInterventionType.interventionType]]; 
                             
-                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"interventionSubtype" sortAscending:YES filterPredicate:predicate];
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"interventionSubType" sortAscending:YES filterPredicate:predicate];
                             
                             subytypeObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                             

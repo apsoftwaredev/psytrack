@@ -6,13 +6,14 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-
+#import "InterventionTypeEntity.h"
 
 @interface ExistingHoursViewController : SCTableViewController <SCTableViewModelDelegate,SCTableViewModelDataSource>{
 
 
     SCArrayOfObjectsModel *objectsModel;
-
+    
+ InterventionTypeEntity *selectedInterventionType;
 }
 //-(void)cancelButtonTapped;
 @end

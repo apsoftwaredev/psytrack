@@ -10,6 +10,8 @@
 #import "PTTAppDelegate.h"
 #import "ClinicianSelectionCell.h"
 #import "EncryptedSCTextViewCell.h"
+
+
 @interface ExistingHoursViewController ()
 
 @end
@@ -1055,7 +1057,7 @@
     //Create a class definition for the other psychotherapyEntity
     SCEntityDefinition *interventionDef = [SCEntityDefinition definitionWithEntityName:@"ExistingInterventionEntity" 
                                                         managedObjectContext:managedObjectContext
-                                                               propertyNames:[NSArray arrayWithObjects: @"interventionType"  ,@"hours", @"models",@"demographics",@"notes", nil]];
+                                                               propertyNames:[NSArray arrayWithObjects: @"interventionType"  ,@"interventionSubType",@"hours", @"models",@"demographics",@"notes", nil]];
     
     
     
@@ -1070,7 +1072,7 @@
     
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
-    interventionDef.titlePropertyName=@"interventionType.interventionType;models.acronym;hours";
+    interventionDef.titlePropertyName=@"interventionType.interventionType;interventionSubType.interventionSubType;hours";
     
     //create an array of objects definition for the other psychotherapy to-many relationship that with show up in a different view  without a place holder element>.
     
@@ -1145,6 +1147,64 @@
     SCPropertyDefinition *interventionTypeNotesPropertyDef = [interventionTypeDef propertyDefinitionWithName:@"notes"];
     interventionTypeNotesPropertyDef.type=SCPropertyTypeTextView;
 
+    
+  
+        
+        
+        NSString * subTypePropertyNameString=@"interventionSubType";
+        NSString * subTypeEntityNameString=@"InterventionTypeSubtypeEntity";
+        
+        SCEntityDefinition *interventionSubTypeDef=[SCEntityDefinition definitionWithEntityName:subTypeEntityNameString managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:subTypePropertyNameString, @"notes", nil]];
+        
+        
+        
+        
+        interventionSubTypeDef.orderAttributeName=@"order";
+        
+        
+        
+        SCPropertyDefinition *interventionSubTypePropertyDef=[interventionDef propertyDefinitionWithName:@"interventionSubType"];
+        interventionSubTypePropertyDef.type =SCPropertyTypeObjectSelection;
+        
+        SCObjectSelectionAttributes *interventionSubTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:interventionSubTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+        interventionSubTypeSelectionAttribs.allowAddingItems = NO;
+        interventionSubTypeSelectionAttribs.allowDeletingItems = NO;
+        interventionSubTypeSelectionAttribs.allowMovingItems = YES;
+        interventionSubTypeSelectionAttribs.allowEditingItems = YES;
+        interventionSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Add subtypes under intervention type)"]];
+        
+        interventionSubTypePropertyDef.attributes = interventionSubTypeSelectionAttribs;
+        
+        SCPropertyDefinition *interventionSubTypeStrPropertyDef=[interventionSubTypeDef propertyDefinitionWithName:subTypePropertyNameString];
+        interventionSubTypeStrPropertyDef.type=SCPropertyTypeTextView;
+        SCPropertyDefinition *interventionSubTypeNotesPropertyDef=[interventionSubTypeDef propertyDefinitionWithName:@"notes"];
+        interventionSubTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+        
+        
+        
+        SCPropertyDefinition *interventionTypeSubtypePropertyDef=[SCPropertyDefinition definitionWithName:@"subTypes" title:@"Subtypes" type:SCPropertyTypeArrayOfObjects];
+        
+        
+        
+        interventionTypeSubtypePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:interventionSubTypeDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new intervention subtype"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+        
+        
+        [interventionTypeDef insertPropertyDefinition:interventionTypeSubtypePropertyDef atIndex:1];
+        
+        
+        
+   
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     //Create a class definition for the intervention ModelEntity
     SCEntityDefinition *interventionModelDef = [SCEntityDefinition definitionWithEntityName:@"InterventionModelEntity" 
                                                         managedObjectContext:managedObjectContext
@@ -1344,7 +1404,17 @@ BOOL valid=NO;
 //    [self tableViewModel:tableViewModel detailModelCreatedForSectionAtIndex:indexPath.section detailTableViewModel:detailTableViewModel];
 //
 //}
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
 
+    if (tableModel.tag==2) {
+        selectedInterventionType=nil;
+    }
+
+
+
+
+
+}
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -1391,9 +1461,154 @@ BOOL valid=NO;
        
     }
 
+    //start
+    
+    NSLog(@"detail tag is %i",detailTableViewModel.tag);
+    
+    if ( detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
+        
+        SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
+        
+        
+        
+        if ([section isKindOfClass:[SCObjectSection class]]){
+            
+            SCObjectSection *objectSection=(SCObjectSection *)section;
+            
+            
+            NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+            
+            
+            
+            NSLog(@"section bound object class is %@",sectionManagedObject.entity.name);
+            if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"ExistingInterventionEntity"]&&objectSection.cellCount>1) {
+                
+                SCTableViewCell *cellAtOne=(SCTableViewCell *)[objectSection cellAtIndex:1];
+                if ([cellAtOne isKindOfClass:[SCObjectSelectionCell class]]) {
+                    SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtOne;
+                    
+                    
+                    NSLog(@"section managed object is %@",sectionManagedObject);
+                    NSObject *interventionTypeObject=[sectionManagedObject valueForKeyPath:@"interventionType"];
+                    
+                    if (indexPath.row!=NSNotFound &&( selectedInterventionType||(interventionTypeObject&&[interventionTypeObject isKindOfClass:[InterventionTypeEntity class]]))) {
+                        if (!selectedInterventionType) {
+                            selectedInterventionType=(InterventionTypeEntity *)interventionTypeObject;
+                        }
+                        
+                        
+                        if (selectedInterventionType.interventionType.length) {
+                            
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                      @"interventionType.interventionType like %@",[NSString stringWithString:(NSString *) selectedInterventionType.interventionType]]; 
+                            
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"interventionSubType" sortAscending:YES filterPredicate:predicate];
+                            
+                            objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                            
+                            [objectSelectionCell reloadBoundValue];
+                            NSLog(@"objectselection cell %@",objectSelectionCell.items);
+                            
+                        }
+                        
+                    }
+                    else {
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                  @"interventionType.interventionType = nil"]; 
+                        
+                        SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"interventionSubType" sortAscending:YES filterPredicate:predicate];
+                        
+                        objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                    }
+                    
+                    
+                }
+                
+                
+                
+            }
+            
+        }}
+    
+    
+    
+    
+    ///end
+
+    
+    
 
 }
+-(void)tableViewModel:(SCTableViewModel *)tableModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath{
 
+    //begin
+    
+    if (tableModel.tag==3) {
+        
+        SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
+       NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+    NSLog(@"cell tag is %i",cell.tag);
+    NSLog(@"cell managed object is %@",cellManagedObject);
+    if ( cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"ExistingInterventionEntity"] && [cell isKindOfClass:[SCObjectSelectionCell class]]&& cell.tag==0) {
+        
+        SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+        
+        
+        if ([objectSelectionCell.selectedItemIndex intValue]>-1) {
+            NSManagedObject *selectedInterventionTypeManagedObject =[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+            if ([selectedInterventionTypeManagedObject isKindOfClass:[InterventionTypeEntity class]]) {
+                selectedInterventionType=(InterventionTypeEntity *) selectedInterventionTypeManagedObject;
+                
+                
+                
+                SCTableViewCell *subtypeCell=(SCTableViewCell *)[tableModel cellAfterCell:objectSelectionCell rewind:NO];
+                
+                if ([subtypeCell isKindOfClass:[SCObjectSelectionCell class]]) {
+                    
+                    
+                    SCObjectSelectionCell *subytypeObjectSelectionCell=(SCObjectSelectionCell *)subtypeCell;
+                    
+                    if (selectedInterventionType.interventionType.length) {
+                        
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                  @"interventionType.interventionType like %@",[NSString stringWithString:(NSString *) selectedInterventionType.interventionType]]; 
+                        
+                        SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"interventionSubType" sortAscending:YES filterPredicate:predicate];
+                        
+                        subytypeObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                        
+                        [subytypeObjectSelectionCell reloadBoundValue];
+                        NSLog(@"objectselection cell %@",subytypeObjectSelectionCell.items);
+                        
+                    }
+                    
+                }
+                
+                
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+        }
+            
+        
+        
+        
+    }
+    
+    }
+    
+    
+    //end
+
+
+
+}
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 

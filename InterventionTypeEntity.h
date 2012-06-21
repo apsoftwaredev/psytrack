@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * interventionType;
 @property (nonatomic, retain) NSSet *interventionDelivered;
-@property (nonatomic, retain) NSSet *subtypes;
+@property (nonatomic, retain) NSSet *subTypes;
 @property (nonatomic, retain) NSSet *existingInterventions;
 @end
 
@@ -28,10 +28,10 @@
 - (void)addInterventionDelivered:(NSSet *)values;
 - (void)removeInterventionDelivered:(NSSet *)values;
 
-- (void)addSubtypesObject:(InterventionTypeSubtypeEntity *)value;
+- (void)addSubTypesObject:(InterventionTypeSubtypeEntity *)value;
 - (void)removeSubtypesObject:(InterventionTypeSubtypeEntity *)value;
-- (void)addSubtypes:(NSSet *)values;
-- (void)removeSubtypes:(NSSet *)values;
+- (void)addSubTypes:(NSSet *)values;
+- (void)removeSubTypes:(NSSet *)values;
 
 - (void)addExistingInterventionsObject:(NSManagedObject *)value;
 - (void)removeExistingInterventionsObject:(NSManagedObject *)value;

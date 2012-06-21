@@ -17,7 +17,7 @@
 @dynamic notes;
 @dynamic interventionType;
 @dynamic interventionDelivered;
-@dynamic subtypes;
+@dynamic subTypes;
 @dynamic existingInterventions;
 
 @end
