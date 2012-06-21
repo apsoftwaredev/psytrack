@@ -102,11 +102,7 @@
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
   	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
-	 NSLog(@"tokenToSave: %@", tokenString);
-	
-	
-    NSLog(@" shared symetric data before change is %@",[appDelegate getSharedSymetricData]);
-    
+	 
     BOOL success=NO;
     NSData *oldTokenData = [wrapper searchKeychainCopyMatching:K_OLD_SHARED_TOKEN];
     
@@ -128,8 +124,6 @@
     }
     
     NSData *tokenData =[NSData dataWithData: [wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN]];
-    
-    NSLog(@"current shared token is %@",[appDelegate convertDataToString:tokenData]);
     
     if (!tokenData) {
         
@@ -167,18 +161,12 @@
 
     
     
-    NSLog(@"old shared token is %@",[appDelegate convertDataToString:oldTokenData]);
-    
-    NSData *newTokenData=[wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN];
-
-    NSLog(@"new token data is %@",[appDelegate convertDataToString:newTokenData]);
+   
     
     tokenData=nil;
     
     tokenString=nil;
- NSLog(@"old shared symetric data is %@",[appDelegate getOldSharedSymetricData]);
-  NSLog(@"new shared symetric data is %@",[appDelegate getSharedSymetricData]);
-    wrapper=nil;
+     wrapper=nil;
     
     return success;
     
@@ -190,10 +178,7 @@
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
   	// as we cant store a nil value in the dictionary, we store an empty string to represent no passcode.
 	NSString *passwordToSave = (passwordString) ? [NSString stringWithFormat:@"%@iJsi3" ,passwordString ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
-    NSLog(@"passcodeToSave: %@", passwordToSave);
-	NSLog(@"current password data is %@",[appDelegate getSharedSymetricData]);
-	
-    
+       
     
     BOOL success=NO;
     BOOL oldPasscodeKeychainItemExists=NO;
@@ -244,15 +229,13 @@
         success= [wrapper updateKeychainValueWithData:passwordData forIdentifier:K_PASSWORD_OLD];
     }
 
-    NSLog(@"old passowrd data is %@",oldPasswordData);
+    
     passwordData =[wrapper searchKeychainCopyMatching:K_PASSWORD_CURRENT];
     if (passwordData) {
     
         success= [wrapper updateKeychainValueWithData:[encryption getHashBytes:[appDelegate convertStringToData: passwordToSave]] forIdentifier:K_PASSWORD_CURRENT];
     }
-    
-    NSLog(@"current passowrd data is %@",passwordData);
-       
+           
     return success;    
     
     
@@ -564,7 +547,7 @@
    
     NSData *currentPasscodeData=[wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE];
     
-    NSLog(@"passocde data is %@",currentPasscodeData);
+   
     if (!currentPasscodeData) {
         return [NSData data];
     }
@@ -873,28 +856,21 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     NSError *error = nil;
     NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
     //4
-    NSLog(@"error is %@",error);
+   
     if (error) {
         return NO;
     }
     
-       NSLog(@"fetched objects are %@",fetchedObjects);
-   
-    
+         
     NSData *sharedSymetricData=[appDelegate getSharedSymetricData];
     if (fetchedObjects.count) 
     {
         
         
-        NSLog(@"fetched objects are %@",fetchedObjects);
-        //                NSPredicate *keyStringPredicate;
+      
+
         
-        KeyEntity *testKey=[fetchedObjects objectAtIndex:0];
-        NSLog(@"test key is %@",testKey);
-        
-               
-        
-        //                     keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]];
+   
         NSData *oldSharedSymetricData=[appDelegate getOldSharedSymetricData];
      
         for (KeyEntity *keyObjectInArray in fetchedObjects) {
@@ -904,16 +880,11 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
                       
                        
             [keyObjectInArray willAccessValueForKey:@"dataF"];
-            NSLog(@"data f is %@",keyObjectInArray.dataF);
             NSData *dataF=[NSData dataWithData:keyObjectInArray.dataF];
             [keyObjectInArray didAccessValueForKey:@"dataF"];
-            NSLog(@"dataf is %@",dataF);
             
-            NSLog(@"old shared symetric data is %@",oldSharedSymetricData);
-            NSLog(@"new shared symetric data is %@", sharedSymetricData);
             NSData *symetricDataEncryptedWithOld=[appDelegate decryptDataToPlainData:dataF usingSymetricKey:oldSharedSymetricData];
-            NSLog(@"old shared symetric data is %@",oldSharedSymetricData);
-            NSLog(@"symetric data decrypted %@",symetricDataEncryptedWithOld);
+           
             [keyObjectInArray didAccessValueForKey:@"dataF"];
             NSData *symetricData=nil;
             
@@ -921,11 +892,9 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
                  symetricData=[appDelegate encryptDataToEncryptedData:symetricDataEncryptedWithOld];
             }
             [keyObjectInArray willAccessValueForKey:@"keyString"];
-            NSLog(@"keystring in array is %@",keyObjectInArray.keyString);
-            [keyObjectInArray didAccessValueForKey:@"keyString"];
             
-            NSLog(@" decrypted symetric data is %@",[appDelegate decryptDataToPlainData:symetricData usingSymetricKey:sharedSymetricData]);
-            NSLog(@"shared synetric dat is %@",sharedSymetricData);                                         
+            [keyObjectInArray didAccessValueForKey:@"keyString"];
+                                                  
             
             
             if (symetricData) {
@@ -952,8 +921,7 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     NSString *newKeyString=[NSString string];
     NSMutableArray * fetchedObjectsKeyStrings=[fetchedObjects mutableArrayValueForKey:@"keyString"];
    
-    NSLog(@"keystrings array i s%@",fetchedObjectsKeyStrings);
-    
+        
     do {
         newKeyString =[appDelegate generateExposedKey];
     } while ([fetchedObjectsKeyStrings containsObject:newKeyString]);
@@ -980,7 +948,7 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
 //        symetricData=[encryption wrapSymmetricKey:symetricData keyRef:nil useDefaultPublicKey:YES];
         sharedSymetricData=[NSData  dataWithData:(NSData *)[appDelegate getSharedSymetricData]];
        NSData * newSymetricData=[appDelegate encryptDataToEncryptedData:sharedSymetricData];
-        NSLog(@"symetric data is %@",newSymetricData);
+       
         [newKeyObject willChangeValueForKey:@"dataF"];
         newKeyObject.dataF=[NSData dataWithData:(NSData *) newSymetricData];
         [newKeyObject didChangeValueForKey:@"dataF"];
