@@ -176,7 +176,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 -(NSData *)decryptDataToPlainData:(NSData *)encryptedData usingSymetricKey:(NSData *)symetricData;
 -(NSData *)convertStringToData:(NSString *)string;
 -(NSData *)getSharedSymetricData;
-
+- (NSURL *)applicationDocumentsDirectory;
 -(NSString *)generateExposedKey;
 //-(IBAction)resaveLockDictionarySettings:(id)sender;
 @property (nonatomic,assign)BOOL okayToDecryptBool;
@@ -190,6 +190,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 @property (nonatomic, strong) IBOutlet ReportsRootViewController_iPad *reportsRootViewController_iPad;
 @property (nonatomic, strong) IBOutlet ReportsDetailViewController_iPad *reportsDetailViewController_iPad;
 @property (nonatomic, strong) IBOutlet ReportsViewController_iPhone *reportsViewController_iPhone;
+@property (nonatomic, strong) IBOutlet UINavigationController *reportsNavigationController_iPhone;
 
 @property (nonatomic, strong) IBOutlet UITabBar *tabBar;
 @property (strong, nonatomic)IBOutlet UIImageView *imageView;

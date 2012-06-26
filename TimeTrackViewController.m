@@ -402,12 +402,7 @@
     
  
     
-	
-	// Get managedObjectContext from application delegate
-    managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-	
-    
-    
+	  
     UIViewController *navtitle=self.navigationController.topViewController;
     
         
@@ -448,7 +443,7 @@
     
 
     
-    NSMutableArray *timeTrackPropertyNamesArray=[NSMutableArray arrayWithObjects:@"dateOfService",  @"time",  @"notes", @"paperwork",  @"supervisor",    @"trainingType", @"site",  @"eventIdentifier", nil];
+    NSMutableArray *timeTrackPropertyNamesArray=[NSMutableArray arrayWithObjects:@"dateOfService",  @"time",  @"notes", @"paperwork",  @"supervisor",    @"trainingType", @"site",  @"paid",@"hourlyRate",@"eventIdentifier", nil];
     
     if (currentControllerSetup==kTrackAssessmentSetup||currentControllerSetup==kTrackInterventionSetup||currentControllerSetup==kTrackSupportSetup) {
         
@@ -1218,9 +1213,38 @@
         
 
     }
+    NSString * ratePropertyNameString=@"hourlyRate";
+    NSString * rateEntityNameString=@"RateEntity";
+    
+    SCEntityDefinition *trackRateDef=[SCEntityDefinition definitionWithEntityName:rateEntityNameString managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:ratePropertyNameString, @"notes", nil]];
     
     
     
+    
+    trackRateDef.orderAttributeName=@"order";
+    
+    
+    
+    SCPropertyDefinition *trackRatePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"hourlyRate"];
+    trackRatePropertyDef.type =SCPropertyTypeObjectSelection;
+    
+    SCObjectSelectionAttributes *trackRateSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trackRateDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    trackRateSelectionAttribs.allowAddingItems = YES;
+    trackRateSelectionAttribs.allowDeletingItems = YES;
+    trackRateSelectionAttribs.allowMovingItems = YES;
+    trackRateSelectionAttribs.allowEditingItems = YES;
+    trackRateSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Add Rates)"]];
+    
+    trackRatePropertyDef.attributes = trackRateSelectionAttribs;
+    
+    SCPropertyDefinition *trackRateStrPropertyDef=[trackRateDef propertyDefinitionWithName:ratePropertyNameString];
+    trackRateStrPropertyDef.type=SCPropertyTypeNumericTextField;
+    SCPropertyDefinition *trackRateNotesPropertyDef=[trackRateDef propertyDefinitionWithName:@"notes"];
+    trackRateNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyGroup *paymentGroup=[SCPropertyGroup groupWithHeaderTitle:@"Payment Information" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"hourlyRate",@"paid", nil]];
+    
+    [timeTrackEntityDef.propertyGroups addGroup:paymentGroup];
     
     
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
