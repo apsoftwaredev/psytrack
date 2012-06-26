@@ -248,7 +248,7 @@
     
     NSInteger result = 0;
     if ([tableView isEqual:self.myTableView]){
-        result = 12;
+        result = 14;
     }
     return result;
     
@@ -281,31 +281,41 @@
                 break;
             }
             case 5:{
-                result = 1;
-                break;
-            }
-            case 6:{
-                result = 3;
-                break;
-            }
-            case 7:{
-                result = 3;
-                break;
-            }
-            case 8:{
-                result = 1;
-                break;
-            }
-            case 9:{
                 result = 2;
                 break;
             }
+            case 6:{
+                result = 4;
+                break;
+            }
+            case 7:{
+                result = 5;
+                break;
+            }
+            case 8:{
+                result = 3;
+                break;
+            }
+
+            case 9:{
+                result = 3;
+                break;
+            }
+
             case 10:{
                 result = 1;
                 break;
             }
-    
             case 11:{
+                result = 2;
+                break;
+            }
+            case 12:{
+                result = 1;
+                break;
+            }
+    
+            case 13:{
                 result = 2;
                 break;
             }
@@ -364,7 +374,7 @@
                     break;
                 case 2:
                 {
-                    if (indexPath.row==0)result.textLabel.text=@"Support Activities";
+                    if (indexPath.row==0)result.textLabel.text=@"Indirect Support Activities";
                     
                 }
                     break;
@@ -386,6 +396,8 @@
                 case 5:
                 {
                     if (indexPath.row==0)result.textLabel.text=@"Consultations";
+                    if (indexPath.row==1)result.textLabel.text=@"Grant Writing";
+                    
                     
                     
                 }
@@ -397,6 +409,7 @@
 
                     if (indexPath.row==1)result.textLabel.text=@"Courses Taken";
                     if (indexPath.row==2)result.textLabel.text=@"Conferences Attended";
+                    if (indexPath.row==3)result.textLabel.text=@"Forum Participation";
 
                     
                 }
@@ -407,17 +420,43 @@
                      if (indexPath.row==0)result.textLabel.text=@"Courses Taught";
                      if (indexPath.row==1)result.textLabel.text=@"Presentations";
                     if (indexPath.row==2)result.textLabel.text=@"Advising";
+                    if (indexPath.row==3)result.textLabel.text=@"Leadership Roles";
+                    if (indexPath.row==4)result.textLabel.text=@"Expert Testemony";
                     
                 }
                     break;
+               
+                
                 case 8:
+                {
+                    if (indexPath.row==0)result.textLabel.text=@"Research Projects";
+                    if (indexPath.row==1)result.textLabel.text=@"Research Participation";
+                    if (indexPath.row==2)result.textLabel.text=@"Commnunity Service";
+
+                    
+                    
+                }
+                    break;
+                case 9:
+                {
+                    if (indexPath.row==0)result.textLabel.text=@"Scholarships";
+                    if (indexPath.row==1)result.textLabel.text=@"Fellowships";
+                    if (indexPath.row==2)result.textLabel.text=@"Grants Awarded";
+                    
+                    
+                    
+                    
+                }
+                    break;
+                
+                case 10:
                 {
                     result.textLabel.text=@"Drug Database";
                     
                 }
                     break;
                     
-                case 9:
+                case 11:
                 {
                     
                     
@@ -427,14 +466,14 @@
                   
                 }
                     break;
-                case 10:
+                case 12:
                 {
                     if (indexPath.row==0)result.textLabel.text=@"Lock Screen and Encryption";
                     
                     
                 } 
                     break;
-                case 11:
+                case 13:
                 {
                 
                     if (indexPath.row==0)result.textLabel.text=@"Support";
@@ -632,7 +671,32 @@
             
         }
             break;
+       
+        
         case 8:
+        {
+            //@"Courses Taught"
+            //            if (indexPath.row==0);
+            
+            //@"Presentations"
+            //            if (indexPath.row==1);
+            
+        }
+            break;
+       
+            
+        case 9:
+        {
+            //@"Courses Taught"
+            //            if (indexPath.row==0);
+            
+            //@"Presentations"
+            //            if (indexPath.row==1);
+            
+        }
+            break;
+            
+        case 10:
         {
             //@"Drug Database"
             UITabBar *tabBar=(UITabBar *) [(PTTAppDelegate *)[UIApplication sharedApplication].delegate tabBar];
@@ -656,7 +720,7 @@
         }
             break;
             
-        case 9:
+        case 11:
         {
             //@"Clinician Groups"
             
@@ -690,7 +754,7 @@
             
         }
             break;
-        case 10:
+        case 12:
         {
             //@"Lock Screen Settings"
             if (indexPath.row==0){
@@ -705,7 +769,7 @@
         }
             break;
            
-        case 11:
+        case 13:
         {
             //@"Support"
             if (indexPath.row==0){
@@ -842,7 +906,7 @@
             headerTitle=@"Direct Intervention Track" ;
             break;
         case 2:
-            headerTitle=@"Support Activities Track";
+            headerTitle=@"Indirect Support Activities Track";
             break;
         case 3:
             headerTitle=@"Direct Supervision Track";
@@ -857,19 +921,26 @@
             headerTitle=@"Education Track";
             break;
         case 7:
-            headerTitle=@"Teaching and Advising Track";
+            headerTitle=@"Teaching and Leadership Track";
             break;
         case 8:
-            headerTitle=@"Drug Database Track";
+            headerTitle=@"Projects Track";
             break;
         case 9:
+            headerTitle=@"Funding Track";
+            break;
+        case 10:
+            headerTitle=@"Drug Database Track";
+            break;
+        
+        case 11:
             headerTitle=@"Groups Track";
             
             break;
-        case 10:
+        case 12:
             headerTitle=@"Security Track";
             break;
-        case 11:
+        case 13:
             headerTitle=@"Support and About Track";
             break;
   

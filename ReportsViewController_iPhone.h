@@ -19,4 +19,8 @@
 
 @interface ReportsViewController_iPhone : UIViewController
 
+
+-(void)showPDFFile;
+
+-(NSString*)getPDFFileName;
 @end

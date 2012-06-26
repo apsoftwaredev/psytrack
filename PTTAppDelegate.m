@@ -88,7 +88,7 @@
 @synthesize reportsRootViewController_iPad, reportsDetailViewController_iPad,reportsViewController_iPhone;
 @synthesize imageView=_imageView;
 @synthesize masterViewController;
-
+@synthesize reportsNavigationController_iPhone;
 @synthesize psyTrackLabel,developedByLabel,clinicianToolsLabel;
 @synthesize lockScreenVC = lockScreenVC_;
 @synthesize casualAlertManager;
@@ -290,11 +290,11 @@
         
                
                 UIImage *reportsImage =[UIImage imageNamed:@"reportTab.png"];
-                self.splitViewControllerReports.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Reports" image:reportsImage tag:92];
+                self.reportsNavigationController_iPhone.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Reports" image:reportsImage tag:92];
        
-        
+    
    
-                NSArray *controllers = [NSArray arrayWithObjects:self.navigationControllerTrainTrack,cliniciansSplitViewController, clientsSplitViewController,  self.splitViewControllerReports,/*other controllers go here */ nil];
+                NSArray *controllers = [NSArray arrayWithObjects:self.navigationControllerTrainTrack,cliniciansSplitViewController, clientsSplitViewController,  self.reportsNavigationController_iPhone,/*other controllers go here */ nil];
                 tabBarController.viewControllers = controllers;
                 self.tabBarController.delegate=self;
                clientsSplitViewController.view.backgroundColor=[UIColor clearColor];

@@ -17,6 +17,9 @@
  */
 #import "ReportsViewController_iPhone.h"
 #import "PTTAppDelegate.h"
+#import "CoreText/CoreText.h"
+#import "PDFRenderer.h"
+
 @implementation ReportsViewController_iPhone
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -49,6 +52,17 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+//    NSString* fileName = [self getPDFFileName];
+    
+//    [PDFRenderer drawPDF:fileName];
+    
+    
+    [self showPDFFile];
+    
+     
+    
+    
 }
 
 - (void)viewDidUnload
@@ -63,5 +77,48 @@
     // Return YES for supported orientations
     return YES;
 }
+
+-(void)showPDFFile
+{
+    NSString* pdfFileName = [self getPDFFileName];
+    CGRect frame;
+    if ([SCUtilities is_iPad]) {
+        frame=CGRectMake(0, 0, 640, 1004);
+    }
+    else {
+        frame=CGRectMake(0, 0, 320, 480);
+    }
+    UIWebView* webView = [[UIWebView alloc] initWithFrame:frame];
+    
+    NSURL *url = [NSURL fileURLWithPath:pdfFileName];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [webView setScalesPageToFit:YES];
+    [webView loadRequest:request];
+    
+    
+    
+    [self.view addSubview:webView];
+    
+}
+
+-(NSString*)getPDFFileName
+{
+//    NSString* fileName = @"monthlyPracticumLog.pdf";
+//    
+//    NSArray *arrayPaths = 
+//    NSSearchPathForDirectoriesInDomains(
+//                                        NSDocumentDirectory,
+//                                        NSUserDomainMask,
+//                                        YES);
+//    NSString *path = [arrayPaths objectAtIndex:0];
+//    NSString* pdfFileName = [path stringByAppendingPathComponent:fileName];
+//    
+    
+    NSString *resourceString=[[NSBundle mainBundle] pathForResource:@"may2012" ofType:@"htm"];
+    
+    return resourceString;
+    
+}
+
 
 @end
