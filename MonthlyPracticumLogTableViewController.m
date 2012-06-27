@@ -52,7 +52,8 @@
     
     [objectsModel addSection:objectsSection];
     self.tableViewModel=objectsModel;
-    
+
+   
 }
 
 - (void)viewDidUnload
@@ -66,5 +67,17 @@
 {
 	return YES;
 }
+
+
+
+
+
+   
+  
+
+
+
+
+
 
 @end

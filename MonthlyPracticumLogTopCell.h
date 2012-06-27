@@ -8,15 +8,15 @@
 
 
 
-@interface MonthlyPracticumLogTopCell : SCCustomCell <SCTableViewModelDelegate>{
+@interface MonthlyPracticumLogTopCell : SCCustomCell <SCTableViewModelDelegate, SCTableViewControllerDelegate, UITableViewDelegate, SCTableViewModelDataSource>{
 
 
-    SCArrayOfObjectsModel *objectsModel;
+    SCArrayOfObjectsModel *objectsModel_;
 
 
 }
 
-
+@property (nonatomic,strong)  SCArrayOfObjectsModel *objectsModel;
 
 @property (nonatomic, weak)IBOutlet UITableView *interventionTypesTableView;
 @property (nonatomic, weak)IBOutlet UITableView *assessmentTypesTableView;
@@ -84,7 +84,7 @@
 
 
 
-
+- (CGSize)interventionTableViewContentSize;
 
 
 

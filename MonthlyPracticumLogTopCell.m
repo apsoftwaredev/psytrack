@@ -62,6 +62,8 @@
 @synthesize sectionSubHeaderView;
 @synthesize sectionSubHeaderLabel;
 @synthesize sectionSubFooterView,sectionSubFooterLabel,sectionSubFooterLabelContainerView;
+@synthesize objectsModel=objectsModel_;
+
 -(void)willDisplay{
 
     self.accessoryType=UITableViewCellAccessoryNone;
@@ -69,7 +71,19 @@
 
     supervisorLabel.text=clinician.combinedName;
     
-        
+//    NSLog(@" size needed height is %g",[self interventionTableViewContentSize ].height );
+    
+    CGSize heightNeeded=[self interventionTableViewContentSize];
+    NSLog(@" size needed height is %g",[self interventionTableViewContentSize ].height );
+    
+    NSLog(@"height needed is %g",heightNeeded.height);
+    if (  heightNeeded.height>self.interventionTypesTableView.frame.size.height) {
+        self.interventionTypesTableView.transform=CGAffineTransformIdentity;
+        CGRect monthlyPracticumLogTopCellFrame =(CGRect ) self.interventionTypesTableView.frame;
+        monthlyPracticumLogTopCellFrame.size.height=heightNeeded.height;
+        self.interventionTypesTableView.frame=monthlyPracticumLogTopCellFrame;
+    }
+
     
 }
 
@@ -114,7 +128,7 @@ NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:
 if (fetchedObjects == nil) {
     
 }
-    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.interventionTypesTableView];
+    self.objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.interventionTypesTableView];
     
     SCClassDefinition *subTypesDef=[SCClassDefinition definitionWithClass:[InterventionTypeSubtypeEntity class] autoGeneratePropertyDefinitions:YES];
     
@@ -180,28 +194,30 @@ if (fetchedObjects == nil) {
         
         objectsSection.footerView = footerContainerView;
         
-
         
         
-                [objectsModel addSection:objectsSection];
+        
+                [objectsModel_ addSection:objectsSection];
         [interventionType didAccessValueForKey:@"subTypes"];
     }
-
     
-    objectsModel.delegate=self;
+  
+    
+//    self.interventionTypesTableView.transform      = CGAffineTransformIdentity;
+//   
+//
+//    
+//    
+//    CGRect frame=CGRectMake(self.interventionTypesTableView.frame.origin.x, self.interventionTypesTableView.frame.origin.y, self.interventionTypesTableView.frame.size.width, self.interventionTypesTableView.contentSize.height);
+//    self.interventionTypesTableView.frame=frame;
     
     
-        NSLog(@"bound object is %@",self.boundObject);
-    // Create and add the objects section
-//	SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil entityDefinition:interventionSubTypeDef];                                 
-            
-
+    self.interventionTypesTableView.autoresizingMask=UIViewAutoresizingFlexibleHeight;
+   NSLog(@"background size height is %g",self.interventionTypesTableView.backgroundView.frame.size.height);
+    objectsModel_.delegate=self;
     
     
-    
-       
-
-
+     
 
 
 
@@ -210,8 +226,11 @@ if (fetchedObjects == nil) {
 
 
 }
-
-
-
+- (CGSize)interventionTableViewContentSize
+{
+    
+    [self.interventionTypesTableView layoutIfNeeded];
+    return [self.interventionTypesTableView contentSize];
+} 
 
 @end

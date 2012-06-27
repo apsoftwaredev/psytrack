@@ -8476,12 +8476,51 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogTopCell.m"
-         timestampString = "362504731.844768"
+         timestampString = "362530771.089078"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "135"
-         endingLineNumber = "135"
+         startingLineNumber = "149"
+         endingLineNumber = "149"
          landmarkName = "-loadBindingsIntoCustomControls"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MonthlyPracticumLogTableViewController.m"
+         timestampString = "362530597.939009"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "98"
+         endingLineNumber = "98"
+         landmarkName = "@implementation MonthlyPracticumLogTableViewController"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MonthlyPracticumLogTopCell.m"
+         timestampString = "362530588.077115"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "80"
+         endingLineNumber = "80"
+         landmarkName = "-willDisplay"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MonthlyPracticumLogTopCell.m"
+         timestampString = "362530663.373924"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "81"
+         endingLineNumber = "81"
+         landmarkName = "-willDisplay"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
