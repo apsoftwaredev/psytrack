@@ -7,8 +7,33 @@
 //
 
 #import "MonthlyPracticumLogBottonCell.h"
-
+#import "InterventionTypeSubtypeEntity.h"
 @implementation MonthlyPracticumLogBottonCell
+
+
+@synthesize cellSubTypeLabel;
+@synthesize hoursWeek1Label;
+@synthesize hoursWeek2Label;
+@synthesize hoursWeek3Label;
+@synthesize hoursWeek4Label;
+@synthesize hoursWeek5Label;
+@synthesize hoursMonthTotalLabel;
+@synthesize hoursCumulativeLabel;
+@synthesize hoursTotalHoursLabel;
+@synthesize cellsContainerView;
+
+
+
+-(void)willDisplay{
+
+NSLog(@"self bound object is %@",self.boundObject);
+    InterventionTypeSubtypeEntity *interventionTypeSubtype=(InterventionTypeSubtypeEntity *)self.boundObject;
+    [interventionTypeSubtype willAccessValueForKey:@"interventionSubtype"];
+    
+    cellSubTypeLabel.text=interventionTypeSubtype.interventionSubType;
+    [interventionTypeSubtype didAccessValueForKey:@"interventionSubtype"];
+   
+}
 
 - (id)initWithFrame:(CGRect)frame
 {

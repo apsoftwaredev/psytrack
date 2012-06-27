@@ -8,6 +8,13 @@
 
 
 
-@interface MonthlyPracticumLogTableViewController : SCTableViewController
+@interface MonthlyPracticumLogTableViewController : SCTableViewController{
+
+
+    SCArrayOfObjectsModel *objectsModel;
+
+
+
+}
 
 @end

@@ -40,10 +40,10 @@
 //    
 //    UIView* mainView = [objects objectAtIndex:0];
 
-    MonthlyPracticumLogTableViewController *monthlyPracticumLogTVC=[[MonthlyPracticumLogTableViewController alloc]initWithNibName:@"MonthlyPracticumLogView" bundle:[NSBundle mainBundle]];
+    MonthlyPracticumLogTableViewController *monthlyPracticumLogTVC=[[MonthlyPracticumLogTableViewController alloc]initWithNibName:@"MonthlyPracticumLogTableViewController" bundle:[NSBundle mainBundle]];
     
     [monthlyPracticumLogTVC loadView];
-    
+    [monthlyPracticumLogTVC viewDidLoad];
     [self createPDFfromUIView:monthlyPracticumLogTVC.view saveToDocumentsWithFileName:@"test2.pdf"];
 
 

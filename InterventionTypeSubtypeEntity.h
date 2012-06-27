@@ -13,7 +13,7 @@
 
 @interface InterventionTypeSubtypeEntity : NSManagedObject
 
-@property (nonatomic, retain) NSString * interventionSubtype;
+@property (nonatomic, retain) NSString * interventionSubType;
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSManagedObject *interventionType;

@@ -12,7 +12,7 @@
 
 @implementation InterventionTypeSubtypeEntity
 
-@dynamic interventionSubtype;
+@dynamic interventionSubType;
 @dynamic order;
 @dynamic notes;
 @dynamic interventionType;

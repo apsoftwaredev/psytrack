@@ -59,6 +59,7 @@
 							<string key="NSResourceName">trainTab.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<reference key="IBUITabBar" ref="964951132"/>
 					</object>
 					<reference key="IBUIParentViewController" ref="628284502"/>
 					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
@@ -91,7 +92,6 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
 							<reference key="IBUIParentViewController" ref="163617807"/>
-							<string key="IBUINibName">TrainTrackViewController_iPad</string>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="IBUIInterfaceOrientation">1</int>
 								<int key="interfaceOrientation">1</int>
@@ -109,6 +109,7 @@
 							<string key="IBUITitle">PsyTrack</string>
 							<reference key="IBUIImage" ref="251662931"/>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							<reference key="IBUITabBar" ref="964951132"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="628284502"/>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
@@ -162,6 +163,7 @@
 								<string key="NSResourceName">reportTab.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							<reference key="IBUITabBar" ref="964951132"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="628284502"/>
 						<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
@@ -208,7 +210,7 @@
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBUIBarStyle">1</int>
 						</object>
-						<array key="IBUIViewControllers">
+						<array class="NSMutableArray" key="IBUIViewControllers">
 							<object class="IBUIViewController" id="353402280">
 								<string key="IBUITitle">Reports</string>
 								<object class="IBUITabBarItem" key="IBUITabBarItem" id="1058194147">
@@ -237,6 +239,7 @@
 							<string key="IBUITitle">Reports</string>
 							<reference key="IBUIImage" ref="230668235"/>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+							<reference key="IBUITabBar" ref="964951132"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="628284502"/>
 						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
@@ -262,7 +265,7 @@
 								<bytes key="NSRGB">MC4zMTc2NDcwNjk3IDAuNjIzNTI5NDM0MiAwLjc3NjQ3MDY2MTIAA</bytes>
 							</object>
 						</object>
-						<array key="IBUIViewControllers">
+						<array class="NSMutableArray" key="IBUIViewControllers">
 							<object class="IBUIViewController" id="309854875">
 								<string key="IBUITitle">Reports</string>
 								<object class="IBUINavigationItem" key="IBUINavigationItem" id="375426044">
@@ -285,6 +288,7 @@
 					<int key="NSvFlags">258</int>
 					<string key="NSFrame">{{0, 975}, {768, 49}}</string>
 					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView"/>
 					<string key="NSReuseIdentifierKey">_NS:475</string>
 					<object class="NSColor" key="IBUIBackgroundColor" id="782406839">
@@ -293,10 +297,17 @@
 					</object>
 					<int key="IBUITag">1</int>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+					<array class="NSMutableArray" key="IBUIItems">
+						<reference ref="697147349"/>
+						<reference ref="73905920"/>
+						<reference ref="1062855639"/>
+						<reference ref="613027942"/>
+					</array>
+					<reference key="IBUISelectedItem" ref="73905920"/>
 				</object>
 			</object>
 			<object class="IBUIWindow" id="555568809">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">1325</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="854319316">
@@ -392,7 +403,6 @@
 								<int key="NSvFlags">1280</int>
 								<string key="NSFrame">{{0, 406}, {355, 73}}</string>
 								<reference key="NSSuperview" ref="854319316"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:345</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -432,7 +442,6 @@
 				</array>
 				<object class="NSPSMatrix" key="NSFrameMatrix"/>
 				<string key="NSFrameSize">{768, 1024}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="854319316"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">2</int>
@@ -834,7 +843,587 @@
 			<nil key="sourceID"/>
 			<int key="maxID">277</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">ABNewPersonViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ABNewPersonViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ABPeoplePickerNavigationController</string>
+					<string key="superclassName">UINavigationController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ABPeoplePickerNavigationController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ABPersonViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ABPersonViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">CasualAlertViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="labelContainerView">UIView</string>
+						<string key="myLabel">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="labelContainerView">
+							<string key="name">labelContainerView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="myLabel">
+							<string key="name">myLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CasualAlertViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ClientEntity</string>
+					<string key="superclassName">NSManagedObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ClientEntity.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ClientsSelectionCell</string>
+					<string key="superclassName">SCObjectSelectionCell</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">clientObject</string>
+						<string key="NS.object.0">ClientEntity</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">clientObject</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">clientObject</string>
+							<string key="candidateClassName">ClientEntity</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ClientsSelectionCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ClientsViewController_iPhone</string>
+					<string key="superclassName">SCViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="alreadySelectedClients">NSMutableSet</string>
+						<string key="clientCurrentlySelectedInReferringDetailview">NSManagedObject</string>
+						<string key="clientObjectSelectionCell">ClientsSelectionCell</string>
+						<string key="searchBar">UISearchBar</string>
+						<string key="sendingViewController">UIViewController</string>
+						<string key="totalClientsLabel">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="alreadySelectedClients">
+							<string key="name">alreadySelectedClients</string>
+							<string key="candidateClassName">NSMutableSet</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="clientCurrentlySelectedInReferringDetailview">
+							<string key="name">clientCurrentlySelectedInReferringDetailview</string>
+							<string key="candidateClassName">NSManagedObject</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="clientObjectSelectionCell">
+							<string key="name">clientObjectSelectionCell</string>
+							<string key="candidateClassName">ClientsSelectionCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="searchBar">
+							<string key="name">searchBar</string>
+							<string key="candidateClassName">UISearchBar</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="sendingViewController">
+							<string key="name">sendingViewController</string>
+							<string key="candidateClassName">UIViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="totalClientsLabel">
+							<string key="name">totalClientsLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ClientsViewController_iPhone.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ClinicianViewController</string>
+					<string key="superclassName">CliniciansViewController_Shared</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="searchBar">UISearchBar</string>
+						<string key="totalCliniciansLabel">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="searchBar">
+							<string key="name">searchBar</string>
+							<string key="candidateClassName">UISearchBar</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="totalCliniciansLabel">
+							<string key="name">totalCliniciansLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ClinicianViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">CliniciansViewController_Shared</string>
+					<string key="superclassName">SCViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="abGroupsDoneButtonTapped:">id</string>
+						<string key="cancelAddNewAddressBookPerson:">id</string>
+						<string key="cancelButtonTappedInABPersonViewController:">id</string>
+						<string key="selectButtonTappedInABPersonController:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="abGroupsDoneButtonTapped:">
+							<string key="name">abGroupsDoneButtonTapped:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="cancelAddNewAddressBookPerson:">
+							<string key="name">cancelAddNewAddressBookPerson:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="cancelButtonTappedInABPersonViewController:">
+							<string key="name">cancelButtonTappedInABPersonViewController:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="selectButtonTappedInABPersonController:">
+							<string key="name">selectButtonTappedInABPersonController:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="clinicianDef">SCEntityDefinition</string>
+						<string key="currentDetailTableViewModel">SCTableViewModel</string>
+						<string key="peoplePickerNavigationController">ABPeoplePickerNavigationController</string>
+						<string key="personAddNewViewController">ABNewPersonViewController</string>
+						<string key="personVCFromSelectionList">ABPersonViewController</string>
+						<string key="personViewController">ABPersonViewController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="clinicianDef">
+							<string key="name">clinicianDef</string>
+							<string key="candidateClassName">SCEntityDefinition</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="currentDetailTableViewModel">
+							<string key="name">currentDetailTableViewModel</string>
+							<string key="candidateClassName">SCTableViewModel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="peoplePickerNavigationController">
+							<string key="name">peoplePickerNavigationController</string>
+							<string key="candidateClassName">ABPeoplePickerNavigationController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="personAddNewViewController">
+							<string key="name">personAddNewViewController</string>
+							<string key="candidateClassName">ABNewPersonViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="personVCFromSelectionList">
+							<string key="name">personVCFromSelectionList</string>
+							<string key="candidateClassName">ABPersonViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="personViewController">
+							<string key="name">personViewController</string>
+							<string key="candidateClassName">ABPersonViewController</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CliniciansViewController_Shared.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">LCYLockDigitView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/LCYLockDigitView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">LCYLockScreenViewController</string>
+					<string key="superclassName">LCYPasscodeInputViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="enterPassCodeBanner">UIView</string>
+						<string key="tryAgainMessageLabel">UILabel</string>
+						<string key="window">UIWindow</string>
+						<string key="wrongPassCodeBanner">UIView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="enterPassCodeBanner">
+							<string key="name">enterPassCodeBanner</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tryAgainMessageLabel">
+							<string key="name">tryAgainMessageLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="window">
+							<string key="name">window</string>
+							<string key="candidateClassName">UIWindow</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="wrongPassCodeBanner">
+							<string key="name">wrongPassCodeBanner</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/LCYLockScreenViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">LCYPasscodeInputViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="lockDigit_0">LCYLockDigitView</string>
+						<string key="lockDigit_1">LCYLockDigitView</string>
+						<string key="lockDigit_2">LCYLockDigitView</string>
+						<string key="lockDigit_3">LCYLockDigitView</string>
+						<string key="passCodeInputField">UITextField</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="lockDigit_0">
+							<string key="name">lockDigit_0</string>
+							<string key="candidateClassName">LCYLockDigitView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lockDigit_1">
+							<string key="name">lockDigit_1</string>
+							<string key="candidateClassName">LCYLockDigitView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lockDigit_2">
+							<string key="name">lockDigit_2</string>
+							<string key="candidateClassName">LCYLockDigitView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lockDigit_3">
+							<string key="name">lockDigit_3</string>
+							<string key="candidateClassName">LCYLockDigitView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="passCodeInputField">
+							<string key="name">passCodeInputField</string>
+							<string key="candidateClassName">UITextField</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/LCYPasscodeInputViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">PTTAppDelegate</string>
+					<string key="superclassName">UIResponder</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">notifyTrustFailure:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">notifyTrustFailure:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">notifyTrustFailure:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="casualAlertManager">CasualAlertViewController</string>
+						<string key="clientsViewController_iPhone">ClientsViewController_iPhone</string>
+						<string key="clinicianToolsLabel">UILabel</string>
+						<string key="clinicianViewController">ClinicianViewController</string>
+						<string key="developedByLabel">UILabel</string>
+						<string key="imageView">UIImageView</string>
+						<string key="lockScreenVC">LCYLockScreenViewController</string>
+						<string key="masterViewController">UIViewController</string>
+						<string key="navigationControllerTrainTrack">UINavigationController</string>
+						<string key="psyTrackLabel">UILabel</string>
+						<string key="reportsDetailViewController_iPad">ReportsDetailViewController_iPad</string>
+						<string key="reportsNavigationController_iPhone">UINavigationController</string>
+						<string key="reportsRootViewController_iPad">ReportsRootViewController_iPad</string>
+						<string key="reportsViewController_iPhone">ReportsViewController_iPhone</string>
+						<string key="splitViewControllerReports">UISplitViewController</string>
+						<string key="tabBar">UITabBar</string>
+						<string key="tabBarController">UITabBarController</string>
+						<string key="tabBarControllerContainerView">UIView</string>
+						<string key="tabBarView">UIView</string>
+						<string key="trainTrackViewController">TrainTrackViewController</string>
+						<string key="viewController">UIView</string>
+						<string key="window">UIWindow</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="casualAlertManager">
+							<string key="name">casualAlertManager</string>
+							<string key="candidateClassName">CasualAlertViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="clientsViewController_iPhone">
+							<string key="name">clientsViewController_iPhone</string>
+							<string key="candidateClassName">ClientsViewController_iPhone</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="clinicianToolsLabel">
+							<string key="name">clinicianToolsLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="clinicianViewController">
+							<string key="name">clinicianViewController</string>
+							<string key="candidateClassName">ClinicianViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="developedByLabel">
+							<string key="name">developedByLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="imageView">
+							<string key="name">imageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="lockScreenVC">
+							<string key="name">lockScreenVC</string>
+							<string key="candidateClassName">LCYLockScreenViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="masterViewController">
+							<string key="name">masterViewController</string>
+							<string key="candidateClassName">UIViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="navigationControllerTrainTrack">
+							<string key="name">navigationControllerTrainTrack</string>
+							<string key="candidateClassName">UINavigationController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="psyTrackLabel">
+							<string key="name">psyTrackLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="reportsDetailViewController_iPad">
+							<string key="name">reportsDetailViewController_iPad</string>
+							<string key="candidateClassName">ReportsDetailViewController_iPad</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="reportsNavigationController_iPhone">
+							<string key="name">reportsNavigationController_iPhone</string>
+							<string key="candidateClassName">UINavigationController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="reportsRootViewController_iPad">
+							<string key="name">reportsRootViewController_iPad</string>
+							<string key="candidateClassName">ReportsRootViewController_iPad</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="reportsViewController_iPhone">
+							<string key="name">reportsViewController_iPhone</string>
+							<string key="candidateClassName">ReportsViewController_iPhone</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="splitViewControllerReports">
+							<string key="name">splitViewControllerReports</string>
+							<string key="candidateClassName">UISplitViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tabBar">
+							<string key="name">tabBar</string>
+							<string key="candidateClassName">UITabBar</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tabBarController">
+							<string key="name">tabBarController</string>
+							<string key="candidateClassName">UITabBarController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tabBarControllerContainerView">
+							<string key="name">tabBarControllerContainerView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tabBarView">
+							<string key="name">tabBarView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="trainTrackViewController">
+							<string key="name">trainTrackViewController</string>
+							<string key="candidateClassName">TrainTrackViewController</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="viewController">
+							<string key="name">viewController</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="window">
+							<string key="name">window</string>
+							<string key="candidateClassName">UIWindow</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/PTTAppDelegate.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ReaderDemoController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ReaderDemoController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ReportsDetailViewController_iPad</string>
+					<string key="superclassName">UITableViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">reportsRootViewController_iPad</string>
+						<string key="NS.object.0">ReportsRootViewController_iPad</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">reportsRootViewController_iPad</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">reportsRootViewController_iPad</string>
+							<string key="candidateClassName">ReportsRootViewController_iPad</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ReportsDetailViewController_iPad.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ReportsRootViewController_iPad</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">reportsDetailViewController_iPad</string>
+						<string key="NS.object.0">ReportsDetailViewController_iPad</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">reportsDetailViewController_iPad</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">reportsDetailViewController_iPad</string>
+							<string key="candidateClassName">ReportsDetailViewController_iPad</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ReportsRootViewController_iPad.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">ReportsViewController_iPhone</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/ReportsViewController_iPhone.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCControlCell</string>
+					<string key="superclassName">SCCustomCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCControlCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCCustomCell</string>
+					<string key="superclassName">SCTableViewCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCCustomCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCDataDefinition</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCDataDefinition.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCEntityDefinition</string>
+					<string key="superclassName">SCDataDefinition</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCEntityDefinition.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCLabelCell</string>
+					<string key="superclassName">SCControlCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCLabelCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCObjectSelectionCell</string>
+					<string key="superclassName">SCSelectionCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCObjectSelectionCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCSelectionCell</string>
+					<string key="superclassName">SCLabelCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCSelectionCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCTableViewCell</string>
+					<string key="superclassName">UITableViewCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCTableViewCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCTableViewModel</string>
+					<string key="superclassName">NSObject</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCTableViewModel.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">tableView</string>
+						<string key="NS.object.0">UITableView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">tableView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">TrainTrackViewController</string>
+					<string key="superclassName">SCViewController</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">messageView</string>
+						<string key="NS.object.0">UIView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">messageView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">messageView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/TrainTrackViewController.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
