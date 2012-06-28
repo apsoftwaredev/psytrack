@@ -73,10 +73,14 @@
 @property (nonatomic, weak)IBOutlet UIView *sectionSubFooterLabelContainerView;
 @property (nonatomic, weak)IBOutlet UILabel *sectionSubFooterLabel;
 
+@property (nonatomic, weak)IBOutlet UIView *directHoursHeader;
+@property (nonatomic, weak)IBOutlet UIView *directHoursFooter;
+@property (nonatomic, weak)IBOutlet UIView *indirectHoursHeader;
+@property (nonatomic, weak)IBOutlet UIView *overallHoursFooter;
+@property (nonatomic, weak)IBOutlet UIView *signaturesView;
 
-
-
-
+@property (nonatomic, weak)IBOutlet UIView *pageHeaderView;
+@property (nonatomic, weak)IBOutlet UIView *subTablesContainerView;
 
 @property (nonatomic, weak)IBOutlet UIScrollView *mainPageScrollView;
 @property (nonatomic, weak)IBOutlet UIScrollView *directHoursScrollView;

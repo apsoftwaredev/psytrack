@@ -32,7 +32,15 @@ NSLog(@"self bound object is %@",self.boundObject);
     
     cellSubTypeLabel.text=interventionTypeSubtype.interventionSubType;
     [interventionTypeSubtype didAccessValueForKey:@"interventionSubtype"];
+    self.accessoryType=UITableViewCellAccessoryNone;
+
+}
+
+-(void)performInitialization{
+
+
    
+
 }
 
 - (id)initWithFrame:(CGRect)frame
