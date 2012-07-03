@@ -2,7 +2,7 @@
 //  InterventionDeliveredEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 6/6/12.
+//  Created by Daniel Boice on 7/2/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
@@ -10,12 +10,13 @@
 #import <CoreData/CoreData.h>
 #import "ServiceParentEntity.h"
 
-@class TimeEntity;
+@class InterventionTypeEntity, InterventionTypeSubtypeEntity, TimeEntity;
 
 @interface InterventionDeliveredEntity : ServiceParentEntity
 
 @property (nonatomic, retain) NSSet *clientPresentations;
-@property (nonatomic, retain) NSManagedObject *interventionType;
+@property (nonatomic, retain) InterventionTypeSubtypeEntity *subtype;
+@property (nonatomic, retain) InterventionTypeEntity *interventionType;
 @property (nonatomic, retain) TimeEntity *time;
 @property (nonatomic, retain) NSSet *modelsUsed;
 @end
