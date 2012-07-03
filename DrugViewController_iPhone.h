@@ -76,6 +76,6 @@
 -(IBAction)StopDownloadTapped:(id)sender;
 -(IBAction)ContinueDownloadTapped:(id)sender;
 -(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(DrugNameObjectSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController applNo:(NSString *)applicationNumber productNo:(NSString *)productNumber;
--(void)doneButtonTapped;
--(void)cancelButtonTapped;
+-(void)myDoneButtonTapped;
+-(void)myCancelButtonTapped;
 @end

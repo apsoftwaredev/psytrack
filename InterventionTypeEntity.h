@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-
+#import "ClinicianEntity.h"
 @class InterventionDeliveredEntity, InterventionTypeSubtypeEntity;
 
 @interface InterventionTypeEntity : NSManagedObject
@@ -19,6 +19,11 @@
 @property (nonatomic, retain) NSSet *interventionDelivered;
 @property (nonatomic, retain) NSSet *subTypes;
 @property (nonatomic, retain) NSSet *existingInterventions;
+
+-(NSString *)monthlyLogNotesForMonth:(NSDate *)dateInMonth clinician:(ClinicianEntity *)clinician;
+
+
+
 @end
 
 @interface InterventionTypeEntity (CoreDataGeneratedAccessors)
@@ -37,5 +42,10 @@
 - (void)removeExistingInterventionsObject:(NSManagedObject *)value;
 - (void)addExistingInterventions:(NSSet *)values;
 - (void)removeExistingInterventions:(NSSet *)values;
+
+
+-(NSString *)totalHoursForMonth:(NSDate *)dateInMonth;
+-(NSTimeInterval )totalHoursForMonthTI:(NSDate *)dateInMonth;
+
 
 @end

@@ -145,7 +145,7 @@
     
     
     if (tokenKeychainItemExists && oldTokenKeychainItemExists && tokenData) {
-        success=NO;
+      
         success= [wrapper updateKeychainValueWithData:tokenData forIdentifier:K_OLD_SHARED_TOKEN];
     }
     
@@ -207,7 +207,7 @@
     
     
     if (!passwordData) {
-        success=NO;
+       
         [wrapper newSearchDictionary:K_PASSWORD_CURRENT];
         success= [wrapper createKeychainValueWithData:[encryption getHashBytes:[appDelegate convertStringToData: passwordToSave]] forIdentifier:K_PASSWORD_CURRENT];
         
@@ -231,7 +231,7 @@
 
     
     passwordData =[wrapper searchKeychainCopyMatching:K_PASSWORD_CURRENT];
-    if (passwordData) {
+    if (passwordKeychainItemExists&&oldPasscodeKeychainItemExists&& passwordData ) {
     
         success= [wrapper updateKeychainValueWithData:[encryption getHashBytes:[appDelegate convertStringToData: passwordToSave]] forIdentifier:K_PASSWORD_CURRENT];
     }
@@ -280,15 +280,16 @@
         passwordKeychainItemExists=YES;
     }
     
-    
-    oldPasswordData =[wrapper searchKeychainCopyMatching:K_PASSWORD_OLD];
-    
-    if (oldPasswordData) {
+    if (passwordKeychainItemExists &&oldPasscodeKeychainItemExists) {
+   
+        oldPasswordData =[wrapper searchKeychainCopyMatching:K_PASSWORD_OLD];
         
-        success= [wrapper updateKeychainValueWithData:passwordData forIdentifier:K_PASSWORD_OLD];
+        if (oldPasswordData) {
+            
+            success= [wrapper updateKeychainValueWithData:passwordData forIdentifier:K_PASSWORD_OLD];
+        }
+
     }
-
-
 
     
     return success;
@@ -332,15 +333,16 @@
         tokenKeychainItemExists=YES;
     }
     
+    if (tokenKeychainItemExists && oldTokenKeychainItemExists) {
     
-    oldTokenData =[wrapper searchKeychainCopyMatching:K_OLD_SHARED_TOKEN];
-    
-    if (oldTokenData) {
+        oldTokenData =[wrapper searchKeychainCopyMatching:K_OLD_SHARED_TOKEN];
         
-        success= [wrapper updateKeychainValueWithData:tokenData forIdentifier:K_OLD_SHARED_TOKEN];
+        if (oldTokenData) {
+            
+            success= [wrapper updateKeychainValueWithData:tokenData forIdentifier:K_OLD_SHARED_TOKEN];
+        }
+    
     }
-    
-    
     
     
     return success;
@@ -862,7 +864,7 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     }
     
          
-    NSData *sharedSymetricData=[appDelegate getSharedSymetricData];
+   
     if (fetchedObjects.count) 
     {
         
@@ -917,16 +919,17 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     
     NSData *  currentKeyStringData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_CURRENT_KEYSTRING];
     BOOL success=NO;
-    
+    NSData *sharedSymetricData=nil;
     NSString *newKeyString=[NSString string];
     NSMutableArray * fetchedObjectsKeyStrings=[fetchedObjects mutableArrayValueForKey:@"keyString"];
    
+    if (!newKeyString.length) {
+      
+        do {
+            newKeyString =[appDelegate generateExposedKey];
+        } while ([fetchedObjectsKeyStrings containsObject:newKeyString]);
         
-    do {
-        newKeyString =[appDelegate generateExposedKey];
-    } while ([fetchedObjectsKeyStrings containsObject:newKeyString]);
-    
-    
+    }
     if (!currentKeyStringData) {
        
         success= [wrapper createKeychainValue:newKeyString forIdentifier:K_LOCK_SCREEN_CURRENT_KEYSTRING];

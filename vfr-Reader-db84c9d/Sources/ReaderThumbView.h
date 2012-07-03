@@ -31,7 +31,7 @@
 
 	NSUInteger _targetTag;
 
- __unsafe_unretained	NSOperation *_operation;
+//    NSOperation *_operation;
 
 @protected // Instance variables
 

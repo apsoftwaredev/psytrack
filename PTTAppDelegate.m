@@ -1001,7 +1001,7 @@
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
 	
 //    reset=YES;
-    BOOL success;
+    BOOL success=NO;
     
         NSData *passcodeData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE];
         if (!passcodeData&&!reset) {
@@ -1019,7 +1019,7 @@
         }
     
     NSData *tokenData = [wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN];
-    if (!tokenData&&!reset) {
+    if (!tokenData&&!reset &&success) {
         
         success= [wrapper createKeychainValueWithData:[self convertStringToData:@"wMbq-zvD2-6p"] forIdentifier:K_CURRENT_SHARED_TOKEN];
         //           passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
@@ -1033,7 +1033,9 @@
         success=YES;
     }
     NSData *passwordData = [wrapper searchKeychainCopyMatching:K_PASSWORD_CURRENT];
-    if (!passwordData&&!reset) {
+    
+    
+    if (!passwordData&&!reset&&success) {
         
         success= [wrapper createKeychainValueWithData:[encryption_ getHashBytes:[self convertStringToData: @"o6fjZ4dhvKIUYVmaqnNJIPCBE2"]] forIdentifier:K_PASSWORD_CURRENT];
         //           passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];

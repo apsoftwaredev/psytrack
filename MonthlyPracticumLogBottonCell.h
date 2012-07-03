@@ -6,9 +6,13 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
+#import "ClinicianEntity.h"
 
+@interface MonthlyPracticumLogBottonCell : SCCustomCell {
 
-@interface MonthlyPracticumLogBottonCell : SCCustomCell
+    ClinicianEntity *clinician_;
+    NSDate *monthToDisplay_;
+}
 
 
 

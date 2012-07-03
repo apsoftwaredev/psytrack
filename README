@@ -21,9 +21,14 @@ Acknoledgements:
 TO DO:
 
 
-
-
-
+-motor test completed  AIMS test
+-psychosocial stressors medical and gaf to diagnosis
+-allergies
+-family History
+-birth development
+-current Living arrangement
+-legal
+-encrypt client presentation data
 -practice Name and website for clinicians
 -cognitive for presentations
 -drug name deleting when leave view
@@ -32,15 +37,15 @@ TO DO:
 -client other referral source
 
 -prescriber list not defauted when prescriber
--systolic pressure validation iphone
+
 -temperature allow decimal
 -assessment, testadministrations testing session name mismatch
--validation on client in client presentations
+
 -add event title
 -incomplete paperwork not red
 -two my infos showing up
 -weight conversion not correct 320 lbs to kg
--referrals clinician selection cell crash
+
 -existing hours number fields label covering field, instruments
 -change existing hours to have the total hours in the badge view
 -existing hours back button disappears
@@ -57,11 +62,6 @@ TO DO:
 
 
 
--validation on client id code
-
-
-
--	finish setting up the persistent store settings,
 
 
 
@@ -72,27 +72,20 @@ TO DO:
 
 
 
-- extend date on encryption key
-
-
 
 
 
 Phase II
 -	add a save to icloud documents to the actions in the drug document view
--	 add the intervention section
--	 add the indirect support section
--	add the supervision received section
--	 add the supervision given section
+
 -	 add college courses section
 - add consultations
 -add presentations
--	add the certification section
+
 -	 add important exams section
 -	 add teaching experience
 -	 add advising
--	add the existing hours section
--  add fees
+
 
 
 begin adding reports
@@ -143,3 +136,13 @@ begin adding reports
 -generating new enter your name on every resart
 
 -auto add medlog date
+-	 add the intervention section
+-	 add the indirect support section
+-	add the supervision received section
+-	 add the supervision given section
+-	add the existing hours section
+-  add fees
+-referrals clinician selection cell crash
+-validation on client id code
+-systolic pressure validation iphone
+-validation on client in client presentations

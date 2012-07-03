@@ -230,10 +230,10 @@
 		E74167EA158E782900CE1AF4 /* Monaco.dfont in Resources */ = {isa = PBXBuildFile; fileRef = E74167E5158E739300CE1AF4 /* Monaco.dfont */; };
 		E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B76150858D3005B798A /* ABGroupSelectionCell.m */; };
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
+		E751791815A26B0C00674F88 /* InterventionDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E751791715A26B0C00674F88 /* InterventionDeliveredEntity.m */; };
+		E751791B15A26B7F00674F88 /* TimeTrackEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E751791A15A26B7F00674F88 /* TimeTrackEntity.m */; };
 		E7577FA9158C1DAF0044D344 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E7577FAC158D13B50044D344 /* EncryptionTokenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7577FAB158D13B50044D344 /* EncryptionTokenCell.m */; };
-		E7577FAE158D15250044D344 /* EncryptionTokenCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7577FAD158D15250044D344 /* EncryptionTokenCell_iPhone.xib */; };
-		E7577FB0158D34D70044D344 /* EncryptionTokenCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7577FAF158D34D70044D344 /* EncryptionTokenCell_iPad.xib */; };
 		E75F7786151CC574002B10AE /* LogEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F7785151CC574002B10AE /* LogEntity.m */; };
 		E7619874158946B100C5BB8F /* ClientGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7619872158946B100C5BB8F /* ClientGroupsViewController.m */; };
 		E7619875158946B100C5BB8F /* ClientGroupsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7619873158946B100C5BB8F /* ClientGroupsViewController.xib */; };
@@ -262,11 +262,9 @@
 		E7919B281547001F001161A9 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B271547001F001161A9 /* Icon-72@2x.png */; };
 		E7919B3015470EDB001161A9 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */; };
 		E7919B3215470F01001161A9 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */; };
-		E7989FFE15801475006B9DBD /* TimeTrackEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7989FFD15801475006B9DBD /* TimeTrackEntity.m */; };
 		E798A0011580158B006B9DBD /* ServiceParentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E798A0001580158B006B9DBD /* ServiceParentEntity.m */; };
 		E798A0041580159E006B9DBD /* TestingSessionDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E798A0031580159E006B9DBD /* TestingSessionDeliveredEntity.m */; };
 		E798A007158016BC006B9DBD /* SupportActivityDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E798A006158016BC006B9DBD /* SupportActivityDeliveredEntity.m */; };
-		E798A00A158016F5006B9DBD /* InterventionDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E798A009158016F5006B9DBD /* InterventionDeliveredEntity.m */; };
 		E798A00D15801721006B9DBD /* SupervisionGivenEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E798A00C15801721006B9DBD /* SupervisionGivenEntity.m */; };
 		E798A01315801774006B9DBD /* SupervisionReceivedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E798A01215801774006B9DBD /* SupervisionReceivedEntity.m */; };
 		E798A0161580C5B8006B9DBD /* ClientEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E798A0151580C5B8006B9DBD /* ClientEntity.m */; };
@@ -334,6 +332,9 @@
 		E7CCB8B6159AACAB00A12908 /* MonthlyPracticumLogMiddleSubCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCB8B5159AACAA00A12908 /* MonthlyPracticumLogMiddleSubCell.m */; };
 		E7CCB8B8159AAD5400A12908 /* MonthlyPracticumLogMiddleSubCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8B7159AAD5400A12908 /* MonthlyPracticumLogMiddleSubCell.xib */; };
 		E7CCB8D1159B945300A12908 /* MonthlyPracticumLogTopCellWithExisting.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8D0159B945300A12908 /* MonthlyPracticumLogTopCellWithExisting.xib */; };
+		E7CCB8E6159CE2FA00A12908 /* ileopard-keys_128x128.png in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8E5159CE2FA00A12908 /* ileopard-keys_128x128.png */; };
+		E7CCB8E7159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8E9159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib */; };
+		E7CCB8EC159CF1B200A12908 /* SupervisionTypeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCB8EB159CF1B200A12908 /* SupervisionTypeEntity.m */; };
 		E7D3732C152C2EFA00121918 /* ExistingHoursEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */; };
 		E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */; };
 		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
@@ -761,12 +762,14 @@
 		E7516B76150858D3005B798A /* ABGroupSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABGroupSelectionCell.m; sourceTree = "<group>"; };
 		E7516B7915085A23005B798A /* PTABGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTABGroup.h; sourceTree = "<group>"; };
 		E7516B7A15085A23005B798A /* PTABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTABGroup.m; sourceTree = "<group>"; };
+		E751791615A26B0C00674F88 /* InterventionDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterventionDeliveredEntity.h; sourceTree = "<group>"; };
+		E751791715A26B0C00674F88 /* InterventionDeliveredEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterventionDeliveredEntity.m; sourceTree = "<group>"; };
+		E751791915A26B7F00674F88 /* TimeTrackEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTrackEntity.h; sourceTree = "<group>"; };
+		E751791A15A26B7F00674F88 /* TimeTrackEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTrackEntity.m; sourceTree = "<group>"; };
 		E7577FA7158C1DAE0044D344 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		E7577FAA158D13B50044D344 /* EncryptionTokenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptionTokenCell.h; sourceTree = "<group>"; };
 		E7577FAB158D13B50044D344 /* EncryptionTokenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptionTokenCell.m; sourceTree = "<group>"; };
-		E7577FAD158D15250044D344 /* EncryptionTokenCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EncryptionTokenCell_iPhone.xib; sourceTree = "<group>"; };
-		E7577FAF158D34D70044D344 /* EncryptionTokenCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EncryptionTokenCell_iPad.xib; sourceTree = "<group>"; };
 		E75F7784151CC574002B10AE /* LogEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogEntity.h; sourceTree = "<group>"; };
 		E75F7785151CC574002B10AE /* LogEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogEntity.m; sourceTree = "<group>"; };
 		E7619871158946B100C5BB8F /* ClientGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientGroupsViewController.h; sourceTree = "<group>"; };
@@ -815,16 +818,12 @@
 		E7919B271547001F001161A9 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
-		E7989FFC15801475006B9DBD /* TimeTrackEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTrackEntity.h; sourceTree = "<group>"; };
-		E7989FFD15801475006B9DBD /* TimeTrackEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTrackEntity.m; sourceTree = "<group>"; };
 		E7989FFF1580158B006B9DBD /* ServiceParentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceParentEntity.h; sourceTree = "<group>"; };
 		E798A0001580158B006B9DBD /* ServiceParentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceParentEntity.m; sourceTree = "<group>"; };
 		E798A0021580159E006B9DBD /* TestingSessionDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestingSessionDeliveredEntity.h; sourceTree = "<group>"; };
 		E798A0031580159E006B9DBD /* TestingSessionDeliveredEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestingSessionDeliveredEntity.m; sourceTree = "<group>"; };
 		E798A005158016BC006B9DBD /* SupportActivityDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupportActivityDeliveredEntity.h; sourceTree = "<group>"; };
 		E798A006158016BC006B9DBD /* SupportActivityDeliveredEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupportActivityDeliveredEntity.m; sourceTree = "<group>"; };
-		E798A008158016F5006B9DBD /* InterventionDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterventionDeliveredEntity.h; sourceTree = "<group>"; };
-		E798A009158016F5006B9DBD /* InterventionDeliveredEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterventionDeliveredEntity.m; sourceTree = "<group>"; };
 		E798A00B15801721006B9DBD /* SupervisionGivenEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionGivenEntity.h; sourceTree = "<group>"; };
 		E798A00C15801721006B9DBD /* SupervisionGivenEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupervisionGivenEntity.m; sourceTree = "<group>"; };
 		E798A01115801774006B9DBD /* SupervisionReceivedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionReceivedEntity.h; sourceTree = "<group>"; };
@@ -904,6 +903,12 @@
 		E7CCB8B5159AACAA00A12908 /* MonthlyPracticumLogMiddleSubCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthlyPracticumLogMiddleSubCell.m; sourceTree = "<group>"; };
 		E7CCB8B7159AAD5400A12908 /* MonthlyPracticumLogMiddleSubCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogMiddleSubCell.xib; sourceTree = "<group>"; };
 		E7CCB8D0159B945300A12908 /* MonthlyPracticumLogTopCellWithExisting.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogTopCellWithExisting.xib; sourceTree = "<group>"; };
+		E7CCB8E5159CE2FA00A12908 /* ileopard-keys_128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ileopard-keys_128x128.png"; sourceTree = "<group>"; };
+		E7CCB8E8159CEE3200A12908 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EncryptionTokenCell_iPhone.xib; sourceTree = "<group>"; };
+		E7CCB8EA159CF1B200A12908 /* SupervisionTypeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionTypeEntity.h; sourceTree = "<group>"; };
+		E7CCB8EB159CF1B200A12908 /* SupervisionTypeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupervisionTypeEntity.m; sourceTree = "<group>"; };
+		E7CCB8ED159CF1F900A12908 /* SupportActivityTypeEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupportActivityTypeEntity.h; sourceTree = "<group>"; };
+		E7CCB8EE159CF1F900A12908 /* SupportActivityTypeEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupportActivityTypeEntity.m; sourceTree = "<group>"; };
 		E7D3732A152C2EFA00121918 /* ExistingHoursEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursEntity.h; sourceTree = "<group>"; };
 		E7D3732B152C2EFA00121918 /* ExistingHoursEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursEntity.m; sourceTree = "<group>"; };
 		E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursOverviewCell.xib; sourceTree = "<group>"; };
@@ -1435,10 +1440,6 @@
 				E7516B7915085A23005B798A /* PTABGroup.h */,
 				E7516B7A15085A23005B798A /* PTABGroup.m */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
-				E772E4AB1593987E00478A3E /* InterventionTypeEntity.h */,
-				E772E4AC1593987E00478A3E /* InterventionTypeEntity.m */,
-				E772E4A8159397B200478A3E /* InterventionTypeSubtypeEntity.h */,
-				E772E4A9159397B200478A3E /* InterventionTypeSubtypeEntity.m */,
 				E7F1E7071576D17100D4A638 /* ClientInstrumentScoresEntity.h */,
 				E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */,
 				E7F1E7041576966000D4A638 /* InstrumentScoreEntity.h */,
@@ -1467,6 +1468,7 @@
 				37B2254A150285E30015D955 /* Default.png */,
 				37F7CF5415005FDB00AD2C3A /* Art assets */,
 				37F7CF5D15005FDB00AD2C3A /* clientsTab.png */,
+				E7CCB8E5159CE2FA00A12908 /* ileopard-keys_128x128.png */,
 				37F7CF5E15005FDB00AD2C3A /* clientsTab@2x.png */,
 				37F7CF6115005FDB00AD2C3A /* cliniciansfullsize.png */,
 				37F7CF6215005FDB00AD2C3A /* cliniciansTab.png */,
@@ -1588,8 +1590,7 @@
 				E7E1A6441530C18900C227E8 /* ShortFieldCell.m */,
 				E7577FAA158D13B50044D344 /* EncryptionTokenCell.h */,
 				E7577FAB158D13B50044D344 /* EncryptionTokenCell.m */,
-				E7577FAD158D15250044D344 /* EncryptionTokenCell_iPhone.xib */,
-				E7577FAF158D34D70044D344 /* EncryptionTokenCell_iPad.xib */,
+				E7CCB8E9159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -1768,22 +1769,30 @@
 		E7989FE9157FAE35006B9DBD /* Managed Object Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				E751791915A26B7F00674F88 /* TimeTrackEntity.h */,
+				E751791A15A26B7F00674F88 /* TimeTrackEntity.m */,
+				E751791615A26B0C00674F88 /* InterventionDeliveredEntity.h */,
+				E751791715A26B0C00674F88 /* InterventionDeliveredEntity.m */,
+				E7CCB8EA159CF1B200A12908 /* SupervisionTypeEntity.h */,
+				E7CCB8EB159CF1B200A12908 /* SupervisionTypeEntity.m */,
+				E772E4AB1593987E00478A3E /* InterventionTypeEntity.h */,
+				E772E4AC1593987E00478A3E /* InterventionTypeEntity.m */,
+				E772E4A8159397B200478A3E /* InterventionTypeSubtypeEntity.h */,
+				E772E4A9159397B200478A3E /* InterventionTypeSubtypeEntity.m */,
+				E7CCB8ED159CF1F900A12908 /* SupportActivityTypeEntity.h */,
+				E7CCB8EE159CF1F900A12908 /* SupportActivityTypeEntity.m */,
 				E798A01A1580EB4A006B9DBD /* SupervisionParentEntity.h */,
 				E798A01B1580EB4A006B9DBD /* SupervisionParentEntity.m */,
 				E798A01115801774006B9DBD /* SupervisionReceivedEntity.h */,
 				E798A01215801774006B9DBD /* SupervisionReceivedEntity.m */,
 				E798A00B15801721006B9DBD /* SupervisionGivenEntity.h */,
 				E798A00C15801721006B9DBD /* SupervisionGivenEntity.m */,
-				E798A008158016F5006B9DBD /* InterventionDeliveredEntity.h */,
-				E798A009158016F5006B9DBD /* InterventionDeliveredEntity.m */,
 				E798A005158016BC006B9DBD /* SupportActivityDeliveredEntity.h */,
 				E798A006158016BC006B9DBD /* SupportActivityDeliveredEntity.m */,
 				E798A0021580159E006B9DBD /* TestingSessionDeliveredEntity.h */,
 				E798A0031580159E006B9DBD /* TestingSessionDeliveredEntity.m */,
 				E7989FFF1580158B006B9DBD /* ServiceParentEntity.h */,
 				E798A0001580158B006B9DBD /* ServiceParentEntity.m */,
-				E7989FFC15801475006B9DBD /* TimeTrackEntity.h */,
-				E7989FFD15801475006B9DBD /* TimeTrackEntity.m */,
 			);
 			name = "Managed Object Subclasses";
 			sourceTree = "<group>";
@@ -2257,8 +2266,7 @@
 				E76984E115869C2C00D760A6 /* ipad-background-blue-plain-small.png in Resources */,
 				E76984E215869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png in Resources */,
 				E7619875158946B100C5BB8F /* ClientGroupsViewController.xib in Resources */,
-				E7577FAE158D15250044D344 /* EncryptionTokenCell_iPhone.xib in Resources */,
-				E7577FB0158D34D70044D344 /* EncryptionTokenCell_iPad.xib in Resources */,
+				E7CCB8E7159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib in Resources */,
 				E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */,
 				E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */,
 				E735609915927EFE0007042C /* MAY20122.xml in Resources */,
@@ -2293,6 +2301,7 @@
 				E7CCB8B3159A9B0100A12908 /* MonthlyPracticumLogBottomCell.xib in Resources */,
 				E7CCB8B8159AAD5400A12908 /* MonthlyPracticumLogMiddleSubCell.xib in Resources */,
 				E7CCB8D1159B945300A12908 /* MonthlyPracticumLogTopCellWithExisting.xib in Resources */,
+				E7CCB8E6159CE2FA00A12908 /* ileopard-keys_128x128.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2433,11 +2442,9 @@
 				E7F1E703157662EB00D4A638 /* InstrumentScoreNameEntity.m in Sources */,
 				E7F1E7061576966000D4A638 /* InstrumentScoreEntity.m in Sources */,
 				E7F1E7091576D17100D4A638 /* ClientInstrumentScoresEntity.m in Sources */,
-				E7989FFE15801475006B9DBD /* TimeTrackEntity.m in Sources */,
 				E798A0011580158B006B9DBD /* ServiceParentEntity.m in Sources */,
 				E798A0041580159E006B9DBD /* TestingSessionDeliveredEntity.m in Sources */,
 				E798A007158016BC006B9DBD /* SupportActivityDeliveredEntity.m in Sources */,
-				E798A00A158016F5006B9DBD /* InterventionDeliveredEntity.m in Sources */,
 				E798A00D15801721006B9DBD /* SupervisionGivenEntity.m in Sources */,
 				E798A01315801774006B9DBD /* SupervisionReceivedEntity.m in Sources */,
 				E798A0161580C5B8006B9DBD /* ClientEntity.m in Sources */,
@@ -2479,6 +2486,9 @@
 				E7B81461159A5FFE0039F38F /* psyTrainTrack.xcdatamodeld in Sources */,
 				E7CCB8B1159A9AD200A12908 /* MonthlyPracticumLogBottonCell.m in Sources */,
 				E7CCB8B6159AACAB00A12908 /* MonthlyPracticumLogMiddleSubCell.m in Sources */,
+				E7CCB8EC159CF1B200A12908 /* SupervisionTypeEntity.m in Sources */,
+				E751791815A26B0C00674F88 /* InterventionDeliveredEntity.m in Sources */,
+				E751791B15A26B7F00674F88 /* TimeTrackEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2912,6 +2922,14 @@
 				37F7CFDC1500624000AD2C3A /* en */,
 			);
 			name = CasualAlertViewController.xib;
+			sourceTree = "<group>";
+		};
+		E7CCB8E9159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7CCB8E8159CEE3200A12908 /* en */,
+			);
+			name = EncryptionTokenCell_iPhone.xib;
 			sourceTree = "<group>";
 		};
 		E7F1CB421598C024006F9E95 /* Localizable.strings */ = {

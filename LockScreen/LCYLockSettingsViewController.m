@@ -280,7 +280,9 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
 -(void)tableViewModel:(SCTableViewModel *)tableModel customButtonTapped:(UIButton *)button forRowWithIndexPath:(NSIndexPath *)indexPath{
 
     SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
+
     if ([cell isKindOfClass:[EncryptionTokenCell class]]) {
         
         EncryptionTokenCell *encryptionTokenCell=(EncryptionTokenCell *)cell;
@@ -379,9 +381,7 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
                     UIView *textFieldView=(UIView *)[cell viewWithTag:KTokenCellTokenFieldTag];
                     if ([textFieldView isKindOfClass:[UITextField class]]) {
                         UITextField *tokenTextField=(UITextField *)textFieldView; 
-                         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-                        
-                        NSString *displayMessage=nil;
+                                                 NSString *displayMessage=nil;
                         if (tokenTextField.text.length<12) {
                             
                            
@@ -437,6 +437,10 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
                     else {
                         displayMessage=@"Error occured in saving new encrytion data."; 
                     }
+                    
+                    if (displayMessage&&displayMessage.length) {
+                        [appDelegate displayNotification:displayMessage];
+                    } 
                 }
                 
             }

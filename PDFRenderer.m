@@ -166,7 +166,7 @@
     
     // Draw the frame.
     CTFrameDraw(frameRef, currentContext);
-    
+    CFRelease(currentText);
     CFRelease(frameRef);
     CFRelease(stringRef);
     CFRelease(framesetter);
@@ -266,7 +266,7 @@
     CGContextScaleCTM(currentContext, 1.0, -1.0);
     CGContextTranslateCTM(currentContext, 0, (-1)*newFrameframe.origin.y*2);
     
-  
+    CFRelease(currentText);
     CFRelease(frameRef);
     CFRelease(stringRef);
     CFRelease(framesetter);
@@ -358,7 +358,8 @@
     
      CFRelease(strUIFont);
     CFRelease(frameRef);
-    CFRelease(stringRef);
+    CFRelease(currentText);
+    CFRelease(attrStr);
     CFRelease(framesetter);
 }
 

@@ -8,6 +8,9 @@
 
 #import "MonthlyPracticumLogBottonCell.h"
 #import "InterventionTypeSubtypeEntity.h"
+#import "MonthlyPracticumLogTopCell.h"
+#import "QuartzCore/QuartzCore.h"
+#import "ClinicianEntity.h"
 @implementation MonthlyPracticumLogBottonCell
 
 
@@ -32,6 +35,36 @@ NSLog(@"self bound object is %@",self.boundObject);
     
     cellSubTypeLabel.text=interventionTypeSubtype.interventionSubType;
     [interventionTypeSubtype didAccessValueForKey:@"interventionSubtype"];
+    
+    NSLog(@"superview class is %@",[self.superview.superview.superview.superview.superview class]);
+    NSLog(@"superview subviews are %@",[[[[self.superview.superview.subviews objectAtIndex:0] subviews]objectAtIndex:1] subviews]);
+        
+        
+       
+//        NSString *monthTotalStr=[interventionTypeSubtype totalHoursToDateForMonthStr:monthToDisplay];
+        
+        
+//        NSLog(@"month total str is %@",monthTotalStr);
+//        
+//        self.hoursMonthTotalLabel.text=monthTotalStr;
+        
+    if ((!monthToDisplay_||!clinician_)&& [self.superview.superview.superview.superview.superview isKindOfClass:[MonthlyPracticumLogTopCell class]]) {
+        MonthlyPracticumLogTopCell *monthlyPracticumLogTopCell=(MonthlyPracticumLogTopCell *)self.superview.superview.superview.superview.superview;
+        
+        
+        monthToDisplay_=(NSDate *)monthlyPracticumLogTopCell.monthToDisplay;
+        clinician_=(ClinicianEntity *)monthlyPracticumLogTopCell.clinician;
+    }
+        self.hoursMonthTotalLabel.text=[interventionTypeSubtype totalHoursToDateForMonthStr:monthToDisplay_  clinician:(ClinicianEntity*)clinician_];
+        self.hoursWeek1Label.text=[interventionTypeSubtype week1TotalHoursForMonthStr:monthToDisplay_ clinician:clinician_];
+        self.hoursWeek2Label.text=[interventionTypeSubtype week2TotalHoursForMonthStr:monthToDisplay_ clinician:(ClinicianEntity*)clinician_];
+        self.hoursWeek3Label.text=[interventionTypeSubtype week3TotalHoursForMonthStr:monthToDisplay_ clinician:(ClinicianEntity*)clinician_];
+        self.hoursWeek4Label.text=[interventionTypeSubtype week4TotalHoursForMonthStr:monthToDisplay_ clinician:(ClinicianEntity*)clinician_];
+        self.hoursWeek5Label.text=[interventionTypeSubtype week5TotalHoursForMonthStr:monthToDisplay_ clinician:(ClinicianEntity*)clinician_];
+  
+    
+    
+    self.layer.borderWidth=0;
     self.accessoryType=UITableViewCellAccessoryNone;
 
 }
@@ -40,6 +73,19 @@ NSLog(@"self bound object is %@",self.boundObject);
 
 
    
+
+}
+-(void)loadBindingsIntoCustomControls{
+
+    [super loadBindingsIntoCustomControls];
+    
+    if ((!monthToDisplay_||!clinician_)&& [self.superview.superview.superview.superview.superview isKindOfClass:[MonthlyPracticumLogTopCell class]]) {
+        MonthlyPracticumLogTopCell *monthlyPracticumLogTopCell=(MonthlyPracticumLogTopCell *)self.superview.superview.superview.superview.superview;
+        
+        
+        monthToDisplay_=(NSDate *)monthlyPracticumLogTopCell.monthToDisplay;
+        clinician_=(ClinicianEntity *)monthlyPracticumLogTopCell.clinician;
+    }
 
 }
 

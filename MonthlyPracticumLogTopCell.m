@@ -7,12 +7,13 @@
 //
 
 #import "MonthlyPracticumLogTopCell.h"
-#import "ClinicianEntity.h"
+
 #import "PTTAppDelegate.h"
 #import "MonthlyPracticumLogMiddleSubCell.h"
 #import "InterventionTypeSubtypeEntity.h"
 #import "MonthlyPracticumLogBottonCell.h"
 #import "InterventionTypeEntity.h"
+#import "QuartzCore/QuartzCore.h"
 @interface MonthlyPracticumLogTopCell ()
 
 @end
@@ -68,15 +69,14 @@
 @synthesize directHoursFooter;
 @synthesize indirectHoursHeader;
 @synthesize overallHoursFooter;
-@synthesize signaturesView, pageHeaderView,subTablesContainerView;
-
+@synthesize signaturesView, pageHeaderView,subTablesContainerView,sectionSubFooterNotesTextView;
+@synthesize monthToDisplay,clinician;
 
 -(void)willDisplay{
 
     self.accessoryType=UITableViewCellAccessoryNone;
-    ClinicianEntity *clinician=(ClinicianEntity *)self.boundObject;
-
-    supervisorLabel.text=clinician.combinedName;
+    
+    supervisorLabel.text=self.clinician.combinedName;
     
 //    NSLog(@" size needed height is %g",[self interventionTableViewContentSize ].height );
     
@@ -202,13 +202,17 @@
     CGRect mainPageScrollViewFrame=self.mainPageScrollView.frame;
     mainPageScrollViewFrame.size.height=changeScrollHeightTo;
     self.mainPageScrollView.frame=mainPageScrollViewFrame;
+    
+    self.interventionTypesTableView.layer.borderWidth=0;
 }
 
 
 -(void)loadBindingsIntoCustomControls{
 
     [super loadBindingsIntoCustomControls];
-    
+    self.monthToDisplay=[NSDate date];
+    self.clinician=(ClinicianEntity *)self.boundObject;
+
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
 //
@@ -243,7 +247,7 @@ NSEntityDescription *entity = [NSEntityDescription entityForName:@"InterventionT
 NSError *error = nil;
 NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
 if (fetchedObjects == nil) {
-    
+   
 }
     self.objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.interventionTypesTableView];
     
@@ -261,7 +265,7 @@ if (fetchedObjects == nil) {
         NSArray *sortDescriptors = [NSArray arrayWithObjects:firstDescriptor, nil];
         NSMutableArray *orderdSubTypesSet=[NSMutableArray arrayWithArray:(NSArray *)[subTypesSet sortedArrayUsingDescriptors:sortDescriptors]];
         
-        NSLog(@"subtype array is %@",subTypesSet);
+       
         
         SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:interventionType.interventionType items:orderdSubTypesSet itemsDefinition:subTypesDef];
         SCDataFetchOptions *fetchOptions=[SCDataFetchOptions optionsWithSortKey:@"order" sortAscending:YES filterPredicate:nil];
@@ -280,7 +284,10 @@ if (fetchedObjects == nil) {
             return contactOverviewCell;
         };
         
+       
+        
         UIView *containerView = [[UIView alloc] initWithFrame:sectionSubHeaderView.frame];
+        
         UILabel *headerLabel = [[UILabel alloc] initWithFrame:sectionSubHeaderLabel.frame];
         headerLabel.font=sectionSubHeaderLabel.font;
         containerView.backgroundColor=sectionSubHeaderView.backgroundColor;
@@ -293,8 +300,61 @@ if (fetchedObjects == nil) {
         
         objectsSection.headerView = containerView;
         
+        
+        UITextView *footerNotesTextView = [[UITextView alloc] initWithFrame:sectionSubFooterNotesTextView.frame];
+        footerNotesTextView.font=sectionSubFooterNotesTextView.font;
+        
+        footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
+        footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
+        
+        footerNotesTextView.textAlignment=UITextAlignmentLeft;
+        footerNotesTextView.tag=61;
+        
+        
+        NSString *monthlyNotes=[interventionType monthlyLogNotesForMonth:self.monthToDisplay clinician:self.clinician];
+        if (monthlyNotes.length) {
+            footerNotesTextView.text=monthlyNotes;
+        }
+        else {
+            footerNotesTextView.hidden=YES;
+        }
+        
+        
+        
+        
+        
+        [footerNotesTextView setContentInset:UIEdgeInsetsMake(-9, 0, 0,0)];
+
 
         UIView *footerContainerView = [[UIView alloc] initWithFrame:sectionSubFooterView.frame];
+        
+        [footerContainerView addSubview:footerNotesTextView];
+        CGSize footerNotesContentSize=footerNotesTextView.contentSize;
+        
+        NSLog(@"content size height is %g",footerNotesContentSize.height);
+        
+        NSLog(@"footernotestextview size height is %g",footerNotesTextView.frame.size.height);
+//        footerNotesTextView.contentSize.width=footerNotesTextView.frame.size.width;
+        if (footerNotesTextView.contentSize.height -9>footerContainerView.frame.size.height) {
+            CGRect footerContainerViewFrame=footerContainerView.frame;
+            footerContainerViewFrame.size.height=footerNotesTextView.contentSize.height-6;
+            
+            
+            footerContainerView.frame=footerContainerViewFrame;
+            
+            
+        }
+        
+        if (footerNotesTextView.contentSize.height>footerNotesTextView.frame.size.height) {
+           
+            CGRect footerNotesTextViewFrame=footerNotesTextView.frame;
+            footerNotesTextViewFrame.size.height=footerNotesTextView.contentSize.height-9;
+            footerNotesTextView.frame=footerNotesTextViewFrame;
+            
+            
+            
+        }
+                
         UIView *subFooterLabelContainerView=[[UIView alloc]initWithFrame:self.sectionSubFooterLabelContainerView.frame];
         subFooterLabelContainerView.backgroundColor=self.sectionSubFooterLabelContainerView.backgroundColor;
         
@@ -307,7 +367,10 @@ if (fetchedObjects == nil) {
         
         footerLabel.textAlignment=UITextAlignmentCenter;
         [subFooterLabelContainerView addSubview:footerLabel];
+        
+                
         [footerContainerView addSubview:subFooterLabelContainerView];
+        
         
         objectsSection.footerView = footerContainerView;
         
@@ -316,6 +379,7 @@ if (fetchedObjects == nil) {
         
                 [objectsModel_ addSection:objectsSection];
         [interventionType didAccessValueForKey:@"subTypes"];
+        
     }
     
   

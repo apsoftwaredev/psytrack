@@ -98,7 +98,7 @@ Keychain API expects as a validly constructed container class.
         // Begin Keychain search setup. The genericPasswordQuery leverages the special user
         // defined attribute kSecAttrGeneric to distinguish itself between other generic Keychain
         // items which may be included by the same application.
-        self.genericPasswordQuery = [[NSMutableDictionary alloc] init];
+        self.genericPasswordQuery = [NSMutableDictionary dictionary];
         
 		[self.genericPasswordQuery setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
         [self.genericPasswordQuery setObject:identifier forKey:(id)kSecAttrGeneric];
@@ -303,7 +303,7 @@ Keychain API expects as a validly constructed container class.
 //	OSStatus junk = noErr;
     if (!self.keychainItemData) 
     {
-        self.keychainItemData = [[NSMutableDictionary alloc] init];
+        self.keychainItemData = [NSMutableDictionary dictionary];
     }
     else if (self.keychainItemData)
     {

@@ -87,9 +87,8 @@
 #endif
 
 	_targetTag = 0; // Clear target tag
-
-	
-
+        
+   
 	[super removeFromSuperview];
 }
 

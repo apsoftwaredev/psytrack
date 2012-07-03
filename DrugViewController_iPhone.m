@@ -406,7 +406,7 @@
 
 }
 
--(void)cancelButtonTapped{
+-(void)myCancelButtonTapped{
     
     //NSLog(@"cancel button Tapped");
     
@@ -428,7 +428,7 @@
     
 }
 
--(void)doneButtonTapped{
+-(void)myDoneButtonTapped{
     
     //NSLog(@"done Button tapped");
     if (isInDetailSubview) {

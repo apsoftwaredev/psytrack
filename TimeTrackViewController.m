@@ -443,7 +443,7 @@
     
 
     
-    NSMutableArray *timeTrackPropertyNamesArray=[NSMutableArray arrayWithObjects:@"dateOfService",  @"time",  @"notes", @"paperwork",  @"supervisor",    @"trainingType", @"site",  @"paid",@"hourlyRate",@"eventIdentifier", nil];
+    NSMutableArray *timeTrackPropertyNamesArray=[NSMutableArray arrayWithObjects:@"dateOfService",  @"time",  @"notes", @"paperwork",  @"supervisor",    @"trainingType", @"site",  @"paid",@"hourlyRate",@"eventIdentifier",@"monthlyLogNotes", nil];
     
     if (currentControllerSetup==kTrackAssessmentSetup||currentControllerSetup==kTrackInterventionSetup||currentControllerSetup==kTrackSupportSetup) {
         
@@ -612,7 +612,7 @@
     
     
    
-    
+    [detailsGroup addPropertyName:@"monthlyLogNotes"];
        
     [timeTrackEntityDef.propertyGroups addGroup:detailsGroup]; 
     
@@ -1161,6 +1161,7 @@
     
     SCPropertyDefinition *trackTypeStrPropertyDef=[trackTypeDef propertyDefinitionWithName:typePropertyNameString];
    trackTypeStrPropertyDef.type=SCPropertyTypeTextView;
+    
     SCPropertyDefinition *trackTypeNotesPropertyDef=[trackTypeDef propertyDefinitionWithName:@"notes"];
     trackTypeNotesPropertyDef.type=SCPropertyTypeTextView;
     
@@ -2333,7 +2334,15 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         //set the date format
         [dateFormatter setDateFormat:@"MMM d, yyyy"];
         //Set the date attributes in the  property definition and make it so the date picker appears 
-        cell.textLabel.text= [dateFormatter stringFromDate:[cellManagedObject valueForKey:@"dateOfService"]];
+        
+        NSDate *totalTime=[cellManagedObject valueForKeyPath:@"time.totalTime"];
+        NSDateFormatter *timeFormatter=[[NSDateFormatter alloc]init];
+        
+        [timeFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+        
+        [timeFormatter setDateFormat:@"HH:mm"];
+        
+        cell.textLabel.text= [NSString stringWithFormat:@"%@; (%@)",[dateFormatter stringFromDate:[cellManagedObject valueForKey:@"dateOfService"]], [timeFormatter stringFromDate:totalTime]];
         if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]) {
             
             
@@ -2359,6 +2368,11 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 }
                 NSString *cellTextString=[cell.textLabel text];
                 if ([cellManagedObject.entity.name isEqualToString:mainEntityString]) {
+                    
+                    
+                    
+                    
+                    
                     //NSLog(@"the managed object entity is Languag spoken Entity");
                     //get the value of the primaryLangugage attribute
                     NSNumber *paperworkNumber=(NSNumber *)[cellManagedObject valueForKey:@"paperwork"];

@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-
+#import "ClinicianEntity.h"
 
 @interface MonthlyPracticumLogTopCell : SCCustomCell <SCTableViewModelDelegate, SCTableViewControllerDelegate, UITableViewDelegate, SCTableViewModelDataSource>{
 
@@ -72,6 +72,7 @@
 @property (nonatomic, weak)IBOutlet UIView *sectionSubFooterView;
 @property (nonatomic, weak)IBOutlet UIView *sectionSubFooterLabelContainerView;
 @property (nonatomic, weak)IBOutlet UILabel *sectionSubFooterLabel;
+@property (nonatomic, weak)IBOutlet UITextView *sectionSubFooterNotesTextView;
 
 @property (nonatomic, weak)IBOutlet UIView *directHoursHeader;
 @property (nonatomic, weak)IBOutlet UIView *directHoursFooter;
@@ -86,7 +87,8 @@
 @property (nonatomic, weak)IBOutlet UIScrollView *directHoursScrollView;
 @property (nonatomic, weak)IBOutlet UIScrollView *indirectHoursScrollView;
 
-
+@property (nonatomic, weak) NSDate *monthToDisplay;
+@property (nonatomic, weak) ClinicianEntity *clinician;
 
 - (CGSize)interventionTableViewContentSize;
 
