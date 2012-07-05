@@ -109,8 +109,11 @@ return @"0:00";
 
 
     NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+     [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    NSLog(@"date in monht is d %@",dateInMonth);
     NSDateComponents *startDateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |NSWeekCalendarUnit|NSDayCalendarUnit) fromDate:dateInMonth];
-    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+   
     //create week
     startDateComponents.day=1;
     startDateComponents.hour=0;
@@ -249,6 +252,7 @@ return 0;
 -(NSTimeInterval )monthTotalHoursForMonthTI:(NSDate *)dateInMonth clinician:(ClinicianEntity*)clinician{
 
     NSCalendar *calendar = [NSCalendar currentCalendar];
+    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     NSDateComponents *startDateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |NSDayCalendarUnit) fromDate:dateInMonth];
     //create a date with these components
     NSRange range = [calendar rangeOfUnit:NSDayCalendarUnit

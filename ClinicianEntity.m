@@ -2,11 +2,12 @@
 //  ClinicianEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 6/7/12.
+//  Created by Daniel Boice on 7/4/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
 #import "ClinicianEntity.h"
+#import "ClinicianGroupEntity.h"
 #import "DemographicProfileEntity.h"
 #import "LogEntity.h"
 #import "MedicationReviewEntity.h"
@@ -14,13 +15,12 @@
 #import "SupervisionParentEntity.h"
 #import "TimeTrackEntity.h"
 #import "PTTAppDelegate.h"
-#import <AddressBook/AddressBook.h>
-#import "ClinicianGroupEntity.h"
 
 @implementation ClinicianEntity
 
 @dynamic lastName;
 @dynamic aBRecordIdentifier;
+@dynamic practiceName;
 @dynamic middleName;
 @dynamic firstName;
 @dynamic myPastSupervisor;
@@ -37,32 +37,31 @@
 @dynamic atMyCurrentSite;
 @dynamic isPrescriber;
 @dynamic logs;
+@dynamic supervisedTime;
 @dynamic awards;
 @dynamic clinicianType;
 @dynamic specialties;
 @dynamic publications;
-@dynamic medicationPrescribed;
 @dynamic groups;
+@dynamic medicationPrescribed;
+@dynamic supervisionSessionsPresent;
 @dynamic influences;
-@dynamic supervisedTime;
 @dynamic diagnoser;
-@dynamic myAdvisor;
 @dynamic site;
 @dynamic existingSupervision;
+@dynamic consultationReferral;
+@dynamic grants;
 @dynamic orientationHistory;
 @dynamic degrees;
-@dynamic advisingGiven;
 @dynamic demographicInfo;
+@dynamic referrals;
 @dynamic employments;
 @dynamic certifications;
 @dynamic licenseNumbers;
 @dynamic memberships;
-@dynamic referrals;
 @dynamic advisingReceived;
 @dynamic currentJobTitles;
 @dynamic teachingExperience;
-@dynamic supervisionSessionsPresent;
-
 
 @synthesize combinedName;
 
@@ -70,9 +69,9 @@
 
 
 -(void)awakeFromInsert{
-
-
-
+    
+    
+    
     NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"ClinicianGroupEntity" inManagedObjectContext:managedObjectContext];
@@ -95,12 +94,12 @@
             
             
         }
-
-
-
+        
+        
+        
     }
-
-
+    
+    
 }
 
 -(NSString *)combinedName{

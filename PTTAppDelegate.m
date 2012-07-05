@@ -99,7 +99,7 @@
 @synthesize okayToDecryptBool=okayToDecryptBool_;
 @synthesize passwordItem=passwordItem_,passCodeItem=passCodeItem_;
 @synthesize colorSwitcher;
-
+@synthesize stopScrollingMonthlyPracticumLog;
 @synthesize changedPassword,changedToken;
 
 + (PTTAppDelegate *)appDelegate {

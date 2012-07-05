@@ -54,6 +54,8 @@ NSLog(@"self bound object is %@",self.boundObject);
         
         monthToDisplay_=(NSDate *)monthlyPracticumLogTopCell.monthToDisplay;
         clinician_=(ClinicianEntity *)monthlyPracticumLogTopCell.clinician;
+        
+        NSLog(@"month is %@ clinician is %@",monthToDisplay_,clinician_);
     }
         self.hoursMonthTotalLabel.text=[interventionTypeSubtype totalHoursToDateForMonthStr:monthToDisplay_  clinician:(ClinicianEntity*)clinician_];
         self.hoursWeek1Label.text=[interventionTypeSubtype week1TotalHoursForMonthStr:monthToDisplay_ clinician:clinician_];

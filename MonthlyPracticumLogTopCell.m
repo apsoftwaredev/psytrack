@@ -14,6 +14,7 @@
 #import "MonthlyPracticumLogBottonCell.h"
 #import "InterventionTypeEntity.h"
 #import "QuartzCore/QuartzCore.h"
+#import "MonthlyPracticumLogTableViewController.h"
 @interface MonthlyPracticumLogTopCell ()
 
 @end
@@ -71,9 +72,12 @@
 @synthesize overallHoursFooter;
 @synthesize signaturesView, pageHeaderView,subTablesContainerView,sectionSubFooterNotesTextView;
 @synthesize monthToDisplay,clinician;
+@synthesize stopScrolling;
+
+static float const MAX_MAIN_SCROLLVIEW_HEIGHT=705;
 
 -(void)willDisplay{
-
+  
     self.accessoryType=UITableViewCellAccessoryNone;
     
     supervisorLabel.text=self.clinician.combinedName;
@@ -137,9 +141,9 @@
 
     self.signaturesView.transform=CGAffineTransformIdentity;
     CGRect signaturesFrame=self.signaturesView.frame;
-    if (shiftSignaturesViewDown>0) {
+    
         signaturesFrame.origin.y=signaturesFrame.origin.y+shiftSignaturesViewDown;
-    }
+  
     
     self.signaturesView.frame=signaturesFrame;
     
@@ -184,12 +188,12 @@
  
     
     CGFloat bottomOfDirectHoursFooter=directHoursFooterFrame.size.height+directHoursFooterFrame.origin.y;
-    CGFloat maxScrollViewHeight=705;
-    CGFloat changeScrollHeightTo=maxScrollViewHeight;
-    if (bottomOfDirectHoursFooter<maxScrollViewHeight) {
+
+    CGFloat changeScrollHeightTo=MAX_MAIN_SCROLLVIEW_HEIGHT;
+    if (bottomOfDirectHoursFooter<MAX_MAIN_SCROLLVIEW_HEIGHT) {
         changeScrollHeightTo=bottomOfDirectHoursFooter;
     }
-    else if(bottomOfDirectHoursFooter>maxScrollViewHeight &&directHoursFooterFrame.origin.y<=maxScrollViewHeight){
+    else if(bottomOfDirectHoursFooter>MAX_MAIN_SCROLLVIEW_HEIGHT &&directHoursFooterFrame.origin.y<=MAX_MAIN_SCROLLVIEW_HEIGHT){
     
         changeScrollHeightTo=directHoursFooterFrame.origin.y-1;
     
@@ -202,17 +206,65 @@
     CGRect mainPageScrollViewFrame=self.mainPageScrollView.frame;
     mainPageScrollViewFrame.size.height=changeScrollHeightTo;
     self.mainPageScrollView.frame=mainPageScrollViewFrame;
+    NSLog(@"mainpagescrollview frame size height is %f",mainPageScrollViewFrame.size.height);
     
-    self.interventionTypesTableView.layer.borderWidth=0;
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(scrollToNextPage)
+     name:@"ScrollMonthlyPracticumLogToNextPage"
+     object:nil];
 }
 
+-(void)scrollToNextPage{
 
+UIScrollView *mainScrollView=self.mainPageScrollView;
+           
+NSLog(@"current offset %f",currentOffsetY);
+    
+  
+    
+    if ((signaturesView.frame.origin.y+signaturesView.frame.size.height)< (mainScrollView.frame.size.height+currentOffsetY)) {
+        
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollMonthlyPracticumLogToNextPage" object:nil];
+        
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        
+        appDelegate.stopScrollingMonthlyPracticumLog=YES;
+        currentOffsetY=0;   
+        
+    } else {
+        
+        CGRect mainScrollViewFrame=self.mainPageScrollView.frame;
+        if (mainScrollViewFrame.size.height <MAX_MAIN_SCROLLVIEW_HEIGHT) {
+            mainScrollViewFrame.size.height=MAX_MAIN_SCROLLVIEW_HEIGHT;
+            currentOffsetY=self.indirectHoursHeader.frame.origin.y;
+            [self.mainPageScrollView setContentOffset:CGPointMake(0, currentOffsetY )];
+           
+        }else {
+            [self.mainPageScrollView setContentOffset:CGPointMake(0, mainScrollView.frame.size.height+currentOffsetY )];
+            currentOffsetY=currentOffsetY+mainScrollView.frame.size.height;
+        }
+        
+    }       
+    
+//    CGRect  mainPageScrollViewFrame=mainPageScrollView.frame;
+//    mainPageScrollViewFrame.size.height=MAX_MAIN_SCROLLVIEW_HEIGHT;
+//    mainScrollView.frame=mainPageScrollViewFrame;
+
+}
 -(void)loadBindingsIntoCustomControls{
 
     [super loadBindingsIntoCustomControls];
-    self.monthToDisplay=[NSDate date];
+    self.monthToDisplay=[self.objectBindings valueForKey:@"monthToDisplay"];
+    
+    
+    NSLog(@"self month to display is %@",self.monthToDisplay);
+    NSLog(@"toplogcell bound object is %@",self.boundObject);
     self.clinician=(ClinicianEntity *)self.boundObject;
-
+    
+    
+    
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
 //

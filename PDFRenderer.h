@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "CoreText/CoreText.h"
 
-@interface PDFRenderer : NSObject
+@interface PDFRenderer : NSObject 
 
 +(void)drawPDF:(NSString*)fileName;
 
@@ -44,4 +44,5 @@
 
 CGFloat GetLineHeightForFont(CTFontRef iFont);
 
++(void)drawPageNumber:(NSInteger )pageNum;
 @end

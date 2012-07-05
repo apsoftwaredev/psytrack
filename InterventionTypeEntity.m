@@ -26,6 +26,8 @@
 
 
     NSCalendar *calendar = [NSCalendar currentCalendar];
+   
+    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     NSDateComponents *startDateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |NSDayCalendarUnit) fromDate:dateInMonth];
     //create a date with these components
     NSRange range = [calendar rangeOfUnit:NSDayCalendarUnit

@@ -209,14 +209,13 @@
 #ifdef DEBUGX
 	NSLog(@"%s", __FUNCTION__);
 #endif
-    
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
 
 	NSString *phrase = nil; // Document password (for unlocking most encrypted PDF files)
 
-	NSString *pdfs = [appDelegate.applicationDocumentsDirectoryString stringByAppendingPathComponent:@"test2.pdf"];
-
+	NSString *pdfs = [appDelegate.applicationDocumentsDirectory.path stringByAppendingPathComponent:@"test20.pdf"];
+NSLog(@"pdfs %@",pdfs);
     [PDFRenderer drawPDF:pdfs];
     
 	NSString *filePath = pdfs  ;// Path to last PDF file

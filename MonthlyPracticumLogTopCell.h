@@ -12,7 +12,7 @@
 
 
     SCArrayOfObjectsModel *objectsModel_;
-
+    CGFloat currentOffsetY;
 
 }
 
@@ -91,7 +91,7 @@
 @property (nonatomic, weak) ClinicianEntity *clinician;
 
 - (CGSize)interventionTableViewContentSize;
-
+@property (nonatomic, assign)BOOL stopScrolling;
 
 
 @end

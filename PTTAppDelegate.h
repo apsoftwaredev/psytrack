@@ -130,6 +130,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 @property (weak, nonatomic)IBOutlet UIView *viewController;
 @property (nonatomic, retain) KeychainItemWrapper *passwordItem;
 @property (nonatomic, retain) KeychainItemWrapper *passCodeItem;
+@property (nonatomic,assign)BOOL stopScrollingMonthlyPracticumLog;
 -(void)loadDatabaseData:(id)sender;
 - (void)initializeiCloudAccess ;
 -(NSURL *)applicationDrugsFileURL;

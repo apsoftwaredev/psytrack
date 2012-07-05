@@ -11,7 +11,8 @@
 #import "MonthlyPracticumLogTableViewController.h"
 #import "PTTAppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
-
+#import "MonthlyPracticumLogTableViewController.h"
+#import "MonthlyPracticumLogTopCell.h"
 #define LEFT_MARGIN 0
 #define RIGHT_MARGIN 0
 #define TOP_MARGIN 0
@@ -40,12 +41,33 @@
 //    
 //    UIView* mainView = [objects objectAtIndex:0];
 
-    MonthlyPracticumLogTableViewController *monthlyPracticumLogTVC=[[MonthlyPracticumLogTableViewController alloc]initWithNibName:@"MonthlyPracticumLogTableViewController" bundle:[NSBundle mainBundle]];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
+
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+NSEntityDescription *entity = [NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:appDelegate.managedObjectContext];
+[fetchRequest setEntity:entity];
+    [fetchRequest setReturnsObjectsAsFaults:NO];
+    
+    
+NSError *error = nil;
+NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+if (fetchedObjects &&fetchedObjects.count) {
+
+    NSManagedObject *managedObject=(NSManagedObject *)[fetchedObjects objectAtIndex:0];
+    ClinicianEntity *clinician=(ClinicianEntity *)managedObject;
+    NSLog(@"managed object class is %@",managedObject.class);
+    
+    MonthlyPracticumLogTableViewController *monthlyPracticumLogTVC=[[MonthlyPracticumLogTableViewController alloc]initWithNibName:(NSString *)@"MonthlyPracticumLogTableViewController" bundle:(NSBundle *)[NSBundle mainBundle] month:(NSInteger)7 year:(NSInteger )2012 supervisor:(ClinicianEntity *)clinician];
+    
+   
     [monthlyPracticumLogTVC loadView];
     [monthlyPracticumLogTVC viewDidLoad];
-    [self createPDFfromUIView:monthlyPracticumLogTVC.view saveToDocumentsWithFileName:@"test2.pdf"];
-
+   
+    // Points the pdf converter to the mutable data object and to the UIView to be converted
+  
+    [self createPDFfromUIView:monthlyPracticumLogTVC.view saveToDocumentsWithFileName:@"test20.pdf" viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTVC];
+}
 
 // Close the PDF context and write the contents out.
 //UIGraphicsEndPDFContext();
@@ -362,22 +384,119 @@
     CFRelease(attrStr);
     CFRelease(framesetter);
 }
++(void)drawPageNumber:(NSInteger )pageNum{
+    
+    
+    NSString *pageString=[NSString stringWithFormat:@"Page %d",pageNum];
+    UIFont *theFont =[UIFont systemFontOfSize:12];
+    
+    CGSize maxSize= CGSizeMake(612, 72);
+    
+    CGSize pageStringSize = [pageString sizeWithFont:theFont constrainedToSize:maxSize lineBreakMode:UILineBreakModeClip];
+    
+    CGRect stringRect =CGRectMake(((612- pageStringSize.width)/2.0), 720 + ((72.0-pageStringSize.height)/2), pageStringSize.width, pageStringSize.height);
+    
+    
+    [pageString drawInRect:stringRect withFont:theFont];
+    
+}
 
-
-+(void)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename
++(void)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTableViewController
 {
     // Creates a mutable data object for updating with binary data, like a byte array
     NSMutableData *pdfData = [NSMutableData data];
-    
+  
     // Points the pdf converter to the mutable data object and to the UIView to be converted
     UIGraphicsBeginPDFContextToData(pdfData, aView.bounds, nil);
-    UIGraphicsBeginPDFPage();
-    CGContextRef pdfContext = UIGraphicsGetCurrentContext();
     
     
-    // draws rect to the view and thus this is captured by UIGraphicsBeginPDFContextToData
+    NSLog(@"monthly practicum log modeledl top cell is  are %i",monthlyPracticumLogTableViewController.tableViewModel.sectionCount);
+    SCArrayOfObjectsModel *objectsModel=(SCArrayOfObjectsModel *)monthlyPracticumLogTableViewController.tableViewModel;
     
-    [aView.layer renderInContext:pdfContext];
+    if (objectsModel.sectionCount) {
+         SCArrayOfObjectsSection *objectsSection=(SCArrayOfObjectsSection *)[objectsModel sectionAtIndex:0];
+        int cellCount=objectsSection.cellCount;
+        if (cellCount) {
+            for (int i=0; i<cellCount; i++) {
+                
+                SCTableViewCell *cell=(SCTableViewCell *)[objectsSection cellAtIndex:i];
+                
+                
+                if ([cell isKindOfClass:[MonthlyPracticumLogTopCell class]]) {
+                    MonthlyPracticumLogTopCell *monthlyPracticumLogTopCell=(MonthlyPracticumLogTopCell *)cell;
+                    
+                    if (monthlyPracticumLogTopCell.subTablesContainerView.frame.size.height>monthlyPracticumLogTopCell.mainPageScrollView.frame.size.height) {
+                        CGContextRef pdfContext;
+                       
+//                        
+//                        CGRect pageRect = aView.bounds;
+                             
+                        // Create our PDF Context with the CFURL, the CGRect we provide, and the above defined dictionary
+                        UIGraphicsBeginPDFContextToData(pdfData, aView.bounds, NULL);
+                        
+                        pdfContext=UIGraphicsGetCurrentContext();
+                        
+                        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                        appDelegate.stopScrollingMonthlyPracticumLog=NO;
+
+                    
+                           
+                        NSInteger currentPage=0;
+                    
+                       
+                        do {
+                            //mark the beginning of a new page
+                            
+                            UIGraphicsBeginPDFPageWithInfo(CGRectMake(0,0,DOC_WIDTH,DOC_HEIGHT), NULL);
+                            
+                            
+                            
+
+                            currentPage++;
+                        
+                            [aView.layer renderInContext:pdfContext];
+                            
+                            
+                            NSLog(@"monthly clinical practicum log cell is %@",monthlyPracticumLogTopCell);
+                           
+                            
+                            [self drawPageNumber:currentPage];
+                            
+                            CGContextTranslateCTM(pdfContext,0, DOC_HEIGHT);
+                            
+                            CGContextScaleCTM(pdfContext, 1.0, -1.0);
+                                                        
+                            [[NSNotificationCenter defaultCenter]postNotificationName:@"ScrollMonthlyPracticumLogToNextPage" object:nil];
+                            
+                           
+                        } while (!appDelegate.stopScrollingMonthlyPracticumLog);
+                        
+                        
+                        
+                        // We are done with our context now, so we release it
+//                        CGContextRelease (pdfContext);
+                       
+                        
+                        
+                        }
+                    
+                    
+                    
+                
+                    
+                
+                
+            }
+        }
+        
+    }
+    
+    }
+    
+    
+    
+   
+    
     
     // remove PDF rendering context
     UIGraphicsEndPDFContext();
@@ -392,6 +511,8 @@
     [pdfData writeToFile:documentDirectoryFilename atomically:YES];
     NSLog(@"documentDirectoryFileName: %@",documentDirectoryFilename);
 }
+
+
 +(void)drawLabels
 {
     NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"MonthlyPracticumLogView" owner:nil options:nil];
@@ -579,5 +700,33 @@ CGFloat GetLineHeightForFont(CTFontRef iFont)
 
 
 
++(CFRange )renderPage:(NSInteger)pageNum  withTextRange: (CFRange )currentRange andFramesetter:(CTFramesetterRef)framesetter{
 
+    CGContextRef currentContext=UIGraphicsGetCurrentContext();
+    
+    CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity);
+    
+    CGRect frameRect=CGRectMake(72,72, 468, 648);
+    
+    CGMutablePathRef framePath=CGPathCreateMutable();
+    CGPathAddRect(framePath, NULL, frameRect);
+    
+    CTFrameRef frameRef =CTFramesetterCreateFrame(framesetter, currentRange, framePath, NULL);
+   
+    
+    CGPathRelease(framePath);
+
+    
+    CGContextTranslateCTM(currentContext,0, 792);
+    
+    CGContextScaleCTM(currentContext, 1.0, -1.0);
+    CTFrameDraw(frameRef, currentContext);
+    
+    currentRange= CTFrameGetVisibleStringRange(frameRef);
+    currentRange.location +=currentRange.length;
+    currentRange.length=0;
+    CFRelease(frameRef);
+    
+    return currentRange;
+}
 @end
