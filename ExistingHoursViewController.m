@@ -677,8 +677,8 @@
     
 
 
-    //Create a class definition for the testingSessionTypeEntity
-    SCEntityDefinition *testingSessionTypeDef = [SCEntityDefinition definitionWithEntityName:@"TestingSessionTypeEntity" 
+    //Create a class definition for the assessmentTypeEntity
+    SCEntityDefinition *assessmentTypeDef = [SCEntityDefinition definitionWithEntityName:@"assessmentTypeEntity" 
                                                         managedObjectContext:managedObjectContext
                                                                propertyNames:[NSArray arrayWithObjects:@"assessmentType", @"notes" , nil]];
     
@@ -708,7 +708,7 @@
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     //create a property definition
     
-    SCPropertyDefinition *testingSessionTypePropertyDef = [assessmentDef propertyDefinitionWithName:@"assessmentType"];
+    SCPropertyDefinition *assessmentTypePropertyDef = [assessmentDef propertyDefinitionWithName:@"assessmentType"];
     
     
     //set the title property name
@@ -717,35 +717,35 @@
     
     //set the property definition type to objects selection
 	
-    testingSessionTypePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *testingSessionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:testingSessionTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    assessmentTypePropertyDef.type = SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *assessmentTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:assessmentTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
-    testingSessionTypeSelectionAttribs.allowAddingItems = YES;
-    testingSessionTypeSelectionAttribs.allowDeletingItems = YES;
-    testingSessionTypeSelectionAttribs.allowMovingItems = YES;
-    testingSessionTypeSelectionAttribs.allowEditingItems = YES;
+    assessmentTypeSelectionAttribs.allowAddingItems = YES;
+    assessmentTypeSelectionAttribs.allowDeletingItems = YES;
+    assessmentTypeSelectionAttribs.allowMovingItems = YES;
+    assessmentTypeSelectionAttribs.allowEditingItems = YES;
     
     //add a placeholder element to tell the user what to do     when there are no other cells                                          
-    testingSessionTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add new assessment type"];
+    assessmentTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add new assessment type"];
     
     
     //add an "Add New" element to appear when user clicks edit
-    testingSessionTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New assessment type"];
+    assessmentTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New assessment type"];
     
     //add the selection attributes to the property definition
-    testingSessionTypePropertyDef.attributes = testingSessionTypeSelectionAttribs;
+    assessmentTypePropertyDef.attributes = assessmentTypeSelectionAttribs;
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     
     
     //Create the property definition for the notes property in the genderDef class
-    SCPropertyDefinition *assessmentTypeNotesPropertyDef = [testingSessionTypeDef propertyDefinitionWithName:@"notes"];
+    SCPropertyDefinition *assessmentTypeNotesPropertyDef = [assessmentTypeDef propertyDefinitionWithName:@"notes"];
     assessmentTypeNotesPropertyDef.type=SCPropertyTypeTextView;
     
     
 
-    testingSessionTypeDef.orderAttributeName=@"order";
+    assessmentTypeDef.orderAttributeName=@"order";
       
 
     

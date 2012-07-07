@@ -40,7 +40,7 @@
 -(int )totalMinutes:(NSTimeInterval) totalTime{
     
     
-    return round(((totalTime/3600) -[self totalHours:totalTime])*60);;
+    return round(((totalTime/3600) -[self totalHours:totalTime])*60);
     
 }
 
@@ -151,7 +151,14 @@ return @"0:00";
     NSDate *endDate = [calendar dateFromComponents:endDateComponents];
     
     NSLog(@"start date is %@ and end date is %@",startDate, endDate);
-    NSPredicate *currentWeekPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND ((dateOfService >= %@) AND (dateOfService < %@)) || (dateOfService = nil) )",clinician.objectID, startDate,endDate];
+    NSPredicate *currentWeekPredicate=nil;
+    if (clinician) {
+        currentWeekPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND ((dateOfService >= %@) AND (dateOfService < %@)) || (dateOfService = nil) )",clinician.objectID, startDate,endDate];
+    }
+    else {
+        currentWeekPredicate = [NSPredicate predicateWithFormat:@"((dateOfService >= %@) AND (dateOfService < %@)) || (dateOfService = nil) ", startDate,endDate];
+    }
+    
     NSLog(@"clinicina is %@",clinician);
     
    
@@ -266,7 +273,14 @@ return 0;
     
     [endDateComponents setDay:range.length];
     NSDate *endDate = [calendar dateFromComponents:endDateComponents];
-    NSPredicate *currentMonthPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND ((dateOfService >= %@) AND (dateOfService <= %@)) || (dateOfService = nil))",clinician.objectID, startDate,endDate];
+    NSPredicate *currentMonthPredicate=nil;
+    
+    if (clinician) {
+         currentMonthPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND ((dateOfService >= %@) AND (dateOfService <= %@)) || (dateOfService = nil))",clinician.objectID, startDate,endDate];
+    }
+    else {
+        currentMonthPredicate = [NSPredicate predicateWithFormat:@" ((dateOfService >= %@) AND (dateOfService <= %@)) || (dateOfService = nil) ", startDate,endDate];
+    }
     
     
     

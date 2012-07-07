@@ -1,5 +1,5 @@
 //
-//  TestingSessionDeliveredEntity.h
+//  AssessmentEntity.h
 //  PsyTrack
 //
 //  Created by Daniel Boice on 6/6/12.
@@ -12,14 +12,14 @@
 
 @class TimeEntity;
 
-@interface TestingSessionDeliveredEntity : ServiceParentEntity
+@interface AssessmentEntity : ServiceParentEntity
 
 @property (nonatomic, retain) NSSet *clientPresentations;
 @property (nonatomic, retain) NSManagedObject *assessmentType;
 @property (nonatomic, retain) TimeEntity *time;
 @end
 
-@interface TestingSessionDeliveredEntity (CoreDataGeneratedAccessors)
+@interface AssessmentEntity (CoreDataGeneratedAccessors)
 
 - (void)addClientPresentationsObject:(NSManagedObject *)value;
 - (void)removeClientPresentationsObject:(NSManagedObject *)value;

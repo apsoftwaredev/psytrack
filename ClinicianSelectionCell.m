@@ -28,6 +28,7 @@
         
     }else if (multiSelect)
     {
+       
         int i=0;
         NSString *labelStr=[NSString string];
         for (ClinicianEntity *clinician in cliniciansArray_) {
@@ -211,7 +212,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
 {
     [super loadBindingsIntoCustomControls];
     
-    self.textLabel.text = nil;
+    self.label.text = nil;
     self.detailTextLabel.text = nil;
     usePrescriber=(BOOL)[(NSNumber *)[self.objectBindings valueForKey:@"91"]boolValue];
     multiSelect=(BOOL)[(NSNumber *)[self.objectBindings valueForKey:@"93"]boolValue];

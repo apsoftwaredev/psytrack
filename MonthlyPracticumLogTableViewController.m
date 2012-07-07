@@ -49,9 +49,13 @@
 NSLog(@"supervisor object is %@",supervisorObject);
      
     SCEntityDefinition *clinicianDef=[SCEntityDefinition definitionWithEntityName:@"ClinicianEntity" managedObjectContext:appDelegate.managedObjectContext propertyNames:[NSArray arrayWithObject:@"lastName"]];
-                                      
+                       
+        NSPredicate *filterPredicate=nil;
         
-        NSPredicate *filterPredicate=[NSPredicate predicateWithFormat:@"self.objectID == %@",supervisorObject.objectID];
+        if (supervisorObject) {
+           filterPredicate  =[NSPredicate predicateWithFormat:@"self.objectID == %@",supervisorObject.objectID];
+        }
+       
     // Create and add the objects section
 	SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil entityDefinition:clinicianDef filterPredicate:filterPredicate];                                 
     

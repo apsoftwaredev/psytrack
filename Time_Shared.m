@@ -174,7 +174,7 @@
     
    
     
-    //insert the custom property definition into the testingSessionDelivered class at index 1
+    //insert the custom property definition into the Assessment class at index 1
     [self.timeDef insertPropertyDefinition:stopwatchDataProperty atIndex:5];
     
     

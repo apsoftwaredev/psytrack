@@ -79,7 +79,7 @@
 @property (nonatomic, weak)IBOutlet UIView *indirectHoursHeader;
 @property (nonatomic, weak)IBOutlet UIView *overallHoursFooter;
 @property (nonatomic, weak)IBOutlet UIView *signaturesView;
-
+@property (nonatomic, weak)IBOutlet UIView *totalInterventionHoursFooterView;
 @property (nonatomic, weak)IBOutlet UIView *pageHeaderView;
 @property (nonatomic, weak)IBOutlet UIView *subTablesContainerView;
 

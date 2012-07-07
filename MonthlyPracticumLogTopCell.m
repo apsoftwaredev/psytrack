@@ -63,7 +63,7 @@
 @synthesize indirectHoursScrollView;
 @synthesize sectionSubHeaderView;
 @synthesize sectionSubHeaderLabel;
-@synthesize sectionSubFooterView,sectionSubFooterLabel,sectionSubFooterLabelContainerView;
+@synthesize sectionSubFooterView,sectionSubFooterLabel,sectionSubFooterLabelContainerView,totalInterventionHoursFooterView;
 @synthesize objectsModel=objectsModel_;
 
 @synthesize directHoursHeader;
@@ -101,6 +101,19 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=705;
     CGFloat assessmentMoreNeededHeight=assessmentTVHeight-self.assessmentTypesTableView.frame.size.height;
     CGFloat supportMoreNeededHeight=supportTVHeight-self.supportActivitieTypesTableView.frame.size.height;
     CGFloat supervisionMoreNeededHeight=supportTVHeight-self.supervisionReceivedTypesTableView.frame.size.height;
+   
+    CGRect indirectHoursHeaderFrame=self.indirectHoursHeader.frame;
+    
+    CGRect assessmentsFrame=self.assessmentTypesTableView.frame;
+    CGRect supportFrame=self.supportActivitieTypesTableView.frame;
+     CGRect supervisionFrame=self.supervisionReceivedTypesTableView.frame;
+    
+    CGFloat assessmentsHeightMoreNeededAndOrigin=assessmentMoreNeededHeight+assessmentsFrame.origin.y+assessmentsFrame.size.height;
+    
+    if ((assessmentsHeightMoreNeededAndOrigin>MAX_MAIN_SCROLLVIEW_HEIGHT)&&(assessmentsFrame.origin.y+assessmentMoreNeededHeight<MAX_MAIN_SCROLLVIEW_HEIGHT) &&(MAX_MAIN_SCROLLVIEW_HEIGHT-assessmentsFrame.origin.y+assessmentMoreNeededHeight<54)) {
+        assessmentMoreNeededHeight=assessmentMoreNeededHeight+(MAX_MAIN_SCROLLVIEW_HEIGHT- assessmentsFrame.origin.y+assessmentMoreNeededHeight);
+    }
+    
     
     CGRect containerFrame=(CGRect ) self.subTablesContainerView.frame;
 
@@ -153,24 +166,24 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=705;
     self.overallHoursFooter.frame=overalHoursFooterFrame;
    
     self.supervisionReceivedTypesTableView.transform=CGAffineTransformIdentity;
-    CGRect supervisionFrame=self.supervisionReceivedTypesTableView.frame;
+   
     supervisionFrame.origin.y=supervisionFrame.origin.y+shiftSupervisionDown;
     supervisionFrame.size.height=supervisionTVHeight;
     self.supervisionReceivedTypesTableView.frame=supervisionFrame;
     
     self.supportActivitieTypesTableView.transform=CGAffineTransformIdentity;
-    CGRect supportFrame=self.supportActivitieTypesTableView.frame;
+    
     supportFrame.origin.y=supportFrame.origin.y+shiftSupportDown;
     supportFrame.size.height=supportTVHeight;
     self.supportActivitieTypesTableView.frame=supportFrame;
     
     self.indirectHoursHeader.transform=CGAffineTransformIdentity;
-    CGRect indirectHoursHeaderFrame=self.indirectHoursHeader.frame;
+    
     indirectHoursHeaderFrame.origin.y=indirectHoursHeaderFrame.origin.y+shiftIndirectHoursHeaderDown;
     self.indirectHoursHeader.frame=indirectHoursHeaderFrame;
     
     self.assessmentTypesTableView.transform=CGAffineTransformIdentity;
-    CGRect assessmentsFrame=self.assessmentTypesTableView.frame;
+    
     assessmentsFrame.origin.y=assessmentsFrame.origin.y+shiftAssessmentsDown;
     assessmentsFrame.size.height=assessmentTVHeight;
     self.assessmentTypesTableView.frame=assessmentsFrame;
@@ -238,7 +251,7 @@ NSLog(@"current offset %f",currentOffsetY);
         CGRect mainScrollViewFrame=self.mainPageScrollView.frame;
         if (mainScrollViewFrame.size.height <MAX_MAIN_SCROLLVIEW_HEIGHT) {
             mainScrollViewFrame.size.height=MAX_MAIN_SCROLLVIEW_HEIGHT;
-            currentOffsetY=self.indirectHoursHeader.frame.origin.y;
+            currentOffsetY=self.indirectHoursHeader.frame.origin.y-5;
             [self.mainPageScrollView setContentOffset:CGPointMake(0, currentOffsetY )];
            
         }else {

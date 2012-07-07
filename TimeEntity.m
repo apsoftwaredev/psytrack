@@ -16,7 +16,7 @@
  *
  */
 #import "TimeEntity.h"
-//#import "TestingSessionDeliveredEntity.h"
+//#import "AssessmentEntity.h"
 
 
 @implementation TimeEntity
@@ -35,7 +35,7 @@
 @dynamic stopwatchRestartAfterStop;
 @dynamic indirectSupportDelived;
 @dynamic interventionDelivered;
-@dynamic testingSessionDelivered;
+@dynamic Assessment;
 @dynamic breaks;
 
 @end

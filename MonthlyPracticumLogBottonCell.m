@@ -53,16 +53,16 @@ NSLog(@"self bound object is %@",self.boundObject);
         
         
         monthToDisplay_=(NSDate *)monthlyPracticumLogTopCell.monthToDisplay;
-        clinician_=(ClinicianEntity *)monthlyPracticumLogTopCell.clinician;
+//        clinician_=(ClinicianEntity *)monthlyPracticumLogTopCell.clinician;
         
         NSLog(@"month is %@ clinician is %@",monthToDisplay_,clinician_);
     }
-        self.hoursMonthTotalLabel.text=[interventionTypeSubtype totalHoursToDateForMonthStr:monthToDisplay_  clinician:(ClinicianEntity*)clinician_];
-        self.hoursWeek1Label.text=[interventionTypeSubtype week1TotalHoursForMonthStr:monthToDisplay_ clinician:clinician_];
-        self.hoursWeek2Label.text=[interventionTypeSubtype week2TotalHoursForMonthStr:monthToDisplay_ clinician:(ClinicianEntity*)clinician_];
-        self.hoursWeek3Label.text=[interventionTypeSubtype week3TotalHoursForMonthStr:monthToDisplay_ clinician:(ClinicianEntity*)clinician_];
-        self.hoursWeek4Label.text=[interventionTypeSubtype week4TotalHoursForMonthStr:monthToDisplay_ clinician:(ClinicianEntity*)clinician_];
-        self.hoursWeek5Label.text=[interventionTypeSubtype week5TotalHoursForMonthStr:monthToDisplay_ clinician:(ClinicianEntity*)clinician_];
+        self.hoursMonthTotalLabel.text=[interventionTypeSubtype totalHoursToDateForMonthStr:monthToDisplay_  clinician:nil];
+        self.hoursWeek1Label.text=[interventionTypeSubtype week1TotalHoursForMonthStr:monthToDisplay_ clinician:nil];
+        self.hoursWeek2Label.text=[interventionTypeSubtype week2TotalHoursForMonthStr:monthToDisplay_ clinician:nil];
+        self.hoursWeek3Label.text=[interventionTypeSubtype week3TotalHoursForMonthStr:monthToDisplay_ clinician:nil];
+        self.hoursWeek4Label.text=[interventionTypeSubtype week4TotalHoursForMonthStr:monthToDisplay_ clinician:nil];
+        self.hoursWeek5Label.text=[interventionTypeSubtype week5TotalHoursForMonthStr:monthToDisplay_ clinician:nil];
   
     
     

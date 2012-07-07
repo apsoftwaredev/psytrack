@@ -22,7 +22,7 @@ typedef enum {
     kTrackSupervisionGivenSetup,
 } PTrackControllerSetup;
 
-static NSString * const kTrackAssessmentEntityName=@"TestingSessionDeliveredEntity";
+static NSString * const kTrackAssessmentEntityName=@"AssessmentEntity";
 static NSString * const kTrackInterventionEntityName=@"InterventionDeliveredEntity";
 static NSString * const kTrackSupportEntityName=@"SupportActivityDeliveredEntity";
 static NSString * const kTrackSupervisionGivenEntityName=@"SupervisionGivenEntity";

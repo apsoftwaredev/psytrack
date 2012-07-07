@@ -18,7 +18,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class TestingSessionDeliveredEntity;
+@class AssessmentEntity;
 
 @interface TimeEntity : NSManagedObject
 
@@ -36,7 +36,7 @@
 @property (nonatomic, strong) NSNumber * stopwatchRestartAfterStop;
 @property (nonatomic, strong) NSManagedObject *indirectSupportDelived;
 @property (nonatomic, strong) NSManagedObject *interventionDelivered;
-@property (nonatomic, strong) TestingSessionDeliveredEntity *testingSessionDelivered;
+@property (nonatomic, strong) AssessmentEntity *Assessment;
 @property (nonatomic, strong) NSSet *breaks;
 @end
 

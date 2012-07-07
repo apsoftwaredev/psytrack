@@ -163,7 +163,7 @@
 	return document;
 }
 
-+ (ReaderDocument *)withDocumentFilePath:(NSString *)filePath password:(NSString *)phrase
++ (ReaderDocument *)withDocumentFilePath:(NSString *)filePath password:(NSString *)phrase checkArchive:(BOOL)checkArchive
 {
 #ifdef DEBUGX
 	NSLog(@"%s", __FUNCTION__);
@@ -171,7 +171,10 @@
 
 	ReaderDocument *document = nil; // ReaderDocument object
 
-	document = [ReaderDocument unarchiveFromFileName:filePath password:phrase];
+    if (checkArchive) {
+        document = [ReaderDocument unarchiveFromFileName:filePath password:phrase];
+    }
+	
 
 	if (document == nil) // Unarchive failed so we create a new ReaderDocument object
 	{

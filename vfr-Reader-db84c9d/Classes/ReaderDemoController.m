@@ -214,13 +214,13 @@
 
 	NSString *phrase = nil; // Document password (for unlocking most encrypted PDF files)
 
-	NSString *pdfs = [appDelegate.applicationDocumentsDirectory.path stringByAppendingPathComponent:@"test20.pdf"];
+	NSString *pdfs = [appDelegate.applicationDocumentsDirectory.path stringByAppendingPathComponent:@"test18.pdf"];
 NSLog(@"pdfs %@",pdfs);
     [PDFRenderer drawPDF:pdfs];
     
 	NSString *filePath = pdfs  ;// Path to last PDF file
 
-	ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:phrase];
+	ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:phrase checkArchive:(BOOL)NO];
 
 	if (document != nil) // Must have a valid ReaderDocument object in order to proceed with things
 	{

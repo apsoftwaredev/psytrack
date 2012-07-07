@@ -1,16 +1,16 @@
 //
-//  TestingSessionDeliveredEntity.m
+//  AssessmentEntity.m
 //  PsyTrack
 //
 //  Created by Daniel Boice on 6/6/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-#import "TestingSessionDeliveredEntity.h"
+#import "AssessmentEntity.h"
 #import "TimeEntity.h"
 
 
-@implementation TestingSessionDeliveredEntity
+@implementation AssessmentEntity
 
 @dynamic clientPresentations;
 @dynamic assessmentType;
