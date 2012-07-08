@@ -1214,6 +1214,48 @@
         
 
     }
+   
+    if (currentControllerSetup==kTrackSupervisionReceivedSetup||currentControllerSetup==kTrackSupervisionGivenSetup) {
+        
+        
+        NSString * subTypePropertyNameString=@"subType";
+        NSString * subTypeEntityNameString=@"SupervisionTypeSubtypeEntity";
+        
+        SCEntityDefinition *trackSubTypeDef=[SCEntityDefinition definitionWithEntityName:subTypeEntityNameString managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:subTypePropertyNameString, @"notes", nil]];
+        
+        
+        
+        
+        trackSubTypeDef.orderAttributeName=@"order";
+        
+        
+        
+        SCPropertyDefinition *trackSubTypePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"subType"];
+        trackSubTypePropertyDef.type =SCPropertyTypeObjectSelection;
+        
+        SCObjectSelectionAttributes *trackSubTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trackSubTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+        trackSubTypeSelectionAttribs.allowAddingItems = YES;
+        trackSubTypeSelectionAttribs.allowDeletingItems = YES;
+        trackSubTypeSelectionAttribs.allowMovingItems = YES;
+        trackSubTypeSelectionAttribs.allowEditingItems = YES;
+        trackSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Add supervision subtypes)"]];
+        
+        trackSubTypePropertyDef.attributes = trackSubTypeSelectionAttribs;
+        
+        SCPropertyDefinition *trackSubTypeStrPropertyDef=[trackSubTypeDef propertyDefinitionWithName:subTypePropertyNameString];
+        trackSubTypeStrPropertyDef.type=SCPropertyTypeTextView;
+        SCPropertyDefinition *trackSubTypeNotesPropertyDef=[trackSubTypeDef propertyDefinitionWithName:@"notes"];
+        trackSubTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+        
+        
+        
+    }
+
+    
+    
+    
+    
+    
     NSString * ratePropertyNameString=@"hourlyRate";
     NSString * rateEntityNameString=@"RateEntity";
     

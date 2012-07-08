@@ -8,7 +8,7 @@
 
 #import "InterventionTypeEntity.h"
 
-@interface ExistingHoursViewController : SCTableViewController <SCTableViewModelDelegate,SCTableViewModelDataSource>{
+@interface ExistingHoursViewController : SCTableViewController <SCTableViewModelDelegate ,SCTableViewModelDataSource>{
 
 
     SCArrayOfObjectsModel *objectsModel;

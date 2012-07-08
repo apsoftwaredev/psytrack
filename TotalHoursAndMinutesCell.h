@@ -8,7 +8,7 @@
 
 
 
-@interface TotalHoursAndMinutesCell : SCCustomCell {
+@interface TotalHoursAndMinutesCell : SCCustomCell <UITextFieldDelegate>{
 
     NSDate *totalTime_;
 
@@ -16,8 +16,8 @@
 }
 
 
-@property (nonatomic, strong)NSNumber *hours;
-@property (nonatomic, strong)NSNumber *minutes;
+@property (nonatomic, assign)int  hours;
+@property (nonatomic, assign)int  minutes;
 @property (nonatomic, strong)NSDate *totalTime;
 @property (nonatomic, strong)IBOutlet UITextField *hoursTF;
 @property (nonatomic, strong)IBOutlet UITextField *minutesTF;

@@ -22,7 +22,14 @@
 }
 
 
+-(void)performInitialization{
 
+    [super performInitialization];
+    
+    self.autoValidateValue=NO;
+
+
+}
 
 -(void)loadBindingsIntoCustomControls{
 
@@ -30,7 +37,7 @@
     [super loadBindingsIntoCustomControls];
     
    
-         self.totalTime=(NSDate *)[self.boundObject valueForKey:@"totalTime"];
+         self.totalTime=(NSDate *)[self.boundObject valueForKey:@"hours"];
    
    
 
@@ -52,10 +59,15 @@
         
         minutesTF.text=[NSString stringWithFormat:@"%i",[self totalMinutes:totalTimeTI]];
         
-        hoursTF.delegate=self;
-        minutesTF.delegate=self;
+       
     }
-
+    else {
+        hoursTF.text=@"0";
+        
+        minutesTF.text=@"0";
+    }
+    hoursTF.delegate=self;
+    minutesTF.delegate=self;
 }
 
 
@@ -79,20 +91,21 @@
     if (!needsCommit) {
         return;
     }
-
+    NSDate *totalTimeFromTF=[self totalTimeFromTextFields];
+    [self.boundObject setValue:totalTimeFromTF forKey:@"hours"];
     
     
     [super commitChanges];
 
 }
--(NSDate*)totalTimeFromHoursStr:(NSString *)hoursStr minutesStr:(NSString *)minutesStr{
+-(NSDate*)totalTimeFromTextFields{
     
     NSTimeInterval totalTimeInterval=0;
     if ([self valueIsValid]) {
         
-        NSTimeInterval hoursTI=[hoursStr intValue]*60*60;
+        NSTimeInterval hoursTI=[hoursTF.text intValue]*60*60;
         
-        NSTimeInterval minutesTI=[minutesStr intValue]*60;
+        NSTimeInterval minutesTI=[minutesTF.text intValue]*60;
         
         totalTimeInterval=hoursTI+minutesTI;
         
@@ -105,24 +118,25 @@
 
 }
 
+
+-(void)textFieldEditingChanged:(id)sender{
+
+    BOOL valuesAreValid=[self.ownerTableViewModel valuesAreValid];
+
+    UIBarButtonItem *doneButton=(UIBarButtonItem *)self.ownerTableViewModel.commitButton;
+    
+    [doneButton setEnabled:valuesAreValid];
+    if (valuesAreValid) {
+        self.needsCommit=YES;
+    }
+
+}
 -(BOOL)valueIsValid{
 
  BOOL  valid=NO;
    
-    if (!hoursTF.text||!hoursTF.text.length) {
-        hoursTF.text=@"0"; 
-        valid=YES;
-    }
-    
-    if (!minutesTF.text||!minutesTF.text.length) {
-        hoursTF.text=@"0"; 
-        valid= YES;
-    }
-    
-    if (valid) {
-        return valid;
-    }
-    
+
+
     NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];
     NSString *hoursNumberStr=[hoursTF.text stringByReplacingOccurrencesOfString:@"," withString:@""];
     NSNumber *number=[numberFormatter numberFromString:hoursNumberStr];
@@ -130,7 +144,7 @@
    
     
     
-    if (hoursNumberStr.length && [hoursNumberStr floatValue]<1000000 &&number) {
+    if (hoursNumberStr.length && [hoursNumberStr floatValue]<1000000  && [hoursNumberStr floatValue]>=0 && number) {
 
         NSScanner* scan = [NSScanner scannerWithString:hoursNumberStr]; 
             int val;         
@@ -147,17 +161,19 @@
         
         
         
-        if (minutesNumberStr.length && [minutesNumberStr floatValue]<1000000 &&number) {
+        if (minutesNumberStr.length && [minutesNumberStr floatValue]<60 && [minutesNumberStr floatValue]>=0 && number) {
             
             NSScanner* scan = [NSScanner scannerWithString:minutesNumberStr]; 
             int val;         
             
             valid=[scan scanInt:&val] && [scan isAtEnd];
             
-        } 
+        } else {
+            valid=NO;
+        }
     }
     
-
+NSLog(@"valid is %i",valid);
     return valid;
 
 

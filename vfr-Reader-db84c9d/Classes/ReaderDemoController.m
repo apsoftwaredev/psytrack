@@ -162,9 +162,7 @@
 	NSLog(@"%s (%d)", __FUNCTION__, interfaceOrientation);
 #endif
 
-	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) // See README
-		return UIInterfaceOrientationIsPortrait(interfaceOrientation);
-	else
+	
 		return YES;
 }
 

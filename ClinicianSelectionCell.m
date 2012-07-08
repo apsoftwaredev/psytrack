@@ -15,7 +15,15 @@
 @synthesize hasChangedClinicians=hasChangedClinicians_;
 @synthesize cliniciansArray=cliniciansArray_;
 
+-(void)performInitialization{
 
+
+    [super performInitialization];
+    
+   self.textLabel.font=[UIFont boldSystemFontOfSize:18];
+
+
+}
 - (void)willDisplay
 {
     
@@ -23,6 +31,7 @@
     
     
     self.textLabel.text=textLabelStr;
+   
     if (!multiSelect && clinicianObject_) {
         self.label.text=(NSString *) self.clinicianObject.combinedName;
         
@@ -252,7 +261,9 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
             
             if (clinicianObject_)
             {
+                NSNumber *selectedIndex=[NSNumber numberWithInt:[self.items indexOfObject:clinicianObject_]];
                 
+                self.selectedItemIndex=selectedIndex;
                 self.label.text =(NSString *) clinicianObject_.combinedName; 
                 
             }
@@ -285,7 +296,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
                     else {
                         labelStr=[labelStr stringByAppendingFormat:@", %@",clinicianInArray.combinedName];
                     }
-
+                    [self.selectedItemsIndexes addObject:[NSNumber numberWithInt:i]];
                 }
                                    
               
@@ -390,6 +401,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
                         else 
                         {
                             labelTextStr=[labelTextStr stringByAppendingFormat:@", %@",clinicianObjectInItems.combinedName];
+                            [self.selectedItemsIndexes addObject:[NSNumber numberWithInt:i]];
                         }
 
                     }  
@@ -408,7 +420,9 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
             
                  //NSLog(@"combined name is %@",clinicianObject_.combinedName);
                 self.label.text=clinicianObject_.combinedName;
-                
+            NSNumber *selectedIndex=[NSNumber numberWithInt:[self.items indexOfObject:clinicianObject_]];
+            
+            self.selectedItemIndex=selectedIndex;
                 NSIndexPath *selfIndexPath=(NSIndexPath *) [self.ownerTableViewModel.modeledTableView indexPathForCell:self];
                 [self.ownerTableViewModel valueChangedForRowAtIndexPath:selfIndexPath];
         }

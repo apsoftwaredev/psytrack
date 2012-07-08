@@ -2,7 +2,7 @@
 //  ExistingHoursEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 4/4/12.
+//  Created by Daniel Boice on 7/8/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
@@ -17,12 +17,10 @@
 @dynamic keyString;
 @dynamic supportActivities;
 @dynamic assessments;
-@dynamic supervision;
+@dynamic supervisionGiven;
 @dynamic directInterventions;
+@dynamic supervisionReceived;
 @synthesize tempNotes;
-
-
-
 
 - (void) awakeFromInsert 
 {
@@ -36,7 +34,7 @@
     NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
     //NSLog(@"reference date %@",referenceDate);
     
-    NSTimeInterval thirtyDays=60*60*24*30;
+//    NSTimeInterval thirtyDays=60*60*24*30;
     NSDate *currentDate=[NSDate date];
     
     
@@ -44,10 +42,11 @@
     if ([(NSDate *)self.startDate isEqualToDate:referenceDate]) {
         [self didAccessValueForKey:@"startDate"];
         [self willChangeValueForKey:(NSString *)@"startDate"];
-        self.startDate = [currentDate dateByAddingTimeInterval:-thirtyDays];
+        NSTimeInterval minusOneDay=-1*60*60*24;
+        self.startDate = [currentDate dateByAddingTimeInterval: minusOneDay];
         [self didChangeValueForKey:(NSString *)@"startDate"];
     }
-
+    
     [self willAccessValueForKey:@"endDate"];
     if ([(NSDate *)self.endDate isEqualToDate:referenceDate]) {
         [self didAccessValueForKey:@"endDate"];
@@ -55,7 +54,7 @@
         self.endDate = currentDate;
         [self didChangeValueForKey:(NSString *)@"endDate"];
     }
-
+    
 }
 - (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
 {
@@ -166,6 +165,5 @@
     
     self.tempNotes=notes;
 }
-
 
 @end

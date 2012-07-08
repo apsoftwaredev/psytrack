@@ -10,7 +10,7 @@
 #import "PTTAppDelegate.h"
 #import "ClinicianSelectionCell.h"
 #import "EncryptedSCTextViewCell.h"
-
+#import "TotalHoursAndMinutesCell.h"
 
 @interface ExistingHoursViewController ()
 
@@ -25,29 +25,29 @@
     // Do any additional setup after loading the view from its nib.
         
     
-    NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
-    
-    
-    
-    
-    
-    // create a spacer
-    UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
-                                   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
-    [buttons addObject:editButton];
-    
-    
-    
-    
-    // create a standard "add" button
-    UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
-                                  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
-    addButton.style = UIBarButtonItemStyleBordered;
-    [buttons addObject:addButton];
-    
-    // stick the buttons in the toolbar
-    self.navigationItem.rightBarButtonItems=buttons;
-    
+//    NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
+//    
+//    
+//    
+//    
+//    
+//    // create a spacer
+//    UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
+//                                   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
+//    [buttons addObject:editButton];
+//    
+//    
+//    
+//    
+//    // create a standard "add" button
+//    UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
+//                                  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
+//    addButton.style = UIBarButtonItemStyleBordered;
+//    [buttons addObject:addButton];
+//    
+//    // stick the buttons in the toolbar
+//    self.navigationItem.rightBarButtonItems=buttons;
+//    
    
     
 	// Get managedObjectContext from application delegate
@@ -61,12 +61,30 @@
     
 
     SCEntityDefinition *existingHoursDef =[SCEntityDefinition definitionWithEntityName:@"ExistingHoursEntity"
-                                                            managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"startDate", @"endDate", @"assessments", @"directInterventions", @"supervision",  @"supportActivities"     , @"notes",   nil]];        
+                                                            managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"startDate", @"endDate", @"assessments", @"directInterventions", @"supervisionReceived", @"supervisionGiven",@"supportActivities"     , @"notes",   nil]];        
     
 
                                           
                                           
     
+    //create the dictionary with the data bindings
+    NSDictionary *supervisorDataBindings = [NSDictionary 
+                                           dictionaryWithObjects:[NSArray arrayWithObjects:@"supervisor",@"Supervisor",[NSNumber numberWithBool:NO],@"supervisor",[NSNumber numberWithBool:NO],nil] 
+                                           forKeys:[NSArray arrayWithObjects:@"1",@"90",@"91",@"92",@"93",nil ]]; // 1 are the control tags
+    
+    //create the custom property definition
+    SCCustomPropertyDefinition *supervisorDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SupervisorData"
+                                                                                        uiElementClass:[ClinicianSelectionCell class] objectBindings:supervisorDataBindings];
+    
+    
+    
+      supervisorDataProperty.autoValidate=NO;
+    //insert the custom property definition into the clientData class at index 
+    
+    [existingHoursDef insertPropertyDefinition:supervisorDataProperty atIndex:0];
+    
+    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+  
     
     //Create the property definition for the start date property in the existing Hours class  definition
     SCPropertyDefinition *existingHoursStartDatePropertyDef = [existingHoursDef propertyDefinitionWithName:@"startDate"];
@@ -481,126 +499,191 @@
                                                                            allowNoSelection:NO autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
     
     
-     
-
-    
-    //Create a class definition for the existingAssessmentEntity
-    SCEntityDefinition *supervisionDef = [SCEntityDefinition definitionWithEntityName:@"ExistingSupervisionEntity" 
-                                                                   managedObjectContext:managedObjectContext
-                                                                          propertyNames:[NSArray arrayWithObjects:@"supervisionType",@"groupHours", @"individualHours",  @"notes",nil]];
-    
-
-    
-    SCPropertyDefinition *supervisionGroupNumberPropertyDef = [supervisionDef propertyDefinitionWithName:@"groupHours"];
-    
-    
-    supervisionGroupNumberPropertyDef.autoValidate=NO;
-    
-    SCPropertyDefinition *supervisionIndividualNumberPropertyDef = [supervisionDef propertyDefinitionWithName:@"individualHours"];
-    
-    
-    supervisionIndividualNumberPropertyDef.autoValidate=NO;
-    
-    
-    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
-    
-    
-    //create an array of objects definition for the supervision to-many relationship that with show up in the same view without a place holder element>.
-    
-    //Create the property definition for the <#propertyName#> property
-    SCPropertyDefinition *supervisionPropertyDef = [existingHoursDef propertyDefinitionWithName:@"supervision"];
-    
-//    supervisionPropertyDef.title=@"Supervision Types";
-    supervisionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supervisionDef
-                                                                                    allowAddingItems:YES
-                                                                                  allowDeletingItems:YES
-                                                                                    allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add supervison hours"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add supervison hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
-    
-   
-    
-    //create an object selection for the supervisionType relationship in the Supervision Entity 
-    
-    
-    //Create a class definition for the supervision TypeEntity
-    SCEntityDefinition *supervisionTypeDef = [SCEntityDefinition definitionWithEntityName:@"SupervisionTypeEntity" 
-                                                        managedObjectContext:managedObjectContext
-                                                               propertyNames:[NSArray arrayWithObjects:@"supervisionType", nil]];
-    
-    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
-    //create a property definition
-   
-    SCPropertyDefinition *supervisionTypePropertyDef = [supervisionDef propertyDefinitionWithName:@"supervisionType"];
-    
-   
-    //set the title property name
-    supervisionDef.titlePropertyName=@"supervisionType.supervisionType;groupHours;individualHours";
-    supervisionDef.titlePropertyNameDelimiter=@" - ";
-    
-    
-    //set the property definition type to objects selection
-	
-    supervisionTypePropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *supervisionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:supervisionTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
-    
-    //set some addtional attributes
-    supervisionTypeSelectionAttribs.allowAddingItems = YES;
-    supervisionTypeSelectionAttribs.allowDeletingItems = YES;
-    supervisionTypeSelectionAttribs.allowMovingItems = NO;
-    supervisionTypeSelectionAttribs.allowEditingItems = YES;
-    
-    //add a placeholder element to tell the user what to do     when there are no other cells                                          
-    supervisionTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add new supervision type"];
-    
-    
-    //add an "Add New" element to appear when user clicks edit
-    supervisionTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New supervision type"];
-    
-    //add the selection attributes to the property definition
-    supervisionTypePropertyDef.attributes = supervisionTypeSelectionAttribs;
-    
-    //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
-    
-    
-    //Create the property definition for the notes property in the genderDef class
-    SCPropertyDefinition *supervisiondNotesPropertyDef = [supervisionDef propertyDefinitionWithName:@"notes"];
-    supervisiondNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-   
-      
     //create the dictionary with the data bindings
-    NSDictionary *clinicianDataBindings = [NSDictionary 
-                                           dictionaryWithObjects:[NSArray arrayWithObjects:@"supervisors",@"Supervisors",[NSNumber numberWithBool:NO],@"supervisors",[NSNumber numberWithBool:YES],nil] 
-                                           forKeys:[NSArray arrayWithObjects:@"1",@"90",@"91",@"92",@"93",nil ]]; // 1 are the control tags
-	
-    //create the custom property definition
-    SCCustomPropertyDefinition *clinicianDataProperty = [SCCustomPropertyDefinition definitionWithName:@"ClinicianData"
-                                                                                    uiElementClass:[ClinicianSelectionCell class] objectBindings:clinicianDataBindings];
-	
+    NSDictionary *hoursDataBindings = [NSDictionary 
+                                       dictionaryWithObjects:[NSArray arrayWithObjects:@"hours",nil] 
+                                       forKeys:[NSArray arrayWithObjects:@"1",nil ]];
+    
 
-    
-    
-    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
-    clinicianDataProperty.autoValidate=TRUE;
-    
-    
-    //insert the custom property definition into the clientData class at index 
-  
-    [supervisionDef insertPropertyDefinition:clinicianDataProperty atIndex:1];
-                        
+     for (NSInteger i=0; i<2; i++) {
+         NSString *supervisionEntityName=nil;
+         NSString *existingSupervisionPropertyName=nil;
+         if (i==0) {
+             supervisionEntityName=@"ExistingSupervisionReceivedEntity";
+            existingSupervisionPropertyName=@"supervisionReceived";
+             
+         }
+         else {
+             supervisionEntityName=@"ExistingSupervisionGivenEntity";
+            existingSupervisionPropertyName=@"supervisionGiven";
+         }
+         
+        //Create a class definition for the existingAssessmentEntity
+        SCEntityDefinition *supervisionDef = [SCEntityDefinition definitionWithEntityName:supervisionEntityName 
+                                                                       managedObjectContext:managedObjectContext
+                                                                              propertyNames:[NSArray arrayWithObjects:@"supervisionType",@"subType", @"notes",nil]];
+        
+
+            //create the custom property definition
+         SCCustomPropertyDefinition *supervisionHoursDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SupervisionHoursData"
+                                                                                                 uiElementNibName:@"TotalHoursAndMinutesCell" objectBindings:hoursDataBindings];
+         
+         
+         //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+         supervisionHoursDataProperty.autoValidate=FALSE;
+         
+         
+         [supervisionDef insertPropertyDefinition:supervisionHoursDataProperty atIndex:2];
+         
+
+        
+        //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+        
+        
+        //create an array of objects definition for the supervision to-many relationship that with show up in the same view without a place holder element>.
+        
+        //Create the property definition for the  property
+        SCPropertyDefinition *supervisionPropertyDef = [existingHoursDef propertyDefinitionWithName:existingSupervisionPropertyName];
+        
+        
+         
+         
+    //    supervisionPropertyDef.title=@"Supervision Types";
+//        supervisionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supervisionDef
+//                                                                                        allowAddingItems:YES
+//                                                                                      allowDeletingItems:YES
+//                                                                                      allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:(i==0)?@"Tap edit to add supervison received hours":@"Tap edit to add supervision given hours"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add supervison hours"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+         supervisionPropertyDef.type=SCPropertyTypeArrayOfObjects;
+         supervisionPropertyDef.attributes =  [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supervisionDef
+                                                   allowAddingItems:YES
+                                                 allowDeletingItems:YES
+                                                   allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:(i==0)?@"tap + to add supervision received hours":@"tap + to add supervision given hours"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];
+        
+        //create an object selection for the supervisionType relationship in the Supervision Entity 
+        
+                 
+         
+        //Create a class definition for the supervision TypeEntity
+        SCEntityDefinition *supervisionTypeDef = [SCEntityDefinition definitionWithEntityName:@"SupervisionTypeEntity" 
+                                                            managedObjectContext:managedObjectContext
+                                                                   propertyNames:[NSArray arrayWithObjects:@"supervisionType", nil]];
+        
+        //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+        //create a property definition
+       
+        SCPropertyDefinition *supervisionTypePropertyDef = [supervisionDef propertyDefinitionWithName:@"supervisionType"];
+         supervisionTypePropertyDef.autoValidate=NO;
+       
+        //set the title property name
+        supervisionDef.titlePropertyName=@"supervisionType.supervisionType;groupHours;individualHours";
+        supervisionDef.titlePropertyNameDelimiter=@" - ";
+        
+        
+        //set the property definition type to objects selection
+        
+        supervisionTypePropertyDef.type = SCPropertyTypeObjectSelection;
+        SCObjectSelectionAttributes *supervisionTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:supervisionTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+        
+        //set some addtional attributes
+        supervisionTypeSelectionAttribs.allowAddingItems = YES;
+        supervisionTypeSelectionAttribs.allowDeletingItems = YES;
+        supervisionTypeSelectionAttribs.allowMovingItems = NO;
+        supervisionTypeSelectionAttribs.allowEditingItems = YES;
+        
+        //add a placeholder element to tell the user what to do     when there are no other cells                                          
+        supervisionTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"Tap edit to add new supervision type"];
+        
+        
+        //add an "Add New" element to appear when user clicks edit
+        supervisionTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New supervision type"];
+        
+        //add the selection attributes to the property definition
+        supervisionTypePropertyDef.attributes = supervisionTypeSelectionAttribs;
+        
+        //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+        
+        
+        //Create the property definition for the notes property in the genderDef class
+        SCPropertyDefinition *supervisiondNotesPropertyDef = [supervisionDef propertyDefinitionWithName:@"notes"];
+        supervisiondNotesPropertyDef.type=SCPropertyTypeTextView;
+        
+       
+         if (i==1) {
+         
+        //create the dictionary with the data bindings
+        NSDictionary *clinicianDataBindings = [NSDictionary 
+                                               dictionaryWithObjects:[NSArray arrayWithObjects:@"supervisors",(i==0)?@"Supervisors":@"Supervisees",[NSNumber numberWithBool:NO],@"supervisors",[NSNumber numberWithBool:YES],nil] 
+                                               forKeys:[NSArray arrayWithObjects:@"1",@"90",@"91",@"92",@"93",nil ]]; // 1 are the control tags
+        
+        //create the custom property definition
+        SCCustomPropertyDefinition *clinicianDataProperty = [SCCustomPropertyDefinition definitionWithName:@"ClinicianData"
+                                                                                        uiElementClass:[ClinicianSelectionCell class] objectBindings:clinicianDataBindings];
+        
+
+        
+        
+        //insert the custom property definition into the clientData class at index 
+        
+        [supervisionDef insertPropertyDefinition:clinicianDataProperty atIndex:3];
+         
+        //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+        clinicianDataProperty.autoValidate=TRUE;
+         }
+        
+        NSString * supervisionSubTypePropertyNameString=@"subType";
+        NSString * supervisionSubTypeEntityNameString=@"SupervisionTypeSubtypeEntity";
+        
+        SCEntityDefinition *supervisionSubTypeDef=[SCEntityDefinition definitionWithEntityName:supervisionSubTypeEntityNameString managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:supervisionSubTypePropertyNameString, @"notes", nil]];
+        
+        
+        
+        
+        supervisionSubTypeDef.orderAttributeName=@"order";
+        
+        
+        
+        SCPropertyDefinition *supervisionSubTypePropertyDef=[supervisionDef propertyDefinitionWithName:@"subType"];
+         supervisionSubTypePropertyDef.autoValidate=NO;
+        supervisionSubTypePropertyDef.type =SCPropertyTypeObjectSelection;
+        
+        SCObjectSelectionAttributes *supervisionSubTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:supervisionSubTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+        supervisionSubTypeSelectionAttribs.allowAddingItems = YES;
+        supervisionSubTypeSelectionAttribs.allowDeletingItems = YES;
+        supervisionSubTypeSelectionAttribs.allowMovingItems = YES;
+        supervisionSubTypeSelectionAttribs.allowEditingItems = YES;
+        supervisionSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Tap edit to add supervision subtypes)"]];
+         supervisionSubTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Add supervision subtypes)"]];
+         
+        supervisionSubTypePropertyDef.attributes = supervisionSubTypeSelectionAttribs;
+        
+        SCPropertyDefinition *supervisionSubTypeStrPropertyDef=[supervisionSubTypeDef propertyDefinitionWithName:supervisionSubTypePropertyNameString];
+        supervisionSubTypeStrPropertyDef.type=SCPropertyTypeTextView;
+        SCPropertyDefinition *supervisionSubTypeNotesPropertyDef=[supervisionSubTypeDef propertyDefinitionWithName:@"notes"];
+        supervisionSubTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+        
+
+    }                   
     
     //Create a class definition for the existingAssessmentEntity
     SCEntityDefinition *supportActivityDef = [SCEntityDefinition definitionWithEntityName:@"ExistingSupportActivityEntity" 
                                                            managedObjectContext:managedObjectContext
-                                                                  propertyNames:[NSArray arrayWithObjects:@"supportActivityType",@"hours",  @"notes",nil]];
+                                                                  propertyNames:[NSArray arrayWithObjects:@"supportActivityType",  @"notes",nil]];
     
     
     
     
-    SCPropertyDefinition *supportActivityNumberPropertyDef = [supportActivityDef propertyDefinitionWithName:@"hours"];
+    //create the custom property definition
+    SCCustomPropertyDefinition *supportHoursDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SupportHoursData"
+                                                                                            uiElementNibName:@"TotalHoursAndMinutesCell" objectBindings:hoursDataBindings];
+	
+    
+    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+    supportHoursDataProperty.autoValidate=FALSE;
     
     
-    supportActivityNumberPropertyDef.autoValidate=NO;
+    [supportActivityDef insertPropertyDefinition:supportHoursDataProperty atIndex:1];
     
+
 
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
@@ -610,12 +693,18 @@
     
     //Create the property definition for the supportActivity property
     SCPropertyDefinition *supportActivitiesPropertyDef = [existingHoursDef propertyDefinitionWithName:@"supportActivities"];
-    supportActivitiesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supportActivityDef
-                                                                                       allowAddingItems:YES
-                                                                                     allowDeletingItems:YES
-                                                                                       allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add support activity hours"]  addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add support activity hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
-    
+//    supportActivitiesPropertyDef.type=SCPropertyTypeArrayOfObjects;
+//    supportActivitiesPropertyDef.attributes =  [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supportActivityDef
+//                                                                                   allowAddingItems:YES
+//                                                                                 allowDeletingItems:YES
+//                                                                                   allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap + to add support activity hours"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add support activity hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];
+    supportActivitiesPropertyDef.type=SCPropertyTypeArrayOfObjects;
+    supportActivitiesPropertyDef.attributes =  [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supportActivityDef
+                                                                                   allowAddingItems:YES
+                                                                                 allowDeletingItems:YES
+                                                                                   allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"tap + to add support activity hours"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];
+
     
     //create an object selection for the supervisionType relationship in the Supervision Entity 
     
@@ -630,7 +719,7 @@
     
     SCPropertyDefinition *supportActivityTypePropertyDef = [supportActivityDef propertyDefinitionWithName:@"supportActivityType"];
     
-    
+    supportActivityTypePropertyDef.autoValidate=NO;
     //set the title property name
     supportActivityDef.titlePropertyName=@"supportActivityType.supportActivityType;hours";
     
@@ -664,23 +753,34 @@
     
     
     //Create a class definition for the existingAssessmentEntity
-    SCEntityDefinition *assessmentDef = [SCEntityDefinition definitionWithEntityName:@"ExisitingAssessmentEntity" 
+    SCEntityDefinition *assessmentDef = [SCEntityDefinition definitionWithEntityName:@"ExistingAssessmentEntity" 
                                                           managedObjectContext:managedObjectContext
-                                                                 propertyNames:[NSArray arrayWithObjects:@"assessmentType",@"hours",@"instruments",@"batteries", @"demographics",@"notes",nil]];
+                                                                 propertyNames:[NSArray arrayWithObjects:@"assessmentType",@"instruments",@"batteries", @"demographics",@"notes",nil]];
     
     
-    SCPropertyDefinition *assessmentNumberPropertyDef = [assessmentDef propertyDefinitionWithName:@"hours"];
+   
+    //create the custom property definition
+    SCCustomPropertyDefinition *assessmentHoursDataProperty = [SCCustomPropertyDefinition definitionWithName:@"AssessmentHoursData"
+                                                                                    uiElementNibName:@"TotalHoursAndMinutesCell" objectBindings:hoursDataBindings];
+	
     
+    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+    assessmentHoursDataProperty.autoValidate=FALSE;
     
-    assessmentNumberPropertyDef.autoValidate=NO;
-    
-    
+   
+    [assessmentDef insertPropertyDefinition:assessmentHoursDataProperty atIndex:1];
 
 
     //Create a class definition for the assessmentTypeEntity
-    SCEntityDefinition *assessmentTypeDef = [SCEntityDefinition definitionWithEntityName:@"assessmentTypeEntity" 
+    SCEntityDefinition *assessmentTypeDef = [SCEntityDefinition definitionWithEntityName:@"AssessmentTypeEntity" 
                                                         managedObjectContext:managedObjectContext
                                                                propertyNames:[NSArray arrayWithObjects:@"assessmentType", @"notes" , nil]];
+    
+    
+    
+    
+      
+
     
     
     
@@ -692,11 +792,11 @@
 //    assessmentsPropertyDef.title=@"Assessment Types";
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     
-   
+    assessmentsPropertyDef.type=SCPropertyTypeArrayOfObjects;
     assessmentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:assessmentDef
                                                                                              allowAddingItems:YES
                                                                                            allowDeletingItems:YES
-                                                                                             allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add assessment hours"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add assessment hours"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                             allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap + to add assessment hours"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -710,7 +810,7 @@
     
     SCPropertyDefinition *assessmentTypePropertyDef = [assessmentDef propertyDefinitionWithName:@"assessmentType"];
     
-    
+    assessmentTypePropertyDef.autoValidate=NO;
     //set the title property name
     assessmentDef.titlePropertyName=@"assessmentType.assessmentType;hours";
     assessmentDef.titlePropertyNameDelimiter=@" - ";
@@ -945,7 +1045,7 @@
     
     
     
-    
+    scoreNameInInstrumentPropertyDef.type=SCPropertyTypeArrayOfObjects;
     scoreNameInInstrumentPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentScoreNameDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"(Define score names)"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to define score name"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	    
     
     
@@ -983,6 +1083,7 @@
     
     //Create the property definition for the instruments property
     SCPropertyDefinition *existingBatteriesPropertyDef = [assessmentDef propertyDefinitionWithName:@"batteries"];
+    existingBatteriesPropertyDef.type=SCPropertyTypeArrayOfObjects;
     existingBatteriesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:existingBatteryDef
                                                                                                allowAddingItems:YES
                                                                                              allowDeletingItems:YES
@@ -1041,6 +1142,7 @@
     //create a property definition
     SCPropertyDefinition *batteryInstrumentsPropertyDef = [batteryDef propertyDefinitionWithName:@"instruments"];
     
+    batteryInstrumentsPropertyDef.type=SCPropertyTypeArrayOfObjects;
     batteryInstrumentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentDef
                                                                                                allowAddingItems:YES
                                                                                              allowDeletingItems:YES
@@ -1058,17 +1160,22 @@
     //Create a class definition for the other psychotherapyEntity
     SCEntityDefinition *interventionDef = [SCEntityDefinition definitionWithEntityName:@"ExistingInterventionEntity" 
                                                         managedObjectContext:managedObjectContext
-                                                               propertyNames:[NSArray arrayWithObjects: @"interventionType"  ,@"interventionSubType",@"hours", @"models",@"demographics",@"notes", nil]];
+                                                               propertyNames:[NSArray arrayWithObjects: @"interventionType"  ,@"interventionSubType", @"models",@"demographics",@"notes", nil]];
     
     
     
     
-    SCPropertyDefinition *existingInterventionNumberPropertyDef = [interventionDef propertyDefinitionWithName:@"hours"];
+    //create the custom property definition
+    SCCustomPropertyDefinition *interventionHoursDataProperty = [SCCustomPropertyDefinition definitionWithName:@"interventionHoursData"
+                                                                                            uiElementNibName:@"TotalHoursAndMinutesCell" objectBindings:hoursDataBindings];
+	
+    
+    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+    interventionHoursDataProperty.autoValidate=FALSE;
     
     
-    existingInterventionNumberPropertyDef.autoValidate=NO;
-    
-    
+    [interventionDef insertPropertyDefinition:interventionHoursDataProperty atIndex:2];
+
 
     
     
@@ -1082,10 +1189,11 @@
     SCPropertyDefinition *directInterventionPropertyDef = [existingHoursDef propertyDefinitionWithName:@"directInterventions"];
     
 //    directInterventionPropertyDef.title=@"Direct Intervention Types";
+    directInterventionPropertyDef.type=SCPropertyTypeArrayOfObjects;
     directInterventionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:interventionDef
                                                                                     allowAddingItems:YES
                                                                                   allowDeletingItems:YES
-                                                                                    allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add direct interventions"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add a direct intervention" ]addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
+                                                                                    allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap + to add direct interventions"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
     
     
     
@@ -1120,7 +1228,7 @@
         
     //set the title property name
     interventionTypeDef.titlePropertyName=@"interventionType";
-    
+    interventionTypePropertyDef.autoValidate=NO;
     //set the property definition type to objects selection
 	
     interventionTypePropertyDef.type = SCPropertyTypeObjectSelection;
@@ -1153,10 +1261,10 @@
   
         
         
-        NSString * subTypePropertyNameString=@"interventionSubType";
-        NSString * subTypeEntityNameString=@"InterventionTypeSubtypeEntity";
+        NSString * interventionSubTypePropertyNameString=@"interventionSubType";
+        NSString * interventionSubTypeEntityNameString=@"InterventionTypeSubtypeEntity";
         
-        SCEntityDefinition *interventionSubTypeDef=[SCEntityDefinition definitionWithEntityName:subTypeEntityNameString managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:subTypePropertyNameString, @"notes", nil]];
+        SCEntityDefinition *interventionSubTypeDef=[SCEntityDefinition definitionWithEntityName:interventionSubTypeEntityNameString managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:interventionSubTypePropertyNameString, @"notes", nil]];
         
         
         
@@ -1166,6 +1274,8 @@
         
         
         SCPropertyDefinition *interventionSubTypePropertyDef=[interventionDef propertyDefinitionWithName:@"interventionSubType"];
+    
+    interventionSubTypePropertyDef.autoValidate=NO;
         interventionSubTypePropertyDef.type =SCPropertyTypeObjectSelection;
         
         SCObjectSelectionAttributes *interventionSubTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:interventionSubTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
@@ -1177,7 +1287,7 @@
         
         interventionSubTypePropertyDef.attributes = interventionSubTypeSelectionAttribs;
         
-        SCPropertyDefinition *interventionSubTypeStrPropertyDef=[interventionSubTypeDef propertyDefinitionWithName:subTypePropertyNameString];
+        SCPropertyDefinition *interventionSubTypeStrPropertyDef=[interventionSubTypeDef propertyDefinitionWithName:interventionSubTypePropertyNameString];
         interventionSubTypeStrPropertyDef.type=SCPropertyTypeTextView;
         SCPropertyDefinition *interventionSubTypeNotesPropertyDef=[interventionSubTypeDef propertyDefinitionWithName:@"notes"];
         interventionSubTypeNotesPropertyDef.type=SCPropertyTypeTextView;
@@ -1249,19 +1359,11 @@
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     
-    objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView  										entityDefinition:existingHoursDef];
-    if (self.navigationItem.rightBarButtonItems.count>1) {
-        
-        objectsModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
-    }
+    objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:existingHoursDef];
     
     
-    
-    if (self.navigationItem.rightBarButtonItems.count >0)
-    {
-        objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
-    }
-    
+
+   
     if(![SCUtilities is_iPad]){
         
         objectsModel.theme=[SCTheme themeWithPath:@"mapper-iPhone.ptt"];
@@ -1276,10 +1378,12 @@
         
     }
     
+    [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
+   
+    objectsModel.editButtonItem = self.editButton;;
     
-//    UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
-//    
-//    self.navigationItem.leftBarButtonItem=cancelButton;
+    objectsModel.addButtonItem = self.addButton;
+
     self.view.backgroundColor=[UIColor clearColor];
     
     
@@ -1287,14 +1391,14 @@
     
     objectsModel.autoAssignDelegateForDetailModels=TRUE;
     objectsModel.autoAssignDataSourceForDetailModels=TRUE;
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reloadBoundValues:)
-                                                 name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
-                                               object:nil];
+    
 
     
     objectsModel.enablePullToRefresh = YES;
     objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
+    
+    
+    
     
     self.tableViewModel=objectsModel;
     
@@ -1312,6 +1416,19 @@
     return YES;
 }
 
+
+-(SCCustomCell *)tableViewModel:(SCTableViewModel *)tableModel cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    SCCustomCell *actionOverviewCell=nil; 
+    if (tableModel.tag==0) {
+    
+        actionOverviewCell  = [SCCustomCell cellWithText:nil objectBindings:nil nibName:@"ExistingHoursOverviewCell"];
+    
+    }
+    
+    
+    return actionOverviewCell;
+
+}
 //-(void)cancelButtonTapped{
 //    
 //    //NSLog(@"cancel button Tapped");
@@ -1345,6 +1462,21 @@ BOOL valid=NO;
         
         SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
         
+        
+        if ([cell isKindOfClass:[ClinicianSelectionCell class]]) {
+            ClinicianSelectionCell *clinicianSelectionCell=(ClinicianSelectionCell *)cell;
+            
+            if (!clinicianSelectionCell.clinicianObject) {
+                return valid;
+            }
+            else {
+                valid=YES;
+                return valid;
+            }
+            
+        }
+        
+        
         NSLog(@"cell class is %@",cell.class);
         NSLog(@"cell tag is %i",cell.tag);
         if ([cell isKindOfClass:[SCDateCell class]]) {
@@ -1354,17 +1486,31 @@ BOOL valid=NO;
             SCDateCell *otherDateCell=nil;
             NSDate *startDate=nil;
             NSDate *endDate=nil;
+            SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
             
-            if ( cell.tag==0) {
+            
+            ClinicianSelectionCell *clinicianSelectionCell=(ClinicianSelectionCell *)[section cellAtIndex:0];
+            ClinicianEntity *clinician=nil;
+            NSLog(@"clinician selelcted ite index is %i",[clinicianSelectionCell.selectedItemIndex intValue]);
+            
+            NSManagedObject *managedObject=[clinicianSelectionCell.items objectAtIndex:[clinicianSelectionCell.selectedItemIndex intValue]];
+            
+            NSLog(@"managed object class is %@",managedObject.class);
+            if (clinicianSelectionCell.clinicianObject) {
+                
+                clinician=clinicianSelectionCell.clinicianObject;
+            }
+            
+            if ( cell.tag==1) {
                 
             
                 otherCell=(SCTableViewCell *)[tableViewModel cellAfterCell:dateCell rewind:NO];
             
                 
             }
-            else if (cell.tag==1){
+            else if (cell.tag==2){
                 SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-                otherCell=(SCTableViewCell *)[section cellAtIndex:0];
+                otherCell=(SCTableViewCell *)[section cellAtIndex:1];
             
                 
             }
@@ -1373,10 +1519,10 @@ BOOL valid=NO;
                 otherDateCell=(SCDateCell *) otherCell;
             }
            
-            if (cell.tag==0) {
+            if (cell.tag==1) {
                 startDate=dateCell.datePicker.date;
                 endDate=otherDateCell.datePicker.date;
-            } else if (cell.tag==1) {
+            } else if (cell.tag==2) {
                 startDate=otherDateCell.datePicker.date;
                 endDate=dateCell.datePicker.date;
             }
@@ -1387,13 +1533,21 @@ BOOL valid=NO;
             if ( ([startDate compare:endDate]) == NSOrderedDescending ) {
                 [appDelegate displayNotification:@"Invalid: The start date is after the end date" forDuration:kPTTScreenLocationTop location:kPTTScreenLocationTop inView:appDelegate.window];
                 return NO;
+            }else if ([startDate isEqualToDate:endDate]) {
+                [appDelegate displayNotification:@"Invalid: Start date is the same as the end date" forDuration:kPTTScreenLocationTop location:kPTTScreenLocationTop inView:appDelegate.window];
+                return NO;
             }
             
             NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
             NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExistingHoursEntity" inManagedObjectContext:managedObjectContext];
             [fetchRequest setEntity:entity];
-            
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"((startDate >= %@) AND (endDate <= %@)) OR ((startDate < %@) AND ((endDate < %@ )AND (endDate > %@) )) OR ((startDate < %@) AND (endDate > %@)   )", startDate, endDate, startDate, endDate,startDate, startDate,endDate];
+                NSPredicate *predicate=nil;
+                if (clinician) {
+                    predicate = [NSPredicate predicateWithFormat:@"(self.supervisor.objectID== %@ AND (startDate >= %@) AND (endDate <= %@)) OR ((startDate < %@) AND ((endDate < %@ )AND (endDate > %@) )) OR ((startDate < %@) AND (endDate > %@)   )", clinician.objectID, startDate, endDate, startDate, endDate,startDate, startDate,endDate];
+                }
+                else {
+                    predicate = [NSPredicate predicateWithFormat:@"((startDate >= %@) AND (endDate <= %@)) OR ((startDate < %@) AND ((endDate < %@ )AND (endDate > %@) )) OR ((startDate < %@) AND (endDate > %@)   )", startDate, endDate, startDate, endDate,startDate, startDate,endDate];
+                }
             [fetchRequest setPredicate:predicate];
             
             NSError *error = nil;
@@ -1404,8 +1558,13 @@ BOOL valid=NO;
             }
             else {
                
-              
-                    [appDelegate displayNotification:@"Existing hours already defined for this date range" forDuration:kPTTScreenLocationTop location:kPTTScreenLocationTop inView:appDelegate.window];
+                if (clinician) {
+                    [appDelegate displayNotification:@"Existing hours already defined for this date range and supervisor." forDuration:kPTTScreenLocationTop location:kPTTScreenLocationTop inView:appDelegate.window];
+
+                }else {
+                     [appDelegate displayNotification:@"Existing hours already defined for this date range" forDuration:kPTTScreenLocationTop location:kPTTScreenLocationTop inView:appDelegate.window];
+                }
+                   
               
                 
             }
@@ -1462,6 +1621,31 @@ BOOL valid=NO;
         
        
     }
+    NSLog(@"cell is kind of class %@",cell.class);
+    NSLog(@"table model tag is %i",tableViewModel.tag);
+    if (tableViewModel.tag==3&&(cell.tag==0||cell.tag==1)) {
+    
+        
+        if([cell isKindOfClass:[SCObjectSelectionCell class]]){
+        
+            SCObjectSelectionCell *selectionCell=(SCObjectSelectionCell *)cell;
+            if (![selectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]] ) {
+                valid=YES;
+            }
+            
+        
+        
+        
+        }
+        if([cell isKindOfClass:[TotalHoursAndMinutesCell class]]){
+        
+            TotalHoursAndMinutesCell *totalHoursAndMinutesCell=(TotalHoursAndMinutesCell *)cell;
+//            UIBarButtonItem *doneButton=(UIBarButtonItem *)objectsModel.commitButton;
+            
+            valid=[totalHoursAndMinutesCell valueIsValid];
+        }
+    }
+    
     
        
     return valid;
@@ -1504,6 +1688,186 @@ BOOL valid=NO;
 
 
 }
+
+-(void)tableViewModel:(SCTableViewModel *)tableModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if (tableModel.tag==0) {
+        NSManagedObject *managedObject=(NSManagedObject *)cell.boundObject;
+            if (managedObject) {
+                
+                
+                SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:indexPath.section];
+                //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
+                if (managedObject && [managedObject respondsToSelector:@selector(entity)]&&![section isKindOfClass:[SCArrayOfStringsSection class]]) {
+        
+                    
+                    ClinicianEntity *supervisor=(ClinicianEntity *)[managedObject valueForKeyPath:@"supervisor"];
+                    
+                    
+                    
+                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        
+        //set the date format
+        [dateFormatter setDateFormat:@"M/d/yyyy"];
+        
+        NSDate *startDate=[managedObject valueForKey:@"startDate"];
+        NSDate *endDate=[managedObject valueForKey:@"endDate"];
+        
+        //                NSString *notes=[managedObject valueForKey:@"notes"];
+        
+        NSMutableSet *assessmentHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"assessments.hours"];
+        
+        NSArray *assessmentHoursArray=[assessmentHoursSet allObjects];
+        //NSLog(@"direct hours are %@",assessmentHoursArray);
+        NSString *assessmentTotalTimeStr=[NSString stringWithFormat:@"%@ Assessment",[self totalTimeStrForHoursArray:assessmentHoursArray]];
+        
+        
+        NSMutableSet *interventionHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"directInterventions.hours"];
+        
+        NSArray *interventionHoursArray=[interventionHoursSet allObjects];
+        NSString *InterventionTotalTimeStr=[NSString stringWithFormat:@"%@ Intervention",[self totalTimeStrForHoursArray:interventionHoursArray]];
+        
+        
+        
+        NSMutableSet *supportHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supportActivities.hours"];
+        
+        NSArray *supportHoursArray=[supportHoursSet allObjects];
+        //NSLog(@"direct hours are %@",supportHoursArray);
+        NSString *supportTotalTimeStr=[NSString stringWithFormat:@"%@ Support",[self totalTimeStrForHoursArray:supportHoursArray]];
+        
+        
+        
+        
+        
+        
+        
+        NSMutableSet *supervisionReceivedHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supervisionReceived.hours"];
+        
+        NSArray *supervisionReceivedHoursArray=[supervisionReceivedHoursSet allObjects];
+        
+        NSString *supervisionReceivedTotalTimeStr=[NSString stringWithFormat:@"%@ Supervision %@",[self totalTimeStrForHoursArray:supervisionReceivedHoursArray],([SCUtilities is_iPad])?@"Received":@"R"];
+        
+        
+        NSMutableSet *supervisionGivenHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supervisionGiven.hours"];
+        
+        NSArray *supervisionGivenHoursArray=[supervisionGivenHoursSet allObjects];
+        
+        NSString *supervisionGivenTotalTimeStr=[NSString stringWithFormat:@"%@ Supervision %@",[self totalTimeStrForHoursArray:supervisionGivenHoursArray],([SCUtilities is_iPad])?@"Given":@"G"];
+        
+        
+        
+        
+        
+        NSString * dateString=[NSString stringWithFormat:@"%@ (%@ - %@) ",supervisor.combinedName,[dateFormatter stringFromDate:startDate],[dateFormatter stringFromDate:endDate]];
+        
+        UILabel *datesLabel=(UILabel *)[cell viewWithTag:71];
+        datesLabel.text=dateString;
+        
+        UILabel *interventionLabel=(UILabel *)[cell viewWithTag:72];
+        interventionLabel.text=InterventionTotalTimeStr;
+        
+        UILabel *assessmentLabel=(UILabel *)[cell viewWithTag:73];
+        assessmentLabel.text=assessmentTotalTimeStr;
+        
+        UILabel *supportLabel=(UILabel *)[cell viewWithTag:75];
+        supportLabel.text=supportTotalTimeStr;
+        
+        UILabel *supervisionReceivedLabel=(UILabel *)[cell viewWithTag:74];
+        supervisionReceivedLabel.text=supervisionReceivedTotalTimeStr;
+        
+        UILabel *supervisionGivenLabel=(UILabel *)[cell viewWithTag:77];
+        supervisionGivenLabel.text=supervisionGivenTotalTimeStr;
+        
+        //            if (![SCUtilities is_iPad]) {
+        //                UIFont *smallerFont=[UIFont systemFontOfSize:15];
+        //                supervisionGivenLabel.font=smallerFont;
+        //                supervisionReceivedLabel.font=smallerFont;
+        //            }
+        UILabel *totalLabel=(UILabel *)[cell viewWithTag:76];
+        NSTimeInterval directHoursTimeInterval=[self totalTimeTIForHoursArray:interventionHoursArray]+[self totalTimeTIForHoursArray:assessmentHoursArray];
+        totalLabel.text=[NSString stringWithFormat:@"%i:%i Total Direct",[self totalHours:directHoursTimeInterval],[self totalMinutes:directHoursTimeInterval]];
+        
+        
+        //                cell.textLabel.text=[NSString stringWithFormat:@"%@ - %@; %@ hrs Assessment; %@ hrs Intervention",[dateFormatter stringFromDate:startDate],[dateFormatter stringFromDate:endDate],assessmentSum, interventionSum];
+        
+        //don't change this to @"" because it causes a bug with the back button
+        cell.textLabel.text=nil;
+        
+    }}
+    }
+    if (tableModel.tag==2) {
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        
+        if (cellManagedObject&& [cellManagedObject respondsToSelector:@selector(entity)]) {
+            
+            if ([cellManagedObject.entity.name isEqualToString:@"ExistingInterventionEntity"]) {
+                NSString *interventionType= [cellManagedObject valueForKeyPath:@"interventionType.interventionType"];
+                
+                NSString *interventionSubType=[cellManagedObject valueForKeyPath:@"interventionSubType.interventionSubType"];
+                
+                NSDate *hours=[cellManagedObject valueForKey:@"hours"];
+                
+                NSString *hoursStr=[self totalTimeStrFromHoursDate:hours];
+                
+                cell.textLabel.text=[NSString stringWithFormat:@"%@ - %@ - %@",interventionType,interventionSubType,hoursStr];
+                
+                
+                
+            }
+            if ([cellManagedObject.entity.name isEqualToString:@"ExistingAssessmentEntity"]) {
+                NSString *assessmentType= [cellManagedObject valueForKeyPath:@"assessmentType.assessmentType"];
+                
+                
+                NSDate *hours=[cellManagedObject valueForKey:@"hours"];
+                
+                NSString *hoursStr=[self totalTimeStrFromHoursDate:hours];
+                
+                cell.textLabel.text=[NSString stringWithFormat:@"%@ - %@",assessmentType,hoursStr];
+                
+                
+                
+            }
+            if ([cellManagedObject.entity.name isEqualToString:@"ExistingSupportActivityEntity"]) {
+                NSString *type= [cellManagedObject valueForKeyPath:@"supportActivityType.supportActivityType"];
+                
+                
+                NSDate *hours=[cellManagedObject valueForKey:@"hours"];
+                
+                NSString *hoursStr=[self totalTimeStrFromHoursDate:hours];
+                
+                cell.textLabel.text=[NSString stringWithFormat:@"%@ - %@",type,hoursStr];
+                
+                
+                
+            }
+            if ([cellManagedObject.entity.name isEqualToString:@"ExistingSupervisionGivenEntity"]||[cellManagedObject.entity.name isEqualToString:@"ExistingSupervisionReceivedEntity"]) {
+                NSString *type= [cellManagedObject valueForKeyPath:@"supervisionType.supervisionType"];
+                
+                NSString *subType= [cellManagedObject valueForKeyPath:@"subType.subType"];
+                
+                NSDate *hours=[cellManagedObject valueForKey:@"hours"];
+                
+                NSString *hoursStr=[self totalTimeStrFromHoursDate:hours];
+                
+               
+                 cell.textLabel.text=[NSString stringWithFormat:@"%@ - %@ - %@",type,subType,hoursStr];
+                
+                
+            }
+            
+            
+        }
+        
+        
+        
+    }
+
+
+
+
+
+
+}
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -1523,8 +1887,6 @@ BOOL valid=NO;
             
             
             
-            UIImage *menuBarBackground=[UIImage imageNamed:@"ipad-menubar-right.png"];
-            [detailTableViewModel.viewController.navigationController.navigationBar setBackgroundImage:menuBarBackground forBarMetrics:UIBarMetricsDefault];
         }
         else {
             
@@ -1699,163 +2061,226 @@ BOOL valid=NO;
 
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//-(void)tableViewModel:(SCTableViewModel *)tableModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//
+//   
+//    
+//    if (tableModel.tag==0) {
+//        NSManagedObject *managedObject=(NSManagedObject *)cell.boundObject;
+//        if (managedObject) {
+//        
+//        
+//        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:indexPath.section];
+//        //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
+//        if (managedObject && [managedObject respondsToSelector:@selector(entity)]&&![section isKindOfClass:[SCArrayOfStringsSection class]]) {
+//            
+//            //NSLog(@"entity name is %@",managedObject.entity.name);
+//            //identify the Languages Spoken table
+//            if ([managedObject.entity.name isEqualToString:@"ExistingHoursEntity"]) {
+//                //define and initialize a date formatter
+//                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//                
+//                //set the date format
+//                [dateFormatter setDateFormat:@"M/d/yyyy"];
+//                
+//                NSDate *startDate=[managedObject valueForKey:@"startDate"];
+//                NSDate *endDate=[managedObject valueForKey:@"endDate"];
+//                
+////                NSString *notes=[managedObject valueForKey:@"notes"];
+//                
+//                NSMutableSet *assessmentHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"assessments.hours"];
+//                
+//                NSArray *assessmentHoursArray=[assessmentHoursSet allObjects];
+//                //NSLog(@"direct hours are %@",assessmentHoursArray);
+//                NSString *assessmentTotalTimeStr=[NSString stringWithFormat:@"%@ Assessment",[self totalTimeStrForHoursArray:assessmentHoursArray]];
+//                
+//                
+//                NSMutableSet *interventionHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"directInterventions.hours"];
+//                
+//                NSArray *interventionHoursArray=[interventionHoursSet allObjects];
+//                NSString *InterventionTotalTimeStr=[NSString stringWithFormat:@"%@ Intervention",[self totalTimeStrForHoursArray:interventionHoursArray]];
+//            
+//               
+//
+//                NSMutableSet *supportHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supportActivities.hours"];
+//                
+//                NSArray *supportHoursArray=[supportHoursSet allObjects];
+//                //NSLog(@"direct hours are %@",supportHoursArray);
+//                NSString *supportTotalTimeStr=[NSString stringWithFormat:@"%@ Support",[self totalTimeStrForHoursArray:supportHoursArray]];
+//                
+//                
+//                
+//                                     
+//                
+//                
+//                
+//                  NSMutableSet *supervisionReceivedHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supervisionReceived.hours"];
+//                
+//                NSArray *supervisionReceivedHoursArray=[supervisionReceivedHoursSet allObjects];
+//                
+//                NSString *supervisionReceivedTotalTimeStr=[NSString stringWithFormat:@"%@ Supervision Received",[self totalTimeStrForHoursArray:supervisionReceivedHoursArray]];
+//
+//               
+//                NSMutableSet *supervisionGivenHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supervisionGiven.hours"];
+//                               
+//                NSArray *supervisionGivenHoursArray=[supervisionGivenHoursSet allObjects];
+//               
+//                NSString *supervisionGivenTotalTimeStr=[NSString stringWithFormat:@"%@ Supervision Given",[self totalTimeStrForHoursArray:supervisionGivenHoursArray]];
+//                
+//
+//                
+//                
+//                
+//              NSString * dateString=[[dateFormatter stringFromDate:startDate] stringByAppendingFormat:@" - %@",[dateFormatter stringFromDate:endDate]];
+//                
+//                UILabel *datesLabel=(UILabel *)[cell viewWithTag:71];
+//                datesLabel.text=dateString;
+//                
+//                UILabel *interventionLabel=(UILabel *)[cell viewWithTag:72];
+//                interventionLabel.text=InterventionTotalTimeStr;
+//                
+//                UILabel *assessmentLabel=(UILabel *)[cell viewWithTag:73];
+//                assessmentLabel.text=assessmentTotalTimeStr;
+//                
+//                 UILabel *supportLabel=(UILabel *)[cell viewWithTag:75];
+//                supportLabel.text=supportTotalTimeStr;
+//                
+//                UILabel *supervisionReceivedLabel=(UILabel *)[cell viewWithTag:74];
+//                supervisionReceivedLabel.text=supervisionReceivedTotalTimeStr;
+//                
+//                UILabel *supervisionGivenLabel=(UILabel *)[cell viewWithTag:77];
+//                supervisionGivenLabel.text=supervisionGivenTotalTimeStr;
+//                
+//                UILabel *totalLabel=(UILabel *)[cell viewWithTag:76];
+//                NSTimeInterval directHoursTimeInterval=[self totalTimeTIForHoursArray:interventionHoursArray]+[self totalTimeTIForHoursArray:assessmentHoursArray];
+//                totalLabel.text=[NSString stringWithFormat:@"%i:%i Total Direct",[self totalHours:directHoursTimeInterval],[self totalMinutes:directHoursTimeInterval]];
+//                               
+//                
+////                cell.textLabel.text=[NSString stringWithFormat:@"%@ - %@; %@ hrs Assessment; %@ hrs Intervention",[dateFormatter stringFromDate:startDate],[dateFormatter stringFromDate:endDate],assessmentSum, interventionSum];
+//                
+//                 cell.textLabel.text=@"";
+//                
+//            }
+//
+//        }
+//    }
+//        
+//}
 
-    NSManagedObject *managedObject=(NSManagedObject *)cell.boundObject;
+
+
+
+
+//}
+-(NSString * )totalTimeStrForHoursArray:(NSArray *)totalTimesArray{
     
-    if (tableViewModel.tag==0) {
-    
-    if (managedObject) {
+    NSTimeInterval totalTime=0;
+    if (totalTimesArray.count) {
         
         
-        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-        //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
-        if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
-            
-            //NSLog(@"entity name is %@",managedObject.entity.name);
-            //identify the Languages Spoken table
-            if ([managedObject.entity.name isEqualToString:@"ExistingHoursEntity"]) {
-                //define and initialize a date formatter
-                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        for (NSDate *totalTimeDateObject in totalTimesArray) {
+            if (totalTimeDateObject&&[totalTimeDateObject isKindOfClass:[NSDate class]]) {
                 
-                //set the date format
-                [dateFormatter setDateFormat:@"M/d/yyyy"];
+                totalTime=totalTime+[totalTimeDateObject timeIntervalSince1970];
+                NSLog(@"time is %@",totalTimeDateObject);
+                NSLog(@"total time is to be added is %e",[totalTimeDateObject timeIntervalSince1970]);
                 
-                NSDate *startDate=[managedObject valueForKey:@"startDate"];
-                NSDate *endDate=[managedObject valueForKey:@"endDate"];
-                
-//                NSString *notes=[managedObject valueForKey:@"notes"];
-                
-                NSMutableSet *assessmentHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"assessments.hours"];
-                
-                NSArray *assessmentHoursArray=[assessmentHoursSet allObjects];
-                //NSLog(@"direct hours are %@",assessmentHoursArray);
-                NSNumber *assessmentSum = nil;
-                
-                for (NSNumber *assessmentHours in assessmentHoursArray) {
-                        //NSLog(@"hours class is %@",[assessmentHours class]);
-                    
-                    if (!assessmentSum) 
-                    {
-                        assessmentSum =[NSNumber numberWithFloat:(float)[assessmentHours floatValue]];
-                    } else 
-                    {
-                        assessmentSum =[NSNumber numberWithFloat:[assessmentSum floatValue] + [assessmentHours floatValue]];
-                    }
-                }
-                NSMutableSet *interventionHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"directInterventions.hours"];
-                
-                NSArray *interventionHoursArray=[interventionHoursSet allObjects];
-                //NSLog(@"direct hours are %@",assessmentHoursArray);
-                NSNumber *interventionSum = nil;
-                
-                for (NSNumber *interventionHours in interventionHoursArray) {
-                    //NSLog(@"hours class is %@",[interventionHours class]);
-                    
-                    if (!interventionSum) 
-                    {
-                        interventionSum =[NSNumber numberWithFloat:(float)[interventionHours floatValue]];
-                    } else 
-                    {
-                        interventionSum =[NSNumber numberWithFloat:[interventionSum floatValue] + [interventionHours floatValue]];
-                    }
-                }
-                
-                NSMutableSet *supportHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supportActivities.hours"];
-                
-                NSArray *supportHoursArray=[supportHoursSet allObjects];
-                //NSLog(@"direct hours are %@",supportHoursArray);
-                NSNumber *supportSum = nil;
-                
-                for (NSNumber *supportHours in supportHoursArray) {
-                    //NSLog(@"hours class is %@",[supportHours class]);
-                    
-                    if (!supportSum) 
-                    {
-                        supportSum =[NSNumber numberWithFloat:(float)[supportHours floatValue]];
-                    } else 
-                    {
-                        supportSum =[NSNumber numberWithFloat:[supportSum floatValue] + [supportHours floatValue]];
-                    }
-                }
-                NSMutableSet *supervisionGroupHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supervision.groupHours"];
-                
-                NSArray *supervisionGroupHoursArray=[supervisionGroupHoursSet allObjects];
-                //NSLog(@"direct hours are %@",supervisionGroupHoursArray);
-                NSNumber *supervisionGroupSum = nil;
-                
-                for (NSNumber *supervisionGroupHours in supervisionGroupHoursArray) {
-                    //NSLog(@"hours class is %@",[supervisionGroupHours class]);
-                    
-                    if (!supervisionGroupSum) 
-                    {
-                        supervisionGroupSum =[NSNumber numberWithFloat:(float)[supervisionGroupHours floatValue]];
-                    } else 
-                    {
-                        supervisionGroupSum =[NSNumber numberWithFloat:[supervisionGroupSum floatValue] + [supervisionGroupHours floatValue]];
-                    }
-                }
-                NSMutableSet *supervisionIndividualHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supervision.individualHours"];
-                
-                NSArray *supervisionIndividualHoursArray=[supervisionIndividualHoursSet allObjects];
-                //NSLog(@"direct hours are %@",supervisionIndividualHoursArray);
-                NSNumber *supervisionIndividualSum = nil;
-                
-                for (NSNumber *supervisionIndividualHours in supervisionIndividualHoursArray) {
-                    //NSLog(@"hours class is %@",[supervisionIndividualHours class]);
-                    
-                    if (!supervisionIndividualSum) 
-                    {
-                        supervisionIndividualSum =[NSNumber numberWithFloat:(float)[supervisionIndividualHours floatValue]];
-                    } else 
-                    {
-                        supervisionIndividualSum =[NSNumber numberWithFloat:[supervisionIndividualSum floatValue] + [supervisionIndividualHours floatValue]];
-                    }
-                }
-
-               
-                float totalSum=[supervisionIndividualSum floatValue]+[supervisionGroupSum floatValue]+[supportSum floatValue]+[interventionSum floatValue]+[assessmentSum floatValue];
-                
-                
-              NSString * dateString=[[dateFormatter stringFromDate:startDate] stringByAppendingFormat:@" - %@",[dateFormatter stringFromDate:endDate]];
-                
-                UILabel *datesLabel=(UILabel *)[cell viewWithTag:71];
-                datesLabel.text=dateString;
-                
-                UILabel *interventionLabel=(UILabel *)[cell viewWithTag:72];
-                interventionLabel.text=[NSString stringWithFormat:@"%.2f Intervention",[interventionSum floatValue]];
-                
-                UILabel *assessmentLabel=(UILabel *)[cell viewWithTag:73];
-                assessmentLabel.text=[NSString stringWithFormat:@"%.2f Assessment",[assessmentSum floatValue]];
-                
-                 UILabel *supportLabel=(UILabel *)[cell viewWithTag:75];
-                supportLabel.text=[NSString stringWithFormat:@"%.2f Support",[supportSum floatValue]];
-                
-                UILabel *supervisionLabel=(UILabel *)[cell viewWithTag:74];
-                supervisionLabel.text=[NSString stringWithFormat:@"%.2f Supervision",[supervisionIndividualSum floatValue]+[supervisionGroupSum floatValue]];
-                
-
-                UILabel *totalLabel=(UILabel *)[cell viewWithTag:76];
-                totalLabel.text=[NSString stringWithFormat:@"%.2f Total",totalSum];
-                               
-                
-//                cell.textLabel.text=[NSString stringWithFormat:@"%@ - %@; %@ hrs Assessment; %@ hrs Intervention",[dateFormatter stringFromDate:startDate],[dateFormatter stringFromDate:endDate],assessmentSum, interventionSum];
-                
-                 cell.textLabel.text=@"";
-                return;
             }
+        }
+        
+        
+        
+        NSString *totalHoursStr=[NSString stringWithFormat:@"%i",[self totalHours:totalTime]];
+        int totalMinutes=[self totalMinutes:totalTime];
+        
+        NSString *totalMinutesStr=nil;
+        if (totalMinutes<10 && totalMinutes>=0 ) {
+             totalMinutesStr=[NSString stringWithFormat:@":0%i",totalMinutes];
+        }
+        else if (totalMinutes>9){
+             totalMinutesStr=[NSString stringWithFormat:@":%i",totalMinutes];
+        }
+        else {
+            totalMinutesStr=@":00";
+        }
+        return [totalHoursStr stringByAppendingString:totalMinutesStr];
 
-        }}
+    }
+    else {
+        return @"0:00";
+    }
+   
+    
+}
+
+-(NSString *)totalTimeStrFromHoursDate:(NSDate *)hours{
+
+
+    NSString *totalTimeStr=nil;
+    if (hours) {
+        
+        NSTimeInterval totalTI=[hours timeIntervalSince1970];
+        int hoursInt=[self totalHours:totalTI];
+        
+        int minuteInt=[self totalMinutes:totalTI];
+        if (minuteInt>9) {
+            totalTimeStr=[NSString stringWithFormat:@"%i:%i",hoursInt,minuteInt];
+        }
+        else 
+        {
+            
+            totalTimeStr=[NSString stringWithFormat:@"%i:0%i",hoursInt,minuteInt];
+        }
+        
         
     }
-
-
+    else {
+        totalTimeStr=@"0:00";
+    }
+    
+    return totalTimeStr;
 
 
 
 }
+-(NSTimeInterval )totalTimeTIForHoursArray:(NSArray *)totalTimesArray{
+    
+    NSTimeInterval totalTime=0;
+    if (totalTimesArray.count) {
+        
+        
+        for (NSDate *totalTimeDateObject in totalTimesArray) {
+            if (totalTimeDateObject&&[totalTimeDateObject isKindOfClass:[NSDate class]]) {
+                
+                totalTime=totalTime+[totalTimeDateObject timeIntervalSince1970];
+                NSLog(@"time is %@",totalTimeDateObject);
+                NSLog(@"total time is to be added is %e",[totalTimeDateObject timeIntervalSince1970]);
+                
+            }
+        }
+        
+        
+        
+               
+    }
+        
+     return totalTime;
+}
 
 
+-(int )totalHours:(NSTimeInterval) totalTime{
+    
+    
+    return totalTime/3600;
+    
+}
+
+-(int )totalMinutes:(NSTimeInterval) totalTime{
+    
+    
+    return round(((totalTime/3600) -[self totalHours:totalTime])*60);;
+    
+}
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 
@@ -1872,22 +2297,5 @@ BOOL valid=NO;
 
 }
 
-
-- (SCCustomCell *)tableViewModel:(SCTableViewModel *)tableModel cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	
-    
-    // Create & return a custom cell based on the cell in ContactOverviewCell.xib
-	
-    
-    SCCustomCell *actionOverviewCell=nil;
-    if (tableModel.tag==0) {
-        actionOverviewCell= [SCCustomCell cellWithText:nil boundObject:nil objectBindings:nil
-                                            nibName:@"ExistingHoursOverviewCell"];
-    }
-	 
-	
-	return actionOverviewCell;
-}
 
 @end
