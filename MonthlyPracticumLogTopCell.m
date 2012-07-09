@@ -15,6 +15,7 @@
 #import "InterventionTypeEntity.h"
 #import "QuartzCore/QuartzCore.h"
 #import "MonthlyPracticumLogTableViewController.h"
+#import "SupervisorsAndTotalTimesForMonth.h"
 @interface MonthlyPracticumLogTopCell ()
 
 @end
@@ -28,7 +29,7 @@
 @synthesize interventionHoursWeek4Label;
 @synthesize interventionHoursWeek5Label;
 @synthesize interventionHoursMonthTotalLabel;
-@synthesize interventionHoursCumulativeLabel;
+@synthesize interventionHoursCummulativeLabel;
 @synthesize interventionHoursTotalHoursLabel;
 
 @synthesize assessmentHoursWeek1Label;
@@ -37,7 +38,7 @@
 @synthesize assessmentHoursWeek4Label;
 @synthesize assessmentHoursWeek5Label;
 @synthesize assessmentHoursMonthTotalLabel;
-@synthesize assessmentHoursCumulativeLabel;
+@synthesize assessmentHoursCummulativeLabel;
 @synthesize assessmentHoursTotalHoursLabel;
 
 @synthesize supportHoursWeek1Label;
@@ -46,7 +47,7 @@
 @synthesize supportHoursWeek4Label;
 @synthesize supportHoursWeek5Label;
 @synthesize supportHoursMonthTotalLabel;
-@synthesize supportHoursCumulativeLabel;
+@synthesize supportHoursCummulativeLabel;
 @synthesize supportHoursTotalHoursLabel;
 
 @synthesize supervisionHoursWeek1Label;
@@ -55,7 +56,7 @@
 @synthesize supervisionHoursWeek4Label;
 @synthesize supervisionHoursWeek5Label;
 @synthesize supervisionHoursMonthTotalLabel;
-@synthesize supervisionHoursCumulativeLabel;
+@synthesize supervisionHoursCummulativeLabel;
 @synthesize supervisionHoursTotalHoursLabel;
 
 @synthesize mainPageScrollView;
@@ -73,6 +74,30 @@
 @synthesize signaturesView, pageHeaderView,subTablesContainerView,sectionSubFooterNotesTextView;
 @synthesize monthToDisplay,clinician;
 @synthesize stopScrolling;
+
+
+@synthesize directHoursWeek1Label;
+@synthesize directHoursWeek2Label;
+@synthesize directHoursWeek3Label;
+@synthesize directHoursWeek4Label;
+@synthesize directHoursWeek5Label;
+@synthesize directHoursMonthTotalLabel;
+@synthesize directHoursCummulativeLabel;
+@synthesize directHoursTotalHoursLabel;
+@synthesize directHoursWeekUndefinedLabel;
+
+@synthesize overallHoursWeek1Label;
+@synthesize overallHoursWeek2Label;
+@synthesize overallHoursWeek3Label;
+@synthesize overallHoursWeek4Label;
+@synthesize overallHoursWeek5Label;
+@synthesize overallHoursMonthTotalLabel;
+@synthesize overallHoursCummulativeLabel;
+@synthesize overallHoursTotalHoursLabel;
+@synthesize overallHoursWeekUndefinedLabel;
+
+@synthesize interventionHoursWeekUndefinedLabel,assessmentoursWeekUndefinedLabel,supportHoursWeekUndefinedLabel,supervisionHoursWeekUndefinedLabel;
+
 
 static float const MAX_MAIN_SCROLLVIEW_HEIGHT=705;
 
@@ -235,8 +260,10 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
 NSLog(@"current offset %f",currentOffsetY);
     
   
+    NSLog(@"signatures view fram e origin y %g",signaturesView.frame.origin.y+self.signaturesView.frame.size.height);
     
-    if ((signaturesView.frame.origin.y+signaturesView.frame.size.height)< (mainScrollView.frame.size.height+currentOffsetY)) {
+  
+    if ((self.signaturesView.frame.origin.y+self.signaturesView.frame.size.height)<=(mainScrollView.frame.size.height+currentOffsetY+5)) {
         
         [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollMonthlyPracticumLogToNextPage" object:nil];
         
@@ -251,8 +278,10 @@ NSLog(@"current offset %f",currentOffsetY);
         CGRect mainScrollViewFrame=self.mainPageScrollView.frame;
         if (mainScrollViewFrame.size.height <MAX_MAIN_SCROLLVIEW_HEIGHT) {
             mainScrollViewFrame.size.height=MAX_MAIN_SCROLLVIEW_HEIGHT;
-            currentOffsetY=self.indirectHoursHeader.frame.origin.y-5;
+            self.mainPageScrollView.frame=mainScrollViewFrame;
+            currentOffsetY=currentOffsetY+ self.indirectHoursHeader.frame.origin.y-5;
             [self.mainPageScrollView setContentOffset:CGPointMake(0, currentOffsetY )];
+            
            
         }else {
             [self.mainPageScrollView setContentOffset:CGPointMake(0, mainScrollView.frame.size.height+currentOffsetY )];
@@ -269,34 +298,22 @@ NSLog(@"current offset %f",currentOffsetY);
 -(void)loadBindingsIntoCustomControls{
 
     [super loadBindingsIntoCustomControls];
-    self.monthToDisplay=[self.objectBindings valueForKey:@"monthToDisplay"];
+    
+    SupervisorsAndTotalTimesForMonth *totalsObject=(SupervisorsAndTotalTimesForMonth *)self.boundObject;
+    
+    
+    self.monthToDisplay=totalsObject.monthToDisplay;
     
     
     NSLog(@"self month to display is %@",self.monthToDisplay);
     NSLog(@"toplogcell bound object is %@",self.boundObject);
-    self.clinician=(ClinicianEntity *)self.boundObject;
+   
     
     
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-//
-//    SCEntityDefinition *interventionTypeDef=[SCEntityDefinition definitionWithEntityName:@"InterventionTypeEntity" managedObjectContext:appDelegate.managedObjectContext propertyNames:[NSArray arrayWithObjects:@"interventionType", nil]];
-//    
-//    
-//    // Create and add the objects section
-//	SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil entityDefinition:interventionTypeDef];                                 
-//    
-//    objectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
-//    {
-//        // Create & return a custom cell based on the cell in ContactOverviewCell.xib
-//        NSString *bindingsString = @"20:subType"; // 1,2,3 are the control tags
-//        MonthlyPracticumLogMiddleSubCell *contactOverviewCell = [MonthlyPracticumLogMiddleSubCell cellWithText:nil objectBindingsString:bindingsString nibName:@"MonthlyPracticumLogMiddleSubCell"];
-//        
-//        
-//        return contactOverviewCell;
-//    };
-//    
+
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 NSEntityDescription *entity = [NSEntityDescription entityForName:@"InterventionTypeEntity" inManagedObjectContext:appDelegate.managedObjectContext];
 [fetchRequest setEntity:entity];
@@ -449,29 +466,118 @@ if (fetchedObjects == nil) {
     
   
     
-//    self.interventionTypesTableView.transform      = CGAffineTransformIdentity;
-//   
-//
-//    
-//    
-//    CGRect frame=CGRectMake(self.interventionTypesTableView.frame.origin.x, self.interventionTypesTableView.frame.origin.y, self.interventionTypesTableView.frame.size.width, self.interventionTypesTableView.contentSize.height);
-//    self.interventionTypesTableView.frame=frame;
-    
     
     self.interventionTypesTableView.autoresizingMask=UIViewAutoresizingFlexibleHeight;
    NSLog(@"background size height is %g",self.interventionTypesTableView.backgroundView.frame.size.height);
     objectsModel_.delegate=self;
     
+   
+    self.interventionHoursWeek1Label.text=totalsObject.interventionTotalWeek1Str;
+    self.assessmentHoursWeek1Label.text=totalsObject.assessmentTotalWeek1Str;
+    self.supportHoursWeek1Label.text=totalsObject.supportTotalWeek1Str;
+    self.supervisionHoursWeek1Label.text=totalsObject.supervisionTotalWeek1Str;
     
-     
+    self.interventionHoursWeek2Label.text=totalsObject.interventionTotalWeek2Str;
+    self.assessmentHoursWeek2Label.text=totalsObject.assessmentTotalWeek2Str;
+    self.supportHoursWeek2Label.text=totalsObject.supportTotalWeek2Str;
+    self.supervisionHoursWeek2Label.text=totalsObject.supervisionTotalWeek2Str;
+    
+    self.interventionHoursWeek3Label.text=totalsObject.interventionTotalWeek3Str;
+    self.assessmentHoursWeek3Label.text=totalsObject.assessmentTotalWeek3Str;
+    self.supportHoursWeek3Label.text=totalsObject.supportTotalWeek3Str;
+    self.supervisionHoursWeek3Label.text=totalsObject.supervisionTotalWeek3Str;
+    
+    self.interventionHoursWeek4Label.text=totalsObject.interventionTotalWeek4Str;
+    self.assessmentHoursWeek4Label.text=totalsObject.assessmentTotalWeek4Str;
+    self.supportHoursWeek4Label.text=totalsObject.supportTotalWeek4Str;
+    self.supervisionHoursWeek4Label.text=totalsObject.supervisionTotalWeek4Str;
+    
+    self.interventionHoursWeek5Label.text=totalsObject.interventionTotalWeek5Str;
+    self.assessmentHoursWeek5Label.text=totalsObject.assessmentTotalWeek5Str;
+    self.supportHoursWeek5Label.text=totalsObject.supportTotalWeek5Str;
+    self.supervisionHoursWeek5Label.text=totalsObject.supervisionTotalWeek5Str;
+  
+    if (totalsObject.overallTotalWeekUndefinedTI) {
+        self.interventionHoursWeekUndefinedLabel.text=totalsObject.interventionTotalWeekUndefinedStr;
+        self.assessmentoursWeekUndefinedLabel.text=totalsObject.assessmentTotalWeekUndefinedStr;
+        self.supportHoursWeekUndefinedLabel.text=totalsObject.supportTotalWeekUndefinedStr;
+        self.supervisionHoursWeekUndefinedLabel.text=totalsObject.supervisionTotalWeekUndefinedStr;
+        self.directHoursWeekUndefinedLabel.text=totalsObject.directTotalWeekUndefinedStr;
+        self.overallHoursWeekUndefinedLabel.text=totalsObject.overallTotalWeekUndefinedStr;
+    }
+   
+    self.directHoursWeek1Label.text=totalsObject.directTotalWeek1Str;
+    self.directHoursWeek2Label.text=totalsObject.directTotalWeek2Str;
+    self.directHoursWeek3Label.text=totalsObject.directTotalWeek3Str;
+    self.directHoursWeek4Label.text=totalsObject.directTotalWeek4Str;
+    self.directHoursWeek5Label.text=totalsObject.directTotalWeek5Str;
+    
+    
+    self.overallHoursWeek1Label.text=totalsObject.overallTotalWeek1Str;
+    self.overallHoursWeek2Label.text=totalsObject.overallTotalWeek2Str;
+    self.overallHoursWeek3Label.text=totalsObject.overallTotalWeek3Str;
+    self.overallHoursWeek4Label.text=totalsObject.overallTotalWeek4Str;
+    self.overallHoursWeek5Label.text=totalsObject.overallTotalWeek5Str;
+    
+    self.interventionHoursMonthTotalLabel.text=totalsObject.interventionTotalForMonthStr;
+    self.assessmentHoursMonthTotalLabel.text=totalsObject.assessmentTotalForMonthStr;
+    self.supportHoursMonthTotalLabel.text=totalsObject.supportTotalForMonthStr;
+    self.supervisionHoursMonthTotalLabel.text=totalsObject.supervisionTotalForMonthStr;
+    self.directHoursMonthTotalLabel.text=totalsObject.directTotalForMonthStr;
+    self.overallHoursMonthTotalLabel.text=totalsObject.overallTotalForMonthStr;
+    
+    
+    self.interventionHoursCummulativeLabel.text=totalsObject.interventionTotalCummulativeStr;
+    self.assessmentHoursCummulativeLabel.text=totalsObject.assessmentTotalCummulativeStr;
+    self.supportHoursCummulativeLabel.text=totalsObject.supportTotalCummulativeStr;
+    self.supervisionHoursCummulativeLabel.text=totalsObject.supervisionTotalCummulativeStr;
+    self.directHoursCummulativeLabel.text=totalsObject.directTotalCummulativeStr;
+    self.overallHoursCummulativeLabel.text=totalsObject.overallTotalCummulativeStr;
+    
+    self.interventionHoursTotalHoursLabel.text=totalsObject.interventionTotalToDateStr;
+    self.assessmentHoursTotalHoursLabel.text=totalsObject.assessmentTotalToDateStr;
+    self.supportHoursTotalHoursLabel.text=totalsObject.supportTotalToDateStr;
+    self.supervisionHoursTotalHoursLabel.text=totalsObject.supervisionTotalToDateStr;
+    self.directHoursTotalHoursLabel.text=totalsObject.directTotalToDateStr;
+    self.overallHoursTotalHoursLabel.text=totalsObject.overallTotalToDateStr;
+    
 
+    
 
-
+    
+  
 
 
 
 
 }
+
+-(NSArray *)fetchObjectsFromEntity:(NSString *)entityStr filterPredicate:(NSPredicate *)filterPredicate{
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityStr inManagedObjectContext:appDelegate.managedObjectContext];
+    
+    [fetchRequest setEntity:entity];
+    
+    
+    if (filterPredicate) {
+        [fetchRequest setPredicate:filterPredicate];
+    }
+    
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    return fetchedObjects;
+    
+}
+
+
 - (CGSize)interventionTableViewContentSize
 {
     

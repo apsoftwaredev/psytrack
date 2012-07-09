@@ -9,6 +9,8 @@
 #import "MonthlyPracticumLogTableViewController.h"
 #import "MonthlyPracticumLogTopCell.h"
 #import "PTTAppDelegate.h"
+#import "SupervisorsAndTotalTimesForMonth.h"
+
 @interface MonthlyPracticumLogTableViewController ()
 
 @end
@@ -43,21 +45,23 @@
      name:@"ScrollPracticumLogToNextSupervisorCell"
      object:nil];
 
-    if (supervisorObject) {
+    
    
    
-NSLog(@"supervisor object is %@",supervisorObject);
+    NSLog(@"supervisor object is %@",supervisorObject);
      
-    SCEntityDefinition *clinicianDef=[SCEntityDefinition definitionWithEntityName:@"ClinicianEntity" managedObjectContext:appDelegate.managedObjectContext propertyNames:[NSArray arrayWithObject:@"lastName"]];
-                       
+                           
         NSPredicate *filterPredicate=nil;
         
-        if (supervisorObject) {
-           filterPredicate  =[NSPredicate predicateWithFormat:@"self.objectID == %@",supervisorObject.objectID];
-        }
+      
+    SCClassDefinition *supervisorsAndTotalTimesForMonthDef=[SCClassDefinition definitionWithClass:[SupervisorsAndTotalTimesForMonth class] autoGeneratePropertyDefinitions:YES];
        
     // Create and add the objects section
-	SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil entityDefinition:clinicianDef filterPredicate:filterPredicate];                                 
+    SupervisorsAndTotalTimesForMonth *supervisorsAndTotalTimesForMonthObject=[[SupervisorsAndTotalTimesForMonth alloc]initWithMonth:[NSDate date] clinician:supervisorObject];
+    
+    NSMutableArray *supervisorsAndTotalTimesForMonthMutableArray=[NSMutableArray arrayWithObject:supervisorsAndTotalTimesForMonthObject];
+    
+	SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:supervisorsAndTotalTimesForMonthMutableArray itemsDefinition:supervisorsAndTotalTimesForMonthDef];                                 
     
     objectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
     {
@@ -82,13 +86,17 @@ NSLog(@"supervisor object is %@",supervisorObject);
         NSDate *monthToDisplay=[calander dateFromComponents:dateComponents];
         
         
-        
-        
-        
+        NSString *topCellNibName=nil;
+        if (supervisorsAndTotalTimesForMonthObject.interventionTotalWeekUndefinedTI||supervisorsAndTotalTimesForMonthObject.assessmentTotalWeekUndefinedTI||supervisorsAndTotalTimesForMonthObject.supportTotalWeekUndefinedTI||supervisorsAndTotalTimesForMonthObject.supervisionTotalWeekUndefinedTI) {
+            topCellNibName=@"MonthlyPracticumLogTopCell";
+        }
+        else {
+            topCellNibName=@"MonthlyPracticumLogTopCell";
+        }
 
         
         NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"lastName",monthToDisplay, nil] forKeys:[NSArray arrayWithObjects:@"20",@"monthToDisplay", nil]];
-        MonthlyPracticumLogTopCell *contactOverviewCell = [MonthlyPracticumLogTopCell cellWithText:nil objectBindings:bindingsDictionary nibName:@"MonthlyPracticumLogTopCell"];
+        MonthlyPracticumLogTopCell *contactOverviewCell = [MonthlyPracticumLogTopCell cellWithText:nil objectBindings:bindingsDictionary nibName:topCellNibName];
         
         
         return contactOverviewCell;
@@ -101,10 +109,7 @@ NSLog(@"supervisor object is %@",supervisorObject);
     self.tableViewModel=objectsModel;
     
    
-    }
-    else {
-        [appDelegate displayNotification:@"Please select a supervisor"];
-    }
+   
 }
 
 - (void)viewDidUnload
