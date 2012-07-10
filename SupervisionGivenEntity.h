@@ -2,7 +2,7 @@
 //  SupervisionGivenEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 6/6/12.
+//  Created by Daniel Boice on 7/10/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
@@ -10,10 +10,12 @@
 #import <CoreData/CoreData.h>
 #import "SupervisionParentEntity.h"
 
-@class TimeEntity;
+@class SupervisionTypeEntity, SupervisionTypeSubtypeEntity, TimeEntity;
 
 @interface SupervisionGivenEntity : SupervisionParentEntity
 
 @property (nonatomic, retain) TimeEntity *time;
+@property (nonatomic, retain) SupervisionTypeSubtypeEntity *subType;
+@property (nonatomic, retain) SupervisionTypeEntity *supervisionType;
 
 @end

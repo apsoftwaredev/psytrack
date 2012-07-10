@@ -12,22 +12,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "40"
-         endingLineNumber = "40"
-         landmarkName = "-totalMinutes:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MonthlyPracticumLogBottonCell.m"
-         timestampString = "363022245.785801"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "41"
-         endingLineNumber = "41"
-         landmarkName = "-willDisplay"
-         landmarkType = "5">
+         endingLineNumber = "40">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -38,9 +23,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "205"
-         endingLineNumber = "205"
-         landmarkName = "-weekTotalHoursForMonthStr:week:clinician:"
-         landmarkType = "5">
+         endingLineNumber = "205">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -51,9 +34,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "176"
-         endingLineNumber = "176"
-         landmarkName = "-weekTotalHoursForMonthTI:week:clinician:"
-         landmarkType = "5">
+         endingLineNumber = "176">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -64,9 +45,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "49"
-         endingLineNumber = "49"
-         landmarkName = "-week2TotalHoursForMonthStr:clinician:"
-         landmarkType = "5">
+         endingLineNumber = "49">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -77,9 +56,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "58"
-         endingLineNumber = "58"
-         landmarkName = "-week3TotalHoursForMonthStr:clinician:"
-         landmarkType = "5">
+         endingLineNumber = "58">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -90,9 +67,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "65"
-         endingLineNumber = "65"
-         landmarkName = "-week4TotalHoursForMonthStr:clinician:"
-         landmarkType = "5">
+         endingLineNumber = "65">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -103,9 +78,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "70"
-         endingLineNumber = "70"
-         landmarkName = "-week5TotalHoursForMonthStr:clinician:"
-         landmarkType = "5">
+         endingLineNumber = "70">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -116,9 +89,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "43"
-         endingLineNumber = "43"
-         landmarkName = "-totalMinutes:"
-         landmarkType = "5">
+         endingLineNumber = "43">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -129,9 +100,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "27"
-         endingLineNumber = "27"
-         landmarkName = "-week1TotalHoursForMonthStr:clinician:"
-         landmarkType = "5">
+         endingLineNumber = "27">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -142,9 +111,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "80"
-         endingLineNumber = "80"
-         landmarkName = "-totalHoursToDateForMonthStr:clinician:"
-         landmarkType = "5">
+         endingLineNumber = "80">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -155,9 +122,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "111"
-         endingLineNumber = "111"
-         landmarkName = "-weekTotalHoursForMonthTI:week:clinician:"
-         landmarkType = "5">
+         endingLineNumber = "111">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -168,9 +133,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "115"
-         endingLineNumber = "115"
-         landmarkName = "-weekTotalHoursForMonthTI:week:clinician:"
-         landmarkType = "5">
+         endingLineNumber = "115">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -181,9 +144,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "130"
-         endingLineNumber = "130"
-         landmarkName = "-weekTotalHoursForMonthTI:week:clinician:"
-         landmarkType = "5">
+         endingLineNumber = "130">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -194,9 +155,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "81"
-         endingLineNumber = "81"
-         landmarkName = "-totalHoursToDateForMonthStr:clinician:"
-         landmarkType = "5">
+         endingLineNumber = "81">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -207,9 +166,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "82"
-         endingLineNumber = "82"
-         landmarkName = "-totalHoursToDateForMonthStr:clinician:"
-         landmarkType = "5">
+         endingLineNumber = "82">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -294,11 +251,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogTableViewController.m"
-         timestampString = "363537905.430754"
+         timestampString = "363566389.173173"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "147"
-         endingLineNumber = "147"
+         startingLineNumber = "150"
+         endingLineNumber = "150"
          landmarkName = "-scrollToNextSupervisorCell"
          landmarkType = "5">
       </FileBreakpoint>
@@ -307,11 +264,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogTableViewController.m"
-         timestampString = "363537905.430754"
+         timestampString = "363566389.173173"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
+         startingLineNumber = "139"
+         endingLineNumber = "139"
          landmarkName = "-scrollToNextSupervisorCell"
          landmarkType = "5">
       </FileBreakpoint>
@@ -606,12 +563,34 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "363559204.716314"
+         timestampString = "363579342.734671"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "761"
-         endingLineNumber = "761"
-         landmarkName = "-totalOverallHoursTIForOveralCell:clinician:"
+         startingLineNumber = "795"
+         endingLineNumber = "795">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SupervisorsAndTotalTimesForMonth.m"
+         timestampString = "363579342.734671"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "819"
+         endingLineNumber = "819">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MonthlyPracticumLogTableViewController.m"
+         timestampString = "363566389.173173"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "97"
+         endingLineNumber = "97"
+         landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -619,39 +598,33 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "363559204.716314"
+         timestampString = "363579342.734671"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "780"
-         endingLineNumber = "780"
-         landmarkName = "-totalOverallHoursTIForOveralCell:clinician:"
-         landmarkType = "5">
+         startingLineNumber = "783"
+         endingLineNumber = "783">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "363559204.716314"
+         timestampString = "363581023.30554"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "784"
-         endingLineNumber = "784"
-         landmarkName = "-totalOverallHoursTIForOveralCell:clinician:"
-         landmarkType = "5">
+         startingLineNumber = "954"
+         endingLineNumber = "954">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "363559204.716314"
+         timestampString = "363581023.30554"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "640"
-         endingLineNumber = "640"
-         landmarkName = "-totalTimeIntervalForTrackArray:predicate:"
-         landmarkType = "5">
+         startingLineNumber = "849"
+         endingLineNumber = "849">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

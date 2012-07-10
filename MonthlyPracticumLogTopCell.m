@@ -301,7 +301,13 @@ NSLog(@"current offset %f",currentOffsetY);
     
     SupervisorsAndTotalTimesForMonth *totalsObject=(SupervisorsAndTotalTimesForMonth *)self.boundObject;
     
-    
+    NSString *bottomCellNibName=nil;    
+    if (totalsObject.overallTotalWeekUndefinedTI) {
+        bottomCellNibName=@"MonthlyPracticumLogBottomCellWithUndefined";
+    }
+    else {
+        bottomCellNibName=@"MonthlyPracticumLogBottomCell";
+    }
     self.monthToDisplay=totalsObject.monthToDisplay;
     
     
@@ -360,7 +366,7 @@ if (fetchedObjects == nil) {
         {
             // Create & return a custom cell based on the cell in ContactOverviewCell.xib
             NSString *bindingsString = @"20:interventionSubType"; // 1,2,3 are the control tags
-            MonthlyPracticumLogBottonCell *contactOverviewCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindingsString:bindingsString nibName:@"MonthlyPracticumLogBottomCell"];
+            MonthlyPracticumLogBottonCell *contactOverviewCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindingsString:bindingsString nibName:bottomCellNibName];
             
             
             return contactOverviewCell;

@@ -37,8 +37,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
+      
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(scrollToNextSupervisorCell)
@@ -51,7 +50,7 @@
     NSLog(@"supervisor object is %@",supervisorObject);
      
                            
-        NSPredicate *filterPredicate=nil;
+      
         
       
     SCClassDefinition *supervisorsAndTotalTimesForMonthDef=[SCClassDefinition definitionWithClass:[SupervisorsAndTotalTimesForMonth class] autoGeneratePropertyDefinitions:YES];
@@ -87,8 +86,11 @@
         
         
         NSString *topCellNibName=nil;
-        if (supervisorsAndTotalTimesForMonthObject.interventionTotalWeekUndefinedTI||supervisorsAndTotalTimesForMonthObject.assessmentTotalWeekUndefinedTI||supervisorsAndTotalTimesForMonthObject.supportTotalWeekUndefinedTI||supervisorsAndTotalTimesForMonthObject.supervisionTotalWeekUndefinedTI) {
-            topCellNibName=@"MonthlyPracticumLogTopCell";
+        
+        NSLog(@"overall undefined time interval is %g",supervisorsAndTotalTimesForMonthObject.overallTotalWeekUndefinedTI);
+        
+        if (supervisorsAndTotalTimesForMonthObject.overallTotalWeekUndefinedTI>0) {
+            topCellNibName=@"MonthlyPracticumLogTopCellWithUndefined";
         }
         else {
             topCellNibName=@"MonthlyPracticumLogTopCell";

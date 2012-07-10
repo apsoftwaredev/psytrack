@@ -2,12 +2,13 @@
 //  SupervisionTypeEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 6/28/12.
+//  Created by Daniel Boice on 7/10/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
 #import "SupervisionTypeEntity.h"
-#import "SupervisionParentEntity.h"
+#import "SupervisionGivenEntity.h"
+#import "SupervisionReceivedEntity.h"
 
 
 @implementation SupervisionTypeEntity
@@ -15,7 +16,8 @@
 @dynamic order;
 @dynamic notes;
 @dynamic supervisionType;
-@dynamic supervisionParent;
+@dynamic supervisionRecieved;
+@dynamic supervisionGiven;
 @dynamic existingSupervision;
 
 @end

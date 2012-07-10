@@ -2,7 +2,7 @@
 //  SupportActivityTypeEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 6/28/12.
+//  Created by Daniel Boice on 7/10/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 

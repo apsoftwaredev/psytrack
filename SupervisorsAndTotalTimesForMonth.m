@@ -10,28 +10,8 @@
 #import "PTTAppDelegate.h"
 
 @implementation SupervisorsAndTotalTimesForMonth
-@synthesize  monthToDisplay;
+
 @synthesize  clinicians;
-@synthesize interventionsDeliveredArray=interventionsDeliveredArray_,
-assessmentsDeliveredArray=assessmentsDeliveredArray_,
-supportActivityDeliveredArray=supportActivityDeliveredArray_,
-supervisionReceivedArray=supervisionReceivedArray_,
-existingHoursHoursArray=existingHoursArray_;
-
-
-@synthesize monthStartDate=monthStartDate_, monthEndDate=monthEndDate_;
-
-@synthesize week1StartDate=week1StartDate_;
-@synthesize week1EndDate=week1EndDate_;
-@synthesize week2StartDate=week2StartDate_;
-@synthesize week2EndDate=week2EndDate_;
-@synthesize week3StartDate=week3StartDate_;
-@synthesize week3EndDate=week3EndDate_;
-@synthesize week4StartDate=week4StartDate_;
-@synthesize week4EndDate=week4EndDate_;
-@synthesize week5StartDate=week5StartDate_;
-@synthesize week5EndDate=week5EndDate_;
-
 
 
 
@@ -196,32 +176,13 @@ existingHoursHoursArray=existingHoursArray_;
 @synthesize overallTotalForMonthTI;
 
 
-
-
-
-
 -(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician{
-
-   self= [super init];
+    //override superclass
+    self= [super initWithMonth:date clinician:clinician];
     
     if (self) {
         
-        self.monthToDisplay=date;
-        self.monthStartDate=[self monthStartDateForDate:date];
-        self.monthEndDate=[self monthEndDate:date];
-       
-        self.week1StartDate=[self weekStartDate:kTrackWeekOne];
-        self.week1EndDate=[self weekEndDate:kTrackWeekOne];
-        self.week2StartDate=[self weekStartDate:kTrackWeekTwo];
-        self.week2EndDate=[self weekEndDate:kTrackWeekTwo];
-        self.week3StartDate=[self weekStartDate:kTrackWeekThree];
-        self.week3EndDate=[self weekEndDate:kTrackWeekThree];
-        self.week4StartDate=[self weekStartDate:kTrackWeekFour];
-        self.week4EndDate=[self weekEndDate:kTrackWeekFour];
-        self.week5StartDate=[self weekStartDate:kTrackWeekFive];
-        self.week5EndDate=[self weekEndDate:kTrackWeekFive];
-        
-        
+                
         
         
         NSPredicate *predicateForTrackEntities=[self predicateForTrackEntitiesAllBeforeAndEqualToEndDateForMonth:(NSDate *)date];
@@ -236,7 +197,7 @@ existingHoursHoursArray=existingHoursArray_;
         
         self.existingHoursHoursArray=[self fetchObjectsFromEntity:kTrackExistingHoursEntityName filterPredicate:[self predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth:date]];
         
-       
+        
         
         
         
@@ -257,276 +218,14 @@ existingHoursHoursArray=existingHoursArray_;
         
         
     }
-
+    
     return self;
-
-
-}
-
-
--(NSTimeInterval )totalTimeIntervalForTotalTimeArray:(NSArray *)totalTimesArray{
-
-     NSTimeInterval totalTime=0;
-    if (totalTimesArray&&totalTimesArray.count) {
-        
-       
-        for (NSDate *totalTimeDateObject in totalTimesArray) {
-            if (totalTimeDateObject&&[totalTimeDateObject isKindOfClass:[NSDate class]]) {
-                
-                totalTime=totalTime+[totalTimeDateObject timeIntervalSince1970];
-                NSLog(@"time is %@",totalTimeDateObject);
-                NSLog(@"total time is to be added is %e",[totalTimeDateObject timeIntervalSince1970]);
-                
-            }
-        }
-    }
-        return totalTime;
-
-
-}
-
--(NSDate *)monthStartDateForDate:(NSDate *)date{
-
-
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-    NSDateComponents *startDateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |NSDayCalendarUnit) fromDate:date];
-   
-    [startDateComponents setDay:0]; //reset the other components
-    
-    NSDate *startDate = [calendar dateFromComponents:startDateComponents]; 
-   
-    return startDate;
-
-}
-
-
--(NSDate *)monthEndDate:(NSDate *)date{
-
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-
-    NSDateComponents *endDateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |NSDayCalendarUnit) fromDate:date];
-    
-    NSRange range = [calendar rangeOfUnit:NSDayCalendarUnit
-                                   inUnit:NSMonthCalendarUnit
-                                  forDate:date];
-    
-    [endDateComponents setDay:range.length];
-    NSDate *endDate = [calendar dateFromComponents:endDateComponents];
-    
-    return endDate;
-
-}
-
--(NSDate *)weekStartDate:(PTrackWeek )week{
-
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    
-    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-    NSLog(@"date in monht is d %@",self.monthToDisplay);
-    NSDateComponents *startDateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |NSWeekCalendarUnit|NSDayCalendarUnit) fromDate:self.monthToDisplay];
-    
-    //create week
-    startDateComponents.day=1;
-    startDateComponents.hour=0;
-    startDateComponents.minute=0;
-    startDateComponents.second=0;
-    NSDateComponents *week2StartDateComponents=[[NSDateComponents alloc]init];
-    week2StartDateComponents.week=week;
-    week2StartDateComponents.hour=0;
-    week2StartDateComponents.minute=0;
-    week2StartDateComponents.month=0;
-    week2StartDateComponents.year=0;
-    
-    NSLog(@"week is %i",startDateComponents.week);
-    NSLog(@"week 2 startdate cfrom compnents %@",[calendar dateByAddingComponents:week2StartDateComponents toDate:[calendar dateFromComponents:startDateComponents] options:0]);
-    
-    
-    //create a date with these components
-    NSRange rangeWeek = [calendar rangeOfUnit:NSDayCalendarUnit
-                                       inUnit:NSWeekCalendarUnit
-                                      forDate:[calendar dateByAddingComponents:week2StartDateComponents toDate:[calendar dateFromComponents:startDateComponents] options:0]];
-    NSLog(@"range week day %d", rangeWeek.location);
-    
-    NSLog(@"range week end day %d",rangeWeek.location+rangeWeek.length-1);
-    
-    [startDateComponents setDay:rangeWeek.location]; //reset the other components
-    
-    NSDate *startDate = [calendar dateFromComponents:startDateComponents]; 
-    
-    return startDate;
-    
-
-
-
-
-
-
-}
--(NSDate *)weekEndDate:(PTrackWeek )week{
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    
-    [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-    NSLog(@"date in monht is d %@",self.monthToDisplay);
-    NSDateComponents *startDateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |NSWeekCalendarUnit|NSDayCalendarUnit) fromDate:self.monthToDisplay];
-    
-    //create week
-    startDateComponents.day=1;
-    startDateComponents.hour=0;
-    startDateComponents.minute=0;
-    startDateComponents.second=0;
-    NSDateComponents *week2StartDateComponents=[[NSDateComponents alloc]init];
-    week2StartDateComponents.week=week;
-    week2StartDateComponents.hour=0;
-    week2StartDateComponents.minute=0;
-    week2StartDateComponents.month=0;
-    week2StartDateComponents.year=0;
-    
-    NSLog(@"week is %i",startDateComponents.week);
-    NSLog(@"week 2 startdate cfrom compnents %@",[calendar dateByAddingComponents:week2StartDateComponents toDate:[calendar dateFromComponents:startDateComponents] options:0]);
-    
-    
-    //create a date with these components
-    NSRange rangeWeek = [calendar rangeOfUnit:NSDayCalendarUnit
-                                       inUnit:NSWeekCalendarUnit
-                                      forDate:[calendar dateByAddingComponents:week2StartDateComponents toDate:[calendar dateFromComponents:startDateComponents] options:0]];
-    NSLog(@"range week day %d", rangeWeek.location);
-    
-    NSLog(@"range week end day %d",rangeWeek.location+rangeWeek.length-1);
-    
-    [startDateComponents setDay:rangeWeek.location]; //reset the other components
-    
-    NSDate *startDate = [calendar dateFromComponents:startDateComponents]; 
-    NSDateComponents *endDateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |NSWeekCalendarUnit|NSDayCalendarUnit) fromDate:startDate];
-    
-    [endDateComponents setDay:rangeWeek.location+rangeWeek.length];
-    NSRange weekRange=[calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSWeekCalendarUnit forDate:self.monthToDisplay];
-    
-    
-    NSLog(@"week is %i",weekRange.length);
-    NSDate *endDate = [calendar dateFromComponents:endDateComponents];
-    
-    
-    return endDate;
-    
-    
-    
-    
-}
-
-
--(NSDate *)storedStartDateForWeek:(PTrackWeek)week{
-
-    NSDate *returnDate=nil;
-    switch (week) {
-        case kTrackWeekOne:
-            returnDate =week1StartDate_;
-            break;
-        case kTrackWeekTwo:
-            returnDate =week2StartDate_;
-            break;
-        case kTrackWeekThree:
-            returnDate =week3StartDate_;
-            break;
-        case kTrackWeekFour:
-            returnDate =week4StartDate_;
-            break;
-        case kTrackWeekFive:
-            returnDate= week5StartDate_;
-            break;
-        default:
-            break;
-    }
-
-
-
-
-
-    return returnDate;
-
-
-}
-
--(NSDate *)storedEndDateForWeek:(PTrackWeek)week{
-    
-    NSDate *returnDate=nil;
-    switch (week) {
-        case kTrackWeekOne:
-            returnDate =week1EndDate_;
-            break;
-        case kTrackWeekTwo:
-            returnDate =week2EndDate_;
-            break;
-        case kTrackWeekThree:
-            returnDate =week3EndDate_;
-            break;
-        case kTrackWeekFour:
-            returnDate =week4EndDate_;
-            break;
-        case kTrackWeekFive:
-            returnDate= week5EndDate_;
-            break;
-        default:
-            break;
-    }
-    
-    
-    
-    
-    
-    return returnDate;
     
     
 }
 
 
 
-
--(int )totalHours:(NSTimeInterval) totalTime{
-    
-    
-    return totalTime/3600;
-    
-}
-
--(int )totalMinutes:(NSTimeInterval) totalTime{
-    
-    
-    return round(((totalTime/3600) -[self totalHours:totalTime])*60);
-    
-}
-
--(NSString *)totalTimeStr:(NSTimeInterval )totalTimeTI{
-
-    NSString *returnString=nil;
-    
-    if (totalTimeTI>0) {
-        NSString *hoursStr=[NSString stringWithFormat:@"%i:",[self totalHours:totalTimeTI]];
-        
-        int minutes=[self totalMinutes:totalTimeTI];
-        NSString *minutesStr=nil;
-        
-        if (minutes<10) {
-            minutesStr=[NSString stringWithFormat:@"0%i", minutes];
-        }
-        else {
-            minutesStr=[NSString stringWithFormat:@"%i",minutes];
-            
-        }
-        returnString=[hoursStr stringByAppendingString:minutesStr];
-        
-    }
-    else {
-        returnString=@"0:00";
-    }
-    
-    return returnString;
-
-
-
-}
 
 //-(NSString *) totalCummulativeHoursForPTrackEntity:(PTrackEntity )pTrackEntity StrForClinician:(ClinicianEntity *)clinician{
 //    
@@ -634,50 +333,6 @@ existingHoursHoursArray=existingHoursArray_;
 //   
 //}
 
--(NSTimeInterval )totalTimeIntervalForTrackArray:(NSArray *)trackArray predicate:(NSPredicate *)predicate{
-
-   
-    NSArray *filteredObjects=nil;
-    if (trackArray && trackArray.count) {
-    
-        if (predicate) {
-            filteredObjects=[trackArray filteredArrayUsingPredicate:(NSPredicate *)predicate];
-            
-
-        }
-        else {
-            filteredObjects=trackArray;
-        }
-    }
-    NSArray *totalTimeArray=nil;
-    
-    if (filteredObjects) {
-        totalTimeArray=[filteredObjects valueForKeyPath:@"time.totalTime"];
-    }
-     
-    
-    
-    return [self totalTimeIntervalForTotalTimeArray:totalTimeArray];
-
-
-
-}
-
--(NSTimeInterval )totalTimeIntervalForExistingHoursArray:(NSArray *)filteredExistingHoursArray keyPath:(NSString *)keyPath{
-    
-    NSArray *existingHoursTimeArray=nil;
-    if (filteredExistingHoursArray) {
-        existingHoursTimeArray=[filteredExistingHoursArray valueForKeyPath:keyPath];
-    }
- 
-    
-   
-    
-    return  [self totalTimeIntervalForTotalTimeArray:existingHoursTimeArray];
-    
-    
-    
-}
 
 -(void ) calculateDirectlHours{
 
@@ -745,8 +400,8 @@ existingHoursHoursArray=existingHoursArray_;
             break;
         case kSummaryWeekUndefined:
         {
-            trackPredicate=[self predicateForTrackWeek:kTrackWeekUndefined clincian:clinician];
-            existingHoursPredicate=[self predicateForExistingHoursWeek:kTrackWeekOne clincian:clinician];
+            
+            existingHoursPredicate=[self predicateForExistingHoursWeekUndefinedForClincian:clinician];
         }
             break;
         case kSummaryTotalForMonth:
@@ -773,29 +428,34 @@ existingHoursHoursArray=existingHoursArray_;
     }
     
     
-   
+    NSTimeInterval trackTotalInterventionTimeInterval=0;
+    NSTimeInterval trackTotalAssessmentInterval=0;
+    NSTimeInterval trackTotalSupportTimeInterval=0;
+    NSTimeInterval trackTotalSupervisionReceivedTimeInterval=0;
     
-    NSLog(@"predicate string is %@",trackPredicate.predicateFormat);
-       
-    NSTimeInterval trackTotalInterventionTimeInterval=[self totalTimeIntervalForTrackArray:self.interventionsDeliveredArray predicate:trackPredicate];
+     
+  
+    if (summaryCell!= kSummaryWeekUndefined) {
     
-        
-    NSLog(@"time interval is %g,",trackTotalInterventionTimeInterval);
-    NSTimeInterval trackTotalAssessmentInterval=[self totalTimeIntervalForTrackArray:self.assessmentsDeliveredArray predicate:trackPredicate];;
+            trackTotalInterventionTimeInterval=[self totalTimeIntervalForTrackArray:self.interventionsDeliveredArray predicate:trackPredicate];
+            
+                
+            
+            trackTotalAssessmentInterval=[self totalTimeIntervalForTrackArray:self.assessmentsDeliveredArray predicate:trackPredicate];;
+            
+               
+            trackTotalSupportTimeInterval=[self totalTimeIntervalForTrackArray:self.supportActivityDeliveredArray predicate:trackPredicate];
+            
+           
+            
+            trackTotalSupervisionReceivedTimeInterval=[self totalTimeIntervalForTrackArray:self.supervisionReceivedArray predicate:trackPredicate];
     
-       
-    NSTimeInterval trackTotalSupportTimeInterval=[self totalTimeIntervalForTrackArray:self.supportActivityDeliveredArray predicate:trackPredicate];
-    
-   
-    
-    NSTimeInterval trackTotalSupervisionReceivedTimeInterval=[self totalTimeIntervalForTrackArray:self.supervisionReceivedArray predicate:trackPredicate];
-    
-    
+    }
     
     
     NSArray *filteredExistingHoursArray=nil;
    
-    if (existingHoursPredicate) {
+       if (existingHoursPredicate) {
         filteredExistingHoursArray=[existingHoursArray_ filteredArrayUsingPredicate:existingHoursPredicate];
         
 
@@ -804,7 +464,8 @@ existingHoursHoursArray=existingHoursArray_;
         filteredExistingHoursArray=existingHoursArray_; //unfiltered
     }
      
-    
+   
+
 
     NSTimeInterval totalExistingInterventionsTI=[self totalTimeIntervalForExistingHoursArray:filteredExistingHoursArray keyPath:kTrackKeyPathForExistingHoursInterventionHours];
             
@@ -911,10 +572,10 @@ existingHoursHoursArray=existingHoursArray_;
             break;
         case kSummaryWeekUndefined:
         {
-            self.interventionTotalWeekUndefinedTI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
-            self.assessmentTotalWeekUndefinedTI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
-            self.supportTotalWeekUndefinedTI=trackTotalSupportTimeInterval+totalExistingSupportTI;
-            self.supervisionTotalWeekUndefinedTI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
+            self.interventionTotalWeekUndefinedTI=totalExistingInterventionsTI;
+            self.assessmentTotalWeekUndefinedTI=totalExistingAssessmentsTI;
+            self.supportTotalWeekUndefinedTI=totalExistingSupportTI;
+            self.supervisionTotalWeekUndefinedTI=totalExistingSupervisionReceivedTI;
             
             
             overallTotalTI =self.interventionTotalWeekUndefinedTI+self.assessmentTotalWeekUndefinedTI+self.supportTotalWeekUndefinedTI+self.supervisionTotalWeekUndefinedTI;
@@ -994,195 +655,6 @@ existingHoursHoursArray=existingHoursArray_;
 
 }
 
-
-
-
--(NSPredicate *)allHoursPredicateForClincian:(ClinicianEntity *)clinician{
-    
-    NSPredicate *priorMonthsServiceDatesPredicate=nil;
-    if (clinician) {
-        priorMonthsServiceDatesPredicate=[NSPredicate predicateWithFormat:@"self.supervisor.objectID == %@ ",clinician.objectID];
-        
-    }
-    
-    return priorMonthsServiceDatesPredicate;
-    
-}
-
--(NSPredicate *)priorMonthsHoursPredicateForClincian:(ClinicianEntity *)clinician{
-
-     NSPredicate *priorMonthsServiceDatesPredicate=nil;
-    if (clinician) {
-        priorMonthsServiceDatesPredicate=[NSPredicate predicateWithFormat:@"(self.supervisor.objectID == %@) AND (dateOfService < %@ )",clinician.objectID,monthStartDate_];
-        
-    }else {
-        priorMonthsServiceDatesPredicate=[NSPredicate predicateWithFormat:@"dateOfService < %@ ",monthStartDate_];
-        
-        
-    }
-
-    return priorMonthsServiceDatesPredicate;
-
-}
-
-
--(NSPredicate *)predicateForTrackCurrentMonthsForClincian:(ClinicianEntity *)clinician{
-    
-    NSPredicate *currentMonthPredicate=nil;
-    
-    if (clinician) {
-        currentMonthPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND ((dateOfService >= %@) AND (dateOfService <= %@)) || (dateOfService = nil))",clinician.objectID, monthStartDate_,monthEndDate_];
-    }
-    else {
-        currentMonthPredicate = [NSPredicate predicateWithFormat:@" ((dateOfService >= %@) AND (dateOfService <= %@)) || (dateOfService = nil) ",monthStartDate_,monthEndDate_];
-    }
-    
-    return currentMonthPredicate;    
-}
-
-
--(NSPredicate *)predicateForExistingHoursCurrentMonthsForClincian:(ClinicianEntity *)clinician{
-    
-    NSPredicate *currentMonthPredicate=nil;
-    
-    if (clinician) {
-        currentMonthPredicate = [NSPredicate predicateWithFormat:@"(self.supervisor.objectID == %@ ) AND (startDate >= %@) AND (endDate <= %@)",clinician.objectID, monthStartDate_,monthEndDate_];
-    }
-    else {
-        currentMonthPredicate = [NSPredicate predicateWithFormat:@" ((startDate >= %@) AND (dateOfService <= %@)))", monthStartDate_,monthEndDate_];
-    }
-    
-    return currentMonthPredicate;    
-}
-
-
--(NSPredicate *)predicateForTrackEntitiesAllBeforeAndEqualToEndDateForMonth:(NSDate *)dateInMonth{
-  
-  NSPredicate *returnPredicate=nil;
-  
-    if (dateInMonth) {
-    
-      returnPredicate = [NSPredicate predicateWithFormat:@" (dateOfService <= %@)", monthEndDate_];
-  }
-  
-  return returnPredicate;    
-}                                          
-
--(NSPredicate *)predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth:(NSDate *)dateInMonth{
-    
-    NSPredicate *returnPredicate=nil;
-    
-    if (dateInMonth) {
-        
-        returnPredicate = [NSPredicate predicateWithFormat:@" (endDate <= %@)", [self monthEndDate:dateInMonth]];
-    }
-    
-    return returnPredicate;    
-}     
-                                          
--(NSPredicate *)predicateForExistingHoursAllBeforeEndDate:(NSDate *)date clinician:(ClinicianEntity *)clinician{
-    
-    NSPredicate *returnPredicate=nil;
-    
-    if (date &&[date isKindOfClass:[NSDate class]]) {
-        if (clinician) {
-            returnPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND  (endDate < %@))",clinician.objectID, date];
-        }
-        else {
-        returnPredicate = [NSPredicate predicateWithFormat:@" (endDate < %@)", date];
-        }
-    }
-    
-    return returnPredicate;    
-}     
-
-
--(NSPredicate *)predicateForExistingHoursWeek:(PTrackWeek)week clincian:(ClinicianEntity *)clinician{
-    
-    NSPredicate *weekPredicate=nil;
-    
-    if (clinician) {
-        weekPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND (startDate >= %@) AND (endDate <= %@))",clinician.objectID, [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
-    }
-    else {
-        weekPredicate = [NSPredicate predicateWithFormat:@" ((startDate >= %@) AND (endDate <= %@))", [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
-    }
-    
-    return weekPredicate;
-    
-}
-
-
--(NSPredicate *)predicateForTrackWeek:(PTrackWeek)week clincian:(ClinicianEntity *)clinician{
-    
-    NSPredicate *weekPredicate=nil;
-    
-    if (clinician) {
-        weekPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND ((dateOfService >= %@) AND (dateOfService <= %@)) || (dateOfService = nil))",clinician.objectID, [self weekStartDate:week],[self weekEndDate:week]];
-    }
-    else {
-        weekPredicate = [NSPredicate predicateWithFormat:@" ((dateOfService >= %@) AND (dateOfService <= %@)) || (dateOfService = nil) ", [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
-    }
-    
-    return weekPredicate;
-    
-}
-
-
-
--(NSArray *)fetchObjectsFromEntity:(NSString *)entityStr filterPredicate:(NSPredicate *)filterPredicate{
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-
-
-
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityStr inManagedObjectContext:appDelegate.managedObjectContext];
-
-    [fetchRequest setEntity:entity];
-   
-   
-    if (filterPredicate) {
-        [fetchRequest setPredicate:filterPredicate];
-    }
-
-
-    NSError *error = nil;
-    NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-
-    return fetchedObjects;
-
-}
-
-
--(NSString *)timeStrFromTimeInterval:(NSTimeInterval )totalTime{
-    
-     
-    if (totalTime) {
-        int totalHours =totalTime/3600;
-        NSLog(@"total hours float is %i",totalHours);
-        int totalMinutes=round(((totalTime/3600) -totalHours)*60);
-        NSLog(@"total minutes is %i",totalMinutes);
-        if (totalMinutes<10) {
-            return [NSString stringWithFormat:@"%i:0%i",totalHours,totalMinutes];
-        }
-        else {
-            return [NSString stringWithFormat:@"%i:%i",totalHours,totalMinutes];
-        }
-        
-        
-    }
-    
-    
-    
-    
-    
-    
-    return @"0:00";
-    
-    
-}
 
 
 

@@ -1542,17 +1542,25 @@ BOOL valid=NO;
             NSEntityDescription *entity = [NSEntityDescription entityForName:@"ExistingHoursEntity" inManagedObjectContext:managedObjectContext];
             [fetchRequest setEntity:entity];
                 NSPredicate *predicate=nil;
-                if (clinician) {
-                    predicate = [NSPredicate predicateWithFormat:@"(self.supervisor.objectID== %@ AND (startDate >= %@) AND (endDate <= %@)) OR ((startDate < %@) AND ((endDate < %@ )AND (endDate > %@) )) OR ((startDate < %@) AND (endDate > %@)   )", clinician.objectID, startDate, endDate, startDate, endDate,startDate, startDate,endDate];
-                }
-                else {
+//                if (clinician) {
+//                    predicate = [NSPredicate predicateWithFormat:@"(self.supervisor != nil AND self.supervisor.objectID== %@ AND (startDate >= %@) AND (endDate <= %@)) OR ((startDate < %@) AND ((endDate < %@ )AND (endDate > %@) )) OR ((startDate < %@) AND (endDate > %@)   )", clinician.objectID, startDate, endDate, startDate, endDate,startDate, startDate,endDate];
+//                }
+//                else {
                     predicate = [NSPredicate predicateWithFormat:@"((startDate >= %@) AND (endDate <= %@)) OR ((startDate < %@) AND ((endDate < %@ )AND (endDate > %@) )) OR ((startDate < %@) AND (endDate > %@)   )", startDate, endDate, startDate, endDate,startDate, startDate,endDate];
-                }
+//                }
             [fetchRequest setPredicate:predicate];
             
             NSError *error = nil;
             NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-            if (!fetchedObjects.count) {
+            
+                
+                if (clinician &&fetchedObjects.count) {
+                    NSPredicate *clinicianFilter=[NSPredicate predicateWithFormat:@"self.supervisor.objectID == %@",clinician.objectID];
+                    
+                    fetchedObjects=[fetchedObjects filteredArrayUsingPredicate:clinicianFilter];
+                    
+                }
+                if (!fetchedObjects.count) {
                 
                 valid=YES;
             }
