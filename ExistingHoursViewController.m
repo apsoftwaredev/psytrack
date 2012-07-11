@@ -11,6 +11,7 @@
 #import "ClinicianSelectionCell.h"
 #import "EncryptedSCTextViewCell.h"
 #import "TotalHoursAndMinutesCell.h"
+#import "ExistingHoursEntity.h"
 
 @interface ExistingHoursViewController ()
 
@@ -1546,16 +1547,24 @@ BOOL valid=NO;
 //                    predicate = [NSPredicate predicateWithFormat:@"(self.supervisor != nil AND self.supervisor.objectID== %@ AND (startDate >= %@) AND (endDate <= %@)) OR ((startDate < %@) AND ((endDate < %@ )AND (endDate > %@) )) OR ((startDate < %@) AND (endDate > %@)   )", clinician.objectID, startDate, endDate, startDate, endDate,startDate, startDate,endDate];
 //                }
 //                else {
-                    predicate = [NSPredicate predicateWithFormat:@"((startDate >= %@) AND (endDate <= %@)) OR ((startDate < %@) AND ((endDate < %@ )AND (endDate > %@) )) OR ((startDate < %@) AND (endDate > %@)   )", startDate, endDate, startDate, endDate,startDate, startDate,endDate];
-//                }
-            [fetchRequest setPredicate:predicate];
+                ExistingHoursEntity *existingHoursObject=nil;
+                if ([cell.boundObject isKindOfClass:[ExistingHoursEntity class]]) {
+                 existingHoursObject=(ExistingHoursEntity *)cell.boundObject;
+                    
+                    //                }
+                }
+                    
+                predicate = [NSPredicate predicateWithFormat:@"((startDate >= %@) AND (endDate <= %@)) OR ((startDate < %@) AND ((endDate < %@ )AND (endDate > %@) )) OR ((startDate < %@) AND (endDate > %@)   )",  startDate, endDate, startDate, endDate,startDate, startDate,endDate];
+                [fetchRequest setPredicate:predicate];
+                NSLog(@"predicate format for validation is %@",predicate.predicateFormat);
+                NSLog(@"startDate is %@ and End Date is %@",startDate, endDate);
             
             NSError *error = nil;
             NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
             
                 
                 if (clinician &&fetchedObjects.count) {
-                    NSPredicate *clinicianFilter=[NSPredicate predicateWithFormat:@"self.supervisor.objectID == %@",clinician.objectID];
+                    NSPredicate *clinicianFilter=[NSPredicate predicateWithFormat:@"self.supervisor.objectID == %@ and self.objectID != %@",clinician.objectID, existingHoursObject.objectID];
                     
                     fetchedObjects=[fetchedObjects filteredArrayUsingPredicate:clinicianFilter];
                     

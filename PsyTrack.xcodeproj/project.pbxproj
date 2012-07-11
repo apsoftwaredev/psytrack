@@ -333,6 +333,9 @@
 		E7ADFD3C15ACF27D00081392 /* SupervisionTypeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD3B15ACF27D00081392 /* SupervisionTypeEntity.m */; };
 		E7ADFD3F15AD0E8A00081392 /* ExistingInterventionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD3E15AD0E8A00081392 /* ExistingInterventionEntity.m */; };
 		E7ADFD4215AD37AD00081392 /* ExistingHoursEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD4115AD37AD00081392 /* ExistingHoursEntity.m */; };
+		E7ADFD4515AE2ACF00081392 /* ExistingAssessmentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD4415AE2ACF00081392 /* ExistingAssessmentEntity.m */; };
+		E7ADFD4815AE2AF500081392 /* ExistingSupervisionReceivedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD4715AE2AF500081392 /* ExistingSupervisionReceivedEntity.m */; };
+		E7ADFD4B15AE2B0900081392 /* ExistingSupportActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD4A15AE2B0900081392 /* ExistingSupportActivityEntity.m */; };
 		E7B81461159A5FFE0039F38F /* psyTrainTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7B8145F159A5FFE0039F38F /* psyTrainTrack.xcdatamodeld */; };
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
@@ -919,6 +922,12 @@
 		E7ADFD3E15AD0E8A00081392 /* ExistingInterventionEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingInterventionEntity.m; sourceTree = "<group>"; };
 		E7ADFD4015AD37AD00081392 /* ExistingHoursEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursEntity.h; sourceTree = "<group>"; };
 		E7ADFD4115AD37AD00081392 /* ExistingHoursEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursEntity.m; sourceTree = "<group>"; };
+		E7ADFD4315AE2ACF00081392 /* ExistingAssessmentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingAssessmentEntity.h; sourceTree = "<group>"; };
+		E7ADFD4415AE2ACF00081392 /* ExistingAssessmentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingAssessmentEntity.m; sourceTree = "<group>"; };
+		E7ADFD4615AE2AF500081392 /* ExistingSupervisionReceivedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingSupervisionReceivedEntity.h; sourceTree = "<group>"; };
+		E7ADFD4715AE2AF500081392 /* ExistingSupervisionReceivedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingSupervisionReceivedEntity.m; sourceTree = "<group>"; };
+		E7ADFD4915AE2B0900081392 /* ExistingSupportActivityEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingSupportActivityEntity.h; sourceTree = "<group>"; };
+		E7ADFD4A15AE2B0900081392 /* ExistingSupportActivityEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingSupportActivityEntity.m; sourceTree = "<group>"; };
 		E7B81460159A5FFE0039F38F /* psyTrainTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = psyTrainTrack.xcdatamodel; sourceTree = "<group>"; };
 		E7C0749D150E60B4009C5498 /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = "<group>"; };
 		E7C0749E150E60B4009C5498 /* KeyEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyEntity.m; sourceTree = "<group>"; };
@@ -1796,6 +1805,12 @@
 		E7989FE9157FAE35006B9DBD /* Managed Object Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				E7ADFD4915AE2B0900081392 /* ExistingSupportActivityEntity.h */,
+				E7ADFD4A15AE2B0900081392 /* ExistingSupportActivityEntity.m */,
+				E7ADFD4615AE2AF500081392 /* ExistingSupervisionReceivedEntity.h */,
+				E7ADFD4715AE2AF500081392 /* ExistingSupervisionReceivedEntity.m */,
+				E7ADFD4315AE2ACF00081392 /* ExistingAssessmentEntity.h */,
+				E7ADFD4415AE2ACF00081392 /* ExistingAssessmentEntity.m */,
 				E7ADFD3D15AD0E8A00081392 /* ExistingInterventionEntity.h */,
 				E7ADFD3E15AD0E8A00081392 /* ExistingInterventionEntity.m */,
 				E7ADFD3A15ACF27D00081392 /* SupervisionTypeEntity.h */,
@@ -2537,6 +2552,9 @@
 				E7ADFD3C15ACF27D00081392 /* SupervisionTypeEntity.m in Sources */,
 				E7ADFD3F15AD0E8A00081392 /* ExistingInterventionEntity.m in Sources */,
 				E7ADFD4215AD37AD00081392 /* ExistingHoursEntity.m in Sources */,
+				E7ADFD4515AE2ACF00081392 /* ExistingAssessmentEntity.m in Sources */,
+				E7ADFD4815AE2AF500081392 /* ExistingSupervisionReceivedEntity.m in Sources */,
+				E7ADFD4B15AE2B0900081392 /* ExistingSupportActivityEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,7 +20,7 @@
 #import "InterventionTypeEntity.h"
 
 typedef enum {
-    kTrakTypeUnknown,
+    kTrackTypeUnknown,
     kTrackTypeIntervention,
     kTrackTypeInterventionSubType,
     kTrackTypeAssessment,

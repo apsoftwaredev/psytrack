@@ -185,7 +185,7 @@
                 
         
         
-        NSPredicate *predicateForTrackEntities=[self predicateForTrackEntitiesAllBeforeAndEqualToEndDateForMonth:(NSDate *)date];
+        NSPredicate *predicateForTrackEntities=[self predicateForTrackEntitiesAllBeforeAndEqualToEndDateForMonth];
         
         self.interventionsDeliveredArray=[self fetchObjectsFromEntity:kTrackInterventionEntityName filterPredicate:predicateForTrackEntities];
         
@@ -195,7 +195,7 @@
         
         self.supervisionReceivedArray=[self fetchObjectsFromEntity:kTrackSupervisionReceivedEntityName filterPredicate:predicateForTrackEntities];
         
-        self.existingHoursHoursArray=[self fetchObjectsFromEntity:kTrackExistingHoursEntityName filterPredicate:[self predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth:date]];
+        self.existingHoursHoursArray=[self fetchObjectsFromEntity:kTrackExistingHoursEntityName filterPredicate:[self predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth]];
         
         
         
@@ -377,25 +377,25 @@
         case kSummaryWeekTwo:
         {
             trackPredicate=[self predicateForTrackWeek:kTrackWeekTwo clincian:clinician];
-            existingHoursPredicate=[self predicateForExistingHoursWeek:kTrackWeekOne clincian:clinician];
+            existingHoursPredicate=[self predicateForExistingHoursWeek:kTrackWeekTwo clincian:clinician];
         }
             break;
         case kSummaryWeekThree:
         {
             trackPredicate=[self predicateForTrackWeek:kTrackWeekThree clincian:clinician];
-            existingHoursPredicate=[self predicateForExistingHoursWeek:kTrackWeekOne clincian:clinician];
+            existingHoursPredicate=[self predicateForExistingHoursWeek:kTrackWeekThree clincian:clinician];
         }
             break;
         case kSummaryWeekFour:
         {
             trackPredicate=[self predicateForTrackWeek:kTrackWeekFour clincian:clinician];
-            existingHoursPredicate=[self predicateForExistingHoursWeek:kTrackWeekOne clincian:clinician];
+            existingHoursPredicate=[self predicateForExistingHoursWeek:kTrackWeekFour clincian:clinician];
         }
             break;
         case kSummaryWeekFive:
         {
             trackPredicate=[self predicateForTrackWeek:kTrackWeekFive clincian:clinician];
-            existingHoursPredicate=[self predicateForExistingHoursWeek:kTrackWeekOne clincian:clinician];
+            existingHoursPredicate=[self predicateForExistingHoursWeek:kTrackWeekFive clincian:clinician];
         }
             break;
         case kSummaryWeekUndefined:

@@ -343,6 +343,9 @@ if (fetchedObjects == nil) {
     SCClassDefinition *subTypesDef=[SCClassDefinition definitionWithClass:[TrackTypeWithTotalTimes class] autoGeneratePropertyDefinitions:YES];
     
     for (InterventionTypeEntity *interventionType in fetchedObjects) {
+        
+        TrackTypeWithTotalTimes *interventionTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:interventionType];
+        
         [interventionType willAccessValueForKey:@"subTypes"];
         NSSet *interventionSubTypeSet=interventionType.subTypes;
         
@@ -478,7 +481,7 @@ if (fetchedObjects == nil) {
         footerLabel.backgroundColor = sectionSubFooterLabel.backgroundColor;
         footerLabel.textColor = sectionSubFooterLabel.textColor;
         footerLabel.tag=60;
-        
+        footerLabel.text=interventionTypeWithTotalTimes.totalToDateStr;
         footerLabel.textAlignment=UITextAlignmentCenter;
         [subFooterLabelContainerView addSubview:footerLabel];
         
