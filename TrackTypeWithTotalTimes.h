@@ -20,6 +20,7 @@
 #import "InterventionTypeEntity.h"
 
 typedef enum {
+    kTrakTypeUnknown,
     kTrackTypeIntervention,
     kTrackTypeInterventionSubType,
     kTrackTypeAssessment,
@@ -36,12 +37,12 @@ typedef enum {
     
     PTrackType trackType;
     
-    
+   __weak NSString *trackPathStartString_;
     
 }
 
 
-
+@property (nonatomic, weak) NSString *trackPathStartString;
 @property (nonatomic, weak) id trackTypeObject;
 
 @property (nonatomic, weak) NSString *typeLabelText;
@@ -72,6 +73,7 @@ typedef enum {
 @property (nonatomic, assign) NSTimeInterval totalToDateTI;
 
 -(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trackTypeObject:(id)trackTypeObjectGiven;
--(NSTimeInterval ) totalOverallHoursTIForOveralCell:(PTSummaryCell)summaryCell clinician:(ClinicianEntity *)clinician;
+-(void ) totalOverallHoursTIForOveralCell:(PTSummaryCell)summaryCell clinician:(ClinicianEntity *)clinician;
+-(NSString *)relationshipPathStartToTrackEntity;
 
 @end

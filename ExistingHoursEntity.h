@@ -2,13 +2,14 @@
 //  ExistingHoursEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/8/12.
+//  Created by Daniel Boice on 7/10/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class ClinicianEntity, ExistingInterventionEntity;
 
 @interface ExistingHoursEntity : NSManagedObject
 
@@ -18,11 +19,14 @@
 @property (nonatomic, retain) NSString * keyString;
 @property (nonatomic, retain) NSSet *supportActivities;
 @property (nonatomic, retain) NSSet *assessments;
-@property (nonatomic, retain) NSManagedObject *supervisionGiven;
+@property (nonatomic, retain) ClinicianEntity *supervisor;
 @property (nonatomic, retain) NSSet *directInterventions;
-@property (nonatomic, retain) NSManagedObject *supervisionReceived;
+@property (nonatomic, retain) NSSet *supervisionReceived;
+@property (nonatomic, retain) NSSet *supervisionGiven;
+
 
 @property (nonatomic, strong) NSString *tempNotes;
+
 
 @end
 
@@ -38,9 +42,19 @@
 - (void)addAssessments:(NSSet *)values;
 - (void)removeAssessments:(NSSet *)values;
 
-- (void)addDirectInterventionsObject:(NSManagedObject *)value;
-- (void)removeDirectInterventionsObject:(NSManagedObject *)value;
+- (void)addDirectInterventionsObject:(ExistingInterventionEntity *)value;
+- (void)removeDirectInterventionsObject:(ExistingInterventionEntity *)value;
 - (void)addDirectInterventions:(NSSet *)values;
 - (void)removeDirectInterventions:(NSSet *)values;
+
+- (void)addSupervisionReceivedObject:(NSManagedObject *)value;
+- (void)removeSupervisionReceivedObject:(NSManagedObject *)value;
+- (void)addSupervisionReceived:(NSSet *)values;
+- (void)removeSupervisionReceived:(NSSet *)values;
+
+- (void)addSupervisionGivenObject:(NSManagedObject *)value;
+- (void)removeSupervisionGivenObject:(NSManagedObject *)value;
+- (void)addSupervisionGiven:(NSSet *)values;
+- (void)removeSupervisionGiven:(NSSet *)values;
 
 @end

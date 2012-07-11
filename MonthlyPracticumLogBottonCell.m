@@ -41,10 +41,13 @@
 
 
 -(void)willDisplay{
+    
+    [super willDisplay];
 NSLog(@"self bound object is %@",self.boundObject);
    
-    cellSubTypeLabel.text=trackTypeWithTotalTimesObject_.typeLabelText;
-           
+        
+      self.cellSubTypeLabel.text=self.trackTypeWithTotalTimesObject.typeLabelText;
+           NSLog(@"track type with total times object %@",self.trackTypeWithTotalTimesObject);
        
 //        NSString *monthTotalStr=[interventionTypeSubtype totalHoursToDateForMonthStr:monthToDisplay];
         
@@ -59,20 +62,7 @@ NSLog(@"self bound object is %@",self.boundObject);
         NSLog(@"month is %@ clinician is %@",monthToDisplay_,clinician_);
   
         
-        self.hoursWeek1Label.text=trackTypeWithTotalTimesObject_.totalWeek1Str;
-        self.hoursWeek2Label.text=trackTypeWithTotalTimesObject_.totalWeek2Str;
-        self.hoursWeek3Label.text=trackTypeWithTotalTimesObject_.totalWeek3Str;
-        self.hoursWeek4Label.text=trackTypeWithTotalTimesObject_.totalWeek4Str;
-        self.hoursWeek5Label.text=trackTypeWithTotalTimesObject_.totalWeek5Str;
-        
-        if (trackTypeWithTotalTimesObject_.totalWeekUndefinedTI>0) {
-            self.hoursWeekUndefinedLabel.text=trackTypeWithTotalTimesObject_.totalWeekUndefinedStr;
-        }
-        self.hoursMonthTotalLabel.text=trackTypeWithTotalTimesObject_.totalForMonthStr;
-        self.hoursCumulativeLabel.text=trackTypeWithTotalTimesObject_.totalCummulativeStr;
-        self.hoursTotalHoursLabel.text=trackTypeWithTotalTimesObject_.totalToDateStr;
-    
-    
+            
     
     self.layer.borderWidth=0;
     self.accessoryType=UITableViewCellAccessoryNone;
@@ -85,25 +75,41 @@ NSLog(@"self bound object is %@",self.boundObject);
    
 
 }
+
 -(void)loadBindingsIntoCustomControls{
 
     [super loadBindingsIntoCustomControls];
-    
-    if ((!monthToDisplay_||!clinician_)&& [self.superview.superview.superview.superview.superview isKindOfClass:[MonthlyPracticumLogTopCell class]]) {
-        MonthlyPracticumLogTopCell *monthlyPracticumLogTopCell=(MonthlyPracticumLogTopCell *)self.superview.superview.superview.superview.superview;
-        
-        
-        monthToDisplay_=(NSDate *)monthlyPracticumLogTopCell.monthToDisplay;
-        clinician_=(ClinicianEntity *)monthlyPracticumLogTopCell.clinician;
-    }
-
-    id trackTypeObject=(id )self.boundObject;
-    
    
     
-   self.trackTypeWithTotalTimesObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:monthToDisplay_ clinician:clinician_ trackTypeObject:trackTypeObject]; 
+    self.trackTypeWithTotalTimesObject=(TrackTypeWithTotalTimes *) self.boundObject; 
+
+    self.cellSubTypeLabel.text=trackTypeWithTotalTimesObject_.typeLabelText;
+    NSLog(@"self bound object is %@",self.boundObject);
+ 
+    NSLog(@"type text is %@",self.trackTypeWithTotalTimesObject.typeLabelText);
+    if (!monthToDisplay_||!clinician_) {       
+        monthToDisplay_=(NSDate *)self.trackTypeWithTotalTimesObject.monthToDisplay;
+        
+    }
     
+    NSLog(@"month to display is %@",monthToDisplay_);
+  NSLog(@"week two %@",trackTypeWithTotalTimesObject_.totalWeek1Str);
+    self.hoursWeek1Label.text=trackTypeWithTotalTimesObject_.totalWeek1Str;
+    self.hoursWeek2Label.text=trackTypeWithTotalTimesObject_.totalWeek2Str;
+    self.hoursWeek3Label.text=trackTypeWithTotalTimesObject_.totalWeek3Str;
+    self.hoursWeek4Label.text=trackTypeWithTotalTimesObject_.totalWeek4Str;
+    self.hoursWeek5Label.text=trackTypeWithTotalTimesObject_.totalWeek5Str;
     
+    if (self.hoursWeekUndefinedLabel) {
+        self.hoursWeekUndefinedLabel.text=trackTypeWithTotalTimesObject_.totalWeekUndefinedStr;
+    }
+    self.hoursMonthTotalLabel.text=trackTypeWithTotalTimesObject_.totalForMonthStr;
+    self.hoursCumulativeLabel.text=trackTypeWithTotalTimesObject_.totalCummulativeStr;
+    self.hoursTotalHoursLabel.text=trackTypeWithTotalTimesObject_.totalToDateStr;
+    
+
+    
+
     
 }
 

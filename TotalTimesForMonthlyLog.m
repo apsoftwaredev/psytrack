@@ -39,6 +39,7 @@ existingHoursHoursArray=existingHoursArray_;
     if (self) {
         
         self.monthToDisplay=date;
+        NSLog(@"month to display is %@",self.monthToDisplay);
         self.monthStartDate=[self monthStartDateForDate:date];
         self.monthEndDate=[self monthEndDate:date];
         
@@ -496,6 +497,18 @@ existingHoursHoursArray=existingHoursArray_;
     
     return returnPredicate;    
 }     
+
+-(NSPredicate *)predicateForExistingHoursAllBeforeAndEqualToEndDateForMonthThroughExistingHours:(NSDate *)dateInMonth{
+    
+    NSPredicate *returnPredicate=nil;
+    
+    if (dateInMonth) {
+        
+        returnPredicate = [NSPredicate predicateWithFormat:@" (existingHours.endDate <= %@)", [self monthEndDate:dateInMonth]];
+    }
+    
+    return returnPredicate;    
+}
 
 -(NSPredicate *)predicateForExistingHoursAllBeforeEndDate:(NSDate *)date clinician:(ClinicianEntity *)clinician{
     

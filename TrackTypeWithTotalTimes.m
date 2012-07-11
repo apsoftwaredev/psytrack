@@ -24,11 +24,15 @@
 #import "SupportActivityTypeEntity.h"
 #import "SupervisionTypeEntity.h"
 #import "SupervisionTypeSubtypeEntity.h"
+#import "PTTAppDelegate.h"
+#import "ExistingHoursEntity.h"
+#import "ExistingInterventionEntity.h"
 
 
 @implementation TrackTypeWithTotalTimes
 
 @synthesize trackTypeObject;
+@synthesize trackPathStartString=trackPathStartString_;
 @synthesize typeLabelText;
 
 @synthesize totalWeek1Str;
@@ -66,139 +70,243 @@
     
     if (self) {
         
-        NSPredicate *predicateForTrackEntities=[self predicateForTrackEntitiesAllBeforeAndEqualToEndDateForMonth:(NSDate *)date];
         
-        NSPredicate * predicateForExistingHoursEntities=[self predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth:date];
-        self.trackTypeObject=trackTypeObjectGiven;
+        NSLog(@"date is %@",date);
+        
+        
+             
+         trackType=[self trackTypeForObjectGiven:trackTypeObjectGiven];
+        
+        NSPredicate *predicateForTrackEntities=[self predicateForTrackEntitiesAllBeforeAndEqualToEndDateForMonth];
+        
+        NSPredicate * predicateForExistingHoursEntities=[self predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth];
+        
+        
+        NSLog(@"predicate for existing hours entites is %@",predicateForExistingHoursEntities.predicateFormat);
+        NSLog(@"predicate for track entities is %@",predicateForTrackEntities.predicateFormat);
+        
+        
+        
+        
         
 
+        self.trackTypeObject=trackTypeObjectGiven;
+        
+       
+        switch (trackType) {
+            case kTrackTypeIntervention:
+            {
                 if ([trackTypeObjectGiven isKindOfClass:[InterventionTypeEntity class]]) {
                     InterventionTypeEntity *interventionType=(InterventionTypeEntity *)trackTypeObjectGiven;
                     
                     self.typeLabelText=interventionType.interventionType;
-                    NSArray *allInterventionsDeliveredForType=interventionType.interventionDelivered.allObjects;
-                    
-                    if (allInterventionsDeliveredForType&&allInterventionsDeliveredForType.count) {
-                          self.interventionsDeliveredArray=[allInterventionsDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                    NSArray *allInterventionsDeliveredForType=nil;
+                    if (interventionType.interventionsDelivered) {
+                        
+                        allInterventionsDeliveredForType=interventionType.interventionsDelivered.allObjects;
                     }
-                  
+                    if (allInterventionsDeliveredForType&&allInterventionsDeliveredForType.count &&predicateForTrackEntities) {
+                        self.interventionsDeliveredArray=[allInterventionsDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                    }
+                    
                     NSLog(@"intervention Delivered Array is %@",self.interventionsDeliveredArray);
                     
-                   
-                    NSArray *allExistingInterventionsArrayForType=interventionType.existingInterventions.allObjects;
+                    NSArray *allExistingInterventionsArrayForType=nil;
+                    if (interventionType.existingInterventions) {
+                        allExistingInterventionsArrayForType=interventionType.existingInterventions.allObjects;
+                    }
                     
-                    if (allExistingInterventionsArrayForType&&allExistingInterventionsArrayForType.count) {
+                    
+                    if (allExistingInterventionsArrayForType&&allExistingInterventionsArrayForType.count&& predicateForExistingHoursEntities) {
+                        
+                    
                         self.existingHoursHoursArray=[allExistingInterventionsArrayForType filteredArrayUsingPredicate:predicateForExistingHoursEntities];
                     }
                     
                     
                     
                     
-                    trackType=kTrackTypeIntervention;
+                   
+                    
+                    for (NSInteger i=0; i<9; i++) {
+                        [ self  totalOverallHoursTIForOveralCell:(PTSummaryCell)i clinician:(ClinicianEntity *)clinician];
+                    }
                     return self;
                     
                 }
+                
 
             
             
-       
+            }
+                break;
+            case kTrackTypeInterventionSubType:
+            {
                 if ([trackTypeObjectGiven isKindOfClass:[InterventionTypeSubtypeEntity class]]) {
                     
                     InterventionTypeSubtypeEntity *interventionSubType=(InterventionTypeSubtypeEntity *)trackTypeObjectGiven;
                     
                     self.typeLabelText=interventionSubType.interventionSubType;
                     
-                    NSArray *allInterventionsDeliveredForSubType=interventionSubType.interventionDelivered.allObjects;
                     
-                    if (allInterventionsDeliveredForSubType &&allInterventionsDeliveredForSubType.count) {
+                    NSArray *allInterventionsDeliveredForSubType=nil;
+                    if (interventionSubType.interventionsDelivered) {
+                        allInterventionsDeliveredForSubType= interventionSubType.interventionsDelivered.allObjects;
+                    }
+                    
+                    
+                    
+                    NSLog(@"all interventions deliverd before filter%@",allInterventionsDeliveredForSubType);
+                    if (allInterventionsDeliveredForSubType &&allInterventionsDeliveredForSubType.count &&predicateForTrackEntities) {
                         self.interventionsDeliveredArray=[allInterventionsDeliveredForSubType filteredArrayUsingPredicate:predicateForTrackEntities];
                         
                     }
                     NSLog(@"intervention Delivered Array is %@",self.interventionsDeliveredArray);
                     
                     
-                    
-                    NSArray *allExistingInterventionsArrayForSubType=interventionSubType.existingInterventions.allObjects;
-                    
-                    if (allExistingInterventionsArrayForSubType&&allExistingInterventionsArrayForSubType.count) {
-                        self.existingHoursHoursArray=[allExistingInterventionsArrayForSubType filteredArrayUsingPredicate:predicateForExistingHoursEntities];
-                        
+                    NSArray *allExistingInterventionsArrayForSubType=nil;
+                    if (interventionSubType.existingInterventions) {
+                        allExistingInterventionsArrayForSubType=interventionSubType.existingInterventions.allObjects;
                     }
                     
                     
+                    NSMutableArray *existingHoursMutableArray=[NSMutableArray array];
                     
-                    trackType=kTrackTypeInterventionSubType;
+                    for (ExistingInterventionEntity *existingInterventionObject in allExistingInterventionsArrayForSubType) {
+                        if (existingInterventionObject.existingHours &&[existingInterventionObject.existingHours isKindOfClass:[ExistingHoursEntity class]]) {
+                            ExistingHoursEntity *existingHoursObject =( ExistingHoursEntity*)existingInterventionObject.existingHours;
+                            NSLog(@"existing hours obect is %@",existingHoursObject);
+                            [existingHoursMutableArray addObject:existingHoursObject];
+                        }
+                    }
+                    
+                    NSLog(@"all existing interventions before filter %@",allExistingInterventionsArrayForSubType);
+                    if (allExistingInterventionsArrayForSubType&&allExistingInterventionsArrayForSubType.count  && predicateForExistingHoursEntities) {
+                        self.existingHoursHoursArray=[existingHoursMutableArray filteredArrayUsingPredicate:predicateForExistingHoursEntities];
+                        
+                    }NSLog(@"existing hours array is %@",self.existingHoursHoursArray);
+                    
+                    
+                   
+                    for (NSInteger i=0; i<9; i++) {
+                        [ self  totalOverallHoursTIForOveralCell:(PTSummaryCell)i clinician:(ClinicianEntity *)clinician];
+                    }
                     return self;
                     
                 }
 
-       
+                
+                
+            }
+                break;
+            case kTrackTypeAssessment:
+            {
                 if ([trackTypeObjectGiven isKindOfClass:[AssessmentTypeEntity class]]) {
                     AssessmentTypeEntity *assessmentType=(AssessmentTypeEntity *)trackTypeObjectGiven;
                     
                     self.typeLabelText=assessmentType.assessmentType;
                     
-                    NSArray *allAssessemntsDeliveredForType=assessmentType.assessments.allObjects;
+                    NSArray *allAssessemntsDeliveredForType=nil;
+                    if (assessmentType.assessments) {
+                        allAssessemntsDeliveredForType=assessmentType.assessments.allObjects;
+                    }
                     
-                    if (allAssessemntsDeliveredForType&&allAssessemntsDeliveredForType.count) {
+                    
+                    
+                    if (allAssessemntsDeliveredForType&&allAssessemntsDeliveredForType.count  &&predicateForTrackEntities) {
                         self.assessmentsDeliveredArray=[allAssessemntsDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
                         
                     }
                     NSLog(@"intervention Delivered Array is %@",self.assessmentsDeliveredArray);
                     
+                    NSArray *allExistingAssessmentsArrayForType=nil;
                     
-                    NSArray *allExistingAssessmentsArrayForType=assessmentType.existingAssessments.allObjects;
+                    if (assessmentType.existingAssessments) {
+                        allExistingAssessmentsArrayForType=assessmentType.existingAssessments.allObjects;
+                    }
                     
-                    if (allExistingAssessmentsArrayForType&&allExistingAssessmentsArrayForType.count) {
+                    
+                    
+                    
+                    if (allExistingAssessmentsArrayForType&&allExistingAssessmentsArrayForType.count && predicateForExistingHoursEntities) {
                         self.existingHoursHoursArray=[allExistingAssessmentsArrayForType filteredArrayUsingPredicate:predicateForExistingHoursEntities];
                         
                     }
                     
                     
                     
-                    
-                    trackType=kTrackTypeAssessment;
+                   
+                    for (NSInteger i=0; i<9; i++) {
+                        [ self  totalOverallHoursTIForOveralCell:(PTSummaryCell)i clinician:(ClinicianEntity *)clinician];
+                    }
                     return self;
                 }
+
                 
-        
+                
+            }
+                break;
+            case kTrackTypeSupport:
+            {
                 
                 if ([trackTypeObjectGiven isKindOfClass:[SupportActivityTypeEntity class]]) {
                     SupportActivityTypeEntity *supportActivityType=(SupportActivityTypeEntity *)trackTypeObjectGiven;
                     
                     self.typeLabelText=supportActivityType.supportActivityType;
                     
-                    NSArray *allSupportActivitiesDeliveredForType=supportActivityType.supportActivitiesDelivered.allObjects;
+                    NSArray *allSupportActivitiesDeliveredForType=nil;
+                    if (supportActivityType.supportActivitiesDelivered) {
+                        allSupportActivitiesDeliveredForType=supportActivityType.supportActivitiesDelivered.allObjects;
+                    }
                     
-                    if (allSupportActivitiesDeliveredForType&&allSupportActivitiesDeliveredForType.count) {
+                    
+                    
+                    
+                    if (allSupportActivitiesDeliveredForType&&allSupportActivitiesDeliveredForType.count  &&predicateForTrackEntities) {
                         self.supportActivityDeliveredArray=[allSupportActivitiesDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
                         
                     }
                     
                     NSLog(@"intervention Delivered Array is %@",self.supportActivityDeliveredArray);
                     
+                    NSArray *allExistingSupportActivitiesArrayForType=nil;
                     
-                    NSArray *allExistingSupportActivitiesArrayForType=supportActivityType.existingSupportActivities.allObjects;
+                    if (supportActivityType.existingSupportActivities) {
+                        allExistingSupportActivitiesArrayForType=supportActivityType.existingSupportActivities.allObjects;
+                        
+                    }
                     
-                    if (allSupportActivitiesDeliveredForType && allSupportActivitiesDeliveredForType.count) {
+                    
+                    if (allSupportActivitiesDeliveredForType && allSupportActivitiesDeliveredForType.count&& predicateForExistingHoursEntities) {
                         self.existingHoursHoursArray=[allExistingSupportActivitiesArrayForType filteredArrayUsingPredicate:predicateForExistingHoursEntities];
                     }
-                                       
                     
-                    trackType=kTrackTypeSupport;
+                   
+                    for (NSInteger i=0; i<9; i++) {
+                        [ self  totalOverallHoursTIForOveralCell:(PTSummaryCell)i clinician:(ClinicianEntity *)clinician];
+                    }
                     return self;
                 }
-         
+
                 
+                
+            }
+                break;
+            case kTrackTypeSupervision:
+            {
                 if ([trackTypeObjectGiven isKindOfClass:[SupervisionTypeEntity class]]) {
                     SupervisionTypeEntity *supervisionType=(SupervisionTypeEntity *)trackTypeObjectGiven;
                     
                     self.typeLabelText=supervisionType.supervisionType;
                     
+                    NSArray *allSupervisionReceivedForType=nil;
+                    if (supervisionType.supervisionRecieved) {
+                        allSupervisionReceivedForType=supervisionType.supervisionRecieved.allObjects;
+                    }
                     
-                    NSArray *allSupervisionReceivedForType=supervisionType.supervisionRecieved.allObjects;
                     
-                    if (allSupervisionReceivedForType &&allSupervisionReceivedForType.count) {
+                    
+                    if (allSupervisionReceivedForType &&allSupervisionReceivedForType.count  &&predicateForTrackEntities) {
                         self.supervisionReceivedArray=[allSupervisionReceivedForType filteredArrayUsingPredicate:predicateForTrackEntities];
                         
                     }
@@ -206,57 +314,174 @@
                     
                     NSLog(@"intervention Delivered Array is %@",self.supportActivityDeliveredArray);
                     
-                    NSArray *allExistingSupervisionReceivedArrayForType=supervisionType.existingSupervision.allObjects;
                     
-                    if (allExistingSupervisionReceivedArrayForType&&allExistingSupervisionReceivedArrayForType.count) {
+                    
+                    NSArray *allExistingSupervisionReceivedArrayForType=nil;
+                    if (supervisionType.existingSupervision) {
+                        allExistingSupervisionReceivedArrayForType=supervisionType.existingSupervision.allObjects;
+                    }
+                    
+                    if (allExistingSupervisionReceivedArrayForType&&allExistingSupervisionReceivedArrayForType.count&& predicateForExistingHoursEntities) {
                         self.existingHoursHoursArray=[allExistingSupervisionReceivedArrayForType filteredArrayUsingPredicate:predicateForExistingHoursEntities];
                         
                     }
                     
                     
+                   
                     
-                    trackType=kTrackTypeSupervision;
+                    for (NSInteger i=0; i<9; i++) {
+                        [ self  totalOverallHoursTIForOveralCell:(PTSummaryCell)i clinician:(ClinicianEntity *)clinician];
+                    }
                     return self;
                 }
-        
+
+                
+                
+            }
+                break;
+            case kTrackTypeSupervisionSubType:
+            {
+                
                 
                 if ([trackTypeObjectGiven isKindOfClass:[SupervisionTypeSubtypeEntity class]]) {
                     SupervisionTypeSubtypeEntity *supervisionSubType=(SupervisionTypeSubtypeEntity *)trackTypeObjectGiven;
                     
                     self.typeLabelText=supervisionSubType.subType;
-                    NSArray *allSupervisionReceivedForSubType=supervisionSubType.supervisionReceived.allObjects;
                     
-                    if (allSupervisionReceivedForSubType &&allSupervisionReceivedForSubType.count) {
+                    
+                    NSArray *allSupervisionReceivedForSubType=nil;
+                    if (supervisionSubType.supervisionReceived) {
+                        allSupervisionReceivedForSubType =supervisionSubType.supervisionReceived.allObjects;
+                    }
+                    
+                    
+                    
+                    
+                    
+                    if (allSupervisionReceivedForSubType &&allSupervisionReceivedForSubType.count  &&predicateForTrackEntities) {
                         self.supervisionReceivedArray=[allSupervisionReceivedForSubType filteredArrayUsingPredicate:predicateForTrackEntities];
                         
                     }
                     
                     
                     NSLog(@"intervention Delivered Array is %@",self.supportActivityDeliveredArray);
+                    NSArray *allExistingSupervisionReceivedArrayForSubType=nil;
                     
-                    NSArray *allExistingSupervisionReceivedArrayForSubType=supervisionSubType.existingSupervision.allObjects;
+                    if (supervisionSubType.existingSupervision) {
+                        allExistingSupervisionReceivedArrayForSubType=supervisionSubType.existingSupervision.allObjects;
+                        
+                    }
                     
-                    if (allExistingSupervisionReceivedArrayForSubType &&allExistingSupervisionReceivedArrayForSubType.count) {
+                    
+                    
+                    if (allExistingSupervisionReceivedArrayForSubType &&allExistingSupervisionReceivedArrayForSubType.count&& predicateForExistingHoursEntities) {
                         self.existingHoursHoursArray=[allExistingSupervisionReceivedArrayForSubType filteredArrayUsingPredicate:predicateForExistingHoursEntities];
                         
                         
                     }
                     
                     
-                    trackType=kTrackTypeSupervisionSubType;
                     
                 }
-   
+
+                
+            }
+                break;
+            case kTrakTypeUnknown:
+            {
+                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                
+
+                [appDelegate displayNotification:@"Track object type was not identified"];
+                
+            }
+                break;
+                
+            default:
+                break;
+        }
+        
+                           
+            
+       
+               
+       
+                             
+        
+                        
+                
+                        
+                  
         
     }
+    
+    for (NSInteger i=0; i<9; i++) {
+        [ self  totalOverallHoursTIForOveralCell:(PTSummaryCell)i clinician:(ClinicianEntity *)clinician];
+    }
+    
+    
     
     return self;
     
     
 }
+-(PTrackType)trackTypeForObjectGiven:(id)trackTypeObjectGiven{
 
 
--(NSTimeInterval ) totalOverallHoursTIForOveralCell:(PTSummaryCell)summaryCell clinician:(ClinicianEntity *)clinician{
+    PTrackType trackTypeToReturn=kTrakTypeUnknown;
+    NSString * tempString=nil;
+
+    if ([trackTypeObjectGiven isKindOfClass:[InterventionTypeEntity class]]) {
+
+        tempString=@"interventionsDelivered";
+        trackTypeToReturn= kTrackTypeIntervention;
+
+    }
+
+    if ([trackTypeObjectGiven isKindOfClass:[InterventionTypeSubtypeEntity class]]) {
+
+        tempString=@"interventionsDelivered";
+        trackTypeToReturn=  kTrackTypeInterventionSubType;
+
+    }
+
+
+    if ([trackTypeObjectGiven isKindOfClass:[AssessmentTypeEntity class]]) {
+
+        tempString=@"assessmentsDelivered";
+        trackTypeToReturn=  kTrackTypeAssessment;
+
+    }
+
+    if ([trackTypeObjectGiven isKindOfClass:[SupportActivityTypeEntity class]]) {
+
+        tempString=@"supportActivitiesDelivered";
+        trackTypeToReturn=  kTrackTypeSupport;
+
+    }
+
+
+    if ([trackTypeObjectGiven isKindOfClass:[SupervisionTypeEntity class]]) {
+
+        tempString=@"supervisionReceived";
+        trackTypeToReturn=  kTrackTypeSupervision;
+
+    }
+
+
+    if ([trackTypeObjectGiven isKindOfClass:[SupervisionTypeSubtypeEntity class]]) {
+
+        tempString=@"supervisionReceived";
+        trackTypeToReturn=  kTrackTypeSupervisionSubType;
+
+    }
+    
+    self.trackPathStartString= [tempString stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+    return trackTypeToReturn;
+
+}
+
+-(void ) totalOverallHoursTIForOveralCell:(PTSummaryCell)summaryCell clinician:(ClinicianEntity *)clinician{
     
     NSPredicate *trackPredicate=nil;
     NSPredicate *existingHoursPredicate=nil;
@@ -408,7 +633,7 @@
        
      
     
-    NSTimeInterval overallTotalTI=0;
+//    NSTimeInterval overallTotalTI=0;
     
     switch (summaryCell) {
         case kSummaryWeekOne:
@@ -623,10 +848,195 @@
     
     
     
-    return overallTotalTI;
+    
     
 }
 
+
+-(NSPredicate *)allHoursPredicateForClincian:(ClinicianEntity *)clinician{
+    
+    NSPredicate *priorMonthsServiceDatesPredicate=nil;
+    
+        
+        
+    if (clinician) {
+    
+        
+        
+        priorMonthsServiceDatesPredicate=[NSPredicate predicateWithFormat:@"%K. supervisor.objectID == %@ ",clinician.objectID];
+        
+    }
+    
+    return priorMonthsServiceDatesPredicate;
+    
+}
+
+
+-(NSString *)relationshipPathStartToTrackEntity{
+
+
+    NSString *relationshipPathStartPoint;
+    
+    
+    return relationshipPathStartPoint;
+
+
+}
+
+
+
+-(NSPredicate *)priorMonthsHoursPredicateForClincian:(ClinicianEntity *)clinician{
+    
+    NSPredicate *priorMonthsServiceDatesPredicate=nil;
+   
+    
+    
+    if (clinician) {
+        priorMonthsServiceDatesPredicate=[NSPredicate predicateWithFormat:@"(self.supervisor.objectID == %@) AND (dateOfService < %@ )",clinician.objectID,monthStartDate_];
+        
+    }else {
+        priorMonthsServiceDatesPredicate=[NSPredicate predicateWithFormat:@"dateOfService < %@ ",monthStartDate_];
+        
+        
+    }
+    
+    return priorMonthsServiceDatesPredicate;
+    
+}
+
+
+-(NSPredicate *)predicateForTrackCurrentMonthsForClincian:(ClinicianEntity *)clinician{
+    
+    NSPredicate *currentMonthPredicate=nil;
+    
+    
+    if (clinician) {
+        currentMonthPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND ((dateOfService >= %@) AND (dateOfService <= %@)) || (dateOfService = nil))", clinician.objectID, monthStartDate_, monthEndDate_];
+    }
+    else {
+        currentMonthPredicate = [NSPredicate predicateWithFormat:@" (dateOfService >= %@) AND (dateOfService <= %@)  ", monthStartDate_,monthEndDate_];
+    }
+    
+    return currentMonthPredicate;    
+}
+
+
+-(NSPredicate *)predicateForExistingHoursCurrentMonthsForClincian:(ClinicianEntity *)clinician{
+    
+    NSPredicate *currentMonthPredicate=nil;
+    
+    
+    if (clinician) {
+        currentMonthPredicate = [NSPredicate predicateWithFormat:@"(self.supervisor.objectID == %@ ) AND (existingHours.startDate >= %@) AND (existingHours.endDate <= %@)",clinician.objectID, monthStartDate_,monthEndDate_];
+    }
+    else {
+        currentMonthPredicate = [NSPredicate predicateWithFormat:@" (startDate >= %@) AND (endDate <= %@)", monthStartDate_,monthEndDate_];
+    }
+    
+    return currentMonthPredicate;    
+}
+
+
+-(NSPredicate *)predicateForTrackEntitiesAllBeforeAndEqualToEndDateForMonth{
+    
+    NSPredicate *returnPredicate=nil;
+    
+    
+    if (monthEndDate_) {
+        
+        returnPredicate = [NSPredicate predicateWithFormat:  @" (dateOfService <= %@)",  monthEndDate_];
+    }
+    
+    return returnPredicate;    
+}                                          
+
+-(NSPredicate *)predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth{
+    
+    NSPredicate *returnPredicate=nil;
+       
+    
+    if (monthEndDate_) {
+        
+        returnPredicate = [NSPredicate predicateWithFormat:@" (endDate <= %@)", monthEndDate_];
+    }
+    
+    return returnPredicate;    
+}     
+
+
+
+-(NSPredicate *)predicateForExistingHoursAllBeforeEndDate:(NSDate *)date clinician:(ClinicianEntity *)clinician{
+    
+    NSPredicate *returnPredicate=nil;
+   
+
+    
+    if (date &&[date isKindOfClass:[NSDate class]]) {
+        if (clinician) {
+            returnPredicate = [NSPredicate predicateWithFormat:@"((supervisor.objectID == %@ ) AND  (endDate < %@))",clinician.objectID, date];
+        }
+        else {
+            returnPredicate = [NSPredicate predicateWithFormat:@" (endDate < %@)", date];
+        }
+    }
+    
+    return returnPredicate;    
+}     
+
+
+-(NSPredicate *)predicateForExistingHoursWeek:(PTrackWeek)week clincian:(ClinicianEntity *)clinician{
+    
+    NSPredicate *weekPredicate=nil;
+    
+
+    
+    if (clinician) {
+        weekPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND (existingHours.startDate >= %@) AND (existingHours.endDate <= %@))",clinician.objectID, [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
+    }
+    else {
+        weekPredicate = [NSPredicate predicateWithFormat:@" ((startDate >= %@) AND (endDate <= %@))", [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
+    }
+    
+    return weekPredicate;
+    
+}
+
+
+-(NSPredicate *)predicateForExistingHoursWeekUndefinedForClincian:(ClinicianEntity *)clinician{
+    
+    NSPredicate *undefinedWeekPredicate=nil;
+   
+
+    
+    if (clinician) {
+        undefinedWeekPredicate = [NSPredicate predicateWithFormat:@" ((self.supervisor.objectID == %@ )  AND ((startDate >= %@) AND (endDate <= %@)) AND (   ((startDate >= %@) AND (endDate > %@)) OR ((startDate >= %@) AND (endDate > %@)) OR ((startDate >= %@) AND (endDate > %@)) OR ((startDate >= %@) AND (endDate > %@)) ))",clinician.objectID, monthStartDate_,monthEndDate_,week1StartDate_,week1EndDate_,week2StartDate_,week2EndDate_,week3StartDate_,week3EndDate_,week4StartDate_,week4EndDate_];
+        
+        
+    }
+    else {
+        undefinedWeekPredicate = [NSPredicate predicateWithFormat:@" (((startDate >= %@) AND (endDate <= %@)) AND (   ((startDate >= %@) AND (endDate > %@)) OR ((startDate >= %@) AND (endDate > %@)) OR ((startDate >= %@) AND (endDate > %@)) OR ((startDate >= %@) AND (endDate > %@)) ))", monthStartDate_,monthEndDate_,week1StartDate_,week1EndDate_,week2StartDate_,week2EndDate_,week3StartDate_,week3EndDate_,week4StartDate_,week4EndDate_];
+    }
+    
+    return undefinedWeekPredicate;
+    
+}
+
+-(NSPredicate *)predicateForTrackWeek:(PTrackWeek)week clincian:(ClinicianEntity *)clinician{
+    
+    NSPredicate *weekPredicate=nil;
+    
+
+    
+    if (clinician) {
+        weekPredicate = [NSPredicate predicateWithFormat:@"(supervisor.objectID == %@ ) AND ((dateOfService >= %@) AND (dateOfService <= %@))",clinician.objectID, [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
+    }
+    else {
+        weekPredicate = [NSPredicate predicateWithFormat:@" (dateOfService >= %@) AND (dateOfService <= %@)  ", [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
+    }
+    
+    return weekPredicate;
+    
+}
 
 
 

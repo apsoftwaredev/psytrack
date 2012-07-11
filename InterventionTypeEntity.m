@@ -16,7 +16,7 @@
 @dynamic order;
 @dynamic notes;
 @dynamic interventionType;
-@dynamic interventionDelivered;
+@dynamic interventionsDelivered;
 @dynamic subTypes;
 @dynamic existingInterventions;
 
@@ -45,8 +45,13 @@
     
     NSLog(@"clinicina object id is %@",clinician.objectID);
     
+    NSArray *filteredArray=nil;
+    [self willAccessValueForKey:@"interventionDelivered"];
+    if (self.interventionsDelivered &&self.interventionsDelivered.count&&currentMonthPredicate) {
+        filteredArray=  [self.interventionsDelivered.allObjects filteredArrayUsingPredicate:currentMonthPredicate];
+    }
     
-    NSArray *filteredArray= [self.interventionDelivered.allObjects filteredArrayUsingPredicate:currentMonthPredicate];
+ 
     NSLog(@"filtered array new is %@",filteredArray);
     InterventionDeliveredEntity *checkInterventionDelivered=nil;
     if (filteredArray.count) {

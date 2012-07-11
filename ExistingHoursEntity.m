@@ -2,11 +2,13 @@
 //  ExistingHoursEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/8/12.
+//  Created by Daniel Boice on 7/10/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
 #import "ExistingHoursEntity.h"
+#import "ClinicianEntity.h"
+#import "ExistingInterventionEntity.h"
 #import "PTTAppDelegate.h"
 
 @implementation ExistingHoursEntity
@@ -17,11 +19,11 @@
 @dynamic keyString;
 @dynamic supportActivities;
 @dynamic assessments;
-@dynamic supervisionGiven;
+@dynamic supervisor;
 @dynamic directInterventions;
 @dynamic supervisionReceived;
+@dynamic supervisionGiven;
 @synthesize tempNotes;
-
 - (void) awakeFromInsert 
 {
     [super awakeFromInsert];
@@ -34,7 +36,7 @@
     NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
     //NSLog(@"reference date %@",referenceDate);
     
-//    NSTimeInterval thirtyDays=60*60*24*30;
+    //    NSTimeInterval thirtyDays=60*60*24*30;
     NSDate *currentDate=[NSDate date];
     
     
@@ -165,5 +167,6 @@
     
     self.tempNotes=notes;
 }
+
 
 @end

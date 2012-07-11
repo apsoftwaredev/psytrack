@@ -301,6 +301,7 @@ NSLog(@"current offset %f",currentOffsetY);
     
     SupervisorsAndTotalTimesForMonth *totalsObject=(SupervisorsAndTotalTimesForMonth *)self.boundObject;
     
+
     NSString *bottomCellNibName=nil;    
     if (totalsObject.overallTotalWeekUndefinedTI) {
         bottomCellNibName=@"MonthlyPracticumLogBottomCellWithUndefined";
@@ -308,8 +309,8 @@ NSLog(@"current offset %f",currentOffsetY);
     else {
         bottomCellNibName=@"MonthlyPracticumLogBottomCell";
     }
-    self.monthToDisplay=totalsObject.monthToDisplay;
-    
+
+    self.monthToDisplay=totalsObject.monthToDisplay;    
     
     NSLog(@"self month to display is %@",self.monthToDisplay);
     NSLog(@"toplogcell bound object is %@",self.boundObject);
@@ -324,7 +325,7 @@ NSLog(@"current offset %f",currentOffsetY);
 NSEntityDescription *entity = [NSEntityDescription entityForName:@"InterventionTypeEntity" inManagedObjectContext:appDelegate.managedObjectContext];
 [fetchRequest setEntity:entity];
     [fetchRequest setRelationshipKeyPathsForPrefetching:
-     [NSArray arrayWithObject:@"subTypes"]];
+     [NSArray arrayWithObjects:@"subTypes",@"subTypes.interventionDelivered.time",@"subTypes.existingInterventions",nil]];
     
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order"
@@ -339,23 +340,43 @@ if (fetchedObjects == nil) {
 }
     self.objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.interventionTypesTableView];
     
-    SCClassDefinition *subTypesDef=[SCClassDefinition definitionWithClass:[InterventionTypeSubtypeEntity class] autoGeneratePropertyDefinitions:YES];
+    SCClassDefinition *subTypesDef=[SCClassDefinition definitionWithClass:[TrackTypeWithTotalTimes class] autoGeneratePropertyDefinitions:YES];
     
     for (InterventionTypeEntity *interventionType in fetchedObjects) {
         [interventionType willAccessValueForKey:@"subTypes"];
-        NSMutableArray *subTypesSet=(NSMutableArray *)[interventionType mutableSetValueForKey:@"subTypes"];
+        NSSet *interventionSubTypeSet=interventionType.subTypes;
+        
+        NSArray *subTypesArray=nil;
+    
+        if (interventionSubTypeSet &&[interventionSubTypeSet isKindOfClass:[NSSet class]]) {
+            
+            subTypesArray=interventionSubTypeSet.allObjects;
+        }
+        
        
+        NSLog(@"subtypes array is %@",subTypesArray);
         
         NSSortDescriptor *firstDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order"
                                                                          ascending:YES] ;
         
         
         NSArray *sortDescriptors = [NSArray arrayWithObjects:firstDescriptor, nil];
-        NSMutableArray *orderdSubTypesSet=[NSMutableArray arrayWithArray:(NSArray *)[subTypesSet sortedArrayUsingDescriptors:sortDescriptors]];
+        NSMutableArray *orderdSubTypeArray=[NSMutableArray arrayWithArray:(NSArray *)[subTypesArray sortedArrayUsingDescriptors:sortDescriptors]];
         
-       
+        NSMutableArray *subTypeWithTotalsItemsArray=[NSMutableArray array];
         
-        SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:interventionType.interventionType items:orderdSubTypesSet itemsDefinition:subTypesDef];
+        for (InterventionTypeSubtypeEntity *interventionSubTypeObject in orderdSubTypeArray ) {
+            TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:[totalsObject.clinicians objectAtIndex:0] trackTypeObject:interventionSubTypeObject];
+            
+            NSLog(@"tracktype with total times object %@",trackTypeWithTotalTimeObject);
+            NSLog(@"track type with total times text is %@",trackTypeWithTotalTimeObject.typeLabelText);
+            [subTypeWithTotalsItemsArray addObject:trackTypeWithTotalTimeObject];
+            
+        }
+        NSLog(@"subytpe total items array is %@",subTypeWithTotalsItemsArray);
+        
+        
+        SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:interventionType.interventionType items:subTypeWithTotalsItemsArray itemsDefinition:subTypesDef];
         SCDataFetchOptions *fetchOptions=[SCDataFetchOptions optionsWithSortKey:@"order" sortAscending:YES filterPredicate:nil];
         
         
@@ -365,8 +386,13 @@ if (fetchedObjects == nil) {
         objectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
         {
             // Create & return a custom cell based on the cell in ContactOverviewCell.xib
-            NSString *bindingsString = @"20:interventionSubType"; // 1,2,3 are the control tags
-            MonthlyPracticumLogBottonCell *contactOverviewCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindingsString:bindingsString nibName:bottomCellNibName];
+            
+            NSLog(@"month to display is %@",self.monthToDisplay);
+//            NSString *bindingsString = @"20:interventionSubType;21:self.monthToDisplay"; // 1,2,3 are the control tags
+            
+            NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"interventionSubType",totalsObject.monthToDisplay, nil] forKeys:[NSArray arrayWithObjects:@"20",@"21", nil]];
+            
+            MonthlyPracticumLogBottonCell *contactOverviewCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindings:bindingsDictionary nibName:bottomCellNibName];
             
             
             return contactOverviewCell;
@@ -503,7 +529,7 @@ if (fetchedObjects == nil) {
     self.supportHoursWeek5Label.text=totalsObject.supportTotalWeek5Str;
     self.supervisionHoursWeek5Label.text=totalsObject.supervisionTotalWeek5Str;
   
-    if (totalsObject.overallTotalWeekUndefinedTI) {
+    if (self.interventionHoursWeekUndefinedLabel) {
         self.interventionHoursWeekUndefinedLabel.text=totalsObject.interventionTotalWeekUndefinedStr;
         self.assessmentoursWeekUndefinedLabel.text=totalsObject.assessmentTotalWeekUndefinedStr;
         self.supportHoursWeekUndefinedLabel.text=totalsObject.supportTotalWeekUndefinedStr;

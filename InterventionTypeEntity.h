@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * interventionType;
-@property (nonatomic, retain) NSSet *interventionDelivered;
+@property (nonatomic, retain) NSSet *interventionsDelivered;
 @property (nonatomic, retain) NSSet *subTypes;
 @property (nonatomic, retain) NSSet *existingInterventions;
 

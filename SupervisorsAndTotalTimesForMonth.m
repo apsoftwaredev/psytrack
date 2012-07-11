@@ -455,7 +455,7 @@
     
     NSArray *filteredExistingHoursArray=nil;
    
-       if (existingHoursPredicate) {
+       if (existingHoursPredicate &&existingHoursArray_ &&existingHoursArray_.count) {
         filteredExistingHoursArray=[existingHoursArray_ filteredArrayUsingPredicate:existingHoursPredicate];
         
 

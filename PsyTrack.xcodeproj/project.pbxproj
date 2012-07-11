@@ -238,7 +238,6 @@
 		E7577FAC158D13B50044D344 /* EncryptionTokenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7577FAB158D13B50044D344 /* EncryptionTokenCell.m */; };
 		E75A148015A8DB2300F3EBEF /* TotalHoursAndMinutesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A147F15A8DB2300F3EBEF /* TotalHoursAndMinutesCell.m */; };
 		E75A148215A8DB6300F3EBEF /* TotalHoursAndMinutesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E75A148115A8DB6300F3EBEF /* TotalHoursAndMinutesCell.xib */; };
-		E75A148815A994D000F3EBEF /* ExistingHoursEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A148715A994D000F3EBEF /* ExistingHoursEntity.m */; };
 		E75A148E15ABC9DB00F3EBEF /* MonthlyPracticumLogBottomCellWithUndefined.xib in Resources */ = {isa = PBXBuildFile; fileRef = E75A148D15ABC9DB00F3EBEF /* MonthlyPracticumLogBottomCellWithUndefined.xib */; };
 		E75A149415AC855900F3EBEF /* TrackTypeWithTotalTimes.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A149315AC855800F3EBEF /* TrackTypeWithTotalTimes.m */; };
 		E75A149715AC9E6900F3EBEF /* TotalTimesForMonthlyLog.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A149615AC9E6900F3EBEF /* TotalTimesForMonthlyLog.m */; };
@@ -332,6 +331,8 @@
 		E7A92491154853760080B35D /* DrugTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7A92490154853760080B35D /* DrugTestViewController.xib */; };
 		E7A9249315485E6C0080B35D /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E7A9249215485E6C0080B35D /* blueArrow.png */; };
 		E7ADFD3C15ACF27D00081392 /* SupervisionTypeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD3B15ACF27D00081392 /* SupervisionTypeEntity.m */; };
+		E7ADFD3F15AD0E8A00081392 /* ExistingInterventionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD3E15AD0E8A00081392 /* ExistingInterventionEntity.m */; };
+		E7ADFD4215AD37AD00081392 /* ExistingHoursEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD4115AD37AD00081392 /* ExistingHoursEntity.m */; };
 		E7B81461159A5FFE0039F38F /* psyTrainTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7B8145F159A5FFE0039F38F /* psyTrainTrack.xcdatamodeld */; };
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
@@ -784,8 +785,6 @@
 		E75A147E15A8DB2300F3EBEF /* TotalHoursAndMinutesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalHoursAndMinutesCell.h; sourceTree = "<group>"; };
 		E75A147F15A8DB2300F3EBEF /* TotalHoursAndMinutesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalHoursAndMinutesCell.m; sourceTree = "<group>"; };
 		E75A148115A8DB6300F3EBEF /* TotalHoursAndMinutesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalHoursAndMinutesCell.xib; sourceTree = "<group>"; };
-		E75A148615A994D000F3EBEF /* ExistingHoursEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursEntity.h; sourceTree = "<group>"; };
-		E75A148715A994D000F3EBEF /* ExistingHoursEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursEntity.m; sourceTree = "<group>"; };
 		E75A148D15ABC9DB00F3EBEF /* MonthlyPracticumLogBottomCellWithUndefined.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogBottomCellWithUndefined.xib; sourceTree = "<group>"; };
 		E75A149215AC855800F3EBEF /* TrackTypeWithTotalTimes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackTypeWithTotalTimes.h; sourceTree = "<group>"; };
 		E75A149315AC855800F3EBEF /* TrackTypeWithTotalTimes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackTypeWithTotalTimes.m; sourceTree = "<group>"; };
@@ -916,6 +915,10 @@
 		E7A9249215485E6C0080B35D /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
 		E7ADFD3A15ACF27D00081392 /* SupervisionTypeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionTypeEntity.h; sourceTree = "<group>"; };
 		E7ADFD3B15ACF27D00081392 /* SupervisionTypeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupervisionTypeEntity.m; sourceTree = "<group>"; };
+		E7ADFD3D15AD0E8A00081392 /* ExistingInterventionEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingInterventionEntity.h; sourceTree = "<group>"; };
+		E7ADFD3E15AD0E8A00081392 /* ExistingInterventionEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingInterventionEntity.m; sourceTree = "<group>"; };
+		E7ADFD4015AD37AD00081392 /* ExistingHoursEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursEntity.h; sourceTree = "<group>"; };
+		E7ADFD4115AD37AD00081392 /* ExistingHoursEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursEntity.m; sourceTree = "<group>"; };
 		E7B81460159A5FFE0039F38F /* psyTrainTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = psyTrainTrack.xcdatamodel; sourceTree = "<group>"; };
 		E7C0749D150E60B4009C5498 /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = "<group>"; };
 		E7C0749E150E60B4009C5498 /* KeyEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyEntity.m; sourceTree = "<group>"; };
@@ -1737,8 +1740,8 @@
 		E75F7788151CED0C002B10AE /* Encrypted Model Subclasses */ = {
 			isa = PBXGroup;
 			children = (
-				E75A148615A994D000F3EBEF /* ExistingHoursEntity.h */,
-				E75A148715A994D000F3EBEF /* ExistingHoursEntity.m */,
+				E7ADFD4015AD37AD00081392 /* ExistingHoursEntity.h */,
+				E7ADFD4115AD37AD00081392 /* ExistingHoursEntity.m */,
 				E751793215A4B1B900674F88 /* ClinicianEntity.h */,
 				E751793315A4B1B900674F88 /* ClinicianEntity.m */,
 				E798A0141580C5B8006B9DBD /* ClientEntity.h */,
@@ -1793,6 +1796,8 @@
 		E7989FE9157FAE35006B9DBD /* Managed Object Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				E7ADFD3D15AD0E8A00081392 /* ExistingInterventionEntity.h */,
+				E7ADFD3E15AD0E8A00081392 /* ExistingInterventionEntity.m */,
 				E7ADFD3A15ACF27D00081392 /* SupervisionTypeEntity.h */,
 				E7ADFD3B15ACF27D00081392 /* SupervisionTypeEntity.m */,
 				E76CF3F315ACF09A00E888F2 /* SupportActivityTypeEntity.h */,
@@ -2522,7 +2527,6 @@
 				E751793415A4B1B900674F88 /* ClinicianEntity.m in Sources */,
 				E751793715A85BCB00674F88 /* SupervisorsAndTotalTimesForMonth.m in Sources */,
 				E75A148015A8DB2300F3EBEF /* TotalHoursAndMinutesCell.m in Sources */,
-				E75A148815A994D000F3EBEF /* ExistingHoursEntity.m in Sources */,
 				E75A149415AC855900F3EBEF /* TrackTypeWithTotalTimes.m in Sources */,
 				E75A149715AC9E6900F3EBEF /* TotalTimesForMonthlyLog.m in Sources */,
 				E76CF3E015ACAD3200E888F2 /* AssessmentTypeEntity.m in Sources */,
@@ -2531,6 +2535,8 @@
 				E76CF3F215ACD13700E888F2 /* InterventionTypeSubtypeEntity.m in Sources */,
 				E76CF3F515ACF09A00E888F2 /* SupportActivityTypeEntity.m in Sources */,
 				E7ADFD3C15ACF27D00081392 /* SupervisionTypeEntity.m in Sources */,
+				E7ADFD3F15AD0E8A00081392 /* ExistingInterventionEntity.m in Sources */,
+				E7ADFD4215AD37AD00081392 /* ExistingHoursEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
