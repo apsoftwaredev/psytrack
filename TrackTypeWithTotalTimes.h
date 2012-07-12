@@ -18,7 +18,7 @@
 
 #import "SupervisorsAndTotalTimesForMonth.h"
 #import "InterventionTypeEntity.h"
-
+#import "ClinicianEntity.h"
 typedef enum {
     kTrackTypeUnknown,
     kTrackTypeIntervention,
@@ -34,17 +34,18 @@ typedef enum {
 @interface TrackTypeWithTotalTimes : TotalTimesForMonthlyLog {
     
     
-    
-    PTrackType trackType;
+   __weak ClinicianEntity *clinician_;
+    PTrackType trackType_;
     
    __weak NSString *trackPathStartString_;
+    __weak NSString *monthlyLogNotes_;
     
 }
-
-
+@property (nonatomic, weak)ClinicianEntity *clinician;
+@property (nonatomic, assign)  PTrackType trackType;;
 @property (nonatomic, weak) NSString *trackPathStartString;
 @property (nonatomic, weak) id trackTypeObject;
-
+@property (nonatomic, weak)NSString *monthlyLogNotes;
 @property (nonatomic, weak) NSString *typeLabelText;
 
 @property (nonatomic, weak) NSString *totalWeek1Str;

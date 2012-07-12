@@ -6,8 +6,15 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-#import "SCTableViewSection.h"
 
 @interface SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter : SCArrayOfObjectsSection
 
+
+
+@property (nonatomic, weak)NSString *footerNotes;
+@property (nonatomic, weak)NSString *footerTotal;
+
+-(id)initWithHeaderTitle:(NSString *)sectionHeaderTitle footerNotes:(NSString *)sectionNotes sectionTotalStr:(NSString *)sectionTotal items:(NSMutableArray *)sectionItems itemsDefinition:(SCDataDefinition *)definition;
+
++(id)sectionWithHeaderTitle:(NSString *)sectionHeaderTitle footerNotes:(NSString *)sectionNotes sectionTotalStr:(NSString *)sectionTotal items:(NSMutableArray *)sectionItems itemsDefinition:(SCDataDefinition *)definition;
 @end

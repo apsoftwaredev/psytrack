@@ -34,9 +34,11 @@
 @implementation TrackTypeWithTotalTimes
 
 @synthesize trackTypeObject;
+@synthesize trackType=trackType_;
 @synthesize trackPathStartString=trackPathStartString_;
+@synthesize clinician=clinician_;
 @synthesize typeLabelText;
-
+@synthesize monthlyLogNotes=monthlyLogNotes_;
 @synthesize totalWeek1Str;
 @synthesize totalWeek2Str;
 @synthesize totalWeek3Str;
@@ -65,7 +67,6 @@
 
 
 
-
 -(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trackTypeObject:(id)trackTypeObjectGiven{
     //override superclass
     self= [super initWithMonth:date clinician:clinician];
@@ -76,8 +77,8 @@
         NSLog(@"date is %@",date);
         
         
-             
-         trackType=[self trackTypeForObjectGiven:trackTypeObjectGiven];
+        self.clinician=clinician;
+       self.trackType=[self trackTypeForObjectGiven:trackTypeObjectGiven];
         
         NSPredicate *predicateForTrackEntities=[self predicateForTrackEntitiesAllBeforeAndEqualToEndDateForMonth];
         
@@ -95,7 +96,7 @@
         self.trackTypeObject=trackTypeObjectGiven;
          NSMutableArray *existingHoursMutableArray=[NSMutableArray array];
        
-        switch (trackType) {
+        switch (trackType_) {
             case kTrackTypeIntervention:
             {
                 if ([trackTypeObjectGiven isKindOfClass:[InterventionTypeEntity class]]) {
@@ -419,12 +420,12 @@
             
         }
         
-       
+        self.monthlyLogNotes=[self monthlyLogNotesForMonth];
                              
-        if (trackType== kTrackTypeIntervention ||trackType==kTrackTypeSupervision) {
+        if (trackType_== kTrackTypeIntervention ||trackType_==kTrackTypeSupervision) {
              [ self  totalOverallHoursTIForOveralCell:(PTSummaryCell)kSummaryTotalToDate clinician:(ClinicianEntity *)clinician];
         }
-        else if (trackType!=kTrackTypeUnknown){
+        else if (trackType_!=kTrackTypeUnknown){
             for (NSInteger i=0; i<9; i++) {
                 [ self  totalOverallHoursTIForOveralCell:(PTSummaryCell)i clinician:(ClinicianEntity *)clinician];
             }   
@@ -449,54 +450,53 @@
 
 
     PTrackType trackTypeToReturn=kTrackTypeUnknown;
-    NSString * tempString=nil;
+   
 
     if ([trackTypeObjectGiven isKindOfClass:[InterventionTypeEntity class]]) {
 
-        tempString=@"interventionsDelivered";
-        trackTypeToReturn= kTrackTypeIntervention;
-
+    
+        return  kTrackTypeIntervention;
+        
     }
 
     if ([trackTypeObjectGiven isKindOfClass:[InterventionTypeSubtypeEntity class]]) {
 
-        tempString=@"interventionsDelivered";
-        trackTypeToReturn=  kTrackTypeInterventionSubType;
+       
+       return  kTrackTypeInterventionSubType;
 
     }
 
 
     if ([trackTypeObjectGiven isKindOfClass:[AssessmentTypeEntity class]]) {
 
-        tempString=@"assessmentsDelivered";
-        trackTypeToReturn=  kTrackTypeAssessment;
+        
+        return  kTrackTypeAssessment;
 
     }
 
     if ([trackTypeObjectGiven isKindOfClass:[SupportActivityTypeEntity class]]) {
 
-        tempString=@"supportActivitiesDelivered";
-        trackTypeToReturn=  kTrackTypeSupport;
+        return kTrackTypeSupport;
 
     }
 
 
     if ([trackTypeObjectGiven isKindOfClass:[SupervisionTypeEntity class]]) {
 
-        tempString=@"supervisionReceived";
-        trackTypeToReturn=  kTrackTypeSupervision;
+        
+       return  kTrackTypeSupervision;
 
     }
 
 
     if ([trackTypeObjectGiven isKindOfClass:[SupervisionTypeSubtypeEntity class]]) {
 
-        tempString=@"supervisionReceived";
-        trackTypeToReturn=  kTrackTypeSupervisionSubType;
+       
+       return   kTrackTypeSupervisionSubType;
 
     }
     
-    self.trackPathStartString= [tempString stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+  
     return trackTypeToReturn;
 
 }
@@ -590,7 +590,7 @@
 
    
         
-        switch (trackType) {
+        switch (trackType_) {
             case kTrackTypeIntervention:
                 if (summaryCell!=kTrackWeekUndefined)  
                     trackTotalInterventionTimeInterval=[self totalTimeIntervalForTrackArray:self.interventionsDeliveredArray predicate:trackPredicate];
@@ -657,16 +657,16 @@
     switch (summaryCell) {
         case kSummaryWeekOne:
         {
-            if (trackType==kTrackIntervention||trackType==kTrackTypeInterventionSubType) {
+            if (trackType_==kTrackIntervention||trackType_==kTrackTypeInterventionSubType) {
                 self.totalWeek1TI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
             }
-            if (trackType==kTrackAssessment) {
+            if (trackType_==kTrackAssessment) {
                 self.totalWeek1TI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
             }
-            if (trackType==kTrackTypeSupport) {
+            if (trackType_==kTrackTypeSupport) {
                 self.totalWeek1TI=trackTotalSupportTimeInterval+totalExistingSupportTI;
             }
-            if (trackType==kTrackTypeSupervision||trackType==kTrackTypeSupervisionSubType) {
+            if (trackType_==kTrackTypeSupervision||trackType_==kTrackTypeSupervisionSubType) {
                 self.totalWeek1TI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
             }
             
@@ -680,16 +680,16 @@
             break;
         case kSummaryWeekTwo:
         {
-            if (trackType==kTrackIntervention||trackType==kTrackTypeInterventionSubType) {
+            if (trackType_==kTrackIntervention||trackType_==kTrackTypeInterventionSubType) {
                 self.totalWeek2TI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
             }
-            if (trackType==kTrackAssessment) {
+            if (trackType_==kTrackAssessment) {
                 self.totalWeek2TI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
             }
-            if (trackType==kTrackTypeSupport) {
+            if (trackType_==kTrackTypeSupport) {
                 self.totalWeek2TI=trackTotalSupportTimeInterval+totalExistingSupportTI;
             }
-            if (trackType==kTrackTypeSupervision||trackType==kTrackTypeSupervisionSubType) {
+            if (trackType_==kTrackTypeSupervision||trackType_==kTrackTypeSupervisionSubType) {
                 self.totalWeek2TI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
             }
             
@@ -702,16 +702,16 @@
             break;
         case kSummaryWeekThree:
         {
-            if (trackType==kTrackIntervention||trackType==kTrackTypeInterventionSubType) {
+            if (trackType_==kTrackIntervention||trackType_==kTrackTypeInterventionSubType) {
                 self.totalWeek3TI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
             }
-            if (trackType==kTrackAssessment) {
+            if (trackType_==kTrackAssessment) {
                 self.totalWeek3TI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
             }
-            if (trackType==kTrackTypeSupport) {
+            if (trackType_==kTrackTypeSupport) {
                 self.totalWeek3TI=trackTotalSupportTimeInterval+totalExistingSupportTI;
             }
-            if (trackType==kTrackTypeSupervision||trackType==kTrackTypeSupervisionSubType) {
+            if (trackType_==kTrackTypeSupervision||trackType_==kTrackTypeSupervisionSubType) {
                 self.totalWeek3TI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
             }
             
@@ -726,16 +726,16 @@
             break;
         case kSummaryWeekFour:
         {
-            if (trackType==kTrackIntervention||trackType==kTrackTypeInterventionSubType) {
+            if (trackType_==kTrackIntervention||trackType_==kTrackTypeInterventionSubType) {
                 self.totalWeek4TI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
             }
-            if (trackType==kTrackAssessment) {
+            if (trackType_==kTrackAssessment) {
                 self.totalWeek4TI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
             }
-            if (trackType==kTrackTypeSupport) {
+            if (trackType_==kTrackTypeSupport) {
                 self.totalWeek4TI=trackTotalSupportTimeInterval+totalExistingSupportTI;
             }
-            if (trackType==kTrackTypeSupervision||trackType==kTrackTypeSupervisionSubType) {
+            if (trackType_==kTrackTypeSupervision||trackType_==kTrackTypeSupervisionSubType) {
                 self.totalWeek4TI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
             }
             
@@ -748,16 +748,16 @@
             break;
         case kSummaryWeekFive:
         {
-            if (trackType==kTrackIntervention||trackType==kTrackTypeInterventionSubType) {
+            if (trackType_==kTrackIntervention||trackType_==kTrackTypeInterventionSubType) {
                 self.totalWeek5TI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
             }
-            if (trackType==kTrackAssessment) {
+            if (trackType_==kTrackAssessment) {
                 self.totalWeek5TI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
             }
-            if (trackType==kTrackTypeSupport) {
+            if (trackType_==kTrackTypeSupport) {
                 self.totalWeek5TI=trackTotalSupportTimeInterval+totalExistingSupportTI;
             }
-            if (trackType==kTrackTypeSupervision||trackType==kTrackTypeSupervisionSubType) {
+            if (trackType_==kTrackTypeSupervision||trackType_==kTrackTypeSupervisionSubType) {
                 self.totalWeek5TI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
             }
             
@@ -771,16 +771,16 @@
             break;
         case kSummaryWeekUndefined:
         {
-            if (trackType==kTrackIntervention||trackType==kTrackTypeInterventionSubType) {
+            if (trackType_==kTrackIntervention||trackType_==kTrackTypeInterventionSubType) {
                 self.totalWeekUndefinedTI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
             }
-            if (trackType==kTrackAssessment) {
+            if (trackType_==kTrackAssessment) {
                 self.totalWeekUndefinedTI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
             }
-            if (trackType==kTrackTypeSupport) {
+            if (trackType_==kTrackTypeSupport) {
                 self.totalWeekUndefinedTI=trackTotalSupportTimeInterval+totalExistingSupportTI;
             }
-            if (trackType==kTrackTypeSupervision||trackType==kTrackTypeSupervisionSubType) {
+            if (trackType_==kTrackTypeSupervision||trackType_==kTrackTypeSupervisionSubType) {
                 self.totalWeekUndefinedTI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
             }
             
@@ -794,16 +794,16 @@
             break;
         case kSummaryTotalForMonth:
         {
-            if (trackType==kTrackIntervention||trackType==kTrackTypeInterventionSubType) {
+            if (trackType_==kTrackIntervention||trackType_==kTrackTypeInterventionSubType) {
                 self.totalForMonthTI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
             }
-            if (trackType==kTrackAssessment) {
+            if (trackType_==kTrackAssessment) {
                 self.totalForMonthTI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
             }
-            if (trackType==kTrackTypeSupport) {
+            if (trackType_==kTrackTypeSupport) {
                 self.totalForMonthTI=trackTotalSupportTimeInterval+totalExistingSupportTI;
             }
-            if (trackType==kTrackTypeSupervision||trackType==kTrackTypeSupervisionSubType) {
+            if (trackType_==kTrackTypeSupervision||trackType_==kTrackTypeSupervisionSubType) {
                 self.totalForMonthTI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
             }
             
@@ -815,16 +815,16 @@
             break;
         case kSummaryCummulative:
         {
-            if (trackType==kTrackIntervention||trackType==kTrackTypeInterventionSubType) {
+            if (trackType_==kTrackIntervention||trackType_==kTrackTypeInterventionSubType) {
                 self.totalCummulativeTI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
             }
-            if (trackType==kTrackAssessment) {
+            if (trackType_==kTrackAssessment) {
                 self.totalCummulativeTI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
             }
-            if (trackType==kTrackTypeSupport) {
+            if (trackType_==kTrackTypeSupport) {
                 self.totalCummulativeTI=trackTotalSupportTimeInterval+totalExistingSupportTI;
             }
-            if (trackType==kTrackTypeSupervision||trackType==kTrackTypeSupervisionSubType) {
+            if (trackType_==kTrackTypeSupervision||trackType_==kTrackTypeSupervisionSubType) {
                 self.totalCummulativeTI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
             }
             
@@ -839,16 +839,16 @@
             break;
         case kSummaryTotalToDate:
         {
-            if (trackType==kTrackIntervention||trackType==kTrackTypeInterventionSubType) {
+            if (trackType_==kTrackIntervention||trackType_==kTrackTypeInterventionSubType) {
                 self.totalToDateTI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
             }
-            if (trackType==kTrackAssessment) {
+            if (trackType_==kTrackAssessment) {
                 self.totalToDateTI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
             }
-            if (trackType==kTrackTypeSupport) {
+            if (trackType_==kTrackTypeSupport) {
                 self.totalToDateTI=trackTotalSupportTimeInterval+totalExistingSupportTI;
             }
-            if (trackType==kTrackTypeSupervision||trackType==kTrackTypeSupervisionSubType) {
+            if (trackType_==kTrackTypeSupervision||trackType_==kTrackTypeSupervisionSubType) {
                 self.totalToDateTI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
             }
             
@@ -871,6 +871,86 @@
     
 }
 
+-(NSString *)monthlyLogNotesForMonth{
+    
+    
+    NSArray *trackDeliveredFilteredForCurrentMonth=nil;
+    NSPredicate *trackPredicateForCurrentMonth=[self predicateForTrackCurrentMonthsForClincian:clinician_];
+    NSString *returnString=nil;
+    switch (trackType_) {
+        case kTrackTypeIntervention:
+            trackDeliveredFilteredForCurrentMonth=[self.interventionsDeliveredArray filteredArrayUsingPredicate:trackPredicateForCurrentMonth];
+            
+            
+            break;
+        
+        case kTrackTypeInterventionSubType:
+            trackDeliveredFilteredForCurrentMonth=[self.interventionsDeliveredArray filteredArrayUsingPredicate:trackPredicateForCurrentMonth];
+            
+            
+            break;
+
+        case kTrackTypeAssessment:
+            trackDeliveredFilteredForCurrentMonth=[self.assessmentsDeliveredArray filteredArrayUsingPredicate:trackPredicateForCurrentMonth];
+            
+            
+            break;
+
+        
+        case kTrackTypeSupport:
+            trackDeliveredFilteredForCurrentMonth=[self.supportActivityDeliveredArray filteredArrayUsingPredicate:trackPredicateForCurrentMonth];
+            
+            
+            break;
+            
+
+        case kTrackTypeSupervision:
+            trackDeliveredFilteredForCurrentMonth=[self.supervisionReceivedArray filteredArrayUsingPredicate:trackPredicateForCurrentMonth];
+            
+            
+            break;
+        
+        case kTrackTypeSupervisionSubType:
+            trackDeliveredFilteredForCurrentMonth=[self.supervisionReceivedArray filteredArrayUsingPredicate:trackPredicateForCurrentMonth];
+            
+            
+            break;
+            
+        default:
+            break;
+    }
+   
+    
+    if (trackDeliveredFilteredForCurrentMonth) {
+    
+    int trackDeliveredFilteredForCurrentMonthCount=trackDeliveredFilteredForCurrentMonth.count;
+    if (trackDeliveredFilteredForCurrentMonthCount) {
+        
+        NSArray *monthlyLogNotesArray=[trackDeliveredFilteredForCurrentMonth valueForKey:@"monthlyLogNotes"];
+        int monthlyLogNotesArrayCount=monthlyLogNotesArray.count;
+        for ( int i=0;i< monthlyLogNotesArrayCount; i++){
+            
+            
+            id logNotesID=[monthlyLogNotesArray objectAtIndex:i];
+           
+        
+            if ([logNotesID isKindOfClass:[NSString class]]) {
+                NSString *logNotesStr=(NSString *)logNotesID;
+                if (i==0) {
+                    returnString=logNotesStr;
+                }
+                else {
+                    returnString=[monthlyLogNotes_ stringByAppendingFormat:@"; %@",logNotesStr];
+                }
+            }
+        }
+       
+    }
+    }
+    return returnString;
+    
+    
+}
 
 
 

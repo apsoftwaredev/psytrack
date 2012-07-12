@@ -16,11 +16,14 @@
 #import "QuartzCore/QuartzCore.h"
 #import "MonthlyPracticumLogTableViewController.h"
 #import "SupervisorsAndTotalTimesForMonth.h"
+#import "SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h"
+
 @interface MonthlyPracticumLogTopCell ()
 
 @end
 
 @implementation MonthlyPracticumLogTopCell
+
 @synthesize interventionTypesTableView,assessmentTypesTableView,supportActivitieTypesTableView,supervisionReceivedTypesTableView;
 @synthesize supervisorLabel,studentNameLabel,programLabel,monthYearLabel,courseLabel,practicumSiteNameLabel;
 @synthesize interventionHoursWeek1Label;
@@ -344,7 +347,10 @@ if (fetchedObjects == nil) {
     
     for (InterventionTypeEntity *interventionType in fetchedObjects) {
         
-        TrackTypeWithTotalTimes *interventionTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:interventionType];
+       TrackTypeWithTotalTimes *interventionTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:interventionType];
+        
+        
+        SCClassDefinition *trackTypeWithTotalTimesDef=[SCClassDefinition definitionWithClass:[TrackTypeWithTotalTimes class] autoGeneratePropertyDefinitions:YES];
         
         [interventionType willAccessValueForKey:@"subTypes"];
         NSSet *interventionSubTypeSet=interventionType.subTypes;
@@ -379,7 +385,12 @@ if (fetchedObjects == nil) {
         NSLog(@"subytpe total items array is %@",subTypeWithTotalsItemsArray);
         
         
-        SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:interventionType.interventionType items:subTypeWithTotalsItemsArray itemsDefinition:subTypesDef];
+        SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *objectsSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:interventionType.interventionType footerNotes:interventionTypeWithTotalTimes.monthlyLogNotes sectionTotalStr:interventionTypeWithTotalTimes.totalForMonthStr items:subTypeWithTotalsItemsArray itemsDefinition:subTypesDef];
+        
+//        NSString *monthlyLogNotes=[interventionType monthlyLogNotesForMonth:self.monthToDisplay clinician:self.clinician];
+        
+       
+        
         SCDataFetchOptions *fetchOptions=[SCDataFetchOptions optionsWithSortKey:@"order" sortAscending:YES filterPredicate:nil];
         
         
@@ -403,97 +414,10 @@ if (fetchedObjects == nil) {
         
        
         
-        UIView *containerView = [[UIView alloc] initWithFrame:sectionSubHeaderView.frame];
-        
-        UILabel *headerLabel = [[UILabel alloc] initWithFrame:sectionSubHeaderLabel.frame];
-        headerLabel.font=sectionSubHeaderLabel.font;
-        containerView.backgroundColor=sectionSubHeaderView.backgroundColor;
-        headerLabel.backgroundColor = sectionSubHeaderLabel.backgroundColor;
-        headerLabel.textColor = sectionSubHeaderLabel.textColor;
-        headerLabel.tag=60;
-        headerLabel.text=objectsSection.headerTitle;
-        headerLabel.textAlignment=UITextAlignmentCenter;
-        [containerView addSubview:headerLabel];
-        
-        objectsSection.headerView = containerView;
+               
         
         
-        UITextView *footerNotesTextView = [[UITextView alloc] initWithFrame:sectionSubFooterNotesTextView.frame];
-        footerNotesTextView.font=sectionSubFooterNotesTextView.font;
-        
-        footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
-        footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
-        
-        footerNotesTextView.textAlignment=UITextAlignmentLeft;
-        footerNotesTextView.tag=61;
-        
-        
-        NSString *monthlyNotes=[interventionType monthlyLogNotesForMonth:self.monthToDisplay clinician:self.clinician];
-        if (monthlyNotes.length) {
-            footerNotesTextView.text=monthlyNotes;
-        }
-        else {
-            footerNotesTextView.hidden=YES;
-        }
-        
-        
-        
-        
-        
-        [footerNotesTextView setContentInset:UIEdgeInsetsMake(-9, 0, 0,0)];
-
-
-        UIView *footerContainerView = [[UIView alloc] initWithFrame:sectionSubFooterView.frame];
-        
-        [footerContainerView addSubview:footerNotesTextView];
-        CGSize footerNotesContentSize=footerNotesTextView.contentSize;
-        
-        NSLog(@"content size height is %g",footerNotesContentSize.height);
-        
-        NSLog(@"footernotestextview size height is %g",footerNotesTextView.frame.size.height);
-//        footerNotesTextView.contentSize.width=footerNotesTextView.frame.size.width;
-        if (footerNotesTextView.contentSize.height -9>footerContainerView.frame.size.height) {
-            CGRect footerContainerViewFrame=footerContainerView.frame;
-            footerContainerViewFrame.size.height=footerNotesTextView.contentSize.height-6;
-            
-            
-            footerContainerView.frame=footerContainerViewFrame;
-            
-            
-        }
-        
-        if (footerNotesTextView.contentSize.height>footerNotesTextView.frame.size.height) {
-           
-            CGRect footerNotesTextViewFrame=footerNotesTextView.frame;
-            footerNotesTextViewFrame.size.height=footerNotesTextView.contentSize.height-9;
-            footerNotesTextView.frame=footerNotesTextViewFrame;
-            
-            
-            
-        }
-                
-        UIView *subFooterLabelContainerView=[[UIView alloc]initWithFrame:self.sectionSubFooterLabelContainerView.frame];
-        subFooterLabelContainerView.backgroundColor=self.sectionSubFooterLabelContainerView.backgroundColor;
-        
-        UILabel *footerLabel = [[UILabel alloc] initWithFrame:sectionSubFooterLabel.frame];
-        footerLabel.font=sectionSubFooterLabel.font;
-        footerContainerView.backgroundColor=sectionSubFooterView.backgroundColor;
-        footerLabel.backgroundColor = sectionSubFooterLabel.backgroundColor;
-        footerLabel.textColor = sectionSubFooterLabel.textColor;
-        footerLabel.tag=60;
-        footerLabel.text=interventionTypeWithTotalTimes.totalToDateStr;
-        footerLabel.textAlignment=UITextAlignmentCenter;
-        [subFooterLabelContainerView addSubview:footerLabel];
-        
-                
-        [footerContainerView addSubview:subFooterLabelContainerView];
-        
-        
-        objectsSection.footerView = footerContainerView;
-        
-        
-        
-        
+        objectsModel_.delegate=self;
                 [objectsModel_ addSection:objectsSection];
         [interventionType didAccessValueForKey:@"subTypes"];
         
@@ -581,6 +505,126 @@ if (fetchedObjects == nil) {
 
     
   
+
+
+
+
+}
+-(void)tableViewModel:(SCTableViewModel *)tableModel didAddSectionAtIndex:(NSUInteger)index{
+
+
+    SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:index];
+    SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *objectsSection=nil;
+    if ([section isKindOfClass:[SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter class]]) {
+        objectsSection=(SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *)section;
+    }
+    
+    UIView *containerView = [[UIView alloc] initWithFrame:sectionSubHeaderView.frame];
+    
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:sectionSubHeaderLabel.frame];
+    headerLabel.font=sectionSubHeaderLabel.font;
+    containerView.backgroundColor=sectionSubHeaderView.backgroundColor;
+    headerLabel.backgroundColor = sectionSubHeaderLabel.backgroundColor;
+    headerLabel.textColor = sectionSubHeaderLabel.textColor;
+    headerLabel.tag=60;
+    headerLabel.text=objectsSection.headerTitle;
+    headerLabel.textAlignment=UITextAlignmentCenter;
+    [containerView addSubview:headerLabel];
+    
+    objectsSection.headerView = containerView;
+    
+    
+    UITextView *footerNotesTextView = [[UITextView alloc] initWithFrame:sectionSubFooterNotesTextView.frame];
+    footerNotesTextView.font=sectionSubFooterNotesTextView.font;
+    
+    footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
+    footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
+    
+    footerNotesTextView.textAlignment=UITextAlignmentLeft;
+    footerNotesTextView.tag=61;
+    
+    
+    NSLog(@"section bound object is %@",objectsSection.boundObject);
+      
+NSLog(@"objectSection bound object is %@",objectsSection.dataStore.data);
+   
+     
+        
+       
+      
+        
+        
+        if (objectsSection.footerNotes.length) {
+            footerNotesTextView.text=objectsSection.footerNotes;
+        }
+        else {
+            footerNotesTextView.hidden=YES;
+        }
+        
+    
+    
+    
+        
+    
+    
+           
+    
+    
+    
+    [footerNotesTextView setContentInset:UIEdgeInsetsMake(-9, 0, 0,0)];
+    
+    
+    UIView *footerContainerView = [[UIView alloc] initWithFrame:sectionSubFooterView.frame];
+    
+    [footerContainerView addSubview:footerNotesTextView];
+    CGSize footerNotesContentSize=footerNotesTextView.contentSize;
+    
+    NSLog(@"content size height is %g",footerNotesContentSize.height);
+    
+    NSLog(@"footernotestextview size height is %g",footerNotesTextView.frame.size.height);
+    //        footerNotesTextView.contentSize.width=footerNotesTextView.frame.size.width;
+    if (footerNotesTextView.contentSize.height -9>footerContainerView.frame.size.height) {
+        CGRect footerContainerViewFrame=footerContainerView.frame;
+        footerContainerViewFrame.size.height=footerNotesTextView.contentSize.height-6;
+        
+        
+        footerContainerView.frame=footerContainerViewFrame;
+        
+        
+    }
+    
+    if (footerNotesTextView.contentSize.height>footerNotesTextView.frame.size.height) {
+        
+        CGRect footerNotesTextViewFrame=footerNotesTextView.frame;
+        footerNotesTextViewFrame.size.height=footerNotesTextView.contentSize.height-9;
+        footerNotesTextView.frame=footerNotesTextViewFrame;
+        
+        
+        
+    }
+    
+    UIView *subFooterLabelContainerView=[[UIView alloc]initWithFrame:self.sectionSubFooterLabelContainerView.frame];
+    subFooterLabelContainerView.backgroundColor=self.sectionSubFooterLabelContainerView.backgroundColor;
+    
+    UILabel *footerLabel = [[UILabel alloc] initWithFrame:sectionSubFooterLabel.frame];
+    footerLabel.font=sectionSubFooterLabel.font;
+    footerContainerView.backgroundColor=sectionSubFooterView.backgroundColor;
+    footerLabel.backgroundColor = sectionSubFooterLabel.backgroundColor;
+    footerLabel.textColor = sectionSubFooterLabel.textColor;
+    footerLabel.tag=60;
+    footerLabel.text=objectsSection.footerTotal;
+    footerLabel.textAlignment=UITextAlignmentCenter;
+    [subFooterLabelContainerView addSubview:footerLabel];
+    
+    
+    [footerContainerView addSubview:subFooterLabelContainerView];
+    
+    
+    objectsSection.footerView = footerContainerView;
+
+
+
+
 
 
 

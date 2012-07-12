@@ -337,6 +337,7 @@
 		E7ADFD4815AE2AF500081392 /* ExistingSupervisionReceivedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD4715AE2AF500081392 /* ExistingSupervisionReceivedEntity.m */; };
 		E7ADFD4B15AE2B0900081392 /* ExistingSupportActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD4A15AE2B0900081392 /* ExistingSupportActivityEntity.m */; };
 		E7B81461159A5FFE0039F38F /* psyTrainTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7B8145F159A5FFE0039F38F /* psyTrainTrack.xcdatamodeld */; };
+		E7C02D9F15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */; };
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
 		E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */; };
@@ -929,6 +930,8 @@
 		E7ADFD4915AE2B0900081392 /* ExistingSupportActivityEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingSupportActivityEntity.h; sourceTree = "<group>"; };
 		E7ADFD4A15AE2B0900081392 /* ExistingSupportActivityEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingSupportActivityEntity.m; sourceTree = "<group>"; };
 		E7B81460159A5FFE0039F38F /* psyTrainTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = psyTrainTrack.xcdatamodel; sourceTree = "<group>"; };
+		E7C02D9D15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h; sourceTree = "<group>"; };
+		E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m; sourceTree = "<group>"; };
 		E7C0749D150E60B4009C5498 /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = "<group>"; };
 		E7C0749E150E60B4009C5498 /* KeyEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyEntity.m; sourceTree = "<group>"; };
 		E7C074A0150EE4DE009C5498 /* EncryptedSCDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCDateCell.h; sourceTree = "<group>"; };
@@ -1970,6 +1973,8 @@
 				E75A149315AC855800F3EBEF /* TrackTypeWithTotalTimes.m */,
 				E75A149515AC9E6900F3EBEF /* TotalTimesForMonthlyLog.h */,
 				E75A149615AC9E6900F3EBEF /* TotalTimesForMonthlyLog.m */,
+				E7C02D9D15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h */,
+				E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */,
 			);
 			name = "Monthly Practicum Log";
 			sourceTree = "<group>";
@@ -2555,6 +2560,7 @@
 				E7ADFD4515AE2ACF00081392 /* ExistingAssessmentEntity.m in Sources */,
 				E7ADFD4815AE2AF500081392 /* ExistingSupervisionReceivedEntity.m in Sources */,
 				E7ADFD4B15AE2B0900081392 /* ExistingSupportActivityEntity.m in Sources */,
+				E7C02D9F15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
