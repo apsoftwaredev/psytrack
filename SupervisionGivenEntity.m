@@ -2,7 +2,7 @@
 //  SupervisionGivenEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/10/12.
+//  Created by Daniel Boice on 7/15/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
@@ -14,8 +14,8 @@
 
 @implementation SupervisionGivenEntity
 
-@dynamic time;
 @dynamic subType;
+@dynamic time;
 @dynamic supervisionType;
 
 @end

@@ -2,7 +2,7 @@
 //  TimeTrackEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/2/12.
+//  Created by Daniel Boice on 7/15/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
@@ -13,13 +13,13 @@
 
 @interface TimeTrackEntity : NSManagedObject
 
+@property (nonatomic, retain) NSString * monthlyLogNotes;
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * eventIdentifier;
 @property (nonatomic, retain) NSDate * dateOfService;
-@property (nonatomic, retain) NSString * monthlyLogNotes;
+@property (nonatomic, retain) NSString * eventIdentifier;
 @property (nonatomic, retain) NSManagedObject *site;
 @property (nonatomic, retain) ClinicianEntity *supervisor;
-@property (nonatomic, retain) NSManagedObject *trainingType;
+@property (nonatomic, retain) NSManagedObject *trainingProgram;
 
 @end

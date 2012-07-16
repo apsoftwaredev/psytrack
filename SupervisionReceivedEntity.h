@@ -2,7 +2,7 @@
 //  SupervisionReceivedEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/10/12.
+//  Created by Daniel Boice on 7/15/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
@@ -14,8 +14,8 @@
 
 @interface SupervisionReceivedEntity : SupervisionParentEntity
 
-@property (nonatomic, retain) TimeEntity *time;
 @property (nonatomic, retain) SupervisionTypeSubtypeEntity *subType;
+@property (nonatomic, retain) TimeEntity *time;
 @property (nonatomic, retain) SupervisionTypeEntity *supervisionType;
 
 @end
