@@ -13,6 +13,11 @@
 #import "InterventionTypeSubtypeEntity.h"
 #import "MonthlyPracticumLogBottonCell.h"
 #import "InterventionTypeEntity.h"
+#import "AssessmentTypeEntity.h"
+#import "SupportActivityTypeEntity.h"
+#import "SupervisionTypeEntity.h"
+#import "SupervisionTypeSubtypeEntity.h"
+
 #import "QuartzCore/QuartzCore.h"
 #import "MonthlyPracticumLogTableViewController.h"
 #import "SupervisorsAndTotalTimesForMonth.h"
@@ -68,7 +73,7 @@
 @synthesize sectionSubHeaderView;
 @synthesize sectionSubHeaderLabel;
 @synthesize sectionSubFooterView,sectionSubFooterLabel,sectionSubFooterLabelContainerView,totalInterventionHoursFooterView;
-@synthesize objectsModel=objectsModel_;
+@synthesize interventionObjectsModel=interventionObjectsModel_,assessmentObjectsModel=assessmentObjectsModel_,supportObjectsModel=supportObjectsModel_,supervisionObjectsModel=supervisionObjectsModel_;
 
 @synthesize directHoursHeader;
 @synthesize directHoursFooter;
@@ -321,36 +326,24 @@ NSLog(@"current offset %f",currentOffsetY);
     
     
     
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//
+//    
+    self.interventionObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.interventionTypesTableView];
     
-
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-NSEntityDescription *entity = [NSEntityDescription entityForName:@"InterventionTypeEntity" inManagedObjectContext:appDelegate.managedObjectContext];
-[fetchRequest setEntity:entity];
-    [fetchRequest setRelationshipKeyPathsForPrefetching:
-     [NSArray arrayWithObjects:@"subTypes",@"subTypes.interventionDelivered.time",@"subTypes.existingInterventions",nil]];
+    interventionObjectsModel_.delegate=self;
+//    
+    SCClassDefinition *typesDef=[SCClassDefinition definitionWithClass:[TrackTypeWithTotalTimes class] autoGeneratePropertyDefinitions:YES];
     
+     NSArray *fetchedInterventionObjects =  [self fetchObjectsFromEntity:(NSString *)@"InterventionTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"subTypes",@"subTypes.interventionsDelivered.time",@"subTypes.existingInterventions",nil]];
+//     
+    SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"order" sortAscending:YES filterPredicate:nil];
     
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order"
-                                                                   ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-NSError *error = nil;
-NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-if (fetchedObjects == nil) {
-   
-}
-    self.objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.interventionTypesTableView];
-    
-    SCClassDefinition *subTypesDef=[SCClassDefinition definitionWithClass:[TrackTypeWithTotalTimes class] autoGeneratePropertyDefinitions:YES];
-    
-    for (InterventionTypeEntity *interventionType in fetchedObjects) {
+    for (InterventionTypeEntity *interventionType in fetchedInterventionObjects) {
         
        TrackTypeWithTotalTimes *interventionTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:interventionType];
         
         
-        SCClassDefinition *trackTypeWithTotalTimesDef=[SCClassDefinition definitionWithClass:[TrackTypeWithTotalTimes class] autoGeneratePropertyDefinitions:YES];
+
         
         [interventionType willAccessValueForKey:@"subTypes"];
         NSSet *interventionSubTypeSet=interventionType.subTypes;
@@ -374,30 +367,29 @@ if (fetchedObjects == nil) {
         
         NSMutableArray *subTypeWithTotalsItemsArray=[NSMutableArray array];
         
+        
+        NSLog(@"month to display %@",self.monthToDisplay);
         for (InterventionTypeSubtypeEntity *interventionSubTypeObject in orderdSubTypeArray ) {
             TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:[totalsObject.clinicians objectAtIndex:0] trackTypeObject:interventionSubTypeObject];
             
-            NSLog(@"tracktype with total times object %@",trackTypeWithTotalTimeObject);
-            NSLog(@"track type with total times text is %@",trackTypeWithTotalTimeObject.typeLabelText);
+            NSLog(@"tracktype with total times object %@",interventionTypeWithTotalTimes.totalForMonthStr);
+            NSLog(@"track type with total times text is %@",interventionTypeWithTotalTimes.typeLabelText);
             [subTypeWithTotalsItemsArray addObject:trackTypeWithTotalTimeObject];
             
         }
         NSLog(@"subytpe total items array is %@",subTypeWithTotalsItemsArray);
         
         
-        SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *objectsSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:interventionType.interventionType footerNotes:interventionTypeWithTotalTimes.monthlyLogNotes sectionTotalStr:interventionTypeWithTotalTimes.totalForMonthStr items:subTypeWithTotalsItemsArray itemsDefinition:subTypesDef];
+        SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *interventionsSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:interventionType.interventionType footerNotes:interventionTypeWithTotalTimes.monthlyLogNotes sectionTotalStr: interventionTypeWithTotalTimes.totalToDateStr items:subTypeWithTotalsItemsArray itemsDefinition:typesDef];
         
 //        NSString *monthlyLogNotes=[interventionType monthlyLogNotesForMonth:self.monthToDisplay clinician:self.clinician];
         
        
-        
-        SCDataFetchOptions *fetchOptions=[SCDataFetchOptions optionsWithSortKey:@"order" sortAscending:YES filterPredicate:nil];
-        
-        
-        objectsSection.dataFetchOptions=fetchOptions;
+              
+        interventionsSection.dataFetchOptions=dataFetchOptions;
         
         
-        objectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
+        interventionsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
         {
             // Create & return a custom cell based on the cell in ContactOverviewCell.xib
             
@@ -417,18 +409,153 @@ if (fetchedObjects == nil) {
                
         
         
-        objectsModel_.delegate=self;
-                [objectsModel_ addSection:objectsSection];
+        
+        [interventionObjectsModel_ addSection:interventionsSection];
         [interventionType didAccessValueForKey:@"subTypes"];
         
     }
     
   
+    self.assessmentObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.assessmentTypesTableView];
     
+    assessmentObjectsModel_.delegate=self;
+    NSArray *fetchedAssessmentObjects =  [self fetchObjectsFromEntity:(NSString *)@"AssessmentTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"assessements.time",@"existingAssessments",nil]];
+    
+    NSMutableArray *assessmentTypesWithTotalsItemsArray=[NSMutableArray array];
+    
+    for (AssessmentTypeEntity *assessmentType in fetchedAssessmentObjects) {
+        
+        TrackTypeWithTotalTimes *assessmentTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:totalsObject.monthToDisplay clinician:[totalsObject.clinicians objectAtIndex:0] trackTypeObject:assessmentType];
+        
+        
+        
+        
+        
+        
+            [assessmentTypesWithTotalsItemsArray addObject:assessmentTypeWithTotalTimes];
+            
+        }
+       
+        
+              
+     
+        
+        
+        NSLog(@"month to display %@",self.monthToDisplay);
+     
+            NSLog(@"assessmentytypes with total times array is %@",assessmentTypesWithTotalsItemsArray);
+                  
+        SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *assessmentObjectsSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:nil footerNotes:totalsObject.assessmentMonthlyNotes sectionTotalStr:nil items:assessmentTypesWithTotalsItemsArray itemsDefinition:typesDef];
+        
+        //        NSString *monthlyLogNotes=[interventionType monthlyLogNotesForMonth:self.monthToDisplay clinician:self.clinician];
+        
+        NSLog(@"assessment objects section is %@",assessmentObjectsSection);
+        
+       
+        NSLog(@"assessment objects section items are %@",assessmentObjectsSection.items);
+        
+        assessmentObjectsSection.dataFetchOptions=dataFetchOptions;
+        
+        NSLog(@"assessment objects section items again are %@",assessmentObjectsSection.items);
+        assessmentObjectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
+        {
+            // Create & return a custom cell based on the cell in ContactOverviewCell.xib
+            
+            NSLog(@"month to display is %@",self.monthToDisplay);
+            //            NSString *bindingsString = @"20:interventionSubType;21:self.monthToDisplay"; // 1,2,3 are the control tags
+            
+            NSDictionary *assessmentBindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"assessmentType",totalsObject.monthToDisplay, nil] forKeys:[NSArray arrayWithObjects:@"20",@"21", nil]];
+            
+            MonthlyPracticumLogBottonCell *assessmentTypeCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindings:assessmentBindingsDictionary nibName:bottomCellNibName];
+            NSLog(@"assessment types cell is %@",assessmentTypeCell);
+            
+            return assessmentTypeCell;
+        };
+        
+        
+        
+        
+        
+        
+    
+        [assessmentObjectsModel_ addSection:assessmentObjectsSection];
+     
+    
+    
+    self.supportObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.supportActivitieTypesTableView];
+    
+    supportObjectsModel_.delegate=self;
+    NSArray *fetchedSupportObjects =  [self fetchObjectsFromEntity:(NSString *)@"SupportActivityTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"supportActivitiesDelivered.time",@"existingSupportActivities",nil]];
+    
+    NSMutableArray *supportActivitytTypesWithTotalsItemsArray=[NSMutableArray array];
+    
+    for (SupportActivityTypeEntity *supportActivityType in fetchedSupportObjects) {
+        
+        TrackTypeWithTotalTimes *supportActivityTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:supportActivityType];
+        
+        
+        
+        
+        
+        
+        [supportActivitytTypesWithTotalsItemsArray addObject:supportActivityTypeWithTotalTimes];
+        
+    }
+    
+    
+    
+    
+    
+    
+    NSLog(@"month to display %@",self.monthToDisplay);
+    
+    
+    
+    SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *supportObjectsSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:nil footerNotes:totalsObject.supportMonthlyNotes sectionTotalStr:nil items:supportActivitytTypesWithTotalsItemsArray itemsDefinition:typesDef];
+    
+    //        NSString *monthlyLogNotes=[interventionType monthlyLogNotesForMonth:self.monthToDisplay clinician:self.clinician];
+    
+    
+    
+    
+    
+    
+    supportObjectsSection.dataFetchOptions=dataFetchOptions;
+    
+    
+    supportObjectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
+    {
+        // Create & return a custom cell based on the cell in ContactOverviewCell.xib
+        
+        NSLog(@"month to display is %@",self.monthToDisplay);
+        //            NSString *bindingsString = @"20:interventionSubType;21:self.monthToDisplay"; // 1,2,3 are the control tags
+        
+        NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"supportType",totalsObject.monthToDisplay, nil] forKeys:[NSArray arrayWithObjects:@"20",@"21", nil]];
+        
+        MonthlyPracticumLogBottonCell *contactOverviewCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindings:bindingsDictionary nibName:bottomCellNibName];
+        
+        
+        return contactOverviewCell;
+    };
+    
+    
+    
+    
+    
+    
+    
+    [supportObjectsModel_ addSection:supportObjectsSection];
+    
+
+    
+    
+    
+    
+ 
     
     self.interventionTypesTableView.autoresizingMask=UIViewAutoresizingFlexibleHeight;
    NSLog(@"background size height is %g",self.interventionTypesTableView.backgroundView.frame.size.height);
-    objectsModel_.delegate=self;
+   
     
    
     self.interventionHoursWeek1Label.text=totalsObject.interventionTotalWeek1Str;
@@ -518,7 +645,7 @@ if (fetchedObjects == nil) {
     if ([section isKindOfClass:[SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter class]]) {
         objectsSection=(SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *)section;
     }
-    
+    if(objectsSection.headerTitle && objectsSection.headerTitle.length){
     UIView *containerView = [[UIView alloc] initWithFrame:sectionSubHeaderView.frame];
     
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:sectionSubHeaderLabel.frame];
@@ -532,7 +659,7 @@ if (fetchedObjects == nil) {
     [containerView addSubview:headerLabel];
     
     objectsSection.headerView = containerView;
-    
+    } 
     
     UITextView *footerNotesTextView = [[UITextView alloc] initWithFrame:sectionSubFooterNotesTextView.frame];
     footerNotesTextView.font=sectionSubFooterNotesTextView.font;
@@ -546,7 +673,7 @@ if (fetchedObjects == nil) {
     
     NSLog(@"section bound object is %@",objectsSection.boundObject);
       
-NSLog(@"objectSection bound object is %@",objectsSection.dataStore.data);
+    NSLog(@"objectSection bound object is %@",objectsSection.dataStore.data);
    
      
         
@@ -592,36 +719,46 @@ NSLog(@"objectSection bound object is %@",objectsSection.dataStore.data);
         
         
     }
-    
+    NSString *footerTotal=(NSString *)objectsSection.footerTotal;
     if (footerNotesTextView.contentSize.height>footerNotesTextView.frame.size.height) {
         
         CGRect footerNotesTextViewFrame=footerNotesTextView.frame;
         footerNotesTextViewFrame.size.height=footerNotesTextView.contentSize.height-9;
+        
+        
+        if (!footerTotal||!footerTotal.length) {
+            footerNotesTextViewFrame.size.width=footerContainerView.frame.size.width-7;
+        }
         footerNotesTextView.frame=footerNotesTextViewFrame;
         
         
         
     }
+  
+    footerContainerView.backgroundColor=sectionSubFooterView.backgroundColor;
+    if (footerTotal&&footerTotal.length) {
+    
     
     UIView *subFooterLabelContainerView=[[UIView alloc]initWithFrame:self.sectionSubFooterLabelContainerView.frame];
     subFooterLabelContainerView.backgroundColor=self.sectionSubFooterLabelContainerView.backgroundColor;
     
     UILabel *footerLabel = [[UILabel alloc] initWithFrame:sectionSubFooterLabel.frame];
     footerLabel.font=sectionSubFooterLabel.font;
-    footerContainerView.backgroundColor=sectionSubFooterView.backgroundColor;
+    
     footerLabel.backgroundColor = sectionSubFooterLabel.backgroundColor;
     footerLabel.textColor = sectionSubFooterLabel.textColor;
     footerLabel.tag=60;
-    footerLabel.text=objectsSection.footerTotal;
+    NSLog(@"footer total %@",objectsSection.footerTotal);
+    footerLabel.text=footerTotal;
     footerLabel.textAlignment=UITextAlignmentCenter;
     [subFooterLabelContainerView addSubview:footerLabel];
     
     
     [footerContainerView addSubview:subFooterLabelContainerView];
-    
-    
+   
+    } 
     objectsSection.footerView = footerContainerView;
-
+   
 
 
 
@@ -631,23 +768,30 @@ NSLog(@"objectSection bound object is %@",objectsSection.dataStore.data);
 
 }
 
--(NSArray *)fetchObjectsFromEntity:(NSString *)entityStr filterPredicate:(NSPredicate *)filterPredicate{
+-(NSArray *)fetchObjectsFromEntity:(NSString *)entityStr filterPredicate:(NSPredicate *)filterPredicate pathsForPrefetching:(NSArray *)pathsForPrefetching {
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
     
     
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+       
+
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityStr inManagedObjectContext:appDelegate.managedObjectContext];
     
     [fetchRequest setEntity:entity];
-    
+    [fetchRequest setRelationshipKeyPathsForPrefetching:
+     pathsForPrefetching];
+
     
     if (filterPredicate) {
         [fetchRequest setPredicate:filterPredicate];
     }
-    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order"
+                                                                   ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
     
     NSError *error = nil;
     NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];

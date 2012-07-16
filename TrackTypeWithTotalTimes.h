@@ -34,14 +34,14 @@ typedef enum {
 @interface TrackTypeWithTotalTimes : TotalTimesForMonthlyLog {
     
     
-   __weak ClinicianEntity *clinician_;
+   
     PTrackType trackType_;
     
    __weak NSString *trackPathStartString_;
-    __weak NSString *monthlyLogNotes_;
     
+     __weak NSString *monthlyLogNotes_;
 }
-@property (nonatomic, weak)ClinicianEntity *clinician;
+
 @property (nonatomic, assign)  PTrackType trackType;;
 @property (nonatomic, weak) NSString *trackPathStartString;
 @property (nonatomic, weak) id trackTypeObject;

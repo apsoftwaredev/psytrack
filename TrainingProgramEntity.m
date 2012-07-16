@@ -8,7 +8,7 @@
 
 #import "TrainingProgramEntity.h"
 #import "TimeTrackEntity.h"
-
+#import "PTTAppDelegate.h"
 
 @implementation TrainingProgramEntity
 
@@ -17,5 +17,7 @@
 @dynamic trainingProgram;
 @dynamic selectedByDefault;
 @dynamic timeTracks;
+
+
 
 @end

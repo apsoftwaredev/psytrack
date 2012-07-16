@@ -13,7 +13,9 @@ typedef enum {
     kTrackAssessment,
     kTrackIntervention,
     kTrackSupport,
-    kTrackSupervisionReceived
+    kTrackSupervisionReceived,
+    kTrackExistingHours
+    
 } PTrackEntity;
 
 typedef enum {
@@ -59,6 +61,7 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 
 
     __weak NSDate  *monthToDisplay_;
+    __weak ClinicianEntity *clinician_;
     __weak NSArray *clinicians_;
     __weak NSDate *monthStartDate_;
     __weak NSDate *monthEndDate_;
@@ -79,7 +82,7 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
     __weak NSDate *week5StartDate_;
     __weak NSDate *week5EndDate_;
     
-    
+   
 
 
 
@@ -87,10 +90,12 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 
 }
 
-
+@property (nonatomic, weak) ClinicianEntity *clinician;
 @property (nonatomic, weak) NSDate *monthToDisplay;
 @property (nonatomic, weak) NSDate *monthStartDate;
 @property (nonatomic, weak) NSDate *monthEndDate;
+
+
 
 @property (nonatomic, weak) NSDate *week1StartDate;
 @property (nonatomic, weak) NSDate *week1EndDate;

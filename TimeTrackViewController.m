@@ -19,6 +19,8 @@
 
 #import "ClinicianSelectionCell.h"
 #import "InterventionTypeSubtypeEntity.h"
+#import "TrainingProgramEntity.h"
+#import "SiteEntity.h"
 
 @interface TimeTrackViewController ()
 
@@ -216,7 +218,7 @@
     SCCustomPropertyDefinition *additionalTimePropertyDef = [SCCustomPropertyDefinition definitionWithName:@"AdditionalTime" uiElementNibName:timePickerCellNibName  objectBindings:additionalTimeDataBindings];	
     
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
-    additionalTimePropertyDef.autoValidate=FALSE;
+    additionalTimePropertyDef.autoValidate=NO;
     
 	
     
@@ -431,7 +433,7 @@
         default:
             break;
     }
-     SCPropertyGroup *detailsGroup =[SCPropertyGroup groupWithHeaderTitle:detailsHeaderStr footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"trainingType",@"site", nil]];
+     SCPropertyGroup *detailsGroup =[SCPropertyGroup groupWithHeaderTitle:detailsHeaderStr footerTitle:@"*Required" propertyNames:[NSArray arrayWithObjects:@"trainingProgram",@"site", nil]];
   
     //define a property group
     SCPropertyGroup *eventGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"dateOfService",@"time", @"EventButtonCell",nil]];
@@ -443,7 +445,7 @@
     
 
     
-    NSMutableArray *timeTrackPropertyNamesArray=[NSMutableArray arrayWithObjects:@"dateOfService",  @"time",  @"notes", @"paperwork",  @"supervisor",    @"trainingType", @"site",  @"paid",@"hourlyRate",@"eventIdentifier",@"monthlyLogNotes", nil];
+    NSMutableArray *timeTrackPropertyNamesArray=[NSMutableArray arrayWithObjects:@"dateOfService",  @"time",  @"notes", @"paperwork",  @"supervisor",    @"trainingProgram", @"site",  @"paid",@"hourlyRate",@"eventIdentifier",@"monthlyLogNotes", nil];
     
     if (currentControllerSetup==kTrackAssessmentSetup||currentControllerSetup==kTrackInterventionSetup||currentControllerSetup==kTrackSupportSetup) {
         
@@ -532,6 +534,7 @@
             
             [detailsGroup insertPropertyName:@"supportActivityType" atIndex:0];
             
+           
             break;
             
         case kTrackSupervisionGivenSetup:
@@ -664,7 +667,7 @@
     
       
     //Training Type  start
-    SCEntityDefinition *trainingTypeDef=[SCEntityDefinition definitionWithEntityName:@"TrainingTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"trainingType",@"selectedByDefault", @"notes", nil]];
+    SCEntityDefinition *trainingProgramDef=[SCEntityDefinition definitionWithEntityName:@"TrainingProgramEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"trainingProgram",@"selectedByDefault", @"notes", nil]];
     
     
     
@@ -672,26 +675,26 @@
     
     
     
-    trainingTypeDef.orderAttributeName=@"order";
+    trainingProgramDef.orderAttributeName=@"order";
     
     
     
-    SCPropertyDefinition *sessionTrainingTypePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"trainingType"];
-    sessionTrainingTypePropertyDef.type =SCPropertyTypeObjectSelection;
+    SCPropertyDefinition *sessionTrainingProgramPropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"trainingProgram"];
+    sessionTrainingProgramPropertyDef.type =SCPropertyTypeObjectSelection;
     
-    SCObjectSelectionAttributes *trainingTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trainingTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-    trainingTypeSelectionAttribs.allowAddingItems = YES;
-    trainingTypeSelectionAttribs.allowDeletingItems = YES;
-    trainingTypeSelectionAttribs.allowMovingItems = YES;
-    trainingTypeSelectionAttribs.allowEditingItems = YES;
-    trainingTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Training Types)"];
-    trainingTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Training Type"];
-    sessionTrainingTypePropertyDef.attributes = trainingTypeSelectionAttribs;
+    SCObjectSelectionAttributes *trainingProgramSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trainingProgramDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    trainingProgramSelectionAttribs.allowAddingItems = YES;
+    trainingProgramSelectionAttribs.allowDeletingItems = YES;
+    trainingProgramSelectionAttribs.allowMovingItems = YES;
+    trainingProgramSelectionAttribs.allowEditingItems = YES;
+    trainingProgramSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Training Types)"];
+    trainingProgramSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Training Type"];
+    sessionTrainingProgramPropertyDef.attributes = trainingProgramSelectionAttribs;
     
-    SCPropertyDefinition *trainingTypePropertyDef=[trainingTypeDef propertyDefinitionWithName:@"trainingType"];
-    trainingTypePropertyDef.type=SCPropertyTypeTextView;
-    SCPropertyDefinition *trainingTypeNotesPropertyDef=[trainingTypeDef propertyDefinitionWithName:@"notes"];
-    trainingTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *trainingProgramPropertyDef=[trainingProgramDef propertyDefinitionWithName:@"trainingProgram"];
+    trainingProgramPropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *trainingProgramNotesPropertyDef=[trainingProgramDef propertyDefinitionWithName:@"notes"];
+    trainingProgramNotesPropertyDef.type=SCPropertyTypeTextView;
     
     //training type end
     
@@ -871,7 +874,7 @@
         
         
         //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
-        studentsPresentDataProperty.autoValidate=FALSE;
+        studentsPresentDataProperty.autoValidate=YES;
         
         [timeTrackEntityDef removePropertyDefinitionWithName:@"studentsPresent"];
         
@@ -1059,6 +1062,7 @@
     NSString *typePropertyNameString=nil;
     NSString *typeEntityNameString=nil;
     NSString *typeDescriptionString=nil;
+    NSString *typeTitleString=nil;
     switch (currentControllerSetup) {
         case kTrackAssessmentSetup:
         {
@@ -1074,7 +1078,7 @@
             typeEntityNameString =@"AssessmentTypeEntity";
             typePropertyNameString=@"assessmentType";
             typeDescriptionString=@"assessment type";
-                        
+            typeTitleString=@"Assessment Type*";
             
             
         } 
@@ -1092,6 +1096,7 @@
             typeEntityNameString =@"InterventionTypeEntity";
             typePropertyNameString=@"interventionType";
               typeDescriptionString=@"intervention type";
+            typeTitleString=@"Intervention Type*";
            
         } 
             
@@ -1109,7 +1114,7 @@
             typeEntityNameString =@"SupportActivityTypeEntity";
             typePropertyNameString=@"supportActivityType";
               typeDescriptionString=@"support activity type";
-
+            typeTitleString=@"Support Activity Type*";
             
 
         } 
@@ -1131,7 +1136,7 @@
               typeDescriptionString=@"supervision type";
 
         
-        
+        typeTitleString=@"Supervision Type*";
         
         
         
@@ -1148,8 +1153,9 @@
     
     
     SCPropertyDefinition *trackTypePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:typePropertyNameString];
+    trackTypePropertyDef.autoValidate=NO;
     trackTypePropertyDef.type =SCPropertyTypeObjectSelection;
-    
+    trackTypePropertyDef.title=typeTitleString;
     SCObjectSelectionAttributes *trackTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trackTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     trackTypeSelectionAttribs.allowAddingItems = YES;
     trackTypeSelectionAttribs.allowDeletingItems = YES;
@@ -1173,7 +1179,7 @@
      
         NSString * subTypePropertyNameString=@"interventionSubType";
         NSString * subTypeEntityNameString=@"InterventionTypeSubtypeEntity";
-        
+        NSString * subTypeTitleString=@"Subtype*";
         SCEntityDefinition *trackSubTypeDef=[SCEntityDefinition definitionWithEntityName:subTypeEntityNameString managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:subTypePropertyNameString, @"notes", nil]];
         
         
@@ -1185,7 +1191,8 @@
         
         SCPropertyDefinition *trackSubTypePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"subtype"];
         trackSubTypePropertyDef.type =SCPropertyTypeObjectSelection;
-        
+        trackSubTypePropertyDef.title=subTypeTitleString;
+         trackSubTypePropertyDef.autoValidate=NO;
         SCObjectSelectionAttributes *trackSubTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trackSubTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
         trackSubTypeSelectionAttribs.allowAddingItems = NO;
         trackSubTypeSelectionAttribs.allowDeletingItems = NO;
@@ -1220,7 +1227,7 @@
         
         NSString * subTypePropertyNameString=@"subType";
         NSString * subTypeEntityNameString=@"SupervisionTypeSubtypeEntity";
-        
+        NSString * subTypeTitleString=@"Subtype*";
         SCEntityDefinition *trackSubTypeDef=[SCEntityDefinition definitionWithEntityName:subTypeEntityNameString managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:subTypePropertyNameString, @"notes", nil]];
         
         
@@ -1232,7 +1239,8 @@
         
         SCPropertyDefinition *trackSubTypePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"subType"];
         trackSubTypePropertyDef.type =SCPropertyTypeObjectSelection;
-        
+        trackSubTypePropertyDef.title=subTypeTitleString;
+        trackSubTypePropertyDef.autoValidate=NO;
         SCObjectSelectionAttributes *trackSubTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trackSubTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
         trackSubTypeSelectionAttribs.allowAddingItems = YES;
         trackSubTypeSelectionAttribs.allowDeletingItems = YES;
@@ -2254,8 +2262,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             section.headerView = containerView;
 
-            
-        }
+                    }
 
         
         //        }
@@ -2263,7 +2270,20 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     }
     
     
-    
+    if (section.footerTitle&&section.footerTitle.length) {
+        UIView *footerContainerView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, 300, 20)];
+        UILabel *sectionFooterLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, 20, 300, 20)];
+        
+        
+        sectionFooterLabel.backgroundColor = [UIColor clearColor];
+        sectionFooterLabel.textColor = [UIColor yellowColor];
+        sectionFooterLabel.tag=60;
+        sectionFooterLabel.text=section.footerTitle;
+        [footerContainerView addSubview:sectionFooterLabel];
+        
+        section.footerView = footerContainerView;   
+    }
+
     
   
     if (tableViewModel.tag ==2 && index==1) 
@@ -2567,7 +2587,23 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     
                 }
             }
+            
+                       
+            
+            
         }
+        if ([cell isKindOfClass:[ClinicianSelectionCell class]]) {
+            ClinicianSelectionCell *clinicianSelectionCell=(ClinicianSelectionCell *)cell;
+            
+            if (clinicianSelectionCell.clinicianObject ) {
+                ClinicianEntity *supervisorSelected=(ClinicianEntity *)clinicianSelectionCell.clinicianObject;
+                if ([supervisorSelected.myInformation isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+                    clinicianSelectionCell.label.text=@"Self";
+                }
+            }
+            
+        }
+
         //        UIView *view=(UIView *)[timeCell viewWithTag:5];
         //        UILabel*lable =(UILabel*)view;
         //        lable.text=@"test";
@@ -2728,7 +2764,49 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 }
 
 
+-(BOOL)tableViewModel:(SCTableViewModel *)tableModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
 
+    BOOL valid=NO;
+
+    SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
+    
+    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+    
+    if (tableModel.tag==1 &&cellManagedObject) {
+        ClinicianEntity *supervisor=(ClinicianEntity *)[cellManagedObject valueForKey:@"supervisor"];
+        if (supervisor &&[supervisor isKindOfClass:[ClinicianEntity class]]) {
+            valid=YES;
+        }
+        NSLog(@"cell tag is %i",cell.tag);
+        
+        NSString *cellTitleLastCharacter=[cell.textLabel.text substringFromIndex:cell.textLabel.text.length-1 ];
+    
+        NSLog(@"cell title last character is %@",cellTitleLastCharacter);
+     
+        if ([cell isKindOfClass:[SCObjectSelectionCell class]]&&[cellTitleLastCharacter isEqualToString:@"*" ]) {
+            SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+            
+            NSLog(@"selected item index is %@",objectSelectionCell.selectedItemIndex);
+            if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
+                valid=YES;
+            }else {
+                valid=NO;
+            }
+            
+        }
+
+    
+    
+
+    }
+    else 
+    {
+        valid=YES;
+    }
+
+
+    return  valid;
+}
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -2907,6 +2985,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
         
         if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]) { 
             if ( [cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) {
@@ -2928,12 +3008,76 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         }   
         currentDetailTableViewModel=tableViewModel;
 
+       
+        if ([cellManagedObject.entity.name isEqualToString:@"TrainingProgramEntity"]) {
+            if (cell.tag==1) {
+                       PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+            
+            
+            NSFetchRequest *trainingProgramFetchRequest = [[NSFetchRequest alloc] init];
+            NSEntityDescription *trainingProgramEntity = [NSEntityDescription entityForName:@"TrainingProgramEntity" inManagedObjectContext:appDelegate.managedObjectContext];
+            [trainingProgramFetchRequest setEntity:trainingProgramEntity];
+            
+            NSPredicate *defaultTrainingPredicate = [NSPredicate predicateWithFormat:@"selectedByDefault == %@ ", [NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES]];
+            [trainingProgramFetchRequest setPredicate:defaultTrainingPredicate];
+            
+            NSError *trainingProgramError = nil;
+            NSArray *trainingProgramFetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:trainingProgramFetchRequest error:&trainingProgramError];
+            
+            
+            if (trainingProgramFetchedObjects&&trainingProgramFetchedObjects.count) {
+                
+                for (TrainingProgramEntity *trainingProgram in trainingProgramFetchedObjects) {
+                    [trainingProgram willChangeValueForKey:@"selectedByDefault"];
+                    trainingProgram.selectedByDefault=[NSNumber numberWithBool:NO];
+                    [trainingProgram didChangeValueForKey:@"selectedByDefault"];
+                }
+                
+                
+                
+                
+                
+            }     
+            }
+        }
+        if ([cellManagedObject.entity.name isEqualToString:@"SiteEntity"]) {
+            if (cell.tag==6) {
+               
+                
+                
+                NSFetchRequest *siteFetchRequest = [[NSFetchRequest alloc] init];
+                NSEntityDescription *siteEntity = [NSEntityDescription entityForName:@"SiteEntity" inManagedObjectContext:appDelegate.managedObjectContext];
+                [siteFetchRequest setEntity:siteEntity];
+                
+                NSPredicate *defaultSitePredicate = [NSPredicate predicateWithFormat:@"defaultSite == %@ ", [NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES]];
+                [siteFetchRequest setPredicate:defaultSitePredicate];
+                
+                NSError *siteError = nil;
+                NSArray *siteFetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:siteFetchRequest error:&siteError];
+                
+                
+                if (siteFetchedObjects&&siteFetchedObjects.count) {
+                                        
+                    for (SiteEntity *site  in siteFetchedObjects) {
+                        [site willChangeValueForKey:@"defaultSite"];
+                        site.defaultSite=[NSNumber numberWithBool:NO];
+                        [site didChangeValueForKey:@"defaultSite"];
+                    }
+                    
+                    
+                    
+                    
+                    
+                }     
+            }
+        }
+
+        
     } 
     
     
     
-    
-    
+       
     
         
     

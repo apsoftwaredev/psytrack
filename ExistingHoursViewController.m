@@ -522,7 +522,7 @@
         //Create a class definition for the existingAssessmentEntity
         SCEntityDefinition *supervisionDef = [SCEntityDefinition definitionWithEntityName:supervisionEntityName 
                                                                        managedObjectContext:managedObjectContext
-                                                                              propertyNames:[NSArray arrayWithObjects:@"supervisionType",@"subType", @"notes",nil]];
+                                                                              propertyNames:[NSArray arrayWithObjects:@"supervisionType",@"subType", @"notes",@"monthlyLogNotes",nil]];
         
 
             //create the custom property definition
@@ -668,7 +668,7 @@
     //Create a class definition for the existingAssessmentEntity
     SCEntityDefinition *supportActivityDef = [SCEntityDefinition definitionWithEntityName:@"ExistingSupportActivityEntity" 
                                                            managedObjectContext:managedObjectContext
-                                                                  propertyNames:[NSArray arrayWithObjects:@"supportActivityType",  @"notes",nil]];
+                                                                  propertyNames:[NSArray arrayWithObjects:@"supportActivityType",  @"notes",@"monthlyLogNotes",nil]];
     
     
     
@@ -756,7 +756,7 @@
     //Create a class definition for the existingAssessmentEntity
     SCEntityDefinition *assessmentDef = [SCEntityDefinition definitionWithEntityName:@"ExistingAssessmentEntity" 
                                                           managedObjectContext:managedObjectContext
-                                                                 propertyNames:[NSArray arrayWithObjects:@"assessmentType",@"instruments",@"batteries", @"demographics",@"notes",nil]];
+                                                                 propertyNames:[NSArray arrayWithObjects:@"assessmentType",@"instruments",@"batteries", @"demographics",@"notes",@"monthlyLogNotes",nil]];
     
     
    
@@ -1161,7 +1161,7 @@
     //Create a class definition for the other psychotherapyEntity
     SCEntityDefinition *interventionDef = [SCEntityDefinition definitionWithEntityName:@"ExistingInterventionEntity" 
                                                         managedObjectContext:managedObjectContext
-                                                               propertyNames:[NSArray arrayWithObjects: @"interventionType"  ,@"interventionSubType", @"models",@"demographics",@"notes", nil]];
+                                                               propertyNames:[NSArray arrayWithObjects: @"interventionType"  ,@"interventionSubType", @"models",@"demographics",@"notes",@"monthlyLogNotes", nil]];
     
     
     

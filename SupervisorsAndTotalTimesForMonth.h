@@ -25,6 +25,8 @@
 
 @interface SupervisorsAndTotalTimesForMonth : TotalTimesForMonthlyLog{
 
+   __weak NSString *assessmentMonthlyNotes_;
+   __weak NSString *supportMonthlyNotes_;
 
     
 }
@@ -193,6 +195,8 @@
 @property (nonatomic, assign) NSTimeInterval overallTotalForMonthTI;
 
 
+@property (nonatomic, weak) NSString *assessmentMonthlyNotes;
+@property (nonatomic, weak) NSString *supportMonthlyNotes;
 
 
 
@@ -201,5 +205,5 @@
 
 -(NSTimeInterval ) totalOverallHoursTIForOveralCell:(PTSummaryCell)overallCell clinician:(ClinicianEntity *)clinician;
 
-
+-(NSString *)monthlyLogNotesForMonth:(PTrackEntity )ptrackEntityType;
 @end

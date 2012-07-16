@@ -93,7 +93,7 @@ NSLog(@"self bound object is %@",self.boundObject);
     }
     
     NSLog(@"month to display is %@",monthToDisplay_);
-  NSLog(@"week two %@",trackTypeWithTotalTimesObject_.totalWeek1Str);
+  NSLog(@"week two %@",trackTypeWithTotalTimesObject_.totalWeek2Str);
     self.hoursWeek1Label.text=trackTypeWithTotalTimesObject_.totalWeek1Str;
     self.hoursWeek2Label.text=trackTypeWithTotalTimesObject_.totalWeek2Str;
     self.hoursWeek3Label.text=trackTypeWithTotalTimesObject_.totalWeek3Str;

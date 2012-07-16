@@ -17,5 +17,6 @@
 @dynamic notes;
 @dynamic supportActivityType;
 @dynamic existingHours;
+@dynamic monthlyLogNotes;
 
 @end

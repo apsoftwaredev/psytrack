@@ -11,12 +11,21 @@
 @interface MonthlyPracticumLogTopCell : SCCustomCell <SCTableViewModelDelegate, SCTableViewControllerDelegate, UITableViewDelegate, SCTableViewModelDataSource>{
 
 
-    SCArrayOfObjectsModel *objectsModel_;
+    SCArrayOfObjectsModel *interventionObjectsModel_;
+    SCArrayOfObjectsModel *assessmentObjectsModel_;
+    SCArrayOfObjectsModel *supportObjectsModel_;
+    SCArrayOfObjectsModel *supervisionObjectsModel_;
+    
+    
+    
     CGFloat currentOffsetY;
 
 }
 
-@property (nonatomic,strong)  SCArrayOfObjectsModel *objectsModel;
+@property (nonatomic,strong)  SCArrayOfObjectsModel *interventionObjectsModel;
+@property (nonatomic,strong)  SCArrayOfObjectsModel *assessmentObjectsModel;
+@property (nonatomic,strong)  SCArrayOfObjectsModel *supportObjectsModel;
+@property (nonatomic,strong)  SCArrayOfObjectsModel *supervisionObjectsModel;
 
 @property (nonatomic, weak)IBOutlet UITableView *interventionTypesTableView;
 @property (nonatomic, weak)IBOutlet UITableView *assessmentTypesTableView;

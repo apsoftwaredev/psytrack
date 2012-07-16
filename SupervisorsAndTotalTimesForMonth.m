@@ -8,12 +8,15 @@
 
 #import "SupervisorsAndTotalTimesForMonth.h"
 #import "PTTAppDelegate.h"
+#import "ExistingAssessmentEntity.h"
+#import "ExistingSupportActivityEntity.h"
+
 
 @implementation SupervisorsAndTotalTimesForMonth
 
 @synthesize  clinicians;
 
-
+@synthesize assessmentMonthlyNotes=assessmentMonthlyNotes_,supportMonthlyNotes=supportMonthlyNotes_;
 
 @synthesize interventionTotalWeek1Str;
 @synthesize interventionTotalWeek2Str;
@@ -211,6 +214,9 @@
         self.overallTotalCummulativeTI =[self totalOverallHoursTIForOveralCell:kSummaryCummulative clinician:(ClinicianEntity *)clinician];
         self.overallTotalToDateTI=[self totalOverallHoursTIForOveralCell:kSummaryTotalToDate clinician:clinician];
         
+        
+        self.assessmentMonthlyNotes=[self monthlyLogNotesForMonth:kTrackAssessment];
+        self.supportMonthlyNotes=[self monthlyLogNotesForMonth:kTrackSupport];
         [self calculateDirectlHours];
         
         
@@ -657,6 +663,175 @@
 
 
 
+-(NSString *)monthlyLogNotesForMonth:(PTrackEntity )ptrackEntityType{
+    
+    
+    NSArray *trackDeliveredFilteredForCurrentMonth=nil;
+    NSPredicate *trackPredicateForCurrentMonth=[self predicateForTrackCurrentMonthsForClincian:clinician_];
+    NSString *returnString=nil;
+   
+    switch (ptrackEntityType) {
+                    
+            case kTrackAssessment:
+            trackDeliveredFilteredForCurrentMonth=[self.assessmentsDeliveredArray filteredArrayUsingPredicate:trackPredicateForCurrentMonth];
+            
+            
+            break;
+            
+            
+        case kTrackSupport:
+        
+            trackDeliveredFilteredForCurrentMonth=[self.supportActivityDeliveredArray filteredArrayUsingPredicate:trackPredicateForCurrentMonth];
+            
+            
+                     
+            break;
+            
+
+            
+        default:
+            break;
+    }
+    
+ NSArray *filteredExistingHoursArray=nil;
+    if (self.existingHoursHoursArray &&self.existingHoursHoursArray.count) {
+        filteredExistingHoursArray=[self.existingHoursHoursArray filteredArrayUsingPredicate:[self predicateForExistingHoursCurrentMonthsForClincian:clinician_]];
+    }
+    
+    
+    
+    if (trackDeliveredFilteredForCurrentMonth) {
+        
+        int trackDeliveredFilteredForCurrentMonthCount=trackDeliveredFilteredForCurrentMonth.count;
+        if (trackDeliveredFilteredForCurrentMonthCount) {
+            
+            NSArray *monthlyLogNotesArray=[trackDeliveredFilteredForCurrentMonth valueForKey:@"monthlyLogNotes"];
+            int monthlyLogNotesArrayCount=monthlyLogNotesArray.count;
+            for ( int i=0;i< monthlyLogNotesArrayCount; i++){
+                
+                
+                id logNotesID=[monthlyLogNotesArray objectAtIndex:i];
+                
+                
+                if ([logNotesID isKindOfClass:[NSString class]]) {
+                    NSString *logNotesStr=(NSString *)logNotesID;
+                    if (i==0) {
+                        returnString=logNotesStr;
+                    }
+                    else {
+                        returnString=[logNotesStr stringByAppendingFormat:@"; %@",logNotesStr];
+                    }
+                }
+            }
+            
+        }
+    }
+    
+        
+        int filteredExistingHoursArrayCount=filteredExistingHoursArray.count;
+        if (filteredExistingHoursArrayCount) {
+           
+            NSArray *existingTypeArray=nil;
+            
+            NSSet *existingTypeSet=nil;
+            switch (ptrackEntityType) {
+               
+                case kTrackAssessment:
+                    
+                {
+                    NSLog(@"filtered existing hours array is %@",filteredExistingHoursArray);
+                    
+                    if (filteredExistingHoursArray&&filteredExistingHoursArray.count) {
+                        existingTypeSet=[filteredExistingHoursArray mutableSetValueForKeyPath:@"assessments.monthlyLogNotes"];
+                    }
+                    
+                    
+                }
+                    break;
+                    
+                case kTrackSupport:
+                {
+                    if (filteredExistingHoursArray &&filteredExistingHoursArray.count) {
+                        existingTypeSet=[filteredExistingHoursArray mutableSetValueForKeyPath:@"supportActivities.monthlyLogNotes"];
+                        
+                    }
+                   
+                }
+                    break;
+                
+                
+                
+                    
+                default:
+                    break;
+            }
+           
+            
+            NSLog(@"monthly log notes array %@",existingTypeArray);
+    
+            existingTypeArray=existingTypeSet.allObjects;
+        NSLog(@"existing type array %@",existingTypeArray);
+            NSString *logNotesStr=nil;
+            for ( id logNotesID in existingTypeArray){
+                
+                
+               
+                                               
+                if ([logNotesID isKindOfClass:[NSString class]]) {
+                    logNotesStr=(NSString *) logNotesID;
+                }
+                else if ([logNotesID isKindOfClass:[NSSet class]] )
+                {
+                    NSSet *logNotesSet=(NSSet *)logNotesID;
+                                       NSArray *logNotesArray=logNotesSet.allObjects;
+                    
+                    for (int i=0;i<logNotesArray.count ; i++) {
+                        NSString *logNoteInLogNotesArray=[logNotesArray objectAtIndex:i];
+                       
+                        if (logNoteInLogNotesArray &&[logNoteInLogNotesArray isKindOfClass:[NSString class]] &&logNoteInLogNotesArray.length) {
+                            
+                            if (!logNotesStr ||!logNotesStr.length) {
+                                logNotesStr=logNoteInLogNotesArray;
+                            }
+                            else {
+                                logNotesStr=[NSString stringWithFormat:@"%@; %@",logNotesStr,logNoteInLogNotesArray];
+                            }
+                            
+                        }
+                        
+                    }
+                }
+
+                if (!returnString ||!returnString.length) {
+                    returnString=logNotesStr;
+                    
+                }
+                else {
+                
+                    if ([logNotesStr isKindOfClass:[NSString class]]) {
+                        returnString=[returnString stringByAppendingFormat:@"; %@",logNotesStr];
+                    }
+                    
+                }
+                
+                NSLog(@"return String %@",returnString);
+                
+                
+            }
+            
+        }
+    
+
+    if (returnString && ![returnString isKindOfClass:[NSString class]]) {
+        
+        returnString=[NSString string];
+        
+    }
+    
+    return returnString;
+    
+    
+}
 
 
 

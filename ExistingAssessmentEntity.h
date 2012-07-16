@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSManagedObject *demographics;
 @property (nonatomic, retain) ExistingHoursEntity *existingHours;
 @property (nonatomic, retain) NSSet *batteries;
+@property (nonatomic, retain )NSString *monthlyLogNotes;
 @end
 
 @interface ExistingAssessmentEntity (CoreDataGeneratedAccessors)

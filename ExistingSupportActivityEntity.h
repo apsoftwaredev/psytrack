@@ -17,5 +17,5 @@
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) SupportActivityTypeEntity *supportActivityType;
 @property (nonatomic, retain) ExistingHoursEntity *existingHours;
-
+@property (nonatomic, retain) NSString * monthlyLogNotes;
 @end

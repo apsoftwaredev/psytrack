@@ -17,7 +17,7 @@ supportActivityDeliveredArray=supportActivityDeliveredArray_,
 supervisionReceivedArray=supervisionReceivedArray_,
 existingHoursHoursArray=existingHoursArray_;
 
-
+@synthesize clinician=clinician_;
 @synthesize monthStartDate=monthStartDate_, monthEndDate=monthEndDate_;
 
 @synthesize week1StartDate=week1StartDate_;
@@ -39,6 +39,7 @@ existingHoursHoursArray=existingHoursArray_;
     if (self) {
         
         self.monthToDisplay=date;
+        self.clinician=clinician;
         NSLog(@"month to display is %@",self.monthToDisplay);
         self.monthStartDate=[self monthStartDateForDate:date];
         self.monthEndDate=[self monthEndDate:date];
@@ -620,6 +621,7 @@ existingHoursHoursArray=existingHoursArray_;
     
     
 }
+
 
 
 

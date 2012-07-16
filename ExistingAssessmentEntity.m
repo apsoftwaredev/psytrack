@@ -20,5 +20,6 @@
 @dynamic demographics;
 @dynamic existingHours;
 @dynamic batteries;
+@dynamic monthlyLogNotes;
 
 @end

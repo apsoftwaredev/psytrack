@@ -231,7 +231,6 @@
 		E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B76150858D3005B798A /* ABGroupSelectionCell.m */; };
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 		E751791815A26B0C00674F88 /* InterventionDeliveredEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E751791715A26B0C00674F88 /* InterventionDeliveredEntity.m */; };
-		E751791B15A26B7F00674F88 /* TimeTrackEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E751791A15A26B7F00674F88 /* TimeTrackEntity.m */; };
 		E751793415A4B1B900674F88 /* ClinicianEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E751793315A4B1B900674F88 /* ClinicianEntity.m */; };
 		E751793715A85BCB00674F88 /* SupervisorsAndTotalTimesForMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = E751793615A85BCA00674F88 /* SupervisorsAndTotalTimesForMonth.m */; };
 		E7577FA9158C1DAF0044D344 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -338,6 +337,11 @@
 		E7ADFD4B15AE2B0900081392 /* ExistingSupportActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD4A15AE2B0900081392 /* ExistingSupportActivityEntity.m */; };
 		E7B81461159A5FFE0039F38F /* psyTrainTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7B8145F159A5FFE0039F38F /* psyTrainTrack.xcdatamodeld */; };
 		E7C02D9F15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */; };
+		E7C02DA215B3621B0072F97C /* SupervisionReceivedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA115B362190072F97C /* SupervisionReceivedEntity.m */; };
+		E7C02DA515B362990072F97C /* SupervisionGivenEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA415B362980072F97C /* SupervisionGivenEntity.m */; };
+		E7C02DA815B390CA0072F97C /* TimeTrackEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA715B390CA0072F97C /* TimeTrackEntity.m */; };
+		E7C02DB015B3958B0072F97C /* TrainingProgramEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DAF15B3958A0072F97C /* TrainingProgramEntity.m */; };
+		E7C02DB315B3A4610072F97C /* SiteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DB215B3A4600072F97C /* SiteEntity.m */; };
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
 		E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */; };
@@ -776,8 +780,6 @@
 		E7516B7A15085A23005B798A /* PTABGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTABGroup.m; sourceTree = "<group>"; };
 		E751791615A26B0C00674F88 /* InterventionDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterventionDeliveredEntity.h; sourceTree = "<group>"; };
 		E751791715A26B0C00674F88 /* InterventionDeliveredEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterventionDeliveredEntity.m; sourceTree = "<group>"; };
-		E751791915A26B7F00674F88 /* TimeTrackEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTrackEntity.h; sourceTree = "<group>"; };
-		E751791A15A26B7F00674F88 /* TimeTrackEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTrackEntity.m; sourceTree = "<group>"; };
 		E751793215A4B1B900674F88 /* ClinicianEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianEntity.h; sourceTree = "<group>"; };
 		E751793315A4B1B900674F88 /* ClinicianEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicianEntity.m; sourceTree = "<group>"; };
 		E751793515A85BCA00674F88 /* SupervisorsAndTotalTimesForMonth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisorsAndTotalTimesForMonth.h; sourceTree = "<group>"; };
@@ -809,10 +811,6 @@
 		E76CF3DF15ACAD3200E888F2 /* AssessmentTypeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssessmentTypeEntity.m; sourceTree = "<group>"; };
 		E76CF3E415ACB6A400E888F2 /* SupervisionParentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionParentEntity.h; sourceTree = "<group>"; };
 		E76CF3E515ACB6A400E888F2 /* SupervisionParentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupervisionParentEntity.m; sourceTree = "<group>"; };
-		E76CF3E715ACB6E600E888F2 /* SupervisionReceivedEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupervisionReceivedEntity.h; sourceTree = "<group>"; };
-		E76CF3E815ACB6E600E888F2 /* SupervisionReceivedEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupervisionReceivedEntity.m; sourceTree = "<group>"; };
-		E76CF3E915ACB70200E888F2 /* SupervisionGivenEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SupervisionGivenEntity.h; sourceTree = "<group>"; };
-		E76CF3EA15ACB70200E888F2 /* SupervisionGivenEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SupervisionGivenEntity.m; sourceTree = "<group>"; };
 		E76CF3ED15ACB74A00E888F2 /* SupervisionTypeSubtypeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionTypeSubtypeEntity.h; sourceTree = "<group>"; };
 		E76CF3EE15ACB74A00E888F2 /* SupervisionTypeSubtypeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupervisionTypeSubtypeEntity.m; sourceTree = "<group>"; };
 		E76CF3F015ACD13600E888F2 /* InterventionTypeSubtypeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterventionTypeSubtypeEntity.h; sourceTree = "<group>"; };
@@ -932,6 +930,16 @@
 		E7B81460159A5FFE0039F38F /* psyTrainTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = psyTrainTrack.xcdatamodel; sourceTree = "<group>"; };
 		E7C02D9D15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h; sourceTree = "<group>"; };
 		E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m; sourceTree = "<group>"; };
+		E7C02DA015B362180072F97C /* SupervisionReceivedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionReceivedEntity.h; sourceTree = "<group>"; };
+		E7C02DA115B362190072F97C /* SupervisionReceivedEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupervisionReceivedEntity.m; sourceTree = "<group>"; };
+		E7C02DA315B362970072F97C /* SupervisionGivenEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionGivenEntity.h; sourceTree = "<group>"; };
+		E7C02DA415B362980072F97C /* SupervisionGivenEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupervisionGivenEntity.m; sourceTree = "<group>"; };
+		E7C02DA615B390C90072F97C /* TimeTrackEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeTrackEntity.h; sourceTree = "<group>"; };
+		E7C02DA715B390CA0072F97C /* TimeTrackEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeTrackEntity.m; sourceTree = "<group>"; };
+		E7C02DAE15B3958A0072F97C /* TrainingProgramEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingProgramEntity.h; sourceTree = "<group>"; };
+		E7C02DAF15B3958A0072F97C /* TrainingProgramEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingProgramEntity.m; sourceTree = "<group>"; };
+		E7C02DB115B3A45F0072F97C /* SiteEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiteEntity.h; sourceTree = "<group>"; };
+		E7C02DB215B3A4600072F97C /* SiteEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SiteEntity.m; sourceTree = "<group>"; };
 		E7C0749D150E60B4009C5498 /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = "<group>"; };
 		E7C0749E150E60B4009C5498 /* KeyEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyEntity.m; sourceTree = "<group>"; };
 		E7C074A0150EE4DE009C5498 /* EncryptedSCDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCDateCell.h; sourceTree = "<group>"; };
@@ -1808,6 +1816,16 @@
 		E7989FE9157FAE35006B9DBD /* Managed Object Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				E7C02DB115B3A45F0072F97C /* SiteEntity.h */,
+				E7C02DB215B3A4600072F97C /* SiteEntity.m */,
+				E7C02DAE15B3958A0072F97C /* TrainingProgramEntity.h */,
+				E7C02DAF15B3958A0072F97C /* TrainingProgramEntity.m */,
+				E7C02DA615B390C90072F97C /* TimeTrackEntity.h */,
+				E7C02DA715B390CA0072F97C /* TimeTrackEntity.m */,
+				E7C02DA315B362970072F97C /* SupervisionGivenEntity.h */,
+				E7C02DA415B362980072F97C /* SupervisionGivenEntity.m */,
+				E7C02DA015B362180072F97C /* SupervisionReceivedEntity.h */,
+				E7C02DA115B362190072F97C /* SupervisionReceivedEntity.m */,
 				E7ADFD4915AE2B0900081392 /* ExistingSupportActivityEntity.h */,
 				E7ADFD4A15AE2B0900081392 /* ExistingSupportActivityEntity.m */,
 				E7ADFD4615AE2AF500081392 /* ExistingSupervisionReceivedEntity.h */,
@@ -1824,16 +1842,10 @@
 				E76CF3F115ACD13700E888F2 /* InterventionTypeSubtypeEntity.m */,
 				E76CF3ED15ACB74A00E888F2 /* SupervisionTypeSubtypeEntity.h */,
 				E76CF3EE15ACB74A00E888F2 /* SupervisionTypeSubtypeEntity.m */,
-				E76CF3E915ACB70200E888F2 /* SupervisionGivenEntity.h */,
-				E76CF3EA15ACB70200E888F2 /* SupervisionGivenEntity.m */,
-				E76CF3E715ACB6E600E888F2 /* SupervisionReceivedEntity.h */,
-				E76CF3E815ACB6E600E888F2 /* SupervisionReceivedEntity.m */,
 				E76CF3E415ACB6A400E888F2 /* SupervisionParentEntity.h */,
 				E76CF3E515ACB6A400E888F2 /* SupervisionParentEntity.m */,
 				E76CF3DE15ACAD3200E888F2 /* AssessmentTypeEntity.h */,
 				E76CF3DF15ACAD3200E888F2 /* AssessmentTypeEntity.m */,
-				E751791915A26B7F00674F88 /* TimeTrackEntity.h */,
-				E751791A15A26B7F00674F88 /* TimeTrackEntity.m */,
 				E751791615A26B0C00674F88 /* InterventionDeliveredEntity.h */,
 				E751791715A26B0C00674F88 /* InterventionDeliveredEntity.m */,
 				E772E4AB1593987E00478A3E /* InterventionTypeEntity.h */,
@@ -2543,7 +2555,6 @@
 				E7CCB8B1159A9AD200A12908 /* MonthlyPracticumLogBottonCell.m in Sources */,
 				E7CCB8B6159AACAB00A12908 /* MonthlyPracticumLogMiddleSubCell.m in Sources */,
 				E751791815A26B0C00674F88 /* InterventionDeliveredEntity.m in Sources */,
-				E751791B15A26B7F00674F88 /* TimeTrackEntity.m in Sources */,
 				E751793415A4B1B900674F88 /* ClinicianEntity.m in Sources */,
 				E751793715A85BCB00674F88 /* SupervisorsAndTotalTimesForMonth.m in Sources */,
 				E75A148015A8DB2300F3EBEF /* TotalHoursAndMinutesCell.m in Sources */,
@@ -2561,6 +2572,11 @@
 				E7ADFD4815AE2AF500081392 /* ExistingSupervisionReceivedEntity.m in Sources */,
 				E7ADFD4B15AE2B0900081392 /* ExistingSupportActivityEntity.m in Sources */,
 				E7C02D9F15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m in Sources */,
+				E7C02DA215B3621B0072F97C /* SupervisionReceivedEntity.m in Sources */,
+				E7C02DA515B362990072F97C /* SupervisionGivenEntity.m in Sources */,
+				E7C02DA815B390CA0072F97C /* TimeTrackEntity.m in Sources */,
+				E7C02DB015B3958B0072F97C /* TrainingProgramEntity.m in Sources */,
+				E7C02DB315B3A4610072F97C /* SiteEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
