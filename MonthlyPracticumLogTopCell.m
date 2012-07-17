@@ -122,10 +122,10 @@
 @synthesize supervisorSummaryDateAboveLineLabel;
 @synthesize supervisorSummaryDateBelowLineLabel;
 @synthesize supervisorSummaryContainerView;
+@synthesize containerForSignaturesAndSupervisorSummaries;
 
 
-
-static float const MAX_MAIN_SCROLLVIEW_HEIGHT=705;
+static float const MAX_MAIN_SCROLLVIEW_HEIGHT=567;
 
 -(void)willDisplay{
   
@@ -146,18 +146,19 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=705;
     CGFloat shiftDirectHoursFooterDown=0;
     CGFloat shiftIndirectHoursHeaderDown=0;
     CGFloat shiftOverallHoursFooterDown=0;
-    CGFloat shiftSignaturesViewDown=0;
+    CGFloat shiftContainerForSignaturesViewAndSupervisorSummariesDownTo=0;
     
     CGFloat interventionMoreNeededHeight=interventionTVHeight- self.interventionTypesTableView.frame.size.height;
     CGFloat assessmentMoreNeededHeight=assessmentTVHeight-self.assessmentTypesTableView.frame.size.height;
     CGFloat supportMoreNeededHeight=supportTVHeight-self.supportActivitieTypesTableView.frame.size.height;
     CGFloat supervisionMoreNeededHeight=supportTVHeight-self.supervisionReceivedTypesTableView.frame.size.height;
-   
+    
     CGRect indirectHoursHeaderFrame=self.indirectHoursHeader.frame;
     
     CGRect assessmentsFrame=self.assessmentTypesTableView.frame;
     CGRect supportFrame=self.supportActivitieTypesTableView.frame;
      CGRect supervisionFrame=self.supervisionReceivedTypesTableView.frame;
+    
     
     CGFloat assessmentsHeightMoreNeededAndOrigin=assessmentMoreNeededHeight+assessmentsFrame.origin.y+assessmentsFrame.size.height;
     
@@ -189,6 +190,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=705;
         containerFrame.size.height=containerFrame.size.height+supervisionMoreNeededHeight;
         
     }
+    containerFrame.size.height=containerFrame.size.height+self.containerForSignaturesAndSupervisorSummaries.frame.size.height;
     
     self.subTablesContainerView.transform=CGAffineTransformIdentity;
     self.subTablesContainerView.frame=containerFrame;
@@ -199,7 +201,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=705;
     shiftSupportDown=shiftIndirectHoursHeaderDown;
     shiftSupervisionDown=shiftSupportDown+supportMoreNeededHeight;
     shiftOverallHoursFooterDown=shiftSupervisionDown+supervisionMoreNeededHeight;
-    shiftSignaturesViewDown=shiftOverallHoursFooterDown;
+    shiftContainerForSignaturesViewAndSupervisorSummariesDownTo=shiftOverallHoursFooterDown+overallHoursFooter.frame.size.height+15;
     
     
 
@@ -239,19 +241,19 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=705;
     
     
     self.overallHoursFooter.transform=CGAffineTransformIdentity;
-    CGRect overalHoursFooterFrame=self.overallHoursFooter.frame;
-    overalHoursFooterFrame.origin.y=supervisionTVHeight+supervisionFrame.origin.y+15;
+    CGRect overallHoursFooterFrame=self.overallHoursFooter.frame;
+    overallHoursFooterFrame.origin.y=supervisionTVHeight+supervisionFrame.origin.y+15;
     
    
-    self.overallHoursFooter.frame=overalHoursFooterFrame;
+    self.overallHoursFooter.frame=overallHoursFooterFrame;
  
-    self.signaturesView.transform=CGAffineTransformIdentity;
-    CGRect signaturesFrame=self.signaturesView.frame;
+    self.containerForSignaturesAndSupervisorSummaries.transform=CGAffineTransformIdentity;
+    CGRect containerForSignaturesAndSupervisorSummariesFrame=self.containerForSignaturesAndSupervisorSummaries.frame;
     
-    signaturesFrame.origin.y=overalHoursFooterFrame.size.height+overalHoursFooterFrame.origin.y+15;
+    containerForSignaturesAndSupervisorSummariesFrame.origin.y=overallHoursFooterFrame.origin.y+overallHoursFooterFrame.size.height+15;
     
     
-    self.signaturesView.frame=signaturesFrame;
+    self.containerForSignaturesAndSupervisorSummaries.frame=containerForSignaturesAndSupervisorSummariesFrame;
     
 
     
@@ -268,8 +270,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=705;
     
     }
     
-    
-    
+   
     self.mainPageScrollView.transform=CGAffineTransformIdentity;
     CGRect mainPageScrollViewFrame=self.mainPageScrollView.frame;
     mainPageScrollViewFrame.size.height=changeScrollHeightTo;
@@ -293,7 +294,7 @@ NSLog(@"current offset %f",currentOffsetY);
     NSLog(@"signatures view fram e origin y %g",signaturesView.frame.origin.y+self.signaturesView.frame.size.height);
     
   
-    if ((self.signaturesView.frame.origin.y+self.signaturesView.frame.size.height)<=(mainScrollView.frame.size.height+currentOffsetY+5)) {
+    if ((self.containerForSignaturesAndSupervisorSummaries.frame.origin.y+self.containerForSignaturesAndSupervisorSummaries.frame.size.height)<=(MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY)) {
         
         [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollMonthlyPracticumLogToNextPage" object:nil];
         
@@ -309,7 +310,7 @@ NSLog(@"current offset %f",currentOffsetY);
         if (mainScrollViewFrame.size.height <MAX_MAIN_SCROLLVIEW_HEIGHT) {
             mainScrollViewFrame.size.height=MAX_MAIN_SCROLLVIEW_HEIGHT;
             self.mainPageScrollView.frame=mainScrollViewFrame;
-            currentOffsetY=currentOffsetY+ self.indirectHoursHeader.frame.origin.y-5;
+            currentOffsetY=currentOffsetY+ self.indirectHoursHeader.frame.origin.y;
             [self.mainPageScrollView setContentOffset:CGPointMake(0, currentOffsetY )];
             
            
@@ -317,6 +318,60 @@ NSLog(@"current offset %f",currentOffsetY);
             [self.mainPageScrollView setContentOffset:CGPointMake(0, mainScrollView.frame.size.height+currentOffsetY )];
             currentOffsetY=currentOffsetY+mainScrollView.frame.size.height;
         }
+        
+        CGFloat paddAdditonalY=0;
+        NSLog(@"self container for supervisor and signatures summaries and subviews %@",self.containerForSignaturesAndSupervisorSummaries.subviews);
+        
+        for (NSInteger i=0; i<self.containerForSignaturesAndSupervisorSummaries.subviews.count; i++) {
+            UIView *subview =[self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:i];
+            CGRect subviewFrame=subview.frame;
+            if (subview.frame.origin.y+self.containerForSignaturesAndSupervisorSummaries.frame.origin.y<currentOffsetY+MAX_MAIN_SCROLLVIEW_HEIGHT && subview.frame.origin.y+subview.frame.size.height+self.containerForSignaturesAndSupervisorSummaries.frame.origin.y>currentOffsetY+MAX_MAIN_SCROLLVIEW_HEIGHT) {
+                
+                
+                
+                paddAdditonalY=(currentOffsetY+MAX_MAIN_SCROLLVIEW_HEIGHT)-(subviewFrame.origin.y+self.containerForSignaturesAndSupervisorSummaries.frame.origin.y);
+                
+                
+                CGRect contatinerForTableViewsFrame=self.subTablesContainerView.frame;
+                contatinerForTableViewsFrame.size.height=contatinerForTableViewsFrame.size.height+paddAdditonalY*(self.containerForSignaturesAndSupervisorSummaries.subviews.count);
+                self.subTablesContainerView.transform=CGAffineTransformIdentity;
+                self.subTablesContainerView.frame=contatinerForTableViewsFrame;
+                
+               CGRect containerForSignaturesAndSupervisorSummariesFrame=self.containerForSignaturesAndSupervisorSummaries.frame;
+                
+                self.containerForSignaturesAndSupervisorSummaries.transform=CGAffineTransformIdentity;
+                
+                containerForSignaturesAndSupervisorSummariesFrame.size.height=containerForSignaturesAndSupervisorSummariesFrame.size.height+paddAdditonalY;
+                
+                self.containerForSignaturesAndSupervisorSummaries.frame=containerForSignaturesAndSupervisorSummariesFrame;
+                subviewFrame.origin.y=subviewFrame.origin.y+paddAdditonalY;
+                subview.transform=CGAffineTransformIdentity;
+                subview.frame=subviewFrame;
+                 
+                for (NSInteger p=i+1; p<self.containerForSignaturesAndSupervisorSummaries.subviews.count; p++) {
+                    UIView *nextSubview=[self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:p];
+                    
+                        CGRect nextSubviewFrame=nextSubview.frame;
+                        nextSubviewFrame.origin.y=nextSubviewFrame.origin.y+paddAdditonalY;
+                        nextSubview.transform=CGAffineTransformIdentity;
+                        nextSubview.frame=nextSubviewFrame;
+                        paddAdditonalY=paddAdditonalY+nextSubviewFrame.origin.y+nextSubviewFrame.size.height;
+                    
+                    
+                }
+                
+                
+                
+            }
+            
+    
+        }
+    
+    CGRect signaturesViewFrame =self.signaturesView.frame;
+    signaturesViewFrame.origin.y=self.containerForSignaturesAndSupervisorSummaries.frame.size.height-signaturesViewFrame.size.height;
+    
+    self.signaturesView.frame=signaturesViewFrame;
+    
         
     }       
     
@@ -333,7 +388,9 @@ NSLog(@"current offset %f",currentOffsetY);
     
   
     self.supervisorLabel.text=totalsObject.cliniciansStr;
-    if (totalsObject.clinicians.count>1) {
+    numberOfSupervisors=totalsObject.clinicians.count;
+    
+    if (numberOfSupervisors>1) {
         supervisorLabelBeforeColon.text=@"Supervisors:";
     }
     [self.supervisorLabel alignTop];
@@ -745,8 +802,186 @@ NSLog(@"current offset %f",currentOffsetY);
     self.directHoursTotalHoursLabel.text=totalsObject.directTotalToDateStr;
     self.overallHoursTotalHoursLabel.text=totalsObject.overallTotalToDateStr;
     
-
+    CGFloat yPositionToPutSupervisorSummaryConatinerView=0;
     
+    for ( int i=0;i<numberOfSupervisors;i++) {
+        ClinicianEntity *supervisor=[totalsObject.clinicians objectAtIndex:i];
+        SupervisorsAndTotalTimesForMonth *supervisorTotalsObject=[[SupervisorsAndTotalTimesForMonth alloc]initWithMonth:self.monthToDisplay clinician:supervisor];
+        if (i==0) {
+            
+            self.supervisorSummaryHeaderLabel.text=[NSString stringWithFormat:@"Summary of Hours Supervised by %@ (Month Total:%@)",supervisor.combinedName,supervisorTotalsObject.overallTotalForMonthStr];
+            
+            
+            self.supervisorSummaryMonthInterventionHoursLabel.text=totalsObject.interventionTotalForMonthStr;
+            self.supervisorSummaryMonthAssessmentHoursLabel.text=totalsObject.assessmentTotalForMonthStr;
+            self.supervisorSummaryMonthSupportHoursLabel.text=totalsObject.supportTotalForMonthStr;
+            self.supervisorSummaryMonthSupervisionHoursLabel.text=totalsObject.supervisionTotalForMonthStr;
+            self.supervisorSummaryTotalToDateHoursLabel.text=[NSString stringWithFormat:@"Total Hours with %@ (including previous months): %@",supervisor.combinedName, supervisorTotalsObject.overallTotalToDateStr];
+            self.supervisorSummarySignatureLabel.text=nil;
+            self.supervisorSummarySignatureTitleUnderLineLabel.text=[NSString stringWithFormat:@"Signature for %@",supervisor.combinedName];
+            self.supervisorSummaryDateAboveLineLabel.text=nil;
+            [self.containerForSignaturesAndSupervisorSummaries addSubview:self.supervisorSummaryContainerView];
+            
+            yPositionToPutSupervisorSummaryConatinerView=yPositionToPutSupervisorSummaryConatinerView+self.supervisorSummaryContainerView.frame.size.height+15;
+           
+        }
+        else {
+           
+       
+            
+            UILabel *nibSupervisorSummaryHeader=self.supervisorSummaryHeaderLabel;
+            UILabel *headerLabel=[[UILabel alloc]initWithFrame:nibSupervisorSummaryHeader.frame];
+            headerLabel.backgroundColor=[UIColor whiteColor];
+            headerLabel.font=nibSupervisorSummaryHeader.font;
+            headerLabel.textAlignment=nibSupervisorSummaryHeader.textAlignment;
+            headerLabel.text=[NSString stringWithFormat:@"Summary of Hours Supervised by %@ (Month Total:%@)",supervisor.combinedName,supervisorTotalsObject.overallTotalForMonthStr];
+          
+            UILabel *nibSupervisorSummaryInterventionHeader=self.supervisorSummaryMonthInterventionHeaderLabel;
+            UILabel *interventionHeaderLabel=[[UILabel alloc]initWithFrame:nibSupervisorSummaryInterventionHeader.frame];
+            interventionHeaderLabel.backgroundColor=[UIColor whiteColor];
+            interventionHeaderLabel.font=nibSupervisorSummaryInterventionHeader.font;
+            interventionHeaderLabel.textAlignment=nibSupervisorSummaryInterventionHeader.textAlignment;
+            interventionHeaderLabel.text=nibSupervisorSummaryInterventionHeader.text;
+            interventionHeaderLabel.lineBreakMode=UILineBreakModeWordWrap;
+            interventionHeaderLabel.numberOfLines=2;
+            
+            UILabel *nibSupervisorSummaryAssessmentHeader=self.supervisorSummaryMonthAssessmentHeaderLabel;
+            UILabel *assessmentHeaderLabel=[[UILabel alloc]initWithFrame:nibSupervisorSummaryAssessmentHeader.frame];
+            assessmentHeaderLabel.backgroundColor=[UIColor whiteColor];
+            assessmentHeaderLabel.font=nibSupervisorSummaryAssessmentHeader.font;
+            assessmentHeaderLabel.textAlignment=nibSupervisorSummaryAssessmentHeader.textAlignment;
+            assessmentHeaderLabel.text=nibSupervisorSummaryAssessmentHeader.text;
+            assessmentHeaderLabel.lineBreakMode=UILineBreakModeWordWrap;
+            assessmentHeaderLabel.numberOfLines=2;
+            
+            UILabel *nibSupervisorSummarySupportHeader=self.supervisorSummaryMonthSupportHeaderLabel;
+            UILabel *supportHeaderLabel=[[UILabel alloc]initWithFrame:nibSupervisorSummarySupportHeader.frame];
+            supportHeaderLabel.backgroundColor=[UIColor whiteColor];
+            supportHeaderLabel.font=nibSupervisorSummarySupportHeader.font;
+            supportHeaderLabel.textAlignment=nibSupervisorSummarySupportHeader.textAlignment;
+            supportHeaderLabel.text=nibSupervisorSummarySupportHeader.text;
+            supportHeaderLabel.lineBreakMode=UILineBreakModeWordWrap;
+            supportHeaderLabel.numberOfLines=2;
+
+
+            UILabel *nibSupervisorSummarySupervisionHeader=self.supervisorSummaryMonthSupervisionHeaderLabel;
+            UILabel *supervisionHeaderLabel=[[UILabel alloc]initWithFrame:nibSupervisorSummarySupervisionHeader.frame];
+            supervisionHeaderLabel.backgroundColor=[UIColor whiteColor];
+            supervisionHeaderLabel.font=nibSupervisorSummarySupervisionHeader.font;
+            supervisionHeaderLabel.textAlignment=nibSupervisorSummarySupervisionHeader.textAlignment;
+            supervisionHeaderLabel.text=nibSupervisorSummarySupervisionHeader.text;
+            supervisionHeaderLabel.lineBreakMode=UILineBreakModeWordWrap;
+            supervisionHeaderLabel.numberOfLines=2;
+
+            UILabel *nibSupervisorSummaryInterventionHours=self.supervisorSummaryMonthInterventionHoursLabel;
+            UILabel *interventionHoursLabel=[[UILabel alloc]initWithFrame:nibSupervisorSummaryInterventionHours.frame];
+            interventionHoursLabel.backgroundColor=[UIColor whiteColor];
+            interventionHoursLabel.font=nibSupervisorSummaryInterventionHours.font;
+            interventionHoursLabel.textAlignment=nibSupervisorSummaryInterventionHours.textAlignment;
+            interventionHoursLabel.text=supervisorTotalsObject.interventionTotalForMonthStr;
+            
+            UILabel *nibSupervisorSummaryAssessmentHours=self.supervisorSummaryMonthAssessmentHoursLabel;
+            UILabel *assessmentHoursLabel=[[UILabel alloc]initWithFrame:nibSupervisorSummaryAssessmentHours.frame];
+            assessmentHoursLabel.backgroundColor=[UIColor whiteColor];
+            assessmentHoursLabel.font=nibSupervisorSummaryAssessmentHours.font;
+            assessmentHoursLabel.textAlignment=nibSupervisorSummaryAssessmentHours.textAlignment;
+            assessmentHoursLabel.text=supervisorTotalsObject.assessmentTotalForMonthStr;
+            
+            UILabel *nibSupervisorSummarySupportHours=self.supervisorSummaryMonthSupportHoursLabel;
+            UILabel *supportHoursLabel=[[UILabel alloc]initWithFrame:nibSupervisorSummarySupportHours.frame];
+            supportHoursLabel.backgroundColor=[UIColor whiteColor];
+            supportHoursLabel.font=nibSupervisorSummarySupportHours.font;
+            supportHoursLabel.textAlignment=nibSupervisorSummarySupportHours.textAlignment;
+            supportHoursLabel.text=supervisorTotalsObject.supportTotalForMonthStr;
+            
+            
+            UILabel *nibSupervisorSummarySupervisionHours=self.supervisorSummaryMonthSupervisionHoursLabel;
+            UILabel *supervisionHoursLabel=[[UILabel alloc]initWithFrame:nibSupervisorSummarySupervisionHours.frame];
+            supervisionHoursLabel.backgroundColor=[UIColor whiteColor];
+            supervisionHoursLabel.font=nibSupervisorSummarySupervisionHours.font;
+            supervisionHoursLabel.textAlignment=nibSupervisorSummarySupervisionHours.textAlignment;
+            supervisionHoursLabel.text=supervisorTotalsObject.supervisionTotalForMonthStr;
+            
+            
+            
+            
+            
+            UILabel *nibSupervisorSummarySignature=self.supervisorSummarySignatureLabel;
+            UILabel *signatureLabel=[[UILabel alloc]initWithFrame:nibSupervisorSummarySignature.frame];
+            signatureLabel.backgroundColor=[UIColor whiteColor];
+            signatureLabel.font=nibSupervisorSummarySignature.font;
+            signatureLabel.textAlignment=nibSupervisorSummarySignature.textAlignment;
+            signatureLabel.text=nil;
+            
+            UILabel *nibSupervisorSummarySignatureTitleUnderLineLabel=self.supervisorSummarySignatureTitleUnderLineLabel;
+            UILabel *signatureUnderLineLabel=[[UILabel alloc]initWithFrame:nibSupervisorSummarySignatureTitleUnderLineLabel.frame];
+            signatureUnderLineLabel.backgroundColor=[UIColor whiteColor];
+            signatureUnderLineLabel.font=nibSupervisorSummarySignatureTitleUnderLineLabel.font;
+            signatureUnderLineLabel.textAlignment=nibSupervisorSummarySignatureTitleUnderLineLabel.textAlignment;
+            signatureUnderLineLabel.text=[NSString stringWithFormat:@"Signature for %@",supervisor.combinedName];
+            
+            UILabel *nibSupervisorSummaryDateAboveLineLabel=self.supervisorSummaryDateAboveLineLabel;
+            UILabel *dateAboveLineLabel=[[UILabel alloc]initWithFrame:nibSupervisorSummaryDateAboveLineLabel.frame];
+            dateAboveLineLabel.backgroundColor=[UIColor whiteColor];
+            dateAboveLineLabel.font=nibSupervisorSummarySignatureTitleUnderLineLabel.font;
+            dateAboveLineLabel.textAlignment=nibSupervisorSummarySignatureTitleUnderLineLabel.textAlignment;
+            dateAboveLineLabel.text=nil;
+            
+            UILabel *nibSupervisorSummaryDateBelowLineLabel=self.supervisorSummaryDateBelowLineLabel;
+            UILabel *dateBelowLineLabel=[[UILabel alloc]initWithFrame:nibSupervisorSummaryDateBelowLineLabel.frame];
+            dateBelowLineLabel.backgroundColor=[UIColor whiteColor];
+            dateBelowLineLabel.font=nibSupervisorSummarySignatureTitleUnderLineLabel.font;
+            dateBelowLineLabel.textAlignment=nibSupervisorSummarySignatureTitleUnderLineLabel.textAlignment;
+            dateBelowLineLabel.text=nibSupervisorSummaryDateBelowLineLabel.text;
+
+            UILabel *nibSupervisorSummaryTotalToDateLabel=self.supervisorSummaryTotalToDateHoursLabel;
+            UILabel *totalToDateLabel=[[UILabel alloc]initWithFrame:nibSupervisorSummaryTotalToDateLabel.frame];
+            totalToDateLabel.backgroundColor=[UIColor whiteColor];
+            totalToDateLabel.font=nibSupervisorSummaryTotalToDateLabel.font;
+            totalToDateLabel.textAlignment=nibSupervisorSummaryTotalToDateLabel.textAlignment;
+            totalToDateLabel.text=[NSString stringWithFormat:@"Total Hours with %@ (including previous months): %@",supervisor.combinedName, supervisorTotalsObject.overallTotalToDateStr];
+            
+            CGRect summaryContainerViewFrame=CGRectMake(self.supervisorSummaryContainerView.frame.origin.x, yPositionToPutSupervisorSummaryConatinerView,self.supervisorSummaryContainerView.frame.size.width, self.supervisorSummaryContainerView.frame.size.height);
+            
+            UIView *summaryContainerView=[[UIView alloc]initWithFrame:summaryContainerViewFrame];
+            summaryContainerView.backgroundColor=[UIColor blackColor];
+            [summaryContainerView addSubview:headerLabel];
+            [summaryContainerView addSubview:interventionHeaderLabel];
+            [summaryContainerView addSubview:assessmentHeaderLabel];
+            [summaryContainerView addSubview:supportHeaderLabel];
+            [summaryContainerView addSubview:supervisionHeaderLabel];
+            [summaryContainerView addSubview:interventionHoursLabel];
+            [summaryContainerView addSubview:assessmentHoursLabel];
+            [summaryContainerView addSubview:supportHoursLabel];
+            [summaryContainerView addSubview:supervisionHoursLabel];
+            [summaryContainerView addSubview:signatureLabel];
+            [summaryContainerView addSubview:signatureUnderLineLabel];
+            [summaryContainerView addSubview:dateAboveLineLabel];
+            [summaryContainerView addSubview:dateBelowLineLabel];
+            [summaryContainerView addSubview:totalToDateLabel];
+            
+            CGRect containerForSignaturesAndSupervisorSummariesFrame=self.containerForSignaturesAndSupervisorSummaries.frame;
+            
+            containerForSignaturesAndSupervisorSummariesFrame.size.height=containerForSignaturesAndSupervisorSummariesFrame.size.height+summaryContainerView.frame.size.height+15;
+            self.containerForSignaturesAndSupervisorSummaries.frame=containerForSignaturesAndSupervisorSummariesFrame;
+            
+            
+            [self.containerForSignaturesAndSupervisorSummaries addSubview:summaryContainerView];
+            
+            yPositionToPutSupervisorSummaryConatinerView=yPositionToPutSupervisorSummaryConatinerView+summaryContainerView.frame.size.height+15;
+            
+            
+            
+            
+            
+        }   
+    [self.containerForSignaturesAndSupervisorSummaries addSubview:self.signaturesView];
+    CGRect signaturesViewFrame=self.signaturesView.frame;
+    
+    signaturesViewFrame.origin.y=yPositionToPutSupervisorSummaryConatinerView;
+    self.signaturesView.frame=signaturesViewFrame;
+        
+    }
 
     
   

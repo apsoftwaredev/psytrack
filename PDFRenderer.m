@@ -386,8 +386,11 @@ if (fetchedObjects &&fetchedObjects.count) {
 }
 +(void)drawPageNumber:(NSInteger )pageNum{
     
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
     
-    NSString *pageString=[NSString stringWithFormat:@"Page %d",pageNum];
+    [dateFormatter setDateFormat:@"HH:mm M/d/yyyy"];
+     
+     NSString *pageString=[NSString stringWithFormat:@"Page %d  (Generated %@)",pageNum,[dateFormatter stringFromDate:[NSDate date]]];
     UIFont *theFont =[UIFont systemFontOfSize:12];
     
     CGSize maxSize= CGSizeMake(612, 72);
@@ -442,11 +445,11 @@ if (fetchedObjects &&fetchedObjects.count) {
                     
                            
                         NSInteger currentPage=0;
-                    
+                        int totalPages=0;
                        
                         do {
                             //mark the beginning of a new page
-                            
+                            totalPages++;
                             UIGraphicsBeginPDFPageWithInfo(CGRectMake(0,0,DOC_WIDTH,DOC_HEIGHT), NULL);
                             
                             

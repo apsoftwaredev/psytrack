@@ -102,6 +102,7 @@
 @synthesize stopScrollingMonthlyPracticumLog;
 @synthesize changedPassword,changedToken;
 
+
 + (PTTAppDelegate *)appDelegate {
 	return (PTTAppDelegate *)[[UIApplication sharedApplication] delegate];
 }

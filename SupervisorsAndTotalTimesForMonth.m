@@ -204,7 +204,22 @@
         self.existingHoursHoursArray=[self fetchObjectsFromEntity:kTrackExistingHoursEntityName filterPredicate:[self predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth]];
         
         
+        if(clinician_){
         
+        
+            NSPredicate *clinicianFilter=[self predicateForClincian];
+            self.interventionsDeliveredArray=[self.interventionsDeliveredArray filteredArrayUsingPredicate:clinicianFilter];
+            self.assessmentsDeliveredArray=[self.assessmentsDeliveredArray filteredArrayUsingPredicate:clinicianFilter];
+            
+            self.supportActivityDeliveredArray=[self.supportActivityDeliveredArray filteredArrayUsingPredicate:clinicianFilter];
+            
+            self.supervisionReceivedArray=[self.supervisionReceivedArray filteredArrayUsingPredicate:clinicianFilter];
+            
+            self.existingHoursHoursArray=[self.existingHoursHoursArray filteredArrayUsingPredicate:clinicianFilter];
+            
+        
+        
+        }
         
         
         self.overallTotalWeek1TI=[self totalOverallHoursTIForOveralCell:kSummaryWeekOne clinician:clinician];

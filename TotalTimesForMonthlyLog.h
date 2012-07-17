@@ -148,7 +148,7 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 -(NSTimeInterval )totalTimeIntervalForExistingHoursArray:(NSArray *)filteredExistingHoursArray keyPath:(NSString *)keyPath;
 
 
-
+-(NSPredicate *)predicateForClincian;
 -(NSPredicate *)priorMonthsHoursPredicate;
 
 

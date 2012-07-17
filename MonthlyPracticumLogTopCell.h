@@ -16,7 +16,8 @@
     SCArrayOfObjectsModel *supportObjectsModel_;
     SCArrayOfObjectsModel *supervisionObjectsModel_;
     
-    
+    NSInteger numberOfSupervisors;
+
     
     CGFloat currentOffsetY;
 
@@ -147,7 +148,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *supervisorSummaryDateBelowLineLabel;
 @property (nonatomic, weak) IBOutlet UIView *supervisorSummaryContainerView;
 
-
+@property (nonatomic, weak) IBOutlet UIView *containerForSignaturesAndSupervisorSummaries;
 
 
 
