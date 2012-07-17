@@ -149,7 +149,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 -(NSURL *)applicationSupportURL;
 -(NSString *)applicationSupportPath;
 -(NSString *)setupLockDictionaryResultStr;
-
+-(void)setupMyInfoRecord;
 - (void)saveDrugsContext;
 - (NSNumber *)iCloudPreferenceFromUserDefaults;
 -(BOOL)copyDrugsToMainContext;

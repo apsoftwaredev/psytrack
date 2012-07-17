@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClinicianEntity;
+@class ClinicianEntity,SiteEntity;
 
 @interface TimeTrackEntity : NSManagedObject
 
@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSDate * dateOfService;
 @property (nonatomic, retain) NSString * eventIdentifier;
-@property (nonatomic, retain) NSManagedObject *site;
+@property (nonatomic, retain) SiteEntity *site;
 @property (nonatomic, retain) ClinicianEntity *supervisor;
 @property (nonatomic, retain) NSManagedObject *trainingProgram;
 

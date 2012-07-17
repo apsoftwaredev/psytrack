@@ -545,8 +545,8 @@
                                                      
             
             [timeTrackPropertyNamesArray addObject:@"modelsUsed"];
-            
-            
+            [timeTrackPropertyNamesArray addObject:@"subType"];
+             [detailsGroup insertPropertyName:@"subType" atIndex:1];
             
                         
             break;
@@ -558,6 +558,8 @@
             trackEntityName= kTrackSupervisionReceivedEntityName;
             
             [timeTrackPropertyNamesArray addObject:@"modelsUsed"];
+            [timeTrackPropertyNamesArray addObject:@"subType"];
+             [detailsGroup insertPropertyName:@"subType" atIndex:1];
             break;
             
             
@@ -1246,7 +1248,8 @@
         trackSubTypeSelectionAttribs.allowDeletingItems = YES;
         trackSubTypeSelectionAttribs.allowMovingItems = YES;
         trackSubTypeSelectionAttribs.allowEditingItems = YES;
-        trackSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Add supervision subtypes)"]];
+        trackSubTypeSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Add new supervision subtype"];
+        trackSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(tap edit to Add supervision subtypes)"]];
         
         trackSubTypePropertyDef.attributes = trackSubTypeSelectionAttribs;
         
@@ -1255,7 +1258,11 @@
         SCPropertyDefinition *trackSubTypeNotesPropertyDef=[trackSubTypeDef propertyDefinitionWithName:@"notes"];
         trackSubTypeNotesPropertyDef.type=SCPropertyTypeTextView;
         
+        SCPropertyDefinition *trackTypeSubtypePropertyDef=[SCPropertyDefinition definitionWithName:@"subTypes" title:@"Subtypes" type:SCPropertyTypeArrayOfObjects];
         
+        [trackTypeDef addPropertyDefinition:trackTypeSubtypePropertyDef];
+        
+        trackTypeSubtypePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:trackSubTypeDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new supervision subtype"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
         
     }
 
@@ -1860,6 +1867,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
     if (tableViewModel.tag==0) {
         selectedInterventionType=nil;
+        selectedSupervisionType=nil;
         serviceDateCell=nil;
         self.eventViewController=nil;
         if (clientPresentations_Shared) {
@@ -2125,6 +2133,52 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
             }
             
+            if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&([sectionManagedObject.entity.name isEqualToString:@"SupervisionReceivedEntity"]||[sectionManagedObject.entity.name isEqualToString:@"SupervisionGivenEntity"])&&objectSection.cellCount>1) {
+                
+                SCTableViewCell *cellAtFour=(SCTableViewCell *)[objectSection cellAtIndex:0];
+                if ([cellAtFour isKindOfClass:[SCObjectSelectionCell class]]) {
+                    SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtFour;
+                    
+                    
+                    NSLog(@"section managed object is %@",sectionManagedObject);
+                    NSObject *supervisionTypeObject=[sectionManagedObject valueForKeyPath:@"supervisionType"];
+                    
+                    if (indexPath.row!=NSNotFound &&( selectedSupervisionType||(supervisionTypeObject&&[supervisionTypeObject isKindOfClass:[SupervisionTypeEntity class]]))) {
+                        if (!selectedSupervisionType) {
+                            selectedSupervisionType=(SupervisionTypeEntity *)supervisionTypeObject;
+                        }
+                        
+                        
+                        if (selectedSupervisionType.supervisionType.length) {
+                            
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                      @"supervisionType.supervisionType like %@",[NSString stringWithString:(NSString *) selectedSupervisionType.supervisionType]]; 
+                            
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"supervisionSubType" sortAscending:YES filterPredicate:predicate];
+                            
+                            objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                            
+                            [objectSelectionCell reloadBoundValue];
+                            NSLog(@"objectselection cell %@",objectSelectionCell.items);
+                            
+                        }
+                        
+                    }
+                    else {
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                  @"supervisionType.supervisionType = nil"]; 
+                        
+                        SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"subType" sortAscending:YES filterPredicate:predicate];
+                        
+                        objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                    }
+                    
+                    
+                }
+                
+                
+                
+            }
         }}
     
     
@@ -2899,12 +2953,57 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
                 
                 
-            }
+            }}
+               NSLog(@"cell managed obect entity name is %@",cellManagedObject.entity.name);
+            if ((currentControllerSetup==kTrackSupervisionReceivedSetup||currentControllerSetup==kTrackSupervisionGivenSetup)&& cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&([cellManagedObject.entity.name isEqualToString:@"SupervisionReceivedEntity"]||[cellManagedObject.entity.name isEqualToString:@"SupervisionGivenEntity"] )&& [cell isKindOfClass:[SCObjectSelectionCell class]]&& cell.tag==0) {
+                
+                SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
                 
                 
+                if ([objectSelectionCell.selectedItemIndex intValue]>-1) {
+                    NSManagedObject *selectedSupervisionTypeManagedObject =[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                    if ([selectedSupervisionTypeManagedObject isKindOfClass:[SupervisionTypeEntity class]]) {
+                        selectedSupervisionType=(SupervisionTypeEntity *) selectedSupervisionTypeManagedObject;
+                        
+                        
+                        
+                        SCTableViewCell *subtypeCell=(SCTableViewCell *)[tableViewModel cellAfterCell:objectSelectionCell rewind:NO];
+                        
+                        if ([subtypeCell isKindOfClass:[SCObjectSelectionCell class]]) {
+                            
+                            
+                            SCObjectSelectionCell *subytypeObjectSelectionCell=(SCObjectSelectionCell *)subtypeCell;
+                            
+                            if (selectedSupervisionType.supervisionType.length) {
+                                
+                                NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                          @"supervisionType.supervisionType like %@",[NSString stringWithString:(NSString *) selectedSupervisionType.supervisionType]]; 
+                                
+                                SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"subType" sortAscending:YES filterPredicate:predicate];
+                                
+                                subytypeObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                                
+                                [subytypeObjectSelectionCell reloadBoundValue];
+                                NSLog(@"objectselection cell %@",subytypeObjectSelectionCell.items);
+                                
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                }  
+                    
+                    
+                    
+                } 
            
             
-        }
+        
 
         
         

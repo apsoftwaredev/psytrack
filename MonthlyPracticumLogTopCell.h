@@ -37,8 +37,10 @@
 @property (nonatomic, weak)IBOutlet UILabel *programLabel;
 @property (nonatomic, weak)IBOutlet UILabel *monthYearLabel;
 
+@property (nonatomic, weak)IBOutlet UILabel *supervisorLabelBeforeColon;
 @property (nonatomic, weak)IBOutlet UILabel *supervisorLabel;
 @property (nonatomic, weak)IBOutlet UILabel *courseLabel;
+@property (nonatomic, weak)IBOutlet UILabel *siteNameLabelBeforeColon;
 
 @property (nonatomic, weak)IBOutlet UILabel *interventionHoursWeek1Label;
 @property (nonatomic, weak)IBOutlet UILabel *interventionHoursWeek2Label;
@@ -125,9 +127,33 @@
 
 @property (nonatomic, weak) NSDate *monthToDisplay;
 @property (nonatomic, weak) ClinicianEntity *clinician;
+@property (nonatomic, assign)BOOL stopScrolling;
+
+
+@property (nonatomic, weak) IBOutlet UILabel *supervisorSummaryHeaderLabel;
+@property (nonatomic, weak) IBOutlet UILabel *supervisorSummaryMonthInterventionHeaderLabel;
+@property (nonatomic, weak) IBOutlet UILabel *supervisorSummaryMonthAssessmentHeaderLabel;
+@property (nonatomic, weak) IBOutlet UILabel *supervisorSummaryMonthSupportHeaderLabel;
+@property (nonatomic, weak) IBOutlet UILabel *supervisorSummaryMonthSupervisionHeaderLabel;
+
+@property (nonatomic, weak) IBOutlet UILabel *supervisorSummaryMonthInterventionHoursLabel;
+@property (nonatomic, weak) IBOutlet UILabel *supervisorSummaryMonthAssessmentHoursLabel;
+@property (nonatomic, weak) IBOutlet UILabel *supervisorSummaryMonthSupportHoursLabel;
+@property (nonatomic, weak) IBOutlet UILabel *supervisorSummaryMonthSupervisionHoursLabel;
+@property (nonatomic, weak) IBOutlet UILabel *supervisorSummaryTotalToDateHoursLabel;
+@property (nonatomic, weak) IBOutlet UILabel *supervisorSummarySignatureLabel;
+@property (nonatomic, weak) IBOutlet UILabel *supervisorSummarySignatureTitleUnderLineLabel;
+@property (nonatomic, weak) IBOutlet UILabel *supervisorSummaryDateAboveLineLabel;
+@property (nonatomic, weak) IBOutlet UILabel *supervisorSummaryDateBelowLineLabel;
+@property (nonatomic, weak) IBOutlet UIView *supervisorSummaryContainerView;
+
+
+
+
+
 
 - (CGSize)interventionTableViewContentSize;
-@property (nonatomic, assign)BOOL stopScrolling;
+
 
 
 @end

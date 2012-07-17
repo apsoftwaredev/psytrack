@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class SupervisionGivenEntity, SupervisionReceivedEntity;
+@class SupervisionGivenEntity,SupervisionTypeSubtypeEntity,SupervisionReceivedEntity;
 
 @interface SupervisionTypeEntity : NSManagedObject
 
@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSSet *supervisionRecieved;
 @property (nonatomic, retain) NSSet *supervisionGiven;
 @property (nonatomic, retain) NSSet *existingSupervision;
+@property (nonatomic, retain) NSSet *subTypes;
 @end
 
 @interface SupervisionTypeEntity (CoreDataGeneratedAccessors)
@@ -32,6 +33,11 @@
 - (void)removeSupervisionGivenObject:(SupervisionGivenEntity *)value;
 - (void)addSupervisionGiven:(NSSet *)values;
 - (void)removeSupervisionGiven:(NSSet *)values;
+
+- (void)addSubTypesObject:(SupervisionTypeSubtypeEntity *)value;
+- (void)removeSubtypesObject:(SupervisionReceivedEntity *)value;
+- (void)addSubTypes:(NSSet *)values;
+- (void)removeSubTypes:(NSSet *)values;
 
 - (void)addExistingSupervisionObject:(NSManagedObject *)value;
 - (void)removeExistingSupervisionObject:(NSManagedObject *)value;

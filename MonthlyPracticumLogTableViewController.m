@@ -56,7 +56,7 @@
     SCClassDefinition *supervisorsAndTotalTimesForMonthDef=[SCClassDefinition definitionWithClass:[SupervisorsAndTotalTimesForMonth class] autoGeneratePropertyDefinitions:YES];
        
     // Create and add the objects section
-    SupervisorsAndTotalTimesForMonth *supervisorsAndTotalTimesForMonthObject=[[SupervisorsAndTotalTimesForMonth alloc]initWithMonth:[NSDate date] clinician:supervisorObject];
+    SupervisorsAndTotalTimesForMonth *supervisorsAndTotalTimesForMonthObject=[[SupervisorsAndTotalTimesForMonth alloc]initWithMonth:[NSDate date] clinician:nil];
     
     NSMutableArray *supervisorsAndTotalTimesForMonthMutableArray=[NSMutableArray arrayWithObject:supervisorsAndTotalTimesForMonthObject];
     

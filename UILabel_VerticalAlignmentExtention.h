@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UILabel_VerticalAlignmentExtention : UILabel
 
+
+#pragma mark VerticalAlign
+@interface UILabel (VerticalAlign)
+- (void)alignTop;
+- (void)alignBottom;
 @end

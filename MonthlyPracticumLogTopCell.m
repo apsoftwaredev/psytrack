@@ -22,13 +22,13 @@
 #import "MonthlyPracticumLogTableViewController.h"
 #import "SupervisorsAndTotalTimesForMonth.h"
 #import "SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h"
-
+#import "UILabel_VerticalAlignmentExtention.h"
 @interface MonthlyPracticumLogTopCell ()
 
 @end
 
 @implementation MonthlyPracticumLogTopCell
-
+@synthesize supervisorLabelBeforeColon,siteNameLabelBeforeColon;
 @synthesize interventionTypesTableView,assessmentTypesTableView,supportActivitieTypesTableView,supervisionReceivedTypesTableView;
 @synthesize supervisorLabel,studentNameLabel,programLabel,monthYearLabel,courseLabel,practicumSiteNameLabel;
 @synthesize interventionHoursWeek1Label;
@@ -106,6 +106,24 @@
 
 @synthesize interventionHoursWeekUndefinedLabel,assessmentoursWeekUndefinedLabel,supportHoursWeekUndefinedLabel,supervisionHoursWeekUndefinedLabel;
 
+@synthesize supervisorSummaryHeaderLabel;
+@synthesize supervisorSummaryMonthInterventionHeaderLabel;
+@synthesize supervisorSummaryMonthAssessmentHeaderLabel;
+@synthesize supervisorSummaryMonthSupportHeaderLabel;
+@synthesize supervisorSummaryMonthSupervisionHeaderLabel;
+
+@synthesize supervisorSummaryMonthInterventionHoursLabel;
+@synthesize supervisorSummaryMonthAssessmentHoursLabel;
+@synthesize supervisorSummaryMonthSupportHoursLabel;
+@synthesize supervisorSummaryMonthSupervisionHoursLabel;
+@synthesize supervisorSummaryTotalToDateHoursLabel;
+@synthesize supervisorSummarySignatureLabel;
+@synthesize supervisorSummarySignatureTitleUnderLineLabel;
+@synthesize supervisorSummaryDateAboveLineLabel;
+@synthesize supervisorSummaryDateBelowLineLabel;
+@synthesize supervisorSummaryContainerView;
+
+
 
 static float const MAX_MAIN_SCROLLVIEW_HEIGHT=705;
 
@@ -113,7 +131,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=705;
   
     self.accessoryType=UITableViewCellAccessoryNone;
     
-    supervisorLabel.text=self.clinician.combinedName;
+    
     
 //    NSLog(@" size needed height is %g",[self interventionTableViewContentSize ].height );
     
@@ -185,18 +203,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=705;
     
     
 
-    self.signaturesView.transform=CGAffineTransformIdentity;
-    CGRect signaturesFrame=self.signaturesView.frame;
-    
-        signaturesFrame.origin.y=signaturesFrame.origin.y+shiftSignaturesViewDown;
-  
-    
-    self.signaturesView.frame=signaturesFrame;
-    
-    self.overallHoursFooter.transform=CGAffineTransformIdentity;
-    CGRect overalHoursFooterFrame=self.overallHoursFooter.frame;
-    overalHoursFooterFrame.origin.y=overalHoursFooterFrame.origin.y+shiftOverallHoursFooterDown;
-    self.overallHoursFooter.frame=overalHoursFooterFrame;
+          
    
     self.supervisionReceivedTypesTableView.transform=CGAffineTransformIdentity;
    
@@ -224,14 +231,29 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=705;
     self.directHoursFooter.transform=CGAffineTransformIdentity;
     CGRect directHoursFooterFrame=self.directHoursFooter.frame;
    
-        directHoursFooterFrame.origin.y=assessmentsFrame.size.height+assessmentsFrame.origin.y+5;  //keep an eye on this
+    directHoursFooterFrame.origin.y=assessmentsFrame.size.height+assessmentsFrame.origin.y+5;  //keep an eye on this
     
     
     
     self.directHoursFooter.frame=directHoursFooterFrame;
     
+    
+    self.overallHoursFooter.transform=CGAffineTransformIdentity;
+    CGRect overalHoursFooterFrame=self.overallHoursFooter.frame;
+    overalHoursFooterFrame.origin.y=supervisionTVHeight+supervisionFrame.origin.y+15;
+    
    
+    self.overallHoursFooter.frame=overalHoursFooterFrame;
  
+    self.signaturesView.transform=CGAffineTransformIdentity;
+    CGRect signaturesFrame=self.signaturesView.frame;
+    
+    signaturesFrame.origin.y=overalHoursFooterFrame.size.height+overalHoursFooterFrame.origin.y+15;
+    
+    
+    self.signaturesView.frame=signaturesFrame;
+    
+
     
     CGFloat bottomOfDirectHoursFooter=directHoursFooterFrame.size.height+directHoursFooterFrame.origin.y;
 
@@ -309,7 +331,12 @@ NSLog(@"current offset %f",currentOffsetY);
     
     SupervisorsAndTotalTimesForMonth *totalsObject=(SupervisorsAndTotalTimesForMonth *)self.boundObject;
     
-
+  
+    self.supervisorLabel.text=totalsObject.cliniciansStr;
+    if (totalsObject.clinicians.count>1) {
+        supervisorLabelBeforeColon.text=@"Supervisors:";
+    }
+    [self.supervisorLabel alignTop];
     NSString *bottomCellNibName=nil;    
     if (totalsObject.overallTotalWeekUndefinedTI) {
         bottomCellNibName=@"MonthlyPracticumLogBottomCellWithUndefined";
@@ -318,14 +345,20 @@ NSLog(@"current offset %f",currentOffsetY);
         bottomCellNibName=@"MonthlyPracticumLogBottomCell";
     }
 
+    
     self.monthToDisplay=totalsObject.monthToDisplay;    
     
     NSLog(@"self month to display is %@",self.monthToDisplay);
     NSLog(@"toplogcell bound object is %@",self.boundObject);
    
+       
     
-    
-    
+    if (totalsObject.numberOfSites>1) {
+        self.siteNameLabelBeforeColon.text=@"Practicum Site Names:";
+    }
+    self.practicumSiteNameLabel.text=totalsObject.practicumSiteNamesStr;
+    [self.practicumSiteNameLabel alignBottom];
+    self.studentNameLabel.text=totalsObject.studentNameStr;
 //
 //    
     self.interventionObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.interventionTypesTableView];
@@ -547,7 +580,92 @@ NSLog(@"current offset %f",currentOffsetY);
     [supportObjectsModel_ addSection:supportObjectsSection];
     
 
+    self.supervisionObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.supervisionReceivedTypesTableView];
     
+    supervisionObjectsModel_.delegate=self;
+    //    
+    
+    NSArray *fetchedSupervisionObjects =  [self fetchObjectsFromEntity:(NSString *)@"SupervisionTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"supervisionReceived.time",@"existingSupervision",nil]];
+    //     
+     
+    for (SupervisionTypeEntity *supervisionType in fetchedSupervisionObjects) {
+        
+        TrackTypeWithTotalTimes *supervisionTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:supervisionType];
+        
+        
+        
+        
+        [supervisionType willAccessValueForKey:@"subTypes"];
+        NSSet *supervisionSubTypeSet=supervisionType.subTypes;
+        
+        NSArray *subTypesArray=nil;
+        
+        if (supervisionSubTypeSet &&[supervisionSubTypeSet isKindOfClass:[NSSet class]]) {
+            
+            subTypesArray=supervisionSubTypeSet.allObjects;
+        }
+        
+        
+        NSLog(@"subtypes array is %@",subTypesArray);
+        
+        NSSortDescriptor *firstDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order"
+                                                                        ascending:YES] ;
+        
+        
+        NSArray *sortDescriptors = [NSArray arrayWithObjects:firstDescriptor, nil];
+        NSMutableArray *orderdSubTypeArray=[NSMutableArray arrayWithArray:(NSArray *)[subTypesArray sortedArrayUsingDescriptors:sortDescriptors]];
+        
+        NSMutableArray *subTypeWithTotalsItemsArray=[NSMutableArray array];
+        
+        
+        NSLog(@"month to display %@",self.monthToDisplay);
+        for (SupervisionTypeSubtypeEntity *supervisionSubTypeObject in orderdSubTypeArray ) {
+            TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:[totalsObject.clinicians objectAtIndex:0] trackTypeObject:supervisionSubTypeObject];
+            
+            NSLog(@"tracktype with total times object %@",supervisionTypeWithTotalTimes.totalForMonthStr);
+            NSLog(@"track type with total times text is %@",supervisionTypeWithTotalTimes.typeLabelText);
+            [subTypeWithTotalsItemsArray addObject:trackTypeWithTotalTimeObject];
+            
+        }
+        NSLog(@"subytpe total items array is %@",subTypeWithTotalsItemsArray);
+        
+        
+        SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *supervisionSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:supervisionType.supervisionType footerNotes:supervisionTypeWithTotalTimes.monthlyLogNotes sectionTotalStr: supervisionTypeWithTotalTimes.totalToDateStr items:subTypeWithTotalsItemsArray itemsDefinition:typesDef];
+        
+        //        NSString *monthlyLogNotes=[interventionType monthlyLogNotesForMonth:self.monthToDisplay clinician:self.clinician];
+        
+        
+        
+        supervisionSection.dataFetchOptions=dataFetchOptions;
+        
+        
+        supervisionSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
+        {
+            // Create & return a custom cell based on the cell in ContactOverviewCell.xib
+            
+            NSLog(@"month to display is %@",self.monthToDisplay);
+            //            NSString *bindingsString = @"20:interventionSubType;21:self.monthToDisplay"; // 1,2,3 are the control tags
+            
+            NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"supervisionSubType",totalsObject.monthToDisplay, nil] forKeys:[NSArray arrayWithObjects:@"20",@"21", nil]];
+            
+            MonthlyPracticumLogBottonCell *contactOverviewCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindings:bindingsDictionary nibName:bottomCellNibName];
+            
+            
+            return contactOverviewCell;
+        };
+        
+        
+        
+        
+        
+        
+        
+        [supervisionObjectsModel_ addSection:supervisionSection];
+        [supervisionType didAccessValueForKey:@"subTypes"];
+        
+    }
+    
+
     
     
     

@@ -8,24 +8,45 @@
 
 #import "UILabel_VerticalAlignmentExtention.h"
 
-@implementation UILabel_VerticalAlignmentExtention
 
-- (id)initWithFrame:(CGRect)frame
+@implementation UILabel (VerticalAlign)
+
+- (void)alignTop
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+    CGSize fontSize = [self.text sizeWithFont:self.font];
+    
+    double finalHeight = fontSize.height * self.numberOfLines;
+    double finalWidth = self.frame.size.width;    //expected width of label
+    
+    
+    CGSize theStringSize = [self.text sizeWithFont:self.font constrainedToSize:CGSizeMake(finalWidth, finalHeight) lineBreakMode:self.lineBreakMode];
+    
+    
+    int newLinesToPad = (finalHeight  - theStringSize.height) / fontSize.height;
+    
+    for(int i=0; i<= newLinesToPad; i++)
+    {
+        self.text = [self.text stringByAppendingString:@" \n"];
     }
-    return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)alignBottom
 {
-    // Drawing code
+    CGSize fontSize = [self.text sizeWithFont:self.font];
+    
+    double finalHeight = fontSize.height * self.numberOfLines;
+    double finalWidth = self.frame.size.width;    //expected width of label
+    
+    
+    CGSize theStringSize = [self.text sizeWithFont:self.font constrainedToSize:CGSizeMake(finalWidth, finalHeight) lineBreakMode:self.lineBreakMode];
+    
+    
+    int newLinesToPad = (finalHeight  - theStringSize.height) / fontSize.height;
+    
+    for(int i=0; i< newLinesToPad; i++)
+    {
+        self.text = [NSString stringWithFormat:@" \n%@",self.text];
+    }
 }
-*/
 
 @end

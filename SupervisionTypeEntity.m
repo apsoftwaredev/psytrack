@@ -19,5 +19,6 @@
 @dynamic supervisionRecieved;
 @dynamic supervisionGiven;
 @dynamic existingSupervision;
+@dynamic subTypes;
 
 @end

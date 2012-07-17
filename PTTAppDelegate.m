@@ -1267,6 +1267,7 @@
         
         myClinicianInfoObject.firstName=@"Enter Your";
         myClinicianInfoObject.lastName=@"Name Here";
+        myClinicianInfoObject.bio=@"If a duplicate my information record was created on another device, the next time the program is opened the duplicate record with \"Enter Your\" in the first name field will be deleted.";
     }
     else if (myInfoFetchedObjects.count>1){
         

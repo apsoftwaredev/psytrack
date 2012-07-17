@@ -36,7 +36,11 @@
 
 
 @property (nonatomic, weak) NSArray *clinicians;
+@property (nonatomic, weak) NSString *cliniciansStr;
+@property (nonatomic, weak) NSString *practicumSiteNamesStr;
+@property (nonatomic, assign) NSInteger numberOfSites;
 
+@property (nonatomic, weak) NSString *studentNameStr;
 
 @property (nonatomic, weak) NSString *interventionTotalWeek1Str;
 @property (nonatomic, weak) NSString *interventionTotalWeek2Str;

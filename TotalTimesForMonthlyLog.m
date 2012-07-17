@@ -428,11 +428,11 @@ existingHoursHoursArray=existingHoursArray_;
     
 }
 
--(NSPredicate *)priorMonthsHoursPredicateForClincian:(ClinicianEntity *)clinician{
+-(NSPredicate *)priorMonthsHoursPredicate{
     
     NSPredicate *priorMonthsServiceDatesPredicate=nil;
-    if (clinician) {
-        priorMonthsServiceDatesPredicate=[NSPredicate predicateWithFormat:@"(self.supervisor.objectID == %@) AND (dateOfService < %@ )",clinician.objectID,monthStartDate_];
+    if (clinician_) {
+        priorMonthsServiceDatesPredicate=[NSPredicate predicateWithFormat:@"(self.supervisor.objectID == %@) AND (dateOfService < %@ )",clinician_.objectID,monthStartDate_];
         
     }else {
         priorMonthsServiceDatesPredicate=[NSPredicate predicateWithFormat:@"dateOfService < %@ ",monthStartDate_];
@@ -445,12 +445,12 @@ existingHoursHoursArray=existingHoursArray_;
 }
 
 
--(NSPredicate *)predicateForTrackCurrentMonthsForClincian:(ClinicianEntity *)clinician{
+-(NSPredicate *)predicateForTrackCurrentMonth{
     
     NSPredicate *currentMonthPredicate=nil;
     
-    if (clinician) {
-        currentMonthPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND ((dateOfService >= %@) AND (dateOfService <= %@)) || (dateOfService = nil))",clinician.objectID, monthStartDate_,monthEndDate_];
+    if (clinician_) {
+        currentMonthPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND ((dateOfService >= %@) AND (dateOfService <= %@)) || (dateOfService = nil))",clinician_.objectID, monthStartDate_,monthEndDate_];
     }
     else {
         currentMonthPredicate = [NSPredicate predicateWithFormat:@" ((dateOfService >= %@) AND (dateOfService <= %@)) || (dateOfService = nil) ",monthStartDate_,monthEndDate_];
@@ -460,12 +460,12 @@ existingHoursHoursArray=existingHoursArray_;
 }
 
 
--(NSPredicate *)predicateForExistingHoursCurrentMonthsForClincian:(ClinicianEntity *)clinician{
+-(NSPredicate *)predicateForExistingHoursCurrentMonth{
     
     NSPredicate *currentMonthPredicate=nil;
     
-    if (clinician) {
-        currentMonthPredicate = [NSPredicate predicateWithFormat:@"(self.supervisor.objectID == %@ ) AND (startDate >= %@) AND (endDate <= %@)",clinician.objectID, monthStartDate_,monthEndDate_];
+    if (clinician_) {
+        currentMonthPredicate = [NSPredicate predicateWithFormat:@"(self.supervisor.objectID == %@ ) AND (startDate >= %@) AND (endDate <= %@)",clinician_.objectID, monthStartDate_,monthEndDate_];
     }
     else {
         currentMonthPredicate = [NSPredicate predicateWithFormat:@" (startDate >= %@) AND (endDate <= %@)", monthStartDate_,monthEndDate_];
@@ -500,13 +500,13 @@ existingHoursHoursArray=existingHoursArray_;
 }     
 
 
--(NSPredicate *)predicateForExistingHoursAllBeforeEndDate:(NSDate *)date clinician:(ClinicianEntity *)clinician{
+-(NSPredicate *)predicateForExistingHoursAllBeforeEndDate:(NSDate *)date;{
     
     NSPredicate *returnPredicate=nil;
     
     if (date &&[date isKindOfClass:[NSDate class]]) {
-        if (clinician) {
-            returnPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND  (endDate < %@))",clinician.objectID, date];
+        if (clinician_) {
+            returnPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND  (endDate < %@))",clinician_.objectID, date];
         }
         else {
             returnPredicate = [NSPredicate predicateWithFormat:@" (endDate < %@)", date];
@@ -517,12 +517,12 @@ existingHoursHoursArray=existingHoursArray_;
 }     
 
 
--(NSPredicate *)predicateForExistingHoursWeek:(PTrackWeek)week clincian:(ClinicianEntity *)clinician{
+-(NSPredicate *)predicateForExistingHoursWeek:(PTrackWeek)week{
     
     NSPredicate *weekPredicate=nil;
     
-    if (clinician) {
-        weekPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND (startDate >= %@) AND (endDate <= %@))",clinician.objectID, [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
+    if (clinician_) {
+        weekPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND (startDate >= %@) AND (endDate <= %@))",clinician_.objectID, [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
     }
     else {
         weekPredicate = [NSPredicate predicateWithFormat:@" ((startDate >= %@) AND (endDate <= %@))", [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
@@ -533,12 +533,12 @@ existingHoursHoursArray=existingHoursArray_;
 }
 
 
--(NSPredicate *)predicateForExistingHoursWeekUndefinedForClincian:(ClinicianEntity *)clinician{
+-(NSPredicate *)predicateForExistingHoursWeekUndefined{
     
     NSPredicate *undefinedWeekPredicate=nil;
     
-    if (clinician) {
-        undefinedWeekPredicate = [NSPredicate predicateWithFormat:@" ((self.supervisor.objectID == %@ )  AND NOT ((startDate >= %@) AND (endDate <= %@)) AND (   ((startDate >= %@) AND (endDate > %@)) OR ((startDate >= %@) AND (endDate > %@)) OR ((startDate >= %@) AND (endDate > %@)) OR ((startDate >= %@) AND (endDate > %@)) ))",clinician.objectID, monthStartDate_,monthEndDate_,week1StartDate_,week1EndDate_,week2StartDate_,week2EndDate_,week3StartDate_,week3EndDate_,week4StartDate_,week4EndDate_];
+    if (clinician_) {
+        undefinedWeekPredicate = [NSPredicate predicateWithFormat:@" ((self.supervisor.objectID == %@ )  AND NOT ((startDate >= %@) AND (endDate <= %@)) AND (   ((startDate >= %@) AND (endDate > %@)) OR ((startDate >= %@) AND (endDate > %@)) OR ((startDate >= %@) AND (endDate > %@)) OR ((startDate >= %@) AND (endDate > %@)) ))",clinician_.objectID, monthStartDate_,monthEndDate_,week1StartDate_,week1EndDate_,week2StartDate_,week2EndDate_,week3StartDate_,week3EndDate_,week4StartDate_,week4EndDate_];
         
         
     }
@@ -551,12 +551,12 @@ existingHoursHoursArray=existingHoursArray_;
     
 }
 
--(NSPredicate *)predicateForTrackWeek:(PTrackWeek)week clincian:(ClinicianEntity *)clinician{
+-(NSPredicate *)predicateForTrackWeek:(PTrackWeek)week{
     
     NSPredicate *weekPredicate=nil;
     
-    if (clinician) {
-        weekPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND ((dateOfService >= %@) AND (dateOfService <= %@)) || (dateOfService = nil))",clinician.objectID, [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
+    if (clinician_) {
+        weekPredicate = [NSPredicate predicateWithFormat:@"((self.supervisor.objectID == %@ ) AND ((dateOfService >= %@) AND (dateOfService <= %@)) || (dateOfService = nil))",clinician_.objectID, [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
     }
     else {
         weekPredicate = [NSPredicate predicateWithFormat:@" ((dateOfService >= %@) AND (dateOfService <= %@)) || (dateOfService = nil) ", [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];

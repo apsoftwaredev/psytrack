@@ -149,24 +149,24 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 
 
 
--(NSPredicate *)priorMonthsHoursPredicateForClincian:(ClinicianEntity *)clinician;
+-(NSPredicate *)priorMonthsHoursPredicate;
 
 
 
--(NSPredicate *)predicateForTrackCurrentMonthsForClincian:(ClinicianEntity *)clinician;
+-(NSPredicate *)predicateForTrackCurrentMonth;
 
--(NSPredicate *)predicateForExistingHoursCurrentMonthsForClincian:(ClinicianEntity *)clinician;
+-(NSPredicate *)predicateForExistingHoursCurrentMonth;
 
 -(NSPredicate *)predicateForTrackEntitiesAllBeforeAndEqualToEndDateForMonth;
 
 -(NSPredicate *)predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth;
 
 
--(NSPredicate *)predicateForExistingHoursAllBeforeEndDate:(NSDate *)date clinician:(ClinicianEntity *)clinician;
+-(NSPredicate *)predicateForExistingHoursAllBeforeEndDate:(NSDate *)date;
 
--(NSPredicate *)predicateForExistingHoursWeek:(PTrackWeek)week clincian:(ClinicianEntity *)clinician;
--(NSPredicate *)predicateForExistingHoursWeekUndefinedForClincian:(ClinicianEntity *)clinician;
--(NSPredicate *)predicateForTrackWeek:(PTrackWeek)week clincian:(ClinicianEntity *)clinician;
+-(NSPredicate *)predicateForExistingHoursWeek:(PTrackWeek)week;
+-(NSPredicate *)predicateForExistingHoursWeekUndefined;
+-(NSPredicate *)predicateForTrackWeek:(PTrackWeek)week;
 
 
 
