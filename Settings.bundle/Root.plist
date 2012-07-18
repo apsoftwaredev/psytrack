@@ -40,5 +40,7 @@
 	</dict>
 	<key>lock_screen_padlock_sound_is_on</key>
 	<true/>
+	<key>monthly_practicum_log_number</key>
+	<integer>0</integer>
 </dict>
 </plist>

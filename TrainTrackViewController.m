@@ -814,6 +814,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     
+
     self.view.backgroundColor = [UIColor clearColor];
     
     UIImage *lockImage=[UIImage imageNamed:@"lock.png"];
@@ -831,24 +832,24 @@
     UIViewAutoresizingFlexibleHeight;
     
     [self.view addSubview:self.myTableView];
-    NSString *menuBarImageNameStr=nil;
+//    NSString *menuBarImageNameStr=nil;
     if ([SCUtilities is_iPad]) {
         
         [self.myTableView setBackgroundView:nil];
         [self.myTableView setBackgroundView:[[UIView alloc] init]];
-        menuBarImageNameStr=@"ipad-menubar-full.png";
+       
     }
-    else {
+    
         [self.myTableView setBackgroundColor:[UIColor clearColor]];
-        menuBarImageNameStr=@"menubar-full.png"; 
+       
 
-    }
-          UIImage *navBarBackgroundImage=[UIImage imageNamed:menuBarImageNameStr];
     
-
-    UINavigationBar *navBar=(UINavigationBar *)self.navigationController.navigationBar;
+//          UIImage *navBarBackgroundImage=[UIImage imageNamed:menuBarImageNameStr];
     
-    [navBar setBackgroundImage:navBarBackgroundImage forBarMetrics:UIBarMetricsDefault];
+//
+//    UINavigationBar *navBar=(UINavigationBar *)self.navigationController.navigationBar;
+    
+//    [navBar setBackgroundImage:navBarBackgroundImage forBarMetrics:UIBarMetricsDefault];
     
     self.tableView.hidden=YES;
 }

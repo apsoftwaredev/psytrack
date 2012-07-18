@@ -409,7 +409,10 @@
 	{
 		[self performSelector:@selector(showDocument:) withObject:nil afterDelay:0.02];
 	}
-
+    if ([delegate respondsToSelector:@selector(readerViewDidAppear:)] == YES)
+	{
+		[delegate readerViewDidAppear:self]; // Dismiss the ReaderViewController
+	}
 #if (READER_DISABLE_IDLE == TRUE) // Option
 
 	[UIApplication sharedApplication].idleTimerDisabled = YES;

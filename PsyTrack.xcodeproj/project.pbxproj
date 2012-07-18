@@ -343,6 +343,9 @@
 		E7C02DB315B3A4610072F97C /* SiteEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DB215B3A4600072F97C /* SiteEntity.m */; };
 		E7C02DB615B442220072F97C /* SupervisionTypeSubtypeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DB515B442200072F97C /* SupervisionTypeSubtypeEntity.m */; };
 		E7C02DBA15B4C24E0072F97C /* UILabel_VerticalAlignmentExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DB915B4C24E0072F97C /* UILabel_VerticalAlignmentExtention.m */; };
+		E7C02DC315B6003E0072F97C /* MonthlyPracticumLogGenerateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DC115B6003C0072F97C /* MonthlyPracticumLogGenerateViewController.m */; };
+		E7C02DC415B6003E0072F97C /* MonthlyPracticumLogGenerateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7C02DC215B6003D0072F97C /* MonthlyPracticumLogGenerateViewController.xib */; };
+		E7C02DC615B61CBC0072F97C /* MonthlyPracticumLogGenerateVC_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7C02DC515B61CBB0072F97C /* MonthlyPracticumLogGenerateVC_iPhone.xib */; };
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
 		E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */; };
@@ -943,6 +946,10 @@
 		E7C02DB515B442200072F97C /* SupervisionTypeSubtypeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupervisionTypeSubtypeEntity.m; sourceTree = "<group>"; };
 		E7C02DB815B4C24E0072F97C /* UILabel_VerticalAlignmentExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILabel_VerticalAlignmentExtention.h; sourceTree = "<group>"; };
 		E7C02DB915B4C24E0072F97C /* UILabel_VerticalAlignmentExtention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILabel_VerticalAlignmentExtention.m; sourceTree = "<group>"; };
+		E7C02DC015B6003B0072F97C /* MonthlyPracticumLogGenerateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthlyPracticumLogGenerateViewController.h; sourceTree = "<group>"; };
+		E7C02DC115B6003C0072F97C /* MonthlyPracticumLogGenerateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthlyPracticumLogGenerateViewController.m; sourceTree = "<group>"; };
+		E7C02DC215B6003D0072F97C /* MonthlyPracticumLogGenerateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogGenerateViewController.xib; sourceTree = "<group>"; };
+		E7C02DC515B61CBB0072F97C /* MonthlyPracticumLogGenerateVC_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogGenerateVC_iPhone.xib; sourceTree = "<group>"; };
 		E7C0749D150E60B4009C5498 /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = "<group>"; };
 		E7C0749E150E60B4009C5498 /* KeyEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyEntity.m; sourceTree = "<group>"; };
 		E7C074A0150EE4DE009C5498 /* EncryptedSCDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCDateCell.h; sourceTree = "<group>"; };
@@ -1992,6 +1999,10 @@
 				E75A149615AC9E6900F3EBEF /* TotalTimesForMonthlyLog.m */,
 				E7C02D9D15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h */,
 				E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */,
+				E7C02DC015B6003B0072F97C /* MonthlyPracticumLogGenerateViewController.h */,
+				E7C02DC115B6003C0072F97C /* MonthlyPracticumLogGenerateViewController.m */,
+				E7C02DC515B61CBB0072F97C /* MonthlyPracticumLogGenerateVC_iPhone.xib */,
+				E7C02DC215B6003D0072F97C /* MonthlyPracticumLogGenerateViewController.xib */,
 			);
 			name = "Monthly Practicum Log";
 			sourceTree = "<group>";
@@ -2381,6 +2392,8 @@
 				E7CCB8E6159CE2FA00A12908 /* ileopard-keys_128x128.png in Resources */,
 				E75A148215A8DB6300F3EBEF /* TotalHoursAndMinutesCell.xib in Resources */,
 				E75A148E15ABC9DB00F3EBEF /* MonthlyPracticumLogBottomCellWithUndefined.xib in Resources */,
+				E7C02DC415B6003E0072F97C /* MonthlyPracticumLogGenerateViewController.xib in Resources */,
+				E7C02DC615B61CBC0072F97C /* MonthlyPracticumLogGenerateVC_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2583,6 +2596,7 @@
 				E7C02DB315B3A4610072F97C /* SiteEntity.m in Sources */,
 				E7C02DB615B442220072F97C /* SupervisionTypeSubtypeEntity.m in Sources */,
 				E7C02DBA15B4C24E0072F97C /* UILabel_VerticalAlignmentExtention.m in Sources */,
+				E7C02DC315B6003E0072F97C /* MonthlyPracticumLogGenerateViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

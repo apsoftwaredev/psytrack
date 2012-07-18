@@ -329,7 +329,7 @@ NSLog(@"current offset %f",currentOffsetY);
                 
                 
                 
-                paddAdditonalY=(currentOffsetY+MAX_MAIN_SCROLLVIEW_HEIGHT)-(subviewFrame.origin.y+self.containerForSignaturesAndSupervisorSummaries.frame.origin.y);
+                paddAdditonalY=(currentOffsetY+MAX_MAIN_SCROLLVIEW_HEIGHT)-(subviewFrame.origin.y+self.containerForSignaturesAndSupervisorSummaries.frame.origin.y)+5;
                 
                 
                 CGRect contatinerForTableViewsFrame=self.subTablesContainerView.frame;

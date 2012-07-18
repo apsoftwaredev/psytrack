@@ -40,6 +40,7 @@
 @optional // Delegate protocols
 
 - (void)dismissReaderViewController:(ReaderViewController *)viewController;
+- (void)readerViewDidAppear:(ReaderViewController *)viewController;
 
 @end
 

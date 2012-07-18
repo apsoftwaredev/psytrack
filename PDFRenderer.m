@@ -66,7 +66,7 @@ if (fetchedObjects &&fetchedObjects.count) {
    
     // Points the pdf converter to the mutable data object and to the UIView to be converted
   
-    [self createPDFfromUIView:monthlyPracticumLogTVC.view saveToDocumentsWithFileName:@"test18.pdf" viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTVC];
+    [self createPDFfromUIView:monthlyPracticumLogTVC.view saveToDocumentsWithFileName:fileName  viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTVC];
 }
 
 // Close the PDF context and write the contents out.

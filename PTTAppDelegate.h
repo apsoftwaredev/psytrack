@@ -55,6 +55,9 @@ static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group
 static NSString * const kPTCurrentKeyDictionary=@"current_key_dictonary";
 static NSString * const kPTCurrentKeyDate=@"current_key_date";
 static NSString * const kPTiCloudPreference=@"icloud_preference";
+static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_number";
+
+
 
 /****************************************************************************************/
 /*	class PTTAppDelegate	*/
