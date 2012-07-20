@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PracticumLogMonthPickerView : UIPickerView
+@interface PracticumLogMonthPickerView : UIPickerView <UIPickerViewDataSource>
 
 @end

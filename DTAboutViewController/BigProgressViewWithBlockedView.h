@@ -8,6 +8,15 @@
 
 #import "BigProgressView.h"
 
-@interface BigProgressViewWithBlockedView : BigProgressView
+@interface BigProgressViewWithBlockedView : BigProgressView{
 
+
+    UIView *sendingViewToBlock;
+
+
+
+}
+
+- (id)initWithFrame:(CGRect)frame blockedView:(UIView *)blockedView;
+-(void)startAnimatingProgressInBackground;
 @end

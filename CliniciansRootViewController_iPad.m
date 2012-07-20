@@ -217,7 +217,9 @@
                 if ([viewLong isKindOfClass:[UILabel class]]) {
                     //NSLog(@"first name");
                     UILabel *firstNameLabel =(UILabel *)viewLong;
-                    firstNameLabel.text=@"First Name:";  
+                    firstNameLabel.text=@"First Name:";
+                    cell.commitChangesLive=YES;
+                    
                 }
                 break;
                 

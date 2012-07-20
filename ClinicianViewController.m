@@ -203,8 +203,7 @@
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem;
         objectsModel.editButtonItem = self.navigationItem.leftBarButtonItem;
-//        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
-//        self.navigationItem.rightBarButtonItem = addButton;
+
         objectsModel.addButtonItem = self.navigationItem.rightBarButtonItem;
         objectsModel.autoAssignDelegateForDetailModels=TRUE;
         objectsModel.autoAssignDataSourceForDetailModels=TRUE;
@@ -311,7 +310,7 @@
     }
 
 }
-  
+
 
 -(void)viewDidAppear:(BOOL)animated{
 

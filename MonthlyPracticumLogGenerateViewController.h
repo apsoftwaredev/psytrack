@@ -7,25 +7,38 @@
 //
 
 #import "ReaderViewController.h"
-#import "BigProgressView.h"
+
 #import "SCArrayOfObjectsModel+CoreData+SelectionSection.h"
-@interface MonthlyPracticumLogGenerateViewController : SCViewController <ReaderViewControllerDelegate,UITextFieldDelegate>{
+#import "PracticumLogMonthPickerVC.h"
+#import "BigProgressViewWithBlockedView.h"
+@interface MonthlyPracticumLogGenerateViewController : SCTableViewController <ReaderViewControllerDelegate,UITextFieldDelegate, SCTableViewModelDelegate, UIPickerViewDelegate,UIPickerViewDataSource>{
 
 
-    SCArrayOfObjectsModel_UseSelectionSection *objectsModel;
-BigProgressView *prog;
-   
+    SCArrayOfObjectsModel *objectsModel;
+    BigProgressViewWithBlockedView *prog;
+    NSDate *earliestDate;
+    NSInteger firstMonth;
+    NSInteger firstYear;
+    NSInteger currentYear;
+    NSInteger currentMonth;
+    NSInteger newestYear;
+    NSInteger numberOfYearsSinceFirstDatePlusTen;
+    
 } 
 
 @property (nonatomic, weak)IBOutlet UITableView *trainingProgramTableView;
 @property (nonatomic, weak)IBOutlet UITextField *pdfFileNameTextField;
 @property (nonatomic, weak)IBOutlet UITextField *pdfPasswordTextField;
 @property (nonatomic, weak)IBOutlet UISwitch *amendedLogSwitch;
-@property (nonatomic, weak)IBOutlet UIScrollView *scrollView;
+
 @property (nonatomic, weak)IBOutlet UIView *containerView;
 @property (nonatomic, weak) IBOutlet UIButton *generateButton;
 @property (nonatomic, weak)IBOutlet UITextField *monthTextField;
-@property (nonatomic, weak)IBOutlet UIPickerView *pickerView;
+@property (nonatomic, weak)IBOutlet UIPickerView *myPickerView;
+@property (nonatomic, weak)IBOutlet UIView *pickerContainerView;
+@property (nonatomic, weak)IBOutlet UITextField *monthYearFieldOverMonthYearField;
+@property (nonatomic, weak)IBOutlet UIButton *doneButtonOnPickerViewContainer;
+
 -(IBAction)generateButtonTapped:(id)sender;
 
 

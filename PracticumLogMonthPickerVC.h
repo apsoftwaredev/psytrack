@@ -1,5 +1,5 @@
 //
-//  PracticumLogMonthPickerVCViewController.h
+//  PracticumLogMonthPickerVC.h
 //  PsyTrack
 //
 //  Created by Daniel Boice on 7/18/12.
@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PracticumLogMonthPickerVCViewController : UIViewController
+@interface PracticumLogMonthPickerVC : UIViewController <UIPickerViewDelegate,UIPickerViewDataSource>
+
+
+@property (nonatomic, strong)IBOutlet UIPickerView *picker;
 
 @end
