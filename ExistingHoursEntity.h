@@ -25,8 +25,12 @@
 @property (nonatomic, retain) NSSet *supervisionGiven;
 @property (nonatomic, retain) TrainingProgramEntity *programCourse;
 @property (nonatomic, retain) SiteEntity *site;
-@end
 
+
+
+@property (nonatomic, strong) NSString *tempNotes;
+
+@end
 @interface ExistingHoursEntity (CoreDataGeneratedAccessors)
 
 - (void)addSupportActivitiesObject:(ExistingSupportActivityEntity *)value;

@@ -26,7 +26,8 @@
 @interface MonthlyPracticumLogTopCell ()
 
 @end
-
+//with a screen resolution at 612 792
+//or 1122 X 1452
 @implementation MonthlyPracticumLogTopCell
 @synthesize supervisorLabelBeforeColon,siteNameLabelBeforeColon;
 @synthesize interventionTypesTableView,assessmentTypesTableView,supportActivitieTypesTableView,supervisionReceivedTypesTableView;
@@ -123,9 +124,9 @@
 @synthesize supervisorSummaryDateBelowLineLabel;
 @synthesize supervisorSummaryContainerView;
 @synthesize containerForSignaturesAndSupervisorSummaries;
+@synthesize trainingProgram;
 
-
-static float const MAX_MAIN_SCROLLVIEW_HEIGHT=567;
+static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1040;
 
 -(void)willDisplay{
   
@@ -386,7 +387,10 @@ NSLog(@"current offset %f",currentOffsetY);
     
     SupervisorsAndTotalTimesForMonth *totalsObject=(SupervisorsAndTotalTimesForMonth *)self.boundObject;
     
+    NSLog(@"training program is %@",totalsObject.trainingProgram);
+    self.trainingProgram=totalsObject.trainingProgram;
   
+    self.programLabel.text=[NSString stringWithFormat:@"%@ - %@",  self.trainingProgram.trainingProgram, self.trainingProgram.course];;
     self.supervisorLabel.text=totalsObject.cliniciansStr;
     numberOfSupervisors=totalsObject.clinicians.count;
     
@@ -430,7 +434,7 @@ NSLog(@"current offset %f",currentOffsetY);
     
     for (InterventionTypeEntity *interventionType in fetchedInterventionObjects) {
         
-       TrackTypeWithTotalTimes *interventionTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:interventionType];
+       TrackTypeWithTotalTimes *interventionTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:interventionType trainingProgram:self.trainingProgram];
         
         
 
@@ -460,7 +464,7 @@ NSLog(@"current offset %f",currentOffsetY);
         
         NSLog(@"month to display %@",self.monthToDisplay);
         for (InterventionTypeSubtypeEntity *interventionSubTypeObject in orderdSubTypeArray ) {
-            TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:[totalsObject.clinicians objectAtIndex:0] trackTypeObject:interventionSubTypeObject];
+            TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:[totalsObject.clinicians objectAtIndex:0] trackTypeObject:interventionSubTypeObject trainingProgram:self.trainingProgram];
             
             NSLog(@"tracktype with total times object %@",interventionTypeWithTotalTimes.totalForMonthStr);
             NSLog(@"track type with total times text is %@",interventionTypeWithTotalTimes.typeLabelText);
@@ -515,7 +519,7 @@ NSLog(@"current offset %f",currentOffsetY);
     
     for (AssessmentTypeEntity *assessmentType in fetchedAssessmentObjects) {
         
-        TrackTypeWithTotalTimes *assessmentTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:totalsObject.monthToDisplay clinician:[totalsObject.clinicians objectAtIndex:0] trackTypeObject:assessmentType];
+        TrackTypeWithTotalTimes *assessmentTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:totalsObject.monthToDisplay clinician:[totalsObject.clinicians objectAtIndex:0] trackTypeObject:assessmentType trainingProgram:self.trainingProgram];
         
         
         
@@ -581,7 +585,7 @@ NSLog(@"current offset %f",currentOffsetY);
     
     for (SupportActivityTypeEntity *supportActivityType in fetchedSupportObjects) {
         
-        TrackTypeWithTotalTimes *supportActivityTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:supportActivityType];
+        TrackTypeWithTotalTimes *supportActivityTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:supportActivityType trainingProgram:self.trainingProgram];
         
         
         
@@ -647,7 +651,7 @@ NSLog(@"current offset %f",currentOffsetY);
      
     for (SupervisionTypeEntity *supervisionType in fetchedSupervisionObjects) {
         
-        TrackTypeWithTotalTimes *supervisionTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:supervisionType];
+        TrackTypeWithTotalTimes *supervisionTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:supervisionType trainingProgram:self.trainingProgram];
         
         
         
@@ -677,7 +681,7 @@ NSLog(@"current offset %f",currentOffsetY);
         
         NSLog(@"month to display %@",self.monthToDisplay);
         for (SupervisionTypeSubtypeEntity *supervisionSubTypeObject in orderdSubTypeArray ) {
-            TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:[totalsObject.clinicians objectAtIndex:0] trackTypeObject:supervisionSubTypeObject];
+            TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:[totalsObject.clinicians objectAtIndex:0] trackTypeObject:supervisionSubTypeObject trainingProgram:self.trainingProgram];
             
             NSLog(@"tracktype with total times object %@",supervisionTypeWithTotalTimes.totalForMonthStr);
             NSLog(@"track type with total times text is %@",supervisionTypeWithTotalTimes.typeLabelText);
@@ -806,7 +810,7 @@ NSLog(@"current offset %f",currentOffsetY);
     
     for ( int i=0;i<numberOfSupervisors;i++) {
         ClinicianEntity *supervisor=[totalsObject.clinicians objectAtIndex:i];
-        SupervisorsAndTotalTimesForMonth *supervisorTotalsObject=[[SupervisorsAndTotalTimesForMonth alloc]initWithMonth:self.monthToDisplay clinician:supervisor];
+        SupervisorsAndTotalTimesForMonth *supervisorTotalsObject=[[SupervisorsAndTotalTimesForMonth alloc]initWithMonth:self.monthToDisplay clinician:supervisor trainingProgram:self.trainingProgram];
         if (i==0) {
             
             self.supervisorSummaryHeaderLabel.text=[NSString stringWithFormat:@"Summary of Hours Supervised by %@ (Month Total:%@)",supervisor.combinedName,supervisorTotalsObject.overallTotalForMonthStr];
@@ -1072,22 +1076,25 @@ NSLog(@"current offset %f",currentOffsetY);
         
         
     }
+    CGRect footerNotesTextViewFrame=footerNotesTextView.frame;
     NSString *footerTotal=(NSString *)objectsSection.footerTotal;
+    
     if (footerNotesTextView.contentSize.height>footerNotesTextView.frame.size.height) {
         
-        CGRect footerNotesTextViewFrame=footerNotesTextView.frame;
+       
         footerNotesTextViewFrame.size.height=footerNotesTextView.contentSize.height-9;
         
         
-        if (!footerTotal||!footerTotal.length) {
-            footerNotesTextViewFrame.size.width=footerContainerView.frame.size.width-7;
-        }
-        footerNotesTextView.frame=footerNotesTextViewFrame;
+       
         
         
         
     }
-  
+    if (!footerTotal||!footerTotal.length) {
+        footerNotesTextViewFrame.size.width=footerContainerView.frame.size.width-7;
+    }
+    footerNotesTextView.frame=footerNotesTextViewFrame;
+        
     footerContainerView.backgroundColor=sectionSubFooterView.backgroundColor;
     if (footerTotal&&footerTotal.length) {
     
@@ -1120,6 +1127,7 @@ NSLog(@"current offset %f",currentOffsetY);
 
 
 }
+
 
 -(NSArray *)fetchObjectsFromEntity:(NSString *)entityStr filterPredicate:(NSPredicate *)filterPredicate pathsForPrefetching:(NSArray *)pathsForPrefetching {
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;

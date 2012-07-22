@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ClinicianEntity.h"
+#import "TrainingProgramEntity.h"
 
 typedef enum {
     kTrackAssessment,
@@ -62,6 +63,7 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 
     __weak NSDate  *monthToDisplay_;
     __weak ClinicianEntity *clinician_;
+    __weak TrainingProgramEntity *trainingProgram_;
     __weak NSArray *clinicians_;
     __weak NSDate *monthStartDate_;
     __weak NSDate *monthEndDate_;
@@ -91,6 +93,8 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 }
 
 @property (nonatomic, weak) ClinicianEntity *clinician;
+
+@property (nonatomic, weak) TrainingProgramEntity *trainingProgram;
 @property (nonatomic, weak) NSDate *monthToDisplay;
 @property (nonatomic, weak) NSDate *monthStartDate;
 @property (nonatomic, weak) NSDate *monthEndDate;
@@ -116,7 +120,7 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 @property (nonatomic, weak) NSArray *existingHoursHoursArray;
 
 
--(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician;
+-(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven;
 
 
 -(NSTimeInterval )totalTimeIntervalForTotalTimeArray:(NSArray *)totalTimesArray;
@@ -175,9 +179,12 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 
 -(NSString *)timeStrFromTimeInterval:(NSTimeInterval )totalTime;  
 
+-(NSPredicate *)predicateForTrainingProgram;
+
+-(NSPredicate *)predicateForTrackTrainingProgram; 
 
 
-
+-(NSPredicate *)predicateForExistingHoursProgramCourse;
 
 
 @end

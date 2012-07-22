@@ -67,9 +67,9 @@
 
 
 
--(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trackTypeObject:(id)trackTypeObjectGiven{
+-(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trackTypeObject:(id)trackTypeObjectGiven trainingProgram:(TrainingProgramEntity *)trainingProgramGiven{
     //override superclass
-    self= [super initWithMonth:date clinician:clinician];
+    self= [super initWithMonth:date clinician:clinician trainingProgram:trainingProgramGiven];
     
     if (self) {
         
@@ -89,8 +89,8 @@
         NSLog(@"predicate for track entities is %@",predicateForTrackEntities.predicateFormat);
         
         
-        
-        
+        NSPredicate *predicateForTrackTrainingProgram=[self predicateForTrackTrainingProgram];
+        NSPredicate *predicateForExistingHoursProgramCourse=[self predicateForExistingHoursProgramCourse];
         
 
         self.trackTypeObject=trackTypeObjectGiven;
@@ -109,7 +109,14 @@
                         allInterventionsDeliveredForType=interventionType.interventionsDelivered.allObjects;
                     }
                     if (allInterventionsDeliveredForType&&allInterventionsDeliveredForType.count &&predicateForTrackEntities) {
-                        self.interventionsDeliveredArray=[allInterventionsDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        
+                        NSArray *tempInterventionsDeliveredArray=[allInterventionsDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+
+                        if (tempInterventionsDeliveredArray &&tempInterventionsDeliveredArray.count) {
+                            self.interventionsDeliveredArray= [tempInterventionsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+                        }
+                                               
+                        
                     }
                     
                     NSLog(@"intervention Delivered Array is %@",self.interventionsDeliveredArray);
@@ -164,7 +171,15 @@
                     
                     NSLog(@"all interventions deliverd before filter%@",allInterventionsDeliveredForSubType);
                     if (allInterventionsDeliveredForSubType &&allInterventionsDeliveredForSubType.count &&predicateForTrackEntities) {
-                        self.interventionsDeliveredArray=[allInterventionsDeliveredForSubType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        
+                        
+                        NSArray *tempInterventionsDeliveredArray=[allInterventionsDeliveredForSubType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        
+                        if (tempInterventionsDeliveredArray &&tempInterventionsDeliveredArray.count) {
+                            self.interventionsDeliveredArray= [tempInterventionsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+                        }
+
+                        
                         
                     }
                     NSLog(@"intervention Delivered Array is %@",self.interventionsDeliveredArray);
@@ -210,7 +225,16 @@
                     
                     
                     if (allAssessemntsDeliveredForType&&allAssessemntsDeliveredForType.count  &&predicateForTrackEntities) {
-                        self.assessmentsDeliveredArray=[allAssessemntsDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        
+                        
+                        
+                        NSArray *tempAssessmentsDeliveredArray=[allAssessemntsDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        
+                        if (tempAssessmentsDeliveredArray &&tempAssessmentsDeliveredArray.count) {
+                            self.assessmentsDeliveredArray= [tempAssessmentsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+                        }
+
+                        
                         
                     }
                                        
@@ -260,7 +284,14 @@
                     
                     
                     if (allSupportActivitiesDeliveredForType&&allSupportActivitiesDeliveredForType.count  &&predicateForTrackEntities) {
-                        self.supportActivityDeliveredArray=[allSupportActivitiesDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        
+                        
+                        NSArray *tempSupportActivitiesDeliveredArray=[allSupportActivitiesDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        
+                        if (tempSupportActivitiesDeliveredArray &&tempSupportActivitiesDeliveredArray.count) {
+                            self.supportActivityDeliveredArray= [tempSupportActivitiesDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+                        }
+
                         
                     }
                     
@@ -309,7 +340,13 @@
                     
                     
                     if (allSupervisionReceivedForType &&allSupervisionReceivedForType.count  &&predicateForTrackEntities) {
-                        self.supervisionReceivedArray=[allSupervisionReceivedForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                   
+                        NSArray *tempSupervisionDeliveredArray=[allSupervisionReceivedForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        
+                        if (tempSupervisionDeliveredArray &&tempSupervisionDeliveredArray.count) {
+                            self.supervisionReceivedArray= [tempSupervisionDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+                        }
+                        
                         
                     }
                     
@@ -363,7 +400,14 @@
                     
                     
                     if (allSupervisionReceivedForSubType &&allSupervisionReceivedForSubType.count  &&predicateForTrackEntities) {
-                        self.supervisionReceivedArray=[allSupervisionReceivedForSubType filteredArrayUsingPredicate:predicateForTrackEntities];
+                                                
+                        NSArray *tempSupervisionDeliveredArray=[allSupervisionReceivedForSubType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        
+                        if (tempSupervisionDeliveredArray &&tempSupervisionDeliveredArray.count) {
+                            self.supervisionReceivedArray= [tempSupervisionDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+                        }
+
+                        
                         
                     }
                     
@@ -415,7 +459,12 @@
             
        
         if (existingHoursMutableArray&&existingHoursMutableArray.count  && predicateForExistingHoursEntities) {
-            self.existingHoursHoursArray=[existingHoursMutableArray filteredArrayUsingPredicate:predicateForExistingHoursEntities];
+            
+            NSArray *tempExistingHoursArray=[existingHoursMutableArray filteredArrayUsingPredicate:predicateForExistingHoursEntities];
+            
+            if (tempExistingHoursArray &&tempExistingHoursArray.count && predicateForExistingHoursProgramCourse) {
+                self.existingHoursHoursArray=[tempExistingHoursArray filteredArrayUsingPredicate:predicateForExistingHoursProgramCourse];
+            }
             
         }
         
@@ -889,7 +938,7 @@
         case kTrackTypeInterventionSubType:
             trackDeliveredFilteredForCurrentMonth=[self.interventionsDeliveredArray filteredArrayUsingPredicate:trackPredicateForCurrentMonth];
             
-            
+            NSLog(@"track typr filterd for current month %@",trackDeliveredFilteredForCurrentMonth);
             break;
             
         case kTrackTypeAssessment:
@@ -928,7 +977,7 @@
         int trackDeliveredFilteredForCurrentMonthCount=trackDeliveredFilteredForCurrentMonth.count;
         if (trackDeliveredFilteredForCurrentMonthCount) {
             
-            NSArray *monthlyLogNotesArray=[trackDeliveredFilteredForCurrentMonth valueForKey:@"monthlyLogNotes"];
+            NSMutableArray *monthlyLogNotesArray=[trackDeliveredFilteredForCurrentMonth mutableArrayValueForKey:@"monthlyLogNotes"];
             int monthlyLogNotesArrayCount=monthlyLogNotesArray.count;
             for ( int i=0;i< monthlyLogNotesArrayCount; i++){
                 
@@ -942,13 +991,14 @@
                         returnString=logNotesStr;
                     }
                     else {
-                        returnString=[monthlyLogNotes_ stringByAppendingFormat:@"; %@",logNotesStr];
+                        returnString=[returnString stringByAppendingFormat:@"; %@",logNotesStr];
                     }
                 }
             }
             
         }
     }
+    NSLog(@"return string is %@",returnString);
     
     NSArray *filteredExistingHoursArray=nil;
     if (self.existingHoursHoursArray &&self.existingHoursHoursArray.count) {
@@ -963,7 +1013,7 @@
         NSSet *existingTypeSet=nil;
         switch (trackType_) {
                 
-            case kTrackTypeIntervention:
+            case kTrackTypeAssessment:
                 
             {
                 NSLog(@"filtered existing hours array is %@",filteredExistingHoursArray);
@@ -976,7 +1026,7 @@
             }
                 break;
                 
-            case kTrackTypeSupervision:
+            case kTrackTypeSupport:
             {
                 if (filteredExistingHoursArray &&filteredExistingHoursArray.count) {
                     existingTypeSet=[filteredExistingHoursArray mutableSetValueForKeyPath:@"supportActivities.monthlyLogNotes"];

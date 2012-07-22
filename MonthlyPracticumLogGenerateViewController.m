@@ -20,7 +20,7 @@
 @implementation MonthlyPracticumLogGenerateViewController
 @synthesize pdfFileNameTextField,pdfPasswordTextField,amendedLogSwitch,generateButton,trainingProgramTableView=trainingProgramTableView_;
 @synthesize containerView,monthTextField,myPickerView,pickerContainerView, monthYearFieldOverMonthYearField,doneButtonOnPickerViewContainer;
-
+@synthesize refreshButton,monthToDisplay;
 
 - (void)viewDidLoad
 {
@@ -45,7 +45,9 @@
     
     SCEntityDefinition *programDef=[SCEntityDefinition definitionWithEntityName:@"TrainingProgramEntity" managedObjectContext:appDelegate.managedObjectContext autoGeneratePropertyDefinitions:YES];
     
-    programDef.titlePropertyName=@"trainingProgram";
+    programDef.titlePropertyName=@"trainingProgram;course";
+    
+    programDef.titlePropertyNameDelimiter=@" - ";
     objectsModel=[[SCArrayOfObjectsModel_UseSelectionSection alloc]initWithTableView:self.trainingProgramTableView entityDefinition:programDef];
     
 
@@ -57,36 +59,11 @@
     objectsModel.enablePullToRefresh = TRUE;
     objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
     
-    
+   
+    [self setDatesAndYears];
 
-    
-    earliestDate=[self firstDateInTrackOrExisting];
-    NSLog(@"earliest date %@",earliestDate);
-    firstYear=[self yearIntegerFromDate:earliestDate];
-    NSLog(@"first Year is %i",firstYear);
-    firstMonth=[self monthIntegerFromDate:earliestDate];
-    NSLog(@"first month is %i",firstMonth);
-    currentYear=[self yearIntegerForCurrentDate];
-    NSLog(@"current year is %i",currentYear);
-    currentMonth=[self monthIntegerFromDate:[NSDate date]];
-    NSLog(@"current Month is %i",currentMonth);
-    
-    NSLog(@"newest year is %i",newestYear);
-    
-    if ([earliestDate compare:[NSDate date]]==NSOrderedDescending) {
-        currentYear=firstYear;
-        currentMonth=firstMonth;
-    }
-    
-    if (newestYear<=currentYear) {
-        newestYear=currentYear;
-    }
-    numberOfYearsSinceFirstDatePlusTen=newestYear-firstYear+10;
-    
-    NSString *monthString=[self titleForRow:currentMonth-1];
-    NSString *monthYearString=[NSString stringWithFormat:@"%@ %i",monthString,currentYear];
-    
-    self.monthYearFieldOverMonthYearField.text=monthYearString;
+  
+   
     
     
     
@@ -126,42 +103,89 @@
 
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-    [NSThread detachNewThreadSelector:@selector(startAnimatingProgressInBackground) toTarget:prog withObject:prog];
-    [self.view setNeedsDisplay];
 	NSString *phrase = nil; // Document password (for unlocking most encrypted PDF files)
     NSString *fileName=[[self sanitizeFileName:pdfFileNameTextField.text] stringByAppendingPathExtension:@"pdf"];
 	NSString *pdfs = [appDelegate.applicationDocumentsDirectory.path stringByAppendingPathComponent:fileName];
     NSLog(@"pdfs %@",pdfs);
-    [PDFRenderer drawPDF:fileName];
-    
-	NSString *filePath = pdfs  ;// Path to last PDF file
-    
-	ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:phrase checkArchive:(BOOL)NO];
-    
-	if (document != nil) // Must have a valid ReaderDocument object in order to proceed with things
-	{
-		ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
+    TrainingProgramEntity *trainingProgram=nil;
+    if (objectsModel.sectionCount) {
+        SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:0];
+        NSLog(@"section class is %@",section.class);
+        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+            SCSelectionSection *selectionSection=(SCSelectionSection *)section;
+            if (![selectionSection.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
+                id objectAtSelectedIndex=[selectionSection.items objectAtIndex:[selectionSection.selectedItemIndex intValue]];
+                
+                if ([objectAtSelectedIndex isKindOfClass:[TrainingProgramEntity class]]) {
+                    trainingProgram=(TrainingProgramEntity *)objectAtSelectedIndex;
+                    
+                    
+                    
+                }
+                
+            }
+            else {
+                [appDelegate displayNotification:@"Please select training program & course"];
+                return;
+            }
+            
+            
+            
+        }
+    }
+else {
+    [appDelegate displayNotification:@"Add training programs under psyTrack interventions, assessments, existing hours, supervision, or existing hours tables"];
+    return;
+}
+NSLog(@"self.monthTodisplay is %@",self.monthToDisplay);
+    if (trainingProgram && self.monthToDisplay) {
         
-		readerViewController.delegate = self; // Set the ReaderViewController delegate to self
+        [NSThread detachNewThreadSelector:@selector(startAnimatingProgressInBackground) toTarget:prog withObject:prog];
+        [self.view setNeedsDisplay];
+    
+        [PDFRenderer drawPDF:fileName month:self.monthToDisplay trainingProgram:trainingProgram];
         
+        NSString *filePath = pdfs  ;// Path to last PDF file
+        
+        ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:phrase checkArchive:(BOOL)NO];
+        
+        if (document != nil) // Must have a valid ReaderDocument object in order to proceed with things
+        {
+            ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
+            
+            readerViewController.delegate = self; // Set the ReaderViewController delegate to self
+            
 #if (DEMO_VIEW_CONTROLLER_PUSH == TRUE)
-        
-		[self.navigationController pushViewController:readerViewController animated:YES];
-        
+            
+            [self.navigationController pushViewController:readerViewController animated:YES];
+            
 #else // present in a modal view controller
-        
-		readerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-		readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-        
-		[self presentModalViewController:readerViewController animated:YES];
-        
+            
+            readerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+            
+            [self presentModalViewController:readerViewController animated:YES];
+            
 #endif // DEMO_VIEW_CONTROLLER_PUSH
+            
+            // Release the ReaderViewController
+        }
+
+    }
+
+else if (!self.monthToDisplay){
+    if(!numberOfYearsSinceFirstDatePlusTen){
+        [appDelegate displayNotification:@"No records to diplay"];
+    
+    }
+    else {
+        [appDelegate displayNotification:@"Please select a month and year"];
+    }
         
-        // Release the ReaderViewController
-	}
-
-
-
+    
+}
+    
+    
 }
 
 
@@ -230,7 +254,13 @@
 
     if (textField.tag==23) {
         [self setMyPickerViewToCurrentMonthAndYear];
-        self.monthYearFieldOverMonthYearField.text=[NSString stringWithFormat:@"%@ %i",[self titleForRow:currentMonth-1],currentYear];
+        if (self.monthToDisplay) {
+            self.monthYearFieldOverMonthYearField.text=[NSString stringWithFormat:@"%@ %i",[self titleForRow:currentMonth-1],currentYear];
+        }
+else {
+    self.monthYearFieldOverMonthYearField.text=@"No records to display";
+}
+        
     }
     if (textField.tag==24) {
         [textField resignFirstResponder];
@@ -346,6 +376,7 @@
 #pragma mark UIPickerViewDelegate methods
 
 
+
 -(void)viewDidLayoutSubviews{
 
 
@@ -416,6 +447,7 @@
         NSInteger rowForCurrentYear=currentYear-firstYear;
         [self.myPickerView selectRow:rowForCurrentYear inComponent:1 animated:YES];
         
+        [self setMonthtoDisplayToPickerSelection];
     }
 
 
@@ -471,7 +503,123 @@ if([yearLabelView isKindOfClass:[UILabel class]]){
 
 
 }
+#pragma mark -
+#pragma mark Custom Methods for PickerView
 
+-(IBAction)refreshButtonTapped:(id)sender{
+
+    [self setDatesAndYears];
+    [self.myPickerView reloadAllComponents];
+
+    [self setMyPickerViewToCurrentMonthAndYear];
+
+
+
+}
+
+-(void)setMonthtoDisplayToPickerSelection{
+
+
+    NSInteger pickerFirstComponentRow=[self.myPickerView selectedRowInComponent:0];
+    NSInteger pickerSecondComponentRow=[self.myPickerView selectedRowInComponent:1];
+    
+    
+    NSInteger month=pickerFirstComponentRow+1 ;
+    
+    NSInteger year =pickerSecondComponentRow+firstYear;
+    
+    
+       
+      //define a  calandar
+      NSCalendar *calendar = [NSCalendar currentCalendar];
+      
+      //define the calandar unit flags
+      NSUInteger unitFlags = NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit;
+      
+      //define the date components
+      NSDateComponents *dateComponents = [calendar components:unitFlags fromDate:[NSDate date]];
+    
+    dateComponents.month=month;
+    dateComponents.year=year;
+    dateComponents.day=1;
+    
+    if (firstYear) {
+         self.monthToDisplay=[calendar dateFromComponents:dateComponents];
+    }
+    else {
+        self.monthToDisplay=nil;
+    }
+   
+    
+NSLog(@"month to display is %@",self.monthToDisplay);
+
+
+}
+-(void)setDatesAndYears{
+
+
+    
+    earliestDate=[self firstDateInTrackOrExisting];
+    NSLog(@"earliest date %@",earliestDate);
+    if (earliestDate) {
+   
+    firstYear=[self yearIntegerFromDate:earliestDate];
+    NSLog(@"first Year is %i",firstYear);
+    firstMonth=[self monthIntegerFromDate:earliestDate];
+    NSLog(@"first month is %i",firstMonth);
+    currentYear=[self yearIntegerForCurrentDate];
+    NSLog(@"current year is %i",currentYear);
+    currentMonth=[self monthIntegerFromDate:[NSDate date]];
+    NSLog(@"current Month is %i",currentMonth);
+    
+    NSLog(@"newest year is %i",newestYear);
+    
+    if ([earliestDate compare:[NSDate date]]==NSOrderedDescending) {
+        currentYear=firstYear;
+        currentMonth=firstMonth;
+    }
+    
+    if (newestYear<=currentYear) {
+        newestYear=currentYear;
+    }
+    numberOfYearsSinceFirstDatePlusTen=newestYear-firstYear+10;
+        
+        [self setMyPickerViewToCurrentMonthAndYear];
+       
+    }
+    else {
+        firstYear=0;
+        firstMonth=0;
+        currentYear=0;
+        currentMonth=0;
+        numberOfYearsSinceFirstDatePlusTen=0;
+        
+    }
+
+    
+    
+    NSString *monthString=[self titleForRow:currentMonth-1];
+    NSString *monthYearString=[NSString stringWithFormat:@"%@ %i",monthString,currentYear];
+    NSLog(@"self month to display is %@",self.monthToDisplay);
+    if (firstYear) {
+        self.monthYearFieldOverMonthYearField.text=monthYearString;
+    }
+    else
+    {
+        self.monthYearFieldOverMonthYearField.text =@"No records to display";
+        
+    }
+
+
+}
+
+-(void)tableViewModelDidPullToRefresh:(SCTableViewModel *)tableModel{
+    
+    [self setDatesAndYears];
+    [self.myPickerView reloadAllComponents];
+    
+    
+}
 -(NSDate *)firstDateInTrackOrExisting{
 
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -582,6 +730,8 @@ NSLog(@"fetched objects %@",fetchedObjects);
                       
                       //define the date components
                       NSDateComponents *dateComponents = [calendar components:unitFlags fromDate:givenDate];
+        
+        [dateComponents setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
         yearToReturn=dateComponents.year;
     }
     return yearToReturn;

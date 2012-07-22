@@ -18,8 +18,8 @@
 #define TOP_MARGIN 0
 #define BOTTOM_MARGIN 0
 #define BOTTOM_FOOTER_MARGIN 0
-#define DOC_WIDTH 612
-#define DOC_HEIGHT 792
+#define DOC_WIDTH 1122
+#define DOC_HEIGHT 1452
 
 
 
@@ -27,7 +27,7 @@
 @implementation PDFRenderer
 
 
-+(void)drawPDF:(NSString*)fileName
++(void)drawPDF:(NSString*)fileName month:(NSDate *)monthToDisplay trainingProgram:(TrainingProgramEntity *)trainingProgramGiven
 {
 // Create the PDF context using the default page size of 612 x 792.
 //UIGraphicsBeginPDFContextToFile(fileName, CGRectZero, nil);
@@ -41,24 +41,10 @@
 //    
 //    UIView* mainView = [objects objectAtIndex:0];
 
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-NSEntityDescription *entity = [NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:appDelegate.managedObjectContext];
-[fetchRequest setEntity:entity];
-    [fetchRequest setReturnsObjectsAsFaults:NO];
+   
     
     
-NSError *error = nil;
-NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-if (fetchedObjects &&fetchedObjects.count) {
-
-    NSManagedObject *managedObject=(NSManagedObject *)[fetchedObjects objectAtIndex:0];
-    ClinicianEntity *clinician=(ClinicianEntity *)managedObject;
-    NSLog(@"managed object class is %@",managedObject.class);
-    
-    MonthlyPracticumLogTableViewController *monthlyPracticumLogTVC=[[MonthlyPracticumLogTableViewController alloc]initWithNibName:(NSString *)@"MonthlyPracticumLogTableViewController" bundle:(NSBundle *)[NSBundle mainBundle] month:(NSInteger)7 year:(NSInteger )2012 supervisor:(ClinicianEntity *)clinician];
+    MonthlyPracticumLogTableViewController *monthlyPracticumLogTVC=[[MonthlyPracticumLogTableViewController alloc]initWithNibName:(NSString *)@"MonthlyPracticumLogTableViewController" bundle:(NSBundle *)[NSBundle mainBundle] monthToDisplay:monthToDisplay trainingProgram:trainingProgramGiven];
     
    
     [monthlyPracticumLogTVC loadView];
@@ -67,7 +53,7 @@ if (fetchedObjects &&fetchedObjects.count) {
     // Points the pdf converter to the mutable data object and to the UIView to be converted
   
     [self createPDFfromUIView:monthlyPracticumLogTVC.view saveToDocumentsWithFileName:fileName  viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTVC];
-}
+
 
 // Close the PDF context and write the contents out.
 //UIGraphicsEndPDFContext();
@@ -391,13 +377,13 @@ if (fetchedObjects &&fetchedObjects.count) {
     [dateFormatter setDateFormat:@"HH:mm M/d/yyyy"];
      
      NSString *pageString=[NSString stringWithFormat:@"Page %d  (Generated %@)",pageNum,[dateFormatter stringFromDate:[NSDate date]]];
-    UIFont *theFont =[UIFont systemFontOfSize:12];
+    UIFont *theFont =[UIFont systemFontOfSize:17];
     
-    CGSize maxSize= CGSizeMake(612, 72);
+    CGSize maxSize= CGSizeMake(1122, 132);
     
     CGSize pageStringSize = [pageString sizeWithFont:theFont constrainedToSize:maxSize lineBreakMode:UILineBreakModeClip];
     
-    CGRect stringRect =CGRectMake(((612- pageStringSize.width)/2.0), 720 + ((72.0-pageStringSize.height)/2), pageStringSize.width, pageStringSize.height);
+    CGRect stringRect =CGRectMake(((1122- pageStringSize.width)/2.0), 1320 + ((132.0-pageStringSize.height)/2), pageStringSize.width, pageStringSize.height);
     
     
     [pageString drawInRect:stringRect withFont:theFont];

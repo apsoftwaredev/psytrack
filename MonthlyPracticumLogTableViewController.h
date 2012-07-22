@@ -8,16 +8,17 @@
 
 #import "MonthlyPracticumLogTopCell.h"
 #import "ClinicianEntity.h"
-@interface MonthlyPracticumLogTableViewController : SCTableViewController <SCTableViewControllerDelegate, SCTableViewModelDelegate>{
+#import "TrainingProgramEntity.h"
+@interface MonthlyPracticumLogTableViewController : SCViewController <SCTableViewControllerDelegate, SCTableViewModelDelegate>{
 
 
     SCArrayOfObjectsModel *objectsModel;
-    NSInteger year;
-    NSInteger month;
+   
     ClinicianEntity *supervisorObject;
 
-
+    TrainingProgramEntity *trainingProgram_;
+    NSDate *monthToDisplay_;
 }
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil month:(NSInteger)monthInteger year:(NSInteger )yearInteger supervisor:(ClinicianEntity *)supervisor;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil monthToDisplay:(NSDate *)monthGiven trainingProgram:(TrainingProgramEntity *)trainingProgramGiven;
 
 @end

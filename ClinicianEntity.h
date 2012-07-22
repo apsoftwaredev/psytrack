@@ -59,6 +59,11 @@
 @property (nonatomic, retain) NSSet *existingHours;
 @property (nonatomic, retain) NSManagedObject *teachingExperience;
 @property (nonatomic, retain) NSSet *practicumCoursesInstructed;
+
+
+@property (nonatomic, strong) NSString *tempNotes;
+@property (nonatomic, strong)  NSString *combinedName;
+
 @end
 
 @interface ClinicianEntity (CoreDataGeneratedAccessors)

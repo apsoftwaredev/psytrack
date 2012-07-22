@@ -38,6 +38,9 @@
 @property (nonatomic, weak)IBOutlet UIView *pickerContainerView;
 @property (nonatomic, weak)IBOutlet UITextField *monthYearFieldOverMonthYearField;
 @property (nonatomic, weak)IBOutlet UIButton *doneButtonOnPickerViewContainer;
+@property (nonatomic, weak)IBOutlet UIButton *refreshButton;
+
+@property (nonatomic, strong) NSDate *monthToDisplay;
 
 -(IBAction)generateButtonTapped:(id)sender;
 

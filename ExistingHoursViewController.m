@@ -12,7 +12,8 @@
 #import "EncryptedSCTextViewCell.h"
 #import "TotalHoursAndMinutesCell.h"
 #import "ExistingHoursEntity.h"
-
+#import "TrainingProgramEntity.h"
+#import "SiteEntity.h"
 @interface ExistingHoursViewController ()
 
 @end
@@ -62,7 +63,7 @@
     
 
     SCEntityDefinition *existingHoursDef =[SCEntityDefinition definitionWithEntityName:@"ExistingHoursEntity"
-                                                            managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"startDate", @"endDate", @"assessments", @"directInterventions", @"supervisionReceived", @"supervisionGiven",@"supportActivities"     , @"notes",   nil]];        
+                                                            managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"site",@"programCourse",@"startDate", @"endDate", @"assessments", @"directInterventions", @"supervisionReceived", @"supervisionGiven",@"supportActivities"     , @"notes",   nil]];        
     
 
                                           
@@ -84,6 +85,179 @@
     
     [existingHoursDef insertPropertyDefinition:supervisorDataProperty atIndex:0];
     
+    
+    
+    SCEntityDefinition *siteDef=[SCEntityDefinition definitionWithEntityName:@"SiteEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"siteName", @"location",@"settingType", @"started",@"ended",@"notes",@"defaultSite", nil]];
+    
+    
+    
+    
+    SCEntityDefinition *settingTypeDef=[SCEntityDefinition definitionWithEntityName:@"SiteSettingTypeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects: @"settingTypeName", @"notes",nil]];
+    
+    
+    
+    
+    siteDef.orderAttributeName=@"order";
+    
+    
+    
+    SCPropertyDefinition *sitePropertyDef=[existingHoursDef propertyDefinitionWithName:@"site"];
+    sitePropertyDef.title=@"Site*";
+    sitePropertyDef.autoValidate=NO;
+    sitePropertyDef.type =SCPropertyTypeObjectSelection;
+    
+    SCObjectSelectionAttributes *siteSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:siteDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    siteSelectionAttribs.allowAddingItems = YES;
+    siteSelectionAttribs.allowDeletingItems = YES;
+    siteSelectionAttribs.allowMovingItems = YES;
+    siteSelectionAttribs.allowEditingItems = YES;
+    siteSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Sites)"];
+    siteSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Site"];
+    sitePropertyDef.attributes = siteSelectionAttribs;
+    
+    SCPropertyDefinition *siteNamePropertyDef=[siteDef propertyDefinitionWithName:@"siteName"];
+    siteNamePropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *siteNotesPropertyDef=[siteDef propertyDefinitionWithName:@"notes"];
+    siteNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+    //define and initialize a date formatter
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    //set the date format
+    [dateFormatter setDateFormat:@"MMM d, yyyy"];
+    
+    SCPropertyDefinition *siteStartedPropertyDef = [siteDef propertyDefinitionWithName:@"started"];
+	siteStartedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                       datePickerMode:UIDatePickerModeDate 
+                                                        displayDatePickerInDetailView:YES];
+    
+    SCPropertyDefinition *siteEndedPropertyDef = [siteDef propertyDefinitionWithName:@"ended"];
+	siteEndedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                     datePickerMode:UIDatePickerModeDate 
+                                                      displayDatePickerInDetailView:YES];
+    
+    settingTypeDef.orderAttributeName=@"order";
+    
+
+    
+    SCPropertyDefinition *settingTypePropertyDef=[siteDef propertyDefinitionWithName:@"settingType"];
+    settingTypePropertyDef.type =SCPropertyTypeObjectSelection;
+    
+    SCObjectSelectionAttributes *settingTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:settingTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    settingTypeSelectionAttribs.allowAddingItems = YES;
+    settingTypeSelectionAttribs.allowDeletingItems = YES;
+    settingTypeSelectionAttribs.allowMovingItems = YES;
+    settingTypeSelectionAttribs.allowEditingItems = YES;
+    settingTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap edit to add setting type)"];
+    settingTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText: @"Add new setting type"];
+    settingTypePropertyDef.attributes = settingTypeSelectionAttribs;
+    
+    SCPropertyDefinition *settingTypeNamePropertyDef=[settingTypeDef propertyDefinitionWithName:@"settingTypeName"];
+    settingTypeNamePropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *settingTypeNotesPropertyDef=[settingTypeDef propertyDefinitionWithName:@"notes"];
+    settingTypeNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+
+    //Training Type  start
+    SCEntityDefinition *trainingProgramDef=[SCEntityDefinition definitionWithEntityName:@"TrainingProgramEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"school",@"trainingProgram",@"course",@"startDate",@"endDate",@"selectedByDefault", @"notes", nil]];
+    
+    
+    
+    
+    
+    
+    
+    
+    trainingProgramDef.orderAttributeName=@"order";
+    
+    
+    
+    SCPropertyDefinition *sessionTrainingProgramPropertyDef=[existingHoursDef propertyDefinitionWithName:@"programCourse"];
+    sessionTrainingProgramPropertyDef.type =SCPropertyTypeObjectSelection;
+    
+    
+    sessionTrainingProgramPropertyDef.autoValidate=NO;
+    sessionTrainingProgramPropertyDef.title=@"Program - Course*";
+    trainingProgramDef.titlePropertyName=@"trainingProgram;course";
+    trainingProgramDef.titlePropertyNameDelimiter=@" - ";
+    
+    SCObjectSelectionAttributes *trainingProgramSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trainingProgramDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    trainingProgramSelectionAttribs.allowAddingItems = YES;
+    trainingProgramSelectionAttribs.allowDeletingItems = YES;
+    trainingProgramSelectionAttribs.allowMovingItems = YES;
+    trainingProgramSelectionAttribs.allowEditingItems = YES;
+    trainingProgramSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Training Types)"];
+    trainingProgramSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Training Type"];
+    sessionTrainingProgramPropertyDef.attributes = trainingProgramSelectionAttribs;
+    
+    SCPropertyDefinition *trainingProgramPropertyDef=[trainingProgramDef propertyDefinitionWithName:@"trainingProgram"];
+    trainingProgramPropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *trainingProgramNotesPropertyDef=[trainingProgramDef propertyDefinitionWithName:@"notes"];
+    trainingProgramNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+    
+    //create the dictionary with the data bindings
+    NSDictionary *instructorDataBindings = [NSDictionary 
+                                            dictionaryWithObjects:[NSArray arrayWithObjects:@"seminarInstructor",@"Seminar Instructor",[NSNumber numberWithBool:NO],@"seminarInstructor",[NSNumber numberWithBool:NO],nil] 
+                                            forKeys:[NSArray arrayWithObjects:@"1",@"90",@"91",@"92",@"93",nil ]]; // 1 are the control tags
+	
+    //create the custom property definition
+    SCCustomPropertyDefinition *instructorDataProperty = [SCCustomPropertyDefinition definitionWithName:@"InstructorData"
+                                                                                         uiElementClass:[ClinicianSelectionCell class] objectBindings:instructorDataBindings];
+	
+    
+    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+    instructorDataProperty.autoValidate=FALSE;
+    
+    
+    [trainingProgramDef insertPropertyDefinition:instructorDataProperty atIndex:1];
+    
+    SCPropertyDefinition *trainingProgramStartDatePropertyDef = [trainingProgramDef propertyDefinitionWithName:@"startDate"];
+	trainingProgramStartDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                                    datePickerMode:UIDatePickerModeDate 
+                                                                     displayDatePickerInDetailView:NO];
+    
+    
+    SCPropertyDefinition *trainingProgramEndDatePropertyDef = [trainingProgramDef propertyDefinitionWithName:@"endDate"];
+	trainingProgramEndDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                                  datePickerMode:UIDatePickerModeDate 
+                                                                   displayDatePickerInDetailView:NO];
+    
+    
+    
+    SCEntityDefinition *schoolDef=[SCEntityDefinition definitionWithEntityName:@"SchoolEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"schoolName",@"notes", nil]];
+    
+    
+    schoolDef.orderAttributeName=@"order";
+    SCPropertyDefinition *trainingProgramSchoolPropertyDef=[trainingProgramDef propertyDefinitionWithName:@"school"];
+    trainingProgramSchoolPropertyDef.type =SCPropertyTypeObjectSelection;
+    
+    
+    
+    
+    SCObjectSelectionAttributes *trainingProgramSchoolSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:schoolDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    trainingProgramSchoolSelectionAttribs.allowAddingItems = YES;
+    trainingProgramSchoolSelectionAttribs.allowDeletingItems = YES;
+    trainingProgramSchoolSelectionAttribs.allowMovingItems = YES;
+    trainingProgramSchoolSelectionAttribs.allowEditingItems = YES;
+    trainingProgramSchoolSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Schools)"];
+    trainingProgramSchoolSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New School"];
+    trainingProgramSchoolPropertyDef.attributes = trainingProgramSchoolSelectionAttribs;
+    
+    SCPropertyDefinition *trainingProgramSchoolNamePropertyDef=[schoolDef propertyDefinitionWithName:@"schoolName"];
+    trainingProgramSchoolNamePropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *trainingPrograSchoolmNotesPropertyDef=[schoolDef propertyDefinitionWithName:@"notes"];
+    trainingPrograSchoolmNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+
+    
+    //training type end
+    
+
+    
+    
     //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
   
     
@@ -91,11 +265,7 @@
     SCPropertyDefinition *existingHoursStartDatePropertyDef = [existingHoursDef propertyDefinitionWithName:@"startDate"];
     
     //format the the date using a date formatter
-    //define and initialize a date formatter
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-    //set the date format
-    [dateFormatter setDateFormat:@"MMM d, yyyy"];
+   
     //Set the date attributes in the existinghoursstartdate property definition and make it so the date picker appears in the same view.
     existingHoursStartDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
                                                                    datePickerMode:UIDatePickerModeDate
@@ -537,8 +707,11 @@
          [supervisionDef insertPropertyDefinition:supervisionHoursDataProperty atIndex:2];
          
 
-        
-        //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
+         SCPropertyDefinition *supervisionMonthlyLogNotes=[supervisionDef propertyDefinitionWithName:@"monthlyLogNotes"];
+         supervisionMonthlyLogNotes.type=SCPropertyTypeTextView;
+         
+         
+         //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
         
         
         //create an array of objects definition for the supervision to-many relationship that with show up in the same view without a place holder element>.
@@ -648,13 +821,12 @@
         supervisionSubTypePropertyDef.type =SCPropertyTypeObjectSelection;
         
         SCObjectSelectionAttributes *supervisionSubTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:supervisionSubTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-        supervisionSubTypeSelectionAttribs.allowAddingItems = YES;
-        supervisionSubTypeSelectionAttribs.allowDeletingItems = YES;
+        supervisionSubTypeSelectionAttribs.allowAddingItems = NO;
+        supervisionSubTypeSelectionAttribs.allowDeletingItems = NO;
         supervisionSubTypeSelectionAttribs.allowMovingItems = YES;
         supervisionSubTypeSelectionAttribs.allowEditingItems = YES;
-        supervisionSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Tap edit to add supervision subtypes)"]];
-         supervisionSubTypeSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Add supervision subtypes)"]];
-         
+        supervisionSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Add supervision subtypes under Supervision Type)"]];
+        
         supervisionSubTypePropertyDef.attributes = supervisionSubTypeSelectionAttribs;
         
         SCPropertyDefinition *supervisionSubTypeStrPropertyDef=[supervisionSubTypeDef propertyDefinitionWithName:supervisionSubTypePropertyNameString];
@@ -663,6 +835,11 @@
         supervisionSubTypeNotesPropertyDef.type=SCPropertyTypeTextView;
         
 
+         SCPropertyDefinition *supervisionTypeSubtypePropertyDef=[SCPropertyDefinition definitionWithName:@"subTypes" title:@"Subtypes" type:SCPropertyTypeArrayOfObjects];
+         
+         [supervisionTypeDef addPropertyDefinition:supervisionTypeSubtypePropertyDef];
+         
+         supervisionTypeSubtypePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supervisionSubTypeDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new supervision subtype"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
     }                   
     
     //Create a class definition for the existingAssessmentEntity
@@ -672,6 +849,11 @@
     
     
     
+    
+    SCPropertyDefinition *supportMonthlyLogNotes=[supportActivityDef propertyDefinitionWithName:@"monthlyLogNotes"];
+    supportMonthlyLogNotes.type=SCPropertyTypeTextView;
+    
+
     
     //create the custom property definition
     SCCustomPropertyDefinition *supportHoursDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SupportHoursData"
@@ -760,6 +942,10 @@
     
     
    
+    SCPropertyDefinition *assessmentnMonthlyLogNotes=[assessmentDef propertyDefinitionWithName:@"monthlyLogNotes"];
+    assessmentnMonthlyLogNotes.type=SCPropertyTypeTextView;
+    
+
     //create the custom property definition
     SCCustomPropertyDefinition *assessmentHoursDataProperty = [SCCustomPropertyDefinition definitionWithName:@"AssessmentHoursData"
                                                                                     uiElementNibName:@"TotalHoursAndMinutesCell" objectBindings:hoursDataBindings];
@@ -1165,7 +1351,10 @@
     
     
     
+    SCPropertyDefinition *interventionMonthlyLogNotes=[interventionDef propertyDefinitionWithName:@"monthlyLogNotes"];
+   interventionMonthlyLogNotes.type=SCPropertyTypeTextView;
     
+
     //create the custom property definition
     SCCustomPropertyDefinition *interventionHoursDataProperty = [SCCustomPropertyDefinition definitionWithName:@"interventionHoursData"
                                                                                             uiElementNibName:@"TotalHoursAndMinutesCell" objectBindings:hoursDataBindings];
@@ -1478,6 +1667,35 @@ BOOL valid=NO;
         }
         
         
+        
+        
+                   
+            NSString *cellTitleLastCharacter=[cell.textLabel.text substringFromIndex:cell.textLabel.text.length-1 ];
+            
+            NSLog(@"cell title last character is %@",cellTitleLastCharacter);
+            
+            if ([cell isKindOfClass:[SCObjectSelectionCell class]]&&[cellTitleLastCharacter isEqualToString:@"*" ]) {
+                SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+                
+                NSLog(@"selected item index is %@",objectSelectionCell.selectedItemIndex);
+                if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
+                    valid=YES;
+                }else {
+                    valid=NO;
+                }
+                
+            }
+            
+            
+            
+            
+       
+        
+
+        
+        
+        
+        
         NSLog(@"cell class is %@",cell.class);
         NSLog(@"cell tag is %i",cell.tag);
         if ([cell isKindOfClass:[SCDateCell class]]) {
@@ -1502,16 +1720,16 @@ BOOL valid=NO;
                 clinician=clinicianSelectionCell.clinicianObject;
             }
             
-            if ( cell.tag==1) {
+            if ( cell.tag==3) {
                 
             
                 otherCell=(SCTableViewCell *)[tableViewModel cellAfterCell:dateCell rewind:NO];
             
                 
             }
-            else if (cell.tag==2){
+            else if (cell.tag==4){
                 SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-                otherCell=(SCTableViewCell *)[section cellAtIndex:1];
+                otherCell=(SCTableViewCell *)[section cellAtIndex:3];
             
                 
             }
@@ -1520,10 +1738,10 @@ BOOL valid=NO;
                 otherDateCell=(SCDateCell *) otherCell;
             }
            
-            if (cell.tag==1) {
+            if (cell.tag==3) {
                 startDate=dateCell.datePicker.date;
                 endDate=otherDateCell.datePicker.date;
-            } else if (cell.tag==2) {
+            } else if (cell.tag==4) {
                 startDate=otherDateCell.datePicker.date;
                 endDate=dateCell.datePicker.date;
             }
@@ -1698,6 +1916,7 @@ BOOL valid=NO;
 
     if (tableModel.tag==2) {
         selectedInterventionType=nil;
+        selectedSupervisionType=nil;
     }
 
 
@@ -1812,6 +2031,23 @@ BOOL valid=NO;
         
     }}
     }
+    
+    if (tableModel.tag==1) {
+        if ([cell isKindOfClass:[ClinicianSelectionCell class]]) {
+            ClinicianSelectionCell *clinicianSelectionCell=(ClinicianSelectionCell *)cell;
+            
+            if (clinicianSelectionCell.clinicianObject ) {
+                ClinicianEntity *supervisorSelected=(ClinicianEntity *)clinicianSelectionCell.clinicianObject;
+                if ([supervisorSelected.myInformation isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+                    clinicianSelectionCell.label.text=@"Self";
+                }
+            }
+            
+        }
+        
+    }
+    
+    
     if (tableModel.tag==2) {
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
@@ -1978,6 +2214,7 @@ BOOL valid=NO;
                             NSLog(@"objectselection cell %@",objectSelectionCell.items);
                             
                         }
+                       
                         
                     }
                     else {
@@ -1996,7 +2233,58 @@ BOOL valid=NO;
                 
             }
             
-        }}
+            
+        
+            
+            if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&([sectionManagedObject.entity.name isEqualToString:@"ExistingSupervisionReceivedEntity"]||[sectionManagedObject.entity.name isEqualToString:@"ExistingSupervisionGivenEntity"])&&objectSection.cellCount>1) {
+                
+                SCTableViewCell *cellAtFour=(SCTableViewCell *)[objectSection cellAtIndex:1];
+                if ([cellAtFour isKindOfClass:[SCObjectSelectionCell class]]) {
+                    SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtFour;
+                    
+                    
+                    NSLog(@"section managed object is %@",sectionManagedObject);
+                    NSObject *supervisionTypeObject=[sectionManagedObject valueForKeyPath:@"supervisionType"];
+                    
+                    if (indexPath.row!=NSNotFound &&( selectedSupervisionType||(supervisionTypeObject&&[supervisionTypeObject isKindOfClass:[SupervisionTypeEntity class]]))) {
+                        if (!selectedSupervisionType) {
+                            selectedSupervisionType=(SupervisionTypeEntity *)supervisionTypeObject;
+                        }
+                        
+                        
+                        if (selectedSupervisionType.supervisionType.length) {
+                            
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                      @"supervisionType.supervisionType like %@",[NSString stringWithString:(NSString *) selectedSupervisionType.supervisionType]]; 
+                            
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"supervisionSubType" sortAscending:YES filterPredicate:predicate];
+                            
+                            objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                            
+                            [objectSelectionCell reloadBoundValue];
+                            NSLog(@"objectselection cell %@",objectSelectionCell.items);
+                            
+                        }
+                        
+                        
+                    }
+                    else {
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                  @"supervisionType.supervisionType = nil"]; 
+                        
+                        SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"subType" sortAscending:YES filterPredicate:predicate];
+                        
+                        objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                    }
+                    
+                    
+                }
+                
+                
+                
+            }
+
+    }}
     
     
     
@@ -2011,13 +2299,19 @@ BOOL valid=NO;
 
     //begin
     
+    
+   
+    
     if (tableModel.tag==3) {
         
         SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
     NSLog(@"cell tag is %i",cell.tag);
     NSLog(@"cell managed object is %@",cellManagedObject);
-    if ( cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"ExistingInterventionEntity"] && [cell isKindOfClass:[SCObjectSelectionCell class]]&& cell.tag==0) {
+        
+        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]) {
+       
+    if ([cellManagedObject.entity.name isEqualToString:@"ExistingInterventionEntity"] && [cell isKindOfClass:[SCObjectSelectionCell class]]&& cell.tag==0) {
         
         SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
         
@@ -2038,6 +2332,7 @@ BOOL valid=NO;
                     
                     if (selectedInterventionType.interventionType.length) {
                         
+                        subytypeObjectSelectionCell.userInteractionEnabled=YES;
                         NSPredicate *predicate = [NSPredicate predicateWithFormat:
                                                   @"interventionType.interventionType like %@",[NSString stringWithString:(NSString *) selectedInterventionType.interventionType]]; 
                         
@@ -2049,7 +2344,9 @@ BOOL valid=NO;
                         NSLog(@"objectselection cell %@",subytypeObjectSelectionCell.items);
                         
                     }
-                    
+                    else {
+                        subytypeObjectSelectionCell.userInteractionEnabled=NO;
+                    }
                 }
                 
                 
@@ -2065,10 +2362,127 @@ BOOL valid=NO;
         }
             
         
-        
-        
+
+    } 
+        NSLog(@"cellmanaged object entity name is %@",cellManagedObject.entity.name);
+        if (([cellManagedObject.entity.name isEqualToString:@"ExistingSupervisionReceivedEntity"]||[cellManagedObject.entity.name isEqualToString:@"ExistingSupervisionGivenEntity"] )&& [cell isKindOfClass:[SCObjectSelectionCell class]]&& cell.tag==0) {
+            
+            SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+            
+            
+            if ([objectSelectionCell.selectedItemIndex intValue]>-1) {
+                NSManagedObject *selectedSupervisionTypeManagedObject =[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                if ([selectedSupervisionTypeManagedObject isKindOfClass:[SupervisionTypeEntity class]]) {
+                    selectedSupervisionType=(SupervisionTypeEntity *) selectedSupervisionTypeManagedObject;
+                    
+                    
+                    
+                    SCTableViewCell *subtypeCell=(SCTableViewCell *)[tableModel cellAfterCell:objectSelectionCell rewind:NO];
+                    
+                    if ([subtypeCell isKindOfClass:[SCObjectSelectionCell class]]) {
+                        
+                        
+                        SCObjectSelectionCell *subytypeObjectSelectionCell=(SCObjectSelectionCell *)subtypeCell;
+                        
+                        if (selectedSupervisionType.supervisionType.length) {
+                           
+                            subytypeObjectSelectionCell.userInteractionEnabled=YES;
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                      @"supervisionType.supervisionType like %@",[NSString stringWithString:(NSString *) selectedSupervisionType.supervisionType]]; 
+                            
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"subType" sortAscending:YES filterPredicate:predicate];
+                            
+                            subytypeObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                            
+                            [subytypeObjectSelectionCell reloadBoundValue];
+                            NSLog(@"objectselection cell %@",subytypeObjectSelectionCell.items);
+                            
+                        }
+                        else {
+                            subytypeObjectSelectionCell.userInteractionEnabled=NO;
+                        }
+                        
+                    }
+                    
+                    
+                }
+                
+                
+                
+                
+            }  
+            
+            
+            
+        }  
     }
     
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        if ([cellManagedObject.entity.name isEqualToString:@"TrainingProgramEntity"]) {
+            if (cell.tag==1) {
+                
+                
+                
+                NSFetchRequest *trainingProgramFetchRequest = [[NSFetchRequest alloc] init];
+                NSEntityDescription *trainingProgramEntity = [NSEntityDescription entityForName:@"TrainingProgramEntity" inManagedObjectContext:appDelegate.managedObjectContext];
+                [trainingProgramFetchRequest setEntity:trainingProgramEntity];
+                
+                NSPredicate *defaultTrainingPredicate = [NSPredicate predicateWithFormat:@"selectedByDefault == %@ ", [NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES]];
+                [trainingProgramFetchRequest setPredicate:defaultTrainingPredicate];
+                
+                NSError *trainingProgramError = nil;
+                NSArray *trainingProgramFetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:trainingProgramFetchRequest error:&trainingProgramError];
+                
+                
+                if (trainingProgramFetchedObjects&&trainingProgramFetchedObjects.count) {
+                    
+                    for (TrainingProgramEntity *trainingProgram in trainingProgramFetchedObjects) {
+                        [trainingProgram willChangeValueForKey:@"selectedByDefault"];
+                        trainingProgram.selectedByDefault=[NSNumber numberWithBool:NO];
+                        [trainingProgram didChangeValueForKey:@"selectedByDefault"];
+                    }
+                    
+                    
+                    
+                    
+                    
+                }     
+            }
+        }
+        if ([cellManagedObject.entity.name isEqualToString:@"SiteEntity"]) {
+            if (cell.tag==6) {
+                
+                
+                
+                NSFetchRequest *siteFetchRequest = [[NSFetchRequest alloc] init];
+                NSEntityDescription *siteEntity = [NSEntityDescription entityForName:@"SiteEntity" inManagedObjectContext:appDelegate.managedObjectContext];
+                [siteFetchRequest setEntity:siteEntity];
+                
+                NSPredicate *defaultSitePredicate = [NSPredicate predicateWithFormat:@"defaultSite == %@ ", [NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES]];
+                [siteFetchRequest setPredicate:defaultSitePredicate];
+                
+                NSError *siteError = nil;
+                NSArray *siteFetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:siteFetchRequest error:&siteError];
+                
+                
+                if (siteFetchedObjects&&siteFetchedObjects.count) {
+                    
+                    for (SiteEntity *site  in siteFetchedObjects) {
+                        [site willChangeValueForKey:@"defaultSite"];
+                        site.defaultSite=[NSNumber numberWithBool:NO];
+                        [site didChangeValueForKey:@"defaultSite"];
+                    }
+                    
+                    
+                    
+                    
+                    
+                }     
+            }
+        }
+
+        
+        
     }
     
     

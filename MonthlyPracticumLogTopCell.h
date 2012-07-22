@@ -128,6 +128,7 @@
 
 @property (nonatomic, weak) NSDate *monthToDisplay;
 @property (nonatomic, weak) ClinicianEntity *clinician;
+@property (nonatomic, weak) TrainingProgramEntity *trainingProgram;
 @property (nonatomic, assign)BOOL stopScrolling;
 
 

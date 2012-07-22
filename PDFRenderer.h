@@ -9,10 +9,12 @@
 
 #import <Foundation/Foundation.h>
 #import "CoreText/CoreText.h"
+#import "TrainingProgramEntity.h"
 
 @interface PDFRenderer : NSObject 
 
-+(void)drawPDF:(NSString*)fileName;
++(void)drawPDF:(NSString*)fileName month:(NSDate *)monthToDisplay trainingProgram:(TrainingProgramEntity *)trainingProgramGiven;
+
 
 +(void)drawText;
 

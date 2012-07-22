@@ -7,13 +7,14 @@
 //
 
 #import "InterventionTypeEntity.h"
-
+#import "SupervisionTypeEntity.h"
 @interface ExistingHoursViewController : SCTableViewController <SCTableViewModelDelegate ,SCTableViewModelDataSource>{
 
 
     SCArrayOfObjectsModel *objectsModel;
     
  InterventionTypeEntity *selectedInterventionType;
+    SupervisionTypeEntity *selectedSupervisionType;
 }
 //-(void)cancelButtonTapped;
 @end

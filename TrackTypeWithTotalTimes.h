@@ -19,6 +19,7 @@
 #import "SupervisorsAndTotalTimesForMonth.h"
 #import "InterventionTypeEntity.h"
 #import "ClinicianEntity.h"
+#import "TrainingProgramEntity.h"
 typedef enum {
     kTrackTypeUnknown,
     kTrackTypeIntervention,
@@ -73,7 +74,8 @@ typedef enum {
 @property (nonatomic, weak) NSString *totalToDateStr;
 @property (nonatomic, assign) NSTimeInterval totalToDateTI;
 
--(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trackTypeObject:(id)trackTypeObjectGiven;
+-(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trackTypeObject:(id)trackTypeObjectGiven trainingProgram:(TrainingProgramEntity *)trainingProgramGiven;
+
 -(void ) totalOverallHoursTIForOveralCell:(PTSummaryCell)summaryCell clinician:(ClinicianEntity *)clinician;
 -(NSString *)relationshipPathStartToTrackEntity;
 

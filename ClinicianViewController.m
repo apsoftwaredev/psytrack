@@ -744,7 +744,12 @@
 
 }
 
+-(void)tableViewModelDidPullToRefresh:(SCTableViewModel *)tableModel{
 
+
+    [self updateClinicianTotalLabel];
+
+}
 - (void)tableViewModel:(SCArrayOfItemsModel *)tableViewModel
 searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {

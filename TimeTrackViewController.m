@@ -578,7 +578,10 @@
     
     
     
+    SCPropertyDefinition *monthlyLogNotes=[timeTrackEntityDef propertyDefinitionWithName:@"monthlyLogNotes"];
+    monthlyLogNotes.type=SCPropertyTypeTextView;
     
+
     
     
     
@@ -669,19 +672,26 @@
     
       
     //Training Type  start
-    SCEntityDefinition *trainingProgramDef=[SCEntityDefinition definitionWithEntityName:@"TrainingProgramEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"trainingProgram",@"selectedByDefault", @"notes", nil]];
+    SCEntityDefinition *trainingProgramDef=[SCEntityDefinition definitionWithEntityName:@"TrainingProgramEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"school",@"trainingProgram",@"course",@"startDate",@"endDate",@"selectedByDefault", @"notes", nil]];
     
     
     
+   
     
     
     
     
     trainingProgramDef.orderAttributeName=@"order";
-    
+
     
     
     SCPropertyDefinition *sessionTrainingProgramPropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"trainingProgram"];
+    
+    sessionTrainingProgramPropertyDef.autoValidate=NO;
+    sessionTrainingProgramPropertyDef.title=@"Program - Course*";
+    trainingProgramDef.titlePropertyName=@"trainingProgram;course";
+    trainingProgramDef.titlePropertyNameDelimiter=@" - ";
+    
     sessionTrainingProgramPropertyDef.type =SCPropertyTypeObjectSelection;
     
     SCObjectSelectionAttributes *trainingProgramSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trainingProgramDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
@@ -697,6 +707,62 @@
     trainingProgramPropertyDef.type=SCPropertyTypeTextView;
     SCPropertyDefinition *trainingProgramNotesPropertyDef=[trainingProgramDef propertyDefinitionWithName:@"notes"];
     trainingProgramNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+    
+    //create the dictionary with the data bindings
+    NSDictionary *instructorDataBindings = [NSDictionary 
+                                           dictionaryWithObjects:[NSArray arrayWithObjects:@"seminarInstructor",@"Seminar Instructor",[NSNumber numberWithBool:NO],@"seminarInstructor",[NSNumber numberWithBool:NO],nil] 
+                                           forKeys:[NSArray arrayWithObjects:@"1",@"90",@"91",@"92",@"93",nil ]]; // 1 are the control tags
+	
+    //create the custom property definition
+    SCCustomPropertyDefinition *instructorDataProperty = [SCCustomPropertyDefinition definitionWithName:@"InstructorData"
+                                                                                        uiElementClass:[ClinicianSelectionCell class] objectBindings:instructorDataBindings];
+	
+    
+    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+    instructorDataProperty.autoValidate=FALSE;
+    
+    
+    [trainingProgramDef insertPropertyDefinition:instructorDataProperty atIndex:1];
+    
+    SCPropertyDefinition *trainingProgramStartDatePropertyDef = [trainingProgramDef propertyDefinitionWithName:@"startDate"];
+	trainingProgramStartDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                         datePickerMode:UIDatePickerModeDate 
+                                                          displayDatePickerInDetailView:NO];
+    
+    
+    SCPropertyDefinition *trainingProgramEndDatePropertyDef = [trainingProgramDef propertyDefinitionWithName:@"endDate"];
+	trainingProgramEndDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                                    datePickerMode:UIDatePickerModeDate 
+                                                                     displayDatePickerInDetailView:NO];
+    
+
+    SCEntityDefinition *schoolDef=[SCEntityDefinition definitionWithEntityName:@"SchoolEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"schoolName",@"notes", nil]];
+    
+    
+    schoolDef.orderAttributeName=@"order";
+    SCPropertyDefinition *trainingProgramSchoolPropertyDef=[trainingProgramDef propertyDefinitionWithName:@"school"];
+    trainingProgramSchoolPropertyDef.type =SCPropertyTypeObjectSelection;
+    
+    
+    
+    
+    SCObjectSelectionAttributes *trainingProgramSchoolSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:schoolDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    trainingProgramSchoolSelectionAttribs.allowAddingItems = YES;
+    trainingProgramSchoolSelectionAttribs.allowDeletingItems = YES;
+    trainingProgramSchoolSelectionAttribs.allowMovingItems = YES;
+    trainingProgramSchoolSelectionAttribs.allowEditingItems = YES;
+    trainingProgramSchoolSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to add schools)"];
+    trainingProgramSchoolSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New School"];
+    trainingProgramSchoolPropertyDef.attributes = trainingProgramSchoolSelectionAttribs;
+    
+    SCPropertyDefinition *trainingProgramSchoolNamePropertyDef=[schoolDef propertyDefinitionWithName:@"schoolName"];
+    trainingProgramSchoolNamePropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *trainingPrograSchoolmNotesPropertyDef=[schoolDef propertyDefinitionWithName:@"notes"];
+    trainingPrograSchoolmNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+
     
     //training type end
     
@@ -1011,6 +1077,9 @@
     
     
     SCPropertyDefinition *sitePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"site"];
+    sitePropertyDef.title=@"Site*";
+    sitePropertyDef.autoValidate=NO;
+    
     sitePropertyDef.type =SCPropertyTypeObjectSelection;
     
     SCObjectSelectionAttributes *siteSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:siteDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
@@ -1244,12 +1313,12 @@
         trackSubTypePropertyDef.title=subTypeTitleString;
         trackSubTypePropertyDef.autoValidate=NO;
         SCObjectSelectionAttributes *trackSubTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trackSubTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-        trackSubTypeSelectionAttribs.allowAddingItems = YES;
-        trackSubTypeSelectionAttribs.allowDeletingItems = YES;
+        trackSubTypeSelectionAttribs.allowAddingItems = NO;
+        trackSubTypeSelectionAttribs.allowDeletingItems = NO;
         trackSubTypeSelectionAttribs.allowMovingItems = YES;
         trackSubTypeSelectionAttribs.allowEditingItems = YES;
-        trackSubTypeSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Add new supervision subtype"];
-        trackSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(tap edit to Add supervision subtypes)"]];
+        
+        trackSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Add subtypes under intervention type)"]];
         
         trackSubTypePropertyDef.attributes = trackSubTypeSelectionAttribs;
         
@@ -2256,6 +2325,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     }
 }
 
+-(void)tableViewModelDidPullToRefresh:(SCTableViewModel *)tableModel{
+    
+    
+    [self updateAdministrationTotalLabel:tableModel];
+    
+}
 
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {

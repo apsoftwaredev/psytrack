@@ -8,6 +8,8 @@
 
 #import "TotalTimesForMonthlyLog.h"
 #import "PTTAppDelegate.h"
+
+
 @implementation TotalTimesForMonthlyLog
 
 @synthesize  monthToDisplay;
@@ -16,6 +18,7 @@ assessmentsDeliveredArray=assessmentsDeliveredArray_,
 supportActivityDeliveredArray=supportActivityDeliveredArray_,
 supervisionReceivedArray=supervisionReceivedArray_,
 existingHoursHoursArray=existingHoursArray_;
+@synthesize trainingProgram=trainingProgram_;
 
 @synthesize clinician=clinician_;
 @synthesize monthStartDate=monthStartDate_, monthEndDate=monthEndDate_;
@@ -32,7 +35,7 @@ existingHoursHoursArray=existingHoursArray_;
 @synthesize week5EndDate=week5EndDate_;
 
 
--(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician{
+-(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven{
     
     self= [super init];
     
@@ -40,6 +43,8 @@ existingHoursHoursArray=existingHoursArray_;
         
         self.monthToDisplay=date;
         self.clinician=clinician;
+        self.trainingProgram=trainingProgramGiven;
+        
         NSLog(@"month to display is %@",self.monthToDisplay);
         self.monthStartDate=[self monthStartDateForDate:date];
         self.monthEndDate=[self monthEndDate:date];
@@ -92,10 +97,12 @@ existingHoursHoursArray=existingHoursArray_;
                 
             }else if ([totalTimeDateObject isKindOfClass:[NSDate class]]) {
                 dateToAdd=totalTimeDateObject;
+                
+                NSLog(@"total time is to be added is %e",[totalTimeDateObject timeIntervalSince1970]);
+
             }
             
-            NSLog(@"total time is to be added is %e",[totalTimeDateObject timeIntervalSince1970]);
-            
+                        
             
             if (dateToAdd&&[dateToAdd isKindOfClass:[NSDate class]]) {
                 
@@ -529,6 +536,35 @@ existingHoursHoursArray=existingHoursArray_;
     return undefinedWeekPredicate;
     
 }
+
+-(NSPredicate *)predicateForTrackTrainingProgram{
+    
+    NSPredicate *trainingProgramPredicate=nil;
+    
+    
+    trainingProgramPredicate = [NSPredicate predicateWithFormat:@"trainingProgram.objectID == %@", trainingProgram_.objectID];
+    
+    
+    
+    return trainingProgramPredicate;
+    
+}
+
+-(NSPredicate *)predicateForExistingHoursProgramCourse{
+    
+    NSPredicate *trainingProgramPredicate=nil;
+    
+    
+    trainingProgramPredicate = [NSPredicate predicateWithFormat:@"programCourse.objectID == %@", trainingProgram_.objectID];
+    
+    
+    
+    return trainingProgramPredicate;
+    
+}
+
+
+
 
 -(NSPredicate *)predicateForTrackWeek:(PTrackWeek)week{
     

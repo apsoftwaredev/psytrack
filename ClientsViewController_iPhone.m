@@ -720,6 +720,13 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     
 }
+
+-(void)tableViewModelDidPullToRefresh:(SCTableViewModel *)tableModel{
+    
+    
+    [self updateClientsTotalLabel];
+    
+}
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];

@@ -182,9 +182,9 @@
 @synthesize overallTotalForMonthTI;
 
 
--(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician{
+-(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven{
     //override superclass
-    self= [super initWithMonth:date clinician:clinician];
+    self= [super initWithMonth:date clinician:clinician trainingProgram:trainingProgramGiven];
     
     if (self) {
         
@@ -193,15 +193,30 @@
         self.clinician=clinician;
         NSPredicate *predicateForTrackEntities=[self predicateForTrackEntitiesAllBeforeAndEqualToEndDateForMonth];
         
-        self.interventionsDeliveredArray=[self fetchObjectsFromEntity:kTrackInterventionEntityName filterPredicate:predicateForTrackEntities];
+        NSArray *tempInterventionsDeliveredArray=[self fetchObjectsFromEntity:kTrackInterventionEntityName filterPredicate:predicateForTrackEntities];
         
-        self.assessmentsDeliveredArray=[self fetchObjectsFromEntity:kTrackAssessmentEntityName filterPredicate:predicateForTrackEntities];
+       NSArray * tempAssessmentsDeliveredArray=[self fetchObjectsFromEntity:kTrackAssessmentEntityName filterPredicate:predicateForTrackEntities];
         
-        self.supportActivityDeliveredArray=[self fetchObjectsFromEntity:kTrackSupportEntityName filterPredicate:predicateForTrackEntities];
+        NSArray * tempSupportActivityDeliveredArray=[self fetchObjectsFromEntity:kTrackSupportEntityName filterPredicate:predicateForTrackEntities];
         
-        self.supervisionReceivedArray=[self fetchObjectsFromEntity:kTrackSupervisionReceivedEntityName filterPredicate:predicateForTrackEntities];
+        NSArray *tempSupervisionReceivedArray=[self fetchObjectsFromEntity:kTrackSupervisionReceivedEntityName filterPredicate:predicateForTrackEntities];
         
-        self.existingHoursHoursArray=[self fetchObjectsFromEntity:kTrackExistingHoursEntityName filterPredicate:[self predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth]];
+       NSArray *tempExistingHoursHoursArray=[self fetchObjectsFromEntity:kTrackExistingHoursEntityName filterPredicate:[self predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth]];
+        
+        
+        NSPredicate *predicateForTrackTrainingProgram=[self predicateForTrackTrainingProgram];
+        self.interventionsDeliveredArray=[tempInterventionsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+        
+        self.assessmentsDeliveredArray=[tempAssessmentsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+        
+        self.supportActivityDeliveredArray=[tempSupportActivityDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+        
+        self.supervisionReceivedArray=[tempSupervisionReceivedArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+        
+        
+        NSPredicate *predicateForExistingHoursProgramCourse=[self predicateForExistingHoursProgramCourse];
+        self.existingHoursHoursArray=[tempExistingHoursHoursArray filteredArrayUsingPredicate:predicateForExistingHoursProgramCourse];
+        
         
         
         if(clinician_){
@@ -1042,7 +1057,10 @@
         int trackDeliveredFilteredForCurrentMonthCount=trackDeliveredFilteredForCurrentMonth.count;
         if (trackDeliveredFilteredForCurrentMonthCount) {
             
-            NSArray *monthlyLogNotesArray=[trackDeliveredFilteredForCurrentMonth valueForKey:@"monthlyLogNotes"];
+            NSArray *monthlyLogNotesArray=[trackDeliveredFilteredForCurrentMonth mutableArrayValueForKey:@"monthlyLogNotes"];
+            
+            NSLog(@"monlthy log notes array is %@",monthlyLogNotesArray);
+            
             int monthlyLogNotesArrayCount=monthlyLogNotesArray.count;
             for ( int i=0;i< monthlyLogNotesArrayCount; i++){
                 
@@ -1056,7 +1074,7 @@
                         returnString=logNotesStr;
                     }
                     else {
-                        returnString=[logNotesStr stringByAppendingFormat:@"; %@",logNotesStr];
+                        returnString=[returnString stringByAppendingFormat:@"; %@",logNotesStr];
                     }
                 }
             }
@@ -1113,7 +1131,8 @@
                 
                 
                
-                                               
+                NSMutableArray  *filteredLogNotesMutableArray=nil;
+                
                 if ([logNotesID isKindOfClass:[NSString class]]) {
                     logNotesStr=(NSString *) logNotesID;
                 }
@@ -1127,13 +1146,20 @@
                        
                         if (logNoteInLogNotesArray &&[logNoteInLogNotesArray isKindOfClass:[NSString class]] &&logNoteInLogNotesArray.length) {
                             
-                            if (!logNotesStr ||!logNotesStr.length) {
-                                logNotesStr=logNoteInLogNotesArray;
-                            }
-                            else {
-                                logNotesStr=[NSString stringWithFormat:@"%@; %@",logNotesStr,logNoteInLogNotesArray];
-                            }
+//                            BOOL shouldAddToArray=NO;
                             
+                            if (![filteredLogNotesMutableArray containsObject:logNoteInLogNotesArray]) {
+                                [filteredLogNotesMutableArray addObject:logNoteInLogNotesArray];
+                           
+                            
+                            
+                                if (!logNotesStr ||!logNotesStr.length) {
+                                    logNotesStr=logNoteInLogNotesArray;
+                                }
+                                else {
+                                    logNotesStr=[NSString stringWithFormat:@"%@; %@",logNotesStr,logNoteInLogNotesArray];
+                                }
+                             }
                         }
                         
                     }
