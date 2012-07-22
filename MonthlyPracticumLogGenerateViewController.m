@@ -55,6 +55,8 @@
     objectsModel.delegate=self;
     objectsModel.allowMovingItems=YES;
     objectsModel.allowRowSelection=YES;
+
+    
 //    objectsModel.al
     objectsModel.enablePullToRefresh = TRUE;
     objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
@@ -211,6 +213,40 @@ else if (!self.monthToDisplay){
     return scrubbed;
 
 }
+
+#pragma mark -
+#pragma mark SCTableViewModelDelegate methods
+
+-(void)tableViewModel:(SCTableViewModel *)tableModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+    
+    if (cellManagedObject&&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject isKindOfClass:[TrainingProgramEntity class]]) {
+        TrainingProgramEntity *trainingProgram=(TrainingProgramEntity *)cellManagedObject;
+        
+        if ([trainingProgram.selectedByDefault isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+            SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:indexPath.section];
+            
+            if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+                SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection *)section;
+                
+                [objectsSelectionSection setSelectedItemIndex:[NSNumber numberWithInt:indexPath.row]];
+                
+                
+                
+            }
+            
+            
+        }
+        
+        
+    }
+    
+
+
+
+}
+
 
 #pragma mark -
 #pragma mark ReaderViewController Delegate Methods
