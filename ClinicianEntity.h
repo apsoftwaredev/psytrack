@@ -2,14 +2,14 @@
 //  ClinicianEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/4/12.
+//  Created by Daniel Boice on 7/22/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClinicianGroupEntity, DemographicProfileEntity, LogEntity, MedicationReviewEntity, ReferralEntity, SupervisionParentEntity, TimeTrackEntity;
+@class ClinicianGroupEntity, DemographicProfileEntity, ExistingHoursEntity, LogEntity, MedicationReviewEntity, ReferralEntity, SiteEntity, SupervisionParentEntity, TimeTrackEntity, TrainingProgramEntity;
 
 @interface ClinicianEntity : NSManagedObject
 
@@ -41,9 +41,9 @@
 @property (nonatomic, retain) MedicationReviewEntity *medicationPrescribed;
 @property (nonatomic, retain) NSSet *supervisionSessionsPresent;
 @property (nonatomic, retain) NSSet *influences;
+@property (nonatomic, retain) NSSet *existingSupervisionGiven;
 @property (nonatomic, retain) NSManagedObject *diagnoser;
 @property (nonatomic, retain) NSSet *site;
-@property (nonatomic, retain) NSManagedObject *existingSupervision;
 @property (nonatomic, retain) NSSet *consultationReferral;
 @property (nonatomic, retain) NSSet *grants;
 @property (nonatomic, retain) NSSet *orientationHistory;
@@ -56,13 +56,9 @@
 @property (nonatomic, retain) NSSet *memberships;
 @property (nonatomic, retain) NSManagedObject *advisingReceived;
 @property (nonatomic, retain) NSSet *currentJobTitles;
+@property (nonatomic, retain) NSSet *existingHours;
 @property (nonatomic, retain) NSManagedObject *teachingExperience;
-
-
-@property (nonatomic, strong) NSString *tempNotes;
-@property (nonatomic, strong)  NSString *combinedName;
-
-
+@property (nonatomic, retain) NSSet *practicumCoursesInstructed;
 @end
 
 @interface ClinicianEntity (CoreDataGeneratedAccessors)
@@ -112,8 +108,13 @@
 - (void)addInfluences:(NSSet *)values;
 - (void)removeInfluences:(NSSet *)values;
 
-- (void)addSiteObject:(NSManagedObject *)value;
-- (void)removeSiteObject:(NSManagedObject *)value;
+- (void)addExistingSupervisionGivenObject:(NSManagedObject *)value;
+- (void)removeExistingSupervisionGivenObject:(NSManagedObject *)value;
+- (void)addExistingSupervisionGiven:(NSSet *)values;
+- (void)removeExistingSupervisionGiven:(NSSet *)values;
+
+- (void)addSiteObject:(SiteEntity *)value;
+- (void)removeSiteObject:(SiteEntity *)value;
 - (void)addSite:(NSSet *)values;
 - (void)removeSite:(NSSet *)values;
 
@@ -166,5 +167,15 @@
 - (void)removeCurrentJobTitlesObject:(NSManagedObject *)value;
 - (void)addCurrentJobTitles:(NSSet *)values;
 - (void)removeCurrentJobTitles:(NSSet *)values;
+
+- (void)addExistingHoursObject:(ExistingHoursEntity *)value;
+- (void)removeExistingHoursObject:(ExistingHoursEntity *)value;
+- (void)addExistingHours:(NSSet *)values;
+- (void)removeExistingHours:(NSSet *)values;
+
+- (void)addPracticumCoursesInstructedObject:(TrainingProgramEntity *)value;
+- (void)removePracticumCoursesInstructedObject:(TrainingProgramEntity *)value;
+- (void)addPracticumCoursesInstructed:(NSSet *)values;
+- (void)removePracticumCoursesInstructed:(NSSet *)values;
 
 @end

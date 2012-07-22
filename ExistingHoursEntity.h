@@ -2,14 +2,14 @@
 //  ExistingHoursEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/10/12.
+//  Created by Daniel Boice on 7/22/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClinicianEntity, ExistingInterventionEntity;
+@class ClinicianEntity, ExistingAssessmentEntity, ExistingInterventionEntity, ExistingSupervisionReceivedEntity, ExistingSupportActivityEntity, SiteEntity, TrainingProgramEntity;
 
 @interface ExistingHoursEntity : NSManagedObject
 
@@ -23,22 +23,19 @@
 @property (nonatomic, retain) NSSet *directInterventions;
 @property (nonatomic, retain) NSSet *supervisionReceived;
 @property (nonatomic, retain) NSSet *supervisionGiven;
-
-
-@property (nonatomic, strong) NSString *tempNotes;
-
-
+@property (nonatomic, retain) TrainingProgramEntity *programCourse;
+@property (nonatomic, retain) SiteEntity *site;
 @end
 
 @interface ExistingHoursEntity (CoreDataGeneratedAccessors)
 
-- (void)addSupportActivitiesObject:(NSManagedObject *)value;
-- (void)removeSupportActivitiesObject:(NSManagedObject *)value;
+- (void)addSupportActivitiesObject:(ExistingSupportActivityEntity *)value;
+- (void)removeSupportActivitiesObject:(ExistingSupportActivityEntity *)value;
 - (void)addSupportActivities:(NSSet *)values;
 - (void)removeSupportActivities:(NSSet *)values;
 
-- (void)addAssessmentsObject:(NSManagedObject *)value;
-- (void)removeAssessmentsObject:(NSManagedObject *)value;
+- (void)addAssessmentsObject:(ExistingAssessmentEntity *)value;
+- (void)removeAssessmentsObject:(ExistingAssessmentEntity *)value;
 - (void)addAssessments:(NSSet *)values;
 - (void)removeAssessments:(NSSet *)values;
 
@@ -47,8 +44,8 @@
 - (void)addDirectInterventions:(NSSet *)values;
 - (void)removeDirectInterventions:(NSSet *)values;
 
-- (void)addSupervisionReceivedObject:(NSManagedObject *)value;
-- (void)removeSupervisionReceivedObject:(NSManagedObject *)value;
+- (void)addSupervisionReceivedObject:(ExistingSupervisionReceivedEntity *)value;
+- (void)removeSupervisionReceivedObject:(ExistingSupervisionReceivedEntity *)value;
 - (void)addSupervisionReceived:(NSSet *)values;
 - (void)removeSupervisionReceived:(NSSet *)values;
 
