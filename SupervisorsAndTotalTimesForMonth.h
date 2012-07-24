@@ -41,6 +41,9 @@
 @property (nonatomic, assign) NSInteger numberOfSites;
 
 @property (nonatomic, weak) NSString *studentNameStr;
+@property (nonatomic, weak) NSString *practicumSeminarInstructtor;
+@property (nonatomic, weak) NSString *schoolNameStr;
+@property (nonatomic, weak) NSString *monthAndYearsInParentheses;
 
 @property (nonatomic, weak) NSString *interventionTotalWeek1Str;
 @property (nonatomic, weak) NSString *interventionTotalWeek2Str;
@@ -201,10 +204,10 @@
 
 @property (nonatomic, weak) NSString *assessmentMonthlyNotes;
 @property (nonatomic, weak) NSString *supportMonthlyNotes;
+@property (nonatomic, assign) BOOL markAmended;
 
 
-
-
+-(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven markAmended:(BOOL)markAmendedGiven;
 -(void ) calculateDirectlHours;
 
 -(NSTimeInterval ) totalOverallHoursTIForOveralCell:(PTSummaryCell)overallCell clinician:(ClinicianEntity *)clinician;

@@ -18,15 +18,16 @@
 @implementation MonthlyPracticumLogTableViewController
 
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil monthToDisplay:(NSDate *)monthGiven trainingProgram:(TrainingProgramEntity *)trainingProgramGiven
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil monthToDisplay:(NSDate *)monthGiven trainingProgram:(TrainingProgramEntity *)trainingProgramGiven  markAmended:(BOOL)markAmendedGiven
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
         
-        NSLog(@"month given is %@",monthGiven);
+       
         trainingProgram_=trainingProgramGiven;
         monthToDisplay_=monthGiven;
+        markAmended=markAmendedGiven;
         
     }
     return self;
@@ -46,16 +47,13 @@
     
    
    
-    NSLog(@"supervisor object is %@",supervisorObject);
-     
-                           
-      
+   
         
       
     SCClassDefinition *supervisorsAndTotalTimesForMonthDef=[SCClassDefinition definitionWithClass:[SupervisorsAndTotalTimesForMonth class] autoGeneratePropertyDefinitions:YES];
        
     // Create and add the objects section
-    SupervisorsAndTotalTimesForMonth *supervisorsAndTotalTimesForMonthObject=[[SupervisorsAndTotalTimesForMonth alloc]initWithMonth:[NSDate date] clinician:nil trainingProgram:trainingProgram_];
+    SupervisorsAndTotalTimesForMonth *supervisorsAndTotalTimesForMonthObject=[[SupervisorsAndTotalTimesForMonth alloc]initWithMonth:monthToDisplay_ clinician:nil trainingProgram:trainingProgram_ markAmended:markAmended];
     
     NSMutableArray *supervisorsAndTotalTimesForMonthMutableArray=[NSMutableArray arrayWithObject:supervisorsAndTotalTimesForMonthObject];
     
@@ -72,7 +70,6 @@
         
         NSString *topCellNibName=nil;
         
-        NSLog(@"overall undefined time interval is %g",supervisorsAndTotalTimesForMonthObject.overallTotalWeekUndefinedTI);
         
         if (supervisorsAndTotalTimesForMonthObject.overallTotalWeekUndefinedTI>0) {
             topCellNibName=@"MonthlyPracticumLogTopCellWithUndefined";

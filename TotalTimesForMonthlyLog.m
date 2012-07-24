@@ -35,7 +35,7 @@ existingHoursHoursArray=existingHoursArray_;
 @synthesize week5EndDate=week5EndDate_;
 
 
--(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven{
+-(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven {
     
     self= [super init];
     
@@ -45,7 +45,6 @@ existingHoursHoursArray=existingHoursArray_;
         self.clinician=clinician;
         self.trainingProgram=trainingProgramGiven;
         
-        NSLog(@"month to display is %@",self.monthToDisplay);
         self.monthStartDate=[self monthStartDateForDate:date];
         self.monthEndDate=[self monthEndDate:date];
         
@@ -84,10 +83,10 @@ existingHoursHoursArray=existingHoursArray_;
     
     NSTimeInterval totalTime=0;
     if (totalTimesArray&&totalTimesArray.count) {
-        NSLog(@"total times array is %@",totalTimesArray);
+       
         
         for (id totalTimeDateObject in totalTimesArray) {
-            NSLog(@"time is %@",totalTimeDateObject);
+            
             NSDate *dateToAdd=nil;
             if ([totalTimeDateObject isKindOfClass:[NSSet class]]) {
                 NSSet *totalSet=(NSSet *)totalTimeDateObject;
@@ -98,7 +97,7 @@ existingHoursHoursArray=existingHoursArray_;
             }else if ([totalTimeDateObject isKindOfClass:[NSDate class]]) {
                 dateToAdd=totalTimeDateObject;
                 
-                NSLog(@"total time is to be added is %e",[totalTimeDateObject timeIntervalSince1970]);
+               
 
             }
             
@@ -107,8 +106,6 @@ existingHoursHoursArray=existingHoursArray_;
             if (dateToAdd&&[dateToAdd isKindOfClass:[NSDate class]]) {
                 
                 totalTime=totalTime+[totalTimeDateObject timeIntervalSince1970];
-                NSLog(@"time is %@",totalTimeDateObject);
-                NSLog(@"total time is to be added is %e",[totalTimeDateObject timeIntervalSince1970]);
                 
             }
         }
@@ -157,7 +154,7 @@ existingHoursHoursArray=existingHoursArray_;
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
     [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-    NSLog(@"date in monht is d %@",self.monthToDisplay);
+    
     NSDateComponents *startDateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |NSWeekCalendarUnit|NSDayCalendarUnit) fromDate:self.monthToDisplay];
     
     //create week
@@ -172,17 +169,12 @@ existingHoursHoursArray=existingHoursArray_;
     week2StartDateComponents.month=0;
     week2StartDateComponents.year=0;
     
-    NSLog(@"week is %i",startDateComponents.week);
-    NSLog(@"week 2 startdate cfrom compnents %@",[calendar dateByAddingComponents:week2StartDateComponents toDate:[calendar dateFromComponents:startDateComponents] options:0]);
     
     
     //create a date with these components
     NSRange rangeWeek = [calendar rangeOfUnit:NSDayCalendarUnit
                                        inUnit:NSWeekCalendarUnit
                                       forDate:[calendar dateByAddingComponents:week2StartDateComponents toDate:[calendar dateFromComponents:startDateComponents] options:0]];
-    NSLog(@"range week day %d", rangeWeek.location);
-    
-    NSLog(@"range week end day %d",rangeWeek.location+rangeWeek.length-1);
     
     [startDateComponents setDay:rangeWeek.location]; //reset the other components
     
@@ -202,7 +194,7 @@ existingHoursHoursArray=existingHoursArray_;
     NSCalendar *calendar = [NSCalendar currentCalendar];
     
     [calendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-    NSLog(@"date in monht is d %@",self.monthToDisplay);
+    
     NSDateComponents *startDateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |NSWeekCalendarUnit|NSDayCalendarUnit) fromDate:self.monthToDisplay];
     
     //create week
@@ -217,28 +209,22 @@ existingHoursHoursArray=existingHoursArray_;
     week2StartDateComponents.month=0;
     week2StartDateComponents.year=0;
     
-    NSLog(@"week is %i",startDateComponents.week);
-    NSLog(@"week 2 startdate cfrom compnents %@",[calendar dateByAddingComponents:week2StartDateComponents toDate:[calendar dateFromComponents:startDateComponents] options:0]);
-    
+   
     
     //create a date with these components
     NSRange rangeWeek = [calendar rangeOfUnit:NSDayCalendarUnit
                                        inUnit:NSWeekCalendarUnit
                                       forDate:[calendar dateByAddingComponents:week2StartDateComponents toDate:[calendar dateFromComponents:startDateComponents] options:0]];
-    NSLog(@"range week day %d", rangeWeek.location);
-    
-    NSLog(@"range week end day %d",rangeWeek.location+rangeWeek.length-1);
-    
+   
     [startDateComponents setDay:rangeWeek.location]; //reset the other components
     
     NSDate *startDate = [calendar dateFromComponents:startDateComponents]; 
     NSDateComponents *endDateComponents = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit |NSWeekCalendarUnit|NSDayCalendarUnit) fromDate:startDate];
     
     [endDateComponents setDay:rangeWeek.location+rangeWeek.length];
-    NSRange weekRange=[calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSWeekCalendarUnit forDate:self.monthToDisplay];
+   
     
-    
-    NSLog(@"week is %i",weekRange.length);
+   
     NSDate *endDate = [calendar dateFromComponents:endDateComponents];
     
     
@@ -611,9 +597,8 @@ existingHoursHoursArray=existingHoursArray_;
     
     if (totalTime) {
         int totalHours =totalTime/3600;
-        NSLog(@"total hours float is %i",totalHours);
+       
         int totalMinutes=round(((totalTime/3600) -totalHours)*60);
-        NSLog(@"total minutes is %i",totalMinutes);
         if (totalMinutes<10) {
             return [NSString stringWithFormat:@"%i:0%i",totalHours,totalMinutes];
         }

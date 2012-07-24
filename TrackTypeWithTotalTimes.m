@@ -85,10 +85,7 @@
         NSPredicate * predicateForExistingHoursEntities=[self predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth];
         
         
-        NSLog(@"predicate for existing hours entites is %@",predicateForExistingHoursEntities.predicateFormat);
-        NSLog(@"predicate for track entities is %@",predicateForTrackEntities.predicateFormat);
-        
-        
+               
         NSPredicate *predicateForTrackTrainingProgram=[self predicateForTrackTrainingProgram];
         NSPredicate *predicateForExistingHoursProgramCourse=[self predicateForExistingHoursProgramCourse];
         
@@ -119,8 +116,7 @@
                         
                     }
                     
-                    NSLog(@"intervention Delivered Array is %@",self.interventionsDeliveredArray);
-                    
+                   
                     NSArray *allExistingInterventionsArrayForType=nil;
                     if (interventionType.existingInterventions) {
                         allExistingInterventionsArrayForType=interventionType.existingInterventions.allObjects;
@@ -132,13 +128,12 @@
                     for (ExistingInterventionEntity *existingInterventionObject in allExistingInterventionsArrayForType) {
                         if (existingInterventionObject.existingHours &&[existingInterventionObject.existingHours isKindOfClass:[ExistingHoursEntity class]]) {
                             ExistingHoursEntity *existingHoursObject =( ExistingHoursEntity*)existingInterventionObject.existingHours;
-                            NSLog(@"existing hours obect is %@",existingHoursObject);
+                            
                             [existingHoursMutableArray addObject:existingHoursObject];
                         }
                     }
                     
-                    NSLog(@"all existing interventions before filter %@",allExistingInterventionsArrayForType);
-                   
+                  
                     
                     
                     
@@ -169,7 +164,6 @@
                     
                     
                     
-                    NSLog(@"all interventions deliverd before filter%@",allInterventionsDeliveredForSubType);
                     if (allInterventionsDeliveredForSubType &&allInterventionsDeliveredForSubType.count &&predicateForTrackEntities) {
                         
                         
@@ -182,7 +176,6 @@
                         
                         
                     }
-                    NSLog(@"intervention Delivered Array is %@",self.interventionsDeliveredArray);
                     
                     
                     NSArray *allExistingInterventionsArrayForSubType=nil;
@@ -196,7 +189,7 @@
                     for (ExistingInterventionEntity *existingInterventionObject in allExistingInterventionsArrayForSubType) {
                         if (existingInterventionObject.existingHours &&[existingInterventionObject.existingHours isKindOfClass:[ExistingHoursEntity class]]) {
                             ExistingHoursEntity *existingHoursObject =( ExistingHoursEntity*)existingInterventionObject.existingHours;
-                            NSLog(@"existing hours obect is %@",existingHoursObject);
+                            
                             [existingHoursMutableArray addObject:existingHoursObject];
                         }
                     }
@@ -251,7 +244,7 @@
                     for (ExistingAssessmentEntity *existingAssessmentObject in allExistingAssessmentsArrayForType) {
                         if (existingAssessmentObject.existingHours &&[existingAssessmentObject.existingHours isKindOfClass:[ExistingHoursEntity class]]) {
                             ExistingHoursEntity *existingHoursObject =( ExistingHoursEntity*)existingAssessmentObject.existingHours;
-                            NSLog(@"existing hours obect is %@",existingHoursObject);
+                           
                             [existingHoursMutableArray addObject:existingHoursObject];
                         }
                     }
@@ -295,7 +288,6 @@
                         
                     }
                     
-                    NSLog(@"intervention Delivered Array is %@",self.supportActivityDeliveredArray);
                     
                     NSArray *allExistingSupportActivitiesArrayForType=nil;
                     
@@ -310,7 +302,7 @@
                     for (ExistingAssessmentEntity *existingSupportActivityObject in allExistingSupportActivitiesArrayForType) {
                         if (existingSupportActivityObject.existingHours &&[existingSupportActivityObject.existingHours isKindOfClass:[ExistingHoursEntity class]]) {
                             ExistingHoursEntity *existingHoursObject =( ExistingHoursEntity*)existingSupportActivityObject.existingHours;
-                            NSLog(@"existing hours obect is %@",existingHoursObject);
+                            
                             [existingHoursMutableArray addObject:existingHoursObject];
                         }
                     }
@@ -351,8 +343,6 @@
                     }
                     
                     
-                    NSLog(@"intervention Delivered Array is %@",self.supportActivityDeliveredArray);
-                    
                     
                     
                     NSArray *allExistingSupervisionReceivedArrayForType=nil;
@@ -365,7 +355,6 @@
                     for (ExistingAssessmentEntity *existingSupervisionReceivedObject in allExistingSupervisionReceivedArrayForType) {
                         if (existingSupervisionReceivedObject.existingHours &&[existingSupervisionReceivedObject.existingHours isKindOfClass:[ExistingHoursEntity class]]) {
                             ExistingHoursEntity *existingHoursObject =( ExistingHoursEntity*)existingSupervisionReceivedObject.existingHours;
-                            NSLog(@"existing hours obect is %@",existingHoursObject);
                             [existingHoursMutableArray addObject:existingHoursObject];
                         }
                     }
@@ -412,7 +401,7 @@
                     }
                     
                     
-                    NSLog(@"intervention Delivered Array is %@",self.supportActivityDeliveredArray);
+                    
                     NSArray *allExistingSupervisionReceivedArrayForSubType=nil;
                     
                     if (supervisionSubType.existingSupervision) {
@@ -426,7 +415,7 @@
                     for (ExistingAssessmentEntity *existingSupervisionReceivedObject in allExistingSupervisionReceivedArrayForSubType) {
                         if (existingSupervisionReceivedObject.existingHours &&[existingSupervisionReceivedObject.existingHours isKindOfClass:[ExistingHoursEntity class]]) {
                             ExistingHoursEntity *existingHoursObject =( ExistingHoursEntity*)existingSupervisionReceivedObject.existingHours;
-                            NSLog(@"existing hours obect is %@",existingHoursObject);
+                           
                             [existingHoursMutableArray addObject:existingHoursObject];
                         }
                     }
@@ -626,10 +615,10 @@
     NSTimeInterval totalExistingSupervisionReceivedTI=0;
     
     NSArray *filteredExistingHoursArray=nil;
-    NSLog(@"existing hours array %@",existingHoursArray_);
+    
     if (existingHoursPredicate && existingHoursArray_ && existingHoursArray_.count) {
         filteredExistingHoursArray=[existingHoursArray_ filteredArrayUsingPredicate:existingHoursPredicate];
-        NSLog(@"existing hours array after filter is %@",filteredExistingHoursArray);        
+              
     }
     else {
         filteredExistingHoursArray=existingHoursArray_; //unfiltered
@@ -938,7 +927,7 @@
         case kTrackTypeInterventionSubType:
             trackDeliveredFilteredForCurrentMonth=[self.interventionsDeliveredArray filteredArrayUsingPredicate:trackPredicateForCurrentMonth];
             
-            NSLog(@"track typr filterd for current month %@",trackDeliveredFilteredForCurrentMonth);
+           
             break;
             
         case kTrackTypeAssessment:
@@ -998,7 +987,7 @@
             
         }
     }
-    NSLog(@"return string is %@",returnString);
+    
     
     NSArray *filteredExistingHoursArray=nil;
     if (self.existingHoursHoursArray &&self.existingHoursHoursArray.count) {
@@ -1016,7 +1005,6 @@
             case kTrackTypeAssessment:
                 
             {
-                NSLog(@"filtered existing hours array is %@",filteredExistingHoursArray);
                 
                 if (filteredExistingHoursArray&&filteredExistingHoursArray.count) {
                     existingTypeSet=[filteredExistingHoursArray mutableSetValueForKeyPath:@"assessments.monthlyLogNotes"];
@@ -1044,10 +1032,8 @@
         }
         
         
-        NSLog(@"monthly log notes array %@",existingTypeArray);
-        
+       
         existingTypeArray=existingTypeSet.allObjects;
-        NSLog(@"existing type array %@",existingTypeArray);
         NSString *logNotesStr=nil;
         for ( id logNotesID in existingTypeArray){
             
@@ -1091,7 +1077,7 @@
                 
             }
             
-            NSLog(@"return String %@",returnString);
+           
             
             
         }

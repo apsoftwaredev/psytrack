@@ -20,8 +20,6 @@
 @property (nonatomic, retain) NSSet *subTypes;
 @property (nonatomic, retain) NSSet *existingInterventions;
 
--(NSString *)monthlyLogNotesForMonth:(NSDate *)dateInMonth clinician:(ClinicianEntity *)clinician;
-
 
 
 @end

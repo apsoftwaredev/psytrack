@@ -27,8 +27,7 @@
 @implementation PDFRenderer
 
 
-+(void)drawPDF:(NSString*)fileName month:(NSDate *)monthToDisplay trainingProgram:(TrainingProgramEntity *)trainingProgramGiven
-{
++(void)drawPDF:(NSString*)fileName month:(NSDate *)monthToDisplay trainingProgram:(TrainingProgramEntity *)trainingProgramGiven password:(NSString *) filePassword amended:(BOOL)markAmended{
 // Create the PDF context using the default page size of 612 x 792.
 //UIGraphicsBeginPDFContextToFile(fileName, CGRectZero, nil);
 //// Mark the beginning of a new page.
@@ -44,7 +43,7 @@
    
     
     
-    MonthlyPracticumLogTableViewController *monthlyPracticumLogTVC=[[MonthlyPracticumLogTableViewController alloc]initWithNibName:(NSString *)@"MonthlyPracticumLogTableViewController" bundle:(NSBundle *)[NSBundle mainBundle] monthToDisplay:monthToDisplay trainingProgram:trainingProgramGiven];
+    MonthlyPracticumLogTableViewController *monthlyPracticumLogTVC=[[MonthlyPracticumLogTableViewController alloc]initWithNibName:(NSString *)@"MonthlyPracticumLogTableViewController" bundle:(NSBundle *)[NSBundle mainBundle] monthToDisplay:monthToDisplay trainingProgram:trainingProgramGiven markAmended:markAmended];
     
    
     [monthlyPracticumLogTVC loadView];
@@ -52,7 +51,7 @@
    
     // Points the pdf converter to the mutable data object and to the UIView to be converted
   
-    [self createPDFfromUIView:monthlyPracticumLogTVC.view saveToDocumentsWithFileName:fileName  viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTVC];
+    [self createPDFfromUIView:monthlyPracticumLogTVC.view saveToDocumentsWithFileName:fileName  viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTVC password:filePassword];
 
 
 // Close the PDF context and write the contents out.
@@ -114,6 +113,65 @@
 
 
 }
+
+
++(void)addNumberOfPagesToFileAtFilePath:(NSString *)filePath newFileName:(NSString *)newFileName{
+    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    
+    NSString *newFilePath = [[appDelegate applicationDocumentsDirectoryString]stringByAppendingPathComponent:newFileName];
+
+    
+    //create empty pdf file;
+    UIGraphicsBeginPDFContextToFile(newFilePath, CGRectMake(0, 0, DOC_WIDTH, DOC_HEIGHT), nil);
+    
+    CFURLRef url = CFURLCreateWithFileSystemPath (NULL, (__bridge CFStringRef)filePath, kCFURLPOSIXPathStyle, 0);
+
+    //open template file
+    CGPDFDocumentRef templateDocument = CGPDFDocumentCreateWithURL(url);
+    CFRelease(url);
+    
+    //get amount of pages in template
+    size_t count = CGPDFDocumentGetNumberOfPages(templateDocument);
+    
+    //for each page in template
+    for (size_t pageNumber = 1; pageNumber <= count; pageNumber++) {
+        //get bounds of template page
+        CGPDFPageRef templatePage = CGPDFDocumentGetPage(templateDocument, pageNumber);
+        CGRect templatePageBounds = CGPDFPageGetBoxRect(templatePage, kCGPDFCropBox);
+        
+        //create empty page with corresponding bounds in new document
+        UIGraphicsBeginPDFPageWithInfo(templatePageBounds, nil);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        //flip context due to different origins
+        CGContextTranslateCTM(context, 0.0, templatePageBounds.size.height);
+        CGContextScaleCTM(context, 0.73, -0.73);
+        
+        //copy content of template page on the corresponding page in new file
+        CGContextDrawPDFPage(context, templatePage);
+        
+        //flip context back
+        CGContextTranslateCTM(context, 0.0, templatePageBounds.size.height);
+        CGContextScaleCTM(context, 0.73, -0.73);
+        
+        /* Here you can do any drawings */
+        [@"Test" drawAtPoint:CGPointMake(200, 300) withFont:[UIFont systemFontOfSize:20]];
+    }
+    CGPDFDocumentRelease(templateDocument);
+    UIGraphicsEndPDFContext();
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
 
 +(void)drawPDFOld:(NSString*)fileName
 {
@@ -370,13 +428,13 @@
     CFRelease(attrStr);
     CFRelease(framesetter);
 }
-+(void)drawPageNumber:(NSInteger )pageNum{
++(void)drawPageNumber:(NSInteger )pageNum totalPages:(NSInteger )totalPages{
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
     
     [dateFormatter setDateFormat:@"HH:mm M/d/yyyy"];
      
-     NSString *pageString=[NSString stringWithFormat:@"Page %d  (Generated %@)",pageNum,[dateFormatter stringFromDate:[NSDate date]]];
+     NSString *pageString=[NSString stringWithFormat:@"Page %d of %d (Generated %@) ",pageNum,totalPages,[dateFormatter stringFromDate:[NSDate date]]];
     UIFont *theFont =[UIFont systemFontOfSize:17];
     
     CGSize maxSize= CGSizeMake(1122, 132);
@@ -390,14 +448,27 @@
     
 }
 
-+(void)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTableViewController
++(void)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTableViewController  password:(NSString *) filePassword
 {
     // Creates a mutable data object for updating with binary data, like a byte array
     NSMutableData *pdfData = [NSMutableData data];
-  
-    // Points the pdf converter to the mutable data object and to the UIView to be converted
-    UIGraphicsBeginPDFContextToData(pdfData, aView.bounds, nil);
+    NSMutableDictionary *auxiliaryInfoDic=auxiliaryInfoDic=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"My PDF File",@"My Name",@"Monthly Clinical Practicum Log",nil] forKeys:[NSArray arrayWithObjects:(__bridge NSString *) kCGPDFContextTitle,(__bridge NSString *)kCGPDFContextCreator,(__bridge NSString *)kCGPDFContextSubject, nil]];
     
+    
+    if (filePassword &&filePassword.length) {
+        NSDictionary *passwordDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:filePassword,filePassword, nil] forKeys:[NSArray arrayWithObjects:(__bridge NSString *)kCGPDFContextUserPassword,(__bridge NSString *)kCGPDFContextOwnerPassword, nil]];
+        
+        
+        
+        [auxiliaryInfoDic addEntriesFromDictionary:passwordDic];
+    }
+   
+   
+    
+    // Points the pdf converter to the mutable data object and to the UIView to be converted
+
+    UIGraphicsBeginPDFContextToData(pdfData, aView.bounds,(NSDictionary *) auxiliaryInfoDic);
+
     
     NSLog(@"monthly practicum log modeledl top cell is  are %i",monthlyPracticumLogTableViewController.tableViewModel.sectionCount);
     SCArrayOfObjectsModel *objectsModel=(SCArrayOfObjectsModel *)monthlyPracticumLogTableViewController.tableViewModel;
@@ -449,7 +520,7 @@
                             NSLog(@"monthly clinical practicum log cell is %@",monthlyPracticumLogTopCell);
                            
                             
-                            [self drawPageNumber:currentPage];
+                          
                             
                             CGContextTranslateCTM(pdfContext,0, DOC_HEIGHT);
                             
@@ -496,8 +567,61 @@
     NSString* documentDirectory = [documentDirectories objectAtIndex:0];
     NSString* documentDirectoryFilename = [documentDirectory stringByAppendingPathComponent:aFilename];
     
+    
+    //begin
+    
+   
+    //create empty pdf file;
+    UIGraphicsBeginPDFContextToFile(documentDirectoryFilename, CGRectMake(0, 0, DOC_WIDTH, DOC_HEIGHT), auxiliaryInfoDic);
+    
+    CGDataProviderRef dataProvider=CGDataProviderCreateWithCFData((__bridge CFDataRef)pdfData);
+    //open template file
+    CGPDFDocumentRef templateDocument = CGPDFDocumentCreateWithProvider(dataProvider);
+  
+    
+    //get amount of pages in template
+    size_t count = CGPDFDocumentGetNumberOfPages(templateDocument);
+    
+    //for each page in template
+    for (size_t pageNumber = 1; pageNumber <= count; pageNumber++) {
+        //get bounds of template page
+        CGPDFPageRef templatePage = CGPDFDocumentGetPage(templateDocument, pageNumber);
+        CGRect templatePageBounds = CGPDFPageGetBoxRect(templatePage, kCGPDFCropBox);
+        
+        //create empty page with corresponding bounds in new document
+        UIGraphicsBeginPDFPageWithInfo(templatePageBounds, nil);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        //flip context due to different origins
+        CGContextTranslateCTM(context, 0.0, templatePageBounds.size.height);
+        CGContextScaleCTM(context, 1.0, -1.0);
+        
+        //copy content of template page on the corresponding page in new file
+        CGContextDrawPDFPage(context, templatePage);
+        
+        //flip context back
+        CGContextTranslateCTM(context, 0.0, templatePageBounds.size.height);
+        CGContextScaleCTM(context, 1.0, -1.0);
+        
+        /* Here you can do any drawings */
+    [self drawPageNumber:pageNumber totalPages:count];
+    }
+    CGPDFDocumentRelease(templateDocument);
+    UIGraphicsEndPDFContext();
+    
+    
+
+    
+    
+    
+    //end
+    
+    
+    
+    
+    
     // instructs the mutable data object to write its context to a file on disk
-    [pdfData writeToFile:documentDirectoryFilename atomically:YES];
+//    [pdfData writeToFile:documentDirectoryFilename atomically:YES];
     NSLog(@"documentDirectoryFileName: %@",documentDirectoryFilename);
 }
 

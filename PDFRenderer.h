@@ -13,7 +13,7 @@
 
 @interface PDFRenderer : NSObject 
 
-+(void)drawPDF:(NSString*)fileName month:(NSDate *)monthToDisplay trainingProgram:(TrainingProgramEntity *)trainingProgramGiven;
++(void)drawPDF:(NSString*)fileName month:(NSDate *)monthToDisplay trainingProgram:(TrainingProgramEntity *)trainingProgramGiven password:(NSString *) filePassword amended:(BOOL)markAmended;
 
 
 +(void)drawText;
@@ -46,5 +46,5 @@
 
 CGFloat GetLineHeightForFont(CTFontRef iFont);
 
-+(void)drawPageNumber:(NSInteger )pageNum;
++(void)drawPageNumber:(NSInteger )pageNum totalPages:(NSInteger)totalPages;
 @end

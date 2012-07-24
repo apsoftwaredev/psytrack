@@ -77,6 +77,6 @@ typedef enum {
 -(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trackTypeObject:(id)trackTypeObjectGiven trainingProgram:(TrainingProgramEntity *)trainingProgramGiven;
 
 -(void ) totalOverallHoursTIForOveralCell:(PTSummaryCell)summaryCell clinician:(ClinicianEntity *)clinician;
--(NSString *)relationshipPathStartToTrackEntity;
+
 
 @end

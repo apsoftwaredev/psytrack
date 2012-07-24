@@ -933,7 +933,7 @@
 
 			mailComposer.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 			mailComposer.modalPresentationStyle = UIModalPresentationFormSheet;
-
+            mailComposer.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor];
 			mailComposer.mailComposeDelegate = self; // Set the delegate
 
 			[self presentModalViewController:mailComposer animated:YES];

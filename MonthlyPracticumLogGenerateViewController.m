@@ -65,7 +65,7 @@
     [self setDatesAndYears];
 
   
-   
+    changedDefaultFileName=NO;
     
     
     
@@ -100,20 +100,18 @@
 	return YES;
 }
 
-
--(IBAction)generateButtonTapped:(id)sender{
-
+-(void)generateAndViewReportPDFWithFileName:(NSString *)fileName{
+    [self.view setNeedsDisplay];
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-	NSString *phrase = nil; // Document password (for unlocking most encrypted PDF files)
-    NSString *fileName=[[self sanitizeFileName:pdfFileNameTextField.text] stringByAppendingPathExtension:@"pdf"];
+    NSString *phrase = self.pdfPasswordTextField.text; // Document password (for unlocking most encrypted PDF files)
+   
 	NSString *pdfs = [appDelegate.applicationDocumentsDirectory.path stringByAppendingPathComponent:fileName];
-    NSLog(@"pdfs %@",pdfs);
+    
     TrainingProgramEntity *trainingProgram=nil;
     if (objectsModel.sectionCount) {
         SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:0];
-        NSLog(@"section class is %@",section.class);
-        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+               if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCSelectionSection *selectionSection=(SCSelectionSection *)section;
             if (![selectionSection.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
                 id objectAtSelectedIndex=[selectionSection.items objectAtIndex:[selectionSection.selectedItemIndex intValue]];
@@ -135,17 +133,17 @@
             
         }
     }
-else {
-    [appDelegate displayNotification:@"Add training programs under psyTrack interventions, assessments, existing hours, supervision, or existing hours tables"];
-    return;
-}
-NSLog(@"self.monthTodisplay is %@",self.monthToDisplay);
+    else {
+        [appDelegate displayNotification:@"Add training programs under psyTrack interventions, assessments, existing hours, supervision, or existing hours tables"];
+        return;
+    }
+   
     if (trainingProgram && self.monthToDisplay) {
         
         [NSThread detachNewThreadSelector:@selector(startAnimatingProgressInBackground) toTarget:prog withObject:prog];
         [self.view setNeedsDisplay];
-    
-        [PDFRenderer drawPDF:fileName month:self.monthToDisplay trainingProgram:trainingProgram];
+        
+        [PDFRenderer drawPDF:fileName month:self.monthToDisplay trainingProgram:trainingProgram password:phrase amended:self.amendedLogSwitch.on];
         
         NSString *filePath = pdfs  ;// Path to last PDF file
         
@@ -172,25 +170,106 @@ NSLog(@"self.monthTodisplay is %@",self.monthToDisplay);
             
             // Release the ReaderViewController
         }
-
+        
+    }
+    
+    else if (!self.monthToDisplay){
+        if(!numberOfYearsSinceFirstDatePlusTen){
+            [appDelegate displayNotification:@"No records to diplay"];
+            
+        }
+        else {
+            [appDelegate displayNotification:@"Please select a month and year"];
+        }
+        
+        
     }
 
-else if (!self.monthToDisplay){
-    if(!numberOfYearsSinceFirstDatePlusTen){
-        [appDelegate displayNotification:@"No records to diplay"];
+
+
+
+}
+-(IBAction)generateButtonTapped:(id)sender{
+
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
+	
+    NSString *fileName=[self sanitizeFileName:pdfFileNameTextField.text];
+	NSString *pdfs = [appDelegate.applicationDocumentsDirectory.path stringByAppendingPathComponent:fileName];
+    
+    if ([self fileAlreadyExists:pdfs]) {
+        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"File %@ Already Exists in Documents Folder",fileName]  message:@"Would you like to overwrite the existing file?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes",@"No, incriment", nil];
+        
+        alertView.tag=50;
+        
+        [alertView show];
+        
     }
     else {
-        [appDelegate displayNotification:@"Please select a month and year"];
+        [self generateAndViewReportPDFWithFileName:[fileName stringByAppendingPathExtension:@"pdf"]];
     }
+    
         
     
 }
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     
+
+    if (alertView.tag==50) {
+        NSString *fileName=[self sanitizeFileName:pdfFileNameTextField.text];
+            
+        switch (buttonIndex) {
     
+                   
+                case 1: // overwrite
+                {
+                    // do the delete
+                    
+                   
+                    
+                   
+                    [self generateAndViewReportPDFWithFileName:fileName];
+                    
+                    
+                    break;
+                }
+                    
+                case 2: // increment
+                {
+                    // do the delete
+                    
+                    NSString *newFileName=[self incrementedFileName:fileName];
+                    [self generateAndViewReportPDFWithFileName:newFileName];
+                   
+                }
+                    break;
+            }
+                
+           
+    }      
+            
+        
+    
+
+
+
 }
+-(IBAction)amendedLogSwitchChangedOn:(id)sender{
+    
+    if (!changedDefaultFileName) {
+   
+        NSString *fileNameText=self.pdfFileNameTextField.text;
+        if (self.amendedLogSwitch.on) {
+            self.pdfFileNameTextField.text=[NSString stringWithFormat:@"Amended%@",fileNameText];
+        }
+        else {
+            self.pdfFileNameTextField.text=[fileNameText stringByReplacingOccurrencesOfString:@"Amended" withString:@""];
+        }
 
+    }
 
+}
 -(NSString *)sanitizeFileName:(NSString *)fileName{
     NSString *scrubbed =nil;
     
@@ -198,19 +277,73 @@ else if (!self.monthToDisplay){
         NSCharacterSet *invalidFsChars = [NSCharacterSet characterSetWithCharactersInString:@"/\\?%*|\"<>"];
         scrubbed = [fileName stringByTrimmingCharactersInSet:invalidFsChars];
         
-        if (scrubbed.length>20) {
+        if (scrubbed.length>35) {
                 
-            scrubbed=[scrubbed substringToIndex:19];
+            scrubbed=[scrubbed substringToIndex:34];
         }
         
     }
    
     if (!scrubbed ||!scrubbed.length) {
-        int practicumLogNumber=[[[NSUserDefaults standardUserDefaults]valueForKey:kPTMonthlyPracticumLogNumber]intValue];
-        scrubbed=[NSString stringWithFormat:@"monthlyPracticumLog%i",practicumLogNumber];
+       
+        
+        NSString *monthStr=[self titleForRow:[self.myPickerView selectedRowInComponent:0]]; 
+        NSString *yearStr=[NSString stringWithFormat:@"%i",firstYear+[self.myPickerView selectedRowInComponent:1]];
+        
+        
+        scrubbed=[NSString stringWithFormat:@"%@%@%@PracticumLog",self.amendedLogSwitch.on?@"Amended":@"",monthStr,yearStr];
+        self.pdfFileNameTextField.text=scrubbed;
+
+        
     }
 
     return scrubbed;
+
+}
+
+-(BOOL)fileAlreadyExists:(NSString *)fileName{
+
+        
+    NSFileManager *fileManager=[[NSFileManager alloc]init];
+    
+       
+    return [fileManager fileExistsAtPath:[fileName stringByAppendingPathExtension:@"pdf"]];    
+    
+
+
+
+
+}
+-(NSString *)incrementedFileName:(NSString *)fileNameGiven{
+
+    
+    
+    NSFileManager *fileManager=[[NSFileManager alloc]init];
+    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    NSString *documentsPath=[appDelegate applicationDocumentsDirectory].path;
+    
+    NSString *newFileName=[fileNameGiven stringByAppendingPathExtension:@"pdf"];
+    
+    NSString *documentsPathWithNewFileName=[documentsPath stringByAppendingPathComponent:newFileName];
+    
+
+
+    NSInteger i=0;
+    do {
+        i++;
+        
+        newFileName=[fileNameGiven stringByAppendingFormat:@"%i.pdf",i];
+        documentsPathWithNewFileName=[documentsPath stringByAppendingPathComponent:newFileName];
+        
+        
+        
+    } while ( [fileManager fileExistsAtPath:documentsPathWithNewFileName]);
+    
+
+
+    return newFileName;
 
 }
 
@@ -247,6 +380,14 @@ else if (!self.monthToDisplay){
 
 }
 
+-(void)tableViewModelDidPullToRefresh:(SCTableViewModel *)tableModel{
+    changedDefaultFileName=NO;
+
+    [self setDatesAndYears];
+    [self.myPickerView reloadAllComponents];
+    
+    
+}
 
 #pragma mark -
 #pragma mark ReaderViewController Delegate Methods
@@ -288,17 +429,24 @@ else if (!self.monthToDisplay){
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
 
+    
     if (textField.tag==23) {
         [self setMyPickerViewToCurrentMonthAndYear];
         if (self.monthToDisplay) {
-            self.monthYearFieldOverMonthYearField.text=[NSString stringWithFormat:@"%@ %i",[self titleForRow:currentMonth-1],currentYear];
+            NSString *monthStr=[self titleForRow:currentMonth-1]; 
+            self.monthYearFieldOverMonthYearField.text=[NSString stringWithFormat:@"%@ %i",monthStr,currentYear];
+           
+            if (!changedDefaultFileName) {
+                self.pdfFileNameTextField.text=[NSString stringWithFormat:@"%@%@%iPracticumLog",self.amendedLogSwitch.on?@"Amended":@"",monthStr,currentYear];
+            }
+            
         }
-else {
-    self.monthYearFieldOverMonthYearField.text=@"No records to display";
-}
+        else {
+            self.monthYearFieldOverMonthYearField.text=@"No records to display";
+        }
         
     }
-    if (textField.tag==24) {
+    else if (textField.tag==24) {
         [textField resignFirstResponder];
         [monthTextField becomeFirstResponder];
         return NO;
@@ -309,6 +457,14 @@ else {
     return YES;
 }
 
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+
+    changedDefaultFileName=YES;
+    return YES;
+
+
+}
 -(IBAction)doneButtonOnPickerConatainerTapped:(id)sender{
 
 
@@ -532,10 +688,17 @@ if([yearLabelView isKindOfClass:[UILabel class]]){
         monthYearStr=[monthYearStr stringByAppendingFormat:@" %@", rowLabel.text];
         
         self.monthYearFieldOverMonthYearField.text=monthYearStr;
+        
+        NSString *monthYearStrWithoutSpace=[monthYearStr stringByReplacingOccurrencesOfString:@" " withString:@""]; 
+        
+        if (!changedDefaultFileName) {
+            self.pdfFileNameTextField.text=[NSString stringWithFormat:@"%@%@PracticumLog",self.amendedLogSwitch.on?@"Amended":@"",monthYearStrWithoutSpace];
+        }
+
     }
     
 }
-
+    [self setMonthtoDisplayToPickerSelection];
 
 
 }
@@ -587,8 +750,6 @@ if([yearLabelView isKindOfClass:[UILabel class]]){
     }
    
     
-NSLog(@"month to display is %@",self.monthToDisplay);
-
 
 }
 -(void)setDatesAndYears{
@@ -596,19 +757,15 @@ NSLog(@"month to display is %@",self.monthToDisplay);
 
     
     earliestDate=[self firstDateInTrackOrExisting];
-    NSLog(@"earliest date %@",earliestDate);
+   
     if (earliestDate) {
    
     firstYear=[self yearIntegerFromDate:earliestDate];
-    NSLog(@"first Year is %i",firstYear);
-    firstMonth=[self monthIntegerFromDate:earliestDate];
-    NSLog(@"first month is %i",firstMonth);
-    currentYear=[self yearIntegerForCurrentDate];
-    NSLog(@"current year is %i",currentYear);
-    currentMonth=[self monthIntegerFromDate:[NSDate date]];
-    NSLog(@"current Month is %i",currentMonth);
     
-    NSLog(@"newest year is %i",newestYear);
+    firstMonth=[self monthIntegerFromDate:earliestDate];
+    currentYear=[self yearIntegerForCurrentDate];
+    
+    currentMonth=[self monthIntegerFromDate:[NSDate date]];
     
     if ([earliestDate compare:[NSDate date]]==NSOrderedDescending) {
         currentYear=firstYear;
@@ -636,9 +793,15 @@ NSLog(@"month to display is %@",self.monthToDisplay);
     
     NSString *monthString=[self titleForRow:currentMonth-1];
     NSString *monthYearString=[NSString stringWithFormat:@"%@ %i",monthString,currentYear];
-    NSLog(@"self month to display is %@",self.monthToDisplay);
+   
     if (firstYear) {
         self.monthYearFieldOverMonthYearField.text=monthYearString;
+        NSString *monthYearStrWithoutSpace=[monthYearString stringByReplacingOccurrencesOfString:@" " withString:@""]; 
+        
+        if (!changedDefaultFileName) {
+            self.pdfFileNameTextField.text=[NSString stringWithFormat:@"%@%@PracticumLog",self.amendedLogSwitch.on?@"Amended":@"",monthYearStrWithoutSpace];
+        }
+        
     }
     else
     {
@@ -649,13 +812,7 @@ NSLog(@"month to display is %@",self.monthToDisplay);
 
 }
 
--(void)tableViewModelDidPullToRefresh:(SCTableViewModel *)tableModel{
-    
-    [self setDatesAndYears];
-    [self.myPickerView reloadAllComponents];
-    
-    
-}
+
 -(NSDate *)firstDateInTrackOrExisting{
 
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -677,7 +834,7 @@ NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:
 if (fetchedObjects == nil) {
     // Handle the error
 }
-NSLog(@"fetched objects %@",fetchedObjects);
+
     NSDate *trackFirstDateOfService=nil;
    
     NSDate *trackNewestDate=nil;
@@ -709,7 +866,7 @@ NSLog(@"fetched objects %@",fetchedObjects);
     if (fetchedObjects == nil) {
         // Handle the error
     }
-    NSLog(@"fetched objects %@",existingHoursFetchedObjects);
+   
     NSDate *existingHoursFirstDate=nil;
     NSDate *existingHoursNewestDate=nil;
     if (existingHoursFetchedObjects && existingHoursFetchedObjects.count) {

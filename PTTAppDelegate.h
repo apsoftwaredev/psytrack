@@ -182,6 +182,7 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
 -(NSData *)convertStringToData:(NSString *)string;
 -(NSData *)getSharedSymetricData;
 - (NSURL *)applicationDocumentsDirectory;
+- (NSURL *)applicationCachesDirectory;
 -(NSString *)generateExposedKey;
 //-(IBAction)resaveLockDictionarySettings:(id)sender;
 @property (nonatomic,assign)BOOL okayToDecryptBool;

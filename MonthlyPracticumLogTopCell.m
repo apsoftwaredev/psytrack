@@ -9,7 +9,7 @@
 #import "MonthlyPracticumLogTopCell.h"
 
 #import "PTTAppDelegate.h"
-#import "MonthlyPracticumLogMiddleSubCell.h"
+
 #import "InterventionTypeSubtypeEntity.h"
 #import "MonthlyPracticumLogBottonCell.h"
 #import "InterventionTypeEntity.h"
@@ -23,6 +23,7 @@
 #import "SupervisorsAndTotalTimesForMonth.h"
 #import "SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h"
 #import "UILabel_VerticalAlignmentExtention.h"
+#import "SiteEntity.h"
 @interface MonthlyPracticumLogTopCell ()
 
 @end
@@ -125,8 +126,10 @@
 @synthesize supervisorSummaryContainerView;
 @synthesize containerForSignaturesAndSupervisorSummaries;
 @synthesize trainingProgram;
-
-static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1040;
+@synthesize studentSignatureLabelUnderLine,practicumSupervisorSignatureLabelUnderLine,monthlyPracticumLogTitleLabel;
+@synthesize siteNameUnderline;
+@synthesize schoolNameLabel;
+static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
 
 -(void)willDisplay{
   
@@ -148,7 +151,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1040;
     CGFloat shiftIndirectHoursHeaderDown=0;
     CGFloat shiftOverallHoursFooterDown=0;
     CGFloat shiftContainerForSignaturesViewAndSupervisorSummariesDownTo=0;
-    
+   
     CGFloat interventionMoreNeededHeight=interventionTVHeight- self.interventionTypesTableView.frame.size.height;
     CGFloat assessmentMoreNeededHeight=assessmentTVHeight-self.assessmentTypesTableView.frame.size.height;
     CGFloat supportMoreNeededHeight=supportTVHeight-self.supportActivitieTypesTableView.frame.size.height;
@@ -156,6 +159,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1040;
     
     CGRect indirectHoursHeaderFrame=self.indirectHoursHeader.frame;
     
+    CGRect interventionsFrame=self.interventionTypesTableView.frame;
     CGRect assessmentsFrame=self.assessmentTypesTableView.frame;
     CGRect supportFrame=self.supportActivitieTypesTableView.frame;
      CGRect supervisionFrame=self.supervisionReceivedTypesTableView.frame;
@@ -231,6 +235,15 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1040;
     assessmentsFrame.size.height=assessmentTVHeight;
     self.assessmentTypesTableView.frame=assessmentsFrame;
     
+    
+    self.interventionTypesTableView.transform=CGAffineTransformIdentity;
+    
+    
+    interventionsFrame.size.height=interventionTVHeight;
+    self.interventionTypesTableView.frame=interventionsFrame;
+    
+    
+    
     self.directHoursFooter.transform=CGAffineTransformIdentity;
     CGRect directHoursFooterFrame=self.directHoursFooter.frame;
    
@@ -276,7 +289,6 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1040;
     CGRect mainPageScrollViewFrame=self.mainPageScrollView.frame;
     mainPageScrollViewFrame.size.height=changeScrollHeightTo;
     self.mainPageScrollView.frame=mainPageScrollViewFrame;
-    NSLog(@"mainpagescrollview frame size height is %f",mainPageScrollViewFrame.size.height);
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -289,11 +301,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1040;
 
 UIScrollView *mainScrollView=self.mainPageScrollView;
            
-NSLog(@"current offset %f",currentOffsetY);
-    
   
-    NSLog(@"signatures view fram e origin y %g",signaturesView.frame.origin.y+self.signaturesView.frame.size.height);
-    
   
     if ((self.containerForSignaturesAndSupervisorSummaries.frame.origin.y+self.containerForSignaturesAndSupervisorSummaries.frame.size.height)<=(MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY)) {
         
@@ -308,10 +316,24 @@ NSLog(@"current offset %f",currentOffsetY);
     } else {
         
         CGRect mainScrollViewFrame=self.mainPageScrollView.frame;
-        if (mainScrollViewFrame.size.height <MAX_MAIN_SCROLLVIEW_HEIGHT) {
+        
+        if (mainScrollViewFrame.size.height <currentOffsetY+ MAX_MAIN_SCROLLVIEW_HEIGHT) {
+            CGFloat mainScrollVieFrameHeightPlusY=MAX_MAIN_SCROLLVIEW_HEIGHT-self.mainPageScrollView.frame.size.height;
             mainScrollViewFrame.size.height=MAX_MAIN_SCROLLVIEW_HEIGHT;
             self.mainPageScrollView.frame=mainScrollViewFrame;
-            currentOffsetY=currentOffsetY+ self.indirectHoursHeader.frame.origin.y;
+           
+            
+            
+            if (self.assessmentTypesTableView.frame.size.height+self.assessmentTypesTableView.frame.origin.y>MAX_MAIN_SCROLLVIEW_HEIGHT||self.interventionTypesTableView.frame.size.height+self.interventionTypesTableView.frame.origin.y>MAX_MAIN_SCROLLVIEW_HEIGHT) {
+                currentOffsetY=currentOffsetY+MAX_MAIN_SCROLLVIEW_HEIGHT-mainScrollVieFrameHeightPlusY;
+            }
+            else if ((self.directHoursFooter.frame.origin.y+self.directHoursFooter.frame.size.height>MAX_MAIN_SCROLLVIEW_HEIGHT)&&self.interventionTypesTableView.frame.size.height+self.interventionTypesTableView.frame.origin.y<=MAX_MAIN_SCROLLVIEW_HEIGHT) {
+                currentOffsetY=currentOffsetY+ self.directHoursFooter.frame.origin.y;
+            }
+            else {
+                currentOffsetY=currentOffsetY+ self.indirectHoursHeader.frame.origin.y;
+            }
+            
             [self.mainPageScrollView setContentOffset:CGPointMake(0, currentOffsetY )];
             
            
@@ -387,11 +409,19 @@ NSLog(@"current offset %f",currentOffsetY);
     
     SupervisorsAndTotalTimesForMonth *totalsObject=(SupervisorsAndTotalTimesForMonth *)self.boundObject;
     
-    NSLog(@"training program is %@",totalsObject.trainingProgram);
+   
     self.trainingProgram=totalsObject.trainingProgram;
   
-    self.programLabel.text=[NSString stringWithFormat:@"%@ - %@",  self.trainingProgram.trainingProgram, self.trainingProgram.course];;
-    self.supervisorLabel.text=totalsObject.cliniciansStr;
+    self.programLabel.text=[NSString stringWithFormat:@"%@ - %@",  self.trainingProgram.trainingProgram, self.trainingProgram.course];
+   
+    NSString *cliniciansStr=totalsObject.cliniciansStr;
+    if (cliniciansStr&&cliniciansStr.length) {
+        self.supervisorLabel.text=cliniciansStr;
+    }
+    else {
+        [self setSupervisorNameToDefault];
+    }
+    
     numberOfSupervisors=totalsObject.clinicians.count;
     
     if (numberOfSupervisors>1) {
@@ -409,19 +439,51 @@ NSLog(@"current offset %f",currentOffsetY);
     
     self.monthToDisplay=totalsObject.monthToDisplay;    
     
-    NSLog(@"self month to display is %@",self.monthToDisplay);
-    NSLog(@"toplogcell bound object is %@",self.boundObject);
-   
-       
+          
     
     if (totalsObject.numberOfSites>1) {
         self.siteNameLabelBeforeColon.text=@"Practicum Site Names:";
     }
-    self.practicumSiteNameLabel.text=totalsObject.practicumSiteNamesStr;
+    else {
+        CGRect siteNameUnderlineFrame=self.siteNameUnderline.frame;
+        
+        siteNameUnderlineFrame.origin.y=siteNameUnderlineFrame.origin.y-7;
+        self.siteNameUnderline.frame=siteNameUnderlineFrame;
+        
+        CGRect practicumSiteNameLabelFrame=self.practicumSiteNameLabel.frame;
+        
+        practicumSiteNameLabelFrame.origin.y=practicumSiteNameLabelFrame.origin.y-10;
+        self.practicumSiteNameLabel.frame=practicumSiteNameLabelFrame;
+        
+        
+    }
+    NSString *practicumSiteNameStr=totalsObject.practicumSiteNamesStr;
+    
+    if (practicumSiteNameStr &&practicumSiteNameStr.length) {
+         self.practicumSiteNameLabel.text=totalsObject.practicumSiteNamesStr;
+    }
+    else {
+        [self setSiteNameToDefault];
+    }
+   
     [self.practicumSiteNameLabel alignBottom];
     self.studentNameLabel.text=totalsObject.studentNameStr;
+    self.schoolNameLabel.text=totalsObject.schoolNameStr;
 //
 //    
+    self.studentSignatureLabelUnderLine.text=[NSString stringWithFormat:@"%@ (Student)", totalsObject.studentNameStr];
+    
+    self.practicumSupervisorSignatureLabelUnderLine.text=totalsObject.practicumSeminarInstructtor;
+    
+    if (!totalsObject.markAmended) {
+        self.monthlyPracticumLogTitleLabel.text=[NSString stringWithFormat:@"Monthly Clinical Practicum Log for %@",totalsObject.monthAndYearsInParentheses];
+    }
+    else {
+        self.monthlyPracticumLogTitleLabel.text=[NSString stringWithFormat:@"Amended Monthly Clinical Practicum Log for %@",totalsObject.monthAndYearsInParentheses];
+    }
+    
+    
+    
     self.interventionObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.interventionTypesTableView];
     
     interventionObjectsModel_.delegate=self;
@@ -450,7 +512,6 @@ NSLog(@"current offset %f",currentOffsetY);
         }
         
        
-        NSLog(@"subtypes array is %@",subTypesArray);
         
         NSSortDescriptor *firstDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order"
                                                                          ascending:YES] ;
@@ -462,17 +523,14 @@ NSLog(@"current offset %f",currentOffsetY);
         NSMutableArray *subTypeWithTotalsItemsArray=[NSMutableArray array];
         
         
-        NSLog(@"month to display %@",self.monthToDisplay);
+     
         for (InterventionTypeSubtypeEntity *interventionSubTypeObject in orderdSubTypeArray ) {
-            TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:[totalsObject.clinicians objectAtIndex:0] trackTypeObject:interventionSubTypeObject trainingProgram:self.trainingProgram];
+            TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:interventionSubTypeObject trainingProgram:self.trainingProgram];
             
-            NSLog(@"tracktype with total times object %@",interventionTypeWithTotalTimes.totalForMonthStr);
-            NSLog(@"track type with total times text is %@",interventionTypeWithTotalTimes.typeLabelText);
             [subTypeWithTotalsItemsArray addObject:trackTypeWithTotalTimeObject];
             
         }
-        NSLog(@"subytpe total items array is %@",subTypeWithTotalsItemsArray);
-        
+       
         
         SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *interventionsSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:interventionType.interventionType footerNotes:interventionTypeWithTotalTimes.monthlyLogNotes sectionTotalStr: interventionTypeWithTotalTimes.totalToDateStr items:subTypeWithTotalsItemsArray itemsDefinition:typesDef];
         
@@ -487,7 +545,7 @@ NSLog(@"current offset %f",currentOffsetY);
         {
             // Create & return a custom cell based on the cell in ContactOverviewCell.xib
             
-            NSLog(@"month to display is %@",self.monthToDisplay);
+            
 //            NSString *bindingsString = @"20:interventionSubType;21:self.monthToDisplay"; // 1,2,3 are the control tags
             
             NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"interventionSubType",totalsObject.monthToDisplay, nil] forKeys:[NSArray arrayWithObjects:@"20",@"21", nil]];
@@ -519,7 +577,7 @@ NSLog(@"current offset %f",currentOffsetY);
     
     for (AssessmentTypeEntity *assessmentType in fetchedAssessmentObjects) {
         
-        TrackTypeWithTotalTimes *assessmentTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:totalsObject.monthToDisplay clinician:[totalsObject.clinicians objectAtIndex:0] trackTypeObject:assessmentType trainingProgram:self.trainingProgram];
+        TrackTypeWithTotalTimes *assessmentTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:totalsObject.monthToDisplay clinician:self.clinician trackTypeObject:assessmentType trainingProgram:self.trainingProgram];
         
         
         
@@ -535,34 +593,25 @@ NSLog(@"current offset %f",currentOffsetY);
      
         
         
-        NSLog(@"month to display %@",self.monthToDisplay);
-     
-            NSLog(@"assessmentytypes with total times array is %@",assessmentTypesWithTotalsItemsArray);
-                  
+                 
         SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *assessmentObjectsSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:nil footerNotes:totalsObject.assessmentMonthlyNotes sectionTotalStr:nil items:assessmentTypesWithTotalsItemsArray itemsDefinition:typesDef];
         
         //        NSString *monthlyLogNotes=[interventionType monthlyLogNotesForMonth:self.monthToDisplay clinician:self.clinician];
         
-        NSLog(@"assessment objects section is %@",assessmentObjectsSection);
-        
        
-        NSLog(@"assessment objects section items are %@",assessmentObjectsSection.items);
-        
         assessmentObjectsSection.dataFetchOptions=dataFetchOptions;
         
-        NSLog(@"assessment objects section items again are %@",assessmentObjectsSection.items);
         assessmentObjectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
         {
             // Create & return a custom cell based on the cell in ContactOverviewCell.xib
             
-            NSLog(@"month to display is %@",self.monthToDisplay);
+        
             //            NSString *bindingsString = @"20:interventionSubType;21:self.monthToDisplay"; // 1,2,3 are the control tags
             
             NSDictionary *assessmentBindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"assessmentType",totalsObject.monthToDisplay, nil] forKeys:[NSArray arrayWithObjects:@"20",@"21", nil]];
             
             MonthlyPracticumLogBottonCell *assessmentTypeCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindings:assessmentBindingsDictionary nibName:bottomCellNibName];
-            NSLog(@"assessment types cell is %@",assessmentTypeCell);
-            
+                        
             return assessmentTypeCell;
         };
         
@@ -601,9 +650,7 @@ NSLog(@"current offset %f",currentOffsetY);
     
     
     
-    NSLog(@"month to display %@",self.monthToDisplay);
-    
-    
+   
     
     SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *supportObjectsSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:nil footerNotes:totalsObject.supportMonthlyNotes sectionTotalStr:nil items:supportActivitytTypesWithTotalsItemsArray itemsDefinition:typesDef];
     
@@ -621,7 +668,7 @@ NSLog(@"current offset %f",currentOffsetY);
     {
         // Create & return a custom cell based on the cell in ContactOverviewCell.xib
         
-        NSLog(@"month to display is %@",self.monthToDisplay);
+    
         //            NSString *bindingsString = @"20:interventionSubType;21:self.monthToDisplay"; // 1,2,3 are the control tags
         
         NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"supportType",totalsObject.monthToDisplay, nil] forKeys:[NSArray arrayWithObjects:@"20",@"21", nil]];
@@ -667,7 +714,7 @@ NSLog(@"current offset %f",currentOffsetY);
         }
         
         
-        NSLog(@"subtypes array is %@",subTypesArray);
+       
         
         NSSortDescriptor *firstDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order"
                                                                         ascending:YES] ;
@@ -679,16 +726,13 @@ NSLog(@"current offset %f",currentOffsetY);
         NSMutableArray *subTypeWithTotalsItemsArray=[NSMutableArray array];
         
         
-        NSLog(@"month to display %@",self.monthToDisplay);
+       
         for (SupervisionTypeSubtypeEntity *supervisionSubTypeObject in orderdSubTypeArray ) {
-            TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:[totalsObject.clinicians objectAtIndex:0] trackTypeObject:supervisionSubTypeObject trainingProgram:self.trainingProgram];
+            TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:supervisionSubTypeObject trainingProgram:self.trainingProgram];
             
-            NSLog(@"tracktype with total times object %@",supervisionTypeWithTotalTimes.totalForMonthStr);
-            NSLog(@"track type with total times text is %@",supervisionTypeWithTotalTimes.typeLabelText);
-            [subTypeWithTotalsItemsArray addObject:trackTypeWithTotalTimeObject];
+                        [subTypeWithTotalsItemsArray addObject:trackTypeWithTotalTimeObject];
             
         }
-        NSLog(@"subytpe total items array is %@",subTypeWithTotalsItemsArray);
         
         
         SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *supervisionSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:supervisionType.supervisionType footerNotes:supervisionTypeWithTotalTimes.monthlyLogNotes sectionTotalStr: supervisionTypeWithTotalTimes.totalToDateStr items:subTypeWithTotalsItemsArray itemsDefinition:typesDef];
@@ -704,7 +748,7 @@ NSLog(@"current offset %f",currentOffsetY);
         {
             // Create & return a custom cell based on the cell in ContactOverviewCell.xib
             
-            NSLog(@"month to display is %@",self.monthToDisplay);
+            
             //            NSString *bindingsString = @"20:interventionSubType;21:self.monthToDisplay"; // 1,2,3 are the control tags
             
             NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"supervisionSubType",totalsObject.monthToDisplay, nil] forKeys:[NSArray arrayWithObjects:@"20",@"21", nil]];
@@ -732,9 +776,8 @@ NSLog(@"current offset %f",currentOffsetY);
     
  
     
-    self.interventionTypesTableView.autoresizingMask=UIViewAutoresizingFlexibleHeight;
-   NSLog(@"background size height is %g",self.interventionTypesTableView.backgroundView.frame.size.height);
-   
+//    self.interventionTypesTableView.autoresizingMask=UIViewAutoresizingFlexibleHeight;
+  
     
    
     self.interventionHoursWeek1Label.text=totalsObject.interventionTotalWeek1Str;
@@ -807,6 +850,26 @@ NSLog(@"current offset %f",currentOffsetY);
     self.overallHoursTotalHoursLabel.text=totalsObject.overallTotalToDateStr;
     
     CGFloat yPositionToPutSupervisorSummaryConatinerView=0;
+    
+    if (!numberOfSupervisors) {
+        CGRect containerForSignaturesAndSupervisorSummariesFrame=self.containerForSignaturesAndSupervisorSummaries.frame;
+        
+        containerForSignaturesAndSupervisorSummariesFrame.size.height=self.signaturesView.frame.size.height+15;
+        self.containerForSignaturesAndSupervisorSummaries.frame=containerForSignaturesAndSupervisorSummariesFrame;
+        
+
+         yPositionToPutSupervisorSummaryConatinerView=0;
+       
+        CGRect signaturesViewFrame=self.signaturesView.frame;
+        
+        signaturesViewFrame.origin.y=yPositionToPutSupervisorSummaryConatinerView;
+        self.signaturesView.frame=signaturesViewFrame;
+
+        
+        [self.containerForSignaturesAndSupervisorSummaries addSubview:self.signaturesView];
+        [self.subTablesContainerView addSubview:self.containerForSignaturesAndSupervisorSummaries];     
+    }
+    else {
     
     for ( int i=0;i<numberOfSupervisors;i++) {
         ClinicianEntity *supervisor=[totalsObject.clinicians objectAtIndex:i];
@@ -978,7 +1041,8 @@ NSLog(@"current offset %f",currentOffsetY);
             
             
             
-        }   
+        }
+    
     [self.containerForSignaturesAndSupervisorSummaries addSubview:self.signaturesView];
     CGRect signaturesViewFrame=self.signaturesView.frame;
     
@@ -987,7 +1051,7 @@ NSLog(@"current offset %f",currentOffsetY);
         
     }
 
-    
+    }
   
 
 
@@ -1018,6 +1082,8 @@ NSLog(@"current offset %f",currentOffsetY);
     objectsSection.headerView = containerView;
     } 
     
+    if ((objectsSection.footerNotes &&objectsSection.footerNotes.length)||(objectsSection.footerTotal &&objectsSection.footerTotal.length)) {
+  
     UITextView *footerNotesTextView = [[UITextView alloc] initWithFrame:sectionSubFooterNotesTextView.frame];
     footerNotesTextView.font=sectionSubFooterNotesTextView.font;
     
@@ -1028,10 +1094,7 @@ NSLog(@"current offset %f",currentOffsetY);
     footerNotesTextView.tag=61;
     
     
-    NSLog(@"section bound object is %@",objectsSection.boundObject);
-      
-    NSLog(@"objectSection bound object is %@",objectsSection.dataStore.data);
-   
+  
      
         
        
@@ -1061,12 +1124,9 @@ NSLog(@"current offset %f",currentOffsetY);
     UIView *footerContainerView = [[UIView alloc] initWithFrame:sectionSubFooterView.frame];
     
     [footerContainerView addSubview:footerNotesTextView];
-    CGSize footerNotesContentSize=footerNotesTextView.contentSize;
     
-    NSLog(@"content size height is %g",footerNotesContentSize.height);
     
-    NSLog(@"footernotestextview size height is %g",footerNotesTextView.frame.size.height);
-    //        footerNotesTextView.contentSize.width=footerNotesTextView.frame.size.width;
+    
     if (footerNotesTextView.contentSize.height -9>footerContainerView.frame.size.height) {
         CGRect footerContainerViewFrame=footerContainerView.frame;
         footerContainerViewFrame.size.height=footerNotesTextView.contentSize.height-6;
@@ -1119,7 +1179,7 @@ NSLog(@"current offset %f",currentOffsetY);
     } 
     objectsSection.footerView = footerContainerView;
    
-
+    }
 
 
 
@@ -1127,8 +1187,69 @@ NSLog(@"current offset %f",currentOffsetY);
 
 
 }
+-(void)setSiteNameToDefault{
+
+    NSArray *fetchedObjects=[self fetchUnorderedObjectsFromEntity:@"SiteEntity" filterPredicate:[NSPredicate predicateWithFormat:@"defaultSite==%@",[NSNumber numberWithBool:YES] ] ];
+
+    SiteEntity *defaultSite=nil;
+    if (fetchedObjects &&fetchedObjects.count) {
+        defaultSite=[fetchedObjects objectAtIndex:0];
+        self.practicumSiteNameLabel.text=defaultSite.siteName;
+    }
+    
+    
+}
+
+-(void)setSupervisorNameToDefault{
+    
+    NSArray *fetchedObjects=[self fetchUnorderedObjectsFromEntity:@"ClinicianEntity" filterPredicate:[NSPredicate predicateWithFormat:@"myCurrentSupervisor ==%@",[NSNumber numberWithBool:YES] ]];
+    
+    NSLog(@"fetched objects are %@",fetchedObjects);
+    ClinicianEntity *defaultSupervisor=nil;
+    if (fetchedObjects &&fetchedObjects.count) {
+        defaultSupervisor=[fetchedObjects objectAtIndex:0];
+        if ([defaultSupervisor.myInformation isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+            self.supervisorLabel.text=@"Self";
+        }
+        else {
+             self.supervisorLabel.text=defaultSupervisor.combinedName;
+        }
+       
+    }
+    else {
+        self.supervisorLabel.text=nil;
+    }
+    
+}
+
+-(NSArray *)fetchUnorderedObjectsFromEntity:(NSString *)entityStr filterPredicate:(NSPredicate *)filterPredicate{
+
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityStr inManagedObjectContext:appDelegate.managedObjectContext];
+    
+    [fetchRequest setEntity:entity];
+        
+    
+    if (filterPredicate) {
+        [fetchRequest setPredicate:filterPredicate];
+    }
+   
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    return fetchedObjects;
 
 
+}
 -(NSArray *)fetchObjectsFromEntity:(NSString *)entityStr filterPredicate:(NSPredicate *)filterPredicate pathsForPrefetching:(NSArray *)pathsForPrefetching {
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     

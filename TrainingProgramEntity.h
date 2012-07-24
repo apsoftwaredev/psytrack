@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClinicianEntity, ExistingHoursEntity, LogEntity, TimeTrackEntity;
+@class ClinicianEntity, ExistingHoursEntity, LogEntity, TimeTrackEntity,SchoolEntity;
 
 @interface TrainingProgramEntity : NSManagedObject
 
@@ -24,7 +24,7 @@
 @property (nonatomic, retain) ClinicianEntity *seminarInstructor;
 @property (nonatomic, retain) NSSet *logs;
 @property (nonatomic, retain) NSSet *existingHours;
-@property (nonatomic, retain) NSManagedObject *school;
+@property (nonatomic, retain) SchoolEntity *school;
 @end
 
 @interface TrainingProgramEntity (CoreDataGeneratedAccessors)

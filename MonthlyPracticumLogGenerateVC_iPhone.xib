@@ -45,7 +45,7 @@
 						<int key="NSvFlags">290</int>
 						<string key="NSFrameSize">{319, 49}</string>
 						<reference key="NSSuperview" ref="103177555"/>
-						<reference key="NSNextKeyView" ref="103177555"/>
+						<reference key="NSNextKeyView" ref="205158481"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -147,6 +147,7 @@
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUITag">41</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<string key="IBUIText"/>
@@ -288,6 +289,7 @@
 								<int key="NSvFlags">266</int>
 								<string key="NSFrame">{{8, 71}, {303, 31}}</string>
 								<reference key="NSSuperview" ref="205158481"/>
+								<reference key="NSNextKeyView" ref="307232328"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -316,7 +318,7 @@
 								<int key="NSvFlags">266</int>
 								<string key="NSFrame">{{0, 42}, {319, 21}}</string>
 								<reference key="NSSuperview" ref="205158481"/>
-								<reference key="NSNextKeyView" ref="307232328"/>
+								<reference key="NSNextKeyView" ref="389629446"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -335,6 +337,7 @@
 						</array>
 						<string key="NSFrame">{{0, 218}, {319, 461}}</string>
 						<reference key="NSSuperview" ref="103177555"/>
+						<reference key="NSNextKeyView" ref="680682666"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="870857751">
 							<int key="NSColorSpace">3</int>
@@ -345,7 +348,7 @@
 				</array>
 				<string key="NSFrameSize">{319, 687}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSNextKeyView" ref="680682666"/>
+				<reference key="NSNextKeyView" ref="521768381"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<reference key="IBUIBackgroundColor" ref="870857751"/>
 				<bool key="IBUIClipsSubviews">YES</bool>
@@ -380,6 +383,7 @@
 						<int key="NSvFlags">289</int>
 						<string key="NSFrame">{{248, 2}, {72, 35}}</string>
 						<reference key="NSSuperview" ref="840651402"/>
+						<reference key="NSNextKeyView" ref="10725560"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -402,6 +406,7 @@
 						<int key="NSvFlags">293</int>
 						<string key="NSFrame">{{120, 3}, {80, 33}}</string>
 						<reference key="NSSuperview" ref="840651402"/>
+						<reference key="NSNextKeyView" ref="809850288"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -421,6 +426,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 254}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSNextKeyView" ref="353046641"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">2</int>
@@ -550,6 +556,15 @@
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">25</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">amendedLogSwitchChangedOn:</string>
+						<reference key="source" ref="442462152"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">13</int>
+					</object>
+					<int key="connectionID">50</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -750,7 +765,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">49</int>
+			<int key="maxID">50</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

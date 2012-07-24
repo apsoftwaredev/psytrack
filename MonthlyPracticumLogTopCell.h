@@ -37,11 +37,13 @@
 @property (nonatomic, weak)IBOutlet UILabel *practicumSiteNameLabel;
 @property (nonatomic, weak)IBOutlet UILabel *programLabel;
 @property (nonatomic, weak)IBOutlet UILabel *monthYearLabel;
-
+@property (nonatomic, weak) IBOutlet UILabel *siteNameUnderline;
 @property (nonatomic, weak)IBOutlet UILabel *supervisorLabelBeforeColon;
 @property (nonatomic, weak)IBOutlet UILabel *supervisorLabel;
 @property (nonatomic, weak)IBOutlet UILabel *courseLabel;
 @property (nonatomic, weak)IBOutlet UILabel *siteNameLabelBeforeColon;
+@property (nonatomic, weak) IBOutlet UILabel *monthlyPracticumLogTitleLabel;
+@property (nonatomic, weak) IBOutlet UILabel *schoolNameLabel;
 
 @property (nonatomic, weak)IBOutlet UILabel *interventionHoursWeek1Label;
 @property (nonatomic, weak)IBOutlet UILabel *interventionHoursWeek2Label;
@@ -126,9 +128,9 @@
 @property (nonatomic, weak)IBOutlet UIScrollView *directHoursScrollView;
 @property (nonatomic, weak)IBOutlet UIScrollView *indirectHoursScrollView;
 
-@property (nonatomic, weak) NSDate *monthToDisplay;
+@property (nonatomic, strong) NSDate *monthToDisplay;
 @property (nonatomic, weak) ClinicianEntity *clinician;
-@property (nonatomic, weak) TrainingProgramEntity *trainingProgram;
+@property (nonatomic, strong) TrainingProgramEntity *trainingProgram;
 @property (nonatomic, assign)BOOL stopScrolling;
 
 
@@ -151,7 +153,8 @@
 
 @property (nonatomic, weak) IBOutlet UIView *containerForSignaturesAndSupervisorSummaries;
 
-
+@property (nonatomic, weak)IBOutlet UILabel *studentSignatureLabelUnderLine;
+@property (nonatomic, weak) IBOutlet UILabel *practicumSupervisorSignatureLabelUnderLine;
 
 
 - (CGSize)interventionTableViewContentSize;

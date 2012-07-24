@@ -5187,6 +5187,10 @@ return YES;
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
+- (NSURL *)applicationCachesDirectory
+{
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+}
 
 - (NSURL *)applicationDrugsDirectory
 {

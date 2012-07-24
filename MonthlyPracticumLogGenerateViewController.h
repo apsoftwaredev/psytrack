@@ -9,9 +9,9 @@
 #import "ReaderViewController.h"
 
 #import "SCArrayOfObjectsModel+CoreData+SelectionSection.h"
-#import "PracticumLogMonthPickerVC.h"
+
 #import "BigProgressViewWithBlockedView.h"
-@interface MonthlyPracticumLogGenerateViewController : SCTableViewController <ReaderViewControllerDelegate,UITextFieldDelegate, SCTableViewModelDelegate, UIPickerViewDelegate,UIPickerViewDataSource>{
+@interface MonthlyPracticumLogGenerateViewController : SCTableViewController <ReaderViewControllerDelegate,UITextFieldDelegate, SCTableViewModelDelegate, UIPickerViewDelegate,UIPickerViewDataSource,UIAlertViewDelegate>{
 
 
     SCArrayOfObjectsModel *objectsModel;
@@ -23,7 +23,7 @@
     NSInteger currentMonth;
     NSInteger newestYear;
     NSInteger numberOfYearsSinceFirstDatePlusTen;
-    
+    BOOL changedDefaultFileName;
 } 
 
 @property (nonatomic, weak)IBOutlet UITableView *trainingProgramTableView;
@@ -44,6 +44,6 @@
 
 -(IBAction)generateButtonTapped:(id)sender;
 
-
+-(IBAction)amendedLogSwitchChangedOn:(id)sender;
 
 @end
