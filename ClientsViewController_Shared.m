@@ -715,6 +715,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     SCPropertyDefinition *temperaturePropertyDef = [vitalsDef propertyDefinitionWithName:@"temperature"];
     
     temperaturePropertyDef.autoValidate=NO;
+    temperaturePropertyDef.type=SCPropertyTypeNumericTextField;
     
     
     //create an array of objects definition for the vitals to-many relationship that with show up in a different view  without a place holder element>.

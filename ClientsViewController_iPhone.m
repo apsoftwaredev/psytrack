@@ -896,10 +896,13 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                         
                     {
                         
-                        SCNumericTextFieldCell *textFieldCell=(SCNumericTextFieldCell *)cell;
-                        
-                        textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
-                        
+                        if (cell.tag<6 && [cell isKindOfClass:[SCNumericTextFieldCell class]]) {
+                            SCNumericTextFieldCell *textFieldCell=(SCNumericTextFieldCell *)cell;
+                            
+                            textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
+
+                        }
+                                                
                     }
                 }}
         }
@@ -1243,7 +1246,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                                 break;
                             case 6:
                             {
-                                if ([textFieldCell.textField.text integerValue]< 130 &&number) {
+                                if ([textFieldCell.textField.text floatValue]< 130 &&number) {
                                     valid=YES;
                                 }
                                 else {

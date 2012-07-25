@@ -220,7 +220,6 @@
 		E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */; };
 		E71E26AD1569C3920004A793 /* BreakTimeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E71E26AC1569C3920004A793 /* BreakTimeEntity.m */; };
 		E71E26C7156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E71E26C6156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m */; };
-		E735609915927EFE0007042C /* MAY20122.xml in Resources */ = {isa = PBXBuildFile; fileRef = E735609815927EFE0007042C /* MAY20122.xml */; };
 		E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DD158E28DC00CE1AF4 /* menubar-full.png */; };
 		E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */; };
 		E74167EA158E782900CE1AF4 /* Monaco.dfont in Resources */ = {isa = PBXBuildFile; fileRef = E74167E5158E739300CE1AF4 /* Monaco.dfont */; };
@@ -759,7 +758,6 @@
 		E71E26AC1569C3920004A793 /* BreakTimeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakTimeEntity.m; sourceTree = "<group>"; };
 		E71E26C5156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCArrayOfObjectsModel+CoreData+SelectionSection.h"; sourceTree = "<group>"; };
 		E71E26C6156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SCArrayOfObjectsModel+CoreData+SelectionSection.m"; sourceTree = "<group>"; };
-		E735609815927EFE0007042C /* MAY20122.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MAY20122.xml; sourceTree = "<group>"; };
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
 		E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full@2x.png"; sourceTree = "<group>"; };
 		E74167E5158E739300CE1AF4 /* Monaco.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = Monaco.dfont; sourceTree = "<group>"; };
@@ -1281,7 +1279,6 @@
 		37F7CE3D1500518900AD2C3A /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				E735609815927EFE0007042C /* MAY20122.xml */,
 				E798A02415843B9D006B9DBD /* MasterViewControllerTheme.ptt */,
 				37F7CE1C1500334800AD2C3A /* PTTMasterViewController_iPad.xib */,
 				37F7CE1E1500334800AD2C3A /* PTTMasterViewController_iPhone.xib */,
@@ -2320,7 +2317,6 @@
 				E7CCB8E7159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib in Resources */,
 				E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */,
 				E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */,
-				E735609915927EFE0007042C /* MAY20122.xml in Resources */,
 				E7F1CAF21597AF4C006F9E95 /* MonthlyPracticumLogTopCell.xib in Resources */,
 				E7F1CB741598C024006F9E95 /* AppIcon-057.png in Resources */,
 				E7F1CB751598C024006F9E95 /* AppIcon-072.png in Resources */,

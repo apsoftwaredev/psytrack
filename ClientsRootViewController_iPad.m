@@ -648,10 +648,12 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                 if ([cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]) 
                     
                 {
+                    if (cell.tag<6&& [cell isKindOfClass:[SCNumericTextFieldCell class]]) {
+                        SCNumericTextFieldCell *textFieldCell=(SCNumericTextFieldCell *)cell;
+                        
+                        textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
+                    }
                     
-                    SCNumericTextFieldCell *textFieldCell=(SCNumericTextFieldCell *)cell;
-                    
-                    textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
                     break;
                 }
                 }}
@@ -1721,7 +1723,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                             break;
                         case 6:
                         {
-                            if ([textFieldCell.textField.text integerValue]< 130 &&number) {
+                            if ([textFieldCell.textField.text floatValue]< 130 &&number) {
                                 valid=YES;
                             }
                             else {
