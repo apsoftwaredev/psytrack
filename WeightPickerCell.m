@@ -360,25 +360,22 @@
         thirdComponentFloat=roundf(thirdComponentFloat);
         thirdComponentInteger=[[NSNumber numberWithFloat:thirdComponentFloat]integerValue];
         
-        float fourthDigit=(thirdComponentFloat*10)-(thirdComponentInteger*10);
-        
-        NSLog(@"weight is %g",weight);
-        NSLog(@"fourgth digit is %g",fourthDigit);
-        NSLog(@"fist didgit %f",firstComponentFloat);
-        NSLog(@"second float is  %f",secondComponentFloat);
-        NSLog(@"thrid is %g",thirdComponentFloat);
-        NSLog(@"third integer is %i",thirdComponentInteger);
-        NSLog(@"first componet integer is %i",firstComponentInteger);
-        NSLog(@"second component integer is %i",secondComponentInteger);
-        
         
         if (thirdComponentInteger>9) {
             thirdComponentInteger=0;
             secondComponentInteger++;
         }
                
-        
+        if (secondComponentInteger>9) {
+            firstComponentInteger++;
+            secondComponentInteger=0;
+        }
       
+        if (firstComponentInteger>9) {
+            firstComponentInteger=9;
+            secondComponentInteger=9;
+            thirdComponentInteger=9;
+        }
         
         [picker selectRow:firstComponentInteger inComponent:0 animated:YES];
         [picker selectRow:secondComponentInteger inComponent:1 animated:YES];
