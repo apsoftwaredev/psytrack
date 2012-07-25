@@ -21,6 +21,17 @@ Acknoledgements:
 TO DO:
 
 
+-need to fix calander so it doesn't add a new calader everytime it is installed
+-fix drug view controller
+-update drug database
+-encrypt client presentation data
+-update model for consultations, CE, courses, conferences, forums, presentations, advising, leadership roles, expert testemony, research projects, community serivce, scholarships, fellowships, grants awarded
+-add rekay to encrypted model subclasses and update on password change
+-add report for total hours and demographic
+-change demographic to background info
+
+-fix presentations
+
 
 -motor test completed  AIMS test
 -psychosocial stressors medical and gaf to diagnosis
@@ -29,7 +40,7 @@ TO DO:
 -birth development
 -current Living arrangement
 -legal
--encrypt client presentation data
+
 -practice Name and website for clinicians
 -cognitive for presentations
 -drug name deleting when leave view
@@ -39,7 +50,6 @@ TO DO:
 
 -prescriber list not defauted when prescriber
 
--temperature allow decimal
 
 -add event title
 
@@ -48,16 +58,15 @@ TO DO:
 
 -existing hours number fields label covering field, instruments
 -change existing hours to have the total hours in the badge view
--existing hours back button disappears
+
 -symptom description iphone
--test administration client selection validation, cant save.
+
 
 -dosage number validation and keyboard
 -	Add the diagnoses section to client
 
 -business names for clinicians
 
--	Add billing section to the client tab, keep it simple, -add service codes
 
 
 
@@ -66,7 +75,8 @@ TO DO:
 
 
 
--need to fix calander so it doesn't add a new calader everytime it is installed
+
+
 
 
 
@@ -82,14 +92,14 @@ Phase II
 - add consultations
 -add presentations
 
--	 add important exams section
+
 -	 add teaching experience
 -	 add advising
 
 
 
 begin adding reports
--	set up the pdf writer
+
 -	create a report of activity for specified time ranges
 
 - final cleanup, remove nslogs, unecesary comments. alphebatize methods, finish documentation
