@@ -1,5 +1,5 @@
 /*
- *  ReportsViewController_iPhone.h
+ *  ReportsViewController.h
  *  psyTrack Clinician Tools
  *  Version: 1.0
  *
@@ -17,10 +17,8 @@
  */
 #import <UIKit/UIKit.h>
 
-@interface ReportsViewController_iPhone : UIViewController
+@interface ReportsViewController : UITableViewController<UITableViewDelegate, UITableViewDataSource>
 
 
--(void)showPDFFile;
-
--(NSString*)getPDFFileName;
+@property (nonatomic, strong) UITableView *myTableView;
 @end

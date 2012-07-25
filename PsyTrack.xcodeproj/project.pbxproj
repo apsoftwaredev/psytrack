@@ -126,12 +126,8 @@
 		37F7CEAE15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEAA15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib */; };
 		37F7CEAF15005C5F00AD2C3A /* TrainTrackViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEAC15005C5F00AD2C3A /* TrainTrackViewController_iPhone.xib */; };
 		37F7CEB215005C7300AD2C3A /* TrainTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEB115005C7300AD2C3A /* TrainTrackViewController.m */; };
-		37F7CEBA15005D6700AD2C3A /* ReportsDetailViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEB415005D6700AD2C3A /* ReportsDetailViewController_iPad.xib */; };
-		37F7CEBB15005D6700AD2C3A /* ReportsRootViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEB615005D6700AD2C3A /* ReportsRootViewController_iPad.xib */; };
-		37F7CEBC15005D6700AD2C3A /* ReportsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEB815005D6700AD2C3A /* ReportsViewController_iPhone.xib */; };
-		37F7CEC315005D8A00AD2C3A /* ReportsDetailViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEBE15005D8A00AD2C3A /* ReportsDetailViewController_iPad.m */; };
-		37F7CEC415005D8A00AD2C3A /* ReportsRootViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEC015005D8A00AD2C3A /* ReportsRootViewController_iPad.m */; };
-		37F7CEC515005D8A00AD2C3A /* ReportsViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEC215005D8A00AD2C3A /* ReportsViewController_iPhone.m */; };
+		37F7CEBC15005D6700AD2C3A /* ReportsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEB815005D6700AD2C3A /* ReportsViewController.xib */; };
+		37F7CEC515005D8A00AD2C3A /* ReportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEC215005D8A00AD2C3A /* ReportsViewController.m */; };
 		37F7CECB15005E7100AD2C3A /* drugs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */; };
 		37F7CF2615005F7E00AD2C3A /* BehaviorPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CED115005F7E00AD2C3A /* BehaviorPickerCell.m */; };
 		37F7CF2715005F7E00AD2C3A /* BOPickersDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CED315005F7E00AD2C3A /* BOPickersDataSource.m */; };
@@ -364,8 +360,6 @@
 		E7F1CAF21597AF4C006F9E95 /* MonthlyPracticumLogTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CAF01597AF4C006F9E95 /* MonthlyPracticumLogTopCell.xib */; };
 		E7F1CAF41597CADB006F9E95 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F1CAF31597CADB006F9E95 /* CoreText.framework */; };
 		E7F1CAF91597D010006F9E95 /* PDFRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1CAF81597D00F006F9E95 /* PDFRenderer.m */; };
-		E7F1CAFB1597DED8006F9E95 /* may2012.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CAFA1597DED8006F9E95 /* may2012.pdf */; };
-		E7F1CB151598A4D0006F9E95 /* may2012.htm in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CB141598A4CF006F9E95 /* may2012.htm */; };
 		E7F1CB721598C024006F9E95 /* ReaderBookDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1CB231598C024006F9E95 /* ReaderBookDelegate.m */; };
 		E7F1CB731598C024006F9E95 /* ReaderDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1CB251598C024006F9E95 /* ReaderDemoController.m */; };
 		E7F1CB741598C024006F9E95 /* AppIcon-057.png in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CB271598C024006F9E95 /* AppIcon-057.png */; };
@@ -641,15 +635,9 @@
 		37F7CEAD15005C5F00AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TrainTrackViewController_iPhone.xib; sourceTree = "<group>"; };
 		37F7CEB015005C7300AD2C3A /* TrainTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainTrackViewController.h; sourceTree = "<group>"; };
 		37F7CEB115005C7300AD2C3A /* TrainTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainTrackViewController.m; sourceTree = "<group>"; };
-		37F7CEB515005D6700AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ReportsDetailViewController_iPad.xib; sourceTree = "<group>"; };
-		37F7CEB715005D6700AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ReportsRootViewController_iPad.xib; sourceTree = "<group>"; };
-		37F7CEB915005D6700AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ReportsViewController_iPhone.xib; sourceTree = "<group>"; };
-		37F7CEBD15005D8A00AD2C3A /* ReportsDetailViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportsDetailViewController_iPad.h; sourceTree = "<group>"; };
-		37F7CEBE15005D8A00AD2C3A /* ReportsDetailViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportsDetailViewController_iPad.m; sourceTree = "<group>"; };
-		37F7CEBF15005D8A00AD2C3A /* ReportsRootViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportsRootViewController_iPad.h; sourceTree = "<group>"; };
-		37F7CEC015005D8A00AD2C3A /* ReportsRootViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportsRootViewController_iPad.m; sourceTree = "<group>"; };
-		37F7CEC115005D8A00AD2C3A /* ReportsViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportsViewController_iPhone.h; sourceTree = "<group>"; };
-		37F7CEC215005D8A00AD2C3A /* ReportsViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportsViewController_iPhone.m; sourceTree = "<group>"; };
+		37F7CEB915005D6700AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ReportsViewController.xib; sourceTree = "<group>"; };
+		37F7CEC115005D8A00AD2C3A /* ReportsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportsViewController.h; sourceTree = "<group>"; };
+		37F7CEC215005D8A00AD2C3A /* ReportsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportsViewController.m; sourceTree = "<group>"; };
 		37F7CEC815005E7100AD2C3A /* drugs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = drugs.xcdatamodel; sourceTree = "<group>"; };
 		37F7CED015005F7E00AD2C3A /* BehaviorPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BehaviorPickerCell.h; sourceTree = "<group>"; };
 		37F7CED115005F7E00AD2C3A /* BehaviorPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BehaviorPickerCell.m; sourceTree = "<group>"; };
@@ -975,10 +963,6 @@
 		E7F1CAF31597CADB006F9E95 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		E7F1CAF71597D00F006F9E95 /* PDFRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFRenderer.h; sourceTree = "<group>"; };
 		E7F1CAF81597D00F006F9E95 /* PDFRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFRenderer.m; sourceTree = "<group>"; };
-		E7F1CAFA1597DED8006F9E95 /* may2012.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = may2012.pdf; sourceTree = "<group>"; };
-		E7F1CB121598A1F3006F9E95 /* MAY201223.xls */ = {isa = PBXFileReference; lastKnownFileType = file; path = MAY201223.xls; sourceTree = "<group>"; };
-		E7F1CB131598A458006F9E95 /* excelmay2012.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = excelmay2012.xlsx; sourceTree = "<group>"; };
-		E7F1CB141598A4CF006F9E95 /* may2012.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = may2012.htm; sourceTree = "<group>"; };
 		E7F1CB221598C024006F9E95 /* ReaderBookDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderBookDelegate.h; sourceTree = "<group>"; };
 		E7F1CB231598C024006F9E95 /* ReaderBookDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderBookDelegate.m; sourceTree = "<group>"; };
 		E7F1CB241598C024006F9E95 /* ReaderDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderDemoController.h; sourceTree = "<group>"; };
@@ -1463,20 +1447,10 @@
 		37F7CEB315005D0700AD2C3A /* Reports */ = {
 			isa = PBXGroup;
 			children = (
-				E7F1CB141598A4CF006F9E95 /* may2012.htm */,
-				E7F1CB121598A1F3006F9E95 /* MAY201223.xls */,
-				E7F1CB131598A458006F9E95 /* excelmay2012.xlsx */,
-				E7F1CAFA1597DED8006F9E95 /* may2012.pdf */,
 				E7F1CAEB1597A780006F9E95 /* Monthly Practicum Log */,
-				37F7CEBD15005D8A00AD2C3A /* ReportsDetailViewController_iPad.h */,
-				37F7CEBE15005D8A00AD2C3A /* ReportsDetailViewController_iPad.m */,
-				37F7CEBF15005D8A00AD2C3A /* ReportsRootViewController_iPad.h */,
-				37F7CEC015005D8A00AD2C3A /* ReportsRootViewController_iPad.m */,
-				37F7CEC115005D8A00AD2C3A /* ReportsViewController_iPhone.h */,
-				37F7CEC215005D8A00AD2C3A /* ReportsViewController_iPhone.m */,
-				37F7CEB415005D6700AD2C3A /* ReportsDetailViewController_iPad.xib */,
-				37F7CEB615005D6700AD2C3A /* ReportsRootViewController_iPad.xib */,
-				37F7CEB815005D6700AD2C3A /* ReportsViewController_iPhone.xib */,
+				37F7CEC115005D8A00AD2C3A /* ReportsViewController.h */,
+				37F7CEC215005D8A00AD2C3A /* ReportsViewController.m */,
+				37F7CEB815005D6700AD2C3A /* ReportsViewController.xib */,
 				E7F1CAF71597D00F006F9E95 /* PDFRenderer.h */,
 				E7F1CAF81597D00F006F9E95 /* PDFRenderer.m */,
 			);
@@ -2222,9 +2196,7 @@
 				37F7CEA7150059D900AD2C3A /* TimeTrackViewController.xib in Resources */,
 				37F7CEAE15005C5F00AD2C3A /* TrainTrackViewController_iPad.xib in Resources */,
 				37F7CEAF15005C5F00AD2C3A /* TrainTrackViewController_iPhone.xib in Resources */,
-				37F7CEBA15005D6700AD2C3A /* ReportsDetailViewController_iPad.xib in Resources */,
-				37F7CEBB15005D6700AD2C3A /* ReportsRootViewController_iPad.xib in Resources */,
-				37F7CEBC15005D6700AD2C3A /* ReportsViewController_iPhone.xib in Resources */,
+				37F7CEBC15005D6700AD2C3A /* ReportsViewController.xib in Resources */,
 				37F7CF2F15005F7E00AD2C3A /* CustomSCTextViewCell_iPhone.xib in Resources */,
 				37F7CF3015005F7E00AD2C3A /* FrequencyPickerCell_iPad.xib in Resources */,
 				37F7CF3115005F7E00AD2C3A /* FrequencyPickerCell_iPhone.xib in Resources */,
@@ -2350,8 +2322,6 @@
 				E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */,
 				E735609915927EFE0007042C /* MAY20122.xml in Resources */,
 				E7F1CAF21597AF4C006F9E95 /* MonthlyPracticumLogTopCell.xib in Resources */,
-				E7F1CAFB1597DED8006F9E95 /* may2012.pdf in Resources */,
-				E7F1CB151598A4D0006F9E95 /* may2012.htm in Resources */,
 				E7F1CB741598C024006F9E95 /* AppIcon-057.png in Resources */,
 				E7F1CB751598C024006F9E95 /* AppIcon-072.png in Resources */,
 				E7F1CB761598C024006F9E95 /* AppIcon-114.png in Resources */,
@@ -2460,9 +2430,7 @@
 				37F7CE9C1500596F00AD2C3A /* Time_Shared.m in Sources */,
 				37F7CE9D1500596F00AD2C3A /* TimeEntity.m in Sources */,
 				37F7CEB215005C7300AD2C3A /* TrainTrackViewController.m in Sources */,
-				37F7CEC315005D8A00AD2C3A /* ReportsDetailViewController_iPad.m in Sources */,
-				37F7CEC415005D8A00AD2C3A /* ReportsRootViewController_iPad.m in Sources */,
-				37F7CEC515005D8A00AD2C3A /* ReportsViewController_iPhone.m in Sources */,
+				37F7CEC515005D8A00AD2C3A /* ReportsViewController.m in Sources */,
 				37F7CECB15005E7100AD2C3A /* drugs.xcdatamodeld in Sources */,
 				37F7CF2615005F7E00AD2C3A /* BehaviorPickerCell.m in Sources */,
 				37F7CF2715005F7E00AD2C3A /* BOPickersDataSource.m in Sources */,
@@ -2812,28 +2780,12 @@
 			name = TrainTrackViewController_iPhone.xib;
 			sourceTree = "<group>";
 		};
-		37F7CEB415005D6700AD2C3A /* ReportsDetailViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				37F7CEB515005D6700AD2C3A /* en */,
-			);
-			name = ReportsDetailViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		37F7CEB615005D6700AD2C3A /* ReportsRootViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				37F7CEB715005D6700AD2C3A /* en */,
-			);
-			name = ReportsRootViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		37F7CEB815005D6700AD2C3A /* ReportsViewController_iPhone.xib */ = {
+		37F7CEB815005D6700AD2C3A /* ReportsViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				37F7CEB915005D6700AD2C3A /* en */,
 			);
-			name = ReportsViewController_iPhone.xib;
+			name = ReportsViewController.xib;
 			sourceTree = "<group>";
 		};
 		37F7CEE215005F7E00AD2C3A /* CustomSCTextViewCell_iPhone.xib */ = {

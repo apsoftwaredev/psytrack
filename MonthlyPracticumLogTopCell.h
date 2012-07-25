@@ -18,7 +18,7 @@
     
     NSInteger numberOfSupervisors;
 
-    
+    BOOL markAmended;
     CGFloat currentOffsetY;
 
 }

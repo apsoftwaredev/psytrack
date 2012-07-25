@@ -474,8 +474,8 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
     self.studentSignatureLabelUnderLine.text=[NSString stringWithFormat:@"%@ (Student)", totalsObject.studentNameStr];
     
     self.practicumSupervisorSignatureLabelUnderLine.text=totalsObject.practicumSeminarInstructtor;
-    
-    if (!totalsObject.markAmended) {
+    markAmended=totalsObject.markAmended;
+    if (!markAmended) {
         self.monthlyPracticumLogTitleLabel.text=[NSString stringWithFormat:@"Monthly Clinical Practicum Log for %@",totalsObject.monthAndYearsInParentheses];
     }
     else {
@@ -873,7 +873,7 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
     
     for ( int i=0;i<numberOfSupervisors;i++) {
         ClinicianEntity *supervisor=[totalsObject.clinicians objectAtIndex:i];
-        SupervisorsAndTotalTimesForMonth *supervisorTotalsObject=[[SupervisorsAndTotalTimesForMonth alloc]initWithMonth:self.monthToDisplay clinician:supervisor trainingProgram:self.trainingProgram];
+        SupervisorsAndTotalTimesForMonth *supervisorTotalsObject=[[SupervisorsAndTotalTimesForMonth alloc]initWithMonth:self.monthToDisplay clinician:supervisor trainingProgram:self.trainingProgram markAmended:markAmended];
         if (i==0) {
             
             self.supervisorSummaryHeaderLabel.text=[NSString stringWithFormat:@"Summary of Hours Supervised by %@ (Month Total:%@)",supervisor.combinedName,supervisorTotalsObject.overallTotalForMonthStr];

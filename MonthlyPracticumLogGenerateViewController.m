@@ -12,6 +12,7 @@
 #import "PDFRenderer.h"
 #import "TimeTrackEntity.h"
 #import "ExistingHoursEntity.h"
+#import "ClinicianSelectionCell.h"
 
 @interface MonthlyPracticumLogGenerateViewController ()
 -(NSString *)sanitizeFileName:(NSString *)fileName;
@@ -43,19 +44,124 @@
     self.view.backgroundColor=[UIColor clearColor];
     navtitle.title=@"Monthly Practicum Log Generator";
     
-    SCEntityDefinition *programDef=[SCEntityDefinition definitionWithEntityName:@"TrainingProgramEntity" managedObjectContext:appDelegate.managedObjectContext autoGeneratePropertyDefinitions:YES];
+   
     
-    programDef.titlePropertyName=@"trainingProgram;course";
+       
+    //begin
+    SCEntityDefinition *trainingProgramDef=[SCEntityDefinition definitionWithEntityName:@"TrainingProgramEntity" managedObjectContext:appDelegate.managedObjectContext propertyNames:[NSArray arrayWithObjects:@"school",@"trainingProgram",@"course",@"startDate",@"endDate",@"selectedByDefault", @"notes", nil]];
     
-    programDef.titlePropertyNameDelimiter=@" - ";
-    objectsModel=[[SCArrayOfObjectsModel_UseSelectionSection alloc]initWithTableView:self.trainingProgramTableView entityDefinition:programDef];
+    
+    trainingProgramDef.titlePropertyName=@"trainingProgram;course";
+    
+    trainingProgramDef.titlePropertyNameDelimiter=@" - ";
+    
+
+    
+    
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"EEE, M/d/yyyy"];
+    
+    
+    
+    
+    trainingProgramDef.orderAttributeName=@"order";
+    
+    
+    
+    
+    
+   
+           
+    SCPropertyDefinition *trainingProgramPropertyDef=[trainingProgramDef propertyDefinitionWithName:@"trainingProgram"];
+    trainingProgramPropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *trainingProgramNotesPropertyDef=[trainingProgramDef propertyDefinitionWithName:@"notes"];
+    trainingProgramNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+    
+    //create the dictionary with the data bindings
+    NSDictionary *instructorDataBindings = [NSDictionary 
+                                            dictionaryWithObjects:[NSArray arrayWithObjects:@"seminarInstructor",@"Seminar Instructor",[NSNumber numberWithBool:NO],@"seminarInstructor",[NSNumber numberWithBool:NO],nil] 
+                                            forKeys:[NSArray arrayWithObjects:@"1",@"90",@"91",@"92",@"93",nil ]]; // 1 are the control tags
+	
+    //create the custom property definition
+    SCCustomPropertyDefinition *instructorDataProperty = [SCCustomPropertyDefinition definitionWithName:@"InstructorData"
+                                                                                         uiElementClass:[ClinicianSelectionCell class] objectBindings:instructorDataBindings];
+	
+    
+    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+    instructorDataProperty.autoValidate=FALSE;
+    
+    
+    [trainingProgramDef insertPropertyDefinition:instructorDataProperty atIndex:1];
+    
+    SCPropertyDefinition *trainingProgramStartDatePropertyDef = [trainingProgramDef propertyDefinitionWithName:@"startDate"];
+	trainingProgramStartDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                                    datePickerMode:UIDatePickerModeDate 
+                                                                     displayDatePickerInDetailView:NO];
+    
+    
+    SCPropertyDefinition *trainingProgramEndDatePropertyDef = [trainingProgramDef propertyDefinitionWithName:@"endDate"];
+	trainingProgramEndDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                                  datePickerMode:UIDatePickerModeDate 
+                                                                   displayDatePickerInDetailView:NO];
+    
+    
+    SCEntityDefinition *schoolDef=[SCEntityDefinition definitionWithEntityName:@"SchoolEntity" managedObjectContext:appDelegate.managedObjectContext propertyNames:[NSArray arrayWithObjects:@"schoolName",@"notes", nil]];
+    
+    
+    schoolDef.orderAttributeName=@"order";
+    SCPropertyDefinition *trainingProgramSchoolPropertyDef=[trainingProgramDef propertyDefinitionWithName:@"school"];
+    trainingProgramSchoolPropertyDef.type =SCPropertyTypeObjectSelection;
+    
+    
+    
+    
+    SCObjectSelectionAttributes *trainingProgramSchoolSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:schoolDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    trainingProgramSchoolSelectionAttribs.allowAddingItems = YES;
+    trainingProgramSchoolSelectionAttribs.allowDeletingItems = YES;
+    trainingProgramSchoolSelectionAttribs.allowMovingItems = YES;
+    trainingProgramSchoolSelectionAttribs.allowEditingItems = YES;
+    trainingProgramSchoolSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to add schools)"];
+    trainingProgramSchoolSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New School"];
+    trainingProgramSchoolPropertyDef.attributes = trainingProgramSchoolSelectionAttribs;
+    
+    SCPropertyDefinition *trainingProgramSchoolNamePropertyDef=[schoolDef propertyDefinitionWithName:@"schoolName"];
+    trainingProgramSchoolNamePropertyDef.type=SCPropertyTypeTextView;
+    SCPropertyDefinition *trainingPrograSchoolmNotesPropertyDef=[schoolDef propertyDefinitionWithName:@"notes"];
+    trainingPrograSchoolmNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+    
+    //training type end
+    //end
+    
+    
+    
+    
+    
+    
+    
+    
+    objectsModel=[[SCArrayOfObjectsModel_UseSelectionSection alloc]initWithTableView:self.trainingProgramTableView entityDefinition:trainingProgramDef];
     
 
     objectsModel.tag=0;
     objectsModel.delegate=self;
     objectsModel.allowMovingItems=YES;
     objectsModel.allowRowSelection=YES;
-
+    objectsModel.allowAddingItems=YES;
+    objectsModel.allowDeletingItems=YES;
+    [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
+    NSLog(@"self.navigationItem.rightBarButtonItems are %@",self.buttonsToolbar.items);
+    
+    objectsModel.editButtonItem = self.editButton;;
+    
+    objectsModel.addButtonItem = self.addButton;
+    
+    objectsModel.autoAssignDelegateForDetailModels=YES;
+    
     
 //    objectsModel.al
     objectsModel.enablePullToRefresh = TRUE;
@@ -198,7 +304,7 @@
 	NSString *pdfs = [appDelegate.applicationDocumentsDirectory.path stringByAppendingPathComponent:fileName];
     
     if ([self fileAlreadyExists:pdfs]) {
-        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"File %@ Already Exists in Documents Folder",fileName]  message:@"Would you like to overwrite the existing file?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes",@"No, incriment", nil];
+        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"File %@.pdf Already Exists in the Documents Folder",fileName]  message:@"Would you like to overwrite the existing file?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes",@"No, incriment", nil];
         
         alertView.tag=50;
         
@@ -379,7 +485,45 @@
 
 
 }
-
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    
+ 
+    if ([SCUtilities is_iPad]) {
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        
+        UIColor *backgroundColor=nil;
+        
+        if(indexPath.row==NSNotFound|| tableModel.tag>0)
+        {
+            
+            backgroundColor=(UIColor *)appDelegate.window.backgroundColor;
+            
+        }
+        else {
+            
+            
+            
+            backgroundColor=[UIColor clearColor];
+            
+            
+        }
+        
+        if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
+            
+            [detailTableViewModel.modeledTableView setBackgroundView:nil];
+            UIView *view=[[UIView alloc]init];
+            [detailTableViewModel.modeledTableView setBackgroundView:view];
+            [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
+            
+            
+            
+            
+        }
+        
+        
+    }
+}
 -(void)tableViewModelDidPullToRefresh:(SCTableViewModel *)tableModel{
     changedDefaultFileName=NO;
 
@@ -431,6 +575,9 @@
 
     
     if (textField.tag==23) {
+        if (![SCUtilities is_iPad]) {
+           [ self.tableView setContentOffset:CGPointMake(0, self.monthYearFieldOverMonthYearField.frame.origin.y+self.monthYearFieldOverMonthYearField.frame.size.height)  animated:YES ];
+        }
         [self setMyPickerViewToCurrentMonthAndYear];
         if (self.monthToDisplay) {
             NSString *monthStr=[self titleForRow:currentMonth-1]; 
@@ -555,8 +702,14 @@
     
     if ([SCUtilities is_iPad]) 
         return  180.0;
-    else
-        return 50.0;
+    else if(component==0){
+        return 180.0;
+    }
+    else {
+        return 80.0;
+    }
+        
+        
     
     
     
@@ -594,7 +747,12 @@
 
 -(UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
 
-      UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(20, 0, 150.0, 30.0)];
+    CGFloat viewWidth=180.0;
+    if (component==1) {
+        viewWidth=80.0;
+    }
+    
+      UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(20, 0, viewWidth, 30.0)];
     
     
     
@@ -614,6 +772,7 @@
 
     label.font=[UIFont boldSystemFontOfSize:21];
     label.backgroundColor=[UIColor clearColor];
+    label.textAlignment=UITextAlignmentCenter;
  
     return label;
 }
