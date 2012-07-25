@@ -830,6 +830,11 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     difYear=nowYear-birthYear;
     
+    if (difMonth<0) {
+        difMonth=12-difMonth;
+        difYear=difYear-1;
+    }
+    
     NSString *age =[NSString stringWithFormat:@"%iy %im %id",difYear,difMonth,difDay];
     
 

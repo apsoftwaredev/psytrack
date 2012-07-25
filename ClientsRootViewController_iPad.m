@@ -1323,7 +1323,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
    
     if (tableModel.tag==1 &&index==0 &&section.cellCount>3) {
         [section insertCell:[SCLabelCell cellWithText:@"Age"] atIndex:2];
-        [section insertCell:[SCLabelCell cellWithText:@"Wechsler Age"] atIndex:3];
+        [section insertCell:[SCLabelCell cellWithText:@"Age (30-Day Months)"] atIndex:3];
         
         
         

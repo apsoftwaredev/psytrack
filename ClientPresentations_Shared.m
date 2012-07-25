@@ -1245,10 +1245,8 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 
 
-NSLog(@"cell text is %@",cell.textLabel.text);
-NSLog(@"section is %i",indexPath.section);
-NSLog(@"tablemodel is %i",tableViewModel.tag);
-    if ((tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Wechlsler Test Age"])||(tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Test Age"])) 
+
+    if ((tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Age (30-day Months)"])||(tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Test Age"])) 
     {
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         
@@ -1331,7 +1329,7 @@ if (tableViewModel.tag==5&&tableViewModel.sectionCount>1&&indexPath.section==1){
             SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" boundObject:nil labelTextPropertyName:@"TestAge"]
         ;
        
-            SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Wechsler Test Age" boundObject:nil labelTextPropertyName:@"WechslerTestAge"];
+            SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Test Age (30-day Months)" boundObject:nil labelTextPropertyName:@"WechslerTestAge"];
             
             [section addCell:actualAge];
             [section addCell:wechslerAge];

@@ -20,8 +20,8 @@ Acknoledgements:
 
 TO DO:
 
--supervisor label goes away on existing hours supervision
--update total label when pull to refresh
+
+
 -motor test completed  AIMS test
 -psychosocial stressors medical and gaf to diagnosis
 -allergies
@@ -40,10 +40,9 @@ TO DO:
 -prescriber list not defauted when prescriber
 
 -temperature allow decimal
--assessment, testadministrations testing session name mismatch
 
 -add event title
--incomplete paperwork not red
+
 -two my infos showing up
 -weight conversion not correct 320 lbs to kg
 

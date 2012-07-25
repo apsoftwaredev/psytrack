@@ -2462,12 +2462,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         }
         
         
-        //        section.footerView.autoresizingMask=;
-        //        
-        //       //NSLog(@"section width is is %f",section.footerView.frame.size.width;
-        
+               
     }
-    NSLog(@"index is %i",index);
+  
 
     if (tableViewModel.tag==3 && tableViewModel.sectionCount&&index==1) {
         
@@ -2485,7 +2482,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 NSLog(@"object section managed obeject entity %@",objectSectionManagedObject.entity.name);
                 //if change the cell text then update the method that sets the age with the new cell text
                 SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" boundObject:nil labelTextPropertyName:@"Age"];
-                SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Wechlsler Test Age" boundObject:nil labelTextPropertyName:@"WechslerAge"];
+                SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Age (30-Day Months)" boundObject:nil labelTextPropertyName:@"WechslerAge"];
                 actualAge.label.text=[NSString stringWithString: @"0y 0m"];
                 wechslerAge.label.text=[NSString stringWithFormat:@"%iy %im",0,0];
                 [sectionOne addCell:actualAge];

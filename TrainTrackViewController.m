@@ -281,7 +281,7 @@
                 break;
             }
             case 5:{
-                result = 2;
+                result = 1;
                 break;
             }
             case 6:{
@@ -293,7 +293,7 @@
                 break;
             }
             case 8:{
-                result = 3;
+                result = 2;
                 break;
             }
 
@@ -396,7 +396,7 @@
                 case 5:
                 {
                     if (indexPath.row==0)result.textLabel.text=@"Consultations";
-                    if (indexPath.row==1)result.textLabel.text=@"Grant Writing";
+                   
                     
                     
                     
@@ -430,8 +430,8 @@
                 case 8:
                 {
                     if (indexPath.row==0)result.textLabel.text=@"Research Projects";
-                    if (indexPath.row==1)result.textLabel.text=@"Research Participation";
-                    if (indexPath.row==2)result.textLabel.text=@"Commnunity Service";
+                    
+                    if (indexPath.row==1)result.textLabel.text=@"Commnunity Service";
 
                     
                     
@@ -1032,29 +1032,29 @@ return headerView;
 
 
 
-
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-   
-//    [super tableViewModel:tableViewModel detailViewWillPresentForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
+//
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+//   
+////    [super tableViewModel:tableViewModel detailViewWillPresentForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
+////    
+//    if (tableViewModel.tag==0) {
+//        if (detailTableViewModel.sectionCount>6) {
 //    
-    if (tableViewModel.tag==0) {
-        if (detailTableViewModel.sectionCount>6) {
-    
-    if (indexPath.section==0) {
-        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-        
-      
-        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject; 
-        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClinicianEntity"]) {
-            [detailTableViewModel removeSectionAtIndex:1];
-            [detailTableViewModel removeSectionAtIndex:4];
-        }
-
-    }
-            
-        }
-    }
-}
+//    if (indexPath.section==0) {
+//        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+//        
+//      
+//        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject; 
+//        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClinicianEntity"]) {
+//            [detailTableViewModel removeSectionAtIndex:1];
+//            [detailTableViewModel removeSectionAtIndex:4];
+//        }
+//
+//    }
+//            
+//        }
+//    }
+//}
 
 //-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 //    
@@ -1091,342 +1091,71 @@ return headerView;
 //
 //}
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
-{
-//    [super tableViewModel:tableViewModel didAddSectionAtIndex:index];
-    SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
-    if (tableViewModel.tag==0) {
-      
-    if (index==0) {
-        
-        if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
-            SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
-            
-            
-            //NSLog(@"items count is %i",[arrayOfObjectsSection.itemsSet count]);
-            if ([arrayOfObjectsSection.items count]>1) {
-               
-              
-                for (int i=0; i<[arrayOfObjectsSection.items count]; i++) {
-                    ClinicianEntity *clinicianObject=(ClinicianEntity *)[arrayOfObjectsSection.items objectAtIndex:i];
-                    if (i>0) {
-                        clinicianObject.myInformation=FALSE;
-                    }
-                    
-                }
-                
-               
-                if (arrayOfObjectsSection.cellCount>1) {
-                    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-                    
-                    [appDelegate saveContext];
-//                    [tableModel_ reloadBoundValues];
-//                    [tableModel_.modeledTableView reloadData];
-                }
-            } 
-          
-                
-//               //                
-//                SCSelectionCell *selectionCell=[[SCSelectionCell alloc]initWithText:@"My Information" withBoundKey:@"myClinicianDataCell" withLabelTextValue:nil];
-//                
-//                selectionCell.boundObject=myInfoObject;
-//                
-//                [arrayOfObjectsSection addCell:selectionCell];
-                
-                
-                
-        }
-            
-            
-        
-    }
-        
-    }
-//    if(section.headerTitle !=nil)
-//    {
-//        
-//        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 60)];
-//        UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 40)];
-//        
-//        
-//        
-//        
-//        headerLabel.text = section.headerTitle;
-//        
-//        
-//        headerLabel.backgroundColor = [UIColor clearColor];
-//        headerLabel.textColor = [UIColor whiteColor];
-//        
-//        [containerView addSubview:headerLabel];
-//        
-//        section.headerView = containerView;
-//        [self.tableView reloadData];
-//        
-//          }
-}
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-    
-    
-    
-    
-        detailTableViewModel.delegate = self;
-        detailTableViewModel.tag = tableViewModel.tag+1;
-     
-    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-        
-   
-        [detailTableViewModel.modeledTableView setBackgroundView:nil];
-        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
-    }
-    
-    
-    
-}
-
-//-(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//
-//    
-//    
-//    
-//    SCTableViewCell *cell =(SCTableViewCell *) [tableViewModel cellAtIndexPath:indexPath];
-//    SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-//    
-//    //NSLog(@"index path section %i",indexPath.section);
+//- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSInteger)index
+//{
+////    [super tableViewModel:tableViewModel didAddSectionAtIndex:index];
+//    SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
 //    if (tableViewModel.tag==0) {
-//    
-//    switch (cell.tag) {
+//      
+//    if (index==0) {
 //        
-//        case 0:
-//        {
-//            if (indexPath.section==0) {
-//                 //NSLog(@"selected zero");
-//                if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
-//                    SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
+//        if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
+//            SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
+//            
+//            
+//            //NSLog(@"items count is %i",[arrayOfObjectsSection.itemsSet count]);
+//            if ([arrayOfObjectsSection.items count]>1) {
+//               
+//              
+//                for (int i=0; i<[arrayOfObjectsSection.items count]; i++) {
+//                    ClinicianEntity *clinicianObject=(ClinicianEntity *)[arrayOfObjectsSection.items objectAtIndex:i];
+//                    if (i>0) {
+//                        clinicianObject.myInformation=FALSE;
+//                    }
 //                    
-//                    
-//                    [arrayOfObjectsSection dispatchEventSelectRowAtIndexPath:indexPath];
 //                }
-//            
-//            
-//            }
+//                
+//               
+//                if (arrayOfObjectsSection.cellCount>1) {
+//                    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//                    
+//                    [appDelegate saveContext];
+//                }
+//            } 
 //          
-//        }  
-//         break;
-//        
-//        
-//        case 2:
-//        {
-//            TestAdministrationsViewController_iPad *testAdministrationsViewController_iPad = [[TestAdministrationsViewController_iPad alloc] initWithNibName:@"TestAdministrationsViewController_iPad" bundle:nil];
-//            
-//            [self.navigationController pushViewController:testAdministrationsViewController_iPad animated:YES];
-//            break;
-//        }    
-//            
-//        case 7:
-//        {
-//            NSString *existingHoursViewControllerNibName=nil;
-//            if ([SCUtilities is_iPad]) {
-//                existingHoursViewControllerNibName=@"ExistingHoursViewController_iPad";
-//            }else {
-//                existingHoursViewControllerNibName=@"ExistingHoursViewController";
-//            }
-//            ExistingHoursViewController *existingHoursViewController = [[ExistingHoursViewController alloc] initWithNibName:existingHoursViewControllerNibName bundle:[NSBundle mainBundle]];
-//            
-//            [self.navigationController pushViewController:existingHoursViewController animated:YES];
-//            break;
-//        }    
-//        case 15:
-//        {
-//            
-//            
-//                        
-////                if ([cell isKindOfClass:[CustomSCSelectonCellWithLoading class]]) {
-////                    CustomSCSelectonCellWithLoading * loadingCell=(CustomSCSelectonCellWithLoading *)cell;
-////                    loadingCell.imageView.hidden=FALSE;
-////                }
-//            
-//            
-//            
-//            
-//           
-//               
-////           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //                
-////                self.tableView.userInteractionEnabled=FALSE;
-//                UITabBar *tabBar=(UITabBar *) [(PTTAppDelegate *)[UIApplication sharedApplication].delegate tabBar];
-//                tabBar.userInteractionEnabled=FALSE;            
-//            
-//            DrugViewController_iPhone *drugViewController_iPhone = [[DrugViewController_iPhone alloc] initWithNibName:@"DrugViewController_iPhone" bundle:nil];
-//            
-//            [self.navigationController pushViewController:drugViewController_iPhone animated:YES];
-//           
-//                if ([cell isKindOfClass:[CustomSCSelectonCellWithLoading class]]) {
-//                    CustomSCSelectonCellWithLoading * loadingCell=(CustomSCSelectonCellWithLoading *)cell;
-//                    loadingCell.imageView.hidden=TRUE;
-//                    [loadingCell setSelected:FALSE];
-//                    [loadingCell setHighlighted:FALSE animated:YES];
-//                    
-//                }
-//                tabBar.userInteractionEnabled=TRUE;
-////                self.tableView.userInteractionEnabled=TRUE;
 //                
-//               
-////           });
-//
-////            dispatch_release(firstSerialQueue);
+//                
+//                
+//        }
 //            
 //            
-//            break;
-//        }    
-//        case 16:
-//        {
-//                       
-//            LCYLockSettingsViewController *lockSettingsVC = [[LCYLockSettingsViewController alloc] initWithNibName:@"LCYLockSettingsViewController" bundle:nil];
-//            [[self navigationController] pushViewController:lockSettingsVC animated:YES];            
-//            break;
-//        }    
-//        case 17:
-//        {
-//            InAppSettingsViewController *inAppSettingsViewController = [[InAppSettingsViewController alloc] initWithNibName:@"InAppSettingsViewController" bundle:nil];
-//            
-//            [self.navigationController pushViewController:inAppSettingsViewController animated:YES];
-//            
-//            inAppSettingsViewController.rootNavController=self.navigationController;
-//            break;
-//        }    
-//        case 18:
-//        {
-//            DTLayoutDefinition *supportLayout = [DTLayoutDefinition layoutNamed:@"support"];
-//			DTAboutViewController *support =[[DTAboutViewController alloc] initWithLayout:supportLayout];
-//			support.title = @"Support";
-//			[self.navigationController pushViewController:support animated:YES];
-//            break;
-//        }   
-//        case 19:
-//        {
-//            DTAboutViewController *about = [[DTAboutViewController alloc] initWithLayout:nil]; // default is @"about"
-//			about.title	 = @"About";
-//			about.delegate = self;
-//			[self.navigationController pushViewController:about animated:YES];
-//        }   
-//        default:
-//            break;
+//        
+//    }
+//        
 //    }
 //
-//        
-//    }     
-//else {
-//    if([section isKindOfClass:[SCArrayOfObjectsSection class]]){
-//        
-//        SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
-//        [arrayOfObjectsSection dispatchEventSelectRowAtIndexPath:indexPath];
-//        
-//        
-//    }
-//}  
-    
-//    
-//    if (cell.tag==2){
-//        InterventionViewController *interventionViewController = [[InterventionViewController alloc] initWithNibName:@"InterventionViewController" bundle:nil];
-//        
-//        [self.navigationController pushViewController:interventionViewController animated:YES];
-//        [interventionViewController release];
-//        
-//    }
-//    if (cell.tag==3){
-//        IndirectSupportViewController *indirectSupportViewController = [[IndirectSupportViewController alloc] initWithNibName:@"IndirectSupportViewController" bundle:nil];
-//        
-//        [self.navigationController pushViewController:indirectSupportViewController animated:YES];
-//        [indirectSupportViewController release];
-//        
-//    }
-//    if (cell.tag==4){
-//        SupervisionReceivedViewController *supervisionReceivedViewController = [[SupervisionReceivedViewController alloc] initWithNibName:@"SupervisionReceivedViewController" bundle:nil];
-//        
-//        [self.navigationController pushViewController:supervisionReceivedViewController animated:YES];
-//        [supervisionReceivedViewController release];
-//        
-//    }
-//    if (cell.tag==5){
-//        SupervisionGivenViewController *supervisionGivenViewController = [[SupervisionGivenViewController alloc] initWithNibName:@"SupervisionGivenViewController" bundle:nil];
-//        
-//        [self.navigationController pushViewController:supervisionGivenViewController animated:YES];
-//        [supervisionGivenViewController release];
-//        
- 
-//   }
-//
-//- (IASKAppSettingsViewController*)appSettingsViewController {
-//	if (!appSettingsViewController) {
-//		appSettingsViewController = [[IASKAppSettingsViewController alloc] initWithNibName:@"IASKAppSettingsView" bundle:nil];
-//		appSettingsViewController.delegate = self;
-//	}
-//	return appSettingsViewController;
 //}
-//#pragma mark -
-//#pragma mark IASKAppSettingsViewControllerDelegate protocol
-//- (void)settingsViewControllerDidEnd:(IASKAppSettingsViewController*)sender {
-//    [self dismissModalViewControllerAnimated:YES];
-//	
-//	// your code here to reconfigure the app for changed settings
-//}
-//
-//// optional delegate method for handling mail sending result
-//- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 //    
-//    if ( error != nil ) {
-//        // handle error here
+//    
+//    
+//    
+//        detailTableViewModel.delegate = self;
+//        detailTableViewModel.tag = tableViewModel.tag+1;
+//     
+//    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+//        
+//   
+//        [detailTableViewModel.modeledTableView setBackgroundView:nil];
+//        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
+//        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
 //    }
 //    
-//    if ( result == MFMailComposeResultSent ) {
-//        // your code here to handle this result
-//    }
-//    else if ( result == MFMailComposeResultCancelled ) {
-//        // ...
-//    }
-//    else if ( result == MFMailComposeResultSaved ) {
-//        // ...
-//    }
-//    else if ( result == MFMailComposeResultFailed ) {
-//        // ...
-//    }
+//    
+//    
 //}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderForKey:(NSString*)key {
-//	if ([key isEqualToString:@"IASKLogo"]) {
-//		return [UIImage imageNamed:@"Icon.png"].size.height + 25;
-//	}
-//	return 0;
-//}
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderForKey:(NSString*)key {
-//	if ([key isEqualToString:@"IASKLogo"]) {
-//		UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Icon.png"]];
-//		imageView.contentMode = UIViewContentModeCenter;
-//		return imageView ;
-//	}
-//	return nil;
-//}
-//
-//
-//
-//#pragma mark UITextViewDelegate (for CustomViewCell)
-//- (void)textViewDidChange:(UITextView *)textView {
-//    [[NSUserDefaults standardUserDefaults] setObject:textView.text forKey:@"customCell"];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:kIASKAppSettingChanged object:@"customCell"];
-//}
-//
-//#pragma mark -
-//- (void)settingsViewController:(IASKAppSettingsViewController*)sender buttonTappedForKey:(NSString*)key {
-//	if ([key isEqualToString:@"ButtonDemoAction1"]) {
-//		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Demo Action 1 called" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//		[alert show];
-//	} else {
-//		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Demo Action 2 called" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//		[alert show];
-//	}
-//}
+
 
 - (IBAction) lockScreen: (id) sender;
 {
@@ -1435,27 +1164,7 @@ return headerView;
 	//NSLog(@"app passcode is: %@", [appDelegate appLockPasscode]);	
 	
     [appDelegate lockApplication];
-//	if ([appDelegate isPasscodeOn])
-//	{		
-//		[appDelegate lockApplication];
-//	}
-//	else 
-//	{
-////		PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-//        
-////        [[appDelegate window] addSubview:self.messageView];
-//        
-//       
-//
-//        
-//        
-//        UICasualAlert *casualAlert=[[UICasualAlert alloc]init];
-////        [casualAlert displayRedAlert];
-//         [casualAlert displayRegularAlert:@"Need To Set Passcode in Lock Screen Settings" forDuration:2.0 inView:nil];
-////        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Need to set Passcode" message:nil delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-////		[av show];
-//		
-//	}
+
     
 }
 
