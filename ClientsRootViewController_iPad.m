@@ -391,9 +391,9 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
             
             
         }
-        
-        UIImage *menuBarBackground=[UIImage imageNamed:@"ipad-menubar-right.png"];
-        [detailTableViewModel.viewController.navigationController.navigationBar setBackgroundImage:menuBarBackground forBarMetrics:UIBarMetricsDefault];
+//        
+//        UIImage *menuBarBackground=[UIImage imageNamed:@"ipad-menubar-right.png"];
+//        [detailTableViewModel.viewController.navigationController.navigationBar setBackgroundImage:menuBarBackground forBarMetrics:UIBarMetricsDefault];
         
     }    
 //    if (tableModel.tag==4&&tableModel.sectionCount ) {

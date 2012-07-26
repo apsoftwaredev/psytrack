@@ -18,8 +18,9 @@
 #import "DrugViewController_iPhone.h"
 #import "DrugActionDateViewController.h"
 #import "PTTAppDelegate.h"
-#import "CustomSCSelectonCellWithLoading.h"
 
+#import "PTTEncryption.h"
+#import "SCArrayOfObjectsModel+CoreData+SelectionSection.h"
 
 @implementation DrugViewController_iPhone
 @synthesize searchBar;
@@ -113,7 +114,7 @@
     drugsManagedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate drugsManagedObjectContext];
     //Create a class definition for Client entity
 	
-    SCEntityDefinition *drugDef = [SCEntityDefinition definitionWithEntityName:@"DrugProductEntity" 
+    drugDef = [SCEntityDefinition definitionWithEntityName:@"DrugProductEntity" 
                                       managedObjectContext:drugsManagedObjectContext 
                                              propertyNames:[NSArray arrayWithObject:@"tECode"]];
     
@@ -201,34 +202,39 @@
     drugDef.keyPropertyName=@"drugName";
 //    if (drugsManagedObjectContext) {
 //   
-//    NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:drugsManagedObjectContext];
-//    
-//    
-//    NSFetchRequest *productFetchRequest = [[NSFetchRequest alloc] init];
-//   
-//    
-//    
-//    [productFetchRequest setEntity:productEntityDesc];
-//    
-//    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"drugName"
-//                                                                   ascending:YES];
-//   NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-//    
-//    
-//    [productFetchRequest setSortDescriptors:sortDescriptors];
-//
-//   
-//    NSError *productError = nil;
-//        NSArray *productFetchedObjects;
-//        
-//        if ([drugsManagedObjectContext countForFetchRequest:productFetchRequest error:&productError]) {
-//       
-//        productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:productFetchRequest error:&productError];
-//            
-//        }
-//    drugsMutableArray=[NSMutableArray arrayWithArray:productFetchedObjects];
-//    productFetchedObjects=nil;
-//    } 
+    productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:drugsManagedObjectContext];
+    
+    
+    productFetchRequest = [[NSFetchRequest alloc] init];
+  filterPredicate=[NSPredicate predicateWithFormat:@"drugName== nil"];
+    
+    [productFetchRequest setPredicate:filterPredicate];
+    
+    
+    [productFetchRequest setEntity:productEntityDesc];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"drugName"
+                                                                   ascending:YES];
+   NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    
+    
+    [productFetchRequest setSortDescriptors:sortDescriptors];
+
+   
+    NSError *productError = nil;
+        NSArray *productFetchedObjects;
+        
+        if ([drugsManagedObjectContext countForFetchRequest:productFetchRequest error:&productError]) {
+       
+        productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:productFetchRequest error:&productError];
+            
+        }
+    NSMutableArray *mutableDrugsArray=[NSMutableArray array];
+    if (productFetchedObjects) {
+        mutableDrugsArray= [NSMutableArray arrayWithArray:productFetchedObjects];
+    }
+   
+        
 //    NSLog(@"drugsmutable array %i",drugsMutableArray.count);
     // Instantiate the tabel model
     
@@ -236,76 +242,30 @@
 //    
 //    
 //    
-//    
-
-    
-    SCArrayOfObjectsModel *objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:drugDef];
-	objectsModel.searchBar = self.searchBar;
-	objectsModel.searchPropertyName = @"drugName";
-	objectsModel.addButtonItem = self.addButton;
+   
+    if (!isInDetailSubview) {
   
-//	self.searchBar.delegate=self;
+    objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView];
     
-    // Replace the default model with the new objectsModel
-//    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"drugName Matches %@",@"a"];
-    objectsModel.enablePullToRefresh = TRUE;
-    objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
    
-    
-    SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"drugName" sortAscending:YES filterPredicate:nil];
-   
-  
-    dataFetchOptions.batchStartingOffset=0;
-    dataFetchOptions.batchSize=10;
-    objectsModel.dataStore.storeMode=SCStoreModeAsynchronous;
- 
-    objectsModel.dataFetchOptions=dataFetchOptions;
-   
-    [objectsModel reloadBoundValues];
-    
-    self.tableViewModel = objectsModel;
-//    [self.tableViewModel reloadBoundValues];
-    if (isInDetailSubview) {
+	        
+    }else if (isInDetailSubview) {
         
-//         NSPredicate *currentClientsPredicate=[NSPredicate predicateWithFormat:@"applNo MATCHES %@",drugObjectSelectionCell_.d];
-        
-//        tableModel=[[SCArrayOfObjectsModel alloc]tableViewModelWithTableView:(UITableView *)self.tableView
-//                                                          withViewController:(UIViewController *)self
-//                                                                   withItems:(NSMutableArray *)drugsMutableArray
-//                                                         withClassDefinition:(SCEntityDefinition *)classDefinition
-//                                                       useSCSelectionSection:(BOOL)_useSCSelectionSection];
-        
-        
-        
-            
-//       tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withItems:drugsMutableArray withClassDefinition:drugDef useSCSelectionSection:YES];	
-//        
-//        tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView items:drugsMutableArray itemsDefinition:drugDef];	
-        
-//        [self.searchBar setSelectedScopeButtonIndex:1];
-       
+        objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView];
         NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
         
         
-        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped)];
+        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(myDoneButtonTapped)];
         [buttons addObject:doneButton];
         
         // create a spacer
-        UIBarButtonItem* viewButton = [[UIBarButtonItem alloc]
-                                       initWithTitle:@"View" style:UIBarButtonItemStylePlain target:nil action:nil];
+        UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
+        [buttons addObject:editButton];
         
-      
-        [buttons addObject:viewButton];
-        
-//        [self editButtonItem];
+        [self editButtonItem];
         
         
-        // create a standard "add" button
-//        UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
-////                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
-////        addButton.style = UIBarButtonItemStyleBordered;
-////        [buttons addObject:addButton];
-////        
         
         
         // stick the buttons in the toolbar
@@ -313,31 +273,93 @@
         objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
         
         
-        UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
+        UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTappedInDetalView)];
         
         self.navigationItem.leftBarButtonItem=cancelButton;
+
         
+    }
+       
+     
+   
+	objectsModel.searchPropertyName = @"drugName";
+
+    
+    //	self.searchBar.delegate=self;
+    
+    // Replace the default model with the new objectsModel
+    //    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"drugName Matches %@",@"a"];
+    objectsModel.enablePullToRefresh = TRUE;
+    objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
+    objectsModel.delegate=self;
+    
+    objectsModel.allowAddingItems=NO;
+    objectsModel.allowDeletingItems=NO;
+    objectsModel.allowEditDetailView=YES;
+    objectsModel.allowMovingItems=YES;
+    objectsModel.allowRowSelection=YES;
+    
+    objectsModel.delegate=self;
+    SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"drugName" sortAscending:YES filterPredicate:nil];
+    
+    
+    objectsModel.autoAssignDelegateForDetailModels=YES;
+    objectsModel.dataStore.storeMode=SCStoreModeAsynchronous;
+    
+    objectsModel.dataFetchOptions=dataFetchOptions;
+    //    [objectsModel reloadBoundValues];
+    
+    self.tableViewModel = objectsModel;
+    [self.tableViewModel reloadBoundValues];
+    self.searchBar.delegate=self;
+
+    if (isInDetailSubview) {
+    
+//    NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
+////        
+////        
+//        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(myDoneButtonTapped)];
+//        [buttons addObject:doneButton];
+//        
+//        // create a spacer
+//        UIBarButtonItem* viewButton = [[UIBarButtonItem alloc]
+//                                       initWithTitle:@"View" style:UIBarButtonItemStylePlain target:self action:@selector(viewButtonTapped)];
+//        
+//      
+//        [buttons addObject:viewButton];
+//        
+////        [self editButtonItem];
+//        
+//        
+////        // create a standard "add" button
+////        UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
+////                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
+////        addButton.style = UIBarButtonItemStyleBordered;
+////        [buttons addObject:addButton];
+//////        
+//        
+//        
+//        // stick the buttons in the toolbar
+//        self.navigationItem.rightBarButtonItems=buttons;
+////        objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
+////        
+//        
+//        UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
+////        
+////        self.navigationItem.leftBarButtonItem=cancelButton;
+////        
         //so you can tell that the it is in view mode
         objectsModel.allowMovingItems=YES;
         
-    }
-    else
-    {
+//        self.navigationItem.rightBarButtonItem=doneButton;
         
     
-    
-        if (self.navigationItem.rightBarButtonItems.count>1) {
-            
-            objectsModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
-        }
-        
-        
-        
-        if (self.navigationItem.rightBarButtonItems.count >0)
-        {
-            objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
-        }
-        
+//        
+//        if (self.navigationItem.rightBarButtonItems.count >0)
+//        {
+//            objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
+//        }
+//        
 
         
     }
@@ -365,23 +387,108 @@
 }
 
 //-()sea
-//-(NSArray *)tableViewModel:(SCArrayOfItemsModel *)tableModel customSearchResultForSearchText:(NSString *)searchText autoSearchResults:(NSArray *)autoSearchResults{
-//
-//    NSArray *array=[NSArray array];
-//    
-//    if ([searchText isEqualToString:@""]){
-//        
-//        return array;
-//    
-//    
-//    }
-//    else {
-//        return autoSearchResults;
-//    }
-//
-//
-//}
+-(void)viewButtonTapped{
 
+    SCArrayOfObjectsSection *section=(SCArrayOfObjectsSection *)[objectsModel sectionAtIndex:0];
+    section.allowEditDetailView=YES;
+    section.allowRowSelection=YES;
+    [section dispatchEventSelectRowAtIndexPath:[objectsModel indexPathForCell:objectsModel.activeCell]];
+
+}
+
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+
+    [self.searchBar resignFirstResponder];
+
+
+}
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+
+
+    [self.searchBar resignFirstResponder];
+
+
+}
+-(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    objectsModel=nil;
+
+    NSFetchRequest *newRequewst=[[NSFetchRequest alloc]init];
+       
+    filterPredicate=[NSPredicate predicateWithFormat:@"drugName contains [cd] %@",searchText];
+    
+    [newRequewst setPredicate:filterPredicate];
+    
+    [newRequewst setEntity:productEntityDesc];
+       
+    NSError *productError = nil;
+    NSArray *productFetchedObjects;
+    
+    if ([drugsManagedObjectContext countForFetchRequest:newRequewst error:&productError]) {
+        
+        productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:newRequewst error:&productError];
+    
+        NSLog(@"product fetched objects are %@",productFetchedObjects);
+    }
+       
+    
+    
+    [objectsModel removeAllSections];
+    if (isInDetailSubview) {
+         objectsModel=[[SCArrayOfObjectsModel_UseSelectionSection alloc]initWithTableView:self.tableView items:[NSMutableArray arrayWithArray:productFetchedObjects] itemsDefinition:drugDef];
+    
+
+    }
+    else {
+        objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView items:[NSMutableArray arrayWithArray:productFetchedObjects] itemsDefinition:drugDef];
+    }
+    
+       
+	objectsModel.searchPropertyName = @"drugName";
+	objectsModel.addButtonItem = self.addButton;
+    
+    //	self.searchBar.delegate=self;
+    
+    // Replace the default model with the new objectsModel
+    //    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"drugName Matches %@",@"a"];
+    objectsModel.enablePullToRefresh = TRUE;
+    objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
+    objectsModel.delegate=self;
+    
+    objectsModel.allowAddingItems=NO;
+    objectsModel.allowDeletingItems=NO;
+    objectsModel.allowEditDetailView=YES;
+    objectsModel.allowMovingItems=YES;
+    objectsModel.allowRowSelection=YES;
+    objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
+    objectsModel.delegate=self;
+    SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"drugName" sortAscending:YES filterPredicate:nil];
+    
+    
+    objectsModel.autoAssignDelegateForDetailModels=YES;
+    objectsModel.dataStore.storeMode=SCStoreModeAsynchronous;
+    
+    objectsModel.dataFetchOptions=dataFetchOptions;
+    //    [objectsModel reloadBoundValues];
+    
+    self.tableViewModel = objectsModel;
+    [self.tableViewModel reloadBoundValues];
+   
+
+    [objectsModel.modeledTableView reloadData];
+
+
+
+}
+
+
+
+-(void)viewDidAppear:(BOOL)animated{
+
+   [[NSNotificationCenter defaultCenter]postNotificationName:@"DrugViewControllerDidAppear" object:nil];
+
+
+}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -477,9 +584,10 @@
             //                }
             
             
-            [self cancelButtonTapped];
+           
             
         } 
+         [self myCancelButtonTapped];
     }
     //        else
     //        {
@@ -883,7 +991,13 @@
     NSString *symetricString=@"8qfnbyfalVvdjf093uPmsdj30mz98fI6";
     NSData *symetricData=[symetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
     
-    NSData *decryptedData=[appDelegate decryptDataToPlainData:fileData usingSymetricKey:symetricData];
+    PTTEncryption *encryption=[[PTTEncryption alloc]init];
+    NSData *decryptedData=nil;
+    
+    if (symetricData.length==32) {
+         decryptedData=(NSData *) [encryption doCipher:fileData key:symetricData context:kCCDecrypt padding:(CCOptions *) kCCOptionECBMode];;
+    }
+   
     
     if (decryptedData.length) {
          [decryptedData writeToURL:drugsStoreURL atomically:YES];
@@ -892,11 +1006,11 @@
     
 
     if (drugsManagedObjectContext) {
-//        drugsManagedObjectContext=nil;
-        //NSLog(@"drugs persistent stores %@",drugsManagedObjectContext.persistentStoreCoordinator.persistentStores);
-        
+        drugsManagedObjectContext=nil;
+NSLog(@"drugs persistent stores %@",drugsManagedObjectContext.persistentStoreCoordinator.persistentStores);
+
 //        NSPersistentStore *persistentStore=(NSPersistentStore *)[appDelegate.drugsPersistentStoreCoordinator.persistentStores objectAtIndex:0];
-//        
+        
 //        NSError *error;
 //        [appDelegate.drugsPersistentStoreCoordinator removePersistentStore:(NSPersistentStore *)persistentStore error:&error ];
 //        
@@ -908,8 +1022,8 @@
 //        NSManagedObjectModel *drugModel=(NSManagedObjectModel *)[appDelegate drugsManagedObjectModel];
 //        drugModel=nil;
 //        
-////        drugsManagedObjectContext=nil;
-        drugsManagedObjectContext=(NSManagedObjectContext *)[appDelegate drugsManagedObjectContext];
+//        drugsManagedObjectContext=nil;
+//        drugsManagedObjectContext=(NSManagedObjectContext *)[appDelegate drugsManagedObjectContext];
 //        [drugModel awakeFromNib];
 //        [appDelegate drugsManagedObjectModel]=nil;
 //        [drugsManagedObjectContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
@@ -919,8 +1033,7 @@
         drugsManagedObjectContext=(NSManagedObjectContext *)[appDelegate drugsManagedObjectContext];
 //        NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:drugsManagedObjectContext];
         
-        [self.tableViewModel reloadBoundValues];
-        [self.tableView reloadData];
+       
 //        NSFetchRequest *productFetchRequest = [[NSFetchRequest alloc] init];
 //        
 //        
@@ -945,10 +1058,12 @@
 //        itemsArray=drugsMutableArray;
         //NSLog(@"drugsMutable array count is %i",drugsMutableArray.count);
     } 
-    
-    
-   
+    objectsModel=nil;
+    self.tableViewModel=nil;
+    [self viewDidLoad];
+    [objectsModel reloadBoundValues];
     [self.tableView reloadData];
+    
     downloadButton_.hidden=YES;
     downloadStopButton_.hidden=YES;
     downloadContinueButton_.hidden=YES;
@@ -1013,7 +1128,7 @@
     if (tableViewModel.tag==1 &&index==0) {
         if (section.cellCount<5) {
      
-        CustomSCSelectonCellWithLoading *drugActionDatesCell=[CustomSCSelectonCellWithLoading cellWithText:@"Drug Documents"];
+        SCObjectSelectionCell *drugActionDatesCell=[SCObjectSelectionCell cellWithText:@"Drug Documents"];
 //        drugActionDatesCell.delegate=self;
         drugActionDatesCell.tag=14;
         
@@ -1022,6 +1137,27 @@
         
             
         }
+    }
+    
+       
+   
+    
+    if(section.headerTitle !=nil)
+    {
+        
+        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
+        UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 40)];
+        
+        
+        headerLabel.backgroundColor = [UIColor clearColor];
+        headerLabel.textColor = [UIColor whiteColor];
+        headerLabel.text=section.headerTitle;
+        [containerView addSubview:headerLabel];
+        
+        section.headerView = containerView;
+        
+        
+        
     }
 }
 
@@ -1089,13 +1225,6 @@
                 
                 [self.navigationController pushViewController:drugActionDateViewController_iPhone animated:YES];
                 
-                if ([cell isKindOfClass:[CustomSCSelectonCellWithLoading class]]) {
-                    CustomSCSelectonCellWithLoading * loadingCell=(CustomSCSelectonCellWithLoading *)cell;
-                    loadingCell.imageView.hidden=TRUE;
-                    [loadingCell setSelected:FALSE];
-                    [loadingCell setHighlighted:FALSE animated:YES];
-                    
-                }
                 tabBar.userInteractionEnabled=TRUE;
                 self.tableView.userInteractionEnabled=TRUE;
                 

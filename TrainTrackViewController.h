@@ -16,24 +16,20 @@
  *
  */
 #import <UIKit/UIKit.h>
-//#import "SCTableViewModel.h"
-#import "CliniciansViewController_Shared.h"
-//#import "IASKAppSettingsViewController.h"
-#import "DTAboutViewController.h"
-@interface TrainTrackViewController : SCViewController < UITableViewDataSource, UITableViewDelegate , DTAboutViewControllerDelegate /* ,IASKSettingsDelegate  */>{
-    
-//     SCArrayOfObjectsModel *tableModel_;
-//   
-//    CliniciansViewController_Shared *cliniciansViewController_Shared_;
-//    IASKAppSettingsViewController *appSettingsViewController;
-}
-@property (nonatomic, strong) UITableView *myTableView;
 
-//@property (strong, nonatomic) SCArrayOfObjectsModel *tableModel;
-@property (strong, nonatomic) IBOutlet UIView *messageView;
-//@property (nonatomic, strong)CliniciansViewController_Shared *cliniciansViewController_Shared;
-//@property (nonatomic, retain) IASKAppSettingsViewController *appSettingsViewController;
-//- (void)loadTableModel:(id)sender;
+#import "CliniciansViewController_Shared.h"
+
+#import "DTAboutViewController.h"
+#import "BigProgressViewWithBlockedView.h"
+
+
+@interface TrainTrackViewController : UITableViewController < UITableViewDataSource, UITableViewDelegate , DTAboutViewControllerDelegate>{
+
+
+    BigProgressViewWithBlockedView *prog;
+
+}
+
 
 @end
 

@@ -15,7 +15,7 @@
  *	This notice may not be removed from this file.
  *
  */
-#import <UIKit/UIKit.h>
+
 
 @interface DrugDocOverviewCell : SCCustomCell  {
 

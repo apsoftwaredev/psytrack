@@ -75,6 +75,9 @@
     //    self.navigationItem.rightBarButtonItems=buttons;
     //    
     
+    
+    
+    
 	self.tableView.backgroundColor=[UIColor clearColor];
     
     NSManagedObjectContext *drugsManagedObjectContext=(NSManagedObjectContext *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate drugsManagedObjectContext];
@@ -84,6 +87,27 @@
     
     NSPredicate *applNoPredicate=[NSPredicate predicateWithFormat:@"applNo matches %@ AND seqNo matches %@",applNoString, inDocSeqNoString];
     
+    NSFetchRequest * actionDateFetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"DrugAppDocEntity"
+                                              inManagedObjectContext:drugsManagedObjectContext];
+    [actionDateFetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"docDate"
+                                                                   ascending:NO];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [actionDateFetchRequest setSortDescriptors:sortDescriptors];
+    
+    [actionDateFetchRequest setPredicate:applNoPredicate];
+    
+    
+    //    [fetchRequest setFetchBatchSize:10];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjectsArray = [drugsManagedObjectContext executeFetchRequest:actionDateFetchRequest error:&error];
+    
+      
+  
+
         
     
     
@@ -94,19 +118,36 @@
     appDocDef.keyPropertyName=@"docDate";
     
     // Instantiate the tabel model
-	tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView];	
+	objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView ];	
     
-    
+    objectsModel.delegate=self;
 //    SCArrayOfObjectsSection *section=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Action Documents" entityClassDefinition:appDocDef usingPredicate:applNoPredicate];
     
-    SCArrayOfObjectsSection *section =[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Action Documents" entityDefinition:appDocDef filterPredicate:applNoPredicate];
+    SCArrayOfObjectsSection *section =[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Action Documents" items:[NSMutableArray arrayWithArray:fetchedObjectsArray] itemsDefinition:appDocDef];
+    
+    
     section.allowDeletingItems=FALSE;
     section.allowEditDetailView=FALSE;
     section.allowMovingItems=FALSE;
     section.allowAddingItems=FALSE;
+    section.allowRowSelection=NO;
+    
+    section.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
+    {
+        
+        
+        NSDictionary *actionOverviewBindings = [NSDictionary 
+                                                dictionaryWithObjects:[NSArray arrayWithObjects:@"docDate", @"docType", @"docType",@"docDate",@"WebViewDetailViewController",   nil] 
+                                                forKeys:[NSArray arrayWithObjects:@"1", @"2", @"top",@"bottom",@"openNib",nil]]; // 1,2,3 are the control tags
+        SCCustomCell *actionOverviewCell = [SCCustomCell cellWithText:nil boundObject:nil objectBindings:actionOverviewBindings
+                                                              nibName:@"DrugDocOverviewCell_iPhone"];
+        
+        return actionOverviewCell;
+    };
+//    
     
 //    section.sortItemsSetAscending=FALSE;
-    [tableModel addSection:section];
+    [objectsModel addSection:section];
     
     //  	tableModel.searchPropertyName = @"drugName;activeIngredient";
     //    
@@ -191,7 +232,10 @@
     //    [(PTTAppDelegate *)[UIApplication sharedApplication].delegate application:[UIApplication sharedApplication]
     //                                               willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
     //                                                                     duration:5];
-    //    
+    //   
+    
+    
+    self.tableViewModel=objectsModel;
 }
 
 
@@ -221,6 +265,7 @@
 	SCCustomCell *actionOverviewCell = [SCCustomCell cellWithText:nil boundObject:nil objectBindings:actionOverviewBindings
                                                         nibName:@"DrugDocOverviewCell_iPhone"];
 	
+    
 	return actionOverviewCell;
 }
 
@@ -255,19 +300,6 @@
     
 }
 
-
-#pragma mark - SCTable view delegate
-
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    
-    //     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-    //     // ...
-    //     // Pass the selected object to the new view controller.
-    //     [self.navigationController pushViewController:detailViewController animated:YES];
-    
-}
 
 
 

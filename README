@@ -21,8 +21,8 @@ Acknoledgements:
 TO DO:
 
 
--need to fix calander so it doesn't add a new calader everytime it is installed
--fix drug view controller
+//-need to fix calander so it doesn't add a new calader everytime it is installed
+
 -update drug database
 -encrypt client presentation data
 -update model for consultations, CE, courses, conferences, forums, presentations, advising, leadership roles, expert testemony, research projects, community serivce, scholarships, fellowships, grants awarded

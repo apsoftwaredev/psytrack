@@ -1457,31 +1457,47 @@
 	self.eventStore = [[EKEventStore alloc] init];
     
 	self.eventsList = [[NSMutableArray alloc] initWithArray:0];
-    // find local source
-    //    EKSource *localSource = nil;
-    //    for (EKSource *source in eventStore.sources){
-    //        if (source.sourceType == EKSourceTypeLocal)
-    //        {
-    //            localSource = source;
-    //            
-    //            break;
-    //        }
-    //    }
-    
+// find local source
+//    EKSource *localSource = nil;
+//    for (EKSource *source in eventStore.sources){
+//        if (source.sourceType == EKSourceTypeLocal)
+//        {
+//            localSource = source;
+//            
+//            break;
+//        }
+//    }
+//
     self.psyTrackCalendar=[ self eventEditViewControllerDefaultCalendarForNewEvents:nil];
     
     
     
-    //                 NSSet *calendars=(NSSet *)[localSource calendars];
-    //                    for(id obj in calendars) { 
-    //                    if([obj isKindOfClass:[EKCalendar class]]){
-    //                        EKCalendar *calendar=(EKCalendar *)obj;
-    //                        if ([calendar.calendarIdentifier isEqualToString:self.psyTrackCalendar.calendarIdentifier]) {
-    //                            self.psyTrackCalendar=(EKCalendar *)calendar;
-    //                          
-    //                            break;
-    // 
-    // Get the default calendar from store.
+//                 NSSet *calendars=(NSSet *)[localSource calendars];
+//                    for(id obj in calendars) { 
+//                    if([obj isKindOfClass:[EKCalendar class]]){
+//                        EKCalendar *calendar=(EKCalendar *)obj;
+//                        if ([calendar.calendarIdentifier isEqualToString:self.psyTrackCalendar.calendarIdentifier]) {
+//                            self.psyTrackCalendar=(EKCalendar *)calendar;
+//                          
+//                            break;
+//                        }}}
+    
+    
+    NSLog(@"self event store calanders are %@",self.eventStore.calendars);
+    for (EKCalendar *calander in self.eventStore.calendars){
+    
+       
+    
+        if ([calander.title isEqualToString:@"Client Appointments"]) {
+    
+               NSError *err;
+            [self.eventStore removeCalendar:calander commit:YES error:&err ];
+        }
+    
+//     NSLog(@"calanders are %@",localSource.calendars);
+    
+    }
+// Get the default calendar from store.
 	
     
     //	    
@@ -3288,13 +3304,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             NSManagedObject *buttonManagedObject=(NSManagedObject *)buttonCell.boundObject;
             NSString *eventIdentifier=(NSString *)[buttonManagedObject valueForKey:@"eventIdentifier"];
             //NSLog(@"event identifier in add event %@",eventIdentifier);
-            if (eventIdentifier.length) {
+            if (eventIdentifier.length  &&[self.eventStore eventWithIdentifier:eventIdentifier]) {
                 if (!eventViewController) {
                     
                     thisEvent= (EKEvent *)[self.eventStore eventWithIdentifier:eventIdentifier];
                     
                     self.eventViewController=[[EKEventEditViewController alloc]initWithNibName:nil bundle:nil];
                     [eventViewController setEvent:thisEvent];
+                    
                     
                     //                  
                 }
@@ -3558,7 +3575,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 	
 	NSError *error = nil;
 	EKEvent *thisEvent = controller.event;
-	SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:1];
+	SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
     SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:3];
     
 	switch (action) {
@@ -3593,6 +3610,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             NSLog(@"cell bound object is %@",cell.boundObject);
             [cell commitChanges];
             [cell reloadBoundValue];
+            NSLog(@"cell tag is %i",cell.tag);
+            NSLog(@"cell is %@",cell.class);
             if ([cell isKindOfClass:[ButtonCell class]]) {
                 ButtonCell *buttonCell=(ButtonCell *)cell;
                 UIButton *button=(UIButton *)buttonCell.button;

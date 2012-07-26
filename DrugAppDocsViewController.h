@@ -17,10 +17,10 @@
  */
 #import <UIKit/UIKit.h>
 
-@interface DrugAppDocsViewController : UITableViewController <SCTableViewModelDataSource, SCTableViewModelDelegate>{
+@interface DrugAppDocsViewController : SCTableViewController <SCTableViewModelDataSource, SCTableViewModelDelegate>{
     
     
-    SCArrayOfObjectsModel *tableModel;
+    SCArrayOfObjectsModel *objectsModel;
     
     
 }

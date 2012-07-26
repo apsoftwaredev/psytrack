@@ -26,19 +26,20 @@
 
 @synthesize dateField,docTypeField;
 
-
 -(void)performInitialization{
+
     [super performInitialization];
     
-    docTypeField.delegate=self;
-//    self.delegate=self;
+    
+    
 
 }
+
 
 -(void)loadBindingsIntoCustomControls{
 
     
-//    [super loadBindingsIntoCustomControls];
+    [super loadBindingsIntoCustomControls];
 //    
 //   
 
@@ -123,7 +124,7 @@
 
 }
 
--(void)willDisplayCell:(SCTableViewCell *)cell{
+-(void)willDisplayCell{
 
 
     if (self.isSelected ) {
@@ -139,11 +140,59 @@
 
 }
 
--(void)willSelectCell:(SCTableViewCell *)cell{
+-(void)willSelectCell{
 
 
     docTypeField.textColor=[UIColor whiteColor];
     dateField.textColor=[UIColor whiteColor];
+
+
+}
+-(void)didSelectCell{
+
+    
+    if ([openNibNameString isEqualToString:@"WebViewDetailViewController"]) {
+        NSString *urlString=(NSString *)[self.boundObject valueForKey:@"docUrl"];
+        
+        
+        if (urlString.length) {
+            
+            WebViewDetailViewController *webDetailViewController=[[WebViewDetailViewController alloc]initWithNibName:openNibNameString bundle:nil urlString:urlString];
+            
+            [self.ownerTableViewModel.viewController.navigationController pushViewController:webDetailViewController animated:YES]; 
+            
+            
+        }
+        
+    }
+    else if ([openNibNameString isEqualToString:@"DrugAppDocsViewController"])
+    {
+        
+        //        //NSLog(@"bound object is %@",self.boundObject);
+        NSString *applNoString=[self.boundObject valueForKey:@"applNo"];
+        NSString *inDocSeqNoString=[self.boundObject valueForKey:@"inDocTypeSeqNo"];
+        
+        //        UITabBarController *tabBarController=(UITabBarController *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate tabBarController];
+        //        
+        //        [tabBarController.tabBar setHidden:TRUE ];
+        //
+        
+        DrugAppDocsViewController *drugAppDocsViewController=[[DrugAppDocsViewController alloc]initWithNibName:openNibNameString bundle:nil applNoString:applNoString inDocSeqNo:inDocSeqNoString];
+        
+        [self.ownerTableViewModel.viewController.navigationController pushViewController:drugAppDocsViewController animated:YES]; 
+        
+        
+    }
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    [UIView setAnimationDuration:2];
+    self.highlighted=FALSE;
+    docTypeField.textColor=[UIColor colorWithRed:0.185592 green:0.506495 blue:0.686239 alpha:1];
+    dateField.textColor=[UIColor blackColor];
+    [UIView commitAnimations];
+
+
+
 
 
 }
@@ -152,51 +201,11 @@
 //    //NSLog(@"text color is %@", docTypeField.textColor);
     
         
-   
-    if ([openNibNameString isEqualToString:@"WebViewDetailViewController"]) {
-        NSString *urlString=(NSString *)[self.boundObject valueForKey:@"docUrl"];
-        
-       
-        if (urlString.length) {
-            
-            WebViewDetailViewController *webDetailViewController=[[WebViewDetailViewController alloc]initWithNibName:openNibNameString bundle:nil urlString:urlString];
-            
-            [self.ownerTableViewModel.viewController.navigationController pushViewController:webDetailViewController animated:YES]; 
-           
-            
-        }
-        
-    }
-    else if ([openNibNameString isEqualToString:@"DrugAppDocsViewController"])
-    {
-        
-//        //NSLog(@"bound object is %@",self.boundObject);
-        NSString *applNoString=[self.boundObject valueForKey:@"applNo"];
-        NSString *inDocSeqNoString=[self.boundObject valueForKey:@"inDocTypeSeqNo"];
-        
-//        UITabBarController *tabBarController=(UITabBarController *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate tabBarController];
-//        
-//        [tabBarController.tabBar setHidden:TRUE ];
-//
-        
-        DrugAppDocsViewController *drugAppDocsViewController=[[DrugAppDocsViewController alloc]initWithNibName:openNibNameString bundle:nil applNoString:applNoString inDocSeqNo:inDocSeqNoString];
-        
-        [self.ownerTableViewModel.viewController.navigationController pushViewController:drugAppDocsViewController animated:YES]; 
-       
-
-    }
-    [UIView beginAnimations:nil context:nil];
-       [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    [UIView setAnimationDuration:2];
-    self.highlighted=FALSE;
-    docTypeField.textColor=[UIColor colorWithRed:0.185592 green:0.506495 blue:0.686239 alpha:1];
-    dateField.textColor=[UIColor blackColor];
-       [UIView commitAnimations];
-   
+     
 
 }
 
--(void)didDeselectCell:(SCTableViewCell *)cell{
+-(void)didDeselectCell{
 
     docTypeField.textColor=[UIColor colorWithRed:0.185592 green:0.506495 blue:0.686239 alpha:1];
     dateField.textColor=[UIColor blackColor];

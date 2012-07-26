@@ -11,6 +11,7 @@
 #import "SCArrayOfObjectsModel+CoreData+SelectionSection.h"
 
 #import "BigProgressViewWithBlockedView.h"
+
 @interface MonthlyPracticumLogGenerateViewController : SCTableViewController <ReaderViewControllerDelegate,UITextFieldDelegate, SCTableViewModelDelegate, UIPickerViewDelegate,UIPickerViewDataSource,UIAlertViewDelegate>{
 
 

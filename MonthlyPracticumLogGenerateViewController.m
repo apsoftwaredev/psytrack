@@ -207,7 +207,7 @@
 }
 
 -(void)generateAndViewReportPDFWithFileName:(NSString *)fileName{
-    [self.view setNeedsDisplay];
+   
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
     NSString *phrase = self.pdfPasswordTextField.text; // Document password (for unlocking most encrypted PDF files)

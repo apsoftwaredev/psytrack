@@ -46,10 +46,10 @@
 
 @implementation TrainTrackViewController
 
-@synthesize messageView;
+
 //@synthesize cliniciansViewController_Shared=cliniciansViewController_Shared_;
 //@synthesize appSettingsViewController;
-@synthesize myTableView;
+
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -246,10 +246,8 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    NSInteger result = 0;
-    if ([tableView isEqual:self.myTableView]){
-        result = 14;
-    }
+    NSInteger result  = 14;
+    
     return result;
     
 }
@@ -258,7 +256,7 @@
  numberOfRowsInSection:(NSInteger)section{
     
     NSInteger result = 0;
-    if ([tableView isEqual:self.myTableView]){
+   
         switch (section){
             case 0:{
                 result = 1;
@@ -323,7 +321,7 @@
                 break;
                   
         }
-    }
+    
     return result;
     
 }
@@ -340,7 +338,7 @@
     
     UITableViewCell *result = nil;
     
-    if ([tableView isEqual:self.myTableView]){
+    
         
         static NSString *TableViewCellIdentifier = @"MyCells";
         
@@ -487,7 +485,7 @@
         result.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
         
-    }
+    
     
     return result;
     
@@ -702,10 +700,23 @@
             UITabBar *tabBar=(UITabBar *) [(PTTAppDelegate *)[UIApplication sharedApplication].delegate tabBar];
             tabBar.userInteractionEnabled=FALSE;            
             
+            [[NSNotificationCenter defaultCenter]
+             addObserver:prog
+             selector:@selector(stopAnimating)
+             name:@"DrugViewControllerDidAppear"
+             object:nil];
+
+            
+            
+            
+            [NSThread detachNewThreadSelector:@selector(startAnimatingProgressInBackground) toTarget:prog withObject:prog];
+            
             DrugViewController_iPhone *drugViewController_iPhone = [[DrugViewController_iPhone alloc] initWithNibName:@"DrugViewController_iPhone" bundle:nil];
+//           
+            
 //            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
             
-           NSLog(@"view controller is %@",self.tableViewModel);
+//           NSLog(@"view controller is %@",self.tableViewModel);
 //            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:drugViewController_iPhone];	
             
 //            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -820,29 +831,29 @@
     UIImage *lockImage=[UIImage imageNamed:@"lock.png"];
 	UIBarButtonItem *stopButton = [[UIBarButtonItem alloc] initWithImage:lockImage style:UIBarButtonItemStyleDone target:self action:@selector(lockScreen:)];
     self.navigationItem.rightBarButtonItem = stopButton;
-    self.myTableView = 
-    [[UITableView alloc] initWithFrame:self.view.bounds
-                                 style:UITableViewStyleGrouped];
+//    self.myTableView = 
+//    [[UITableView alloc] initWithFrame:self.view.bounds
+//                                 style:UITableViewStyleGrouped];
 //    self.myTableView.backgroundColor=[UIColor clearColor];
-    self.myTableView.dataSource = self;
-    self.myTableView.delegate=self;
+    self.tableView.dataSource = self;
+    self.tableView.delegate=self;
     /* Make sure our table view resizes correctly */
-    self.myTableView.autoresizingMask = 
-    UIViewAutoresizingFlexibleWidth |
-    UIViewAutoresizingFlexibleHeight;
+//    self.tableView.autoresizingMask = 
+//    UIViewAutoresizingFlexibleWidth |
+//    UIViewAutoresizingFlexibleHeight;
     
-    [self.view addSubview:self.myTableView];
+//    [self.view addSubview:self.myTableView];
 //    NSString *menuBarImageNameStr=nil;
     if ([SCUtilities is_iPad]) {
         
-        [self.myTableView setBackgroundView:nil];
-        [self.myTableView setBackgroundView:[[UIView alloc] init]];
+        [self.tableView setBackgroundView:nil];
+        [self.tableView setBackgroundView:[[UIView alloc] init]];
        
     }
     
-        [self.myTableView setBackgroundColor:[UIColor clearColor]];
+        [self.tableView setBackgroundColor:[UIColor clearColor]];
        
-
+prog = [[BigProgressViewWithBlockedView alloc] initWithFrame:CGRectMake(0, 64, 320, 367) blockedView:self.view];
     
 //          UIImage *navBarBackgroundImage=[UIImage imageNamed:menuBarImageNameStr];
     
@@ -850,14 +861,9 @@
 //    UINavigationBar *navBar=(UINavigationBar *)self.navigationController.navigationBar;
     
 //    [navBar setBackgroundImage:navBarBackgroundImage forBarMetrics:UIBarMetricsDefault];
-    
-    self.tableView.hidden=YES;
+ 
 }
 
-- (void)viewDidUnload{
-    [super viewDidUnload];
-    self.myTableView = nil;
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -870,11 +876,8 @@
 - (CGFloat)     tableView:(UITableView *)tableView 
  heightForHeaderInSection:(NSInteger)section{
     
-    CGFloat result = 0.0f;
+    CGFloat result =  30.0f;
     
-    if ([tableView isEqual:self.myTableView]){
-        result = 30.0f;
-    }
     
     return result;
     
@@ -883,11 +886,8 @@
 - (CGFloat)     tableView:(UITableView *)tableView 
  heightForFooterInSection:(NSInteger)section{
     
-    CGFloat result = 0.0f;
+    CGFloat result = 30.0f;
     
-    if ([tableView isEqual:self.myTableView] ){
-        result = 30.0f;
-    }
     
     return result;
     
@@ -949,13 +949,13 @@
             break;
     }
     
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.myTableView.bounds.size.width, 30)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 30)];
     if (section == 0)
         [headerView setBackgroundColor:[UIColor clearColor]];
     else 
         [headerView setBackgroundColor:[UIColor clearColor]];
 
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, self.myTableView.bounds.size.width - 10, 18)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, self.tableView.bounds.size.width - 10, 18)];
     
     
     
@@ -1156,7 +1156,13 @@ return headerView;
 //    
 //}
 
+-(void)drugViewControllerDidFinishLoading{
 
+    [prog stopAnimating];
+
+
+
+}
 - (IBAction) lockScreen: (id) sender;
 {
 	PTTAppDelegate *appDelegate =  (PTTAppDelegate *)	[[UIApplication sharedApplication] delegate];

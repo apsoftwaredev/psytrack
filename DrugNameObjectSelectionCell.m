@@ -108,10 +108,13 @@
     
     DrugViewController_iPhone *drugsViewContoller=[[DrugViewController_iPhone alloc]initWithNibName:drugViewControllerNibName bundle:[NSBundle mainBundle] isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController applNo:(NSString *)applicationNumber productNo:(NSString *)productNumber];
     
-       
+   [self.ownerTableViewModel.viewController.navigationController pushViewController:drugsViewContoller animated:YES];
     
-    [self.ownerTableViewModel.viewController.navigationController pushViewController:drugsViewContoller animated:YES];
-//    if ([drugsViewContoller.tableModel sectionCount]>0) {
+    if (drugProduct.drugName &&drugProduct.drugName.length)
+    [drugsViewContoller searchBar:drugsViewContoller.searchBar textDidChange:drugProduct.drugName];
+    
+    
+    //    if ([drugsViewContoller.tableModel sectionCount]>0) {
 //        SCTableViewSection *section=(SCTableViewSection *)[drugsViewContoller.tableModel sectionAtIndex:0];
 //        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
 //            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
@@ -215,8 +218,10 @@
 //    self.detailTextLabel.text = nil;
 //    
     
-    self.label.text=(NSString *) [self.boundObject valueForKey:@"drugName" ];
-
+ 
+    drugProduct=(DrugProductEntity *) self.boundObject;
+       self.label.text=(NSString *) drugProduct.drugName;
+    
     //    NSManagedObjectContext *managedObjectContext=(NSManagedObjectContext *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
     //    
     //    
@@ -321,9 +326,9 @@
        
         
         if (drugProduct) {
+            [self.boundObject setValue:drugProduct.drugName forKey:@"drugName"];
             
-            
-            self.label.text=[drugProduct valueForKeyPath:@"drugName"];
+            self.label.text=drugProduct.drugName;
             
             NSIndexPath *selfIndexPath=(NSIndexPath *) [self.ownerTableViewModel.modeledTableView indexPathForCell:self];
             [self.ownerTableViewModel valueChangedForRowAtIndexPath:selfIndexPath];

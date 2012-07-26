@@ -1342,50 +1342,52 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     
     
-    if (tableViewModel.sectionCount) {
-        //            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0]
-        ;
-        //            if (detailSectionZero.cellCount) {
-        //                
-        //                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-        //                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-        ////                
-        //                if (cellManagedObject&& [cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"])
-        //                {
-        //                    sectionContainsMedLog=TRUE;
-        //                }
-        //                
-        //            }
-        SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];;
-        
-        
-        
-        
-        
-        //        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-        
-        //NSLog(@"index of cell is %i",[section indexForCell:cell]);
-        if (!cell ||(indexPath.row==0)) {
-            
-            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
-            SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-            
-            
-            
-            NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-            //NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-            //NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
-            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
-                
-                [detailTableViewModel removeSectionAtIndex:1];
-                
-                
-            }
-            else {
-                [detailTableViewModel.modeledTableView reloadData];
-            }
-        }
-    }  
+//    if (tableViewModel.tag==4&& tableViewModel.sectionCount) {
+//        //            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0]
+//        ;
+//        //            if (detailSectionZero.cellCount) {
+//        //                
+//        //                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
+//        //                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
+//        ////                
+//        //                if (cellManagedObject&& [cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"])
+//        //                {
+//        //                    sectionContainsMedLog=TRUE;
+//        //                }
+//        //                
+//        //            }
+//        SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];;
+//        
+//        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
+//        
+//        
+//        
+//        NSLog(@"selected cell section cell count %i",section.cellCount);
+//        
+//        //        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+//        
+//        //NSLog(@"index of cell is %i",[section indexForCell:cell]);
+//        if (!cell ||(indexPath.row==0 &&section.cellCount<2)) {
+//            
+//            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
+//            SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
+//            
+//            
+//            
+//            NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
+//            //NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
+//            //NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
+//            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
+//                
+//                [detailTableViewModel removeSectionAtIndex:1];
+//                
+//                
+//            }
+//            else {
+//                [detailTableViewModel.modeledTableView reloadData];
+//            }
+//        }
+//    }  
     
 }
 

@@ -18,10 +18,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DrugActionDateViewController : UITableViewController <SCTableViewModelDataSource, SCTableViewModelDelegate>{
+@interface DrugActionDateViewController : SCTableViewController <SCTableViewModelDataSource, SCTableViewModelDelegate>{
     
     
-    SCArrayOfItemsModel *tableModel;
+    SCArrayOfItemsModel *objectsModel;
     NSArray *_docTypesArray;
     NSMutableSet *actionDateMutableSet;
     

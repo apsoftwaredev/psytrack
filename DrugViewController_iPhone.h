@@ -21,8 +21,9 @@
 #import "UIDownloadBar.h"
 #import "DrugNameObjectSelectionCell.h"
 #import "DrugProductEntity.h"
-@interface DrugViewController_iPhone : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, UIDownloadBarDelegate > {
+@interface DrugViewController_iPhone : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, UIDownloadBarDelegate,UISearchBarDelegate > {
     
+    SCArrayOfObjectsModel *objectsModel;
     
   	UISearchBar *searchBar;
 //    UITableView *tableView;
@@ -50,6 +51,15 @@
     NSTimer *checkingTimer_;
     
     DrugProductEntity *currentlySelectedDrug;
+    SCEntityDefinition *drugDef;
+    
+    
+    NSEntityDescription *productEntityDesc;    
+   
+    NSFetchRequest *productFetchRequest;
+    NSPredicate *filterPredicate;
+    
+        
     
 }
 //@property (nonatomic, strong)  SCArrayOfObjectsModel *tableModel;
@@ -79,3 +89,4 @@
 -(void)myDoneButtonTapped;
 -(void)myCancelButtonTapped;
 @end
+

@@ -103,18 +103,20 @@
         
         
         
-        NSManagedObjectContext *managedObjectContext=(NSManagedObjectContext *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate drugsManagedObjectContext];
+        NSManagedObjectContext *drugsManagedObjectContext=(NSManagedObjectContext *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate drugsManagedObjectContext];
         
         
-        
+        NSLog(@"applnostring %@",applNoString);
         NSPredicate *applNoPredicate=[NSPredicate predicateWithFormat:@"applNo matches %@",applNoString];
         
+   
+    
         
         NSFetchRequest * actionDateFetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"DrugRegActionDateEntity"
-                                                  inManagedObjectContext:managedObjectContext];
+                                                  inManagedObjectContext:drugsManagedObjectContext];
         [actionDateFetchRequest setEntity:entity];
-        
+   
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"actionDate"
                                                                        ascending:NO];
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
@@ -126,61 +128,73 @@
         //    [fetchRequest setFetchBatchSize:10];
         
         NSError *error = nil;
-        NSArray *fetchedObjectsArray = [managedObjectContext executeFetchRequest:actionDateFetchRequest error:&error];
+        NSArray *fetchedObjectsArray = [drugsManagedObjectContext executeFetchRequest:actionDateFetchRequest error:&error];
         
         NSMutableSet * _actionDateSet=(NSMutableSet *)[NSMutableSet setWithArray:fetchedObjectsArray];
         if(_actionDateSet == nil) {
             // Handle the error
         }       
-//            NSLog(@"ending dispach 1");
+            NSLog(@"ending dispach 1");
         
   
 
   
     NSFetchRequest *docTypesFetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *docTypeEntity = [NSEntityDescription entityForName:@"DrugDocTypeLookupEntity"
-                                              inManagedObjectContext:managedObjectContext];
+                                              inManagedObjectContext:drugsManagedObjectContext];
     [docTypesFetchRequest setEntity:docTypeEntity];
     
    
     NSError *docTypesError = nil;
-   _docTypesArray = [managedObjectContext executeFetchRequest:docTypesFetchRequest error:&docTypesError];
+   _docTypesArray = [drugsManagedObjectContext executeFetchRequest:docTypesFetchRequest error:&docTypesError];
     if (_docTypesArray == nil) {
         // Handle the error
     }
-    
+//    
 
     
+//    SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"actionDate" sortAscending:NO filterPredicate:applNoPredicate];
     
-    
-    SCEntityDefinition *actionDateDef=[SCEntityDefinition definitionWithEntityName:@"DrugRegActionDateEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"actionDate", @"docType", nil]];
+    SCEntityDefinition *actionDateDef=[SCEntityDefinition definitionWithEntityName:@"DrugRegActionDateEntity" managedObjectContext:drugsManagedObjectContext propertyNames:[NSArray arrayWithObjects:@"actionDate", @"docType",@"docTypeDesc", nil]];
     
 
 //    NSMutableArray *mutableArray=[NSMutableArray arrayWithArray:fetchedObjects];
     
     actionDateDef.keyPropertyName=@"actionDate";
-    
+    actionDateDef.titlePropertyName=@"actionDate";
 
     
-    SCArrayOfObjectsSection *section=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"USFDA Actions" items:[NSMutableArray arrayWithArray:fetchedObjectsArray] itemsDefinition:nil];
-    
-   
+    SCArrayOfObjectsSection *section=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"USFDA Actions" items:[NSMutableArray arrayWithArray:fetchedObjectsArray] itemsDefinition:actionDateDef];
+//    section.dataFetchOptions=dataFetchOptions;
+    section.allowEditDetailView=NO;
     section.allowDeletingItems=FALSE;
     section.allowEditDetailView=FALSE;
     section.allowMovingItems=FALSE;
     section.allowAddingItems=FALSE;
-    
+    section.allowRowSelection=NO;
 //    section.sortItemsSetAscending=FALSE;
        
      
-   
+    section.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
+    {
+        
+        NSDictionary *actionOverviewBindings = [NSDictionary 
+                                                dictionaryWithObjects:[NSArray arrayWithObjects:@"actionDate", @"docTypeDesc",@"actionDate",@"DrugAppDocsViewController",   nil] 
+                                                forKeys:[NSArray arrayWithObjects:@"1",  @"top",@"bottom",@"openNib",nil]]; // 1,2,3 are the control tags
+        SCCustomCell *actionOverviewCell = [SCCustomCell cellWithText:nil boundObject:nil objectBindings:actionOverviewBindings nibName:@"DrugDocOverviewCell_iPhone"];
+        
+        
+        
+        return actionOverviewCell;
+    };
+
 
     
     
     // Instantiate the tabel model
-	tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView];	
+	objectsModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView];	
     
-    [tableModel addSection:section];
+    [objectsModel addSection:section];
         
 //    });
  
@@ -267,7 +281,12 @@
     //    [(PTTAppDelegate *)[UIApplication sharedApplication].delegate application:[UIApplication sharedApplication]
     //                                               willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
     //                                                                     duration:5];
-    //    
+    //  
+    
+    objectsModel.allowRowSelection=YES;
+    
+    self.tableViewModel=objectsModel;
+    objectsModel.delegate=self;
 }
 
 
@@ -281,25 +300,6 @@
 
 #pragma mark -
 #pragma mark SCTableViewModelDataSource methods
-
-- (SCCustomCell *)tableViewModel:(SCTableViewModel *)tableViewModel
-	  customCellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	
-    
-    // Create & return a custom cell based on the cell in ContactOverviewCell.xib
-	
-  
-    
-    NSDictionary *actionOverviewBindings = [NSDictionary 
-                                            dictionaryWithObjects:[NSArray arrayWithObjects:@"actionDate", @"docTypeDesc",@"actionDate",@"DrugAppDocsViewController",   nil] 
-                                            forKeys:[NSArray arrayWithObjects:@"1",  @"top",@"bottom",@"openNib",nil]]; // 1,2,3 are the control tags
-	SCCustomCell *actionOverviewCell = [SCCustomCell cellWithText:nil boundObject:nil objectBindings:actionOverviewBindings nibName:@"DrugDocOverviewCell_iPhone"];
-	
-
-   
-	return actionOverviewCell;
-}
 
 
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
@@ -332,20 +332,6 @@
 }
 
 
-
-//-(void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//
-//
-//    if ([cell isKindOfClass:[DrugDocOverviewCell class]]) {
-//        DrugDocOverviewCell *drugOverviewCell=(DrugDocOverviewCell *)cell;
-//        
-//        
-//    }
-//
-//
-//
-//
-//}
 
 
 @end
