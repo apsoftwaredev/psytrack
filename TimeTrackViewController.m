@@ -1484,19 +1484,19 @@
     
     
     NSLog(@"self event store calanders are %@",self.eventStore.calendars);
-    for (EKCalendar *calander in self.eventStore.calendars){
-    
-       
-    
-        if ([calander.title isEqualToString:@"Client Appointments"]) {
-    
-               NSError *err;
-            [self.eventStore removeCalendar:calander commit:YES error:&err ];
-        }
+//    for (EKCalendar *calander in self.eventStore.calendars){
+//    
+//       
+//    
+//        if ([calander.title isEqualToString:@"Client Appointments"]) {
+//    
+//               NSError *err;
+//            [self.eventStore removeCalendar:calander commit:YES error:&err ];
+//        }
     
 //     NSLog(@"calanders are %@",localSource.calendars);
     
-    }
+//    }
 // Get the default calendar from store.
 	
     

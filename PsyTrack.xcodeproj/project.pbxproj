@@ -351,6 +351,8 @@
 		E7CCB8E7159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8E9159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib */; };
 		E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */; };
 		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
+		E7E1425915C1F34B00D0F505 /* PresentationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */; };
+		E7E1425A15C1F34B00D0F505 /* PresentationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */; };
 		E7E1A63D152E873500C227E8 /* TimeTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */; };
 		E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A6441530C18900C227E8 /* ShortFieldCell.m */; };
 		E7F1CAF11597AF4C006F9E95 /* MonthlyPracticumLogTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1CAEF1597AF4C006F9E95 /* MonthlyPracticumLogTopCell.m */; };
@@ -946,6 +948,9 @@
 		E7CCB8E8159CEE3200A12908 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EncryptionTokenCell_iPhone.xib; sourceTree = "<group>"; };
 		E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursOverviewCell.xib; sourceTree = "<group>"; };
 		E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController_iPad.xib; sourceTree = "<group>"; };
+		E7E1425615C1F34B00D0F505 /* PresentationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationsViewController.h; sourceTree = "<group>"; };
+		E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentationsViewController.m; sourceTree = "<group>"; };
+		E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresentationsViewController.xib; sourceTree = "<group>"; };
 		E7E1A63A152E873500C227E8 /* TimeTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TimeTrackViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TimeTrackViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7E1A6431530C18900C227E8 /* ShortFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortFieldCell.h; sourceTree = "<group>"; };
@@ -1259,6 +1264,7 @@
 				37F7CE4C150054CE00AD2C3A /* Clients */,
 				37F7CE6D1500570500AD2C3A /* Clinicians */,
 				37F7CDDA1500312300AD2C3A /* Drugs */,
+				E7E1425515C1EA7500D0F505 /* Teaching */,
 				37F7CE8E1500589200AD2C3A /* Track */,
 				37F7CECF15005EC900AD2C3A /* Custom Cells */,
 				37F7CECD15005E9900AD2C3A /* Images */,
@@ -1921,6 +1927,16 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		E7E1425515C1EA7500D0F505 /* Teaching */ = {
+			isa = PBXGroup;
+			children = (
+				E7E1425615C1F34B00D0F505 /* PresentationsViewController.h */,
+				E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */,
+				E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */,
+			);
+			name = Teaching;
+			sourceTree = "<group>";
+		};
 		E7E1A638152E86C600C227E8 /* Time Track View Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -2339,6 +2355,7 @@
 				E75A148E15ABC9DB00F3EBEF /* MonthlyPracticumLogBottomCellWithUndefined.xib in Resources */,
 				E7C02DC415B6003E0072F97C /* MonthlyPracticumLogGenerateVC_iPad.xib in Resources */,
 				E7C02DC615B61CBC0072F97C /* MonthlyPracticumLogGenerateVC_iPhone.xib in Resources */,
+				E7E1425A15C1F34B00D0F505 /* PresentationsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2539,6 +2556,7 @@
 				E74B04E315BC447F0077D759 /* ClinicianEntity.m in Sources */,
 				E74B04E615BC87F60077D759 /* TrainingProgramEntity.m in Sources */,
 				E74B04E915BCEB870077D759 /* SchoolEntity.m in Sources */,
+				E7E1425915C1F34B00D0F505 /* PresentationsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

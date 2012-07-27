@@ -11,7 +11,7 @@
 @interface TotalHoursAndMinutesCell : SCCustomCell <UITextFieldDelegate>{
 
     NSDate *totalTime_;
-
+    NSString *keyString;
 
 }
 
@@ -21,5 +21,5 @@
 @property (nonatomic, strong)NSDate *totalTime;
 @property (nonatomic, strong)IBOutlet UITextField *hoursTF;
 @property (nonatomic, strong)IBOutlet UITextField *minutesTF;
-
+@property (nonatomic, strong)IBOutlet UILabel*TotalHoursLabel;
 @end

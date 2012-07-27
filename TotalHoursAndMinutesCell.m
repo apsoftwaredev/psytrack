@@ -7,10 +7,10 @@
 //
 
 #import "TotalHoursAndMinutesCell.h"
-
+#import "PresentationsViewController.h"
 @implementation TotalHoursAndMinutesCell
 @synthesize hours,minutes,totalTime=totalTime_;
-@synthesize hoursTF,minutesTF;
+@synthesize hoursTF,minutesTF,TotalHoursLabel;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -37,7 +37,15 @@
     [super loadBindingsIntoCustomControls];
     
    
-         self.totalTime=(NSDate *)[self.boundObject valueForKey:@"hours"];
+   
+    if ([self.ownerTableViewModel.masterModel.viewController isKindOfClass:[PresentationsViewController class]]) {
+        keyString=@"length";
+        self.TotalHoursLabel.text=nil;
+    }
+    else {
+        keyString=@"hours";
+    }
+         self.totalTime=(NSDate *)[self.boundObject valueForKey:keyString];
    
    
 
@@ -92,7 +100,8 @@
         return;
     }
     NSDate *totalTimeFromTF=[self totalTimeFromTextFields];
-    [self.boundObject setValue:totalTimeFromTF forKey:@"hours"];
+    
+    [self.boundObject setValue:totalTimeFromTF forKey:keyString];
     
     
     [super commitChanges];

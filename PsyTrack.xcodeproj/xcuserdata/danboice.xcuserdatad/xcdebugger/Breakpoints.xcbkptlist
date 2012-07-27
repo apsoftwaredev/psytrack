@@ -303,11 +303,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalHoursAndMinutesCell.m"
-         timestampString = "363414111.630352"
+         timestampString = "365042199.050975"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "136"
-         endingLineNumber = "136"
+         startingLineNumber = "145"
+         endingLineNumber = "145"
          landmarkName = "-valueIsValid"
          landmarkType = "5">
       </FileBreakpoint>
@@ -355,11 +355,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalHoursAndMinutesCell.m"
-         timestampString = "363405045.563894"
+         timestampString = "365042199.050975"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "124"
-         endingLineNumber = "124"
+         startingLineNumber = "133"
+         endingLineNumber = "133"
          landmarkName = "-textFieldEditingChanged:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1531,7 +1531,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
@@ -1544,7 +1544,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
@@ -1557,7 +1557,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
@@ -2003,11 +2003,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrainTrackViewController.m"
-         timestampString = "364942281.920245"
+         timestampString = "365039558.745216"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1162"
-         endingLineNumber = "1162"
+         startingLineNumber = "1177"
+         endingLineNumber = "1177"
          landmarkName = "-drugViewControllerDidFinishLoading"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2474,32 +2474,6 @@
          timestampString = "364992584.909771"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1491"
-         endingLineNumber = "1491"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TimeTrackViewController.m"
-         timestampString = "364992584.909771"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1487"
-         endingLineNumber = "1487"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TimeTrackViewController.m"
-         timestampString = "364992584.909771"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1497"
          endingLineNumber = "1497"
          landmarkName = "-viewDidLoad"
@@ -2509,13 +2483,13 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "TimeTrackViewController.m"
-         timestampString = "364992584.909771"
+         filePath = "TotalHoursAndMinutesCell.m"
+         timestampString = "365045741.537017"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1494"
-         endingLineNumber = "1494"
-         landmarkName = "-viewDidLoad"
+         startingLineNumber = "41"
+         endingLineNumber = "41"
+         landmarkName = "-loadBindingsIntoCustomControls"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

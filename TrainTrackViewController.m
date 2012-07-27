@@ -31,6 +31,7 @@
 #import "ClinicianViewController.h"
 #import "CliniciansDetailViewController_iPad.h"
 #import "ClientGroupsViewController.h"
+#import "PresentationsViewController.h"
 //#import "UICasualAlert.h"
 //#import <MessageUI/MessageUI.h>
 //
@@ -287,7 +288,7 @@
                 break;
             }
             case 7:{
-                result = 5;
+                result = 4;
                 break;
             }
             case 8:{
@@ -296,7 +297,7 @@
             }
 
             case 9:{
-                result = 3;
+                result = 2;
                 break;
             }
 
@@ -417,9 +418,8 @@
                 {
                      if (indexPath.row==0)result.textLabel.text=@"Courses Taught";
                      if (indexPath.row==1)result.textLabel.text=@"Presentations";
-                    if (indexPath.row==2)result.textLabel.text=@"Advising";
-                    if (indexPath.row==3)result.textLabel.text=@"Leadership Roles";
-                    if (indexPath.row==4)result.textLabel.text=@"Expert Testemony";
+                    if (indexPath.row==2)result.textLabel.text=@"Leadership Roles";
+                    if (indexPath.row==3)result.textLabel.text=@"Expert Testemony";
                     
                 }
                     break;
@@ -439,7 +439,7 @@
                 {
                     if (indexPath.row==0)result.textLabel.text=@"Scholarships";
                     if (indexPath.row==1)result.textLabel.text=@"Fellowships";
-                    if (indexPath.row==2)result.textLabel.text=@"Grants Awarded";
+                    
                     
                     
                     
@@ -665,7 +665,22 @@
 //            if (indexPath.row==0);
             
             //@"Presentations"
-//            if (indexPath.row==1);
+            if (indexPath.row==1){
+            
+               
+                   
+                    PresentationsViewController *presentationsViewController = [[PresentationsViewController alloc] initWithNibName:@"PresentationsViewController" bundle:[NSBundle mainBundle]];
+                    
+                    [self.navigationController pushViewController:presentationsViewController animated:YES];
+                    break;
+            }  
+
+            
+            
+            
+            
+            
+            
             
         }
             break;

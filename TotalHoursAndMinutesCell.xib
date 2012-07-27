@@ -139,7 +139,6 @@
 								<string key="NSFrame">{{239, 6}, {43, 31}}</string>
 								<reference key="NSSuperview" ref="773058354"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -206,6 +205,14 @@
 						<reference key="destination" ref="436073273"/>
 					</object>
 					<int key="connectionID">9</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">TotalHoursLabel</string>
+						<reference key="source" ref="723877602"/>
+						<reference key="destination" ref="57899278"/>
+					</object>
+					<int key="connectionID">10</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -275,7 +282,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">9</int>
+			<int key="maxID">10</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -299,10 +306,15 @@
 					<string key="className">TotalHoursAndMinutesCell</string>
 					<string key="superclassName">SCCustomCell</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="TotalHoursLabel">UILabel</string>
 						<string key="hoursTF">UITextField</string>
 						<string key="minutesTF">UITextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="TotalHoursLabel">
+							<string key="name">TotalHoursLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="hoursTF">
 							<string key="name">hoursTF</string>
 							<string key="candidateClassName">UITextField</string>
