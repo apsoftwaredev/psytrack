@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ConsultationEntity;
+@class ConsultationEntity,RateEntity;
 
 @interface RateChargeEntity : NSManagedObject
 
@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSDate * dateCharged;
 @property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSManagedObject *rate;
+@property (nonatomic, retain) RateEntity *rate;
 @property (nonatomic, retain) ConsultationEntity *consultation;
 
 @end

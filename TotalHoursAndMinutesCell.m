@@ -37,6 +37,7 @@
     [super loadBindingsIntoCustomControls];
     
    
+    if (!self.needsCommit) {
    
     if ([self.ownerTableViewModel.masterModel.viewController isKindOfClass:[PresentationsViewController class]]) {
         keyString=@"length";
@@ -45,6 +46,8 @@
     else {
         keyString=@"hours";
     }
+    
+   
          self.totalTime=(NSDate *)[self.boundObject valueForKey:keyString];
    
    
@@ -62,7 +65,7 @@
     
     if (totalTimeTI>0) {
         
-        
+     
         hoursTF.text=[NSString stringWithFormat:@"%i",[self totalHours:totalTimeTI]];
         
         minutesTF.text=[NSString stringWithFormat:@"%i",[self totalMinutes:totalTimeTI]];
@@ -76,6 +79,7 @@
     }
     hoursTF.delegate=self;
     minutesTF.delegate=self;
+    }
 }
 
 
@@ -95,8 +99,8 @@
 
 -(void)commitChanges{
 
-
-    if (!needsCommit) {
+    BOOL valuesAreValid=[self.ownerTableViewModel valuesAreValid];
+    if (!self.needsCommit||!valuesAreValid) {
         return;
     }
     NSDate *totalTimeFromTF=[self totalTimeFromTextFields];
@@ -105,7 +109,7 @@
     
     
     [super commitChanges];
-
+    self.needsCommit=NO;
 }
 -(NSDate*)totalTimeFromTextFields{
     
@@ -130,14 +134,14 @@
 
 -(void)textFieldEditingChanged:(id)sender{
 
-    BOOL valuesAreValid=[self.ownerTableViewModel valuesAreValid];
-
+    
+ BOOL valuesAreValid=[self.ownerTableViewModel valuesAreValid];
     UIBarButtonItem *doneButton=(UIBarButtonItem *)self.ownerTableViewModel.commitButton;
     
     [doneButton setEnabled:valuesAreValid];
-    if (valuesAreValid) {
+    
         self.needsCommit=YES;
-    }
+    
 
 }
 -(BOOL)valueIsValid{

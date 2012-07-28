@@ -13,6 +13,10 @@
 #import "TotalHoursAndMinutesCell.h"
 #import "ReferralEntity.h"
 #import "OtherReferralSourceEntity.h"
+#import "ConsultationEntity.h"
+#import "RateChargeEntity.h"
+#import "RateEntity.h"
+
 @interface ConsultationsViewController ()
 
 @end
@@ -32,7 +36,7 @@
     [dateFormatter setDateFormat:@"M/d/yyyy"];
     NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
 
-    SCEntityDefinition *consultationDef=[SCEntityDefinition definitionWithEntityName:@"ConsultationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"organization;startDate;endDate;hours;proBono;referrals;logs;notes;rate;fees"];
+    SCEntityDefinition *consultationDef=[SCEntityDefinition definitionWithEntityName:@"ConsultationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"organization;startDate;endDate;hours;proBono;referrals;logs;notes;rateCharges;fees;paid;payments"];
     
     
     SCEntityDefinition *logDef=[SCEntityDefinition definitionWithEntityName:@"LogEntity" managedObjectContext:managedObjectContext propertyNamesString:@"dateTime;notes"];
@@ -58,15 +62,227 @@
     organizationDef.titlePropertyName=@"name";
     
     
-    SCEntityDefinition *rateDef=[SCEntityDefinition definitionWithEntityName:@"RateEntity" managedObjectContext:managedObjectContext propertyNamesString:@"serviceDesc;dateStarted;dateEnded;hourlyRate;notes"];
+    SCEntityDefinition *rateDef=[SCEntityDefinition definitionWithEntityName:@"RateEntity" managedObjectContext:managedObjectContext propertyNamesString:@"rateName;dateStarted;dateEnded;hourlyRate;notes"];
+    
+    rateDef.titlePropertyName=@"rateName;hourlyRate";
+    rateDef.titlePropertyNameDelimiter=@" $";
+    
+    SCEntityDefinition *feeDef=[SCEntityDefinition definitionWithEntityName:@"FeeEntity" managedObjectContext:managedObjectContext propertyNamesString:@"feeName;amount;dateCharged;feeType"];
     
     
-    SCEntityDefinition *feeDef=[SCEntityDefinition definitionWithEntityName:@"FeeEntity" managedObjectContext:managedObjectContext propertyNamesString:@"descr;amount;dateCharged;feeType"];
+    SCPropertyGroup *feesAndRatesPropertyGroup=[SCPropertyGroup groupWithHeaderTitle:@"Charges and Payments" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"rateCharges",@"fees",@"payments",@"paid",@"proBono", nil]];
+    
+    [consultationDef.propertyGroups addGroup:feesAndRatesPropertyGroup];
+    
+    feeDef.orderAttributeName=@"order";
+    feeDef.titlePropertyName=@"feeName;amount";
+    feeDef.titlePropertyNameDelimiter=@" $";
     
     SCEntityDefinition *feeTypeDef=[SCEntityDefinition definitionWithEntityName:@"FeeTypeEntity" managedObjectContext:managedObjectContext propertyNamesString:@"feeType"];
     
+    feeTypeDef.keyPropertyName=@"feeType";
+    feeTypeDef.orderAttributeName=@"order";
+    
+    
+    SCEntityDefinition *paymentDef=[SCEntityDefinition definitionWithEntityName:@"PaymentEntity" managedObjectContext:managedObjectContext propertyNamesString:@"amount;dateReceived;dateCleared;paymentSource;paymentType;notes"];
+    paymentDef.titlePropertyName=@"paymentSource.source;amount";
+    paymentDef.titlePropertyNameDelimiter=@" $";
+    paymentDef.orderAttributeName=@"order";
+    SCEntityDefinition *paymentSourceDef=[SCEntityDefinition definitionWithEntityName:@"PaymentSourceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"source"];
+    
+    paymentSourceDef.orderAttributeName=@"order";
+    
+    SCEntityDefinition *paymentTypeDef=[SCEntityDefinition definitionWithEntityName:@"PaymentTypeEntity" managedObjectContext:managedObjectContext propertyNamesString:@"paymentType"];
+    
+    paymentTypeDef.orderAttributeName=@"order";
+    
+    SCEntityDefinition *rateChargeDef=[SCEntityDefinition definitionWithEntityName:@"RateChargeEntity" managedObjectContext:managedObjectContext propertyNamesString:@"dateCharged;hours;rate;notes"];
+    
+    
+    rateChargeDef.orderAttributeName=@"order";
+    rateChargeDef.titlePropertyName=@"rate.rateName;rate.hourlyRate";
+    rateChargeDef.titlePropertyNameDelimiter=@" $";
+    
+    
+    
+    
+    [rateChargeDef removePropertyDefinitionWithName:@"hours"];
+    
+    
+    
+    //create the dictionary with the data bindings
+    NSDictionary *hoursDataBindings = [NSDictionary 
+                                       dictionaryWithObjects:[NSArray arrayWithObjects:@"hours",nil] 
+                                       forKeys:[NSArray arrayWithObjects:@"1",nil ]];
+    
+    
+    
+    
+    //create the custom property definition
+    SCCustomPropertyDefinition *rateChargedHoursDataProperty = [SCCustomPropertyDefinition definitionWithName:@"rateChargedHoursData"
+                                                                                  uiElementNibName:@"TotalHoursAndMinutesCell" objectBindings:hoursDataBindings];
+    
+    rateChargedHoursDataProperty.title=nil;
+    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+    rateChargedHoursDataProperty.autoValidate=FALSE;
+    
+    
+    [rateChargeDef insertPropertyDefinition:rateChargedHoursDataProperty atIndex:1];
+    
+
+    
+    
+    SCPropertyDefinition *rateChargesPropertyDef=[consultationDef propertyDefinitionWithName:@"rateCharges"];
+    
+    rateChargesPropertyDef.type=SCPropertyTypeArrayOfObjects;
+    rateChargesPropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:rateChargeDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add Rate Charges"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];
+    
+    
+    
+    
+    
+    SCPropertyDefinition *rateChargesNotesPropertyDef=[rateChargeDef propertyDefinitionWithName:@"notes"];
+    rateChargesNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *rateChargedDateChargedPropertyDef = [rateChargeDef propertyDefinitionWithName:@"dateCharged"];
+	rateChargedDateChargedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                               datePickerMode:UIDatePickerModeDate 
+                                                                displayDatePickerInDetailView:NO];
+    
+    
+    
+    SCPropertyDefinition *paymentDateReceivedPropertyDef = [paymentDef propertyDefinitionWithName:@"dateReceived"];
+	paymentDateReceivedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                           datePickerMode:UIDatePickerModeDate 
+                                                            displayDatePickerInDetailView:NO];
+    
+    
+    SCPropertyDefinition *paymentDateClearedPropertyDef = [paymentDef propertyDefinitionWithName:@"dateCleared"];
+	paymentDateClearedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                         datePickerMode:UIDatePickerModeDate 
+                                                          displayDatePickerInDetailView:NO];
+    
+    
+    SCPropertyDefinition *paymentNotesPropertyDef=[paymentDef propertyDefinitionWithName:@"notes"];
+    paymentNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *paymentTypePropertyDef=[paymentDef propertyDefinitionWithName:@"paymentType"];
+    paymentTypePropertyDef.type=SCPropertyTypeObjectSelection;
+    
+    SCObjectSelectionAttributes* paymentTypeSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:paymentTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    paymentTypeSelectionAttribs.allowAddingItems=YES;
+    paymentTypeSelectionAttribs.allowDeletingItems=YES;
+    paymentTypeSelectionAttribs.allowEditingItems=YES;
+    paymentTypeSelectionAttribs.allowMovingItems=YES;
+    paymentTypeSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Add new payment type"];
+    paymentTypeSelectionAttribs.placeholderuiElement=[SCTableViewCell cellWithText:@"Tap Edit to add payment types"];
+    paymentTypePropertyDef.attributes=paymentTypeSelectionAttribs;
+    
+    
+    
+    SCPropertyDefinition *paymentSourcePropertyDef=[paymentDef propertyDefinitionWithName:@"paymentSource"];
+    paymentSourcePropertyDef.type=SCPropertyTypeObjectSelection;
+    
+    SCObjectSelectionAttributes* paymentSourceSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:paymentSourceDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    paymentSourceSelectionAttribs.allowAddingItems=YES;
+    paymentSourceSelectionAttribs.allowDeletingItems=YES;
+    paymentSourceSelectionAttribs.allowEditingItems=YES;
+    paymentSourceSelectionAttribs.allowMovingItems=YES;
+    paymentSourceSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Add new payment source"];
+    paymentSourceSelectionAttribs.placeholderuiElement=[SCTableViewCell cellWithText:@"Tap Edit to add payment sources"];
+    paymentSourcePropertyDef.attributes=paymentSourceSelectionAttribs;
+    
+    
+    SCPropertyDefinition *consultationPaymentsPropertyDef=[consultationDef propertyDefinitionWithName:@"payments"];
+    
+    consultationPaymentsPropertyDef.type=SCPropertyTypeArrayOfObjects;
+    
+    consultationPaymentsPropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:paymentDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add Payments"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];
+    
+    
+    
+    
+    
+    SCPropertyDefinition *feeDateChargedPropertyDef = [feeDef propertyDefinitionWithName:@"dateCharged"];
+	feeDateChargedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                         datePickerMode:UIDatePickerModeDate 
+                                                          displayDatePickerInDetailView:NO];
+    
+    
+    
+    SCPropertyDefinition *rateDateStartedPropertyDef = [rateDef propertyDefinitionWithName:@"dateStarted"];
+	rateDateStartedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                     datePickerMode:UIDatePickerModeDate 
+                                                      displayDatePickerInDetailView:NO];
+    
+    
+    SCPropertyDefinition *rateDateEndedPropertyDef = [rateDef propertyDefinitionWithName:@"dateEnded"];
+	rateDateEndedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                       datePickerMode:UIDatePickerModeDate 
+                                                        displayDatePickerInDetailView:NO];
+    
+    SCPropertyDefinition *rateNotesPropertyDef = [rateDef propertyDefinitionWithName:@"notes"];
+	
+	rateNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    
+    SCPropertyDefinition *rateChargeRatePropertyDef=[rateChargeDef propertyDefinitionWithName:@"rate"];
+    
+    
+    
+    
+    rateChargeRatePropertyDef.type=SCPropertyTypeObjectSelection;
+    rateChargeRatePropertyDef.autoValidate=NO;
+    SCObjectSelectionAttributes *rateSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:rateDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    
+    
+    
+    rateSelectionAttribs.allowMovingItems=YES;
+    rateSelectionAttribs.allowEditingItems=YES;
+    rateSelectionAttribs.allowAddingItems=YES;
+    rateSelectionAttribs.allowDeletingItems=YES;
+    rateSelectionAttribs.allowMultipleSelection=NO;
+    rateSelectionAttribs.allowNoSelection=YES;
+    rateSelectionAttribs.placeholderuiElement=[SCTableViewCell cellWithText:@"Tap edit to add rates"];
+    rateSelectionAttribs.addNewObjectuiElement= [SCTableViewCell cellWithText:@"Add new rate"];
+    rateChargeRatePropertyDef.attributes=rateSelectionAttribs;
+    
+
+      
+    SCPropertyDefinition *feeTypeNamePropertyDef=[feeTypeDef propertyDefinitionWithName:@"feeType"];
+    
+    feeTypeNamePropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *feeTypePropertyDef=[feeDef propertyDefinitionWithName:@"feeType"];
+    
+    feeTypePropertyDef.type=SCPropertyTypeObjectSelection;
+    
+    SCSelectionAttributes *feeTypeSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:feeTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    
+    
+    
+    feeTypeSelectionAttribs.allowMovingItems=YES;
+    feeTypeSelectionAttribs.allowEditingItems=YES;
+    feeTypeSelectionAttribs.allowAddingItems=YES;
+    feeTypeSelectionAttribs.allowDeletingItems=YES;
+    feeTypeSelectionAttribs.allowMultipleSelection=NO;
+    feeTypeSelectionAttribs.allowNoSelection=YES;
+    feeTypeSelectionAttribs.placeholderuiElement=[SCTableViewCell cellWithText:@"Tap edit to add fee types"];
+    feeTypeSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Add new fee type"];
+    feeTypePropertyDef.attributes=feeTypeSelectionAttribs;
+    
+    
+    SCPropertyDefinition *consultationFeesPropertyDef=[consultationDef propertyDefinitionWithName:@"fees"];
+    
+    consultationFeesPropertyDef.type=SCPropertyTypeArrayOfObjects;
+    
+    consultationFeesPropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:feeDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add fees"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];
+    
+  
+    
     SCPropertyDefinition *organizationPropertyDef=[consultationDef propertyDefinitionWithName:@"organization"];
     organizationPropertyDef.type=SCPropertyTypeObjectSelection;
+    organizationPropertyDef.autoValidate=NO;
     SCSelectionAttributes *organizationSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:organizationDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     
     organizationSelectionAttribs.allowAddingItems=YES;
@@ -99,12 +315,7 @@
     
        
     
-    //create the dictionary with the data bindings
-    NSDictionary *hoursDataBindings = [NSDictionary 
-                                        dictionaryWithObjects:[NSArray arrayWithObjects:@"hours",nil] 
-                                        forKeys:[NSArray arrayWithObjects:@"1",nil ]];
-    
-    
+     
     
     
     //create the custom property definition
@@ -318,7 +529,33 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
+}
+
+
+-(void)tableViewModel:(SCTableViewModel *)tableModel didAddSectionAtIndex:(NSUInteger)index{
+    
+    SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:index];
+    if(section.headerTitle !=nil)
+{
+   
+    
+        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 60)];
+        UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 300, 40)];
+        
+        
+        headerLabel.backgroundColor = [UIColor clearColor];
+        headerLabel.textColor = [UIColor whiteColor];
+        headerLabel.tag=60;
+        headerLabel.text=section.headerTitle;
+        [containerView addSubview:headerLabel];
+        
+        section.headerView = containerView;
+        
+    }
+    
+    
+        
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
@@ -372,6 +609,31 @@
         SCArrayOfObjectsSection *objectsSection=(SCArrayOfObjectsSection *)[tableModel sectionAtIndex:0];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
+        if (cellManagedObject && [cellManagedObject isKindOfClass:[RateChargeEntity class]]) {
+            RateChargeEntity *rateChargeObject=(RateChargeEntity *)cellManagedObject;
+            NSDate *hours=rateChargeObject.hours;
+            
+            NSTimeInterval hoursTI=[hours timeIntervalSince1970];
+            
+            RateEntity *rateObject=(RateEntity *)rateChargeObject.rate;
+            
+            
+            NSTimeInterval  hoursTIHours=hoursTI/60/60;
+            
+            NSDecimal hoursDecimal=[[NSNumber numberWithDouble:hoursTIHours]decimalValue];
+            
+            NSDecimalNumber *hoursDecimalNumber = [NSDecimalNumber decimalNumberWithDecimal:
+                                    hoursDecimal];
+            
+           
+           NSDecimalNumber *totalChargeDecimalNumber=  [rateObject.hourlyRate decimalNumberByMultiplyingBy:hoursDecimalNumber];
+            
+            NSString *textToDisplay=[NSString stringWithFormat:@"%@ %.2lf hrs at $%@ hr ($%.2lf total)",rateObject.rateName,[hoursDecimalNumber floatValue],rateObject.hourlyRate,[totalChargeDecimalNumber floatValue]];
+            
+            cell.textLabel.text=textToDisplay;
+            
+        }
+        
         if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject isKindOfClass:[ReferralEntity class]]) {
         
             ReferralEntity *referralObject=(ReferralEntity *)cellManagedObject;
@@ -397,13 +659,43 @@
 -(BOOL)tableViewModel:(SCTableViewModel *)tableModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     BOOL valid=NO;
+    SCObjectSection *objectSection=(SCObjectSection *)[tableModel sectionAtIndex:indexPath.section];
+    NSLog(@"object section bound object is %@",objectSection.boundObject);
+    SCTableViewCell *cell=[tableModel cellAtIndexPath:indexPath];
+    NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+    
+    if (tableModel.tag==1) {
+        
+        
+        NSLog(@"section managed object %@",sectionManagedObject);
+        if (sectionManagedObject && [sectionManagedObject isKindOfClass:[ConsultationEntity class]]&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
+            SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+            
+            if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
+                return YES;
+            }
+            
+        }
+
+    }
     if (tableModel.tag==3) {
-        SCObjectSection *objectSection=(SCObjectSection *)[tableModel sectionAtIndex:indexPath.section];
-        NSLog(@"object section bound object is %@",objectSection.boundObject);
-        SCTableViewCell *cell=[tableModel cellAtIndexPath:indexPath];
+       
+        
+        if (sectionManagedObject&& [sectionManagedObject isKindOfClass:[RateChargeEntity class]]) {
+        
+            if (cell.tag==2&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
+                SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+                
+                if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
+                    return YES;
+                }
+            }
         
         
-        NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+        }
+        
+                
+        
         if (sectionManagedObject&& [sectionManagedObject isKindOfClass:[ReferralEntity class]]) {
             SCTableViewCell *otherCell=nil;
             if (cell.tag==1) {

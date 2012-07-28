@@ -303,11 +303,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalHoursAndMinutesCell.m"
-         timestampString = "365042199.050975"
+         timestampString = "365201570.383056"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "145"
-         endingLineNumber = "145"
+         startingLineNumber = "149"
+         endingLineNumber = "149"
          landmarkName = "-valueIsValid"
          landmarkType = "5">
       </FileBreakpoint>
@@ -351,15 +351,15 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalHoursAndMinutesCell.m"
-         timestampString = "365042199.050975"
+         timestampString = "365201570.383056"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "133"
-         endingLineNumber = "133"
+         startingLineNumber = "137"
+         endingLineNumber = "137"
          landmarkName = "-textFieldEditingChanged:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2484,11 +2484,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalHoursAndMinutesCell.m"
-         timestampString = "365045741.537017"
+         timestampString = "365201570.383056"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "41"
-         endingLineNumber = "41"
+         startingLineNumber = "42"
+         endingLineNumber = "42"
+         landmarkName = "-loadBindingsIntoCustomControls"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TotalHoursAndMinutesCell.m"
+         timestampString = "365201656.246594"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "40"
+         endingLineNumber = "40"
          landmarkName = "-loadBindingsIntoCustomControls"
          landmarkType = "5">
       </FileBreakpoint>
