@@ -20,6 +20,7 @@
 @dynamic keyString;
 @dynamic clinician;
 @dynamic client;
+@dynamic otherSource;
 @synthesize tempNotes;
 
 - (void) awakeFromInsert 

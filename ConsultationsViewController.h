@@ -6,8 +6,12 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-#import "SCTableViewController.h"
 
-@interface ConsultationsViewController : SCTableViewController
+
+@interface ConsultationsViewController : SCTableViewController <SCTableViewModelDelegate,SCTableViewModelDataSource>{
+
+     SCArrayOfObjectsModel *objectsModel;
+
+}
 
 @end

@@ -32,6 +32,7 @@
 #import "CliniciansDetailViewController_iPad.h"
 #import "ClientGroupsViewController.h"
 #import "PresentationsViewController.h"
+#import "ConsultationsViewController.h"
 //#import "UICasualAlert.h"
 //#import <MessageUI/MessageUI.h>
 //
@@ -641,7 +642,16 @@
         case 5:
         {
             //@"Consultations"
-//            if (indexPath.row==0);
+       
+            if (indexPath.row==0){
+                
+                
+                
+                ConsultationsViewController *consultationsViewController = [[ConsultationsViewController alloc] initWithNibName:@"ConsultationsViewController" bundle:[NSBundle mainBundle]];
+                
+                [self.navigationController pushViewController:consultationsViewController animated:YES];
+                break;
+            }  
             
             
         }

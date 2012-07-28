@@ -201,13 +201,21 @@
     
     SCPropertyDefinition *topicsPropertyDef=[presentationDef propertyDefinitionWithName:@"topics"];
     
+    topicsPropertyDef.type=SCPropertyTypeObjectSelection;
     
-    topicsPropertyDef.type=SCPropertyTypeArrayOfObjects;
+    SCObjectSelectionAttributes *topicSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:topicDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
     
-    topicsPropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:topicDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add topics"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];
+    
+    topicSelectionAttribs.allowAddingItems = YES;
+    topicSelectionAttribs.allowDeletingItems = YES;
+    topicSelectionAttribs.allowMovingItems = YES;
+    topicSelectionAttribs.allowEditingItems = YES;
+    topicSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to add topics)"];
+    topicSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Tap Here to add topic"];
+    
+    topicsPropertyDef.attributes = topicSelectionAttribs;
     
 
-    
     
     
     SCPropertyDefinition *presentationDeliveredNotesPropertyDef=[presentationDeliveredDef propertyDefinitionWithName:@"notes"];
@@ -229,10 +237,19 @@
     
     SCPropertyDefinition *forumsPropertyDef=[presentationDef propertyDefinitionWithName:@"forums"];
     
+    forumsPropertyDef.type=SCPropertyTypeObjectSelection;
     
-    forumsPropertyDef.type=SCPropertyTypeArrayOfObjects;
+    SCObjectSelectionAttributes *forumSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:forumDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
     
-    forumsPropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:forumDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add forums"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:NO];
+    
+    forumSelectionAttribs.allowAddingItems = YES;
+    forumSelectionAttribs.allowDeletingItems = YES;
+    forumSelectionAttribs.allowMovingItems = YES;
+    forumSelectionAttribs.allowEditingItems = YES;
+    forumSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to add Forums)"];
+    forumSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Tap Here to add forum"];
+    
+    forumsPropertyDef.attributes = forumSelectionAttribs;
     
 
     
@@ -263,7 +280,19 @@
    
     conferencesPropertyDef.type=SCPropertyTypeObjectSelection;
     
-    conferencesPropertyDef.attributes=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:conferenceDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
+    SCObjectSelectionAttributes *conferencesSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:conferenceDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
+    
+    
+    conferencesSelectionAttribs.allowAddingItems = YES;
+    conferencesSelectionAttribs.allowDeletingItems = YES;
+    conferencesSelectionAttribs.allowMovingItems = YES;
+    conferencesSelectionAttribs.allowEditingItems = YES;
+    conferencesSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add conferences)"];
+    conferencesSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Tap Here to add conference"];
+    
+    conferencesPropertyDef.attributes = conferencesSelectionAttribs;
+   
+
     
      SCPropertyDefinition *presentationDeliveredPropertyDef=[presentationDef propertyDefinitionWithName:@"deliveries"];
     presentationDeliveredPropertyDef.type=SCPropertyTypeArrayOfObjects;

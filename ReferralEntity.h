@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClientEntity, ClinicianEntity;
+@class ClientEntity, ClinicianEntity,OtherReferralSourceEntity;
 
 @interface ReferralEntity : NSManagedObject
 
@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSString * keyString;
 @property (nonatomic, retain) ClinicianEntity *clinician;
 @property (nonatomic, retain) ClientEntity *client;
-
+@property (nonatomic, retain) OtherReferralSourceEntity *otherSource;
 
 @property (nonatomic, strong) NSString *tempNotes;
 

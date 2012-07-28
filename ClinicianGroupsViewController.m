@@ -259,12 +259,21 @@
         
         SCCustomPropertyDefinition *groupNameUpdateCProperty = [SCCustomPropertyDefinition definitionWithName:@"addressBookButtonCell" uiElementNibName:@"ABGroupNameChangeCell" objectBindings:nil];;
         
+        
+//        SCPropertyDefinition *grouNamePropertyDef=[clinicianGroupDef propertyDefinitionWithName:@"groupName"];
+//        
+//        grouNamePropertyDef.autoValidate=YES;
+        
         //add the property definition to the clinician class 
         [clinicianGroupDef addPropertyDefinition:groupNameUpdateCProperty];
 
         SCPropertyGroup *mainGroup=[SCPropertyGroup groupWithHeaderTitle:@"Clinician Group Details" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"groupName",@"addressBookSync",@"addNewClinicians",@"addressBookButtonCell", nil]];
         
         [clinicianGroupDef.propertyGroups addGroup:mainGroup];
+        
+        
+        
+        
         objectsModel.editButtonItem = self.navigationItem.rightBarButtonItem;
         //        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
         //        self.navigationItem.rightBarButtonItem = addButton;
