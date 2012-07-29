@@ -339,8 +339,6 @@
 		E7B3E40E15C58B2F00729C88 /* TrainTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3E40615C58B2F00729C88 /* TrainTrackViewController.m */; };
 		E7B3E43515C58E5900729C88 /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B3E43215C58E3C00729C88 /* libSensibleTableView.a */; };
 		E7B3E44415C58E9600729C88 /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B3E44115C58E7F00729C88 /* libSTV+CoreData.a */; };
-		E7B3E44D15C5903700729C88 /* SensibleTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B3E44C15C5903700729C88 /* SensibleTableView.framework */; };
-		E7B3E44F15C5904E00729C88 /* STV+CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B3E44E15C5904E00729C88 /* STV+CoreData.framework */; };
 		E7C02D9F15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */; };
 		E7C02DA215B3621B0072F97C /* SupervisionReceivedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA115B362190072F97C /* SupervisionReceivedEntity.m */; };
 		E7C02DA515B362990072F97C /* SupervisionGivenEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA415B362980072F97C /* SupervisionGivenEntity.m */; };
@@ -943,8 +941,6 @@
 		E7B3E40615C58B2F00729C88 /* TrainTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainTrackViewController.m; sourceTree = "<group>"; };
 		E7B3E42915C58E3B00729C88 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3-1.0.6 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
 		E7B3E43815C58E7E00729C88 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3-1.0.6 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
-		E7B3E44C15C5903700729C88 /* SensibleTableView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SensibleTableView.framework; path = "../../Downloads/STV 3-1.0.6 Pro/Static Frameworks/SensibleTableView.framework"; sourceTree = "<group>"; };
-		E7B3E44E15C5904E00729C88 /* STV+CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "STV+CoreData.framework"; path = "../../Downloads/STV 3-1.0.6 Pro/Static Frameworks/STV+CoreData.framework"; sourceTree = "<group>"; };
 		E7C02D9D15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h; sourceTree = "<group>"; };
 		E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m; sourceTree = "<group>"; };
 		E7C02DA015B362180072F97C /* SupervisionReceivedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionReceivedEntity.h; sourceTree = "<group>"; };
@@ -1083,8 +1079,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7B3E44F15C5904E00729C88 /* STV+CoreData.framework in Frameworks */,
-				E7B3E44D15C5903700729C88 /* SensibleTableView.framework in Frameworks */,
 				E7B3E44415C58E9600729C88 /* libSTV+CoreData.a in Frameworks */,
 				E7B3E43515C58E5900729C88 /* libSensibleTableView.a in Frameworks */,
 				E7F1CBA31598C787006F9E95 /* ImageIO.framework in Frameworks */,
@@ -1738,8 +1732,6 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				E7B3E44E15C5904E00729C88 /* STV+CoreData.framework */,
-				E7B3E44C15C5903700729C88 /* SensibleTableView.framework */,
 				E7B3E42915C58E3B00729C88 /* SensibleTableView.xcodeproj */,
 				E7B3E43815C58E7E00729C88 /* STV+CoreData.xcodeproj */,
 				E78A8D101531DCB30099FE5B /* PsyTrack.entitlements */,
