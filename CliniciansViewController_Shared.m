@@ -186,7 +186,7 @@
         
         
         self.clinicianDef=[SCEntityDefinition definitionWithEntityName:@"ClinicianEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects: @"degrees", 
-                                                                                                                                                   @"licenseNumbers", @"certifications",@"specialties",@"publications",@"orientationHistory",@"awards",@"memberships",@"influences",@"employments",
+                                                                                                                                                   @"licenses", @"certifications",@"specialties",@"publications",@"orientationHistory",@"awards",@"memberships",@"influences",@"employments",
                                                                                                                                                    @"demographicInfo",@"startedPracticing",@"clinicianType", @"atMyCurrentSite",  @"myCurrentSupervisor",@"myPastSupervisor",@"referrals",@"isPrescriber",@"logs",@"bio",@"notes",@"groups", nil]];
         
         
@@ -630,23 +630,41 @@
     
     membershipDescPropertyDef.type=SCPropertyTypeTextView;
     //Create a class definition for Degree entity
-	SCEntityDefinition *licenseNumberDef = [SCEntityDefinition definitionWithEntityName:@"LicenseNumberEntity" 
+	SCEntityDefinition *licenseDef = [SCEntityDefinition definitionWithEntityName:@"LicenseEntity" 
                                                              managedObjectContext:managedObjectContext
-                                                                    propertyNames:[NSArray arrayWithObjects:@"licenseName",@"governingBody",@"licenseNumber",@"status",
-                                                                                       @"renewDate",@"notes", nil]];
+                                                                    propertyNames:[NSArray arrayWithObjects:@"licenseName",@"governingBody",@"license",@"status",
+                                                                                       @"renewDate",@"notes",@"renewals", nil]];
     
+        SCEntityDefinition *licenseRenewalDef=[SCEntityDefinition definitionWithEntityName:@"LicenseRenewalEntity" managedObjectContext:managedObjectContext propertyNamesString:@"renewalDate;notes"];
+        
+        SCPropertyDefinition *licenseRenewalsPropertyDef=[licenseDef propertyDefinitionWithName:@"renewals"];
+        
+        
+        licenseRenewalsPropertyDef.type=SCPropertyTypeArrayOfObjects;
+        
+        licenseRenewalsPropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:licenseRenewalDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add renewals"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];
+        
+        
+        
+        SCPropertyDefinition *licenseRenewalRenewDatePropertyDef = [licenseRenewalDef propertyDefinitionWithName:@"renewalDate"];
+        licenseRenewalRenewDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+                                                                                datePickerMode:UIDatePickerModeDate 
+                                                                 displayDatePickerInDetailView:NO];
+        SCPropertyDefinition *licenseRenewalNotesPropertyDef=[licenseRenewalDef propertyDefinitionWithName:@"notes"];
+        licenseRenewalNotesPropertyDef.type=SCPropertyTypeTextView;
+
     
     //set the order attributes name defined in the License Number Entity    
-    licenseNumberDef.orderAttributeName=@"order";
-    SCPropertyDefinition *licenseNumberRenewDatePropertyDef = [licenseNumberDef propertyDefinitionWithName:@"renewDate"];
-	licenseNumberRenewDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+    licenseDef.orderAttributeName=@"order";
+    SCPropertyDefinition *licenseRenewDatePropertyDef = [licenseDef propertyDefinitionWithName:@"renewDate"];
+	licenseRenewDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
                                                                                   datePickerMode:UIDatePickerModeDate 
                                                                    displayDatePickerInDetailView:NO];
     
     
     
     //Create a class definition for License entity
-	SCEntityDefinition *licenseDef = [SCEntityDefinition definitionWithEntityName:@"LicenseEntity" 
+	SCEntityDefinition *licenseNameDef = [SCEntityDefinition definitionWithEntityName:@"LicenseNameEntity" 
 													   managedObjectContext:managedObjectContext
 															  propertyNames:[NSArray arrayWithObjects:@"title",@"notes",nil]];
 	
@@ -665,37 +683,37 @@
 
     
         //set the order attributes name defined in the License Entity
-    licenseDef.orderAttributeName=@"order";
-    SCPropertyDefinition *licenseNamePropertyDef = [licenseNumberDef propertyDefinitionWithName:@"licenseName"];
+    licenseNameDef.orderAttributeName=@"order";
+    SCPropertyDefinition *licenseNamePropertyDef = [licenseDef propertyDefinitionWithName:@"licenseName"];
     
     //override the auto title generation for the License Name property definition and set it to a shorter title
-    licenseNamePropertyDef.title =@"License";
+    licenseNamePropertyDef.title =@"License Name";
 	//override the auto title generation for the <#name#> property definition and set it to a custom title
     licenseNamePropertyDef.type = SCPropertyTypeObjectSelection;
-	SCObjectSelectionAttributes *licenseSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:licenseDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-    licenseSelectionAttribs.allowAddingItems = YES;
-    licenseSelectionAttribs.allowDeletingItems = YES;
-    licenseSelectionAttribs.allowMovingItems = YES;
-    licenseSelectionAttribs.allowEditingItems = YES;
-    licenseSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define licenses)"];
-    licenseSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new License"];
-    licenseNamePropertyDef.attributes = licenseSelectionAttribs;
+	SCObjectSelectionAttributes *licenseNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:licenseNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    licenseNameSelectionAttribs.allowAddingItems = YES;
+    licenseNameSelectionAttribs.allowDeletingItems = YES;
+    licenseNameSelectionAttribs.allowMovingItems = YES;
+    licenseNameSelectionAttribs.allowEditingItems = YES;
+    licenseNameSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define license names)"];
+    licenseNameSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new license name"];
+    licenseNamePropertyDef.attributes = licenseNameSelectionAttribs;
 	
-    licenseNumberDef.titlePropertyName=@"licenseName.title;governingBody.body";
-    
-    SCPropertyDefinition *licenseNumberNotesPropertyDef = [licenseNumberDef propertyDefinitionWithName:@"notes"];
-	licenseNumberNotesPropertyDef.type = SCPropertyTypeTextView;
+    licenseDef.titlePropertyName=@"licenseName.title;governingBody.body";
     
     SCPropertyDefinition *licenseNotesPropertyDef = [licenseDef propertyDefinitionWithName:@"notes"];
 	licenseNotesPropertyDef.type = SCPropertyTypeTextView;
     
-    SCPropertyDefinition *licenseTitlePropertyDef = [licenseDef propertyDefinitionWithName:@"title"];
+    SCPropertyDefinition *licenseNameNotesPropertyDef = [licenseNameDef propertyDefinitionWithName:@"notes"];
+	licenseNameNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *licenseTitlePropertyDef = [licenseNameDef propertyDefinitionWithName:@"title"];
 	licenseTitlePropertyDef.type = SCPropertyTypeTextView;
     
     //create an object selection for the governingBody relationship in the LicenseNuber Entity 
     
     //create a property definition
-    SCPropertyDefinition *governingBodyPropertyDef = [licenseNumberDef propertyDefinitionWithName:@"governingBody"];
+    SCPropertyDefinition *governingBodyPropertyDef = [licenseDef propertyDefinitionWithName:@"governingBody"];
  
     //set the title property name
     governingBodyDef.titlePropertyName=@"body";
@@ -1293,12 +1311,12 @@
                                                                                   allowAddingItems:TRUE
                                                                                 allowDeletingItems:TRUE
                                                                                   allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
-    SCPropertyDefinition *licenseNumbersPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"licenseNumbers"];
-	licenseNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:licenseNumberDef
+    SCPropertyDefinition *licensesPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"licenses"];
+	licensesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:licenseDef
                                                                                           allowAddingItems:TRUE
                                                                                         allowDeletingItems:TRUE
                                                                                           allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
-    licenseNumbersPropertyDef.title=@"Licenses";
+    licensesPropertyDef.title=@"Licenses";
     
     
     SCPropertyDefinition *orientationHistoryPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"orientationHistory"];
@@ -1575,11 +1593,11 @@
                                                                                               allowAddingItems:TRUE
                                                                                             allowDeletingItems:TRUE
                                                                                               allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Positions)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
-	SCPropertyDefinition *licensesPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"licenses"];
-	licensesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:licenseDef
-																					allowAddingItems:TRUE
-																				  allowDeletingItems:TRUE
-																					allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Licenses)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
+//	SCPropertyDefinition *licensesPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"licenses"];
+//	licensesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:licenseDef
+//																					allowAddingItems:TRUE
+//																				  allowDeletingItems:TRUE
+//																					allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Licenses)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
     SCPropertyDefinition *certificationsPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"certifications"];
 	certificationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:certificationDef
 																						  allowAddingItems:TRUE
@@ -1723,7 +1741,7 @@
     
     
     
-    SCPropertyGroup *credentialssGroup = [SCPropertyGroup groupWithHeaderTitle:@"Credentials" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"clinicianType",@"licenseNumbers", @"degrees", @"certifications",@"isPrescriber",nil]];
+    SCPropertyGroup *credentialssGroup = [SCPropertyGroup groupWithHeaderTitle:@"Credentials" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"clinicianType",@"licenses", @"degrees", @"certifications",@"isPrescriber",nil]];
     
     SCPropertyGroup *professionalHistoryGroup =[SCPropertyGroup groupWithHeaderTitle:@"Professional History" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"employments",@"publications", @"awards", @"memberships",nil]];
     

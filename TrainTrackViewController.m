@@ -33,6 +33,7 @@
 #import "ClientGroupsViewController.h"
 #import "PresentationsViewController.h"
 #import "ConsultationsViewController.h"
+#import "CECreditsViewController.h"
 //#import "UICasualAlert.h"
 //#import <MessageUI/MessageUI.h>
 //
@@ -660,7 +661,16 @@
         case 6:
         {
             //@"Continuing Education Credits"
-//            if (indexPath.row==0);
+            if (indexPath.row==0){
+            
+            
+            
+                CECreditsViewController *ceCreditsViewController = [[CECreditsViewController alloc] initWithNibName:@"CECreditsViewController" bundle:[NSBundle mainBundle]];
+                
+                [self.navigationController pushViewController:ceCreditsViewController animated:YES];
+           
+            }
+            
             
             //@"Certifications"
 //            if (indexPath.row==1);

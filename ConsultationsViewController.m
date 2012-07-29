@@ -503,7 +503,7 @@
     
     
     
-	objectsModel.searchPropertyName = @"dateOfService";
+//	objectsModel.searchPropertyName = @"dateOfService";
     
     objectsModel.allowMovingItems=TRUE;
     
