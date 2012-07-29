@@ -187,7 +187,7 @@
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
 {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 37)];
-    label.text = [NSString stringWithFormat:[self titleForRow:row]];
+    label.text = [NSString stringWithFormat:@"%@",[self titleForRow:row]];
     label.textAlignment = UITextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
     label.font=[UIFont fontWithName:@"Helvetica-Bold" size:18];

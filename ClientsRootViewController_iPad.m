@@ -1188,13 +1188,13 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                         NSString *doseChangeString;
                         switch (doseChange) {
                             case 0:
-                                doseChangeString=[NSString stringWithString:@"No Change"];
+                                doseChangeString=@"No Change";
                                 break;
                             case 1:
-                                doseChangeString=[NSString stringWithString:@"Decrease to"];
+                                doseChangeString=@"Decrease to";
                                 break;  
                             case 2:
-                                doseChangeString=[NSString stringWithString:@"Increase to"];
+                                doseChangeString=@"Increase to";
                                 break;
                                 
                             default:

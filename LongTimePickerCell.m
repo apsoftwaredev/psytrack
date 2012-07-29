@@ -124,17 +124,17 @@
     NSInteger minutesComponent=[[minuteFormatter stringFromDate:timeValue]integerValue];
     
     if (hoursComponent==1) {
-        hourLabel.text=[NSString stringWithString:@"Hour"];
+        hourLabel.text=@"Hour";
     }
     else{
-        hourLabel.text=[NSString stringWithString:@"Hours"];
+        hourLabel.text=@"Hours";
         
     }
     if (minutesComponent==1) {
-        minLabel.text=[NSString stringWithString:@"Minute"];
+        minLabel.text=@"Minute";
     }
     else{
-        minLabel.text=[NSString stringWithString:@"Minutes"];
+        minLabel.text=@"Minutes";
         
     }
     

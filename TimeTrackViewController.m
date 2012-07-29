@@ -203,9 +203,9 @@
     NSString *timePickerCellNibName;
     
     if([SCUtilities is_iPad])
-        timePickerCellNibName=[NSString stringWithString:@"TimePickerCell_iPad"];
+        timePickerCellNibName=@"TimePickerCell_iPad";
     else
-        timePickerCellNibName=[NSString stringWithString:@"TimePickerCell"];
+        timePickerCellNibName=@"TimePickerCell";
     
     
     
@@ -1269,7 +1269,7 @@
         trackSubTypeSelectionAttribs.allowDeletingItems = NO;
         trackSubTypeSelectionAttribs.allowMovingItems = YES;
         trackSubTypeSelectionAttribs.allowEditingItems = YES;
-        trackSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Add subtypes under intervention type)"]];
+        trackSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add subtypes under intervention type)"];
         
         trackSubTypePropertyDef.attributes = trackSubTypeSelectionAttribs;
         
@@ -1318,7 +1318,7 @@
         trackSubTypeSelectionAttribs.allowMovingItems = YES;
         trackSubTypeSelectionAttribs.allowEditingItems = YES;
         
-        trackSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Add subtypes under intervention type)"]];
+        trackSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add subtypes under intervention type)"];
         
         trackSubTypePropertyDef.attributes = trackSubTypeSelectionAttribs;
         
@@ -1360,7 +1360,7 @@
     trackRateSelectionAttribs.allowDeletingItems = YES;
     trackRateSelectionAttribs.allowMovingItems = YES;
     trackRateSelectionAttribs.allowEditingItems = YES;
-    trackRateSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Add Rates)"]];
+    trackRateSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"(Add Rates)"];
     
     trackRatePropertyDef.attributes = trackRateSelectionAttribs;
     
@@ -1758,10 +1758,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     //NSLog(@"event Identifier %@", cell.boundObject);
                     NSString *buttonText;
                     if (eventIdentifier.length) {
-                        buttonText=[NSString stringWithString:@"Edit This Calendar Event"];
+                        buttonText=@"Edit This Calendar Event";
                     }
                     else {
-                        buttonText=[NSString stringWithString:@"Add Event to Calendar"];
+                        buttonText=@"Add Event to Calendar";
                     }
                     ButtonCell *buttonCell=(ButtonCell *)cell;
                     UIButton *button=buttonCell.button;
@@ -2499,7 +2499,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 //if change the cell text then update the method that sets the age with the new cell text
                 SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" boundObject:nil labelTextPropertyName:@"Age"];
                 SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Age (30-Day Months)" boundObject:nil labelTextPropertyName:@"WechslerAge"];
-                actualAge.label.text=[NSString stringWithString: @"0y 0m"];
+                actualAge.label.text=@"0y 0m";
                 wechslerAge.label.text=[NSString stringWithFormat:@"%iy %im",0,0];
                 [sectionOne addCell:actualAge];
                 [sectionOne addCell:wechslerAge];
@@ -4520,7 +4520,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 clientDateOfBirth=(NSDate *)[clientObject valueForKey:@"dateOfBirth"];
                 
             }else{
-                NSString *noClientString=[NSString stringWithString:@"choose client"];
+                NSString *noClientString=@"choose client";
                 wechslerAgeCell.label.text=noClientString; 
                 actualAgeCell.label.text=noClientString;
                 return;
@@ -4547,23 +4547,23 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         else
         {
             if (!serviceDateCell.datePicker.date) {
-                wechslerAgeCell.label.text=[NSString stringWithString:@"no test date"];
-                actualAgeCell.label.text=[NSString stringWithString:@"no test date"];
+                wechslerAgeCell.label.text=@"no test date";
+                actualAgeCell.label.text=@"no test date";
             }
             else if (!clientDateOfBirth)
             {
                 
                 if (wechslerAgeCell&&[wechslerAgeCell respondsToSelector:@selector(label) ]) {
                     
-                    wechslerAgeCell.label.text=[NSString stringWithString:@"no birthdate"];
-                    actualAgeCell.label.text=[NSString stringWithString:@"no birthdate"];
+                    wechslerAgeCell.label.text=@"no birthdate";
+                    actualAgeCell.label.text=@"no birthdate";
                     
                 }
             }
             else
             {
-                wechslerAgeCell.label.text=[NSString stringWithString:@"0y 0m"];
-                actualAgeCell.label.text=[NSString stringWithString:@"0y 0m"];
+                wechslerAgeCell.label.text=@"0y 0m";
+                actualAgeCell.label.text=@"0y 0m";
             }
             
             

@@ -825,7 +825,7 @@
         supervisionSubTypeSelectionAttribs.allowDeletingItems = NO;
         supervisionSubTypeSelectionAttribs.allowMovingItems = YES;
         supervisionSubTypeSelectionAttribs.allowEditingItems = YES;
-        supervisionSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Add supervision subtypes under Supervision Type)"]];
+        supervisionSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add supervision subtypes under Supervision Type)"];
         
         supervisionSubTypePropertyDef.attributes = supervisionSubTypeSelectionAttribs;
         
@@ -1473,7 +1473,7 @@
         interventionSubTypeSelectionAttribs.allowDeletingItems = NO;
         interventionSubTypeSelectionAttribs.allowMovingItems = YES;
         interventionSubTypeSelectionAttribs.allowEditingItems = YES;
-        interventionSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:[NSString stringWithString:@"(Add subtypes under intervention type)"]];
+        interventionSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add subtypes under intervention type)"];
         
         interventionSubTypePropertyDef.attributes = interventionSubTypeSelectionAttribs;
         

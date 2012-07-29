@@ -92,9 +92,9 @@
     NSString *drugViewControllerNibName;
     
     if ([SCUtilities is_iPad]) 
-        drugViewControllerNibName=[NSString stringWithString:@"DrugViewController_iPhone"];
+        drugViewControllerNibName=@"DrugViewController_iPhone";
     else
-        drugViewControllerNibName=[NSString stringWithString:@"DrugViewController_iPhone"];
+        drugViewControllerNibName=@"DrugViewController_iPhone";
     
     
     NSString *applicationNumber=[self.boundObject valueForKey:@"applNo"];

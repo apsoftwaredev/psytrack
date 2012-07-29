@@ -1898,7 +1898,7 @@
     else 
     {
       
-        NSString *alertText=[NSString stringWithString:@"Error 790: Unable to decrypt data" ];
+        NSString *alertText=@"Error 790: Unable to decrypt data";
         
         [self displayNotification:alertText forDuration:3.0 location:kPTTScreenLocationTop  inView:nil];
         
@@ -6047,9 +6047,9 @@ return [self applicationDrugsDirectory].path;
 	{
         NSString *lockScreenNibName;
         if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad)
-            lockScreenNibName=[NSString stringWithString:@"LCYLockScreen_iPhone"];
+            lockScreenNibName=@"LCYLockScreen_iPhone";
         else 
-            lockScreenNibName=[NSString stringWithString:@"LCYLockScreen_iPad"];
+            lockScreenNibName=@"LCYLockScreen_iPad";
         
         
 		self.lockScreenVC = [[LCYLockScreenViewController alloc] initWithNibName:lockScreenNibName bundle:[NSBundle mainBundle]];
@@ -6088,7 +6088,7 @@ return [self applicationDrugsDirectory].path;
     else {
         
        
-        NSString *alertText=[NSString stringWithString:@"Need To Set Passcode in Lock Screen Settings" ];
+        NSString *alertText=@"Need To Set Passcode in Lock Screen Settings";
     
         [self displayNotification:alertText forDuration:3.0 location:kPTTScreenLocationTop  inView:nil];
     }

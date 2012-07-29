@@ -108,9 +108,9 @@
     NSString *timePickerCellNibName;
     
     if([SCUtilities is_iPad])
-        timePickerCellNibName=[NSString stringWithString:@"TimePickerCell_iPad"];
+        timePickerCellNibName=@"TimePickerCell_iPad";
     else
-        timePickerCellNibName=[NSString stringWithString:@"TimePickerCell"];
+        timePickerCellNibName=@"TimePickerCell";
     
     
     

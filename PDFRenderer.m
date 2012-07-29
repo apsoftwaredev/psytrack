@@ -773,7 +773,7 @@
     CGFloat sizeToReturn= 0;
 
     CGPoint textStartPosition= CGContextGetTextPosition(contxt);
-    NSLog(@"start point is %g",textStartPosition);
+    NSLog(@"start point is %f",textStartPosition.x);
     
     CGContextSetTextDrawingMode(contxt, kCGTextInvisible);
     CGContextSetTextPosition(contxt, 0, 0);
@@ -783,7 +783,7 @@
     CGPoint textEndPosition=CGContextGetTextPosition(contxt);
     
      CGContextSetTextDrawingMode(contxt, kCGTextFill);
-    NSLog(@"text end position is %g",textEndPosition);
+    NSLog(@"text end position is %f",textEndPosition.x);
     sizeToReturn=textEndPosition.x-textStartPosition.x;
     
     return sizeToReturn;

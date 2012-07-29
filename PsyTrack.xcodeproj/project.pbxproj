@@ -108,7 +108,6 @@
 		37F7CE681500563200AD2C3A /* ClientsDetailViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE661500563200AD2C3A /* ClientsDetailViewController_iPad.m */; };
 		37F7CE691500563200AD2C3A /* ClientsRootViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE671500563200AD2C3A /* ClientsRootViewController_iPad.m */; };
 		37F7CE6C150056F800AD2C3A /* EncryptedSCTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE6B150056F800AD2C3A /* EncryptedSCTextFieldCell.m */; };
-		37F7CE731500573E00AD2C3A /* CliniciansViewController_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE711500573E00AD2C3A /* CliniciansViewController_Shared.m */; };
 		37F7CE791500578B00AD2C3A /* CliniciansDetailViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE761500578B00AD2C3A /* CliniciansDetailViewController_iPad.m */; };
 		37F7CE7A1500578B00AD2C3A /* CliniciansRootViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE781500578B00AD2C3A /* CliniciansRootViewController_iPad.m */; };
 		37F7CE7F150057C300AD2C3A /* CliniciansDetailViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CE7B150057C300AD2C3A /* CliniciansDetailViewController_iPad.xib */; };
@@ -123,7 +122,6 @@
 		37F7CE9D1500596F00AD2C3A /* TimeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE9B1500596F00AD2C3A /* TimeEntity.m */; };
 		37F7CEA7150059D900AD2C3A /* TimeTrackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEA3150059D900AD2C3A /* TimeTrackViewController.xib */; };
 		37F7CEAE15005C5F00AD2C3A /* TrainTrackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEAA15005C5F00AD2C3A /* TrainTrackViewController.xib */; };
-		37F7CEB215005C7300AD2C3A /* TrainTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEB115005C7300AD2C3A /* TrainTrackViewController.m */; };
 		37F7CEBC15005D6700AD2C3A /* ReportsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEB815005D6700AD2C3A /* ReportsViewController.xib */; };
 		37F7CEC515005D8A00AD2C3A /* ReportsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEC215005D8A00AD2C3A /* ReportsViewController.m */; };
 		37F7CECB15005E7100AD2C3A /* drugs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */; };
@@ -231,7 +229,6 @@
 		E751793715A85BCB00674F88 /* SupervisorsAndTotalTimesForMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = E751793615A85BCA00674F88 /* SupervisorsAndTotalTimesForMonth.m */; };
 		E7577FA9158C1DAF0044D344 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E7577FAC158D13B50044D344 /* EncryptionTokenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7577FAB158D13B50044D344 /* EncryptionTokenCell.m */; };
-		E75A148015A8DB2300F3EBEF /* TotalHoursAndMinutesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A147F15A8DB2300F3EBEF /* TotalHoursAndMinutesCell.m */; };
 		E75A148215A8DB6300F3EBEF /* TotalHoursAndMinutesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E75A148115A8DB6300F3EBEF /* TotalHoursAndMinutesCell.xib */; };
 		E75A148E15ABC9DB00F3EBEF /* MonthlyPracticumLogBottomCellWithUndefined.xib in Resources */ = {isa = PBXBuildFile; fileRef = E75A148D15ABC9DB00F3EBEF /* MonthlyPracticumLogBottomCellWithUndefined.xib */; };
 		E75A149415AC855900F3EBEF /* TrackTypeWithTotalTimes.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A149315AC855800F3EBEF /* TrackTypeWithTotalTimes.m */; };
@@ -317,8 +314,6 @@
 		E798A1311585593D006B9DBD /* mapper-ipad-full.ptt in Resources */ = {isa = PBXBuildFile; fileRef = E798A1301585593B006B9DBD /* mapper-ipad-full.ptt */; };
 		E798A13A15857D6C006B9DBD /* ColorSwitcher.m in Sources */ = {isa = PBXBuildFile; fileRef = E798A13915857D5C006B9DBD /* ColorSwitcher.m */; };
 		E798A13C15857E36006B9DBD /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E798A13B15857E2F006B9DBD /* CoreImage.framework */; };
-		E79AB6EB15718369009CE87A /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E79AB6E81571834E009CE87A /* libSensibleTableView.a */; };
-		E79AB6F81571839A009CE87A /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E79AB6F515718382009CE87A /* libSTV+CoreData.a */; };
 		E7A21370155B34CD005CF154 /* LogoBackgroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A2136E155B34CD005CF154 /* LogoBackgroundViewController.m */; };
 		E7A21371155B34CD005CF154 /* LogoBackgroundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7A2136F155B34CD005CF154 /* LogoBackgroundViewController.xib */; };
 		E7A5D7081559EB26000F248F /* DetailViewControllerTheme.ptt in Resources */ = {isa = PBXBuildFile; fileRef = E7A5D7071559EB26000F248F /* DetailViewControllerTheme.ptt */; };
@@ -329,13 +324,23 @@
 		E7ADFD4515AE2ACF00081392 /* ExistingAssessmentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD4415AE2ACF00081392 /* ExistingAssessmentEntity.m */; };
 		E7ADFD4815AE2AF500081392 /* ExistingSupervisionReceivedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD4715AE2AF500081392 /* ExistingSupervisionReceivedEntity.m */; };
 		E7ADFD4B15AE2B0900081392 /* ExistingSupportActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD4A15AE2B0900081392 /* ExistingSupportActivityEntity.m */; };
-		E7AFB2B115C329A4005E2722 /* ConsultationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AFB2AF15C329A3005E2722 /* ConsultationsViewController.m */; };
 		E7AFB2B215C329A4005E2722 /* ConsultationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AFB2B015C329A4005E2722 /* ConsultationsViewController.xib */; };
 		E7AFB2B615C38530005E2722 /* OtherReferralSourceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AFB2B515C38530005E2722 /* OtherReferralSourceEntity.m */; };
 		E7AFB2B915C45BB4005E2722 /* ConsultationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AFB2B815C45BB4005E2722 /* ConsultationEntity.m */; };
 		E7AFB2BC15C477FC005E2722 /* RateChargeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AFB2BB15C477FC005E2722 /* RateChargeEntity.m */; };
 		E7AFB2BF15C47C8D005E2722 /* RateEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AFB2BE15C47C8D005E2722 /* RateEntity.m */; };
-		E7B81461159A5FFE0039F38F /* psyTrainTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7B8145F159A5FFE0039F38F /* psyTrainTrack.xcdatamodeld */; };
+		E7B3E40715C58B2F00729C88 /* CECreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3E3FD15C58B2F00729C88 /* CECreditsViewController.m */; };
+		E7B3E40815C58B2F00729C88 /* LicenseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3E40015C58B2F00729C88 /* LicenseEntity.m */; };
+		E7B3E40915C58B2F00729C88 /* LicenseRenewalEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3E40115C58B2F00729C88 /* LicenseRenewalEntity.m */; };
+		E7B3E40A15C58B2F00729C88 /* CliniciansViewController_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3E40215C58B2F00729C88 /* CliniciansViewController_Shared.m */; };
+		E7B3E40B15C58B2F00729C88 /* CECreditsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7B3E40315C58B2F00729C88 /* CECreditsViewController.xib */; };
+		E7B3E40C15C58B2F00729C88 /* ConsultationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3E40415C58B2F00729C88 /* ConsultationsViewController.m */; };
+		E7B3E40D15C58B2F00729C88 /* TotalHoursAndMinutesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3E40515C58B2F00729C88 /* TotalHoursAndMinutesCell.m */; };
+		E7B3E40E15C58B2F00729C88 /* TrainTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3E40615C58B2F00729C88 /* TrainTrackViewController.m */; };
+		E7B3E43515C58E5900729C88 /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B3E43215C58E3C00729C88 /* libSensibleTableView.a */; };
+		E7B3E44415C58E9600729C88 /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B3E44115C58E7F00729C88 /* libSTV+CoreData.a */; };
+		E7B3E44D15C5903700729C88 /* SensibleTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B3E44C15C5903700729C88 /* SensibleTableView.framework */; };
+		E7B3E44F15C5904E00729C88 /* STV+CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B3E44E15C5904E00729C88 /* STV+CoreData.framework */; };
 		E7C02D9F15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */; };
 		E7C02DA215B3621B0072F97C /* SupervisionReceivedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA115B362190072F97C /* SupervisionReceivedEntity.m */; };
 		E7C02DA515B362990072F97C /* SupervisionGivenEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA415B362980072F97C /* SupervisionGivenEntity.m */; };
@@ -415,36 +420,37 @@
 		E7F1E703157662EB00D4A638 /* InstrumentScoreNameEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E702157662EB00D4A638 /* InstrumentScoreNameEntity.m */; };
 		E7F1E7061576966000D4A638 /* InstrumentScoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E7051576966000D4A638 /* InstrumentScoreEntity.m */; };
 		E7F1E7091576D17100D4A638 /* ClientInstrumentScoresEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */; };
+		E7FA340415C580EF0025B18B /* psyTrainTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */; };
 		E7FB3AAD1562A4E4000A6782 /* TwoButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */; };
 		E7FB3AB31562C867000A6782 /* AddViewABLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB21562C867000A6782 /* AddViewABLinkButtonCell.m */; };
 		E7FB3AB61562C888000A6782 /* LookupRemoveLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB51562C888000A6782 /* LookupRemoveLinkButtonCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E79AB6E71571834E009CE87A /* PBXContainerItemProxy */ = {
+		E7B3E43115C58E3C00729C88 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */;
+			containerPortal = E7B3E42915C58E3B00729C88 /* SensibleTableView.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DBE7373014F99E580076D2B6;
 			remoteInfo = SensibleTableView;
 		};
-		E79AB6E91571835C009CE87A /* PBXContainerItemProxy */ = {
+		E7B3E43315C58E5300729C88 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */;
+			containerPortal = E7B3E42915C58E3B00729C88 /* SensibleTableView.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = DBE7372F14F99E580076D2B6;
 			remoteInfo = SensibleTableView;
 		};
-		E79AB6F415718382009CE87A /* PBXContainerItemProxy */ = {
+		E7B3E44015C58E7F00729C88 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */;
+			containerPortal = E7B3E43815C58E7E00729C88 /* STV+CoreData.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DBE737C414FC66D40076D2B6;
 			remoteInfo = "STV+CoreData";
 		};
-		E79AB6F61571838D009CE87A /* PBXContainerItemProxy */ = {
+		E7B3E44215C58E8F00729C88 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */;
+			containerPortal = E7B3E43815C58E7E00729C88 /* STV+CoreData.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
 			remoteInfo = "STV+CoreData";
@@ -611,7 +617,6 @@
 		37F7CE6A150056F800AD2C3A /* EncryptedSCTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCTextFieldCell.h; sourceTree = "<group>"; };
 		37F7CE6B150056F800AD2C3A /* EncryptedSCTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCTextFieldCell.m; sourceTree = "<group>"; };
 		37F7CE701500573E00AD2C3A /* CliniciansViewController_Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CliniciansViewController_Shared.h; sourceTree = "<group>"; };
-		37F7CE711500573E00AD2C3A /* CliniciansViewController_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CliniciansViewController_Shared.m; sourceTree = "<group>"; };
 		37F7CE751500578B00AD2C3A /* CliniciansDetailViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CliniciansDetailViewController_iPad.h; sourceTree = "<group>"; };
 		37F7CE761500578B00AD2C3A /* CliniciansDetailViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CliniciansDetailViewController_iPad.m; sourceTree = "<group>"; };
 		37F7CE771500578B00AD2C3A /* CliniciansRootViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CliniciansRootViewController_iPad.h; sourceTree = "<group>"; };
@@ -636,7 +641,6 @@
 		37F7CEA4150059D900AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TimeTrackViewController.xib; sourceTree = "<group>"; };
 		37F7CEAB15005C5F00AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TrainTrackViewController.xib; sourceTree = "<group>"; };
 		37F7CEB015005C7300AD2C3A /* TrainTrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainTrackViewController.h; sourceTree = "<group>"; };
-		37F7CEB115005C7300AD2C3A /* TrainTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainTrackViewController.m; sourceTree = "<group>"; };
 		37F7CEB915005D6700AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ReportsViewController.xib; sourceTree = "<group>"; };
 		37F7CEC115005D8A00AD2C3A /* ReportsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportsViewController.h; sourceTree = "<group>"; };
 		37F7CEC215005D8A00AD2C3A /* ReportsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportsViewController.m; sourceTree = "<group>"; };
@@ -785,7 +789,6 @@
 		E7577FAA158D13B50044D344 /* EncryptionTokenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptionTokenCell.h; sourceTree = "<group>"; };
 		E7577FAB158D13B50044D344 /* EncryptionTokenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptionTokenCell.m; sourceTree = "<group>"; };
 		E75A147E15A8DB2300F3EBEF /* TotalHoursAndMinutesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalHoursAndMinutesCell.h; sourceTree = "<group>"; };
-		E75A147F15A8DB2300F3EBEF /* TotalHoursAndMinutesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalHoursAndMinutesCell.m; sourceTree = "<group>"; };
 		E75A148115A8DB6300F3EBEF /* TotalHoursAndMinutesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalHoursAndMinutesCell.xib; sourceTree = "<group>"; };
 		E75A148D15ABC9DB00F3EBEF /* MonthlyPracticumLogBottomCellWithUndefined.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogBottomCellWithUndefined.xib; sourceTree = "<group>"; };
 		E75A149215AC855800F3EBEF /* TrackTypeWithTotalTimes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackTypeWithTotalTimes.h; sourceTree = "<group>"; };
@@ -901,8 +904,6 @@
 		E798A13815857D4F006B9DBD /* ColorSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSwitcher.h; sourceTree = "<group>"; };
 		E798A13915857D5C006B9DBD /* ColorSwitcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSwitcher.m; sourceTree = "<group>"; };
 		E798A13B15857E2F006B9DBD /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.0.6 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
-		E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3.0.6 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E7A2136D155B34CD005CF154 /* LogoBackgroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoBackgroundViewController.h; sourceTree = "<group>"; };
 		E7A2136E155B34CD005CF154 /* LogoBackgroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoBackgroundViewController.m; sourceTree = "<group>"; };
 		E7A2136F155B34CD005CF154 /* LogoBackgroundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogoBackgroundViewController.xib; sourceTree = "<group>"; };
@@ -920,7 +921,6 @@
 		E7ADFD4915AE2B0900081392 /* ExistingSupportActivityEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingSupportActivityEntity.h; sourceTree = "<group>"; };
 		E7ADFD4A15AE2B0900081392 /* ExistingSupportActivityEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingSupportActivityEntity.m; sourceTree = "<group>"; };
 		E7AFB2AE15C329A3005E2722 /* ConsultationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultationsViewController.h; sourceTree = "<group>"; };
-		E7AFB2AF15C329A3005E2722 /* ConsultationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsultationsViewController.m; sourceTree = "<group>"; };
 		E7AFB2B015C329A4005E2722 /* ConsultationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsultationsViewController.xib; sourceTree = "<group>"; };
 		E7AFB2B415C38530005E2722 /* OtherReferralSourceEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherReferralSourceEntity.h; sourceTree = "<group>"; };
 		E7AFB2B515C38530005E2722 /* OtherReferralSourceEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherReferralSourceEntity.m; sourceTree = "<group>"; };
@@ -930,7 +930,21 @@
 		E7AFB2BB15C477FC005E2722 /* RateChargeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateChargeEntity.m; sourceTree = "<group>"; };
 		E7AFB2BD15C47C8D005E2722 /* RateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateEntity.h; sourceTree = "<group>"; };
 		E7AFB2BE15C47C8D005E2722 /* RateEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateEntity.m; sourceTree = "<group>"; };
-		E7B81460159A5FFE0039F38F /* psyTrainTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = psyTrainTrack.xcdatamodel; sourceTree = "<group>"; };
+		E7B3E3FC15C58B2F00729C88 /* CECreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CECreditsViewController.h; sourceTree = "<group>"; };
+		E7B3E3FD15C58B2F00729C88 /* CECreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CECreditsViewController.m; sourceTree = "<group>"; };
+		E7B3E3FE15C58B2F00729C88 /* LicenseRenewalEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LicenseRenewalEntity.h; sourceTree = "<group>"; };
+		E7B3E3FF15C58B2F00729C88 /* LicenseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LicenseEntity.h; sourceTree = "<group>"; };
+		E7B3E40015C58B2F00729C88 /* LicenseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LicenseEntity.m; sourceTree = "<group>"; };
+		E7B3E40115C58B2F00729C88 /* LicenseRenewalEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LicenseRenewalEntity.m; sourceTree = "<group>"; };
+		E7B3E40215C58B2F00729C88 /* CliniciansViewController_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CliniciansViewController_Shared.m; sourceTree = "<group>"; };
+		E7B3E40315C58B2F00729C88 /* CECreditsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CECreditsViewController.xib; sourceTree = "<group>"; };
+		E7B3E40415C58B2F00729C88 /* ConsultationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsultationsViewController.m; sourceTree = "<group>"; };
+		E7B3E40515C58B2F00729C88 /* TotalHoursAndMinutesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TotalHoursAndMinutesCell.m; sourceTree = "<group>"; };
+		E7B3E40615C58B2F00729C88 /* TrainTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainTrackViewController.m; sourceTree = "<group>"; };
+		E7B3E42915C58E3B00729C88 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3-1.0.6 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
+		E7B3E43815C58E7E00729C88 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3-1.0.6 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
+		E7B3E44C15C5903700729C88 /* SensibleTableView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SensibleTableView.framework; path = "../../Downloads/STV 3-1.0.6 Pro/Static Frameworks/SensibleTableView.framework"; sourceTree = "<group>"; };
+		E7B3E44E15C5904E00729C88 /* STV+CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "STV+CoreData.framework"; path = "../../Downloads/STV 3-1.0.6 Pro/Static Frameworks/STV+CoreData.framework"; sourceTree = "<group>"; };
 		E7C02D9D15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h; sourceTree = "<group>"; };
 		E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m; sourceTree = "<group>"; };
 		E7C02DA015B362180072F97C /* SupervisionReceivedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionReceivedEntity.h; sourceTree = "<group>"; };
@@ -1055,6 +1069,7 @@
 		E7F1E7051576966000D4A638 /* InstrumentScoreEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentScoreEntity.m; sourceTree = "<group>"; };
 		E7F1E7071576D17100D4A638 /* ClientInstrumentScoresEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientInstrumentScoresEntity.h; sourceTree = "<group>"; };
 		E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientInstrumentScoresEntity.m; sourceTree = "<group>"; };
+		E7FA340315C580EF0025B18B /* psyTrainTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = psyTrainTrack.xcdatamodel; sourceTree = "<group>"; };
 		E7FB3AAB1562A4E3000A6782 /* TwoButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoButtonCell.h; sourceTree = "<group>"; };
 		E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoButtonCell.m; sourceTree = "<group>"; };
 		E7FB3AB11562C867000A6782 /* AddViewABLinkButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewABLinkButtonCell.h; sourceTree = "<group>"; };
@@ -1068,11 +1083,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7B3E44F15C5904E00729C88 /* STV+CoreData.framework in Frameworks */,
+				E7B3E44D15C5903700729C88 /* SensibleTableView.framework in Frameworks */,
+				E7B3E44415C58E9600729C88 /* libSTV+CoreData.a in Frameworks */,
+				E7B3E43515C58E5900729C88 /* libSensibleTableView.a in Frameworks */,
 				E7F1CBA31598C787006F9E95 /* ImageIO.framework in Frameworks */,
 				E7F1CAF41597CADB006F9E95 /* CoreText.framework in Frameworks */,
 				E798A13C15857E36006B9DBD /* CoreImage.framework in Frameworks */,
-				E79AB6F81571839A009CE87A /* libSTV+CoreData.a in Frameworks */,
-				E79AB6EB15718369009CE87A /* libSensibleTableView.a in Frameworks */,
 				E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */,
 				3773F77114FD267000C36B75 /* AudioToolbox.framework in Frameworks */,
 				B78E053214E6B4A300890EA4 /* Security.framework in Frameworks */,
@@ -1281,6 +1298,7 @@
 				37F7CE4C150054CE00AD2C3A /* Clients */,
 				37F7CE6D1500570500AD2C3A /* Clinicians */,
 				37F7CDDA1500312300AD2C3A /* Drugs */,
+				E7B3E3FB15C58A5800729C88 /* Education */,
 				E7E1425515C1EA7500D0F505 /* Teaching */,
 				37F7CE8E1500589200AD2C3A /* Track */,
 				37F7CECF15005EC900AD2C3A /* Custom Cells */,
@@ -1373,7 +1391,7 @@
 				37F7CE81150057E400AD2C3A /* iPhone */,
 				37F7CE741500574800AD2C3A /* iPad */,
 				37F7CE701500573E00AD2C3A /* CliniciansViewController_Shared.h */,
-				37F7CE711500573E00AD2C3A /* CliniciansViewController_Shared.m */,
+				E7B3E40215C58B2F00729C88 /* CliniciansViewController_Shared.m */,
 			);
 			name = Clinicians;
 			sourceTree = "<group>";
@@ -1408,7 +1426,7 @@
 				E7E1A638152E86C600C227E8 /* Time Track View Controller */,
 				E78DA6A015252511004ABF29 /* Existing Hours */,
 				37F7CEB015005C7300AD2C3A /* TrainTrackViewController.h */,
-				37F7CEB115005C7300AD2C3A /* TrainTrackViewController.m */,
+				E7B3E40615C58B2F00729C88 /* TrainTrackViewController.m */,
 				37F7CEAA15005C5F00AD2C3A /* TrainTrackViewController.xib */,
 				37F7CE971500594E00AD2C3A /* Time */,
 				37F7CE901500591000AD2C3A /* Client Presentations */,
@@ -1472,7 +1490,11 @@
 		37F7CEC615005E3400AD2C3A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E7B8145F159A5FFE0039F38F /* psyTrainTrack.xcdatamodeld */,
+				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
+				E7B3E3FE15C58B2F00729C88 /* LicenseRenewalEntity.h */,
+				E7B3E3FF15C58B2F00729C88 /* LicenseEntity.h */,
+				E7B3E40015C58B2F00729C88 /* LicenseEntity.m */,
+				E7B3E40115C58B2F00729C88 /* LicenseRenewalEntity.m */,
 				E7AFB2BD15C47C8D005E2722 /* RateEntity.h */,
 				E7AFB2BE15C47C8D005E2722 /* RateEntity.m */,
 				E7AFB2BA15C477FC005E2722 /* RateChargeEntity.h */,
@@ -1636,7 +1658,7 @@
 				E7577FAB158D13B50044D344 /* EncryptionTokenCell.m */,
 				E7CCB8E9159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib */,
 				E75A147E15A8DB2300F3EBEF /* TotalHoursAndMinutesCell.h */,
-				E75A147F15A8DB2300F3EBEF /* TotalHoursAndMinutesCell.m */,
+				E7B3E40515C58B2F00729C88 /* TotalHoursAndMinutesCell.m */,
 				E75A148115A8DB6300F3EBEF /* TotalHoursAndMinutesCell.xib */,
 			);
 			name = "Custom Cells";
@@ -1716,8 +1738,10 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */,
-				E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */,
+				E7B3E44E15C5904E00729C88 /* STV+CoreData.framework */,
+				E7B3E44C15C5903700729C88 /* SensibleTableView.framework */,
+				E7B3E42915C58E3B00729C88 /* SensibleTableView.xcodeproj */,
+				E7B3E43815C58E7E00729C88 /* STV+CoreData.xcodeproj */,
 				E78A8D101531DCB30099FE5B /* PsyTrack.entitlements */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Helpers */,
@@ -1936,30 +1960,40 @@
 			path = brown;
 			sourceTree = "<group>";
 		};
-		E79AB6E01571834E009CE87A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E79AB6E81571834E009CE87A /* libSensibleTableView.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E79AB6ED15718382009CE87A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E79AB6F515718382009CE87A /* libSTV+CoreData.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		E7AFB2B315C329DB005E2722 /* Consultations */ = {
 			isa = PBXGroup;
 			children = (
 				E7AFB2AE15C329A3005E2722 /* ConsultationsViewController.h */,
-				E7AFB2AF15C329A3005E2722 /* ConsultationsViewController.m */,
+				E7B3E40415C58B2F00729C88 /* ConsultationsViewController.m */,
 				E7AFB2B015C329A4005E2722 /* ConsultationsViewController.xib */,
 			);
 			name = Consultations;
+			sourceTree = "<group>";
+		};
+		E7B3E3FB15C58A5800729C88 /* Education */ = {
+			isa = PBXGroup;
+			children = (
+				E7B3E3FC15C58B2F00729C88 /* CECreditsViewController.h */,
+				E7B3E3FD15C58B2F00729C88 /* CECreditsViewController.m */,
+				E7B3E40315C58B2F00729C88 /* CECreditsViewController.xib */,
+			);
+			name = Education;
+			sourceTree = "<group>";
+		};
+		E7B3E42A15C58E3B00729C88 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7B3E43215C58E3C00729C88 /* libSensibleTableView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7B3E43915C58E7E00729C88 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7B3E44115C58E7F00729C88 /* libSTV+CoreData.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		E7E1425515C1EA7500D0F505 /* Teaching */ = {
@@ -2130,8 +2164,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				E79AB6F71571838D009CE87A /* PBXTargetDependency */,
-				E79AB6EA1571835C009CE87A /* PBXTargetDependency */,
+				E7B3E44315C58E8F00729C88 /* PBXTargetDependency */,
+				E7B3E43415C58E5300729C88 /* PBXTargetDependency */,
 			);
 			name = PsyTrack;
 			productName = psyTrainTrack;
@@ -2160,12 +2194,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = E79AB6E01571834E009CE87A /* Products */;
-					ProjectRef = E79AB6DF1571834E009CE87A /* SensibleTableView.xcodeproj */;
+					ProductGroup = E7B3E42A15C58E3B00729C88 /* Products */;
+					ProjectRef = E7B3E42915C58E3B00729C88 /* SensibleTableView.xcodeproj */;
 				},
 				{
-					ProductGroup = E79AB6ED15718382009CE87A /* Products */;
-					ProjectRef = E79AB6EC15718382009CE87A /* STV+CoreData.xcodeproj */;
+					ProductGroup = E7B3E43915C58E7E00729C88 /* Products */;
+					ProjectRef = E7B3E43815C58E7E00729C88 /* STV+CoreData.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -2176,18 +2210,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E79AB6E81571834E009CE87A /* libSensibleTableView.a */ = {
+		E7B3E43215C58E3C00729C88 /* libSensibleTableView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSensibleTableView.a;
-			remoteRef = E79AB6E71571834E009CE87A /* PBXContainerItemProxy */;
+			remoteRef = E7B3E43115C58E3C00729C88 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E79AB6F515718382009CE87A /* libSTV+CoreData.a */ = {
+		E7B3E44115C58E7F00729C88 /* libSTV+CoreData.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libSTV+CoreData.a";
-			remoteRef = E79AB6F415718382009CE87A /* PBXContainerItemProxy */;
+			remoteRef = E7B3E44015C58E7F00729C88 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2393,6 +2427,7 @@
 				E7C02DC615B61CBC0072F97C /* MonthlyPracticumLogGenerateVC_iPhone.xib in Resources */,
 				E7E1425A15C1F34B00D0F505 /* PresentationsViewController.xib in Resources */,
 				E7AFB2B215C329A4005E2722 /* ConsultationsViewController.xib in Resources */,
+				E7B3E40B15C58B2F00729C88 /* CECreditsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2459,7 +2494,6 @@
 				37F7CE681500563200AD2C3A /* ClientsDetailViewController_iPad.m in Sources */,
 				37F7CE691500563200AD2C3A /* ClientsRootViewController_iPad.m in Sources */,
 				37F7CE6C150056F800AD2C3A /* EncryptedSCTextFieldCell.m in Sources */,
-				37F7CE731500573E00AD2C3A /* CliniciansViewController_Shared.m in Sources */,
 				37F7CE791500578B00AD2C3A /* CliniciansDetailViewController_iPad.m in Sources */,
 				37F7CE7A1500578B00AD2C3A /* CliniciansRootViewController_iPad.m in Sources */,
 				37F7CE871500582600AD2C3A /* ClinicianViewController.m in Sources */,
@@ -2469,7 +2503,6 @@
 				37F7CE961500592900AD2C3A /* ClientPresentations_Shared.m in Sources */,
 				37F7CE9C1500596F00AD2C3A /* Time_Shared.m in Sources */,
 				37F7CE9D1500596F00AD2C3A /* TimeEntity.m in Sources */,
-				37F7CEB215005C7300AD2C3A /* TrainTrackViewController.m in Sources */,
 				37F7CEC515005D8A00AD2C3A /* ReportsViewController.m in Sources */,
 				37F7CECB15005E7100AD2C3A /* drugs.xcdatamodeld in Sources */,
 				37F7CF2615005F7E00AD2C3A /* BehaviorPickerCell.m in Sources */,
@@ -2564,11 +2597,9 @@
 				E7F1CB9D1598C024006F9E95 /* ThumbsViewController.m in Sources */,
 				E7F1CB9E1598C024006F9E95 /* UIXToolbarView.m in Sources */,
 				E7F1CBB0159A389F006F9E95 /* MonthlyPracticumLogTableViewController.m in Sources */,
-				E7B81461159A5FFE0039F38F /* psyTrainTrack.xcdatamodeld in Sources */,
 				E7CCB8B1159A9AD200A12908 /* MonthlyPracticumLogBottonCell.m in Sources */,
 				E751791815A26B0C00674F88 /* InterventionDeliveredEntity.m in Sources */,
 				E751793715A85BCB00674F88 /* SupervisorsAndTotalTimesForMonth.m in Sources */,
-				E75A148015A8DB2300F3EBEF /* TotalHoursAndMinutesCell.m in Sources */,
 				E75A149415AC855900F3EBEF /* TrackTypeWithTotalTimes.m in Sources */,
 				E75A149715AC9E6900F3EBEF /* TotalTimesForMonthlyLog.m in Sources */,
 				E76CF3E015ACAD3200E888F2 /* AssessmentTypeEntity.m in Sources */,
@@ -2594,26 +2625,33 @@
 				E74B04E615BC87F60077D759 /* TrainingProgramEntity.m in Sources */,
 				E74B04E915BCEB870077D759 /* SchoolEntity.m in Sources */,
 				E7E1425915C1F34B00D0F505 /* PresentationsViewController.m in Sources */,
-				E7AFB2B115C329A4005E2722 /* ConsultationsViewController.m in Sources */,
 				E7AFB2B615C38530005E2722 /* OtherReferralSourceEntity.m in Sources */,
 				E7AFB2B915C45BB4005E2722 /* ConsultationEntity.m in Sources */,
 				E7AFB2BC15C477FC005E2722 /* RateChargeEntity.m in Sources */,
 				E7AFB2BF15C47C8D005E2722 /* RateEntity.m in Sources */,
+				E7FA340415C580EF0025B18B /* psyTrainTrack.xcdatamodeld in Sources */,
+				E7B3E40715C58B2F00729C88 /* CECreditsViewController.m in Sources */,
+				E7B3E40815C58B2F00729C88 /* LicenseEntity.m in Sources */,
+				E7B3E40915C58B2F00729C88 /* LicenseRenewalEntity.m in Sources */,
+				E7B3E40A15C58B2F00729C88 /* CliniciansViewController_Shared.m in Sources */,
+				E7B3E40C15C58B2F00729C88 /* ConsultationsViewController.m in Sources */,
+				E7B3E40D15C58B2F00729C88 /* TotalHoursAndMinutesCell.m in Sources */,
+				E7B3E40E15C58B2F00729C88 /* TrainTrackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E79AB6EA1571835C009CE87A /* PBXTargetDependency */ = {
+		E7B3E43415C58E5300729C88 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SensibleTableView;
-			targetProxy = E79AB6E91571835C009CE87A /* PBXContainerItemProxy */;
+			targetProxy = E7B3E43315C58E5300729C88 /* PBXContainerItemProxy */;
 		};
-		E79AB6F71571838D009CE87A /* PBXTargetDependency */ = {
+		E7B3E44315C58E8F00729C88 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "STV+CoreData";
-			targetProxy = E79AB6F61571838D009CE87A /* PBXContainerItemProxy */;
+			targetProxy = E7B3E44215C58E8F00729C88 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3096,6 +3134,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Downloads/STV 3-1.0 Pro/Static Frameworks\"",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../Downloads/STV 3-1.0.6 Pro/Static Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";
@@ -3127,6 +3166,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Downloads/STV 3-1.0 Pro/Static Frameworks\"",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../Downloads/STV 3-1.0.6 Pro/Static Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";
@@ -3192,12 +3232,12 @@
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
-		E7B8145F159A5FFE0039F38F /* psyTrainTrack.xcdatamodeld */ = {
+		E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				E7B81460159A5FFE0039F38F /* psyTrainTrack.xcdatamodel */,
+				E7FA340315C580EF0025B18B /* psyTrainTrack.xcdatamodel */,
 			);
-			currentVersion = E7B81460159A5FFE0039F38F /* psyTrainTrack.xcdatamodel */;
+			currentVersion = E7FA340315C580EF0025B18B /* psyTrainTrack.xcdatamodel */;
 			path = psyTrainTrack.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

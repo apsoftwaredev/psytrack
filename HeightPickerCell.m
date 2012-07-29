@@ -113,7 +113,7 @@
         }
         heightTallInchesOrCentemeters=[[NSNumber numberWithFloat:roundf(inches)]integerValue];
         heightTallFtOrM=[[NSNumber numberWithFloat:roundf(feet)]integerValue];
-        littleUnit=[NSString stringWithString:@"in"];
+        littleUnit=@"in";
         
         
     }
@@ -138,7 +138,7 @@
             heightTallInchesOrCentemeters=63;
             componentChanged=4;
         }
-        littleUnit=[NSString stringWithString:@"cm"]; 
+        littleUnit=@"cm"; 
     
     }
 
@@ -295,28 +295,28 @@
 {
     NSInteger returnInteger=0;
    
-   
-    //NSLog(@"component %i",component);
-    NSString *bigUnit,*littleUnit ;
-    if (loadUnitsFromBoundObject) {
-        bigUnit=(NSString *)[self.boundObject valueForKey:@"heightUnit"];
-        if ([bigUnit isEqualToString:@"ft"]) {
-            littleUnit=[NSString stringWithString:@"in"];
-        }
-        else if([bigUnit isEqualToString:@"m"] ){
-            
-            littleUnit=[NSString stringWithString:@"cm"];
-        }
+
+//NSLog(@"component %i",component);
+NSString *bigUnit,*littleUnit ;
+if (loadUnitsFromBoundObject) {
+    bigUnit=(NSString *)[self.boundObject valueForKey:@"heightUnit"];
+    if ([bigUnit isEqualToString:@"ft"]) {
+        littleUnit=@"in";
+    }
+    else if([bigUnit isEqualToString:@"m"] ){
         
+        littleUnit=@"cm";
     }
     
-    else
-    {
-        
-        bigUnit=[self bigUnitForRow:[picker selectedRowInComponent:1]];
-        littleUnit=[self littleUnitForRow:[picker selectedRowInComponent:3]];
-        
-    }
+}
+
+else
+{
+    
+    bigUnit=[self bigUnitForRow:[picker selectedRowInComponent:1]];
+    littleUnit=[self littleUnitForRow:[picker selectedRowInComponent:3]];
+    
+}
     if (component==0) {
         
         
@@ -432,44 +432,44 @@
             }
             else
             {
-                componentChanged=3;
+                    componentChanged=3;
+                }
+               
+                [picker reloadComponent:2];
+                
+                
             }
-           
-            [picker reloadComponent:2];
-            
-            
         }
-    }
-    
-    if (component==1||component==3) {
-        NSInteger firstComponent=[picker selectedRowInComponent:0];
-        NSInteger thirdComponent=[picker selectedRowInComponent:2];
-        NSString *bigUnit = [self bigUnitForRow:[picker selectedRowInComponent:1]];
-        NSString *littleUnit = [self littleUnitForRow:[picker selectedRowInComponent:3]];
-        loadUnitsFromBoundObject=FALSE;
-        componentChanged=component; 
-        [picker reloadComponent:2];
-        [picker reloadComponent:0];
-        NSInteger heighTallFtOrM=firstComponent;
         
-        NSInteger heighTallInOrCm=thirdComponent;
-        BOOL convertToMetric=FALSE;
-        //NSLog(@"big unit is %@",bigUnit);
-        //NSLog(@"littleUnit is %@",littleUnit);
-        if (component==1) {
-           
-            if ([bigUnit isEqualToString:@"ft"]) {
-                convertToMetric=FALSE;      
-                littleUnit=[NSString stringWithString:@"in"];
-                 
-                            
-           }
+        if (component==1||component==3) {
+            NSInteger firstComponent=[picker selectedRowInComponent:0];
+            NSInteger thirdComponent=[picker selectedRowInComponent:2];
+            NSString *bigUnit = [self bigUnitForRow:[picker selectedRowInComponent:1]];
+            NSString *littleUnit = [self littleUnitForRow:[picker selectedRowInComponent:3]];
+            loadUnitsFromBoundObject=FALSE;
+            componentChanged=component; 
+            [picker reloadComponent:2];
+            [picker reloadComponent:0];
+            NSInteger heighTallFtOrM=firstComponent;
             
-            if ([bigUnit isEqualToString:@"m"]) {
+            NSInteger heighTallInOrCm=thirdComponent;
+            BOOL convertToMetric=FALSE;
+            //NSLog(@"big unit is %@",bigUnit);
+            //NSLog(@"littleUnit is %@",littleUnit);
+            if (component==1) {
+               
+                if ([bigUnit isEqualToString:@"ft"]) {
+                    convertToMetric=FALSE;      
+                    littleUnit=@"in";
+                     
+                                
+               }
                 
-                convertToMetric=TRUE;
-                littleUnit=[NSString stringWithString:@"cm"];
-                
+                if ([bigUnit isEqualToString:@"m"]) {
+                    
+                    convertToMetric=TRUE;
+                    littleUnit=@"cm";
+                    
                                
             }
             
@@ -484,22 +484,22 @@
         {
         
             if ([littleUnit isEqualToString:@"in"]) {
-//                float inches;
-                convertToMetric=FALSE;                
-               bigUnit=[NSString stringWithString:@"ft"];
+    //                float inches;
+                    convertToMetric=FALSE;                
+                   bigUnit=@"ft";
+                    
+                    
+                }
                 
+                if ([littleUnit isEqualToString:@"cm"]) {
+                    
+                    convertToMetric=TRUE;
+                    bigUnit=@"m";
+                 
+               
+                }
                 
-            }
-            
-            if ([littleUnit isEqualToString:@"cm"]) {
-                
-                convertToMetric=TRUE;
-                bigUnit=[NSString stringWithString:@"m"];
-             
-           
-            }
-            
-   
+       
             
             
             

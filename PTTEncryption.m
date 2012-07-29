@@ -146,7 +146,7 @@ NSString* trustResultDescribe( SecTrustResultType result ) {
     if (result <=kSecTrustResultOtherError)
         return kTrustResultNames[result];
     else
-        return [NSString stringWithFormat:@"(Unknown trust result %i)", result];
+        return [NSString stringWithFormat:@"(Unknown trust result %lu)", result];
 }
 
 -(id)init {
@@ -221,7 +221,7 @@ NSString* trustResultDescribe( SecTrustResultType result ) {
         
         CFMutableDictionaryRef fileSecObjectsDictionary=(CFMutableDictionaryRef) valueAtIndexZero;
        
-        NSString *identityKeyString=[NSString stringWithString:@"identity"];
+        NSString *identityKeyString=@"identity";
         
         myIdentity=( SecIdentityRef ) CFDictionaryGetValue(fileSecObjectsDictionary, (__bridge CFStringRef) identityKeyString);
         
@@ -230,7 +230,7 @@ NSString* trustResultDescribe( SecTrustResultType result ) {
         SecIdentityCopyCertificate(myIdentity, &certificateRef);       
 //        SecTrustRef *myTrust;
         
-        NSString *trustKeyString=[NSString stringWithString:@"trust"];
+        NSString *trustKeyString=@"trust";
         SecTrustRef myTrust;
 //        
         myTrust=( SecTrustRef ) CFDictionaryGetValue(fileSecObjectsDictionary, (__bridge CFStringRef) trustKeyString);
@@ -238,7 +238,7 @@ NSString* trustResultDescribe( SecTrustResultType result ) {
       
          
         
-        NSString *chainString=[NSString stringWithString:@"chain"];
+        NSString *chainString=@"chain";
         
         
         CFArrayRef CFChainArray=(CFArrayRef) CFDictionaryGetValue(fileSecObjectsDictionary, (__bridge CFStringRef) chainString);

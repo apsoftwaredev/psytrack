@@ -1664,138 +1664,138 @@ if(section.headerTitle !=nil)
 
 }
 -(void)addWechlerAgeCellToSection:(SCTableViewSection *)section {
-    
-    if (section.cellCount>2) {
-       SCLabelCell *actualAgeCell=(SCLabelCell*)[section cellAtIndex:1];
-    SCLabelCell *wechslerAgeCell=(SCLabelCell*)[section cellAtIndex:2];
+
+if (section.cellCount>2) {
+   SCLabelCell *actualAgeCell=(SCLabelCell*)[section cellAtIndex:1];
+SCLabelCell *wechslerAgeCell=(SCLabelCell*)[section cellAtIndex:2];
 //    SCTableViewCell *clientCell=(SCTableViewCell *)[section cellAtIndex:0];
 //    SCTableViewCell *testDateCell=(SCTableViewCell*)[section cellAtIndex:3];
-    ClientsViewController_Shared *clientsViewController_Shared=[[ClientsViewController_Shared alloc]init];
-    
-    SCTableViewCell *clientCell=(SCTableViewCell *)[section cellAtIndex:0];
+ClientsViewController_Shared *clientsViewController_Shared=[[ClientsViewController_Shared alloc]init];
+
+SCTableViewCell *clientCell=(SCTableViewCell *)[section cellAtIndex:0];
+
+NSDate *clientDateOfBirth=nil;    
+if ([clientCell isKindOfClass:[ClientsSelectionCell class]]) {
+    ClientsSelectionCell *clientObjectsSelectionCell=(ClientsSelectionCell *)clientCell;
+    if (clientObjectsSelectionCell.clientObject) {
    
-    NSDate *clientDateOfBirth=nil;    
-    if ([clientCell isKindOfClass:[ClientsSelectionCell class]]) {
-        ClientsSelectionCell *clientObjectsSelectionCell=(ClientsSelectionCell *)clientCell;
-        if (clientObjectsSelectionCell.clientObject) {
-       
-        //NSLog(@"client objects selection cell %@",[clientObjectsSelectionCell.clientObject valueForKey:@"dateOfBirth"]);
-        
+    //NSLog(@"client objects selection cell %@",[clientObjectsSelectionCell.clientObject valueForKey:@"dateOfBirth"]);
+    
 //        NSArray *array=[[NSArray alloc]init];
-       //NSLog(@"cleint object %@",clientObjectsSelectionCell.clientObject);
+   //NSLog(@"cleint object %@",clientObjectsSelectionCell.clientObject);
 //        int itemsCount=clientObjectsSelectionCell.items.count;
 //        if (itemsCount>=0&&clientObjectsSelectionCell.clientObject) {
 ////            clientDateOfBirth=(NSDate *)[(NSArray *)[clientObjectsSelectionCell.items valueForKey:@"dateOfBirth"]lastObject];
-            
-           
-            
-            
-            NSManagedObject *clientObject=(NSManagedObject *)clientObjectsSelectionCell.clientObject;
-            clientDateOfBirth=(NSDate *)[clientObject valueForKey:@"dateOfBirth"];
+        
+       
+        
+        
+        NSManagedObject *clientObject=(NSManagedObject *)clientObjectsSelectionCell.clientObject;
+        clientDateOfBirth=(NSDate *)[clientObject valueForKey:@"dateOfBirth"];
 
-        }else{
-            NSString *noClientString=[NSString stringWithString:@"choose client"];
-            wechslerAgeCell.label.text=noClientString; 
-            actualAgeCell.label.text=noClientString;
-            return;
-    
-        }
-        
-       
-        
-       
-        
-        //NSLog(@"client date of birth is %@",clientDateOfBirth);
+    }else{
+        NSString *noClientString=@"choose client";
+        wechslerAgeCell.label.text=noClientString;
+        actualAgeCell.label.text=noClientString;
+        return;
+
     }
-    //NSLog(@"client cell class is  %@", [clientCell class]);
-        
     
+   
+    
+   
+    
+    //NSLog(@"client date of birth is %@",clientDateOfBirth);
+}
+//NSLog(@"client cell class is  %@", [clientCell class]);
+    
+
 //    //NSLog(@"client cell bound object %@",[clientManagedObject valueForKey:@"client.dateOfBirth"]);
 //   //NSLog(@"client date of birth is %@", [clientCell.boundObject valueForKey:@"dateOfBirth"]);
-    //NSLog(@"master model is %@",self.serviceDatePickerDate);
-   
-    if (serviceDatePickerDate && clientDateOfBirth) {
-        wechslerAgeCell.label.text=(NSString *)[clientsViewController_Shared calculateWechslerAgeWithBirthdate:(NSDate *)clientDateOfBirth toDate:(NSDate *)serviceDatePickerDate];
-        actualAgeCell.label.text=(NSString *)[clientsViewController_Shared calculateActualAgeWithBirthdate:(NSDate *)clientDateOfBirth toDate:(NSDate *)serviceDatePickerDate];
+//NSLog(@"master model is %@",self.serviceDatePickerDate);
+
+if (serviceDatePickerDate && clientDateOfBirth) {
+    wechslerAgeCell.label.text=(NSString *)[clientsViewController_Shared calculateWechslerAgeWithBirthdate:(NSDate *)clientDateOfBirth toDate:(NSDate *)serviceDatePickerDate];
+    actualAgeCell.label.text=(NSString *)[clientsViewController_Shared calculateActualAgeWithBirthdate:(NSDate *)clientDateOfBirth toDate:(NSDate *)serviceDatePickerDate];
+}
+else
+{
+    if (!serviceDatePickerDate) {
+        wechslerAgeCell.label.text=@"no test date";
+        actualAgeCell.label.text=@"no test date";
+    }
+    else if (!clientDateOfBirth)
+    {
+    
+        if (wechslerAgeCell&&[wechslerAgeCell respondsToSelector:@selector(label) ]) {
+        
+        wechslerAgeCell.label.text=@"no birthdate";
+        actualAgeCell.label.text=@"no birthdate";
+            
+        }
     }
     else
     {
-        if (!serviceDatePickerDate) {
-            wechslerAgeCell.label.text=[NSString stringWithString:@"no test date"];
-            actualAgeCell.label.text=[NSString stringWithString:@"no test date"];
-        }
-        else if (!clientDateOfBirth)
-        {
-        
-            if (wechslerAgeCell&&[wechslerAgeCell respondsToSelector:@selector(label) ]) {
-            
-            wechslerAgeCell.label.text=[NSString stringWithString:@"no birthdate"];
-            actualAgeCell.label.text=[NSString stringWithString:@"no birthdate"];
-                
-            }
-        }
-        else
-        {
-            wechslerAgeCell.label.text=[NSString stringWithString:@"0y 0m"];
-            actualAgeCell.label.text=[NSString stringWithString:@"0y 0m"];
-        }
-       
-    
+        wechslerAgeCell.label.text=@"0y 0m";
+        actualAgeCell.label.text=@"0y 0m";
     }
-        [wechslerAgeCell setNeedsLayout];
-        [wechslerAgeCell setNeedsDisplay];
-        [actualAgeCell setNeedsLayout];
-        [actualAgeCell setNeedsDisplay];
-    }
+   
+
+}
+    [wechslerAgeCell setNeedsLayout];
+    [wechslerAgeCell setNeedsDisplay];
+    [actualAgeCell setNeedsLayout];
+    [actualAgeCell setNeedsDisplay];
+}
 
 //    actualAgeCell.label.text=[clientsViewController_Shared calculateActualAgeWithBirthdate:birthdateCell.datePicker.date];
 //    
-    
+
 }
 -(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
 //NSLog(@"tablemodel tag in validate cell is %i",tableViewModel.tag);
 
-    if (tableViewModel.tag==3){
+if (tableViewModel.tag==3){
+    
+    
+    SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+    
+    if ([cell isKindOfClass:[ClientsSelectionCell class]]) {
+        ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)cell;
+        //NSLog(@"client selection cell boud object is %@",clientSelectionCell.boundObject);
+        if (clientSelectionCell.clientObject) {
+            return YES;
+        }
         
-        
-        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-        
-        if ([cell isKindOfClass:[ClientsSelectionCell class]]) {
-            ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)cell;
-            //NSLog(@"client selection cell boud object is %@",clientSelectionCell.boundObject);
-            if (clientSelectionCell.clientObject) {
+    }
+
+}
+
+SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+if ([section isKindOfClass:[SCObjectSection class]]){
+    
+    SCObjectSection *objectSection=(SCObjectSection *)section;
+    
+    NSLog(@"object section bound object is %@",objectSection.boundObject);
+    
+    NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+    
+    
+    
+    
+    if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"InstrumentScoreEntity"]) {
+        SCTableViewCell *cellAtOne=(SCTableViewCell *)[objectSection cellAtIndex:0];
+        if ([cellAtOne isKindOfClass:[SCObjectSelectionCell class]]) {
+            SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtOne;
+            
+            if (objectSelectionCell.label.text.length) {
                 return YES;
             }
             
-        }
+            
+            
 
-    }
-    
-    SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-    if ([section isKindOfClass:[SCObjectSection class]]){
-        
-        SCObjectSection *objectSection=(SCObjectSection *)section;
-        
-        NSLog(@"object section bound object is %@",objectSection.boundObject);
-        
-        NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
-        
-        
-        
-        
-        if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"InstrumentScoreEntity"]) {
-            SCTableViewCell *cellAtOne=(SCTableViewCell *)[objectSection cellAtIndex:0];
-            if ([cellAtOne isKindOfClass:[SCObjectSelectionCell class]]) {
-                SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtOne;
-                
-                if (objectSelectionCell.label.text.length) {
-                    return YES;
-                }
-                
-                
-                
-    
-            }}}
+        }}}
     
     return NO;
 }

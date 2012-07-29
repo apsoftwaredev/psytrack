@@ -663,9 +663,9 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     NSString *heightPickerNibName;
     if ([SCUtilities is_iPad]) 
-        heightPickerNibName=[NSString stringWithString:@"HeightPickerCell_iPad"];
+        heightPickerNibName=@"HeightPickerCell_iPad";
     else
-        heightPickerNibName=[NSString stringWithString:@"HeightPickerCell_iPhone"];
+        heightPickerNibName=@"HeightPickerCell_iPhone";
     
     SCCustomPropertyDefinition *heightProperty = [SCCustomPropertyDefinition definitionWithName:@"HeightTall" uiElementNibName:heightPickerNibName objectBindings:heightPickerDataBindings];
 	
@@ -687,9 +687,9 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     NSString *weightPickerNibName;
     if ([SCUtilities is_iPad]) 
-        weightPickerNibName=[NSString stringWithString:@"WeightPickerCell_iPad"];
+        weightPickerNibName=@"WeightPickerCell_iPad";
     else
-        weightPickerNibName=[NSString stringWithString:@"WeightPickerCell_iPhone"];
+        weightPickerNibName=@"WeightPickerCell_iPhone";
     
     SCCustomPropertyDefinition *weightProperty = [SCCustomPropertyDefinition definitionWithName:@"Weight" uiElementNibName:weightPickerNibName objectBindings:weightPickerDataBindings];
 	
@@ -920,7 +920,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     }
     if (birthdate==NULL){
     
-        return [NSString stringWithString:@"no birthdate"];
+        return @"no birthdate";
     
     }
  

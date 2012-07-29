@@ -93,7 +93,7 @@
     
     
     if (!unit) {
-        unit=[NSString stringWithString:@""];
+        unit=@"";
     }
     
     
@@ -225,7 +225,7 @@
         }
         else if (row==4)
         {
-            unit=[NSString stringWithString:@"daily"];
+            unit=@"daily";
         }
     }
    else if (fourthComponent!=1) {
@@ -234,7 +234,7 @@
         }
         else if (row==9)
         {
-            unit=[NSString stringWithString:@"centuries"];
+            unit=@"centuries";
         }
        
     }
@@ -266,14 +266,14 @@
     
     switch (row) {
         case 0:
-            returnStr = [NSString stringWithString:@"Xs"];
+            returnStr = @"Xs";
             break;
         case 1:
-            returnStr = [NSString stringWithString:@"X in"];
+            returnStr = @"X in";
             break;    
         
         case 2:
-            returnStr = [NSString stringWithString:@"for"];
+            returnStr = @"for";
             break; 
         
         default:
@@ -383,14 +383,14 @@
     if (component==2) {
         switch (row) {
             case 0:
-                returnStr = [NSString stringWithString:@"Xs"];
+                returnStr = @"Xs";
                 break;
             case 1:
-                returnStr = [NSString stringWithString:@"X in"];
+                returnStr = @"X in";
                 break;    
                 
             case 2:
-                returnStr = [NSString stringWithString:@"every"];
+                returnStr = @"every";
                 break; 
                 
             default:
@@ -412,7 +412,7 @@
     }
     else if (component==3&&row==0) {
     
-        returnStr=[NSString stringWithString:@""];
+        returnStr=@"";
     
     }
     

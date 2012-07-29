@@ -75,9 +75,9 @@
     NSString *clinicianViewControllerNibName;
     
     if ([SCUtilities is_iPad]) 
-        clinicianViewControllerNibName=[NSString stringWithString:@"ClinicianViewController"];
+        clinicianViewControllerNibName=@"ClinicianViewController";
     else
-        clinicianViewControllerNibName=[NSString stringWithString:@"ClinicianViewController"];
+        clinicianViewControllerNibName=@"ClinicianViewController";
     
     
     NSPredicate *predicate=nil;

@@ -130,9 +130,9 @@
     NSString *clientViewControllerNibName;
     
     if ([SCUtilities is_iPad]) 
-        clientViewControllerNibName=[NSString stringWithString:@"ClientsViewController_iPad"];
+        clientViewControllerNibName=@"ClientsViewController_iPad";
     else
-        clientViewControllerNibName=[NSString stringWithString:@"ClientsViewController_iPhone"];
+        clientViewControllerNibName=@"ClientsViewController_iPhone";
 
         
         ClientsViewController_iPhone *clientsViewContoller=[[ClientsViewController_iPhone alloc]initWithNibName:clientViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController allowMultipleSelection:multiSelect];

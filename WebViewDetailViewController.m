@@ -301,7 +301,7 @@
         
         printInfo.outputType = UIPrintInfoOutputGeneral;
         
-        printInfo.jobName = [NSString stringWithString:@"Your Print Job"];
+        printInfo.jobName = @"Your Print Job";
         
         printInfo.duplex = UIPrintInfoDuplexLongEdge;
         

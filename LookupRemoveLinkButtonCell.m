@@ -14,8 +14,8 @@
 
 
     
-    NSString *buttonOneStr=[NSString stringWithString:@"Remove Address Book Link"];
-    NSString *buttonTwoStr =[NSString stringWithString:@"Look Up In Address Book"];
+    NSString *buttonOneStr=@"Remove Address Book Link";
+    NSString *buttonTwoStr =@"Look Up In Address Book";
 
 
     self.buttonText=buttonOneStr;

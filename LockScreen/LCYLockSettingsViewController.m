@@ -882,9 +882,9 @@ if(section.headerTitle !=nil)
 
     NSString *passCodeEditorNibName;
     if ([SCUtilities is_iPad])
-       passCodeEditorNibName=[NSString stringWithString:@"LCYPassCodeEditorViewController_iPad"];
+       passCodeEditorNibName=@"LCYPassCodeEditorViewController_iPad";
     else 
-     passCodeEditorNibName=[NSString stringWithString:@"LCYPassCodeEditorViewController_iPhone"];
+     passCodeEditorNibName=@"LCYPassCodeEditorViewController_iPhone";
 
 
 	LCYPassCodeEditorViewController *passCodeEditor = [[LCYPassCodeEditorViewController alloc] initWithNibName:passCodeEditorNibName bundle:nil];
