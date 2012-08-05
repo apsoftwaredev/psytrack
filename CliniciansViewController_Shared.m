@@ -649,7 +649,7 @@
         SCPropertyDefinition *licenseRenewalRenewDatePropertyDef = [licenseRenewalDef propertyDefinitionWithName:@"renewalDate"];
         licenseRenewalRenewDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
                                                                                 datePickerMode:UIDatePickerModeDate 
-                                                                 displayDatePickerInDetailView:NO];
+                                                                 displayDatePickerInDetailView:YES];
         SCPropertyDefinition *licenseRenewalNotesPropertyDef=[licenseRenewalDef propertyDefinitionWithName:@"notes"];
         licenseRenewalNotesPropertyDef.type=SCPropertyTypeTextView;
 
