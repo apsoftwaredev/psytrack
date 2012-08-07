@@ -632,7 +632,7 @@
     //Create a class definition for Degree entity
 	SCEntityDefinition *licenseDef = [SCEntityDefinition definitionWithEntityName:@"LicenseEntity" 
                                                              managedObjectContext:managedObjectContext
-                                                                    propertyNames:[NSArray arrayWithObjects:@"licenseName",@"governingBody",@"license",@"status",
+                                                                    propertyNames:[NSArray arrayWithObjects:@"licenseName",@"governingBody",@"licenseNumber",@"status",
                                                                                        @"renewDate",@"notes",@"renewals", nil]];
     
         SCEntityDefinition *licenseRenewalDef=[SCEntityDefinition definitionWithEntityName:@"LicenseRenewalEntity" managedObjectContext:managedObjectContext propertyNamesString:@"renewalDate;notes"];

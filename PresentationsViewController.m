@@ -29,7 +29,7 @@
     [dateFormatter setDateFormat:@"M/d/yyyy"];
 
     NSManagedObjectContext *managedObjectContext=appDelegate.managedObjectContext;
-    SCEntityDefinition *presentationDef=[SCEntityDefinition definitionWithEntityName:@"PresentationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"title;topics;hours;notes;deliveries;publications;logs;conferences;forums"];
+    SCEntityDefinition *presentationDef=[SCEntityDefinition definitionWithEntityName:@"PresentationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"title;topics;notes;deliveries;publications;logs;conferences;forums"];
     
     presentationDef.titlePropertyName=@"title";
     presentationDef.keyPropertyName=@"title";
