@@ -2002,19 +2002,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "TrainTrackViewController.m"
-         timestampString = "365124630.578526"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1187"
-         endingLineNumber = "1187"
-         landmarkName = "@implementation TrainTrackViewController"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
          timestampString = "364988694.265463"
          startingColumnNumber = "9223372036854775807"

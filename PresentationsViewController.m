@@ -29,7 +29,7 @@
     [dateFormatter setDateFormat:@"M/d/yyyy"];
 
     NSManagedObjectContext *managedObjectContext=appDelegate.managedObjectContext;
-    SCEntityDefinition *presentationDef=[SCEntityDefinition definitionWithEntityName:@"PresentationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"title;topics;notes;deliveries;publications;logs;conferences;forums"];
+    SCEntityDefinition *presentationDef=[SCEntityDefinition definitionWithEntityName:@"PresentationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"title;topics;notes;deliveries;publications;logs;conferences"];
     
     presentationDef.titlePropertyName=@"title";
     presentationDef.keyPropertyName=@"title";
@@ -47,9 +47,7 @@
     
     conferenceDef.keyPropertyName=@"title";
     
-    SCEntityDefinition *forumDef=[SCEntityDefinition definitionWithEntityName:@"ForumEntity" managedObjectContext:managedObjectContext propertyNamesString:@"forumName;dateStarted;dateEnded;notes;size;topics"];
-    
-    forumDef.keyPropertyName=@"forumName";
+  
     
     SCEntityDefinition *topicDef=[SCEntityDefinition definitionWithEntityName:@"TopicEntity" managedObjectContext:managedObjectContext propertyNamesString:@"topic;notes"];
     
@@ -86,34 +84,7 @@
 //    forumHostingOrganizationsPropertyDef.attributes=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:hostingOrganizationDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
     
     
-    SCPropertyDefinition *forumEndDatePropertyDef = [forumDef propertyDefinitionWithName:@"dateEnded"];
-	forumEndDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
-                                                                             datePickerMode:UIDatePickerModeDate 
-                                                              displayDatePickerInDetailView:NO];
-    
-    
-    SCPropertyDefinition *forumStartDatePropertyDef = [forumDef propertyDefinitionWithName:@"dateStarted"];
-	forumStartDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
-                                                                               datePickerMode:UIDatePickerModeDate 
-                                                                displayDatePickerInDetailView:NO];
-    SCPropertyDefinition *forumNotesPropertyDef = [forumDef propertyDefinitionWithName:@"notes"];
-	
-	forumNotesPropertyDef.type = SCPropertyTypeTextView;
-    
-    SCPropertyDefinition *forumNotableTopicsPropertyDef = [forumDef propertyDefinitionWithName:@"topics"];
-	
-	forumNotableTopicsPropertyDef.type = SCPropertyTypeTextView;	
-    
-    
-   
-    
-    
-    SCPropertyDefinition *forumNamePropertyDef = [forumDef propertyDefinitionWithName:@"forumName"];
-	
-	forumNamePropertyDef.type = SCPropertyTypeTextView;	
-    
-
-    
+      
     //end
     
     
@@ -234,25 +205,7 @@
     
 
     
-    
-    SCPropertyDefinition *forumsPropertyDef=[presentationDef propertyDefinitionWithName:@"forums"];
-    
-    forumsPropertyDef.type=SCPropertyTypeObjectSelection;
-    
-    SCObjectSelectionAttributes *forumSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:forumDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
-    
-    
-    forumSelectionAttribs.allowAddingItems = YES;
-    forumSelectionAttribs.allowDeletingItems = YES;
-    forumSelectionAttribs.allowMovingItems = YES;
-    forumSelectionAttribs.allowEditingItems = YES;
-    forumSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to add Forums)"];
-    forumSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Tap Here to add forum"];
-    
-    forumsPropertyDef.attributes = forumSelectionAttribs;
-    
-
-    
+       
     
     //create the dictionary with the data bindings
     NSDictionary *lengthDataBindings = [NSDictionary 
