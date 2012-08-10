@@ -11,7 +11,7 @@
 @interface ConsultationsViewController : SCTableViewController <SCTableViewModelDelegate,SCTableViewModelDataSource>{
 
      SCArrayOfObjectsModel *objectsModel;
-
+    NSDateFormatter *dateFormatter;
 }
 
 @end

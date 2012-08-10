@@ -16,7 +16,7 @@
 #import "ConsultationEntity.h"
 #import "RateChargeEntity.h"
 #import "RateEntity.h"
-
+#import "LogEntity.h"
 @interface ConsultationsViewController ()
 
 @end
@@ -30,10 +30,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
   
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+   dateFormatter = [[NSDateFormatter alloc] init];
     
     //set the date format
     [dateFormatter setDateFormat:@"M/d/yyyy"];
+    [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+    
     NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
 
     SCEntityDefinition *consultationDef=[SCEntityDefinition definitionWithEntityName:@"ConsultationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"organization;startDate;endDate;hours;proBono;referrals;logs;notes;rateCharges;fees;paid;payments"];
@@ -449,6 +451,14 @@
     //    phoneNumberPropertyDef.title=@"Phone Number";
     logNotesPropertyDef.autoValidate=NO;
     
+    NSDateFormatter *dateTimeFormatter=[[NSDateFormatter alloc]init];
+    [dateTimeFormatter setDateFormat:@"ccc M/d/yy h:mm a"];
+    [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+    SCPropertyDefinition *logDatePropertyDef=[logDef propertyDefinitionWithName:@"dateTime"];
+    logDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateTimeFormatter
+                                                                     datePickerMode:UIDatePickerModeDateAndTime
+                                                      displayDatePickerInDetailView:YES];
+    
 
     
     SCPropertyDefinition *startDatePropertyDef = [consultationDef propertyDefinitionWithName:@"startDate"];
@@ -609,7 +619,7 @@
         SCArrayOfObjectsSection *objectsSection=(SCArrayOfObjectsSection *)[tableModel sectionAtIndex:0];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
-        if (cellManagedObject && [cellManagedObject isKindOfClass:[RateChargeEntity class]]) {
+        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"RateChargeEntity"]) {
             RateChargeEntity *rateChargeObject=(RateChargeEntity *)cellManagedObject;
             NSDate *hours=rateChargeObject.hours;
             
@@ -634,7 +644,7 @@
             
         }
         
-        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject isKindOfClass:[ReferralEntity class]]) {
+       else if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"ReferralEntity"]) {
         
             ReferralEntity *referralObject=(ReferralEntity *)cellManagedObject;
             ClinicianEntity *clinician=(ClinicianEntity *)referralObject.clinician;
@@ -651,6 +661,31 @@
             
                        
         }
+       else if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"LogEntity"]) {
+            
+            LogEntity *logObject=(LogEntity *)cellManagedObject;
+            
+            if (logObject.dateTime) {
+                NSString *displayString=[dateFormatter stringFromDate:logObject.dateTime];
+                
+                NSString *notesString=logObject.notes;
+                if(notesString &&notesString.length){
+                
+                
+                    displayString=[displayString stringByAppendingFormat:@": %@",notesString];
+                
+                }
+                cell.textLabel.text=displayString;
+
+            }
+           
+            
+                                
+           
+            
+            
+        }
+        
         DLog(@"objects section bound object is %@",objectsSection.boundObject);
         
     }
@@ -666,9 +701,7 @@
     
     if (tableModel.tag==1) {
         
-        DLog(@"cell class is %@",cell.class);
-        DLog(@"section managed object %@",sectionManagedObject);
-        DLog(@"section managed object class is %@",sectionManagedObject.class);
+       
         if (sectionManagedObject && [sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"ConsultationEntity"]&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
             SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
             
@@ -681,8 +714,8 @@
     }
     if (tableModel.tag==3) {
        
-        
-        if (sectionManagedObject&& [sectionManagedObject isKindOfClass:[RateChargeEntity class]]) {
+       
+        if (sectionManagedObject&& [sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"RateChargeEntity"]) {
         
             if (cell.tag==2&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
                 SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
@@ -697,7 +730,7 @@
         
                 
         
-        if (sectionManagedObject&& [sectionManagedObject isKindOfClass:[ReferralEntity class]]) {
+        else if (sectionManagedObject&& [sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"ReferralEntity"]) {
             SCTableViewCell *otherCell=nil;
             if (cell.tag==1) {
                 otherCell=(SCTableViewCell *)[objectSection cellAtIndex:2];
@@ -744,6 +777,11 @@
            
                         
             
+        }
+        else
+        {
+        
+            return YES;
         }
         
     }
