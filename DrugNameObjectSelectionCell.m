@@ -43,7 +43,7 @@
 - (void)didSelectCell
 {
     
-//    //NSLog(@"client %@",[self.boundObject valueForKey:@"client"]);
+//    //DLog(@"client %@",[self.boundObject valueForKey:@"client"]);
     
     
     
@@ -61,7 +61,7 @@
     
     
     
-    //    //NSLog(@"clientobject selection itemset %@",mutableSet);
+    //    //DLog(@"clientobject selection itemset %@",mutableSet);
     
     //    SCObjectSelectionSection *objectSelectionSection=[SCObjectSelectionSection sectionWithHeaderTitle:nil withItemsSet:mutableSet withClassDefinition:clientsViewController_Shared.clientDef];
     //    
@@ -119,7 +119,7 @@
 //        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
 //            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
 //            
-//            //NSLog(@"self bound object is %@",self.boundObject);
+//            //DLog(@"self bound object is %@",self.boundObject);
 //            NSString *drugName=[self.boundObject valueForKey:@"drugName"];
 //            
 //            
@@ -233,7 +233,7 @@
     //    NSError *error = nil;
     //    NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
     //    if (fetchedObjects == nil) {
-    //        //NSLog(@"no items");
+    //        //DLog(@"no items");
     //    }
     //    NSMutableArray *arrayWithFetchedWithoutAlreadySelected=[NSMutableArray arrayWithArray:fetchedObjects];
     
@@ -242,7 +242,7 @@
     
     //    if (!hasChangedClients && [self.boundObject valueForKey:@"client"]) {
     //               
-    //      //NSLog(@"self itmes are %@",self.items);
+    //      //DLog(@"self itmes are %@",self.items);
     //    
     //      
 //    if (!hasChangedClients) {
@@ -293,7 +293,7 @@
 //       
 //        
 //       clientIDCodeString = (NSString *)[clientObject valueForKey:@"clientIDCode"];
-//        //NSLog(@"client id code %@",(NSString *)[clientObject valueForKey:@"clientIDCode"]);
+//        //DLog(@"client id code %@",(NSString *)[clientObject valueForKey:@"clientIDCode"]);
 //
 //    }
 // 

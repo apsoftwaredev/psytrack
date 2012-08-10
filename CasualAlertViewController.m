@@ -250,7 +250,7 @@ NSInteger intSort(id num1, id num2, void *context)
         
         
 //        if ([tabBarController.view viewWithTag:654]){
-//            //NSLog(@"newlabel class is%@", [newLabel class] );
+//            //DLog(@"newlabel class is%@", [newLabel class] );
 //            CGRect appWindowFrame=[del.window frame];
 //            //        CGRect frame = CGRectMake(appWindowFrame.size.width/2-419/2,appWindowFrame.size.height/2-112/2,419,112);
 //            //        UIView *containerView=[[UIView alloc]initWithFrame:frame];
@@ -611,7 +611,7 @@ NSInteger intSort(id num1, id num2, void *context)
  //-(IBAction)dismissPresentedView:(id)sender{
  //
  //    
- ////NSLog(@"timer should dismiss view");
+ ////DLog(@"timer should dismiss view");
  //    
  //    [redAlertViewController dismissModalViewControllerAnimated:YES];
  //

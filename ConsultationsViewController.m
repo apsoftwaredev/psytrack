@@ -487,7 +487,7 @@
     consultationDef.titlePropertyName=@"organization.name";
   
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
-    NSLog(@"self.navigationItem.rightBarButtonItems are %@",self.buttonsToolbar.items);
+    DLog(@"self.navigationItem.rightBarButtonItems are %@",self.buttonsToolbar.items);
     
     objectsModel.editButtonItem = self.editButton;;
     
@@ -651,7 +651,7 @@
             
                        
         }
-        NSLog(@"objects section bound object is %@",objectsSection.boundObject);
+        DLog(@"objects section bound object is %@",objectsSection.boundObject);
         
     }
 
@@ -660,14 +660,14 @@
 
     BOOL valid=NO;
     SCObjectSection *objectSection=(SCObjectSection *)[tableModel sectionAtIndex:indexPath.section];
-    NSLog(@"object section bound object is %@",objectSection.boundObject);
+    DLog(@"object section bound object is %@",objectSection.boundObject);
     SCTableViewCell *cell=[tableModel cellAtIndexPath:indexPath];
     NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
     
     if (tableModel.tag==1) {
         
         
-        NSLog(@"section managed object %@",sectionManagedObject);
+        DLog(@"section managed object %@",sectionManagedObject);
         if (sectionManagedObject && [sectionManagedObject isKindOfClass:[ConsultationEntity class]]&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
             SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
             
@@ -715,9 +715,9 @@
             if ([cell isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 return YES;
             }
-            NSLog(@"cell tag is %i",cell.tag);
-           NSLog(@"cell class is %@",cell.class);
-            NSLog(@"other cell class is %@",otherCell.class);
+            DLog(@"cell tag is %i",cell.tag);
+           DLog(@"cell class is %@",cell.class);
+            DLog(@"other cell class is %@",otherCell.class);
             if ([cell isKindOfClass:[SCObjectSelectionCell class]]) {
                 SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
                 if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {

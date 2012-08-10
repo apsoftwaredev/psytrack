@@ -203,7 +203,7 @@ Keychain API expects as a validly constructed container class.
                                           (CFTypeRef *)&result);
 	
     if (status!=0) {
-        NSLog(@"status is %ld",status);
+        DLog(@"status is %ld",status);
     }
     [searchDictionary release];
     

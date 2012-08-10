@@ -103,7 +103,7 @@
                 break;
             }
             case 7:{
-                result = 3;
+                result = 5;
                 break;
             }
            
@@ -122,13 +122,14 @@
     
             case 11:{
                 result = 2;
+                 
                 break;
             }
            default:
                 break;
                   
         }
-    
+   
     return result;
     
 }
@@ -226,6 +227,9 @@
                      if (indexPath.row==1)result.textLabel.text=@"Presentations";
                    
                     if (indexPath.row==2)result.textLabel.text=@"Expert Testemony";
+                    if (indexPath.row==3)result.textLabel.text=@"Community Service";
+                    if (indexPath.row==4)result.textLabel.text=@"Other Involvement";
+                    
                     
                 }
                     break;
@@ -339,7 +343,7 @@
                         [appDelegate.tabBarController setSelectedViewController:splitView];
                         
                         
-//                        NSLog(@"barbutton item action is %@",barButtonItem.action);
+//                        DLog(@"barbutton item action is %@",barButtonItem.action);
                     
                       
                       
@@ -535,7 +539,7 @@
             
 //            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
             
-//           NSLog(@"view controller is %@",self.tableViewModel);
+//           DLog(@"view controller is %@",self.tableViewModel);
 //            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:drugViewController_iPhone];	
             
 //            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -741,7 +745,7 @@ prog = [[BigProgressViewWithBlockedView alloc] initWithFrame:CGRectMake(0, 64, 3
             headerTitle=@"Education Track";
             break;
         case 7:
-            headerTitle=@"Teaching and Leadership Track";
+            headerTitle=@"Teaching and Involvement Track";
             break;
        
         case 8:
@@ -803,7 +807,7 @@ return headerView;
 {
 	PTTAppDelegate *appDelegate =  (PTTAppDelegate *)	[[UIApplication sharedApplication] delegate];
     
-	//NSLog(@"app passcode is: %@", [appDelegate appLockPasscode]);	
+	//DLog(@"app passcode is: %@", [appDelegate appLockPasscode]);	
 	
     [appDelegate lockApplication];
 

@@ -180,7 +180,7 @@
 - (BOOL) authenticatePassCode: (NSString *) userInput;
 {
 	BOOL result = NO;
-	////NSLog(@"userInput: %@", userInput);
+	////DLog(@"userInput: %@", userInput);
 	LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
@@ -216,7 +216,7 @@
 - (void) handleCompleteUserInput:(NSString *) userInput;
 {
 	[stateMachine_ transitionWithInput:userInput];
-	////NSLog(@"stateMachine_: %@", stateMachine_);
+	////DLog(@"stateMachine_: %@", stateMachine_);
 	
 	if ([stateMachine_ gotCompletionState])
 	{

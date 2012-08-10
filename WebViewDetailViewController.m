@@ -57,7 +57,7 @@
      
         // Custom initialization
         documentWebURLString=documentURLString;
-//               //NSLog(@"document url top string%@",documentWebURLString);
+//               //DLog(@"document url top string%@",documentWebURLString);
 
     }
     return self;
@@ -77,16 +77,16 @@
    documentWebURLString=nil;
     documentWebURL=nil;
     
-//     //NSLog(@"path to file%@", PDFDocumentOnDeviceURL.path);
+//     //DLog(@"path to file%@", PDFDocumentOnDeviceURL.path);
     NSFileManager *fileManager=[[NSFileManager alloc]init];
     if([fileManager fileExistsAtPath:tmpPDF]) {
         
-//        //NSLog(@"path to file%@", PDFDocumentOnDeviceURL.absoluteString);
+//        //DLog(@"path to file%@", PDFDocumentOnDeviceURL.absoluteString);
         
         NSError *error=nil;
         
         if (![fileManager removeItemAtPath:tmpPDF error:&error]) {
-            //NSLog(@"erroro occured %@",error);
+            //DLog(@"erroro occured %@",error);
         }
         
         
@@ -148,7 +148,7 @@
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
-    //NSLog(@"didReceiveMemoryWarning message sent to PrintPhotoViewController"); 
+    //DLog(@"didReceiveMemoryWarning message sent to PrintPhotoViewController"); 
 }
 
 
@@ -220,16 +220,16 @@
     webView.backgroundColor = [UIColor blackColor];
    
    
-//    //NSLog(@"formatted comma is %@",[documentWebURLString stringByReplacingOccurrencesOfString:@"," withString:[NSString stringWithFormat:@"%C",0x002C ]]);
+//    //DLog(@"formatted comma is %@",[documentWebURLString stringByReplacingOccurrencesOfString:@"," withString:[NSString stringWithFormat:@"%C",0x002C ]]);
     
-//    //NSLog(@"new formateted %@",[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
+//    //DLog(@"new formateted %@",[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
 //           NSASCIIStringEncoding]);
     
 //    NSURL *targetURL = [NSURL URLWithString:(NSString *)[[(NSString*)[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
 //                                                         NSASCIIStringEncoding] stringByReplacingOccurrencesOfString:@"," withString:formattedComma]stringByReplacingOccurrencesOfString:@"\%22" withString:@""] ];
-//    //NSLog(@"target URL string is %@",[(NSString*)[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
+//    //DLog(@"target URL string is %@",[(NSString*)[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
 //                                                  NSASCIIStringEncoding] stringByReplacingOccurrencesOfString:@"," withString:formattedComma]);
-//    //NSLog(@"target url is %@",documentWebURL);
+//    //DLog(@"target url is %@",documentWebURL);
     
    
    
@@ -324,7 +324,7 @@
             
 //            if (!completed && error)
 //                
-//                //NSLog(@"FAILED! due to error in domain %@ with error code %u",
+//                //DLog(@"FAILED! due to error in domain %@ with error code %u",
 //                      
 //                      error.domain, error.code);
             
@@ -410,14 +410,14 @@
             
             
                         
-            //NSLog(@"temp file name is %@",tmpPDF);
+            //DLog(@"temp file name is %@",tmpPDF);
             if (![fileData writeToFile:tmpPDF atomically:YES]) {
-                //NSLog(@"writeToFile error");
+                //DLog(@"writeToFile error");
                 
             }
             else {
                 
-                //NSLog(@"Written!");
+                //DLog(@"Written!");
             }
             
 
@@ -433,7 +433,7 @@
                 
                 break;
             default:
-                //NSLog(@"cancel actionsheet tapped");
+                //DLog(@"cancel actionsheet tapped");
                 break;
                 
         }

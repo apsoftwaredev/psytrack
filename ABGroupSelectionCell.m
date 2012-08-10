@@ -44,7 +44,7 @@
   
 //self.abGroupsArray=[NSArray arrayWithArray:[self addressBookGroupsArray]];
 
-    NSLog(@"abgroups array is %@",self.abGroupsArray);
+    DLog(@"abgroups array is %@",self.abGroupsArray);
     [super performInitialization];
      
    
@@ -98,21 +98,21 @@
 //    
 //    
 //    }
-    NSLog(@"items array is %@",self.abGroupsArray);
+    DLog(@"items array is %@",self.abGroupsArray);
 
     return self.abGroupsArray;
     
    
 //    NSMutableArray *groupsArray=[NSMutableArray arrayWithArray:[self addressBookGroupsArray]];
-//     NSLog(@"items array is %@",groupsArray);
+//     DLog(@"items array is %@",groupsArray);
 //    return groupsArray;
    
 //    NSMutableArray *itemsArray=(NSMutableArray *)self.items;
 //    itemsArray=groupsArray;
 //    
-//    NSLog(@"items array is %@",itemsArray);
+//    DLog(@"items array is %@",itemsArray);
 //    int groupCount=self.items.count;
-//    NSLog(@" group count is %i",groupCount);
+//    DLog(@" group count is %i",groupCount);
 //    for (int i=0; i<groupCount; i++) {
 //      PTABGroup *ptGroup=[itemsArray objectAtIndex:i];
 //        if ([self personContainedInGroupWithID:ptGroup.recordID]) {
@@ -503,7 +503,7 @@
             
         }
         
-        //NSLog(@"group name is %@",CFGroupName);   
+        //DLog(@"group name is %@",CFGroupName);   
         //check to see if the group name exists already
         
         ABRecordRef source=nil;
@@ -528,7 +528,7 @@
         if (groupCount&&!group ) {
             
             
-            //NSLog(@"cggroups array %@",allGroupsInSource);
+            //DLog(@"cggroups array %@",allGroupsInSource);
             
             
             for (CFIndex i = 0; i < groupCount; i++) {
@@ -542,7 +542,7 @@
                                                                                   1
                                                                                   );
                 
-                //NSLog(@"result is %ld and %d",result,kCFCompareEqualTo);
+                //DLog(@"result is %ld and %d",result,kCFCompareEqualTo);
                 if (result==0) {
                     group=groupInCheckNameArray;
                     break;
@@ -550,7 +550,7 @@
                 //                    CFRelease(CFGroupsCheckNameArray); 
                 //                    CFRelease(CFGroupNameCheck);
                 
-                //NSLog(@"group is %@",group);
+                //DLog(@"group is %@",group);
                 
             }
         }
@@ -584,7 +584,7 @@
             //        
             //        //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
             //        
-            //        //        //NSLog(@"group composite name is %@",groupRecord.compositeName);
+            //        //        //DLog(@"group composite name is %@",groupRecord.compositeName);
             //        
             //        bool didSetGroupName=FALSE;
             //        didSetGroupName= (bool) ABRecordSetValue (
@@ -593,7 +593,7 @@
             //                                                  (__bridge CFStringRef)groupName  ,
             //                                                  nil
             //                                                  );  
-            //        //        //NSLog(@"group record identifier is %i",groupRecord.recordID);
+            //        //        //DLog(@"group record identifier is %i",groupRecord.recordID);
             //        
             //        BOOL wantToSaveChanges=TRUE;
             //        if (ABAddressBookHasUnsavedChanges(addressBook)) {
@@ -615,9 +615,9 @@
             //        
             //        //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
             //        
-            //        //NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
+            //        //DLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
             //
-            //        //NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
+            //        //DLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
             //        groupIdentifier=ABRecordGetRecordID(group);
             //        
             //        
@@ -652,7 +652,7 @@
         if (groupCount) {
             
             allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
-            //NSLog(@"cggroups array %@",(__bridge NSArray *) allGroupsInSource);
+            //DLog(@"cggroups array %@",(__bridge NSArray *) allGroupsInSource);
             
             if (allGroupsInSource) {
                 
@@ -1016,8 +1016,8 @@
 //                        
 //                        NSString *checkNameStr=[NSString stringWithFormat:@"%@",(__bridge NSString*) CFGroupNameCheck];
 //                        
-//                        ////NSLog(@"cfgroupname is %@",checkNameStr);
-//                        //NSLog(@"groupname Str is %@",groupName);
+//                        ////DLog(@"cfgroupname is %@",checkNameStr);
+//                        //DLog(@"groupname Str is %@",groupName);
 //                        if ([checkNameStr isEqualToString:groupName]) {
 //                            group=groupInCheckNameArray;
 //                            groupIdentifier=ABRecordGetRecordID(group);
@@ -1029,11 +1029,11 @@
 //                            }
 //                            
 //                            if (group) {
-//                                //NSLog(@"group is %@",group);
+//                                //DLog(@"group is %@",group);
 //                            }
 //                            
 //                            else {
-//                                //NSLog(@"no group");
+//                                //DLog(@"no group");
 //                            } 
 //                            break;
 //                        }
@@ -1079,10 +1079,10 @@
 //            
 //            //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
 //            
-//            //        //NSLog(@"group composite name is %@",groupRecord.compositeName);
+//            //        //DLog(@"group composite name is %@",groupRecord.compositeName);
 //            
 //            
-//            //        //NSLog(@"group record identifier is %i",groupRecord.recordID);
+//            //        //DLog(@"group record identifier is %i",groupRecord.recordID);
 //            
 //            bool didSetGroupName=FALSE;
 //            didSetGroupName= (bool) ABRecordSetValue (
@@ -1101,8 +1101,8 @@
 //                    bool didSave=FALSE;
 //                    didSave = ABAddressBookSave(addressBook, nil);
 //                    
-//                    if (!didSave) {/* Handle error here. */  //NSLog(@"addressbook did not save");}
-//                    else //NSLog(@"addresss book saved new group.");
+//                    if (!didSave) {/* Handle error here. */  //DLog(@"addressbook did not save");}
+//                    else //DLog(@"addresss book saved new group.");
 //                    
 //                } 
 //                else {
@@ -1115,9 +1115,9 @@
 //            
 //            //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
 //            
-//            //NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
+//            //DLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
 //            
-//            //NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
+//            //DLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
 //            
 //            
 //            
@@ -1272,7 +1272,7 @@
                 {
                     
                     
-                    //NSLog(@"cggroups array %@",allGroupsInSource);
+                    //DLog(@"cggroups array %@",allGroupsInSource);
                     
                     
                     for (CFIndex i = 0; i < groupCount; i++) {
@@ -1290,8 +1290,8 @@
                         
                         NSString *checkNameStr=[NSString stringWithFormat:@"%@",(__bridge NSString*) CFGroupNameCheck];
                         
-                        //NSLog(@"cfgroupname is %@",checkNameStr);
-                        //NSLog(@"groupname Str is %@",groupName);
+                        //DLog(@"cfgroupname is %@",checkNameStr);
+                        //DLog(@"groupname Str is %@",groupName);
                         if ([checkNameStr isEqualToString:groupName]) {
                             group=groupInCheckNameArray;
                             groupIdentifier=ABRecordGetRecordID(group);
@@ -1303,11 +1303,11 @@
                             }
                             
                             if (group) {
-                                //NSLog(@"group is %@",group);
+                                //DLog(@"group is %@",group);
                             }
                             
                             else {
-                                //NSLog(@"no group");
+                                //DLog(@"no group");
                             } 
                             break;
                         }
@@ -1353,10 +1353,10 @@
             
             //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
             
-            //        //NSLog(@"group composite name is %@",groupRecord.compositeName);
+            //        //DLog(@"group composite name is %@",groupRecord.compositeName);
             
             
-            //        //NSLog(@"group record identifier is %i",groupRecord.recordID);
+            //        //DLog(@"group record identifier is %i",groupRecord.recordID);
             
             bool didSetGroupName=FALSE;
             didSetGroupName= (bool) ABRecordSetValue (
@@ -1375,8 +1375,8 @@
                     bool didSave=FALSE;
                     didSave = ABAddressBookSave(addressBook, nil);
                     
-                    //                if (!didSave) {/* Handle error here. */  //NSLog(@"addressbook did not save");}
-                    //                else //NSLog(@"addresss book saved new group.");
+                    //                if (!didSave) {/* Handle error here. */  //DLog(@"addressbook did not save");}
+                    //                else //DLog(@"addresss book saved new group.");
                     
                 } 
                 else {
@@ -1389,9 +1389,9 @@
             
             //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
             
-            //NSLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
+            //DLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
             
-            //NSLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
+            //DLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
             
             
             

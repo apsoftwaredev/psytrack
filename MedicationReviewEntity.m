@@ -42,7 +42,7 @@
     [dateFormatter setDateFormat:@"H:m:ss yyyy M d"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"MST"]];
     NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
-    //NSLog(@"reference date %@",referenceDate);
+    //DLog(@"reference date %@",referenceDate);
     [self willAccessValueForKey:@"logDate"];
     if ([(NSDate *)self.logDate isEqualToDate:referenceDate]) {
         [self didAccessValueForKey:@"logDate"];
@@ -67,7 +67,7 @@
         
         
         NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
-        //NSLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        //DLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
         NSData *encryptedData;
         NSString *encryptedKeyString;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
@@ -75,10 +75,10 @@
             
             
             if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
-                //NSLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                //DLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
                 
                 encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
-                //NSLog(@"key date is client entity %@",encryptedkeyString);
+                //DLog(@"key date is client entity %@",encryptedkeyString);
             }
         }
         

@@ -1138,7 +1138,7 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 
-//NSLog(@"tableview model tag is %i",tableViewModel.tag);
+//DLog(@"tableview model tag is %i",tableViewModel.tag);
     
  
 
@@ -1232,7 +1232,7 @@
 
 -(void)tableViewControllerDidDisappear:(SCTableViewController *)tableViewController cancelButtonTapped:(BOOL)cancelTapped doneButtonTapped:(BOOL)doneTapped{
 
-//NSLog(@"detail view will appear for row at index path");
+//DLog(@"detail view will appear for row at index path");
 
 
 }
@@ -1318,7 +1318,7 @@ if (tableViewModel.tag==5&&tableViewModel.sectionCount>1&&indexPath.section==1){
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index{
 
-    //NSLog(@"tableviewmodel tab is %i",tableViewModel.tag);
+    //DLog(@"tableviewmodel tab is %i",tableViewModel.tag);
 
     if (tableViewModel.tag==3&&index==0) 
     {
@@ -1347,7 +1347,7 @@ SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
 //    }
 
 
-//NSLog(@"did add section at index header title is %@",section.headerTitle);
+//DLog(@"did add section at index header title is %@",section.headerTitle);
 
 if(section.headerTitle !=nil)
 {
@@ -1481,7 +1481,7 @@ if(section.headerTitle !=nil)
                         objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                             
                             [objectSelectionCell reloadBoundValue];
-                            NSLog(@"objectselection cell %@",objectSelectionCell.items);
+                            DLog(@"objectselection cell %@",objectSelectionCell.items);
                             
                         }
                         
@@ -1679,10 +1679,10 @@ if ([clientCell isKindOfClass:[ClientsSelectionCell class]]) {
     ClientsSelectionCell *clientObjectsSelectionCell=(ClientsSelectionCell *)clientCell;
     if (clientObjectsSelectionCell.clientObject) {
    
-    //NSLog(@"client objects selection cell %@",[clientObjectsSelectionCell.clientObject valueForKey:@"dateOfBirth"]);
+    //DLog(@"client objects selection cell %@",[clientObjectsSelectionCell.clientObject valueForKey:@"dateOfBirth"]);
     
 //        NSArray *array=[[NSArray alloc]init];
-   //NSLog(@"cleint object %@",clientObjectsSelectionCell.clientObject);
+   //DLog(@"cleint object %@",clientObjectsSelectionCell.clientObject);
 //        int itemsCount=clientObjectsSelectionCell.items.count;
 //        if (itemsCount>=0&&clientObjectsSelectionCell.clientObject) {
 ////            clientDateOfBirth=(NSDate *)[(NSArray *)[clientObjectsSelectionCell.items valueForKey:@"dateOfBirth"]lastObject];
@@ -1705,14 +1705,14 @@ if ([clientCell isKindOfClass:[ClientsSelectionCell class]]) {
     
    
     
-    //NSLog(@"client date of birth is %@",clientDateOfBirth);
+    //DLog(@"client date of birth is %@",clientDateOfBirth);
 }
-//NSLog(@"client cell class is  %@", [clientCell class]);
+//DLog(@"client cell class is  %@", [clientCell class]);
     
 
-//    //NSLog(@"client cell bound object %@",[clientManagedObject valueForKey:@"client.dateOfBirth"]);
-//   //NSLog(@"client date of birth is %@", [clientCell.boundObject valueForKey:@"dateOfBirth"]);
-//NSLog(@"master model is %@",self.serviceDatePickerDate);
+//    //DLog(@"client cell bound object %@",[clientManagedObject valueForKey:@"client.dateOfBirth"]);
+//   //DLog(@"client date of birth is %@", [clientCell.boundObject valueForKey:@"dateOfBirth"]);
+//DLog(@"master model is %@",self.serviceDatePickerDate);
 
 if (serviceDatePickerDate && clientDateOfBirth) {
     wechslerAgeCell.label.text=(NSString *)[clientsViewController_Shared calculateWechslerAgeWithBirthdate:(NSDate *)clientDateOfBirth toDate:(NSDate *)serviceDatePickerDate];
@@ -1753,7 +1753,7 @@ else
 
 }
 -(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
-//NSLog(@"tablemodel tag in validate cell is %i",tableViewModel.tag);
+//DLog(@"tablemodel tag in validate cell is %i",tableViewModel.tag);
 
 if (tableViewModel.tag==3){
     
@@ -1762,7 +1762,7 @@ if (tableViewModel.tag==3){
     
     if ([cell isKindOfClass:[ClientsSelectionCell class]]) {
         ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)cell;
-        //NSLog(@"client selection cell boud object is %@",clientSelectionCell.boundObject);
+        //DLog(@"client selection cell boud object is %@",clientSelectionCell.boundObject);
         if (clientSelectionCell.clientObject) {
             return YES;
         }
@@ -1776,7 +1776,7 @@ if ([section isKindOfClass:[SCObjectSection class]]){
     
     SCObjectSection *objectSection=(SCObjectSection *)section;
     
-    NSLog(@"object section bound object is %@",objectSection.boundObject);
+    DLog(@"object section bound object is %@",objectSection.boundObject);
     
     NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
     

@@ -324,7 +324,7 @@
 -(NSString *)cliniciansStrFromCliniciansArray:(NSArray*)cliniciansArray{
 
     NSString *returnString=nil;
-    NSLog(@"clinicians Array is %@",cliniciansArray);
+    DLog(@"clinicians Array is %@",cliniciansArray);
     for (ClinicianEntity *clinicianInArray in cliniciansArray) {
         
         if (!returnString||!returnString.length) {

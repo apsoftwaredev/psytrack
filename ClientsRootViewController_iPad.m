@@ -215,7 +215,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 //    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
 //    }
 //    detailTableViewModel.delegate=self;
-//    //NSLog(@"detail model created for row at index path detailtable model tag is %i", detailTableViewModel.tag);
+//    //DLog(@"detail model created for row at index path detailtable model tag is %i", detailTableViewModel.tag);
 //}
 //
 
@@ -246,14 +246,14 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 //        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
 //        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
 //    }
-    //NSLog(@"tabel veiw modoel %i",tableViewModel.tag);
+    //DLog(@"tabel veiw modoel %i",tableViewModel.tag);
     
     if (tableViewModel.tag==4 ) {
         
         //this is so the second section will not appear if it is the second log, because that info does not pertain
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
-        //NSLog(@"section cell count is %i",section.cellCount);
-        //NSLog(@"detailtableview model sectioncount %i",detailTableViewModel.sectionCount);
+        //DLog(@"section cell count is %i",section.cellCount);
+        //DLog(@"detailtableview model sectioncount %i",detailTableViewModel.sectionCount);
 //        BOOL sectionContainsMedLog=FALSE;
         
         if (tableViewModel.sectionCount) {
@@ -285,8 +285,8 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                 
                 
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-                //NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-                //NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
+                //DLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
+                //DLog(@"cell  class is %@",[cellZeroSectionZero class]);
                 if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"] && detailTableViewModel.sectionCount>2) {
                     
                     [detailTableViewModel removeSectionAtIndex:1];
@@ -306,7 +306,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 -(void) tableViewModel:(SCTableViewModel *)tableViewModel customButtonTapped:(UIButton *)button forRowWithIndexPath:(NSIndexPath *)indexPath{
     
     
-    //NSLog(@"custom button tapped");
+    //DLog(@"custom button tapped");
     
     
     
@@ -320,7 +320,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
         if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&section.cellCount>1){
             
             SCTextFieldCell *phoneNumberCell =(SCTextFieldCell *) [section cellAtIndex:1];
-            //NSLog(@"custom button tapped");
+            //DLog(@"custom button tapped");
             if (phoneNumberCell.textField.text.length) {
                 
                 
@@ -422,7 +422,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 //        
 //        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:0];
 //        
-//        //NSLog(@"index of cell is %i",[section indexForCell:cell]);
+//        //DLog(@"index of cell is %i",[section indexForCell:cell]);
 //        if ((!cell &&section.cellCount==1) ||(indexPath.row==0)) {
 //            
 //            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
@@ -435,7 +435,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 //            
 //            NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
 //
-//                NSLog(@"cell  class is %@",[cellZeroSectionZero class]);
+//                DLog(@"cell  class is %@",[cellZeroSectionZero class]);
 //                
 //                if ([cellManagedObject respondsToSelector:@selector(entity)]) {
 //               
@@ -463,7 +463,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-    //NSLog(@"detail model created for row at index");
+    //DLog(@"detail model created for row at index");
     
 //    
     detailTableViewModel.tag=tableViewModel.tag+1;
@@ -478,7 +478,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
     [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
     [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
     }
-    //NSLog(@"detail model created for row at index detailtable model tag is %i", detailTableViewModel.tag);
+    //DLog(@"detail model created for row at index detailtable model tag is %i", detailTableViewModel.tag);
     
     
     
@@ -503,7 +503,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 //        NSError *error = nil;
 //        NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
 //        if (fetchedObjects == nil) {
-//            //NSLog(@"no items");
+//            //DLog(@"no items");
 //        }
 //        
 //        
@@ -517,7 +517,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 //            
 //        }
 //        
-//        //NSLog(@"clientobject selection itemset %@",mutableSet);
+//        //DLog(@"clientobject selection itemset %@",mutableSet);
 //            [tableViewModel removeSectionAtIndex:0];
 //        
 //        SCObjectSelectionSection *objectSelectionSection=[SCObjectSelectionSection sectionWithHeaderTitle:nil withItemsSet:mutableSet withClassDefinition:clientsViewController_Shared.clientDef];
@@ -570,12 +570,12 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 
 - (void)tableViewModel:(SCTableViewModel *) tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *) indexPath
 {
-    //NSLog(@"table view model tag is %i",tableViewModel.tag);
-    //NSLog(@"tableviewmodel tag is %i",tableViewModel.tag);
+    //DLog(@"table view model tag is %i",tableViewModel.tag);
+    //DLog(@"tableviewmodel tag is %i",tableViewModel.tag);
 
         
-    //NSLog(@"table view model tag is %i",tableViewModel.tag);
-    //NSLog(@"tableviewmodel tag is %i",tableViewModel.tag);
+    //DLog(@"table view model tag is %i",tableViewModel.tag);
+    //DLog(@"tableviewmodel tag is %i",tableViewModel.tag);
     
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
     switch (tableViewModel.tag) {
@@ -585,7 +585,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
            if( [cell isKindOfClass:[SCDateCell class]]) {
                 SCDateCell *dateCell=(SCDateCell *)cell;
                 [dateCell.datePicker setMaximumDate:[NSDate date]];
-                //NSLog(@"date cell date is%@ ",dateCell.datePicker.date);
+                //DLog(@"date cell date is%@ ",dateCell.datePicker.date);
                 
             }
 
@@ -598,7 +598,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
             if ([cell isKindOfClass:[SCDateCell class]]) {
                 SCDateCell *dateCell=(SCDateCell *)cell;
                 [dateCell.datePicker setMaximumDate:[NSDate date]];
-                //NSLog(@"date cell date is%@ ",dateCell.datePicker.date);
+                //DLog(@"date cell date is%@ ",dateCell.datePicker.date);
                 
             }
             
@@ -623,7 +623,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                         break;
                     }
                     
-                    //NSLog(@"cell kind of class is %@",cell.class);
+                    //DLog(@"cell kind of class is %@",cell.class);
                     if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]]) 
                     {
                         EncryptedSCTextFieldCell *encryptedTextFieldCell=(EncryptedSCTextFieldCell *)cell;
@@ -707,7 +707,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                     } 
                 break;
                 }
-                //NSLog(@"entity name is %@",cellManagedObject.entity.name);
+                //DLog(@"entity name is %@",cellManagedObject.entity.name);
                 if (cell.tag==1 && cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"LanguageSpokenEntity"])
                 {
                     
@@ -734,7 +734,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                 
                 if (cellManagedObject&&[cellManagedObject respondsToSelector:@selector(entity)]) { 
-                //NSLog(@"entity name is %@",cellManagedObject.entity.name);
+                //DLog(@"entity name is %@",cellManagedObject.entity.name);
                     if (cell.tag==1 && [cell isKindOfClass:[SCCustomCell class]]&& [cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
                     {
                         
@@ -752,15 +752,15 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
             
             if (cell.tag==5&& tableViewModel.sectionCount >2) {
                 
-                //NSLog(@"cell tag is %i",cell.tag);
-                //NSLog(@"cell text is %@",cell.textLabel.text);
+                //DLog(@"cell tag is %i",cell.tag);
+                //DLog(@"cell text is %@",cell.textLabel.text);
                 
                 SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
                 if (followUpSection.cellCount>0) {
                                 SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];        
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
-                //NSLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-                //NSLog(@"cell  class is %@",[cellOne class]);
+                //DLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
+                //DLog(@"cell  class is %@",[cellOne class]);
                 if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                     
                     
@@ -875,7 +875,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-    //NSLog(@"table bies slkjd %i", tableViewModel.tag);
+    //DLog(@"table bies slkjd %i", tableViewModel.tag);
     SCTableViewCell *cell =tableViewModel.activeCell;
     
     switch (tableViewModel.tag) {
@@ -910,8 +910,8 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 {
     SCTableViewSection *section =[tableViewModel sectionAtIndex:0];
     
-    //NSLog(@"section header title %@", section.headerTitle);
-    //NSLog(@"table model tag is %i", tableViewModel.tag);
+    //DLog(@"section header title %@", section.headerTitle);
+    //DLog(@"table model tag is %i", tableViewModel.tag);
     NSManagedObject *managedObject = (NSManagedObject *)cell.boundObject;
     
     switch (tableViewModel.tag) {
@@ -946,7 +946,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                 //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
                 if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
                     
-                    //NSLog(@"entity name is %@",managedObject.entity.name);
+                    //DLog(@"entity name is %@",managedObject.entity.name);
                     //identify the Languages Spoken table
                     if ([managedObject.entity.name isEqualToString:@"LogEntity"]) {
                         //define and initialize a date formatter
@@ -1003,7 +1003,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                     }
                     
                     if ([managedObject.entity.name isEqualToString:@"VitalsEntity"]) {
-                        //NSLog(@"the managed object entity is Vitals Entity");
+                        //DLog(@"the managed object entity is Vitals Entity");
                         
                         
                         NSDate *dateTaken=(NSDate *)[cell.boundObject valueForKey:@"dateTaken"];
@@ -1064,12 +1064,12 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                     
                     //identify the Languages Spoken table
                     if ([managedObject.entity.name isEqualToString:@"LanguageSpokenEntity"]) {
-                        //NSLog(@"the managed object entity is Languag spoken Entity");
+                        //DLog(@"the managed object entity is Languag spoken Entity");
                         //get the value of the primaryLangugage attribute
                         NSNumber *primaryLanguageNumber=(NSNumber *)[managedObject valueForKey:@"primaryLanguage"];
                         
                         
-                        //NSLog(@"primary alanguage %@",  primaryLanguageNumber);
+                        //DLog(@"primary alanguage %@",  primaryLanguageNumber);
                         //if the primaryLanguage selection is Yes
                         if (primaryLanguageNumber==[NSNumber numberWithInteger:0]) {
                             //get the language
@@ -1086,7 +1086,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                     
                   
                 if ([managedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]) {
-                        //NSLog(@"the managed object entity is Migration History Entity");
+                        //DLog(@"the managed object entity is Migration History Entity");
                         
                         
                         NSDate *arrivedDate=(NSDate *)[cell.boundObject valueForKey:@"arrivedDate"];
@@ -1128,16 +1128,16 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
             
             if (cell.tag==3) {
                 
-                //NSLog(@"cell tag is %i", cell.tag);
+                //DLog(@"cell tag is %i", cell.tag);
                 UIView *viewOne = [cell viewWithTag:14];
                 
                 if([viewOne isKindOfClass:[UISlider class]])
                 {
                     UISlider *sliderOne = (UISlider *)viewOne;
                     UILabel *slabel = (UILabel *)[cell viewWithTag:10];
-                    //NSLog(@"detail will appear for row at index path label text%@",slabel.text);
+                    //DLog(@"detail will appear for row at index path label text%@",slabel.text);
                     
-                    //NSLog(@"bound value is %f", sliderOne.value);
+                    //DLog(@"bound value is %f", sliderOne.value);
                     slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
                     
                     
@@ -1146,13 +1146,13 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                 }     
             }
             if (cell.tag==4){
-                //NSLog(@"cell tag is ");
+                //DLog(@"cell tag is ");
                 UIView *viewTwo = [cell viewWithTag:14];
                 if([viewTwo isKindOfClass:[UISlider class]])
                 {
                     
                     
-                    //NSLog(@"cell tag is %i", cell.tag);
+                    //DLog(@"cell tag is %i", cell.tag);
                     
                     
                     UISlider *sliderTwo = (UISlider *)viewTwo;
@@ -1174,7 +1174,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                 //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
                 if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
                     
-                    //NSLog(@"entity name is %@",managedObject.entity.name);
+                    //DLog(@"entity name is %@",managedObject.entity.name);
                     //identify the Languages Spoken table
                     if ([managedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                         //define and initialize a date formatter
@@ -1239,7 +1239,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     
-    //NSLog(@"scope changed");
+    //DLog(@"scope changed");
     if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
     {
         
@@ -1269,12 +1269,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         switch (selectedScope) {
             case 0: //current
                 dataFetchOptions.filterPredicate = [NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
-                //NSLog(@"case 1");
+                //DLog(@"case 1");
                 break;
                 
             default:
                 dataFetchOptions.filterPredicate = nil;
-                //NSLog(@"case default");
+                //DLog(@"case default");
                 
                 break;
         }
@@ -1334,12 +1334,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     //    if (tableViewModel.tag==0) {
     //       
     //        
-    //        //NSLog(@"test%@", section.class);
+    //        //DLog(@"test%@", section.class);
     //        
     //        if (searchBar.text.length !=searchStringLength) {
     //            
     //            if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
-    //                //NSLog(@"test");
+    //                //DLog(@"test");
     //                
     //               
     //                SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
@@ -1352,7 +1352,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     //                section=(SCObjectSelectionSection*) objectsSelectionSection;
     //                [tableViewModel addSection:section ];
     //                tableViewModel.delegate=self;
-    //                //NSLog(@"section %@",[section class]);
+    //                //DLog(@"section %@",[section class]);
     //                
     //                    
     //            }
@@ -1378,8 +1378,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             NSManagedObject *cellOneBoundObject=(NSManagedObject *)cellOne.boundObject;
             
-            //NSLog(@"section bound object entity is %@",cellOneBoundObject);
-            //NSLog(@"section bound object entity name is %@",cellOneBoundObject.entity.name);
+            //DLog(@"section bound object entity is %@",cellOneBoundObject);
+            //DLog(@"section bound object entity name is %@",cellOneBoundObject.entity.name);
             if (cellOneBoundObject &&[cellOneBoundObject respondsToSelector:@selector(entity)] &&[cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
             
                 
@@ -1411,9 +1411,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     }
 
     
-    //NSLog(@"tablemodel data source %@",[section class]);
+    //DLog(@"tablemodel data source %@",[section class]);
     
-    //NSLog(@"did add section at index header title is %@",section.headerTitle);
+    //DLog(@"did add section at index header title is %@",section.headerTitle);
     
     if(section.headerTitle !=nil)
     {
@@ -1445,7 +1445,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //{
 //    
 //    if (tableViewModel.tag==0) {
-//        //NSLog(@"did iset row for index path");
+//        //DLog(@"did iset row for index path");
 //   
 //       
 //            if(isInDetailSubview)
@@ -1577,7 +1577,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
   
     
     
-    //NSLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
+    //DLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
     
     if (tableViewModel.tag==1&&tableViewModel.sectionCount){
         
@@ -1595,7 +1595,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 if ( clientIDCodeEncryptedCell.textField.text.length ) {
                     
                     valid=TRUE;
-                    //NSLog(@"first or last name is valid");
+                    //DLog(@"first or last name is valid");
                     
                 }
                 else
@@ -1674,7 +1674,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             if (section.cellCount>6) 
             {
             
-                //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
+                //DLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
                 
                 
                 SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];
@@ -1685,8 +1685,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];;
                     
                     NSNumber *number=[numberFormatter numberFromString:textFieldCell.textField.text];
-                    NSLog(@"cell tag is %i",cell.tag);
-                    NSLog(@"text inpou is %@",textFieldCell.textField.text);
+                    DLog(@"cell tag is %i",cell.tag);
+                    DLog(@"text inpou is %@",textFieldCell.textField.text);
                     if (textFieldCell.textField.text.length) {
                    
                     switch (cell.tag) {
@@ -1763,7 +1763,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             SCTableViewCell *firstCell =(SCTableViewCell *)[section cellAtIndex:0];
             NSManagedObject *firstCellManagedObject=(NSManagedObject *)firstCell.boundObject;
             
-            //NSLog(@"first cell class is %@",[firstCell class]);
+            //DLog(@"first cell class is %@",[firstCell class]);
             
             if (firstCellManagedObject &&[firstCellManagedObject respondsToSelector:@selector(entity)]&&[firstCellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"]&&[firstCell isKindOfClass:[SCObjectSelectionCell class]]) {
                 SCObjectSelectionCell *symptomCell=(SCObjectSelectionCell *)firstCell;
@@ -1795,14 +1795,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             SCTableViewCell *cellTo=(SCTableViewCell *)[section cellAtIndex:1];
             SCTableViewCell *cellArrivedDate=(SCTableViewCell *)[section cellAtIndex:2];
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
-            //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
+            //DLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
             if (cellManagedObject &&  [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject.entity.name  isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
                 
-                //NSLog(@"arrived date cell class is %@",[cellArrivedDate class]);
+                //DLog(@"arrived date cell class is %@",[cellArrivedDate class]);
                 SCDateCell *arrivedDateCell=(SCDateCell *)cellArrivedDate;
                 
                 if (encryptedFrom.textView.text.length && encryptedTo.textView.text.length &&arrivedDateCell.label.text.length) {

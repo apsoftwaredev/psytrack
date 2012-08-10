@@ -106,7 +106,7 @@
         NSManagedObjectContext *drugsManagedObjectContext=(NSManagedObjectContext *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate drugsManagedObjectContext];
         
         
-        NSLog(@"applnostring %@",applNoString);
+        DLog(@"applnostring %@",applNoString);
         NSPredicate *applNoPredicate=[NSPredicate predicateWithFormat:@"applNo matches %@",applNoString];
         
    
@@ -134,7 +134,7 @@
         if(_actionDateSet == nil) {
             // Handle the error
         }       
-            NSLog(@"ending dispach 1");
+            DLog(@"ending dispach 1");
         
   
 

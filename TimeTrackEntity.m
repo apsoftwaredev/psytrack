@@ -37,7 +37,7 @@
     [dateFormatter setDateFormat:@"H:m:ss yyyy M d"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"MST"]];
     NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
-    //NSLog(@"reference date %@",referenceDate);
+    //DLog(@"reference date %@",referenceDate);
     [self willAccessValueForKey:@"dateOfService"];
     if ([(NSDate *)self.dateOfService isEqualToDate:referenceDate]) {
         [self didAccessValueForKey:@"dateOfService"];
@@ -91,7 +91,7 @@
     NSFetchRequest *trainingProgramFetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *trainingProgramEntity = [NSEntityDescription entityForName:@"TrainingProgramEntity" inManagedObjectContext:appDelegate.managedObjectContext];
     [trainingProgramFetchRequest setEntity:trainingProgramEntity];
-    NSLog(@"traingin program entity is %@",trainingProgramEntity);
+    DLog(@"traingin program entity is %@",trainingProgramEntity);
 //    [trainingProgramFetchRequest setRelationshipKeyPathsForPrefetching:[NSArray arrayWithObject:@"selectedByDefault"]];
 //    
 //    NSPredicate *defaultTrainingPredicate = [NSPredicate predicateWithFormat:@"selectedByDefault == %@ ", [NSNumber numberWithBool:YES]];
@@ -100,7 +100,7 @@
     NSError *trainingProgramError = nil;
     NSArray *trainingProgramFetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:trainingProgramFetchRequest error:&trainingProgramError];
     
-    NSLog(@"trainging program fetched objects are %@",trainingProgramFetchedObjects);
+    DLog(@"trainging program fetched objects are %@",trainingProgramFetchedObjects);
     for (TrainingProgramEntity *trainingProgram in trainingProgramFetchedObjects) {
         [trainingProgram willAccessValueForKey:@"selectedByDefault"];
         if ([trainingProgram.selectedByDefault isEqualToNumber:[NSNumber numberWithBool:YES]]) {
@@ -118,7 +118,7 @@
     NSFetchRequest *siteFetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *siteEntity = [NSEntityDescription entityForName:@"SiteEntity" inManagedObjectContext:appDelegate.managedObjectContext];
     [siteFetchRequest setEntity:siteEntity];
-    NSLog(@"traingin program entity is %@",siteFetchRequest);
+    DLog(@"traingin program entity is %@",siteFetchRequest);
     //    [trainingProgramFetchRequest setRelationshipKeyPathsForPrefetching:[NSArray arrayWithObject:@"selectedByDefault"]];
     //    
     //    NSPredicate *defaultTrainingPredicate = [NSPredicate predicateWithFormat:@"selectedByDefault == %@ ", [NSNumber numberWithBool:YES]];
@@ -127,7 +127,7 @@
     NSError *siteError = nil;
     NSArray *siteFetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:siteFetchRequest error:&siteError];
     
-    NSLog(@"trainging program fetched objects are %@",siteFetchedObjects);
+    DLog(@"trainging program fetched objects are %@",siteFetchedObjects);
     for (SiteEntity *site in siteFetchedObjects) {
         [site willAccessValueForKey:@"defaultSite"];
         if ([site.defaultSite isEqualToNumber:[NSNumber numberWithBool:YES]]) {

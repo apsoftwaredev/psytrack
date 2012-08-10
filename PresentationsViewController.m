@@ -328,7 +328,7 @@
     presentationDef.titlePropertyName=@"title";
     presentationDef.keyPropertyName=@"title";
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
-    NSLog(@"self.navigationItem.rightBarButtonItems are %@",self.buttonsToolbar.items);
+    DLog(@"self.navigationItem.rightBarButtonItems are %@",self.buttonsToolbar.items);
     
     objectsModel.editButtonItem = self.editButton;;
     

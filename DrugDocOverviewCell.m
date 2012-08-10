@@ -64,7 +64,7 @@
     
     
     
-//    //NSLog(@"self bound object is %@",self.boundObject);
+//    //DLog(@"self bound object is %@",self.boundObject);
     
     NSString *keyPathStringForTopText=[self.objectBindings valueForKey:@"top"];
     openNibNameString=[self.objectBindings valueForKey:@"openNib"];
@@ -84,7 +84,7 @@
 
         NSArray *docTypeLookupArray=(NSArray *)[(DrugActionDateViewController *)self.ownerTableViewModel.delegate docTypesArray];
         
-//           //NSLog(@"doctype lookup arrya is %@",docTypeLookupArray);
+//           //DLog(@"doctype lookup arrya is %@",docTypeLookupArray);
         
       
        
@@ -93,13 +93,13 @@
         if (docTypeLookupArray.count>0) {
          
            
-//            //NSLog(@"fetched object is %@",fetchedObjects);
+//            //DLog(@"fetched object is %@",fetchedObjects);
             DrugDocTypeLookupEntity *docTypeLookup=(DrugDocTypeLookupEntity *)[docTypeLookupArray objectAtIndex:0];
            
          
             
             NSString *docTypeDescString=(NSString *)docTypeLookup.docTypeDesc;
-//            //NSLog(@"docype desc string is %@",docTypeDescString);
+//            //DLog(@"docype desc string is %@",docTypeDescString);
             docTypeField.text=docTypeDescString;
         }
         
@@ -107,7 +107,7 @@
       
 //        
 //        docTypeField.text=(NSString *)docTypeSet;
-//         //NSLog(@"doc type lookup object is %@",docTypeSet);
+//         //DLog(@"doc type lookup object is %@",docTypeSet);
     }
    
     
@@ -168,7 +168,7 @@
     else if ([openNibNameString isEqualToString:@"DrugAppDocsViewController"])
     {
         
-        //        //NSLog(@"bound object is %@",self.boundObject);
+        //        //DLog(@"bound object is %@",self.boundObject);
         NSString *applNoString=[self.boundObject valueForKey:@"applNo"];
         NSString *inDocSeqNoString=[self.boundObject valueForKey:@"inDocTypeSeqNo"];
         
@@ -198,7 +198,7 @@
 }
 -(void)didSelectCell:(SCTableViewCell *)cell{
     
-//    //NSLog(@"text color is %@", docTypeField.textColor);
+//    //DLog(@"text color is %@", docTypeField.textColor);
     
         
      

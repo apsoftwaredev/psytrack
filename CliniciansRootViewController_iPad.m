@@ -142,28 +142,28 @@
    
     if (tableViewModel.tag==0||tableViewModel.tag==1) {
 //        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-         //NSLog(@"cell class is %@",cell.class);
+         //DLog(@"cell class is %@",cell.class);
 //        if (cell.tag<) {
 //            UIView *viewLong =[cell viewWithTag:51];
 //            if ([viewLong isKindOfClass:[UILabel class]]) {
-//                //NSLog(@"last name");
+//                //DLog(@"last name");
 //                UILabel *lastNameLabel =(UILabel *)viewLong;
 //                if ([lastNameLabel.text isEqualToString:@"Last Name:"]) {
 //                    UITextField *lastNameField=(UITextField *)[cell viewWithTag:50];
 //                    NSString *lastNameStr=lastNameField.text;
 //                    if (lastNameStr.length) {
-//                        //NSLog(@"current cell superview is %@",[self.tableViewModel indexPathForCell:currentTableViewCell]);
+//                        //DLog(@"current cell superview is %@",[self.tableViewModel indexPathForCell:currentTableViewCell]);
                         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:[tableViewModel.masterModel indexPathForCell:currentTableViewCell].section];
 //                        unsigned short lastNameFirstChar=[lastNameStr characterAtIndex:0];
 //                        if ((unsigned short)[section.headerTitle characterAtIndex:0]!=(unsigned short)lastNameFirstChar) {
             
-        //NSLog(@"they arent equal");
+        //DLog(@"they arent equal");
         
         SCTableViewCell *cell=nil;
         if (indexPath.row !=NSNotFound) {
            cell =(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
         }  
-        NSLog(@"selection cell %@",[cell class]);
+        DLog(@"selection cell %@",[cell class]);
         
         if (!addingClinician && tableViewModel.tag==1&&cell&&indexPath.section==0&&![cell isKindOfClass:[SCArrayOfObjectsCell class]]&&![cell isKindOfClass:[SCObjectCell class]]&&![cell isKindOfClass:[SCObjectSelectionCell class]]) {
             [section commitCellChanges];
@@ -176,7 +176,7 @@
                      
 
     }
-//NSLog(@"did end editing row");
+//DLog(@"did end editing row");
 
 }
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -191,7 +191,7 @@
 
 - (void)tableViewModel:(SCTableViewModel *) tableViewModel willConfigureCell:(SCTableViewCell *) cell forRowAtIndexPath:(NSIndexPath *) indexPath
 {
-    //NSLog(@"table view model tag is %i", tableViewModel.tag);
+    //DLog(@"table view model tag is %i", tableViewModel.tag);
     
     
     
@@ -205,7 +205,7 @@
             case 0:
                 if ([viewShort isKindOfClass:[UILabel class]]) 
                 {
-                    //NSLog(@"prefix");
+                    //DLog(@"prefix");
                     UILabel *titleLabel =(UILabel *)viewShort;
                     titleLabel.text=@"Prefix:";
                     tableViewModel.tag=1;
@@ -215,7 +215,7 @@
                 break;
             case 1:
                 if ([viewLong isKindOfClass:[UILabel class]]) {
-                    //NSLog(@"first name");
+                    //DLog(@"first name");
                     UILabel *firstNameLabel =(UILabel *)viewLong;
                     firstNameLabel.text=@"First Name:";
                     cell.commitChangesLive=YES;
@@ -225,7 +225,7 @@
                 
             case 2:
                 if ([viewLong isKindOfClass:[UILabel class]]) {
-                    //NSLog(@"middle name");
+                    //DLog(@"middle name");
                     UILabel *middleNameLabel =(UILabel *)viewLong;
                     middleNameLabel.text=@"Middle Name:";
                 } 
@@ -233,7 +233,7 @@
                 
             case 3:
                 if ([viewLong isKindOfClass:[UILabel class]]) {
-                    //NSLog(@"last name");
+                    //DLog(@"last name");
                     UILabel *lastNameLabel =(UILabel *)viewLong;
                     lastNameLabel.text=@"Last Name:";
                     
@@ -241,7 +241,7 @@
                 break;
             case 4:
                 if ([viewLong isKindOfClass:[UILabel class]]) {
-                    //NSLog(@"suffix");
+                    //DLog(@"suffix");
                     UILabel *suffixLabel =(UILabel *)viewLong;
                     suffixLabel.text=@"Suffix:";
                 } 
@@ -291,8 +291,8 @@
                     
                     int addressBookRecordIdentifier=(int )[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"]intValue]; 
                     
-                    //NSLog(@"addressbook identifier is %i",addressBookRecordIdentifier);
-                    //NSLog(@"addressbook Identifier %@", cell.boundObject);
+                    //DLog(@"addressbook identifier is %i",addressBookRecordIdentifier);
+                    //DLog(@"addressbook Identifier %@", cell.boundObject);
                     //                NSString *buttonText;
                     
                     
@@ -434,13 +434,13 @@
 {
     
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
-    //NSLog(@"tableview model tag is %i",tableViewModel.tag);
-    //NSLog(@"tableview model view controller is%@ ",[tableViewModel.viewController class]);
-   //NSLog(@"index is %i",index);
-    //NSLog(@"tabelmodel section count is %i",tableViewModel.sectionCount);
+    //DLog(@"tableview model tag is %i",tableViewModel.tag);
+    //DLog(@"tableview model view controller is%@ ",[tableViewModel.viewController class]);
+   //DLog(@"index is %i",index);
+    //DLog(@"tabelmodel section count is %i",tableViewModel.sectionCount);
     if ((tableViewModel.tag==0||tableViewModel.tag==1 )&&[tableViewModel.viewController isKindOfClass:[CliniciansDetailViewController_iPad class]]) 
     {
-        //NSLog(@"section index is %i",index);
+        //DLog(@"section index is %i",index);
        
         if (index==0) {
             self.currentDetailTableViewModel=tableViewModel;
@@ -452,7 +452,7 @@
     [super tableViewModel:tableViewModel didAddSectionAtIndex:index];
     
 //    if (index==6) {
-//        //NSLog(@"cells in section is %i",section.cellCount);
+//        //DLog(@"cells in section is %i",section.cellCount);
 //        
 //        
 //        
@@ -464,7 +464,7 @@
 //            ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
 //            
 //            
-//            //NSLog(@"my information is %@",clinicianObject.myInformation);
+//            //DLog(@"my information is %@",clinicianObject.myInformation);
 //            if ([clinicianObject.myInformation isEqualToNumber:[NSNumber numberWithBool:YES]]) {
 //                
 //                [tableViewModel removeSectionAtIndex:1];
@@ -477,8 +477,8 @@
 //            
 //            
 //            
-//            //NSLog(@"client abrecordidntifier %i",[clinicianObject.aBRecordIdentifier intValue]);
-//            //NSLog(@"client abrecordidentifier %@",clinicianObject.aBRecordIdentifier);
+//            //DLog(@"client abrecordidntifier %i",[clinicianObject.aBRecordIdentifier intValue]);
+//            //DLog(@"client abrecordidentifier %@",clinicianObject.aBRecordIdentifier);
 //            self.abGroupObjectSelectionCell=[[ABGroupSelectionCell alloc]initWithClinician:(ClinicianEntity *)clinicianObject];    
 //            
 //            abGroupObjectSelectionCell_.tag=429;
@@ -512,7 +512,7 @@
 //            if(emailField.text.length){
 //                valid=[self validateEmail:emailField.text];
 //                
-//                //NSLog(@"testing email address");
+//                //DLog(@"testing email address");
 //            }
 //            else
 //            {
@@ -525,7 +525,7 @@
 //    }
     
     
-    //NSLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
+    //DLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
     
     if (tableViewModel.tag==1||tableViewModel.tag==0){
         
@@ -534,16 +534,16 @@
         
         SCTextFieldCell *lastNameCell =(SCTextFieldCell *)[section cellAtIndex:3];
         SCTextFieldCell *firstNameCell =(SCTextFieldCell *)[section cellAtIndex:1];
-        //NSLog(@"last Name cell tag is %i", lastNameCell.tag);
+        //DLog(@"last Name cell tag is %i", lastNameCell.tag);
         UITextField *lastNameField =(UITextField *)[lastNameCell viewWithTag:50];
         UITextField *firstNameField =(UITextField *)[firstNameCell viewWithTag:50];
-        //NSLog(@"first name field %@",firstNameField.text);
-        //NSLog(@"last name field %@",lastNameField.text);
+        //DLog(@"first name field %@",firstNameField.text);
+        //DLog(@"last name field %@",lastNameField.text);
         
         if ( firstNameField.text.length && lastNameField.text.length) {
             
             valid=TRUE;
-            //NSLog(@"first or last name is valid");
+            //DLog(@"first or last name is valid");
             
         }
         else
@@ -599,14 +599,14 @@
             SCTableViewCell *cellTo=(SCTableViewCell *)[section cellAtIndex:1];
             SCTableViewCell *cellArrivedDate=(SCTableViewCell *)[section cellAtIndex:2];
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
-            //NSLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
+            //DLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
             
             if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
                 
-                //NSLog(@"arrived date cell class is %@",[cellArrivedDate class]);
+                //DLog(@"arrived date cell class is %@",[cellArrivedDate class]);
                 SCDateCell *arrivedDateCell=(SCDateCell *)cellArrivedDate;
                 
                 if (encryptedFrom.textView.text.length && encryptedTo.textView.text.length &&arrivedDateCell.label.text.length) {
@@ -639,7 +639,7 @@
 
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-    //NSLog(@"detail model created for row at index");
+    //DLog(@"detail model created for row at index");
     
     if (tableViewModel.tag==0) {
         addingClinician=YES;

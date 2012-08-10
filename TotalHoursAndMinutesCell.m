@@ -186,7 +186,7 @@
         }
     }
     
-NSLog(@"valid is %i",valid);
+DLog(@"valid is %i",valid);
     return valid;
 
 

@@ -74,7 +74,7 @@
     if (self) {
         
         
-        NSLog(@"date is %@",date);
+        DLog(@"date is %@",date);
         
         
         self.clinician=clinician;

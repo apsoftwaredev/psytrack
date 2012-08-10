@@ -393,7 +393,7 @@
         
         startTime=[dateFormatClearSeconds dateFromString:[dateFormatter stringFromDate:startTime]];
         endTime=[dateFormatClearSeconds dateFromString:[dateFormatter stringFromDate:endTime]];
-        //NSLog(@"start time %@ end time %@ additioanl time %@ time to subtract %@",startTime,endTime,additionalTime,timeToSubtract);
+        //DLog(@"start time %@ end time %@ additioanl time %@ time to subtract %@",startTime,endTime,additionalTime,timeToSubtract);
 
         
     }
@@ -839,13 +839,13 @@
     [dateFormatClearSeconds setDateFormat:@"H:mm"];
     
     for(id obj in arrayOfObjectsSection.items) { 
-        NSLog(@"items are %@",arrayOfObjectsSection.items);
-        NSLog(@"object in section is%@",obj);
+        DLog(@"items are %@",arrayOfObjectsSection.items);
+        DLog(@"object in section is%@",obj);
         if ([obj isKindOfClass:[SCTableViewCell class]]) {
             SCTableViewCell *cell=(SCTableViewCell *)obj;
             NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
             
-            NSLog(@"cell managed object class is %@",cellManagedObject.class);
+            DLog(@"cell managed object class is %@",cellManagedObject.class);
             if ([cellManagedObject respondsToSelector:@selector(entity)]) {
                 breakStartTime=(NSDate *)[obj valueForKey:@"startTime"];
                 breakEndTime=(NSDate *)[obj valueForKey:@"endTime"];
@@ -880,7 +880,7 @@
         //cut off miliseconds
         
         totalTimeString=[NSString stringWithFormat:@"%f",totalBreakTimeInterval];
-        //NSLog(@"totoal time string is %@", totalTimeString);
+        //DLog(@"totoal time string is %@", totalTimeString);
         
         NSRange range;
         range.length=6;
@@ -1011,7 +1011,7 @@
         
         //        section.footerView.autoresizingMask=;
         //        
-        //       //NSLog(@"section width is is %f",section.footerView.frame.size.width;
+        //       //DLog(@"section width is is %f",section.footerView.frame.size.width;
        
     }
     
@@ -1221,7 +1221,7 @@
 -(void)tableViewModelDidEndEditing:(SCTableViewModel *)tableViewModel{
 
 
-//NSLog(@"did end editing");
+//DLog(@"did end editing");
 
   
     
@@ -1245,7 +1245,7 @@
 //            
 //            
 //            
-//            //NSLog(@"cell is kind of class %@",[timeCell class]);
+//            //DLog(@"cell is kind of class %@",[timeCell class]);
 //            if ([timeCell isKindOfClass:[SCObjectCell class]]) 
 //            {
 //                

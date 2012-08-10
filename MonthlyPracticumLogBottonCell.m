@@ -43,23 +43,23 @@
 -(void)willDisplay{
     
     [super willDisplay];
-NSLog(@"self bound object is %@",self.boundObject);
+DLog(@"self bound object is %@",self.boundObject);
    
         
       self.cellSubTypeLabel.text=self.trackTypeWithTotalTimesObject.typeLabelText;
-           NSLog(@"track type with total times object %@",self.trackTypeWithTotalTimesObject);
+           DLog(@"track type with total times object %@",self.trackTypeWithTotalTimesObject);
        
 //        NSString *monthTotalStr=[interventionTypeSubtype totalHoursToDateForMonthStr:monthToDisplay];
         
         
-//        NSLog(@"month total str is %@",monthTotalStr);
+//        DLog(@"month total str is %@",monthTotalStr);
 //        
 //        self.hoursMonthTotalLabel.text=monthTotalStr;
         
    
 
         
-        NSLog(@"month is %@ clinician is %@",monthToDisplay_,clinician_);
+        DLog(@"month is %@ clinician is %@",monthToDisplay_,clinician_);
   
         
             
@@ -84,16 +84,16 @@ NSLog(@"self bound object is %@",self.boundObject);
     self.trackTypeWithTotalTimesObject=(TrackTypeWithTotalTimes *) self.boundObject; 
 
     self.cellSubTypeLabel.text=trackTypeWithTotalTimesObject_.typeLabelText;
-    NSLog(@"self bound object is %@",self.boundObject);
+    DLog(@"self bound object is %@",self.boundObject);
  
-    NSLog(@"type text is %@",self.trackTypeWithTotalTimesObject.typeLabelText);
+    DLog(@"type text is %@",self.trackTypeWithTotalTimesObject.typeLabelText);
     if (!monthToDisplay_||!clinician_) {       
         monthToDisplay_=(NSDate *)self.trackTypeWithTotalTimesObject.monthToDisplay;
         
     }
     
-    NSLog(@"month to display is %@",monthToDisplay_);
-  NSLog(@"week two %@",trackTypeWithTotalTimesObject_.totalWeek2Str);
+    DLog(@"month to display is %@",monthToDisplay_);
+  DLog(@"week two %@",trackTypeWithTotalTimesObject_.totalWeek2Str);
     self.hoursWeek1Label.text=trackTypeWithTotalTimesObject_.totalWeek1Str;
     self.hoursWeek2Label.text=trackTypeWithTotalTimesObject_.totalWeek2Str;
     self.hoursWeek3Label.text=trackTypeWithTotalTimesObject_.totalWeek3Str;

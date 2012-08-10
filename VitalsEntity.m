@@ -33,8 +33,8 @@
     [dateFormatter setDateFormat:@"H:m:ss yyyy M d"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"MST"]];
     NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
-    //NSLog(@"reference date %@",referenceDate);
-    //NSLog(@"date taken is %@",self.dateTaken);
+    //DLog(@"reference date %@",referenceDate);
+    //DLog(@"date taken is %@",self.dateTaken);
     if ([(NSDate *)self.dateTaken isEqualToDate:referenceDate]) {
         self.dateTaken = [NSDate date];
         

@@ -114,8 +114,8 @@
     numberOfTimes=numberOfTimes-(hundredsTimes*100);
     //    NSString *title = @"";
     
-    //NSLog(@"hundreds %i tens %i",hundredsTimes,numberOfTimes);
-    //NSLog(@"contact frequency unit is %@",unit);
+    //DLog(@"hundreds %i tens %i",hundredsTimes,numberOfTimes);
+    //DLog(@"contact frequency unit is %@",unit);
     [picker selectRow:hundredsTimes inComponent:0 animated:YES];
     [picker selectRow:numberOfTimes inComponent:1 animated:YES];
     [picker selectRow:lengthOfUnit inComponent:3 animated:YES];
@@ -429,7 +429,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    //NSLog(@"component changed is %i",component);
+    //DLog(@"component changed is %i",component);
     
  
                

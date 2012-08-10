@@ -21,15 +21,15 @@
 {
 	dataToShow_ = [NSDictionary dictionaryWithContentsOfFile:path];
 /*	
-	//NSLog(@"%s ! %@", _cmd, [dataToShow_ objectForKey:[NSNumber numberWithInt:0]]);
-	//NSLog(@"%s ! %@", _cmd, [dataToShow_ objectForKey:[NSNumber numberWithInt:1]]);	
+	//DLog(@"%s ! %@", _cmd, [dataToShow_ objectForKey:[NSNumber numberWithInt:0]]);
+	//DLog(@"%s ! %@", _cmd, [dataToShow_ objectForKey:[NSNumber numberWithInt:1]]);	
 	
-	//NSLog(@" all keys: %@", [dataToShow_  allKeys]);
-	//NSLog(@" all values: %@", [dataToShow_  allValues]);	
+	//DLog(@" all keys: %@", [dataToShow_  allKeys]);
+	//DLog(@" all values: %@", [dataToShow_  allValues]);	
 	
 	for(id k in [dataToShow_ allKeys])
 	{
-		//NSLog(@"k: %@ (%@) -> %@", k, [k class], [dataToShow_ objectForKey:k]);
+		//DLog(@"k: %@ (%@) -> %@", k, [k class], [dataToShow_ objectForKey:k]);
 	}	
 */
 }

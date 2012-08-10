@@ -56,7 +56,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
    
-    //NSLog(@"client def entity description %@",self.clientDef.entity.description);
+    //DLog(@"client def entity description %@",self.clientDef.entity.description);
     
     SCPropertyDefinition *clientIdCodePropertyDef  =[self.clientDef propertyDefinitionWithName:@"clientIDCode"];
     
@@ -779,7 +779,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     NSDateFormatter *yearFormater=[[NSDateFormatter alloc]init];
     [yearFormater setDateFormat:@"Y"];
     
-    //NSLog(@"date years %@, months%@, days %@",[yearFormater stringFromDate:birthdate],[monthFormater stringFromDate:birthdate],[dayFormater stringFromDate:birthdate]);
+    //DLog(@"date years %@, months%@, days %@",[yearFormater stringFromDate:birthdate],[monthFormater stringFromDate:birthdate],[dayFormater stringFromDate:birthdate]);
     
     int nowYear, nowMonth, nowDay;
     
@@ -933,7 +933,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     NSDateFormatter *yearFormater=[[NSDateFormatter alloc]init];
     [yearFormater setDateFormat:@"Y"];
     
-    //NSLog(@"date years %@, months%@, days %@",[yearFormater stringFromDate:birthdate],[monthFormater stringFromDate:birthdate],[dayFormater stringFromDate:birthdate]);
+    //DLog(@"date years %@, months%@, days %@",[yearFormater stringFromDate:birthdate],[monthFormater stringFromDate:birthdate],[dayFormater stringFromDate:birthdate]);
     
     int toYear, toMonth, toDateDay;
     

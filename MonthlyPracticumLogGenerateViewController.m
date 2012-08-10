@@ -154,7 +154,7 @@
     objectsModel.allowAddingItems=YES;
     objectsModel.allowDeletingItems=YES;
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
-    NSLog(@"self.navigationItem.rightBarButtonItems are %@",self.buttonsToolbar.items);
+    DLog(@"self.navigationItem.rightBarButtonItems are %@",self.buttonsToolbar.items);
     
     objectsModel.editButtonItem = self.editButton;;
     
@@ -546,7 +546,7 @@
 - (void)dismissReaderViewController:(ReaderViewController *)viewController
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+	DLog(@"%s", __FUNCTION__);
 #endif
     
 #if (DEMO_VIEW_CONTROLLER_PUSH == TRUE)

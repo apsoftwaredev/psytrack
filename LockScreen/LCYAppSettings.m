@@ -81,7 +81,7 @@
         
     }
     else {
-        NSLog(@"passcode data to save %@",passcodeDataToSave);
+        DLog(@"passcode data to save %@",passcodeDataToSave);
         
         success= [wrapper updateKeychainValueWithData:passcodeDataToSave forIdentifier:K_LOCK_SCREEN_PASSCODE];
     }
