@@ -936,7 +936,7 @@
 		E7B3E3FF15C58B2F00729C88 /* LicenseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LicenseEntity.h; sourceTree = "<group>"; };
 		E7B3E40015C58B2F00729C88 /* LicenseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LicenseEntity.m; sourceTree = "<group>"; };
 		E7B3E40115C58B2F00729C88 /* LicenseRenewalEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LicenseRenewalEntity.m; sourceTree = "<group>"; };
-		E7B3E40215C58B2F00729C88 /* CliniciansViewController_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CliniciansViewController_Shared.m; sourceTree = "<group>"; };
+		E7B3E40215C58B2F00729C88 /* CliniciansViewController_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CliniciansViewController_Shared.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7B3E40315C58B2F00729C88 /* CECreditsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CECreditsViewController.xib; sourceTree = "<group>"; };
 		E7B3E40415C58B2F00729C88 /* ConsultationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsultationsViewController.m; sourceTree = "<group>"; };
 		E7B3E40515C58B2F00729C88 /* TotalHoursAndMinutesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TotalHoursAndMinutesCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };

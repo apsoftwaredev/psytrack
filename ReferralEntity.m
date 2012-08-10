@@ -13,7 +13,7 @@
 
 @implementation ReferralEntity
 
-@dynamic referralDate;
+@dynamic dateReferred;
 @dynamic order;
 @dynamic notes;
 @dynamic referralInOrOut;
@@ -23,7 +23,7 @@
 @dynamic otherSource;
 @synthesize tempNotes;
 
-- (void) awakeFromInsert 
+- (void) awakeFromInsert
 {
     [super awakeFromInsert];
     
@@ -34,12 +34,12 @@
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"MST"]];
     NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
     //DLog(@"reference date %@",referenceDate);
-    [self willAccessValueForKey:@"referralDate"];
-    if ([(NSDate *)self.referralDate isEqualToDate:referenceDate]) {
-        [self didAccessValueForKey:@"referralDate"];
-        [self willChangeValueForKey:(NSString *)@"referralDate"];
-        self.referralDate = [NSDate date];
-        [self didChangeValueForKey:(NSString *)@"referralDate"];
+    [self willAccessValueForKey:@"dateReferred"];
+    if ([(NSDate *)self.dateReferred isEqualToDate:referenceDate]) {
+        [self didAccessValueForKey:@"dateReferred"];
+        [self willChangeValueForKey:(NSString *)@"dateReferred"];
+        self.dateReferred = [NSDate date];
+        [self didChangeValueForKey:(NSString *)@"dateReferred"];
     }
 }
 

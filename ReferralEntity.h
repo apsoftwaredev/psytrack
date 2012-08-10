@@ -13,7 +13,7 @@
 
 @interface ReferralEntity : NSManagedObject
 
-@property (nonatomic, retain) NSDate * referralDate;
+@property (nonatomic, retain) NSDate * dateReferred;
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSNumber * referralInOrOut;
