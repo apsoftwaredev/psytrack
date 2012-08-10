@@ -1028,7 +1028,7 @@
     //Create a class definition for ReferralEntity to track the referrals
     SCEntityDefinition *referralDef = [SCEntityDefinition definitionWithEntityName:@"ReferralEntity" 
                                                         managedObjectContext:managedObjectContext
-                                                               propertyNames:[NSArray arrayWithObjects:@"client",@"referralDate",@"referralInOrOut", @"notes", nil]];
+                                                               propertyNames:[NSArray arrayWithObjects:@"client",@"dateReferred",@"referralInOrOut", @"notes", nil]];
     
     //Do some property definition customization for the referralDef Entity
     
@@ -1067,11 +1067,11 @@
     [referralDef insertPropertyDefinition:clientDataProperty atIndex:0];
     
 
-    //Create the property definition for the referralDate property in the referralDef Class
-    SCPropertyDefinition *referralDatePropertyDef = [referralDef propertyDefinitionWithName:@"referralDate"];
+    //Create the property definition for the dateReferred property in the referralDef Class
+    SCPropertyDefinition *dateReferredPropertyDef = [referralDef propertyDefinitionWithName:@"dateReferred"];
      
-    //Set the date attributes in the referralDatePropertyDef property definition and make it so the date picker appears in a detail view.
-    referralDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+    //Set the date attributes in the dateReferredPropertyDef property definition and make it so the date picker appears in a detail view.
+    dateReferredPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
                                                                    datePickerMode:UIDatePickerModeDate
                                                     displayDatePickerInDetailView:TRUE];
     
@@ -1112,7 +1112,7 @@
 //    
     //set the title property name
     referralDef.titlePropertyName=@"client.clientIDCode";
-    referralDef.keyPropertyName=@"referralDate";
+    referralDef.keyPropertyName=@"dateReferred";
 //    //set the property definition type to objects selection
 //	clientReferredPropertyDef.type = SCPropertyTypeObjectSelection;
 //    SCObjectSelectionAttributes *clientReferredSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:clientsViewController_Shared.clientDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
@@ -2392,15 +2392,15 @@
                         //set the date format
                         [dateFormatter setDateFormat:@"M/d/yyyy"];
                         
-                        NSDate *referralDate=[managedObject valueForKey:@"referralDate"];
+                        NSDate *dateReferred=[managedObject valueForKey:@"dateReferred"];
                         NSString *clientIDCode=[managedObject valueForKeyPath:@"client.clientIDCode"];
                         NSString *notes=[managedObject valueForKey:@"notes"];
                         NSNumber *referralInfo=[managedObject valueForKey:@"referralInOrOut"];
                     
                         NSString *labelString=[NSString string];
                       
-                        if (referralDate) {
-                            labelString=[[dateFormatter stringFromDate:referralDate] stringByAppendingString:@": "];
+                        if (dateReferred) {
+                            labelString=[[dateFormatter stringFromDate:dateReferred] stringByAppendingString:@": "];
                         }
                         if (clientIDCode.length) {
                             labelString=[labelString stringByAppendingFormat:@"%@", clientIDCode];

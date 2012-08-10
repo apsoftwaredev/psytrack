@@ -47,15 +47,15 @@
     //Create a class definition for ReferralEntity to track the referrals
     SCEntityDefinition *referralDef = [SCEntityDefinition definitionWithEntityName:@"ReferralEntity" 
                                                               managedObjectContext:managedObjectContext
-                                                                     propertyNames:[NSArray arrayWithObjects:@"clinician",@"referralDate",@"otherSource", @"notes", nil]];
+                                                                     propertyNames:[NSArray arrayWithObjects:@"clinician",@"dateReferred",@"otherSource", @"notes", nil]];
     
        
     referralDef.titlePropertyName=@"clinician.combinedName";
-    referralDef.keyPropertyName=@"referralDate";
+    
     
     SCEntityDefinition *otherReferralSourceDef=[SCEntityDefinition definitionWithEntityName:@"OtherReferralSourceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"sourceName;notes"];
     
-    
+    otherReferralSourceDef.titlePropertyName=@"sourceName";
     SCEntityDefinition *organizationDef=[SCEntityDefinition definitionWithEntityName:@"OrganizationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"name;notes;size"];
     
     organizationDef.keyPropertyName=@"name";
@@ -355,7 +355,7 @@
     SCPropertyDefinition *otherReferralSourceNotes=[otherReferralSourceDef propertyDefinitionWithName:@"notes"];
     otherReferralSourceNotes.type=SCPropertyTypeTextView;
     
-    otherReferralSourceDef.keyPropertyName=@"referralDate";
+   
     
     otherReferralSourcePropertyDef.autoValidate=NO;
   
@@ -378,11 +378,11 @@
         [referralDef insertPropertyDefinition:clinicianDataProperty atIndex:1];
     
    
-    //Create the property definition for the referralDate property in the referralDef Class
-    SCPropertyDefinition *referralDatePropertyDef = [referralDef propertyDefinitionWithName:@"referralDate"];
+    //Create the property definition for the dateReferred property in the referralDef Class
+    SCPropertyDefinition *dateReferredPropertyDef = [referralDef propertyDefinitionWithName:@"dateReferred"];
     
-    //Set the date attributes in the referralDatePropertyDef property definition and make it so the date picker appears in a detail view.
-    referralDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+    //Set the date attributes in the dateReferredPropertyDef property definition and make it so the date picker appears in a detail view.
+    dateReferredPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
                                                                         datePickerMode:UIDatePickerModeDate
                                                          displayDatePickerInDetailView:TRUE];
     
@@ -423,7 +423,7 @@
     //    
     //set the title property name
     referralDef.titlePropertyName=@"client.clientIDCode";
-    referralDef.keyPropertyName=@"referralDate";
+    referralDef.keyPropertyName=@"dateReferred";
     
     SCPropertyDefinition *logsPropertyDef=[consultationDef propertyDefinitionWithName:@"logs"];
     
