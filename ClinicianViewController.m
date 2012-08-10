@@ -251,7 +251,11 @@
     
     
      [self updateClinicianTotalLabel];
-    
+    objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
+    {
+        [self updateClinicianTotalLabel];
+    };
+
    
     //change back button image
        
@@ -744,12 +748,7 @@
 
 }
 
--(void)tableViewModelDidPullToRefresh:(SCTableViewModel *)tableModel{
 
-
-    [self updateClinicianTotalLabel];
-
-}
 - (void)tableViewModel:(SCArrayOfItemsModel *)tableViewModel
 searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {

@@ -173,7 +173,13 @@
   
     changedDefaultFileName=NO;
     
-    
+    objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
+    {
+        changedDefaultFileName=NO;
+        [self setDatesAndYears];
+        [self.myPickerView reloadAllComponents];
+    };
+
     
     self.tableViewModel=objectsModel;
     
@@ -523,14 +529,6 @@
         
         
     }
-}
--(void)tableViewModelDidPullToRefresh:(SCTableViewModel *)tableModel{
-    changedDefaultFileName=NO;
-
-    [self setDatesAndYears];
-    [self.myPickerView reloadAllComponents];
-    
-    
 }
 
 #pragma mark -

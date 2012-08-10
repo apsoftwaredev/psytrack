@@ -254,6 +254,12 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     [self updateClientsTotalLabel];
     
+    objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
+    {
+        [self updateClientsTotalLabel];
+    };
+
+    
     [(PTTAppDelegate *)[UIApplication sharedApplication].delegate application:[UIApplication sharedApplication]
                                                willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
                                                                      duration:5];
@@ -721,12 +727,8 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
 }
 
--(void)tableViewModelDidPullToRefresh:(SCTableViewModel *)tableModel{
-    
-    
-    [self updateClientsTotalLabel];
-    
-}
+
+
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];

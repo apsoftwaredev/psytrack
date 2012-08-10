@@ -1419,8 +1419,14 @@
         
         
     }
+   
+    objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
+    {
+        [self updateAdministrationTotalLabel:tableModel];
+    };
+    
     self.tableViewModel=objectsModel;
-    [self updateAdministrationTotalLabel:self.tableViewModel];
+     [self updateAdministrationTotalLabel:self.tableViewModel];
     
    
      // Initialize tableModel
@@ -2341,12 +2347,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     }
 }
 
--(void)tableViewModelDidPullToRefresh:(SCTableViewModel *)tableModel{
-    
-    
-    [self updateAdministrationTotalLabel:tableModel];
-    
-}
+
 
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {
