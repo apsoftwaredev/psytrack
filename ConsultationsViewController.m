@@ -666,9 +666,10 @@
     
     if (tableModel.tag==1) {
         
-        
+        DLog(@"cell class is %@",cell.class);
         DLog(@"section managed object %@",sectionManagedObject);
-        if (sectionManagedObject && [sectionManagedObject isKindOfClass:[ConsultationEntity class]]&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
+        DLog(@"section managed object class is %@",sectionManagedObject.class);
+        if (sectionManagedObject && [sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"ConsultationEntity"]&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
             SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
             
             if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
