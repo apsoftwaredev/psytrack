@@ -17,6 +17,7 @@
 #import "RateChargeEntity.h"
 #import "RateEntity.h"
 #import "LogEntity.h"
+#import "PaymentEntity.h"
 @interface ConsultationsViewController ()
 
 @end
@@ -685,7 +686,46 @@
             
             
         }
-        
+       else if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"PaymentEntity"]) {
+           
+           PaymentEntity *paymentObject=(PaymentEntity *)cellManagedObject;
+           
+           NSDate *dateReceived=paymentObject.dateReceived;
+           NSString *dateReceivedStr;
+           if (dateReceived) {
+               dateReceivedStr=[dateFormatter stringFromDate:dateReceived];
+           }
+           
+           NSDate *dateCleared=paymentObject.dateCleared;
+           NSString *dateClearedStr;
+           if (dateCleared) {
+               dateClearedStr=[dateFormatter stringFromDate:dateCleared];
+           }
+           
+           NSLocale *locale = [NSLocale currentLocale];
+           NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc]init];
+           [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+           [currencyFormatter setLocale:locale];
+           
+           NSString *displayString=nil;
+           if (dateCleared) {
+               
+               displayString=[dateClearedStr stringByAppendingFormat:@": %@",[currencyFormatter stringFromNumber:paymentObject.amount]];
+                              
+           }else if (dateReceived){
+           
+               displayString=[dateReceivedStr stringByAppendingFormat:@": %@",[currencyFormatter stringFromNumber:paymentObject.amount]];
+           
+               cell.textLabel.textColor=[UIColor redColor];
+           }
+           cell.textLabel.text=displayString;
+           
+           
+           
+           
+           
+       }
+ 
         DLog(@"objects section bound object is %@",objectsSection.boundObject);
         
     }
