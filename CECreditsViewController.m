@@ -256,7 +256,15 @@
 
     
     SCPropertyDefinition *ceCostPropertyDef=[ceCreditsDef propertyDefinitionWithName:@"cost"];
-    ceCostPropertyDef.title=@"Cost $";
+    
+    NSLocale *locale = [NSLocale currentLocale];
+    NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc]init];
+    [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [currencyFormatter setLocale:locale];
+    
+    NSString *localCurrencySymbol=[[currencyFormatter stringFromNumber:[NSNumber numberWithInt:0]] substringToIndex:1];
+    
+    ceCostPropertyDef.title=[NSString stringWithFormat:@"Cost %@",localCurrencySymbol];
     
     
     SCPropertyDefinition *ceTitlePropertyDef=[ceCreditsDef propertyDefinitionWithName:@"cETitle"];

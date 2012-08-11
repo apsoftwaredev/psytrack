@@ -34,6 +34,7 @@
 #import "PresentationsViewController.h"
 #import "ConsultationsViewController.h"
 #import "CECreditsViewController.h"
+#import "CoursesTakenViewController.h"
 //#import "UICasualAlert.h"
 //#import <MessageUI/MessageUI.h>
 //
@@ -458,7 +459,15 @@
                 [self.navigationController pushViewController:ceCreditsViewController animated:YES];
            
             }
-            
+            if (indexPath.row==1){
+                
+                
+                
+                CoursesTakenViewController *coursesTakenViewController = [[CoursesTakenViewController alloc] initWithNibName:@"CoursesTakenViewController" bundle:[NSBundle mainBundle]];
+                
+                [self.navigationController pushViewController:coursesTakenViewController animated:YES];
+                
+            }
             
             //@"Certifications"
 //            if (indexPath.row==1);
@@ -494,30 +503,9 @@
             break;
        
         
-        case 8:
-        {
-            //@"Courses Taught"
-            //            if (indexPath.row==0);
-            
-            //@"Presentations"
-            //            if (indexPath.row==1);
-            
-        }
-            break;
        
             
-        case 9:
-        {
-            //@"Courses Taught"
-            //            if (indexPath.row==0);
-            
-            //@"Presentations"
-            //            if (indexPath.row==1);
-            
-        }
-            break;
-            
-        case 10:
+        case 8:
         {
             //@"Drug Database"
             UITabBar *tabBar=(UITabBar *) [(PTTAppDelegate *)[UIApplication sharedApplication].delegate tabBar];
@@ -554,7 +542,7 @@
         }
             break;
             
-        case 11:
+        case 9:
         {
             //@"Clinician Groups"
             
@@ -588,7 +576,7 @@
             
         }
             break;
-        case 12:
+        case 10:
         {
             //@"Lock Screen Settings"
             if (indexPath.row==0){
@@ -603,7 +591,7 @@
         }
             break;
            
-        case 13:
+        case 11:
         {
             //@"Support"
             if (indexPath.row==0){
