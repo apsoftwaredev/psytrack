@@ -21,7 +21,7 @@
 #import "InterventionTypeSubtypeEntity.h"
 #import "TrainingProgramEntity.h"
 #import "SiteEntity.h"
-
+#import "RateEntity.h"
 @interface TimeTrackViewController ()
 
 @end
@@ -2753,7 +2753,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             
         }
-        if ([cell isKindOfClass:[ClinicianSelectionCell class]]) {
+       else if ([cell isKindOfClass:[ClinicianSelectionCell class]]) {
             ClinicianSelectionCell *clinicianSelectionCell=(ClinicianSelectionCell *)cell;
             
             if (clinicianSelectionCell.clinicianObject ) {
@@ -2770,6 +2770,28 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         //        lable.text=@"test";
         //        timeCell.label.text=(NSString *)[counterDateFormatter stringFromDate:totalTimeDate];
         
+        
+       else if ([cell.textLabel.text isEqualToString:@"Hourly Rate"]&&[cell isKindOfClass:[SCObjectSelectionCell class]]){
+           DLog(@"hourly rate cell tag is %i",cell.tag);
+           SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+           
+           if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
+            
+               RateEntity *rateSelected=(RateEntity *)[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex intValue]];
+               
+               NSLocale *locale = [NSLocale currentLocale];
+               NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc]init];
+               [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+               [currencyFormatter setLocale:locale];
+               objectSelectionCell.label.text=[rateSelected.rateName stringByAppendingFormat:@" %@",[currencyFormatter stringFromNumber:rateSelected.hourlyRate]];
+               
+           }
+           
+       
+       
+       }
+        
+        
     }
     
     
@@ -2778,91 +2800,116 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         
         
+        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]) {
         
-        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
-            
-            if (cell.tag>=0 && cell.tag<4) {
-                if ([cell isKindOfClass:[SCDateCell class]]){
-                    SCDateCell *dateCell=(SCDateCell *)cell;
-                    
-                    switch (cell.tag) {
-                        case 0:
-                            startTime=[cellManagedObject valueForKey:@"startTime"];
-                            break;
-                        case 1:
-                            endTime=[cellManagedObject valueForKey:@"endTime"];
-                            break;
-                        case 2:
-                            additionalTime=dateCell.datePicker.date;
-                            [dateCell.dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-                            break;
-                            
-                        case 3:
-                            timeToSubtract=dateCell.datePicker.date;
-                            [dateCell.dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-                            break;
-                            
-                            
-                    }
-                    
-                }
-            }
-            
-            
-            if (cell.tag==5) 
-            {
+            if ([cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
                 
-                if ([cell isKindOfClass:[StopwatchCell class]]) 
+                if (cell.tag>=0 && cell.tag<4) {
+                    if ([cell isKindOfClass:[SCDateCell class]]){
+                        SCDateCell *dateCell=(SCDateCell *)cell;
+                        
+                        switch (cell.tag) {
+                            case 0:
+                                startTime=[cellManagedObject valueForKey:@"startTime"];
+                                break;
+                            case 1:
+                                endTime=[cellManagedObject valueForKey:@"endTime"];
+                                break;
+                            case 2:
+                                additionalTime=dateCell.datePicker.date;
+                                [dateCell.dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+                                break;
+                                
+                            case 3:
+                                timeToSubtract=dateCell.datePicker.date;
+                                [dateCell.dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+                                break;
+                                
+                                
+                        }
+                        
+                    }
+                }
+                
+                
+               else if (cell.tag==5)
                 {
                     
-                    addStopwatch=(NSDate *)[cell.boundObject valueForKey:@"addStopwatch"];
-                    
-                    
-                    
-                    //set the date format
-                    
-                    //                n  
-                    //                   
-                    //                
-                    stopwatchTextField.text=[stopwatchCell.stopwatchFormat stringFromDate:addStopwatch];
-                    
-                    
-                    BOOL stopwatchIsRunningBool;
-                    stopwatchIsRunningBool=(BOOL )[[cellManagedObject valueForKey:@"stopwatchRunning"] boolValue];
-                    
-                    
-                    if (stopwatchIsRunningBool &&!viewControllerOpen) 
+                    if ([cell isKindOfClass:[StopwatchCell class]]) 
                     {
-                        [stopwatchCell startButtonTapped:self];
+                        
+                        addStopwatch=(NSDate *)[cell.boundObject valueForKey:@"addStopwatch"];
+                        
+                        
+                        
+                        //set the date format
+                        
+                        //                n  
+                        //                   
+                        //                
+                        stopwatchTextField.text=[stopwatchCell.stopwatchFormat stringFromDate:addStopwatch];
+                        
+                        
+                        BOOL stopwatchIsRunningBool;
+                        stopwatchIsRunningBool=(BOOL )[[cellManagedObject valueForKey:@"stopwatchRunning"] boolValue];
+                        
+                        
+                        if (stopwatchIsRunningBool &&!viewControllerOpen) 
+                        {
+                            [stopwatchCell startButtonTapped:self];
+                        }
+                        if (!viewControllerOpen) {
+                            [self calculateTime];
+                        }
+                        viewControllerOpen=YES;
+                        
                     }
-                    if (!viewControllerOpen) {
-                        [self calculateTime];
-                    }
-                    viewControllerOpen=YES;
-                    
                 }
+                
+                
             }
+            else if ([cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"])
             
-            
-        }
-        else
-        {
-            
-            
-            if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) 
             {
                 
                 
                 
-                UILabel *totalTimeLabel=(UILabel *)[cell viewWithTag:28];
-                totalTimeLabel.text=[self tableViewModel:tableViewModel calculateBreakTimeForRowAtIndexPath:indexPath withBoundValues:YES];
-                SCTableViewSection *section=[tableViewModel sectionAtIndex:1];
+                    
+                    
+                    
+                    UILabel *totalTimeLabel=(UILabel *)[cell viewWithTag:28];
+                    totalTimeLabel.text=[self tableViewModel:tableViewModel calculateBreakTimeForRowAtIndexPath:indexPath withBoundValues:YES];
+                    SCTableViewSection *section=[tableViewModel sectionAtIndex:1];
+                    
+                    NSString *totalBreakTimeString=(NSString *)[self totalBreakTimeString];
+                    UILabel *headerLabel=(UILabel *)[section.headerView viewWithTag:60];
+                    headerLabel.text=totalBreakTimeString;
+                    
                 
-                NSString *totalBreakTimeString=(NSString *)[self totalBreakTimeString];
-                UILabel *headerLabel=(UILabel *)[section.headerView viewWithTag:60];
-                headerLabel.text=totalBreakTimeString;
                 
             }
+           
+            else if ([cellManagedObject.entity.name isEqualToString:@"RateEntity"])
+                
+            {
+                
+                
+                
+                
+                
+                RateEntity *rateSelected=(RateEntity *)cellManagedObject;
+                NSLocale *locale = [NSLocale currentLocale];
+                NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc]init];
+                [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+                [currencyFormatter setLocale:locale];
+                cell.textLabel.text=[rateSelected.rateName stringByAppendingFormat:@" %@",[currencyFormatter stringFromNumber:rateSelected.hourlyRate]];
+                
+                
+                
+                
+            }
+            
+            
             
         }
     }
