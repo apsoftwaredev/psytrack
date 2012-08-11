@@ -1336,14 +1336,17 @@
     }
 
     
+    //begin rate paste
     
+    
+    //end
     
     
     
     NSString * ratePropertyNameString=@"hourlyRate";
     NSString * rateEntityNameString=@"RateEntity";
     
-    SCEntityDefinition *trackRateDef=[SCEntityDefinition definitionWithEntityName:rateEntityNameString managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:ratePropertyNameString, @"notes", nil]];
+    SCEntityDefinition *trackRateDef=[SCEntityDefinition definitionWithEntityName:rateEntityNameString managedObjectContext:managedObjectContext propertyNamesString:@"rateName;dateStarted;dateEnded;hourlyRate;notes"];
     
     
     
@@ -1352,7 +1355,7 @@
     
     
     
-    SCPropertyDefinition *trackRatePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:@"hourlyRate"];
+    SCPropertyDefinition *trackRatePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:ratePropertyNameString];
     trackRatePropertyDef.type =SCPropertyTypeObjectSelection;
     
     SCObjectSelectionAttributes *trackRateSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trackRateDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
@@ -1368,6 +1371,21 @@
     trackRateStrPropertyDef.type=SCPropertyTypeNumericTextField;
     SCPropertyDefinition *trackRateNotesPropertyDef=[trackRateDef propertyDefinitionWithName:@"notes"];
     trackRateNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *rateDateStartedPropertyDef = [trackRateDef propertyDefinitionWithName:@"dateStarted"];
+	rateDateStartedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                           datePickerMode:UIDatePickerModeDate
+                                                            displayDatePickerInDetailView:NO];
+    
+    
+    SCPropertyDefinition *rateDateEndedPropertyDef = [trackRateDef propertyDefinitionWithName:@"dateEnded"];
+	rateDateEndedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                         datePickerMode:UIDatePickerModeDate
+                                                          displayDatePickerInDetailView:NO];
+    
+    
+    
+    
     
     SCPropertyGroup *paymentGroup=[SCPropertyGroup groupWithHeaderTitle:@"Payment Information" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"hourlyRate",@"paid", nil]];
     
