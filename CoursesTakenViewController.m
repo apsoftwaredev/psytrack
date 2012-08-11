@@ -40,7 +40,7 @@
     
     
     degreeDef.titlePropertyName=@"degree.degreeName";
-    
+    degreeCourseDef.keyPropertyName=@"courseName";
     SCPropertyDefinition *schoolNotesPropertyDef=[schoolDef propertyDefinitionWithName:@"notes"];
     schoolNotesPropertyDef.type=SCPropertyTypeTextView;
     
