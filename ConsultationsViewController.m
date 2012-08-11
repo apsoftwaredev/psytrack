@@ -638,8 +638,11 @@
             
            
            NSDecimalNumber *totalChargeDecimalNumber=  [rateObject.hourlyRate decimalNumberByMultiplyingBy:hoursDecimalNumber];
-            
-            NSString *textToDisplay=[NSString stringWithFormat:@"%@ %.2lf hrs at $%@ hr ($%.2lf total)",rateObject.rateName,[hoursDecimalNumber floatValue],rateObject.hourlyRate,[totalChargeDecimalNumber floatValue]];
+            NSLocale *locale = [NSLocale currentLocale];
+            NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc]init];
+            [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+            [currencyFormatter setLocale:locale];
+            NSString *textToDisplay=[NSString stringWithFormat:@"%@ %.2lf hrs at $%@ hr (%@ total)",rateObject.rateName,[hoursDecimalNumber floatValue],rateObject.hourlyRate,[currencyFormatter stringFromNumber:  totalChargeDecimalNumber]];
             
             cell.textLabel.text=textToDisplay;
             
@@ -711,6 +714,7 @@
            if (dateCleared) {
                
                displayString=[dateClearedStr stringByAppendingFormat:@": %@",[currencyFormatter stringFromNumber:paymentObject.amount]];
+               cell.textLabel.textColor=[UIColor blackColor];
                               
            }else if (dateReceived){
            
@@ -718,6 +722,11 @@
            
                cell.textLabel.textColor=[UIColor redColor];
            }
+           else if (paymentObject.amount){
+               displayString = [currencyFormatter stringFromNumber:paymentObject.amount];
+           
+           }
+           
            cell.textLabel.text=displayString;
            
            
