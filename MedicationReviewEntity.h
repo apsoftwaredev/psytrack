@@ -28,7 +28,7 @@
 @property (nonatomic, retain) ClinicianEntity *prescriber;
 @property (nonatomic, retain) NSManagedObject *frequency;
 
-@property (nonatomic, strong) NSString *tempNotes;
+@property (nonatomic, weak) NSString *tempNotes;
 @end
 
 

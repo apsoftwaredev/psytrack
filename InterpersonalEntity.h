@@ -22,6 +22,6 @@
 @property (nonatomic, retain) DemographicProfileEntity *demographicProfile;
 @property (nonatomic, retain) NSManagedObject *relationship;
 
-@property (nonatomic, strong) NSString *tempNotes;
+@property (nonatomic, weak) NSString *tempNotes;
 
 @end

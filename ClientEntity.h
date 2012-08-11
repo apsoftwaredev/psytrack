@@ -34,10 +34,10 @@
 @property (nonatomic, retain) NSSet *referrals;
 @property (nonatomic, retain) NSSet *groups;
 
-@property (nonatomic, strong) NSString *tempClientIDCode;
-@property (nonatomic, strong) NSString *tempInitials;
-@property (nonatomic, strong) NSDate *tempDateOfBirth;
-@property (nonatomic, strong) NSString *tempNotes;
+@property (nonatomic, weak) NSString *tempClientIDCode;
+@property (nonatomic, weak) NSString *tempInitials;
+@property (nonatomic, weak) NSDate *tempDateOfBirth;
+@property (nonatomic, weak) NSString *tempNotes;
 
 
 @end

@@ -37,8 +37,8 @@
 @property (nonatomic, retain) NSSet *significantLifeEvents;
 @property (nonatomic, retain) NSSet *races;
 
-@property (nonatomic, retain) NSString * tempProfileNotes;
-@property (nonatomic, retain) NSString * tempSex;
+@property (nonatomic, weak) NSString * tempProfileNotes;
+@property (nonatomic, weak) NSString * tempSex;
 
 @end
 

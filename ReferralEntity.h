@@ -22,6 +22,6 @@
 @property (nonatomic, retain) ClientEntity *client;
 @property (nonatomic, retain) OtherReferralSourceEntity *otherSource;
 
-@property (nonatomic, strong) NSString *tempNotes;
+@property (nonatomic, weak) NSString *tempNotes;
 
 @end

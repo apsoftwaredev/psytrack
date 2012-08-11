@@ -354,6 +354,8 @@
 		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
 		E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */; };
+		E7C6871D15D613C600637BCE /* CoursesTakenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C6871B15D613C600637BCE /* CoursesTakenViewController.m */; };
+		E7C6871E15D613C600637BCE /* CoursesTakenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7C6871C15D613C600637BCE /* CoursesTakenViewController.xib */; };
 		E7CCB8B1159A9AD200A12908 /* MonthlyPracticumLogBottonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCB8B0159A9AD200A12908 /* MonthlyPracticumLogBottonCell.m */; };
 		E7CCB8B3159A9B0100A12908 /* MonthlyPracticumLogBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8B2159A9B0100A12908 /* MonthlyPracticumLogBottomCell.xib */; };
 		E7CCB8D1159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8D0159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib */; };
@@ -970,6 +972,9 @@
 		E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCDateCell.m; sourceTree = "<group>"; };
 		E7C074A3150EE514009C5498 /* EncryptedSCTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCTextViewCell.h; sourceTree = "<group>"; };
 		E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCTextViewCell.m; sourceTree = "<group>"; };
+		E7C6871A15D613C600637BCE /* CoursesTakenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoursesTakenViewController.h; sourceTree = "<group>"; };
+		E7C6871B15D613C600637BCE /* CoursesTakenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursesTakenViewController.m; sourceTree = "<group>"; };
+		E7C6871C15D613C600637BCE /* CoursesTakenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoursesTakenViewController.xib; sourceTree = "<group>"; };
 		E7CCB8AF159A9AD100A12908 /* MonthlyPracticumLogBottonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthlyPracticumLogBottonCell.h; sourceTree = "<group>"; };
 		E7CCB8B0159A9AD200A12908 /* MonthlyPracticumLogBottonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthlyPracticumLogBottonCell.m; sourceTree = "<group>"; };
 		E7CCB8B2159A9B0100A12908 /* MonthlyPracticumLogBottomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogBottomCell.xib; sourceTree = "<group>"; };
@@ -1986,11 +1991,22 @@
 		E7B3E3FB15C58A5800729C88 /* Education */ = {
 			isa = PBXGroup;
 			children = (
+				E7C6871915D6137B00637BCE /* Courses Taken */,
 				E7B3E3FC15C58B2F00729C88 /* CECreditsViewController.h */,
 				E7B3E3FD15C58B2F00729C88 /* CECreditsViewController.m */,
 				E7B3E40315C58B2F00729C88 /* CECreditsViewController.xib */,
 			);
 			name = Education;
+			sourceTree = "<group>";
+		};
+		E7C6871915D6137B00637BCE /* Courses Taken */ = {
+			isa = PBXGroup;
+			children = (
+				E7C6871A15D613C600637BCE /* CoursesTakenViewController.h */,
+				E7C6871B15D613C600637BCE /* CoursesTakenViewController.m */,
+				E7C6871C15D613C600637BCE /* CoursesTakenViewController.xib */,
+			);
+			name = "Courses Taken";
 			sourceTree = "<group>";
 		};
 		E7E1425515C1EA7500D0F505 /* Teaching */ = {
@@ -2425,6 +2441,7 @@
 				E7E1425A15C1F34B00D0F505 /* PresentationsViewController.xib in Resources */,
 				E7AFB2B215C329A4005E2722 /* ConsultationsViewController.xib in Resources */,
 				E7B3E40B15C58B2F00729C88 /* CECreditsViewController.xib in Resources */,
+				E7C6871E15D613C600637BCE /* CoursesTakenViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2635,6 +2652,7 @@
 				E7B3E40D15C58B2F00729C88 /* TotalHoursAndMinutesCell.m in Sources */,
 				E7B3E40E15C58B2F00729C88 /* TrainTrackViewController.m in Sources */,
 				E734334715D5D69C007237C5 /* PaymentEntity.m in Sources */,
+				E7C6871D15D613C600637BCE /* CoursesTakenViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

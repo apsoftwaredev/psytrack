@@ -22,6 +22,6 @@
 @property (nonatomic, retain) NSManagedObject *licenseNumber;
 @property (nonatomic, retain) ClinicianEntity *clinician;
 
-@property (nonatomic, strong) NSString *tempNotes;
+@property (nonatomic, weak) NSString *tempNotes;
 
 @end

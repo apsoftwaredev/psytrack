@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSString  * migratedTo;
 @property (nonatomic, retain) DemographicProfileEntity *demographicProfile;
 
-@property (nonatomic, retain) NSString  * tempNotes;
-@property (nonatomic, retain) NSString  * tempMigratedFrom;
-@property (nonatomic, retain) NSString  * tempMigratedTo;
+@property (nonatomic, weak) NSString  * tempNotes;
+@property (nonatomic, weak) NSString  * tempMigratedFrom;
+@property (nonatomic, weak) NSString  * tempMigratedTo;
 @end

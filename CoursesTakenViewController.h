@@ -6,8 +6,13 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-#import <SensibleTableView/SensibleTableView.h>
 
-@interface CoursesTakenViewController : SCTableViewController
+@interface CoursesTakenViewController : SCTableViewController <SCTableViewModelDelegate> {
+
+    SCArrayOfObjectsModel *objectsModel;
+
+    NSDateFormatter *dateFormatter;
+
+}
 
 @end

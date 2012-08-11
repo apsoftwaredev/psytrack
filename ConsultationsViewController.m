@@ -454,7 +454,7 @@
     
     NSDateFormatter *dateTimeFormatter=[[NSDateFormatter alloc]init];
     [dateTimeFormatter setDateFormat:@"ccc M/d/yy h:mm a"];
-    [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+    [dateTimeFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
     SCPropertyDefinition *logDatePropertyDef=[logDef propertyDefinitionWithName:@"dateTime"];
     logDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateTimeFormatter
                                                                      datePickerMode:UIDatePickerModeDateAndTime

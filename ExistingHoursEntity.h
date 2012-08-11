@@ -28,7 +28,7 @@
 
 
 
-@property (nonatomic, strong) NSString *tempNotes;
+@property (nonatomic, weak) NSString *tempNotes;
 
 @end
 @interface ExistingHoursEntity (CoreDataGeneratedAccessors)

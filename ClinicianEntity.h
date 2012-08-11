@@ -61,7 +61,7 @@
 @property (nonatomic, retain) NSSet *practicumCoursesInstructed;
 
 
-@property (nonatomic, strong) NSString *tempNotes;
+@property (nonatomic, weak) NSString *tempNotes;
 @property (nonatomic, strong)  NSString *combinedName;
 
 @end

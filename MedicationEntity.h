@@ -25,7 +25,7 @@
 @property (nonatomic, retain) NSSet *medLogs;
 @property (nonatomic, retain) NSSet *symptomsTargeted;
 
-@property (nonatomic, strong) NSString *tempNotes;
+@property (nonatomic, weak) NSString *tempNotes;
 @end
 
 @interface MedicationEntity (CoreDataGeneratedAccessors)
