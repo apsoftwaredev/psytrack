@@ -35,6 +35,7 @@
 #import "ConsultationsViewController.h"
 #import "CECreditsViewController.h"
 #import "CoursesTakenViewController.h"
+#import "ConferencesAttendedVC.h"
 //#import "UICasualAlert.h"
 //#import <MessageUI/MessageUI.h>
 //
@@ -468,9 +469,16 @@
                 [self.navigationController pushViewController:coursesTakenViewController animated:YES];
                 
             }
+            if (indexPath.row==2){
+                
+                
+                
+                ConferencesAttendedVC *conferencesAttendedViewController = [[ConferencesAttendedVC alloc] initWithNibName:@"ConferencesAttendedVC" bundle:[NSBundle mainBundle]];
+                
+                [self.navigationController pushViewController:conferencesAttendedViewController animated:YES];
+                
+            }
             
-            //@"Certifications"
-//            if (indexPath.row==1);
             
             
         }
