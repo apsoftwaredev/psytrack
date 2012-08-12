@@ -29,7 +29,7 @@
 @implementation PDFRenderer
 
 
-+(void)drawPDF:(NSString*)fileName month:(NSDate *)monthToDisplay trainingProgram:(TrainingProgramEntity *)trainingProgramGiven password:(NSString *) filePassword amended:(BOOL)markAmended{
++(void)drawPDF:(NSString*)fileName month:(NSDate *)monthToDisplay trainingProgram:(TrainingProgramEntity *)trainingProgramGiven password:(NSString *) filePassword amended:(BOOL)markAmended {
 // Create the PDF context using the default page size of 612 x 792.
 //UIGraphicsBeginPDFContextToFile(fileName, CGRectZero, nil);
 //// Mark the beginning of a new page.
@@ -53,7 +53,13 @@
    
     // Points the pdf converter to the mutable data object and to the UIView to be converted
   
-    [self createPDFfromUIView:monthlyPracticumLogTVC.view saveToDocumentsWithFileName:fileName  viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTVC password:filePassword];
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+    
+    [dateFormatter setDateFormat:@"MMMM yyyy"];
+    
+    NSString *documentTitle=[NSString stringWithFormat:@"%@Monthly Clinical Practicum Log for %@", markAmended?@"Amended ":@"",[dateFormatter stringFromDate:monthToDisplay]];
+    [self createPDFfromUIView:monthlyPracticumLogTVC.view saveToDocumentsWithFileName:fileName  viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTVC password:filePassword  documentTitle:(NSString *)documentTitle];
 
 
 // Close the PDF context and write the contents out.
@@ -450,11 +456,13 @@
     
 }
 
-+(void)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTableViewController  password:(NSString *) filePassword
++(void)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTableViewController  password:(NSString *) filePassword documentTitle:(NSString *)documentTitle
 {
     // Creates a mutable data object for updating with binary data, like a byte array
     NSMutableData *pdfData = [NSMutableData data];
-    NSMutableDictionary *auxiliaryInfoDic=auxiliaryInfoDic=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"My PDF File",@"My Name",@"Monthly Clinical Practicum Log",nil] forKeys:[NSArray arrayWithObjects:(__bridge NSString *) kCGPDFContextTitle,(__bridge NSString *)kCGPDFContextCreator,(__bridge NSString *)kCGPDFContextSubject, nil]];
+    
+    NSString *studentName=monthlyPracticumLogTableViewController.studentName;
+    NSMutableDictionary *auxiliaryInfoDic=auxiliaryInfoDic=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:documentTitle,@"PsyTrack Clinician Tools",studentName,@"Monthly Clinical Practicum Log",nil] forKeys:[NSArray arrayWithObjects:(__bridge NSString *) kCGPDFContextTitle,(__bridge NSString *)kCGPDFContextCreator,(__bridge NSString *)kCGPDFContextAuthor,(__bridge NSString *)kCGPDFContextSubject, nil]];
     
     
     if (filePassword &&filePassword.length) {

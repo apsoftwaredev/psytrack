@@ -259,7 +259,7 @@
             phrase=nil;
         }
         
-        [PDFRenderer drawPDF:fileName month:self.monthToDisplay trainingProgram:trainingProgram password:phrase amended:self.amendedLogSwitch.on];
+        [PDFRenderer drawPDF:fileName month:self.monthToDisplay trainingProgram:trainingProgram password:phrase amended:self.amendedLogSwitch.on ];
         
         NSString *filePath = pdfs  ;// Path to last PDF file
         

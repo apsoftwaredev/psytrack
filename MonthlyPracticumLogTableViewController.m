@@ -16,7 +16,7 @@
 @end
 
 @implementation MonthlyPracticumLogTableViewController
-
+@synthesize studentName;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil monthToDisplay:(NSDate *)monthGiven trainingProgram:(TrainingProgramEntity *)trainingProgramGiven  markAmended:(BOOL)markAmendedGiven
 {
@@ -55,6 +55,7 @@
     // Create and add the objects section
     SupervisorsAndTotalTimesForMonth *supervisorsAndTotalTimesForMonthObject=[[SupervisorsAndTotalTimesForMonth alloc]initWithMonth:monthToDisplay_ clinician:nil trainingProgram:trainingProgram_ markAmended:markAmended];
     
+    self.studentName=supervisorsAndTotalTimesForMonthObject.studentNameStr;
     NSMutableArray *supervisorsAndTotalTimesForMonthMutableArray=[NSMutableArray arrayWithObject:supervisorsAndTotalTimesForMonthObject];
     
 	SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:supervisorsAndTotalTimesForMonthMutableArray itemsDefinition:supervisorsAndTotalTimesForMonthDef];                                 
