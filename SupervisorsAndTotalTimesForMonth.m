@@ -249,6 +249,7 @@
         
         }
         
+        DLog(@"self.existing hours array is %@",self.existingHoursHoursArray);
         
         self.overallTotalWeek1TI=[self totalOverallHoursTIForOveralCell:kSummaryWeekOne clinician:clinician];
         self.overallTotalWeek2TI=[self totalOverallHoursTIForOveralCell:kSummaryWeekTwo clinician:clinician];
@@ -256,6 +257,8 @@
         self.overallTotalWeek4TI=[self totalOverallHoursTIForOveralCell:kSummaryWeekFour clinician:clinician];
         self.overallTotalWeek5TI=[self totalOverallHoursTIForOveralCell:kSummaryWeekFive clinician:clinician];
         self.overallTotalWeekUndefinedTI=[self totalOverallHoursTIForOveralCell:kSummaryWeekUndefined clinician:clinician];
+        
+        
         self.overallTotalForMonthTI=[self totalOverallHoursTIForOveralCell:kSummaryTotalForMonth clinician:clinician];
         self.overallTotalCummulativeTI =[self totalOverallHoursTIForOveralCell:kSummaryCummulative clinician:(ClinicianEntity *)clinician];
         self.overallTotalToDateTI=[self totalOverallHoursTIForOveralCell:kSummaryTotalToDate clinician:clinician];
@@ -741,6 +744,7 @@
         {
             
             existingHoursPredicate=[self predicateForExistingHoursWeekUndefined];
+            DLog(@"ksummaryweekundefined ");
         }
             break;
         case kSummaryTotalForMonth:
@@ -795,8 +799,10 @@
     NSArray *filteredExistingHoursArray=nil;
    
        if (existingHoursPredicate &&existingHoursArray_ &&existingHoursArray_.count) {
-        filteredExistingHoursArray=[existingHoursArray_ filteredArrayUsingPredicate:existingHoursPredicate];
         
+           DLog(@"exsiting hours before filter %@",existingHoursArray_);
+           filteredExistingHoursArray=[existingHoursArray_ filteredArrayUsingPredicate:existingHoursPredicate];
+        DLog(@"filtered existing hours array  %@",filteredExistingHoursArray);
 
     }
     else {
@@ -811,6 +817,7 @@
     NSTimeInterval totalExistingAssessmentsTI=[self totalTimeIntervalForExistingHoursArray:filteredExistingHoursArray keyPath:kTrackKeyPathForExistingHoursAssessmentHours];
     
     
+    DLog(@"total for existing assessments array  %f",totalExistingAssessmentsTI);
     NSTimeInterval totalExistingSupportTI=[self totalTimeIntervalForExistingHoursArray:filteredExistingHoursArray keyPath:kTrackKeyPathForExistingHoursSupportActivityHours];
     
     
@@ -913,6 +920,8 @@
         {
             self.interventionTotalWeekUndefinedTI=totalExistingInterventionsTI;
             self.assessmentTotalWeekUndefinedTI=totalExistingAssessmentsTI;
+            DLog(@"assessments time interval %f",self.assessmentTotalWeekUndefinedTI);
+            
             self.supportTotalWeekUndefinedTI=totalExistingSupportTI;
             self.supervisionTotalWeekUndefinedTI=totalExistingSupervisionReceivedTI;
             

@@ -316,7 +316,7 @@
     objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:presentationDef];
     
     
-    if(![SCUtilities is_iPad]){
+    if([SCUtilities is_iPad]){
         
         self.tableView.backgroundView=nil;
         UIView *newView=[[UIView alloc]init];

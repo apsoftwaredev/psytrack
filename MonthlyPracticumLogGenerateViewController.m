@@ -254,6 +254,10 @@
         
         [NSThread detachNewThreadSelector:@selector(startAnimatingProgressInBackground) toTarget:prog withObject:prog];
         [self.view setNeedsDisplay];
+        if (phrase&&phrase.length==0) {
+           //otherwise the print button won't appear because we cannont print documents with passwords
+            phrase=nil;
+        }
         
         [PDFRenderer drawPDF:fileName month:self.monthToDisplay trainingProgram:trainingProgram password:phrase amended:self.amendedLogSwitch.on];
         
@@ -341,7 +345,7 @@
                    
                     
                    
-                    [self generateAndViewReportPDFWithFileName:fileName];
+                    [self generateAndViewReportPDFWithFileName:[fileName stringByAppendingPathExtension:@"pdf"]];
                     
                     
                     break;

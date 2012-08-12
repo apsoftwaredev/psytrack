@@ -13,11 +13,13 @@
 #import <QuartzCore/QuartzCore.h>
 #import "MonthlyPracticumLogTableViewController.h"
 #import "MonthlyPracticumLogTopCell.h"
-#define LEFT_MARGIN 0
-#define RIGHT_MARGIN 0
-#define TOP_MARGIN 0
-#define BOTTOM_MARGIN 0
-#define BOTTOM_FOOTER_MARGIN 0
+#define LEFT_MARGIN 5
+#define RIGHT_MARGIN 5
+#define TOP_MARGIN 10
+#define BOTTOM_MARGIN 5
+#define BOTTOM_FOOTER_MARGIN 5
+//#define DOC_WIDTH 1122
+//#define DOC_HEIGHT 1452
 #define DOC_WIDTH 1122
 #define DOC_HEIGHT 1452
 
@@ -435,13 +437,13 @@
     [dateFormatter setDateFormat:@"HH:mm M/d/yyyy"];
      
      NSString *pageString=[NSString stringWithFormat:@"Page %d of %d (Generated %@) ",pageNum,totalPages,[dateFormatter stringFromDate:[NSDate date]]];
-    UIFont *theFont =[UIFont systemFontOfSize:17];
+    UIFont *theFont =[UIFont systemFontOfSize:36];
     
-    CGSize maxSize= CGSizeMake(1122, 132);
+    CGSize maxSize= CGSizeMake(2244, 264);
     
     CGSize pageStringSize = [pageString sizeWithFont:theFont constrainedToSize:maxSize lineBreakMode:UILineBreakModeClip];
     
-    CGRect stringRect =CGRectMake(((1122- pageStringSize.width)/2.0), 1320 + ((132.0-pageStringSize.height)/2), pageStringSize.width, pageStringSize.height);
+    CGRect stringRect =CGRectMake(((2244- pageStringSize.width)/2.0), 1586 + ((670-pageStringSize.height)), pageStringSize.width, pageStringSize.height);
     
     
     [pageString drawInRect:stringRect withFont:theFont];
@@ -507,7 +509,7 @@
                         do {
                             //mark the beginning of a new page
                             totalPages++;
-                            UIGraphicsBeginPDFPageWithInfo(CGRectMake(0,0,DOC_WIDTH,DOC_HEIGHT), NULL);
+                            UIGraphicsBeginPDFPageWithInfo(CGRectMake(-LEFT_MARGIN,TOP_MARGIN,DOC_WIDTH/2,DOC_HEIGHT/2), NULL);
                             
                             
                             
@@ -572,7 +574,7 @@
     
    
     //create empty pdf file;
-    UIGraphicsBeginPDFContextToFile(documentDirectoryFilename, CGRectMake(0, 0, DOC_WIDTH, DOC_HEIGHT), auxiliaryInfoDic);
+    UIGraphicsBeginPDFContextToFile(documentDirectoryFilename, CGRectMake(LEFT_MARGIN/2, TOP_MARGIN/2, DOC_WIDTH/2, DOC_HEIGHT/2), auxiliaryInfoDic);
     
     CGDataProviderRef dataProvider=CGDataProviderCreateWithCFData((__bridge CFDataRef)pdfData);
     //open template file
@@ -593,15 +595,15 @@
         CGContextRef context = UIGraphicsGetCurrentContext();
         
         //flip context due to different origins
-        CGContextTranslateCTM(context, 0.0, templatePageBounds.size.height);
-        CGContextScaleCTM(context, 1.0, -1.0);
+        CGContextTranslateCTM(context, 15.0, templatePageBounds.size.height/2);
+        CGContextScaleCTM(context, 0.47, -0.47);
         
         //copy content of template page on the corresponding page in new file
         CGContextDrawPDFPage(context, templatePage);
         
         //flip context back
-        CGContextTranslateCTM(context, 0.0, templatePageBounds.size.height);
-        CGContextScaleCTM(context, 1.0, -1.0);
+        CGContextTranslateCTM(context, 15.0, templatePageBounds.size.height/2);
+        CGContextScaleCTM(context, 0.47, -0.47);
         
         /* Here you can do any drawings */
     [self drawPageNumber:pageNumber totalPages:count];

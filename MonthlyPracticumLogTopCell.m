@@ -341,7 +341,18 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
             [self.mainPageScrollView setContentOffset:CGPointMake(0, mainScrollView.frame.size.height+currentOffsetY )];
             currentOffsetY=currentOffsetY+mainScrollView.frame.size.height;
         }
-        
+        if (self.overallHoursFooter.frame.size.height +self.overallHoursFooter.frame.origin.y>MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY&&self.overallHoursFooter.frame.origin.y<MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY) {
+            CGRect overallHoursFooterFrame=self.overallHoursFooter.frame;
+            overallHoursFooterFrame.origin.y=MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY+10;
+            self.overallHoursFooter.frame=overallHoursFooterFrame;
+            
+            CGRect containerForSignaturesAndSupervisiorSummariesFrame=self.containerForSignaturesAndSupervisorSummaries.frame;
+            containerForSignaturesAndSupervisiorSummariesFrame.origin.y=overallHoursFooterFrame.origin.y+overallHoursFooterFrame.size.height+ 10;
+            self.containerForSignaturesAndSupervisorSummaries.frame=containerForSignaturesAndSupervisiorSummariesFrame;
+            
+            
+            
+        }
         CGFloat paddAdditonalY=0;
         DLog(@"self container for supervisor and signatures summaries and subviews %@",self.containerForSignaturesAndSupervisorSummaries.subviews);
         
@@ -428,7 +439,9 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
         supervisorLabelBeforeColon.text=@"Supervisors:";
     }
     [self.supervisorLabel alignTop];
-    NSString *bottomCellNibName=nil;    
+    NSString *bottomCellNibName=nil;
+    
+    
     if (totalsObject.overallTotalWeekUndefinedTI) {
         bottomCellNibName=@"MonthlyPracticumLogBottomCellWithUndefined";
     }

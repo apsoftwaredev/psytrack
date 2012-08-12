@@ -182,7 +182,7 @@
     
     [degreeCourseDef insertPropertyDefinition:clinicianDataProperty atIndex:5];
     
-    if(![SCUtilities is_iPad]){
+    if([SCUtilities is_iPad]){
         
         self.tableView.backgroundView=nil;
         UIView *newView=[[UIView alloc]init];

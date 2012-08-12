@@ -278,7 +278,7 @@
     objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:ceCreditsDef];
     
     
-    if(![SCUtilities is_iPad]){
+    if([SCUtilities is_iPad]){
         
         self.tableView.backgroundView=nil;
         UIView *newView=[[UIView alloc]init];
@@ -399,6 +399,45 @@
 
 
 
+}
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    
+    
+    if ([SCUtilities is_iPad]) {
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        
+        UIColor *backgroundColor=nil;
+        
+        if(indexPath.row==NSNotFound|| tableModel.tag>0)
+        {
+            
+            backgroundColor=(UIColor *)appDelegate.window.backgroundColor;
+            
+        }
+        else {
+            
+            
+            
+            backgroundColor=[UIColor clearColor];
+            
+            
+        }
+        
+        if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
+            
+            [detailTableViewModel.modeledTableView setBackgroundView:nil];
+            UIView *view=[[UIView alloc]init];
+            [detailTableViewModel.modeledTableView setBackgroundView:view];
+            [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
+            
+            
+            
+            
+        }
+        
+        
+    }
 }
 
 

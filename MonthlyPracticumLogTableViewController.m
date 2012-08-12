@@ -72,7 +72,7 @@
         
         
         if (supervisorsAndTotalTimesForMonthObject.overallTotalWeekUndefinedTI>0) {
-            topCellNibName=@"MonthlyPracticumLogTopCellWithUndefined";
+            topCellNibName=@"MonthlyPracticumLogTopCellWithUndefined2";
         }
         else {
             topCellNibName=@"MonthlyPracticumLogTopCell";
