@@ -217,6 +217,8 @@
 		E71E26AD1569C3920004A793 /* BreakTimeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E71E26AC1569C3920004A793 /* BreakTimeEntity.m */; };
 		E71E26C7156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E71E26C6156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m */; };
 		E71EAD7415D7F83500204389 /* MonthlyPracticumLogTopCellWithUndefined2.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71EAD7315D7F83500204389 /* MonthlyPracticumLogTopCellWithUndefined2.xib */; };
+		E71EAD7915D86C7E00204389 /* ConferencesAttendedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E71EAD7715D86C7E00204389 /* ConferencesAttendedVC.m */; };
+		E71EAD7A15D86C7E00204389 /* ConferencesAttendedVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71EAD7815D86C7E00204389 /* ConferencesAttendedVC.xib */; };
 		E734334715D5D69C007237C5 /* PaymentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E734334615D5D69C007237C5 /* PaymentEntity.m */; };
 		E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DD158E28DC00CE1AF4 /* menubar-full.png */; };
 		E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */; };
@@ -768,6 +770,9 @@
 		E71E26C5156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCArrayOfObjectsModel+CoreData+SelectionSection.h"; sourceTree = "<group>"; };
 		E71E26C6156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SCArrayOfObjectsModel+CoreData+SelectionSection.m"; sourceTree = "<group>"; };
 		E71EAD7315D7F83500204389 /* MonthlyPracticumLogTopCellWithUndefined2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogTopCellWithUndefined2.xib; sourceTree = "<group>"; };
+		E71EAD7615D86C7E00204389 /* ConferencesAttendedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConferencesAttendedVC.h; sourceTree = "<group>"; };
+		E71EAD7715D86C7E00204389 /* ConferencesAttendedVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConferencesAttendedVC.m; sourceTree = "<group>"; };
+		E71EAD7815D86C7E00204389 /* ConferencesAttendedVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConferencesAttendedVC.xib; sourceTree = "<group>"; };
 		E734334515D5D69C007237C5 /* PaymentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentEntity.h; sourceTree = "<group>"; };
 		E734334615D5D69C007237C5 /* PaymentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentEntity.m; sourceTree = "<group>"; };
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
@@ -1787,6 +1792,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E71EAD7515D86C3F00204389 /* Conferences Attended */ = {
+			isa = PBXGroup;
+			children = (
+				E71EAD7615D86C7E00204389 /* ConferencesAttendedVC.h */,
+				E71EAD7715D86C7E00204389 /* ConferencesAttendedVC.m */,
+				E71EAD7815D86C7E00204389 /* ConferencesAttendedVC.xib */,
+			);
+			name = "Conferences Attended";
+			sourceTree = "<group>";
+		};
 		E742FF5115D1E3E9005D91D4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -1993,6 +2008,7 @@
 		E7B3E3FB15C58A5800729C88 /* Education */ = {
 			isa = PBXGroup;
 			children = (
+				E71EAD7515D86C3F00204389 /* Conferences Attended */,
 				E7C6871915D6137B00637BCE /* Courses Taken */,
 				E7B3E3FC15C58B2F00729C88 /* CECreditsViewController.h */,
 				E7B3E3FD15C58B2F00729C88 /* CECreditsViewController.m */,
@@ -2446,6 +2462,7 @@
 				E7B3E40B15C58B2F00729C88 /* CECreditsViewController.xib in Resources */,
 				E7C6871E15D613C600637BCE /* CoursesTakenViewController.xib in Resources */,
 				E71EAD7415D7F83500204389 /* MonthlyPracticumLogTopCellWithUndefined2.xib in Resources */,
+				E71EAD7A15D86C7E00204389 /* ConferencesAttendedVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2657,6 +2674,7 @@
 				E7B3E40E15C58B2F00729C88 /* TrainTrackViewController.m in Sources */,
 				E734334715D5D69C007237C5 /* PaymentEntity.m in Sources */,
 				E7C6871D15D613C600637BCE /* CoursesTakenViewController.m in Sources */,
+				E71EAD7915D86C7E00204389 /* ConferencesAttendedVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
