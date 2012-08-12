@@ -10,6 +10,9 @@
 #import "PTTAppDelegate.h"
 #import "EncryptedSCTextViewCell.h"
 #import "TotalHoursAndMinutesCell.h"
+#import "LogEntity.h"
+#import "ConferenceEntity.h"
+
 @interface ConferencesAttendedVC ()
 
 @end
@@ -43,7 +46,7 @@
     SCPropertyDefinition *otherNotesPropertyDef = [conferenceDef propertyDefinitionWithName:@"notes"];
     
     otherNotesPropertyDef.type=SCPropertyTypeTextView;
-    otherNotesPropertyDef.title=@"otherNotes";
+    otherNotesPropertyDef.title=@"Other Notes";
     
     SCPropertyDefinition *notableTopicsPropertyDef = [conferenceDef propertyDefinitionWithName:@"notableTopics"];
     
@@ -243,5 +246,65 @@
         
     }
 }
+
+-(void)tableViewModel:(SCTableViewModel *)tableModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    if (tableModel.tag==0) {
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        NSString *displayText=nil;
+        if ([cellManagedObject isKindOfClass:[ConferenceEntity class]]) {
+            ConferenceEntity *conferenceObject=(ConferenceEntity *)cellManagedObject;
+        
+            if (conferenceObject.startDate){
+            
+                displayText=[dateFormatter stringFromDate:conferenceObject.startDate];
+                
+            
+            
+            }
+            
+            if (displayText && displayText.length) {
+                
+                displayText=[displayText stringByAppendingFormat:@": %@",conferenceObject.title];
+                
+            }
+            
+            
+        }
+        cell.textLabel.text=displayText;
+        
+    }
+    
+    if (tableModel.tag==2&&tableModel.sectionCount) {
+        
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        
+        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"LogEntity"]) {
+            
+            LogEntity *logObject=(LogEntity *)cellManagedObject;
+            
+            if (logObject.dateTime) {
+                NSString *displayString=[dateFormatter stringFromDate:logObject.dateTime];
+                
+                NSString *notesString=logObject.notes;
+                if(notesString &&notesString.length){
+                    
+                    
+                    displayString=[displayString stringByAppendingFormat:@": %@",notesString];
+                    
+                }
+                cell.textLabel.text=displayString;
+                
+            }
+            
+            
+        }
+        
+        
+    }
+    
+}
+
 
 @end
