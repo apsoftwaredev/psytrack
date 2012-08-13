@@ -220,6 +220,8 @@
 		E71EAD7915D86C7E00204389 /* ConferencesAttendedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E71EAD7715D86C7E00204389 /* ConferencesAttendedVC.m */; };
 		E71EAD7A15D86C7E00204389 /* ConferencesAttendedVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71EAD7815D86C7E00204389 /* ConferencesAttendedVC.xib */; };
 		E71EAD7D15D875AA00204389 /* ConferenceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E71EAD7C15D875AA00204389 /* ConferenceEntity.m */; };
+		E71EAD8115D88E5100204389 /* TeachingExperienceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E71EAD7F15D88E5100204389 /* TeachingExperienceVC.m */; };
+		E71EAD8215D88E5100204389 /* TeachingExperienceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71EAD8015D88E5100204389 /* TeachingExperienceVC.xib */; };
 		E734334715D5D69C007237C5 /* PaymentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E734334615D5D69C007237C5 /* PaymentEntity.m */; };
 		E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DD158E28DC00CE1AF4 /* menubar-full.png */; };
 		E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */; };
@@ -776,6 +778,9 @@
 		E71EAD7815D86C7E00204389 /* ConferencesAttendedVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConferencesAttendedVC.xib; sourceTree = "<group>"; };
 		E71EAD7B15D875AA00204389 /* ConferenceEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConferenceEntity.h; sourceTree = "<group>"; };
 		E71EAD7C15D875AA00204389 /* ConferenceEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConferenceEntity.m; sourceTree = "<group>"; };
+		E71EAD7E15D88E5100204389 /* TeachingExperienceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingExperienceVC.h; sourceTree = "<group>"; };
+		E71EAD7F15D88E5100204389 /* TeachingExperienceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingExperienceVC.m; sourceTree = "<group>"; };
+		E71EAD8015D88E5100204389 /* TeachingExperienceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeachingExperienceVC.xib; sourceTree = "<group>"; };
 		E734334515D5D69C007237C5 /* PaymentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentEntity.h; sourceTree = "<group>"; };
 		E734334615D5D69C007237C5 /* PaymentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentEntity.m; sourceTree = "<group>"; };
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
@@ -2039,6 +2044,9 @@
 				E7E1425615C1F34B00D0F505 /* PresentationsViewController.h */,
 				E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */,
 				E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */,
+				E71EAD7E15D88E5100204389 /* TeachingExperienceVC.h */,
+				E71EAD7F15D88E5100204389 /* TeachingExperienceVC.m */,
+				E71EAD8015D88E5100204389 /* TeachingExperienceVC.xib */,
 			);
 			name = Teaching;
 			sourceTree = "<group>";
@@ -2468,6 +2476,7 @@
 				E7C6871E15D613C600637BCE /* CoursesTakenViewController.xib in Resources */,
 				E71EAD7415D7F83500204389 /* MonthlyPracticumLogTopCellWithUndefined2.xib in Resources */,
 				E71EAD7A15D86C7E00204389 /* ConferencesAttendedVC.xib in Resources */,
+				E71EAD8215D88E5100204389 /* TeachingExperienceVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2681,6 +2690,7 @@
 				E7C6871D15D613C600637BCE /* CoursesTakenViewController.m in Sources */,
 				E71EAD7915D86C7E00204389 /* ConferencesAttendedVC.m in Sources */,
 				E71EAD7D15D875AA00204389 /* ConferenceEntity.m in Sources */,
+				E71EAD8115D88E5100204389 /* TeachingExperienceVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
