@@ -36,6 +36,9 @@
 #import "CECreditsViewController.h"
 #import "CoursesTakenViewController.h"
 #import "ConferencesAttendedVC.h"
+#import "TeachingExperienceVC.h"
+
+
 //#import "UICasualAlert.h"
 //#import <MessageUI/MessageUI.h>
 //
@@ -225,7 +228,7 @@
                     
                 case 7:
                 {
-                     if (indexPath.row==0)result.textLabel.text=@"Courses Taught";
+                     if (indexPath.row==0)result.textLabel.text=@"Teaching Experience";
                      if (indexPath.row==1)result.textLabel.text=@"Presentations";
                    
                     if (indexPath.row==2)result.textLabel.text=@"Expert Testemony";
@@ -486,10 +489,15 @@
             
         case 7:
         {
-            //@"Courses Taught"
-//            if (indexPath.row==0);
-            
-            //@"Presentations"
+            if (indexPath.row==0){
+                
+                
+                
+                TeachingExperienceVC *teachingExperienceVC = [[TeachingExperienceVC alloc] initWithNibName:@"TeachingExperienceVC" bundle:[NSBundle mainBundle]];
+                
+                [self.navigationController pushViewController:teachingExperienceVC animated:YES];
+                
+            }
             if (indexPath.row==1){
             
                
