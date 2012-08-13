@@ -1045,8 +1045,10 @@ if (fetchedObjects == nil) {
         existingHoursNewestDate=existingHoursLastObject.endDate;
         
     }
+    DLog(@"existing hours newe %@first %@  track %@",existingHoursNewestDate,existingHoursFirstDate,trackFirstDateOfService);
     NSDate *returnDate=nil;
-    if (([trackFirstDateOfService compare:existingHoursFirstDate]==NSOrderedSame)||([trackFirstDateOfService compare:existingHoursFirstDate]==NSOrderedAscending)) {
+    if (trackFirstDateOfService &&((trackFirstDateOfService && !existingHoursFirstDate)||([trackFirstDateOfService compare:existingHoursFirstDate]==NSOrderedSame)||([trackFirstDateOfService compare:existingHoursFirstDate]==NSOrderedAscending))) {
+        
         returnDate=trackFirstDateOfService;
     }
     else {

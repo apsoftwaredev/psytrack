@@ -38,8 +38,7 @@
     presentationDeliveredDef.titlePropertyName=@"date";
     presentationDeliveredDef.keyPropertyName=@"date";
     
-    SCEntityDefinition *publicationDef=[SCEntityDefinition definitionWithEntityName:@"PublicationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"authors;datePublished;notes;pageNumbers;publicationTitle;publisher;volume"];
-    
+   
     
     SCEntityDefinition *logDef=[SCEntityDefinition definitionWithEntityName:@"LogEntity" managedObjectContext:managedObjectContext propertyNamesString:@"dateTime;notes"];
     
@@ -125,16 +124,27 @@
 	conferenceTitlePropertyDef.type = SCPropertyTypeTextView;	
     
     
-    //set the order attributes name defined in the Publication Entity    
+    
+    //Create a class definition for Publication entity
+	SCEntityDefinition *publicationDef = [SCEntityDefinition definitionWithEntityName:@"PublicationEntity"
+                                                                 managedObjectContext:managedObjectContext
+                                                                        propertyNames:[NSArray arrayWithObjects:@"publicationTitle",@"authors",@"datePublished", @"publisher",@"volume", @"pageNumbers",@"publicationType",@"notes",
+                                                                                       nil]];
+    
+    
+    
+    
+    
+    //set the order attributes name defined in the Publication Entity
     publicationDef.orderAttributeName=@"order";
     publicationDef.titlePropertyName=@"publicationTitle;datePublished";
-    SCEntityDefinition *publicationTypeDef = [SCEntityDefinition definitionWithEntityName:@"PublicationTypeEntity" 
+    SCEntityDefinition *publicationTypeDef = [SCEntityDefinition definitionWithEntityName:@"PublicationTypeEntity"
                                                                      managedObjectContext:managedObjectContext
                                                                             propertyNames:[NSArray arrayWithObjects: @"publicationType",
                                                                                            nil]];
     
     
-    //set the order attributes name defined in the Publication Type Entity      
+    //set the order attributes name defined in the Publication Type Entity
     publicationTypeDef.orderAttributeName=@"order";
     SCPropertyDefinition *publicationTypePropertyDef = [publicationDef propertyDefinitionWithName:@"publicationType"];
     
@@ -149,26 +159,31 @@
     publicationTypePropertyDef.attributes = publicationSelectionAttribs;
     
     SCPropertyDefinition *datePublishedPropertyDef = [publicationDef propertyDefinitionWithName:@"datePublished"];
-	datePublishedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
-                                                                         datePickerMode:UIDatePickerModeDate 
+	datePublishedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                         datePickerMode:UIDatePickerModeDate
                                                           displayDatePickerInDetailView:NO];
     
     SCPropertyDefinition *publicationTitlePropertyDef = [publicationDef propertyDefinitionWithName:@"publicationTitle"];
 	
-	publicationTitlePropertyDef.type = SCPropertyTypeTextView;	
+	publicationTitlePropertyDef.type = SCPropertyTypeTextView;
     SCPropertyDefinition *publicationAuthorsPropertyDef = [publicationDef propertyDefinitionWithName:@"authors"];
 	
-	publicationAuthorsPropertyDef.type = SCPropertyTypeTextView;	
+	publicationAuthorsPropertyDef.type = SCPropertyTypeTextView;
     
     SCPropertyDefinition *publicationPublisherPropertyDef = [publicationDef propertyDefinitionWithName:@"publisher"];
 	
-	publicationPublisherPropertyDef.type = SCPropertyTypeTextView;	
+	publicationPublisherPropertyDef.type = SCPropertyTypeTextView;
     
     SCPropertyDefinition *publicationNotesPropertyDef = [publicationDef propertyDefinitionWithName:@"notes"];
 	
-	publicationNotesPropertyDef.type = SCPropertyTypeTextView;	
+	publicationNotesPropertyDef.type = SCPropertyTypeTextView;
     
-
+    SCPropertyDefinition *publicationsPropertyDef = [presentationDef propertyDefinitionWithName:@"publications"];
+	publicationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:publicationDef
+                                                                                   allowAddingItems:TRUE
+                                                                                 allowDeletingItems:TRUE
+                                                                                   allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:nil addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
+    
     
     SCPropertyDefinition *topicsPropertyDef=[presentationDef propertyDefinitionWithName:@"topics"];
     
@@ -252,13 +267,7 @@
     
     presentationDeliveredPropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:presentationDeliveredDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add Presentation Deliveries"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];
     
-    SCPropertyDefinition *publicationsPropertyDef=[presentationDef propertyDefinitionWithName:@"publications"];
-    
-    publicationsPropertyDef.type=SCPropertyTypeArrayOfObjects;
-    
-    publicationsPropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:publicationDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add publications"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];
-    
-    
+        
     SCPropertyDefinition *conferenceLogPropertyDef=[conferenceDef propertyDefinitionWithName:@"logs"];
     
     conferenceLogPropertyDef.type=SCPropertyTypeArrayOfObjects;

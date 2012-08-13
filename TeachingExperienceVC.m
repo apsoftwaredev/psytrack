@@ -35,7 +35,7 @@
     
     
     
-    SCEntityDefinition *teachingExperienceDef=[SCEntityDefinition definitionWithEntityName:@"TeachingExperienceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"classTitle;credits;startDate;endDate;subject;school;logs;hours;notes"];
+    SCEntityDefinition *teachingExperienceDef=[SCEntityDefinition definitionWithEntityName:@"TeachingExperienceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"classTitle;credits;startDate;endDate;subject;school;publications;logs;notes"];
     
     
     
@@ -225,7 +225,7 @@
     
     UIViewController *navtitle=self.navigationController.topViewController;
     
-    navtitle.title=@"Courses Taken";
+    navtitle.title=@"Teaching Experience";
     
     
     
