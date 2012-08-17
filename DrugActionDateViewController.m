@@ -269,12 +269,18 @@
     //    
     
     
+    
     if([SCUtilities is_iPad]){
+        
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
-        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+        
+        [self.tableView setBackgroundColor:appDelegate.window.backgroundColor]; // Make the table view transparent
+        
     }
-    
     
     //    [self updateClientsTotalLabel];
     

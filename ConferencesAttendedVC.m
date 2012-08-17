@@ -169,7 +169,7 @@
     
     UIViewController *navtitle=self.navigationController.topViewController;
     
-    navtitle.title=@"Courses Taken";
+    navtitle.title=@"Conferences Attended";
     
     
     

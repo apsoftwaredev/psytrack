@@ -273,7 +273,7 @@
         objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
         
         
-        UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTappedInDetalView)];
+        UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(myCancelButtonTapped)];
         
         self.navigationItem.leftBarButtonItem=cancelButton;
 
@@ -308,6 +308,9 @@
     
     objectsModel.dataFetchOptions=dataFetchOptions;
     //    [objectsModel reloadBoundValues];
+   
+    objectsModel.autoAssignDelegateForDetailModels=YES;
+    
     
     self.tableViewModel = objectsModel;
     [self.tableViewModel reloadBoundValues];
@@ -363,16 +366,26 @@
 
         
     }
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    UIColor * backgroundColor=nil;
+    if (isInDetailSubview) {
+      backgroundColor  =(UIColor *)(UIWindow *)appDelegate.window.backgroundColor;
+    }
+    else{
+        backgroundColor=[UIColor clearColor];
+    }
+   
     
     
     
     if([SCUtilities is_iPad]){
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
-        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+        [self.tableView setBackgroundColor:backgroundColor]; // Make the table view transparent
     }
     
-    
+    self.view.backgroundColor=backgroundColor;
 
     
     CGFloat localDbBytes=(CGFloat )[self getLocalDrugFileSize];
@@ -1221,7 +1234,47 @@ DLog(@"drugs persistent stores %@",drugsManagedObjectContext.persistentStoreCoor
                 //DLog(@"applNo is %@",drugApplNo);
                 DrugActionDateViewController * drugActionDateViewController_iPhone = [[DrugActionDateViewController alloc] initWithNibName:@"DrugActionDateViewController" bundle:[NSBundle mainBundle] withApplNo:drugApplNo];
                 
+            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+            
+            
+            
+            if ([SCUtilities is_iPad]) {
+                //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
                 
+                
+                UIColor *backgroundColor=nil;
+                
+                if(isInDetailSubview)
+                {
+                    //            backgroundImage=[UIImage imageNamed:@"iPad-background-blue.png"];
+                    backgroundColor=(UIColor *)(UIWindow *)appDelegate.window.backgroundColor;
+                    
+                    
+                    
+                }
+                else {
+                    
+                    
+                    
+                    backgroundColor=[UIColor clearColor];
+                    
+                    
+                }
+                
+                if (drugActionDateViewController_iPhone.tableView.backgroundColor!=backgroundColor) {
+                    
+                    [drugActionDateViewController_iPhone.tableView setBackgroundView:nil];
+                    UIView *view=[[UIView alloc]init];
+                    [drugActionDateViewController_iPhone.tableView setBackgroundView:view];
+                    [drugActionDateViewController_iPhone.tableView setBackgroundColor:backgroundColor];
+                    
+                    
+                    
+                    
+                }
+                
+                
+            }
                 
                 [self.navigationController pushViewController:drugActionDateViewController_iPhone animated:YES];
                 
@@ -1259,18 +1312,49 @@ DLog(@"drugs persistent stores %@",drugsManagedObjectContext.persistentStoreCoor
     
  
 }
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-
-    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    
+    if ([SCUtilities is_iPad]) {
+        //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
-
-        [detailTableViewModel.modeledTableView setBackgroundView:nil];
-        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
+        
+        UIColor *backgroundColor=nil;
+        
+        if(indexPath.row==NSNotFound|| tableModel.tag>0||isInDetailSubview)
+        {
+            //            backgroundImage=[UIImage imageNamed:@"iPad-background-blue.png"];
+            backgroundColor=(UIColor *)(UIWindow *)appDelegate.window.backgroundColor;
+            
+            
+            
+        }
+        else {
+            
+            
+            
+            backgroundColor=[UIColor clearColor];
+            
+            
+        }
+        
+        if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
+            
+            [detailTableViewModel.modeledTableView setBackgroundView:nil];
+            UIView *view=[[UIView alloc]init];
+            [detailTableViewModel.modeledTableView setBackgroundView:view];
+            [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
+            
+            
+            
+            
+        }
+        
+        
     }
-
-
-
 }
 
 @end

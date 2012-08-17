@@ -71,7 +71,7 @@
 //    sleepHoursNightlyPropertyDef.autoValidate=NO;
     
     //define a property group
-    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"affect", @"appearance",  @"assessment", @"attention", @"attitude", @"improvement", @"interpersonal", @"behaviors", @"imagry",   @"plan",  @"rapport",  @"sensory", @"sleepHoursNightly",    @"sleepQuality",@"psychomotor", @"speechLanguage",  @"cultural",  @"additionalVariables",  nil ]];
+    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"affect", @"appearance",  @"assessment", @"attention", @"attitude", @"improvement", @"interpersonal", @"behaviors", @"imagry",   @"plan",  @"rapport",  @"sensory", @"sleepHoursNightly",    @"sleepQuality",@"psychomotor", @"speechLanguage",  @"cultural",  @"additionalVariables", @"concentration",@"eyeContact",@"insight",@"intellect",@"judgement", @"medical",@"memory",@"mood",@"perception",@"psychosocial",@"thoughtContent", nil ]];
     [self.clientPresentationDef.propertyGroups addGroup:notesGroup];
     
     SCPropertyGroup *orientationGroup = [SCPropertyGroup groupWithHeaderTitle:@"Client Orientation" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"orientedToBody", @"orientedToPerson",  @"orientedToPlace", @"orientedToTime",    nil ]];
@@ -1511,7 +1511,7 @@ if(section.headerTitle !=nil)
         UIColor *backgroundColor=nil;
         if(indexPath.row==NSNotFound|| tableModel.tag>0)
         {
-            backgroundColor=(UIColor *)(UIView *)[(UIWindow *)appDelegate.window viewWithTag:5].backgroundColor;
+            backgroundColor=(UIColor *)(UIView *)(UIWindow *)appDelegate.window.backgroundColor;
         }
         else {
             backgroundColor=[UIColor clearColor];

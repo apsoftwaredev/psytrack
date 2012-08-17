@@ -1726,7 +1726,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalTimesForMonthlyLog.m"
@@ -1951,11 +1951,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "620"
-         endingLineNumber = "620"
+         startingLineNumber = "633"
+         endingLineNumber = "633"
          landmarkName = "-flashCheckingLabel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1977,11 +1977,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "488"
-         endingLineNumber = "488"
+         startingLineNumber = "501"
+         endingLineNumber = "501"
          landmarkName = "-viewDidAppear:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1990,11 +1990,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1128"
-         endingLineNumber = "1128"
+         startingLineNumber = "1141"
+         endingLineNumber = "1141"
          landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2146,11 +2146,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugActionDateViewController.m"
-         timestampString = "364949655.100206"
+         timestampString = "366839949.955528"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "289"
-         endingLineNumber = "289"
+         startingLineNumber = "295"
+         endingLineNumber = "295"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2159,11 +2159,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugActionDateViewController.m"
-         timestampString = "364949656.641594"
+         timestampString = "366839949.955528"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "288"
-         endingLineNumber = "288"
+         startingLineNumber = "294"
+         endingLineNumber = "294"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2185,12 +2185,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugAppDocsViewController.m"
-         timestampString = "364958468.713915"
+         timestampString = "366839949.955528"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "262"
-         endingLineNumber = "262"
-         landmarkName = "-tableViewModel:customCellForRowAtIndexPath:"
+         startingLineNumber = "271"
+         endingLineNumber = "271"
+         landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2198,11 +2198,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "417"
-         endingLineNumber = "417"
+         startingLineNumber = "430"
+         endingLineNumber = "430"
          landmarkName = "-searchBar:textDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2211,11 +2211,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "431"
-         endingLineNumber = "431"
+         startingLineNumber = "444"
+         endingLineNumber = "444"
          landmarkName = "-searchBar:textDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2224,11 +2224,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "419"
-         endingLineNumber = "419"
+         startingLineNumber = "432"
+         endingLineNumber = "432"
          landmarkName = "-searchBar:textDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2237,11 +2237,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "402"
-         endingLineNumber = "402"
+         startingLineNumber = "415"
+         endingLineNumber = "415"
          landmarkName = "-searchBarCancelButtonClicked:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2302,11 +2302,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "428"
-         endingLineNumber = "428"
+         startingLineNumber = "441"
+         endingLineNumber = "441"
          landmarkName = "-searchBar:textDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2315,11 +2315,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "416"
-         endingLineNumber = "416"
+         startingLineNumber = "429"
+         endingLineNumber = "429"
          landmarkName = "-searchBar:textDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2328,11 +2328,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "567"
-         endingLineNumber = "567"
+         startingLineNumber = "580"
+         endingLineNumber = "580"
          landmarkName = "-myDoneButtonTapped"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2341,11 +2341,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "566"
-         endingLineNumber = "566"
+         startingLineNumber = "579"
+         endingLineNumber = "579"
          landmarkName = "-myDoneButtonTapped"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2354,11 +2354,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "392"
-         endingLineNumber = "392"
+         startingLineNumber = "405"
+         endingLineNumber = "405"
          landmarkName = "-viewButtonTapped"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2367,11 +2367,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "542"
-         endingLineNumber = "542"
+         startingLineNumber = "555"
+         endingLineNumber = "555"
          landmarkName = "-myDoneButtonTapped"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2380,11 +2380,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "544"
-         endingLineNumber = "544"
+         startingLineNumber = "557"
+         endingLineNumber = "557"
          landmarkName = "-myDoneButtonTapped"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2393,11 +2393,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "364988694.265463"
+         timestampString = "366840469.249103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "590"
-         endingLineNumber = "590"
+         startingLineNumber = "603"
+         endingLineNumber = "603"
          landmarkName = "-myDoneButtonTapped"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2581,6 +2581,32 @@
          startingLineNumber = "1049"
          endingLineNumber = "1049"
          landmarkName = "-firstDateInTrackOrExisting"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DrugViewController_iPhone.m"
+         timestampString = "366840469.249103"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1321"
+         endingLineNumber = "1321"
+         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientPresentations_Shared.m"
+         timestampString = "366840602.794264"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1507"
+         endingLineNumber = "1507"
+         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
