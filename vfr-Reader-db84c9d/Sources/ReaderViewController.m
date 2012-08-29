@@ -944,6 +944,32 @@
 
 #endif // end of READER_ENABLE_MAIL Option
 }
+- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar openInButton:(UIButton *)button
+{
+#ifdef DEBUGX
+	NSLog(@"%s", __FUNCTION__);
+#endif
+    
+#if (READER_ENABLE_OPEN_IN == TRUE) // Option
+    documentController =
+    [UIDocumentInteractionController interactionControllerWithURL:document.fileURL];
+    documentController.delegate = self;
+    
+    documentController.UTI = @"com.adobe.pdf";
+    
+ 
+    
+    UIButton *openInButton =[toolbar.subviews objectAtIndex:5];
+    CGRect openInFrame=openInButton.frame;;
+    
+    
+    
+    
+    [documentController presentOpenInMenuFromRect:openInFrame inView:self.view animated:YES];
+	    
+#endif // end of READER_ENABLE_MAIL Option
+}
+
 
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar markButton:(UIButton *)button
 {

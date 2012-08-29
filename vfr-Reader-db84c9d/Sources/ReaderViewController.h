@@ -46,7 +46,8 @@
 
 @interface ReaderViewController : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate,
 													ReaderMainToolbarDelegate, ReaderMainPagebarDelegate, ReaderContentViewDelegate,
-													ThumbsViewControllerDelegate>
+													ThumbsViewControllerDelegate
+                                                      ,UIDocumentInteractionControllerDelegate  >
 {
 @private // Instance variables
 
@@ -69,6 +70,8 @@
 	NSDate *lastHideTime;
 
 	BOOL isVisible;
+    
+    UIDocumentInteractionController *documentController;
 }
 
 @property (nonatomic, assign, readwrite) id <ReaderViewControllerDelegate> delegate;

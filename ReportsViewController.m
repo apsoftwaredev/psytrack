@@ -23,7 +23,7 @@
 @synthesize myTableView;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    NSInteger result = 1;
+    NSInteger result = 2;
     
     return result;
     
@@ -32,8 +32,30 @@
 - (NSInteger)tableView:(UITableView *)tableView 
  numberOfRowsInSection:(NSInteger)section{
     
-    NSInteger result = 1;
+    NSInteger result =0;
        
+    switch (section) {
+        case 0:
+            result=3;
+            
+            break;
+        case 1:
+            result=1;
+            
+            break;
+        
+        case 2:
+            result=1;
+            
+            break;
+            break;
+        default:
+            break;
+    }
+    
+    
+    
+    
     return result;
     
 }
@@ -69,10 +91,24 @@
             case 0:
             {
                 if (indexPath.row==0)result.textLabel.text=@"Monthly Practicum Log";
+                if (indexPath.row==1)result.textLabel.text=@"Total Hours Report";
+                if (indexPath.row==2)result.textLabel.text=@"Demographic Reports";
                 
             }
                 break;
+            case 1:
+            {
+               if (indexPath.row==0)result.textLabel.text=@"Continuing Education Report";
                 
+            }
+                break;
+           
+            case 2:
+            {
+                if (indexPath.row==0)result.textLabel.text=@"Client Report";
+                
+            }
+                break;
            
             default:
                 break;
@@ -219,7 +255,15 @@
         case 0:
             headerTitle=@"Training Reports";
             break;
-                    
+        
+        case 1:
+            headerTitle=@"Education Report";
+            break;
+
+        case 2:
+            headerTitle=@"Client Report";
+            break;
+
         default:
             break;
     }
@@ -232,6 +276,7 @@
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10, 3, self.tableView.bounds.size.width - 10, 18)];
     
+   
     
     
     label.text = headerTitle;

@@ -25,7 +25,7 @@
 
 @implementation WebViewDetailViewController
 
-@synthesize  popover;
+@synthesize  popover=popover_;
 
 @synthesize webView,toolbar, scrollView, printButton;
 
@@ -344,9 +344,6 @@
         
     }
 }
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
-    self.popover = nil;
-}
 
 - (IBAction)displayActionSheet:(id)sender{
     
@@ -355,7 +352,7 @@
         
         pdfActionSheet = [[UIActionSheet alloc] initWithTitle:@"Actions"
                                                                  delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
-                                                        otherButtonTitles:@"Email", @"Print", nil];
+                                                        otherButtonTitles:@"Email", @"Print",@"Open In", nil];
        
         pdfActionSheet.actionSheetStyle = UIActionSheetStyleDefault;
         pdfActionSheet.cancelButtonIndex=2;
@@ -375,10 +372,10 @@
     }  
     else
     {
-    
+        
        pdfActionSheet = [[UIActionSheet alloc] initWithTitle:@"Actions"
                                                                  delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
-                                                        otherButtonTitles:@"Email", nil];
+                                                        otherButtonTitles:@"Email",@"Open In", nil];
        
         pdfActionSheet.actionSheetStyle = UIActionSheetStyleDefault;
         pdfActionSheet.cancelButtonIndex=1;
@@ -396,7 +393,7 @@
 #pragma mark -
 #pragma mark - UIActionSheetDelegate
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
 	// the user clicked one of the OK/Cancel buttons
 	
@@ -432,6 +429,14 @@
                 [self displayComposerSheet];
                 
                 break;
+            case 2:
+            {
+                DLog(@"file name is  %@",fileName);
+                DLog(@"temp pdf is %@",tmpPDF);
+                [self openDocumentIn];
+            }
+                
+                
             default:
                 //DLog(@"cancel actionsheet tapped");
                 break;
@@ -447,7 +452,15 @@
     }
     
 }
-
+-(void)openDocumentIn {
+    
+    documentController =
+    [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:tmpPDF]];
+    documentController.delegate = self;
+   
+    documentController.UTI = @"com.adobe.pdf";
+    [documentController presentOpenInMenuFromBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
+}
 
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
 

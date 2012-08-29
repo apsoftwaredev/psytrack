@@ -22,12 +22,12 @@
 
 @class BigProgressView;
 @interface WebViewDetailViewController : UIViewController <UIPrintInteractionControllerDelegate ,/*UIAlertViewDelegate,		// for UIAlertView*/
-UIActionSheetDelegate, UIScrollViewDelegate, UIPopoverControllerDelegate, MFMailComposeViewControllerDelegate,UIWebViewDelegate> {
+UIActionSheetDelegate, UIScrollViewDelegate, UIPopoverControllerDelegate, MFMailComposeViewControllerDelegate,UIDocumentInteractionControllerDelegate, UIWebViewDelegate> {
     UIToolbar	  *toolbar;
     UIBarButtonItem *printButton;
 //    UIBarButtonItem *pickerButton;
   
-    UIPopoverController *popover;
+    UIPopoverController *popover_;
     
     UIWebView *webView;
    BigProgressView *prog;
@@ -45,16 +45,16 @@ UIActionSheetDelegate, UIScrollViewDelegate, UIPopoverControllerDelegate, MFMail
     UIPrintInteractionController *pic;
     UIActionSheet *pdfActionSheet;
     PTTAppDelegate *appDelegate;
-
+UIDocumentInteractionController *documentController;
 }
 
 
 
-@property (strong, readwrite) UIToolbar	      *toolbar;
-@property (strong, readwrite) UIBarButtonItem *printButton;
+@property (strong, nonatomic) UIToolbar	      *toolbar;
+@property (strong, nonatomic) UIBarButtonItem *printButton;
 
-@property (retain, strong) IBOutlet UIScrollView *scrollView;
-@property (retain, readwrite) UIPopoverController *popover;
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) UIPopoverController *popover;
  @property (nonatomic, strong) IBOutlet UILabel *message;
 - (void)printContent ;
 

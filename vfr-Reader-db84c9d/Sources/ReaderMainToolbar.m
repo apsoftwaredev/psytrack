@@ -168,7 +168,29 @@
 		}
 
 #endif // end of READER_ENABLE_MAIL Option
-
+#if (READER_ENABLE_OPEN_IN == TRUE) // Option
+        
+				rightButtonX -= (EMAIL_BUTTON_WIDTH + BUTTON_SPACE);
+                
+         
+         
+			
+        UIButton *emailButton = [UIButton buttonWithType:UIButtonTypeCustom];
+                
+				emailButton.frame = CGRectMake(rightButtonX, BUTTON_Y, EMAIL_BUTTON_WIDTH, BUTTON_HEIGHT);
+				[emailButton setImage:[UIImage imageNamed:@"ActionButton.png"] forState:UIControlStateNormal];
+				[emailButton addTarget:self action:@selector(openInButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+				[emailButton setBackgroundImage:buttonH forState:UIControlStateHighlighted];
+				[emailButton setBackgroundImage:buttonN forState:UIControlStateNormal];
+				emailButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+                
+				[self addSubview:emailButton]; titleWidth -= (EMAIL_BUTTON_WIDTH + BUTTON_SPACE);
+		
+#endif // end of READER_ENABLE_MAIL Option
+        
+        
+        
+        
 #if (READER_ENABLE_PRINT == TRUE) // Option
 NSLog(@"object.password is %@",object.password);
 		if (object.password == nil) // We can only print documents without passwords
@@ -349,7 +371,14 @@ NSLog(@"object.password is %@",object.password);
 
 	[delegate tappedInToolbar:self emailButton:button];
 }
-
+- (void)openInButtonTapped:(UIButton *)button
+{
+#ifdef DEBUGX
+	NSLog(@"%s", __FUNCTION__);
+#endif
+    
+	[delegate tappedInToolbar:self openInButton:button];
+}
 - (void)markButtonTapped:(UIButton *)button
 {
 #ifdef DEBUGX

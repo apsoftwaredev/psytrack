@@ -424,6 +424,8 @@
 }
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+    if (searchText.length>2) {
+   
     objectsModel=nil;
 
     NSFetchRequest *newRequewst=[[NSFetchRequest alloc]init];
@@ -441,7 +443,7 @@
         
         productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:newRequewst error:&productError];
     
-        DLog(@"product fetched objects are %@",productFetchedObjects);
+        
     }
        
     
@@ -491,7 +493,7 @@
     [objectsModel.modeledTableView reloadData];
 
 
-
+    }
 }
 
 

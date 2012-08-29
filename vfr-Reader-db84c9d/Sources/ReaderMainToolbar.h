@@ -39,7 +39,7 @@
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar printButton:(UIButton *)button;
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar emailButton:(UIButton *)button;
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar markButton:(UIButton *)button;
-
+- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar openInButton:(UIButton *)button;
 @end
 
 @interface ReaderMainToolbar : UIXToolbarView
