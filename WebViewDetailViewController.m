@@ -459,7 +459,14 @@
     documentController.delegate = self;
    
     documentController.UTI = @"com.adobe.pdf";
-    [documentController presentOpenInMenuFromBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
+    if ([SCUtilities is_iPad]) {
+        [documentController presentOpenInMenuFromBarButtonItem:self.navigationItem.rightBarButtonItem animated:YES];
+    }
+    else{
+        UIView *toolbarSubview=[self.toolbar.subviews objectAtIndex:0];
+        [documentController presentOpenInMenuFromRect:toolbarSubview.frame inView:self.view animated:YES];
+    }
+    
 }
 
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{

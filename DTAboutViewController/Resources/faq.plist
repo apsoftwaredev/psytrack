@@ -15,8 +15,16 @@ I try my best to answer every support question.
 For support issues, email response time varies. I do try my best to answer as promptly as possible. If I don’t respond within a week, feel free to remind us with another email. I will try my best and I truly do care. </string>
 	</dict>
 	<dict>
+		<key>How do I save a report to a Dropbox folder?</key>
+		<string>Install dropbox on your device.  Open the report in the pdf viewer.  Tap the action button (with the arrow) in the toolbar.  Scroll down to dropbox and select it (it may not be visible until you scroll down the list with your finger).  A Dropbox dialoge box will appear that allows you to specify the file name and folder where you want to import the file.</string>
+	</dict>
+	<dict>
 		<key>Any more Frequently Asked Questions?</key>
 		<string>I will add more frequently asked questions as they come in.  I you have a question that is frequently asked, I will add it here.  So please send me your questions.</string>
+	</dict>
+	<dict>
+		<key>How do I put an electronic signature on a practicum log report?</key>
+		<string>Install Adobe Reader.  Open the pef report in the viewer and tap the action button at the top (with the arrow on it) and select adobe reader application.  Adobe reader allows you to write your signature on a pdf with your finger.  It also allows you to add text to a pdf.  You can then expot it from adobe reader to a dropbox folder with the signatures on it.  You can also open the file on your computer with Adobe Acrobat and sign and certify the document with a digital id.  </string>
 	</dict>
 	<dict>
 		<key>How secure is the data? What if I loose my phone?</key>
