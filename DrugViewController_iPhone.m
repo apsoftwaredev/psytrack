@@ -393,6 +393,11 @@
     
     navigationItem.title=[NSString stringWithFormat:@"Drugs %0.1f MB", localDbBytes/1048576];
     
+    
+    UIImage *menueBarImage=[UIImage imageNamed:@"ipad-menubar-left.png"];
+    [self.searchBar setBackgroundImage:menueBarImage];
+    [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+    
 
     
     

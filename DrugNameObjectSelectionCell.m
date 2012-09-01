@@ -112,9 +112,8 @@
     
     if (drugProduct.drugName &&drugProduct.drugName.length)
     [drugsViewContoller searchBar:drugsViewContoller.searchBar textDidChange:drugProduct.drugName];
-    
-    
-    //    if ([drugsViewContoller.tableModel sectionCount]>0) {
+   
+      //    if ([drugsViewContoller.tableModel sectionCount]>0) {
 //        SCTableViewSection *section=(SCTableViewSection *)[drugsViewContoller.tableModel sectionAtIndex:0];
 //        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
 //            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;

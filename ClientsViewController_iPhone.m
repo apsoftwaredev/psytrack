@@ -268,6 +268,14 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     
     self.tableViewModel=objectsModel;
+    
+    
+    UIImage *menueBarImage=[UIImage imageNamed:@"ipad-menubar-left.png"];
+    [self.searchBar setBackgroundImage:menueBarImage];
+    [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+    
+
+    
 }
 -(void)viewDidUnload{
     [super viewDidUnload];

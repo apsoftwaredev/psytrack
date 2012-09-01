@@ -44,5 +44,9 @@ Try using an ID code or initials instead client names and store the names with t
 		<key>How do I back up the data?</key>
 		<string>The database is backed up when you back up your device software in iTunes or iCloud.  You can set up iCloud to automatically create secure backups of your device software.  iCloud is nice because if you somehow loose your device or have a fire and all your hardware is destroyed, you can pick up where you left off with the last back up.</string>
 	</dict>
+	<dict>
+		<key>What are the relevant HIPPA rules regarding client information?</key>
+		<string>It is very important that you review the The Health Insurance Portability and Accountability Act of 1996 (HIPAA) Privacy and Security Rules before entering any client information into this app.  This app is intended to be used for statistical tracking purposes, not client record keeping.  The information you enter related to clients should be completely de-identified, which includes id numbers that can be traced to clients.  It is also recommended that you use the lock screen and lock screen that comes with your device.http://www.hhs.gov/ocr/privacy/hipaa/understanding/summary/index.html“De-Identified Health Information. There are no restrictions on the use or disclosure of de-identified health information.14 De-identified health information neither identifies nor provides a reasonable basis to identify an individual. There are two ways to de-identify information; either: (1) a formal determination by a qualified statistician; or (2) the removal of specified identifiers of the individual and of the individual’s relatives, household members, and employers is required, and is adequate only if the covered entity has no actual knowledge that the remaining information could be used to identify the individual.15 “</string>
+	</dict>
 </array>
 </plist>

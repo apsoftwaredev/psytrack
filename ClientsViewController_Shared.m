@@ -50,7 +50,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	self.clientDef = [SCEntityDefinition definitionWithEntityName:@"ClientEntity" 
                                                       managedObjectContext:managedObjectContext 
                                                              propertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth", @"keyString",
-                                                                                @"initials",  @"demographicInfo", @"dateAdded",@"currentClient",@"phoneNumbers", @"logs", @"medicationHistory",@"diagnoses", @"vitals",  
+                                                                                @"initials",  @"demographicInfo", @"dateAdded",@"currentClient"/*,@"phoneNumbers"*/, @"logs", @"medicationHistory",@"diagnoses", @"vitals",
                                                                 @"notes",@"groups",nil]];
 	
     
@@ -133,7 +133,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     clientNotesPropertyDef.objectBindings=encryClientNotesTVCellKeyBindingsDic;
     
     clientNotesPropertyDef.autoValidate=NO;
-
+/*
     //Create a class definition for the phone NumberEntity
     SCEntityDefinition *phoneDef = [SCEntityDefinition definitionWithEntityName:@"PhoneEntity" 
                                                         managedObjectContext:managedObjectContext
@@ -190,7 +190,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 //    // add the phone property group
 //    [phoneDef.propertyGroups addGroup:phoneGroup];
     
-   
+  */ 
     
     //Create a class definition for the logsEntity
     SCEntityDefinition *logDef = [SCEntityDefinition definitionWithEntityName:@"LogEntity" 
@@ -757,7 +757,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     [self.clientDef.propertyGroups addGroup:clientInfoGroup];
     [self.clientDef.propertyGroups addGroup:groupsGroup];
 //    self.clientDef.orderAttributeName=@"order";
-    
+   
 
     return self;
 
