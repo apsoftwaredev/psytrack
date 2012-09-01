@@ -8,6 +8,11 @@
 
 #import <SensibleTableView/SensibleTableView.h>
 
-@interface ExpertTestemonyVC : SCTableViewController
-
+@interface ExpertTestemonyVC : SCTableViewController <SCTableViewModelDelegate> {
+    
+    SCArrayOfObjectsModel *objectsModel;
+    
+    NSDateFormatter *dateFormatter;
+    
+}
 @end

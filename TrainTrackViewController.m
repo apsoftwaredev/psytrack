@@ -37,7 +37,7 @@
 #import "CoursesTakenViewController.h"
 #import "ConferencesAttendedVC.h"
 #import "TeachingExperienceVC.h"
-
+#import "ExpertTestemonyVC.h"
 
 //#import "UICasualAlert.h"
 //#import <MessageUI/MessageUI.h>
@@ -108,7 +108,7 @@
                 break;
             }
             case 7:{
-                result = 5;
+                result = 6;
                 break;
             }
            
@@ -232,8 +232,9 @@
                      if (indexPath.row==1)result.textLabel.text=@"Presentations";
                    
                     if (indexPath.row==2)result.textLabel.text=@"Expert Testemony";
-                    if (indexPath.row==3)result.textLabel.text=@"Community Service";
-                    if (indexPath.row==4)result.textLabel.text=@"Other Involvement";
+                    if (indexPath.row==3)result.textLabel.text=@"Media Appearance";
+                    if (indexPath.row==4)result.textLabel.text=@"Community Service";
+                    if (indexPath.row==5)result.textLabel.text=@"Other Involvement";
                     
                     
                 }
@@ -508,7 +509,16 @@
                     break;
             }  
 
-            
+            if (indexPath.row==2){
+                
+                
+                
+                ExpertTestemonyVC *expertTestemonyVC = [[ExpertTestemonyVC alloc] initWithNibName:@"ExpertTestemonyVC" bundle:[NSBundle mainBundle]];
+                
+                [self.navigationController pushViewController:expertTestemonyVC animated:YES];
+                break;
+            }
+
             
             
             

@@ -7,34 +7,33 @@
 //
 
 #import "MediaAppearanceVC.h"
-
+#import "PTTAppDelegate.h"
 @interface MediaAppearanceVC ()
 
 @end
 
 @implementation MediaAppearanceVC
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    dateFormatter = [[NSDateFormatter alloc] init];
+    
+    //set the date format
+    [dateFormatter setDateFormat:@"M/d/yyyy"];
+    [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+    
+    
+    
+    
+    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    
+    SCEntityDefinition *expertTestemonyDef=[SCEntityDefinition definitionWithEntityName:@"MediaAppearanceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"showName;audience;dateInterviewed;host;hours;network;notes; showtimes;topics"];
+    
+
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

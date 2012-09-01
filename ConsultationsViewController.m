@@ -798,9 +798,7 @@
             if ([cell isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 return YES;
             }
-            DLog(@"cell tag is %i",cell.tag);
-           DLog(@"cell class is %@",cell.class);
-            DLog(@"other cell class is %@",otherCell.class);
+           
             if ([cell isKindOfClass:[SCObjectSelectionCell class]]) {
                 SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
                 if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {

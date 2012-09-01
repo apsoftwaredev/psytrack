@@ -214,6 +214,10 @@
 		B7F877BB14C9A38900F00C0D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877B914C9A38900F00C0D /* EventKit.framework */; };
 		B7F877BC14C9A38900F00C0D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877BA14C9A38900F00C0D /* EventKitUI.framework */; };
 		E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */; };
+		E71B1EB915F297F1009C5E6B /* ExpertTestemonyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E71B1EB715F297F1009C5E6B /* ExpertTestemonyVC.m */; };
+		E71B1EBA15F297F1009C5E6B /* ExpertTestemonyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71B1EB815F297F1009C5E6B /* ExpertTestemonyVC.xib */; };
+		E71B1EC615F2CD57009C5E6B /* MediaAppearanceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E71B1EC415F2CD57009C5E6B /* MediaAppearanceVC.m */; };
+		E71B1EC715F2CD57009C5E6B /* MediaAppearanceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71B1EC515F2CD57009C5E6B /* MediaAppearanceVC.xib */; };
 		E71E26AD1569C3920004A793 /* BreakTimeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E71E26AC1569C3920004A793 /* BreakTimeEntity.m */; };
 		E71E26C7156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m in Sources */ = {isa = PBXBuildFile; fileRef = E71E26C6156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.m */; };
 		E71EAD7415D7F83500204389 /* MonthlyPracticumLogTopCellWithUndefined2.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71EAD7315D7F83500204389 /* MonthlyPracticumLogTopCellWithUndefined2.xib */; };
@@ -769,6 +773,12 @@
 		B7F877BA14C9A38900F00C0D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		E70B9EFD15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSourcesSCObjectSelectionCell.h; sourceTree = "<group>"; };
 		E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSourcesSCObjectSelectionCell.m; sourceTree = "<group>"; };
+		E71B1EB615F297F1009C5E6B /* ExpertTestemonyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpertTestemonyVC.h; sourceTree = "<group>"; };
+		E71B1EB715F297F1009C5E6B /* ExpertTestemonyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpertTestemonyVC.m; sourceTree = "<group>"; };
+		E71B1EB815F297F1009C5E6B /* ExpertTestemonyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpertTestemonyVC.xib; sourceTree = "<group>"; };
+		E71B1EC315F2CD57009C5E6B /* MediaAppearanceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaAppearanceVC.h; sourceTree = "<group>"; };
+		E71B1EC415F2CD57009C5E6B /* MediaAppearanceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaAppearanceVC.m; sourceTree = "<group>"; };
+		E71B1EC515F2CD57009C5E6B /* MediaAppearanceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MediaAppearanceVC.xib; sourceTree = "<group>"; };
 		E71E26AB1569C3920004A793 /* BreakTimeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakTimeEntity.h; sourceTree = "<group>"; };
 		E71E26AC1569C3920004A793 /* BreakTimeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakTimeEntity.m; sourceTree = "<group>"; };
 		E71E26C5156AA1A00004A793 /* SCArrayOfObjectsModel+CoreData+SelectionSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SCArrayOfObjectsModel+CoreData+SelectionSection.h"; sourceTree = "<group>"; };
@@ -2049,6 +2059,12 @@
 				E71EAD7E15D88E5100204389 /* TeachingExperienceVC.h */,
 				E71EAD7F15D88E5100204389 /* TeachingExperienceVC.m */,
 				E71EAD8015D88E5100204389 /* TeachingExperienceVC.xib */,
+				E71B1EB615F297F1009C5E6B /* ExpertTestemonyVC.h */,
+				E71B1EB715F297F1009C5E6B /* ExpertTestemonyVC.m */,
+				E71B1EB815F297F1009C5E6B /* ExpertTestemonyVC.xib */,
+				E71B1EC315F2CD57009C5E6B /* MediaAppearanceVC.h */,
+				E71B1EC415F2CD57009C5E6B /* MediaAppearanceVC.m */,
+				E71B1EC515F2CD57009C5E6B /* MediaAppearanceVC.xib */,
 			);
 			name = Teaching;
 			sourceTree = "<group>";
@@ -2481,6 +2497,8 @@
 				E71EAD7A15D86C7E00204389 /* ConferencesAttendedVC.xib in Resources */,
 				E71EAD8215D88E5100204389 /* TeachingExperienceVC.xib in Resources */,
 				E78C96D115EE8CB100EDB0FF /* ActionButton.png in Resources */,
+				E71B1EBA15F297F1009C5E6B /* ExpertTestemonyVC.xib in Resources */,
+				E71B1EC715F2CD57009C5E6B /* MediaAppearanceVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2695,6 +2713,8 @@
 				E71EAD7915D86C7E00204389 /* ConferencesAttendedVC.m in Sources */,
 				E71EAD7D15D875AA00204389 /* ConferenceEntity.m in Sources */,
 				E71EAD8115D88E5100204389 /* TeachingExperienceVC.m in Sources */,
+				E71B1EB915F297F1009C5E6B /* ExpertTestemonyVC.m in Sources */,
+				E71B1EC615F2CD57009C5E6B /* MediaAppearanceVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
