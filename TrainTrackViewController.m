@@ -38,6 +38,7 @@
 #import "ConferencesAttendedVC.h"
 #import "TeachingExperienceVC.h"
 #import "ExpertTestemonyVC.h"
+#import "MediaAppearanceVC.h"
 
 //#import "UICasualAlert.h"
 //#import <MessageUI/MessageUI.h>
@@ -519,7 +520,15 @@
                 break;
             }
 
-            
+            if (indexPath.row==3){
+                
+                
+                
+                MediaAppearanceVC *mediaAppearanceVC = [[MediaAppearanceVC alloc] initWithNibName:@"MediaAppearanceVC" bundle:[NSBundle mainBundle]];
+                
+                [self.navigationController pushViewController:mediaAppearanceVC animated:YES];
+                break;
+            }
             
             
             
