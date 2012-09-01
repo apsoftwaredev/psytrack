@@ -43,7 +43,7 @@
     organizationDef.keyPropertyName=@"name";
     organizationDef.titlePropertyName=@"name";
     
-    SCEntityDefinition *courtApperancesDef=[SCEntityDefinition definitionWithEntityName:@"ExpertTestemonyAppearnceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"dateAppeared;notes"];
+    SCEntityDefinition *courtApperancesDef=[SCEntityDefinition definitionWithEntityName:@"ExpertTestemonyAppearanceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"dateAppeared;notes"];
     
     //Create a class definition for Publication entity
 	SCEntityDefinition *publicationDef = [SCEntityDefinition definitionWithEntityName:@"PublicationEntity"
@@ -387,7 +387,7 @@
          
             
         }
-        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"ExpertTestemonyAppearnceEntity"])
+        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"ExpertTestemonyAppearanceEntity"])
         {
             
             NSDate *dateAppeared=[cellManagedObject valueForKey:@"dateAppeared"];
@@ -412,8 +412,7 @@
         }
 
         
-       DLog(@"objects section bound object is %@",cellManagedObject.entity.name);
-        
+              
     }
     
 }
