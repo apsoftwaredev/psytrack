@@ -34,7 +34,7 @@
     mediaAppearanceDef.orderAttributeName=@"order";
     SCPropertyDefinition *showNamePropertyDefinition=[mediaAppearanceDef propertyDefinitionWithName:@"showName"];
     showNamePropertyDefinition.type=SCPropertyTypeTextView;
-    
+    showNamePropertyDefinition.title=@"Show/Publication";
     
     SCPropertyDefinition *audiencePropertyDefinition=[mediaAppearanceDef propertyDefinitionWithName:@"audience"];
     audiencePropertyDefinition.type=SCPropertyTypeTextView;
