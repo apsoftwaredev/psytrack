@@ -8,6 +8,9 @@
 
 #import "CommunityServiceVC.h"
 #import "PTTAppDelegate.h"
+#import "EncryptedSCTextViewCell.h"
+#import "LogEntity.h"
+
 @interface CommunityServiceVC ()
 
 @end
@@ -29,11 +32,66 @@
     
     NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
     
-    SCEntityDefinition *communityServiceDef=[SCEntityDefinition definitionWithEntityName:@"MediaAppearanceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"dateEnded;dateStarted;hours;notes;order"];
+    SCEntityDefinition *communityServiceDef=[SCEntityDefinition definitionWithEntityName:@"CommunityServiceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"projectName;dateStarted;dateEnded;hours;notes"];
     
     SCEntityDefinition *organizationDef=[SCEntityDefinition definitionWithEntityName:@"OrganizationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"name;notes;size"];
     
+    SCEntityDefinition *logDef=[SCEntityDefinition definitionWithEntityName:@"LogEntity" managedObjectContext:managedObjectContext propertyNamesString:@"dateTime;notes"];
     
+    
+    
+    SCPropertyDefinition *dateStartedPropertyDef=[communityServiceDef propertyDefinitionWithName:@"dateStarted"];
+    dateStartedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                        datePickerMode:UIDatePickerModeDate
+                                                         displayDatePickerInDetailView:NO];
+    
+    SCPropertyDefinition *dateEndedPropertyDef=[communityServiceDef propertyDefinitionWithName:@"dateEnded"];
+    dateEndedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                       datePickerMode:UIDatePickerModeDate
+                                                        displayDatePickerInDetailView:NO];
+    
+    SCPropertyDefinition *communityServiceNotesPropertyDef=[communityServiceDef propertyDefinitionWithName:@"notes"];
+    
+    communityServiceNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *projectNamePropertyDef=[communityServiceDef propertyDefinitionWithName:@"projectName"];
+    
+    projectNamePropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *logsPropertyDef=[communityServiceDef propertyDefinitionWithName:@"logs"];
+    
+    logsPropertyDef.type=SCPropertyTypeArrayOfObjects;
+    
+    logsPropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:logDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add Logs"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];
+    
+    
+    
+    //do some customizing of the log notes, change it to "Number" to make it shorter
+    SCPropertyDefinition *logNotesPropertyDef = [logDef propertyDefinitionWithName:@"notes"];
+    
+    logNotesPropertyDef.title = @"Notes";
+    
+    
+    logNotesPropertyDef.type=SCPropertyTypeCustom;
+    logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    
+    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    
+    
+    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
+    //    phoneNumberPropertyDef.title=@"Phone Number";
+    logNotesPropertyDef.autoValidate=NO;
+    
+    NSDateFormatter *dateTimeFormatter=[[NSDateFormatter alloc]init];
+    [dateTimeFormatter setDateFormat:@"ccc M/d/yy h:mm a"];
+    [dateTimeFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+    SCPropertyDefinition *logDatePropertyDef=[logDef propertyDefinitionWithName:@"dateTime"];
+    logDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateTimeFormatter
+                                                                   datePickerMode:UIDatePickerModeDateAndTime
+                                                    displayDatePickerInDetailView:YES];
+    
+    
+   
     
     
     organizationDef.keyPropertyName=@"name";
@@ -136,6 +194,129 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
+}
+
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    
+    if ([SCUtilities is_iPad]) {
+        //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        
+        UIColor *backgroundColor=nil;
+        
+        if(indexPath.row==NSNotFound|| tableModel.tag>0)
+        {
+            //            backgroundImage=[UIImage imageNamed:@"iPad-background-blue.png"];
+            backgroundColor=(UIColor *)(UIWindow *)appDelegate.window.backgroundColor;
+            
+            
+            
+        }
+        else {
+            
+            
+            
+            backgroundColor=[UIColor clearColor];
+            
+            
+        }
+        
+        if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
+            
+            [detailTableViewModel.modeledTableView setBackgroundView:nil];
+            UIView *view=[[UIView alloc]init];
+            [detailTableViewModel.modeledTableView setBackgroundView:view];
+            [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
+            
+            
+            
+            
+        }
+        
+        
+    }
+}
+-(void)tableViewModel:(SCTableViewModel *)tableModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (tableModel.tag==0){
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"CommunityServiceEntity"])
+        {
+            
+            NSString *projecteNameStr=[cellManagedObject valueForKey:@"projectName"];
+            NSString *notesStr=[cellManagedObject valueForKey:@"notes"];
+            NSDate *dateStarted=[cellManagedObject valueForKey:@"dateStarted"];
+            NSString *cellText=nil;
+            
+            if (dateStarted) {
+                cellText=[dateFormatter stringFromDate:dateStarted];
+            }
+            
+            if (projecteNameStr &&projecteNameStr.length) {
+                
+                
+                if (cellText&&cellText.length) {
+                    cellText=[cellText stringByAppendingFormat:@": %@",projecteNameStr];
+                }
+                else
+                {
+                
+                    cellText=projecteNameStr;
+                }
+                
+                
+            }
+            
+            if (notesStr &&notesStr.length) {
+                
+                
+                cellText=cellText?[cellText stringByAppendingFormat:@"; %@",notesStr]:notesStr;
+                
+            }
+            
+            cell.textLabel.text=cellText;
+            
+            
+            
+            
+            
+        }
+    }
+    else if (tableModel.tag==2&&tableModel.sectionCount) {
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        
+        
+        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"LogEntity"])
+        {
+            
+            LogEntity *logObject=(LogEntity *)cellManagedObject;
+            
+            if (logObject.dateTime) {
+                NSString *displayString=[dateFormatter stringFromDate:logObject.dateTime];
+                
+                NSString *notesString=logObject.notes;
+                if(notesString &&notesString.length){
+                    
+                    
+                    displayString=[displayString stringByAppendingFormat:@": %@",notesString];
+                    
+                }
+                cell.textLabel.text=displayString;
+                
+            }
+            
+            
+            
+        }
+               
+        
+        
+    }
+    
 }
 
 @end

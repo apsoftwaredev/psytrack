@@ -39,7 +39,7 @@
 #import "TeachingExperienceVC.h"
 #import "ExpertTestemonyVC.h"
 #import "MediaAppearanceVC.h"
-
+#import "CommunityServiceVC.h"
 //#import "UICasualAlert.h"
 //#import <MessageUI/MessageUI.h>
 //
@@ -530,7 +530,15 @@
                 break;
             }
             
-            
+            if (indexPath.row==4){
+                
+                
+                
+                CommunityServiceVC *communitySerivceVC = [[CommunityServiceVC alloc] initWithNibName:@"CommunityServiceVC" bundle:[NSBundle mainBundle]];
+                
+                [self.navigationController pushViewController:communitySerivceVC animated:YES];
+                break;
+            }
             
             
             
