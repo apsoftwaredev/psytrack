@@ -8,6 +8,13 @@
 
 #import <SensibleTableView/SensibleTableView.h>
 
-@interface CommunityServiceVC : SCTableViewController
+@interface CommunityServiceVC : SCTableViewController<SCTableViewModelDelegate> {
+    
+    SCArrayOfObjectsModel *objectsModel;
+    
+    NSDateFormatter *dateFormatter;
+    
+}
+
 
 @end

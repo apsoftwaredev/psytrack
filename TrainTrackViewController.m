@@ -233,7 +233,7 @@
                      if (indexPath.row==1)result.textLabel.text=@"Presentations";
                    
                     if (indexPath.row==2)result.textLabel.text=@"Expert Testemony";
-                    if (indexPath.row==3)result.textLabel.text=@"Media Appearance";
+                    if (indexPath.row==3)result.textLabel.text=@"Media Appearances";
                     if (indexPath.row==4)result.textLabel.text=@"Community Service";
                     if (indexPath.row==5)result.textLabel.text=@"Other Involvement";
                     

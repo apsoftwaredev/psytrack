@@ -106,7 +106,7 @@
     
     
     
-	objectsModel.searchPropertyName = @"dateOfService";
+
     
     objectsModel.allowMovingItems=TRUE;
     

@@ -374,6 +374,8 @@
 		E7CCB8E7159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8E9159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib */; };
 		E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */; };
 		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
+		E7DEECDD15F2EEC6001D5B05 /* CommunityServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DEECDB15F2EEC6001D5B05 /* CommunityServiceVC.m */; };
+		E7DEECDE15F2EEC6001D5B05 /* CommunityServiceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7DEECDC15F2EEC6001D5B05 /* CommunityServiceVC.xib */; };
 		E7E1425915C1F34B00D0F505 /* PresentationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */; };
 		E7E1425A15C1F34B00D0F505 /* PresentationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */; };
 		E7E1A63D152E873500C227E8 /* TimeTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */; };
@@ -1010,6 +1012,9 @@
 		E7CCB8E8159CEE3200A12908 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EncryptionTokenCell_iPhone.xib; sourceTree = "<group>"; };
 		E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursOverviewCell.xib; sourceTree = "<group>"; };
 		E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController_iPad.xib; sourceTree = "<group>"; };
+		E7DEECDA15F2EEC6001D5B05 /* CommunityServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityServiceVC.h; sourceTree = "<group>"; };
+		E7DEECDB15F2EEC6001D5B05 /* CommunityServiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityServiceVC.m; sourceTree = "<group>"; };
+		E7DEECDC15F2EEC6001D5B05 /* CommunityServiceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommunityServiceVC.xib; sourceTree = "<group>"; };
 		E7E1425615C1F34B00D0F505 /* PresentationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationsViewController.h; sourceTree = "<group>"; };
 		E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentationsViewController.m; sourceTree = "<group>"; };
 		E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresentationsViewController.xib; sourceTree = "<group>"; };
@@ -2065,6 +2070,9 @@
 				E71B1EC315F2CD57009C5E6B /* MediaAppearanceVC.h */,
 				E71B1EC415F2CD57009C5E6B /* MediaAppearanceVC.m */,
 				E71B1EC515F2CD57009C5E6B /* MediaAppearanceVC.xib */,
+				E7DEECDA15F2EEC6001D5B05 /* CommunityServiceVC.h */,
+				E7DEECDB15F2EEC6001D5B05 /* CommunityServiceVC.m */,
+				E7DEECDC15F2EEC6001D5B05 /* CommunityServiceVC.xib */,
 			);
 			name = Teaching;
 			sourceTree = "<group>";
@@ -2499,6 +2507,7 @@
 				E78C96D115EE8CB100EDB0FF /* ActionButton.png in Resources */,
 				E71B1EBA15F297F1009C5E6B /* ExpertTestemonyVC.xib in Resources */,
 				E71B1EC715F2CD57009C5E6B /* MediaAppearanceVC.xib in Resources */,
+				E7DEECDE15F2EEC6001D5B05 /* CommunityServiceVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2715,6 +2724,7 @@
 				E71EAD8115D88E5100204389 /* TeachingExperienceVC.m in Sources */,
 				E71B1EB915F297F1009C5E6B /* ExpertTestemonyVC.m in Sources */,
 				E71B1EC615F2CD57009C5E6B /* MediaAppearanceVC.m in Sources */,
+				E7DEECDD15F2EEC6001D5B05 /* CommunityServiceVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

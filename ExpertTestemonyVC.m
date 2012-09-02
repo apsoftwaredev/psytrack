@@ -45,6 +45,30 @@
     
     SCEntityDefinition *courtApperancesDef=[SCEntityDefinition definitionWithEntityName:@"ExpertTestemonyAppearanceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"dateAppeared;notes"];
     
+    
+    
+    
+    
+    SCPropertyDefinition *organizationPropertyDef=[expertTestemonyDef propertyDefinitionWithName:@"organization"];
+    organizationPropertyDef.type=SCPropertyTypeObjectSelection;
+    organizationPropertyDef.autoValidate=NO;
+    SCSelectionAttributes *organizationSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:organizationDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    
+    organizationSelectionAttribs.allowAddingItems=YES;
+    organizationSelectionAttribs.allowDeletingItems=YES;
+    organizationSelectionAttribs.allowEditingItems=YES;
+    organizationSelectionAttribs.allowMovingItems=NO;
+    organizationSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Add new organization"];
+    organizationSelectionAttribs.placeholderuiElement=[SCTableViewCell cellWithText:@"Tap edit to add organizations"];
+    organizationPropertyDef.attributes=organizationSelectionAttribs;
+    
+    SCPropertyDefinition *organizationNamePropertyDef=[organizationDef propertyDefinitionWithName:@"name"];
+    organizationNamePropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *organizationNotesPropertyDef=[organizationDef propertyDefinitionWithName:@"notes"];
+    organizationNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+
     //Create a class definition for Publication entity
 	SCEntityDefinition *publicationDef = [SCEntityDefinition definitionWithEntityName:@"PublicationEntity"
                                                                  managedObjectContext:managedObjectContext
