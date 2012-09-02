@@ -376,6 +376,8 @@
 		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
 		E7DEECDD15F2EEC6001D5B05 /* CommunityServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DEECDB15F2EEC6001D5B05 /* CommunityServiceVC.m */; };
 		E7DEECDE15F2EEC6001D5B05 /* CommunityServiceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7DEECDC15F2EEC6001D5B05 /* CommunityServiceVC.xib */; };
+		E7DEECE215F2FAE1001D5B05 /* OtherActivityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DEECE015F2FAE1001D5B05 /* OtherActivityVC.m */; };
+		E7DEECE315F2FAE1001D5B05 /* OtherActivityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7DEECE115F2FAE1001D5B05 /* OtherActivityVC.xib */; };
 		E7E1425915C1F34B00D0F505 /* PresentationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */; };
 		E7E1425A15C1F34B00D0F505 /* PresentationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */; };
 		E7E1A63D152E873500C227E8 /* TimeTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */; };
@@ -1015,6 +1017,9 @@
 		E7DEECDA15F2EEC6001D5B05 /* CommunityServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityServiceVC.h; sourceTree = "<group>"; };
 		E7DEECDB15F2EEC6001D5B05 /* CommunityServiceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityServiceVC.m; sourceTree = "<group>"; };
 		E7DEECDC15F2EEC6001D5B05 /* CommunityServiceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommunityServiceVC.xib; sourceTree = "<group>"; };
+		E7DEECDF15F2FAE0001D5B05 /* OtherActivityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherActivityVC.h; sourceTree = "<group>"; };
+		E7DEECE015F2FAE1001D5B05 /* OtherActivityVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherActivityVC.m; sourceTree = "<group>"; };
+		E7DEECE115F2FAE1001D5B05 /* OtherActivityVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherActivityVC.xib; sourceTree = "<group>"; };
 		E7E1425615C1F34B00D0F505 /* PresentationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationsViewController.h; sourceTree = "<group>"; };
 		E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentationsViewController.m; sourceTree = "<group>"; };
 		E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresentationsViewController.xib; sourceTree = "<group>"; };
@@ -2073,6 +2078,9 @@
 				E7DEECDA15F2EEC6001D5B05 /* CommunityServiceVC.h */,
 				E7DEECDB15F2EEC6001D5B05 /* CommunityServiceVC.m */,
 				E7DEECDC15F2EEC6001D5B05 /* CommunityServiceVC.xib */,
+				E7DEECDF15F2FAE0001D5B05 /* OtherActivityVC.h */,
+				E7DEECE015F2FAE1001D5B05 /* OtherActivityVC.m */,
+				E7DEECE115F2FAE1001D5B05 /* OtherActivityVC.xib */,
 			);
 			name = Teaching;
 			sourceTree = "<group>";
@@ -2508,6 +2516,7 @@
 				E71B1EBA15F297F1009C5E6B /* ExpertTestemonyVC.xib in Resources */,
 				E71B1EC715F2CD57009C5E6B /* MediaAppearanceVC.xib in Resources */,
 				E7DEECDE15F2EEC6001D5B05 /* CommunityServiceVC.xib in Resources */,
+				E7DEECE315F2FAE1001D5B05 /* OtherActivityVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2725,6 +2734,7 @@
 				E71B1EB915F297F1009C5E6B /* ExpertTestemonyVC.m in Sources */,
 				E71B1EC615F2CD57009C5E6B /* MediaAppearanceVC.m in Sources */,
 				E7DEECDD15F2EEC6001D5B05 /* CommunityServiceVC.m in Sources */,
+				E7DEECE215F2FAE1001D5B05 /* OtherActivityVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

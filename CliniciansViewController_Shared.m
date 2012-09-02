@@ -1179,6 +1179,13 @@
     
     
     firstNameDataProperty.autoValidate=FALSE;
+        
+        firstNameDataProperty.cellActions.valueChanged = ^(SCTableViewCell *cell, NSIndexPath *indexPath)
+        {
+            [cell commitChanges];
+            [cell.ownerTableViewModel.masterModel reloadBoundValues];
+            [cell.ownerTableViewModel.masterModel.modeledTableView reloadData];
+        };
     [self.clinicianDef insertPropertyDefinition:firstNameDataProperty atIndex:1];
     
     
@@ -1210,7 +1217,12 @@
                                                                                  uiElementNibName:textFieldAndLableNibName 
                                                                                    objectBindings:lastNameDataBindings];
 	
-    
+        lastNameDataProperty.cellActions.valueChanged = ^(SCTableViewCell *cell, NSIndexPath *indexPath)
+        {
+            [cell commitChanges];
+            [cell.ownerTableViewModel.masterModel reloadBoundValues];
+            [cell.ownerTableViewModel.masterModel.modeledTableView reloadData];
+        };
     
     lastNameDataProperty.autoValidate=FALSE;
     
@@ -2593,12 +2605,6 @@
 }
 
 
-//-(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    
-//    
-//    
-//}
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     SCTableViewCell *cell = nil;

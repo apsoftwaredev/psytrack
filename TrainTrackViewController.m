@@ -40,6 +40,7 @@
 #import "ExpertTestemonyVC.h"
 #import "MediaAppearanceVC.h"
 #import "CommunityServiceVC.h"
+#import "OtherActivityVC.h"
 //#import "UICasualAlert.h"
 //#import <MessageUI/MessageUI.h>
 //
@@ -235,7 +236,7 @@
                     if (indexPath.row==2)result.textLabel.text=@"Expert Testemony";
                     if (indexPath.row==3)result.textLabel.text=@"Media Appearances";
                     if (indexPath.row==4)result.textLabel.text=@"Community Service";
-                    if (indexPath.row==5)result.textLabel.text=@"Other Involvement";
+                    if (indexPath.row==5)result.textLabel.text=@"Other Activities";
                     
                     
                 }
@@ -541,6 +542,15 @@
             }
             
             
+            if (indexPath.row==5){
+                
+                
+                
+                OtherActivityVC *otherActivityVC = [[OtherActivityVC alloc] initWithNibName:@"OtherActivityVC" bundle:[NSBundle mainBundle]];
+                
+                [self.navigationController pushViewController:otherActivityVC animated:YES];
+                break;
+            }
             
         }
             break;

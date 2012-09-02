@@ -737,41 +737,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-    if (tableViewModel.tag==0&&[section isKindOfClass:[SCObjectSelectionSection class]]) {
-        
-        //        SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
-        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-        
-        currentlySelectedClient=(ClientEntity *)cell.boundObject;
-        //DLog(@"currently selected client is %@",currentlySelectedClient);
-    }
-    //DLog(@"table model class %@",[tableViewModel class]);
-    if ([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]]) {
-        SCArrayOfObjectsModel *arrayOfObjectsModel=(SCArrayOfObjectsModel *)tableViewModel;
-        
-        [arrayOfObjectsModel dispatchEventSelectRowAtIndexPath:indexPath];
-        return;
-    }
-    
-    if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
-        SCObjectSelectionSection *selectionSection=(SCObjectSelectionSection *)section;
-        
-        [selectionSection dispatchEventSelectRowAtIndexPath:indexPath];
-        return;
-    }
-    if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
-        SCArrayOfObjectsSection *selectionSection=(SCArrayOfObjectsSection *)section;
-        
-        [selectionSection dispatchEventSelectRowAtIndexPath:indexPath];
-        
-    }
-    //DLog(@"section class %@",[section class]);
-    
-    
-}
+
 -(void)tableViewModelCoreDataObjectsLoaded:(SCArrayOfItemsModel *)tableViewModel{
     
     if(isInDetailSubview){

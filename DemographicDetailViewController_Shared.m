@@ -538,10 +538,8 @@
     militaryServiceDef.orderAttributeName=@"order";
     
     SCPropertyDefinition *demMilitaryServicePropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"militaryService"];
-    demMilitaryServicePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:militaryServiceDef
-                                                                                              allowAddingItems:FALSE
-                                                                                            allowDeletingItems:FALSE
-                                                                                              allowMovingItems:FALSE];
+    demMilitaryServicePropertyDef.type=SCPropertyTypeObject;
+    demMilitaryServicePropertyDef.attributes = [SCObjectAttributes attributesWithObjectDefinition:militaryServiceDef];
     
     
     
@@ -558,13 +556,13 @@
     
     
     SCPropertyDefinition *serviceHistoryPropertyDef = [militaryServiceDef propertyDefinitionWithName:@"serviceHistory"];
-    
+    serviceHistoryPropertyDef.type=SCPropertyTypeArrayOfObjects;
 	serviceHistoryPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:militaryServiceDatesDef
                                                                                           allowAddingItems:YES
                                                                                         allowDeletingItems:YES
                                                                                           allowMovingItems:YES
-                                                                                expandContentInCurrentView:YES 
-                                                                                      placeholderuiElement:nil 
+                                                                                expandContentInCurrentView:YES
+                                                                                 placeholderuiElement:[SCTableViewCell cellWithText:@"Add Enlistment/Commissions"]
                                                                                      addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap Here To Add Service Record"]
                                                                    addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:NO];
     
@@ -596,10 +594,44 @@
 	tsClearancePropertyDef.attributes = [SCSegmentedAttributes attributesWithSegmentTitlesArray:[NSArray arrayWithObjects:@"Yes", @"No", nil]];
     
     
-    
+  /*
     SCPropertyDefinition *militarySpecialtiesPropertyDef = [militaryServiceDef propertyDefinitionWithName:@"militarySpecialties"];
     militarySpecialtiesPropertyDef.type = SCPropertyTypeTextView;
+   */ 
+   NSString*militarySpecialtiesPropName=@"militarySpecialties";
+    if ([SCUtilities is_iPad]) {
+        SCPropertyDefinition *militaryServiceSpecialtiesPropertyDef = [militaryServiceDef propertyDefinitionWithName:militarySpecialtiesPropName];
+        militaryServiceSpecialtiesPropertyDef.type=SCPropertyTypeTextView;
+    }
+    else
+    {
+        
+        [militaryServiceDef removePropertyDefinitionWithName:militarySpecialtiesPropName];
+        NSDictionary *militarySpecialtiesBindings = [NSDictionary
+                                                     dictionaryWithObjects:[NSArray arrayWithObject:militarySpecialtiesPropName]
+                                                     forKeys:[NSArray arrayWithObject:@"80"]]; // 1 is the control tag
+        SCCustomPropertyDefinition *militarySpecialtiesDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SpecialtiesTextView"
+                                                                                                    uiElementNibName:@"TextViewAndLabelCell_iPhone"
+                                                                                                      objectBindings:militarySpecialtiesBindings];
+        
+        
+        [militaryServiceDef addPropertyDefinition:militarySpecialtiesDataProperty];
+        militarySpecialtiesPropName=@"SpecialtiesTextView";
+        
+        
+    }
+    // Create a special group for rest of service related variables
+    SCPropertyGroup *militaryServiceGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"awards",@"exposureToCombat", @"highestRank",@"serviceDisability",@"tsClearance",militarySpecialtiesPropName,@"SpecialtiesTextView", @"notes", nil]];
     
+    [militaryServiceDef.propertyGroups insertGroup:militaryServiceGroup atIndex:0];
+    
+
+    // Create a special group for military Records
+    SCPropertyGroup *militaryRecordGroup = [SCPropertyGroup groupWithHeaderTitle:@"Service Record" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"serviceHistory", nil]];
+    
+    [militaryServiceDef.propertyGroups insertGroup:militaryRecordGroup atIndex:1];
+    
+   
 	SCPropertyDefinition *branchOfServicePropertyDef = [militaryServiceDatesDef propertyDefinitionWithName:@"branch"];
     
     
@@ -610,7 +642,7 @@
                                                                       allowNoSelection:NO autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
     
     
-    
+ 
     SCPropertyDefinition *officerOrEnlistedPropertyDef = [militaryServiceDatesDef propertyDefinitionWithName:@"officerOrEnlisted"];
     officerOrEnlistedPropertyDef.type = SCPropertyTypeSegmented;
 	officerOrEnlistedPropertyDef.attributes = [SCSegmentedAttributes attributesWithSegmentTitlesArray:[NSArray arrayWithObjects:@"Officer", @"Enlisted", nil]];
@@ -622,7 +654,7 @@
     dischargeTypePropertyDef.type = SCPropertyTypeSelection;
 	dischargeTypePropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Honorable Discharge",@"Other Than Honorable Discharge",@"Dishonorable Discharge", nil] 
                                                               allowMultipleSelection:NO
-                                                                    allowNoSelection:YES autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
+                                                                    allowNoSelection:YES autoDismissDetailView:NO hideDetailViewNavigationBar:NO];
     
     
     
@@ -640,45 +672,14 @@
 	dateDischargedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
                                                                           datePickerMode:UIDatePickerModeDate
                                                            displayDatePickerInDetailView:YES];
-    
+   
     
     SCPropertyDefinition *militaryServiceDatesNotesPropertyDef = [militaryServiceDatesDef propertyDefinitionWithName:@"notes"];
     militaryServiceDatesNotesPropertyDef.type=SCPropertyTypeTextView;
     
-    NSString*militarySpecialtiesPropName=@"militarySpecialties";
-    if ([SCUtilities is_iPad]) {
-        SCPropertyDefinition *militaryServiceSpecialtiesPropertyDef = [militaryServiceDatesDef propertyDefinitionWithName:militarySpecialtiesPropName];
-        militaryServiceSpecialtiesPropertyDef.type=SCPropertyTypeTextView;
-    }
-    else
-    {
-        
-        [militaryServiceDef removePropertyDefinitionWithName:militarySpecialtiesPropName];
-        NSDictionary *militarySpecialtiesBindings = [NSDictionary 
-                                                     dictionaryWithObjects:[NSArray arrayWithObject:@"militarySpecialties"] 
-                                                     forKeys:[NSArray arrayWithObject:@"80"]]; // 1 is the control tag
-        SCCustomPropertyDefinition *militarySpecialtiesDataProperty = [SCCustomPropertyDefinition definitionWithName:@"SpecialtiesTextView"
-                                                                                                uiElementNibName:@"TextViewAndLabelCell_iPhone"
-                                                                                                  objectBindings:militarySpecialtiesBindings];
-        
-        
-        [militaryServiceDef addPropertyDefinition:militarySpecialtiesDataProperty];
-        militarySpecialtiesPropName=@"SpecialtiesTextView";
-
-        
-    }
-    
-    // Create a special group for military Records
-    SCPropertyGroup *militaryRecordGroup = [SCPropertyGroup groupWithHeaderTitle:@"Service Record" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"serviceHistory", nil]];
-    
-    [militaryServiceDef.propertyGroups insertGroup:militaryRecordGroup atIndex:0];
-    
-    // Create a special group for rest of service related variables
-    SCPropertyGroup *militaryServiceGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"awards",@"exposureToCombat", @"highestRank",@"serviceDisability",@"tsClearance",militarySpecialtiesPropName, @"notes", nil]];
-    
-    [militaryServiceDef.propertyGroups insertGroup:militaryServiceGroup atIndex:1];
-    
-    //end Military History section
+  
+   
+      //end Military History section
     
     //Do some property definition customization for the Demographic Profile Entity military History relationship
     

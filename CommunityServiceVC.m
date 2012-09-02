@@ -32,7 +32,9 @@
     
     NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
     
-    SCEntityDefinition *communityServiceDef=[SCEntityDefinition definitionWithEntityName:@"CommunityServiceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"projectName;dateStarted;dateEnded;hours;notes"];
+    SCEntityDefinition *communityServiceDef=[SCEntityDefinition definitionWithEntityName:@"CommunityServiceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"projectName;dateStarted;dateEnded;logs;notes"];
+    
+    communityServiceDef.orderAttributeName=@"order";
     
     SCEntityDefinition *organizationDef=[SCEntityDefinition definitionWithEntityName:@"OrganizationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"name;notes;size"];
     
