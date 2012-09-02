@@ -33,7 +33,7 @@
 @property (nonatomic, retain) NSSet *clientPresentations;
 @property (nonatomic, retain) NSSet *referrals;
 @property (nonatomic, retain) NSSet *groups;
-
+@property (nonatomic, retain) NSSet *substancesUse;
 @property (nonatomic, weak) NSString *tempClientIDCode;
 @property (nonatomic, weak) NSString *tempInitials;
 @property (nonatomic, weak) NSDate *tempDateOfBirth;

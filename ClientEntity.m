@@ -38,6 +38,7 @@
 @dynamic clientPresentations;
 @dynamic referrals;
 @dynamic groups;
+@dynamic substancesUse;
 
 @synthesize tempClientIDCode;
 @synthesize tempInitials;

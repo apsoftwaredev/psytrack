@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSManagedObject *militaryService;
 @property (nonatomic, retain) NSManagedObject *educationLevel;
-@property (nonatomic, retain) NSSet *substancesUse;
+
 @property (nonatomic, retain) ClientEntity *client;
 @property (nonatomic, retain) NSSet *disabilities;
 @property (nonatomic, retain) NSSet *spiritualBeliefs;

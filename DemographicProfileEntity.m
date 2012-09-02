@@ -21,7 +21,6 @@
 @dynamic order;
 @dynamic militaryService;
 @dynamic educationLevel;
-@dynamic substancesUse;
 @dynamic client;
 @dynamic disabilities;
 @dynamic spiritualBeliefs;
