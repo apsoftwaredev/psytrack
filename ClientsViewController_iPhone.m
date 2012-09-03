@@ -270,7 +270,16 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     self.tableViewModel=objectsModel;
     
     
-    UIImage *menueBarImage=[UIImage imageNamed:@"ipad-menubar-left.png"];
+    NSString *imageNameStr=nil;
+    if ([SCUtilities is_iPad]) {
+        imageNameStr=@"ipad-menubar-full.png";
+    }
+    else{
+        
+        imageNameStr=@"menubar.png";
+    }
+    
+    UIImage *menueBarImage=[UIImage imageNamed:imageNameStr];
     [self.searchBar setBackgroundImage:menueBarImage];
     [self.searchBar setScopeBarBackgroundImage:menueBarImage];
     
@@ -1106,34 +1115,11 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     return valid;
     
 }
--(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     BOOL valid = TRUE;
     
-    //    SCTableViewCell *cell = [tableViewModel cellAtIndexPath:indexPath];
     
-    
-    //    
-    //    if (tableViewModel.tag==4) {
-    //        UILabel *emaiLabel=(UILabel *)[cell viewWithTag:51];
-    //        if (emaiLabel.text==@"Email Address:")
-    //        {
-    //            UITextField *emailField=(UITextField *)[cell viewWithTag:50];
-    //            
-    //            if(emailField.text.length){
-    //                valid=[self validateEmail:emailField.text];
-    //                
-    //                //DLog(@"testing email address");
-    //            }
-    //             else
-    //            {
-    //                valid=FALSE;
-    //            }
-    //        }
-    //        
-    //        
-    //        
-    //    }
     
     
     //DLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
@@ -1169,7 +1155,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         }
     }
     
-    if (tableViewModel.tag==3&& tableViewModel.sectionCount){
+    else if (tableViewModel.tag==3&& tableViewModel.sectionCount){
         
         
         
@@ -1184,56 +1170,56 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 if ([ notesManagedObject.entity.name   isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
                     EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
                     
-                    if (encryptedNoteCell.textView.text.length) 
+                    if (encryptedNoteCell.textView.text.length)
                     {
                         valid=TRUE;
                     }
-                    else 
+                    else
                     {
                         valid=FALSE;
                     }
                     
-                } 
+                }
                 
                 
                 //here it is not the notes cell
                 if ([notesManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[notesCell isKindOfClass:[SCTextFieldCell class]]) {
                     SCTextFieldCell *drugNameCell=(SCTextFieldCell *)notesCell;
                     
-                    if (drugNameCell.textField.text.length) 
+                    if (drugNameCell.textField.text.length)
                     {
                         valid=TRUE;
                     }
-                    else 
+                    else
                     {
                         valid=FALSE;
                     }
                     
                 }
                 
-                if ([notesManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
-                    EncryptedSCTextFieldCell *phoneNumberCell=(EncryptedSCTextFieldCell *)notesCell;
-                    
-                    if (phoneNumberCell.textField.text.length) 
-                    {
-                        
-                        valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
-                    }
-                    else 
-                    {
-                        valid=FALSE;
-                    }
-                    
-                }
+//                if ([notesManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
+//                    EncryptedSCTextFieldCell *phoneNumberCell=(EncryptedSCTextFieldCell *)notesCell;
+//                    
+//                    if (phoneNumberCell.textField.text.length)
+//                    {
+//                        
+//                        valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
+//                    }
+//                    else
+//                    {
+//                        valid=FALSE;
+//                    }
+//                    
+//                }
                 
             }
             
             
             
-            if (section.cellCount>6) 
+            if (section.cellCount>6)
             {
                 
-                //DLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
+                //DLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);
                 
                 
                 SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];
@@ -1293,7 +1279,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                                 break;
                             default:
                                 break;
-                        }                    
+                        }
                         
                         
                     }
@@ -1303,7 +1289,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     
                     
                 }
-            }        
+            }
             
             
             
@@ -1312,22 +1298,71 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             
         }
     }
-    
-    if (tableViewModel.tag==4&& tableViewModel.sectionCount){
+    else  if (tableViewModel.tag==5&& tableViewModel.sectionCount){
         
         
         
         SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
         
-        if (section.cellCount>3) 
+        if (section.cellCount>0) {
+            SCTableViewCell *firstCell =(SCTableViewCell *)[section cellAtIndex:0];
+            NSManagedObject *firstCellManagedObject=(NSManagedObject *)firstCell.boundObject;
+            
+            //DLog(@"first cell class is %@",[firstCell class]);
+            
+            if (firstCellManagedObject &&[firstCellManagedObject respondsToSelector:@selector(entity)]&&[firstCellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"]&&[firstCell isKindOfClass:[SCObjectSelectionCell class]]) {
+                SCObjectSelectionCell *symptomCell=(SCObjectSelectionCell *)firstCell;
+                
+                if (symptomCell.label.text.length)
+                {
+                    valid=TRUE;
+                }
+                else
+                {
+                    valid=FALSE;
+                }
+                
+            }
+            
+            SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];
+            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+            
+            
+            if (cell.tag==1&&cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[cell isKindOfClass:[SCTextFieldCell class]]){
+                
+                SCTextFieldCell *textFieldCell=(SCTextFieldCell*)cell;
+                
+                if (textFieldCell.textField.text.length)
+                {
+                    valid=TRUE;
+                }
+                else
+                {
+                    valid=FALSE;
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    else if (tableViewModel.tag==4&& tableViewModel.sectionCount){
+        
+        
+        
+        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
+        
+        if (section.cellCount>3)
         {
             SCTableViewCell *cellFrom=(SCTableViewCell *)[section cellAtIndex:0];
             SCTableViewCell *cellTo=(SCTableViewCell *)[section cellAtIndex:1];
             SCTableViewCell *cellArrivedDate=(SCTableViewCell *)[section cellAtIndex:2];
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
-            //DLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
+            //DLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);
             
-            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)] &&[cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (cellManagedObject &&  [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject.entity.name  isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
@@ -1350,83 +1385,136 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     
     return valid;
+    
+    
+    
+    
+    
+    
 }
 
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+    //    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
     
-    
-    if([SCUtilities is_iPad]){
-        
-        UIColor *backgroundColor=nil;
+    if ([SCUtilities is_iPad]) {
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
-
-        if (isInDetailSubview) {
-            backgroundColor=appDelegate.window.backgroundColor;
+        
+        UIColor *backgroundColor=nil;
+        
+        if(indexPath.row==NSNotFound|| tableModel.tag>0)
+        {
+            
+            backgroundColor=(UIColor *)appDelegate.window.backgroundColor;
+            
         }
         else {
+            
+            
+            
             backgroundColor=[UIColor clearColor];
+            
+            
         }
         
-        [detailTableViewModel.modeledTableView setBackgroundView:nil];
-        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-        [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor]; // Make the table view transparent
-        self.totalClientsLabel.backgroundColor=backgroundColor;
+        if (detailTableViewModel.modeledTableView.backgroundColor!=backgroundColor) {
+            
+            [detailTableViewModel.modeledTableView setBackgroundView:nil];
+            UIView *view=[[UIView alloc]init];
+            [detailTableViewModel.modeledTableView setBackgroundView:view];
+            [detailTableViewModel.modeledTableView setBackgroundColor:backgroundColor];
+            
+            
+            
+            
+        }
+        
+        
+    }
+    
+    
+    if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
+        
+        SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
+        
+        
+        
+        if ([section isKindOfClass:[SCObjectSection class]]){
+            
+            SCObjectSection *objectSection=(SCObjectSection *)section;
+            
+            
+            NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+            
+            
+            
+            
+            if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"DiagnosisHistoryEntity"]&&objectSection.cellCount>1) {
+                //specifiers cell
+                SCTableViewCell *cellAtOne=(SCTableViewCell *)[objectSection cellAtIndex:1];
+                if ([cellAtOne isKindOfClass:[SCObjectSelectionCell class]]) {
+                    SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtOne;
+                    
+                    
+                    DLog(@"section managed object is %@",sectionManagedObject);
+                    NSObject *disorderObject=[sectionManagedObject valueForKeyPath:@"disorder"];
+                    
+                    if (indexPath.row!=NSNotFound &&( selectedDisorder||(disorderObject&&[disorderObject isKindOfClass:[DisorderEntity class]]))) {
+                        if (!selectedDisorder) {
+                            selectedDisorder=(DisorderEntity *)disorderObject;
+                        }
+                        
+                        
+                        if (selectedDisorder.disorderName.length) {
+                            
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                      @"disorder.disorderName like %@",[NSString stringWithString:(NSString *) selectedDisorder.disorderName]];
+                            
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"specifier" sortAscending:YES filterPredicate:predicate];
+                            
+                            objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                            
+                            [objectSelectionCell reloadBoundValue];
+                            
+                            
+                            
+                            
+                        }
+                    }
+                    else {
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                  @"disorder.disorderName = nil"];
+                        
+                        SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"specifier" sortAscending:YES filterPredicate:predicate];
+                        
+                        objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                    }
+                    
+                    
+                }
+                
+                
+                
+            }
+        }}
+    
+    
+}
+
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (tableModel.tag==0) {
+        selectedDisorder=nil;
     }
     
     
     
-//    if (tableViewModel.tag==4&& tableViewModel.sectionCount) {
-//        //            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0]
-//        ;
-//        //            if (detailSectionZero.cellCount) {
-//        //                
-//        //                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-//        //                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-//        ////                
-//        //                if (cellManagedObject&& [cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"])
-//        //                {
-//        //                    sectionContainsMedLog=TRUE;
-//        //                }
-//        //                
-//        //            }
-//        SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];;
-//        
-//        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-//        
-//        
-//        
-//        DLog(@"selected cell section cell count %i",section.cellCount);
-//        
-//        //        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-//        
-//        //DLog(@"index of cell is %i",[section indexForCell:cell]);
-//        if (!cell ||(indexPath.row==0 &&section.cellCount<2)) {
-//            
-//            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
-//            SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-//            
-//            
-//            
-//            NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-//            //DLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-//            //DLog(@"cell  class is %@",[cellZeroSectionZero class]);
-//            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
-//                
-//                [detailTableViewModel removeSectionAtIndex:1];
-//                
-//                
-//            }
-//            else {
-//                [detailTableViewModel.modeledTableView reloadData];
-//            }
-//        }
-//    }  
+    
     
 }
-
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     
@@ -1597,9 +1685,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     SCTableViewCell *cell = [tableViewModel cellAtIndexPath:IndexPath];
     
     
-    
-    
-    if (tableViewModel.tag==1&&cell.tag==1) {
+    if ((tableViewModel.tag==1 ||tableViewModel.tag==0) &&cell.tag==1) {
         
         if ([cell isKindOfClass:[SCDateCell class]]) {
             SCDateCell *dateCell=(SCDateCell *)cell;
@@ -1611,8 +1697,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             }
         }
     }
-   
-  else  if ((tableViewModel.tag==3||tableViewModel.tag==5)&&[cell isKindOfClass:[DrugNameObjectSelectionCell class]]) {
+    else if ((tableViewModel.tag==3||tableViewModel.tag==5)&&[cell isKindOfClass:[DrugNameObjectSelectionCell class]]) {
         DrugNameObjectSelectionCell *drugNameObjectSelectionCell=(DrugNameObjectSelectionCell *)cell;
         
         if (drugNameObjectSelectionCell.drugProduct) {
@@ -1621,23 +1706,14 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             if ([drugNameCell isKindOfClass:[SCTextFieldCell class]] ) {
                 SCTextFieldCell *textFieldCell=(SCTextFieldCell *)drugNameCell;
                 textFieldCell.textField.text=drugNameObjectSelectionCell.drugProduct.drugName;
-                NSManagedObject *drugNameManagedObject=(NSManagedObject *)drugNameCell.boundObject;
-                NSString *drugName=drugNameObjectSelectionCell.drugProduct.drugName;
-                
-                
-                if (drugName && drugName.length) {
-                    [drugNameManagedObject setValue:(NSString *) drugNameObjectSelectionCell.drugProduct.drugName forKey:(NSString *)@"drugName"];
-                }
-                
-                
-                
                 
             }
             
         }
         
     }
-   else if (tableViewModel.tag==4){
+    
+    else if (tableViewModel.tag==4){
         
         UIView *viewOne = [cell viewWithTag:14];
         switch (cell.tag) {
@@ -1659,7 +1735,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 
                 
                 if([viewOne isKindOfClass:[UISlider class]])
-                {    
+                {
                     UISlider *sliderTwo = (UISlider *)viewOne;
                     UILabel *sTwolabel = (UILabel *)[cell viewWithTag:10];
                     
@@ -1674,6 +1750,79 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             default:
                 break;
         }
+    }
+    
+    else if (tableViewModel.tag==3)
+    {
+        
+        
+        
+        //begin
+        
+        
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        DLog(@"cell class is  %@",cell.class);
+        DLog(@"cell managed obect entity name is %@",cellManagedObject.entity.name);
+        DLog(@"cellmanaged ofbec is  %@",cellManagedObject);
+        if (cell.tag==0&& cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"DiagnosisHistoryEntity"]&& [cell isKindOfClass:[SCObjectSelectionCell class]]) {
+            
+            SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+            
+            
+            if ([objectSelectionCell.selectedItemIndex intValue]>-1) {
+                DisorderEntity *selectedDisorderManagedObject =(DisorderEntity*)[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                
+                DLog(@"selected cell managed object os  %@",selectedDisorderManagedObject);
+                if (selectedDisorderManagedObject &&[selectedDisorderManagedObject respondsToSelector:@selector(entity)]&&[selectedDisorderManagedObject.entity.name isEqualToString:@"DisorderEntity"]) {
+                    selectedDisorder=(DisorderEntity *) selectedDisorderManagedObject;
+                    
+                    
+                    
+                    SCTableViewCell *specifierCell=(SCTableViewCell *)[tableViewModel cellAfterCell:objectSelectionCell rewind:NO];
+                    
+                    if ([specifierCell isKindOfClass:[SCObjectSelectionCell class]]) {
+                        
+                        
+                        SCObjectSelectionCell *specifierObjectSelectionCell=(SCObjectSelectionCell *)specifierCell;
+                        
+                        if (selectedDisorder.disorderName.length) {
+                            
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                      @"disorder.disorderName like %@",[NSString stringWithString:(NSString *) selectedDisorder.disorderName]];
+                            
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"specifier" sortAscending:YES filterPredicate:predicate];
+                            
+                            specifierObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                            
+                            [specifierObjectSelectionCell reloadBoundValue];
+                            
+                            
+                        }
+                        
+                    }
+                    
+                    
+                }
+                
+                
+                
+                
+            }
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        //end
+        
+        
+        
     }
 }
 

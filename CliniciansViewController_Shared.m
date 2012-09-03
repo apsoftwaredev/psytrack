@@ -2630,8 +2630,17 @@
     {
        
         backgroundColor=(UIColor *)appDelegate.window.backgroundColor;
-        UIImage *menuBarBackground=[UIImage imageNamed:@"ipad-menubar-right.png"];
-        [detailTableViewModel.viewController.navigationController.navigationBar setBackgroundImage:menuBarBackground forBarMetrics:UIBarMetricsDefault];  
+        NSString *imageNameStr=nil;
+        if ([SCUtilities is_iPad]) {
+            imageNameStr=@"ipad-menubar-full.png";
+        }
+        else{
+            
+            imageNameStr=@"menubar.png";
+        }
+        
+        UIImage *menueBarImage=[UIImage imageNamed:imageNameStr];
+        [detailTableViewModel.viewController.navigationController.navigationBar setBackgroundImage:menueBarImage forBarMetrics:UIBarMetricsDefault];  
     }
     else {
         

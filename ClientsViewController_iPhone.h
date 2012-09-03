@@ -20,6 +20,7 @@
 #import "ClientsViewController_Shared.h"
 #import "ClientsSelectionCell.h"
 #import "ClientEntity.h"
+#import "DisorderEntity.h"
 
 @interface ClientsViewController_iPhone : SCViewController <  SCTableViewModelDataSource, SCTableViewModelDelegate, SCTableViewControllerDelegate, UIAlertViewDelegate> {
     
@@ -43,6 +44,8 @@
     SCArrayOfObjectsModel *objectsModel;
     ClientEntity *currentlySelectedClient;
     NSMutableArray *currentlySelectedClientsArray;
+    
+      DisorderEntity *selectedDisorder;
 }
 
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;

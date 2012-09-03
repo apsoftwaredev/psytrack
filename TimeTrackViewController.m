@@ -3060,8 +3060,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
        
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-        DLog(@"cell tag is %i",cell.tag);
-        DLog(@"cell managed object is %@",cellManagedObject);
+        
         if (currentControllerSetup==kTrackInterventionSetup&& cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"InterventionDeliveredEntity"] && [cell isKindOfClass:[SCObjectSelectionCell class]]&& cell.tag==3) {
             
             SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;

@@ -378,6 +378,8 @@
 		E7DEECDE15F2EEC6001D5B05 /* CommunityServiceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7DEECDC15F2EEC6001D5B05 /* CommunityServiceVC.xib */; };
 		E7DEECE215F2FAE1001D5B05 /* OtherActivityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DEECE015F2FAE1001D5B05 /* OtherActivityVC.m */; };
 		E7DEECE315F2FAE1001D5B05 /* OtherActivityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7DEECE115F2FAE1001D5B05 /* OtherActivityVC.xib */; };
+		E7DEECE615F5262C001D5B05 /* DiagnosisHistoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DEECE515F5262C001D5B05 /* DiagnosisHistoryEntity.m */; };
+		E7DEECE915F526B2001D5B05 /* DisorderEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DEECE815F526B2001D5B05 /* DisorderEntity.m */; };
 		E7E1425915C1F34B00D0F505 /* PresentationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */; };
 		E7E1425A15C1F34B00D0F505 /* PresentationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */; };
 		E7E1A63D152E873500C227E8 /* TimeTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */; };
@@ -1020,6 +1022,12 @@
 		E7DEECDF15F2FAE0001D5B05 /* OtherActivityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherActivityVC.h; sourceTree = "<group>"; };
 		E7DEECE015F2FAE1001D5B05 /* OtherActivityVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherActivityVC.m; sourceTree = "<group>"; };
 		E7DEECE115F2FAE1001D5B05 /* OtherActivityVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherActivityVC.xib; sourceTree = "<group>"; };
+		E7DEECE415F5262C001D5B05 /* DiagnosisHistoryEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiagnosisHistoryEntity.h; sourceTree = "<group>"; };
+		E7DEECE515F5262C001D5B05 /* DiagnosisHistoryEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiagnosisHistoryEntity.m; sourceTree = "<group>"; };
+		E7DEECE715F526B2001D5B05 /* DisorderEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisorderEntity.h; sourceTree = "<group>"; };
+		E7DEECE815F526B2001D5B05 /* DisorderEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisorderEntity.m; sourceTree = "<group>"; };
+		E7DEECEA15F526C4001D5B05 /* DisorderSpecifierEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisorderSpecifierEntity.h; sourceTree = "<group>"; };
+		E7DEECEB15F526C4001D5B05 /* DisorderSpecifierEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DisorderSpecifierEntity.m; sourceTree = "<group>"; };
 		E7E1425615C1F34B00D0F505 /* PresentationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationsViewController.h; sourceTree = "<group>"; };
 		E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentationsViewController.m; sourceTree = "<group>"; };
 		E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresentationsViewController.xib; sourceTree = "<group>"; };
@@ -1529,7 +1537,13 @@
 		37F7CEC615005E3400AD2C3A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E7DEECEA15F526C4001D5B05 /* DisorderSpecifierEntity.h */,
+				E7DEECEB15F526C4001D5B05 /* DisorderSpecifierEntity.m */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
+				E7DEECE715F526B2001D5B05 /* DisorderEntity.h */,
+				E7DEECE815F526B2001D5B05 /* DisorderEntity.m */,
+				E7DEECE415F5262C001D5B05 /* DiagnosisHistoryEntity.h */,
+				E7DEECE515F5262C001D5B05 /* DiagnosisHistoryEntity.m */,
 				E734334515D5D69C007237C5 /* PaymentEntity.h */,
 				E734334615D5D69C007237C5 /* PaymentEntity.m */,
 				E7B3E3FE15C58B2F00729C88 /* LicenseRenewalEntity.h */,
@@ -2735,6 +2749,8 @@
 				E71B1EC615F2CD57009C5E6B /* MediaAppearanceVC.m in Sources */,
 				E7DEECDD15F2EEC6001D5B05 /* CommunityServiceVC.m in Sources */,
 				E7DEECE215F2FAE1001D5B05 /* OtherActivityVC.m in Sources */,
+				E7DEECE615F5262C001D5B05 /* DiagnosisHistoryEntity.m in Sources */,
+				E7DEECE915F526B2001D5B05 /* DisorderEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,6 +22,7 @@
 #import "DemographicDetailViewController_Shared.h"
 
 #import "ClientsSelectionCell.h"
+#import "DisorderEntity.h"
 //@class ClientsDetailViewController_iPad;
 @interface ClientsRootViewController_iPad : SCViewController </*SCTableViewModelDataSource */SCTableViewModelDelegate> {
     
@@ -33,7 +34,7 @@
 //    SCArrayOfObjectsModel *tableModel;
      SCArrayOfObjectsModel *objectsModel;
     
-       
+    DisorderEntity *selectedDisorder;
 }
 
 

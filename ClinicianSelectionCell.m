@@ -135,7 +135,9 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
    
     
     clinicianViewController=[[ClinicianViewController alloc]initWithNibName:clinicianViewControllerNibName bundle:nil isInDetailSubView:YES objectSelectionCell:self sendingViewController:self.ownerTableViewModel.viewController  withPredicate:(NSPredicate *)predicate usePrescriber:(BOOL)usePrescriber allowMultipleSelection:(BOOL)multiSelect];
-    
+    if (cliniciansArray_.count) {
+        
+    }
     
     //DLog(@"view controllers is %@",self.ownerTableViewModel.viewController.navigationController.viewControllers);
 
@@ -367,7 +369,9 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
  
     //    [self.boundObject setValue:selectedObject forKey:@"client"];
     
-    
+    DLog(@"selected items %@",selectedItems);
+    DLog(@"self clinicians array %@",self.cliniciansArray);
+    DLog(@"clinicians array_ %@",cliniciansArray_);
     if (hasValue) {
         
         
@@ -382,7 +386,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
         
         if (multiSelect) 
         {
-            
+            DLog(@"clinicians array is  %@",cliniciansArray_);
              NSString *labelTextStr=[NSString string];
             if (self.cliniciansArray.count) 
             {

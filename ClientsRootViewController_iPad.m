@@ -149,8 +149,16 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
     
     
     [self.view setBackgroundColor:(UIColor *)appDelegate.window.backgroundColor];
+    NSString *imageNameStr=nil;
+    if ([SCUtilities is_iPad]) {
+        imageNameStr=@"ipad-menubar-right.png";
+    }
+    else{
     
-    UIImage *menueBarImage=[UIImage imageNamed:@"ipad-menubar-left.png"];
+    imageNameStr=@"menubar.png";
+    }
+   
+    UIImage *menueBarImage=[UIImage imageNamed:imageNameStr];
     [self.searchBar setBackgroundImage:menueBarImage];
     [self.searchBar setScopeBarBackgroundImage:menueBarImage];
     
@@ -391,81 +399,83 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
             
             
         }
-//        
-//        UIImage *menuBarBackground=[UIImage imageNamed:@"ipad-menubar-right.png"];
-//        [detailTableViewModel.viewController.navigationController.navigationBar setBackgroundImage:menuBarBackground forBarMetrics:UIBarMetricsDefault];
+
         
     }    
-//    if (tableModel.tag==4&&tableModel.sectionCount ) {
-//        //            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0]
-////        ;
-//        //            if (detailSectionZero.cellCount) {
-//        //                
-//        //                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-//        //                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-//        ////                
-//        //                if (cellManagedObject&& [cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"])
-//        //                {
-//        //                    sectionContainsMedLog=TRUE;
-//        //                }
-//        //                
-//        //            }
-//        SCTableViewCell *cell=nil;
-//        if (indexPath.row!=NSNotFound) {
-//            cell=[tableModel cellAtIndexPath:indexPath];
-//        }
-//      
-//        
-//        
-//        
-//        
-//        
-//        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:0];
-//        
-//        //DLog(@"index of cell is %i",[section indexForCell:cell]);
-//        if ((!cell &&section.cellCount==1) ||(indexPath.row==0)) {
-//            
-//            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
-//            
-//            if (detailSectionZero.cellCount) {
-//              
-//            SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-//            
-//            
-//            
-//            NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-//
-//                DLog(@"cell  class is %@",[cellZeroSectionZero class]);
-//                
-//                if ([cellManagedObject respondsToSelector:@selector(entity)]) {
-//               
-//                
-//                    if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2 ) {
-//                        
-//                        SCTableViewSection *sectionOne=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:1];
-//                        
-//                        [sectionOne removeAllCells];
-//                        [detailTableViewModel removeSectionAtIndex:1];
-//                        
-//                        
-//                    }
-//                    else {
-//        //                [detailTableViewModel.modeledTableView reloadData];
-//                    }
-//                }
-//            }
-//        }
-//    }  
-//      
 
     
+if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
+    
+    SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
+    
+    
+    
+    if ([section isKindOfClass:[SCObjectSection class]]){
+        
+        SCObjectSection *objectSection=(SCObjectSection *)section;
+        
+        
+        NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+        
+        
+        
+        
+        if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"DiagnosisHistoryEntity"]&&objectSection.cellCount>1) {
+            //specifiers cell
+            SCTableViewCell *cellAtOne=(SCTableViewCell *)[objectSection cellAtIndex:1];
+            if ([cellAtOne isKindOfClass:[SCObjectSelectionCell class]]) {
+                SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtOne;
+                
+                
+                DLog(@"section managed object is %@",sectionManagedObject);
+                NSObject *disorderObject=[sectionManagedObject valueForKeyPath:@"disorder"];
+                
+                if (indexPath.row!=NSNotFound &&( selectedDisorder||(disorderObject&&[disorderObject isKindOfClass:[DisorderEntity class]]))) {
+                    if (!selectedDisorder) {
+                        selectedDisorder=(DisorderEntity *)disorderObject;
+                    }
+                    
+                    
+                    if (selectedDisorder.disorderName.length) {
+                        
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                  @"disorder.disorderName like %@",[NSString stringWithString:(NSString *) selectedDisorder.disorderName]];
+                        
+                        SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"specifier" sortAscending:YES filterPredicate:predicate];
+                        
+                        objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                        
+                        [objectSelectionCell reloadBoundValue];
+                        
+                        
+                 
+                    
+                    }
+                }
+                    else {
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                  @"disorder.disorderName = nil"];
+                        
+                        SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"specifier" sortAscending:YES filterPredicate:predicate];
+                        
+                        objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                    }
+                
+                
+                }
+            
+            
+            
+        }
+        }}
+
    
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     //DLog(@"detail model created for row at index");
     
-//    
+//
     detailTableViewModel.tag=tableViewModel.tag+1;
     
     
@@ -789,8 +799,70 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
             }
             } 
         }
-            break;
             
+            break;
+        case 7:
+        {
+            
+            if (section.cellCount>0&&cell.boundObject) {
+                
+                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+                if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]) {
+                    
+                    //DLog(@"entity name is %@",cellManagedObject.entity.name);
+                    if (cell.tag==1 && [cell isKindOfClass:[SCCustomCell class]] &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
+                    {
+                        
+                        UIView *scaleView = [cell viewWithTag:70];
+                        if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
+                            
+                            UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
+                            fluencyLevelLabel.text=@"Severity Level:";
+                            
+                        }
+                    }
+                    
+                    
+                    
+                    
+                    if (cell.tag==5&& tableViewModel.sectionCount >2) {
+                        
+                        //DLog(@"cell tag is %i",cell.tag);
+                        //DLog(@"cell text is %@",cell.textLabel.text);
+                        
+                        SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
+                        SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];
+                        NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
+                        //DLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
+                        //DLog(@"cell  class is %@",[cellOne class]);
+                        if ([cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
+                            
+                            
+                            if ([cell isKindOfClass:[SCCustomCell class]])
+                            {
+                                UIView *scaleView = [cell viewWithTag:70];
+                                if ([scaleView isKindOfClass:[UISegmentedControl class]])
+                                {
+                                    
+                                    UILabel *satisfactionLevelLabel =(UILabel *)[cell viewWithTag:71];
+                                    satisfactionLevelLabel.text=@"Satisfaction With Drug:";
+                                    
+                                }
+                                
+                                
+                            }
+                            
+                            
+                            
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+            break;
+
         default:
             break;
     }
@@ -871,9 +943,93 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                 break;
         }
     }
+    
+   else if (tableViewModel.tag==3)
+    {
+        
+        
+        
+        //begin
+        
+        
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        DLog(@"cell class is  %@",cell.class);
+        DLog(@"cell managed obect entity name is %@",cellManagedObject.entity.name);
+        DLog(@"cellmanaged ofbec is  %@",cellManagedObject);
+        if (cell.tag==0&& cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"DiagnosisHistoryEntity"]&& [cell isKindOfClass:[SCObjectSelectionCell class]]) {
+            
+            SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+            
+            
+            if ([objectSelectionCell.selectedItemIndex intValue]>-1) {
+                DisorderEntity *selectedDisorderManagedObject =(DisorderEntity*)[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                
+                DLog(@"selected cell managed object os  %@",selectedDisorderManagedObject);
+                if (selectedDisorderManagedObject &&[selectedDisorderManagedObject respondsToSelector:@selector(entity)]&&[selectedDisorderManagedObject.entity.name isEqualToString:@"DisorderEntity"]) {
+                    selectedDisorder=(DisorderEntity *) selectedDisorderManagedObject;
+                    
+                    
+                    
+                    SCTableViewCell *specifierCell=(SCTableViewCell *)[tableViewModel cellAfterCell:objectSelectionCell rewind:NO];
+                    
+                    if ([specifierCell isKindOfClass:[SCObjectSelectionCell class]]) {
+                        
+                        
+                        SCObjectSelectionCell *specifierObjectSelectionCell=(SCObjectSelectionCell *)specifierCell;
+                        
+                        if (selectedDisorder.disorderName.length) {
+                            
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                      @"disorder.disorderName like %@",[NSString stringWithString:(NSString *) selectedDisorder.disorderName]];
+                            
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"specifier" sortAscending:YES filterPredicate:predicate];
+                            
+                            specifierObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                            
+                            [specifierObjectSelectionCell reloadBoundValue];
+                            
+                            
+                        }
+                        
+                    }
+                    
+                    
+                }
+                
+                
+                
+                
+            }
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        //end
+        
+        
+        
+    }
 }
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel willSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if (tableModel.tag==0) {
+        selectedDisorder=nil;
+    }
+
+
+
+
+
+}
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //DLog(@"table bies slkjd %i", tableViewModel.tag);
     SCTableViewCell *cell =tableViewModel.activeCell;
@@ -1855,7 +2011,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         }
     }
 
-    if (tableViewModel.tag==3&& tableViewModel.sectionCount){
+   else if (tableViewModel.tag==3&& tableViewModel.sectionCount){
         
         
         
@@ -1897,20 +2053,20 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     
                 }
             
-                if ([notesManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
-                    EncryptedSCTextFieldCell *phoneNumberCell=(EncryptedSCTextFieldCell *)notesCell;
-                    
-                    if (phoneNumberCell.textField.text.length) 
-                    {
-                      
-                        valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
-                    }
-                    else 
-                    {
-                        valid=FALSE;
-                    }
-                    
-                }
+//                if ([notesManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
+//                    EncryptedSCTextFieldCell *phoneNumberCell=(EncryptedSCTextFieldCell *)notesCell;
+//                    
+//                    if (phoneNumberCell.textField.text.length) 
+//                    {
+//                      
+//                        valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
+//                    }
+//                    else 
+//                    {
+//                        valid=FALSE;
+//                    }
+//                    
+//                }
             
             }
         
@@ -1998,7 +2154,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
         }
     }
-    if (tableViewModel.tag==5&& tableViewModel.sectionCount){
+  else  if (tableViewModel.tag==5&& tableViewModel.sectionCount){
         
         
         
@@ -2023,12 +2179,32 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 }
                 
             }
-                  }
+           
+            SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];
+            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+            
+            
+            if (cell.tag==1&&cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[cell isKindOfClass:[SCTextFieldCell class]]){
+            
+                SCTextFieldCell *textFieldCell=(SCTextFieldCell*)cell;
+                
+                if (textFieldCell.textField.text.length)
+                {
+                    valid=TRUE;
+                }
+                else
+                {
+                    valid=FALSE;
+                }
+                
+            }
+
+        }
         
         
     }
 
-    if (tableViewModel.tag==4&& tableViewModel.sectionCount){
+   else if (tableViewModel.tag==4&& tableViewModel.sectionCount){
         
         
         

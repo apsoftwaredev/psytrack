@@ -297,7 +297,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     //add a custom title
     drugNamePropertyDef.title = @"Drug Name";
-    
+    drugNamePropertyDef.autoValidate=NO;
 
     //get the client setup from the clients View Controller Shared
     // Add a custom property that represents a custom cells for the description defined TextFieldAndLableCell.xib
@@ -951,11 +951,12 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
 	diagnosisSpecifierPropertyDef.type = SCPropertyTypeObjectSelection;
 	SCObjectSelectionAttributes *diagnosisSpecifiersSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:diagnosisSpecifierDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
-    diagnosisSpecifiersSelectionAttribs.allowAddingItems = YES;
-    diagnosisSpecifiersSelectionAttribs.allowDeletingItems = YES;
+    diagnosisSpecifiersSelectionAttribs.allowAddingItems = NO;
+    diagnosisSpecifiersSelectionAttribs.allowDeletingItems = NO;
     diagnosisSpecifiersSelectionAttribs.allowMovingItems = YES;
     diagnosisSpecifiersSelectionAttribs.allowEditingItems = YES;
-    diagnosisSpecifiersSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define Specifiers)"];
+    diagnosisSpecifiersSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add specifiers under disorder entry)"];
+
     diagnosisSpecifiersSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new specifier"];
     diagnosisSpecifierPropertyDef.attributes = diagnosisSpecifiersSelectionAttribs;
     
