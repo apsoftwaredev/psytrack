@@ -425,9 +425,12 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
        
-    SCPropertyDefinition *symptomNamePropertyDef = [symptomDef propertyDefinitionWithName:@"symptomName"];
-    symptomNamePropertyDef.type = SCPropertyTypeObjectSelection;
-    symptomNamePropertyDef.title=@"Symptom";
+    SCPropertyDefinition *symptomNamePropertyDef = [symptomNameDef propertyDefinitionWithName:@"symptomName"];
+    symptomNamePropertyDef.type = SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *symtomSymptomNamePropertyDef = [symptomDef propertyDefinitionWithName:@"symptomName"];
+    symtomSymptomNamePropertyDef.type = SCPropertyTypeObjectSelection;
+    symtomSymptomNamePropertyDef.title=@"Symptom";
 	SCObjectSelectionAttributes *symptomNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:symptomNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
     
  
@@ -437,7 +440,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     symptomNameSelectionAttribs.allowEditingItems = YES;
     symptomNameSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap edit to add sypmtoms)"];
     symptomNameSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add Symptom Definition"];
-    symptomNamePropertyDef.attributes = symptomNameSelectionAttribs;
+    symtomSymptomNamePropertyDef.attributes = symptomNameSelectionAttribs;
     SCPropertyDefinition *symptomDescriptionPropertyDef = [symptomNameDef propertyDefinitionWithName:@"symptomDescription"];
     
     symptomDescriptionPropertyDef.type=SCPropertyTypeTextView;
@@ -759,25 +762,262 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     
-    SCEntityDefinition *diagnosisHistoryDef=[SCEntityDefinition definitionWithEntityName:@"DiagnosisHistoryEntity" managedObjectContext:managedObjectContext propertyNamesString:@"disorder;specifiers;axis;dateDiagnosed;dateRecovered;notes;onset;status;diagnosedBy;diagnosisLog; medications"];
-    
+    SCEntityDefinition *diagnosisHistoryDef=[SCEntityDefinition definitionWithEntityName:@"DiagnosisHistoryEntity" managedObjectContext:managedObjectContext propertyNamesString:@"disorder;specifiers;axis;dateDiagnosed;dateRecovered;treatmentStarted;notes;onset;status;diagnosedBy;diagnosisLog; medications"];
+       
     diagnosisHistoryDef.orderAttributeName=@"order";
-    SCEntityDefinition *diagnosisLogyDef=[SCEntityDefinition definitionWithEntityName:@"DiagnosisLogEntity" managedObjectContext:managedObjectContext propertyNamesString:@"logDate;symptoms;frequency;onset;prognosis;severity;notes"];
+    diagnosisHistoryDef.titlePropertyName=@"axis;disorder.disorderName;specifiers.specifier";
+    SCEntityDefinition *diagnosisLogyDef=[SCEntityDefinition definitionWithEntityName:@"DiagnosisLogEntity" managedObjectContext:managedObjectContext propertyNamesString:@"logDate;symptoms;frequency;onset;prognosis;notes"];
     diagnosisLogyDef.orderAttributeName=@"order";
     
-    SCEntityDefinition *diagnosisSpecifiersyDef=[SCEntityDefinition definitionWithEntityName:@"DisorderSpecifierEntity" managedObjectContext:managedObjectContext propertyNamesString:@"specifier"];
-    diagnosisSpecifiersyDef.orderAttributeName=@"order";
+    SCEntityDefinition *diagnosisSpecifierDef=[SCEntityDefinition definitionWithEntityName:@"DisorderSpecifierEntity" managedObjectContext:managedObjectContext propertyNamesString:@"specifier"];
+    diagnosisSpecifierDef.orderAttributeName=@"order";
     
     
     SCEntityDefinition *disorderDef=[SCEntityDefinition definitionWithEntityName:@"DisorderEntity" managedObjectContext:managedObjectContext propertyNamesString:@"disorderName;specifiers;code;desc;notes;category;classificationSystem;subCategory;symptoms"];
     disorderDef.keyPropertyName=@"code";
     
+    SCEntityDefinition *disorderClassificationSystemDef=[SCEntityDefinition definitionWithEntityName:@"DisorderSystemEntity" managedObjectContext:managedObjectContext propertyNamesString:@"classificationSystem;desc"];
+    disorderClassificationSystemDef.orderAttributeName=@"order";
     
-    
-    
-//    self.clientDef.orderAttributeName=@"order";
-   
+    SCEntityDefinition *categoryDef=[SCEntityDefinition definitionWithEntityName:@"DisorderCategoryEntity" managedObjectContext:managedObjectContext propertyNamesString:@"categoryName;desc"];
+    categoryDef.orderAttributeName=@"order";
 
+    SCEntityDefinition *subCategoryDef=[SCEntityDefinition definitionWithEntityName:@"DisorderSubCategoryEntity" managedObjectContext:managedObjectContext propertyNamesString:@"subCategory;desc"];
+    subCategoryDef.orderAttributeName=@"order";
+    
+    SCPropertyDefinition *diagnosisDisorderPropertyDef = [diagnosisHistoryDef propertyDefinitionWithName:@"disorder"];
+    
+	diagnosisDisorderPropertyDef.type = SCPropertyTypeObjectSelection;
+	SCObjectSelectionAttributes *diagnosisDisorderSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:disorderDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    diagnosisDisorderSelectionAttribs.allowAddingItems = YES;
+    diagnosisDisorderSelectionAttribs.allowDeletingItems = YES;
+    diagnosisDisorderSelectionAttribs.allowMovingItems = YES;
+    diagnosisDisorderSelectionAttribs.allowEditingItems = YES;
+    diagnosisDisorderSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define Disorders)"];
+    diagnosisDisorderSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new disorder"];
+    diagnosisDisorderPropertyDef.attributes = diagnosisDisorderSelectionAttribs;
+    
+
+    
+    
+    SCPropertyDefinition *diagnosisHistoryPropertyDef=[self.clientDef propertyDefinitionWithName:@"diagnoses"];
+    
+    diagnosisHistoryPropertyDef.type=SCPropertyTypeArrayOfObjects;
+    
+    diagnosisHistoryPropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:diagnosisHistoryDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add Diagnoses"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];
+    
+    
+    SCPropertyDefinition *disorderSystemPropertyDef = [disorderDef propertyDefinitionWithName:@"classificationSystem"];
+    
+	disorderSystemPropertyDef.type = SCPropertyTypeObjectSelection;
+	SCObjectSelectionAttributes *disorderSystemSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:disorderClassificationSystemDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    disorderSystemSelectionAttribs.allowAddingItems = YES;
+    disorderSystemSelectionAttribs.allowDeletingItems = YES;
+    disorderSystemSelectionAttribs.allowMovingItems = YES;
+    disorderSystemSelectionAttribs.allowEditingItems = YES;
+    disorderSystemSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define Classification Systems)"];
+    disorderSystemSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new Classification System"];
+    disorderSystemPropertyDef.attributes = disorderSystemSelectionAttribs;
+    
+    
+    
+    
+    
+    SCPropertyDefinition *disorderSubCategoryPropertyDef = [disorderDef propertyDefinitionWithName:@"subCategory"];
+    
+	disorderSubCategoryPropertyDef.type = SCPropertyTypeObjectSelection;
+	SCObjectSelectionAttributes *disorderSubCategorySelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:subCategoryDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    disorderSubCategorySelectionAttribs.allowAddingItems = YES;
+    disorderSubCategorySelectionAttribs.allowDeletingItems = YES;
+    disorderSubCategorySelectionAttribs.allowMovingItems = YES;
+    disorderSubCategorySelectionAttribs.allowEditingItems = YES;
+    disorderSubCategorySelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define subcategories)"];
+    disorderSubCategorySelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new subcategory"];
+    disorderSubCategoryPropertyDef.attributes = disorderSubCategorySelectionAttribs;
+    
+    
+
+    
+    SCPropertyDefinition *disorderCategoryPropertyDef = [disorderDef propertyDefinitionWithName:@"category"];
+    
+	disorderCategoryPropertyDef.type = SCPropertyTypeObjectSelection;
+	SCObjectSelectionAttributes *disorderCategorySelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:categoryDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    disorderCategorySelectionAttribs.allowAddingItems = YES;
+    disorderCategorySelectionAttribs.allowDeletingItems = YES;
+    disorderCategorySelectionAttribs.allowMovingItems = YES;
+    disorderCategorySelectionAttribs.allowEditingItems = YES;
+    disorderCategorySelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define Categories)"];
+    disorderCategorySelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new category"];
+    disorderCategoryPropertyDef.attributes = disorderCategorySelectionAttribs;
+    
+    
+    
+    
+    SCPropertyDefinition *specifierPropertyDef = [diagnosisSpecifierDef propertyDefinitionWithName:@"specifier"];
+	
+    
+	specifierPropertyDef.type = SCPropertyTypeTextView;
+    
+    
+    SCPropertyDefinition *disorderSubCategoryDescPropertyDef = [subCategoryDef propertyDefinitionWithName:@"desc"];
+	
+    disorderSubCategoryDescPropertyDef.title=@"Description";
+	disorderSubCategoryDescPropertyDef.type = SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *diagnosisPrognosisPropertyDef = [diagnosisLogyDef propertyDefinitionWithName:@"prognosis"];
+	
+    
+	diagnosisPrognosisPropertyDef.type = SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *subCategoryPropertyDef = [subCategoryDef propertyDefinitionWithName:@"subCategory"];
+	
+    
+	subCategoryPropertyDef.type = SCPropertyTypeTextView;
+    
+    
+    SCPropertyDefinition *categoryPropertyDef = [categoryDef propertyDefinitionWithName:@"categoryName"];
+	
+   
+	categoryPropertyDef.type = SCPropertyTypeTextView;
+    
+    
+    SCPropertyDefinition *disorderCategoryDescPropertyDef = [categoryDef propertyDefinitionWithName:@"desc"];
+	
+    disorderCategoryDescPropertyDef.title=@"Description";
+	disorderCategoryDescPropertyDef.type = SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *disorderSystemDescPropertyDef = [disorderClassificationSystemDef propertyDefinitionWithName:@"desc"];
+	
+    disorderSystemDescPropertyDef.title=@"Description";
+	disorderSystemDescPropertyDef.type = SCPropertyTypeTextView;
+    
+
+    
+    SCPropertyDefinition *classifcationSystemPropertyDef = [disorderClassificationSystemDef propertyDefinitionWithName:@"classificationSystem"];
+	
+	classifcationSystemPropertyDef.type = SCPropertyTypeTextView;
+    
+    
+    
+    SCPropertyDefinition *disorderDescPropertyDef = [disorderDef propertyDefinitionWithName:@"desc"];
+	
+	disorderDescPropertyDef.type = SCPropertyTypeTextView;
+    disorderDescPropertyDef.title=@"Description";
+    
+    SCPropertyDefinition *disorderNamePropertyDef = [disorderDef propertyDefinitionWithName:@"disorderName"];
+	
+	disorderNamePropertyDef.type = SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *disorderNotesPropertyDef = [disorderDef propertyDefinitionWithName:@"notes"];
+	
+	disorderNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *diagnosisNotesPropertyDef = [diagnosisHistoryDef propertyDefinitionWithName:@"notes"];
+	
+	diagnosisNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *diagnosisLogNotesPropertyDef = [diagnosisLogyDef propertyDefinitionWithName:@"notes"];
+	
+	diagnosisLogNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *diagnosisSpecifierPropertyDef = [diagnosisHistoryDef propertyDefinitionWithName:@"specifiers"];
+    
+	diagnosisSpecifierPropertyDef.type = SCPropertyTypeObjectSelection;
+	SCObjectSelectionAttributes *diagnosisSpecifiersSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:diagnosisSpecifierDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
+    diagnosisSpecifiersSelectionAttribs.allowAddingItems = YES;
+    diagnosisSpecifiersSelectionAttribs.allowDeletingItems = YES;
+    diagnosisSpecifiersSelectionAttribs.allowMovingItems = YES;
+    diagnosisSpecifiersSelectionAttribs.allowEditingItems = YES;
+    diagnosisSpecifiersSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define Specifiers)"];
+    diagnosisSpecifiersSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new specifier"];
+    diagnosisSpecifierPropertyDef.attributes = diagnosisSpecifiersSelectionAttribs;
+    
+    
+    SCPropertyDefinition *disorderSpecifiersPropertyDef=[disorderDef propertyDefinitionWithName:@"specifiers"];
+    
+    disorderSpecifiersPropertyDef.type=SCPropertyTypeArrayOfObjects;
+    
+    disorderSpecifiersPropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:diagnosisSpecifierDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add Specifiers"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];
+    
+    
+    
+    SCPropertyDefinition *diagnosisLogsPropertyDef=[diagnosisHistoryDef propertyDefinitionWithName:@"diagnosisLog"];
+    
+    diagnosisLogsPropertyDef.type=SCPropertyTypeArrayOfObjects;
+    
+    diagnosisLogsPropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:diagnosisLogyDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add Diagnosis Logs"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];
+    
+    SCPropertyDefinition *disorderSymptomsDef = [disorderDef propertyDefinitionWithName:@"symptoms"];
+    
+    
+    disorderSymptomsDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:symptomNameDef
+                                                                                       allowAddingItems:YES
+                                                                                     allowDeletingItems:YES
+                                                                                       allowMovingItems:YES expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"Add Symptoms"]  addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:NO];
+    
+    [diagnosisLogyDef addPropertyDefinition:severityLevelDataProperty];
+    
+    SCPropertyDefinition *diagnosisSymptomsPropertyDef = [diagnosisLogyDef propertyDefinitionWithName:@"symptoms"];
+    
+	diagnosisSymptomsPropertyDef.type = SCPropertyTypeObjectSelection;
+	SCObjectSelectionAttributes *diagnosisSymptomsSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:symptomNameDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
+    diagnosisSymptomsSelectionAttribs.allowAddingItems = YES;
+    diagnosisSymptomsSelectionAttribs.allowDeletingItems = YES;
+    diagnosisSymptomsSelectionAttribs.allowMovingItems = YES;
+    diagnosisSymptomsSelectionAttribs.allowEditingItems = YES;
+    diagnosisSymptomsSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define Symptoms)"];
+    diagnosisSymptomsSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new symptom"];
+    diagnosisSymptomsPropertyDef.attributes = diagnosisSymptomsSelectionAttribs;
+    
+    SCPropertyDefinition *diagnosisMedicationsPropertyDef = [diagnosisHistoryDef propertyDefinitionWithName:@"medications"];
+    
+	diagnosisMedicationsPropertyDef.type = SCPropertyTypeObjectSelection;
+	SCObjectSelectionAttributes *diagnosisMedicationSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:medicationDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
+    diagnosisMedicationSelectionAttribs.allowAddingItems = YES;
+    diagnosisMedicationSelectionAttribs.allowDeletingItems = YES;
+    diagnosisMedicationSelectionAttribs.allowMovingItems = YES;
+    diagnosisMedicationSelectionAttribs.allowEditingItems = YES;
+    diagnosisMedicationSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add Medication Log)"];
+    diagnosisMedicationSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new Medication"];
+    diagnosisMedicationsPropertyDef.attributes = diagnosisMedicationSelectionAttribs;
+    
+ 
+    
+    
+    SCPropertyDefinition *dateDiagnosedPropertyDef = [diagnosisHistoryDef propertyDefinitionWithName:@"dateDiagnosed"];
+	dateDiagnosedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                         datePickerMode:UIDatePickerModeDate
+                                                          displayDatePickerInDetailView:NO];
+   
+    SCPropertyDefinition *dateRecoveredPropertyDef = [diagnosisHistoryDef propertyDefinitionWithName:@"dateRecovered"];
+	dateRecoveredPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                         datePickerMode:UIDatePickerModeDate
+                                                          displayDatePickerInDetailView:NO];
+    dateRecoveredPropertyDef.title=@"Date Ended";
+    SCPropertyDefinition *treatmentStartedPropertyDef = [diagnosisHistoryDef propertyDefinitionWithName:@"treatmentStarted"];
+	treatmentStartedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                         datePickerMode:UIDatePickerModeDate
+                                                          displayDatePickerInDetailView:NO];
+    
+    SCPropertyDefinition *diagnosisLogDatePropertyDef = [diagnosisLogyDef propertyDefinitionWithName:@"logDate"];
+	diagnosisLogDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                            datePickerMode:UIDatePickerModeDate
+                                                             displayDatePickerInDetailView:YES];
+    
+    SCPropertyDefinition *diagnosisLogOnsetPropertyDef = [diagnosisLogyDef propertyDefinitionWithName:@"onset"];
+	diagnosisLogOnsetPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                            datePickerMode:UIDatePickerModeDate
+                                                             displayDatePickerInDetailView:NO];
+    
+    SCPropertyDefinition *diagnosisOnsetPropertyDef = [diagnosisHistoryDef propertyDefinitionWithName:@"onset"];
+	diagnosisOnsetPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                             datePickerMode:UIDatePickerModeDate
+                                                              displayDatePickerInDetailView:NO];
+    
+    
+
+    
+    
     return self;
 
 
