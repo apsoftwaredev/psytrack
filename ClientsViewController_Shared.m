@@ -756,6 +756,25 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     [self.clientDef.propertyGroups addGroup:clientInfoGroup];
     [self.clientDef.propertyGroups addGroup:groupsGroup];
+    
+    
+    
+    SCEntityDefinition *diagnosisHistoryDef=[SCEntityDefinition definitionWithEntityName:@"DiagnosisHistoryEntity" managedObjectContext:managedObjectContext propertyNamesString:@"disorder;specifiers;axis;dateDiagnosed;dateRecovered;notes;onset;status;diagnosedBy;diagnosisLog; medications"];
+    
+    diagnosisHistoryDef.orderAttributeName=@"order";
+    SCEntityDefinition *diagnosisLogyDef=[SCEntityDefinition definitionWithEntityName:@"DiagnosisLogEntity" managedObjectContext:managedObjectContext propertyNamesString:@"logDate;symptoms;frequency;onset;prognosis;severity;notes"];
+    diagnosisLogyDef.orderAttributeName=@"order";
+    
+    SCEntityDefinition *diagnosisSpecifiersyDef=[SCEntityDefinition definitionWithEntityName:@"DisorderSpecifierEntity" managedObjectContext:managedObjectContext propertyNamesString:@"specifier"];
+    diagnosisSpecifiersyDef.orderAttributeName=@"order";
+    
+    
+    SCEntityDefinition *disorderDef=[SCEntityDefinition definitionWithEntityName:@"DisorderEntity" managedObjectContext:managedObjectContext propertyNamesString:@"disorderName;specifiers;code;desc;notes;category;classificationSystem;subCategory;symptoms"];
+    disorderDef.keyPropertyName=@"code";
+    
+    
+    
+    
 //    self.clientDef.orderAttributeName=@"order";
    
 
