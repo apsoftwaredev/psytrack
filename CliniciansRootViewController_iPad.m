@@ -135,9 +135,9 @@
 #pragma SCTableViewModelDelegate methodds
 
 
-//-(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    [super tableViewModel:tableViewModel valueChangedForRowAtIndexPath:indexPath];
-//       
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath{
+    [super tableViewModel:tableViewModel valueChangedForRowAtIndexPath:indexPath];
+//
 //   
 //    if (tableViewModel.tag==0||tableViewModel.tag==1) {
 ////        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
@@ -152,32 +152,32 @@
 ////                    NSString *lastNameStr=lastNameField.text;
 ////                    if (lastNameStr.length) {
 ////                        //DLog(@"current cell superview is %@",[self.tableViewModel indexPathForCell:currentTableViewCell]);
-//                        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:[tableViewModel.masterModel indexPathForCell:currentTableViewCell].section];
+                        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:[tableViewModel.masterModel indexPathForCell:currentTableViewCell].section];
 ////                        unsigned short lastNameFirstChar=[lastNameStr characterAtIndex:0];
 ////                        if ((unsigned short)[section.headerTitle characterAtIndex:0]!=(unsigned short)lastNameFirstChar) {
 //            
 //        //DLog(@"they arent equal");
 //        
-//        SCTableViewCell *cell=nil;
-//        if (indexPath.row !=NSNotFound) {
-//           cell =(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-//        }  
-//        DLog(@"selection cell %@",[cell class]);
-//        
-////        if (!addingClinician && tableViewModel.tag==1&&cell&&indexPath.section==0&&![cell isKindOfClass:[SCArrayOfObjectsCell class]]&&![cell isKindOfClass:[SCObjectCell class]]&&![cell isKindOfClass:[SCObjectSelectionCell class]]) {
-////            [section commitCellChanges];
-////            [tableViewModel.masterModel reloadBoundValues];
-////            [tableViewModel.masterModel.modeledTableView reloadData];
-////            
-////
-////        }
-//                                                    
+        SCTableViewCell *cell=nil;
+        if (indexPath.row !=NSNotFound) {
+           cell =(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+        }  
+        DLog(@"selection cell %@",[cell class]);
+        
+        if (!addingClinician && tableViewModel.tag==1&&cell&&indexPath.section==0&&![cell isKindOfClass:[SCArrayOfObjectsCell class]]&&![cell isKindOfClass:[SCObjectCell class]]&&![cell isKindOfClass:[SCObjectSelectionCell class]]) {
+            [section commitCellChanges];
+            [tableViewModel.masterModel reloadBoundValues];
+            [tableViewModel.masterModel.modeledTableView reloadData];
+            
+
+        }
+//
 //                     
 //
 //    }
 ////DLog(@"did end editing row");
 //
-//}
+}
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     if (tableModel.tag==0) {

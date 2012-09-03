@@ -732,7 +732,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     vitalsPropertyDef.title=@"Vitals/Height/Weight";
-    SCPropertyGroup *clientInfoGroup = [SCPropertyGroup groupWithHeaderTitle:@"De-Identified Client Data" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth",@"initials",@"demographicInfo",@"dateAdded",@"currentClient",@"phoneNumbers", @"logs",@"medicationHistory",@"diagnoses", @"vitals", @"notes", nil]];
+    SCPropertyGroup *clientInfoGroup = [SCPropertyGroup groupWithHeaderTitle:@"De-Identified Client Data" footerTitle:@"De-Identified Means Cannot Be Traced or Linked to Actual Client Records or Individuals" propertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth",@"initials",@"demographicInfo",@"dateAdded",@"currentClient",@"phoneNumbers", @"logs",@"medicationHistory",@"diagnoses", @"vitals", @"notes", nil]];
     
     
     SCEntityDefinition *clientGroupDef=[SCEntityDefinition definitionWithEntityName:@"ClientGroupEntity" managedObjectContext:managedObjectContext propertyNamesString:@"Client Group:(groupName,addNewClients)"];
@@ -762,9 +762,9 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     
-    SCEntityDefinition *diagnosisHistoryDef=[SCEntityDefinition definitionWithEntityName:@"DiagnosisHistoryEntity" managedObjectContext:managedObjectContext propertyNamesString:@"disorder;specifiers;axis;dateDiagnosed;dateRecovered;treatmentStarted;notes;onset;status;diagnosedBy;diagnosisLog; medications"];
+    SCEntityDefinition *diagnosisHistoryDef=[SCEntityDefinition definitionWithEntityName:@"DiagnosisHistoryEntity" managedObjectContext:managedObjectContext propertyNamesString:@"disorder;specifiers;axis;primary;dateDiagnosed;treatmentStarted;dateEnded;notes;onset;status;diagnosisLog; medications"];
        
-    diagnosisHistoryDef.orderAttributeName=@"order";
+    diagnosisHistoryDef.keyPropertyName=@"axis";
     diagnosisHistoryDef.titlePropertyName=@"axis;disorder.disorderName;specifiers.specifier";
     SCEntityDefinition *diagnosisLogyDef=[SCEntityDefinition definitionWithEntityName:@"DiagnosisLogEntity" managedObjectContext:managedObjectContext propertyNamesString:@"logDate;symptoms;frequency;onset;prognosis;notes"];
     diagnosisLogyDef.orderAttributeName=@"order";
@@ -775,15 +775,42 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     SCEntityDefinition *disorderDef=[SCEntityDefinition definitionWithEntityName:@"DisorderEntity" managedObjectContext:managedObjectContext propertyNamesString:@"disorderName;specifiers;code;desc;notes;category;classificationSystem;subCategory;symptoms"];
     disorderDef.keyPropertyName=@"code";
+    disorderDef.titlePropertyName=@"classificationSystem.abbreviatedName;code;disorderName";
     
-    SCEntityDefinition *disorderClassificationSystemDef=[SCEntityDefinition definitionWithEntityName:@"DisorderSystemEntity" managedObjectContext:managedObjectContext propertyNamesString:@"classificationSystem;desc"];
+    SCEntityDefinition *disorderClassificationSystemDef=[SCEntityDefinition definitionWithEntityName:@"DisorderSystemEntity" managedObjectContext:managedObjectContext propertyNamesString:@"classificationSystem;abbreviatedName;desc"];
     disorderClassificationSystemDef.orderAttributeName=@"order";
+    disorderClassificationSystemDef.titlePropertyName=@"abbreviatedName;classificationSystem";
     
     SCEntityDefinition *categoryDef=[SCEntityDefinition definitionWithEntityName:@"DisorderCategoryEntity" managedObjectContext:managedObjectContext propertyNamesString:@"categoryName;desc"];
     categoryDef.orderAttributeName=@"order";
 
     SCEntityDefinition *subCategoryDef=[SCEntityDefinition definitionWithEntityName:@"DisorderSubCategoryEntity" managedObjectContext:managedObjectContext propertyNamesString:@"subCategory;desc"];
     subCategoryDef.orderAttributeName=@"order";
+    
+    
+    
+    //create the dictionary with the data bindings
+    NSDictionary *diagnosingCliniciansDataBindings = [NSDictionary
+                                           dictionaryWithObjects:[NSArray arrayWithObjects:@"diagnosedBy",@"Diagnosed By",[NSNumber numberWithBool:NO],@"diagnosedBy",[NSNumber numberWithBool:YES],nil]
+                                           forKeys:[NSArray arrayWithObjects:@"1",@"90",@"91",@"92",@"93",nil ]]; // 1 are the control tags
+	
+    //create the custom property definition
+    SCCustomPropertyDefinition *diagnosingCliniciansDataProperty = [SCCustomPropertyDefinition definitionWithName:@"DiagnosersData"
+                                                                                        uiElementClass:[ClinicianSelectionCell class] objectBindings:diagnosingCliniciansDataBindings];
+	
+    
+    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
+    diagnosingCliniciansDataProperty.autoValidate=FALSE;
+    
+    
+    
+    
+    
+
+    [diagnosisHistoryDef addPropertyDefinition:diagnosingCliniciansDataProperty];
+
+    
+    
     
     SCPropertyDefinition *diagnosisDisorderPropertyDef = [diagnosisHistoryDef propertyDefinitionWithName:@"disorder"];
     
@@ -987,13 +1014,13 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     SCPropertyDefinition *dateDiagnosedPropertyDef = [diagnosisHistoryDef propertyDefinitionWithName:@"dateDiagnosed"];
 	dateDiagnosedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
                                                                          datePickerMode:UIDatePickerModeDate
-                                                          displayDatePickerInDetailView:NO];
+                                                          displayDatePickerInDetailView:YES];
    
-    SCPropertyDefinition *dateRecoveredPropertyDef = [diagnosisHistoryDef propertyDefinitionWithName:@"dateRecovered"];
+    SCPropertyDefinition *dateRecoveredPropertyDef = [diagnosisHistoryDef propertyDefinitionWithName:@"dateEnded"];
 	dateRecoveredPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
                                                                          datePickerMode:UIDatePickerModeDate
                                                           displayDatePickerInDetailView:NO];
-    dateRecoveredPropertyDef.title=@"Date Ended";
+    
     SCPropertyDefinition *treatmentStartedPropertyDef = [diagnosisHistoryDef propertyDefinitionWithName:@"treatmentStarted"];
 	treatmentStartedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
                                                                          datePickerMode:UIDatePickerModeDate

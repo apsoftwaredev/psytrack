@@ -1180,12 +1180,15 @@
     
     firstNameDataProperty.autoValidate=FALSE;
         
-        firstNameDataProperty.cellActions.valueChanged = ^(SCTableViewCell *cell, NSIndexPath *indexPath)
-        {
-            [cell commitChanges];
-            [cell.ownerTableViewModel.masterModel reloadBoundValues];
-            [cell.ownerTableViewModel.masterModel.modeledTableView reloadData];
-        };
+//        firstNameDataProperty.cellActions.valueChanged = ^( SCTableViewCell *cell, NSIndexPath *indexPath)
+//        {
+//            if (indexPath.row!=NSNotFound) {
+//           
+//            [cell commitChanges];
+//            [cell.ownerTableViewModel.masterModel reloadBoundValues];
+//            [cell.ownerTableViewModel.masterModel.modeledTableView reloadData];
+//            }
+//        };
     [self.clinicianDef insertPropertyDefinition:firstNameDataProperty atIndex:1];
     
     
@@ -1217,12 +1220,12 @@
                                                                                  uiElementNibName:textFieldAndLableNibName 
                                                                                    objectBindings:lastNameDataBindings];
 	
-        lastNameDataProperty.cellActions.valueChanged = ^(SCTableViewCell *cell, NSIndexPath *indexPath)
-        {
-            [cell commitChanges];
-            [cell.ownerTableViewModel.masterModel reloadBoundValues];
-            [cell.ownerTableViewModel.masterModel.modeledTableView reloadData];
-        };
+//        lastNameDataProperty.cellActions.valueChanged = ^(SCTableViewCell *cell, NSIndexPath *indexPath)
+//        {
+//            [cell commitChanges];
+//            [cell.ownerTableViewModel.masterModel reloadBoundValues];
+//            [cell.ownerTableViewModel.masterModel.modeledTableView reloadData];
+//        };
     
     lastNameDataProperty.autoValidate=FALSE;
     

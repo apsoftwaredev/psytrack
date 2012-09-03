@@ -817,7 +817,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
             }
         }
     }
-    if (tableViewModel.tag==3&&[cell isKindOfClass:[DrugNameObjectSelectionCell class]]) {
+   else if ((tableViewModel.tag==3||tableViewModel.tag==5)&&[cell isKindOfClass:[DrugNameObjectSelectionCell class]]) {
         DrugNameObjectSelectionCell *drugNameObjectSelectionCell=(DrugNameObjectSelectionCell *)cell;
         
         if (drugNameObjectSelectionCell.drugProduct) {
@@ -833,7 +833,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
         
     }
     
-    if (tableViewModel.tag==4){
+   else if (tableViewModel.tag==4){
         
         UIView *viewOne = [cell viewWithTag:14];
         switch (cell.tag) {
@@ -962,7 +962,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                         return;
                     }
                     
-                    if ([managedObject.entity.name isEqualToString:@"MedicationEntity"]) {
+                   else if ([managedObject.entity.name isEqualToString:@"MedicationEntity"]) {
                         //define and initialize a date formatter
                         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
                         
@@ -1002,7 +1002,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                         return;
                     }
                     
-                    if ([managedObject.entity.name isEqualToString:@"VitalsEntity"]) {
+                   else if ([managedObject.entity.name isEqualToString:@"VitalsEntity"]) {
                         //DLog(@"the managed object entity is Vitals Entity");
                         
                         
@@ -1043,9 +1043,116 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                         
                     }
 
+                   else if ([managedObject.entity.name isEqualToString:@"DiagnosisHistoryEntity"]) {
+                       //DLog(@"the managed object entity is Vitals Entity");
+                       
+                       
+                                              
+                       
+                       NSString *axisStr=[managedObject valueForKey:@"axis"];
+                       NSString*disorderName=[managedObject valueForKeyPath:@"disorder.disorderName"];
+                       NSMutableSet *specifiersSet=[managedObject mutableSetValueForKeyPath:@"specifiers.specifier"];
+                       NSDate *dateEnded=[managedObject valueForKey:@"dateEnded"];
+                       NSNumber *primary=[managedObject valueForKey:@"primary"];
+                       NSString *classificationSystem=[managedObject valueForKeyPath:@"disorder.classificationSystem.abbreviatedName"];
+                       
+                       BOOL primaryBool=primary?(BOOL)[primary boolValue]:NO;
+                       
+                       NSString *specifiersStr=nil;
+                       for (NSString *specifier in specifiersSet) {
+                           specifiersStr=specifiersStr?[specifiersStr stringByAppendingFormat:@", %@",specifier]:specifier;
+                       }
+                       
+                       
+                       
+                       
+                       
+                       NSString *labelText=axisStr&&axisStr.length?axisStr:nil;
+                       
+                       
+                       if (dateEnded) {
+                           NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                           
+                           //set the date format
+                           [dateFormatter setDateFormat:@"M/d/yyyy"];
+                           [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+                           
+                           if (labelText&&labelText.length) {
+                               labelText=[labelText stringByAppendingFormat:@" (Ended %@)",[dateFormatter stringFromDate:dateEnded]];
+                           }
+                           else{
+                               
+                               labelText=[dateFormatter stringFromDate:dateEnded];
+                               
+                           }
+                           cell.textLabel.textColor=[UIColor blackColor];
+                           
+                       }
+                       else
+                       {
+                           if (primaryBool) {
+                               cell.textLabel.textColor=[UIColor redColor];
+                           }
+                           else{
+                               cell.textLabel.textColor=[UIColor blueColor];
+                           }
+                           
+                       }
+                       
+
+                       
+                       if (classificationSystem && classificationSystem.length ){
+                           
+                           if (labelText&&labelText.length) {
+                               labelText=[labelText stringByAppendingFormat:@" %@", classificationSystem];
+                           }
+                           else
+                           {
+                               labelText=classificationSystem;
+                           }
+                           
+                       }
+                       
+                       
+                       
+                                             
+                       if (disorderName && disorderName.length ){
+                           
+                           if (labelText&&labelText.length) {
+                               labelText=[labelText stringByAppendingFormat:@" %@", disorderName];
+                           }
+                           else
+                           {
+                               labelText=disorderName;
+                           }
+                           
+                       }
+                       
+                       if (specifiersStr && specifiersStr.length ){
+                           
+                           if (labelText&&labelText.length) {
+                               labelText=[labelText stringByAppendingFormat:@", %@", specifiersStr];
+                           }
+                           else
+                           {
+                               labelText=specifiersStr;
+                           }
+                           
+                       }
+
+                       
+                       
+                       
+                       cell.textLabel.text=labelText;
+                       //change the text color to red
+                       
+                       return;
+                       
+                   }
+
                 }
             }
-        } 
+        }
             break;
 
         case 3:
@@ -1125,6 +1232,121 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
             
         case 4:
             //this is a fourth level detail view
+             if (managedObject &&[managedObject respondsToSelector:@selector(entity)]) {
+             
+             
+                 if ([managedObject.entity.name isEqualToString:@"MedicationEntity"]) {
+                     //define and initialize a date formatter
+                     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                     
+                     //set the date format
+                     [dateFormatter setDateFormat:@"M/d/yyyy"];
+                     [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+                     
+                     NSDate *startedDate=[managedObject valueForKey:@"dateStarted"];
+                     NSDate *discontinued=[managedObject valueForKey:@"discontinued"];
+                     NSString *drugName=[managedObject valueForKey:@"drugName"];
+                     //                        NSString *notes=[managedObject valueForKey:@"notes"];
+                     
+                     NSString *labelString=[NSString string];
+                     if (drugName.length) {
+                         labelString=drugName;
+                     }
+                     if (startedDate) {
+                         
+                         NSString *startedDateStr=[dateFormatter stringFromDate:startedDate];
+                         if (labelString.length && startedDateStr.length) {
+                             labelString=[labelString stringByAppendingFormat:@"; started: %@",startedDateStr];
+                         }
+                         
+                     }
+                     if (discontinued)
+                     {
+                         
+                         NSString *discontinueddDateStr=[dateFormatter stringFromDate:discontinued];
+                         if (labelString.length && discontinueddDateStr.length) {
+                             labelString=[labelString stringByAppendingFormat:@"; discontinued: %@",discontinueddDateStr];
+                         }
+                         
+                     }
+                     else {
+                         cell.textLabel.textColor=[UIColor blueColor];
+                     }
+                     cell.textLabel.text=labelString;
+                     return;
+                 }
+                 else if ([managedObject.entity.name isEqualToString:@"DiagnosisLogEntity"]) {
+                     
+                     NSDate *logDate=[managedObject valueForKey:@"logDate"];
+                     NSSet *symptoms=[managedObject mutableSetValueForKeyPath:@"symptoms.symptomName"];
+                     
+                     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                     NSString *logDateStr=nil;
+                     if (logDate) {
+                         [dateFormatter setDateFormat:@"M/d/yyyy"];
+                         [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+                         logDateStr=[dateFormatter stringFromDate:logDate];
+                         
+
+                     }
+                    NSString *symptomNamesStr=nil;
+                    for (NSString *symptomName in symptoms) {
+                        symptomNamesStr=symptomNamesStr?[symptomNamesStr stringByAppendingFormat:@", %@",symptomName]:symptomName;
+                    }
+
+                    cell.textLabel.text=logDateStr&&symptomNamesStr?[logDateStr stringByAppendingFormat:@": %@",symptomNamesStr]:logDateStr;
+                 
+                    
+                                 
+                 }
+          
+               
+                if ([managedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
+                    //define and initialize a date formatter
+                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                    
+                    //set the date format
+                    [dateFormatter setDateFormat:@"M/d/yy"];
+                    
+                    NSInteger doseChange=(NSInteger )[(NSNumber *)[cell.boundObject valueForKey:@"doseChange"] integerValue];
+                    
+                    NSString *doseChangeString;
+                    switch (doseChange) {
+                        case 0:
+                            doseChangeString=@"No Change";
+                            break;
+                        case 1:
+                            doseChangeString=@"Decrease to";
+                            break;
+                        case 2:
+                            doseChangeString=@"Increase to";
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                    NSString *notes=(NSString *)[cell.boundObject valueForKey:@"notes"];
+                    NSDate *logDate=(NSDate *)[cell.boundObject valueForKey:@"logDate"];
+                    NSString *dosage=(NSString *)[cell.boundObject valueForKey:@"dosage"];
+                    if (doseChangeString &&doseChangeString.length) {
+                        cell.textLabel.text=[NSString stringWithFormat:@"%@: %@ %@",[dateFormatter stringFromDate:logDate],doseChangeString,dosage];
+                    }
+                    else
+                    {
+                        
+                        cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateFormatter stringFromDate:logDate],dosage];
+                    }
+                    
+                    if (notes &&notes.length) {
+                        cell.textLabel.text=[cell.textLabel.text stringByAppendingFormat:@", %@",notes];
+                    }
+                    
+                }
+
+
+             
+            
+            
             
             if (cell.tag==3) {
                 
@@ -1163,65 +1385,88 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                 }
                 
                 
-                return;
-                
+               
             }
             //identify the if the cell has a managedObject
-            if (managedObject && [managedObject respondsToSelector:@selector(entity)]) {
+          
+            return;
+            
                 
                 
-                
-                //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
-                if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
-                    
-                    //DLog(@"entity name is %@",managedObject.entity.name);
-                    //identify the Languages Spoken table
-                    if ([managedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
-                        //define and initialize a date formatter
-                        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                        
-                        //set the date format
-                        [dateFormatter setDateFormat:@"M/d/yy"];
-                        
-                        NSInteger doseChange=(NSInteger )[(NSNumber *)[cell.boundObject valueForKey:@"doseChange"] integerValue];
-                        
-                        NSString *doseChangeString;
-                        switch (doseChange) {
-                            case 0:
-                                doseChangeString=@"No Change";
-                                break;
-                            case 1:
-                                doseChangeString=@"Decrease to";
-                                break;  
-                            case 2:
-                                doseChangeString=@"Increase to";
-                                break;
-                                
-                            default:
-                                break;
-                        }
-                        NSString *notes=(NSString *)[cell.boundObject valueForKey:@"notes"];
-                        NSDate *logDate=(NSDate *)[cell.boundObject valueForKey:@"logDate"];
-                        NSString *dosage=(NSString *)[cell.boundObject valueForKey:@"dosage"];
-                        if (doseChangeString &&doseChangeString.length) {
-                            cell.textLabel.text=[NSString stringWithFormat:@"%@: %@ %@",[dateFormatter stringFromDate:logDate],doseChangeString,dosage];
-                        }
-                        else
-                        {
-                            
-                            cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateFormatter stringFromDate:logDate],dosage];
-                        }
-                        
-                        if (notes &&notes.length) {
-                            cell.textLabel.text=[cell.textLabel.text stringByAppendingFormat:@", %@",notes];
-                        }
-                        
-                    }
-                }
             }
-            
-            
-            
+            break;
+    case 5:
+    
+    {
+        if (managedObject && [managedObject respondsToSelector:@selector(entity)]) {
+            if ([managedObject.entity.name isEqualToString:@"DiagnosisLogEntity"]&&cell.tag==6&&[cell viewWithTag:70]) {
+                
+                UIView *scaleView = [cell viewWithTag:70];
+                if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
+                    
+                    UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
+                    fluencyLevelLabel.text=@"Severity Level:";
+                    break;
+                }
+                break;
+                
+                
+                
+                
+            }
+
+        }
+        return;
+    }
+    break;
+        case 6:
+        {
+            DLog(@"cell tag is  %i",tableViewModel.tag);
+            if (managedObject && [managedObject respondsToSelector:@selector(entity)]) {
+                if ([managedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
+                    //define and initialize a date formatter
+                    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                    
+                    //set the date format
+                    [dateFormatter setDateFormat:@"M/d/yy"];
+                    
+                    NSInteger doseChange=(NSInteger )[(NSNumber *)[cell.boundObject valueForKey:@"doseChange"] integerValue];
+                    
+                    NSString *doseChangeString;
+                    switch (doseChange) {
+                        case 0:
+                            doseChangeString=@"No Change";
+                            break;
+                        case 1:
+                            doseChangeString=@"Decrease to";
+                            break;
+                        case 2:
+                            doseChangeString=@"Increase to";
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                    NSString *notes=(NSString *)[cell.boundObject valueForKey:@"notes"];
+                    NSDate *logDate=(NSDate *)[cell.boundObject valueForKey:@"logDate"];
+                    NSString *dosage=(NSString *)[cell.boundObject valueForKey:@"dosage"];
+                    if (doseChangeString &&doseChangeString.length) {
+                        cell.textLabel.text=[NSString stringWithFormat:@"%@: %@ %@",[dateFormatter stringFromDate:logDate],doseChangeString,dosage];
+                    }
+                    else
+                    {
+                        
+                        cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateFormatter stringFromDate:logDate],dosage];
+                    }
+                    
+                    if (notes &&notes.length) {
+                        cell.textLabel.text=[cell.textLabel.text stringByAppendingFormat:@", %@",notes];
+                    }
+                    
+                }
+                             
+            }
+        }
             break;
         default:
             break;
