@@ -623,36 +623,45 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                 
                 if (cellManagedObject&&[cellManagedObject respondsToSelector:@selector(entity)]) {
                 
-                    if ([cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
-                    
-                {
-                    if ( ![SCUtilities is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
-                    {
-                        UIButton *button=(UIButton *)[cell viewWithTag:300];
-                        [button setTitle:@"Call Number" forState:UIControlStateNormal];
-                        break;
-                    }
-                    
-                    //DLog(@"cell kind of class is %@",cell.class);
-                    if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]]) 
-                    {
-                        EncryptedSCTextFieldCell *encryptedTextFieldCell=(EncryptedSCTextFieldCell *)cell;
+                    if ([cellManagedObject.entity.name isEqualToString:@"SubstanceUseEntity"]  )
                         
-                        UITextField *textField=(UITextField *)encryptedTextFieldCell.textField;
-                        
-                        textField.keyboardType=UIKeyboardTypeNumberPad;
-                        break; 
-                    }
-                    
-                    if ( [cell isKindOfClass:[SCTextFieldCell class]]) 
                     {
-                        SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
+                        UILabel *label=(UILabel *)cell.textLabel;
+                        [label sizeToFit];
                         
-                        textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
-                        break; 
+                        
                     }
-                   
-                }
+                    //                    if ([cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  )
+                    //
+                    //                    {
+                    //                        if ( ![SCUtilities is_iPad] &&[cell isKindOfClass:[ButtonCell class]])
+                    //                        {
+                    //                            UIButton *button=(UIButton *)[cell viewWithTag:300];
+                    //                            [button setTitle:@"Call Number" forState:UIControlStateNormal];
+                    //
+                    //                        }
+                    //
+                    //                        //DLog(@"cell kind of class is %@",cell.class);
+                    //                        if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]])
+                    //                        {
+                    //                            EncryptedSCTextFieldCell *encryptedTextFieldCell=(EncryptedSCTextFieldCell *)cell;
+                    //
+                    //                            UITextField *textField=(UITextField *)encryptedTextFieldCell.textField;
+                    //
+                    //                            textField.keyboardType=UIKeyboardTypeNumberPad;
+                    //
+                    //                        }
+                    //
+                    //                        if ( [cell isKindOfClass:[SCTextFieldCell class]])
+                    //                        {
+                    //                            SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
+                    //                            
+                    //                            textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
+                    //                            
+                    //                        }
+                    //                        
+                    //                    }
+                    
                 
                 
                 if ([cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]) 
@@ -869,6 +878,24 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
     
 }
 
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel didLayoutSubviewsForCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if ((tableViewModel.tag==3||tableViewModel.tag==5) &&([SCSwitchCell class]||[SCTextFieldCell class])) {
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        
+        if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&([cellManagedObject.entity.name isEqualToString:@"SubstanceUseEntity"]||[cellManagedObject.entity.name isEqualToString:@"SubstanceUseLogEntity"])) {
+            [cell.textLabel sizeToFit];
+            if ([cell isKindOfClass:[SCNumericTextFieldCell class]]||[cell isKindOfClass:[SCTextFieldCell class]]) {
+                SCNumericTextFieldCell *numericTextField=(SCNumericTextFieldCell *)cell;
+                numericTextField.textField.textAlignment=UITextAlignmentRight;
+                numericTextField.textField.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin ;
+            }
+            
+        }}
+    
+    
+}
 
 
 
@@ -1117,7 +1144,26 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                         cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateTimeDateFormatter stringFromDate:logDate],notes];
                         return;
                     }
-                    
+
+                    else if ([managedObject.entity.name isEqualToString:@"SubstanceUseEntity"]) {
+                       
+                        NSNumber *currentTreatmentIssue=[managedObject valueForKey:@"currentTreatmentIssue"];
+                        BOOL currentTreatmentIssueBool=currentTreatmentIssue?[currentTreatmentIssue boolValue]:NO;
+                        
+                        if (currentTreatmentIssueBool) {
+                            cell.textLabel.textColor=[UIColor redColor];
+                        }
+                        else{
+                        
+                            cell.textLabel.textColor=[UIColor blackColor];
+                        }
+                                                
+                        
+                        
+                        
+                        return;
+                    }
+
                    else if ([managedObject.entity.name isEqualToString:@"MedicationEntity"]) {
                         //define and initialize a date formatter
                         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -1431,12 +1477,72 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                      cell.textLabel.text=labelString;
                      return;
                  }
+                 else if ([managedObject.entity.name isEqualToString:@"SubstanceUseLogEntity"]) {
+                     
+                     NSDate *logDate=[managedObject valueForKey:@"logDate"];
+                     NSNumber *numberOfTimes=[managedObject valueForKey:@"timesUsedInLastThirtyDays"];
+                     
+                     NSString *notes=[managedObject valueForKey:@"notes"];
+                                          
+                     NSString *displayStr=nil;
+                     if (logDate) {
+                         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                         
+
+                         [dateFormatter setDateFormat:@"M/d/yyyy"];
+                         [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+                         displayStr=[dateFormatter stringFromDate:logDate];
+                         
+                         
+                     }
+                     
+                     if (numberOfTimes) {
+                         
+                         if (displayStr&&displayStr.length) {
+                             displayStr=[displayStr stringByAppendingFormat:@"(%@ times in past 30 days)",numberOfTimes];
+                             
+                             
+                         }
+                         else
+                         {
+                             displayStr=[NSString stringWithFormat:@"%@",numberOfTimes];
+                         
+                         }
+                         
+                     }
+                     if (notes) {
+                         
+                         if (displayStr&&displayStr.length) {
+                             displayStr=[displayStr stringByAppendingFormat:@"; %@ ",notes];
+                             
+                             
+                         }
+                         else
+                         {
+                             displayStr=[NSString stringWithFormat:@"%@",notes];
+                             
+                         }
+                         
+                     }
+                     
+                     
+                     
+                     
+                     
+                     cell.textLabel.text=displayStr;
+                     
+                     
+                     
+                     return;
+                 }
                  else if ([managedObject.entity.name isEqualToString:@"DiagnosisLogEntity"]) {
                      
                      NSDate *logDate=[managedObject valueForKey:@"logDate"];
                      NSSet *symptoms=[managedObject mutableSetValueForKeyPath:@"symptoms.symptomName"];
                      
                      NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                    
+                     
                      NSString *logDateStr=nil;
                      if (logDate) {
                          [dateFormatter setDateFormat:@"M/d/yyyy"];
@@ -2020,7 +2126,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         if (section.cellCount>1) {
             SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
+            SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
             
+            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
             if (notesManagedObject && [notesManagedObject respondsToSelector:@selector(entity)]) {
             
                 if ([ notesManagedObject.entity.name   isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
@@ -2037,9 +2145,38 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     
                 } 
             
-    
+                
+               else if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[ cellManagedObject.entity.name   isEqualToString:@"SubstanceUseEntity"]) {
+                   
+                   if (cell.tag==0 && [cell isKindOfClass:[SCObjectSelectionCell class]]){
+                        SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+                        
+                        if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]])
+                        {
+                            valid=TRUE;
+                        }
+                        else
+                        {
+                            valid=FALSE;
+                        }
+                   }
+                   if (cell.tag==1 && [cell isKindOfClass:[SCNumericTextFieldCell class]]){
+                       SCNumericTextFieldCell *numericTextFieldCell=(SCNumericTextFieldCell *)cell;
+                       int ageOfFirstUse=[numericTextFieldCell.textField.text intValue];
+                       if ( ageOfFirstUse<140 &&ageOfFirstUse>=0)
+                       {
+                           valid=TRUE;
+                       }
+                       else
+                       {
+                           valid=FALSE;
+                       }
+                   }
+                   
+                   
+                }
                 //here it is not the notes cell
-                if ([notesManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[notesCell isKindOfClass:[SCTextFieldCell class]]) {
+               else if ([notesManagedObject.entity.name isEqualToString:@"MedicationEntity"]&&[notesCell isKindOfClass:[SCTextFieldCell class]]) {
                     SCTextFieldCell *drugNameCell=(SCTextFieldCell *)notesCell;
                     
                     if (drugNameCell.textField.text.length) 
@@ -2086,8 +2223,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];;
                     
                     NSNumber *number=[numberFormatter numberFromString:textFieldCell.textField.text];
-                    DLog(@"cell tag is %i",cell.tag);
-                    DLog(@"text inpou is %@",textFieldCell.textField.text);
+                    
                     if (textFieldCell.textField.text.length) {
                    
                     switch (cell.tag) {

@@ -196,6 +196,22 @@
 
 
 }
+- (void)tableViewModel:(SCTableViewModel *)tableViewModel didLayoutSubviewsForCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if([cell isKindOfClass:[SCNumericTextFieldCell class]])
+    {
+        SCNumericTextFieldCell *numericCell=(SCNumericTextFieldCell *)cell;
+        
+        
+        [numericCell.textLabel sizeToFit];
+        numericCell.textField.textAlignment=UITextAlignmentRight;
+        numericCell.textField.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin ;
+        //       CGRect textFieldFrame=numericCell.textField.textInputView.frame;
+        //        textFieldFrame.size.width=50;
+        
+        
+    }
+}
 
 - (void)tableViewModel:(SCTableViewModel *) tableViewModel willConfigureCell:(SCTableViewCell *) cell forRowAtIndexPath:(NSIndexPath *) indexPath
 {

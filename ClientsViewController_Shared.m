@@ -50,7 +50,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	self.clientDef = [SCEntityDefinition definitionWithEntityName:@"ClientEntity" 
                                                       managedObjectContext:managedObjectContext 
                                                              propertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth", @"keyString",
-                                                                                @"initials",  @"demographicInfo", @"dateAdded",@"currentClient"/*,@"phoneNumbers"*/, @"logs", @"medicationHistory",@"diagnoses", @"vitals",
+                                                                                @"initials",  @"demographicInfo", @"dateAdded",@"currentClient"/*,@"phoneNumbers"*/, @"logs", @"medicationHistory",@"diagnoses", @"substanceUse",@"vitals",
                                                                 @"notes",@"groups",nil]];
 	
     
@@ -644,7 +644,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //Create a class definition for the vitals Entity
     SCEntityDefinition *vitalsDef = [SCEntityDefinition definitionWithEntityName:@"VitalsEntity" 
                                                         managedObjectContext:managedObjectContext
-                                                               propertyNames:[NSArray arrayWithObjects:@"dateTaken",@"systolicPressure",@"diastolicPressure", @"heartRate",@"temperature",@"heightTall", @"heightUnit",   @"weight",  @"weightUnit",  nil]];
+                                                               propertyNames:[NSArray arrayWithObjects:@"dateTaken",@"systolicPressure",@"diastolicPressure", @"heartRate",@"temperature",  nil]];
     
     
     
@@ -661,7 +661,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //Do some property definition customization for the vitals Entity defined in vitalsDef
     NSDictionary *heightPickerDataBindings = [NSDictionary 
                                               dictionaryWithObjects:[NSArray arrayWithObjects:@"heightTall",@"Height",@"heightUnit",nil] 
-                                              forKeys:[NSArray arrayWithObjects:@"2", @"3",@"4", nil]]; // 1 is the control tags
+                                              forKeys:[NSArray arrayWithObjects:@"20", @"22",@"23", nil]]; // 1 is the control tags
 	
     
     NSString *heightPickerNibName;
@@ -678,15 +678,11 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     NSDictionary *weightPickerDataBindings = [NSDictionary 
                                               dictionaryWithObjects:[NSArray arrayWithObjects:@"weight",@"Weight",@"weightUnit",nil] 
-                                              forKeys:[NSArray arrayWithObjects:@"2", @"3",@"4", nil]]; // 1 is the control tags
+                                              forKeys:[NSArray arrayWithObjects:@"20", @"21",@"22", nil]]; // 1 is the control tags
 	
     
     
-    
-    [vitalsDef removePropertyDefinitionWithName:@"weight"];
-    [vitalsDef removePropertyDefinitionWithName:@"weightUnit"];
-    [vitalsDef removePropertyDefinitionWithName:@"heightTall"];
-    [vitalsDef removePropertyDefinitionWithName:@"heightUnit"];
+   
     
     NSString *weightPickerNibName;
     if ([SCUtilities is_iPad]) 
@@ -732,7 +728,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     vitalsPropertyDef.title=@"Vitals/Height/Weight";
-    SCPropertyGroup *clientInfoGroup = [SCPropertyGroup groupWithHeaderTitle:@"De-Identified Client Data" footerTitle:@"De-Identified Means Cannot Be Traced or Linked to Actual Client Records or Individuals" propertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth",@"initials",@"demographicInfo",@"dateAdded",@"currentClient",@"phoneNumbers", @"logs",@"medicationHistory",@"diagnoses", @"vitals", @"notes", nil]];
+    SCPropertyGroup *clientInfoGroup = [SCPropertyGroup groupWithHeaderTitle:@"De-Identified Client Data" footerTitle:@"De-Identified Means Cannot Be Traced or Linked to Actual Client Records or Individuals" propertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth",@"initials",@"demographicInfo",@"dateAdded",@"currentClient",@"phoneNumbers", @"logs",@"medicationHistory",@"diagnoses", @"substanceUse",@"vitals", @"notes", nil]];
     
     
     SCEntityDefinition *clientGroupDef=[SCEntityDefinition definitionWithEntityName:@"ClientGroupEntity" managedObjectContext:managedObjectContext propertyNamesString:@"Client Group:(groupName,addNewClients)"];
@@ -1043,7 +1039,103 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                               displayDatePickerInDetailView:NO];
     
     
+    
+    
+    
+    SCEntityDefinition *substanceUseDef=[SCEntityDefinition definitionWithEntityName:@"SubstanceUseEntity" managedObjectContext:managedObjectContext propertyNamesString:@"substance;ageOfFirstUse;currentDrugOfChoice;currentTreatmentIssue;historyOfAbuse;historyOfDependence;historyOfTreatment;lastUse;substanceUseLogs;notes"];
+    
+    substanceUseDef.titlePropertyName=@"substance.substanceName";
+    
+    SCEntityDefinition *substanceNameDef=[SCEntityDefinition definitionWithEntityName:@"SubstanceNameEntity" managedObjectContext:managedObjectContext propertyNamesString:@"substanceName;desc"];
+    
+  
+    SCEntityDefinition *substanceClassDef=[SCEntityDefinition definitionWithEntityName:@"SubstanceClassEntity" managedObjectContext:managedObjectContext propertyNamesString:@"substanceClassName;desc"];
+    
+    
+    SCEntityDefinition *substanceLogDef=[SCEntityDefinition definitionWithEntityName:@"SubstanceUseLogEntity" managedObjectContext:managedObjectContext propertyNamesString:@"logDate;timesUsedInLastThirtyDays;typicalDose;notes"];
+    
+   
+    SCPropertyDefinition *substanceNumberOfTimesUsedPropertyDef=[substanceLogDef propertyDefinitionWithName:@"timesUsedInLastThirtyDays"];
+    
+    substanceNumberOfTimesUsedPropertyDef.title=@"Times Used In Last 30 Days";
+    
+    SCPropertyDefinition *substanceAgeFirstUsedPropertyDef=[substanceUseDef propertyDefinitionWithName:@"ageOfFirstUse"];
+    substanceAgeFirstUsedPropertyDef.autoValidate=NO;
+    
+    SCPropertyDefinition *clientSubstanceUsePropertyDef=[self.clientDef propertyDefinitionWithName:@"substanceUse"];
+    
+       clientSubstanceUsePropertyDef.type=SCPropertyTypeArrayOfObjects;
+    
+    clientSubstanceUsePropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:substanceUseDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add Substance Use"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];
+    
+    
+    SCPropertyDefinition *substanceNamePropertyDef = [substanceUseDef propertyDefinitionWithName:@"substance"];
+    substanceNamePropertyDef.autoValidate=NO;
+	substanceNamePropertyDef.type = SCPropertyTypeObjectSelection;
+	SCObjectSelectionAttributes *substanceNameSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:substanceNameDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    substanceNameSelectionAttribs.allowAddingItems = YES;
+    substanceNameSelectionAttribs.allowDeletingItems = YES;
+    substanceNameSelectionAttribs.allowMovingItems = YES;
+    substanceNameSelectionAttribs.allowEditingItems = YES;
+    substanceNameSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define Substances)"];
+    substanceNameSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new substance"];
+    substanceNamePropertyDef.attributes = substanceNameSelectionAttribs;
+    
 
+    SCPropertyDefinition *substanceClassPropertyDef = [substanceNameDef propertyDefinitionWithName:@"substanceClass"];
+    
+	substanceClassPropertyDef.type = SCPropertyTypeObjectSelection;
+	SCObjectSelectionAttributes *substanceClassSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:substanceClassDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
+    substanceClassSelectionAttribs.allowAddingItems = YES;
+    substanceClassSelectionAttribs.allowDeletingItems = YES;
+    substanceClassSelectionAttribs.allowMovingItems = YES;
+    substanceClassSelectionAttribs.allowEditingItems = YES;
+    substanceClassSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Define Substance Classes)"];
+    substanceClassSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new substance class"];
+    substanceClassPropertyDef.attributes = substanceClassSelectionAttribs;
+    
+    SCPropertyDefinition *clientSubstanceLogPropertyDef=[substanceUseDef propertyDefinitionWithName:@"substanceUseLogs"];
+    
+    clientSubstanceLogPropertyDef.type=SCPropertyTypeArrayOfObjects;
+    
+    clientSubstanceLogPropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:substanceLogDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add Substance Use Log"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];
+    
+
+    SCPropertyDefinition *substanceUseLogDatePropertyDef = [substanceLogDef propertyDefinitionWithName:@"logDate"];
+	substanceUseLogDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                         datePickerMode:UIDatePickerModeDate
+                                                          displayDatePickerInDetailView:YES];
+    
+    
+    
+    SCPropertyDefinition *substanceUseNotesPropertyDef = [substanceUseDef propertyDefinitionWithName:@"notes"];
+	
+	substanceUseNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *substanceUseLogNotesPropertyDef = [substanceLogDef propertyDefinitionWithName:@"notes"];
+	
+	substanceUseLogNotesPropertyDef.type = SCPropertyTypeTextView;
+    SCPropertyDefinition *substanceNameNamePropertyDef = [substanceNameDef propertyDefinitionWithName:@"substanceName"];
+	
+	substanceNameNamePropertyDef.type = SCPropertyTypeTextView;
+    
+    
+    SCPropertyDefinition *substanceNameDescPropertyDef = [substanceNameDef propertyDefinitionWithName:@"desc"];
+	substanceNameDescPropertyDef.title=@"Description";
+	substanceNameDescPropertyDef.type = SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *substanceClassDescPropertyDef = [substanceClassDef propertyDefinitionWithName:@"desc"];
+	substanceClassDescPropertyDef.title=@"Description";
+	substanceClassDescPropertyDef.type = SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *substanceClassNamePropertyDef = [substanceClassDef propertyDefinitionWithName:@"substanceClassName"];
+	
+	substanceClassNamePropertyDef.type = SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *substanceLastUsePropertyDef = [substanceUseDef propertyDefinitionWithName:@"lastUse"];
+	substanceLastUsePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+                                                                          datePickerMode:UIDatePickerModeDate
+                                                           displayDatePickerInDetailView:NO];
     
     
     return self;

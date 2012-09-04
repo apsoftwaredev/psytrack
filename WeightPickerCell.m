@@ -80,9 +80,9 @@
 }
 
 // overrides superclass
-- (void)loadBindingsIntoCustomControls
+- (void)loadBoundValueIntoControl
 {
-    [super loadBindingsIntoCustomControls];
+    [super loadBoundValueIntoControl];
     
     NSInteger weight=[(NSNumber *)[self.boundObject valueForKey:@"weight"]integerValue];
     NSString *unit=(NSString *)[self.boundObject valueForKey:@"weightUnit"];

@@ -86,14 +86,14 @@
 }
 
 // overrides superclass
-- (void)loadBindingsIntoCustomControls
+- (void)loadBoundValueIntoControl
 {
-    [super loadBindingsIntoCustomControls];
+    [super loadBoundValueIntoControl];
     
 //    float heightTall=[(NSNumber *)[self.boundObject valueForKey:@"heightTall"]decimalValue];
     NSString *bigUnit=(NSString *)[self.boundObject valueForKey:@"heightUnit"];
    
-    
+    DLog(@"big unit is %@ ",bigUnit);
     
    
    
@@ -154,6 +154,7 @@
     self.label.text = [NSString stringWithFormat:@"%i %@ %i %@",heightTallFtOrM,bigUnit,heightTallInchesOrCentemeters,littleUnit] ;
     
     
+   
     
 }
 // overrides superclass
@@ -193,7 +194,8 @@
 
 //override superclass
 - (void)cellValueChanged
-{	
+{
+    [super cellValueChanged];
     int firstComponent=[picker selectedRowInComponent:0];
     NSString *bigUnit=[self bigUnitForRow:[picker selectedRowInComponent:1]];
     int thirdComponent=[picker selectedRowInComponent:2];
@@ -202,7 +204,7 @@
     
 	self.label.text = [NSString stringWithFormat:@"%i %@ %i %@",firstComponent,bigUnit,thirdComponent,littleUnit] ;
 	
-	[super cellValueChanged];
+	
 }
 
 //override superclass
