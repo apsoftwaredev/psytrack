@@ -10,7 +10,7 @@
 #import "PTTAppDelegate.h"
 
 #import "InterventionTypeSubtypeEntity.h"
-#import "MonthlyPracticumLogBottonCell.h"
+
 #import "InterventionTypeEntity.h"
 #import "AssessmentTypeEntity.h"
 #import "SupportActivityTypeEntity.h"
@@ -18,7 +18,7 @@
 #import "SupervisionTypeSubtypeEntity.h"
 
 #import "QuartzCore/QuartzCore.h"
-#import "MonthlyPracticumLogTableViewController.h"
+#import "AllHoursReportBottomCell.h"
 #import "SupervisorsAndTotalTimesForMonth.h"
 #import "SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h"
 #import "UILabel_VerticalAlignmentExtention.h"
@@ -467,10 +467,10 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
             
             NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"interventionSubType", nil] forKeys:[NSArray arrayWithObjects:@"20", nil]];
             
-            MonthlyPracticumLogBottonCell *contactOverviewCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindings:bindingsDictionary nibName:bottomCellNibName];
+            AllHoursReportBottomCell *allHoursBottomCell = [AllHoursReportBottomCell cellWithText:nil objectBindings:bindingsDictionary nibName:bottomCellNibName];
             
             
-            return contactOverviewCell;
+            return allHoursBottomCell;
         };
         
         
@@ -527,7 +527,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         NSDictionary *assessmentBindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"assessmentType", nil] forKeys:[NSArray arrayWithObjects:@"20", nil]];
         
-        MonthlyPracticumLogBottonCell *assessmentTypeCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindings:assessmentBindingsDictionary nibName:bottomCellNibName];
+        AllHoursReportBottomCell *assessmentTypeCell = [AllHoursReportBottomCell cellWithText:nil objectBindings:assessmentBindingsDictionary nibName:bottomCellNibName];
         
         return assessmentTypeCell;
     };
@@ -590,11 +590,10 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"supportType", nil] forKeys:[NSArray arrayWithObjects:@"20", nil]];
         
-        MonthlyPracticumLogBottonCell *contactOverviewCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindings:bindingsDictionary nibName:bottomCellNibName];
+        AllHoursReportBottomCell *allHoursBottomCell = [AllHoursReportBottomCell cellWithText:nil objectBindings:bindingsDictionary nibName:bottomCellNibName];
         
         
-        return contactOverviewCell;
-    };
+        return allHoursBottomCell;    };
     
     
     
@@ -670,10 +669,10 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
             
             NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"supervisionSubType", nil] forKeys:[NSArray arrayWithObjects:@"20", nil]];
             
-            MonthlyPracticumLogBottonCell *contactOverviewCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindings:bindingsDictionary nibName:bottomCellNibName];
+            AllHoursReportBottomCell *allHoursBottomCell = [AllHoursReportBottomCell cellWithText:nil objectBindings:bindingsDictionary nibName:bottomCellNibName];
             
             
-            return contactOverviewCell;
+            return allHoursBottomCell;
         };
         
         

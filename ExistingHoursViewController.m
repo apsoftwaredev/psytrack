@@ -160,7 +160,7 @@
     
 
     //Training Type  start
-    SCEntityDefinition *trainingProgramDef=[SCEntityDefinition definitionWithEntityName:@"TrainingProgramEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"school",@"trainingProgram",@"course",@"startDate",@"endDate",@"selectedByDefault", @"notes", nil]];
+    SCEntityDefinition *trainingProgramDef=[SCEntityDefinition definitionWithEntityName:@"TrainingProgramEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"school",@"trainingProgram",@"doctorateLevel",@"course",@"startDate",@"endDate",@"selectedByDefault", @"notes", nil]];
     
     
     
@@ -2419,7 +2419,7 @@ BOOL valid=NO;
     
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         if ([cellManagedObject.entity.name isEqualToString:@"TrainingProgramEntity"]) {
-            if (cell.tag==1) {
+            if (cell.tag==7) {
                 
                 
                 

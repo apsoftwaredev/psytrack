@@ -672,7 +672,7 @@
     
       
     //Training Type  start
-    SCEntityDefinition *trainingProgramDef=[SCEntityDefinition definitionWithEntityName:@"TrainingProgramEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"school",@"trainingProgram",@"course",@"startDate",@"endDate",@"selectedByDefault", @"notes", nil]];
+    SCEntityDefinition *trainingProgramDef=[SCEntityDefinition definitionWithEntityName:@"TrainingProgramEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"school",@"trainingProgram",@"course",@"doctorateLevel",@"startDate",@"endDate",@"selectedByDefault", @"notes", nil]];
     
     
     
@@ -3175,8 +3175,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
-        
-        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
+     
+        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
             
             
             switch (cell.tag) {
@@ -3247,7 +3247,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
                 if (cell.tag==1||cell.tag==2||cell.tag==3)
                     breakTimeTotalHeaderLabel.text=[self tableViewModel:tableViewModel calculateBreakTimeForRowAtIndexPath:indexPath withBoundValues:NO];
-            }
+                }
             
             if ( [cellManagedObject.entity.name isEqualToString:@"SupportActivityClientEntity"]) 
             {
@@ -3262,7 +3262,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
        
         if ([cellManagedObject.entity.name isEqualToString:@"TrainingProgramEntity"]) {
-            if (cell.tag==1) {
+            if (cell.tag==7) {
                        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
             
             

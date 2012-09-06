@@ -166,7 +166,8 @@
 //    objectsModel.al
     objectsModel.enablePullToRefresh = TRUE;
     objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
-    
+    objectsModel.autoAssignDelegateForDetailModels=YES;
+
    
     [self setDatesAndYears];
 
@@ -533,6 +534,59 @@
         
         
     }
+}
+-(void)tableViewModel:(SCTableViewModel *)tableModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if (tableModel.tag==1) {
+        
+        SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+                
+        
+        if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]) {
+            if ([cellManagedObject.entity.name isEqualToString:@"TrainingProgramEntity"]) {
+        
+                if (cell.tag==7) {
+                    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                    
+                    
+                    NSFetchRequest *trainingProgramFetchRequest = [[NSFetchRequest alloc] init];
+                    NSEntityDescription *trainingProgramEntity = [NSEntityDescription entityForName:@"TrainingProgramEntity" inManagedObjectContext:appDelegate.managedObjectContext];
+                    [trainingProgramFetchRequest setEntity:trainingProgramEntity];
+                    
+                    NSPredicate *defaultTrainingPredicate = [NSPredicate predicateWithFormat:@"selectedByDefault == %@ ", [NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES]];
+                    [trainingProgramFetchRequest setPredicate:defaultTrainingPredicate];
+                    
+                    NSError *trainingProgramError = nil;
+                    NSArray *trainingProgramFetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:trainingProgramFetchRequest error:&trainingProgramError];
+                    
+                    
+                    if (trainingProgramFetchedObjects&&trainingProgramFetchedObjects.count) {
+                        
+                        for (TrainingProgramEntity *trainingProgram in trainingProgramFetchedObjects) {
+                            [trainingProgram willChangeValueForKey:@"selectedByDefault"];
+                            trainingProgram.selectedByDefault=[NSNumber numberWithBool:NO];
+                            [trainingProgram didChangeValueForKey:@"selectedByDefault"];
+                        }
+                        
+                        
+                        if (tableModel.masterModel.sectionCount) {
+                            SCSelectionSection *masterModelSection=(SCSelectionSection *)[tableModel.masterModel sectionAtIndex:0];
+                            
+                            [masterModelSection setSelectedItemIndex:[NSNumber numberWithInt:-1]];
+                            [tableModel.masterModel.tableView reloadData];
+                            
+                        }
+
+                    }
+                                               
+                        
+                    }
+                }
+            }
+
+        }
+    
 }
 
 #pragma mark -
