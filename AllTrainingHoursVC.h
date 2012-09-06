@@ -7,7 +7,22 @@
 //
 
 #import <SensibleTableView/SensibleTableView.h>
+#import "ClinicianEntity.h"
+#import "TrainingProgramEntity.h"
 
-@interface AllTrainingHoursVC : SCTableViewController
+@interface AllTrainingHoursVC : SCViewController <SCTableViewControllerDelegate, SCTableViewModelDelegate>{
+    
+    
+    SCArrayOfObjectsModel *objectsModel;
+    
+    ClinicianEntity *supervisorObject;
+    
+    TrainingProgramEntity *trainingProgram_;
+    NSDate *monthToDisplay_;
+    BOOL markAmended;
+}
+
+@property(nonatomic, weak) NSString *studentName;
+
 
 @end

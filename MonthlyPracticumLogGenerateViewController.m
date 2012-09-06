@@ -48,7 +48,7 @@
     
        
     //begin
-    SCEntityDefinition *trainingProgramDef=[SCEntityDefinition definitionWithEntityName:@"TrainingProgramEntity" managedObjectContext:appDelegate.managedObjectContext propertyNames:[NSArray arrayWithObjects:@"school",@"trainingProgram",@"course",@"startDate",@"endDate",@"selectedByDefault", @"notes", nil]];
+    SCEntityDefinition *trainingProgramDef=[SCEntityDefinition definitionWithEntityName:@"TrainingProgramEntity" managedObjectContext:appDelegate.managedObjectContext propertyNames:[NSArray arrayWithObjects:@"school",@"trainingProgram",@"course",@"doctorateLevel",@"startDate",@"endDate",@"selectedByDefault", @"notes", nil]];
     
     
     trainingProgramDef.titlePropertyName=@"trainingProgram;course";
@@ -259,7 +259,7 @@
             phrase=nil;
         }
         
-        [PDFRenderer drawPDF:fileName month:self.monthToDisplay trainingProgram:trainingProgram password:phrase amended:self.amendedLogSwitch.on ];
+        [PDFRenderer drawMonthlyPracticumLogPDF:fileName month:self.monthToDisplay trainingProgram:trainingProgram password:phrase amended:self.amendedLogSwitch.on ];
         
         NSString *filePath = pdfs  ;// Path to last PDF file
         

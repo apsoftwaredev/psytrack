@@ -7,8 +7,71 @@
 //
 
 #import "AllHoursReportBottomCell.h"
+#import "InterventionTypeSubtypeEntity.h"
+#import "MonthlyPracticumLogTopCell.h"
+#import "QuartzCore/QuartzCore.h"
+#import "ClinicianEntity.h"
 
 @implementation AllHoursReportBottomCell
+
+@synthesize trackTypeWithTotalTimesObject=trackTypeWithTotalTimesObject_;
+@synthesize cellSubTypeLabel;
+
+@synthesize hoursTotalHoursLabel;
+@synthesize cellsContainerView;
+
+
+
+-(void)willDisplay{
+    
+    [super willDisplay];
+   
+    
+    
+    self.cellSubTypeLabel.text=self.trackTypeWithTotalTimesObject.typeLabelText;
+   
+    
+   
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    self.layer.borderWidth=0;
+    self.accessoryType=UITableViewCellAccessoryNone;
+    
+}
+
+-(void)performInitialization{
+    
+    
+    
+    
+}
+
+-(void)loadBindingsIntoCustomControls{
+    
+    [super loadBindingsIntoCustomControls];
+    
+    
+    self.trackTypeWithTotalTimesObject=(TrackTypeWithTotalTimes *) self.boundObject;
+    
+    self.cellSubTypeLabel.text=trackTypeWithTotalTimesObject_.typeLabelText;
+    DLog(@"self bound object is %@",self.boundObject);
+    
+    
+   
+    self.hoursTotalHoursLabel.text=trackTypeWithTotalTimesObject_.totalToDateStr;
+    
+    
+    
+    
+    
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -19,13 +82,5 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

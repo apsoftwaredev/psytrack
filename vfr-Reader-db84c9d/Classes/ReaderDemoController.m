@@ -214,7 +214,7 @@
 
 	NSString *pdfs = [appDelegate.applicationDocumentsDirectory.path stringByAppendingPathComponent:@"test18.pdf"];
 NSLog(@"pdfs %@",pdfs);
-    [PDFRenderer drawPDF:pdfs month:nil trainingProgram:nil password:nil amended:NO];
+    [PDFRenderer drawMonthlyPracticumLogPDF:pdfs month:nil trainingProgram:nil password:nil amended:NO];
     
 	NSString *filePath = pdfs  ;// Path to last PDF file
 

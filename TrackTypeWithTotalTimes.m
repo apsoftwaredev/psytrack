@@ -74,20 +74,32 @@
     if (self) {
         
         
-        DLog(@"date is %@",date);
+       
         
         
         self.clinician=clinician;
        self.trackType=[self trackTypeForObjectGiven:trackTypeObjectGiven];
         
-        NSPredicate *predicateForTrackEntities=[self predicateForTrackEntitiesAllBeforeAndEqualToEndDateForMonth];
         
-        NSPredicate * predicateForExistingHoursEntities=[self predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth];
+        NSPredicate *predicateForTrackEntities=nil;
         
+        NSPredicate * predicateForExistingHoursEntities=nil;
         
-               
-        NSPredicate *predicateForTrackTrainingProgram=[self predicateForTrackTrainingProgram];
-        NSPredicate *predicateForExistingHoursProgramCourse=[self predicateForExistingHoursProgramCourse];
+        if (date) {
+            predicateForTrackEntities=[self predicateForTrackEntitiesAllBeforeAndEqualToEndDateForMonth];
+            
+            predicateForExistingHoursEntities=[self predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth];
+            
+        }
+        
+        NSPredicate *predicateForTrackTrainingProgram=nil;
+        NSPredicate *predicateForExistingHoursProgramCourse=nil;
+        if (trackTypeObjectGiven) {
+            predicateForTrackTrainingProgram=[self predicateForTrackTrainingProgram];
+            predicateForExistingHoursProgramCourse=[self predicateForExistingHoursProgramCourse];
+        }
+       
+       
         
 
         self.trackTypeObject=trackTypeObjectGiven;
@@ -459,7 +471,7 @@
         
         self.monthlyLogNotes=[self monthlyLogNotesForMonth];
                              
-        if (trackType_== kTrackTypeIntervention ||trackType_==kTrackTypeSupervision) {
+        if (trackType_== kTrackTypeIntervention ||trackType_==kTrackTypeSupervision||!self.monthToDisplay) {
              [ self  totalOverallHoursTIForOveralCell:(PTSummaryCell)kSummaryTotalToDate clinician:(ClinicianEntity *)clinician];
         }
         else if (trackType_!=kTrackTypeUnknown){

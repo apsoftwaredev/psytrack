@@ -13,6 +13,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "MonthlyPracticumLogTableViewController.h"
 #import "MonthlyPracticumLogTopCell.h"
+#import "AllTrainingHoursVC.h"
+
 #define LEFT_MARGIN 5
 #define RIGHT_MARGIN 5
 #define TOP_MARGIN 10
@@ -29,7 +31,7 @@
 @implementation PDFRenderer
 
 
-+(void)drawPDF:(NSString*)fileName month:(NSDate *)monthToDisplay trainingProgram:(TrainingProgramEntity *)trainingProgramGiven password:(NSString *) filePassword amended:(BOOL)markAmended {
++(void)drawMonthlyPracticumLogPDF:(NSString*)fileName month:(NSDate *)monthToDisplay trainingProgram:(TrainingProgramEntity *)trainingProgramGiven password:(NSString *) filePassword amended:(BOOL)markAmended {
 // Create the PDF context using the default page size of 612 x 792.
 //UIGraphicsBeginPDFContextToFile(fileName, CGRectZero, nil);
 //// Mark the beginning of a new page.
@@ -65,6 +67,45 @@
 // Close the PDF context and write the contents out.
 //UIGraphicsEndPDFContext();
 }
+
+
++(void)drawAllHoursReportPDF:(NSString*)fileName  password:(NSString *) filePassword {
+    // Create the PDF context using the default page size of 612 x 792.
+    //UIGraphicsBeginPDFContextToFile(fileName, CGRectZero, nil);
+    //// Mark the beginning of a new page.
+    //UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, DOC_WIDTH, DOC_HEIGHT), nil);
+    
+    //    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    //
+    //    NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"MonthlyPracticumLogView" owner:nil options:nil];
+    //
+    //    UIView* mainView = [objects objectAtIndex:0];
+    
+    
+    
+    
+    AllTrainingHoursVC *allTrainingHoursVC=[[AllTrainingHoursVC alloc]initWithNibName:(NSString *)@"AllTrainingHoursVC" bundle:(NSBundle *)[NSBundle mainBundle]];
+    
+    
+    [allTrainingHoursVC loadView];
+    [allTrainingHoursVC viewDidLoad];
+    
+    // Points the pdf converter to the mutable data object and to the UIView to be converted
+    
+    
+    
+    NSString *documentTitle=@"Training Hours Report";
+                             
+    [self createAllHoursReportPDFfromUIView:allTrainingHoursVC.view saveToDocumentsWithFileName:fileName viewController:(AllTrainingHoursVC*)allTrainingHoursVC password:filePassword  documentTitle:(NSString *)documentTitle];
+    
+    
+    // Close the PDF context and write the contents out.
+    //UIGraphicsEndPDFContext();
+}
+
+
+
 +(void)editTemplate{
 
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -634,6 +675,188 @@
 //    [pdfData writeToFile:documentDirectoryFilename atomically:YES];
     DLog(@"documentDirectoryFileName: %@",documentDirectoryFilename);
 }
+
+
+
++(void)createAllHoursReportPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename viewController:(AllTrainingHoursVC*)allHoursReportVC  password:(NSString *) filePassword documentTitle:(NSString *)documentTitle
+{
+    // Creates a mutable data object for updating with binary data, like a byte array
+    NSMutableData *pdfData = [NSMutableData data];
+    
+    NSString *studentName=allHoursReportVC.studentName;
+    NSMutableDictionary *auxiliaryInfoDic=auxiliaryInfoDic=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:documentTitle,@"PsyTrack Clinician Tools",studentName,@"Monthly Clinical Practicum Log",nil] forKeys:[NSArray arrayWithObjects:(__bridge NSString *) kCGPDFContextTitle,(__bridge NSString *)kCGPDFContextCreator,(__bridge NSString *)kCGPDFContextAuthor,(__bridge NSString *)kCGPDFContextSubject, nil]];
+    
+    
+    if (filePassword &&filePassword.length) {
+        NSDictionary *passwordDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:filePassword,filePassword, nil] forKeys:[NSArray arrayWithObjects:(__bridge NSString *)kCGPDFContextUserPassword,(__bridge NSString *)kCGPDFContextOwnerPassword, nil]];
+        
+        
+        
+        [auxiliaryInfoDic addEntriesFromDictionary:passwordDic];
+    }
+    
+    
+    
+    // Points the pdf converter to the mutable data object and to the UIView to be converted
+    
+    UIGraphicsBeginPDFContextToData(pdfData, aView.bounds,(NSDictionary *) auxiliaryInfoDic);
+    
+    
+    DLog(@"monthly practicum log modeledl top cell is  are %i",allHoursReportVC.tableViewModel.sectionCount);
+    SCArrayOfObjectsModel *objectsModel=(SCArrayOfObjectsModel *)allHoursReportVC.tableViewModel;
+    
+    if (objectsModel.sectionCount) {
+        SCArrayOfObjectsSection *objectsSection=(SCArrayOfObjectsSection *)[objectsModel sectionAtIndex:0];
+        int cellCount=objectsSection.cellCount;
+        if (cellCount) {
+            for (int i=0; i<cellCount; i++) {
+                
+                SCTableViewCell *cell=(SCTableViewCell *)[objectsSection cellAtIndex:i];
+                
+                
+                if ([cell isKindOfClass:[MonthlyPracticumLogTopCell class]]) {
+                    MonthlyPracticumLogTopCell *monthlyPracticumLogTopCell=(MonthlyPracticumLogTopCell *)cell;
+                    
+                    if (monthlyPracticumLogTopCell.subTablesContainerView.frame.size.height>monthlyPracticumLogTopCell.mainPageScrollView.frame.size.height) {
+                        CGContextRef pdfContext;
+                        
+                        //
+                        //                        CGRect pageRect = aView.bounds;
+                        
+                        // Create our PDF Context with the CFURL, the CGRect we provide, and the above defined dictionary
+                        UIGraphicsBeginPDFContextToData(pdfData, aView.bounds, NULL);
+                        
+                        pdfContext=UIGraphicsGetCurrentContext();
+                        
+                        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                        appDelegate.stopScrollingMonthlyPracticumLog=NO;
+                        
+                        
+                        
+                        NSInteger currentPage=0;
+                        int totalPages=0;
+                        
+                        do {
+                            //mark the beginning of a new page
+                            totalPages++;
+                            UIGraphicsBeginPDFPageWithInfo(CGRectMake(-LEFT_MARGIN,TOP_MARGIN,DOC_WIDTH/2,DOC_HEIGHT/2), NULL);
+                            
+                            
+                            
+                            
+                            currentPage++;
+                            
+                            [aView.layer renderInContext:pdfContext];
+                            
+                            
+                            DLog(@"monthly clinical practicum log cell is %@",monthlyPracticumLogTopCell);
+                            
+                            
+                            
+                            
+                            CGContextTranslateCTM(pdfContext,0, DOC_HEIGHT);
+                            
+                            CGContextScaleCTM(pdfContext, 1.0, -1.0);
+                            
+                            [[NSNotificationCenter defaultCenter]postNotificationName:@"ScrollMonthlyPracticumLogToNextPage" object:nil];
+                            
+                            
+                        } while (!appDelegate.stopScrollingMonthlyPracticumLog);
+                        
+                        
+                        
+                        // We are done with our context now, so we release it
+                        //                        CGContextRelease (pdfContext);
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+            }
+            
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    // remove PDF rendering context
+    UIGraphicsEndPDFContext();
+    
+    // Retrieves the document directories from the iOS device
+    NSArray* documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,YES);
+    
+    NSString* documentDirectory = [documentDirectories objectAtIndex:0];
+    NSString* documentDirectoryFilename = [documentDirectory stringByAppendingPathComponent:aFilename];
+    
+    
+    //begin
+    
+    
+    //create empty pdf file;
+    UIGraphicsBeginPDFContextToFile(documentDirectoryFilename, CGRectMake(LEFT_MARGIN/2, TOP_MARGIN/2, DOC_WIDTH/2, DOC_HEIGHT/2), auxiliaryInfoDic);
+    
+    CGDataProviderRef dataProvider=CGDataProviderCreateWithCFData((__bridge CFDataRef)pdfData);
+    //open template file
+    CGPDFDocumentRef templateDocument = CGPDFDocumentCreateWithProvider(dataProvider);
+    
+    
+    //get amount of pages in template
+    size_t count = CGPDFDocumentGetNumberOfPages(templateDocument);
+    
+    //for each page in template
+    for (size_t pageNumber = 1; pageNumber <= count; pageNumber++) {
+        //get bounds of template page
+        CGPDFPageRef templatePage = CGPDFDocumentGetPage(templateDocument, pageNumber);
+        CGRect templatePageBounds = CGPDFPageGetBoxRect(templatePage, kCGPDFCropBox);
+        
+        //create empty page with corresponding bounds in new document
+        UIGraphicsBeginPDFPageWithInfo(templatePageBounds, nil);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        //flip context due to different origins
+        CGContextTranslateCTM(context, 15.0, templatePageBounds.size.height/2);
+        CGContextScaleCTM(context, 0.47, -0.47);
+        
+        //copy content of template page on the corresponding page in new file
+        CGContextDrawPDFPage(context, templatePage);
+        
+        //flip context back
+        CGContextTranslateCTM(context, 15.0, templatePageBounds.size.height/2);
+        CGContextScaleCTM(context, 0.47, -0.47);
+        
+        /* Here you can do any drawings */
+        [self drawPageNumber:pageNumber totalPages:count];
+    }
+    CGPDFDocumentRelease(templateDocument);
+    UIGraphicsEndPDFContext();
+    
+    
+    
+    
+    
+    
+    //end
+    
+    
+    
+    
+    
+    // instructs the mutable data object to write its context to a file on disk
+    //    [pdfData writeToFile:documentDirectoryFilename atomically:YES];
+    DLog(@"documentDirectoryFileName: %@",documentDirectoryFilename);
+}
+
 
 
 +(void)drawLabels

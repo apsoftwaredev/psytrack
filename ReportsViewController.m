@@ -18,6 +18,7 @@
 #import "ReportsViewController.h"
 #import "PTTAppDelegate.h"
 #import "MonthlyPracticumLogGenerateViewController.h"
+#import "AllTrainingHoursGenerateVC.h"
 
 @implementation ReportsViewController
 @synthesize myTableView;
@@ -154,6 +155,18 @@
                 break;
             }  
             
+            if (indexPath.row==1){
+                NSString *allHoursNibName=nil;
+                if ([SCUtilities is_iPad]) {
+                    allHoursNibName=@"AllTrainingHoursGenerateVC";
+                }else {
+                    allHoursNibName=@"AllTrainingHoursGenerateVC";
+                }
+                AllTrainingHoursGenerateVC *allTrainingHoursGenerateVC = [[AllTrainingHoursGenerateVC alloc] initWithNibName:allHoursNibName bundle:[NSBundle mainBundle]];
+                
+                [self.navigationController pushViewController:allTrainingHoursGenerateVC animated:YES];
+                break;
+            }
             
         }
             break;

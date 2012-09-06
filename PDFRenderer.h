@@ -11,10 +11,15 @@
 #import "CoreText/CoreText.h"
 #import "TrainingProgramEntity.h"
 
+
 @interface PDFRenderer : NSObject 
 
-+(void)drawPDF:(NSString*)fileName month:(NSDate *)monthToDisplay trainingProgram:(TrainingProgramEntity *)trainingProgramGiven password:(NSString *) filePassword amended:(BOOL)markAmended ;
++(void)drawMonthlyPracticumLogPDF:(NSString*)fileName month:(NSDate *)monthToDisplay trainingProgram:(TrainingProgramEntity *)trainingProgramGiven password:(NSString *) filePassword amended:(BOOL)markAmended ;
 
+
+
+
++(void)drawAllHoursReportPDF:(NSString*)fileName  password:(NSString *) filePassword;
 
 +(void)drawText;
 

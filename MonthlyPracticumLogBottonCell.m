@@ -47,20 +47,7 @@ DLog(@"self bound object is %@",self.boundObject);
    
         
       self.cellSubTypeLabel.text=self.trackTypeWithTotalTimesObject.typeLabelText;
-           DLog(@"track type with total times object %@",self.trackTypeWithTotalTimesObject);
-       
-//        NSString *monthTotalStr=[interventionTypeSubtype totalHoursToDateForMonthStr:monthToDisplay];
-        
-        
-//        DLog(@"month total str is %@",monthTotalStr);
-//        
-//        self.hoursMonthTotalLabel.text=monthTotalStr;
-        
-   
-
-        
-        DLog(@"month is %@ clinician is %@",monthToDisplay_,clinician_);
-  
+           
         
             
     
@@ -84,16 +71,13 @@ DLog(@"self bound object is %@",self.boundObject);
     self.trackTypeWithTotalTimesObject=(TrackTypeWithTotalTimes *) self.boundObject; 
 
     self.cellSubTypeLabel.text=trackTypeWithTotalTimesObject_.typeLabelText;
-    DLog(@"self bound object is %@",self.boundObject);
- 
-    DLog(@"type text is %@",self.trackTypeWithTotalTimesObject.typeLabelText);
+    
     if (!monthToDisplay_||!clinician_) {       
         monthToDisplay_=(NSDate *)self.trackTypeWithTotalTimesObject.monthToDisplay;
         
     }
     
-    DLog(@"month to display is %@",monthToDisplay_);
-  DLog(@"week two %@",trackTypeWithTotalTimesObject_.totalWeek2Str);
+
     self.hoursWeek1Label.text=trackTypeWithTotalTimesObject_.totalWeek1Str;
     self.hoursWeek2Label.text=trackTypeWithTotalTimesObject_.totalWeek2Str;
     self.hoursWeek3Label.text=trackTypeWithTotalTimesObject_.totalWeek3Str;
@@ -122,13 +106,5 @@ DLog(@"self bound object is %@",self.boundObject);
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

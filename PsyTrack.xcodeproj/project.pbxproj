@@ -214,6 +214,12 @@
 		B7F877BB14C9A38900F00C0D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877B914C9A38900F00C0D /* EventKit.framework */; };
 		B7F877BC14C9A38900F00C0D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877BA14C9A38900F00C0D /* EventKitUI.framework */; };
 		E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */; };
+		E719708E15F78DAE0043662B /* AllTrainingHoursVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E719708C15F78DAE0043662B /* AllTrainingHoursVC.m */; };
+		E719708F15F78DAE0043662B /* AllTrainingHoursVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E719708D15F78DAE0043662B /* AllTrainingHoursVC.xib */; };
+		E719709215F809B30043662B /* AllHoursReportTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E719709115F809B30043662B /* AllHoursReportTopCell.m */; };
+		E719709415F80BB40043662B /* AllHoursReportTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E719709315F80BB40043662B /* AllHoursReportTopCell.xib */; };
+		E719709715F83A3B0043662B /* AllHoursReportBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E719709615F83A3B0043662B /* AllHoursReportBottomCell.m */; };
+		E719709915F83A620043662B /* AllHoursReportBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E719709815F83A620043662B /* AllHoursReportBottomCell.xib */; };
 		E71B1EB915F297F1009C5E6B /* ExpertTestemonyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E71B1EB715F297F1009C5E6B /* ExpertTestemonyVC.m */; };
 		E71B1EBA15F297F1009C5E6B /* ExpertTestemonyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71B1EB815F297F1009C5E6B /* ExpertTestemonyVC.xib */; };
 		E71B1EC615F2CD57009C5E6B /* MediaAppearanceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E71B1EC415F2CD57009C5E6B /* MediaAppearanceVC.m */; };
@@ -230,8 +236,6 @@
 		E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DD158E28DC00CE1AF4 /* menubar-full.png */; };
 		E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */; };
 		E74167EA158E782900CE1AF4 /* Monaco.dfont in Resources */ = {isa = PBXBuildFile; fileRef = E74167E5158E739300CE1AF4 /* Monaco.dfont */; };
-		E742FF5C15D1E3FC005D91D4 /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E742FF5915D1E3EA005D91D4 /* libSensibleTableView.a */; };
-		E742FF6915D1E41A005D91D4 /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E742FF6615D1E40D005D91D4 /* libSTV+CoreData.a */; };
 		E74B04E015BC436A0077D759 /* ExistingHoursEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B04DF15BC436A0077D759 /* ExistingHoursEntity.m */; };
 		E74B04E315BC447F0077D759 /* ClinicianEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B04E215BC447F0077D759 /* ClinicianEntity.m */; };
 		E74B04E615BC87F60077D759 /* TrainingProgramEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B04E515BC87F60077D759 /* TrainingProgramEntity.m */; };
@@ -380,6 +384,10 @@
 		E7DEECE315F2FAE1001D5B05 /* OtherActivityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7DEECE115F2FAE1001D5B05 /* OtherActivityVC.xib */; };
 		E7DEECE615F5262C001D5B05 /* DiagnosisHistoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DEECE515F5262C001D5B05 /* DiagnosisHistoryEntity.m */; };
 		E7DEECE915F526B2001D5B05 /* DisorderEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DEECE815F526B2001D5B05 /* DisorderEntity.m */; };
+		E7DEECF815F69F83001D5B05 /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7DEECF515F69F5D001D5B05 /* libSensibleTableView.a */; };
+		E7DEED0515F69FD5001D5B05 /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7DEED0215F69FBB001D5B05 /* libSTV+CoreData.a */; };
+		E7DEED0A15F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DEED0815F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.m */; };
+		E7DEED0B15F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7DEED0915F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.xib */; };
 		E7E1425915C1F34B00D0F505 /* PresentationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */; };
 		E7E1425A15C1F34B00D0F505 /* PresentationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */; };
 		E7E1A63D152E873500C227E8 /* TimeTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */; };
@@ -445,30 +453,30 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E742FF5815D1E3EA005D91D4 /* PBXContainerItemProxy */ = {
+		E7DEECF415F69F5D001D5B05 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E742FF5015D1E3E9005D91D4 /* SensibleTableView.xcodeproj */;
+			containerPortal = E7DEECEC15F69F5B001D5B05 /* SensibleTableView.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DBE7373014F99E580076D2B6;
 			remoteInfo = SensibleTableView;
 		};
-		E742FF5A15D1E3F5005D91D4 /* PBXContainerItemProxy */ = {
+		E7DEECF615F69F7A001D5B05 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E742FF5015D1E3E9005D91D4 /* SensibleTableView.xcodeproj */;
+			containerPortal = E7DEECEC15F69F5B001D5B05 /* SensibleTableView.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = DBE7372F14F99E580076D2B6;
 			remoteInfo = SensibleTableView;
 		};
-		E742FF6515D1E40D005D91D4 /* PBXContainerItemProxy */ = {
+		E7DEED0115F69FBB001D5B05 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E742FF5D15D1E40C005D91D4 /* STV+CoreData.xcodeproj */;
+			containerPortal = E7DEECF915F69FB9001D5B05 /* STV+CoreData.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DBE737C414FC66D40076D2B6;
 			remoteInfo = "STV+CoreData";
 		};
-		E742FF6715D1E413005D91D4 /* PBXContainerItemProxy */ = {
+		E7DEED0315F69FCD001D5B05 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E742FF5D15D1E40C005D91D4 /* STV+CoreData.xcodeproj */;
+			containerPortal = E7DEECF915F69FB9001D5B05 /* STV+CoreData.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
 			remoteInfo = "STV+CoreData";
@@ -779,6 +787,15 @@
 		B7F877BA14C9A38900F00C0D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		E70B9EFD15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSourcesSCObjectSelectionCell.h; sourceTree = "<group>"; };
 		E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSourcesSCObjectSelectionCell.m; sourceTree = "<group>"; };
+		E719708B15F78DAE0043662B /* AllTrainingHoursVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllTrainingHoursVC.h; sourceTree = "<group>"; };
+		E719708C15F78DAE0043662B /* AllTrainingHoursVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllTrainingHoursVC.m; sourceTree = "<group>"; };
+		E719708D15F78DAE0043662B /* AllTrainingHoursVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllTrainingHoursVC.xib; sourceTree = "<group>"; };
+		E719709015F809B30043662B /* AllHoursReportTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllHoursReportTopCell.h; sourceTree = "<group>"; };
+		E719709115F809B30043662B /* AllHoursReportTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllHoursReportTopCell.m; sourceTree = "<group>"; };
+		E719709315F80BB40043662B /* AllHoursReportTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllHoursReportTopCell.xib; sourceTree = "<group>"; };
+		E719709515F83A3B0043662B /* AllHoursReportBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllHoursReportBottomCell.h; sourceTree = "<group>"; };
+		E719709615F83A3B0043662B /* AllHoursReportBottomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllHoursReportBottomCell.m; sourceTree = "<group>"; };
+		E719709815F83A620043662B /* AllHoursReportBottomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllHoursReportBottomCell.xib; sourceTree = "<group>"; };
 		E71B1EB615F297F1009C5E6B /* ExpertTestemonyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpertTestemonyVC.h; sourceTree = "<group>"; };
 		E71B1EB715F297F1009C5E6B /* ExpertTestemonyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpertTestemonyVC.m; sourceTree = "<group>"; };
 		E71B1EB815F297F1009C5E6B /* ExpertTestemonyVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpertTestemonyVC.xib; sourceTree = "<group>"; };
@@ -803,8 +820,6 @@
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
 		E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full@2x.png"; sourceTree = "<group>"; };
 		E74167E5158E739300CE1AF4 /* Monaco.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = Monaco.dfont; sourceTree = "<group>"; };
-		E742FF5015D1E3E9005D91D4 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.0.7 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
-		E742FF5D15D1E40C005D91D4 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3.0.7 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E74B04DE15BC436A0077D759 /* ExistingHoursEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursEntity.h; sourceTree = "<group>"; };
 		E74B04DF15BC436A0077D759 /* ExistingHoursEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursEntity.m; sourceTree = "<group>"; };
 		E74B04E115BC447F0077D759 /* ClinicianEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianEntity.h; sourceTree = "<group>"; };
@@ -1028,6 +1043,11 @@
 		E7DEECE815F526B2001D5B05 /* DisorderEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisorderEntity.m; sourceTree = "<group>"; };
 		E7DEECEA15F526C4001D5B05 /* DisorderSpecifierEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisorderSpecifierEntity.h; sourceTree = "<group>"; };
 		E7DEECEB15F526C4001D5B05 /* DisorderSpecifierEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DisorderSpecifierEntity.m; sourceTree = "<group>"; };
+		E7DEECEC15F69F5B001D5B05 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.1.0 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
+		E7DEECF915F69FB9001D5B05 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3.1.0 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
+		E7DEED0715F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllTrainingHoursGenerateVC.h; sourceTree = "<group>"; };
+		E7DEED0815F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllTrainingHoursGenerateVC.m; sourceTree = "<group>"; };
+		E7DEED0915F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllTrainingHoursGenerateVC.xib; sourceTree = "<group>"; };
 		E7E1425615C1F34B00D0F505 /* PresentationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationsViewController.h; sourceTree = "<group>"; };
 		E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentationsViewController.m; sourceTree = "<group>"; };
 		E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresentationsViewController.xib; sourceTree = "<group>"; };
@@ -1132,8 +1152,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E742FF6915D1E41A005D91D4 /* libSTV+CoreData.a in Frameworks */,
-				E742FF5C15D1E3FC005D91D4 /* libSensibleTableView.a in Frameworks */,
+				E7DEED0515F69FD5001D5B05 /* libSTV+CoreData.a in Frameworks */,
+				E7DEECF815F69F83001D5B05 /* libSensibleTableView.a in Frameworks */,
 				E7F1CBA31598C787006F9E95 /* ImageIO.framework in Frameworks */,
 				E7F1CAF41597CADB006F9E95 /* CoreText.framework in Frameworks */,
 				E798A13C15857E36006B9DBD /* CoreImage.framework in Frameworks */,
@@ -1524,6 +1544,7 @@
 		37F7CEB315005D0700AD2C3A /* Reports */ = {
 			isa = PBXGroup;
 			children = (
+				E7DEED0615F6C127001D5B05 /* All Training Hours Report */,
 				E7F1CAEB1597A780006F9E95 /* Monthly Practicum Log */,
 				37F7CEC115005D8A00AD2C3A /* ReportsViewController.h */,
 				37F7CEC215005D8A00AD2C3A /* ReportsViewController.m */,
@@ -1793,8 +1814,8 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				E742FF5D15D1E40C005D91D4 /* STV+CoreData.xcodeproj */,
-				E742FF5015D1E3E9005D91D4 /* SensibleTableView.xcodeproj */,
+				E7DEECF915F69FB9001D5B05 /* STV+CoreData.xcodeproj */,
+				E7DEECEC15F69F5B001D5B05 /* SensibleTableView.xcodeproj */,
 				E78A8D101531DCB30099FE5B /* PsyTrack.entitlements */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Helpers */,
@@ -1846,22 +1867,6 @@
 				E71EAD7815D86C7E00204389 /* ConferencesAttendedVC.xib */,
 			);
 			name = "Conferences Attended";
-			sourceTree = "<group>";
-		};
-		E742FF5115D1E3E9005D91D4 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E742FF5915D1E3EA005D91D4 /* libSensibleTableView.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E742FF5E15D1E40C005D91D4 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E742FF6615D1E40D005D91D4 /* libSTV+CoreData.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		E75F7788151CED0C002B10AE /* Encrypted Model Subclasses */ = {
@@ -2073,6 +2078,41 @@
 			name = "Courses Taken";
 			sourceTree = "<group>";
 		};
+		E7DEECED15F69F5B001D5B05 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7DEECF515F69F5D001D5B05 /* libSensibleTableView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7DEECFA15F69FB9001D5B05 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7DEED0215F69FBB001D5B05 /* libSTV+CoreData.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7DEED0615F6C127001D5B05 /* All Training Hours Report */ = {
+			isa = PBXGroup;
+			children = (
+				E7DEED0715F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.h */,
+				E7DEED0815F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.m */,
+				E7DEED0915F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.xib */,
+				E719708B15F78DAE0043662B /* AllTrainingHoursVC.h */,
+				E719708C15F78DAE0043662B /* AllTrainingHoursVC.m */,
+				E719708D15F78DAE0043662B /* AllTrainingHoursVC.xib */,
+				E719709015F809B30043662B /* AllHoursReportTopCell.h */,
+				E719709115F809B30043662B /* AllHoursReportTopCell.m */,
+				E719709315F80BB40043662B /* AllHoursReportTopCell.xib */,
+				E719709515F83A3B0043662B /* AllHoursReportBottomCell.h */,
+				E719709615F83A3B0043662B /* AllHoursReportBottomCell.m */,
+				E719709815F83A620043662B /* AllHoursReportBottomCell.xib */,
+			);
+			name = "All Training Hours Report";
+			sourceTree = "<group>";
+		};
 		E7E1425515C1EA7500D0F505 /* Teaching */ = {
 			isa = PBXGroup;
 			children = (
@@ -2258,8 +2298,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				E742FF6815D1E413005D91D4 /* PBXTargetDependency */,
-				E742FF5B15D1E3F5005D91D4 /* PBXTargetDependency */,
+				E7DEED0415F69FCD001D5B05 /* PBXTargetDependency */,
+				E7DEECF715F69F7A001D5B05 /* PBXTargetDependency */,
 			);
 			name = PsyTrack;
 			productName = psyTrainTrack;
@@ -2288,12 +2328,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = E742FF5115D1E3E9005D91D4 /* Products */;
-					ProjectRef = E742FF5015D1E3E9005D91D4 /* SensibleTableView.xcodeproj */;
+					ProductGroup = E7DEECED15F69F5B001D5B05 /* Products */;
+					ProjectRef = E7DEECEC15F69F5B001D5B05 /* SensibleTableView.xcodeproj */;
 				},
 				{
-					ProductGroup = E742FF5E15D1E40C005D91D4 /* Products */;
-					ProjectRef = E742FF5D15D1E40C005D91D4 /* STV+CoreData.xcodeproj */;
+					ProductGroup = E7DEECFA15F69FB9001D5B05 /* Products */;
+					ProjectRef = E7DEECF915F69FB9001D5B05 /* STV+CoreData.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -2304,18 +2344,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E742FF5915D1E3EA005D91D4 /* libSensibleTableView.a */ = {
+		E7DEECF515F69F5D001D5B05 /* libSensibleTableView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSensibleTableView.a;
-			remoteRef = E742FF5815D1E3EA005D91D4 /* PBXContainerItemProxy */;
+			remoteRef = E7DEECF415F69F5D001D5B05 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E742FF6615D1E40D005D91D4 /* libSTV+CoreData.a */ = {
+		E7DEED0215F69FBB001D5B05 /* libSTV+CoreData.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libSTV+CoreData.a";
-			remoteRef = E742FF6515D1E40D005D91D4 /* PBXContainerItemProxy */;
+			remoteRef = E7DEED0115F69FBB001D5B05 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2531,6 +2571,10 @@
 				E71B1EC715F2CD57009C5E6B /* MediaAppearanceVC.xib in Resources */,
 				E7DEECDE15F2EEC6001D5B05 /* CommunityServiceVC.xib in Resources */,
 				E7DEECE315F2FAE1001D5B05 /* OtherActivityVC.xib in Resources */,
+				E7DEED0B15F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.xib in Resources */,
+				E719708F15F78DAE0043662B /* AllTrainingHoursVC.xib in Resources */,
+				E719709415F80BB40043662B /* AllHoursReportTopCell.xib in Resources */,
+				E719709915F83A620043662B /* AllHoursReportBottomCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2751,21 +2795,25 @@
 				E7DEECE215F2FAE1001D5B05 /* OtherActivityVC.m in Sources */,
 				E7DEECE615F5262C001D5B05 /* DiagnosisHistoryEntity.m in Sources */,
 				E7DEECE915F526B2001D5B05 /* DisorderEntity.m in Sources */,
+				E7DEED0A15F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.m in Sources */,
+				E719708E15F78DAE0043662B /* AllTrainingHoursVC.m in Sources */,
+				E719709215F809B30043662B /* AllHoursReportTopCell.m in Sources */,
+				E719709715F83A3B0043662B /* AllHoursReportBottomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E742FF5B15D1E3F5005D91D4 /* PBXTargetDependency */ = {
+		E7DEECF715F69F7A001D5B05 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SensibleTableView;
-			targetProxy = E742FF5A15D1E3F5005D91D4 /* PBXContainerItemProxy */;
+			targetProxy = E7DEECF615F69F7A001D5B05 /* PBXContainerItemProxy */;
 		};
-		E742FF6815D1E413005D91D4 /* PBXTargetDependency */ = {
+		E7DEED0415F69FCD001D5B05 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "STV+CoreData";
-			targetProxy = E742FF6715D1E413005D91D4 /* PBXContainerItemProxy */;
+			targetProxy = E7DEED0315F69FCD001D5B05 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

@@ -41,10 +41,13 @@ existingHoursHoursArray=existingHoursArray_;
     
     if (self) {
         
-        self.monthToDisplay=date;
         self.clinician=clinician;
         self.trainingProgram=trainingProgramGiven;
         
+        if (date) {
+       
+        self.monthToDisplay=date;
+
         self.monthStartDate=[self monthStartDateForDate:date];
         self.monthEndDate=[self monthEndDate:date];
         
@@ -58,7 +61,7 @@ existingHoursHoursArray=existingHoursArray_;
         self.week4EndDate=[self weekEndDate:kTrackWeekFour];
         self.week5StartDate=[self weekStartDate:kTrackWeekFive];
         self.week5EndDate=[self weekEndDate:kTrackWeekFive];
-        
+        }
         
         
         
