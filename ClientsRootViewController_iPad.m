@@ -518,7 +518,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                 }
                 else {
                     NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                              @"variableName.varaibleName = nil"];
+                                              @"variableName.variableName = nil"];
                     
                     SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
                     
