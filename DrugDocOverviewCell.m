@@ -64,7 +64,7 @@
     
     
     
-//    //DLog(@"self bound object is %@",self.boundObject);
+//    
     
     NSString *keyPathStringForTopText=[self.objectBindings valueForKey:@"top"];
     openNibNameString=[self.objectBindings valueForKey:@"openNib"];
@@ -84,7 +84,7 @@
 
         NSArray *docTypeLookupArray=(NSArray *)[(DrugActionDateViewController *)self.ownerTableViewModel.delegate docTypesArray];
         
-//           //DLog(@"doctype lookup arrya is %@",docTypeLookupArray);
+//           
         
       
        
@@ -93,13 +93,13 @@
         if (docTypeLookupArray.count>0) {
          
            
-//            //DLog(@"fetched object is %@",fetchedObjects);
+//            
             DrugDocTypeLookupEntity *docTypeLookup=(DrugDocTypeLookupEntity *)[docTypeLookupArray objectAtIndex:0];
            
          
             
             NSString *docTypeDescString=(NSString *)docTypeLookup.docTypeDesc;
-//            //DLog(@"docype desc string is %@",docTypeDescString);
+//            
             docTypeField.text=docTypeDescString;
         }
         
@@ -107,7 +107,7 @@
       
 //        
 //        docTypeField.text=(NSString *)docTypeSet;
-//         //DLog(@"doc type lookup object is %@",docTypeSet);
+//         
     }
    
     
@@ -168,7 +168,7 @@
     else if ([openNibNameString isEqualToString:@"DrugAppDocsViewController"])
     {
         
-        //        //DLog(@"bound object is %@",self.boundObject);
+        //        
         NSString *applNoString=[self.boundObject valueForKey:@"applNo"];
         NSString *inDocSeqNoString=[self.boundObject valueForKey:@"inDocTypeSeqNo"];
         
@@ -198,7 +198,7 @@
 }
 -(void)didSelectCell:(SCTableViewCell *)cell{
     
-//    //DLog(@"text color is %@", docTypeField.textColor);
+//    
     
         
      

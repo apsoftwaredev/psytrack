@@ -61,7 +61,7 @@
     self.trackTypeWithTotalTimesObject=(TrackTypeWithTotalTimes *) self.boundObject;
     
     self.cellSubTypeLabel.text=trackTypeWithTotalTimesObject_.typeLabelText;
-    DLog(@"self bound object is %@",self.boundObject);
+    
     
     
    

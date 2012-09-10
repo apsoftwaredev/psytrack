@@ -351,7 +351,7 @@
                         [appDelegate.tabBarController setSelectedViewController:splitView];
                         
                         
-//                        DLog(@"barbutton item action is %@",barButtonItem.action);
+//                        
                     
                       
                       
@@ -580,7 +580,7 @@
             
 //            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
             
-//           DLog(@"view controller is %@",self.tableViewModel);
+//           
 //            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:drugViewController_iPhone];	
             
 //            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -848,7 +848,7 @@ return headerView;
 {
 	PTTAppDelegate *appDelegate =  (PTTAppDelegate *)	[[UIApplication sharedApplication] delegate];
     
-	//DLog(@"app passcode is: %@", [appDelegate appLockPasscode]);	
+		
 	
     [appDelegate lockApplication];
 

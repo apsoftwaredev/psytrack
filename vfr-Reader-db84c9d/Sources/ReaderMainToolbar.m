@@ -192,7 +192,7 @@
         
         
 #if (READER_ENABLE_PRINT == TRUE) // Option
-NSLog(@"object.password is %@",object.password);
+
 		if (object.password == nil) // We can only print documents without passwords
 		{
 			Class printInteractionController = NSClassFromString(@"UIPrintInteractionController");

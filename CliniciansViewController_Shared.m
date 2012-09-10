@@ -1836,9 +1836,9 @@
 //    if (tableViewModel.tag==1) {
 //        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
 //        
-//        //DLog(@"cell class is %@",[cell class]);
 //        
-//        //DLog(@"cell tag is %i",cell.tag);
+//        
+//        
 ////        if (cell.tag==429&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
 ////            
 ////            
@@ -1894,7 +1894,7 @@
             case 0:
                 if ([viewShorterTextLabelView isKindOfClass:[UILabel class]]) 
                 {
-                    //DLog(@"prefix");
+                    
                     UILabel *titleLabel =(UILabel *)viewShorterTextLabelView;
                     
                     titleLabel.text=@"Prefix:";
@@ -1903,7 +1903,7 @@
             case 1:
                 if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
                 {
-                    //DLog(@"first name");
+                    
                     
                     UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
                     firstNameLabel.text=@"First Name:";  
@@ -1913,7 +1913,7 @@
             case 2:
                 if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
                 {
-                    //DLog(@"middle name");
+                    
                     
                     UILabel *middleNameLabel =(UILabel *)viewLongerTextLabelView;
                     middleNameLabel.text=@"Middle Name:";
@@ -1924,7 +1924,7 @@
                 if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
                 {
                     
-                    //DLog(@"last name");
+                    
                     UILabel *lastNameLabel =(UILabel *)viewLongerTextLabelView;
                     lastNameLabel.text=@"Last Name:";
                     
@@ -1934,7 +1934,7 @@
                 if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
                 {
                     
-                    //DLog(@"suffix");
+                    
                     UILabel *suffixLabel =(UILabel *)viewLongerTextLabelView;
                     suffixLabel.text=@"Suffix:";
                 } 
@@ -1988,8 +1988,8 @@
                
                 int addressBookRecordIdentifier=(int )[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"]intValue]; 
                 
-                //DLog(@"addressbook identifier is %i",addressBookRecordIdentifier);
-                //DLog(@"addressbook Identifier %@", cell.boundObject);
+                
+                
 //                NSString *buttonText;
                 
             
@@ -2045,7 +2045,7 @@
                 case 0:
                     
                 {    
-                    //DLog(@"cell tag is %i",3);
+                    
                     [button setTitle:@"Look Up In Address book" forState:UIControlStateNormal];
                     
                     
@@ -2055,7 +2055,7 @@
                 case 1:
                     
                 {    
-                    //DLog(@"cell tag is %i",4);
+                    
                     [button setTitle:@"Add Or Edit in Address Book" forState:UIControlStateNormal];
                     
                 }
@@ -2284,7 +2284,7 @@
 //        
 //    } 
 // 
-//        //DLog(@"name values %@, %@, %@, %@, %@, %@", self.nameTitle, self.firstName, self.middleName, self.lastName,self.suffix, self.credentialIntitials );
+//        
 //        
 //
 //    
@@ -2327,7 +2327,7 @@
 //        fullName=[fullName stringByAppendingFormat:@", %@", self.credentialIntitials];
 //
 //    }
-//     //DLog(@"name values %@",fullName  );
+//     
 //      
 //    
 //
@@ -2343,8 +2343,8 @@
        willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    //DLog(@"section header title %@", section.headerTitle);
-    //DLog(@"table model tag is %i", tableViewModel.tag);
+    
+    
     
     
     switch (tableViewModel.tag) {
@@ -2365,7 +2365,7 @@
                 
 
             cell.textLabel.text=clinicianObject.combinedName;
-             //DLog(@"cellManagedObject%@",clinicianObject.combinedName);
+             
              }
             
             
@@ -2378,18 +2378,18 @@
         {
             NSManagedObject *managedObject = (NSManagedObject *)cell.boundObject;
             //identify the if the cell has a managedObject
-        DLog(@"bound object store is %@",cell.boundObject);
+        
             if (managedObject) {
                 if (tableViewModel.sectionCount) {
                     
                     SCTableViewSection *section =[tableViewModel sectionAtIndex:0];
                     
                 
-                //DLog(@"cell managed object is %@",[managedObject class]);
+                
                 //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
                 if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
                     
-//                    //DLog(@"entity name is %@",managedObject.entity.name);
+//                    
                     //identify the Languages Spoken table
                     if (![NSStringFromClass([managedObject class])isEqualToString:@"PTABGroup"] &&![managedObject isKindOfClass:[SCTableViewCell class]]&&[managedObject.entity.name isEqualToString:@"LogEntity"]) {
                         //define and initialize a date formatter
@@ -2497,12 +2497,12 @@
                     //identify the Languages Spoken table
                     
                     if ([managedObject.entity.name  isEqualToString:@"LanguageSpokenEntity"]) {
-                        //DLog(@"the managed object entity is Languag spoken Entity");
+                        
                         //get the value of the primaryLangugage attribute
                         NSNumber *primaryLanguageNumber=(NSNumber *)[managedObject valueForKey:@"primaryLanguage"];
                         
                         
-                        //DLog(@"primary alanguage %@",  primaryLanguageNumber);
+                        
                         //if the primaryLanguage selection is Yes
                         if (primaryLanguageNumber==[NSNumber numberWithInteger:0]) {
                             //get the language
@@ -2517,7 +2517,7 @@
                     }
                 } 
                     if ([managedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]) {
-                        //DLog(@"the managed object entity is Migration History Entity");
+                        
                         
                         
                         NSDate *arrivedDate=(NSDate *)[cell.boundObject valueForKey:@"arrivedDate"];
@@ -2556,16 +2556,16 @@
             //this is a fourth level detail view
             if (cell.tag==3)
             {
-                //DLog(@"cell tag is %i", cell.tag);
+                
                 UIView *viewOne = [cell viewWithTag:14];
                 
                 if([viewOne isKindOfClass:[UISlider class]])
                 {
                     UISlider *sliderOne = (UISlider *)viewOne;
                     UILabel *slabel = (UILabel *)[cell viewWithTag:10];
-                    //DLog(@"detail will appear for row at index path label text%@",slabel.text);
                     
-                    //DLog(@"bound value is %f", sliderOne.value);
+                    
+                    
                     slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
                     
                     
@@ -2576,13 +2576,13 @@
             }
             if (cell.tag==4)
             {
-                //DLog(@"cell tag is ");
+                
                 UIView *viewTwo = [cell viewWithTag:14];
                 if([viewTwo isKindOfClass:[UISlider class]])
                 {
                     
                     
-                    //DLog(@"cell tag is %i", cell.tag);
+                    
                     
                     
                     UISlider *sliderTwo = (UISlider *)viewTwo;
@@ -2709,17 +2709,17 @@
     
     SCTableViewSection *section = [tablewModel sectionAtIndex:index];
     
-    //DLog(@"tableview model tag is %i",tableViewModel.tag);
-    //DLog(@"tableview model view controller is%@ ",[tableViewModel.viewController class]);
-    //DLog(@"index is %i",index);
-    //DLog(@"tabelmodel section count is %i",tableViewModel.sectionCount);
+    
+    
+    
+    
     if (tablewModel.tag==1 ) {
-        //DLog(@"section index is %i",index);
+        
         
         
         
         if (index==6) {
-            //DLog(@"cells in section is %i",section.cellCount);
+            
             
             
             if (tablewModel.sectionCount) {
@@ -2734,7 +2734,7 @@
                 ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
                 
                 
-                //DLog(@"my information is %@",clinicianObject.myInformation);
+                
                 if ([clinicianObject.myInformation isEqualToNumber:[NSNumber numberWithBool:YES]]) {
                     
                     [tablewModel removeSectionAtIndex:1];
@@ -2748,8 +2748,8 @@
                
                 
                 
-                //DLog(@"client abrecordidntifier %i",[clinicianObject.aBRecordIdentifier intValue]);
-                //DLog(@"client abrecordidentifier %@",clinicianObject.aBRecordIdentifier);
+                
+                
 //                self.abGroupObjectSelectionCell=[[ABGroupSelectionCell alloc]initWithClinician:(ClinicianEntity *)clinicianObject];   
 //                
 //              
@@ -2799,7 +2799,7 @@
 //            if(emailField.text.length){
 //                valid=[self validateEmail:emailField.text];
 //                
-//                //DLog(@"testing email address");
+//                
 //            }
 //            else
 //            {
@@ -2812,7 +2812,7 @@
 //    }
     
     
-    //DLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
+    
   if (tableViewModel.sectionCount) {  
     if (tableViewModel.tag==1){
         
@@ -2824,16 +2824,16 @@
             SCCustomCell *firstNameCell =(SCCustomCell *)[section cellAtIndex:1];
         SCCustomCell *lastNameCell =(SCCustomCell *)[section cellAtIndex:3];
         
-        //DLog(@"last Name cell tag is %i", lastNameCell.tag);
+        
         UITextField *lastNameField =(UITextField *)[lastNameCell viewWithTag:50];
         UITextField *firstNameField =(UITextField *)[firstNameCell viewWithTag:50];
-        //DLog(@"first name field %@",firstNameField.text);
-        //DLog(@"last name field %@",lastNameField.text);
+        
+        
         
         if ( firstNameField.text.length && lastNameField.text.length) {
             
             valid=TRUE;
-            //DLog(@"first or last name is valid");
+            
             
         }
         else
@@ -2907,14 +2907,14 @@
             SCTableViewCell *cellTo=(SCTableViewCell *)[section cellAtIndex:1];
             SCTableViewCell *cellArrivedDate=(SCTableViewCell *)[section cellAtIndex:2];
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
-            //DLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
+              
             
             if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"] && [cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
                 
-                //DLog(@"arrived date cell class is %@",[cellArrivedDate class]);
+                
                 SCDateCell *arrivedDateCell=(SCDateCell *)cellArrivedDate;
                 
                 if (encryptedFrom.textView.text.length && encryptedTo.textView.text.length &&arrivedDateCell.label.text.length) {
@@ -3037,17 +3037,17 @@
     
 //    SCTableViewSection *section =[tableViewModel sectionAtIndex:indexPath.section];
     SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-    //DLog(@"custom button tapped");
+    
     currentDetailTableViewModel_=tableViewModel;
     
     if (tableViewModel.tag==1) {
-        //DLog(@"table model tag is %i",2);
-        //DLog(@"the cell tag is %i",cell.tag);
+        
+        
         switch (cell.tag)
         {
                 //            case 0:
                 //            {
-                //                //DLog(@"cell tag is %i",0);
+                //                
                 //                
                 //
                 //               
@@ -3063,7 +3063,7 @@
                 ////                //DLog(@"the managed object is %@", 
                 //////                    self.presentedViewController.parentViewController );
                 ////                
-                ////                //DLog(@"the managed object context is %@", managedObjectContext);
+                ////                
                 //////                [self showPeoplePickerController];
                 //                
                 //                
@@ -3074,14 +3074,14 @@
                 //                
                 //            case 1:
                 //            {
-                //                //DLog(@"cell tag is %i",1);
+                //                
                 ////                [self showPersonViewController ];   
                 //                break;
                 //            }    
                 //                
                 //            case 2:
                 //            {
-                //                //DLog(@"cell tag is %i",2);
+                //                
                 //                
                 ////                [self showNewPersonViewController];
                 //                
@@ -3090,7 +3090,7 @@
                 //            }    
             case 8:
             {
-                //DLog(@"cell tag is %i",2);
+                
                 if ([cell isKindOfClass:[AddViewABLinkButtonCell class]]) {
                     
                     
@@ -3106,13 +3106,13 @@
 //                        SCTableViewCell *cellAtOne=(SCTableViewCell *)[section cellAtIndex:1];
 //                        
 //                        UIView *viewLongerTextLabelView =(UIView *)[cellAtOne viewWithTag:51];
-//                        //DLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
+//                        
 //                        if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
 //                        {
-//                            //DLog(@"first name");
+//                            
 //                            
 //                            UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-//                            //DLog(@"label tex is %@",firstNameLabel.text);
+//                            
 //                            if ([firstNameLabel.text isEqualToString:@"First Name:"]) {
 //                                [cellAtOne commitChanges];
 //                            } 
@@ -3124,10 +3124,10 @@
 //                        
 //                        if ([lastNameLabelView isKindOfClass:[UILabel class]]) 
 //                        {
-//                            //DLog(@"last Name");
+//                            
 //                            
 //                            UILabel *lastNameLabel =(UILabel *)lastNameLabelView;
-//                            //DLog(@"label last nametex is %@",lastNameLabel.text);
+//                            
 //                            if ([lastNameLabel.text isEqualToString:@"Last Name:"]) {
 //                                [cellAtThree commitChanges];
 //                            } 
@@ -3139,7 +3139,7 @@
                         //                        clinician=(ClinicianEntity *) cellManagedObject;
                         
                         
-                        //DLog(@"clinician %@",clinician);
+                        
                         if ([tableViewModel valuesAreValid]) {
                             int sectionCount=tableViewModel.sectionCount;
                         for (NSInteger i=0; i<sectionCount;i++) {
@@ -3166,7 +3166,7 @@
                 break;
             }    
             case 9:
-            {   //DLog(@"cell tag is %i",2);
+            {   
                 if ([cell isKindOfClass:[LookupRemoveLinkButtonCell class]]) {
                     
                     
@@ -3180,8 +3180,8 @@
                         
                         int addressBookRecordIdentifier=(int )[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"]intValue]; 
                         
-                        //DLog(@"addressbook identifier is %i",addressBookRecordIdentifier);
-                        //DLog(@"addressbook Identifier %@", cell.boundObject);
+                        
+                        
                         
                         if (addressBookRecordIdentifier!=-1) {
                             
@@ -3252,12 +3252,12 @@
 
 -(void)tableViewModelDidEndEditing:(SCTableViewModel *)tableViewModel{
     
-   //DLog(@"tableview model tag is %i",tableViewModel.tag);
+   
     deletePressedOnce=NO;
     
     
     
-    //DLog(@"did end editiong");
+    
     
 
     
@@ -3265,7 +3265,7 @@
 //-(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel willRemoveRowAtIndexPath:(NSIndexPath *)indexPath{
 //    
 //    SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-//    //DLog(@"delete sender is activated %@",cell.boundObject);
+//    
 //    BOOL myInformation=(BOOL)[(NSNumber *)[cell.boundObject valueForKey:@"myInformation"]boolValue];
 //    if (myInformation) {
 //        PTTAppDelegate *appdelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -3291,7 +3291,7 @@
 //            
 //            
 //            NSArray *boundObjectKeys=(NSArray *)[entityDescription attributesByName] ;
-//            //DLog(@"client entity keys %@",boundObjectKeys);
+//            
 //            for (id attribute in boundObjectKeys){
 //                BOOL setNil=YES;
 //                if ([attribute isEqualToString:@"firstName"]) {
@@ -3305,14 +3305,14 @@
 //                
 //                if (setNil && ![attribute isEqualToString:@"myInformation"]&&![attribute isEqualToString:@"atMyCurrentSite"]&&![attribute isEqualToString:@"order"]) {
 //                    [cellManagedObject setValue:nil forKey:attribute];
-//                    //DLog(@"attribute %@",attribute);
+//                    
 //                }
 //                
 //            }
 //            
 //            
 //            NSArray *relationshipsByName=(NSArray *)[entityDescription relationshipsByName] ;
-//            //DLog(@"client entity keys %@",relationshipsByName);
+//            
 //            
 //            for (id relationship in relationshipsByName){
 //                
@@ -3320,7 +3320,7 @@
 //                
 //                
 //                [clinicianObject setValue:nil forKey:relationship];
-//                //DLog(@"set nil value for relationship %@",relationship);
+//                
 //                
 //                
 //            }
@@ -3330,7 +3330,7 @@
 //            [tableViewModel.modeledTableView reloadData];
 //            [appdelegate displayNotification:@"My Personal Information Cleared" forDuration:3.0 location:kPTTScreenLocationTop inView:notificationSuperView];
 //            deletePressedOnce=NO;
-//            //DLog(@"client entity keys after %@",cellManagedObject);
+//            
 //        }
 //        
 //        return NO;
@@ -3378,7 +3378,7 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     
-//DLog(@"table view model tag is %i",tableViewModel.tag);
+
     if (tableViewModel.tag==1) {
         self.currentDetailTableViewModel=tableViewModel;
     }
@@ -3544,7 +3544,7 @@
     //	abToDisplay.peoplePicker.displayedProperties=displayedItems;
 	// Show the picker 
     
-    DLog(@"current detailtableviewmodel is %i",currentDetailTableViewModel_.tag);
+    
 	[currentDetailTableViewModel_.viewController.navigationController presentModalViewController:self.peoplePickerNavigationController animated:YES];
     
 	
@@ -3573,7 +3573,7 @@
         
     }
    
-//    //DLog(@"clinicianrecord identifier is %i",clinicianRecordIdentifier);
+//    
    
         
         
@@ -3581,7 +3581,7 @@
         // 
         //     }
         //    
-        //    //DLog(@"existingPerson_ record id %@",existingPersonRef);
+        //    
         
         
         if (existingPersonRecordID==-1) {
@@ -3592,7 +3592,7 @@
             NSString *name=[NSString string];
             name=(NSString *)[NSString stringWithFormat:@"%@ %@",clinician.firstName, clinician.lastName];
             
-            DLog(@"name string is %@",name);
+            
             CFArrayRef peopleWithNameArray=nil;
             
            
@@ -3610,7 +3610,7 @@
                     addressBookForPeopleArray=nil;
                 }
             
-            //DLog(@" people with name array %@",peopleWithNameArray);
+            
             
             int peopleCount=CFArrayGetCount((CFArrayRef) peopleWithNameArray);
             if (peopleCount==1  && !addExistingAfterPromptBool  ) {
@@ -3638,8 +3638,8 @@
                                                                delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Link to Existing", @"Create New", nil];
                 
                 alert.tag=kAlertTagFoundExistingPersonWithName;
-                //DLog(@"composite name is %@",compositeName);
-                //DLog(@"alert message is %@",alertMessage);
+                
+                
                 
                 [alert show];
                 //            CFRelease(name);
@@ -3705,7 +3705,7 @@
                 //    ABPerson *person=(ABPerson *)personRecord;
                 
                 
-                //DLog(@"clinician first name is %@ and Clnician last name is %@",clinician.firstName,clinician.lastName);
+                
                 if (clinician.firstName.length) {
                 ABRecordSetValue(existingPersonRef, kABPersonFirstNameProperty, (__bridge CFStringRef) clinician.firstName, nil) ; 
                 }
@@ -3726,7 +3726,7 @@
                 if (clinician.notes.length) {
                     ABRecordSetValue(existingPersonRef, kABPersonNoteProperty, (__bridge CFStringRef) clinician.notes, nil) ;
                 }
-//                //DLog(@"group issdfsdf %@",group);
+//                
                 [personAddNewViewController_ setAddressBook:addressBookForPeopleArray];
                 if (self.personAddNewViewController) {
                     self.personAddNewViewController.view=nil;
@@ -3776,7 +3776,7 @@
         else
             
         {
-            //DLog(@"existing record id is %i",existingPersonRecordID);
+            
             
             [self showPersonViewControllerForRecordID:(int)existingPersonRecordID];
             
@@ -3796,7 +3796,7 @@
 
 //        recordIdentifier=(__bridge NSString)CFRecordID;
 
-//        //DLog(@"record identifier is %i",CFRecordID);
+//        
 //        CFErrorRef error = NULL;
 //        
 //
@@ -3810,10 +3810,10 @@
 //        
 //        group se
 //            
-//        //DLog(@"abrecrod didset value is %i",didSet);
-//            //DLog(@"group record %@",CFAddressBookGroupRecord);
 //        
-//         //DLog(@" record id is %i",CFRecordID);
+//            
+//        
+//         
 //        
 //       
 //       didSet= (bool) ABAddressBookAddRecord (
@@ -3823,15 +3823,15 @@
 //                                     );
 //        
 //        
-//        //DLog(@"address book add record didset value is %i",didSet);
-//         //DLog(@" record id is %i",CFRecordID);
+//        
+//         
 //        
 //        CFRecordID= (ABRecordID) ABRecordGetRecordID (
 //                                                      (ABRecordRef) CFAddressBookGroupRecord
 //                                                      );
 //        
 //        
-//        //DLog(@" record id is %i",CFRecordID);
+//        
 //       
 //        if (ABAddressBookHasUnsavedChanges(addressBook)) {
 //            
@@ -3839,16 +3839,16 @@
 //                didSave = (bool) ABAddressBookSave(addressBook, &error);
 //                
 //                if (didSave) {
-//                    //DLog(@"did save is %i",didSave);
 //                    
 //                    
-//                    //DLog(@" record id is %i",CFRecordID);
+//                    
+//                    
 //                    CFRecordID= (ABRecordID) ABRecordGetRecordID (
 //                                                                  (ABRecordRef) CFAddressBookGroupRecord
 //                                                                  );
 //                    
 //                    
-//                    //DLog(@" record id is %i",CFRecordID);
+//                    
 //                    
 //                    groupIdentifier=(ABRecordID)CFRecordID;
 //                    [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInteger:groupIdentifier] forKeyPath:@"addressBookGroupIdentifier"];
@@ -3900,7 +3900,7 @@
 //    NSArray *groupsArray=(__bridge NSArray*)CFGroupsArray;
 //    
 //    
-//    //DLog(@"groups array %@",groupsArray);
+//    
 
 //    if (![groupsArray containsObject:grou) {
 //        <#statements#>
@@ -3956,11 +3956,11 @@
 //
 //
 //NSMutableArray *peopleMutable= (__bridge NSMutableArray*) CFPeopleMutable;
-////DLog(@"people mutable is %@",peopleMutable);
+//
 //NSString *predicateString = [NSString stringWithFormat:@"[SELF] contains %",CFShortFullName];
 //    NSPredicate *searchPredicate = [NSPredicate predicateWithFormat:predicateString];
 //    NSArray *names = [peopleMutable filteredArrayUsingPredicate:searchPredicate];
-//    //DLog(@"names are %@", names);
+//    
 //	 CFArrayRef *CFPeopleWithName = (CFArrayRef *)ABRecordCopyCompositeName( CFShortFullName);
 //    NSArray *nsPeopleWithCompositeArray=(NSArray *)CFPeopleWithName;
 //
@@ -4256,16 +4256,16 @@
     
     // stick the buttons in the toolbar
     
-    //DLog(@"people picker view controllers are %@",peoplePicker.viewControllers); 
+     
     if (peoplePicker.viewControllers.count) {
    
     UIViewController *membersViewController=(UIViewController *)[peoplePicker.viewControllers objectAtIndex:1];
     
-    //DLog(@"modal view controler is %@",membersViewController.modalViewController);
+    
     
     membersViewController.navigationController.delegate=self;
     
-    //DLog(@"members view controller navigation controller viewcontrollers are %@",membersViewController.navigationController.viewControllers);
+    
     
     
     for (UIViewController *viewController in membersViewController.navigationController.viewControllers) {
@@ -4283,10 +4283,10 @@
 -(void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
     
     
-    //DLog(@"will show view controller %@",viewController);
+    
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    //DLog(@"will show view controller %@",viewController);
+    
     if (viewController.view.tag==837 &&viewController.view.subviews.count) {
         
         
@@ -4326,7 +4326,7 @@
     
     
     //    if (viewController.view.tag==900) {
-    //        //DLog(@"view controller tag is 900 and class is %@",[viewController class]);
+    //        
     //        
     //        if ([viewController isKindOfClass:[ABNewPersonViewController class]]) {
     //           
@@ -4374,7 +4374,7 @@
         [buttons addObject:selectButton];
         
         
-        //DLog(@"child view controllers are %@",viewController.view.subviews);
+        
         if (viewController.view.subviews.count) {
        
         UITableView *personViewTableView=(UITableView *)[viewController.view.subviews objectAtIndex:0];
@@ -4456,7 +4456,7 @@
 //                
 //                ABGroupAddMember(group, person, nil);
 //                didSave=( bool )  ABAddressBookAddRecord(addressBook, group, nil);
-//                //DLog(@"group is %@",group);
+//                
 //            }
 //            
 //            
@@ -4477,7 +4477,7 @@
 //        
 //        
 //        
-//        //DLog(@"did save group add member %i ",didSave); 
+//         
 //        
 //        
 //        if (ABAddressBookHasUnsavedChanges(addressBook)) {
@@ -4503,24 +4503,24 @@
 //        
 //        
 //        //        if ([addressBook_ hasUnsavedChanges]) {
-//        //            //DLog(@"displayed person is %@ and %@",personAddNewViewController_, personAddNewViewController_.displayedPerson);
+//        //            
 //        //            existingPerson_=[addressBook personWithRecordRef:personAddNewViewController_.displayedPerson];
 //        //            
 //        //            didSave= [addressBook addRecord:(ABRecord *)existingPerson_];
-//        //            //DLog(@"didsave is equal to %i",didSave);
+//        //            
 //        //            didSave= [addressBook save];
 //        //            
 //        //
 //        //        }
 //        
 //        
-//        //    //DLog(@"didsave addressbook is %i",didSave);
+//        //    
         
         
         ABRecordRef recordRef=personAddNewViewController_.displayedPerson;             
-        //DLog(@"existing person %@", recordRef);
+        
         int aBRecordID=ABRecordGetRecordID((ABRecordRef) recordRef);
-        //DLog(@"abrecord id is %i  ",aBRecordID);
+        
         SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel_ sectionAtIndex:0];
         SCTableViewCell *cell =(SCTableViewCell *)[section cellAtIndex:1];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
@@ -4535,13 +4535,13 @@
             
             
             UIView *viewLongerTextLabelView =(UIView *)[cell viewWithTag:51];
-            //DLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
+            
             if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
             {
-                //DLog(@"first name");
+                
                 
                 UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-                //DLog(@"label tex is %@",firstNameLabel.text);
+                
                 
                 if (aBRecordID &&[firstNameLabel.text isEqualToString:@"First Name:"]) 
                 {
@@ -4673,7 +4673,7 @@
     }
     else
     {
-        //DLog(@"cancel button pressed");
+        
     }
     
     
@@ -4708,10 +4708,10 @@
     //        ABRecordID recordID=(ABRecordID )existingPerson_.recordID;
     //
     //        
-    //        //DLog(@"person identifier is %i", recordID);
+    //        
     //            existingPerson_=(ABPerson *)[addressBook personWithRecordID:recordID];
     //            [clinician setValue:[NSNumber numberWithInt:recordID] forKey:@"aBRecordIdentifier"];        
-    //            //DLog(@"person to display is %@",existingPerson_.recordRef);
+    //            
     //            SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
     //            SCTableViewCell *cell =(SCTableViewCell *)[section cellAtIndex:1];
     //            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
@@ -4724,13 +4724,13 @@
     //                
     //                
     //                UIView *viewLongerTextLabelView =(UIView *)[cell viewWithTag:51];
-    //                //DLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
+    //                
     //                if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
     //                {
-    //                    //DLog(@"first name");
+    //                    
     //                    
     //                    UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-    //                    //DLog(@"label tex is %@",firstNameLabel.text);
+    //                    
     //                    
     //                    if (recordID &&[firstNameLabel.text isEqualToString:@"First Name:"]) {
     //                        
@@ -4786,7 +4786,7 @@
     if (actionSheet.tag==kAlertTagFoundExistingPersonWithName) {
         switch (buttonIndex) {
             case 0:
-                //DLog(@"zero index");
+                
                 // on main thread in delegate method -alertView:clickedButtonAtIndex:
                 // (do something with choosen buttonIndex)
                 
@@ -4795,7 +4795,7 @@
                 break;
             case 1:
             {
-                //DLog(@"one index");
+                
                 
                 SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel_ sectionAtIndex:0];
                 SCTableViewCell *cell =(SCTableViewCell *)[section cellAtIndex:1];
@@ -4809,17 +4809,17 @@
                     
                     
                     UIView *viewLongerTextLabelView =(UIView *)[cell viewWithTag:51];
-                    //DLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
+                    
                     if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
                     {
-                        //DLog(@"first name");
+                        
                         
                         UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-                        //DLog(@"label tex is %@",firstNameLabel.text);
                         
                         
                         
-                        //DLog(@"existing person %i", existingPersonRecordID);
+                        
+                        
                         if (existingPersonRecordID !=-1) {
                             
                             
@@ -4880,7 +4880,7 @@
             }
                 break;
             case 2:
-                //DLog(@"two index");
+                
                 [self resetABVariablesToNil];
                 addExistingAfterPromptBool=TRUE;
                 
@@ -4897,7 +4897,7 @@
     if (actionSheet.tag==kAlertTagFoundExistingPeopleWithName) {
         switch (buttonIndex) {
             case 0:
-                //DLog(@"zero index");
+                
                 // on main thread in delegate method -alertView:clickedButtonAtIndex:
                 // (do something with choosen buttonIndex)
                 
@@ -4906,37 +4906,37 @@
                 break;
             case 1:
             {
-                //                //DLog(@"one index");
+                //                
                 //                ABAddressBook *aBtoFilter=[[ABAddressBook alloc]init];
                 //                
                 //                NSArray *arrayWithAllPeople=[aBtoFilter allPeople];
                 //                
-                //                //DLog(@"array with all people is %@",arrayWithAllPeople);
+                //                
                 //                NSArray *arrayWithCompositeName=[aBtoFilter allPeopleWithName:existingPerson.compositeName];
                 //               
                 //                
-                //               //DLog(@"array with all people with composite name is %@",arrayWithCompositeName);
+                //               
                 //                
                 //                
                 //                for (ABPerson *personInArray in arrayWithAllPeople) {
                 //                    
-                //                     //DLog(@"person composite name is %@",personInArray.compositeName);
+                //                     
                 //                    if (![personInArray.firstName isEqualToString:existingPerson.firstName]||![personInArray.lastName isEqualToString:existingPerson.lastName]) {
-                //                     //DLog(@"person composite name to remove is %@",personInArray.compositeName);
+                //                     
                 //                         [aBtoFilter removeRecord:(ABRecord *)personInArray];
                 //                        
                 //                    }    
                 //                   
                 //                    
                 //                }
-                //                //DLog(@"abtofilter all people %@",[aBtoFilter allPeople]);
+                //                
                 
                 [self showPeoplePickerController];
                 
             }
                 break;
             case 2:
-                //DLog(@"two index");
+                
                 
                 [self resetABVariablesToNil];
                 addExistingAfterPromptBool=TRUE;
@@ -4955,8 +4955,8 @@
 
 -(IBAction)cancelButtonTappedInABPersonViewController:(id)sender{
     
-    //DLog(@"cancel button clicked");
-    //DLog(@"sender class is %@",[sender class]);
+    
+    
     if (personVCFromSelectionList_) {
         [self.personVCFromSelectionList dismissViewControllerAnimated:YES completion:nil];
     }
@@ -5000,13 +5000,13 @@
         
         
         
-        //DLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
+        
         if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
         {
-            //DLog(@"first name");
+            
             
             UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-            //DLog(@"label tex is %@",firstNameLabel.text);
+            
             
             ABRecordRef recordRef=personVCFromSelectionList_.displayedPerson;
             int aBRecordID=ABRecordGetRecordID((ABRecordRef)recordRef);
@@ -5139,13 +5139,13 @@
     }
     
     
-    //DLog(@"selectButton Tapped");
+    
 }
 
 
 -(IBAction)cancelAddNewAddressBookPerson:(id)sender{
     
-    //DLog(@"cancel button pressed");
+    
     [personAddNewViewController_.navigationController dismissViewControllerAnimated:YES completion:^{
         
         currentDetailTableViewModel_.viewController.navigationController.delegate =nil;
@@ -5181,37 +5181,37 @@
 
 //-(IBAction)doneButtonTappedInABPersonViewController:(id)sender{
 //    
-//    //DLog(@"done button pressed");
+//    
 //   
 //
 //    
 //    bool didSave=NO;
 //  
 //    
-//    //DLog(@"displayed person is %@ and %@",personAddNewViewController_, personAddNewViewController_.displayedPerson);
+//    
 //    existingPerson_=[addressBook_ personWithRecordRef:personAddNewViewController_.displayedPerson];
 //    
 //    didSave= [addressBook_ addRecord:(ABRecord *)existingPerson_];
-//     //DLog(@"didsave is equal to %i",didSave);
+//     
 //   didSave= [addressBook_ save];
 //    
 //   
 //  
-//   //DLog(@"didsave addressbook is %i",didSave);
-//    
-//    //DLog(@"existing person properties description %@",[existingPerson_ description]);
-//    //DLog(@"existing person observation info%@",existingPerson_.observationInfo);
-//    //DLog(@"existing person class%@ ",  [existingPerson_ class]);
-//    
-//    //DLog(@"existing person %@",[existingPerson_ accessibilityValue]);
-//    //DLog(@"existing person %@",[existingPerson_ dictionaryWithValuesForKeys:[NSArray array]]);
+//   
 //    
 //    
-//    //DLog(@"existing person observation info %@",[personAddNewViewController_ observationInfo]);
+//    
+//    
+//    
+//    
+//    
+//    
+//    
+//    
 //    ABRecordRef recordRef=personAddNewViewController_.displayedPerson;             
-//    //DLog(@"existing person %@", recordRef);
+//    
 //    int aBRecordID=existingPerson_.recordID;
-//    //DLog(@"abrecord id is %i  ",aBRecordID);
+//    
 //    SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
 //    SCTableViewCell *cell =(SCTableViewCell *)[section cellAtIndex:1];
 //    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
@@ -5224,13 +5224,13 @@
 //        
 //        
 //        UIView *viewLongerTextLabelView =(UIView *)[cell viewWithTag:51];
-//        //DLog(@"viewlonger text label view is %@",[viewLongerTextLabelView class]);
+//        
 //        if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
 //        {
-//            //DLog(@"first name");
+//            
 //            
 //            UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-//            //DLog(@"label tex is %@",firstNameLabel.text);
+//            
 //            
 //            if (aBRecordID &&[firstNameLabel.text isEqualToString:@"First Name:"]) 
 //            {
@@ -5376,7 +5376,7 @@
                 {
                     
                     
-                    //DLog(@"cggroups array %@",allGroupsInSource);
+                    
                     
                     
                     for (CFIndex i = 0; i < groupCount; i++) {
@@ -5394,8 +5394,8 @@
                         
                         NSString *checkNameStr=[NSString stringWithFormat:@"%@",(__bridge NSString*) CFGroupNameCheck];
                         
-                        //DLog(@"cfgroupname is %@",checkNameStr);
-                        //DLog(@"groupname Str is %@",groupName);
+                        
+                        
                         if ([checkNameStr isEqualToString:groupName]) {
                             group=groupInCheckNameArray;
                             groupIdentifier=ABRecordGetRecordID(group);
@@ -5407,11 +5407,11 @@
                             }
                             
                             if (group) {
-                                //DLog(@"group is %@",group);
+                                
                             }
                             
                             else {
-                                //DLog(@"no group");
+                                
                             } 
                             break;
                         }
@@ -5457,10 +5457,10 @@
             
             //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
             
-            //        //DLog(@"group composite name is %@",groupRecord.compositeName);
+            //        
             
             
-            //        //DLog(@"group record identifier is %i",groupRecord.recordID);
+            //        
             
             bool didSetGroupName=FALSE;
             didSetGroupName= (bool) ABRecordSetValue (
@@ -5479,8 +5479,8 @@
                     bool didSave=FALSE;
                     didSave = ABAddressBookSave(addressBookToChangOrAddName, nil);
                     
-                    //                if (!didSave) {/* Handle error here. */  //DLog(@"addressbook did not save");}
-                    //                else //DLog(@"addresss book saved new group.");
+                    //                if (!didSave) {/* Handle error here. */  }
+                    //                else 
                     
                 } 
                 else {
@@ -5493,9 +5493,9 @@
             
             //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
             
-            //DLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
             
-            //DLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
+            
+            
             
             
             
@@ -5649,7 +5649,7 @@
 -(NSArray *)addressBookGroupsArrayWithAddressBook:(ABAddressBookRef )addressBook source:(ABRecordRef )source{
     
     
-    //DLog(@"group name is %@",CFGroupName);   
+       
     //check to see if the group name exists already
   
     NSMutableArray *allGroups=nil;
@@ -5678,7 +5678,7 @@
      
         
         
-        //DLog(@"cggroups array %@",(__bridge NSArray *) allGroupsInSource);
+        
         
         if (allGroupsInSource) {
             
@@ -6065,7 +6065,7 @@
 //                {
 //                    
 //                   
-//                    //DLog(@"cggroups array %@",allGroupsInSource);
+//                    
 //                    
 //                    
 //                    for (CFIndex i = 0; i < groupCount; i++) {
@@ -6083,8 +6083,8 @@
 //                        
 //                        NSString *checkNameStr=[NSString stringWithFormat:@"%@",(__bridge NSString*) CFGroupNameCheck];
 //                        
-//                        //DLog(@"cfgroupname is %@",checkNameStr);
-//                        //DLog(@"groupname Str is %@",groupName);
+//                        
+//                        
 //                        if ([checkNameStr isEqualToString:groupName]) {
 //                            group=groupInCheckNameArray;
 //                            groupIdentifier=ABRecordGetRecordID(group);
@@ -6096,11 +6096,11 @@
 //                            }
 //                            
 //                            if (group) {
-//                                //DLog(@"group is %@",group);
+//                                
 //                            }
 //                            
 //                            else {
-//                                //DLog(@"no group");
+//                                
 //                            } 
 //                            break;
 //                        }
@@ -6146,10 +6146,10 @@
 //            
 //            //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
 //            
-//            //        //DLog(@"group composite name is %@",groupRecord.compositeName);
+//            //        
 //            
 //            
-//            //        //DLog(@"group record identifier is %i",groupRecord.recordID);
+//            //        
 //            
 //            bool didSetGroupName=FALSE;
 //            didSetGroupName= (bool) ABRecordSetValue (
@@ -6168,8 +6168,8 @@
 //                    bool didSave=FALSE;
 //                    didSave = ABAddressBookSave(addressBook, nil);
 //                    
-////                    if (!didSave) {/* Handle error here. */  //DLog(@"addressbook did not save");}
-////                    else //DLog(@"addresss book saved new group.");
+////                    if (!didSave) {/* Handle error here. */  }
+////                    else 
 //                    
 //                } 
 //                else {
@@ -6182,9 +6182,9 @@
 //            
 //            //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
 //            
-//            //DLog(@"group idenitifer is%i",ABRecordGetRecordID(group));
 //            
-//            //DLog(@"group name is %@", (__bridge NSString *)ABRecordCopyValue(group, kABGroupNameProperty));
+//            
+//            
 //            
 //            
 //            
@@ -6255,11 +6255,11 @@
 -(IBAction)abGroupsDoneButtonTapped:(id)sender{
     
     
-    //DLog(@"done button pressed");
+    
     //    SCTableViewModel *ownerTableViewModel=(SCTableViewModel *)self.ownerTableViewModel;
     
     
-    //DLog(@"currenct detail tag is %i",currentDetailTableViewModel_.tag);
+    
     if (currentDetailTableViewModel_.tag=429 &&currentDetailTableViewModel_.sectionCount) {
         SCObjectSelectionSection *section=(SCObjectSelectionSection *)[currentDetailTableViewModel_ sectionAtIndex:0];
         NSMutableSet *mutableSet= (NSMutableSet *) abGroupObjectSelectionCell_.objectSelectionCell.selectedItemsIndexes;
@@ -6334,7 +6334,7 @@
                        intValue];
     
     
-    //DLog(@"source record id is %i",recordID);
+    
     if (continueChecking && recordID!=-1) {
         
         abSource=ABAddressBookGetSourceWithRecordID(addressBookToGetSource, recordID);

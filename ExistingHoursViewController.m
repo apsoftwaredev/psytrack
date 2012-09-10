@@ -1621,9 +1621,9 @@
 }
 //-(void)cancelButtonTapped{
 //    
-//    //DLog(@"cancel button Tapped");
 //    
-//    //DLog(@"parent controller %@",[super parentViewController]);
+//    
+//    
 //    
 //    if(self.navigationController)
 //	{
@@ -1644,7 +1644,7 @@
 -(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
 BOOL valid=NO;
     SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];
-    //DLog(@"cell class is %@",cell.class);
+    
     
     if (tableViewModel.tag==1) {
         NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
@@ -1672,12 +1672,12 @@ BOOL valid=NO;
                    
             NSString *cellTitleLastCharacter=[cell.textLabel.text substringFromIndex:cell.textLabel.text.length-1 ];
             
-            DLog(@"cell title last character is %@",cellTitleLastCharacter);
+            
             
             if ([cell isKindOfClass:[SCObjectSelectionCell class]]&&[cellTitleLastCharacter isEqualToString:@"*" ]) {
                 SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
                 
-                DLog(@"selected item index is %@",objectSelectionCell.selectedItemIndex);
+                
                 if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
                     valid=YES;
                 }else {
@@ -1696,8 +1696,8 @@ BOOL valid=NO;
         
         
         
-        DLog(@"cell class is %@",cell.class);
-        DLog(@"cell tag is %i",cell.tag);
+        
+        
         if ([cell isKindOfClass:[SCDateCell class]]) {
             SCDateCell *dateCell=(SCDateCell *)cell;
             
@@ -1710,11 +1710,9 @@ BOOL valid=NO;
             
             ClinicianSelectionCell *clinicianSelectionCell=(ClinicianSelectionCell *)[section cellAtIndex:0];
             ClinicianEntity *clinician=nil;
-            DLog(@"clinician selelcted ite index is %i",[clinicianSelectionCell.selectedItemIndex intValue]);
             
-            NSManagedObject *managedObject=[clinicianSelectionCell.items objectAtIndex:[clinicianSelectionCell.selectedItemIndex intValue]];
             
-            DLog(@"managed object class is %@",managedObject.class);
+                        
             if (clinicianSelectionCell.clinicianObject) {
                 
                 clinician=clinicianSelectionCell.clinicianObject;
@@ -1746,7 +1744,7 @@ BOOL valid=NO;
                 endDate=dateCell.datePicker.date;
             }
             
-            DLog(@"start dat is %@ and enddate is %@",startDate, endDate);
+            
             if (startDate && endDate) {
             
             if ( ([startDate compare:endDate]) == NSOrderedDescending ) {
@@ -1774,8 +1772,8 @@ BOOL valid=NO;
                     
                 predicate = [NSPredicate predicateWithFormat:@"((startDate >= %@) AND (endDate <= %@)) OR ((startDate < %@) AND ((endDate < %@ )AND (endDate > %@) )) OR ((startDate < %@) AND (endDate > %@)   )",  startDate, endDate, startDate, endDate,startDate, startDate,endDate];
                 [fetchRequest setPredicate:predicate];
-                DLog(@"predicate format for validation is %@",predicate.predicateFormat);
-                DLog(@"startDate is %@ and End Date is %@",startDate, endDate);
+                
+                
             
             NSError *error = nil;
             NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -1856,8 +1854,8 @@ BOOL valid=NO;
         
        
     }
-    DLog(@"cell is kind of class %@",cell.class);
-    DLog(@"table model tag is %i",tableViewModel.tag);
+    
+    
     if (tableViewModel.tag==3&&(cell.tag==0||cell.tag==1)) {
     
         
@@ -1954,7 +1952,7 @@ BOOL valid=NO;
         NSMutableSet *assessmentHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"assessments.hours"];
         
         NSArray *assessmentHoursArray=[assessmentHoursSet allObjects];
-        //DLog(@"direct hours are %@",assessmentHoursArray);
+        
         NSString *assessmentTotalTimeStr=[NSString stringWithFormat:@"%@ Assessment",[self totalTimeStrForHoursArray:assessmentHoursArray]];
         
         
@@ -1968,7 +1966,7 @@ BOOL valid=NO;
         NSMutableSet *supportHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supportActivities.hours"];
         
         NSArray *supportHoursArray=[supportHoursSet allObjects];
-        //DLog(@"direct hours are %@",supportHoursArray);
+        
         NSString *supportTotalTimeStr=[NSString stringWithFormat:@"%@ Support",[self totalTimeStrForHoursArray:supportHoursArray]];
         
         
@@ -2167,7 +2165,7 @@ BOOL valid=NO;
 
     //start
     
-    DLog(@"detail tag is %i",detailTableViewModel.tag);
+    
     
     if ( detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
         
@@ -2184,7 +2182,7 @@ BOOL valid=NO;
             
             
             
-            DLog(@"section bound object class is %@",sectionManagedObject.entity.name);
+            
             if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"ExistingInterventionEntity"]&&objectSection.cellCount>1) {
                 
                 SCTableViewCell *cellAtOne=(SCTableViewCell *)[objectSection cellAtIndex:1];
@@ -2192,7 +2190,7 @@ BOOL valid=NO;
                     SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtOne;
                     
                     
-                    DLog(@"section managed object is %@",sectionManagedObject);
+                    
                     NSObject *interventionTypeObject=[sectionManagedObject valueForKeyPath:@"interventionType"];
                     
                     if (indexPath.row!=NSNotFound &&( selectedInterventionType||(interventionTypeObject&&[interventionTypeObject isKindOfClass:[InterventionTypeEntity class]]))) {
@@ -2211,7 +2209,7 @@ BOOL valid=NO;
                             objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                             
                             [objectSelectionCell reloadBoundValue];
-                            DLog(@"objectselection cell %@",objectSelectionCell.items);
+                            
                             
                         }
                        
@@ -2243,7 +2241,7 @@ BOOL valid=NO;
                     SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtFour;
                     
                     
-                    DLog(@"section managed object is %@",sectionManagedObject);
+                    
                     NSObject *supervisionTypeObject=[sectionManagedObject valueForKeyPath:@"supervisionType"];
                     
                     if (indexPath.row!=NSNotFound &&( selectedSupervisionType||(supervisionTypeObject&&[supervisionTypeObject isKindOfClass:[SupervisionTypeEntity class]]))) {
@@ -2262,7 +2260,7 @@ BOOL valid=NO;
                             objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                             
                             [objectSelectionCell reloadBoundValue];
-                            DLog(@"objectselection cell %@",objectSelectionCell.items);
+                            
                             
                         }
                         
@@ -2306,8 +2304,8 @@ BOOL valid=NO;
         
         SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-    DLog(@"cell tag is %i",cell.tag);
-    DLog(@"cell managed object is %@",cellManagedObject);
+    
+    
         
         if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]) {
        
@@ -2341,7 +2339,7 @@ BOOL valid=NO;
                         subytypeObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                         
                         [subytypeObjectSelectionCell reloadBoundValue];
-                        DLog(@"objectselection cell %@",subytypeObjectSelectionCell.items);
+                        
                         
                     }
                     else {
@@ -2364,7 +2362,7 @@ BOOL valid=NO;
         
 
     } 
-        DLog(@"cellmanaged object entity name is %@",cellManagedObject.entity.name);
+        
         if (([cellManagedObject.entity.name isEqualToString:@"ExistingSupervisionReceivedEntity"]||[cellManagedObject.entity.name isEqualToString:@"ExistingSupervisionGivenEntity"] )&& [cell isKindOfClass:[SCObjectSelectionCell class]]&& cell.tag==0) {
             
             SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
@@ -2395,7 +2393,7 @@ BOOL valid=NO;
                             subytypeObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                             
                             [subytypeObjectSelectionCell reloadBoundValue];
-                            DLog(@"objectselection cell %@",subytypeObjectSelectionCell.items);
+                            
                             
                         }
                         else {
@@ -2505,7 +2503,7 @@ BOOL valid=NO;
 //        //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
 //        if (managedObject && [managedObject respondsToSelector:@selector(entity)]&&![section isKindOfClass:[SCArrayOfStringsSection class]]) {
 //            
-//            //DLog(@"entity name is %@",managedObject.entity.name);
+//            
 //            //identify the Languages Spoken table
 //            if ([managedObject.entity.name isEqualToString:@"ExistingHoursEntity"]) {
 //                //define and initialize a date formatter
@@ -2522,7 +2520,7 @@ BOOL valid=NO;
 //                NSMutableSet *assessmentHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"assessments.hours"];
 //                
 //                NSArray *assessmentHoursArray=[assessmentHoursSet allObjects];
-//                //DLog(@"direct hours are %@",assessmentHoursArray);
+//                
 //                NSString *assessmentTotalTimeStr=[NSString stringWithFormat:@"%@ Assessment",[self totalTimeStrForHoursArray:assessmentHoursArray]];
 //                
 //                
@@ -2536,7 +2534,7 @@ BOOL valid=NO;
 //                NSMutableSet *supportHoursSet=[managedObject mutableSetValueForKeyPath:(NSString *)@"supportActivities.hours"];
 //                
 //                NSArray *supportHoursArray=[supportHoursSet allObjects];
-//                //DLog(@"direct hours are %@",supportHoursArray);
+//                
 //                NSString *supportTotalTimeStr=[NSString stringWithFormat:@"%@ Support",[self totalTimeStrForHoursArray:supportHoursArray]];
 //                
 //                
@@ -2613,8 +2611,8 @@ BOOL valid=NO;
             if (totalTimeDateObject&&[totalTimeDateObject isKindOfClass:[NSDate class]]) {
                 
                 totalTime=totalTime+[totalTimeDateObject timeIntervalSince1970];
-                DLog(@"time is %@",totalTimeDateObject);
-                DLog(@"total time is to be added is %e",[totalTimeDateObject timeIntervalSince1970]);
+                
+                
                 
             }
         }
@@ -2684,8 +2682,8 @@ BOOL valid=NO;
             if (totalTimeDateObject&&[totalTimeDateObject isKindOfClass:[NSDate class]]) {
                 
                 totalTime=totalTime+[totalTimeDateObject timeIntervalSince1970];
-                DLog(@"time is %@",totalTimeDateObject);
-                DLog(@"total time is to be added is %e",[totalTimeDateObject timeIntervalSince1970]);
+                
+                
                 
             }
         }

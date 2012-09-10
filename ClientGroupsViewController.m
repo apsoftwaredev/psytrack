@@ -57,13 +57,13 @@
     
     if(![SCUtilities is_iPad]){
         
-        objectsModel.theme=[SCTheme themeWithPath:@"mapper-iPhone.ptt"];
+        objectsModel.theme=[SCTheme themeWithPath:@"./MapperTheme/mapper-iPhone.ptt"];
         
                 
         
         
     }else {
-        objectsModel.theme=[SCTheme themeWithPath:@"mapper-ipad-full.ptt"];
+        objectsModel.theme=[SCTheme themeWithPath:@"./MapperTheme/mapper-ipad-full.ptt"];
         
                
         
@@ -73,20 +73,20 @@
     
     
     // Initialize tableModel
-    NSString *detailThemeNameStr=nil;
+//    NSString *detailThemeNameStr=nil;
     if ([SCUtilities is_iPad]) {
-        detailThemeNameStr=@"mapper-ipad-full.ppt";
+//        detailThemeNameStr=@"mapper-ipad-full.ppt";
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
     }
     else {
         
         [self.tableView setBackgroundColor:[UIColor clearColor]];
-        detailThemeNameStr=@"mapper-phone.ptt";
+//        detailThemeNameStr=@"mapper-phone.ptt";
     }
     
-    SCTheme *theme=[SCTheme themeWithPath:detailThemeNameStr];
-    objectsModel.theme=theme;
+//    SCTheme *theme=[SCTheme themeWithPath:detailThemeNameStr];
+//    objectsModel.theme=theme;
     
     
     
@@ -94,6 +94,10 @@
     self.view.backgroundColor=[UIColor clearColor];
     
     
+    UIViewController *navtitle=self.navigationController.topViewController;
+    
+    navtitle.title=@"Client Groups";
+
 
     
     

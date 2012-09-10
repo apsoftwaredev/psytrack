@@ -186,7 +186,7 @@
         }
     }
     
-DLog(@"valid is %i",valid);
+
     return valid;
 
 

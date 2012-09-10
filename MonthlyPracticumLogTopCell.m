@@ -137,7 +137,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     
     
-//    DLog(@" size needed height is %g",[self interventionTableViewContentSize ].height );
+//    
     
     CGFloat interventionTVHeight=[self interventionTableViewContentSize].height;
     CGFloat assessmentTVHeight=[self assessmentTypesTableViewContentSize].height;
@@ -354,7 +354,7 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
             
         }
         CGFloat paddAdditonalY=0;
-        DLog(@"self container for supervisor and signatures summaries and subviews %@",self.containerForSignaturesAndSupervisorSummaries.subviews);
+        
         
         for (NSInteger i=0; i<self.containerForSignaturesAndSupervisorSummaries.subviews.count; i++) {
             UIView *subview =[self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:i];
@@ -1181,7 +1181,7 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
     footerLabel.backgroundColor = sectionSubFooterLabel.backgroundColor;
     footerLabel.textColor = sectionSubFooterLabel.textColor;
     footerLabel.tag=60;
-    DLog(@"footer total %@",objectsSection.footerTotal);
+    
     footerLabel.text=footerTotal;
     footerLabel.textAlignment=UITextAlignmentCenter;
     [subFooterLabelContainerView addSubview:footerLabel];
@@ -1217,7 +1217,7 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
     
     NSArray *fetchedObjects=[self fetchUnorderedObjectsFromEntity:@"ClinicianEntity" filterPredicate:[NSPredicate predicateWithFormat:@"myCurrentSupervisor ==%@",[NSNumber numberWithBool:YES] ]];
     
-    DLog(@"fetched objects are %@",fetchedObjects);
+    
     ClinicianEntity *defaultSupervisor=nil;
     if (fetchedObjects &&fetchedObjects.count) {
         defaultSupervisor=[fetchedObjects objectAtIndex:0];

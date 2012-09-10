@@ -81,12 +81,12 @@ NSAssert1(X, Y, Z);
 #else
 #define LOGGING_FACILITY(X, Y)	\
 if (!(X)) {			\
-DLog(Y);		\
+		\
 }					
 
 #define LOGGING_FACILITY1(X, Y, Z)	\
 if (!(X)) {				\
-DLog(Y, Z);		\
+		\
 }						
 #endif
 
@@ -173,7 +173,7 @@ NSString* trustResultDescribe( SecTrustResultType result ) {
     CFDataRef inPKCS12Data = (__bridge CFDataRef)PKCS12Data;             // 1
     
     
-//    DLog(@"inpkcs12data is %@",inPKCS12Data);
+//    
     OSStatus status = noErr;
     
     SecIdentityRef myIdentity;
@@ -293,7 +293,7 @@ NSString* trustResultDescribe( SecTrustResultType result ) {
                   
                     
                     
-            //        DLog(@"exceptions are %@",trustResultDescribe(trustResult));
+            //        
                     
                           
                    
@@ -309,7 +309,7 @@ NSString* trustResultDescribe( SecTrustResultType result ) {
                    
                     //5
                     if (status==noErr) {
-//                   DLog(@"trust result string is %@",trustResultDescribe(trustResult));
+//                   
                         switch(trustResult) {
                             case kSecTrustResultProceed:
                                 // Accepted by user keychain setting explicitly
@@ -338,7 +338,7 @@ NSString* trustResultDescribe( SecTrustResultType result ) {
                              
                             //6
                             {
-                //                DLog(@"kSecTrustResultRecoverableTrustFailure");
+                //                
                                 //Get time used to verify trust
                                 
                                 CFAbsoluteTime trustTime,currentTime,timeIncrement,newTime;
@@ -373,7 +373,7 @@ NSString* trustResultDescribe( SecTrustResultType result ) {
                                     }
                                     //7
                                 
-//                                 DLog(@"trust Resutl are %@",trustResultDescribe(trustResult));
+//                                 
                                 //7
                                 if ((trustResult == kSecTrustResultProceed ||trustResult== kSecTrustResultUnspecified||trustResult== kSecTrustResultRecoverableTrustFailure)&&status==noErr) { 
                                    
@@ -506,7 +506,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
         }
 //        else 
 //        {
-//            DLog(@"public key is nil");
+//            
 //        }
         
         
@@ -543,7 +543,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
 								);
 	
 	if (sanityCheck!=noErr) 
-        DLog(@"Error encrypting, OSStatus == %ld.", sanityCheck );
+        
  
 	
 	// Build up cipher text blob.
@@ -571,7 +571,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
             BOOL proceed=[self identityAndTrustResult];
             
             if (!proceed ||privateKeyRef==nil) {
-//                DLog(@"was not able to verify security information");
+//                
                 return nil;
                 
             }
@@ -584,7 +584,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
         }
 //        else 
 //        {
-//            DLog(@"private key is nil");
+//            
 //        }
         
         
@@ -660,7 +660,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
         
         if (!proceed ||privateKeyRef==nil) 
         {
-//            DLog(@"was not able to verify security information");
+//            
             return nil;
             
         }
@@ -745,12 +745,12 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
 	LOGGING_FACILITY(plainText != nil, @"PlainText object cannot be nil." );
 	LOGGING_FACILITY(symmetricKey != nil, @"Symmetric key object cannot be nil." );
 	LOGGING_FACILITY(pkcs7 != NULL, @"CCOptions * pkcs7 cannot be NULL." );
-//	DLog(@"semetric key length is %i",[symmetricKey length]);
-//    DLog(@"max blowfish key length is%i",kChosenCipherKeySize);
+//	
+//    
     
     LOGGING_FACILITY([symmetricKey length] == kChosenCipherKeySize, @"Disjoint choices for key size." );
 
-//        DLog(@"semetric key length is %i, kchosenchyper size is %i",[symmetricKey length],kChosenCipherKeySize);
+//        
     if ([symmetricKey length]!=kChosenCipherKeySize) {
         return nil;
     }
@@ -841,7 +841,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
 	if (bufferPtr) free(bufferPtr);
 }
 @catch (NSException *exception) {
-        DLog(@"exception name:%@ reason: %@ userInfo is %@",exception.name,exception.reason,exception.userInfo);
+        
     }
 @finally {
         
@@ -882,7 +882,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
             
             if (!proceed ||privateKeyRef==nil) 
             {
-//                DLog(@"was not able to verify security information");
+//                
                 return nil;
                 
             }

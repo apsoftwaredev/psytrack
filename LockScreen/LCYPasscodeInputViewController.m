@@ -184,7 +184,7 @@ const int PASSCODE_INPUT_HANDLER_PASSCODE_LENGTH = 4;
 
 -(IBAction)appUnlocked:(id)sender{
     
-    //DLog(@"app unlocked");
+    
   
     [self.passCodeInputField becomeFirstResponder ];	
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"appUnlocked" object:nil];
@@ -197,7 +197,7 @@ const int PASSCODE_INPUT_HANDLER_PASSCODE_LENGTH = 4;
 	
 	if (range.length == 1 && [string length] == 0)
 	{
-		////DLog(@"got a delete press");
+		//
 		[self adjustLockDigitsForDeletePress];
 	}
 	else 

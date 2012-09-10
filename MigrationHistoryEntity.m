@@ -67,7 +67,7 @@
         
         
         NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:keyStringToSet];
-        //DLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        
         NSData *encryptedData;
         NSString *encryptedKeyString;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
@@ -75,10 +75,10 @@
             
             
             if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
-                //DLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                
                 
                 encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
-                //DLog(@"key date is client entity %@",encryptedkeyString);
+                
             }
         }
         

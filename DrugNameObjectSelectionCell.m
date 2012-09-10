@@ -43,7 +43,7 @@
 - (void)didSelectCell
 {
     
-//    //DLog(@"client %@",[self.boundObject valueForKey:@"client"]);
+//    
     
     
     
@@ -61,7 +61,7 @@
     
     
     
-    //    //DLog(@"clientobject selection itemset %@",mutableSet);
+    //    
     
     //    SCObjectSelectionSection *objectSelectionSection=[SCObjectSelectionSection sectionWithHeaderTitle:nil withItemsSet:mutableSet withClassDefinition:clientsViewController_Shared.clientDef];
     //    
@@ -118,7 +118,7 @@
 //        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
 //            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
 //            
-//            //DLog(@"self bound object is %@",self.boundObject);
+//            
 //            NSString *drugName=[self.boundObject valueForKey:@"drugName"];
 //            
 //            
@@ -232,7 +232,7 @@
     //    NSError *error = nil;
     //    NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
     //    if (fetchedObjects == nil) {
-    //        //DLog(@"no items");
+    //        
     //    }
     //    NSMutableArray *arrayWithFetchedWithoutAlreadySelected=[NSMutableArray arrayWithArray:fetchedObjects];
     
@@ -241,7 +241,7 @@
     
     //    if (!hasChangedClients && [self.boundObject valueForKey:@"client"]) {
     //               
-    //      //DLog(@"self itmes are %@",self.items);
+    //      
     //    
     //      
 //    if (!hasChangedClients) {
@@ -292,7 +292,7 @@
 //       
 //        
 //       clientIDCodeString = (NSString *)[clientObject valueForKey:@"clientIDCode"];
-//        //DLog(@"client id code %@",(NSString *)[clientObject valueForKey:@"clientIDCode"]);
+//        
 //
 //    }
 // 

@@ -42,7 +42,7 @@
     [dateFormatter setDateFormat:@"H:m:ss yyyy M d"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"MST"]];
     NSDate *referenceDate=[dateFormatter dateFromString:[NSString stringWithFormat:@"%i:%i:%i %i %i %i",11,11,11,2006,6,6]];
-    //DLog(@"reference date %@",referenceDate);
+    
     
     //    NSTimeInterval thirtyDays=60*60*24*30;
     NSDate *currentDate=[NSDate date];
@@ -114,7 +114,7 @@
     NSFetchRequest *trainingProgramFetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *trainingProgramEntity = [NSEntityDescription entityForName:@"TrainingProgramEntity" inManagedObjectContext:appDelegate.managedObjectContext];
     [trainingProgramFetchRequest setEntity:trainingProgramEntity];
-    DLog(@"traingin program entity is %@",trainingProgramEntity);
+    
     //    [trainingProgramFetchRequest setRelationshipKeyPathsForPrefetching:[NSArray arrayWithObject:@"selectedByDefault"]];
     //    
     //    NSPredicate *defaultTrainingPredicate = [NSPredicate predicateWithFormat:@"selectedByDefault == %@ ", [NSNumber numberWithBool:YES]];
@@ -123,7 +123,7 @@
     NSError *trainingProgramError = nil;
     NSArray *trainingProgramFetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:trainingProgramFetchRequest error:&trainingProgramError];
     
-    DLog(@"trainging program fetched objects are %@",trainingProgramFetchedObjects);
+    
     for (TrainingProgramEntity *trainingProgram in trainingProgramFetchedObjects) {
         [trainingProgram willAccessValueForKey:@"selectedByDefault"];
         if ([trainingProgram.selectedByDefault isEqualToNumber:[NSNumber numberWithBool:YES]]) {
@@ -141,7 +141,7 @@
     NSFetchRequest *siteFetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *siteEntity = [NSEntityDescription entityForName:@"SiteEntity" inManagedObjectContext:appDelegate.managedObjectContext];
     [siteFetchRequest setEntity:siteEntity];
-    DLog(@"traingin program entity is %@",siteFetchRequest);
+    
     //    [trainingProgramFetchRequest setRelationshipKeyPathsForPrefetching:[NSArray arrayWithObject:@"selectedByDefault"]];
     //    
     //    NSPredicate *defaultTrainingPredicate = [NSPredicate predicateWithFormat:@"selectedByDefault == %@ ", [NSNumber numberWithBool:YES]];
@@ -150,7 +150,7 @@
     NSError *siteError = nil;
     NSArray *siteFetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:siteFetchRequest error:&siteError];
     
-    DLog(@"trainging program fetched objects are %@",siteFetchedObjects);
+    
     for (SiteEntity *site in siteFetchedObjects) {
         [site willAccessValueForKey:@"defaultSite"];
         if ([site.defaultSite isEqualToNumber:[NSNumber numberWithBool:YES]]) {
@@ -194,7 +194,7 @@
         
         
         NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:nil];
-        //DLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        
         NSData *encryptedData;
         NSString *encryptedKeyString;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
@@ -202,10 +202,10 @@
             
             
             if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
-                //DLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                
                 
                 encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
-                //DLog(@"key date is client entity %@",encryptedkeyString);
+                
             }
         }
         
@@ -249,7 +249,7 @@
         
         
         NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
-        //DLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        
         NSData *encryptedData;
         NSString *encryptedKeyString;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
@@ -257,10 +257,10 @@
             
             
             if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
-                //DLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                
                 
                 encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
-                //DLog(@"key date is client entity %@",encryptedkeyString);
+                
             }
         }
         

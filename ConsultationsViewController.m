@@ -498,7 +498,7 @@
     consultationDef.titlePropertyName=@"organization.name";
   
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
-    DLog(@"self.navigationItem.rightBarButtonItems are %@",self.buttonsToolbar.items);
+    
     
     objectsModel.editButtonItem = self.editButton;;
     
@@ -617,7 +617,7 @@
 
 
     if (tableModel.tag==2&&tableModel.sectionCount) {
-        SCArrayOfObjectsSection *objectsSection=(SCArrayOfObjectsSection *)[tableModel sectionAtIndex:0];
+       
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
         if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"RateChargeEntity"]) {
@@ -735,7 +735,7 @@
            
        }
  
-        DLog(@"objects section bound object is %@",objectsSection.boundObject);
+        
         
     }
 
@@ -744,7 +744,7 @@
 
     BOOL valid=NO;
     SCObjectSection *objectSection=(SCObjectSection *)[tableModel sectionAtIndex:indexPath.section];
-    DLog(@"object section bound object is %@",objectSection.boundObject);
+    
     SCTableViewCell *cell=[tableModel cellAtIndexPath:indexPath];
     NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
     

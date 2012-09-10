@@ -121,7 +121,7 @@
 #endif
    
 //    
-    DLog(@"time interval is %f",[[NSDate date] timeIntervalSince1970]);
+    
     // Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the
     // method "reachabilityChanged" will be called. 
     [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
@@ -165,10 +165,10 @@
       [[NSUserDefaults standardUserDefaults] registerDefaults:settingsDictionary];
     
     [[NSUserDefaults standardUserDefaults] synchronize];
-        //DLog(@"not successful in writing the default prefs");
+        
 
             
-    //DLog(@"user defaults are %@",[[NSUserDefaults standardUserDefaults].dictionaryRepresentation allKeys]);
+    
     
    
   
@@ -190,7 +190,7 @@
        
 ;
    
-    //DLog(@"lcock dictionary is %@",[lockValuesDictionary_ allKeys]);
+    
  
     UIImage *backgroundPattern=nil;
     NSString *tabBarImageNameStr=nil;
@@ -303,7 +303,7 @@
                 cliniciansSplitViewController.view.backgroundColor=[UIColor clearColor];
         
        
-                //DLog(@"window background color is %@", self.window.backgroundColor);
+                
 //                
             }
     else {
@@ -472,7 +472,7 @@
                 UILabel *label=(UILabel *)[containerView viewWithTag:656];
                 NSString *labelText=(NSString *)label.text;
                 
-                DLog(@"label text length is %i",labelText.length);
+                
                 if ([[label.text substringToIndex:12]isEqualToString:@"Establishing"]) {
                
              
@@ -546,18 +546,18 @@
 
 //-(void)checkKeyEntity {
 //
-//    DLog(@"lock values dictionary lock screen creat date %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]);
+//    
 //    
 //    
 //    NSPredicate *keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]];
-//    //DLog(@"lock screen date is %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]);
+//    
 //    NSFetchRequest *newFetchRequest=[[NSFetchRequest alloc]init];
 //    
 //    [newFetchRequest setPredicate:keyStringPredicate];
 //    
 //    NSError *error=nil;
 //    NSArray *fetchedObjects=[managedObjectContext__ executeFetchRequest:newFetchRequest error:&error];
-//    DLog(@"fetched objects are %@",fetchedObjects);
+//    
 //    if(fetchedObjects.count){
 //       KeyEntity *keyObject=[fetchedObjects objectAtIndex:0];
 //        if ([keyObject.keyDate isEqualToDate:(NSDate *)[(NSDictionary *)[[NSUserDefaults standardUserDefaults]valueForKey:kPTCurrentKeyDictionary] valueForKey:kPTCurrentKeyDate] ] ) {
@@ -575,11 +575,11 @@
 //            
 //           
 //            
-//            DLog(@"decrypted Lock data is %@",decryptedLockData);
+//            
 //            //            
 //            NSString* newStr = [[NSString alloc] initWithData:decryptedLockData encoding:NSASCIIStringEncoding];;
 //            //            
-//            DLog(@"newstring is %@",newStr);
+//            
 //            if (decryptedLockData) {
 //                
 //                
@@ -588,7 +588,7 @@
 //                if (dictionaryFromDecryptedData) {
 //                    
 //                    
-//                    //                    //DLog(@"lockvalues dictionary %@",[dictionaryFromDecryptedData allKeys]);
+//                    //                    
 //                    
 //                    id obj = [dictionaryFromDecryptedData objectForKey:K_LOCK_SCREEN_PASSCODE];
 //                    
@@ -598,8 +598,8 @@
 //                        NSString *pHash= [NSString stringWithFormat:@"%@asdj9emV3k30wer93",@""];
 //                        NSString *checkHash=[dictionaryFromDecryptedData valueForKey:K_LOCK_SCREEN_P_HSH];
 //                        
-//                        //                        //DLog(@"check hash string is %@",checkHash);
-//                        //                        //DLog(@"hash str is %@",hashStr);
+//                        //                        
+//                        //                        
 //                        if (checkHash && [checkHash isEqualToString:pHash]) {
 //                            
 //                            [lockValuesDictionary_ setValue:[dictionaryFromDecryptedData valueForKey:K_LOCK_SCREEN_PASSCODE] forKey:K_LOCK_SCREEN_PASSCODE];
@@ -631,7 +631,7 @@
 //            lockValuesDictionary_ setValue:(NSString *)[(NSDictionary *)[[NSUserDefaults standardUserDefaults]valueForKey:kPTCurrentKeyDictionary] valueForKey:keyObject.da]  forUndefinedKey:<#(NSString *)#>                                 
 //            
 //        }
-//        DLog(@"key entity is %@",keyObject);
+//        
 //        [self saveContext];
 //    }
 //    else 
@@ -685,7 +685,7 @@
     
     //    NSInteger screenLocationForMessage=kPTTScreenLocationTop;
     
-    //DLog(@"app is locked:  %i  app is locked at startup%i passcode is on %i",[self isAppLocked],[self isLockedAtStartup],[self isPasscodeOn]);
+    
     
     
 //    if (([self isPasscodeOn]&&([self isAppLocked]||[self isLockedAtStartup]))) {
@@ -767,7 +767,10 @@
 - (void) reachabilityChanged: (NSNotification* )note
 {
 	Reachability* curReach = [note object];
-	NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+	if (curReach) {
+         NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    }
+   
 //	[self updateInterfaceWithReachability: curReach];
 }
 
@@ -775,7 +778,7 @@
 -(IBAction)notifyTrustFailure:(id)sender{
 
 
-    //DLog(@"sender class is %@",[sender class]);
+    
     if (self.window.isKeyWindow) {
         [self displayNotification:@"Problem with trust settings.  Check for software update or notify support." forDuration:5.0 location:kPTTScreenLocationMiddle inView:self.window];
     }
@@ -808,7 +811,7 @@
 	// the defaults haven't been copied in yet.  So do so here.  Adds another null check
 	// for every retrieve, but should only trip the first time
 	if (val == nil) { 
-		//DLog(@"user defaults may not have been loaded from Settings.bundle ... doing that now ...");
+		
 		//Get the bundle path
 		NSString *bPath = [[NSBundle mainBundle] bundlePath];
 		NSString *settingsPath = [bPath stringByAppendingPathComponent:@"Settings.bundle"];
@@ -817,17 +820,17 @@
 		//Get the Preferences Array from the dictionary
 		NSDictionary *settingsDictionary = [NSDictionary dictionaryWithContentsOfFile:plistFile];
 		NSArray *preferencesArray = [settingsDictionary objectForKey:@"PreferenceSpecifiers"];
-        DLog(@"preferences array is %@",preferencesArray);
+        
 		//Loop through the array
 		NSDictionary *item;
 		for(item in preferencesArray)
 		{
 			//Get the key of the item.
 			NSString *keyValue = [item objectForKey:@"Key"];
-            DLog(@"key balue is %@",keyValue);
+            
 			//Get the default value specified in the plist file.
 			id defaultValue = [item objectForKey:@"DefaultValue"];
-            DLog(@"default value is %@",defaultValue);
+            
 			if (keyValue && defaultValue) {				
 				[standardUserDefaults setObject:defaultValue forKey:keyValue];
 				if ([keyValue compare:kPTiCloudPreference] == NSOrderedSame)
@@ -836,7 +839,7 @@
 		}
 		[standardUserDefaults synchronize];
 	}
-    DLog(@"icloud preference is %@",val);
+    
 	return val;
 
 
@@ -853,7 +856,7 @@
 	// the defaults haven't been copied in yet.  So do so here.  Adds another null check
 	// for every retrieve, but should only trip the first time
 	if (val == nil) { 
-		//DLog(@"user defaults may not have been loaded from Settings.bundle ... doing that now ...");
+		
 		//Get the bundle path
 		NSString *bPath = [[NSBundle mainBundle] bundlePath];
 		NSString *settingsPath = [bPath stringByAppendingPathComponent:@"Settings.bundle"];
@@ -896,14 +899,14 @@
         [self.passwordItem setObject:[self generateRandomStringOfLength:30] forKey:(__bridge id) kSecValueData];
     }
     password=(NSString *)[passwordItem_ objectForKey:(__bridge_transfer id)kSecValueData];
-    DLog(@"password item is %@",password );
+    
     NSString* symmetricString= [NSString stringWithFormat:@"%@%@",password,[self combSmString]];
-    DLog(@"semetric string is %@",symmetricString);
-    DLog(@"semetric string length is %i",symmetricString.length);
-    DLog(@"pasword item length is %i", password.length);    
+    
+    
+        
 //    NSData *data=[symmetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
     
-//DLog(@"data length is %i",[data length]);
+
     return [symmetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
 }
 
@@ -1447,12 +1450,12 @@
         self.encryption=[[PTTEncryption alloc]init];
     }
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
-	DLog(@"current key string is %@",[ self convertDataToString:(NSData *)[wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_CURRENT_KEYSTRING]]);
+	
     
     
    NSMutableDictionary *returnDictionary=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[NSData data], (NSString *)[ self convertDataToString:(NSData *)[wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_CURRENT_KEYSTRING]], nil] forKeys:[NSArray arrayWithObjects:@"encryptedData", @"keyString", nil]]; 
     
-    DLog(@"return dictionary is %@",returnDictionary);
+    
     NSData *sharedSymetricData = [self getSharedSymetricData];
     
     if (!sharedSymetricData) {
@@ -1472,16 +1475,16 @@
         
        
         
-       DLog(@"pascode data length is %i",sharedSymetricData.length);
+       
         if(sharedSymetricData.length==32){
             NSData* data=[self convertStringToData:plainTextStr ];
             
             
             
-            //            //DLog(@"keystring is %@",keyString);
+            //            
             
             encryptedData=(NSData *) [encryption_ doCipher:data key:sharedSymetricData context:kCCEncrypt padding:(CCOptions *) kCCOptionPKCS7Padding];
-            DLog(@"encrytped data is %@",encryptedData);
+            
             if (encryptedData.length) {
                 if ([returnDictionary.allKeys containsObject:@"encryptedData"]) {
                     [returnDictionary setValue:encryptedData forKey:@"encryptedData"];
@@ -1787,7 +1790,7 @@
     
     
     
-        DLog(@"encrypted data is %@",encryptedData);
+        
        
         if (encryptedData.length ) {
             
@@ -1812,7 +1815,7 @@
             NSEntityDescription *keyEntity = [NSEntityDescription entityForName:@"KeyEntity" inManagedObjectContext:managedObjectContext__];
             [fetchRequest setEntity:keyEntity];
         
-        DLog(@"keystring is %@",keyString);
+        
         NSPredicate *   keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",keyString];
         [fetchRequest setPredicate: keyStringPredicate];   
         NSError *error = nil;
@@ -1826,24 +1829,17 @@
 //            }
 //            //4
             //4
-        DLog(@"fetched objects are %@",fetchedObjects);
+        
             if (fetchedObjects.count) 
             {
                 
                 
-                DLog(@"fetched objects are %@",fetchedObjects);
-//                NSPredicate *keyStringPredicate;
                 
-                KeyEntity *testKey=[fetchedObjects objectAtIndex:0];
-                DLog(@"test key is %@",testKey);
-                
-               
-                
-//                     keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]];
+
                     
                     for (KeyEntity *keyObjectInArray in fetchedObjects) {
-                        DLog(@"keyobject in array keystring is %@",keyObjectInArray.keyString);
-                        DLog(@"create key is %@",keyString);
+                        
+                        
                         [keyObjectInArray willAccessValueForKey:@"keyString"];
                         if ([keyObjectInArray.keyString isEqualToString:keyString]) {
                             
@@ -1860,13 +1856,13 @@
                 {
                     
                     [keyObject willAccessValueForKey:@"dataF"];
-                    DLog(@"data f is %@",keyObject.dataF);
+                    
                     if (keyObject.dataF) {
                       
                         symetricData =[encryption_ doCipher:keyObject.dataF key:sharedSymetricData context:kCCDecrypt padding:(CCOptions *) kCCOptionPKCS7Padding];
-                        DLog(@"symetric data is %@",symetricData);
                         
-                        DLog(@"key object data f is %@",keyObject.dataF);
+                        
+                        
                         if (!symetricData) {
                             symetricData =[encryption_ doCipher:keyObject.dataF key:[self getOldSharedSymetricData] context:kCCDecrypt padding:(CCOptions *) kCCOptionPKCS7Padding];
                         }
@@ -1880,7 +1876,7 @@
                     if (symetricData&&symetricData.length==32) {
                         decryptedData=(NSData *) [encryption_ doCipher:encryptedData key:symetricData context:kCCDecrypt padding:(CCOptions *) kCCOptionPKCS7Padding];
                         
-                        DLog(@"decrypted data is %@",decryptedData);
+                        
                     }
                     [keyObject didAccessValueForKey:@"dataF"];
             
@@ -1906,7 +1902,7 @@
     }
         
         
-    DLog(@"decrypted data returned is %@",decryptedData);
+    
     
     return decryptedData;  
     
@@ -1971,8 +1967,8 @@
 	NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
 	NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-	DLog(@"Register URL: %@", url);
-	DLog(@"Return Data: %@", returnData);
+	
+	
 	
 #endif
 }
@@ -1984,7 +1980,7 @@
 	
 #if !TARGET_IPHONE_SIMULATOR
 	
-	//DLog(@"Error in registration. Error: %@", error);
+	
 	
 #endif
 }
@@ -1996,18 +1992,18 @@
 	
 #if !TARGET_IPHONE_SIMULATOR
     
-	DLog(@"remote notification: %@",[userInfo description]);
+	
 	NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
 	
 	NSString *alert = [apsInfo objectForKey:@"alert"];
-	DLog(@"Received Push Alert: %@", alert);
+	
 	
 	NSString *sound = [apsInfo objectForKey:@"sound"];
-    DLog(@"Received Push Sound: %@", sound);
+    
 	AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 	
 	NSString *badge = [apsInfo objectForKey:@"badge"];
-	DLog(@"Received Push Badge: %@", badge);
+	
 	application.applicationIconBadgeNumber = [[apsInfo objectForKey:@"badge"] integerValue];
 	
 #endif
@@ -2132,7 +2128,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                     if ([[self.tabBarController.selectedViewController class] isSubclassOfClass:[UISplitViewController class]]) {
                     
                  
-                        //DLog(@"tabbar selected item index landscape left is %i",self.tabBarController.selectedIndex);
+                        
                         
                         
                         CGRect frame= CGRectMake(((self.window.frame.size.width-self.tabBarController.tabBar.frame.size.height)/2)-self.tabBarController.tabBar.frame.size.height- self.viewController.frame.size.height/2,(self.window.frame.size.height/2-self.viewController.frame.size.height/2)-160, self.viewController.frame.size.width, self.viewController.frame.size.height);     
@@ -2150,7 +2146,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                         self.viewController.frame      =frame;
                    
                         
-                        //DLog(@"landscape left split");
+                        
                                         
                     } else
                         
@@ -2165,7 +2161,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 
                         
                         
-                    //DLog(@"landscape left not split");
+                    
                     }
                     
                    
@@ -2192,7 +2188,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
 
                     
                   
-                    //DLog(@"iphone left");
+                    
                                        
 
                 }
@@ -2212,7 +2208,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                    
 //                       UISplitViewController *splitViewController=(UISplitViewController*) self.tabBarController.selectedViewController;
                        
-                       //DLog(@"split view controller view controllers %@",splitViewController.viewControllers);
+                       
                        
                       
                        
@@ -2233,7 +2229,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                        
                        
 //                   self.viewController.view.transform      = CGAffineTransformTranslate(self.viewController.view.transform, 140, self.imageView.frame.origin.x);
-                 //DLog(@"landscape right split");
+                 
                   
                    
                    } 
@@ -2244,7 +2240,7 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                        
 //                       self.viewController.view.transform     = CGAffineTransformTranslate(self.viewController.view.transform,130 , -140);
                        
-                      //DLog(@"landscape right not split");
+                      
                        
                      
                            CGRect frame= CGRectMake(((self.window.frame.size.width-self.tabBarController.tabBar.frame.size.height)/2)-self.tabBarController.tabBar.frame.size.height- self.viewController.frame.size.height/2,(self.window.frame.size.height/2-self.viewController.frame.size.height/2), self.viewController.frame.size.width, self.viewController.frame.size.height);                      
@@ -2253,8 +2249,8 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
                    }
                    
                    
-                   //DLog(@"clinician x position is %f", self.viewController.view.frame.origin.x);
-                   //DLog(@"clinician y position is %f", self.viewController.view.frame.origin.y);
+                   
+                   
                    
                    
                    
@@ -2485,13 +2481,13 @@ duration:(NSTimeInterval)1.0];
              */
                     
             
-            DLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            
             abort();
         } 
         
         else
         {
-            DLog(@"saved successfully");
+            
         
         }      
         
@@ -2514,13 +2510,13 @@ duration:(NSTimeInterval)1.0];
              
              abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
              */
-            //DLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            
             abort();
         } 
         else
         {
         
-            //DLog(@"saved drug context");
+            
         
         }
     }
@@ -2661,7 +2657,7 @@ duration:(NSTimeInterval)1.0];
 //         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
 //         
 //         */
-//        //DLog(@"Unresolved error %@, %@", error, [error userInfo]);
+//        
 //        abort();
 //    }   
 //    
@@ -2701,7 +2697,7 @@ duration:(NSTimeInterval)1.0];
             
             if (![fileManager fileExistsAtPath:drugsDatabase]) {
                 NSString *drugTextDocPath = [[NSBundle mainBundle] pathForResource:@"drugs" ofType:@"sqlite"];
-                //DLog(@"path to file%@", drugsDatabase);
+                
                 if (drugTextDocPath) {
                     
                     [fileManager copyItemAtPath:drugTextDocPath toPath:drugsDatabase error:NULL];
@@ -2740,12 +2736,12 @@ duration:(NSTimeInterval)1.0];
                          Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
                          
                          */
-                        //DLog(@"Unresolved error %@, %@", drugError, [drugError userInfo]);
+                        
                         abort();
                     }   
                     else 
                     {
-                        //DLog(@"added persistent drug store");
+                        
                       
                         
                     }    
@@ -2827,7 +2823,7 @@ duration:(NSTimeInterval)1.0];
         
         if (![fileManager fileExistsAtPath:disordersDatabase]) {
             NSString *disorderTextDocPath = [[NSBundle mainBundle] pathForResource:@"disorders" ofType:@"sqlite"];
-            //DLog(@"path to file%@", disordersDatabase);
+            
             if (disorderTextDocPath) {
                 
                 [fileManager copyItemAtPath:disorderTextDocPath toPath:disordersDatabase error:NULL];
@@ -2866,12 +2862,12 @@ duration:(NSTimeInterval)1.0];
              Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
              
              */
-            //DLog(@"Unresolved error %@, %@", disorderError, [disorderError userInfo]);
+            
             abort();
         }   
         else 
         {
-            //DLog(@"added persistent drug store");
+            
             
             
         }    
@@ -2927,10 +2923,10 @@ duration:(NSTimeInterval)1.0];
             
             NSURL *applicationURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"Application.txt"];
             
-            //DLog(@"drugUrl %@",applicationURL);
+            
             TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:applicationURL encoding:NSASCIIStringEncoding];
             
-            //                        //DLog(@"csvfile %@",[tabFile description]);
+            //                        
             
             
             NSInteger appCount = [tabFile count];
@@ -2938,7 +2934,7 @@ duration:(NSTimeInterval)1.0];
             
             
             
-            //DLog(@"starting appCount is%i",appCount);
+            
             
             for (NSInteger z=9; z<=appCount-8; z++) {
                 
@@ -2992,22 +2988,22 @@ duration:(NSTimeInterval)1.0];
                 
                 
                 
-                //                //DLog(@"drug %@",app);
+                //                
                 
                 
                 
                 
                 
-                //                //DLog(@"z is %i",z);
+                //                
                 
                 
                 
                 
                 if (z>=appCount-1)
                 {
-                    //DLog(@"count is%i",appCount);
-                    //DLog(@"z is %i",z);
-                    //DLog(@"last app is %@",app);
+                    
+                    
+                    
                     
                 }
             }
@@ -3033,10 +3029,10 @@ duration:(NSTimeInterval)1.0];
             
             NSURL *productURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"Product.txt"];
             
-            //            //DLog(@"drugUrl %@",productURL);
+            //            
             TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:productURL encoding:NSASCIIStringEncoding];
             
-            //            //DLog(@"csvfile %@",[tabFile description]);
+            //            
             
             
             NSInteger productCount = [tabFile count];
@@ -3049,7 +3045,7 @@ duration:(NSTimeInterval)1.0];
             NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:__drugsManagedObjectContext];
             
             
-            //DLog(@"starting productCount is%i",productCount);
+            
             
             for (NSInteger z=9; z<=productCount-8; z++) {
                 
@@ -3058,7 +3054,7 @@ duration:(NSTimeInterval)1.0];
                 
                 DrugProductEntity *drug=[[DrugProductEntity alloc]initWithEntity:productEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
                 
-                //                //DLog(@"object at index %@",[tabFile objectAtIndex:z]);
+                //                
                 drug.applNo=[tabFile objectAtIndex:z];
                 z++;
                 
@@ -3094,10 +3090,10 @@ duration:(NSTimeInterval)1.0];
                 
                 if (z>=productCount-1)
                 {
-                    //DLog(@"count is%i",productCount);
-                    //DLog(@"z is %i",z);
                     
-                    //DLog(@"last app is %@",drug);
+                    
+                    
+                    
                 }
                 
             }
@@ -3115,10 +3111,10 @@ duration:(NSTimeInterval)1.0];
             
             NSURL *drugRegActionDateURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"RegActionDate.txt"];
             
-            //            //DLog(@"drugUrl %@",productURL);
+            //            
             TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugRegActionDateURL encoding:NSASCIIStringEncoding];
             
-            //            //DLog(@"csvfile %@",[tabFile description]);
+            //            
             
             
             NSInteger drugRegActionDateCount = [tabFile count];
@@ -3138,7 +3134,7 @@ duration:(NSTimeInterval)1.0];
                 
                 DrugRegActionDateEntity *drugRegActionDate=[[DrugRegActionDateEntity alloc]initWithEntity:productEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
                 
-                //                //DLog(@"object at index %@",[tabFile objectAtIndex:z]);
+                //                
                
                 
                 drugRegActionDate.applNo=[tabFile objectAtIndex:z];
@@ -3173,12 +3169,12 @@ duration:(NSTimeInterval)1.0];
                 if (z>=drugRegActionDateCount-1)
                 {
                 
-                    //DLog(@"z is %i",z);
-                    //DLog(@"last app is %@",drugRegActionDate);
                     
-                    //DLog(@"drug reg action date %@",drugRegActionDate);
-                    //DLog(@"action date is %@",[tabFile objectAtIndex:z]);
-                    //DLog(@"action date formatted is %@",[dateFormatter dateFromString:[tabFile objectAtIndex:z]]);
+                    
+                    
+                    
+                    
+                    
                 }
                 
                 
@@ -3193,10 +3189,10 @@ duration:(NSTimeInterval)1.0];
             
             NSURL *drugReviewClass_LookupURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"ReviewClass_Lookup.txt"];
             
-            //            //DLog(@"drugUrl %@",productURL);
+            //            
             TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugReviewClass_LookupURL encoding:NSASCIIStringEncoding];
             
-            //            //DLog(@"csvfile %@",[tabFile description]);
+            //            
             
             
             NSInteger drugReviewClass_LookupCount = [tabFile count];
@@ -3207,7 +3203,7 @@ duration:(NSTimeInterval)1.0];
             
             
             NSEntityDescription *drugReviewClassLookupEntityDesc=[NSEntityDescription entityForName:@"DrugReviewClassLookupEntity" inManagedObjectContext:__drugsManagedObjectContext];
-            //DLog(@"starting drugReviewClass_LookupCount is%i",drugReviewClass_LookupCount);
+            
             
             for (NSInteger z=4; z<drugReviewClass_LookupCount-3; z++) {
                 
@@ -3215,7 +3211,7 @@ duration:(NSTimeInterval)1.0];
                 
                 DrugReviewClassLookupEntity *drugReviewClassLookup=[[DrugReviewClassLookupEntity alloc]initWithEntity:drugReviewClassLookupEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
                 
-                //                //DLog(@"object at index %@",[tabFile objectAtIndex:z]);
+                //                
                 drugReviewClassLookup.reviewClassID=[tabFile objectAtIndex:z];
                 z++;
                 
@@ -3236,14 +3232,14 @@ duration:(NSTimeInterval)1.0];
                 
                 
                 
-                //DLog(@"z is %i",z);
+                
                 
                 if (z>=drugReviewClass_LookupCount-1)
                 {
-                    //DLog(@"count is%i",drugReviewClass_LookupCount);
-                    //DLog(@"z is %i",z);
                     
-                    //DLog(@"last app is %@",drugReviewClassLookup);
+                    
+                    
+                    
                 }
                 
                 
@@ -3262,10 +3258,10 @@ duration:(NSTimeInterval)1.0];
             
             NSURL *appDocURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"AppDoc.txt"];
             
-            //            //DLog(@"drugUrl %@",productURL);
+            //            
             TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:appDocURL encoding:NSASCIIStringEncoding];
             
-            //            //DLog(@"csvfile %@",[tabFile description]);
+            //            
             
             
             NSInteger appDocCount = [tabFile count];
@@ -3276,7 +3272,7 @@ duration:(NSTimeInterval)1.0];
             
             
             NSEntityDescription *appDocEntityDesc=[NSEntityDescription entityForName:@"DrugAppDocEntity" inManagedObjectContext:__drugsManagedObjectContext];
-            //DLog(@"starting appDocCount is%i",appDocCount);
+            
             for (NSInteger z=9; z<appDocCount-8; z++) {
                 
                 
@@ -3284,7 +3280,7 @@ duration:(NSTimeInterval)1.0];
                 
                 DrugAppDocEntity *appDoc=[[DrugAppDocEntity alloc]initWithEntity:appDocEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
                 
-                //                //DLog(@"object at index %@",[tabFile objectAtIndex:z]);
+                //                
                 appDoc.appDocID=[NSNumber numberWithInteger:(NSInteger)[[tabFile objectAtIndex:z]integerValue]];
                 z++;
                 
@@ -3331,9 +3327,9 @@ duration:(NSTimeInterval)1.0];
                 
                 if (z>=appDocCount-1)
                 {
-                    //DLog(@"count is%i",appDocCount);
-                    //DLog(@"z is %i",z);
-                    //DLog(@"last app is %@",appDoc);
+                    
+                    
+                    
                 }
                 
             }
@@ -3355,10 +3351,10 @@ duration:(NSTimeInterval)1.0];
             
             NSURL *appDocType_LookupURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"AppDocType_Lookup.txt"];
             
-            //            //DLog(@"drugUrl %@",productURL);
+            //            
             TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:appDocType_LookupURL encoding:NSASCIIStringEncoding];
             
-            //            //DLog(@"csvfile %@",[tabFile description]);
+            //            
             
             
             NSInteger appDocType_LookupCount = [tabFile count];
@@ -3369,14 +3365,14 @@ duration:(NSTimeInterval)1.0];
             
             
             NSEntityDescription *appDocType_LookupEntityDesc=[NSEntityDescription entityForName:@"DrugAppDocTypeLookupEntity" inManagedObjectContext:__drugsManagedObjectContext];
-            //DLog(@"starting appDocType_LookupCount is%i",appDocType_LookupCount);
+            
             for (NSInteger z=2; z<appDocType_LookupCount-1; z++) {
                 
                 
                 
                 DrugAppDocTypeLookupEntity *drugAppDocTypeLookup=[[DrugAppDocTypeLookupEntity alloc]initWithEntity:appDocType_LookupEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
                 
-                //                //DLog(@"object at index %@",[tabFile objectAtIndex:z]);
+                //                
                 
                 
                 drugAppDocTypeLookup.appDocType=[tabFile objectAtIndex:z];
@@ -3391,9 +3387,9 @@ duration:(NSTimeInterval)1.0];
                 
                 if (z>=appDocType_LookupCount-1)
                 {
-                    //DLog(@"z is %i",z);
-                    //DLog(@"count is%i",appDocType_LookupCount);
-                    //DLog(@"last app is %@",drugAppDocTypeLookup);
+                    
+                    
+                    
                     
                     
                 }
@@ -3421,10 +3417,10 @@ duration:(NSTimeInterval)1.0];
             
             NSURL *drugChemicalTypeLookupURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"ChemTypeLookup.txt"];
             
-            //            //DLog(@"drugUrl %@",productURL);
+            //            
             TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugChemicalTypeLookupURL encoding:NSASCIIStringEncoding];
             
-            //            //DLog(@"csvfile %@",[tabFile description]);
+            //            
             
             
             NSInteger drugChemicalTypeLookupCount = [tabFile count];
@@ -3435,7 +3431,7 @@ duration:(NSTimeInterval)1.0];
             
             
             NSEntityDescription *drugChemicalTypeLookupEntityDesc=[NSEntityDescription entityForName:@"DrugChemicalTypeLookupEntity" inManagedObjectContext:__drugsManagedObjectContext];
-            //DLog(@"starting drugChemicallookup is%i",drugChemicalTypeLookupCount);
+            
             for (NSInteger z=3; z<drugChemicalTypeLookupCount-2; z++) {
                 
                 
@@ -3444,7 +3440,7 @@ duration:(NSTimeInterval)1.0];
                 
                 DrugChemicalTypeLookupEntity *drugChemicalTypeLookup=[[DrugChemicalTypeLookupEntity alloc]initWithEntity:drugChemicalTypeLookupEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
                 
-                //                //DLog(@"object at index %@",[tabFile objectAtIndex:z]);
+                //                
                 
                 
                 drugChemicalTypeLookup.chemicalTypeID=[NSNumber numberWithInteger:(NSInteger)[[tabFile objectAtIndex:z]integerValue]];
@@ -3461,9 +3457,9 @@ duration:(NSTimeInterval)1.0];
                 
                 if (z>=drugChemicalTypeLookupCount-1)
                 {   
-                    //DLog(@"count is%i",drugChemicalTypeLookupCount);
-                    //DLog(@"z is %i",z);
-                    //DLog(@"last app is %@",drugChemicalTypeLookup);
+                    
+                    
+                    
                 }
                 
             }
@@ -3481,10 +3477,10 @@ duration:(NSTimeInterval)1.0];
             
             NSURL *docType_lookupURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"DocType_lookup.txt"];
             
-            //            //DLog(@"drugUrl %@",productURL);
+            //            
             TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:docType_lookupURL encoding:NSASCIIStringEncoding];
             
-            //            //DLog(@"csvfile %@",[tabFile description]);
+            //            
             
             
             NSInteger docType_lookupCount = [tabFile count];
@@ -3496,7 +3492,7 @@ duration:(NSTimeInterval)1.0];
             
             NSEntityDescription *drugDocTypeLookupEntityDesc=[NSEntityDescription entityForName:@"DrugDocTypeLookupEntity" inManagedObjectContext:__drugsManagedObjectContext];
             
-            //DLog(@"starting docType_lookupCount is%i",docType_lookupCount);
+            
             
             for (NSInteger z=2; z<docType_lookupCount-1; z++) {
                 
@@ -3506,7 +3502,7 @@ duration:(NSTimeInterval)1.0];
                 
                 DrugDocTypeLookupEntity *docTypeLookup=[[DrugDocTypeLookupEntity alloc]initWithEntity:drugDocTypeLookupEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
                 
-                //                //DLog(@"object at index %@",[tabFile objectAtIndex:z]);
+                //                
                 
                 
                 docTypeLookup.docType=[tabFile objectAtIndex:z];
@@ -3520,9 +3516,9 @@ duration:(NSTimeInterval)1.0];
                 if (z>=docType_lookupCount-1)
                 {
                     
-                    //DLog(@"count is%i",docType_lookupCount);
-                    //DLog(@"z is %i",z);
-                    //DLog(@"last app is %@",docTypeLookup);
+                    
+                    
+                    
                 }
             }
             
@@ -3540,10 +3536,10 @@ duration:(NSTimeInterval)1.0];
             
             NSURL *product_tecodeURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"Product_tecode.txt"];
             
-            //            //DLog(@"drugUrl %@",productURL);
+            //            
             TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:product_tecodeURL encoding:NSASCIIStringEncoding];
             
-            //            //DLog(@"csvfile %@",[tabFile description]);
+            //            
             
             
             NSInteger product_tecodeCount = [tabFile count];
@@ -3554,7 +3550,7 @@ duration:(NSTimeInterval)1.0];
             
             
             NSEntityDescription *drugProductTECodeEntityDesc=[NSEntityDescription entityForName:@"DrugProductTECodeEntity" inManagedObjectContext:__drugsManagedObjectContext];
-            //DLog(@"starting docType_lookupCount is%i",product_tecodeCount);
+            
             for (NSInteger z=5; z<product_tecodeCount-4; z++) {
                 
                 
@@ -3563,7 +3559,7 @@ duration:(NSTimeInterval)1.0];
                 
                 DrugProductTECodeEntity *productTECode=[[DrugProductTECodeEntity alloc]initWithEntity:drugProductTECodeEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
                 
-                //                //DLog(@"object at index %@",[tabFile objectAtIndex:z]);
+                //                
                 
                 
                 productTECode.applNo=[tabFile objectAtIndex:z];
@@ -3583,9 +3579,9 @@ duration:(NSTimeInterval)1.0];
                 
                 if (z>=product_tecodeCount-1)
                 {
-                    //DLog(@"count is%i",product_tecodeCount);
-                    //DLog(@"z is %i",z);
-                    //DLog(@"last app is %@",productTECode);
+                    
+                    
+                    
                 }
                 
             }
@@ -3620,7 +3616,7 @@ duration:(NSTimeInterval)1.0];
         if (appFetchedObjects == nil) {
             // Handle the error
             
-            //DLog(@"no app fectched objects");
+            
         }
         else
         {
@@ -3640,9 +3636,9 @@ duration:(NSTimeInterval)1.0];
             }
             else
             {
-                //DLog(@"beginning opperation");
+                
                 NSInteger appFetchedObjectsCount=appFetchedObjects.count;
-                //DLog(@"app fetched objects count %i",appFetchedObjectsCount);
+                
                 for (NSInteger i=0; i<appFetchedObjectsCount; i++) {
                     if (appFetchedObjectsCount) {
                         
@@ -3658,14 +3654,14 @@ duration:(NSTimeInterval)1.0];
                         
                         if (i==1||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000) {
                             
-                            //DLog(@"i is %i",i);
                             
-                            //DLog(@"filtered rpoducts array is %@",filteredProductsArray);
+                            
+                            
                         }
                         
                     } 
                 }
-                //DLog(@"operation create app products relationship for loop complete");
+                
                 
                 
                 NSFetchRequest *actionDateFetchRequest = [[NSFetchRequest alloc] init];
@@ -3682,9 +3678,9 @@ duration:(NSTimeInterval)1.0];
                 }
                 else
                 {
-                    //DLog(@"beginning opperation action date");
                     
-                    //DLog(@"app fetched objects count %i",appFetchedObjectsCount);
+                    
+                    
                     for (NSInteger i=0; i<appFetchedObjectsCount; i++) {
                         
                         if (appFetchedObjectsCount) {
@@ -3701,19 +3697,19 @@ duration:(NSTimeInterval)1.0];
                             
                             if (i==1||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000) {
                                 
-                                //DLog(@"i is %i",i);
                                 
-                                //DLog(@"filtered actionDate array is %@",filteredActionDateArray);
+                                
+                                
                             }
                             
                         }
                         else{
-                            //DLog(@"no app objects");
+                            
                             
                         }
                     }
                 } 
-                //DLog(@"operation create app actiondate relationship for loop complete");
+                
                 
                 
                 NSFetchRequest *appDocsFetchRequest = [[NSFetchRequest alloc] init];
@@ -3730,9 +3726,9 @@ duration:(NSTimeInterval)1.0];
                 }
                 else
                 {
-                    //DLog(@"beginning opperation action date");
+                    
                     NSInteger actionDateFetchedObjectsCount=actionDateFetchedObjects.count;
-                    //DLog(@"app fetched objects count %i",actionDateFetchedObjectsCount);
+                    
                     for (NSInteger i=0; i<actionDateFetchedObjectsCount; i++) {
                         if (actionDateFetchedObjectsCount) { 
                             DrugRegActionDateEntity *action=[actionDateFetchedObjects objectAtIndex:i];
@@ -3747,16 +3743,16 @@ duration:(NSTimeInterval)1.0];
                             
                             if (i==1||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000||i==30000||i==100000) {
                                 
-                                //DLog(@"actionDate is is %i",i);
                                 
-                                //DLog(@"filtered appdocs array is %@",filteredAppDocArray);
+                                
+                                
                             }
                             
                             
                         }
                         else
                         {
-                            //DLog(@"no actionDateFetchedObjectsCount objects");
+                            
                             
                         }
                         
@@ -3764,7 +3760,7 @@ duration:(NSTimeInterval)1.0];
                     
                 }    
                 
-                //DLog(@"operation create app appdocs relationship for loop complete");
+                
                 
                 
                 NSFetchRequest *appDocTypeLookupFetchRequest = [[NSFetchRequest alloc] init];
@@ -3781,11 +3777,11 @@ duration:(NSTimeInterval)1.0];
                 }
                 else
                 {
-                    //DLog(@"beginning opperation appdocTypeLookupFetchedObjects");
+                    
                     NSInteger appDocTypeLookupFetchedObjectsCount=appDocTypeLookupFetchedObjects.count;
-                    //DLog(@"docTypeLookupFetchedObjects count %i",appDocTypeLookupFetchedObjectsCount);
+                    
                     for (NSInteger i=0; i<appDocTypeLookupFetchedObjectsCount; i++) {
-                        //                                    //DLog(@"appDocTypeLookupFetchedObjects %@",appDocTypeLookupFetchedObjects);
+                        //                                    
                         if (appDocTypeLookupFetchedObjectsCount) { 
                             
                             
@@ -3801,15 +3797,15 @@ duration:(NSTimeInterval)1.0];
                             
                             if (i==1||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000||i==30000) {
                                 
-                                //DLog(@"i is %i",i);
                                 
-                                //DLog(@"filtered rpoducts array is %@",filteredAppDocArray);
+                                
+                                
                             }
                             
                         }
                         else
                         {
-                            //DLog(@"no appDocTypeLookupFetchedObjectsCount objects");
+                            
                             
                         }
                         
@@ -3849,7 +3845,7 @@ duration:(NSTimeInterval)1.0];
 
 
 
-//DLog(@"completed setting up drug store opperation");
+
 //    [__drugsManagedObjectContext setUndoManager:undoManager];
 
     return TRUE;
@@ -3860,12 +3856,12 @@ duration:(NSTimeInterval)1.0];
 
     NSString *addStr=[NSString stringWithFormat:@"%@",addSmtricStr];
 
-DLog(@"gui %@",[PTTAppDelegate GetUUID]);
+
    
         int firstCharacter=[addStr characterAtIndex:0];
         int fifthCharacter=[addStr characterAtIndex:4];
         
-        //DLog(@"first character is %i fifth Character is %i",firstCharacter, fifthCharacter);
+        
         
         NSString *firstNumberString=[NSString stringWithFormat:@"%i",firstCharacter]; 
         NSString *secondNumberString=[NSString stringWithFormat:@"%i",fifthCharacter]; 
@@ -3877,7 +3873,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
         if (firstNumberString.length &&secondNumberString.length) {
             subStringOne=[firstNumberString substringFromIndex:firstNumberString.length-1];
             subIntOne=(int)[(NSString *)subStringOne intValue];
-            //DLog(@"subint one is %i",subIntOne);
+            
             
             
             subStringTwo=[secondNumberString substringFromIndex:secondNumberString.length-1];
@@ -3886,7 +3882,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
             int newInt=subIntOne+subIntTwo*addSmNr;
             
             NSString *newIntStringValue=[NSString stringWithFormat:@"%i",newInt];
-            //DLog(@"subint two is %i",newInt);
+            
             NSRange range;
             range.length=2;
             range.location=1;
@@ -3894,13 +3890,13 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
                         
             
         }
-        //DLog(@"return string is %@",addStr);
+        
     return addStr;
     
 }
 
 -(BOOL)copyDrugsToMainContext{
-//DLog(@"beginning copy drugs to main context");
+
     
     
        
@@ -3935,7 +3931,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
             
             DrugProductEntity *productMain=[[DrugProductEntity alloc]initWithEntity:productsMainEntity insertIntoManagedObjectContext:managedObjectContext__];
             
-            //                //DLog(@"object at index %@",[tabFile objectAtIndex:z]);
+            //                
             productMain.applNo=product.applNo;
             
             
@@ -3968,10 +3964,10 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
             
                        
         }
-        //                //DLog(@"beginning opperation make relationships for apps and products");
+        //                
         //           
         //
-        //                //DLog(@"app fetched objects count %i",appFetchedObjectsMainCount);
+        //                
         //                for (NSInteger i=0; i<appFetchedObjectsMainCount; i++) {
         //                    if (appFetchedObjectsMainCount) {
         //                        ;
@@ -3997,9 +3993,9 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
         //                        
         //                        if (i<10||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000) {
         //                            
-        //                            //DLog(@"i is %i",i);
         //                            
-        //                            //DLog(@"filtered rpoducts array is %@",productsMainFetchedObjects);
+        //                            
+        //                            
         //                        }
         //                        }
         //                        
@@ -4010,7 +4006,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
         
         
     }
-    //DLog(@"completed products copy");
+    
     
     
     
@@ -4051,7 +4047,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //
 //   
 //    
-//    //DLog(@"starting drugRegActionDateCount is%i",drugRegActionDateCount);
+//    
 //    
 //    for (NSInteger r=0; r<drugRegActionDateCount; r++) {
 //        
@@ -4061,7 +4057,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //        
 //        DrugRegActionDateEntity *drugRegActionDate=[drugRegActionDateFetchedObjects objectAtIndex:r];
 //        
-//        //                //DLog(@"object at index %@",[tabFile objectAtIndex:z]);
+//        //                
 //        drugRegActionDateMain.applNo=drugRegActionDate.applNo;
 //
 //        
@@ -4120,9 +4116,9 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 ////                                
 ////                                if (i<10||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000) {
 ////                                    
-////                                    //DLog(@"i is %i",i);
 ////                                    
-////                                    //DLog(@"filtered appActionDatesFetchedObjects array is %@",appActionDatesFetchedObjects);
+////                                    
+////                                    
 ////                                }
 ////                            }
 ////                            
@@ -4132,7 +4128,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //
 //    }}
 //    
-//     //DLog(@"completed drugRegActionDate copy");
+//     
 //    
 ////    
 ////    NSEntityDescription *appEntityMainDesc=[NSEntityDescription entityForName:@"DrugApplicationEntity" inManagedObjectContext:__managedObjectContext];
@@ -4148,7 +4144,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 ////    if (appFetchedObjectsMain == nil) {
 ////        // Handle the error
 ////        
-////        //DLog(@"no app main fectched objects");
+////        
 ////    }
 ////    NSInteger appFetchedObjectsMainCount=appFetchedObjectsMain.count;
 //    
@@ -4166,7 +4162,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //        }
 //    
 //    
-//    //DLog(@"starting application with products and regaction dates app add drugRegActionDateMainFetchedObjects is %i ", drugRegActionDateMainFetchedObjects.count);
+//    
 //        
 //    NSFetchRequest *productsMainFetchRequest = [[NSFetchRequest alloc] init];
 //  
@@ -4179,7 +4175,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //        }
 //   
 //    
-//              //DLog(@"starting application with products and regaction dates app add productsMainFetchedObjects is %i ", productsMainFetchedObjects.count);
+//              
 //       
 //    
 //    
@@ -4198,7 +4194,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //    if (appFetchedObjects == nil) {
 //        // Handle the error
 //        
-//        //DLog(@"no app fectched objects");
+//        
 //    }
 //    
 //    else
@@ -4206,7 +4202,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //        
 //        
 //        NSInteger appCount=appFetchedObjects.count;
-//        //DLog(@"starting appCount is%i",appCount);
+//        
 //        
 //        
 //        NSEntityDescription *entityMainDesc=[NSEntityDescription entityForName:@"DrugApplicationEntity" inManagedObjectContext:__managedObjectContext];
@@ -4294,9 +4290,9 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //            
 //            if (z<10  || z%100==0|| z==appCount-2)
 //            {
-//                //DLog(@"appCount count count is%i",appCount);
-//                //DLog(@"p is %i",z);
-//                //DLog(@"productMain is is %@",appMain);
+//                
+//                
+//                
 //               
 //            }
 //
@@ -4347,7 +4343,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 ////            
 ////            
 ////            
-////            //DLog(@"starting drugReviewClassLookupCount is%i",drugReviewClassLookupCount);
+////            
 ////            
 ////            for (NSInteger r=0; r<drugReviewClassLookupCount; r++) {
 ////                
@@ -4377,9 +4373,9 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 ////                
 ////                if (r>=drugReviewClassLookupCount-1)
 ////                {
-////                    //DLog(@"count is%i",drugReviewClassLookupCount);
-////                    //DLog(@"r is %i",r);
-////                    //DLog(@"drugReviewClassLookupMain app is %@",drugReviewClassLookupMain);
+////                    
+////                    
+////                    
 ////                }
 ////                
 ////                
@@ -4387,9 +4383,9 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 ////            
 ////        }}  
 ////    
-////    //DLog(@"completed drugReviewClassLookupCount copy");
+////    
 //    
-//    //DLog(@"starting add app doctype add and copy");
+//    
 //    
 //    NSFetchRequest *appDocType_LookupFetchRequest = [[NSFetchRequest alloc] init];
 //    NSEntityDescription *appDocType_LookupEntityDesc=[NSEntityDescription entityForName:@"DrugAppDocTypeLookupEntity" inManagedObjectContext:__drugsManagedObjectContext];
@@ -4416,7 +4412,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //            
 //            
 //            
-//            //DLog(@"starting appDocType_LookupCount is%i",appDocType_LookupCount);
+//            
 //            
 //            for (NSInteger r=0; r<appDocType_LookupCount; r++) {
 //                
@@ -4435,16 +4431,16 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //                
 //                if (r>=appDocType_LookupCount-1)
 //                {
-//                    //DLog(@"count is%i",appDocType_LookupCount);
-//                    //DLog(@"r is %i",r);
-//                    //DLog(@"appDocType_LookupCount app is %@",appDocType_LookupMain);
+//                    
+//                    
+//                    
 //                }
 //                
 //                
 //            }
 //            
 //        }
-//      //DLog(@"completed appDocType_LookupCount copy");
+//      
 //    
 //    NSError *appDocType_LookupMainError = nil;
 //    NSArray *appDocType_LookupMainFetchedObjects = [__managedObjectContext executeFetchRequest:appDocType_LookupMainFetchRequest error:&appDocType_LookupMainError];
@@ -4481,7 +4477,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //            
 //            
 //            
-//            //DLog(@"starting appDocCount is%i",appDocCount);
+//            
 //            
 //            for (NSInteger r=0; r<appDocCount; r++) {
 //                
@@ -4564,16 +4560,16 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //                
 //                if (r<8||r%100==0||r>=appDocCount-1)
 //                {
-//                    //DLog(@"count is%i",appDocCount);
-//                    //DLog(@"r is %i",r);
-//                    //DLog(@"appDocMain app is %@",appDocMain);
+//                    
+//                    
+//                    
 //                }
 //                
 //                
 //            }
 //            
-////            //DLog(@"beginning opperation action date");
-////            //DLog(@"beginning opperation");
+////            
+////            
 ////           
 ////           
 ////            
@@ -4593,7 +4589,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 ////                {
 ////
 ////                NSInteger drugRegActionDateMainCount =drugRegActionDateMainFetchedObjects.count;
-////                //DLog(@"drugRegActionDateCount and app docs fetched objects count %i",drugRegActionDateMainCount);
+////                
 ////            
 ////            for (NSInteger i=0; i<drugRegActionDateMainCount; i++) {
 ////                if (drugRegActionDateMainCount) {
@@ -4610,15 +4606,15 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 ////                    
 ////                    if (i<101||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000) {
 ////                        
-////                        //DLog(@"i is %i",i);
 ////                        
-////                        //DLog(@"filtered actionDate array is %@",filteredAppDocsArray);
+////                        
+////                        
 ////                    }
 ////                    
 ////                }
 ////                else
 ////                {
-////                    //DLog(@"no app objects");
+////                    
 ////                    
 ////                }
 ////            }
@@ -4626,7 +4622,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 ////    }}
 //            }
 //    
-//    //DLog(@"completed appDocCount copy");
+//    
 //    
 //
 // 
@@ -4667,7 +4663,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 ////            
 ////            
 ////            
-////            //DLog(@"starting drugReviewClassLookupCount is%i",drugChemicalTypeLookupCount);
+////            
 ////            
 ////            for (NSInteger r=0; r<drugChemicalTypeLookupCount; r++) {
 ////                
@@ -4694,9 +4690,9 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 ////                
 ////                if (r>=drugChemicalTypeLookupCount-1)
 ////                {
-////                    //DLog(@"count is%i",drugChemicalTypeLookupCount);
-////                    //DLog(@"r is %i",r);
-////                    //DLog(@"drugChemicalTypeLookupMain app is %@",drugChemicalTypeLookupMain);
+////                    
+////                    
+////                    
 ////                }
 ////                
 ////                
@@ -4704,7 +4700,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 ////            
 ////        }}  
 ////    
-////    //DLog(@"completed drugChemicalTypeLookupMain copy");
+////    
 ////    
 //    
 //    NSFetchRequest *drugDocTypeLookupFetchRequest = [[NSFetchRequest alloc] init];
@@ -4740,7 +4736,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //            
 //            
 //            
-//            //DLog(@"starting drugReviewClassLookupCount is%i",drugDocTypeLookupCount);
+//            
 //            
 //            for (NSInteger r=0; r<drugDocTypeLookupCount; r++) {
 //                
@@ -4783,11 +4779,11 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //
 //                if (r<10||r%100==0||r>=drugDocTypeLookupCount-1) {
 //                    
-//                    //DLog(@"r is %i",r);
 //                    
-////                    //DLog(@"filtered actionDate array count is %i",actionDatepMainFetchedObjects.count);
-//                    //DLog(@"count is%i",drugDocTypeLookupCount);
-//                    //DLog(@"docTypeLookupMain app is %@",docTypeLookupMain);
+//                    
+////                    
+//                    
+//                    
 //                }
 //
 //                
@@ -4803,7 +4799,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //            
 //        }}  
 //    
-//    //DLog(@"completed docTypeLookupMain copy");
+//    
 //    
 //    NSFetchRequest *drugProductTECodeFetchRequest = [[NSFetchRequest alloc] init];
 //    NSEntityDescription *drugProductTECodeEntityDesc=[NSEntityDescription entityForName:@"DrugProductTECodeEntity" inManagedObjectContext:__drugsManagedObjectContext];
@@ -4832,7 +4828,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //            
 //            
 //            
-//            //DLog(@"starting drugReviewClassLookupCount is%i",drugProductTECodeCount);
+//            
 //            
 //            for (NSInteger r=0; r<drugProductTECodeCount; r++) {
 //                
@@ -4863,9 +4859,9 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 //                
 //                if (r%100==0||r>=drugProductTECodeCount-1)
 //                {
-//                    //DLog(@"count is%i",drugProductTECodeCount);
-//                    //DLog(@"r is %i",r);
-//                    //DLog(@"productTECode app is %@",productTECode);
+//                    
+//                    
+//                    
 //                }
 //                
 //                
@@ -4896,9 +4892,9 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 ////                else
 ////                {
 ////                NSInteger productMainCount =productsMainFetchedObjects.count;
-////                //DLog(@"beginning opperation make relationships for products and TECode");
 ////                
-////                //DLog(@"app fetched objects count %i",productMainCount);
+////                
+////                
 ////                for (NSInteger i=0; i<productMainCount; i++) {
 ////                    if (productMainCount) {
 ////                        
@@ -4914,9 +4910,9 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 ////                        
 ////                        if (i<10||i%100==0) {
 ////                            
-////                            //DLog(@"i is %i",i);
 ////                            
-////                            //DLog(@"filtered rpoducts array is %@",filteredTECCodeArray);
+////                            
+////                            
 ////                        }
 ////                        
 ////                    } 
@@ -4930,7 +4926,7 @@ DLog(@"gui %@",[PTTAppDelegate GetUUID]);
 ////            }}  
 //    }
 //    
-//    //DLog(@"completed adding the objects to the main context ");
+//    
     
 return YES;     
         
@@ -4944,7 +4940,7 @@ return YES;
 //        if (appFetchedObjects == nil) {
 //            // Handle the error
 //            
-//            //DLog(@"no app fectched objects");
+//            
 //        }
 //        else
 //        {
@@ -4964,9 +4960,9 @@ return YES;
 //            }
 //            else
 //            {
-//                //DLog(@"beginning opperation");
+//                
 //                NSInteger appFetchedObjectsCount=appFetchedObjects.count;
-//                //DLog(@"app fetched objects count %i",appFetchedObjectsCount);
+//                
 //                for (NSInteger i=0; i<appFetchedObjectsCount; i++) {
 //                    if (appFetchedObjectsCount) {
 //                        
@@ -4982,14 +4978,14 @@ return YES;
 //                        
 //                        if (i==1||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000) {
 //                            
-//                            //DLog(@"i is %i",i);
 //                            
-//                            //DLog(@"filtered rpoducts array is %@",filteredProductsArray);
+//                            
+//                            
 //                        }
 //                        
 //                    } 
 //                }
-//                //DLog(@"operation create app products relationship for loop complete");
+//                
 //                
 //                
 //                NSFetchRequest *actionDateFetchRequest = [[NSFetchRequest alloc] init];
@@ -5006,9 +5002,9 @@ return YES;
 //                }
 //                else
 //                {
-//                    //DLog(@"beginning opperation action date");
 //                    
-//                    //DLog(@"app fetched objects count %i",appFetchedObjectsCount);
+//                    
+//                    
 //                    for (NSInteger i=0; i<appFetchedObjectsCount; i++) {
 //                        
 //                        if (appFetchedObjectsCount) {
@@ -5025,19 +5021,19 @@ return YES;
 //                            
 //                            if (i==1||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000) {
 //                                
-//                                //DLog(@"i is %i",i);
 //                                
-//                                //DLog(@"filtered actionDate array is %@",filteredActionDateArray);
+//                                
+//                                
 //                            }
 //                            
 //                        }
 //                        else{
-//                            //DLog(@"no app objects");
+//                            
 //                            
 //                        }
 //                    }
 //                } 
-//                //DLog(@"operation create app actiondate relationship for loop complete");
+//                
 //                
 //                
 //                NSFetchRequest *appDocsFetchRequest = [[NSFetchRequest alloc] init];
@@ -5054,9 +5050,9 @@ return YES;
 //                }
 //                else
 //                {
-//                    //DLog(@"beginning opperation action date");
+//                    
 //                    NSInteger actionDateFetchedObjectsCount=actionDateFetchedObjects.count;
-//                    //DLog(@"app fetched objects count %i",actionDateFetchedObjectsCount);
+//                    
 //                    for (NSInteger i=0; i<actionDateFetchedObjectsCount; i++) {
 //                        if (actionDateFetchedObjectsCount) { 
 //                            DrugRegActionDateEntity *action=[actionDateFetchedObjects objectAtIndex:i];
@@ -5071,16 +5067,16 @@ return YES;
 //                            
 //                            if (i==1||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000||i==30000||i==100000) {
 //                                
-//                                //DLog(@"actionDate is is %i",i);
 //                                
-//                                //DLog(@"filtered appdocs array is %@",filteredAppDocArray);
+//                                
+//                                
 //                            }
 //                            
 //                            
 //                        }
 //                        else
 //                        {
-//                            //DLog(@"no actionDateFetchedObjectsCount objects");
+//                            
 //                            
 //                        }
 //                        
@@ -5088,7 +5084,7 @@ return YES;
 //                    
 //                }    
 //                
-//                //DLog(@"operation create app appdocs relationship for loop complete");
+//                
 //                
 //                
 //                NSFetchRequest *appDocTypeLookupFetchRequest = [[NSFetchRequest alloc] init];
@@ -5105,11 +5101,11 @@ return YES;
 //                }
 //                else
 //                {
-//                    //DLog(@"beginning opperation appdocTypeLookupFetchedObjects");
+//                    
 //                    NSInteger appDocTypeLookupFetchedObjectsCount=appDocTypeLookupFetchedObjects.count;
-//                    //DLog(@"docTypeLookupFetchedObjects count %i",appDocTypeLookupFetchedObjectsCount);
+//                    
 //                    for (NSInteger i=0; i<appDocTypeLookupFetchedObjectsCount; i++) {
-//                        //                                    //DLog(@"appDocTypeLookupFetchedObjects %@",appDocTypeLookupFetchedObjects);
+//                        //                                    
 //                        if (appDocTypeLookupFetchedObjectsCount) { 
 //                            
 //                            
@@ -5125,15 +5121,15 @@ return YES;
 //                            
 //                            if (i==1||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000||i==30000) {
 //                                
-//                                //DLog(@"i is %i",i);
 //                                
-//                                //DLog(@"filtered rpoducts array is %@",filteredAppDocArray);
+//                                
+//                                
 //                            }
 //                            
 //                        }
 //                        else
 //                        {
-//                            //DLog(@"no appDocTypeLookupFetchedObjectsCount objects");
+//                            
 //                            
 //                        }
 //                        
@@ -5200,13 +5196,13 @@ return YES;
     NSError *error=[[NSError alloc]init];
     if(![fileManager fileExistsAtPath:dirToCreate isDirectory:&isDir])
         [fileManager createDirectoryAtPath:dirToCreate withIntermediateDirectories:YES attributes:nil error:&error];
-            //DLog(@"Error: Create folder failed");
+            
 
     
     
     NSURL *drugUrl=[NSURL fileURLWithPath:dirToCreate isDirectory:YES];
     
-    //DLog(@"drug url is %@",drugUrl.path);
+    
     
     return drugUrl;
 }
@@ -5219,13 +5215,13 @@ return YES;
     NSError *error=[[NSError alloc]init];
     if(![fileManager fileExistsAtPath:dirToCreate isDirectory:&isDir])
         [fileManager createDirectoryAtPath:dirToCreate withIntermediateDirectories:YES attributes:nil error:&error];
-            //DLog(@"Error: Create folder failed");
+            
     
     
     
     NSURL *disorderUrl=[NSURL fileURLWithPath:dirToCreate isDirectory:YES];
     
-    //DLog(@"disorder url is %@",disorderUrl.path);
+    
     
     return disorderUrl;
 }
@@ -5239,13 +5235,13 @@ return YES;
     NSError *error=[[NSError alloc]init];
     if(![fileManager fileExistsAtPath:dirToCreate isDirectory:&isDir])
         [fileManager createDirectoryAtPath:dirToCreate withIntermediateDirectories:YES attributes:nil error:&error];
-            //DLog(@"Error: Create folder failed");
+            
     
     
     
     NSURL *pttDatabaseUrl=[NSURL fileURLWithPath:dirToCreate isDirectory:YES];
     
-    //DLog(@"drug url is %@",pttDatabaseUrl.path);
+    
     
     return pttDatabaseUrl;
 }
@@ -5257,13 +5253,13 @@ return YES;
     NSError *error=[[NSError alloc]init];
     if(![fileManager fileExistsAtPath:dirToCreate isDirectory:&isDir])
         [fileManager createDirectoryAtPath:dirToCreate withIntermediateDirectories:YES attributes:nil error:&error];
-    //DLog(@"Error: Create folder failed");
+    
     
     
     
     NSURL *pttDatabaseUrl=[NSURL fileURLWithPath:dirToCreate isDirectory:YES];
     
-    //DLog(@"drug url is %@",pttDatabaseUrl.path);
+    
     
     return pttDatabaseUrl;
 }
@@ -5345,10 +5341,10 @@ return [self applicationDrugsDirectory].path;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if ([[NSFileManager defaultManager]
              URLForUbiquityContainerIdentifier:nil] != nil){
-            DLog(@"iCloud is available\n");
+            
         }
-        else
-            DLog(@"iCloud not available.\n");
+       
+            
     });
 }
 
@@ -5459,7 +5455,7 @@ return [self applicationDrugsDirectory].path;
 //        NSURL *ubiq = [[NSFileManager defaultManager] 
 //                       URLForUbiquityContainerIdentifier:nil];
 //        if (ubiq) {
-//            //DLog(@"iCloud access at %@", ubiq);
+//            
 //            // TODO: Load document... 
 //        
 //        
@@ -5488,7 +5484,7 @@ return [self applicationDrugsDirectory].path;
 //             * The schema for the persistent store is incompatible with current managed object model
 //             Check the error message to determine what the actual problem was.
 //             */
-//            //DLog(@"Unresolved error %@, %@", error, [error userInfo]);
+//            
 //            abort();
 //        }    
 //        [psc unlock];
@@ -5497,7 +5493,7 @@ return [self applicationDrugsDirectory].path;
 //        // post a custom notification to make your views do whatever they need to such as tell their
 //        // NSFetchedResultsController to -performFetch again now there is a real store
 //        dispatch_async(dispatch_get_main_queue(), ^{
-//            //DLog(@"asynchronously added persistent store!");
+//            
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData" object:self userInfo:nil];
 //        });
 //            
@@ -5506,7 +5502,7 @@ return [self applicationDrugsDirectory].path;
 //        else 
 //        
 //        {
-//            //DLog(@"No iCloud access setting up local store");
+//            
 //            
 //            
 //            NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"psyTrack.sqlite"];
@@ -5546,7 +5542,7 @@ return [self applicationDrugsDirectory].path;
 //                 Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
 //                 
 //                 */
-//                //DLog(@"Unresolved error %@, %@", error, [error userInfo]);
+//                
 //                abort();
 //            }   
 //
@@ -5604,10 +5600,8 @@ return [self applicationDrugsDirectory].path;
         if (useiCloud&&useriCloudChoice&&[coreDataCloudContent length] != 0 &&[self reachable]) {
                 // iCloud is available
                 cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
-            DLog(@"icloud user info %@",cloudURL);
-            NSFileManager * filemanager=[[NSFileManager alloc]init];
-          NSArray *cloudURLContents=  [filemanager contentsOfDirectoryAtPath:[cloudURL path] error:nil];
-            DLog(@"contents of cloud url %@",cloudURLContents);
+            
+           
             
                 options = [NSDictionary dictionaryWithObjectsAndKeys:@"4R8ZH75936.com.psycheweb.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil]; 
              
@@ -5618,7 +5612,7 @@ return [self applicationDrugsDirectory].path;
                            [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
                            nil];
 
-                DLog(@"icloud is not available");
+                
                 
             }
 
@@ -5637,7 +5631,7 @@ return [self applicationDrugsDirectory].path;
             
             NSError *removeError=nil;
 
-            DLog(@"items at cloud ural %@",[[NSFileManager defaultManager] contentsAtPath:cloudURL.path]);
+            
             
             if (cloudURL) {
                 [[NSFileManager defaultManager] removeItemAtURL:cloudURL error:&removeError];
@@ -5662,7 +5656,7 @@ return [self applicationDrugsDirectory].path;
              * The schema for the persistent store is incompatible with current managed object model
              Check the error message to determine what the actual problem was.
              */
-            DLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            
 //            abort();
         }    
         
@@ -5675,7 +5669,7 @@ return [self applicationDrugsDirectory].path;
 //        options = [NSDictionary dictionaryWithObjectsAndKeys:@"4R8ZH75936.com.psycheweb.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil]; 
 //        if (![self.persistentStoreCoordinator migratePersistentStore:store toURL:storeUrl options:options withType:NSSQLiteStoreType error:&errorChangeStore])
 //        {
-//            DLog(@"Error migrating data: %@, %@", errorChangeStore, [errorChangeStore userInfo]);
+//            
 //            //abort();
 //        }
 //        [fileManager removeItemAtURL:[[self applicationPTTDirectory] URLByAppendingPathComponent:@"psyTrack.sqlite"] error:nil];
@@ -5686,7 +5680,7 @@ return [self applicationDrugsDirectory].path;
         // post a custom notification to make your views do whatever they need to such as tell their
         // NSFetchedResultsController to -performFetch again now there is a real store
         dispatch_async(dispatch_get_main_queue(), ^{
-            DLog(@"asynchronously added persistent store!");
+            
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"persistentStoreAdded" object:self userInfo:nil];
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData" object:self userInfo:nil];
@@ -5726,7 +5720,7 @@ return [self applicationDrugsDirectory].path;
 //        NSError* error;
 //        if (![appDelegate.persistentStoreCoordinator migratePersistentStore:store toURL:storeUrl options:options withType:NSSQLiteStoreType error:&error])
 //        {
-//            DLog(@"Error migrating data: %@, %@", error, [error userInfo]);
+//            
 //            //abort();
 //        }
 //        [fileManager removeItemAtURL:[[appDelegate applicationDocumentsDirectory] URLByAppendingPathComponent:@"YourApp.sqlite"] error:nil];
@@ -5746,7 +5740,7 @@ return [self applicationDrugsDirectory].path;
 //        NSError* error;
 //        if (![appDelegate.persistentStoreCoordinator migratePersistentStore:store toURL:storeUrl options:options withType:NSSQLiteStoreType error:&error])
 //        {
-//            DLog(@"Error migrating data: %@, %@", error, [error userInfo]);
+//            
 //            //abort();
 //        }
 //        [fileManager removeItemAtURL:[[appDelegate applicationDocumentsDirectory] URLByAppendingPathComponent:@"YourApp2.sqlite"] error:nil];
@@ -5774,22 +5768,22 @@ return [self applicationDrugsDirectory].path;
 //    NSPersistentStoreCoordinator* psc = persistentStoreCoordinator__;
 //    
 //   
-//     //DLog(@"user default preference for icloud is %i",[[NSUserDefaults standardUserDefaults] boolForKey:@"icloud_preference"]);
+//     
 //    
-//    DLog(@"icloud user info %@",[[NSUbiquitousKeyValueStore defaultStore].dictionaryRepresentation allKeys]);
+//    
 //    //BOOL useriCloudPref=[[NSUserDefaults standardUserDefaults] boolForKey:@"icloud_preference"];
 //    
 //    NSURL *ubiq = [[NSFileManager defaultManager] 
 //                   URLForUbiquityContainerIdentifier:nil];
 //    if ( ubiq ) {
-//        DLog(@"iCloud access at %@", ubiq);
+//        
 //        // TODO: Load document... 
 //        
-//        DLog(@"user default preference for icloud is %i",[[NSUserDefaults standardUserDefaults] boolForKey:@"icloud_preference"]);
+//        
 //        
 //        
 //    } else {
-//        DLog(@"No iCloud access");
+//        
 //    }
 //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 //            NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -5819,7 +5813,7 @@ return [self applicationDrugsDirectory].path;
 //                           [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
 //                           [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
 //                           nil];
-//                DLog(@"icloud is not available");
+//                
 //                
 //            }
 //            
@@ -5827,7 +5821,7 @@ return [self applicationDrugsDirectory].path;
 //            [psc lock];
 //            if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
 //            {
-//                DLog(@"Unresolved error %@, %@", error, [error userInfo]);
+//                
 //                abort();
 //            }
 //            [psc unlock];
@@ -5843,9 +5837,9 @@ return [self applicationDrugsDirectory].path;
 //                     [self saveContext];
 //                }
 //                
-//                DLog(@"store url path %@",[storeURL path]);
-//                DLog(@"persisitant store %@",persistentStoreCoordinator__.persistentStores);
-//                DLog(@"asynchronously added persistent store!");
+//                
+//                
+//                
 //                [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData" object:self userInfo:nil];
 //               
 //                addedPersistentStoreSuccess=YES;
@@ -5869,7 +5863,7 @@ return [self applicationDrugsDirectory].path;
                                              selector:@selector(shake) name:@"shake" object:nil];
     
     if(event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake)
-    { //DLog(@"motion Began");
+    { 
         
         
         [self flashAppTrainAndTitleGraphics];
@@ -5899,7 +5893,7 @@ return [self applicationDrugsDirectory].path;
         displayDevelopedByAttempt=0;
         if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad)
         {
-          //DLog(@"tab bar tag is %i",self.tabBarController.selectedViewController.tabBarItem.tag);
+          
            
                 
             
@@ -5931,10 +5925,10 @@ return [self applicationDrugsDirectory].path;
     if ([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPad)
     {
                clinicianViewController.totalCliniciansLabel.alpha=1;
-        //DLog(@"totoal clinicians label%f", clinicianViewController.totalCliniciansLabel.alpha);
+        
         
         clientsViewController_iPhone.totalClientsLabel.alpha=1;
-        //DLog(@"totoal clinicians label%@", [clientsViewController_iPhone class]);
+        
         
 //        self.trainTrackViewController.tableView.alpha=1;
        
@@ -6117,7 +6111,7 @@ return [self applicationDrugsDirectory].path;
 
 -(void)displayNotification:(NSString *)alertText forDuration:(float)seconds location:(NSInteger )screenLocation inView:(UIView *)viewSuperview{
 
-    //DLog(@"alert text is  in app delegate is %@",alertText);
+    
    
     
     if (casualAlertManager) {

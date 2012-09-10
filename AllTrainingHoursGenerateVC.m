@@ -290,7 +290,7 @@
 - (void)dismissReaderViewController:(ReaderViewController *)viewController
 {
 #ifdef DEBUGX
-	DLog(@"%s", __FUNCTION__);
+	
 #endif
     
 #if (DEMO_VIEW_CONTROLLER_PUSH == TRUE)

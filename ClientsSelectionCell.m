@@ -51,7 +51,7 @@
     
     NSString *textLabelStr=[self.objectBindings valueForKey:@"90"];
     
-    DLog(@"text labvel st is %@",textLabelStr);
+    
     self.textLabel.text=textLabelStr;
     if (!multiSelect && clientObject) {
         self.label.text=(NSString *) self.clientObject.clientIDCode;
@@ -81,7 +81,7 @@
 - (void)didSelectCell
 {
     
-    ////DLog(@"client %@",[self.boundObject valueForKey:@"client"]);
+    //
    
    
     
@@ -99,7 +99,7 @@
     
     
     
-//    ////DLog(@"clientobject selection itemset %@",mutableSet);
+//    //
     
 //    SCObjectSelectionSection *objectSelectionSection=[SCObjectSelectionSection sectionWithHeaderTitle:nil withItemsSet:mutableSet withClassDefinition:clientsViewController_Shared.clientDef];
 //    
@@ -208,7 +208,7 @@
 
         
         
-        ////DLog(@"already selected Clients are%@",self.alreadySelectedClients);
+        //
         
         
            
@@ -247,7 +247,7 @@
     //    NSError *error = nil;
     //    NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
     //    if (fetchedObjects == nil) {
-    //        //DLog(@"no items");
+    //        
     //    }
     //    NSMutableArray *arrayWithFetchedWithoutAlreadySelected=[NSMutableArray arrayWithArray:fetchedObjects];
     
@@ -256,11 +256,11 @@
     
     //    if (!hasChangedClients && [self.boundObject valueForKey:@"client"]) {
     //               
-    //      //DLog(@"self itmes are %@",self.items);
+    //      
     //    
     //      
     
-    //DLog(@"cell bound object is %@", self.boundObject);
+    
     if (!hasChangedClients) {
         NSString *clientKeyStr=[self.objectBindings valueForKey:@"92"];
         if (!multiSelect) 
@@ -287,7 +287,7 @@
             
             NSMutableSet *clientsMutableSet=(NSMutableSet *)[self.boundObject mutableSetValueForKey:clientKeyStr];
             self.clientsArray=[NSMutableArray arrayWithArray:[clientsMutableSet allObjects]];
-            //DLog(@"clinician array is %@",cliniciansArray_);
+            
             
             NSString *labelStr=[NSString string];
             for (int i=0; i<self.clientsArray.count; i++) {
@@ -309,7 +309,7 @@
                 
                 
             }
-            DLog(@"label string is %@",labelStr);
+            
             self.label.text=labelStr;
             
         }
@@ -334,7 +334,7 @@
 //       
 //        
 //       clientIDCodeString = (NSString *)[clientObject valueForKey:@"clientIDCode"];
-//        ////DLog(@"client id code %@",(NSString *)[clientObject valueForKey:@"clientIDCode"]);
+//        //
 //
 //    }
 // 
@@ -471,7 +471,7 @@
         
     }else 
     {
-        //DLog(@"combined name is %@",clinicianObject_.combinedName);
+        
         if (![clientObject isDeleted]) {
             
             [self.boundObject setValue:clientObject forKey:clientKeyStr];

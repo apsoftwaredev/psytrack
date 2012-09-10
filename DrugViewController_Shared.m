@@ -68,7 +68,7 @@
 //        [(PTTAppDelegate *)[UIApplication sharedApplication].delegate  copyDrugsToMainContext]; 
 //         [(PTTAppDelegate *)[UIApplication sharedApplication].delegate saveContext];
 //    }
-//         //DLog(@"copied to main complete");
+//         
     }
   
     BOOL takeOutQuotes=FALSE;
@@ -95,7 +95,7 @@
                 
                 
                 
-                //                //DLog(@"object at index %@",[tabFile objectAtIndex:z]);
+                //                
                 productMain.drugName=[productMain.drugName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
                 
                  productMain.dosage= [productMain.dosage stringByReplacingOccurrencesOfString:@"\"" withString:@""];
@@ -121,14 +121,14 @@
                 
                 
                 
-                //                //DLog(@"object at index %@",[tabFile objectAtIndex:z]);
+                //                
                 product.drugName=[product.drugName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
                 
                 product.dosage= [product.dosage stringByReplacingOccurrencesOfString:@"\"" withString:@""];
                 
             }
             
-            //DLog(@"took out quotes");
+            
 //        }  
        
     }   

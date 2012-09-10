@@ -527,7 +527,7 @@
     UIGraphicsBeginPDFContextToData(pdfData, aView.bounds,(NSDictionary *) auxiliaryInfoDic);
 
     
-    DLog(@"monthly practicum log modeledl top cell is  are %i",monthlyPracticumLogTableViewController.tableViewModel.sectionCount);
+    
     SCArrayOfObjectsModel *objectsModel=(SCArrayOfObjectsModel *)monthlyPracticumLogTableViewController.tableViewModel;
     
     if (objectsModel.sectionCount) {
@@ -574,7 +574,7 @@
                             [aView.layer renderInContext:pdfContext];
                             
                             
-                            DLog(@"monthly clinical practicum log cell is %@",monthlyPracticumLogTopCell);
+                            
                            
                             
                           
@@ -679,7 +679,7 @@
     
     // instructs the mutable data object to write its context to a file on disk
 //    [pdfData writeToFile:documentDirectoryFilename atomically:YES];
-    DLog(@"documentDirectoryFileName: %@",documentDirectoryFilename);
+    
 }
 
 
@@ -692,7 +692,7 @@
     
     
     NSString *studentName=allHoursReportVC.studentName;
-    DLog(@"student name is %@ document title is %@ ", studentName, documentTitle);
+    
     
     
     NSMutableDictionary *auxiliaryInfoDic=auxiliaryInfoDic=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:documentTitle,@"PsyTrack Clinician Tools",studentName,documentTitle,nil] forKeys:[NSArray arrayWithObjects:(__bridge NSString *) kCGPDFContextTitle,(__bridge NSString *)kCGPDFContextCreator,(__bridge NSString *)kCGPDFContextAuthor,(__bridge NSString *)kCGPDFContextSubject, nil]];
@@ -962,10 +962,10 @@
 
 +(CGFloat )adjustToCenterHorizontally:(CGRect )frame context:(CGContextRef )context string:(NSString * )str {
     
-    DLog(@"frame is %g",frame.size.width);
+    
     CGFloat frameWidth=frame.size.width;
     CGFloat textWidth=[self widthOfText:context string:str];
-    DLog(@"textWidth %g",textWidth);
+    
     CGFloat newStartingXPoint=(frameWidth/2)-(textWidth/2);
     
     
@@ -982,7 +982,7 @@
     CGFloat sizeToReturn= 0;
 
     CGPoint textStartPosition= CGContextGetTextPosition(contxt);
-    DLog(@"start point is %f",textStartPosition.x);
+    
     
     CGContextSetTextDrawingMode(contxt, kCGTextInvisible);
     CGContextSetTextPosition(contxt, 0, 0);
@@ -992,7 +992,7 @@
     CGPoint textEndPosition=CGContextGetTextPosition(contxt);
     
      CGContextSetTextDrawingMode(contxt, kCGTextFill);
-    DLog(@"text end position is %f",textEndPosition.x);
+    
     sizeToReturn=textEndPosition.x-textStartPosition.x;
     
     return sizeToReturn;

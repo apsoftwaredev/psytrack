@@ -512,7 +512,7 @@
 		378DED5414FE72F000CF4F12 /* DTInfoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTInfoManager.h; sourceTree = "<group>"; };
 		378DED5514FE72F000CF4F12 /* DTInfoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTInfoManager.m; sourceTree = "<group>"; };
 		378DED5614FE72F000CF4F12 /* DTLayoutDefinition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTLayoutDefinition.h; sourceTree = "<group>"; };
-		378DED5714FE72F000CF4F12 /* DTLayoutDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTLayoutDefinition.m; sourceTree = "<group>"; };
+		378DED5714FE72F000CF4F12 /* DTLayoutDefinition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DTLayoutDefinition.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		378DED5814FE72F000CF4F12 /* DTPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTPageControl.h; sourceTree = "<group>"; };
 		378DED5914FE72F000CF4F12 /* DTPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTPageControl.m; sourceTree = "<group>"; };
 		378DED5A14FE72F000CF4F12 /* DTSingleQuestionContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTSingleQuestionContentView.h; sourceTree = "<group>"; };
@@ -581,7 +581,7 @@
 		37BF64F414F2917D0065C607 /* NSDictionaryHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryHelpers.m; sourceTree = SOURCE_ROOT; };
 		37F7CDD114FEC3EB00AD2C3A /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		37F7CDDB150031F100AD2C3A /* DrugActionDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugActionDateViewController.h; sourceTree = "<group>"; };
-		37F7CDDC150031F100AD2C3A /* DrugActionDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugActionDateViewController.m; sourceTree = "<group>"; };
+		37F7CDDC150031F100AD2C3A /* DrugActionDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DrugActionDateViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		37F7CDDE150031F100AD2C3A /* DrugAppDocsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugAppDocsViewController.h; sourceTree = "<group>"; };
 		37F7CDDF150031F100AD2C3A /* DrugAppDocsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugAppDocsViewController.m; sourceTree = "<group>"; };
 		37F7CDE9150031F100AD2C3A /* DrugViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugViewController_iPhone.h; sourceTree = "<group>"; };
@@ -791,10 +791,10 @@
 		E719708C15F78DAE0043662B /* AllTrainingHoursVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllTrainingHoursVC.m; sourceTree = "<group>"; };
 		E719708D15F78DAE0043662B /* AllTrainingHoursVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllTrainingHoursVC.xib; sourceTree = "<group>"; };
 		E719709015F809B30043662B /* AllHoursReportTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllHoursReportTopCell.h; sourceTree = "<group>"; };
-		E719709115F809B30043662B /* AllHoursReportTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllHoursReportTopCell.m; sourceTree = "<group>"; };
+		E719709115F809B30043662B /* AllHoursReportTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AllHoursReportTopCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E719709315F80BB40043662B /* AllHoursReportTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllHoursReportTopCell.xib; sourceTree = "<group>"; };
 		E719709515F83A3B0043662B /* AllHoursReportBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllHoursReportBottomCell.h; sourceTree = "<group>"; };
-		E719709615F83A3B0043662B /* AllHoursReportBottomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllHoursReportBottomCell.m; sourceTree = "<group>"; };
+		E719709615F83A3B0043662B /* AllHoursReportBottomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AllHoursReportBottomCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E719709815F83A620043662B /* AllHoursReportBottomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllHoursReportBottomCell.xib; sourceTree = "<group>"; };
 		E71B1EB615F297F1009C5E6B /* ExpertTestemonyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpertTestemonyVC.h; sourceTree = "<group>"; };
 		E71B1EB715F297F1009C5E6B /* ExpertTestemonyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpertTestemonyVC.m; sourceTree = "<group>"; };
@@ -889,7 +889,7 @@
 		E78DA69D15227EA9004ABF29 /* ClinicianSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianSelectionCell.h; sourceTree = "<group>"; };
 		E78DA69E15227EA9004ABF29 /* ClinicianSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicianSelectionCell.m; sourceTree = "<group>"; };
 		E78DA6A115252579004ABF29 /* ExistingHoursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursViewController.h; sourceTree = "<group>"; };
-		E78DA6A215252579004ABF29 /* ExistingHoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursViewController.m; sourceTree = "<group>"; };
+		E78DA6A215252579004ABF29 /* ExistingHoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ExistingHoursViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E78DA6A315252579004ABF29 /* ExistingHoursViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController.xib; sourceTree = "<group>"; };
 		E7912D0C151D332700E0609A /* DemographicProfileEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicProfileEntity.h; sourceTree = "<group>"; };
 		E7912D0D151D332700E0609A /* DemographicProfileEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicProfileEntity.m; sourceTree = "<group>"; };
@@ -909,7 +909,7 @@
 		E798A005158016BC006B9DBD /* SupportActivityDeliveredEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupportActivityDeliveredEntity.h; sourceTree = "<group>"; };
 		E798A006158016BC006B9DBD /* SupportActivityDeliveredEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupportActivityDeliveredEntity.m; sourceTree = "<group>"; };
 		E798A0141580C5B8006B9DBD /* ClientEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientEntity.h; sourceTree = "<group>"; };
-		E798A0151580C5B8006B9DBD /* ClientEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientEntity.m; sourceTree = "<group>"; };
+		E798A0151580C5B8006B9DBD /* ClientEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClientEntity.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E798A02415843B9D006B9DBD /* MasterViewControllerTheme.ptt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MasterViewControllerTheme.ptt; sourceTree = "<group>"; };
 		E798A03015845941006B9DBD /* mapper-ipad-detail.ptt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "mapper-ipad-detail.ptt"; sourceTree = "<group>"; };
 		E798A03115845941006B9DBD /* mapper-iPhone.ptt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "mapper-iPhone.ptt"; sourceTree = "<group>"; };
@@ -991,7 +991,7 @@
 		E7B3E40115C58B2F00729C88 /* LicenseRenewalEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LicenseRenewalEntity.m; sourceTree = "<group>"; };
 		E7B3E40215C58B2F00729C88 /* CliniciansViewController_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CliniciansViewController_Shared.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7B3E40315C58B2F00729C88 /* CECreditsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CECreditsViewController.xib; sourceTree = "<group>"; };
-		E7B3E40415C58B2F00729C88 /* ConsultationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsultationsViewController.m; sourceTree = "<group>"; };
+		E7B3E40415C58B2F00729C88 /* ConsultationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ConsultationsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7B3E40515C58B2F00729C88 /* TotalHoursAndMinutesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TotalHoursAndMinutesCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7B3E40615C58B2F00729C88 /* TrainTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TrainTrackViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7C02D9D15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h; sourceTree = "<group>"; };
@@ -1009,7 +1009,7 @@
 		E7C02DB815B4C24E0072F97C /* UILabel_VerticalAlignmentExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILabel_VerticalAlignmentExtention.h; sourceTree = "<group>"; };
 		E7C02DB915B4C24E0072F97C /* UILabel_VerticalAlignmentExtention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UILabel_VerticalAlignmentExtention.m; sourceTree = "<group>"; };
 		E7C02DC015B6003B0072F97C /* MonthlyPracticumLogGenerateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthlyPracticumLogGenerateViewController.h; sourceTree = "<group>"; };
-		E7C02DC115B6003C0072F97C /* MonthlyPracticumLogGenerateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthlyPracticumLogGenerateViewController.m; sourceTree = "<group>"; };
+		E7C02DC115B6003C0072F97C /* MonthlyPracticumLogGenerateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MonthlyPracticumLogGenerateViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7C02DC215B6003D0072F97C /* MonthlyPracticumLogGenerateVC_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogGenerateVC_iPad.xib; sourceTree = "<group>"; };
 		E7C02DC515B61CBB0072F97C /* MonthlyPracticumLogGenerateVC_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogGenerateVC_iPhone.xib; sourceTree = "<group>"; };
 		E7C02DD515B891060072F97C /* BigProgressViewWithBlockedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigProgressViewWithBlockedView.h; sourceTree = "<group>"; };
@@ -1024,7 +1024,7 @@
 		E7C6871B15D613C600637BCE /* CoursesTakenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursesTakenViewController.m; sourceTree = "<group>"; };
 		E7C6871C15D613C600637BCE /* CoursesTakenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoursesTakenViewController.xib; sourceTree = "<group>"; };
 		E7CCB8AF159A9AD100A12908 /* MonthlyPracticumLogBottonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthlyPracticumLogBottonCell.h; sourceTree = "<group>"; };
-		E7CCB8B0159A9AD200A12908 /* MonthlyPracticumLogBottonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthlyPracticumLogBottonCell.m; sourceTree = "<group>"; };
+		E7CCB8B0159A9AD200A12908 /* MonthlyPracticumLogBottonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MonthlyPracticumLogBottonCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7CCB8B2159A9B0100A12908 /* MonthlyPracticumLogBottomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogBottomCell.xib; sourceTree = "<group>"; };
 		E7CCB8D0159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogTopCellWithUndefined.xib; sourceTree = "<group>"; };
 		E7CCB8E5159CE2FA00A12908 /* ileopard-keys_128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ileopard-keys_128x128.png"; sourceTree = "<group>"; };
@@ -1046,7 +1046,7 @@
 		E7DEECEC15F69F5B001D5B05 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.1.0 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
 		E7DEECF915F69FB9001D5B05 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3.1.0 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E7DEED0715F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllTrainingHoursGenerateVC.h; sourceTree = "<group>"; };
-		E7DEED0815F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllTrainingHoursGenerateVC.m; sourceTree = "<group>"; };
+		E7DEED0815F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AllTrainingHoursGenerateVC.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7DEED0915F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllTrainingHoursGenerateVC.xib; sourceTree = "<group>"; };
 		E7E1425615C1F34B00D0F505 /* PresentationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationsViewController.h; sourceTree = "<group>"; };
 		E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentationsViewController.m; sourceTree = "<group>"; };
@@ -1056,11 +1056,11 @@
 		E7E1A6431530C18900C227E8 /* ShortFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortFieldCell.h; sourceTree = "<group>"; };
 		E7E1A6441530C18900C227E8 /* ShortFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortFieldCell.m; sourceTree = "<group>"; };
 		E7F1CAEE1597AF4C006F9E95 /* MonthlyPracticumLogTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthlyPracticumLogTopCell.h; sourceTree = "<group>"; };
-		E7F1CAEF1597AF4C006F9E95 /* MonthlyPracticumLogTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthlyPracticumLogTopCell.m; sourceTree = "<group>"; };
+		E7F1CAEF1597AF4C006F9E95 /* MonthlyPracticumLogTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MonthlyPracticumLogTopCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7F1CAF01597AF4C006F9E95 /* MonthlyPracticumLogTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogTopCell.xib; sourceTree = "<group>"; };
 		E7F1CAF31597CADB006F9E95 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		E7F1CAF71597D00F006F9E95 /* PDFRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFRenderer.h; sourceTree = "<group>"; };
-		E7F1CAF81597D00F006F9E95 /* PDFRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFRenderer.m; sourceTree = "<group>"; };
+		E7F1CAF81597D00F006F9E95 /* PDFRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PDFRenderer.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7F1CB221598C024006F9E95 /* ReaderBookDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderBookDelegate.h; sourceTree = "<group>"; };
 		E7F1CB231598C024006F9E95 /* ReaderBookDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ReaderBookDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7F1CB241598C024006F9E95 /* ReaderDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderDemoController.h; sourceTree = "<group>"; };
@@ -3295,7 +3295,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/../../Downloads/STV 3.0.7 Pro/Static Frameworks\"",
+					"\"$(SRCROOT)/../../Downloads/STV 3.1.0 Pro/Static Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";
@@ -3326,7 +3326,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/../../Downloads/STV 3.0.7 Pro/Static Frameworks\"",
+					"\"$(SRCROOT)/../../Downloads/STV 3.1.0 Pro/Static Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";
@@ -3338,7 +3338,6 @@
 					"$(inherited)",
 					"\"$(SDKROOT)/usr/lib/system\"",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/A\"",
 				);
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "";

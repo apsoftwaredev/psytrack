@@ -43,7 +43,7 @@
 -(void)willDisplay{
     
     [super willDisplay];
-DLog(@"self bound object is %@",self.boundObject);
+
    
         
       self.cellSubTypeLabel.text=self.trackTypeWithTotalTimesObject.typeLabelText;

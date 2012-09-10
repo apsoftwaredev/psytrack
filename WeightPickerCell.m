@@ -128,8 +128,8 @@
     NSInteger thirdComponent=[picker selectedRowInComponent:2];
     NSString *unit = [self titleForRow:[picker selectedRowInComponent:3]];
     NSInteger weight=(firstComponent*100)+(secondComponent*10)+thirdComponent;
-    //DLog(@"weight is %i",weight);
-    //DLog(@"weight Units are %@",unit);
+    
+    
     [self.boundObject setValue:[NSNumber numberWithInteger:weight] forKey:@"weight"];
     [self.boundObject setValue:unit forKey:@"weightUnit"];
     
@@ -286,7 +286,7 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    //DLog(@"component changed is %i",component);
+    
     loadingRows=FALSE;
     if (component==0) {
         NSString *unit = [self titleForRow:[picker selectedRowInComponent:3]];

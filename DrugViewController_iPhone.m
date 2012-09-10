@@ -235,7 +235,7 @@
     }
    
         
-//    DLog(@"drugsmutable array %i",drugsMutableArray.count);
+//    
     // Instantiate the tabel model
     
 //    tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self];    
@@ -544,9 +544,9 @@
 
 -(void)myCancelButtonTapped{
     
-    //DLog(@"cancel button Tapped");
     
-    //DLog(@"parent controller %@",[super parentViewController]);
+    
+    
     
     if(self.navigationController)
 	{
@@ -566,28 +566,28 @@
 
 -(void)myDoneButtonTapped{
     
-    //DLog(@"done Button tapped");
+    
     if (isInDetailSubview) {
         SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
-        //DLog(@"section class is %@",[section class]);
+        
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
             
             //            //DLog(@"test valie changed at index with cell index selected %i",[objectsSelectionSection.selectedItemIndex integerValue]) ;
             //            if (clientObjectSelectionCell) {
             
-            //                //DLog(@"objectsSelectionSection.selectedItemsIndexes.count %i",objectsSelectionSection.items.count);
+            //                
             
             //                if ([objectsSelectionSection.selectedItemIndex integerValue]>=0&&[objectsSelectionSection.selectedItemIndex integerValue]<=objectsSelectionSection.items.count) {
             //                    
 //            NSIndexPath *cellIndexPath=objectsSelectionSection.selectedCellIndexPath;
             
 //            SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:cellIndexPath];
-            //DLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
             
             
             
-            //DLog(@"selected item index%@",objectsSelectionSection.selectedItemIndex);
+            
+            
             
             if (objectsSelectionSection.cellCount>0) {
                 if (currentlySelectedDrug) {
@@ -703,7 +703,7 @@
         if (attributes != nil) {
 			lastModifiedDate = [attributes fileModificationDate];
             
-            //DLog(@"drugFile Size %@",lastModifiedDate);
+            
 		}
 		else {
 			error=[NSError errorWithDomain:@"Error Getting Drug File Size" code:1 userInfo:nil];
@@ -747,7 +747,7 @@
         if (attributes != nil) {
 			drugFileSize = [attributes fileSize];
             
-            //DLog(@"drugFile Size %f",drugFileSize);
+            
 		}
 		else {
 			error=[NSError errorWithDomain:@"Error Getting Drug File Size" code:1 userInfo:nil];
@@ -781,12 +781,12 @@
 {
    
     CGFloat remoteSize = [[NSString stringWithFormat:@"%lli",[response expectedContentLength]] floatValue];
-    //DLog(@"Remote Size : %f",remoteSize);
+    
     
     [checkingTimer_ invalidate];
     checkingTimer_=nil;
     CGFloat localFileSize=[self getLocalDrugFileSize];
-    //DLog(@"local size %f",localFileSize);
+    
     /* Try to retrieve last modified date from HTTP header. If found, format
 	 date so it matches format of cached image file modification date. */
     
@@ -815,9 +815,9 @@
     
    
     NSComparisonResult result = [remoteModifiedDate compare:localModifiedDate ];
-     //DLog(@"remote modified date islocal modifire date is %d",result);
-   //DLog(@"remote date is %@",remoteModifiedDate);
-    //DLog(@"local date is %@",localModifiedDate);
+     
+   
+    
     
     
     if ((result == NSOrderedDescending) ||(remoteSize && (localFileSize<remoteSize))) {
@@ -865,9 +865,9 @@
 
 //-(void)cancelButtonTapped{
 //    
-//    //DLog(@"cancel button Tapped");
 //    
-//    //DLog(@"parent controller %@",[super parentViewController]);
+//    
+//    
 //    
 //    if(self.navigationController)
 //	{
@@ -887,17 +887,17 @@
 //
 //-(void)doneButtonTapped{
 //    
-//    //DLog(@"done Button tapped");
+//    
 //    if (isInDetailSubview) {
 //        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:0];
-//        //DLog(@"section class is %@",[section class]);
+//        
 //        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
 //            SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
 //            
 //            //DLog(@"test valie changed at index with cell index selected %i",[objectsSelectionSection.selectedItemIndex integerValue]) ;
 //            if (clientObjectSelectionCell) {
 //                
-//                //DLog(@"objectsSelectionSection.selectedItemsIndexes.count %i",objectsSelectionSection.items.count);
+//                
 //                
 //                if ([objectsSelectionSection.selectedItemIndex integerValue]>=0&&[objectsSelectionSection.selectedItemIndex integerValue]<=objectsSelectionSection.items.count) {
 //                    
@@ -1008,14 +1008,14 @@
 
 
 - (void)downloadBar:(UIDownloadBar *)downloadBar didFinishWithData:(NSData *)fileData suggestedFilename:(NSString *)filename {
-	//DLog(@"%@", filename);
+	
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
     
     [appDelegate displayNotification:@"Drug Database Download Complete." forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
 
    NSURL *drugsStoreURL = [[appDelegate applicationDrugsDirectory] URLByAppendingPathComponent:@"drugs.sqlite"];
-    //DLog(@"drugsstore url is %@",drugsStoreURL);
+    
     
     NSString *symetricString=@"8qfnbyfalVvdjf093uPmsdj30mz98fI6";
     NSData *symetricData=[symetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
@@ -1036,7 +1036,7 @@
 
     if (drugsManagedObjectContext) {
         drugsManagedObjectContext=nil;
-DLog(@"drugs persistent stores %@",drugsManagedObjectContext.persistentStoreCoordinator.persistentStores);
+
 
 //        NSPersistentStore *persistentStore=(NSPersistentStore *)[appDelegate.drugsPersistentStoreCoordinator.persistentStores objectAtIndex:0];
         
@@ -1045,7 +1045,7 @@ DLog(@"drugs persistent stores %@",drugsManagedObjectContext.persistentStoreCoor
 //        
 //        if (![drugsManagedObjectContext.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:@"DrugsConfig" URL:drugsStoreURL options:nil error:&error])
 //        {
-//            //DLog(@"unalbe to load persistent store");
+//            
 //        }   
 //        drugsManagedObjectContext=nil;
 //        NSManagedObjectModel *drugModel=(NSManagedObjectModel *)[appDelegate drugsManagedObjectModel];
@@ -1085,7 +1085,7 @@ DLog(@"drugs persistent stores %@",drugsManagedObjectContext.persistentStoreCoor
 //        
 //        NSArray *itemsArray=(NSArray *)tableModel.items;
 //        itemsArray=drugsMutableArray;
-        //DLog(@"drugsMutable array count is %i",drugsMutableArray.count);
+        
     } 
     objectsModel=nil;
     self.tableViewModel=nil;
@@ -1153,7 +1153,7 @@ DLog(@"drugs persistent stores %@",drugsManagedObjectContext.persistentStoreCoor
     
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
    
-    //DLog(@"cell count is %i",section.cellCount);
+    
     if (tableViewModel.tag==1 &&index==0) {
         if (section.cellCount<5) {
      
@@ -1200,7 +1200,7 @@ DLog(@"drugs persistent stores %@",drugsManagedObjectContext.persistentStoreCoor
         SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
         
         currentlySelectedDrug=(DrugProductEntity *)cell.boundObject;
-        //DLog(@"currently selected client is %@",currentlySelectedDrug);
+        
         
         SCObjectSelectionSection *selectionSection=(SCObjectSelectionSection *)section;
         
@@ -1237,7 +1237,7 @@ DLog(@"drugs persistent stores %@",drugsManagedObjectContext.persistentStoreCoor
 //            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
 //            dispatch_async(queue, ^{
                 
-                //DLog(@"beginning dispach 2");
+                
                 
                 self.tableView.userInteractionEnabled=FALSE;
                 UITabBar *tabBar=(UITabBar *) [(PTTAppDelegate *)[UIApplication sharedApplication].delegate tabBar];
@@ -1247,7 +1247,7 @@ DLog(@"drugs persistent stores %@",drugsManagedObjectContext.persistentStoreCoor
                 
                 drugApplNo=(NSString *)[section.boundObject valueForKey:@"applNo"];
                 
-                //DLog(@"applNo is %@",drugApplNo);
+                
                 DrugActionDateViewController * drugActionDateViewController_iPhone = [[DrugActionDateViewController alloc] initWithNibName:@"DrugActionDateViewController" bundle:[NSBundle mainBundle] withApplNo:drugApplNo];
                 
             PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;

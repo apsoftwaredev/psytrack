@@ -223,7 +223,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 //    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
 //    }
 //    detailTableViewModel.delegate=self;
-//    //DLog(@"detail model created for row at index path detailtable model tag is %i", detailTableViewModel.tag);
+//    
 //}
 //
 
@@ -254,14 +254,14 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 //        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
 //        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
 //    }
-    //DLog(@"tabel veiw modoel %i",tableViewModel.tag);
+    
     
     if (tableViewModel.tag==4 ) {
         
         //this is so the second section will not appear if it is the second log, because that info does not pertain
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
-        //DLog(@"section cell count is %i",section.cellCount);
-        //DLog(@"detailtableview model sectioncount %i",detailTableViewModel.sectionCount);
+        
+        
 //        BOOL sectionContainsMedLog=FALSE;
         
         if (tableViewModel.sectionCount) {
@@ -293,8 +293,8 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                 
                 
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-                //DLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-                //DLog(@"cell  class is %@",[cellZeroSectionZero class]);
+                
+                
                 if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"] && detailTableViewModel.sectionCount>2) {
                     
                     [detailTableViewModel removeSectionAtIndex:1];
@@ -314,7 +314,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 -(void) tableViewModel:(SCTableViewModel *)tableViewModel customButtonTapped:(UIButton *)button forRowWithIndexPath:(NSIndexPath *)indexPath{
     
     
-    //DLog(@"custom button tapped");
+    
     
     
     
@@ -328,7 +328,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
         if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&section.cellCount>1){
             
             SCTextFieldCell *phoneNumberCell =(SCTextFieldCell *) [section cellAtIndex:1];
-            //DLog(@"custom button tapped");
+            
             if (phoneNumberCell.textField.text.length) {
                 
                 
@@ -427,7 +427,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                 SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtOne;
                 
                 
-                DLog(@"section managed object is %@",sectionManagedObject);
+                
                 NSObject *disorderObject=[sectionManagedObject valueForKeyPath:@"disorder"];
                 
                 if (indexPath.row!=NSNotFound &&( selectedDisorder||(disorderObject&&[disorderObject isKindOfClass:[DisorderEntity class]]))) {
@@ -473,7 +473,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-    //DLog(@"detail model created for row at index");
+    
     
 //
     detailTableViewModel.tag=tableViewModel.tag+1;
@@ -488,7 +488,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
     [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
     [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
     }
-    //DLog(@"detail model created for row at index detailtable model tag is %i", detailTableViewModel.tag);
+    
     
     
     
@@ -513,7 +513,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
 //        NSError *error = nil;
 //        NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
 //        if (fetchedObjects == nil) {
-//            //DLog(@"no items");
+//            
 //        }
 //        
 //        
@@ -527,7 +527,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
 //            
 //        }
 //        
-//        //DLog(@"clientobject selection itemset %@",mutableSet);
+//        
 //            [tableViewModel removeSectionAtIndex:0];
 //        
 //        SCObjectSelectionSection *objectSelectionSection=[SCObjectSelectionSection sectionWithHeaderTitle:nil withItemsSet:mutableSet withClassDefinition:clientsViewController_Shared.clientDef];
@@ -580,12 +580,12 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
 
 - (void)tableViewModel:(SCTableViewModel *) tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *) indexPath
 {
-    //DLog(@"table view model tag is %i",tableViewModel.tag);
-    //DLog(@"tableviewmodel tag is %i",tableViewModel.tag);
+    
+    
 
         
-    //DLog(@"table view model tag is %i",tableViewModel.tag);
-    //DLog(@"tableviewmodel tag is %i",tableViewModel.tag);
+    
+    
     
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
     switch (tableViewModel.tag) {
@@ -595,7 +595,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
            if( [cell isKindOfClass:[SCDateCell class]]) {
                 SCDateCell *dateCell=(SCDateCell *)cell;
                 [dateCell.datePicker setMaximumDate:[NSDate date]];
-                //DLog(@"date cell date is%@ ",dateCell.datePicker.date);
+                
                 
             }
 
@@ -608,7 +608,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
             if ([cell isKindOfClass:[SCDateCell class]]) {
                 SCDateCell *dateCell=(SCDateCell *)cell;
                 [dateCell.datePicker setMaximumDate:[NSDate date]];
-                //DLog(@"date cell date is%@ ",dateCell.datePicker.date);
+                
                 
             }
             
@@ -641,7 +641,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                     //
                     //                        }
                     //
-                    //                        //DLog(@"cell kind of class is %@",cell.class);
+                    //                        
                     //                        if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]])
                     //                        {
                     //                            EncryptedSCTextFieldCell *encryptedTextFieldCell=(EncryptedSCTextFieldCell *)cell;
@@ -726,7 +726,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                     } 
                 break;
                 }
-                //DLog(@"entity name is %@",cellManagedObject.entity.name);
+                
                 if (cell.tag==1 && cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"LanguageSpokenEntity"])
                 {
                     
@@ -753,7 +753,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                 
                 if (cellManagedObject&&[cellManagedObject respondsToSelector:@selector(entity)]) { 
-                //DLog(@"entity name is %@",cellManagedObject.entity.name);
+                
                     if (cell.tag==1 && [cell isKindOfClass:[SCCustomCell class]]&& [cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
                     {
                         
@@ -771,15 +771,15 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
             
             if (cell.tag==5&& tableViewModel.sectionCount >2) {
                 
-                //DLog(@"cell tag is %i",cell.tag);
-                //DLog(@"cell text is %@",cell.textLabel.text);
+                
+                
                 
                 SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
                 if (followUpSection.cellCount>0) {
                                 SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];        
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
-                //DLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-                //DLog(@"cell  class is %@",[cellOne class]);
+                
+                
                 if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                     
                     
@@ -818,7 +818,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                 if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]) {
                     
-                    //DLog(@"entity name is %@",cellManagedObject.entity.name);
+                    
                     if (cell.tag==1 && [cell isKindOfClass:[SCCustomCell class]] &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
                     {
                         
@@ -836,14 +836,14 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                     
                     if (cell.tag==5&& tableViewModel.sectionCount >2) {
                         
-                        //DLog(@"cell tag is %i",cell.tag);
-                        //DLog(@"cell text is %@",cell.textLabel.text);
+                        
+                        
                         
                         SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
                         SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];
                         NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
-                        //DLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-                        //DLog(@"cell  class is %@",[cellOne class]);
+                        
+                        
                         if ([cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                             
                             
@@ -980,9 +980,9 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
         
         
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-        DLog(@"cell class is  %@",cell.class);
-        DLog(@"cell managed obect entity name is %@",cellManagedObject.entity.name);
-        DLog(@"cellmanaged ofbec is  %@",cellManagedObject);
+        
+        
+        
         if (cell.tag==0&& cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"DiagnosisHistoryEntity"]&& [cell isKindOfClass:[SCObjectSelectionCell class]]) {
             
             SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
@@ -991,7 +991,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
             if ([objectSelectionCell.selectedItemIndex intValue]>-1) {
                 DisorderEntity *selectedDisorderManagedObject =(DisorderEntity*)[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
                 
-                DLog(@"selected cell managed object os  %@",selectedDisorderManagedObject);
+                
                 if (selectedDisorderManagedObject &&[selectedDisorderManagedObject respondsToSelector:@selector(entity)]&&[selectedDisorderManagedObject.entity.name isEqualToString:@"DisorderEntity"]) {
                     selectedDisorder=(DisorderEntity *) selectedDisorderManagedObject;
                     
@@ -1058,7 +1058,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
 }
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //DLog(@"table bies slkjd %i", tableViewModel.tag);
+    
     SCTableViewCell *cell =tableViewModel.activeCell;
     
     switch (tableViewModel.tag) {
@@ -1093,8 +1093,8 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
 {
     SCTableViewSection *section =[tableViewModel sectionAtIndex:0];
     
-    //DLog(@"section header title %@", section.headerTitle);
-    //DLog(@"table model tag is %i", tableViewModel.tag);
+    
+    
     NSManagedObject *managedObject = (NSManagedObject *)cell.boundObject;
     
     switch (tableViewModel.tag) {
@@ -1129,7 +1129,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                 //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
                 if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
                     
-                    //DLog(@"entity name is %@",managedObject.entity.name);
+                    
                     //identify the Languages Spoken table
                     if ([managedObject.entity.name isEqualToString:@"LogEntity"]) {
                         //define and initialize a date formatter
@@ -1205,7 +1205,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                     }
                     
                    else if ([managedObject.entity.name isEqualToString:@"VitalsEntity"]) {
-                        //DLog(@"the managed object entity is Vitals Entity");
+                        
                         
                         
                         NSDate *dateTaken=(NSDate *)[cell.boundObject valueForKey:@"dateTaken"];
@@ -1246,7 +1246,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                     }
 
                    else if ([managedObject.entity.name isEqualToString:@"DiagnosisHistoryEntity"]) {
-                       //DLog(@"the managed object entity is Vitals Entity");
+                       
                        
                        
                                               
@@ -1373,12 +1373,12 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                     
                     //identify the Languages Spoken table
                     if ([managedObject.entity.name isEqualToString:@"LanguageSpokenEntity"]) {
-                        //DLog(@"the managed object entity is Languag spoken Entity");
+                        
                         //get the value of the primaryLangugage attribute
                         NSNumber *primaryLanguageNumber=(NSNumber *)[managedObject valueForKey:@"primaryLanguage"];
                         
                         
-                        //DLog(@"primary alanguage %@",  primaryLanguageNumber);
+                        
                         //if the primaryLanguage selection is Yes
                         if (primaryLanguageNumber==[NSNumber numberWithInteger:0]) {
                             //get the language
@@ -1395,7 +1395,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                     
                   
                 if ([managedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]) {
-                        //DLog(@"the managed object entity is Migration History Entity");
+                        
                         
                         
                         NSDate *arrivedDate=(NSDate *)[cell.boundObject valueForKey:@"arrivedDate"];
@@ -1612,16 +1612,16 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
             
             if (cell.tag==3) {
                 
-                //DLog(@"cell tag is %i", cell.tag);
+                
                 UIView *viewOne = [cell viewWithTag:14];
                 
                 if([viewOne isKindOfClass:[UISlider class]])
                 {
                     UISlider *sliderOne = (UISlider *)viewOne;
                     UILabel *slabel = (UILabel *)[cell viewWithTag:10];
-                    //DLog(@"detail will appear for row at index path label text%@",slabel.text);
                     
-                    //DLog(@"bound value is %f", sliderOne.value);
+                    
+                    
                     slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
                     
                     
@@ -1630,13 +1630,13 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                 }     
             }
             if (cell.tag==4){
-                //DLog(@"cell tag is ");
+                
                 UIView *viewTwo = [cell viewWithTag:14];
                 if([viewTwo isKindOfClass:[UISlider class]])
                 {
                     
                     
-                    //DLog(@"cell tag is %i", cell.tag);
+                    
                     
                     
                     UISlider *sliderTwo = (UISlider *)viewTwo;
@@ -1683,7 +1683,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
     break;
         case 6:
         {
-            DLog(@"cell tag is  %i",tableViewModel.tag);
+            
             if (managedObject && [managedObject respondsToSelector:@selector(entity)]) {
                 if ([managedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                     //define and initialize a date formatter
@@ -1746,7 +1746,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
 searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     
-    //DLog(@"scope changed");
+    
     if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
     {
         
@@ -1776,12 +1776,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         switch (selectedScope) {
             case 0: //current
                 dataFetchOptions.filterPredicate = [NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
-                //DLog(@"case 1");
+                
                 break;
                 
             default:
                 dataFetchOptions.filterPredicate = nil;
-                //DLog(@"case default");
+                
                 
                 break;
         }
@@ -1841,12 +1841,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     //    if (tableViewModel.tag==0) {
     //       
     //        
-    //        //DLog(@"test%@", section.class);
+    //        
     //        
     //        if (searchBar.text.length !=searchStringLength) {
     //            
     //            if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
-    //                //DLog(@"test");
+    //                
     //                
     //               
     //                SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
@@ -1859,7 +1859,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     //                section=(SCObjectSelectionSection*) objectsSelectionSection;
     //                [tableViewModel addSection:section ];
     //                tableViewModel.delegate=self;
-    //                //DLog(@"section %@",[section class]);
+    //                
     //                
     //                    
     //            }
@@ -1885,8 +1885,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             NSManagedObject *cellOneBoundObject=(NSManagedObject *)cellOne.boundObject;
             
-            //DLog(@"section bound object entity is %@",cellOneBoundObject);
-            //DLog(@"section bound object entity name is %@",cellOneBoundObject.entity.name);
+            
+            
             if (cellOneBoundObject &&[cellOneBoundObject respondsToSelector:@selector(entity)] &&[cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
             
                 
@@ -1918,9 +1918,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     }
 
     
-    //DLog(@"tablemodel data source %@",[section class]);
     
-    //DLog(@"did add section at index header title is %@",section.headerTitle);
+    
+    
     
     if(section.headerTitle !=nil)
     {
@@ -1952,7 +1952,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 //{
 //    
 //    if (tableViewModel.tag==0) {
-//        //DLog(@"did iset row for index path");
+//        
 //   
 //       
 //            if(isInDetailSubview)
@@ -2084,7 +2084,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
   
     
     
-    //DLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
+    
     
     if (tableViewModel.tag==1&&tableViewModel.sectionCount){
         
@@ -2102,7 +2102,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 if ( clientIDCodeEncryptedCell.textField.text.length ) {
                     
                     valid=TRUE;
-                    //DLog(@"first or last name is valid");
+                    
                     
                 }
                 else
@@ -2212,7 +2212,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             if (section.cellCount>6) 
             {
             
-                //DLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
+                  
                 
                 
                 SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];
@@ -2300,7 +2300,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             SCTableViewCell *firstCell =(SCTableViewCell *)[section cellAtIndex:0];
             NSManagedObject *firstCellManagedObject=(NSManagedObject *)firstCell.boundObject;
             
-            //DLog(@"first cell class is %@",[firstCell class]);
+            
             
             if (firstCellManagedObject &&[firstCellManagedObject respondsToSelector:@selector(entity)]&&[firstCellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"]&&[firstCell isKindOfClass:[SCObjectSelectionCell class]]) {
                 SCObjectSelectionCell *symptomCell=(SCObjectSelectionCell *)firstCell;
@@ -2352,14 +2352,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             SCTableViewCell *cellTo=(SCTableViewCell *)[section cellAtIndex:1];
             SCTableViewCell *cellArrivedDate=(SCTableViewCell *)[section cellAtIndex:2];
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
-            //DLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);  
+              
             
             if (cellManagedObject &&  [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject.entity.name  isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
                 
-                //DLog(@"arrived date cell class is %@",[cellArrivedDate class]);
+                
                 SCDateCell *arrivedDateCell=(SCDateCell *)cellArrivedDate;
                 
                 if (encryptedFrom.textView.text.length && encryptedTo.textView.text.length &&arrivedDateCell.label.text.length) {

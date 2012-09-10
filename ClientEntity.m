@@ -158,7 +158,7 @@ if (fetchedObjects) {
 //        }
 //        
 //    }
-//        //                    //DLog(@"lockvalues dictionary %@",[dictionaryFromDecryptedData allKeys]);
+//        //                    
 //        
 //        
 //
@@ -209,7 +209,7 @@ if (fetchedObjects) {
         
         
         NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:nil];
-        //DLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        
         NSData *encryptedData;
         NSString *encryptedKeyString;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
@@ -217,10 +217,10 @@ if (fetchedObjects) {
             
             
             if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
-                //DLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                
                 
                 encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
-                //DLog(@"key date is client entity %@",encryptedkeyString);
+                
             }
         }
         
@@ -328,7 +328,7 @@ if (fetchedObjects) {
 //    self.dateOfBirth=nil;
 //    self.notes=nil;
 //    self.initials=nil;
-//    //DLog(@"fdata dictionary %@",fDataDictionary);
+//    
 //    
 //    
 //    
@@ -339,7 +339,7 @@ if (fetchedObjects) {
 ////    [self setPrimitiveValue:encryptedKeyDate forKey:@"keyDate"];
 ////    
 ////    [self didChangeValueForKey:@"keyDate"];
-////    //DLog(@"encrypted key date is %@",encryptedKeyDate);
+////    
 ////    
 ////}
 //
@@ -359,7 +359,7 @@ if (fetchedObjects) {
         
         [self willAccessValueForKey:@"keyString"];
         NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:keyStringToSet];
-        //DLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        
         NSData *encryptedData=nil;
         NSString *encryptedKeyString=nil;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
@@ -367,14 +367,14 @@ if (fetchedObjects) {
             
             
             if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
-                //DLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                
                 
                 encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
-                //DLog(@"key date is client entity %@",encryptedkeyString);
+                
             }
         }
         
-        DLog(@"encrypted data %@",encryptedData);
+        
         if (encryptedData.length) {
             [self willChangeValueForKey:key];
             [self setPrimitiveValue:encryptedData forKey:key];
@@ -525,7 +525,7 @@ if (fetchedObjects) {
         
         
         NSData *primitiveData=[self primitiveValueForKey:@"clientIDCode"];
-        DLog(@"primitive data %@",primitiveData);
+        
         
         if (!primitiveData ||!primitiveData.length) {
             return nil;
@@ -538,11 +538,11 @@ if (fetchedObjects) {
         if(tmpKeyString && tmpKeyString.length){
             NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
             
-            DLog(@"temp string is %@",strData);
+            
 
             tempStr=[appDelegate convertDataToString:strData];
             
-            DLog(@"temp string is %@",tempStr);
+            
             [self willChangeValueForKey:@"tempClientIDCode"];
             
             self.tempClientIDCode=tempStr;
@@ -616,7 +616,7 @@ if (fetchedObjects) {
     
     
     
-    //DLog(@"date valeu is %@",newDate);
+    
     return newDate;
     
     
@@ -636,7 +636,7 @@ if (fetchedObjects) {
         
         
         NSDictionary *encryptedDataDictionary=[appDelegate encryptDataToEncryptedData:dateData withKeyString:keyStringToSet];
-        DLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        
         NSData *encryptedData;
         NSString *encryptedKeyString;
         if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
@@ -644,10 +644,10 @@ if (fetchedObjects) {
             
             
             if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
-                DLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                
                 
                 encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
-                DLog(@"key date is client entity %@",encryptedKeyString);
+                
             }
         }
         

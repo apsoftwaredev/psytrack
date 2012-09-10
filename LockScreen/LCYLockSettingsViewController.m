@@ -239,7 +239,7 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
     if (cell.tag==2 &&[cell isKindOfClass:[SCSwitchCell class]]) {
         
         SCSwitchCell *switchCell=(SCSwitchCell *)cell;
-       //DLog(@"switch cell value %i",[switchCell.switchControl isOn]);
+       
         
         if ([self passCodeLockIsOn]) {
             [self setLockedAtStartup: [switchCell.switchControl isOn]];
@@ -255,7 +255,7 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
     if (cell.tag==4 &&[cell isKindOfClass:[SCSwitchCell class]]) {
         
         SCSwitchCell *switchCell=(SCSwitchCell *)cell;
-        //DLog(@"switch cell value %i",[switchCell.switchControl isOn]);
+        
         
         [[NSUserDefaults standardUserDefaults]setBool:switchCell.switchControl.on forKey:K_LOCK_SCREEN_PADLOCK_SOUND_IS_ON];
         
@@ -287,7 +287,7 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
         
         EncryptionTokenCell *encryptionTokenCell=(EncryptionTokenCell *)cell;
         
-        DLog(@"apply changes tag is %i",kTokenCellApplyChangesButtonTag);
+        
         
         switch (button.tag) {
             
@@ -492,7 +492,7 @@ if(section.headerTitle !=nil)
 - (BOOL) authenticatePassword: (NSString *) userInput;
 {
 	BOOL result = NO;
-	////DLog(@"userInput: %@", userInput);
+	//
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
  
@@ -505,7 +505,7 @@ if(section.headerTitle !=nil)
     NSString *passwordToCheck = (userInput) ? [NSString stringWithFormat:@"%@kdieJsi3ea18ki" ,userInput ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
     PTTEncryption *encryption=[[PTTEncryption alloc]init];
     
-    DLog(@"password to check %@",passwordToCheck);
+    
     if ( [ (NSData *)[encryption getHashBytes:[appDelegate convertStringToData: passwordToCheck]] isEqualToData:[appSettings passwordData]] ) 
         
         
@@ -987,14 +987,14 @@ if(section.headerTitle !=nil)
 #pragma mark LCYPassCodeEditorDelegate protocol implementation...
 - (void) passcodeEditor: (LCYPassCodeEditorViewController *) passcodeEditor newCode:(NSData *) newCode;
 {
-	//DLog(@"editor: %@ | newCode: %@", passcodeEditor, newCode);
+	
 	[self.navigationController dismissModalViewControllerAnimated:YES];
 	[self updatePasscodeSettings:newCode];	
 	[self.tableView reloadData];	
 }
 
 -(void)clearUserInput{
-DLog(@"clear user input fired");
+
     if (objectsModel.sectionCount) {
         SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:0];
         if (section.cellCount && [section isKindOfClass:[SCArrayOfObjectsSection class]]) {

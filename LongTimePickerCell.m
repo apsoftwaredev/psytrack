@@ -111,13 +111,13 @@
 {
     [super loadBindingsIntoCustomControls];
     
-    //DLog(@"object bindings %@",self.objectBindings);
+    
     
     boundObjectName=(NSString *)[self.objectBindings valueForKey:@"41"];
     timeValue=(NSDate *)[self.boundObject valueForKey:boundObjectName];
     
     boundObjectTitle=(NSString *)[self.objectBindings valueForKey:@"42"];
-    //DLog(@"bound date is %@",timeValue);
+    
     
     NSInteger hoursComponent=[[hourFormatter stringFromDate:timeValue]integerValue];
     
@@ -160,7 +160,7 @@
     NSInteger minuteComponent=[picker selectedRowInComponent:1];
     
     [hourFormatter setDateFormat:@"H:m"];
-    //DLog(@"date to be entered is %@",[hourMinFormatter dateFromString:[NSString stringWithFormat:@"%i:%i",hourComponent,minuteComponent]]);
+    
     timeValue=[hourMinFormatter dateFromString:[NSString stringWithFormat:@"%i:%i",hourComponent,minuteComponent]];
     [self.boundObject setValue:timeValue forKey:boundObjectName];
     

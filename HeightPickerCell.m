@@ -68,7 +68,7 @@
     
 //    [picker reloadInputViews];
      loadUnitsFromBoundObject=TRUE;
-    //    //DLog(@"picker subviews is %@",picker.subviews);
+    //    
     //    
 }
 
@@ -93,7 +93,7 @@
 //    float heightTall=[(NSNumber *)[self.boundObject valueForKey:@"heightTall"]decimalValue];
     NSString *bigUnit=(NSString *)[self.boundObject valueForKey:@"heightUnit"];
    
-    DLog(@"big unit is %@ ",bigUnit);
+    
     
    
    
@@ -184,7 +184,7 @@
 //    float heightTall=[[NSString stringWithFormat:@"%f", inchesTall]floatValue]; 
     
  
-    //DLog(@"height is %i",heightTall);
+    
 
     [self.boundObject setValue:[NSNumber numberWithInteger:heightTall] forKey:@"heightTall"];
     [self.boundObject setValue:bigUnit forKey:@"heightUnit"];
@@ -298,7 +298,7 @@
     NSInteger returnInteger=0;
    
 
-//DLog(@"component %i",component);
+
 NSString *bigUnit,*littleUnit ;
 if (loadUnitsFromBoundObject) {
     bigUnit=(NSString *)[self.boundObject valueForKey:@"heightUnit"];
@@ -422,7 +422,7 @@ else
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    //DLog(@"component changed is %i",component);
+    
     
     if (component==0) {
          NSString *bigUnit = [self bigUnitForRow:[picker selectedRowInComponent:1]];
@@ -456,8 +456,8 @@ else
             
             NSInteger heighTallInOrCm=thirdComponent;
             BOOL convertToMetric=FALSE;
-            //DLog(@"big unit is %@",bigUnit);
-            //DLog(@"littleUnit is %@",littleUnit);
+            
+            
             if (component==1) {
                
                 if ([bigUnit isEqualToString:@"ft"]) {
@@ -534,16 +534,16 @@ else
             centemetersInteger=thirdComponent+(firstComponent *100);
             
             inchesFloat=centemetersInteger*0.393700787;
-            //DLog(@"inches %f, centemeters %f",inchesFloat,centemetersFloat);
+            
            
             feetFloat=inchesFloat/12;
             feetInteger=feetFloat;
             inchesFloat=feetFloat-feetInteger;
             inchesFloat=inchesFloat*12;
             
-            //DLog(@"inchecs float before round is %f",inchesFloat);
+            
             inchesFloat=roundf(inchesFloat);
-            //DLog(@"inches float after round it %f",inchesFloat);
+            
             
             inchesInteger=inchesFloat;
            
@@ -554,10 +554,10 @@ else
             heighTallFtOrM=feetInteger;
             
             
-            //DLog(@"inches float tallbig is %f",inchesFloat);
-            //DLog(@"inches integer is  talllittle is %i",inchesInteger);
-            //DLog(@"feet float %f",feetFloat);
-            //DLog(@"feet integer M %i",feetInteger);
+            
+            
+            
+            
             
          
         
@@ -598,7 +598,7 @@ else
     if (metersFloat-metersInteger>0.995) {
         metersInteger++;
     }
-    //DLog(@"meters float are %i",metersInteger);
+    
     
    
 
@@ -614,14 +614,14 @@ else
     centemetersFloat=inchesInteger * 2.54;
     NSInteger metersInteger, centemetersInteger;
     
-    //DLog(@"centementers are %f",centemetersFloat);
+    
     
     metersFloat=centemetersFloat/100.0;
-    //DLog(@"meters float are %f",metersFloat);
+    
     
     metersInteger=metersFloat;
     
-    //DLog(@"meters integer is %i",metersInteger);
+    
     
     
     centemetersFloat=(metersFloat-metersInteger)*100;
@@ -631,14 +631,14 @@ else
         centemetersInteger++;
     }
     
-    //DLog(@"centemeters float is %f",centemetersFloat);
-    //DLog(@"cenetmeters integeri is %i",centemetersInteger);
     
-//    //DLog(@"meters rounded %i", metersInteger);
+    
+    
+//    
 //    heighTallFtOrM=metersInteger;
 //    
 //    centemetersComponent=centemetersInteger;
-//    //DLog(@"centemeteres are %i",centemetersComponent);
+//    
     
     
     

@@ -146,7 +146,7 @@ static DTInfoManager *_sharedInstance = nil;
  }
  else
  {
- DLog(@"Cannot update apps from URL %@", appsUpdateURL);
+ 
  }
  
  }
@@ -269,7 +269,7 @@ static DTInfoManager *_sharedInstance = nil;
 		}
 //		else
 //		{
-//			//DLog(@"Cannot update dictionary from URL %@", updateURL);
+//			
 //		}
 	}
 	

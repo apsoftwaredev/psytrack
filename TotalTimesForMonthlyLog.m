@@ -263,7 +263,7 @@ existingHoursHoursArray=existingHoursArray_;
     if (week==kTrackWeekFive) {
         
         endDate=[self monthEndDate:self.monthToDisplay];
-        DLog(@"month end date is  %@",endDate);
+        
         
     }
     else{
@@ -604,7 +604,7 @@ existingHoursHoursArray=existingHoursArray_;
     
     doctorateLevelPredicate = [NSPredicate predicateWithFormat:@"programCourse.doctorateLevel == %@", [NSNumber numberWithBool:doctorateLevel_]];
     
-    DLog(@"doctorate level is  %i",doctorateLevel_);
+    
     
     return doctorateLevelPredicate;
     
@@ -618,7 +618,7 @@ existingHoursHoursArray=existingHoursArray_;
     doctorateLevelPredicate = [NSPredicate predicateWithFormat:@"trainingProgram.doctorateLevel == %@", [NSNumber numberWithBool:doctorateLevel_]];
     
     
-    DLog(@"doctorate level is  %i",doctorateLevel_);
+    
     
     return doctorateLevelPredicate;
     

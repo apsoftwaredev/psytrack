@@ -51,7 +51,7 @@
 
  
     stopwatchIsRunningBool=[[self.boundObject valueForKey:@"stopwatchRunning"]boolValue];
-// //DLog(@"value in perform ininitialization for stopwatch running%@", stopwatchRunning); 
+//  
 }
 
 
@@ -68,7 +68,7 @@ addStopwatch=(NSDate *)[self.boundObject valueForKey:@"addStopwatch"];
 -(void)customButtonTapped:(UIButton *)button forCell:(SCCustomCell *)cell{
 
 
-////DLog(@"custom button tapped in stopwatch cell");
+//
 
 
 }
@@ -225,9 +225,9 @@ addStopwatch=(NSDate *)[self.boundObject valueForKey:@"addStopwatch"];
     
     
 ////    [self setValue:[referenceDate dateByAddingTimeInterval:pauseInterval] forKey:@"addStopwatch"];
-//    //DLog(@"reference date a pause time at start are %@, and pauseinterval is %f",referenceDate, pauseInterval);
-//    //DLog(@" just before timer stopwatch running is %@, pause interval is %f, pausetime is %@, stopwatchStartTime is %@",stopwatchRunning, [[NSNumber numberWithFloat:pauseInterval]floatValue],pauseTime, stopwatchStartTime);
-    ////DLog(@"returning date in start tapped %@",date);
+//    
+//    
+    //
     //    
     //    
     
@@ -276,7 +276,7 @@ addStopwatch=(NSDate *)[self.boundObject valueForKey:@"addStopwatch"];
 //    stopwatchRunning=[NSNumber numberWithBool:stopwatchIsRunningBool];
     
     
-//    //DLog(@"stopwatch running is %@, pause interval is %f, pausetime is %@, stopwatchStartTime is %@,stopwatch restarted is %@",stopwatchRunning, [[NSNumber numberWithDouble:pauseInterval]doubleValue],pauseTime, stopwatchStartTime,[NSNumber numberWithBool:stopwatchRestartAfterStop]);
+//    
 //    NSDictionary *stopwatchDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:stopwatchRunning, [NSNumber numberWithBool:stopwatchRestartAfterStop] , nil] forKeys:[NSArray arrayWithObjects:@"stopwatchRunning", @"stopwatchRestartAfterStop",  nil]];
 //    [managedObject setValuesForKeysWithDictionary:stopwatchDictionary];
 //    stopwatchTextField.text=[stopwatchFormat stringFromDate:addStopwatch];
@@ -317,7 +317,7 @@ addStopwatch=(NSDate *)[self.boundObject valueForKey:@"addStopwatch"];
 //    NSDictionary *observerDictionary=[NSDictionary dictionaryWithObject:addStopwatch forKey:@"addStopwatch"];
 //    [self observeValueForKeyPath:@"addStopwatch" ofObject:self change:observerDictionary context:nil];
    
-//    //DLog(@"bound object dictionary %@", stopwatchDictionary);
+//    
     [super commitChanges];
     needsCommit = FALSE;
   
@@ -329,7 +329,7 @@ addStopwatch=(NSDate *)[self.boundObject valueForKey:@"addStopwatch"];
     
     now = [NSDate date];
     
-//    //DLog(@"return date is %@", addStopwatch);
+//    
 
     
     NSTimeInterval howLong = [now timeIntervalSinceDate:stopwatchStartTime];
@@ -343,7 +343,7 @@ addStopwatch=(NSDate *)[self.boundObject valueForKey:@"addStopwatch"];
     
     addStopwatch=returnDate;
     
-//    //DLog(@"return date class is %@ and add stopwatch class is %@",returnDate ,addStopwatch);
+//    
     stopwatchIsRunningBool=YES;
   
     
@@ -352,8 +352,8 @@ addStopwatch=(NSDate *)[self.boundObject valueForKey:@"addStopwatch"];
 //    stopwatchRunning=(NSNumber *)[NSNumber numberWithBool:stopwatchIsRunningBool];
 //     [self setValue:addStopwatch forKey:@"addStopwatch"];
     
-//    //DLog(@"value for add stopwatch key is %@", addStopwatch);
-//    //DLog(@"stopwatch running is %@, pause interval is %f, pausetime is %@, stopwatchStartTime is %@, stopwatchRestartAfterStop %@, returnDate is %@",stopwatchRunning, pauseInterval,pauseTime, stopwatchStartTime, [NSNumber numberWithBool:stopwatchRestartAfterStop], addStopwatch);
+//    
+//    
     
   
    
@@ -361,7 +361,7 @@ addStopwatch=(NSDate *)[self.boundObject valueForKey:@"addStopwatch"];
       [self commitChanges];
     stopwatchTextField.text=[stopwatchFormat stringFromDate:addStopwatch];
    
-//   //DLog(@"return date is %@", addStopwatch);
+//   
     
   
     [[NSNotificationCenter defaultCenter]

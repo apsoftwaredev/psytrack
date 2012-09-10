@@ -283,6 +283,10 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     [self.searchBar setBackgroundImage:menueBarImage];
     [self.searchBar setScopeBarBackgroundImage:menueBarImage];
     
+    
+    UIViewController *navtitle=self.navigationController.topViewController;
+    
+    navtitle.title=@"Clients";
 
     
 }
@@ -330,9 +334,9 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 
 -(void)cancelButtonTappedInDetalView{
     
-    //DLog(@"cancel button Tapped");
     
-    //DLog(@"parent controller %@",[super parentViewController]);
+    
+    
     
     if(self.navigationController)
     {
@@ -363,10 +367,10 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 
 -(void)doneButtonTappedInDetailView{
     
-    //DLog(@"done Button tapped");
+    
     if (isInDetailSubview &&objectsModel.sectionCount) {
         SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:0];
-        //DLog(@"section class is %@",[section class]);
+        
         //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         //        
         //        if ([appDelegate managedObjectContext].hasChanges) {
@@ -380,7 +384,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             [objectsSelectionSection commitCellChanges];
             if (allowMultipleSelection) {
                 NSInteger sectionCount=self.tableViewModel.sectionCount;
-                //DLog(@"section count is %i",sectionCount);
+                
                 if (sectionCount&& !currentlySelectedClientsArray) {
                     currentlySelectedClientsArray=[NSMutableArray array];
                 }
@@ -403,7 +407,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                                 ClientEntity *clientnObject=(ClientEntity *)selectedCell.boundObject;
                                 [currentlySelectedClientsArray addObject:clientnObject];
                                 
-                                //DLog(@"currently selected clinicians array is %@",currentlySelectedClientsArray);
+                                
                                 
                             }
                             
@@ -416,10 +420,10 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 }
                 
                 
-                //DLog(@"currently selected clinicians array is %@",currentlySelectedClientsArray);
                 
                 
-                //DLog(@"object selection section selected itemsindexes %@",objectsSelectionSection.selectedItemsIndexes);                    
+                
+                                    
                 
                 
                 [clientObjectSelectionCell  doneButtonTappedInDetailView:(NSObject *)nil selectedClients:(NSArray *)currentlySelectedClientsArray withValue:(BOOL)YES];
@@ -434,11 +438,11 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 //                    <#statements#>
                 //                }
                 //                SCTableViewCell *cell=(SCTableViewCell *)[self.tableViewModel cellAtIndexPath:cellIndexPath];
-                //                //DLog(@"cell bound object in clients view controller at done %@",cell.boundObject);
+                //                
                 
                 
                 
-                //DLog(@"selected item index%@",objectsSelectionSection.selectedItemIndex);
+                
                 
                 
                 if (objectsSelectionSection.selectedItemIndex&&![objectsSelectionSection.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]] && [objectsSelectionSection.selectedItemIndex intValue]< objectsSelectionSection.items.count) {
@@ -457,7 +461,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             //            //DLog(@"test valie changed at index with cell index selected %i",[objectsSelectionSection.selectedItemIndex integerValue]) ;
             //            if (clientObjectSelectionCell) {
             
-            //                //DLog(@"objectsSelectionSection.selectedItemsIndexes.count %i",objectsSelectionSection.items.count);
+            //                
             
             //                if ([objectsSelectionSection.selectedItemIndex integerValue]>=0&&[objectsSelectionSection.selectedItemIndex integerValue]<=objectsSelectionSection.items.count) {
             //                    
@@ -513,7 +517,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 -(void)setSelectedClients{
     if (isInDetailSubview) {
         SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
-        //DLog(@"section class is %@",[section class]);
+        
         //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         //        
         //        if ([appDelegate managedObjectContext].hasChanges) {
@@ -528,7 +532,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 
                 if (allowMultipleSelection) 
                 {
-                    //DLog(@"currentlyselected clinicians in set selected are %@",currentlySelectedCliniciansArray);
+                    
                     if (currentlySelectedClientsArray.count) {
                         
                         NSMutableSet *selectedIndexesSet=objectSelectionSection.selectedItemsIndexes;
@@ -554,7 +558,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     if (isInDetailSubview) {
         SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
-        //DLog(@"section class is %@",[section class]);
+        
         //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         //        
         //        if ([appDelegate managedObjectContext].hasChanges) {
@@ -593,7 +597,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                             ClientEntity *clientObject=(ClientEntity *)selectedCell.boundObject;
                             [currentlySelectedClientsArray addObject:clientObject];
                             
-                            //DLog(@"currently selected clinicians array is %@",currentlySelectedCliniciansArray);
+                            
                             
                         }
                         
@@ -605,10 +609,10 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 }
                 
                 
-                //DLog(@"currently selected clinicians array is %@",currentlySelectedCliniciansArray);
                 
                 
-                //DLog(@"object selection section selected itemsindexes %@",objectsSelectionSection.selectedItemsIndexes);                    
+                
+                                    
                 
                 
             }}}   
@@ -661,7 +665,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 //        NSError *error = nil;
 //        NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
 //        if (fetchedObjects == nil) {
-//            //DLog(@"no items");
+//            
 //        }
 //        
 //        
@@ -675,7 +679,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 //            
 //        }
 //        
-//        //DLog(@"clientobject selection itemset %@",mutableSet);
+//        
 //            [tableViewModel removeSectionAtIndex:0];
 //        
 //        SCObjectSelectionSection *objectSelectionSection=[SCObjectSelectionSection sectionWithHeaderTitle:nil withItemsSet:mutableSet withClassDefinition:clientsViewController_Shared.clientDef];
@@ -727,7 +731,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 -(void)tableViewModel:(SCArrayOfItemsModel *)tableViewModel sectionGenerated:(SCTableViewSection *)section atIndex:(NSInteger)index{
     
     
-    //DLog(@"section generaged is %@",[section class]);
+    
     if (tableViewModel.tag==0&&[section isKindOfClass:[SCObjectSelectionSection class]]) {
         SCObjectSelectionSection *objSelectionSection=(SCObjectSelectionSection *)section;
         objSelectionSection.autoSelectNewItemCell=TRUE;
@@ -786,8 +790,8 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 
 - (void)tableViewModel:(SCTableViewModel *) tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *) indexPath
 {
-    //DLog(@"table view model tag is %i",tableViewModel.tag);
-    //DLog(@"tableviewmodel tag is %i",tableViewModel.tag);
+    
+    
     
     SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
     switch (tableViewModel.tag) {
@@ -795,22 +799,22 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         {
             
             //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-            //        //DLog(@"cell text label text is %@",cell.textLabel);
+            //        
             //        
             //        ClientEntity *clientObject=(ClientEntity *)cell.boundObject;
             //        
-            //        //DLog(@"cell bound object is %@", cell.boundObject);
+            //        
             //        
             //        cell.boundObject=clientObject;
-            //        //DLog(@"cell bound object is %@", cell.boundObject);
+            //        
             //        
             ////     
-            //        //DLog(@"cell bound object is %@",clientObject);
+            //        
             //  
             //        NSString *clientIDCodeData=[cell.boundObject valueForKey:@"clientIDCodeDC"];
             //        cell.textLabel.text=clientIDCodeData;
             //        cell.textLabel.text=clientObject.clientIDCode;
-            //        //DLog(@"table model all keys %@",tableViewModel.modelKeyValues);
+            //        
             
             if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
                 
@@ -820,9 +824,9 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 
                 
                 if ([cell.boundObject isEqual:currentlySelectedClient]) {
-                    //DLog(@"currently selected client is %@",currentlySelectedClient);
-                    //DLog(@"cell bound object is %@",cell.boundObject);
-                    //DLog(@"they are equal section cell count is %i", section.cellCount);
+                    
+                    
+                    
                     //            [objectSelectionSection setSelectedCellIndexPath:indexPath];
                     [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:currentlySelectedClient]]];
                     
@@ -833,7 +837,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 
                 //            [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:(NSInteger)[objectSelectionSection.items indexOfObject:managedObject]]]; 
                 
-                //DLog(@"index integer of object %i",[objectSelectionSection.items indexOfObject:currentlySelectedClient]);
+                
                 
                 
                 
@@ -846,7 +850,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             if ([cell isKindOfClass:[SCDateCell class]]) {
                 SCDateCell *dateCell=(SCDateCell *)cell;
                 [dateCell.datePicker setMaximumDate:[NSDate date]];
-                //DLog(@"date cell date is%@ ",dateCell.datePicker.date);
+                
                 
             }
             
@@ -873,7 +877,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 //                            
 //                        }
 //                        
-//                        //DLog(@"cell kind of class is %@",cell.class);
+//                        
 //                        if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]]) 
 //                        {
 //                            EncryptedSCTextFieldCell *encryptedTextFieldCell=(EncryptedSCTextFieldCell *)cell;
@@ -895,7 +899,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 //                    }
                     
                     
-                    //DLog(@"cell kind of class is %@",cell.class);
+                    
                     if ([cellManagedObject.entity.name isEqualToString:@"VitalsEntity"] &&cell.tag>2 &&[cell isKindOfClass:[SCNumericTextFieldCell class]]) 
                         
                     {
@@ -955,7 +959,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                             
                         }  
                     }
-                    //DLog(@"entity name is %@",cellManagedObject.entity.name);
+                    
                     if (cell.tag==1 && [cellManagedObject.entity.name isEqualToString:@"LanguageSpokenEntity"])
                     {
                         
@@ -980,7 +984,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                 if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]) {
                     
-                    //DLog(@"entity name is %@",cellManagedObject.entity.name);
+                    
                     if (cell.tag==1 && [cell isKindOfClass:[SCCustomCell class]] &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
                     {
                         
@@ -998,14 +1002,14 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 
                 if (cell.tag==5&& tableViewModel.sectionCount >2) {
                     
-                    //DLog(@"cell tag is %i",cell.tag);
-                    //DLog(@"cell text is %@",cell.textLabel.text);
+                    
+                    
                     
                     SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
                     SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];        
                     NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
-                    //DLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-                    //DLog(@"cell  class is %@",[cellOne class]);
+                    
+                    
                     if ([cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                         
                         
@@ -1041,7 +1045,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
                 if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]) {
                     
-                    //DLog(@"entity name is %@",cellManagedObject.entity.name);
+                    
                     if (cell.tag==1 && [cell isKindOfClass:[SCCustomCell class]] &&[cellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"])
                     {
                         
@@ -1059,14 +1063,14 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 
                 if (cell.tag==5&& tableViewModel.sectionCount >2) {
                     
-                    //DLog(@"cell tag is %i",cell.tag);
-                    //DLog(@"cell text is %@",cell.textLabel.text);
+                    
+                    
                     
                     SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
                     SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];
                     NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
-                    //DLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-                    //DLog(@"cell  class is %@",[cellOne class]);
+                    
+                    
                     if ([cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                         
                         
@@ -1141,7 +1145,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     
     
-    //DLog(@"table view model is alkjlaksjdfkj %i", tableViewModel.tag);
+    
     
     if (tableViewModel.tag==1&&tableViewModel.sectionCount){
         
@@ -1159,7 +1163,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 if ( clientIDCodeEncryptedCell.textField.text.length ) {
                     
                     valid=TRUE;
-                    //DLog(@"first or last name is valid");
+                    
                     
                 }
                 else
@@ -1268,7 +1272,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             if (section.cellCount>6)
             {
                 
-                //DLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);
+                
                 
                 
                 SCTableViewCell *cell=[tableViewModel cellAtIndexPath:indexPath];
@@ -1279,8 +1283,8 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];;
                     
                     NSNumber *number=[numberFormatter numberFromString:textFieldCell.textField.text];
-                    DLog(@"cell tag is %i",cell.tag);
-                    DLog(@"text inpou is %@",textFieldCell.textField.text);
+                    
+                    
                     if (textFieldCell.textField.text.length) {
                         
                         switch (cell.tag) {
@@ -1357,7 +1361,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             SCTableViewCell *firstCell =(SCTableViewCell *)[section cellAtIndex:0];
             NSManagedObject *firstCellManagedObject=(NSManagedObject *)firstCell.boundObject;
             
-            //DLog(@"first cell class is %@",[firstCell class]);
+            
             
             if (firstCellManagedObject &&[firstCellManagedObject respondsToSelector:@selector(entity)]&&[firstCellManagedObject.entity.name isEqualToString:@"AdditionalSymptomEntity"]&&[firstCell isKindOfClass:[SCObjectSelectionCell class]]) {
                 SCObjectSelectionCell *symptomCell=(SCObjectSelectionCell *)firstCell;
@@ -1409,14 +1413,14 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             SCTableViewCell *cellTo=(SCTableViewCell *)[section cellAtIndex:1];
             SCTableViewCell *cellArrivedDate=(SCTableViewCell *)[section cellAtIndex:2];
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
-            //DLog(@"cell managed object entity name is %@",cellManagedObject.entity.name);
+            
             
             if (cellManagedObject &&  [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject.entity.name  isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
                 
                 EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
                 EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
                 
-                //DLog(@"arrived date cell class is %@",[cellArrivedDate class]);
+                
                 SCDateCell *arrivedDateCell=(SCDateCell *)cellArrivedDate;
                 
                 if (encryptedFrom.textView.text.length && encryptedTo.textView.text.length &&arrivedDateCell.label.text.length) {
@@ -1508,7 +1512,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtOne;
                     
                     
-                    DLog(@"section managed object is %@",sectionManagedObject);
+                    
                     NSObject *disorderObject=[sectionManagedObject valueForKeyPath:@"disorder"];
                     
                     if (indexPath.row!=NSNotFound &&( selectedDisorder||(disorderObject&&[disorderObject isKindOfClass:[DisorderEntity class]]))) {
@@ -1574,14 +1578,14 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
         [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
     }
-    //DLog(@"tabel veiw modoel %i",tableViewModel.tag);
+    
     
     if (tableViewModel.tag==4 ) {
         
         //this is so the second section will not appear if it is the second log, because that info does not pertain
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
-        //DLog(@"section cell count is %i",section.cellCount);
-        //DLog(@"detailtableview model sectioncount %i",detailTableViewModel.sectionCount);
+        
+        
         //        BOOL sectionContainsMedLog=FALSE;
         
         if (tableViewModel.sectionCount) {
@@ -1613,8 +1617,8 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 
                 
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-                //DLog(@"cell managed object entity is %@",cellManagedObject.entity.name);
-                //DLog(@"cell  class is %@",[cellZeroSectionZero class]);
+                
+                
                 if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]&&detailTableViewModel.sectionCount>2) {
                     
                     [detailTableViewModel removeSectionAtIndex:1];
@@ -1666,7 +1670,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         [self updateClientsTotalLabel];
         
     }
-    //DLog(@"table view model tag is %i",tableViewModel.tag);
+    
     
     
     
@@ -1679,7 +1683,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 -(void) tableViewModel:(SCTableViewModel *)tableViewModel customButtonTapped:(UIButton *)button forRowWithIndexPath:(NSIndexPath *)indexPath{
     
     
-    //DLog(@"custom button tapped");
+    
     
     
     
@@ -1694,7 +1698,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             if ([cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&section.cellCount>1){
                 
                 SCTextFieldCell *phoneNumberCell =(SCTextFieldCell *) [section cellAtIndex:1];
-                //DLog(@"custom button tapped");
+                
                 if (phoneNumberCell.textField.text.length) {
                     
                     
@@ -1810,9 +1814,9 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         
         
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-        DLog(@"cell class is  %@",cell.class);
-        DLog(@"cell managed obect entity name is %@",cellManagedObject.entity.name);
-        DLog(@"cellmanaged ofbec is  %@",cellManagedObject);
+        
+        
+        
         if (cell.tag==0&& cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"DiagnosisHistoryEntity"]&& [cell isKindOfClass:[SCObjectSelectionCell class]]) {
             
             SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
@@ -1821,7 +1825,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             if ([objectSelectionCell.selectedItemIndex intValue]>-1) {
                 DisorderEntity *selectedDisorderManagedObject =(DisorderEntity*)[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
                 
-                DLog(@"selected cell managed object os  %@",selectedDisorderManagedObject);
+                
                 if (selectedDisorderManagedObject &&[selectedDisorderManagedObject respondsToSelector:@selector(entity)]&&[selectedDisorderManagedObject.entity.name isEqualToString:@"DisorderEntity"]) {
                     selectedDisorder=(DisorderEntity *) selectedDisorderManagedObject;
                     
@@ -1878,7 +1882,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willSelectRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-    //DLog(@"table bies slkjd %i", tableViewModel.tag);
+    
     SCTableViewCell *cell =tableViewModel.activeCell;
     
     switch (tableViewModel.tag) {
@@ -1913,8 +1917,8 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 {
     SCTableViewSection *section =[tableViewModel sectionAtIndex:0];
     
-    //DLog(@"section header title %@", section.headerTitle);
-    //DLog(@"table model tag is %i", tableViewModel.tag);
+    
+    
     NSManagedObject *managedObject = (NSManagedObject *)cell.boundObject;
     
     switch (tableViewModel.tag) {
@@ -1949,7 +1953,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
                 if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
                     
-                    //DLog(@"entity name is %@",managedObject.entity.name);
+                    
                     //identify the Languages Spoken table
                     if ([managedObject.entity.name isEqualToString:@"LogEntity"]) {
                         //define and initialize a date formatter
@@ -2022,7 +2026,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     }
                     
                     else if ([managedObject.entity.name isEqualToString:@"VitalsEntity"]) {
-                        //DLog(@"the managed object entity is Vitals Entity");
+                        
                         
                         
                         NSDate *dateTaken=(NSDate *)[cell.boundObject valueForKey:@"dateTaken"];
@@ -2063,7 +2067,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     }
                     
                     else if ([managedObject.entity.name isEqualToString:@"DiagnosisHistoryEntity"]) {
-                        //DLog(@"the managed object entity is Vitals Entity");
+                        
                         
                         
                         
@@ -2190,12 +2194,12 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     
                     //identify the Languages Spoken table
                     if ([managedObject.entity.name isEqualToString:@"LanguageSpokenEntity"]) {
-                        //DLog(@"the managed object entity is Languag spoken Entity");
+                        
                         //get the value of the primaryLangugage attribute
                         NSNumber *primaryLanguageNumber=(NSNumber *)[managedObject valueForKey:@"primaryLanguage"];
                         
                         
-                        //DLog(@"primary alanguage %@",  primaryLanguageNumber);
+                        
                         //if the primaryLanguage selection is Yes
                         if (primaryLanguageNumber==[NSNumber numberWithInteger:0]) {
                             //get the language
@@ -2212,7 +2216,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     
                     
                     if ([managedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]) {
-                        //DLog(@"the managed object entity is Migration History Entity");
+                        
                         
                         
                         NSDate *arrivedDate=(NSDate *)[cell.boundObject valueForKey:@"arrivedDate"];
@@ -2426,16 +2430,16 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 
                 if (cell.tag==3) {
                     
-                    //DLog(@"cell tag is %i", cell.tag);
+                    
                     UIView *viewOne = [cell viewWithTag:14];
                     
                     if([viewOne isKindOfClass:[UISlider class]])
                     {
                         UISlider *sliderOne = (UISlider *)viewOne;
                         UILabel *slabel = (UILabel *)[cell viewWithTag:10];
-                        //DLog(@"detail will appear for row at index path label text%@",slabel.text);
                         
-                        //DLog(@"bound value is %f", sliderOne.value);
+                        
+                        
                         slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
                         
                         
@@ -2444,13 +2448,13 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     }
                 }
                 if (cell.tag==4){
-                    //DLog(@"cell tag is ");
+                    
                     UIView *viewTwo = [cell viewWithTag:14];
                     if([viewTwo isKindOfClass:[UISlider class]])
                     {
                         
                         
-                        //DLog(@"cell tag is %i", cell.tag);
+                        
                         
                         
                         UISlider *sliderTwo = (UISlider *)viewTwo;
@@ -2497,7 +2501,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             break;
         case 6:
         {
-            DLog(@"cell tag is  %i",tableViewModel.tag);
+            
             if (managedObject && [managedObject respondsToSelector:@selector(entity)]) {
                 if ([managedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                     //define and initialize a date formatter
@@ -2562,7 +2566,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
      [self createSelectedClientsArray];
     
-    //DLog(@"scope changed");
+    
     if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
     {
         
@@ -2592,12 +2596,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         switch (selectedScope) {
             case 0: //current
                 dataFetchOptions.filterPredicate = [NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
-                //DLog(@"case 1");
+                
                 break;
                 
             default:
                 dataFetchOptions.filterPredicate = nil;
-                //DLog(@"case default");
+                
                 
                 break;
         }
@@ -2678,8 +2682,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             NSManagedObject *cellOneBoundObject=(NSManagedObject *)cellOne.boundObject;
             
-            //DLog(@"section bound object entity is %@",cellOneBoundObject);
-            //DLog(@"section bound object entity name is %@",cellOneBoundObject.entity.name);
+            
+            
             if (cellOneBoundObject &&[cellOneBoundObject respondsToSelector:@selector(entity)] && [cellOneBoundObject.entity.name isEqualToString:@"MedicationEntity"]) {
                 
                 
@@ -2714,12 +2718,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     //    if (tableViewModel.tag==0) {
     //       
     //        
-    //        //DLog(@"test%@", section.class);
+    //        
     //        
     //        if (searchBar.text.length !=searchStringLength) {
     //            
     //            if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
-    //                //DLog(@"test");
+    //                
     //                
     //               
     //                SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
@@ -2732,7 +2736,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     //                section=(SCObjectSelectionSection*) objectsSelectionSection;
     //                [tableViewModel addSection:section ];
     //                tableViewModel.delegate=self;
-    //                //DLog(@"section %@",[section class]);
+    //                
     //                
     //                    
     //            }
@@ -2751,9 +2755,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     //
     //    }
     
-    //DLog(@"tablemodel data source %@",[section class]);
     
-    //DLog(@"did add section at index header title is %@",section.headerTitle);
+    
+    
     
     if(section.headerTitle !=nil)
     {
@@ -2824,7 +2828,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     
     if (tableViewModel.tag==0) {
-        //DLog(@"did iset row for index path");
+        
         
         [self updateClientsTotalLabel];
         if(isInDetailSubview)

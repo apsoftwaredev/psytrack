@@ -211,12 +211,12 @@
         self.interventionsDeliveredArray=[self.interventionsDeliveredArray filteredArrayUsingPredicate:predicateForTrackDoctorateLevel];
         
         
-         DLog(@"assessment delivered array %@ %i",[self.assessmentsDeliveredArray valueForKeyPath:@"trainingProgram.doctorateLevel"],doctorateLevel_);
+         
         
         
         self.assessmentsDeliveredArray=[self.assessmentsDeliveredArray filteredArrayUsingPredicate:predicateForTrackDoctorateLevel];
         
-        DLog(@"assessment delivered array %@",self.assessmentsDeliveredArray);
+        
         
         self.supportActivityDeliveredArray=[self.supportActivityDeliveredArray filteredArrayUsingPredicate:predicateForTrackDoctorateLevel];
         
@@ -256,7 +256,7 @@
         
         self.studentNameStr=[self getStudentName];
         self.clinicians=[self supervisorsArray];
-        DLog(@"self.clinicians is  %@",self.clinicians);
+        
         self.cliniciansStr=[self cliniciansStrFromCliniciansArray:self.clinicians];
         self.trainingProgramsStr=[self setTrainingProgramString];
 }
@@ -329,7 +329,7 @@
         
         }
         
-        DLog(@"self.existing hours array is %@",self.existingHoursHoursArray);
+        
         
         self.overallTotalWeek1TI=[self totalOverallHoursTIForOveralCell:kSummaryWeekOne clinician:clinician];
         self.overallTotalWeek2TI=[self totalOverallHoursTIForOveralCell:kSummaryWeekTwo clinician:clinician];
@@ -448,7 +448,7 @@
 -(NSString *)cliniciansStrFromCliniciansArray:(NSArray*)cliniciansArray{
 
     NSString *returnString=nil;
-    DLog(@"clinicians Array is %@",cliniciansArray);
+    
     for (ClinicianEntity *clinicianInArray in cliniciansArray) {
         
         if (!returnString||!returnString.length) {
@@ -895,7 +895,7 @@
         {
             
             existingHoursPredicate=[self predicateForExistingHoursWeekUndefined];
-            DLog(@"ksummaryweekundefined ");
+            
         }
             break;
         case kSummaryTotalForMonth:
@@ -951,9 +951,9 @@
    
        if (existingHoursPredicate &&existingHoursArray_ &&existingHoursArray_.count) {
         
-           DLog(@"exsiting hours before filter %@",existingHoursArray_);
+           
            filteredExistingHoursArray=[existingHoursArray_ filteredArrayUsingPredicate:existingHoursPredicate];
-        DLog(@"filtered existing hours array  %@",filteredExistingHoursArray);
+        
 
     }
     else {
@@ -968,7 +968,7 @@
     NSTimeInterval totalExistingAssessmentsTI=[self totalTimeIntervalForExistingHoursArray:filteredExistingHoursArray keyPath:kTrackKeyPathForExistingHoursAssessmentHours];
     
     
-    DLog(@"total for existing assessments array  %f",totalExistingAssessmentsTI);
+    
     NSTimeInterval totalExistingSupportTI=[self totalTimeIntervalForExistingHoursArray:filteredExistingHoursArray keyPath:kTrackKeyPathForExistingHoursSupportActivityHours];
     
     
@@ -1071,7 +1071,7 @@
         {
             self.interventionTotalWeekUndefinedTI=totalExistingInterventionsTI;
             self.assessmentTotalWeekUndefinedTI=totalExistingAssessmentsTI;
-            DLog(@"assessments time interval %f",self.assessmentTotalWeekUndefinedTI);
+            
             
             self.supportTotalWeekUndefinedTI=totalExistingSupportTI;
             self.supervisionTotalWeekUndefinedTI=totalExistingSupervisionReceivedTI;

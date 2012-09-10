@@ -51,13 +51,13 @@
 //        
 //        NSData *encryptedData=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"34"]]; 
 //        NSDate *keyString=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"32"]];
-//        //DLog(@"encrypted data is %@",encryptedData);
-//        //DLog(@"key date is %@",keyString);
+//        
+//        
 //        NSData *decryptedData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithDate:keyString encryptedData:encryptedData];
 //        
-//        //DLog(@"decyrpted data %@",decryptedData);
+//        
 //        self.clientIDCodeStr=[appDelegate convertDataToString:decryptedData];
-//        //DLog(@"temp string is %@",self.clientIDCodeStr);
+//        
 ////        [self.boundObject setValue:keyString forKey:@"keyString"];
 //        
 //        
@@ -77,7 +77,7 @@
     
     //    self.boundObject=self.testString;
     
-    //DLog(@"bound object is %@",self.boundObject);
+    
     
     //    SCTableViewModel *owTableViewModel=(SCTableViewModel *)self.ownerTableViewModel;
     //  
@@ -120,30 +120,30 @@
 //    
 //
 ////    NSString *plaintext=self.textField.text;
-////    //DLog(@"key bindings are %@",[self.ownerTableViewModel. allKeys]);
+////    
 //    self.clientIDCodeStr=self.textField.text;
-//    //DLog(@"textfield text is %@",self.clientIDCodeStr);
+//    
 //    
 //    NSDate *keyString=[self.boundObject valueForKey:[self.objectBindings valueForKey:@"32"]];
 //    
-//    //DLog(@"key date is %@",keyString);
+//    
 //    
 //    NSDictionary *encryptedDictionary=[appDelegate encryptStringToEncryptedData:self.clientIDCodeStr withkeyString:(NSDate*)keyString];
 //    
 //    NSData *encryptedData=[encryptedDictionary valueForKey:@"encryptedData"];
 //   
-//    //DLog(@"encrypted data is %@",encryptedDictionary);
 //    
-//    //DLog(@"encrypete data is %@",encryptedData);
+//    
+//    
 //    
 //    //even though it says client ID code, some users may put in a name..
 //    
 //    [self.boundObject setValue:encryptedData forKey:[self.objectBindings valueForKey:@"34"]];
-//        //DLog(@"encrypted data is %@",[self.objectBindings valueForKey:@"34"]);
+//        
 //    
 //    keyString=[encryptedDictionary valueForKey:@"keyString"];
 //    
-//    //DLog(@"keyString is %@",keyString);
+//    
 //    [self.boundObject setValue:keyString forKey:@"keyString"];
 //    
 ////    //    NSData *encryptedData=(NSData *)[self convertStringToEncryptedData:clientIDCode];
@@ -155,7 +155,7 @@
 ////    self.boundObject setValue: forKey:<#(NSString *)#>
 //    
 //     [super commitChanges];
-//    //DLog(@"self bound object %@",self.boundObject);
+//    
 //    needsCommit=FALSE;
 //    
 //}

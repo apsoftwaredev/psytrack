@@ -62,7 +62,7 @@
 {
     
 //    NSString *clinicianKeyStr=[self.objectBindings valueForKey:@"92"];
-    //DLog(@"client %@",[self.boundObject valueForKey:clinicianKeyStr]);
+    
     
     
     
@@ -130,7 +130,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
         predicate=[NSPredicate predicateWithFormat:@"myCurrentSupervisor == %i OR myPastSupervisor==%i", TRUE, TRUE];
     }
 }
-    //DLog(@"use prescriberis %i",usePrescriber);
+    
     ClinicianViewController *clinicianViewController=nil;
    
     
@@ -139,7 +139,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
         
     }
     
-    //DLog(@"view controllers is %@",self.ownerTableViewModel.viewController.navigationController.viewControllers);
+    
 
 //    for ( int i=0;i< self.ownerTableViewModel.viewController.navigationController.viewControllers.count;i++) {
 //        id objectInArray=(id)[self.ownerTableViewModel.viewController.navigationController.viewControllers objectAtIndex:i];
@@ -240,7 +240,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
     //    NSError *error = nil;
     //    NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
     //    if (fetchedObjects == nil) {
-    //        //DLog(@"no items");
+    //        
     //    }
     //    NSMutableArray *arrayWithFetchedWithoutAlreadySelected=[NSMutableArray arrayWithArray:fetchedObjects];
     
@@ -249,11 +249,11 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
     
     //    if (!hasChangedClients && [self.boundObject valueForKey:@"client"]) {
     //               
-    //      //DLog(@"self itmes are %@",self.items);
+    //      
     //    
     //      
     
-    //DLog(@"cell bound object is %@", self.boundObject);
+    
     if (!hasChangedClinicians_) {
         NSString *clinicianKeyStr=[self.objectBindings valueForKey:@"92"];
         if (!multiSelect) 
@@ -282,7 +282,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
             NSString *clinicianKeyStr=[self.objectBindings valueForKey:@"92"];
             NSMutableSet *cliniciansMutableSet=(NSMutableSet *)[self.boundObject mutableSetValueForKey:clinicianKeyStr];
             self.cliniciansArray=[NSMutableArray arrayWithArray:[cliniciansMutableSet allObjects]];
-            //DLog(@"clinician array is %@",cliniciansArray_);
+            
             
             NSString *labelStr=[NSString string];
             for (int i=0; i<cliniciansArray_.count; i++) {
@@ -345,7 +345,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
 //       
 //        
 //       clientIDCodeString = (NSString *)[clientObject valueForKey:@"clientIDCode"];
-//        //DLog(@"client id code %@",(NSString *)[clientObject valueForKey:@"clientIDCode"]);
+//        
 //
 //    }
 // 
@@ -369,9 +369,9 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
  
     //    [self.boundObject setValue:selectedObject forKey:@"client"];
     
-    DLog(@"selected items %@",selectedItems);
-    DLog(@"self clinicians array %@",self.cliniciansArray);
-    DLog(@"clinicians array_ %@",cliniciansArray_);
+    
+    
+    
     if (hasValue) {
         
         
@@ -386,7 +386,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
         
         if (multiSelect) 
         {
-            DLog(@"clinicians array is  %@",cliniciansArray_);
+            
              NSString *labelTextStr=[NSString string];
             if (self.cliniciansArray.count) 
             {
@@ -422,7 +422,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
         else if (self.clinicianObject)
         {
             
-                 //DLog(@"combined name is %@",clinicianObject_.combinedName);
+                 
                 self.label.text=clinicianObject_.combinedName;
             NSNumber *selectedIndex=[NSNumber numberWithInt:[self.items indexOfObject:clinicianObject_]];
             
@@ -472,7 +472,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
         
     }else 
     {
-      //DLog(@"combined name is %@",clinicianObject_.combinedName);
+      
         if (![clinicianObject_ isDeleted]) {
             
             [self.boundObject setValue:clinicianObject_ forKey:clinicianKeyStr];

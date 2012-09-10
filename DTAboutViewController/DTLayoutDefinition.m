@@ -56,7 +56,7 @@ static NSMutableDictionary *_cachedLayouts = nil;
 		}
 		else
 		{
-//			DLog(@"Error reading attributes of file %@: %@", path, [error localizedDescription]);
+//			
 		
 			
 			return nil;
@@ -126,7 +126,7 @@ static NSMutableDictionary *_cachedLayouts = nil;
 		}
 //		else
 //		{
-//			DLog(@"Cannot update layout from URL %@", updateURL);
+//			
 //		}
 	}
 	

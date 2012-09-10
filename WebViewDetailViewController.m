@@ -57,7 +57,7 @@
      
         // Custom initialization
         documentWebURLString=documentURLString;
-//               //DLog(@"document url top string%@",documentWebURLString);
+//               
 
     }
     return self;
@@ -77,16 +77,16 @@
    documentWebURLString=nil;
     documentWebURL=nil;
     
-//     //DLog(@"path to file%@", PDFDocumentOnDeviceURL.path);
+//     
     NSFileManager *fileManager=[[NSFileManager alloc]init];
     if([fileManager fileExistsAtPath:tmpPDF]) {
         
-//        //DLog(@"path to file%@", PDFDocumentOnDeviceURL.absoluteString);
+//        
         
         NSError *error=nil;
         
         if (![fileManager removeItemAtPath:tmpPDF error:&error]) {
-            //DLog(@"erroro occured %@",error);
+            
         }
         
         
@@ -148,7 +148,7 @@
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
-    //DLog(@"didReceiveMemoryWarning message sent to PrintPhotoViewController"); 
+     
 }
 
 
@@ -220,7 +220,7 @@
     webView.backgroundColor = [UIColor blackColor];
    
    
-//    //DLog(@"formatted comma is %@",[documentWebURLString stringByReplacingOccurrencesOfString:@"," withString:[NSString stringWithFormat:@"%C",0x002C ]]);
+//    
     
 //    //DLog(@"new formateted %@",[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
 //           NSASCIIStringEncoding]);
@@ -229,7 +229,7 @@
 //                                                         NSASCIIStringEncoding] stringByReplacingOccurrencesOfString:@"," withString:formattedComma]stringByReplacingOccurrencesOfString:@"\%22" withString:@""] ];
 //    //DLog(@"target URL string is %@",[(NSString*)[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
 //                                                  NSASCIIStringEncoding] stringByReplacingOccurrencesOfString:@"," withString:formattedComma]);
-//    //DLog(@"target url is %@",documentWebURL);
+//    
     
    
    
@@ -407,14 +407,14 @@
             
             
                         
-            //DLog(@"temp file name is %@",tmpPDF);
+            
             if (![fileData writeToFile:tmpPDF atomically:YES]) {
-                //DLog(@"writeToFile error");
+                
                 
             }
             else {
                 
-                //DLog(@"Written!");
+                
             }
             
 
@@ -431,14 +431,14 @@
                 break;
             case 2:
             {
-                DLog(@"file name is  %@",fileName);
-                DLog(@"temp pdf is %@",tmpPDF);
+                
+                
                 [self openDocumentIn];
             }
                 
                 
             default:
-                //DLog(@"cancel actionsheet tapped");
+                
                 break;
                 
         }

@@ -96,7 +96,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     
     
-    //    DLog(@" size needed height is %g",[self interventionTableViewContentSize ].height );
+    //    
     
     CGFloat interventionTVHeight=[self interventionTableViewContentSize].height;
     CGFloat assessmentTVHeight=[self assessmentTypesTableViewContentSize].height;
@@ -261,7 +261,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     UIScrollView *mainScrollView=self.mainPageScrollView;
     
     
-    DLog(@"containter frame origin y %f and %f and %f ",self.containerForSignaturesAndSupervisorSummaries.frame.origin.y,self.containerForSignaturesAndSupervisorSummaries.frame.size.height, MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY);
+    
     
     
     if ((self.containerForSignaturesAndSupervisorSummaries.frame.origin.y+self.containerForSignaturesAndSupervisorSummaries.frame.size.height)<=(MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY)) {
@@ -315,7 +315,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
             
         }
         CGFloat paddAdditonalY=0;
-        DLog(@"self container for supervisor and signatures summaries and subviews %@",self.containerForSignaturesAndSupervisorSummaries.subviews);
+        
         
         for (NSInteger i=0; i<self.containerForSignaturesAndSupervisorSummaries.subviews.count; i++) {
             UIView *subview =[self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:i];
@@ -1031,7 +1031,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
             footerLabel.backgroundColor = sectionSubFooterLabel.backgroundColor;
             footerLabel.textColor = sectionSubFooterLabel.textColor;
             footerLabel.tag=60;
-            DLog(@"footer total %@",objectsSection.footerTotal);
+            
             footerLabel.text=footerTotal;
             footerLabel.textAlignment=UITextAlignmentCenter;
             [subFooterLabelContainerView addSubview:footerLabel];

@@ -1393,7 +1393,7 @@
     
     
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
-    DLog(@"self.navigationItem.rightBarButtonItems are %@",self.buttonsToolbar.items);
+    
     
     objectsModel.editButtonItem = self.editButton;;
     
@@ -1448,20 +1448,25 @@
     
    
      // Initialize tableModel
-    NSString *detailThemeNameStr=nil;
+//    NSString *detailThemeNameStr=nil;
     if ([SCUtilities is_iPad]) {
-         detailThemeNameStr=@"mapper-ipad-full.ppt";
+//        NSString *mapperThemePath=(NSString *)[(NSString *)(NSBundle *)[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"mapper-ipad-full"];
+//        
+//        detailThemeNameStr=mapperThemePath;
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
     }
     else {
         
         [self.tableView setBackgroundColor:[UIColor clearColor]];
-        detailThemeNameStr=@"mapper-phone.ptt";
+       
+//        NSString *mapperThemePath=[NSBundle pathForResource:@"mapper-phone" ofType:@"ppt" inDirectory:@"MapperTheme"];
+//        
+//        detailThemeNameStr=mapperThemePath;
     }
-        
-    SCTheme *theme=[SCTheme themeWithPath:detailThemeNameStr];
-    objectsModel.theme=theme;
+//
+//    SCTheme *theme=[SCTheme themeWithPath:detailThemeNameStr];
+//    objectsModel.theme=theme;
     
 
   
@@ -1507,7 +1512,7 @@
 //                        }}}
     
     
-    DLog(@"self event store calanders are %@",self.eventStore.calendars);
+    
 //    for (EKCalendar *calander in self.eventStore.calendars){
 //    
 //       
@@ -1518,7 +1523,7 @@
 //            [self.eventStore removeCalendar:calander commit:YES error:&err ];
 //        }
     
-//     DLog(@"calanders are %@",localSource.calendars);
+//     
     
 //    }
 // Get the default calendar from store.
@@ -1533,7 +1538,7 @@
 
 //-(void)didMoveToParentViewController:(UIViewController *)parent{
 //
-//DLog(@"will move to parent %@",parent);
+
 //    if (!parent) {
 //        [self viewDidUnload];
 //    }
@@ -1553,7 +1558,7 @@
 searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     
-    //DLog(@"scope changed");
+    
     
     
     
@@ -1563,8 +1568,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         SCArrayOfObjectsModel *objectsModel = (SCArrayOfObjectsModel *)tableViewModel;
         
        
-        //DLog(@"start dtate %@",startDate);
-        //DLog(@"end date is %@", endDate);
+        
+        
         
        
                
@@ -1677,7 +1682,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         
         int cellCount=0;
-        DLog(@" table view model section count is %i",tableModel.sectionCount);
+        
         if (tableModel.sectionCount >0){
             
             for (int i=0; i<tableModel.sectionCount; i++) {
@@ -1727,16 +1732,16 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    ////DLog(@"table view tag is %i",tableViewModel.tag);
+    //
     //    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
     
-    DLog(@"tab tag %i",tableViewModel.tag);
-    DLog(@"indext path section is %i", indexPath.section);
+    
+    
     if(tableViewModel.tag==1 &&(indexPath.section==0||indexPath.section==1)){
         //        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-        //DLog(@"cell bound object is %@",cellManagedObject);
-        //DLog(@"cell.tag%i",cell.tag);
-        //DLog(@"section managed object is %@",cellManagedObject.entity.name);
+        
+        
+        
         switch (cell.tag) {
             case 0:
             {
@@ -1775,11 +1780,11 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             case 3:
             {
                 if ([cell isKindOfClass:[ButtonCell class]]) {
-                    DLog(@"eventidentifier bound object %@",cell.boundObject);
+                    
                     NSString *eventIdentifier=[cell.boundObject valueForKey:@"eventIdentifier"]; 
                     
                     
-                    //DLog(@"event Identifier %@", cell.boundObject);
+                    
                     NSString *buttonText;
                     if (eventIdentifier.length) {
                         buttonText=@"Edit This Calendar Event";
@@ -1955,7 +1960,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
                 
                 
-                //DLog(@"delegate switched to client presentation shared");
+                
                 
             }
             
@@ -2023,7 +2028,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         
         
-        //DLog(@"tableview model data source %@",tableViewModel.dataSource);
+        
         if (section.cellCount>0) 
         {
             SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:0];
@@ -2032,13 +2037,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             {
                 
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-                //DLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
+                
                 if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
                     
                     SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)[tableViewModel sectionAtIndex:0];
                     NSMutableSet *mutableSet=[(NSMutableSet *)arrayOfObjectsSection.items mutableSetValueForKey:@"client"];
                     
-                    DLog(@"mutable set is %@",mutableSet);
+                    
                     SCArrayOfObjectsSection *mainSection=(SCArrayOfObjectsSection *)[detailTableViewModel sectionAtIndex:0];
                     if (mainSection.cellCount) {
                         SCTableViewCell *cellAtZero=(SCTableViewCell *)[mainSection cellAtIndex:0];
@@ -2047,7 +2052,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                             ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];
                             clientSelectionCell.alreadySelectedClients=mutableSet;
                             
-                            //DLog(@"client items are12345 %@",mutableSet);
+                            
                             clientSelectionCell.hasChangedClients=NO;
                         }
                        
@@ -2112,8 +2117,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 ////        {
 ////            
 ////            
-////            //DLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
-////            //DLog(@"detail model class is %@",[detailTableViewModel class]);
+////            
+////            
 ////            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)] &&[cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) 
 ////            {
 ////                
@@ -2139,7 +2144,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         currentDetailTableViewModel=detailTableViewModel;
         
     }
-    DLog(@"tableviewmodel tag is %i",tableModel.tag);
+    
     if ([SCUtilities is_iPad]) {
                 PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
@@ -2202,7 +2207,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtFour;
                     
                     
-                    DLog(@"section managed object is %@",sectionManagedObject);
+                    
                     NSObject *interventionTypeObject=[sectionManagedObject valueForKeyPath:@"interventionType"];
                     
                     if (indexPath.row!=NSNotFound &&( selectedInterventionType||(interventionTypeObject&&[interventionTypeObject isKindOfClass:[InterventionTypeEntity class]]))) {
@@ -2221,7 +2226,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                             objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                             
                             [objectSelectionCell reloadBoundValue];
-                            DLog(@"objectselection cell %@",objectSelectionCell.items);
+                            
                             
                         }
                         
@@ -2249,7 +2254,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtFour;
                     
                     
-                    DLog(@"section managed object is %@",sectionManagedObject);
+                    
                     NSObject *supervisionTypeObject=[sectionManagedObject valueForKeyPath:@"supervisionType"];
                     
                     if (indexPath.row!=NSNotFound &&( selectedSupervisionType||(supervisionTypeObject&&[supervisionTypeObject isKindOfClass:[SupervisionTypeEntity class]]))) {
@@ -2268,7 +2273,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                             objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                             
                             [objectSelectionCell reloadBoundValue];
-                            DLog(@"objectselection cell %@",objectSelectionCell.items);
+                            
                             
                         }
                         
@@ -2332,13 +2337,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
             NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-            //DLog(@"cell managed object is%@ ",cellManagedObject.entity.name);
+            
             if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)] &&[cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) {
                 
                 SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
                 NSMutableSet *mutableSet=[(NSMutableSet *)arrayOfObjectsSection.items mutableSetValueForKey:@"client"];
                 
-                DLog(@"mutable set is %@",mutableSet);
+                
                 if (detailTableViewModel.sectionCount) {
                
                 SCArrayOfObjectsSection *mainSection=(SCArrayOfObjectsSection *)[detailTableViewModel sectionAtIndex:0];
@@ -2349,7 +2354,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                         ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)[mainSection cellAtIndex:0];
                         clientSelectionCell.alreadySelectedClients=mutableSet;
                         
-                        //DLog(@"client items are12345 %@",mutableSet);
+                        
                         clientSelectionCell.hasChangedClients=NO;
                     }
                     
@@ -2358,7 +2363,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     
                 }
                 
-                //DLog(@"client items are12345 %@",mutableSet);
+                
                 
             }
         } 
@@ -2514,7 +2519,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             if (objectSectionManagedObject&&[objectSectionManagedObject respondsToSelector:@selector(entity)] &&([objectSectionManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]||[objectSectionManagedObject.entity.name isEqualToString:@"SupportActivityClientEntity"])) {
               
-                DLog(@"object section managed obeject entity %@",objectSectionManagedObject.entity.name);
+                
                 //if change the cell text then update the method that sets the age with the new cell text
                 SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" boundObject:nil labelTextPropertyName:@"Age"];
                 SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Age (30-Day Months)" boundObject:nil labelTextPropertyName:@"WechslerAge"];
@@ -2573,7 +2578,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             //rule out selection cells with SCArrayOfStringsSection, prevents sex and sexual orientation selection views from raising an exception on managedObject.entity.name
             if (![section isKindOfClass:[SCArrayOfStringsSection class]]) {
                 
-            DLog(@"entity name is %@",cellManagedObject.entity.name);
+            
                 //identify the Languages Spoken table
                 NSString *mainEntityString=[NSString string];
                 switch (currentControllerSetup) {
@@ -2596,12 +2601,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     
                     
                     
-                    //DLog(@"the managed object entity is Languag spoken Entity");
+                    
                     //get the value of the primaryLangugage attribute
                     NSNumber *paperworkNumber=(NSNumber *)[cellManagedObject valueForKey:@"paperwork"];
                     
                     
-                    //DLog(@"primary alanguage %@",  paperworkNumber);
+                    
                     //if the paperwork selection is Yes
                     if (paperworkNumber==[NSNumber numberWithInteger:0]) {
                         //set the text color to red
@@ -2617,7 +2622,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     
                     NSMutableSet *clientSet=[cellManagedObject mutableSetValueForKeyPath:pathStr];
                     
-                    //DLog(@"client set is %@",clientSet);
+                    
                     
                     NSString *clientsString=[NSString string];
                     if ([clientSet count]) {
@@ -2703,7 +2708,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     
                     [cell.textLabel setText:cellTextString];
                     
-                    //DLog(@"cell text label text is %@",cell.textLabel.text);
+                    
                     
                 
             }
@@ -2721,15 +2726,15 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         if (cell.tag==1)
         {
-            //DLog(@"cell is kind of class %@",[cell class]);
+            
             if ([cell isKindOfClass:[SCObjectCell class]]) 
             {
                
                 NSDate *totalTimeDateBoundValue=(NSDate *)[cell.boundObject valueForKey:@"totalTime"];
-                //DLog(@"total time date in will display cell objects %@", totalTimeDate);
+                
                 NSString *totalTimeString=[counterDateFormatter stringFromDate:totalTimeDateBoundValue];
                 
-                DLog(@"total time date is %@",[counterDateFormatter stringFromDate:totalTimeDateBoundValue]);
+                
                 UILabel *totalTimeLabel=(UILabel *)[cell viewWithTag:28];
                 totalTimeLabel.text=totalTimeString;
                 
@@ -2772,7 +2777,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         
        else if ([cell.textLabel.text isEqualToString:@"Hourly Rate"]&&[cell isKindOfClass:[SCObjectSelectionCell class]]){
-           DLog(@"hourly rate cell tag is %i",cell.tag);
+           
            SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
            
            if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
@@ -2985,16 +2990,16 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         if (supervisor &&[supervisor isKindOfClass:[ClinicianEntity class]]) {
             valid=YES;
         }
-        DLog(@"cell tag is %i",cell.tag);
+        
         
         NSString *cellTitleLastCharacter=[cell.textLabel.text substringFromIndex:cell.textLabel.text.length-1 ];
     
-        DLog(@"cell title last character is %@",cellTitleLastCharacter);
+        
      
         if ([cell isKindOfClass:[SCObjectSelectionCell class]]&&[cellTitleLastCharacter isEqualToString:@"*" ]) {
             SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
             
-            DLog(@"selected item index is %@",objectSelectionCell.selectedItemIndex);
+            
             if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
                 valid=YES;
             }else {
@@ -3023,7 +3028,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     if (tableViewModel.tag==1) 
     {
         SCSelectionCell *cell=(SCSelectionCell *)[tableViewModel.modeledTableView cellForRowAtIndexPath:indexPath];
-        //DLog(@"cell.tag %i",cell.tag);
+        
         if (cell.tag==0) {
             if ([cell isKindOfClass:[SCDateCell class]]){
                 serviceDateCell=(SCDateCell *)cell;
@@ -3038,7 +3043,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             
             
-            //DLog(@"cell is kind of class %@",[cell class]);
+            
             if ([cell isKindOfClass:[SCObjectCell class]]) 
             {
             
@@ -3090,7 +3095,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                             subytypeObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                             
                             [subytypeObjectSelectionCell reloadBoundValue];
-                            DLog(@"objectselection cell %@",subytypeObjectSelectionCell.items);
+                            
                             
                         }
 
@@ -3107,7 +3112,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
                 
             }}
-               DLog(@"cell managed obect entity name is %@",cellManagedObject.entity.name);
+               
             if ((currentControllerSetup==kTrackSupervisionReceivedSetup||currentControllerSetup==kTrackSupervisionGivenSetup)&& cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&([cellManagedObject.entity.name isEqualToString:@"SupervisionReceivedEntity"]||[cellManagedObject.entity.name isEqualToString:@"SupervisionGivenEntity"] )&& [cell isKindOfClass:[SCObjectSelectionCell class]]&& cell.tag==0) {
                 
                 SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
@@ -3137,7 +3142,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                                 subytypeObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                                 
                                 [subytypeObjectSelectionCell reloadBoundValue];
-                                DLog(@"objectselection cell %@",subytypeObjectSelectionCell.items);
+                                
                                 
                             }
                             
@@ -3169,7 +3174,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     
     if (tableViewModel.tag==2) {
-        //DLog(@"value changed for row at index path");
+        
         currentDetailTableViewModel=tableViewModel;
 
         SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
@@ -3354,12 +3359,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     EKEvent *thisEvent;
     
     
-    //DLog(@"add event sender is %@",[sender superclass]);
+    
     if ([[sender class] isSubclassOfClass:[UIButton class]]) 
     {
         UIButton *button=(UIButton *)sender;
         UIView *buttonView=(UIView *)button.superview;
-        //DLog(@"button superview is %@",buttonView.superview);
+        
         
         if ([buttonView.superview isKindOfClass:[ButtonCell class]]) 
         {
@@ -3368,7 +3373,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             NSManagedObject *buttonManagedObject=(NSManagedObject *)buttonCell.boundObject;
             NSString *eventIdentifier=(NSString *)[buttonManagedObject valueForKey:@"eventIdentifier"];
-            //DLog(@"event identifier in add event %@",eventIdentifier);
+            
             if (eventIdentifier.length  &&[self.eventStore eventWithIdentifier:eventIdentifier]) {
                 if (!eventViewController) {
                     
@@ -3405,7 +3410,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 else {
                     [thisEvent setCalendar:self.psyTrackCalendar];
                 }
-                //DLog(@"add new event calander %@",self.psyTrackCalendar);
+                
                 
                 [buttonCell commitDetailModelChanges:currentDetailTableViewModel];
                 
@@ -3413,14 +3418,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
                 NSManagedObject *buttonCellManagedObject=(NSManagedObject *)buttonCell.boundObject;
                 
-                //DLog(@"button cell managed object is %@",buttonCellManagedObject);
+                
                 
                 TimeEntity *timeEntity=(TimeEntity *)[buttonCellManagedObject valueForKey:@"time"];
                 
                 NSDate *testDate=(NSDate *)[buttonCellManagedObject valueForKey:@"dateOfService"];
                 
                 NSDate *calanderStartTime=(NSDate *)[timeEntity valueForKey:@"startTime"];
-                //DLog(@"time entity is %@",timeEntity);
+                
                 
                 NSDate *calanderEndTime=(NSDate *)[timeEntity valueForKey:@"endTime"];
                 
@@ -3448,20 +3453,20 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 if (calanderStartTime && testDate) {
                     NSString *startDateString=[NSString stringWithFormat:@"%@ %@",[dateFormatterTime stringFromDate:startTime],[dateFormatterDate stringFromDate:testDate]];
                     
-                    //DLog(@"startDateString is %@",startDateString);
+                    
                     
                     startTime=[dateFormatterCombined dateFromString:startDateString];
-                    //DLog(@"startTime is %@",startTime);
+                    
                 }
                 
                 if (calanderEndTime && testDate) {
                     NSString *endDateString=[NSString stringWithFormat:@"%@ %@",[dateFormatterTime stringFromDate:endTime],[dateFormatterDate stringFromDate:testDate]];
                     
-                    //DLog(@"startDateString is %@",endDateString);
+                    
                     
                     endTime=[dateFormatterCombined dateFromString:endDateString];
                     
-                    //DLog(@"end time is %@", endTime);
+                    
                 }
                 
                 if (calanderStartTime&&calanderEndTime) {
@@ -3524,7 +3529,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                             
                             SCTableViewSection *section=[tableModel sectionAtIndex:1]; 
                             
-                            DLog(@"section class is %@",section.class);
+                            
                             if ([section isKindOfClass:[SCObjectSection class]]) {
                                 SCObjectSection *objectSection=(SCObjectSection *)section;
                                 
@@ -3545,7 +3550,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                         {
                             SCTableViewSection *section=[tableModel sectionAtIndex:2]; 
                             
-                            DLog(@"section class is %@",section.class);
+                            
                             if ([section isKindOfClass:[SCObjectSection class]]) {
                                 SCObjectSection *objectSection=(SCObjectSection *)section;
                                 
@@ -3596,7 +3601,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
                
                                
-                DLog(@"event title string is %@",eventTitleString);
+                
                 if ( [eventTitleString length] > 0)
                    
                 
@@ -3605,7 +3610,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 UIViewController *currentTableModelViewController=(UIViewController *)currentDetailTableViewModel.viewController;
                 
                 NSString *calenderLocation=[[NSUserDefaults standardUserDefaults] valueForKey:@"calander_location"];
-                //DLog(@"calander location is %@",calenderLocation);
+                
                 [thisEvent setLocation:calenderLocation];
                 
                 addController.editViewDelegate = self;
@@ -3615,7 +3620,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 //                
                 //                UITabBarController *tabBarController=[appDelegate tabBarController];
                 
-                DLog(@"curretnt tableviewmodel tag is %i",currentDetailTableViewModel.tag);
+                
 //                currentTableModelViewController.navigationController.delegate=self;
             
                 [currentTableModelViewController.navigationController presentModalViewController:addController animated:YES];
@@ -3659,33 +3664,33 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 			// If the new event is being added to the default calendar, then update its 
 			// eventsList.
 			
-            //DLog(@"self psyTrack calendar %@",self.psyTrackCalendar);
-            //DLog(@"even calander is %@",thisEvent.calendar);
+            
+            
             
             if (self.psyTrackCalendar ==  thisEvent.calendar) {
 				[self.eventsList addObject:thisEvent];
 			}
 			[controller.eventStore saveEvent:controller.event span:EKSpanThisEvent error:&error];
 			
-            //DLog(@"section count is %i",currentDetailTableViewModel.sectionCount);
             
-            //DLog(@"cell bound object in save event is %@",cell.boundObject);
+            
+            
             
             [cell.boundObject setValue:[controller.event eventIdentifier] forKey:@"eventIdentifier"];
-            DLog(@"cell bound object is %@",cell.boundObject);
+            
             [cell commitChanges];
             [cell reloadBoundValue];
-            DLog(@"cell tag is %i",cell.tag);
-            DLog(@"cell is %@",cell.class);
+            
+            
             if ([cell isKindOfClass:[ButtonCell class]]) {
                 ButtonCell *buttonCell=(ButtonCell *)cell;
                 UIButton *button=(UIButton *)buttonCell.button;
                 
                 [button setTitle:@"Edit Calendar Event" forState:UIControlStateNormal];
-                //DLog(@"cell identifier after reset button is %@",[cell.boundObject valueForKey:@"eventIdentifier"]);
+                
             }
             
-            //DLog(@"event identifier controller .event.event identi %@", [cell.boundObject valueForKey:@"eventIdentifier"]);
+            
             
             
         }
@@ -3698,8 +3703,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 			// If deleting an event from the currenly default calendar, then update its 
 			// eventsList.
 			
-            //DLog(@"self psyTrack calendar %@",self.psyTrackCalendar);
-            //DLog(@"even calander is %@",thisEvent.calendar);
+            
+            
             
             if (self.psyTrackCalendar ==  thisEvent.calendar) {
 				[self.eventsList removeObject:thisEvent];
@@ -3715,7 +3720,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 UIButton *button=(UIButton *)buttonCell.button;
                 
                 [button setTitle:@"Add Event To Calendar" forState:UIControlStateNormal];
-                //DLog(@"cell identifier after reset button is %@",[cell.boundObject valueForKey:@"eventIdentifier"]);
+                
             }
 			break;
 			
@@ -3752,7 +3757,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             if ([source.title isEqualToString: @"iCloud"])
             {
                 mySource = source;
-                //                //DLog(@"cloud source type is %@",source.sourceType);
+                //                
                 
                 break;
             }
@@ -3814,16 +3819,16 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     
     
-    //DLog(@"cal id = %@", self.psyTrackCalendar.calendarIdentifier);
+    
     
     NSError *error;
     
     if (![self.eventStore saveCalendar:self.psyTrackCalendar commit:YES error:&error ]) {
-        //DLog(@"something didn't go right");
+        
     }
     else
     {
-        //DLog(@"saved calendar");
+        
         [[NSUserDefaults standardUserDefaults]setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
         //                 NSSet *calendars=(NSSet *)[localSource calendars];
         //                    for(id obj in calendars) { 
@@ -3850,7 +3855,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     
     if (self.psyTrackCalendar) {
-        //DLog(@"self %@",self.psyTrackCalendar);
+        
     }
     
     
@@ -3877,7 +3882,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(void)calculateTime
 {
     
-    DLog(@"current detailtable view model %i",currentDetailTableViewModel.tag);
+    
     if (currentDetailTableViewModel.sectionCount) {
    
     SCTableViewSection *section=[currentDetailTableViewModel sectionAtIndex:0];
@@ -3922,7 +3927,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         startTime=[dateFormatClearSeconds dateFromString:[dateFormatter stringFromDate:startTime]];
         endTime=[dateFormatClearSeconds dateFromString:[dateFormatter stringFromDate:endTime]];
-        //DLog(@"start time %@ end time %@ additioanl time %@ time to subtract %@",startTime,endTime,additionalTime,timeToSubtract);
+        
         
         
     }
@@ -4227,7 +4232,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         //cut off miliseconds
         
         totalTimeString=[NSString stringWithFormat:@"%f",totalBreakTimeInterval];
-        //DLog(@"totoal time string is %@", totalTimeString);
+        
         
         NSRange range;
         range.length=6;
@@ -4247,7 +4252,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         }
     
     
-    DLog(@"total break time interval is %f",totalBreakTimeInterval);
+    
     return totalBreakTimeInterval;
     
 }  
@@ -4264,7 +4269,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     NSDate *timeFromReferenceTime=[referenceDate dateByAddingTimeInterval:totalBreakTimeInterval];
     
     
-    DLog(@"total break time %@",[counterDateFormatter stringFromDate:timeFromReferenceTime]);
+    
     return [NSString stringWithFormat:@"Total Break Time: %@",[counterDateFormatter stringFromDate:timeFromReferenceTime]];
     
     
@@ -4404,14 +4409,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(void)tableViewModel:(SCTableViewModel *)tableModel itemAddedForSectionAtIndexPath:(NSIndexPath *)indexPath item:(NSObject *)item{
 
     currentDetailTableViewModel=tableModel;
-    DLog(@"current table view model tag is %i",currentDetailTableViewModel.tag);
+    
     if(tableModel.tag==2 &&indexPath.section)
     {
         [self calculateTime];
         SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:1];
         UILabel *breakSectionHeaderLabel=(UILabel *)[section.headerView viewWithTag:60];
        
-        DLog(@"break time string is %@",[self totalBreakTimeString]);
+        
         breakSectionHeaderLabel.text=[self totalBreakTimeString];
         
     }
@@ -4427,13 +4432,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     [self tableViewModel:(SCTableViewModel *)tableModel itemAddedForSectionAtIndexPath:indexPath item:(NSObject *)item];
         
     }
-    //DLog(@"value changed for row at index path");
+    
     currentDetailTableViewModel=tableModel;
     
     if (tableModel.tag==1) 
     {
         SCSelectionCell *cell=(SCSelectionCell *)[tableModel.modeledTableView cellForRowAtIndexPath:indexPath];
-        //DLog(@"cell.tag %i",cell.tag);
+        
         if (cell.tag==0) {
             if ([cell isKindOfClass:[SCDateCell class]]){
                 serviceDateCell=(SCDateCell *)cell;
@@ -4448,7 +4453,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             
             
-            //DLog(@"cell is kind of class %@",[cell class]);
+            
             if ([cell isKindOfClass:[SCObjectCell class]]) 
             {
                 
@@ -4570,10 +4575,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             ClientsSelectionCell *clientObjectsSelectionCell=(ClientsSelectionCell *)clientCell;
             if (clientObjectsSelectionCell.clientObject) {
                 
-                //DLog(@"client objects selection cell %@",[clientObjectsSelectionCell.clientObject valueForKey:@"dateOfBirth"]);
+                
                 
                 //        NSArray *array=[[NSArray alloc]init];
-                //DLog(@"cleint object %@",clientObjectsSelectionCell.clientObject);
+                
                 //        int itemsCount=clientObjectsSelectionCell.items.count;
                 //        if (itemsCount>=0&&clientObjectsSelectionCell.clientObject) {
                 ////            clientDateOfBirth=(NSDate *)[(NSArray *)[clientObjectsSelectionCell.items valueForKey:@"dateOfBirth"]lastObject];
@@ -4596,14 +4601,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             
             
-            //DLog(@"client date of birth is %@",clientDateOfBirth);
+            
         }
-        //DLog(@"client cell class is  %@", [clientCell class]);
         
         
-        //    //DLog(@"client cell bound object %@",[clientManagedObject valueForKey:@"client.dateOfBirth"]);
-        //   //DLog(@"client date of birth is %@", [clientCell.boundObject valueForKey:@"dateOfBirth"]);
-        //DLog(@"master model is %@",self.serviceDatePickerDate);
+        
+        //    
+        //   
+        
         
         if (serviceDateCell.datePicker.date && clientDateOfBirth) {
             wechslerAgeCell.label.text=(NSString *)[clientsViewController_Shared calculateWechslerAgeWithBirthdate:(NSDate *)clientDateOfBirth toDate:(NSDate *)serviceDateCell.datePicker.date];

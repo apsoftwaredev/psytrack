@@ -101,7 +101,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 //        int firstCharacter=[uuid characterAtIndex:0];
 //        int fifthCharacter=[uuid characterAtIndex:4];
 //        
-//        //DLog(@"first character is %i fifth Character is %i",firstCharacter, fifthCharacter);
+//        
 //        
 //        NSString *firstNumberString=[NSString stringWithFormat:@"%i",firstCharacter]; 
 //        NSString *secondNumberString=[NSString stringWithFormat:@"%i",fifthCharacter]; 
@@ -113,7 +113,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 //        if (firstNumberString.length) {
 //            subStringOne=[firstNumberString substringFromIndex:firstNumberString.length-1];
 //            subIntOne=(int)[(NSString *)subStringOne intValue];
-//            //DLog(@"subint one is %i",subIntOne);
+//            
 //        
 //        }
 //        if (subStringTwo.length) {
@@ -122,7 +122,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 //            subStringTwo=[secondNumberString substringFromIndex:secondNumberString.length-1];
 //            subIntTwo=(int)[(NSString *)subStringTwo intValue];
 //            
-//            //DLog(@"subint two is %i",subIntTwo);
+//            
 //            
 //        }
 //        
@@ -169,7 +169,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 //    
 //    NSDate *referenceDate=[dateFormatter dateFromString:@"06/06/2006"];
 //    
-//    //DLog(@"reference date is %@",[dateFormatter stringFromDate:referenceDate]);
+//    
 //    
 //    //define a gregorian calandar
 //    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -193,16 +193,16 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 //    
 //    
 //    
-//    //DLog(@"days is %i",PTTUnlockSeed+day+day%7);
+//    
 //    NSString *leftString=(NSString *)[NSString stringWithFormat:@"%i",PTTUnlockSeed+day+thirdNumber+2%7];
 //    NSString *middleRString=(NSString *)[NSString stringWithFormat:@"%i",PTTUnlockSeed+ninethNumber+day%6];
-//    //DLog(@"left string %@",leftString);
-//    //DLog(@"left string %i",leftString.length);
+//    
+//    
 //    NSString *middleLString=(NSString *)[NSString stringWithFormat:@"%i",PTTUnlockSeed+fifthNumber+day%3+2];
 //    NSString *rightString=(NSString *)[NSString stringWithFormat:@"%i",PTTUnlockSeed+day+seventhNumber+day/9] ;
 //    
 //    
-//    //DLog(@"right string is %@",rightString);
+//    
 //    NSString *shortLeftStr, *shortRightStr, *shortMiddleRStr, *shortMiddleLStr;
 //    
 //    
@@ -210,7 +210,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 //    shortRightStr = [rightString substringFromIndex:[rightString length]-1];
 //    shortMiddleLStr = [middleLString substringFromIndex:[middleLString length]-1];
 //    shortMiddleRStr = [middleRString substringFromIndex:[middleRString length]-1];
-//    //DLog(@"new string is %@",[[(NSString *) [shortLeftStr stringByAppendingString:shortRightStr]stringByAppendingString:shortMiddleLStr]stringByAppendingString:shortMiddleRStr]);
+//    
 //    
 //    //just a pseudorandom string that can be generated based on date and the seed and text message number.  I can send a text message to the number to reset
 //    
@@ -219,14 +219,14 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 //    
 //    
 //    
-//    //DLog(@"alternate string%@",alternateString);
+//    
 //    //    NSRange range;
 //    //        range.length = 3;
 //    //    range.location=alternateUnlockString.length-2;
 //    //    
 //    
 //    
-//    //DLog(@"alternate unlok string %@",alternateString);
+//    
 //        
 //    }
 //    }
@@ -240,7 +240,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 - (BOOL) authenticatePassCode: (NSString *) userInput;
 {
 	BOOL result = NO;
-	////DLog(@"userInput: %@", userInput);
+	//
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
          BOOL ableToSave=NO;
@@ -308,7 +308,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
        
         
         userAttempts++;
-        //DLog(@"user attempts %i",userAttempts);
+        
         
        
         //2
@@ -444,11 +444,11 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
     
    
     isTimerOn_=FALSE;
-   //DLog(@"timer is %i",isTimerOn_);
+   
     
    
     isTimerOn_=(BOOL)[appSettings isLockedTimerOn];
-  //DLog(@"timer is %i",isTimerOn_);
+  
        
     
     

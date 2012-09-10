@@ -154,7 +154,7 @@
     objectsModel.allowAddingItems=YES;
     objectsModel.allowDeletingItems=YES;
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
-    DLog(@"self.navigationItem.rightBarButtonItems are %@",self.buttonsToolbar.items);
+    
     
     objectsModel.editButtonItem = self.editButton;;
     
@@ -602,7 +602,7 @@
 - (void)dismissReaderViewController:(ReaderViewController *)viewController
 {
 #ifdef DEBUGX
-	DLog(@"%s", __FUNCTION__);
+	
 #endif
     
 #if (DEMO_VIEW_CONTROLLER_PUSH == TRUE)
@@ -1099,7 +1099,7 @@ if (fetchedObjects == nil) {
         existingHoursNewestDate=existingHoursLastObject.endDate;
         
     }
-    DLog(@"existing hours newe %@first %@  track %@",existingHoursNewestDate,existingHoursFirstDate,trackFirstDateOfService);
+    
     NSDate *returnDate=nil;
     if (trackFirstDateOfService &&((trackFirstDateOfService && !existingHoursFirstDate)||([trackFirstDateOfService compare:existingHoursFirstDate]==NSOrderedSame)||([trackFirstDateOfService compare:existingHoursFirstDate]==NSOrderedAscending))) {
         
