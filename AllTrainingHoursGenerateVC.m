@@ -21,7 +21,7 @@
 @implementation AllTrainingHoursGenerateVC
 @synthesize pdfFileNameTextField,pdfPasswordTextField,generateButton;
 @synthesize containerView;
-
+@synthesize doctorateLevelSegCtrl;
 
 - (void)viewDidLoad
 {
@@ -83,7 +83,8 @@
             phrase=nil;
         }
         
-        [PDFRenderer drawAllHoursReportPDF:(NSString*)fileName  password:(NSString *) phrase ];
+    
+        [PDFRenderer drawAllHoursReportPDF:(NSString*)fileName  password:(NSString *) phrase doctorateLevel:[self doctorateLevelSegmentedControlValue]];
         
         NSString *filePath = pdfs  ;// Path to last PDF file
         
@@ -215,7 +216,20 @@
     return scrubbed;
     
 }
+-(BOOL)doctorateLevelSegmentedControlValue{
 
+    if (self.doctorateLevelSegCtrl.selectedSegmentIndex==1){
+    
+        return YES;
+    
+    }
+    else
+    {
+        return NO;
+    }
+
+
+}
 -(BOOL)fileAlreadyExists:(NSString *)fileNameGiven{
     
     

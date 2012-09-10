@@ -33,8 +33,34 @@ existingHoursHoursArray=existingHoursArray_;
 @synthesize week4EndDate=week4EndDate_;
 @synthesize week5StartDate=week5StartDate_;
 @synthesize week5EndDate=week5EndDate_;
+@synthesize doctorateLevel=doctorateLevel_;
 
 
+-(id)initWithDoctorateLevel:(BOOL)doctorateLevelGiven clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven{
+
+    self= [super init];
+    
+    if (self) {
+        
+        self.clinician=clinician;
+        self.trainingProgram=trainingProgramGiven;
+        
+        self.doctorateLevel=doctorateLevelGiven;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    return self;
+
+
+}
 -(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven {
     
     self= [super init];
@@ -144,6 +170,9 @@ existingHoursHoursArray=existingHoursArray_;
     NSRange range = [calendar rangeOfUnit:NSDayCalendarUnit
                                    inUnit:NSMonthCalendarUnit
                                   forDate:date];
+    endDateComponents.hour=23;
+    endDateComponents.minute=59;
+    endDateComponents.second=59;
     
     [endDateComponents setDay:range.length];
     NSDate *endDate = [calendar dateFromComponents:endDateComponents];
@@ -167,8 +196,9 @@ existingHoursHoursArray=existingHoursArray_;
     startDateComponents.second=0;
     NSDateComponents *week2StartDateComponents=[[NSDateComponents alloc]init];
     week2StartDateComponents.week=week;
-    week2StartDateComponents.hour=0;
-    week2StartDateComponents.minute=0;
+    week2StartDateComponents.hour=23;
+    week2StartDateComponents.minute=59;
+    week2StartDateComponents.second=59;
     week2StartDateComponents.month=0;
     week2StartDateComponents.year=0;
     
@@ -207,14 +237,17 @@ existingHoursHoursArray=existingHoursArray_;
     startDateComponents.second=0;
     NSDateComponents *week2StartDateComponents=[[NSDateComponents alloc]init];
     week2StartDateComponents.week=week;
-    week2StartDateComponents.hour=0;
-    week2StartDateComponents.minute=0;
+    week2StartDateComponents.hour=23;
+    week2StartDateComponents.minute=59;
+    week2StartDateComponents.second=59;
     week2StartDateComponents.month=0;
     week2StartDateComponents.year=0;
     
    
     
     //create a date with these components
+   
+    
     NSRange rangeWeek = [calendar rangeOfUnit:NSDayCalendarUnit
                                        inUnit:NSWeekCalendarUnit
                                       forDate:[calendar dateByAddingComponents:week2StartDateComponents toDate:[calendar dateFromComponents:startDateComponents] options:0]];
@@ -226,9 +259,20 @@ existingHoursHoursArray=existingHoursArray_;
     
     [endDateComponents setDay:rangeWeek.location+rangeWeek.length];
    
+     NSDate *endDate = nil;
+    if (week==kTrackWeekFive) {
+        
+        endDate=[self monthEndDate:self.monthToDisplay];
+        DLog(@"month end date is  %@",endDate);
+        
+    }
+    else{
     
+       
+    endDate= [calendar dateFromComponents:endDateComponents];
+    }
    
-    NSDate *endDate = [calendar dateFromComponents:endDateComponents];
+   
     
     
     return endDate;
@@ -553,6 +597,32 @@ existingHoursHoursArray=existingHoursArray_;
 }
 
 
+-(NSPredicate *)predicateForExistingHoursDoctorateLevel{
+    
+    NSPredicate *doctorateLevelPredicate=nil;
+    
+    
+    doctorateLevelPredicate = [NSPredicate predicateWithFormat:@"programCourse.doctorateLevel == %@", [NSNumber numberWithBool:doctorateLevel_]];
+    
+    DLog(@"doctorate level is  %i",doctorateLevel_);
+    
+    return doctorateLevelPredicate;
+    
+}
+
+-(NSPredicate *)predicateForTrackDoctorateLevel{
+    
+    NSPredicate *doctorateLevelPredicate=nil;
+    
+    
+    doctorateLevelPredicate = [NSPredicate predicateWithFormat:@"trainingProgram.doctorateLevel == %@", [NSNumber numberWithBool:doctorateLevel_]];
+    
+    
+    DLog(@"doctorate level is  %i",doctorateLevel_);
+    
+    return doctorateLevelPredicate;
+    
+}
 
 
 -(NSPredicate *)predicateForTrackWeek:(PTrackWeek)week{

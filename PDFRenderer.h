@@ -19,7 +19,7 @@
 
 
 
-+(void)drawAllHoursReportPDF:(NSString*)fileName  password:(NSString *) filePassword;
++(void)drawAllHoursReportPDF:(NSString*)fileName  password:(NSString *) filePassword doctorateLevel:(BOOL)doctorateLevelSelected;
 
 +(void)drawText;
 

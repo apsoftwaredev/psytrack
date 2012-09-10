@@ -78,5 +78,5 @@ typedef enum {
 
 -(void ) totalOverallHoursTIForOveralCell:(PTSummaryCell)summaryCell clinician:(ClinicianEntity *)clinician;
 
-
+-(id)initWithDoctorateLevel:(BOOL)doctoarateLevelSelected clinician:(ClinicianEntity *)supervisor trackTypeObject:(id)trackTypeObjectGiven;
 @end

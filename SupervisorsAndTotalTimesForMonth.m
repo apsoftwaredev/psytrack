@@ -184,6 +184,86 @@
 
 @synthesize practicumSeminarInstructtor, schoolNameStr, monthAndYearsInParentheses;
 @synthesize markAmended;
+@synthesize trainingProgramsStr;
+
+@synthesize numberOfProgramCourses;
+-(id)initWithDoctorateLevel:(BOOL)doctoarateLevelSelected clinician:(ClinicianEntity *)supervisor{
+    //override superclass
+   self= [super initWithMonth:nil clinician:supervisor trainingProgram:nil];
+    
+    if (self) {
+        
+        self.doctorateLevel=doctoarateLevelSelected;
+        NSPredicate *predicateForTrackDoctorateLevel=[self predicateForTrackDoctorateLevel];
+        
+        NSPredicate *predicateForExistingHoursDoctorateLevel=[self predicateForExistingHoursDoctorateLevel];
+        
+        self.interventionsDeliveredArray=[self fetchObjectsFromEntity:kTrackInterventionEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+        
+       self.assessmentsDeliveredArray=[self fetchObjectsFromEntity:kTrackAssessmentEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+        
+       self.supportActivityDeliveredArray=[self fetchObjectsFromEntity:kTrackSupportEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+        
+        self.supervisionReceivedArray=[self fetchObjectsFromEntity:kTrackSupervisionReceivedEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+        
+        self.existingHoursHoursArray=[self fetchObjectsFromEntity:kTrackExistingHoursEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"programCourse" ]];
+                                              
+        self.interventionsDeliveredArray=[self.interventionsDeliveredArray filteredArrayUsingPredicate:predicateForTrackDoctorateLevel];
+        
+        
+         DLog(@"assessment delivered array %@ %i",[self.assessmentsDeliveredArray valueForKeyPath:@"trainingProgram.doctorateLevel"],doctorateLevel_);
+        
+        
+        self.assessmentsDeliveredArray=[self.assessmentsDeliveredArray filteredArrayUsingPredicate:predicateForTrackDoctorateLevel];
+        
+        DLog(@"assessment delivered array %@",self.assessmentsDeliveredArray);
+        
+        self.supportActivityDeliveredArray=[self.supportActivityDeliveredArray filteredArrayUsingPredicate:predicateForTrackDoctorateLevel];
+        
+        self.supervisionReceivedArray=[self.supervisionReceivedArray filteredArrayUsingPredicate:predicateForTrackDoctorateLevel];
+        
+        self.existingHoursHoursArray=[self.existingHoursHoursArray filteredArrayUsingPredicate:predicateForExistingHoursDoctorateLevel];
+        
+        
+        if(clinician_){
+            
+            
+            NSPredicate *clinicianFilter=[self predicateForClincian];
+            self.interventionsDeliveredArray=[self.interventionsDeliveredArray filteredArrayUsingPredicate:clinicianFilter];
+            self.assessmentsDeliveredArray=[self.assessmentsDeliveredArray filteredArrayUsingPredicate:clinicianFilter];
+            
+            self.supportActivityDeliveredArray=[self.supportActivityDeliveredArray filteredArrayUsingPredicate:clinicianFilter];
+            
+            self.supervisionReceivedArray=[self.supervisionReceivedArray filteredArrayUsingPredicate:clinicianFilter];
+            
+            self.existingHoursHoursArray=[self.existingHoursHoursArray filteredArrayUsingPredicate:clinicianFilter];
+            
+            
+            
+        }
+        
+        self.overallTotalToDateTI=[self totalOverallHoursTIForOveralCell:kSummaryTotalToDate clinician:nil];
+        
+        
+        self.assessmentMonthlyNotes=[self monthlyLogNotesForMonth:kTrackAssessment];
+        self.supportMonthlyNotes=[self monthlyLogNotesForMonth:kTrackSupport];
+
+        self.directTotalToDateTI=self.interventionTotalToDateTI+self.assessmentTotalToDateTI;
+        
+        
+       
+        self.directTotalToDateStr=[self timeStrFromTimeInterval: self.directTotalToDateTI];
+        
+        self.studentNameStr=[self getStudentName];
+        self.clinicians=[self supervisorsArray];
+        DLog(@"self.clinicians is  %@",self.clinicians);
+        self.cliniciansStr=[self cliniciansStrFromCliniciansArray:self.clinicians];
+        self.trainingProgramsStr=[self setTrainingProgramString];
+}
+
+    return self;
+
+}
 
 -(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven markAmended:(BOOL)markAmendedGiven{
     //override superclass
@@ -324,6 +404,47 @@
 
 }
 
+-(NSString *)setTrainingProgramString{
+    
+    NSSet *trainingProgramSet=[self.interventionsDeliveredArray valueForKey:@"trainingProgram"];
+    NSSet *programCourseSet=[self.existingHoursHoursArray valueForKey:@"programCourse"];
+
+    NSMutableSet *combinedSet=[NSMutableSet set];
+    if (trainingProgramSet && programCourseSet &&programCourseSet.count&& trainingProgramSet.count) {
+        [combinedSet addObjectsFromArray:programCourseSet.allObjects];
+        [combinedSet addObjectsFromArray:trainingProgramSet.allObjects];
+    }
+    else if(programCourseSet&& (!trainingProgramSet||!trainingProgramSet.count)){
+    
+        [combinedSet addObjectsFromArray:programCourseSet.allObjects];
+    
+    
+    }else if ((!programCourseSet ||!programCourseSet.count)&&trainingProgramSet&&trainingProgramSet.count){
+    
+        [combinedSet addObjectsFromArray:trainingProgramSet.allObjects];
+    
+    }
+    
+    self.numberOfProgramCourses=combinedSet.count;
+    NSString *returnString=nil;
+    for (TrainingProgramEntity *trainingProgram in combinedSet.allObjects) {
+        
+        if (!returnString||!returnString.length) {
+            returnString=[NSString stringWithFormat:@"%@ - %@",trainingProgram.trainingProgram ,trainingProgram.course];
+        }
+        else {
+            returnString=[returnString stringByAppendingFormat:@"; %@ - %@",trainingProgram.trainingProgram,trainingProgram.course];
+        }
+        
+    }
+    
+    return  returnString;
+    
+    
+}
+
+
+
 -(NSString *)cliniciansStrFromCliniciansArray:(NSArray*)cliniciansArray{
 
     NSString *returnString=nil;
@@ -392,13 +513,21 @@
 
 }
 -(NSSet *)cliniciansFromTrackArray:(NSArray *)trackArray{
-
-       NSPredicate *predicateForTrackEntitiesForMonth=[self predicateForTrackCurrentMonth];
+    NSPredicate *predicateForTrackEntitiesForMonth=nil;
+    
+    if (monthToDisplay_) {
+         predicateForTrackEntitiesForMonth=[self predicateForTrackCurrentMonth];
+    }
+      
     
     NSArray *trackArrayForCurrentMonth=nil;
-    if (trackArray&& [trackArray isKindOfClass:[NSArray class]] &&  trackArray.count) {
+    if (trackArray&& [trackArray isKindOfClass:[NSArray class]] &&  trackArray.count &&predicateForTrackEntitiesForMonth) {
         trackArrayForCurrentMonth=[trackArray filteredArrayUsingPredicate:predicateForTrackEntitiesForMonth];
         
+    }
+    else{
+    
+        trackArrayForCurrentMonth=trackArray;
     }
     
     NSMutableSet *supervisorsSet=nil;
@@ -416,14 +545,24 @@
 
 -(NSSet *)cliniciansFromExistingHoursArray:(NSArray *)existingHoursArrayGiven{
     
-    
-    NSPredicate *predicateForExistingEntitiesForMonth=[self predicateForExistingHoursCurrentMonth];
+    NSPredicate *predicateForExistingEntitiesForMonth=nil;
+    if (monthToDisplay_) {
+        predicateForExistingEntitiesForMonth=[self predicateForExistingHoursCurrentMonth];
+    }
+ 
     
     NSArray *existingArrayForCurrentMonth=nil;
-    if (existingHoursArrayGiven&& [existingHoursArrayGiven isKindOfClass:[NSArray class]] &&  existingHoursArrayGiven.count) {
+    if (existingHoursArrayGiven&& [existingHoursArrayGiven isKindOfClass:[NSArray class]] &&  existingHoursArrayGiven.count &&predicateForExistingEntitiesForMonth) {
         existingArrayForCurrentMonth=[existingHoursArrayGiven filteredArrayUsingPredicate:predicateForExistingEntitiesForMonth];
         
     }
+    else{
+    
+        existingArrayForCurrentMonth=existingHoursArrayGiven;
+    }
+    
+    
+    
     NSMutableSet *supervisorsSet=nil;
     if (existingArrayForCurrentMonth &&existingArrayForCurrentMonth.count) {
         
@@ -439,7 +578,11 @@
 -(NSString *)practicumSitesStr{
 
     NSString *returnString=nil;
-    NSPredicate *predicateForCurrentMonth=[self predicateForTrackCurrentMonth];
+    NSPredicate *predicateForCurrentMonth=nil;
+    if (monthToDisplay_) {
+       predicateForCurrentMonth=[self predicateForTrackCurrentMonth];
+    }
+    
     
     NSArray *trackArray=[self fetchObjectsFromEntity:@"TimeTrackEntity" filterPredicate:predicateForCurrentMonth pathsForPrefetching:[NSArray arrayWithObject:@"site"]];
 
@@ -510,10 +653,18 @@
     if (filterPredicate) {
         [fetchRequest setPredicate:filterPredicate];
     }
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order"
-                                                                   ascending:YES];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    [fetchRequest setSortDescriptors:sortDescriptors];
+   
+  
+    if (![entityStr isEqualToString:@"ExistingHoursEntity"]) {
+       NSSortDescriptor *sortDescriptor = sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order"
+                                                                       ascending:YES];
+        
+        NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+        [fetchRequest setSortDescriptors:sortDescriptors];
+        
+    }
+   
+   
     
     NSError *error = nil;
     NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -552,7 +703,7 @@
     }
     
     if (clinicianSetFromSupport) {
-//        [mutableCombinedClinicians removeObjectsInArray:clinicianArrayFromSupport];
+
 
         [combinedCliniciansMutableSet addObjectsFromArray:clinicianSetFromSupport.allObjects];
     }

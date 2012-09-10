@@ -186,11 +186,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PDFRenderer.m"
-         timestampString = "368576104.820875"
+         timestampString = "368917802.060522"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "572"
-         endingLineNumber = "572"
+         startingLineNumber = "578"
+         endingLineNumber = "578"
          landmarkName = "+createPDFfromUIView:saveToDocumentsWithFileName:viewController:password:documentTitle:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -199,11 +199,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PDFRenderer.m"
-         timestampString = "368576104.820875"
+         timestampString = "368917802.060522"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "580"
-         endingLineNumber = "580"
+         startingLineNumber = "586"
+         endingLineNumber = "586"
          landmarkName = "+createPDFfromUIView:saveToDocumentsWithFileName:viewController:password:documentTitle:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -277,11 +277,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PDFRenderer.m"
-         timestampString = "368576104.820875"
+         timestampString = "368917802.060522"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "561"
-         endingLineNumber = "561"
+         startingLineNumber = "567"
+         endingLineNumber = "567"
          landmarkName = "+createPDFfromUIView:saveToDocumentsWithFileName:viewController:password:documentTitle:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -561,66 +561,66 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366492053.165238"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1318"
-         endingLineNumber = "1318">
+         startingLineNumber = "1469"
+         endingLineNumber = "1469">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366492053.165238"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1342"
-         endingLineNumber = "1342">
+         startingLineNumber = "1493"
+         endingLineNumber = "1493">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366492053.165238"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1306"
-         endingLineNumber = "1306">
+         startingLineNumber = "1457"
+         endingLineNumber = "1457">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366492053.165238"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1477"
-         endingLineNumber = "1477">
+         startingLineNumber = "1628"
+         endingLineNumber = "1628">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366492053.165238"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1372"
-         endingLineNumber = "1372">
+         startingLineNumber = "1523"
+         endingLineNumber = "1523">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalTimesForMonthlyLog.m"
-         timestampString = "368626944.497747"
+         timestampString = "368941505.500307"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "359"
-         endingLineNumber = "359"
+         startingLineNumber = "403"
+         endingLineNumber = "403"
          landmarkName = "-totalTimeIntervalForTrackArray:predicate:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -629,11 +629,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalTimesForMonthlyLog.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934076.085418"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "52"
-         endingLineNumber = "52"
+         startingLineNumber = "78"
+         endingLineNumber = "78"
          landmarkName = "-initWithMonth:clinician:trainingProgram:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -681,11 +681,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934713.7459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "204"
-         endingLineNumber = "204"
+         startingLineNumber = "678"
+         endingLineNumber = "678"
          landmarkName = "-initWithMonth:clinician:trackTypeObject:trainingProgram:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -694,11 +694,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalTimesForMonthlyLog.m"
-         timestampString = "368626944.497747"
+         timestampString = "368941505.500307"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "524"
-         endingLineNumber = "524"
+         startingLineNumber = "568"
+         endingLineNumber = "568"
          landmarkName = "-predicateForExistingHoursWeekUndefined"
          landmarkType = "5">
       </FileBreakpoint>
@@ -707,11 +707,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934713.7459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "632"
-         endingLineNumber = "632"
+         startingLineNumber = "1168"
+         endingLineNumber = "1168"
          landmarkName = "-totalOverallHoursTIForOveralCell:clinician:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -720,11 +720,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934713.7459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "642"
-         endingLineNumber = "642"
+         startingLineNumber = "1178"
+         endingLineNumber = "1178"
          landmarkName = "-totalOverallHoursTIForOveralCell:clinician:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -733,11 +733,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934713.7459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "592"
-         endingLineNumber = "592"
+         startingLineNumber = "1128"
+         endingLineNumber = "1128"
          landmarkName = "-totalOverallHoursTIForOveralCell:clinician:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -824,11 +824,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934713.7459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "246"
-         endingLineNumber = "246"
+         startingLineNumber = "731"
+         endingLineNumber = "731"
          landmarkName = "-initWithMonth:clinician:trackTypeObject:trainingProgram:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -837,11 +837,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934713.7459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "737"
-         endingLineNumber = "737"
+         startingLineNumber = "1273"
+         endingLineNumber = "1273"
          landmarkName = "-totalOverallHoursTIForOveralCell:clinician:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -850,11 +850,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934713.7459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "664"
-         endingLineNumber = "664"
+         startingLineNumber = "1200"
+         endingLineNumber = "1200"
          landmarkName = "-totalOverallHoursTIForOveralCell:clinician:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -863,11 +863,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934713.7459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "739"
-         endingLineNumber = "739"
+         startingLineNumber = "1275"
+         endingLineNumber = "1275"
          landmarkName = "-totalOverallHoursTIForOveralCell:clinician:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -876,11 +876,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934713.7459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "567"
-         endingLineNumber = "567"
+         startingLineNumber = "1103"
+         endingLineNumber = "1103"
          landmarkName = "-totalOverallHoursTIForOveralCell:clinician:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1015,11 +1015,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934713.7459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "598"
-         endingLineNumber = "598"
+         startingLineNumber = "1134"
+         endingLineNumber = "1134"
          landmarkName = "-totalOverallHoursTIForOveralCell:clinician:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1028,11 +1028,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934713.7459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "220"
-         endingLineNumber = "220"
+         startingLineNumber = "694"
+         endingLineNumber = "694"
          landmarkName = "-initWithMonth:clinician:trackTypeObject:trainingProgram:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1093,11 +1093,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366492053.165238"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1123"
-         endingLineNumber = "1123"
+         startingLineNumber = "1274"
+         endingLineNumber = "1274"
          landmarkName = "-monthlyLogNotesForMonth:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1106,11 +1106,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366492053.165238"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1153"
-         endingLineNumber = "1153"
+         startingLineNumber = "1304"
+         endingLineNumber = "1304"
          landmarkName = "-monthlyLogNotesForMonth:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1119,11 +1119,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366492053.165238"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1125"
-         endingLineNumber = "1125"
+         startingLineNumber = "1276"
+         endingLineNumber = "1276"
          landmarkName = "-monthlyLogNotesForMonth:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1132,11 +1132,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366492053.165238"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1130"
-         endingLineNumber = "1130"
+         startingLineNumber = "1281"
+         endingLineNumber = "1281"
          landmarkName = "-monthlyLogNotesForMonth:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1145,11 +1145,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366492053.165238"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1129"
-         endingLineNumber = "1129"
+         startingLineNumber = "1280"
+         endingLineNumber = "1280"
          landmarkName = "-monthlyLogNotesForMonth:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1158,11 +1158,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366492053.165238"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1132"
-         endingLineNumber = "1132"
+         startingLineNumber = "1283"
+         endingLineNumber = "1283"
          landmarkName = "-monthlyLogNotesForMonth:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1171,11 +1171,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366492053.165238"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1122"
-         endingLineNumber = "1122"
+         startingLineNumber = "1273"
+         endingLineNumber = "1273"
          landmarkName = "-monthlyLogNotesForMonth:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1223,11 +1223,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366490335.02553"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "342"
-         endingLineNumber = "342"
+         startingLineNumber = "463"
+         endingLineNumber = "463"
          landmarkName = "-cliniciansStrFromCliniciansArray:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1249,11 +1249,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366490335.02553"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "444"
-         endingLineNumber = "444"
+         startingLineNumber = "587"
+         endingLineNumber = "587"
          landmarkName = "-practicumSitesStr"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1262,11 +1262,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366490335.02553"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "448"
-         endingLineNumber = "448"
+         startingLineNumber = "591"
+         endingLineNumber = "591"
          landmarkName = "-practicumSitesStr"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1275,11 +1275,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366490335.02553"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "490"
-         endingLineNumber = "490"
+         startingLineNumber = "633"
+         endingLineNumber = "633"
          landmarkName = "-practicumSitesStr"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1431,11 +1431,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366492053.165238"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1015"
-         endingLineNumber = "1015"
+         startingLineNumber = "1166"
+         endingLineNumber = "1166"
          landmarkName = "-monthlyLogNotesForMonth:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1444,11 +1444,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934713.7459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "940"
-         endingLineNumber = "940"
+         startingLineNumber = "1476"
+         endingLineNumber = "1476"
          landmarkName = "-monthlyLogNotesForMonth"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1457,11 +1457,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934713.7459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1004"
-         endingLineNumber = "1004"
+         startingLineNumber = "1540"
+         endingLineNumber = "1540"
          landmarkName = "-monthlyLogNotesForMonth"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1470,11 +1470,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934713.7459"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "941"
-         endingLineNumber = "941"
+         startingLineNumber = "1477"
+         endingLineNumber = "1477"
          landmarkName = "-monthlyLogNotesForMonth"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1717,11 +1717,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalTimesForMonthlyLog.m"
-         timestampString = "368626944.497747"
+         timestampString = "368934076.085418"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "97"
-         endingLineNumber = "97"
+         startingLineNumber = "123"
+         endingLineNumber = "123"
          landmarkName = "-totalTimeIntervalForTotalTimeArray:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1769,11 +1769,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366490335.02553"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "545"
-         endingLineNumber = "545"
+         startingLineNumber = "696"
+         endingLineNumber = "696"
          landmarkName = "-supervisorsArray"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2523,11 +2523,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366490187.651312"
+         timestampString = "368936119.749976"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "254"
-         endingLineNumber = "254"
+         startingLineNumber = "334"
+         endingLineNumber = "334"
          landmarkName = "-initWithMonth:clinician:trainingProgram:markAmended:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2536,11 +2536,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366491654.946007"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "821"
-         endingLineNumber = "821"
+         startingLineNumber = "972"
+         endingLineNumber = "972"
          landmarkName = "-totalOverallHoursTIForOveralCell:clinician:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2549,11 +2549,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "SupervisorsAndTotalTimesForMonth.m"
-         timestampString = "366492032.411984"
+         timestampString = "368938973.06452"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "925"
-         endingLineNumber = "925"
+         startingLineNumber = "1076"
+         endingLineNumber = "1076"
          landmarkName = "-totalOverallHoursTIForOveralCell:clinician:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3270,6 +3270,396 @@
          startingLineNumber = "575"
          endingLineNumber = "575"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PDFRenderer.m"
+         timestampString = "368917802.060522"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "757"
+         endingLineNumber = "757"
+         landmarkName = "+createAllHoursReportPDFfromUIView:saveToDocumentsWithFileName:viewController:password:documentTitle:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PDFRenderer.m"
+         timestampString = "368917802.060522"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "695"
+         endingLineNumber = "695"
+         landmarkName = "+createAllHoursReportPDFfromUIView:saveToDocumentsWithFileName:viewController:password:documentTitle:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PDFRenderer.m"
+         timestampString = "368917802.060522"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "698"
+         endingLineNumber = "698"
+         landmarkName = "+createAllHoursReportPDFfromUIView:saveToDocumentsWithFileName:viewController:password:documentTitle:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SupervisorsAndTotalTimesForMonth.m"
+         timestampString = "368936119.749976"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "356"
+         endingLineNumber = "356"
+         landmarkName = "-initWithMonth:clinician:trainingProgram:markAmended:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PDFRenderer.m"
+         timestampString = "368916136.570475"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "92"
+         endingLineNumber = "92"
+         landmarkName = "+drawAllHoursReportPDF:password:doctorateLevel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "AllTrainingHoursVC.m"
+         timestampString = "368920656.170427"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "47"
+         endingLineNumber = "47"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "AllTrainingHoursVC.m"
+         timestampString = "368920656.170427"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "49"
+         endingLineNumber = "49"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PDFRenderer.m"
+         timestampString = "368917614.837143"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "88"
+         endingLineNumber = "88"
+         landmarkName = "+drawAllHoursReportPDF:password:doctorateLevel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "AllHoursReportTopCell.m"
+         timestampString = "368938141.475594"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "382"
+         endingLineNumber = "382"
+         landmarkName = "-loadBindingsIntoCustomControls"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "AllTrainingHoursVC.m"
+         timestampString = "368920656.170427"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "AllTrainingHoursVC.m"
+         timestampString = "368920656.170427"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "79"
+         endingLineNumber = "79"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "AllTrainingHoursVC.m"
+         timestampString = "368920656.170427"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "112"
+         endingLineNumber = "112"
+         landmarkName = "-scrollToNextSupervisorCell"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "AllHoursReportTopCell.m"
+         timestampString = "368938141.475594"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "262"
+         endingLineNumber = "262"
+         landmarkName = "-scrollToNextPage"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "AllHoursReportTopCell.m"
+         timestampString = "368938141.475594"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "267"
+         endingLineNumber = "267"
+         landmarkName = "-scrollToNextPage"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "AllHoursReportTopCell.m"
+         timestampString = "368938141.475594"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "721"
+         endingLineNumber = "721"
+         landmarkName = "-loadBindingsIntoCustomControls"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SupervisorsAndTotalTimesForMonth.m"
+         timestampString = "368936119.749976"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "260"
+         endingLineNumber = "260"
+         landmarkName = "-initWithDoctorateLevel:clinician:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TrackTypeWithTotalTimes.m"
+         timestampString = "368934713.7459"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "536"
+         endingLineNumber = "536"
+         landmarkName = "-initWithMonth:clinician:trackTypeObject:trainingProgram:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TrackTypeWithTotalTimes.m"
+         timestampString = "368934713.7459"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "714"
+         endingLineNumber = "714"
+         landmarkName = "-initWithMonth:clinician:trackTypeObject:trainingProgram:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TrackTypeWithTotalTimes.m"
+         timestampString = "368934713.7459"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "724"
+         endingLineNumber = "724"
+         landmarkName = "-initWithMonth:clinician:trackTypeObject:trainingProgram:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SupervisorsAndTotalTimesForMonth.m"
+         timestampString = "368936119.749976"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "221"
+         endingLineNumber = "221"
+         landmarkName = "-initWithDoctorateLevel:clinician:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SupervisorsAndTotalTimesForMonth.m"
+         timestampString = "368936119.749976"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "282"
+         endingLineNumber = "282"
+         landmarkName = "-initWithMonth:clinician:trainingProgram:markAmended:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SupervisorsAndTotalTimesForMonth.m"
+         timestampString = "368936119.749976"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "205"
+         endingLineNumber = "205"
+         landmarkName = "-initWithDoctorateLevel:clinician:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SupervisorsAndTotalTimesForMonth.m"
+         timestampString = "368936119.749976"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "210"
+         endingLineNumber = "210"
+         landmarkName = "-initWithDoctorateLevel:clinician:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SupervisorsAndTotalTimesForMonth.m"
+         timestampString = "368936119.749976"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "209"
+         endingLineNumber = "209"
+         landmarkName = "-initWithDoctorateLevel:clinician:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SupervisorsAndTotalTimesForMonth.m"
+         timestampString = "368936119.749976"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "217"
+         endingLineNumber = "217"
+         landmarkName = "-initWithDoctorateLevel:clinician:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TrackTypeWithTotalTimes.m"
+         timestampString = "368932553.097999"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "122"
+         endingLineNumber = "122"
+         landmarkName = "-initWithDoctorateLevel:clinician:trackTypeObject:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TotalTimesForMonthlyLog.m"
+         timestampString = "368941505.500307"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "623"
+         endingLineNumber = "623"
+         landmarkName = "-predicateForTrackDoctorateLevel"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TotalTimesForMonthlyLog.m"
+         timestampString = "368941505.500307"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "609"
+         endingLineNumber = "609"
+         landmarkName = "-predicateForExistingHoursDoctorateLevel"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SupervisorsAndTotalTimesForMonth.m"
+         timestampString = "368938973.06452"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "412"
+         endingLineNumber = "412"
+         landmarkName = "-setTrainingProgramString"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TotalTimesForMonthlyLog.m"
+         timestampString = "368941505.500307"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "267"
+         endingLineNumber = "267"
+         landmarkName = "-weekEndDate:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

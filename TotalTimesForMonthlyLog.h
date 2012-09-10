@@ -84,7 +84,7 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
     __weak NSDate *week5StartDate_;
     __weak NSDate *week5EndDate_;
     
-   
+    BOOL doctorateLevel_;
 
 
 
@@ -92,6 +92,7 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 
 }
 
+@property (nonatomic, assign)BOOL doctorateLevel;
 @property (nonatomic, weak) ClinicianEntity *clinician;
 
 @property (nonatomic, strong) TrainingProgramEntity *trainingProgram;
@@ -120,9 +121,13 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 @property (nonatomic, weak) NSArray *existingHoursHoursArray;
 
 
+
 -(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven;
 
+-(id)initWithDoctorateLevel:(BOOL)doctorateLevelGiven clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven;
 
+-(NSPredicate *)predicateForExistingHoursDoctorateLevel;
+-(NSPredicate *)predicateForTrackDoctorateLevel;
 -(NSTimeInterval )totalTimeIntervalForTotalTimeArray:(NSArray *)totalTimesArray;
 
 -(NSDate *)monthStartDateForDate:(NSDate *)date;

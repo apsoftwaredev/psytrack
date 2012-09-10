@@ -34,7 +34,7 @@
 
 @property (nonatomic, weak)IBOutlet UILabel *studentNameLabel;
 @property (nonatomic, weak)IBOutlet UILabel *programLabel;
-
+@property (nonatomic, weak) IBOutlet UILabel *programLabelBeforeColon;
 
 @property (nonatomic, weak)IBOutlet UILabel *supervisorLabelBeforeColon;
 

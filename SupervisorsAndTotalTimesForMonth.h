@@ -33,8 +33,8 @@
 
 
 
-
-
+@property (nonatomic, assign) NSInteger numberOfProgramCourses;
+@property (nonatomic, weak) NSString *trainingProgramsStr;
 @property (nonatomic, weak) NSArray *clinicians;
 @property (nonatomic, weak) NSString *cliniciansStr;
 @property (nonatomic, weak) NSString *practicumSiteNamesStr;
@@ -208,6 +208,9 @@
 
 
 -(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven markAmended:(BOOL)markAmendedGiven;
+
+-(id)initWithDoctorateLevel:(BOOL)doctoarateLevelSelected clinician:(ClinicianEntity *)supervisor;
+
 -(void ) calculateDirectlHours;
 
 -(NSTimeInterval ) totalOverallHoursTIForOveralCell:(PTSummaryCell)overallCell clinician:(ClinicianEntity *)clinician;

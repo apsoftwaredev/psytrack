@@ -69,7 +69,7 @@
 }
 
 
-+(void)drawAllHoursReportPDF:(NSString*)fileName  password:(NSString *) filePassword {
++(void)drawAllHoursReportPDF:(NSString*)fileName  password:(NSString *) filePassword doctorateLevel:(BOOL)doctorateLevelSelected {
     // Create the PDF context using the default page size of 612 x 792.
     //UIGraphicsBeginPDFContextToFile(fileName, CGRectZero, nil);
     //// Mark the beginning of a new page.
@@ -85,7 +85,7 @@
     
     
     
-    AllTrainingHoursVC *allTrainingHoursVC=[[AllTrainingHoursVC alloc]initWithNibName:(NSString *)@"AllTrainingHoursVC" bundle:(NSBundle *)[NSBundle mainBundle]];
+    AllTrainingHoursVC *allTrainingHoursVC=[[AllTrainingHoursVC alloc]initWithNibName:(NSString *)@"AllTrainingHoursVC" bundle:(NSBundle *)[NSBundle mainBundle] doctorateLevel:doctorateLevelSelected];
     
     
     [allTrainingHoursVC loadView];
@@ -93,9 +93,15 @@
     
     // Points the pdf converter to the mutable data object and to the UIView to be converted
     
+    NSString *documentTitle=nil;
+    if (doctorateLevelSelected) {
+       documentTitle=@"Doctorate Level Training Hours Report";
+    }
+    else{
     
+        documentTitle=@"Master's Level Training Hours Report";
+    }
     
-    NSString *documentTitle=@"Training Hours Report";
                              
     [self createAllHoursReportPDFfromUIView:allTrainingHoursVC.view saveToDocumentsWithFileName:fileName viewController:(AllTrainingHoursVC*)allTrainingHoursVC password:filePassword  documentTitle:(NSString *)documentTitle];
     
@@ -683,8 +689,13 @@
     // Creates a mutable data object for updating with binary data, like a byte array
     NSMutableData *pdfData = [NSMutableData data];
     
+    
+    
     NSString *studentName=allHoursReportVC.studentName;
-    NSMutableDictionary *auxiliaryInfoDic=auxiliaryInfoDic=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:documentTitle,@"PsyTrack Clinician Tools",studentName,@"Monthly Clinical Practicum Log",nil] forKeys:[NSArray arrayWithObjects:(__bridge NSString *) kCGPDFContextTitle,(__bridge NSString *)kCGPDFContextCreator,(__bridge NSString *)kCGPDFContextAuthor,(__bridge NSString *)kCGPDFContextSubject, nil]];
+    DLog(@"student name is %@ document title is %@ ", studentName, documentTitle);
+    
+    
+    NSMutableDictionary *auxiliaryInfoDic=auxiliaryInfoDic=[NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:documentTitle,@"PsyTrack Clinician Tools",studentName,documentTitle,nil] forKeys:[NSArray arrayWithObjects:(__bridge NSString *) kCGPDFContextTitle,(__bridge NSString *)kCGPDFContextCreator,(__bridge NSString *)kCGPDFContextAuthor,(__bridge NSString *)kCGPDFContextSubject, nil]];
     
     
     if (filePassword &&filePassword.length) {
@@ -702,22 +713,8 @@
     UIGraphicsBeginPDFContextToData(pdfData, aView.bounds,(NSDictionary *) auxiliaryInfoDic);
     
     
-    DLog(@"monthly practicum log modeledl top cell is  are %i",allHoursReportVC.tableViewModel.sectionCount);
-    SCArrayOfObjectsModel *objectsModel=(SCArrayOfObjectsModel *)allHoursReportVC.tableViewModel;
-    
-    if (objectsModel.sectionCount) {
-        SCArrayOfObjectsSection *objectsSection=(SCArrayOfObjectsSection *)[objectsModel sectionAtIndex:0];
-        int cellCount=objectsSection.cellCount;
-        if (cellCount) {
-            for (int i=0; i<cellCount; i++) {
-                
-                SCTableViewCell *cell=(SCTableViewCell *)[objectsSection cellAtIndex:i];
-                
-                
-                if ([cell isKindOfClass:[MonthlyPracticumLogTopCell class]]) {
-                    MonthlyPracticumLogTopCell *monthlyPracticumLogTopCell=(MonthlyPracticumLogTopCell *)cell;
-                    
-                    if (monthlyPracticumLogTopCell.subTablesContainerView.frame.size.height>monthlyPracticumLogTopCell.mainPageScrollView.frame.size.height) {
+   
+     
                         CGContextRef pdfContext;
                         
                         //
@@ -749,8 +746,7 @@
                             [aView.layer renderInContext:pdfContext];
                             
                             
-                            DLog(@"monthly clinical practicum log cell is %@",monthlyPracticumLogTopCell);
-                            
+                           
                             
                             
                             
@@ -758,7 +754,7 @@
                             
                             CGContextScaleCTM(pdfContext, 1.0, -1.0);
                             
-                            [[NSNotificationCenter defaultCenter]postNotificationName:@"ScrollMonthlyPracticumLogToNextPage" object:nil];
+                            [[NSNotificationCenter defaultCenter]postNotificationName:@"ScrollAllHoursVCToNextPage" object:nil];
                             
                             
                         } while (!appDelegate.stopScrollingMonthlyPracticumLog);
@@ -770,22 +766,7 @@
                         
                         
                         
-                    }
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                }
-            }
-            
-        }
-        
-    }
-    
-    
+                      
     
     
     
@@ -851,12 +832,7 @@
     
     
     
-    
-    // instructs the mutable data object to write its context to a file on disk
-    //    [pdfData writeToFile:documentDirectoryFilename atomically:YES];
-    DLog(@"documentDirectoryFileName: %@",documentDirectoryFilename);
 }
-
 
 
 +(void)drawLabels

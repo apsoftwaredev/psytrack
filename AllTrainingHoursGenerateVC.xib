@@ -48,7 +48,7 @@
 								<string key="NSFrame">{{160, 157}, {267, 31}}</string>
 								<reference key="NSSuperview" ref="708856202"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="375880193"/>
+								<reference key="NSNextKeyView" ref="342091591"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -177,7 +177,6 @@
 								<string key="NSFrame">{{33, 287}, {394, 37}}</string>
 								<reference key="NSSuperview" ref="708856202"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -232,19 +231,20 @@
 								<reference key="IBUIFontDescription" ref="172828522"/>
 								<reference key="IBUIFont" ref="604977492"/>
 							</object>
-							<object class="IBUISegmentedControl" id="669597524">
+							<object class="IBUISegmentedControl" id="342091591">
 								<reference key="NSNextResponder" ref="708856202"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{80, 221}, {301, 44}}</string>
 								<reference key="NSSuperview" ref="708856202"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="375880193"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBNumberOfSegments">2</int>
 								<int key="IBSelectedSegmentIndex">0</int>
 								<array key="IBSegmentTitles">
-									<string>Masters Level</string>
+									<string>Master's Level</string>
 									<string>Doctorate Level</string>
 								</array>
 								<array class="NSMutableArray" key="IBSegmentWidths">
@@ -329,6 +329,14 @@
 					<int key="connectionID">23</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">doctorateLevelSegCtrl</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="342091591"/>
+					</object>
+					<int key="connectionID">27</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">generateButtonTapped:</string>
 						<reference key="source" ref="375880193"/>
@@ -370,7 +378,7 @@
 						<reference key="object" ref="708856202"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="207884153"/>
-							<reference ref="669597524"/>
+							<reference ref="342091591"/>
 							<reference ref="375880193"/>
 							<reference ref="934509915"/>
 							<reference ref="553922109"/>
@@ -411,7 +419,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">26</int>
-						<reference key="object" ref="669597524"/>
+						<reference key="object" ref="342091591"/>
 						<reference key="parent" ref="708856202"/>
 					</object>
 				</array>
@@ -435,7 +443,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">26</int>
+			<int key="maxID">27</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -455,6 +463,7 @@
 					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="containerView">UIView</string>
+						<string key="doctorateLevelSegCtrl">UISegmentedControl</string>
 						<string key="generateButton">UIButton</string>
 						<string key="pdfFileNameTextField">UITextField</string>
 						<string key="pdfPasswordTextField">UITextField</string>
@@ -463,6 +472,10 @@
 						<object class="IBToOneOutletInfo" key="containerView">
 							<string key="name">containerView</string>
 							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="doctorateLevelSegCtrl">
+							<string key="name">doctorateLevelSegCtrl</string>
+							<string key="candidateClassName">UISegmentedControl</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="generateButton">
 							<string key="name">generateButton</string>

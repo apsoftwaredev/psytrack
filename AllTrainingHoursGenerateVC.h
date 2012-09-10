@@ -23,7 +23,7 @@
 
 @property (nonatomic, weak)IBOutlet UIView *containerView;
 @property (nonatomic, weak) IBOutlet UIButton *generateButton;
-
+@property (nonatomic, weak) IBOutlet UISegmentedControl *doctorateLevelSegCtrl;
 -(IBAction)generateButtonTapped:(id)sender;
 
 

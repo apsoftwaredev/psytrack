@@ -64,7 +64,448 @@
 @synthesize totalToDateStr;
 @synthesize totalToDateTI;
 @synthesize monthlyLogNotes=monthlyLogNotes_;
+@synthesize doctorateLevel;
 
+
+-(id)initWithDoctorateLevel:(BOOL)doctoarateLevelSelected clinician:(ClinicianEntity *)supervisor trackTypeObject:(id)trackTypeObjectGiven{
+    //override superclass
+    self= [super initWithDoctorateLevel:doctoarateLevelSelected clinician:supervisor trainingProgram:nil];
+    
+    if (self) {
+        
+        
+        self.doctorateLevel=doctoarateLevelSelected;
+        
+        
+        self.clinician=supervisor;
+        self.trackType=[self trackTypeForObjectGiven:trackTypeObjectGiven];
+        
+        
+        NSPredicate *predicateForTrackEntities=[NSPredicate predicateWithFormat:@"trainingProgram.doctorateLevel == %@",[NSNumber numberWithBool:doctoarateLevelSelected]];
+        
+        NSPredicate * predicateForExistingHoursEntities=[NSPredicate predicateWithFormat:@"programCourse.doctorateLevel == %@",[NSNumber numberWithBool:doctoarateLevelSelected]];
+        
+        
+      
+        
+        
+        
+        self.trackTypeObject=trackTypeObjectGiven;
+        NSMutableArray *existingHoursMutableArray=[NSMutableArray array];
+        
+        switch (trackType_) {
+            case kTrackTypeIntervention:
+            {
+                if ([trackTypeObjectGiven isKindOfClass:[InterventionTypeEntity class]]) {
+                    InterventionTypeEntity *interventionType=(InterventionTypeEntity *)trackTypeObjectGiven;
+                    
+                    self.typeLabelText=interventionType.interventionType;
+                    NSArray *allInterventionsDeliveredForType=nil;
+                    if (interventionType.interventionsDelivered) {
+                        
+                        allInterventionsDeliveredForType=interventionType.interventionsDelivered.allObjects;
+                    }
+                    if (allInterventionsDeliveredForType&&allInterventionsDeliveredForType.count ) {
+                        
+                    
+                       
+                        if (predicateForTrackEntities) {
+                            self.interventionsDeliveredArray=[allInterventionsDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        }
+                        else{
+                            self.interventionsDeliveredArray=allInterventionsDeliveredForType;
+                            
+                        }
+                        
+                        
+                        
+                     
+                        
+                        
+                        
+                    }
+                    
+                    
+                    NSArray *allExistingInterventionsArrayForType=nil;
+                    if (interventionType.existingInterventions) {
+                        allExistingInterventionsArrayForType=interventionType.existingInterventions.allObjects;
+                    }
+                    
+                    
+                    
+                    
+                    for (ExistingInterventionEntity *existingInterventionObject in allExistingInterventionsArrayForType) {
+                        if (existingInterventionObject.existingHours &&[existingInterventionObject.existingHours isKindOfClass:[ExistingHoursEntity class]]) {
+                            ExistingHoursEntity *existingHoursObject =( ExistingHoursEntity*)existingInterventionObject.existingHours;
+                            
+                            [existingHoursMutableArray addObject:existingHoursObject];
+                        }
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+                
+            }
+                break;
+            case kTrackTypeInterventionSubType:
+            {
+                if ([trackTypeObjectGiven isKindOfClass:[InterventionTypeSubtypeEntity class]]) {
+                    
+                    InterventionTypeSubtypeEntity *interventionSubType=(InterventionTypeSubtypeEntity *)trackTypeObjectGiven;
+                    
+                    self.typeLabelText=interventionSubType.interventionSubType;
+                    
+                    
+                    NSSet *allInterventionsDeliveredForSubType=nil;
+                    if (interventionSubType.interventionsDelivered && predicateForTrackEntities) {
+                        allInterventionsDeliveredForSubType= [interventionSubType.interventionsDelivered filteredSetUsingPredicate:predicateForTrackEntities];
+                    }
+                
+                
+                     self.interventionsDeliveredArray=   allInterventionsDeliveredForSubType.allObjects;
+                    
+                                               
+                  
+                    
+                    
+                    NSArray *allExistingInterventionsArrayForSubType=nil;
+                    if (interventionSubType.existingInterventions) {
+                        allExistingInterventionsArrayForSubType=interventionSubType.existingInterventions.allObjects;
+                    }
+                    
+                    
+                    
+                    
+                    for (ExistingInterventionEntity *existingInterventionObject in allExistingInterventionsArrayForSubType) {
+                        if (existingInterventionObject.existingHours &&[existingInterventionObject.existingHours isKindOfClass:[ExistingHoursEntity class]]) {
+                            ExistingHoursEntity *existingHoursObject =( ExistingHoursEntity*)existingInterventionObject.existingHours;
+                            
+                            [existingHoursMutableArray addObject:existingHoursObject];
+                        }
+                    }
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+            }
+                break;
+            case kTrackTypeAssessment:
+            {
+                if ([trackTypeObjectGiven isKindOfClass:[AssessmentTypeEntity class]]) {
+                    AssessmentTypeEntity *assessmentType=(AssessmentTypeEntity *)trackTypeObjectGiven;
+                    
+                    self.typeLabelText=assessmentType.assessmentType;
+                    
+                    NSArray *allAssessemntsDeliveredForType=nil;
+                    if (assessmentType.assessments) {
+                        allAssessemntsDeliveredForType=assessmentType.assessments.allObjects;
+                    }
+                    
+                    
+                    
+                    if (allAssessemntsDeliveredForType&&allAssessemntsDeliveredForType.count  ) {
+                        
+                       
+                        if (predicateForTrackEntities) {
+                            self.assessmentsDeliveredArray=[allAssessemntsDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        }
+                        else{
+                            
+                            self.assessmentsDeliveredArray= allAssessemntsDeliveredForType;
+                            
+                        }
+                        
+                        
+                                              
+                        
+                        
+                    }
+                    
+                    NSArray *allExistingAssessmentsArrayForType=nil;
+                    
+                    if (assessmentType.existingAssessments) {
+                        allExistingAssessmentsArrayForType=assessmentType.existingAssessments.allObjects;
+                    }
+                    
+                    
+                    
+                    
+                    
+                    for (ExistingAssessmentEntity *existingAssessmentObject in allExistingAssessmentsArrayForType) {
+                        if (existingAssessmentObject.existingHours &&[existingAssessmentObject.existingHours isKindOfClass:[ExistingHoursEntity class]]) {
+                            ExistingHoursEntity *existingHoursObject =( ExistingHoursEntity*)existingAssessmentObject.existingHours;
+                            
+                            [existingHoursMutableArray addObject:existingHoursObject];
+                        }
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+            }
+                break;
+            case kTrackTypeSupport:
+            {
+                
+                if ([trackTypeObjectGiven isKindOfClass:[SupportActivityTypeEntity class]]) {
+                    SupportActivityTypeEntity *supportActivityType=(SupportActivityTypeEntity *)trackTypeObjectGiven;
+                    
+                    self.typeLabelText=supportActivityType.supportActivityType;
+                    
+                    NSArray *allSupportActivitiesDeliveredForType=nil;
+                    if (supportActivityType.supportActivitiesDelivered) {
+                        allSupportActivitiesDeliveredForType=supportActivityType.supportActivitiesDelivered.allObjects;
+                    }
+                    
+                    
+                    
+                    
+                    if (allSupportActivitiesDeliveredForType&&allSupportActivitiesDeliveredForType.count  ) {
+                        
+                        
+                        
+                        if (predicateForTrackEntities) {
+                            self.supportActivityDeliveredArray=[allSupportActivitiesDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        }
+                        else{
+                            
+                            self.supportActivityDeliveredArray=allSupportActivitiesDeliveredForType;
+                        }
+                        
+                                               
+                        
+                        
+                    }
+                    
+                    
+                    NSArray *allExistingSupportActivitiesArrayForType=nil;
+                    
+                    if (supportActivityType.existingSupportActivities) {
+                        allExistingSupportActivitiesArrayForType=supportActivityType.existingSupportActivities.allObjects;
+                        
+                    }
+                    
+                    
+                    
+                    
+                    for (ExistingAssessmentEntity *existingSupportActivityObject in allExistingSupportActivitiesArrayForType) {
+                        if (existingSupportActivityObject.existingHours &&[existingSupportActivityObject.existingHours isKindOfClass:[ExistingHoursEntity class]]) {
+                            ExistingHoursEntity *existingHoursObject =( ExistingHoursEntity*)existingSupportActivityObject.existingHours;
+                            
+                            [existingHoursMutableArray addObject:existingHoursObject];
+                        }
+                    }
+                    
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+            }
+                break;
+            case kTrackTypeSupervision:
+            {
+                if ([trackTypeObjectGiven isKindOfClass:[SupervisionTypeEntity class]]) {
+                    SupervisionTypeEntity *supervisionType=(SupervisionTypeEntity *)trackTypeObjectGiven;
+                    
+                    self.typeLabelText=supervisionType.supervisionType;
+                    
+                    NSArray *allSupervisionReceivedForType=nil;
+                    if (supervisionType.supervisionRecieved) {
+                        allSupervisionReceivedForType=supervisionType.supervisionRecieved.allObjects;
+                    }
+                    
+                    
+                    
+                    if (allSupervisionReceivedForType &&allSupervisionReceivedForType.count  ) {
+                        
+                        if (predicateForTrackEntities) {
+                           self.supervisionReceivedArray=[allSupervisionReceivedForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        }
+                        else
+                        {
+                            self.supervisionReceivedArray=allSupervisionReceivedForType;
+                        }
+                                               
+                        
+                    }
+                    
+                    
+                    
+                    
+                    NSArray *allExistingSupervisionReceivedArrayForType=nil;
+                    if (supervisionType.existingSupervision) {
+                        allExistingSupervisionReceivedArrayForType=supervisionType.existingSupervision.allObjects;
+                    }
+                    
+                    
+                    
+                    for (ExistingAssessmentEntity *existingSupervisionReceivedObject in allExistingSupervisionReceivedArrayForType) {
+                        if (existingSupervisionReceivedObject.existingHours &&[existingSupervisionReceivedObject.existingHours isKindOfClass:[ExistingHoursEntity class]]) {
+                            ExistingHoursEntity *existingHoursObject =( ExistingHoursEntity*)existingSupervisionReceivedObject.existingHours;
+                            [existingHoursMutableArray addObject:existingHoursObject];
+                        }
+                    }
+                    
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+            }
+                break;
+            case kTrackTypeSupervisionSubType:
+            {
+                
+                
+                if ([trackTypeObjectGiven isKindOfClass:[SupervisionTypeSubtypeEntity class]]) {
+                    SupervisionTypeSubtypeEntity *supervisionSubType=(SupervisionTypeSubtypeEntity *)trackTypeObjectGiven;
+                    
+                    self.typeLabelText=supervisionSubType.subType;
+                    
+                    
+                    NSArray *allSupervisionReceivedForSubType=nil;
+                    if (supervisionSubType.supervisionReceived) {
+                        allSupervisionReceivedForSubType =supervisionSubType.supervisionReceived.allObjects;
+                    }
+                    
+                    
+                    
+                    
+                    
+                    if (allSupervisionReceivedForSubType &&allSupervisionReceivedForSubType.count  ) {
+                        
+                       
+                        if (predicateForTrackEntities) {
+                            self.supervisionReceivedArray=[allSupervisionReceivedForSubType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        }
+                        
+                        else{
+                            self.supervisionReceivedArray=allSupervisionReceivedForSubType;
+                            
+                        }
+                        
+                       
+                        
+                        
+                    }
+                    
+                    
+                    
+                    NSArray *allExistingSupervisionReceivedArrayForSubType=nil;
+                    
+                    if (supervisionSubType.existingSupervision) {
+                        allExistingSupervisionReceivedArrayForSubType=supervisionSubType.existingSupervision.allObjects;
+                        
+                    }
+                    
+                    
+                    
+                    
+                    for (ExistingAssessmentEntity *existingSupervisionReceivedObject in allExistingSupervisionReceivedArrayForSubType) {
+                        if (existingSupervisionReceivedObject.existingHours &&[existingSupervisionReceivedObject.existingHours isKindOfClass:[ExistingHoursEntity class]]) {
+                            ExistingHoursEntity *existingHoursObject =( ExistingHoursEntity*)existingSupervisionReceivedObject.existingHours;
+                            
+                            [existingHoursMutableArray addObject:existingHoursObject];
+                        }
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+                
+                
+            }
+                break;
+            case kTrackTypeUnknown:
+            {
+                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                
+                
+                [appDelegate displayNotification:@"Track type object class was not identified"];
+                
+            }
+                break;
+                
+            default:
+                break;
+        }
+        
+        
+        
+        
+        if (existingHoursMutableArray&&existingHoursMutableArray.count ) {
+            
+           
+            
+            if(predicateForExistingHoursEntities){
+                 self.existingHoursHoursArray=[existingHoursMutableArray filteredArrayUsingPredicate:predicateForExistingHoursEntities];
+            }
+            else{
+                 self.existingHoursHoursArray=existingHoursMutableArray;
+                
+            }
+            
+            
+           
+            
+        }
+        
+        self.monthlyLogNotes=[self monthlyLogNotesForMonth];
+        
+        if (trackType_== kTrackTypeIntervention ||trackType_==kTrackTypeSupervision||!self.monthToDisplay) {
+            [ self  totalOverallHoursTIForOveralCell:(PTSummaryCell)kSummaryTotalToDate clinician:(ClinicianEntity *)supervisor];
+        }
+        else if (trackType_!=kTrackTypeUnknown){
+            for (NSInteger i=0; i<9; i++) {
+                [ self  totalOverallHoursTIForOveralCell:(PTSummaryCell)i clinician:(ClinicianEntity *)supervisor];
+            }   
+        }
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    return self;
+    
+    
+}
 
 
 -(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trackTypeObject:(id)trackTypeObjectGiven trainingProgram:(TrainingProgramEntity *)trainingProgramGiven{
@@ -94,7 +535,7 @@
         
         NSPredicate *predicateForTrackTrainingProgram=nil;
         NSPredicate *predicateForExistingHoursProgramCourse=nil;
-        if (trackTypeObjectGiven) {
+        if (trainingProgramGiven) {
             predicateForTrackTrainingProgram=[self predicateForTrackTrainingProgram];
             predicateForExistingHoursProgramCourse=[self predicateForExistingHoursProgramCourse];
         }
@@ -117,14 +558,35 @@
                         
                         allInterventionsDeliveredForType=interventionType.interventionsDelivered.allObjects;
                     }
-                    if (allInterventionsDeliveredForType&&allInterventionsDeliveredForType.count &&predicateForTrackEntities) {
+                    if (allInterventionsDeliveredForType&&allInterventionsDeliveredForType.count ) {
                         
-                        NSArray *tempInterventionsDeliveredArray=[allInterventionsDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        
+                        
+                        NSArray *tempInterventionsDeliveredArray=nil;
+                        
+                        if (predicateForTrackEntities) {
+                            tempInterventionsDeliveredArray=[allInterventionsDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        }
+                        else{
+                            tempInterventionsDeliveredArray=allInterventionsDeliveredForType;
+                        
+                        }
+                        
+                        
+                       
 
-                        if (tempInterventionsDeliveredArray &&tempInterventionsDeliveredArray.count) {
+                        if (tempInterventionsDeliveredArray &&tempInterventionsDeliveredArray.count &&predicateForTrackTrainingProgram) {
                             self.interventionsDeliveredArray= [tempInterventionsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
                         }
+                        else{
+                        
+                            self.interventionsDeliveredArray=allInterventionsDeliveredForType;
+                            }
                                                
+                        
+                        
+                        
+                        
                         
                     }
                     
@@ -176,13 +638,25 @@
                     
                     
                     
-                    if (allInterventionsDeliveredForSubType &&allInterventionsDeliveredForSubType.count &&predicateForTrackEntities) {
+                    if (allInterventionsDeliveredForSubType &&allInterventionsDeliveredForSubType.count) {
+                        
+                        NSArray *tempInterventionsDeliveredArray=nil;
+                        if (predicateForTrackEntities) {
+                          tempInterventionsDeliveredArray=  [allInterventionsDeliveredForSubType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        }
+                        else{
+                        
+                            tempInterventionsDeliveredArray=allInterventionsDeliveredForSubType;
+                        }
                         
                         
-                        NSArray *tempInterventionsDeliveredArray=[allInterventionsDeliveredForSubType filteredArrayUsingPredicate:predicateForTrackEntities];
-                        
-                        if (tempInterventionsDeliveredArray &&tempInterventionsDeliveredArray.count) {
+                        if (tempInterventionsDeliveredArray &&tempInterventionsDeliveredArray.count &&predicateForTrackTrainingProgram) {
                             self.interventionsDeliveredArray= [tempInterventionsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+                        }
+                        else
+                        {
+                            self.interventionsDeliveredArray=allInterventionsDeliveredForSubType;
+                
                         }
 
                         
@@ -229,14 +703,25 @@
                     
                     
                     
-                    if (allAssessemntsDeliveredForType&&allAssessemntsDeliveredForType.count  &&predicateForTrackEntities) {
+                    if (allAssessemntsDeliveredForType&&allAssessemntsDeliveredForType.count  ) {
                         
+                        NSArray *tempAssessmentsDeliveredArray=nil;
+                        if (predicateForTrackEntities) {
+                             tempAssessmentsDeliveredArray= [allAssessemntsDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        }
+                        else{
                         
+                            tempAssessmentsDeliveredArray= allAssessemntsDeliveredForType;
                         
-                        NSArray *tempAssessmentsDeliveredArray=[allAssessemntsDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        }
+                      
                         
-                        if (tempAssessmentsDeliveredArray &&tempAssessmentsDeliveredArray.count) {
+                        if (tempAssessmentsDeliveredArray &&tempAssessmentsDeliveredArray.count && predicateForTrackTrainingProgram) {
                             self.assessmentsDeliveredArray= [tempAssessmentsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+                        }
+                        else{
+                        
+                            self.assessmentsDeliveredArray=allAssessemntsDeliveredForType;
                         }
 
                         
@@ -288,14 +773,29 @@
                     
                     
                     
-                    if (allSupportActivitiesDeliveredForType&&allSupportActivitiesDeliveredForType.count  &&predicateForTrackEntities) {
+                    if (allSupportActivitiesDeliveredForType&&allSupportActivitiesDeliveredForType.count  ) {
                         
                         
-                        NSArray *tempSupportActivitiesDeliveredArray=[allSupportActivitiesDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
                         
-                        if (tempSupportActivitiesDeliveredArray &&tempSupportActivitiesDeliveredArray.count) {
+                        NSArray *tempSupportActivitiesDeliveredArray=nil;
+                        
+                        if (predicateForTrackEntities) {
+                            tempSupportActivitiesDeliveredArray=[allSupportActivitiesDeliveredForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        }
+                        else{
+                        
+                            tempSupportActivitiesDeliveredArray=allSupportActivitiesDeliveredForType;
+                        }
+                        
+                        if (tempSupportActivitiesDeliveredArray &&tempSupportActivitiesDeliveredArray.count &&predicateForTrackTrainingProgram) {
                             self.supportActivityDeliveredArray= [tempSupportActivitiesDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
                         }
+                        else{
+                        
+                            self.supportActivityDeliveredArray=allSupportActivitiesDeliveredForType;
+                        
+                        }
+                        
 
                         
                     }
@@ -343,12 +843,23 @@
                     
                     
                     
-                    if (allSupervisionReceivedForType &&allSupervisionReceivedForType.count  &&predicateForTrackEntities) {
+                    if (allSupervisionReceivedForType &&allSupervisionReceivedForType.count  ) {
                    
-                        NSArray *tempSupervisionDeliveredArray=[allSupervisionReceivedForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        NSArray *tempSupervisionDeliveredArray=nil;
+                        if (predicateForTrackEntities) {
+                            tempSupervisionDeliveredArray=[allSupervisionReceivedForType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        }
+                       else
+                       {
+                           tempSupervisionDeliveredArray=allSupervisionReceivedForType;
+                       }
                         
-                        if (tempSupervisionDeliveredArray &&tempSupervisionDeliveredArray.count) {
+                        if (tempSupervisionDeliveredArray &&tempSupervisionDeliveredArray.count && predicateForTrackTrainingProgram) {
                             self.supervisionReceivedArray= [tempSupervisionDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+                        }
+                        else{
+                            self.supervisionReceivedArray=allSupervisionReceivedForType;
+                        
                         }
                         
                         
@@ -400,12 +911,25 @@
                     
                     
                     
-                    if (allSupervisionReceivedForSubType &&allSupervisionReceivedForSubType.count  &&predicateForTrackEntities) {
-                                                
-                        NSArray *tempSupervisionDeliveredArray=[allSupervisionReceivedForSubType filteredArrayUsingPredicate:predicateForTrackEntities];
+                    if (allSupervisionReceivedForSubType &&allSupervisionReceivedForSubType.count  ) {
                         
-                        if (tempSupervisionDeliveredArray &&tempSupervisionDeliveredArray.count) {
+                        
+                        NSArray *tempSupervisionDeliveredArray=nil;
+                        if (predicateForTrackEntities) {
+                            tempSupervisionDeliveredArray=[allSupervisionReceivedForSubType filteredArrayUsingPredicate:predicateForTrackEntities];
+                        }
+                        
+                        else{
+                            tempSupervisionDeliveredArray=allSupervisionReceivedForSubType;
+                        
+                        }
+                        
+                        if (tempSupervisionDeliveredArray &&tempSupervisionDeliveredArray.count &&predicateForTrackTrainingProgram) {
                             self.supervisionReceivedArray= [tempSupervisionDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+                        }
+                        else{
+                            
+                            self.supervisionReceivedArray=allSupervisionReceivedForSubType;
                         }
 
                         
@@ -459,12 +983,24 @@
                            
             
        
-        if (existingHoursMutableArray&&existingHoursMutableArray.count  && predicateForExistingHoursEntities) {
+        if (existingHoursMutableArray&&existingHoursMutableArray.count ) {
             
-            NSArray *tempExistingHoursArray=[existingHoursMutableArray filteredArrayUsingPredicate:predicateForExistingHoursEntities];
+            NSArray *tempExistingHoursArray=nil;
+           
+            if(predicateForExistingHoursEntities){
+                tempExistingHoursArray=[existingHoursMutableArray filteredArrayUsingPredicate:predicateForExistingHoursEntities];
+            }
+            else{
+                tempExistingHoursArray=existingHoursMutableArray;
+                
+            }
+            
             
             if (tempExistingHoursArray &&tempExistingHoursArray.count && predicateForExistingHoursProgramCourse) {
                 self.existingHoursHoursArray=[tempExistingHoursArray filteredArrayUsingPredicate:predicateForExistingHoursProgramCourse];
+            }
+            else{
+                self.existingHoursHoursArray=existingHoursMutableArray;
             }
             
         }

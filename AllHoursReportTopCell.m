@@ -22,7 +22,7 @@
 #import "SupervisorsAndTotalTimesForMonth.h"
 #import "SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h"
 #import "UILabel_VerticalAlignmentExtention.h"
-#import "SiteEntity.h"
+
 
 @implementation AllHoursReportTopCell
 
@@ -85,6 +85,9 @@
 
 @synthesize studentSignatureLabelUnderLine,allHoursReportTitleLabel;
 @synthesize schoolNameLabel;
+@synthesize programLabelBeforeColon;
+
+
 static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
 
 -(void)willDisplay{
@@ -249,7 +252,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(scrollToNextPage)
-     name:@"ScrollMonthlyPracticumLogToNextPage"
+     name:@"ScrollAllHoursVCToNextPage"
      object:nil];
 }
 
@@ -258,10 +261,12 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     UIScrollView *mainScrollView=self.mainPageScrollView;
     
     
+    DLog(@"containter frame origin y %f and %f and %f ",self.containerForSignaturesAndSupervisorSummaries.frame.origin.y,self.containerForSignaturesAndSupervisorSummaries.frame.size.height, MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY);
+    
     
     if ((self.containerForSignaturesAndSupervisorSummaries.frame.origin.y+self.containerForSignaturesAndSupervisorSummaries.frame.size.height)<=(MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY)) {
         
-        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollMonthlyPracticumLogToNextPage" object:nil];
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollAllHoursVCToNextPage" object:nil];
         
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
@@ -377,13 +382,12 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     SupervisorsAndTotalTimesForMonth *totalsObject=(SupervisorsAndTotalTimesForMonth *)self.boundObject;
     
     
-    
+    self.allHoursReportTitleLabel.text=totalsObject.doctorateLevel?@"All Doctorate Level Training Hours":@"All Master's Level Training Hours";
    
     numberOfSupervisors=totalsObject.clinicians.count;
     
     
-    [self.programLabel alignTop];
-    NSString *bottomCellNibName=nil;
+        NSString *bottomCellNibName=nil;
     
     
    
@@ -391,8 +395,13 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     
     
-    
+    self.programLabel.text=totalsObject.trainingProgramsStr;
   
+    [self.programLabel alignTop];
+    
+    if (totalsObject.numberOfProgramCourses>1) {
+        self.programLabelBeforeColon.text=@"Programs & Courses:";
+    }
     self.studentNameLabel.text=totalsObject.studentNameStr;
        //
     //
@@ -407,13 +416,13 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     //
     SCClassDefinition *typesDef=[SCClassDefinition definitionWithClass:[TrackTypeWithTotalTimes class] autoGeneratePropertyDefinitions:YES];
     
-    NSArray *fetchedInterventionObjects =  [self fetchObjectsFromEntity:(NSString *)@"InterventionTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"subTypes",@"subTypes.interventionsDelivered.time",@"subTypes.existingInterventions",nil]];
+    NSArray *fetchedInterventionObjects =  [self fetchObjectsFromEntity:(NSString *)@"InterventionTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"subTypes",@"subTypes.interventionsDelivered.time", @"subTypes.interventionsDelivered.trainingProgram",@"subTypes.existingInterventions",@"subTypes.existingInterventions.programCourse",nil]];
     //
     SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"order" sortAscending:YES filterPredicate:nil];
     
     for (InterventionTypeEntity *interventionType in fetchedInterventionObjects) {
         
-        TrackTypeWithTotalTimes *interventionTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:nil clinician:nil trackTypeObject:interventionType trainingProgram:nil];
+        TrackTypeWithTotalTimes *interventionTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithDoctorateLevel:totalsObject.doctorateLevel clinician:clinician trackTypeObject:interventionType];
         
         
         
@@ -442,7 +451,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         
         for (InterventionTypeSubtypeEntity *interventionSubTypeObject in orderdSubTypeArray ) {
-            TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:nil clinician:nil trackTypeObject:interventionSubTypeObject trainingProgram:nil];
+            TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithDoctorateLevel:totalsObject.doctorateLevel clinician:clinician trackTypeObject:interventionSubTypeObject];
             
             [subTypeWithTotalsItemsArray addObject:trackTypeWithTotalTimeObject];
             
@@ -494,7 +503,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     for (AssessmentTypeEntity *assessmentType in fetchedAssessmentObjects) {
         
-        TrackTypeWithTotalTimes *assessmentTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:nil clinician:nil trackTypeObject:assessmentType trainingProgram:nil];
+        TrackTypeWithTotalTimes *assessmentTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithDoctorateLevel:totalsObject.doctorateLevel clinician:clinician trackTypeObject:assessmentType];
         
         
         
@@ -551,7 +560,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     for (SupportActivityTypeEntity *supportActivityType in fetchedSupportObjects) {
         
-        TrackTypeWithTotalTimes *supportActivityTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:nil clinician:nil trackTypeObject:supportActivityType trainingProgram:nil];
+        TrackTypeWithTotalTimes *supportActivityTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithDoctorateLevel:totalsObject.doctorateLevel clinician:clinician trackTypeObject:supportActivityType];
         
         
         
@@ -614,7 +623,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     for (SupervisionTypeEntity *supervisionType in fetchedSupervisionObjects) {
         
-        TrackTypeWithTotalTimes *supervisionTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithMonth:nil clinician:nil trackTypeObject:supervisionType trainingProgram:nil];
+        TrackTypeWithTotalTimes *supervisionTypeWithTotalTimes=[[TrackTypeWithTotalTimes alloc]initWithDoctorateLevel:totalsObject.doctorateLevel clinician:clinician trackTypeObject:supervisionType];
         
         
         
@@ -644,7 +653,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         
         for (SupervisionTypeSubtypeEntity *supervisionSubTypeObject in orderdSubTypeArray ) {
-            TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:nil clinician:nil trackTypeObject:supervisionSubTypeObject trainingProgram:nil];
+            TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithDoctorateLevel:totalsObject.doctorateLevel clinician:clinician trackTypeObject:supervisionSubTypeObject];
             
             [subTypeWithTotalsItemsArray addObject:trackTypeWithTotalTimeObject];
             
@@ -730,10 +739,10 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         for ( int i=0;i<numberOfSupervisors;i++) {
             ClinicianEntity *supervisor=[totalsObject.clinicians objectAtIndex:i];
-            SupervisorsAndTotalTimesForMonth *supervisorTotalsObject=[[SupervisorsAndTotalTimesForMonth alloc]initWithMonth:nil clinician:supervisor trainingProgram:nil markAmended:NO];
+            SupervisorsAndTotalTimesForMonth *supervisorTotalsObject=[[SupervisorsAndTotalTimesForMonth alloc]initWithDoctorateLevel:totalsObject.doctorateLevel clinician:supervisor];
             if (i==0) {
                 
-                self.supervisorSummaryHeaderLabel.text=[NSString stringWithFormat:@"Summary of Hours Supervised by %@ (Month Total:%@)",supervisor.combinedName,supervisorTotalsObject.overallTotalForMonthStr];
+                self.supervisorSummaryHeaderLabel.text=[NSString stringWithFormat:@"Summary of Hours Supervised by %@ (Total:%@)",supervisor.combinedName,supervisorTotalsObject.overallTotalToDateStr];
                 
                 
                 self.supervisorSummaryTotalInterventionHoursLabel.text=totalsObject.interventionTotalToDateStr;
@@ -958,12 +967,9 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         
         
-        if (objectsSection.footerNotes.length) {
-            footerNotesTextView.text=objectsSection.footerNotes;
-        }
-        else {
+   
             footerNotesTextView.hidden=YES;
-        }
+       
         
         
         

@@ -15,14 +15,11 @@
     
     SCArrayOfObjectsModel *objectsModel;
     
-    ClinicianEntity *supervisorObject;
     
-    TrainingProgramEntity *trainingProgram_;
-    NSDate *monthToDisplay_;
-    BOOL markAmended;
+    BOOL doctorateLevel;
 }
 
 @property(nonatomic, weak) NSString *studentName;
 
-
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil doctorateLevel:(BOOL)doctorateLevelSelected;
 @end
