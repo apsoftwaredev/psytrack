@@ -41,6 +41,30 @@
 @synthesize tempProfileNotes;
 @synthesize tempSex;
 
+
+
+-(void)rekeyEncryptedAttributes{
+    [self willAccessValueForKey:@"profileNotes"];
+    if (self.profileNotes) {
+        [self setStringToPrimitiveData:(NSString *)self.profileNotes forKey:(NSString *)@"profileNotes" ];
+    
+        
+    }
+    [self didAccessValueForKey:@"profileNotes"];
+    
+    
+    [self willAccessValueForKey:@"sex"];
+    if (self.sex) {
+        [self setStringToPrimitiveData:(NSString *)self.sex forKey:(NSString *)@"sex"];
+        
+        
+    }
+    [self didAccessValueForKey:@"sex"];
+    
+        
+    
+}
+
 -(void)setProfileNotes:(NSString *)notes{
     
     [self setStringToPrimitiveData:(NSString *)notes forKey:@"profileNotes"];

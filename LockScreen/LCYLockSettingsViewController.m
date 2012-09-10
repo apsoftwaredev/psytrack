@@ -316,7 +316,6 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
                     else 
                     {
                          
-                        DLog(@"token password tag is %i",kTokenCellPasswordCurrentTag);
                         
                     
                         

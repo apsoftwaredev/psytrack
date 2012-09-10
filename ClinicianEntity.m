@@ -172,7 +172,65 @@
     return combinedName;
     
 }
+-(void)rekeyEncryptedAttributes{
 
+    if (self.notes) {
+        [self rekeyString:(NSString *)self.notes forKey:@"notes"];
+    }
+    
+
+}
+- (void)rekeyString:(NSString *)strValue forKey:(NSString *)key
+{
+    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    if (strValue&& strValue.length ) {
+        
+        
+        
+        
+        
+        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:nil];
+        //DLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        NSData *encryptedData;
+        NSString *encryptedKeyString;
+        if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
+            encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
+            
+            
+            if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
+                //DLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                
+                encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
+                //DLog(@"key date is client entity %@",encryptedkeyString);
+            }
+        }
+        
+        
+        if (encryptedData.length) {
+            [self willChangeValueForKey:key];
+            [self setPrimitiveValue:encryptedData forKey:key];
+            [self didChangeValueForKey:key];
+        }
+        
+        
+        [self willAccessValueForKey:@"keyString"];
+        if (![encryptedKeyString isEqualToString:self.keyString]) {
+            [self didAccessValueForKey:@"keyString"];
+            [self willChangeValueForKey:@"keyString"];
+            [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
+            [self didChangeValueForKey:@"keyString"];
+            
+        }
+        
+        
+        
+        
+        
+        
+    }
+}
 
 - (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
 {

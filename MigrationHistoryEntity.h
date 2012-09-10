@@ -23,4 +23,6 @@
 @property (nonatomic, weak) NSString  * tempNotes;
 @property (nonatomic, weak) NSString  * tempMigratedFrom;
 @property (nonatomic, weak) NSString  * tempMigratedTo;
+-(void)rekeyEncryptedAttributes;
+
 @end

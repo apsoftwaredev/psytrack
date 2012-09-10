@@ -45,9 +45,21 @@
     }
 }
 
+-(void)rekeyEncryptedAttributes{
+    [self willAccessValueForKey:@"notes"];
+    if (self.notes) {
+        [self setStringToPrimitiveData:(NSString *)self.notes forKey:(NSString *)@"profileNotes" keyString:nil];
+        
+        
+    }
+    [self didAccessValueForKey:@"notes"];
+    
+    
+       
+}
 
 
-- (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
+- (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key keyString:(NSString *)keyStringToSet
 {
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -58,7 +70,7 @@
         
         
         
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
+        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:keyStringToSet];
         //DLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
         NSData *encryptedData;
         NSString *encryptedKeyString;
@@ -151,9 +163,9 @@
     
 }
 -(void)setNotes:(NSString *)notes{
-    
-    [self setStringToPrimitiveData:(NSString *)notes forKey:@"notes"];
-    
+    [self willAccessValueForKey:@"keyString"];
+    [self setStringToPrimitiveData:(NSString *)notes forKey:@"notes" keyString:self.keyString];
+    [self didAccessValueForKey:@"keyString"];
     self.tempNotes=notes;
 }
 

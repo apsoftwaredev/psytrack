@@ -29,6 +29,8 @@
 @property (nonatomic, retain) NSManagedObject *frequency;
 
 @property (nonatomic, weak) NSString *tempNotes;
+
+-(void)rekeyEncryptedAttributes;
 @end
 
 

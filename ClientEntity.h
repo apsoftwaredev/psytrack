@@ -39,7 +39,7 @@
 @property (nonatomic, weak) NSDate *tempDateOfBirth;
 @property (nonatomic, weak) NSString *tempNotes;
 
-
+-(void)rekeyEncryptedAttributes;
 @end
 
 @interface ClientEntity (CoreDataGeneratedAccessors)

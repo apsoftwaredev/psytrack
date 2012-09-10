@@ -166,19 +166,101 @@ if (fetchedObjects) {
 //
 //}
 
+-(void)rekeyEncryptedAttributes{
+    
+    
+    [self willAccessValueForKey:@"notes"];
+    if (self.notes) {
+        [self rekeyString:(NSString *)self.notes forKey:@"notes"];
+    }
+    [self didAccessValueForKey:@"notes"];
+    
+    [self willAccessValueForKey:@"clientIDCode"];
+        if (self.clientIDCode) {
+            [self rekeyString:(NSString *)self.clientIDCode forKey:@"clientIDCode"];
+        }
+    [self didAccessValueForKey:@"clientIDCode"];
+    
+    [self willAccessValueForKey:@"initials"];
+    if (self.initials) {
+        [self rekeyString:(NSString *)self.initials forKey:@"initials"];
+
+    }
+    [self didAccessValueForKey:@"initials"];
+    
+    [self willAccessValueForKey:@"dateOfBirth"];
+    if (self.dateOfBirth) {
+         [self setDateToPrimitiveData:(NSDate *)self.dateOfBirth  forKey:(NSString *)@"dateOfBirth" keyString:nil];
+    }
+    [self didAccessValueForKey:@"dateOfBirth"];
+  
+    
+    
+}
+- (void)rekeyString:(NSString *)strValue forKey:(NSString *)key
+{
+    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    if (strValue&& strValue.length ) {
+        
+        
+        
+        
+        
+        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:nil];
+        //DLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
+        NSData *encryptedData;
+        NSString *encryptedKeyString;
+        if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
+            encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
+            
+            
+            if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
+                //DLog(@"all keys are %@",[encryptedDataDictionary allKeys]);
+                
+                encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
+                //DLog(@"key date is client entity %@",encryptedkeyString);
+            }
+        }
+        
+        
+        if (encryptedData.length) {
+            [self willChangeValueForKey:key];
+            [self setPrimitiveValue:encryptedData forKey:key];
+            [self didChangeValueForKey:key];
+        }
+        
+        
+        [self willAccessValueForKey:@"keyString"];
+        if (![encryptedKeyString isEqualToString:self.keyString]) {
+            [self didAccessValueForKey:@"keyString"];
+            [self willChangeValueForKey:@"keyString"];
+            [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
+            [self didChangeValueForKey:@"keyString"];
+            
+        }
+        
+        
+        
+        
+        
+        
+    }
+}
 
 
 -(void)setInitials:(NSString *)initials{
     
     
-    [self setStringToPrimitiveData:(NSString *)initials forKey:@"initials"];
+    [self setStringToPrimitiveData:(NSString *)initials forKey:@"initials" keyString:self.keyString];
     
     self.tempInitials=initials;
     
 }
 -(void)setNotes:(NSString *)notes{
     
-    [self setStringToPrimitiveData:(NSString *)notes forKey:@"notes"];
+    [self setStringToPrimitiveData:(NSString *)notes forKey:@"notes" keyString:self.keyString];
     
     self.tempNotes=notes;
 }
@@ -187,7 +269,7 @@ if (fetchedObjects) {
 {
     
     
-    [self setStringToPrimitiveData:(NSString *)clientIDCode forKey:@"clientIDCode"];
+    [self setStringToPrimitiveData:(NSString *)clientIDCode forKey:@"clientIDCode" keyString:self.keyString];
     
     self.tempClientIDCode=clientIDCode;
     
@@ -199,7 +281,7 @@ if (fetchedObjects) {
 
 -(void)setDateOfBirth:(NSDate *)dateOfBirth{
     
-    [self setDateToPrimitiveData:(NSDate *)dateOfBirth forKey:(NSString *)@"dateOfBirth" ];
+    [self setDateToPrimitiveData:(NSDate *)dateOfBirth forKey:(NSString *)@"dateOfBirth" keyString:self.keyString];
     self.tempDateOfBirth=dateOfBirth;
     
 }
@@ -265,7 +347,7 @@ if (fetchedObjects) {
 //}
 
 
-- (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
+- (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key keyString:(NSString *)keyStringToSet
 {
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -276,7 +358,7 @@ if (fetchedObjects) {
         
         
         [self willAccessValueForKey:@"keyString"];
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
+        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:keyStringToSet];
         //DLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
         NSData *encryptedData=nil;
         NSString *encryptedKeyString=nil;
@@ -539,7 +621,7 @@ if (fetchedObjects) {
     
     
 }
-- (void)setDateToPrimitiveData:(NSDate *)dateToConvert forKey:(NSString *)key 
+- (void)setDateToPrimitiveData:(NSDate *)dateToConvert forKey:(NSString *)key keyString:(NSString *)keyStringToSet
 {
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -553,7 +635,7 @@ if (fetchedObjects) {
         NSData * dateData = [NSKeyedArchiver archivedDataWithRootObject:dateToConvert];
         
         
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptDataToEncryptedData:dateData withKeyString:self.keyString];
+        NSDictionary *encryptedDataDictionary=[appDelegate encryptDataToEncryptedData:dateData withKeyString:keyStringToSet];
         DLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
         NSData *encryptedData;
         NSString *encryptedKeyString;

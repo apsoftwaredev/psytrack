@@ -1700,20 +1700,23 @@
 																			 datePickerMode:UIDatePickerModeDate 
 															  displayDatePickerInDetailView:NO];
     
-    
-    //create a custom property definition for the addressbook button cell
-    SCCustomPropertyDefinition *addressBookRecordButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"addressBookButtonCell" uiElementClass:[AddViewABLinkButtonCell class] objectBindings:nil];
-    
-    //add the property definition to the clinician class 
-    [self.clinicianDef addPropertyDefinition:addressBookRecordButtonProperty];
-    
-    //create a custom property definition for the delete addressbook link button cell
-    SCCustomPropertyDefinition *deleteABLinkButtonCellProperty = [SCCustomPropertyDefinition definitionWithName:@"deleteABLinkButtonCell" uiElementClass:[LookupRemoveLinkButtonCell class] objectBindings:nil];
-    
-    //add the property definition to the clinician class 
-    [self.clinicianDef addPropertyDefinition:deleteABLinkButtonCellProperty];
-  
-        SCEntityDefinition *abGroupsDef=[SCEntityDefinition definitionWithEntityName:@"ClinicianGroupEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"groupName", @"addressBookSync",@"addNewClinicians",nil]];
+        if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
+        {
+            SCCustomPropertyDefinition *addressBookRecordButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"addressBookButtonCell" uiElementClass:[AddViewABLinkButtonCell class] objectBindings:nil];
+            
+            //add the property definition to the clinician class
+            [self.clinicianDef addPropertyDefinition:addressBookRecordButtonProperty];
+            
+            //create a custom property definition for the delete addressbook link button cell
+            SCCustomPropertyDefinition *deleteABLinkButtonCellProperty = [SCCustomPropertyDefinition definitionWithName:@"deleteABLinkButtonCell" uiElementClass:[LookupRemoveLinkButtonCell class] objectBindings:nil];
+            
+            //add the property definition to the clinician class
+            [self.clinicianDef addPropertyDefinition:deleteABLinkButtonCellProperty];
+            
+
+        }
+            //create a custom property definition for the addressbook button cell
+            SCEntityDefinition *abGroupsDef=[SCEntityDefinition definitionWithEntityName:@"ClinicianGroupEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"groupName", @"addressBookSync",@"addNewClinicians",nil]];
         
         
         SCPropertyDefinition *abGroupsPropertyDef=[self.clinicianDef propertyDefinitionWithName:@"groups"];
@@ -5725,7 +5728,8 @@
 }
 -(void)synchronizeAddressBookGroupsForClinician:(ClinicianEntity *)clinicianToSync {
 
-   
+    if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
+    {
   
         
         ABRecordRef source=nil;
@@ -5809,7 +5813,7 @@
            }
     
 
-
+    }
 
 }
 

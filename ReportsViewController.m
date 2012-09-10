@@ -24,7 +24,7 @@
 @synthesize myTableView;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    NSInteger result = 2;
+    NSInteger result = 1;
     
     return result;
     
@@ -37,7 +37,7 @@
        
     switch (section) {
         case 0:
-            result=3;
+            result=2;
             
             break;
         case 1:

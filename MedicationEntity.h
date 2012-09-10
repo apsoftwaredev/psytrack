@@ -26,6 +26,8 @@
 @property (nonatomic, retain) NSSet *symptomsTargeted;
 
 @property (nonatomic, weak) NSString *tempNotes;
+-(void)rekeyEncryptedAttributes;
+
 @end
 
 @interface MedicationEntity (CoreDataGeneratedAccessors)

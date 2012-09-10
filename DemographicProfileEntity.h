@@ -40,6 +40,8 @@
 @property (nonatomic, weak) NSString * tempProfileNotes;
 @property (nonatomic, weak) NSString * tempSex;
 
+-(void)rekeyEncryptedAttributes;
+
 @end
 
 @interface DemographicProfileEntity (CoreDataGeneratedAccessors)

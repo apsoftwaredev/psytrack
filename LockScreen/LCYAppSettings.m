@@ -11,6 +11,18 @@
 #import "KeychainItemWrapper.h"
 #import "PTTEncryption.h"
 #import "KeyEntity.h"
+
+#import "ClientEntity.h"
+#import "ExistingHoursEntity.h"
+#import "ClinicianEntity.h"
+#import "MedicationReviewEntity.h"
+#import "MedicationEntity.h"
+#import "ReferralEntity.h"
+#import "InterpersonalEntity.h"
+#import "MigrationHistoryEntity.h"
+#import "DemographicProfileEntity.h"
+#import "LogEntity.h"
+
 @implementation LCYAppSettings
 
 //@synthesize lockScreenChallengePhrase=lockScreenChallengePhrase_;
@@ -18,6 +30,128 @@
 
 
 
+-(void)rekeyEncryptedModelSubclasses{
+
+    BOOL rekey=YES;
+    if (rekey) {
+        NSArray *clientsArray=[self fetchEntity:@"ClientEntity"];
+        
+        for (ClientEntity *client in clientsArray) {
+            
+            [client rekeyEncryptedAttributes];
+        }
+    }
+   
+    if (rekey) {
+        NSArray *existingHoursArray=[self fetchEntity:@"ExistingHoursEntity"];
+        
+        for (ExistingHoursEntity *existingHours in existingHoursArray) {
+            
+            [existingHours rekeyEncryptedAttributes];
+        }
+    }
+    if (rekey) {
+        NSArray *clinicianArray=[self fetchEntity:@"ClinicianEntity"];
+        
+        for (ClinicianEntity *clinician in clinicianArray) {
+            
+            [clinician rekeyEncryptedAttributes];
+        }
+    }
+    if (rekey) {
+        NSArray *medicationReviewArray=[self fetchEntity:@"MedicationReviewEntity"];
+        
+        for (MedicationReviewEntity *medicationReview in medicationReviewArray) {
+            
+            [medicationReview rekeyEncryptedAttributes];
+        }
+    }
+    if (rekey) {
+        NSArray *medicationReviewArray=[self fetchEntity:@"MedicationReviewEntity"];
+        
+        for (MedicationReviewEntity *medicationReview in medicationReviewArray) {
+            
+            [medicationReview rekeyEncryptedAttributes];
+        }
+    }
+    if (rekey) {
+        NSArray *medicationEntityArray=[self fetchEntity:@"MedicationEntity"];
+        
+        for (MedicationEntity *medication in medicationEntityArray) {
+            
+            [medication rekeyEncryptedAttributes];
+        }
+    }
+    if (rekey) {
+        NSArray *referralEntityArray=[self fetchEntity:@"ReferralEntity"];
+        
+        for (ReferralEntity *referral in referralEntityArray) {
+            
+            [referral rekeyEncryptedAttributes];
+        }
+    }
+
+    if (rekey) {
+        NSArray *interpersonalEntityArray=[self fetchEntity:@"InterpersonalEntity"];
+        
+        for (InterpersonalEntity *interpersonal in interpersonalEntityArray) {
+            
+            [interpersonal rekeyEncryptedAttributes];
+        }
+    }
+    
+
+    if (rekey) {
+        NSArray *migrationHistoryEntityArray=[self fetchEntity:@"MigrationHistoryEntity"];
+        
+        for (MigrationHistoryEntity *migrationHistory in migrationHistoryEntityArray) {
+            
+            [migrationHistory rekeyEncryptedAttributes];
+        }
+    }
+    if (rekey) {
+        NSArray *demographicProfileEntityArray=[self fetchEntity:@"DemographicProfileEntity"];
+        
+        for (DemographicProfileEntity *demographicProfile in demographicProfileEntityArray) {
+            
+            [demographicProfile rekeyEncryptedAttributes];
+        }
+    }
+    
+    if (rekey) {
+        NSArray *logEntityArray=[self fetchEntity:@"LogEntity"];
+        
+        for (LogEntity *log in logEntityArray) {
+            
+            [log rekeyEncryptedAttributes];
+        }
+    }
+
+
+    
+
+}
+
+-(NSArray *)fetchEntity:(NSString *)entityName{
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    NSManagedObjectContext *managedObjectContext=appDelegate.managedObjectContext;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:managedObjectContext];
+[fetchRequest setEntity:entity];
+
+NSError *error = nil;
+NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+
+    if (fetchedObjects) {
+        return fetchedObjects;
+    }
+    
+    else
+        return [NSArray array];
+    
+    
+}
 
 
 -(BOOL)setPasscodeDataWithString:(NSString *)passcodeString{
@@ -960,8 +1094,9 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     }
     
     sharedSymetricData=nil;
-    
+    [self rekeyEncryptedModelSubclasses];
    
+    [appDelegate saveContext];
     
     return YES;
 

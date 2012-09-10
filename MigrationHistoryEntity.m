@@ -23,9 +23,39 @@
 
 
 
+-(void)rekeyEncryptedAttributes{
+    [self willAccessValueForKey:@"notes"];
+    if (self.notes) {
+        [self setStringToPrimitiveData:(NSString *)self.notes forKey:(NSString *)@"notes" keyString:nil];
+        
+        
+    }
+    [self didAccessValueForKey:@"notes"];
+ 
+    
+    [self willAccessValueForKey:@"migratedFrom"];
+    if (self.migratedFrom) {
+        [self setStringToPrimitiveData:(NSString *)self.migratedFrom forKey:(NSString *)@"migratedFrom" keyString:nil];
+        
+       
+    }
+    [self didAccessValueForKey:@"migratedFrom"];
+    
+    [self willAccessValueForKey:@"migratedTo"];
+    if (self.migratedTo) {
+        [self setStringToPrimitiveData:(NSString *)self.migratedTo forKey:(NSString *)@"migratedTo" keyString:nil];
+        
+        
+    }
+    [self didAccessValueForKey:@"migratedTo"];
+    
+    
+    
+}
 
 
-- (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
+
+- (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key keyString:(NSString *)keyStringToSet
 {
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -36,7 +66,7 @@
         
         
         
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
+        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:keyStringToSet];
         //DLog(@"encrypted dictionary right after set %@",encryptedDataDictionary);
         NSData *encryptedData;
         NSString *encryptedKeyString;
@@ -129,9 +159,9 @@
     
 }
 -(void)setNotes:(NSString *)notes{
-    
-    [self setStringToPrimitiveData:(NSString *)notes forKey:@"notes"];
-    
+    [self willAccessValueForKey:@"keyString"];
+    [self setStringToPrimitiveData:(NSString *)notes forKey:@"notes" keyString:self.keyString];
+    [self didAccessValueForKey:@"keyString"];
     self.tempNotes=notes;
 }
 
@@ -189,9 +219,9 @@
     
 }
 -(void)setMigratedFrom:(NSString *)migratedFrom{
-    
-    [self setStringToPrimitiveData:(NSString *)migratedFrom forKey:@"migratedFrom"];
-    
+    [self willAccessValueForKey:@"keyString"];
+    [self setStringToPrimitiveData:(NSString *)migratedFrom forKey:@"migratedFrom" keyString:self.keyString];
+    [self didAccessValueForKey:@"keyString"];
     self.tempMigratedFrom=migratedFrom;
 }
 -(NSString *)migratedTo{
@@ -247,9 +277,9 @@
     
 }
 -(void)setMigratedTo:(NSString *)migratedTo{
-    
-    [self setStringToPrimitiveData:(NSString *)migratedTo forKey:@"migratedTo"];
-    
+    [self willAccessValueForKey:@"keyString"];
+    [self setStringToPrimitiveData:(NSString *)migratedTo forKey:@"migratedTo" keyString:self.keyString];
+    [self didAccessValueForKey:@"keyString"];
     self.tempMigratedTo=migratedTo;
 }
 

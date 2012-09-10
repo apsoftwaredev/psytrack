@@ -64,6 +64,8 @@
 @property (nonatomic, weak) NSString *tempNotes;
 @property (nonatomic, strong)  NSString *combinedName;
 
+-(void)rekeyEncryptedAttributes;
+
 @end
 
 @interface ClinicianEntity (CoreDataGeneratedAccessors)

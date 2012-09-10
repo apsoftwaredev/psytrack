@@ -24,4 +24,5 @@
 
 @property (nonatomic, weak) NSString *tempNotes;
 
+-(void)rekeyEncryptedAttributes;
 @end
