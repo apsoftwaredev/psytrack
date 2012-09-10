@@ -179,7 +179,7 @@
     //Create a class definition for Additional Variable Name entity
     SCEntityDefinition *additionalVariableNameDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalVariableNameEntity" 
                                                                       managedObjectContext:managedObjectContext
-                                                                             propertyNames:[NSArray arrayWithObjects:@"variableName",@"notes",nil]]; 
+                                                                             propertyNames:[NSArray arrayWithObjects:@"variableName",@"notes",nil]];
     
     
     
@@ -193,6 +193,31 @@
     
     
     additionalVariableValueDef.orderAttributeName=@"order";
+    
+    
+    
+    //begin
+    
+  
+    
+    
+    additionalVariableValueDef.orderAttributeName=@"order";
+    
+    
+    
+       
+    
+    SCPropertyDefinition *variableValuesInVariableNamePropertyDef=[SCPropertyDefinition definitionWithName:@"variableValues" title:@"Values" type:SCPropertyTypeArrayOfObjects];
+    
+    [additionalVariableNameDef addPropertyDefinition:variableValuesInVariableNamePropertyDef];
+    
+    variableValuesInVariableNamePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:additionalVariableValueDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new variable value"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
+    
+    
+    //end
+    
+    
+    
     
     
     //Do some property definition customization for the Demographic Profile Entity sex and Profile notes attributes
@@ -713,8 +738,8 @@
     additionalVariableValuePropertyDef.title=@"Selected Value(s)";
     additionalVariableValuePropertyDef.type = SCPropertyTypeObjectSelection;
 	SCObjectSelectionAttributes *variableValueSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:additionalVariableValueDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
-    variableValueSelectionAttribs.allowAddingItems = YES;
-    variableValueSelectionAttribs.allowDeletingItems = YES;
+    variableValueSelectionAttribs.allowAddingItems = NO;
+    variableValueSelectionAttribs.allowDeletingItems = NO;
     variableValueSelectionAttribs.allowMovingItems = YES;
     variableValueSelectionAttribs.allowEditingItems = YES;
     variableValueSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add Variable Value Definitions)"];
