@@ -15,6 +15,8 @@
  *	This notice may not be removed from this file.
  *
  */
+
+#import "AdditionalVariableNameEntity.h"
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
@@ -35,6 +37,8 @@
      SCArrayOfObjectsModel *objectsModel;
     
     DisorderEntity *selectedDisorder;
+    
+       AdditionalVariableNameEntity *selectedVariableName;
 }
 
 

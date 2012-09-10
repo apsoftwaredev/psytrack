@@ -468,6 +468,78 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
             
         }
         }}
+else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
+    
+    
+    SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
+    
+    
+    
+    if ([section isKindOfClass:[SCObjectSection class]]){
+        
+        SCObjectSection *objectSection=(SCObjectSection *)section;
+        
+        
+        NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+        
+        
+        
+        
+        if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"]&&objectSection.cellCount>1) {
+            
+            SCTableViewCell *cellAtZero=(SCTableViewCell *)[objectSection cellAtIndex:1];
+            if ([cellAtZero isKindOfClass:[SCObjectSelectionCell class]]) {
+                SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtZero;
+                
+                
+                
+                NSObject *additionalVariableNameObject=[sectionManagedObject valueForKeyPath:@"variableName"];
+                
+                if (indexPath.row!=NSNotFound &&( selectedVariableName||(additionalVariableNameObject&&[additionalVariableNameObject isKindOfClass:[AdditionalVariableNameEntity class]]))) {
+                    if (!selectedVariableName) {
+                        selectedVariableName=(AdditionalVariableNameEntity *)additionalVariableNameObject;
+                    }
+                    
+                    
+                    if (selectedVariableName.variableName.length) {
+                        
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                  @"variableName.variableName like %@",[NSString stringWithString:(NSString *) selectedVariableName.variableName]];
+                        
+                        SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
+                        
+                        objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                        
+                        [objectSelectionCell reloadBoundValue];
+                        
+                        
+                    }
+                    
+                }
+                else {
+                    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                              @"variableName.varaibleName = nil"];
+                    
+                    SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
+                    
+                    objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                }
+                
+                
+            }
+            
+            
+            
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+}
 
    
 }
@@ -933,43 +1005,100 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
     }
     
    else if (tableViewModel.tag==4){
-        
-        UIView *viewOne = [cell viewWithTag:14];
-        switch (cell.tag) {
-            case 3:
-                
-                
-                
-                if([viewOne isKindOfClass:[UISlider class]])
-                {
-                    UISlider *sliderOne = (UISlider *)viewOne;
-                    UILabel *sOnelabel = (UILabel *)[cell viewWithTag:10];
-                    
-                    sOnelabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
-                }
-                
-                break;
-                
-            case 4:
-                
-                
-                if([viewOne isKindOfClass:[UISlider class]])
-                {    
-                    UISlider *sliderTwo = (UISlider *)viewOne;
-                    UILabel *sTwolabel = (UILabel *)[cell viewWithTag:10];
-                    
-                    sTwolabel.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];
-                }
-                
-                
-                
-                
-                
-                
-            default:
-                break;
-        }
-    }
+       
+       
+       
+       NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+       
+       if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"]) {
+           
+           if (cell.tag==0&&[cell isKindOfClass:[SCObjectSelectionCell class]] ) {
+               
+               SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+               
+               
+               if ([objectSelectionCell.selectedItemIndex intValue]>-1) {
+                   NSManagedObject *selectedVariableNameManagedObject =[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                   if ([selectedVariableNameManagedObject isKindOfClass:[AdditionalVariableNameEntity class]]) {
+                       selectedVariableName=(AdditionalVariableNameEntity *) selectedVariableNameManagedObject;
+                       
+                       
+                       
+                       SCTableViewCell *variableValueCell=(SCTableViewCell *)[tableViewModel cellAfterCell:objectSelectionCell rewind:NO];
+                       
+                       if ([variableValueCell isKindOfClass:[SCObjectSelectionCell class]]) {
+                           
+                           
+                           SCObjectSelectionCell *variableValueObjectSelectionCell=(SCObjectSelectionCell *)variableValueCell;
+                           
+                           if (selectedVariableName.variableName.length) {
+                               
+                               NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                         @"variableName.variableName like %@",[NSString stringWithString:(NSString *) selectedVariableName.variableName]];
+                               
+                               SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
+                               
+                               variableValueObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                               
+                               [variableValueObjectSelectionCell reloadBoundValue];
+                               
+                               
+                           }
+                           
+                       }
+                       
+                       
+                   }
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+               }
+               
+           }
+           
+           UIView *viewOne = [cell viewWithTag:14];
+           switch (cell.tag) {
+               case 3:
+                   
+                   
+                   
+                   if([viewOne isKindOfClass:[UISlider class]])
+                   {
+                       UISlider *sliderOne = (UISlider *)viewOne;
+                       UILabel *sOnelabel = (UILabel *)[cell viewWithTag:10];
+                       
+                       sOnelabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
+                   }
+                   
+                   break;
+                   
+               case 4:
+                   
+                   
+                   if([viewOne isKindOfClass:[UISlider class]])
+                   {
+                       UISlider *sliderTwo = (UISlider *)viewOne;
+                       UILabel *sTwolabel = (UILabel *)[cell viewWithTag:10];
+                       
+                       sTwolabel.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];
+                   }
+                   
+                   
+                   
+                   
+                   
+                   
+               default:
+                   break;
+           }
+       }
+   }
+    
     
    else if (tableViewModel.tag==3)
     {
@@ -1049,6 +1178,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
 
     if (tableModel.tag==0) {
         selectedDisorder=nil;
+        selectedVariableName=nil;
     }
 
 

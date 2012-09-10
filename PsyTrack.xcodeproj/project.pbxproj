@@ -253,6 +253,9 @@
 		E75F7786151CC574002B10AE /* LogEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E75F7785151CC574002B10AE /* LogEntity.m */; };
 		E7619874158946B100C5BB8F /* ClientGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7619872158946B100C5BB8F /* ClientGroupsViewController.m */; };
 		E7619875158946B100C5BB8F /* ClientGroupsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7619873158946B100C5BB8F /* ClientGroupsViewController.xib */; };
+		E762661315FE8A7B00D97D3E /* AdditionalVariableNameEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E762661215FE8A7B00D97D3E /* AdditionalVariableNameEntity.m */; };
+		E762661915FE8AF900D97D3E /* AdditionalVariableValueEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E762661815FE8AF900D97D3E /* AdditionalVariableValueEntity.m */; };
+		E762661F15FE958500D97D3E /* AdditionalVariableEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E762661E15FE958500D97D3E /* AdditionalVariableEntity.m */; };
 		E76984DE158636C200D760A6 /* ClinicianGroupEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E76984DD158636C200D760A6 /* ClinicianGroupEntity.m */; };
 		E76984E115869C2C00D760A6 /* ipad-background-blue-plain-small.png in Resources */ = {isa = PBXBuildFile; fileRef = E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */; };
 		E76984E215869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E76984E015869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png */; };
@@ -852,12 +855,12 @@
 		E7619871158946B100C5BB8F /* ClientGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientGroupsViewController.h; sourceTree = "<group>"; };
 		E7619872158946B100C5BB8F /* ClientGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientGroupsViewController.m; sourceTree = "<group>"; };
 		E7619873158946B100C5BB8F /* ClientGroupsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientGroupsViewController.xib; sourceTree = "<group>"; };
-		E76265FC15FE827C00D97D3E /* AdditionalVariableEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdditionalVariableEntity.h; sourceTree = "<group>"; };
-		E76265FD15FE827C00D97D3E /* AdditionalVariableEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdditionalVariableEntity.m; sourceTree = "<group>"; };
-		E76265FE15FE82A900D97D3E /* AdditionalVariableNameEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdditionalVariableNameEntity.h; sourceTree = "<group>"; };
-		E76265FF15FE82A900D97D3E /* AdditionalVariableNameEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdditionalVariableNameEntity.m; sourceTree = "<group>"; };
-		E762660015FE82BC00D97D3E /* AdditionalVariableValueEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdditionalVariableValueEntity.h; sourceTree = "<group>"; };
-		E762660115FE82BC00D97D3E /* AdditionalVariableValueEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdditionalVariableValueEntity.m; sourceTree = "<group>"; };
+		E762661115FE8A7B00D97D3E /* AdditionalVariableNameEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalVariableNameEntity.h; sourceTree = "<group>"; };
+		E762661215FE8A7B00D97D3E /* AdditionalVariableNameEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdditionalVariableNameEntity.m; sourceTree = "<group>"; };
+		E762661715FE8AF900D97D3E /* AdditionalVariableValueEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalVariableValueEntity.h; sourceTree = "<group>"; };
+		E762661815FE8AF900D97D3E /* AdditionalVariableValueEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdditionalVariableValueEntity.m; sourceTree = "<group>"; };
+		E762661D15FE958500D97D3E /* AdditionalVariableEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalVariableEntity.h; sourceTree = "<group>"; };
+		E762661E15FE958500D97D3E /* AdditionalVariableEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdditionalVariableEntity.m; sourceTree = "<group>"; };
 		E76984DC158636C200D760A6 /* ClinicianGroupEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianGroupEntity.h; sourceTree = "<group>"; };
 		E76984DD158636C200D760A6 /* ClinicianGroupEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicianGroupEntity.m; sourceTree = "<group>"; };
 		E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-background-blue-plain-small.png"; sourceTree = "<group>"; };
@@ -1564,15 +1567,15 @@
 		37F7CEC615005E3400AD2C3A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E762660015FE82BC00D97D3E /* AdditionalVariableValueEntity.h */,
-				E762660115FE82BC00D97D3E /* AdditionalVariableValueEntity.m */,
-				E76265FE15FE82A900D97D3E /* AdditionalVariableNameEntity.h */,
-				E76265FF15FE82A900D97D3E /* AdditionalVariableNameEntity.m */,
-				E76265FC15FE827C00D97D3E /* AdditionalVariableEntity.h */,
-				E76265FD15FE827C00D97D3E /* AdditionalVariableEntity.m */,
+				E762661D15FE958500D97D3E /* AdditionalVariableEntity.h */,
+				E762661E15FE958500D97D3E /* AdditionalVariableEntity.m */,
 				E7DEECEA15F526C4001D5B05 /* DisorderSpecifierEntity.h */,
 				E7DEECEB15F526C4001D5B05 /* DisorderSpecifierEntity.m */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
+				E762661715FE8AF900D97D3E /* AdditionalVariableValueEntity.h */,
+				E762661815FE8AF900D97D3E /* AdditionalVariableValueEntity.m */,
+				E762661115FE8A7B00D97D3E /* AdditionalVariableNameEntity.h */,
+				E762661215FE8A7B00D97D3E /* AdditionalVariableNameEntity.m */,
 				E7DEECE715F526B2001D5B05 /* DisorderEntity.h */,
 				E7DEECE815F526B2001D5B05 /* DisorderEntity.m */,
 				E7DEECE415F5262C001D5B05 /* DiagnosisHistoryEntity.h */,
@@ -2811,6 +2814,9 @@
 				E719708E15F78DAE0043662B /* AllTrainingHoursVC.m in Sources */,
 				E719709215F809B30043662B /* AllHoursReportTopCell.m in Sources */,
 				E719709715F83A3B0043662B /* AllHoursReportBottomCell.m in Sources */,
+				E762661315FE8A7B00D97D3E /* AdditionalVariableNameEntity.m in Sources */,
+				E762661915FE8AF900D97D3E /* AdditionalVariableValueEntity.m in Sources */,
+				E762661F15FE958500D97D3E /* AdditionalVariableEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

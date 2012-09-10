@@ -15,12 +15,12 @@
  *	This notice may not be removed from this file.
  *
  */
-
+#import "AdditionalVariableNameEntity.h"
 #import <AddressBook/AddressBook.h>
 #import <AddressBookUI/AddressBookUI.h>
 #import "ClinicianEntity.h"
 #import "ABGroupSelectionCell.h"
-#import "AdditionalVariableNameEntity.h"
+
 
 static NSInteger const kAlertTagFoundExistingPersonWithName = 1;
 static NSInteger const kAlertTagFoundExistingPeopleWithName = 2;

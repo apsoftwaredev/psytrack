@@ -15,7 +15,7 @@
  *	This notice may not be removed from this file.
  *
  */
-
+#import "AdditionalVariableNameEntity.h"
 #import <UIKit/UIKit.h>
 #import "ClientsViewController_Shared.h"
 #import "ClientsSelectionCell.h"
@@ -46,6 +46,8 @@
     NSMutableArray *currentlySelectedClientsArray;
     
       DisorderEntity *selectedDisorder;
+    
+       AdditionalVariableNameEntity *selectedVariableName;
 }
 
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;

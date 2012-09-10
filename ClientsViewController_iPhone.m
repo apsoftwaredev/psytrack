@@ -1553,7 +1553,78 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                 
             }
         }}
+    else  if (tableModel.tag==4){
     
+            
+            SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:2];
+            
+            
+            
+            if ([section isKindOfClass:[SCObjectSection class]]){
+                
+                SCObjectSection *objectSection=(SCObjectSection *)section;
+                
+                
+                NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+                
+                
+                
+                
+                if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"]&&objectSection.cellCount>4) {
+                    
+                    SCTableViewCell *cellAtOne=(SCTableViewCell *)[objectSection cellAtIndex:1];
+                    if ([cellAtOne isKindOfClass:[SCObjectSelectionCell class]]) {
+                        SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtOne;
+                        
+                        
+                        
+                        NSObject *additionalVariableNameObject=[sectionManagedObject valueForKeyPath:@"additionalVariableName"];
+                        
+                        if (indexPath.row!=NSNotFound &&( selectedVariableName||(additionalVariableNameObject&&[additionalVariableNameObject isKindOfClass:[AdditionalVariableNameEntity class]]))) {
+                            if (!selectedVariableName) {
+                                selectedVariableName=(AdditionalVariableNameEntity *)additionalVariableNameObject;
+                            }
+                            
+                            
+                            if (selectedVariableName.variableName.length) {
+                                
+                                NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                          @"variableName.variableName like %@",[NSString stringWithString:(NSString *) selectedVariableName.variableName]];
+                                
+                                SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
+                                
+                                objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                                
+                                [objectSelectionCell reloadBoundValue];
+                                
+                                
+                            }
+                            
+                        }
+                        else {
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                      @"variableName.varaibleName = nil"];
+                            
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
+                            
+                            objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    
+                }
+            }
+            
+
+    
+    
+    
+    
+    
+    }
     
 }
 
@@ -1561,6 +1632,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     if (tableModel.tag==0) {
         selectedDisorder=nil;
+        selectedVariableName=nil;
     }
     
     
@@ -1578,9 +1650,9 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
         [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
     }
-    
-    
-    if (tableViewModel.tag==4 ) {
+    if (tableViewModel.tag==4) {
+        
+
         
         //this is so the second section will not appear if it is the second log, because that info does not pertain
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
@@ -1767,7 +1839,62 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     }
     
     else if (tableViewModel.tag==4){
-        
+      
+            
+            
+            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+            
+            if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"]) {
+                
+                if (cell.tag==0&&[cell isKindOfClass:[SCObjectSelectionCell class]] ) {
+                    
+                    SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+                    
+                    
+                    if ([objectSelectionCell.selectedItemIndex intValue]>-1) {
+                        NSManagedObject *selectedVariableNameManagedObject =[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                        if ([selectedVariableNameManagedObject isKindOfClass:[AdditionalVariableNameEntity class]]) {
+                            selectedVariableName=(AdditionalVariableNameEntity *) selectedVariableNameManagedObject;
+                            
+                            
+                            
+                            SCTableViewCell *variableValueCell=(SCTableViewCell *)[tableViewModel cellAfterCell:objectSelectionCell rewind:NO];
+                            
+                            if ([variableValueCell isKindOfClass:[SCObjectSelectionCell class]]) {
+                                
+                                
+                                SCObjectSelectionCell *variableValueObjectSelectionCell=(SCObjectSelectionCell *)variableValueCell;
+                                
+                                if (selectedVariableName.variableName.length) {
+                                    
+                                    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                              @"variableName.variableName like %@",[NSString stringWithString:(NSString *) selectedVariableName.variableName]];
+                                    
+                                    SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
+                                    
+                                    variableValueObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                                    
+                                    [variableValueObjectSelectionCell reloadBoundValue];
+                                    
+                                    
+                                }
+                                
+                            }
+                            
+                            
+                        }
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    }
+                    
+                }
+
         UIView *viewOne = [cell viewWithTag:14];
         switch (cell.tag) {
             case 3:
@@ -1803,6 +1930,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             default:
                 break;
         }
+            }
     }
     
     else if (tableViewModel.tag==3)
