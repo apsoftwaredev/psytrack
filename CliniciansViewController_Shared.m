@@ -2676,6 +2676,73 @@
         }
     }
     
+    if (tableModel.tag==4) {
+    
+    SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:2];
+    
+    
+    
+    if ([section isKindOfClass:[SCObjectSection class]]){
+        
+        SCObjectSection *objectSection=(SCObjectSection *)section;
+        
+        
+        NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+        
+        
+        
+        
+        if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"]&&objectSection.cellCount>4) {
+            
+            SCTableViewCell *cellAtOne=(SCTableViewCell *)[objectSection cellAtIndex:1];
+            if ([cellAtOne isKindOfClass:[SCObjectSelectionCell class]]) {
+                SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtOne;
+                
+                
+                
+                NSObject *additionalVariableNameObject=[sectionManagedObject valueForKeyPath:@"additionalVariableName"];
+                
+                if (indexPath.row!=NSNotFound &&( selectedVariableName||(additionalVariableNameObject&&[additionalVariableNameObject isKindOfClass:[AdditionalVariableNameEntity class]]))) {
+                    if (!selectedVariableName) {
+                        selectedVariableName=(AdditionalVariableNameEntity *)additionalVariableNameObject;
+                    }
+                    
+                    
+                    if (selectedVariableName.variableName.length) {
+                        
+                        NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                  @"variableName.variableName like %@",[NSString stringWithString:(NSString *) selectedVariableName.variableName]];
+                        
+                        SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
+                        
+                        objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                        
+                        [objectSelectionCell reloadBoundValue];
+                        
+                        
+                    }
+                    
+                }
+                else {
+                    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                              @"variableName.varaibleName = nil"];
+                    
+                    SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
+                    
+                    objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                }
+                
+                
+            }
+            
+            
+            
+        }
+    }
+    
+    }
+    
+    
 }
 
 -(void)setSectionHeaderColorWithSection:(SCTableViewSection *)section color:(UIColor *)color{
@@ -3001,6 +3068,62 @@
               
     
     if (tableViewModel.tag==4){
+        
+        
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        
+        if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"]) {
+            
+            if (cell.tag==0&&[cell isKindOfClass:[SCObjectSelectionCell class]] ) {
+           
+            SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+            
+            
+            if ([objectSelectionCell.selectedItemIndex intValue]>-1) {
+                NSManagedObject *selectedVariableNameManagedObject =[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                if ([selectedVariableNameManagedObject isKindOfClass:[AdditionalVariableNameEntity class]]) {
+                    selectedVariableName=(AdditionalVariableNameEntity *) selectedVariableNameManagedObject;
+                    
+                    
+                    
+                    SCTableViewCell *variableValueCell=(SCTableViewCell *)[tableViewModel cellAfterCell:objectSelectionCell rewind:NO];
+                    
+                    if ([variableValueCell isKindOfClass:[SCObjectSelectionCell class]]) {
+                        
+                        
+                        SCObjectSelectionCell *variableValueObjectSelectionCell=(SCObjectSelectionCell *)variableValueCell;
+                        
+                        if (selectedVariableName.variableName.length) {
+                            
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                      @"variableName.variableName like %@",[NSString stringWithString:(NSString *) selectedVariableName.variableName]];
+                            
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
+                            
+                            variableValueObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                            
+                            [variableValueObjectSelectionCell reloadBoundValue];
+                            
+                            
+                        }
+                        
+                    }
+                    
+                    
+                }
+                
+                
+                
+                
+                
+                
+                
+                
+            }
+        
+            }
+        
+        
         if (cell.tag==3)
         {
             UIView *viewOne = [cell viewWithTag:14];
@@ -3028,6 +3151,7 @@
             
         }
         
+    }
     }
 }
 
@@ -3383,6 +3507,9 @@
         self.currentDetailTableViewModel=tableViewModel;
     }
 
+    if (tableViewModel.tag==0) {
+        selectedVariableName=nil;
+    }
 
 }
 

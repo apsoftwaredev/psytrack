@@ -20,6 +20,8 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import "ClinicianEntity.h"
 #import "ABGroupSelectionCell.h"
+#import "AdditionalVariableNameEntity.h"
+
 static NSInteger const kAlertTagFoundExistingPersonWithName = 1;
 static NSInteger const kAlertTagFoundExistingPeopleWithName = 2;
 
@@ -54,7 +56,7 @@ NSManagedObjectContext *managedObjectContext;
   BOOL isInDetailSubview;
     
    
-   
+    AdditionalVariableNameEntity *selectedVariableName;
     
     
 }

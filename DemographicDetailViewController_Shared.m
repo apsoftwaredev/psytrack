@@ -742,8 +742,8 @@
     variableValueSelectionAttribs.allowDeletingItems = NO;
     variableValueSelectionAttribs.allowMovingItems = YES;
     variableValueSelectionAttribs.allowEditingItems = YES;
-    variableValueSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add Variable Value Definitions)"];
-    variableValueSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add Variable Value Definition"];
+    variableValueSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add Values under variable name definition)"];
+    variableValueSelectionAttribs.addNewObjectuiElement = nil;
     additionalVariableValuePropertyDef.attributes = variableValueSelectionAttribs;
     SCPropertyDefinition *additionalVariableValueNotesPropertyDef = [additionalVariableValueDef propertyDefinitionWithName:@"notes"];
     additionalVariableValueNotesPropertyDef.type=SCPropertyTypeTextView;
