@@ -2676,70 +2676,77 @@
         }
     }
     
-    if (tableModel.tag==4) {
-    
-    SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:2];
-    
-    
-    
-    if ([section isKindOfClass:[SCObjectSection class]]){
-        
-        SCObjectSection *objectSection=(SCObjectSection *)section;
+    else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
         
         
-        NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+        SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
         
         
         
-        
-        if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"]&&objectSection.cellCount>4) {
+        if ([section isKindOfClass:[SCObjectSection class]]){
             
-            SCTableViewCell *cellAtOne=(SCTableViewCell *)[objectSection cellAtIndex:1];
-            if ([cellAtOne isKindOfClass:[SCObjectSelectionCell class]]) {
-                SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtOne;
+            SCObjectSection *objectSection=(SCObjectSection *)section;
+            
+            
+            NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+            
+            
+            
+            
+            if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"]&&objectSection.cellCount>1) {
                 
-                
-                
-                NSObject *additionalVariableNameObject=[sectionManagedObject valueForKeyPath:@"additionalVariableName"];
-                
-                if (indexPath.row!=NSNotFound &&( selectedVariableName||(additionalVariableNameObject&&[additionalVariableNameObject isKindOfClass:[AdditionalVariableNameEntity class]]))) {
-                    if (!selectedVariableName) {
-                        selectedVariableName=(AdditionalVariableNameEntity *)additionalVariableNameObject;
-                    }
+                SCTableViewCell *cellAtZero=(SCTableViewCell *)[objectSection cellAtIndex:1];
+                if ([cellAtZero isKindOfClass:[SCObjectSelectionCell class]]) {
+                    SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtZero;
                     
                     
-                    if (selectedVariableName.variableName.length) {
+                    
+                    NSObject *additionalVariableNameObject=[sectionManagedObject valueForKeyPath:@"variableName"];
+                    
+                    if (indexPath.row!=NSNotFound &&( selectedVariableName||(additionalVariableNameObject&&[additionalVariableNameObject isKindOfClass:[AdditionalVariableNameEntity class]]))) {
+                        if (!selectedVariableName) {
+                            selectedVariableName=(AdditionalVariableNameEntity *)additionalVariableNameObject;
+                        }
                         
+                        
+                        if (selectedVariableName.variableName.length) {
+                            
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                      @"variableName.variableName like %@",[NSString stringWithString:(NSString *) selectedVariableName.variableName]];
+                            
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
+                            
+                            objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                            
+                            [objectSelectionCell reloadBoundValue];
+                            
+                            
+                        }
+                        
+                    }
+                    else {
                         NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                                  @"variableName.variableName like %@",[NSString stringWithString:(NSString *) selectedVariableName.variableName]];
+                                                  @"variableName.variableName = nil"];
                         
                         SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
                         
                         objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
-                        
-                        [objectSelectionCell reloadBoundValue];
-                        
-                        
                     }
                     
-                }
-                else {
-                    NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                              @"variableName.varaibleName = nil"];
                     
-                    SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
-                    
-                    objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                 }
+                
                 
                 
             }
-            
-            
-            
         }
-    }
-    
+        
+        
+        
+        
+        
+        
+        
     }
     
     
