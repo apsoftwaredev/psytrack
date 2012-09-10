@@ -2524,7 +2524,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" boundObject:nil labelTextPropertyName:@"Age"];
                 SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Age (30-Day Months)" boundObject:nil labelTextPropertyName:@"WechslerAge"];
                 actualAge.label.text=@"0y 0m";
-                wechslerAge.label.text=[NSString stringWithFormat:@"%iy %im",0,0];
+                wechslerAge.label.text=@"0y 0m";
                 [sectionOne addCell:actualAge];
                 [sectionOne addCell:wechslerAge];
             } 

@@ -34,7 +34,7 @@
 {
     [super loadBindingsIntoCustomControls];
     
-    NSString *riskType=[self.objectBindings valueForKey:@"31"];
+    NSString *riskType=[self.objectBindings valueForKey:@"41"];
     
     if ([riskType isEqualToString:@"suicide"]) {
         self.titleLabel.text=@"Suicide";

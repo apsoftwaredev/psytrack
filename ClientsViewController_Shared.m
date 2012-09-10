@@ -1148,80 +1148,57 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 -(NSString *)calculateWechslerAgeWithBirthdate:(NSDate *)birthdate{
 
     
-    NSDate *now=[NSDate date];
-    NSDateFormatter *dayFormater=[[NSDateFormatter alloc]init];
-    [dayFormater setDateFormat:@"d"];
-    
-    NSDateFormatter *monthFormater=[[NSDateFormatter alloc]init];
-    [monthFormater setDateFormat:@"M"];
-    
-    NSDateFormatter *yearFormater=[[NSDateFormatter alloc]init];
-    [yearFormater setDateFormat:@"Y"];
-    
-    
-    
-    int nowYear, nowMonth, nowDay;
-    
-    nowYear=[[yearFormater stringFromDate:now]intValue];
-    
-    nowMonth=[[monthFormater stringFromDate:now]intValue];
-    
-    nowDay=[[dayFormater stringFromDate:now]intValue];
-    
-    int birthYear, birthMonth, birthDay;
-    
-    birthYear=[[yearFormater stringFromDate:birthdate]intValue];
-    
-    birthMonth=[[monthFormater stringFromDate:birthdate]intValue];
-    
-    birthDay=[[dayFormater stringFromDate:birthdate]intValue];
-    
-    int difYear,difMonth,difDay;
-    if (birthDay >nowDay) {
+     
+    if (birthdate==NULL){
         
-        difDay=(nowDay+30)-birthDay;
-        
-        if (nowMonth>=birthMonth) {
-             difMonth=(nowMonth-1)-birthMonth;
-        
-        }
-        else
-        {
-            difMonth=((nowMonth+12)-1)-birthMonth;
-            nowYear=nowYear-1;
-        }
-       
-        
+        return @"no birthdate";
         
     }
-    else
-    {
-        difDay=nowDay-birthDay;
-        if (nowMonth>=birthMonth) {
-            difMonth=nowMonth-birthMonth;
-            
-        }
-        else
-        {
-            difMonth=(nowMonth+12)-birthMonth;
-            nowYear=nowYear-1;
+    NSDate *now =[NSDate date];
+    
+    //    NSTimeInterval ageInterval=[birthdate timeIntervalSinceNow];
+    
+    //define a gregorian calandar
+    NSCalendar *gregorianCalendar = [NSCalendar currentCalendar];
+    [gregorianCalendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    //define the calandar unit flags
+    NSUInteger unitFlags = NSDayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    
+    //define the date components
+    NSDateComponents *dateComponents = [gregorianCalendar components:unitFlags
+                                                            fromDate:birthdate
+                                                              toDate:now
+                                                             options:0];
+    
+    int day, month, year;
+    day=[dateComponents day];
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    
+    [dateFormatter setDateFormat:@"d"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    int birthDateDay=[[dateFormatter stringFromDate:birthdate]intValue];
+    int nowDateDay=[[dateFormatter stringFromDate:now]intValue];
+    if (nowDateDay>30) {
+        nowDateDay=30;
+    }
+    if (nowDateDay-birthDateDay<0) {
+        day=30-(nowDateDay-birthDateDay);
+        if (day>30) {
+            day=30-(day-30);
         }
     }
     
-    difYear=nowYear-birthYear;
+    month=[dateComponents month];
     
-    if (difMonth<0) {
-        difMonth=12-difMonth;
-        difYear=difYear-1;
-    }
+    year=[dateComponents year];
     
-    NSString *age =[NSString stringWithFormat:@"%iy %im %id",difYear,difMonth,difDay];
+    NSString *age =[NSString stringWithFormat:@"%iy %im %id",year,month,day];
     
-
-
-
+    
+    
+    
     return age;
-}
+  }
 
 -(NSString *)calculateActualAgeWithBirthdate:(NSDate *)birthdate{
 
@@ -1231,8 +1208,8 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 //    NSTimeInterval ageInterval=[birthdate timeIntervalSinceNow];
     
     //define a gregorian calandar
-    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-   
+    NSCalendar *gregorianCalendar = [NSCalendar currentCalendar];
+    [gregorianCalendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     //define the calandar unit flags
     NSUInteger unitFlags = NSDayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
      
@@ -1245,13 +1222,16 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     int day, month, year;
     day=[dateComponents day];
     month=[dateComponents month];
+    DLog(@"month is  %i",month);
     year=[dateComponents year];
  
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-
+    
     [dateFormatter setDateFormat:@"M"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    int nowMonth=[[dateFormatter stringFromDate:now]intValue];
     int dateMonth=[[dateFormatter stringFromDate:birthdate]intValue];
-    if (dateMonth==4||dateMonth==6||dateMonth==9||dateMonth==11) {
+    if ((nowMonth!=9&&nowMonth!=4&&nowMonth!=6&&nowMonth!=11)&&(dateMonth==4||dateMonth==6||dateMonth==9||dateMonth==11)) {
         day=day-1;
     }
     if(dateMonth==2){
@@ -1276,8 +1256,16 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     int dateDiff=[[dateFormatter stringFromDate:birthdate]intValue];
     int nowDay=[[dateFormatter stringFromDate:now]intValue];
     if (dateDiff==nowDay) {
-        
+        if (day>27) {
+            month=month+1;
+            if (month>11) {
+                year=year+1;
+                month=0;
+            }
+        }
+
         day=0;
+        
         
     }
     else if (dateDiff< nowDay)
@@ -1286,7 +1274,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
         day=nowDay-dateDiff;
     }
 
-
+DLog(@"month is  %i",month);
     
     return [NSString stringWithFormat:@"%iy %im %id", year,month,day];
 }
@@ -1302,91 +1290,49 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
         return @"no birthdate";
     
     }
- 
-    NSDateFormatter *dayFormater=[[NSDateFormatter alloc]init];
-    [dayFormater setDateFormat:@"d"];
-    
-    NSDateFormatter *monthFormater=[[NSDateFormatter alloc]init];
-    [monthFormater setDateFormat:@"M"];
-    
-    NSDateFormatter *yearFormater=[[NSDateFormatter alloc]init];
-    [yearFormater setDateFormat:@"Y"];
     
     
+    //    NSTimeInterval ageInterval=[birthdate timeIntervalSinceNow];
     
-    int toYear, toMonth, toDateDay;
+    //define a gregorian calandar
+    NSCalendar *gregorianCalendar = [NSCalendar currentCalendar];
+    [gregorianCalendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    //define the calandar unit flags
+    NSUInteger unitFlags = NSDayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
     
-    toYear=[[yearFormater stringFromDate:toDate]intValue];
+    //define the date components
+    NSDateComponents *dateComponents = [gregorianCalendar components:unitFlags
+                                                            fromDate:birthdate
+                                                              toDate:toDate
+                                                             options:0];
     
-    toMonth=[[monthFormater stringFromDate:toDate]intValue];
+    int day, month, year;
+    day=[dateComponents day];
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
     
-    toDateDay=[[dayFormater stringFromDate:toDate]intValue];
+    [dateFormatter setDateFormat:@"d"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    int birthDateDay=[[dateFormatter stringFromDate:birthdate]intValue];
+    int nowDateDay=[[dateFormatter stringFromDate:toDate]intValue];
     
-    int birthYear, birthMonth, birthDay;
-    
-    birthYear=[[yearFormater stringFromDate:birthdate]intValue];
-    
-    birthMonth=[[monthFormater stringFromDate:birthdate]intValue];
-    
-    birthDay=[[dayFormater stringFromDate:birthdate]intValue];
-    
-    int difYear,difMonth,difDay;
-    if (birthDay >toDateDay) {
-        
-        difDay=(toDateDay+30)-birthDay;
-        
-        if (toMonth>=birthMonth) {
-            difMonth=(toMonth-1)-birthMonth;
-            
-        }
-        else
-        {
-            difMonth=((toMonth+12)-1)-birthMonth;
-            toYear=toYear-1;
-        }
-        
-        
-        
-    }
-    else
-    {
-        difDay=toDateDay-birthDay;
-        if (toMonth>=birthMonth) {
-            difMonth=toMonth-birthMonth;
-            
-        }
-        else
-        {
-            difMonth=(toMonth+12)-birthMonth;
-            toYear=toYear-1;
+    if (nowDateDay-birthDateDay<0) {
+        day=30-(nowDateDay-birthDateDay);
+        if (day>30) {
+            day=30-(day-30);
         }
     }
     
-       
-    difYear=toYear-birthYear;
-   
+    month=[dateComponents month];
     
-    if (difMonth<0) {
-        difYear=difYear-1;
-        difMonth=12+difMonth;
-        
-    }
-    if (difYear<0) {
-        difYear=0;
-        difMonth=0;
-        difDay=0;
-    }
+    year=[dateComponents year];
     
-    if (difDay<0&&difDay==0&&difYear==0) {
-        difDay=0;
-    }
-    
-    NSString *age =[NSString stringWithFormat:@"%iy %im %id",difYear,difMonth,difDay];
+    NSString *age =[NSString stringWithFormat:@"%iy %im %id",year,month,day];
     
     
     
     
     return age;
+
 }
 
 -(NSString *)calculateActualAgeWithBirthdate:(NSDate *)birthdate toDate:(NSDate *)toDate{
@@ -1399,30 +1345,53 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
         return [NSString stringWithFormat:@"no birthdate"];
     }
     
+    
+ 
+    
     //    NSTimeInterval ageInterval=[birthdate timeIntervalSinceNow];
-    
+   
     //define a gregorian calandar
-    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    
+    NSCalendar *gregorianCalendar = [NSCalendar currentCalendar];
+  
+    [gregorianCalendar setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     //define the calandar unit flags
-    NSUInteger unitFlags = NSDayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSUInteger unitFlags =NSHourCalendarUnit|NSMinuteCalendarUnit |NSSecondCalendarUnit | NSDayCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
     
+    
+    NSDateComponents *toDateDateComponents=[gregorianCalendar components:unitFlags fromDate:toDate];
+    
+    NSDateComponents *nowDateComponents=[gregorianCalendar components:unitFlags fromDate:[NSDate date]];
+    toDateDateComponents.hour=nowDateComponents.hour;
+    
+    toDateDateComponents.minute=nowDateComponents.minute;
+    
+    toDateDateComponents.second=nowDateComponents.second;
+
     //define the date components
     NSDateComponents *dateComponents = [gregorianCalendar components:unitFlags
                                                             fromDate:birthdate
-                                                              toDate:toDate
+                                                              toDate:[gregorianCalendar dateFromComponents:toDateDateComponents]
                                                              options:0];
     
-    int day, month, year;
-    day=[dateComponents day];
-    month=[dateComponents month];
-    year=[dateComponents year];
+    
+  
+    
+    
     
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
     
     [dateFormatter setDateFormat:@"M"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    int day, month, year;
+    day=[dateComponents day];
+    month=[dateComponents month];
+    DLog(@"month is  %i",month);
+    year=[dateComponents year];
+    
+    
+    int toDateMonth=[[dateFormatter stringFromDate:toDate]intValue];
     int dateMonth=[[dateFormatter stringFromDate:birthdate]intValue];
-    if (dateMonth==4||dateMonth==6||dateMonth==9||dateMonth==11) {
+    if ((toDateMonth!=9&&toDateMonth!=4&&toDateMonth!=6&&toDateMonth!=11)&&(dateMonth==4||dateMonth==6||dateMonth==9||dateMonth==11)) {
         day=day-1;
     }
     if(dateMonth==2){
@@ -1445,27 +1414,30 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     [dateFormatter setDateFormat:@"d"];
     int dateDiff=[[dateFormatter stringFromDate:birthdate]intValue];
-    int toDateDay=[[dateFormatter stringFromDate:toDate]intValue];
-    if (dateDiff==toDateDay) {
+    int nowDay=[[dateFormatter stringFromDate:toDate]intValue];
+    if (dateDiff==nowDay) {
+        if (day>27) {
+            month=month+1;
+            if (month>11) {
+                year=year+1;
+                month=0;
+            }
+        }
         
         day=0;
         
+        
     }
-    else if (dateDiff< toDateDay)
+    else if (dateDiff< nowDay)
     {
         
-        day=toDateDay-dateDiff;
+        day=nowDay-dateDiff;
     }
     
-    if (year<0) {
-        year=0;
-        month=0;
-        day=0;
-    }
-    if (day<0&&month==0&&year==0) {
-        day=0;
-    }
+    DLog(@"month is  %i",month);
+    
     return [NSString stringWithFormat:@"%iy %im %id", year,month,day];
+
 }
 
 @end

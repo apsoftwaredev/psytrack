@@ -381,7 +381,7 @@
      [self.clientPresentationDef removePropertyDefinitionWithName:@"client"];
     NSDictionary *suicidalityDataBindings = [NSDictionary 
                                              dictionaryWithObjects:[NSArray arrayWithObjects:@"suicideIdeation",@"suicidePlan",@"suicideMeans", @"suicideHistory", @"suicide",   nil ] 
-                                             forKeys:[NSArray arrayWithObjects:@"20",@"21",@"22",@"23",@"31",nil]]; // 20,21,22,23 are the binding keys 
+                                             forKeys:[NSArray arrayWithObjects:@"20",@"21",@"22",@"23",@"41",nil]]; // 20,21,22,23 are the binding keys 
     SCCustomPropertyDefinition *suicidalityDataProperty = [SCCustomPropertyDefinition definitionWithName:@"suicidalityData"
                                                                                     uiElementNibName:@"SuicidalityCell"
                                                                                       objectBindings:suicidalityDataBindings];
@@ -393,7 +393,7 @@
     
     NSDictionary *homicidalityDataBindings = [NSDictionary 
                                              dictionaryWithObjects:[NSArray arrayWithObjects:@"homicideIdeation",@"homicidePlan",@"homicideMeans", @"homicideHistory", @"homicide",   nil ] 
-                                             forKeys:[NSArray arrayWithObjects:@"20",@"21",@"22",@"23",@"31",nil]]; // 20,21,22,23 are the binding keys 
+                                             forKeys:[NSArray arrayWithObjects:@"20",@"21",@"22",@"23",@"41",nil]]; // 20,21,22,23 are the binding keys 
     SCCustomPropertyDefinition *homicidalityDataProperty = [SCCustomPropertyDefinition definitionWithName:@"homicidalityData"
                                                                                         uiElementNibName:@"SuicidalityCell"
                                                                                           objectBindings:homicidalityDataBindings];
@@ -1245,8 +1245,8 @@
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 
 
-
-    if ((tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Age (30-day Months)"])||(tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Test Age"])) 
+DLog(@"cell text is  %@",cell.textLabel.text);
+    if ((tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Age (30-Day Months)"])||(tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Test Age"]))
     {
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         
@@ -1329,7 +1329,7 @@ if (tableViewModel.tag==5&&tableViewModel.sectionCount>1&&indexPath.section==1){
             SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" boundObject:nil labelTextPropertyName:@"TestAge"]
         ;
        
-            SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Test Age (30-day Months)" boundObject:nil labelTextPropertyName:@"WechslerTestAge"];
+            SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Age (30-day Months)" boundObject:nil labelTextPropertyName:@"WechslerTestAge"];
             
             [section addCell:actualAge];
             [section addCell:wechslerAge];
@@ -1715,8 +1715,9 @@ if ([clientCell isKindOfClass:[ClientsSelectionCell class]]) {
 
 
 if (serviceDatePickerDate && clientDateOfBirth) {
-    wechslerAgeCell.label.text=(NSString *)[clientsViewController_Shared calculateWechslerAgeWithBirthdate:(NSDate *)clientDateOfBirth toDate:(NSDate *)serviceDatePickerDate];
+    wechslerAgeCell.label.text=[NSString stringWithString:(NSString *)[clientsViewController_Shared calculateWechslerAgeWithBirthdate:(NSDate *)clientDateOfBirth toDate:(NSDate *)serviceDatePickerDate]];
     actualAgeCell.label.text=(NSString *)[clientsViewController_Shared calculateActualAgeWithBirthdate:(NSDate *)clientDateOfBirth toDate:(NSDate *)serviceDatePickerDate];
+   
 }
 else
 {
@@ -1742,10 +1743,8 @@ else
    
 
 }
-    [wechslerAgeCell setNeedsLayout];
-    [wechslerAgeCell setNeedsDisplay];
-    [actualAgeCell setNeedsLayout];
-    [actualAgeCell setNeedsDisplay];
+   
+
 }
 
 //    actualAgeCell.label.text=[clientsViewController_Shared calculateActualAgeWithBirthdate:birthdateCell.datePicker.date];
