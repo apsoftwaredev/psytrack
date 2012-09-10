@@ -3741,7 +3741,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsRootViewController_iPad.m"
@@ -3750,6 +3750,32 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "409"
          endingLineNumber = "409"
+         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsRootViewController_iPad.m"
+         timestampString = "369006644.582439"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "496"
+         endingLineNumber = "496"
+         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsRootViewController_iPad.m"
+         timestampString = "369007006.764903"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "522"
+         endingLineNumber = "522"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
