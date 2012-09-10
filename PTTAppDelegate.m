@@ -1968,7 +1968,7 @@
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
 	NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
 	
-	
+	DLog(@"send request %@",returnData);
 	
 #endif
 }
@@ -1996,15 +1996,15 @@
 	NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
 	
 	NSString *alert = [apsInfo objectForKey:@"alert"];
+	[self displayNotification:alert];
 	
-	
-	NSString *sound = [apsInfo objectForKey:@"sound"];
+//	NSString *sound = [apsInfo objectForKey:@"sound"];
     
 	AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 	
 	NSString *badge = [apsInfo objectForKey:@"badge"];
 	
-	application.applicationIconBadgeNumber = [[apsInfo objectForKey:@"badge"] integerValue];
+	application.applicationIconBadgeNumber = [badge integerValue];
 	
 #endif
 }
