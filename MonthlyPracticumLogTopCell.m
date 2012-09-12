@@ -149,8 +149,8 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     CGFloat shiftSupervisionDown=0;
     CGFloat shiftDirectHoursFooterDown=0;
     CGFloat shiftIndirectHoursHeaderDown=0;
-    CGFloat shiftOverallHoursFooterDown=0;
-    CGFloat shiftContainerForSignaturesViewAndSupervisorSummariesDownTo=0;
+//    CGFloat shiftOverallHoursFooterDown=0;
+//    CGFloat shiftContainerForSignaturesViewAndSupervisorSummariesDownTo=0;
    
     CGFloat interventionMoreNeededHeight=interventionTVHeight- self.interventionTypesTableView.frame.size.height;
     CGFloat assessmentMoreNeededHeight=assessmentTVHeight-self.assessmentTypesTableView.frame.size.height;
@@ -205,8 +205,8 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     shiftIndirectHoursHeaderDown=shiftDirectHoursFooterDown;
     shiftSupportDown=shiftIndirectHoursHeaderDown;
     shiftSupervisionDown=shiftSupportDown+supportMoreNeededHeight;
-    shiftOverallHoursFooterDown=shiftSupervisionDown+supervisionMoreNeededHeight;
-    shiftContainerForSignaturesViewAndSupervisorSummariesDownTo=shiftOverallHoursFooterDown+overallHoursFooter.frame.size.height+15;
+//    shiftOverallHoursFooterDown=shiftSupervisionDown+supervisionMoreNeededHeight;
+//    shiftContainerForSignaturesViewAndSupervisorSummariesDownTo=shiftOverallHoursFooterDown+overallHoursFooter.frame.size.height+15;
     
     
 

@@ -16,7 +16,7 @@
  *
  */
 
-@interface BOPickersDataSource : NSObject <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface BOPickersDataSource : NSObject /*<UIPickerViewDataSource, UIPickerViewDelegate>*/
 {
 	NSArray	*customPickerArray;
 }
@@ -29,7 +29,7 @@
 
 
 
--(NSArray *)stringArrayForPropertyName:(NSString *)propertyNameValue;
+//-(NSArray *)stringArrayForPropertyName:(NSString *)propertyNameValue;
 -(NSArray *)presentationDataWithPropertyName:(NSString *)propertyNameValue;
 
 @end

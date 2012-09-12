@@ -292,7 +292,7 @@
     
     else if (!self.monthToDisplay){
         if(!numberOfYearsSinceFirstDatePlusTen){
-            [appDelegate displayNotification:@"No records to diplay"];
+            [appDelegate displayNotification:@"No Assessments, Interventions, Support Activities, Or Supervision"];
             
         }
         else {
@@ -441,9 +441,9 @@
     
     NSString *documentsPath=[appDelegate applicationDocumentsDirectory].path;
     
-    NSString *newFileName=[fileNameGiven stringByAppendingPathExtension:@"pdf"];
+    NSString *newFileName=nil;
     
-    NSString *documentsPathWithNewFileName=[documentsPath stringByAppendingPathComponent:newFileName];
+    NSString *documentsPathWithNewFileName=nil;
     
 
 

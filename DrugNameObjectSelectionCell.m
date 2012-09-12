@@ -338,7 +338,7 @@
         //    }
         else
         {
-            self.label.text=[NSString string];
+            self.label.text=nil;
             //         self.selectedItemIndex=[NSNumber numberWithInteger:-1];
         }
     }

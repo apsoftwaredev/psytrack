@@ -160,7 +160,7 @@
                 if ([SCUtilities is_iPad]) {
                     allHoursNibName=@"AllTrainingHoursGenerateVC";
                 }else {
-                    allHoursNibName=@"AllTrainingHoursGenerateVC";
+                    allHoursNibName=@"AllTrainingHoursGenerateVC_iPhone";
                 }
                 AllTrainingHoursGenerateVC *allTrainingHoursGenerateVC = [[AllTrainingHoursGenerateVC alloc] initWithNibName:allHoursNibName bundle:[NSBundle mainBundle]];
                 

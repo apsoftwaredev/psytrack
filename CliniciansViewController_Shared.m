@@ -149,22 +149,22 @@
     //set different custom cells nib names for iPhone and iPad
     NSString *shortFieldCellNibName=nil;
     NSString *textFieldAndLableNibName=nil;
-    NSString *scaleDataCellNibName=nil;
-    NSString *switchAndLabelCellName=nil;
+//    NSString *scaleDataCellNibName=nil;
+//    NSString *switchAndLabelCellName=nil;
     if ([SCUtilities is_iPad]) {
         
         textFieldAndLableNibName=@"TextFieldAndLabelCell_iPad";
         shortFieldCellNibName=@"ShortFieldCell_iPad";
-        scaleDataCellNibName=@"ScaleDataCell_iPad";
-        switchAndLabelCellName=@"switchAndLabelCell_iPad";
+//        scaleDataCellNibName=@"ScaleDataCell_iPad";
+//        switchAndLabelCellName=@"switchAndLabelCell_iPad";
                
     } else
     {
         
         textFieldAndLableNibName=@"TextFieldAndLabelCell_iPhone";
         shortFieldCellNibName=@"ShortFieldCell_iPhone";
-        scaleDataCellNibName=@"ScaleDataCell_iPhone";
-        switchAndLabelCellName=@"switchAndLabelCell_iPhone";
+//        scaleDataCellNibName=@"ScaleDataCell_iPhone";
+//        switchAndLabelCellName=@"switchAndLabelCell_iPhone";
 
     }
     
@@ -2628,7 +2628,7 @@
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
 
-    UIColor *backgroundColor=[UIColor clearColor];
+    UIColor *backgroundColor=nil;
     if(indexPath.row==NSNotFound|| tableModel.tag>0 ||isInDetailSubview)
     {
        
@@ -3470,40 +3470,20 @@
 //    return YES;
 //}
 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDismissForSectionAtIndex:(NSUInteger)index{
-    if (tableViewModel.tag==0) {
-        if (![SCUtilities is_iPad]) {
-        
-        currentDetailTableViewModel_.viewController.view=nil;
-        self.currentDetailTableViewModel=nil;
-            
-        }
-        [self resetABVariablesToNil];
-        
-    }
-    
-    
-    
-    
-    
-    
-} 
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewDidDisappearForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if (tableViewModel.tag==0&&![SCUtilities is_iPad]) {
+
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewDidDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    if (tableModel.tag==0&&![SCUtilities is_iPad]) {
         currentDetailTableViewModel_.viewController.view=nil;
         self.currentDetailTableViewModel=nil;
         [self resetABVariablesToNil];
         
-       
         
-       
-        [tableViewModel.masterModel.modeledTableView reloadData];
+        
+        
+        [tableModel.masterModel.modeledTableView reloadData];
     }
-//    if (tableViewModel.tag==1) {
-//        currentDetailTableViewModel=tableViewModel;
-//    }
-    
+
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -3601,12 +3581,9 @@
 -(BOOL)checkIfRecordIDInAddressBook:(int)recordID {
 
 
-    ABAddressBookRef addressBookCheck=nil;
-    if (!addressBookCheck) {
-        addressBookCheck=ABAddressBookCreate();
-    }
-    
-    
+    ABAddressBookRef addressBookCheck=ABAddressBookCreate();
+        
+
     BOOL exists=NO;
     if (addressBookCheck) {
    
@@ -3616,18 +3593,18 @@
 
         if (person) {
             exists=YES;
-            CFRelease(person);
+           
         } 
         
-        
+       
+    }
+        CFRelease(addressBookCheck);
+      
     }
    
-        addressBookCheck=nil;
-    }
-        
+   
     return exists;
-
-}
+  }
 
 
 
@@ -3723,10 +3700,10 @@
             
             
             //crashes if try to release and show alert view
-            NSString *name=[NSString string];
-            name=(NSString *)[NSString stringWithFormat:@"%@ %@",clinician.firstName, clinician.lastName];
+            NSString *name=(NSString *)[NSString stringWithFormat:@"%@ %@",clinician.firstName, clinician.lastName];
             
-            
+;
+                    
             CFArrayRef peopleWithNameArray=nil;
             
            
@@ -3741,170 +3718,165 @@
                
                 peopleWithNameArray= ABAddressBookCopyPeopleWithName((ABAddressBookRef) addressBookForPeopleArray, (__bridge CFStringRef) name);
             
-                    addressBookForPeopleArray=nil;
+                   
+                   
+                   
+                
+            
+            
+            
+                int peopleCount=CFArrayGetCount((CFArrayRef) peopleWithNameArray);
+                if (peopleCount==1  && !addExistingAfterPromptBool  ) {
+                    
+                    
+                    ABRecordRef  existingPersonRef=CFArrayGetValueAtIndex(peopleWithNameArray, 0);
+                    
+                    existingPersonRecordID=ABRecordGetRecordID(existingPersonRef);
+                    CFStringRef CFFirstName=ABRecordCopyValue((ABRecordRef) existingPersonRef, kABPersonFirstNameProperty);
+                    
+                    CFStringRef CFLastName=ABRecordCopyValue((ABRecordRef) existingPersonRef, kABPersonLastNameProperty);
+                    
+                    NSString *firstName=(__bridge_transfer NSString *)CFFirstName;
+                    
+                    NSString *lastName=(__bridge_transfer NSString *)CFLastName;
+                    
+                                    
+                    
+                    NSString *compositeName=[NSString stringWithFormat:@"%@ %@", firstName, lastName]; 
+                    NSString *alertMessage=[NSString stringWithFormat:@"Existing entry for %@ in the Address Book. Would you like to link this clinician to the existing Address Book entry?",compositeName];
+                    
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Existing Contact With Name" message:alertMessage
+                                                                   delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Link to Existing", @"Create New", nil];
+                    
+                    alert.tag=kAlertTagFoundExistingPersonWithName;
+                    
+                    
+                    
+                    [alert show];
+                    //            CFRelease(name);
+                    //            CFRelease(peopleWithNameArray);
+                    
+                    //            [self showUnknownPersonViewControllerWithABRecordRef:(ABRecordRef)person.recordRef];
+                    
+                                    
+                     name=NULL;
+                  
                 }
-            
-            
-            
-            int peopleCount=CFArrayGetCount((CFArrayRef) peopleWithNameArray);
-            if (peopleCount==1  && !addExistingAfterPromptBool  ) {
-                
-                
-                ABRecordRef  existingPersonRef=CFArrayGetValueAtIndex(peopleWithNameArray, 0);
-                
-                existingPersonRecordID=ABRecordGetRecordID(existingPersonRef);
-                CFStringRef CFFirstName=ABRecordCopyValue((ABRecordRef) existingPersonRef, kABPersonFirstNameProperty);
-                
-                CFStringRef CFLastName=ABRecordCopyValue((ABRecordRef) existingPersonRef, kABPersonLastNameProperty);
-                
-                NSString *firstName=(__bridge_transfer NSString *)CFFirstName;
-                
-                NSString *lastName=(__bridge_transfer NSString *)CFLastName;
-                
-                CFRelease(CFFirstName);
-                CFRelease(CFLastName);
-                
-                
-                NSString *compositeName=[NSString stringWithFormat:@"%@ %@", firstName, lastName]; 
-                NSString *alertMessage=[NSString stringWithFormat:@"Existing entry for %@ in the Address Book. Would you like to link this clinician to the existing Address Book entry?",compositeName];
-                
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Existing Contact With Name" message:alertMessage
-                                                               delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Link to Existing", @"Create New", nil];
-                
-                alert.tag=kAlertTagFoundExistingPersonWithName;
-                
-                
-                
-                [alert show];
-                //            CFRelease(name);
-                //            CFRelease(peopleWithNameArray);
-                
-                //            [self showUnknownPersonViewControllerWithABRecordRef:(ABRecordRef)person.recordRef];
-                
-                                
-                 name=NULL;
-            
-            }
-               
+                   
 
-            else if(peopleCount>1 && !addExistingAfterPromptBool)
-            {
-                ABRecordRef  existingPersonRef=CFArrayGetValueAtIndex(peopleWithNameArray, 0);
+                else if(peopleCount>1 && !addExistingAfterPromptBool)
+                {
+                    ABRecordRef  existingPersonRef=CFArrayGetValueAtIndex(peopleWithNameArray, 0);
+                    
+                    CFStringRef CFFirstName=ABRecordCopyValue((ABRecordRef) existingPersonRef, kABPersonFirstNameProperty);
+                    
+                    CFStringRef CFLastName=ABRecordCopyValue((ABRecordRef) existingPersonRef, kABPersonLastNameProperty);
+                    
+                    NSString *firstName=(__bridge_transfer NSString *)CFFirstName;
+                    
+                    NSString *lastName=(__bridge_transfer NSString *)CFLastName;
+                    
+                                                   
+                    
+                    NSString *compositeName=[NSString stringWithFormat:@"%@ %@", firstName, lastName];  
+                    NSString *alertMessage=[NSString stringWithFormat:@"Existing entries for %@ in the Address Book. Would you like to select an existing Address Book entry for this clinician?",compositeName];
+                    
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Existing Contacts With Name" message:alertMessage
+                                                                   delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Choose Existing", @"Create New", nil];
+                    
+                    alert.tag=kAlertTagFoundExistingPeopleWithName;
+                    
+
+                    
+                    [alert show];
+                 
+                   
+
+                    
                 
-                CFStringRef CFFirstName=ABRecordCopyValue((ABRecordRef) existingPersonRef, kABPersonFirstNameProperty);
-                
-                CFStringRef CFLastName=ABRecordCopyValue((ABRecordRef) existingPersonRef, kABPersonLastNameProperty);
-                
-                NSString *firstName=(__bridge_transfer NSString *)CFFirstName;
-                
-                NSString *lastName=(__bridge_transfer NSString *)CFLastName;
-                
-                if (CFFirstName!=NULL) {
-                    CFRelease(CFFirstName);
                 }
-                if (CFLastName!=NULL) {
-                    CFRelease(CFLastName);
+                
+            
+            
+                else
+                    
+                {
+                   
+                    
+                    ABRecordRef  existingPersonRef=ABPersonCreate();
+                    
+                    //    ABPerson *person=(ABPerson *)personRecord;
+                    
+                    
+                    
+                    if (clinician.firstName.length) {
+                    ABRecordSetValue(existingPersonRef, kABPersonFirstNameProperty, (__bridge CFStringRef) clinician.firstName, nil) ; 
+                    }
+                    if (clinician.lastName.length) {
+                    ABRecordSetValue(existingPersonRef, kABPersonLastNameProperty, (__bridge CFStringRef) clinician.lastName, nil) ; 
+                    }
+                    if (clinician.prefix.length) {
+                        ABRecordSetValue(existingPersonRef, kABPersonPrefixProperty, (__bridge CFStringRef) clinician.prefix, nil) ; 
+                    }
+                    if (clinician.middleName.length) {
+                        ABRecordSetValue(existingPersonRef, kABPersonMiddleNameProperty, (__bridge CFStringRef) clinician.middleName, nil) ; 
+                    }
+                    
+                    if (clinician.suffix.length) {
+                        ABRecordSetValue(existingPersonRef, kABPersonSuffixProperty, (__bridge CFStringRef) clinician.suffix, nil) ; 
+                    }
+                    
+                    if (clinician.notes.length) {
+                        ABRecordSetValue(existingPersonRef, kABPersonNoteProperty, (__bridge CFStringRef) clinician.notes, nil) ;
+                    }
+    //                
+                    [personAddNewViewController_ setAddressBook:addressBookForPeopleArray];
+                    if (self.personAddNewViewController) {
+                        self.personAddNewViewController.view=nil;
+                        self.personAddNewViewController=nil;
+                    }
+                    self.personAddNewViewController=[[ABNewPersonViewController alloc]init];;
+                   
+                   
+                    
+                    personAddNewViewController_.newPersonViewDelegate=self;
+                    [personAddNewViewController_ setDisplayedPerson:existingPersonRef];
+                    
+                    personAddNewViewController_.view.tag=837;
+                    
+                    //           [personAddNewViewController_ setAddressBook:addressBook];
+                    //            personAddNewViewController_=[[ABNewPersonViewController alloc]init];;
+                    //            personAddNewViewController_.parentGroup=group;
+                    //            personAddNewViewController_.newPersonViewDelegate=self;
+                    //            [personAddNewViewController_ setDisplayedPerson:existingPersonRef];
+                    //            
+                    //            personAddNewViewController_.view.tag=900;
+                    //            currentDetailTableViewModel.viewController.navigationController.delegate =self ;
+                    
+                    
+                    
+                    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:personAddNewViewController_];	
+                    
+                    navController.delegate=self;
+                    [[currentDetailTableViewModel_.viewController navigationController] presentModalViewController:navController animated:YES];
+                    
+                    addExistingAfterPromptBool=FALSE;
+                     
+                    CFRelease(existingPersonRef);
 
                 }
-                               
-                
-                NSString *compositeName=[NSString stringWithFormat:@"%@ %@", firstName, lastName];  
-                NSString *alertMessage=[NSString stringWithFormat:@"Existing entries for %@ in the Address Book. Would you like to select an existing Address Book entry for this clinician?",compositeName];
-                
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Existing Contacts With Name" message:alertMessage
-                                                               delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Choose Existing", @"Create New", nil];
-                
-                alert.tag=kAlertTagFoundExistingPeopleWithName;
-                
-
-                
-                [alert show];
-             
-               
-                
-                
             
-            }
-                
-                
+                if (peopleWithNameArray) {
+                     CFRelease(peopleWithNameArray);
+                }
                
             
-            else
                 
-            {
-               
-                
-                ABRecordRef  existingPersonRef=ABPersonCreate();
-                
-                //    ABPerson *person=(ABPerson *)personRecord;
-                
-                
-                
-                if (clinician.firstName.length) {
-                ABRecordSetValue(existingPersonRef, kABPersonFirstNameProperty, (__bridge CFStringRef) clinician.firstName, nil) ; 
-                }
-                if (clinician.lastName.length) {
-                ABRecordSetValue(existingPersonRef, kABPersonLastNameProperty, (__bridge CFStringRef) clinician.lastName, nil) ; 
-                }
-                if (clinician.prefix.length) {
-                    ABRecordSetValue(existingPersonRef, kABPersonPrefixProperty, (__bridge CFStringRef) clinician.prefix, nil) ; 
-                }
-                if (clinician.middleName.length) {
-                    ABRecordSetValue(existingPersonRef, kABPersonMiddleNameProperty, (__bridge CFStringRef) clinician.middleName, nil) ; 
-                }
-                
-                if (clinician.suffix.length) {
-                    ABRecordSetValue(existingPersonRef, kABPersonSuffixProperty, (__bridge CFStringRef) clinician.suffix, nil) ; 
-                }
-                
-                if (clinician.notes.length) {
-                    ABRecordSetValue(existingPersonRef, kABPersonNoteProperty, (__bridge CFStringRef) clinician.notes, nil) ;
-                }
-//                
-                [personAddNewViewController_ setAddressBook:addressBookForPeopleArray];
-                if (self.personAddNewViewController) {
-                    self.personAddNewViewController.view=nil;
-                    self.personAddNewViewController=nil;
-                }
-                self.personAddNewViewController=[[ABNewPersonViewController alloc]init];;
-               
-               
-                
-                personAddNewViewController_.newPersonViewDelegate=self;
-                [personAddNewViewController_ setDisplayedPerson:existingPersonRef];
-                
-                personAddNewViewController_.view.tag=837;
-                
-                //           [personAddNewViewController_ setAddressBook:addressBook];
-                //            personAddNewViewController_=[[ABNewPersonViewController alloc]init];;
-                //            personAddNewViewController_.parentGroup=group;
-                //            personAddNewViewController_.newPersonViewDelegate=self;
-                //            [personAddNewViewController_ setDisplayedPerson:existingPersonRef];
-                //            
-                //            personAddNewViewController_.view.tag=900;
-                //            currentDetailTableViewModel.viewController.navigationController.delegate =self ;
-                
-                
-                
-                UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:personAddNewViewController_];	
-                
-                navController.delegate=self;
-                [[currentDetailTableViewModel_.viewController navigationController] presentModalViewController:navController animated:YES];
-                
-                addExistingAfterPromptBool=FALSE;
-                //            [currentDetailTableViewModel.viewController.navigationController presentModalViewController:                
-            
-//            if (addressBook!=NULL) {
-//                CFRelease(addressBook);
-//            }
-//            if (addressBookNew!=NULL) {
-//                    CFRelease(addressBookNew);
-//                }
             }
+                if (addressBookForPeopleArray) {
+                    CFRelease(addressBookForPeopleArray);
+                }
             }
-//            if (addressBook==) {
-//                CFRelease(addressBook);
-//            }
           
         }
         else
@@ -4367,7 +4339,9 @@
         
         
 	}
-	
+if (addressBookForShowPerson) {
+    CFRelease(addressBookForShowPerson);
+}
 	
 }
 
@@ -4802,13 +4776,10 @@
             
             
         }
-        CFRelease(recordRef);
+       
         
     }
-    else
-    {
-        
-    }
+ 
     
     
     existingPersonRecordID =-1;
@@ -5696,9 +5667,7 @@
     if (addressBookToChangOrAddName) {
         CFRelease(addressBookToChangOrAddName);
     }
-    if (source) {
-        CFRelease(source);
-    }
+  
 
 }
 -(BOOL)personWithRecordID:(int)personID containedInGroupWithID:(int)groupID {
@@ -5756,9 +5725,7 @@
             }
             
         }
-        if (person) {
-            CFRelease(person);
-        }
+       
         if (arrayOfGroupMembers) {
             CFRelease(arrayOfGroupMembers);
             
@@ -5766,15 +5733,11 @@
         
     }
     
-    if (group){
-        
-        CFRelease(group);
-    }
-    
+       
     
     } 
     if (addressBookToCheckPerson) {
-        addressBookToCheckPerson=nil;
+        CFRelease(addressBookToCheckPerson);
     }
     return personExistsInGroup;
     
@@ -5837,7 +5800,7 @@
                 
                 [allGroups addObject:ptGroup];
                 
-                CFRelease(groupInCFArray);
+              
                 
                 CFRelease(cfGroupName);
             }     
@@ -5940,10 +5903,9 @@
         }
     }
 
-        if (source) {
-            CFRelease(source);
-
-        }
+if (addressBookToSyncronize) {
+    CFRelease(addressBookToSyncronize);
+}
            }
     
 
@@ -5977,14 +5939,14 @@
             
             ABRecordRef group= ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBookToAddNewPerson, (ABRecordID) groupID);
             
-            CFErrorRef error=nil;
+            CFErrorRef *error=nil;
             if (group) {
-                bool didSave=( bool )  ABGroupAddMember(group, person,&error);
+                bool didSave=( bool )  ABGroupAddMember(group, person,error);
                 
                 if (error!=noErr) {
                     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
                     
-                    [ appDelegate displayNotification:[NSString stringWithFormat:@"Error adding to group occured: %@", (__bridge NSString *) CFErrorCopyDescription(error) ]forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+                    [ appDelegate displayNotification:[NSString stringWithFormat:@"Error adding to group occured: %@", (__bridge NSString *) CFErrorCopyDescription(*error) ]forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
                 }
                 BOOL wantToSaveChanges=YES;
                 if (didSave &&ABAddressBookHasUnsavedChanges(addressBookToAddNewPerson)) {
@@ -6009,26 +5971,20 @@
                     
                 }
             }
-            if (group) {
-                CFRelease(group);
-                
-            }
-            if (error) 
-            {
-                CFRelease(error);
-            }
-            
+           
+                       
         }
         
     }
     
     
     
-    if (person) {
-        CFRelease(person);
-    }        
+     
     } 
-    addressBookToAddNewPerson=nil;
+    if (addressBookToAddNewPerson) {
+       CFRelease(addressBookToAddNewPerson);
+    }
+   
 } 
 
 
@@ -6055,15 +6011,15 @@
             ABRecordRef group=nil;
             group= ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBookToRemovePerson, (ABRecordID) groupID);
             
-            CFErrorRef error=nil;
+            CFErrorRef *error=nil;
             
             if (group) {
-                bool didRemove=( bool )  ABGroupRemoveMember(group, person,&error);
+                bool didRemove=( bool )  ABGroupRemoveMember(group, person,error);
                 
                 if (error!=noErr) {
                     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
                     
-                    [ appDelegate displayNotification:[NSString stringWithFormat:@"Error adding to group occured: %@", (__bridge NSString *) CFErrorCopyDescription(error) ]forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+                    [ appDelegate displayNotification:[NSString stringWithFormat:@"Error adding to group occured: %@", (__bridge NSString *) CFErrorCopyDescription(*error) ]forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
                 }
                 BOOL wantToSaveChanges=YES;
                 if (didRemove &&ABAddressBookHasUnsavedChanges(addressBookToRemovePerson)) {
@@ -6089,15 +6045,7 @@
                     
                 }
             }
-            if (group) {
-                CFRelease(group);
-                
-            }
-            if (error) 
-            {
-                CFRelease(error);
-            }
-            
+                       
             
             
         }
@@ -6106,14 +6054,11 @@
     
             
     
-    if (person) {
-        CFRelease(person);
-    }
-          
+     
         } 
 
     if (addressBookToRemovePerson) {
-        addressBookToRemovePerson=nil;
+        CFRelease(addressBookToRemovePerson);
     }
 
 } 
@@ -6386,37 +6331,40 @@
 //    
 //}
 
--(IBAction)abGroupsDoneButtonTapped:(id)sender{
-    
-    
-    
-    //    SCTableViewModel *ownerTableViewModel=(SCTableViewModel *)self.ownerTableViewModel;
-    
-    
-    
-    if (currentDetailTableViewModel_.tag=429 &&currentDetailTableViewModel_.sectionCount) {
-        SCObjectSelectionSection *section=(SCObjectSelectionSection *)[currentDetailTableViewModel_ sectionAtIndex:0];
-        NSMutableSet *mutableSet= (NSMutableSet *) abGroupObjectSelectionCell_.objectSelectionCell.selectedItemsIndexes;
-        mutableSet=section.selectedItemsIndexes;
-        
-       
-        
-        
-    }
-    if(self.tableViewModel.viewController.navigationController)
-	{
-		// check if self is the rootViewController
-        
-        [self.tableViewModel.viewController.navigationController popViewControllerAnimated:YES];
-        
-        
-	}
-	else
-		[self.tableViewModel.viewController dismissModalViewControllerAnimated:YES];
-    
-
-    
-}
+//-(IBAction)abGroupsDoneButtonTapped:(id)sender{
+//    
+//    
+//    
+//    //    SCTableViewModel *ownerTableViewModel=(SCTableViewModel *)self.ownerTableViewModel;
+//    
+//    
+//    
+//    if (currentDetailTableViewModel_.tag=429 &&currentDetailTableViewModel_.sectionCount) {
+//        SCObjectSelectionSection *section=(SCObjectSelectionSection *)[currentDetailTableViewModel_ sectionAtIndex:0];
+//        
+//        
+//        
+//        NSMutableSet *mutableSet= (NSMutableSet *) abGroupObjectSelectionCell_.objectSelectionCell.selectedItemsIndexes;
+//        mutableSet=[NSMutableSet setWithSet:section.selectedItemsIndexes ];
+//        
+//       
+//        
+//        
+//    }
+//    if(self.tableViewModel.viewController.navigationController)
+//	{
+//		// check if self is the rootViewController
+//        
+//        [self.tableViewModel.viewController.navigationController popViewControllerAnimated:YES];
+//        
+//        
+//	}
+//	else
+//		[self.tableViewModel.viewController dismissModalViewControllerAnimated:YES];
+//    
+//
+//    
+//}
 
 -(int )defaultABSourceID{
     
@@ -6527,9 +6475,7 @@
         returnID=sourceID;        
         
     }
-        if (abSource) {
-            CFRelease(abSource);
-        }     
+       
       
           if (allSourcesArray) {
               CFRelease(allSourcesArray);
@@ -6537,7 +6483,7 @@
         
     }
     if (addressBookToGetSource) {
-        addressBookToGetSource=nil;
+        CFRelease(addressBookToGetSource);
     }
     
     

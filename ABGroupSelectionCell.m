@@ -210,19 +210,19 @@
                 
                 ABRecordRef group= ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, (ABRecordID) groupID);
                 
-                CFErrorRef error=nil;
+                CFErrorRef *error=nil;
                 if (group) {
-                bool didSave=( bool )  ABGroupAddMember(group, person,&error);
+                bool didSave=( bool )  ABGroupAddMember(group, person,error);
             
                 if (error!=noErr) {
                     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
                     
-                   [ appDelegate displayNotification:[NSString stringWithFormat:@"Error adding to group occured: %@", (__bridge NSString *) CFErrorCopyDescription(error) ]forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+                   [ appDelegate displayNotification:[NSString stringWithFormat:@"Error adding to group occured: %@", (__bridge NSString *) CFErrorCopyDescription(*error) ]forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
                 }
-                BOOL wantToSaveChanges=YES;
-                if (didSave &&ABAddressBookHasUnsavedChanges(addressBook)) {
+               
+                if ((didSave ==YES) && (ABAddressBookHasUnsavedChanges(addressBook))==YES) {
                   
-                        
+                         BOOL wantToSaveChanges=YES;
                         if (wantToSaveChanges) {
                             
                             didSave = ABAddressBookSave(addressBook, nil);
@@ -242,10 +242,6 @@
                         
                 }
                 }
-                if (group) {
-                    CFRelease(group);
-                    
-                }
                 if (error) 
                 {
                     CFRelease(error);
@@ -256,11 +252,8 @@
         }
                
         
-     
-    if (person) {
-        CFRelease(person);
-    }
-        
+    CFRelease(addressBook);
+           
 } 
 
         
@@ -286,19 +279,22 @@
             ABRecordRef group=nil;
              group= ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, (ABRecordID) groupID);
             
-            CFErrorRef error=nil;
-            
+            CFErrorRef *error=nil;
+           
             if (group) {
-                    bool didRemove=( bool )  ABGroupRemoveMember(group, person,&error);
+                 bool  didRemove=( bool )  ABGroupRemoveMember(group, person,error);
             
-            if (error!=noErr) {
-                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-                
-                [ appDelegate displayNotification:[NSString stringWithFormat:@"Error adding to group occured: %@", (__bridge NSString *) CFErrorCopyDescription(error) ]forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
-            }
-            BOOL wantToSaveChanges=YES;
-            if (didRemove &&ABAddressBookHasUnsavedChanges(addressBook)) {
-                
+                if (error!=noErr) {
+                    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                    
+                    [ appDelegate displayNotification:[NSString stringWithFormat:@"Error adding to group occured: %@", (__bridge NSString *) CFErrorCopyDescription(*error) ]forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
+
+                }
+               
+               
+                 
+            else if ((didRemove ==YES)&&  ( ABAddressBookHasUnsavedChanges((ABAddressBookRef )addressBook))==YES) {
+                BOOL wantToSaveChanges=YES;
                 
                 if (wantToSaveChanges) {
                     bool didSave=NO;
@@ -320,14 +316,10 @@
                 
             }
             }
-            if (group) {
-                CFRelease(group);
-                
-            }
-            if (error) 
-            {
-                CFRelease(error);
-            }
+            
+           
+              
+            
             
            
             
@@ -337,10 +329,7 @@
     
     
     
-    if (person) {
-        CFRelease(person);
-    }
-    
+    CFRelease(addressBook);
 } 
     
         
@@ -405,9 +394,7 @@
         }
             
         }
-        if (person) {
-            CFRelease(person);
-        }
+        
         if (arrayOfGroupMembers) {
             CFRelease(arrayOfGroupMembers);
             
@@ -415,12 +402,9 @@
         
 }
 
-    if (group){
+    
 
-        CFRelease(group);
-    }
-
-
+    CFRelease(addressBook);
 
     return personExistsInGroup;
 
@@ -1509,7 +1493,7 @@
         
         
         if (source) {
-            continueChecking=NO;
+           
             returnID=recordID;
         }
         
@@ -1517,7 +1501,7 @@
         
         
     }
-    if (continueChecking&& allSourcesArray && CFArrayGetCount(allSourcesArray) >1 &&  iCloudEnabled) {
+   else if (continueChecking&& allSourcesArray && CFArrayGetCount(allSourcesArray) >1 &&  iCloudEnabled) {
         
         
         
@@ -1530,12 +1514,10 @@
             
             // Fetch the name associated with the source type
 //            NSString *sourceName = [self nameForSourceWithIdentifier:[(__bridge NSNumber*)sourceType intValue]];
-            if (sourceType) {
-                CFRelease(sourceType);
-            }
             
+            NSNumber *sourceTypeNumber=(__bridge_transfer NSNumber *)sourceType;
             
-            if ([(__bridge NSNumber *)sourceType isEqualToNumber:[NSNumber numberWithInt:kABSourceTypeCardDAV]]) 
+            if ([sourceTypeNumber isEqualToNumber:[NSNumber numberWithInt:kABSourceTypeCardDAV]])
 
             {
                 sourceID=ABRecordGetRecordID(source);
@@ -1545,17 +1527,16 @@
                 //               
                 
                 returnID=sourceID;
-                continueChecking=NO;
+             
                 break;
             }
             
-            
-        }
+                   }
         
         
     }
     
-    if(continueChecking&& sourcesCount>1)
+  else  if(continueChecking&& sourcesCount>1)
     {
         source= CFArrayGetValueAtIndex(allSourcesArray, 0);
         sourceID=ABRecordGetRecordID(source);

@@ -229,7 +229,7 @@
         productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:productFetchRequest error:&productError];
             
         }
-    NSMutableArray *mutableDrugsArray=[NSMutableArray array];
+    NSMutableArray *mutableDrugsArray=nil;
     if (productFetchedObjects) {
         mutableDrugsArray= [NSMutableArray arrayWithArray:productFetchedObjects];
     }

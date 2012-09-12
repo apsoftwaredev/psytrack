@@ -28,18 +28,6 @@
 }
 
 
-//overrides superclass
-- (BOOL)becomeFirstResponder
-{
-    return [self.textField becomeFirstResponder];
-    
-}
-
-//overrides superclass
-- (BOOL)resignFirstResponder
-{
-	return [self.textField resignFirstResponder];
-}
 
 // overrides superclass
 - (void)loadBindingsIntoCustomControls

@@ -18,7 +18,6 @@
 #import "ClientPresentations_Shared.h"
 #import "PTTAppDelegate.h"
 #import "ClientsViewController_Shared.h"
-#import "BehaviorPickerCell.h"
 #import "BOPickersDataSource.h"
 #import "ClientsSelectionCell.h"
 #import "InstrumentEntity.h"

@@ -665,7 +665,7 @@
     }
     CGPDFDocumentRelease(templateDocument);
     UIGraphicsEndPDFContext();
-    
+    CGDataProviderRelease(dataProvider);
     
 
     
@@ -821,7 +821,7 @@
     }
     CGPDFDocumentRelease(templateDocument);
     UIGraphicsEndPDFContext();
-    
+     CGDataProviderRelease(dataProvider);
     
     
     

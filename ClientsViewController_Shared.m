@@ -305,7 +305,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //create the dictionary with the data bindings
     NSDictionary *drugNameDataBindings = [NSDictionary 
                                         dictionaryWithObjects:[NSArray arrayWithObject:@"drugName"] 
-                                        forKeys:[NSArray arrayWithObject:@"1" ]]; // 1 are the control tags
+                                        forKeys:[NSArray arrayWithObject:@"20" ]]; // 1 are the control tags
 	
     //create the custom property definition
     SCCustomPropertyDefinition *drugNameDataProperty = [SCCustomPropertyDefinition definitionWithName:@"DrugNameData"
@@ -1222,7 +1222,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     int day, month, year;
     day=[dateComponents day];
     month=[dateComponents month];
-    DLog(@"month is  %i",month);
+    
     year=[dateComponents year];
  
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
@@ -1274,7 +1274,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
         day=nowDay-dateDiff;
     }
 
-DLog(@"month is  %i",month);
+
     
     return [NSString stringWithFormat:@"%iy %im %id", year,month,day];
 }
@@ -1385,7 +1385,7 @@ DLog(@"month is  %i",month);
     int day, month, year;
     day=[dateComponents day];
     month=[dateComponents month];
-    DLog(@"month is  %i",month);
+    
     year=[dateComponents year];
     
     

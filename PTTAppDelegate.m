@@ -941,11 +941,11 @@
     
     [tokenHash getBytes:aBuffer];
     [passwordData appendBytes:aBuffer length:len];
-    
+
     
     NSData * symetricData=[encryption_ getHashBytes:passwordData];
     
-    
+    free(aBuffer);
     
     
     return symetricData;
@@ -985,7 +985,7 @@
     
     NSData * symetricData=[encryption_ getHashBytes:passwordData];
     
-    
+    free(aBuffer);
     
     
     return symetricData;

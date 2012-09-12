@@ -17,7 +17,7 @@
  */
 #import "WebViewDetailViewController.h"
 
-#import "DrugWebViewActionsViewController.h"
+
 
 //#import "UICasualAlert.h"
 
@@ -243,7 +243,7 @@
     if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad){
     
  
-        toolbarFrame = CGRectMake(0, bounds.size.height - kToolbarHeight, bounds.size.width, kToolbarHeight);
+        toolbarFrame = CGRectMake(0, bounds.size.height - kToolbarHeight-10, bounds.size.width, kToolbarHeight);
         UIToolbar *aToolbar = [[UIToolbar alloc] initWithFrame:toolbarFrame];
         aToolbar.barStyle = UIBarStyleBlack;
          self.toolbar=aToolbar;

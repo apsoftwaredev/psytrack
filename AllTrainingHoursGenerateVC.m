@@ -253,9 +253,9 @@
     
     NSString *documentsPath=[appDelegate applicationDocumentsDirectory].path;
     
-    NSString *newFileName=[fileNameGiven stringByAppendingPathExtension:@"pdf"];
+    NSString *newFileName=nil;
     
-    NSString *documentsPathWithNewFileName=[documentsPath stringByAppendingPathComponent:newFileName];
+    NSString *documentsPathWithNewFileName=nil;
     
     
     

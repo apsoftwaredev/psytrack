@@ -40,12 +40,13 @@ static NSMutableDictionary *_cachedLayouts = nil;
 
 - (id)initWithContentsOfFile:(NSString *)path
 {
+    
 	NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
 	
     // Get name of plist
     NSString *name = [[path lastPathComponent] stringByDeletingPathExtension];
 	
-	if ([self initWithDictionary:dictionary])
+	if (self=[self initWithDictionary:dictionary])
 	{
 		// get last modified from file
 		NSError *error;

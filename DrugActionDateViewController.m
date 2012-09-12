@@ -155,7 +155,7 @@
     
 //    SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"actionDate" sortAscending:NO filterPredicate:applNoPredicate];
     
-    SCEntityDefinition *actionDateDef=[SCEntityDefinition definitionWithEntityName:@"DrugRegActionDateEntity" managedObjectContext:drugsManagedObjectContext propertyNames:[NSArray arrayWithObjects:@"actionDate", @"docType",@"docTypeDesc", nil]];
+    SCEntityDefinition *actionDateDef=[SCEntityDefinition definitionWithEntityName:@"DrugRegActionDateEntity" managedObjectContext:drugsManagedObjectContext propertyNames:[NSArray arrayWithObjects:@"actionDate", @"docType", nil]];
     
 
 //    NSMutableArray *mutableArray=[NSMutableArray arrayWithArray:fetchedObjects];
