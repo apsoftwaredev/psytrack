@@ -18,10 +18,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 Acknoledgements:
  Thank you to all those who supported and encouraged me as a made this app.  A special thanks to Dr. Shalene Kirkley Ph.D. for her encouragement and enthusiasm for pursuing the idea back in the first year of my doctorate program.   I have had a lot of fun making it and I am glad to finally be able to share it with all of you.   Thank YOU for trying my app and hopefully writing a positive review for me.  I hope that you find it useful and enjoyable to use.  Thank you to Tarek at Sensible Table view for a great product and support, and thanks to Dr. Touch at Cocoanetics for his help with the DTAboutViewController.  Thank you to Krishna Kotecha for the starting point for the lock screen.  Thank you to Apple, Inc. and all its laborers around the world for a making all of this amazing technology possible.  Thank you to the countless other developers who have shared solutions and helped others through the internet.  And of course, a special thanks to my friends and family for their never-ending support throughout my life.   
 
-TO DO:
+Potential TO DO:
 
 
-//-need to fix calander so it doesn't add a new calader everytime it is installed
 
 -update drug database
 -encrypt client presentation data
@@ -53,7 +52,6 @@ TO DO:
 
 -add event title
 
--two my infos showing up
 
 
 -existing hours number fields label covering field, instruments
@@ -62,19 +60,10 @@ TO DO:
 -symptom description iphone
 
 
--dosage number validation and keyboard
--	Add the diagnoses section to client
 
--business names for clinicians
-
-
-
--update copyright and about page to make more succinct and less personal
 
 -hourly rate detail view controller with searchbar scope bars for current rates
 
-
--rewrite data security faq
 
 
 -ability to sort courses using seach and scope bar
@@ -90,12 +79,9 @@ Phase II
 -	add a save to icloud documents to the actions in the drug document view
 
 -	 add college courses section
-- add consultations
--add presentations
 
 
--	 add teaching experience
--	 add advising
+
 
 
 
@@ -103,7 +89,7 @@ begin adding reports
 
 -	create a report of activity for specified time ranges
 
-- final cleanup, remove nslogs, unecesary comments. alphebatize methods, finish documentation
+
 - submit to store version 1.0 release!
 - create the therapist matching feature
 - additional features

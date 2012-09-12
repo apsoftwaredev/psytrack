@@ -1735,6 +1735,7 @@
 			isa = PBXGroup;
 			children = (
 				E74167E5158E739300CE1AF4 /* Monaco.dfont */,
+				E78A8D101531DCB30099FE5B /* PsyTrack.entitlements */,
 				3767981815006A8100D0639D /* InfoPlist.strings */,
 				37F7CFCB150060D400AD2C3A /* main.m */,
 				37F7CFCD150060D400AD2C3A /* PsyTrack-Prefix.pch */,
@@ -1772,6 +1773,8 @@
 		B771C54314DAF3E4002D430E /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				E71955B515FF87250070E61D /* STV+CoreData.xcodeproj */,
+				E71955A715FF86BA0070E61D /* SensibleTableView.xcodeproj */,
 				E7F1CB1E1598C024006F9E95 /* vfr-Reader-db84c9d */,
 				E7577FA7158C1DAE0044D344 /* KeychainItemWrapper.h */,
 				E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */,
@@ -1793,9 +1796,6 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				E71955B515FF87250070E61D /* STV+CoreData.xcodeproj */,
-				E71955A715FF86BA0070E61D /* SensibleTableView.xcodeproj */,
-				E78A8D101531DCB30099FE5B /* PsyTrack.entitlements */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Third Party */,
 				37F7CE1B1500328E00AD2C3A /* psyTrack */,
