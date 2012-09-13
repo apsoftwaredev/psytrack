@@ -229,6 +229,7 @@
 		E71EAD7D15D875AA00204389 /* ConferenceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E71EAD7C15D875AA00204389 /* ConferenceEntity.m */; };
 		E71EAD8115D88E5100204389 /* TeachingExperienceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E71EAD7F15D88E5100204389 /* TeachingExperienceVC.m */; };
 		E71EAD8215D88E5100204389 /* TeachingExperienceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71EAD8015D88E5100204389 /* TeachingExperienceVC.xib */; };
+		E7294C7C1600E78200C153CE /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E7294C7B1600E78200C153CE /* psyTrack.sqlite */; };
 		E734334715D5D69C007237C5 /* PaymentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E734334615D5D69C007237C5 /* PaymentEntity.m */; };
 		E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DD158E28DC00CE1AF4 /* menubar-full.png */; };
 		E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */; };
@@ -805,6 +806,7 @@
 		E71EAD7E15D88E5100204389 /* TeachingExperienceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingExperienceVC.h; sourceTree = "<group>"; };
 		E71EAD7F15D88E5100204389 /* TeachingExperienceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingExperienceVC.m; sourceTree = "<group>"; };
 		E71EAD8015D88E5100204389 /* TeachingExperienceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeachingExperienceVC.xib; sourceTree = "<group>"; };
+		E7294C7B1600E78200C153CE /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = psyTrack.sqlite; sourceTree = "<group>"; };
 		E734334515D5D69C007237C5 /* PaymentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentEntity.h; sourceTree = "<group>"; };
 		E734334615D5D69C007237C5 /* PaymentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentEntity.m; sourceTree = "<group>"; };
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
@@ -1550,6 +1552,7 @@
 				E7DEECEA15F526C4001D5B05 /* DisorderSpecifierEntity.h */,
 				E7DEECEB15F526C4001D5B05 /* DisorderSpecifierEntity.m */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
+				E7294C7B1600E78200C153CE /* psyTrack.sqlite */,
 				E762662315FE980500D97D3E /* AdditionalVariableValueEntity.h */,
 				E762662415FE980500D97D3E /* AdditionalVariableValueEntity.m */,
 				E762662015FE97F900D97D3E /* AdditionalVariableNameEntity.h */,
@@ -2580,6 +2583,7 @@
 				E719564C15FFAEDD0070E61D /* DTAboutViewController-Info.plist in Resources */,
 				E719567915FFAFB60070E61D /* AboutDocumentViewController.xib in Resources */,
 				E719568A15FFEF1C0070E61D /* AllTrainingHoursGenerateVC_iPhone.xib in Resources */,
+				E7294C7C1600E78200C153CE /* psyTrack.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

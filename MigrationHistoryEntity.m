@@ -25,29 +25,41 @@
 
 -(void)rekeyEncryptedAttributes{
     [self willAccessValueForKey:@"notes"];
-    if (self.notes) {
-        [self setStringToPrimitiveData:(NSString *)self.notes forKey:(NSString *)@"notes" keyString:nil];
+    
+    NSString *notesStr=[NSString stringWithString:self.notes];
+    [self didAccessValueForKey:@"notes"];
+    
+     [self willAccessValueForKey:@"migratedFrom"];
+    NSString *migratedFromStr=[NSString stringWithString:self.migratedFrom];
+     [self didAccessValueForKey:@"migratedFrom"];
+    
+    [self willAccessValueForKey:@"migratedTo"];
+    NSString *migratedToStr=[NSString stringWithString:self.migratedTo];
+    [self didAccessValueForKey:@"migratedTo"];
+    
+    if (notesStr &&notesStr.length) {
+        [self setStringToPrimitiveData:(NSString *)notesStr forKey:(NSString *)@"notes" keyString:nil];
         
         
     }
-    [self didAccessValueForKey:@"notes"];
+   
  
     
-    [self willAccessValueForKey:@"migratedFrom"];
-    if (self.migratedFrom) {
-        [self setStringToPrimitiveData:(NSString *)self.migratedFrom forKey:(NSString *)@"migratedFrom" keyString:nil];
+   
+    if (migratedFromStr && migratedFromStr.length) {
+        [self setStringToPrimitiveData:(NSString *)migratedFromStr forKey:(NSString *)@"migratedFrom" keyString:self.keyString];
         
        
     }
-    [self didAccessValueForKey:@"migratedFrom"];
+   
     
-    [self willAccessValueForKey:@"migratedTo"];
-    if (self.migratedTo) {
-        [self setStringToPrimitiveData:(NSString *)self.migratedTo forKey:(NSString *)@"migratedTo" keyString:nil];
+    
+    if (migratedToStr&&migratedToStr.length) {
+        [self setStringToPrimitiveData:(NSString *)migratedToStr forKey:(NSString *)@"migratedTo" keyString:self.keyString];
         
         
     }
-    [self didAccessValueForKey:@"migratedTo"];
+  
     
     
     

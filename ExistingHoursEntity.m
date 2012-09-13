@@ -175,65 +175,28 @@
 
 
 -(void)rekeyEncryptedAttributes{
+    NSString *notesStr=nil;
     
+    
+    [self willAccessValueForKey:@"notes"];
     if (self.notes) {
-        [self rekeyString:(NSString *)self.notes forKey:@"notes"];
+       notesStr=  [NSString stringWithString:self.notes];
     }
+    [self didAccessValueForKey:@"notes"];
     
+    [self willChangeValueForKey:@"keyString"];
     
-}
-- (void)rekeyString:(NSString *)strValue forKey:(NSString *)key
-{
-    
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    if (strValue&& strValue.length ) {
-        
-        
-        
-        
-        
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:nil];
-        
-        NSData *encryptedData;
-        NSString *encryptedKeyString;
-        if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
-            encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
-            
-            
-            if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
-                
-                
-                encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
-                
-            }
-        }
-        
-        
-        if (encryptedData.length) {
-            [self willChangeValueForKey:key];
-            [self setPrimitiveValue:encryptedData forKey:key];
-            [self didChangeValueForKey:key];
-        }
-        
-        
-        [self willAccessValueForKey:@"keyString"];
-        if (![encryptedKeyString isEqualToString:self.keyString]) {
-            [self didAccessValueForKey:@"keyString"];
-            [self willChangeValueForKey:@"keyString"];
-            [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
-            [self didChangeValueForKey:@"keyString"];
-            
-        }
-        
-        
-        
-        
-        
-        
-    }
-}
+    [self setNilValueForKey:@"keyString"];
+    [self didChangeValueForKey:@"keyString"];
 
+ 
+    if (notesStr && notesStr.length) {
+       [self setStringToPrimitiveData:(NSString *)notesStr forKey:@"notes"];
+        
+    }
+    
+    
+}
 
 
 
@@ -246,9 +209,11 @@
         
         
         
-        
+        [self willAccessValueForKey:@"keyString"];
         
         NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
+        [self didAccessValueForKey:@"keyString"];
+        
         
         NSData *encryptedData;
         NSString *encryptedKeyString;
@@ -290,7 +255,7 @@
 }
 -(NSString *)notes{
     
-    NSString *tempStr;
+    NSString *tempStr=nil;
     [self willAccessValueForKey:@"tempNotes"];
     
     

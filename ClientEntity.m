@@ -167,110 +167,96 @@ if (fetchedObjects) {
 //}
 
 -(void)rekeyEncryptedAttributes{
+     
+    NSDate *dateOfBirthDt=nil;
+    NSString *notesStr=nil;
     
+    NSString *clientIDCodeStr=nil;
+    NSString *initialsStr=nil;
     
     [self willAccessValueForKey:@"notes"];
     if (self.notes) {
-        [self rekeyString:(NSString *)self.notes forKey:@"notes"];
+         notesStr=[NSString stringWithString:self.notes];
     }
-    [self didAccessValueForKey:@"notes"];
+      [self didAccessValueForKey:@"notes"];
     
     [self willAccessValueForKey:@"clientIDCode"];
-        if (self.clientIDCode) {
-            [self rekeyString:(NSString *)self.clientIDCode forKey:@"clientIDCode"];
-        }
+    if (self.clientIDCode) {
+         clientIDCodeStr=[NSString stringWithString:self.clientIDCode];
+    }
+   
     [self didAccessValueForKey:@"clientIDCode"];
+
     
     [self willAccessValueForKey:@"initials"];
-    if (self.initials) {
-        [self rekeyString:(NSString *)self.initials forKey:@"initials"];
-
+   
+    if (self.initials){
+        initialsStr=[NSString stringWithString:self.initials];
     }
+    
     [self didAccessValueForKey:@"initials"];
     
     [self willAccessValueForKey:@"dateOfBirth"];
     if (self.dateOfBirth) {
-         [self setDateToPrimitiveData:(NSDate *)self.dateOfBirth  forKey:(NSString *)@"dateOfBirth" keyString:nil];
+        
+        dateOfBirthDt=self.dateOfBirth;
     }
     [self didAccessValueForKey:@"dateOfBirth"];
+    
+    
+    if (dateOfBirthDt) {
+        [self setDateToPrimitiveData:(NSDate *)dateOfBirthDt  forKey:(NSString *)@"dateOfBirth" keyString:nil];
+    }
+   
+    
+    
+   
+    if (notesStr) {
+        [self setNotes:notesStr];
+    }
   
     
-    
-}
-- (void)rekeyString:(NSString *)strValue forKey:(NSString *)key
-{
-    
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    if (strValue&& strValue.length ) {
-        
-        
-        
-        
-        
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:nil];
-        
-        NSData *encryptedData;
-        NSString *encryptedKeyString;
-        if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
-            encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
+   
+        if (clientIDCodeStr) {
             
-            
-            if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
-                
-                
-                encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
-                
-            }
+            [self setClientIDCode:clientIDCodeStr];
         }
-        
-        
-        if (encryptedData.length) {
-            [self willChangeValueForKey:key];
-            [self setPrimitiveValue:encryptedData forKey:key];
-            [self didChangeValueForKey:key];
-        }
-        
-        
-        [self willAccessValueForKey:@"keyString"];
-        if (![encryptedKeyString isEqualToString:self.keyString]) {
-            [self didAccessValueForKey:@"keyString"];
-            [self willChangeValueForKey:@"keyString"];
-            [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
-            [self didChangeValueForKey:@"keyString"];
-            
-        }
-        
-        
-        
-        
-        
-        
+      
+    
+    if (initialsStr) {
+        [self setInitials:initialsStr];
+
     }
+
+    
+   
+    
+    
 }
 
 
 -(void)setInitials:(NSString *)initials{
     
-    
+    [self willAccessValueForKey:@"keyString"];
     [self setStringToPrimitiveData:(NSString *)initials forKey:@"initials" keyString:self.keyString];
-    
+    [self  didAccessValueForKey:@"keyString"];
     self.tempInitials=initials;
     
 }
 -(void)setNotes:(NSString *)notes{
     
+     [self willAccessValueForKey:@"keyString"];
     [self setStringToPrimitiveData:(NSString *)notes forKey:@"notes" keyString:self.keyString];
-    
+     [self  didAccessValueForKey:@"keyString"];
     self.tempNotes=notes;
 }
 
 - (void)setClientIDCode:(NSString *)clientIDCode
 {
     
-    
+     [self willAccessValueForKey:@"keyString"];
     [self setStringToPrimitiveData:(NSString *)clientIDCode forKey:@"clientIDCode" keyString:self.keyString];
-    
+     [self  didAccessValueForKey:@"keyString"];
     self.tempClientIDCode=clientIDCode;
     
     
@@ -280,8 +266,9 @@ if (fetchedObjects) {
 } 
 
 -(void)setDateOfBirth:(NSDate *)dateOfBirth{
-    
+     [self willAccessValueForKey:@"keyString"];
     [self setDateToPrimitiveData:(NSDate *)dateOfBirth forKey:(NSString *)@"dateOfBirth" keyString:self.keyString];
+    [self  didAccessValueForKey:@"keyString"];
     self.tempDateOfBirth=dateOfBirth;
     
 }

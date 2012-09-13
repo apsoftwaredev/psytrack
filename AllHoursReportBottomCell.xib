@@ -47,9 +47,9 @@
 									<object class="IBUILabel" id="503162441">
 										<reference key="NSNextResponder" ref="578437196"/>
 										<int key="NSvFlags">256</int>
-										<string key="NSFrame">{{2, 2}, {295, 19}}</string>
+										<string key="NSFrame">{{2, 2}, {532, 19}}</string>
 										<reference key="NSSuperview" ref="578437196"/>
-										<reference key="NSNextKeyView"/>
+										<reference key="NSWindow"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<object class="NSColor" key="IBUIBackgroundColor" id="473038956">
 											<int key="NSColorSpace">3</int>
@@ -82,8 +82,9 @@
 									<object class="IBUILabel" id="502537162">
 										<reference key="NSNextResponder" ref="578437196"/>
 										<int key="NSvFlags">256</int>
-										<string key="NSFrame">{{298, 2}, {126, 19}}</string>
+										<string key="NSFrame">{{536, 2}, {127, 19}}</string>
 										<reference key="NSSuperview" ref="578437196"/>
+										<reference key="NSWindow"/>
 										<string key="NSReuseIdentifierKey">_NS:9</string>
 										<reference key="IBUIBackgroundColor" ref="473038956"/>
 										<bool key="IBUIOpaque">NO</bool>
@@ -112,6 +113,7 @@
 								</array>
 								<string key="NSFrame">{{-1, 0}, {1053, 21}}</string>
 								<reference key="NSSuperview" ref="459842859"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="503162441"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor" id="454254332">
@@ -121,8 +123,9 @@
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
 						</array>
-						<string key="NSFrameSize">{425, 21}</string>
+						<string key="NSFrameSize">{665, 21}</string>
 						<reference key="NSSuperview" ref="127742116"/>
+						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -135,8 +138,9 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{425, 22}</string>
+				<string key="NSFrameSize">{665, 22}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="459842859"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<reference key="IBUIBackgroundColor" ref="454254332"/>
@@ -244,7 +248,53 @@
 			<nil key="sourceID"/>
 			<int key="maxID">23</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">AllHoursReportBottomCell</string>
+					<string key="superclassName">SCCustomCell</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="cellSubTypeLabel">UILabel</string>
+						<string key="cellsContainerView">UIView</string>
+						<string key="hoursTotalHoursLabel">UILabel</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="cellSubTypeLabel">
+							<string key="name">cellSubTypeLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="cellsContainerView">
+							<string key="name">cellsContainerView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="hoursTotalHoursLabel">
+							<string key="name">hoursTotalHoursLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/AllHoursReportBottomCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCCustomCell</string>
+					<string key="superclassName">SCTableViewCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCCustomCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SCTableViewCell</string>
+					<string key="superclassName">UITableViewCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SCTableViewCell.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">

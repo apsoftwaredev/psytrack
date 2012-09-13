@@ -28,7 +28,7 @@
 @property (nonatomic, retain) NSString * bio;
 @property (nonatomic, retain) NSNumber * myInformation;
 @property (nonatomic, retain) NSDate * startedPracticing;
-@property (nonatomic, retain) NSData * notes;
+@property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSNumber * atMyCurrentSite;
 @property (nonatomic, retain) NSNumber * isPrescriber;
 @property (nonatomic, retain) NSSet *logs;

@@ -171,8 +171,9 @@
 }
 -(void)setNotes:(NSString *)notes{
     
+    [self willChangeValueForKey:@"keyString"];
     [self setStringToPrimitiveData:(NSString *)notes forKey:@"notes" keyString:(NSString *)self.keyString];
-    
+    [self didAccessValueForKey:@"keyString"];
     self.tempNotes=notes;
 }
 

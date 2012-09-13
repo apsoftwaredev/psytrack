@@ -1966,9 +1966,8 @@
 	// !!! CHANGE "http" TO "https" IF YOU ARE USING HTTPS PROTOCOL
 	NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-	[NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-	
-	DLog(@"send request %@",returnData);
+NSData *response =	[NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+	if (response == nil) {	DLog(@"send request %@",returnData)};
 	
 #endif
 }
@@ -5589,8 +5588,16 @@ return [self applicationDrugsDirectory].path;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSFileManager *fileManager = [NSFileManager defaultManager];
         
-               
+       
+        // If the expected store doesn't exist, copy the default store.
+        if (![fileManager fileExistsAtPath:storePath]) {
+            NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
+            if (defaultStorePath) {
+                [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
+            }
+        }
         NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
+       
         // this needs to match the entitlements and provisioning profile
         NSURL *cloudURL = [fileManager URLForUbiquityContainerIdentifier:nil];
         NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"psyTrack"];

@@ -44,22 +44,50 @@
 
 
 -(void)rekeyEncryptedAttributes{
-    [self willAccessValueForKey:@"profileNotes"];
-    if (self.profileNotes) {
-        [self setStringToPrimitiveData:(NSString *)self.profileNotes forKey:(NSString *)@"profileNotes" ];
     
-        
+    NSString *notesStr=nil;
+    NSString *sexStr=nil;
+    
+     [self willAccessValueForKey:@"profileNotes"];
+    
+    if (self.profileNotes) {
+        notesStr=[NSString stringWithString:self.profileNotes];
     }
     [self didAccessValueForKey:@"profileNotes"];
-    
+
     
     [self willAccessValueForKey:@"sex"];
+    
     if (self.sex) {
-        [self setStringToPrimitiveData:(NSString *)self.sex forKey:(NSString *)@"sex"];
+    
+        sexStr=[NSString stringWithString:self.sex];
+    
+            }
+    [self didAccessValueForKey:@"sex"];
+    
+                      
+    
+    [self willChangeValueForKey:@"keyString"];
+    [self setNilValueForKey:@"keyString"];
+    [self didChangeValueForKey:@"keyString"];
+    
+    
+   
+    if (notesStr && notesStr.length) {
+        [self setStringToPrimitiveData:(NSString *)notesStr forKey:(NSString *)@"profileNotes" ];
+    
+        
+    }
+    
+    
+    
+    
+    if (sexStr && sexStr.length) {
+        [self setStringToPrimitiveData:(NSString *)sexStr forKey:(NSString *)@"sex"];
         
         
     }
-    [self didAccessValueForKey:@"sex"];
+   
     
         
     
@@ -90,7 +118,7 @@
         
         
         [self willAccessValueForKey:@"keyString"];
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:nil];
+        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
         
         NSData *encryptedData;
         NSString *encryptedKeyString;

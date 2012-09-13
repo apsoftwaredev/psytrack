@@ -2884,11 +2884,11 @@
 //        
 //        
 //    }
-    
-    
+
+   
     
   if (tableViewModel.sectionCount) {  
-    if (tableViewModel.tag==1){
+    if (tableViewModel.tag==1||([SCUtilities is_iPad]&&tableViewModel.tag==0)){
         
         
        
@@ -2919,7 +2919,7 @@
     }
     
     
-    if (tableViewModel.tag==3){
+  else  if (tableViewModel.tag==3){
         
         
         
@@ -2969,7 +2969,7 @@
         
     }
     
-    if (tableViewModel.tag==4){
+  else  if (tableViewModel.tag==4){
         
         
         

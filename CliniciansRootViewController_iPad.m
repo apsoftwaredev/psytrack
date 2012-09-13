@@ -519,136 +519,136 @@
     
 }
 
--(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    BOOL valid = TRUE;
-    
-//    SCTableViewCell *cell = [tableViewModel cellAtIndexPath:indexPath];
-    
-    
-    
-//    if (tableViewModel.tag==4) {
-//        UILabel *emaiLabel=(UILabel *)[cell viewWithTag:51];
-//        if (emaiLabel.text==@"Email Address:")
-//        {
-//            UITextField *emailField=(UITextField *)[cell viewWithTag:50];
+//-(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    BOOL valid = TRUE;
+//    
+////    SCTableViewCell *cell = [tableViewModel cellAtIndexPath:indexPath];
+//    
+//    
+//    
+////    if (tableViewModel.tag==4) {
+////        UILabel *emaiLabel=(UILabel *)[cell viewWithTag:51];
+////        if (emaiLabel.text==@"Email Address:")
+////        {
+////            UITextField *emailField=(UITextField *)[cell viewWithTag:50];
+////            
+////            if(emailField.text.length){
+////                valid=[self validateEmail:emailField.text];
+////                
+////                
+////            }
+////            else
+////            {
+////                valid=FALSE;
+////            }
+////        }
+////        
+////        
+////        
+////    }
+//    
+//    
+//    
+//    
+//    if (tableViewModel.tag==1||tableViewModel.tag==0){
+//        
+//        
+//        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
+//        
+//        SCTextFieldCell *lastNameCell =(SCTextFieldCell *)[section cellAtIndex:3];
+//        SCTextFieldCell *firstNameCell =(SCTextFieldCell *)[section cellAtIndex:1];
+//        
+//        UITextField *lastNameField =(UITextField *)[lastNameCell viewWithTag:50];
+//        UITextField *firstNameField =(UITextField *)[firstNameCell viewWithTag:50];
+//        
+//        
+//        
+//        if ( firstNameField.text.length && lastNameField.text.length) {
 //            
-//            if(emailField.text.length){
-//                valid=[self validateEmail:emailField.text];
+//            valid=TRUE;
+//            
+//            
+//        }
+//        else
+//        {
+//            valid=FALSE;
+//        }
+//    }
+//    
+//    
+//    
+////    SCObjectSection *objectSection = (SCObjectSection *)[tableViewModel sectionAtIndex:0];
+////    SCTextFieldCell *zipFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"zipCode"];
+//    if (tableViewModel.tag==3&& tableViewModel.sectionCount){
+//        
+//        
+//        
+//        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
+//        
+//        if (section.cellCount>1) {
+//            SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
+//            NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
+//            
+//            
+//            if ( notesManagedObject &&[notesManagedObject respondsToSelector:@selector(entity)]&& [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+//                EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
 //                
+//                if (encryptedNoteCell.textView.text.length) 
+//                {
+//                    valid=TRUE;
+//                }
+//                else 
+//                {
+//                    valid=FALSE;
+//                }
 //                
 //            }
-//            else
-//            {
-//                valid=FALSE;
-//            }
+//            
+//            
 //        }
 //        
 //        
-//        
 //    }
-    
-    
-    
-    
-    if (tableViewModel.tag==1||tableViewModel.tag==0){
-        
-        
-        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
-        
-        SCTextFieldCell *lastNameCell =(SCTextFieldCell *)[section cellAtIndex:3];
-        SCTextFieldCell *firstNameCell =(SCTextFieldCell *)[section cellAtIndex:1];
-        
-        UITextField *lastNameField =(UITextField *)[lastNameCell viewWithTag:50];
-        UITextField *firstNameField =(UITextField *)[firstNameCell viewWithTag:50];
-        
-        
-        
-        if ( firstNameField.text.length && lastNameField.text.length) {
-            
-            valid=TRUE;
-            
-            
-        }
-        else
-        {
-            valid=FALSE;
-        }
-    }
-    
-    
-    
-//    SCObjectSection *objectSection = (SCObjectSection *)[tableViewModel sectionAtIndex:0];
-//    SCTextFieldCell *zipFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"zipCode"];
-    if (tableViewModel.tag==3&& tableViewModel.sectionCount){
-        
-        
-        
-        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
-        
-        if (section.cellCount>1) {
-            SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
-            NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
-            
-            
-            if ( notesManagedObject &&[notesManagedObject respondsToSelector:@selector(entity)]&& [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
-                EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
-                
-                if (encryptedNoteCell.textView.text.length) 
-                {
-                    valid=TRUE;
-                }
-                else 
-                {
-                    valid=FALSE;
-                }
-                
-            }
-            
-            
-        }
-        
-        
-    }
-
-    if (tableViewModel.tag==4&& tableViewModel.sectionCount){
-        
-        
-        
-        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
-        
-        if (section.cellCount>3) 
-        {
-            SCTableViewCell *cellFrom=(SCTableViewCell *)[section cellAtIndex:0];
-            SCTableViewCell *cellTo=(SCTableViewCell *)[section cellAtIndex:1];
-            SCTableViewCell *cellArrivedDate=(SCTableViewCell *)[section cellAtIndex:2];
-            NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
-              
-            
-            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
-                
-                EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
-                EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
-                
-                
-                SCDateCell *arrivedDateCell=(SCDateCell *)cellArrivedDate;
-                
-                if (encryptedFrom.textView.text.length && encryptedTo.textView.text.length &&arrivedDateCell.label.text.length) {
-                    valid=YES;
-                }
-                else {
-                    valid=NO;
-                }
-                
-            }
-        }        
-    }
-    
-
-   
-    
-    return valid;
-}
+//
+//    if (tableViewModel.tag==4&& tableViewModel.sectionCount){
+//        
+//        
+//        
+//        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
+//        
+//        if (section.cellCount>3) 
+//        {
+//            SCTableViewCell *cellFrom=(SCTableViewCell *)[section cellAtIndex:0];
+//            SCTableViewCell *cellTo=(SCTableViewCell *)[section cellAtIndex:1];
+//            SCTableViewCell *cellArrivedDate=(SCTableViewCell *)[section cellAtIndex:2];
+//            NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
+//              
+//            
+//            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+//                
+//                EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
+//                EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
+//                
+//                
+//                SCDateCell *arrivedDateCell=(SCDateCell *)cellArrivedDate;
+//                
+//                if (encryptedFrom.textView.text.length && encryptedTo.textView.text.length &&arrivedDateCell.label.text.length) {
+//                    valid=YES;
+//                }
+//                else {
+//                    valid=NO;
+//                }
+//                
+//            }
+//        }        
+//    }
+//    
+//
+//   
+//    
+//    return valid;
+//}
 
 
 

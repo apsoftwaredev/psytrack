@@ -48,7 +48,7 @@
 -(void)rekeyEncryptedAttributes{
     [self willAccessValueForKey:@"notes"];
     if (self.notes) {
-        [self setStringToPrimitiveData:(NSString *)self.notes forKey:(NSString *)@"profileNotes" keyString:nil];
+        [self setStringToPrimitiveData:(NSString *)self.notes forKey:(NSString *)@"notes" keyString:nil];
         
         
     }

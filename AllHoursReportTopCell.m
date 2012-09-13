@@ -936,6 +936,8 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         UIView *containerView = [[UIView alloc] initWithFrame:sectionSubHeaderView.frame];
         
         UILabel *headerLabel = [[UILabel alloc] initWithFrame:sectionSubHeaderLabel.frame];
+        headerLabel.adjustsFontSizeToFitWidth=YES;
+        headerLabel.minimumFontSize= sectionSubHeaderLabel.minimumFontSize;
         headerLabel.font=sectionSubHeaderLabel.font;
         containerView.backgroundColor=sectionSubHeaderView.backgroundColor;
         headerLabel.backgroundColor = sectionSubHeaderLabel.backgroundColor;
