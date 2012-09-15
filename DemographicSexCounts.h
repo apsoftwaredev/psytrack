@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DemographicSexCounts : NSObject
+@interface DemographicSexCounts : NSObject {
+
+    __weak NSMutableArray *sexMutableArray_;
+
+
+}
+
+@property (nonatomic, weak)NSMutableArray *sexMutableArray;
+
 
 @end

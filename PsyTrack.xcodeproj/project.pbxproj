@@ -230,6 +230,10 @@
 		E71EAD8115D88E5100204389 /* TeachingExperienceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E71EAD7F15D88E5100204389 /* TeachingExperienceVC.m */; };
 		E71EAD8215D88E5100204389 /* TeachingExperienceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71EAD8015D88E5100204389 /* TeachingExperienceVC.xib */; };
 		E7294C7C1600E78200C153CE /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E7294C7B1600E78200C153CE /* psyTrack.sqlite */; };
+		E7294C9B1604C1AB00C153CE /* DemographicSexCounts.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294C9A1604C1AB00C153CE /* DemographicSexCounts.m */; };
+		E7294C9E1604C48500C153CE /* DemographicSex.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294C9D1604C48400C153CE /* DemographicSex.m */; };
+		E7294CA11604C9FB00C153CE /* DemographicSexualOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294CA01604C9FB00C153CE /* DemographicSexualOrientation.m */; };
+		E7294CA41604CB5F00C153CE /* DemographicSexualOrientationCounts.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294CA31604CB5F00C153CE /* DemographicSexualOrientationCounts.m */; };
 		E734334715D5D69C007237C5 /* PaymentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E734334615D5D69C007237C5 /* PaymentEntity.m */; };
 		E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DD158E28DC00CE1AF4 /* menubar-full.png */; };
 		E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */; };
@@ -807,6 +811,14 @@
 		E71EAD7F15D88E5100204389 /* TeachingExperienceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingExperienceVC.m; sourceTree = "<group>"; };
 		E71EAD8015D88E5100204389 /* TeachingExperienceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeachingExperienceVC.xib; sourceTree = "<group>"; };
 		E7294C7B1600E78200C153CE /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = psyTrack.sqlite; sourceTree = "<group>"; };
+		E7294C991604C1AB00C153CE /* DemographicSexCounts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicSexCounts.h; sourceTree = "<group>"; };
+		E7294C9A1604C1AB00C153CE /* DemographicSexCounts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicSexCounts.m; sourceTree = "<group>"; };
+		E7294C9C1604C48400C153CE /* DemographicSex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicSex.h; sourceTree = "<group>"; };
+		E7294C9D1604C48400C153CE /* DemographicSex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicSex.m; sourceTree = "<group>"; };
+		E7294C9F1604C9FB00C153CE /* DemographicSexualOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicSexualOrientation.h; sourceTree = "<group>"; };
+		E7294CA01604C9FB00C153CE /* DemographicSexualOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicSexualOrientation.m; sourceTree = "<group>"; };
+		E7294CA21604CB5F00C153CE /* DemographicSexualOrientationCounts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicSexualOrientationCounts.h; sourceTree = "<group>"; };
+		E7294CA31604CB5F00C153CE /* DemographicSexualOrientationCounts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicSexualOrientationCounts.m; sourceTree = "<group>"; };
 		E734334515D5D69C007237C5 /* PaymentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentEntity.h; sourceTree = "<group>"; };
 		E734334615D5D69C007237C5 /* PaymentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentEntity.m; sourceTree = "<group>"; };
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
@@ -1533,6 +1545,7 @@
 		37F7CEB315005D0700AD2C3A /* Reports */ = {
 			isa = PBXGroup;
 			children = (
+				E7294C981604C0CF00C153CE /* Demographic Report */,
 				E7DEED0615F6C127001D5B05 /* All Training Hours Report */,
 				E7F1CAEB1597A780006F9E95 /* Monthly Practicum Log */,
 				37F7CEC115005D8A00AD2C3A /* ReportsViewController.h */,
@@ -1888,6 +1901,21 @@
 				E71EAD7815D86C7E00204389 /* ConferencesAttendedVC.xib */,
 			);
 			name = "Conferences Attended";
+			sourceTree = "<group>";
+		};
+		E7294C981604C0CF00C153CE /* Demographic Report */ = {
+			isa = PBXGroup;
+			children = (
+				E7294C991604C1AB00C153CE /* DemographicSexCounts.h */,
+				E7294C9A1604C1AB00C153CE /* DemographicSexCounts.m */,
+				E7294C9C1604C48400C153CE /* DemographicSex.h */,
+				E7294C9D1604C48400C153CE /* DemographicSex.m */,
+				E7294C9F1604C9FB00C153CE /* DemographicSexualOrientation.h */,
+				E7294CA01604C9FB00C153CE /* DemographicSexualOrientation.m */,
+				E7294CA21604CB5F00C153CE /* DemographicSexualOrientationCounts.h */,
+				E7294CA31604CB5F00C153CE /* DemographicSexualOrientationCounts.m */,
+			);
+			name = "Demographic Report";
 			sourceTree = "<group>";
 		};
 		E75F7788151CED0C002B10AE /* Encrypted Model Subclasses */ = {
@@ -2803,6 +2831,10 @@
 				E719568615FFAFB60070E61D /* TouchyWebView.m in Sources */,
 				E719568715FFAFB60070E61D /* UILabel+Helpers.m in Sources */,
 				E719568815FFAFB60070E61D /* UIView+Helpers.m in Sources */,
+				E7294C9B1604C1AB00C153CE /* DemographicSexCounts.m in Sources */,
+				E7294C9E1604C48500C153CE /* DemographicSex.m in Sources */,
+				E7294CA11604C9FB00C153CE /* DemographicSexualOrientation.m in Sources */,
+				E7294CA41604CB5F00C153CE /* DemographicSexualOrientationCounts.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
