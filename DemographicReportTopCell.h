@@ -46,4 +46,8 @@
 
 @property (nonatomic, weak)IBOutlet UILabel *clinicianNameLabel;
 
+@property (nonatomic, weak)IBOutlet UIScrollView *mainPageScrollView;
+
+@property (nonatomic, weak)IBOutlet UIView *tablesContainerView;
+@property (nonatomic, weak) IBOutlet UILabel *totalClientsLabel;
 @end

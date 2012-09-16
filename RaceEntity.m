@@ -17,7 +17,7 @@
 @dynamic raceName;
 @dynamic demographics;
 @dynamic existingRaces;
-
+@selector clientCount;
 
 -(int)clientCount{
     

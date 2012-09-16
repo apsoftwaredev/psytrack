@@ -18,6 +18,9 @@
 @property (nonatomic, retain) NSString * ethnicityName;
 @property (nonatomic, retain) NSSet *demographics;
 @property (nonatomic, retain) NSManagedObject *existingEthnicities;
+
+@property (nonatomic, assign) int clientCount;
+
 @end
 
 @interface EthnicityEntity (CoreDataGeneratedAccessors)

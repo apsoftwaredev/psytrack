@@ -247,6 +247,9 @@
 		E7294CCF160655E700C153CE /* DemographicReportTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7294CCE160655E500C153CE /* DemographicReportTopCell.xib */; };
 		E7294CD21606614100C153CE /* DemographicReportBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294CD11606613E00C153CE /* DemographicReportBottomCell.m */; };
 		E7294CD41606622300C153CE /* DemographicReportBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7294CD31606622100C153CE /* DemographicReportBottomCell.xib */; };
+		E7294CD716066FBF00C153CE /* EthnicityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294CD616066FBC00C153CE /* EthnicityEntity.m */; };
+		E7294CDA16066FF800C153CE /* DemographicEthnicityCounts.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294CD916066FF500C153CE /* DemographicEthnicityCounts.m */; };
+		E7294CDD1606706B00C153CE /* EthnicityCombinationCount.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294CDC1606706700C153CE /* EthnicityCombinationCount.m */; };
 		E734334715D5D69C007237C5 /* PaymentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E734334615D5D69C007237C5 /* PaymentEntity.m */; };
 		E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DD158E28DC00CE1AF4 /* menubar-full.png */; };
 		E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */; };
@@ -862,6 +865,12 @@
 		E7294CD01606613C00C153CE /* DemographicReportBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicReportBottomCell.h; sourceTree = "<group>"; };
 		E7294CD11606613E00C153CE /* DemographicReportBottomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicReportBottomCell.m; sourceTree = "<group>"; };
 		E7294CD31606622100C153CE /* DemographicReportBottomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemographicReportBottomCell.xib; sourceTree = "<group>"; };
+		E7294CD516066FB900C153CE /* EthnicityEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EthnicityEntity.h; sourceTree = "<group>"; };
+		E7294CD616066FBC00C153CE /* EthnicityEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EthnicityEntity.m; sourceTree = "<group>"; };
+		E7294CD816066FF200C153CE /* DemographicEthnicityCounts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicEthnicityCounts.h; sourceTree = "<group>"; };
+		E7294CD916066FF500C153CE /* DemographicEthnicityCounts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicEthnicityCounts.m; sourceTree = "<group>"; };
+		E7294CDB1606706500C153CE /* EthnicityCombinationCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EthnicityCombinationCount.h; sourceTree = "<group>"; };
+		E7294CDC1606706700C153CE /* EthnicityCombinationCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EthnicityCombinationCount.m; sourceTree = "<group>"; };
 		E734334515D5D69C007237C5 /* PaymentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentEntity.h; sourceTree = "<group>"; };
 		E734334615D5D69C007237C5 /* PaymentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentEntity.m; sourceTree = "<group>"; };
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
@@ -1948,10 +1957,14 @@
 		E7294C981604C0CF00C153CE /* Demographic Report */ = {
 			isa = PBXGroup;
 			children = (
+				E7294CD516066FB900C153CE /* EthnicityEntity.h */,
+				E7294CD616066FBC00C153CE /* EthnicityEntity.m */,
 				E7294CB216052E6E00C153CE /* RaceEntity.h */,
 				E7294CB316052E6E00C153CE /* RaceEntity.m */,
 				E7294CC516061C9A00C153CE /* RaceCombinationCount.h */,
 				E7294CC616061C9B00C153CE /* RaceCombinationCount.m */,
+				E7294CDB1606706500C153CE /* EthnicityCombinationCount.h */,
+				E7294CDC1606706700C153CE /* EthnicityCombinationCount.m */,
 				E7294CB016052E2600C153CE /* DisabilityEntity.h */,
 				E7294CB116052E2600C153CE /* DisabilityEntity.m */,
 				E7294CAE16052DF100C153CE /* EducationLevelEntity.h */,
@@ -1974,6 +1987,8 @@
 				E7294CB81605F7C300C153CE /* DemographicEducationCounts.m */,
 				E7294CBA1605F96B00C153CE /* DemographicDisabilityCount.h */,
 				E7294CBB1605F96C00C153CE /* DemographicDisabilityCount.m */,
+				E7294CD816066FF200C153CE /* DemographicEthnicityCounts.h */,
+				E7294CD916066FF500C153CE /* DemographicEthnicityCounts.m */,
 				E7294CBD1605FFF400C153CE /* DemographicReportViewController.h */,
 				E7294CBE1605FFF400C153CE /* DemographicReportViewController.m */,
 				E7294CC01606004500C153CE /* DemographicReportViewController.xib */,
@@ -2921,6 +2936,9 @@
 				E7294CCA1606533C00C153CE /* DemographicVariableAndCount.m in Sources */,
 				E7294CCD1606559B00C153CE /* DemographicReportTopCell.m in Sources */,
 				E7294CD21606614100C153CE /* DemographicReportBottomCell.m in Sources */,
+				E7294CD716066FBF00C153CE /* EthnicityEntity.m in Sources */,
+				E7294CDA16066FF800C153CE /* DemographicEthnicityCounts.m in Sources */,
+				E7294CDD1606706B00C153CE /* EthnicityCombinationCount.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

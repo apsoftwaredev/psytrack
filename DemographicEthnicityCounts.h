@@ -1,5 +1,5 @@
 //
-//  DemographicEthnicityCount.h
+//  DemographicEthnicityCounts.h
 //  PsyTrack
 //
 //  Created by Daniel Boice on 9/16/12.
@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DemographicEthnicityCount : NSObject
+@interface DemographicEthnicityCounts : NSObject{
+    
+    __weak NSMutableArray *ethnicityMutableArray_;
+    __weak NSSet *multiRacialOnlySet_;
+    
+}
+
+@property (nonatomic, weak)NSMutableArray *ethnicityMutableArray;
+@property (nonatomic, weak)NSSet *multiEthnicOnlySet;
+
 
 @end

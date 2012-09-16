@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * raceName;
 @property (nonatomic, retain) DemographicProfileEntity *demographics;
 @property (nonatomic, retain) NSSet *existingRaces;
+@property (nonatomic, assign) int clientCount;
 @end
 
 @interface RaceEntity (CoreDataGeneratedAccessors)

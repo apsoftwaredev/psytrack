@@ -8,6 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
-@interface EthnicityCombinationCount : NSObject
+@interface EthnicityCombinationCount : NSObject {
+    
+    __weak NSString *ethnicityCombinationStr_;
+    __weak NSMutableSet *ethnicityCombinationMutableSet_;
+    int ethnicityCombinationCount_;
+    
+    
+    
+}
+
+@property (nonatomic, weak) NSString *ethnicityCombinationStr;
+@property (nonatomic, weak) NSMutableSet *ethnicityCombinationMutableSet;
+@property (nonatomic, assign) int ethnicityCombinationCount;
+
+-(id)initWithethnicityCombinationStr:(NSString *)ethnicityCombinationStrGiven ethnicityMutableSet:(NSMutableSet *)ethnicityMutableSetGiven;
+
+
 
 @end

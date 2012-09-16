@@ -7,6 +7,25 @@
 //
 
 #import "DemographicReportTopCell.h"
+#import "PTTAppDelegate.h"
+#import "MyInformationAndTotalClients.h"
+#import "DemographicSexCounts.h"
+#import "DemographicSex.h"
+#import "DemographicGenderCounts.h"
+#import "GenderEntity.h"
+#import "DemographicGenderCounts.h"
+
+#import "EthnicityCombinationCount.h"
+#import "EthnicityEntity.h"
+#import "DemographicEthnicityCounts.h"
+#import "RaceEntity.h"
+#import "RaceCombinationCount.h"
+#import "DemographicRaceCounts.h"
+#import "DisabilityEntity.h"
+
+
+#import "DemographicDisabilityCount.h"
+#import "DemographicEducationCounts.h"
 
 @implementation DemographicReportTopCell
 
@@ -29,9 +48,12 @@
 @synthesize disabilityTableView;
 @synthesize educationTableView;
 @synthesize sexualOrientationTableView;
-
+@synthesize mainPageScrollView;
 
 @synthesize clinicianNameLabel;
+@synthesize tablesContainerView;
+
+@synthesize totalClientsLabel;
 
 static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
 
@@ -43,161 +65,69 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     //
     
-    CGFloat interventionTVHeight=[self interventionTableViewContentSize].height;
-    CGFloat assessmentTVHeight=[self assessmentTypesTableViewContentSize].height;
-    CGFloat supportTVHeight=[self supportTypesTableViewContentSize].height;
-    CGFloat supervisionTVHeight=[self supervisionTypesTableViewContentSize].height;
+    CGFloat sexTVHeight=[self sexTableViewContentSize].height;
+    CGFloat genderTVHeight=[self genderTableViewContentSize].height;
+    CGFloat ethnicityTVHeight=[self ethnicityTableViewContentSize].height;
+    CGFloat raceTVHeight=[self raceTableViewContentSize].height;
     
-    CGFloat shiftAssessmentsDown=0;
-    CGFloat shiftSupportDown=0;
-    CGFloat shiftSupervisionDown=0;
-    CGFloat shiftDirectHoursFooterDown=0;
-    CGFloat shiftIndirectHoursHeaderDown=0;
-    //    CGFloat shiftOverallHoursFooterDown=0;
-    //    CGFloat shiftContainerForSignaturesViewAndSupervisorSummariesDownTo=0;
-    
-    CGFloat interventionMoreNeededHeight=interventionTVHeight- self.interventionTypesTableView.frame.size.height;
-    CGFloat assessmentMoreNeededHeight=assessmentTVHeight-self.assessmentTypesTableView.frame.size.height;
-    CGFloat supportMoreNeededHeight=supportTVHeight-self.supportActivitieTypesTableView.frame.size.height;
-    CGFloat supervisionMoreNeededHeight=supportTVHeight-self.supervisionReceivedTypesTableView.frame.size.height;
-    
-    CGRect indirectHoursHeaderFrame=self.indirectHoursHeader.frame;
-    
-    CGRect interventionsFrame=self.interventionTypesTableView.frame;
-    CGRect assessmentsFrame=self.assessmentTypesTableView.frame;
-    CGRect supportFrame=self.supportActivitieTypesTableView.frame;
-    CGRect supervisionFrame=self.supervisionReceivedTypesTableView.frame;
+    CGFloat disabilityTVHeight=[self disabilityTableViewContentSize].height;
+    CGFloat educationLevelTVHeight=[self educationTableViewContentSize].height;
+    CGFloat sexualOrientationTVHeight=[self sexualOrientationViewContentSize].height;
     
     
-    CGFloat assessmentsHeightMoreNeededAndOrigin=assessmentMoreNeededHeight+assessmentsFrame.origin.y+assessmentsFrame.size.height;
+    CGFloat totalPaddingHeight=35.0;
+    CGRect tablesContainerViewFrame=self.tablesContainerView.frame;
     
-    if ((assessmentsHeightMoreNeededAndOrigin>MAX_MAIN_SCROLLVIEW_HEIGHT)&&(assessmentsFrame.origin.y+assessmentMoreNeededHeight<MAX_MAIN_SCROLLVIEW_HEIGHT) &&(MAX_MAIN_SCROLLVIEW_HEIGHT-assessmentsFrame.origin.y+assessmentMoreNeededHeight<54)) {
-        assessmentMoreNeededHeight=assessmentMoreNeededHeight+(MAX_MAIN_SCROLLVIEW_HEIGHT- assessmentsFrame.origin.y+assessmentMoreNeededHeight);
-    }
+    tablesContainerViewFrame.size.height=sexTVHeight+genderTVHeight+ethnicityTVHeight+raceTVHeight+disabilityTVHeight+educationLevelTVHeight+sexualOrientationTVHeight+totalPaddingHeight+10.0;
     
+    self.tablesContainerView.frame=tablesContainerViewFrame;
     
-    CGRect containerFrame=(CGRect ) self.subTablesContainerView.frame;
+    CGRect sexTableViewFrame=self.sexTableView.frame;
+    CGRect genderTableViewFrame=self.genderTableView.frame;
+    CGRect ethnicityTableViewFrame=self.ethnicitiesTableView.frame;
+    CGRect raceTableViewFrame=self.racesTableView.frame;
+    CGRect disabilityTableViewFrame=self.disabilityTableView.frame;
+    CGRect educationLevelTableViewFrame=self.educationTableView.frame;
+    CGRect sexualOrientationTableViewFrame=self.sexualOrientationTableView.frame;
     
+    CGFloat padding=5.0;
     
-    if ( interventionMoreNeededHeight>0) {
-        
-        containerFrame.size.height=containerFrame.size.height+interventionMoreNeededHeight;
-        
-    }
-    if ( assessmentMoreNeededHeight>0) {
-        
-        containerFrame.size.height=containerFrame.size.height+assessmentMoreNeededHeight;
-        
-    }
-    if ( supportMoreNeededHeight>0) {
-        
-        containerFrame.size.height=containerFrame.size.height+supportMoreNeededHeight;
-        
-    }
-    if ( supervisionMoreNeededHeight>0) {
-        
-        containerFrame.size.height=containerFrame.size.height+supervisionMoreNeededHeight;
-        
-    }
-    containerFrame.size.height=containerFrame.size.height+self.containerForSignaturesAndSupervisorSummaries.frame.size.height;
+    sexTableViewFrame.size.height=sexTVHeight;
+    genderTableViewFrame.origin.y=sexTableViewFrame.origin.y+sexTVHeight+padding;
+    genderTableViewFrame.size.height=genderTVHeight;
+    ethnicityTableViewFrame.origin.y=genderTableViewFrame.origin.y+genderTVHeight+padding;
+    ethnicityTableViewFrame.size.height=ethnicityTVHeight;
+    raceTableViewFrame.origin.y=ethnicityTableViewFrame.origin.y+ethnicityTVHeight+padding;
+    raceTableViewFrame.size.height=raceTVHeight;
+    disabilityTableViewFrame.origin.y=raceTableViewFrame.origin.y+raceTVHeight+padding;
+    disabilityTableViewFrame.size.height=disabilityTVHeight;
+    educationLevelTableViewFrame.origin.y=disabilityTableViewFrame.origin.y+disabilityTVHeight+padding;
+    educationLevelTableViewFrame.size.height=educationLevelTVHeight;
+    sexualOrientationTableViewFrame.origin.y=educationLevelTableViewFrame.origin.y+educationLevelTVHeight+padding;
+    sexualOrientationTableViewFrame.size.height=sexualOrientationTVHeight;
     
-    self.subTablesContainerView.transform=CGAffineTransformIdentity;
-    self.subTablesContainerView.frame=containerFrame;
+
+    self.sexTableView.frame=sexTableViewFrame;
+    self.genderTableView.frame=genderTableViewFrame;
+    self.ethnicitiesTableView.frame=ethnicityTableViewFrame;
+    self.racesTableView.frame=raceTableViewFrame;
     
-    shiftAssessmentsDown=interventionMoreNeededHeight;
-    shiftDirectHoursFooterDown=shiftAssessmentsDown+assessmentMoreNeededHeight;
-    shiftIndirectHoursHeaderDown=shiftDirectHoursFooterDown;
-    shiftSupportDown=shiftIndirectHoursHeaderDown;
-    shiftSupervisionDown=shiftSupportDown+supportMoreNeededHeight;
-    //    shiftOverallHoursFooterDown=shiftSupervisionDown+supervisionMoreNeededHeight;
-    //    shiftContainerForSignaturesViewAndSupervisorSummariesDownTo=shiftOverallHoursFooterDown+overallHoursFooter.frame.size.height+15;
+    self.disabilityTableView.frame=disabilityTableViewFrame;
+    self.educationTableView.frame=educationLevelTableViewFrame;
+    self.sexualOrientationTableView.frame=sexualOrientationTableViewFrame;
     
+    CGRect mainScrollViewFrame=self.mainPageScrollView.frame;
     
-    
-    
-    
-    self.supervisionReceivedTypesTableView.transform=CGAffineTransformIdentity;
-    
-    supervisionFrame.origin.y=supervisionFrame.origin.y+shiftSupervisionDown;
-    supervisionFrame.size.height=supervisionTVHeight;
-    self.supervisionReceivedTypesTableView.frame=supervisionFrame;
-    
-    self.supportActivitieTypesTableView.transform=CGAffineTransformIdentity;
-    
-    supportFrame.origin.y=supportFrame.origin.y+shiftSupportDown;
-    supportFrame.size.height=supportTVHeight;
-    self.supportActivitieTypesTableView.frame=supportFrame;
-    
-    self.indirectHoursHeader.transform=CGAffineTransformIdentity;
-    
-    indirectHoursHeaderFrame.origin.y=indirectHoursHeaderFrame.origin.y+shiftIndirectHoursHeaderDown;
-    self.indirectHoursHeader.frame=indirectHoursHeaderFrame;
-    
-    self.assessmentTypesTableView.transform=CGAffineTransformIdentity;
-    
-    assessmentsFrame.origin.y=assessmentsFrame.origin.y+shiftAssessmentsDown;
-    assessmentsFrame.size.height=assessmentTVHeight;
-    self.assessmentTypesTableView.frame=assessmentsFrame;
+    mainScrollViewFrame.size.height=MAX_MAIN_SCROLLVIEW_HEIGHT;
     
     
-    self.interventionTypesTableView.transform=CGAffineTransformIdentity;
+    self.mainPageScrollView.frame=mainScrollViewFrame;
     
-    
-    interventionsFrame.size.height=interventionTVHeight;
-    self.interventionTypesTableView.frame=interventionsFrame;
-    
-    
-    
-    self.directHoursFooter.transform=CGAffineTransformIdentity;
-    CGRect directHoursFooterFrame=self.directHoursFooter.frame;
-    
-    directHoursFooterFrame.origin.y=assessmentsFrame.size.height+assessmentsFrame.origin.y+5;  //keep an eye on this
-    
-    
-    
-    self.directHoursFooter.frame=directHoursFooterFrame;
-    
-    
-    self.overallHoursFooter.transform=CGAffineTransformIdentity;
-    CGRect overallHoursFooterFrame=self.overallHoursFooter.frame;
-    overallHoursFooterFrame.origin.y=supervisionTVHeight+supervisionFrame.origin.y+15;
-    
-    
-    self.overallHoursFooter.frame=overallHoursFooterFrame;
-    
-    self.containerForSignaturesAndSupervisorSummaries.transform=CGAffineTransformIdentity;
-    CGRect containerForSignaturesAndSupervisorSummariesFrame=self.containerForSignaturesAndSupervisorSummaries.frame;
-    
-    containerForSignaturesAndSupervisorSummariesFrame.origin.y=overallHoursFooterFrame.origin.y+overallHoursFooterFrame.size.height+15;
-    
-    
-    self.containerForSignaturesAndSupervisorSummaries.frame=containerForSignaturesAndSupervisorSummariesFrame;
-    
-    
-    
-    CGFloat bottomOfDirectHoursFooter=directHoursFooterFrame.size.height+directHoursFooterFrame.origin.y;
-    
-    CGFloat changeScrollHeightTo=MAX_MAIN_SCROLLVIEW_HEIGHT;
-    if (bottomOfDirectHoursFooter<MAX_MAIN_SCROLLVIEW_HEIGHT) {
-        changeScrollHeightTo=bottomOfDirectHoursFooter;
-    }
-    else if(bottomOfDirectHoursFooter>MAX_MAIN_SCROLLVIEW_HEIGHT &&directHoursFooterFrame.origin.y<=MAX_MAIN_SCROLLVIEW_HEIGHT){
-        
-        changeScrollHeightTo=directHoursFooterFrame.origin.y-1;
-        
-        
-    }
-    
-    
-    self.mainPageScrollView.transform=CGAffineTransformIdentity;
-    CGRect mainPageScrollViewFrame=self.mainPageScrollView.frame;
-    mainPageScrollViewFrame.size.height=changeScrollHeightTo;
-    self.mainPageScrollView.frame=mainPageScrollViewFrame;
     
     [[NSNotificationCenter defaultCenter]
      addObserver:self
      selector:@selector(scrollToNextPage)
-     name:@"ScrollAllHoursVCToNextPage"
+     name:@"ScrollDemographicVCToNextPage"
      object:nil];
 }
 
@@ -209,9 +139,9 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     
     
-    if ((self.containerForSignaturesAndSupervisorSummaries.frame.origin.y+self.containerForSignaturesAndSupervisorSummaries.frame.size.height)<=(MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY)) {
+    if ((self.sexualOrientationTableView.frame.origin.y+self.sexualOrientationTableView.frame.size.height)<=(MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY)) {
         
-        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollAllHoursVCToNextPage" object:nil];
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollDemographicReportVCToNextPage" object:nil];
         
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
@@ -221,75 +151,37 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
     } else {
         
-        CGRect mainScrollViewFrame=self.mainPageScrollView.frame;
+         
         
-        if (mainScrollViewFrame.size.height <currentOffsetY+ MAX_MAIN_SCROLLVIEW_HEIGHT) {
-            CGFloat mainScrollVieFrameHeightPlusY=MAX_MAIN_SCROLLVIEW_HEIGHT-self.mainPageScrollView.frame.size.height;
-            mainScrollViewFrame.size.height=MAX_MAIN_SCROLLVIEW_HEIGHT;
-            self.mainPageScrollView.frame=mainScrollViewFrame;
-            
-            
-            
-            if (self.assessmentTypesTableView.frame.size.height+self.assessmentTypesTableView.frame.origin.y>MAX_MAIN_SCROLLVIEW_HEIGHT||self.interventionTypesTableView.frame.size.height+self.interventionTypesTableView.frame.origin.y>MAX_MAIN_SCROLLVIEW_HEIGHT) {
-                currentOffsetY=currentOffsetY+MAX_MAIN_SCROLLVIEW_HEIGHT-mainScrollVieFrameHeightPlusY;
-            }
-            else if ((self.directHoursFooter.frame.origin.y+self.directHoursFooter.frame.size.height>MAX_MAIN_SCROLLVIEW_HEIGHT)&&self.interventionTypesTableView.frame.size.height+self.interventionTypesTableView.frame.origin.y<=MAX_MAIN_SCROLLVIEW_HEIGHT) {
-                currentOffsetY=currentOffsetY+ self.directHoursFooter.frame.origin.y;
-            }
-            else {
-                currentOffsetY=currentOffsetY+ self.indirectHoursHeader.frame.origin.y;
-            }
-            
-            [self.mainPageScrollView setContentOffset:CGPointMake(0, currentOffsetY )];
-            
-            
-        }else {
             [self.mainPageScrollView setContentOffset:CGPointMake(0, mainScrollView.frame.size.height+currentOffsetY )];
             currentOffsetY=currentOffsetY+mainScrollView.frame.size.height;
-        }
-        if (self.overallHoursFooter.frame.size.height +self.overallHoursFooter.frame.origin.y>MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY&&self.overallHoursFooter.frame.origin.y<MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY) {
-            CGRect overallHoursFooterFrame=self.overallHoursFooter.frame;
-            overallHoursFooterFrame.origin.y=MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY+10;
-            self.overallHoursFooter.frame=overallHoursFooterFrame;
-            
-            CGRect containerForSignaturesAndSupervisiorSummariesFrame=self.containerForSignaturesAndSupervisorSummaries.frame;
-            containerForSignaturesAndSupervisiorSummariesFrame.origin.y=overallHoursFooterFrame.origin.y+overallHoursFooterFrame.size.height+ 10;
-            self.containerForSignaturesAndSupervisorSummaries.frame=containerForSignaturesAndSupervisiorSummariesFrame;
-            
-            
-            
-        }
+        
+        
         CGFloat paddAdditonalY=0;
         
         
-        for (NSInteger i=0; i<self.containerForSignaturesAndSupervisorSummaries.subviews.count; i++) {
-            UIView *subview =[self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:i];
+        for (NSInteger i=0; i<self.tablesContainerView.subviews.count; i++) {
+            UIView *subview =[self.tablesContainerView.subviews objectAtIndex:i];
             CGRect subviewFrame=subview.frame;
-            if (subview.frame.origin.y+self.containerForSignaturesAndSupervisorSummaries.frame.origin.y<currentOffsetY+MAX_MAIN_SCROLLVIEW_HEIGHT && subview.frame.origin.y+subview.frame.size.height+self.containerForSignaturesAndSupervisorSummaries.frame.origin.y>currentOffsetY+MAX_MAIN_SCROLLVIEW_HEIGHT) {
+            if ((currentOffsetY+MAX_MAIN_SCROLLVIEW_HEIGHT )-subview.frame.origin.y+subview.frame.size.height<66.0
+               ) {
                 
                 
                 
-                paddAdditonalY=(currentOffsetY+MAX_MAIN_SCROLLVIEW_HEIGHT)-(subviewFrame.origin.y+self.containerForSignaturesAndSupervisorSummaries.frame.origin.y)+5;
+                paddAdditonalY=(currentOffsetY+MAX_MAIN_SCROLLVIEW_HEIGHT)-(subviewFrame.origin.y+subview.frame.origin.y)+5;
                 
+                CGRect tableContainerViewFrame=self.tablesContainerView.frame;
+                tableContainerViewFrame.size.height=tableContainerViewFrame.size.height+paddAdditonalY;
+                self.tablesContainerView.transform=CGAffineTransformIdentity;
+                self.tablesContainerView.frame=tableContainerViewFrame;
                 
-                CGRect contatinerForTableViewsFrame=self.subTablesContainerView.frame;
-                contatinerForTableViewsFrame.size.height=contatinerForTableViewsFrame.size.height+paddAdditonalY*(self.containerForSignaturesAndSupervisorSummaries.subviews.count);
-                self.subTablesContainerView.transform=CGAffineTransformIdentity;
-                self.subTablesContainerView.frame=contatinerForTableViewsFrame;
-                
-                CGRect containerForSignaturesAndSupervisorSummariesFrame=self.containerForSignaturesAndSupervisorSummaries.frame;
-                
-                self.containerForSignaturesAndSupervisorSummaries.transform=CGAffineTransformIdentity;
-                
-                containerForSignaturesAndSupervisorSummariesFrame.size.height=containerForSignaturesAndSupervisorSummariesFrame.size.height+paddAdditonalY;
-                
-                self.containerForSignaturesAndSupervisorSummaries.frame=containerForSignaturesAndSupervisorSummariesFrame;
+               
                 subviewFrame.origin.y=subviewFrame.origin.y+paddAdditonalY;
                 subview.transform=CGAffineTransformIdentity;
                 subview.frame=subviewFrame;
                 
-                for (NSInteger p=i+1; p<self.containerForSignaturesAndSupervisorSummaries.subviews.count; p++) {
-                    UIView *nextSubview=[self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:p];
+                for (NSInteger p=i+1; p<self.tablesContainerView.subviews.count; p++) {
+                    UIView *nextSubview=[self.tablesContainerView.subviews objectAtIndex:p];
                     
                     CGRect nextSubviewFrame=nextSubview.frame;
                     nextSubviewFrame.origin.y=nextSubviewFrame.origin.y+paddAdditonalY;
@@ -305,65 +197,41 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
             }
             
             
-        }
+        }}
         
-        CGRect signaturesViewFrame =self.signaturesView.frame;
-        signaturesViewFrame.origin.y=self.containerForSignaturesAndSupervisorSummaries.frame.size.height-signaturesViewFrame.size.height;
-        
-        self.signaturesView.frame=signaturesViewFrame;
-        
-        
-    }
-    
-    //    CGRect  mainPageScrollViewFrame=mainPageScrollView.frame;
-    //    mainPageScrollViewFrame.size.height=MAX_MAIN_SCROLLVIEW_HEIGHT;
-    //    mainScrollView.frame=mainPageScrollViewFrame;
+      
     
 }
 -(void)loadBindingsIntoCustomControls{
     
     [super loadBindingsIntoCustomControls];
     
-    SupervisorsAndTotalTimesForMonth *totalsObject=(SupervisorsAndTotalTimesForMonth *)self.boundObject;
+    MyInformationAndTotalClients *totalsObject=(MyInformationAndTotalClients *)self.boundObject;
     
     
-    self.allHoursReportTitleLabel.text=totalsObject.doctorateLevel?@"All Doctorate Level Training Hours":@"All Master's Level Training Hours";
-    
-    numberOfSupervisors=totalsObject.clinicians.count;
+   
+    numberOfSupervisors=totalsObject.totalClients;
     
     
     NSString *bottomCellNibName=nil;
     
     
     
-    bottomCellNibName=@"AllHoursReportBottomCell";
+    bottomCellNibName=@"DemographicReportBottomCell";
     
     
     
-    self.programLabel.text=totalsObject.trainingProgramsStr;
-    
-    [self.programLabel alignTop];
-    
-    if (totalsObject.numberOfProgramCourses>1) {
-        self.programLabelBeforeColon.text=@"Programs & Courses:";
-    }
-    self.studentNameLabel.text=totalsObject.studentNameStr;
+   
+    self.clinicianNameLabel.text=totalsObject.myName;
     //
+ 
+    
+    self.sexObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.sexTableView];
+    
+    sexObjectsModel_.delegate=self;
     //
-    self.studentSignatureLabelUnderLine.text=[NSString stringWithFormat:@"%@ (Student)", totalsObject.studentNameStr];
-    
-    
-    
-    
-    self.interventionObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.interventionTypesTableView];
-    
-    interventionObjectsModel_.delegate=self;
-    //
-    SCClassDefinition *typesDef=[SCClassDefinition definitionWithClass:[TrackTypeWithTotalTimes class] autoGeneratePropertyDefinitions:YES];
-    
-    NSArray *fetchedInterventionObjects =  [self fetchObjectsFromEntity:(NSString *)@"InterventionTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"subTypes",@"subTypes.interventionsDelivered.time", @"subTypes.interventionsDelivered.trainingProgram",@"subTypes.existingInterventions",@"subTypes.existingInterventions.programCourse",nil]];
-    //
-    SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"order" sortAscending:YES filterPredicate:nil];
+   
+   
     
     for (InterventionTypeEntity *interventionType in fetchedInterventionObjects) {
         
