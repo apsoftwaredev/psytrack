@@ -8,6 +8,14 @@
 
 #import <SensibleTableView/SensibleTableView.h>
 
-@interface DemographicReportViewController : SCTableViewController
+@interface DemographicReportViewController : SCViewController <SCTableViewControllerDelegate, SCTableViewModelDelegate>{
+    
+    
+    SCArrayOfObjectsModel *objectsModel;
+    
+    
+    
+}
+
 
 @end

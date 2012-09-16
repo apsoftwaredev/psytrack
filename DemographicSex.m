@@ -13,7 +13,7 @@
 @implementation DemographicSex
 @synthesize sex,count;
 
--(id)initWithSex:(NSString *)sexGiven{
+-(id)initWithSex:(NSString *)sexGiven count:(int)countGiven{
     
     self =[super init];
     
@@ -22,22 +22,7 @@
         
         self.sex=sexGiven;
         
-        NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"DemographicProfileEntity" inManagedObjectContext:managedObjectContext];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sex MATCHES ", sexGiven];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (fetchedObjects != nil) {
-            self.count=fetchedObjects.count;
-        }
-        else
-            self.count=0;
-        
+        self.count=countGiven;
         
         
         
@@ -58,7 +43,7 @@
         self.sex=sexGiven;
         
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sex MATCHES ", sexGiven];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sex MATCHES %@ AND clinician == nil ", sexGiven];
         
         NSArray *filteredObjects =  [demographicArrayGiven filteredArrayUsingPredicate:predicate];
         

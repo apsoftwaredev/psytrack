@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DemographicDisabilityCount : NSObject
+@interface DemographicDisabilityCount : NSObject{
+    
+    __weak NSMutableArray *disabilityMutableArray_;
+    
+    
+}
+
+@property (nonatomic, weak)NSMutableArray *disabilityMutableArray;
 
 @end

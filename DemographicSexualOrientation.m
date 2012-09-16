@@ -26,7 +26,7 @@
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"DemographicProfileEntity" inManagedObjectContext:managedObjectContext];
         [fetchRequest setEntity:entity];
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sexualOrientation MATCHES ", sexualOrientationGiven];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sexualOrientation MATCHES %@ AND clinician == nil", sexualOrientationGiven];
         [fetchRequest setPredicate:predicate];
         
         NSError *error = nil;
@@ -57,7 +57,7 @@
         self.sexualOrientation=sexualOrientationGiven;
         
         
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sexualOrientation MATCHES ", sexualOrientationGiven];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sexualOrientation MATCHES %@ AND clinician == nil", sexualOrientationGiven];
         
         NSArray *filteredObjects =  [demographicArrayGiven filteredArrayUsingPredicate:predicate];
         

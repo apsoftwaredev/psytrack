@@ -56,7 +56,14 @@
         
         [sexMutableArray_ addObject:demographicUndisclosed];
         
+        NSArray *filteredForNull=[fetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"sex == nil"]];
         
+        if (filteredForNull && filteredForNull.count>0) {
+            DemographicSex *demographicSexNil=[[DemographicSex alloc]initWithSex:@"Not Selected" count:filteredForNull.count];
+            [sexMutableArray_ addObject:demographicSexNil];
+        }
+        
+
         
         
     }

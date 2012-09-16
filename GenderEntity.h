@@ -18,6 +18,9 @@
 @property (nonatomic, retain) NSString * genderName;
 @property (nonatomic, retain) NSSet *existingGenders;
 @property (nonatomic, retain) NSSet *demographics;
+
+@property (nonatomic, assign) int clientCount;
+
 @end
 
 @interface GenderEntity (CoreDataGeneratedAccessors)

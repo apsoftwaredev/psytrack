@@ -17,5 +17,24 @@
 @dynamic genderName;
 @dynamic existingGenders;
 @dynamic demographics;
+@synthesize clientCount;
 
+
+-(int)clientCount{
+
+    int returnInt=0;
+   
+    
+    NSMutableSet *clientSet=[self mutableSetValueForKeyPath:@"demographics.client"];
+    
+    
+    returnInt=clientSet.count;
+    
+    
+    return returnInt;
+    
+    
+
+
+}
 @end

@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DemographicEducationCounts : NSObject
+@interface DemographicEducationCounts : NSObject {
+    
+    __weak NSMutableArray *educationMutableArray_;
+    
+    
+}
+
+@property (nonatomic, weak)NSMutableArray *educationMutableArray;
+
+
 
 @end

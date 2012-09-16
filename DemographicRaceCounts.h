@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DemographicRaceCounts : NSObject
+@interface DemographicRaceCounts : NSObject {
+    
+    __weak NSMutableArray *raceMutableArray_;
+    __weak NSSet *multiRacialOnlySet_;
+    
+}
 
+@property (nonatomic, weak)NSMutableArray *raceMutableArray;
+@property (nonatomic, weak)NSSet *multiRacialOnlySet;
 @end

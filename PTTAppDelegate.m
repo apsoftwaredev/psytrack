@@ -61,8 +61,8 @@
 #define kPTTAppSqliteFileName @"psyTrack.sqlite"
 #define kPTTDrugDatabaseSqliteFileName @"drugs.sqlite"
 
-
-
+#import "RaceCombinationCount.h"
+#import "DemographicRaceCounts.h"
 
 @implementation PTTAppDelegate
 
@@ -121,6 +121,30 @@
 #endif
    
 //    
+    NSMutableSet *mutableSet=[NSMutableSet set];
+    
+    RaceCombinationCount *raceCombinationOne=[[RaceCombinationCount alloc]initWithRaceCombinationStr:@"Black, White" raceMutableSet:[NSMutableSet setWithObjects:@"Black",@"White", nil]];
+    
+    RaceCombinationCount *raceCombinationThree=[[RaceCombinationCount alloc]initWithRaceCombinationStr:@"White" raceMutableSet:[NSMutableSet setWithObject:@"White"]];
+   
+    RaceCombinationCount *raceCombinationFour=[[RaceCombinationCount alloc]initWithRaceCombinationStr:@"Black, White" raceMutableSet:[NSMutableSet setWithObjects:@"Black",@"White", nil]];
+    
+    [mutableSet addObject:raceCombinationFour];
+    
+    [mutableSet addObject:raceCombinationThree];
+    [mutableSet addObject:raceCombinationOne];
+    
+    RaceCombinationCount *raceCombinationTwo=[[RaceCombinationCount alloc]initWithRaceCombinationStr:@"Pink, Purple" raceMutableSet:[NSMutableSet setWithObjects:@"Pink",@"Purple", nil]];
+    
+    [mutableSet addObject:raceCombinationTwo];
+
+    NSSet *filteredSet=[mutableSet filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"raceCombinationMutableSet ==  %@",raceCombinationOne.raceCombinationMutableSet]];
+    
+    DLog(@"filtered mutable set is  %@",filteredSet);
+    DLog(@"mutable set is  %@",mutableSet);
+    
+    
+   
     
     // Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the
     // method "reachabilityChanged" will be called. 

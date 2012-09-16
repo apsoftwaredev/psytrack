@@ -6,8 +6,16 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-#import <SensibleTableView/SensibleTableView.h>
+@interface DemographicReportBottomCell : SCCustomCell {
 
-@interface DemographicReportBottomCell : SCCustomCell
+
+
+
+}
+
+@property (nonatomic, weak)IBOutlet UILabel *variableLabel;
+@property (nonatomic, weak)IBOutlet UILabel *variableCountLabel;
+@property (nonatomic, weak)IBOutlet UIView *containerView;
+
 
 @end

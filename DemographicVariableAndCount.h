@@ -10,4 +10,8 @@
 
 @interface DemographicVariableAndCount : NSObject
 
+@property (nonatomic, weak) NSString *variableStr;
+@property (nonatomic, weak) NSString *variableCountStr;
+
+
 @end

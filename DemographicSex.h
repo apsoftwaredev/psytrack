@@ -16,5 +16,6 @@
 @property (nonatomic, assign) int count;
 
 -(id)initWithSex:(NSString *)sexGiven fromDemographicArray:(NSArray *)demographicArrayGiven;
--(id)initWithSex:(NSString *)sexGiven;
+-(id)initWithSex:(NSString *)sexGiven count:(int)countGiven;
+
 @end

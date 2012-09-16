@@ -8,6 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RaceCombinationCount : NSObject
+@interface RaceCombinationCount : NSObject {
+
+   __weak NSString *raceCombinationStr_;
+    __weak NSMutableSet *raceCombinationMutableSet_;
+     int raceCombinationCount_;
+
+
+
+}
+
+@property (nonatomic, weak) NSString *raceCombinationStr;
+@property (nonatomic, weak) NSMutableSet *raceCombinationMutableSet;
+@property (nonatomic, assign) int raceCombinationCount;
+
+-(id)initWithRaceCombinationStr:(NSString *)raceCombinationStrGiven raceMutableSet:(NSMutableSet *)raceMutableSetGiven;
 
 @end

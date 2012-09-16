@@ -17,6 +17,9 @@
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * educationLevel;
 @property (nonatomic, retain) NSSet *demographics;
+
+@property (nonatomic, assign) int clientCount;
+
 @end
 
 @interface EducationLevelEntity (CoreDataGeneratedAccessors)

@@ -14,6 +14,9 @@
 #import "ExistingHoursEntity.h"
 #import "ClinicianSelectionCell.h"
 
+
+#import "DemographicRaceCounts.h"
+#import "RaceCombinationCount.h"
 @interface AllTrainingHoursGenerateVC ()
 -(NSString *)sanitizeFileName;
 @end
@@ -50,7 +53,14 @@
     prog = [[BigProgressViewWithBlockedView alloc] initWithFrame:CGRectMake(0, 64, 320, 367) blockedView:self.view];
     
        
+    DemographicRaceCounts *demographicRacesCounts=[[DemographicRaceCounts alloc]init];
     
+    
+    DLog(@"demographic races counts  %@",demographicRacesCounts.raceMutableArray);
+    for (RaceCombinationCount *raceCombination in demographicRacesCounts.raceMutableArray) {
+        NSLog(@"race combination is %@ count is %i",raceCombination.raceCombinationStr,raceCombination.raceCombinationCount);
+        
+    }
     
 }
 

@@ -9,5 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @interface MyInformationAndTotalClients : NSObject
+{
+
+   __weak NSString *myName_;
+    int totalClients_;
+
+
+}
+@property (nonatomic, weak) NSString *myName;
+@property (nonatomic, assign) int totalClients;
 
 @end

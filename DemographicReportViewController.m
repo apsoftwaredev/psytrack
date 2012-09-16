@@ -7,37 +7,75 @@
 //
 
 #import "DemographicReportViewController.h"
-
+#import "MyInformationAndTotalClients.h"
+#import "DemographicReportTopCell.h"
 @interface DemographicReportViewController ()
 
 @end
 
 @implementation DemographicReportViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    
+    SCClassDefinition *myInformationandTotalClientshDef=[SCClassDefinition definitionWithClass:[MyInformationAndTotalClients class] autoGeneratePropertyDefinitions:YES];
+    
+    // Create and add the objects section
+    MyInformationAndTotalClients *myInformationAndTotalClients=[[MyInformationAndTotalClients alloc]init];
+    
+//    self.studentName=myInformationAndTotalClients.myName;
+    NSMutableArray *myInformationMutableArray=[NSMutableArray arrayWithObject:myInformationAndTotalClients];
+    
+	SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:supervisorsAndTotalTimesForMonthMutableArray itemsDefinition:myInformationandTotalClientshDef];
+    
+    objectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
+    {
+        // Create & return a custom cell based on the cell in ContactOverviewCell.xib
+        //        NSString *bindingsString = @"20:lastName;"; // 1,2,3 are the control tags
+        
+        
+        
+        
+        
+        NSString *topCellNibName=nil;
+        
+        
+        
+        topCellNibName=@"DemographicReportTopCell";
+        
+        
+        
+        
+        DemographicReportTopCell *demographicReportTopCell = [DemographicReportTopCell cellWithText:nil objectBindings:nil nibName:topCellNibName];
+        
+        
+        return demographicReportTopCell;
+    };
+    
+    
+    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView];
+    
+    [objectsModel addSection:objectsSection];
+    self.tableViewModel=objectsModel;
+    
+    
+
+    
+    
+    
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
 }
+
+
 
 @end
