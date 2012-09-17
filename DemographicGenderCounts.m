@@ -32,8 +32,8 @@
         
         NSError *error = nil;
         NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        
-        for (int i; i<fetchedObjects.count; i++) {
+        DLog(@"fetched objects are  %@",fetchedObjects);
+        for (int i=0; i<fetchedObjects.count; i++) {
             
             
             

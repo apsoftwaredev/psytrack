@@ -18,4 +18,6 @@
 @property (nonatomic, weak)NSMutableArray *disabilityMutableArray;
 @property (nonatomic, weak)NSSet *multiDisabilityOnlySet;
 
+
+;
 @end

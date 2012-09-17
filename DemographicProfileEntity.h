@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClientEntity, ClinicianEntity, ImmigrationHistoryEntity;
+@class ClientEntity, ClinicianEntity, ImmigrationHistoryEntity,GenderEntity,EducationLevelEntity;
 
 @interface DemographicProfileEntity : NSManagedObject
 
@@ -19,7 +19,7 @@
 @property (nonatomic, retain) NSString * keyString;
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSManagedObject *militaryService;
-@property (nonatomic, retain) NSManagedObject *educationLevel;
+@property (nonatomic, retain) EducationLevelEntity *educationLevel;
 
 @property (nonatomic, retain) ClientEntity *client;
 @property (nonatomic, retain) NSSet *disabilities;
@@ -27,7 +27,7 @@
 @property (nonatomic, retain) NSSet *migrationHistory;
 @property (nonatomic, retain) ClinicianEntity *clinician;
 @property (nonatomic, retain) NSSet *interpersonal;
-@property (nonatomic, retain) NSManagedObject *gender;
+@property (nonatomic, retain) GenderEntity *gender;
 @property (nonatomic, retain) NSSet *languagesSpoken;
 @property (nonatomic, retain) NSManagedObject *employmentStatus;
 @property (nonatomic, retain) NSSet *cultureGroups;

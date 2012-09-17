@@ -369,7 +369,6 @@
 		E7ADFD4B15AE2B0900081392 /* ExistingSupportActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD4A15AE2B0900081392 /* ExistingSupportActivityEntity.m */; };
 		E7AFB2B215C329A4005E2722 /* ConsultationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AFB2B015C329A4005E2722 /* ConsultationsViewController.xib */; };
 		E7AFB2B615C38530005E2722 /* OtherReferralSourceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AFB2B515C38530005E2722 /* OtherReferralSourceEntity.m */; };
-		E7AFB2B915C45BB4005E2722 /* ConsultationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AFB2B815C45BB4005E2722 /* ConsultationEntity.m */; };
 		E7AFB2BC15C477FC005E2722 /* RateChargeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AFB2BB15C477FC005E2722 /* RateChargeEntity.m */; };
 		E7AFB2BF15C47C8D005E2722 /* RateEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AFB2BE15C47C8D005E2722 /* RateEntity.m */; };
 		E7B3E40715C58B2F00729C88 /* CECreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3E3FD15C58B2F00729C88 /* CECreditsViewController.m */; };
@@ -380,6 +379,13 @@
 		E7B3E40C15C58B2F00729C88 /* ConsultationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3E40415C58B2F00729C88 /* ConsultationsViewController.m */; };
 		E7B3E40D15C58B2F00729C88 /* TotalHoursAndMinutesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3E40515C58B2F00729C88 /* TotalHoursAndMinutesCell.m */; };
 		E7B3E40E15C58B2F00729C88 /* TrainTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3E40615C58B2F00729C88 /* TrainTrackViewController.m */; };
+		E7B49BED1607B8C10073AA30 /* EducationLevelEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BEC1607B8C10073AA30 /* EducationLevelEntity.m */; };
+		E7B49BF01607BB460073AA30 /* ClientPresentationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BEF1607BB460073AA30 /* ClientPresentationEntity.m */; };
+		E7B49BF31607BB870073AA30 /* ConsultationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BF21607BB870073AA30 /* ConsultationEntity.m */; };
+		E7B49BF61607BCF00073AA30 /* ContinuingEducationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BF51607BCF00073AA30 /* ContinuingEducationEntity.m */; };
+		E7B49BF91607BD1F0073AA30 /* ContinuingEducationTypeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BF81607BD1F0073AA30 /* ContinuingEducationTypeEntity.m */; };
+		E7B49BFC1607BD600073AA30 /* DisorderSubCategoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BFB1607BD600073AA30 /* DisorderSubCategoryEntity.m */; };
+		E7B49BFF1607BD7B0073AA30 /* DisorderSystemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BFE1607BD7B0073AA30 /* DisorderSystemEntity.m */; };
 		E7C02D9F15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */; };
 		E7C02DA215B3621B0072F97C /* SupervisionReceivedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA115B362190072F97C /* SupervisionReceivedEntity.m */; };
 		E7C02DA515B362990072F97C /* SupervisionGivenEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA415B362980072F97C /* SupervisionGivenEntity.m */; };
@@ -842,8 +848,6 @@
 		E7294CA916052B1A00C153CE /* DemographicGenderCounts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicGenderCounts.m; sourceTree = "<group>"; };
 		E7294CAB16052DCC00C153CE /* GenderEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenderEntity.h; sourceTree = "<group>"; };
 		E7294CAC16052DCC00C153CE /* GenderEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenderEntity.m; sourceTree = "<group>"; };
-		E7294CAE16052DF100C153CE /* EducationLevelEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EducationLevelEntity.h; sourceTree = "<group>"; };
-		E7294CAF16052DF100C153CE /* EducationLevelEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EducationLevelEntity.m; sourceTree = "<group>"; };
 		E7294CB016052E2600C153CE /* DisabilityEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisabilityEntity.h; sourceTree = "<group>"; };
 		E7294CB116052E2600C153CE /* DisabilityEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DisabilityEntity.m; sourceTree = "<group>"; };
 		E7294CB216052E6E00C153CE /* RaceEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RaceEntity.h; sourceTree = "<group>"; };
@@ -1049,8 +1053,6 @@
 		E7AFB2B015C329A4005E2722 /* ConsultationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsultationsViewController.xib; sourceTree = "<group>"; };
 		E7AFB2B415C38530005E2722 /* OtherReferralSourceEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherReferralSourceEntity.h; sourceTree = "<group>"; };
 		E7AFB2B515C38530005E2722 /* OtherReferralSourceEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherReferralSourceEntity.m; sourceTree = "<group>"; };
-		E7AFB2B715C45BB4005E2722 /* ConsultationEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultationEntity.h; sourceTree = "<group>"; };
-		E7AFB2B815C45BB4005E2722 /* ConsultationEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsultationEntity.m; sourceTree = "<group>"; };
 		E7AFB2BA15C477FC005E2722 /* RateChargeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateChargeEntity.h; sourceTree = "<group>"; };
 		E7AFB2BB15C477FC005E2722 /* RateChargeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateChargeEntity.m; sourceTree = "<group>"; };
 		E7AFB2BD15C47C8D005E2722 /* RateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateEntity.h; sourceTree = "<group>"; };
@@ -1066,6 +1068,20 @@
 		E7B3E40415C58B2F00729C88 /* ConsultationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ConsultationsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7B3E40515C58B2F00729C88 /* TotalHoursAndMinutesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TotalHoursAndMinutesCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7B3E40615C58B2F00729C88 /* TrainTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TrainTrackViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		E7B49BEB1607B8C00073AA30 /* EducationLevelEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EducationLevelEntity.h; sourceTree = "<group>"; };
+		E7B49BEC1607B8C10073AA30 /* EducationLevelEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EducationLevelEntity.m; sourceTree = "<group>"; };
+		E7B49BEE1607BB460073AA30 /* ClientPresentationEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientPresentationEntity.h; sourceTree = "<group>"; };
+		E7B49BEF1607BB460073AA30 /* ClientPresentationEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientPresentationEntity.m; sourceTree = "<group>"; };
+		E7B49BF11607BB870073AA30 /* ConsultationEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultationEntity.h; sourceTree = "<group>"; };
+		E7B49BF21607BB870073AA30 /* ConsultationEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsultationEntity.m; sourceTree = "<group>"; };
+		E7B49BF41607BCF00073AA30 /* ContinuingEducationEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinuingEducationEntity.h; sourceTree = "<group>"; };
+		E7B49BF51607BCF00073AA30 /* ContinuingEducationEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinuingEducationEntity.m; sourceTree = "<group>"; };
+		E7B49BF71607BD1F0073AA30 /* ContinuingEducationTypeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContinuingEducationTypeEntity.h; sourceTree = "<group>"; };
+		E7B49BF81607BD1F0073AA30 /* ContinuingEducationTypeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContinuingEducationTypeEntity.m; sourceTree = "<group>"; };
+		E7B49BFA1607BD600073AA30 /* DisorderSubCategoryEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisorderSubCategoryEntity.h; sourceTree = "<group>"; };
+		E7B49BFB1607BD600073AA30 /* DisorderSubCategoryEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisorderSubCategoryEntity.m; sourceTree = "<group>"; };
+		E7B49BFD1607BD7B0073AA30 /* DisorderSystemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisorderSystemEntity.h; sourceTree = "<group>"; };
+		E7B49BFE1607BD7B0073AA30 /* DisorderSystemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisorderSystemEntity.m; sourceTree = "<group>"; };
 		E7C02D9D15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h; sourceTree = "<group>"; };
 		E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m; sourceTree = "<group>"; };
 		E7C02DA015B362180072F97C /* SupervisionReceivedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionReceivedEntity.h; sourceTree = "<group>"; };
@@ -1622,11 +1638,23 @@
 		37F7CEC615005E3400AD2C3A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E7B49BFD1607BD7B0073AA30 /* DisorderSystemEntity.h */,
+				E7B49BFE1607BD7B0073AA30 /* DisorderSystemEntity.m */,
+				E7B49BFA1607BD600073AA30 /* DisorderSubCategoryEntity.h */,
+				E7B49BFB1607BD600073AA30 /* DisorderSubCategoryEntity.m */,
+				E7B49BF71607BD1F0073AA30 /* ContinuingEducationTypeEntity.h */,
+				E7B49BF81607BD1F0073AA30 /* ContinuingEducationTypeEntity.m */,
+				E7B49BF11607BB870073AA30 /* ConsultationEntity.h */,
+				E7B49BF21607BB870073AA30 /* ConsultationEntity.m */,
 				E762661D15FE958500D97D3E /* AdditionalVariableEntity.h */,
 				E762661E15FE958500D97D3E /* AdditionalVariableEntity.m */,
 				E7DEECEA15F526C4001D5B05 /* DisorderSpecifierEntity.h */,
 				E7DEECEB15F526C4001D5B05 /* DisorderSpecifierEntity.m */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
+				E7B49BF41607BCF00073AA30 /* ContinuingEducationEntity.h */,
+				E7B49BF51607BCF00073AA30 /* ContinuingEducationEntity.m */,
+				E7B49BEE1607BB460073AA30 /* ClientPresentationEntity.h */,
+				E7B49BEF1607BB460073AA30 /* ClientPresentationEntity.m */,
 				E762662315FE980500D97D3E /* AdditionalVariableValueEntity.h */,
 				E762662415FE980500D97D3E /* AdditionalVariableValueEntity.m */,
 				E762662015FE97F900D97D3E /* AdditionalVariableNameEntity.h */,
@@ -1645,8 +1673,6 @@
 				E7AFB2BE15C47C8D005E2722 /* RateEntity.m */,
 				E7AFB2BA15C477FC005E2722 /* RateChargeEntity.h */,
 				E7AFB2BB15C477FC005E2722 /* RateChargeEntity.m */,
-				E7AFB2B715C45BB4005E2722 /* ConsultationEntity.h */,
-				E7AFB2B815C45BB4005E2722 /* ConsultationEntity.m */,
 				E7AFB2B415C38530005E2722 /* OtherReferralSourceEntity.h */,
 				E7AFB2B515C38530005E2722 /* OtherReferralSourceEntity.m */,
 				E7516B7915085A23005B798A /* PTABGroup.h */,
@@ -1967,6 +1993,8 @@
 		E7294C981604C0CF00C153CE /* Demographic Report */ = {
 			isa = PBXGroup;
 			children = (
+				E7B49BEB1607B8C00073AA30 /* EducationLevelEntity.h */,
+				E7B49BEC1607B8C10073AA30 /* EducationLevelEntity.m */,
 				E7294CD516066FB900C153CE /* EthnicityEntity.h */,
 				E7294CD616066FBC00C153CE /* EthnicityEntity.m */,
 				E7294CB216052E6E00C153CE /* RaceEntity.h */,
@@ -1979,8 +2007,6 @@
 				E7294CDC1606706700C153CE /* EthnicityCombinationCount.m */,
 				E7294CB016052E2600C153CE /* DisabilityEntity.h */,
 				E7294CB116052E2600C153CE /* DisabilityEntity.m */,
-				E7294CAE16052DF100C153CE /* EducationLevelEntity.h */,
-				E7294CAF16052DF100C153CE /* EducationLevelEntity.m */,
 				E7294CAB16052DCC00C153CE /* GenderEntity.h */,
 				E7294CAC16052DCC00C153CE /* GenderEntity.m */,
 				E7294C991604C1AB00C153CE /* DemographicSexCounts.h */,
@@ -2891,7 +2917,6 @@
 				E74B04E915BCEB870077D759 /* SchoolEntity.m in Sources */,
 				E7E1425915C1F34B00D0F505 /* PresentationsViewController.m in Sources */,
 				E7AFB2B615C38530005E2722 /* OtherReferralSourceEntity.m in Sources */,
-				E7AFB2B915C45BB4005E2722 /* ConsultationEntity.m in Sources */,
 				E7AFB2BC15C477FC005E2722 /* RateChargeEntity.m in Sources */,
 				E7AFB2BF15C47C8D005E2722 /* RateEntity.m in Sources */,
 				E7FA340415C580EF0025B18B /* psyTrainTrack.xcdatamodeld in Sources */,
@@ -2959,6 +2984,13 @@
 				E7294CDD1606706B00C153CE /* EthnicityCombinationCount.m in Sources */,
 				E7294CE01606814400C153CE /* DisabilityCombinationCount.m in Sources */,
 				E7294CE4160685DC00C153CE /* DemographicReportGenerateVC.m in Sources */,
+				E7B49BED1607B8C10073AA30 /* EducationLevelEntity.m in Sources */,
+				E7B49BF01607BB460073AA30 /* ClientPresentationEntity.m in Sources */,
+				E7B49BF31607BB870073AA30 /* ConsultationEntity.m in Sources */,
+				E7B49BF61607BCF00073AA30 /* ContinuingEducationEntity.m in Sources */,
+				E7B49BF91607BD1F0073AA30 /* ContinuingEducationTypeEntity.m in Sources */,
+				E7B49BFC1607BD600073AA30 /* DisorderSubCategoryEntity.m in Sources */,
+				E7B49BFF1607BD7B0073AA30 /* DisorderSystemEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

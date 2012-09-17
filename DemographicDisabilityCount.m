@@ -13,7 +13,7 @@
 #import "DisabilityCombinationCount.h"
 
 @implementation DemographicDisabilityCount
-@synthesize disabilityMutableArray=disabilitynMutableArray_;
+@synthesize disabilityMutableArray=disabilityMutableArray_;
 @synthesize  multiDisabilityOnlySet=multiDisabilityOnlySet_;
 -(id)init{
     
@@ -37,18 +37,24 @@
         DLog(@"fetched objects count is  %i",fetchedObjects.count);
         NSMutableSet *allDisabilitysSet=[NSMutableSet set];
         int numberOfMulitDisabilityIndividuals=0;
+        int numberOfNilDisabilities=0;
         for (int i=0; i<fetchedObjects.count; i++) {
             
             ClientEntity *clientObject=[fetchedObjects objectAtIndex:i];
             NSMutableSet *clientdisabilitysSet=[clientObject mutableSetValueForKeyPath:@"demographicInfo.disabilities"];
             DLog(@"client disabilitys set is %@",clientdisabilitysSet);
-            if (clientdisabilitysSet ) {
+            if (clientdisabilitysSet &&clientdisabilitysSet.count>0 ) {
                 [allDisabilitysSet addObject:[NSSet setWithSet:clientdisabilitysSet]];
                 if (clientdisabilitysSet.count>1) {
                     numberOfMulitDisabilityIndividuals++;
                 }
             }
+            else
+            {
+                numberOfNilDisabilities++;
             
+            
+            }
             
             
             
@@ -88,11 +94,33 @@
         
         
         DLog(@"multiracailonly set is  %@",multiDisabilityOnlySet_);
-        DisabilityCombinationCount *allMultiDisabilityCount=[[DisabilityCombinationCount alloc]init];
+        if (numberOfMulitDisabilityIndividuals>0) {
+            DisabilityCombinationCount *allMultiDisabilityCount=[[DisabilityCombinationCount alloc]init];
+            
+            
+            [allMultiDisabilityCount setDisabilityCombinationStr:@"Individuals with Multiple Disabilities"];
+            [allMultiDisabilityCount setDisabilityCombinationCount:numberOfMulitDisabilityIndividuals];
+            
+            [disabilityCombinatonCountSet addObject:allMultiDisabilityCount];
+            
+
+        }
+               
         
-        [allMultiDisabilityCount setDisabilityCombinationStr:@"Individuals with Multiple Disabilities"];
-        [allMultiDisabilityCount setDisabilityCombinationCount:numberOfMulitDisabilityIndividuals];
-        [disabilityCombinatonCountSet addObject:allMultiDisabilityCount];
+        
+        
+        DisabilityCombinationCount *nilCount=[[DisabilityCombinationCount alloc]init];
+        nilCount.disabilityCombinationStr=@"Not Selected";
+        if (numberOfNilDisabilities>0) {
+            [nilCount setDisabilityCombinationCount:numberOfNilDisabilities];
+        }
+        else{
+            
+            [nilCount setDisabilityCombinationCount:0];
+            
+        }
+
+        
         
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"disabilityCombinationStr"
                                                                        ascending:YES];
@@ -102,6 +130,11 @@
         
         NSArray *sorteddisabilityCombinationArray=[disabilityCombinatonCountSet.allObjects sortedArrayUsingDescriptors:sortDescriptors];
         [disabilityMutableArray_ addObjectsFromArray:sorteddisabilityCombinationArray];
+        
+        if (nilCount.disabilityCombinationCount>0) {
+            [disabilityMutableArray_ addObject:nilCount];
+        }
+
     }
     
     return self;

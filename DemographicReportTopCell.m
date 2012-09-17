@@ -33,6 +33,7 @@
 #import "DemographicSexualOrientationCounts.h"
 #import "DemographicVariableAndCount.h"
 #import "DemographicReportBottomCell.h"
+
 @implementation DemographicReportTopCell
 
 @synthesize sexObjectsModel=sexObjectsModel_;
@@ -224,8 +225,18 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     
     bottomCellNibName=@"DemographicReportBottomCell";
+    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    NSFetchRequest *demographicProfileFetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *demographicProfileEntity = [NSEntityDescription entityForName:@"DemographicProfileEntity" inManagedObjectContext:managedObjectContext];
+    [demographicProfileFetchRequest setEntity:demographicProfileEntity];
+    
+    [demographicProfileFetchRequest setRelationshipKeyPathsForPrefetching:[NSArray arrayWithObjects:@"self.disabilities.disabilityName", nil ]];
+    
+    NSError *demError = nil;
+    NSArray *demProfileFetchedObjects = [managedObjectContext executeFetchRequest:demographicProfileFetchRequest error:&demError];
     
     
+
     
    
     self.clinicianNameLabel.text=totalsObject.myName;
@@ -348,6 +359,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         demVariableAndCountObject.variableCountStr=[NSString stringWithFormat:@"%i",disabilityCombinationCount.disabilityCombinationCount];
         
         [disabilityVariablesMutableArray addObject:demVariableAndCountObject];
+       
     }
     
     SCArrayOfObjectsSection *disabilitySection=[SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:disabilityVariablesMutableArray itemsDefinition:variableDef];
@@ -373,7 +385,11 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         [educationVariablesMutableArray addObject:demVariableAndCountObject];
     }
-    
+    DemographicVariableAndCount *notSelectedEducationLevel=[[DemographicVariableAndCount alloc]init];
+    notSelectedEducationLevel.variableCountStr=demographicEducationCounts.notSelectedCountStr;
+    notSelectedEducationLevel.variableStr=@"Not Selected";
+    [educationVariablesMutableArray addObject:notSelectedEducationLevel];
+
     SCArrayOfObjectsSection *educationSection=[SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:educationVariablesMutableArray itemsDefinition:variableDef];
     
     

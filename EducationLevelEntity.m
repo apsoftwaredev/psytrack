@@ -17,4 +17,24 @@
 @dynamic educationLevel;
 @dynamic demographics;
 
+@synthesize clientCountStr;
+
+
+-(NSString *)clientCountStr{
+    
+    int returnInt=0;
+    
+    
+    NSMutableSet *clientSet=[self mutableSetValueForKeyPath:@"demographics.client"];
+    
+    
+    returnInt=clientSet.count;
+    
+    
+    return [NSString stringWithFormat:@"%i",returnInt];
+    
+    
+    
+    
+}
 @end

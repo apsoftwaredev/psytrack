@@ -17,6 +17,7 @@
 
 @property (nonatomic, weak)NSMutableArray *educationMutableArray;
 
+@property (nonatomic, weak)NSString *notSelectedCountStr;
 
 
 @end

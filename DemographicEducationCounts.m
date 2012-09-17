@@ -9,6 +9,7 @@
 #import "DemographicEducationCounts.h"
 #import "PTTAppDelegate.h"
 #import "EducationLevelEntity.h"
+
 @implementation DemographicEducationCounts
 @synthesize educationMutableArray=educationMutableArray_;
 -(id)init{
@@ -30,11 +31,13 @@
         NSError *error = nil;
         NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
         
-        for (int i; i<fetchedObjects.count; i++) {
+        for (int i=0; i<fetchedObjects.count; i++) {
             
             
+            NSManagedObject *educationLevelManagedObject=(NSManagedObject *)[fetchedObjects objectAtIndex:i];
+            EducationLevelEntity *educationObject=(EducationLevelEntity *)educationLevelManagedObject;
             
-            EducationLevelEntity *educationObject=[fetchedObjects objectAtIndex:i];
+            DLog(@"cleint str %@",educationObject.clientCountStr);
             
             [educationMutableArray_ addObject:educationObject];
             
@@ -44,6 +47,30 @@
             
         }
         
+        NSFetchRequest *demographicProfileFetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *demographicProfileEntity = [NSEntityDescription entityForName:@"DemographicProfileEntity" inManagedObjectContext:managedObjectContext];
+        [demographicProfileFetchRequest setEntity:demographicProfileEntity];
+        
+        
+        
+        NSError *demError = nil;
+        NSArray *demProfileFetchedObjects = [managedObjectContext executeFetchRequest:demographicProfileFetchRequest error:&demError];
+        
+        
+        
+        NSArray *filteredForNull=[demProfileFetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"educationLevel == nil AND clinician == nil"]];
+        
+        
+        
+        
+        if (filteredForNull && filteredForNull.count>0) {
+            self.notSelectedCountStr=[NSString stringWithFormat:@"%i",filteredForNull.count];
+        }
+        else{
+            
+            self.notSelectedCountStr=[NSString stringWithFormat:@"%i",0];
+            
+        }
         
         
         
