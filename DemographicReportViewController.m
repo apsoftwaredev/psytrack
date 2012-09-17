@@ -14,7 +14,7 @@
 @end
 
 @implementation DemographicReportViewController
-
+@synthesize clinicianName=clinicianName_;
 
 - (void)viewDidLoad
 {
@@ -27,10 +27,12 @@
     // Create and add the objects section
     MyInformationAndTotalClients *myInformationAndTotalClients=[[MyInformationAndTotalClients alloc]init];
     
-//    self.studentName=myInformationAndTotalClients.myName;
+    self.clinicianName=myInformationAndTotalClients.myName;
+    
+
     NSMutableArray *myInformationMutableArray=[NSMutableArray arrayWithObject:myInformationAndTotalClients];
     
-	SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:supervisorsAndTotalTimesForMonthMutableArray itemsDefinition:myInformationandTotalClientshDef];
+	SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:myInformationMutableArray itemsDefinition:myInformationandTotalClientshDef];
     
     objectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
     {

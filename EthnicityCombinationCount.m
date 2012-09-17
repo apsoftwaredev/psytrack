@@ -15,7 +15,7 @@
 
 
 
--(id)initWithethnicityCombinationStr:(NSString *)ethnicityCombinationStrGiven ethnicityMutableSet:(NSMutableSet *)ethnicityMutableSetGiven{
+-(id)initWithEthnicityCombinationStr:(NSString *)ethnicityCombinationStrGiven ethnicityMutableSet:(NSMutableSet *)ethnicityMutableSetGiven{
     
     self=[super init];
     
@@ -37,7 +37,7 @@
     
     NSArray *clientDemographicArray=[self fetchObjectsFromEntity:@"DemographicProfileEntity" filterPredicate:[NSPredicate predicateWithFormat:@"clinician == nil "]];
     
-    NSArray *filteredArray=[clientDemographicArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"ethnicities == %@",ethnicityCombinationMutableSet_]];
+    NSArray *filteredArray=[clientDemographicArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"clinician == nil AND ethnicities == %@",ethnicityCombinationMutableSet_]];
     
     
     returnInt=filteredArray.count;

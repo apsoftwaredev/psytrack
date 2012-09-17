@@ -18,7 +18,7 @@
     SCArrayOfObjectsModel  *sexualOrientationObjectsModel_;
     NSInteger numberOfSupervisors;
     
-    BOOL markAmended;
+    
     CGFloat currentOffsetY;
     
 }

@@ -36,7 +36,7 @@
     
     NSArray *clientDemographicArray=[self fetchObjectsFromEntity:@"DemographicProfileEntity" filterPredicate:[NSPredicate predicateWithFormat:@"clinician == nil "]];
 
-    NSArray *filteredArray=[clientDemographicArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"races == %@",raceCombinationMutableSet_]];
+    NSArray *filteredArray=[clientDemographicArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"clinician==nil AND races == %@",raceCombinationMutableSet_]];
     
    
     returnInt=filteredArray.count;

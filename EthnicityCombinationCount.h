@@ -22,7 +22,7 @@
 @property (nonatomic, weak) NSMutableSet *ethnicityCombinationMutableSet;
 @property (nonatomic, assign) int ethnicityCombinationCount;
 
--(id)initWithethnicityCombinationStr:(NSString *)ethnicityCombinationStrGiven ethnicityMutableSet:(NSMutableSet *)ethnicityMutableSetGiven;
+-(id)initWithEthnicityCombinationStr:(NSString *)ethnicityCombinationStrGiven ethnicityMutableSet:(NSMutableSet *)ethnicityMutableSetGiven;
 
 
 

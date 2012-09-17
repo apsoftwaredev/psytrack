@@ -21,6 +21,8 @@
 
 +(void)drawAllHoursReportPDF:(NSString*)fileName  password:(NSString *) filePassword doctorateLevel:(BOOL)doctorateLevelSelected;
 
++(void)drawDemographicReportPDF:(NSString*)fileName  password:(NSString *) filePassword ;
+
 +(void)drawText;
 
 +(void)drawLineFromPoint:(CGPoint)from toPoint:(CGPoint)to;

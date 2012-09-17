@@ -12,7 +12,7 @@
 
 @implementation DemographicSexualOrientation
 @synthesize sexualOrientation,count;
--(id)initWithSex:(NSString *)sexualOrientationGiven{
+-(id)initWithSexualOrientation:(NSString *)sexualOrientationGiven count:(int)countGiven{
     
     self =[super init];
     
@@ -20,25 +20,7 @@
         
         
         self.sexualOrientation=sexualOrientationGiven;
-        
-        NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:@"DemographicProfileEntity" inManagedObjectContext:managedObjectContext];
-        [fetchRequest setEntity:entity];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sexualOrientation MATCHES %@ AND clinician == nil", sexualOrientationGiven];
-        [fetchRequest setPredicate:predicate];
-        
-        NSError *error = nil;
-        NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (fetchedObjects != nil) {
-            self.count=fetchedObjects.count;
-        }
-        else
-            self.count=0;
-        
-        
-        
+        self.count=countGiven;
         
     }
     

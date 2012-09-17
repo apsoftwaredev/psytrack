@@ -250,6 +250,10 @@
 		E7294CD716066FBF00C153CE /* EthnicityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294CD616066FBC00C153CE /* EthnicityEntity.m */; };
 		E7294CDA16066FF800C153CE /* DemographicEthnicityCounts.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294CD916066FF500C153CE /* DemographicEthnicityCounts.m */; };
 		E7294CDD1606706B00C153CE /* EthnicityCombinationCount.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294CDC1606706700C153CE /* EthnicityCombinationCount.m */; };
+		E7294CE01606814400C153CE /* DisabilityCombinationCount.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294CDF1606813F00C153CE /* DisabilityCombinationCount.m */; };
+		E7294CE4160685DC00C153CE /* DemographicReportGenerateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294CE2160685D300C153CE /* DemographicReportGenerateVC.m */; };
+		E7294CE5160685DC00C153CE /* DemographicReportGenerateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7294CE3160685D800C153CE /* DemographicReportGenerateVC.xib */; };
+		E7294CE716069C5000C153CE /* DemographicReportGenerateVC_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7294CE616069C4D00C153CE /* DemographicReportGenerateVC_iPhone.xib */; };
 		E734334715D5D69C007237C5 /* PaymentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E734334615D5D69C007237C5 /* PaymentEntity.m */; };
 		E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DD158E28DC00CE1AF4 /* menubar-full.png */; };
 		E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */; };
@@ -871,6 +875,12 @@
 		E7294CD916066FF500C153CE /* DemographicEthnicityCounts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicEthnicityCounts.m; sourceTree = "<group>"; };
 		E7294CDB1606706500C153CE /* EthnicityCombinationCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EthnicityCombinationCount.h; sourceTree = "<group>"; };
 		E7294CDC1606706700C153CE /* EthnicityCombinationCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EthnicityCombinationCount.m; sourceTree = "<group>"; };
+		E7294CDE1606813B00C153CE /* DisabilityCombinationCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisabilityCombinationCount.h; sourceTree = "<group>"; };
+		E7294CDF1606813F00C153CE /* DisabilityCombinationCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisabilityCombinationCount.m; sourceTree = "<group>"; };
+		E7294CE1160685D100C153CE /* DemographicReportGenerateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicReportGenerateVC.h; sourceTree = "<group>"; };
+		E7294CE2160685D300C153CE /* DemographicReportGenerateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicReportGenerateVC.m; sourceTree = "<group>"; };
+		E7294CE3160685D800C153CE /* DemographicReportGenerateVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemographicReportGenerateVC.xib; sourceTree = "<group>"; };
+		E7294CE616069C4D00C153CE /* DemographicReportGenerateVC_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemographicReportGenerateVC_iPhone.xib; sourceTree = "<group>"; };
 		E734334515D5D69C007237C5 /* PaymentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentEntity.h; sourceTree = "<group>"; };
 		E734334615D5D69C007237C5 /* PaymentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentEntity.m; sourceTree = "<group>"; };
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
@@ -1961,6 +1971,8 @@
 				E7294CD616066FBC00C153CE /* EthnicityEntity.m */,
 				E7294CB216052E6E00C153CE /* RaceEntity.h */,
 				E7294CB316052E6E00C153CE /* RaceEntity.m */,
+				E7294CDE1606813B00C153CE /* DisabilityCombinationCount.h */,
+				E7294CDF1606813F00C153CE /* DisabilityCombinationCount.m */,
 				E7294CC516061C9A00C153CE /* RaceCombinationCount.h */,
 				E7294CC616061C9B00C153CE /* RaceCombinationCount.m */,
 				E7294CDB1606706500C153CE /* EthnicityCombinationCount.h */,
@@ -2002,6 +2014,10 @@
 				E7294CD01606613C00C153CE /* DemographicReportBottomCell.h */,
 				E7294CD11606613E00C153CE /* DemographicReportBottomCell.m */,
 				E7294CD31606622100C153CE /* DemographicReportBottomCell.xib */,
+				E7294CE1160685D100C153CE /* DemographicReportGenerateVC.h */,
+				E7294CE2160685D300C153CE /* DemographicReportGenerateVC.m */,
+				E7294CE3160685D800C153CE /* DemographicReportGenerateVC.xib */,
+				E7294CE616069C4D00C153CE /* DemographicReportGenerateVC_iPhone.xib */,
 			);
 			name = "Demographic Report";
 			sourceTree = "<group>";
@@ -2702,6 +2718,8 @@
 				E7294CC11606004600C153CE /* DemographicReportViewController.xib in Resources */,
 				E7294CCF160655E700C153CE /* DemographicReportTopCell.xib in Resources */,
 				E7294CD41606622300C153CE /* DemographicReportBottomCell.xib in Resources */,
+				E7294CE5160685DC00C153CE /* DemographicReportGenerateVC.xib in Resources */,
+				E7294CE716069C5000C153CE /* DemographicReportGenerateVC_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2939,6 +2957,8 @@
 				E7294CD716066FBF00C153CE /* EthnicityEntity.m in Sources */,
 				E7294CDA16066FF800C153CE /* DemographicEthnicityCounts.m in Sources */,
 				E7294CDD1606706B00C153CE /* EthnicityCombinationCount.m in Sources */,
+				E7294CE01606814400C153CE /* DisabilityCombinationCount.m in Sources */,
+				E7294CE4160685DC00C153CE /* DemographicReportGenerateVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

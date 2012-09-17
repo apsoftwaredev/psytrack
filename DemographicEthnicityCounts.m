@@ -8,12 +8,12 @@
 
 #import "DemographicEthnicityCounts.h"
 #import "PTTAppDelegate.h"
-#import "ethnicityEntity.h"
+#import "EthnicityEntity.h"
 #import "ClientEntity.h"
 #import "EthnicityCombinationCount.h"
 
 @implementation DemographicEthnicityCounts
-@synthesize ethnicityMutableArray=ethnicityMutableArray_, multiRacialOnlySet=multiRacialOnlySet_;
+@synthesize ethnicityMutableArray=ethnicityMutableArray_, multiEthnicityOnlySet=multiEthnicityOnlySet_;
 -(id)init{
     
     self=[super init];
@@ -36,17 +36,21 @@
         DLog(@"fetched objects count is  %i",fetchedObjects.count);
         NSMutableSet *allethnicitysSet=[NSMutableSet set];
         int numberOfMulitethnicityIndividuals=0;
+        int numberNotSelected=0;
         for (int i=0; i<fetchedObjects.count; i++) {
             
             ClientEntity *clientObject=[fetchedObjects objectAtIndex:i];
-            NSMutableSet *clientethnicitysSet=[clientObject mutableSetValueForKeyPath:@"demographicInfo.ethnicitys"];
+            NSMutableSet *clientethnicitysSet=[clientObject mutableSetValueForKeyPath:@"demographicInfo.ethnicities"];
             DLog(@"client ethnicitys set is %@",clientethnicitysSet);
-            if (clientethnicitysSet ) {
+            if (clientethnicitysSet && clientethnicitysSet.count>0 ) {
+            
                 [allethnicitysSet addObject:[NSSet setWithSet:clientethnicitysSet]];
                 if (clientethnicitysSet.count>1) {
                     numberOfMulitethnicityIndividuals++;
                 }
             }
+            else
+                numberNotSelected++;
             
             
             
@@ -76,7 +80,7 @@
                 
             }
             
-            EthnicityCombinationCount *ethnicityCombinationCountObject=[[EthnicityCombinationCount alloc]initWithethnicityCombinationStr:ethnicityCombinationString ethnicityMutableSet:mutableSet];
+            EthnicityCombinationCount *ethnicityCombinationCountObject=[[EthnicityCombinationCount alloc]initWithEthnicityCombinationStr:ethnicityCombinationString ethnicityMutableSet:mutableSet];
             [ethnicityCombinatonCountSet addObject:ethnicityCombinationCountObject];
             
             
@@ -86,13 +90,26 @@
         }
         
         
-        DLog(@"multiracailonly set is  %@",multiRacialOnlySet_);
-        EthnicityCombinationCount *allMultiEthnicityCount=[[EthnicityCombinationCount alloc]init];
+        DLog(@"multiracailonly set is  %@",multiEthnicityOnlySet_);
+        if (numberOfMulitethnicityIndividuals>0) {
+            EthnicityCombinationCount *allMultiEthnicityCount=[[EthnicityCombinationCount alloc]init];
+            
+            [allMultiEthnicityCount setEthnicityCombinationStr:@"Individuals with Multiple Ethnicities"];
+            [allMultiEthnicityCount setEthnicityCombinationCount:numberOfMulitethnicityIndividuals];
+            [ethnicityCombinatonCountSet addObject:allMultiEthnicityCount];
+            
+        }
+       
+        if (numberNotSelected>0) {
+            EthnicityCombinationCount *notSelectedCount=[[EthnicityCombinationCount alloc]init];
+            
+            [notSelectedCount setEthnicityCombinationStr:@"Not Selected"];
+            [notSelectedCount setEthnicityCombinationCount:numberNotSelected];
+            [ethnicityCombinatonCountSet addObject:notSelectedCount];
+            
+        }
         
-        [allMultiEthnicityCount setEthnicityCombinationStr:@"Total Multiracial Individuals"];
-        [allMultiEthnicityCount setEthnicityCombinationCount:numberOfMulitethnicityIndividuals];
-        [ethnicityCombinatonCountSet addObject:allMultiEthnicityCount];
-        
+
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"ethnicityCombinationStr"
                                                                        ascending:YES];
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];

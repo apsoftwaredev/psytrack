@@ -47,6 +47,14 @@
         DemographicSexualOrientation *demographicUndisclosed=[[DemographicSexualOrientation alloc]initWithSexualOrientation:@"Undisclosed" fromDemographicArray:fetchedObjects];
         
         
+        NSArray *filteredForNull=[fetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"clinician == nil AND sexualOrientation == nil"]];
+        
+        if (filteredForNull && filteredForNull.count>0) {
+            DemographicSexualOrientation *demographicSexualOrientationNil=[[DemographicSexualOrientation alloc]initWithSexualOrientation:@"Not Selected" count:filteredForNull.count];
+            [sexualOrientationMutableArray_ addObject:demographicSexualOrientationNil];
+        }
+
+        
         [sexualOrientationMutableArray_ addObject:demographicAsexual];
         [sexualOrientationMutableArray_ addObject:demographicBisexual];
         [sexualOrientationMutableArray_ addObject:demographicGay];

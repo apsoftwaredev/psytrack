@@ -19,7 +19,7 @@
 @property (nonatomic, retain) NSSet *existingGenders;
 @property (nonatomic, retain) NSSet *demographics;
 
-@property (nonatomic, assign) int clientCount;
+@property (nonatomic, weak) NSString *clientCountStr;
 
 @end
 

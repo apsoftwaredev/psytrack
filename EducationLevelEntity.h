@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSString * educationLevel;
 @property (nonatomic, retain) NSSet *demographics;
 
-@property (nonatomic, assign) int clientCount;
+@property (nonatomic, assign) NSString *clientCountStr;
 
 @end
 

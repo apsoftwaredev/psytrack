@@ -93,6 +93,35 @@
         [allMultiRaceCount setRaceCombinationCount:numberOfMulitRaceIndividuals];
         [raceCombinatonCountSet addObject:allMultiRaceCount];
         
+        
+        NSFetchRequest *demographicProfileFetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *demographicProfileEntity = [NSEntityDescription entityForName:@"DemographicProfileEntity" inManagedObjectContext:managedObjectContext];
+        [demographicProfileFetchRequest setEntity:demographicProfileEntity];
+        
+        
+        
+        NSError *demError = nil;
+        NSArray *demProfileFetchedObjects = [managedObjectContext executeFetchRequest:demographicProfileFetchRequest error:&demError];
+        
+        
+        
+        NSArray *filteredForNull=[demProfileFetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"races == nil AND clinician == nil"]];
+        
+        
+        
+        RaceCombinationCount *nilCount=[[RaceCombinationCount alloc]init];
+        nilCount.raceCombinationStr=@"Not Selected";
+        if (filteredForNull && filteredForNull.count>0) {
+            [nilCount setRaceCombinationCount:filteredForNull.count];
+        }
+        else{
+            
+            nilCount.raceCombinationCount=0;
+            
+        }
+        
+        
+        
 NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"raceCombinationStr"
 ascending:YES];
 NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
@@ -101,6 +130,10 @@ NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil]
         
         NSArray *sortedRaceCombinationArray=[raceCombinatonCountSet.allObjects sortedArrayUsingDescriptors:sortDescriptors];
         [raceMutableArray_ addObjectsFromArray:sortedRaceCombinationArray];
+        if (nilCount.raceCombinationCount>0) {
+             [raceMutableArray_ addObject:nilCount];
+        }
+       
     }
     
     return self;

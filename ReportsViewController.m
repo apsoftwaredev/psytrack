@@ -19,6 +19,7 @@
 #import "PTTAppDelegate.h"
 #import "MonthlyPracticumLogGenerateViewController.h"
 #import "AllTrainingHoursGenerateVC.h"
+#import "DemographicReportGenerateVC.h"
 
 @implementation ReportsViewController
 @synthesize myTableView;
@@ -37,7 +38,7 @@
        
     switch (section) {
         case 0:
-            result=2;
+            result=3;
             
             break;
         case 1:
@@ -155,7 +156,7 @@
                 break;
             }  
             
-            if (indexPath.row==1){
+           else if (indexPath.row==1){
                 NSString *allHoursNibName=nil;
                 if ([SCUtilities is_iPad]) {
                     allHoursNibName=@"AllTrainingHoursGenerateVC";
@@ -167,6 +168,20 @@
                 [self.navigationController pushViewController:allTrainingHoursGenerateVC animated:YES];
                 break;
             }
+            
+           else if (indexPath.row==2){
+                NSString *allHoursNibName=nil;
+                if ([SCUtilities is_iPad]) {
+                    allHoursNibName=@"DemographicReportGenerateVC";
+                }else {
+                    allHoursNibName=@"DemographicReportGenerateVC_iPhone";
+                }
+                DemographicReportGenerateVC *demographicReportGenerateVC = [[DemographicReportGenerateVC alloc] initWithNibName:allHoursNibName bundle:[NSBundle mainBundle]];
+                
+                [self.navigationController pushViewController:demographicReportGenerateVC animated:YES];
+                break;
+            }
+
             
         }
             break;

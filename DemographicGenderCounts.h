@@ -17,6 +17,6 @@
 
 @property (nonatomic, weak)NSMutableArray *genderMutableArray;
 
-
+@property (nonatomic, weak)NSString *notSelectedCountStr;
 
 @end

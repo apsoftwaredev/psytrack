@@ -16,9 +16,9 @@
 @dynamic notes;
 @dynamic educationLevel;
 @dynamic demographics;
-@synthesize clientCount;
+@synthesize clientCountStr;
 
--(int)clientCount{
+-(NSString *)clientCountStr{
     
     int returnInt=0;
     
@@ -29,7 +29,7 @@
     returnInt=clientSet.count;
     
     
-    return returnInt;
+    return [NSString stringWithFormat:@"%i",  returnInt];
     
     
     
