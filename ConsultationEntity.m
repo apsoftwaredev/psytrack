@@ -2,27 +2,29 @@
 //  ConsultationEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/28/12.
+//  Created by Daniel Boice on 9/17/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
 #import "ConsultationEntity.h"
 #import "LogEntity.h"
+#import "PaymentEntity.h"
 #import "ReferralEntity.h"
 
 
 @implementation ConsultationEntity
 
-@dynamic endDate;
-@dynamic startDate;
-@dynamic notes;
-@dynamic hours;
 @dynamic proBono;
+@dynamic hours;
+@dynamic endDate;
+@dynamic notes;
+@dynamic startDate;
 @dynamic paid;
-@dynamic logs;
 @dynamic organization;
-@dynamic referrals;
-@dynamic rate;
+@dynamic payments;
+@dynamic rateCharges;
+@dynamic logs;
 @dynamic fees;
+@dynamic referrals;
 
 @end

@@ -2,7 +2,7 @@
 //  EducationLevelEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 9/15/12.
+//  Created by Daniel Boice on 9/17/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
@@ -17,9 +17,6 @@
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * educationLevel;
 @property (nonatomic, retain) NSSet *demographics;
-
-@property (nonatomic, assign) NSString *clientCountStr;
-
 @end
 
 @interface EducationLevelEntity (CoreDataGeneratedAccessors)

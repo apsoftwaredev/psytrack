@@ -2,7 +2,7 @@
 //  EducationLevelEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 9/15/12.
+//  Created by Daniel Boice on 9/17/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
@@ -16,24 +16,5 @@
 @dynamic notes;
 @dynamic educationLevel;
 @dynamic demographics;
-@synthesize clientCountStr;
-
--(NSString *)clientCountStr{
-    
-    int returnInt=0;
-    
-    
-    NSMutableSet *clientSet=[self mutableSetValueForKeyPath:@"demographics.client"];
-    
-    
-    returnInt=clientSet.count;
-    
-    
-    return [NSString stringWithFormat:@"%i",  returnInt];
-    
-    
-    
-    
-}
 
 @end
