@@ -1790,6 +1790,9 @@
 //    objectsSection.itemsAccessoryType = UITableViewCellAccessoryNone;
     
     existingPersonRecordID=-1;
+        
+        
+        
     }
     
 }
@@ -1886,7 +1889,7 @@
         UIView *viewShorterTextLabelView =(UIView *)[cell viewWithTag:35];
         UIView *viewLongerTextLabelView =(UIView *)[cell viewWithTag:51];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-        if (cellManagedObject&&[cellManagedObject.entity.name  isEqualToString:@"ClinicianEntity"]) {
+        if (cellManagedObject&& [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name  isEqualToString:@"ClinicianEntity"]) {
      
         
         switch (cell.tag) 
@@ -2033,7 +2036,7 @@
         }
         }
     }
-    if (tableViewModel.tag==2) 
+   else if (tableViewModel.tag==2)
     {
         UIView *buttonView =[cell viewWithTag:300];
         if ([buttonView isKindOfClass:[UIButton class]]) 
@@ -2067,7 +2070,7 @@
         }
     }
 
-    if (tableViewModel.tag==4) 
+  else  if (tableViewModel.tag==4)
     {
         
         
@@ -2614,6 +2617,7 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     SCTableViewCell *cell = nil;
+    
     if(indexPath.row != NSNotFound)
         cell = [tableModel cellAtIndexPath:indexPath];
 
@@ -2623,6 +2627,9 @@
                 
         
     }
+    
+    
+    
     detailTableViewModel.delegate=self;
     if ([SCUtilities is_iPad]) {
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -2898,23 +2905,26 @@
             SCCustomCell *firstNameCell =(SCCustomCell *)[section cellAtIndex:1];
         SCCustomCell *lastNameCell =(SCCustomCell *)[section cellAtIndex:3];
         
+                if ([firstNameCell isKindOfClass:[SCCustomCell class]]&&[ lastNameCell isKindOfClass: [SCCustomCell class]]) {
+                    UITextField *lastNameField =(UITextField *)[lastNameCell viewWithTag:50];
+                    UITextField *firstNameField =(UITextField *)[firstNameCell viewWithTag:50];
+                    
+                    
+                    
+                    if ( firstNameCell && firstNameField.text.length && lastNameField && lastNameField.text.length) {
+                        
+                        valid=TRUE;
+                        
+                        
+                    }
+                    else
+                    {
+                        valid=FALSE;
+                    }
+
+                }
         
-        UITextField *lastNameField =(UITextField *)[lastNameCell viewWithTag:50];
-        UITextField *firstNameField =(UITextField *)[firstNameCell viewWithTag:50];
-        
-        
-        
-        if ( firstNameField.text.length && lastNameField.text.length) {
-            
-            valid=TRUE;
-            
-            
-        }
-        else
-        {
-            valid=FALSE;
-        }
-        }
+                }
         
     }
     
@@ -3479,9 +3489,11 @@
         [self resetABVariablesToNil];
         
         
+        if (!isInDetailSubview) {
+           [ tableModel.masterModel.modeledTableView reloadData];
+        }
         
         
-        [tableModel.masterModel.modeledTableView reloadData];
     }
 
 }
@@ -3496,6 +3508,7 @@
 
     if (tableViewModel.tag==0) {
         selectedVariableName=nil;
+        self.currentDetailTableViewModel=nil;
     }
 
 }

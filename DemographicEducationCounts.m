@@ -11,7 +11,7 @@
 #import "EducationLevelEntity.h"
 
 @implementation DemographicEducationCounts
-@synthesize educationMutableArray=educationMutableArray_;
+@synthesize educationMutableArray=educationMutableArray_,notSelectedCountUInteger;
 -(id)init{
     
     self=[super init];
@@ -37,8 +37,10 @@
             NSManagedObject *educationLevelManagedObject=(NSManagedObject *)[fetchedObjects objectAtIndex:i];
             EducationLevelEntity *educationObject=(EducationLevelEntity *)educationLevelManagedObject;
             
+            if (educationObject&& [educationObject.clientCountStr intValue]) {
+                [educationMutableArray_ addObject:educationObject];
+            }
             
-            [educationMutableArray_ addObject:educationObject];
             
             
             
@@ -57,17 +59,17 @@
         
         
         
-        NSArray *filteredForNull=[demProfileFetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"educationLevel == nil AND clinician == nil"]];
+        NSArray *filteredForNull=[demProfileFetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"educationLevel == nil AND clinician == nil AND client != nil"]];
         
         
         
         
         if (filteredForNull && filteredForNull.count>0) {
-            self.notSelectedCountStr=[NSString stringWithFormat:@"%i",filteredForNull.count];
+            self.notSelectedCountUInteger=filteredForNull.count;
         }
         else{
             
-            self.notSelectedCountStr=[NSString stringWithFormat:@"%i",0];
+            self.notSelectedCountUInteger=0;
             
         }
         

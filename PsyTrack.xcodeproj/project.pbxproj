@@ -386,6 +386,7 @@
 		E7B49BFC1607BD600073AA30 /* DisorderSubCategoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BFB1607BD600073AA30 /* DisorderSubCategoryEntity.m */; };
 		E7B49BFF1607BD7B0073AA30 /* DisorderSystemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BFE1607BD7B0073AA30 /* DisorderSystemEntity.m */; };
 		E7B49C111607E24F0073AA30 /* BatteryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49C101607E24F0073AA30 /* BatteryEntity.m */; };
+		E7B49C1D1608187E0073AA30 /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E7B49C1C1608187E0073AA30 /* psyTrack.sqlite */; };
 		E7C02D9F15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */; };
 		E7C02DA215B3621B0072F97C /* SupervisionReceivedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA115B362190072F97C /* SupervisionReceivedEntity.m */; };
 		E7C02DA515B362990072F97C /* SupervisionGivenEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA415B362980072F97C /* SupervisionGivenEntity.m */; };
@@ -1091,7 +1092,7 @@
 		E7B49C171607E2D30073AA30 /* PublicationTypeEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicationTypeEntity.m; sourceTree = "<group>"; };
 		E7B49C181607E3010073AA30 /* AdditionalSymptomEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdditionalSymptomEntity.h; sourceTree = "<group>"; };
 		E7B49C191607E3010073AA30 /* AdditionalSymptomEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdditionalSymptomEntity.m; sourceTree = "<group>"; };
-		E7B49C1B16080B2B0073AA30 /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = psyTrack.sqlite; sourceTree = "<group>"; };
+		E7B49C1C1608187E0073AA30 /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = psyTrack.sqlite; sourceTree = "<group>"; };
 		E7C02D9D15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h; sourceTree = "<group>"; };
 		E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m; sourceTree = "<group>"; };
 		E7C02DA015B362180072F97C /* SupervisionReceivedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionReceivedEntity.h; sourceTree = "<group>"; };
@@ -1651,7 +1652,7 @@
 				E7B49C1A1607E53A0073AA30 /* NSManagedObject Subclasses */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
-				E7B49C1B16080B2B0073AA30 /* psyTrack.sqlite */,
+				E7B49C1C1608187E0073AA30 /* psyTrack.sqlite */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2774,6 +2775,7 @@
 				E7294CD41606622300C153CE /* DemographicReportBottomCell.xib in Resources */,
 				E7294CE5160685DC00C153CE /* DemographicReportGenerateVC.xib in Resources */,
 				E7294CE716069C5000C153CE /* DemographicReportGenerateVC_iPhone.xib in Resources */,
+				E7B49C1D1608187E0073AA30 /* psyTrack.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,12 +11,12 @@
 @interface MyInformationAndTotalClients : NSObject
 {
 
-   __weak NSString *myName_;
+    NSString *myName_;
     int totalClients_;
 
 
 }
-@property (nonatomic, weak) NSString *myName;
+@property (nonatomic, strong) NSString *myName;
 @property (nonatomic, assign) int totalClients;
 
 @end

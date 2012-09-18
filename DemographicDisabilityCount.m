@@ -83,8 +83,11 @@
             }
             
             DisabilityCombinationCount *disabilityCombinationCountObject=[[DisabilityCombinationCount alloc]initWithDisabilityCombinationStr:disabilityCombinationString disabilityMutableSet:mutableSet];
+        if (disabilityCombinationCountObject.disabilityCombinationCount) {
             [disabilityCombinatonCountSet addObject:disabilityCombinationCountObject];
             
+        }
+           
             
             
             

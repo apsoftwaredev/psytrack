@@ -10,14 +10,14 @@
 
 @interface DemographicEducationCounts : NSObject {
     
-    __weak NSMutableArray *educationMutableArray_;
+     NSMutableArray *educationMutableArray_;
     
     
 }
 
-@property (nonatomic, weak)NSMutableArray *educationMutableArray;
+@property (nonatomic, strong)NSMutableArray *educationMutableArray;
 
-@property (nonatomic, weak)NSString *notSelectedCountStr;
+@property (nonatomic, assign)NSUInteger notSelectedCountUInteger;
 
 
 @end

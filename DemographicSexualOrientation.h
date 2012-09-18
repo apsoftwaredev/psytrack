@@ -11,7 +11,7 @@
 @interface DemographicSexualOrientation : NSObject
 
 
-@property (nonatomic, weak) NSString *sexualOrientation;
+@property (nonatomic, strong) NSString *sexualOrientation;
 @property (nonatomic, assign) int count;
 
 -(id)initWithSexualOrientation:(NSString *)sexOrientationGiven fromDemographicArray:(NSArray *)demographicArrayGiven;

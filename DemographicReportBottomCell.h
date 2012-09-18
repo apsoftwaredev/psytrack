@@ -10,7 +10,7 @@
 #import "DemographicVariableAndCount.h"
 @interface DemographicReportBottomCell : SCCustomCell {
 
-  __weak  DemographicVariableAndCount *demVariableAndCount_;
+    DemographicVariableAndCount *demVariableAndCount_;
 
 
 }
@@ -18,6 +18,6 @@
 @property (nonatomic, weak)IBOutlet UILabel *variableLabel;
 @property (nonatomic, weak)IBOutlet UILabel *variableCountLabel;
 @property (nonatomic, weak)IBOutlet UIView *containerView;
-@property (nonatomic, weak) DemographicVariableAndCount *demVariableAndCount;
+@property (nonatomic, strong) DemographicVariableAndCount *demVariableAndCount;
 
 @end

@@ -13,10 +13,10 @@
     
     SCArrayOfObjectsModel *objectsModel;
     
-    __weak NSString *clinicianName_;
+     NSString *clinicianName_;
     
 }
 
-@property (nonatomic, weak) NSString *clinicianName;
+@property (nonatomic, strong) NSString *clinicianName;
 
 @end

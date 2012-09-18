@@ -13,7 +13,7 @@
 
 @implementation DemographicGenderCounts
 
-@synthesize genderMutableArray=genderMutableArray_,notSelectedCountStr;
+@synthesize genderMutableArray=genderMutableArray_,notSelectedCountUInteger;
 -(id)init{
     
     self=[super init];
@@ -37,8 +37,10 @@
             
             
             GenderEntity *genderObject=[fetchedObjects objectAtIndex:i];
-            
-            [genderMutableArray_ addObject:genderObject];
+                  if (genderObject && [genderObject.clientCountStr intValue]) {
+                       [genderMutableArray_ addObject:genderObject];
+                  }
+           
             
             
             
@@ -60,17 +62,17 @@
         
         
         
-        NSArray *filteredForNull=[demProfileFetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"gender == nil AND clinician == nil"]];
+        NSArray *filteredForNull=[demProfileFetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"gender == nil AND clinician == nil AND client != nil"]];
         
         
         
         
         if (filteredForNull && filteredForNull.count>0) {
-            self.notSelectedCountStr=[NSString stringWithFormat:@"%i",filteredForNull.count];
+            self.notSelectedCountUInteger=filteredForNull.count;
         }
         else{
         
-            self.notSelectedCountStr=[NSString stringWithFormat:@"%i",0];
+            self.notSelectedCountUInteger=0;
 
         }
         

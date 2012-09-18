@@ -10,13 +10,13 @@
 
 @interface DemographicEthnicityCounts : NSObject{
     
-    __weak NSMutableArray *ethnicityMutableArray_;
-    __weak NSSet *multiEthnicityOnlySet_;
+     NSMutableArray *ethnicityMutableArray_;
+     NSSet *multiEthnicityOnlySet_;
     
 }
 
-@property (nonatomic, weak)NSMutableArray *ethnicityMutableArray;
-@property (nonatomic, weak)NSSet *multiEthnicityOnlySet;
+@property (nonatomic, strong)NSMutableArray *ethnicityMutableArray;
+@property (nonatomic, strong)NSSet *multiEthnicityOnlySet;
 
 
 @end

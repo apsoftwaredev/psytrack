@@ -10,12 +10,12 @@
 
 @interface DemographicSexCounts : NSObject {
 
-    __weak NSMutableArray *sexMutableArray_;
+     NSMutableArray *sexMutableArray_;
 
 
 }
 
-@property (nonatomic, weak)NSMutableArray *sexMutableArray;
+@property (nonatomic, strong)NSMutableArray *sexMutableArray;
 
 
 @end

@@ -47,21 +47,41 @@
         DemographicSexualOrientation *demographicUndisclosed=[[DemographicSexualOrientation alloc]initWithSexualOrientation:@"Undisclosed" fromDemographicArray:fetchedObjects];
         
         
-        NSArray *filteredForNull=[fetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"clinician == nil AND sexualOrientation == nil"]];
+        NSArray *filteredForNull=[fetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"clinician == nil AND sexualOrientation == nil AND client!= nil"]];
         
         if (filteredForNull && filteredForNull.count>0) {
             DemographicSexualOrientation *demographicSexualOrientationNil=[[DemographicSexualOrientation alloc]initWithSexualOrientation:@"Not Selected" count:filteredForNull.count];
-            [sexualOrientationMutableArray_ addObject:demographicSexualOrientationNil];
+            if (demographicSexualOrientationNil.count) {
+                [sexualOrientationMutableArray_ addObject:demographicSexualOrientationNil];
+            }
+            
         }
 
+        if (demographicAsexual.count) {
+             [sexualOrientationMutableArray_ addObject:demographicAsexual];
+        }
+        if (demographicBisexual.count) {
+            [sexualOrientationMutableArray_ addObject:demographicBisexual];
+        }
+        if (demographicGay.count) {
+             [sexualOrientationMutableArray_ addObject:demographicGay];
+        }
+        if (demographicHeterosexual.count) {
+             [sexualOrientationMutableArray_ addObject:demographicHeterosexual];
+        }
+       
+        if (demographicLesbian.count) {
+            [sexualOrientationMutableArray_ addObject:demographicLesbian];
+        }
         
-        [sexualOrientationMutableArray_ addObject:demographicAsexual];
-        [sexualOrientationMutableArray_ addObject:demographicBisexual];
-        [sexualOrientationMutableArray_ addObject:demographicGay];
-        [sexualOrientationMutableArray_ addObject:demographicHeterosexual];
-        [sexualOrientationMutableArray_ addObject:demographicLesbian];
-        [sexualOrientationMutableArray_ addObject:demographicQuestioning];
-        [sexualOrientationMutableArray_ addObject:demographicUndisclosed];
+        
+        if (demographicQuestioning.count) {
+             [sexualOrientationMutableArray_ addObject:demographicQuestioning];
+        }
+        if (demographicUndisclosed.count) {
+             [sexualOrientationMutableArray_ addObject:demographicUndisclosed];
+        }
+       
         
         
     }

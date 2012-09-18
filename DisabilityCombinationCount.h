@@ -10,16 +10,16 @@
 
 @interface DisabilityCombinationCount : NSObject {
     
-    __weak NSString *disabilityCombinationStr_;
-    __weak NSMutableSet *disabilityCombinationMutableSet_;
+     NSString *disabilityCombinationStr_;
+     NSMutableSet *disabilityCombinationMutableSet_;
     int disabilityCombinationCount_;
     
     
     
 }
 
-@property (nonatomic, weak) NSString *disabilityCombinationStr;
-@property (nonatomic, weak) NSMutableSet *disabilityCombinationMutableSet;
+@property (nonatomic, strong) NSString *disabilityCombinationStr;
+@property (nonatomic, strong) NSMutableSet *disabilityCombinationMutableSet;
 @property (nonatomic, assign) int disabilityCombinationCount;
 
 -(id)initWithDisabilityCombinationStr:(NSString *)disabilityCombinationStrGiven disabilityMutableSet:(NSMutableSet *)disabilityMutableSetGiven;

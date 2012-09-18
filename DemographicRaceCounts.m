@@ -75,7 +75,10 @@
             }
         
         RaceCombinationCount *raceCombinationCountObject=[[RaceCombinationCount alloc]initWithRaceCombinationStr:raceCombinationString raceMutableSet:mutableSet];
-         [raceCombinatonCountSet addObject:raceCombinationCountObject];
+        if (raceCombinationCountObject.raceCombinationCount) {
+             [raceCombinatonCountSet addObject:raceCombinationCountObject];
+        }
+       
         
         
     
@@ -83,12 +86,14 @@
         
         }
        
-                
+    if (numberOfMulitRaceIndividuals) {
         RaceCombinationCount *allMultiRaceCount=[[RaceCombinationCount alloc]init];
         
         [allMultiRaceCount setRaceCombinationStr:@"Total Multiracial Individuals"];
         [allMultiRaceCount setRaceCombinationCount:numberOfMulitRaceIndividuals];
         [raceCombinatonCountSet addObject:allMultiRaceCount];
+    }
+       
         
         
         NSFetchRequest *demographicProfileFetchRequest = [[NSFetchRequest alloc] init];
@@ -102,12 +107,12 @@
         
         
         
-        NSArray *filteredForNull=[demProfileFetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"races == nil AND clinician == nil"]];
+        NSArray *filteredForNull=[demProfileFetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"races == nil AND clinician == nil AND client !=nil "]];
         
         
         
         RaceCombinationCount *nilCount=[[RaceCombinationCount alloc]init];
-        nilCount.raceCombinationStr=@"Not Selected";
+        [nilCount setRaceCombinationStr:@"Not Selected"];
         if (filteredForNull && filteredForNull.count>0) {
             [nilCount setRaceCombinationCount:filteredForNull.count];
         }

@@ -34,9 +34,9 @@
 
     int returnInt=0;
     
-    NSArray *clientDemographicArray=[self fetchObjectsFromEntity:@"DemographicProfileEntity" filterPredicate:[NSPredicate predicateWithFormat:@"clinician == nil "]];
+    NSArray *clientDemographicArray=[self fetchObjectsFromEntity:@"DemographicProfileEntity" filterPredicate:[NSPredicate predicateWithFormat:@"clinician == nil AND client != nil"]];
 
-    NSArray *filteredArray=[clientDemographicArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"clinician==nil AND races == %@",raceCombinationMutableSet_]];
+    NSArray *filteredArray=[clientDemographicArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@" races == %@ ",raceCombinationMutableSet_]];
     
    
     returnInt=filteredArray.count;

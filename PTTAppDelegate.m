@@ -341,6 +341,10 @@
 //           }
 //       });
     tabBarController.tabBar.userInteractionEnabled=NO;
+    for (UIViewController *viewControllerInArray in tabBarController.viewControllers) {
+        viewControllerInArray.view.userInteractionEnabled=NO;
+    }
+    
     [UIApplication sharedApplication].statusBarHidden = YES;
     
     self.colorSwitcher = [[ColorSwitcher alloc] initWithScheme:@"blue"];
@@ -703,6 +707,9 @@
         }else 
         {
              tabBarController.tabBar.userInteractionEnabled=YES;
+            for (UIViewController *viewControllerInArray in tabBarController.viewControllers) {
+                viewControllerInArray.view.userInteractionEnabled=YES;
+            }
             [self.window addSubview:self.tabBarController.view];
              [self flashAppTrainAndTitleGraphics];
         }
@@ -713,6 +720,9 @@
         statusMessage=@"Welcome. Ready to use now.";
         [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:nil];
         tabBarController.tabBar.userInteractionEnabled=YES;
+        for (UIViewController *viewControllerInArray in tabBarController.viewControllers) {
+            viewControllerInArray.view.userInteractionEnabled=YES;
+        }
         [self.window addSubview:self.tabBarController.view];
          [self flashAppTrainAndTitleGraphics];
     
@@ -1966,7 +1976,7 @@
 	NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
 NSData *response =	[NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-	if (response == nil) {	DLog(@"send request %@",returnData)};
+	if (response == nil) {	DLog(@"send request %@",response)};
 	
 #endif
 }

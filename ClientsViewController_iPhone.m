@@ -1007,10 +1007,10 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     
                     SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
                     SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];        
-                    NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
+                    NSManagedObject *cellOneManagedObject=(NSManagedObject *)cellOne.boundObject;
                     
                     
-                    if ([cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
+                    if (cellOneManagedObject && [cellOneManagedObject respondsToSelector:@selector(entity)]&&[cellOneManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                         
                         
                         if ([cell isKindOfClass:[SCCustomCell class]]) 
@@ -1068,10 +1068,10 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     
                     SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
                     SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];
-                    NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
+                    NSManagedObject *cellOneManagedObject=(NSManagedObject *)cellOne.boundObject;
                     
                     
-                    if ([cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
+                    if (cellOneManagedObject && [cellOneManagedObject respondsToSelector:@selector(entity)] && [cellOneManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                         
                         
                         if ([cell isKindOfClass:[SCCustomCell class]])

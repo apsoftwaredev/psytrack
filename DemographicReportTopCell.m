@@ -274,11 +274,15 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         [genderVariablesMutableArray addObject:demVariableAndCountObject];
     }
-    DemographicVariableAndCount *notSelectedGender=[[DemographicVariableAndCount alloc]init];
-    notSelectedGender.variableCountStr=demographicGenderCounts.notSelectedCountStr;
-    notSelectedGender.variableStr=@"Not Selected";
-    [genderVariablesMutableArray addObject:notSelectedGender];
-    
+   
+    if (demographicGenderCounts.notSelectedCountUInteger>0) {
+         DemographicVariableAndCount *notSelectedGender=[[DemographicVariableAndCount alloc]init];
+        notSelectedGender.variableCountStr=[ NSString stringWithFormat:@"%i", demographicGenderCounts.notSelectedCountUInteger ];
+        notSelectedGender.variableStr=@"Not Selected";
+        [genderVariablesMutableArray addObject:notSelectedGender];
+
+    }
+       
     SCArrayOfObjectsSection *genderSection=[SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:genderVariablesMutableArray itemsDefinition:variableDef];
     
     
@@ -374,11 +378,15 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         [educationVariablesMutableArray addObject:demVariableAndCountObject];
     }
-    DemographicVariableAndCount *notSelectedEducationLevel=[[DemographicVariableAndCount alloc]init];
-    notSelectedEducationLevel.variableCountStr=demographicEducationCounts.notSelectedCountStr;
-    notSelectedEducationLevel.variableStr=@"Not Selected";
-    [educationVariablesMutableArray addObject:notSelectedEducationLevel];
+    
+    if (demographicEducationCounts.notSelectedCountUInteger>0) {
+        DemographicVariableAndCount *notSelectedEducationLevel=[[DemographicVariableAndCount alloc]init];
+        notSelectedEducationLevel.variableCountStr=[NSString stringWithFormat:@"%i", demographicEducationCounts.notSelectedCountUInteger ];
+        notSelectedEducationLevel.variableStr=@"Not Selected";
+        [educationVariablesMutableArray addObject:notSelectedEducationLevel];
 
+    }
+   
     SCArrayOfObjectsSection *educationSection=[SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:educationVariablesMutableArray itemsDefinition:variableDef];
     
     

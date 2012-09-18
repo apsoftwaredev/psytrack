@@ -33,30 +33,46 @@
         
         DemographicSex *demographicMale=[[DemographicSex alloc]initWithSex:@"Male" fromDemographicArray:fetchedObjects];
         
-        [sexMutableArray_ addObject:demographicMale];
+        if (demographicMale.count) {
+             [sexMutableArray_ addObject:demographicMale];
+        }
+       
         
         DemographicSex *demographicFemale=[[DemographicSex alloc]initWithSex:@"Female" fromDemographicArray:fetchedObjects];
         
-        [sexMutableArray_ addObject:demographicFemale];
+        if (demographicFemale.count) {
+            [sexMutableArray_ addObject:demographicFemale];
+        }
+        
         
         DemographicSex *demographicIntersexual=[[DemographicSex alloc]initWithSex:@"Intersexual" fromDemographicArray:fetchedObjects];
         
-        [sexMutableArray_ addObject:demographicIntersexual];
+        if (demographicIntersexual.count) {
+             [sexMutableArray_ addObject:demographicIntersexual];
+        }
+       
         
         DemographicSex *demographicF2M=[[DemographicSex alloc]initWithSex:@"F2M" fromDemographicArray:fetchedObjects];
         
-        [sexMutableArray_ addObject:demographicF2M];
+        if (demographicF2M.count) {
+             [sexMutableArray_ addObject:demographicF2M];
+        }
+       
         
         DemographicSex *demographicM2F=[[DemographicSex alloc]initWithSex:@"M2F" fromDemographicArray:fetchedObjects];
-        
-        [sexMutableArray_ addObject:demographicM2F];
+        if (demographicM2F.count) {
+             [sexMutableArray_ addObject:demographicM2F];
+        }
+       
         
  
         DemographicSex *demographicUndisclosed=[[DemographicSex alloc]initWithSex:@"Undisclosed" fromDemographicArray:fetchedObjects];
+        if (demographicUndisclosed.count) {
+              [sexMutableArray_ addObject:demographicUndisclosed];
+        }
+      
         
-        [sexMutableArray_ addObject:demographicUndisclosed];
-        
-        NSArray *filteredForNull=[fetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"clinician==nil AND sex == nil"]];
+        NSArray *filteredForNull=[fetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"clinician==nil AND sex == nil AND client != nil"]];
         
         if (filteredForNull && filteredForNull.count>0) {
             DemographicSex *demographicSexNil=[[DemographicSex alloc]initWithSex:@"Not Selected" count:filteredForNull.count];

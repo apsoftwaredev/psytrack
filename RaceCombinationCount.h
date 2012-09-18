@@ -10,17 +10,17 @@
 
 @interface RaceCombinationCount : NSObject {
 
-   __weak NSString *raceCombinationStr_;
-    __weak NSMutableSet *raceCombinationMutableSet_;
-     int raceCombinationCount_;
+    NSString *raceCombinationStr_;
+     NSMutableSet *raceCombinationMutableSet_;
+     NSUInteger raceCombinationCount_;
 
 
 
 }
 
-@property (nonatomic, weak) NSString *raceCombinationStr;
-@property (nonatomic, weak) NSMutableSet *raceCombinationMutableSet;
-@property (nonatomic, assign) int raceCombinationCount;
+@property (nonatomic, strong) NSString *raceCombinationStr;
+@property (nonatomic, strong) NSMutableSet *raceCombinationMutableSet;
+@property (nonatomic, assign) NSUInteger raceCombinationCount;
 
 -(id)initWithRaceCombinationStr:(NSString *)raceCombinationStrGiven raceMutableSet:(NSMutableSet *)raceMutableSetGiven;
 

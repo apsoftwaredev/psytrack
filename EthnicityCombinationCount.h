@@ -10,16 +10,16 @@
 
 @interface EthnicityCombinationCount : NSObject {
     
-    __weak NSString *ethnicityCombinationStr_;
-    __weak NSMutableSet *ethnicityCombinationMutableSet_;
+     NSString *ethnicityCombinationStr_;
+     NSMutableSet *ethnicityCombinationMutableSet_;
     int ethnicityCombinationCount_;
     
     
     
 }
 
-@property (nonatomic, weak) NSString *ethnicityCombinationStr;
-@property (nonatomic, weak) NSMutableSet *ethnicityCombinationMutableSet;
+@property (nonatomic, strong) NSString *ethnicityCombinationStr;
+@property (nonatomic, strong) NSMutableSet *ethnicityCombinationMutableSet;
 @property (nonatomic, assign) int ethnicityCombinationCount;
 
 -(id)initWithEthnicityCombinationStr:(NSString *)ethnicityCombinationStrGiven ethnicityMutableSet:(NSMutableSet *)ethnicityMutableSetGiven;

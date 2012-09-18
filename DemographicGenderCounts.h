@@ -10,13 +10,13 @@
 
 @interface DemographicGenderCounts : NSObject{
     
-    __weak NSMutableArray *genderMutableArray_;
+     NSMutableArray *genderMutableArray_;
     
     
 }
 
-@property (nonatomic, weak)NSMutableArray *genderMutableArray;
+@property (nonatomic, strong)NSMutableArray *genderMutableArray;
 
-@property (nonatomic, weak)NSString *notSelectedCountStr;
+@property (nonatomic, assign)NSUInteger notSelectedCountUInteger;
 
 @end

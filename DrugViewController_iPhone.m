@@ -241,16 +241,19 @@
 //    tableModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView withViewController:self];    
 //    
 //    
-//    
+//
+    if (objectsModel) {
+        objectsModel=nil;
+    }
    
     if (!isInDetailSubview) {
-  
+        
     objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView];
     
    
 	        
     }else if (isInDetailSubview) {
-        
+    
         objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView];
         NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
         

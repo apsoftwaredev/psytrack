@@ -10,13 +10,13 @@
 
 @interface DemographicDisabilityCount : NSObject{
     
-    __weak NSMutableArray *disabilityMutableArray_;
-    __weak NSSet *multiDisabilityOnlySet_;
+     NSMutableArray *disabilityMutableArray_;
+     NSSet *multiDisabilityOnlySet_;
     
 }
 
-@property (nonatomic, weak)NSMutableArray *disabilityMutableArray;
-@property (nonatomic, weak)NSSet *multiDisabilityOnlySet;
+@property (nonatomic, strong)NSMutableArray *disabilityMutableArray;
+@property (nonatomic, strong)NSSet *multiDisabilityOnlySet;
 
 
 ;

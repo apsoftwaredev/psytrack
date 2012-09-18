@@ -295,7 +295,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                 NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
                 
                 
-                if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"] && detailTableViewModel.sectionCount>2) {
+                if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)] && [cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"] && detailTableViewModel.sectionCount>2) {
                     
                     [detailTableViewModel removeSectionAtIndex:1];
                     
@@ -325,7 +325,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
         SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:0];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
-        if (cellManagedObject &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&section.cellCount>1){
+        if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)] &&[cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&section.cellCount>1){
             
             SCTextFieldCell *phoneNumberCell =(SCTextFieldCell *) [section cellAtIndex:1];
             
@@ -913,10 +913,10 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                         
                         SCTableViewSection *followUpSection=(SCTableViewSection *)[tableViewModel sectionAtIndex:1];
                         SCTableViewCell *cellOne=(SCTableViewCell *)[followUpSection cellAtIndex:0];
-                        NSManagedObject *cellManagedObject=(NSManagedObject *)cellOne.boundObject;
+                        NSManagedObject *cellOneManagedObject=(NSManagedObject *)cellOne.boundObject;
                         
                         
-                        if ([cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
+                        if (cellOneManagedObject &&[cellOneManagedObject respondsToSelector:@selector(entity)]&&[cellOneManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"]) {
                             
                             
                             if ([cell isKindOfClass:[SCCustomCell class]])

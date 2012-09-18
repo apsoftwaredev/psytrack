@@ -25,7 +25,7 @@
     
     SCArrayOfObjectsModel *objectsModel;
     
-  	UISearchBar *searchBar;
+  	__weak UISearchBar *searchBar;
 //    UITableView *tableView;
     
 //	SCArrayOfObjectsModel *tableModel;
@@ -41,12 +41,12 @@
     DrugViewController_Shared *drugViewController_Shared;
     NSManagedObjectContext * drugsManagedObjectContext;
     UIDownloadBar *downloadBar_;
-     UILabel *downloadLabel_;
-     UILabel *downloadBytesLabel_;
-     UIButton *downloadButton_;
-    UIButton *downloadStopButton_;
-     UIButton *downloadContinueButton_;
-    UIButton *downloadCheckButton_;
+    __weak UILabel *downloadLabel_;
+    __weak UILabel *downloadBytesLabel_;
+    __weak UIButton *downloadButton_;
+    __weak UIButton *downloadStopButton_;
+    __weak UIButton *downloadContinueButton_;
+    __weak UIButton *downloadCheckButton_;
     NSMutableArray *drugsMutableArray;
     NSTimer *checkingTimer_;
     
@@ -63,15 +63,15 @@
     
 }
 //@property (nonatomic, strong)  SCArrayOfObjectsModel *tableModel;
-@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
 //@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIDownloadBar *downloadBar;
-@property (nonatomic, strong) IBOutlet UILabel *downloadLabel;
-@property (nonatomic, strong) IBOutlet UILabel *downloadBytesLabel;
-@property (nonatomic, strong) IBOutlet UIButton *downloadButton;
-@property (nonatomic, strong) IBOutlet UIButton *downloadStopButton;
-@property (nonatomic,strong) IBOutlet UIButton *downloadContinueButton;
-@property (nonatomic,strong) IBOutlet UIButton *downloadCheckButton;
+@property (nonatomic, weak) IBOutlet UILabel *downloadLabel;
+@property (nonatomic, weak) IBOutlet UILabel *downloadBytesLabel;
+@property (nonatomic, weak) IBOutlet UIButton *downloadButton;
+@property (nonatomic, weak) IBOutlet UIButton *downloadStopButton;
+@property (nonatomic,weak) IBOutlet UIButton *downloadContinueButton;
+@property (nonatomic,weak) IBOutlet UIButton *downloadCheckButton;
 @property (nonatomic, strong) NSTimer *checkingTimer;
 
 

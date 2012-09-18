@@ -251,7 +251,7 @@
     //    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"drugName Matches %@",@"a"];
     objectsModel.enablePullToRefresh = TRUE;
     objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
-    
+
     
 
     
@@ -735,7 +735,26 @@
     
 
 }
+-(BOOL)tableViewModel:(SCTableViewModel *)tableModel willAddItemForSectionAtIndex:(NSUInteger)index item:(NSObject *)item{
 
+        
+    if (tableModel.tag==0 && !tableModel.sectionCount) {
+        [objectsModel.searchBar setSelectedScopeButtonIndex:0];
+         SCDataFetchOptions *dataFetchOptions=(SCDataFetchOptions *)objectsModel.dataFetchOptions;
+        [dataFetchOptions setFilterPredicate:nil];
+       
+        
+        
+        
+        
+        
+    }
+
+    return YES;
+
+
+
+}
 
 - (void)tableViewModel:(SCArrayOfItemsModel *)tableViewModel
 searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
@@ -785,6 +804,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         }
         [objectsModel reloadBoundValues];
         [objectsModel.modeledTableView reloadData];   
+        
+        
         
         [self updateClinicianTotalLabel];
         
@@ -890,47 +911,18 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
         tableModel.delegate=self;
         SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)section;
+       
         if (allowMultipleSelection) {
             objectSelectionSection.allowMultipleSelection=YES;
             objectSelectionSection.allowNoSelection=YES;
         }
     }
     
-    if (tableModel.tag==0) {
-        
-    
-        if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
-      
-        SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
-        arrayOfObjectsSection.fetchItemsCell=[SCFetchItemsCell cellWithText:@"Load More..."];
-        
    
-    
-    SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"firstName" sortAscending:YES filterPredicate:nil];
-    
-    
-    dataFetchOptions.batchStartingOffset=2;
-    dataFetchOptions.batchSize=2;
-    
-    
-    arrayOfObjectsSection.dataFetchOptions=dataFetchOptions;
-        [arrayOfObjectsSection.dataFetchOptions sort];
-            
-        }
-    }
-    
     
     
 
-      if (isInDetailSubview &&[section isKindOfClass:[SCObjectSelectionSection class]])
-      {
-        
-        
-            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
-            
-            objectSelectionSection.allowMultipleSelection=allowMultipleSelection;
-      
-    }
+     
     
 
 
@@ -939,6 +931,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
     SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
   
+    if (tableViewModel.tag==0) {
+        
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
+        if ([cellManagedObject respondsToSelector:@selector(entity)] && [cellManagedObject.entity.name isEqualToString:@"ClinicianEntity"]) {
+    
     BOOL myInformation=(BOOL)[(NSNumber *)[cell.boundObject valueForKey:@"myInformation"]boolValue];
     if (myInformation) {
         PTTAppDelegate *appdelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -956,9 +954,6 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         }
         else
         {
-            
-            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-            ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
             
             NSEntityDescription *entityDescription=(NSEntityDescription *) clinicianObject.entity;
             
@@ -1008,7 +1003,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
        
         return NO;
     }
-    
+        }}
     return YES;
 }
     

@@ -81,8 +81,11 @@
             }
             
             EthnicityCombinationCount *ethnicityCombinationCountObject=[[EthnicityCombinationCount alloc]initWithEthnicityCombinationStr:ethnicityCombinationString ethnicityMutableSet:mutableSet];
+        if (ethnicityCombinationCountObject.ethnicityCombinationCount) {
             [ethnicityCombinatonCountSet addObject:ethnicityCombinationCountObject];
             
+        }
+           
             
             
             
