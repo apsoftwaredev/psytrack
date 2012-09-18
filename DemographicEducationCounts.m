@@ -37,7 +37,6 @@
             NSManagedObject *educationLevelManagedObject=(NSManagedObject *)[fetchedObjects objectAtIndex:i];
             EducationLevelEntity *educationObject=(EducationLevelEntity *)educationLevelManagedObject;
             
-            DLog(@"cleint str %@",educationObject.clientCountStr);
             
             [educationMutableArray_ addObject:educationObject];
             

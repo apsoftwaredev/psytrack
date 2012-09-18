@@ -33,14 +33,14 @@
         NSError *error = nil;
         NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
         
-        DLog(@"fetched objects count is  %i",fetchedObjects.count);
+      
         NSMutableSet *allRacesSet=[NSMutableSet set];
         int numberOfMulitRaceIndividuals=0;
         for (int i=0; i<fetchedObjects.count; i++) {
             
             ClientEntity *clientObject=[fetchedObjects objectAtIndex:i];
             NSMutableSet *clientRacesSet=[clientObject mutableSetValueForKeyPath:@"demographicInfo.races"];
-            DLog(@"client races set is %@",clientRacesSet);
+           
             if (clientRacesSet ) {
                  [allRacesSet addObject:[NSSet setWithSet:clientRacesSet]];
                 if (clientRacesSet.count>1) {
@@ -55,7 +55,6 @@
             
             
         }
-        DLog(@"all races set is %@",allRacesSet);
         
         NSMutableSet *raceCombinatonCountSet=[NSMutableSet set];
         
@@ -72,7 +71,6 @@
                 
                 }
                 
-               DLog(@"race combination string is %@",raceCombinationString);
                 
             }
         
@@ -86,7 +84,6 @@
         }
        
                 
-        DLog(@"multiracailonly set is  %@",multiRacialOnlySet_);
         RaceCombinationCount *allMultiRaceCount=[[RaceCombinationCount alloc]init];
         
         [allMultiRaceCount setRaceCombinationStr:@"Total Multiracial Individuals"];

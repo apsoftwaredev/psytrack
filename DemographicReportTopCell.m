@@ -225,18 +225,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     
     bottomCellNibName=@"DemographicReportBottomCell";
-    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-    NSFetchRequest *demographicProfileFetchRequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *demographicProfileEntity = [NSEntityDescription entityForName:@"DemographicProfileEntity" inManagedObjectContext:managedObjectContext];
-    [demographicProfileFetchRequest setEntity:demographicProfileEntity];
-    
-    [demographicProfileFetchRequest setRelationshipKeyPathsForPrefetching:[NSArray arrayWithObjects:@"self.disabilities.disabilityName", nil ]];
-    
-    NSError *demError = nil;
-    NSArray *demProfileFetchedObjects = [managedObjectContext executeFetchRequest:demographicProfileFetchRequest error:&demError];
-    
-    
-
+   
     
    
     self.clinicianNameLabel.text=totalsObject.myName;

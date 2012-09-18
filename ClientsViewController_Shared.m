@@ -1434,7 +1434,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
         day=nowDay-dateDiff;
     }
     
-    DLog(@"month is  %i",month);
+   
     
     return [NSString stringWithFormat:@"%iy %im %id", year,month,day];
 

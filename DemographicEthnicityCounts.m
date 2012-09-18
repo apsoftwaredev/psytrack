@@ -33,7 +33,7 @@
         NSError *error = nil;
         NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
         
-        DLog(@"fetched objects count is  %i",fetchedObjects.count);
+       
         NSMutableSet *allethnicitysSet=[NSMutableSet set];
         int numberOfMulitethnicityIndividuals=0;
         int numberNotSelected=0;
@@ -41,7 +41,7 @@
             
             ClientEntity *clientObject=[fetchedObjects objectAtIndex:i];
             NSMutableSet *clientethnicitysSet=[clientObject mutableSetValueForKeyPath:@"demographicInfo.ethnicities"];
-            DLog(@"client ethnicitys set is %@",clientethnicitysSet);
+           
             if (clientethnicitysSet && clientethnicitysSet.count>0 ) {
             
                 [allethnicitysSet addObject:[NSSet setWithSet:clientethnicitysSet]];
@@ -59,7 +59,7 @@
             
             
         }
-        DLog(@"all ethnicitys set is %@",allethnicitysSet);
+       
         
         NSMutableSet *ethnicityCombinatonCountSet=[NSMutableSet set];
         
@@ -76,7 +76,7 @@
                     
                 }
                 
-                DLog(@"ethnicity combination string is %@",ethnicityCombinationString);
+              
                 
             }
             
@@ -90,7 +90,7 @@
         }
         
         
-        DLog(@"multiracailonly set is  %@",multiEthnicityOnlySet_);
+       
         if (numberOfMulitethnicityIndividuals>0) {
             EthnicityCombinationCount *allMultiEthnicityCount=[[EthnicityCombinationCount alloc]init];
             

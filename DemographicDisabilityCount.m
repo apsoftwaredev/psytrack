@@ -34,7 +34,7 @@
         NSError *error = nil;
         NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
         
-        DLog(@"fetched objects count is  %i",fetchedObjects.count);
+       
         NSMutableSet *allDisabilitysSet=[NSMutableSet set];
         int numberOfMulitDisabilityIndividuals=0;
         int numberOfNilDisabilities=0;
@@ -42,7 +42,7 @@
             
             ClientEntity *clientObject=[fetchedObjects objectAtIndex:i];
             NSMutableSet *clientdisabilitysSet=[clientObject mutableSetValueForKeyPath:@"demographicInfo.disabilities"];
-            DLog(@"client disabilitys set is %@",clientdisabilitysSet);
+            
             if (clientdisabilitysSet &&clientdisabilitysSet.count>0 ) {
                 [allDisabilitysSet addObject:[NSSet setWithSet:clientdisabilitysSet]];
                 if (clientdisabilitysSet.count>1) {
@@ -62,7 +62,7 @@
             
             
         }
-        DLog(@"all disabilitys set is %@",allDisabilitysSet);
+       
         
         NSMutableSet *disabilityCombinatonCountSet=[NSMutableSet set];
         
@@ -79,7 +79,6 @@
                     
                 }
                 
-                DLog(@"disability combination string is %@",disabilityCombinationString);
                 
             }
             
@@ -93,7 +92,7 @@
         }
         
         
-        DLog(@"multiracailonly set is  %@",multiDisabilityOnlySet_);
+
         if (numberOfMulitDisabilityIndividuals>0) {
             DisabilityCombinationCount *allMultiDisabilityCount=[[DisabilityCombinationCount alloc]init];
             

@@ -294,7 +294,6 @@
 		E78C96D115EE8CB100EDB0FF /* ActionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E78C96D015EE8CB100EDB0FF /* ActionButton.png */; };
 		E78DA68C151F9AE9004ABF29 /* ReferralEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA68B151F9AE9004ABF29 /* ReferralEntity.m */; };
 		E78DA690151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA68F151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m */; };
-		E78DA6931520B1AD004ABF29 /* icd.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E78DA6911520B1AD004ABF29 /* icd.xcdatamodeld */; };
 		E78DA6991521D93E004ABF29 /* MedicationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA6981521D93E004ABF29 /* MedicationEntity.m */; };
 		E78DA69C1521DBD2004ABF29 /* MedicationReviewEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA69B1521DBD1004ABF29 /* MedicationReviewEntity.m */; };
 		E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA69E15227EA9004ABF29 /* ClinicianSelectionCell.m */; };
@@ -386,6 +385,7 @@
 		E7B49BF91607BD1F0073AA30 /* ContinuingEducationTypeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BF81607BD1F0073AA30 /* ContinuingEducationTypeEntity.m */; };
 		E7B49BFC1607BD600073AA30 /* DisorderSubCategoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BFB1607BD600073AA30 /* DisorderSubCategoryEntity.m */; };
 		E7B49BFF1607BD7B0073AA30 /* DisorderSystemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BFE1607BD7B0073AA30 /* DisorderSystemEntity.m */; };
+		E7B49C111607E24F0073AA30 /* BatteryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49C101607E24F0073AA30 /* BatteryEntity.m */; };
 		E7C02D9F15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */; };
 		E7C02DA215B3621B0072F97C /* SupervisionReceivedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA115B362190072F97C /* SupervisionReceivedEntity.m */; };
 		E7C02DA515B362990072F97C /* SupervisionGivenEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA415B362980072F97C /* SupervisionGivenEntity.m */; };
@@ -957,7 +957,6 @@
 		E78DA68B151F9AE9004ABF29 /* ReferralEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ReferralEntity.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E78DA68E151FAC8A004ABF29 /* DrugNameObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugNameObjectSelectionCell.h; sourceTree = "<group>"; };
 		E78DA68F151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugNameObjectSelectionCell.m; sourceTree = "<group>"; };
-		E78DA6921520B1AD004ABF29 /* icd.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = icd.xcdatamodel; sourceTree = "<group>"; };
 		E78DA6971521D93E004ABF29 /* MedicationEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedicationEntity.h; sourceTree = "<group>"; };
 		E78DA6981521D93E004ABF29 /* MedicationEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedicationEntity.m; sourceTree = "<group>"; };
 		E78DA69A1521DBD1004ABF29 /* MedicationReviewEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedicationReviewEntity.h; sourceTree = "<group>"; };
@@ -1082,6 +1081,17 @@
 		E7B49BFB1607BD600073AA30 /* DisorderSubCategoryEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisorderSubCategoryEntity.m; sourceTree = "<group>"; };
 		E7B49BFD1607BD7B0073AA30 /* DisorderSystemEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisorderSystemEntity.h; sourceTree = "<group>"; };
 		E7B49BFE1607BD7B0073AA30 /* DisorderSystemEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisorderSystemEntity.m; sourceTree = "<group>"; };
+		E7B49C0F1607E24F0073AA30 /* BatteryEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatteryEntity.h; sourceTree = "<group>"; };
+		E7B49C101607E24F0073AA30 /* BatteryEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatteryEntity.m; sourceTree = "<group>"; };
+		E7B49C121607E29C0073AA30 /* InstrumentLogEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstrumentLogEntity.h; sourceTree = "<group>"; };
+		E7B49C131607E29C0073AA30 /* InstrumentLogEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstrumentLogEntity.m; sourceTree = "<group>"; };
+		E7B49C141607E2BF0073AA30 /* PublicationEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicationEntity.h; sourceTree = "<group>"; };
+		E7B49C151607E2BF0073AA30 /* PublicationEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicationEntity.m; sourceTree = "<group>"; };
+		E7B49C161607E2D30073AA30 /* PublicationTypeEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PublicationTypeEntity.h; sourceTree = "<group>"; };
+		E7B49C171607E2D30073AA30 /* PublicationTypeEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicationTypeEntity.m; sourceTree = "<group>"; };
+		E7B49C181607E3010073AA30 /* AdditionalSymptomEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdditionalSymptomEntity.h; sourceTree = "<group>"; };
+		E7B49C191607E3010073AA30 /* AdditionalSymptomEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdditionalSymptomEntity.m; sourceTree = "<group>"; };
+		E7B49C1B16080B2B0073AA30 /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = psyTrack.sqlite; sourceTree = "<group>"; };
 		E7C02D9D15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h; sourceTree = "<group>"; };
 		E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m; sourceTree = "<group>"; };
 		E7C02DA015B362180072F97C /* SupervisionReceivedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionReceivedEntity.h; sourceTree = "<group>"; };
@@ -1638,57 +1648,10 @@
 		37F7CEC615005E3400AD2C3A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E7B49BFD1607BD7B0073AA30 /* DisorderSystemEntity.h */,
-				E7B49BFE1607BD7B0073AA30 /* DisorderSystemEntity.m */,
-				E7B49BFA1607BD600073AA30 /* DisorderSubCategoryEntity.h */,
-				E7B49BFB1607BD600073AA30 /* DisorderSubCategoryEntity.m */,
-				E7B49BF71607BD1F0073AA30 /* ContinuingEducationTypeEntity.h */,
-				E7B49BF81607BD1F0073AA30 /* ContinuingEducationTypeEntity.m */,
-				E7B49BF11607BB870073AA30 /* ConsultationEntity.h */,
-				E7B49BF21607BB870073AA30 /* ConsultationEntity.m */,
-				E762661D15FE958500D97D3E /* AdditionalVariableEntity.h */,
-				E762661E15FE958500D97D3E /* AdditionalVariableEntity.m */,
-				E7DEECEA15F526C4001D5B05 /* DisorderSpecifierEntity.h */,
-				E7DEECEB15F526C4001D5B05 /* DisorderSpecifierEntity.m */,
+				E7B49C1A1607E53A0073AA30 /* NSManagedObject Subclasses */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
-				E7B49BF41607BCF00073AA30 /* ContinuingEducationEntity.h */,
-				E7B49BF51607BCF00073AA30 /* ContinuingEducationEntity.m */,
-				E7B49BEE1607BB460073AA30 /* ClientPresentationEntity.h */,
-				E7B49BEF1607BB460073AA30 /* ClientPresentationEntity.m */,
-				E762662315FE980500D97D3E /* AdditionalVariableValueEntity.h */,
-				E762662415FE980500D97D3E /* AdditionalVariableValueEntity.m */,
-				E762662015FE97F900D97D3E /* AdditionalVariableNameEntity.h */,
-				E762662115FE97F900D97D3E /* AdditionalVariableNameEntity.m */,
-				E7DEECE715F526B2001D5B05 /* DisorderEntity.h */,
-				E7DEECE815F526B2001D5B05 /* DisorderEntity.m */,
-				E7DEECE415F5262C001D5B05 /* DiagnosisHistoryEntity.h */,
-				E7DEECE515F5262C001D5B05 /* DiagnosisHistoryEntity.m */,
-				E734334515D5D69C007237C5 /* PaymentEntity.h */,
-				E734334615D5D69C007237C5 /* PaymentEntity.m */,
-				E7B3E3FE15C58B2F00729C88 /* LicenseRenewalEntity.h */,
-				E7B3E3FF15C58B2F00729C88 /* LicenseEntity.h */,
-				E7B3E40015C58B2F00729C88 /* LicenseEntity.m */,
-				E7B3E40115C58B2F00729C88 /* LicenseRenewalEntity.m */,
-				E7AFB2BD15C47C8D005E2722 /* RateEntity.h */,
-				E7AFB2BE15C47C8D005E2722 /* RateEntity.m */,
-				E7AFB2BA15C477FC005E2722 /* RateChargeEntity.h */,
-				E7AFB2BB15C477FC005E2722 /* RateChargeEntity.m */,
-				E7AFB2B415C38530005E2722 /* OtherReferralSourceEntity.h */,
-				E7AFB2B515C38530005E2722 /* OtherReferralSourceEntity.m */,
-				E7516B7915085A23005B798A /* PTABGroup.h */,
-				E7516B7A15085A23005B798A /* PTABGroup.m */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
-				E7F1E7071576D17100D4A638 /* ClientInstrumentScoresEntity.h */,
-				E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */,
-				E7F1E7041576966000D4A638 /* InstrumentScoreEntity.h */,
-				E7F1E7051576966000D4A638 /* InstrumentScoreEntity.m */,
-				E7F1E701157662EB00D4A638 /* InstrumentScoreNameEntity.h */,
-				E7F1E702157662EB00D4A638 /* InstrumentScoreNameEntity.m */,
-				E7F1E6F61575916F00D4A638 /* InstrumentEntity.h */,
-				E7F1E6F71575916F00D4A638 /* InstrumentEntity.m */,
-				E71E26AB1569C3920004A793 /* BreakTimeEntity.h */,
-				E71E26AC1569C3920004A793 /* BreakTimeEntity.m */,
-				E78DA6911520B1AD004ABF29 /* icd.xcdatamodeld */,
+				E7B49C1B16080B2B0073AA30 /* psyTrack.sqlite */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2245,6 +2208,71 @@
 				E7B3E40315C58B2F00729C88 /* CECreditsViewController.xib */,
 			);
 			name = Education;
+			sourceTree = "<group>";
+		};
+		E7B49C1A1607E53A0073AA30 /* NSManagedObject Subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				E7B49C181607E3010073AA30 /* AdditionalSymptomEntity.h */,
+				E7B49C191607E3010073AA30 /* AdditionalSymptomEntity.m */,
+				E7B49C161607E2D30073AA30 /* PublicationTypeEntity.h */,
+				E7B49C171607E2D30073AA30 /* PublicationTypeEntity.m */,
+				E7B49C141607E2BF0073AA30 /* PublicationEntity.h */,
+				E7B49C151607E2BF0073AA30 /* PublicationEntity.m */,
+				E7B49C121607E29C0073AA30 /* InstrumentLogEntity.h */,
+				E7B49C131607E29C0073AA30 /* InstrumentLogEntity.m */,
+				E7B49BFD1607BD7B0073AA30 /* DisorderSystemEntity.h */,
+				E7B49BFE1607BD7B0073AA30 /* DisorderSystemEntity.m */,
+				E7B49BFA1607BD600073AA30 /* DisorderSubCategoryEntity.h */,
+				E7B49BFB1607BD600073AA30 /* DisorderSubCategoryEntity.m */,
+				E7B49BF71607BD1F0073AA30 /* ContinuingEducationTypeEntity.h */,
+				E7B49BF81607BD1F0073AA30 /* ContinuingEducationTypeEntity.m */,
+				E7B49BF11607BB870073AA30 /* ConsultationEntity.h */,
+				E7B49BF21607BB870073AA30 /* ConsultationEntity.m */,
+				E762661D15FE958500D97D3E /* AdditionalVariableEntity.h */,
+				E762661E15FE958500D97D3E /* AdditionalVariableEntity.m */,
+				E7DEECEA15F526C4001D5B05 /* DisorderSpecifierEntity.h */,
+				E7DEECEB15F526C4001D5B05 /* DisorderSpecifierEntity.m */,
+				E7B49C0F1607E24F0073AA30 /* BatteryEntity.h */,
+				E7B49C101607E24F0073AA30 /* BatteryEntity.m */,
+				E7B49BF41607BCF00073AA30 /* ContinuingEducationEntity.h */,
+				E7B49BF51607BCF00073AA30 /* ContinuingEducationEntity.m */,
+				E7B49BEE1607BB460073AA30 /* ClientPresentationEntity.h */,
+				E7B49BEF1607BB460073AA30 /* ClientPresentationEntity.m */,
+				E762662315FE980500D97D3E /* AdditionalVariableValueEntity.h */,
+				E762662415FE980500D97D3E /* AdditionalVariableValueEntity.m */,
+				E762662015FE97F900D97D3E /* AdditionalVariableNameEntity.h */,
+				E762662115FE97F900D97D3E /* AdditionalVariableNameEntity.m */,
+				E7DEECE715F526B2001D5B05 /* DisorderEntity.h */,
+				E7DEECE815F526B2001D5B05 /* DisorderEntity.m */,
+				E7DEECE415F5262C001D5B05 /* DiagnosisHistoryEntity.h */,
+				E7DEECE515F5262C001D5B05 /* DiagnosisHistoryEntity.m */,
+				E734334515D5D69C007237C5 /* PaymentEntity.h */,
+				E734334615D5D69C007237C5 /* PaymentEntity.m */,
+				E7B3E3FE15C58B2F00729C88 /* LicenseRenewalEntity.h */,
+				E7B3E3FF15C58B2F00729C88 /* LicenseEntity.h */,
+				E7B3E40015C58B2F00729C88 /* LicenseEntity.m */,
+				E7B3E40115C58B2F00729C88 /* LicenseRenewalEntity.m */,
+				E7AFB2BD15C47C8D005E2722 /* RateEntity.h */,
+				E7AFB2BE15C47C8D005E2722 /* RateEntity.m */,
+				E7AFB2BA15C477FC005E2722 /* RateChargeEntity.h */,
+				E7AFB2BB15C477FC005E2722 /* RateChargeEntity.m */,
+				E7AFB2B415C38530005E2722 /* OtherReferralSourceEntity.h */,
+				E7AFB2B515C38530005E2722 /* OtherReferralSourceEntity.m */,
+				E7516B7915085A23005B798A /* PTABGroup.h */,
+				E7516B7A15085A23005B798A /* PTABGroup.m */,
+				E7F1E7071576D17100D4A638 /* ClientInstrumentScoresEntity.h */,
+				E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */,
+				E7F1E7041576966000D4A638 /* InstrumentScoreEntity.h */,
+				E7F1E7051576966000D4A638 /* InstrumentScoreEntity.m */,
+				E7F1E701157662EB00D4A638 /* InstrumentScoreNameEntity.h */,
+				E7F1E702157662EB00D4A638 /* InstrumentScoreNameEntity.m */,
+				E7F1E6F61575916F00D4A638 /* InstrumentEntity.h */,
+				E7F1E6F71575916F00D4A638 /* InstrumentEntity.m */,
+				E71E26AB1569C3920004A793 /* BreakTimeEntity.h */,
+				E71E26AC1569C3920004A793 /* BreakTimeEntity.m */,
+			);
+			name = "NSManagedObject Subclasses";
 			sourceTree = "<group>";
 		};
 		E7C6871915D6137B00637BCE /* Courses Taken */ = {
@@ -2836,7 +2864,6 @@
 				E7912D1D151E441200E0609A /* InterpersonalEntity.m in Sources */,
 				E78DA68C151F9AE9004ABF29 /* ReferralEntity.m in Sources */,
 				E78DA690151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m in Sources */,
-				E78DA6931520B1AD004ABF29 /* icd.xcdatamodeld in Sources */,
 				E78DA6991521D93E004ABF29 /* MedicationEntity.m in Sources */,
 				E78DA69C1521DBD2004ABF29 /* MedicationReviewEntity.m in Sources */,
 				E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */,
@@ -2991,6 +3018,7 @@
 				E7B49BF91607BD1F0073AA30 /* ContinuingEducationTypeEntity.m in Sources */,
 				E7B49BFC1607BD600073AA30 /* DisorderSubCategoryEntity.m in Sources */,
 				E7B49BFF1607BD7B0073AA30 /* DisorderSystemEntity.m in Sources */,
+				E7B49C111607E24F0073AA30 /* BatteryEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3571,16 +3599,6 @@
 			);
 			currentVersion = 37F7CEC815005E7100AD2C3A /* drugs.xcdatamodel */;
 			path = drugs.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-		E78DA6911520B1AD004ABF29 /* icd.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				E78DA6921520B1AD004ABF29 /* icd.xcdatamodel */,
-			);
-			currentVersion = E78DA6921520B1AD004ABF29 /* icd.xcdatamodel */;
-			path = icd.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

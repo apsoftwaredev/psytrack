@@ -445,10 +445,13 @@
     
 
     
-    NSMutableArray *timeTrackPropertyNamesArray=[NSMutableArray arrayWithObjects:@"dateOfService",  @"time",  @"notes", @"paperwork",  @"supervisor",    @"trainingProgram", @"site",  @"paid",@"hourlyRate",@"eventIdentifier",@"monthlyLogNotes", nil];
+    NSMutableArray *timeTrackPropertyNamesArray=[NSMutableArray arrayWithObjects:@"dateOfService",  @"time",  @"notes",  @"supervisor",    @"trainingProgram", @"site",  @"eventIdentifier",@"monthlyLogNotes", nil];
     
     if (currentControllerSetup==kTrackAssessmentSetup||currentControllerSetup==kTrackInterventionSetup||currentControllerSetup==kTrackSupportSetup) {
         
+        [timeTrackPropertyNamesArray addObject:@"paperwork"];
+        [timeTrackPropertyNamesArray addObject:@"paid"];
+        [timeTrackPropertyNamesArray addObject:@"hourlyRate"];
         if (currentControllerSetup!=kTrackSupportSetup) {
             [timeTrackPropertyNamesArray addObject:@"clientPresentations"];
             [eventGroup insertPropertyName:@"clientPresentations" atIndex:2];
