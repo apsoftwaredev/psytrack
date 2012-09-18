@@ -514,13 +514,6 @@
 }
 
 
-
--(void)viewDidAppear:(BOOL)animated{
-
-   [[NSNotificationCenter defaultCenter]postNotificationName:@"DrugViewControllerDidAppear" object:nil];
-
-
-}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations

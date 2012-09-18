@@ -36,19 +36,25 @@
       
         NSMutableSet *allRacesSet=[NSMutableSet set];
         int numberOfMulitRaceIndividuals=0;
+        int numberOfNilRaces=0;
         for (int i=0; i<fetchedObjects.count; i++) {
             
             ClientEntity *clientObject=[fetchedObjects objectAtIndex:i];
             NSMutableSet *clientRacesSet=[clientObject mutableSetValueForKeyPath:@"demographicInfo.races"];
-           
-            if (clientRacesSet ) {
-                 [allRacesSet addObject:[NSSet setWithSet:clientRacesSet]];
+            
+            if (clientRacesSet &&clientRacesSet.count>0 ) {
+                [allRacesSet addObject:[NSSet setWithSet:clientRacesSet]];
                 if (clientRacesSet.count>1) {
                     numberOfMulitRaceIndividuals++;
                 }
             }
+            else
+            {
+                numberOfNilRaces++;
+                
+                
+            }
             
-           
             
             
             
@@ -95,32 +101,26 @@
     }
        
         
+         RaceCombinationCount *nilCount=[[RaceCombinationCount alloc]init];
+    nilCount.raceCombinationStr=@"Not Selected";
+    if (numberOfNilRaces>0) {
+        [nilCount setRaceCombinationCount:numberOfNilRaces];
+    }
+    else{
         
-        NSFetchRequest *demographicProfileFetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *demographicProfileEntity = [NSEntityDescription entityForName:@"DemographicProfileEntity" inManagedObjectContext:managedObjectContext];
-        [demographicProfileFetchRequest setEntity:demographicProfileEntity];
+        [nilCount setRaceCombinationCount:0];
         
+    }
+    
+
+    
+             
         
+
         
-        NSError *demError = nil;
-        NSArray *demProfileFetchedObjects = [managedObjectContext executeFetchRequest:demographicProfileFetchRequest error:&demError];
+//    RaceCombinationCount *nilCount=[[RaceCombinationCount alloc]initWithNilSelectionCount:filteredForNull&&filteredForNull.count?filteredForNull.count:0];
+       
         
-        
-        
-        NSArray *filteredForNull=[demProfileFetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"races == nil AND clinician == nil AND client !=nil "]];
-        
-        
-        
-        RaceCombinationCount *nilCount=[[RaceCombinationCount alloc]init];
-        [nilCount setRaceCombinationStr:@"Not Selected"];
-        if (filteredForNull && filteredForNull.count>0) {
-            [nilCount setRaceCombinationCount:filteredForNull.count];
-        }
-        else{
-            
-            nilCount.raceCombinationCount=0;
-            
-        }
         
         
         
@@ -132,12 +132,17 @@ NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil]
         
         NSArray *sortedRaceCombinationArray=[raceCombinatonCountSet.allObjects sortedArrayUsingDescriptors:sortDescriptors];
         [raceMutableArray_ addObjectsFromArray:sortedRaceCombinationArray];
-        if (nilCount.raceCombinationCount>0) {
-             [raceMutableArray_ addObject:nilCount];
-        }
-       
+        
+
+    if (nilCount.raceCombinationCount>0) {
+        [raceMutableArray_ addObject:nilCount];
     }
     
+
+    }
+    
+
+
     return self;
     
 }

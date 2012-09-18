@@ -358,7 +358,7 @@ addStopwatch=(NSDate *)[self.boundObject valueForKey:@"addStopwatch"];
   
    
     needsCommit=TRUE;
-      [self commitChanges];
+     
     stopwatchTextField.text=[stopwatchFormat stringFromDate:addStopwatch];
    
 //   

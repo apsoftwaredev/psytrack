@@ -1993,6 +1993,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
     }
     if (tableViewModel.tag==1){
+        SCTableViewCell *cellAtIndexPath=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+        
+        if (indexPath.row!=NSNotFound && cellAtIndexPath.tag==1) {
+       
         [stopwatchCell invalidateTheTimer];
         [[NSNotificationCenter defaultCenter]
          removeObserver:self];
@@ -2005,8 +2009,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         viewControllerOpen=FALSE;
 
         
-        viewControllerOpen=FALSE;
+       
         [tableViewModel.modeledTableView reloadData];
+            
+        }
         //           [self timerDestroy];
         
         //           stopwatchRunning=nil;
@@ -2723,7 +2729,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     }
     
     
-    if (tableViewModel.tag==1) 
+  else  if (tableViewModel.tag==1)
     {
         
         
@@ -2804,7 +2810,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     
     
-    if (tableViewModel.tag==2) {
+   else if (tableViewModel.tag==2) {
         
         
         
@@ -2921,7 +2927,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
         }
     }
-    if (tableViewModel.tag==3) 
+  else  if (tableViewModel.tag==3)
     {
         
         
@@ -3026,12 +3032,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
         
     if (tableViewModel.tag==1) 
     {
         SCSelectionCell *cell=(SCSelectionCell *)[tableViewModel.modeledTableView cellForRowAtIndexPath:indexPath];
-        
         if (cell.tag==0) {
             if ([cell isKindOfClass:[SCDateCell class]]){
                 serviceDateCell=(SCDateCell *)cell;
@@ -3116,7 +3120,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
             }}
                
-            if ((currentControllerSetup==kTrackSupervisionReceivedSetup||currentControllerSetup==kTrackSupervisionGivenSetup)&& cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&([cellManagedObject.entity.name isEqualToString:@"SupervisionReceivedEntity"]||[cellManagedObject.entity.name isEqualToString:@"SupervisionGivenEntity"] )&& [cell isKindOfClass:[SCObjectSelectionCell class]]&& cell.tag==0) {
+           else if ((currentControllerSetup==kTrackSupervisionReceivedSetup||currentControllerSetup==kTrackSupervisionGivenSetup)&& cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&([cellManagedObject.entity.name isEqualToString:@"SupervisionReceivedEntity"]||[cellManagedObject.entity.name isEqualToString:@"SupervisionGivenEntity"] )&& [cell isKindOfClass:[SCObjectSelectionCell class]]&& cell.tag==0) {
                 
                 SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
                 
@@ -3176,7 +3180,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             }
     
     
-    if (tableViewModel.tag==2) {
+   else if (tableViewModel.tag==2) {
         
         currentDetailTableViewModel=tableViewModel;
 
@@ -3241,7 +3245,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     } 
     
     
-    if (tableViewModel.tag==3) {
+    else if (tableViewModel.tag==3) {
         
         SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;

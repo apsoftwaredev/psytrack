@@ -11,7 +11,24 @@
 @implementation RaceCombinationCount
 @synthesize  raceCombinationCount=raceCombinationCount_, raceCombinationMutableSet=raceCombinationMutableSet_,raceCombinationStr=raceCombinationStr_;
 
+-(id)initWithNilSelectionCount:(NSUInteger)countGiven{
 
+    self=[super init];
+    
+    
+    if (self) {
+        self.raceCombinationStr=@"Not Selected";
+        
+        
+        self.raceCombinationCount=countGiven;
+    }
+    
+    return self;
+
+
+
+
+}
 
 
 -(id)initWithRaceCombinationStr:(NSString *)raceCombinationStrGiven raceMutableSet:(NSMutableSet *)raceMutableSetGiven{

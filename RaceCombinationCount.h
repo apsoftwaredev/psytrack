@@ -23,5 +23,5 @@
 @property (nonatomic, assign) NSUInteger raceCombinationCount;
 
 -(id)initWithRaceCombinationStr:(NSString *)raceCombinationStrGiven raceMutableSet:(NSMutableSet *)raceMutableSetGiven;
-
+-(id)initWithNilSelectionCount:(NSUInteger)countGiven;
 @end

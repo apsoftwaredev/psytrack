@@ -561,20 +561,7 @@
         case 8:
         {
             //@"Drug Database"
-            UITabBar *tabBar=(UITabBar *) [(PTTAppDelegate *)[UIApplication sharedApplication].delegate tabBar];
-            tabBar.userInteractionEnabled=FALSE;            
-            
-            [[NSNotificationCenter defaultCenter]
-             addObserver:prog
-             selector:@selector(stopAnimating)
-             name:@"DrugViewControllerDidAppear"
-             object:nil];
-
-            
-            
-            
-            [NSThread detachNewThreadSelector:@selector(startAnimatingProgressInBackground) toTarget:prog withObject:prog];
-            
+           
             DrugViewController_iPhone *drugViewController_iPhone = [[DrugViewController_iPhone alloc] initWithNibName:@"DrugViewController_iPhone" bundle:nil];
 //           
             
@@ -589,7 +576,7 @@
             [self.navigationController pushViewController:drugViewController_iPhone animated:YES];
             
             
-            tabBar.userInteractionEnabled=TRUE;
+         
            
             
         }
@@ -839,9 +826,11 @@ return headerView;
 
 -(void)drugViewControllerDidFinishLoading{
 
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"DrugViewControllerDidAppear" object:nil];
     [prog stopAnimating];
 
-
+    
+    
 
 }
 - (IBAction) lockScreen: (id) sender;

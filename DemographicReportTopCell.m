@@ -323,7 +323,6 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     NSMutableArray *raceVariablesMutableArray=[NSMutableArray array];
     
     for (RaceCombinationCount *raceCombinationCount in demographicRaceCounts.raceMutableArray ) {
-        
         DemographicVariableAndCount *demVariableAndCountObject=[[DemographicVariableAndCount alloc]init];
         demVariableAndCountObject.variableStr=raceCombinationCount.raceCombinationStr;
         demVariableAndCountObject.variableCountStr=[NSString stringWithFormat:@"%i",raceCombinationCount.raceCombinationCount];
