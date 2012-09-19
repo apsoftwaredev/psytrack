@@ -388,7 +388,7 @@
                     SupervisionTypeSubtypeEntity *supervisionSubType=(SupervisionTypeSubtypeEntity *)trackTypeObjectGiven;
                     
                     self.typeLabelText=supervisionSubType.subType;
-                    
+                    DLog(@"self track type text is  %@",self.typeLabelText);
                     
                     NSArray *allSupervisionReceivedForSubType=nil;
                     if (supervisionSubType.supervisionReceived) {
@@ -465,7 +465,7 @@
         
         if (existingHoursMutableArray&&existingHoursMutableArray.count ) {
             
-           
+           DLog(@"existing hours mutalbe array %@",existingHoursMutableArray);
             
             if(predicateForExistingHoursEntities){
                  self.existingHoursHoursArray=[existingHoursMutableArray filteredArrayUsingPredicate:predicateForExistingHoursEntities];
@@ -1044,7 +1044,7 @@
         
     }
 
-    if ([trackTypeObjectGiven isKindOfClass:[InterventionTypeSubtypeEntity class]]) {
+   else if ([trackTypeObjectGiven isKindOfClass:[InterventionTypeSubtypeEntity class]]) {
 
        
        return  kTrackTypeInterventionSubType;
@@ -1052,21 +1052,21 @@
     }
 
 
-    if ([trackTypeObjectGiven isKindOfClass:[AssessmentTypeEntity class]]) {
+    else if ([trackTypeObjectGiven isKindOfClass:[AssessmentTypeEntity class]]) {
 
         
         return  kTrackTypeAssessment;
 
     }
 
-    if ([trackTypeObjectGiven isKindOfClass:[SupportActivityTypeEntity class]]) {
+    else if ([trackTypeObjectGiven isKindOfClass:[SupportActivityTypeEntity class]]) {
 
         return kTrackTypeSupport;
 
     }
 
 
-    if ([trackTypeObjectGiven isKindOfClass:[SupervisionTypeEntity class]]) {
+   else if ([trackTypeObjectGiven isKindOfClass:[SupervisionTypeEntity class]]) {
 
         
        return  kTrackTypeSupervision;
@@ -1074,7 +1074,7 @@
     }
 
 
-    if ([trackTypeObjectGiven isKindOfClass:[SupervisionTypeSubtypeEntity class]]) {
+    else if ([trackTypeObjectGiven isKindOfClass:[SupervisionTypeSubtypeEntity class]]) {
 
        
        return   kTrackTypeSupervisionSubType;
@@ -1224,6 +1224,8 @@
                     trackTotalSupervisionReceivedTimeInterval=[self totalTimeIntervalForTrackArray:self.supervisionReceivedArray predicate:trackPredicate];
                 
                 totalExistingSupervisionReceivedTI=[self totalTimeIntervalForExistingHoursArray:filteredExistingHoursArray keyPath:kTrackKeyPathForExistingHoursSupervisionReceivedHours];
+                
+             
                 break;
 
 
@@ -1439,7 +1441,7 @@
             if (trackType_==kTrackTypeSupervision||trackType_==kTrackTypeSupervisionSubType) {
                 self.totalToDateTI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
             }
-            
+            DLog(@"total time str %@",self.totalToDateStr);
             
             self.totalToDateStr=[self totalTimeStr:self.totalToDateTI];
             

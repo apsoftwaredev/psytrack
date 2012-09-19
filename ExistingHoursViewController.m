@@ -749,7 +749,7 @@
          supervisionTypePropertyDef.autoValidate=NO;
        
         //set the title property name
-        supervisionDef.titlePropertyName=@"supervisionType.supervisionType;groupHours;individualHours";
+        supervisionDef.titlePropertyName=@"supervisionType.supervisionType;subType.subType";
         supervisionDef.titlePropertyNameDelimiter=@" - ";
         
         
@@ -2234,7 +2234,7 @@ BOOL valid=NO;
             
         
             
-            if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&([sectionManagedObject.entity.name isEqualToString:@"ExistingSupervisionReceivedEntity"]||[sectionManagedObject.entity.name isEqualToString:@"ExistingSupervisionGivenEntity"])&&objectSection.cellCount>1) {
+           else if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&([sectionManagedObject.entity.name isEqualToString:@"ExistingSupervisionReceivedEntity"]||[sectionManagedObject.entity.name isEqualToString:@"ExistingSupervisionGivenEntity"])&&objectSection.cellCount>1) {
                 
                 SCTableViewCell *cellAtFour=(SCTableViewCell *)[objectSection cellAtIndex:1];
                 if ([cellAtFour isKindOfClass:[SCObjectSelectionCell class]]) {
@@ -2255,7 +2255,7 @@ BOOL valid=NO;
                             NSPredicate *predicate = [NSPredicate predicateWithFormat:
                                                       @"supervisionType.supervisionType like %@",[NSString stringWithString:(NSString *) selectedSupervisionType.supervisionType]]; 
                             
-                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"supervisionSubType" sortAscending:YES filterPredicate:predicate];
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"subType" sortAscending:YES filterPredicate:predicate];
                             
                             objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                             
