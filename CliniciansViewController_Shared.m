@@ -3506,11 +3506,14 @@
         self.currentDetailTableViewModel=tableViewModel;
     }
 
-    if (tableViewModel.tag==0) {
-        selectedVariableName=nil;
+   else if (tableViewModel.tag==0) {
+        
         self.currentDetailTableViewModel=nil;
     }
 
+   else if (tableViewModel.tag==3) {
+        selectedVariableName=nil;
+    }
 }
 
 //- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

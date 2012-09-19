@@ -1176,13 +1176,15 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    if (tableModel.tag==0) {
+    if (tableModel.tag==2) {
         selectedDisorder=nil;
-        selectedVariableName=nil;
+        
     }
 
 
-
+    if (tableModel.tag==3) {
+        selectedVariableName=nil;
+    }
 
 
 }

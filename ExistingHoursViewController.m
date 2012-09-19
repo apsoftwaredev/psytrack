@@ -2019,7 +2019,11 @@ BOOL valid=NO;
         //            }
         UILabel *totalLabel=(UILabel *)[cell viewWithTag:76];
         NSTimeInterval directHoursTimeInterval=[self totalTimeTIForHoursArray:interventionHoursArray]+[self totalTimeTIForHoursArray:assessmentHoursArray];
-        totalLabel.text=[NSString stringWithFormat:@"%i:%i Total Direct",[self totalHours:directHoursTimeInterval],[self totalMinutes:directHoursTimeInterval]];
+       
+                    NSInteger totalDirectMinutes=[self totalMinutes:directHoursTimeInterval];
+        NSString *directMinutesStr=[self totalMinutesStrFromMinutesInteger:totalDirectMinutes];
+                    
+        totalLabel.text=[NSString stringWithFormat:@"%i:%@ Total Direct",[self totalHours:directHoursTimeInterval],directMinutesStr];
         
         
         //                cell.textLabel.text=[NSString stringWithFormat:@"%@ - %@; %@ hrs Assessment; %@ hrs Intervention",[dateFormatter stringFromDate:startDate],[dateFormatter stringFromDate:endDate],assessmentSum, interventionSum];
@@ -2622,16 +2626,7 @@ BOOL valid=NO;
         NSString *totalHoursStr=[NSString stringWithFormat:@"%i",[self totalHours:totalTime]];
         int totalMinutes=[self totalMinutes:totalTime];
         
-        NSString *totalMinutesStr=nil;
-        if (totalMinutes<10 && totalMinutes>=0 ) {
-             totalMinutesStr=[NSString stringWithFormat:@":0%i",totalMinutes];
-        }
-        else if (totalMinutes>9){
-             totalMinutesStr=[NSString stringWithFormat:@":%i",totalMinutes];
-        }
-        else {
-            totalMinutesStr=@":00";
-        }
+        NSString *totalMinutesStr=[self totalMinutesStrFromMinutesInteger:totalMinutes];
         return [totalHoursStr stringByAppendingString:totalMinutesStr];
 
     }
@@ -2641,7 +2636,23 @@ BOOL valid=NO;
    
     
 }
+-(NSString *)totalMinutesStrFromMinutesInteger:(NSInteger)totalMinutes{
 
+    NSString *totalMinutesStr=nil;
+    if (totalMinutes<10 && totalMinutes>=0 ) {
+        totalMinutesStr=[NSString stringWithFormat:@":0%i",totalMinutes];
+    }
+    else if (totalMinutes>9){
+        totalMinutesStr=[NSString stringWithFormat:@":%i",totalMinutes];
+    }
+    else {
+        totalMinutesStr=@":00";
+    }
+
+    return totalMinutesStr;
+
+
+}
 -(NSString *)totalTimeStrFromHoursDate:(NSDate *)hours{
 
 
@@ -2697,14 +2708,14 @@ BOOL valid=NO;
 }
 
 
--(int )totalHours:(NSTimeInterval) totalTime{
+-(NSInteger )totalHours:(NSTimeInterval) totalTime{
     
     
     return totalTime/3600;
     
 }
 
--(int )totalMinutes:(NSTimeInterval) totalTime{
+-(NSInteger )totalMinutes:(NSTimeInterval) totalTime{
     
     
     return round(((totalTime/3600) -[self totalHours:totalTime])*60);;
