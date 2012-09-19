@@ -1024,21 +1024,76 @@
     }
    
     
-    if (decryptedData.length) {
-         [decryptedData writeToURL:drugsStoreURL atomically:YES];
-    }
-   
+        
+
+    if ( decryptedData.length) {
+        
+        NSPersistentStoreCoordinator *drugsPersistentStoreCoordinator=(NSPersistentStoreCoordinator *)appDelegate.drugsPersistentStoreCoordinator;
+        
+        NSPersistentStore *drugsPersistentStore=[drugsPersistentStoreCoordinator persistentStoreForURL:drugsStoreURL];
+        
+        
+        if (drugsPersistentStore) {
+              NSError *error = nil;
+            [drugsPersistentStoreCoordinator removePersistentStore:drugsPersistentStore error:&error];
+            
+            
+        }
+        BOOL fileWritten=   [decryptedData writeToURL:drugsStoreURL atomically:YES];
+        if (fileWritten) {
+      
+            NSError *drugError = nil;
+           
+           
+            if (![drugsPersistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:@"DrugsConfig" URL:drugsStoreURL options:nil error:&drugError])
+            {
+                /*
+                 Replace this implementation with code to handle the error appropriately.
+                 
+                 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                 
+                 Typical reasons for an error here include:
+                 * The persistent store is not accessible;
+                 * The schema for the persistent store is incompatible with current managed object model.
+                 Check the error message to determine what the actual problem was.
+                 
+                 
+                 If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
+                 
+                 If you encounter schema incompatibility errors during development, you can reduce their frequency by:
+                 * Simply deleting the existing store:
+                 [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
+                 
+                 * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
+                 [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+                 
+                 Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
+                 
+                 */
+                if([appDelegate.managedObjectContext hasChanges]){
+                
+                    [appDelegate saveContext];
+                
+                
+                }
+                [appDelegate displayNotification:@"Error Setting Up the Drug Database, please restart"];
+                abort();
+            }
+            else{
+                for (NSManagedObject *managedObject in drugsManagedObjectContext.registeredObjects) {
+                    [drugsManagedObjectContext refreshObject:managedObject mergeChanges:NO];
+                }
+            }
     
-
-    if (drugsManagedObjectContext) {
-        drugsManagedObjectContext=nil;
-
-
+        
+        }
+        
+    }
 //        NSPersistentStore *persistentStore=(NSPersistentStore *)[appDelegate.drugsPersistentStoreCoordinator.persistentStores objectAtIndex:0];
         
 //        NSError *error;
 //        [appDelegate.drugsPersistentStoreCoordinator removePersistentStore:(NSPersistentStore *)persistentStore error:&error ];
-//        
+//
 //        if (![drugsManagedObjectContext.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:@"DrugsConfig" URL:drugsStoreURL options:nil error:&error])
 //        {
 //            
@@ -1053,9 +1108,9 @@
 //        [appDelegate drugsManagedObjectModel]=nil;
 //        [drugsManagedObjectContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
 
-        [appDelegate resetDrugsModel];
+//        [appDelegate resetDrugsModel];
         
-        drugsManagedObjectContext=(NSManagedObjectContext *)[appDelegate drugsManagedObjectContext];
+//        drugsManagedObjectContext=(NSManagedObjectContext *)[appDelegate drugsManagedObjectContext];
 //        NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:drugsManagedObjectContext];
         
        
@@ -1082,12 +1137,12 @@
 //        NSArray *itemsArray=(NSArray *)tableModel.items;
 //        itemsArray=drugsMutableArray;
         
-    } 
-    objectsModel=nil;
-    self.tableViewModel=nil;
-    [self viewDidLoad];
+    
+   
+    
+    
     [objectsModel reloadBoundValues];
-    [self.tableView reloadData];
+    [objectsModel.modeledTableView reloadData];
     
     downloadButton_.hidden=YES;
     downloadStopButton_.hidden=YES;

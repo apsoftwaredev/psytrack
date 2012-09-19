@@ -2747,13 +2747,8 @@ duration:(NSTimeInterval)1.0];
                         
                         abort();
                     }   
-                    else 
-                    {
-                        
-                      
-                        
-                    }    
-
+                   
+                  
                     
                 
     }
