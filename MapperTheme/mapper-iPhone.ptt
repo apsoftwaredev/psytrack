@@ -1,8 +1,4 @@
 
-UINavigationBar
-{
-    backgroundImage: "menubar-full.png";
-}
 
 navigationItemTitleLabel
 {

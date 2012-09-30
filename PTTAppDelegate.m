@@ -98,7 +98,7 @@
 @synthesize colorSwitcher;
 @synthesize stopScrollingMonthlyPracticumLog;
 @synthesize changedPassword,changedToken;
-
+@synthesize drugViewControllerIsInDetailSubview;
 
 + (PTTAppDelegate *)appDelegate {
 	return (PTTAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -308,7 +308,7 @@
     else {
         [UIApplication sharedApplication].statusBarStyle=UIStatusBarStyleBlackTranslucent;
         
-        backgroundPattern=[UIImage imageNamed:@"bg-blue.png"];
+        backgroundPattern=[UIImage imageNamed:@"ipad-background-blue-plain-small.png"];
          tabBarImageNameStr=@"tabbar.png";
     }
     
@@ -361,7 +361,16 @@
     
     managedObjectContext__=[self managedObjectContext];
    
+    if (self.tabBarController.view) {
+        [self.tabBarController.view removeFromSuperview];
+        
+        
+    }
    
+                        
+    
+                        
+                        
 #if !TARGET_IPHONE_SIMULATOR
     // Add registration for remote notifications
 	[[UIApplication sharedApplication] 
@@ -449,7 +458,9 @@
     [[UISlider appearance] setThumbImage:thumbImage 
                                 forState:UIControlStateNormal];
 
-       
+    [[UISearchBar appearance] setBackgroundImage:navBarImage ];
+    
+    
 }
 
 
@@ -716,14 +727,18 @@
         [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:containerView];
         
     }else if (!isAppLocked &&!isLockedAtStartup) {
-        
-        statusMessage=@"Welcome. Ready to use now.";
-        [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:nil];
+        if (resetDatabase) {
+            statusMessage=@"Reset Database. Ready to use now.";
+        }
+        else {
+            statusMessage=@"Welcome. Ready to use now.";
+        }
+            [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:nil];
         tabBarController.tabBar.userInteractionEnabled=YES;
         for (UIViewController *viewControllerInArray in tabBarController.viewControllers) {
             viewControllerInArray.view.userInteractionEnabled=YES;
         }
-//        [self.window addSubview:self.tabBarController.view];
+        [self.window addSubview:self.tabBarController.view];
         
          [self flashAppTrainAndTitleGraphics];
        
@@ -1009,7 +1024,9 @@
 
 -(BOOL)setupDefaultSymetricData:(BOOL)reset{
     
-   
+    if (!encryption_) {
+        self.encryption=[[PTTEncryption alloc]init];
+    }
   
     
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
@@ -1018,7 +1035,7 @@
     BOOL success=NO;
     
         NSData *passcodeData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE];
-        if (!passcodeData&&!reset) {
+        if (!passcodeData) {
        
             success= [wrapper createKeychainValueWithData:[encryption_ getHashBytes:[self convertStringToData: @"o6fjZ4dhvKIUYVmaqnNJIPCBE2"]] forIdentifier:K_LOCK_SCREEN_PASSCODE];
 //           passcodeData = [wrapper searchKeychainCopyMatching:@"Passcode"];
@@ -1130,6 +1147,133 @@
     return returnStr;
 }
 
+-(NSString *)resetDefaultLockKeychainSettingsWithReset:(BOOL)reset{
+    
+    
+    
+    NSString *statusMessage=nil;
+    
+    
+    
+    KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
+    //
+   
+    NSData *pascodeOnData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE_IS_ON];
+    if (!pascodeOnData) {
+        
+        [wrapper newSearchDictionary:K_LOCK_SCREEN_PASSCODE_IS_ON];
+        [wrapper createKeychainValue:[NSString stringWithFormat:@"%i", NO] forIdentifier:K_LOCK_SCREEN_PASSCODE_IS_ON];
+        statusMessage=@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase.";
+        firstRun=YES;
+        
+    }else if(reset) {
+        
+        
+        
+            [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",NO] forIdentifier:K_LOCK_SCREEN_PASSCODE_IS_ON];
+    
+        
+        
+            statusMessage=@"Lock Settings Reset.";
+        
+    }
+    
+    
+    NSData *tokenData = [wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN];
+    if (!tokenData) {
+        
+        [wrapper newSearchDictionary:K_CURRENT_SHARED_TOKEN];
+        [wrapper createKeychainValue:[NSString stringWithFormat:@"kd8934ngolKjhv7yknlk"] forIdentifier:K_CURRENT_SHARED_TOKEN];
+        
+    }else if(reset) {
+        
+        
+        
+                [wrapper updateKeychainValue:[NSString stringWithFormat:@"kd8934ngolKjhv7yknlk"] forIdentifier:K_CURRENT_SHARED_TOKEN];
+        
+        
+        
+                statusMessage=@"Lock Settings Reset.";
+        
+    }
+    
+    
+    
+    NSData *currentKeyStringData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_CURRENT_KEYSTRING];
+    if (!currentKeyStringData) {
+        
+        [wrapper newSearchDictionary:K_LOCK_SCREEN_CURRENT_KEYSTRING];
+        [wrapper createKeychainValue:[self generateExposedKey] forIdentifier:K_LOCK_SCREEN_CURRENT_KEYSTRING];
+        
+        
+    }else if(reset) {
+        
+        
+        
+                [wrapper updateKeychainValue:[self generateExposedKey] forIdentifier:K_LOCK_SCREEN_CURRENT_KEYSTRING];
+        
+        
+    }
+    
+    
+    
+    
+    NSData *lockScreenPassCodeData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE];
+    if (!lockScreenPassCodeData) {
+        
+        [self setupDefaultSymetricData: NO];
+        
+    }else if(reset) {
+        
+                [self setupDefaultSymetricData:YES];
+    }
+    
+    
+    NSData *lockScreenAttemptData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_ATTEMPT];
+    if (!lockScreenAttemptData) {
+        
+        [wrapper newSearchDictionary:K_LOCK_SCREEN_ATTEMPT];
+        [wrapper createKeychainValue:[NSString stringWithFormat:@"%i",0] forIdentifier:K_LOCK_SCREEN_ATTEMPT];
+        
+        
+    }else if(reset) {
+                 [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",0] forIdentifier:K_LOCK_SCREEN_ATTEMPT];
+    }
+    
+    NSData *lockScreenStartupData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_LOCK_AT_STARTUP];
+    if (!lockScreenStartupData) {
+        
+        [wrapper newSearchDictionary:K_LOCK_SCREEN_LOCK_AT_STARTUP];
+        [wrapper createKeychainValue:[NSString stringWithFormat:@"%i", NO] forIdentifier:K_LOCK_SCREEN_LOCK_AT_STARTUP];
+        
+    }else if(reset) {
+                [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",NO] forIdentifier:K_LOCK_SCREEN_LOCK_AT_STARTUP];
+    }
+    
+    NSData *lockScreenTimerOnData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_TIMER_ON];
+    if (!lockScreenTimerOnData) {
+        
+        [wrapper newSearchDictionary:K_LOCK_SCREEN_TIMER_ON];
+        [wrapper createKeychainValue:[NSString stringWithFormat:@"%i", NO] forIdentifier:K_LOCK_SCREEN_TIMER_ON];
+        
+    }else if(reset) {
+                [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",NO] forIdentifier:K_LOCK_SCREEN_TIMER_ON];
+    }
+    
+    
+    NSData *lockScreenLockedData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_LOCKED];
+    
+    if (!lockScreenLockedData) {
+        
+        [wrapper newSearchDictionary:K_LOCK_SCREEN_LOCKED];
+        [wrapper createKeychainValue:[NSString stringWithFormat:@"%i", NO] forIdentifier:K_LOCK_SCREEN_LOCKED];
+    }else if(reset) {
+                 [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",NO] forIdentifier:K_LOCK_SCREEN_LOCKED];
+        
+    } 
+    
+    return statusMessage;
+}
 
 
 -(NSString *)setupDefaultLockKeychainSettingsWithReset:(BOOL)reset{
@@ -1150,9 +1294,13 @@
         [wrapper createKeychainValue:[NSString stringWithFormat:@"%i", NO] forIdentifier:K_LOCK_SCREEN_PASSCODE_IS_ON];
       statusMessage=@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase.";
         
-    }else if(reset) {
-       
-        
+    }
+    
+    
+    if (firstRun) {
+        statusMessage=@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase.";
+    }
+    
 //            
 //           [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",NO] forIdentifier:K_LOCK_SCREEN_PASSCODE_IS_ON];
 //       
@@ -1160,7 +1308,7 @@
        
 //        statusMessage=@"Lock Settings Reset.";
         
-    }
+
     
     
     NSData *tokenData = [wrapper searchKeychainCopyMatching:K_CURRENT_SHARED_TOKEN];
@@ -2432,7 +2580,7 @@ duration:(NSTimeInterval)1.0];
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
-    [self saveContextsAndSettings];
+    [self saveContext];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -2450,27 +2598,32 @@ duration:(NSTimeInterval)1.0];
     application.applicationIconBadgeNumber = 0;
     
 }
--(void)saveContextsAndSettings{
 
-    [self saveContext];
-    
-//    [self saveDrugsContext];
-//    [self saveLockDictionarySettings];
-
-
-}
 
 -(void)displayMemoryWarning{
 
 
-    [self displayNotification:@"Memory Warning Received.  Try closing some open applications that are not needed at this time and restarting the application." forDuration:0 location:kPTTScreenLocationMiddle inView:nil];
-    
+    [self displayNotification:@"Memory Warning Received.  Try closing some open applications that are not needed at this time and restarting the application." forDuration:15.0 location:kPTTScreenLocationMiddle inView:nil];
+  
+    if (!self.drugViewControllerIsInDetailSubview) {
+  
     NSFileManager *fileManager=[[NSFileManager alloc]init];
     NSError *error=nil;
-   [ fileManager removeItemAtURL:[self applicationDrugsFileURL] error:&error];
 
+    if (__drugsPersistentStoreCoordinator&&__drugsPersistentStoreCoordinator.persistentStores.count) {
+      
+        NSPersistentStore *drugsPersisstentStore=[__drugsPersistentStoreCoordinator.persistentStores objectAtIndex:0];
+        
+        [__drugsPersistentStoreCoordinator removePersistentStore:drugsPersisstentStore  error:nil];
+        
+        __drugsPersistentStoreCoordinator=nil;
+        __drugsManagedObjectContext=nil;
+        __drugsManagedObjectModel=nil;
+    }
+   [ fileManager removeItemAtURL:[self applicationDrugsFileURL] error:&error];
+    }
     
-    [self saveContextsAndSettings];
+    [self saveContext];
 
 
 
@@ -2479,7 +2632,7 @@ duration:(NSTimeInterval)1.0];
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
-    [self saveContextsAndSettings];
+    [self saveContext];
 }
 
 - (void)saveContext
@@ -5439,130 +5592,6 @@ return [self applicationDrugsDirectory].path;
 }
 
 
-/**
- Returns the persistent store coordinator for the application.
- If the coordinator doesn't already exist, it is created and the application's store added to it.
- */
-//- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-//	
-//    if (persistentStoreCoordinator__ != nil) {
-//        return persistentStoreCoordinator__;
-//    }
-//    
-//    // assign the PSC to our app delegate ivar before adding the persistent store in the background
-//    // this leverages a behavior in Core Data where you can create NSManagedObjectContext and fetch requests
-//    // even if the PSC has no stores.  Fetch requests return empty arrays until the persistent store is added
-//    // so it's possible to bring up the UI and then fill in the results later
-//    persistentStoreCoordinator__ = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-//    
-//    
-//    // prep the store path and bundle stuff here since NSBundle isn't totally thread safe
-//    NSPersistentStoreCoordinator* psc = persistentStoreCoordinator__;
-//	NSString *storePath = [[self applicationDocumentsDirectoryString] stringByAppendingPathComponent:@"psyTrack.sqlite"];
-//    
-//    // do this asynchronously since if this is the first time this particular device is syncing with preexisting
-//    // iCloud content it may take a long long time to download
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        
-//        NSURL *ubiq = [[NSFileManager defaultManager] 
-//                       URLForUbiquityContainerIdentifier:nil];
-//        if (ubiq) {
-//            
-//            // TODO: Load document... 
-//        
-//        
-//        NSFileManager *fileManager = [NSFileManager defaultManager];
-//        
-//        NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
-//        // this needs to match the entitlements and provisioning profile
-//        NSURL *cloudURL = [fileManager URLForUbiquityContainerIdentifier:nil];
-//        NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"recipes_v3"];
-//        cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
-//        
-//        //  The API to turn on Core Data iCloud support here.
-//        NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:@"com.apple.coredata.examples.recipes.3", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];
-//        
-//        NSError *error = nil;
-//        
-//        [psc lock];
-//        if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
-//            /*
-//             Replace this implementation with code to handle the error appropriately.
-//             
-//             abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-//             
-//             Typical reasons for an error here include:
-//             * The persistent store is not accessible
-//             * The schema for the persistent store is incompatible with current managed object model
-//             Check the error message to determine what the actual problem was.
-//             */
-//            
-//            abort();
-//        }    
-//        [psc unlock];
-//        
-//        // tell the UI on the main thread we finally added the store and then
-//        // post a custom notification to make your views do whatever they need to such as tell their
-//        // NSFetchedResultsController to -performFetch again now there is a real store
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            
-//            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData" object:self userInfo:nil];
-//        });
-//            
-//            
-//        } 
-//        else 
-//        
-//        {
-//            
-//            
-//            
-//            NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"psyTrack.sqlite"];
-//            
-//            NSError *error = nil;
-//            
-//           
-//            
-//            
-//            
-//
-//
-//            
-//           
-//            if (![persistentStoreCoordinator__ addPersistentStoreWithType:NSSQLiteStoreType configuration:@"main" URL:storeURL options:nil error:&error])
-//            {
-//                /*
-//                 Replace this implementation with code to handle the error appropriately.
-//                 
-//                 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-//                 
-//                 Typical reasons for an error here include:
-//                 * The persistent store is not accessible;
-//                 * The schema for the persistent store is incompatible with current managed object model.
-//                 Check the error message to determine what the actual problem was.
-//                 
-//                 
-//                 If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
-//                 
-//                 If you encounter schema incompatibility errors during development, you can reduce their frequency by:
-//                 * Simply deleting the existing store:
-//                 [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
-//                 
-//                 * Performing automatic lightweight migration by passing the following dictionary as the options parameter: 
-//                 [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
-//                 
-//                 Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-//                 
-//                 */
-//                
-//                abort();
-//            }   
-//
-//        }
-//    });
-//    
-//    return persistentStoreCoordinator__;
-//}
 
 -(BOOL)reachable {
     Reachability *r = [Reachability reachabilityWithHostName:@"google.com"];
@@ -5607,6 +5636,19 @@ return [self applicationDrugsDirectory].path;
             NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
             if (defaultStorePath) {
                 [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
+                NSString *statusMessage=[self resetDefaultLockKeychainSettingsWithReset:YES];
+                if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."]) {
+                    NSString *displaymessage=[NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
+                    [self displayNotification:displaymessage];
+                    resetDatabase=YES;
+                }
+                else{
+                
+                    firstRun=YES;
+                
+                }
+                
+                
             }
         }
         NSURL *storeUrl = [NSURL fileURLWithPath:storePath];

@@ -374,6 +374,22 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
             
             
         }
+        CGRect supervisionTableViewFrame= self.supervisionReceivedTypesTableView.frame;
+
+        CGSize supervisionTVSize=[self supervisionTypesTableViewContentSize];
+        
+        supervisionTableViewFrame.size.height=supervisionTVSize.height;
+        self.supervisionReceivedTypesTableView.frame=supervisionTableViewFrame;
+        
+        CGRect supportTableViewFrame= self.supportActivitieTypesTableView.frame;
+        
+        CGSize supportTVSize=[self supportTypesTableViewContentSize];
+        
+        supportTableViewFrame.size.height=supportTVSize.height;
+        self.supportActivitieTypesTableView.frame=supportTableViewFrame;
+        
+
+        
         
         CGRect signaturesViewFrame =self.signaturesView.frame;
         signaturesViewFrame.origin.y=self.containerForSignaturesAndSupervisorSummaries.frame.size.height-signaturesViewFrame.size.height;

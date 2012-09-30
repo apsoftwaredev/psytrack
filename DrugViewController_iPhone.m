@@ -415,7 +415,35 @@
     
     
 }
+-(void)didReceiveMemoryWarning{
 
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    if (!appDelegate.drugViewControllerIsInDetailSubview) {
+       objectsModel=nil;
+    
+     NSArray *productFetchedObjects=[NSArray array];
+    if (isInDetailSubview) {
+        objectsModel=[[SCArrayOfObjectsModel_UseSelectionSection alloc]initWithTableView:self.tableView items:[NSMutableArray arrayWithArray:productFetchedObjects] itemsDefinition:drugDef];
+        
+        
+    }
+    else {
+        objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView items:[NSMutableArray arrayWithArray:productFetchedObjects] itemsDefinition:drugDef];
+    }
+    self.tableViewModel = objectsModel;
+    [self.tableViewModel reloadBoundValues];
+    drugsManagedObjectContext=nil;
+
+[objectsModel.modeledTableView reloadData];
+    CGFloat localDbBytes=(CGFloat )0.1;
+    UINavigationItem *navigationItem=(UINavigationItem *)self.navigationItem;
+    
+    navigationItem.title=[NSString stringWithFormat:@"Drugs %0.1f MB", localDbBytes/1048576];
+    
+    }
+
+}
 //-()sea
 -(void)viewButtonTapped{
 
@@ -454,8 +482,13 @@
     [newRequewst setEntity:productEntityDesc];
        
     NSError *productError = nil;
-    NSArray *productFetchedObjects;
-    
+    NSArray *productFetchedObjects=[NSArray array];
+        if (!drugsManagedObjectContext) {
+            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+            
+
+            drugsManagedObjectContext=[appDelegate drugsManagedObjectContext];
+        }
     if ([drugsManagedObjectContext countForFetchRequest:newRequewst error:&productError]) {
         
         productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:newRequewst error:&productError];
@@ -466,7 +499,8 @@
     
     
     [objectsModel removeAllSections];
-    if (isInDetailSubview) {
+ 
+        if (isInDetailSubview) {
          objectsModel=[[SCArrayOfObjectsModel_UseSelectionSection alloc]initWithTableView:self.tableView items:[NSMutableArray arrayWithArray:productFetchedObjects] itemsDefinition:drugDef];
     
 
@@ -1348,11 +1382,22 @@ else
     
  
 }
+
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewDidDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+
+    if (tableModel.tag==0) {
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        appDelegate.drugViewControllerIsInDetailSubview=NO;
+    }
+
+}
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-    
+    appDelegate.drugViewControllerIsInDetailSubview=YES;
     
     if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;

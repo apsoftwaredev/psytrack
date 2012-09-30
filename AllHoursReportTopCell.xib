@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1296</int>
-		<string key="IBDocument.SystemVersion">12B19</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
-		<string key="IBDocument.AppKitVersion">1187</string>
-		<string key="IBDocument.HIToolboxVersion">624.00</string>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">12C54</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1498</string>
+			<string key="NS.object.0">1926</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -69,6 +69,7 @@
 												<object class="NSColor" key="IBUITextColor" id="610234467">
 													<int key="NSColorSpace">1</int>
 													<bytes key="NSRGB">MCAwIDAAA</bytes>
+													<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
 												</object>
 												<nil key="IBUIHighlightedColor"/>
 												<int key="IBUIBaselineAdjustment">0</int>
@@ -85,6 +86,7 @@
 													<double key="NSSize">19</double>
 													<int key="NSfFlags">16</int>
 												</object>
+												<double key="preferredMaxLayoutWidth">678</double>
 											</object>
 											<object class="IBUILabel" id="455787630">
 												<reference key="NSNextResponder" ref="801663449"/>
@@ -323,6 +325,7 @@
 																<int key="IBUILineBreakMode">0</int>
 																<reference key="IBUIFontDescription" ref="709505375"/>
 																<reference key="IBUIFont" ref="667443624"/>
+																<double key="preferredMaxLayoutWidth">127</double>
 															</object>
 														</array>
 														<string key="NSFrame">{{194, 0}, {665, 82}}</string>
@@ -439,6 +442,7 @@
 																			<double key="NSSize">17</double>
 																			<int key="NSfFlags">16</int>
 																		</object>
+																		<double key="preferredMaxLayoutWidth">127</double>
 																	</object>
 																</array>
 																<string key="NSFrame">{{0, 84}, {665, 31}}</string>
@@ -546,6 +550,7 @@
 																		<int key="IBUILineBreakMode">0</int>
 																		<reference key="IBUIFontDescription" ref="780479122"/>
 																		<reference key="IBUIFont" ref="676260377"/>
+																		<double key="preferredMaxLayoutWidth">127</double>
 																	</object>
 																</array>
 																<string key="NSFrame">{{0, 83}, {665, 31}}</string>
@@ -636,6 +641,7 @@
 																<int key="IBUILineBreakMode">0</int>
 																<reference key="IBUIFontDescription" ref="709505375"/>
 																<reference key="IBUIFont" ref="667443624"/>
+																<double key="preferredMaxLayoutWidth">127</double>
 															</object>
 														</array>
 														<string key="NSFrame">{{193, 302}, {665, 82}}</string>
@@ -704,6 +710,7 @@
 																<int key="IBUILineBreakMode">0</int>
 																<reference key="IBUIFontDescription" ref="709505375"/>
 																<reference key="IBUIFont" ref="667443624"/>
+																<double key="preferredMaxLayoutWidth">127</double>
 															</object>
 														</array>
 														<string key="NSFrame">{{193, 414}, {665, 82}}</string>
@@ -793,6 +800,7 @@
 																		<int key="IBUILineBreakMode">0</int>
 																		<reference key="IBUIFontDescription" ref="780479122"/>
 																		<reference key="IBUIFont" ref="676260377"/>
+																		<double key="preferredMaxLayoutWidth">127</double>
 																	</object>
 																</array>
 																<string key="NSFrame">{{0, 83}, {665, 31}}</string>
@@ -804,7 +812,7 @@
 																<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 															</object>
 														</array>
-														<string key="NSFrame">{{193, 504}, {665, 100}}</string>
+														<string key="NSFrame">{{193, 504}, {665, 83}}</string>
 														<reference key="NSSuperview" ref="640083504"/>
 														<reference key="NSWindow"/>
 														<reference key="NSNextKeyView" ref="703990182"/>
@@ -900,9 +908,10 @@
 																		<int key="IBUILineBreakMode">0</int>
 																		<reference key="IBUIFontDescription" ref="780479122"/>
 																		<reference key="IBUIFont" ref="676260377"/>
+																		<double key="preferredMaxLayoutWidth">127</double>
 																	</object>
 																</array>
-																<string key="NSFrame">{{0, 93}, {665, 31}}</string>
+																<string key="NSFrame">{{0, 83}, {665, 31}}</string>
 																<reference key="NSSuperview" ref="1018355134"/>
 																<reference key="NSWindow"/>
 																<reference key="NSNextKeyView" ref="307781044"/>
@@ -911,7 +920,7 @@
 																<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 															</object>
 														</array>
-														<string key="NSFrame">{{193, 598}, {665, 124}}</string>
+														<string key="NSFrame">{{193, 607}, {665, 89}}</string>
 														<reference key="NSSuperview" ref="640083504"/>
 														<reference key="NSWindow"/>
 														<reference key="NSNextKeyView" ref="660181891"/>
@@ -978,6 +987,7 @@
 																<int key="IBUILineBreakMode">0</int>
 																<reference key="IBUIFontDescription" ref="709505375"/>
 																<reference key="IBUIFont" ref="667443624"/>
+																<double key="preferredMaxLayoutWidth">127</double>
 															</object>
 														</array>
 														<string key="NSFrame">{{193, 730}, {665, 82}}</string>
@@ -1118,6 +1128,7 @@
 								<int key="IBUILineBreakMode">0</int>
 								<reference key="IBUIFontDescription" ref="366061912"/>
 								<reference key="IBUIFont" ref="653180349"/>
+								<double key="preferredMaxLayoutWidth">125</double>
 							</object>
 						</array>
 						<string key="NSFrame">{{535, 1}, {128, 33}}</string>
@@ -1338,6 +1349,7 @@
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="780479122"/>
 						<reference key="IBUIFont" ref="676260377"/>
+						<double key="preferredMaxLayoutWidth">262</double>
 					</object>
 					<object class="IBUILabel" id="915291122">
 						<reference key="NSNextResponder" ref="837410159"/>
@@ -1363,6 +1375,7 @@
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="184305262"/>
 						<reference key="IBUIFont" ref="859902433"/>
+						<double key="preferredMaxLayoutWidth">1048</double>
 					</object>
 					<object class="IBUILabel" id="888294444">
 						<reference key="NSNextResponder" ref="837410159"/>
@@ -1388,6 +1401,7 @@
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="780479122"/>
 						<reference key="IBUIFont" ref="676260377"/>
+						<double key="preferredMaxLayoutWidth">261</double>
 					</object>
 					<object class="IBUILabel" id="92803177">
 						<reference key="NSNextResponder" ref="837410159"/>
@@ -1413,6 +1427,7 @@
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="780479122"/>
 						<reference key="IBUIFont" ref="676260377"/>
+						<double key="preferredMaxLayoutWidth">261</double>
 					</object>
 					<object class="IBUILabel" id="145899792">
 						<reference key="NSNextResponder" ref="837410159"/>
@@ -1438,6 +1453,7 @@
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="780479122"/>
 						<reference key="IBUIFont" ref="676260377"/>
+						<double key="preferredMaxLayoutWidth">261</double>
 					</object>
 					<object class="IBUILabel" id="147758704">
 						<reference key="NSNextResponder" ref="837410159"/>
@@ -1463,6 +1479,7 @@
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="184305262"/>
 						<reference key="IBUIFont" ref="859902433"/>
+						<double key="preferredMaxLayoutWidth">261</double>
 					</object>
 					<object class="IBUILabel" id="559461724">
 						<reference key="NSNextResponder" ref="837410159"/>
@@ -1488,6 +1505,7 @@
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="184305262"/>
 						<reference key="IBUIFont" ref="859902433"/>
+						<double key="preferredMaxLayoutWidth">261</double>
 					</object>
 					<object class="IBUILabel" id="270097617">
 						<reference key="NSNextResponder" ref="837410159"/>
@@ -1513,6 +1531,7 @@
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="184305262"/>
 						<reference key="IBUIFont" ref="859902433"/>
+						<double key="preferredMaxLayoutWidth">261</double>
 					</object>
 					<object class="IBUILabel" id="400583222">
 						<reference key="NSNextResponder" ref="837410159"/>
@@ -1538,6 +1557,7 @@
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="184305262"/>
 						<reference key="IBUIFont" ref="859902433"/>
+						<double key="preferredMaxLayoutWidth">261</double>
 					</object>
 					<object class="IBUILabel" id="47362119">
 						<reference key="NSNextResponder" ref="837410159"/>
@@ -1562,6 +1582,7 @@
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="184305262"/>
 						<reference key="IBUIFont" ref="859902433"/>
+						<double key="preferredMaxLayoutWidth">262</double>
 					</object>
 					<object class="IBUILabel" id="117594884">
 						<reference key="NSNextResponder" ref="837410159"/>
@@ -1587,6 +1608,7 @@
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="780479122"/>
 						<reference key="IBUIFont" ref="676260377"/>
+						<double key="preferredMaxLayoutWidth">262</double>
 					</object>
 					<object class="IBUILabel" id="794712570">
 						<reference key="NSNextResponder" ref="837410159"/>
@@ -1612,6 +1634,7 @@
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="780479122"/>
 						<reference key="IBUIFont" ref="676260377"/>
+						<double key="preferredMaxLayoutWidth">785</double>
 					</object>
 					<object class="IBUILabel" id="530545982">
 						<reference key="NSNextResponder" ref="837410159"/>
@@ -1637,6 +1660,7 @@
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="184305262"/>
 						<reference key="IBUIFont" ref="859902433"/>
+						<double key="preferredMaxLayoutWidth">785</double>
 					</object>
 				</array>
 				<string key="NSFrameSize">{1053, 278}</string>
@@ -2269,9 +2293,9 @@
 							<reference ref="255193236"/>
 							<reference ref="614130051"/>
 							<reference ref="180469733"/>
-							<reference ref="1018355134"/>
 							<reference ref="458361584"/>
 							<reference ref="455546996"/>
+							<reference ref="1018355134"/>
 						</array>
 						<reference key="parent" ref="146538234"/>
 					</object>
@@ -2882,10 +2906,10 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1296" key="NS.object.0"/>
+			<real value="1536" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">1498</string>
+		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>
 </archive>

@@ -108,6 +108,8 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
    
     NSTimer *checkKeyEntityTimer;
     NSTimer *displayConnectingTimer;
+     BOOL resetDatabase;
+    BOOL firstRun;
 }
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;
@@ -134,7 +136,7 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
 @property (nonatomic, retain) KeychainItemWrapper *passwordItem;
 @property (nonatomic, retain) KeychainItemWrapper *passCodeItem;
 @property (nonatomic,assign)BOOL stopScrollingMonthlyPracticumLog;
-
+@property (nonatomic,assign) BOOL drugViewControllerIsInDetailSubview;
 -(void)loadDatabaseData:(id)sender;
 - (void)initializeiCloudAccess ;
 -(NSURL *)applicationDrugsFileURL;
@@ -214,8 +216,6 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
 
 @property (nonatomic, strong) IBOutlet LCYLockScreenViewController *lockScreenVC;
 @property (nonatomic, strong)IBOutlet CasualAlertViewController *casualAlertManager;
-
--(void)saveContextsAndSettings;
 
 - (void) lockScreen: (LCYLockScreenViewController *) lockScreen unlockedApp: (BOOL) unlocked;
 -(LCYAppSettings *) appSettings;

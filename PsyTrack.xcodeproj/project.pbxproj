@@ -256,6 +256,8 @@
 		E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DD158E28DC00CE1AF4 /* menubar-full.png */; };
 		E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */; };
 		E74167EA158E782900CE1AF4 /* Monaco.dfont in Resources */ = {isa = PBXBuildFile; fileRef = E74167E5158E739300CE1AF4 /* Monaco.dfont */; };
+		E74AD6A81618EAB700B596FC /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E74AD6A71618EAB700B596FC /* psyTrack.sqlite */; };
+		E74AD6AA1618ECD200B596FC /* ipad-background-blue-plain-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74AD6A91618ECD200B596FC /* ipad-background-blue-plain-small@2x.png */; };
 		E74B04E015BC436A0077D759 /* ExistingHoursEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B04DF15BC436A0077D759 /* ExistingHoursEntity.m */; };
 		E74B04E315BC447F0077D759 /* ClinicianEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B04E215BC447F0077D759 /* ClinicianEntity.m */; };
 		E74B04E615BC87F60077D759 /* TrainingProgramEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B04E515BC87F60077D759 /* TrainingProgramEntity.m */; };
@@ -278,7 +280,6 @@
 		E762662515FE980500D97D3E /* AdditionalVariableValueEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E762662415FE980500D97D3E /* AdditionalVariableValueEntity.m */; };
 		E76984DE158636C200D760A6 /* ClinicianGroupEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E76984DD158636C200D760A6 /* ClinicianGroupEntity.m */; };
 		E76984E115869C2C00D760A6 /* ipad-background-blue-plain-small.png in Resources */ = {isa = PBXBuildFile; fileRef = E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */; };
-		E76984E215869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E76984E015869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png */; };
 		E76984ED15879E5300D760A6 /* ClientGroupEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E76984EC15879E5300D760A6 /* ClientGroupEntity.m */; };
 		E76CF3E015ACAD3200E888F2 /* AssessmentTypeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E76CF3DF15ACAD3200E888F2 /* AssessmentTypeEntity.m */; };
 		E76CF3E615ACB6A400E888F2 /* SupervisionParentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E76CF3E515ACB6A400E888F2 /* SupervisionParentEntity.m */; };
@@ -346,8 +347,6 @@
 		E798A0EF15845941006B9DBD /* switch-on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E798A08F15845941006B9DBD /* switch-on@2x.png */; };
 		E798A0F015845941006B9DBD /* tabbar.png in Resources */ = {isa = PBXBuildFile; fileRef = E798A09015845941006B9DBD /* tabbar.png */; };
 		E798A0F115845941006B9DBD /* tabbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E798A09115845941006B9DBD /* tabbar@2x.png */; };
-		E798A0FD15850672006B9DBD /* bg-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = E798A0F815850669006B9DBD /* bg-blue.png */; };
-		E798A0FE15850672006B9DBD /* bg-blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E798A0F91585066B006B9DBD /* bg-blue@2x.png */; };
 		E798A103158507EF006B9DBD /* mapper-ipad-master.ptt in Resources */ = {isa = PBXBuildFile; fileRef = E798A102158507EE006B9DBD /* mapper-ipad-master.ptt */; };
 		E798A126158539A7006B9DBD /* ipad-menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E798A124158539A2006B9DBD /* ipad-menubar-full.png */; };
 		E798A127158539A7006B9DBD /* ipad-menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E798A125158539A4006B9DBD /* ipad-menubar-full@2x.png */; };
@@ -479,6 +478,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		E74AD6931618B61E00B596FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7CFC2A3161507D500D130BE /* STV+CoreData.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
+			remoteInfo = "STV+CoreData";
+		};
 		E7CFC29D1615075C00D130BE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E7CFC2951615075C00D130BE /* SensibleTableView.xcodeproj */;
@@ -879,6 +885,8 @@
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
 		E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full@2x.png"; sourceTree = "<group>"; };
 		E74167E5158E739300CE1AF4 /* Monaco.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = Monaco.dfont; sourceTree = "<group>"; };
+		E74AD6A71618EAB700B596FC /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = psyTrack.sqlite; path = ../../Desktop/psyTrack.sqlite; sourceTree = "<group>"; };
+		E74AD6A91618ECD200B596FC /* ipad-background-blue-plain-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-background-blue-plain-small@2x.png"; sourceTree = "<group>"; };
 		E74B04DE15BC436A0077D759 /* ExistingHoursEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursEntity.h; sourceTree = "<group>"; };
 		E74B04DF15BC436A0077D759 /* ExistingHoursEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursEntity.m; sourceTree = "<group>"; };
 		E74B04E115BC447F0077D759 /* ClinicianEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianEntity.h; sourceTree = "<group>"; };
@@ -920,7 +928,6 @@
 		E76984DC158636C200D760A6 /* ClinicianGroupEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianGroupEntity.h; sourceTree = "<group>"; };
 		E76984DD158636C200D760A6 /* ClinicianGroupEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicianGroupEntity.m; sourceTree = "<group>"; };
 		E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-background-blue-plain-small.png"; sourceTree = "<group>"; };
-		E76984E015869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-background-blue-plain-small@2x.png"; sourceTree = "<group>"; };
 		E76984EB15879E5300D760A6 /* ClientGroupEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientGroupEntity.h; sourceTree = "<group>"; };
 		E76984EC15879E5300D760A6 /* ClientGroupEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientGroupEntity.m; sourceTree = "<group>"; };
 		E76CF3DE15ACAD3200E888F2 /* AssessmentTypeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssessmentTypeEntity.h; sourceTree = "<group>"; };
@@ -1012,8 +1019,6 @@
 		E798A08F15845941006B9DBD /* switch-on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "switch-on@2x.png"; sourceTree = "<group>"; };
 		E798A09015845941006B9DBD /* tabbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar.png; sourceTree = "<group>"; };
 		E798A09115845941006B9DBD /* tabbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar@2x.png"; sourceTree = "<group>"; };
-		E798A0F815850669006B9DBD /* bg-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-blue.png"; sourceTree = "<group>"; };
-		E798A0F91585066B006B9DBD /* bg-blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-blue@2x.png"; sourceTree = "<group>"; };
 		E798A102158507EE006B9DBD /* mapper-ipad-master.ptt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "mapper-ipad-master.ptt"; sourceTree = "<group>"; };
 		E798A124158539A2006B9DBD /* ipad-menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-menubar-full.png"; sourceTree = "<group>"; };
 		E798A125158539A4006B9DBD /* ipad-menubar-full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-menubar-full@2x.png"; sourceTree = "<group>"; };
@@ -1168,7 +1173,6 @@
 		E7F1CB401598C024006F9E95 /* vfrREADME */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vfrREADME; sourceTree = "<group>"; };
 		E7F1CB431598C024006F9E95 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E7F1CB441598C024006F9E95 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E7F1CB451598C024006F9E95 /* Reader.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Reader.pdf; sourceTree = "<group>"; };
 		E7F1CB471598C024006F9E95 /* CGPDFDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPDFDocument.h; sourceTree = "<group>"; };
 		E7F1CB481598C024006F9E95 /* CGPDFDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGPDFDocument.m; sourceTree = "<group>"; };
 		E7F1CB491598C024006F9E95 /* ReaderConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderConstants.h; sourceTree = "<group>"; };
@@ -1638,6 +1642,7 @@
 				E7B49C1A1607E53A0073AA30 /* NSManagedObject Subclasses */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
+				E74AD6A71618EAB700B596FC /* psyTrack.sqlite */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1645,6 +1650,7 @@
 		37F7CECD15005E9900AD2C3A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E7B7957916124528008D3E8F /* Default-568h@2x.png */,
 				E7A9249215485E6C0080B35D /* blueArrow.png */,
 				E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */,
 				E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */,
@@ -1825,6 +1831,8 @@
 		B771C54314DAF3E4002D430E /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				E7CFC2A3161507D500D130BE /* STV+CoreData.xcodeproj */,
+				E7CFC2951615075C00D130BE /* SensibleTableView.xcodeproj */,
 				E7F1CB1E1598C024006F9E95 /* vfr-Reader-db84c9d */,
 				E7577FA7158C1DAE0044D344 /* KeychainItemWrapper.h */,
 				E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */,
@@ -1846,9 +1854,6 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				E7CFC2A3161507D500D130BE /* STV+CoreData.xcodeproj */,
-				E7CFC2951615075C00D130BE /* SensibleTableView.xcodeproj */,
-				E7B7957916124528008D3E8F /* Default-568h@2x.png */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Third Party */,
 				37F7CE1B1500328E00AD2C3A /* psyTrack */,
@@ -2104,14 +2109,12 @@
 		E798A03215845941006B9DBD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E74AD6A91618ECD200B596FC /* ipad-background-blue-plain-small@2x.png */,
 				E74167DD158E28DC00CE1AF4 /* menubar-full.png */,
 				E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */,
 				E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */,
-				E76984E015869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png */,
 				E798A124158539A2006B9DBD /* ipad-menubar-full.png */,
 				E798A125158539A4006B9DBD /* ipad-menubar-full@2x.png */,
-				E798A0F815850669006B9DBD /* bg-blue.png */,
-				E798A0F91585066B006B9DBD /* bg-blue@2x.png */,
 				E798A03315845941006B9DBD /* arrow.png */,
 				E798A03415845941006B9DBD /* arrow@2x.png */,
 				E798A03515845941006B9DBD /* back.png */,
@@ -2409,7 +2412,6 @@
 			isa = PBXGroup;
 			children = (
 				E7F1CB421598C024006F9E95 /* Localizable.strings */,
-				E7F1CB451598C024006F9E95 /* Reader.pdf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -2473,6 +2475,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				E74AD6941618B61E00B596FC /* PBXTargetDependency */,
 				E7CFC2A11615076800D130BE /* PBXTargetDependency */,
 			);
 			name = PsyTrack;
@@ -2678,14 +2681,11 @@
 				E798A0EF15845941006B9DBD /* switch-on@2x.png in Resources */,
 				E798A0F015845941006B9DBD /* tabbar.png in Resources */,
 				E798A0F115845941006B9DBD /* tabbar@2x.png in Resources */,
-				E798A0FD15850672006B9DBD /* bg-blue.png in Resources */,
-				E798A0FE15850672006B9DBD /* bg-blue@2x.png in Resources */,
 				E798A103158507EF006B9DBD /* mapper-ipad-master.ptt in Resources */,
 				E798A126158539A7006B9DBD /* ipad-menubar-full.png in Resources */,
 				E798A127158539A7006B9DBD /* ipad-menubar-full@2x.png in Resources */,
 				E798A1311585593D006B9DBD /* mapper-ipad-full.ptt in Resources */,
 				E76984E115869C2C00D760A6 /* ipad-background-blue-plain-small.png in Resources */,
-				E76984E215869C2C00D760A6 /* ipad-background-blue-plain-small@2x.png in Resources */,
 				E7619875158946B100C5BB8F /* ClientGroupsViewController.xib in Resources */,
 				E7CCB8E7159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib in Resources */,
 				E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */,
@@ -2756,6 +2756,8 @@
 				E7294CE5160685DC00C153CE /* DemographicReportGenerateVC.xib in Resources */,
 				E7294CE716069C5000C153CE /* DemographicReportGenerateVC_iPhone.xib in Resources */,
 				E7B7957A16124528008D3E8F /* Default-568h@2x.png in Resources */,
+				E74AD6A81618EAB700B596FC /* psyTrack.sqlite in Resources */,
+				E74AD6AA1618ECD200B596FC /* ipad-background-blue-plain-small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3005,6 +3007,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E74AD6941618B61E00B596FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "STV+CoreData";
+			targetProxy = E74AD6931618B61E00B596FC /* PBXContainerItemProxy */;
+		};
 		E7CFC2A11615076800D130BE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SensibleTableView;
