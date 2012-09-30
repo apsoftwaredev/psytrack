@@ -1503,7 +1503,7 @@ if(section.headerTitle !=nil)
             
     }}
 
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         

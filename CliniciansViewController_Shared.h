@@ -76,7 +76,7 @@ NSManagedObjectContext *managedObjectContext;
 
 //@property (nonatomic, strong) IBOutlet SCArrayOfObjectsModel *tableModel;
 @property (nonatomic, strong)  UIViewController *rootViewController;
-@property (nonatomic, strong) IBOutlet  SCTableViewModel *currentDetailTableViewModel;
+
 @property (nonatomic, strong)ABGroupSelectionCell *abGroupObjectSelectionCell;
 //@property (strong, nonatomic)IBOutlet SCArrayOfStringsSection *objectsSection;
 

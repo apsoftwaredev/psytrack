@@ -1568,6 +1568,16 @@
         
     }
     
+    
+    
+    if([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6){
+        
+        self.tableView.backgroundView=nil;
+        UIView *newView=[[UIView alloc]init];
+        [self.tableView setBackgroundView:newView];
+        
+        
+    }
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
    
     objectsModel.editButtonItem = self.editButton;;
@@ -2129,7 +2139,7 @@ BOOL valid=NO;
     
 
    
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         

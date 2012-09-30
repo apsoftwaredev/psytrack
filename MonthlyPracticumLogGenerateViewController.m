@@ -31,7 +31,7 @@
 //    
 //
      UIViewController *navtitle=self.navigationController.topViewController;
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         
         
         [self.trainingProgramTableView setBackgroundView:nil];
@@ -499,7 +499,7 @@
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
  
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         

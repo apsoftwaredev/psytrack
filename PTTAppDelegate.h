@@ -57,7 +57,7 @@ static NSString * const kPTCurrentKeyDate=@"current_key_date";
 static NSString * const kPTiCloudPreference=@"icloud_preference";
 static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_number";
 
-
+#define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height-568)?NO:YES)
 
 /****************************************************************************************/
 /*	class PTTAppDelegate	*/

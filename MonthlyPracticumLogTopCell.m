@@ -706,7 +706,7 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
     supervisionObjectsModel_.delegate=self;
     //    
     
-    NSArray *fetchedSupervisionObjects =  [self fetchObjectsFromEntity:(NSString *)@"SupervisionTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"supervisionReceived.time",@"existingSupervision",nil]];
+    NSArray *fetchedSupervisionObjects =  [self fetchObjectsFromEntity:(NSString *)@"SupervisionTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"supervisionReceived.startTime",@"supervisionReceived.endTime",@"subTypes.existingHours",@"supervisionReceived.time",@"existingSupervision",nil] ];
     //     
      
     for (SupervisionTypeEntity *supervisionType in fetchedSupervisionObjects) {
@@ -717,7 +717,7 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
         
         
         [supervisionType willAccessValueForKey:@"subTypes"];
-        NSSet *supervisionSubTypeSet=supervisionType.subTypes;
+        NSMutableSet *supervisionSubTypeSet=[supervisionType mutableSetValueForKey:@"subTypes"];
         
         NSArray *subTypesArray=nil;
         
@@ -744,6 +744,7 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
             TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:supervisionSubTypeObject trainingProgram:self.trainingProgram];
             
                         [subTypeWithTotalsItemsArray addObject:trackTypeWithTotalTimeObject];
+            DLog(@"tracktype iwht total time object is %@ %@",trackTypeWithTotalTimeObject.typeLabelText,trackTypeWithTotalTimeObject.totalToDateStr);
             
         }
         
@@ -1279,6 +1280,38 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
     [fetchRequest setRelationshipKeyPathsForPrefetching:
      pathsForPrefetching];
 
+    
+    if (filterPredicate) {
+        [fetchRequest setPredicate:filterPredicate];
+    }
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order"
+                                                                   ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    return fetchedObjects;
+    
+}
+
+-(NSArray *)fetchObjectsFromEntity:(NSString *)entityStr filterPredicate:(NSPredicate *)filterPredicate pathsForPrefetching:(NSArray *)pathsForPrefetching propertiesToFetch:(NSArray *)propertiesToFetch{
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setPropertiesToFetch:propertiesToFetch];
+    
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityStr inManagedObjectContext:appDelegate.managedObjectContext];
+    
+    [fetchRequest setEntity:entity];
+    [fetchRequest setRelationshipKeyPathsForPrefetching:
+     pathsForPrefetching];
+    
     
     if (filterPredicate) {
         [fetchRequest setPredicate:filterPredicate];

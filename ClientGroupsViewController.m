@@ -55,7 +55,7 @@
     
     
     
-    if(![SCUtilities is_iPad]){
+    if(![SCUtilities is_iPad]||[SCUtilities systemVersion]>=6){
         
         objectsModel.theme=[SCTheme themeWithPath:@"./MapperTheme/mapper-iPhone.ptt"];
         
@@ -74,7 +74,7 @@
     
     // Initialize tableModel
 //    NSString *detailThemeNameStr=nil;
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
 //        detailThemeNameStr=@"mapper-ipad-full.ppt";
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
@@ -122,7 +122,7 @@
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
 
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         

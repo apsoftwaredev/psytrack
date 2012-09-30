@@ -37,8 +37,8 @@
     BOOL allowMultipleSelection;
      UIViewController *sendingViewController;
      NSMutableSet *alreadySelectedClients;
-     NSManagedObject *clientCurrentlySelectedInReferringDetailview;
-    SCTableViewModel *medicationReviewTableViewModel;
+    
+   
     int searchStringLength;
     BOOL reloadTableView;
     SCArrayOfObjectsModel *objectsModel;

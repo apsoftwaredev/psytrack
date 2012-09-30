@@ -39,7 +39,7 @@
     SCTableViewModel *currentDetailTableViewModel_;
     SCObjectSelectionCell *sourcesObjSelectionCell_;
     
-    ABAddressBookRef addressBook;
+//    ABAddressBookRef addressBook;
     ABRecordRef source;
     int groupRecordIDToDeleteOrImport;
     UIView *detailViewSuperview;

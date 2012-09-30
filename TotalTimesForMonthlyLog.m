@@ -17,7 +17,12 @@
 assessmentsDeliveredArray=assessmentsDeliveredArray_,
 supportActivityDeliveredArray=supportActivityDeliveredArray_,
 supervisionReceivedArray=supervisionReceivedArray_,
-existingHoursHoursArray=existingHoursArray_;
+existingHoursArray=existingHoursArray_;
+@synthesize existingHInterventionrray=existingInterventionsArray_,
+existingAssessmentArray=existingAssessmentsArray_,
+existingSupportArray=existingSupportArray_,
+existingSupervisionArray=existingSupervisionArray_;
+
 @synthesize trainingProgram=trainingProgram_;
 
 @synthesize clinician=clinician_;
@@ -133,12 +138,14 @@ existingHoursHoursArray=existingHoursArray_;
                         
             
             if (dateToAdd&&[dateToAdd isKindOfClass:[NSDate class]]) {
-                
+                DLog(@"total time object is  %@",totalTimeDateObject);
                 totalTime=totalTime+[totalTimeDateObject timeIntervalSince1970];
                 
             }
         }
     }
+    
+    
     return totalTime;
     
     
@@ -393,14 +400,15 @@ existingHoursHoursArray=existingHoursArray_;
     
     
 }
--(NSTimeInterval )totalTimeIntervalForTrackArray:(NSArray *)trackArray predicate:(NSPredicate *)predicate{
+-(NSTimeInterval )totalTimeIntervalForTrackArray:(NSSet *)trackArray predicate:(NSPredicate *)predicate{
     
     
-    NSArray *filteredObjects=nil;
+    NSSet *filteredObjects=nil;
+    DLog(@"track array is  %@",trackArray);
     if (trackArray && trackArray.count) {
         
         if (predicate) {
-            filteredObjects=[trackArray filteredArrayUsingPredicate:(NSPredicate *)predicate];
+            filteredObjects=[trackArray filteredSetUsingPredicate:(NSPredicate *)predicate];
             
             
         }
@@ -413,10 +421,33 @@ existingHoursHoursArray=existingHoursArray_;
     if (filteredObjects) {
         totalTimeArray=[filteredObjects valueForKeyPath:@"time.totalTime"];
     }
+    NSMutableArray *returnTimeArray=[NSMutableArray array];
     
+            for (id object in totalTimeArray) {
+            if ([object isKindOfClass:[NSSet class]]) {
+                NSSet *objectSet=(NSSet *)object;
+                NSArray *objectSetArray=objectSet.allObjects;
+                for (id objectInObject in objectSetArray) {
+                    
+                    if ([objectInObject isKindOfClass:[NSDate class]]) {
+                        
+                        [returnTimeArray addObject:objectInObject];
+                    }
+                }
+                
+            }
+            else if ([object isKindOfClass:[NSDate class]]){
+                [returnTimeArray addObject:object];
+                
+            }
+        }
+        
+        
     
+
+    DLog(@"total time is  %@",returnTimeArray);
     
-    return [self totalTimeIntervalForTotalTimeArray:totalTimeArray];
+    return [self totalTimeIntervalForTotalTimeArray:returnTimeArray];
     
     
     
@@ -425,9 +456,12 @@ existingHoursHoursArray=existingHoursArray_;
 -(NSTimeInterval )totalTimeIntervalForExistingHoursArray:(NSArray *)filteredExistingHoursArray keyPath:(NSString *)keyPath{
     
     NSMutableArray *existingHoursTimeArray=[NSMutableArray array];
-    
+    DLog(@"filtered existing hopiurs arru os  %@",filteredExistingHoursArray);
+    DLog(@"temp path is  %@",keyPath);
     if (filteredExistingHoursArray  &&filteredExistingHoursArray.count) {
         NSSet *existingHoursTempSet=[filteredExistingHoursArray valueForKeyPath:keyPath];
+        DLog(@"existing hour stemp set is  %@",existingHoursTempSet);
+        
         for (id object in existingHoursTempSet) {
             if ([object isKindOfClass:[NSSet class]]) {
                 NSSet *objectSet=(NSSet *)object;
@@ -446,7 +480,7 @@ existingHoursHoursArray=existingHoursArray_;
         
     }
     
-    
+    DLog(@"exitting our stime array  %@",existingHoursTimeArray);
     
     
     return  [self totalTimeIntervalForTotalTimeArray:existingHoursTimeArray];
@@ -454,6 +488,47 @@ existingHoursHoursArray=existingHoursArray_;
     
     
 }
+
+-(NSTimeInterval )totalTimeIntervalForExistingHoursArray:(NSArray *)filteredExistingHoursArray {
+    
+    NSMutableArray *existingHoursTimeArray=[NSMutableArray array];
+    
+    if (filteredExistingHoursArray  &&filteredExistingHoursArray.count) {
+        NSSet *existingHoursTempSet=[filteredExistingHoursArray valueForKeyPath:@"hours"];
+        DLog(@"existing hour stemp set is  %@",existingHoursTempSet);
+        
+        for (id object in existingHoursTempSet) {
+            if ([object isKindOfClass:[NSSet class]]) {
+                NSSet *objectSet=(NSSet *)object;
+                NSArray *objectSetArray=objectSet.allObjects;
+                for (id objectInObject in objectSetArray) {
+                    
+                    if ([objectInObject isKindOfClass:[NSDate class]]) {
+                        
+                        [existingHoursTimeArray addObject:objectInObject];
+                    }
+                }
+                
+            }
+            else if ([object isKindOfClass:[NSDate class]]){
+             [existingHoursTimeArray addObject:object];
+            
+            }
+        }
+        
+        
+    }
+    
+    DLog(@"exitting our stime array  %@",existingHoursTimeArray);
+    
+    
+    return  [self totalTimeIntervalForTotalTimeArray:existingHoursTimeArray];
+    
+    
+    
+}
+
+
 
 
 -(NSPredicate *)predicateForClincian{
@@ -499,7 +574,7 @@ existingHoursHoursArray=existingHoursArray_;
     NSPredicate *currentMonthPredicate=nil;
     
     
-        currentMonthPredicate = [NSPredicate predicateWithFormat:@" (startDate >= %@) AND (endDate <= %@)", monthStartDate_,monthEndDate_];
+        currentMonthPredicate = [NSPredicate predicateWithFormat:@" (existingHours.startDate >= %@) AND (existingHours.endDate <= %@)", monthStartDate_,monthEndDate_];
       
     return currentMonthPredicate;    
 }
@@ -523,7 +598,7 @@ existingHoursHoursArray=existingHoursArray_;
     
     if (monthEndDate_) {
         
-        returnPredicate = [NSPredicate predicateWithFormat:@" (endDate <= %@)", monthEndDate_];
+        returnPredicate = [NSPredicate predicateWithFormat:@" (existingHours.endDate <= %@)", monthEndDate_];
     }
     
     return returnPredicate;    
@@ -536,7 +611,7 @@ existingHoursHoursArray=existingHoursArray_;
     
     if (date &&[date isKindOfClass:[NSDate class]]) {
        
-            returnPredicate = [NSPredicate predicateWithFormat:@" (endDate < %@)", date];
+            returnPredicate = [NSPredicate predicateWithFormat:@" (existingHours.endDate < %@)", date];
      
     }
     
@@ -549,7 +624,7 @@ existingHoursHoursArray=existingHoursArray_;
     NSPredicate *weekPredicate=nil;
     
    
-        weekPredicate = [NSPredicate predicateWithFormat:@" ((startDate >= %@) AND (endDate <= %@))", [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
+        weekPredicate = [NSPredicate predicateWithFormat:@" ((existingHours.startDate >= %@) AND (existingHours.endDate <= %@))", [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
     
     
     return weekPredicate;
@@ -562,9 +637,9 @@ existingHoursHoursArray=existingHoursArray_;
     NSPredicate *undefinedWeekPredicate=nil;
     
     
-        undefinedWeekPredicate = [NSPredicate predicateWithFormat:@"((startDate >= %@) AND (endDate <= %@)) AND NOT (   ((startDate >= %@) AND (endDate < %@)) OR ((startDate >= %@) AND (endDate < %@)) OR ((startDate >= %@) AND (endDate < %@)) OR ((startDate >= %@) AND (endDate < %@))) ", monthStartDate_,monthEndDate_,week1StartDate_,week1EndDate_,week2StartDate_,week2EndDate_,week3StartDate_,week3EndDate_,week4StartDate_,week4EndDate_];
+        undefinedWeekPredicate = [NSPredicate predicateWithFormat:@"((existingHours.startDate >= %@) AND (existingHours.endDate <= %@)) AND NOT (   ((existingHours.startDate >= %@) AND (existingHours.endDate < %@)) OR ((existingHours.startDate >= %@) AND (existingHours.endDate < %@)) OR ((existingHours.startDate >= %@) AND (existingHours.endDate < %@)) OR ((existingHours.startDate >= %@) AND (existingHours.endDate < %@)) OR  ((existingHours.startDate >= %@) AND (existingHours.endDate < %@))) ", monthStartDate_,monthEndDate_,week1StartDate_,week1EndDate_,week2StartDate_,week2EndDate_,week3StartDate_,week3EndDate_,week4StartDate_,week4EndDate_,week5StartDate_,week5EndDate_];
     
-    
+
    
     return undefinedWeekPredicate;
     
@@ -588,7 +663,7 @@ existingHoursHoursArray=existingHoursArray_;
     NSPredicate *trainingProgramPredicate=nil;
     
     
-    trainingProgramPredicate = [NSPredicate predicateWithFormat:@"programCourse.objectID == %@", trainingProgram_.objectID];
+    trainingProgramPredicate = [NSPredicate predicateWithFormat:@"existingHours.programCourse.objectID == %@", trainingProgram_.objectID];
     
     
     
@@ -602,7 +677,7 @@ existingHoursHoursArray=existingHoursArray_;
     NSPredicate *doctorateLevelPredicate=nil;
     
     
-    doctorateLevelPredicate = [NSPredicate predicateWithFormat:@"programCourse.doctorateLevel == %@", [NSNumber numberWithBool:doctorateLevel_]];
+    doctorateLevelPredicate = [NSPredicate predicateWithFormat:@"existingHours.programCourse.doctorateLevel == %@", [NSNumber numberWithBool:doctorateLevel_]];
     
     
     

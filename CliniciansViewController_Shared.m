@@ -39,7 +39,7 @@
 
 @synthesize personVCFromSelectionList=personVCFromSelectionList_;
 @synthesize personAddNewViewController=personAddNewViewController_;
-@synthesize currentDetailTableViewModel=currentDetailTableViewModel_;
+
 @synthesize rootViewController=rootViewController_;
 //@synthesize tableModel=tableModel_;
 //@synthesize tableView;
@@ -57,9 +57,6 @@
        [super viewDidUnload];
    
 //     self.tableModel=nil;
-    if (currentDetailTableViewModel_) {
-        self.currentDetailTableViewModel=nil;
-    }
     
    
    currentDetailTableViewModel_=nil;
@@ -2182,27 +2179,6 @@
 
 
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
-{
-    if (tableViewModel.tag==0) {
-        self.currentDetailTableViewModel=detailTableViewModel;
-    }
-    
-//    SCObjectSection *objectSection = (SCObjectSection *)[detailTableViewModel sectionAtIndex:0];
-//    SCTextFieldCell *zipFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"zipCode"];
-//    zipFieldCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-//    SCTextFieldCell *postOfficeBoxFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"postOfficeBox"];
-//    postOfficeBoxFieldCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
-//    
-//    SCTextFieldCell *phoneNumberFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"phoneNumber"];
-//    phoneNumberFieldCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation; 
-//    
-//    SCTextFieldCell *extentionFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"extention"];
-//    extentionFieldCell.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation; 
-//    
-    
-    
-}
 
 
 
@@ -2622,7 +2598,7 @@
         cell = [tableModel cellAtIndexPath:indexPath];
 
     if (cell && (tableModel.tag==0||(tableModel.tag==1&&cell.tag==429))) {
-        self.currentDetailTableViewModel=detailTableViewModel;
+        currentDetailTableViewModel_=detailTableViewModel;
         
                 
         
@@ -2631,7 +2607,7 @@
     
     
     detailTableViewModel.delegate=self;
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
 
@@ -2641,7 +2617,7 @@
        
         backgroundColor=(UIColor *)appDelegate.window.backgroundColor;
         NSString *imageNameStr=nil;
-        if ([SCUtilities is_iPad]) {
+        if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
             imageNameStr=@"ipad-menubar-full.png";
         }
         else{
@@ -3178,11 +3154,10 @@
     
 //    SCTableViewSection *section =[tableViewModel sectionAtIndex:indexPath.section];
     SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-    
-    currentDetailTableViewModel_=tableViewModel;
+       
     
     if (tableViewModel.tag==1) {
-        
+          currentDetailTableViewModel_=tableViewModel;
         
         switch (cell.tag)
         {
@@ -3280,6 +3255,7 @@
                         //                        clinician=(ClinicianEntity *) cellManagedObject;
                         
                         
+                        if ([SCUtilities systemVersion]<6) {
                         
                         if ([tableViewModel valuesAreValid]) {
                             int sectionCount=tableViewModel.sectionCount;
@@ -3299,6 +3275,7 @@
                         else {
                             [[PTTAppDelegate appDelegate] displayNotification:@"A first and last name before adding or use look up.."  forDuration:8.0 location:kPTTScreenLocationTop inView:tableViewModel.viewController.view.superview];
                         }
+                        }
                     }
                     
                     
@@ -3307,7 +3284,7 @@
                 break;
             }    
             case 9:
-            {   
+            {    if ([SCUtilities systemVersion]<6) {
                 if ([cell isKindOfClass:[LookupRemoveLinkButtonCell class]]) {
                     
                     
@@ -3362,9 +3339,11 @@
                         }
                         else
                         {
+                           
+                            
                             
                             [self showPeoplePickerController];
-                            
+                            }
                             
                         }
                         
@@ -3485,7 +3464,7 @@
 
     if (tableModel.tag==0&&![SCUtilities is_iPad]) {
         currentDetailTableViewModel_.viewController.view=nil;
-        self.currentDetailTableViewModel=nil;
+        
         [self resetABVariablesToNil];
         
         
@@ -3503,12 +3482,12 @@
     
 
     if (tableViewModel.tag==1) {
-        self.currentDetailTableViewModel=tableViewModel;
+        currentDetailTableViewModel_=tableViewModel;
     }
 
    else if (tableViewModel.tag==0) {
         
-        self.currentDetailTableViewModel=nil;
+        currentDetailTableViewModel_=nil;
     }
 
    else if (tableViewModel.tag==3) {
@@ -3671,10 +3650,12 @@
     //	abToDisplay.peoplePicker.displayedProperties=displayedItems;
 	// Show the picker 
     
-    
-	[currentDetailTableViewModel_.viewController.navigationController presentModalViewController:self.peoplePickerNavigationController animated:YES];
-    
-	
+    if (currentDetailTableViewModel_) {
+        [currentDetailTableViewModel_.viewController.navigationController presentModalViewController:self.peoplePickerNavigationController animated:YES];
+        
+
+    }
+		
 }
 
 
@@ -3688,8 +3669,8 @@
 {
 	
    
-   
-    
+    if ([SCUtilities systemVersion]<6) {
+       
 
   
     
@@ -3906,7 +3887,7 @@
         }
      
        
-   
+    }
 
 }
 
@@ -4310,7 +4291,7 @@
         } 
         else {
             
-            if ([SCUtilities is_iPad]) {
+            if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
            
             self.personViewController=nil;
             self.personViewController=[[ABPersonViewController alloc]init];
@@ -4343,10 +4324,11 @@
             self.personViewController.view.tag=837;
 
         }
-        
+            if (currentDetailTableViewModel_) {
+          
                 [currentDetailTableViewModel_.viewController.navigationController setDelegate:self];
         [currentDetailTableViewModel_.viewController.navigationController pushViewController:personViewController_ animated:YES];
-        
+            }
         
         //        picker.personViewDelegate = self;
         //		picker.displayedPerson = recordRef;
@@ -4419,7 +4401,7 @@ if (addressBookForShowPerson) {
       
       
         
-        if ([SCUtilities is_iPad]) {
+        if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
             [personViewTableView setBackgroundView:nil];
             [personViewTableView setBackgroundView:self.iPadPersonBackgroundView];
         }
@@ -4751,10 +4733,13 @@ if (addressBookForShowPerson) {
 //                    
 //                    [abGroupObjectSelectionCell_ addPersonToSelectedGroups];
 //                    abGroupObjectSelectionCell_.synchWithABBeforeLoadBool=YES;
-
+                    if (currentDetailTableViewModel_) {
+                    
                     [currentDetailTableViewModel_ reloadBoundValues];
                     [currentDetailTableViewModel_.modeledTableView reloadData];
-                    clinician=(ClinicianEntity *) cellManagedObject;
+                    
+                    }
+                        clinician=(ClinicianEntity *) cellManagedObject;
                     
                     
                     SCTableViewSection *sectionOne=[currentDetailTableViewModel_ sectionAtIndex:0];

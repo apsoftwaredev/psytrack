@@ -114,12 +114,10 @@
     
 //    CFRelease(addressBook);
 //    CFRelease(existingPersonRef);
-    if (currentDetailTableViewModel_) {
-        self.currentDetailTableViewModel=nil;
-    }
+  
     
     
-    
+    currentDetailTableViewModel_=nil;
     
     if (personVCFromSelectionList) {
         self.personVCFromSelectionList=nil;
@@ -467,7 +465,7 @@
         
        
         if (index==0) {
-            self.currentDetailTableViewModel=tableViewModel;
+            currentDetailTableViewModel_=tableViewModel;
              tableViewModel.tag=1;
         }
         

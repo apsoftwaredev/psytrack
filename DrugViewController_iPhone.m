@@ -382,7 +382,7 @@
     
     
     
-    if([SCUtilities is_iPad]){
+    if([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6){
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
         [self.tableView setBackgroundColor:backgroundColor]; // Make the table view transparent
@@ -398,7 +398,7 @@
     
     
     NSString *imageNameStr=nil;
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         imageNameStr=@"ipad-menubar-full.png";
     }
     else{
@@ -1032,15 +1032,20 @@
         
         NSPersistentStore *drugsPersistentStore=[drugsPersistentStoreCoordinator persistentStoreForURL:drugsStoreURL];
         
-        
+        BOOL proceedWithAddingStore=YES;
         if (drugsPersistentStore) {
               NSError *error = nil;
-            [drugsPersistentStoreCoordinator removePersistentStore:drugsPersistentStore error:&error];
+            if (![drugsPersistentStoreCoordinator removePersistentStore:drugsPersistentStore error:&error]) {
+                
+                proceedWithAddingStore=NO;
+               [appDelegate displayNotification:@"Unable to remove old drug database at this time. Try resarting the app or try again later."];
+                
+            }
             
             
         }
         BOOL fileWritten=   [decryptedData writeToURL:drugsStoreURL atomically:YES];
-        if (fileWritten) {
+        if (fileWritten  && proceedWithAddingStore) {
       
             NSError *drugError = nil;
            
@@ -1084,59 +1089,23 @@
                     [drugsManagedObjectContext refreshObject:managedObject mergeChanges:NO];
                 }
             }
-    
+        }
+            else
+            {
+            
+                [appDelegate displayNotification:@"Problem with setting up drug database occured.  Please try again later or contact suppor"];
+            
+            }
         
         }
         
-    }
-//        NSPersistentStore *persistentStore=(NSPersistentStore *)[appDelegate.drugsPersistentStoreCoordinator.persistentStores objectAtIndex:0];
-        
-//        NSError *error;
-//        [appDelegate.drugsPersistentStoreCoordinator removePersistentStore:(NSPersistentStore *)persistentStore error:&error ];
-//
-//        if (![drugsManagedObjectContext.persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:@"DrugsConfig" URL:drugsStoreURL options:nil error:&error])
-//        {
-//            
-//        }   
-//        drugsManagedObjectContext=nil;
-//        NSManagedObjectModel *drugModel=(NSManagedObjectModel *)[appDelegate drugsManagedObjectModel];
-//        drugModel=nil;
-//        
-//        drugsManagedObjectContext=nil;
-//        drugsManagedObjectContext=(NSManagedObjectContext *)[appDelegate drugsManagedObjectContext];
-//        [drugModel awakeFromNib];
-//        [appDelegate drugsManagedObjectModel]=nil;
-//        [drugsManagedObjectContext setMergePolicy:NSMergeByPropertyStoreTrumpMergePolicy];
-
-//        [appDelegate resetDrugsModel];
-        
-//        drugsManagedObjectContext=(NSManagedObjectContext *)[appDelegate drugsManagedObjectContext];
-//        NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:drugsManagedObjectContext];
-        
-       
-//        NSFetchRequest *productFetchRequest = [[NSFetchRequest alloc] init];
-//        
-//        
-//        
-//        [productFetchRequest setEntity:productEntityDesc];
-//    
-//        
-//        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"drugName"
-//                                                                       ascending:YES];
-//        NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-//        [productFetchRequest setSortDescriptors:sortDescriptors];
-////        
-//        
-//        NSError *productError = nil;
-//        NSArray *productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:productFetchRequest error:&productError];
-//        
-//        drugsMutableArray=[NSMutableArray arrayWithArray:productFetchedObjects];
-//        productFetchedObjects=nil;
-//        
-//        
-//        NSArray *itemsArray=(NSArray *)tableModel.items;
-//        itemsArray=drugsMutableArray;
-        
+    
+else
+{
+    
+    [appDelegate displayNotification:@"Encryption Error Occured while setting up the drug database.  Please try again later or contact suppor"];
+    
+}
     
    
     
@@ -1305,7 +1274,7 @@
             
             
             
-            if ([SCUtilities is_iPad]) {
+            if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
                 //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
                 
                 
@@ -1385,7 +1354,7 @@
     
     
     
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         

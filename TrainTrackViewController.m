@@ -695,7 +695,7 @@
     
 //    [self.view addSubview:self.myTableView];
 //    NSString *menuBarImageNameStr=nil;
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];

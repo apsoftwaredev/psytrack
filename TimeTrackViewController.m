@@ -612,13 +612,14 @@
     //add a button to add an event to the calandar
     
     //create a custom property definition for the Button Cell
-    
+    if ([SCUtilities systemVersion]<6) {
+   
     NSDictionary *buttonCellObjectBinding=[NSDictionary dictionaryWithObject:@"eventIdentifier" forKey:@"event_identifier"];
     SCCustomPropertyDefinition *eventButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"EventButtonCell" uiElementClass:[ButtonCell class] objectBindings:buttonCellObjectBinding];
     
     //add the property definition to the test administration detail view  
     [timeTrackEntityDef addPropertyDefinition:eventButtonProperty];
-       
+    }
     [timeTrackEntityDef.propertyGroups addGroup:peopleGroup];
     
     
@@ -1408,7 +1409,7 @@
     
     objectsModel.autoSortSections = TRUE;  
     objectsModel.searchBar = self.searchBar;
-	objectsModel.searchPropertyName = @"dateOfService";
+	objectsModel.searchPropertyName = @"notes";
     
     objectsModel.allowMovingItems=TRUE;
     
@@ -1421,7 +1422,7 @@
     
     
     
-    if(![SCUtilities is_iPad]){
+    if(![SCUtilities is_iPad]||[SCUtilities systemVersion]>=6){
         
         objectsModel.theme=[SCTheme themeWithPath:@"mapper-iPhone.ptt"];
        
@@ -1452,7 +1453,7 @@
    
      // Initialize tableModel
 //    NSString *detailThemeNameStr=nil;
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
 //        NSString *mapperThemePath=(NSString *)[(NSString *)(NSBundle *)[NSBundle mainBundle].bundlePath stringByAppendingPathComponent:@"mapper-ipad-full"];
 //        
 //        detailThemeNameStr=mapperThemePath;
@@ -1483,7 +1484,7 @@
     [counterDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];  
     
     
-    referenceDate=[counterDateFormatter dateFromString:@"00:00:00"];
+    referenceDate=[NSDate dateWithTimeIntervalSince1970:0];
     
     // Initialize an event store object with the init method. Initilize the array for events.
 	self.eventStore = [[EKEventStore alloc] init];
@@ -1554,7 +1555,82 @@
 }
 
 
+-(NSArray *)tableViewModel:(SCArrayOfItemsModel *)tableModel customSearchResultForSearchText:(NSString *)searchText autoSearchResults:(NSArray *)autoSearchResults{
 
+    NSDateFormatter *dateFormatterForSearch=[[NSDateFormatter alloc]init];
+    
+    [dateFormatterForSearch setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC" ]];
+    [dateFormatterForSearch setDateFormat:@"M/d/yyyy"];
+    
+    NSDate *dateFromSearchText=[dateFormatterForSearch dateFromString:searchText];
+    
+    if (dateFromSearchText && [dateFromSearchText compare:[NSDate dateWithTimeIntervalSince1970:0]]==NSOrderedDescending) {
+        
+  DLog(@"date to search is  %@",dateFromSearchText);
+    NSString *entityName=nil;
+    switch (currentControllerSetup) {
+        case kTrackAssessmentSetup:
+            entityName=kTrackAssessmentEntityName;
+            break;
+        case kTrackInterventionSetup:
+            entityName=kTrackInterventionEntityName;
+            break;
+        case kTrackSupportSetup:
+            entityName=kTrackSupportEntityName;
+            break;
+        case kTrackSupervisionGivenSetup:
+             entityName=kTrackSupervisionGivenEntityName;
+            break;
+            
+        case kTrackSupervisionReceivedSetup:
+            entityName=kTrackSupervisionReceivedEntityName;
+            break;
+            
+        default:
+            break;
+    }
+    
+        NSCalendar *defaultCalendar=[NSCalendar currentCalendar];
+        
+        NSDateComponents *dateComponents=[defaultCalendar components:(NSHourCalendarUnit |NSDayCalendarUnit|NSMinuteCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSSecondCalendarUnit) fromDate:dateFromSearchText];
+    
+        dateComponents.year=0;
+        dateComponents.month=0;
+        dateComponents.hour=23;
+        dateComponents.minute=59;
+        dateComponents.second=59;
+        dateComponents.day=-1;
+        NSDate *oneDayBefore=[defaultCalendar dateByAddingComponents:dateComponents toDate:dateFromSearchText options:0];
+        
+        DLog(@"one day after  %@",oneDayBefore);
+        dateComponents.month=0;
+        dateComponents.hour=0;
+        dateComponents.minute=0;
+        dateComponents.second=0;
+        dateComponents.day=1;
+        NSDate *oneDayAfter=[defaultCalendar dateByAddingComponents:dateComponents toDate:dateFromSearchText options:0];
+        
+        DLog(@"dated one day after is  %@",oneDayAfter);
+        
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:managedObjectContext];
+[fetchRequest setEntity:entity];
+
+NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateOfService > %@ AND dateOfService < %@", oneDayBefore,oneDayAfter];
+[fetchRequest setPredicate:predicate];
+
+NSError *error = nil;
+NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+
+    return fetchedObjects;
+    }
+    else{
+    
+        return autoSearchResults;
+    
+    }
+
+}
 
 
 - (void)tableViewModel:(SCArrayOfItemsModel *)tableViewModel
@@ -1800,6 +1876,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     [button setTitle:buttonText forState:UIControlStateNormal];
                     [button addTarget:self action:@selector(addEvent:) forControlEvents:UIControlEventTouchUpInside];
                     
+                    [buttonCell setNeedsDisplay];
+                    [buttonCell setNeedsLayout];
+                    [buttonCell reloadInputViews];
+                
                 }
                 
             }
@@ -1814,13 +1894,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
      NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
     if (tableViewModel.tag==2) {
         
-       
+       DLog(@"cellmanaged object entity name is %@",cellManagedObject);
         if (cellManagedObject&& [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
        
         
         if (indexPath.section==0) {
             
-            if (cell.tag==2||cell.tag==3) 
+            if (cell.tag==0||cell.tag==1)
                 
             {
                 if ([cell isKindOfClass:[SCDateCell class]]) {
@@ -1831,9 +1911,20 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     
                     [dateCell.dateFormatter setDefaultDate:referenceDate];
                     
-                    [dateCell.dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
                     
-                    [dateCell.datePicker setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+                    NSCalendar *defaultCalander=[NSCalendar currentCalendar];
+                    NSDateComponents *dateComponentsFromNow=[defaultCalander components:(NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit) fromDate:[NSDate date]];
+                    
+                    dateComponentsFromNow.year=1970;
+                    dateComponentsFromNow.month=1;
+                    dateComponentsFromNow.day=1;
+                    [dateComponentsFromNow setTimeZone:[NSTimeZone defaultTimeZone]];
+                    dateCell.datePicker.date=[defaultCalander dateFromComponents:dateComponentsFromNow];
+                    
+                    
+                    [dateCell.dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
+                    
+                    
                 }
                 
             }
@@ -1846,7 +1937,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 case 5:
                 {
                     
-                    if ([cell class]==[StopwatchCell class]) {
+                    if ([cell isKindOfClass:[ StopwatchCell class]]) {
                         stopwatchCell=(StopwatchCell *)cell;
                         stopwatchTextField=(UITextField *)stopwatchCell.stopwatchTextField;
                         
@@ -1887,6 +1978,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                         cell.backgroundColor=[UIColor clearColor];
                         
                         
+                       
                     }
                 }
                     break;
@@ -1980,7 +2072,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    currentDetailTableViewModel=tableViewModel;
+    if (tableViewModel.tag>0) {
+         currentDetailTableViewModel=tableViewModel;
+    }
+    else{
+    
+        currentDetailTableViewModel=nil;
+    }
         
     if (tableViewModel.tag==0) {
         selectedInterventionType=nil;
@@ -2154,7 +2252,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
     }
     
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
                 PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         
@@ -3053,8 +3151,30 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             if ([cell isKindOfClass:[SCObjectCell class]]) 
             {
-            
-                [cell.boundObject setValue:totalTimeDate forKey:@"totalTime"];
+                
+                NSCalendar *defaultCalander=[NSCalendar currentCalendar];
+                [defaultCalander setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+                NSDateComponents *dateComponents=[defaultCalander components:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit) fromDate:totalTimeDate];
+                [dateComponents setTimeZone:[NSTimeZone defaultTimeZone]];
+                
+                NSNumber *hourNumber=[NSNumber numberWithInteger:dateComponents.hour ];
+                NSNumber * minutesNumber=[NSNumber numberWithInteger:dateComponents.minute ];
+                [dateComponents setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+                
+                [dateComponents setHour:[hourNumber integerValue]];
+                 [dateComponents setMinute:[minutesNumber integerValue]];
+                [dateComponents setYear:1970];
+                [dateComponents setMonth:1];
+                [dateComponents setDay:1];
+                if (dateComponents.second>30) {
+                    dateComponents.minute=dateComponents.minute+1;
+                
+                }
+                dateComponents.second=0;
+                
+                
+                
+                [cell.boundObject setValue:[defaultCalander dateFromComponents:dateComponents] forKey:@"totalTime"];
                 [self tableViewModel:(SCTableViewModel *)tableViewModel 
                      willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath];
                 
@@ -3363,6 +3483,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 // specified event store.
 - (void)addEvent:(id)sender {
 	
+    
+    if ([SCUtilities systemVersion]<6) {
+    
     EKEvent *thisEvent;
     
     
@@ -3616,9 +3739,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
                 UIViewController *currentTableModelViewController=(UIViewController *)currentDetailTableViewModel.viewController;
                 
-                NSString *calenderLocation=[[NSUserDefaults standardUserDefaults] valueForKey:@"calander_location"];
                 
-                [thisEvent setLocation:calenderLocation];
                 
                 addController.editViewDelegate = self;
                 addController.view.tag=837;
@@ -3638,7 +3759,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         }
         
     }
-    
+    }
     
   }
 
@@ -3649,7 +3770,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 // Overriding EKEventEditViewDelegate method to update event store according to user actions.
 - (void)eventEditViewController:(EKEventEditViewController *)controller 
           didCompleteWithAction:(EKEventEditViewAction)action {
-	
+
 	NSError *error = nil;
 	EKEvent *thisEvent = controller.event;
 	SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
@@ -3746,7 +3867,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 // Set the calendar edited by EKEventEditViewController to our chosen calendar - the default calendar.
 - (EKCalendar *)eventEditViewControllerDefaultCalendarForNewEvents:(EKEventEditViewController *)controller {
-	
+	if ([SCUtilities systemVersion]<6) {
+  
     
     // Get the default calendar from store.
     //    settingsDictionary=(NSDictionary *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate settingsPlistDictionary];
@@ -3756,9 +3878,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     EKSource *mySource = nil;
     
     
-    BOOL iCloudEnabled=(BOOL)[[NSUserDefaults standardUserDefaults] valueForKey:@"icloud_preference"];
-    
-    if (iCloudEnabled) {
+
         for (EKSource *source in eventStore.sources){
             
             if ([source.title isEqualToString: @"iCloud"])
@@ -3770,7 +3890,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             }
         }
         
-    }
+ 
     
     if (!mySource)
     {
@@ -3871,6 +3991,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     EKCalendar *calendarForEdit = self.psyTrackCalendar;
 	return calendarForEdit;
+        
+    }
+    else{
+    
+        return nil;
+    }
 }
 
 #pragma mark -
@@ -3902,6 +4028,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     TimePickerCell *additionalTimeCell =(TimePickerCell *)[section cellAtIndex:2];
     TimePickerCell *subtractTimeCell =(TimePickerCell *)[section cellAtIndex:3];
     if (startTime&&startTimeCell.label.text.length) {
+        
         startTime=startTimeCell.datePicker.date;
         
     }
@@ -3935,8 +4062,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         startTime=[dateFormatClearSeconds dateFromString:[dateFormatter stringFromDate:startTime]];
         endTime=[dateFormatClearSeconds dateFromString:[dateFormatter stringFromDate:endTime]];
         
-        
-        
+        DLog(@"start time  %@",startTime);
+        DLog(@"end time is  %@",endTime);
+        DLog(@"start time cell is  %@",startTimeCell.datePicker.date);
     }
     
     
@@ -4081,7 +4209,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         if (section.cellCount>=6) 
         {
             
-            if ([[section cellAtIndex:5] class]==[StopwatchCell class]) 
+            if ([[section cellAtIndex:5] isKindOfClass:[StopwatchCell class]])
             {
                 
                 
@@ -4129,7 +4257,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     if (tableViewModel.tag==3) 
     {
         NSManagedObject *sectionManagedObject=(NSManagedObject *)section.boundObject;
-        if (sectionManagedObject && [sectionManagedObject.entity.name  isEqualToString:@"BreakTimeEntity"]) {
+        if (sectionManagedObject && [sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name  isEqualToString:@"BreakTimeEntity"]) {
             
             switch (button.tag)
             {
@@ -4414,10 +4542,15 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel itemAddedForSectionAtIndexPath:(NSIndexPath *)indexPath item:(NSObject *)item{
-
-    currentDetailTableViewModel=tableModel;
+    if (tableModel.tag>0) {
+         currentDetailTableViewModel=tableModel;
+    }
+    else{
     
-    if(tableModel.tag==2 &&indexPath.section)
+        currentDetailTableViewModel=nil;
+    }
+    
+    if(tableModel.tag==2 &&indexPath.section &&currentDetailTableViewModel.sectionCount>1)
     {
         [self calculateTime];
         SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:1];
@@ -4433,14 +4566,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel itemEditedForSectionAtIndexPath:(NSIndexPath *)indexPath item:(NSObject *)item{
-    
-    if (currentDetailTableViewModel.tag==2) {
+   
+    if (currentDetailTableViewModel && currentDetailTableViewModel.tag==2) {
    
     [self tableViewModel:(SCTableViewModel *)tableModel itemAddedForSectionAtIndexPath:indexPath item:(NSObject *)item];
         
     }
     
-    currentDetailTableViewModel=tableModel;
+    
     
     if (tableModel.tag==1) 
     {

@@ -35,17 +35,45 @@
     
     
     
-    SCEntityDefinition *teachingExperienceDef=[SCEntityDefinition definitionWithEntityName:@"TeachingExperienceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"classTitle;credits;startDate;endDate;subject;school;publications;logs;notes"];
+    SCEntityDefinition *teachingExperienceDef=[SCEntityDefinition definitionWithEntityName:@"TeachingExperienceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"teachingRole;classTitle;credits;startDate;endDate;subject;school;publications;topics;logs;notes"];
     
+    teachingExperienceDef.titlePropertyName=@"teachingRole;classTitle";
     
-    
+    teachingExperienceDef.titlePropertyNameDelimiter=@" - ";
     SCEntityDefinition *logDef=[SCEntityDefinition definitionWithEntityName:@"LogEntity" managedObjectContext:managedObjectContext propertyNamesString:@"dateTime;notes"];
     
 
     SCEntityDefinition *schoolDef=[SCEntityDefinition definitionWithEntityName:@"SchoolEntity" managedObjectContext:managedObjectContext propertyNamesString:@"schoolName;notes"];
     
     
+    SCEntityDefinition *topicDef=[SCEntityDefinition definitionWithEntityName:@"TopicEntity" managedObjectContext:managedObjectContext propertyNamesString:@"topic;notes"];
     
+    topicDef.keyPropertyName=@"topic";
+
+    SCPropertyDefinition *topicPropertyDef=[topicDef propertyDefinitionWithName:@"topic"];
+    topicPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *topicNotesPropertyDef=[topicDef propertyDefinitionWithName:@"notes"];
+    topicNotesPropertyDef.type=SCPropertyTypeTextView;
+
+    
+    SCPropertyDefinition *topicsPropertyDef=[teachingExperienceDef propertyDefinitionWithName:@"topics"];
+    
+    topicsPropertyDef.type=SCPropertyTypeObjectSelection;
+    
+    SCObjectSelectionAttributes *topicSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:topicDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
+    
+    
+    topicSelectionAttribs.allowAddingItems = YES;
+    topicSelectionAttribs.allowDeletingItems = YES;
+    topicSelectionAttribs.allowMovingItems = YES;
+    topicSelectionAttribs.allowEditingItems = YES;
+    topicSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to add topics)"];
+    topicSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Tap Here to add topic"];
+    
+    topicsPropertyDef.attributes = topicSelectionAttribs;
+    
+
     
     SCPropertyDefinition *startDatePropertyDef = [teachingExperienceDef propertyDefinitionWithName:@"startDate"];
 	startDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
@@ -204,7 +232,7 @@
     
 
     
-    if([SCUtilities is_iPad]){
+    if([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6){
         
         self.tableView.backgroundView=nil;
         UIView *newView=[[UIView alloc]init];
@@ -265,7 +293,7 @@
     
     
     
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         

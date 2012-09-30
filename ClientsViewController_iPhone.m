@@ -35,7 +35,7 @@
 @synthesize clientObjectSelectionCell;
 @synthesize sendingViewController;
 @synthesize alreadySelectedClients;
-@synthesize clientCurrentlySelectedInReferringDetailview;
+
 @synthesize clientsViewController_Shared;
 static NSString *kBackgroundColorKey = @"backgroundColor";
 //@synthesize searchDisplayController;
@@ -232,7 +232,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 
     //    objectsModel.delegate=self;
     
-    if([SCUtilities is_iPad]){
+    if([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6){
         
         UIColor *backgroundColor=nil;
         
@@ -271,7 +271,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     
     NSString *imageNameStr=nil;
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         imageNameStr=@"ipad-menubar-full.png";
     }
     else{
@@ -633,7 +633,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
 }
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
-    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+    if(([SCUtilities systemVersion]>=6||[SCUtilities is_iPad])&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
         
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
@@ -1452,7 +1452,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     //    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
     
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         

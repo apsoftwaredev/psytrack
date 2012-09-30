@@ -89,13 +89,9 @@
     //    objectSelectionSection.allowEditDetailView = YES;
     //
     
-    NSString *drugViewControllerNibName;
+    NSString *drugViewControllerNibName=@"DrugViewController_iPhone";
     
-    if ([SCUtilities is_iPad]) 
-        drugViewControllerNibName=@"DrugViewController_iPhone";
-    else
-        drugViewControllerNibName=@"DrugViewController_iPhone";
-    
+  
     
     NSString *applicationNumber=[self.boundObject valueForKey:@"applNo"];
     NSString *productNumber=[self.boundObject valueForKey:@"productNo"];

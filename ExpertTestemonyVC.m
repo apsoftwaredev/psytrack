@@ -252,7 +252,7 @@
     [courtApperancesDef addPropertyDefinition:hoursDataProperty];
     
     
-    if([SCUtilities is_iPad]){
+    if([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6){
         
         self.tableView.backgroundView=nil;
         UIView *newView=[[UIView alloc]init];
@@ -309,7 +309,7 @@
     
     
     
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         

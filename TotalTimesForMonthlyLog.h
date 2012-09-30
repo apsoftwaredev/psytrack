@@ -67,10 +67,15 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
     __weak NSArray *clinicians_;
     __weak NSDate *monthStartDate_;
     __weak NSDate *monthEndDate_;
-    __weak NSArray *interventionsDeliveredArray_;
-    __weak NSArray *assessmentsDeliveredArray_;
-    __weak NSArray *supportActivityDeliveredArray_;
-    __weak NSArray *supervisionReceivedArray_;
+    __weak NSSet *interventionsDeliveredArray_;
+    __weak NSSet *assessmentsDeliveredArray_;
+    __weak NSSet *supportActivityDeliveredArray_;
+     NSSet *supervisionReceivedArray_;
+    
+    __weak NSSet *existingInterventionsArray_;
+    __weak NSSet *existingAssessmentsArray_;
+    __weak NSSet *existingSupportArray_;
+     NSSet *existingSupervisionArray_;
     __weak NSArray *existingHoursArray_;
     
     __weak NSDate  *week1StartDate_;
@@ -114,11 +119,33 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 @property (nonatomic, weak) NSDate *week5EndDate;
 
 
-@property (nonatomic, weak) NSArray *interventionsDeliveredArray;
-@property (nonatomic, weak) NSArray *assessmentsDeliveredArray;
-@property (nonatomic, weak) NSArray *supportActivityDeliveredArray;
-@property (nonatomic, weak) NSArray *supervisionReceivedArray;
-@property (nonatomic, weak) NSArray *existingHoursHoursArray;
+@property (nonatomic, weak) NSSet *interventionsDeliveredArray;
+@property (nonatomic, weak) NSSet *assessmentsDeliveredArray;
+@property (nonatomic, weak) NSSet *supportActivityDeliveredArray;
+@property (nonatomic, strong) NSSet *supervisionReceivedArray;
+
+
+
+@property (nonatomic, weak) NSArray *existingHoursArray;
+
+
+
+
+@property (nonatomic, weak) NSSet *existingHInterventionrray;
+
+
+
+@property (nonatomic, weak) NSSet *existingAssessmentArray;
+
+
+
+@property (nonatomic, weak) NSSet *existingSupportArray;
+
+
+@property (nonatomic, strong) NSSet *existingSupervisionArray;
+
+
+
 
 
 
@@ -151,7 +178,7 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 -(int )totalMinutes:(NSTimeInterval) totalTime;
 
 -(NSString *)totalTimeStr:(NSTimeInterval )totalTimeTI;
--(NSTimeInterval )totalTimeIntervalForTrackArray:(NSArray *)trackArray predicate:(NSPredicate *)predicate;
+-(NSTimeInterval )totalTimeIntervalForTrackArray:(NSSet *)trackArray predicate:(NSPredicate *)predicate;
 
 
 -(NSTimeInterval )totalTimeIntervalForExistingHoursArray:(NSArray *)filteredExistingHoursArray keyPath:(NSString *)keyPath;
@@ -191,5 +218,5 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 
 -(NSPredicate *)predicateForExistingHoursProgramCourse;
 
-
+-(NSTimeInterval )totalTimeIntervalForExistingHoursArray:(NSArray *)filteredExistingHoursArray ;
 @end

@@ -291,12 +291,25 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
             else if ((self.directHoursFooter.frame.origin.y+self.directHoursFooter.frame.size.height>MAX_MAIN_SCROLLVIEW_HEIGHT)&&self.interventionTypesTableView.frame.size.height+self.interventionTypesTableView.frame.origin.y<=MAX_MAIN_SCROLLVIEW_HEIGHT) {
                 currentOffsetY=currentOffsetY+ self.directHoursFooter.frame.origin.y;
             }
-            else {
+            else if (currentOffsetY <self.indirectHoursHeader.frame.origin.y){
                 currentOffsetY=currentOffsetY+ self.indirectHoursHeader.frame.origin.y;
             }
+            else{
             
-            [self.mainPageScrollView setContentOffset:CGPointMake(0, currentOffsetY )];
+            currentOffsetY=currentOffsetY+ self.mainPageScrollView.frame.size.height;
+            }
             
+          
+           
+          
+            if ((currentOffsetY+self.mainPageScrollView.frame.size.height)*2>self.subTablesContainerView.frame.size.height) {
+                CGRect subTableContainerFrame=self.subTablesContainerView.frame;
+                subTableContainerFrame.size.height=currentOffsetY+self.mainPageScrollView.frame.size.height;
+                self.subTablesContainerView.frame=subTableContainerFrame;
+                
+            }
+            
+             [self.mainPageScrollView setContentOffset:CGPointMake(0, currentOffsetY )];
             
         }else {
             [self.mainPageScrollView setContentOffset:CGPointMake(0, mainScrollView.frame.size.height+currentOffsetY )];
@@ -618,7 +631,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     supervisionObjectsModel_.delegate=self;
     //
     
-    NSArray *fetchedSupervisionObjects =  [self fetchObjectsFromEntity:(NSString *)@"SupervisionTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"supervisionReceived.time",@"existingSupervision",nil]];
+    NSArray *fetchedSupervisionObjects =  [self fetchObjectsFromEntity:(NSString *)@"SupervisionTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"supervisionReceived.startTime",@"supervisionReceived.endTime",@"subTypes.existingHours",@"supervisionReceived.time",@"existingSupervision",nil]];
     //
     
     for (SupervisionTypeEntity *supervisionType in fetchedSupervisionObjects) {

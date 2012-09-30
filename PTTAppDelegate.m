@@ -314,32 +314,25 @@
     
     clinicianToolsLabel.text=NSLocalizedStringWithDefaultValue(@"Clinician Tools" , @"Root", [NSBundle mainBundle], @"Clinician Tools", @"subname for the application");
     
-   
-   
+    CGRect clinicianToolsLabelFrame=clinicianToolsLabel.frame;
     
+    clinicianToolsLabelFrame.origin.y=self.imageView.frame.origin.y+self.imageView.frame.size.height-35.0;
+    clinicianToolsLabel.frame=clinicianToolsLabelFrame;
+    
+    CGRect developedByLabelFrame=self.developedByLabel.frame;
+    
+    developedByLabelFrame.origin.y=self.clinicianToolsLabel.frame.origin.y+self.clinicianToolsLabel.frame.size.height+5.0;
+    self.developedByLabel.frame=developedByLabelFrame;
+    
+    CGRect psyTrackLabelFrame=self.psyTrackLabel.frame;
+    psyTrackLabelFrame.origin.y=self.imageView.frame.origin.y-psyTrackLabelFrame.size.height+35.0;
+    self.psyTrackLabel.frame=psyTrackLabelFrame;
     
       [[UITabBar appearance] setTintColor:[UIColor whiteColor]];       
     [[UITabBar appearance] setSelectedImageTintColor:[UIColor blueColor]]; 
     [self.tabBarController setDelegate:self];
                
-//       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{                          
-//         
-//           
-//           if (!([[NSUserDefaults standardUserDefaults] objectForKey:kPTTAddressBookGroupName]&&![[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName])||(![[NSUserDefaults standardUserDefaults]objectForKey:kPTTAddressBookGroupIdentifier]&&![[NSUserDefaults standardUserDefaults]valueForKey:kPTTAddressBookGroupIdentifier])) 
-//           {
-//               InAppSettingsViewController *inAppSettingsViewController=[[InAppSettingsViewController alloc]init ];
-//                
-//               if([[NSUserDefaults standardUserDefaults] objectForKey:kPTTAddressBookGroupName]){
-//               NSString *groupName=[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
-//              
-//               [inAppSettingsViewController changeABGroupNameTo:(NSString *)groupName addNew:NO];
-//               }
-//               else {
-//                   [inAppSettingsViewController changeABGroupNameTo:(NSString *)[NSString string] addNew:NO];
-//               }
-//               
-//           }
-//       });
+
     tabBarController.tabBar.userInteractionEnabled=NO;
     for (UIViewController *viewControllerInArray in tabBarController.viewControllers) {
         viewControllerInArray.view.userInteractionEnabled=NO;
@@ -358,7 +351,7 @@
      [self.window setBackgroundColor:[UIColor colorWithPatternImage:backgroundPattern]];
     
     [self.window makeKeyAndVisible];
-    [self displayNotification:@"Configuring iCloud database settings. One moment please..." forDuration:0.0 location:kPTTScreenLocationTop inView:self.window];
+    [self displayNotification:@"Configuring database settings for iCloud. One moment please..." forDuration:0.0 location:kPTTScreenLocationTop inView:self.window];
     displayConnectingTimer=[NSTimer scheduledTimerWithTimeInterval:0.5
                                                             target:self
                                                           selector:@selector(changeEstablishingConnectionMessage)
@@ -397,8 +390,15 @@
     
     NSString *sliderHandleImageName=nil;
     
+    if ([SCUtilities systemVersion]>=6||[SCUtilities is_iPad]) {
+       menuBarImageName=@"ipad-menubar-full";
+    }
+    else{
+     menuBarImageName=@"menubar-full";
+    
+    }
     if ([SCUtilities is_iPad]) {
-        menuBarImageName=@"ipad-menubar-full";
+      
         
        
         
@@ -408,7 +408,7 @@
         sliderHandleImageName=@"ipad-slider-handle.png";
     }
     else {
-        menuBarImageName=@"menubar-full";
+       
         
         
         
@@ -475,24 +475,24 @@
                 UILabel *label=(UILabel *)[containerView viewWithTag:656];
                 NSString *labelText=(NSString *)label.text;
                 
-                
-                if ([[label.text substringToIndex:12]isEqualToString:@"Establishing"]) {
+               
+                if ([[label.text substringToIndex:11]isEqualToString:@"Configuring"]) {
                
              
-                NSString *message=@"Establishing connection for database. One moment please";
+                NSString *message=@"Configuring database for iCloud. One moment please";
                 
                 switch (labelText.length) {
-                    case 55:
+                    case 50:
                         message=[message stringByAppendingString:@"."];
                         break;
-                    case 56:
+                    case 51:
                         message=[message stringByAppendingString:@".."];
                         break;
-                    case 57:
+                    case 52:
                         message=[message stringByAppendingString:@"..."];
                         break;
-                    case 58:
-                        message=[message substringToIndex:55];
+                    case 53:
+                        message=[message substringToIndex:50];
                         break;
                     default:
                         break;
@@ -723,9 +723,10 @@
         for (UIViewController *viewControllerInArray in tabBarController.viewControllers) {
             viewControllerInArray.view.userInteractionEnabled=YES;
         }
-        [self.window addSubview:self.tabBarController.view];
+//        [self.window addSubview:self.tabBarController.view];
+        
          [self flashAppTrainAndTitleGraphics];
-    
+       
         
     } else if(isAppLocked||isLockedAtStartup) {
             
@@ -2102,16 +2103,24 @@ willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation
          self.clinicianToolsLabel.transform      = CGAffineTransformMakeRotation(M_PI);
          self.developedByLabel.transform      = CGAffineTransformMakeRotation(M_PI);
         //iPhone upside down
-        
-            self.imageView.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform,0,75);
-
-            self.psyTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform,0,-130);
+            if ([SCUtilities systemVersion]<6) {
+                self.imageView.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform,0,75);
+                
+                self.psyTrackLabel.transform      = CGAffineTransformTranslate(self.psyTrackLabel.transform,0,-130);
+                
+                
+                self.developedByLabel.transform      = CGAffineTransformTranslate(self.developedByLabel.transform,0,340);
+                self.clinicianToolsLabel.transform      = CGAffineTransformTranslate(self.clinicianToolsLabel.transform,0,280);
+                
+                
+            }
+            else{
+            
+                
             
             
-            self.developedByLabel.transform      = CGAffineTransformTranslate(self.developedByLabel.transform,0,340);
-            self.clinicianToolsLabel.transform      = CGAffineTransformTranslate(self.clinicianToolsLabel.transform,0,280);
+            }
             
-                                
         }
         
     }
@@ -5601,14 +5610,16 @@ return [self applicationDrugsDirectory].path;
             }
         }
         NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
-       
+        NSURL *cloudURL =nil;
         // this needs to match the entitlements and provisioning profile
-        NSURL *cloudURL = [fileManager URLForUbiquityContainerIdentifier:nil];
+#if !TARGET_IPHONE_SIMULATOR
+        cloudURL = [fileManager URLForUbiquityContainerIdentifier:nil];
+#endif
         NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"psyTrack"];
         NSDictionary* options;
-        BOOL useriCloudChoice=YES;
-        BOOL useiCloud=YES;
-        if (useiCloud&&useriCloudChoice&&[coreDataCloudContent length] != 0 &&[self reachable]) {
+      
+       
+        if ([coreDataCloudContent length] != 0 &&[self reachable]) {
                 // iCloud is available
                 cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
             

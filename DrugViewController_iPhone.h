@@ -25,7 +25,7 @@
     
     SCArrayOfObjectsModel *objectsModel;
     
-  	__weak UISearchBar *searchBar;
+  	 UISearchBar *searchBar;
 //    UITableView *tableView;
     
 //	SCArrayOfObjectsModel *tableModel;

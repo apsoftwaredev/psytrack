@@ -27,7 +27,7 @@
     [dateFormatter setDateFormat:@"M/d/yyyy"];
     NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
     
-    SCEntityDefinition *ceCreditsDef=[SCEntityDefinition definitionWithEntityName:@"ContinuingEducationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"cETitle;type;provider;cost;credits;dateEarned;forLicenseRenewal;notes"];
+    SCEntityDefinition *ceCreditsDef=[SCEntityDefinition definitionWithEntityName:@"ContinuingEducationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"cETitle;type;topics;provider;cost;credits;dateEarned;forLicenseRenewal;notes"];
     
     
     SCEntityDefinition *providerDef=[SCEntityDefinition definitionWithEntityName:@"ContinuingEducationProviderEntity" managedObjectContext:managedObjectContext propertyNamesString:@"providerName;notes"];
@@ -47,6 +47,39 @@
                                                                                    @"renewDate",@"notes",@"renewals", nil]];
     
     licenseDef.titlePropertyName=@"licenseName.title";
+    
+    
+    SCEntityDefinition *topicDef=[SCEntityDefinition definitionWithEntityName:@"TopicEntity" managedObjectContext:managedObjectContext propertyNamesString:@"topic;notes"];
+    
+    topicDef.keyPropertyName=@"topic";
+    
+    SCPropertyDefinition *topicPropertyDef=[topicDef propertyDefinitionWithName:@"topic"];
+    topicPropertyDef.type=SCPropertyTypeTextView;
+    
+    SCPropertyDefinition *topicNotesPropertyDef=[topicDef propertyDefinitionWithName:@"notes"];
+    topicNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+    SCPropertyDefinition *topicsPropertyDef=[ceCreditsDef propertyDefinitionWithName:@"topics"];
+    
+    topicsPropertyDef.type=SCPropertyTypeObjectSelection;
+    
+    SCObjectSelectionAttributes *topicSelectionAttribs=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:topicDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
+    
+    
+    topicSelectionAttribs.allowAddingItems = YES;
+    topicSelectionAttribs.allowDeletingItems = YES;
+    topicSelectionAttribs.allowMovingItems = YES;
+    topicSelectionAttribs.allowEditingItems = YES;
+    topicSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to add topics)"];
+    topicSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Tap Here to add topic"];
+    
+    topicsPropertyDef.attributes = topicSelectionAttribs;
+    
+    
+
+    
+    
     SCPropertyDefinition *licenseRenewalsPropertyDef=[ceCreditsDef propertyDefinitionWithName:@"forLicenseRenewal"];
     licenseRenewalsPropertyDef.type=SCPropertyTypeObjectSelection;
     
@@ -278,7 +311,7 @@
     objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:ceCreditsDef];
     
     
-    if([SCUtilities is_iPad]){
+    if([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6){
         
         self.tableView.backgroundView=nil;
         UIView *newView=[[UIView alloc]init];
@@ -403,7 +436,7 @@
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         

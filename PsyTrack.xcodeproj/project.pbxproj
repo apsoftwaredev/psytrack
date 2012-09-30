@@ -176,8 +176,6 @@
 		B7F877BB14C9A38900F00C0D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877B914C9A38900F00C0D /* EventKit.framework */; };
 		B7F877BC14C9A38900F00C0D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877BA14C9A38900F00C0D /* EventKitUI.framework */; };
 		E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */; };
-		E71955B415FF86DC0070E61D /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E71955B015FF86BC0070E61D /* libSensibleTableView.a */; };
-		E71955C115FF873B0070E61D /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E71955BE15FF87250070E61D /* libSTV+CoreData.a */; };
 		E719562515FFADB60070E61D /* DTAboutViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = E71955F715FFADB60070E61D /* DTAboutViewController.strings */; };
 		E719562615FFADB60070E61D /* DTAboutViewController-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E71955F915FFADB60070E61D /* DTAboutViewController-Info.plist */; };
 		E719562715FFADB60070E61D /* UIButtonBarArrowDownSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = E71955FB15FFADB60070E61D /* UIButtonBarArrowDownSmall.png */; };
@@ -386,6 +384,7 @@
 		E7B49BFC1607BD600073AA30 /* DisorderSubCategoryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BFB1607BD600073AA30 /* DisorderSubCategoryEntity.m */; };
 		E7B49BFF1607BD7B0073AA30 /* DisorderSystemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BFE1607BD7B0073AA30 /* DisorderSystemEntity.m */; };
 		E7B49C111607E24F0073AA30 /* BatteryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49C101607E24F0073AA30 /* BatteryEntity.m */; };
+		E7B7957A16124528008D3E8F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7B7957916124528008D3E8F /* Default-568h@2x.png */; };
 		E7C02D9F15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */; };
 		E7C02DA215B3621B0072F97C /* SupervisionReceivedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA115B362190072F97C /* SupervisionReceivedEntity.m */; };
 		E7C02DA515B362990072F97C /* SupervisionGivenEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA415B362980072F97C /* SupervisionGivenEntity.m */; };
@@ -406,6 +405,8 @@
 		E7CCB8D1159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8D0159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib */; };
 		E7CCB8E6159CE2FA00A12908 /* ileopard-keys_128x128.png in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8E5159CE2FA00A12908 /* ileopard-keys_128x128.png */; };
 		E7CCB8E7159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8E9159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib */; };
+		E7CFC2B4161509B700D130BE /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7CFC29E1615075C00D130BE /* libSensibleTableView.a */; };
+		E7CFC2B5161509BD00D130BE /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7CFC2AC161507D600D130BE /* libSTV+CoreData.a */; };
 		E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */; };
 		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
 		E7DEECDD15F2EEC6001D5B05 /* CommunityServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DEECDB15F2EEC6001D5B05 /* CommunityServiceVC.m */; };
@@ -424,8 +425,6 @@
 		E7F1CAF21597AF4C006F9E95 /* MonthlyPracticumLogTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CAF01597AF4C006F9E95 /* MonthlyPracticumLogTopCell.xib */; };
 		E7F1CAF41597CADB006F9E95 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F1CAF31597CADB006F9E95 /* CoreText.framework */; };
 		E7F1CAF91597D010006F9E95 /* PDFRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1CAF81597D00F006F9E95 /* PDFRenderer.m */; };
-		E7F1CB721598C024006F9E95 /* ReaderBookDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1CB231598C024006F9E95 /* ReaderBookDelegate.m */; };
-		E7F1CB731598C024006F9E95 /* ReaderDemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1CB251598C024006F9E95 /* ReaderDemoController.m */; };
 		E7F1CB741598C024006F9E95 /* AppIcon-057.png in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CB271598C024006F9E95 /* AppIcon-057.png */; };
 		E7F1CB751598C024006F9E95 /* AppIcon-072.png in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CB281598C024006F9E95 /* AppIcon-072.png */; };
 		E7F1CB761598C024006F9E95 /* AppIcon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CB291598C024006F9E95 /* AppIcon-114.png */; };
@@ -447,7 +446,6 @@
 		E7F1CB861598C024006F9E95 /* vfrLICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CB391598C024006F9E95 /* vfrLICENSE */; };
 		E7F1CB891598C024006F9E95 /* vfrREADME in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CB401598C024006F9E95 /* vfrREADME */; };
 		E7F1CB8A1598C024006F9E95 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CB421598C024006F9E95 /* Localizable.strings */; };
-		E7F1CB8B1598C024006F9E95 /* Reader.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CB451598C024006F9E95 /* Reader.pdf */; };
 		E7F1CB8C1598C024006F9E95 /* CGPDFDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1CB481598C024006F9E95 /* CGPDFDocument.m */; };
 		E7F1CB8D1598C024006F9E95 /* ReaderConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1CB4A1598C024006F9E95 /* ReaderConstants.m */; };
 		E7F1CB8E1598C024006F9E95 /* ReaderContentPage.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1CB4C1598C024006F9E95 /* ReaderContentPage.m */; };
@@ -481,32 +479,25 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E71955AF15FF86BC0070E61D /* PBXContainerItemProxy */ = {
+		E7CFC29D1615075C00D130BE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E71955A715FF86BA0070E61D /* SensibleTableView.xcodeproj */;
+			containerPortal = E7CFC2951615075C00D130BE /* SensibleTableView.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DBE7373014F99E580076D2B6;
 			remoteInfo = SensibleTableView;
 		};
-		E71955B215FF86CC0070E61D /* PBXContainerItemProxy */ = {
+		E7CFC2A01615076800D130BE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E71955A715FF86BA0070E61D /* SensibleTableView.xcodeproj */;
+			containerPortal = E7CFC2951615075C00D130BE /* SensibleTableView.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = DBE7372F14F99E580076D2B6;
 			remoteInfo = SensibleTableView;
 		};
-		E71955BD15FF87250070E61D /* PBXContainerItemProxy */ = {
+		E7CFC2AB161507D600D130BE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E71955B515FF87250070E61D /* STV+CoreData.xcodeproj */;
+			containerPortal = E7CFC2A3161507D500D130BE /* STV+CoreData.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DBE737C414FC66D40076D2B6;
-			remoteInfo = "STV+CoreData";
-		};
-		E71955BF15FF872F0070E61D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E71955B515FF87250070E61D /* STV+CoreData.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
 			remoteInfo = "STV+CoreData";
 		};
 /* End PBXContainerItemProxy section */
@@ -750,8 +741,6 @@
 		B7F877BA14C9A38900F00C0D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		E70B9EFD15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSourcesSCObjectSelectionCell.h; sourceTree = "<group>"; };
 		E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSourcesSCObjectSelectionCell.m; sourceTree = "<group>"; };
-		E71955A715FF86BA0070E61D /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3-1.1.0 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
-		E71955B515FF87250070E61D /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3-1.1.0 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E71955F515FFADB60070E61D /* DTAboutViewController-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTAboutViewController-Prefix.pch"; sourceTree = "<group>"; };
 		E71955F815FFADB60070E61D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/DTAboutViewController.strings; sourceTree = "<group>"; };
 		E71955F915FFADB60070E61D /* DTAboutViewController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DTAboutViewController-Info.plist"; sourceTree = "<group>"; };
@@ -920,7 +909,7 @@
 		E75F7784151CC574002B10AE /* LogEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogEntity.h; sourceTree = "<group>"; };
 		E75F7785151CC574002B10AE /* LogEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogEntity.m; sourceTree = "<group>"; };
 		E7619871158946B100C5BB8F /* ClientGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientGroupsViewController.h; sourceTree = "<group>"; };
-		E7619872158946B100C5BB8F /* ClientGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientGroupsViewController.m; sourceTree = "<group>"; };
+		E7619872158946B100C5BB8F /* ClientGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClientGroupsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7619873158946B100C5BB8F /* ClientGroupsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientGroupsViewController.xib; sourceTree = "<group>"; };
 		E762661D15FE958500D97D3E /* AdditionalVariableEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalVariableEntity.h; sourceTree = "<group>"; };
 		E762661E15FE958500D97D3E /* AdditionalVariableEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdditionalVariableEntity.m; sourceTree = "<group>"; };
@@ -1057,7 +1046,7 @@
 		E7AFB2BD15C47C8D005E2722 /* RateEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RateEntity.h; sourceTree = "<group>"; };
 		E7AFB2BE15C47C8D005E2722 /* RateEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RateEntity.m; sourceTree = "<group>"; };
 		E7B3E3FC15C58B2F00729C88 /* CECreditsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CECreditsViewController.h; sourceTree = "<group>"; };
-		E7B3E3FD15C58B2F00729C88 /* CECreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CECreditsViewController.m; sourceTree = "<group>"; };
+		E7B3E3FD15C58B2F00729C88 /* CECreditsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CECreditsViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7B3E3FE15C58B2F00729C88 /* LicenseRenewalEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LicenseRenewalEntity.h; sourceTree = "<group>"; };
 		E7B3E3FF15C58B2F00729C88 /* LicenseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LicenseEntity.h; sourceTree = "<group>"; };
 		E7B3E40015C58B2F00729C88 /* LicenseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LicenseEntity.m; sourceTree = "<group>"; };
@@ -1091,6 +1080,7 @@
 		E7B49C171607E2D30073AA30 /* PublicationTypeEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PublicationTypeEntity.m; sourceTree = "<group>"; };
 		E7B49C181607E3010073AA30 /* AdditionalSymptomEntity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdditionalSymptomEntity.h; sourceTree = "<group>"; };
 		E7B49C191607E3010073AA30 /* AdditionalSymptomEntity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdditionalSymptomEntity.m; sourceTree = "<group>"; };
+		E7B7957916124528008D3E8F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		E7C02D9D15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h; sourceTree = "<group>"; };
 		E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m; sourceTree = "<group>"; };
 		E7C02DA015B362180072F97C /* SupervisionReceivedEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionReceivedEntity.h; sourceTree = "<group>"; };
@@ -1124,6 +1114,8 @@
 		E7CCB8D0159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogTopCellWithUndefined.xib; sourceTree = "<group>"; };
 		E7CCB8E5159CE2FA00A12908 /* ileopard-keys_128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ileopard-keys_128x128.png"; sourceTree = "<group>"; };
 		E7CCB8E8159CEE3200A12908 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EncryptionTokenCell_iPhone.xib; sourceTree = "<group>"; };
+		E7CFC2951615075C00D130BE /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.1.1 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
+		E7CFC2A3161507D500D130BE /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3.1.1 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursOverviewCell.xib; sourceTree = "<group>"; };
 		E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController_iPad.xib; sourceTree = "<group>"; };
 		E7DEECDA15F2EEC6001D5B05 /* CommunityServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityServiceVC.h; sourceTree = "<group>"; };
@@ -1154,10 +1146,6 @@
 		E7F1CAF31597CADB006F9E95 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		E7F1CAF71597D00F006F9E95 /* PDFRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFRenderer.h; sourceTree = "<group>"; };
 		E7F1CAF81597D00F006F9E95 /* PDFRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PDFRenderer.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		E7F1CB221598C024006F9E95 /* ReaderBookDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderBookDelegate.h; sourceTree = "<group>"; };
-		E7F1CB231598C024006F9E95 /* ReaderBookDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ReaderBookDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		E7F1CB241598C024006F9E95 /* ReaderDemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderDemoController.h; sourceTree = "<group>"; };
-		E7F1CB251598C024006F9E95 /* ReaderDemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ReaderDemoController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7F1CB271598C024006F9E95 /* AppIcon-057.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-057.png"; sourceTree = "<group>"; };
 		E7F1CB281598C024006F9E95 /* AppIcon-072.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-072.png"; sourceTree = "<group>"; };
 		E7F1CB291598C024006F9E95 /* AppIcon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon-114.png"; sourceTree = "<group>"; };
@@ -1245,8 +1233,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E71955C115FF873B0070E61D /* libSTV+CoreData.a in Frameworks */,
-				E71955B415FF86DC0070E61D /* libSensibleTableView.a in Frameworks */,
+				E7CFC2B5161509BD00D130BE /* libSTV+CoreData.a in Frameworks */,
+				E7CFC2B4161509B700D130BE /* libSensibleTableView.a in Frameworks */,
 				E7F1CBA31598C787006F9E95 /* ImageIO.framework in Frameworks */,
 				E7F1CAF41597CADB006F9E95 /* CoreText.framework in Frameworks */,
 				E798A13C15857E36006B9DBD /* CoreImage.framework in Frameworks */,
@@ -1837,8 +1825,6 @@
 		B771C54314DAF3E4002D430E /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
-				E71955B515FF87250070E61D /* STV+CoreData.xcodeproj */,
-				E71955A715FF86BA0070E61D /* SensibleTableView.xcodeproj */,
 				E7F1CB1E1598C024006F9E95 /* vfr-Reader-db84c9d */,
 				E7577FA7158C1DAE0044D344 /* KeychainItemWrapper.h */,
 				E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */,
@@ -1860,6 +1846,9 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
+				E7CFC2A3161507D500D130BE /* STV+CoreData.xcodeproj */,
+				E7CFC2951615075C00D130BE /* SensibleTableView.xcodeproj */,
+				E7B7957916124528008D3E8F /* Default-568h@2x.png */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Third Party */,
 				37F7CE1B1500328E00AD2C3A /* psyTrack */,
@@ -1898,22 +1887,6 @@
 				B79F48A2142BEF0D0085D47B /* CoreData.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E71955A815FF86BA0070E61D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E71955B015FF86BC0070E61D /* libSensibleTableView.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E71955B615FF87250070E61D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E71955BE15FF87250070E61D /* libSTV+CoreData.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		E71955F415FFADB60070E61D /* Core */ = {
@@ -2283,6 +2256,22 @@
 			name = "Courses Taken";
 			sourceTree = "<group>";
 		};
+		E7CFC2961615075C00D130BE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7CFC29E1615075C00D130BE /* libSensibleTableView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7CFC2A4161507D500D130BE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7CFC2AC161507D600D130BE /* libSTV+CoreData.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E7DEED0615F6C127001D5B05 /* All Training Hours Report */ = {
 			isa = PBXGroup;
 			children = (
@@ -2386,10 +2375,6 @@
 		E7F1CB1F1598C024006F9E95 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				E7F1CB221598C024006F9E95 /* ReaderBookDelegate.h */,
-				E7F1CB231598C024006F9E95 /* ReaderBookDelegate.m */,
-				E7F1CB241598C024006F9E95 /* ReaderDemoController.h */,
-				E7F1CB251598C024006F9E95 /* ReaderDemoController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2488,8 +2473,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				E71955C015FF872F0070E61D /* PBXTargetDependency */,
-				E71955B315FF86CC0070E61D /* PBXTargetDependency */,
+				E7CFC2A11615076800D130BE /* PBXTargetDependency */,
 			);
 			name = PsyTrack;
 			productName = psyTrainTrack;
@@ -2518,12 +2502,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = E71955A815FF86BA0070E61D /* Products */;
-					ProjectRef = E71955A715FF86BA0070E61D /* SensibleTableView.xcodeproj */;
+					ProductGroup = E7CFC2961615075C00D130BE /* Products */;
+					ProjectRef = E7CFC2951615075C00D130BE /* SensibleTableView.xcodeproj */;
 				},
 				{
-					ProductGroup = E71955B615FF87250070E61D /* Products */;
-					ProjectRef = E71955B515FF87250070E61D /* STV+CoreData.xcodeproj */;
+					ProductGroup = E7CFC2A4161507D500D130BE /* Products */;
+					ProjectRef = E7CFC2A3161507D500D130BE /* STV+CoreData.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -2534,18 +2518,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E71955B015FF86BC0070E61D /* libSensibleTableView.a */ = {
+		E7CFC29E1615075C00D130BE /* libSensibleTableView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSensibleTableView.a;
-			remoteRef = E71955AF15FF86BC0070E61D /* PBXContainerItemProxy */;
+			remoteRef = E7CFC29D1615075C00D130BE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E71955BE15FF87250070E61D /* libSTV+CoreData.a */ = {
+		E7CFC2AC161507D600D130BE /* libSTV+CoreData.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libSTV+CoreData.a";
-			remoteRef = E71955BD15FF87250070E61D /* PBXContainerItemProxy */;
+			remoteRef = E7CFC2AB161507D600D130BE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2728,7 +2712,6 @@
 				E7F1CB861598C024006F9E95 /* vfrLICENSE in Resources */,
 				E7F1CB891598C024006F9E95 /* vfrREADME in Resources */,
 				E7F1CB8A1598C024006F9E95 /* Localizable.strings in Resources */,
-				E7F1CB8B1598C024006F9E95 /* Reader.pdf in Resources */,
 				E7F1CBB1159A389F006F9E95 /* MonthlyPracticumLogTableViewController.xib in Resources */,
 				E7CCB8B3159A9B0100A12908 /* MonthlyPracticumLogBottomCell.xib in Resources */,
 				E7CCB8D1159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib in Resources */,
@@ -2772,6 +2755,7 @@
 				E7294CD41606622300C153CE /* DemographicReportBottomCell.xib in Resources */,
 				E7294CE5160685DC00C153CE /* DemographicReportGenerateVC.xib in Resources */,
 				E7294CE716069C5000C153CE /* DemographicReportGenerateVC_iPhone.xib in Resources */,
+				E7B7957A16124528008D3E8F /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2892,8 +2876,6 @@
 				E772E4AD1593987E00478A3E /* InterventionTypeEntity.m in Sources */,
 				E7F1CAF11597AF4C006F9E95 /* MonthlyPracticumLogTopCell.m in Sources */,
 				E7F1CAF91597D010006F9E95 /* PDFRenderer.m in Sources */,
-				E7F1CB721598C024006F9E95 /* ReaderBookDelegate.m in Sources */,
-				E7F1CB731598C024006F9E95 /* ReaderDemoController.m in Sources */,
 				E7F1CB8C1598C024006F9E95 /* CGPDFDocument.m in Sources */,
 				E7F1CB8D1598C024006F9E95 /* ReaderConstants.m in Sources */,
 				E7F1CB8E1598C024006F9E95 /* ReaderContentPage.m in Sources */,
@@ -3023,15 +3005,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E71955B315FF86CC0070E61D /* PBXTargetDependency */ = {
+		E7CFC2A11615076800D130BE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SensibleTableView;
-			targetProxy = E71955B215FF86CC0070E61D /* PBXContainerItemProxy */;
-		};
-		E71955C015FF872F0070E61D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "STV+CoreData";
-			targetProxy = E71955BF15FF872F0070E61D /* PBXContainerItemProxy */;
+			targetProxy = E7CFC2A01615076800D130BE /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3515,6 +3492,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/../../Downloads/STV 3.1.0 Pro/Static Frameworks\"",
+					"\"$(SRCROOT)/../../Downloads/STV 3.1.1 Pro/Static Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";
@@ -3546,6 +3524,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/../../Downloads/STV 3.1.0 Pro/Static Frameworks\"",
+					"\"$(SRCROOT)/../../Downloads/STV 3.1.1 Pro/Static Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";

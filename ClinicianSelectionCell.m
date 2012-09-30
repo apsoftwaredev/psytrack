@@ -72,13 +72,8 @@
    
     
     
-    NSString *clinicianViewControllerNibName;
-    
-    if ([SCUtilities is_iPad]) 
-        clinicianViewControllerNibName=@"ClinicianViewController";
-    else
-        clinicianViewControllerNibName=@"ClinicianViewController";
-    
+    NSString * clinicianViewControllerNibName=@"ClinicianViewController";
+   
     
     NSPredicate *predicate=nil;
     

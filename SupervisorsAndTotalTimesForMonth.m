@@ -197,46 +197,49 @@
         NSPredicate *predicateForTrackDoctorateLevel=[self predicateForTrackDoctorateLevel];
         
         NSPredicate *predicateForExistingHoursDoctorateLevel=[self predicateForExistingHoursDoctorateLevel];
+        NSArray *fetchedInderventionDeliveredArray=[self fetchObjectsFromEntity:kTrackInterventionEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+        self.interventionsDeliveredArray=[NSSet setWithArray:fetchedInderventionDeliveredArray];
         
-        self.interventionsDeliveredArray=[self fetchObjectsFromEntity:kTrackInterventionEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+        NSArray *fetchedAssessmentsDeliveredArray=[self fetchObjectsFromEntity:kTrackAssessmentEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+       self.assessmentsDeliveredArray=[NSSet setWithArray:fetchedAssessmentsDeliveredArray];
         
-       self.assessmentsDeliveredArray=[self fetchObjectsFromEntity:kTrackAssessmentEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+        NSArray *fetchedSupportActivityDeliveredArray=[self fetchObjectsFromEntity:kTrackSupportEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+       self.supportActivityDeliveredArray=[NSSet setWithArray:fetchedSupportActivityDeliveredArray];
         
-       self.supportActivityDeliveredArray=[self fetchObjectsFromEntity:kTrackSupportEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+        NSArray *fetchedSupervisionArray=[self fetchObjectsFromEntity:kTrackSupervisionReceivedEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+        self.supervisionReceivedArray=[NSSet setWithArray:fetchedSupervisionArray];
         
-        self.supervisionReceivedArray=[self fetchObjectsFromEntity:kTrackSupervisionReceivedEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
-        
-        self.existingHoursHoursArray=[self fetchObjectsFromEntity:kTrackExistingHoursEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"programCourse" ]];
+        self.existingHoursArray=[self fetchObjectsFromEntity:kTrackExistingHoursEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"programCourse" ]];
                                               
-        self.interventionsDeliveredArray=[self.interventionsDeliveredArray filteredArrayUsingPredicate:predicateForTrackDoctorateLevel];
+        self.interventionsDeliveredArray=[self.interventionsDeliveredArray filteredSetUsingPredicate:predicateForTrackDoctorateLevel];
         
         
          
         
         
-        self.assessmentsDeliveredArray=[self.assessmentsDeliveredArray filteredArrayUsingPredicate:predicateForTrackDoctorateLevel];
+        self.assessmentsDeliveredArray=[self.assessmentsDeliveredArray filteredSetUsingPredicate:predicateForTrackDoctorateLevel];
         
         
         
-        self.supportActivityDeliveredArray=[self.supportActivityDeliveredArray filteredArrayUsingPredicate:predicateForTrackDoctorateLevel];
+        self.supportActivityDeliveredArray=[self.supportActivityDeliveredArray filteredSetUsingPredicate:predicateForTrackDoctorateLevel];
         
-        self.supervisionReceivedArray=[self.supervisionReceivedArray filteredArrayUsingPredicate:predicateForTrackDoctorateLevel];
+        self.supervisionReceivedArray=[self.supervisionReceivedArray filteredSetUsingPredicate:predicateForTrackDoctorateLevel];
         
-        self.existingHoursHoursArray=[self.existingHoursHoursArray filteredArrayUsingPredicate:predicateForExistingHoursDoctorateLevel];
+        self.existingHoursArray=[self.existingHoursArray filteredArrayUsingPredicate:predicateForExistingHoursDoctorateLevel];
         
         
         if(clinician_){
             
             
             NSPredicate *clinicianFilter=[self predicateForClincian];
-            self.interventionsDeliveredArray=[self.interventionsDeliveredArray filteredArrayUsingPredicate:clinicianFilter];
-            self.assessmentsDeliveredArray=[self.assessmentsDeliveredArray filteredArrayUsingPredicate:clinicianFilter];
+            self.interventionsDeliveredArray=[self.interventionsDeliveredArray filteredSetUsingPredicate:clinicianFilter];
+            self.assessmentsDeliveredArray=[self.assessmentsDeliveredArray filteredSetUsingPredicate:clinicianFilter];
             
-            self.supportActivityDeliveredArray=[self.supportActivityDeliveredArray filteredArrayUsingPredicate:clinicianFilter];
+            self.supportActivityDeliveredArray=[self.supportActivityDeliveredArray filteredSetUsingPredicate:clinicianFilter];
             
-            self.supervisionReceivedArray=[self.supervisionReceivedArray filteredArrayUsingPredicate:clinicianFilter];
+            self.supervisionReceivedArray=[self.supervisionReceivedArray filteredSetUsingPredicate:clinicianFilter];
             
-            self.existingHoursHoursArray=[self.existingHoursHoursArray filteredArrayUsingPredicate:clinicianFilter];
+            self.existingHoursArray=[self.existingHoursArray filteredArrayUsingPredicate:clinicianFilter];
             
             
             
@@ -291,22 +294,22 @@
         NSPredicate *predicateForTrackTrainingProgram=[self predicateForTrackTrainingProgram];
         if (tempInterventionsDeliveredArray&& tempInterventionsDeliveredArray.count) {
         
-            self.interventionsDeliveredArray=[tempInterventionsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+            self.interventionsDeliveredArray=[NSSet setWithArray:[tempInterventionsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram]];
         }
         if (tempAssessmentsDeliveredArray&& tempAssessmentsDeliveredArray.count) {
-            self.assessmentsDeliveredArray=[tempAssessmentsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+            self.assessmentsDeliveredArray=[NSSet setWithArray:[tempAssessmentsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram]];
         }
         if (tempSupportActivityDeliveredArray&& tempSupportActivityDeliveredArray.count) {
-            self.supportActivityDeliveredArray=[tempSupportActivityDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+            self.supportActivityDeliveredArray=[NSSet setWithArray:[tempSupportActivityDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram]];
         }
         if (tempSupervisionReceivedArray&& tempSupervisionReceivedArray.count) {
-            self.supervisionReceivedArray=[tempSupervisionReceivedArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram];
+            self.supervisionReceivedArray=[NSSet setWithArray:[tempSupervisionReceivedArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram]];
         }
         
         NSPredicate *predicateForExistingHoursProgramCourse=[self predicateForExistingHoursProgramCourse];
        
         if (tempExistingHoursHoursArray&& tempExistingHoursHoursArray.count) {
-            self.existingHoursHoursArray=[tempExistingHoursHoursArray filteredArrayUsingPredicate:predicateForExistingHoursProgramCourse];
+            self.existingHoursArray=[tempExistingHoursHoursArray filteredArrayUsingPredicate:predicateForExistingHoursProgramCourse];
         }
             
            
@@ -316,14 +319,14 @@
         
         
             NSPredicate *clinicianFilter=[self predicateForClincian];
-            self.interventionsDeliveredArray=[self.interventionsDeliveredArray filteredArrayUsingPredicate:clinicianFilter];
-            self.assessmentsDeliveredArray=[self.assessmentsDeliveredArray filteredArrayUsingPredicate:clinicianFilter];
+            self.interventionsDeliveredArray=[self.interventionsDeliveredArray filteredSetUsingPredicate:clinicianFilter];
+            self.assessmentsDeliveredArray=[self.assessmentsDeliveredArray filteredSetUsingPredicate:clinicianFilter];
             
-            self.supportActivityDeliveredArray=[self.supportActivityDeliveredArray filteredArrayUsingPredicate:clinicianFilter];
+            self.supportActivityDeliveredArray=[self.supportActivityDeliveredArray filteredSetUsingPredicate:clinicianFilter];
             
-            self.supervisionReceivedArray=[self.supervisionReceivedArray filteredArrayUsingPredicate:clinicianFilter];
+            self.supervisionReceivedArray=[self.supervisionReceivedArray filteredSetUsingPredicate:clinicianFilter];
             
-            self.existingHoursHoursArray=[self.existingHoursHoursArray filteredArrayUsingPredicate:clinicianFilter];
+            self.existingHoursArray=[self.existingHoursArray filteredArrayUsingPredicate:clinicianFilter];
             
         
         
@@ -407,7 +410,7 @@
 -(NSString *)setTrainingProgramString{
     
     NSSet *trainingProgramSet=[self.interventionsDeliveredArray valueForKey:@"trainingProgram"];
-    NSSet *programCourseSet=[self.existingHoursHoursArray valueForKey:@"programCourse"];
+    NSSet *programCourseSet=[self.existingHoursArray valueForKey:@"programCourse"];
 
     NSMutableSet *combinedSet=[NSMutableSet set];
     if (trainingProgramSet && programCourseSet &&programCourseSet.count&& trainingProgramSet.count) {
@@ -681,15 +684,15 @@
     
     NSMutableSet *combinedCliniciansMutableSet=[NSMutableSet set];
     
-    NSSet *cliniciansSetFromInterventions=[self cliniciansFromTrackArray:self.interventionsDeliveredArray];    
+    NSSet *cliniciansSetFromInterventions=[self cliniciansFromTrackArray:self.interventionsDeliveredArray.allObjects];
     
-    NSSet *clinicianSetFromAssessments=[self cliniciansFromTrackArray:self.assessmentsDeliveredArray ];
+    NSSet *clinicianSetFromAssessments=[self cliniciansFromTrackArray:self.assessmentsDeliveredArray.allObjects ];
     
-    NSSet *clinicianSetFromSupport=[self cliniciansFromTrackArray:self.supportActivityDeliveredArray];
+    NSSet *clinicianSetFromSupport=[self cliniciansFromTrackArray:self.supportActivityDeliveredArray.allObjects];
     
-    NSSet *clinicianSetFromSupervision=[self cliniciansFromTrackArray:self.supervisionReceivedArray ];
+    NSSet *clinicianSetFromSupervision=[self cliniciansFromTrackArray:self.supervisionReceivedArray.allObjects ];
     
-    NSSet * clinicianSetFromExistingHours=[self cliniciansFromExistingHoursArray:self.existingHoursHoursArray];
+    NSSet * clinicianSetFromExistingHours=[self cliniciansFromExistingHoursArray:self.existingHoursArray];
     
       
     //to avoid duplicates
@@ -1159,14 +1162,14 @@
 -(NSString *)monthlyLogNotesForMonth:(PTrackEntity )ptrackEntityType{
     
     
-    NSArray *trackDeliveredFilteredForCurrentMonth=nil;
+    NSSet *trackDeliveredFilteredForCurrentMonth=nil;
     NSPredicate *trackPredicateForCurrentMonth=[self predicateForTrackCurrentMonth];
     NSString *returnString=nil;
    
     switch (ptrackEntityType) {
                     
             case kTrackAssessment:
-            trackDeliveredFilteredForCurrentMonth=[self.assessmentsDeliveredArray filteredArrayUsingPredicate:trackPredicateForCurrentMonth];
+            trackDeliveredFilteredForCurrentMonth=[self.assessmentsDeliveredArray filteredSetUsingPredicate:trackPredicateForCurrentMonth];
             
             
             break;
@@ -1174,10 +1177,10 @@
             
         case kTrackSupport:
         
-            trackDeliveredFilteredForCurrentMonth=[self.supportActivityDeliveredArray filteredArrayUsingPredicate:trackPredicateForCurrentMonth];
+            trackDeliveredFilteredForCurrentMonth=[self.supportActivityDeliveredArray filteredSetUsingPredicate:trackPredicateForCurrentMonth];
             
             
-                     
+            
             break;
             
 
@@ -1187,8 +1190,8 @@
     }
     
  NSArray *filteredExistingHoursArray=nil;
-    if (self.existingHoursHoursArray &&self.existingHoursHoursArray.count) {
-        filteredExistingHoursArray=[self.existingHoursHoursArray filteredArrayUsingPredicate:[self predicateForExistingHoursCurrentMonth]];
+    if (self.existingHoursArray &&self.existingHoursArray.count) {
+        filteredExistingHoursArray=[self.existingHoursArray filteredArrayUsingPredicate:[self predicateForExistingHoursCurrentMonth]];
     }
     
     
@@ -1332,6 +1335,93 @@
     
 }
 
+-(NSPredicate *)predicateForExistingHoursProgramCourse{
+    
+    NSPredicate *trainingProgramPredicate=nil;
+    
+    
+    trainingProgramPredicate = [NSPredicate predicateWithFormat:@"programCourse.objectID == %@", trainingProgram_.objectID];
+    
+    
+    
+    return trainingProgramPredicate;
+    
+}
 
+
+-(NSPredicate *)predicateForExistingHoursDoctorateLevel{
+    
+    NSPredicate *doctorateLevelPredicate=nil;
+    
+    
+    doctorateLevelPredicate = [NSPredicate predicateWithFormat:@"programCourse.doctorateLevel == %@", [NSNumber numberWithBool:doctorateLevel_]];
+    
+    
+    
+    return doctorateLevelPredicate;
+    
+}
+
+-(NSPredicate *)predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth{
+    
+    NSPredicate *returnPredicate=nil;
+    
+    if (monthEndDate_) {
+        
+        returnPredicate = [NSPredicate predicateWithFormat:@" (endDate <= %@)", monthEndDate_];
+    }
+    
+    return returnPredicate;
+}
+
+
+-(NSPredicate *)predicateForExistingHoursAllBeforeEndDate:(NSDate *)date;{
+    
+    NSPredicate *returnPredicate=nil;
+    
+    if (date &&[date isKindOfClass:[NSDate class]]) {
+        
+        returnPredicate = [NSPredicate predicateWithFormat:@" (endDate < %@)", date];
+        
+    }
+    
+    return returnPredicate;
+}
+
+
+-(NSPredicate *)predicateForExistingHoursWeek:(PTrackWeek)week{
+    
+    NSPredicate *weekPredicate=nil;
+    
+    
+    weekPredicate = [NSPredicate predicateWithFormat:@" ((startDate >= %@) AND (endDate <= %@))", [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
+    
+    
+    return weekPredicate;
+    
+}
+
+
+-(NSPredicate *)predicateForExistingHoursWeekUndefined{
+    
+    NSPredicate *undefinedWeekPredicate=nil;
+    
+    
+    undefinedWeekPredicate = [NSPredicate predicateWithFormat:@"((startDate >= %@) AND (endDate <= %@)) AND NOT (   ((startDate >= %@) AND (endDate < %@)) OR ((startDate >= %@) AND (endDate < %@)) OR ((startDate >= %@) AND (endDate < %@)) OR ((startDate >= %@) AND (endDate < %@)) OR  ((startDate >= %@) AND (endDate < %@))) ", monthStartDate_,monthEndDate_,week1StartDate_,week1EndDate_,week2StartDate_,week2EndDate_,week3StartDate_,week3EndDate_,week4StartDate_,week4EndDate_,week5StartDate_,week5EndDate_];
+    
+    
+    
+    return undefinedWeekPredicate;
+    
+}
+-(NSPredicate *)predicateForExistingHoursCurrentMonth{
+    
+    NSPredicate *currentMonthPredicate=nil;
+    
+    
+    currentMonthPredicate = [NSPredicate predicateWithFormat:@" (startDate >= %@) AND (endDate <= %@)", monthStartDate_,monthEndDate_];
+    
+    return currentMonthPredicate;
+}
 
 @end

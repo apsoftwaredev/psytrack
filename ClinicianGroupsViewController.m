@@ -54,7 +54,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-       if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+       if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad||[SCUtilities systemVersion]>=6) {
         
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
@@ -256,6 +256,7 @@
         SCEntityDefinition *clinicianGroupDef=[SCEntityDefinition definitionWithEntityName:@"ClinicianGroupEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"groupName",@"addressBookSync",@"addNewClinicians", nil]];
         
          objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:clinicianGroupDef]; 
+        if ([SCUtilities systemVersion]<6) {
         
         SCCustomPropertyDefinition *groupNameUpdateCProperty = [SCCustomPropertyDefinition definitionWithName:@"addressBookButtonCell" uiElementNibName:@"ABGroupNameChangeCell" objectBindings:nil];;
         
@@ -266,7 +267,7 @@
         
         //add the property definition to the clinician class 
         [clinicianGroupDef addPropertyDefinition:groupNameUpdateCProperty];
-
+        }
         SCPropertyGroup *mainGroup=[SCPropertyGroup groupWithHeaderTitle:@"Clinician Group Details" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"groupName",@"addressBookSync",@"addNewClinicians",@"addressBookButtonCell", nil]];
         
         [clinicianGroupDef.propertyGroups addGroup:mainGroup];
@@ -621,8 +622,10 @@
     NSMutableArray *list = [NSMutableArray array];
     if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
     {
+        
+        ABAddressBookRef addressBookToGetAddressBookSources=ABAddressBookCreate();
 	// Get all the sources from the address book
-	CFArrayRef allSources = ABAddressBookCopyArrayOfAllSources(addressBook);
+	CFArrayRef allSources = ABAddressBookCopyArrayOfAllSources(addressBookToGetAddressBookSources);
 	
 	for (CFIndex i = 0; i < CFArrayGetCount(allSources); i++)
     {
@@ -630,7 +633,7 @@
 		
 		// Fetch all groups included in the current source
 		CFArrayRef result =nil; 
-       result= ABAddressBookCopyArrayOfAllGroupsInSource (addressBook, aSource);
+       result= ABAddressBookCopyArrayOfAllGroupsInSource (addressBookToGetAddressBookSources, aSource);
 		
 		// The app displays a source if and only if it contains groups
 		if (CFArrayGetCount(result) > 0)
@@ -663,7 +666,10 @@
     }
 	if (allSources) {
         CFRelease(allSources);
-    }	
+    }
+        if (addressBookToGetAddressBookSources) {
+            CFRelease(addressBookToGetAddressBookSources);
+        }
 	}
     return list;	
 
@@ -970,7 +976,7 @@ if(sourceArray.count>1)
 }
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
-    if ([SCUtilities is_iPad]) {
+    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         
@@ -1017,7 +1023,8 @@ if(sourceArray.count>1)
    
    	PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-
+    if ([SCUtilities systemVersion]<6) {
+   
 	switch (button.tag)
 	{
 		case 301:
@@ -1059,14 +1066,13 @@ if(sourceArray.count>1)
             if (groupNameTo && groupNameTo.length) {
                 if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
                 {
-                addressBook=nil;
-                source=nil;
-                addressBook=ABAddressBookCreate();
-              
+                    
+                ABAddressBookRef addressBookToGetGroup=ABAddressBookCreate();
+                
                 int sourceID=[self defaultABSourceID];
                 
                 
-                source=ABAddressBookGetSourceWithRecordID(addressBook, sourceID);
+                source=ABAddressBookGetSourceWithRecordID(addressBookToGetGroup, sourceID);
 
                 
                 
@@ -1104,6 +1110,10 @@ if(sourceArray.count>1)
                 
                 if (groupNameToAlreadyExistsInAB && [groupNameTo isEqualToString:groupNameFrom]) {
                     [appDelegate displayNotification:@"Group name has not changed." forDuration:3.0 location:kPTTScreenLocationTop inView:tableViewModel.viewController.view.superview];
+                    
+                    if (addressBookToGetGroup) {
+                        CFRelease(addressBookToGetGroup);
+                    }
                     return;
                 }
                 
@@ -1123,7 +1133,10 @@ if(sourceArray.count>1)
                         
                     }
                     
-                    [appDelegate displayNotification:displayMessag forDuration:3.0 location:kPTTScreenLocationTop inView:tableViewModel.viewController.view.superview]; 
+                    [appDelegate displayNotification:displayMessag forDuration:3.0 location:kPTTScreenLocationTop inView:tableViewModel.viewController.view.superview];
+                    if (addressBookToGetGroup) {
+                        CFRelease(addressBookToGetGroup);
+                    }
                     return;
 
                     
@@ -1133,7 +1146,7 @@ if(sourceArray.count>1)
                
                 
                     BOOL successAtChangingName=NO;
-                    if (addressBook) 
+                    if (addressBookToGetGroup) 
                     {
                    
                 
@@ -1164,8 +1177,8 @@ if(sourceArray.count>1)
                  
             [appDelegate displayNotification:displayMessage forDuration:3.0 location:kPTTScreenLocationTop inView:tableViewModel.viewController.view.superview];
                 
-                if (addressBook) {
-                    addressBook=nil;
+                if (addressBookToGetGroup) {
+                    CFRelease(addressBookToGetGroup);
                 }
                 if (source) {
                     CFRelease(source);
@@ -1232,14 +1245,14 @@ if(sourceArray.count>1)
             if (groupName && groupName.length) {
                 if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
                 {
-                 addressBook=nil;
-                source=nil;
-                addressBook=ABAddressBookCreate();
+                 
+                
+               ABAddressBookRef addressBookToGetGroups=ABAddressBookCreate();
                 
                 int sourceID=[self defaultABSourceID];
                 
                 
-                source=ABAddressBookGetSourceWithRecordID(addressBook, sourceID);
+                source=ABAddressBookGetSourceWithRecordID(addressBookToGetGroups, sourceID);
                 
                 
                 
@@ -1258,7 +1271,7 @@ if(sourceArray.count>1)
                 
 
             
-            }
+         
             
             
             
@@ -1279,13 +1292,13 @@ if(sourceArray.count>1)
                 if (source) {
                     CFRelease(source);
                 }
-                
-                if (addressBook) {
-                    addressBook=nil;
-                    
-                } 
             
+                if (addressBookToGetGroups) {
+                    CFRelease(addressBookToGetGroups);
+                }
                
+            }
+            
             }
             }
          
@@ -1334,17 +1347,19 @@ if(sourceArray.count>1)
             }
             BOOL groupNameAlreadyExistsInAB=NO;
             
+            if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
+            {
+            ABAddressBookRef addressBookToGetTheGroup=ABAddressBookCreate();
             if (groupName && groupName.length) {
-                if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
-                {
-                addressBook=nil;
+                
+                
                 source=nil;
-                addressBook=ABAddressBookCreate();
+              
                 
                 int sourceID=[self defaultABSourceID];
                 
                 if (!source && sourceID>-1) {
-                    source=ABAddressBookGetSourceWithRecordID(addressBook, sourceID);
+                    source=ABAddressBookGetSourceWithRecordID(addressBookToGetTheGroup, sourceID);
 
                 }
                                
@@ -1369,20 +1384,18 @@ if(sourceArray.count>1)
             if (!groupNameAlreadyExistsInAB) {
                 [appDelegate displayNotification:@"Group not found in the Address Book." forDuration:3.0 location:kPTTScreenLocationTop inView:tableViewModel.viewController.view.superview];
                 
-                if (addressBook) {
-                    addressBook=nil;
-                }
-                if (source) {
-                    CFRelease(source);
+               
+                if (addressBookToGetTheGroup) {
+                    CFRelease(addressBookToGetTheGroup);
                 }
                 
                 return;
             }
 
             
-             
+            
                 
-                CFArrayRef allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
+                CFArrayRef allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBookToGetTheGroup, source);
                 
                 int groupCount=0;
                 if (allGroupsInSource) {
@@ -1397,7 +1410,7 @@ if(sourceArray.count>1)
                     
                     
                     
-                    ABRecordRef abGroup=(ABRecordRef)ABAddressBookGetGroupWithRecordID(addressBook, group.recordID);
+                    ABRecordRef abGroup=(ABRecordRef)ABAddressBookGetGroupWithRecordID(addressBookToGetTheGroup, group.recordID);
                     CFArrayRef groupMembers;
                     groupMembers=nil;
                     
@@ -1458,8 +1471,8 @@ if(sourceArray.count>1)
 //            NSString *currentNameString=[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];
             
             
-            if (addressBook) {
-                addressBook=nil;
+            if (addressBookToGetTheGroup) {
+                CFRelease(addressBookToGetTheGroup);
             }
             if (source) {
                 CFRelease(source);
@@ -1487,7 +1500,8 @@ if(sourceArray.count>1)
         case 305:
         {
             
-            
+            if ([SCUtilities systemVersion]<6) {
+           
             
             ABPeoplePickerNavigationController *peoplePicker=[[ABPeoplePickerNavigationController alloc]init];
             
@@ -1502,7 +1516,7 @@ if(sourceArray.count>1)
             // Show the picker 
             
             
-            peoplePicker.addressBook=addressBook;
+           
             
             [peoplePicker shouldAutorotateToInterfaceOrientation:YES];
             [peoplePicker setEditing:YES];
@@ -1529,12 +1543,13 @@ if(sourceArray.count>1)
             
 //            NSString *groupNameString = (NSString *)[tableViewModel.modelKeyValues valueForKey:@"groupNameString"];
 			
-            
+            }
            
             break; 
         
         
         }
+    }
 //    addressBook=nil;
 //    
 //   
@@ -1548,11 +1563,13 @@ if(sourceArray.count>1)
        
             
 case 1:
+           
     if (buttonIndex==1) {
         
         
         
-        
+        if ([SCUtilities systemVersion]<6) {
+       
 //        BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults]boolForKey:kPTAutoAddClinicianToGroup];
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 
@@ -1560,42 +1577,42 @@ case 1:
         {
             if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
             {
-            if (!addressBook) {
-                addressBook=ABAddressBookCreate();
-            }
-       
-            if (addressBook) {
+           
+              ABAddressBookRef  addressBookAfterAlert=ABAddressBookCreate();
             
-                int CFGroupCount = ABAddressBookGetGroupCount((ABAddressBookRef) addressBook);
+       
+            if (addressBookAfterAlert) {
+            
+                int CFGroupCount = ABAddressBookGetGroupCount((ABAddressBookRef) addressBookAfterAlert);
                 
                 if ( CFGroupCount >0) {
                     
                     
                     ABRecordRef group=nil;
-                    group=(ABRecordRef)ABAddressBookGetGroupWithRecordID(addressBook, groupRecordIDToDeleteOrImport);
+                    group=(ABRecordRef)ABAddressBookGetGroupWithRecordID(addressBookAfterAlert, groupRecordIDToDeleteOrImport);
                     bool   didRemove=NO;
                     if (group) {
 
             
             
             
-                        didRemove =  (bool)   ABAddressBookRemoveRecord((ABAddressBookRef) addressBook, (ABRecordRef) group, nil);
+                        didRemove =  (bool)   ABAddressBookRemoveRecord((ABAddressBookRef) addressBookAfterAlert, (ABRecordRef) group, nil);
                         
                         
                         BOOL wantToSaveChanges=TRUE;
                         bool didSave=FALSE;
-                        if (ABAddressBookHasUnsavedChanges(addressBook)) {
+                        if (ABAddressBookHasUnsavedChanges(addressBookAfterAlert)) {
                             
                             if (wantToSaveChanges) {
                                 
-                                didSave = ABAddressBookSave(addressBook, nil);
+                                didSave = ABAddressBookSave(addressBookAfterAlert, nil);
                                 
     //                            if (!didSave) {/* Handle error here. */  }
     //                            else 
                             } 
                             else {
                                 
-                                ABAddressBookRevert(addressBook);
+                                ABAddressBookRevert(addressBookAfterAlert);
                                 
                             }
                             
@@ -1622,12 +1639,14 @@ case 1:
                         [appDelegate displayNotification:@"Group not found." forDuration:3.0 location:kPTTScreenLocationTop inView:detailViewSuperview];
                     }
                 }
-                    addressBook=nil;
+                if (addressBookAfterAlert) {
+                    CFRelease(addressBookAfterAlert);
+                }
                     detailViewSuperview=nil;
                     groupRecordIDToDeleteOrImport=-1;
             }
     
-            }}}
+            }}}}
     break;
 //                        
 //                        [[NSUserDefaults standardUserDefaults]setValue:@"" forKey:kPTTAddressBookGroupName];
@@ -2566,9 +2585,9 @@ case 1:
         //check to see if the group name exists already
     if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
     {
-      
+        ABAddressBookRef addressBookToBuildAddressBookGroupArray=ABAddressBookCreate();
     CFArrayRef allGroupsInSource=nil;
-    allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
+    allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBookToBuildAddressBookGroupArray, source);
         int groupCount=CFArrayGetCount(allGroupsInSource);
         
         
@@ -2627,6 +2646,9 @@ case 1:
    
  
         }
+        if (addressBookToBuildAddressBookGroupArray) {
+            CFRelease(addressBookToBuildAddressBookGroupArray);
+        }
   
 if (allGroupsInSource){
   CFRelease(allGroupsInSource);   
@@ -2645,8 +2667,8 @@ if (allGroupsInSource){
     {
 
     ABRecordRef group=nil;
-                
-        CFArrayRef allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
+        ABAddressBookRef addressBookToChangeABGroupName=ABAddressBookCreate();
+        CFArrayRef allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBookToChangeABGroupName, source);
         int groupCount=CFArrayGetCount(allGroupsInSource);
         
         
@@ -2718,6 +2740,9 @@ if (allGroupsInSource){
         if (group) {
             CFRelease(group);
         }
+        if (addressBookToChangeABGroupName) {
+            CFRelease(addressBookToChangeABGroupName);
+        }
         return successAtSettingName;
     }
 
@@ -2726,7 +2751,7 @@ if (allGroupsInSource){
     if (!group ||addNew) {
         
                
-        if (!addressBook) {
+        if (!addressBookToChangeABGroupName) {
             
             return successAtSettingName;
         }
@@ -2754,15 +2779,15 @@ if (allGroupsInSource){
                successAtSettingName=NO;
         }
         
-        ABAddressBookAddRecord((ABAddressBookRef) addressBook, (ABRecordRef) groupTroCreate, nil);
+        ABAddressBookAddRecord((ABAddressBookRef) addressBookToChangeABGroupName, (ABRecordRef) groupTroCreate, nil);
         
         
         BOOL wantToSaveChanges=TRUE;
-        if (ABAddressBookHasUnsavedChanges(addressBook)) {
+        if (ABAddressBookHasUnsavedChanges(addressBookToChangeABGroupName)) {
             
             if (wantToSaveChanges) {
                 bool didSave=FALSE;
-                didSave = ABAddressBookSave(addressBook, nil);
+                didSave = ABAddressBookSave(addressBookToChangeABGroupName, nil);
                 
 //                if (!didSave) {/* Handle error here. */  }
 //                else 
@@ -2772,7 +2797,7 @@ if (allGroupsInSource){
             } 
             else {
                 
-                ABAddressBookRevert(addressBook);
+                ABAddressBookRevert(addressBookToChangeABGroupName);
                 
             }
             
@@ -2807,13 +2832,13 @@ if (allGroupsInSource){
           
         
        
-        if (error ==noErr && ABAddressBookHasUnsavedChanges(addressBook)) 
+        if (error ==noErr && ABAddressBookHasUnsavedChanges(addressBookToChangeABGroupName)) 
         {
             
             if (wantToSaveChanges)
             {
                 bool didSave=FALSE;
-                didSave = ABAddressBookSave(addressBook, nil);
+                didSave = ABAddressBookSave(addressBookToChangeABGroupName, nil);
                 if (didSave) {
                     successAtSettingName=YES;
                 }
@@ -2822,7 +2847,7 @@ if (allGroupsInSource){
             else 
                 {
                     
-                    ABAddressBookRevert(addressBook);
+                    ABAddressBookRevert(addressBookToChangeABGroupName);
                     
                 }
            
@@ -2836,7 +2861,10 @@ if (allGroupsInSource){
     if (group !=NULL) 
     {
         group=nil;
-    } 
+    }
+    if (addressBookToChangeABGroupName) {
+        CFRelease(addressBookToChangeABGroupName);
+    }
     }
     return successAtSettingName;
 }
@@ -2849,20 +2877,20 @@ if (allGroupsInSource){
     {
 
 
-    if (!addressBook) {
-         addressBook=ABAddressBookCreate();
-    }
+   
+         ABAddressBookRef addressBookToImportContactsInGroup=ABAddressBookCreate();
+    
    
     
 //    int groupIdentifier=groupRecordIDToDeleteOrImport;
     
     ABRecordRef group=nil;
     if (groupRecordIDToDeleteOrImport>-1) {
-        group=(ABRecordRef )ABAddressBookGetGroupWithRecordID(addressBook, groupRecordIDToDeleteOrImport);
+        group=(ABRecordRef )ABAddressBookGetGroupWithRecordID(addressBookToImportContactsInGroup, groupRecordIDToDeleteOrImport);
     }
     
     
-    if (addressBook && group) {
+    if (addressBookToImportContactsInGroup && group) {
         CFArrayRef allPeopleInGroup=(CFArrayRef ) ABGroupCopyArrayOfAllMembers(group);
         
         int peopleInGroupCount=CFArrayGetCount(allPeopleInGroup);
@@ -3080,8 +3108,8 @@ if (allGroupsInSource){
         
     }
 
-if (addressBook) {
-    CFRelease(addressBook);
+if (addressBookToImportContactsInGroup) {
+    CFRelease(addressBookToImportContactsInGroup);
 }
     }
 }
@@ -3128,8 +3156,8 @@ if (addressBook) {
    
     if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
     {
- 
-    CFArrayRef allSourcesArray=ABAddressBookCopyArrayOfAllSources(addressBook);
+        ABAddressBookRef addressBookToGetSource =ABAddressBookCreate();
+    CFArrayRef allSourcesArray=ABAddressBookCopyArrayOfAllSources(addressBookToGetSource);
     source=nil;
     int sourcesCount=0;
     
@@ -3160,7 +3188,7 @@ if (addressBook) {
     
     if (continueChecking && recordID!=-1) {
         
-        source=ABAddressBookGetSourceWithRecordID(addressBook, recordID);
+        source=ABAddressBookGetSourceWithRecordID(addressBookToGetSource, recordID);
 
        
         if (source) {
@@ -3221,6 +3249,10 @@ if (addressBook) {
     if (allSourcesArray) {
         CFRelease(allSourcesArray);
     }
+        
+        if (addressBookToGetSource) {
+            CFRelease(addressBookToGetSource);
+        }
     }
     
     return returnID;

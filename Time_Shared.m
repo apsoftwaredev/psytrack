@@ -309,8 +309,9 @@
     
     [counterDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];  
     
-    
-    referenceDate=[counterDateFormatter dateFromString:@"00:00:00"];
+   
+       
+    referenceDate=[NSDate dateWithTimeIntervalSince1970:0];
     
     self.delegate=self;
 
@@ -328,7 +329,7 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
-    if([SCUtilities is_iPad]&&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
+    if(([SCUtilities systemVersion]>=6|| [SCUtilities is_iPad]) &&detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
         
 
     [detailTableViewModel.modeledTableView setBackgroundView:nil];
@@ -723,8 +724,8 @@
                                 TimePickerCell *additionalTimeCell=(TimePickerCell *)[section cellAtIndex:2];
                                 TimePickerCell *timeToSubtractCell=(TimePickerCell *)[section cellAtIndex:3];
                                 
-                                [startTimeCell.boundObject setValue:nil forKey:@"startTime"];
-                                [endTimeCell.boundObject setValue:nil forKey:@"endTime"];
+                                [startTimeCell.boundObject setNilValueForKey:@"startTime"];
+                                [endTimeCell.boundObject setNilValueForKey:@"endTime"];
                                 [additionalTimeCell.boundObject setValue:referenceDate forKey:@"additionalTime"];
                                 [timeToSubtractCell.boundObject setValue:referenceDate forKey:@"timeToSubtract"];
                                 

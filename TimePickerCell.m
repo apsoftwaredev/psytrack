@@ -56,9 +56,9 @@
     [minuteFormatter setDateFormat:@"m"];
     [hourFormatter setDateFormat:@"H"];
    
-    [hourFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
-    [minuteFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
-    [hourMinFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
+    [hourFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    [minuteFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    [hourMinFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
    
     // Center the picker in the detailViewController
 	CGRect pickerFrame = self.picker.frame;
@@ -159,7 +159,21 @@
     
     [hourFormatter setDateFormat:@"H:m"];
     
+  
+    
     timeValue=[hourMinFormatter dateFromString:[NSString stringWithFormat:@"%i:%i",hourComponent,minuteComponent]];
+   
+    NSDateComponents *dateComponents=[[NSDateComponents alloc]init];
+    dateComponents.year=1970;
+    dateComponents.month=1;
+    dateComponents.day=1;
+    dateComponents.hour=hourComponent;
+    dateComponents.minute=minuteComponent;
+    
+    NSCalendar *calander=[NSCalendar currentCalendar];
+    [calander setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    timeValue=[calander dateFromComponents:dateComponents];
+    DLog(@"time vale is  %@",timeValue);
     [self.boundObject setValue:timeValue forKey:boundObjectName];
     
     needsCommit = FALSE;

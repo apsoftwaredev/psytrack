@@ -125,7 +125,7 @@
             // Set the view controller's theme
         
         
-        if ([SCUtilities is_iPad]) {
+        if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
             
             
             [objectsModel.modeledTableView setBackgroundView:nil];
@@ -213,7 +213,7 @@
         objectsModel.addButtonItem = self.navigationItem.rightBarButtonItem;
         objectsModel.autoAssignDelegateForDetailModels=TRUE;
         objectsModel.autoAssignDataSourceForDetailModels=TRUE;
-        if (![SCUtilities is_iPad]) {
+        if (![SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
             
             self.tableView.backgroundColor=[UIColor clearColor];
 //            UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];

@@ -243,7 +243,7 @@ NSInteger intSort(id num1, id num2, void *context)
         CGPoint stopPoint=[self makeStopPointForContainerSuperViewFrame:(CGRect)appWindowFrame  labelContainerFrame:(CGRect)myViewFrame location:(NSInteger )screenLocation addtionalTopSpace:(float)additionalTopSpace additionalBottomSpace:(float)additionalBottomSpace];
         
         
-        
+    self.labelContainerView.tag=655;
         
         
         [self  moveTo:(CGPoint)stopPoint duration:(float)seconds option:(UIViewAnimationOptions)UIViewAnimationOptionTransitionCrossDissolve];
