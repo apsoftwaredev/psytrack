@@ -289,13 +289,17 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     CGRect mainPageScrollViewFrame=self.mainPageScrollView.frame;
     mainPageScrollViewFrame.size.height=changeScrollHeightTo;
     self.mainPageScrollView.frame=mainPageScrollViewFrame;
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(scrollToNextPage)
-     name:@"ScrollMonthlyPracticumLogToNextPage"
-     object:nil];
-}
+    @try {
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(scrollToNextPage)
+         name:@"ScrollMonthlyPracticumLogToNextPage"
+         object:nil];
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
+    }
 
 -(void)scrollToNextPage{
 
@@ -304,8 +308,13 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
   
   
     if ((self.containerForSignaturesAndSupervisorSummaries.frame.origin.y+self.containerForSignaturesAndSupervisorSummaries.frame.size.height)<=(MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY)) {
-        
-        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollMonthlyPracticumLogToNextPage" object:nil];
+        @try{
+             [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollMonthlyPracticumLogToNextPage" object:nil];
+        }@catch(id anException){
+            //do nothing, obviously it wasn't attached because an exception was thrown
+        }
+
+       
         
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
@@ -744,7 +753,7 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
             TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithMonth:self.monthToDisplay clinician:self.clinician trackTypeObject:supervisionSubTypeObject trainingProgram:self.trainingProgram];
             
                         [subTypeWithTotalsItemsArray addObject:trackTypeWithTotalTimeObject];
-            DLog(@"tracktype iwht total time object is %@ %@",trackTypeWithTotalTimeObject.typeLabelText,trackTypeWithTotalTimeObject.totalToDateStr);
+        
             
         }
         

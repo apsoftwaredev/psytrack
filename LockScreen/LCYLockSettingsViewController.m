@@ -76,6 +76,13 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
 
 - (void) viewDidUnload 
 {
+    @try{
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"passcodeEditorCanceled" object:nil];
+    }
+    @catch(id anException){
+            //do nothing, obviously it wasn't attached because an exception was thrown
+        }
+
     // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
     // For example: self.myOutlet = nil;
     [super viewDidUnload];
@@ -905,12 +912,18 @@ if(section.headerTitle !=nil)
     
    
 	[[self navigationController] presentModalViewController:navController animated:YES];
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(updatePasscodeOnSwichCell)
-     name:@"passcodeEditorCanceled"
-     object:nil];
+    @try {
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(updatePasscodeOnSwichCell)
+         name:@"passcodeEditorCanceled"
+         object:nil];
+    }
+    @catch (NSException *exception) {
+        //nothing
+    }
+
+
 		
 }
 

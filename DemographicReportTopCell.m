@@ -129,13 +129,17 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     
     self.mainPageScrollView.frame=mainScrollViewFrame;
+    @try {
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(scrollToNextPage)
+         name:@"ScrollDemographicVCToNextPage"
+         object:nil];
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
     
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(scrollToNextPage)
-     name:@"ScrollDemographicVCToNextPage"
-     object:nil];
 }
 
 -(void)scrollToNextPage{
@@ -148,7 +152,14 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     if ((self.sexualOrientationTableView.frame.origin.y+self.sexualOrientationTableView.frame.size.height)<=(MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY)) {
         
-        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollDemographicVCToNextPage" object:nil];
+        @try {
+            [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollDemographicVCToNextPage" object:nil];
+            
+
+        }
+        @catch (NSException *exception) {
+            //do nothing
+        }
         
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         

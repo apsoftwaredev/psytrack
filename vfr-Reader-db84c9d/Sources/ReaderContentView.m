@@ -131,7 +131,13 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 			self.zoomScale = self.minimumZoomScale; // Set zoom to fit page content
 		}
 
-		[self addObserver:self forKeyPath:@"frame" options:0 context:NULL];
+        @try {
+            [self addObserver:self forKeyPath:@"frame" options:0 context:NULL];
+        }
+        @catch (NSException *exception) {
+            //do nothing
+        }
+       
 
 		self.tag = page; // Tag the view with the page number
 	}
@@ -141,8 +147,14 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 -(void)dealloc{
 
 
+    @try {
+          [self removeObserver:self forKeyPath:@"frame"];
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
 
-    [self removeObserver:self forKeyPath:@"frame"];
+  
 
 }
 

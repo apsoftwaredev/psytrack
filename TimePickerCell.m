@@ -173,7 +173,7 @@
     NSCalendar *calander=[NSCalendar currentCalendar];
     [calander setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     timeValue=[calander dateFromComponents:dateComponents];
-    DLog(@"time vale is  %@",timeValue);
+   
     [self.boundObject setValue:timeValue forKey:boundObjectName];
     
     needsCommit = FALSE;

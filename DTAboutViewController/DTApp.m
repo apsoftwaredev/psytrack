@@ -103,8 +103,14 @@
 	[receivedIconData writeToFile:[self cachedFileName] atomically:NO];
 	receivedIconData=nil; receivedIconData = nil;
 	iconDownloadConnection =nil; iconDownloadConnection = nil;
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DTAppLoadedIcon" object:nil userInfo:[NSDictionary dictionaryWithObject:self forKey:@"App"]];
+	@try {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DTAppLoadedIcon" object:nil userInfo:[NSDictionary dictionaryWithObject:self forKey:@"App"]];
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
+
+
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error

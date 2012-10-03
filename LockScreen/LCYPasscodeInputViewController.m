@@ -65,13 +65,28 @@ const int PASSCODE_INPUT_HANDLER_PASSCODE_LENGTH = 4;
 {
 	[super viewWillAppear: animated];
 	[self.passCodeInputField becomeFirstResponder];	
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(appUnlocked:)
-     name:@"appUnlocked"
-     object:nil];
-    
-    
+   
+    @try {
+        [[NSNotificationCenter defaultCenter]removeObserver:self];
+        
+        
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
+
+
+    @try {
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(appUnlocked:)
+         name:@"appUnlocked"
+         object:nil];
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
+
 
     
 }
@@ -187,7 +202,13 @@ const int PASSCODE_INPUT_HANDLER_PASSCODE_LENGTH = 4;
     
   
     [self.passCodeInputField becomeFirstResponder ];	
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"appUnlocked" object:nil];
+    @try {
+         [[NSNotificationCenter defaultCenter] removeObserver:self name:@"appUnlocked" object:nil];
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
+
     
     
 }

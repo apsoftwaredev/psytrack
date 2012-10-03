@@ -87,7 +87,6 @@
 		37F7CE8D1500588900AD2C3A /* MySource.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE8B1500588900AD2C3A /* MySource.m */; };
 		37F7CE951500592900AD2C3A /* Age.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE921500592900AD2C3A /* Age.m */; };
 		37F7CE961500592900AD2C3A /* ClientPresentations_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE941500592900AD2C3A /* ClientPresentations_Shared.m */; };
-		37F7CE9C1500596F00AD2C3A /* Time_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE991500596F00AD2C3A /* Time_Shared.m */; };
 		37F7CE9D1500596F00AD2C3A /* TimeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE9B1500596F00AD2C3A /* TimeEntity.m */; };
 		37F7CEA7150059D900AD2C3A /* TimeTrackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEA3150059D900AD2C3A /* TimeTrackViewController.xib */; };
 		37F7CEAE15005C5F00AD2C3A /* TrainTrackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CEAA15005C5F00AD2C3A /* TrainTrackViewController.xib */; };
@@ -634,8 +633,6 @@
 		37F7CE921500592900AD2C3A /* Age.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Age.m; sourceTree = "<group>"; };
 		37F7CE931500592900AD2C3A /* ClientPresentations_Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientPresentations_Shared.h; sourceTree = "<group>"; };
 		37F7CE941500592900AD2C3A /* ClientPresentations_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClientPresentations_Shared.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		37F7CE981500596F00AD2C3A /* Time_Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Time_Shared.h; sourceTree = "<group>"; };
-		37F7CE991500596F00AD2C3A /* Time_Shared.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Time_Shared.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		37F7CE9A1500596F00AD2C3A /* TimeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TimeEntity.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		37F7CE9B1500596F00AD2C3A /* TimeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TimeEntity.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		37F7CEA4150059D900AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TimeTrackViewController.xib; sourceTree = "<group>"; };
@@ -1613,8 +1610,6 @@
 		37F7CE971500594E00AD2C3A /* Time */ = {
 			isa = PBXGroup;
 			children = (
-				37F7CE981500596F00AD2C3A /* Time_Shared.h */,
-				37F7CE991500596F00AD2C3A /* Time_Shared.m */,
 				37F7CE9A1500596F00AD2C3A /* TimeEntity.h */,
 				37F7CE9B1500596F00AD2C3A /* TimeEntity.m */,
 			);
@@ -2812,7 +2807,6 @@
 				37F7CE8D1500588900AD2C3A /* MySource.m in Sources */,
 				37F7CE951500592900AD2C3A /* Age.m in Sources */,
 				37F7CE961500592900AD2C3A /* ClientPresentations_Shared.m in Sources */,
-				37F7CE9C1500596F00AD2C3A /* Time_Shared.m in Sources */,
 				37F7CE9D1500596F00AD2C3A /* TimeEntity.m in Sources */,
 				37F7CEC515005D8A00AD2C3A /* ReportsViewController.m in Sources */,
 				37F7CECB15005E7100AD2C3A /* drugs.xcdatamodeld in Sources */,

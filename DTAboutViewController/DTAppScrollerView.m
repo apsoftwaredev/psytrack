@@ -52,8 +52,14 @@
 		
 		_scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth; 
 		_pageControl.autoresizingMask = UIViewAutoresizingFlexibleWidth; 
+		@try {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIconLoaded:) name:@"DTAppLoadedIcon" object:nil];
+        }
+        @catch (NSException *exception) {
+            //do nothing
+        }
+    
 		
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIconLoaded:) name:@"DTAppLoadedIcon" object:nil];
     }
     return self;
 }
@@ -194,7 +200,14 @@
 
 - (void)dealloc 
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
+    @try {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
+    @catch (NSException *exception) {
+        //do nothinbg
+    }
+
+
 
 }
 

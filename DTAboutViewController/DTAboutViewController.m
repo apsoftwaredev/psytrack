@@ -91,7 +91,15 @@
 		delegate = self;
 		
 		// notification when apps list has been updated
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layoutDefinitionUpdated:) name:@"DTInfoManagerLayoutUpdated" object:nil];
+		@try {
+              [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(layoutDefinitionUpdated:) name:@"DTInfoManagerLayoutUpdated" object:nil];
+        }
+        @catch (NSException *exception) {
+            //do nothhihg
+        }
+    
+        
+      
 	}
 	
 	return self;

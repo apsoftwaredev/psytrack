@@ -37,13 +37,20 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-      
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(scrollToNextSupervisorCell)
-     name:@"ScrollPracticumLogToNextSupervisorCell"
-     object:nil];
+    
+    @try {
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(scrollToNextSupervisorCell)
+         name:@"ScrollPracticumLogToNextSupervisorCell"
+         object:nil];
 
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
+    
+   
     
    
    
@@ -57,8 +64,7 @@
     
     self.studentName=supervisorsAndTotalTimesForMonthObject.studentNameStr;
     NSMutableArray *supervisorsAndTotalTimesForMonthMutableArray=[NSMutableArray arrayWithObject:supervisorsAndTotalTimesForMonthObject];
-    
-	SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:supervisorsAndTotalTimesForMonthMutableArray itemsDefinition:supervisorsAndTotalTimesForMonthDef];                                 
+  SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:supervisorsAndTotalTimesForMonthMutableArray itemsDefinition:supervisorsAndTotalTimesForMonthDef];                                 
     
     objectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
     {

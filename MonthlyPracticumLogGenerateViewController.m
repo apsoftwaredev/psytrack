@@ -206,6 +206,16 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    
+    
+   if( [SCModelCenter sharedModelCenter].keyboardIssuer ==self){
+    
+       [SCModelCenter sharedModelCenter].keyboardIssuer = nil;
+    
+    
+    };
+    
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -629,7 +639,7 @@
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
 
-    
+     [SCModelCenter sharedModelCenter].keyboardIssuer = self;
     if (textField.tag==23) {
         if (![SCUtilities is_iPad]) {
            [ self.tableView setContentOffset:CGPointMake(0, self.monthYearFieldOverMonthYearField.frame.origin.y+self.monthYearFieldOverMonthYearField.frame.size.height)  animated:YES ];

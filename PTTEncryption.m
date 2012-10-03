@@ -414,9 +414,15 @@ NSString* trustResultDescribe( SecTrustResultType result ) {
                         //5
                         {
                             NSString *trustResultString =trustResultDescribe(trustResult);
-                            [[NSNotificationCenter defaultCenter]
-                             postNotificationName:@"trustFailureOccured"
-                             object:trustResultString];
+                            @try {
+                                [[NSNotificationCenter defaultCenter]
+                                 postNotificationName:@"trustFailureOccured"
+                                 object:trustResultString];
+                            }
+                            @catch (NSException *exception) {
+                                //do nothing
+                            }
+                                                    
 
                         }
                         //5

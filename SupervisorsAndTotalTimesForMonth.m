@@ -1201,22 +1201,24 @@
         int trackDeliveredFilteredForCurrentMonthCount=trackDeliveredFilteredForCurrentMonth.count;
         if (trackDeliveredFilteredForCurrentMonthCount) {
             
-            NSArray *monthlyLogNotesArray=[trackDeliveredFilteredForCurrentMonth mutableArrayValueForKey:@"monthlyLogNotes"];
+            NSMutableSet *monthlyLogNotesArray=[trackDeliveredFilteredForCurrentMonth mutableSetValueForKey:@"monthlyLogNotes"];
             
             int monthlyLogNotesArrayCount=monthlyLogNotesArray.count;
             for ( int i=0;i< monthlyLogNotesArrayCount; i++){
                 
-                
-                id logNotesID=[monthlyLogNotesArray objectAtIndex:i];
+                id logNotesID=[monthlyLogNotesArray.allObjects objectAtIndex:i];
                 
                 
                 if ([logNotesID isKindOfClass:[NSString class]]) {
                     NSString *logNotesStr=(NSString *)logNotesID;
+                    if (logNotesStr && logNotesStr.length) {
+                    
                     if (i==0) {
                         returnString=logNotesStr;
                     }
                     else {
                         returnString=[returnString stringByAppendingFormat:@"; %@",logNotesStr];
+                    }
                     }
                 }
             }

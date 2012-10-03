@@ -617,8 +617,14 @@
                             CGContextTranslateCTM(pdfContext,0, DOC_HEIGHT);
                             
                             CGContextScaleCTM(pdfContext, 1.0, -1.0);
-                                                        
-                            [[NSNotificationCenter defaultCenter]postNotificationName:@"ScrollMonthlyPracticumLogToNextPage" object:nil];
+                            
+                            @try {
+                                  [[NSNotificationCenter defaultCenter]postNotificationName:@"ScrollMonthlyPracticumLogToNextPage" object:nil];
+                            }
+                            @catch (NSException *exception) {
+                              appDelegate.stopScrollingMonthlyPracticumLog=YES;
+                            }
+                        
                             
                            
                         } while (!appDelegate.stopScrollingMonthlyPracticumLog);
@@ -788,9 +794,14 @@
                             CGContextTranslateCTM(pdfContext,0, DOC_HEIGHT);
                             
                             CGContextScaleCTM(pdfContext, 1.0, -1.0);
-                            
-                            [[NSNotificationCenter defaultCenter]postNotificationName:@"ScrollAllHoursVCToNextPage" object:nil];
-                            
+                            @try {
+                                [[NSNotificationCenter defaultCenter]postNotificationName:@"ScrollAllHoursVCToNextPage" object:nil];
+                                
+                            }
+                            @catch (NSException *exception) {
+                                appDelegate.stopScrollingMonthlyPracticumLog=YES;
+                            }
+    
                             
                         } while (!appDelegate.stopScrollingMonthlyPracticumLog);
                         
@@ -938,9 +949,14 @@
         CGContextTranslateCTM(pdfContext,0, DOC_HEIGHT);
         
         CGContextScaleCTM(pdfContext, 1.0, -1.0);
-        
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"ScrollDemographicVCToNextPage" object:nil];
-        
+        @try {
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"ScrollDemographicVCToNextPage" object:nil];
+            
+        }
+        @catch (NSException *exception) {
+            appDelegate.stopScrollingMonthlyPracticumLog=YES;
+        }
+            
         
     } while (!appDelegate.stopScrollingMonthlyPracticumLog);
     

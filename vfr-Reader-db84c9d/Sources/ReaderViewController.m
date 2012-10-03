@@ -285,7 +285,13 @@
 
 			[notificationCenter addObserver:self selector:@selector(applicationWill:) name:UIApplicationWillTerminateNotification object:nil];
 
-			[notificationCenter addObserver:self selector:@selector(applicationWill:) name:UIApplicationWillResignActiveNotification object:nil];
+            @try {
+                [notificationCenter addObserver:self selector:@selector(applicationWill:) name:UIApplicationWillResignActiveNotification object:nil];
+            }
+            @catch (NSException *exception) {
+                //do nothing
+            }
+           
 
 			[object updateProperties]; document = object ; // Retain the supplied ReaderDocument object for our use
 

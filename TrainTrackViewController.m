@@ -824,15 +824,6 @@ return headerView;
 }
 
 
--(void)drugViewControllerDidFinishLoading{
-
-    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"DrugViewControllerDidAppear" object:nil];
-    [prog stopAnimating];
-
-    
-    
-
-}
 - (IBAction) lockScreen: (id) sender;
 {
 	PTTAppDelegate *appDelegate =  (PTTAppDelegate *)	[[UIApplication sharedApplication] delegate];

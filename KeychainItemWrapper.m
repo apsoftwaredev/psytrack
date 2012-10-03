@@ -260,7 +260,6 @@ Keychain API expects as a validly constructed container class.
     
     NSMutableDictionary *searchDictionary = [self newSearchDictionary:identifier];
     NSMutableDictionary *updateDictionary = [[NSMutableDictionary alloc] init];
-    DLog(@"data is %@",<#value#>);
     [updateDictionary setObject:data forKey:(id)kSecValueData];
 	
     OSStatus status = SecItemUpdate((CFDictionaryRef)searchDictionary,

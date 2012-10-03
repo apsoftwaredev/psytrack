@@ -71,12 +71,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     
     
-    // listen for key-value store changes externally from the cloud
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateCloudItems:)
-                                                 name:NSUbiquitousKeyValueStoreDidChangeExternallyNotification 
-                                               object:[NSUbiquitousKeyValueStore defaultStore]];
-    // By passing "object", it tells the cloud that we want to use "key-value store"
+       // By passing "object", it tells the cloud that we want to use "key-value store"
     // (which will allow other devices to automatically sync)
     
     // Get any change since last launch:

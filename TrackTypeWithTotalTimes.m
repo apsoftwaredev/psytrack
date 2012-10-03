@@ -383,7 +383,6 @@
                     
                     
                     
-                    DLog(@"self.supervision received array is  %@",self.supervisionReceivedArray);
                     
                     NSSet *allExistingSupervisionReceivedSetForType=nil;
                     
@@ -894,13 +893,11 @@
                     
                     
                     
-                    DLog(@"self.supervision received array is  %@",self.supervisionReceivedArray);
-                    
+                     
                     NSSet *allExistingSupervisionReceivedSetForType=nil;
                     
                     if (supervisionType.existingSupervision) {
                         allExistingSupervisionReceivedSetForType=[supervisionType valueForKey:@"existingSupervision"];
-                        DLog(@"all existing supervision recieved for sub type is  %@",allExistingSupervisionReceivedSetForType);
                         if (predicateForExistingHoursEntities) {
                             allExistingSupervisionReceivedSetForType=  [allExistingSupervisionReceivedSetForType filteredSetUsingPredicate:predicateForExistingHoursEntities];
                         }
@@ -909,7 +906,6 @@
                     
                     
                     
-                    DLog(@"allexisting supervision received for subtype is %@",allExistingSupervisionReceivedSetForType);
                     
                     
                     
@@ -917,8 +913,7 @@
                         self.existingSupervisionArray=[allExistingSupervisionReceivedSetForType filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"existingHours.programCourse.objectID == %@", trainingProgram_.objectID]];
                     }
                     
-                    DLog(@"self.exsithgin supervision haours arrray is  %@",self.existingSupervisionArray);
-                    
+                
                     
                     
                    
@@ -1544,7 +1539,6 @@
             if (trackType_==kTrackTypeSupervision||trackType_==kTrackTypeSupervisionSubType) {
                 self.totalToDateTI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
             }
-            DLog(@"total time str %@",self.totalToDateStr);
             
             self.totalToDateStr=[self totalTimeStr:self.totalToDateTI];
             
@@ -1619,21 +1613,24 @@
         int trackDeliveredFilteredForCurrentMonthCount=trackDeliveredFilteredForCurrentMonth.count;
         if (trackDeliveredFilteredForCurrentMonthCount) {
             
-            NSMutableArray *monthlyLogNotesArray=[trackDeliveredFilteredForCurrentMonth mutableArrayValueForKey:@"monthlyLogNotes"];
+            NSMutableSet *monthlyLogNotesArray=[trackDeliveredFilteredForCurrentMonth mutableSetValueForKey:@"monthlyLogNotes"];
             int monthlyLogNotesArrayCount=monthlyLogNotesArray.count;
             for ( int i=0;i< monthlyLogNotesArrayCount; i++){
                 
                 
-                id logNotesID=[monthlyLogNotesArray objectAtIndex:i];
+                id logNotesID=[monthlyLogNotesArray.allObjects objectAtIndex:i];
                 
                 
                 if ([logNotesID isKindOfClass:[NSString class]]) {
                     NSString *logNotesStr=(NSString *)logNotesID;
+                    if (logNotesStr&& logNotesStr.length) {
+                   
                     if (i==0) {
                         returnString=logNotesStr;
                     }
                     else {
                         returnString=[returnString stringByAppendingFormat:@"; %@",logNotesStr];
+                    }
                     }
                 }
             }

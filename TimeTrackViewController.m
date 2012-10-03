@@ -8,7 +8,6 @@
 
 #import "TimeTrackViewController.h"
 #import "PTTAppDelegate.h"
-#import "Time_Shared.h"
 #import "ButtonCell.h"
 #import "ClientPresentations_Shared.h"
 #import "ClientsViewController_iPhone.h"
@@ -97,7 +96,6 @@
     self.eventsList=nil;
     self.eventViewController=nil;
     
-    time_Shared=nil;
     
     searchBar=nil;
 //    tableView=nil;
@@ -1399,7 +1397,7 @@
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
     
     
-    objectsModel.editButtonItem = self.editButton;;
+    objectsModel.editButtonItem = self.editButton;
     
     objectsModel.addButtonItem = self.addButton;
     
@@ -1426,18 +1424,13 @@
         
         objectsModel.theme=[SCTheme themeWithPath:@"mapper-iPhone.ptt"];
        
-        UIImage *menueBarImage=[UIImage imageNamed:@"menubar-full.png"];
-        [self.searchBar setBackgroundImage:menueBarImage];
-        [self.searchBar setScopeBarBackgroundImage:menueBarImage];
-        
+               
         
         
     }else {
         objectsModel.theme=[SCTheme themeWithPath:@"mapper-ipad-full.ptt"];
       
-        UIImage *menueBarImage=[UIImage imageNamed:@"ipad-menubar-right.png"];
-        [self.searchBar setBackgroundImage:menueBarImage];
-        [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+        
         
         
     }
@@ -1566,7 +1559,6 @@
     
     if (dateFromSearchText && [dateFromSearchText compare:[NSDate dateWithTimeIntervalSince1970:0]]==NSOrderedDescending) {
         
-  DLog(@"date to search is  %@",dateFromSearchText);
     NSString *entityName=nil;
     switch (currentControllerSetup) {
         case kTrackAssessmentSetup:
@@ -1602,7 +1594,6 @@
         dateComponents.day=-1;
         NSDate *oneDayBefore=[defaultCalendar dateByAddingComponents:dateComponents toDate:dateFromSearchText options:0];
         
-        DLog(@"one day after  %@",oneDayBefore);
         dateComponents.month=0;
         dateComponents.hour=0;
         dateComponents.minute=0;
@@ -1610,7 +1601,7 @@
         dateComponents.day=1;
         NSDate *oneDayAfter=[defaultCalendar dateByAddingComponents:dateComponents toDate:dateFromSearchText options:0];
         
-        DLog(@"dated one day after is  %@",oneDayAfter);
+       
         
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
 NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:managedObjectContext];
@@ -1894,7 +1885,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
      NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
     if (tableViewModel.tag==2) {
         
-       DLog(@"cellmanaged object entity name is %@",cellManagedObject);
+      
         if (cellManagedObject&& [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
        
         
@@ -1941,23 +1932,47 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                         stopwatchCell=(StopwatchCell *)cell;
                         stopwatchTextField=(UITextField *)stopwatchCell.stopwatchTextField;
                         
-                        [[NSNotificationCenter defaultCenter]
-                         addObserver:self
-                         selector:@selector(stopwatchUpdated:)
-                         name:@"addStopwatchChanged"
-                         object:nil];
                         
-                        [[NSNotificationCenter defaultCenter]
-                         addObserver:self
-                         selector:@selector(stopwatchReset:)
-                         name:@"stopwatchResetButtonTapped"
-                         object:nil];  
+                        @try {
+                            NSNotificationCenter *notificationCenter=[NSNotificationCenter defaultCenter];
+                            [notificationCenter removeObserver:self];
+                            [notificationCenter removeObserver:self];
+                            [notificationCenter removeObserver:self];
+                            
+                        }
+                        @catch (NSException *exception) {
+                            //dlog
+                        }
                         
-                        [[NSNotificationCenter defaultCenter]
-                         addObserver:self
-                         selector:@selector(stopwatchStop:)
-                         name:@"stopwatchStopButtonTapped"
-                         object:nil];
+                        @try {
+                            
+                            
+                            
+                            
+                            [[NSNotificationCenter defaultCenter]
+                             addObserver:self
+                             selector:@selector(stopwatchUpdated:)
+                             name:@"addStopwatchChanged"
+                             object:nil];
+                            
+                            [[NSNotificationCenter defaultCenter]
+                             addObserver:self
+                             selector:@selector(stopwatchReset:)
+                             name:@"stopwatchResetButtonTapped"
+                             object:nil];
+                            
+                            [[NSNotificationCenter defaultCenter]
+                             addObserver:self
+                             selector:@selector(stopwatchStop:)
+                             name:@"stopwatchStopButtonTapped"
+                             object:nil];
+                        }
+                        @catch (NSException *exception) {
+                           //do nothing
+                            
+                        }
+                       
+                        
                         
                         timeSection=[tableViewModel sectionAtIndex:0];
                     }
@@ -2096,13 +2111,21 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         if (indexPath.row!=NSNotFound && cellAtIndexPath.tag==1) {
        
         [stopwatchCell invalidateTheTimer];
-        [[NSNotificationCenter defaultCenter]
-         removeObserver:self];
-        [[NSNotificationCenter defaultCenter]
-         removeObserver:self];
         
-        [[NSNotificationCenter defaultCenter]
-         removeObserver:self];
+            @try {
+                [[NSNotificationCenter defaultCenter]
+                 removeObserver:self];
+                [[NSNotificationCenter defaultCenter]
+                 removeObserver:self];
+                
+                [[NSNotificationCenter defaultCenter]
+                 removeObserver:self];
+            }
+            @catch (NSException *exception) {
+                // do nothing
+            }
+           
+       
         //    [self calculateTime];
         viewControllerOpen=FALSE;
 
@@ -2213,35 +2236,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 }
 
-//-(void)tableViewModel:(SCTableViewModel *)tableModel detailModelConfiguredForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-//
-//
-//
-////    if (indexPath.row!=NSNotFound) {
-////        SCTableViewCell *cell=(SCTableViewCell *)[tableModel cellAtIndexPath:indexPath];
-////        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-////        if (detailTableViewModel.tag==2 ||tableModel.tag==1) 
-////        {
-////            
-////            
-////            
-////            
-////            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)] &&[cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) 
-////            {
-////                
-////                
-////                
-////                time_Shared.tableViewModel=detailTableViewModel;
-////                time_Shared.tableViewModel.delegate=time_Shared;
-////                //                tableModel.detailViewController=time_Shared;
-////            }
-////            
-////        }    
-////        
-////    }
-//
-//
-//}
+
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
@@ -3310,7 +3305,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
      
         if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"TimeEntity"]) {
             
-            
+            NSInteger sectionAtIndex=indexPath.section;
+            if (sectionAtIndex==0) {
+           
             switch (cell.tag) {
                 case 0:
                 {
@@ -3358,8 +3355,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 default:
                     break;
             }
+            }
+       if (sectionAtIndex==0||sectionAtIndex==1) {
+           [self calculateTime];
+       }
             
-            [self calculateTime];
+       
         }
         
     } 
@@ -4062,9 +4063,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         startTime=[dateFormatClearSeconds dateFromString:[dateFormatter stringFromDate:startTime]];
         endTime=[dateFormatClearSeconds dateFromString:[dateFormatter stringFromDate:endTime]];
         
-        DLog(@"start time  %@",startTime);
-        DLog(@"end time is  %@",endTime);
-        DLog(@"start time cell is  %@",startTimeCell.datePicker.date);
+      
     }
     
     

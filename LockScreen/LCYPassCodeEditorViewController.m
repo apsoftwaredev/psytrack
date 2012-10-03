@@ -165,7 +165,14 @@
 
 - (IBAction) cancel;
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"passcodeEditorCanceled" object:nil];
+    @try {
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"passcodeEditorCanceled" object:nil];
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
+   
+   
 	[self dismissViewControllerAnimated:YES completion:nil];
   
 

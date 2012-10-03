@@ -115,7 +115,14 @@
     }
     else {
         
-        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollAllHoursVCToNextPage" object:nil ];
+        @try {
+             [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollAllHoursVCToNextPage" object:nil ];
+        }
+        @catch (NSException *exception) {
+            //do nothing
+        }
+       
+       
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         

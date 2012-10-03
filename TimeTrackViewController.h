@@ -14,7 +14,6 @@
 #import "InterventionTypeEntity.h"
 #import "SupervisionTypeEntity.h"
 
-@class Time_Shared;
 
 typedef enum {
     kTrackAssessmentSetup,
@@ -33,7 +32,6 @@ static NSString * const kTrackSupervisionReceivedEntityName=@"SupervisionReceive
 
 @interface TimeTrackViewController : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, EKEventEditViewDelegate , UINavigationControllerDelegate>
 {
-    Time_Shared *time_Shared;
     ClientPresentations_Shared *clientPresentations_Shared;
     UISearchBar *searchBar;
 //    UITableView *tableView;

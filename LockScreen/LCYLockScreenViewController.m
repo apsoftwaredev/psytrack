@@ -519,10 +519,16 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 	if ([self authenticatePassCode: userInput] )	
 	{
 		[self.delegate lockScreen:self unlockedApp:YES];
-        
-        [[NSNotificationCenter defaultCenter]
-         postNotificationName:@"appUnlocked"
-         object:nil];
+        @try {
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"appUnlocked"
+             object:nil];
+        }
+        @catch (NSException *exception) {
+            //do nothing
+        }
+    
+    
         
 	}
         

@@ -141,8 +141,13 @@ static DTInfoManager *_sharedInstance = nil;
  NSString *cacheDirectory = [paths objectAtIndex:0];
  NSString *apps_file = [cacheDirectory stringByAppendingPathComponent:@"apps.plist"];
  [appsDict writeToFile:apps_file atomically:YES];
- 
- [[NSNotificationCenter defaultCenter] postNotificationName:@"DTInfoManagerAppsInfoUpdated" object:nil userInfo:nil];
+     @try {
+          [[NSNotificationCenter defaultCenter] postNotificationName:@"DTInfoManagerAppsInfoUpdated" object:nil userInfo:nil];
+     }
+     @catch (NSException *exception) {
+         //do nothing
+     }
+     
  }
  else
  {
@@ -264,8 +269,14 @@ static DTInfoManager *_sharedInstance = nil;
 			
 			[self.lastRefreshDates setObject:[NSDate date] forKey:fileName];
 			
+			@try {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"DTInfoManagerDictionaryUpdated" object:nil userInfo:nil];
+            }
+            @catch (NSException *exception) {
+                //do nothing
+            }
+        
 			
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"DTInfoManagerDictionaryUpdated" object:nil userInfo:nil];
 		}
 //		else
 //		{

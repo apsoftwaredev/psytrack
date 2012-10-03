@@ -90,8 +90,14 @@ static NSMutableDictionary *_cachedLayouts = nil;
 	self.lastModifiedDate = [NSDate date];
 	
 	isRefreshing = NO;
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DTInfoManagerLayoutUpdated" object:self userInfo:nil];
+	@try {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"DTInfoManagerLayoutUpdated" object:self userInfo:nil];
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
+
+
 }
 
 

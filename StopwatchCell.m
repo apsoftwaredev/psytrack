@@ -94,21 +94,41 @@ addStopwatch=(NSDate *)[self.boundObject valueForKey:@"addStopwatch"];
 
     [self toggleStartStopButtons];
     [self stopTheStopwatchTimer];
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:@"stopwatchStopButtonTapped"
-     object:self];
+    
+    
+   
+    
+    @try {
+       
+        
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"stopwatchStopButtonTapped"
+         object:self];
 
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
+    
 }
 
 -(IBAction)resetButtonTapped:(id)sender{
     startButton.highlighted=TRUE;
     startButton.hidden=FALSE;
     [self resetValuesToDefault];
+   
     
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:@"stopwatchResetButtonTapped"
-     object:self];
+    
+    @try {
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"stopwatchResetButtonTapped"
+         object:self];
 
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
+   
 }
 -(void)toggleStartStopButtons{
 
@@ -363,12 +383,20 @@ addStopwatch=(NSDate *)[self.boundObject valueForKey:@"addStopwatch"];
    
 //   
     
-  
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:@"addStopwatchChanged"
-     object:self];
+    @try {
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:@"addStopwatchChanged"
+         object:self];
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
+
+
     
 }
+
+
 
 
 @end

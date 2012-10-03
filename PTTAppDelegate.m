@@ -121,26 +121,39 @@
       
    
     
-    // Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the
-    // method "reachabilityChanged" will be called. 
-    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
-    hostReach = [Reachability reachabilityWithHostName: @"www.apple.com"];
-	[hostReach startNotifier];
-//	[self updateInterfaceWithReachability: hostReach];
-	
-    internetReach = [Reachability reachabilityForInternetConnection] ;
-	[internetReach startNotifier];
-//	[self updateInterfaceWithReachability: internetReach];
-    
-    wifiReach = [Reachability reachabilityForLocalWiFi] ;
-	[wifiReach startNotifier];
-//	[self updateInterfaceWithReachability: wifiReach];
+//    // Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the
+//    // method "reachabilityChanged" will be called. 
+//    @try {
+//         [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
+//    }
+//    @catch (NSException *exception) {
+//        //do nothing
+//    }
+//   
+//   
+//    hostReach = [Reachability reachabilityWithHostName: @"www.apple.com"];
+//	[hostReach startNotifier];
+////	[self updateInterfaceWithReachability: hostReach];
+//	
+//    internetReach = [Reachability reachabilityForInternetConnection] ;
+//	[internetReach startNotifier];
+////	[self updateInterfaceWithReachability: internetReach];
+//    
+//    wifiReach = [Reachability reachabilityForLocalWiFi] ;
+//	[wifiReach startNotifier];
+////	[self updateInterfaceWithReachability: wifiReach];
 
 	NSUbiquitousKeyValueStore* store = [NSUbiquitousKeyValueStore defaultStore];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateKVStoreItems:)
-                                                 name:NSUbiquitousKeyValueStoreDidChangeExternallyNotification
-                                               object:store];
+    @try {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(updateKVStoreItems:)
+                                                     name:NSUbiquitousKeyValueStoreDidChangeExternallyNotification
+                                                   object:store];
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
+    
    
        [store synchronize];
 
@@ -169,21 +182,26 @@
             
     
     
+    @try {
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(notifyTrustFailure:)
+         name:@"trustFailureOccured"
+         object:nil];
+        
+        
+        
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(loadDatabaseData:)
+         name:@"persistentStoreAdded"
+         object:nil];
+    }
+    @catch (NSException *exception) {
+        [self displayNotification:@"Error loading database" forDuration:0 location:kPTTScreenLocationTop inView:self.window];
+    }
+    
    
-  
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(notifyTrustFailure:)
-     name:@"trustFailureOccured"
-     object:nil];
-    
-  
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(loadDatabaseData:)
-     name:@"persistentStoreAdded"
-     object:nil];
    
  
        
@@ -459,6 +477,7 @@
                                 forState:UIControlStateNormal];
 
     [[UISearchBar appearance] setBackgroundImage:navBarImage ];
+    [[UISearchBar appearance]setScopeBarBackgroundImage:navBarImage];
     
     
 }
@@ -662,7 +681,14 @@
 -(void)loadDatabaseData:(id)sender
 {
     
+    @try {
+        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"persistentStoreAdded" object:nil ];
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
 
+    
     self.encryption=[[PTTEncryption alloc]init];
     NSString *statusMessage;
     retrievedEncryptedDataFile=NO;
@@ -754,8 +780,8 @@
         [self displayNotification:trustResultFailureString forDuration:8.0 location:kPTTScreenLocationMiddle inView:self.window];
     }
 //    [self saveLockDictionarySettings];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadTableModel" object:self userInfo:nil];
-        
+    
+
 }
 //- (void) updateInterfaceWithReachability: (Reachability*) curReach
 //{
@@ -789,15 +815,15 @@
 //}
 
 //Called by Reachability whenever status changes.
-- (void) reachabilityChanged: (NSNotification* )note
-{
-	Reachability* curReach = [note object];
-	if (curReach) {
-         NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
-    }
-   
-//	[self updateInterfaceWithReachability: curReach];
-}
+//- (void) reachabilityChanged: (NSNotification* )note
+//{
+//	Reachability* curReach = [note object];
+//	if (curReach) {
+//         NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+//    }
+//   
+////	[self updateInterfaceWithReachability: curReach];
+//}
 
 
 -(IBAction)notifyTrustFailure:(id)sender{
@@ -5528,9 +5554,7 @@ return [self applicationDrugsDirectory].path;
 - (void)mergeiCloudChanges:(NSNotification*)note forContext:(NSManagedObjectContext*)moc {
     [moc mergeChangesFromContextDidSaveNotification:note]; 
     
-    NSNotification* refreshNotification = [NSNotification notificationWithName:@"RefreshAllViews" object:self  userInfo:[note userInfo]];
-    
-    [[NSNotificationCenter defaultCenter] postNotification:refreshNotification];
+   
 }
 
 /**
@@ -5554,7 +5578,14 @@ return [self applicationDrugsDirectory].path;
         [moc performBlockAndWait:^{
             // even the post initialization needs to be done within the Block
             [moc setPersistentStoreCoordinator: coordinator];
-            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mergeChangesFrom_iCloud:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:coordinator];
+            @try {
+                [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mergeChangesFrom_iCloud:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:coordinator];
+            }
+            @catch (NSException *exception) {
+                [self displayNotification:@"Error adding observer to iCloud merges" forDuration:5.0 location:kPTTScreenLocationTop inView:self.window];
+            }
+         
+         
         }];
         managedObjectContext__ = moc;
     }
@@ -5745,8 +5776,17 @@ return [self applicationDrugsDirectory].path;
         // NSFetchedResultsController to -performFetch again now there is a real store
         dispatch_async(dispatch_get_main_queue(), ^{
             
+            @try {
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"persistentStoreAdded" object:self userInfo:nil];
+            }
+            @catch (NSException *exception) {
+                [self displayNotification:@"Error setting up database. App will now close." forDuration:10.0 location:kPTTScreenLocationTop inView:self.window];
+                
+                sleep(10);
+                abort();
+            }
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"persistentStoreAdded" object:self userInfo:nil];
+           
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData" object:self userInfo:nil];
             
             
@@ -5923,8 +5963,7 @@ return [self applicationDrugsDirectory].path;
 
 -(void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event {
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(shake) name:@"shake" object:nil];
+   
     
     if(event.type == UIEventTypeMotion && event.subtype == UIEventSubtypeMotionShake)
     { 

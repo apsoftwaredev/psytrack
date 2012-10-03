@@ -138,7 +138,7 @@ existingSupervisionArray=existingSupervisionArray_;
                         
             
             if (dateToAdd&&[dateToAdd isKindOfClass:[NSDate class]]) {
-                DLog(@"total time object is  %@",totalTimeDateObject);
+               
                 totalTime=totalTime+[totalTimeDateObject timeIntervalSince1970];
                 
             }
@@ -404,7 +404,7 @@ existingSupervisionArray=existingSupervisionArray_;
     
     
     NSSet *filteredObjects=nil;
-    DLog(@"track array is  %@",trackArray);
+    
     if (trackArray && trackArray.count) {
         
         if (predicate) {
@@ -445,7 +445,7 @@ existingSupervisionArray=existingSupervisionArray_;
         
     
 
-    DLog(@"total time is  %@",returnTimeArray);
+  
     
     return [self totalTimeIntervalForTotalTimeArray:returnTimeArray];
     
@@ -456,12 +456,10 @@ existingSupervisionArray=existingSupervisionArray_;
 -(NSTimeInterval )totalTimeIntervalForExistingHoursArray:(NSArray *)filteredExistingHoursArray keyPath:(NSString *)keyPath{
     
     NSMutableArray *existingHoursTimeArray=[NSMutableArray array];
-    DLog(@"filtered existing hopiurs arru os  %@",filteredExistingHoursArray);
-    DLog(@"temp path is  %@",keyPath);
+    
     if (filteredExistingHoursArray  &&filteredExistingHoursArray.count) {
         NSSet *existingHoursTempSet=[filteredExistingHoursArray valueForKeyPath:keyPath];
-        DLog(@"existing hour stemp set is  %@",existingHoursTempSet);
-        
+      
         for (id object in existingHoursTempSet) {
             if ([object isKindOfClass:[NSSet class]]) {
                 NSSet *objectSet=(NSSet *)object;
@@ -480,8 +478,6 @@ existingSupervisionArray=existingSupervisionArray_;
         
     }
     
-    DLog(@"exitting our stime array  %@",existingHoursTimeArray);
-    
     
     return  [self totalTimeIntervalForTotalTimeArray:existingHoursTimeArray];
     
@@ -495,8 +491,7 @@ existingSupervisionArray=existingSupervisionArray_;
     
     if (filteredExistingHoursArray  &&filteredExistingHoursArray.count) {
         NSSet *existingHoursTempSet=[filteredExistingHoursArray valueForKeyPath:@"hours"];
-        DLog(@"existing hour stemp set is  %@",existingHoursTempSet);
-        
+       
         for (id object in existingHoursTempSet) {
             if ([object isKindOfClass:[NSSet class]]) {
                 NSSet *objectSet=(NSSet *)object;
@@ -519,7 +514,6 @@ existingSupervisionArray=existingSupervisionArray_;
         
     }
     
-    DLog(@"exitting our stime array  %@",existingHoursTimeArray);
     
     
     return  [self totalTimeIntervalForTotalTimeArray:existingHoursTimeArray];

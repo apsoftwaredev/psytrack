@@ -468,7 +468,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
     }else 
     {
       
-        if (![clinicianObject_ isDeleted]) {
+        if (clinicianObject_) {
             
             [self.boundObject setValue:clinicianObject_ forKey:clinicianKeyStr];
         }

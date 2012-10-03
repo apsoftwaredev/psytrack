@@ -248,12 +248,18 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     CGRect mainPageScrollViewFrame=self.mainPageScrollView.frame;
     mainPageScrollViewFrame.size.height=changeScrollHeightTo;
     self.mainPageScrollView.frame=mainPageScrollViewFrame;
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(scrollToNextPage)
-     name:@"ScrollAllHoursVCToNextPage"
-     object:nil];
+    @try {
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(scrollToNextPage)
+         name:@"ScrollAllHoursVCToNextPage"
+         object:nil];
+    }
+    @catch (NSException *exception) {
+        //do nothing
+    }
+
+
 }
 
 -(void)scrollToNextPage{
@@ -265,8 +271,11 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     
     if ((self.containerForSignaturesAndSupervisorSummaries.frame.origin.y+self.containerForSignaturesAndSupervisorSummaries.frame.size.height)<=(MAX_MAIN_SCROLLVIEW_HEIGHT+currentOffsetY)) {
-        
-        [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollAllHoursVCToNextPage" object:nil];
+        @try{
+             [[NSNotificationCenter defaultCenter]removeObserver:self name:@"ScrollAllHoursVCToNextPage" object:nil];        }@catch(id anException){
+            //do nothing, obviously it wasn't attached because an exception was thrown
+        }
+       
         
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
