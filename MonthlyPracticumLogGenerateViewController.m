@@ -624,6 +624,13 @@
 	[self dismissModalViewControllerAnimated:YES];
     
 #endif // DEMO_VIEW_CONTROLLER_PUSH
+
+    if (viewController.view) {
+        viewController.view=nil;
+        viewController=nil;
+    
+    }
+
 }
 
 #pragma mark -

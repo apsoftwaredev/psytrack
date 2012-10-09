@@ -148,6 +148,8 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 
 
     @try {
+        theContentView=nil;
+        theContentView=nil;
           [self removeObserver:self forKeyPath:@"frame"];
     }
     @catch (NSException *exception) {

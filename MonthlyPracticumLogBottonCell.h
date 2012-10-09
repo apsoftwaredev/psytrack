@@ -21,14 +21,14 @@
 
 @interface MonthlyPracticumLogBottonCell : SCCustomCell {
 
-    __weak ClinicianEntity *clinician_;
-    __weak NSDate *monthToDisplay_;
-    __weak TrackTypeWithTotalTimes *trackTypeWithTotalTimesObject_;
+     ClinicianEntity *clinician_;
+     NSDate *monthToDisplay_;
+     TrackTypeWithTotalTimes *trackTypeWithTotalTimesObject_;
 }
 
 
 
-@property (nonatomic, weak)  TrackTypeWithTotalTimes *trackTypeWithTotalTimesObject;
+@property (nonatomic, strong)  TrackTypeWithTotalTimes *trackTypeWithTotalTimesObject;
 @property (nonatomic, weak)IBOutlet UIView *cellsContainerView;
 @property (nonatomic, weak)IBOutlet UILabel *cellSubTypeLabel;
 @property (nonatomic, weak)IBOutlet UILabel *hoursWeek1Label;

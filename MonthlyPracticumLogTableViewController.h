@@ -23,5 +23,5 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil monthToDisplay:(NSDate *)monthGiven trainingProgram:(TrainingProgramEntity *)trainingProgramGiven markAmended:(BOOL)markAmendedGiven;
 
 
-@property(nonatomic, weak) NSString *studentName;
+@property(nonatomic, strong) NSString *studentName;
 @end

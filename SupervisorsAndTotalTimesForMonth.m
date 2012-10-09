@@ -360,6 +360,11 @@
         self.practicumSeminarInstructtor=self.trainingProgram.seminarInstructor.combinedName;
         self.schoolNameStr=self.trainingProgram.school.schoolName;
         [self setMonthandYearsInParentheses];
+        
+        self.interventionsDeliveredArray=nil;
+        self.assessmentsDeliveredArray=nil;
+        self.supportActivityDeliveredArray=nil;
+        self.supervisionReceivedArray=nil;
        
     }
     

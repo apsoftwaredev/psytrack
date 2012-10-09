@@ -463,6 +463,7 @@
 	 theScrollView = nil;  contentViews = nil;
 
 	 lastHideTime = nil; lastAppearSize = CGSizeZero; currentPage = 0;
+    document=nil;
 
 	[super viewDidUnload];
 }

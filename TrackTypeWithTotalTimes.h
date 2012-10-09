@@ -38,22 +38,22 @@ typedef enum {
    
     PTrackType trackType_;
     
-   __weak NSString *trackPathStartString_;
+    NSString *trackPathStartString_;
     
-     __weak NSString *monthlyLogNotes_;
+      NSString *monthlyLogNotes_;
 }
 
 @property (nonatomic, assign)  PTrackType trackType;;
-@property (nonatomic, weak) NSString *trackPathStartString;
-@property (nonatomic, weak) id trackTypeObject;
-@property (nonatomic, weak)NSString *monthlyLogNotes;
-@property (nonatomic, weak) NSString *typeLabelText;
+@property (nonatomic, strong) NSString *trackPathStartString;
+@property (nonatomic, strong) id trackTypeObject;
+@property (nonatomic, strong)NSString *monthlyLogNotes;
+@property (nonatomic, strong) NSString *typeLabelText;
 
-@property (nonatomic, weak) NSString *totalWeek1Str;
-@property (nonatomic, weak) NSString *totalWeek2Str;
-@property (nonatomic, weak) NSString *totalWeek3Str;
-@property (nonatomic, weak) NSString *totalWeek4Str;
-@property (nonatomic, weak) NSString *totalWeek5Str;
+@property (nonatomic, strong) NSString *totalWeek1Str;
+@property (nonatomic, strong) NSString *totalWeek2Str;
+@property (nonatomic, strong) NSString *totalWeek3Str;
+@property (nonatomic, strong) NSString *totalWeek4Str;
+@property (nonatomic, strong) NSString *totalWeek5Str;
 
 @property (nonatomic, assign) NSTimeInterval totalWeek1TI;
 @property (nonatomic, assign) NSTimeInterval totalWeek2TI;
@@ -62,16 +62,16 @@ typedef enum {
 @property (nonatomic, assign) NSTimeInterval totalWeek5TI;
 
 
-@property (nonatomic, weak) NSString *totalWeekUndefinedStr;
+@property (nonatomic, strong) NSString *totalWeekUndefinedStr;
 @property (nonatomic, assign) NSTimeInterval totalWeekUndefinedTI;
 
-@property (nonatomic, weak) NSString *totalForMonthStr;
+@property (nonatomic, strong) NSString *totalForMonthStr;
 @property (nonatomic, assign) NSTimeInterval totalForMonthTI;
 
-@property (nonatomic, weak) NSString *totalCummulativeStr;
+@property (nonatomic, strong) NSString *totalCummulativeStr;
 @property (nonatomic, assign) NSTimeInterval totalCummulativeTI;
 
-@property (nonatomic, weak) NSString *totalToDateStr;
+@property (nonatomic, strong) NSString *totalToDateStr;
 @property (nonatomic, assign) NSTimeInterval totalToDateTI;
 
 -(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trackTypeObject:(id)trackTypeObjectGiven trainingProgram:(TrainingProgramEntity *)trainingProgramGiven;

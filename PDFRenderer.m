@@ -63,6 +63,8 @@
     
     NSString *documentTitle=[NSString stringWithFormat:@"%@Monthly Clinical Practicum Log for %@", markAmended?@"Amended ":@"",[dateFormatter stringFromDate:monthToDisplay]];
     [self createPDFfromUIView:monthlyPracticumLogTVC.view saveToDocumentsWithFileName:fileName  viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTVC password:filePassword  documentTitle:(NSString *)documentTitle];
+    monthlyPracticumLogTVC.view=nil;
+    monthlyPracticumLogTVC=nil;
 
 
 // Close the PDF context and write the contents out.
@@ -105,8 +107,8 @@
     
                              
     [self createAllHoursReportPDFfromUIView:allTrainingHoursVC.view saveToDocumentsWithFileName:fileName viewController:(AllTrainingHoursVC*)allTrainingHoursVC password:filePassword  documentTitle:(NSString *)documentTitle];
-    
-    
+    allTrainingHoursVC.view=nil;
+    allTrainingHoursVC=nil;
     // Close the PDF context and write the contents out.
     //UIGraphicsEndPDFContext();
 }
@@ -535,7 +537,7 @@
     
     
     [pageString drawInRect:stringRect withFont:theFont];
-    
+
 }
 
 +(void)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTableViewController  password:(NSString *) filePassword documentTitle:(NSString *)documentTitle
@@ -625,7 +627,7 @@
                               appDelegate.stopScrollingMonthlyPracticumLog=YES;
                             }
                         
-                            
+                            [aView.layer removeFromSuperlayer];
                            
                         } while (!appDelegate.stopScrollingMonthlyPracticumLog);
                         
@@ -674,12 +676,13 @@
     
     CGDataProviderRef dataProvider=CGDataProviderCreateWithCFData((__bridge CFDataRef)pdfData);
     //open template file
+    
     CGPDFDocumentRef templateDocument = CGPDFDocumentCreateWithProvider(dataProvider);
   
     
     //get amount of pages in template
     size_t count = CGPDFDocumentGetNumberOfPages(templateDocument);
-    
+    CGContextRef context = UIGraphicsGetCurrentContext();
     //for each page in template
     for (size_t pageNumber = 1; pageNumber <= count; pageNumber++) {
         //get bounds of template page
@@ -688,14 +691,16 @@
         
         //create empty page with corresponding bounds in new document
         UIGraphicsBeginPDFPageWithInfo(templatePageBounds, nil);
-        CGContextRef context = UIGraphicsGetCurrentContext();
+        
         
         //flip context due to different origins
         CGContextTranslateCTM(context, 15.0, templatePageBounds.size.height/2);
         CGContextScaleCTM(context, 0.47, -0.47);
         
+      
         //copy content of template page on the corresponding page in new file
         CGContextDrawPDFPage(context, templatePage);
+        
         
         //flip context back
         CGContextTranslateCTM(context, 15.0, templatePageBounds.size.height/2);
@@ -703,12 +708,14 @@
         
         /* Here you can do any drawings */
     [self drawPageNumber:pageNumber totalPages:count];
+        
     }
+    CGContextEndPage(context);
     CGPDFDocumentRelease(templateDocument);
     UIGraphicsEndPDFContext();
     CGDataProviderRelease(dataProvider);
+    pdfData=nil;
     
-
     
     
     
@@ -1247,7 +1254,11 @@ CGFloat GetLineHeightForFont(CTFontRef iFont)
     currentRange.location +=currentRange.length;
     currentRange.length=0;
     CFRelease(frameRef);
+    CGContextRelease(currentContext);
     
     return currentRange;
+    
+    
+    
 }
 @end

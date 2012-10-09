@@ -25,8 +25,8 @@
 
 @interface SupervisorsAndTotalTimesForMonth : TotalTimesForMonthlyLog{
 
-   __weak NSString *assessmentMonthlyNotes_;
-   __weak NSString *supportMonthlyNotes_;
+    NSString *assessmentMonthlyNotes_;
+    NSString *supportMonthlyNotes_;
 
     
 }
@@ -34,22 +34,22 @@
 
 
 @property (nonatomic, assign) NSInteger numberOfProgramCourses;
-@property (nonatomic, weak) NSString *trainingProgramsStr;
-@property (nonatomic, weak) NSArray *clinicians;
-@property (nonatomic, weak) NSString *cliniciansStr;
-@property (nonatomic, weak) NSString *practicumSiteNamesStr;
+@property (nonatomic, strong) NSString *trainingProgramsStr;
+@property (nonatomic, strong) NSArray *clinicians;
+@property (nonatomic, strong) NSString *cliniciansStr;
+@property (nonatomic, strong) NSString *practicumSiteNamesStr;
 @property (nonatomic, assign) NSInteger numberOfSites;
 
-@property (nonatomic, weak) NSString *studentNameStr;
-@property (nonatomic, weak) NSString *practicumSeminarInstructtor;
-@property (nonatomic, weak) NSString *schoolNameStr;
-@property (nonatomic, weak) NSString *monthAndYearsInParentheses;
+@property (nonatomic, strong) NSString *studentNameStr;
+@property (nonatomic, strong) NSString *practicumSeminarInstructtor;
+@property (nonatomic, strong) NSString *schoolNameStr;
+@property (nonatomic, strong) NSString *monthAndYearsInParentheses;
 
-@property (nonatomic, weak) NSString *interventionTotalWeek1Str;
-@property (nonatomic, weak) NSString *interventionTotalWeek2Str;
-@property (nonatomic, weak) NSString *interventionTotalWeek3Str;
-@property (nonatomic, weak) NSString *interventionTotalWeek4Str;
-@property (nonatomic, weak) NSString *interventionTotalWeek5Str;
+@property (nonatomic, strong) NSString *interventionTotalWeek1Str;
+@property (nonatomic, strong) NSString *interventionTotalWeek2Str;
+@property (nonatomic, strong) NSString *interventionTotalWeek3Str;
+@property (nonatomic, strong) NSString *interventionTotalWeek4Str;
+@property (nonatomic, strong) NSString *interventionTotalWeek5Str;
 
 @property (nonatomic, assign) NSTimeInterval interventionTotalWeek1TI;
 @property (nonatomic, assign) NSTimeInterval interventionTotalWeek2TI;
@@ -58,25 +58,25 @@
 @property (nonatomic, assign) NSTimeInterval interventionTotalWeek5TI;
 
 
-@property (nonatomic, weak) NSString *interventionTotalWeekUndefinedStr;
+@property (nonatomic, strong) NSString *interventionTotalWeekUndefinedStr;
 @property (nonatomic, assign) NSTimeInterval interventionTotalWeekUndefinedTI;
 
-@property (nonatomic, weak) NSString *interventionTotalForMonthStr;
+@property (nonatomic, strong) NSString *interventionTotalForMonthStr;
 @property (nonatomic, assign) NSTimeInterval interventionTotalForMonthTI;
 
-@property (nonatomic, weak) NSString *interventionTotalCummulativeStr;
+@property (nonatomic, strong) NSString *interventionTotalCummulativeStr;
 @property (nonatomic, assign) NSTimeInterval interventionTotalCummulativeTI;
 
-@property (nonatomic, weak) NSString *interventionTotalToDateStr;
+@property (nonatomic, strong) NSString *interventionTotalToDateStr;
 @property (nonatomic, assign) NSTimeInterval interventionTotalToDateTI;
 
 
 
-@property (nonatomic, weak) NSString *assessmentTotalWeek1Str;
-@property (nonatomic, weak) NSString *assessmentTotalWeek2Str;
-@property (nonatomic, weak) NSString *assessmentTotalWeek3Str;
-@property (nonatomic, weak) NSString *assessmentTotalWeek4Str;
-@property (nonatomic, weak) NSString *assessmentTotalWeek5Str;
+@property (nonatomic, strong) NSString *assessmentTotalWeek1Str;
+@property (nonatomic, strong) NSString *assessmentTotalWeek2Str;
+@property (nonatomic, strong) NSString *assessmentTotalWeek3Str;
+@property (nonatomic, strong) NSString *assessmentTotalWeek4Str;
+@property (nonatomic, strong) NSString *assessmentTotalWeek5Str;
 
 @property (nonatomic, assign) NSTimeInterval assessmentTotalWeek1TI;
 @property (nonatomic, assign) NSTimeInterval assessmentTotalWeek2TI;
@@ -84,24 +84,24 @@
 @property (nonatomic, assign) NSTimeInterval assessmentTotalWeek4TI;
 @property (nonatomic, assign) NSTimeInterval assessmentTotalWeek5TI;
 
-@property (nonatomic, weak) NSString *assessmentTotalWeekUndefinedStr;
+@property (nonatomic, strong) NSString *assessmentTotalWeekUndefinedStr;
 @property (nonatomic, assign) NSTimeInterval assessmentTotalWeekUndefinedTI;
 
-@property (nonatomic, weak) NSString *assessmentTotalForMonthStr;
+@property (nonatomic, strong) NSString *assessmentTotalForMonthStr;
 @property (nonatomic, assign) NSTimeInterval assessmentTotalForMonthTI;
 
-@property (nonatomic, weak) NSString *assessmentTotalCummulativeStr;
+@property (nonatomic, strong) NSString *assessmentTotalCummulativeStr;
 @property (nonatomic, assign) NSTimeInterval assessmentTotalCummulativeTI;
 
-@property (nonatomic, weak) NSString *assessmentTotalToDateStr;
+@property (nonatomic, strong) NSString *assessmentTotalToDateStr;
 @property (nonatomic, assign) NSTimeInterval assessmentTotalToDateTI;
 
 
-@property (nonatomic, weak) NSString *supportTotalWeek1Str;
-@property (nonatomic, weak) NSString *supportTotalWeek2Str;
-@property (nonatomic, weak) NSString *supportTotalWeek3Str;
-@property (nonatomic, weak) NSString *supportTotalWeek4Str;
-@property (nonatomic, weak) NSString *supportTotalWeek5Str;
+@property (nonatomic, strong) NSString *supportTotalWeek1Str;
+@property (nonatomic, strong) NSString *supportTotalWeek2Str;
+@property (nonatomic, strong) NSString *supportTotalWeek3Str;
+@property (nonatomic, strong) NSString *supportTotalWeek4Str;
+@property (nonatomic, strong) NSString *supportTotalWeek5Str;
 
 @property (nonatomic, assign) NSTimeInterval supportTotalWeek1TI;
 @property (nonatomic, assign) NSTimeInterval supportTotalWeek2TI;
@@ -110,24 +110,24 @@
 @property (nonatomic, assign) NSTimeInterval supportTotalWeek5TI;
 
 
-@property (nonatomic, weak) NSString *supportTotalWeekUndefinedStr;
+@property (nonatomic, strong) NSString *supportTotalWeekUndefinedStr;
 @property (nonatomic, assign) NSTimeInterval supportTotalWeekUndefinedTI;
 
-@property (nonatomic, weak) NSString *supportTotalForMonthStr;
+@property (nonatomic, strong) NSString *supportTotalForMonthStr;
 @property (nonatomic, assign) NSTimeInterval supportTotalForMonthTI;
 
-@property (nonatomic, weak) NSString *supportTotalCummulativeStr;
+@property (nonatomic, strong) NSString *supportTotalCummulativeStr;
 @property (nonatomic, assign) NSTimeInterval supportTotalCummulativeTI;
 
-@property (nonatomic, weak) NSString *supportTotalToDateStr;
+@property (nonatomic, strong) NSString *supportTotalToDateStr;
 @property (nonatomic, assign) NSTimeInterval supportTotalToDateTI;
 
 
-@property (nonatomic, weak) NSString *supervisionTotalWeek1Str;
-@property (nonatomic, weak) NSString *supervisionTotalWeek2Str;
-@property (nonatomic, weak) NSString *supervisionTotalWeek3Str;
-@property (nonatomic, weak) NSString *supervisionTotalWeek4Str;
-@property (nonatomic, weak) NSString *supervisionTotalWeek5Str;
+@property (nonatomic, strong) NSString *supervisionTotalWeek1Str;
+@property (nonatomic, strong) NSString *supervisionTotalWeek2Str;
+@property (nonatomic, strong) NSString *supervisionTotalWeek3Str;
+@property (nonatomic, strong) NSString *supervisionTotalWeek4Str;
+@property (nonatomic, strong) NSString *supervisionTotalWeek5Str;
 
 @property (nonatomic, assign) NSTimeInterval supervisionTotalWeek1TI;
 @property (nonatomic, assign) NSTimeInterval supervisionTotalWeek2TI;
@@ -136,25 +136,25 @@
 @property (nonatomic, assign) NSTimeInterval supervisionTotalWeek5TI;
 
 
-@property (nonatomic, weak) NSString *supervisionTotalWeekUndefinedStr;
+@property (nonatomic, strong) NSString *supervisionTotalWeekUndefinedStr;
 @property (nonatomic, assign) NSTimeInterval supervisionTotalWeekUndefinedTI;
 
-@property (nonatomic, weak) NSString *supervisionTotalForMonthStr;
+@property (nonatomic, strong) NSString *supervisionTotalForMonthStr;
 @property (nonatomic, assign) NSTimeInterval supervisionTotalForMonthTI;
 
-@property (nonatomic, weak) NSString *supervisionTotalCummulativeStr;
+@property (nonatomic, strong) NSString *supervisionTotalCummulativeStr;
 @property (nonatomic, assign) NSTimeInterval supervisionTotalCummulativeTI;
 
-@property (nonatomic, weak) NSString *supervisionTotalToDateStr;
+@property (nonatomic, strong) NSString *supervisionTotalToDateStr;
 @property (nonatomic, assign) NSTimeInterval supervisionTotalToDateTI;
 
 
 
-@property (nonatomic, weak) NSString *directTotalWeek1Str;
-@property (nonatomic, weak) NSString *directTotalWeek2Str;
-@property (nonatomic, weak) NSString *directTotalWeek3Str;
-@property (nonatomic, weak) NSString *directTotalWeek4Str;
-@property (nonatomic, weak) NSString *directTotalWeek5Str;
+@property (nonatomic, strong) NSString *directTotalWeek1Str;
+@property (nonatomic, strong) NSString *directTotalWeek2Str;
+@property (nonatomic, strong) NSString *directTotalWeek3Str;
+@property (nonatomic, strong) NSString *directTotalWeek4Str;
+@property (nonatomic, strong) NSString *directTotalWeek5Str;
 
 @property (nonatomic, assign) NSTimeInterval directTotalWeek1TI;
 @property (nonatomic, assign) NSTimeInterval directTotalWeek2TI;
@@ -163,24 +163,24 @@
 @property (nonatomic, assign) NSTimeInterval directTotalWeek5TI;
 
 
-@property (nonatomic, weak) NSString *directTotalWeekUndefinedStr;
+@property (nonatomic, strong) NSString *directTotalWeekUndefinedStr;
 @property (nonatomic, assign) NSTimeInterval directTotalWeekUndefinedTI;
 
-@property (nonatomic, weak) NSString *directTotalForMonthStr;
+@property (nonatomic, strong) NSString *directTotalForMonthStr;
 @property (nonatomic, assign) NSTimeInterval directTotalForMonthTI;
 
-@property (nonatomic, weak) NSString *directTotalCummulativeStr;
+@property (nonatomic, strong) NSString *directTotalCummulativeStr;
 @property (nonatomic, assign) NSTimeInterval directTotalCummulativeTI;
 
-@property (nonatomic, weak) NSString *directTotalToDateStr;
+@property (nonatomic, strong) NSString *directTotalToDateStr;
 @property (nonatomic, assign) NSTimeInterval directTotalToDateTI;
 
 
-@property (nonatomic, weak) NSString *overallTotalWeek1Str;
-@property (nonatomic, weak) NSString *overallTotalWeek2Str;
-@property (nonatomic, weak) NSString *overallTotalWeek3Str;
-@property (nonatomic, weak) NSString *overallTotalWeek4Str;
-@property (nonatomic, weak) NSString *overallTotalWeek5Str;
+@property (nonatomic, strong) NSString *overallTotalWeek1Str;
+@property (nonatomic, strong) NSString *overallTotalWeek2Str;
+@property (nonatomic, strong) NSString *overallTotalWeek3Str;
+@property (nonatomic, strong) NSString *overallTotalWeek4Str;
+@property (nonatomic, strong) NSString *overallTotalWeek5Str;
 
 @property (nonatomic, assign) NSTimeInterval overallTotalWeek1TI;
 @property (nonatomic, assign) NSTimeInterval overallTotalWeek2TI;
@@ -189,21 +189,21 @@
 @property (nonatomic, assign) NSTimeInterval overallTotalWeek5TI;
 
 
-@property (nonatomic, weak) NSString *overallTotalWeekUndefinedStr;
+@property (nonatomic, strong) NSString *overallTotalWeekUndefinedStr;
 @property (nonatomic, assign) NSTimeInterval overallTotalWeekUndefinedTI;
 
-@property (nonatomic, weak) NSString *overallTotalCummulativeStr;
+@property (nonatomic, strong) NSString *overallTotalCummulativeStr;
 @property (nonatomic, assign) NSTimeInterval overallTotalCummulativeTI;
 
-@property (nonatomic, weak) NSString *overallTotalToDateStr;
+@property (nonatomic, strong) NSString *overallTotalToDateStr;
 @property (nonatomic, assign) NSTimeInterval overallTotalToDateTI;
 
-@property (nonatomic, weak) NSString *overallTotalForMonthStr;
+@property (nonatomic, strong) NSString *overallTotalForMonthStr;
 @property (nonatomic, assign) NSTimeInterval overallTotalForMonthTI;
 
 
-@property (nonatomic, weak) NSString *assessmentMonthlyNotes;
-@property (nonatomic, weak) NSString *supportMonthlyNotes;
+@property (nonatomic, strong) NSString *assessmentMonthlyNotes;
+@property (nonatomic, strong) NSString *supportMonthlyNotes;
 @property (nonatomic, assign) BOOL markAmended;
 
 

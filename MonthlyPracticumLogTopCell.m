@@ -131,6 +131,8 @@
 @synthesize schoolNameLabel;
 static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
 
+
+
 -(void)willDisplay{
   
     self.accessoryType=UITableViewCellAccessoryNone;
@@ -320,7 +322,13 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
         
         
         appDelegate.stopScrollingMonthlyPracticumLog=YES;
-        currentOffsetY=0;   
+        currentOffsetY=0;
+        self.mainPageScrollView=nil;
+       interventionObjectsModel_=nil;
+       assessmentObjectsModel_=nil;
+       supportObjectsModel_=nil;
+       supervisionObjectsModel_=nil;
+       
         
     } else {
         

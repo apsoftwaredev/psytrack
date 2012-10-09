@@ -592,11 +592,21 @@
 		CGContextSetRenderingIntent(context, kCGRenderingIntentDefault); CGContextSetInterpolationQuality(context, kCGInterpolationDefault);
 
 		CGContextDrawPDFPage(context, drawPDFPageRef); // Render the PDF page into the context
+       
+        
 	}
 
 	CGPDFPageRelease(drawPDFPageRef); CGPDFDocumentRelease(drawPDFDocRef); // Cleanup
 }
+-(void)removeFromSuperview{
 
+    [super removeFromSuperview];
+    CGPDFPageRelease(_PDFPageRef);
+    CGPDFDocumentRelease(_PDFDocRef);
+
+
+
+}
 @end
 
 #pragma mark -

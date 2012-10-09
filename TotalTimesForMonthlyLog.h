@@ -62,32 +62,32 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 
 
      NSDate  *monthToDisplay_;
-    __weak ClinicianEntity *clinician_;
+     ClinicianEntity *clinician_;
      TrainingProgramEntity *trainingProgram_;
-    __weak NSArray *clinicians_;
-    __weak NSDate *monthStartDate_;
-    __weak NSDate *monthEndDate_;
-    __weak NSSet *interventionsDeliveredArray_;
-    __weak NSSet *assessmentsDeliveredArray_;
-    __weak NSSet *supportActivityDeliveredArray_;
+     NSArray *clinicians_;
+     NSDate *monthStartDate_;
+     NSDate *monthEndDate_;
+     NSSet *interventionsDeliveredArray_;
+     NSSet *assessmentsDeliveredArray_;
+     NSSet *supportActivityDeliveredArray_;
      NSSet *supervisionReceivedArray_;
     
-    __weak NSSet *existingInterventionsArray_;
-    __weak NSSet *existingAssessmentsArray_;
-    __weak NSSet *existingSupportArray_;
+    NSSet *existingInterventionsArray_;
+     NSSet *existingAssessmentsArray_;
+     NSSet *existingSupportArray_;
      NSSet *existingSupervisionArray_;
-    __weak NSArray *existingHoursArray_;
+     NSArray *existingHoursArray_;
     
-    __weak NSDate  *week1StartDate_;
-    __weak NSDate *week1EndDate_;
-    __weak NSDate  *week2StartDate_;
-    __weak NSDate *week2EndDate_;
-    __weak NSDate  *week3StartDate_;
-    __weak NSDate *week3EndDate_;
-    __weak NSDate  *week4StartDate_;
-    __weak NSDate *week4EndDate_;
-    __weak NSDate *week5StartDate_;
-    __weak NSDate *week5EndDate_;
+     NSDate  *week1StartDate_;
+     NSDate *week1EndDate_;
+     NSDate  *week2StartDate_;
+     NSDate *week2EndDate_;
+     NSDate  *week3StartDate_;
+     NSDate *week3EndDate_;
+     NSDate  *week4StartDate_;
+     NSDate *week4EndDate_;
+     NSDate *week5StartDate_;
+     NSDate *week5EndDate_;
     
     BOOL doctorateLevel_;
 
@@ -98,48 +98,48 @@ static NSString * const kTrackKeyPathForExistingHoursSupervisionReceivedHours=@"
 }
 
 @property (nonatomic, assign)BOOL doctorateLevel;
-@property (nonatomic, weak) ClinicianEntity *clinician;
+@property (nonatomic, strong) ClinicianEntity *clinician;
 
 @property (nonatomic, strong) TrainingProgramEntity *trainingProgram;
 @property (nonatomic, strong) NSDate *monthToDisplay;
-@property (nonatomic, weak) NSDate *monthStartDate;
-@property (nonatomic, weak) NSDate *monthEndDate;
+@property (nonatomic, strong) NSDate *monthStartDate;
+@property (nonatomic, strong) NSDate *monthEndDate;
 
 
 
-@property (nonatomic, weak) NSDate *week1StartDate;
-@property (nonatomic, weak) NSDate *week1EndDate;
-@property (nonatomic, weak) NSDate *week2StartDate;
-@property (nonatomic, weak) NSDate *week2EndDate;
-@property (nonatomic, weak) NSDate *week3StartDate;
-@property (nonatomic, weak) NSDate *week3EndDate;
-@property (nonatomic, weak) NSDate *week4StartDate;
-@property (nonatomic, weak) NSDate *week4EndDate;
-@property (nonatomic, weak) NSDate *week5StartDate;
-@property (nonatomic, weak) NSDate *week5EndDate;
+@property (nonatomic, strong) NSDate *week1StartDate;
+@property (nonatomic, strong) NSDate *week1EndDate;
+@property (nonatomic, strong) NSDate *week2StartDate;
+@property (nonatomic, strong) NSDate *week2EndDate;
+@property (nonatomic, strong) NSDate *week3StartDate;
+@property (nonatomic, strong) NSDate *week3EndDate;
+@property (nonatomic, strong) NSDate *week4StartDate;
+@property (nonatomic, strong) NSDate *week4EndDate;
+@property (nonatomic, strong) NSDate *week5StartDate;
+@property (nonatomic, strong) NSDate *week5EndDate;
 
 
-@property (nonatomic, weak) NSSet *interventionsDeliveredArray;
-@property (nonatomic, weak) NSSet *assessmentsDeliveredArray;
-@property (nonatomic, weak) NSSet *supportActivityDeliveredArray;
+@property (nonatomic, strong) NSSet *interventionsDeliveredArray;
+@property (nonatomic, strong) NSSet *assessmentsDeliveredArray;
+@property (nonatomic, strong) NSSet *supportActivityDeliveredArray;
 @property (nonatomic, strong) NSSet *supervisionReceivedArray;
 
 
 
-@property (nonatomic, weak) NSArray *existingHoursArray;
+@property (nonatomic, strong) NSArray *existingHoursArray;
 
 
 
 
-@property (nonatomic, weak) NSSet *existingHInterventionrray;
+@property (nonatomic, strong) NSSet *existingHInterventionrray;
 
 
 
-@property (nonatomic, weak) NSSet *existingAssessmentArray;
+@property (nonatomic, strong) NSSet *existingAssessmentArray;
 
 
 
-@property (nonatomic, weak) NSSet *existingSupportArray;
+@property (nonatomic, strong) NSSet *existingSupportArray;
 
 
 @property (nonatomic, strong) NSSet *existingSupervisionArray;

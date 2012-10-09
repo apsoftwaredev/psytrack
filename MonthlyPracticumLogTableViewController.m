@@ -102,6 +102,15 @@
    
    
 }
+-(void)didReceiveMemoryWarning{
+
+    [super didReceiveMemoryWarning];
+    objectsModel=nil;
+    supervisorObject=nil;
+    trainingProgram_=nil;
+    monthToDisplay_=nil;
+    self.studentName=nil;
+}
 
 - (void)viewDidUnload
 {
