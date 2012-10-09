@@ -1320,7 +1320,7 @@
         trackSubTypeSelectionAttribs.allowMovingItems = YES;
         trackSubTypeSelectionAttribs.allowEditingItems = YES;
         
-        trackSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add subtypes under intervention type)"];
+        trackSubTypeSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add subtypes under supervision type)"];
         
         trackSubTypePropertyDef.attributes = trackSubTypeSelectionAttribs;
         
@@ -2247,6 +2247,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
     }
     
+    if (tableModel.tag==0) {
+        [self.searchBar setSelectedScopeButtonIndex:1];
+        SCArrayOfObjectsModel *objectsModel=(SCArrayOfObjectsModel *)tableModel;
+       [objectsModel.dataFetchOptions setFilterPredicate:nil];
+        
+    }
+    
     if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
                 PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
@@ -2286,7 +2293,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     
     
-    if (currentControllerSetup==kTrackInterventionSetup&& detailTableViewModel.tag==1&& detailTableViewModel.sectionCount>2) {
+    if ((currentControllerSetup==kTrackInterventionSetup||currentControllerSetup==kTrackSupervisionGivenSetup||currentControllerSetup==kTrackSupervisionReceivedSetup)&& detailTableViewModel.tag==1&& detailTableViewModel.sectionCount>2) {
         
         SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:2];
         
@@ -2351,7 +2358,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&([sectionManagedObject.entity.name isEqualToString:@"SupervisionReceivedEntity"]||[sectionManagedObject.entity.name isEqualToString:@"SupervisionGivenEntity"])&&objectSection.cellCount>1) {
                 
-                SCTableViewCell *cellAtFour=(SCTableViewCell *)[objectSection cellAtIndex:0];
+                SCTableViewCell *cellAtFour=(SCTableViewCell *)[objectSection cellAtIndex:1];
                 if ([cellAtFour isKindOfClass:[SCObjectSelectionCell class]]) {
                     SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtFour;
                     
@@ -2370,7 +2377,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                             NSPredicate *predicate = [NSPredicate predicateWithFormat:
                                                       @"supervisionType.supervisionType like %@",[NSString stringWithString:(NSString *) selectedSupervisionType.supervisionType]]; 
                             
-                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"supervisionSubType" sortAscending:YES filterPredicate:predicate];
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"subType" sortAscending:YES filterPredicate:predicate];
                             
                             objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
                             
@@ -4535,7 +4542,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForSectionAtIndex:(NSUInteger)index{
     
     
-    
+    if (tableViewModel.tag==0) {
+        currentDetailTableViewModel=nil;
+    }
     
     
 }

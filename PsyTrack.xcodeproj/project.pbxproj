@@ -252,10 +252,10 @@
 		E7294CE5160685DC00C153CE /* DemographicReportGenerateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7294CE3160685D800C153CE /* DemographicReportGenerateVC.xib */; };
 		E7294CE716069C5000C153CE /* DemographicReportGenerateVC_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7294CE616069C4D00C153CE /* DemographicReportGenerateVC_iPhone.xib */; };
 		E734334715D5D69C007237C5 /* PaymentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E734334615D5D69C007237C5 /* PaymentEntity.m */; };
+		E73B541316243F0F008EB835 /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E73B541216243F0F008EB835 /* psyTrack.sqlite */; };
 		E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DD158E28DC00CE1AF4 /* menubar-full.png */; };
 		E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */; };
 		E74167EA158E782900CE1AF4 /* Monaco.dfont in Resources */ = {isa = PBXBuildFile; fileRef = E74167E5158E739300CE1AF4 /* Monaco.dfont */; };
-		E74AD6A81618EAB700B596FC /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E74AD6A71618EAB700B596FC /* psyTrack.sqlite */; };
 		E74AD6AA1618ECD200B596FC /* ipad-background-blue-plain-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74AD6A91618ECD200B596FC /* ipad-background-blue-plain-small@2x.png */; };
 		E74B04E015BC436A0077D759 /* ExistingHoursEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B04DF15BC436A0077D759 /* ExistingHoursEntity.m */; };
 		E74B04E315BC447F0077D759 /* ClinicianEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B04E215BC447F0077D759 /* ClinicianEntity.m */; };
@@ -879,10 +879,10 @@
 		E7294CE616069C4D00C153CE /* DemographicReportGenerateVC_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemographicReportGenerateVC_iPhone.xib; sourceTree = "<group>"; };
 		E734334515D5D69C007237C5 /* PaymentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentEntity.h; sourceTree = "<group>"; };
 		E734334615D5D69C007237C5 /* PaymentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentEntity.m; sourceTree = "<group>"; };
+		E73B541216243F0F008EB835 /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = psyTrack.sqlite; sourceTree = "<group>"; };
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
 		E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full@2x.png"; sourceTree = "<group>"; };
 		E74167E5158E739300CE1AF4 /* Monaco.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = Monaco.dfont; sourceTree = "<group>"; };
-		E74AD6A71618EAB700B596FC /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = psyTrack.sqlite; path = ../../Desktop/psyTrack.sqlite; sourceTree = "<group>"; };
 		E74AD6A91618ECD200B596FC /* ipad-background-blue-plain-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-background-blue-plain-small@2x.png"; sourceTree = "<group>"; };
 		E74B04DE15BC436A0077D759 /* ExistingHoursEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursEntity.h; sourceTree = "<group>"; };
 		E74B04DF15BC436A0077D759 /* ExistingHoursEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursEntity.m; sourceTree = "<group>"; };
@@ -1637,7 +1637,7 @@
 				E7B49C1A1607E53A0073AA30 /* NSManagedObject Subclasses */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
-				E74AD6A71618EAB700B596FC /* psyTrack.sqlite */,
+				E73B541216243F0F008EB835 /* psyTrack.sqlite */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2751,8 +2751,8 @@
 				E7294CE5160685DC00C153CE /* DemographicReportGenerateVC.xib in Resources */,
 				E7294CE716069C5000C153CE /* DemographicReportGenerateVC_iPhone.xib in Resources */,
 				E7B7957A16124528008D3E8F /* Default-568h@2x.png in Resources */,
-				E74AD6A81618EAB700B596FC /* psyTrack.sqlite in Resources */,
 				E74AD6AA1618ECD200B596FC /* ipad-background-blue-plain-small@2x.png in Resources */,
+				E73B541316243F0F008EB835 /* psyTrack.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

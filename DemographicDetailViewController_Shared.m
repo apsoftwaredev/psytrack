@@ -80,6 +80,8 @@
 //    
 //    [self.demographicProfileDef.propertyGroups addGroup:sharedPropertyGroup];
     //Create a class definition for Demographic Gender entity
+    
+    
     SCEntityDefinition *genderDef = [SCEntityDefinition definitionWithEntityName:@"GenderEntity" 
                                                       managedObjectContext:managedObjectContext
                                                              propertyNames:[NSArray arrayWithObjects:@"genderName",@"notes",nil]];

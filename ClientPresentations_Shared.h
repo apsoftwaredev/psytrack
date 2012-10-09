@@ -18,6 +18,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "InstrumentEntity.h"
+#import "AdditionalVariableNameEntity.h"
 
 @interface ClientPresentations_Shared : NSObject <SCTableViewModelDelegate,SCTableViewModelDataSource, SCTableViewControllerDelegate>{
 
@@ -27,6 +28,7 @@
      SCEntityDefinition *clientPresentationDef;
     InstrumentEntity *selectedInstrument;
 
+      AdditionalVariableNameEntity *selectedVariableName;
 }
 
 

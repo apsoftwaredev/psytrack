@@ -195,7 +195,7 @@
     
     [self.clientPresentationDef removePropertyDefinitionWithName:@"liabilityRisk"];
     NSDictionary *liabilityRiskScaleDataBindings = [NSDictionary 
-                                                  dictionaryWithObjects:[NSArray arrayWithObjects:@"liabilityRisk",@"Liability Risk Level", nil] 
+                                                  dictionaryWithObjects:[NSArray arrayWithObjects:@"liabilityRisk",@"Risk Concern Level", nil] 
                                                   forKeys:[NSArray arrayWithObjects:@"70",@"2",nil]]; // 70 and 2 are the control tags
     SCCustomPropertyDefinition *liabilityRiskScaleDataProperty = [SCCustomPropertyDefinition definitionWithName:@"liabilityRiskScaleData"
                                                                                              uiElementNibName:scaleDataCellNibName
@@ -445,6 +445,13 @@
     
     additionalVariableValueDef.orderAttributeName=@"order";
     
+    SCPropertyDefinition *variableValuesInVariableNamePropertyDef=[SCPropertyDefinition definitionWithName:@"variableValues" title:@"Values" type:SCPropertyTypeArrayOfObjects];
+    
+    [additionalVariableNameDef addPropertyDefinition:variableValuesInVariableNamePropertyDef];
+    
+    variableValuesInVariableNamePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:additionalVariableValueDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new variable value"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
+    
+
 
     SCPropertyDefinition *additionalVariablesPropertyDef = [clientPresentationDef propertyDefinitionWithName:@"additionalVariables"];
     
@@ -472,12 +479,11 @@
     additionalVariableValuePropertyDef.title=@"Selected Value(s)";
     additionalVariableValuePropertyDef.type = SCPropertyTypeObjectSelection;
 	SCObjectSelectionAttributes *variableValueSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:additionalVariableValueDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
-    variableValueSelectionAttribs.allowAddingItems = YES;
-    variableValueSelectionAttribs.allowDeletingItems = YES;
+    variableValueSelectionAttribs.allowAddingItems = NO;
+    variableValueSelectionAttribs.allowDeletingItems = NO;
     variableValueSelectionAttribs.allowMovingItems = YES;
     variableValueSelectionAttribs.allowEditingItems = YES;
-    variableValueSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add Variable Value Definitions)"];
-    variableValueSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add Variable Value Definition"];
+    variableValueSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add Variable Values Under Variable Name)"];
     additionalVariableValuePropertyDef.attributes = variableValueSelectionAttribs;
     SCPropertyDefinition *additionalVariableValueNotesPropertyDef = [additionalVariableValueDef propertyDefinitionWithName:@"notes"];
     additionalVariableValueNotesPropertyDef.type=SCPropertyTypeTextView;
@@ -1110,14 +1116,18 @@
     
     //create a property definition
     SCPropertyDefinition *batteryInstrumentsPropertyDef = [batteryDef propertyDefinitionWithName:@"instruments"];
+    batteryInstrumentsPropertyDef.type = SCPropertyTypeObjectSelection;
+	
+    SCObjectSelectionAttributes *batteryInstrumentsSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:instrumentDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
+    batteryInstrumentsSelectionAttribs.allowAddingItems = YES;
+    batteryInstrumentsSelectionAttribs.allowDeletingItems = YES;
+    batteryInstrumentsSelectionAttribs.allowMovingItems = YES;
+    batteryInstrumentsSelectionAttribs.allowEditingItems = YES;
+    batteryInstrumentsSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"(Add Instrument)"];
+
+    batteryInstrumentsSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Instruments)"];
     
-    batteryInstrumentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentDef
-                                                                                         allowAddingItems:YES
-                                                                                       allowDeletingItems:YES
-                                                                                         allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add instruments"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
-    
-    
-    
+    batteryInstrumentsPropertyDef.attributes = batteryInstrumentsSelectionAttribs;
    
     //Create the property definition for the notes property in the genderDef class
     SCPropertyDefinition *batteryNotesPropertyDef = [batteryDef propertyDefinitionWithName:@"notes"];
@@ -1399,13 +1409,83 @@ if(section.headerTitle !=nil)
     if (selectedInstrument && tableModel.tag==4) {
         selectedInstrument=nil;
     }
-
+    DLog(@"tabel model tag is  %i",tableModel.tag);
+    if(selectedVariableName && tableModel.tag==4)
+        selectedVariableName=nil;
 
 
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+   DLog(@"tablemodel tag is  %i",tableModel.tag);
+   
+        if (detailTableViewModel.tag==5 &&detailTableViewModel.sectionCount){
+            
+            
+            SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
+            
+            
+            
+            if ([section isKindOfClass:[SCObjectSection class]]){
+                
+                SCObjectSection *objectSection=(SCObjectSection *)section;
+                
+                
+                NSManagedObject *sectionManagedObject=(NSManagedObject *)objectSection.boundObject;
+                
+                
+                
+                
+                if (sectionManagedObject&&[sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"]&&objectSection.cellCount>1) {
+                    
+                    SCTableViewCell *cellAtZero=(SCTableViewCell *)[objectSection cellAtIndex:1];
+                    if ([cellAtZero isKindOfClass:[SCObjectSelectionCell class]]) {
+                        SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellAtZero;
+                        
+                        
+                        
+                        NSObject *additionalVariableNameObject=[sectionManagedObject valueForKeyPath:@"variableName"];
+                        
+                        if (indexPath.row!=NSNotFound &&( selectedVariableName||(additionalVariableNameObject&&[additionalVariableNameObject isKindOfClass:[AdditionalVariableNameEntity class]]))) {
+                            if (!selectedVariableName) {
+                                selectedVariableName=(AdditionalVariableNameEntity *)additionalVariableNameObject;
+                            }
+                            
+                            
+                            if (selectedVariableName.variableName.length) {
+                                
+                                NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                          @"variableName.variableName like %@",[NSString stringWithString:(NSString *) selectedVariableName.variableName]];
+                                
+                                SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
+                                
+                                objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                                
+                                [objectSelectionCell reloadBoundValue];
+                                
+                                
+                            }
+                            
+                        }
+                        else {
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                      @"variableName.variableName = nil"];
+                            
+                            SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
+                            
+                            objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    
+                }
+            }
 
+    }
+    
     if ( detailTableViewModel.sectionCount) {
        
         SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
@@ -1547,7 +1627,7 @@ if(section.headerTitle !=nil)
     SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
    
        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-  
+  DLog(@"tablemodel tag is  %i",tableViewModel.tag);
     if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"ClientInstrumentScoresEntity"] && [cell isKindOfClass:[SCObjectSelectionCell class]]&&cell.tag==0) {
         
         SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
@@ -1616,7 +1696,64 @@ if(section.headerTitle !=nil)
         
     }
     
-    if (tableViewModel.tag==3) {
+ 
+        
+        
+     
+        
+       else if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"AdditionalVariableEntity"]) {
+            
+            if (cell.tag==0&&[cell isKindOfClass:[SCObjectSelectionCell class]] ) {
+                
+                SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+                
+                
+                if ([objectSelectionCell.selectedItemIndex intValue]>-1) {
+                    NSManagedObject *selectedVariableNameManagedObject =[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                    if ([selectedVariableNameManagedObject isKindOfClass:[AdditionalVariableNameEntity class]]) {
+                        selectedVariableName=(AdditionalVariableNameEntity *) selectedVariableNameManagedObject;
+                        
+                        
+                        
+                        SCTableViewCell *variableValueCell=(SCTableViewCell *)[tableViewModel cellAfterCell:objectSelectionCell rewind:NO];
+                        
+                        if ([variableValueCell isKindOfClass:[SCObjectSelectionCell class]]) {
+                            
+                            
+                            SCObjectSelectionCell *variableValueObjectSelectionCell=(SCObjectSelectionCell *)variableValueCell;
+                            
+                            if (selectedVariableName.variableName.length) {
+                                
+                                NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                                                          @"variableName.variableName like %@",[NSString stringWithString:(NSString *) selectedVariableName.variableName]];
+                                
+                                SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
+                                
+                                variableValueObjectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                                
+                                [variableValueObjectSelectionCell reloadBoundValue];
+                                
+                                
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+                
+            }
+       }
+
+  else  if (tableViewModel.tag==3) {
         SCTableViewSection *sectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         
 //        if (indexPath.section==0&&cell.tag==0) {
@@ -1627,7 +1764,7 @@ if(section.headerTitle !=nil)
         
     }
 
-    if (tableViewModel.tag==5){
+    else if (tableViewModel.tag==5){
         SCTableViewCell *cell = [tableViewModel cellAtIndexPath:indexPath];
         if (cell.tag==3)
         {

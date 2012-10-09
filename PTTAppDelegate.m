@@ -131,7 +131,7 @@
 //    }
 //   
 //   
-//    hostReach = [Reachability reachabilityWithHostName: @"www.apple.com"];
+//    hostReach = [Reachability reachabilityWithHostName: @"www.google.com"];
 //	[hostReach startNotifier];
 ////	[self updateInterfaceWithReachability: hostReach];
 //	
@@ -2149,9 +2149,14 @@
 	// Register the Device Data
 	// !!! CHANGE "http" TO "https" IF YOU ARE USING HTTPS PROTOCOL
 	NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    
+    
+    
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-NSData *response =	[NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-	if (response == nil) {	DLog(@"send request %@",response)};
+
+   [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:nil];
+
 	
 #endif
 }
@@ -5552,7 +5557,15 @@ return [self applicationDrugsDirectory].path;
 // The main list view doesn't need that custom notification because the NSFetchedResultsController is
 // already listening directly to the NSManagedObjectContext
 - (void)mergeiCloudChanges:(NSNotification*)note forContext:(NSManagedObjectContext*)moc {
-    [moc mergeChangesFromContextDidSaveNotification:note]; 
+    @try {
+        [moc mergeChangesFromContextDidSaveNotification:note];
+    }
+    @catch (NSException *exception) {
+        [self displayNotification:@"Error Occured Merging Changes From iCloud. May occur if required value has not downloaded yet.  If problem persists, you can disable iCloud in settings." forDuration:6.0 location:kPTTScreenLocationTop inView:self.window];
+        [moc rollback];
+    }
+   
+
     
    
 }
@@ -5602,6 +5615,7 @@ return [self applicationDrugsDirectory].path;
     // this only works if you used NSMainQueueConcurrencyType
     // otherwise use a dispatch_async back to the main thread yourself
     [moc performBlock:^{
+       
         [self mergeiCloudChanges:notification forContext:moc];
         [self displayNotification:@"Merged changes from iCloud" forDuration:3.0 location:kPTTScreenLocationTop inView:self.window];
     }];
@@ -5688,8 +5702,13 @@ return [self applicationDrugsDirectory].path;
 #if !TARGET_IPHONE_SIMULATOR
         cloudURL = [fileManager URLForUbiquityContainerIdentifier:nil];
 #endif
-        NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"psyTrack"];
-        NSDictionary* options;
+       
+        
+        NSString* coreDataCloudContent =nil;
+             if (cloudURL) {
+                  coreDataCloudContent=     [[cloudURL path] stringByAppendingPathComponent:@"psyTrack"];
+             }
+            NSDictionary* options;
       
        
         if ([coreDataCloudContent length] != 0 &&[self reachable]) {
@@ -5730,13 +5749,9 @@ return [self applicationDrugsDirectory].path;
             
             if (cloudURL) {
                 [[NSFileManager defaultManager] removeItemAtURL:cloudURL error:&removeError];
-                [self displayNotification:@"An unresolved error occured while setting up iCloud. Try restarting." forDuration:0 location:kPTTScreenLocationTop inView:self.window];
+                [self displayNotification:@"An unresolved error occured while setting up database.  Try restarting" forDuration:0 location:kPTTScreenLocationTop inView:self.window];
             
-                if (removeError) {
-                    
-                    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kPTiCloudPreference];
-                    
-                }
+                
             }
             
             
@@ -5753,24 +5768,23 @@ return [self applicationDrugsDirectory].path;
              */
             
 //            abort();
-        }    
+        }
+        else
         
-//        NSPersistentStore* store = [psc.persistentStores objectAtIndex:0];
-//        
-//        NSError* errorChangeStore;
-//        
-//        if (&useriCloudChoice&&[coreDataCloudContent length] != 0 &&[self reachable]){
-//       
-//        options = [NSDictionary dictionaryWithObjectsAndKeys:@"4R8ZH75936.com.psycheweb.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil]; 
-//        if (![self.persistentStoreCoordinator migratePersistentStore:store toURL:storeUrl options:options withType:NSSQLiteStoreType error:&errorChangeStore])
-//        {
-//            
-//            //abort();
-//        }
-//        [fileManager removeItemAtURL:[[self applicationPTTDirectory] URLByAppendingPathComponent:@"psyTrack.sqlite"] error:nil];
-//        }
+            
+        {
+            
+
         [psc unlock];
+         NSError *errorSettingAttributes = nil;
+            NSDictionary *fileAttributes = [NSDictionary dictionaryWithObject:NSFileProtectionComplete forKey:NSFileProtectionKey];
         
+                if(![fileManager setAttributes:fileAttributes ofItemAtPath:storePath error:&errorSettingAttributes])
+                {
+                    
+                    [self displayNotification:[NSString stringWithFormat:@"Error occured while setting data protection. %@", errorSettingAttributes.description]];
+                }
+                    
         // tell the UI on the main thread we finally added the store and then
         // post a custom notification to make your views do whatever they need to such as tell their
         // NSFetchedResultsController to -performFetch again now there is a real store
@@ -5792,6 +5806,7 @@ return [self applicationDrugsDirectory].path;
             
             
         });
+        }
     });
     
     return persistentStoreCoordinator__;

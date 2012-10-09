@@ -1329,14 +1329,16 @@
     //create a property definition
     SCPropertyDefinition *batteryInstrumentsPropertyDef = [batteryDef propertyDefinitionWithName:@"instruments"];
     
-    batteryInstrumentsPropertyDef.type=SCPropertyTypeArrayOfObjects;
-    batteryInstrumentsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:instrumentDef
-                                                                                               allowAddingItems:YES
-                                                                                             allowDeletingItems:YES
-                                                                                               allowMovingItems:NO expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Tap edit to add instruments"] addNewObjectuiElement:[SCTableViewCell cellWithText:@"Tap here to add instrument"] addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];	
+    batteryInstrumentsPropertyDef.type=SCPropertyTypeObjectSelection;
+    SCObjectSelectionAttributes *batteryInstrumentsSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:instrumentDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
+    batteryInstrumentsSelectionAttribs.allowAddingItems = YES;
+    batteryInstrumentsSelectionAttribs.allowDeletingItems = YES;
+    batteryInstrumentsSelectionAttribs.allowMovingItems = YES;
+    batteryInstrumentsSelectionAttribs.allowEditingItems = YES;
+    batteryInstrumentsSelectionAttribs.addNewObjectuiElement=[SCTableViewCell cellWithText:@"Add New Instrument"];
+    batteryInstrumentsSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add Instruments)"];
+    batteryInstrumentsPropertyDef.attributes=batteryInstrumentsSelectionAttribs;
     
-    
-   
     SCPropertyDefinition *existingBatteryNotesPropertyDef = [existingBatteryDef propertyDefinitionWithName:@"notes"];
     existingBatteryNotesPropertyDef.type=SCPropertyTypeTextView;
     
