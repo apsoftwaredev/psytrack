@@ -2634,24 +2634,48 @@ duration:(NSTimeInterval)1.0];
 -(void)displayMemoryWarning{
 
 
-    [self displayNotification:@"Memory Warning Received.  Try closing some open applications that are not needed at this time and restarting the application." forDuration:15.0 location:kPTTScreenLocationMiddle inView:nil];
+    [self displayNotification:@"Memory Warning Received.  Consider closing some open applications that are not needed at this time or restarting the application to free up memory space." forDuration:15.0 location:kPTTScreenLocationMiddle inView:nil];
   
     if (!self.drugViewControllerIsInDetailSubview) {
   
     NSFileManager *fileManager=[[NSFileManager alloc]init];
     NSError *error=nil;
+        float freeSpace = 0.0f;
+        float totalSpace=0.0f;
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
+        
+        
+        if (dictionary) {
+            NSNumber *fileSystemFreeSizeInBytes = [dictionary objectForKey: NSFileSystemFreeSize];
+            freeSpace = [fileSystemFreeSizeInBytes floatValue];
+        } else { 
+            //Handle error
+        }
+       
+        if (dictionary) {
+            NSNumber *fileSystemTotalSizeInBytes = [dictionary objectForKey: NSFileSystemSize];
+            totalSpace = [fileSystemTotalSizeInBytes floatValue];
+        } else {
+            //Handle error
+        }
 
-    if (__drugsPersistentStoreCoordinator&&__drugsPersistentStoreCoordinator.persistentStores.count) {
-      
-        NSPersistentStore *drugsPersisstentStore=[__drugsPersistentStoreCoordinator.persistentStores objectAtIndex:0];
+        float percentageFreeSpace=freeSpace/totalSpace *100;
         
-        [__drugsPersistentStoreCoordinator removePersistentStore:drugsPersisstentStore  error:nil];
-        
-        __drugsPersistentStoreCoordinator=nil;
-        __drugsManagedObjectContext=nil;
-        __drugsManagedObjectModel=nil;
-    }
-   [ fileManager removeItemAtURL:[self applicationDrugsFileURL] error:&error];
+
+        if(percentageFreeSpace <7.0 ){
+            if ( __drugsPersistentStoreCoordinator&&__drugsPersistentStoreCoordinator.persistentStores.count) {
+              
+                NSPersistentStore *drugsPersisstentStore=[__drugsPersistentStoreCoordinator.persistentStores objectAtIndex:0];
+                
+                [__drugsPersistentStoreCoordinator removePersistentStore:drugsPersisstentStore  error:nil];
+                
+                __drugsPersistentStoreCoordinator=nil;
+                __drugsManagedObjectContext=nil;
+                __drugsManagedObjectModel=nil;
+            }
+        [ fileManager removeItemAtURL:[self applicationDrugsFileURL] error:&error];
+        }
     }
     
     [self saveContext];
