@@ -608,9 +608,11 @@
 
                             currentPage++;
                         
+//                            [aView.layer renderInContext:pdfContext];
+                            
+                            [aView.layer removeAllAnimations];
                             [aView.layer renderInContext:pdfContext];
-                            
-                            
+
                             
                            
                             
@@ -636,7 +638,7 @@
                         // We are done with our context now, so we release it
 //                        CGContextRelease (pdfContext);
                        
-                        
+                        CGContextEndPage(pdfContext);
                         
                         }
                     
@@ -705,13 +707,15 @@
         //flip context back
         CGContextTranslateCTM(context, 15.0, templatePageBounds.size.height/2);
         CGContextScaleCTM(context, 0.47, -0.47);
-        
+    
         /* Here you can do any drawings */
     [self drawPageNumber:pageNumber totalPages:count];
         
     }
     CGContextEndPage(context);
+
     CGPDFDocumentRelease(templateDocument);
+    UIGraphicsEndPDFContext();
     UIGraphicsEndPDFContext();
     CGDataProviderRelease(dataProvider);
     pdfData=nil;
@@ -791,10 +795,9 @@
                             
                             currentPage++;
                             
+
+                            [aView.layer removeAllAnimations];
                             [aView.layer renderInContext:pdfContext];
-                            
-                            
-                           
                             
                             
                             
@@ -809,7 +812,7 @@
                                 appDelegate.stopScrollingMonthlyPracticumLog=YES;
                             }
     
-                            
+                            [aView.layer removeFromSuperlayer];
                         } while (!appDelegate.stopScrollingMonthlyPracticumLog);
                         
                         
@@ -847,7 +850,7 @@
     
     //get amount of pages in template
     size_t count = CGPDFDocumentGetNumberOfPages(templateDocument);
-    
+    CGContextRef context = UIGraphicsGetCurrentContext();
     //for each page in template
     for (size_t pageNumber = 1; pageNumber <= count; pageNumber++) {
         //get bounds of template page
@@ -856,7 +859,7 @@
         
         //create empty page with corresponding bounds in new document
         UIGraphicsBeginPDFPageWithInfo(templatePageBounds, nil);
-        CGContextRef context = UIGraphicsGetCurrentContext();
+        
         
         //flip context due to different origins
         CGContextTranslateCTM(context, 15.0, templatePageBounds.size.height/2);
@@ -872,12 +875,12 @@
         /* Here you can do any drawings */
         [self drawPageNumber:pageNumber totalPages:count];
     }
+     CGContextEndPage(context);
     CGPDFDocumentRelease(templateDocument);
     UIGraphicsEndPDFContext();
-     CGDataProviderRelease(dataProvider);
-    
-    
-    
+    UIGraphicsEndPDFContext();
+    CGDataProviderRelease(dataProvider);
+    pdfData=nil;
     
     
     //end
@@ -946,8 +949,11 @@
         
         currentPage++;
         
+//        
+        [aView.layer removeAllAnimations];
         [aView.layer renderInContext:pdfContext];
         
+
         
         
         
@@ -964,7 +970,7 @@
             appDelegate.stopScrollingMonthlyPracticumLog=YES;
         }
             
-        
+         [aView.layer removeFromSuperlayer];
     } while (!appDelegate.stopScrollingMonthlyPracticumLog);
     
     
@@ -1002,6 +1008,7 @@
     
     //get amount of pages in template
     size_t count = CGPDFDocumentGetNumberOfPages(templateDocument);
+    CGContextRef context = UIGraphicsGetCurrentContext();
     
     //for each page in template
     for (size_t pageNumber = 1; pageNumber <= count; pageNumber++) {
@@ -1011,8 +1018,7 @@
         
         //create empty page with corresponding bounds in new document
         UIGraphicsBeginPDFPageWithInfo(templatePageBounds, nil);
-        CGContextRef context = UIGraphicsGetCurrentContext();
-        
+         
         //flip context due to different origins
         CGContextTranslateCTM(context, 15.0, templatePageBounds.size.height/2);
         CGContextScaleCTM(context, 0.47, -0.47);
@@ -1027,10 +1033,13 @@
         /* Here you can do any drawings */
         [self drawPageNumber:pageNumber totalPages:count];
     }
+    CGContextEndPage(context);
     CGPDFDocumentRelease(templateDocument);
     UIGraphicsEndPDFContext();
+    UIGraphicsEndPDFContext();
     CGDataProviderRelease(dataProvider);
-    
+    pdfData=nil;
+
     
     
     

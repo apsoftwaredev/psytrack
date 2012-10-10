@@ -324,10 +324,24 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
         appDelegate.stopScrollingMonthlyPracticumLog=YES;
         currentOffsetY=0;
         self.mainPageScrollView=nil;
-       interventionObjectsModel_=nil;
-       assessmentObjectsModel_=nil;
-       supportObjectsModel_=nil;
-       supervisionObjectsModel_=nil;
+        monthToDisplay=nil;
+        clinician=nil;
+        trainingProgram=nil;
+       [interventionObjectsModel_ removeAllSections];
+        [assessmentObjectsModel_ removeAllSections];
+        [supportObjectsModel_ removeAllSections];
+        [supervisionObjectsModel_ removeAllSections];
+        
+        interventionObjectsModel_.viewController.view=nil;
+        assessmentObjectsModel_.viewController.view=nil;
+        supportObjectsModel_.viewController.view=nil;
+        supervisionObjectsModel_.viewController.view=nil;
+        
+        interventionObjectsModel_=nil;
+        assessmentObjectsModel_=nil;
+        supportObjectsModel_=nil;
+        supervisionObjectsModel_=nil;
+        
        
         
     } else {

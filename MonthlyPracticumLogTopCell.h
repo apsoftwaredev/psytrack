@@ -129,8 +129,8 @@
 @property (nonatomic, weak)IBOutlet UIScrollView *indirectHoursScrollView;
 
 @property (nonatomic, strong) NSDate *monthToDisplay;
-@property (nonatomic, weak) ClinicianEntity *clinician;
-@property (nonatomic, strong) TrainingProgramEntity *trainingProgram;
+@property (nonatomic, strong) ClinicianEntity *clinician;
+@property (nonatomic,  strong) TrainingProgramEntity *trainingProgram;
 @property (nonatomic, assign)BOOL stopScrolling;
 
 

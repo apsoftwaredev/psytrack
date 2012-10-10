@@ -25,7 +25,7 @@
 
 @implementation MonthlyPracticumLogBottonCell
 
-@synthesize trackTypeWithTotalTimesObject=trackTypeWithTotalTimesObject_;
+//@synthesize trackTypeWithTotalTimesObject=trackTypeWithTotalTimesObject_;
 @synthesize cellSubTypeLabel;
 @synthesize hoursWeek1Label;
 @synthesize hoursWeek2Label;
@@ -46,7 +46,7 @@
 
    
         
-      self.cellSubTypeLabel.text=self.trackTypeWithTotalTimesObject.typeLabelText;
+      self.cellSubTypeLabel.text=trackTypeWithTotalTimesObject_.typeLabelText;
            
         
             
@@ -68,12 +68,12 @@
     [super loadBindingsIntoCustomControls];
    
     
-    self.trackTypeWithTotalTimesObject=(TrackTypeWithTotalTimes *) self.boundObject; 
+    trackTypeWithTotalTimesObject_=(TrackTypeWithTotalTimes *) self.boundObject;
 
     self.cellSubTypeLabel.text=trackTypeWithTotalTimesObject_.typeLabelText;
     
     if (!monthToDisplay_||!clinician_) {       
-        monthToDisplay_=(NSDate *)self.trackTypeWithTotalTimesObject.monthToDisplay;
+        monthToDisplay_=(NSDate *)trackTypeWithTotalTimesObject_.monthToDisplay;
         
     }
     

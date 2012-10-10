@@ -28,7 +28,7 @@
 
 
 
-@property (nonatomic, strong)  TrackTypeWithTotalTimes *trackTypeWithTotalTimesObject;
+//@property (nonatomic, strong)  TrackTypeWithTotalTimes *trackTypeWithTotalTimesObject;
 @property (nonatomic, weak)IBOutlet UIView *cellsContainerView;
 @property (nonatomic, weak)IBOutlet UILabel *cellSubTypeLabel;
 @property (nonatomic, weak)IBOutlet UILabel *hoursWeek1Label;
