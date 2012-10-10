@@ -174,7 +174,6 @@
 		B7D097F514BAC43E00C6065F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D097F414BAC43E00C6065F /* MessageUI.framework */; };
 		B7F877BB14C9A38900F00C0D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877B914C9A38900F00C0D /* EventKit.framework */; };
 		B7F877BC14C9A38900F00C0D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877BA14C9A38900F00C0D /* EventKitUI.framework */; };
-		E701B1B216245F030004DDCF /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E701B1B116245F030004DDCF /* psyTrack.sqlite */; };
 		E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */; };
 		E719562515FFADB60070E61D /* DTAboutViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = E71955F715FFADB60070E61D /* DTAboutViewController.strings */; };
 		E719562615FFADB60070E61D /* DTAboutViewController-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E71955F915FFADB60070E61D /* DTAboutViewController-Info.plist */; };
@@ -742,7 +741,6 @@
 		B7D097F414BAC43E00C6065F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B7F877B914C9A38900F00C0D /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		B7F877BA14C9A38900F00C0D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
-		E701B1B116245F030004DDCF /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = psyTrack.sqlite; sourceTree = "<group>"; };
 		E70B9EFD15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSourcesSCObjectSelectionCell.h; sourceTree = "<group>"; };
 		E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSourcesSCObjectSelectionCell.m; sourceTree = "<group>"; };
 		E71955F515FFADB60070E61D /* DTAboutViewController-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTAboutViewController-Prefix.pch"; sourceTree = "<group>"; };
@@ -1637,7 +1635,6 @@
 				E7B49C1A1607E53A0073AA30 /* NSManagedObject Subclasses */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
-				E701B1B116245F030004DDCF /* psyTrack.sqlite */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2752,7 +2749,6 @@
 				E7294CE716069C5000C153CE /* DemographicReportGenerateVC_iPhone.xib in Resources */,
 				E7B7957A16124528008D3E8F /* Default-568h@2x.png in Resources */,
 				E74AD6AA1618ECD200B596FC /* ipad-background-blue-plain-small@2x.png in Resources */,
-				E701B1B216245F030004DDCF /* psyTrack.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

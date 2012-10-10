@@ -5698,28 +5698,28 @@ return [self applicationDrugsDirectory].path;
     // iCloud content it may take a long long time to download
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSFileManager *fileManager = [NSFileManager defaultManager];
-        
-       
-        // If the expected store doesn't exist, copy the default store.
-        if (![fileManager fileExistsAtPath:storePath]) {
-            NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
-            if (defaultStorePath) {
-                [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
-                NSString *statusMessage=[self resetDefaultLockKeychainSettingsWithReset:YES];
-                if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."]) {
-                    NSString *displaymessage=[NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
-                    [self displayNotification:displaymessage];
-                    resetDatabase=YES;
-                }
-                else{
-                
-                    firstRun=YES;
-                
-                }
-                
-                
-            }
-        }
+//
+//       
+//        // If the expected store doesn't exist, copy the default store.
+//        if (![fileManager fileExistsAtPath:storePath]) {
+//            NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
+//            if (defaultStorePath) {
+//                [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
+//                NSString *statusMessage=[self resetDefaultLockKeychainSettingsWithReset:YES];
+//                if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."]) {
+//                    NSString *displaymessage=[NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
+//                    [self displayNotification:displaymessage];
+//                    resetDatabase=YES;
+//                }
+//                else{
+//                
+//                    firstRun=YES;
+//                
+//                }
+//                
+//                
+//            }
+//        }
         NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
         NSURL *cloudURL =nil;
         // this needs to match the entitlements and provisioning profile
@@ -5842,159 +5842,6 @@ return [self applicationDrugsDirectory].path;
 
 
 
-
-
-//-(void) onChangeiCloudSync
-//{
-//    PTTAppDelegate* appDelegate = (PTTAppDelegate*) [[UIApplication sharedApplication] delegate];
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    
-//    if ([iCloudUtility iCloudEnabled])
-//    {
-//        NSURL *storeUrl = [[appDelegate applicationDocumentsDirectory] URLByAppendingPathComponent:@"psyTrack.sqlite"];
-//        NSURL *cloudURL = [fileManager URLForUbiquityContainerIdentifier:nil];
-//        NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"data"];
-//        cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
-//        
-//        //  The API to turn on Core Data iCloud support here.
-//        NSDictionary* options = [NSDictionary dictionaryWithObjectsAndKeys:@"com.yourcompany.yourapp.coredata", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];
-//        
-//        NSPersistentStore* store = [appDelegate.persistentStoreCoordinator.persistentStores objectAtIndex:0];
-//        NSError* error;
-//        if (![appDelegate.persistentStoreCoordinator migratePersistentStore:store toURL:storeUrl options:options withType:NSSQLiteStoreType error:&error])
-//        {
-//            
-//            //abort();
-//        }
-//        [fileManager removeItemAtURL:[[appDelegate applicationDocumentsDirectory] URLByAppendingPathComponent:@"YourApp.sqlite"] error:nil];
-//        [appDelegate resetStore];
-//    }
-//    else
-//    {
-//        NSURL *storeUrl = [[appDelegate applicationDocumentsDirectory] URLByAppendingPathComponent:@"YourApp.sqlite"];
-//        
-//        //  The API to turn on Core Data iCloud support here.
-//        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
-//                                 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-//                                 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
-//                                 nil];
-//        
-//        NSPersistentStore* store = [appDelegate.persistentStoreCoordinator.persistentStores objectAtIndex:0];
-//        NSError* error;
-//        if (![appDelegate.persistentStoreCoordinator migratePersistentStore:store toURL:storeUrl options:options withType:NSSQLiteStoreType error:&error])
-//        {
-//            
-//            //abort();
-//        }
-//        [fileManager removeItemAtURL:[[appDelegate applicationDocumentsDirectory] URLByAppendingPathComponent:@"YourApp2.sqlite"] error:nil];
-//        [appDelegate resetStore];
-//    }
-//}
-
-//- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-//{
-//    if (persistentStoreCoordinator__ != nil)
-//    {
-//        return persistentStoreCoordinator__;
-//    }
-////    NSString *uniqueIdentifier = [[UIDevice currentDevice] uniqueIdentifier];
-//    
-//    
-// 
-//
-//
-//    NSURL *storeURL = [[self applicationPTTDirectory] URLByAppendingPathComponent:[NSString stringWithFormat:@"psyTrack.sqlite"]];
-//    
-//    persistentStoreCoordinator__ = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-//
-//    
-//    NSPersistentStoreCoordinator* psc = persistentStoreCoordinator__;
-//    
-//   
-//     
-//    
-//    
-//    //BOOL useriCloudPref=[[NSUserDefaults standardUserDefaults] boolForKey:@"icloud_preference"];
-//    
-//    NSURL *ubiq = [[NSFileManager defaultManager] 
-//                   URLForUbiquityContainerIdentifier:nil];
-//    if ( ubiq ) {
-//        
-//        // TODO: Load document... 
-//        
-//        
-//        
-//        
-//    } else {
-//        
-//    }
-//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//            NSFileManager *fileManager = [NSFileManager defaultManager];
-//            
-//            // Migrate datamodel
-//            NSDictionary *options = nil;
-//            
-//                      
-//            // this needs to match the entitlements and provisioning profile
-//            NSURL *cloudURL = [fileManager URLForUbiquityContainerIdentifier:nil];
-//            NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"psyTrack"];
-//            if ([coreDataCloudContent length] != 0 ) {
-//                // iCloud is available
-//                cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
-//                
-//                options = [NSDictionary dictionaryWithObjectsAndKeys:
-//                           [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-//                           [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
-//                           @"4R8ZH75936.com.psycheweb.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey,
-//                           cloudURL, NSPersistentStoreUbiquitousContentURLKey,
-//                           nil];
-//                
-//                
-//            } else {
-//                // iCloud is not available
-//                options = [NSDictionary dictionaryWithObjectsAndKeys:
-//                           [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-//                           [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
-//                           nil];
-//                
-//                
-//            }
-//            
-//            NSError *error = nil;
-//            [psc lock];
-//            if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
-//            {
-//                
-//                abort();
-//            }
-//            [psc unlock];
-//            
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                
-//                NSError *setProtectionAttribsError = nil;
-//                NSDictionary *fileAttributes = [NSDictionary dictionaryWithObject:NSFileProtectionComplete forKey:NSFileProtectionKey];
-//                if (![[NSFileManager defaultManager] setAttributes:fileAttributes ofItemAtPath:[storeURL path] error:&setProtectionAttribsError]) {
-//                    // Handle error
-//                }
-//                else {
-//                     [self saveContext];
-//                }
-//                
-//                
-//                
-//                
-//                [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData" object:self userInfo:nil];
-//               
-//                addedPersistentStoreSuccess=YES;
-//               
-//               
-//            });
-//            
-//        });
-//        
-//    
-//    return persistentStoreCoordinator__;
-//}
 
 
 #pragma mark -
