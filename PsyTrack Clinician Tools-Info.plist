@@ -109,6 +109,8 @@
 	<string>PTTMasterViewController_iPhone</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>PTTMasterViewController_iPad</string>
+	<key>Pushwoosh_APPID</key>
+	<string>DF097-EDB31</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Monaco.dfont</string>

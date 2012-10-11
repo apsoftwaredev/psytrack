@@ -58,6 +58,7 @@
 
 #import <Security/Security.h>
 
+
 #define kPTTAppSqliteFileName @"psyTrack.sqlite"
 #define kPTTDrugDatabaseSqliteFileName @"drugs.sqlite"
 
@@ -159,6 +160,10 @@
 
     [self initializeiCloudAccess];
     
+    
+    
+//    [Parse setApplicationId:@"UCK2PmpY8ufgbuLyJXqYM9HGdpFAsmPUxjbMDWee"
+//                  clientKey:@"VN8MzEgoIcA9xUOe0rjaGuF1WmiKusiNmCFvAOP2"];
  
 //    UIImage * sShot = [UIImage imageNamed:@"Dan Boice-46.jpg"];
 //    UIImageWriteToSavedPhotosAlbum(sShot, nil, nil, nil);
@@ -178,8 +183,7 @@
     
     [[NSUserDefaults standardUserDefaults] synchronize];
         
-
-            
+               
     
     
     @try {
@@ -390,10 +394,18 @@
                         
                         
 #if !TARGET_IPHONE_SIMULATOR
-    // Add registration for remote notifications
-	[[UIApplication sharedApplication] 
-     registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound)];
+   
+   
+    
+    [[UIApplication sharedApplication]
+     registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeAlert |
+      UIRemoteNotificationTypeBadge |
+      UIRemoteNotificationTypeSound)];
 	
+	[application setApplicationIconBadgeNumber:0];
+    
+   
 	
 #endif
     
@@ -2094,115 +2106,212 @@
 
 #pragma mark -
 #pragma mark Apple Push Notification Servieces
+-(void)application:(UIApplication*)app didFailtoRegisterForRemoteNotificationsWithError:(NSError*)err{
+    NSString *str = [NSString stringWithFormat:@"Error: %@", err];
+    NSLog(@"%@", str);
+}
 
-/* 
+-(void)application:(UIApplication*)app didReceiveRemoteNotification:(NSDictionary*)userInfo{
+    /* If our app is in the background iOS shows our push notification in the notification center.
+     If our app is in the foreground it is up to the app to handle it as shown below. */
+    
+    
+    NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
+    NSString *alert = [apsInfo objectForKey:@"alert"];
+//    NSString *sound = [apsInfo objectForKey:@"sound"];
+    NSLog(@"user info is  %@",userInfo);
+    [self displayNotification:alert];
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    NSString *badge = [apsInfo objectForKey:@"badge"];
+    app.applicationIconBadgeNumber = [badge integerValue];
+    
+//    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"" message:alert delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+//    [av show];
+  
+}
+
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+	NSString *appname = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+	NSString *type = @"ios";
+	NSString *devToken = [[[[deviceToken description]
+        stringByReplacingOccurrencesOfString:@"<"withString:@""]stringByReplacingOccurrencesOfString:@">"
+                             withString:@""]stringByReplacingOccurrencesOfString:@" "withString:@""];
+	
+   
+	
+
+	NSString *host = @"https://HoT0rJxAX40XqiJZHSVE3J:r7uv5ARVQ76jMNaMSNqO4X@api.appsidekick.com/v1/register_push_device?type=%@&devicetoken=%@&appname=%@";
+    DLog(@"devtoken length %i",devToken.length);
+	NSString *urlString = [NSString stringWithFormat:host, type, devToken, appname];
+	NSURL *url = [NSURL URLWithString:urlString];
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+	[request setHTTPMethod:@"POST"];
+	DLog(@"url %@",url);
+//	NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+//	NSString *strReply = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+//	NSLog(@"%@", strReply);
+
+       
+    
+//    
+	[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response,
+                                                                                                               NSData *data,
+                                                                                                               NSError *error)
+     {
+         
+         if ([data length] >0 && error == nil)
+         {
+             
+             // DO YOUR WORK HERE
+             NSLog(@"response received");
+             NSString *strReply = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSLog(@"%@", strReply);
+         }
+         else if ([data length] == 0 && error == nil)
+         {
+             NSLog(@"Nothing was downloaded.");
+         }
+         else if (error != nil){
+             NSLog(@"Error = %@", error);
+         }
+         
+     }];
+    
+
+}
+
+/*
  * --------------------------------------------------------------------------------------------------------------
- *  BEGIN APNS CODE 
+ *  BEGIN APNS CODE
  * --------------------------------------------------------------------------------------------------------------
  */
 
 /**
  * Fetch and Format Device Token and Register Important Information to Remote Server
  */
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
-	
-#if !TARGET_IPHONE_SIMULATOR
-    
-	// Get Bundle Info for Remote Registration (handy if you have more than one app)
-	NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
-	NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-	
-	// Check what Notifications the user has turned on.  We registered for all three, but they may have manually disabled some or all of them.
-	NSUInteger rntypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-	
-	// Set the defaults to disabled unless we find otherwise...
-	NSString *pushBadge = (rntypes & UIRemoteNotificationTypeBadge) ? @"enabled" : @"disabled";
-	NSString *pushAlert = (rntypes & UIRemoteNotificationTypeAlert) ? @"enabled" : @"disabled";
-	NSString *pushSound = (rntypes & UIRemoteNotificationTypeSound) ? @"enabled" : @"disabled";	
-	
-	// Get the users Device Model, Display Name, Unique ID, Token & Version Number
-	UIDevice *dev = [UIDevice currentDevice];
-	NSString *deviceUuid = [PTTAppDelegate GetUUID]  ;
-	
-		
-	
-	NSString *deviceName = dev.name;
-	NSString *deviceModel = dev.model;
-	NSString *deviceSystemVersion = dev.systemVersion;
-	
-	// Prepare the Device Token for Registration (remove spaces and < >)
-	NSString *deviceToken = [[[[devToken description] 
-                               stringByReplacingOccurrencesOfString:@"<"withString:@""] 
-                              stringByReplacingOccurrencesOfString:@">" withString:@""] 
-                             stringByReplacingOccurrencesOfString: @" " withString: @""];
-	
-	// Build URL String for Registration
-	// !!! CHANGE "www.mywebsite.com" TO YOUR WEBSITE. Leave out the http://
-	// !!! SAMPLE: "secure.awesomeapp.com"
-	NSString *host = @"www.psytrack.com";
-	
-	// !!! CHANGE "/apns.php?" TO THE PATH TO WHERE apns.php IS INSTALLED 
-	// !!! ( MUST START WITH / AND END WITH ? ). 
-	// !!! SAMPLE: "/path/to/apns.php?"
-	NSString *urlString = [NSString stringWithFormat:@"/apns/apns.php?task=%@&appname=%@&appversion=%@&deviceuid=%@&devicetoken=%@&devicename=%@&devicemodel=%@&deviceversion=%@&pushbadge=%@&pushalert=%@&pushsound=%@", @"register", appName,appVersion, deviceUuid, deviceToken, deviceName, deviceModel, deviceSystemVersion, pushBadge, pushAlert, pushSound];
-	
-	// Register the Device Data
-	// !!! CHANGE "http" TO "https" IF YOU ARE USING HTTPS PROTOCOL
-	NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    
-    
-    
-    
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-
-   [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:nil];
-
-	
-#endif
-}
-
-/**
- * Failed to Register for Remote Notifications
- */
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-	
-#if !TARGET_IPHONE_SIMULATOR
-	
-	
-	
-#endif
-}
-
-/**
- * Remote Notification Received while application was open.
- */
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-	
-#if !TARGET_IPHONE_SIMULATOR
-    
-	
-	NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
-	
-	NSString *alert = [apsInfo objectForKey:@"alert"];
-	[self displayNotification:alert];
-	
-//	NSString *sound = [apsInfo objectForKey:@"sound"];
-    
-	AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-	
-	NSString *badge = [apsInfo objectForKey:@"badge"];
-	
-	application.applicationIconBadgeNumber = [badge integerValue];
-	
-#endif
-}
-
-/* 
- * --------------------------------------------------------------------------------------------------------------
- *  END APNS CODE 
- * --------------------------------------------------------------------------------------------------------------
- */
-
+//- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken{
+//#if !TARGET_IPHONE_SIMULATOR
+//    
+////	// Get Bundle Info for Remote Registration (handy if you have more than one app)
+////	NSString *appName = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
+////	NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+////	
+////	// Check what Notifications the user has turned on.  We registered for all three, but they may have manually disabled some or all of them.
+////	NSUInteger rntypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+////	
+////	// Set the defaults to disabled unless we find otherwise...
+////	NSString *pushBadge = (rntypes & UIRemoteNotificationTypeBadge) ? @"enabled" : @"disabled";
+////	NSString *pushAlert = (rntypes & UIRemoteNotificationTypeAlert) ? @"enabled" : @"disabled";
+////	NSString *pushSound = (rntypes & UIRemoteNotificationTypeSound) ? @"enabled" : @"disabled";	
+////	
+////	// Get the users Device Model, Display Name, Unique ID, Token & Version Number
+////	UIDevice *dev = [UIDevice currentDevice];
+////	NSString *deviceUuid = [PTTAppDelegate GetUUID]  ;
+////	
+////		
+////	
+////	NSString *deviceName = dev.name;
+////	NSString *deviceModel = dev.model;
+////	NSString *deviceSystemVersion = dev.systemVersion;
+////	
+////	// Prepare the Device Token for Registration (remove spaces and < >)
+////	NSString *deviceToken = [[[[devToken description] 
+////                               stringByReplacingOccurrencesOfString:@"<"withString:@""] 
+////                              stringByReplacingOccurrencesOfString:@">" withString:@""] 
+////                             stringByReplacingOccurrencesOfString: @" " withString: @""];
+////	
+////	// Build URL String for Registration
+////	// !!! CHANGE "www.mywebsite.com" TO YOUR WEBSITE. Leave out the http://
+////	// !!! SAMPLE: "secure.awesomeapp.com"
+////	NSString *host = @"www.psytrack.com";
+////	
+////	// !!! CHANGE "/apns.php?" TO THE PATH TO WHERE apns.php IS INSTALLED 
+////	// !!! ( MUST START WITH / AND END WITH ? ). 
+////	// !!! SAMPLE: "/path/to/apns.php?"
+////	NSString *urlString = [NSString stringWithFormat:@"/apns/apns.php?task=%@&appname=%@&appversion=%@&deviceuid=%@&devicetoken=%@&devicename=%@&devicemodel=%@&deviceversion=%@&pushbadge=%@&pushalert=%@&pushsound=%@", @"register", appName,appVersion, deviceUuid, deviceToken, deviceName, deviceModel, deviceSystemVersion, pushBadge, pushAlert, pushSound];
+////	
+////	// Register the Device Data
+////	// !!! CHANGE "http" TO "https" IF YOU ARE USING HTTPS PROTOCOL
+////	NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+////    
+////    
+////    
+////    
+////    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+////
+////   [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:nil];
+//
+// 
+//        // Tell Parse about the device token.
+//        [PFPush storeDeviceToken:newDeviceToken];
+//        // Subscribe to the global broadcast channel.
+//        [PFPush subscribeToChannelInBackground:@"PsyTrack" target:self selector:@selector(subscribeFinished:error:)];
+// 
+//    
+//	
+//#endif
+//}
+//
+///**
+// * Failed to Register for Remote Notifications
+// */
+//- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+//    if (error.code == 3010) {
+//        NSLog(@"Push notifications are not supported in the iOS Simulator.");
+//    } else {
+//        // show some alert or otherwise handle the failure to register.
+//        [self displayNotification:@"Unable to register for remote notifications at this time."];
+//	}
+//}
+///**
+// * Remote Notification Received while application was open.
+// */
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+//	
+//#if !TARGET_IPHONE_SIMULATOR
+//    
+//	
+////	NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
+////	
+////	NSString *alert = [apsInfo objectForKey:@"alert"];
+////	[self displayNotification:alert];
+////	
+//////	NSString *sound = [apsInfo objectForKey:@"sound"];
+////    
+////	AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+////	
+////	NSString *badge = [apsInfo objectForKey:@"badge"];
+////	
+////	application.applicationIconBadgeNumber = [badge integerValue];
+//
+//
+//   
+//
+//    [PFPush handlePush:userInfo];
+//
+//       
+//    
+//    
+//#endif
+//}
+//
+//- (void)subscribeFinished:(NSNumber *)result error:(NSError *)error {
+//    
+//#ifdef DEBUG
+//    if ([result boolValue]) {
+//        NSLog(@"PsyTrack successfully subscribed to push notifications on the PsyTrack channel.");
+//    } else {
+//        NSLog(@"PsyTrack failed to subscribe to push notifications on the PsyTrack channel.");
+//    }
+//#endif
+//}
+///* 
+// * --------------------------------------------------------------------------------------------------------------
+// *  END APNS CODE 
+// * --------------------------------------------------------------------------------------------------------------
+// */
+//
 
 #pragma mark -
 #pragma mark change statusbar orientation psytrack image move
@@ -5700,26 +5809,26 @@ return [self applicationDrugsDirectory].path;
         NSFileManager *fileManager = [NSFileManager defaultManager];
 //
 //       
-//        // If the expected store doesn't exist, copy the default store.
-//        if (![fileManager fileExistsAtPath:storePath]) {
-//            NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
-//            if (defaultStorePath) {
-//                [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
-//                NSString *statusMessage=[self resetDefaultLockKeychainSettingsWithReset:YES];
-//                if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."]) {
-//                    NSString *displaymessage=[NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
-//                    [self displayNotification:displaymessage];
-//                    resetDatabase=YES;
-//                }
-//                else{
-//                
-//                    firstRun=YES;
-//                
-//                }
-//                
-//                
-//            }
-//        }
+        // If the expected store doesn't exist, copy the default store.
+        if (![fileManager fileExistsAtPath:storePath]) {
+            NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
+            if (defaultStorePath) {
+                [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
+                NSString *statusMessage=[self resetDefaultLockKeychainSettingsWithReset:YES];
+                if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."]) {
+                    NSString *displaymessage=[NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
+                    [self displayNotification:displaymessage];
+                    resetDatabase=YES;
+                }
+                else{
+                
+                    firstRun=YES;
+                
+                }
+                
+                
+            }
+        }
         NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
         NSURL *cloudURL =nil;
         // this needs to match the entitlements and provisioning profile

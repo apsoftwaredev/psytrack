@@ -1988,10 +1988,13 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                         
                         
                         UIButton *button =(UIButton *)[cell viewWithTag:300];
-                        [button setTitle:@"Clear Times" forState:UIControlStateNormal];
+                        if (![button.titleLabel.text isEqualToString:@"Clear Times"]) {
+                            [button setTitle:@"Clear Times" forState:UIControlStateNormal];
+                           
+
+                        }
                         button.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin;
                         cell.backgroundColor=[UIColor clearColor];
-                        
                         
                        
                     }
@@ -4234,21 +4237,21 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                                 TimePickerCell *additionalTimeCell=(TimePickerCell *)[section cellAtIndex:2];
                                 TimePickerCell *timeToSubtractCell=(TimePickerCell *)[section cellAtIndex:3];
                                 
-                                [startTimeCell.boundObject setValue:nil forKey:@"startTime"];
-                                [endTimeCell.boundObject setValue:nil forKey:@"endTime"];
-                                [additionalTimeCell.boundObject setValue:referenceDate forKey:@"additionalTime"];
-                                [timeToSubtractCell.boundObject setValue:referenceDate forKey:@"timeToSubtract"];
+                                [startTimeCell clearControl];
+                                [endTimeCell clearControl];
+                                [additionalTimeCell clearTime];
+                                [timeToSubtractCell clearTime];
                                 
                                 startTime=nil;
                                 
                                 endTime=nil;
                                 
                                 additionalTime=nil;
-                                
+                            
                                 
                                 
                                 timeToSubtract=nil;
-                                [section reloadBoundValues];
+                                
                                 
                                 [self calculateTime];
                             }

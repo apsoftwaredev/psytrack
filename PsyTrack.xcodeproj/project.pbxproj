@@ -469,6 +469,7 @@
 		E7F1E703157662EB00D4A638 /* InstrumentScoreNameEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E702157662EB00D4A638 /* InstrumentScoreNameEntity.m */; };
 		E7F1E7061576966000D4A638 /* InstrumentScoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E7051576966000D4A638 /* InstrumentScoreEntity.m */; };
 		E7F1E7091576D17100D4A638 /* ClientInstrumentScoresEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */; };
+		E7F86B4D1625E54C00C57911 /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E7F86B4C1625E54C00C57911 /* psyTrack.sqlite */; };
 		E7FA340415C580EF0025B18B /* psyTrainTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */; };
 		E7FB3AAD1562A4E4000A6782 /* TwoButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */; };
 		E7FB3AB31562C867000A6782 /* AddViewABLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB21562C867000A6782 /* AddViewABLinkButtonCell.m */; };
@@ -1218,6 +1219,7 @@
 		E7F1E7051576966000D4A638 /* InstrumentScoreEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentScoreEntity.m; sourceTree = "<group>"; };
 		E7F1E7071576D17100D4A638 /* ClientInstrumentScoresEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientInstrumentScoresEntity.h; sourceTree = "<group>"; };
 		E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientInstrumentScoresEntity.m; sourceTree = "<group>"; };
+		E7F86B4C1625E54C00C57911 /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = psyTrack.sqlite; sourceTree = "<group>"; };
 		E7FA340315C580EF0025B18B /* psyTrainTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = psyTrainTrack.xcdatamodel; sourceTree = "<group>"; };
 		E7FB3AAB1562A4E3000A6782 /* TwoButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoButtonCell.h; sourceTree = "<group>"; };
 		E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoButtonCell.m; sourceTree = "<group>"; };
@@ -1232,12 +1234,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */,
 				E7CFC2B5161509BD00D130BE /* libSTV+CoreData.a in Frameworks */,
 				E7CFC2B4161509B700D130BE /* libSensibleTableView.a in Frameworks */,
 				E7F1CBA31598C787006F9E95 /* ImageIO.framework in Frameworks */,
 				E7F1CAF41597CADB006F9E95 /* CoreText.framework in Frameworks */,
 				E798A13C15857E36006B9DBD /* CoreImage.framework in Frameworks */,
-				E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */,
 				3773F77114FD267000C36B75 /* AudioToolbox.framework in Frameworks */,
 				B78E053214E6B4A300890EA4 /* Security.framework in Frameworks */,
 				B78E04AE14E1F75D00890EA4 /* QuartzCore.framework in Frameworks */,
@@ -1635,6 +1637,7 @@
 				E7B49C1A1607E53A0073AA30 /* NSManagedObject Subclasses */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
+				E7F86B4C1625E54C00C57911 /* psyTrack.sqlite */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2749,6 +2752,7 @@
 				E7294CE716069C5000C153CE /* DemographicReportGenerateVC_iPhone.xib in Resources */,
 				E7B7957A16124528008D3E8F /* Default-568h@2x.png in Resources */,
 				E74AD6AA1618ECD200B596FC /* ipad-background-blue-plain-small@2x.png in Resources */,
+				E7F86B4D1625E54C00C57911 /* psyTrack.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3502,10 +3506,11 @@
 					"\"$(SDKROOT)/usr/lib/system\"",
 					"\"$(SRCROOT)\"",
 				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)\"/**";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)\"/../** \"$(SRCROOT)/../../Downloads/iPhone-1/Classes\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3534,6 +3539,7 @@
 					"\"$(SDKROOT)/usr/lib/system\"",
 					"\"$(SRCROOT)\"",
 				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "4377248F-C037-4299-898B-146B7461DC00";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4377248F-C037-4299-898B-146B7461DC00";

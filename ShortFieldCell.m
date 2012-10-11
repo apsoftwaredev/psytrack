@@ -215,6 +215,7 @@
         NSString *textStr=[self titleForRow:[pickerView selectedRowInComponent:0]];
        
         self.textField.text = textStr;
+        needsCommit=YES;
     }
 	
 }

@@ -20,6 +20,7 @@
 #import <UIKit/UIKit.h>
 #import "LCYLockScreenViewController.h"
 #import "ColorSwitcher.h"
+
 #define addSmtricStr @"iEn8ioesfec3"
 
 
@@ -58,7 +59,7 @@ static NSString * const kPTiCloudPreference=@"icloud_preference";
 static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_number";
 
 #define IS_IPHONE5 (([[UIScreen mainScreen] bounds].size.height-568)?NO:YES)
-
+#define IS_VERSION_6_OR_HIGHER (([[[UIDevice currentDevice] systemVersion] doubleValue]>=6?YES:NO)
 /****************************************************************************************/
 /*	class PTTAppDelegate	*/
 /****************************************************************************************/ 
@@ -225,6 +226,8 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
 + (NSString *)GetUUID;
 
 -(NSData*)getLocalSymetricData;
+
+
 @end
 
 

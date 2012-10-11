@@ -233,7 +233,17 @@
    
     return title;
 }
+-(void)clearTime{
 
+
+    self.timeValue=nil;
+    [self.picker selectRow:0 inComponent:0 animated:YES];
+
+    [self.picker selectRow:0 inComponent:1 animated:YES];
+self.dateLabel.text=@"0:00";
+    
+
+}
 - (NSInteger)rowForTitle:(NSString *)title
 {
     NSInteger row = 0;

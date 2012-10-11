@@ -57,7 +57,7 @@
 
 - (NSString *)titleForRow:(NSInteger)row;
 - (NSInteger)rowForTitle:(NSString *)title;
-
+-(void)clearTime;
 
 @end
 
