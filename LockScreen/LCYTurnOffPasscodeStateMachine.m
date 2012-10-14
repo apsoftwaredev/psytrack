@@ -111,6 +111,8 @@ NSString * NSStringFromLCYTurnOffPasscodeStates (LCYTurnOffPasscodeStates state)
 			NSAssert(NO, @"Unknown state");
 			break;
 	}	
+    appSettings=nil;
+    encryption=nil;
 }
 
 - (NSString *) currentPromptText;

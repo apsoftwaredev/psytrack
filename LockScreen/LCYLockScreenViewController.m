@@ -420,7 +420,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
                                                  repeats:NO];
     }
 
-
+    appSettings=nil;
 
 }
 
@@ -496,7 +496,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
     }
   
     [self.passCodeInputField becomeFirstResponder];
-
+    appSettings=nil;
 }
 
 -(void)resetTimer{
@@ -510,6 +510,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
     
     LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
     [appSettings setLockScreenTimerOn:isTimerOn_];
+    appSettings=nil;
     
 }
 - (void) handleCompleteUserInput:(NSString *) userInput;

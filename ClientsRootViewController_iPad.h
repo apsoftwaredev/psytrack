@@ -47,6 +47,7 @@
 @property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
 //@property (nonatomic, weak) IBOutlet UITableView *tableView;
 //@property (nonatomic, strong) IBOutlet SCArrayOfObjectsModel *tableModel;
+@property (nonatomic, strong) IBOutlet UILabel *totalClientsLabel;
 
 // Method called by DetailViewController
 

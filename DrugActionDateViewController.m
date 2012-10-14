@@ -287,12 +287,16 @@
     //    [(PTTAppDelegate *)[UIApplication sharedApplication].delegate application:[UIApplication sharedApplication]
     //                                               willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
     //                                                                     duration:5];
-    //  
-    
+    //
     objectsModel.allowRowSelection=YES;
     
     self.tableViewModel=objectsModel;
     objectsModel.delegate=self;
+    sortDescriptor=nil;
+    sortDescriptors=nil;
+    actionDateFetchRequest=nil;
+    docTypesFetchRequest=nil;
+
 }
 
 

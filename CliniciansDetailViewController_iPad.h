@@ -19,7 +19,7 @@
 #import <CoreData/CoreData.h>
 
 
-@interface CliniciansDetailViewController_iPad : SCTableViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> 
+@interface CliniciansDetailViewController_iPad : SCTableViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate,SCTableViewModelDelegate>
 {
     UIPopoverController *popoverController;
 
@@ -43,6 +43,8 @@
 //	UIBarButtonItem *addButtonItem;
 
 }
+
+
 /*
 @property (nonatomic,strong) IBOutlet CliniciansRootViewController_iPad *cliniciansRootViewController_iPad;
 

@@ -43,6 +43,7 @@
         self.dateTime = [NSDate date];
         [self didChangeValueForKey:(NSString *)@"dateTime"];
     }
+    dateFormatter=nil;
 }
 
 -(void)rekeyEncryptedAttributes{

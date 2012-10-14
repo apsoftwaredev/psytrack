@@ -54,7 +54,7 @@
     self.textLabel.text=docType;
     self.label.text=[dateFormatter stringFromDate:docDate];
 
-
+    dateFormatter=nil;
     
 }
 

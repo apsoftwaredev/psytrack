@@ -26,7 +26,7 @@
 			[dateFormatter8 setDateFormat:@"yyyyMMdd"]; /* Unicode Locale Data Markup Language */
 			[dateFormatter8 setTimeZone:[NSTimeZone timeZoneWithName:@"America/Los_Angeles"]];
 			retDate = [dateFormatter8 dateFromString:self]; 
-		
+            dateFormatter8=nil;
 			return retDate;
 		}
 		case 10:
@@ -35,7 +35,7 @@
 			[dateFormatterToRead setDateFormat:@"MM/dd/yyyy"]; /* Unicode Locale Data Markup Language */
 			[dateFormatterToRead setTimeZone:[NSTimeZone timeZoneWithName:@"America/Los_Angeles"]];
 			retDate = [dateFormatterToRead dateFromString:self];
-	
+            dateFormatterToRead=nil;
 			return retDate;
 		}
 	}

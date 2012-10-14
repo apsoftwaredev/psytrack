@@ -67,7 +67,7 @@
     
     NSError *error = nil;
     NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
+    fetchRequest=nil;
     return fetchedObjects;
     
 }

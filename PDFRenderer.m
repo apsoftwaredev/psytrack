@@ -65,7 +65,7 @@
     [self createPDFfromUIView:monthlyPracticumLogTVC.view saveToDocumentsWithFileName:fileName  viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTVC password:filePassword  documentTitle:(NSString *)documentTitle];
     monthlyPracticumLogTVC.view=nil;
     monthlyPracticumLogTVC=nil;
-
+    dateFormatter=nil;
 
 // Close the PDF context and write the contents out.
 //UIGraphicsEndPDFContext();
@@ -141,7 +141,8 @@
     
     
     [self createDemographicReportPDFfromUIView:(UIView*)demographicReportVC.view  saveToDocumentsWithFileName:(NSString*)fileName viewController:(DemographicReportViewController*)demographicReportVC  password:(NSString *)filePassword documentTitle:(NSString *)documentTitle];
-    
+    demographicReportVC.view=nil;
+    demographicReportVC=nil;
     
     // Close the PDF context and write the contents out.
     //UIGraphicsEndPDFContext();
@@ -537,7 +538,7 @@
     
     
     [pageString drawInRect:stringRect withFont:theFont];
-
+    dateFormatter=nil;
 }
 
 +(void)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTableViewController  password:(NSString *) filePassword documentTitle:(NSString *)documentTitle

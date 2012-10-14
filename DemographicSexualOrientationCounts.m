@@ -82,7 +82,7 @@
              [sexualOrientationMutableArray_ addObject:demographicUndisclosed];
         }
        
-        
+        fetchRequest=nil;
         
     }
     

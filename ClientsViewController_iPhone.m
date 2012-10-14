@@ -1129,7 +1129,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         
         
     } 
-    
+    numberFormatter=nil;
     return valid;
     
 }
@@ -1331,7 +1331,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                         
                         
                     }
-                    
+                    numberFormatter=nil;
                     
                     
                     
@@ -1482,7 +1482,12 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         
         
     }
-    
+    if (tableModel.tag==0) {
+        [self.searchBar setSelectedScopeButtonIndex:1];
+        
+        [objectsModel.dataFetchOptions setFilterPredicate:nil];
+        
+    }
     
     if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
         
@@ -2094,6 +2099,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                         NSString *notes=[managedObject valueForKey:@"notes"];
                         
                         cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateTimeDateFormatter stringFromDate:logDate],notes];
+                        dateTimeDateFormatter=nil;
                         return;
                     }
                     else if ([managedObject.entity.name isEqualToString:@"SubstanceUseEntity"]) {
@@ -2150,6 +2156,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                             cell.textLabel.textColor=[UIColor blueColor];
                         }
                         cell.textLabel.text=labelString;
+                        dateFormatter=nil;
                         return;
                     }
                     
@@ -2189,7 +2196,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                         
                         cell.textLabel.text=labelText;
                         //change the text color to red
-                        
+                        dateFormatter=nil;
                         return;
                         
                     }
@@ -2237,7 +2244,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                                 
                             }
                             cell.textLabel.textColor=[UIColor blackColor];
-                            
+                            dateFormatter=nil;
                         }
                         else
                         {
@@ -2292,7 +2299,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                         }
                         
                         
-                        
+                    
                         
                         cell.textLabel.text=labelText;
                         //change the text color to red
@@ -2369,6 +2376,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                             
                             cell.textLabel.text=historyString;
                             //change the text color to red
+                            dateFormatter=nil;
                         }
                         return;
                         
@@ -2424,6 +2432,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                         cell.textLabel.textColor=[UIColor blueColor];
                     }
                     cell.textLabel.text=labelString;
+                    dateFormatter=nil;
                     return;
                 }
                 else if ([managedObject.entity.name isEqualToString:@"DiagnosisLogEntity"]) {
@@ -2447,7 +2456,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     
                     cell.textLabel.text=logDateStr&&symptomNamesStr?[logDateStr stringByAppendingFormat:@": %@",symptomNamesStr]:logDateStr;
                     
-                    
+                    dateFormatter=nil;
                     
                 }
                 
@@ -2467,7 +2476,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                         [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
                         displayStr=[dateFormatter stringFromDate:logDate];
                         
-                        
+                        dateFormatter=nil;
                     }
                     
                     if (numberOfTimes) {
@@ -2548,7 +2557,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     if (notes &&notes.length) {
                         cell.textLabel.text=[cell.textLabel.text stringByAppendingFormat:@", %@",notes];
                     }
-                    
+                    dateFormatter=nil;
                 }
                 
                 
@@ -2670,7 +2679,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     if (notes &&notes.length) {
                         cell.textLabel.text=[cell.textLabel.text stringByAppendingFormat:@", %@",notes];
                     }
-                    
+                    dateFormatter=nil;
                 }
                 
             }
@@ -2927,7 +2936,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             for (int i=0; i<objectsModel.sectionCount; i++) {
                 SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:i];
-                cellCount=cellCount+section.cellCount;
+                if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
+                    SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
+                    cellCount=arrayOfObjectsSection.items.count;
+                    
+                }
+                else{
+                    cellCount=cellCount+section.cellCount;
+                }
                 
             }
             

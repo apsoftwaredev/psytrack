@@ -103,7 +103,7 @@
         
     }
     
-    
+    fetchRequest=nil;
 }
 
 -(NSString *)combinedName{

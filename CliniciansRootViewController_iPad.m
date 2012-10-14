@@ -96,9 +96,8 @@
     
     self.tableViewModel = objectsModel;
     
-    
-  
    
+       
    
 }
 
@@ -159,7 +158,7 @@
 ////                    NSString *lastNameStr=lastNameField.text;
 ////                    if (lastNameStr.length) {
 ////                        
-                        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:[tableViewModel.masterModel indexPathForCell:currentTableViewCell].section];
+//                        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:[tableViewModel.masterModel indexPathForCell:currentTableViewCell].section];
 ////                        unsigned short lastNameFirstChar=[lastNameStr characterAtIndex:0];
 ////                        if ((unsigned short)[section.headerTitle characterAtIndex:0]!=(unsigned short)lastNameFirstChar) {
 //            
@@ -170,13 +169,17 @@
            cell =(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
         }  
         
-        
-        if (!addingClinician && tableViewModel.tag==1&&cell&&indexPath.section==0&&![cell isKindOfClass:[SCArrayOfObjectsCell class]]&&![cell isKindOfClass:[SCObjectCell class]]&&![cell isKindOfClass:[SCObjectSelectionCell class]]) {
-            [section commitCellChanges];
+    SCTableViewSection *sectionAtIndexPathThatChanged=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+        if (!addingClinician && tableViewModel.tag==1&&((cell&&indexPath.section==0&&![cell isKindOfClass:[SCArrayOfObjectsCell class]]&&![cell isKindOfClass:[SCObjectCell class]]&&![cell isKindOfClass:[SCObjectSelectionCell class]])||(indexPath.section==1 &&sectionAtIndexPathThatChanged.cellCount==3))) {
+            [sectionAtIndexPathThatChanged commitCellChanges];
+            
+            if (!self.searchBar.selectedScopeButtonIndex==0) {
+                [self.searchBar setSelectedScopeButtonIndex:0];
+                objectsModel.dataFetchOptions.filterPredicate=nil;
+            }
             [tableViewModel.masterModel reloadBoundValues];
             [tableViewModel.masterModel.modeledTableView reloadData];
             
-
         }
 //
 //                     
@@ -185,6 +188,10 @@
 //
 //
 }
+
+
+
+
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     if (tableModel.tag==0) {

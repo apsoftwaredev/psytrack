@@ -216,11 +216,12 @@
 
 -(BOOL)fileAlreadyExists:(NSString *)fileNameGiven{
     
-    
+  
     NSFileManager *fileManager=[[NSFileManager alloc]init];
+    BOOL fileExists=[fileManager fileExistsAtPath:[fileNameGiven stringByAppendingPathExtension:@"pdf"]];
     
-    
-    return [fileManager fileExistsAtPath:[fileNameGiven stringByAppendingPathExtension:@"pdf"]];
+    fileManager=nil;
+    return fileExists;
     
     
     
@@ -254,7 +255,7 @@
         
     } while ( [fileManager fileExistsAtPath:documentsPathWithNewFileName]);
     
-    
+    fileManager=nil;
     
     return newFileName;
     

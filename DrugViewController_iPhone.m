@@ -410,8 +410,9 @@
     [self.searchBar setBackgroundImage:menueBarImage];
     [self.searchBar setScopeBarBackgroundImage:menueBarImage];
     
-
-    
+    productFetchRequest=nil;
+    sortDescriptor=nil;
+    sortDescriptors=nil;
     
     
 }
@@ -834,7 +835,7 @@
             
 			[dateFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
 			remoteModifiedDate = [dateFormatter dateFromString:modified];
-		
+            dateFormatter=nil;
 		}
 		else {
 			/* default if last modified date doesn't exist (not an error) */
@@ -1123,6 +1124,7 @@
                     [drugsManagedObjectContext refreshObject:managedObject mergeChanges:NO];
                 }
             }
+        
         }
             else
             {
@@ -1130,10 +1132,10 @@
                 [appDelegate displayNotification:@"Problem with setting up drug database occured.  Please try again later or contact suppor"];
             
             }
-        
+       
         }
-        
-    
+
+
 else
 {
     
@@ -1160,7 +1162,7 @@ else
     [UIView commitAnimations];
     self.downloadBar=nil;
     
-    
+    encryption=nil;
 }
 
 - (void)downloadBar:(UIDownloadBar *)downloadBar didFailWithError:(NSError *)error {

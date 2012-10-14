@@ -123,6 +123,7 @@ NSString* NSStringFromLCYSetPasscodeStates (LCYSetPasscodeStates state)
 			NSAssert(NO, @"Unknown state");
 			break;
 	}	
+    encryption=nil;
 }
 
 - (NSString *) currentPromptText;

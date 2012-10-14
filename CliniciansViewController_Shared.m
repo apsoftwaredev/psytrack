@@ -1698,8 +1698,8 @@
 																			 datePickerMode:UIDatePickerModeDate 
 															  displayDatePickerInDetailView:NO];
     
-        if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
-        {
+//        if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
+//        {
             SCCustomPropertyDefinition *addressBookRecordButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"addressBookButtonCell" uiElementClass:[AddViewABLinkButtonCell class] objectBindings:nil];
             
             //add the property definition to the clinician class
@@ -1712,7 +1712,7 @@
             [self.clinicianDef addPropertyDefinition:deleteABLinkButtonCellProperty];
             
 
-        }
+//        }
             //create a custom property definition for the addressbook button cell
             SCEntityDefinition *abGroupsDef=[SCEntityDefinition definitionWithEntityName:@"ClinicianGroupEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"groupName", @"addressBookSync",@"addNewClinicians",nil]];
         
@@ -2382,6 +2382,7 @@
                         NSString *notes=[managedObject valueForKey:@"notes"];
                         
                         cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateTimeDateFormatter stringFromDate:logDate],notes];
+                        dateTimeDateFormatter=nil;
                     }
                     if (![NSStringFromClass([managedObject class])isEqualToString:@"PTABGroup"]&& ![managedObject isKindOfClass:[SCTableViewCell class]]&&[managedObject.entity.name isEqualToString:@"ReferralEntity"]) {
                         //define and initialize a date formatter
@@ -2417,7 +2418,7 @@
                         cell.textLabel.text=labelString;
                         
                         
-                        
+                        dateFormatter=nil;
                         
                         
                     }
@@ -2444,7 +2445,7 @@
                         cell.textLabel.text=labelString;
                         
                         
-                        
+                        dateFormatter=nil;
                         
                         
                     }
@@ -2523,7 +2524,7 @@
                             cell.textLabel.text=historyString;
                             //change the text color to red
                         }
-
+                        dateFormatter=nil;
                     }
             }
             }
@@ -2604,7 +2605,6 @@
                 
         
     }
-    
     
     
     detailTableViewModel.delegate=self;
@@ -3256,7 +3256,7 @@
                         //                        clinician=(ClinicianEntity *) cellManagedObject;
                         
                         
-                        if ([SCUtilities systemVersion]<6) {
+//                        if ([SCUtilities systemVersion]<6) {
                         
                         if ([tableViewModel valuesAreValid]) {
                             int sectionCount=tableViewModel.sectionCount;
@@ -3277,7 +3277,7 @@
                             [[PTTAppDelegate appDelegate] displayNotification:@"A first and last name before adding or use look up.."  forDuration:8.0 location:kPTTScreenLocationTop inView:tableViewModel.viewController.view.superview];
                         }
                         }
-                    }
+//                    }
                     
                     
                     
@@ -3285,7 +3285,8 @@
                 break;
             }    
             case 9:
-            {    if ([SCUtilities systemVersion]<6) {
+            {
+//                if ([SCUtilities systemVersion]<6) {
                 if ([cell isKindOfClass:[LookupRemoveLinkButtonCell class]]) {
                     
                     
@@ -3350,7 +3351,7 @@
                         
                         
                         
-                    }
+//                    }
                     
                     
                     
@@ -3576,31 +3577,63 @@
 }
 -(BOOL)checkIfRecordIDInAddressBook:(int)recordID {
 
+    bool exists=NO;
+    ABAddressBookRef addressBookCheck=NULL;
 
-    ABAddressBookRef addressBookCheck=ABAddressBookCreate();
-        
-
-    BOOL exists=NO;
+if ( !IS_VERSION_6_OR_HIGHER){
+    addressBookCheck= ABAddressBookCreate();
+   
+    
+    
     if (addressBookCheck) {
-   
-    if (recordID>0) {
-  
-        ABRecordRef person=(ABRecordRef ) ABAddressBookGetPersonWithRecordID(addressBookCheck, recordID);
-
-        if (person) {
-            exists=YES;
-           
-        } 
         
+        if (recordID>0) {
+            
+            ABRecordRef person=(ABRecordRef ) ABAddressBookGetPersonWithRecordID(addressBookCheck, recordID);
+            
+            if (person) {
+                exists=YES;
+                
+            }
+            
+            
+        }
        
+        
     }
-        CFRelease(addressBookCheck);
-      
+
     }
-   
-   
-    return exists;
-  }
+else
+{
+    // Do any additional setup after loading the view
+    CFErrorRef myError = NULL;
+     addressBookCheck = ABAddressBookCreateWithOptions(NULL, &myError);
+    ABAuthorizationStatus authorizationStatus=(ABAuthorizationStatus )ABAddressBookGetAuthorizationStatus ();
+
+    if (authorizationStatus==kABAuthorizationStatusAuthorized && recordID>-1 && addressBookCheck) {
+        
+        ABRecordRef person=(ABRecordRef ) ABAddressBookGetPersonWithRecordID(addressBookCheck, recordID);
+                                                 
+            if (person) {
+                exists=YES;
+                                                     
+         }
+                                             
+    }
+
+          
+               
+                
+               
+       
+}
+
+if (addressBookCheck)
+     CFRelease(addressBookCheck);
+
+return exists;
+
+}
 
 
 
@@ -3613,18 +3646,67 @@
 
 -(void)showPeoplePickerController
 {
+    BOOL proceed=NO;
+    
+    ABAddressBookRef addressBookForPeoplePickerController=NULL;
+   
+    if (!IS_VERSION_6_OR_HIGHER) {
+        addressBookForPeoplePickerController=ABAddressBookCreate();
+        proceed=YES;
+    }
+    else
+    {
+        
+        
+        if (ABAddressBookGetAuthorizationStatus() !=kABAuthorizationStatusAuthorized) {
+           
+            CFErrorRef myError = NULL;
+            addressBookForPeoplePickerController=  ABAddressBookCreateWithOptions(NULL, &myError);
+            
+            ABAddressBookRequestAccessWithCompletion(addressBookForPeoplePickerController, ^(bool granted, CFErrorRef error) {
+                
+            });
+            
+            if (addressBookForPeoplePickerController) {
+                CFRelease(addressBookForPeoplePickerController);
+            }
+        }
+        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+            
+            proceed=YES;
+            
+        }
+        else{
+            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+            
+            [appDelegate displayNotification:@"Enable PsyTrack contacts access under the device restrictions settings to use this feature." forDuration:10.0 location:kPTTScreenLocationTop inView:nil];
+            return;
+        }
+    }
+    
     
 	if (!self.peoplePickerNavigationController) {
         self.peoplePickerNavigationController=[[ABPeoplePickerNavigationController alloc]init];
+      
 
     }
     else {
         
         self.peoplePickerNavigationController=nil;
         self.peoplePickerNavigationController.view=nil;
+        self.peoplePickerNavigationController.addressBook=NULL;
         self.peoplePickerNavigationController=[[ABPeoplePickerNavigationController alloc]init];
         
+        
     }
+    
+    
+    
+    
+    
+    
+    
+    
         
     peoplePickerNavigationController_.peoplePickerDelegate = self;
 	// Display only a person's phone, email, and birthdate
@@ -3670,8 +3752,8 @@
 {
 	
    
-    if ([SCUtilities systemVersion]<6) {
-       
+//    if ([SCUtilities systemVersion]<6) {
+    
 
   
     
@@ -3693,36 +3775,38 @@
         //    
         
         
-        if (existingPersonRecordID==-1) {
+
    
+if (!IS_VERSION_6_OR_HIGHER){
+    if (existingPersonRecordID==-1) {    
+        //crashes if try to release and show alert view
+        NSString *name=(NSString *)[NSString stringWithFormat:@"%@ %@",clinician.firstName, clinician.lastName];
+        
+        
+        
+        CFArrayRef peopleWithNameArray=nil;
+        
+        
+        
+        
+        if (name.length) {
+            
+            ABAddressBookRef addressBookForPeopleArray=NULL;
             
             
-            //crashes if try to release and show alert view
-            NSString *name=(NSString *)[NSString stringWithFormat:@"%@ %@",clinician.firstName, clinician.lastName];
             
-;
-                    
-            CFArrayRef peopleWithNameArray=nil;
-            
-           
-            
-           
-            if (name.length) {
+            addressBookForPeopleArray= ABAddressBookCreate();
+            if (addressBookForPeopleArray) {
                 
-                ABAddressBookRef addressBookForPeopleArray=nil;
-                addressBookForPeopleArray=ABAddressBookCreate();
-                 
-                if (addressBookForPeopleArray) {
-               
                 peopleWithNameArray= ABAddressBookCopyPeopleWithName((ABAddressBookRef) addressBookForPeopleArray, (__bridge CFStringRef) name);
-            
-                   
-                   
-                   
                 
-            
-            
-            
+                
+                
+                
+                
+                
+                
+                
                 int peopleCount=CFArrayGetCount((CFArrayRef) peopleWithNameArray);
                 if (peopleCount==1  && !addExistingAfterPromptBool  ) {
                     
@@ -3738,9 +3822,9 @@
                     
                     NSString *lastName=(__bridge_transfer NSString *)CFLastName;
                     
-                                    
                     
-                    NSString *compositeName=[NSString stringWithFormat:@"%@ %@", firstName, lastName]; 
+                    
+                    NSString *compositeName=[NSString stringWithFormat:@"%@ %@", firstName, lastName];
                     NSString *alertMessage=[NSString stringWithFormat:@"Existing entry for %@ in the Address Book. Would you like to link this clinician to the existing Address Book entry?",compositeName];
                     
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Existing Contact With Name" message:alertMessage
@@ -3756,12 +3840,12 @@
                     
                     //            [self showUnknownPersonViewControllerWithABRecordRef:(ABRecordRef)person.recordRef];
                     
-                                    
-                     name=NULL;
-                  
+                    
+                    name=NULL;
+                    
                 }
-                   
-
+                
+                
                 else if(peopleCount>1 && !addExistingAfterPromptBool)
                 {
                     ABRecordRef  existingPersonRef=CFArrayGetValueAtIndex(peopleWithNameArray, 0);
@@ -3774,9 +3858,9 @@
                     
                     NSString *lastName=(__bridge_transfer NSString *)CFLastName;
                     
-                                                   
                     
-                    NSString *compositeName=[NSString stringWithFormat:@"%@ %@", firstName, lastName];  
+                    
+                    NSString *compositeName=[NSString stringWithFormat:@"%@ %@", firstName, lastName];
                     NSString *alertMessage=[NSString stringWithFormat:@"Existing entries for %@ in the Address Book. Would you like to select an existing Address Book entry for this clinician?",compositeName];
                     
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Existing Contacts With Name" message:alertMessage
@@ -3784,22 +3868,22 @@
                     
                     alert.tag=kAlertTagFoundExistingPeopleWithName;
                     
-
+                    
                     
                     [alert show];
-                 
-                   
-
                     
-                
+                    
+                    
+                    
+                    
                 }
                 
-            
-            
+                
+                
                 else
                     
                 {
-                   
+                    
                     
                     ABRecordRef  existingPersonRef=ABPersonCreate();
                     
@@ -3808,34 +3892,34 @@
                     
                     
                     if (clinician.firstName.length) {
-                    ABRecordSetValue(existingPersonRef, kABPersonFirstNameProperty, (__bridge CFStringRef) clinician.firstName, nil) ; 
+                        ABRecordSetValue(existingPersonRef, kABPersonFirstNameProperty, (__bridge CFStringRef) clinician.firstName, nil) ;
                     }
                     if (clinician.lastName.length) {
-                    ABRecordSetValue(existingPersonRef, kABPersonLastNameProperty, (__bridge CFStringRef) clinician.lastName, nil) ; 
+                        ABRecordSetValue(existingPersonRef, kABPersonLastNameProperty, (__bridge CFStringRef) clinician.lastName, nil) ;
                     }
                     if (clinician.prefix.length) {
-                        ABRecordSetValue(existingPersonRef, kABPersonPrefixProperty, (__bridge CFStringRef) clinician.prefix, nil) ; 
+                        ABRecordSetValue(existingPersonRef, kABPersonPrefixProperty, (__bridge CFStringRef) clinician.prefix, nil) ;
                     }
                     if (clinician.middleName.length) {
-                        ABRecordSetValue(existingPersonRef, kABPersonMiddleNameProperty, (__bridge CFStringRef) clinician.middleName, nil) ; 
+                        ABRecordSetValue(existingPersonRef, kABPersonMiddleNameProperty, (__bridge CFStringRef) clinician.middleName, nil) ;
                     }
                     
                     if (clinician.suffix.length) {
-                        ABRecordSetValue(existingPersonRef, kABPersonSuffixProperty, (__bridge CFStringRef) clinician.suffix, nil) ; 
+                        ABRecordSetValue(existingPersonRef, kABPersonSuffixProperty, (__bridge CFStringRef) clinician.suffix, nil) ;
                     }
                     
                     if (clinician.notes.length) {
                         ABRecordSetValue(existingPersonRef, kABPersonNoteProperty, (__bridge CFStringRef) clinician.notes, nil) ;
                     }
-    //                
+                    //
                     [personAddNewViewController_ setAddressBook:addressBookForPeopleArray];
                     if (self.personAddNewViewController) {
                         self.personAddNewViewController.view=nil;
                         self.personAddNewViewController=nil;
                     }
                     self.personAddNewViewController=[[ABNewPersonViewController alloc]init];;
-                   
-                   
+                    
+                    
                     
                     personAddNewViewController_.newPersonViewDelegate=self;
                     [personAddNewViewController_ setDisplayedPerson:existingPersonRef];
@@ -3847,50 +3931,279 @@
                     //            personAddNewViewController_.parentGroup=group;
                     //            personAddNewViewController_.newPersonViewDelegate=self;
                     //            [personAddNewViewController_ setDisplayedPerson:existingPersonRef];
-                    //            
+                    //
                     //            personAddNewViewController_.view.tag=900;
                     //            currentDetailTableViewModel.viewController.navigationController.delegate =self ;
                     
                     
                     
-                    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:personAddNewViewController_];	
+                    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:personAddNewViewController_];
                     
                     navController.delegate=self;
                     [[currentDetailTableViewModel_.viewController navigationController] presentModalViewController:navController animated:YES];
                     
                     addExistingAfterPromptBool=FALSE;
-                     
+                    
                     CFRelease(existingPersonRef);
-
+                    
                 }
-            
+                
                 if (peopleWithNameArray) {
-                     CFRelease(peopleWithNameArray);
+                    CFRelease(peopleWithNameArray);
                 }
-               
-            
+                
+                
                 
             }
-                if (addressBookForPeopleArray) {
-                    CFRelease(addressBookForPeopleArray);
-                }
+            if (addressBookForPeopleArray) {
+                CFRelease(addressBookForPeopleArray);
             }
-          
         }
-        else
-            
-        {
-            
-            
-            [self showPersonViewControllerForRecordID:(int)existingPersonRecordID];
-            
-     
-        }
-     
        
+    }
+        
+    else
+        
+    {
+        
+        
+        [self showPersonViewControllerForRecordID:(int)existingPersonRecordID];
+        
+        
     }
 
 }
+    else
+    {
+       
+       if (existingPersonRecordID==-1) {
+       
+         CFErrorRef myError = NULL;
+         ABAddressBookRef addressBookForPeopleArray=  ABAddressBookCreateWithOptions(NULL, &myError);
+        
+           
+           if (ABAddressBookGetAuthorizationStatus() !=kABAuthorizationStatusAuthorized) {
+               ABAddressBookRequestAccessWithCompletion(addressBookForPeopleArray, ^(bool granted, CFErrorRef error) {
+                 
+               });
+           }
+        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+               // The user has previously given access, add the contact
+         
+           
+           
+          
+          
+                
+                //crashes if try to release and show alert view
+                NSString *name=(NSString *)[NSString stringWithFormat:@"%@ %@",clinician.firstName, clinician.lastName];
+                
+                CFArrayRef peopleWithNameArray=nil;
+            
+                if (name.length) {
+                    
+                    
+                    
+                   
+                    if (addressBookForPeopleArray) {
+                        
+                        peopleWithNameArray= ABAddressBookCopyPeopleWithName((ABAddressBookRef) addressBookForPeopleArray, (__bridge CFStringRef) name);
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        int peopleCount=CFArrayGetCount((CFArrayRef) peopleWithNameArray);
+                        if (peopleCount==1  && !addExistingAfterPromptBool  ) {
+                            
+                            
+                            ABRecordRef  existingPersonRef=CFArrayGetValueAtIndex(peopleWithNameArray, 0);
+                            
+                            existingPersonRecordID=ABRecordGetRecordID(existingPersonRef);
+                            CFStringRef CFFirstName=ABRecordCopyValue((ABRecordRef) existingPersonRef, kABPersonFirstNameProperty);
+                            
+                            CFStringRef CFLastName=ABRecordCopyValue((ABRecordRef) existingPersonRef, kABPersonLastNameProperty);
+                            
+                            NSString *firstName=(__bridge_transfer NSString *)CFFirstName;
+                            
+                            NSString *lastName=(__bridge_transfer NSString *)CFLastName;
+                            
+                            
+                            
+                            NSString *compositeName=[NSString stringWithFormat:@"%@ %@", firstName, lastName];
+                            NSString *alertMessage=[NSString stringWithFormat:@"Existing entry for %@ in the Address Book. Would you like to link this clinician to the existing Address Book entry?",compositeName];
+                            
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Existing Contact With Name" message:alertMessage
+                                                                           delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Link to Existing", @"Create New", nil];
+                            
+                            alert.tag=kAlertTagFoundExistingPersonWithName;
+                            
+                            
+                            
+                          
+                            //            CFRelease(name);
+                            //            CFRelease(peopleWithNameArray);
+                            
+                            //            [self showUnknownPersonViewControllerWithABRecordRef:(ABRecordRef)person.recordRef];
+                            [alert show];
+                            
+                            name=NULL;
+                            
+                        }
+                        
+                        
+                        else if(peopleCount>1 && !addExistingAfterPromptBool)
+                        {
+                            ABRecordRef  existingPersonRef=CFArrayGetValueAtIndex(peopleWithNameArray, 0);
+                            
+                            CFStringRef CFFirstName=ABRecordCopyValue((ABRecordRef) existingPersonRef, kABPersonFirstNameProperty);
+                            
+                            CFStringRef CFLastName=ABRecordCopyValue((ABRecordRef) existingPersonRef, kABPersonLastNameProperty);
+                            
+                            NSString *firstName=(__bridge_transfer NSString *)CFFirstName;
+                            
+                            NSString *lastName=(__bridge_transfer NSString *)CFLastName;
+                            
+                            
+                            
+                            NSString *compositeName=[NSString stringWithFormat:@"%@ %@", firstName, lastName];
+                            NSString *alertMessage=[NSString stringWithFormat:@"Existing entries for %@ in the Address Book. Would you like to select an existing Address Book entry for this clinician?",compositeName];
+                            
+                            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Existing Contacts With Name" message:alertMessage
+                                                                           delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Choose Existing", @"Create New", nil];
+                            
+                            alert.tag=kAlertTagFoundExistingPeopleWithName;
+                            
+                        
+                            
+                                                       
+                            [alert show];
+                            
+                            
+                            
+                        }
+                        
+                        
+                        
+                        else
+                            
+                        {
+                            
+                            
+                            ABRecordRef  existingPersonRef=ABPersonCreate();
+                            
+                            //    ABPerson *person=(ABPerson *)personRecord;
+                            
+                            
+                            
+                            if (clinician.firstName.length) {
+                                ABRecordSetValue(existingPersonRef, kABPersonFirstNameProperty, (__bridge CFStringRef) clinician.firstName, nil) ;
+                            }
+                            if (clinician.lastName.length) {
+                                ABRecordSetValue(existingPersonRef, kABPersonLastNameProperty, (__bridge CFStringRef) clinician.lastName, nil) ;
+                            }
+                            if (clinician.prefix.length) {
+                                ABRecordSetValue(existingPersonRef, kABPersonPrefixProperty, (__bridge CFStringRef) clinician.prefix, nil) ;
+                            }
+                            if (clinician.middleName.length) {
+                                ABRecordSetValue(existingPersonRef, kABPersonMiddleNameProperty, (__bridge CFStringRef) clinician.middleName, nil) ;
+                            }
+                            
+                            if (clinician.suffix.length) {
+                                ABRecordSetValue(existingPersonRef, kABPersonSuffixProperty, (__bridge CFStringRef) clinician.suffix, nil) ;
+                            }
+                            
+                            if (clinician.notes.length) {
+                                ABRecordSetValue(existingPersonRef, kABPersonNoteProperty, (__bridge CFStringRef) clinician.notes, nil) ;
+                            }
+                            //
+                            [personAddNewViewController_ setAddressBook:addressBookForPeopleArray];
+                            if (self.personAddNewViewController) {
+                                self.personAddNewViewController.view=nil;
+                                self.personAddNewViewController=nil;
+                            }
+                            self.personAddNewViewController=[[ABNewPersonViewController alloc]init];;
+                            
+                            
+                            
+                            personAddNewViewController_.newPersonViewDelegate=self;
+                            [personAddNewViewController_ setDisplayedPerson:existingPersonRef];
+                            
+                            personAddNewViewController_.view.tag=837;
+                            
+                            //           [personAddNewViewController_ setAddressBook:addressBook];
+                            //            personAddNewViewController_=[[ABNewPersonViewController alloc]init];;
+                            //            personAddNewViewController_.parentGroup=group;
+                            //            personAddNewViewController_.newPersonViewDelegate=self;
+                            //            [personAddNewViewController_ setDisplayedPerson:existingPersonRef];
+                            //
+                            //            personAddNewViewController_.view.tag=900;
+                            //            currentDetailTableViewModel.viewController.navigationController.delegate =self ;
+                            
+                            
+                            
+                            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:personAddNewViewController_];
+                            
+                            navController.delegate=self;
+                            [[currentDetailTableViewModel_.viewController navigationController] presentModalViewController:navController animated:YES];
+                            
+                            addExistingAfterPromptBool=FALSE;
+                            
+                            CFRelease(existingPersonRef);
+                            
+                        }
+                        
+                        if (peopleWithNameArray) {
+                            CFRelease(peopleWithNameArray);
+                        }
+                        
+                        
+                        
+                    }
+                    if (addressBookForPeopleArray) {
+                        CFRelease(addressBookForPeopleArray);
+                    }
+                }
+                
+            }
+       else
+       {
+           PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+           
+           
+           [appDelegate displayNotification:@"Please enable psytrack contacts access under the device restrictions setttings to utilize this feature" forDuration:10.0 location:kPTTScreenLocationTop inView:nil];
+           
+           
+       }
+            
+            
+        
+}
+
+
+else
+    
+{
+    
+    
+    [self showPersonViewControllerForRecordID:(int)existingPersonRecordID];
+    
+    
+}
+    
+
+    }
+
+
+}
+
+
+//    }
+
+
 
 
 
@@ -3899,10 +4212,37 @@
 -(void)showPersonViewControllerForRecordID:(int)recordID
 {
 	
-    ABAddressBookRef addressBookForShowPerson=ABAddressBookCreate();
-        if (addressBookForShowPerson) {
-      
+    ABAddressBookRef addressBookForShowPerson;
+    
+    BOOL proceed=NO;
+    if (!IS_VERSION_6_OR_HIGHER) {
+         addressBookForShowPerson=ABAddressBookCreate();
+        proceed=YES;
+    }
+    else
+    {
+        CFErrorRef myError = NULL;
+         addressBookForShowPerson=  ABAddressBookCreateWithOptions(NULL, &myError);
+       
+    
+        if (ABAddressBookGetAuthorizationStatus() !=kABAuthorizationStatusAuthorized) {
+            ABAddressBookRequestAccessWithCompletion(addressBookForShowPerson, ^(bool granted, CFErrorRef error) {
                 
+            });
+        }
+        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+       
+            proceed=YES;
+            
+        }
+        else{
+        
+            return;
+        }
+    }
+        if (proceed && addressBookForShowPerson) {
+      
+            
 
         ABRecordRef existingPerson=nil;
         existingPerson=ABAddressBookGetPersonWithRecordID(addressBookForShowPerson, recordID);
@@ -3911,7 +4251,7 @@
        
         if (!self.personViewController) {
             self.personViewController=[[ABPersonViewController alloc]init];
-        } 
+        }
         else {
             
             if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
@@ -3922,14 +4262,14 @@
             
                 if (!iPadPersonBackgroundView_) {
                     self.iPadPersonBackgroundView=[[UIView alloc]init];
-                }    
+                }
            
           
                 
                 
             }
             
-                
+            
             
         }
 //        [self.personViewController.view setBackgroundColor:[UIColor clearColor]];
@@ -3984,12 +4324,20 @@ if (addressBookForShowPerson) {
     
     
     // stick the buttons in the toolbar
-    
+   
      
     if (peoplePicker.viewControllers.count) {
-   
-    UIViewController *membersViewController=(UIViewController *)[peoplePicker.viewControllers objectAtIndex:1];
     
+        UIViewController *membersViewController=nil;
+        if (peoplePicker.viewControllers.count==1){
+        
+        membersViewController=(UIViewController *)[peoplePicker.viewControllers objectAtIndex:0];
+        }
+        else if (peoplePicker.viewControllers.count==2){
+        membersViewController=(UIViewController *)[peoplePicker.viewControllers objectAtIndex:1];
+        
+        
+        }
     
     
     membersViewController.navigationController.delegate=self;
@@ -5008,15 +5356,39 @@ if (addressBookForShowPerson) {
     
             { 
                        
-                if (!source) {
+                
+                
+                BOOL proceed=NO;
+                if (!IS_VERSION_6_OR_HIGHER) {
+                    addressBookToChangOrAddName=ABAddressBookCreate();
+                    proceed=YES;
+                }
+                else
+                {
+                    
+                    
+                    
+                    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+                        CFErrorRef myError = NULL;
+                        addressBookToChangOrAddName=  ABAddressBookCreateWithOptions(NULL, &myError);
+                        
+                        proceed=YES;
+                        
+                    }
+                    else{
+                        
+                        return;
+                    }
+                }
 
-                addressBookToChangOrAddName=ABAddressBookCreate();
-            if (!source) {
+
+            
+            if (proceed && addressBookToChangOrAddName && !source) {
                 source=ABAddressBookGetSourceWithRecordID(addressBookToChangOrAddName, sourceID);
             }
             
             
-        }
+       
         
     }
     
@@ -5304,10 +5676,36 @@ if (addressBookForShowPerson) {
         return NO;
     }
     ABAddressBookRef addressBookToCheckPerson=nil;
-    addressBookToCheckPerson=ABAddressBookCreate();
+    
+    BOOL proceed=NO;
+    if (!IS_VERSION_6_OR_HIGHER) {
+        addressBookToCheckPerson=ABAddressBookCreate();
+        proceed=YES;
+    }
+    else
+    {
+        
+        
+        
+       
+        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+            CFErrorRef myError = NULL;
+            addressBookToCheckPerson=  ABAddressBookCreateWithOptions(NULL, &myError);
+            
+            proceed=YES;
+            
+        }
+        else{
+            
+            return NO;
+        }
+    }
+
+    
+  
     
     BOOL personExistsInGroup=NO;
-        if (addressBookToCheckPerson) {
+        if (proceed && addressBookToCheckPerson) {
        
     ABRecordRef group=nil;
     
@@ -5449,8 +5847,8 @@ if (addressBookForShowPerson) {
 }
 -(void)synchronizeAddressBookGroupsForClinician:(ClinicianEntity *)clinicianToSync {
 
-    if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
-    {
+//    if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
+//    {
   
         
         ABRecordRef source=nil;
@@ -5458,8 +5856,35 @@ if (addressBookForShowPerson) {
        int sourceID=[self defaultABSourceID];
        
     
-    ABAddressBookRef addressBookToSyncronize=ABAddressBookCreate();
-    if (addressBookToSyncronize) {
+    ABAddressBookRef addressBookToSyncronize=NULL;
+    
+    
+    
+    BOOL proceed=NO;
+    if (!IS_VERSION_6_OR_HIGHER) {
+        addressBookToSyncronize=ABAddressBookCreate();
+        proceed=YES;
+    }
+    else
+    {
+       
+        
+        
+        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+            CFErrorRef myError = NULL;
+            addressBookToSyncronize=  ABAddressBookCreateWithOptions(NULL, &myError);
+            
+            proceed=YES;
+            
+        }
+        else{
+            
+            return ;
+        }
+    }
+    
+
+    if (proceed&& addressBookToSyncronize) {
    
             source=ABAddressBookGetSourceWithRecordID(addressBookToSyncronize, sourceID);
      
@@ -5533,7 +5958,7 @@ if (addressBookToSyncronize) {
            }
     
 
-    }
+//    }
 
 }
 
@@ -5547,10 +5972,32 @@ if (addressBookToSyncronize) {
     
     ABAddressBookRef addressBookToAddNewPerson=nil;
     
-    addressBookToAddNewPerson=ABAddressBookCreate();
+   
+    BOOL proceed=NO;
+    if (!IS_VERSION_6_OR_HIGHER) {
+        addressBookToAddNewPerson=ABAddressBookCreate();
+        proceed=YES;
+    }
+    else
+    {
+        
+        
+        
+        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+            CFErrorRef myError = NULL;
+            addressBookToAddNewPerson=  ABAddressBookCreateWithOptions(NULL, &myError);
+            
+            proceed=YES;
+            
+        }
+        else{
+            
+            return ;
+        }
+    }
     
     
-    if (addressBookToAddNewPerson) {
+    if (proceed && addressBookToAddNewPerson) {
     
     ABRecordRef person=ABAddressBookGetPersonWithRecordID(addressBookToAddNewPerson, clinicianABRecordIdentifier);
     
@@ -5620,8 +6067,42 @@ if (addressBookToSyncronize) {
     }
     
     ABAddressBookRef addressBookToRemovePerson=nil;
-    addressBookToRemovePerson=ABAddressBookCreate();
-        if (addressBookToRemovePerson) {
+    
+    
+    
+    
+    
+  
+    
+    
+    BOOL proceed=NO;
+    if (!IS_VERSION_6_OR_HIGHER) {
+        addressBookToRemovePerson=ABAddressBookCreate();
+        proceed=YES;
+    }
+    else
+    {
+        
+        
+        
+        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+            CFErrorRef myError = NULL;
+            addressBookToRemovePerson=  ABAddressBookCreateWithOptions(NULL, &myError);
+            
+            proceed=YES;
+            
+        }
+        else{
+            
+            return ;
+        }
+    }
+    
+    
+    
+    
+    
+        if (proceed&& addressBookToRemovePerson) {
        
         ABRecordRef person=nil;
     person=ABAddressBookGetPersonWithRecordID(addressBookToRemovePerson, clinicianABRecordIdentifier);
@@ -5994,7 +6475,29 @@ if (addressBookToSyncronize) {
     
     ABAddressBookRef addressBookToGetSource;
     addressBookToGetSource=ABAddressBookCreate();
-    
+    BOOL proceed=NO;
+    if (!IS_VERSION_6_OR_HIGHER) {
+        addressBookToGetSource=ABAddressBookCreate();
+        proceed=YES;
+    }
+    else
+    {
+        
+        
+        
+        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+            CFErrorRef myError = NULL;
+            addressBookToGetSource=  ABAddressBookCreateWithOptions(NULL, &myError);
+            
+            proceed=YES;
+            
+        }
+        else{
+            
+            return -1;
+        }
+    }
+
     
      
     BOOL iCloudEnabled=(BOOL)[[NSUserDefaults standardUserDefaults] valueForKey:@"icloud_preference"];
@@ -6004,7 +6507,7 @@ if (addressBookToSyncronize) {
     BOOL continueChecking=YES;
    
     
-    if (addressBookToGetSource) {
+    if (proceed && addressBookToGetSource) {
     CFArrayRef allSourcesArray=ABAddressBookCopyArrayOfAllSources(addressBookToGetSource);
 
       

@@ -334,8 +334,8 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
                         }                        
                                                                     
                     }
-                                                                       
-                                                                       
+                appSettings=nil;
+                
             }
                     
                    
@@ -366,7 +366,7 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
                     
                 }
                 
-                
+                  appSettings=nil;
                
             }
                 break;
@@ -425,7 +425,7 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
                         [appDelegate displayNotification:displayMessage];
                     
                     }
-                    
+  
                 }
                 else if (passwordsAreValid && !shouldChangeToken){
                     NSString *displayMessage=nil;
@@ -448,7 +448,7 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
                         [appDelegate displayNotification:displayMessage];
                     } 
                 }
-                
+                  appSettings=nil;
             }
                 break;
             case 404:
@@ -462,7 +462,7 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
             default:
                 break;
         }
-        
+    
     }
     
 
@@ -520,7 +520,8 @@ if(section.headerTitle !=nil)
         result = YES;
         
     }
-    
+    appSettings=nil;
+    encryption=nil;
     return result;
     
 }
@@ -839,7 +840,7 @@ if(section.headerTitle !=nil)
     }
     
     
-    
+    appSettings=nil;
     
     
     
@@ -958,7 +959,7 @@ if(section.headerTitle !=nil)
     LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
 	
     [appSettings setLockScreenStartup:value];
-    
+    appSettings=nil;
     
 }
 
@@ -991,7 +992,7 @@ if(section.headerTitle !=nil)
         
 	}
 
-	
+	appSettings=nil;
     
     [self performSelector:@selector(updatePasscodeOnSwichCell)];
 }

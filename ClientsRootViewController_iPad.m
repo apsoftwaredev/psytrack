@@ -32,7 +32,7 @@
 //@synthesize tableView=_tableView;
 @synthesize searchBar;
 //@synthesize tableModel;
-
+@synthesize totalClientsLabel;
 
 
 #pragma mark -
@@ -119,22 +119,15 @@
 
 
 // Replace the default model with the new objectsModel
-//    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"drugName Matches %@",@"a"];
+
 objectsModel.enablePullToRefresh = TRUE;
 objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
 
 
-//    SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"firstName" sortAscending:YES filterPredicate:nil];
 
-
-//    dataFetchOptions.batchStartingOffset=10;
-//    dataFetchOptions.batchSize=10;
-//    
-//    
-//    objectsModel.dataFetchOptions=dataFetchOptions;
     objectsModel.addButtonItem=objectsModel.detailViewController.navigationItem.rightBarButtonItem;
     
-//    objectsModel.addButtonItem = self.addButton;
+
 	objectsModel.itemsAccessoryType = UITableViewCellAccessoryNone;
     objectsModel.detailViewControllerOptions.modalPresentationStyle = UIModalPresentationPageSheet;
     objectsModel.detailViewController=self.tableViewModel.detailViewController;
@@ -143,10 +136,6 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
     clientDetailViewController.navigationBarType=SCNavigationBarTypeAddRight;
     
     objectsModel.addButtonItem=clientDetailViewController.navigationItem.rightBarButtonItem;
-    //    self.tableView.backgroundColor=[UIColor clearColor]; // Make the table view application backgound color (turquose)
-    
-    //    self.tableView.backgroundColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]; // Make the table view application backgound color (turquose)
-    
     
     [self.view setBackgroundColor:(UIColor *)appDelegate.window.backgroundColor];
     NSString *imageNameStr=nil;
@@ -163,8 +152,12 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
     [self.searchBar setScopeBarBackgroundImage:menueBarImage];
     
     
-    
-    
+    objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
+    {
+        [self updateClientsTotalLabel];
+    };
+
+      [self updateClientsTotalLabel];
     self.tableViewModel = objectsModel;
 //        
 }
@@ -402,7 +395,12 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 
         
     }    
-
+    if (tableModel.tag==0 ) {
+        [self.searchBar setSelectedScopeButtonIndex:0];
+        
+        [objectsModel.dataFetchOptions setFilterPredicate:nil];
+        
+    }
     
 if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
     
@@ -1274,6 +1272,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                         NSString *notes=[managedObject valueForKey:@"notes"];
                         
                         cell.textLabel.text=[NSString stringWithFormat:@"%@: %@",[dateTimeDateFormatter stringFromDate:logDate],notes];
+                        dateTimeDateFormatter=nil;
                         return;
                     }
 
@@ -1315,6 +1314,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                         if (startedDate) {
                             
                             NSString *startedDateStr=[dateFormatter stringFromDate:startedDate];
+                          
                             if (labelString.length && startedDateStr.length) {
                                 labelString=[labelString stringByAppendingFormat:@"; started: %@",startedDateStr];
                             }
@@ -1333,6 +1333,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                             cell.textLabel.textColor=[UIColor blueColor];
                         }
                         cell.textLabel.text=labelString;
+                         dateFormatter=nil;
                         return;
                     }
                     
@@ -1372,7 +1373,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                         
                         cell.textLabel.text=labelText;
                         //change the text color to red
-                        
+                          dateFormatter=nil;
                         return;
                         
                     }
@@ -1420,7 +1421,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                                
                            }
                            cell.textLabel.textColor=[UIColor blackColor];
-                           
+                             dateFormatter=nil;
                        }
                        else
                        {
@@ -1553,6 +1554,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                             cell.textLabel.text=historyString;
                             //change the text color to red
                         }
+                      dateFormatter=nil;
                     return;
 
                     }
@@ -1607,6 +1609,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                          cell.textLabel.textColor=[UIColor blueColor];
                      }
                      cell.textLabel.text=labelString;
+                       dateFormatter=nil;
                      return;
                  }
                  else if ([managedObject.entity.name isEqualToString:@"SubstanceUseLogEntity"]) {
@@ -1624,7 +1627,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                          [dateFormatter setDateFormat:@"M/d/yyyy"];
                          [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
                          displayStr=[dateFormatter stringFromDate:logDate];
-                         
+                            dateFormatter=nil;
                          
                      }
                      
@@ -1659,7 +1662,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                      
                      
                      
-                     
+                    
                      
                      cell.textLabel.text=displayStr;
                      
@@ -1691,7 +1694,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                     cell.textLabel.text=logDateStr&&symptomNamesStr?[logDateStr stringByAppendingFormat:@": %@",symptomNamesStr]:logDateStr;
                  
                     
-                                 
+                       dateFormatter=nil;
                  }
           
                
@@ -1734,7 +1737,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                     if (notes &&notes.length) {
                         cell.textLabel.text=[cell.textLabel.text stringByAppendingFormat:@", %@",notes];
                     }
-                    
+                       dateFormatter=nil;
                 }
 
 
@@ -1856,9 +1859,9 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                     if (notes &&notes.length) {
                         cell.textLabel.text=[cell.textLabel.text stringByAppendingFormat:@", %@",notes];
                     }
-                    
+                        dateFormatter=nil;  
                 }
-                             
+                          
             }
         }
             break;
@@ -1873,7 +1876,46 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
     
     
 }
-
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForSectionAtIndex:(NSUInteger)index{
+    
+    if (tableViewModel.tag==0) {
+        
+        //        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
+        //
+        //        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+        //            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
+        //            SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:objectSelectionSection.selectedCellIndexPath];
+        //             NSManagedObject  *object;
+        //            if (cell.boundObject && [cell isSelected]) {
+        //                object =(NSManagedObject *)cell.boundObject;
+        //                [tableViewModel reloadBoundValues];
+        //                [self.tableView reloadData];
+        //
+        //
+        //                [objectSelectionSection setSelectedItemIndex: [NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:object]]];
+        //
+        //            }
+        //
+        //        }
+        //        else
+        //        {
+        //            [tableViewModel reloadBoundValues];
+        //            [self.tableView reloadData];
+        //        }
+        
+        [self updateClientsTotalLabel];
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
 - (void)tableViewModel:(SCArrayOfItemsModel *)tableViewModel
 searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
@@ -1923,7 +1965,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         
         [objectsModel.modeledTableView reloadData];
-        
+        [self updateClientsTotalLabel];
         
         //         if (objectsModel.sectionCount>0) {
         //        if (isInDetailSubview) {
@@ -1949,6 +1991,58 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         //    }
     }
+}
+
+-(void)tableViewModel:(SCTableViewModel *)tableViewModel didRemoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (tableViewModel.tag==0) {
+        
+        [self updateClientsTotalLabel];
+        
+    }
+    
+}
+
+
+
+-(void)updateClientsTotalLabel{
+    
+    
+    if (objectsModel.tag==0)
+    {
+        int cellCount=0;
+        if (objectsModel.sectionCount >0){
+            
+            for (int i=0; i<objectsModel.sectionCount; i++) {
+                SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:i];
+                if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
+                    SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
+                    cellCount=arrayOfObjectsSection.items.count;
+                    
+                }
+                else{
+                    cellCount=cellCount+section.cellCount;
+                }
+                
+            }
+            
+            
+        }
+        if (cellCount==0)
+        {
+            self.totalClientsLabel.text=@"Tap + To Add Clients";
+        }
+        else
+        {
+            self.totalClientsLabel.text=[NSString stringWithFormat:@"Total Clients: %i", cellCount];
+        }
+        
+    }
+    
+    
+    
+    
+    
 }
 
 
@@ -2032,7 +2126,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     if(section.footerTitle !=nil)
     {
         
-        UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 550, 100)];
+       UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 550, 100)];
         UILabel *footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 550, 100)];
         footerLabel.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
         footerLabel.numberOfLines=6;
@@ -2204,7 +2298,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         
     } 
-    
+    numberFormatter=nil;
     return valid;
     
 }
@@ -2409,7 +2503,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     }
                     
                     
-                                        
+                    numberFormatter=nil;
                     
                     
                 }

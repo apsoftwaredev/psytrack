@@ -121,6 +121,9 @@
         
         NSArray *sortedethnicityCombinationArray=[ethnicityCombinatonCountSet.allObjects sortedArrayUsingDescriptors:sortDescriptors];
         [ethnicityMutableArray_ addObjectsFromArray:sortedethnicityCombinationArray];
+        fetchRequest=nil;
+        sortDescriptor=nil;
+        sortDescriptors=nil;
     }
     
     return self;

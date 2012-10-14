@@ -209,7 +209,8 @@
 //		[self showBanner:self.wrongPassCodeBanner];
 //		[self resetUIState];
 	}
-	
+	appSettings=nil;
+    encryption=nil;
 	return result;
 }
 

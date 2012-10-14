@@ -92,6 +92,7 @@ if (fetchedObjects) {
         
         
     }
+    fetchRequest=nil;
 }
 
 

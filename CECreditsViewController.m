@@ -372,7 +372,7 @@
         
     }
     
-
+    fetchRequest=nil;
     
     
     

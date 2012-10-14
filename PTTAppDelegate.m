@@ -700,8 +700,10 @@
         //do nothing
     }
 
-    
-    self.encryption=[[PTTEncryption alloc]init];
+    if (encryption_) {
+         self.encryption=[[PTTEncryption alloc]init];
+    }
+   
     NSString *statusMessage;
     retrievedEncryptedDataFile=NO;
     
@@ -969,7 +971,7 @@
         
 //    NSData *data=[symmetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
     
-
+    wrapper=nil;
     return [symmetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
 }
 
@@ -1120,7 +1122,7 @@
 
     
     
-
+    wrapper=nil;
     
     return success;
     
@@ -1309,7 +1311,7 @@
                  [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",NO] forIdentifier:K_LOCK_SCREEN_LOCKED];
         
     } 
-    
+    wrapper=nil;
     return statusMessage;
 }
 
@@ -1441,7 +1443,7 @@
 //         [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",NO] forIdentifier:K_LOCK_SCREEN_LOCKED];
        
     } 
-    
+    wrapper=nil;
     return statusMessage;
 }
 
@@ -1487,8 +1489,8 @@
         }
         
     }
+        myInfoFetchRequest=nil;
     }
-
 
 
 
@@ -1693,7 +1695,7 @@
             
         }
     }
-    
+    wrapper=nil;
     return [NSDictionary dictionaryWithDictionary:returnDictionary];
     
     
@@ -1749,7 +1751,7 @@
         [self checkKeyStringInKeyEntity];
         
     }
-    
+    wrapper=nil;
     
     return  [NSDictionary dictionaryWithDictionary:returnDictionary];
     
@@ -1883,7 +1885,7 @@
         //4
         
         
-        
+        fetchRequest=nil;
        
         
         KeyEntity *keyObject=nil;
@@ -2078,10 +2080,11 @@
             
             
                 }
+        
             }
       
         
-    
+
      
     }
         
@@ -2097,9 +2100,9 @@
         
     }
         
-        
     
-    
+    wrapper=nil;
+
     return decryptedData;  
     
 }
@@ -5531,7 +5534,7 @@ return YES;
     
     NSURL *drugUrl=[NSURL fileURLWithPath:dirToCreate isDirectory:YES];
     
-    
+    fileManager=nil;
     
     return drugUrl;
 }
@@ -5549,7 +5552,7 @@ return YES;
     
     
     NSURL *disorderUrl=[NSURL fileURLWithPath:dirToCreate isDirectory:YES];
-    
+    fileManager=nil;
     
     
     return disorderUrl;
@@ -5570,7 +5573,7 @@ return YES;
     
     NSURL *pttDatabaseUrl=[NSURL fileURLWithPath:dirToCreate isDirectory:YES];
     
-    
+    fileManager=nil;
     
     return pttDatabaseUrl;
 }
@@ -5588,7 +5591,7 @@ return YES;
     
     NSURL *pttDatabaseUrl=[NSURL fileURLWithPath:dirToCreate isDirectory:YES];
     
-    
+    fileManager=nil;
     
     return pttDatabaseUrl;
 }
@@ -5619,7 +5622,7 @@ return [self applicationDrugsDirectory].path;
     
     NSURL* suppurl = [fm URLForDirectory:NSApplicationSupportDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&err];
 
-
+    fm=nil;
     return suppurl;
 
 }
@@ -5885,6 +5888,10 @@ return [self applicationDrugsDirectory].path;
                 [self displayNotification:@"An unresolved error occured while setting up database.  Try restarting" forDuration:0 location:kPTTScreenLocationTop inView:self.window];
             
                 
+            }else{
+            
+                [self displayNotification:@"App was unable to load database." forDuration:0 location:kPTTScreenLocationTop inView:self.window];
+            
             }
             
             
@@ -6091,8 +6098,11 @@ return [self applicationDrugsDirectory].path;
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
     
     NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE_IS_ON];
+    BOOL passcodeOn=(BOOL)[(NSString * )[self convertDataToString:lockedData]boolValue];
+    wrapper=nil;
+    lockedData=nil;
     
-    return (BOOL)[(NSString * )[self convertDataToString:lockedData]boolValue];
+    return passcodeOn;
 
 }
 - (BOOL) isLockedAtStartup
@@ -6100,8 +6110,11 @@ return [self applicationDrugsDirectory].path;
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
     
     NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_LOCK_AT_STARTUP];
+    BOOL lockedOnStartup=(BOOL)[(NSString * )[self convertDataToString:lockedData]boolValue];
     
-    return (BOOL)[(NSString * )[self convertDataToString:lockedData]boolValue];
+    wrapper=nil;
+    lockedData=nil;
+    return lockedOnStartup;
 }
 
 
@@ -6111,8 +6124,10 @@ return [self applicationDrugsDirectory].path;
  KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
 
   NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_LOCKED];
-
-    return (BOOL)[(NSString * )[self convertDataToString:lockedData]boolValue];	
+BOOL isLocked= (BOOL)[(NSString * )[self convertDataToString:lockedData]boolValue];	
+    lockedData=nil;
+    wrapper=nil;
+    return isLocked;
 
 }
 -(BOOL)isLockedTimerOn{
@@ -6120,8 +6135,11 @@ return [self applicationDrugsDirectory].path;
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
     
     NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_TIMER_ON];
-    
-    return (BOOL)[(NSString * )[self convertDataToString:lockedData]boolValue];	
+   BOOL isLockedTimerOn=(BOOL)[(NSString * )[self convertDataToString:lockedData]boolValue];
+   
+    wrapper=nil;
+    lockedData=nil;
+    return isLockedTimerOn;
     
 }
 
@@ -6177,6 +6195,7 @@ return [self applicationDrugsDirectory].path;
         if ([self isLockedTimerOn]) {
             [self displayWrongPassword];
         }
+        appsettings=nil;
     }
     else {
         
@@ -6227,7 +6246,7 @@ return [self applicationDrugsDirectory].path;
 
 -(void)displayNotification:(NSString *)alertText{
 
-    [self displayNotification:(NSString *)alertText forDuration:(float)3.0 location:(NSInteger )kPTTScreenLocationTop   inView:nil];
+    [self displayNotification:(NSString *)alertText forDuration:(float)4.0 location:(NSInteger )kPTTScreenLocationTop   inView:nil];
 
 }
 

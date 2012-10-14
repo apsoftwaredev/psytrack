@@ -299,6 +299,26 @@
 
 
     }
+    if (self.selectMyInformationOnLoad) {
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+             [appDelegate displayNotification:@"Tap the Clinicians Button in the Upper Left to display clinicians list, then tap your name."];
+        }
+        else if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)){
+            
+            [appDelegate displayNotification:@"Select your name from the clinicians list to view/track your information"];
+            
+        }
+                   
+            
+            
+    
+            
+       
+
+    }
+    
     
 }
 #pragma mark -
@@ -362,12 +382,19 @@
                     BOOL myInformation=[(NSNumber *)[cellManagedObject valueForKey:@"myInformation"]boolValue];
                     
                     if (myInformation) {
-                        [self.tableViewModel setActiveCell:cell];
+                         [self.tableViewModel setActiveCell:cell];
+                        if (![SCUtilities is_iPad]) {
+                           
+                            
+                            [arrayOfObjectsSection dispatchEventSelectRowAtIndexPath:[self.tableViewModel indexPathForCell:cell]];
                         
-                        [arrayOfObjectsSection dispatchEventSelectRowAtIndexPath:[self.tableViewModel indexPathForCell:cell]];
+                        }
+                                                                         
+                        
+            
+                        
                         foundMyInformation=YES;
-                        break;
-                        
+                         break;
                     }
                     
                 }
@@ -848,8 +875,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             
             for (int i=0; i<objectsModel.sectionCount; i++) {
                 SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:i];
-                cellCount=cellCount+section.cellCount;
-                
+                if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
+                    SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
+                    cellCount=arrayOfObjectsSection.items.count;
+                    
+                }
+                else{
+                    cellCount=cellCount+section.cellCount;
+                }
             }
             
             
@@ -871,6 +904,22 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 }
 
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+
+    [super tableViewModel:tableModel detailViewWillPresentForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
+    
+    if (tableModel.tag==0 &&objectsModel.searchBar.selectedScopeButtonIndex!=0) {
+        [objectsModel.searchBar setSelectedScopeButtonIndex:0];
+       
+        [objectsModel.dataFetchOptions setFilterPredicate:nil];
+        
+    }
+
+
+
+
+
+}
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didInsertRowAtIndexPath:(NSIndexPath *)indexPath
 
 {

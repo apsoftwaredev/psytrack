@@ -645,7 +645,7 @@
             NSString *textToDisplay=[NSString stringWithFormat:@"%@ %.2lf hrs at $%@ hr (%@ total)",rateObject.rateName,[hoursDecimalNumber floatValue],rateObject.hourlyRate,[currencyFormatter stringFromNumber:  totalChargeDecimalNumber]];
             
             cell.textLabel.text=textToDisplay;
-            
+            currencyFormatter=nil;
         }
         
        else if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"ReferralEntity"]) {
@@ -730,7 +730,7 @@
            cell.textLabel.text=displayString;
            
            
-           
+           currencyFormatter=nil;
            
            
        }

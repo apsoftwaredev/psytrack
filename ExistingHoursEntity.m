@@ -166,7 +166,10 @@
         [site didAccessValueForKey:@"defaultSite"];
         
     }
-    
+    dateFormatter=nil;
+    supervisorFetchRequest=nil;
+    trainingProgramFetchRequest=nil;
+    siteFetchRequest=nil;
     
     
 }

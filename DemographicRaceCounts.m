@@ -137,11 +137,11 @@ NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil]
     if (nilCount.raceCombinationCount>0) {
         [raceMutableArray_ addObject:nilCount];
     }
-    
-
+        sortDescriptor=nil;
+        sortDescriptors=nil;
+        fetchRequest=nil;
     }
     
-
 
     return self;
     

@@ -1814,9 +1814,9 @@ BOOL valid=NO;
                 
             }
 
-            
+                fetchRequest=nil;
             }   
-            
+    
             
         }
         
@@ -1826,7 +1826,6 @@ BOOL valid=NO;
             
             
         }
-
 
 
         
@@ -1860,7 +1859,7 @@ BOOL valid=NO;
         
         
         
-        
+        numberFormatter=nil;
         
        
         
@@ -2042,7 +2041,8 @@ BOOL valid=NO;
         
         //don't change this to @"" because it causes a bug with the back button
         cell.textLabel.text=nil;
-        
+                    dateFormatter=nil;
+                    
     }}
     }
     
@@ -2460,7 +2460,8 @@ BOOL valid=NO;
                     
                     
                     
-                }     
+                }
+                trainingProgramFetchRequest=nil;
             }
         }
         if ([cellManagedObject.entity.name isEqualToString:@"SiteEntity"]) {
@@ -2491,7 +2492,8 @@ BOOL valid=NO;
                     
                     
                     
-                }     
+                }
+                siteFetchRequest=nil;
             }
         }
 

@@ -18,8 +18,7 @@
 #import "CliniciansDetailViewController_iPad.h"
 #import "PTTAppDelegate.h"
 
-
-
+#import "CliniciansRootViewController_iPad.h"
 
 
 @implementation CliniciansDetailViewController_iPad
@@ -35,6 +34,7 @@
     
     // Set the view controller's theme
     self.tableViewModel.theme = [SCTheme themeWithPath:@"mapper-ipad-detail.ptt"];
+    
 }
 
 - (void)viewDidUnload {
@@ -79,8 +79,34 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration {
 }
 
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailModelConfiguredForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
 
+    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    CliniciansRootViewController_iPad *clinicianRootViewController_iPad=(CliniciansRootViewController_iPad *)appDelegate.clinicianViewController;
+    
+    if (clinicianRootViewController_iPad.searchBar.selectedScopeButtonIndex!=0) {
+        [clinicianRootViewController_iPad.searchBar setSelectedScopeButtonIndex:0];
+        SCArrayOfObjectsModel *arrayOfObjectsModel=(SCArrayOfObjectsModel *)clinicianRootViewController_iPad.tableViewModel;
+        
+        [arrayOfObjectsModel.dataFetchOptions setFilterPredicate:nil];
+        
+        [arrayOfObjectsModel.tableView reloadData];
+        
+        
+    }
+    self.delegate=clinicianRootViewController_iPad;
+
+}
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
+
+
+
+
+}
 //@synthesize addButtonItem;
 //
 //@synthesize popoverController;

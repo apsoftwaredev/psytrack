@@ -51,7 +51,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                       managedObjectContext:managedObjectContext 
                                                              propertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth", @"keyString",
                                                                                 @"initials",  @"demographicInfo", @"dateAdded",@"currentClient"/*,@"phoneNumbers"*/, @"logs", @"medicationHistory",@"diagnoses", @"substanceUse",@"vitals",
-                                                                @"notes",@"groups",nil]];
+                                                                @"notes",@"groups",@"otherReferralSource",nil]];
 	
     
     
@@ -1138,6 +1138,29 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                            displayDatePickerInDetailView:NO];
     
     
+    SCEntityDefinition *otherReferralSourceDef=[SCEntityDefinition definitionWithEntityName:@"OtherReferralSourceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"sourceName;notes"];
+    
+    otherReferralSourceDef.keyPropertyName=@"sourceName";
+    otherReferralSourceDef.titlePropertyName=@"sourceName";
+    
+    SCPropertyDefinition *otherReferralSourcePropertyDef = [clientDef propertyDefinitionWithName:@"otherReferralSource"];
+    
+	otherReferralSourcePropertyDef.type = SCPropertyTypeObjectSelection;
+	SCObjectSelectionAttributes *otherReferralSourceSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:otherReferralSourceDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+    otherReferralSourceSelectionAttribs.allowAddingItems = YES;
+    otherReferralSourceSelectionAttribs.allowDeletingItems = YES;
+    otherReferralSourceSelectionAttribs.allowMovingItems = YES;
+    otherReferralSourceSelectionAttribs.allowEditingItems = YES;
+    otherReferralSourceSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap edit to add new referral source)"];
+    otherReferralSourceSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new referral source"];
+    otherReferralSourcePropertyDef.attributes = otherReferralSourceSelectionAttribs;
+
+    
+    SCPropertyDefinition *otherReferralSourceNotesPropertyDef=[otherReferralSourceDef propertyDefinitionWithName:@"notes"];
+    otherReferralSourceNotesPropertyDef.type=SCPropertyTypeTextView;
+    
+    
+    [groupsGroup addPropertyName:@"otherReferralSource"];
     return self;
 
 
@@ -1195,7 +1218,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     NSString *age =[NSString stringWithFormat:@"%iy %im %id",year,month,day];
     
     
-    
+    dateFormatter=nil;
     
     return age;
   }
@@ -1274,7 +1297,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
         day=nowDay-dateDiff;
     }
 
-
+    dateFormatter=nil;
     
     return [NSString stringWithFormat:@"%iy %im %id", year,month,day];
 }
@@ -1328,7 +1351,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     NSString *age =[NSString stringWithFormat:@"%iy %im %id",year,month,day];
     
-    
+    dateFormatter=nil;
     
     
     return age;
@@ -1434,7 +1457,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
         day=nowDay-dateDiff;
     }
     
-   
+    dateFormatter=nil;
     
     return [NSString stringWithFormat:@"%iy %im %id", year,month,day];
 

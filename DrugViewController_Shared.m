@@ -30,108 +30,108 @@
            //Create a class definition for Client entity
 	
     
-    BOOL checkMain=FALSE;
-    if (checkMain){
-    
-    NSEntityDescription *appEntityDesc=[NSEntityDescription entityForName:@"DrugApplicationEntity" inManagedObjectContext:drugsManagedObjectContext];
-    
-    
-    NSFetchRequest *appFetchRequest = [[NSFetchRequest alloc] init];
-    
-    [appFetchRequest setEntity:appEntityDesc];
-    NSError *appError = nil;
-    NSArray *appFetchedObjects = [drugsManagedObjectContext executeFetchRequest:appFetchRequest error:&appError];
-
-    NSInteger appFetchedObjectsCount= appFetchedObjects.count;
-    if (appFetchedObjectsCount==0) {
-         [(PTTAppDelegate *)[UIApplication sharedApplication].delegate  setUpDrugStore]; 
-        [(PTTAppDelegate *)[UIApplication sharedApplication].delegate saveDrugsContext];
-        
-    }
-   
-   
-    
-//    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+//    BOOL checkMain=FALSE;
+//    if (checkMain){
+//    
+//    NSEntityDescription *appEntityDesc=[NSEntityDescription entityForName:@"DrugApplicationEntity" inManagedObjectContext:drugsManagedObjectContext];
+//    
+//    
+//    NSFetchRequest *appFetchRequest = [[NSFetchRequest alloc] init];
+//    
+//    [appFetchRequest setEntity:appEntityDesc];
+//    NSError *appError = nil;
+//    NSArray *appFetchedObjects = [drugsManagedObjectContext executeFetchRequest:appFetchRequest error:&appError];
 //
-    
-//    NSEntityDescription *appEntityDescMain=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:managedObjectContext];
-//    
-//    
-//    NSFetchRequest *appFetchRequestMain = [[NSFetchRequest alloc] init];
-//    
-//    [appFetchRequestMain setEntity:appEntityDescMain];
-//    NSError *appMainError = nil;
-//    NSArray *appFetchedObjectsMain = [managedObjectContext executeFetchRequest:appFetchRequestMain error:&appMainError];
-//    
-//    NSInteger appFetchedObjectsCountMain= appFetchedObjectsMain.count;
-//    if (appFetchedObjectsCountMain==0) {
-//        [(PTTAppDelegate *)[UIApplication sharedApplication].delegate  copyDrugsToMainContext]; 
-//         [(PTTAppDelegate *)[UIApplication sharedApplication].delegate saveContext];
+//    NSInteger appFetchedObjectsCount= appFetchedObjects.count;
+//    if (appFetchedObjectsCount==0) {
+//         [(PTTAppDelegate *)[UIApplication sharedApplication].delegate  setUpDrugStore]; 
+//        [(PTTAppDelegate *)[UIApplication sharedApplication].delegate saveDrugsContext];
+//        
 //    }
-//         
-    }
+//   
+//   
+//    
+////    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+////
+//    
+////    NSEntityDescription *appEntityDescMain=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:managedObjectContext];
+////    
+////    
+////    NSFetchRequest *appFetchRequestMain = [[NSFetchRequest alloc] init];
+////    
+////    [appFetchRequestMain setEntity:appEntityDescMain];
+////    NSError *appMainError = nil;
+////    NSArray *appFetchedObjectsMain = [managedObjectContext executeFetchRequest:appFetchRequestMain error:&appMainError];
+////    
+////    NSInteger appFetchedObjectsCountMain= appFetchedObjectsMain.count;
+////    if (appFetchedObjectsCountMain==0) {
+////        [(PTTAppDelegate *)[UIApplication sharedApplication].delegate  copyDrugsToMainContext]; 
+////         [(PTTAppDelegate *)[UIApplication sharedApplication].delegate saveContext];
+////    }
+////         
+//    }
   
-    BOOL takeOutQuotes=FALSE;
-   
-    if (takeOutQuotes) {
-   
-//        if (appFetchedObjectsCount>0) {
-            
-            NSEntityDescription *productEntityDescMain=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:drugsManagedObjectContext];
-            
-            
-            NSFetchRequest *productFetchRequestMain = [[NSFetchRequest alloc] init];
-            
-            [productFetchRequestMain setEntity:productEntityDescMain];
-            NSError *productMainError = nil;
-            NSArray *productFetchedObjectsMain = [drugsManagedObjectContext executeFetchRequest:productFetchRequestMain error:&productMainError];
-            
-            NSInteger productCountMain= productFetchedObjectsMain.count;
-            
-            
-            for (int p=0;p<productCountMain; p++){
-                
-                DrugProductEntity *productMain=[productFetchedObjectsMain objectAtIndex:p];
-                
-                
-                
-                //                
-                productMain.drugName=[productMain.drugName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-                
-                 productMain.dosage= [productMain.dosage stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-                
-            }
-            
-            
-            NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:drugsManagedObjectContext];
-            
-            
-            NSFetchRequest *productFetchRequest = [[NSFetchRequest alloc] init];
-            
-            [productFetchRequest setEntity:productEntityDesc];
-            NSError *productError = nil;
-            NSArray *productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:productFetchRequest error:&productError];
-            
-            NSInteger productCount= productFetchedObjects.count;
-            
-            
-            for (int p=0;p<productCount; p++){
-                
-                DrugProductEntity *product=[productFetchedObjects objectAtIndex:p];
-                
-                
-                
-                //                
-                product.drugName=[product.drugName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-                
-                product.dosage= [product.dosage stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-                
-            }
-            
-            
-//        }  
-       
-    }   
+//    BOOL takeOutQuotes=FALSE;
+//   
+//    if (takeOutQuotes) {
+//   
+////        if (appFetchedObjectsCount>0) {
+//            
+//            NSEntityDescription *productEntityDescMain=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:drugsManagedObjectContext];
+//            
+//            
+//            NSFetchRequest *productFetchRequestMain = [[NSFetchRequest alloc] init];
+//            
+//            [productFetchRequestMain setEntity:productEntityDescMain];
+//            NSError *productMainError = nil;
+//            NSArray *productFetchedObjectsMain = [drugsManagedObjectContext executeFetchRequest:productFetchRequestMain error:&productMainError];
+//            
+//            NSInteger productCountMain= productFetchedObjectsMain.count;
+//            
+//            
+//            for (int p=0;p<productCountMain; p++){
+//                
+//                DrugProductEntity *productMain=[productFetchedObjectsMain objectAtIndex:p];
+//                
+//                
+//                
+//                //                
+//                productMain.drugName=[productMain.drugName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+//                
+//                 productMain.dosage= [productMain.dosage stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+//                
+//            }
+//            
+//            
+//            NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:drugsManagedObjectContext];
+//            
+//            
+//            NSFetchRequest *productFetchRequest = [[NSFetchRequest alloc] init];
+//            
+//            [productFetchRequest setEntity:productEntityDesc];
+//            NSError *productError = nil;
+//            NSArray *productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:productFetchRequest error:&productError];
+//            
+//            NSInteger productCount= productFetchedObjects.count;
+//            
+//            
+//            for (int p=0;p<productCount; p++){
+//                
+//                DrugProductEntity *product=[productFetchedObjects objectAtIndex:p];
+//                
+//                
+//                
+//                //                
+//                product.drugName=[product.drugName stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+//                
+//                product.dosage= [product.dosage stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+//                
+//            }
+//        
+//            
+////        }  
+//       
+//    }   
   
    
         
@@ -230,7 +230,7 @@
 //    
 //    productTECodePropertyDef.title=@"Therapeutic Equivalents"; 
     
-    
+
     
     
     return self;

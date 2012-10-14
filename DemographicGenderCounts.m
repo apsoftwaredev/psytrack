@@ -76,7 +76,8 @@
 
         }
         
-        
+        fetchRequest=nil;
+        demographicProfileFetchRequest=nil;
     }
     
     return self;

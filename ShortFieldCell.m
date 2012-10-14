@@ -87,7 +87,21 @@
 	[super commitChanges];
     if (useTitlePicker) {
    
-    NSString *prefix = [self titleForRow:[prefixPickerView_ selectedRowInComponent:0]];
+        NSString *pickerPrefix= [self titleForRow:[prefixPickerView_ selectedRowInComponent:0]];
+        NSString *textFieldStr= self.textField.text;
+        
+        
+        NSString *prefix = nil;
+        
+        
+        if ([pickerPrefix isEqualToString:textFieldStr]) {
+            prefix=pickerPrefix;
+        }
+        else{
+            prefix=textFieldStr;
+        
+        }
+        
     [self.boundObject setValue:prefix forKey:@"prefix"];
    
     } 
@@ -163,7 +177,7 @@
         case 34: title = @"Gen.";   break;
         case 35: title = @"Adm.";        break;
 
-
+    default:  title = @"";        break;
             
             
     }
@@ -179,6 +193,7 @@
         if([title isEqualToString:[self titleForRow:i]])
         {
             row = i;
+            
             break;
         }
     }

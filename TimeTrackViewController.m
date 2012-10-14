@@ -1756,8 +1756,15 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         if (tableModel.sectionCount >0){
             
             for (int i=0; i<tableModel.sectionCount; i++) {
-                SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:i];
-                cellCount=cellCount+section.cellCount;
+                SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:i];
+                if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
+                    SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
+                    cellCount=arrayOfObjectsSection.items.count;
+                    
+                }
+                else{
+                    cellCount=cellCount+section.cellCount;
+                }
                 
             }
             

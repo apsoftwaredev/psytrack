@@ -487,7 +487,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         NSMutableArray *subTypeWithTotalsItemsArray=[NSMutableArray array];
         
         
-        
+        firstDescriptor=nil;
         for (InterventionTypeSubtypeEntity *interventionSubTypeObject in orderdSubTypeArray ) {
             TrackTypeWithTotalTimes *trackTypeWithTotalTimeObject=[[TrackTypeWithTotalTimes alloc]initWithDoctorateLevel:totalsObject.doctorateLevel clinician:clinician trackTypeObject:interventionSubTypeObject];
             

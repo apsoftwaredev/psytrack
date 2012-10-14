@@ -150,7 +150,7 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     else
         return [NSArray array];
     
-    
+    fetchRequest=nil;
 }
 
 
@@ -187,7 +187,7 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     passcodeData=nil;
     passcodeToSave=nil;
     wrapper=nil;
-    
+    wrapper=nil;
     return success;
 
 
@@ -425,7 +425,7 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
 
     }
 
-    
+    wrapper=nil;
     return success;
 
 }
@@ -477,7 +477,7 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
         }
     
     }
-    
+    wrapper=nil;
     
     return success;
     
@@ -513,7 +513,7 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
         success= [wrapper updateKeychainValueWithData:[appDelegate convertStringToData: hintString] forIdentifier:K_PASSOWRD_HINT];
     }
     
-   
+    wrapper=nil;
     
     return success;
 
@@ -545,7 +545,7 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
 
     wrapper=nil;
     lockScreenLockedData=nil;
-    
+    wrapper=nil;
     return success;
     
     
@@ -579,7 +579,7 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     }
    
    
-                       
+    wrapper=nil;
     
     return success;
     
@@ -703,6 +703,7 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     PTTEncryption *encryption=(PTTEncryption *)appDelegate.encryption;
     NSString *defaultPasscode=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     NSData *defaultPasscodeData=[encryption getHashBytes:[appDelegate convertStringToData:defaultPasscode]];
+    
     if(!defaultPasscodeData)
         return [NSData data];
     else {
@@ -770,7 +771,7 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
         } 
         return returnString;
     }
-    
+
     
 }
 
@@ -861,8 +862,11 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     
 
     NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE_IS_ON];
+    BOOL passcodeOn=(BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];
     
-    return (BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];
+    wrapper=nil;
+    lockedData=nil;
+    return passcodeOn;
     
 }
 - (BOOL) isLockedAtStartup
@@ -872,8 +876,11 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     
 
     NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_LOCK_AT_STARTUP];
+    BOOL lockedOn=(BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];
+    lockedData=nil;
+    wrapper=nil;
     
-    return (BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];
+    return lockedOn;
 }
 
 
@@ -885,8 +892,10 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     
 
     NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_LOCKED];
-    
-    return (BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];	
+    BOOL appLocked=(BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];
+    wrapper=nil;
+    lockedData=nil;
+    return appLocked;
     
 }
 -(BOOL)isLockedTimerOn{
@@ -896,8 +905,11 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     
 
     NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_TIMER_ON];
+    BOOL timerOn=(BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];
     
-    return (BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];	
+    wrapper=nil;
+    lockedData=nil;
+    return timerOn;
     
 }
 
@@ -922,6 +934,8 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     else {
         numberOfAttempts=20;
     }
+    wrapper=nil;
+    lockedData=nil;
     return numberOfAttempts;
     
 }
@@ -944,7 +958,7 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
         
         
     } 
-    
+    numberFormatter=nil;
     return valid;
     
 }
@@ -1097,7 +1111,8 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     [self rekeyEncryptedModelSubclasses];
    
     [appDelegate saveContext];
-    
+    wrapper=nil;
+    fetchRequest=nil;
     return YES;
 
 

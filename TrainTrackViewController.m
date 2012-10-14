@@ -301,10 +301,13 @@
             if (![SCUtilities is_iPad]) {
            
                 UINavigationController *navController=nil;
+                
+                
                 for (navController in appDelegate.tabBarController.viewControllers) {
                     if ([navController.title isEqualToString:@"Clinicians"]) {
                         
                         [appDelegate.clinicianViewController setSelectMyInformationOnLoad:YES];
+                        
                         [appDelegate.tabBarController setSelectedViewController:navController];
                         
                         break;

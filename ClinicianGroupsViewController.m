@@ -3094,8 +3094,8 @@ if (allGroupsInSource){
             }
             
 
-                
-                
+        fetchRequest=nil;
+        
 
                 
                 

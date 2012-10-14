@@ -136,9 +136,9 @@
         if (nilCount.disabilityCombinationCount>0) {
             [disabilityMutableArray_ addObject:nilCount];
         }
-
+        fetchRequest=nil;
     }
-    
+
     return self;
     
 }

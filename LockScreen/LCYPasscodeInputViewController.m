@@ -137,7 +137,7 @@ const int PASSCODE_INPUT_HANDLER_PASSCODE_LENGTH = 4;
         int lockDigitPosition = self.passCodeInputField.text.length;
         [self setLockDigit: lockDigitPosition isOn: YES];
     }
-    
+    appSettings=nil;
 }
 
 

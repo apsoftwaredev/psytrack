@@ -1290,7 +1290,7 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
     
     NSError *error = nil;
     NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
+    fetchRequest=nil;
     return fetchedObjects;
 
 
@@ -1322,7 +1322,9 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
     
     NSError *error = nil;
     NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
+    fetchRequest=nil;
+    sortDescriptor=nil;
+    sortDescriptors=nil;
     return fetchedObjects;
     
 }

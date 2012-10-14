@@ -245,6 +245,10 @@
     
     
     self.tableViewModel=objectsModel;
+    actionDateFetchRequest=nil;
+    sortDescriptor=nil;
+    sortDescriptors=nil;
+    
 }
 
 

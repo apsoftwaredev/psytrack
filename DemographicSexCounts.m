@@ -81,7 +81,7 @@
         
 
         
-        
+        fetchRequest=nil;
     }
 
     return self;
