@@ -356,6 +356,8 @@
 		E7A5D7081559EB26000F248F /* DetailViewControllerTheme.ptt in Resources */ = {isa = PBXBuildFile; fileRef = E7A5D7071559EB26000F248F /* DetailViewControllerTheme.ptt */; };
 		E7A92491154853760080B35D /* DrugTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7A92490154853760080B35D /* DrugTestViewController.xib */; };
 		E7A9249315485E6C0080B35D /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E7A9249215485E6C0080B35D /* blueArrow.png */; };
+		E7A9F5CD16399CDE00DCDBEB /* SensibleTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A9F5CC16399CDE00DCDBEB /* SensibleTableView.framework */; };
+		E7A9F5CF16399CF100DCDBEB /* STV+CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A9F5CE16399CF100DCDBEB /* STV+CoreData.framework */; };
 		E7ADFD3C15ACF27D00081392 /* SupervisionTypeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD3B15ACF27D00081392 /* SupervisionTypeEntity.m */; };
 		E7ADFD3F15AD0E8A00081392 /* ExistingInterventionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD3E15AD0E8A00081392 /* ExistingInterventionEntity.m */; };
 		E7ADFD4515AE2ACF00081392 /* ExistingAssessmentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD4415AE2ACF00081392 /* ExistingAssessmentEntity.m */; };
@@ -402,8 +404,6 @@
 		E7CCB8D1159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8D0159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib */; };
 		E7CCB8E6159CE2FA00A12908 /* ileopard-keys_128x128.png in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8E5159CE2FA00A12908 /* ileopard-keys_128x128.png */; };
 		E7CCB8E7159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8E9159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib */; };
-		E7CFC2B4161509B700D130BE /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7CFC29E1615075C00D130BE /* libSensibleTableView.a */; };
-		E7CFC2B5161509BD00D130BE /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7CFC2AC161507D600D130BE /* libSTV+CoreData.a */; };
 		E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */; };
 		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
 		E7DEECDD15F2EEC6001D5B05 /* CommunityServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DEECDB15F2EEC6001D5B05 /* CommunityServiceVC.m */; };
@@ -475,37 +475,6 @@
 		E7FB3AB31562C867000A6782 /* AddViewABLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB21562C867000A6782 /* AddViewABLinkButtonCell.m */; };
 		E7FB3AB61562C888000A6782 /* LookupRemoveLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB51562C888000A6782 /* LookupRemoveLinkButtonCell.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		E74AD6931618B61E00B596FC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E7CFC2A3161507D500D130BE /* STV+CoreData.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
-			remoteInfo = "STV+CoreData";
-		};
-		E7CFC29D1615075C00D130BE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E7CFC2951615075C00D130BE /* SensibleTableView.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DBE7373014F99E580076D2B6;
-			remoteInfo = SensibleTableView;
-		};
-		E7CFC2A01615076800D130BE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E7CFC2951615075C00D130BE /* SensibleTableView.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = DBE7372F14F99E580076D2B6;
-			remoteInfo = SensibleTableView;
-		};
-		E7CFC2AB161507D600D130BE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E7CFC2A3161507D500D130BE /* STV+CoreData.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DBE737C414FC66D40076D2B6;
-			remoteInfo = "STV+CoreData";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		376797F71500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ABGroupNameChangeCell.xib; sourceTree = "<group>"; };
@@ -1028,6 +997,8 @@
 		E7A5D7071559EB26000F248F /* DetailViewControllerTheme.ptt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DetailViewControllerTheme.ptt; sourceTree = "<group>"; };
 		E7A92490154853760080B35D /* DrugTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrugTestViewController.xib; sourceTree = "<group>"; };
 		E7A9249215485E6C0080B35D /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
+		E7A9F5CC16399CDE00DCDBEB /* SensibleTableView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SensibleTableView.framework; path = "../../Downloads/STV 3.1.3 Std/Static Frameworks/SensibleTableView.framework"; sourceTree = "<group>"; };
+		E7A9F5CE16399CF100DCDBEB /* STV+CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "STV+CoreData.framework"; path = "../../Downloads/STV 3.1.3 Std/Static Frameworks/STV+CoreData.framework"; sourceTree = "<group>"; };
 		E7ADFD3A15ACF27D00081392 /* SupervisionTypeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionTypeEntity.h; sourceTree = "<group>"; };
 		E7ADFD3B15ACF27D00081392 /* SupervisionTypeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupervisionTypeEntity.m; sourceTree = "<group>"; };
 		E7ADFD3D15AD0E8A00081392 /* ExistingInterventionEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingInterventionEntity.h; sourceTree = "<group>"; };
@@ -1115,8 +1086,6 @@
 		E7CCB8D0159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogTopCellWithUndefined.xib; sourceTree = "<group>"; };
 		E7CCB8E5159CE2FA00A12908 /* ileopard-keys_128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ileopard-keys_128x128.png"; sourceTree = "<group>"; };
 		E7CCB8E8159CEE3200A12908 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EncryptionTokenCell_iPhone.xib; sourceTree = "<group>"; };
-		E7CFC2951615075C00D130BE /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.1.1 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
-		E7CFC2A3161507D500D130BE /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3.1.1 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursOverviewCell.xib; sourceTree = "<group>"; };
 		E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController_iPad.xib; sourceTree = "<group>"; };
 		E7DEECDA15F2EEC6001D5B05 /* CommunityServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityServiceVC.h; sourceTree = "<group>"; };
@@ -1234,9 +1203,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A9F5CF16399CF100DCDBEB /* STV+CoreData.framework in Frameworks */,
+				E7A9F5CD16399CDE00DCDBEB /* SensibleTableView.framework in Frameworks */,
 				E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */,
-				E7CFC2B5161509BD00D130BE /* libSTV+CoreData.a in Frameworks */,
-				E7CFC2B4161509B700D130BE /* libSensibleTableView.a in Frameworks */,
 				E7F1CBA31598C787006F9E95 /* ImageIO.framework in Frameworks */,
 				E7F1CAF41597CADB006F9E95 /* CoreText.framework in Frameworks */,
 				E798A13C15857E36006B9DBD /* CoreImage.framework in Frameworks */,
@@ -1826,8 +1795,6 @@
 		B771C54314DAF3E4002D430E /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
-				E7CFC2A3161507D500D130BE /* STV+CoreData.xcodeproj */,
-				E7CFC2951615075C00D130BE /* SensibleTableView.xcodeproj */,
 				E7F1CB1E1598C024006F9E95 /* vfr-Reader-db84c9d */,
 				E7577FA7158C1DAE0044D344 /* KeychainItemWrapper.h */,
 				E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */,
@@ -1849,6 +1816,8 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
+				E7A9F5CE16399CF100DCDBEB /* STV+CoreData.framework */,
+				E7A9F5CC16399CDE00DCDBEB /* SensibleTableView.framework */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Third Party */,
 				37F7CE1B1500328E00AD2C3A /* psyTrack */,
@@ -2254,22 +2223,6 @@
 			name = "Courses Taken";
 			sourceTree = "<group>";
 		};
-		E7CFC2961615075C00D130BE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E7CFC29E1615075C00D130BE /* libSensibleTableView.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E7CFC2A4161507D500D130BE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E7CFC2AC161507D600D130BE /* libSTV+CoreData.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		E7DEED0615F6C127001D5B05 /* All Training Hours Report */ = {
 			isa = PBXGroup;
 			children = (
@@ -2470,8 +2423,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				E74AD6941618B61E00B596FC /* PBXTargetDependency */,
-				E7CFC2A11615076800D130BE /* PBXTargetDependency */,
 			);
 			name = PsyTrack;
 			productName = psyTrainTrack;
@@ -2498,39 +2449,12 @@
 			mainGroup = B79F488D142BEF0C0085D47B;
 			productRefGroup = B79F4899142BEF0D0085D47B /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = E7CFC2961615075C00D130BE /* Products */;
-					ProjectRef = E7CFC2951615075C00D130BE /* SensibleTableView.xcodeproj */;
-				},
-				{
-					ProductGroup = E7CFC2A4161507D500D130BE /* Products */;
-					ProjectRef = E7CFC2A3161507D500D130BE /* STV+CoreData.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				B79F4897142BEF0D0085D47B /* PsyTrack */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		E7CFC29E1615075C00D130BE /* libSensibleTableView.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSensibleTableView.a;
-			remoteRef = E7CFC29D1615075C00D130BE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E7CFC2AC161507D600D130BE /* libSTV+CoreData.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libSTV+CoreData.a";
-			remoteRef = E7CFC2AB161507D600D130BE /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B79F4896142BEF0D0085D47B /* Resources */ = {
@@ -2999,19 +2923,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E74AD6941618B61E00B596FC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "STV+CoreData";
-			targetProxy = E74AD6931618B61E00B596FC /* PBXContainerItemProxy */;
-		};
-		E7CFC2A11615076800D130BE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SensibleTableView;
-			targetProxy = E7CFC2A01615076800D130BE /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		376797F61500665D00D0639D /* ABGroupNameChangeCell.xib */ = {
@@ -3494,6 +3405,7 @@
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/../../Downloads/STV 3.1.0 Pro/Static Frameworks\"",
 					"\"$(SRCROOT)/../../Downloads/STV 3.1.1 Pro/Static Frameworks\"",
+					"\"$(SRCROOT)/../../Downloads/STV 3.1.3 Std/Static Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";
@@ -3531,6 +3443,7 @@
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/../../Downloads/STV 3.1.0 Pro/Static Frameworks\"",
 					"\"$(SRCROOT)/../../Downloads/STV 3.1.1 Pro/Static Frameworks\"",
+					"\"$(SRCROOT)/../../Downloads/STV 3.1.3 Std/Static Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";

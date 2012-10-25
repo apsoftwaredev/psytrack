@@ -139,9 +139,22 @@ bytesReceived=bytesReceived_;
 	operationFinished = YES;
 	//NSLog(@"Connection did finish loading...%@",localFilename);
    
-    
+    DownloadConnection=nil;
+    DownloadRequest=nil;
     
 	//[connection release];
 }
+-(void)dealloc{
 
+    DownloadRequest=nil;
+	DownloadConnection=nil;
+	receivedData=nil;
+	localFilename=nil;
+	downloadUrl=nil;
+	
+	
+	fileUrlPath=nil;
+	possibleFilename=nil;
+
+}
 @end

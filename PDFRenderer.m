@@ -63,6 +63,7 @@
     
     NSString *documentTitle=[NSString stringWithFormat:@"%@Monthly Clinical Practicum Log for %@", markAmended?@"Amended ":@"",[dateFormatter stringFromDate:monthToDisplay]];
     [self createPDFfromUIView:monthlyPracticumLogTVC.view saveToDocumentsWithFileName:fileName  viewController:(MonthlyPracticumLogTableViewController*)monthlyPracticumLogTVC password:filePassword  documentTitle:(NSString *)documentTitle];
+    [monthlyPracticumLogTVC viewDidUnload];
     monthlyPracticumLogTVC.view=nil;
     monthlyPracticumLogTVC=nil;
     dateFormatter=nil;
@@ -107,6 +108,7 @@
     
                              
     [self createAllHoursReportPDFfromUIView:allTrainingHoursVC.view saveToDocumentsWithFileName:fileName viewController:(AllTrainingHoursVC*)allTrainingHoursVC password:filePassword  documentTitle:(NSString *)documentTitle];
+    [allTrainingHoursVC viewDidUnload];
     allTrainingHoursVC.view=nil;
     allTrainingHoursVC=nil;
     // Close the PDF context and write the contents out.
@@ -141,6 +143,7 @@
     
     
     [self createDemographicReportPDFfromUIView:(UIView*)demographicReportVC.view  saveToDocumentsWithFileName:(NSString*)fileName viewController:(DemographicReportViewController*)demographicReportVC  password:(NSString *)filePassword documentTitle:(NSString *)documentTitle];
+    [demographicReportVC viewDidUnload];
     demographicReportVC.view=nil;
     demographicReportVC=nil;
     

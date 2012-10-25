@@ -219,7 +219,7 @@ existingSupervisionArray=existingSupervisionArray_;
     [startDateComponents setDay:rangeWeek.location]; //reset the other components
     
     NSDate *startDate = [calendar dateFromComponents:startDateComponents]; 
-    
+    week2StartDateComponents=nil;
     return startDate;
     
     
@@ -280,7 +280,7 @@ existingSupervisionArray=existingSupervisionArray_;
     }
    
    
-    
+    week2StartDateComponents=nil;
     
     return endDate;
     
@@ -728,7 +728,7 @@ existingSupervisionArray=existingSupervisionArray_;
     
     NSError *error = nil;
     NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
+    fetchRequest=nil;
     return fetchedObjects;
     
 }

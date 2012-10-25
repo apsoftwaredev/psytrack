@@ -150,7 +150,7 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     else
         return [NSArray array];
     
-    fetchRequest=nil;
+//    fetchRequest=nil;
 }
 
 
@@ -170,6 +170,10 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     
     
     PTTEncryption *encryption=(PTTEncryption *)[appDelegate encryption];
+    if (!encryption) {
+        appDelegate.encryption=[[PTTEncryption alloc]init];
+        encryption=appDelegate.encryption;
+    }
     if (!passcodeData) {
         
         [wrapper newSearchDictionary:K_LOCK_SCREEN_PASSCODE];
@@ -183,11 +187,11 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     }
 
 
-    passcodeString=nil;
-    passcodeData=nil;
-    passcodeToSave=nil;
-    wrapper=nil;
-    wrapper=nil;
+//    passcodeString=nil;
+//    passcodeData=nil;
+//    passcodeToSave=nil;
+//    wrapper=nil;
+//    wrapper=nil;
     return success;
 
 
@@ -221,9 +225,9 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     }
     
     
-    passcodeData=nil;
-    passcodeDataToSave=nil;
-    wrapper=nil;
+//    passcodeData=nil;
+//    passcodeDataToSave=nil;
+//    wrapper=nil;
     
     return success;
     
@@ -297,10 +301,10 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     
    
     
-    tokenData=nil;
-    
-    tokenString=nil;
-     wrapper=nil;
+//    tokenData=nil;
+//    
+//    tokenString=nil;
+//     wrapper=nil;
     
     return success;
     
@@ -322,6 +326,11 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     
     
     PTTEncryption *encryption=(PTTEncryption *)[appDelegate encryption];
+    if (!encryption) {
+        appDelegate.encryption=[[PTTEncryption alloc]init];
+        encryption=appDelegate.encryption;
+    }
+    
     if (!oldPasswordData) {
         
         [wrapper newSearchDictionary:K_PASSWORD_OLD];
@@ -414,7 +423,8 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
         passwordKeychainItemExists=YES;
     }
     
-    if (passwordKeychainItemExists &&oldPasscodeKeychainItemExists) {
+    PTTEncryption *encryption=[[PTTEncryption alloc]init];
+        if (passwordKeychainItemExists &&oldPasscodeKeychainItemExists) {
    
         oldPasswordData =[wrapper searchKeychainCopyMatching:K_PASSWORD_OLD];
         
@@ -422,9 +432,17 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
             
             success= [wrapper updateKeychainValueWithData:passwordData forIdentifier:K_PASSWORD_OLD];
         }
+        else
+        {
+           
+            success= [wrapper createKeychainValueWithData:[encryption getHashBytes:passwordData] forIdentifier:K_PASSWORD_OLD];
+            
+           
+        
+        }
 
     }
-
+    encryption=nil;
     wrapper=nil;
     return success;
 
@@ -477,7 +495,7 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
         }
     
     }
-    wrapper=nil;
+//    wrapper=nil;
     
     return success;
     
@@ -513,7 +531,7 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
         success= [wrapper updateKeychainValueWithData:[appDelegate convertStringToData: hintString] forIdentifier:K_PASSOWRD_HINT];
     }
     
-    wrapper=nil;
+//    wrapper=nil;
     
     return success;
 
@@ -543,9 +561,8 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
         
     } 
 
-    wrapper=nil;
-    lockScreenLockedData=nil;
-    wrapper=nil;
+//    wrapper=nil;
+//    lockScreenLockedData=nil;
     return success;
     
     
@@ -579,7 +596,7 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     }
    
    
-    wrapper=nil;
+//    wrapper=nil;
     
     return success;
     
@@ -608,8 +625,8 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     }
     
     
-    lockScreenAttemptData=nil;
-    wrapper=nil;
+//    lockScreenAttemptData=nil;
+//    wrapper=nil;
     
     return success;
     
@@ -639,8 +656,8 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     }
     
     
-    lockScreenStartupData=nil;
-    wrapper=nil;
+//    lockScreenStartupData=nil;
+//    wrapper=nil;
     
     return success;
     
@@ -669,8 +686,8 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
         success=  [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",timerOn] forIdentifier:K_LOCK_SCREEN_TIMER_ON];
     }
     
-    lockScreenTimerOnData=nil;
-    wrapper=nil;
+//    lockScreenTimerOnData=nil;
+//    wrapper=nil;
     
     return success;
     
@@ -701,6 +718,10 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     
     
     PTTEncryption *encryption=(PTTEncryption *)appDelegate.encryption;
+    if (!encryption) {
+        appDelegate.encryption=[[PTTEncryption alloc]init];
+        encryption=appDelegate.encryption;
+    }
     NSString *defaultPasscode=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     NSData *defaultPasscodeData=[encryption getHashBytes:[appDelegate convertStringToData:defaultPasscode]];
     
@@ -782,6 +803,10 @@ NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest
     
 
     PTTEncryption *encryption=(PTTEncryption *)appDelegate.encryption;
+    if (!encryption) {
+        appDelegate.encryption=[[PTTEncryption alloc]init];
+        encryption=appDelegate.encryption;
+    }
 NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     NSData *defaultPasswordData=[encryption getHashBytes:[appDelegate convertStringToData:defaultPassword]];
     if(!defaultPasswordData)
@@ -864,8 +889,8 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE_IS_ON];
     BOOL passcodeOn=(BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];
     
-    wrapper=nil;
-    lockedData=nil;
+//    wrapper=nil;
+//    lockedData=nil;
     return passcodeOn;
     
 }
@@ -877,8 +902,8 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
 
     NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_LOCK_AT_STARTUP];
     BOOL lockedOn=(BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];
-    lockedData=nil;
-    wrapper=nil;
+//    lockedData=nil;
+//    wrapper=nil;
     
     return lockedOn;
 }
@@ -893,8 +918,8 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
 
     NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_LOCKED];
     BOOL appLocked=(BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];
-    wrapper=nil;
-    lockedData=nil;
+//    wrapper=nil;
+//    lockedData=nil;
     return appLocked;
     
 }
@@ -907,8 +932,8 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     NSData *  lockedData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_TIMER_ON];
     BOOL timerOn=(BOOL)[(NSString * )[appDelegate convertDataToString:lockedData]boolValue];
     
-    wrapper=nil;
-    lockedData=nil;
+//    wrapper=nil;
+//    lockedData=nil;
     return timerOn;
     
 }
@@ -934,8 +959,8 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     else {
         numberOfAttempts=20;
     }
-    wrapper=nil;
-    lockedData=nil;
+//    wrapper=nil;
+//    lockedData=nil;
     return numberOfAttempts;
     
 }
@@ -980,6 +1005,7 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
 //    PTTEncryption *encryption=(PTTEncryption *)appDelegate.encryption;
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
     
@@ -996,6 +1022,10 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
         [self updateOldPasswordWithCurrentPassword];
     }
     if (changedPassword &&!changedToken) {
+        [self updateOldTokenWithCurrentToken];
+    }
+    if (changedPassword&&changedToken) {
+         [self updateOldPasswordWithCurrentPassword];
         [self updateOldTokenWithCurrentToken];
     }
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -1038,12 +1068,12 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
             [keyObjectInArray didAccessValueForKey:@"dataF"];
             NSData *symetricData=nil;
             
-            if (symetricDataEncryptedWithOld) {
+            if (symetricDataEncryptedWithOld&&symetricDataEncryptedWithOld.length) {
                  symetricData=[appDelegate encryptDataToEncryptedData:symetricDataEncryptedWithOld];
             }
-            [keyObjectInArray willAccessValueForKey:@"keyString"];
             
-            [keyObjectInArray didAccessValueForKey:@"keyString"];
+                       
+            
                                                   
             
             
@@ -1066,11 +1096,13 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
     
     
     NSData *  currentKeyStringData= [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_CURRENT_KEYSTRING];
+    
+    
     BOOL success=NO;
     NSData *sharedSymetricData=nil;
     NSString *newKeyString=[NSString string];
     NSMutableArray * fetchedObjectsKeyStrings=[fetchedObjects mutableArrayValueForKey:@"keyString"];
-   
+  
     if (!newKeyString.length) {
       
         do {
@@ -1085,6 +1117,7 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
         
     }else  
     {
+        DLog(@"new key string is  %@",newKeyString);
         success=  [wrapper updateKeychainValue:newKeyString forIdentifier:K_LOCK_SCREEN_CURRENT_KEYSTRING];
     }
         
@@ -1092,10 +1125,11 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
    
         KeyEntity *newKeyObject=[[KeyEntity alloc] initWithEntity:keyEntity insertIntoManagedObjectContext:managedObjectContext];
         [newKeyObject willChangeValueForKey:@"keyString"];
-        newKeyObject.keyString=newKeyString ;
+        DLog(@"keystring is equal  %@",newKeyString);
+        newKeyObject.keyString=[NSString stringWithString:newKeyString] ;
         [newKeyObject didChangeValueForKey:@"keyString"];
-        
-        
+        DLog(@"new key object is  %@",newKeyObject.keyString);
+        DLog(@"newkey object keystring is  %@",newKeyObject.keyString);
 //        symetricData=[encryption wrapSymmetricKey:symetricData keyRef:nil useDefaultPublicKey:YES];
         sharedSymetricData=[NSData  dataWithData:(NSData *)[appDelegate getSharedSymetricData]];
        NSData * newSymetricData=[appDelegate encryptDataToEncryptedData:sharedSymetricData];
@@ -1103,16 +1137,16 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
         [newKeyObject willChangeValueForKey:@"dataF"];
         newKeyObject.dataF=[NSData dataWithData:(NSData *) newSymetricData];
         [newKeyObject didChangeValueForKey:@"dataF"];
-        newSymetricData=nil;
+        
             
     }
-    
-    sharedSymetricData=nil;
-    [self rekeyEncryptedModelSubclasses];
+    [appDelegate saveContext];
+//    [managedObjectContext processPendingChanges];
+  
    
     [appDelegate saveContext];
-    wrapper=nil;
-    fetchRequest=nil;
+//    wrapper=nil;
+//    fetchRequest=nil;
     return YES;
 
 

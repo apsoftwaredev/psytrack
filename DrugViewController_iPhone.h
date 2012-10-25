@@ -59,8 +59,8 @@
     NSFetchRequest *productFetchRequest;
     NSPredicate *filterPredicate;
     
-        
-    
+    NSURLRequest *drugFileRequest;
+    NSURLConnection *connectionToDrugFile;
 }
 //@property (nonatomic, strong)  SCArrayOfObjectsModel *tableModel;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;

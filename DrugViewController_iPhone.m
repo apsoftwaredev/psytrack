@@ -543,7 +543,7 @@
    
 
     [objectsModel.modeledTableView reloadData];
-
+        newRequewst=nil;
 
     }
 }
@@ -797,11 +797,11 @@
     NSTimeInterval timeout=10.0;
     NSURL *remoteFileURL=[NSURL URLWithString:@"https://psytrack.com/dFiles/dFile-001.zpk"];
     
-    NSURLRequest *request =  [[NSURLRequest alloc] initWithURL:remoteFileURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeout];
+    drugFileRequest=  [[NSURLRequest alloc] initWithURL:remoteFileURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeout];
 
     
 //    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:remoteFileURL cachePolicy:nsurl timeoutInterval:timeout];
-    NSURLConnection *connectionToDrugFile = [NSURLConnection connectionWithRequest:request delegate:self];
+   connectionToDrugFile = [NSURLConnection connectionWithRequest:drugFileRequest delegate:self];
 
     [connectionToDrugFile start];
 
@@ -875,7 +875,8 @@
     }
     [checkingTimer_ invalidate];
     [connection cancel];
-    connection=nil;
+    connectionToDrugFile=nil;
+    drugFileRequest=nil;
     
     
 }
@@ -889,7 +890,8 @@
     [UIView setAnimationDuration:20.0];
     self.downloadLabel.alpha=(CGFloat)0;
     [UIView commitAnimations];
-
+    connectionToDrugFile=nil;
+    drugFileRequest=nil;
     
     
 }
@@ -992,9 +994,15 @@
         
         
 //        NSURL *drugsDirectory=(NSURL*)[appDelegate applicationDrugsDirectory];
-            self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://psycheweb.com/psytrack/dFiles/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
-                                         timeout:15 
-                                        delegate:self];
+//            self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://psycheweb.com/psytrack/dFiles/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
+//                                         timeout:15 
+//                                        delegate:self];
+        
+        self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
+                                                      timeout:15
+                                                     delegate:self];
+        
+        
         
         [self.view addSubview:self.downloadBar];
         [self.view setNeedsDisplay];
@@ -1160,6 +1168,7 @@ else
     self.downloadBar.hidden=YES;
  
     [UIView commitAnimations];
+    
     self.downloadBar=nil;
     
     encryption=nil;

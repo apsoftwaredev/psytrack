@@ -86,6 +86,11 @@ static NSString * const kTrackSupervisionReceivedEntityName=@"SupervisionReceive
     SCTableViewSection *breakTimeSection;
     InterventionTypeEntity *selectedInterventionType;
     SupervisionTypeEntity *selectedSupervisionType;
+    
+    NSDateFormatter *shortTimeFormatter;
+    NSDateFormatter *additionalTimeFormatter;
+    NSDateFormatter *dateFormatter1;
+    SCArrayOfObjectsModel *objectsModel;
 }
 
 

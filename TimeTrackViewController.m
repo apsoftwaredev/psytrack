@@ -75,6 +75,58 @@
     [super viewDidUnload];
     
     
+ 
+  
+    [objectsModel removeAllSections];
+    objectsModel=nil;
+   
+    counterDateFormatter=nil;
+    referenceDate=nil;
+    totalTimeDate=nil;
+    addStopwatch=nil;
+    serviceDateCell=nil;
+    
+    
+    breakTimeTotalHeaderLabel=nil;
+    
+    
+    eventStore=nil;
+    psyTrackCalendar=nil;
+	eventsList=nil;
+    eventViewController=nil;
+    
+    currentDetailTableViewModel=nil;
+    //    NSString *calendarIdentifier;
+    
+    eventButtonBoundObject=nil;
+    
+    
+    eventTitleString=nil;
+    
+    tableModelClassDefEntity=nil;
+    
+    timer=nil;
+    
+    
+   
+    stopwatchCell=nil;
+    timeSection=nil;
+    footerLabel=nil;
+    totalTimeHeaderLabel=nil;
+    
+    
+    startTime=nil;
+    endTime=nil;
+    additionalTime=nil;
+    timeToSubtract=nil;
+    
+    breakTimeSection=nil;
+    selectedInterventionType=nil;
+    selectedSupervisionType=nil;
+    
+    
+    
+    
     self.view=nil;
 
    
@@ -108,18 +160,15 @@
     
     
     counterDateFormatter=nil;
-    referenceDate=nil;
-    totalTimeDate=nil;
-    addStopwatch=nil;
-    serviceDateCell=nil;
+        
     
+   
     
-    breakTimeTotalHeaderLabel=nil;
-    
-    
-    
+    dateFormatter1=nil;
+    shortTimeFormatter=nil;
+additionalTimeFormatter=nil;
     currentDetailTableViewModel=nil;
-    
+    self.tableViewModel=nil;
     
     eventButtonBoundObject=nil;
     
@@ -160,8 +209,8 @@
     
     
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-	[dateFormatter setDateFormat:@"EEE, M/d/yyyy"];
+    dateFormatter1 = [[NSDateFormatter alloc] init];
+	[dateFormatter1 setDateFormat:@"EEE, M/d/yyyy"];
     
     
     
@@ -175,10 +224,10 @@
     
     
     //set up the date time formatters
-    NSDateFormatter *shortTimeFormatter = [[NSDateFormatter alloc] init];
+    shortTimeFormatter = [[NSDateFormatter alloc] init];
 	[shortTimeFormatter setTimeStyle:NSDateFormatterShortStyle];
     
-    NSDateFormatter *additionalTimeFormatter = [[NSDateFormatter alloc] init];
+    additionalTimeFormatter = [[NSDateFormatter alloc] init];
 	[additionalTimeFormatter setDateFormat:@"H:mm"];
     [additionalTimeFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     //Create a class definition for the TimeEntity
@@ -595,7 +644,7 @@
     [timeTrackEntityDef removePropertyDefinitionAtIndex:eventIdentifierPropertyIndex];
     
     SCPropertyDefinition *dateOfServicePropertyDef = [timeTrackEntityDef propertyDefinitionWithName:@"dateOfService"];
-	dateOfServicePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+	dateOfServicePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter1 
                                                                          datePickerMode:UIDatePickerModeDate 
                                                           displayDatePickerInDetailView:YES];
     
@@ -729,13 +778,13 @@
     [trainingProgramDef insertPropertyDefinition:instructorDataProperty atIndex:1];
     
     SCPropertyDefinition *trainingProgramStartDatePropertyDef = [trainingProgramDef propertyDefinitionWithName:@"startDate"];
-	trainingProgramStartDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+	trainingProgramStartDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter1 
                                                                          datePickerMode:UIDatePickerModeDate 
                                                           displayDatePickerInDetailView:NO];
     
     
     SCPropertyDefinition *trainingProgramEndDatePropertyDef = [trainingProgramDef propertyDefinitionWithName:@"endDate"];
-	trainingProgramEndDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+	trainingProgramEndDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter1 
                                                                                     datePickerMode:UIDatePickerModeDate 
                                                                      displayDatePickerInDetailView:NO];
     
@@ -1045,7 +1094,7 @@
   
     //     tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
     //										withEntityClassDefinition:timeTrackEntity usingPredicate:paperworkIncompletePredicate];
-    SCArrayOfObjectsModel *objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:timeTrackEntityDef filterPredicate:modelPredicate];
+    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:timeTrackEntityDef filterPredicate:modelPredicate];
     
     //    self.tableViewModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView 
     //										entityDefinition:timeTrackEntity];
@@ -1098,12 +1147,12 @@
     SCPropertyDefinition *siteNotesPropertyDef=[siteDef propertyDefinitionWithName:@"notes"];
     siteNotesPropertyDef.type=SCPropertyTypeTextView;
     SCPropertyDefinition *siteStartedPropertyDef = [siteDef propertyDefinitionWithName:@"started"];
-	siteStartedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+	siteStartedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter1 
                                                                          datePickerMode:UIDatePickerModeDate 
                                                           displayDatePickerInDetailView:YES];
     
     SCPropertyDefinition *siteEndedPropertyDef = [siteDef propertyDefinitionWithName:@"ended"];
-	siteEndedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
+	siteEndedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter1 
                                                                        datePickerMode:UIDatePickerModeDate 
                                                         displayDatePickerInDetailView:YES];
     
@@ -1375,13 +1424,13 @@
     trackRateNotesPropertyDef.type=SCPropertyTypeTextView;
     
     SCPropertyDefinition *rateDateStartedPropertyDef = [trackRateDef propertyDefinitionWithName:@"dateStarted"];
-	rateDateStartedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+	rateDateStartedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter1
                                                                            datePickerMode:UIDatePickerModeDate
                                                             displayDatePickerInDetailView:NO];
     
     
     SCPropertyDefinition *rateDateEndedPropertyDef = [trackRateDef propertyDefinitionWithName:@"dateEnded"];
-	rateDateEndedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
+	rateDateEndedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter1
                                                                          datePickerMode:UIDatePickerModeDate
                                                           displayDatePickerInDetailView:NO];
     
@@ -1612,7 +1661,8 @@ NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dateOfService > %@ A
 
 NSError *error = nil;
 NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-
+        fetchRequest=nil;
+        dateFormatterForSearch=nil;
     return fetchedObjects;
     }
     else{
@@ -1635,8 +1685,6 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
     {
-        SCArrayOfObjectsModel *objectsModel = (SCArrayOfObjectsModel *)tableViewModel;
-        
        
         
         
@@ -2259,7 +2307,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     if (tableModel.tag==0) {
         [self.searchBar setSelectedScopeButtonIndex:1];
-        SCArrayOfObjectsModel *objectsModel=(SCArrayOfObjectsModel *)tableModel;
+       
        [objectsModel.dataFetchOptions setFilterPredicate:nil];
         
     }
@@ -2833,8 +2881,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             }
             
         }
-        
-        
+        timeFormatter=nil;
+        dateFormatter=nil;
         
     }
     
@@ -2909,6 +2957,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                [currencyFormatter setLocale:locale];
                objectSelectionCell.label.text=[rateSelected.rateName stringByAppendingFormat:@" %@",[currencyFormatter stringFromNumber:rateSelected.hourlyRate]];
                
+               currencyFormatter=nil;
            }
            
        
@@ -3029,7 +3078,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 cell.textLabel.text=[rateSelected.rateName stringByAppendingFormat:@" %@",[currencyFormatter stringFromNumber:rateSelected.hourlyRate]];
                 
                 
-                
+                currencyFormatter=nil;
                 
             }
             
@@ -3439,7 +3488,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 
                 
                 
-            }     
+            }
+                trainingProgramFetchRequest=nil;
             }
         }
         if ([cellManagedObject.entity.name isEqualToString:@"SiteEntity"]) {
@@ -3470,7 +3520,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     
                     
                     
-                }     
+                }
+                siteFetchRequest=nil;
             }
         }
 
@@ -3741,7 +3792,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                             break;
                     }
 
-                    
+                    dateFormatterCombined=nil;
+                    dateFormatterDate=nil;
+                    dateFormatterTime=nil;
                                                          
                 }
                                
@@ -4080,7 +4133,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         startTime=[dateFormatClearSeconds dateFromString:[dateFormatter stringFromDate:startTime]];
         endTime=[dateFormatClearSeconds dateFromString:[dateFormatter stringFromDate:endTime]];
         
-      
+        dateFormatter=nil;
+        dateFormatClearSeconds=nil;
     }
     
     
@@ -4374,6 +4428,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     
                     NSTimeInterval startAndEndTimeInterval=[breakEndTime timeIntervalSinceDate:breakStartTime]+[breakUndefinedTime timeIntervalSinceDate:referenceDate];
                     totalBreakTimeInterval=totalBreakTimeInterval+startAndEndTimeInterval;
+                dateFormatter=nil;
+                dateFormatClearSeconds=nil;
             }
         }
     
@@ -4501,7 +4557,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         breakStartTime=[dateFormatClearSeconds dateFromString:[dateFormatter stringFromDate:breakStartTime]];
         breakEndTime=[dateFormatClearSeconds dateFromString:[dateFormatter stringFromDate:breakEndTime]];
-        
+        dateFormatClearSeconds=nil;
+        dateFormatter=nil;
     }
     NSTimeInterval startAndEndTimeInterval=0.0;
     

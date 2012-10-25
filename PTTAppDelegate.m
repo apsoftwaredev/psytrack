@@ -700,7 +700,7 @@
         //do nothing
     }
 
-    if (encryption_) {
+    if (!encryption_) {
          self.encryption=[[PTTEncryption alloc]init];
     }
    
@@ -1010,7 +1010,7 @@
     
     NSData * symetricData=[encryption_ getHashBytes:passwordData];
     
-    free(aBuffer);
+//    free(aBuffer);
     
     
     return symetricData;
@@ -1049,8 +1049,8 @@
     
     
     NSData * symetricData=[encryption_ getHashBytes:passwordData];
-    
-    free(aBuffer);
+    DLog(@"symetric data is  %@",symetricData);
+//    free(aBuffer);
     
     
     return symetricData;
@@ -1199,7 +1199,7 @@
     //
    
     NSData *pascodeOnData = [wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_PASSCODE_IS_ON];
-    if (!pascodeOnData) {
+    if (!pascodeOnData&&!reset) {
         
         [wrapper newSearchDictionary:K_LOCK_SCREEN_PASSCODE_IS_ON];
         [wrapper createKeychainValue:[NSString stringWithFormat:@"%i", NO] forIdentifier:K_LOCK_SCREEN_PASSCODE_IS_ON];
@@ -1311,7 +1311,7 @@
                  [wrapper updateKeychainValue:[NSString stringWithFormat:@"%i",NO] forIdentifier:K_LOCK_SCREEN_LOCKED];
         
     } 
-    wrapper=nil;
+//    wrapper=nil;
     return statusMessage;
 }
 
@@ -1469,17 +1469,17 @@
         
         myClinicianInfoObject.firstName=@"Enter Your";
         myClinicianInfoObject.lastName=@"Name Here";
-        myClinicianInfoObject.bio=@"If a duplicate my information record was created on another device, the next time the program is opened the duplicate record with \"Enter Your\" in the first name field will be deleted.";
+        
     }
     else if (myInfoFetchedObjects.count>1){
-        
-        for (int i=0;i<myInfoFetchedObjects.count; i++) {
+        int myInfoFetchedObjectsCount=myInfoFetchedObjects.count;
+        for (int i=0;i<myInfoFetchedObjectsCount; i++) {
             ClinicianEntity *myClinicianInfoObject=[myInfoFetchedObjects objectAtIndex:i];
             [myClinicianInfoObject willAccessValueForKey:@"firstName"];
             if ([myClinicianInfoObject.firstName isEqualToString:@"Enter Your"]) {
-                if (myInfoFetchedObjects.count>1) {
+                if (myInfoFetchedObjectsCount>1) {
                      [managedObjectContext__ deleteObject:myClinicianInfoObject];
-                    
+                    myInfoFetchedObjectsCount--;
                 }
                
             }
@@ -1489,7 +1489,7 @@
         }
         
     }
-        myInfoFetchRequest=nil;
+//        myInfoFetchRequest=nil;
     }
 
 
@@ -1695,7 +1695,7 @@
             
         }
     }
-    wrapper=nil;
+//    wrapper=nil;
     return [NSDictionary dictionaryWithDictionary:returnDictionary];
     
     
@@ -1885,7 +1885,7 @@
         //4
         
         
-        fetchRequest=nil;
+//        fetchRequest=nil;
        
         
         KeyEntity *keyObject=nil;
@@ -1970,8 +1970,12 @@
     }
     KeychainItemWrapper *wrapper = [[KeychainItemWrapper alloc] init];
     NSData *sharedSymetricData = [self getSharedSymetricData];
-
+   
      NSData *decryptedData;
+
+    DLog(@"keystring is  %@",keyString);
+    DLog(@"keystring in keychain %@",[self convertDataToString:[wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_CURRENT_KEYSTRING]]);
+       
     if ([keyString isEqualToString:[self convertDataToString:[wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_CURRENT_KEYSTRING]]]) {
     
            
@@ -2039,6 +2043,8 @@
                         
                         
                         [keyObjectInArray willAccessValueForKey:@"keyString"];
+                        DLog(@"keyobject is  %@",keyObject);
+                        DLog(@"keystring is  %@ and %@",keyObjectInArray.keyString, keyString);
                         if ([keyObjectInArray.keyString isEqualToString:keyString]) {
                             
                             keyObject=keyObjectInArray;
@@ -2060,8 +2066,8 @@
                         symetricData =[encryption_ doCipher:keyObject.dataF key:sharedSymetricData context:kCCDecrypt padding:(CCOptions *) kCCOptionPKCS7Padding];
                         
                         
-                        
-                        if (!symetricData) {
+                        DLog(@"symetric data is  %@",symetricData);
+                        if (!symetricData||symetricData.length!=32) {
                             symetricData =[encryption_ doCipher:keyObject.dataF key:[self getOldSharedSymetricData] context:kCCDecrypt padding:(CCOptions *) kCCOptionPKCS7Padding];
                         }
 //                        if (symetricData) {
@@ -2090,7 +2096,7 @@
         
        
     
-    else 
+    else if(!decryptedData)
     {
       
         NSString *alertText=@"Error 790: Unable to decrypt data";
@@ -2101,7 +2107,7 @@
     }
         
     
-    wrapper=nil;
+//    wrapper=nil;
 
     return decryptedData;  
     
@@ -2819,9 +2825,10 @@ duration:(NSTimeInterval)1.0];
                     
             
             
-            abort();
+            [self displayNotification:@"Error occured in saving context"];
+
         } 
-        
+
         else
         {
             

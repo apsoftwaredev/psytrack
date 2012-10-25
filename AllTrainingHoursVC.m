@@ -99,6 +99,27 @@
     
 }
 
+-(void)didReceiveMemoryWarning{
+    
+    [super didReceiveMemoryWarning];
+    [objectsModel removeAllSections];
+    objectsModel=nil;
+   
+    self.studentName=nil;
+    
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+    
+    [objectsModel removeAllSections];
+    objectsModel=nil;
+   
+    self.studentName=nil;
+}
 -(void) scrollToNextSupervisorCell  {
     
     

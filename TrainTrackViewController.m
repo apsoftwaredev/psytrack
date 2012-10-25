@@ -17,30 +17,7 @@
  */
 #import "TrainTrackViewController.h"
 #import "PTTAppDelegate.h"
-#import "TimeTrackViewController.h"
-#import "DrugViewController_iPhone.h"
-#import "ClinicianEntity.h"
-//#import "CustomSCSelectonCellWithLoading.h"
-//#import "CliniciansViewController_Shared.h"
-#import "LCYLockSettingsViewController.h"
-#import "ExistingHoursViewController.h"
-#import "CliniciansRootViewController_iPad.h"
-#import "DTAboutViewController.h"
-#import "NSString+Helpers.h"
-#import "ClinicianGroupsViewController.h"
-#import "ClinicianViewController.h"
-#import "CliniciansDetailViewController_iPad.h"
-#import "ClientGroupsViewController.h"
-#import "PresentationsViewController.h"
-#import "ConsultationsViewController.h"
-#import "CECreditsViewController.h"
-#import "CoursesTakenViewController.h"
-#import "ConferencesAttendedVC.h"
-#import "TeachingExperienceVC.h"
-#import "ExpertTestemonyVC.h"
-#import "MediaAppearanceVC.h"
-#import "CommunityServiceVC.h"
-#import "OtherActivityVC.h"
+
 //#import "UICasualAlert.h"
 //#import <MessageUI/MessageUI.h>
 //
@@ -424,13 +401,17 @@
         {
             //@"Existing Hours"
             if (indexPath.row==0){
-                NSString *existingHoursViewControllerNibName=nil;
-                if ([SCUtilities is_iPad]) {
-                    existingHoursViewControllerNibName=@"ExistingHoursViewController_iPad";
-                }else {
-                    existingHoursViewControllerNibName=@"ExistingHoursViewController";
+              
+                if (!existingHoursViewController) {
+                    NSString *existingHoursViewControllerNibName=nil;
+                    if ([SCUtilities is_iPad]) {
+                        existingHoursViewControllerNibName=@"ExistingHoursViewController_iPad";
+                    }else {
+                        existingHoursViewControllerNibName=@"ExistingHoursViewController";
+                    }
+                     existingHoursViewController = [[ExistingHoursViewController alloc] initWithNibName:existingHoursViewControllerNibName bundle:[NSBundle mainBundle]];
                 }
-                ExistingHoursViewController *existingHoursViewController = [[ExistingHoursViewController alloc] initWithNibName:existingHoursViewControllerNibName bundle:[NSBundle mainBundle]];
+               
                 
                 [self.navigationController pushViewController:existingHoursViewController animated:YES];
                 break;
@@ -446,8 +427,10 @@
             if (indexPath.row==0){
                 
                 
-                
-                ConsultationsViewController *consultationsViewController = [[ConsultationsViewController alloc] initWithNibName:@"ConsultationsViewController" bundle:[NSBundle mainBundle]];
+                if (!consultationsViewController) {
+                    consultationsViewController = [[ConsultationsViewController alloc] initWithNibName:@"ConsultationsViewController" bundle:[NSBundle mainBundle]];
+                    
+                }
                 
                 [self.navigationController pushViewController:consultationsViewController animated:YES];
                 break;
@@ -463,27 +446,33 @@
             if (indexPath.row==0){
             
             
-            
-                CECreditsViewController *ceCreditsViewController = [[CECreditsViewController alloc] initWithNibName:@"CECreditsViewController" bundle:[NSBundle mainBundle]];
-                
+                if (!ceCreditsViewController) {
+                   ceCreditsViewController = [[CECreditsViewController alloc] initWithNibName:@"CECreditsViewController" bundle:[NSBundle mainBundle]];
+                    
+                }
+               
                 [self.navigationController pushViewController:ceCreditsViewController animated:YES];
            
             }
             if (indexPath.row==1){
                 
                 
-                
-                CoursesTakenViewController *coursesTakenViewController = [[CoursesTakenViewController alloc] initWithNibName:@"CoursesTakenViewController" bundle:[NSBundle mainBundle]];
-                
+                if (!coursesTakenViewController) {
+                   coursesTakenViewController = [[CoursesTakenViewController alloc] initWithNibName:@"CoursesTakenViewController" bundle:[NSBundle mainBundle]];
+                    
+                }
+               
                 [self.navigationController pushViewController:coursesTakenViewController animated:YES];
                 
             }
             if (indexPath.row==2){
                 
                 
-                
-                ConferencesAttendedVC *conferencesAttendedViewController = [[ConferencesAttendedVC alloc] initWithNibName:@"ConferencesAttendedVC" bundle:[NSBundle mainBundle]];
-                
+                if (!conferencesAttendedViewController) {
+                   conferencesAttendedViewController = [[ConferencesAttendedVC alloc] initWithNibName:@"ConferencesAttendedVC" bundle:[NSBundle mainBundle]];
+                    
+
+                }
                 [self.navigationController pushViewController:conferencesAttendedViewController animated:YES];
                 
             }
@@ -498,8 +487,10 @@
             if (indexPath.row==0){
                 
                 
-                
-                TeachingExperienceVC *teachingExperienceVC = [[TeachingExperienceVC alloc] initWithNibName:@"TeachingExperienceVC" bundle:[NSBundle mainBundle]];
+                if (!teachingExperienceVC) {
+                    teachingExperienceVC = [[TeachingExperienceVC alloc] initWithNibName:@"TeachingExperienceVC" bundle:[NSBundle mainBundle]];
+                    
+                }
                 
                 [self.navigationController pushViewController:teachingExperienceVC animated:YES];
                 
@@ -507,9 +498,11 @@
             if (indexPath.row==1){
             
                
-                   
-                    PresentationsViewController *presentationsViewController = [[PresentationsViewController alloc] initWithNibName:@"PresentationsViewController" bundle:[NSBundle mainBundle]];
+                if (!presentationsViewController) {
+                   presentationsViewController = [[PresentationsViewController alloc] initWithNibName:@"PresentationsViewController" bundle:[NSBundle mainBundle]];
                     
+                }
+                
                     [self.navigationController pushViewController:presentationsViewController animated:YES];
                     break;
             }  
@@ -517,8 +510,10 @@
             if (indexPath.row==2){
                 
                 
-                
-                ExpertTestemonyVC *expertTestemonyVC = [[ExpertTestemonyVC alloc] initWithNibName:@"ExpertTestemonyVC" bundle:[NSBundle mainBundle]];
+                if (!expertTestemonyVC) {
+                    expertTestemonyVC = [[ExpertTestemonyVC alloc] initWithNibName:@"ExpertTestemonyVC" bundle:[NSBundle mainBundle]];
+                }
+               
                 
                 [self.navigationController pushViewController:expertTestemonyVC animated:YES];
                 break;
@@ -528,7 +523,10 @@
                 
                 
                 
-                MediaAppearanceVC *mediaAppearanceVC = [[MediaAppearanceVC alloc] initWithNibName:@"MediaAppearanceVC" bundle:[NSBundle mainBundle]];
+            
+                if (!mediaAppearanceVC) {
+                    mediaAppearanceVC = [[MediaAppearanceVC alloc] initWithNibName:@"MediaAppearanceVC" bundle:[NSBundle mainBundle]];
+                }
                 
                 [self.navigationController pushViewController:mediaAppearanceVC animated:YES];
                 break;
@@ -538,7 +536,10 @@
                 
                 
                 
-                CommunityServiceVC *communitySerivceVC = [[CommunityServiceVC alloc] initWithNibName:@"CommunityServiceVC" bundle:[NSBundle mainBundle]];
+                
+                if (!communitySerivceVC) {
+                    communitySerivceVC = [[CommunityServiceVC alloc] initWithNibName:@"CommunityServiceVC" bundle:[NSBundle mainBundle]];
+                }
                 
                 [self.navigationController pushViewController:communitySerivceVC animated:YES];
                 break;
@@ -548,8 +549,10 @@
             if (indexPath.row==5){
                 
                 
-                
-                OtherActivityVC *otherActivityVC = [[OtherActivityVC alloc] initWithNibName:@"OtherActivityVC" bundle:[NSBundle mainBundle]];
+                if (!otherActivityVC) {
+                    otherActivityVC = [[OtherActivityVC alloc] initWithNibName:@"OtherActivityVC" bundle:[NSBundle mainBundle]];
+                }
+            
                 
                 [self.navigationController pushViewController:otherActivityVC animated:YES];
                 break;
@@ -565,7 +568,7 @@
         {
             //@"Drug Database"
            
-            DrugViewController_iPhone *drugViewController_iPhone = [[DrugViewController_iPhone alloc] initWithNibName:@"DrugViewController_iPhone" bundle:nil];
+            
 //           
             
 //            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -575,7 +578,9 @@
             
 //            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
             
-
+            if (!drugViewController_iPhone) {
+                drugViewController_iPhone = [[DrugViewController_iPhone alloc] initWithNibName:@"DrugViewController_iPhone" bundle:nil];
+            }
             [self.navigationController pushViewController:drugViewController_iPhone animated:YES];
             
             
@@ -592,8 +597,10 @@
             
             if (indexPath.row==0){
                 
-                
-                ClinicianGroupsViewController *clinicianGroupsViewController = [[ClinicianGroupsViewController alloc] initWithNibName:@"ClinicianGroupsViewController" bundle:[NSBundle mainBundle] ];
+                if (!clinicianGroupsViewController) {
+                    clinicianGroupsViewController = [[ClinicianGroupsViewController alloc] initWithNibName:@"ClinicianGroupsViewController" bundle:[NSBundle mainBundle] ];
+                }
+              
                 
                 [self.navigationController pushViewController:clinicianGroupsViewController animated:YES];
                 
@@ -606,8 +613,10 @@
             
             if (indexPath.row==1){
                 
-                
-                ClientGroupsViewController *clientGroupsViewController = [[ClientGroupsViewController alloc] initWithNibName:@"ClientGroupsViewController" bundle:[NSBundle mainBundle]];
+                if (!clientGroupsViewController) {
+                    clientGroupsViewController = [[ClientGroupsViewController alloc] initWithNibName:@"ClientGroupsViewController" bundle:[NSBundle mainBundle]];
+                }
+              
                 
                 [self.navigationController pushViewController:clientGroupsViewController animated:YES];
                 
@@ -624,8 +633,12 @@
             //@"Lock Screen Settings"
             if (indexPath.row==0){
                 
-                LCYLockSettingsViewController *lockSettingsVC = [[LCYLockSettingsViewController alloc] initWithNibName:@"LCYLockSettingsViewController" bundle:nil];
-                [[self navigationController] pushViewController:lockSettingsVC animated:YES];            
+               
+                
+                if (!lockSettingsVC) {
+                    lockSettingsVC = [[LCYLockSettingsViewController alloc] initWithNibName:@"LCYLockSettingsViewController" bundle:nil];
+                }
+                [[self navigationController] pushViewController:lockSettingsVC animated:YES];
                 break;
                 
             };
@@ -639,7 +652,10 @@
             //@"Support"
             if (indexPath.row==0){
                 DTLayoutDefinition *supportLayout = [DTLayoutDefinition layoutNamed:@"support"];
-                DTAboutViewController *support =[[DTAboutViewController alloc] initWithLayout:supportLayout];
+                if (!support) {
+                    support =[[DTAboutViewController alloc] initWithLayout:supportLayout];
+                }
+               
                 support.title = @"Support";
                 [self.navigationController pushViewController:support animated:YES];
 
@@ -648,8 +664,10 @@
             
             //@"About"
             if (indexPath.row==1){
-            
-                DTAboutViewController *about = [[DTAboutViewController alloc] initWithLayout:nil]; // default is @"about"
+                if (!about) {
+                    about = [[DTAboutViewController alloc] initWithLayout:nil];
+                }
+               
                 about.title	 = @"About";
                 about.delegate = self;
                 [self.navigationController pushViewController:about animated:YES];
@@ -661,6 +679,145 @@
         default:
             break;
     }
+    
+
+
+}
+
+
+-(void)viewDidAppear:(BOOL)animated{
+
+
+    [self setviewControllersToNil];
+
+}
+
+
+
+-(void)setviewControllersToNil{
+  
+    if (timeTrackViewController) {
+        [timeTrackViewController viewDidUnload];
+        timeTrackViewController.view=nil;
+        timeTrackViewController=nil;
+    }
+    
+    if (existingHoursViewController) {
+        [existingHoursViewController viewDidUnload];
+        existingHoursViewController.view=nil;
+        existingHoursViewController=nil;
+
+    }
+    
+    if (consultationsViewController) {
+        [consultationsViewController viewDidUnload];
+        consultationsViewController.view=nil;
+        consultationsViewController =nil;
+        
+    }
+    
+    if (ceCreditsViewController) {
+        [ceCreditsViewController viewDidUnload];
+        ceCreditsViewController.view=nil;
+        ceCreditsViewController =nil;
+        
+    }
+    
+    if (coursesTakenViewController) {
+        [coursesTakenViewController viewDidUnload];
+        coursesTakenViewController.view=nil;
+        coursesTakenViewController =nil;
+        
+    }
+   
+    if (conferencesAttendedViewController) {
+        [conferencesAttendedViewController viewDidUnload];
+        conferencesAttendedViewController.view=nil;
+        conferencesAttendedViewController =nil;
+        
+        
+    }
+    
+    if (teachingExperienceVC) {
+        [teachingExperienceVC viewDidUnload];
+        teachingExperienceVC.view=nil;
+        teachingExperienceVC =nil;
+        
+    }
+   
+    if (presentationsViewController) {
+        [presentationsViewController viewDidUnload];
+        presentationsViewController.view=nil;
+        presentationsViewController =nil;
+        
+        
+    }
+    if (expertTestemonyVC) {
+        [expertTestemonyVC viewDidUnload];
+        expertTestemonyVC.view=nil;
+        expertTestemonyVC =nil;
+        
+    }
+    if (mediaAppearanceVC) {
+        [mediaAppearanceVC viewDidUnload];
+        mediaAppearanceVC.view=nil;
+        mediaAppearanceVC =nil;
+        
+    }
+    if (communitySerivceVC) {
+        [communitySerivceVC viewDidUnload];
+        communitySerivceVC.view=nil;
+        communitySerivceVC=nil ;
+        
+    }
+   
+    if (otherActivityVC) {
+        [otherActivityVC viewDidUnload];
+        otherActivityVC.view=nil;
+        otherActivityVC =nil;
+        
+    }
+    if (drugViewController_iPhone) {
+        [drugViewController_iPhone viewDidUnload];
+        drugViewController_iPhone.view=nil;
+        
+        drugViewController_iPhone=nil;
+        
+    }
+    if (clinicianGroupsViewController) {
+        [clinicianGroupsViewController viewDidUnload];
+        clinicianGroupsViewController.view=nil;
+        clinicianGroupsViewController =nil;
+        
+    }
+    
+    if (clinicianGroupsViewController) {
+        [clientGroupsViewController viewDidUnload];
+        clientGroupsViewController.view=nil;
+        clientGroupsViewController =nil;
+        
+    }
+   
+    if (lockSettingsVC) {
+        [lockSettingsVC viewDidUnload];
+        lockSettingsVC.view=nil;
+        lockSettingsVC =nil;
+        
+    }
+    
+    if (support) {
+        [support viewDidUnload];
+        support.view=nil;
+        support =nil;
+    }
+   
+    if (about) {
+        [about viewDidUnload];
+        about.view=nil;
+        
+        about =nil;
+    }
+     // default is @"about"
     
 
 
@@ -818,7 +975,7 @@ return headerView;
 
 -(void)LoadTimeTrackViewControllerWithSetup:(PTrackControllerSetup )timeTrackSetup{
 
-    TimeTrackViewController *timeTrackViewController = [[TimeTrackViewController alloc] initWithNibName:@"TimeTrackViewController" bundle:nil trackSetup:timeTrackSetup];
+    timeTrackViewController = [[TimeTrackViewController alloc] initWithNibName:@"TimeTrackViewController" bundle:nil trackSetup:timeTrackSetup];
     
     [self.navigationController pushViewController:timeTrackViewController animated:YES];
 

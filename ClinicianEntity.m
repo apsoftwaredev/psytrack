@@ -182,13 +182,15 @@
     if (self.notes) {
         notesStr=  [NSString stringWithString:self.notes];
     }
+    DLog(@"notes str is  %@",notesStr);
+    DLog(@"self notes is  %@",self.notes);
     [self didAccessValueForKey:@"notes"];
     [self willChangeValueForKey:@"keyString"];
     
     [self setNilValueForKey:@"keyString"];
     [self didChangeValueForKey:@"keyString"];
 
-    
+    self.keyString=nil;
     
         if (notesStr && notesStr.length) {
             [self setStringToPrimitiveData:(NSString *)notesStr forKey:@"notes"];
@@ -227,20 +229,22 @@
             }
         }
         
-        
+
         if (encryptedData.length) {
             [self willChangeValueForKey:key];
             [self setPrimitiveValue:encryptedData forKey:key];
             [self didChangeValueForKey:key];
         }
         
-        
+        DLog(@"encrytped data string is  %@",encryptedKeyString);
+        DLog(@"self keystring is  %@",self.keyString);
         [self willAccessValueForKey:@"keyString"];
         if (![encryptedKeyString isEqualToString:self.keyString]) {
             [self didAccessValueForKey:@"keyString"];
             [self willChangeValueForKey:@"keyString"];
             if (encryptedKeyString && encryptedKeyString.length) {
                  [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
+                self.keyString=encryptedKeyString;
             }
            
             [self didChangeValueForKey:@"keyString"];
@@ -278,11 +282,12 @@
         [self willAccessValueForKey:@"keyString"];
         NSString *tmpKeyString=self.keyString;
         [self didAccessValueForKey:@"keyString"];
-        
+        DLog(@"temp key string is  %@",tempStr);
         NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
         
-        tempStr=[appDelegate convertDataToString:strData];
         
+        tempStr=[appDelegate convertDataToString:strData];
+        DLog(@"strdata is  %@",tempStr);
         [self willChangeValueForKey:@"tempNotes"];
         
         self.tempNotes=tempStr;

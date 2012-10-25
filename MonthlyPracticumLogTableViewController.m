@@ -119,6 +119,13 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    
+    [objectsModel removeAllSections];
+    objectsModel=nil;
+    supervisorObject=nil;
+    trainingProgram_=nil;
+    monthToDisplay_=nil;
+    self.studentName=nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

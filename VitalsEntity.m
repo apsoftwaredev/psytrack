@@ -39,6 +39,7 @@
         self.dateTaken = [NSDate date];
         
     }
+    dateFormatter=nil;
 }
 
 

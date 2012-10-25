@@ -404,9 +404,9 @@
         self.monthAndYearsInParentheses=[NSString stringWithFormat:@"%@%@",[monthDateFormatter stringFromDate:self.monthToDisplay],yearsInParentheses?yearsInParentheses:@""];
     }
     
+    monthDateFormatter=nil;
     
-    
-    
+    yearDateFormatter=nil;
     
     
 
@@ -669,14 +669,16 @@
         
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
         [fetchRequest setSortDescriptors:sortDescriptors];
-        
+        sortDescriptor=nil;
+        sortDescriptors=nil;
     }
    
    
     
     NSError *error = nil;
     NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
+    fetchRequest=nil;
+
     return fetchedObjects;
     
 }
