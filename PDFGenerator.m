@@ -135,8 +135,7 @@ NSLog(@"document directory filename is %@",documentDirectoryFilename);
                 
                 textLabelText=cell.textLabel.text;
                 
-                if([textLabelText isEqualToString:@"Test Age: "])
-                    textLabelText=@"Age on Date of Service:";
+                
             }
             
             if ([cell isKindOfClass:[ClientsSelectionCell class]]) {

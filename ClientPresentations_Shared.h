@@ -20,6 +20,14 @@
 #import "InstrumentEntity.h"
 #import "AdditionalVariableNameEntity.h"
 
+typedef enum {
+    kTrackAssessment,
+    kTrackIntervention,
+    kTrackSupport,
+    kTrackSupervisionReceived,
+    kTrackSupervisionGiven
+} PTTimeTrackControllerSetup;
+
 @interface ClientPresentations_Shared : NSObject <SCTableViewModelDelegate,SCTableViewModelDataSource, SCTableViewControllerDelegate>{
 
 
@@ -31,6 +39,7 @@
       AdditionalVariableNameEntity *selectedVariableName;
 }
 
+@property (nonatomic, assign) PTTimeTrackControllerSetup sendingControllerSetup;
 
 @property (strong, nonatomic) IBOutlet SCEntityDefinition *clientPresentationDef;
 //@property (strong, nonatomic) IBOutlet SCArrayOfObjectsModel *tableModel;

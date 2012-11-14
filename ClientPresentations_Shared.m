@@ -24,11 +24,13 @@
 #import "InstrumentScoreNameEntity.h"
 #import "InstrumentScoreEntity.h"
 #import "ClientInstrumentScoresEntity.h"
+#import "SuicidaltiyCell.h"
+
 @implementation ClientPresentations_Shared
 @synthesize clientPresentationDef;
 //@synthesize tableModel;
 @synthesize serviceDatePickerDate;
-
+@synthesize  sendingControllerSetup;
 
 -(id)setupUsingSTV {
 
@@ -1255,7 +1257,7 @@
 
 
 
-    if ((tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Age (30-Day Months)"])||(tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Test Age"]))
+    if ((tableViewModel.tag==3 && indexPath.section==0 && [cell.textLabel.text isEqualToString:@"Age (30-Day Months)"])||(tableViewModel.tag==3 && indexPath.section==0 && ([cell.textLabel.text isEqualToString:@"Test Age"]||[cell.textLabel.text isEqualToString:@"Age on Service Date"])))
     {
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         
@@ -1335,7 +1337,7 @@ if (tableViewModel.tag==5&&tableViewModel.sectionCount>1&&indexPath.section==1){
         
        
       
-            SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" boundObject:nil labelTextPropertyName:@"TestAge"]
+            SCLabelCell *actualAge=[SCLabelCell cellWithText:(self.sendingControllerSetup!=kTrackAssessment)?@"Age on Service Date":@"SD Test Age" boundObject:nil labelTextPropertyName:@"TestAge"]
         ;
        
             SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Age (30-day Months)" boundObject:nil labelTextPropertyName:@"WechslerTestAge"];
@@ -1761,7 +1763,41 @@ if(section.headerTitle !=nil)
             
 //        }
         
-        
+      if (indexPath.section==0&&cell.tag==0&&tableViewModel.sectionCount>1) {
+      
+          SCTableViewSection *sectionAtTwo=(SCTableViewSection *)[tableViewModel sectionAtIndex:2];
+          if (sectionAtTwo.cellCount>10)
+          {
+              SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[sectionZero cellAtIndex:0];
+              
+              if ([cellZeroSectionZero isKindOfClass:[ClientsSelectionCell class]]) {
+                  ClientsSelectionCell *clientsSelectionCell =(ClientsSelectionCell *)cellZeroSectionZero;
+                
+                  ClientEntity *clientSelected=(ClientEntity *)clientsSelectionCell.clientObject;
+                  
+                  SCTableViewCell *cellAtTen=(SCTableViewCell *)[sectionAtTwo cellAtIndex:10];
+                  
+                  if ([cellAtTen isKindOfClass:[SuicidaltiyCell class]]) {
+                      SuicidaltiyCell *suicideCell=(SuicidaltiyCell *)cellAtTen;
+                      
+                      [suicideCell setHasHistory:clientSelected];
+                  }
+                 
+                  SCTableViewCell *cellAtEleven=(SCTableViewCell *)[sectionAtTwo cellAtIndex:11];
+                  
+                  if ([cellAtEleven isKindOfClass:[SuicidaltiyCell class]]) {
+                      SuicidaltiyCell *homicideCell=(SuicidaltiyCell *)cellAtEleven;
+                      
+                      [homicideCell setHasHistory:clientSelected];
+                  }
+              }
+              
+             
+              
+          
+          }
+      
+      }
     }
 
     else if (tableViewModel.tag==5){

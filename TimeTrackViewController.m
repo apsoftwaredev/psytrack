@@ -907,7 +907,7 @@ additionalTimeFormatter=nil;
         }
         else {
             clientPresentations_Shared=[[ClientPresentations_Shared alloc]init];
-            
+            clientPresentations_Shared.sendingControllerSetup=currentControllerSetup;
             [clientPresentations_Shared setupUsingSTV];
             
             clientsEntityDefinition=clientPresentations_Shared.clientPresentationDef;
@@ -2137,6 +2137,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 if (serviceDateCell.label.text.length) 
                 {
                     clientPresentations_Shared.serviceDatePickerDate=(NSDate *)serviceDateCell.datePicker.date;
+                    
                 }
                 
                 
@@ -2701,7 +2702,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
               
                 
                 //if change the cell text then update the method that sets the age with the new cell text
-                SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Test Age" boundObject:nil labelTextPropertyName:@"Age"];
+                SCLabelCell *actualAge=[SCLabelCell cellWithText:currentControllerSetup==kTrackAssessmentSetup? @"Test Age":@"Age on Service Date" boundObject:nil labelTextPropertyName:@"Age"];
                 SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Age (30-Day Months)" boundObject:nil labelTextPropertyName:@"WechslerAge"];
                 actualAge.label.text=@"0y 0m";
                 wechslerAge.label.text=@"0y 0m";

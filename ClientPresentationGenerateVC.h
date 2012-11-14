@@ -27,7 +27,7 @@
 @property (nonatomic,strong) SCArrayOfObjectsModel *presentationTableModel;
 
 -(IBAction)generateButtonTapped:(id)sender;
--(IBAction)myCancelButtonTapped:(id)sender;
+
 
 
 @end

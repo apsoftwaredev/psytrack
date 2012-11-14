@@ -16,6 +16,7 @@
  *
  */
 #import <UIKit/UIKit.h>
+#import "ClientEntity.h"
 
 @interface SuicidaltiyCell : SCCustomCell {
     BOOL suicidePlan;
@@ -56,4 +57,6 @@
 -(void)checkSuicideRisk;
 -(void)flashSuicideWarning;
 -(NSString *)getSelectedVariables;
+-(void)setHasHistory:(ClientEntity *)clientEntity;
+
 @end

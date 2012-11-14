@@ -16,6 +16,8 @@
  *
  */
 #import "SuicidaltiyCell.h"
+#import "PTTAppDelegate.h"
+
 
 @implementation SuicidaltiyCell
 @synthesize ideationButton,meansButton,planButton,historyButton,ideationOnButton,meansOnButton,planOnButton,historyOnButton,titleLabel;
@@ -48,8 +50,8 @@
     ideationKeyString =[riskType stringByAppendingString:@"Ideation"];
     planKeyString=[riskType stringByAppendingString:@"Plan"];
     meansKeyString=[riskType stringByAppendingString:@"Means"];
-       
-   suicideHistory = [[self.boundObject valueForKey:historyKeyString]boolValue];
+    
+    suicideHistory = [[self.boundObject valueForKey:historyKeyString]boolValue];
     suicideMeans = [[self.boundObject valueForKey:meansKeyString]boolValue];
     suicideIdeation = [[self.boundObject valueForKey:ideationKeyString]boolValue];
     suicidePlan = [[self.boundObject valueForKey:planKeyString]boolValue];
@@ -75,7 +77,7 @@
     
     
     if (suicideIdeation) {
-        returnText=@"ideation";
+        returnText=@"has ideation";
         
     }else
     {
@@ -85,11 +87,11 @@
     }
     if (suicidePlan) {
         if (returnText) {
-            returnText=[returnText stringByAppendingFormat:@", plan"];
+            returnText=[returnText stringByAppendingFormat:@", has plan"];
         }
         else{
         
-            returnText=@"plan";
+            returnText=@"has plan";
         }
         
     }
@@ -107,11 +109,11 @@
 
     if (suicideMeans) {
         if (returnText) {
-            returnText=[returnText stringByAppendingFormat:@", means"];
+            returnText=[returnText stringByAppendingFormat:@", has means"];
         }
         else{
             
-            returnText=@"means";
+            returnText=@"has means";
         }
     }
     else{
@@ -130,11 +132,11 @@
     
     if (suicideHistory) {
         if (returnText) {
-            returnText=[returnText stringByAppendingFormat:@", history"];
+            returnText=[returnText stringByAppendingFormat:@", has history"];
         }
         else{
             
-            returnText=@"history";
+            returnText=@"has history";
         }
     }
     else{
@@ -415,7 +417,53 @@
     }
    
 }
+-(void)setHasHistory:(ClientEntity *)clientEntity{
 
+    if (clientEntity) {
+   
+        NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+            
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"ClientPresentationEntity" inManagedObjectContext:managedObjectContext];
+        [fetchRequest setEntity:entity];
+        
+            NSPredicate *predicate=nil;
+            if([self.titleLabel.text isEqualToString:@"Suicide"]){
+                predicate = [NSPredicate predicateWithFormat:@" suicideHistory == %@",  [NSNumber numberWithBool:YES]];
+            }
+            else{
+                predicate = [NSPredicate predicateWithFormat:@" homicideHistory == %@", [NSNumber numberWithBool:YES]];
+            
+            }
+        
+        [fetchRequest setPredicate:predicate];
+
+        NSError *error = nil;
+        NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        
+      
+        
+        
+        if (fetchedObjects != nil &&fetchedObjects.count) {
+             NSArray *filteredForClient=[fetchedObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"client.objectID==%@",clientEntity.objectID]];
+            
+            if(filteredForClient &&filteredForClient.count){
+            
+                [self historyButtonTapped:nil];
+            
+            }
+            filteredForClient=nil;
+        }
+    
+        fetchedObjects=nil;
+        predicate=nil;
+        entity=nil;
+        fetchRequest=nil;
+    
+    }
+
+
+}
 
 
 @end
