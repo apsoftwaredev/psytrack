@@ -70,7 +70,88 @@
     [self checkSuicideRisk];
     
 }
+-(NSString *)getSelectedVariables{
+    NSString *returnText=nil;
+    
+    
+    if (suicideIdeation) {
+        returnText=@"ideation";
+        
+    }else
+    {
+    
+    returnText=@"no ideation";
+    
+    }
+    if (suicidePlan) {
+        if (returnText) {
+            returnText=[returnText stringByAppendingFormat:@", plan"];
+        }
+        else{
+        
+            returnText=@"plan";
+        }
+        
+    }
+    else{
+    
+        if (returnText) {
+            returnText=[returnText stringByAppendingFormat:@", no plan"];
+        }
+        else{
+            
+            returnText=@"no plan";
+        }
+    
+    }
 
+    if (suicideMeans) {
+        if (returnText) {
+            returnText=[returnText stringByAppendingFormat:@", means"];
+        }
+        else{
+            
+            returnText=@"means";
+        }
+    }
+    else{
+    
+        if (returnText) {
+            returnText=[returnText stringByAppendingFormat:@", no means"];
+        }
+        else{
+            
+            returnText=@"no means";
+        }
+
+    
+    
+    }
+    
+    if (suicideHistory) {
+        if (returnText) {
+            returnText=[returnText stringByAppendingFormat:@", history"];
+        }
+        else{
+            
+            returnText=@"history";
+        }
+    }
+    else{
+    
+        if (returnText) {
+            returnText=[returnText stringByAppendingFormat:@", no history"];
+        }
+        else{
+            
+            returnText=@"no history";
+        }
+    
+    }
+    
+    return returnText;
+    
+}
 -(void)toggleButtons:(UIButton *)button{
     
     

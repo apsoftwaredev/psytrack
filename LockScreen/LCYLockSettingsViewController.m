@@ -114,28 +114,28 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
     valuesDictionary_ = [NSMutableDictionary dictionary];
 
     
-    NSString *encryptionTokenCellNibName=nil;
-    
-    if ([SCUtilities is_iPad]) {
-        encryptionTokenCellNibName=@"EncryptionTokenCell_iPhone";
-    }
-    else {
-        encryptionTokenCellNibName=@"EncryptionTokenCell_iPhone";
-    }
-    
-  
-    NSDictionary *tokenObjectBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"token",@"viewToken",@"generateButton",@"currentPassword",@"newPassword",@"reenterPassword",@"applyChangesButton",@"validateTokenButton",@"validateCurrentPasswordButton",@"validateNewPasswordButton", @"validateReenterPasswordButton",    nil] forKeys:[NSArray arrayWithObjects:@"400",@"401",@"402",@"403",@"404",@"405",@"406",@"500", @"501", @"502", @"503",     nil]];
-    
-    EncryptionTokenCell *encrytptionTokenCell=[EncryptionTokenCell cellWithText:nil boundObject: valuesDictionary_
- objectBindings:tokenObjectBindingsDic nibName:encryptionTokenCellNibName];
-    encrytptionTokenCell.tag=3;
-    
-    SCArrayOfObjectsSection *encryptionStringSection=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Encryption Settings"];
-    
-    [encryptionStringSection addCell:encrytptionTokenCell];
-    
-    
-    
+//    NSString *encryptionTokenCellNibName=nil;
+//    
+//    if ([SCUtilities is_iPad]) {
+//        encryptionTokenCellNibName=@"EncryptionTokenCell_iPhone";
+//    }
+//    else {
+//        encryptionTokenCellNibName=@"EncryptionTokenCell_iPhone";
+//    }
+//    
+//  
+//    NSDictionary *tokenObjectBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"token",@"viewToken",@"generateButton",@"currentPassword",@"newPassword",@"reenterPassword",@"applyChangesButton",@"validateTokenButton",@"validateCurrentPasswordButton",@"validateNewPasswordButton", @"validateReenterPasswordButton",    nil] forKeys:[NSArray arrayWithObjects:@"400",@"401",@"402",@"403",@"404",@"405",@"406",@"500", @"501", @"502", @"503",     nil]];
+//    
+//    EncryptionTokenCell *encrytptionTokenCell=[EncryptionTokenCell cellWithText:nil boundObject: valuesDictionary_
+// objectBindings:tokenObjectBindingsDic nibName:encryptionTokenCellNibName];
+//    encrytptionTokenCell.tag=3;
+//    
+//    SCArrayOfObjectsSection *encryptionStringSection=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Encryption Settings"];
+//    
+//    [encryptionStringSection addCell:encrytptionTokenCell];
+//    
+//    
+//    
     //    NSString * lcyLockPath=[[NSBundle mainBundle] pathForResource:@"LCYLock"
 //                                                           ofType:@"plist"];
 //    
@@ -178,7 +178,7 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
     // Initialize tableModel
     objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView];
 
-    [objectsModel addSection:encryptionStringSection];
+//    [objectsModel addSection:encryptionStringSection];
 
 
      [objectsModel addSection:settingsSection];

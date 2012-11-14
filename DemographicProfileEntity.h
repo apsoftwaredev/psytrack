@@ -40,7 +40,7 @@
 @property (nonatomic, weak) NSString * tempProfileNotes;
 @property (nonatomic, weak) NSString * tempSex;
 
--(void)rekeyEncryptedAttributes;
+//-(void)rekeyEncryptedAttributes;
 
 @end
 

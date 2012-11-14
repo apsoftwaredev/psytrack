@@ -393,16 +393,16 @@
     
     //create a property definition for the notes property in the referral class definition
     SCPropertyDefinition *referralNotesPropertyDef = [referralDef propertyDefinitionWithName:@"notes"];
-    
-    referralNotesPropertyDef.type=SCPropertyTypeCustom;
-    referralNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    
-    NSDictionary *encryReferralNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    referralNotesPropertyDef.objectBindings=encryReferralNotesTVCellKeyBindingsDic;
+    referralNotesPropertyDef.type=SCPropertyTypeTextView;
+//    referralNotesPropertyDef.type=SCPropertyTypeCustom;
+//    referralNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+//    
+//    NSDictionary *encryReferralNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+//    
+//    
+//    referralNotesPropertyDef.objectBindings=encryReferralNotesTVCellKeyBindingsDic;
     referralNotesPropertyDef.title=@"Notes";
-    referralNotesPropertyDef.autoValidate=NO;
+//    referralNotesPropertyDef.autoValidate=NO;
     
     //Create the property definition for the referralInOrOut property in the referralDef class
     SCPropertyDefinition *referralInOrOutPropertyDef = [referralDef propertyDefinitionWithName:@"referralInOrOut"];
@@ -441,16 +441,16 @@
     
     logNotesPropertyDef.title = @"Notes";
     
-    
-    logNotesPropertyDef.type=SCPropertyTypeCustom;
-    logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    
-    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
-    //    phoneNumberPropertyDef.title=@"Phone Number";
-    logNotesPropertyDef.autoValidate=NO;
+    logNotesPropertyDef.type=SCPropertyTypeTextView;
+    //    logNotesPropertyDef.type=SCPropertyTypeCustom;
+    //    logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    //
+    //    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    //
+    //
+    //    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
+    //    //    phoneNumberPropertyDef.title=@"Phone Number";
+    //    logNotesPropertyDef.autoValidate=NO;
     
     NSDateFormatter *dateTimeFormatter=[[NSDateFormatter alloc]init];
     [dateTimeFormatter setDateFormat:@"ccc M/d/yy h:mm a"];
@@ -795,7 +795,7 @@
                     return YES;
                 }
             }
-            if ([cell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if ([cell isKindOfClass:[SCTextViewCell class]]) {
                 return YES;
             }
            

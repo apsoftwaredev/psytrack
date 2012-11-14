@@ -173,151 +173,151 @@
     
 }
 
--(void)rekeyEncryptedAttributes{
-   
-    
-    
-    NSString *notesStr=nil;
-    [self willAccessValueForKey:@"notes"];
-    if (self.notes) {
-        notesStr=  [NSString stringWithString:self.notes];
-    }
-    DLog(@"notes str is  %@",notesStr);
-    DLog(@"self notes is  %@",self.notes);
-    [self didAccessValueForKey:@"notes"];
-    [self willChangeValueForKey:@"keyString"];
-    
-    [self setNilValueForKey:@"keyString"];
-    [self didChangeValueForKey:@"keyString"];
-
-    self.keyString=nil;
-    
-        if (notesStr && notesStr.length) {
-            [self setStringToPrimitiveData:(NSString *)notesStr forKey:@"notes"];
-            
-        }
-        
-  
-    
-    
-}
-
-- (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
-{
-    
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    if (strValue&& strValue.length ) {
-        
-        
-        
-        [self willAccessValueForKey:@"keyString"];
-        
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
-        [self didAccessValueForKey:@"keyString"];
-        NSData *encryptedData;
-        NSString *encryptedKeyString;
-        if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
-            encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
-            
-            
-            if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
-                
-                
-                encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
-                
-            }
-        }
-        
-
-        if (encryptedData.length) {
-            [self willChangeValueForKey:key];
-            [self setPrimitiveValue:encryptedData forKey:key];
-            [self didChangeValueForKey:key];
-        }
-        
-        DLog(@"encrytped data string is  %@",encryptedKeyString);
-        DLog(@"self keystring is  %@",self.keyString);
-        [self willAccessValueForKey:@"keyString"];
-        if (![encryptedKeyString isEqualToString:self.keyString]) {
-            [self didAccessValueForKey:@"keyString"];
-            [self willChangeValueForKey:@"keyString"];
-            if (encryptedKeyString && encryptedKeyString.length) {
-                 [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
-                self.keyString=encryptedKeyString;
-            }
-           
-            [self didChangeValueForKey:@"keyString"];
-            
-        }
-        
-        
-        
-        
-        
-        
-    }
-}
--(NSString *)notes{
-    
-    NSString *tempStr;
-    [self willAccessValueForKey:@"tempNotes"];
-    
-    
-    if (!self.tempNotes ||!self.tempNotes.length) {
-        
-        [self didAccessValueForKey:@"tempNotes"];
-        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-        
-        
-        [self willAccessValueForKey:@"notes"];
-        
-        
-        NSData *primitiveData=[self primitiveValueForKey:@"notes"];
-        [self didAccessValueForKey:@"notes"];
-        
-        if (!primitiveData ||!primitiveData.length ) {
-            return nil;
-        }
-        [self willAccessValueForKey:@"keyString"];
-        NSString *tmpKeyString=self.keyString;
-        [self didAccessValueForKey:@"keyString"];
-        DLog(@"temp key string is  %@",tempStr);
-        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
-        
-        
-        tempStr=[appDelegate convertDataToString:strData];
-        DLog(@"strdata is  %@",tempStr);
-        [self willChangeValueForKey:@"tempNotes"];
-        
-        self.tempNotes=tempStr;
-        [self didChangeValueForKey:@"tempNotes"];
-        
-        
-    }
-    else 
-    {
-        tempStr=self.tempNotes;
-        [self didAccessValueForKey:@"tempNotes"];
-    }
-    
-    
-    
-    
-    return tempStr;
-    
-    
-    
-    
-    
-    
-}
--(void)setNotes:(NSString *)notes{
-    
-    [self setStringToPrimitiveData:(NSString *)notes forKey:@"notes"];
-    
-    self.tempNotes=notes;
-}
+//-(void)rekeyEncryptedAttributes{
+//   
+//    
+//    
+//    NSString *notesStr=nil;
+//    [self willAccessValueForKey:@"notes"];
+//    if (self.notes) {
+//        notesStr=  [NSString stringWithString:self.notes];
+//    }
+//    DLog(@"notes str is  %@",notesStr);
+//    DLog(@"self notes is  %@",self.notes);
+//    [self didAccessValueForKey:@"notes"];
+//    [self willChangeValueForKey:@"keyString"];
+//    
+//    [self setNilValueForKey:@"keyString"];
+//    [self didChangeValueForKey:@"keyString"];
+//
+//    self.keyString=nil;
+//    
+//        if (notesStr && notesStr.length) {
+//            [self setStringToPrimitiveData:(NSString *)notesStr forKey:@"notes"];
+//            
+//        }
+//        
+//  
+//    
+//    
+//}
+//
+//- (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
+//{
+//    
+//    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//    
+//    if (strValue&& strValue.length ) {
+//        
+//        
+//        
+//        [self willAccessValueForKey:@"keyString"];
+//        
+//        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
+//        [self didAccessValueForKey:@"keyString"];
+//        NSData *encryptedData;
+//        NSString *encryptedKeyString;
+//        if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
+//            encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
+//            
+//            
+//            if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
+//                
+//                
+//                encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
+//                
+//            }
+//        }
+//        
+//
+//        if (encryptedData.length) {
+//            [self willChangeValueForKey:key];
+//            [self setPrimitiveValue:encryptedData forKey:key];
+//            [self didChangeValueForKey:key];
+//        }
+//        
+//        DLog(@"encrytped data string is  %@",encryptedKeyString);
+//        DLog(@"self keystring is  %@",self.keyString);
+//        [self willAccessValueForKey:@"keyString"];
+//        if (![encryptedKeyString isEqualToString:self.keyString]) {
+//            [self didAccessValueForKey:@"keyString"];
+//            [self willChangeValueForKey:@"keyString"];
+//            if (encryptedKeyString && encryptedKeyString.length) {
+//                 [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
+//                self.keyString=encryptedKeyString;
+//            }
+//           
+//            [self didChangeValueForKey:@"keyString"];
+//            
+//        }
+//        
+//        
+//        
+//        
+//        
+//        
+//    }
+//}
+//-(NSString *)notes{
+//    
+//    NSString *tempStr;
+//    [self willAccessValueForKey:@"tempNotes"];
+//    
+//    
+//    if (!self.tempNotes ||!self.tempNotes.length) {
+//        
+//        [self didAccessValueForKey:@"tempNotes"];
+//        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//        
+//        
+//        [self willAccessValueForKey:@"notes"];
+//        
+//        
+//        NSData *primitiveData=[self primitiveValueForKey:@"notes"];
+//        [self didAccessValueForKey:@"notes"];
+//        
+//        if (!primitiveData ||!primitiveData.length ) {
+//            return nil;
+//        }
+//        [self willAccessValueForKey:@"keyString"];
+//        NSString *tmpKeyString=self.keyString;
+//        [self didAccessValueForKey:@"keyString"];
+//        DLog(@"temp key string is  %@",tempStr);
+//        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
+//        
+//        
+//        tempStr=[appDelegate convertDataToString:strData];
+//        DLog(@"strdata is  %@",tempStr);
+//        [self willChangeValueForKey:@"tempNotes"];
+//        
+//        self.tempNotes=tempStr;
+//        [self didChangeValueForKey:@"tempNotes"];
+//        
+//        
+//    }
+//    else 
+//    {
+//        tempStr=self.tempNotes;
+//        [self didAccessValueForKey:@"tempNotes"];
+//    }
+//    
+//    
+//    
+//    
+//    return tempStr;
+//    
+//    
+//    
+//    
+//    
+//    
+//}
+//-(void)setNotes:(NSString *)notes{
+//    
+//    [self setStringToPrimitiveData:(NSString *)notes forKey:@"notes"];
+//    
+//    self.tempNotes=notes;
+//}
 
 //    -(NSSet *)abGroupsold{
 //        

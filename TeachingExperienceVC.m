@@ -132,17 +132,18 @@
     
     logNotesPropertyDef.title = @"Notes";
     
+    logNotesPropertyDef.type=SCPropertyTypeTextView;
+    //    logNotesPropertyDef.type=SCPropertyTypeCustom;
+    //    logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+    //
+    //    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+    //
+    //
+    //    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
+    //    //    phoneNumberPropertyDef.title=@"Phone Number";
+    //    logNotesPropertyDef.autoValidate=NO;
     
-    logNotesPropertyDef.type=SCPropertyTypeCustom;
-    logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    
-    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
-    //    phoneNumberPropertyDef.title=@"Phone Number";
-    logNotesPropertyDef.autoValidate=NO;
-    
+
     NSDateFormatter *dateTimeFormatter=[[NSDateFormatter alloc]init];
     [dateTimeFormatter setDateFormat:@"ccc M/d/yy h:mm a"];
     [dateTimeFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
@@ -177,7 +178,8 @@
     
     
     
-        
+    SCPropertyDefinition *publicationTitlePropertyDef=[publicationDef propertyDefinitionWithName:@"publicationTitle"];
+    publicationTitlePropertyDef.title=@"Title";
     
     //set the order attributes name defined in the Publication Entity
     publicationDef.orderAttributeName=@"order";
@@ -207,7 +209,7 @@
                                                                          datePickerMode:UIDatePickerModeDate
                                                           displayDatePickerInDetailView:NO];
     
-    SCPropertyDefinition *publicationTitlePropertyDef = [publicationDef propertyDefinitionWithName:@"publicationTitle"];
+  
 	
 	publicationTitlePropertyDef.type = SCPropertyTypeTextView;
     SCPropertyDefinition *publicationAuthorsPropertyDef = [publicationDef propertyDefinitionWithName:@"authors"];
@@ -286,7 +288,10 @@
 	return YES;
 }
 
-
+- (BOOL)disablesAutomaticKeyboardDismissal
+{
+    return NO;
+}
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;

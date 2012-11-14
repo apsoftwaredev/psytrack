@@ -251,7 +251,12 @@
 		E7294CE4160685DC00C153CE /* DemographicReportGenerateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294CE2160685D300C153CE /* DemographicReportGenerateVC.m */; };
 		E7294CE5160685DC00C153CE /* DemographicReportGenerateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7294CE3160685D800C153CE /* DemographicReportGenerateVC.xib */; };
 		E7294CE716069C5000C153CE /* DemographicReportGenerateVC_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7294CE616069C4D00C153CE /* DemographicReportGenerateVC_iPhone.xib */; };
+		E733F4A71646D9FE00A0F020 /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E733F4A41646D9E700A0F020 /* libSensibleTableView.a */; };
+		E733F4B41646DA2100A0F020 /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E733F4B11646DA1600A0F020 /* libSTV+CoreData.a */; };
 		E734334715D5D69C007237C5 /* PaymentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E734334615D5D69C007237C5 /* PaymentEntity.m */; };
+		E7388B681652B7E600E04639 /* ClientPresentationGenerateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E7388B661652B7E600E04639 /* ClientPresentationGenerateVC.m */; };
+		E7388B691652B7E600E04639 /* ClientPresentationGenerateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7388B671652B7E600E04639 /* ClientPresentationGenerateVC.xib */; };
+		E7388B6E1652C0EB00E04639 /* PDFGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = E7388B6D1652C0EB00E04639 /* PDFGenerator.m */; };
 		E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DD158E28DC00CE1AF4 /* menubar-full.png */; };
 		E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */; };
 		E74167EA158E782900CE1AF4 /* Monaco.dfont in Resources */ = {isa = PBXBuildFile; fileRef = E74167E5158E739300CE1AF4 /* Monaco.dfont */; };
@@ -356,8 +361,6 @@
 		E7A5D7081559EB26000F248F /* DetailViewControllerTheme.ptt in Resources */ = {isa = PBXBuildFile; fileRef = E7A5D7071559EB26000F248F /* DetailViewControllerTheme.ptt */; };
 		E7A92491154853760080B35D /* DrugTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7A92490154853760080B35D /* DrugTestViewController.xib */; };
 		E7A9249315485E6C0080B35D /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E7A9249215485E6C0080B35D /* blueArrow.png */; };
-		E7A9F5CD16399CDE00DCDBEB /* SensibleTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A9F5CC16399CDE00DCDBEB /* SensibleTableView.framework */; };
-		E7A9F5CF16399CF100DCDBEB /* STV+CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A9F5CE16399CF100DCDBEB /* STV+CoreData.framework */; };
 		E7ADFD3C15ACF27D00081392 /* SupervisionTypeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD3B15ACF27D00081392 /* SupervisionTypeEntity.m */; };
 		E7ADFD3F15AD0E8A00081392 /* ExistingInterventionEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD3E15AD0E8A00081392 /* ExistingInterventionEntity.m */; };
 		E7ADFD4515AE2ACF00081392 /* ExistingAssessmentEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ADFD4415AE2ACF00081392 /* ExistingAssessmentEntity.m */; };
@@ -469,12 +472,42 @@
 		E7F1E703157662EB00D4A638 /* InstrumentScoreNameEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E702157662EB00D4A638 /* InstrumentScoreNameEntity.m */; };
 		E7F1E7061576966000D4A638 /* InstrumentScoreEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E7051576966000D4A638 /* InstrumentScoreEntity.m */; };
 		E7F1E7091576D17100D4A638 /* ClientInstrumentScoresEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */; };
-		E7F86B4D1625E54C00C57911 /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E7F86B4C1625E54C00C57911 /* psyTrack.sqlite */; };
 		E7FA340415C580EF0025B18B /* psyTrainTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */; };
 		E7FB3AAD1562A4E4000A6782 /* TwoButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */; };
 		E7FB3AB31562C867000A6782 /* AddViewABLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB21562C867000A6782 /* AddViewABLinkButtonCell.m */; };
 		E7FB3AB61562C888000A6782 /* LookupRemoveLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB51562C888000A6782 /* LookupRemoveLinkButtonCell.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E733F4A31646D9E700A0F020 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E733F49B1646D9E600A0F020 /* SensibleTableView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DBE7373014F99E580076D2B6;
+			remoteInfo = SensibleTableView;
+		};
+		E733F4A51646D9F600A0F020 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E733F49B1646D9E600A0F020 /* SensibleTableView.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = DBE7372F14F99E580076D2B6;
+			remoteInfo = SensibleTableView;
+		};
+		E733F4B01646DA1600A0F020 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E733F4A81646DA1500A0F020 /* STV+CoreData.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DBE737C414FC66D40076D2B6;
+			remoteInfo = "STV+CoreData";
+		};
+		E733F4B21646DA1C00A0F020 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E733F4A81646DA1500A0F020 /* STV+CoreData.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
+			remoteInfo = "STV+CoreData";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		376797F71500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ABGroupNameChangeCell.xib; sourceTree = "<group>"; };
@@ -846,8 +879,15 @@
 		E7294CE2160685D300C153CE /* DemographicReportGenerateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicReportGenerateVC.m; sourceTree = "<group>"; };
 		E7294CE3160685D800C153CE /* DemographicReportGenerateVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemographicReportGenerateVC.xib; sourceTree = "<group>"; };
 		E7294CE616069C4D00C153CE /* DemographicReportGenerateVC_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemographicReportGenerateVC_iPhone.xib; sourceTree = "<group>"; };
+		E733F49B1646D9E600A0F020 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.1.3 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
+		E733F4A81646DA1500A0F020 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3.1.3 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E734334515D5D69C007237C5 /* PaymentEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentEntity.h; sourceTree = "<group>"; };
 		E734334615D5D69C007237C5 /* PaymentEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentEntity.m; sourceTree = "<group>"; };
+		E7388B651652B7E600E04639 /* ClientPresentationGenerateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientPresentationGenerateVC.h; sourceTree = "<group>"; };
+		E7388B661652B7E600E04639 /* ClientPresentationGenerateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientPresentationGenerateVC.m; sourceTree = "<group>"; };
+		E7388B671652B7E600E04639 /* ClientPresentationGenerateVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientPresentationGenerateVC.xib; sourceTree = "<group>"; };
+		E7388B6C1652C0EB00E04639 /* PDFGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerator.h; sourceTree = "<group>"; };
+		E7388B6D1652C0EB00E04639 /* PDFGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerator.m; sourceTree = "<group>"; };
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
 		E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full@2x.png"; sourceTree = "<group>"; };
 		E74167E5158E739300CE1AF4 /* Monaco.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = Monaco.dfont; sourceTree = "<group>"; };
@@ -997,8 +1037,6 @@
 		E7A5D7071559EB26000F248F /* DetailViewControllerTheme.ptt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DetailViewControllerTheme.ptt; sourceTree = "<group>"; };
 		E7A92490154853760080B35D /* DrugTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrugTestViewController.xib; sourceTree = "<group>"; };
 		E7A9249215485E6C0080B35D /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
-		E7A9F5CC16399CDE00DCDBEB /* SensibleTableView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SensibleTableView.framework; path = "../../Downloads/STV 3.1.3 Std/Static Frameworks/SensibleTableView.framework"; sourceTree = "<group>"; };
-		E7A9F5CE16399CF100DCDBEB /* STV+CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "STV+CoreData.framework"; path = "../../Downloads/STV 3.1.3 Std/Static Frameworks/STV+CoreData.framework"; sourceTree = "<group>"; };
 		E7ADFD3A15ACF27D00081392 /* SupervisionTypeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SupervisionTypeEntity.h; sourceTree = "<group>"; };
 		E7ADFD3B15ACF27D00081392 /* SupervisionTypeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SupervisionTypeEntity.m; sourceTree = "<group>"; };
 		E7ADFD3D15AD0E8A00081392 /* ExistingInterventionEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingInterventionEntity.h; sourceTree = "<group>"; };
@@ -1188,7 +1226,6 @@
 		E7F1E7051576966000D4A638 /* InstrumentScoreEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentScoreEntity.m; sourceTree = "<group>"; };
 		E7F1E7071576D17100D4A638 /* ClientInstrumentScoresEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientInstrumentScoresEntity.h; sourceTree = "<group>"; };
 		E7F1E7081576D17100D4A638 /* ClientInstrumentScoresEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientInstrumentScoresEntity.m; sourceTree = "<group>"; };
-		E7F86B4C1625E54C00C57911 /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = psyTrack.sqlite; sourceTree = "<group>"; };
 		E7FA340315C580EF0025B18B /* psyTrainTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = psyTrainTrack.xcdatamodel; sourceTree = "<group>"; };
 		E7FB3AAB1562A4E3000A6782 /* TwoButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoButtonCell.h; sourceTree = "<group>"; };
 		E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoButtonCell.m; sourceTree = "<group>"; };
@@ -1203,8 +1240,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7A9F5CF16399CF100DCDBEB /* STV+CoreData.framework in Frameworks */,
-				E7A9F5CD16399CDE00DCDBEB /* SensibleTableView.framework in Frameworks */,
+				E733F4B41646DA2100A0F020 /* libSTV+CoreData.a in Frameworks */,
+				E733F4A71646D9FE00A0F020 /* libSensibleTableView.a in Frameworks */,
 				E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */,
 				E7F1CBA31598C787006F9E95 /* ImageIO.framework in Frameworks */,
 				E7F1CAF41597CADB006F9E95 /* CoreText.framework in Frameworks */,
@@ -1588,6 +1625,7 @@
 		37F7CEB315005D0700AD2C3A /* Reports */ = {
 			isa = PBXGroup;
 			children = (
+				E7388B5F1652B75200E04639 /* Client Presentation */,
 				E7294C981604C0CF00C153CE /* Demographic Report */,
 				E7DEED0615F6C127001D5B05 /* All Training Hours Report */,
 				E7F1CAEB1597A780006F9E95 /* Monthly Practicum Log */,
@@ -1606,7 +1644,6 @@
 				E7B49C1A1607E53A0073AA30 /* NSManagedObject Subclasses */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
-				E7F86B4C1625E54C00C57911 /* psyTrack.sqlite */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1795,6 +1832,8 @@
 		B771C54314DAF3E4002D430E /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				E733F4A81646DA1500A0F020 /* STV+CoreData.xcodeproj */,
+				E733F49B1646D9E600A0F020 /* SensibleTableView.xcodeproj */,
 				E7F1CB1E1598C024006F9E95 /* vfr-Reader-db84c9d */,
 				E7577FA7158C1DAE0044D344 /* KeychainItemWrapper.h */,
 				E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */,
@@ -1816,8 +1855,6 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				E7A9F5CE16399CF100DCDBEB /* STV+CoreData.framework */,
-				E7A9F5CC16399CDE00DCDBEB /* SensibleTableView.framework */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Third Party */,
 				37F7CE1B1500328E00AD2C3A /* psyTrack */,
@@ -1949,6 +1986,34 @@
 				E7294CE616069C4D00C153CE /* DemographicReportGenerateVC_iPhone.xib */,
 			);
 			name = "Demographic Report";
+			sourceTree = "<group>";
+		};
+		E733F49C1646D9E600A0F020 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E733F4A41646D9E700A0F020 /* libSensibleTableView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E733F4A91646DA1500A0F020 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E733F4B11646DA1600A0F020 /* libSTV+CoreData.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7388B5F1652B75200E04639 /* Client Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				E7388B651652B7E600E04639 /* ClientPresentationGenerateVC.h */,
+				E7388B661652B7E600E04639 /* ClientPresentationGenerateVC.m */,
+				E7388B671652B7E600E04639 /* ClientPresentationGenerateVC.xib */,
+				E7388B6C1652C0EB00E04639 /* PDFGenerator.h */,
+				E7388B6D1652C0EB00E04639 /* PDFGenerator.m */,
+			);
+			name = "Client Presentation";
 			sourceTree = "<group>";
 		};
 		E75F7788151CED0C002B10AE /* Encrypted Model Subclasses */ = {
@@ -2423,6 +2488,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				E733F4B31646DA1C00A0F020 /* PBXTargetDependency */,
+				E733F4A61646D9F600A0F020 /* PBXTargetDependency */,
 			);
 			name = PsyTrack;
 			productName = psyTrainTrack;
@@ -2449,12 +2516,39 @@
 			mainGroup = B79F488D142BEF0C0085D47B;
 			productRefGroup = B79F4899142BEF0D0085D47B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E733F49C1646D9E600A0F020 /* Products */;
+					ProjectRef = E733F49B1646D9E600A0F020 /* SensibleTableView.xcodeproj */;
+				},
+				{
+					ProductGroup = E733F4A91646DA1500A0F020 /* Products */;
+					ProjectRef = E733F4A81646DA1500A0F020 /* STV+CoreData.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B79F4897142BEF0D0085D47B /* PsyTrack */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		E733F4A41646D9E700A0F020 /* libSensibleTableView.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSensibleTableView.a;
+			remoteRef = E733F4A31646D9E700A0F020 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E733F4B11646DA1600A0F020 /* libSTV+CoreData.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libSTV+CoreData.a";
+			remoteRef = E733F4B01646DA1600A0F020 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B79F4896142BEF0D0085D47B /* Resources */ = {
@@ -2676,7 +2770,7 @@
 				E7294CE716069C5000C153CE /* DemographicReportGenerateVC_iPhone.xib in Resources */,
 				E7B7957A16124528008D3E8F /* Default-568h@2x.png in Resources */,
 				E74AD6AA1618ECD200B596FC /* ipad-background-blue-plain-small@2x.png in Resources */,
-				E7F86B4D1625E54C00C57911 /* psyTrack.sqlite in Resources */,
+				E7388B691652B7E600E04639 /* ClientPresentationGenerateVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2919,10 +3013,25 @@
 				E7B49BFC1607BD600073AA30 /* DisorderSubCategoryEntity.m in Sources */,
 				E7B49BFF1607BD7B0073AA30 /* DisorderSystemEntity.m in Sources */,
 				E7B49C111607E24F0073AA30 /* BatteryEntity.m in Sources */,
+				E7388B681652B7E600E04639 /* ClientPresentationGenerateVC.m in Sources */,
+				E7388B6E1652C0EB00E04639 /* PDFGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E733F4A61646D9F600A0F020 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SensibleTableView;
+			targetProxy = E733F4A51646D9F600A0F020 /* PBXContainerItemProxy */;
+		};
+		E733F4B31646DA1C00A0F020 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "STV+CoreData";
+			targetProxy = E733F4B21646DA1C00A0F020 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		376797F61500665D00D0639D /* ABGroupNameChangeCell.xib */ = {

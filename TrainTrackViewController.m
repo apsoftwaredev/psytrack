@@ -241,7 +241,7 @@
                     break;
                 case 10:
                 {
-                    if (indexPath.row==0)result.textLabel.text=@"Lock Screen and Encryption";
+                    if (indexPath.row==0)result.textLabel.text=@"Lock Screen Settings";
                     
                     
                 } 

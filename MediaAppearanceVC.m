@@ -126,6 +126,10 @@
 {
 	return YES;
 }
+- (BOOL)disablesAutomaticKeyboardDismissal
+{
+    return NO;
+}
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;

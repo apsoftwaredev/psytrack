@@ -26,7 +26,7 @@
 @property (nonatomic, retain) NSSet *symptomsTargeted;
 
 @property (nonatomic, weak) NSString *tempNotes;
--(void)rekeyEncryptedAttributes;
+//-(void)rekeyEncryptedAttributes;
 
 @end
 

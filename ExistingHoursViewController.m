@@ -284,15 +284,16 @@
     existingHoursEndDatePropertyDef.autoValidate=NO;
     //Create the property definition for the notes property in the existing hours class
     SCPropertyDefinition *existingHoursNotesPropertyDef = [existingHoursDef propertyDefinitionWithName:@"notes"];
-    existingHoursNotesPropertyDef.type=SCPropertyTypeCustom;
-    existingHoursNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    
-    NSDictionary *encryProfileNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    existingHoursNotesPropertyDef.objectBindings=encryProfileNotesTVCellKeyBindingsDic;
+    existingHoursNotesPropertyDef.type=SCPropertyTypeTextView;
+//    existingHoursNotesPropertyDef.type=SCPropertyTypeCustom;
+//    existingHoursNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+//    
+//    NSDictionary *encryProfileNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+//    
+//    
+//    existingHoursNotesPropertyDef.objectBindings=encryProfileNotesTVCellKeyBindingsDic;
     existingHoursNotesPropertyDef.title=@"Notes";
-    existingHoursNotesPropertyDef.autoValidate=NO;
+//    existingHoursNotesPropertyDef.autoValidate=NO;
     
     existingHoursDef.keyPropertyName=@"startDate";
 
@@ -1821,7 +1822,7 @@ BOOL valid=NO;
         }
         
         
-        if ([cell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+        if ([cell isKindOfClass:[SCTextViewCell class]]) {
             valid=YES;
             
             

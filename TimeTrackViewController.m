@@ -21,6 +21,8 @@
 #import "TrainingProgramEntity.h"
 #import "SiteEntity.h"
 #import "RateEntity.h"
+#import "ClientPresentationGenerateVC.h"
+
 @interface TimeTrackViewController ()
 
 @end
@@ -1595,7 +1597,10 @@ additionalTimeFormatter=nil;
     // Ensure that the view controller supports rotation and that the split view can therefore show in both portrait and landscape.    
     return YES;
 }
-
+- (BOOL)disablesAutomaticKeyboardDismissal
+{
+    return NO;
+}
 
 -(NSArray *)tableViewModel:(SCArrayOfItemsModel *)tableModel customSearchResultForSearchText:(NSString *)searchText autoSearchResults:(NSArray *)autoSearchResults{
 
@@ -2120,6 +2125,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             {
 //                SCArrayOfObjectsModel *arrayOfObjectsModel=(SCArrayOfObjectsModel *)self.tableViewModel;
 //                clientPresentations_Shared.tableModel=arrayOfObjectsModel;
+                
+                UIBarButtonItem *reportButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(generateReportButtonTapped:)];
+                
+               NSMutableArray *buttoItems=[NSMutableArray arrayWithArray:tableViewModel.viewController.navigationItem.rightBarButtonItems];
+                
+                [buttoItems addObject:reportButton];
+                tableViewModel.viewController.navigationItem.rightBarButtonItems=buttoItems;
+                
                 tableViewModel.delegate=clientPresentations_Shared;
                 if (serviceDateCell.label.text.length) 
                 {
@@ -4864,6 +4877,71 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
 }
 
+-(IBAction)generateReportButtonTapped:(id)sender{
 
+
+    ClientPresentationGenerateVC *clientPresentationGenerateVC=[[ClientPresentationGenerateVC alloc]initWithNibName:@"ClientPresentationGenerateVC" bundle:[NSBundle mainBundle]];
+    
+    clientPresentationGenerateVC.presentationTableModel=(SCArrayOfObjectsModel *)currentDetailTableViewModel;
+    
+    clientPresentationGenerateVC.view.backgroundColor=currentDetailTableViewModel.viewController.view.backgroundColor;
+    
+    
+    [currentDetailTableViewModel.viewController.navigationController pushViewController:clientPresentationGenerateVC animated:YES];
+   
+   
+    for (NSInteger p=0; p<currentDetailTableViewModel.sectionCount; p++) {
+        
+         SCTableViewSection *section=[currentDetailTableViewModel sectionAtIndex:p];
+        
+        NSLog(@"section is %i ",p);
+        for (NSInteger i=0; i<section.cellCount; i++) {
+           
+           
+            SCTableViewCell *cell=[section cellAtIndex:i];
+            
+            NSLog(@"cell is %i",i);
+            NSLog(@"cell class is %@",[cell class]);
+            
+            if ([cell respondsToSelector:@selector(textLabel)]&&cell.textLabel.text){
+                
+                NSLog(@" cell text label is %@",cell.textLabel.text);
+                
+            }
+            
+            if ([cell isKindOfClass:[SCControlCell class]]){
+            
+                UIView *labelView=[cell viewWithTag:71];
+                
+                if ([labelView isKindOfClass:[UILabel class]]){
+                
+                    UILabel *textLabel=(UILabel *)labelView;
+                    
+                    NSLog(@"label text is %@",textLabel.text);
+                
+                
+                }
+                
+                UIView *segmentedView=(UIView *)[cell viewWithTag:70];
+                if ([segmentedView isKindOfClass:[UISegmentedControl class]]){
+                    
+                    UISegmentedControl *segmentedControl=(UISegmentedControl *)segmentedView;
+                    
+                    NSLog(@"label text is %i",segmentedControl.selectedSegmentIndex);
+                    
+                    
+                }
+
+            
+            }
+            
+        }
+
+        
+    }
+        
+
+
+}
 
 @end

@@ -170,7 +170,10 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
     // Ensure that the view controller supports rotation and that the split view can therefore show in both portrait and landscape.    
     return YES;
 }
-
+- (BOOL)disablesAutomaticKeyboardDismissal
+{
+    return NO;
+}
 
 //
 //#pragma mark -
@@ -2322,8 +2325,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             SCTableViewCell *clientIDCodeCell =(SCTableViewCell *)[section cellAtIndex:0];
             
             
-            if ([clientIDCodeCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
-                EncryptedSCTextFieldCell *clientIDCodeEncryptedCell =(EncryptedSCTextFieldCell *)clientIDCodeCell;
+            if ([clientIDCodeCell isKindOfClass:[SCTextFieldCell class]]) {
+                SCTextFieldCell *clientIDCodeEncryptedCell =(SCTextFieldCell *)clientIDCodeCell;
                 
                 if ( clientIDCodeEncryptedCell.textField.text.length ) {
                     
@@ -2357,8 +2360,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
             if (notesManagedObject && [notesManagedObject respondsToSelector:@selector(entity)]) {
             
-                if ([ notesManagedObject.entity.name   isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
-                    EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
+                if ([ notesManagedObject.entity.name   isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[SCTextViewCell class]]) {
+                    SCTextViewCell *encryptedNoteCell=(SCTextViewCell *)notesCell;
                     
                     if (encryptedNoteCell.textView.text.length) 
                     {
@@ -2580,10 +2583,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
               
             
-            if (cellManagedObject &&  [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject.entity.name  isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (cellManagedObject &&  [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject.entity.name  isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[SCTextViewCell class]]) {
                 
-                EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
-                EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
+                SCTextViewCell *encryptedFrom=(SCTextViewCell *)cellFrom;
+                SCTextViewCell *encryptedTo=(SCTextViewCell *)cellTo;
                 
                 
                 SCDateCell *arrivedDateCell=(SCDateCell *)cellArrivedDate;

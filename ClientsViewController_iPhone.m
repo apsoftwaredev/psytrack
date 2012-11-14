@@ -359,7 +359,10 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
 }
 
-
+- (BOOL)disablesAutomaticKeyboardDismissal
+{
+    return NO;
+}
 -(void)doneButtonTappedInDetailView{
     
     
@@ -1152,8 +1155,8 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             SCTableViewCell *clientIDCodeCell =(SCTableViewCell *)[section cellAtIndex:0];
             
             
-            if ([clientIDCodeCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
-                EncryptedSCTextFieldCell *clientIDCodeEncryptedCell =(EncryptedSCTextFieldCell *)clientIDCodeCell;
+            if ([clientIDCodeCell isKindOfClass:[SCTextFieldCell class]]) {
+                SCTextFieldCell *clientIDCodeEncryptedCell =(SCTextFieldCell *)clientIDCodeCell;
                 
                 if ( clientIDCodeEncryptedCell.textField.text.length ) {
                     
@@ -1187,8 +1190,8 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
             if (notesManagedObject && [notesManagedObject respondsToSelector:@selector(entity)]) {
                 
-                if ([ notesManagedObject.entity.name   isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
-                    EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
+                if ([ notesManagedObject.entity.name   isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[SCTextViewCell class]]) {
+                    SCTextViewCell *encryptedNoteCell=(SCTextViewCell *)notesCell;
                     
                     if (encryptedNoteCell.textView.text.length)
                     {
@@ -1410,10 +1413,10 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
             
             
-            if (cellManagedObject &&  [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject.entity.name  isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (cellManagedObject &&  [cellManagedObject respondsToSelector:@selector(entity)]&& [cellManagedObject.entity.name  isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[SCTextViewCell class]]) {
                 
-                EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
-                EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
+                SCTextViewCell *encryptedFrom=(SCTextViewCell *)cellFrom;
+                SCTextViewCell *encryptedTo=(SCTextViewCell *)cellTo;
                 
                 
                 SCDateCell *arrivedDateCell=(SCDateCell *)cellArrivedDate;
@@ -1717,6 +1720,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     
 }
+
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForSectionAtIndex:(NSUInteger)index{
     
     if (tableViewModel.tag==0) {

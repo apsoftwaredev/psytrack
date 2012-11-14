@@ -229,15 +229,17 @@
                                                                      allowNoSelection:NO
                                                                 autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
     
-    demographicSexPropertyDef.type=SCPropertyTypeCustom;
-    demographicSexPropertyDef.uiElementClass=[EncryptedSCSelectionCell class];
+//    demographicSexPropertyDef.type=SCPropertyTypeSelection;
     
-    NSDictionary *encryProfileSexTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"sex",@"keyString",@"Sex",@"sex", nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    demographicSexPropertyDef.objectBindings=encryProfileSexTVCellKeyBindingsDic;
-    
-    demographicSexPropertyDef.autoValidate=NO;
+//    demographicSexPropertyDef.type=SCPropertyTypeCustom;
+//    demographicSexPropertyDef.uiElementClass=[EncryptedSCSelectionCell class];
+//    
+//    NSDictionary *encryProfileSexTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"sex",@"keyString",@"Sex",@"sex", nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+//    
+//    
+//    demographicSexPropertyDef.objectBindings=encryProfileSexTVCellKeyBindingsDic;
+//    
+//    demographicSexPropertyDef.autoValidate=NO;
     
     
     
@@ -249,18 +251,19 @@
                                                                      allowMultipleSelection:NO
                                                                            allowNoSelection:NO autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
     SCPropertyDefinition *demographicNotesPropertyDef = [self.demographicProfileDef propertyDefinitionWithName:@"profileNotes"];
+    demographicNotesPropertyDef.type=SCPropertyTypeTextView;
 //    demographicNotesPropertyDef.type=SCPropertyTypeTextView;
     
    
-    demographicNotesPropertyDef.type=SCPropertyTypeCustom;
-    demographicNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    
-    NSDictionary *encryProfileNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"profileNotes",@"keyString",@"Notes",@"profileNotes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    demographicNotesPropertyDef.objectBindings=encryProfileNotesTVCellKeyBindingsDic;
+//    demographicNotesPropertyDef.type=SCPropertyTypeCustom;
+//    demographicNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+//    
+//    NSDictionary *encryProfileNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"profileNotes",@"keyString",@"Notes",@"profileNotes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+//    
+//    
+//    demographicNotesPropertyDef.objectBindings=encryProfileNotesTVCellKeyBindingsDic;
     demographicNotesPropertyDef.title=@"Notes";
-    demographicNotesPropertyDef.autoValidate=NO;
+//    demographicNotesPropertyDef.autoValidate=NO;
     
     
     
@@ -467,41 +470,42 @@
     //Do some property definition customization for the Immigration History Entity attribute
     SCPropertyDefinition *migrationFromPropertyDef = [migrationHistoryDef propertyDefinitionWithName:@"migratedFrom"];
   
-    
-    migrationFromPropertyDef.type=SCPropertyTypeCustom;
-    migrationFromPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    
-    NSDictionary *encryMigrationFromTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"migratedFrom",@"keyString",@"Migrated From",@"migratedFrom",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    migrationFromPropertyDef.objectBindings=encryMigrationFromTVCellKeyBindingsDic;
+    migrationFromPropertyDef.type=SCPropertyTypeTextView;
+//    migrationFromPropertyDef.type=SCPropertyTypeCustom;
+//    migrationFromPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+//    
+//    NSDictionary *encryMigrationFromTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"migratedFrom",@"keyString",@"Migrated From",@"migratedFrom",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+//    
+//    
+//    migrationFromPropertyDef.objectBindings=encryMigrationFromTVCellKeyBindingsDic;
     migrationFromPropertyDef.title=@"Migrated From";
-    migrationFromPropertyDef.autoValidate=NO;
+//    migrationFromPropertyDef.autoValidate=NO;
     
     
     SCPropertyDefinition *migrationToPropertyDef = [migrationHistoryDef propertyDefinitionWithName:@"migratedTo"];
-    
-    migrationToPropertyDef.type=SCPropertyTypeCustom;
-    migrationToPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    
-    NSDictionary *encryMigrationToTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"migratedTo",@"keyString",@"To",@"migratedTo",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    migrationToPropertyDef.objectBindings=encryMigrationToTVCellKeyBindingsDic;
+    migrationToPropertyDef.type=SCPropertyTypeTextView;
+//    migrationToPropertyDef.type=SCPropertyTypeCustom;
+//    migrationToPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+//    
+//    NSDictionary *encryMigrationToTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"migratedTo",@"keyString",@"To",@"migratedTo",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+//    
+//    
+//    migrationToPropertyDef.objectBindings=encryMigrationToTVCellKeyBindingsDic;
     migrationToPropertyDef.title=@"To";
-    migrationToPropertyDef.autoValidate=NO;
+//    migrationToPropertyDef.autoValidate=NO;
     
     SCPropertyDefinition *migrationHistoryNotesPropertyDef = [migrationHistoryDef propertyDefinitionWithName:@"notes"];
     
-    migrationHistoryNotesPropertyDef.type=SCPropertyTypeCustom;
-    migrationHistoryNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    
-    NSDictionary *encryHistoryNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    migrationHistoryNotesPropertyDef.objectBindings=encryHistoryNotesTVCellKeyBindingsDic;
+//    migrationHistoryNotesPropertyDef.type=SCPropertyTypeCustom;
+//    migrationHistoryNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+//    
+//    NSDictionary *encryHistoryNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+//    
+//    
+//    migrationHistoryNotesPropertyDef.objectBindings=encryHistoryNotesTVCellKeyBindingsDic;
     migrationHistoryNotesPropertyDef.title=@"Notes";
-    migrationHistoryNotesPropertyDef.autoValidate=NO;
+    migrationHistoryNotesPropertyDef.type=SCPropertyTypeTextView;
+//    migrationHistoryNotesPropertyDef.autoValidate=NO;
     
     //Create the property definition for the arrivedDate property in the migration history class
     SCPropertyDefinition *arrivedDatePropertyDef = [migrationHistoryDef propertyDefinitionWithName:@"arrivedDate"];
@@ -874,16 +878,16 @@
     //Create the property definition for the notes property in the interpersonal class
     SCPropertyDefinition *interpersonalNotesPropertyDef = [interpersonalDef propertyDefinitionWithName:@"notes"];
     
-       
-    interpersonalNotesPropertyDef.type=SCPropertyTypeCustom;
-    interpersonalNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    
-    NSDictionary *encryInterpersonalNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    interpersonalNotesPropertyDef.objectBindings=encryInterpersonalNotesTVCellKeyBindingsDic;
+    interpersonalNotesPropertyDef.type=SCPropertyTypeTextView;
+//    interpersonalNotesPropertyDef.type=SCPropertyTypeCustom;
+//    interpersonalNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+//    
+//    NSDictionary *encryInterpersonalNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+//    
+//    
+//    interpersonalNotesPropertyDef.objectBindings=encryInterpersonalNotesTVCellKeyBindingsDic;
     interpersonalNotesPropertyDef.title=@"Notes";
-    interpersonalNotesPropertyDef.autoValidate=NO;
+//    interpersonalNotesPropertyDef.autoValidate=NO;
     
 //       BOPickersDataSource *boPicker=[[BOPickersDataSource alloc]init];
     

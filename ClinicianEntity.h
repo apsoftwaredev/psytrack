@@ -64,7 +64,7 @@
 @property (nonatomic, weak) NSString *tempNotes;
 @property (nonatomic, strong)  NSString *combinedName;
 
--(void)rekeyEncryptedAttributes;
+//-(void)rekeyEncryptedAttributes;
 
 @end
 

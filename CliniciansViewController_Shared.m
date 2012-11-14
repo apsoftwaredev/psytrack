@@ -910,6 +910,8 @@
                                                                   propertyNames:[NSArray arrayWithObjects:@"publicationTitle",@"authors",@"datePublished", @"publisher",@"volume", @"pageNumbers",@"publicationType",@"notes",
                                                                                      nil]];
     
+        SCPropertyDefinition *publicationTitlePropertyDef=[publicationDef propertyDefinitionWithName:@"publicationTitle"];
+        publicationTitlePropertyDef.title=@"Title";
     //set the order attributes name defined in the Publication Entity    
     publicationDef.orderAttributeName=@"order";
     publicationDef.titlePropertyName=@"publicationTitle;datePublished";
@@ -938,7 +940,7 @@
                                                                          datePickerMode:UIDatePickerModeDate 
                                                           displayDatePickerInDetailView:NO];
     
-    SCPropertyDefinition *publicationTitlePropertyDef = [publicationDef propertyDefinitionWithName:@"publicationTitle"];
+    
 	
 	publicationTitlePropertyDef.type = SCPropertyTypeTextView;	
     SCPropertyDefinition *publicationAuthorsPropertyDef = [publicationDef propertyDefinitionWithName:@"authors"];
@@ -1077,15 +1079,16 @@
     //create a property definition for the notes property in the referral class definition
     SCPropertyDefinition *referralNotesPropertyDef = [referralDef propertyDefinitionWithName:@"notes"];
     
-    referralNotesPropertyDef.type=SCPropertyTypeCustom;
-    referralNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    
-    NSDictionary *encryReferralNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    referralNotesPropertyDef.objectBindings=encryReferralNotesTVCellKeyBindingsDic;
+//    referralNotesPropertyDef.type=SCPropertyTypeCustom;
+//    referralNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+//    
+//    NSDictionary *encryReferralNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+//    
+//    
+//    referralNotesPropertyDef.objectBindings=encryReferralNotesTVCellKeyBindingsDic;
     referralNotesPropertyDef.title=@"Notes";
-    referralNotesPropertyDef.autoValidate=NO;
+        referralNotesPropertyDef.type=SCPropertyTypeTextView;
+//    referralNotesPropertyDef.autoValidate=NO;
     
     //Create the property definition for the referralInOrOut property in the referralDef class
     SCPropertyDefinition *referralInOrOutPropertyDef = [referralDef propertyDefinitionWithName:@"referralInOrOut"];
@@ -1660,17 +1663,17 @@
     SCPropertyDefinition *logNotesPropertyDef = [logDef propertyDefinitionWithName:@"notes"];
     
     logNotesPropertyDef.title = @"Notes";
-    
-    
-    logNotesPropertyDef.type=SCPropertyTypeCustom;
-    logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    
-    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
-    //    phoneNumberPropertyDef.title=@"Phone Number";
-    logNotesPropertyDef.autoValidate=NO;
+        logNotesPropertyDef.type=SCPropertyTypeTextView;
+//    
+//    logNotesPropertyDef.type=SCPropertyTypeCustom;
+//    logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+//    
+//    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+//    
+//    
+//    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
+//    //    phoneNumberPropertyDef.title=@"Phone Number";
+//    logNotesPropertyDef.autoValidate=NO;
     
     
 
@@ -1679,16 +1682,16 @@
     //override the auto title generation for the notes property definition and set it to blank, it will have the title in the header
     clinicianNotesPropertyDef.title=@"";
         
-    
-    clinicianNotesPropertyDef.type=SCPropertyTypeCustom;
-    clinicianNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    
-    NSDictionary *encryClinicianNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    clinicianNotesPropertyDef.objectBindings=encryClinicianNotesTVCellKeyBindingsDic;
-    //    phoneNumberPropertyDef.title=@"Phone Number";
-    clinicianNotesPropertyDef.autoValidate=NO;
+        clinicianNotesPropertyDef.type=SCPropertyTypeTextView;
+//    clinicianNotesPropertyDef.type=SCPropertyTypeCustom;
+//    clinicianNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+//    
+//    NSDictionary *encryClinicianNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+//    
+//    
+//    clinicianNotesPropertyDef.objectBindings=encryClinicianNotesTVCellKeyBindingsDic;
+//    //    phoneNumberPropertyDef.title=@"Phone Number";
+//    clinicianNotesPropertyDef.autoValidate=NO;
 
 	SCPropertyDefinition *clinicianBioPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"bio"];
     
@@ -1807,7 +1810,10 @@
 }
 
 
-
+- (BOOL)disablesAutomaticKeyboardDismissal
+{
+    return NO;
+}
 
 
 #pragma mark -
@@ -2918,10 +2924,10 @@
             
             if (notesManagedObject&&[notesManagedObject respondsToSelector:@selector(entity)]) {
             
-            if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
-                EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
+            if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[SCTextViewCell class]]) {
+                SCTextViewCell *noteCell=(SCTextViewCell *)notesCell;
                 
-                if (encryptedNoteCell.textView.text.length) 
+                if (noteCell.textView.text.length)
                 {
                     valid=TRUE;
                 }
@@ -2970,10 +2976,10 @@
             NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
               
             
-            if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"] && [cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"] && [cellFrom isKindOfClass:[SCTextViewCell class]]) {
                 
-                EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
-                EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
+                SCTextViewCell *encryptedFrom=(SCTextViewCell *)cellFrom;
+                SCTextViewCell *encryptedTo=(SCTextViewCell *)cellTo;
                 
                 
                 SCDateCell *arrivedDateCell=(SCDateCell *)cellArrivedDate;
@@ -3526,7 +3532,7 @@
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
             
             
-            if (notesManagedObject &&[notesManagedObject respondsToSelector:@selector(entity)]&&[notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (notesManagedObject &&[notesManagedObject respondsToSelector:@selector(entity)]&&[notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[SCTextViewCell class]]) {
                 
                 [notesCell becomeFirstResponder];
             }
@@ -3564,7 +3570,7 @@
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
             
             
-            if (notesManagedObject &&[notesManagedObject respondsToSelector:@selector(entity)]&&[notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
+            if (notesManagedObject &&[notesManagedObject respondsToSelector:@selector(entity)]&&[notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[SCTextViewCell class]]) {
                 
                 [notesCell becomeFirstResponder];
             }

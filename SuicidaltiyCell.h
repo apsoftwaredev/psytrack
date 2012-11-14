@@ -55,4 +55,5 @@
 -(void)toggleButtons:(UIButton *)button;
 -(void)checkSuicideRisk;
 -(void)flashSuicideWarning;
+-(NSString *)getSelectedVariables;
 @end

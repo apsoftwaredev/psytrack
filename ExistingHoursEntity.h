@@ -29,7 +29,7 @@
 
 
 @property (nonatomic, weak) NSString *tempNotes;
--(void)rekeyEncryptedAttributes;
+//-(void)rekeyEncryptedAttributes;
 @end
 @interface ExistingHoursEntity (CoreDataGeneratedAccessors)
 

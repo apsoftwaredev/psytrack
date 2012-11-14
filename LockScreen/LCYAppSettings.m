@@ -30,107 +30,107 @@
 
 
 
--(void)rekeyEncryptedModelSubclasses{
-
-    BOOL rekey=YES;
-    if (rekey) {
-        NSArray *clientsArray=[self fetchEntity:@"ClientEntity"];
-        
-        for (ClientEntity *client in clientsArray) {
-            
-            [client rekeyEncryptedAttributes];
-        }
-    }
-   
-    if (rekey) {
-        NSArray *existingHoursArray=[self fetchEntity:@"ExistingHoursEntity"];
-        
-        for (ExistingHoursEntity *existingHours in existingHoursArray) {
-            
-            [existingHours rekeyEncryptedAttributes];
-        }
-    }
-    if (rekey) {
-        NSArray *clinicianArray=[self fetchEntity:@"ClinicianEntity"];
-        
-        for (ClinicianEntity *clinician in clinicianArray) {
-            
-            [clinician rekeyEncryptedAttributes];
-        }
-    }
-    if (rekey) {
-        NSArray *medicationReviewArray=[self fetchEntity:@"MedicationReviewEntity"];
-        
-        for (MedicationReviewEntity *medicationReview in medicationReviewArray) {
-            
-            [medicationReview rekeyEncryptedAttributes];
-        }
-    }
-    if (rekey) {
-        NSArray *medicationReviewArray=[self fetchEntity:@"MedicationReviewEntity"];
-        
-        for (MedicationReviewEntity *medicationReview in medicationReviewArray) {
-            
-            [medicationReview rekeyEncryptedAttributes];
-        }
-    }
-    if (rekey) {
-        NSArray *medicationEntityArray=[self fetchEntity:@"MedicationEntity"];
-        
-        for (MedicationEntity *medication in medicationEntityArray) {
-            
-            [medication rekeyEncryptedAttributes];
-        }
-    }
-    if (rekey) {
-        NSArray *referralEntityArray=[self fetchEntity:@"ReferralEntity"];
-        
-        for (ReferralEntity *referral in referralEntityArray) {
-            
-            [referral rekeyEncryptedAttributes];
-        }
-    }
-
-    if (rekey) {
-        NSArray *interpersonalEntityArray=[self fetchEntity:@"InterpersonalEntity"];
-        
-        for (InterpersonalEntity *interpersonal in interpersonalEntityArray) {
-            
-            [interpersonal rekeyEncryptedAttributes];
-        }
-    }
-    
-
-    if (rekey) {
-        NSArray *migrationHistoryEntityArray=[self fetchEntity:@"MigrationHistoryEntity"];
-        
-        for (MigrationHistoryEntity *migrationHistory in migrationHistoryEntityArray) {
-            
-            [migrationHistory rekeyEncryptedAttributes];
-        }
-    }
-    if (rekey) {
-        NSArray *demographicProfileEntityArray=[self fetchEntity:@"DemographicProfileEntity"];
-        
-        for (DemographicProfileEntity *demographicProfile in demographicProfileEntityArray) {
-            
-            [demographicProfile rekeyEncryptedAttributes];
-        }
-    }
-    
-    if (rekey) {
-        NSArray *logEntityArray=[self fetchEntity:@"LogEntity"];
-        
-        for (LogEntity *log in logEntityArray) {
-            
-            [log rekeyEncryptedAttributes];
-        }
-    }
-
-
-    
-
-}
+//-(void)rekeyEncryptedModelSubclasses{
+//
+//    BOOL rekey=YES;
+//    if (rekey) {
+//        NSArray *clientsArray=[self fetchEntity:@"ClientEntity"];
+//        
+//        for (ClientEntity *client in clientsArray) {
+//            
+//            [client rekeyEncryptedAttributes];
+//        }
+//    }
+//   
+//    if (rekey) {
+//        NSArray *existingHoursArray=[self fetchEntity:@"ExistingHoursEntity"];
+//        
+//        for (ExistingHoursEntity *existingHours in existingHoursArray) {
+//            
+//            [existingHours rekeyEncryptedAttributes];
+//        }
+//    }
+//    if (rekey) {
+//        NSArray *clinicianArray=[self fetchEntity:@"ClinicianEntity"];
+//        
+//        for (ClinicianEntity *clinician in clinicianArray) {
+//            
+//            [clinician rekeyEncryptedAttributes];
+//        }
+//    }
+//    if (rekey) {
+//        NSArray *medicationReviewArray=[self fetchEntity:@"MedicationReviewEntity"];
+//        
+//        for (MedicationReviewEntity *medicationReview in medicationReviewArray) {
+//            
+//            [medicationReview rekeyEncryptedAttributes];
+//        }
+//    }
+//    if (rekey) {
+//        NSArray *medicationReviewArray=[self fetchEntity:@"MedicationReviewEntity"];
+//        
+//        for (MedicationReviewEntity *medicationReview in medicationReviewArray) {
+//            
+//            [medicationReview rekeyEncryptedAttributes];
+//        }
+//    }
+//    if (rekey) {
+//        NSArray *medicationEntityArray=[self fetchEntity:@"MedicationEntity"];
+//        
+//        for (MedicationEntity *medication in medicationEntityArray) {
+//            
+//            [medication rekeyEncryptedAttributes];
+//        }
+//    }
+//    if (rekey) {
+//        NSArray *referralEntityArray=[self fetchEntity:@"ReferralEntity"];
+//        
+//        for (ReferralEntity *referral in referralEntityArray) {
+//            
+//            [referral rekeyEncryptedAttributes];
+//        }
+//    }
+//
+//    if (rekey) {
+//        NSArray *interpersonalEntityArray=[self fetchEntity:@"InterpersonalEntity"];
+//        
+//        for (InterpersonalEntity *interpersonal in interpersonalEntityArray) {
+//            
+//            [interpersonal rekeyEncryptedAttributes];
+//        }
+//    }
+//    
+//
+//    if (rekey) {
+//        NSArray *migrationHistoryEntityArray=[self fetchEntity:@"MigrationHistoryEntity"];
+//        
+//        for (MigrationHistoryEntity *migrationHistory in migrationHistoryEntityArray) {
+//            
+//            [migrationHistory rekeyEncryptedAttributes];
+//        }
+//    }
+//    if (rekey) {
+//        NSArray *demographicProfileEntityArray=[self fetchEntity:@"DemographicProfileEntity"];
+//        
+//        for (DemographicProfileEntity *demographicProfile in demographicProfileEntityArray) {
+//            
+//            [demographicProfile rekeyEncryptedAttributes];
+//        }
+//    }
+//    
+//    if (rekey) {
+//        NSArray *logEntityArray=[self fetchEntity:@"LogEntity"];
+//        
+//        for (LogEntity *log in logEntityArray) {
+//            
+//            [log rekeyEncryptedAttributes];
+//        }
+//    }
+//
+//
+//    
+//
+//}
 
 -(NSArray *)fetchEntity:(NSString *)entityName{
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
