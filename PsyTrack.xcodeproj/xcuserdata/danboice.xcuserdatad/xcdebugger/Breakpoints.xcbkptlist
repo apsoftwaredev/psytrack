@@ -2380,11 +2380,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ConsultationsViewController.m"
-         timestampString = "375309994.435911"
+         timestampString = "375400093.460201"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "804"
-         endingLineNumber = "804"
+         startingLineNumber = "891"
+         endingLineNumber = "891"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7125,12 +7125,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ConsultationsViewController.m"
-         timestampString = "375309994.435911"
+         timestampString = "375400093.460201"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "821"
-         endingLineNumber = "821"
-         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
+         startingLineNumber = "779"
+         endingLineNumber = "779"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -7138,38 +7138,51 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ConsultationsViewController.m"
-         timestampString = "375310330.345416"
+         timestampString = "375400093.460201"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "822"
          endingLineNumber = "822"
-         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ConsultationsViewController.m"
-         timestampString = "375310552.329284"
+         timestampString = "375400093.460201"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "836"
-         endingLineNumber = "836"
-         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
+         startingLineNumber = "844"
+         endingLineNumber = "844"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ConsultationsViewController.m"
-         timestampString = "375311037.251812"
+         timestampString = "375400093.460201"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "847"
-         endingLineNumber = "847"
-         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
+         startingLineNumber = "857"
+         endingLineNumber = "857"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ConsultationsViewController.m"
+         timestampString = "375400093.460201"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "781"
+         endingLineNumber = "781"
+         landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

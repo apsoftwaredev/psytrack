@@ -54,7 +54,10 @@
                                                               managedObjectContext:managedObjectContext
                                                                      propertyNames:[NSArray arrayWithObjects:@"clinician",@"dateReferred",@"otherSource", @"notes", nil]];
     
-       
+    
+    SCPropertyDefinition *paidPropertyDef=[consultationDef propertyDefinitionWithName:@"paid"];
+    paidPropertyDef.title=@"Balance Paid";
+    
     referralDef.titlePropertyName=@"clinician.combinedName";
     
     
@@ -76,10 +79,25 @@
     
     
     SCPropertyDefinition *feeAmountPropertyDef=[feeDef propertyDefinitionWithName:@"amount"];
-    feeAmountPropertyDef.autoValidate=NO;
+    feeAmountPropertyDef.autoValidate=YES;
+    feeAmountPropertyDef.type=SCPropertyTypeNumericTextField;
     
-    SCPropertyDefinition *rateHourlyRatePropertyDef=[rateDef propertyDefinitionWithName:@"hourlyRate"];
-    rateHourlyRatePropertyDef.autoValidate=NO;
+    SCNumericTextFieldAttributes *numericAttributes = [SCNumericTextFieldAttributes attributesWithMinimumValue:nil maximumValue:nil allowFloatValue:YES];
+    [numericAttributes.numberFormatter setGroupingSeparator:@","];
+    [numericAttributes.numberFormatter setGroupingSize:3];
+    
+
+    
+    feeAmountPropertyDef.attributes=numericAttributes;
+    
+        SCPropertyDefinition *rateHourlyRatePropertyDef=[rateDef propertyDefinitionWithName:@"hourlyRate"];
+    rateHourlyRatePropertyDef.autoValidate=YES;
+    
+    rateHourlyRatePropertyDef.type=SCPropertyTypeNumericTextField;
+    
+    rateHourlyRatePropertyDef.attributes=numericAttributes;
+    
+    
     NSLocale *theLocale = [NSLocale currentLocale];
     NSString *symbol = [theLocale objectForKey:NSLocaleCurrencySymbol];
     
@@ -635,9 +653,10 @@
 -(void)tableViewModel:(SCTableViewModel *)tableModel willDisplayCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 
 
-    if (tableModel.tag==2&&tableModel.sectionCount) {
+    if ((tableModel.tag==2 || tableModel.tag==4)&&tableModel.sectionCount) {
        
         NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+        
         
         if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"RateChargeEntity"]) {
             RateChargeEntity *rateChargeObject=(RateChargeEntity *)cellManagedObject;
@@ -661,7 +680,11 @@
             NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc]init];
             [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
             [currencyFormatter setLocale:locale];
-            NSString *textToDisplay=[NSString stringWithFormat:@"%@ %.2lf hrs at %@ hr (%@ total)",rateObject.rateName,[hoursDecimalNumber floatValue],rateObject.hourlyRate,[currencyFormatter stringFromNumber:  totalChargeDecimalNumber]];
+
+            [currencyFormatter setGroupingSize:3];
+            [currencyFormatter setGroupingSeparator:@","];
+            
+            NSString *textToDisplay=[NSString stringWithFormat:@"%@ %.2lf hrs at %@ hr (%@ total)",rateObject.rateName,[hoursDecimalNumber floatValue],[currencyFormatter stringFromNumber: rateObject.hourlyRate],[currencyFormatter stringFromNumber:  totalChargeDecimalNumber]];
             
             cell.textLabel.text=textToDisplay;
             currencyFormatter=nil;
@@ -768,17 +791,24 @@
            NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc]init];
            [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
            [currencyFormatter setLocale:locale];
-           
+           [currencyFormatter setGroupingSeparator:@","];
+           [currencyFormatter setGroupingSize:3];
            NSString *displayString=nil;
-           if (dateReceived){
+           if (dateReceived&&feeObject.amount){
                
-               displayString=[dateReceivedStr stringByAppendingFormat:@": %@",[currencyFormatter stringFromNumber:feeObject.amount]];
+               displayString=feeObject.feeName?[dateReceivedStr stringByAppendingFormat:@": %@ %@",feeObject.feeName,[currencyFormatter stringFromNumber:feeObject.amount] ]:[dateReceivedStr stringByAppendingFormat:@": %@",[currencyFormatter stringFromNumber:feeObject.amount]];
                
-              
+               
            }
            else if (feeObject.amount){
-               displayString = [currencyFormatter stringFromNumber:feeObject.amount];
+               displayString = feeObject.feeName?[NSString stringWithFormat:@"%@ %@",feeObject.feeName,[currencyFormatter stringFromNumber:feeObject.amount] ]:[currencyFormatter stringFromNumber:feeObject.amount];
                
+           }
+           else {
+           
+               displayString=(feeObject.feeName&&dateReceivedStr)?[dateReceivedStr stringByAppendingFormat:@": %@ %@",feeObject.feeName,[currencyFormatter stringFromNumber:[NSNumber numberWithFloat:0.00]] ]:dateReceivedStr?[dateReceivedStr stringByAppendingFormat:@": %@",[currencyFormatter stringFromNumber:[NSNumber numberWithFloat:0.00]]]:[currencyFormatter stringFromNumber:[NSNumber numberWithFloat:0.00]];
+
+           
            }
            
            cell.textLabel.text=displayString;
@@ -789,8 +819,65 @@
            
        }
 
+      else  if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"RateEntity"]) {
+            RateEntity *rateObject=(RateEntity *)cellManagedObject;
+            
+          
+            NSLocale *locale = [NSLocale currentLocale];
+            NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc]init];
+            [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+            [currencyFormatter setLocale:locale];
+            
+            [currencyFormatter setGroupingSize:3];
+            [currencyFormatter setGroupingSeparator:@","];
+            
+            NSString *textToDisplay=[NSString stringWithFormat:@"%@ %@",rateObject.rateName,[currencyFormatter stringFromNumber: rateObject.hourlyRate]];
+            
+            cell.textLabel.text=textToDisplay;
+            currencyFormatter=nil;
+        }
         
+    }
+    else if (tableModel.tag==3){
+    
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
         
+        DLog(@"cell text label is  %@",cell.textLabel.text);
+        DLog(@"cell tag is  %i",cell.tag);
+        DLog(@"cell bound object is  %@",cellManagedObject);
+        if ([cell.textLabel.text isEqualToString:@"Rate"]&&cell.tag==2 &&([cell isKindOfClass:[SCObjectSelectionCell class]]) ) {
+            
+             SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+            
+            if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
+            
+            RateEntity *rateObject=(RateEntity *)[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex intValue]];
+            
+
+            if (rateObject.hourlyRate && rateObject.rateName) {
+               
+                NSLocale *locale = [NSLocale currentLocale];
+                NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc]init];
+                [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+                [currencyFormatter setLocale:locale];
+                
+                [currencyFormatter setGroupingSize:3];
+                [currencyFormatter setGroupingSeparator:@","];
+                
+                NSString *textToDisplay=[NSString stringWithFormat:@"%@ %@",rateObject.rateName,[currencyFormatter stringFromNumber: rateObject.hourlyRate]];
+                
+               
+                objectSelectionCell.label.text=textToDisplay;
+                currencyFormatter=nil;
+
+            }
+            
+            }
+            
+            
+        }
+    
+    
     }
    
 }
@@ -815,51 +902,52 @@
         }
 
     }
-   else if (tableModel.tag==3) {
-       
-       DLog(@"cell class is  %@",cell.class);
-       if ([cell isKindOfClass:[SCNumericTextFieldCell class]]) {
-           SCNumericTextFieldCell *numericCell=(SCNumericTextFieldCell *)cell;
-           
-           
-           
-           NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];
-           NSString *numberStr=[numericCell.textField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
-           NSNumber *number=[numberFormatter numberFromString:numberStr];
-        
-           NSDecimal amountDecimal=[number decimalValue];
-           
-           NSDecimalNumber *amountDecimalNumber = [NSDecimalNumber decimalNumberWithDecimal:
-                                                  amountDecimal];
-           
-           if (numberStr.length &&(number ||amountDecimalNumber)) {
-               valid=YES;
-               
-               
-//                   NSScanner* scan = [NSScanner scannerWithString:numberStr];
-//                   int val;
+//   else if (tableModel.tag==3&&[cell isKindOfClass:[SCNumericTextFieldCell class]])
+//   {
+//       
+//       DLog(@"cell class is  %@",cell.class);
+//       
+//           SCNumericTextFieldCell *numericCell=(SCNumericTextFieldCell *)cell;
+//           
+//           
+//           
+//           NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];
+//           NSString *numberStr=[numericCell.textField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
+//           NSNumber *number=[numberFormatter numberFromString:numberStr];
+//        
+//           NSDecimal amountDecimal=[number decimalValue];
+//           
+//           NSDecimalNumber *amountDecimalNumber = [NSDecimalNumber decimalNumberWithDecimal:
+//                                                  amountDecimal];
+//           
+//           if (numberStr.length &&(number ||amountDecimalNumber)) {
+//               valid=YES;
+//               
+//               
+////                   NSScanner* scan = [NSScanner scannerWithString:numberStr];
+////                   int val;
+////                   
+////                   valid=[scan scanInt:&val] && [scan isAtEnd];
+//               
 //                   
-//                   valid=[scan scanInt:&val] && [scan isAtEnd];
-               
-                   
-           }
-           else{
-               valid=NO;
-           }
-           
-               
-         
-           
-           
-           
-           numberFormatter=nil;
-           
-           
-           
-           
-       }
-
-       
+//           }
+//           else{
+//               valid=NO;
+//           }
+//           
+//               
+//         
+//           
+//           
+//           
+//           numberFormatter=nil;
+//           
+//           
+//           
+//           
+//       }
+//
+    
        else if (sectionManagedObject&& [sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"RateChargeEntity"]) {
         
             if (cell.tag==2&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
@@ -927,9 +1015,9 @@
             return YES;
         }
         
-    }
     
-return valid;    
+
+return valid;
 
 
 
