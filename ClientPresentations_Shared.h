@@ -45,7 +45,6 @@ typedef enum {
 //@property (strong, nonatomic) IBOutlet SCArrayOfObjectsModel *tableModel;
 
 @property (strong, nonatomic)IBOutlet NSDate *serviceDatePickerDate;
-
 -(id)setupUsingSTV ;
 -(void)addWechlerAgeCellToSection:(SCTableViewSection *)section;
 

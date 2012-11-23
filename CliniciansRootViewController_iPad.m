@@ -60,7 +60,7 @@
    
 
 
-   
+    objectsModel.delegate=self;
 
     objectsModel.addButtonItem=objectsModel.detailViewController.navigationItem.rightBarButtonItem;
     
@@ -171,7 +171,12 @@
         
     SCTableViewSection *sectionAtIndexPathThatChanged=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
         if (!addingClinician && tableViewModel.tag==1&&((cell&&indexPath.section==0&&![cell isKindOfClass:[SCArrayOfObjectsCell class]]&&![cell isKindOfClass:[SCObjectCell class]]&&![cell isKindOfClass:[SCObjectSelectionCell class]])||(indexPath.section==1 &&sectionAtIndexPathThatChanged.cellCount==3))) {
-            [sectionAtIndexPathThatChanged commitCellChanges];
+            
+            for (NSInteger i=0; i<tableViewModel.sectionCount; i++) {
+                SCTableViewSection *sectionAtIndex=[tableViewModel sectionAtIndex:i];
+                [sectionAtIndex commitCellChanges];
+            }
+            
             
             if (!self.searchBar.selectedScopeButtonIndex==0) {
                 [self.searchBar setSelectedScopeButtonIndex:0];

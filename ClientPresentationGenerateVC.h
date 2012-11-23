@@ -25,6 +25,12 @@
 @property (nonatomic, weak)IBOutlet UIView *containerView;
 @property (nonatomic, weak) IBOutlet UIButton *generateButton;
 @property (nonatomic,strong) SCArrayOfObjectsModel *presentationTableModel;
+@property (nonatomic, strong)NSDate *serviceDate;
+
+@property (strong, nonatomic) NSDate *timeInDate;
+@property (nonatomic, strong)   NSDate *timeOutDate;
+@property (nonatomic, strong) NSDate *totalTime;
+@property (nonatomic, strong)NSString *serviceDateTimeString;
 
 -(IBAction)generateButtonTapped:(id)sender;
 

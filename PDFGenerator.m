@@ -10,6 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "ClientsSelectionCell.h"
 #import "SuicidaltiyCell.h"
+#import "ClinicianTypeEntity.h"
+#import "ClientEntity.h"
+#import "ClientsSelectionCell.h"
 
 #define LEFT_MARGIN 50
 #define RIGHT_MARGIN 50
@@ -24,18 +27,18 @@
 @synthesize invisibleTextView;
 
 
-- (void)createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)presentationTableModel forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString*)password {
+- (void)createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)presentationTableModel serviceDateTimeStr:(NSString *)serviceDateTimeStr clinician:(ClinicianEntity*)clinician forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString*)password{
     
     //create our invisibleTextView
-    invisibleTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    textArray = [[NSMutableArray alloc] init];
-    NSString *content=[self getContentFromTableModel:presentationTableModel];
+//    invisibleTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+//    textArray = [[NSMutableArray alloc] init];
+//    NSString *content=[self getContentFromTableModel:presentationTableModel];
     
     
     
     
-    [textArray setArray:[content componentsSeparatedByString:@" "]];
-    [invisibleTextView setText:content];
+//    [textArray setArray:[content componentsSeparatedByString:@" "]];
+//    [invisibleTextView setText:content];
     
     
 	CGContextRef pdfContext;
@@ -50,7 +53,7 @@
     NSString* documentDirectory = [documentDirectories objectAtIndex:0];
     NSString* documentDirectoryFilename = [documentDirectory stringByAppendingPathComponent:fileName];
     
-NSLog(@"document directory filename is %@",documentDirectoryFilename);
+
     
 	const char *filename = [documentDirectoryFilename UTF8String];
 	// Create a CFString from the filename we provide to this method when we call it
@@ -83,7 +86,74 @@ NSLog(@"document directory filename is %@",documentDirectoryFilename);
 	//CFRelease(passwordString);
 	
 	//CFRange currentRange = CFRangeMake(0, 0);
-	
+    NSString *clinicianString=nil;
+    if (clinician) {
+        clinicianString=clinician.combinedName;
+        if (clinicianString&& clinician.clinicianType) {
+            
+            
+            NSString *clinicianTypeString=nil;
+            
+            for (ClinicianTypeEntity *clinicianType in clinician.clinicianType.allObjects) {
+               DLog(@"clinician type class is  %@",clinicianType.class);
+                if (clinicianTypeString&&clinicianTypeString.length) {
+                    
+                    clinicianTypeString=[clinicianTypeString stringByAppendingFormat:@", %@",clinicianType.clinicianType];
+                
+                }
+              
+                else if ([clinicianType.clinicianType isKindOfClass:[NSString class]]&&clinicianType.clinicianType.length) {
+                    clinicianTypeString=clinicianType.clinicianType;
+                }
+            
+            }
+                   
+        
+           if ([clinicianString isKindOfClass:[NSString class]] &&clinicianTypeString&&clinicianTypeString.length) {
+                clinicianString=[clinicianString stringByAppendingFormat:@" (%@)",clinicianTypeString ];
+            }
+        }
+        clinicianString=[@"Provider: " stringByAppendingString:clinicianString];
+        
+    }
+    NSString *clientIDCodeStr=nil;
+    if (presentationTableModel && presentationTableModel.sectionCount>0) {
+        SCTableViewSection *firstSection=(SCTableViewSection *)[presentationTableModel sectionAtIndex:0];
+        if (firstSection.cellCount>0) {
+            SCTableViewCell *clientCell=(SCTableViewCell *)[firstSection cellAtIndex:0];
+            
+            if ([clientCell isKindOfClass:[ClientsSelectionCell class]]) {
+                ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)clientCell;
+                ClientEntity *clientObject=(ClientEntity *)clientSelectionCell.clientObject;
+                if (clientObject &&clientObject.clientIDCode) {
+                    clientIDCodeStr= clientObject.clientIDCode;
+                    
+                }
+               
+                if (firstSection.cellCount>1) {
+                    SCLabelCell *ageCell=(SCLabelCell *)[firstSection cellAtIndex:1];
+                    if (ageCell && [ageCell isKindOfClass:[SCLabelCell class]]&& ageCell.label.text && (![ageCell.label.text isEqualToString:@"choose client"]||[ageCell.label.text isEqualToString:@"no birthdate"])) {
+                    
+                        if (clientIDCodeStr) {
+                            NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+                            [dateFormatter setDateFormat:@"M/d/yyyy"];
+                            clientIDCodeStr =[clientIDCodeStr stringByAppendingFormat:@"  (DOB: %@, Age: %@)",[dateFormatter stringFromDate: clientObject.dateOfBirth], ageCell.label.text];
+                        
+                            dateFormatter=nil;
+                        
+                        }
+                    }
+                    
+                }
+            }
+            
+        }
+       
+        
+    }
+    
+    
+   DLog(@"clinican string is  %@",clinicianString);
 	do {
 		CGContextBeginPage (pdfContext, &pageRect);
 		
@@ -94,13 +164,162 @@ NSLog(@"document directory filename is %@",documentDirectoryFilename);
 		
 		UIGraphicsPushContext(pdfContext);
 		CGContextSaveGState(pdfContext);
-		CGContextTranslateCTM(pdfContext, 0, bounds.origin.y);
-		CGContextScaleCTM(pdfContext, 1, -1);
-		CGContextTranslateCTM(pdfContext, 0, -(bounds.origin.y + bounds.size.height));
-		if ([invisibleTextView.text length] > 0) [[self stringToDraw:font fontSize:fontSize] drawInRect:bounds withFont:[UIFont fontWithName:font size:fontSize]];
+//		CGContextTranslateCTM(pdfContext, 0, bounds.origin.y);
+//		CGContextScaleCTM(pdfContext, 1, -1);
+//		CGContextTranslateCTM(pdfContext, 0, -(bounds.origin.y + bounds.size.height));
+        
+        // Flip the coordinate system
+//        CGContextSetTextMatrix(pdfContext, CGAffineTransformIdentity);
+//        CGContextTranslateCTM(pdfContext, 0, bounds.size.height);
+//        CGContextScaleCTM(pdfContext, 1.0, -1.0);
+
+        
+        CGMutablePathRef newPath = CGPathCreateMutable();
+        CGPathAddRect(newPath, NULL, bounds );
+        
+        NSMutableAttributedString *titleStr = [[NSMutableAttributedString alloc] initWithString:@"Client Interaction Process Notes\n"];
+        UIFont *titleFont=[UIFont fontWithName:@"Georgia-Bold" size:14.0];
+        [titleStr addAttribute:NSFontAttributeName value:titleFont range:NSMakeRange(0, [titleStr length])];
+        
+        CTTextAlignment theAlignment = kCTCenterTextAlignment;
+        CFIndex theNumberOfSettings = 1;
+        CTParagraphStyleSetting theSettings[1] = {{ kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &theAlignment }};
+        CTParagraphStyleRef theParagraphRef = CTParagraphStyleCreate(theSettings, theNumberOfSettings);
+        NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)theParagraphRef, (id)kCTParagraphStyleAttributeName, nil];
+        
+        [titleStr addAttributes:attributes range:NSMakeRange(0,[titleStr length])];
+        //
+        //        [str drawInRect:bounds];
+        
+        
+        // create the framesetter and render text
+        CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)titleStr);
+        CTFrameRef frame = CTFramesetterCreateFrame(framesetter,
+                                                    CFRangeMake(0, [titleStr length]), newPath, NULL);
+        
+        CTFrameDraw(frame, pdfContext);
+        
+        
+        CFRelease(frame);
+       
+        CFRelease(framesetter);
+       
+        CGFloat titleLineHeight=titleFont.lineHeight;
+        
+        UIFont *normalFont=[UIFont fontWithName:@"Georgia-Bold" size:12.0];
+        
+        
+        if (clientIDCodeStr&&[clientIDCodeStr isKindOfClass:[NSString class]]) {
+            
+            
+            
+            
+            
+            NSMutableAttributedString *clientIDCodeAttrString = [[NSMutableAttributedString alloc] initWithString:[@"Client: " stringByAppendingString:clientIDCodeStr]];
+            
+            
+            
+            [clientIDCodeAttrString addAttribute:NSFontAttributeName value:normalFont range:NSMakeRange(0, [clientIDCodeAttrString length])];
+            
+            CGRect clientBounds = CGRectMake(LEFT_MARGIN,
+                                               TOP_MARGIN-titleLineHeight,
+                                               DOC_WIDTH - RIGHT_MARGIN - LEFT_MARGIN,
+                                               DOC_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN);
+            
+            CGMutablePathRef clientPath = CGPathCreateMutable();
+            CGPathAddRect(clientPath, NULL, clientBounds );
+            
+            [clientIDCodeAttrString addAttributes:attributes range:NSMakeRange(0,[clientIDCodeAttrString length])];
+            
+            CTFramesetterRef clientframesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)clientIDCodeAttrString);
+            CTFrameRef clientFrame = CTFramesetterCreateFrame(clientframesetter,
+                                                                   CFRangeMake(0, [clientIDCodeAttrString length]), clientPath, NULL);
+            
+            CTFrameDraw(clientFrame, pdfContext);
+            
+            CFRelease(clientFrame);
+            CFRelease(clientPath);
+            CFRelease(clientframesetter);
+        }
+
+        
+        
+        if (serviceDateTimeStr&&[serviceDateTimeStr isKindOfClass:[NSString class]]) {
+            
+            
+            
+            
+            
+            NSMutableAttributedString *serviceDateString = [[NSMutableAttributedString alloc] initWithString:[@"Service Date: " stringByAppendingString:serviceDateTimeStr]];
+            
+            
+            
+            [serviceDateString addAttribute:NSFontAttributeName value:normalFont range:NSMakeRange(0, [serviceDateString length])];
+            
+            CGRect clinicanBounds = CGRectMake(LEFT_MARGIN,
+                                               TOP_MARGIN-normalFont.lineHeight-titleLineHeight,
+                                               DOC_WIDTH - RIGHT_MARGIN - LEFT_MARGIN,
+                                                DOC_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN);
+            
+            CGMutablePathRef serviceDatePath = CGPathCreateMutable();
+            CGPathAddRect(serviceDatePath, NULL, clinicanBounds );
+            
+            [serviceDateString addAttributes:attributes range:NSMakeRange(0,[serviceDateString length])];
+            
+            CTFramesetterRef serviceDateframesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)serviceDateString);
+            CTFrameRef serviceDateFrame = CTFramesetterCreateFrame(serviceDateframesetter,
+                                                                CFRangeMake(0, [serviceDateString length]), serviceDatePath, NULL);
+            
+            CTFrameDraw(serviceDateFrame, pdfContext);
+            
+            CFRelease(serviceDateFrame);
+            CFRelease(serviceDatePath);
+            CFRelease(serviceDateframesetter);
+        }
+
+        if (clinicianString&&clinicianString.length) {
+      
+        
+          
+       
+       
+        NSMutableAttributedString *clinicianStr = [[NSMutableAttributedString alloc] initWithString:clinicianString];
+        
+         
+            
+        [clinicianStr addAttribute:NSFontAttributeName value:normalFont range:NSMakeRange(0, [clinicianStr length])];
+        
+        CGRect clinicanBounds = CGRectMake(LEFT_MARGIN,
+                                               TOP_MARGIN-normalFont.lineHeight*2-titleLineHeight,
+                                               DOC_WIDTH - RIGHT_MARGIN - LEFT_MARGIN,
+                                                DOC_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN);
+       
+         CGMutablePathRef clinicianPath = CGPathCreateMutable();
+        CGPathAddRect(clinicianPath, NULL, clinicanBounds );
+               
+        [clinicianStr addAttributes:attributes range:NSMakeRange(0,[clinicianStr length])];
+        
+        CTFramesetterRef clinicanframesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)clinicianStr);
+        CTFrameRef clinicanframe = CTFramesetterCreateFrame(clinicanframesetter,
+                                                    CFRangeMake(0, [clinicianStr length]), clinicianPath, NULL);
+        
+        CTFrameDraw(clinicanframe, pdfContext);
+       
+        CFRelease(clinicanframe);
+        CFRelease(newPath);
+        CFRelease(clinicanframesetter);
+        }
+        //		if ([invisibleTextView.text length] > 0) [[self stringToDraw:font fontSize:fontSize] drawInRect:bounds withFont:[UIFont fontWithName:font size:fontSize]];
 		CGContextRestoreGState(pdfContext);
 		UIGraphicsPopContext();
-		
+        //
+        // Clean up
+       
+       
+//		if ([invisibleTextView.text length] > 0) [[self stringToDraw:font fontSize:fontSize] drawInRect:bounds withFont:[UIFont fontWithName:font size:fontSize]];
+//		CGContextRestoreGState(pdfContext);
+//		UIGraphicsPopContext();
+		done=YES;
 		CGContextEndPage (pdfContext);
 	}
 	while (!done);
@@ -434,5 +653,6 @@ NSLog(@"document directory filename is %@",documentDirectoryFilename);
 	
 	return invisibleTextView.text;
 }
+
 
 @end

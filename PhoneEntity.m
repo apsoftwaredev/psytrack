@@ -20,118 +20,118 @@
 @dynamic client;
 @dynamic keyString;
 
-@synthesize tempPhoneNumber;
-
-
-- (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
-{
-    
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    if (strValue&& strValue.length  ) {
-        
-        
-        
-        
-        
-        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
-        
-        NSData *encryptedData;
-        NSString *encryptedKeyString;
-        if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
-            encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
-            
-            
-            if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
-                
-                
-                encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
-                
-            }
-        }
-        
-        
-        if (encryptedData.length) {
-            [self willChangeValueForKey:key];
-            [self setPrimitiveValue:encryptedData forKey:key];
-            [self didChangeValueForKey:key];
-        }
-        
-        
-        [self willAccessValueForKey:@"keyString"];
-        if (![encryptedKeyString isEqualToString:self.keyString]) {
-            [self didAccessValueForKey:@"keyString"];
-            [self willChangeValueForKey:@"keyString"];
-            [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
-            [self didChangeValueForKey:@"keyString"];
-            
-        }
-        
-        
-        
-        
-        
-        
-    }
-}
-
--(NSString *)phoneNumber{
-    
-    NSString *tempStr;
-    [self willAccessValueForKey:@"tempPhoneNumber"];
-    
-    
-    if (!self.tempPhoneNumber ||!self.tempPhoneNumber.length) {
-        
-        [self didAccessValueForKey:@"tempPhoneNumber"];
-        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-        
-        
-        [self willAccessValueForKey:@"phoneNumber"];
-        
-        
-        NSData *primitiveData=[self primitiveValueForKey:@"phoneNumber"];
-        [self didAccessValueForKey:@"phoneNumber"];
-        if (!primitiveData ||!primitiveData.length ) {
-            return nil;
-        }
-        [self willAccessValueForKey:@"keyString"];
-        NSString *tmpKeyString=self.keyString;
-        [self didAccessValueForKey:@"keyString"];
-        
-        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
-        
-        tempStr=[appDelegate convertDataToString:strData];
-        
-        [self willChangeValueForKey:@"tempPhoneNumber"];
-        
-        self.tempPhoneNumber=tempStr;
-        [self didChangeValueForKey:@"tempPhoneNumber"];
-        
-        
-    }
-    else 
-    {
-        tempStr=self.tempPhoneNumber;
-        [self didAccessValueForKey:@"tempPhoneNumber"];
-    }
-    
-    
-    
-    
-    return tempStr;
-    
-    
-    
-    
-    
-    
-}
--(void)setPhoneNumber:(NSString *)phoneNumber{
-    
-    [self setStringToPrimitiveData:(NSString *)phoneNumber forKey:@"phoneNumber"];
-    
-    self.tempPhoneNumber=phoneNumber;
-}
+//@synthesize tempPhoneNumber;
+//
+//
+//- (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key 
+//{
+//    
+//    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//    
+//    if (strValue&& strValue.length  ) {
+//        
+//        
+//        
+//        
+//        
+//        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:self.keyString];
+//        
+//        NSData *encryptedData;
+//        NSString *encryptedKeyString;
+//        if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
+//            encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
+//            
+//            
+//            if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
+//                
+//                
+//                encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
+//                
+//            }
+//        }
+//        
+//        
+//        if (encryptedData.length) {
+//            [self willChangeValueForKey:key];
+//            [self setPrimitiveValue:encryptedData forKey:key];
+//            [self didChangeValueForKey:key];
+//        }
+//        
+//        
+//        [self willAccessValueForKey:@"keyString"];
+//        if (![encryptedKeyString isEqualToString:self.keyString]) {
+//            [self didAccessValueForKey:@"keyString"];
+//            [self willChangeValueForKey:@"keyString"];
+//            [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
+//            [self didChangeValueForKey:@"keyString"];
+//            
+//        }
+//        
+//        
+//        
+//        
+//        
+//        
+//    }
+//}
+//
+//-(NSString *)phoneNumber{
+//    
+//    NSString *tempStr;
+//    [self willAccessValueForKey:@"tempPhoneNumber"];
+//    
+//    
+//    if (!self.tempPhoneNumber ||!self.tempPhoneNumber.length) {
+//        
+//        [self didAccessValueForKey:@"tempPhoneNumber"];
+//        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//        
+//        
+//        [self willAccessValueForKey:@"phoneNumber"];
+//        
+//        
+//        NSData *primitiveData=[self primitiveValueForKey:@"phoneNumber"];
+//        [self didAccessValueForKey:@"phoneNumber"];
+//        if (!primitiveData ||!primitiveData.length ) {
+//            return nil;
+//        }
+//        [self willAccessValueForKey:@"keyString"];
+//        NSString *tmpKeyString=self.keyString;
+//        [self didAccessValueForKey:@"keyString"];
+//        
+//        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
+//        
+//        tempStr=[appDelegate convertDataToString:strData];
+//        
+//        [self willChangeValueForKey:@"tempPhoneNumber"];
+//        
+//        self.tempPhoneNumber=tempStr;
+//        [self didChangeValueForKey:@"tempPhoneNumber"];
+//        
+//        
+//    }
+//    else 
+//    {
+//        tempStr=self.tempPhoneNumber;
+//        [self didAccessValueForKey:@"tempPhoneNumber"];
+//    }
+//    
+//    
+//    
+//    
+//    return tempStr;
+//    
+//    
+//    
+//    
+//    
+//    
+//}
+//-(void)setPhoneNumber:(NSString *)phoneNumber{
+//    
+//    [self setStringToPrimitiveData:(NSString *)phoneNumber forKey:@"phoneNumber"];
+//    
+//    self.tempPhoneNumber=phoneNumber;
+//}
 
 @end

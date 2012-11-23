@@ -50,7 +50,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 	self.clientDef = [SCEntityDefinition definitionWithEntityName:@"ClientEntity" 
                                                       managedObjectContext:managedObjectContext 
                                                              propertyNames:[NSArray arrayWithObjects:@"clientIDCode", @"dateOfBirth", @"keyString",
-                                                                                @"initials",  @"demographicInfo", @"dateAdded",@"currentClient"/*,@"phoneNumbers"*/, @"logs", @"medicationHistory",@"diagnoses", @"substanceUse",@"vitals",
+                                                                                @"initials",  @"demographicInfo", @"dateAdded",@"currentClient",@"phoneNumbers", @"logs", @"medicationHistory",@"diagnoses", @"substanceUse",@"vitals",
                                                                 @"notes",@"groups",@"otherReferralSource",nil]];
 	
     
@@ -140,7 +140,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 //    clientNotesPropertyDef.objectBindings=encryClientNotesTVCellKeyBindingsDic;
     clientNotesPropertyDef.type=SCPropertyTypeTextView;
 //    clientNotesPropertyDef.autoValidate=NO;
-/*
+
     //Create a class definition for the phone NumberEntity
     SCEntityDefinition *phoneDef = [SCEntityDefinition definitionWithEntityName:@"PhoneEntity" 
                                                         managedObjectContext:managedObjectContext
@@ -172,13 +172,13 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     phoneNumberPropertyDef.title = @"Number";
     
    
-    phoneNumberPropertyDef.type=SCPropertyTypeCustom;
-    phoneNumberPropertyDef.uiElementClass=[EncryptedSCTextFieldCell class];
-    
-    NSDictionary *encryPhoneNumberTFCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"phoneNumber",@"keyString",@"Number",@"phoneNumber",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    phoneNumberPropertyDef.objectBindings=encryPhoneNumberTFCellKeyBindingsDic;
+//    phoneNumberPropertyDef.type=SCPropertyTypeCustom;
+//    phoneNumberPropertyDef.uiElementClass=[EncryptedSCTextFieldCell class];
+//    
+//    NSDictionary *encryPhoneNumberTFCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"phoneNumber",@"keyString",@"Number",@"phoneNumber",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+//    
+//    
+//    phoneNumberPropertyDef.objectBindings=encryPhoneNumberTFCellKeyBindingsDic;
 //    phoneNumberPropertyDef.title=@"Phone Number";
     phoneNumberPropertyDef.autoValidate=NO;
     
@@ -197,7 +197,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 //    // add the phone property group
 //    [phoneDef.propertyGroups addGroup:phoneGroup];
     
-  */ 
+   
     
     //Create a class definition for the logsEntity
     SCEntityDefinition *logDef = [SCEntityDefinition definitionWithEntityName:@"LogEntity" 
@@ -227,7 +227,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
 //    
 //    
 //    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
-//    //    phoneNumberPropertyDef.title=@"Phone Number";
+//   phoneNumberPropertyDef.title=@"Phone Number";
 //    logNotesPropertyDef.autoValidate=NO;
 
     

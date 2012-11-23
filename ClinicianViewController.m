@@ -119,7 +119,7 @@
     if (isInDetailSubview) {
         objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef]; 
         objectsModel.tag=0;
-        objectsModel.delegate=self;
+//        objectsModel.delegate=self;
        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
             [self.view setBackgroundColor:appDelegate.window.backgroundColor];
             // Set the view controller's theme

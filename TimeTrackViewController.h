@@ -48,7 +48,7 @@ static NSString * const kTrackSupervisionReceivedEntityName=@"SupervisionReceive
     NSDate *totalTimeDate;
     NSDate *addStopwatch;
     SCDateCell *serviceDateCell;
-    
+    SCObjectCell *totalTimeCell;
     
     UILabel *breakTimeTotalHeaderLabel;
     

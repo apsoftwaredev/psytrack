@@ -865,36 +865,36 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     
                     
                    
-//                    if ([cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
-//                        
-//                    {
-//                        if ( ![SCUtilities is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
-//                        {
-//                            UIButton *button=(UIButton *)[cell viewWithTag:300];
-//                            [button setTitle:@"Call Number" forState:UIControlStateNormal];
-//                            
-//                        }
-//                        
-//                        
-//                        if ( [cell isKindOfClass:[EncryptedSCTextFieldCell class]]) 
-//                        {
-//                            EncryptedSCTextFieldCell *encryptedTextFieldCell=(EncryptedSCTextFieldCell *)cell;
-//                            
-//                            UITextField *textField=(UITextField *)encryptedTextFieldCell.textField;
-//                            
-//                            textField.keyboardType=UIKeyboardTypeNumberPad;
-//                            
-//                        }
-//                        
-//                        if ( [cell isKindOfClass:[SCTextFieldCell class]]) 
-//                        {
-//                            SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
-//                            
-//                            textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
-//                            
-//                        }
-//                        
-//                    }
+                    if ([cellManagedObject.entity.name isEqualToString:@"PhoneEntity"]  ) 
+                        
+                    {
+                        if ( ![SCUtilities is_iPad] &&[cell isKindOfClass:[ButtonCell class]]) 
+                        {
+                            UIButton *button=(UIButton *)[cell viewWithTag:300];
+                            [button setTitle:@"Call Number" forState:UIControlStateNormal];
+                            
+                        }
+                        
+                        
+                        if ( [cell isKindOfClass:[SCTextFieldCell class]])
+                        {
+                            SCTextFieldCell *encryptedTextFieldCell=(SCTextFieldCell *)cell;
+                            
+                            UITextField *textField=(UITextField *)encryptedTextFieldCell.textField;
+                            
+                            textField.keyboardType=UIKeyboardTypeNumberPad;
+                            
+                        }
+                        
+                        if ( [cell isKindOfClass:[SCTextFieldCell class]]) 
+                        {
+                            SCTextFieldCell *textFieldCell=(SCTextFieldCell *)cell;
+                            
+                            textFieldCell.textField.keyboardType=UIKeyboardTypeNumberPad;
+                            
+                        }
+                        
+                    }
                     
                     
                     
@@ -1114,7 +1114,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
 }
 -(BOOL)checkStringIsNumber:(NSString *)str{
-    BOOL valid=YES;
+    BOOL valid=NO;
     NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];
     NSString *numberStr=[str stringByReplacingOccurrencesOfString:@"," withString:@""];
     NSNumber *number=[numberFormatter numberFromString:numberStr];
@@ -1248,20 +1248,20 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
                     
                 }
                 
-//                if ([notesManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextFieldCell class]]) {
-//                    EncryptedSCTextFieldCell *phoneNumberCell=(EncryptedSCTextFieldCell *)notesCell;
-//                    
-//                    if (phoneNumberCell.textField.text.length)
-//                    {
-//                        
-//                        valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
-//                    }
-//                    else
-//                    {
-//                        valid=FALSE;
-//                    }
-//                    
-//                }
+                if ([notesManagedObject.entity.name isEqualToString:@"PhoneEntity"]&&[notesCell isKindOfClass:[SCTextFieldCell class]]) {
+                    SCTextFieldCell *phoneNumberCell=(SCTextFieldCell *)notesCell;
+                    
+                    if (phoneNumberCell.textField.text.length)
+                    {
+                        
+                        valid=[self checkStringIsNumber:(NSString *)phoneNumberCell.textField.text];
+                    }
+                    else
+                    {
+                        valid=FALSE;
+                    }
+                    
+                }
                 
             }
             
@@ -1456,7 +1456,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
         
         UIColor *backgroundColor=nil;
         
-        if(indexPath.row==NSNotFound|| tableModel.tag>0)
+        if(indexPath.row==NSNotFound|| detailTableViewModel.tag>0)
         {
             
             backgroundColor=(UIColor *)appDelegate.window.backgroundColor;

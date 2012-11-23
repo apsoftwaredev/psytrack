@@ -10,6 +10,7 @@
 #import "PTTAppDelegate.h"
 #import "ReaderDocument.h"
 #import "PDFGenerator.h"
+#import "ClinicianEntity.h"
 
 @interface ClientPresentationGenerateVC ()
 -(NSString *)sanitizeFileName;
@@ -22,8 +23,9 @@
 @synthesize pdfFileNameTextField,pdfPasswordTextField,generateButton;
 @synthesize containerView;
 @synthesize presentationTableModel;
-
-
+@synthesize serviceDate;
+@synthesize totalTime, timeInDate,timeOutDate;
+@synthesize serviceDateTimeString;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -84,7 +86,7 @@
     }
     
     PDFGenerator *pdfGenerator=[[PDFGenerator alloc]init];
-    [pdfGenerator createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)self.presentationTableModel forSize:12 andFont:@"Georgia" andColor:[UIColor blackColor] :YES :YES :([pdfPasswordTextField.text length] > 0) ? pdfPasswordTextField.text : nil];
+    [pdfGenerator createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)self.presentationTableModel serviceDateTimeStr:(NSString *)self.serviceDateTimeString clinician:(ClinicianEntity *)[self getClinicianName] forSize:12 andFont:@"Georgia" andColor:[UIColor blackColor] :YES :YES :([pdfPasswordTextField.text length] > 0) ? pdfPasswordTextField.text : nil];
     
    
     NSString *filePath = pdfs  ;// Path to last PDF file
@@ -316,5 +318,80 @@
     
     
 }
+-(ClinicianEntity *)getClinicianName{
+    
+    ClinicianEntity *clinician=nil;
+    
+    NSArray *cliniciansArrayWithMyInfo=[self fetchObjectsFromEntity:@"ClinicianEntity" filterPredicate:[NSPredicate predicateWithFormat:@"myInformation== %@",[NSNumber numberWithBool:YES]]];
+    
+    
+    if (cliniciansArrayWithMyInfo&&cliniciansArrayWithMyInfo.count) {
+        
+        int clinicianCount=cliniciansArrayWithMyInfo.count;
+        
+        if (clinicianCount>1) {
+            //there should only be one
+            
+            
+            for (ClinicianEntity *clinicianInArray in cliniciansArrayWithMyInfo) {
+                
+                //try to find the right one
+                if ([clinicianInArray.firstName isEqualToString:@"Enter Your"]) {
+                    clinician=clinicianInArray;
+                    break;
+                }
+                
+                
+                
+            }
+            
+            if (!clinician) {
+                ClinicianEntity *clinicianInArray=[cliniciansArrayWithMyInfo objectAtIndex:0];
+                clinician=clinicianInArray;
+                
+                
+            }
+            
+            
+            
+        }
+        else if (cliniciansArrayWithMyInfo&& cliniciansArrayWithMyInfo.count) {
+            
+            ClinicianEntity *clinicianInArray=[cliniciansArrayWithMyInfo objectAtIndex:0];
+            clinician=clinicianInArray;
+        }
+        
+    }
+    
+    return clinician;
+    
+}
+-(NSArray *)fetchObjectsFromEntity:(NSString *)entityStr filterPredicate:(NSPredicate *)filterPredicate{
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    
+    
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityStr inManagedObjectContext:appDelegate.managedObjectContext];
+    
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setRelationshipKeyPathsForPrefetching:
+     (NSArray *)[NSArray arrayWithObjects:@"clinicianType",nil] ];
+    
+    if (filterPredicate) {
+        [fetchRequest setPredicate:filterPredicate];
+    }
+    
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    fetchRequest=nil;
+    return fetchedObjects;
+    
+}
+
 
 @end

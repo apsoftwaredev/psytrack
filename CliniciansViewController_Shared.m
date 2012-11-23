@@ -2612,8 +2612,8 @@
         
     }
     
-    
-    detailTableViewModel.delegate=self;
+
+//    detailTableViewModel.delegate=self;
     if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         

@@ -18,6 +18,8 @@
 #import "RateEntity.h"
 #import "LogEntity.h"
 #import "PaymentEntity.h"
+#import "FeeEntity.h"
+
 @interface ConsultationsViewController ()
 
 @end
@@ -68,10 +70,22 @@
     SCEntityDefinition *rateDef=[SCEntityDefinition definitionWithEntityName:@"RateEntity" managedObjectContext:managedObjectContext propertyNamesString:@"rateName;dateStarted;dateEnded;hourlyRate;notes"];
     
     rateDef.titlePropertyName=@"rateName;hourlyRate";
-    rateDef.titlePropertyNameDelimiter=@" $";
+   
     
     SCEntityDefinition *feeDef=[SCEntityDefinition definitionWithEntityName:@"FeeEntity" managedObjectContext:managedObjectContext propertyNamesString:@"feeName;amount;dateCharged;feeType"];
     
+    
+    SCPropertyDefinition *feeAmountPropertyDef=[feeDef propertyDefinitionWithName:@"amount"];
+    feeAmountPropertyDef.autoValidate=NO;
+    
+    SCPropertyDefinition *rateHourlyRatePropertyDef=[rateDef propertyDefinitionWithName:@"hourlyRate"];
+    rateHourlyRatePropertyDef.autoValidate=NO;
+    NSLocale *theLocale = [NSLocale currentLocale];
+    NSString *symbol = [theLocale objectForKey:NSLocaleCurrencySymbol];
+    
+   feeAmountPropertyDef.title =[NSString stringWithFormat:@"Amount %@", symbol];
+    rateHourlyRatePropertyDef.title=[NSString stringWithFormat:@"Hourly Rate %@", symbol];
+
     
     SCPropertyGroup *feesAndRatesPropertyGroup=[SCPropertyGroup groupWithHeaderTitle:@"Charges and Payments" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"rateCharges",@"fees",@"payments",@"paid",@"proBono", nil]];
     
@@ -79,7 +93,8 @@
     
     feeDef.orderAttributeName=@"order";
     feeDef.titlePropertyName=@"feeName;amount";
-    feeDef.titlePropertyNameDelimiter=@" $";
+    feeDef.titlePropertyNameDelimiter=[NSString stringWithFormat:@" %@",symbol];
+    rateDef.titlePropertyNameDelimiter=[NSString stringWithFormat:@" %@",symbol];
     
     SCEntityDefinition *feeTypeDef=[SCEntityDefinition definitionWithEntityName:@"FeeTypeEntity" managedObjectContext:managedObjectContext propertyNamesString:@"feeType"];
     
@@ -87,10 +102,15 @@
     feeTypeDef.orderAttributeName=@"order";
     
     
+  
     SCEntityDefinition *paymentDef=[SCEntityDefinition definitionWithEntityName:@"PaymentEntity" managedObjectContext:managedObjectContext propertyNamesString:@"amount;dateReceived;dateCleared;paymentSource;paymentType;notes"];
     paymentDef.titlePropertyName=@"paymentSource.source;amount";
-    paymentDef.titlePropertyNameDelimiter=@" $";
+
     paymentDef.orderAttributeName=@"order";
+    SCPropertyDefinition *paymentAmountPropertyDef=[paymentDef propertyDefinitionWithName:@"amount"];
+    paymentAmountPropertyDef.title=[NSString stringWithFormat:@"Amount %@",symbol];
+    paymentAmountPropertyDef.autoValidate=NO;
+    
     SCEntityDefinition *paymentSourceDef=[SCEntityDefinition definitionWithEntityName:@"PaymentSourceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"source"];
     
     paymentSourceDef.orderAttributeName=@"order";
@@ -104,7 +124,6 @@
     
     rateChargeDef.orderAttributeName=@"order";
     rateChargeDef.titlePropertyName=@"rate.rateName;rate.hourlyRate";
-    rateChargeDef.titlePropertyNameDelimiter=@" $";
     
     
     
@@ -642,7 +661,7 @@
             NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc]init];
             [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
             [currencyFormatter setLocale:locale];
-            NSString *textToDisplay=[NSString stringWithFormat:@"%@ %.2lf hrs at $%@ hr (%@ total)",rateObject.rateName,[hoursDecimalNumber floatValue],rateObject.hourlyRate,[currencyFormatter stringFromNumber:  totalChargeDecimalNumber]];
+            NSString *textToDisplay=[NSString stringWithFormat:@"%@ %.2lf hrs at %@ hr (%@ total)",rateObject.rateName,[hoursDecimalNumber floatValue],rateObject.hourlyRate,[currencyFormatter stringFromNumber:  totalChargeDecimalNumber]];
             
             cell.textLabel.text=textToDisplay;
             currencyFormatter=nil;
@@ -734,11 +753,46 @@
            
            
        }
- 
+       else if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"FeeEntity"]) {
+           
+           FeeEntity *feeObject=(FeeEntity *)cellManagedObject;
+           
+           NSDate *dateReceived=feeObject.dateCharged;
+           NSString *dateReceivedStr;
+           if (dateReceived) {
+               dateReceivedStr=[dateFormatter stringFromDate:dateReceived];
+           }
+           
+                    
+           NSLocale *locale = [NSLocale currentLocale];
+           NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc]init];
+           [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+           [currencyFormatter setLocale:locale];
+           
+           NSString *displayString=nil;
+           if (dateReceived){
+               
+               displayString=[dateReceivedStr stringByAppendingFormat:@": %@",[currencyFormatter stringFromNumber:feeObject.amount]];
+               
+              
+           }
+           else if (feeObject.amount){
+               displayString = [currencyFormatter stringFromNumber:feeObject.amount];
+               
+           }
+           
+           cell.textLabel.text=displayString;
+           
+           
+           currencyFormatter=nil;
+           
+           
+       }
+
         
         
     }
-
+   
 }
 -(BOOL)tableViewModel:(SCTableViewModel *)tableModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
 
@@ -761,10 +815,52 @@
         }
 
     }
-    if (tableModel.tag==3) {
+   else if (tableModel.tag==3) {
        
+       DLog(@"cell class is  %@",cell.class);
+       if ([cell isKindOfClass:[SCNumericTextFieldCell class]]) {
+           SCNumericTextFieldCell *numericCell=(SCNumericTextFieldCell *)cell;
+           
+           
+           
+           NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];
+           NSString *numberStr=[numericCell.textField.text stringByReplacingOccurrencesOfString:@"," withString:@""];
+           NSNumber *number=[numberFormatter numberFromString:numberStr];
+        
+           NSDecimal amountDecimal=[number decimalValue];
+           
+           NSDecimalNumber *amountDecimalNumber = [NSDecimalNumber decimalNumberWithDecimal:
+                                                  amountDecimal];
+           
+           if (numberStr.length &&(number ||amountDecimalNumber)) {
+               valid=YES;
+               
+               
+//                   NSScanner* scan = [NSScanner scannerWithString:numberStr];
+//                   int val;
+//                   
+//                   valid=[scan scanInt:&val] && [scan isAtEnd];
+               
+                   
+           }
+           else{
+               valid=NO;
+           }
+           
+               
+         
+           
+           
+           
+           numberFormatter=nil;
+           
+           
+           
+           
+       }
+
        
-        if (sectionManagedObject&& [sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"RateChargeEntity"]) {
+       else if (sectionManagedObject&& [sectionManagedObject respondsToSelector:@selector(entity)]&&[sectionManagedObject.entity.name isEqualToString:@"RateChargeEntity"]) {
         
             if (cell.tag==2&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
                 SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;

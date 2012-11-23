@@ -1183,6 +1183,7 @@ additionalTimeFormatter=nil;
 
     
     
+    NSString *typePropertyNamesString=nil;
     NSString *typePropertyNameString=nil;
     NSString *typeEntityNameString=nil;
     NSString *typeDescriptionString=nil;
@@ -1200,6 +1201,7 @@ additionalTimeFormatter=nil;
             
             
             typeEntityNameString =@"AssessmentTypeEntity";
+            typePropertyNamesString=@":(assessmentType,notes)";
             typePropertyNameString=@"assessmentType";
             typeDescriptionString=@"assessment type";
             typeTitleString=@"Assessment Type*";
@@ -1218,6 +1220,7 @@ additionalTimeFormatter=nil;
             self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"Current Month",@"All Items",@"Incomplete",nil];
             
             typeEntityNameString =@"InterventionTypeEntity";
+            typePropertyNamesString=@":(interventionType, subTypes,notes)";
             typePropertyNameString=@"interventionType";
               typeDescriptionString=@"intervention type";
             typeTitleString=@"Intervention Type*";
@@ -1236,6 +1239,7 @@ additionalTimeFormatter=nil;
             
             
             typeEntityNameString =@"SupportActivityTypeEntity";
+            typePropertyNamesString=@":(supportActivityType,notes)";
             typePropertyNameString=@"supportActivityType";
               typeDescriptionString=@"support activity type";
             typeTitleString=@"Support Activity Type*";
@@ -1256,6 +1260,7 @@ additionalTimeFormatter=nil;
             
             
             typeEntityNameString =@"SupervisionTypeEntity";
+            typePropertyNamesString=@":(supervisionType,subTypes,notes)";
             typePropertyNameString=@"supervisionType";
               typeDescriptionString=@"supervision type";
 
@@ -1267,7 +1272,7 @@ additionalTimeFormatter=nil;
         }
             break;
     }
-    SCEntityDefinition *trackTypeDef=[SCEntityDefinition definitionWithEntityName:typeEntityNameString managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:typePropertyNameString, @"notes", nil]];
+    SCEntityDefinition *trackTypeDef=[SCEntityDefinition definitionWithEntityName:typeEntityNameString managedObjectContext:managedObjectContext propertyNamesString:typePropertyNamesString];
     
     
     
@@ -1333,11 +1338,11 @@ additionalTimeFormatter=nil;
         
         
         
-        SCPropertyDefinition *trackTypeSubtypePropertyDef=[SCPropertyDefinition definitionWithName:@"subTypes" title:@"Subtypes" type:SCPropertyTypeArrayOfObjects];
-        
-        [trackTypeDef addPropertyDefinition:trackTypeSubtypePropertyDef];
-        
-        trackTypeSubtypePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:trackSubTypeDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new intervention subtype"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+//        SCPropertyDefinition *trackTypeSubtypePropertyDef=[SCPropertyDefinition definitionWithName:@"subTypes" title:@"Subtypes" type:SCPropertyTypeArrayOfObjects];
+//        
+//        [trackTypeDef addPropertyDefinition:trackTypeSubtypePropertyDef];
+        SCPropertyDefinition *trackTypeSubtypePropertyDef=[trackTypeDef propertyDefinitionWithName:@"subTypes"];
+        trackTypeSubtypePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:trackSubTypeDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new intervention subtype"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
         
        
        
@@ -2911,6 +2916,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
             if ([cell isKindOfClass:[SCObjectCell class]]) 
             {
                
+                totalTimeCell=(SCObjectCell *)cell;
                 NSDate *totalTimeDateBoundValue=(NSDate *)[cell.boundObject valueForKey:@"totalTime"];
                 
                 NSString *totalTimeString=[counterDateFormatter stringFromDate:totalTimeDateBoundValue];
@@ -4884,62 +4890,42 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     ClientPresentationGenerateVC *clientPresentationGenerateVC=[[ClientPresentationGenerateVC alloc]initWithNibName:@"ClientPresentationGenerateVC" bundle:[NSBundle mainBundle]];
     
     clientPresentationGenerateVC.presentationTableModel=(SCArrayOfObjectsModel *)currentDetailTableViewModel;
+    clientPresentationGenerateVC.serviceDate=(NSDate *)serviceDateCell.datePicker.date;
     
+    TimeEntity *timeObject=nil;
+    if ([totalTimeCell.boundObject isKindOfClass:[TimeEntity class]]) {
+        timeObject=(TimeEntity *)totalTimeCell.boundObject;
+    }
+    
+    
+    clientPresentationGenerateVC.serviceDateTimeString=[dateFormatter1 stringFromDate:serviceDateCell.datePicker.date] ;
+    if (timeObject && clientPresentationGenerateVC.serviceDateTimeString &&[clientPresentationGenerateVC.serviceDateTimeString isKindOfClass:[NSString class]]) {
+        
+        NSDateFormatter *timeFormatter=[[NSDateFormatter alloc]init];
+        [timeFormatter setDateFormat:@"H:mm "];
+        [timeFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+        
+        
+        if (timeObject.startTime &&timeObject.endTime&&timeObject.totalTime) {
+          
+            clientPresentationGenerateVC.serviceDateTimeString=[clientPresentationGenerateVC.serviceDateTimeString stringByAppendingFormat:@" (%@ \u2013 %@, total time: %@)", [shortTimeFormatter stringFromDate:timeObject.startTime],[shortTimeFormatter stringFromDate:timeObject.endTime], [counterDateFormatter stringFromDate:timeObject.totalTime] ];
+        }
+        else if (timeObject.totalTime){
+        
+            clientPresentationGenerateVC.serviceDateTimeString=[clientPresentationGenerateVC.serviceDateTimeString stringByAppendingFormat:@" (total time: %@)", [counterDateFormatter stringFromDate:timeObject.totalTime] ];
+        
+        }
+        
+    }
     clientPresentationGenerateVC.view.backgroundColor=currentDetailTableViewModel.viewController.view.backgroundColor;
     
     
     [currentDetailTableViewModel.viewController.navigationController pushViewController:clientPresentationGenerateVC animated:YES];
    
    
-    for (NSInteger p=0; p<currentDetailTableViewModel.sectionCount; p++) {
-        
-         SCTableViewSection *section=[currentDetailTableViewModel sectionAtIndex:p];
-        
-        NSLog(@"section is %i ",p);
-        for (NSInteger i=0; i<section.cellCount; i++) {
-           
-           
-            SCTableViewCell *cell=[section cellAtIndex:i];
-            
-            NSLog(@"cell is %i",i);
-            NSLog(@"cell class is %@",[cell class]);
-            
-            if ([cell respondsToSelector:@selector(textLabel)]&&cell.textLabel.text){
-                
-                NSLog(@" cell text label is %@",cell.textLabel.text);
-                
-            }
-            
-            if ([cell isKindOfClass:[SCControlCell class]]){
-            
-                UIView *labelView=[cell viewWithTag:71];
-                
-                if ([labelView isKindOfClass:[UILabel class]]){
-                
-                    UILabel *textLabel=(UILabel *)labelView;
-                    
-                    NSLog(@"label text is %@",textLabel.text);
-                
-                
-                }
-                
-                UIView *segmentedView=(UIView *)[cell viewWithTag:70];
-                if ([segmentedView isKindOfClass:[UISegmentedControl class]]){
-                    
-                    UISegmentedControl *segmentedControl=(UISegmentedControl *)segmentedView;
-                    
-                    NSLog(@"label text is %i",segmentedControl.selectedSegmentIndex);
-                    
-                    
-                }
-
-            
-            }
-            
-        }
 
         
-    }
+   
         
 
 

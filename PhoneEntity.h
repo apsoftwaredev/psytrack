@@ -20,6 +20,6 @@
 @property (nonatomic, retain) NSString   * keyString;
 @property (nonatomic, retain) ClientEntity *client;
 
-@property (nonatomic, weak) NSString *tempPhoneNumber;
+
 
 @end
