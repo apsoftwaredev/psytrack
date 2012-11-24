@@ -499,8 +499,7 @@ additionalTimeFormatter=nil;
     if (currentControllerSetup==kTrackAssessmentSetup||currentControllerSetup==kTrackInterventionSetup||currentControllerSetup==kTrackSupportSetup) {
         
         [timeTrackPropertyNamesArray addObject:@"paperwork"];
-        [timeTrackPropertyNamesArray addObject:@"paid"];
-        [timeTrackPropertyNamesArray addObject:@"hourlyRate"];
+        
         if (currentControllerSetup!=kTrackSupportSetup) {
             [timeTrackPropertyNamesArray addObject:@"clientPresentations"];
             [eventGroup insertPropertyName:@"clientPresentations" atIndex:2];
@@ -848,10 +847,11 @@ additionalTimeFormatter=nil;
         SCEntityDefinition *clientsEntityDefinition=nil;
         if (currentControllerSetup== kTrackSupportSetup) {
             
-            clientsEntityDefinition=[SCEntityDefinition definitionWithEntityName:@"SupportActivityClientEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"notes", nil]];
+            clientsEntityDefinition=[SCEntityDefinition definitionWithEntityName:@"SupportActivityClientEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"notes", @"hourlyRate",@"paid",@"proBono",nil]];
             clientsPropertyNameStr=@"supportActivityClients";
             clientsEntityDefinition.titlePropertyName=@"client.clientIDCode";
- 
+            
+                     
                 [clientsEntityDefinition removePropertyDefinitionWithName:@"supportActivityDelivered"];
             /****************************************************************************************/
             /*	BEGIN Class Definition and attributes for the Client Entity */
@@ -900,6 +900,68 @@ additionalTimeFormatter=nil;
             
             // add the main property group to the clientPresentations class. 
             [clientsEntityDefinition.propertyGroups addGroup:supportActivityNotesGroup];
+            
+            
+            NSString * ratePropertyNameString=@"hourlyRate";
+            NSString * rateEntityNameString=@"RateEntity";
+            
+            SCEntityDefinition *rateDef=[SCEntityDefinition definitionWithEntityName:rateEntityNameString managedObjectContext:managedObjectContext propertyNamesString:@"rateName;dateStarted;dateEnded;hourlyRate;notes"];
+            
+            
+            
+           
+
+            rateDef.orderAttributeName=@"order";
+            
+            SCPropertyDefinition *hourlyRatePropertyDef=[rateDef propertyDefinitionWithName:@"hourlyRate"];
+            hourlyRatePropertyDef.type=SCPropertyTypeNumericTextField;
+            
+            SCNumericTextFieldAttributes *numericAttributes = [SCNumericTextFieldAttributes attributesWithMinimumValue:nil maximumValue:nil allowFloatValue:YES];
+            [numericAttributes.numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+            [numericAttributes.numberFormatter setGroupingSeparator:@","];
+            [numericAttributes.numberFormatter setGroupingSize:3];
+            
+            
+            hourlyRatePropertyDef.attributes=numericAttributes;
+            
+            SCPropertyDefinition *ratePropertyDef=[clientsEntityDefinition propertyDefinitionWithName:ratePropertyNameString];
+            ratePropertyDef.type =SCPropertyTypeObjectSelection;
+            
+            SCObjectSelectionAttributes *rateSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:rateDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
+            rateSelectionAttribs.allowAddingItems = YES;
+            rateSelectionAttribs.allowDeletingItems = YES;
+            rateSelectionAttribs.allowMovingItems = YES;
+            rateSelectionAttribs.allowEditingItems = YES;
+            rateSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"(Add Rates)"];
+            
+            ratePropertyDef.attributes = rateSelectionAttribs;
+            
+            SCPropertyDefinition *rateStrPropertyDef=[rateDef propertyDefinitionWithName:ratePropertyNameString];
+            rateStrPropertyDef.type=SCPropertyTypeNumericTextField;
+            SCPropertyDefinition *rateNotesPropertyDef=[rateDef propertyDefinitionWithName:@"notes"];
+            rateNotesPropertyDef.type=SCPropertyTypeTextView;
+            
+            SCPropertyDefinition *rateDateStartedPropertyDef = [rateDef propertyDefinitionWithName:@"dateStarted"];
+            rateDateStartedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter1
+                                                                                   datePickerMode:UIDatePickerModeDate
+                                                                    displayDatePickerInDetailView:NO];
+            
+            
+            SCPropertyDefinition *rateDateEndedPropertyDef = [rateDef propertyDefinitionWithName:@"dateEnded"];
+            rateDateEndedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter1
+                                                                                 datePickerMode:UIDatePickerModeDate
+                                                                  displayDatePickerInDetailView:NO];
+            
+            
+            
+            
+            SCPropertyGroup *paymentGroup=[SCPropertyGroup groupWithHeaderTitle:@"Payment Information" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"hourlyRate",@"paid", @"proBono",nil]];
+            
+            
+            
+            
+            
+            [clientsEntityDefinition.propertyGroups addGroup:paymentGroup];
             
 
             
@@ -1394,60 +1456,8 @@ additionalTimeFormatter=nil;
     }
 
     
-    //begin rate paste
+      
     
-    
-    //end
-    
-    
-    
-    NSString * ratePropertyNameString=@"hourlyRate";
-    NSString * rateEntityNameString=@"RateEntity";
-    
-    SCEntityDefinition *trackRateDef=[SCEntityDefinition definitionWithEntityName:rateEntityNameString managedObjectContext:managedObjectContext propertyNamesString:@"rateName;dateStarted;dateEnded;hourlyRate;notes"];
-    
-    
-    
-    
-    trackRateDef.orderAttributeName=@"order";
-    
-    
-    
-    SCPropertyDefinition *trackRatePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:ratePropertyNameString];
-    trackRatePropertyDef.type =SCPropertyTypeObjectSelection;
-    
-    SCObjectSelectionAttributes *trackRateSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trackRateDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
-    trackRateSelectionAttribs.allowAddingItems = YES;
-    trackRateSelectionAttribs.allowDeletingItems = YES;
-    trackRateSelectionAttribs.allowMovingItems = YES;
-    trackRateSelectionAttribs.allowEditingItems = YES;
-    trackRateSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"(Add Rates)"];
-    
-    trackRatePropertyDef.attributes = trackRateSelectionAttribs;
-    
-    SCPropertyDefinition *trackRateStrPropertyDef=[trackRateDef propertyDefinitionWithName:ratePropertyNameString];
-    trackRateStrPropertyDef.type=SCPropertyTypeNumericTextField;
-    SCPropertyDefinition *trackRateNotesPropertyDef=[trackRateDef propertyDefinitionWithName:@"notes"];
-    trackRateNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-    SCPropertyDefinition *rateDateStartedPropertyDef = [trackRateDef propertyDefinitionWithName:@"dateStarted"];
-	rateDateStartedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter1
-                                                                           datePickerMode:UIDatePickerModeDate
-                                                            displayDatePickerInDetailView:NO];
-    
-    
-    SCPropertyDefinition *rateDateEndedPropertyDef = [trackRateDef propertyDefinitionWithName:@"dateEnded"];
-	rateDateEndedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter1
-                                                                         datePickerMode:UIDatePickerModeDate
-                                                          displayDatePickerInDetailView:NO];
-    
-    
-    
-    
-    
-    SCPropertyGroup *paymentGroup=[SCPropertyGroup groupWithHeaderTitle:@"Payment Information" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"hourlyRate",@"paid", nil]];
-    
-    [timeTrackEntityDef.propertyGroups addGroup:paymentGroup];
     
     
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
@@ -3145,6 +3155,50 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                 [self displayAgeInAgeCells:section];
             
             
+                    
+                    
+                    
+                    
+                    
+                    if (cell.tag==0 &&[cell.textLabel.text isEqualToString:@"Hourly Rate"]&&([cell isKindOfClass:[SCObjectSelectionCell class]]) ) {
+                        
+                        SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+                        
+                        if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
+                            
+                            RateEntity *rateObject=(RateEntity *)[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex intValue]];
+                            
+                            
+                            if (rateObject.hourlyRate && rateObject.rateName) {
+                                
+                                NSLocale *locale = [NSLocale currentLocale];
+                                NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc]init];
+                                [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+                                [currencyFormatter setLocale:locale];
+                                
+                                [currencyFormatter setGroupingSize:3];
+                                [currencyFormatter setGroupingSeparator:@","];
+                                
+                                NSString *textToDisplay=[NSString stringWithFormat:@"%@ %@",rateObject.rateName,[currencyFormatter stringFromNumber: rateObject.hourlyRate]];
+                                
+                                
+                                objectSelectionCell.label.text=textToDisplay;
+                                currencyFormatter=nil;
+                                
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                
+                
+                
             }
             
         }
@@ -3155,7 +3209,40 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         
     }
-    
+  else if (tableViewModel.tag==4&&tableViewModel.sectionCount){
+      
+      
+      
+      
+      NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
+      
+      if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"RateEntity"]) {
+          
+          RateEntity *rateObject=(RateEntity *)cellManagedObject;
+          
+          if (rateObject.hourlyRate) {
+              NSLocale *locale = [NSLocale currentLocale];
+              NSNumberFormatter *currencyFormatter = [[NSNumberFormatter alloc]init];
+              [currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+              [currencyFormatter setLocale:locale];
+              
+              [currencyFormatter setGroupingSize:3];
+              [currencyFormatter setGroupingSeparator:@","];
+              
+              NSString *textToDisplay=rateObject.rateName?[NSString stringWithFormat:@"%@ %@",rateObject.rateName,[currencyFormatter stringFromNumber: rateObject.hourlyRate]]:[currencyFormatter stringFromNumber:rateObject.hourlyRate];
+              
+              
+              cell.textLabel.text=textToDisplay;
+          }
+          
+      }
+      
+      
+      
+      
+      
+  }
+
     
     
     
