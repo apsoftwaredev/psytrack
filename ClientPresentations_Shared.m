@@ -68,10 +68,14 @@
     
     rapportPropertyDef.type=SCPropertyTypeTextView;
     
-//    SCPropertyDefinition *sleepHoursNightlyPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"sleepHoursNightly"];
+    SCPropertyDefinition *sleepHoursNightlyPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"sleepHoursNightly"];
     
-//    sleepHoursNightlyPropertyDef.autoValidate=NO;
+    sleepHoursNightlyPropertyDef.type=SCPropertyTypeNumericTextField;
     
+    SCNumericTextFieldAttributes *numericAttributes = [SCNumericTextFieldAttributes attributesWithMinimumValue:nil maximumValue:nil allowFloatValue:YES];
+    [numericAttributes.numberFormatter setGroupingSeparator:@","];
+    [numericAttributes.numberFormatter setGroupingSize:3];
+    sleepHoursNightlyPropertyDef.attributes=numericAttributes;
     //define a property group
     SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"affect", @"appearance",  @"assessment", @"attention", @"attitude",@"homework", @"improvement", @"interpersonal", @"behaviors", @"imagery",   @"plan",  @"rapport",  @"sensory", @"sleepHoursNightly",    @"sleepQuality",@"psychomotor", @"speechLanguage",  @"cultural",  @"additionalVariables", @"concentration",@"eyeContact",@"insight",@"intellect",@"judgement", @"medical",@"memory",@"mood",@"perception",@"psychosocial",@"clientsDesc",@"thoughtContent", nil ]];
     [self.clientPresentationDef.propertyGroups addGroup:notesGroup];
@@ -1231,12 +1235,6 @@
     
     SCPropertyDefinition *hourlyRatePropertyDef=[rateDef propertyDefinitionWithName:@"hourlyRate"];
     hourlyRatePropertyDef.type=SCPropertyTypeNumericTextField;
-    
-    SCNumericTextFieldAttributes *numericAttributes = [SCNumericTextFieldAttributes attributesWithMinimumValue:nil maximumValue:nil allowFloatValue:YES];
-    [numericAttributes.numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [numericAttributes.numberFormatter setGroupingSeparator:@","];
-    [numericAttributes.numberFormatter setGroupingSize:3];
-    
     
     hourlyRatePropertyDef.attributes=numericAttributes;
     

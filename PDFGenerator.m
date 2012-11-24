@@ -53,7 +53,10 @@
     NSString* documentDirectory = [documentDirectories objectAtIndex:0];
     NSString* documentDirectoryFilename = [documentDirectory stringByAppendingPathComponent:fileName];
     
-
+    
+    //                          // Creates a mutable data object for updating with binary data, like a byte array
+    NSMutableData *pdfData = [NSMutableData data];
+  
     
 	const char *filename = [documentDirectoryFilename UTF8String];
 	// Create a CFString from the filename we provide to this method when we call it
@@ -79,11 +82,23 @@
 	
 	
 	// Create our PDF Context with the CFURL, the CGRect we provide, and the above defined dictionary
-	pdfContext = CGPDFContextCreateWithURL (url, &pageRect, myDictionary);
-	// Cleanup our mess
-	CFRelease(myDictionary);
-	CFRelease(url);
-	//CFRelease(passwordString);
+//	pdfContext = CGPDFContextCreateWithURL (url, &pageRect, myDictionary);
+	
+//      UIGraphicsBeginPDFContextToData(pdfData, aView.bounds, NULL);
+//    CGContextRef pdfContext;
+    
+    //
+    //                        CGRect pageRect = aView.bounds;
+    
+    // Create our PDF Context with the CFURL, the CGRect we provide, and the above defined dictionary
+    
+    
+  
+    
+ 
+
+    // Cleanup our mess
+		//CFRelease(passwordString);
 	
 	//CFRange currentRange = CFRangeMake(0, 0);
     NSString *clinicianString=nil;
@@ -132,16 +147,16 @@
                
                 if (firstSection.cellCount>1) {
                     SCLabelCell *ageCell=(SCLabelCell *)[firstSection cellAtIndex:1];
-                    if (ageCell && [ageCell isKindOfClass:[SCLabelCell class]]&& ageCell.label.text && (![ageCell.label.text isEqualToString:@"choose client"]||[ageCell.label.text isEqualToString:@"no birthdate"])) {
+                    if (ageCell && [ageCell isKindOfClass:[SCLabelCell class]]&& ageCell.label.text && (![ageCell.label.text isEqualToString:@"choose client"]||[ageCell.label.text isEqualToString:@"no birthdate"])&&clientIDCodeStr &&clientObject.dateOfBirth) {
                     
-                        if (clientIDCodeStr) {
+                        
                             NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
                             [dateFormatter setDateFormat:@"M/d/yyyy"];
                             clientIDCodeStr =[clientIDCodeStr stringByAppendingFormat:@"  (DOB: %@, Age: %@)",[dateFormatter stringFromDate: clientObject.dateOfBirth], ageCell.label.text];
                         
                             dateFormatter=nil;
                         
-                        }
+                        
                     }
                     
                 }
@@ -151,16 +166,20 @@
        
         
     }
+    CGRect bounds = CGRectMake(LEFT_MARGIN,
+                               TOP_MARGIN,
+                               DOC_WIDTH - RIGHT_MARGIN - LEFT_MARGIN,
+                               DOC_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN);
     
-    
+      UIGraphicsBeginPDFContextToData(pdfData, bounds, NULL);
   
+       pdfContext=UIGraphicsGetCurrentContext();
+    
+    
 	do {
 		CGContextBeginPage (pdfContext, &pageRect);
 		
-		CGRect bounds = CGRectMake(LEFT_MARGIN,
-								   TOP_MARGIN,
-								   DOC_WIDTH - RIGHT_MARGIN - LEFT_MARGIN,
-								   DOC_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN);
+		
 		
 		UIGraphicsPushContext(pdfContext);
 		CGContextSaveGState(pdfContext);
@@ -324,16 +343,91 @@
 	}
 	while (!done);
 	
-	// We are done with our context now, so we release it
-	CGContextRelease (pdfContext);
-	CFRelease(path);
+    // We are done with our context now, so we release it
+	
+ 
+    // remove PDF rendering context
+    UIGraphicsEndPDFContext();
+  
     
+    //begin
+    
+    
+    //create empty pdf file;
+    UIGraphicsBeginPDFContextToFile(documentDirectoryFilename, CGRectMake(0,
+                                                                          0,
+                                                                          DOC_WIDTH ,
+                                                                          DOC_HEIGHT), (__bridge NSDictionary *)(myDictionary));
+    
+    CGDataProviderRef dataProvider=CGDataProviderCreateWithCFData((__bridge CFDataRef)pdfData);
+    //open template file
+    
+    CGPDFDocumentRef templateDocument = CGPDFDocumentCreateWithProvider(dataProvider);
+    
+    
+    //get amount of pages in template
+    size_t count = CGPDFDocumentGetNumberOfPages(templateDocument);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    //for each page in template
+    for (size_t pageNumber = 1; pageNumber <= count; pageNumber++) {
+        //get bounds of template page
+        CGPDFPageRef templatePage = CGPDFDocumentGetPage(templateDocument, pageNumber);
+        CGRect templatePageBounds = CGPDFPageGetBoxRect(templatePage, kCGPDFCropBox);
+        
+        //create empty page with corresponding bounds in new document
+        UIGraphicsBeginPDFPageWithInfo(templatePageBounds, nil);
+        
+        
+        //flip context due to different origins
+        CGContextTranslateCTM(context, 15.0, templatePageBounds.size.height);
+        CGContextScaleCTM(context, 1.0, -1.0);
+        
+        
+        //copy content of template page on the corresponding page in new file
+        CGContextDrawPDFPage(context, templatePage);
+        
+        
+        //flip context back
+        CGContextTranslateCTM(context, 15.0, templatePageBounds.size.height);
+        CGContextScaleCTM(context, 1.0, -1.0);
+        
+        /* Here you can do any drawings */
+        [self drawPageNumber:pageNumber totalPages:count];
+        
+    }
+    CFRelease(myDictionary);
+    CFRelease(path);
+    CFRelease(url);
+        CGPDFDocumentRelease(templateDocument);
+    UIGraphicsEndPDFContext();
+    CGDataProviderRelease(dataProvider);
+    pdfData=nil;
 
+    
+    
     
     
 }
 
-
+-(void)drawPageNumber:(NSInteger )pageNum totalPages:(NSInteger )totalPages{
+    
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    
+    [dateFormatter setDateFormat:@"h:mm aa M/d/yyyy"];
+    
+    NSString *pageString=[NSString stringWithFormat:@"Page %d of %d (Generated %@) ",pageNum,totalPages,[dateFormatter stringFromDate:[NSDate date]]];
+    UIFont *theFont =[UIFont fontWithName:@"Georgia-Bold" size:10.0];
+    
+    CGSize maxSize= CGSizeMake(1122, 132);
+    
+    CGSize pageStringSize = [pageString sizeWithFont:theFont constrainedToSize:maxSize lineBreakMode:UILineBreakModeClip];
+    
+    CGRect stringRect =CGRectMake(((DOC_WIDTH- pageStringSize.width)/2), ((DOC_HEIGHT-pageStringSize.height))-10, pageStringSize.width, pageStringSize.height);
+    
+    
+    [pageString drawInRect:stringRect withFont:theFont];
+    dateFormatter=nil;
+}
 
 -(NSString *)getContentFromTableModel:(SCArrayOfObjectsModel *)tableModel{
 
