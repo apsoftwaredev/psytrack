@@ -741,7 +741,7 @@
         //Create a class definition for the supervision TypeEntity
         SCEntityDefinition *supervisionTypeDef = [SCEntityDefinition definitionWithEntityName:@"SupervisionTypeEntity" 
                                                             managedObjectContext:managedObjectContext
-                                                                   propertyNames:[NSArray arrayWithObjects:@"supervisionType", nil]];
+                                                                   propertyNames:[NSArray arrayWithObjects:@"supervisionType",@"subTypes", nil]];
         
         //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
         //create a property definition
@@ -836,9 +836,11 @@
         supervisionSubTypeNotesPropertyDef.type=SCPropertyTypeTextView;
         
 
-         SCPropertyDefinition *supervisionTypeSubtypePropertyDef=[SCPropertyDefinition definitionWithName:@"subTypes" title:@"Subtypes" type:SCPropertyTypeArrayOfObjects];
-         
-         [supervisionTypeDef addPropertyDefinition:supervisionTypeSubtypePropertyDef];
+//         SCPropertyDefinition *supervisionTypeSubtypePropertyDef=[SCPropertyDefinition definitionWithName:@"subTypes" title:@"Subtypes" type:SCPropertyTypeArrayOfObjects];
+//         
+//         [supervisionTypeDef addPropertyDefinition:supervisionTypeSubtypePropertyDef];
+         SCPropertyDefinition *supervisionTypeSubtypePropertyDef=[supervisionTypeDef propertyDefinitionWithName:@"subTypes"];
+         supervisionSubTypePropertyDef.type=SCPropertyTypeArrayOfObjects;
          
          supervisionTypeSubtypePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supervisionSubTypeDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new supervision subtype"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
     }                   
@@ -1348,7 +1350,7 @@
     batteryNotesPropertyDef.type=SCPropertyTypeTextView;
     
     //Create a class definition for the other psychotherapyEntity
-    SCEntityDefinition *interventionDef = [SCEntityDefinition definitionWithEntityName:@"ExistingInterventionEntity" 
+    SCEntityDefinition *interventionDef = [SCEntityDefinition definitionWithEntityName:@"ExistingInterventionEntity"
                                                         managedObjectContext:managedObjectContext
                                                                propertyNames:[NSArray arrayWithObjects: @"interventionType"  ,@"interventionSubType", @"models",@"demographics",@"notes",@"monthlyLogNotes", nil]];
     
@@ -1407,7 +1409,7 @@
     //Create a class definition for the ExistingOtherInterventionType Entity
     SCEntityDefinition *interventionTypeDef = [SCEntityDefinition definitionWithEntityName:@"InterventionTypeEntity" 
                                                         managedObjectContext:managedObjectContext
-                                                               propertyNames:[NSArray arrayWithObjects:@"interventionType",@"notes",   nil]];
+                                                               propertyNames:[NSArray arrayWithObjects:@"interventionType",@"subTypes",@"notes",   nil]];
     
     
     
@@ -1487,11 +1489,13 @@
         
         
         
-        SCPropertyDefinition *interventionTypeSubtypePropertyDef=[SCPropertyDefinition definitionWithName:@"subTypes" title:@"Subtypes" type:SCPropertyTypeArrayOfObjects];
+//        SCPropertyDefinition *interventionTypeSubtypePropertyDef=[SCPropertyDefinition definitionWithName:@"subTypes" title:@"Subtypes" type:SCPropertyTypeArrayOfObjects];
+    
         
-        
-        
-        interventionTypeSubtypePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:interventionSubTypeDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new intervention subtype"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+    SCPropertyDefinition *interventionTypeSubtypePropertyDef=[interventionTypeDef propertyDefinitionWithName:@"subTypes"];
+    interventionTypeSubtypePropertyDef.type=SCPropertyTypeArrayOfObjects;
+    interventionSubTypeStrPropertyDef.title=@"Selectable SubTypes";
+        interventionTypeSubtypePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:interventionSubTypeDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new intervention subtype"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
         
         
         [interventionTypeDef insertPropertyDefinition:interventionTypeSubtypePropertyDef atIndex:1];

@@ -181,7 +181,7 @@
     //Create a class definition for Additional Variable Name entity
     SCEntityDefinition *additionalVariableNameDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalVariableNameEntity" 
                                                                       managedObjectContext:managedObjectContext
-                                                                             propertyNames:[NSArray arrayWithObjects:@"variableName",@"notes",nil]];
+                                                                             propertyNames:[NSArray arrayWithObjects:@"variableName",@"variableValues",@"notes",nil]];
     
     
     
@@ -207,9 +207,8 @@
     
        
     
-    SCPropertyDefinition *variableValuesInVariableNamePropertyDef=[SCPropertyDefinition definitionWithName:@"variableValues" title:@"Values" type:SCPropertyTypeArrayOfObjects];
-    
-    [additionalVariableNameDef addPropertyDefinition:variableValuesInVariableNamePropertyDef];
+    SCPropertyDefinition *variableValuesInVariableNamePropertyDef=[additionalVariableNameDef propertyDefinitionWithName:@"variableValues"];
+    variableValuesInVariableNamePropertyDef.type=SCPropertyTypeArrayOfObjects;
     
     variableValuesInVariableNamePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:additionalVariableValueDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new variable value"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
     

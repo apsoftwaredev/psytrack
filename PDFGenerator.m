@@ -95,7 +95,7 @@
             NSString *clinicianTypeString=nil;
             
             for (ClinicianTypeEntity *clinicianType in clinician.clinicianType.allObjects) {
-               DLog(@"clinician type class is  %@",clinicianType.class);
+               
                 if (clinicianTypeString&&clinicianTypeString.length) {
                     
                     clinicianTypeString=[clinicianTypeString stringByAppendingFormat:@", %@",clinicianType.clinicianType];
@@ -153,7 +153,7 @@
     }
     
     
-   DLog(@"clinican string is  %@",clinicianString);
+  
 	do {
 		CGContextBeginPage (pdfContext, &pageRect);
 		

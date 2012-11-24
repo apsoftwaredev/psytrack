@@ -73,7 +73,7 @@
 //    sleepHoursNightlyPropertyDef.autoValidate=NO;
     
     //define a property group
-    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"affect", @"appearance",  @"assessment", @"attention", @"attitude", @"improvement", @"interpersonal", @"behaviors", @"imagry",   @"plan",  @"rapport",  @"sensory", @"sleepHoursNightly",    @"sleepQuality",@"psychomotor", @"speechLanguage",  @"cultural",  @"additionalVariables", @"concentration",@"eyeContact",@"insight",@"intellect",@"judgement", @"medical",@"memory",@"mood",@"perception",@"psychosocial",@"thoughtContent", nil ]];
+    SCPropertyGroup *notesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"affect", @"appearance",  @"assessment", @"attention", @"attitude",@"homework", @"improvement", @"interpersonal", @"behaviors", @"imagery",   @"plan",  @"rapport",  @"sensory", @"sleepHoursNightly",    @"sleepQuality",@"psychomotor", @"speechLanguage",  @"cultural",  @"additionalVariables", @"concentration",@"eyeContact",@"insight",@"intellect",@"judgement", @"medical",@"memory",@"mood",@"perception",@"psychosocial",@"clientsDesc",@"thoughtContent", nil ]];
     [self.clientPresentationDef.propertyGroups addGroup:notesGroup];
     
     SCPropertyGroup *orientationGroup = [SCPropertyGroup groupWithHeaderTitle:@"Client Orientation" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"orientedToBody", @"orientedToPerson",  @"orientedToPlace", @"orientedToTime",    nil ]];
@@ -106,7 +106,7 @@
   
     //create a property definition for the orientated to place property in the cleintPresentation Def class
     SCPropertyDefinition *orientedToBodyPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"orientedToBody"];
-    orientedToBodyPropertyDef.title=@"Body";
+    orientedToBodyPropertyDef.title=@"Situation";
     //set the property type to segmented
     orientedToBodyPropertyDef.type = SCPropertyTypeSegmented;
     
@@ -414,7 +414,7 @@
     clientDescPropertyDef.type = SCPropertyTypeTextView;
     
     //override the auto title generation for the clientDesc property definition and set it to a custom title
-    clientDescPropertyDef.title=@"";
+    clientDescPropertyDef.title=@"Struggled With";
     
     //Create a class definition for Additional Variables entity 
     SCEntityDefinition *additionalVariableDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalVariableEntity" 
@@ -433,7 +433,7 @@
     //Create a class definition for Additional Variable Name entity
     SCEntityDefinition *additionalVariableNameDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalVariableNameEntity" 
                                                                             managedObjectContext:managedObjectContext
-                                                                                   propertyNames:[NSArray arrayWithObjects:@"variableName",@"notes",nil]]; 
+                                                                                   propertyNames:[NSArray arrayWithObjects:@"variableName",@"notes",@"variableValues",nil]];
     
     
     
@@ -448,10 +448,11 @@
     
     additionalVariableValueDef.orderAttributeName=@"order";
     
-    SCPropertyDefinition *variableValuesInVariableNamePropertyDef=[SCPropertyDefinition definitionWithName:@"variableValues" title:@"Values" type:SCPropertyTypeArrayOfObjects];
-    
-    [additionalVariableNameDef addPropertyDefinition:variableValuesInVariableNamePropertyDef];
-    
+//    SCPropertyDefinition *variableValuesInVariableNamePropertyDef=[SCPropertyDefinition definitionWithName:@"variableValues" title:@"Values" type:SCPropertyTypeArrayOfObjects];
+//    
+//    [additionalVariableNameDef addPropertyDefinition:variableValuesInVariableNamePropertyDef];
+    SCPropertyDefinition *variableValuesInVariableNamePropertyDef=[additionalVariableNameDef propertyDefinitionWithName:@"variableValues"];
+    variableValuesInVariableNamePropertyDef.title=@"Selectable Values";
     variableValuesInVariableNamePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:additionalVariableValueDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new variable value"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
     
 
@@ -637,11 +638,7 @@
     //define a property group
     SCPropertyGroup *clinicianRatingsGroup = [SCPropertyGroup groupWithHeaderTitle:@"Clinician Subjective Ratings" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"allianceScaleData",@"communicativeAbilityScaleData", @"opennessScaleData",@"progressClinicianScaleData",  @"depthScaleData", @"safetyRisk",@"liabilityRiskScaleData", @"safetyRiskScaleData",    nil]];
     [self.clientPresentationDef.propertyGroups insertGroup:clinicianRatingsGroup atIndex:2];
-    
-    //define a property group
-    SCPropertyGroup *clientDescGroup = [SCPropertyGroup groupWithHeaderTitle:@"Client's Description of Problem" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"clientsDesc", nil]];
-    [self.clientPresentationDef.propertyGroups addGroup:clientDescGroup];
-    
+   
     //define a property group
     SCPropertyGroup *clientPresentationNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"otherNotes", nil]];
     
@@ -683,7 +680,7 @@
     
     
     //Create a property definition for the sensoryNotes property.
-    SCPropertyDefinition *sensoryNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"sensoryNotes"];
+    SCPropertyDefinition *sensoryNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"sensory"];
     
     //set the sensoryNotes property definition type to a Text View Cell
     sensoryNotesPropertyDef.type = SCPropertyTypeTextView;
@@ -696,11 +693,11 @@
     //set the notableBehaviors property definition type to a Text View Cell
     notableBehaviorsPropertyDef.type = SCPropertyTypeTextView;
     
-    //Create a property definition for the notableImagry property.
-    SCPropertyDefinition *notableImagryPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"imagry"];
+    //Create a property definition for the notableImagery property.
+    SCPropertyDefinition *notableImageryPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"imagery"];
     
-    //set the notableImagry property definition type to a Text View Cell
-    notableImagryPropertyDef.type = SCPropertyTypeTextView;
+    //set the notableImagery property definition type to a Text View Cell
+    notableImageryPropertyDef.type = SCPropertyTypeTextView;
     
     //Create a property definition for the interpersonalNotes property.
     SCPropertyDefinition *interpersonalNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"interpersonal"];
@@ -714,7 +711,83 @@
     
     //set the psychoMotorNotes property definition type to a Text View Cell
     psychomotorNotesPropertyDef.type = SCPropertyTypeTextView;
+   
+    //Create a property definition for the psychoMotorNotes property.
+    SCPropertyDefinition *concentrationNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"concentration"];
     
+    //set the psychoMotorNotes property definition type to a Text View Cell
+    concentrationNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    //Create a property definition for the psychoMotorNotes property.
+    SCPropertyDefinition *eyeContactnNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"eyeContact"];
+    
+    //set the psychoMotorNotes property definition type to a Text View Cell
+    eyeContactnNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    //Create a property definition for the psychoMotorNotes property.
+    SCPropertyDefinition *insightNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"insight"];
+    
+    //set the psychoMotorNotes property definition type to a Text View Cell
+    insightNotesPropertyDef.type = SCPropertyTypeTextView;
+   
+    //Create a property definition for the psychoMotorNotes property.
+    SCPropertyDefinition *homeworkNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"homework"];
+    
+    //set the psychoMotorNotes property definition type to a Text View Cell
+    homeworkNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    //Create a property definition for the psychoMotorNotes property.
+    SCPropertyDefinition *intellectNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"intellect"];
+    
+    //set the psychoMotorNotes property definition type to a Text View Cell
+    intellectNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    
+    //Create a property definition for the psychoMotorNotes property.
+    SCPropertyDefinition *judgementNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"judgement"];
+    
+    //set the psychoMotorNotes property definition type to a Text View Cell
+    judgementNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    //Create a property definition for the psychoMotorNotes property.
+    SCPropertyDefinition *medicalNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"medical"];
+    
+    //set the psychoMotorNotes property definition type to a Text View Cell
+    medicalNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    
+    //Create a property definition for the psychoMotorNotes property.
+    SCPropertyDefinition *memoryNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"memory"];
+    
+    //set the psychoMotorNotes property definition type to a Text View Cell
+    memoryNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    //Create a property definition for the psychoMotorNotes property.
+    SCPropertyDefinition *moodNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"mood"];
+    
+    //set the psychoMotorNotes property definition type to a Text View Cell
+    moodNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    //Create a property definition for the psychoMotorNotes property.
+    SCPropertyDefinition *perceptionNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"perception"];
+    
+    //set the psychoMotorNotes property definition type to a Text View Cell
+    perceptionNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    //Create a property definition for the psychoMotorNotes property.
+    SCPropertyDefinition *psychosocialNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"psychosocial"];
+    
+    //set the psychoMotorNotes property definition type to a Text View Cell
+    psychosocialNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    //Create a property definition for the psychoMotorNotes property.
+    SCPropertyDefinition *thoughtContentNotesPropertyDef = [self.clientPresentationDef propertyDefinitionWithName:@"thoughtContent"];
+    
+    //set the psychoMotorNotes property definition type to a Text View Cell
+    thoughtContentNotesPropertyDef.type = SCPropertyTypeTextView;
+    
+    //Create a property definition for the psychoMotorNotes property.
+   
     
 //    //define a property group
 //    SCPropertyGroup *affectNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"affectNotes"]];
@@ -1907,6 +1980,36 @@ if(section.headerTitle !=nil)
                 }
                 
             }
+           
+           
+          
+          else if (cell.tag==3)
+           {
+               UIView *viewOne = [cell viewWithTag:14];
+               
+               if([viewOne isKindOfClass:[UISlider class]])
+               {
+                   UISlider *sliderOne = (UISlider *)viewOne;
+                   UILabel *sOnelabel = (UILabel *)[cell viewWithTag:10];
+                   
+                   sOnelabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
+               }
+           }
+          else if (cell.tag==4)
+           {
+               UIView *viewTwo =[cell viewWithTag:14];
+               if([viewTwo isKindOfClass:[UISlider class]])
+               {
+                   UISlider *sliderTwo = (UISlider *)viewTwo;
+                   UILabel *sTwolabel = (UILabel *)[cell viewWithTag:10];
+                   
+                   sTwolabel.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];
+               }
+               
+               
+               
+           }
+           
        }
 
   else  if (tableViewModel.tag==3) {
@@ -1954,36 +2057,7 @@ if(section.headerTitle !=nil)
       }
     }
 
-    else if (tableViewModel.tag==5){
-        SCTableViewCell *cell = [tableViewModel cellAtIndexPath:indexPath];
-        if (cell.tag==3)
-        {
-            UIView *viewOne = [cell viewWithTag:14];
-            
-            if([viewOne isKindOfClass:[UISlider class]])
-            {
-                UISlider *sliderOne = (UISlider *)viewOne;
-                UILabel *sOnelabel = (UILabel *)[cell viewWithTag:10];
-                
-                sOnelabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
-            }
-        }  
-        if (cell.tag==4)
-        {        
-            UIView *viewTwo =[cell viewWithTag:14];
-            if([viewTwo isKindOfClass:[UISlider class]])
-            {    
-                UISlider *sliderTwo = (UISlider *)viewTwo;
-                UILabel *sTwolabel = (UILabel *)[cell viewWithTag:10];
-                
-                sTwolabel.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];
-            }
-            
-            
-            
-        }
-        
-    }
+    
 
 
 

@@ -1447,11 +1447,13 @@ additionalTimeFormatter=nil;
         SCPropertyDefinition *trackSubTypeNotesPropertyDef=[trackSubTypeDef propertyDefinitionWithName:@"notes"];
         trackSubTypeNotesPropertyDef.type=SCPropertyTypeTextView;
         
-        SCPropertyDefinition *trackTypeSubtypePropertyDef=[SCPropertyDefinition definitionWithName:@"subTypes" title:@"Subtypes" type:SCPropertyTypeArrayOfObjects];
-        
-        [trackTypeDef addPropertyDefinition:trackTypeSubtypePropertyDef];
-        
-        trackTypeSubtypePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:trackSubTypeDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new supervision subtype"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];	
+//        SCPropertyDefinition *trackTypeSubtypePropertyDef=[SCPropertyDefinition definitionWithName:@"subTypes" title:@"Subtypes" type:SCPropertyTypeArrayOfObjects];
+//        
+//        [trackTypeDef addPropertyDefinition:trackTypeSubtypePropertyDef];
+    
+         SCPropertyDefinition *trackTypeSubtypePropertyDef=[trackTypeDef propertyDefinitionWithName:@"subTypes"];
+        trackTypeSubtypePropertyDef.type=SCPropertyTypeArrayOfObjects;
+        trackTypeSubtypePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:trackSubTypeDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new supervision subtype"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
         
     }
 
@@ -4995,7 +4997,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         if (timeObject.startTime &&timeObject.endTime&&timeObject.totalTime) {
           
-            clientPresentationGenerateVC.serviceDateTimeString=[clientPresentationGenerateVC.serviceDateTimeString stringByAppendingFormat:@" (%@ \u2013 %@, total time: %@)", [shortTimeFormatter stringFromDate:timeObject.startTime],[shortTimeFormatter stringFromDate:timeObject.endTime], [counterDateFormatter stringFromDate:timeObject.totalTime] ];
+            clientPresentationGenerateVC.serviceDateTimeString=[clientPresentationGenerateVC.serviceDateTimeString stringByAppendingFormat:@" (%@ \u2013 %@, time counted: %@)", [shortTimeFormatter stringFromDate:timeObject.startTime],[shortTimeFormatter stringFromDate:timeObject.endTime], [counterDateFormatter stringFromDate:timeObject.totalTime] ];
         }
         else if (timeObject.totalTime){
         
