@@ -2189,6 +2189,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         selectedSupervisionType=nil;
         serviceDateCell=nil;
         self.eventViewController=nil;
+        firstDetailTableModel=nil;
         if (clientPresentations_Shared) {
             clientPresentations_Shared.serviceDatePickerDate=nil;
         }
@@ -2340,6 +2341,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         [self.searchBar setSelectedScopeButtonIndex:1];
        
        [objectsModel.dataFetchOptions setFilterPredicate:nil];
+        firstDetailTableModel=detailTableViewModel;
         
     }
     
@@ -4980,7 +4982,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     clientPresentationGenerateVC.presentationTableModel=(SCArrayOfObjectsModel *)currentDetailTableViewModel;
     clientPresentationGenerateVC.serviceDate=(NSDate *)serviceDateCell.datePicker.date;
-    
+    clientPresentationGenerateVC.firstDetailTableModel=(SCArrayOfObjectsModel * )firstDetailTableModel;
     TimeEntity *timeObject=nil;
     if ([totalTimeCell.boundObject isKindOfClass:[TimeEntity class]]) {
         timeObject=(TimeEntity *)totalTimeCell.boundObject;

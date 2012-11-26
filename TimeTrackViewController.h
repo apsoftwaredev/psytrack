@@ -59,7 +59,7 @@ static NSString * const kTrackSupervisionReceivedEntityName=@"SupervisionReceive
     EKEventEditViewController *eventViewController;
     
     SCTableViewModel *currentDetailTableViewModel;
-    //    NSString *calendarIdentifier;
+    SCTableViewModel *firstDetailTableModel;
     
     NSManagedObject *eventButtonBoundObject;
 

@@ -23,7 +23,7 @@
 - (NSString *)stringToDraw:(NSString *)font fontSize:(int)fontSize;
 
 
-- (void)createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)presentationTableModel serviceDateTimeStr:(NSString *)serviceDateTimeStr clinician:(ClinicianEntity*)clinician forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString*)password;
+- (void)createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)presentationTableModel firstDetaiTableModel:(SCArrayOfObjectsModel *)firstDetailTableModel serviceDateTimeStr:(NSString *)serviceDateTimeStr clinician:(ClinicianEntity*)clinician forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString*)password;
 
 @property (nonatomic, retain) UITextView *invisibleTextView;
 @property (nonatomic, retain) NSMutableArray *textArray;

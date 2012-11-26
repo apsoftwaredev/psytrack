@@ -27,7 +27,7 @@
 @synthesize invisibleTextView;
 
 
-- (void)createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)presentationTableModel serviceDateTimeStr:(NSString *)serviceDateTimeStr clinician:(ClinicianEntity*)clinician forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString*)password{
+- (void)createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)presentationTableModel   firstDetaiTableModel:(SCArrayOfObjectsModel *)firstDetailTableModel  serviceDateTimeStr:(NSString *)serviceDateTimeStr clinician:(ClinicianEntity*)clinician forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString*)password{
     
     //create our invisibleTextView
 //    invisibleTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
@@ -166,10 +166,10 @@
        
         
     }
-    CGRect bounds = CGRectMake(LEFT_MARGIN,
-                               TOP_MARGIN,
-                               DOC_WIDTH - RIGHT_MARGIN - LEFT_MARGIN,
-                               DOC_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN);
+    CGRect bounds = CGRectMake(0,
+                               0,
+                               DOC_WIDTH,
+                               DOC_HEIGHT );
     
       UIGraphicsBeginPDFContextToData(pdfData, bounds, NULL);
   
@@ -194,7 +194,10 @@
 
         
         CGMutablePathRef newPath = CGPathCreateMutable();
-        CGPathAddRect(newPath, NULL, bounds );
+        CGPathAddRect(newPath, NULL, CGRectMake(RIGHT_MARGIN,
+                                                TOP_MARGIN,
+                                                DOC_WIDTH-RIGHT_MARGIN-LEFT_MARGIN,
+                                                DOC_HEIGHT-TOP_MARGIN-BOTTOM_MARGIN ));
         
         NSMutableAttributedString *titleStr = [[NSMutableAttributedString alloc] initWithString:@"Client Interaction Process Notes\n"];
         UIFont *titleFont=[UIFont fontWithName:@"Georgia-Bold" size:14.0];
@@ -225,7 +228,7 @@
        
         CGFloat titleLineHeight=titleFont.lineHeight;
         
-        UIFont *normalFont=[UIFont fontWithName:@"Georgia-Bold" size:12.0];
+        UIFont *normalFont=[UIFont fontWithName:@"Georgia-Bold" size:10.0];
         
         
         if (clientIDCodeStr&&[clientIDCodeStr isKindOfClass:[NSString class]]) {
@@ -299,7 +302,7 @@
         if (clinicianString&&clinicianString.length) {
       
         
-          
+        
        
        
         NSMutableAttributedString *clinicianStr = [[NSMutableAttributedString alloc] initWithString:clinicianString];
@@ -331,6 +334,27 @@
         //		if ([invisibleTextView.text length] > 0) [[self stringToDraw:font fontSize:fontSize] drawInRect:bounds withFont:[UIFont fontWithName:font size:fontSize]];
 		CGContextRestoreGState(pdfContext);
 		UIGraphicsPopContext();
+        
+        
+        //set up context
+        UIColor *redColor=[UIColor redColor];
+        CGContextSetLineWidth(pdfContext, 0.3);
+        CGContextSetStrokeColorWithColor(pdfContext, redColor.CGColor);
+        
+        //line1
+        CGContextMoveToPoint(pdfContext, 10,DOC_HEIGHT- TOP_MARGIN-normalFont.lineHeight*3-titleLineHeight-5);
+        CGContextAddLineToPoint(pdfContext, DOC_WIDTH-10, DOC_HEIGHT- TOP_MARGIN-normalFont.lineHeight*3-titleLineHeight-5);
+        
+
+        
+        
+        //finished drawing
+        CGContextStrokePath(pdfContext);
+        
+        
+    
+        
+        
         //
         // Clean up
        
@@ -339,10 +363,11 @@
 //		CGContextRestoreGState(pdfContext);
 //		UIGraphicsPopContext();
 		done=YES;
-		CGContextEndPage (pdfContext);
+		
 	}
 	while (!done);
 	
+    CGContextEndPage (pdfContext);
     // We are done with our context now, so we release it
 	
  
@@ -379,8 +404,8 @@
         
         
         //flip context due to different origins
-        CGContextTranslateCTM(context, 15.0, templatePageBounds.size.height);
-        CGContextScaleCTM(context, 1.0, -1.0);
+        CGContextTranslateCTM(context, 0, templatePageBounds.size.height);
+        CGContextScaleCTM(context, 0.99, -0.99);
         
         
         //copy content of template page on the corresponding page in new file
@@ -388,11 +413,15 @@
         
         
         //flip context back
-        CGContextTranslateCTM(context, 15.0, templatePageBounds.size.height);
-        CGContextScaleCTM(context, 1.0, -1.0);
+        CGContextTranslateCTM(context, 0, templatePageBounds.size.height);
+        CGContextScaleCTM(context, 0.99, -0.99);
         
         /* Here you can do any drawings */
         [self drawPageNumber:pageNumber totalPages:count];
+        
+        
+        
+        
         
     }
     CFRelease(myDictionary);
@@ -416,13 +445,13 @@
     [dateFormatter setDateFormat:@"h:mm aa M/d/yyyy"];
     
     NSString *pageString=[NSString stringWithFormat:@"Page %d of %d (Generated %@) ",pageNum,totalPages,[dateFormatter stringFromDate:[NSDate date]]];
-    UIFont *theFont =[UIFont fontWithName:@"Georgia-Bold" size:10.0];
+    UIFont *theFont =[UIFont fontWithName:@"Georgia" size:10.0];
     
     CGSize maxSize= CGSizeMake(1122, 132);
     
     CGSize pageStringSize = [pageString sizeWithFont:theFont constrainedToSize:maxSize lineBreakMode:UILineBreakModeClip];
     
-    CGRect stringRect =CGRectMake(((DOC_WIDTH- pageStringSize.width)/2), ((DOC_HEIGHT-pageStringSize.height))-10, pageStringSize.width, pageStringSize.height);
+    CGRect stringRect =CGRectMake(((DOC_WIDTH- pageStringSize.width)/2), ((DOC_HEIGHT-BOTTOM_FOOTER_MARGIN-pageStringSize.height)), pageStringSize.width, pageStringSize.height);
     
     
     [pageString drawInRect:stringRect withFont:theFont];

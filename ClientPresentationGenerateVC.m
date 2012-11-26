@@ -86,7 +86,7 @@
     }
     
     PDFGenerator *pdfGenerator=[[PDFGenerator alloc]init];
-    [pdfGenerator createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)self.presentationTableModel serviceDateTimeStr:(NSString *)self.serviceDateTimeString clinician:(ClinicianEntity *)[self getClinicianName] forSize:12 andFont:@"Georgia" andColor:[UIColor blackColor] :YES :YES :([pdfPasswordTextField.text length] > 0) ? pdfPasswordTextField.text : nil];
+    [pdfGenerator createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)self.presentationTableModel firstDetaiTableModel:(SCArrayOfObjectsModel *)self.firstDetailTableModel serviceDateTimeStr:(NSString *)self.serviceDateTimeString clinician:(ClinicianEntity *)[self getClinicianName] forSize:12 andFont:@"Georgia" andColor:[UIColor blackColor] :YES :YES :([pdfPasswordTextField.text length] > 0) ? pdfPasswordTextField.text : nil];
     
    
     NSString *filePath = pdfs  ;// Path to last PDF file

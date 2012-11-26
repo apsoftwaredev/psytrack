@@ -25,6 +25,7 @@
 @property (nonatomic, weak)IBOutlet UIView *containerView;
 @property (nonatomic, weak) IBOutlet UIButton *generateButton;
 @property (nonatomic,strong) SCArrayOfObjectsModel *presentationTableModel;
+@property (nonatomic, strong) SCArrayOfObjectsModel *firstDetailTableModel;
 @property (nonatomic, strong)NSDate *serviceDate;
 
 @property (strong, nonatomic) NSDate *timeInDate;
