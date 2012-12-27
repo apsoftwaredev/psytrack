@@ -258,6 +258,7 @@
 		E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DD158E28DC00CE1AF4 /* menubar-full.png */; };
 		E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */; };
 		E74167EA158E782900CE1AF4 /* Monaco.dfont in Resources */ = {isa = PBXBuildFile; fileRef = E74167E5158E739300CE1AF4 /* Monaco.dfont */; };
+		E741E26E16838FA900B59C67 /* ServiceCodeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E741E26D16838FA900B59C67 /* ServiceCodeEntity.m */; };
 		E74AD6AA1618ECD200B596FC /* ipad-background-blue-plain-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E74AD6A91618ECD200B596FC /* ipad-background-blue-plain-small@2x.png */; };
 		E74B04E015BC436A0077D759 /* ExistingHoursEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B04DF15BC436A0077D759 /* ExistingHoursEntity.m */; };
 		E74B04E315BC447F0077D759 /* ClinicianEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E74B04E215BC447F0077D759 /* ClinicianEntity.m */; };
@@ -890,6 +891,8 @@
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
 		E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full@2x.png"; sourceTree = "<group>"; };
 		E74167E5158E739300CE1AF4 /* Monaco.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = Monaco.dfont; sourceTree = "<group>"; };
+		E741E26C16838FA900B59C67 /* ServiceCodeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCodeEntity.h; sourceTree = "<group>"; };
+		E741E26D16838FA900B59C67 /* ServiceCodeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceCodeEntity.m; sourceTree = "<group>"; };
 		E74AD6A91618ECD200B596FC /* ipad-background-blue-plain-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-background-blue-plain-small@2x.png"; sourceTree = "<group>"; };
 		E74B04DE15BC436A0077D759 /* ExistingHoursEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursEntity.h; sourceTree = "<group>"; };
 		E74B04DF15BC436A0077D759 /* ExistingHoursEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExistingHoursEntity.m; sourceTree = "<group>"; };
@@ -2207,6 +2210,8 @@
 		E7B49C1A1607E53A0073AA30 /* NSManagedObject Subclasses */ = {
 			isa = PBXGroup;
 			children = (
+				E741E26C16838FA900B59C67 /* ServiceCodeEntity.h */,
+				E741E26D16838FA900B59C67 /* ServiceCodeEntity.m */,
 				E7F2C2C4165EBA41006549BC /* FeeTypeEntity.h */,
 				E7F2C2C5165EBA41006549BC /* FeeTypeEntity.m */,
 				E7F2C2C2165EBA2C006549BC /* FeeEntity.h */,
@@ -3029,6 +3034,7 @@
 				E7388B681652B7E600E04639 /* ClientPresentationGenerateVC.m in Sources */,
 				E7388B6E1652C0EB00E04639 /* PDFGenerator.m in Sources */,
 				E7ECFB151656E9E100C13F93 /* ClinicianTypeEntity.m in Sources */,
+				E741E26E16838FA900B59C67 /* ServiceCodeEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3526,7 +3532,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/../../Downloads/STV 3.1.4 Pro/Static Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";
@@ -3562,7 +3567,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/../../Downloads/STV 3.1.4 Pro/Static Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";
@@ -3580,7 +3584,7 @@
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "4377248F-C037-4299-898B-146B7461DC00";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4377248F-C037-4299-898B-146B7461DC00";
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)\"/../** \"$(SRCROOT)/../../Downloads/iPhone-1/Classes\" \"$(SRCROOT)/../../Downloads/STV 3.1.4 Pro/Source Code/STV+CoreData/STV+CoreData\" \"$(SRCROOT)/../../Downloads/STV 3.1.4 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
