@@ -937,7 +937,9 @@
     
     clientInstrumentNotesPropertyDef.type=SCPropertyTypeTextView;
     
-    SCPropertyDefinition *instrumentNotesPropertyDef = [instrumentDef propertyDefinitionWithName:@"notes"];    
+    
+    
+    SCPropertyDefinition *instrumentNotesPropertyDef = [instrumentDef propertyDefinitionWithName:@"notes"];
     
     instrumentNotesPropertyDef.type=SCPropertyTypeTextView;
     
@@ -1147,7 +1149,7 @@
     //Create a class definition for the Instrument Entity
     SCEntityDefinition *batteryDef = [SCEntityDefinition definitionWithEntityName:@"BatteryEntity" 
                                                              managedObjectContext:managedObjectContext
-                                                                    propertyNames:[NSArray arrayWithObjects:@"batteryName", @"acronym", @"publisher",@"instruments", @"sampleSize", @"ages",@"notes" , nil]];
+                                                                    propertyNames:[NSArray arrayWithObjects:@"batteryName", @"acronym", @"publisher",@"instruments", @"sampleSize", @"ages",@"notes" ,@"completedTrainingBattery", nil]];
     
 
     

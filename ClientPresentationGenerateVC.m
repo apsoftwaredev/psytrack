@@ -11,6 +11,9 @@
 #import "ReaderDocument.h"
 #import "PDFGenerator.h"
 #import "ClinicianEntity.h"
+#import "AssessmentTypeEntity.h"
+#import "ServiceCodeEntity.h"
+
 
 @interface ClientPresentationGenerateVC ()
 -(NSString *)sanitizeFileName;
@@ -86,7 +89,120 @@
     }
     
     PDFGenerator *pdfGenerator=[[PDFGenerator alloc]init];
-    [pdfGenerator createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)self.presentationTableModel firstDetaiTableModel:(SCArrayOfObjectsModel *)self.firstDetailTableModel serviceDateTimeStr:(NSString *)self.serviceDateTimeString clinician:(ClinicianEntity *)[self getClinicianName] forSize:12 andFont:@"Georgia" andColor:[UIColor blackColor] :YES :YES :([pdfPasswordTextField.text length] > 0) ? pdfPasswordTextField.text : nil];
+    
+    
+    NSString *trackText=nil;
+    switch (self.timeTrackControllerSetup) {
+        case kTimeTrackAssessmentSetup:
+        {
+        DLog(@"section count is  %i",self.firstDetailTableModel.sectionCount);
+            if (self.firstDetailTableModel && self.firstDetailTableModel.sectionCount>2) {
+                
+                
+                SCTableViewSection *sectionThree=(SCTableViewSection *)[self.firstDetailTableModel sectionAtIndex:2];
+                SCTableViewCell *cellOne=(SCTableViewCell *)[sectionThree cellAtIndex:0];
+                DLog(@"cell class is  %@",cellOne.class);
+                if ([cellOne isKindOfClass:[SCObjectSelectionCell class]]){
+                
+                
+                    SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellOne;
+                    
+                    if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInteger:-1]]) {
+                        NSManagedObject *selectedObject=(NSManagedObject *)[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                        
+                        if ([selectedObject isKindOfClass:[AssessmentTypeEntity class]]) {
+                            AssessmentTypeEntity *assessmentTypeObject=(AssessmentTypeEntity *)selectedObject;
+                            
+                            [assessmentTypeObject willAccessValueForKey:@"assessmentType"];
+                            if (assessmentTypeObject.assessmentType&& assessmentTypeObject.assessmentType.length) {
+                                trackText=[NSString stringWithFormat:@"Assessment Type: %@ \n",assessmentTypeObject.assessmentType];
+                            }
+                        }
+                    
+                        
+                        
+                    }
+                    
+                    
+                
+                
+                  }
+                
+                
+    
+            
+                    SCTableViewCell *cellFour=(SCTableViewCell *)[sectionThree cellAtIndex:3];
+            DLog(@"cell class is  %@",cellFour.class);
+                    if ([cellFour isKindOfClass:[SCObjectSelectionCell class]]){
+                        
+                        
+                        SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellFour;
+                        
+                        if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInteger:-1]]) {
+                            NSManagedObject *selectedObject=(NSManagedObject *)[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                            
+                            if ([selectedObject isKindOfClass:[ServiceCodeEntity class]]) {
+                                ServiceCodeEntity *serviceCodeObject=(ServiceCodeEntity *)selectedObject;
+                                
+                                [serviceCodeObject willAccessValueForKey:@"code"];
+                                if (serviceCodeObject.code && serviceCodeObject.code.length) {
+                                    if (!trackText) {
+                                         trackText=[NSString stringWithFormat:@"Service Code: %@",serviceCodeObject.code];
+                                        
+                                                                                
+                                    }
+                                    else{
+                                    
+                                         trackText=[trackText stringByAppendingFormat:@"Service Code: %@",serviceCodeObject.code];
+                                                                           }
+                                
+                                }
+                                
+                                
+                                [serviceCodeObject willAccessValueForKey:@"name"];
+                                if (serviceCodeObject.name && serviceCodeObject.name.length) {
+                                    trackText=[trackText stringByAppendingFormat:@" - %@",serviceCodeObject.name];
+                                }
+
+                            }
+                            
+                            
+                            
+                        }
+                        
+                        
+                        
+                        
+                    }
+
+                    
+            
+            
+            
+                }
+    
+           
+            
+        
+        
+        }
+            break;
+        case kTimeTrackInterventionSetup:
+
+            break;
+        case kTimeTrackSupportSetup:
+            
+            break;
+       
+        default:
+            break;
+    }
+    
+    
+    
+    
+    
+[pdfGenerator createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)self.presentationTableModel trackText:(NSString *)trackText serviceDateTimeStr:(NSString *)self.serviceDateTimeString clinician:(ClinicianEntity *)[self getClinicianName] forSize:12 andFont:@"Georgia" andColor:[UIColor blackColor] :YES :YES :([pdfPasswordTextField.text length] > 0) ? pdfPasswordTextField.text : nil];
     
    
     NSString *filePath = pdfs  ;// Path to last PDF file

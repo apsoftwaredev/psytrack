@@ -9,6 +9,14 @@
 #import "ReaderViewController.h"
 #import "BigProgressViewWithBlockedView.h"
 
+typedef enum {
+    kTimeTrackAssessmentSetup,
+    kTimeTrackInterventionSetup,
+    kTimeTrackSupportSetup,
+    kTimeTrackSupervisionReceivedSetup,
+    kTimeTrackSupervisionGivenSetup,
+} PTimeTrackControllerSetup;
+
 
 @interface ClientPresentationGenerateVC : SCViewController <ReaderViewControllerDelegate,UITextFieldDelegate, UIAlertViewDelegate>{
     
@@ -32,6 +40,7 @@
 @property (nonatomic, strong)   NSDate *timeOutDate;
 @property (nonatomic, strong) NSDate *totalTime;
 @property (nonatomic, strong)NSString *serviceDateTimeString;
+@property (nonatomic, assign)PTimeTrackControllerSetup timeTrackControllerSetup;
 
 -(IBAction)generateButtonTapped:(id)sender;
 

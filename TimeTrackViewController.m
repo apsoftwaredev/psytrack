@@ -4983,6 +4983,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     clientPresentationGenerateVC.presentationTableModel=(SCArrayOfObjectsModel *)currentDetailTableViewModel;
     clientPresentationGenerateVC.serviceDate=(NSDate *)serviceDateCell.datePicker.date;
     clientPresentationGenerateVC.firstDetailTableModel=(SCArrayOfObjectsModel * )firstDetailTableModel;
+    clientPresentationGenerateVC.timeTrackControllerSetup=currentControllerSetup;
+    
     TimeEntity *timeObject=nil;
     if ([totalTimeCell.boundObject isKindOfClass:[TimeEntity class]]) {
         timeObject=(TimeEntity *)totalTimeCell.boundObject;

@@ -27,7 +27,7 @@
 @synthesize invisibleTextView;
 
 
-- (void)createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)presentationTableModel   firstDetaiTableModel:(SCArrayOfObjectsModel *)firstDetailTableModel  serviceDateTimeStr:(NSString *)serviceDateTimeStr clinician:(ClinicianEntity*)clinician forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString*)password{
+- (void)createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)presentationTableModel trackText:(NSString *)trackText   serviceDateTimeStr:(NSString *)serviceDateTimeStr clinician:(ClinicianEntity*)clinician forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString*)password{
     
     //create our invisibleTextView
 //    invisibleTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
@@ -166,23 +166,76 @@
        
         
     }
-    CGRect bounds = CGRectMake(0,
+    CGRect pageBounds = CGRectMake(0,
                                0,
                                DOC_WIDTH,
                                DOC_HEIGHT );
     
-      UIGraphicsBeginPDFContextToData(pdfData, bounds, NULL);
+      UIGraphicsBeginPDFContextToData(pdfData, pageBounds, NULL);
   
        pdfContext=UIGraphicsGetCurrentContext();
     
+    int pageCount=0;
     
+    NSString *presentationTableModelString=[self getContentFromTableModel:presentationTableModel];
+    
+    DLog(@"print presentation string %@",presentationTableModelString);
+    //
+    // Clean up
+    
+    
+    //		if ([invisibleTextView.text length] > 0) [[self stringToDraw:font fontSize:fontSize] drawInRect:bounds withFont:[UIFont fontWithName:font size:fontSize]];
+    //		CGContextRestoreGState(pdfContext);
+    //		UIGraphicsPopContext();
+    //create our invisibleTextView
+    invisibleTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, DOC_WIDTH-RIGHT_MARGIN-LEFT_MARGIN, DOC_HEIGHT-BOTTOM_FOOTER_MARGIN-BOTTOM_MARGIN-TOP_MARGIN)];
+    textArray = [[NSMutableArray alloc] init];
+    
+    [textArray setArray:[presentationTableModelString componentsSeparatedByString:@" "]];
+    [invisibleTextView setText:presentationTableModelString];
+    UIFont *normalFont=[UIFont fontWithName:@"Georgia-Bold" size:10.0];
+    UIFont *titleFont=[UIFont fontWithName:@"Georgia-Bold" size:14.0];
+	
+    
+    NSMutableAttributedString *titleStr = [[NSMutableAttributedString alloc] initWithString:@"Client Interaction Process Notes\n"];
+   
+    CGMutablePathRef newPath = CGPathCreateMutable();
+    CGPathAddRect(newPath, NULL, CGRectMake(RIGHT_MARGIN,
+                                            TOP_MARGIN,
+                                            DOC_WIDTH-RIGHT_MARGIN-LEFT_MARGIN,
+                                            DOC_HEIGHT-TOP_MARGIN-BOTTOM_MARGIN ));
+    
+    
+    [titleStr addAttribute:NSFontAttributeName value:titleFont range:NSMakeRange(0, [titleStr length])];
+    
+    
+    
+    CTTextAlignment theAlignment = kCTCenterTextAlignment;
+    CFIndex theNumberOfSettings = 1;
+    CTParagraphStyleSetting theSettings[1] = {{ kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &theAlignment }};
+    CTParagraphStyleRef theParagraphRef = CTParagraphStyleCreate(theSettings, theNumberOfSettings);
+    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)theParagraphRef, (id)kCTParagraphStyleAttributeName, nil];
+    
+    [titleStr addAttributes:attributes range:NSMakeRange(0,[titleStr length])];
+    //
+    //        [str drawInRect:bounds];
+    
+    
+    // create the framesetter and render text
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)titleStr);
+    CTFrameRef frame = CTFramesetterCreateFrame(framesetter,
+                                                CFRangeMake(0, [titleStr length]), newPath, NULL);
+    CGFloat titleLineHeight=titleFont.lineHeight;
+    
+
 	do {
+        pageCount++;
 		CGContextBeginPage (pdfContext, &pageRect);
 		
+      
+//		CGContextSaveGState(pdfContext);
+//		UIGraphicsPushContext(pdfContext);
 		
-		
-		UIGraphicsPushContext(pdfContext);
-		CGContextSaveGState(pdfContext);
 //		CGContextTranslateCTM(pdfContext, 0, bounds.origin.y);
 //		CGContextScaleCTM(pdfContext, 1, -1);
 //		CGContextTranslateCTM(pdfContext, 0, -(bounds.origin.y + bounds.size.height));
@@ -193,42 +246,13 @@
 //        CGContextScaleCTM(pdfContext, 1.0, -1.0);
 
         
-        CGMutablePathRef newPath = CGPathCreateMutable();
-        CGPathAddRect(newPath, NULL, CGRectMake(RIGHT_MARGIN,
-                                                TOP_MARGIN,
-                                                DOC_WIDTH-RIGHT_MARGIN-LEFT_MARGIN,
-                                                DOC_HEIGHT-TOP_MARGIN-BOTTOM_MARGIN ));
-        
-        NSMutableAttributedString *titleStr = [[NSMutableAttributedString alloc] initWithString:@"Client Interaction Process Notes\n"];
-        UIFont *titleFont=[UIFont fontWithName:@"Georgia-Bold" size:14.0];
-        [titleStr addAttribute:NSFontAttributeName value:titleFont range:NSMakeRange(0, [titleStr length])];
-        
-        CTTextAlignment theAlignment = kCTCenterTextAlignment;
-        CFIndex theNumberOfSettings = 1;
-        CTParagraphStyleSetting theSettings[1] = {{ kCTParagraphStyleSpecifierAlignment, sizeof(CTTextAlignment), &theAlignment }};
-        CTParagraphStyleRef theParagraphRef = CTParagraphStyleCreate(theSettings, theNumberOfSettings);
-        NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)theParagraphRef, (id)kCTParagraphStyleAttributeName, nil];
-        
-        [titleStr addAttributes:attributes range:NSMakeRange(0,[titleStr length])];
-        //
-        //        [str drawInRect:bounds];
+               CTFrameDraw(frame, pdfContext);
         
         
-        // create the framesetter and render text
-        CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)titleStr);
-        CTFrameRef frame = CTFramesetterCreateFrame(framesetter,
-                                                    CFRangeMake(0, [titleStr length]), newPath, NULL);
-        
-        CTFrameDraw(frame, pdfContext);
-        
-        
-        CFRelease(frame);
        
-        CFRelease(framesetter);
-       
-        CGFloat titleLineHeight=titleFont.lineHeight;
         
-        UIFont *normalFont=[UIFont fontWithName:@"Georgia-Bold" size:10.0];
+        
+       
         
         
         if (clientIDCodeStr&&[clientIDCodeStr isKindOfClass:[NSString class]]) {
@@ -258,7 +282,7 @@
                                                                    CFRangeMake(0, [clientIDCodeAttrString length]), clientPath, NULL);
             
             CTFrameDraw(clientFrame, pdfContext);
-            
+            clientIDCodeAttrString=nil;
             CFRelease(clientFrame);
             CFRelease(clientPath);
             CFRelease(clientframesetter);
@@ -293,7 +317,7 @@
                                                                 CFRangeMake(0, [serviceDateString length]), serviceDatePath, NULL);
             
             CTFrameDraw(serviceDateFrame, pdfContext);
-            
+            serviceDateString=nil;
             CFRelease(serviceDateFrame);
             CFRelease(serviceDatePath);
             CFRelease(serviceDateframesetter);
@@ -326,14 +350,14 @@
                                                     CFRangeMake(0, [clinicianStr length]), clinicianPath, NULL);
         
         CTFrameDraw(clinicanframe, pdfContext);
-       
+            clinicianStr=nil;
         CFRelease(clinicanframe);
-        CFRelease(newPath);
+        CFRelease(clinicianPath);
         CFRelease(clinicanframesetter);
         }
         //		if ([invisibleTextView.text length] > 0) [[self stringToDraw:font fontSize:fontSize] drawInRect:bounds withFont:[UIFont fontWithName:font size:fontSize]];
-		CGContextRestoreGState(pdfContext);
-		UIGraphicsPopContext();
+//		CGContextRestoreGState(pdfContext);
+//		UIGraphicsPopContext();
         
         
         //set up context
@@ -351,29 +375,109 @@
         //finished drawing
         CGContextStrokePath(pdfContext);
         
+        DLog(@"track text is  %@",trackText);
+        if (pageCount==1 && trackText) {
+            
+            NSMutableAttributedString *trackTextAttStr = [[NSMutableAttributedString alloc] initWithString:trackText];
+            
+            
+            
+            [trackTextAttStr addAttribute:NSFontAttributeName value:normalFont range:NSMakeRange(0, [trackText length])];
+            
+            CGRect clinicanBounds = CGRectMake(LEFT_MARGIN,
+                                               TOP_MARGIN-normalFont.lineHeight*3-titleLineHeight-10,
+                                               DOC_WIDTH - RIGHT_MARGIN - LEFT_MARGIN,
+                                               DOC_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN);
+            
+            CGMutablePathRef trackTextPath = CGPathCreateMutable();
+            CGPathAddRect(trackTextPath, NULL, clinicanBounds );
+            
+            [trackTextAttStr addAttributes:attributes range:NSMakeRange(0,[trackTextAttStr length])];
+            
+            CTFramesetterRef trackTextframesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)trackTextAttStr);
+            CTFrameRef trackTextframe = CTFramesetterCreateFrame(trackTextframesetter,
+                                                                CFRangeMake(0, [trackTextAttStr length]), trackTextPath, NULL);
+            
+            CTFrameDraw(trackTextframe, pdfContext);
+            
+            CFRelease(trackTextframe);
+            CFRelease(trackTextPath);
+            CFRelease(trackTextframesetter);
+            trackTextAttStr=nil;
+        }
         
-    
+               
+            
+//            UIGraphicsPushContext(pdfContext);
+//            CGContextSaveGState(pdfContext);
+//            CGContextTranslateCTM(pdfContext, 0, bounds.origin.y);
+//            CGContextScaleCTM(pdfContext, 1, -1);
+//            CGContextTranslateCTM(pdfContext, 0, -(bounds.origin.y + bounds.size.height));
+            if ([invisibleTextView.text length] > 0)
+            {
+               // [[self stringToDraw:font fontSize:12 drawInRect:bounds] drawInRect:bounds withFont:[UIFont fontWithName:@"Times New Roman" size:12.0]];
+                
+                
+//                [@"test" drawInRect:bounds withFont:[UIFont fontWithName:@"Times New Roman" size:12.0]];
+                               CGRect bounds = CGRectMake(LEFT_MARGIN,
+                                           TOP_MARGIN-normalFont.lineHeight*5-titleLineHeight-10,
+                                           DOC_WIDTH - RIGHT_MARGIN - LEFT_MARGIN,
+                                           DOC_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN);
+               
+                
+                NSMutableAttributedString *textAttStr = [[NSMutableAttributedString alloc] initWithString:[self stringToDraw:font fontSize:12 drawInRect:bounds]];
+                
+                
+                
+//                [textAttStr addAttribute:NSFontAttributeName value:normalFont range:NSMakeRange(0, [trackText length])];
+                
+
+                
+                CGMutablePathRef trackTextPath = CGPathCreateMutable();
+                CGPathAddRect(trackTextPath, NULL, bounds );
+                
+//                [textAttStr addAttributes:attributes range:NSMakeRange(0,[textAttStr length])];
+                
+                CTFramesetterRef trackTextframesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)textAttStr);
+                CTFrameRef trackTextframe = CTFramesetterCreateFrame(trackTextframesetter,
+                                                                     CFRangeMake(0, [textAttStr length]), trackTextPath, NULL);
+                
+                CTFrameDraw(trackTextframe, pdfContext);
+                textAttStr=nil;
+                CFRelease(trackTextframe);
+                CFRelease(trackTextPath);
+                CFRelease(trackTextframesetter);
+                
+            }
+            else
+            {
+                done=YES;
+            }
+
+//            CGContextRestoreGState(pdfContext);
+//            UIGraphicsPopContext();
         
-        
-        //
-        // Clean up
-       
-       
-//		if ([invisibleTextView.text length] > 0) [[self stringToDraw:font fontSize:fontSize] drawInRect:bounds withFont:[UIFont fontWithName:font size:fontSize]];
-//		CGContextRestoreGState(pdfContext);
-//		UIGraphicsPopContext();
-		done=YES;
+		      
+		if (pageCount>50) {
+            //just as a control
+            done=YES;
+        }
+		
+		CGContextEndPage (pdfContext);
 		
 	}
 	while (!done);
 	
-    CGContextEndPage (pdfContext);
-    // We are done with our context now, so we release it
-	
+   
  
     // remove PDF rendering context
     UIGraphicsEndPDFContext();
-  
+    CFRelease(frame);
+    titleStr=nil;
+    titleFont=nil;
+    CFRelease(framesetter);
+    invisibleTextView.text=nil;
+    CFRelease(newPath);
     
     //begin
     
@@ -463,16 +567,18 @@
     NSString *returnString=nil;
     
     
-    
-    for (NSInteger i=0; i<tableModel.sectionCount; i++) {
+   
+    for (NSInteger i=2; i<tableModel.sectionCount-1; i++) {
         
         SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:i];
-        
+         BOOL addedScaleText=NO;
+        BOOL addedOrientationText=NO;
         for (NSInteger p=0; p<section.cellCount; p++) {
             SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:p];
            
             NSString *textLabelText=[NSString string];
             NSString *labelText=[NSString string];
+           
             if( [cell respondsToSelector:@selector(textLabel) ]) {
                 
                 textLabelText=cell.textLabel.text;
@@ -480,17 +586,7 @@
                 
             }
             
-            if ([cell isKindOfClass:[ClientsSelectionCell class]]) {
-                ClientsSelectionCell *clientSelectionCell=(ClientsSelectionCell *)cell;
-                
-                labelText=clientSelectionCell.label.text;
-            }
-            
-            if ([cell isKindOfClass:[SCLabelCell class]]) {
-                SCLabelCell   *labelCell=(SCLabelCell *)cell;
-                
-                labelText=labelCell.label.text;
-            }
+           
 
             if ([cell isKindOfClass:[SCControlCell class]]){
                 
@@ -509,9 +605,23 @@
                 if ([segmentedView isKindOfClass:[UISegmentedControl class]]){
                     
                     UISegmentedControl *segmentedControl=(UISegmentedControl *)segmentedView;
-                    if(segmentedControl.selectedSegmentIndex!=-1)
+                    if(segmentedControl.selectedSegmentIndex!=-1){
+                        if (!addedScaleText) {
+                            addedScaleText=YES;
+                            if (textLabelText) {
+                                if (i==2) {
+                                    textLabelText=[@"Client subjective ratings (Scale values range from 0 to 10). \n" stringByAppendingString:textLabelText];
+                                }
+                                else{
+                                
+                                textLabelText=[@"Clinician subjective ratings (Scale values range from 0 to 10). \n" stringByAppendingString:textLabelText];
+                                }
+                            
+                            }
+                            
+                        }
                         labelText=[NSString stringWithFormat:@"%i",segmentedControl.selectedSegmentIndex];
-                    else{
+                    }else{
                     
                         textLabelText=nil;
                         labelText=nil;
@@ -576,6 +686,19 @@
            
             if ([cell isKindOfClass:[SCSegmentedCell class]]) {
                 SCSegmentedCell *segmentedCell=(SCSegmentedCell *)cell;
+                
+                if(segmentedCell.segmentedControl.selectedSegmentIndex!=-1){
+                    if (!addedScaleText) {
+                        addedOrientationText=YES;
+                        if (textLabelText) {
+                            if (i==5 &&p==0) {
+                                textLabelText=[@"Client Orientation. \n" stringByAppendingString:textLabelText];
+                            }
+                        
+                        }
+                        
+                    }
+                }
                 if (segmentedCell.segmentedControl.selectedSegmentIndex==0) {
                     labelText=@"yes";
                     
@@ -593,7 +716,9 @@
             }
             
             if (returnString &&returnString.length&&textLabelText) {
-                if (p==0||[cell isKindOfClass:[SCTextViewCell cell]]||[cell isKindOfClass:[SCTextFieldCell class]]) {
+               
+                if (p==0||[cell isKindOfClass:[SCTextViewCell class]]||[cell isKindOfClass:[SCTextFieldCell class]]) {
+                    
                     returnString=[[returnString stringByAppendingFormat:@"\n\n"]stringByAppendingString:(labelText)?[textLabelText stringByAppendingFormat:@": %@",labelText ]:[NSString string]];
                 }
                 else if([cell isKindOfClass:[SuicidaltiyCell class]]){
@@ -691,7 +816,7 @@
 		CGContextTranslateCTM(pdfContext, 0, bounds.origin.y);
 		CGContextScaleCTM(pdfContext, 1, -1);
 		CGContextTranslateCTM(pdfContext, 0, -(bounds.origin.y + bounds.size.height));
-		if ([invisibleTextView.text length] > 0) [[self stringToDraw:font fontSize:fontSize] drawInRect:bounds withFont:[UIFont fontWithName:font size:fontSize]];
+		if ([invisibleTextView.text length] > 0) [[self stringToDraw:font fontSize:fontSize drawInRect:bounds] drawInRect:bounds withFont:[UIFont fontWithName:font size:fontSize]];
 		CGContextRestoreGState(pdfContext);
 		UIGraphicsPopContext();
 		
@@ -706,17 +831,17 @@
     
 }
 
-- (NSString *)stringToDraw:(NSString *)font fontSize:(int)fontSize {
+- (NSString *)stringToDraw:(NSString *)font fontSize:(int)fontSize drawInRect:(CGRect )bounds {
 	CGSize tempSize;
     CGSize theTextSize;
-    tempSize.width = DOC_WIDTH - RIGHT_MARGIN - LEFT_MARGIN;
-    tempSize.height = 10000000;//DOC_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN;
+    tempSize.width = bounds.size.width;
+    tempSize.height = bounds.size.height;//DOC_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN;
 	
     theTextSize = [invisibleTextView.text sizeWithFont: [UIFont fontWithName:font size:fontSize] constrainedToSize: tempSize];
 	
 	//NSLog(@"size.width:%f, size.height:%f", theTextSize.width, theTextSize.height);
 	
-	if (theTextSize.height > DOC_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN) {
+	if (theTextSize.height >= bounds.size.height-1) {
 		//NSLog(@"Text exceeds bounds");
 		BOOL match = NO;
 		int wordCount = 0;
@@ -728,21 +853,24 @@
 		do {
 			if ([textArray count] > wordCount + 1) {
 				returnString = (wordCount > 0) ? [returnString stringByAppendingString:[NSString stringWithFormat:@" %@", [textArray objectAtIndex:wordCount]]] : [NSString stringWithFormat:@"%@", [textArray objectAtIndex:wordCount]];
-				theTextSize = [returnString sizeWithFont: [UIFont fontWithName:font size:fontSize] constrainedToSize: CGSizeMake(DOC_WIDTH - RIGHT_MARGIN - LEFT_MARGIN, DOC_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN)];
+				theTextSize = [returnString sizeWithFont: [UIFont fontWithName:font size:fontSize] constrainedToSize: CGSizeMake(DOC_WIDTH - RIGHT_MARGIN - LEFT_MARGIN, bounds.size.height)];
 				//NSLog(@"Currentsize.width:%f, Currentsize.height:%f", theTextSize.width, theTextSize.height);
 				currentHeight = theTextSize.height;
 				
-				if (theTextSize.height >= DOC_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN) {
+				if (theTextSize.height > bounds.size.height) {
 					match = YES;
 					//NSLog(@"MATCH");
 				}
 				
-				if (currentHeight == previousHeight && currentHeight > 700.0f) { //sometimes the above is not accurate and the height is shorter than we think (because of large fonts)
+				if (currentHeight == previousHeight && currentHeight > 575.0f) { //sometimes the above is not accurate and the height is shorter than we think (because of large fonts)
 					//NSLog(@"FIXMATCH");
 					match = YES;
-					wordCount --;
+					
+//                    wordCount ++;
 					returnString = tempReturnString;
 				}
+                
+              
 				wordCount ++;
 			}
 			else {
@@ -752,13 +880,37 @@
 			tempReturnString = returnString;
 		}
 		while (!match);
-		
-		for (int i = 0; i < wordCount; i++) {
-			[textArray removeObjectAtIndex:0];
+		 
+		for (int i = 0; i < wordCount-1; i++) {
+            //this is so if the last object in the return string is an object with new lines is not cut off at the bottom of the page
+            if (i==wordCount-2) {
+               NSString * objectInTextArray=[textArray objectAtIndex:0];
+               
+                
+                NSRange range = [objectInTextArray rangeOfString:@"\n\n" options:NSBackwardsSearch ];
+                
+                if (range.location!=NSNotFound) {
+                    objectInTextArray=[objectInTextArray substringFromIndex:range.location+2];
+                    [textArray removeObjectAtIndex:0];
+                    [textArray insertObject:objectInTextArray atIndex:0];
+                    
+                }
+                else{
+                [textArray removeObjectAtIndex:0];
+                }
+                
+                
+            }
+            else{
+                [textArray removeObjectAtIndex:0];
+            }
+            
 		}
 		
 		if ([textArray count]) {
 			invisibleTextView.text = [textArray componentsJoinedByString:@" "];
+            
+             
 		}
 		else {
 			invisibleTextView.text = @"";
@@ -767,10 +919,26 @@
 		
 		if ([returnString length] == 0) returnString = @" ";
 		
+        if([returnString hasSuffix:@":"])
+        {
+            returnString =[returnString stringByAppendingString:@"has colon"];
+        
+            NSRange range = [returnString rangeOfString:@"\n\n" options:NSBackwardsSearch ];
+
+            if (range.location!=NSNotFound) {
+                returnString=[returnString substringToIndex:range.location];
+                
+            }
+        
+        
+        }
+		
 		return returnString;
 	}
 	else {
 		done = YES;
+        if([invisibleTextView.text hasSuffix:@":"]){invisibleTextView.text =[invisibleTextView.text stringByAppendingString:@"has colon"];}
+		
 		return invisibleTextView.text;
 	}
 	
