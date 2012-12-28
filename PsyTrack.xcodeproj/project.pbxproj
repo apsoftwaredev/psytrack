@@ -385,6 +385,7 @@
 		E7B49BFF1607BD7B0073AA30 /* DisorderSystemEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49BFE1607BD7B0073AA30 /* DisorderSystemEntity.m */; };
 		E7B49C111607E24F0073AA30 /* BatteryEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B49C101607E24F0073AA30 /* BatteryEntity.m */; };
 		E7B5D97F168D31BB000CA5B5 /* ClientPresentationGenerateVC_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7B5D97E168D31BB000CA5B5 /* ClientPresentationGenerateVC_iPhone.xib */; };
+		E7B5D994168DB670000CA5B5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B2254A150285E30015D955 /* Default.png */; };
 		E7B7957A16124528008D3E8F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7B7957916124528008D3E8F /* Default-568h@2x.png */; };
 		E7C02D9F15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */; };
 		E7C02DA215B3621B0072F97C /* SupervisionReceivedEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DA115B362190072F97C /* SupervisionReceivedEntity.m */; };
@@ -2791,6 +2792,7 @@
 				E74AD6AA1618ECD200B596FC /* ipad-background-blue-plain-small@2x.png in Resources */,
 				E7388B691652B7E600E04639 /* ClientPresentationGenerateVC.xib in Resources */,
 				E7B5D97F168D31BB000CA5B5 /* ClientPresentationGenerateVC_iPhone.xib in Resources */,
+				E7B5D994168DB670000CA5B5 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

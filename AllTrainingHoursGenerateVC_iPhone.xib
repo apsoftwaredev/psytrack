@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1296</int>
-		<string key="IBDocument.SystemVersion">12B19</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2549</string>
-		<string key="IBDocument.AppKitVersion">1187</string>
-		<string key="IBDocument.HIToolboxVersion">624.00</string>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1498</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -41,15 +41,15 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIScrollView" id="854437189">
 						<reference key="NSNextResponder" ref="571752162"/>
-						<int key="NSvFlags">274</int>
+						<int key="NSvFlags">258</int>
 						<array class="NSMutableArray" key="NSSubviews">
 							<object class="IBUIView" id="476331132">
 								<reference key="NSNextResponder" ref="854437189"/>
-								<int key="NSvFlags">293</int>
+								<int key="NSvFlags">290</int>
 								<array class="NSMutableArray" key="NSSubviews">
 									<object class="IBUITextField" id="338311432">
 										<reference key="NSNextResponder" ref="476331132"/>
-										<int key="NSvFlags">269</int>
+										<int key="NSvFlags">267</int>
 										<string key="NSFrame">{{147, 157}, {181, 31}}</string>
 										<reference key="NSSuperview" ref="476331132"/>
 										<reference key="NSWindow"/>
@@ -123,7 +123,7 @@
 									</object>
 									<object class="IBUITextField" id="82924128">
 										<reference key="NSNextResponder" ref="476331132"/>
-										<int key="NSvFlags">269</int>
+										<int key="NSvFlags">267</int>
 										<string key="NSFrame">{{147, 104}, {181, 31}}</string>
 										<reference key="NSSuperview" ref="476331132"/>
 										<reference key="NSWindow"/>
@@ -178,7 +178,7 @@
 									</object>
 									<object class="IBUIButton" id="391615003">
 										<reference key="NSNextResponder" ref="476331132"/>
-										<int key="NSvFlags">288</int>
+										<int key="NSvFlags">290</int>
 										<string key="NSFrame">{{42, 290}, {286, 37}}</string>
 										<reference key="NSSuperview" ref="476331132"/>
 										<reference key="NSWindow"/>
@@ -282,7 +282,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</array>
-						<string key="NSFrame">{{-21, 0}, {335, 401}}</string>
+						<string key="NSFrame">{{-21, 0}, {335, 499}}</string>
 						<reference key="NSSuperview" ref="571752162"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -291,7 +291,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 				</array>
-				<string key="NSFrameSize">{320, 416}</string>
+				<string key="NSFrameSize">{320, 553}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -546,10 +546,10 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1296" key="NS.object.0"/>
+			<real value="1536" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">1498</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>

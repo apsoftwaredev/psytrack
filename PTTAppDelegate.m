@@ -764,7 +764,7 @@
                 viewControllerInArray.view.userInteractionEnabled=YES;
             }
             [self.window addSubview:self.tabBarController.view];
-//             [self flashAppTrainAndTitleGraphics];
+             [self flashAppTrainAndTitleGraphics];
         }
         [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:containerView];
         
@@ -782,8 +782,7 @@
         }
         [self.window addSubview:self.tabBarController.view];
         
-//         [self flashAppTrainAndTitleGraphics];
-        self.tabBarController.view.hidden=YES;
+         [self flashAppTrainAndTitleGraphics];
 
         
     } else if(isAppLocked||isLockedAtStartup) {
