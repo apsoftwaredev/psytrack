@@ -1144,7 +1144,41 @@
     
     [clientInstrumentScoresDef.propertyGroups addGroup:notesInClientInstrumentScoresPropertyGroup];
     
+    
+    //Create a class definition for the Instrument Entity
+    SCEntityDefinition *clientBatteryNotesDef = [SCEntityDefinition definitionWithEntityName:@"ClientBatteryNotesEntity"
+                                                             managedObjectContext:managedObjectContext
+                                                                               propertyNames:[NSArray arrayWithObjects:@"battery",@"countAsTrainingBattery",
+                                                                                              @"notes", nil]];
+    
 
+    //set the title property name
+    clientBatteryNotesDef.titlePropertyName=@"battery.batteryName;battery.acronym";
+    clientBatteryNotesDef.titlePropertyNameDelimiter=@" - ";
+    clientBatteryNotesDef.orderAttributeName=@"order";
+
+    //Create the property definition for the instrument Scores property
+    SCPropertyDefinition *clientBatteryNotesPropertyDef = [clientPresentationDef propertyDefinitionWithName:@"batteries"];
+    
+    clientBatteryNotesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:clientBatteryNotesDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add battery"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
+    
+    
+    SCPropertyDefinition *countAsTrainingPropertyDef=[clientBatteryNotesDef propertyDefinitionWithName:@"countAsTrainingBattery"];
+   
+    if ([SCUtilities is_iPad]) {
+        countAsTrainingPropertyDef.title=@"Count as Completed Training Battery";
+    }
+    else{
+        countAsTrainingPropertyDef.title=@"Completed Battery";
+    
+    }
+    
+    countAsTrainingPropertyDef.cellActions.didLayoutSubviews = ^(SCTableViewCell *cell, NSIndexPath *indexPath)
+    {
+        [cell.textLabel sizeToFit];
+    };
+    
+    
     
     //Create a class definition for the Instrument Entity
     SCEntityDefinition *batteryDef = [SCEntityDefinition definitionWithEntityName:@"BatteryEntity" 
@@ -1153,8 +1187,12 @@
     
 
     
+    
+    SCPropertyDefinition *clientBatteryNotesNotesPropertyDef = [clientBatteryNotesDef propertyDefinitionWithName:@"notes"];
+    clientBatteryNotesNotesPropertyDef.type=SCPropertyTypeTextView;
+    
     //create a property definition
-    SCPropertyDefinition *batteryPropertyDef = [clientPresentationDef propertyDefinitionWithName:@"batteries"];
+    SCPropertyDefinition *batteryPropertyDef = [clientBatteryNotesDef propertyDefinitionWithName:@"battery"];
     
     
     
@@ -1165,7 +1203,7 @@
     //set the property definition type to objects selection
 	
     batteryPropertyDef.type = SCPropertyTypeObjectSelection;
-    SCObjectSelectionAttributes *batterySelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:batteryDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
+    SCObjectSelectionAttributes *batterySelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:batteryDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:YES];
     
     //set some addtional attributes
     batterySelectionAttribs.allowAddingItems = YES;

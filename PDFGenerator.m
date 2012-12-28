@@ -27,8 +27,8 @@
 @synthesize invisibleTextView;
 
 
-- (void)createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)presentationTableModel trackText:(NSString *)trackText   serviceDateTimeStr:(NSString *)serviceDateTimeStr clinician:(ClinicianEntity*)clinician forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString*)password{
-    
+- (void)createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)presentationTableModel trackText:(NSString *)trackText   serviceDateTimeStr:(NSString *)serviceDateTimeStr clinician:(ClinicianEntity*)clinician forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString*)password reportTitle:(NSString *)reportTitle isSupportActivity:(BOOL)spportActivity{
+    isSupportActivity=spportActivity;
     //create our invisibleTextView
 //    invisibleTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
 //    textArray = [[NSMutableArray alloc] init];
@@ -197,7 +197,7 @@
     UIFont *titleFont=[UIFont fontWithName:@"Georgia-Bold" size:14.0];
 	
     
-    NSMutableAttributedString *titleStr = [[NSMutableAttributedString alloc] initWithString:@"Client Interaction Process Notes\n"];
+    NSMutableAttributedString *titleStr = [[NSMutableAttributedString alloc] initWithString:reportTitle];
    
     CGMutablePathRef newPath = CGPathCreateMutable();
     CGPathAddRect(newPath, NULL, CGRectMake(RIGHT_MARGIN,
@@ -565,9 +565,33 @@
 -(NSString *)getContentFromTableModel:(SCArrayOfObjectsModel *)tableModel{
 
     NSString *returnString=nil;
-    
-    
-   
+    NSString *textLabelText=[NSString string];
+    NSString *labelText=[NSString string];
+    if (isSupportActivity) {
+        SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:1];
+        SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:0];
+        
+        if( [cell respondsToSelector:@selector(textLabel) ]) {
+            
+            textLabelText=cell.textLabel.text;
+            
+            
+        }
+        
+        if ([cell isKindOfClass:[SCTextViewCell class]]) {
+            SCTextViewCell *textViewCell=(SCTextViewCell *)cell;
+            labelText=textViewCell.textView.text;
+            
+            if (!labelText||!labelText.length) {
+                textLabelText=nil;
+            }
+        }
+        if (textLabelText && textLabelText.length && labelText&&labelText.length) {
+            returnString=[textLabelText stringByAppendingFormat:@": %@",labelText ];
+        }
+        
+    }
+    else{
     for (NSInteger i=2; i<tableModel.sectionCount-1; i++) {
         
         SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:i];
@@ -576,8 +600,7 @@
         for (NSInteger p=0; p<section.cellCount; p++) {
             SCTableViewCell *cell=(SCTableViewCell *)[section cellAtIndex:p];
            
-            NSString *textLabelText=[NSString string];
-            NSString *labelText=[NSString string];
+            
            
             if( [cell respondsToSelector:@selector(textLabel) ]) {
                 
@@ -744,7 +767,7 @@
         
         
     }
-    
+    }
    
     if (!returnString) {
         returnString=@"no return string";

@@ -2136,7 +2136,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         
         
-        if (cellManagedObject && [cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]) 
+        if (cellManagedObject && ([cellManagedObject.entity.name isEqualToString:@"ClientPresentationEntity"]||[cellManagedObject.entity.name isEqualToString:@"SupportActivityClientEntity"]))
         {
             if (tableViewModel.delegate!=clientPresentations_Shared) 
             {
@@ -4977,8 +4977,15 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 -(IBAction)generateReportButtonTapped:(id)sender{
 
+    NSString *nibName=nil;
+    if ([SCUtilities is_iPad]) {
+        nibName=@"ClientPresentationGenerateVC";
+    }
+    else{
+        nibName=@"ClientPresentationGenerateVC_iPhone";
+        }
 
-    ClientPresentationGenerateVC *clientPresentationGenerateVC=[[ClientPresentationGenerateVC alloc]initWithNibName:@"ClientPresentationGenerateVC" bundle:[NSBundle mainBundle]];
+    ClientPresentationGenerateVC *clientPresentationGenerateVC=[[ClientPresentationGenerateVC alloc]initWithNibName:nibName bundle:[NSBundle mainBundle]];
     
     clientPresentationGenerateVC.presentationTableModel=(SCArrayOfObjectsModel *)currentDetailTableViewModel;
     clientPresentationGenerateVC.serviceDate=(NSDate *)serviceDateCell.datePicker.date;

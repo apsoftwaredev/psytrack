@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
 		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
 		<string key="IBDocument.AppKitVersion">1187.34</string>
 		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1929</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -43,18 +43,21 @@
 			</object>
 			<object class="IBUITabBarController" id="628284502">
 				<object class="IBUISimulatedTabBarMetrics" key="IBUISimulatedBottomBarMetrics"/>
+				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics" id="60488845">
+					<int key="IBUIStatusBarStyle">2</int>
+				</object>
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 					<int key="IBUIInterfaceOrientation">1</int>
 					<int key="interfaceOrientation">1</int>
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
-				<object class="IBUINavigationController" key="IBUISelectedViewController" id="163617807">
-					<string key="IBUITitle">Reports</string>
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="73905920">
+				<object class="IBUINavigationController" key="IBUISelectedViewController" id="158962504">
+					<string key="IBUITitle">Train Track</string>
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="697147349">
 						<int key="IBUITag">92</int>
 						<string key="IBUITitle">PsyTrack</string>
-						<object class="NSCustomResource" key="IBUIImage" id="671221931">
+						<object class="NSCustomResource" key="IBUIImage" id="66020922">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">trainTab.png</string>
 						</object>
@@ -70,7 +73,7 @@
 					</object>
 					<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					<bool key="IBUIHorizontal">NO</bool>
-					<object class="IBUINavigationBar" key="IBUINavigationBar" id="377490445">
+					<object class="IBUINavigationBar" key="IBUINavigationBar" id="659888921">
 						<nil key="NSNextResponder"/>
 						<int key="NSvFlags">256</int>
 						<string key="NSFrameSize">{0, 0}</string>
@@ -85,13 +88,13 @@
 						</object>
 					</object>
 					<array class="NSMutableArray" key="IBUIViewControllers">
-						<object class="IBUIViewController" id="501759137">
-							<object class="IBUINavigationItem" key="IBUINavigationItem" id="598416728">
+						<object class="IBUIViewController" id="927215447">
+							<object class="IBUINavigationItem" key="IBUINavigationItem" id="479963630">
 								<string key="IBUITitle">PsyTrack</string>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
-							<reference key="IBUIParentViewController" ref="163617807"/>
-							<string key="IBUINibName">ReportsViewController</string>
+							<reference key="IBUIParentViewController" ref="158962504"/>
+							<string key="IBUINibName">TrainTrackViewController</string>
 							<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 								<int key="IBUIInterfaceOrientation">1</int>
 								<int key="interfaceOrientation">1</int>
@@ -102,12 +105,13 @@
 					</array>
 				</object>
 				<array class="NSMutableArray" key="IBUIViewControllers">
-					<object class="IBUINavigationController" id="158962504">
-						<string key="IBUITitle">Train Track</string>
-						<object class="IBUITabBarItem" key="IBUITabBarItem" id="697147349">
+					<reference ref="158962504"/>
+					<object class="IBUINavigationController" id="163617807">
+						<string key="IBUITitle">Reports</string>
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="73905920">
 							<int key="IBUITag">92</int>
 							<string key="IBUITitle">PsyTrack</string>
-							<reference key="IBUIImage" ref="671221931"/>
+							<reference key="IBUIImage" ref="66020922"/>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						</object>
 						<reference key="IBUIParentViewController" ref="628284502"/>
@@ -120,7 +124,7 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIHorizontal">NO</bool>
-						<object class="IBUINavigationBar" key="IBUINavigationBar" id="659888921">
+						<object class="IBUINavigationBar" key="IBUINavigationBar" id="377490445">
 							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">256</int>
 							<string key="NSFrameSize">{0, 0}</string>
@@ -135,13 +139,13 @@
 							</object>
 						</object>
 						<array class="NSMutableArray" key="IBUIViewControllers">
-							<object class="IBUIViewController" id="927215447">
-								<object class="IBUINavigationItem" key="IBUINavigationItem" id="479963630">
+							<object class="IBUIViewController" id="501759137">
+								<object class="IBUINavigationItem" key="IBUINavigationItem" id="598416728">
 									<string key="IBUITitle">PsyTrack</string>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								</object>
-								<reference key="IBUIParentViewController" ref="158962504"/>
-								<string key="IBUINibName">TrainTrackViewController</string>
+								<reference key="IBUIParentViewController" ref="163617807"/>
+								<string key="IBUINibName">ReportsViewController</string>
 								<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 									<int key="IBUIInterfaceOrientation">1</int>
 									<int key="interfaceOrientation">1</int>
@@ -151,7 +155,6 @@
 							</object>
 						</array>
 					</object>
-					<reference ref="163617807"/>
 				</array>
 				<object class="IBUITabBar" key="IBUITabBar" id="964951132">
 					<reference key="NSNextResponder"/>
@@ -178,7 +181,7 @@
 							<object class="IBUILabel" id="53127511">
 								<reference key="NSNextResponder" ref="854319316"/>
 								<int key="NSvFlags">1280</int>
-								<string key="NSFrame">{{-0.5, 36}, {355, 68}}</string>
+								<string key="NSFrame">{{26, 36}, {355, 68}}</string>
 								<reference key="NSSuperview" ref="854319316"/>
 								<reference key="NSNextKeyView" ref="648961861"/>
 								<string key="NSReuseIdentifierKey">_NS:345</string>
@@ -216,7 +219,7 @@
 							<object class="IBUILabel" id="830115337">
 								<reference key="NSNextResponder" ref="854319316"/>
 								<int key="NSvFlags">1280</int>
-								<string key="NSFrame">{{0, 336}, {355, 85}}</string>
+								<string key="NSFrame">{{23, 336}, {355, 85}}</string>
 								<reference key="NSSuperview" ref="854319316"/>
 								<reference key="NSNextKeyView" ref="824363260"/>
 								<string key="NSReuseIdentifierKey">_NS:345</string>
@@ -246,7 +249,7 @@
 							<object class="IBUIImageView" id="648961861">
 								<reference key="NSNextResponder" ref="854319316"/>
 								<int key="NSvFlags">1280</int>
-								<string key="NSFrame">{{-0.5, 73}, {355, 298}}</string>
+								<string key="NSFrame">{{26, 73}, {355, 298}}</string>
 								<reference key="NSSuperview" ref="854319316"/>
 								<reference key="NSNextKeyView" ref="830115337"/>
 								<bool key="IBUIOpaque">NO</bool>
@@ -262,7 +265,7 @@
 							<object class="IBUILabel" id="824363260">
 								<reference key="NSNextResponder" ref="854319316"/>
 								<int key="NSvFlags">1280</int>
-								<string key="NSFrame">{{0, 406}, {355, 73}}</string>
+								<string key="NSFrame">{{0, 406}, {401, 73}}</string>
 								<reference key="NSSuperview" ref="854319316"/>
 								<string key="NSReuseIdentifierKey">_NS:345</string>
 								<bool key="IBUIOpaque">NO</bool>
@@ -270,7 +273,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<string key="IBUIText">Developed by Dan Boice, M.S. PsycheWeb, LLC</string>
+								<string key="IBUIText">Developed by Dan Boice, M.S., M.A. PsycheWeb, LLC</string>
 								<object class="NSColor" key="IBUITextColor">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
@@ -291,10 +294,10 @@
 									<double key="NSSize">23</double>
 									<int key="NSfFlags">16</int>
 								</object>
-								<double key="preferredMaxLayoutWidth">355</double>
+								<double key="preferredMaxLayoutWidth">401</double>
 							</object>
 						</array>
-						<string key="NSFrame">{{206.5, 302}, {355, 499}}</string>
+						<string key="NSFrame">{{179.5, 302}, {401, 499}}</string>
 						<reference key="NSSuperview" ref="555568809"/>
 						<reference key="NSNextKeyView" ref="53127511"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>
@@ -313,6 +316,7 @@
 				</object>
 				<bool key="IBUIOpaque">NO</bool>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+				<reference key="IBUISimulatedStatusBarMetrics" ref="60488845"/>
 				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
 					<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>
 					<object class="NSMutableDictionary" key="IBUINormalizedOrientationToSizeMap">
@@ -517,9 +521,9 @@
 						<reference key="object" ref="854319316"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="648961861"/>
-							<reference ref="830115337"/>
 							<reference ref="824363260"/>
 							<reference ref="53127511"/>
+							<reference ref="830115337"/>
 						</array>
 						<reference key="parent" ref="555568809"/>
 					</object>
@@ -643,6 +647,6 @@
 			<string key="colorTrain300.png">{300, 300}</string>
 			<string key="trainTab.png">{30, 30}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1929</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>

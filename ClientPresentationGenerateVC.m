@@ -13,7 +13,9 @@
 #import "ClinicianEntity.h"
 #import "AssessmentTypeEntity.h"
 #import "ServiceCodeEntity.h"
-
+#import "InterventionTypeEntity.h"
+#import "InterventionTypeSubtypeEntity.h"
+#import "SupportActivityTypeEntity.h"
 
 @interface ClientPresentationGenerateVC ()
 -(NSString *)sanitizeFileName;
@@ -40,7 +42,7 @@
     
     self.containerView.backgroundColor=[UIColor clearColor];
     self.view.backgroundColor=[UIColor clearColor];
-    navtitle.title=@"Client Demographics Report Generator";
+    navtitle.title=@"Client Interaction Report Generator";
     
     
     fileName=nil;
@@ -92,10 +94,14 @@
     
     
     NSString *trackText=nil;
+    NSString *reportTitle=nil;
+    BOOL isSupportActivity=NO;
+    
     switch (self.timeTrackControllerSetup) {
         case kTimeTrackAssessmentSetup:
         {
-        DLog(@"section count is  %i",self.firstDetailTableModel.sectionCount);
+        
+            reportTitle=@"Client Interaction Process Notes\n";
             if (self.firstDetailTableModel && self.firstDetailTableModel.sectionCount>2) {
                 
                 
@@ -188,10 +194,237 @@
         }
             break;
         case kTimeTrackInterventionSetup:
+       
+        {
+            reportTitle=@"Client Interaction Process Notes\n";
+            if (self.firstDetailTableModel && self.firstDetailTableModel.sectionCount>2) {
+                
+                
+                SCTableViewSection *sectionThree=(SCTableViewSection *)[self.firstDetailTableModel sectionAtIndex:2];
+                SCTableViewCell *cellThree=(SCTableViewCell *)[sectionThree cellAtIndex:3];
+                DLog(@"cell class is  %@",cellThree.class);
+                if ([cellThree isKindOfClass:[SCObjectSelectionCell class]]){
+                    
+                    
+                    SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellThree;
+                    
+                    if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInteger:-1]]) {
+                        NSManagedObject *selectedObject=(NSManagedObject *)[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                        
+                        if ([selectedObject isKindOfClass:[InterventionTypeEntity class]]) {
+                            InterventionTypeEntity *interventionTypeObject=(InterventionTypeEntity *)selectedObject;
+                            
+                            [interventionTypeObject willAccessValueForKey:@"interventionType"];
+                            if (interventionTypeObject.interventionType&& interventionTypeObject.interventionType.length) {
+                                trackText=[NSString stringWithFormat:@"Intervention Type: %@ ; ",interventionTypeObject.interventionType];
+                            }
+                        }
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                }
+                 SCTableViewCell *cellFour=(SCTableViewCell *)[sectionThree cellAtIndex:4];
+                if ([cellFour isKindOfClass:[SCObjectSelectionCell class]]){
+                    
+                    
+                    SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellFour;
+                    
+                    if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInteger:-1]]) {
+                        NSManagedObject *selectedObject=(NSManagedObject *)[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                        
+                        if ([selectedObject isKindOfClass:[InterventionTypeSubtypeEntity class]]) {
+                            InterventionTypeSubtypeEntity *interventionTypeSubtypeObject=(InterventionTypeSubtypeEntity *)selectedObject;
+                            
+                            [interventionTypeSubtypeObject willAccessValueForKey:@"interventionSubType"];
+                            
+                            
+                            
+                            if (interventionTypeSubtypeObject.interventionSubType&& interventionTypeSubtypeObject.interventionSubType.length) {
+                               
+                            
+                            
+                                if (!trackText) {
+                                    trackText=[NSString stringWithFormat:@"Subtype: %@ \n",interventionTypeSubtypeObject.interventionSubType];
+                                    
+                                    
+                                }
+                                else{
+                                    
+                                    trackText=[trackText stringByAppendingFormat:@"Subtype: %@ \n",interventionTypeSubtypeObject.interventionSubType];
+                                }
+                            
+                            }
+                        }
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+                SCTableViewCell *cellFive=(SCTableViewCell *)[sectionThree cellAtIndex:5];
+                DLog(@"cell class is  %@",cellFive.class);
+                if ([cellFive isKindOfClass:[SCObjectSelectionCell class]]){
+                    
+                    
+                    SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellFive;
+                    
+                    if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInteger:-1]]) {
+                        NSManagedObject *selectedObject=(NSManagedObject *)[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                        
+                        if ([selectedObject isKindOfClass:[ServiceCodeEntity class]]) {
+                            ServiceCodeEntity *serviceCodeObject=(ServiceCodeEntity *)selectedObject;
+                            
+                            [serviceCodeObject willAccessValueForKey:@"code"];
+                            if (serviceCodeObject.code && serviceCodeObject.code.length) {
+                                if (!trackText) {
+                                    trackText=[NSString stringWithFormat:@"Service Code: %@",serviceCodeObject.code];
+                                    
+                                    
+                                }
+                                else{
+                                    
+                                    trackText=[trackText stringByAppendingFormat:@"Service Code: %@",serviceCodeObject.code];
+                                }
+                                
+                            }
+                            
+                            
+                            [serviceCodeObject willAccessValueForKey:@"name"];
+                            if (serviceCodeObject.name && serviceCodeObject.name.length) {
+                                trackText=[trackText stringByAppendingFormat:@" - %@",serviceCodeObject.name];
+                            }
+                            
+                        }
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+                
+                
+            }
+            
+            
+            
+            
+            
+        }
 
             break;
         case kTimeTrackSupportSetup:
+       
+        {
+           reportTitle=@"Client Support Activity Process Notes\n";
+            isSupportActivity=YES;
+            if (self.firstDetailTableModel && self.firstDetailTableModel.sectionCount>2) {
+                
+                
+                SCTableViewSection *sectionThree=(SCTableViewSection *)[self.firstDetailTableModel sectionAtIndex:2];
+                SCTableViewCell *cellOne=(SCTableViewCell *)[sectionThree cellAtIndex:0];
+                DLog(@"cell class is  %@",cellOne.class);
+                if ([cellOne isKindOfClass:[SCObjectSelectionCell class]]){
+                    
+                    
+                    SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellOne;
+                    
+                    if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInteger:-1]]) {
+                        NSManagedObject *selectedObject=(NSManagedObject *)[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                        
+                        if ([selectedObject isKindOfClass:[SupportActivityTypeEntity class]]) {
+                            SupportActivityTypeEntity *supportActivityTypeObject=(SupportActivityTypeEntity *)selectedObject;
+                            
+                            [supportActivityTypeObject willAccessValueForKey:@"supportActivityType"];
+                            if (supportActivityTypeObject.supportActivityType&& supportActivityTypeObject.supportActivityType.length) {
+                                trackText=[NSString stringWithFormat:@"Indirect Support Type: %@ \n",supportActivityTypeObject.supportActivityType];
+                            }
+                        }
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+                
+                SCTableViewCell *cellFour=(SCTableViewCell *)[sectionThree cellAtIndex:3];
+                
+                if ([cellFour isKindOfClass:[SCObjectSelectionCell class]]){
+                    
+                    
+                    SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cellFour;
+                    
+                    if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInteger:-1]]) {
+                        NSManagedObject *selectedObject=(NSManagedObject *)[objectSelectionCell.items objectAtIndex:[objectSelectionCell.selectedItemIndex integerValue]];
+                        
+                        if ([selectedObject isKindOfClass:[ServiceCodeEntity class]]) {
+                            ServiceCodeEntity *serviceCodeObject=(ServiceCodeEntity *)selectedObject;
+                            
+                            [serviceCodeObject willAccessValueForKey:@"code"];
+                            if (serviceCodeObject.code && serviceCodeObject.code.length) {
+                                if (!trackText) {
+                                    trackText=[NSString stringWithFormat:@"Service Code: %@",serviceCodeObject.code];
+                                    
+                                    
+                                }
+                                else{
+                                    
+                                    trackText=[trackText stringByAppendingFormat:@"Service Code: %@",serviceCodeObject.code];
+                                }
+                                
+                            }
+                            
+                            
+                            [serviceCodeObject willAccessValueForKey:@"name"];
+                            if (serviceCodeObject.name && serviceCodeObject.name.length) {
+                                trackText=[trackText stringByAppendingFormat:@" - %@",serviceCodeObject.name];
+                            }
+                            
+                        }
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+                
+                
+            }
             
+            
+            
+            
+            
+        }
+
             break;
        
         default:
@@ -202,7 +435,7 @@
     
     
     
-[pdfGenerator createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)self.presentationTableModel trackText:(NSString *)trackText serviceDateTimeStr:(NSString *)self.serviceDateTimeString clinician:(ClinicianEntity *)[self getClinicianName] forSize:12 andFont:@"Georgia" andColor:[UIColor blackColor] :YES :YES :([pdfPasswordTextField.text length] > 0) ? pdfPasswordTextField.text : nil];
+[pdfGenerator createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)self.presentationTableModel trackText:(NSString *)trackText serviceDateTimeStr:(NSString *)self.serviceDateTimeString clinician:(ClinicianEntity *)[self getClinicianName] forSize:12 andFont:@"Georgia" andColor:[UIColor blackColor] :YES :YES :([pdfPasswordTextField.text length] > 0) ? pdfPasswordTextField.text : nil reportTitle:(NSString *)reportTitle isSupportActivity:(BOOL)isSupportActivity];
     
    
     NSString *filePath = pdfs  ;// Path to last PDF file
@@ -329,7 +562,7 @@
         
         
         
-        scrubbed=@"ClientDemographicReport";
+        scrubbed=@"ClientInteractionReport";
         self.pdfFileNameTextField.text=scrubbed;
         
         

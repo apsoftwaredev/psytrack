@@ -318,7 +318,9 @@
    
                 NSArray *controllers = [NSArray arrayWithObjects:self.navigationControllerTrainTrack,cliniciansSplitViewController, clientsSplitViewController,  self.reportsNavigationController_iPhone,/*other controllers go here */ nil];
                 tabBarController.viewControllers = controllers;
-                self.tabBarController.delegate=self;
+        
+        
+            self.tabBarController.delegate=self;
                clientsSplitViewController.view.backgroundColor=[UIColor clearColor];
        
                 cliniciansSplitViewController.view.backgroundColor=[UIColor clearColor];
@@ -762,7 +764,7 @@
                 viewControllerInArray.view.userInteractionEnabled=YES;
             }
             [self.window addSubview:self.tabBarController.view];
-             [self flashAppTrainAndTitleGraphics];
+//             [self flashAppTrainAndTitleGraphics];
         }
         [self displayNotification:statusMessage forDuration:5.0 location:kPTTScreenLocationTop inView:containerView];
         
@@ -780,8 +782,9 @@
         }
         [self.window addSubview:self.tabBarController.view];
         
-         [self flashAppTrainAndTitleGraphics];
-       
+//         [self flashAppTrainAndTitleGraphics];
+        self.tabBarController.view.hidden=YES;
+
         
     } else if(isAppLocked||isLockedAtStartup) {
             
