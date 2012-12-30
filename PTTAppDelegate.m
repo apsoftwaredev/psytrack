@@ -2146,16 +2146,43 @@
         stringByReplacingOccurrencesOfString:@"<"withString:@""]stringByReplacingOccurrencesOfString:@">"
                              withString:@""]stringByReplacingOccurrencesOfString:@" "withString:@""];
 	
-   
-	[[NSUserDefaults standardUserDefaults] setValue:deviceToken forKey:@"devtoken"];
+    NSString *savedDevToken=[[NSUserDefaults standardUserDefaults] valueForKey:@"devtoken"];
+	
+    if (savedDevToken && deviceToken && [savedDevToken isKindOfClass:[NSString class]]&&![devToken isEqualToString:savedDevToken]) {
+        [[NSUserDefaults standardUserDefaults] setValue:deviceToken forKey:@"devtoken"];
+        
+        NSString *host = @"https://HoT0rJxAX40XqiJZHSVE3J:r7uv5ARVQ76jMNaMSNqO4X@api.appsidekick.com/v1/register_push_device?type=%@&devicetoken=%@&appname=%@";
+        
+        NSString *urlString = [NSString stringWithFormat:host, type, devToken, appname];
+        NSURL *url = [NSURL URLWithString:urlString];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod:@"POST"];
+        DLog(@"url %@",url);
+        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response,
+                                                                                                                   NSData *data,
+                                                                                                                   NSError *error)
+         {
+             
+             if ([data length] >0 && error == nil)
+             {
+                 
+                 // DO YOUR WORK HERE
+                 NSLog(@"response received");
+                 NSString *strReply = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                 NSLog(@"%@", strReply);
+             }
+             else if ([data length] == 0 && error == nil)
+             {
+                 NSLog(@"Nothing was downloaded.");
+             }
+             else if (error != nil){
+                 NSLog(@"Error = %@", error);
+             }
+             
+         }];
 
-	NSString *host = @"https://HoT0rJxAX40XqiJZHSVE3J:r7uv5ARVQ76jMNaMSNqO4X@api.appsidekick.com/v1/register_push_device?type=%@&devicetoken=%@&appname=%@";
-  
-	NSString *urlString = [NSString stringWithFormat:host, type, devToken, appname];
-	NSURL *url = [NSURL URLWithString:urlString];
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-	[request setHTTPMethod:@"POST"];
-	DLog(@"url %@",url);
+    }
+    
 //	NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
 //	NSString *strReply = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
 //	NSLog(@"%@", strReply);
@@ -2163,29 +2190,7 @@
        
     
 //    
-	[NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response,
-                                                                                                               NSData *data,
-                                                                                                               NSError *error)
-     {
-         
-         if ([data length] >0 && error == nil)
-         {
-             
-             // DO YOUR WORK HERE
-             NSLog(@"response received");
-             NSString *strReply = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-             NSLog(@"%@", strReply);
-         }
-         else if ([data length] == 0 && error == nil)
-         {
-             NSLog(@"Nothing was downloaded.");
-         }
-         else if (error != nil){
-             NSLog(@"Error = %@", error);
-         }
-         
-     }];
-    
+	    
 
 }
 
