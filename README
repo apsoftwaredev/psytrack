@@ -23,15 +23,6 @@ Potential TO DO:
 
 
 -update drug database
--encrypt client presentation data
--update model for consultations, CE, courses, conferences, forums, presentations, advising, leadership roles, expert testemony, research projects, community serivce, scholarships, fellowships, grants awarded
--add rekay to encrypted model subclasses and update on password change
--add report for total hours and demographic
--change demographic to background info
-
--fix presentations
--other referral source for client
-
 -motor test completed  AIMS test
 -psychosocial stressors medical and gaf to diagnosis
 -allergies
@@ -40,24 +31,16 @@ Potential TO DO:
 -current Living arrangement
 -legal
 
--practice Name and website for clinicians
--cognitive for presentations
--drug name deleting when leave view
--number fields in existing hours, text label covers field
--drug name staying with no selection
--client other referral source
 
--prescriber list not defauted when prescriber
+
 
 
 -add event title
 
 
 
--existing hours number fields label covering field, instruments
--change existing hours to have the total hours in the badge view
 
--symptom description iphone
+-change existing hours to have the total hours in the badge view
 
 
 
@@ -77,8 +60,6 @@ Potential TO DO:
 
 Phase II
 -	add a save to icloud documents to the actions in the drug document view
-
--	 add college courses section
 
 
 
