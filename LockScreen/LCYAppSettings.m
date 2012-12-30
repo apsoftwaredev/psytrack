@@ -1117,7 +1117,7 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
         
     }else  
     {
-        DLog(@"new key string is  %@",newKeyString);
+       
         success=  [wrapper updateKeychainValue:newKeyString forIdentifier:K_LOCK_SCREEN_CURRENT_KEYSTRING];
     }
         
@@ -1125,11 +1125,10 @@ NSString *defaultPassword=@"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
    
         KeyEntity *newKeyObject=[[KeyEntity alloc] initWithEntity:keyEntity insertIntoManagedObjectContext:managedObjectContext];
         [newKeyObject willChangeValueForKey:@"keyString"];
-        DLog(@"keystring is equal  %@",newKeyString);
+        
         newKeyObject.keyString=[NSString stringWithString:newKeyString] ;
         [newKeyObject didChangeValueForKey:@"keyString"];
-        DLog(@"new key object is  %@",newKeyObject.keyString);
-        DLog(@"newkey object keystring is  %@",newKeyObject.keyString);
+       
 //        symetricData=[encryption wrapSymmetricKey:symetricData keyRef:nil useDefaultPublicKey:YES];
         sharedSymetricData=[NSData  dataWithData:(NSData *)[appDelegate getSharedSymetricData]];
        NSData * newSymetricData=[appDelegate encryptDataToEncryptedData:sharedSymetricData];

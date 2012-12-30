@@ -778,7 +778,7 @@
         certificationDef.cellActions.valueIsValid= ^BOOL(SCTableViewCell *cell, NSIndexPath *indexPath)
         {
             BOOL valid = FALSE;
-            DLog(@"cell tag is  %i",cell.tag);
+           
             if(cell.tag==0&&[cell isKindOfClass:[SCObjectSelectionCell class]])
             {
                 
@@ -2954,7 +2954,7 @@
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
             
             if (notesManagedObject&&[notesManagedObject respondsToSelector:@selector(entity)]) {
-            DLog(@"notes managed object entity name is  %@",notesManagedObject.entity.name);
+           
             if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[SCTextViewCell class]]) {
                 SCTextViewCell *noteCell=(SCTextViewCell *)notesCell;
                 
@@ -3691,7 +3691,7 @@ return exists;
     ABAddressBookRef addressBookForPeoplePickerController=NULL;
    
     if (!IS_VERSION_6_OR_HIGHER) {
-        addressBookForPeoplePickerController=ABAddressBookCreate();
+//        addressBookForPeoplePickerController=ABAddressBookCreate();
         proceed=YES;
     }
     else
@@ -3724,7 +3724,7 @@ return exists;
         }
     }
     
-    
+    if(proceed){
 	if (!self.peoplePickerNavigationController) {
         self.peoplePickerNavigationController=[[ABPeoplePickerNavigationController alloc]init];
       
@@ -3778,7 +3778,7 @@ return exists;
         
 
     }
-		
+    }
 }
 
 
@@ -3999,7 +3999,7 @@ if (!IS_VERSION_6_OR_HIGHER){
                 CFRelease(addressBookForPeopleArray);
             }
         }
-       
+        
     }
         
     else
@@ -4011,7 +4011,7 @@ if (!IS_VERSION_6_OR_HIGHER){
         
         
     }
-
+    
 }
     else
     {
@@ -4203,14 +4203,19 @@ if (!IS_VERSION_6_OR_HIGHER){
                         
                         
                     }
-                    if (addressBookForPeopleArray) {
-                        CFRelease(addressBookForPeopleArray);
-                    }
+                    
                 }
-                
+           if (addressBookForPeopleArray) {
+               CFRelease(addressBookForPeopleArray);
+           }
             }
        else
        {
+          
+           if (addressBookForPeopleArray) {
+               CFRelease(addressBookForPeopleArray);
+           }
+
            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
            
            
@@ -4219,7 +4224,7 @@ if (!IS_VERSION_6_OR_HIGHER){
            
        }
             
-            
+           
         
 }
 
@@ -4236,7 +4241,7 @@ else
     
 
     }
-
+    
 
 }
 
@@ -4276,7 +4281,9 @@ else
             
         }
         else{
-        
+            if (addressBookForShowPerson) {
+                CFRelease(addressBookForShowPerson);
+            }
             return;
         }
     }
@@ -6514,7 +6521,7 @@ if (addressBookToSyncronize) {
 -(int )defaultABSourceID{
     
     ABAddressBookRef addressBookToGetSource;
-    addressBookToGetSource=ABAddressBookCreate();
+   
     BOOL proceed=NO;
     if (!IS_VERSION_6_OR_HIGHER) {
         addressBookToGetSource=ABAddressBookCreate();

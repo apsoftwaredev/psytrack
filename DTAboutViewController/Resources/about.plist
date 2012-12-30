@@ -18,7 +18,7 @@
 			<key>Type</key>
 			<string>Text</string>
 			<key>Title</key>
-			<string>PsyTrack  Clinician Tools version  $CFBundleVersion.</string>
+			<string>PsyTrack TM Clinician Tools version  $CFBundleVersion.</string>
 		</dict>
 		<dict>
 			<key>TextStyle</key>
@@ -26,7 +26,7 @@
 			<key>Type</key>
 			<string>Text</string>
 			<key>Title</key>
-			<string>psyTrack is a product of PsycheWeb LLC, Copyright 2011, all rights reserved. </string>
+			<string>PsyTrack TM is a product of PsycheWeb LLC, Copyright 2011, all rights reserved. </string>
 		</dict>
 		<dict>
 			<key>ButtonStyle</key>
@@ -114,7 +114,7 @@
 			<key>Type</key>
 			<string>Text</string>
 			<key>Title</key>
-			<string>I want to thank all those who supported and encouraged me as a made this app.  A special thanks to Dr. Shalene Kirkley Ph.D. for her encouragement and enthusiasm for pursuing the idea back in the first year of my doctorate program.  I have had a lot of fun making it and I am glad to finally be able to share it with all of you.  Thank you Edwin Nez for all your bug testing and patience with me while I made the app.  Thanks also to Dr. Benson-Florez  Ph.D. for his multicultural suggestions.  Thank YOU for trying my app and hopefully writing a cheritable review for me.  I hope that you find it useful and enjoyable to use.  Thank you Tarek Sakr at Sensible Table view for a great product and support, and thanks to Dr. Touch at Cocoanetics for his help with the DTAboutViewController.  Thank you Krishna Kotecha for the starting point for the lock screen.  Thanks to Julius Oklamcak for the starting point for the pdf viewer.  Thanks to Chick Arnold for giving me idea about tracking the media appearances.  Thank you to Apple, Inc. and all their laborers around the world for a making all of this amazing technology possible.  And of course, a special thanks to my friends and family for their constant support throughout my life.   </string>
+			<string>Thanks to everyone who supported and encouraged me as a made this app.  A special thanks to Dr. Shalene Kirkley Ph.D. for her encouragement and enthusiasm for pursuing the idea back in the first year of my doctorate program.  I have had a lot of fun making it and I am glad to finally be able to share it with all of you.  Thank you Edwin Nez for all your bug testing and patience with me while I made the app.  Thanks also to Dr. Benson-Florez  Ph.D. for his multicultural suggestions.  Thank YOU for trying my app and hopefully writing a cheritable review for me.  I hope that you find it useful and enjoyable to use.  Thank you Tarek Sakr at Sensible Table view for a great product and support, and thanks to Dr. Touch at Cocoanetics for his help with the DTAboutViewController.  Thank you Krishna Kotecha for the starting point for the lock screen.  Thanks to Julius Oklamcak for the starting point for the pdf viewer.  Thanks to Chick Arnold for giving me idea about tracking the media appearances.  Thank you to Apple, Inc. and all their laborers around the world for a making all of this amazing technology possible.  And of course, thanks friends and family for their constant support throughout my life.   </string>
 		</dict>
 		<dict>
 			<key>TextStyle</key>
@@ -130,7 +130,7 @@
 			<key>Type</key>
 			<string>Text</string>
 			<key>Title</key>
-			<string>psyTrack Clinician Tools
+			<string>psyTrack TM Clinician Tools
 Developed by Dan Boice, M.S. Copyright (c) 2011-2012 
 </string>
 		</dict>
@@ -149,7 +149,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&
 			<key>Type</key>
 			<string>Text</string>
 			<key>Title</key>
-			<string>PSYCHEWEB MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE, REGARDING THE PSYCHEWEB LLC SOFTWARE OR ITS USE AND OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.  ANY CLIENT INFORMATION USED IN THIS APP SHOULD BE DE-IDENTIFIED.  SEE THE FAQ FOR DISCUSSION OF HIPPA RULES. </string>
+			<string>PSYCHEWEB LLC MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE, REGARDING THE PSYCHEWEB LLC SOFTWARE OR ITS USE AND OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.  ALTHOUGH THE INFORMATION IN THE APP IS ENCRYPTED WHEN THE PHONE IS LOCKED, IT IS RECOMMENDED THAT ANY CLIENT INFORMATION USED IN THIS APP SHOULD ALSO BE DE-IDENTIFIED.  IT IS ALSO RECOMMENDED THAT YOU TURN OFF AUTO JOINING OF UNKNOWN POSSIBLY UNSECURE WIFI NETWORKS FOR ADDITIONAL SECURITY.  SEE THE FAQ FOR DISCUSSION OF HIPPA RULES. </string>
 		</dict>
 	</array>
 </dict>

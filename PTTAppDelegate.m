@@ -1012,7 +1012,7 @@
     
     NSData * symetricData=[encryption_ getHashBytes:passwordData];
     
-//    free(aBuffer);
+    free(aBuffer);
     
     
     return symetricData;
@@ -1051,8 +1051,8 @@
     
     
     NSData * symetricData=[encryption_ getHashBytes:passwordData];
-    DLog(@"symetric data is  %@",symetricData);
-//    free(aBuffer);
+  
+    free(aBuffer);
     
     
     return symetricData;
@@ -1975,9 +1975,7 @@
    
      NSData *decryptedData;
 
-    DLog(@"keystring is  %@",keyString);
-    DLog(@"keystring in keychain %@",[self convertDataToString:[wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_CURRENT_KEYSTRING]]);
-       
+    
     if ([keyString isEqualToString:[self convertDataToString:[wrapper searchKeychainCopyMatching:K_LOCK_SCREEN_CURRENT_KEYSTRING]]]) {
     
            
@@ -2045,8 +2043,7 @@
                         
                         
                         [keyObjectInArray willAccessValueForKey:@"keyString"];
-                        DLog(@"keyobject is  %@",keyObject);
-                        DLog(@"keystring is  %@ and %@",keyObjectInArray.keyString, keyString);
+                        
                         if ([keyObjectInArray.keyString isEqualToString:keyString]) {
                             
                             keyObject=keyObjectInArray;
@@ -2150,10 +2147,10 @@
                              withString:@""]stringByReplacingOccurrencesOfString:@" "withString:@""];
 	
    
-	
+	[[NSUserDefaults standardUserDefaults] setValue:deviceToken forKey:@"devtoken"];
 
 	NSString *host = @"https://HoT0rJxAX40XqiJZHSVE3J:r7uv5ARVQ76jMNaMSNqO4X@api.appsidekick.com/v1/register_push_device?type=%@&devicetoken=%@&appname=%@";
-    DLog(@"devtoken length %i",devToken.length);
+  
 	NSString *urlString = [NSString stringWithFormat:host, type, devToken, appname];
 	NSURL *url = [NSURL URLWithString:urlString];
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];

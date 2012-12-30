@@ -840,11 +840,7 @@
     }
     else if (tableModel.tag==3){
     
-        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-        
-        DLog(@"cell text label is  %@",cell.textLabel.text);
-        DLog(@"cell tag is  %i",cell.tag);
-        DLog(@"cell bound object is  %@",cellManagedObject);
+       
         if ([cell.textLabel.text isEqualToString:@"Rate"]&&cell.tag==2 &&([cell isKindOfClass:[SCObjectSelectionCell class]]) ) {
             
              SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;

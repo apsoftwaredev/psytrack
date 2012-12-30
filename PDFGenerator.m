@@ -179,7 +179,7 @@
     
     NSString *presentationTableModelString=[self getContentFromTableModel:presentationTableModel];
     
-    DLog(@"print presentation string %@",presentationTableModelString);
+   
     //
     // Clean up
     
@@ -375,7 +375,7 @@
         //finished drawing
         CGContextStrokePath(pdfContext);
         
-        DLog(@"track text is  %@",trackText);
+       
         if (pageCount==1 && trackText) {
             
             NSMutableAttributedString *trackTextAttStr = [[NSMutableAttributedString alloc] initWithString:trackText];
@@ -463,7 +463,7 @@
             done=YES;
         }
 		
-		CGContextEndPage (pdfContext);
+//		CGContextEndPage (pdfContext);
 		
 	}
 	while (!done);
@@ -711,7 +711,7 @@
                 SCSegmentedCell *segmentedCell=(SCSegmentedCell *)cell;
                 
                 if(segmentedCell.segmentedControl.selectedSegmentIndex!=-1){
-                    if (!addedScaleText) {
+                    if (!addedOrientationText) {
                         addedOrientationText=YES;
                         if (textLabelText) {
                             if (i==5 &&p==0) {
@@ -843,7 +843,7 @@
 		CGContextRestoreGState(pdfContext);
 		UIGraphicsPopContext();
 		
-		CGContextEndPage (pdfContext);
+//		CGContextEndPage (pdfContext);
 	}
 	while (!done);
 	

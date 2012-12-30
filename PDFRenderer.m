@@ -642,7 +642,7 @@
                         // We are done with our context now, so we release it
 //                        CGContextRelease (pdfContext);
                        
-                        CGContextEndPage(pdfContext);
+//                        CGContextEndPage(pdfContext);
                         
                         }
                     
@@ -716,7 +716,7 @@
     [self drawPageNumber:pageNumber totalPages:count];
         
     }
-    CGContextEndPage(context);
+//    CGContextEndPage(context);
 
     CGPDFDocumentRelease(templateDocument);
     UIGraphicsEndPDFContext();
@@ -879,7 +879,7 @@
         /* Here you can do any drawings */
         [self drawPageNumber:pageNumber totalPages:count];
     }
-     CGContextEndPage(context);
+//     CGContextEndPage(context);
     CGPDFDocumentRelease(templateDocument);
     UIGraphicsEndPDFContext();
     UIGraphicsEndPDFContext();
@@ -1037,7 +1037,7 @@
         /* Here you can do any drawings */
         [self drawPageNumber:pageNumber totalPages:count];
     }
-    CGContextEndPage(context);
+//    CGContextEndPage(context);
     CGPDFDocumentRelease(templateDocument);
     UIGraphicsEndPDFContext();
     UIGraphicsEndPDFContext();
@@ -1244,7 +1244,7 @@ CGFloat GetLineHeightForFont(CTFontRef iFont)
 +(CFRange )renderPage:(NSInteger)pageNum  withTextRange: (CFRange )currentRange andFramesetter:(CTFramesetterRef)framesetter{
 
     CGContextRef currentContext=UIGraphicsGetCurrentContext();
-    
+    UIGraphicsPushContext(currentContext);
     CGContextSetTextMatrix(currentContext, CGAffineTransformIdentity);
     
     CGRect frameRect=CGRectMake(72,72, 468, 648);
@@ -1267,7 +1267,8 @@ CGFloat GetLineHeightForFont(CTFontRef iFont)
     currentRange.location +=currentRange.length;
     currentRange.length=0;
     CFRelease(frameRef);
-    CGContextRelease(currentContext);
+    UIGraphicsPopContext();
+//    CGContextRelease(currentContext);
     
     return currentRange;
     
