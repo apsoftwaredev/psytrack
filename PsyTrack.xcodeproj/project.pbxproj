@@ -225,6 +225,7 @@
 		E71EAD7D15D875AA00204389 /* ConferenceEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E71EAD7C15D875AA00204389 /* ConferenceEntity.m */; };
 		E71EAD8115D88E5100204389 /* TeachingExperienceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E71EAD7F15D88E5100204389 /* TeachingExperienceVC.m */; };
 		E71EAD8215D88E5100204389 /* TeachingExperienceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71EAD8015D88E5100204389 /* TeachingExperienceVC.xib */; };
+		E7283EE916905219005D8647 /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E7283EE816905219005D8647 /* psyTrack.sqlite */; };
 		E7294C9B1604C1AB00C153CE /* DemographicSexCounts.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294C9A1604C1AB00C153CE /* DemographicSexCounts.m */; };
 		E7294C9E1604C48500C153CE /* DemographicSex.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294C9D1604C48400C153CE /* DemographicSex.m */; };
 		E7294CA11604C9FB00C153CE /* DemographicSexualOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294CA01604C9FB00C153CE /* DemographicSexualOrientation.m */; };
@@ -833,6 +834,7 @@
 		E71EAD7E15D88E5100204389 /* TeachingExperienceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingExperienceVC.h; sourceTree = "<group>"; };
 		E71EAD7F15D88E5100204389 /* TeachingExperienceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingExperienceVC.m; sourceTree = "<group>"; };
 		E71EAD8015D88E5100204389 /* TeachingExperienceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeachingExperienceVC.xib; sourceTree = "<group>"; };
+		E7283EE816905219005D8647 /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = psyTrack.sqlite; sourceTree = "<group>"; };
 		E7294C991604C1AB00C153CE /* DemographicSexCounts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicSexCounts.h; sourceTree = "<group>"; };
 		E7294C9A1604C1AB00C153CE /* DemographicSexCounts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicSexCounts.m; sourceTree = "<group>"; };
 		E7294C9C1604C48400C153CE /* DemographicSex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicSex.h; sourceTree = "<group>"; };
@@ -1655,6 +1657,7 @@
 			children = (
 				E7B49C1A1607E53A0073AA30 /* NSManagedObject Subclasses */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
+				E7283EE816905219005D8647 /* psyTrack.sqlite */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
 			);
 			name = Models;
@@ -2793,6 +2796,7 @@
 				E7388B691652B7E600E04639 /* ClientPresentationGenerateVC.xib in Resources */,
 				E7B5D97F168D31BB000CA5B5 /* ClientPresentationGenerateVC_iPhone.xib in Resources */,
 				E7B5D994168DB670000CA5B5 /* Default.png in Resources */,
+				E7283EE916905219005D8647 /* psyTrack.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

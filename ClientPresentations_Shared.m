@@ -1183,7 +1183,7 @@
     //Create a class definition for the Instrument Entity
     SCEntityDefinition *batteryDef = [SCEntityDefinition definitionWithEntityName:@"BatteryEntity" 
                                                              managedObjectContext:managedObjectContext
-                                                                    propertyNames:[NSArray arrayWithObjects:@"batteryName", @"acronym", @"publisher",@"instruments", @"sampleSize", @"ages",@"notes" ,@"completedTrainingBattery", nil]];
+                                                                    propertyNames:[NSArray arrayWithObjects:@"batteryName", @"acronym", @"publisher",@"instruments", @"sampleSize", @"ages",@"notes" , nil]];
     
 
     

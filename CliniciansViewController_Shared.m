@@ -773,7 +773,38 @@
 	SCEntityDefinition *certificationDef = [SCEntityDefinition definitionWithEntityName:@"CertificationEntity" 
 															 managedObjectContext:managedObjectContext
 																	propertyNames:[NSArray arrayWithObjects:@"certificationName",@"certifiedBy",@"completeDate",@"notes",
-																					   nil]];	
+																					   nil]];
+        
+        certificationDef.cellActions.valueIsValid= ^BOOL(SCTableViewCell *cell, NSIndexPath *indexPath)
+        {
+            BOOL valid = FALSE;
+            DLog(@"cell tag is  %i",cell.tag);
+            if(cell.tag==0&&[cell isKindOfClass:[SCObjectSelectionCell class]])
+            {
+                
+                {
+                    SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
+                    
+                    if (![objectSelectionCell.selectedItemIndex isEqualToNumber:[NSNumber numberWithInteger:-1]] )
+                    {
+                        valid=TRUE;
+                    }
+                    else
+                    {
+                        valid=FALSE;
+                    }
+                    
+                }
+
+            }
+            else{
+            
+                valid=YES;
+            }
+            
+            return valid;
+        };
+
     //set the order attributes name defined in the Certification Entity	
     certificationDef.orderAttributeName=@"order";
   
@@ -2923,7 +2954,7 @@
             NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
             
             if (notesManagedObject&&[notesManagedObject respondsToSelector:@selector(entity)]) {
-            
+            DLog(@"notes managed object entity name is  %@",notesManagedObject.entity.name);
             if (notesManagedObject && [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[SCTextViewCell class]]) {
                 SCTextViewCell *noteCell=(SCTextViewCell *)notesCell;
                 
@@ -2956,6 +2987,9 @@
                 }
                 
             }
+                
+                
+                
             }}
         }
         

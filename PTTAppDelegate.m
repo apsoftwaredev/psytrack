@@ -5823,25 +5823,25 @@ return [self applicationDrugsDirectory].path;
 //       
         // If the expected store doesn't exist, copy the default store.
         
-//        if (![fileManager fileExistsAtPath:storePath]) {
-//            NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
-//            if (defaultStorePath&&[fileManager fileExistsAtPath:defaultStorePath]) {
-//                [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
-//                NSString *statusMessage=[self resetDefaultLockKeychainSettingsWithReset:YES];
-//                if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."]) {
-//                    NSString *displaymessage=[NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
-//                    [self displayNotification:displaymessage];
-//                    resetDatabase=YES;
-//                }
-//                else{
-//                
-//                    firstRun=YES;
-//                
-//                }
-//                
-//                
-//            }
-//        }
+        if (![fileManager fileExistsAtPath:storePath]) {
+            NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
+            if (defaultStorePath&&[fileManager fileExistsAtPath:defaultStorePath]) {
+                [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
+                NSString *statusMessage=[self resetDefaultLockKeychainSettingsWithReset:YES];
+                if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."]) {
+                    NSString *displaymessage=[NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
+                    [self displayNotification:displaymessage];
+                    resetDatabase=YES;
+                }
+                else{
+                
+                    firstRun=YES;
+                
+                }
+                
+                
+            }
+        }
         NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
         NSURL *cloudURL =nil;
         // this needs to match the entitlements and provisioning profile
