@@ -1118,7 +1118,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];
     NSString *numberStr=[str stringByReplacingOccurrencesOfString:@"," withString:@""];
     NSNumber *number=[numberFormatter numberFromString:numberStr];
-    if (numberStr.length && [numberStr floatValue]<1000000 &&number) {
+    if (numberStr.length && [numberStr floatValue]<1000000000000 &&number) {
         valid=YES;
         
         if ([str rangeOfString:@"Number"].location != NSNotFound) {

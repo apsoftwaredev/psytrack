@@ -648,8 +648,11 @@
         
         
     }
+    
+    
+    
     // Create a special group for rest of service related variables
-    SCPropertyGroup *militaryServiceGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"awards",@"exposureToCombat", @"highestRank",@"serviceDisability",@"tsClearance",militarySpecialtiesPropName,@"SpecialtiesTextView", @"notes", nil]];
+    SCPropertyGroup *militaryServiceGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"awards",@"exposureToCombat", @"highestRank",@"serviceDisability",@"tsClearance",militarySpecialtiesPropName, @"notes", nil]];
     
     [militaryServiceDef.propertyGroups insertGroup:militaryServiceGroup atIndex:0];
     

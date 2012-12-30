@@ -299,7 +299,7 @@
 
 
     }
-    if (self.selectMyInformationOnLoad) {
+    if (self.selectMyInformationOnLoad && [SCUtilities is_iPad]) {
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
         if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {

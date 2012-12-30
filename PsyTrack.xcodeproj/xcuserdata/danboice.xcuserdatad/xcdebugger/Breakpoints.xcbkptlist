@@ -6077,8 +6077,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4025"
          endingLineNumber = "4025"
-         landmarkName = "@implementation CliniciansViewController_Shared"
-         landmarkType = "3">
+         landmarkName = "-evaluateWhichABViewControllerToShow"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -6103,8 +6103,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4086"
          endingLineNumber = "4086"
-         landmarkName = "@implementation CliniciansViewController_Shared"
-         landmarkType = "3">
+         landmarkName = "-evaluateWhichABViewControllerToShow"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -6116,8 +6116,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4121"
          endingLineNumber = "4121"
-         landmarkName = "@implementation CliniciansViewController_Shared"
-         landmarkType = "3">
+         landmarkName = "-evaluateWhichABViewControllerToShow"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -6129,8 +6129,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4030"
          endingLineNumber = "4030"
-         landmarkName = "@implementation CliniciansViewController_Shared"
-         landmarkType = "3">
+         landmarkName = "-evaluateWhichABViewControllerToShow"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -6142,8 +6142,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4022"
          endingLineNumber = "4022"
-         landmarkName = "@implementation CliniciansViewController_Shared"
-         landmarkType = "3">
+         landmarkName = "-evaluateWhichABViewControllerToShow"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -6155,8 +6155,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4026"
          endingLineNumber = "4026"
-         landmarkName = "@implementation CliniciansViewController_Shared"
-         landmarkType = "3">
+         landmarkName = "-evaluateWhichABViewControllerToShow"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -6168,8 +6168,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4039"
          endingLineNumber = "4039"
-         landmarkName = "@implementation CliniciansViewController_Shared"
-         landmarkType = "3">
+         landmarkName = "-evaluateWhichABViewControllerToShow"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -6246,8 +6246,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4215"
          endingLineNumber = "4215"
-         landmarkName = "@implementation CliniciansViewController_Shared"
-         landmarkType = "3">
+         landmarkName = "-evaluateWhichABViewControllerToShow"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7573,6 +7573,19 @@
          startingLineNumber = "782"
          endingLineNumber = "782"
          landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../Downloads/STV 3.1.4 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core/SCGlobals.m"
+         timestampString = "378589884.426976"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "529"
+         endingLineNumber = "529"
+         landmarkName = "-keyboardWillHide:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

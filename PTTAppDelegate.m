@@ -362,7 +362,7 @@
         viewControllerInArray.view.userInteractionEnabled=NO;
     }
     
-    [UIApplication sharedApplication].statusBarHidden = YES;
+    [UIApplication sharedApplication].statusBarHidden = NO;
     
     self.colorSwitcher = [[ColorSwitcher alloc] initWithScheme:@"blue"];
     
