@@ -2,14 +2,14 @@
 //  LicenseEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/28/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClinicianEntity, LicenseRenewalEntity, LogEntity;
+@class ClinicianEntity, LogEntity;
 
 @interface LicenseEntity : NSManagedObject
 
@@ -18,11 +18,11 @@
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSDate * renewDate;
 @property (nonatomic, retain) NSString * licenseNumber;
+@property (nonatomic, retain) NSManagedObject *governingBody;
 @property (nonatomic, retain) NSSet *logs;
 @property (nonatomic, retain) NSManagedObject *licenseName;
-@property (nonatomic, retain) NSManagedObject *governingBody;
-@property (nonatomic, retain) ClinicianEntity *clinician;
 @property (nonatomic, retain) NSSet *renewals;
+@property (nonatomic, retain) ClinicianEntity *clinician;
 @end
 
 @interface LicenseEntity (CoreDataGeneratedAccessors)
@@ -32,8 +32,8 @@
 - (void)addLogs:(NSSet *)values;
 - (void)removeLogs:(NSSet *)values;
 
-- (void)addRenewalsObject:(LicenseRenewalEntity *)value;
-- (void)removeRenewalsObject:(LicenseRenewalEntity *)value;
+- (void)addRenewalsObject:(NSManagedObject *)value;
+- (void)removeRenewalsObject:(NSManagedObject *)value;
 - (void)addRenewals:(NSSet *)values;
 - (void)removeRenewals:(NSSet *)values;
 

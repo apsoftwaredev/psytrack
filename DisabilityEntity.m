@@ -2,8 +2,8 @@
 //  DisabilityEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 9/15/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "DisabilityEntity.h"
@@ -17,23 +17,5 @@
 @dynamic disabilityName;
 @dynamic demographics;
 @dynamic existingDisabilities;
-@synthesize clientCount;
 
--(int)clientCount{
-    
-    int returnInt=0;
-    
-    
-    NSMutableSet *clientSet=[self mutableSetValueForKeyPath:@"demographics.client"];
-    
-    
-    returnInt=clientSet.count;
-    
-    
-    return returnInt;
-    
-    
-    
-    
-}
 @end

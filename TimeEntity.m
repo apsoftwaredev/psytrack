@@ -1,26 +1,24 @@
-/*
- *  TimeEntity.m
- *  psyTrack Clinician Tools
- *  Version: 1.0
- *
- *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
- *
- *  Created by Daniel Boice on 1/29/12.
- *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
- *
- *
- *	This notice may not be removed from this file.
- *
- */
+//
+//  TimeEntity.m
+//  PsyTrack
+//
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
+//
+
 #import "TimeEntity.h"
-//#import "AssessmentEntity.h"
+#import "AssessmentEntity.h"
+#import "BreakTimeEntity.h"
+#import "InterventionDeliveredEntity.h"
+#import "SupervisionGivenEntity.h"
+#import "SupervisionReceivedEntity.h"
+#import "SupportActivityDeliveredEntity.h"
 
 
 @implementation TimeEntity
 
+@dynamic stopwatchRunning;
+@dynamic stopwatchRestartAfterStop;
 @dynamic addStopwatch;
 @dynamic totalTime;
 @dynamic timeToSubtract;
@@ -31,11 +29,11 @@
 @dynamic stopwatchStartTime;
 @dynamic additionalTime;
 @dynamic startTime;
-@dynamic stopwatchRunning;
-@dynamic stopwatchRestartAfterStop;
 @dynamic indirectSupportDelived;
 @dynamic interventionDelivered;
-@dynamic Assessment;
+@dynamic assessmentTime;
 @dynamic breaks;
+@dynamic supervisionReceived;
+@dynamic supervisionGiven;
 
 @end

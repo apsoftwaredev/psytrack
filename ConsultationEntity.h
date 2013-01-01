@@ -2,14 +2,14 @@
 //  ConsultationEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 9/17/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class LogEntity, PaymentEntity, ReferralEntity;
+@class FeeEntity, LogEntity, OrganizationEntity, PaymentEntity, ReferralEntity;
 
 @interface ConsultationEntity : NSManagedObject
 
@@ -19,7 +19,7 @@
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSDate * startDate;
 @property (nonatomic, retain) NSNumber * paid;
-@property (nonatomic, retain) NSManagedObject *organization;
+@property (nonatomic, retain) OrganizationEntity *organization;
 @property (nonatomic, retain) NSSet *payments;
 @property (nonatomic, retain) NSSet *rateCharges;
 @property (nonatomic, retain) NSSet *logs;
@@ -44,8 +44,8 @@
 - (void)addLogs:(NSSet *)values;
 - (void)removeLogs:(NSSet *)values;
 
-- (void)addFeesObject:(NSManagedObject *)value;
-- (void)removeFeesObject:(NSManagedObject *)value;
+- (void)addFeesObject:(FeeEntity *)value;
+- (void)removeFeesObject:(FeeEntity *)value;
 - (void)addFees:(NSSet *)values;
 - (void)removeFees:(NSSet *)values;
 

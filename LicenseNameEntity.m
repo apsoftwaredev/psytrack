@@ -1,0 +1,22 @@
+//
+//  LicenseNameEntity.m
+//  PsyTrack
+//
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
+//
+
+#import "LicenseNameEntity.h"
+#import "LicenseEntity.h"
+#import "LicenseTypeEntity.h"
+
+
+@implementation LicenseNameEntity
+
+@dynamic order;
+@dynamic notes;
+@dynamic title;
+@dynamic licenses;
+@dynamic licenseType;
+
+@end

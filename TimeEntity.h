@@ -1,49 +1,42 @@
-/*
- *  TimeEntity.h
- *  psyTrack Clinician Tools
- *  Version: 1.0
- *
- *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
- *
- *  Created by Daniel Boice on 1/29/12.
- *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
- *
- *
- *	This notice may not be removed from this file.
- *
- */
+//
+//  TimeEntity.h
+//  PsyTrack
+//
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
+//
+
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class AssessmentEntity;
+@class AssessmentEntity, BreakTimeEntity, InterventionDeliveredEntity, SupervisionGivenEntity, SupervisionReceivedEntity, SupportActivityDeliveredEntity;
 
 @interface TimeEntity : NSManagedObject
 
-@property (nonatomic, strong) NSDate * addStopwatch;
-@property (nonatomic, strong) NSDate * totalTime;
-@property (nonatomic, strong) NSDate * timeToSubtract;
-@property (nonatomic, strong) NSString * notes;
-@property (nonatomic, strong) NSNumber * pauseInterval;
-@property (nonatomic, strong) NSDate * endTime;
-@property (nonatomic, strong) NSDate * pauseTime;
-@property (nonatomic, strong) NSDate * stopwatchStartTime;
-@property (nonatomic, strong) NSDate * additionalTime;
-@property (nonatomic, strong) NSDate * startTime;
-@property (nonatomic, strong) NSNumber * stopwatchRunning;
-@property (nonatomic, strong) NSNumber * stopwatchRestartAfterStop;
-@property (nonatomic, strong) NSManagedObject *indirectSupportDelived;
-@property (nonatomic, strong) NSManagedObject *interventionDelivered;
-@property (nonatomic, strong) AssessmentEntity *Assessment;
-@property (nonatomic, strong) NSSet *breaks;
+@property (nonatomic, retain) NSNumber * stopwatchRunning;
+@property (nonatomic, retain) NSNumber * stopwatchRestartAfterStop;
+@property (nonatomic, retain) NSDate * addStopwatch;
+@property (nonatomic, retain) NSDate * totalTime;
+@property (nonatomic, retain) NSDate * timeToSubtract;
+@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSNumber * pauseInterval;
+@property (nonatomic, retain) NSDate * endTime;
+@property (nonatomic, retain) NSDate * pauseTime;
+@property (nonatomic, retain) NSDate * stopwatchStartTime;
+@property (nonatomic, retain) NSDate * additionalTime;
+@property (nonatomic, retain) NSDate * startTime;
+@property (nonatomic, retain) SupportActivityDeliveredEntity *indirectSupportDelived;
+@property (nonatomic, retain) InterventionDeliveredEntity *interventionDelivered;
+@property (nonatomic, retain) AssessmentEntity *assessmentTime;
+@property (nonatomic, retain) NSSet *breaks;
+@property (nonatomic, retain) SupervisionReceivedEntity *supervisionReceived;
+@property (nonatomic, retain) SupervisionGivenEntity *supervisionGiven;
 @end
 
 @interface TimeEntity (CoreDataGeneratedAccessors)
 
-- (void)addBreaksObject:(NSManagedObject *)value;
-- (void)removeBreaksObject:(NSManagedObject *)value;
+- (void)addBreaksObject:(BreakTimeEntity *)value;
+- (void)removeBreaksObject:(BreakTimeEntity *)value;
 - (void)addBreaks:(NSSet *)values;
 - (void)removeBreaks:(NSSet *)values;
 

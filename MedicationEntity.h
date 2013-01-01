@@ -2,44 +2,46 @@
 //  MedicationEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 3/27/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClientEntity;
+@class AdditionalSymptomEntity, ClientEntity, DiagnosisHistoryEntity, MedicationReviewEntity;
 
 @interface MedicationEntity : NSManagedObject
 
-@property (nonatomic, retain) NSString * applNo;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSDate * dateStarted;
-@property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSDate * discontinued;
-@property (nonatomic, retain) NSString * drugName;
-@property (nonatomic, retain) NSString * productNo;
 @property (nonatomic, retain) NSString * keyString;
-@property (nonatomic, retain) ClientEntity *client;
+@property (nonatomic, retain) NSString * productNo;
+@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSNumber * order;
+@property (nonatomic, retain) NSString * drugName;
+@property (nonatomic, retain) NSString * applNo;
+@property (nonatomic, retain) NSDate * dateStarted;
 @property (nonatomic, retain) NSSet *medLogs;
 @property (nonatomic, retain) NSSet *symptomsTargeted;
-
-@property (nonatomic, weak) NSString *tempNotes;
-//-(void)rekeyEncryptedAttributes;
-
+@property (nonatomic, retain) NSSet *diagnoses;
+@property (nonatomic, retain) ClientEntity *client;
 @end
 
 @interface MedicationEntity (CoreDataGeneratedAccessors)
 
-- (void)addMedLogsObject:(NSManagedObject *)value;
-- (void)removeMedLogsObject:(NSManagedObject *)value;
+- (void)addMedLogsObject:(MedicationReviewEntity *)value;
+- (void)removeMedLogsObject:(MedicationReviewEntity *)value;
 - (void)addMedLogs:(NSSet *)values;
 - (void)removeMedLogs:(NSSet *)values;
 
-- (void)addSymptomsTargetedObject:(NSManagedObject *)value;
-- (void)removeSymptomsTargetedObject:(NSManagedObject *)value;
+- (void)addSymptomsTargetedObject:(AdditionalSymptomEntity *)value;
+- (void)removeSymptomsTargetedObject:(AdditionalSymptomEntity *)value;
 - (void)addSymptomsTargeted:(NSSet *)values;
 - (void)removeSymptomsTargeted:(NSSet *)values;
+
+- (void)addDiagnosesObject:(DiagnosisHistoryEntity *)value;
+- (void)removeDiagnosesObject:(DiagnosisHistoryEntity *)value;
+- (void)addDiagnoses:(NSSet *)values;
+- (void)removeDiagnoses:(NSSet *)values;
 
 @end

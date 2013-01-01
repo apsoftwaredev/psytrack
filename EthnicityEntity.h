@@ -2,14 +2,14 @@
 //  EthnicityEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 9/16/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class DemographicProfileEntity;
+@class DemographicProfileEntity, ExistingEthnicityEntity;
 
 @interface EthnicityEntity : NSManagedObject
 
@@ -17,10 +17,7 @@
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * ethnicityName;
 @property (nonatomic, retain) NSSet *demographics;
-@property (nonatomic, retain) NSManagedObject *existingEthnicities;
-
-@property (nonatomic, assign) int clientCount;
-
+@property (nonatomic, retain) ExistingEthnicityEntity *existingEthnicities;
 @end
 
 @interface EthnicityEntity (CoreDataGeneratedAccessors)

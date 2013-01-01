@@ -2,13 +2,14 @@
 //  ContinuingEducationEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 9/17/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class ContinuingEducationProviderEntity, ContinuingEducationTypeEntity;
 
 @interface ContinuingEducationEntity : NSManagedObject
 
@@ -18,7 +19,16 @@
 @property (nonatomic, retain) NSString * cETitle;
 @property (nonatomic, retain) NSNumber * credits;
 @property (nonatomic, retain) NSManagedObject *forLicenseRenewal;
-@property (nonatomic, retain) NSManagedObject *provider;
-@property (nonatomic, retain) NSManagedObject *type;
+@property (nonatomic, retain) ContinuingEducationProviderEntity *provider;
+@property (nonatomic, retain) NSSet *topics;
+@property (nonatomic, retain) ContinuingEducationTypeEntity *type;
+@end
+
+@interface ContinuingEducationEntity (CoreDataGeneratedAccessors)
+
+- (void)addTopicsObject:(NSManagedObject *)value;
+- (void)removeTopicsObject:(NSManagedObject *)value;
+- (void)addTopics:(NSSet *)values;
+- (void)removeTopics:(NSSet *)values;
 
 @end

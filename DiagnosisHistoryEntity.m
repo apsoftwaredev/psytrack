@@ -2,33 +2,35 @@
 //  DiagnosisHistoryEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 9/3/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "DiagnosisHistoryEntity.h"
 #import "ClientEntity.h"
 #import "ClinicianEntity.h"
+#import "DisorderEntity.h"
+#import "DisorderSpecifierEntity.h"
 #import "MedicationEntity.h"
 
 
 @implementation DiagnosisHistoryEntity
 
+@dynamic treatmentStarted;
 @dynamic dateDiagnosed;
-@dynamic dateEnded;
 @dynamic onset;
 @dynamic notes;
 @dynamic order;
 @dynamic axis;
-@dynamic status;
-@dynamic treatmentStarted;
 @dynamic primary;
+@dynamic dateEnded;
+@dynamic status;
+@dynamic medications;
 @dynamic diagnosedBy;
 @dynamic clients;
-@dynamic disorder;
-@dynamic frequency;
-@dynamic diagnosisLog;
 @dynamic specifiers;
-@dynamic medications;
+@dynamic disorder;
+@dynamic diagnosisLog;
+@dynamic frequency;
 
 @end

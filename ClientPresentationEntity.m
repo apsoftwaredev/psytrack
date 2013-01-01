@@ -2,8 +2,8 @@
 //  ClientPresentationEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 9/17/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "ClientPresentationEntity.h"
@@ -16,17 +16,20 @@
 
 @implementation ClientPresentationEntity
 
-@dynamic speechLanguage;
+@dynamic paid;
 @dynamic psychomotor;
 @dynamic eyeContact;
+@dynamic speechLanguage;
 @dynamic depth;
 @dynamic perception;
 @dynamic suicidePlan;
+@dynamic homework;
 @dynamic suicideMeans;
 @dynamic psychosocial;
 @dynamic affect;
 @dynamic judgement;
 @dynamic orientedToTime;
+@dynamic imagery;
 @dynamic stressLevel;
 @dynamic attention;
 @dynamic orientedToBody;
@@ -70,12 +73,13 @@
 @dynamic medical;
 @dynamic rapport;
 @dynamic progressClinician;
+@dynamic proBono;
 @dynamic sleepHoursNightly;
 @dynamic thoughtContent;
 @dynamic sleepQuality;
-@dynamic imagry;
 @dynamic safetyRisk;
 @dynamic additionalVariables;
+@dynamic hourlyRate;
 @dynamic instrumentScores;
 @dynamic interventionDelivered;
 @dynamic testSessionDelivered;

@@ -2,27 +2,32 @@
 //  SupervisionTypeEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/10/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class SupervisionGivenEntity,SupervisionTypeSubtypeEntity,SupervisionReceivedEntity;
+@class ExistingSupervisionEntity, SupervisionGivenEntity, SupervisionReceivedEntity, SupervisionTypeSubtypeEntity;
 
 @interface SupervisionTypeEntity : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * supervisionType;
+@property (nonatomic, retain) NSSet *existingSupervision;
 @property (nonatomic, retain) NSSet *supervisionRecieved;
 @property (nonatomic, retain) NSSet *supervisionGiven;
-@property (nonatomic, retain) NSSet *existingSupervision;
 @property (nonatomic, retain) NSSet *subTypes;
 @end
 
 @interface SupervisionTypeEntity (CoreDataGeneratedAccessors)
+
+- (void)addExistingSupervisionObject:(ExistingSupervisionEntity *)value;
+- (void)removeExistingSupervisionObject:(ExistingSupervisionEntity *)value;
+- (void)addExistingSupervision:(NSSet *)values;
+- (void)removeExistingSupervision:(NSSet *)values;
 
 - (void)addSupervisionRecievedObject:(SupervisionReceivedEntity *)value;
 - (void)removeSupervisionRecievedObject:(SupervisionReceivedEntity *)value;
@@ -35,13 +40,8 @@
 - (void)removeSupervisionGiven:(NSSet *)values;
 
 - (void)addSubTypesObject:(SupervisionTypeSubtypeEntity *)value;
-- (void)removeSubtypesObject:(SupervisionReceivedEntity *)value;
+- (void)removeSubTypesObject:(SupervisionTypeSubtypeEntity *)value;
 - (void)addSubTypes:(NSSet *)values;
 - (void)removeSubTypes:(NSSet *)values;
-
-- (void)addExistingSupervisionObject:(NSManagedObject *)value;
-- (void)removeExistingSupervisionObject:(NSManagedObject *)value;
-- (void)addExistingSupervision:(NSSet *)values;
-- (void)removeExistingSupervision:(NSSet *)values;
 
 @end

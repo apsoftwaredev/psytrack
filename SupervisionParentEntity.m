@@ -2,21 +2,19 @@
 //  SupervisionParentEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/10/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "SupervisionParentEntity.h"
 #import "ClinicianEntity.h"
+#import "SupervisionFeedbackEntity.h"
 
 
 @implementation SupervisionParentEntity
 
-@dynamic supervisionFeedback;
 @dynamic studentsPresent;
 @dynamic modelsUsed;
-
-
-
+@dynamic supervisionFeedback;
 
 @end

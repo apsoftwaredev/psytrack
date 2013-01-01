@@ -2,8 +2,8 @@
 //  DisabilityEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 9/15/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -18,8 +18,6 @@
 @property (nonatomic, retain) NSString * disabilityName;
 @property (nonatomic, retain) NSSet *demographics;
 @property (nonatomic, retain) NSSet *existingDisabilities;
-
-@property (nonatomic, assign) int clientCount;
 @end
 
 @interface DisabilityEntity (CoreDataGeneratedAccessors)

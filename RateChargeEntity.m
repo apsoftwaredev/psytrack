@@ -2,21 +2,23 @@
 //  RateChargeEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/28/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "RateChargeEntity.h"
 #import "ConsultationEntity.h"
+#import "RateEntity.h"
 
 
 @implementation RateChargeEntity
 
-@dynamic hours;
-@dynamic notes;
-@dynamic dateCharged;
 @dynamic order;
-@dynamic rate;
+@dynamic notes;
+@dynamic hours;
+@dynamic paid;
+@dynamic dateCharged;
 @dynamic consultation;
+@dynamic rate;
 
 @end

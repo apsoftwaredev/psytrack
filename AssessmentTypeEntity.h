@@ -2,14 +2,14 @@
 //  AssessmentTypeEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/10/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class AssessmentEntity;
+@class AssessmentEntity, ExistingAssessmentEntity;
 
 @interface AssessmentTypeEntity : NSManagedObject
 
@@ -22,8 +22,8 @@
 
 @interface AssessmentTypeEntity (CoreDataGeneratedAccessors)
 
-- (void)addExistingAssessmentsObject:(NSManagedObject *)value;
-- (void)removeExistingAssessmentsObject:(NSManagedObject *)value;
+- (void)addExistingAssessmentsObject:(ExistingAssessmentEntity *)value;
+- (void)removeExistingAssessmentsObject:(ExistingAssessmentEntity *)value;
 - (void)addExistingAssessments:(NSSet *)values;
 - (void)removeExistingAssessments:(NSSet *)values;
 

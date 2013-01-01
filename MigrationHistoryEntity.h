@@ -1,9 +1,9 @@
 //
 //  MigrationHistoryEntity.h
-//  PsyTrack Clinician Tools
+//  PsyTrack
 //
-//  Created by Daniel Boice on 3/23/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -17,12 +17,7 @@
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * keyString;
 @property (nonatomic, retain) NSString * migratedFrom;
-@property (nonatomic, retain) NSString  * migratedTo;
+@property (nonatomic, retain) NSString * migratedTo;
 @property (nonatomic, retain) DemographicProfileEntity *demographicProfile;
-
-@property (nonatomic, weak) NSString  * tempNotes;
-@property (nonatomic, weak) NSString  * tempMigratedFrom;
-@property (nonatomic, weak) NSString  * tempMigratedTo;
-//-(void)rekeyEncryptedAttributes;
 
 @end

@@ -2,26 +2,28 @@
 //  SiteEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/15/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClinicianEntity, TimeTrackEntity;
+@class ClinicianEntity, ExistingHoursEntity, TimeTrackEntity;
 
 @interface SiteEntity : NSManagedObject
 
 @property (nonatomic, retain) NSString * siteName;
 @property (nonatomic, retain) NSString * location;
-@property (nonatomic, retain) NSDate * started;
+@property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSDate * started;
 @property (nonatomic, retain) NSDate * ended;
 @property (nonatomic, retain) NSNumber * defaultSite;
+@property (nonatomic, retain) NSManagedObject *settingType;
 @property (nonatomic, retain) ClinicianEntity *supervisor;
 @property (nonatomic, retain) NSSet *timeTracks;
-@property (nonatomic, retain) NSManagedObject *settingType;
+@property (nonatomic, retain) NSSet *existingHours;
 @end
 
 @interface SiteEntity (CoreDataGeneratedAccessors)
@@ -30,5 +32,10 @@
 - (void)removeTimeTracksObject:(TimeTrackEntity *)value;
 - (void)addTimeTracks:(NSSet *)values;
 - (void)removeTimeTracks:(NSSet *)values;
+
+- (void)addExistingHoursObject:(ExistingHoursEntity *)value;
+- (void)removeExistingHoursObject:(ExistingHoursEntity *)value;
+- (void)addExistingHours:(NSSet *)values;
+- (void)removeExistingHours:(NSSet *)values;
 
 @end

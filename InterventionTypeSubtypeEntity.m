@@ -2,11 +2,12 @@
 //  InterventionTypeSubtypeEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/10/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "InterventionTypeSubtypeEntity.h"
+#import "ExistingInterventionEntity.h"
 #import "InterventionDeliveredEntity.h"
 #import "InterventionTypeEntity.h"
 
@@ -16,8 +17,8 @@
 @dynamic order;
 @dynamic notes;
 @dynamic interventionSubType;
-@dynamic interventionsDelivered;
 @dynamic interventionType;
+@dynamic interventionsDelivered;
 @dynamic existingInterventions;
 
 @end

@@ -2,36 +2,41 @@
 //  DiagnosisHistoryEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 9/3/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClientEntity, ClinicianEntity, MedicationEntity;
+@class ClientEntity, ClinicianEntity, DisorderEntity, DisorderSpecifierEntity, MedicationEntity;
 
 @interface DiagnosisHistoryEntity : NSManagedObject
 
+@property (nonatomic, retain) NSDate * treatmentStarted;
 @property (nonatomic, retain) NSDate * dateDiagnosed;
-@property (nonatomic, retain) NSDate * dateEnded;
 @property (nonatomic, retain) NSDate * onset;
 @property (nonatomic, retain) NSData * notes;
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * axis;
-@property (nonatomic, retain) NSString * status;
-@property (nonatomic, retain) NSDate * treatmentStarted;
 @property (nonatomic, retain) NSNumber * primary;
+@property (nonatomic, retain) NSDate * dateEnded;
+@property (nonatomic, retain) NSString * status;
+@property (nonatomic, retain) NSSet *medications;
 @property (nonatomic, retain) NSSet *diagnosedBy;
 @property (nonatomic, retain) NSSet *clients;
-@property (nonatomic, retain) NSManagedObject *disorder;
-@property (nonatomic, retain) NSManagedObject *frequency;
-@property (nonatomic, retain) NSSet *diagnosisLog;
 @property (nonatomic, retain) NSSet *specifiers;
-@property (nonatomic, retain) NSSet *medications;
+@property (nonatomic, retain) DisorderEntity *disorder;
+@property (nonatomic, retain) NSSet *diagnosisLog;
+@property (nonatomic, retain) NSManagedObject *frequency;
 @end
 
 @interface DiagnosisHistoryEntity (CoreDataGeneratedAccessors)
+
+- (void)addMedicationsObject:(MedicationEntity *)value;
+- (void)removeMedicationsObject:(MedicationEntity *)value;
+- (void)addMedications:(NSSet *)values;
+- (void)removeMedications:(NSSet *)values;
 
 - (void)addDiagnosedByObject:(ClinicianEntity *)value;
 - (void)removeDiagnosedByObject:(ClinicianEntity *)value;
@@ -43,19 +48,14 @@
 - (void)addClients:(NSSet *)values;
 - (void)removeClients:(NSSet *)values;
 
+- (void)addSpecifiersObject:(DisorderSpecifierEntity *)value;
+- (void)removeSpecifiersObject:(DisorderSpecifierEntity *)value;
+- (void)addSpecifiers:(NSSet *)values;
+- (void)removeSpecifiers:(NSSet *)values;
+
 - (void)addDiagnosisLogObject:(NSManagedObject *)value;
 - (void)removeDiagnosisLogObject:(NSManagedObject *)value;
 - (void)addDiagnosisLog:(NSSet *)values;
 - (void)removeDiagnosisLog:(NSSet *)values;
-
-- (void)addSpecifiersObject:(NSManagedObject *)value;
-- (void)removeSpecifiersObject:(NSManagedObject *)value;
-- (void)addSpecifiers:(NSSet *)values;
-- (void)removeSpecifiers:(NSSet *)values;
-
-- (void)addMedicationsObject:(MedicationEntity *)value;
-- (void)removeMedicationsObject:(MedicationEntity *)value;
-- (void)addMedications:(NSSet *)values;
-- (void)removeMedications:(NSSet *)values;
 
 @end

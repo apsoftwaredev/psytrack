@@ -1,27 +1,34 @@
 //
 //  LogEntity.h
-//  PsyTrack Clinician Tools
+//  PsyTrack
 //
-//  Created by Daniel Boice on 3/23/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClientEntity, ClinicianEntity;
+@class ClientEntity, ClinicianEntity, ConferenceEntity, ConsultationEntity, TrainingProgramEntity;
 
 @interface LogEntity : NSManagedObject
 
 @property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * dateTime;
 @property (nonatomic, retain) NSString * keyString;
-@property (nonatomic, retain) ClientEntity *client;
+@property (nonatomic, retain) NSDate * dateTime;
+@property (nonatomic, retain) NSManagedObject *teachingExperience;
+@property (nonatomic, retain) NSManagedObject *communityService;
+@property (nonatomic, retain) TrainingProgramEntity *trainingProgram;
+@property (nonatomic, retain) NSManagedObject *license;
 @property (nonatomic, retain) NSManagedObject *advisingGiven;
-@property (nonatomic, retain) NSManagedObject *advisor;
-@property (nonatomic, retain) NSManagedObject *licenseNumber;
 @property (nonatomic, retain) ClinicianEntity *clinician;
+@property (nonatomic, retain) NSManagedObject *expertTestemony;
+@property (nonatomic, retain) ConsultationEntity *consultations;
+@property (nonatomic, retain) NSManagedObject *presentation;
+@property (nonatomic, retain) NSManagedObject *course;
+@property (nonatomic, retain) ConferenceEntity *conference;
+@property (nonatomic, retain) NSManagedObject *grant;
+@property (nonatomic, retain) ClientEntity *client;
+@property (nonatomic, retain) NSManagedObject *otherActivity;
 
-@property (nonatomic, weak) NSString *tempNotes;
-//-(void)rekeyEncryptedAttributes;
 @end

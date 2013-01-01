@@ -2,27 +2,29 @@
 //  ConferenceEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 8/12/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "ConferenceEntity.h"
 #import "LogEntity.h"
+#import "OrganizationEntity.h"
+#import "PresentationEntity.h"
 
 
 @implementation ConferenceEntity
 
+@dynamic attendenceSize;
+@dynamic hours;
+@dynamic notableTopics;
 @dynamic notableSpeakers;
 @dynamic endDate;
-@dynamic startDate;
 @dynamic title;
-@dynamic hours;
-@dynamic attendenceSize;
 @dynamic notes;
-@dynamic notableTopics;
 @dynamic order;
-@dynamic logs;
+@dynamic startDate;
 @dynamic myPresentations;
+@dynamic logs;
 @dynamic hostingOrganizations;
 
 @end

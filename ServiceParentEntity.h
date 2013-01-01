@@ -2,18 +2,20 @@
 //  ServiceParentEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 6/6/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "TimeTrackEntity.h"
 
+@class ServiceCodeEntity;
 
 @interface ServiceParentEntity : TimeTrackEntity
 
 @property (nonatomic, retain) NSNumber * paperwork;
-@property (nonatomic, retain) NSManagedObject *serviceCode;
+@property (nonatomic, retain) NSNumber * batteryTask;
+@property (nonatomic, retain) ServiceCodeEntity *serviceCode;
 
 @end

@@ -2,17 +2,21 @@
 //  ExistingAssessmentEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/11/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "ExistingAssessmentEntity.h"
 #import "AssessmentTypeEntity.h"
+#import "ExistingBatteryEntity.h"
+#import "ExistingDemographicsEntity.h"
 #import "ExistingHoursEntity.h"
+#import "ExistingInstrumentEntity.h"
 
 
 @implementation ExistingAssessmentEntity
 
+@dynamic monthlyLogNotes;
 @dynamic notes;
 @dynamic hours;
 @dynamic instruments;
@@ -20,6 +24,5 @@
 @dynamic demographics;
 @dynamic existingHours;
 @dynamic batteries;
-@dynamic monthlyLogNotes;
 
 @end

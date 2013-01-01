@@ -2,34 +2,34 @@
 //  InterventionTypeSubtypeEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/10/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class InterventionDeliveredEntity, InterventionTypeEntity;
+@class ExistingInterventionEntity, InterventionDeliveredEntity, InterventionTypeEntity;
 
 @interface InterventionTypeSubtypeEntity : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * interventionSubType;
-@property (nonatomic, retain) NSSet *interventionsDelivered;
 @property (nonatomic, retain) InterventionTypeEntity *interventionType;
+@property (nonatomic, retain) NSSet *interventionsDelivered;
 @property (nonatomic, retain) NSSet *existingInterventions;
 @end
 
 @interface InterventionTypeSubtypeEntity (CoreDataGeneratedAccessors)
 
-- (void)addInterventionDeliveredObject:(InterventionDeliveredEntity *)value;
-- (void)removeInterventionDeliveredObject:(InterventionDeliveredEntity *)value;
-- (void)addInterventionDelivered:(NSSet *)values;
-- (void)removeInterventionDelivered:(NSSet *)values;
+- (void)addInterventionsDeliveredObject:(InterventionDeliveredEntity *)value;
+- (void)removeInterventionsDeliveredObject:(InterventionDeliveredEntity *)value;
+- (void)addInterventionsDelivered:(NSSet *)values;
+- (void)removeInterventionsDelivered:(NSSet *)values;
 
-- (void)addExistingInterventionsObject:(NSManagedObject *)value;
-- (void)removeExistingInterventionsObject:(NSManagedObject *)value;
+- (void)addExistingInterventionsObject:(ExistingInterventionEntity *)value;
+- (void)removeExistingInterventionsObject:(ExistingInterventionEntity *)value;
 - (void)addExistingInterventions:(NSSet *)values;
 - (void)removeExistingInterventions:(NSSet *)values;
 

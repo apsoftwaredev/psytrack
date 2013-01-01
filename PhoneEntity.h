@@ -1,9 +1,9 @@
 //
 //  PhoneEntity.h
-//  PsyTrack Clinician Tools
+//  PsyTrack
 //
-//  Created by Daniel Boice on 3/20/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,13 +13,10 @@
 
 @interface PhoneEntity : NSManagedObject
 
-@property (nonatomic, retain) NSString * phoneName;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * extention;
 @property (nonatomic, retain) NSString * phoneNumber;
-@property (nonatomic, retain) NSString   * keyString;
+@property (nonatomic, retain) NSString * phoneName;
+@property (nonatomic, retain) NSString * keyString;
+@property (nonatomic, retain) NSString * extension;
 @property (nonatomic, retain) ClientEntity *client;
-
-
 
 @end

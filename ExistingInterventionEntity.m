@@ -2,18 +2,21 @@
 //  ExistingInterventionEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/10/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "ExistingInterventionEntity.h"
+#import "ExistingDemographicsEntity.h"
 #import "ExistingHoursEntity.h"
+#import "InterventionModelEntity.h"
 #import "InterventionTypeEntity.h"
 #import "InterventionTypeSubtypeEntity.h"
 
 
 @implementation ExistingInterventionEntity
 
+@dynamic monthlyLogNotes;
 @dynamic notes;
 @dynamic hours;
 @dynamic interventionType;

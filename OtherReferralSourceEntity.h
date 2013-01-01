@@ -2,14 +2,14 @@
 //  OtherReferralSourceEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/27/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClientEntity, ReferralEntity;
+@class ClientEntity, OtherReferralSourceTypeEntity, ReferralEntity;
 
 @interface OtherReferralSourceEntity : NSManagedObject
 
@@ -17,13 +17,18 @@
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * sourceName;
 @property (nonatomic, retain) NSNumber * abIdentifier;
+@property (nonatomic, retain) NSSet *referrals;
 @property (nonatomic, retain) NSSet *grants;
 @property (nonatomic, retain) NSSet *clients;
-@property (nonatomic, retain) NSManagedObject *referralType;
-@property (nonatomic, retain) NSSet *referrals;
+@property (nonatomic, retain) OtherReferralSourceTypeEntity *referralType;
 @end
 
 @interface OtherReferralSourceEntity (CoreDataGeneratedAccessors)
+
+- (void)addReferralsObject:(ReferralEntity *)value;
+- (void)removeReferralsObject:(ReferralEntity *)value;
+- (void)addReferrals:(NSSet *)values;
+- (void)removeReferrals:(NSSet *)values;
 
 - (void)addGrantsObject:(NSManagedObject *)value;
 - (void)removeGrantsObject:(NSManagedObject *)value;
@@ -34,10 +39,5 @@
 - (void)removeClientsObject:(ClientEntity *)value;
 - (void)addClients:(NSSet *)values;
 - (void)removeClients:(NSSet *)values;
-
-- (void)addReferralsObject:(ReferralEntity *)value;
-- (void)removeReferralsObject:(ReferralEntity *)value;
-- (void)addReferrals:(NSSet *)values;
-- (void)removeReferrals:(NSSet *)values;
 
 @end

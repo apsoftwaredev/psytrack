@@ -2,14 +2,14 @@
 //  AdditionalVariableEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 9/10/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class AdditionalVariableNameEntity, AdditionalVariableValueEntity, DemographicProfileEntity;
+@class AdditionalVariableNameEntity, AdditionalVariableValueEntity, ClientPresentationEntity, DemographicProfileEntity;
 
 @interface AdditionalVariableEntity : NSManagedObject
 
@@ -40,8 +40,8 @@
 - (void)addDemographics:(NSSet *)values;
 - (void)removeDemographics:(NSSet *)values;
 
-- (void)addClientPresentationObject:(NSManagedObject *)value;
-- (void)removeClientPresentationObject:(NSManagedObject *)value;
+- (void)addClientPresentationObject:(ClientPresentationEntity *)value;
+- (void)removeClientPresentationObject:(ClientPresentationEntity *)value;
 - (void)addClientPresentation:(NSSet *)values;
 - (void)removeClientPresentation:(NSSet *)values;
 

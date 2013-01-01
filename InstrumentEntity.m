@@ -2,26 +2,37 @@
 //  InstrumentEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 5/29/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "InstrumentEntity.h"
+#import "BatteryEntity.h"
+#import "ClientInstrumentScoresEntity.h"
+#import "ExistingInstrumentEntity.h"
+#import "InstrumentLogEntity.h"
+#import "InstrumentPublisherEntity.h"
+#import "InstrumentScoreNameEntity.h"
+#import "InstrumentTypeEntity.h"
 
 
 @implementation InstrumentEntity
 
-@dynamic order;
-@dynamic notes;
-@dynamic acronym;
-@dynamic publisher;
+@dynamic numberReportsWritten;
+@dynamic numberScored;
 @dynamic instrumentName;
+@dynamic notes;
+@dynamic order;
 @dynamic ages;
+@dynamic acronym;
+@dynamic numberAdmistered;
 @dynamic sampleSize;
-@dynamic scores;
-@dynamic instrumentType;
 @dynamic scoreNames;
 @dynamic existingInstruments;
 @dynamic batteries;
+@dynamic scores;
+@dynamic instrumentType;
+@dynamic publisher;
+@dynamic logs;
 
 @end

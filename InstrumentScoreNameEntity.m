@@ -2,19 +2,20 @@
 //  InstrumentScoreNameEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 5/30/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "InstrumentScoreNameEntity.h"
 #import "InstrumentEntity.h"
+#import "InstrumentScoreEntity.h"
 
 
 @implementation InstrumentScoreNameEntity
 
+@dynamic abbreviatedName;
 @dynamic scoreName;
 @dynamic notes;
-@dynamic abbreviatedName;
 @dynamic instrument;
 @dynamic scores;
 

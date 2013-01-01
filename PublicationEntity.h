@@ -2,14 +2,14 @@
 //  PublicationEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 9/17/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClinicianEntity;
+@class ClinicianEntity, ExpertTestemonyEntity, PresentationEntity, PublicationTypeEntity;
 
 @interface PublicationEntity : NSManagedObject
 
@@ -39,20 +39,28 @@
 @property (nonatomic, retain) NSString * authors;
 @property (nonatomic, retain) NSString * urlDate;
 @property (nonatomic, retain) NSString * sortWord;
-@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSString * bibtex;
+@property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * publicationTitle;
+@property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * volumeTitle;
+@property (nonatomic, retain) NSSet *subject;
 @property (nonatomic, retain) ClinicianEntity *clinician;
-@property (nonatomic, retain) NSManagedObject *publicationType;
-@property (nonatomic, retain) NSManagedObject *expertTestemony;
+@property (nonatomic, retain) PublicationTypeEntity *publicationType;
+@property (nonatomic, retain) ExpertTestemonyEntity *expertTestemony;
 @property (nonatomic, retain) NSSet *presentations;
 @property (nonatomic, retain) NSManagedObject *teachingExperience;
 @end
 
 @interface PublicationEntity (CoreDataGeneratedAccessors)
 
-- (void)addPresentationsObject:(NSManagedObject *)value;
-- (void)removePresentationsObject:(NSManagedObject *)value;
+- (void)addSubjectObject:(NSManagedObject *)value;
+- (void)removeSubjectObject:(NSManagedObject *)value;
+- (void)addSubject:(NSSet *)values;
+- (void)removeSubject:(NSSet *)values;
+
+- (void)addPresentationsObject:(PresentationEntity *)value;
+- (void)removePresentationsObject:(PresentationEntity *)value;
 - (void)addPresentations:(NSSet *)values;
 - (void)removePresentations:(NSSet *)values;
 

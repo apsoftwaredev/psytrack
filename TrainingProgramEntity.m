@@ -2,30 +2,32 @@
 //  TrainingProgramEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/22/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "TrainingProgramEntity.h"
 #import "ClinicianEntity.h"
 #import "ExistingHoursEntity.h"
 #import "LogEntity.h"
+#import "SchoolEntity.h"
 #import "TimeTrackEntity.h"
 
 
 @implementation TrainingProgramEntity
 
+@dynamic doctorateLevel;
 @dynamic trainingProgram;
-@dynamic order;
-@dynamic notes;
 @dynamic selectedByDefault;
+@dynamic endDate;
+@dynamic notes;
+@dynamic order;
 @dynamic course;
 @dynamic startDate;
-@dynamic endDate;
-@dynamic timeTracks;
 @dynamic seminarInstructor;
+@dynamic school;
+@dynamic timeTracks;
 @dynamic logs;
 @dynamic existingHours;
-@dynamic school;
 
 @end

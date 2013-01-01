@@ -2,13 +2,15 @@
 //  BatteryEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 9/17/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "BatteryEntity.h"
-#import "ClientPresentationEntity.h"
+#import "ExistingBatteryEntity.h"
 #import "InstrumentEntity.h"
+#import "InstrumentLogEntity.h"
+#import "InstrumentPublisherEntity.h"
 
 
 @implementation BatteryEntity
@@ -16,16 +18,16 @@
 @dynamic numberReportsWritten;
 @dynamic numberAdminstered;
 @dynamic numberScored;
+@dynamic notes;
 @dynamic order;
 @dynamic ages;
-@dynamic notes;
 @dynamic acronym;
 @dynamic batteryName;
 @dynamic sampleSize;
-@dynamic publisher;
-@dynamic existingBatteries;
-@dynamic instruments;
-@dynamic clientPresentations;
 @dynamic logs;
+@dynamic publisher;
+@dynamic instruments;
+@dynamic existingBatteries;
+@dynamic clientBatteryNotes;
 
 @end

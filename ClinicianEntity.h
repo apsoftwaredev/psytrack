@@ -2,14 +2,14 @@
 //  ClinicianEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/22/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClinicianGroupEntity, DemographicProfileEntity, ExistingHoursEntity, LogEntity, MedicationReviewEntity, ReferralEntity, SiteEntity, SupervisionParentEntity, TimeTrackEntity, TrainingProgramEntity;
+@class AwardEntity, CertificationEntity, ClinicianGroupEntity, ClinicianTypeEntity, DegreeEntity, DemographicProfileEntity, DiagnosisHistoryEntity, EmploymentEntity, ExistingHoursEntity, ExistingSupervisionGivenEntity, GrantEntity, JobTitleEntity, LicenseEntity, LogEntity, MedicationReviewEntity, MembershipEntity, PublicationEntity, ReferralEntity, SiteEntity, SpecialtyEntity, SupervisionParentEntity, TeachingExperienceEntity, TimeTrackEntity, TrainingProgramEntity;
 
 @interface ClinicianEntity : NSManagedObject
 
@@ -40,11 +40,11 @@
 @property (nonatomic, retain) NSSet *groups;
 @property (nonatomic, retain) MedicationReviewEntity *medicationPrescribed;
 @property (nonatomic, retain) NSSet *supervisionSessionsPresent;
-@property (nonatomic, retain) NSSet *influences;
+@property (nonatomic, retain) NSSet *licenses;
 @property (nonatomic, retain) NSSet *existingSupervisionGiven;
-@property (nonatomic, retain) NSManagedObject *diagnoser;
+@property (nonatomic, retain) NSSet *influences;
+@property (nonatomic, retain) DiagnosisHistoryEntity *diagnoser;
 @property (nonatomic, retain) NSSet *site;
-@property (nonatomic, retain) NSSet *consultationReferral;
 @property (nonatomic, retain) NSSet *grants;
 @property (nonatomic, retain) NSSet *orientationHistory;
 @property (nonatomic, retain) NSSet *degrees;
@@ -52,20 +52,13 @@
 @property (nonatomic, retain) NSSet *referrals;
 @property (nonatomic, retain) NSSet *employments;
 @property (nonatomic, retain) NSSet *certifications;
-@property (nonatomic, retain) NSSet *licenseNumbers;
-@property (nonatomic, retain) NSSet *memberships;
 @property (nonatomic, retain) NSManagedObject *advisingReceived;
+@property (nonatomic, retain) NSSet *memberships;
+@property (nonatomic, retain) NSSet *practicumCoursesInstructed;
+@property (nonatomic, retain) NSManagedObject *coursesInstructed;
 @property (nonatomic, retain) NSSet *currentJobTitles;
 @property (nonatomic, retain) NSSet *existingHours;
-@property (nonatomic, retain) NSManagedObject *teachingExperience;
-@property (nonatomic, retain) NSSet *practicumCoursesInstructed;
-
-
-@property (nonatomic, weak) NSString *tempNotes;
-@property (nonatomic, strong)  NSString *combinedName;
-
-//-(void)rekeyEncryptedAttributes;
-
+@property (nonatomic, retain) TeachingExperienceEntity *teachingExperience;
 @end
 
 @interface ClinicianEntity (CoreDataGeneratedAccessors)
@@ -80,23 +73,23 @@
 - (void)addSupervisedTime:(NSSet *)values;
 - (void)removeSupervisedTime:(NSSet *)values;
 
-- (void)addAwardsObject:(NSManagedObject *)value;
-- (void)removeAwardsObject:(NSManagedObject *)value;
+- (void)addAwardsObject:(AwardEntity *)value;
+- (void)removeAwardsObject:(AwardEntity *)value;
 - (void)addAwards:(NSSet *)values;
 - (void)removeAwards:(NSSet *)values;
 
-- (void)addClinicianTypeObject:(NSManagedObject *)value;
-- (void)removeClinicianTypeObject:(NSManagedObject *)value;
+- (void)addClinicianTypeObject:(ClinicianTypeEntity *)value;
+- (void)removeClinicianTypeObject:(ClinicianTypeEntity *)value;
 - (void)addClinicianType:(NSSet *)values;
 - (void)removeClinicianType:(NSSet *)values;
 
-- (void)addSpecialtiesObject:(NSManagedObject *)value;
-- (void)removeSpecialtiesObject:(NSManagedObject *)value;
+- (void)addSpecialtiesObject:(SpecialtyEntity *)value;
+- (void)removeSpecialtiesObject:(SpecialtyEntity *)value;
 - (void)addSpecialties:(NSSet *)values;
 - (void)removeSpecialties:(NSSet *)values;
 
-- (void)addPublicationsObject:(NSManagedObject *)value;
-- (void)removePublicationsObject:(NSManagedObject *)value;
+- (void)addPublicationsObject:(PublicationEntity *)value;
+- (void)removePublicationsObject:(PublicationEntity *)value;
 - (void)addPublications:(NSSet *)values;
 - (void)removePublications:(NSSet *)values;
 
@@ -110,28 +103,28 @@
 - (void)addSupervisionSessionsPresent:(NSSet *)values;
 - (void)removeSupervisionSessionsPresent:(NSSet *)values;
 
+- (void)addLicensesObject:(LicenseEntity *)value;
+- (void)removeLicensesObject:(LicenseEntity *)value;
+- (void)addLicenses:(NSSet *)values;
+- (void)removeLicenses:(NSSet *)values;
+
+- (void)addExistingSupervisionGivenObject:(ExistingSupervisionGivenEntity *)value;
+- (void)removeExistingSupervisionGivenObject:(ExistingSupervisionGivenEntity *)value;
+- (void)addExistingSupervisionGiven:(NSSet *)values;
+- (void)removeExistingSupervisionGiven:(NSSet *)values;
+
 - (void)addInfluencesObject:(NSManagedObject *)value;
 - (void)removeInfluencesObject:(NSManagedObject *)value;
 - (void)addInfluences:(NSSet *)values;
 - (void)removeInfluences:(NSSet *)values;
-
-- (void)addExistingSupervisionGivenObject:(NSManagedObject *)value;
-- (void)removeExistingSupervisionGivenObject:(NSManagedObject *)value;
-- (void)addExistingSupervisionGiven:(NSSet *)values;
-- (void)removeExistingSupervisionGiven:(NSSet *)values;
 
 - (void)addSiteObject:(SiteEntity *)value;
 - (void)removeSiteObject:(SiteEntity *)value;
 - (void)addSite:(NSSet *)values;
 - (void)removeSite:(NSSet *)values;
 
-- (void)addConsultationReferralObject:(NSManagedObject *)value;
-- (void)removeConsultationReferralObject:(NSManagedObject *)value;
-- (void)addConsultationReferral:(NSSet *)values;
-- (void)removeConsultationReferral:(NSSet *)values;
-
-- (void)addGrantsObject:(NSManagedObject *)value;
-- (void)removeGrantsObject:(NSManagedObject *)value;
+- (void)addGrantsObject:(GrantEntity *)value;
+- (void)removeGrantsObject:(GrantEntity *)value;
 - (void)addGrants:(NSSet *)values;
 - (void)removeGrants:(NSSet *)values;
 
@@ -140,8 +133,8 @@
 - (void)addOrientationHistory:(NSSet *)values;
 - (void)removeOrientationHistory:(NSSet *)values;
 
-- (void)addDegreesObject:(NSManagedObject *)value;
-- (void)removeDegreesObject:(NSManagedObject *)value;
+- (void)addDegreesObject:(DegreeEntity *)value;
+- (void)removeDegreesObject:(DegreeEntity *)value;
 - (void)addDegrees:(NSSet *)values;
 - (void)removeDegrees:(NSSet *)values;
 
@@ -150,28 +143,28 @@
 - (void)addReferrals:(NSSet *)values;
 - (void)removeReferrals:(NSSet *)values;
 
-- (void)addEmploymentsObject:(NSManagedObject *)value;
-- (void)removeEmploymentsObject:(NSManagedObject *)value;
+- (void)addEmploymentsObject:(EmploymentEntity *)value;
+- (void)removeEmploymentsObject:(EmploymentEntity *)value;
 - (void)addEmployments:(NSSet *)values;
 - (void)removeEmployments:(NSSet *)values;
 
-- (void)addCertificationsObject:(NSManagedObject *)value;
-- (void)removeCertificationsObject:(NSManagedObject *)value;
+- (void)addCertificationsObject:(CertificationEntity *)value;
+- (void)removeCertificationsObject:(CertificationEntity *)value;
 - (void)addCertifications:(NSSet *)values;
 - (void)removeCertifications:(NSSet *)values;
 
-- (void)addLicenseNumbersObject:(NSManagedObject *)value;
-- (void)removeLicenseNumbersObject:(NSManagedObject *)value;
-- (void)addLicenseNumbers:(NSSet *)values;
-- (void)removeLicenseNumbers:(NSSet *)values;
-
-- (void)addMembershipsObject:(NSManagedObject *)value;
-- (void)removeMembershipsObject:(NSManagedObject *)value;
+- (void)addMembershipsObject:(MembershipEntity *)value;
+- (void)removeMembershipsObject:(MembershipEntity *)value;
 - (void)addMemberships:(NSSet *)values;
 - (void)removeMemberships:(NSSet *)values;
 
-- (void)addCurrentJobTitlesObject:(NSManagedObject *)value;
-- (void)removeCurrentJobTitlesObject:(NSManagedObject *)value;
+- (void)addPracticumCoursesInstructedObject:(TrainingProgramEntity *)value;
+- (void)removePracticumCoursesInstructedObject:(TrainingProgramEntity *)value;
+- (void)addPracticumCoursesInstructed:(NSSet *)values;
+- (void)removePracticumCoursesInstructed:(NSSet *)values;
+
+- (void)addCurrentJobTitlesObject:(JobTitleEntity *)value;
+- (void)removeCurrentJobTitlesObject:(JobTitleEntity *)value;
 - (void)addCurrentJobTitles:(NSSet *)values;
 - (void)removeCurrentJobTitles:(NSSet *)values;
 
@@ -179,10 +172,5 @@
 - (void)removeExistingHoursObject:(ExistingHoursEntity *)value;
 - (void)addExistingHours:(NSSet *)values;
 - (void)removeExistingHours:(NSSet *)values;
-
-- (void)addPracticumCoursesInstructedObject:(TrainingProgramEntity *)value;
-- (void)removePracticumCoursesInstructedObject:(TrainingProgramEntity *)value;
-- (void)addPracticumCoursesInstructed:(NSSet *)values;
-- (void)removePracticumCoursesInstructed:(NSSet *)values;
 
 @end

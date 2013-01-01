@@ -2,8 +2,8 @@
 //  ClientPresentationEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 9/17/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,17 +13,20 @@
 
 @interface ClientPresentationEntity : NSManagedObject
 
-@property (nonatomic, retain) NSString * speechLanguage;
+@property (nonatomic, retain) NSNumber * paid;
 @property (nonatomic, retain) NSString * psychomotor;
 @property (nonatomic, retain) NSString * eyeContact;
+@property (nonatomic, retain) NSString * speechLanguage;
 @property (nonatomic, retain) NSNumber * depth;
 @property (nonatomic, retain) NSString * perception;
 @property (nonatomic, retain) NSNumber * suicidePlan;
+@property (nonatomic, retain) NSString * homework;
 @property (nonatomic, retain) NSNumber * suicideMeans;
 @property (nonatomic, retain) NSString * psychosocial;
 @property (nonatomic, retain) NSString * affect;
 @property (nonatomic, retain) NSString * judgement;
 @property (nonatomic, retain) NSNumber * orientedToTime;
+@property (nonatomic, retain) NSString * imagery;
 @property (nonatomic, retain) NSNumber * stressLevel;
 @property (nonatomic, retain) NSString * attention;
 @property (nonatomic, retain) NSNumber * orientedToBody;
@@ -67,12 +70,13 @@
 @property (nonatomic, retain) NSString * medical;
 @property (nonatomic, retain) NSString * rapport;
 @property (nonatomic, retain) NSNumber * progressClinician;
-@property (nonatomic, retain) NSNumber * sleepHoursNightly;
+@property (nonatomic, retain) NSNumber * proBono;
+@property (nonatomic, retain) NSDecimalNumber * sleepHoursNightly;
 @property (nonatomic, retain) NSString * thoughtContent;
 @property (nonatomic, retain) NSString * sleepQuality;
-@property (nonatomic, retain) NSString * imagry;
 @property (nonatomic, retain) NSNumber * safetyRisk;
 @property (nonatomic, retain) NSSet *additionalVariables;
+@property (nonatomic, retain) NSManagedObject *hourlyRate;
 @property (nonatomic, retain) NSSet *instrumentScores;
 @property (nonatomic, retain) InterventionDeliveredEntity *interventionDelivered;
 @property (nonatomic, retain) AssessmentEntity *testSessionDelivered;

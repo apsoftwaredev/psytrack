@@ -2,16 +2,17 @@
 //  ExistingSupervisionReceivedEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/11/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "ExistingSupervisionEntity.h"
 
 @class ExistingHoursEntity;
 
-@interface ExistingSupervisionReceivedEntity : NSManagedObject
+@interface ExistingSupervisionReceivedEntity : ExistingSupervisionEntity
 
 @property (nonatomic, retain) ExistingHoursEntity *existingHours;
 

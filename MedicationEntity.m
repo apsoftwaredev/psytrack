@@ -2,154 +2,30 @@
 //  MedicationEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 3/27/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "MedicationEntity.h"
+#import "AdditionalSymptomEntity.h"
 #import "ClientEntity.h"
-#import "PTTAppDelegate.h"
+#import "DiagnosisHistoryEntity.h"
+#import "MedicationReviewEntity.h"
+
 
 @implementation MedicationEntity
 
-@dynamic applNo;
-@dynamic order;
-@dynamic dateStarted;
-@dynamic notes;
 @dynamic discontinued;
-@dynamic drugName;
-@dynamic productNo;
 @dynamic keyString;
-@dynamic client;
+@dynamic productNo;
+@dynamic notes;
+@dynamic order;
+@dynamic drugName;
+@dynamic applNo;
+@dynamic dateStarted;
 @dynamic medLogs;
 @dynamic symptomsTargeted;
-@synthesize tempNotes;
-
-
-
-//
-//-(void)rekeyEncryptedAttributes{
-//     [self willAccessValueForKey:@"notes"];
-//    if (self.notes) {
-//        [self setStringToPrimitiveData:(NSString *)self.notes forKey:(NSString *)@"notes" keyString:nil];
-//        
-//        
-//    }
-//     [self didAccessValueForKey:@"notes"];
-//    
-//}
-
-//- (void)setStringToPrimitiveData:(NSString *)strValue forKey:(NSString *)key keyString:(NSString *)keyStringToSet
-//{
-//    
-//    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-//    
-//    if ( strValue && strValue.length  ) {
-//        
-//        
-//        
-//        
-//        
-//        NSDictionary *encryptedDataDictionary=[appDelegate encryptStringToEncryptedData:(NSString *)strValue withKeyString:keyStringToSet];
-//        
-//        NSData *encryptedData;
-//        NSString *encryptedKeyString;
-//        if ([encryptedDataDictionary.allKeys containsObject:@"encryptedData"]) {
-//            encryptedData=[encryptedDataDictionary valueForKey:@"encryptedData"];
-//            
-//            
-//            if ([encryptedDataDictionary.allKeys containsObject:@"keyString"]) {
-//                
-//                
-//                encryptedKeyString=[encryptedDataDictionary valueForKey:@"keyString"];
-//                
-//            }
-//        }
-//        
-//        
-//        if (encryptedData.length) {
-//            [self willChangeValueForKey:key];
-//            [self setPrimitiveValue:encryptedData forKey:key];
-//            [self didChangeValueForKey:key];
-//        }
-//        
-//        
-//        [self willAccessValueForKey:@"keyString"];
-//        if (![encryptedKeyString isEqualToString:self.keyString]) {
-//            [self didAccessValueForKey:@"keyString"];
-//            [self willChangeValueForKey:@"keyString"];
-//            [self setPrimitiveValue:encryptedKeyString forKey:@"keyString"];
-//            [self didChangeValueForKey:@"keyString"];
-//            
-//        }
-//        
-//        
-//        
-//        
-//        
-//        
-//    }
-//}
-//-(NSString *)notes{
-//    
-//    NSString *tempStr;
-//    [self willAccessValueForKey:@"tempNotes"];
-//    
-//    
-//    if (!self.tempNotes ||!self.tempNotes.length) {
-//        
-//        [self didAccessValueForKey:@"tempNotes"];
-//        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-//        
-//        
-//        [self willAccessValueForKey:@"notes"];
-//        
-//        
-//        NSData *primitiveData=[self primitiveValueForKey:@"notes"];
-//        [self didAccessValueForKey:@"notes"];
-//        
-//        if (!primitiveData ||!primitiveData.length ) {
-//            return nil;
-//        }
-//        [self willAccessValueForKey:@"keyString"];
-//        NSString *tmpKeyString=self.keyString;
-//        [self didAccessValueForKey:@"keyString"];
-//        
-//        NSData *strData=[appDelegate decryptDataToPlainDataUsingKeyEntityWithString:tmpKeyString encryptedData:primitiveData];
-//        
-//        tempStr=[appDelegate convertDataToString:strData];
-//        
-//        [self willChangeValueForKey:@"tempNotes"];
-//        
-//        self.tempNotes=tempStr;
-//        [self didChangeValueForKey:@"tempNotes"];
-//        
-//        
-//    }
-//    else 
-//    {
-//        tempStr=self.tempNotes;
-//        [self didAccessValueForKey:@"tempNotes"];
-//    }
-//    
-//    
-//    
-//    
-//    return tempStr;
-//    
-//    
-//    
-//    
-//    
-//    
-//}
-//-(void)setNotes:(NSString *)notes{
-//    
-//    [self willAccessValueForKey:@"keyString"];
-//    [self setStringToPrimitiveData:(NSString *)notes forKey:@"notes" keyString:self.keyString];
-//    [self didAccessValueForKey:@"keyString"];
-//    
-//    self.tempNotes=notes;
-//}
+@dynamic diagnoses;
+@dynamic client;
 
 @end

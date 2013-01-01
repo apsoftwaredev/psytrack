@@ -1,9 +1,9 @@
 //
 //  KeyEntity.m
-//  PsyTrack Clinician Tools
+//  PsyTrack
 //
-//  Created by Daniel Boice on 3/12/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "KeyEntity.h"
@@ -12,7 +12,8 @@
 @implementation KeyEntity
 
 @dynamic keyF;
-@dynamic dataF;
-@dynamic keyString;
 @dynamic keyDate;
+@dynamic keyString;
+@dynamic dataF;
+
 @end

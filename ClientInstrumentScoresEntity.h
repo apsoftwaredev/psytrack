@@ -2,21 +2,22 @@
 //  ClientInstrumentScoresEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 5/30/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class InstrumentEntity, InstrumentScoreEntity;
+@class ClientPresentationEntity, InstrumentEntity, InstrumentScoreEntity;
 
 @interface ClientInstrumentScoresEntity : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSManagedObject *clientPresentation;
 @property (nonatomic, retain) InstrumentEntity *instrument;
 @property (nonatomic, retain) NSSet *scores;
+@property (nonatomic, retain) ClientPresentationEntity *clientPresentation;
 @end
 
 @interface ClientInstrumentScoresEntity (CoreDataGeneratedAccessors)

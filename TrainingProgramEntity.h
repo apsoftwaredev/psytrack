@@ -2,29 +2,30 @@
 //  TrainingProgramEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/22/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ClinicianEntity, ExistingHoursEntity, LogEntity, TimeTrackEntity,SchoolEntity;
+@class ClinicianEntity, ExistingHoursEntity, LogEntity, SchoolEntity, TimeTrackEntity;
 
 @interface TrainingProgramEntity : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * doctorateLevel;
 @property (nonatomic, retain) NSString * trainingProgram;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSNumber * selectedByDefault;
+@property (nonatomic, retain) NSDate * endDate;
+@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * course;
 @property (nonatomic, retain) NSDate * startDate;
-@property (nonatomic, retain) NSDate * endDate;
-@property (nonatomic, retain) NSSet *timeTracks;
 @property (nonatomic, retain) ClinicianEntity *seminarInstructor;
+@property (nonatomic, retain) SchoolEntity *school;
+@property (nonatomic, retain) NSSet *timeTracks;
 @property (nonatomic, retain) NSSet *logs;
 @property (nonatomic, retain) NSSet *existingHours;
-@property (nonatomic, retain) SchoolEntity *school;
 @end
 
 @interface TrainingProgramEntity (CoreDataGeneratedAccessors)

@@ -2,22 +2,26 @@
 //  InterventionDeliveredEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/2/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "InterventionDeliveredEntity.h"
+#import "ClientPresentationEntity.h"
+#import "InterventionModelEntity.h"
 #import "InterventionTypeEntity.h"
 #import "InterventionTypeSubtypeEntity.h"
+#import "SupportActivityDeliveredEntity.h"
 #import "TimeEntity.h"
 
 
 @implementation InterventionDeliveredEntity
 
 @dynamic clientPresentations;
-@dynamic subtype;
+@dynamic relatedToIndirect;
 @dynamic interventionType;
-@dynamic time;
 @dynamic modelsUsed;
+@dynamic subtype;
+@dynamic time;
 
 @end

@@ -2,14 +2,14 @@
 //  SupportActivityTypeEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 7/10/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class SupportActivityDeliveredEntity;
+@class ExistingSupportActivityEntity, SupportActivityDeliveredEntity;
 
 @interface SupportActivityTypeEntity : NSManagedObject
 
@@ -27,8 +27,8 @@
 - (void)addSupportActivitiesDelivered:(NSSet *)values;
 - (void)removeSupportActivitiesDelivered:(NSSet *)values;
 
-- (void)addExistingSupportActivitiesObject:(NSManagedObject *)value;
-- (void)removeExistingSupportActivitiesObject:(NSManagedObject *)value;
+- (void)addExistingSupportActivitiesObject:(ExistingSupportActivityEntity *)value;
+- (void)removeExistingSupportActivitiesObject:(ExistingSupportActivityEntity *)value;
 - (void)addExistingSupportActivities:(NSSet *)values;
 - (void)removeExistingSupportActivities:(NSSet *)values;
 

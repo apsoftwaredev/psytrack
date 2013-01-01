@@ -2,21 +2,25 @@
 //  FeeEntity.m
 //  PsyTrack
 //
-//  Created by Daniel Boice on 11/22/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import "FeeEntity.h"
+#import "ClientEntity.h"
 #import "ConsultationEntity.h"
+#import "FeeTypeEntity.h"
 
 
 @implementation FeeEntity
 
 @dynamic amount;
-@dynamic feeName;
-@dynamic order;
 @dynamic dateCharged;
-@dynamic consultation;
+@dynamic order;
+@dynamic paid;
+@dynamic feeName;
+@dynamic client;
 @dynamic feeType;
+@dynamic consultation;
 
 @end

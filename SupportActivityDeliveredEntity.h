@@ -2,28 +2,34 @@
 //  SupportActivityDeliveredEntity.h
 //  PsyTrack
 //
-//  Created by Daniel Boice on 6/6/12.
-//  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
+//  Created by Daniel Boice on 1/1/13.
+//  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "ServiceParentEntity.h"
 
-@class TimeEntity;
+@class InterventionDeliveredEntity, SupportActivityClientEntity, SupportActivityTypeEntity, TimeEntity;
 
 @interface SupportActivityDeliveredEntity : ServiceParentEntity
 
-@property (nonatomic, retain) NSSet *clientPresentations;
-@property (nonatomic, retain) NSManagedObject *supportActivityType;
+@property (nonatomic, retain) NSSet *relatedToIntervention;
+@property (nonatomic, retain) NSSet *supportActivityClients;
 @property (nonatomic, retain) TimeEntity *time;
+@property (nonatomic, retain) SupportActivityTypeEntity *supportActivityType;
 @end
 
 @interface SupportActivityDeliveredEntity (CoreDataGeneratedAccessors)
 
-- (void)addClientPresentationsObject:(NSManagedObject *)value;
-- (void)removeClientPresentationsObject:(NSManagedObject *)value;
-- (void)addClientPresentations:(NSSet *)values;
-- (void)removeClientPresentations:(NSSet *)values;
+- (void)addRelatedToInterventionObject:(InterventionDeliveredEntity *)value;
+- (void)removeRelatedToInterventionObject:(InterventionDeliveredEntity *)value;
+- (void)addRelatedToIntervention:(NSSet *)values;
+- (void)removeRelatedToIntervention:(NSSet *)values;
+
+- (void)addSupportActivityClientsObject:(SupportActivityClientEntity *)value;
+- (void)removeSupportActivityClientsObject:(SupportActivityClientEntity *)value;
+- (void)addSupportActivityClients:(NSSet *)values;
+- (void)removeSupportActivityClients:(NSSet *)values;
 
 @end
