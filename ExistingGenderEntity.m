@@ -9,7 +9,7 @@
 #import "ExistingGenderEntity.h"
 #import "ExistingDemographicsEntity.h"
 #import "GenderEntity.h"
-
+#import "PTManagedObjectContext.h"
 
 @implementation ExistingGenderEntity
 
@@ -17,4 +17,14 @@
 @dynamic existingDemographics;
 @dynamic gender;
 
+
+-(BOOL)validateValue:(__autoreleasing id *)value forKey:(NSString *)key error:(NSError *__autoreleasing *)error
+{
+    if ( ![self.managedObjectContext isKindOfClass:[PTManagedObjectContext class]] ) {
+        return YES;
+    }
+    else {
+        return [super validateValue:value forKey:key error:error];
+    }
+}
 @end

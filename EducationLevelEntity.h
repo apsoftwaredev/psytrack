@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "PTManagedObjectContext.h"
 
 @class DemographicProfileEntity;
 
@@ -17,6 +18,8 @@
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSString * educationLevel;
 @property (nonatomic, retain) NSSet *demographics;
+
+@property (nonatomic, weak) NSString *clientCountStr;
 @end
 
 @interface EducationLevelEntity (CoreDataGeneratedAccessors)

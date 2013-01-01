@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "PTManagedObjectContext.h"
 
 @class AdditionalVariableEntity, ClientEntity, ClinicianEntity, CultureGroupEntity, DisabilityEntity, EducationLevelEntity, EthnicityEntity, GenderEntity, InterpersonalEntity, LanguageSpokenEntity, MigrationHistoryEntity, MilitaryServiceEntity, RaceEntity, SpiritualBeliefEntity;
 

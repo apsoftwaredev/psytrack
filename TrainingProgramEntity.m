@@ -30,4 +30,15 @@
 @dynamic logs;
 @dynamic existingHours;
 
+
+-(BOOL)validateValue:(__autoreleasing id *)value forKey:(NSString *)key error:(NSError *__autoreleasing *)error
+{
+    if ( ![self.managedObjectContext isKindOfClass:[PTManagedObjectContext class]] ) {
+        return YES;
+    }
+    else {
+        return [super validateValue:value forKey:key error:error];
+    }
+}
+
 @end

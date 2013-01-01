@@ -19,4 +19,38 @@
 @dynamic demographics;
 @dynamic existingRaces;
 
+@synthesize clientCount;
+
+-(int)clientCount{
+    
+    int returnInt=0;
+    
+    
+    NSMutableSet *clientSet=[self mutableSetValueForKeyPath:@"demographics.client"];
+    
+    if (clientSet) {
+        
+        
+        returnInt=clientSet.count;
+    }
+    
+    
+    
+    return returnInt;
+    
+    
+    
+    
+}
+
+-(BOOL)validateValue:(__autoreleasing id *)value forKey:(NSString *)key error:(NSError *__autoreleasing *)error
+{
+    if ( ![self.managedObjectContext isKindOfClass:[PTManagedObjectContext class]] ) {
+        return YES;
+    }
+    else {
+        return [super validateValue:value forKey:key error:error];
+    }
+}
+
 @end

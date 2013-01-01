@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "PTManagedObjectContext.h"
 
 @class AccomodationEntity, ClientGroupEntity, ClientPresentationEntity, DemographicProfileEntity, DiagnosisHistoryEntity, ExpertTestemonyEntity, FeeEntity, HospitalizationEntity, LogEntity, MedicationEntity, OtherReferralSourceEntity, PaymentEntity, PhoneEntity, ReferralEntity, SubstanceUseEntity, SupervisionFeedbackEntity, SupportActivityClientEntity, VitalsEntity;
 

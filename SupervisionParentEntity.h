@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "TimeTrackEntity.h"
+#import "PTManagedObjectContext.h"
 
 @class ClinicianEntity, SupervisionFeedbackEntity;
 

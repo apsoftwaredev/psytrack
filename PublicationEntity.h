@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "PTManagedObjectContext.h"
 
 @class ClinicianEntity, ExpertTestemonyEntity, PresentationEntity, PublicationTypeEntity;
 
 @interface PublicationEntity : NSManagedObject
 
-@property (nonatomic, retain) NSString * short;
+@property (nonatomic, retain) NSString * shortT;
 @property (nonatomic, retain) NSString * isbnDOI;
 @property (nonatomic, retain) NSString * address;
 @property (nonatomic, retain) NSDate * datePublished;

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "ServiceParentEntity.h"
+#import "PTManagedObjectContext.h"
 
 @class InterventionDeliveredEntity, SupportActivityClientEntity, SupportActivityTypeEntity, TimeEntity;
 

@@ -375,7 +375,7 @@
      [self.window setBackgroundColor:[UIColor colorWithPatternImage:backgroundPattern]];
     
     [self.window makeKeyAndVisible];
-    [self displayNotification:@"Configuring database settings for iCloud. One moment please..." forDuration:0.0 location:kPTTScreenLocationTop inView:self.window];
+    [self displayNotification:@"Configuring database settings for iCloud. One moment please..." forDuration:0.0 location:kPTTScreenLocationMiddle inView:self.window];
     displayConnectingTimer=[NSTimer scheduledTimerWithTimeInterval:0.5
                                                             target:self
                                                           selector:@selector(changeEstablishingConnectionMessage)
@@ -501,7 +501,7 @@
 
 
 -(void)changeEstablishingConnectionMessage{
-
+    secondsWaitingForICloud++;
     UIView *messageView=nil;
     for (UIView *view in self.window.subviews) {
         if (view.tag==645) {
@@ -520,27 +520,45 @@
                 NSString *labelText=(NSString *)label.text;
                 
                
-                if ([[label.text substringToIndex:11]isEqualToString:@"Configuring"]) {
+                if ([[label.text substringToIndex:11]isEqualToString:@"Configuring"] || [[label.text substringToIndex:10]isEqualToString:@"Attempting"]) {
                
              
-                NSString *message=@"Configuring database for iCloud. One moment please";
-                
+                    NSString *message=nil;
+                    if (secondsWaitingForICloud>13) {
+                        message=@"Attempting to set up database for iCloud. Sorry this is taking so long. Please stand by and I will continue working on it. It could take a few minutes if the response from iCloud is slow";
+                    }
+                    else{
+                        message=@"Configuring database for iCloud. One moment please";
+                    
+                    }
+                    
                 switch (labelText.length) {
                     case 50:
+                    case 186:
                         message=[message stringByAppendingString:@"."];
                         break;
                     case 51:
+                    case 187:
                         message=[message stringByAppendingString:@".."];
                         break;
                     case 52:
+                    case 188:
                         message=[message stringByAppendingString:@"..."];
                         break;
                     case 53:
+                    
                         message=[message substringToIndex:50];
                         break;
+                    case 189:
+                        message=[message substringToIndex:186];
+                        break;
+                    
+                    
                     default:
                         break;
                 }
+                
+                   
                 
                 label.text=message;
                 
@@ -859,9 +877,22 @@
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
 
     
-    if (alertView.tag==1) {
-        exit(0);
-    }    
+      
+
+   
+
+        switch (alertView.tag) {
+            case 38:
+            case 1:
+            {
+                 exit(0);
+            }
+                break;
+                    
+        
+    
+    }
+
 
 
 
@@ -871,7 +902,7 @@
 	NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
 	NSNumber * val = nil;
     
-	if (standardUserDefaults) 
+	if (standardUserDefaults)
 		val = [standardUserDefaults objectForKey:kPTiCloudPreference];
     
 	// TODO: / apparent Apple bug: if user hasn't opened Settings for this app yet (as if?!), then
@@ -5897,7 +5928,14 @@ return [self applicationDrugsDirectory].path;
             
             if (cloudURL) {
                 [[NSFileManager defaultManager] removeItemAtURL:cloudURL error:&removeError];
-                [self displayNotification:@"An unresolved error occured while setting up database.  Try restarting" forDuration:0 location:kPTTScreenLocationTop inView:self.window];
+               
+                
+               
+                
+                
+                
+                              
+                [self displayNotification:@"An unresolved error occured while setting up iCloud.  Try restarting and checking your internet connection. If it persists, consider disabling the app iCloud access or internet for a while in the settings and restarting. You can check http://www.apple.com/support/systemstatus/ for iCloud availability." forDuration:0 location:kPTTScreenLocationMiddle inView:self.window];
             
                 
             }else{
@@ -5963,7 +6001,6 @@ return [self applicationDrugsDirectory].path;
     
     return persistentStoreCoordinator__;
 }
-
 
 
 

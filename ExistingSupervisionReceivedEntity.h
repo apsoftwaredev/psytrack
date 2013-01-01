@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "ExistingSupervisionEntity.h"
+#import "PTManagedObjectContext.h"
 
 @class ExistingHoursEntity;
 

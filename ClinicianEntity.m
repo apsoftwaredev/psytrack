@@ -32,6 +32,7 @@
 #import "TimeTrackEntity.h"
 #import "TrainingProgramEntity.h"
 
+#import "PTTAppDelegate.h"
 
 @implementation ClinicianEntity
 
@@ -81,5 +82,120 @@
 @dynamic currentJobTitles;
 @dynamic existingHours;
 @dynamic teachingExperience;
+@synthesize combinedName;
+
+
+-(BOOL)validateValue:(__autoreleasing id *)value forKey:(NSString *)key error:(NSError *__autoreleasing *)error
+{
+    if ( ![self.managedObjectContext isKindOfClass:[PTManagedObjectContext class]] ) {
+        return YES;
+    }
+    else {
+        return [super validateValue:value forKey:key error:error];
+    }
+}
+
+
+
+-(void)awakeFromInsert{
+    
+    
+    
+    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ClinicianGroupEntity" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"addNewClinicians == %@", [NSNumber numberWithBool:YES]];
+    [fetchRequest setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if (fetchedObjects ) {
+        [self willAccessValueForKey:@"groups"];
+        NSMutableSet *groupsMutableSet=(NSMutableSet *)[self mutableSetValueForKey:@"groups"];
+        [self didAccessValueForKey:@"groups"];
+        
+        for (ClinicianGroupEntity *clinicianGroup in fetchedObjects) {
+            [self willChangeValueForKey:@"groups"];
+            [groupsMutableSet addObject:clinicianGroup];
+            [self didChangeValueForKey:@"groups"];
+            
+            
+        }
+        
+        
+        
+    }
+    
+    fetchRequest=nil;
+}
+
+-(NSString *)combinedName{
+    
+    
+    
+    combinedName=[NSString string];
+    
+    
+    
+    
+    
+    [self willAccessValueForKey:@"prefix"];
+    if (self.prefix.length) {
+        combinedName=[self.prefix stringByAppendingString:@" "];
+    }
+    [self didAccessValueForKey:@"prefix"];
+    
+    [self willAccessValueForKey:@"firstName"];
+    if (self.firstName.length) {
+        combinedName=[combinedName stringByAppendingString:self.firstName];
+    }
+    [self didAccessValueForKey:@"firstName"];
+    
+    [self willAccessValueForKey:@"middleName"];
+    if (self.middleName.length )
+    {
+        
+        NSString *middleInitial=[self.middleName substringToIndex:1];
+        
+        middleInitial=[middleInitial stringByAppendingString:@"."];
+        
+        
+        
+        combinedName=[combinedName stringByAppendingFormat:@" %@", middleInitial];
+        
+        
+    }
+    [self didAccessValueForKey:@"middleName"];
+    [self willAccessValueForKey:@"lastName"];
+    
+    if (self.lastName.length  && combinedName.length )
+    {
+        
+        
+        combinedName=[combinedName stringByAppendingFormat:@" %@",self.lastName];
+        
+    }
+    [self didAccessValueForKey:@"lastName"];
+    [self willAccessValueForKey:@"suffix"];
+    if (self.suffix.length  && combinedName.length) {
+        
+        combinedName=[combinedName stringByAppendingFormat:@", %@",self.suffix];
+        
+    }
+    [self didAccessValueForKey:@"suffix"];
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    return combinedName;
+    
+}
 
 @end

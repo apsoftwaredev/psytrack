@@ -110,6 +110,8 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
     NSTimer *displayConnectingTimer;
      BOOL resetDatabase;
     BOOL firstRun;
+    
+    int secondsWaitingForICloud;
 }
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;

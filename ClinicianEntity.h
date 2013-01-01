@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "PTManagedObjectContext.h"
+
 
 @class AwardEntity, CertificationEntity, ClinicianGroupEntity, ClinicianTypeEntity, DegreeEntity, DemographicProfileEntity, DiagnosisHistoryEntity, EmploymentEntity, ExistingHoursEntity, ExistingSupervisionGivenEntity, GrantEntity, JobTitleEntity, LicenseEntity, LogEntity, MedicationReviewEntity, MembershipEntity, PublicationEntity, ReferralEntity, SiteEntity, SpecialtyEntity, SupervisionParentEntity, TeachingExperienceEntity, TimeTrackEntity, TrainingProgramEntity;
 
@@ -59,6 +61,12 @@
 @property (nonatomic, retain) NSSet *currentJobTitles;
 @property (nonatomic, retain) NSSet *existingHours;
 @property (nonatomic, retain) TeachingExperienceEntity *teachingExperience;
+
+
+
+@property (nonatomic, strong)  NSString *combinedName;
+
+
 @end
 
 @interface ClinicianEntity (CoreDataGeneratedAccessors)

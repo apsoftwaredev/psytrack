@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "PTManagedObjectContext.h"
 
 @class BatteryEntity, ClientInstrumentScoresEntity, ExistingInstrumentEntity, InstrumentLogEntity, InstrumentPublisherEntity, InstrumentScoreNameEntity, InstrumentTypeEntity;
 

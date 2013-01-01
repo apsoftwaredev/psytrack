@@ -18,4 +18,36 @@
 @dynamic existingGenders;
 @dynamic demographics;
 
+@synthesize clientCountStr;
+
+
+-(NSString *)clientCountStr{
+    
+    int returnInt=0;
+    
+    
+    NSMutableSet *clientSet=[self mutableSetValueForKeyPath:@"demographics.client"];
+    
+    
+    returnInt=clientSet.count;
+    
+    
+    return [NSString stringWithFormat:@"%i",returnInt];
+    
+    
+    
+    
+}
+
+
+-(BOOL)validateValue:(__autoreleasing id *)value forKey:(NSString *)key error:(NSError *__autoreleasing *)error
+{
+    if ( ![self.managedObjectContext isKindOfClass:[PTManagedObjectContext class]] ) {
+        return YES;
+    }
+    else {
+        return [super validateValue:value forKey:key error:error];
+    }
+}
+
 @end
