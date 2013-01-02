@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class DiagnosisHistoryEntity, DisorderEntity;
 
-@interface DisorderSpecifierEntity : NSManagedObject
+@interface DisorderSpecifierEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * specifier;

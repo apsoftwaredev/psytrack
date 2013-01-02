@@ -20,6 +20,10 @@
 #import <UIKit/UIKit.h>
 #import "LCYLockScreenViewController.h"
 #import "ColorSwitcher.h"
+#import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 #define addSmtricStr @"iEn8ioesfec3"
 
@@ -47,6 +51,7 @@ static NSInteger const kPTTScreenLocationMiddle = 2;
 static NSInteger const kPTTScreenLocationLeft = 3;
 static NSInteger const kPTTScreenLocationRight = 4;
 static NSInteger const kPTTScreenLocationBottom = 5;
+static NSInteger const kPTTMaximumSaveAttempts = 10;
 
 static NSString * const kPTTAddressBookSourceIdentifier=@"address_book_source_identifier";
 static NSString * const kPTTAddressBookGroupIdentifier=@"address_book_group_identifier";
@@ -57,6 +62,7 @@ static NSString * const kPTCurrentKeyDictionary=@"current_key_dictonary";
 static NSString * const kPTCurrentKeyDate=@"current_key_date";
 static NSString * const kPTiCloudPreference=@"icloud_preference";
 static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_number";
+
 
 
 /****************************************************************************************/
@@ -119,7 +125,7 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
 
 - (void)customizeGlobalTheme;
 
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) PTManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 

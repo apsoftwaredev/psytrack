@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClinicianEntity, LogEntity, OtherReferralSourceEntity;
 
-@interface GrantEntity : NSManagedObject
+@interface GrantEntity : PTManagedObject
 
 @property (nonatomic, retain) NSDate * submissionDeadline;
 @property (nonatomic, retain) NSNumber * amount;

@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class CertificationEntity;
 
-@interface CertificationNameEntity : NSManagedObject
+@interface CertificationNameEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * certName;

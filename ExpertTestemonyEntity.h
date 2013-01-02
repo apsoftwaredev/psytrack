@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClientEntity, LogEntity, PublicationEntity;
 
-@interface ExpertTestemonyEntity : NSManagedObject
+@interface ExpertTestemonyEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * plantifDefendant;
 @property (nonatomic, retain) NSString * caseName;

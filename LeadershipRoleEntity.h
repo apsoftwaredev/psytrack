@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
 
 
-@interface LeadershipRoleEntity : NSManagedObject
+
+
+@interface LeadershipRoleEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * impact;
 @property (nonatomic, retain) NSString * theoreticalApproach;

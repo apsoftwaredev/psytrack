@@ -222,7 +222,6 @@
 		E71EAD8115D88E5100204389 /* TeachingExperienceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E71EAD7F15D88E5100204389 /* TeachingExperienceVC.m */; };
 		E71EAD8215D88E5100204389 /* TeachingExperienceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71EAD8015D88E5100204389 /* TeachingExperienceVC.xib */; };
 		E71F250E1692964E004D6753 /* PTManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = E71F250D1692964E004D6753 /* PTManagedObjectContext.m */; };
-		E7283EE916905219005D8647 /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E7283EE816905219005D8647 /* psyTrack.sqlite */; };
 		E7294C9B1604C1AB00C153CE /* DemographicSexCounts.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294C9A1604C1AB00C153CE /* DemographicSexCounts.m */; };
 		E7294C9E1604C48500C153CE /* DemographicSex.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294C9D1604C48400C153CE /* DemographicSex.m */; };
 		E7294CA11604C9FB00C153CE /* DemographicSexualOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294CA01604C9FB00C153CE /* DemographicSexualOrientation.m */; };
@@ -426,6 +425,7 @@
 		E7619875158946B100C5BB8F /* ClientGroupsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7619873158946B100C5BB8F /* ClientGroupsViewController.xib */; };
 		E76984E115869C2C00D760A6 /* ipad-background-blue-plain-small.png in Resources */ = {isa = PBXBuildFile; fileRef = E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */; };
 		E777EF301693A16B000C51E9 /* DrugProductEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E777EF2F1693A16B000C51E9 /* DrugProductEntity.m */; };
+		E777EF361693AEAF000C51E9 /* PTManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E777EF351693AEAE000C51E9 /* PTManagedObject.m */; };
 		E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */; };
 		E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E78A8D1A1531EDF10099FE5B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */; };
@@ -501,7 +501,6 @@
 		E7C02DC315B6003E0072F97C /* MonthlyPracticumLogGenerateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DC115B6003C0072F97C /* MonthlyPracticumLogGenerateViewController.m */; };
 		E7C02DC415B6003E0072F97C /* MonthlyPracticumLogGenerateVC_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7C02DC215B6003D0072F97C /* MonthlyPracticumLogGenerateVC_iPad.xib */; };
 		E7C02DC615B61CBC0072F97C /* MonthlyPracticumLogGenerateVC_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7C02DC515B61CBB0072F97C /* MonthlyPracticumLogGenerateVC_iPhone.xib */; };
-		E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C0749E150E60B4009C5498 /* KeyEntity.m */; };
 		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
 		E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */; };
 		E7C6871D15D613C600637BCE /* CoursesTakenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C6871B15D613C600637BCE /* CoursesTakenViewController.m */; };
@@ -924,7 +923,6 @@
 		E71EAD8015D88E5100204389 /* TeachingExperienceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeachingExperienceVC.xib; sourceTree = "<group>"; };
 		E71F250C1692964E004D6753 /* PTManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTManagedObjectContext.h; sourceTree = "<group>"; };
 		E71F250D1692964E004D6753 /* PTManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTManagedObjectContext.m; sourceTree = "<group>"; };
-		E7283EE816905219005D8647 /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = psyTrack.sqlite; sourceTree = "<group>"; };
 		E7294C991604C1AB00C153CE /* DemographicSexCounts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicSexCounts.h; sourceTree = "<group>"; };
 		E7294C9A1604C1AB00C153CE /* DemographicSexCounts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicSexCounts.m; sourceTree = "<group>"; };
 		E7294C9C1604C48400C153CE /* DemographicSex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicSex.h; sourceTree = "<group>"; };
@@ -1319,6 +1317,8 @@
 		E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-background-blue-plain-small.png"; sourceTree = "<group>"; };
 		E777EF2E1693A16B000C51E9 /* DrugProductEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugProductEntity.h; sourceTree = "<group>"; };
 		E777EF2F1693A16B000C51E9 /* DrugProductEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugProductEntity.m; sourceTree = "<group>"; };
+		E777EF341693AEAE000C51E9 /* PTManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTManagedObject.h; sourceTree = "<group>"; };
+		E777EF351693AEAE000C51E9 /* PTManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTManagedObject.m; sourceTree = "<group>"; };
 		E78480C41518C2E200F48EA3 /* EncryptedSCSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCSelectionCell.h; sourceTree = "<group>"; };
 		E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCSelectionCell.m; sourceTree = "<group>"; };
 		E78A8D191531EDF10099FE5B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -1405,8 +1405,6 @@
 		E7C02DC115B6003C0072F97C /* MonthlyPracticumLogGenerateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MonthlyPracticumLogGenerateViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7C02DC215B6003D0072F97C /* MonthlyPracticumLogGenerateVC_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogGenerateVC_iPad.xib; sourceTree = "<group>"; };
 		E7C02DC515B61CBB0072F97C /* MonthlyPracticumLogGenerateVC_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogGenerateVC_iPhone.xib; sourceTree = "<group>"; };
-		E7C0749D150E60B4009C5498 /* KeyEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyEntity.h; sourceTree = "<group>"; };
-		E7C0749E150E60B4009C5498 /* KeyEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyEntity.m; sourceTree = "<group>"; };
 		E7C074A0150EE4DE009C5498 /* EncryptedSCDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCDateCell.h; sourceTree = "<group>"; };
 		E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCDateCell.m; sourceTree = "<group>"; };
 		E7C074A3150EE514009C5498 /* EncryptedSCTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCTextViewCell.h; sourceTree = "<group>"; };
@@ -1917,9 +1915,10 @@
 		37F7CEC615005E3400AD2C3A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E777EF341693AEAE000C51E9 /* PTManagedObject.h */,
+				E777EF351693AEAE000C51E9 /* PTManagedObject.m */,
 				E7B49C1A1607E53A0073AA30 /* NSManagedObject Subclasses */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
-				E7283EE816905219005D8647 /* psyTrack.sqlite */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
 				E71F250C1692964E004D6753 /* PTManagedObjectContext.h */,
 				E71F250D1692964E004D6753 /* PTManagedObjectContext.m */,
@@ -2086,8 +2085,6 @@
 			children = (
 				E75F7789151CEEC6002B10AE /* Custom Cells For Encryption */,
 				E75F7788151CED0C002B10AE /* Encrypted Model Subclasses */,
-				E7C0749D150E60B4009C5498 /* KeyEntity.h */,
-				E7C0749E150E60B4009C5498 /* KeyEntity.m */,
 				376798141500696800D0639D /* apns.p12 */,
 				376798151500696800D0639D /* ia.p12 */,
 				37BF64D414F19FD70065C607 /* Encryption Helper */,
@@ -3240,7 +3237,6 @@
 				E7388B691652B7E600E04639 /* ClientPresentationGenerateVC.xib in Resources */,
 				E7B5D97F168D31BB000CA5B5 /* ClientPresentationGenerateVC_iPhone.xib in Resources */,
 				E7B5D994168DB670000CA5B5 /* Default.png in Resources */,
-				E7283EE916905219005D8647 /* psyTrack.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3315,7 +3311,6 @@
 				37F7D001150063CF00AD2C3A /* TabFile.m in Sources */,
 				E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */,
 				E7516B7B15085A23005B798A /* PTABGroup.m in Sources */,
-				E7C0749F150E60B4009C5498 /* KeyEntity.m in Sources */,
 				E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */,
 				E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */,
 				E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */,
@@ -3583,6 +3578,7 @@
 				E7315CB016937F9800964CE7 /* ClientBatteryNotesEntity.m in Sources */,
 				E7315CB316937F9800964CE7 /* ExistingGenderEntity.m in Sources */,
 				E777EF301693A16B000C51E9 /* DrugProductEntity.m in Sources */,
+				E777EF361693AEAF000C51E9 /* PTManagedObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

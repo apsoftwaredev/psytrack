@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class LogEntity;
 
-@interface CommunityServiceEntity : NSManagedObject
+@interface CommunityServiceEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSDate * dateStarted;

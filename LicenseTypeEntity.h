@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
 
 
-@interface LicenseTypeEntity : NSManagedObject
+
+
+@interface LicenseTypeEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * licenseType;
 @property (nonatomic, retain) NSNumber * order;

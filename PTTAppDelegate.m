@@ -2843,7 +2843,63 @@ duration:(NSTimeInterval)1.0];
     [self saveContext];
 }
 
-- (void)saveContext
+-(void)saveContext
+{
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    if (managedObjectContext != nil &&persistentStoreCoordinator__!=nil)
+    {
+    [managedObjectContext__ performBlock:^{
+        if ( managedObjectContext__.hasChanges ) {
+            NSUInteger attempts = 0;
+            NSError *error = nil;
+            while ( ![managedObjectContext__ save:&error] && ++attempts <= kPTTMaximumSaveAttempts ) {
+                [self repairForSaveError:error];
+            }
+            
+            if ( attempts > kPTTMaximumSaveAttempts ) {
+                NSString *question = NSLocalizedString(@"A problem arose. Could not save changes.", @"Save fail \n");
+                NSString *info = NSLocalizedString(@"You should quit as soon as possible, "
+                                                   @"because continuing could cause other problems.", @"");
+                [self displayNotification:[question stringByAppendingFormat:@"\n %@",info]  forDuration:7.0 location:kPTTScreenLocationMiddle inView:self.window];
+            }
+        }
+    }];
+    }
+}
+
+
+-(void)repairForSaveError:(NSError *)error
+{
+    [managedObjectContext__ processPendingChanges];
+    [managedObjectContext__.undoManager disableUndoRegistration];
+    
+    if ( error.code != NSValidationMultipleErrorsError ) {
+        NSObject *object = [error.userInfo objectForKey:@"NSValidationErrorObject"];
+        
+        if ([object.class isSubclassOfClass:[PTManagedObject class]]){
+        
+            PTManagedObject *ptManagedObject=(PTManagedObject*)object;
+            [ptManagedObject repairForError:error];
+        
+        
+        
+        }
+        
+    }
+    else {
+        NSArray *detailedErrors = [[error userInfo] objectForKey:NSDetailedErrorsKey];
+        for ( NSError *error in detailedErrors ) {
+            NSDictionary *detailedInfo = error.userInfo;
+            id object = [detailedInfo objectForKey:@"NSValidationErrorObject"];
+            [object repairForError:error];
+        }
+    }
+    
+    [managedObjectContext__ processPendingChanges];
+    [managedObjectContext__.undoManager enableUndoRegistration];
+}
+
+- (void)save
 {
     NSError *error = nil;
     NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
@@ -5752,7 +5808,7 @@ return [self applicationDrugsDirectory].path;
  Returns the managed object context for the application.
  If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
  */
-- (NSManagedObjectContext *)managedObjectContext {
+- (PTManagedObjectContext *)managedObjectContext {
 	
     if (managedObjectContext__ != nil) {
         return managedObjectContext__;
@@ -5764,7 +5820,7 @@ return [self applicationDrugsDirectory].path;
         // Make life easier by adopting the new NSManagedObjectContext concurrency API
         // the NSMainQueueConcurrencyType is good for interacting with views and controllers since
         // they are all bound to the main thread anyway
-        NSManagedObjectContext* moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        PTManagedObjectContext* moc = [[PTManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
         
         [moc performBlockAndWait:^{
             // even the post initialization needs to be done within the Block
@@ -5856,25 +5912,25 @@ return [self applicationDrugsDirectory].path;
 //       
         // If the expected store doesn't exist, copy the default store.
         
-        if (![fileManager fileExistsAtPath:storePath]) {
-            NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
-            if (defaultStorePath&&[fileManager fileExistsAtPath:defaultStorePath]) {
-                [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
-                NSString *statusMessage=[self resetDefaultLockKeychainSettingsWithReset:YES];
-                if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."]) {
-                    NSString *displaymessage=[NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
-                    [self displayNotification:displaymessage];
-                    resetDatabase=YES;
-                }
-                else{
-                
-                    firstRun=YES;
-                
-                }
-                
-                
-            }
-        }
+//        if (![fileManager fileExistsAtPath:storePath]) {
+//            NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
+//            if (defaultStorePath&&[fileManager fileExistsAtPath:defaultStorePath]) {
+//                [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
+//                NSString *statusMessage=[self resetDefaultLockKeychainSettingsWithReset:YES];
+//                if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."]) {
+//                    NSString *displaymessage=[NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
+//                    [self displayNotification:displaymessage];
+//                    resetDatabase=YES;
+//                }
+//                else{
+//                
+//                    firstRun=YES;
+//                
+//                }
+//                
+//                
+//            }
+//        }
         NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
         NSURL *cloudURL =nil;
         // this needs to match the entitlements and provisioning profile

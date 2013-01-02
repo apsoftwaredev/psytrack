@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class LogEntity;
 
-@interface OtherActivityEntity : NSManagedObject
+@interface OtherActivityEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * activity;
 @property (nonatomic, retain) NSString * dates;

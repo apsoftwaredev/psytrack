@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ConferenceEntity, ConsultationEntity, ExpertTestemonyEntity, LeadershipRoleEntity;
 
-@interface OrganizationEntity : NSManagedObject
+@interface OrganizationEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * notes;
 @property (nonatomic, retain) NSNumber * size;

@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClinicianEntity;
 
-@interface EmploymentEntity : NSManagedObject
+@interface EmploymentEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSDate * dateStarted;

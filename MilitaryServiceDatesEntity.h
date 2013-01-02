@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
 
 
-@interface MilitaryServiceDatesEntity : NSManagedObject
+
+
+@interface MilitaryServiceDatesEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * officerOrEnlisted;
 @property (nonatomic, retain) NSDate * dateDischarged;

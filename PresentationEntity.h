@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ConferenceEntity, LogEntity, PresentationDeliveredEntity, PublicationEntity;
 
-@interface PresentationEntity : NSManagedObject
+@interface PresentationEntity : PTManagedObject
 
 @property (nonatomic, retain) NSDate * length;
 @property (nonatomic, retain) NSString * title;

@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ExpertTestemonyEntity;
 
-@interface ExpertTestemonyAppearanceEntity : NSManagedObject
+@interface ExpertTestemonyAppearanceEntity : PTManagedObject
 
 @property (nonatomic, retain) NSDate * dateAppeared;
 @property (nonatomic, retain) NSNumber * order;

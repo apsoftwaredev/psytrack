@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class AdditionalSymptomEntity, DiagnosisHistoryEntity, MedicationReviewEntity;
 
-@interface FrequencyEntity : NSManagedObject
+@interface FrequencyEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * frequencyUnit;
 @property (nonatomic, retain) NSNumber * order;

@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class AssessmentEntity, BreakTimeEntity, InterventionDeliveredEntity, SupervisionGivenEntity, SupervisionReceivedEntity, SupportActivityDeliveredEntity;
 
-@interface TimeEntity : NSManagedObject
+@interface TimeEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * stopwatchRunning;
 @property (nonatomic, retain) NSNumber * stopwatchRestartAfterStop;

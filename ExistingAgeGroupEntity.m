@@ -27,4 +27,17 @@
     }
 }
 
++(BOOL)deletesInvalidObjectsAfterFailedSave
+{
+    return NO;
+}
+
+-(void)repairForError:(NSError *)error
+{
+    if ( [self.class deletesInvalidObjectsAfterFailedSave] ) {
+        [self.managedObjectContext deleteObject:self];
+    }
+}
+
+
 @end

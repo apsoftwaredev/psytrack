@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClientEntity, SupervisionParentEntity;
 
-@interface SupervisionFeedbackEntity : NSManagedObject
+@interface SupervisionFeedbackEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * feedback;

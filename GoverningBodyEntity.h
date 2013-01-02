@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class CountryEntity, LicenseEntity;
 
-@interface GoverningBodyEntity : NSManagedObject
+@interface GoverningBodyEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * body;
 @property (nonatomic, retain) CountryEntity *country;

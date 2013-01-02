@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
 
 
-@interface CountryEntity : NSManagedObject
+
+
+@interface CountryEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * country;
 @property (nonatomic, retain) NSString * code;

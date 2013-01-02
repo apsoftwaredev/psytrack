@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class InstrumentEntity, InstrumentScoreEntity;
 
-@interface InstrumentScoreNameEntity : NSManagedObject
+@interface InstrumentScoreNameEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * abbreviatedName;
 @property (nonatomic, retain) NSString * scoreName;

@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class DemographicProfileEntity, LanguageEntity;
 
-@interface LanguageSpokenEntity : NSManagedObject
+@interface LanguageSpokenEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * onlyLanguage;
 @property (nonatomic, retain) NSNumber * order;

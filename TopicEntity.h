@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ContinuingEducationEntity, PresentationEntity;
 
-@interface TopicEntity : NSManagedObject
+@interface TopicEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * order;
 @property (nonatomic, retain) NSString * topic;

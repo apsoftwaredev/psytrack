@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class PublicationEntity;
 
-@interface SubjectEntity : NSManagedObject
+@interface SubjectEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * subject;
 @property (nonatomic, retain) NSNumber * order;

@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
 
 
-@interface LanguageEntity : NSManagedObject
+
+
+@interface LanguageEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * language;
 @property (nonatomic, retain) NSNumber * order;

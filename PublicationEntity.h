@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClinicianEntity, ExpertTestemonyEntity, PresentationEntity, PublicationTypeEntity;
 
-@interface PublicationEntity : NSManagedObject
+@interface PublicationEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * shortT;
 @property (nonatomic, retain) NSString * isbnDOI;

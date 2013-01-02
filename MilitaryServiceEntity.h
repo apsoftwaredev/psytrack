@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class DemographicProfileEntity, MilitaryServiceDatesEntity;
 
-@interface MilitaryServiceEntity : NSManagedObject
+@interface MilitaryServiceEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * awards;
 @property (nonatomic, retain) NSNumber * serviceDisability;

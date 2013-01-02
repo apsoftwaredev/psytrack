@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClientEntity, ClinicianEntity, ConsultationEntity, OtherReferralSourceEntity;
 
-@interface ReferralEntity : NSManagedObject
+@interface ReferralEntity : PTManagedObject
 
 @property (nonatomic, retain) NSDate * dateReferred;
 @property (nonatomic, retain) NSNumber * order;

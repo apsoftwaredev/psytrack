@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class BreakTimeReasonEntity, TimeEntity;
 
-@interface BreakTimeEntity : NSManagedObject
+@interface BreakTimeEntity : PTManagedObject
 
 @property (nonatomic, retain) NSDate * endTime;
 @property (nonatomic, retain) NSNumber * order;

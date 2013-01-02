@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClinicianEntity, LogEntity, PublicationEntity, SchoolEntity, TopicEntity;
 
-@interface TeachingExperienceEntity : NSManagedObject
+@interface TeachingExperienceEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * subject;
 @property (nonatomic, retain) NSNumber * credits;

@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClinicianEntity, SupervisionTypeEntity, SupervisionTypeSubtypeEntity;
 
-@interface ExistingSupervisionEntity : NSManagedObject
+@interface ExistingSupervisionEntity : PTManagedObject
 
 @property (nonatomic, retain) NSDate * hours;
 @property (nonatomic, retain) NSString * notes;

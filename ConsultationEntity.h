@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class FeeEntity, LogEntity, OrganizationEntity, PaymentEntity, ReferralEntity;
 
-@interface ConsultationEntity : NSManagedObject
+@interface ConsultationEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * proBono;
 @property (nonatomic, retain) NSDate * hours;

@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClientEntity, FrequencyEntity, SubstanceNameEntity;
 
-@interface SubstanceUseEntity : NSManagedObject
+@interface SubstanceUseEntity : PTManagedObject
 
 @property (nonatomic, retain) NSDate * lastUse;
 @property (nonatomic, retain) NSNumber * currentTreatmentIssue;

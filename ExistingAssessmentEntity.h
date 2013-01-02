@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class AssessmentTypeEntity, ExistingBatteryEntity, ExistingDemographicsEntity, ExistingHoursEntity, ExistingInstrumentEntity;
 
-@interface ExistingAssessmentEntity : NSManagedObject
+@interface ExistingAssessmentEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * monthlyLogNotes;
 @property (nonatomic, retain) NSString * notes;

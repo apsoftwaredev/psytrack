@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class AdditionalVariableNameEntity, AdditionalVariableValueEntity, ClientPresentationEntity, DemographicProfileEntity;
 
-@interface AdditionalVariableEntity : NSManagedObject
+@interface AdditionalVariableEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * scale;
 @property (nonatomic, retain) NSNumber * sliderOne;

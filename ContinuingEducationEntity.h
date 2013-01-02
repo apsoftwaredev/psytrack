@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ContinuingEducationProviderEntity, ContinuingEducationTypeEntity;
 
-@interface ContinuingEducationEntity : NSManagedObject
+@interface ContinuingEducationEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * cost;
 @property (nonatomic, retain) NSString * notes;

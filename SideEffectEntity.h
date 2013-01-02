@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class MedicationReviewEntity;
 
-@interface SideEffectEntity : NSManagedObject
+@interface SideEffectEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * effect;
 @property (nonatomic, retain) NSSet *medicationReview;

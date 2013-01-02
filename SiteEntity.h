@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClinicianEntity, ExistingHoursEntity, TimeTrackEntity;
 
-@interface SiteEntity : NSManagedObject
+@interface SiteEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * siteName;
 @property (nonatomic, retain) NSString * location;

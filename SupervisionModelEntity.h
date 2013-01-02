@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class SupervisionParentEntity;
 
-@interface SupervisionModelEntity : NSManagedObject
+@interface SupervisionModelEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * modelName;
 @property (nonatomic, retain) NSNumber * evidenceBased;

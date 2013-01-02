@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class DegreeEntity;
 
-@interface DegreeSubjectEntity : NSManagedObject
+@interface DegreeSubjectEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * subject;
 @property (nonatomic, retain) NSNumber * order;

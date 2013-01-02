@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class BatteryEntity, ClientInstrumentScoresEntity, ExistingInstrumentEntity, InstrumentLogEntity, InstrumentPublisherEntity, InstrumentScoreNameEntity, InstrumentTypeEntity;
 
-@interface InstrumentEntity : NSManagedObject
+@interface InstrumentEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * numberReportsWritten;
 @property (nonatomic, retain) NSNumber * numberScored;

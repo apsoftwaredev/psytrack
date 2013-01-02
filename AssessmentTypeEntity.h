@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class AssessmentEntity, ExistingAssessmentEntity;
 
-@interface AssessmentTypeEntity : NSManagedObject
+@interface AssessmentTypeEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * notes;

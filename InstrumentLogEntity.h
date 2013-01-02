@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class BatteryEntity, InstrumentEntity;
 
-@interface InstrumentLogEntity : NSManagedObject
+@interface InstrumentLogEntity : PTManagedObject
 
 @property (nonatomic, retain) NSDate * logDate;
 @property (nonatomic, retain) NSString * notes;

@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class InstrumentEntity;
 
-@interface InstrumentTypeEntity : NSManagedObject
+@interface InstrumentTypeEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * instrumentType;
 @property (nonatomic, retain) NSNumber * order;

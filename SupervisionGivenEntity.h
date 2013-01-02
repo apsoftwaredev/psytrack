@@ -10,6 +10,9 @@
 #import <CoreData/CoreData.h>
 #import "SupervisionParentEntity.h"
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class SupervisionTypeEntity, SupervisionTypeSubtypeEntity, TimeEntity;
 

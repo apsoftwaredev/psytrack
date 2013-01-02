@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClientEntity;
 
-@interface PhoneEntity : NSManagedObject
+@interface PhoneEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * phoneNumber;
 @property (nonatomic, retain) NSString * phoneName;

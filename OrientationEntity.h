@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class CommunityServiceEntity, OrientationHistoryEntity;
 
-@interface OrientationEntity : NSManagedObject
+@interface OrientationEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * orientation;
 @property (nonatomic, retain) NSNumber * order;

@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClientEntity, ConsultationEntity, FeeTypeEntity;
 
-@interface FeeEntity : NSManagedObject
+@interface FeeEntity : PTManagedObject
 
 @property (nonatomic, retain) NSDecimalNumber * amount;
 @property (nonatomic, retain) NSDate * dateCharged;

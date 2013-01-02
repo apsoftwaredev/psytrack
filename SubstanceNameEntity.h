@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class SubstanceClassEntity;
 
-@interface SubstanceNameEntity : NSManagedObject
+@interface SubstanceNameEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * substanceName;
 @property (nonatomic, retain) NSNumber * order;

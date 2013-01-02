@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClientEntity, OtherReferralSourceTypeEntity, ReferralEntity;
 
-@interface OtherReferralSourceEntity : NSManagedObject
+@interface OtherReferralSourceEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSString * notes;

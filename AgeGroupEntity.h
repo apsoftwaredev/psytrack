@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
 
 
-@interface AgeGroupEntity : NSManagedObject
+
+
+@interface AgeGroupEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * ageGroup;
 @property (nonatomic, retain) NSNumber * order;

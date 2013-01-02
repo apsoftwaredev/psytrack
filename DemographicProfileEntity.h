@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class AdditionalVariableEntity, ClientEntity, ClinicianEntity, CultureGroupEntity, DisabilityEntity, EducationLevelEntity, EthnicityEntity, GenderEntity, InterpersonalEntity, LanguageSpokenEntity, MigrationHistoryEntity, MilitaryServiceEntity, RaceEntity, SpiritualBeliefEntity;
 
-@interface DemographicProfileEntity : NSManagedObject
+@interface DemographicProfileEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * vision;
 @property (nonatomic, retain) NSString * sex;

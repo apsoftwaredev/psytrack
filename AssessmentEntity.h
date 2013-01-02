@@ -10,6 +10,9 @@
 #import <CoreData/CoreData.h>
 #import "ServiceParentEntity.h"
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class AssessmentTypeEntity, ClientPresentationEntity, TimeEntity;
 

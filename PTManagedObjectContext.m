@@ -7,6 +7,9 @@
 //
 
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @implementation PTManagedObjectContext
 

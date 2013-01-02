@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClientPresentationEntity, SupportActivityClientEntity;
 
-@interface RateEntity : NSManagedObject
+@interface RateEntity : PTManagedObject
 
 @property (nonatomic, retain) NSDecimalNumber * hourlyRate;
 @property (nonatomic, retain) NSNumber * order;

@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClientEntity;
 
-@interface ClientGroupEntity : NSManagedObject
+@interface ClientGroupEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * groupName;
 @property (nonatomic, retain) NSNumber * addNewClients;

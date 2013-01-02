@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class SubstanceUseEntity;
 
-@interface SubstanceUseLogEntity : NSManagedObject
+@interface SubstanceUseLogEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * typicalDose;
 @property (nonatomic, retain) NSNumber * order;

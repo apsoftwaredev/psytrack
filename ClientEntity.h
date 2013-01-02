@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class AccomodationEntity, ClientGroupEntity, ClientPresentationEntity, DemographicProfileEntity, DiagnosisHistoryEntity, ExpertTestemonyEntity, FeeEntity, HospitalizationEntity, LogEntity, MedicationEntity, OtherReferralSourceEntity, PaymentEntity, PhoneEntity, ReferralEntity, SubstanceUseEntity, SupervisionFeedbackEntity, SupportActivityClientEntity, VitalsEntity;
 
-@interface ClientEntity : NSManagedObject
+@interface ClientEntity : PTManagedObject
 
 @property (nonatomic, retain) NSDate * dateOfBirth;
 @property (nonatomic, retain) NSString * lastName;

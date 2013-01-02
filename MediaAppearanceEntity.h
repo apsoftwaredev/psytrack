@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
 
-@interface MediaAppearanceEntity : NSManagedObject
+
+
+@interface MediaAppearanceEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * topics;
 @property (nonatomic, retain) NSString * audience;

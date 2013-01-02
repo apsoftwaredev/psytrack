@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class DemographicProfileEntity, RelationshipEntity;
 
-@interface InterpersonalEntity : NSManagedObject
+@interface InterpersonalEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * contactFrequencyUnitLength;
 @property (nonatomic, retain) NSString * notes;

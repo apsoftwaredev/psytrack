@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClientEntity, SupportActivityDeliveredEntity;
 
-@interface SupportActivityClientEntity : NSManagedObject
+@interface SupportActivityClientEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * proBono;
 @property (nonatomic, retain) NSString * notes;

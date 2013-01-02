@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ExistingDemographicsEntity, ExistingHoursEntity, InterventionModelEntity, InterventionTypeEntity, InterventionTypeSubtypeEntity;
 
-@interface ExistingInterventionEntity : NSManagedObject
+@interface ExistingInterventionEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * monthlyLogNotes;
 @property (nonatomic, retain) NSString * notes;

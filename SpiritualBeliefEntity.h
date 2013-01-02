@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class DemographicProfileEntity;
 
-@interface SpiritualBeliefEntity : NSManagedObject
+@interface SpiritualBeliefEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * beliefName;
 @property (nonatomic, retain) NSNumber * order;

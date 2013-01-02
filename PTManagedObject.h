@@ -10,4 +10,9 @@
 
 @interface PTManagedObject : NSManagedObject
 
+
++(BOOL)deletesInvalidObjectsAfterFailedSave;
+
+
+-(void)repairForError:(NSError *)error;
 @end

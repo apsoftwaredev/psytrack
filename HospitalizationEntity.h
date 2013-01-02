@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClientEntity;
 
-@interface HospitalizationEntity : NSManagedObject
+@interface HospitalizationEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * voluntary;
 @property (nonatomic, retain) NSDate * dateDischarged;

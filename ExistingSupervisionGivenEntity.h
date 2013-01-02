@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ExistingHoursEntity;
 
-@interface ExistingSupervisionGivenEntity : NSManagedObject
+@interface ExistingSupervisionGivenEntity : PTManagedObject
 
 @property (nonatomic, retain) ExistingHoursEntity *existingHours;
 

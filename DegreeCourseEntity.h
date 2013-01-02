@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ClinicianEntity, DegreeEntity, LogEntity, SchoolEntity;
 
-@interface DegreeCourseEntity : NSManagedObject
+@interface DegreeCourseEntity : PTManagedObject
 
 @property (nonatomic, retain) NSDate * endDate;
 @property (nonatomic, retain) NSDate * startDate;

@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class AdditionalSymptomNameEntity, DiagnosisHistoryEntity;
 
-@interface DiagnosisLogEntity : NSManagedObject
+@interface DiagnosisLogEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * frequency;
 @property (nonatomic, retain) NSDate * onset;

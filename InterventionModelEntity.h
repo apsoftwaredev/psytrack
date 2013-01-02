@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class ExistingInterventionEntity, InterventionDeliveredEntity;
 
-@interface InterventionModelEntity : NSManagedObject
+@interface InterventionModelEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * modelName;
 @property (nonatomic, retain) NSString * notes;

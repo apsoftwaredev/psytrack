@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
 
 
-@interface PresentationDeliveredEntity : NSManagedObject
+
+
+@interface PresentationDeliveredEntity : PTManagedObject
 
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * notes;

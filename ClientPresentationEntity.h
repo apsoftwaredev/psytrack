@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class AdditionalVariableEntity, AssessmentEntity, ClientEntity, ClientInstrumentScoresEntity, InterventionDeliveredEntity;
 
-@interface ClientPresentationEntity : NSManagedObject
+@interface ClientPresentationEntity : PTManagedObject
 
 @property (nonatomic, retain) NSNumber * paid;
 @property (nonatomic, retain) NSString * psychomotor;

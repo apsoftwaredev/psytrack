@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class AdditionalSymptomEntity, ClientEntity, DiagnosisHistoryEntity, MedicationReviewEntity;
 
-@interface MedicationEntity : NSManagedObject
+@interface MedicationEntity : PTManagedObject
 
 @property (nonatomic, retain) NSDate * discontinued;
 @property (nonatomic, retain) NSString * keyString;

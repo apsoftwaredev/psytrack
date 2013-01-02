@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "PTManagedObjectContext.h"
+#import "PTManagedObject.h"
+
+
 
 @class AdditionalVariableEntity, AdditionalVariableNameEntity;
 
-@interface AdditionalVariableValueEntity : NSManagedObject
+@interface AdditionalVariableValueEntity : PTManagedObject
 
 @property (nonatomic, retain) NSString * variableValue;
 @property (nonatomic, retain) NSNumber * order;
