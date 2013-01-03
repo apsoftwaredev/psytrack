@@ -5931,6 +5931,26 @@ return [self applicationDrugsDirectory].path;
 //                
 //            }
 //        }
+       
+        if (![fileManager fileExistsAtPath:storePath]) {
+           
+                NSString *statusMessage=[self resetDefaultLockKeychainSettingsWithReset:YES];
+                if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."]) {
+                    NSString *displaymessage=[NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
+                    [self displayNotification:displaymessage];
+                    resetDatabase=YES;
+                }
+                else{
+                    
+                    firstRun=YES;
+                    
+                }
+                
+               
+        }
+        
+        
+        
         NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
         NSURL *cloudURL =nil;
         // this needs to match the entitlements and provisioning profile
@@ -5946,13 +5966,13 @@ return [self applicationDrugsDirectory].path;
             NSDictionary* options;
       
        
-        if ([coreDataCloudContent length] != 0 &&[self reachable]) {
+        if (!firstRun&&[coreDataCloudContent length] != 0 &&[self reachable]) {
                 // iCloud is available
                 cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
             
            
             
-                options = [NSDictionary dictionaryWithObjectsAndKeys:@"4R8ZH75936.com.psycheweb.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil]; 
+                options = [NSDictionary dictionaryWithObjectsAndKeys:@"SL2GGUR9DM.com.psycheweb.psytrack", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil]; 
              
             } else {
                 // iCloud is not available
@@ -5975,15 +5995,21 @@ return [self applicationDrugsDirectory].path;
         NSError *error = nil;
         
         [psc lock];
+        
+       
+      DLog(@"items at cloud url %@",[[NSFileManager defaultManager]contentsOfDirectoryAtPath:cloudURL.path error:&error] ) ;
+        
         if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
             
             
-            NSError *removeError=nil;
+            DLog(@"items at cloud url %@",[[NSFileManager defaultManager]contentsOfDirectoryAtPath:cloudURL.path error:&error] ) ;
 
             
             
             if (cloudURL) {
-                [[NSFileManager defaultManager] removeItemAtURL:cloudURL error:&removeError];
+                
+//                NSError *removeError=nil;
+//                [[NSFileManager defaultManager] removeItemAtURL:cloudURL error:&removeError];
                
                 
                
@@ -5991,7 +6017,7 @@ return [self applicationDrugsDirectory].path;
                 
                 
                               
-                [self displayNotification:@"An unresolved error occured while setting up iCloud.  Try restarting and checking your internet connection. If it persists, consider disabling the app iCloud access or internet for a while in the settings and restarting. You can check http://www.apple.com/support/systemstatus/ for iCloud availability." forDuration:0 location:kPTTScreenLocationMiddle inView:self.window];
+                [self displayNotification:@"An unresolved error occured while setting up iCloud.  Try restarting and checking your internet connection. If it persists, consider disabling the app iCloud access or internet for a while in the device settings and restarting. You can check http://www.apple.com/support/systemstatus/ for iCloud availability." forDuration:0 location:kPTTScreenLocationMiddle inView:self.window];
             
                 
             }else{
@@ -6037,6 +6063,7 @@ return [self applicationDrugsDirectory].path;
         dispatch_async(dispatch_get_main_queue(), ^{
             
             @try {
+                DLog(@"core data store added %@",[psc description]);
                  [[NSNotificationCenter defaultCenter] postNotificationName:@"persistentStoreAdded" object:self userInfo:nil];
             }
             @catch (NSException *exception) {
@@ -6057,6 +6084,8 @@ return [self applicationDrugsDirectory].path;
     
     return persistentStoreCoordinator__;
 }
+
+
 
 
 

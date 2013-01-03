@@ -12,7 +12,6 @@
 
 @implementation PTManagedObject
 
-
 -(BOOL)validateValue:(__autoreleasing id *)value forKey:(NSString *)key error:(NSError *__autoreleasing *)error
 {
     if ( ![self.managedObjectContext isKindOfClass:[PTManagedObjectContext class]] ) {
@@ -34,4 +33,5 @@
         [self.managedObjectContext deleteObject:self];
     }
 }
+
 @end

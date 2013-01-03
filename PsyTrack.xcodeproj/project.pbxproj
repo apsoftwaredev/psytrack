@@ -1292,7 +1292,6 @@
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
 		E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full@2x.png"; sourceTree = "<group>"; };
 		E74167E5158E739300CE1AF4 /* Monaco.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = Monaco.dfont; sourceTree = "<group>"; };
-		E745FEE516923DC000498CE0 /* PsyTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PsyTrack.entitlements; sourceTree = "<group>"; };
 		E74AD6A91618ECD200B596FC /* ipad-background-blue-plain-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-background-blue-plain-small@2x.png"; sourceTree = "<group>"; };
 		E7516B75150858D3005B798A /* ABGroupSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABGroupSelectionCell.h; sourceTree = "<group>"; };
 		E7516B76150858D3005B798A /* ABGroupSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ABGroupSelectionCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1380,6 +1379,7 @@
 		E798A13815857D4F006B9DBD /* ColorSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSwitcher.h; sourceTree = "<group>"; };
 		E798A13915857D5C006B9DBD /* ColorSwitcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSwitcher.m; sourceTree = "<group>"; };
 		E798A13B15857E2F006B9DBD /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		E79DD8FC16941DCE00F7D2AA /* PsyTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = PsyTrack.entitlements; path = PsyTrack/PsyTrack.entitlements; sourceTree = "<group>"; };
 		E7A2136D155B34CD005CF154 /* LogoBackgroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoBackgroundViewController.h; sourceTree = "<group>"; };
 		E7A2136E155B34CD005CF154 /* LogoBackgroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoBackgroundViewController.m; sourceTree = "<group>"; };
 		E7A2136F155B34CD005CF154 /* LogoBackgroundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogoBackgroundViewController.xib; sourceTree = "<group>"; };
@@ -2084,7 +2084,6 @@
 			isa = PBXGroup;
 			children = (
 				E75F7789151CEEC6002B10AE /* Custom Cells For Encryption */,
-				E75F7788151CED0C002B10AE /* Encrypted Model Subclasses */,
 				376798141500696800D0639D /* apns.p12 */,
 				376798151500696800D0639D /* ia.p12 */,
 				37BF64D414F19FD70065C607 /* Encryption Helper */,
@@ -2130,7 +2129,7 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				E745FEE516923DC000498CE0 /* PsyTrack.entitlements */,
+				E79DD8FC16941DCE00F7D2AA /* PsyTrack.entitlements */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Third Party */,
 				37F7CE1B1500328E00AD2C3A /* psyTrack */,
@@ -2263,13 +2262,6 @@
 				E7388B6D1652C0EB00E04639 /* PDFGenerator.m */,
 			);
 			name = "Client Presentation";
-			sourceTree = "<group>";
-		};
-		E75F7788151CED0C002B10AE /* Encrypted Model Subclasses */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Encrypted Model Subclasses";
 			sourceTree = "<group>";
 		};
 		E75F7789151CEEC6002B10AE /* Custom Cells For Encryption */ = {
@@ -4017,8 +4009,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Boice (49D3389L6J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Boice (49D3389L6J)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -4034,8 +4026,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "D6A6985A-3101-4CC7-8666-4ACE2D0284BF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D6A6985A-3101-4CC7-8666-4ACE2D0284BF";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4070,9 +4062,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = PsyTrack.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = PsyTrack/PsyTrack.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Boice (49D3389L6J)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Boice (49D3389L6J)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -4095,8 +4087,8 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = PsyTrack;
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "D6A6985A-3101-4CC7-8666-4ACE2D0284BF";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D6A6985A-3101-4CC7-8666-4ACE2D0284BF";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)\"/../** \"$(SRCROOT)/../../Downloads/STV 3.1.4 Pro/Source Code/STV+CoreData/STV+CoreData\"/** \"$(SRCROOT)/../../Downloads/STV 3.1.4 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4106,7 +4098,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = PsyTrack.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PsyTrack/PsyTrack.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Daniel Boice";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Daniel Boice";
 				FRAMEWORK_SEARCH_PATHS = (

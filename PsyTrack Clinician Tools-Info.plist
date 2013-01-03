@@ -81,7 +81,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>com.psycheweb.psytrack.cliniciantools</string>
+	<string>com.psycheweb.psytrack</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

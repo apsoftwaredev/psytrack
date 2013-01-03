@@ -26,27 +26,6 @@
 @dynamic timeTracks;
 @dynamic existingHours;
 
--(BOOL)validateValue:(__autoreleasing id *)value forKey:(NSString *)key error:(NSError *__autoreleasing *)error
-{
-    if ( ![self.managedObjectContext isKindOfClass:[PTManagedObjectContext class]] ) {
-        return YES;
-    }
-    else {
-        return [super validateValue:value forKey:key error:error];
-    }
-}
-
-+(BOOL)deletesInvalidObjectsAfterFailedSave
-{
-    return NO;
-}
-
--(void)repairForError:(NSError *)error
-{
-    if ( [self.class deletesInvalidObjectsAfterFailedSave] ) {
-        [self.managedObjectContext deleteObject:self];
-    }
-}
 
 
 @end
