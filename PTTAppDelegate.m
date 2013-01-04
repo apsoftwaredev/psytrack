@@ -2145,10 +2145,10 @@
 
 #pragma mark -
 #pragma mark Apple Push Notification Servieces
--(void)application:(UIApplication*)app didFailtoRegisterForRemoteNotificationsWithError:(NSError*)err{
-    NSString *str = [NSString stringWithFormat:@"Error: %@", err];
-    NSLog(@"%@", str);
-}
+//-(void)application:(UIApplication*)app didFailtoRegisterForRemoteNotificationsWithError:(NSError*)err{
+//    NSString *str = [NSString stringWithFormat:@"Error: %@", err];
+//    DLog(@"%@", str);
+//}
 
 -(void)application:(UIApplication*)app didReceiveRemoteNotification:(NSDictionary*)userInfo{
     /* If our app is in the background iOS shows our push notification in the notification center.
@@ -2158,7 +2158,7 @@
     NSDictionary *apsInfo = [userInfo objectForKey:@"aps"];
     NSString *alert = [apsInfo objectForKey:@"alert"];
 //    NSString *sound = [apsInfo objectForKey:@"sound"];
-    NSLog(@"user info is  %@",userInfo);
+    DLog(@"user info is  %@",userInfo);
     [self displayNotification:alert];
     AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
     NSString *badge = [apsInfo objectForKey:@"badge"];
@@ -2198,16 +2198,16 @@
              {
                  
                  // DO YOUR WORK HERE
-                 NSLog(@"response received");
-                 NSString *strReply = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                 NSLog(@"%@", strReply);
+                 DLog(@"response received");
+//                 NSString *strReply = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//                 DLog(@"%@", strReply);
              }
              else if ([data length] == 0 && error == nil)
              {
-                 NSLog(@"Nothing was downloaded.");
+                 DLog( @"Nothing was downloaded.");
              }
              else if (error != nil){
-                 NSLog(@"Error = %@", error);
+                 DLog(@"Error = %@", error);
              }
              
          }];
@@ -5791,13 +5791,11 @@ return [self applicationDrugsDirectory].path;
 // The main list view doesn't need that custom notification because the NSFetchedResultsController is
 // already listening directly to the NSManagedObjectContext
 - (void)mergeiCloudChanges:(NSNotification*)note forContext:(NSManagedObjectContext*)moc {
-    @try {
+   
         [moc mergeChangesFromContextDidSaveNotification:note];
-    }
-    @catch (NSException *exception) {
-        [self displayNotification:@"Error Occured Merging Changes From iCloud. May occur if required value has not downloaded yet.  If problem persists, you can disable iCloud in settings." forDuration:6.0 location:kPTTScreenLocationTop inView:self.window];
-        [moc rollback];
-    }
+        [self displayNotification:@"Merged Changes from iCloud"];
+   
+    
    
 
     
@@ -5829,7 +5827,7 @@ return [self applicationDrugsDirectory].path;
                 [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mergeChangesFrom_iCloud:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:coordinator];
             }
             @catch (NSException *exception) {
-                [self displayNotification:@"Error adding observer to iCloud merges" forDuration:5.0 location:kPTTScreenLocationTop inView:self.window];
+                [self displayNotification:@"Error adding observer to iCloud merges" ];
             }
          
          
@@ -5851,7 +5849,7 @@ return [self applicationDrugsDirectory].path;
     [moc performBlock:^{
        
         [self mergeiCloudChanges:notification forContext:moc];
-        [self displayNotification:@"Merged changes from iCloud" forDuration:3.0 location:kPTTScreenLocationTop inView:self.window];
+        
     }];
 }
 
@@ -5912,28 +5910,10 @@ return [self applicationDrugsDirectory].path;
 //       
         // If the expected store doesn't exist, copy the default store.
         
-//        if (![fileManager fileExistsAtPath:storePath]) {
-//            NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
-//            if (defaultStorePath&&[fileManager fileExistsAtPath:defaultStorePath]) {
-//                [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
-//                NSString *statusMessage=[self resetDefaultLockKeychainSettingsWithReset:YES];
-//                if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."]) {
-//                    NSString *displaymessage=[NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
-//                    [self displayNotification:displaymessage];
-//                    resetDatabase=YES;
-//                }
-//                else{
-//                
-//                    firstRun=YES;
-//                
-//                }
-//                
-//                
-//            }
-//        }
-       
         if (![fileManager fileExistsAtPath:storePath]) {
-           
+            NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
+            if (defaultStorePath&&[fileManager fileExistsAtPath:defaultStorePath]) {
+                [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
                 NSString *statusMessage=[self resetDefaultLockKeychainSettingsWithReset:YES];
                 if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."]) {
                     NSString *displaymessage=[NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
@@ -5941,13 +5921,31 @@ return [self applicationDrugsDirectory].path;
                     resetDatabase=YES;
                 }
                 else{
-                    
+                
                     firstRun=YES;
-                    
+                
                 }
                 
-               
+                
+            }
         }
+       
+//        if (![fileManager fileExistsAtPath:storePath]) {
+//           
+//                NSString *statusMessage=[self resetDefaultLockKeychainSettingsWithReset:YES];
+//                if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."]) {
+//                    NSString *displaymessage=[NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
+//                    [self displayNotification:displaymessage];
+//                    resetDatabase=YES;
+//                }
+//                else{
+//                    
+//                    firstRun=YES;
+//                    
+//                }
+//                
+//               
+//        }
         
         
         
@@ -5966,13 +5964,13 @@ return [self applicationDrugsDirectory].path;
             NSDictionary* options;
       
        
-        if (!firstRun&&[coreDataCloudContent length] != 0 &&[self reachable]) {
+        if (!firstRun && !resetDatabase&&[coreDataCloudContent length] != 0 &&[self reachable]) {
                 // iCloud is available
                 cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
             
            
             
-                options = [NSDictionary dictionaryWithObjectsAndKeys:@"SL2GGUR9DM.com.psycheweb.psytrack", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil]; 
+                options = [NSDictionary dictionaryWithObjectsAndKeys:@"SL2GGUR9DM.com.psychewebLLC.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil]; 
              
             } else {
                 // iCloud is not available
@@ -5995,14 +5993,12 @@ return [self applicationDrugsDirectory].path;
         NSError *error = nil;
         
         [psc lock];
-        
        
-      DLog(@"items at cloud url %@",[[NSFileManager defaultManager]contentsOfDirectoryAtPath:cloudURL.path error:&error] ) ;
-        
+       
         if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
             
             
-            DLog(@"items at cloud url %@",[[NSFileManager defaultManager]contentsOfDirectoryAtPath:cloudURL.path error:&error] ) ;
+          
 
             
             
@@ -6017,12 +6013,12 @@ return [self applicationDrugsDirectory].path;
                 
                 
                               
-                [self displayNotification:@"An unresolved error occured while setting up iCloud.  Try restarting and checking your internet connection. If it persists, consider disabling the app iCloud access or internet for a while in the device settings and restarting. You can check http://www.apple.com/support/systemstatus/ for iCloud availability." forDuration:0 location:kPTTScreenLocationMiddle inView:self.window];
+                [self displayNotification:@"An unresolved error occured possibly while setting up iCloud.  Try restarting and checking your internet connection. If it persists, consider disabling or reseting the app iCloud access or internet for a while in the device settings and restarting. Check http://www.apple.com/support/systemstatus/ for iCloud availability." forDuration:0 location:kPTTScreenLocationMiddle inView:self.window];
             
                 
             }else{
             
-                [self displayNotification:@"App was unable to load database." forDuration:0 location:kPTTScreenLocationTop inView:self.window];
+                [self displayNotification:@"App was unable to load database at this time." forDuration:0 location:kPTTScreenLocationTop inView:self.window];
             
             }
             
@@ -6063,7 +6059,7 @@ return [self applicationDrugsDirectory].path;
         dispatch_async(dispatch_get_main_queue(), ^{
             
             @try {
-                DLog(@"core data store added %@",[psc description]);
+               
                  [[NSNotificationCenter defaultCenter] postNotificationName:@"persistentStoreAdded" object:self userInfo:nil];
             }
             @catch (NSException *exception) {
@@ -6084,13 +6080,6 @@ return [self applicationDrugsDirectory].path;
     
     return persistentStoreCoordinator__;
 }
-
-
-
-
-
-
-
 
 
 

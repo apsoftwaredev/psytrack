@@ -15,7 +15,7 @@
 
 @class AccomodationEntity, ClientGroupEntity, ClientPresentationEntity, DemographicProfileEntity, DiagnosisHistoryEntity, ExpertTestemonyEntity, FeeEntity, HospitalizationEntity, LogEntity, MedicationEntity, OtherReferralSourceEntity, PaymentEntity, PhoneEntity, ReferralEntity, SubstanceUseEntity, SupervisionFeedbackEntity, SupportActivityClientEntity, VitalsEntity;
 
-@interface ClientEntity : PTManagedObject
+@interface ClientEntity : NSManagedObject
 
 @property (nonatomic, retain) NSDate * dateOfBirth;
 @property (nonatomic, retain) NSString * lastName;

@@ -12,7 +12,6 @@
 		376798071500665D00D0639D /* LongTimePickerCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376797FC1500665D00D0639D /* LongTimePickerCell_iPhone.xib */; };
 		376798081500665D00D0639D /* MyPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376797FE1500665D00D0639D /* MyPickerView.xib */; };
 		3767980A1500665D00D0639D /* WebViewDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376798021500665D00D0639D /* WebViewDetailViewController.xib */; };
-		376798161500696800D0639D /* apns.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 376798141500696800D0639D /* apns.p12 */; };
 		376798171500696800D0639D /* ia.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 376798151500696800D0639D /* ia.p12 */; };
 		3767981A15006A8100D0639D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3767981815006A8100D0639D /* InfoPlist.strings */; };
 		3773F77114FD267000C36B75 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3773F77014FD267000C36B75 /* AudioToolbox.framework */; };
@@ -172,6 +171,7 @@
 		B7F877BB14C9A38900F00C0D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877B914C9A38900F00C0D /* EventKit.framework */; };
 		B7F877BC14C9A38900F00C0D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877BA14C9A38900F00C0D /* EventKitUI.framework */; };
 		E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */; };
+		E70FACEE1697154C00E14F03 /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E70FACED1697154C00E14F03 /* psyTrack.sqlite */; };
 		E719562515FFADB60070E61D /* DTAboutViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = E71955F715FFADB60070E61D /* DTAboutViewController.strings */; };
 		E719562615FFADB60070E61D /* DTAboutViewController-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E71955F915FFADB60070E61D /* DTAboutViewController-Info.plist */; };
 		E719562715FFADB60070E61D /* UIButtonBarArrowDownSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = E71955FB15FFADB60070E61D /* UIButtonBarArrowDownSmall.png */; };
@@ -614,7 +614,6 @@
 		376797FD1500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LongTimePickerCell_iPhone.xib; sourceTree = "<group>"; };
 		376797FF1500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MyPickerView.xib; sourceTree = "<group>"; };
 		376798031500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/WebViewDetailViewController.xib; sourceTree = "<group>"; };
-		376798141500696800D0639D /* apns.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = apns.p12; sourceTree = "<group>"; };
 		376798151500696800D0639D /* ia.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ia.p12; sourceTree = "<group>"; };
 		3767981915006A8100D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3773F77014FD267000C36B75 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -841,6 +840,7 @@
 		B7F877BA14C9A38900F00C0D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		E70B9EFD15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSourcesSCObjectSelectionCell.h; sourceTree = "<group>"; };
 		E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSourcesSCObjectSelectionCell.m; sourceTree = "<group>"; };
+		E70FACED1697154C00E14F03 /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = psyTrack.sqlite; path = ../../Desktop/psyTrack.sqlite; sourceTree = "<group>"; };
 		E71955F515FFADB60070E61D /* DTAboutViewController-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTAboutViewController-Prefix.pch"; sourceTree = "<group>"; };
 		E71955F815FFADB60070E61D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/DTAboutViewController.strings; sourceTree = "<group>"; };
 		E71955F915FFADB60070E61D /* DTAboutViewController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DTAboutViewController-Info.plist"; sourceTree = "<group>"; };
@@ -1289,6 +1289,7 @@
 		E7388B671652B7E600E04639 /* ClientPresentationGenerateVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientPresentationGenerateVC.xib; sourceTree = "<group>"; };
 		E7388B6C1652C0EB00E04639 /* PDFGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerator.h; sourceTree = "<group>"; };
 		E7388B6D1652C0EB00E04639 /* PDFGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerator.m; sourceTree = "<group>"; };
+		E73D514216965D3C00AB6842 /* PsyTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = PsyTrack.entitlements; path = PsyTrack/PsyTrack.entitlements; sourceTree = "<group>"; };
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
 		E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full@2x.png"; sourceTree = "<group>"; };
 		E74167E5158E739300CE1AF4 /* Monaco.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = Monaco.dfont; sourceTree = "<group>"; };
@@ -1379,7 +1380,6 @@
 		E798A13815857D4F006B9DBD /* ColorSwitcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSwitcher.h; sourceTree = "<group>"; };
 		E798A13915857D5C006B9DBD /* ColorSwitcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSwitcher.m; sourceTree = "<group>"; };
 		E798A13B15857E2F006B9DBD /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
-		E79DD8FC16941DCE00F7D2AA /* PsyTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = PsyTrack.entitlements; path = PsyTrack/PsyTrack.entitlements; sourceTree = "<group>"; };
 		E7A2136D155B34CD005CF154 /* LogoBackgroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoBackgroundViewController.h; sourceTree = "<group>"; };
 		E7A2136E155B34CD005CF154 /* LogoBackgroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoBackgroundViewController.m; sourceTree = "<group>"; };
 		E7A2136F155B34CD005CF154 /* LogoBackgroundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogoBackgroundViewController.xib; sourceTree = "<group>"; };
@@ -2071,6 +2071,7 @@
 		37F7CFCA1500602900AD2C3A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E70FACED1697154C00E14F03 /* psyTrack.sqlite */,
 				E74167E5158E739300CE1AF4 /* Monaco.dfont */,
 				3767981815006A8100D0639D /* InfoPlist.strings */,
 				37F7CFCB150060D400AD2C3A /* main.m */,
@@ -2084,7 +2085,6 @@
 			isa = PBXGroup;
 			children = (
 				E75F7789151CEEC6002B10AE /* Custom Cells For Encryption */,
-				376798141500696800D0639D /* apns.p12 */,
 				376798151500696800D0639D /* ia.p12 */,
 				37BF64D414F19FD70065C607 /* Encryption Helper */,
 				B703DBB714EBF66600A921F2 /* PTTEncryption.h */,
@@ -2129,7 +2129,7 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				E79DD8FC16941DCE00F7D2AA /* PsyTrack.entitlements */,
+				E73D514216965D3C00AB6842 /* PsyTrack.entitlements */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Third Party */,
 				37F7CE1B1500328E00AD2C3A /* psyTrack */,
@@ -3096,7 +3096,6 @@
 				376798071500665D00D0639D /* LongTimePickerCell_iPhone.xib in Resources */,
 				376798081500665D00D0639D /* MyPickerView.xib in Resources */,
 				3767980A1500665D00D0639D /* WebViewDetailViewController.xib in Resources */,
-				376798161500696800D0639D /* apns.p12 in Resources */,
 				376798171500696800D0639D /* ia.p12 in Resources */,
 				3767981A15006A8100D0639D /* InfoPlist.strings in Resources */,
 				37B2254D150286040015D955 /* Default@2x.png in Resources */,
@@ -3229,6 +3228,7 @@
 				E7388B691652B7E600E04639 /* ClientPresentationGenerateVC.xib in Resources */,
 				E7B5D97F168D31BB000CA5B5 /* ClientPresentationGenerateVC_iPhone.xib in Resources */,
 				E7B5D994168DB670000CA5B5 /* Default.png in Resources */,
+				E70FACEE1697154C00E14F03 /* psyTrack.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4026,8 +4026,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "D6A6985A-3101-4CC7-8666-4ACE2D0284BF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D6A6985A-3101-4CC7-8666-4ACE2D0284BF";
+				PROVISIONING_PROFILE = "12C36593-A78E-4F40-94A6-34119851EA18";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "12C36593-A78E-4F40-94A6-34119851EA18";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4050,8 +4050,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "BB5A53B6-3821-4755-940B-3B8EF559496B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BB5A53B6-3821-4755-940B-3B8EF559496B";
+				PROVISIONING_PROFILE = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -4087,8 +4087,8 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = PsyTrack;
-				PROVISIONING_PROFILE = "D6A6985A-3101-4CC7-8666-4ACE2D0284BF";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D6A6985A-3101-4CC7-8666-4ACE2D0284BF";
+				PROVISIONING_PROFILE = "12C36593-A78E-4F40-94A6-34119851EA18";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "12C36593-A78E-4F40-94A6-34119851EA18";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)\"/../** \"$(SRCROOT)/../../Downloads/STV 3.1.4 Pro/Source Code/STV+CoreData/STV+CoreData\"/** \"$(SRCROOT)/../../Downloads/STV 3.1.4 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -4120,8 +4120,8 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = PsyTrack;
-				PROVISIONING_PROFILE = "BB5A53B6-3821-4755-940B-3B8EF559496B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "BB5A53B6-3821-4755-940B-3B8EF559496B";
+				PROVISIONING_PROFILE = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)\"/../** \"$(SRCROOT)/../../Downloads/STV 3.1.4 Pro/Source Code/STV+CoreData/STV+CoreData\"/** \"$(SRCROOT)/../../Downloads/STV 3.1.4 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\"/**";
 				WRAPPER_EXTENSION = app;
 			};
