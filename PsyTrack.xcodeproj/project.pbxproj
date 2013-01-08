@@ -1289,7 +1289,6 @@
 		E7388B671652B7E600E04639 /* ClientPresentationGenerateVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientPresentationGenerateVC.xib; sourceTree = "<group>"; };
 		E7388B6C1652C0EB00E04639 /* PDFGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFGenerator.h; sourceTree = "<group>"; };
 		E7388B6D1652C0EB00E04639 /* PDFGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFGenerator.m; sourceTree = "<group>"; };
-		E73D514216965D3C00AB6842 /* PsyTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = PsyTrack.entitlements; path = PsyTrack/PsyTrack.entitlements; sourceTree = "<group>"; };
 		E74167DD158E28DC00CE1AF4 /* menubar-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full.png"; sourceTree = "<group>"; };
 		E74167DE158E28DC00CE1AF4 /* menubar-full@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menubar-full@2x.png"; sourceTree = "<group>"; };
 		E74167E5158E739300CE1AF4 /* Monaco.dfont */ = {isa = PBXFileReference; lastKnownFileType = file; path = Monaco.dfont; sourceTree = "<group>"; };
@@ -1515,6 +1514,7 @@
 		E7FB3AB21562C867000A6782 /* AddViewABLinkButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddViewABLinkButtonCell.m; sourceTree = "<group>"; };
 		E7FB3AB41562C888000A6782 /* LookupRemoveLinkButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LookupRemoveLinkButtonCell.h; sourceTree = "<group>"; };
 		E7FB3AB51562C888000A6782 /* LookupRemoveLinkButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LookupRemoveLinkButtonCell.m; sourceTree = "<group>"; };
+		E7FE8AA1169BAD7900EB6969 /* PsyTrack.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PsyTrack.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2129,7 +2129,7 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				E73D514216965D3C00AB6842 /* PsyTrack.entitlements */,
+				E7FE8AA1169BAD7900EB6969 /* PsyTrack.entitlements */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Third Party */,
 				37F7CE1B1500328E00AD2C3A /* psyTrack */,
@@ -4050,8 +4050,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
+				PROVISIONING_PROFILE = "D29E9D6D-AA48-469D-A0B5-353B3DE89EC9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D29E9D6D-AA48-469D-A0B5-353B3DE89EC9";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -4062,7 +4062,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = PsyTrack/PsyTrack.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PsyTrack.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Boice (49D3389L6J)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Boice (49D3389L6J)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4098,7 +4098,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_ENTITLEMENTS = PsyTrack/PsyTrack.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PsyTrack.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Daniel Boice";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Daniel Boice";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4120,8 +4120,8 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = PsyTrack;
-				PROVISIONING_PROFILE = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
+				PROVISIONING_PROFILE = "D29E9D6D-AA48-469D-A0B5-353B3DE89EC9";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D29E9D6D-AA48-469D-A0B5-353B3DE89EC9";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)\"/../** \"$(SRCROOT)/../../Downloads/STV 3.1.4 Pro/Source Code/STV+CoreData/STV+CoreData\"/** \"$(SRCROOT)/../../Downloads/STV 3.1.4 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\"/**";
 				WRAPPER_EXTENSION = app;
 			};

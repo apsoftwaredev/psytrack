@@ -463,7 +463,7 @@
             done=YES;
         }
 		
-//		CGContextEndPage (pdfContext);
+		CGContextEndPage (pdfContext);
 		
 	}
 	while (!done);
@@ -843,7 +843,7 @@
 		CGContextRestoreGState(pdfContext);
 		UIGraphicsPopContext();
 		
-//		CGContextEndPage (pdfContext);
+		CGContextEndPage (pdfContext);
 	}
 	while (!done);
 	

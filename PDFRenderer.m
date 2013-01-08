@@ -642,7 +642,7 @@
                         // We are done with our context now, so we release it
 //                        CGContextRelease (pdfContext);
                        
-//                        CGContextEndPage(pdfContext);
+                        CGContextEndPage(pdfContext);
                         
                         }
                     
@@ -716,7 +716,7 @@
     [self drawPageNumber:pageNumber totalPages:count];
         
     }
-//    CGContextEndPage(context);
+    CGContextEndPage(context);
 
     CGPDFDocumentRelease(templateDocument);
     UIGraphicsEndPDFContext();
@@ -879,7 +879,7 @@
         /* Here you can do any drawings */
         [self drawPageNumber:pageNumber totalPages:count];
     }
-//     CGContextEndPage(context);
+     CGContextEndPage(context);
     CGPDFDocumentRelease(templateDocument);
     UIGraphicsEndPDFContext();
     UIGraphicsEndPDFContext();
@@ -1037,7 +1037,7 @@
         /* Here you can do any drawings */
         [self drawPageNumber:pageNumber totalPages:count];
     }
-//    CGContextEndPage(context);
+    CGContextEndPage(context);
     CGPDFDocumentRelease(templateDocument);
     UIGraphicsEndPDFContext();
     UIGraphicsEndPDFContext();

@@ -1894,8 +1894,7 @@ if(section.headerTitle !=nil)
     SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
    
        NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-  DLog(@"tablemodel tag is  %i",tableViewModel.tag);
-    if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"ClientInstrumentScoresEntity"] && [cell isKindOfClass:[SCObjectSelectionCell class]]&&cell.tag==0) {
+      if (cellManagedObject && [cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"ClientInstrumentScoresEntity"] && [cell isKindOfClass:[SCObjectSelectionCell class]]&&cell.tag==0) {
         
         SCObjectSelectionCell *objectSelectionCell=(SCObjectSelectionCell *)cell;
         
