@@ -407,7 +407,7 @@
 	
 	[application setApplicationIconBadgeNumber:0];
     
-   
+ 
 	
 #endif
     
@@ -3315,27 +3315,28 @@ duration:(NSTimeInterval)1.0];
     NSFileManager *fileManager = [NSFileManager defaultManager];
 //    NSUndoManager *undoManager=[[NSUndoManager alloc]init];
 //    undoManager=(NSUndoManager *)__drugsManagedObjectContext.undoManager;
-
+ NSURL *drugsStoreURL = [[self applicationDrugsDirectory] URLByAppendingPathComponent:@"drugs.sqlite"];
     
     
-    [__drugsManagedObjectContext setUndoManager:nil];
-    NSString *drugAppDoc = [[self applicationDocumentsDirectoryString]stringByAppendingPathComponent:@"AppDoc.txt"];
+    [fileManager removeItemAtURL:drugsStoreURL error:NULL];
     
-    NSString *drugAppDocType_Lookup = [[self applicationDocumentsDirectoryString]stringByAppendingPathComponent:@"AppDocType_Lookup.txt"];
+//    [__drugsManagedObjectContext setUndoManager:nil];
+    NSURL *drugAppDoc = [[NSBundle mainBundle] URLForResource:@"AppDoc" withExtension:@"txt" ];
     
-    NSString *drugApplication = [[self applicationDocumentsDirectoryString]stringByAppendingPathComponent:@"Application.txt"];
+    NSURL *drugAppDocType_Lookup = [[NSBundle mainBundle] URLForResource:@"AppDocType_Lookup" withExtension:@"txt" ];
     
-    NSString *drugChemTypeLookup = [[self applicationDocumentsDirectoryString]stringByAppendingPathComponent:@"ChemTypeLookup.txt"];
+    NSURL *drugApplication = [[NSBundle mainBundle] URLForResource:@"Application" withExtension:@"txt"];
     
-    NSString *drugDocType_lookup = [[self applicationDocumentsDirectoryString]stringByAppendingPathComponent:@"DocType_lookup.txt"];
+    NSURL *drugChemTypeLookup =  [[NSBundle mainBundle] URLForResource:@"ChemTypeLookup" withExtension:@"txt"];
     
-    NSString *drugProduct_tecode = [[self applicationDocumentsDirectoryString]stringByAppendingPathComponent:@"Product_tecode.txt"];
+    NSURL *drugDocType_lookup =  [[NSBundle mainBundle] URLForResource:@"DocType_lookup" withExtension:@"txt"];
     
-    NSString *drugProduct = [[self applicationDocumentsDirectoryString]stringByAppendingPathComponent:@"Product.txt"];
+    NSURL *drugProduct_tecode =  [[NSBundle mainBundle] URLForResource:@"Product_tecode" withExtension:@"txt"];
+    NSURL *drugProduct = [[NSBundle mainBundle] URLForResource:@"Product" withExtension:@"txt"];
     
-    NSString *drugRegActionDate = [[self applicationDocumentsDirectoryString]stringByAppendingPathComponent:@"RegActionDate.txt"];
+    NSURL *drugRegActionDate = [[NSBundle mainBundle] URLForResource:@"RegActionDate" withExtension:@"txt"];
     
-    NSString *drugReviewClass_Lookup = [[self applicationDocumentsDirectoryString]stringByAppendingPathComponent:@"ReviewClass_Lookup.txt"];
+    NSURL *drugReviewClass_Lookup = [[NSBundle mainBundle] URLForResource:@"ReviewClass_Lookup" withExtension:@"txt"];
     
     
     
@@ -3344,17 +3345,15 @@ duration:(NSTimeInterval)1.0];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
    
+    if (firstRun||resetDatabase) {
+   
     
-    
-    if (![fileManager fileExistsAtPath:drugApplication]) {
-        NSString *drugTextDocPath = [[NSBundle mainBundle] pathForResource:@"Application" ofType:@"txt"];
-        if (drugTextDocPath) {
-            [fileManager copyItemAtPath:drugTextDocPath toPath:drugApplication error:NULL];
-            
-            NSURL *applicationURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"Application.txt"];
+    if ([fileManager fileExistsAtPath:drugApplication.path]) {
+       
+        if (drugApplication) {
             
             
-            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:applicationURL encoding:NSASCIIStringEncoding];
+            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugApplication encoding:NSASCIIStringEncoding];
             
             //                        
             
@@ -3364,14 +3363,14 @@ duration:(NSTimeInterval)1.0];
             
             
             
-            
+            DLog(@"adding drug application ");
             
             for (NSInteger z=9; z<=appCount-8; z++) {
                 
                 
                 
                 NSEntityDescription *entityDesc=[NSEntityDescription entityForName:@"DrugApplicationEntity" inManagedObjectContext:__drugsManagedObjectContext];
-                DrugApplicationEntity *app=[[DrugApplicationEntity alloc]initWithEntity:entityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
+                DrugApplicationEntity *app=[[DrugApplicationEntity alloc]initWithEntity:entityDesc insertIntoManagedObjectContext:[self drugsManagedObjectContext]];
                 
                 
                 
@@ -3437,7 +3436,7 @@ duration:(NSTimeInterval)1.0];
                     
                 }
             }
-            
+               DLog(@"added drug application ");
             
             
         }
@@ -3450,17 +3449,14 @@ duration:(NSTimeInterval)1.0];
     }
     
     
-    if (![fileManager fileExistsAtPath:drugProduct]) {
-        NSString *drugTextDocPath = [[NSBundle mainBundle] pathForResource:@"Product" ofType:@"txt"];
-        if (drugTextDocPath) {
-            [fileManager copyItemAtPath:drugTextDocPath toPath:drugProduct error:NULL];
+    if ([fileManager fileExistsAtPath:drugProduct.path]) {
+        if (drugProduct) {
+             
             
             
-            
-            NSURL *productURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"Product.txt"];
-            
+           
             //            
-            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:productURL encoding:NSASCIIStringEncoding];
+            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugProduct encoding:NSASCIIStringEncoding];
             
             //            
             
@@ -3472,11 +3468,12 @@ duration:(NSTimeInterval)1.0];
             
             
             
-            NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:__drugsManagedObjectContext];
+            NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
             
             
             
-            
+            DLog(@"adding drug drug product");
+
             for (NSInteger z=9; z<=productCount-8; z++) {
                 
                 
@@ -3527,22 +3524,17 @@ duration:(NSTimeInterval)1.0];
                 }
                 
             }
-            
+            DLog(@"added drug product");
             
         }
         
         
     }  
-    if (![fileManager fileExistsAtPath:drugRegActionDate]) {
-        NSString *drugTextDocPath = [[NSBundle mainBundle] pathForResource:@"RegActionDate" ofType:@"txt"];
-        if (drugTextDocPath) {
-            [fileManager copyItemAtPath:drugTextDocPath toPath:drugRegActionDate error:NULL];
-            
-            
-            NSURL *drugRegActionDateURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"RegActionDate.txt"];
-            
+    if ([fileManager fileExistsAtPath:drugRegActionDate.path]) {
+         if (drugRegActionDate) {
+           
             //            
-            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugRegActionDateURL encoding:NSASCIIStringEncoding];
+            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugRegActionDate encoding:NSASCIIStringEncoding];
             
             //            
             
@@ -3554,10 +3546,11 @@ duration:(NSTimeInterval)1.0];
             
             
             
-            NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugRegActionDateEntity" inManagedObjectContext:__drugsManagedObjectContext];
+            NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugRegActionDateEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
             
            
-            
+            DLog(@"adding drug actiondate");
+
             for (NSInteger z=6; z<=drugRegActionDateCount-5; z++) {
                 
                 
@@ -3609,18 +3602,15 @@ duration:(NSTimeInterval)1.0];
                 
                 
             }
-            
+            DLog(@"added drug actiondate");
         }
     }  
-    if (![fileManager fileExistsAtPath:drugReviewClass_Lookup]) {
-        NSString *drugTextDocPath = [[NSBundle mainBundle] pathForResource:@"ReviewClass_Lookup" ofType:@"txt"];
-        if (drugTextDocPath) {
-            [fileManager copyItemAtPath:drugTextDocPath toPath:drugReviewClass_Lookup error:NULL];
-            
-            NSURL *drugReviewClass_LookupURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"ReviewClass_Lookup.txt"];
+    if ([fileManager fileExistsAtPath:drugReviewClass_Lookup.path]) {
+       
+        if (drugReviewClass_Lookup) {
             
             //            
-            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugReviewClass_LookupURL encoding:NSASCIIStringEncoding];
+            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugReviewClass_Lookup encoding:NSASCIIStringEncoding];
             
             //            
             
@@ -3632,9 +3622,9 @@ duration:(NSTimeInterval)1.0];
             
             
             
-            NSEntityDescription *drugReviewClassLookupEntityDesc=[NSEntityDescription entityForName:@"DrugReviewClassLookupEntity" inManagedObjectContext:__drugsManagedObjectContext];
+            NSEntityDescription *drugReviewClassLookupEntityDesc=[NSEntityDescription entityForName:@"DrugReviewClassLookupEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
             
-            
+            DLog(@"adding drug review class lookup"); 
             for (NSInteger z=4; z<drugReviewClass_LookupCount-3; z++) {
                 
                 
@@ -3677,19 +3667,15 @@ duration:(NSTimeInterval)1.0];
             }
             
             
-            
+        DLog(@"added drug review class lookup");    
         }
+        
     }  
-    if (![fileManager fileExistsAtPath:drugAppDoc]) {
-        NSString *drugTextDocPath = [[NSBundle mainBundle] pathForResource:@"AppDoc" ofType:@"txt"];
-        if (drugTextDocPath) {
-            [fileManager copyItemAtPath:drugTextDocPath toPath:drugAppDoc error:NULL];
-            
-            
-            NSURL *appDocURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"AppDoc.txt"];
+    if ([fileManager fileExistsAtPath:drugAppDoc.path]) {
+        if (drugAppDoc) {
             
             //            
-            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:appDocURL encoding:NSASCIIStringEncoding];
+            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugAppDoc encoding:NSASCIIStringEncoding];
             
             //            
             
@@ -3702,13 +3688,13 @@ duration:(NSTimeInterval)1.0];
             
             
             NSEntityDescription *appDocEntityDesc=[NSEntityDescription entityForName:@"DrugAppDocEntity" inManagedObjectContext:__drugsManagedObjectContext];
-            
+             DLog(@"adding drug app doc"); 
             for (NSInteger z=9; z<appDocCount-8; z++) {
                 
                 
                 
                 
-                DrugAppDocEntity *appDoc=[[DrugAppDocEntity alloc]initWithEntity:appDocEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
+                DrugAppDocEntity *appDoc=[[DrugAppDocEntity alloc]initWithEntity:appDocEntityDesc insertIntoManagedObjectContext:[self drugsManagedObjectContext]];
                 
                 //                
                 appDoc.appDocID=[NSNumber numberWithInteger:(NSInteger)[[tabFile objectAtIndex:z]integerValue]];
@@ -3768,21 +3754,17 @@ duration:(NSTimeInterval)1.0];
             
             
             
-            
+           DLog(@"added drug app doc"); 
             
             
         }
     }
     
-    if (![fileManager fileExistsAtPath:drugAppDocType_Lookup]) {
-        NSString *drugTextDocPath = [[NSBundle mainBundle] pathForResource:@"AppDocType_Lookup" ofType:@"txt"];
-        if (drugTextDocPath) {
-            [fileManager copyItemAtPath:drugTextDocPath toPath:drugAppDocType_Lookup error:NULL];
-            
-            NSURL *appDocType_LookupURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"AppDocType_Lookup.txt"];
+    if ([fileManager fileExistsAtPath:drugAppDocType_Lookup.path]) {
+        if (drugAppDocType_Lookup) {
             
             //            
-            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:appDocType_LookupURL encoding:NSASCIIStringEncoding];
+            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugAppDocType_Lookup encoding:NSASCIIStringEncoding];
             
             //            
             
@@ -3794,8 +3776,9 @@ duration:(NSTimeInterval)1.0];
             
             
             
-            NSEntityDescription *appDocType_LookupEntityDesc=[NSEntityDescription entityForName:@"DrugAppDocTypeLookupEntity" inManagedObjectContext:__drugsManagedObjectContext];
+            NSEntityDescription *appDocType_LookupEntityDesc=[NSEntityDescription entityForName:@"DrugAppDocTypeLookupEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
             
+             DLog(@"adding drug drugAppDocType_Lookup"); 
             for (NSInteger z=2; z<appDocType_LookupCount-1; z++) {
                 
                 
@@ -3834,21 +3817,17 @@ duration:(NSTimeInterval)1.0];
             
             
             
-            
+          DLog(@"added drug drugAppDocType_Lookup");  
             
             
         }
     }  
     
-    if (![fileManager fileExistsAtPath:drugChemTypeLookup]) {
-        NSString *drugTextDocPath = [[NSBundle mainBundle] pathForResource:@"ChemTypeLookup" ofType:@"txt"];
-        if (drugTextDocPath) {
-            [fileManager copyItemAtPath:drugTextDocPath toPath:drugChemTypeLookup error:NULL];
-            
-            NSURL *drugChemicalTypeLookupURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"ChemTypeLookup.txt"];
+    if ([fileManager fileExistsAtPath:drugChemTypeLookup.path]) {
+         if (drugChemTypeLookup) {
             
             //            
-            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugChemicalTypeLookupURL encoding:NSASCIIStringEncoding];
+            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugChemTypeLookup encoding:NSASCIIStringEncoding];
             
             //            
             
@@ -3860,8 +3839,9 @@ duration:(NSTimeInterval)1.0];
             
             
             
-            NSEntityDescription *drugChemicalTypeLookupEntityDesc=[NSEntityDescription entityForName:@"DrugChemicalTypeLookupEntity" inManagedObjectContext:__drugsManagedObjectContext];
+            NSEntityDescription *drugChemicalTypeLookupEntityDesc=[NSEntityDescription entityForName:@"DrugChemicalTypeLookupEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
             
+             DLog(@"adding drug drugChemTypeLookup"); 
             for (NSInteger z=3; z<drugChemicalTypeLookupCount-2; z++) {
                 
                 
@@ -3896,19 +3876,14 @@ duration:(NSTimeInterval)1.0];
             
             
             
-            
+             DLog(@"added drug drugChemTypeLookup");  
             
         }
     }  
-    if (![fileManager fileExistsAtPath:drugDocType_lookup]) {
-        NSString *drugTextDocPath = [[NSBundle mainBundle] pathForResource:@"DocType_lookup" ofType:@"txt"];
-        if (drugTextDocPath) {
-            [fileManager copyItemAtPath:drugTextDocPath toPath:drugDocType_lookup error:NULL];
-            
-            NSURL *docType_lookupURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"DocType_lookup.txt"];
-            
-            //            
-            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:docType_lookupURL encoding:NSASCIIStringEncoding];
+    if ([fileManager fileExistsAtPath:drugDocType_lookup.path]) {
+        if (drugDocType_lookup) {
+                       //            
+            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugDocType_lookup encoding:NSASCIIStringEncoding];
             
             //            
             
@@ -3920,10 +3895,10 @@ duration:(NSTimeInterval)1.0];
             
             
             
-            NSEntityDescription *drugDocTypeLookupEntityDesc=[NSEntityDescription entityForName:@"DrugDocTypeLookupEntity" inManagedObjectContext:__drugsManagedObjectContext];
+            NSEntityDescription *drugDocTypeLookupEntityDesc=[NSEntityDescription entityForName:@"DrugDocTypeLookupEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
             
             
-            
+               DLog(@"adding drug drugDocType_lookup");  
             for (NSInteger z=2; z<docType_lookupCount-1; z++) {
                 
                 
@@ -3954,20 +3929,15 @@ duration:(NSTimeInterval)1.0];
             
             
             
-            
+             DLog(@"added drug drugDocType_lookup");  
             
             
         }
     }  
-    if (![fileManager fileExistsAtPath:drugProduct_tecode]) {
-        NSString *drugTextDocPath = [[NSBundle mainBundle] pathForResource:@"Product_tecode" ofType:@"txt"];
-        if (drugTextDocPath) {
-            [fileManager copyItemAtPath:drugTextDocPath toPath:drugProduct_tecode error:NULL];
-            
-            NSURL *product_tecodeURL = [[(PTTAppDelegate *)[UIApplication sharedApplication].delegate  applicationDocumentsDirectory] URLByAppendingPathComponent:@"Product_tecode.txt"];
-            
-            //            
-            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:product_tecodeURL encoding:NSASCIIStringEncoding];
+    if ([fileManager fileExistsAtPath:drugProduct_tecode.path]) {
+        if (drugProduct_tecode) {
+                        
+            TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugProduct_tecode encoding:NSASCIIStringEncoding];
             
             //            
             
@@ -3977,9 +3947,9 @@ duration:(NSTimeInterval)1.0];
             
             
             
+               DLog(@"adding drug drugProduct_tecode");  
             
-            
-            NSEntityDescription *drugProductTECodeEntityDesc=[NSEntityDescription entityForName:@"DrugProductTECodeEntity" inManagedObjectContext:__drugsManagedObjectContext];
+            NSEntityDescription *drugProductTECodeEntityDesc=[NSEntityDescription entityForName:@"DrugProductTECodeEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
             
             for (NSInteger z=5; z<product_tecodeCount-4; z++) {
                 
@@ -4018,7 +3988,7 @@ duration:(NSTimeInterval)1.0];
             
             
             
-            
+              DLog(@"added drug drugProduct_tecode");  
             
             
         }
@@ -4271,10 +4241,30 @@ duration:(NSTimeInterval)1.0];
     }  
     
     
+    [self saveDrugsContext];
+
+        NSString *symetricString=@"8qfnbyfalVvdjf093uPmsdj30mz98fI6";
+        NSData *symetricData=[symetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
+        if (!encryption_) {
+              encryption_=[self encryption];
+        }
+      
+        
+        NSData *drugStoreData=[NSData dataWithContentsOfURL:drugsStoreURL];
+        
+        NSData *encryptedData=nil;
+        
+        if (symetricData.length==32) {
+            encryptedData=(NSData *) [encryption_ doCipher:drugStoreData key:symetricData context:kCCEncrypt padding:(CCOptions *) kCCOptionECBMode];;
+        }
+        
+
+NSError *writeError = nil;
+NSString *pathForEncryptedDrugFile=[@"/Users/danboice/Dropbox/Public/pt/" stringByAppendingPathComponent:@"testPtData.zpk"];
+[encryptedData writeToFile:pathForEncryptedDrugFile options:NSDataWritingAtomic error:&writeError];
 
 
-
-
+     }
 
 //    [__drugsManagedObjectContext setUndoManager:undoManager];
 
@@ -5923,7 +5913,7 @@ return [self applicationDrugsDirectory].path;
                 else{
                 
                     firstRun=YES;
-                
+                 
                 }
                 
                 
@@ -6061,6 +6051,7 @@ return [self applicationDrugsDirectory].path;
             @try {
                
                  [[NSNotificationCenter defaultCenter] postNotificationName:@"persistentStoreAdded" object:self userInfo:nil];
+                 [self setUpDrugStore];
             }
             @catch (NSException *exception) {
                 [self displayNotification:@"Error setting up database. App will now close." forDuration:10.0 location:kPTTScreenLocationTop inView:self.window];
