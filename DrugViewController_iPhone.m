@@ -34,6 +34,7 @@
 @synthesize checkingTimer=checkingTimer_;
 @synthesize downloadBytesLabel=downloadBytesLabel_;
 @synthesize drugObjectSelectionCell=drugObjectSelectionCell_;
+@synthesize connectingToFile;
 //@synthesize tableModel;
 #pragma mark -
 #pragma mark View lifecycle
@@ -557,20 +558,32 @@
     
 }
 -(IBAction)startCheckingForUpdate:(id)sender{
-
-
+    
     self.downloadLabel.text=@"Checking";
-    downloadLabel_.alpha=1.0;
-    checkingTimer_  = [NSTimer scheduledTimerWithTimeInterval:1.5
+    
+    if (!self.connectingToFile) {
+   
+       
+        downloadLabel_.alpha=1.0;
+        checkingTimer_  = [NSTimer scheduledTimerWithTimeInterval:1.5
                                                            target:self
-                                                     selector:@selector(flashCheckingLabel:)
+                                                         selector:@selector(flashCheckingLabel:)
                                                          userInfo:NULL
                                                           repeats:YES];
+        
+   
+    
+
+       
 
 
-    [self connectToRemoteDrugFile];
+        [self connectToRemoteDrugFile];
 
-
+    }
+    
+ 
+    
+    
 }
 
 -(void)myCancelButtonTapped{
@@ -679,10 +692,7 @@
 
     if (self.downloadLabel.alpha==(CGFloat)1.0) {
         
-        [UIView beginAnimations:nil context: nil];
-        [UIView setAnimationDuration:1.5];
-        self.downloadLabel.alpha=(CGFloat)0.4;
-        [UIView commitAnimations];
+        [self fadeCheckingLabel];
         NSInteger downloadLabelLength=downloadLabel_.text.length;
        
         if (downloadLabelLength>7 && downloadLabelLength<12) {
@@ -698,10 +708,7 @@
     }
     else
     {
-        [UIView beginAnimations:nil context: nil];
-        [UIView setAnimationDuration:1.5];
-        self.downloadLabel.alpha=(CGFloat)1.0;
-        [UIView commitAnimations];    
+        [self checkingLabelToNormalState];
     }
 
 
@@ -709,7 +716,27 @@
 
 
 }
+-(void)fadeCheckingLabel{
 
+    [UIView beginAnimations:nil context: nil];
+    [UIView setAnimationDuration:1.5];
+    self.downloadLabel.alpha=(CGFloat)0.4;
+    [UIView commitAnimations];
+
+
+}
+-(void)checkingLabelToNormalState{
+
+    if (self.downloadLabel.alpha!=(CGFloat)1.0){
+        [UIView beginAnimations:nil context: nil];
+        [UIView setAnimationDuration:1.5];
+        self.downloadLabel.alpha=(CGFloat)1.0;
+        [UIView commitAnimations];
+
+    }
+
+
+}
 -(NSDate *)getTheLastModifiedDateLocal{
 
     NSDate *lastModifiedDate;
@@ -790,21 +817,55 @@
 
 - (void) connectToRemoteDrugFile{
 
-   
-  
+    self.connectingToFile=YES;
+    // Create a URL Request and set the URL
+    NSURL *url = [NSURL URLWithString:@"https://www.dropbox.com"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+     [request setHTTPMethod: @"HEAD"];
+    // Display the network activity indicator
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    if ([appDelegate reachable]) {
-   
-    NSTimeInterval timeout=10.0;
-    NSURL *remoteFileURL=[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"];
+    // Perform the request on a new thread so we don't block the UI
+    dispatch_queue_t downloadQueue = dispatch_queue_create("Download queue", NULL);
+    dispatch_async(downloadQueue, ^{
+        
+        NSError* err = nil;
+        NSHTTPURLResponse* rsp = nil;
+        
+        // Perform the request synchronously on this thread
+        NSData *rspData = [NSURLConnection sendSynchronousRequest:request returningResponse:&rsp error:&err];
+        
+        // Once a response is received, handle it on the main thread in case we do any UI updates
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Hide the network activity indicator
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+            
+            if (rspData == nil || (err != nil && [err code] != noErr)) {
+                // If there was a no data received, or an error...
+                self.downloadLabel.text=@"Not Reachable";
+                [checkingTimer_ invalidate];
+                checkingTimer_=nil;
+                self.connectingToFile=NO;
+                [self checkingLabelToNormalState];
+            } else {
+                NSTimeInterval timeout=10.0;
+                NSURL *remoteFileURL=[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"];
+                
+                drugFileRequest=  [[NSURLRequest alloc] initWithURL:remoteFileURL cachePolicy:NSURLRequestReloadRevalidatingCacheData timeoutInterval:timeout];
+                
+                connectionToDrugFile = [NSURLConnection connectionWithRequest:drugFileRequest delegate:self];
+                
+                [connectionToDrugFile start];
+                 [self checkingLabelToNormalState];
+                // Do whatever else you want with the data...
+            }
+        });
+    });
     
-    drugFileRequest=  [[NSURLRequest alloc] initWithURL:remoteFileURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeout];
-
-   connectionToDrugFile = [NSURLConnection connectionWithRequest:drugFileRequest delegate:self];
-
-    [connectionToDrugFile start];
-    }
+   
+   
+        
+    
    
 }
 
@@ -812,7 +873,7 @@
 {
    
     CGFloat remoteSize = [[NSString stringWithFormat:@"%lli",[response expectedContentLength]] floatValue];
-    
+    self.downloadCheckButton.enabled=YES;
     
     [checkingTimer_ invalidate];
     checkingTimer_=nil;
@@ -848,10 +909,11 @@
     NSComparisonResult result = [remoteModifiedDate compare:localModifiedDate ];
      
    
-    
-    
+    [self fadeCheckingLabel];
+    [self checkingLabelToNormalState];
     
     if ((result == NSOrderedDescending) ||(remoteSize && (localFileSize<remoteSize))) {
+        
         downloadLabel_.text=@"Update Available.";
         downloadCheckButton_.hidden=YES;
         downloadButton_.hidden=NO;
@@ -861,6 +923,7 @@
     }
     else 
     {
+         
         downloadLabel_.text=@"Current Version";
         downloadCheckButton_.hidden=NO;
         downloadButton_.hidden=YES;
@@ -878,11 +941,16 @@
     connectionToDrugFile=nil;
     drugFileRequest=nil;
     
-    
+    self.connectingToFile=NO;
 }
 
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    self.downloadCheckButton.enabled=YES;
+    downloadCheckButton_.hidden=NO;
+    downloadButton_.hidden=YES;
+    downloadStopButton_.hidden=YES;
+    downloadContinueButton_.hidden=YES;
 	[checkingTimer_ invalidate];
     checkingTimer_=nil;
     downloadLabel_.text=@"Not Available";
@@ -892,7 +960,7 @@
     [UIView commitAnimations];
     connectionToDrugFile=nil;
     drugFileRequest=nil;
-    
+    self.connectingToFile=NO;
     
 }
 
@@ -997,26 +1065,65 @@
 //            self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://psycheweb.com/psytrack/dFiles/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
 //                                         timeout:15 
 //                                        delegate:self];
-        if ([appDelegate reachable]) {
-            self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
-                                                          timeout:15
-                                                         delegate:self];
-            
-            
-            
-            [self.view addSubview:self.downloadBar];
-            [self.view setNeedsDisplay];
-            
-            downloadButton_.hidden=YES;
-            downloadStopButton_.hidden=NO;
-            downloadContinueButton_.hidden=YES;
-            downloadCheckButton_.hidden=YES;
-        }
-        else{
         
-            downloadLabel_.text=@"Not Available";
         
-        }
+        
+        self.connectingToFile=YES;
+        // Create a URL Request and set the URL
+        NSURL *url = [NSURL URLWithString:@"https://www.dropbox.com"];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [request setHTTPMethod: @"HEAD"];
+        // Display the network activity indicator
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        
+        // Perform the request on a new thread so we don't block the UI
+        dispatch_queue_t downloadQueue = dispatch_queue_create("Download queue", NULL);
+        dispatch_async(downloadQueue, ^{
+            
+            NSError* err = nil;
+            NSHTTPURLResponse* rsp = nil;
+            
+            // Perform the request synchronously on this thread
+            NSData *rspData = [NSURLConnection sendSynchronousRequest:request returningResponse:&rsp error:&err];
+            
+            // Once a response is received, handle it on the main thread in case we do any UI updates
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // Hide the network activity indicator
+                [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                
+                if (rspData == nil || (err != nil && [err code] != noErr)) {
+                    // If there was a no data received, or an error...
+                    self.downloadLabel.text=@"Not Reachable";
+                    [checkingTimer_ invalidate];
+                    checkingTimer_=nil;
+                    self.connectingToFile=NO;
+                    [self checkingLabelToNormalState];
+                    
+                    downloadButton_.hidden=YES;
+                    downloadStopButton_.hidden=YES;
+                    downloadContinueButton_.hidden=YES;
+                    downloadCheckButton_.hidden=NO;
+                } else {
+                    self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
+                                                                  timeout:15
+                                                                 delegate:self];
+                    
+                    
+                    
+                    [self.view addSubview:self.downloadBar];
+                    [self.view setNeedsDisplay];
+                    
+                    downloadButton_.hidden=YES;
+                    downloadStopButton_.hidden=NO;
+                    downloadContinueButton_.hidden=YES;
+                    downloadCheckButton_.hidden=YES;
+                    
+                }
+            });
+        });
+        
+
+        
        
         
     }
@@ -1095,6 +1202,8 @@
             
         }
         BOOL fileWritten=   [decryptedData writeToURL:drugsStoreURL atomically:YES];
+        NSFileManager *fileManager=[NSFileManager defaultManager];
+        NSError *removeError=nil;
         if (fileWritten  && proceedWithAddingStore) {
       
             NSError *drugError = nil;
@@ -1102,37 +1211,21 @@
            
             if (![drugsPersistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:@"DrugsConfig" URL:drugsStoreURL options:nil error:&drugError])
             {
-                /*
-                 Replace this implementation with code to handle the error appropriately.
-                 
-                 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
-                 Typical reasons for an error here include:
-                 * The persistent store is not accessible;
-                 * The schema for the persistent store is incompatible with current managed object model.
-                 Check the error message to determine what the actual problem was.
-                 
-                 
-                 If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
-                 
-                 If you encounter schema incompatibility errors during development, you can reduce their frequency by:
-                 * Simply deleting the existing store:
-                 [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
-                 
-                 * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
-                 [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
-                 
-                 Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-                 
-                 */
-                if([appDelegate.managedObjectContext hasChanges]){
+                                if([appDelegate.managedObjectContext hasChanges]){
                 
                     [appDelegate saveContext];
                 
                 
                 }
-                [appDelegate displayNotification:@"Error Setting Up the Drug Database, please restart"];
+               
+                if (![fileManager removeItemAtURL:drugsStoreURL error:&removeError]){
                 
+                    [appDelegate displayNotification:[NSString stringWithFormat:@"Error Setting Up the Drug Database and removing bad file %@",removeError.description]];
+                
+                }
+                else{
+                    [appDelegate displayNotification:@"Error Setting Up the Drug Database, please restart"];
+                }
             }
             else{
                 for (NSManagedObject *managedObject in drugsManagedObjectContext.registeredObjects) {
@@ -1144,30 +1237,39 @@
             else
             {
             
-                [appDelegate displayNotification:@"Problem with setting up drug database occured.  Please try again later or contact suppor"];
+                if (![fileManager removeItemAtURL:drugsStoreURL error:&removeError]){
+                    
+                    [appDelegate displayNotification:[NSString stringWithFormat:@"Error Setting Up the Drug Database and removing bad file %@",removeError.description]];
+                    
+                }
+                else{
+                    [appDelegate displayNotification:@"Problem with setting up drug database occured.  Please try again later or contact suppor"];
+                }
+                
             
             }
        
-        }
+    }
 
 
 else
 {
     
-    [appDelegate displayNotification:@"Encryption Error Occured while setting up the drug database.  Please try again later or contact suppor"];
+[appDelegate displayNotification:@"Problem with setting up drug database occured.  Please try again later or contact suppor"];
     
 }
     
    
     
-    
-    [objectsModel reloadBoundValues];
-    [objectsModel.modeledTableView reloadData];
-    
+    [self searchBar:(UISearchBar *)self.searchBar textDidChange:(NSString *)self.searchBar.text];
+   
+    self.downloadCheckButton.enabled=YES;
+   
     downloadButton_.hidden=YES;
     downloadStopButton_.hidden=YES;
     downloadContinueButton_.hidden=YES;
     downloadCheckButton_.hidden=NO;
+    self.connectingToFile=NO;
     [self.view setNeedsDisplay];
     [UIView beginAnimations:nil context: nil];
     [UIView setAnimationDuration:4.0];
@@ -1193,7 +1295,7 @@ else
     downloadStopButton_.hidden=YES;
     downloadContinueButton_.hidden=YES;
     downloadCheckButton_.hidden=NO;
-   
+    self.connectingToFile=NO;
     [self.view setNeedsDisplay];
     [UIView beginAnimations:nil context: nil];
     [UIView setAnimationDuration:20.0];
