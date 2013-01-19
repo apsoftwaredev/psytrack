@@ -154,7 +154,6 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
 -(void)resetDisordersModel;
 + (PTTAppDelegate *)appDelegate ;
 - (NSURL *)applicationPTFileDirectory;
--(BOOL)setUpDrugStore;
 - (void)saveContext;
 + (NSString*)retrieveFromUserDefaults:(NSString*)key;
 -(void)flashAppTrainAndTitleGraphics;
@@ -166,8 +165,8 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
 -(void)setupMyInfoRecord;
 - (void)saveDrugsContext;
 - (NSNumber *)iCloudPreferenceFromUserDefaults;
--(BOOL)copyDrugsToMainContext;
 
+-(BOOL)reachable ;
 -(void)displayMemoryWarning;
 - (NSURL *)applicationDrugsDirectory;
 -(NSString *)applicationDrugsPathString;

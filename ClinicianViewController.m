@@ -109,15 +109,14 @@
         [super viewDidLoad];
    
 
-
-    
+      
     UIViewController *navtitle=self.navigationController.topViewController;
     
     navtitle.title=@"Clinicians";
 
    
     if (isInDetailSubview) {
-        objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef]; 
+        objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef];
         objectsModel.tag=0;
 //        objectsModel.delegate=self;
        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -199,7 +198,7 @@
         
 //        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView
 //                                                 entityDefinition:self.clinicianDef];
-       objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef]; 
+       objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef ];
         if ([SCUtilities is_iPad]) {
             self.navigationBarType = SCNavigationBarTypeEditLeft;
         }

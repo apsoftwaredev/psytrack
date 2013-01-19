@@ -13,6 +13,7 @@
 #import "LogEntity.h"
 #import "ConferenceEntity.h"
 
+
 @interface ConferencesAttendedVC ()
 
 @end
@@ -24,7 +25,10 @@
 {
     [super viewDidLoad];
     
-    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+
+    NSManagedObjectContext * managedObjectContext = [appDelegate managedObjectContext];
     
     
     dateFormatter = [[NSDateFormatter alloc] init];
@@ -161,7 +165,7 @@
     
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
     
-    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:conferenceDef];
+    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:conferenceDef ];
     
     objectsModel.editButtonItem = self.editButton;;
     

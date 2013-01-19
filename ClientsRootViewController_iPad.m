@@ -25,6 +25,7 @@
 #import "EncryptedSCTextFieldCell.h"
 #import "DrugNameObjectSelectionCell.h"
 
+
 @implementation ClientsRootViewController_iPad
 //@synthesize clientsDetailViewController_iPad=_clientsDetailViewController_iPad;
 
@@ -50,9 +51,10 @@
     [super viewDidLoad];
    
     
-    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
-    managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    managedObjectContext = [appDelegate managedObjectContext];
     
 ////    // Set up the edit and add buttons.
 //    self.navigationItem.leftBarButtonItem = self.editButtonItem;
@@ -76,7 +78,7 @@
     
     [clientsViewController_Shared setupTheClientsViewModelUsingSTV];       
 
-    objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:clientsViewController_Shared.clientDef];
+    objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:clientsViewController_Shared.clientDef ];
     if ([SCUtilities is_iPad]) {
         self.navigationBarType = SCNavigationBarTypeEditLeft;
     }
@@ -106,9 +108,7 @@
     [self.tableView setBackgroundView:nil];
     [self.tableView setBackgroundView:[[UIView alloc] init]];
     
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-
+   
     
   
    

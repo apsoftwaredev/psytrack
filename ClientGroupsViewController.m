@@ -9,6 +9,7 @@
 #import "ClientGroupsViewController.h"
 #import "PTTAppDelegate.h"
 
+
 @interface ClientGroupsViewController ()
 
 @end
@@ -25,15 +26,15 @@
 
      UINavigationItem *navigationItem=(UINavigationItem *)self.navigationItem;
     navigationItem.title=@"Client Groups";
-    
-    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    NSManagedObjectContext * managedObjectContext = [appDelegate managedObjectContext];
     SCEntityDefinition *clientGroupDef=[SCEntityDefinition definitionWithEntityName:@"ClientGroupEntity" managedObjectContext:managedObjectContext propertyNamesString:@"Client Group:(groupName,addNewClients)"];
     
     
     clientGroupDef.titlePropertyName=@"groupName";
     clientGroupDef.keyPropertyName=@"groupName";
     
-    objectsModel =[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:clientGroupDef];
+    objectsModel =[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:clientGroupDef ];
     
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
     objectsModel.editButtonItem = self.editButton;;

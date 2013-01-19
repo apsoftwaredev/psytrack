@@ -25,6 +25,7 @@
 #import "ClientGroupEntity.h"
 #import "PTABGroup.h"
 
+
 @implementation ClinicianGroupsViewController
 @synthesize eventsList,eventStore,eventViewController,psyTrackCalendar,rootNavController;
 
@@ -247,15 +248,17 @@
 ////    [defaultABGroupSection addCell:defaultABGroupNameTextFieldCell]; 
 //    [defaultABGroupSection addCell:groupNameUpdateCell];
 //    
-   
-        NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+
+        NSManagedObjectContext * managedObjectContext = [appDelegate managedObjectContext];
         
         
         
        
         SCEntityDefinition *clinicianGroupDef=[SCEntityDefinition definitionWithEntityName:@"ClinicianGroupEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"groupName",@"addressBookSync",@"addNewClinicians", nil]];
         
-         objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:clinicianGroupDef]; 
+         objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:clinicianGroupDef ];
         if ([SCUtilities systemVersion]<6) {
         
         SCCustomPropertyDefinition *groupNameUpdateCProperty = [SCCustomPropertyDefinition definitionWithName:@"addressBookButtonCell" uiElementNibName:@"ABGroupNameChangeCell" objectBindings:nil];;

@@ -793,18 +793,18 @@
    
   
     
-    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    if ([appDelegate reachable]) {
+   
     NSTimeInterval timeout=10.0;
-    NSURL *remoteFileURL=[NSURL URLWithString:@"https://psytrack.com/dFiles/dFile-001.zpk"];
+    NSURL *remoteFileURL=[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"];
     
     drugFileRequest=  [[NSURLRequest alloc] initWithURL:remoteFileURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:timeout];
 
-    
-//    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:remoteFileURL cachePolicy:nsurl timeoutInterval:timeout];
    connectionToDrugFile = [NSURLConnection connectionWithRequest:drugFileRequest delegate:self];
 
     [connectionToDrugFile start];
-
+    }
    
 }
 
@@ -997,20 +997,27 @@
 //            self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://psycheweb.com/psytrack/dFiles/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
 //                                         timeout:15 
 //                                        delegate:self];
+        if ([appDelegate reachable]) {
+            self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
+                                                          timeout:15
+                                                         delegate:self];
+            
+            
+            
+            [self.view addSubview:self.downloadBar];
+            [self.view setNeedsDisplay];
+            
+            downloadButton_.hidden=YES;
+            downloadStopButton_.hidden=NO;
+            downloadContinueButton_.hidden=YES;
+            downloadCheckButton_.hidden=YES;
+        }
+        else{
         
-        self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
-                                                      timeout:15
-                                                     delegate:self];
+            downloadLabel_.text=@"Not Available";
         
-        
-        
-        [self.view addSubview:self.downloadBar];
-        [self.view setNeedsDisplay];
-        
-        downloadButton_.hidden=YES;
-        downloadStopButton_.hidden=NO;
-        downloadContinueButton_.hidden=YES;
-        downloadCheckButton_.hidden=YES;
+        }
+       
         
     }
 
@@ -1125,7 +1132,7 @@
                 
                 }
                 [appDelegate displayNotification:@"Error Setting Up the Drug Database, please restart"];
-                abort();
+                
             }
             else{
                 for (NSManagedObject *managedObject in drugsManagedObjectContext.registeredObjects) {

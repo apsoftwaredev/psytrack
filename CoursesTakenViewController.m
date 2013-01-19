@@ -12,6 +12,8 @@
 #import "EncryptedSCTextViewCell.h"
 #import "LogEntity.h"
 
+
+
 @interface CoursesTakenViewController ()
 
 @end
@@ -23,7 +25,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+
+    NSManagedObjectContext * managedObjectContext = [appDelegate managedObjectContext];
     
     SCEntityDefinition *degreeCourseDef=[SCEntityDefinition definitionWithEntityName:@"DegreeCourseEntity" managedObjectContext:managedObjectContext propertyNamesString:@"courseName;credits;startDate;endDate;grade;degree;logs;notes"];
     
@@ -196,7 +201,7 @@
     
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
     
-    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:degreeCourseDef];
+    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:degreeCourseDef ];
     
     objectsModel.editButtonItem = self.editButton;;
     

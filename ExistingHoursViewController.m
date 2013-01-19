@@ -14,6 +14,9 @@
 #import "ExistingHoursEntity.h"
 #import "TrainingProgramEntity.h"
 #import "SiteEntity.h"
+
+
+
 @interface ExistingHoursViewController ()
 
 @end
@@ -53,7 +56,11 @@
    
     
 	// Get managedObjectContext from application delegate
-   NSManagedObjectContext *managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+  
+
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+
+    NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
 	
     
     
@@ -1556,7 +1563,7 @@
     
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
     
-    objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:existingHoursDef];
+    objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:existingHoursDef ];
     
     
 

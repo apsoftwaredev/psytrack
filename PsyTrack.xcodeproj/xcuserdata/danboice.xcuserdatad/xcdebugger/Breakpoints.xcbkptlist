@@ -303,11 +303,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "372899226.235304"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "681"
-         endingLineNumber = "681"
+         startingLineNumber = "688"
+         endingLineNumber = "688"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -316,11 +316,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "372899226.235304"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "689"
-         endingLineNumber = "689"
+         startingLineNumber = "696"
+         endingLineNumber = "696"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -355,20 +355,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "364667601.202386"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "56"
-         endingLineNumber = "56"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ExistingHoursViewController.m"
-         timestampString = "364667601.202386"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "60"
@@ -381,11 +368,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "364667601.202386"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "65"
-         endingLineNumber = "65"
+         startingLineNumber = "67"
+         endingLineNumber = "67"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -394,11 +381,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "364667601.202386"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "264"
-         endingLineNumber = "264"
+         startingLineNumber = "72"
+         endingLineNumber = "72"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -407,11 +394,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "372899226.235304"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "304"
-         endingLineNumber = "304"
+         startingLineNumber = "271"
+         endingLineNumber = "271"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -420,11 +407,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "372899226.235304"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "457"
-         endingLineNumber = "457"
+         startingLineNumber = "311"
+         endingLineNumber = "311"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -433,11 +420,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "372899226.235304"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "625"
-         endingLineNumber = "625"
+         startingLineNumber = "464"
+         endingLineNumber = "464"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -446,11 +433,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "848"
-         endingLineNumber = "848"
+         startingLineNumber = "632"
+         endingLineNumber = "632"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -459,11 +446,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1336"
-         endingLineNumber = "1336"
+         startingLineNumber = "855"
+         endingLineNumber = "855"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ExistingHoursViewController.m"
+         timestampString = "380254658.903769"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1343"
+         endingLineNumber = "1343"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -483,11 +483,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1677"
-         endingLineNumber = "1677"
+         startingLineNumber = "1684"
+         endingLineNumber = "1684"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -496,11 +496,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1673"
-         endingLineNumber = "1673"
+         startingLineNumber = "1680"
+         endingLineNumber = "1680"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -509,11 +509,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1735"
-         endingLineNumber = "1735"
+         startingLineNumber = "1742"
+         endingLineNumber = "1742"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -522,11 +522,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1733"
-         endingLineNumber = "1733"
+         startingLineNumber = "1740"
+         endingLineNumber = "1740"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -861,11 +861,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2636"
-         endingLineNumber = "2636"
+         startingLineNumber = "2637"
+         endingLineNumber = "2637"
          landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -874,11 +874,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3263"
-         endingLineNumber = "3263"
+         startingLineNumber = "3264"
+         endingLineNumber = "3264"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -887,11 +887,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3280"
-         endingLineNumber = "3280"
+         startingLineNumber = "3281"
+         endingLineNumber = "3281"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -900,20 +900,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3284"
-         endingLineNumber = "3284"
-         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3285"
@@ -926,11 +913,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3298"
-         endingLineNumber = "3298"
+         startingLineNumber = "3286"
+         endingLineNumber = "3286"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -939,11 +926,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3269"
-         endingLineNumber = "3269"
+         startingLineNumber = "3299"
+         endingLineNumber = "3299"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -952,11 +939,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3288"
-         endingLineNumber = "3288"
+         startingLineNumber = "3270"
+         endingLineNumber = "3270"
+         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TimeTrackViewController.m"
+         timestampString = "380254658.903769"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "3289"
+         endingLineNumber = "3289"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1002,11 +1002,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3576"
-         endingLineNumber = "3576"
+         startingLineNumber = "3577"
+         endingLineNumber = "3577"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1015,11 +1015,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3580"
-         endingLineNumber = "3580"
+         startingLineNumber = "3581"
+         endingLineNumber = "3581"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1028,11 +1028,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3613"
-         endingLineNumber = "3613"
+         startingLineNumber = "3614"
+         endingLineNumber = "3614"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1132,11 +1132,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3423"
-         endingLineNumber = "3423"
+         startingLineNumber = "3424"
+         endingLineNumber = "3424"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1145,11 +1145,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3417"
-         endingLineNumber = "3417"
+         startingLineNumber = "3418"
+         endingLineNumber = "3418"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1158,11 +1158,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3430"
-         endingLineNumber = "3430"
+         startingLineNumber = "3431"
+         endingLineNumber = "3431"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1262,11 +1262,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "368969909.313705"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "259"
-         endingLineNumber = "259"
+         startingLineNumber = "258"
+         endingLineNumber = "258"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1418,11 +1418,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2387"
-         endingLineNumber = "2387"
+         startingLineNumber = "2394"
+         endingLineNumber = "2394"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1431,20 +1431,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "375412994.491792"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2260"
-         endingLineNumber = "2260"
-         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ExistingHoursViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2267"
@@ -1457,11 +1444,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2296"
-         endingLineNumber = "2296"
+         startingLineNumber = "2274"
+         endingLineNumber = "2274"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1470,11 +1457,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2243"
-         endingLineNumber = "2243"
+         startingLineNumber = "2303"
+         endingLineNumber = "2303"
+         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ExistingHoursViewController.m"
+         timestampString = "380254658.903769"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2250"
+         endingLineNumber = "2250"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1834,11 +1834,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "374081485.755727"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1696"
-         endingLineNumber = "1696"
+         startingLineNumber = "1702"
+         endingLineNumber = "1702"
          landmarkName = "-tableViewModel:detailViewWillPresentForSectionAtIndex:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1847,11 +1847,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "374081485.755727"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1694"
-         endingLineNumber = "1694"
+         startingLineNumber = "1700"
+         endingLineNumber = "1700"
          landmarkName = "-tableViewModel:detailViewWillPresentForSectionAtIndex:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1860,11 +1860,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "374081485.755727"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1665"
-         endingLineNumber = "1665"
+         startingLineNumber = "1671"
+         endingLineNumber = "1671"
          landmarkName = "-tableViewModel:detailViewWillPresentForSectionAtIndex:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1899,11 +1899,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "372102079.005637"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1222"
-         endingLineNumber = "1222"
+         startingLineNumber = "1229"
+         endingLineNumber = "1229"
          landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2315,11 +2315,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4002"
-         endingLineNumber = "4002"
+         startingLineNumber = "4003"
+         endingLineNumber = "4003"
          landmarkName = "-eventEditViewController:didCompleteWithAction:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2328,11 +2328,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3997"
-         endingLineNumber = "3997"
+         startingLineNumber = "3998"
+         endingLineNumber = "3998"
          landmarkName = "-eventEditViewController:didCompleteWithAction:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2341,11 +2341,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1595"
-         endingLineNumber = "1595"
+         startingLineNumber = "1596"
+         endingLineNumber = "1596"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2380,11 +2380,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ConsultationsViewController.m"
-         timestampString = "378559138.656613"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "887"
-         endingLineNumber = "887"
+         startingLineNumber = "890"
+         endingLineNumber = "890"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2497,11 +2497,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "372102079.005637"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1413"
-         endingLineNumber = "1413"
+         startingLineNumber = "1420"
+         endingLineNumber = "1420"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2549,11 +2549,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "OtherActivityVC.m"
-         timestampString = "374081485.755727"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "265"
-         endingLineNumber = "265"
+         startingLineNumber = "267"
+         endingLineNumber = "267"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2926,11 +2926,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371685237.337247"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "671"
-         endingLineNumber = "671"
+         startingLineNumber = "670"
+         endingLineNumber = "670"
          landmarkName = "-setSelectedClinicians"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2939,11 +2939,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371685237.337247"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "656"
-         endingLineNumber = "656"
+         startingLineNumber = "655"
+         endingLineNumber = "655"
          landmarkName = "-setSelectedClinicians"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2952,11 +2952,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371685237.337247"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "491"
-         endingLineNumber = "491"
+         startingLineNumber = "490"
+         endingLineNumber = "490"
          landmarkName = "-doneButtonTappedInDetailSubView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2965,11 +2965,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371685237.337247"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "490"
-         endingLineNumber = "490"
+         startingLineNumber = "489"
+         endingLineNumber = "489"
          landmarkName = "-doneButtonTappedInDetailSubView"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2991,11 +2991,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "374081485.755727"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1179"
-         endingLineNumber = "1179"
+         startingLineNumber = "1185"
+         endingLineNumber = "1185"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3004,11 +3004,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientsViewController_iPhone.m"
-         timestampString = "374081485.755727"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1207"
-         endingLineNumber = "1207"
+         startingLineNumber = "1213"
+         endingLineNumber = "1213"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3108,11 +3108,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3577"
-         endingLineNumber = "3577"
+         startingLineNumber = "3578"
+         endingLineNumber = "3578"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3121,11 +3121,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2445"
-         endingLineNumber = "2445"
+         startingLineNumber = "2452"
+         endingLineNumber = "2452"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3667,11 +3667,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DemographicReportTopCell.m"
-         timestampString = "370754411.824238"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "153"
-         endingLineNumber = "153"
+         startingLineNumber = "154"
+         endingLineNumber = "154"
          landmarkName = "-scrollToNextPage"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3693,11 +3693,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DemographicReportTopCell.m"
-         timestampString = "370754411.824238"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "227"
-         endingLineNumber = "227"
+         startingLineNumber = "228"
+         endingLineNumber = "228"
          landmarkName = "-loadBindingsIntoCustomControls"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3745,11 +3745,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DemographicReportTopCell.m"
-         timestampString = "370754411.824238"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "365"
-         endingLineNumber = "365"
+         startingLineNumber = "366"
+         endingLineNumber = "366"
          landmarkName = "-loadBindingsIntoCustomControls"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3758,11 +3758,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DemographicReportTopCell.m"
-         timestampString = "370754411.824238"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "358"
-         endingLineNumber = "358"
+         startingLineNumber = "359"
+         endingLineNumber = "359"
          landmarkName = "-loadBindingsIntoCustomControls"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3784,11 +3784,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DemographicReportTopCell.m"
-         timestampString = "370754411.824238"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "280"
-         endingLineNumber = "280"
+         startingLineNumber = "281"
+         endingLineNumber = "281"
          landmarkName = "-loadBindingsIntoCustomControls"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3836,20 +3836,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371685237.337247"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "771"
-         endingLineNumber = "771"
-         landmarkName = "-tableViewModel:willAddItemForSectionAtIndex:item:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "ClinicianViewController.m"
-         timestampString = "371685237.337247"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "770"
@@ -3862,11 +3849,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371685237.337247"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "769"
          endingLineNumber = "769"
+         landmarkName = "-tableViewModel:willAddItemForSectionAtIndex:item:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClinicianViewController.m"
+         timestampString = "380254658.903769"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "768"
+         endingLineNumber = "768"
          landmarkName = "-tableViewModel:willAddItemForSectionAtIndex:item:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3914,11 +3914,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371688026.736264"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "926"
-         endingLineNumber = "926"
+         startingLineNumber = "925"
+         endingLineNumber = "925"
          landmarkName = "-tableViewModel:didInsertRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3927,11 +3927,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371685237.337247"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "790"
-         endingLineNumber = "790"
+         startingLineNumber = "789"
+         endingLineNumber = "789"
          landmarkName = "-tableViewModel:searchBarSelectedScopeButtonIndexDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3940,11 +3940,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371688026.736264"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "957"
-         endingLineNumber = "957"
+         startingLineNumber = "956"
+         endingLineNumber = "956"
          landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3953,11 +3953,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371685237.337247"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "733"
-         endingLineNumber = "733"
+         startingLineNumber = "732"
+         endingLineNumber = "732"
          landmarkName = "-createSelectedCliniciansArray"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3966,11 +3966,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371688026.736264"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "971"
-         endingLineNumber = "971"
+         startingLineNumber = "970"
+         endingLineNumber = "970"
          landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3979,11 +3979,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DemographicReportTopCell.m"
-         timestampString = "370754411.824238"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "338"
-         endingLineNumber = "338"
+         startingLineNumber = "339"
+         endingLineNumber = "339"
          landmarkName = "-loadBindingsIntoCustomControls"
          landmarkType = "5">
       </FileBreakpoint>
@@ -3992,11 +3992,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3308"
-         endingLineNumber = "3308"
+         startingLineNumber = "3309"
+         endingLineNumber = "3309"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4005,7 +4005,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "3313"
+         endingLineNumber = "3313"
+         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TimeTrackViewController.m"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3312"
@@ -4017,25 +4030,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3311"
-         endingLineNumber = "3311"
-         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "ExistingHoursViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2258"
-         endingLineNumber = "2258"
+         startingLineNumber = "2265"
+         endingLineNumber = "2265"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4694,11 +4694,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3485"
-         endingLineNumber = "3485"
+         startingLineNumber = "3486"
+         endingLineNumber = "3486"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4707,11 +4707,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1990"
-         endingLineNumber = "1990"
+         startingLineNumber = "1991"
+         endingLineNumber = "1991"
          landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4720,20 +4720,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1969"
-         endingLineNumber = "1969"
-         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1970"
@@ -4746,7 +4733,33 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1971"
+         endingLineNumber = "1971"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TimeTrackViewController.m"
+         timestampString = "380254658.903769"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1980"
+         endingLineNumber = "1980"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TimeTrackViewController.m"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1979"
@@ -4759,24 +4772,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1978"
-         endingLineNumber = "1978"
-         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3351"
-         endingLineNumber = "3351"
+         startingLineNumber = "3352"
+         endingLineNumber = "3352"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4785,11 +4785,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1628"
-         endingLineNumber = "1628"
+         startingLineNumber = "1629"
+         endingLineNumber = "1629"
          landmarkName = "-tableViewModel:customSearchResultForSearchText:autoSearchResults:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4798,11 +4798,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1637"
-         endingLineNumber = "1637"
+         startingLineNumber = "1638"
+         endingLineNumber = "1638"
          landmarkName = "-tableViewModel:customSearchResultForSearchText:autoSearchResults:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4811,11 +4811,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1681"
-         endingLineNumber = "1681"
+         startingLineNumber = "1682"
+         endingLineNumber = "1682"
          landmarkName = "-tableViewModel:customSearchResultForSearchText:autoSearchResults:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4824,11 +4824,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "378944312.580617"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "6090"
-         endingLineNumber = "6090"
+         startingLineNumber = "3783"
+         endingLineNumber = "3783"
          landmarkName = "-motionBegan:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4837,11 +4837,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "378943203.960578"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5983"
-         endingLineNumber = "5983"
+         startingLineNumber = "3676"
+         endingLineNumber = "3676"
          landmarkName = "-persistentStoreCoordinator"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4850,11 +4850,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "378943203.960578"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5971"
-         endingLineNumber = "5971"
+         startingLineNumber = "3664"
+         endingLineNumber = "3664"
          landmarkName = "-persistentStoreCoordinator"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4876,11 +4876,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "378943203.960578"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5956"
-         endingLineNumber = "5956"
+         startingLineNumber = "3649"
+         endingLineNumber = "3649"
          landmarkName = "-persistentStoreCoordinator"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5045,11 +5045,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2025"
-         endingLineNumber = "2025"
+         startingLineNumber = "2026"
+         endingLineNumber = "2026"
          landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5266,11 +5266,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2183"
-         endingLineNumber = "2183"
+         startingLineNumber = "2184"
+         endingLineNumber = "2184"
          landmarkName = "-tableViewModel:detailViewWillDismissForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5279,11 +5279,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1873"
-         endingLineNumber = "1873"
+         startingLineNumber = "1874"
+         endingLineNumber = "1874"
          landmarkName = "-tableViewModel:didInsertRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5292,11 +5292,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2580"
-         endingLineNumber = "2580"
+         startingLineNumber = "2581"
+         endingLineNumber = "2581"
          landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5305,11 +5305,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3264"
-         endingLineNumber = "3264"
+         startingLineNumber = "3265"
+         endingLineNumber = "3265"
          landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5318,11 +5318,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1712"
-         endingLineNumber = "1712"
+         startingLineNumber = "1713"
+         endingLineNumber = "1713"
          landmarkName = "-tableViewModel:searchBarSelectedScopeButtonIndexDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5331,11 +5331,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3302"
-         endingLineNumber = "3302"
+         startingLineNumber = "3303"
+         endingLineNumber = "3303"
          landmarkName = "@implementation TimeTrackViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -5643,11 +5643,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2344"
-         endingLineNumber = "2344"
+         startingLineNumber = "2345"
+         endingLineNumber = "2345"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5759,38 +5759,12 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "PTTAppDelegate.m"
-         timestampString = "378701911.504381"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2825"
-         endingLineNumber = "2825"
-         landmarkName = "-displayMemoryWarning"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "PTTAppDelegate.m"
-         timestampString = "378701911.504381"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2824"
-         endingLineNumber = "2824"
-         landmarkName = "-displayMemoryWarning"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2071"
-         endingLineNumber = "2071"
+         startingLineNumber = "2072"
+         endingLineNumber = "2072"
          landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5799,11 +5773,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2068"
-         endingLineNumber = "2068"
+         startingLineNumber = "2069"
+         endingLineNumber = "2069"
          landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5812,11 +5786,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2065"
-         endingLineNumber = "2065"
+         startingLineNumber = "2066"
+         endingLineNumber = "2066"
          landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5825,11 +5799,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2006"
-         endingLineNumber = "2006"
+         startingLineNumber = "2007"
+         endingLineNumber = "2007"
          landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5838,11 +5812,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1973"
-         endingLineNumber = "1973"
+         startingLineNumber = "1974"
+         endingLineNumber = "1974"
          landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5851,11 +5825,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1967"
-         endingLineNumber = "1967"
+         startingLineNumber = "1968"
+         endingLineNumber = "1968"
          landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5864,11 +5838,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1891"
-         endingLineNumber = "1891"
+         startingLineNumber = "1892"
+         endingLineNumber = "1892"
          landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5929,11 +5903,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371685237.337247"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "392"
-         endingLineNumber = "392"
+         startingLineNumber = "391"
+         endingLineNumber = "391"
          landmarkName = "-selectMyInformation"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5942,11 +5916,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371685237.337247"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "383"
-         endingLineNumber = "383"
+         startingLineNumber = "382"
+         endingLineNumber = "382"
          landmarkName = "-selectMyInformation"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5955,11 +5929,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371688221.514361"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "912"
-         endingLineNumber = "912"
+         startingLineNumber = "911"
+         endingLineNumber = "911"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5968,11 +5942,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClinicianViewController.m"
-         timestampString = "371688225.34829"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "911"
-         endingLineNumber = "911"
+         startingLineNumber = "910"
+         endingLineNumber = "910"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6202,11 +6176,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "378943203.960578"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5962"
-         endingLineNumber = "5962"
+         startingLineNumber = "3655"
+         endingLineNumber = "3655"
          landmarkName = "-persistentStoreCoordinator"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6215,11 +6189,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "378943203.960578"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5955"
-         endingLineNumber = "5955"
+         startingLineNumber = "3648"
+         endingLineNumber = "3648"
          landmarkName = "-persistentStoreCoordinator"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6280,11 +6254,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "374535156.278147"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "85"
-         endingLineNumber = "85"
+         startingLineNumber = "86"
+         endingLineNumber = "86"
          landmarkName = "-viewDidUnload"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6865,11 +6839,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3304"
-         endingLineNumber = "3304"
+         startingLineNumber = "3305"
+         endingLineNumber = "3305"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6878,11 +6852,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2332"
-         endingLineNumber = "2332"
+         startingLineNumber = "2333"
+         endingLineNumber = "2333"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6891,11 +6865,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2255"
-         endingLineNumber = "2255"
+         startingLineNumber = "2256"
+         endingLineNumber = "2256"
          landmarkName = "-tableViewModel:detailViewWillPresentForSectionAtIndex:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6904,11 +6878,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2259"
-         endingLineNumber = "2259"
+         startingLineNumber = "2260"
+         endingLineNumber = "2260"
          landmarkName = "-tableViewModel:detailViewWillPresentForSectionAtIndex:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6917,11 +6891,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2262"
-         endingLineNumber = "2262"
+         startingLineNumber = "2263"
+         endingLineNumber = "2263"
          landmarkName = "-tableViewModel:detailViewWillPresentForSectionAtIndex:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6930,11 +6904,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2502"
-         endingLineNumber = "2502"
+         startingLineNumber = "2503"
+         endingLineNumber = "2503"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6943,11 +6917,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2528"
-         endingLineNumber = "2528"
+         startingLineNumber = "2529"
+         endingLineNumber = "2529"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6956,33 +6930,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2504"
-         endingLineNumber = "2504"
-         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2507"
-         endingLineNumber = "2507"
-         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2505"
@@ -6995,11 +6943,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2539"
-         endingLineNumber = "2539"
+         startingLineNumber = "2508"
+         endingLineNumber = "2508"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7008,11 +6956,37 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "375412994.491792"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2541"
-         endingLineNumber = "2541"
+         startingLineNumber = "2506"
+         endingLineNumber = "2506"
+         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TimeTrackViewController.m"
+         timestampString = "380254658.903769"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2540"
+         endingLineNumber = "2540"
+         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "TimeTrackViewController.m"
+         timestampString = "380254658.903769"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2542"
+         endingLineNumber = "2542"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7099,11 +7073,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ConsultationsViewController.m"
-         timestampString = "375400093.460201"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "779"
-         endingLineNumber = "779"
+         startingLineNumber = "782"
+         endingLineNumber = "782"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7112,11 +7086,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ConsultationsViewController.m"
-         timestampString = "375400093.460201"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "822"
-         endingLineNumber = "822"
+         startingLineNumber = "825"
+         endingLineNumber = "825"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7125,11 +7099,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ConsultationsViewController.m"
-         timestampString = "378559138.656613"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "853"
-         endingLineNumber = "853"
+         startingLineNumber = "856"
+         endingLineNumber = "856"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7138,11 +7112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ConsultationsViewController.m"
-         timestampString = "375400093.460201"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "781"
-         endingLineNumber = "781"
+         startingLineNumber = "784"
+         endingLineNumber = "784"
          landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7307,11 +7281,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TimeTrackViewController.m"
-         timestampString = "377727400.477799"
+         timestampString = "380254658.903769"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2340"
-         endingLineNumber = "2340"
+         startingLineNumber = "2341"
+         endingLineNumber = "2341"
          landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7619,11 +7593,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "378944312.580617"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "6021"
-         endingLineNumber = "6021"
+         startingLineNumber = "3714"
+         endingLineNumber = "3714"
          landmarkName = "-persistentStoreCoordinator"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7632,11 +7606,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "378944312.580617"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5998"
-         endingLineNumber = "5998"
+         startingLineNumber = "3691"
+         endingLineNumber = "3691"
          landmarkName = "-persistentStoreCoordinator"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7645,11 +7619,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "378943203.960578"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5978"
-         endingLineNumber = "5978"
+         startingLineNumber = "3671"
+         endingLineNumber = "3671"
          landmarkName = "-persistentStoreCoordinator"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7658,11 +7632,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "378943203.960578"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5972"
-         endingLineNumber = "5972"
+         startingLineNumber = "3665"
+         endingLineNumber = "3665"
          landmarkName = "-persistentStoreCoordinator"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7671,11 +7645,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "378943203.960578"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5973"
-         endingLineNumber = "5973"
+         startingLineNumber = "3666"
+         endingLineNumber = "3666"
          landmarkName = "-persistentStoreCoordinator"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7684,11 +7658,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "378943203.960578"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5796"
-         endingLineNumber = "5796"
+         startingLineNumber = "3489"
+         endingLineNumber = "3489"
          landmarkName = "-mergeiCloudChanges:forContext:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7697,11 +7671,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "378943203.960578"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5851"
-         endingLineNumber = "5851"
+         startingLineNumber = "3544"
+         endingLineNumber = "3544"
          landmarkName = "-mergeChangesFrom_iCloud:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7710,12 +7684,142 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "378943203.960578"
+         timestampString = "380266691.518167"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5845"
-         endingLineNumber = "5845"
+         startingLineNumber = "3538"
+         endingLineNumber = "3538"
          landmarkName = "-mergeChangesFrom_iCloud:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../Downloads/STV 3.1.4 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core/SCTableViewCell.m"
+         timestampString = "380242747.849086"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "242"
+         endingLineNumber = "242"
+         landmarkName = "-didLayoutSubviews"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PTTAppDelegate.m"
+         timestampString = "380254687.326132"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "2848"
+         endingLineNumber = "2848"
+         landmarkName = "-saveContext"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../Downloads/STV 3.1.4 Pro/Source Code/STV+CoreData/STV+CoreData/SCCoreDataStore.m"
+         timestampString = "380254708.892983"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "518"
+         endingLineNumber = "518"
+         landmarkName = "-commitData"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SCCoreDataStore_AppDelegate.m"
+         timestampString = "380254736.838775"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "25"
+         endingLineNumber = "25"
+         landmarkName = "-commitData"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "ClientsViewController_iPhone.m"
+         timestampString = "380255231.246968"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "178"
+         endingLineNumber = "178"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SCArrayOfObjectsModel+CoreData+AppDelegate.m"
+         timestampString = "380257851.279736"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "36"
+         endingLineNumber = "36"
+         landmarkName = "-initWithTableView:pTEntityDefinition:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "SCArrayOfObjectsModel+CoreDataWithAppDelegate.m"
+         timestampString = "380259592.816986"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "18"
+         endingLineNumber = "18"
+         landmarkName = "-initWithTableView:pTEntityDefinition:filterPredicate:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../Downloads/STV 3.1.4 Pro/Source Code/STV+CoreData/STV+CoreData/SCCoreDataStore.m"
+         timestampString = "380262549.666572"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "529"
+         endingLineNumber = "529"
+         landmarkName = "-saveContext"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../Downloads/STV 3.1.4 Pro/Source Code/STV+CoreData/STV+CoreData/SCCoreDataStore.m"
+         timestampString = "380262552.884949"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "521"
+         endingLineNumber = "521"
+         landmarkName = "-commitData"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "../../Downloads/STV 3.1.4 Pro/Source Code/STV+CoreData/STV+CoreData/SCCoreDataStore.m"
+         timestampString = "380262815.310872"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "564"
+         endingLineNumber = "564"
+         landmarkName = "-repairForSaveError:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
