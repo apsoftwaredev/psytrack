@@ -11,6 +11,9 @@
 #import "ClientsSelectionCell.h"
 #import "EncryptedSCTextViewCell.h"
 #import "LogEntity.h"
+
+
+
 @interface ExpertTestemonyVC ()
 
 @end
@@ -28,9 +31,11 @@
     [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
     
     
+
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+
     
-    
-    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    NSManagedObjectContext * managedObjectContext = [appDelegate managedObjectContext];
     
     SCEntityDefinition *expertTestemonyDef=[SCEntityDefinition definitionWithEntityName:@"ExpertTestemonyEntity" managedObjectContext:managedObjectContext propertyNamesString:@"caseName;attorneys;hours;judge;plantifDefendant;courtAppearances;logs; organization;publications;notes"];
     

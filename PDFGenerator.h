@@ -20,8 +20,6 @@
     BOOL done;
 }
 
-- (void)createPDF:(NSString *)fileName withContent:(NSString *)content forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString*)password;
-
 - (NSString *)stringToDraw:(NSString *)font fontSize:(int)fontSize drawInRect:(CGRect)bounds;
 
 

@@ -1108,7 +1108,6 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     clientSubstanceLogPropertyDef.attributes=[SCArrayOfObjectsAttributes attributesWithObjectDefinition:substanceLogDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:[SCTableViewCell cellWithText:@"Add Substance Use Log"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:NO addNewObjectuiElementExistsInEditingMode:YES];
     
-
     SCPropertyDefinition *substanceUseLogDatePropertyDef = [substanceLogDef propertyDefinitionWithName:@"logDate"];
 	substanceUseLogDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
                                                                          datePickerMode:UIDatePickerModeDate

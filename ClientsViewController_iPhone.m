@@ -124,7 +124,9 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     if (isInDetailSubview) {
         self.navigationBarType=SCNavigationBarTypeNone; 
         
-        objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView entityDefinition:self.clientsViewController_Shared.clientDef];
+        objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView entityDefinition:self.clientsViewController_Shared.clientDef ];
+        
+        
         if (searchBar.scopeButtonTitles.count>1) {
             
             [self.searchBar setSelectedScopeButtonIndex:1];
@@ -172,8 +174,10 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     else
     {
         
-        objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:self.clientsViewController_Shared.clientDef filterPredicate:currentClientsPredicate];
+        objectsModel =  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:self.clientsViewController_Shared.clientDef filterPredicate:currentClientsPredicate];
         
+       
+       
         
         //        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
         //                                                 withEntityClassDefinition:clientsViewController_Shared.clientDef usingPredicate:currentClientsPredicate useSCSelectionSection:FALSE];
@@ -282,6 +286,7 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     UIViewController *navtitle=self.navigationController.topViewController;
     
     navtitle.title=@"Clients";
+
 
     
 }
@@ -646,6 +651,8 @@ static NSString *kBackgroundColorKey = @"backgroundColor";
     
     
 }
+
+
 //-(void)tableViewModelSearchBarCancelButtonClicked:(SCArrayOfItemsModel *)tableViewModel{
 //    
 //    

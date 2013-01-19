@@ -425,7 +425,6 @@
 		E7619875158946B100C5BB8F /* ClientGroupsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7619873158946B100C5BB8F /* ClientGroupsViewController.xib */; };
 		E76984E115869C2C00D760A6 /* ipad-background-blue-plain-small.png in Resources */ = {isa = PBXBuildFile; fileRef = E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */; };
 		E777EF301693A16B000C51E9 /* DrugProductEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E777EF2F1693A16B000C51E9 /* DrugProductEntity.m */; };
-		E777EF361693AEAF000C51E9 /* PTManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E777EF351693AEAE000C51E9 /* PTManagedObject.m */; };
 		E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */; };
 		E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E78A8D1A1531EDF10099FE5B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */; };
@@ -484,6 +483,10 @@
 		E7A21370155B34CD005CF154 /* LogoBackgroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A2136E155B34CD005CF154 /* LogoBackgroundViewController.m */; };
 		E7A21371155B34CD005CF154 /* LogoBackgroundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7A2136F155B34CD005CF154 /* LogoBackgroundViewController.xib */; };
 		E7A5D7081559EB26000F248F /* DetailViewControllerTheme.ptt in Resources */ = {isa = PBXBuildFile; fileRef = E7A5D7071559EB26000F248F /* DetailViewControllerTheme.ptt */; };
+		E7A8B0F516AA4DD600C33267 /* PTTAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 37F7CE201500334800AD2C3A /* PTTAppDelegate.h */; };
+		E7A8B0FD16AA579F00C33267 /* PTManagedObject.h in Resources */ = {isa = PBXBuildFile; fileRef = E7A8B0FB16AA579F00C33267 /* PTManagedObject.h */; };
+		E7A8B0FE16AA579F00C33267 /* PTManagedObject.m in Resources */ = {isa = PBXBuildFile; fileRef = E7A8B0FC16AA579F00C33267 /* PTManagedObject.m */; };
+		E7A8B0FF16AA583900C33267 /* PTManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A8B0FC16AA579F00C33267 /* PTManagedObject.m */; };
 		E7A92491154853760080B35D /* DrugTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7A92490154853760080B35D /* DrugTestViewController.xib */; };
 		E7A9249315485E6C0080B35D /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E7A9249215485E6C0080B35D /* blueArrow.png */; };
 		E7AFB2B215C329A4005E2722 /* ConsultationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AFB2B015C329A4005E2722 /* ConsultationsViewController.xib */; };
@@ -1316,8 +1319,6 @@
 		E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-background-blue-plain-small.png"; sourceTree = "<group>"; };
 		E777EF2E1693A16B000C51E9 /* DrugProductEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugProductEntity.h; sourceTree = "<group>"; };
 		E777EF2F1693A16B000C51E9 /* DrugProductEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugProductEntity.m; sourceTree = "<group>"; };
-		E777EF341693AEAE000C51E9 /* PTManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTManagedObject.h; sourceTree = "<group>"; };
-		E777EF351693AEAE000C51E9 /* PTManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTManagedObject.m; sourceTree = "<group>"; };
 		E78480C41518C2E200F48EA3 /* EncryptedSCSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCSelectionCell.h; sourceTree = "<group>"; };
 		E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCSelectionCell.m; sourceTree = "<group>"; };
 		E78A8D191531EDF10099FE5B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -1383,6 +1384,8 @@
 		E7A2136E155B34CD005CF154 /* LogoBackgroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoBackgroundViewController.m; sourceTree = "<group>"; };
 		E7A2136F155B34CD005CF154 /* LogoBackgroundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogoBackgroundViewController.xib; sourceTree = "<group>"; };
 		E7A5D7071559EB26000F248F /* DetailViewControllerTheme.ptt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DetailViewControllerTheme.ptt; sourceTree = "<group>"; };
+		E7A8B0FB16AA579F00C33267 /* PTManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTManagedObject.h; sourceTree = "<group>"; };
+		E7A8B0FC16AA579F00C33267 /* PTManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTManagedObject.m; sourceTree = "<group>"; };
 		E7A92490154853760080B35D /* DrugTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrugTestViewController.xib; sourceTree = "<group>"; };
 		E7A9249215485E6C0080B35D /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
 		E7AFB2AE15C329A3005E2722 /* ConsultationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultationsViewController.h; sourceTree = "<group>"; };
@@ -1915,8 +1918,8 @@
 		37F7CEC615005E3400AD2C3A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E777EF341693AEAE000C51E9 /* PTManagedObject.h */,
-				E777EF351693AEAE000C51E9 /* PTManagedObject.m */,
+				E7A8B0FB16AA579F00C33267 /* PTManagedObject.h */,
+				E7A8B0FC16AA579F00C33267 /* PTManagedObject.m */,
 				E7B49C1A1607E53A0073AA30 /* NSManagedObject Subclasses */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
@@ -2933,6 +2936,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		E7A8B0F416AA4DC000C33267 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7A8B0F516AA4DD600C33267 /* PTTAppDelegate.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		B79F4897142BEF0D0085D47B /* PsyTrack */ = {
 			isa = PBXNativeTarget;
@@ -2941,6 +2955,7 @@
 				B79F4894142BEF0D0085D47B /* Sources */,
 				B79F4895142BEF0D0085D47B /* Frameworks */,
 				B79F4896142BEF0D0085D47B /* Resources */,
+				E7A8B0F416AA4DC000C33267 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -3229,6 +3244,8 @@
 				E7B5D97F168D31BB000CA5B5 /* ClientPresentationGenerateVC_iPhone.xib in Resources */,
 				E7B5D994168DB670000CA5B5 /* Default.png in Resources */,
 				E70FACEE1697154C00E14F03 /* psyTrack.sqlite in Resources */,
+				E7A8B0FD16AA579F00C33267 /* PTManagedObject.h in Resources */,
+				E7A8B0FE16AA579F00C33267 /* PTManagedObject.m in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3239,6 +3256,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7A8B0FF16AA583900C33267 /* PTManagedObject.m in Sources */,
 				B703DBB914EBF66600A921F2 /* PTTEncryption.m in Sources */,
 				37BF64F514F2917D0065C607 /* NSDictionaryHelpers.m in Sources */,
 				378DEDD214FE73AF00CF4F12 /* LCYAppSettings.m in Sources */,
@@ -3570,7 +3588,6 @@
 				E7315CB016937F9800964CE7 /* ClientBatteryNotesEntity.m in Sources */,
 				E7315CB316937F9800964CE7 /* ExistingGenderEntity.m in Sources */,
 				E777EF301693A16B000C51E9 /* DrugProductEntity.m in Sources */,
-				E777EF361693AEAF000C51E9 /* PTManagedObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

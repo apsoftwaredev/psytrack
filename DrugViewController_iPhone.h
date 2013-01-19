@@ -73,7 +73,7 @@
 @property (nonatomic,strong) IBOutlet UIButton *downloadContinueButton;
 @property (nonatomic,strong) IBOutlet UIButton *downloadCheckButton;
 @property (nonatomic, strong) NSTimer *checkingTimer;
-
+@property (nonatomic, assign)BOOL connectingToFile;
 
 @property (nonatomic, strong) DrugNameObjectSelectionCell *drugObjectSelectionCell;
 

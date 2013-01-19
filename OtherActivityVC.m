@@ -11,6 +11,8 @@
 #import "EncryptedSCTextViewCell.h"
 #import "LogEntity.h"
 
+
+
 @interface OtherActivityVC ()
 
 @end

@@ -10,6 +10,7 @@
 #import "PTTAppDelegate.h"
 #import "LicenseRenewalEntity.h"
 
+
 @interface CECreditsViewController ()
 
 @end
@@ -25,7 +26,8 @@
     
     //set the date format
     [dateFormatter setDateFormat:@"M/d/yyyy"];
-    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    NSManagedObjectContext * managedObjectContext = [appDelegate managedObjectContext];
     
     SCEntityDefinition *ceCreditsDef=[SCEntityDefinition definitionWithEntityName:@"ContinuingEducationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"cETitle;type;topics;provider;cost;credits;dateEarned;forLicenseRenewal;notes"];
     
@@ -308,7 +310,7 @@
     SCPropertyDefinition *ceCreditNotesPropertyDef=[ceCreditsDef propertyDefinitionWithName:@"notes"];
     ceCreditNotesPropertyDef.type=SCPropertyTypeTextView;
     
-    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:ceCreditsDef];
+    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:ceCreditsDef ];
     
     
     if([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6){

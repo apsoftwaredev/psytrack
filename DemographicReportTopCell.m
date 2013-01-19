@@ -34,6 +34,7 @@
 #import "DemographicVariableAndCount.h"
 #import "DemographicReportBottomCell.h"
 
+
 @implementation DemographicReportTopCell
 
 @synthesize sexObjectsModel=sexObjectsModel_;

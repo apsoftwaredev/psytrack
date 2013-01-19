@@ -20,6 +20,7 @@
 #import "PaymentEntity.h"
 #import "FeeEntity.h"
 
+
 @interface ConsultationsViewController ()
 
 @end
@@ -38,8 +39,10 @@
     //set the date format
     [dateFormatter setDateFormat:@"M/d/yyyy"];
     [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
-    
-    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+
+    NSManagedObjectContext * managedObjectContext = [appDelegate managedObjectContext];
 
     SCEntityDefinition *consultationDef=[SCEntityDefinition definitionWithEntityName:@"ConsultationEntity" managedObjectContext:managedObjectContext propertyNamesString:@"organization;startDate;endDate;hours;proBono;referrals;logs;notes;rateCharges;fees;paid;payments"];
     
@@ -520,7 +523,7 @@
     
     
     
-    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:consultationDef];
+    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:consultationDef ];
     
     
     if([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6){

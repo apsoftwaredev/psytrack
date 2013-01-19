@@ -11,6 +11,7 @@
 #import "EncryptedSCTextViewCell.h"
 #import "LogEntity.h"
 
+
 @interface CommunityServiceVC ()
 
 @end
@@ -29,8 +30,10 @@
     
     
     
-    
-    NSManagedObjectContext * managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
+
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+
+    NSManagedObjectContext * managedObjectContext = [appDelegate managedObjectContext];
     
     SCEntityDefinition *communityServiceDef=[SCEntityDefinition definitionWithEntityName:@"CommunityServiceEntity" managedObjectContext:managedObjectContext propertyNamesString:@"projectName;dateStarted;dateEnded;logs;notes"];
     
@@ -162,7 +165,7 @@
     
     [self setNavigationBarType: SCNavigationBarTypeAddEditRight];
     
-    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:communityServiceDef];
+    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:communityServiceDef ];
     
     objectsModel.editButtonItem = self.editButton;;
     
