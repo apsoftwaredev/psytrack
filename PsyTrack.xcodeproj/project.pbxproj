@@ -487,6 +487,7 @@
 		E7A8B0FD16AA579F00C33267 /* PTManagedObject.h in Resources */ = {isa = PBXBuildFile; fileRef = E7A8B0FB16AA579F00C33267 /* PTManagedObject.h */; };
 		E7A8B0FE16AA579F00C33267 /* PTManagedObject.m in Resources */ = {isa = PBXBuildFile; fileRef = E7A8B0FC16AA579F00C33267 /* PTManagedObject.m */; };
 		E7A8B0FF16AA583900C33267 /* PTManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A8B0FC16AA579F00C33267 /* PTManagedObject.m */; };
+		E7A8B12E16AB789200C33267 /* commerce-category5-information-Security.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E7A8B12D16AB789200C33267 /* commerce-category5-information-Security.pdf */; };
 		E7A92491154853760080B35D /* DrugTestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7A92490154853760080B35D /* DrugTestViewController.xib */; };
 		E7A9249315485E6C0080B35D /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E7A9249215485E6C0080B35D /* blueArrow.png */; };
 		E7AFB2B215C329A4005E2722 /* ConsultationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AFB2B015C329A4005E2722 /* ConsultationsViewController.xib */; };
@@ -1386,6 +1387,7 @@
 		E7A5D7071559EB26000F248F /* DetailViewControllerTheme.ptt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DetailViewControllerTheme.ptt; sourceTree = "<group>"; };
 		E7A8B0FB16AA579F00C33267 /* PTManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTManagedObject.h; sourceTree = "<group>"; };
 		E7A8B0FC16AA579F00C33267 /* PTManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTManagedObject.m; sourceTree = "<group>"; };
+		E7A8B12D16AB789200C33267 /* commerce-category5-information-Security.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "commerce-category5-information-Security.pdf"; sourceTree = "<group>"; };
 		E7A92490154853760080B35D /* DrugTestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrugTestViewController.xib; sourceTree = "<group>"; };
 		E7A9249215485E6C0080B35D /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
 		E7AFB2AE15C329A3005E2722 /* ConsultationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultationsViewController.h; sourceTree = "<group>"; };
@@ -2132,6 +2134,7 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
+				E7A8B12D16AB789200C33267 /* commerce-category5-information-Security.pdf */,
 				E7FE8AA1169BAD7900EB6969 /* PsyTrack.entitlements */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Third Party */,
@@ -3246,6 +3249,7 @@
 				E70FACEE1697154C00E14F03 /* psyTrack.sqlite in Resources */,
 				E7A8B0FD16AA579F00C33267 /* PTManagedObject.h in Resources */,
 				E7A8B0FE16AA579F00C33267 /* PTManagedObject.m in Resources */,
+				E7A8B12E16AB789200C33267 /* commerce-category5-information-Security.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
