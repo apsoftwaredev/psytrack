@@ -148,6 +148,10 @@
             switch (indexPath.section) {
                 case 0:
                 {
+                    if ( indexPath.row==0 && [SCUtilities is_iPad]) {
+                         result.textLabel.text=@"My Information (Select your name under Clinicians tab)";
+                    }
+                  else
                     if (indexPath.row==0)result.textLabel.text=@"My Information";
                 
                 }
