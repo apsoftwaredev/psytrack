@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+
+<array>
+<dict>
+<key>Who is Dr. Touch</key>
+<string>Dr. Touch is and old pseudonym and online-brand of Oliver Drobnik. Nowadays he goes by Cocoanetics.
+	
+His website is http://www.cocoanetics.com </string>
+</dict>
+<dict>
+<key>General Troubleshooting Tips</key>
+<string>Restart your Device.
+A lot of issues are easily resolved by simply restarting your iPhone or iPod touch. If you are having problems, try this first. This is less of an issue with the 3GS, but it’s easy to run out of ram quickly on the older devices and that’s generally the source of a lot of app issues.
+
+Re-download and Reinstall the Application.
+If restarting doesn’t help, you may want to try re-downloading the application and installing it again. You may not have the latest version of the application and maybe we already fixed your issue in an update. Another possibility is having corrupt data and a new install could fix that. If you want to remove the application from your device first, just be aware that removing an application will delete application data for good.</string>
+</dict>
+<dict>
+<key>I emailed you guys, but haven’t received a response yet.</key>
+<string>We are a small 2-person team and get many emails daily. We try our best to answer emails promptly, but we also have bugs to squash, features to add, and new robots to build. But rest assured each and every email is read and filed. 
+
+We generally don’t respond to suggestions and requests unless for some reason we need more info from you. We do file and track them so keep your ideas and requests coming!
+
+We try our best to answer every support question. But please make sure your question hasn’t already been answered in our FAQ. If you email us with an issue that has already been explained in the FAQs, we may skip the email.
+
+For support issues, email response time varies. We do try our best to answer as promptly as possible. If we don’t respond within a week, feel free to remind us with another email. We are trying our best and we truly do care.
+
+If you have a quick question and use Twitter, you’ll probably get a quicker response sending a message to @tapbots.</string>
+</dict>
+<dict>
+<key>How come you haven’t implemented the feature I requested yet?</key>
+<string>We might get a few dozen requests for a particular feature, but the big picture is, we have hundreds of thousands of happy users for a given app. Every change we make affects a lot of users, so unless it’s a bug, planned feature, or just an amazing idea, we probably won’t implement right away or even at all. It’s not that we don’t care. It’s that we care so much about our apps and have a bigger picture of what our customers want. With that said, we do read every single feature request and if it sounds like a good idea, we document them as possible new features.
+
+Our approach to software is different than most. Each of our apps have a core focus and the features we add need to build upon that focus. For us, less is more. We’d much prefer to make our current feature set better rather than adding more.
+
+Finally, it should also be noted that we are not a big company. We are a team of 2 that handles everything from design, development, support, and marketing. We also have multiple apps to support. We really appreciate your understanding.</string>
+</dict>
+<dict>
+<key>Can you add body fat percentage, multiple users, and notes to Weightbot?</key>
+<string>These are our most requested features for Weightbot. Why haven’t we added them yet? The first reason is we aren’t quite sure if they enhance the app for the majority of users. Remember, we have hundreds of thousands of happy Weightbot customers. And the second reason is, we haven’t thought of the perfect way to include them so they don’t feel like an afterthought. Great care went into the design of Weightbot and we don’t want to complicate the app or have anything feel out of place. Weightbot’s simplicity is what most people like about it. 
+
+With that said, we understand these features are important for some and we do think they are great ideas. They are just going to take a lot more work to implement right. This possibly means redesigning Weightbot completely for version 2.0 someday.</string>
+</dict>
+<dict>
+<key>How come age and gender isn’t used to determine my BMI?</key>
+<string>The standard for BMI is based on a person’s weight in relationship to their height, regardless of gender. Also, BMI is calculated the same for children, but the results are compared against children of the same age. So the Overweight/Underweight evaluation in the graph view may be wrong for children or those with more (athletes) or less (elderly) lean body mass. In those cases, you have the option to turn off the BMI evaluation lines in the app settings.
+
+You can also toggle the BMI display on the main screen to show your most recent weight change (by tapping on it) if you prefer not to use BMI at all.</string>
+</dict>
+<dict>
+<key>How come the “Time Left” field in the data view isn’t working correctly?</key>
+<string>The “Time Left” field is an estimated time based on your current weight change trend. If you see “--” in that field, it either means your trending the opposite way of your goal, or you don’t have enough weight data entered yet. 
+
+If you are looking for the “Goal Date” you selected, flip your device 180 degrees to view the graph view. The yellow line signifies your selected goal date.</string>
+</dict>
+<dict>
+<key>I have old weight data, but I can’t scroll back to them in the graphs.</key>
+<string>The scrolling graph view is meant to track your current goal. It starts at the “Starting Date” you selected in the settings. If you want to see older data in that view, you need to change the starting date in the settings. 
+
+However, the best solution is to double-tap the graph to view the month and year overview graphs. You can view all weight data regardless of the start date in these modes.</string>
+</dict>
+<dict>
+<key>My graphs look different than before. How do I go back?</key>
+<string>Rotating your device counter-clockwise reveals the data view. Turning it clockwise will reveal the graphs. 
+
+Also, there are 3 graph modes. There’s the scrolling graph view which contains 7 day, 1 month, and 1 year increments. If you double-tap the graphs, you’ll cycle to a 30 day and 1 year overview graph.</string>
+</dict>
+<dict>
+<key>Tell me more about the Weightbot backup system.</key>
+<string>The Weightbot backup system is a free service provided by Tapbots to keep your data safe. If for any reason you have to delete Weightbot from your device or just get a new device, you’ll be able to restore your data. Your username, password, and backups are all sent via 128-bit SSL encryption.
+
+Weightbot uses your email address as a security measure so your account is only accessible by you. If you forget your password, you can request it to be reset and you will receive an email that allows you to create a new password.</string>
+</dict>
+<dict>
+<key>Can I export my data? What about importing data into Weightbot?</key>
+<string>Our backup system allows you to export the latest backup as a .csv file. You can access it at http://weightbot.com. 
+
+As of today, you can’t import data into Weightbot, but we are looking into that option for the future.</string>
+</dict>
+<dict>
+<key>I accidentally added a weight I didn’t want. How do I delete it?</key>
+<string>Just shake your phone while on the date you wish to delete. You’ll hear a sound and if you have an iPhone, it will vibrate when it has deleted successfully.</string>
+</dict>
+<dict>
+<key>I forgot my 4-digit passcode to open Weightbot. How do I retrieve it?</key>
+<string>There’s no way to retrieve the 4-digit passcode that locks Weightbot. This is a security feature to protect your data. If you use this feature, it’s very important that you never forget this passcode. The only way to get around this is to delete the app and install it again. This however will delete all of your weight data. If you are using our backup system, you should have no problems retrieving your data again.</string>
+</dict>
+<dict>
+<key>Does Weightbot work with any WiFi/Bluetooth scales on the market?</key>
+<string>Weightbot only supports the Withings Scale. For more information about Weightbot and Withings, go to the “Withings Scale” section in Weightbot’s settings. For more information on the scale itself, you can visit withings.com.</string>
+</dict>
+</array>
+
+</plist>

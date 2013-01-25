@@ -748,13 +748,13 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
 	uint8_t iv[kChosenCipherBlockSize];
 	memset((void *) iv, 0x0, (size_t) sizeof(iv));
 	
-	LOGGING_FACILITY(plainText != nil, @"PlainText object cannot be nil." );
-	LOGGING_FACILITY(symmetricKey != nil, @"Symmetric key object cannot be nil." );
-	LOGGING_FACILITY(pkcs7 != NULL, @"CCOptions * pkcs7 cannot be NULL." );
-//	
+//	LOGGING_FACILITY(plainText != nil, @"PlainText object cannot be nil." );
+//	LOGGING_FACILITY(symmetricKey != nil, @"Symmetric key object cannot be nil." );
+//	LOGGING_FACILITY(pkcs7 != NULL, @"CCOptions * pkcs7 cannot be NULL." );
+////	
+////    
 //    
-    
-    LOGGING_FACILITY([symmetricKey length] == kChosenCipherKeySize, @"Disjoint choices for key size." );
+//    LOGGING_FACILITY([symmetricKey length] == kChosenCipherKeySize, @"Disjoint choices for key size." );
 
 //        
     if ([symmetricKey length]!=kChosenCipherKeySize) {
@@ -767,7 +767,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
 
 
 
-	LOGGING_FACILITY(plainTextBufferSize > 0, @"Empty plaintext passed in." );
+//	LOGGING_FACILITY(plainTextBufferSize > 0, @"Empty plaintext passed in." );
 	
 	// We don't want to toss padding on if we don't need to
 	if (encryptOrDecrypt == kCCEncrypt) {
@@ -778,9 +778,10 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
                 pkcs7 =(CCOptions *) kCCOptionPKCS7Padding;
 			}
 		}
-	} else if (encryptOrDecrypt != kCCDecrypt) {
-		LOGGING_FACILITY1( 0, @"Invalid CCOperation parameter [%d] for cipher context.", *pkcs7 );
-	} 
+	}
+//    else if (encryptOrDecrypt != kCCDecrypt) {
+//		LOGGING_FACILITY1( 0, @"Invalid CCOperation parameter [%d] for cipher context.", *pkcs7 );
+//	} 
 	
 	// Create and Initialize the crypto reference.
 	ccStatus = CCCryptorCreate(	encryptOrDecrypt, 
@@ -792,7 +793,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
                                &thisEncipher
                                );
 	
-	LOGGING_FACILITY1( ccStatus == kCCSuccess, @"Problem creating the context, ccStatus == %d.", ccStatus );
+//	LOGGING_FACILITY1( ccStatus == kCCSuccess, @"Problem creating the context, ccStatus == %d.", ccStatus );
 	
 	// Calculate byte block alignment for all calls through to and including final.
 	bufferPtrSize = CCCryptorGetOutputLength(thisEncipher, plainTextBufferSize, true);
@@ -819,7 +820,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
                                &movedBytes
                                );
 	
-	LOGGING_FACILITY1( ccStatus == kCCSuccess, @"Problem with CCCryptorUpdate, ccStatus == %d.", ccStatus );
+//	LOGGING_FACILITY1( ccStatus == kCCSuccess, @"Problem with CCCryptorUpdate, ccStatus == %d.", ccStatus );
 	
 	// Handle book keeping.
 	ptr += movedBytes;
@@ -840,7 +841,7 @@ NSData *encryptedData =[self wrapSymmetricKey:(NSData *)data keyRef:(SecKeyRef)p
 		thisEncipher = NULL;
 	}
 	
-	LOGGING_FACILITY1( ccStatus == kCCSuccess, @"Problem with encipherment ccStatus == %d", ccStatus );
+//	LOGGING_FACILITY1( ccStatus == kCCSuccess, @"Problem with encipherment ccStatus == %d", ccStatus );
 	
 	cipherOrPlainText = [NSData dataWithBytes:(const void *)bufferPtr length:(NSUInteger)totalBytesWritten];
     

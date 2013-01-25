@@ -12,7 +12,6 @@
 		376798071500665D00D0639D /* LongTimePickerCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376797FC1500665D00D0639D /* LongTimePickerCell_iPhone.xib */; };
 		376798081500665D00D0639D /* MyPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376797FE1500665D00D0639D /* MyPickerView.xib */; };
 		3767980A1500665D00D0639D /* WebViewDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376798021500665D00D0639D /* WebViewDetailViewController.xib */; };
-		376798171500696800D0639D /* ia.p12 in Resources */ = {isa = PBXBuildFile; fileRef = 376798151500696800D0639D /* ia.p12 */; };
 		3767981A15006A8100D0639D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3767981815006A8100D0639D /* InfoPlist.strings */; };
 		3773F77114FD267000C36B75 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3773F77014FD267000C36B75 /* AudioToolbox.framework */; };
 		378DEDD214FE73AF00CF4F12 /* LCYAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 378DEDB214FE73AF00CF4F12 /* LCYAppSettings.m */; };
@@ -73,7 +72,6 @@
 		37F7CE651500561900AD2C3A /* ClientsViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE641500561900AD2C3A /* ClientsViewController_iPhone.m */; };
 		37F7CE681500563200AD2C3A /* ClientsDetailViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE661500563200AD2C3A /* ClientsDetailViewController_iPad.m */; };
 		37F7CE691500563200AD2C3A /* ClientsRootViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE671500563200AD2C3A /* ClientsRootViewController_iPad.m */; };
-		37F7CE6C150056F800AD2C3A /* EncryptedSCTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE6B150056F800AD2C3A /* EncryptedSCTextFieldCell.m */; };
 		37F7CE791500578B00AD2C3A /* CliniciansDetailViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE761500578B00AD2C3A /* CliniciansDetailViewController_iPad.m */; };
 		37F7CE7A1500578B00AD2C3A /* CliniciansRootViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE781500578B00AD2C3A /* CliniciansRootViewController_iPad.m */; };
 		37F7CE7F150057C300AD2C3A /* CliniciansDetailViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CE7B150057C300AD2C3A /* CliniciansDetailViewController_iPad.xib */; };
@@ -156,7 +154,6 @@
 		37F7CFD1150060D400AD2C3A /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CFCE150060D400AD2C3A /* Settings.bundle */; };
 		37F7CFDD1500624000AD2C3A /* CasualAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CFDB1500624000AD2C3A /* CasualAlertViewController.xib */; };
 		37F7CFE0150062DE00AD2C3A /* CasualAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CFDF150062DE00AD2C3A /* CasualAlertViewController.m */; };
-		37F7D001150063CF00AD2C3A /* TabFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7D000150063CE00AD2C3A /* TabFile.m */; };
 		B703DBB914EBF66600A921F2 /* PTTEncryption.m in Sources */ = {isa = PBXBuildFile; fileRef = B703DBB814EBF66600A921F2 /* PTTEncryption.m */; };
 		B78C594B14D7669B005E5462 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B78C594914D7669A005E5462 /* AddressBook.framework */; };
 		B78C594C14D7669B005E5462 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B78C594A14D7669A005E5462 /* AddressBookUI.framework */; };
@@ -426,7 +423,6 @@
 		E7619875158946B100C5BB8F /* ClientGroupsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7619873158946B100C5BB8F /* ClientGroupsViewController.xib */; };
 		E76984E115869C2C00D760A6 /* ipad-background-blue-plain-small.png in Resources */ = {isa = PBXBuildFile; fileRef = E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */; };
 		E777EF301693A16B000C51E9 /* DrugProductEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E777EF2F1693A16B000C51E9 /* DrugProductEntity.m */; };
-		E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */; };
 		E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E78A8D1A1531EDF10099FE5B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */; };
 		E78C96D115EE8CB100EDB0FF /* ActionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E78C96D015EE8CB100EDB0FF /* ActionButton.png */; };
@@ -488,7 +484,6 @@
 		E7A8B0FD16AA579F00C33267 /* PTManagedObject.h in Resources */ = {isa = PBXBuildFile; fileRef = E7A8B0FB16AA579F00C33267 /* PTManagedObject.h */; };
 		E7A8B0FE16AA579F00C33267 /* PTManagedObject.m in Resources */ = {isa = PBXBuildFile; fileRef = E7A8B0FC16AA579F00C33267 /* PTManagedObject.m */; };
 		E7A8B0FF16AA583900C33267 /* PTManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A8B0FC16AA579F00C33267 /* PTManagedObject.m */; };
-		E7A8B12E16AB789200C33267 /* commerce-category5-information-Security.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E7A8B12D16AB789200C33267 /* commerce-category5-information-Security.pdf */; };
 		E7A8B14A16AC30C900C33267 /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A8B14716AC305200C33267 /* libSensibleTableView.a */; };
 		E7A8B15716AC311C00C33267 /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7A8B15416AC30F600C33267 /* libSTV+CoreData.a */; };
 		E7A9249315485E6C0080B35D /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E7A9249215485E6C0080B35D /* blueArrow.png */; };
@@ -507,8 +502,6 @@
 		E7C02DC315B6003E0072F97C /* MonthlyPracticumLogGenerateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DC115B6003C0072F97C /* MonthlyPracticumLogGenerateViewController.m */; };
 		E7C02DC415B6003E0072F97C /* MonthlyPracticumLogGenerateVC_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7C02DC215B6003D0072F97C /* MonthlyPracticumLogGenerateVC_iPad.xib */; };
 		E7C02DC615B61CBC0072F97C /* MonthlyPracticumLogGenerateVC_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7C02DC515B61CBB0072F97C /* MonthlyPracticumLogGenerateVC_iPhone.xib */; };
-		E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */; };
-		E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */; };
 		E7C6871D15D613C600637BCE /* CoursesTakenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C6871B15D613C600637BCE /* CoursesTakenViewController.m */; };
 		E7C6871E15D613C600637BCE /* CoursesTakenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7C6871C15D613C600637BCE /* CoursesTakenViewController.xib */; };
 		E7CCB8B1159A9AD200A12908 /* MonthlyPracticumLogBottonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCB8B0159A9AD200A12908 /* MonthlyPracticumLogBottonCell.m */; };
@@ -618,7 +611,6 @@
 		376797FD1500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LongTimePickerCell_iPhone.xib; sourceTree = "<group>"; };
 		376797FF1500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MyPickerView.xib; sourceTree = "<group>"; };
 		376798031500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/WebViewDetailViewController.xib; sourceTree = "<group>"; };
-		376798151500696800D0639D /* ia.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ia.p12; sourceTree = "<group>"; };
 		3767981915006A8100D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3773F77014FD267000C36B75 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		378DEDB114FE73AF00CF4F12 /* LCYAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCYAppSettings.h; path = LockScreen/LCYAppSettings.h; sourceTree = SOURCE_ROOT; };
@@ -715,8 +707,6 @@
 		37F7CE641500561900AD2C3A /* ClientsViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClientsViewController_iPhone.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		37F7CE661500563200AD2C3A /* ClientsDetailViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientsDetailViewController_iPad.m; sourceTree = "<group>"; };
 		37F7CE671500563200AD2C3A /* ClientsRootViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ClientsRootViewController_iPad.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		37F7CE6A150056F800AD2C3A /* EncryptedSCTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCTextFieldCell.h; sourceTree = "<group>"; };
-		37F7CE6B150056F800AD2C3A /* EncryptedSCTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCTextFieldCell.m; sourceTree = "<group>"; };
 		37F7CE701500573E00AD2C3A /* CliniciansViewController_Shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CliniciansViewController_Shared.h; sourceTree = "<group>"; };
 		37F7CE751500578B00AD2C3A /* CliniciansDetailViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CliniciansDetailViewController_iPad.h; sourceTree = "<group>"; };
 		37F7CE761500578B00AD2C3A /* CliniciansDetailViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CliniciansDetailViewController_iPad.m; sourceTree = "<group>"; };
@@ -825,8 +815,6 @@
 		37F7CFDC1500624000AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CasualAlertViewController.xib; sourceTree = "<group>"; };
 		37F7CFDE150062DE00AD2C3A /* CasualAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CasualAlertViewController.h; sourceTree = "<group>"; };
 		37F7CFDF150062DE00AD2C3A /* CasualAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CasualAlertViewController.m; sourceTree = "<group>"; };
-		37F7CFFF150063CE00AD2C3A /* TabFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabFile.h; sourceTree = "<group>"; };
-		37F7D000150063CE00AD2C3A /* TabFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabFile.m; sourceTree = "<group>"; };
 		B703DBB714EBF66600A921F2 /* PTTEncryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTEncryption.h; sourceTree = SOURCE_ROOT; };
 		B703DBB814EBF66600A921F2 /* PTTEncryption.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PTTEncryption.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B78C594914D7669A005E5462 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -1321,8 +1309,6 @@
 		E76984DF15869C2C00D760A6 /* ipad-background-blue-plain-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad-background-blue-plain-small.png"; sourceTree = "<group>"; };
 		E777EF2E1693A16B000C51E9 /* DrugProductEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugProductEntity.h; sourceTree = "<group>"; };
 		E777EF2F1693A16B000C51E9 /* DrugProductEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugProductEntity.m; sourceTree = "<group>"; };
-		E78480C41518C2E200F48EA3 /* EncryptedSCSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCSelectionCell.h; sourceTree = "<group>"; };
-		E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCSelectionCell.m; sourceTree = "<group>"; };
 		E78A8D191531EDF10099FE5B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		E78A8D1A1531EDF10099FE5B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Reachability.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1388,7 +1374,6 @@
 		E7A5D7071559EB26000F248F /* DetailViewControllerTheme.ptt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DetailViewControllerTheme.ptt; sourceTree = "<group>"; };
 		E7A8B0FB16AA579F00C33267 /* PTManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTManagedObject.h; sourceTree = "<group>"; };
 		E7A8B0FC16AA579F00C33267 /* PTManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTManagedObject.m; sourceTree = "<group>"; };
-		E7A8B12D16AB789200C33267 /* commerce-category5-information-Security.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "commerce-category5-information-Security.pdf"; sourceTree = "<group>"; };
 		E7A8B13E16AC305100C33267 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../STV/STV 3.1.4 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
 		E7A8B14B16AC30F600C33267 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../STV/STV 3.1.4 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E7A9249215485E6C0080B35D /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
@@ -1411,10 +1396,6 @@
 		E7C02DC115B6003C0072F97C /* MonthlyPracticumLogGenerateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MonthlyPracticumLogGenerateViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7C02DC215B6003D0072F97C /* MonthlyPracticumLogGenerateVC_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogGenerateVC_iPad.xib; sourceTree = "<group>"; };
 		E7C02DC515B61CBB0072F97C /* MonthlyPracticumLogGenerateVC_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogGenerateVC_iPhone.xib; sourceTree = "<group>"; };
-		E7C074A0150EE4DE009C5498 /* EncryptedSCDateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCDateCell.h; sourceTree = "<group>"; };
-		E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCDateCell.m; sourceTree = "<group>"; };
-		E7C074A3150EE514009C5498 /* EncryptedSCTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptedSCTextViewCell.h; sourceTree = "<group>"; };
-		E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptedSCTextViewCell.m; sourceTree = "<group>"; };
 		E7C6871A15D613C600637BCE /* CoursesTakenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoursesTakenViewController.h; sourceTree = "<group>"; };
 		E7C6871B15D613C600637BCE /* CoursesTakenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoursesTakenViewController.m; sourceTree = "<group>"; };
 		E7C6871C15D613C600637BCE /* CoursesTakenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoursesTakenViewController.xib; sourceTree = "<group>"; };
@@ -1655,13 +1636,6 @@
 			path = LockScreen;
 			sourceTree = SOURCE_ROOT;
 		};
-		37BF64D414F19FD70065C607 /* Encryption Helper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Encryption Helper";
-			sourceTree = "<group>";
-		};
 		37BF64F214F2912C0065C607 /* NSDictionary+Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1854,7 +1828,6 @@
 		37F7CE8E1500589200AD2C3A /* Track */ = {
 			isa = PBXGroup;
 			children = (
-				E7989FE9157FAE35006B9DBD /* Managed Object Subclasses */,
 				E7E1A638152E86C600C227E8 /* Time Track View Controller */,
 				E78DA6A015252511004ABF29 /* Existing Hours */,
 				37F7CEB015005C7300AD2C3A /* TrainTrackViewController.h */,
@@ -2088,9 +2061,6 @@
 		B764788914DE6CED004EE572 /* Encrypted Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E75F7789151CEEC6002B10AE /* Custom Cells For Encryption */,
-				376798151500696800D0639D /* ia.p12 */,
-				37BF64D414F19FD70065C607 /* Encryption Helper */,
 				B703DBB714EBF66600A921F2 /* PTTEncryption.h */,
 				B703DBB814EBF66600A921F2 /* PTTEncryption.m */,
 			);
@@ -2118,8 +2088,6 @@
 				E798A02F15845941006B9DBD /* MapperTheme */,
 				E78A8D191531EDF10099FE5B /* Reachability.h */,
 				E78A8D1A1531EDF10099FE5B /* Reachability.m */,
-				37F7CFFF150063CE00AD2C3A /* TabFile.h */,
-				37F7D000150063CE00AD2C3A /* TabFile.m */,
 				37F7CE3E150051A900AD2C3A /* Download Bar */,
 				378DED4314FE72F000CF4F12 /* DTAboutViewController */,
 				378DEDB014FE73AF00CF4F12 /* LockScreen */,
@@ -2134,7 +2102,6 @@
 			isa = PBXGroup;
 			children = (
 				E724FA1716B1E7D9007508BB /* Encryption-Registration-Number-ERN.pdf */,
-				E7A8B12D16AB789200C33267 /* commerce-category5-information-Security.pdf */,
 				E7FE8AA1169BAD7900EB6969 /* PsyTrack.entitlements */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				B771C54314DAF3E4002D430E /* Third Party */,
@@ -2270,21 +2237,6 @@
 			name = "Client Presentation";
 			sourceTree = "<group>";
 		};
-		E75F7789151CEEC6002B10AE /* Custom Cells For Encryption */ = {
-			isa = PBXGroup;
-			children = (
-				37F7CE6A150056F800AD2C3A /* EncryptedSCTextFieldCell.h */,
-				37F7CE6B150056F800AD2C3A /* EncryptedSCTextFieldCell.m */,
-				E7C074A0150EE4DE009C5498 /* EncryptedSCDateCell.h */,
-				E7C074A1150EE4DE009C5498 /* EncryptedSCDateCell.m */,
-				E7C074A3150EE514009C5498 /* EncryptedSCTextViewCell.h */,
-				E7C074A4150EE514009C5498 /* EncryptedSCTextViewCell.m */,
-				E78480C41518C2E200F48EA3 /* EncryptedSCSelectionCell.h */,
-				E78480C51518C2E200F48EA3 /* EncryptedSCSelectionCell.m */,
-			);
-			name = "Custom Cells For Encryption";
-			sourceTree = "<group>";
-		};
 		E78DA6A015252511004ABF29 /* Existing Hours */ = {
 			isa = PBXGroup;
 			children = (
@@ -2295,13 +2247,6 @@
 				E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */,
 			);
 			name = "Existing Hours";
-			sourceTree = "<group>";
-		};
-		E7989FE9157FAE35006B9DBD /* Managed Object Subclasses */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Managed Object Subclasses";
 			sourceTree = "<group>";
 		};
 		E798A02F15845941006B9DBD /* MapperTheme */ = {
@@ -3114,7 +3059,6 @@
 				376798071500665D00D0639D /* LongTimePickerCell_iPhone.xib in Resources */,
 				376798081500665D00D0639D /* MyPickerView.xib in Resources */,
 				3767980A1500665D00D0639D /* WebViewDetailViewController.xib in Resources */,
-				376798171500696800D0639D /* ia.p12 in Resources */,
 				3767981A15006A8100D0639D /* InfoPlist.strings in Resources */,
 				37B2254D150286040015D955 /* Default@2x.png in Resources */,
 				37B2254F150286170015D955 /* Default-Portrait~ipad.png in Resources */,
@@ -3248,7 +3192,6 @@
 				E70FACEE1697154C00E14F03 /* psyTrack.sqlite in Resources */,
 				E7A8B0FD16AA579F00C33267 /* PTManagedObject.h in Resources */,
 				E7A8B0FE16AA579F00C33267 /* PTManagedObject.m in Resources */,
-				E7A8B12E16AB789200C33267 /* commerce-category5-information-Security.pdf in Resources */,
 				E724FA1816B1E7D9007508BB /* Encryption-Registration-Number-ERN.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3296,7 +3239,6 @@
 				37F7CE651500561900AD2C3A /* ClientsViewController_iPhone.m in Sources */,
 				37F7CE681500563200AD2C3A /* ClientsDetailViewController_iPad.m in Sources */,
 				37F7CE691500563200AD2C3A /* ClientsRootViewController_iPad.m in Sources */,
-				37F7CE6C150056F800AD2C3A /* EncryptedSCTextFieldCell.m in Sources */,
 				37F7CE791500578B00AD2C3A /* CliniciansDetailViewController_iPad.m in Sources */,
 				37F7CE7A1500578B00AD2C3A /* CliniciansRootViewController_iPad.m in Sources */,
 				37F7CE871500582600AD2C3A /* ClinicianViewController.m in Sources */,
@@ -3322,13 +3264,9 @@
 				37F7CF5015005F7E00AD2C3A /* WeightPickerCell.m in Sources */,
 				37F7CFCF150060D400AD2C3A /* main.m in Sources */,
 				37F7CFE0150062DE00AD2C3A /* CasualAlertViewController.m in Sources */,
-				37F7D001150063CF00AD2C3A /* TabFile.m in Sources */,
 				E7516B77150858D3005B798A /* ABGroupSelectionCell.m in Sources */,
 				E7516B7B15085A23005B798A /* PTABGroup.m in Sources */,
-				E7C074A2150EE4DE009C5498 /* EncryptedSCDateCell.m in Sources */,
-				E7C074A5150EE514009C5498 /* EncryptedSCTextViewCell.m in Sources */,
 				E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */,
-				E78480C61518C2E200F48EA3 /* EncryptedSCSelectionCell.m in Sources */,
 				E78DA690151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m in Sources */,
 				E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */,
 				E78DA6A415252579004ABF29 /* ExistingHoursViewController.m in Sources */,
@@ -4071,8 +4009,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "D29E9D6D-AA48-469D-A0B5-353B3DE89EC9";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D29E9D6D-AA48-469D-A0B5-353B3DE89EC9";
+				PROVISIONING_PROFILE = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -4139,8 +4077,8 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = PsyTrack;
-				PROVISIONING_PROFILE = "D29E9D6D-AA48-469D-A0B5-353B3DE89EC9";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "D29E9D6D-AA48-469D-A0B5-353B3DE89EC9";
+				PROVISIONING_PROFILE = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../.STV/STV 3.1.4 Pro/Source Code/STV+CoreData/STV+CoreData\" \"$(SRCROOT)/../STV//STV 3.1.4 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\"";
 				WRAPPER_EXTENSION = app;
 			};
