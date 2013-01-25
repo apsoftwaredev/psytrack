@@ -78,7 +78,7 @@
 				</dict>
 				<dict>
 					<key>Action</key>
-					<string>OpenWebView|http://psyTrack.com</string>
+					<string>OpenWebView|http://psyTrack.com/video</string>
 					<key>Title</key>
 					<string>Go to website</string>
 				</dict>

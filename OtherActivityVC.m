@@ -8,7 +8,6 @@
 
 #import "OtherActivityVC.h"
 #import "PTTAppDelegate.h"
-#import "EncryptedSCTextViewCell.h"
 #import "LogEntity.h"
 
 
@@ -74,17 +73,18 @@
     SCPropertyDefinition *logNotesPropertyDef = [logDef propertyDefinitionWithName:@"notes"];
     
     logNotesPropertyDef.title = @"Notes";
+    logNotesPropertyDef.type=SCPropertyTypeTextView;
     
-    
-    logNotesPropertyDef.type=SCPropertyTypeCustom;
-    logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    
-    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
-    //    phoneNumberPropertyDef.title=@"Phone Number";
-    logNotesPropertyDef.autoValidate=NO;
+//    logNotesPropertyDef.type=SCPropertyTypeCustom;
+//    logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
+//    
+//    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
+//    
+//    
+//    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
+//    //    phoneNumberPropertyDef.title=@"Phone Number";
+//    logNotesPropertyDef.autoValidate=NO;
+
     
     NSDateFormatter *dateTimeFormatter=[[NSDateFormatter alloc]init];
     [dateTimeFormatter setDateFormat:@"ccc M/d/yy h:mm a"];

@@ -1,0 +1,7 @@
+// Prefix header for the DTAboutViewController static library
+
+#ifdef __OBJC__
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <Availability.h>
+#endif

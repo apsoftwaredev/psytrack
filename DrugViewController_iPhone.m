@@ -472,7 +472,9 @@
 -(void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
     if (searchText.length>2) {
-   
+        objectsModel.enablePullToRefresh=NO;
+        objectsModel.tableView.userInteractionEnabled=NO;
+        
     objectsModel=nil;
 
     NSFetchRequest *newRequewst=[[NSFetchRequest alloc]init];
@@ -545,7 +547,8 @@
 
     [objectsModel.modeledTableView reloadData];
         newRequewst=nil;
-
+        objectsModel.enablePullToRefresh=YES;
+        objectsModel.tableView.userInteractionEnabled=YES;
     }
 }
 
@@ -1067,10 +1070,13 @@
 //                                        delegate:self];
         
         
+        objectsModel.enablePullToRefresh=NO;
+        objectsModel.tableView.userInteractionEnabled=NO;
+        self.searchBar.userInteractionEnabled=NO;
         
         self.connectingToFile=YES;
         // Create a URL Request and set the URL
-        NSURL *url = [NSURL URLWithString:@"https://www.dropbox.com"];
+        NSURL *url = [NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         [request setHTTPMethod: @"HEAD"];
         // Display the network activity indicator
@@ -1134,9 +1140,11 @@
 
 -(IBAction)StopDownloadTapped:(id)sender{
 
-
+   
     [self.downloadBar forceStop];
-    
+    objectsModel.enablePullToRefresh=YES;
+    objectsModel.tableView.userInteractionEnabled=YES;
+    self.searchBar.userInteractionEnabled=YES;
     downloadButton_.hidden=YES;
     downloadStopButton_.hidden=YES;
     downloadContinueButton_.hidden=NO;
@@ -1146,7 +1154,9 @@
 }
 
 -(IBAction)ContinueDownloadTapped:(id)sender{
-    
+    objectsModel.enablePullToRefresh=NO;
+    objectsModel.tableView.userInteractionEnabled=NO;
+    self.searchBar.userInteractionEnabled=NO;
     
     [self.downloadBar forceContinue];
     
@@ -1264,7 +1274,8 @@ else
     [self searchBar:(UISearchBar *)self.searchBar textDidChange:(NSString *)self.searchBar.text];
    
     self.downloadCheckButton.enabled=YES;
-   
+    
+    self.searchBar.userInteractionEnabled=YES;
     downloadButton_.hidden=YES;
     downloadStopButton_.hidden=YES;
     downloadContinueButton_.hidden=YES;
@@ -1290,12 +1301,16 @@ else
         downloadBar.hidden=YES;
         self.downloadBar=nil;
     }
+    
     downloadLabel_.text=@"Download Failed.";
     downloadButton_.hidden=YES;
     downloadStopButton_.hidden=YES;
     downloadContinueButton_.hidden=YES;
     downloadCheckButton_.hidden=NO;
     self.connectingToFile=NO;
+    objectsModel.enablePullToRefresh=YES;
+    objectsModel.tableView.userInteractionEnabled=YES;
+    self.searchBar.userInteractionEnabled=YES;
     [self.view setNeedsDisplay];
     [UIView beginAnimations:nil context: nil];
     [UIView setAnimationDuration:20.0];

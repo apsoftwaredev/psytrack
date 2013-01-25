@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>apps</key>
+	<array>
+		<dict>
+			<key>detailURL</key>
+			<string>http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=335657534&amp;mt=8</string>
+			<key>iconBasename</key>
+			<string>SummerTime_1001.png</string>
+			<key>iconURL</key>
+			<string>http://www.drobnik.com/touch/wp-content/uploads/2009/10/SummerTime_1001.png</string>
+			<key>launchURL</key>
+			<string></string>
+			<key>name</key>
+			<string>Summertime</string>
+		</dict>
+		<dict>
+			<key>detailURL</key>
+			<string>http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=304342869&amp;mt=8</string>
+			<key>iconBasename</key>
+			<string>geocorder_icon.png</string>
+			<key>iconURL</key>
+			<string>http://www.drobnik.com/touch/wp-content/uploads/2009/02/geocorder_icon.png</string>
+			<key>launchURL</key>
+			<string></string>
+			<key>name</key>
+			<string>GeoCorder</string>
+		</dict>
+		<dict>
+			<key>detailURL</key>
+			<string>http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=292809726&amp;mt=8</string>
+			<key>iconBasename</key>
+			<string>iwoman_icon.png</string>
+			<key>iconURL</key>
+			<string>http://www.drobnik.com/touch/wp-content/uploads/2009/01/iwoman_icon.png</string>
+			<key>launchURL</key>
+			<string></string>
+			<key>name</key>
+			<string>iWoman</string>
+		</dict>
+		<dict>
+			<key>detailURL</key>
+			<string>http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=308590265&amp;mt=8</string>
+			<key>iconBasename</key>
+			<string>luckywheel_icon.png</string>
+			<key>iconURL</key>
+			<string>http://www.drobnik.com/touch/wp-content/uploads/2009/03/luckywheel_icon.png</string>
+			<key>launchURL</key>
+			<string></string>
+			<key>name</key>
+			<string>LuckyWheel</string>
+		</dict>
+		<dict>
+			<key>detailURL</key>
+			<string>http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=292436602&amp;mt=8</string>
+			<key>iconBasename</key>
+			<string>ifr_cockpit_icon.png</string>
+			<key>iconURL</key>
+			<string>http://www.drobnik.com/touch/wp-content/uploads/2009/01/ifr_cockpit_icon.png</string>
+			<key>launchURL</key>
+			<string></string>
+			<key>name</key>
+			<string>iFR Cockpit</string>
+		</dict>
+	</array>
+	<key>TTL</key>
+	<integer>7</integer>
+	<key>updateURL</key>
+	<string>http://www.cocoanetics.com/appsml/</string>
+</dict>
+</plist>
