@@ -403,49 +403,49 @@ existingSupervisionArray=existingSupervisionArray_;
 -(NSTimeInterval )totalTimeIntervalForTrackArray:(NSSet *)trackArray predicate:(NSPredicate *)predicate{
     
     
-    NSSet *filteredObjects=nil;
+    NSArray *filteredObjects=nil;
     
     if (trackArray && trackArray.count) {
         
         if (predicate) {
-            filteredObjects=[trackArray filteredSetUsingPredicate:(NSPredicate *)predicate];
+            filteredObjects=[trackArray.allObjects filteredArrayUsingPredicate:(NSPredicate *)predicate];
             
             
         }
         else {
-            filteredObjects=trackArray;
+            filteredObjects=trackArray.allObjects;
         }
     }
     NSArray *totalTimeArray=nil;
     
     if (filteredObjects) {
-        totalTimeArray=[filteredObjects valueForKeyPath:@"time.totalTime"];
+        totalTimeArray=[filteredObjects mutableArrayValueForKeyPath:@"time.totalTime"];
     }
     NSMutableArray *returnTimeArray=[NSMutableArray array];
     
-            for (id object in totalTimeArray) {
-            if ([object isKindOfClass:[NSSet class]]) {
-                NSSet *objectSet=(NSSet *)object;
-                NSArray *objectSetArray=objectSet.allObjects;
-                for (id objectInObject in objectSetArray) {
+    for (id object in totalTimeArray) {
+        if ([object isKindOfClass:[NSSet class]]) {
+            NSSet *objectSet=(NSSet *)object;
+            NSArray *objectSetArray=objectSet.allObjects;
+            for (id objectInObject in objectSetArray) {
+                
+                if ([objectInObject isKindOfClass:[NSDate class]]) {
                     
-                    if ([objectInObject isKindOfClass:[NSDate class]]) {
-                        
-                        [returnTimeArray addObject:objectInObject];
-                    }
+                    [returnTimeArray addObject:objectInObject];
                 }
-                
             }
-            else if ([object isKindOfClass:[NSDate class]]){
-                [returnTimeArray addObject:object];
-                
-            }
+            
         }
-        
-        
+        else if ([object isKindOfClass:[NSDate class]]){
+            [returnTimeArray addObject:object];
+            
+        }
+    }
     
-
-  
+    
+    
+    
+    
     
     return [self totalTimeIntervalForTotalTimeArray:returnTimeArray];
     
@@ -458,9 +458,9 @@ existingSupervisionArray=existingSupervisionArray_;
     NSMutableArray *existingHoursTimeArray=[NSMutableArray array];
     
     if (filteredExistingHoursArray  &&filteredExistingHoursArray.count) {
-        NSSet *existingHoursTempSet=[filteredExistingHoursArray valueForKeyPath:keyPath];
+        NSMutableArray *existingHoursTempMutableArray=[filteredExistingHoursArray mutableArrayValueForKeyPath:keyPath];
       
-        for (id object in existingHoursTempSet) {
+        for (id object in existingHoursTempMutableArray) {
             if ([object isKindOfClass:[NSSet class]]) {
                 NSSet *objectSet=(NSSet *)object;
                 NSArray *objectSetArray=objectSet.allObjects;
@@ -471,6 +471,10 @@ existingSupervisionArray=existingSupervisionArray_;
                         [existingHoursTimeArray addObject:objectInObject];
                     }
                 }
+                
+            }
+            else if ([object isKindOfClass:[NSDate class]]){
+                [existingHoursTimeArray addObject:object];
                 
             }
         }
@@ -490,9 +494,10 @@ existingSupervisionArray=existingSupervisionArray_;
     NSMutableArray *existingHoursTimeArray=[NSMutableArray array];
     
     if (filteredExistingHoursArray  &&filteredExistingHoursArray.count) {
-        NSSet *existingHoursTempSet=[filteredExistingHoursArray valueForKeyPath:@"hours"];
+        NSMutableArray *existingHoursTempArray=[filteredExistingHoursArray mutableArrayValueForKeyPath:@"hours"];
+        
        
-        for (id object in existingHoursTempSet) {
+        for (id object in existingHoursTempArray) {
             if ([object isKindOfClass:[NSSet class]]) {
                 NSSet *objectSet=(NSSet *)object;
                 NSArray *objectSetArray=objectSet.allObjects;
