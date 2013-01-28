@@ -114,7 +114,7 @@ existingSupervisionArray=existingSupervisionArray_;
 
 
 -(NSTimeInterval )totalTimeIntervalForTotalTimeArray:(NSArray *)totalTimesArray{
-    
+    DLog(@"total times array is  %i",totalTimesArray.count);
     NSTimeInterval totalTime=0;
     if (totalTimesArray&&totalTimesArray.count) {
        
@@ -403,23 +403,23 @@ existingSupervisionArray=existingSupervisionArray_;
 -(NSTimeInterval )totalTimeIntervalForTrackArray:(NSSet *)trackArray predicate:(NSPredicate *)predicate{
     
     
-    NSSet *filteredObjects=nil;
+    NSArray *filteredObjects=nil;
     
     if (trackArray && trackArray.count) {
         
         if (predicate) {
-            filteredObjects=[trackArray filteredSetUsingPredicate:(NSPredicate *)predicate];
+            filteredObjects=[trackArray.allObjects filteredArrayUsingPredicate:(NSPredicate *)predicate];
             
             
         }
         else {
-            filteredObjects=trackArray;
+            filteredObjects=trackArray.allObjects;
         }
     }
     NSArray *totalTimeArray=nil;
     
     if (filteredObjects) {
-        totalTimeArray=[filteredObjects valueForKeyPath:@"time.totalTime"];
+        totalTimeArray=[filteredObjects mutableArrayValueForKeyPath:@"time.totalTime"];
     }
     NSMutableArray *returnTimeArray=[NSMutableArray array];
     
