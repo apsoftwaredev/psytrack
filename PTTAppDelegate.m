@@ -59,6 +59,23 @@
 #import <Security/Security.h>
 
 
+#import "AssessmentEntity.h"
+#import "TimeEntity.h"
+#import "InterventionDeliveredEntity.h"
+#import "SupportActivityDeliveredEntity.h"
+#import "ClientEntity.h"
+#import "SupervisionReceivedEntity.h"
+#import "AssessmentTypeEntity.h"
+#import "InterventionTypeEntity.h"
+#import "SupportActivityTypeEntity.h"
+#import "InterventionTypeSubtypeEntity.h"
+#import "SupervisionTypeSubtypeEntity.h"
+#import "ClinicianEntity.h"
+#import "SchoolEntity.h"
+#import "TrainingProgramEntity.h"
+#import "SiteEntity.h"
+#import "ClientPresentationEntity.h"
+
 #define kPTTAppSqliteFileName @"psyTrack.sqlite"
 #define kPTTDrugDatabaseSqliteFileName @"drugs.sqlite"
 
@@ -201,7 +218,7 @@
         
         int z=0;
         
-        for (int i=0; i<2; i++) {
+        for (int i=0; i<30; i++) {
             
             NSEntityDescription *clientEntityDesc=[NSEntityDescription entityForName:@"ClientEntity" inManagedObjectContext:managedObjectContext__];
             ClientEntity *client=[[ClientEntity alloc]initWithEntity:clientEntityDesc insertIntoManagedObjectContext:managedObjectContext__];
@@ -290,7 +307,7 @@
             
             
             
-            for (int q =0; q<1; q++) {
+            for (int q =0; q<280; q++) {
                 
                 NSEntityDescription *interventionEntityDesc=[NSEntityDescription entityForName:@"InterventionDeliveredEntity" inManagedObjectContext:managedObjectContext__];
                 InterventionDeliveredEntity*interventionDelivered=[[InterventionDeliveredEntity alloc]initWithEntity:interventionEntityDesc insertIntoManagedObjectContext:managedObjectContext__];
@@ -977,6 +994,11 @@
     if (!encryption_) {
          self.encryption=[[PTTEncryption alloc]init];
     }
+    
+    if (firstRun||resetDatabase) {
+        [self setUpTestData];
+    }
+
    
     NSString *statusMessage;
     retrievedEncryptedDataFile=NO;
