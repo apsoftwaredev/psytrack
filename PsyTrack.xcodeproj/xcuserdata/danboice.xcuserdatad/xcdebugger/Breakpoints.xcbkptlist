@@ -660,8 +660,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "646"
          endingLineNumber = "646"
-         landmarkName = "@implementation TotalTimesForMonthlyLog"
-         landmarkType = "3">
+         landmarkName = "-predicateForTrackTrainingProgram"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -3399,8 +3399,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "701"
          endingLineNumber = "701"
-         landmarkName = "@implementation TotalTimesForMonthlyLog"
-         landmarkType = "3">
+         landmarkName = "-predicateForTrackWeek:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -4478,7 +4478,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "488"
          endingLineNumber = "488"
-         landmarkName = "-totalTimeIntervalForExistingHoursArray:keyPath:"
+         landmarkName = "-totalTimeIntervalForExistingHoursArray:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4491,7 +4491,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "489"
          endingLineNumber = "489"
-         landmarkName = "-totalTimeIntervalForExistingHoursArray:keyPath:"
+         landmarkName = "-totalTimeIntervalForExistingHoursArray:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

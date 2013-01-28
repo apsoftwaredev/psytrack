@@ -101,6 +101,260 @@
 @synthesize changedPassword,changedToken;
 @synthesize drugViewControllerIsInDetailSubview;
 
+
+
+-(void)setUpTestData{
+    
+    
+    if ([self managedObjectContext]) {
+        
+        
+        for (int i=0; i<300; i++) {
+            
+            NSEntityDescription *clinicianEntityDesc=[NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext__];
+            ClinicianEntity *clinician=[[ClinicianEntity alloc]initWithEntity:clinicianEntityDesc insertIntoManagedObjectContext:managedObjectContext__];
+            
+            clinician.firstName=[NSString stringWithFormat:@"FirstName%i",i];
+            clinician.lastName=[NSString stringWithFormat:@"LastName%i",i];
+            clinician.prefix=@"Dr.";
+            
+            
+        }
+        
+        NSEntityDescription *trainingProgramEntityDesc=[NSEntityDescription entityForName:@"TrainingProgramEntity" inManagedObjectContext:managedObjectContext__];
+        
+        TrainingProgramEntity*trainingProgram=[[TrainingProgramEntity alloc]initWithEntity:trainingProgramEntityDesc insertIntoManagedObjectContext:managedObjectContext__];
+        
+        
+        NSEntityDescription *schoolEntityDesc=[NSEntityDescription entityForName:@"SchoolEntity" inManagedObjectContext:managedObjectContext__];
+        
+        
+        NSEntityDescription *clinicianEntityDesc=[NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext__];
+        ClinicianEntity *clinician=[[ClinicianEntity alloc]initWithEntity:clinicianEntityDesc insertIntoManagedObjectContext:managedObjectContext__];
+        
+        clinician.firstName=[NSString stringWithFormat:@"Seminar"];
+        clinician.lastName=[NSString stringWithFormat:@"Instructor"];
+        clinician.prefix=@"Dr.";
+        
+        
+        SchoolEntity *school=[[SchoolEntity alloc]initWithEntity:schoolEntityDesc insertIntoManagedObjectContext:managedObjectContext__];
+        
+        trainingProgram.trainingProgram=@"Psy.D.";
+        trainingProgram.course=@"Practicum I & II";
+        
+        trainingProgram.seminarInstructor=clinician;
+        school.schoolName=@"Argosy University";
+        
+        trainingProgram.school=school;
+        trainingProgram.doctorateLevel=[NSNumber numberWithBool:YES];
+        
+        trainingProgram.selectedByDefault=[NSNumber numberWithBool:YES];
+        
+        
+        NSEntityDescription *siteEntityDesc=[NSEntityDescription entityForName:@"SiteEntity" inManagedObjectContext:managedObjectContext__];
+        
+        SiteEntity *site=[[SiteEntity alloc]initWithEntity:siteEntityDesc insertIntoManagedObjectContext:managedObjectContext__];
+        
+        site.siteName=@"Neuropsychology Consulting Services";
+        site.defaultSite=[NSNumber numberWithBool:YES];
+        
+        NSEntityDescription *interventionTypeDesc=[NSEntityDescription entityForName:@"InterventionTypeEntity" inManagedObjectContext:managedObjectContext__];
+        
+        
+        NSFetchRequest *interventionTypeFetchRequest = [[NSFetchRequest alloc] init];
+        
+        [interventionTypeFetchRequest setEntity:interventionTypeDesc];
+        [interventionTypeFetchRequest setRelationshipKeyPathsForPrefetching:[NSArray arrayWithObject:@"subTypes"]];
+        
+        NSError *interventionTypeError = nil;
+        NSArray *interventionTypeFetchedObjects = [managedObjectContext__ executeFetchRequest:interventionTypeFetchRequest error:&interventionTypeError];
+        
+        
+        NSEntityDescription *timeEntityDesc=[NSEntityDescription entityForName:@"TimeEntity" inManagedObjectContext:managedObjectContext__];
+        
+        
+        
+        
+        NSDateFormatter *additionalTimeDateFormatter=[[NSDateFormatter alloc]init];
+        
+        [additionalTimeDateFormatter setDateFormat:@"H:mm:ss"];
+        [additionalTimeDateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+        
+        NSDate *currentDate=[NSDate date];
+        
+        NSTimeInterval dayTI=60*60*24;
+        
+        NSTimeInterval yearTI=dayTI*365;
+        
+        
+        NSTimeInterval weekTI=dayTI*7;
+        
+        
+        NSDate *referenceDate=[NSDate dateWithTimeIntervalSince1970:0];
+        NSTimeInterval oneHourTI=60*60;
+        
+        
+        
+        
+        NSEntityDescription *clientPresentationEntityDesc=[NSEntityDescription entityForName:@"ClientPresentationEntity" inManagedObjectContext:managedObjectContext__];
+        
+        
+        int z=0;
+        
+        for (int i=0; i<2; i++) {
+            
+            NSEntityDescription *clientEntityDesc=[NSEntityDescription entityForName:@"ClientEntity" inManagedObjectContext:managedObjectContext__];
+            ClientEntity *client=[[ClientEntity alloc]initWithEntity:clientEntityDesc insertIntoManagedObjectContext:managedObjectContext__];
+            
+            client.clientIDCode=[NSString stringWithFormat:@"client%i",i];
+            
+            int p=90;
+            
+            if (i>91&&i<179) {
+                
+                p=i-p;
+                
+            }
+            else if (i>179&&i<269) {
+                
+                p=i-(p*2);
+                
+            }
+            else if (i>2691&&i<300) {
+                
+                p=i-p*3;
+                
+            }
+            else{
+                
+                p=20;
+                
+            }
+            NSTimeInterval timeIntervalToAdd=yearTI* p * -1;
+            
+            NSDate * birthdate=[currentDate dateByAddingTimeInterval:timeIntervalToAdd];
+            
+            
+            client.dateOfBirth=birthdate;
+            
+            
+            NSArray *filteredInterventionTypeArray=nil;
+            NSPredicate *interventionTypePredicate=nil;
+            InterventionTypeEntity *interventionType=nil;
+            
+            
+            switch (z) {
+                case 0:
+                {
+                    z++;
+                    interventionTypePredicate=[NSPredicate predicateWithFormat:@"interventionType MATCHES %@",@"Individual Therapy/Counseling"];
+                    
+                    
+                    
+                    
+                }
+                    break;
+                    
+                case 1:
+                {
+                    z++;
+                    interventionTypePredicate=[NSPredicate predicateWithFormat:@"interventionType MATCHES %@",@"Group Therapy/Counseling"];
+                }
+                    
+                    break;
+                case 2:
+                {
+                    z++;
+                    interventionTypePredicate=[NSPredicate predicateWithFormat:@"interventionType MATCHES %@",@"Family and Couples Therapy/Counseling"];
+                }
+                    break;
+                case 3:
+                {
+                    z=0;
+                    interventionTypePredicate=[NSPredicate predicateWithFormat:@"interventionType MATCHES %@",@"Other Psychological Interventions"];
+                }
+                    
+                    break;
+                    
+            }
+            
+            filteredInterventionTypeArray=[ interventionTypeFetchedObjects filteredArrayUsingPredicate:interventionTypePredicate];
+            
+            interventionType=[filteredInterventionTypeArray objectAtIndex:0];
+            
+            NSMutableSet* interventionTypeSubtypeSet=[interventionType mutableSetValueForKey:@"subTypes"];
+            
+            InterventionTypeSubtypeEntity *interventionSubtype=[interventionTypeSubtypeSet.allObjects objectAtIndex:0];
+            
+            
+            
+            
+            
+            for (int q =0; q<1; q++) {
+                
+                NSEntityDescription *interventionEntityDesc=[NSEntityDescription entityForName:@"InterventionDeliveredEntity" inManagedObjectContext:managedObjectContext__];
+                InterventionDeliveredEntity*interventionDelivered=[[InterventionDeliveredEntity alloc]initWithEntity:interventionEntityDesc insertIntoManagedObjectContext:managedObjectContext__];
+                
+                
+                
+                interventionDelivered.trainingProgram=trainingProgram;
+                
+                interventionDelivered.site=site;
+                
+                
+                interventionDelivered.interventionType=interventionType;
+                interventionDelivered.subtype=interventionSubtype;
+                
+                
+                NSTimeInterval weekOfServiceTI=((weekTI*q)-(z+dayTI))*-1;
+                
+                interventionDelivered.dateOfService=[currentDate dateByAddingTimeInterval:weekOfServiceTI];
+                
+                
+                TimeEntity *time=[[TimeEntity alloc]initWithEntity:timeEntityDesc insertIntoManagedObjectContext:managedObjectContext__];
+                
+                
+                time.additionalTime= [referenceDate dateByAddingTimeInterval:oneHourTI];
+                ;
+                time.totalTime=[referenceDate dateByAddingTimeInterval:oneHourTI];
+                
+                interventionDelivered.time=time;
+                
+                
+                ClientPresentationEntity *clientPresentationEntity=[[ClientPresentationEntity alloc]initWithEntity:clientPresentationEntityDesc insertIntoManagedObjectContext:managedObjectContext__];
+                
+                clientPresentationEntity.client=client;
+                
+                NSSet *clientPresentationSet=[NSSet setWithObject:clientPresentationEntity];
+                
+                interventionDelivered.clientPresentations=clientPresentationSet;
+                
+                
+                
+                
+            }
+            
+            
+            
+            
+        }
+        
+        
+        
+    }
+    
+    
+    
+    [self saveContext];
+    
+    
+    
+    
+    
+    
+}
+
+
 + (PTTAppDelegate *)appDelegate {
 	return (PTTAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
