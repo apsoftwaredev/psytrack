@@ -603,19 +603,6 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalTimesForMonthlyLog.m"
-         timestampString = "370310693.040415"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "411"
-         endingLineNumber = "411"
-         landmarkName = "-totalTimeIntervalForTrackArray:predicate:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TotalTimesForMonthlyLog.m"
          timestampString = "370135328.82857"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
@@ -668,13 +655,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalTimesForMonthlyLog.m"
-         timestampString = "381089144.12937"
+         timestampString = "381092290.734658"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "641"
-         endingLineNumber = "641"
-         landmarkName = "@implementation TotalTimesForMonthlyLog"
-         landmarkType = "3">
+         startingLineNumber = "646"
+         endingLineNumber = "646"
+         landmarkName = "-predicateForTrackTrainingProgram"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -3407,24 +3394,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalTimesForMonthlyLog.m"
-         timestampString = "381089144.12937"
+         timestampString = "381092290.734658"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "696"
-         endingLineNumber = "696"
-         landmarkName = "@implementation TotalTimesForMonthlyLog"
-         landmarkType = "3">
+         startingLineNumber = "701"
+         endingLineNumber = "701"
+         landmarkName = "-predicateForTrackWeek:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalTimesForMonthlyLog.m"
-         timestampString = "381089144.12937"
+         timestampString = "381092290.734658"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "682"
-         endingLineNumber = "682"
+         startingLineNumber = "687"
+         endingLineNumber = "687"
          landmarkName = "-predicateForTrackDoctorateLevel"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4121,19 +4108,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "TotalTimesForMonthlyLog.m"
-         timestampString = "370310693.040415"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "408"
-         endingLineNumber = "408"
-         landmarkName = "-totalTimeIntervalForTrackArray:predicate:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "TrackTypeWithTotalTimes.m"
          timestampString = "381089144.12937"
          startingColumnNumber = "9223372036854775807"
@@ -4499,12 +4473,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalTimesForMonthlyLog.m"
-         timestampString = "381089144.12937"
+         timestampString = "381092290.734658"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "484"
-         endingLineNumber = "484"
-         landmarkName = "-totalTimeIntervalForExistingHoursArray:keyPath:"
+         startingLineNumber = "488"
+         endingLineNumber = "488"
+         landmarkName = "-totalTimeIntervalForExistingHoursArray:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4512,12 +4486,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "TotalTimesForMonthlyLog.m"
-         timestampString = "381089144.12937"
+         timestampString = "381092290.734658"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "485"
-         endingLineNumber = "485"
-         landmarkName = "-totalTimeIntervalForExistingHoursArray:keyPath:"
+         startingLineNumber = "489"
+         endingLineNumber = "489"
+         landmarkName = "-totalTimeIntervalForExistingHoursArray:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -6341,7 +6315,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
@@ -6354,7 +6328,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
@@ -6679,7 +6653,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
@@ -6757,7 +6731,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
@@ -7950,19 +7924,6 @@
          startingLineNumber = "193"
          endingLineNumber = "193"
          landmarkName = "-setUpTestData"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TotalTimesForMonthlyLog.m"
-         timestampString = "381082867.096138"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "422"
-         endingLineNumber = "422"
-         landmarkName = "-totalTimeIntervalForTrackArray:predicate:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
