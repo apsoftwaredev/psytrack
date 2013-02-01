@@ -55,7 +55,7 @@
     CF/NS container objects.
 */
 
-static NSString *serviceName = @"com.psycheweb.psytrack.cliniciantools";
+ 
 @interface KeychainItemWrapper : NSObject
 {
     NSMutableDictionary *keychainItemData;		// The actual keychain item data backing store.

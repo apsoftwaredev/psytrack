@@ -158,7 +158,7 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
 + (NSString*)retrieveFromUserDefaults:(NSString*)key;
 -(void)flashAppTrainAndTitleGraphics;
 - (NSString *)applicationDocumentsDirectoryString;
-- (NSURL *)applicationDocumentsDirectory;
+
 -(NSURL *)applicationSupportURL;
 -(NSString *)applicationSupportPath;
 -(NSString *)setupLockDictionaryResultStr;

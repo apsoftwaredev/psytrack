@@ -21,7 +21,7 @@
 
 @interface LongTimePickerCell : SCCustomCell <UIPickerViewDataSource, UIPickerViewDelegate>
 {
-    __weak UITextField *pickerField;
+     UITextField *pickerField;
     //    TimePickerView *timePickerView;
     NSDateFormatter *minuteFormatter;
     NSDateFormatter *hourFormatter;
@@ -50,7 +50,7 @@
 @property (nonatomic, strong) IBOutlet NSDate *timeValue;
 @property (nonatomic,weak) IBOutlet UIPickerView *picker;
 @property (weak, nonatomic)IBOutlet UILabel *hourLabel;
-@property (weak, nonatomic)IBOutlet UITextField *pickerField;
+@property (strong, nonatomic)IBOutlet UITextField *pickerField;
 @property (weak, nonatomic)IBOutlet UILabel *minLabel;
 
 @property (weak, nonatomic)IBOutlet UILabel *dateLabel;

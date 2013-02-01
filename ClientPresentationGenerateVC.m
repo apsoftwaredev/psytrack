@@ -434,8 +434,8 @@
     
     
     
-    
-[pdfGenerator createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)self.presentationTableModel trackText:(NSString *)trackText serviceDateTimeStr:(NSString *)self.serviceDateTimeString clinician:(ClinicianEntity *)[self getClinicianName] forSize:12 andFont:@"Georgia" andColor:[UIColor blackColor] :YES :YES :([pdfPasswordTextField.text length] > 0) ? pdfPasswordTextField.text : nil reportTitle:(NSString *)reportTitle isSupportActivity:(BOOL)isSupportActivity];
+   
+[pdfGenerator createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)self.presentationTableModel trackText:(NSString *)trackText serviceDateTimeStr:(NSString *)self.serviceDateTimeString clinician:(ClinicianEntity *)[self getClinicianName] forSize:12 andFont:@"Georgia" andColor:[UIColor blackColor] allowCopy:YES allowPrint:YES password:([pdfPasswordTextField.text length] > 0) ? pdfPasswordTextField.text : nil reportTitle:(NSString *)reportTitle isSupportActivity:(BOOL)isSupportActivity];
     
    
     NSString *filePath = pdfs  ;// Path to last PDF file

@@ -43,7 +43,6 @@
 NSInteger intSort(id num1, id num2, void *context);
 //-(IBAction)dismissPresentedView:(id)sender;
 -(void)startFadeout;
--(void)cleanAlertArea;
 
 -(CGPoint )makeStopPointForContainerSuperViewFrame:(CGRect)superViewFrame labelContainerFrame:(CGRect)labelContainer location:(NSInteger )screenLocation addtionalTopSpace:(float)additionalTopSpace additionalBottomSpace:(float)additionalBottomSpace;
 -(CGRect )makeFrameForContainerSuperViewFrame:(CGRect)superViewFrame labelContainerFrame:(CGRect)labelContainer location:(NSInteger )screenLocation;

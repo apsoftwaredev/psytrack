@@ -3745,7 +3745,11 @@ return [self applicationDrugsDirectory].path;
                     
                     [self displayNotification:[NSString stringWithFormat:@"Error occured while setting data protection. %@", errorSettingAttributes.description]];
                 }
-                    
+            
+            if (![self addSkipBackupAttributeToItemAtURL:storeUrl]) {
+               
+                [self displayNotification:@"Error occured while setting setting file attribute."];
+            }
         // tell the UI on the main thread we finally added the store and then
         // post a custom notification to make your views do whatever they need to such as tell their
         // NSFetchedResultsController to -performFetch again now there is a real store
@@ -3774,7 +3778,18 @@ return [self applicationDrugsDirectory].path;
     return persistentStoreCoordinator__;
 }
 
-
+- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
+{
+    BOOL success=NO;
+    
+    if ([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);
+    {
+        NSError *error = nil;
+        success = [URL setResourceValue: [NSNumber numberWithBool: YES]
+                                      forKey: NSURLIsExcludedFromBackupKey error: &error];
+    }
+    return success;
+}
 
 #pragma mark -
 #pragma mark psytrack image fading

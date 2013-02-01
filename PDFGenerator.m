@@ -27,7 +27,7 @@
 @synthesize invisibleTextView;
 
 
-- (void)createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)presentationTableModel trackText:(NSString *)trackText   serviceDateTimeStr:(NSString *)serviceDateTimeStr clinician:(ClinicianEntity*)clinician forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString*)password reportTitle:(NSString *)reportTitle isSupportActivity:(BOOL)spportActivity{
+- (void)createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)presentationTableModel trackText:(NSString *)trackText   serviceDateTimeStr:(NSString *)serviceDateTimeStr clinician:(ClinicianEntity*)clinician forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color allowCopy:(BOOL)allowCopy allowPrint:(BOOL)allowPrint password:(NSString*)password reportTitle:(NSString *)reportTitle isSupportActivity:(BOOL)spportActivity{
     isSupportActivity=spportActivity;
     //create our invisibleTextView
 //    invisibleTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];

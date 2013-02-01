@@ -178,7 +178,7 @@ Keychain API expects as a validly constructed container class.
 - (NSMutableDictionary *)newSearchDictionary:(NSString *)identifier {
     
     NSMutableDictionary *searchDictionary = [[NSMutableDictionary alloc] init];  
-	
+	NSString *serviceName = @"com.psycheweb.psytrack.cliniciantools";
     [searchDictionary setObject:(id)kSecClassGenericPassword forKey:(id)kSecClass];
 	
     NSData *encodedIdentifier = [identifier dataUsingEncoding:NSUTF8StringEncoding];

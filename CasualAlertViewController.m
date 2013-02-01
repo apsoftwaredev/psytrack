@@ -235,9 +235,9 @@ NSInteger intSort(id num1, id num2, void *context)
       
         CGRect myViewFrame=(CGRect ) self.view.frame;
        
-        CGRect frame= [self makeFrameForContainerSuperViewFrame:(CGRect)appWindowFrame labelContainerFrame:(CGRect)myViewFrame location:(NSInteger )screenLocation];
-        
-//        CGRect myFrame=(CGRect) self.view.frame;
+        CGRect frame=  (CGRect)[self makeFrameForContainerSuperViewFrame:(CGRect)appWindowFrame labelContainerFrame:(CGRect)myViewFrame location:(NSInteger )screenLocation];
+    
+    //        CGRect myFrame=(CGRect) self.view.frame;
         [self.view setFrame:frame];
             
         CGPoint stopPoint=[self makeStopPointForContainerSuperViewFrame:(CGRect)appWindowFrame  labelContainerFrame:(CGRect)myViewFrame location:(NSInteger )screenLocation addtionalTopSpace:(float)additionalTopSpace additionalBottomSpace:(float)additionalBottomSpace];
@@ -385,6 +385,7 @@ NSInteger intSort(id num1, id num2, void *context)
     
     CGRect frame= [self makeFrameForContainerSuperViewFrame:(CGRect)appWindowFrame labelContainerFrame:(CGRect)myViewFrame location:(NSInteger )screenLocationToSetView];
     
+    
     //        CGRect myFrame=(CGRect) self.view.frame;
     [self.view setFrame:frame];
 
@@ -404,7 +405,7 @@ NSInteger intSort(id num1, id num2, void *context)
     labelContainerHeight=labelContainer.size.height;
    
     superViewFrameHeight=superViewFrame.size.height;
-    CGPoint stopPoint;
+    CGPoint stopPoint=CGPointMake(0, labelContainerHeight);
     switch (screenLocation) {
         case kPTTScreenLocationTop:
             
@@ -446,7 +447,7 @@ NSInteger intSort(id num1, id num2, void *context)
     labelContainerHeight=labelContainer.size.height;
     superViewFrameWidth=superViewFrame.size.width;
     superViewFrameHeight=superViewFrame.size.height;
-    CGRect frame;
+    CGRect frame=CGRectMake(0, 0, superViewFrameWidth, superViewFrameHeight);
   
     UIInterfaceOrientation currentOrientation = 
     [UIApplication sharedApplication].statusBarOrientation;

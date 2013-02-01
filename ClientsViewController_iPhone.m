@@ -37,7 +37,6 @@
 @synthesize alreadySelectedClients;
 
 @synthesize clientsViewController_Shared;
-static NSString *kBackgroundColorKey = @"backgroundColor";
 //@synthesize searchDisplayController;
 
 #pragma mark -

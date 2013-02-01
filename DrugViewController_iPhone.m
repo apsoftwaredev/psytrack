@@ -1215,11 +1215,18 @@
         NSFileManager *fileManager=[NSFileManager defaultManager];
         NSError *removeError=nil;
         if (fileWritten  && proceedWithAddingStore) {
-      
+            
+            NSError *excludeBackupError = nil;
+            
+            BOOL result = [drugsStoreURL setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:&excludeBackupError];
+            
+            if (!result) { [appDelegate displayNotification:@"Error setting file attribute"]; }
+            
+            
             NSError *drugError = nil;
            
            
-            if (![drugsPersistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:@"DrugsConfig" URL:drugsStoreURL options:nil error:&drugError])
+            if (result && ![drugsPersistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:@"DrugsConfig" URL:drugsStoreURL options:nil error:&drugError])
             {
                                 if([appDelegate.managedObjectContext hasChanges]){
                 
