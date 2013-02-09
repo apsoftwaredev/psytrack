@@ -60,6 +60,8 @@
 
 
 #define kPTTAppSqliteFileName @"psyTrack.sqlite"
+#define kPTTAppSqliteFileName_local @"psyTrack_local.sqlite"
+
 #define kPTTDrugDatabaseSqliteFileName @"drugs.sqlite"
 
 @implementation PTTAppDelegate
@@ -100,6 +102,7 @@
 @synthesize stopScrollingMonthlyPracticumLog;
 @synthesize changedPassword,changedToken;
 @synthesize drugViewControllerIsInDetailSubview;
+@synthesize okayToSaveContext;
 
 + (PTTAppDelegate *)appDelegate {
 	return (PTTAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -154,6 +157,9 @@
     @catch (NSException *exception) {
         //do nothing
     }
+   
+    
+    
     
    
        [store synchronize];
@@ -2840,19 +2846,20 @@ duration:(NSTimeInterval)1.0];
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
+    self.okayToSaveContext=YES;
     [self saveContext];
 }
 
 -(void)saveContext
 {
-    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
-    if (managedObjectContext != nil &&persistentStoreCoordinator__!=nil)
+    PTManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    if (managedObjectContext != nil && persistentStoreCoordinator__!=nil)
     {
-    [managedObjectContext__ performBlock:^{
-        if ( managedObjectContext__.hasChanges ) {
+    
+        if (self.okayToSaveContext && managedObjectContext.hasChanges ) {
             NSUInteger attempts = 0;
             NSError *error = nil;
-            while ( ![managedObjectContext__ save:&error] && ++attempts <= kPTTMaximumSaveAttempts ) {
+            while ( ![managedObjectContext save:&error] && ++attempts <= kPTTMaximumSaveAttempts ) {
                 [self repairForSaveError:error];
             }
             
@@ -2863,7 +2870,7 @@ duration:(NSTimeInterval)1.0];
                 [self displayNotification:[question stringByAppendingFormat:@"\n %@",info]  forDuration:7.0 location:kPTTScreenLocationMiddle inView:self.window];
             }
         }
-    }];
+    
     }
 }
 
@@ -3594,7 +3601,12 @@ return [self applicationDrugsDirectory].path;
     // prep the store path and bundle stuff here since NSBundle isn't totally thread safe
     NSPersistentStoreCoordinator* psc = persistentStoreCoordinator__;
 	NSString *storePath = [[self applicationPTTDirectory].path  stringByAppendingPathComponent:kPTTAppSqliteFileName];
-//    NSURL *storeURL = [[self applicationPTTDirectory] URLByAppendingPathComponent:[NSString stringWithFormat:@"psyTrack.sqlite"]];
+//
+    
+    NSString *storePath_local = [[self applicationPTTDirectory].path  stringByAppendingPathComponent:kPTTAppSqliteFileName_local];
+    
+    
+   
     // do this asynchronously since if this is the first time this particular device is syncing with preexisting
     // iCloud content it may take a long long time to download
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -3606,7 +3618,10 @@ return [self applicationDrugsDirectory].path;
         if (![fileManager fileExistsAtPath:storePath]) {
             NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
             if (defaultStorePath&&[fileManager fileExistsAtPath:defaultStorePath]) {
+               
                 [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
+                [fileManager copyItemAtPath:defaultStorePath toPath:storePath_local error:NULL];
+                
                 NSString *statusMessage=[self resetDefaultLockKeychainSettingsWithReset:YES];
                 if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."]) {
                     NSString *displaymessage=[NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
@@ -3643,6 +3658,8 @@ return [self applicationDrugsDirectory].path;
         
         
         NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
+        
+        
         NSURL *cloudURL =nil;
         // this needs to match the entitlements and provisioning profile
 #if !TARGET_IPHONE_SIMULATOR
@@ -3661,12 +3678,18 @@ return [self applicationDrugsDirectory].path;
                 // iCloud is available
                 cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
             
-           
+            
             
                 options = [NSDictionary dictionaryWithObjectsAndKeys:@"SL2GGUR9DM.com.psychewebLLC.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil]; 
              
             } else {
                 // iCloud is not available
+                
+                //prepare meta data
+                
+              
+                
+                
                 options = [NSDictionary dictionaryWithObjectsAndKeys:
                            [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
                            [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,
@@ -3674,10 +3697,14 @@ return [self applicationDrugsDirectory].path;
 
                 
                 
+               
+                
             }
 
-        
        
+        
+        
+               
         
         //  The API to turn on Core Data iCloud support here.
        
@@ -3688,7 +3715,7 @@ return [self applicationDrugsDirectory].path;
         [psc lock];
        
        
-        if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
+        if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error] ) {
             
             
           
@@ -3730,6 +3757,8 @@ return [self applicationDrugsDirectory].path;
             
 //            abort();
         }
+        
+        
         else
         
             
@@ -3737,6 +3766,7 @@ return [self applicationDrugsDirectory].path;
             
 
         [psc unlock];
+            self.okayToSaveContext=YES;
          NSError *errorSettingAttributes = nil;
             NSDictionary *fileAttributes = [NSDictionary dictionaryWithObject:NSFileProtectionComplete forKey:NSFileProtectionKey];
         
@@ -3753,6 +3783,13 @@ return [self applicationDrugsDirectory].path;
         // tell the UI on the main thread we finally added the store and then
         // post a custom notification to make your views do whatever they need to such as tell their
         // NSFetchedResultsController to -performFetch again now there is a real store
+            
+            @try {
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveContext) name:kSCModelDidCommitData object:NULL];
+            }
+            @catch (NSException *exception) {
+                //do nothing
+            }
         dispatch_async(dispatch_get_main_queue(), ^{
             
             @try {
@@ -3777,6 +3814,52 @@ return [self applicationDrugsDirectory].path;
     
     return persistentStoreCoordinator__;
 }
+
+//
+//-(void)migrateCloudStoreToLocalVersion
+//{
+//    if(self.usingiCloudStore){
+//    
+//        NSString *storePath = [[self applicationPTTDirectory].path  stringByAppendingPathComponent:kPTTAppSqliteFileName];
+//    //
+//    
+//        NSString *storePath_local = [[self applicationPTTDirectory].path  stringByAppendingPathComponent:kPTTAppSqliteFileName_local];
+//    
+//         NSURL *storeURL_local = [NSURL fileURLWithPath:storePath_local];
+//        
+//        NSFileManager *fileManager=[NSFileManager defaultManager];
+//        // remove previous local version
+//        [fileManager removeItemAtURL:storeURL_local
+//                                error:nil];
+//    
+//    // made a copy from original location to the new location
+//        NSPersistentStore *currentPersistentStore=[persistentStoreCoordinator__.persistentStores objectAtIndex:0];
+//        [fileManager copyItemAtURL:currentPersistentStore.URL
+//                          toURL:storeURL_local
+//                          error:nil];
+//    
+//    //prepare meta data
+//    NSDictionary *iCloudMetadata = [currentPersistentStore metadata].copy;
+//    
+//    NSMutableDictionary *localVersionMetadata = iCloudMetadata.mutableCopy;
+//    for(NSString * key in iCloudMetadata){
+//        if([key hasPrefix:@"com.apple.coredata.ubiquity"]){
+//            [localVersionMetadata removeObjectForKey:key];
+//        }
+//    }
+//    
+//    //modify iCloud store
+//    [persistentStoreCoordinator__ setMetadata:localVersionMetadata forPersistentStore:self.iCloudStore];
+//    [self.coordinator setURL:self.iCloudStoreLocalVersionURL forPersistentStore:self.iCloudStore];
+//    
+//    //save to the localVersion location
+//    [self.context save:nil];
+//    
+//    //restore iCloud store
+//    [self.coordinator setMetadata:iCloudMetadata forPersistentStore:self.iCloudStore];
+//    [self.coordinator setURL:self.iCloudStoreURL forPersistentStore:self.iCloudStore];
+//}
+//}
 
 - (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
 {

@@ -61,11 +61,7 @@
 			<key>ButtonStyle</key>
 			<integer>2</integer>
 			<key>Action</key>
-			<string>OpenReview|</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>AppScroller</string>
+			<string>OpenReview|590399925</string>
 		</dict>
 		<dict>
 			<key>ActionRows</key>
@@ -86,7 +82,7 @@
 					<key>Title</key>
 					<string>Tell a Friend</string>
 					<key>Action</key>
-					<string>OpenMail||Great App|&lt;p&gt;Hi!&lt;/p&gt;&lt;p&gt;I discovered this great app!&lt;/p&gt;</string>
+					<string>OpenMail||Great App called PsyTrack Clinician Tools|&lt;p&gt;Hi!&lt;/p&gt;&lt;p&gt;I discovered this great app!&lt;/p&gt;&lt;a href=&quot;https://itunes.apple.com/us/app/psytrack-clinician-tools/id590399925&quot;&gt;PsyTrack Clinician Tools in iTunes&lt;/a&gt;</string>
 				</dict>
 			</array>
 			<key>Action</key>
@@ -100,7 +96,7 @@
 		</dict>
 		<dict>
 			<key>Action</key>
-			<string>UnsupportedAction</string>
+			<string>OpenWebView|http://psyTrack.com/video</string>
 			<key>Title</key>
 			<string>Show The Preview Video</string>
 			<key>Type</key>

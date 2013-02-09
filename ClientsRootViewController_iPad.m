@@ -397,12 +397,23 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
         }
 
         
-    }    
+    }
+    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+
     if (tableModel.tag==0 ) {
         [self.searchBar setSelectedScopeButtonIndex:0];
         
         [objectsModel.dataFetchOptions setFilterPredicate:nil];
         
+        appDelegate.okayToSaveContext=YES;
+    }
+    
+    else if (tableModel.tag>1) {
+        
+        
+        appDelegate.okayToSaveContext=NO;
     }
     
 if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
@@ -1168,14 +1179,20 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
 }
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (tableModel.tag==0) {
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        appDelegate.okayToSaveContext=YES;
+    }
 
-    if (tableModel.tag==2) {
+   else if (tableModel.tag==2) {
         selectedDisorder=nil;
         
     }
 
 
-    if (tableModel.tag==3) {
+    else if (tableModel.tag==3) {
         selectedVariableName=nil;
     }
 
@@ -2279,12 +2296,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     NSNumberFormatter *numberFormatter =[[NSNumberFormatter alloc] init];
     NSString *numberStr=[str stringByReplacingOccurrencesOfString:@"," withString:@""];
     NSNumber *number=[numberFormatter numberFromString:numberStr];
-    if (numberStr.length && [numberStr floatValue]<1000000 &&number) {
+    if (numberStr.length && [numberStr floatValue]<1000000000000 &&number) {
         valid=YES;
         
         if ([str rangeOfString:@"Number"].location != NSNotFound) {
-            NSScanner* scan = [NSScanner scannerWithString:numberStr]; 
-            int val;         
+            NSScanner* scan = [NSScanner scannerWithString:numberStr];
+            int val;
             
             valid=[scan scanInt:&val] && [scan isAtEnd];
             
@@ -2292,11 +2309,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         }
         
         
-    } 
+    }
     numberFormatter=nil;
     return valid;
     
 }
+
 
 -(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{
 

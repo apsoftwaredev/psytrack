@@ -3,10 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>apps</key>
-	<array/>
+	<array>
+		<dict>
+			<key>detailURL</key>
+			<string>https://itunes.apple.com/us/app/psytrack-clinician-tools/id590399925?mt=8</string>
+			<key>iconBasename</key>
+			<string>Icon@2x.png</string>
+			<key>launchURL</key>
+			<string></string>
+			<key>iconURL</key>
+			<string></string>
+			<key>name</key>
+			<string>PsyTrack</string>
+		</dict>
+	</array>
 	<key>TTL</key>
 	<integer>7</integer>
 	<key>updateURL</key>
-	<string>http://www.psycheweb.com/appsml/</string>
+	<string></string>
 </dict>
 </plist>

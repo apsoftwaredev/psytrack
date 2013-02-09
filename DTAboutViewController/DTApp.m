@@ -37,6 +37,7 @@
 		// try cache
 		NSString *cacheFileName = [self cachedFileName];
 		
+        
 		if ([[NSFileManager defaultManager] fileExistsAtPath:cacheFileName]) 
 		{
 			UIImage *originalImage = [UIImage imageWithContentsOfFile:cacheFileName];
@@ -44,7 +45,7 @@
 			return iconImage;
 		}
 		
-		if (!iconDownloadConnection)
+		if (iconURL&&iconURL.length &&!iconDownloadConnection)
 		{
 			NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:iconURL]];
 			iconDownloadConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -67,7 +68,7 @@
 
 - (BOOL) isInstalled
 {
-	if ([launchURL length])
+	if (launchURL &&[launchURL length])
 	{
 		NSURL *url = [NSURL URLWithString:[launchURL stringByAppendingString:@"://"]];
 		return [[UIApplication sharedApplication] canOpenURL:url];

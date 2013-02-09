@@ -379,6 +379,7 @@
        
         pdfActionSheet.actionSheetStyle = UIActionSheetStyleDefault;
         pdfActionSheet.cancelButtonIndex=1;
+        
          [pdfActionSheet showFromToolbar:self.toolbar];
         pdfActionSheet.tag=1;
     }

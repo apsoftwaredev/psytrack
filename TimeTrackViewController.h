@@ -13,7 +13,7 @@
 #import <EventKitUI/EventKitUI.h>
 #import "InterventionTypeEntity.h"
 #import "SupervisionTypeEntity.h"
-
+#import "PTManagedObjectContext.h"
 
 typedef enum {
     kTrackAssessmentSetup,
@@ -35,7 +35,7 @@ static NSString * const kTrackSupervisionReceivedEntityName=@"SupervisionReceive
     ClientPresentations_Shared *clientPresentations_Shared;
     UISearchBar *searchBar;
 //    UITableView *tableView;
-    NSManagedObjectContext *managedObjectContext;
+    PTManagedObjectContext *managedObjectContext;
     __weak UILabel *totalAdministrationsLabel;
     
 //    SCArrayOfObjectsModel *tableModel;

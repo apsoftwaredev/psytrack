@@ -2179,6 +2179,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     
     if (tableViewModel.tag>0) {
          currentDetailTableViewModel=tableViewModel;
+        
     }
     else{
     
@@ -2194,7 +2195,9 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         if (clientPresentations_Shared) {
             clientPresentations_Shared.serviceDatePickerDate=nil;
         }
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
+        appDelegate.okayToSaveContext=YES;
     }
     if (tableViewModel.tag==1){
         SCTableViewCell *cellAtIndexPath=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
@@ -2240,6 +2243,8 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     currentDetailTableViewModel=detailTableViewModel;
+    
+    
     
     if (tableViewModel.tag==2 && tableViewModel.sectionCount ==1) 
     {
@@ -2332,6 +2337,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
     [self tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForSectionAtIndex:(NSUInteger)indexPath.section withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel];
+    
+    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    appDelegate.okayToSaveContext=NO;
     
     if (tableModel.tag==0||tableModel.tag==1) {
         currentDetailTableViewModel=detailTableViewModel;

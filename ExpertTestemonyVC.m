@@ -353,7 +353,29 @@
         
         
     }
+    if (tableModel.tag==0) {
+        appDelegate.okayToSaveContext=YES;
+    }
+    else if (tableModel.tag>1){
+        
+        appDelegate.okayToSaveContext=NO;
+        
+    }
+    
+    
 }
+-(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    if (tableModel.tag==0) {
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        appDelegate.okayToSaveContext=YES;
+    }
+    
+    
+}
+
 
 - (BOOL)disablesAutomaticKeyboardDismissal
 {

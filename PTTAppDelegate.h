@@ -53,6 +53,8 @@ static NSInteger const kPTTScreenLocationRight = 4;
 static NSInteger const kPTTScreenLocationBottom = 5;
 static NSInteger const kPTTMaximumSaveAttempts = 10;
 
+static NSString * const kSCModelDidCommitData=@"SCModelDidCommitData";
+
 static NSString * const kPTTAddressBookSourceIdentifier=@"address_book_source_identifier";
 static NSString * const kPTTAddressBookGroupIdentifier=@"address_book_group_identifier";
 static NSString * const kPTTAddressBookGroupName=@"address_book_group_name";
@@ -145,6 +147,9 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
 @property (nonatomic, retain) KeychainItemWrapper *passCodeItem;
 @property (nonatomic,assign)BOOL stopScrollingMonthlyPracticumLog;
 @property (nonatomic,assign) BOOL drugViewControllerIsInDetailSubview;
+@property (nonatomic, assign) BOOL okayToSaveContext;
+@property (nonatomic, assign) BOOL usingiCloudStore;
+
 -(void)loadDatabaseData:(id)sender;
 - (void)initializeiCloudAccess ;
 -(NSURL *)applicationDrugsFileURL;
