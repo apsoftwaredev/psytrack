@@ -102,7 +102,14 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
 	[super viewWillDisappear:animated];
-	
+	if (documentController) {
+        [documentController dismissMenuAnimated:NO];
+        
+    }
+    if (pdfActionSheet) {
+        [pdfActionSheet dismissWithClickedButtonIndex:5 animated:NO];
+    }
+    
 	[prog stopAnimating];
 	[webView stopLoading];
 	//self.navigationItem.rightBarButtonItem.enabled = YES; // for reloading when we return
@@ -347,14 +354,25 @@
 
 - (IBAction)displayActionSheet:(id)sender{
     
-    
+    if (documentController) {
+        [documentController dismissMenuAnimated:NO];
+        documentController=nil;
+    }
+    if (pdfActionSheet) {
+        [pdfActionSheet dismissWithClickedButtonIndex:5 animated:YES];
+        pdfActionSheet=nil;
+    }
     if([UIPrintInteractionController isPrintingAvailable]){
         
-        pdfActionSheet = [[UIActionSheet alloc] initWithTitle:@"Actions"
-                                                                 delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
-                                                        otherButtonTitles:@"Email", @"Print",@"Open In", nil];
        
-        pdfActionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+        if (!pdfActionSheet) {
+            pdfActionSheet = [[UIActionSheet alloc] initWithTitle:@"Actions"
+                                                         delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
+                                                otherButtonTitles:@"Email", @"Print",@"Open In", nil];
+            
+
+        }
+                pdfActionSheet.actionSheetStyle = UIActionSheetStyleDefault;
         pdfActionSheet.cancelButtonIndex=2;
          
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -372,11 +390,16 @@
     }  
     else
     {
-        
-       pdfActionSheet = [[UIActionSheet alloc] initWithTitle:@"Actions"
-                                                                 delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
-                                                        otherButtonTitles:@"Email",@"Open In", nil];
        
+
+        
+        if (!pdfActionSheet) {
+            pdfActionSheet = [[UIActionSheet alloc] initWithTitle:@"Actions"
+                                                         delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil
+                                                otherButtonTitles:@"Email",@"Open In", nil];
+            
+        }
+      
         pdfActionSheet.actionSheetStyle = UIActionSheetStyleDefault;
         pdfActionSheet.cancelButtonIndex=1;
         
@@ -397,10 +420,13 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
 	// the user clicked one of the OK/Cancel buttons
-	
+	if (actionSheet.tag==1&&buttonIndex==5) {
+        pdfActionSheet=nil;
+        return;
+    }
     if (pdfActionSheet.tag==1) {
  
-        if (buttonIndex==0||buttonIndex==1) {
+        
             
                    
             
@@ -411,52 +437,50 @@
             
             if (![fileData writeToFile:tmpPDF atomically:YES]) {
                 
-                
+                [appDelegate displayNotification:@"Error occured opening menu"];
+                return;
             }
             else {
                 
-                
-            }
-            
-
-        }
         
-        switch (buttonIndex) {
-            
-            case 1:
-                [self printContent];
-                break;
-            case 0:
-                [self displayComposerSheet];
+            switch (buttonIndex) {
                 
-                break;
-            case 2:
-            {
+                case 0:
+                    [self displayComposerSheet];
+                    
+                    break;
+                case 1:
+                    [self printContent];
+                    break;
                 
+                case 2:
+                {
+                    
+                    
+                    [self openDocumentIn];
+                }
                 
-                [self openDocumentIn];
-            }
-                
-                
-            default:
-                
-                break;
+                default:
+                    
+                    break;
                 
         }
        
-      
+            }
     }   
     
     
-    if (pdfActionSheet.tag==2) {
-        
-    }
-    
+pdfActionSheet=nil;
+
 }
+
 -(void)openDocumentIn {
     
-    documentController =
-    [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:tmpPDF]];
+    if (!documentController) {
+        documentController =
+        [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:tmpPDF]];
+    }
+   
     documentController.delegate = self;
    
     documentController.UTI = @"com.adobe.pdf";
@@ -467,7 +491,13 @@
         UIView *toolbarSubview=[self.toolbar.subviews objectAtIndex:0];
         [documentController presentOpenInMenuFromRect:toolbarSubview.frame inView:self.view animated:YES];
     }
+
     
+}
+-(void)documentInteractionControllerDidDismissOpenInMenu:(UIDocumentInteractionController *)controller{
+
+    documentController=nil;
+
 }
 
 -(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
