@@ -3,18 +3,18 @@
 <plist version="1.0">
 <dict>
 	<key>devtoken</key>
-	<string></string>
+	<string>default</string>
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
 			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Location</string>
+			<string>PSTitleValueSpecifier</string>
 			<key>Key</key>
-			<string>calander_location</string>
+			<string>Version</string>
+			<key>Title</key>
+			<string>Version</string>
 			<key>DefaultValue</key>
-			<string>The Clinic</string>
+			<string>1.05</string>
 		</dict>
 	</array>
 	<key>StringsTable</key>

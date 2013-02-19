@@ -1,7 +1,7 @@
 /*
  *  DrugViewController_iPhone.m
  *  psyTrack Clinician Tools
- *  Version: 1.0
+ *  Version: 1.05
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
@@ -479,7 +479,7 @@
 
     NSFetchRequest *newRequewst=[[NSFetchRequest alloc]init];
        
-    filterPredicate=[NSPredicate predicateWithFormat:@"drugName contains [cd] %@",searchText];
+    filterPredicate=[NSPredicate predicateWithFormat:@"drugName contains [cd] %@ OR activeIngredient contains [cd] %@",searchText,searchText];
     
     [newRequewst setPredicate:filterPredicate];
     

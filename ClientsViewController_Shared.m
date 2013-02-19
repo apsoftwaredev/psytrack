@@ -1,7 +1,7 @@
 /*
  *  ClientsViewController_Shared.m
  *  psyTrack Clinician Tools
- *  Version: 1.0
+ *  Version: 1.05
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
@@ -961,7 +961,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     diagnosisSpecifiersSelectionAttribs.allowEditingItems = YES;
     diagnosisSpecifiersSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Add specifiers under disorder entry)"];
 
-    diagnosisSpecifiersSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add new specifier"];
+    diagnosisSpecifiersSelectionAttribs.addNewObjectuiElement = nil;
     diagnosisSpecifierPropertyDef.attributes = diagnosisSpecifiersSelectionAttribs;
     
     

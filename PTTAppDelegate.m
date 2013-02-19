@@ -1,7 +1,7 @@
 /*
  *  PTTAppDelegate.m
  *  psyTrack Clinician Tools
- *  Version: 1.0
+ *  Version: 1.05
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
@@ -2177,25 +2177,28 @@
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
+
+#if !TARGET_IPHONE_SIMULATOR
+
 	NSString *appname = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleDisplayName"];
 	NSString *type = @"ios";
-	NSString *devToken = [[[[deviceToken description]
+	NSString *devToken =(NSString *) [[[[deviceToken description]
         stringByReplacingOccurrencesOfString:@"<"withString:@""]stringByReplacingOccurrencesOfString:@">"
                              withString:@""]stringByReplacingOccurrencesOfString:@" "withString:@""];
 	
-    NSString *savedDevToken=[[NSUserDefaults standardUserDefaults] valueForKey:@"devtoken"];
+    NSString *savedDevToken=(NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:@"devtoken"];
 	
-    if (savedDevToken && deviceToken && [savedDevToken isKindOfClass:[NSString class]]&&![devToken isEqualToString:savedDevToken]) {
+    if (savedDevToken==nil||(savedDevToken && deviceToken && [savedDevToken isKindOfClass:[NSString class]]&&![devToken isEqualToString:savedDevToken])) {
         [[NSUserDefaults standardUserDefaults] setValue:deviceToken forKey:@"devtoken"];
         
-        NSString *host = @"https://HoT0rJxAX40XqiJZHSVE3J:r7uv5ARVQ76jMNaMSNqO4X@api.appsidekick.com/v1/register_push_device?type=%@&devicetoken=%@&appname=%@";
+        NSString *sideKickHost = @"https://HoT0rJxAX40XqiJZHSVE3J:r7uv5ARVQ76jMNaMSNqO4X@api.appsidekick.com/v1/register_push_device?type=%@&devicetoken=%@&appname=%@";
         
-        NSString *urlString = [NSString stringWithFormat:host, type, devToken, appname];
-        NSURL *url = [NSURL URLWithString:urlString];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        [request setHTTPMethod:@"POST"];
-        DLog(@"url %@",url);
-        [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response,
+        NSString *sideKickUrlString = [NSString stringWithFormat:sideKickHost, type, devToken, appname];
+        NSURL *sideKickUrl = [NSURL URLWithString:sideKickUrlString];
+        NSMutableURLRequest *sideKickRequest = [NSMutableURLRequest requestWithURL:sideKickUrl];
+        [sideKickRequest setHTTPMethod:@"POST"];
+        DLog(@"url %@",sideKickUrl);
+        [NSURLConnection sendAsynchronousRequest:sideKickRequest queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response,
                                                                                                                    NSData *data,
                                                                                                                    NSError *error)
          {
@@ -2218,8 +2221,76 @@
              
          }];
 
-    }
     
+    
+
+
+    // Get Bundle Info for Remote Registration (handy if you have more than one app)
+ 	
+ 	NSString *appVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+ 	
+ 	// Check what Notifications the user has turned on.  We registered for all three, but they may have manually disabled some or all of them.
+ 	NSUInteger rntypes = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+ 	
+ 	// Set the defaults to disabled unless we find otherwise...
+ 	NSString *pushBadge = (rntypes & UIRemoteNotificationTypeBadge) ? @"enabled" : @"disabled";
+ 	NSString *pushAlert = (rntypes & UIRemoteNotificationTypeAlert) ? @"enabled" : @"disabled";
+ 	NSString *pushSound = (rntypes & UIRemoteNotificationTypeSound) ? @"enabled" : @"disabled";
+ 	
+ 	// Get the users Device Model, Display Name, Unique ID, Token & Version Number
+ 	UIDevice *dev = [UIDevice currentDevice];
+ 	NSString *deviceUuid = [PTTAppDelegate GetUUID]  ;
+ 	
+    
+ 	
+ 	NSString *deviceName = dev.name;
+ 	NSString *deviceModel = dev.model;
+ 	NSString *deviceSystemVersion = dev.systemVersion;
+ 	
+ 	
+ 	// Build URL String for Registration
+ 	// !!! CHANGE "www.mywebsite.com" TO YOUR WEBSITE. Leave out the http://
+ 	// !!! SAMPLE: "secure.awesomeapp.com"
+ 	NSString *host = @"www.psytrack.com";
+ 	
+ 	// !!! CHANGE "/apns.php?" TO THE PATH TO WHERE apns.php IS INSTALLED
+ 	// !!! ( MUST START WITH / AND END WITH ? ).
+ 	// !!! SAMPLE: "/path/to/apns.php?"
+ 	NSString *urlString = [NSString stringWithFormat:@"/apns87345/apns.php?task=%@&appname=%@&appversion=%@&deviceuid=%@&devicetoken=%@&devicename=%@&devicemodel=%@&deviceversion=%@&pushbadge=%@&pushalert=%@&pushsound=%@", @"register", appname,appVersion, deviceUuid, devToken, deviceName, deviceModel, deviceSystemVersion, pushBadge, pushAlert, pushSound];
+ 	
+ 	// Register the Device Data
+ 	// !!! CHANGE "http" TO "https" IF YOU ARE USING HTTPS PROTOCOL
+ 	NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
+ 	
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue currentQueue] completionHandler:^(NSURLResponse *response,
+                                                                                                               NSData *data,
+                                                                                                               NSError *error)
+     {
+         
+         if ([data length] >0 && error == nil)
+         {
+             
+             // DO YOUR WORK HERE
+             DLog(@"response received");
+//                              NSString *strReply = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//                              DLog(@"%@", strReply);
+         }
+         else if ([data length] == 0 && error == nil)
+         {
+             DLog( @"Nothing was downloaded.");
+         }
+         else if (error != nil){
+             DLog(@"Error = %@", error);
+         }
+         
+     }];
+
+    }
+    	
+ 	
+#endif
+
 //	NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
 //	NSString *strReply = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
 //	NSLog(@"%@", strReply);

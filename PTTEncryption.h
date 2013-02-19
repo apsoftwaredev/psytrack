@@ -1,7 +1,7 @@
 /*
  *  PTTEncryption.h
  *  psyTrack Clinician Tools
- *  Version: 1.0
+ *  Version: 1.05
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
