@@ -118,21 +118,23 @@
     appDocDef.keyPropertyName=@"docDate";
     
     // Instantiate the tabel model
-	objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView ];	
+		
+    SCMemoryStore *memoryStore=[SCMemoryStore storeWithObjectsArray:[NSMutableArray arrayWithArray:fetchedObjectsArray] defaultDefiniton:appDocDef];
     
+    objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView dataStore:memoryStore];
     objectsModel.delegate=self;
 //    SCArrayOfObjectsSection *section=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Action Documents" entityClassDefinition:appDocDef usingPredicate:applNoPredicate];
     
-    SCArrayOfObjectsSection *section =[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Action Documents" items:[NSMutableArray arrayWithArray:fetchedObjectsArray] itemsDefinition:appDocDef];
+//    SCArrayOfObjectsSection *section =[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Action Documents" items:[NSMutableArray arrayWithArray:fetchedObjectsArray] itemsDefinition:appDocDef];
+//    
     
+    objectsModel.allowDeletingItems=FALSE;
+    objectsModel.allowEditDetailView=FALSE;
+    objectsModel.allowMovingItems=FALSE;
+    objectsModel.allowAddingItems=FALSE;
+    objectsModel.allowRowSelection=NO;
     
-    section.allowDeletingItems=FALSE;
-    section.allowEditDetailView=FALSE;
-    section.allowMovingItems=FALSE;
-    section.allowAddingItems=FALSE;
-    section.allowRowSelection=NO;
-    
-    section.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
+    objectsModel.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
     {
         
         
@@ -147,7 +149,7 @@
 //    
     
 //    section.sortItemsSetAscending=FALSE;
-    [objectsModel addSection:section];
+//    [objectsModel addSection:section];
     
     //  	tableModel.searchPropertyName = @"drugName;activeIngredient";
     //    

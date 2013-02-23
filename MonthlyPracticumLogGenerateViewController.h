@@ -8,7 +8,7 @@
 //
 
 #import "ReaderViewController.h"
-#import "SCArrayOfObjectsModel+CoreData+SelectionSection.h"
+#import "SCArrayOfObjectsModel_UseSelectionSection.h"
 #import "BigProgressViewWithBlockedView.h"
 
 @interface MonthlyPracticumLogGenerateViewController : SCTableViewController <ReaderViewControllerDelegate,UITextFieldDelegate, SCTableViewModelDelegate, UIPickerViewDelegate,UIPickerViewDataSource,UIAlertViewDelegate>{

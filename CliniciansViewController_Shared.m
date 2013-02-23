@@ -3521,7 +3521,6 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
 
 
@@ -3532,8 +3531,7 @@
    else if (tableViewModel.tag==0) {
         
         currentDetailTableViewModel_=nil;
-       appDelegate.okayToSaveContext=YES;
-    }
+        }
 
    else if (tableViewModel.tag==3) {
         selectedVariableName=nil;

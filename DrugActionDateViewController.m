@@ -109,7 +109,7 @@
         
         NSPredicate *applNoPredicate=[NSPredicate predicateWithFormat:@"applNo matches %@",applNoString];
         
-   
+    DLog(@"applno is  %@",applNoString);
     
         
         NSFetchRequest * actionDateFetchRequest = [[NSFetchRequest alloc] init];
@@ -123,10 +123,10 @@
         [actionDateFetchRequest setSortDescriptors:sortDescriptors];
         
         [actionDateFetchRequest setPredicate:applNoPredicate];
-        
-        
-        //    [fetchRequest setFetchBatchSize:10];
-        
+                //    [fetchRequest setFetchBatchSize:10];
+    
+    
+   
         NSError *error = nil;
         NSArray *fetchedObjectsArray = [drugsManagedObjectContext executeFetchRequest:actionDateFetchRequest error:&error];
         
@@ -164,37 +164,69 @@
     actionDateDef.titlePropertyName=@"actionDate";
 
     
-    SCArrayOfObjectsSection *section=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"USFDA Actions" items:[NSMutableArray arrayWithArray:fetchedObjectsArray] itemsDefinition:actionDateDef];
-//    section.dataFetchOptions=dataFetchOptions;
-    section.allowEditDetailView=NO;
-    section.allowDeletingItems=FALSE;
-    section.allowEditDetailView=FALSE;
-    section.allowMovingItems=FALSE;
-    section.allowAddingItems=FALSE;
-    section.allowRowSelection=NO;
-//    section.sortItemsSetAscending=FALSE;
+  
+    
+    
+       
+       
+        for (NSManagedObject *managedObject in fetchedObjectsArray) {
+            [managedObject willAccessValueForKey:@"actionDate"];
+        }
+                
+         SCMemoryStore * memoryStore=[SCMemoryStore storeWithObjectsArray:[NSMutableArray arrayWithArray:fetchedObjectsArray] defaultDefiniton:actionDateDef];
+        
+            
+    objectsModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView dataStore:memoryStore];
+    
+
+    
+//        SCArrayOfObjectsSection *section=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"USFDA Actions" dataStore:memoryStore];
+        //    section.dataFetchOptions=dataFetchOptions;
+        objectsModel.allowEditDetailView=NO;
+        objectsModel.allowDeletingItems=FALSE;
+        objectsModel.allowEditDetailView=FALSE;
+        objectsModel.allowMovingItems=FALSE;
+        objectsModel.allowAddingItems=FALSE;
+        objectsModel.allowRowSelection=NO;
+    
+    objectsModel.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
+    {
+            NSDictionary *actionOverviewBindings = [NSDictionary
+                                                    dictionaryWithObjects:[NSArray arrayWithObjects:@"actionDate", @"docTypeDesc",@"actionDate",@"DrugAppDocsViewController",   nil]
+                                                    forKeys:[NSArray arrayWithObjects:@"1",  @"top",@"bottom",@"openNib",nil]]; // 1,2,3 are the control tags
+            SCCustomCell *actionOverviewCell = [SCCustomCell cellWithText:nil boundObject:nil objectBindings:actionOverviewBindings nibName:@"DrugDocOverviewCell_iPhone"];
+            
+            
+            actionOverviewCell.cellActions.didSelect = ^(SCTableViewCell *aCell, NSIndexPath *indexPath)
+            {
+                [(SCArrayOfObjectsSection *)actionOverviewCell.ownerSection dispatchEventSelectRowAtIndexPath:indexPath];
+                // code goes here
+            };
+            
+            
+            actionOverviewCell.cellActions.didLayoutSubviews = ^(SCTableViewCell *aCell, NSIndexPath *path)
+            {
+                // code goes here
+            };
+            
+            return actionOverviewCell;
+            
+            
+            };
+        
+
+        
+        // Instantiate the tabel model
+//      objectsModel.modeledTableView.userInteractionEnabled=YES;
+//    [objectsModel addSection:section];
+    
+    
+   
+    
+   //    section.sortItemsSetAscending=FALSE;
        
      
-    section.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
-    {
-        
-        NSDictionary *actionOverviewBindings = [NSDictionary 
-                                                dictionaryWithObjects:[NSArray arrayWithObjects:@"actionDate", @"docTypeDesc",@"actionDate",@"DrugAppDocsViewController",   nil] 
-                                                forKeys:[NSArray arrayWithObjects:@"1",  @"top",@"bottom",@"openNib",nil]]; // 1,2,3 are the control tags
-        SCCustomCell *actionOverviewCell = [SCCustomCell cellWithText:nil boundObject:nil objectBindings:actionOverviewBindings nibName:@"DrugDocOverviewCell_iPhone"];
-        
-        
-        
-        return actionOverviewCell;
-    };
-
-
-    
-    
-    // Instantiate the tabel model
-	objectsModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView];	
-    
-    [objectsModel addSection:section];
+   
         
 //    });
  
@@ -296,6 +328,8 @@
     sortDescriptors=nil;
     actionDateFetchRequest=nil;
     docTypesFetchRequest=nil;
+    [objectsModel reloadBoundValues];
+    [objectsModel.modeledTableView reloadData];
 
 }
 

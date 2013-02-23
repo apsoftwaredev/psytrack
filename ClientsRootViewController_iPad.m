@@ -399,23 +399,13 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
         
     }
     
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-
     if (tableModel.tag==0 ) {
         [self.searchBar setSelectedScopeButtonIndex:0];
         
         [objectsModel.dataFetchOptions setFilterPredicate:nil];
         
-        appDelegate.okayToSaveContext=YES;
     }
-    
-    else if (tableModel.tag>1) {
-        
-        
-        appDelegate.okayToSaveContext=NO;
-    }
-    
 if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
     
     SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
@@ -1180,13 +1170,9 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (tableModel.tag==0) {
-        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-        
-        appDelegate.okayToSaveContext=YES;
-    }
+    
 
-   else if (tableModel.tag==2) {
+    if (tableModel.tag==2) {
         selectedDisorder=nil;
         
     }

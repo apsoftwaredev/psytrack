@@ -20,7 +20,7 @@
 #import "ButtonCell.h"
 #import "CliniciansViewController_Shared.h"
 
-#import "SCArrayOfObjectsModel+CoreData+SelectionSection.h"
+#import "SCArrayOfObjectsModel_UseSelectionSection.h"
 
 
 
@@ -913,20 +913,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         [objectsModel.dataFetchOptions setFilterPredicate:nil];
         
     }
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
-
-    if (tableModel.tag==0) {
-        
-        appDelegate.okayToSaveContext=YES;
-    }
-
-    else if (tableModel.tag>1) {
-        
-        
-        appDelegate.okayToSaveContext=NO;
-    }
-
 }
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didInsertRowAtIndexPath:(NSIndexPath *)indexPath
 

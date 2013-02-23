@@ -20,7 +20,7 @@
 #import "PTTAppDelegate.h"
 
 #import "PTTEncryption.h"
-#import "SCArrayOfObjectsModel+CoreData+SelectionSection.h"
+#import "SCArrayOfObjectsModel_UseSelectionSection.h"
 
 @implementation DrugViewController_iPhone
 @synthesize searchBar;
@@ -417,35 +417,35 @@
     
     
 }
--(void)didReceiveMemoryWarning{
-
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    if (!appDelegate.drugViewControllerIsInDetailSubview) {
-       objectsModel=nil;
-    
-     NSArray *productFetchedObjects=[NSArray array];
-    if (isInDetailSubview) {
-        objectsModel=[[SCArrayOfObjectsModel_UseSelectionSection alloc]initWithTableView:self.tableView items:[NSMutableArray arrayWithArray:productFetchedObjects] itemsDefinition:drugDef];
-        
-        
-    }
-    else {
-        objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView items:[NSMutableArray arrayWithArray:productFetchedObjects] itemsDefinition:drugDef];
-    }
-    self.tableViewModel = objectsModel;
-    [self.tableViewModel reloadBoundValues];
-    drugsManagedObjectContext=nil;
-
-[objectsModel.modeledTableView reloadData];
-    CGFloat localDbBytes=(CGFloat )0.1;
-    UINavigationItem *navigationItem=(UINavigationItem *)self.navigationItem;
-    
-    navigationItem.title=[NSString stringWithFormat:@"Drugs %0.1f MB", localDbBytes/1048576];
-    
-    }
-
-}
+//-(void)didReceiveMemoryWarning{
+//
+//    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//    
+//    if (!appDelegate.drugViewControllerIsInDetailSubview) {
+//       objectsModel=nil;
+//    
+//     NSArray *productFetchedObjects=[NSArray array];
+//    if (isInDetailSubview) {
+//        objectsModel=[[SCArrayOfObjectsModel_UseSelectionSection alloc]initWithTableView:self.tableView items:[NSMutableArray arrayWithArray:productFetchedObjects] itemsDefinition:drugDef];
+//        
+//        
+//    }
+//    else {
+//        objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView items:[NSMutableArray arrayWithArray:productFetchedObjects] itemsDefinition:drugDef];
+//    }
+//    self.tableViewModel = objectsModel;
+//    [self.tableViewModel reloadBoundValues];
+//    drugsManagedObjectContext=nil;
+//
+//[objectsModel.modeledTableView reloadData];
+//    CGFloat localDbBytes=(CGFloat )0.1;
+//    UINavigationItem *navigationItem=(UINavigationItem *)self.navigationItem;
+//    
+//    navigationItem.title=[NSString stringWithFormat:@"Drugs %0.1f MB", localDbBytes/1048576];
+//    
+//    }
+//
+//}
 //-()sea
 -(void)viewButtonTapped{
 
@@ -475,80 +475,54 @@
         objectsModel.enablePullToRefresh=NO;
         objectsModel.tableView.userInteractionEnabled=NO;
         
-    objectsModel=nil;
-
-    NSFetchRequest *newRequewst=[[NSFetchRequest alloc]init];
-       
-    filterPredicate=[NSPredicate predicateWithFormat:@"drugName contains [cd] %@ OR activeIngredient contains [cd] %@",searchText,searchText];
-    
-    [newRequewst setPredicate:filterPredicate];
-    
-    [newRequewst setEntity:productEntityDesc];
-       
-    NSError *productError = nil;
-    NSArray *productFetchedObjects=[NSArray array];
-        if (!drugsManagedObjectContext) {
-            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        if (objectsModel ) {
+        
+          
+            NSFetchRequest *newRequewst=[[NSFetchRequest alloc]init];
             
+            filterPredicate=[NSPredicate predicateWithFormat:@"drugName contains [cd] %@ OR activeIngredient contains [cd] %@",searchText,searchText];
+            
+            [newRequewst setPredicate:filterPredicate];
+            
+            [newRequewst setEntity:productEntityDesc];
+            NSError *productError = nil;
+            NSArray *productFetchedObjects=[NSArray array];
+            if (!drugsManagedObjectContext) {
+                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+                
+                
+                drugsManagedObjectContext=[appDelegate drugsManagedObjectContext];
+            }
+            if ([drugsManagedObjectContext countForFetchRequest:newRequewst error:&productError]) {
+                
+                productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:newRequewst error:&productError];
+                
+                NSMutableArray *productFetchedObjectsMutableArray=[NSMutableArray arrayWithArray:productFetchedObjects];
+                [objectsModel removeAllSections];
+                
+                
+                SCMemoryStore *memoryStore=[SCMemoryStore storeWithObjectsArray:productFetchedObjectsMutableArray defaultDefiniton:drugDef];
+                
+               
+                [objectsModel setDataStore:memoryStore];
+               
+                [objectsModel reloadBoundValues];
+                //
+                //
+                [objectsModel.modeledTableView reloadData];
+                newRequewst=nil;
+                objectsModel.enablePullToRefresh=YES;
+                objectsModel.tableView.userInteractionEnabled=YES;
+                
 
-            drugsManagedObjectContext=[appDelegate drugsManagedObjectContext];
+                
+            }
+                       
         }
-    if ([drugsManagedObjectContext countForFetchRequest:newRequewst error:&productError]) {
         
-        productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:newRequewst error:&productError];
-    
-        
-    }
-       
-    
-    
-    [objectsModel removeAllSections];
+
  
-        if (isInDetailSubview) {
-         objectsModel=[[SCArrayOfObjectsModel_UseSelectionSection alloc]initWithTableView:self.tableView items:[NSMutableArray arrayWithArray:productFetchedObjects] itemsDefinition:drugDef];
-    
-
-    }
-    else {
-        objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView items:[NSMutableArray arrayWithArray:productFetchedObjects] itemsDefinition:drugDef];
-    }
-    
-       
-	objectsModel.searchPropertyName = @"drugName";
-	objectsModel.addButtonItem = self.addButton;
-    
-    //	self.searchBar.delegate=self;
-    
-    // Replace the default model with the new objectsModel
-    //    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"drugName Matches %@",@"a"];
-    objectsModel.enablePullToRefresh = TRUE;
-    objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
-    objectsModel.delegate=self;
-    
-    objectsModel.allowAddingItems=NO;
-    objectsModel.allowDeletingItems=NO;
-    objectsModel.allowEditDetailView=YES;
-    objectsModel.allowMovingItems=YES;
-    objectsModel.allowRowSelection=YES;
-    objectsModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
-    objectsModel.delegate=self;
-    SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"drugName" sortAscending:YES filterPredicate:nil];
-    
-    
-    objectsModel.autoAssignDelegateForDetailModels=YES;
-    objectsModel.dataStore.storeMode=SCStoreModeAsynchronous;
-    
-    objectsModel.dataFetchOptions=dataFetchOptions;
-    //    [objectsModel reloadBoundValues];
-    
-    self.tableViewModel = objectsModel;
-    [self.tableViewModel reloadBoundValues];
-   
-
-    [objectsModel.modeledTableView reloadData];
-        newRequewst=nil;
-        objectsModel.enablePullToRefresh=YES;
-        objectsModel.tableView.userInteractionEnabled=YES;
     }
 }
 
@@ -1353,7 +1327,7 @@ else
     if (tableViewModel.tag==1 &&index==0) {
         if (section.cellCount<5) {
      
-        SCObjectSelectionCell *drugActionDatesCell=[SCObjectSelectionCell cellWithText:@"Drug Documents"];
+        SCObjectSelectionCell *drugActionDatesCell=[SCObjectSelectionCell cellWithText:@"USFDA Documents"];
 //        drugActionDatesCell.delegate=self;
         drugActionDatesCell.tag=14;
         
@@ -1440,8 +1414,21 @@ else
                 tabBar.userInteractionEnabled=FALSE;               
                 
                 SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+            
+            SCObjectSection *objectSection=nil;
+                if ([section isKindOfClass:[SCObjectSection class]])
+                    objectSection =(SCObjectSection *)section;
+            
+            
+           
+            if (objectSection) {
+                NSManagedObject *drugObject=(NSManagedObject *)objectSection.boundObject;
                 
-                drugApplNo=(NSString *)[section.boundObject valueForKey:@"applNo"];
+                [drugObject willAccessValueForKey:@"applNo"];
+                 drugApplNo=(NSString *)[objectSection.boundObject valueForKey:@"applNo"];
+            }
+            
+            
                 
                 
                 DrugActionDateViewController * drugActionDateViewController_iPhone = [[DrugActionDateViewController alloc] initWithNibName:@"DrugActionDateViewController" bundle:[NSBundle mainBundle] withApplNo:drugApplNo];

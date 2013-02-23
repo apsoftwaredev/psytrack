@@ -17,7 +17,7 @@
  */
 
 
-#import "SCArrayOfObjectsModel+CoreData+SelectionSection.h"
+#import "SCArrayOfObjectsModel_UseSelectionSection.h"
 #import <STV+CoreData/SCCoreDataStore.h> 
 
 

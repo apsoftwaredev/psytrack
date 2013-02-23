@@ -7,7 +7,7 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 #import "ReaderViewController.h"
-#import "SCArrayOfObjectsModel+CoreData+SelectionSection.h"
+#import "SCArrayOfObjectsModel_UseSelectionSection.h"
 #import "BigProgressViewWithBlockedView.h"
 
 @interface AllTrainingHoursGenerateVC : SCViewController <ReaderViewControllerDelegate,UITextFieldDelegate, UIAlertViewDelegate>{

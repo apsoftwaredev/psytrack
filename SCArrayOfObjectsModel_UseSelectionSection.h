@@ -8,7 +8,6 @@
 //
 
 
-#import <SensibleTableView/SCTableViewModel.h>
 
 #import <STV+CoreData/SCEntityDefinition.h> 
 

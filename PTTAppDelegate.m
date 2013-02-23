@@ -102,7 +102,7 @@
 @synthesize stopScrollingMonthlyPracticumLog;
 @synthesize changedPassword,changedToken;
 @synthesize drugViewControllerIsInDetailSubview;
-@synthesize okayToSaveContext;
+
 
 + (PTTAppDelegate *)appDelegate {
 	return (PTTAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -531,7 +531,7 @@
              
                     NSString *message=nil;
                     if (secondsWaitingForICloud>13) {
-                        message=@"Attempting to set up database for iCloud. Sorry this is taking so long. Please stand by and I will continue working on it. It could take a few minutes if the response from iCloud is slow";
+                        message=@"Attempting to set up database for iCloud. Please stand by. It could take a minute or two if the response from iCloud is slow.";
                     }
                     else{
                         message=@"Configuring database for iCloud. One moment please";
@@ -540,23 +540,23 @@
                     
                 switch (labelText.length) {
                     case 50:
-                    case 186:
+                    case 125:
                         message=[message stringByAppendingString:@"."];
                         break;
                     case 51:
-                    case 187:
+                    case 126:
                         message=[message stringByAppendingString:@".."];
                         break;
                     case 52:
-                    case 188:
+                    case 127:
                         message=[message stringByAppendingString:@"..."];
                         break;
                     case 53:
                     
                         message=[message substringToIndex:50];
                         break;
-                    case 189:
-                        message=[message substringToIndex:186];
+                    case 128:
+                        message=[message substringToIndex:125];
                         break;
                     
                     
@@ -614,108 +614,6 @@
 }
 
 
-
-//-(void)checkKeyEntity {
-//
-//    
-//    
-//    
-//    NSPredicate *keyStringPredicate=[NSPredicate predicateWithFormat:@"keyString MATCHES %@",[lockValuesDictionary_ valueForKey:K_LOCK_SCREEN_CREATE_KEY]];
-//    
-//    NSFetchRequest *newFetchRequest=[[NSFetchRequest alloc]init];
-//    
-//    [newFetchRequest setPredicate:keyStringPredicate];
-//    
-//    NSError *error=nil;
-//    NSArray *fetchedObjects=[managedObjectContext__ executeFetchRequest:newFetchRequest error:&error];
-//    
-//    if(fetchedObjects.count){
-//       KeyEntity *keyObject=[fetchedObjects objectAtIndex:0];
-//        if ([keyObject.keyDate isEqualToDate:(NSDate *)[(NSDictionary *)[[NSUserDefaults standardUserDefaults]valueForKey:kPTCurrentKeyDictionary] valueForKey:kPTCurrentKeyDate] ] ) {
-//            [checkKeyEntityTimer invalidate];
-//            checkKeyEntityTimer=nil;
-//            if (!lockValuesDictionary_) {
-//                [self setupLockDictionaryResultStr];
-//                
-//                
-//            }
-//            
-//            NSData *decryptedLockData;
-//            decryptedLockData =(NSData *) [self decryptDataToPlainDataUsingKeyEntityWithString:(NSString *)keyObject.keyString encryptedData:(NSData *)keyObject.dataF];
-//        
-//            
-//           
-//            
-//            
-//            //            
-//            NSString* newStr = [[NSString alloc] initWithData:decryptedLockData encoding:NSASCIIStringEncoding];;
-//            //            
-//            
-//            if (decryptedLockData) {
-//                
-//                
-//                NSDictionary *dictionaryFromDecryptedData=[NSKeyedUnarchiver unarchiveObjectWithData:decryptedLockData];
-//                
-//                if (dictionaryFromDecryptedData) {
-//                    
-//                    
-//                    //                    
-//                    
-//                    id obj = [dictionaryFromDecryptedData objectForKey:K_LOCK_SCREEN_PASSCODE];
-//                    
-//                    if (obj) {
-//                        // use obj
-//                        
-//                        NSString *pHash= [NSString stringWithFormat:@"%@asdj9emV3k30wer93",@""];
-//                        NSString *checkHash=[dictionaryFromDecryptedData valueForKey:K_LOCK_SCREEN_P_HSH];
-//                        
-//                        //                        
-//                        //                        
-//                        if (checkHash && [checkHash isEqualToString:pHash]) {
-//                            
-//                            [lockValuesDictionary_ setValue:[dictionaryFromDecryptedData valueForKey:K_LOCK_SCREEN_PASSCODE] forKey:K_LOCK_SCREEN_PASSCODE];
-//                            [self displayNotification:@"Passcode Updated" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
-//                            
-//                        }
-//                        else {
-//                            [self displayNotification:@"Problem updating Passcode occured" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
-//                        }
-//                        
-//                        
-//                        
-//                    } 
-//                    
-//                    
-//                    
-//                    
-//                }
-//                else
-//                    statusMessage=@"Unable to load necessary security data";
-//            }
-//            else
-//                statusMessage=@"Unable to load necessary security data";
-//            
-//            
-//        }
-//
-//            
-//            lockValuesDictionary_ setValue:(NSString *)[(NSDictionary *)[[NSUserDefaults standardUserDefaults]valueForKey:kPTCurrentKeyDictionary] valueForKey:keyObject.da]  forUndefinedKey:<#(NSString *)#>                                 
-//            
-//        }
-//        
-//        [self saveContext];
-//    }
-//    else 
-//    {
-//        
-//        [self displayNotification:@"Error 789: Unable to save settings." forDuration:3.0 location:kPTTScreenLocationTop inView:nil];                  
-//        
-//    }
-//
-//
-//
-//
-//}
 -(void)loadDatabaseData:(id)sender
 {
     
@@ -2223,7 +2121,7 @@
 
     
     
-
+//as a backup in case appsidekick doesn't work out
 
     // Get Bundle Info for Remote Registration (handy if you have more than one app)
  	
@@ -2917,7 +2815,7 @@ duration:(NSTimeInterval)1.0];
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
-    self.okayToSaveContext=YES;
+    
     [self saveContext];
 }
 
@@ -2927,7 +2825,7 @@ duration:(NSTimeInterval)1.0];
     if (managedObjectContext != nil && persistentStoreCoordinator__!=nil)
     {
     
-        if (self.okayToSaveContext && managedObjectContext.hasChanges ) {
+        if ( managedObjectContext.hasChanges ) {
             NSUInteger attempts = 0;
             NSError *error = nil;
             while ( ![managedObjectContext save:&error] && ++attempts <= kPTTMaximumSaveAttempts ) {
@@ -3837,7 +3735,7 @@ return [self applicationDrugsDirectory].path;
             
 
         [psc unlock];
-            self.okayToSaveContext=YES;
+           
          NSError *errorSettingAttributes = nil;
             NSDictionary *fileAttributes = [NSDictionary dictionaryWithObject:NSFileProtectionComplete forKey:NSFileProtectionKey];
         

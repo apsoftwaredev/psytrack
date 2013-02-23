@@ -8,7 +8,7 @@
 //
 
 #import "ReaderViewController.h"
-#import "SCArrayOfObjectsModel+CoreData+SelectionSection.h"
+#import "SCArrayOfObjectsModel_UseSelectionSection.h"
 #import "BigProgressViewWithBlockedView.h"
 
 @interface DemographicReportGenerateVC : SCViewController  <ReaderViewControllerDelegate,UITextFieldDelegate, UIAlertViewDelegate>{

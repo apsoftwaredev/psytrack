@@ -24,7 +24,7 @@
 #import "EncryptedSCTextFieldCell.h"
 #import "EncryptedSCTextViewCell.h"
 #import "DrugNameObjectSelectionCell.h"
-#import "SCArrayOfObjectsModel+CoreData+SelectionSection.h"
+#import "SCArrayOfObjectsModel_UseSelectionSection.h"
 
 @implementation ClientsViewController_iPhone
 @synthesize searchBar;
@@ -1493,20 +1493,16 @@
         
         
     }
-     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    
     if (tableModel.tag==0) {
         [self.searchBar setSelectedScopeButtonIndex:1];
         
         [objectsModel.dataFetchOptions setFilterPredicate:nil];
-        appDelegate.okayToSaveContext=YES;
+       
     }
    
-    if (tableModel.tag>1) {
-        
-        
-        appDelegate.okayToSaveContext=NO;
-    }
-    if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
+   
+   else if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
         
         SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
         
@@ -1647,12 +1643,8 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (tableModel.tag==0) {
-        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-        
-        appDelegate.okayToSaveContext=YES;
-    }
-    else if (tableModel.tag==2) {
+    
+    if (tableModel.tag==2) {
         selectedDisorder=nil;
         
     }

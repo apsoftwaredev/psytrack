@@ -147,7 +147,6 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
 @property (nonatomic, retain) KeychainItemWrapper *passCodeItem;
 @property (nonatomic,assign)BOOL stopScrollingMonthlyPracticumLog;
 @property (nonatomic,assign) BOOL drugViewControllerIsInDetailSubview;
-@property (nonatomic, assign) BOOL okayToSaveContext;
 @property (nonatomic, assign) BOOL usingiCloudStore;
 
 -(void)loadDatabaseData:(id)sender;
