@@ -166,7 +166,7 @@
         
         self.navigationItem.leftBarButtonItem=cancelButton;
         
-        objectsModel.delegate=self;
+//        objectsModel.delegate=self;
         
         
     }

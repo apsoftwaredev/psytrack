@@ -122,7 +122,7 @@
     SCMemoryStore *memoryStore=[SCMemoryStore storeWithObjectsArray:[NSMutableArray arrayWithArray:fetchedObjectsArray] defaultDefiniton:appDocDef];
     
     objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView dataStore:memoryStore];
-    objectsModel.delegate=self;
+//    objectsModel.delegate=self;
 //    SCArrayOfObjectsSection *section=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Action Documents" entityClassDefinition:appDocDef usingPredicate:applNoPredicate];
     
 //    SCArrayOfObjectsSection *section =[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Action Documents" items:[NSMutableArray arrayWithArray:fetchedObjectsArray] itemsDefinition:appDocDef];

@@ -60,7 +60,7 @@
    
 
 
-    objectsModel.delegate=self;
+//    objectsModel.delegate=self;
 
     objectsModel.addButtonItem=objectsModel.detailViewController.navigationItem.rightBarButtonItem;
     

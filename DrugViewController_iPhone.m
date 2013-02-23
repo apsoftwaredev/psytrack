@@ -18,7 +18,7 @@
 #import "DrugViewController_iPhone.h"
 #import "DrugActionDateViewController.h"
 #import "PTTAppDelegate.h"
-
+#import "ButtonCell.h"
 #import "PTTEncryption.h"
 #import "SCArrayOfObjectsModel_UseSelectionSection.h"
 
@@ -152,6 +152,24 @@
     //insert the custom property definition into the drugsDef class at index 1
     [drugDef insertPropertyDefinition:activeIngredientDataProperty atIndex:1];
     
+    
+    SCCustomPropertyDefinition *lookUpActivieIngredientButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"LookUpActiveIngredientButton" uiElementClass:[ButtonCell class] objectBindings:nil];
+    
+    lookUpActivieIngredientButtonProperty.cellActions.willConfigure = ^(SCTableViewCell *cell, NSIndexPath *indexPath)
+    {
+        if ([cell isKindOfClass:[ButtonCell class]]) {
+            ButtonCell *buttonCell =(ButtonCell *)cell;
+            
+            buttonCell.buttonText=@"Look Up Drugs with Active Ingredient";
+            
+            [buttonCell reloadBoundValue];
+        }
+    };
+
+    [drugDef insertPropertyDefinition:lookUpActivieIngredientButtonProperty atIndex:2];
+    
+
+    
     //create the dictionary with the data bindings
     NSDictionary *dosageDataBindings = [NSDictionary 
                                         dictionaryWithObjects:[NSArray arrayWithObjects:@"dosage",@"Dosage", @"dosage",    nil] 
@@ -165,7 +183,7 @@
     
     
     //insert the custom property definition into the drugsDef class at index 3
-    [drugDef insertPropertyDefinition:dosageDataProperty atIndex:2];
+    [drugDef insertPropertyDefinition:dosageDataProperty atIndex:3];
     
     
     //create the dictionary with the data bindings
@@ -181,7 +199,7 @@
     
     
     //insert the custom property definition into the drugsDef class at index 3
-    [drugDef insertPropertyDefinition:formDataProperty atIndex:3];
+    [drugDef insertPropertyDefinition:formDataProperty atIndex:4];
     
     
     
@@ -283,8 +301,40 @@
 
         
     }
-       
-     
+      
+    drugDef.cellActions.customButtonTapped = ^(SCTableViewCell *cell, NSIndexPath *indexPath, UIButton *button)
+    {
+        
+        if (button.tag==300) {
+            SCViewController *scViewController=(SCViewController *)cell.ownerTableViewModel.viewController;
+                        [scViewController cancelButtonAction];
+            
+            
+            //give it time to complete the animations
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW,
+                                                    1.0f * NSEC_PER_SEC);
+            
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
+            {
+                NSString *activeIngredientStr=(NSString *)[cell.boundObject valueForKey:@"activeIngredient"];
+                DLog(@"%@",activeIngredientStr);
+                [self.searchBar setText:activeIngredientStr];
+                [self searchBar:self.searchBar textDidChange:activeIngredientStr];
+            });
+           
+               
+               
+                
+               
+               
+            
+            
+           
+            
+        }
+        
+    };
+
    
 	objectsModel.searchPropertyName = @"drugName";
 
@@ -295,7 +345,7 @@
     //    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"drugName Matches %@",@"a"];
     objectsModel.enablePullToRefresh = TRUE;
     objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
-    objectsModel.delegate=self;
+//    objectsModel.delegate=self;
     
     objectsModel.allowAddingItems=NO;
     objectsModel.allowDeletingItems=NO;
@@ -303,7 +353,7 @@
     objectsModel.allowMovingItems=YES;
     objectsModel.allowRowSelection=YES;
     
-    objectsModel.delegate=self;
+//    objectsModel.delegate=self;
     SCCoreDataFetchOptions *dataFetchOptions=[[SCCoreDataFetchOptions alloc]initWithSortKey:@"drugName" sortAscending:YES filterPredicate:nil];
     
     
@@ -497,8 +547,14 @@
             if ([drugsManagedObjectContext countForFetchRequest:newRequewst error:&productError]) {
                 
                 productFetchedObjects = [drugsManagedObjectContext executeFetchRequest:newRequewst error:&productError];
-                
-                NSMutableArray *productFetchedObjectsMutableArray=[NSMutableArray arrayWithArray:productFetchedObjects];
+            }
+            
+            NSMutableArray *productFetchedObjectsMutableArray=nil;
+            if (productFetchedObjects && productFetchedObjects.count) {
+                productFetchedObjectsMutableArray=[NSMutableArray arrayWithArray:productFetchedObjects];
+            }
+            
+        
                 [objectsModel removeAllSections];
                 
                 
@@ -517,12 +573,27 @@
                 
 
                 
-            }
+            
+            
                        
         }
+       
+        
+        objectsModel.enablePullToRefresh=YES;
+        objectsModel.tableView.userInteractionEnabled=YES;
         
 
  
+    }
+    else if (searchText==nil ||searchText.length==0){
+        SCMemoryStore *memoryStore=[SCMemoryStore storeWithObjectsArray:nil defaultDefiniton:drugDef];
+        
+    
+        [objectsModel setDataStore:memoryStore];
+        [objectsModel removeAllSections];
+        [objectsModel reloadBoundValues];
+        [objectsModel.modeledTableView reloadData];
+        
     }
 }
 
@@ -1325,14 +1396,14 @@ else
    
     
     if (tableViewModel.tag==1 &&index==0) {
-        if (section.cellCount<5) {
+        if (section.cellCount<6) {
      
         SCObjectSelectionCell *drugActionDatesCell=[SCObjectSelectionCell cellWithText:@"USFDA Documents"];
 //        drugActionDatesCell.delegate=self;
         drugActionDatesCell.tag=14;
         
         
-        [section insertCell:drugActionDatesCell atIndex:4];
+        [section insertCell:drugActionDatesCell atIndex:5];
         
             
         }

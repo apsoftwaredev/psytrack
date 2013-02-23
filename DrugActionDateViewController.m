@@ -323,7 +323,7 @@
     objectsModel.allowRowSelection=YES;
     
     self.tableViewModel=objectsModel;
-    objectsModel.delegate=self;
+//    objectsModel.delegate=self;
     sortDescriptor=nil;
     sortDescriptors=nil;
     actionDateFetchRequest=nil;
