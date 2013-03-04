@@ -12,7 +12,7 @@
 @interface DemographicReportViewController : SCViewController <SCTableViewControllerDelegate, SCTableViewModelDelegate>{
     
     
-    SCArrayOfObjectsModel *objectsModel;
+   
     
      NSString *clinicianName_;
     

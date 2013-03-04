@@ -461,6 +461,7 @@ if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
                         SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"specifier" sortAscending:YES filterPredicate:predicate];
                         
                         objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                        [objectSelectionCell reloadBoundValue];
                     }
                 
                 
@@ -525,6 +526,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                     SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
                     
                     objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                    [objectSelectionCell reloadBoundValue];
                 }
                 
                 

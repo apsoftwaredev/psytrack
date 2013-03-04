@@ -109,7 +109,7 @@
         
         NSPredicate *applNoPredicate=[NSPredicate predicateWithFormat:@"applNo matches %@",applNoString];
         
-    DLog(@"applno is  %@",applNoString);
+   
     
         
         NSFetchRequest * actionDateFetchRequest = [[NSFetchRequest alloc] init];

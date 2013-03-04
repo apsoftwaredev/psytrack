@@ -60,10 +60,8 @@
     };
     
     
-    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView];
-    
-    [objectsModel addSection:objectsSection];
-    self.tableViewModel=objectsModel;
+   
+    [self.tableViewModel addSection:objectsSection];;
     
     
 

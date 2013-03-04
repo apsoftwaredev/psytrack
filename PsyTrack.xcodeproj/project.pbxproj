@@ -425,13 +425,13 @@
 		E777EF301693A16B000C51E9 /* DrugProductEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E777EF2F1693A16B000C51E9 /* DrugProductEntity.m */; };
 		E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E78A8D1A1531EDF10099FE5B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */; };
-		E78C961616D86AC000E8AD09 /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E78C960A16D86A5800E8AD09 /* libSensibleTableView.a */; };
 		E78C961716D86AC600E8AD09 /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E78C961116D86A7900E8AD09 /* libSTV+CoreData.a */; };
 		E78C96D115EE8CB100EDB0FF /* ActionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E78C96D015EE8CB100EDB0FF /* ActionButton.png */; };
 		E78DA690151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA68F151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m */; };
 		E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA69E15227EA9004ABF29 /* ClinicianSelectionCell.m */; };
 		E78DA6A415252579004ABF29 /* ExistingHoursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA6A215252579004ABF29 /* ExistingHoursViewController.m */; };
 		E78DA6A515252579004ABF29 /* ExistingHoursViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78DA6A315252579004ABF29 /* ExistingHoursViewController.xib */; };
+		E78F088916DC742F0075C78E /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E78F088616DC74190075C78E /* libSensibleTableView.a */; };
 		E7919B281547001F001161A9 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B271547001F001161A9 /* Icon-72@2x.png */; };
 		E7919B3015470EDB001161A9 /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */; };
 		E7919B3215470F01001161A9 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */; };
@@ -575,13 +575,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E78C960916D86A5800E8AD09 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E78C960416D86A5700E8AD09 /* SensibleTableView.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DBE7373014F99E580076D2B6;
-			remoteInfo = SensibleTableView;
-		};
 		E78C961016D86A7900E8AD09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E78C960B16D86A7800E8AD09 /* STV+CoreData.xcodeproj */;
@@ -589,19 +582,26 @@
 			remoteGlobalIDString = DBE737C414FC66D40076D2B6;
 			remoteInfo = "STV+CoreData";
 		};
-		E78C961216D86AAB00E8AD09 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E78C960416D86A5700E8AD09 /* SensibleTableView.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = DBE7372F14F99E580076D2B6;
-			remoteInfo = SensibleTableView;
-		};
 		E78C961416D86AB100E8AD09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E78C960B16D86A7800E8AD09 /* STV+CoreData.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
 			remoteInfo = "STV+CoreData";
+		};
+		E78F088516DC74190075C78E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E78F088016DC74180075C78E /* SensibleTableView.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DBE7373014F99E580076D2B6;
+			remoteInfo = SensibleTableView;
+		};
+		E78F088716DC74240075C78E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E78F088016DC74180075C78E /* SensibleTableView.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = DBE7372F14F99E580076D2B6;
+			remoteInfo = SensibleTableView;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1312,7 +1312,6 @@
 		E78A8D191531EDF10099FE5B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		E78A8D1A1531EDF10099FE5B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Reachability.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		E78C960416D86A5700E8AD09 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../STV/STV 3.1.7 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
 		E78C960B16D86A7800E8AD09 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../STV/STV 3.1.7 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E78C96D015EE8CB100EDB0FF /* ActionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButton.png; sourceTree = "<group>"; };
 		E78DA68E151FAC8A004ABF29 /* DrugNameObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugNameObjectSelectionCell.h; sourceTree = "<group>"; };
@@ -1322,6 +1321,7 @@
 		E78DA6A115252579004ABF29 /* ExistingHoursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursViewController.h; sourceTree = "<group>"; };
 		E78DA6A215252579004ABF29 /* ExistingHoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ExistingHoursViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E78DA6A315252579004ABF29 /* ExistingHoursViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController.xib; sourceTree = "<group>"; };
+		E78F088016DC74180075C78E /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../STV/STV 3.1.7 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
 		E7919B271547001F001161A9 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		E7919B2F15470EDB001161A9 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		E7919B3115470F01001161A9 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
@@ -1508,8 +1508,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E78F088916DC742F0075C78E /* libSensibleTableView.a in Frameworks */,
 				E78C961716D86AC600E8AD09 /* libSTV+CoreData.a in Frameworks */,
-				E78C961616D86AC000E8AD09 /* libSensibleTableView.a in Frameworks */,
 				E7F1CAF41597CADB006F9E95 /* CoreText.framework in Frameworks */,
 				E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */,
 				E7F1CBA31598C787006F9E95 /* ImageIO.framework in Frameworks */,
@@ -2080,8 +2080,8 @@
 		B771C54314DAF3E4002D430E /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
+				E78F088016DC74180075C78E /* SensibleTableView.xcodeproj */,
 				E78C960B16D86A7800E8AD09 /* STV+CoreData.xcodeproj */,
-				E78C960416D86A5700E8AD09 /* SensibleTableView.xcodeproj */,
 				E7F1CB1E1598C024006F9E95 /* vfr-Reader-db84c9d */,
 				E7577FA7158C1DAE0044D344 /* KeychainItemWrapper.h */,
 				E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */,
@@ -2237,14 +2237,6 @@
 			name = "Client Presentation";
 			sourceTree = "<group>";
 		};
-		E78C960516D86A5700E8AD09 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E78C960A16D86A5800E8AD09 /* libSensibleTableView.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		E78C960C16D86A7800E8AD09 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -2263,6 +2255,14 @@
 				E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */,
 			);
 			name = "Existing Hours";
+			sourceTree = "<group>";
+		};
+		E78F088116DC74180075C78E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E78F088616DC74190075C78E /* libSensibleTableView.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		E798A02F15845941006B9DBD /* MapperTheme */ = {
@@ -2908,8 +2908,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				E78F088816DC74240075C78E /* PBXTargetDependency */,
 				E78C961516D86AB100E8AD09 /* PBXTargetDependency */,
-				E78C961316D86AAB00E8AD09 /* PBXTargetDependency */,
 			);
 			name = PsyTrack;
 			productName = psyTrainTrack;
@@ -2938,8 +2938,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = E78C960516D86A5700E8AD09 /* Products */;
-					ProjectRef = E78C960416D86A5700E8AD09 /* SensibleTableView.xcodeproj */;
+					ProductGroup = E78F088116DC74180075C78E /* Products */;
+					ProjectRef = E78F088016DC74180075C78E /* SensibleTableView.xcodeproj */;
 				},
 				{
 					ProductGroup = E78C960C16D86A7800E8AD09 /* Products */;
@@ -2954,18 +2954,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E78C960A16D86A5800E8AD09 /* libSensibleTableView.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSensibleTableView.a;
-			remoteRef = E78C960916D86A5800E8AD09 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		E78C961116D86A7900E8AD09 /* libSTV+CoreData.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libSTV+CoreData.a";
 			remoteRef = E78C961016D86A7900E8AD09 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E78F088616DC74190075C78E /* libSensibleTableView.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSensibleTableView.a;
+			remoteRef = E78F088516DC74190075C78E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -3536,15 +3536,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E78C961316D86AAB00E8AD09 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SensibleTableView;
-			targetProxy = E78C961216D86AAB00E8AD09 /* PBXContainerItemProxy */;
-		};
 		E78C961516D86AB100E8AD09 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "STV+CoreData";
 			targetProxy = E78C961416D86AB100E8AD09 /* PBXContainerItemProxy */;
+		};
+		E78F088816DC74240075C78E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SensibleTableView;
+			targetProxy = E78F088716DC74240075C78E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -4057,7 +4057,7 @@
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "12C36593-A78E-4F40-94A6-34119851EA18";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "12C36593-A78E-4F40-94A6-34119851EA18";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../.STV/STV 3.1.4 Pro/Source Code/STV+CoreData/STV+CoreData\" \"$(SRCROOT)/../STV//STV 3.1.4 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\"";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../.STV/STV 3.1.7 Pro/Source Code/STV+CoreData/STV+CoreData\" \"$(SRCROOT)/../STV//STV 3.1.7 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -4089,7 +4089,7 @@
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../.STV/STV 3.1.4 Pro/Source Code/STV+CoreData/STV+CoreData\" \"$(SRCROOT)/../STV//STV 3.1.4 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\"";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../.STV/STV 3.1.7 Pro/Source Code/STV+CoreData/STV+CoreData\" \"$(SRCROOT)/../STV//STV 3.1.7 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

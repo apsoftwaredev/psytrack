@@ -38,14 +38,14 @@
 
 @implementation DemographicReportTopCell
 
-@synthesize sexObjectsModel=sexObjectsModel_;
-@synthesize genderObjectsModel=genderObjectsModel_;
-@synthesize ethnicitiesObjectsModel=ethnicitiesObjectsModel_;
-@synthesize racesObjectsModel=racesObjectsModel_;
+@synthesize sexTableViewModel=sexTableViewModel_;
+@synthesize genderTableViewModel=genderTableViewModel_;
+@synthesize ethnicitiesTableViewModel=ethnicitiesTableViewModel_;
+@synthesize racesTableViewModel=racesTableViewModel_;
 
-@synthesize disabilityObjectsModel=disabilityObjectsModel_;
-@synthesize educationLevelObjectsModel=educationLevelObjectsModel_;
-@synthesize sexualOrientationObjectsModel=sexualOrientationObjectsModel_;
+@synthesize disabilityTableViewModel=disabilityTableViewModel_;
+@synthesize educationLevelTableViewModel=educationLevelTableViewModel_;
+@synthesize sexualOrientationTableViewModel=sexualOrientationTableViewModel_;
 
 
 
@@ -247,9 +247,9 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
  
      SCClassDefinition *variableDef=[SCClassDefinition definitionWithClass:[DemographicVariableAndCount class] autoGeneratePropertyDefinitions:YES];
     
-    self.sexObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.sexTableView];
+    self.sexTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.sexTableView];
     
-    sexObjectsModel_.delegate=self;
+//    sexTableViewModel_.delegate=self;
    
     DemographicSexCounts *demographicSexCounts=[[DemographicSexCounts alloc]init];
     
@@ -267,13 +267,13 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     SCArrayOfObjectsSection *sexSection=[SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:sexVariablesMutableArray itemsDefinition:variableDef];
     
     
-    [sexObjectsModel_ addSection:sexSection];
+    [sexTableViewModel_ addSection:sexSection];
     
       
    
-    self.genderObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.genderTableView];
+    self.genderTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.genderTableView];
     
-    genderObjectsModel_.delegate=self;
+//    genderTableViewModel_.delegate=self;
     
     DemographicGenderCounts *demographicGenderCounts=[[DemographicGenderCounts alloc]init];
     
@@ -299,14 +299,14 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     SCArrayOfObjectsSection *genderSection=[SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:genderVariablesMutableArray itemsDefinition:variableDef];
     
     
-    [genderObjectsModel_ addSection:genderSection];
+    [genderTableViewModel_ addSection:genderSection];
     
     
     
     
-    self.ethnicitiesObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.ethnicitiesTableView];
+    self.ethnicitiesTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.ethnicitiesTableView];
     
-    ethnicitiesObjectsModel_.delegate=self;
+//    ethnicitiesTableViewModel_.delegate=self;
     
     DemographicEthnicityCounts *demographicEthnicityCounts=[[DemographicEthnicityCounts alloc]init];
     
@@ -324,12 +324,12 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     SCArrayOfObjectsSection *ethnicitySection=[SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:ethnicityVariablesMutableArray itemsDefinition:variableDef];
     
     
-    [ethnicitiesObjectsModel_ addSection:ethnicitySection];
+    [ethnicitiesTableViewModel_ addSection:ethnicitySection];
     
 
-    self.racesObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.racesTableView];
+    self.racesTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.racesTableView];
     
-    racesObjectsModel_.delegate=self;
+//    racesTableViewModel_.delegate=self;
     
     DemographicRaceCounts *demographicRaceCounts=[[DemographicRaceCounts alloc]init];
     
@@ -346,12 +346,12 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     SCArrayOfObjectsSection *raceSection=[SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:raceVariablesMutableArray itemsDefinition:variableDef];
     
     
-    [racesObjectsModel_ addSection:raceSection];
+    [racesTableViewModel_ addSection:raceSection];
     
 
-    self.disabilityObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.disabilityTableView];
+    self.disabilityTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.disabilityTableView];
     
-    disabilityObjectsModel_.delegate=self;
+//    disabilityTableViewModel_.delegate=self;
     
     DemographicDisabilityCount *demographicDisabilityCounts=[[DemographicDisabilityCount alloc]init];
     
@@ -370,13 +370,13 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     SCArrayOfObjectsSection *disabilitySection=[SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:disabilityVariablesMutableArray itemsDefinition:variableDef];
     
     
-    [disabilityObjectsModel_ addSection:disabilitySection];
+    [disabilityTableViewModel_ addSection:disabilitySection];
     
 
     
-    self.educationLevelObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.educationTableView];
+    self.educationLevelTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.educationTableView];
     
-    educationLevelObjectsModel_.delegate=self;
+//    educationLevelTableViewModel_.delegate=self;
     
     DemographicEducationCounts *demographicEducationCounts=[[DemographicEducationCounts alloc]init];
     
@@ -402,14 +402,14 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     SCArrayOfObjectsSection *educationSection=[SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:educationVariablesMutableArray itemsDefinition:variableDef];
     
     
-    [educationLevelObjectsModel_ addSection:educationSection];
+    [educationLevelTableViewModel_ addSection:educationSection];
     
     
     
 
-    self.sexualOrientationObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.sexualOrientationTableView];
+    self.sexualOrientationTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.sexualOrientationTableView];
     
-    sexualOrientationObjectsModel_.delegate=self;
+//    sexualOrientationTableViewModel_.delegate=self;
     
     DemographicSexualOrientationCounts *demographicSexualOrientationCounts=[[DemographicSexualOrientationCounts alloc]init];
     
@@ -427,7 +427,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     SCArrayOfObjectsSection *sexualOrientationSection=[SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:sexualOrientationVariablesMutableArray itemsDefinition:variableDef];
     
     
-    [sexualOrientationObjectsModel_ addSection:sexualOrientationSection];
+    [sexualOrientationTableViewModel_ addSection:sexualOrientationSection];
     
 
     sexSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)

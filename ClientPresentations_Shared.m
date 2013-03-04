@@ -1741,6 +1741,7 @@ if(section.headerTitle !=nil)
                             SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
                             
                             objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                            [objectSelectionCell reloadBoundValue];
                         }
                         
                         
@@ -1839,6 +1840,7 @@ if(section.headerTitle !=nil)
                         SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"abbreviatedName" sortAscending:YES filterPredicate:predicate];
                         
                         objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                        [objectSelectionCell reloadBoundValue];
                     }
                                 
                         

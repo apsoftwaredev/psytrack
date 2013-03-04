@@ -1343,13 +1343,14 @@ additionalTimeFormatter=nil;
     
     trackTypeDef.orderAttributeName=@"order";
     
-    
+
     
     SCPropertyDefinition *trackTypePropertyDef=[timeTrackEntityDef propertyDefinitionWithName:typePropertyNameString];
     trackTypePropertyDef.autoValidate=NO;
     trackTypePropertyDef.type =SCPropertyTypeObjectSelection;
     trackTypePropertyDef.title=typeTitleString;
     SCObjectSelectionAttributes *trackTypeSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:trackTypeDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
+    
     trackTypeSelectionAttribs.allowAddingItems = YES;
     trackTypeSelectionAttribs.allowDeletingItems = YES;
     trackTypeSelectionAttribs.allowMovingItems = YES;
@@ -2429,9 +2430,10 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                                                       @"interventionType.interventionType like %@",[NSString stringWithString:(NSString *) selectedInterventionType.interventionType]]; 
                             
                             SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"interventionSubType" sortAscending:YES filterPredicate:predicate];
+                            dataFetchOptions.sortKey=@"order";
                             
                             objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
-                            
+                            numberOfInterventionSubTypeItems=objectSelectionCell.items.count;
                             [objectSelectionCell reloadBoundValue];
                             
                             
@@ -2440,11 +2442,14 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                     }
                     else {
                         NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                                  @"interventionType.interventionType = nil"]; 
+                                                  @"interventionType.interventionType = nil"];
                         
                         SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"interventionSubType" sortAscending:YES filterPredicate:predicate];
-                        
+                       
+                        [dataFetchOptions setSortKey:@"order"];
                         objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                        numberOfInterventionSubTypeItems=objectSelectionCell.items.count;
+                        [objectSelectionCell reloadBoundValue];
                     }
                     
                     
@@ -2492,6 +2497,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
                         SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"subType" sortAscending:YES filterPredicate:predicate];
                         
                         objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                        [objectSelectionCell reloadBoundValue];
                     }
                     
                     
@@ -2578,7 +2584,42 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 }
 
 
-
+//-(void)tableViewModel:(SCTableViewModel *)tableModel moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath{
+//
+//    
+//    
+//    
+//    // Update the selectedItemsIndexes with the new index value
+//    NSNumber *oldItemIndex = [NSNumber numberWithInt:fromIndexPath.row];
+//    NSNumber *newItemIndex = [NSNumber numberWithInt:toIndexPath.row];
+//    
+//    
+//    
+//    SCTableViewSection *section=(SCTableViewSection *)[tableModel sectionAtIndex:toIndexPath.section];
+//    SCObjectSelectionSection *selectionSection=nil;;
+//    if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
+//        selectionSection=(SCObjectSelectionSection *)section;
+//    }
+//    DLog(@"old item index is  %@",oldItemIndex);
+//    DLog(@"new item index is  %@",newItemIndex);
+//    
+//    DLog(@"selection section items %i", numberOfInterventionSubTypeItems);
+//    int p=0;
+//    for (NSObject *obj in selectionSection.items) {
+//        DLog(@"obj class is  %@",obj.class);
+//        NSNumber *newItemIndexPlusTotalItems= [NSNumber numberWithInt:([newItemIndex integerValue] + numberOfInterventionSubTypeItems+p)];
+//        
+//        
+//        NSManagedObject *managedObject=(NSManagedObject *)obj;
+//        
+//        [managedObject setValue:newItemIndexPlusTotalItems forKey:@"order"];
+//    }
+//    selectionSection.dataFetchOptions.filterPredicate=nil;
+//    
+//    
+//   
+//[tableModel.modeledTableView reloadData];
+//}
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {
     

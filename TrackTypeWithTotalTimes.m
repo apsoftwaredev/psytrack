@@ -33,6 +33,7 @@
 
 @implementation TrackTypeWithTotalTimes
 
+@synthesize order;
 @synthesize trackTypeObject;
 @synthesize trackType=trackType_;
 @synthesize trackPathStartString=trackPathStartString_;
@@ -87,7 +88,7 @@
         
         
       
-        
+        self.order=(NSUInteger)[self.trackTypeObject valueForKey:@"order"];
         
         
         self.trackTypeObject=trackTypeObjectGiven;

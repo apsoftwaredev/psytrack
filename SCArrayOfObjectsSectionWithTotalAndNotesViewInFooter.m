@@ -9,6 +9,7 @@
 
 #import "SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h"
 
+
 @implementation SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter
 
 @synthesize footerNotes,footerTotal;

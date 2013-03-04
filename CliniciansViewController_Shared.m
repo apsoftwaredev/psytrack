@@ -2752,6 +2752,7 @@
                         SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"variableValue" sortAscending:YES filterPredicate:predicate];
                         
                         objectSelectionCell.selectionItemsFetchOptions=dataFetchOptions;
+                        [objectSelectionCell reloadBoundValue];
                     }
                     
                     

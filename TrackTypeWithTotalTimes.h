@@ -42,7 +42,7 @@ typedef enum {
     
       NSString *monthlyLogNotes_;
 }
-
+@property (nonatomic, assign) NSUInteger order;
 @property (nonatomic, assign)  PTrackType trackType;;
 @property (nonatomic, strong) NSString *trackPathStartString;
 @property (nonatomic, strong) id trackTypeObject;

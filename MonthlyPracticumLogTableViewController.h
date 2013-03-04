@@ -13,7 +13,7 @@
 @interface MonthlyPracticumLogTableViewController : SCViewController <SCTableViewControllerDelegate, SCTableViewModelDelegate>{
 
 
-    SCArrayOfObjectsModel *objectsModel;
+   
    
     ClinicianEntity *supervisorObject;
 

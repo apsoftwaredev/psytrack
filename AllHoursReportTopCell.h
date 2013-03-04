@@ -11,10 +11,10 @@
 @interface AllHoursReportTopCell : SCCustomCell <SCTableViewModelDelegate, SCTableViewControllerDelegate, UITableViewDelegate, SCTableViewModelDataSource>{
     
     
-    SCArrayOfObjectsModel *interventionObjectsModel_;
-    SCArrayOfObjectsModel *assessmentObjectsModel_;
-    SCArrayOfObjectsModel *supportObjectsModel_;
-    SCArrayOfObjectsModel *supervisionObjectsModel_;
+    SCTableViewModel *interventionTableViewModel_;
+    SCTableViewModel *assessmentTableViewModel_;
+    SCTableViewModel *supportTableViewModel_;
+    SCTableViewModel *supervisionTableViewModel_;
     
     NSInteger numberOfSupervisors;
     
@@ -23,10 +23,10 @@
     
 }
 
-@property (nonatomic,strong)  SCArrayOfObjectsModel *interventionObjectsModel;
-@property (nonatomic,strong)  SCArrayOfObjectsModel *assessmentObjectsModel;
-@property (nonatomic,strong)  SCArrayOfObjectsModel *supportObjectsModel;
-@property (nonatomic,strong)  SCArrayOfObjectsModel *supervisionObjectsModel;
+@property (nonatomic,strong)  SCTableViewModel *interventionTableViewModel;
+@property (nonatomic,strong)  SCTableViewModel *assessmentTableViewModel;
+@property (nonatomic,strong)  SCTableViewModel *supportTableViewModel;
+@property (nonatomic,strong)  SCTableViewModel *supervisionTableViewModel;
 
 @property (nonatomic, weak)IBOutlet UITableView *interventionTypesTableView;
 @property (nonatomic, weak)IBOutlet UITableView *assessmentTypesTableView;

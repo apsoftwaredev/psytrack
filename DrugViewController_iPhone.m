@@ -163,10 +163,12 @@
             buttonCell.buttonText=@"Look Up Drugs with Active Ingredient";
             
             [buttonCell reloadBoundValue];
+            
         }
+        cell.tag=400;
     };
 
-    [drugDef insertPropertyDefinition:lookUpActivieIngredientButtonProperty atIndex:2];
+        [drugDef insertPropertyDefinition:lookUpActivieIngredientButtonProperty atIndex:2];
     
 
     
@@ -307,7 +309,9 @@
         
         if (button.tag==300) {
             SCViewController *scViewController=(SCViewController *)cell.ownerTableViewModel.viewController;
-                        [scViewController cancelButtonAction];
+            objectsModel.modeledTableView.userInteractionEnabled=NO;
+            self.searchBar.userInteractionEnabled=NO;
+            [scViewController cancelButtonAction];
             
             
             //give it time to complete the animations
@@ -316,10 +320,12 @@
             
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
             {
+                
                 NSString *activeIngredientStr=(NSString *)[cell.boundObject valueForKey:@"activeIngredient"];
                 DLog(@"%@",activeIngredientStr);
                 [self.searchBar setText:activeIngredientStr];
                 [self searchBar:self.searchBar textDidChange:activeIngredientStr];
+                self.searchBar.userInteractionEnabled=YES;
             });
            
                
@@ -1564,7 +1570,11 @@ else
             //            break;
             //        }    
             
-            
+        case 400:
+        {
+         //do nothing
+            break;
+        }
         default:
         {
             SCTableViewSection *section = [self.tableViewModel sectionAtIndex:0];

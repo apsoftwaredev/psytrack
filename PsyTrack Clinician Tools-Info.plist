@@ -106,6 +106,8 @@
 	<array>
 		<string>Monaco.dfont</string>
 	</array>
+	<key>UIFileSharingEnabled</key>
+	<true/>
 	<key>UINewsstandApp</key>
 	<false/>
 	<key>UIStatusBarHidden</key>

@@ -20,7 +20,7 @@
 #import "MonthlyPracticumLogGenerateViewController.h"
 #import "AllTrainingHoursGenerateVC.h"
 #import "DemographicReportGenerateVC.h"
-
+#import "MonthlyPracticumLogTableViewController.h"
 @implementation ReportsViewController
 @synthesize myTableView;
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -153,6 +153,18 @@
                 MonthlyPracticumLogGenerateViewController *monthlyPracticumLogGenerateViewController = [[MonthlyPracticumLogGenerateViewController alloc] initWithNibName:monthlyPracticumLogNibName bundle:[NSBundle mainBundle]];
                 
                 [self.navigationController pushViewController:monthlyPracticumLogGenerateViewController animated:YES];
+                
+                
+//                if ([SCUtilities is_iPad]) {
+//                    monthlyPracticumLogNibName=@"MonthlyPracticumLogTableViewController";
+//                }else {
+//                    monthlyPracticumLogNibName=@"MonthlyPracticumLogTableViewController";
+//                }
+//                MonthlyPracticumLogTableViewController *monthlyPracticumLogGenerateViewController = [[MonthlyPracticumLogTableViewController alloc] initWithNibName:monthlyPracticumLogNibName bundle:[NSBundle mainBundle]];
+//                
+//                [self.navigationController pushViewController:monthlyPracticumLogGenerateViewController animated:YES];
+                
+                
                 break;
             }  
             

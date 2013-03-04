@@ -92,6 +92,7 @@ static NSString * const kTrackSupervisionReceivedEntityName=@"SupervisionReceive
     NSDateFormatter *additionalTimeFormatter;
     NSDateFormatter *dateFormatter1;
     SCArrayOfObjectsModel *objectsModel;
+    NSInteger numberOfInterventionSubTypeItems;
 }
 
 

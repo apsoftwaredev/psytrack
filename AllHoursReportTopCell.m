@@ -47,7 +47,7 @@
 @synthesize sectionSubHeaderView;
 @synthesize sectionSubHeaderLabel;
 @synthesize sectionSubFooterView,sectionSubFooterLabel,sectionSubFooterLabelContainerView,totalInterventionHoursFooterView;
-@synthesize interventionObjectsModel=interventionObjectsModel_,assessmentObjectsModel=assessmentObjectsModel_,supportObjectsModel=supportObjectsModel_,supervisionObjectsModel=supervisionObjectsModel_;
+@synthesize interventionTableViewModel=interventionTableViewModel_,assessmentTableViewModel=assessmentTableViewModel_,supportTableViewModel=supportTableViewModel_,supervisionTableViewModel=supervisionTableViewModel_;
 
 @synthesize directHoursHeader;
 @synthesize directHoursFooter;
@@ -449,15 +449,144 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
    
     
     
-    self.interventionObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.interventionTypesTableView];
+    self.interventionTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.interventionTypesTableView];
     
-    interventionObjectsModel_.delegate=self;
+//    interventionTableViewModel_.delegate=self;
+    
+    interventionTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tableModel, SCTableViewSection *section, NSUInteger sectionIndex)
+    {
+        
+       
+        SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *objectsSection=nil;
+        if ([section isKindOfClass:[SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter class]]) {
+            objectsSection=(SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *)section;
+        }
+        if(objectsSection.headerTitle && objectsSection.headerTitle.length){
+            UIView *containerView = [[UIView alloc] initWithFrame:sectionSubHeaderView.frame];
+            
+            UILabel *headerLabel = [[UILabel alloc] initWithFrame:sectionSubHeaderLabel.frame];
+            headerLabel.adjustsFontSizeToFitWidth=YES;
+            headerLabel.minimumFontSize= sectionSubHeaderLabel.minimumFontSize;
+            headerLabel.font=sectionSubHeaderLabel.font;
+            containerView.backgroundColor=sectionSubHeaderView.backgroundColor;
+            headerLabel.backgroundColor = sectionSubHeaderLabel.backgroundColor;
+            headerLabel.textColor = sectionSubHeaderLabel.textColor;
+            headerLabel.tag=60;
+            headerLabel.text=objectsSection.headerTitle;
+            headerLabel.textAlignment=UITextAlignmentCenter;
+            [containerView addSubview:headerLabel];
+            
+            objectsSection.headerView = containerView;
+        }
+        
+        if ((objectsSection.footerNotes &&objectsSection.footerNotes.length)||(objectsSection.footerTotal &&objectsSection.footerTotal.length)) {
+            
+            UITextView *footerNotesTextView = [[UITextView alloc] initWithFrame:sectionSubFooterNotesTextView.frame];
+            footerNotesTextView.font=sectionSubFooterNotesTextView.font;
+            
+            footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
+            footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
+            
+            footerNotesTextView.textAlignment=UITextAlignmentLeft;
+            footerNotesTextView.tag=61;
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            footerNotesTextView.hidden=YES;
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            [footerNotesTextView setContentInset:UIEdgeInsetsMake(-9, 0, 0,0)];
+            
+            
+            UIView *footerContainerView = [[UIView alloc] initWithFrame:sectionSubFooterView.frame];
+            
+            [footerContainerView addSubview:footerNotesTextView];
+            
+            
+            
+            if (footerNotesTextView.contentSize.height -9>footerContainerView.frame.size.height) {
+                CGRect footerContainerViewFrame=footerContainerView.frame;
+                footerContainerViewFrame.size.height=footerNotesTextView.contentSize.height-6;
+                
+                
+                footerContainerView.frame=footerContainerViewFrame;
+                
+                
+            }
+            CGRect footerNotesTextViewFrame=footerNotesTextView.frame;
+            NSString *footerTotal=(NSString *)objectsSection.footerTotal;
+            
+            if (footerNotesTextView.contentSize.height>footerNotesTextView.frame.size.height) {
+                
+                
+                footerNotesTextViewFrame.size.height=footerNotesTextView.contentSize.height-9;
+                
+                
+                
+                
+                
+                
+            }
+            if (!footerTotal||!footerTotal.length) {
+                footerNotesTextViewFrame.size.width=footerContainerView.frame.size.width-7;
+            }
+            footerNotesTextView.frame=footerNotesTextViewFrame;
+            
+            footerContainerView.backgroundColor=sectionSubFooterView.backgroundColor;
+            if (footerTotal&&footerTotal.length) {
+                
+                
+                UIView *subFooterLabelContainerView=[[UIView alloc]initWithFrame:self.sectionSubFooterLabelContainerView.frame];
+                subFooterLabelContainerView.backgroundColor=self.sectionSubFooterLabelContainerView.backgroundColor;
+                
+                UILabel *footerLabel = [[UILabel alloc] initWithFrame:sectionSubFooterLabel.frame];
+                footerLabel.font=sectionSubFooterLabel.font;
+                
+                footerLabel.backgroundColor = sectionSubFooterLabel.backgroundColor;
+                footerLabel.textColor = sectionSubFooterLabel.textColor;
+                footerLabel.tag=60;
+                
+                footerLabel.text=footerTotal;
+                footerLabel.textAlignment=UITextAlignmentCenter;
+                [subFooterLabelContainerView addSubview:footerLabel];
+                
+                
+                [footerContainerView addSubview:subFooterLabelContainerView];
+                
+            }
+            objectsSection.footerView = footerContainerView;
+            
+        }
+        
+        
+        
+        
+
+    };
     //
+    
     SCClassDefinition *typesDef=[SCClassDefinition definitionWithClass:[TrackTypeWithTotalTimes class] autoGeneratePropertyDefinitions:YES];
     
     NSArray *fetchedInterventionObjects =  [self fetchObjectsFromEntity:(NSString *)@"InterventionTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"subTypes",@"subTypes.interventionsDelivered.time", @"subTypes.interventionsDelivered.trainingProgram",@"subTypes.existingInterventions",@"subTypes.existingInterventions.programCourse",nil]];
     //
-    SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"order" sortAscending:YES filterPredicate:nil];
+//    SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"order" sortAscending:YES filterPredicate:nil];
     
     for (InterventionTypeEntity *interventionType in fetchedInterventionObjects) {
         
@@ -503,7 +632,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         
         
-        interventionsSection.dataFetchOptions=dataFetchOptions;
+//        interventionsSection.dataFetchOptions=dataFetchOptions;
         
         
         interventionsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
@@ -527,15 +656,142 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         
         
-        [interventionObjectsModel_ addSection:interventionsSection];
+        [interventionTableViewModel_ addSection:interventionsSection];
         [interventionType didAccessValueForKey:@"subTypes"];
         
     }
     
     
-    self.assessmentObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.assessmentTypesTableView];
+    self.assessmentTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.assessmentTypesTableView];
     
-    assessmentObjectsModel_.delegate=self;
+//    assessmentTableViewModel_.delegate=self;
+    assessmentTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tableModel, SCTableViewSection *section, NSUInteger sectionIndex)
+    {
+        
+       
+        SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *objectsSection=nil;
+        if ([section isKindOfClass:[SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter class]]) {
+            objectsSection=(SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *)section;
+        }
+        if(objectsSection.headerTitle && objectsSection.headerTitle.length){
+            UIView *containerView = [[UIView alloc] initWithFrame:sectionSubHeaderView.frame];
+            
+            UILabel *headerLabel = [[UILabel alloc] initWithFrame:sectionSubHeaderLabel.frame];
+            headerLabel.adjustsFontSizeToFitWidth=YES;
+            headerLabel.minimumFontSize= sectionSubHeaderLabel.minimumFontSize;
+            headerLabel.font=sectionSubHeaderLabel.font;
+            containerView.backgroundColor=sectionSubHeaderView.backgroundColor;
+            headerLabel.backgroundColor = sectionSubHeaderLabel.backgroundColor;
+            headerLabel.textColor = sectionSubHeaderLabel.textColor;
+            headerLabel.tag=60;
+            headerLabel.text=objectsSection.headerTitle;
+            headerLabel.textAlignment=UITextAlignmentCenter;
+            [containerView addSubview:headerLabel];
+            
+            objectsSection.headerView = containerView;
+        }
+        
+        if ((objectsSection.footerNotes &&objectsSection.footerNotes.length)||(objectsSection.footerTotal &&objectsSection.footerTotal.length)) {
+            
+            UITextView *footerNotesTextView = [[UITextView alloc] initWithFrame:sectionSubFooterNotesTextView.frame];
+            footerNotesTextView.font=sectionSubFooterNotesTextView.font;
+            
+            footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
+            footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
+            
+            footerNotesTextView.textAlignment=UITextAlignmentLeft;
+            footerNotesTextView.tag=61;
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            footerNotesTextView.hidden=YES;
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            [footerNotesTextView setContentInset:UIEdgeInsetsMake(-9, 0, 0,0)];
+            
+            
+            UIView *footerContainerView = [[UIView alloc] initWithFrame:sectionSubFooterView.frame];
+            
+            [footerContainerView addSubview:footerNotesTextView];
+            
+            
+            
+            if (footerNotesTextView.contentSize.height -9>footerContainerView.frame.size.height) {
+                CGRect footerContainerViewFrame=footerContainerView.frame;
+                footerContainerViewFrame.size.height=footerNotesTextView.contentSize.height-6;
+                
+                
+                footerContainerView.frame=footerContainerViewFrame;
+                
+                
+            }
+            CGRect footerNotesTextViewFrame=footerNotesTextView.frame;
+            NSString *footerTotal=(NSString *)objectsSection.footerTotal;
+            
+            if (footerNotesTextView.contentSize.height>footerNotesTextView.frame.size.height) {
+                
+                
+                footerNotesTextViewFrame.size.height=footerNotesTextView.contentSize.height-9;
+                
+                
+                
+                
+                
+                
+            }
+            if (!footerTotal||!footerTotal.length) {
+                footerNotesTextViewFrame.size.width=footerContainerView.frame.size.width-7;
+            }
+            footerNotesTextView.frame=footerNotesTextViewFrame;
+            
+            footerContainerView.backgroundColor=sectionSubFooterView.backgroundColor;
+            if (footerTotal&&footerTotal.length) {
+                
+                
+                UIView *subFooterLabelContainerView=[[UIView alloc]initWithFrame:self.sectionSubFooterLabelContainerView.frame];
+                subFooterLabelContainerView.backgroundColor=self.sectionSubFooterLabelContainerView.backgroundColor;
+                
+                UILabel *footerLabel = [[UILabel alloc] initWithFrame:sectionSubFooterLabel.frame];
+                footerLabel.font=sectionSubFooterLabel.font;
+                
+                footerLabel.backgroundColor = sectionSubFooterLabel.backgroundColor;
+                footerLabel.textColor = sectionSubFooterLabel.textColor;
+                footerLabel.tag=60;
+                
+                footerLabel.text=footerTotal;
+                footerLabel.textAlignment=UITextAlignmentCenter;
+                [subFooterLabelContainerView addSubview:footerLabel];
+                
+                
+                [footerContainerView addSubview:subFooterLabelContainerView];
+                
+            }
+            objectsSection.footerView = footerContainerView;
+            
+        }
+        
+        
+        
+        
+
+    };
     NSArray *fetchedAssessmentObjects =  [self fetchObjectsFromEntity:(NSString *)@"AssessmentTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"assessements.time",@"existingAssessments",nil]];
     
     NSMutableArray *assessmentTypesWithTotalsItemsArray=[NSMutableArray array];
@@ -564,7 +820,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     //        NSString *monthlyLogNotes=[interventionType monthlyLogNotesForMonth:self.monthToDisplay clinician:self.clinician];
     
     
-    assessmentObjectsSection.dataFetchOptions=dataFetchOptions;
+//    assessmentObjectsSection.dataFetchOptions=dataFetchOptions;
     
     assessmentObjectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
     {
@@ -586,13 +842,142 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     
     
-    [assessmentObjectsModel_ addSection:assessmentObjectsSection];
+    [assessmentTableViewModel_ addSection:assessmentObjectsSection];
     
     
     
-    self.supportObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.supportActivitieTypesTableView];
+    self.supportTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.supportActivitieTypesTableView];
     
-    supportObjectsModel_.delegate=self;
+//    supportTableViewModel_.delegate=self;
+    
+    supportTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tableModel, SCTableViewSection *section, NSUInteger sectionIndex)
+    {
+       
+        SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *objectsSection=nil;
+        if ([section isKindOfClass:[SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter class]]) {
+            objectsSection=(SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *)section;
+        }
+        if(objectsSection.headerTitle && objectsSection.headerTitle.length){
+            UIView *containerView = [[UIView alloc] initWithFrame:sectionSubHeaderView.frame];
+            
+            UILabel *headerLabel = [[UILabel alloc] initWithFrame:sectionSubHeaderLabel.frame];
+            headerLabel.adjustsFontSizeToFitWidth=YES;
+            headerLabel.minimumFontSize= sectionSubHeaderLabel.minimumFontSize;
+            headerLabel.font=sectionSubHeaderLabel.font;
+            containerView.backgroundColor=sectionSubHeaderView.backgroundColor;
+            headerLabel.backgroundColor = sectionSubHeaderLabel.backgroundColor;
+            headerLabel.textColor = sectionSubHeaderLabel.textColor;
+            headerLabel.tag=60;
+            headerLabel.text=objectsSection.headerTitle;
+            headerLabel.textAlignment=UITextAlignmentCenter;
+            [containerView addSubview:headerLabel];
+            
+            objectsSection.headerView = containerView;
+        }
+        
+        if ((objectsSection.footerNotes &&objectsSection.footerNotes.length)||(objectsSection.footerTotal &&objectsSection.footerTotal.length)) {
+            
+            UITextView *footerNotesTextView = [[UITextView alloc] initWithFrame:sectionSubFooterNotesTextView.frame];
+            footerNotesTextView.font=sectionSubFooterNotesTextView.font;
+            
+            footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
+            footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
+            
+            footerNotesTextView.textAlignment=UITextAlignmentLeft;
+            footerNotesTextView.tag=61;
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            footerNotesTextView.hidden=YES;
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            [footerNotesTextView setContentInset:UIEdgeInsetsMake(-9, 0, 0,0)];
+            
+            
+            UIView *footerContainerView = [[UIView alloc] initWithFrame:sectionSubFooterView.frame];
+            
+            [footerContainerView addSubview:footerNotesTextView];
+            
+            
+            
+            if (footerNotesTextView.contentSize.height -9>footerContainerView.frame.size.height) {
+                CGRect footerContainerViewFrame=footerContainerView.frame;
+                footerContainerViewFrame.size.height=footerNotesTextView.contentSize.height-6;
+                
+                
+                footerContainerView.frame=footerContainerViewFrame;
+                
+                
+            }
+            CGRect footerNotesTextViewFrame=footerNotesTextView.frame;
+            NSString *footerTotal=(NSString *)objectsSection.footerTotal;
+            
+            if (footerNotesTextView.contentSize.height>footerNotesTextView.frame.size.height) {
+                
+                
+                footerNotesTextViewFrame.size.height=footerNotesTextView.contentSize.height-9;
+                
+                
+                
+                
+                
+                
+            }
+            if (!footerTotal||!footerTotal.length) {
+                footerNotesTextViewFrame.size.width=footerContainerView.frame.size.width-7;
+            }
+            footerNotesTextView.frame=footerNotesTextViewFrame;
+            
+            footerContainerView.backgroundColor=sectionSubFooterView.backgroundColor;
+            if (footerTotal&&footerTotal.length) {
+                
+                
+                UIView *subFooterLabelContainerView=[[UIView alloc]initWithFrame:self.sectionSubFooterLabelContainerView.frame];
+                subFooterLabelContainerView.backgroundColor=self.sectionSubFooterLabelContainerView.backgroundColor;
+                
+                UILabel *footerLabel = [[UILabel alloc] initWithFrame:sectionSubFooterLabel.frame];
+                footerLabel.font=sectionSubFooterLabel.font;
+                
+                footerLabel.backgroundColor = sectionSubFooterLabel.backgroundColor;
+                footerLabel.textColor = sectionSubFooterLabel.textColor;
+                footerLabel.tag=60;
+                
+                footerLabel.text=footerTotal;
+                footerLabel.textAlignment=UITextAlignmentCenter;
+                [subFooterLabelContainerView addSubview:footerLabel];
+                
+                
+                [footerContainerView addSubview:subFooterLabelContainerView];
+                
+            }
+            objectsSection.footerView = footerContainerView;
+            
+        }
+        
+        
+        
+        
+
+    };
+
+    
     NSArray *fetchedSupportObjects =  [self fetchObjectsFromEntity:(NSString *)@"SupportActivityTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"supportActivitiesDelivered.time",@"existingSupportActivities",nil]];
     
     NSMutableArray *supportActivitytTypesWithTotalsItemsArray=[NSMutableArray array];
@@ -626,7 +1011,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     
     
-    supportObjectsSection.dataFetchOptions=dataFetchOptions;
+//    supportObjectsSection.dataFetchOptions=dataFetchOptions;
     
     
     supportObjectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
@@ -649,12 +1034,141 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     
     
-    [supportObjectsModel_ addSection:supportObjectsSection];
+    [supportTableViewModel_ addSection:supportObjectsSection];
     
     
-    self.supervisionObjectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.supervisionReceivedTypesTableView];
+    self.supervisionTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.supervisionReceivedTypesTableView];
     
-    supervisionObjectsModel_.delegate=self;
+//    supervisionTableViewModel_.delegate=self;
+    
+    supervisionTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tableModel, SCTableViewSection *section, NSUInteger sectionIndex)
+    {
+        
+       
+        SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *objectsSection=nil;
+        if ([section isKindOfClass:[SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter class]]) {
+            objectsSection=(SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *)section;
+        }
+        if(objectsSection.headerTitle && objectsSection.headerTitle.length){
+            UIView *containerView = [[UIView alloc] initWithFrame:sectionSubHeaderView.frame];
+            
+            UILabel *headerLabel = [[UILabel alloc] initWithFrame:sectionSubHeaderLabel.frame];
+            headerLabel.adjustsFontSizeToFitWidth=YES;
+            headerLabel.minimumFontSize= sectionSubHeaderLabel.minimumFontSize;
+            headerLabel.font=sectionSubHeaderLabel.font;
+            containerView.backgroundColor=sectionSubHeaderView.backgroundColor;
+            headerLabel.backgroundColor = sectionSubHeaderLabel.backgroundColor;
+            headerLabel.textColor = sectionSubHeaderLabel.textColor;
+            headerLabel.tag=60;
+            headerLabel.text=objectsSection.headerTitle;
+            headerLabel.textAlignment=UITextAlignmentCenter;
+            [containerView addSubview:headerLabel];
+            
+            objectsSection.headerView = containerView;
+        }
+        
+        if ((objectsSection.footerNotes &&objectsSection.footerNotes.length)||(objectsSection.footerTotal &&objectsSection.footerTotal.length)) {
+            
+            UITextView *footerNotesTextView = [[UITextView alloc] initWithFrame:sectionSubFooterNotesTextView.frame];
+            footerNotesTextView.font=sectionSubFooterNotesTextView.font;
+            
+            footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
+            footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
+            
+            footerNotesTextView.textAlignment=UITextAlignmentLeft;
+            footerNotesTextView.tag=61;
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            footerNotesTextView.hidden=YES;
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            [footerNotesTextView setContentInset:UIEdgeInsetsMake(-9, 0, 0,0)];
+            
+            
+            UIView *footerContainerView = [[UIView alloc] initWithFrame:sectionSubFooterView.frame];
+            
+            [footerContainerView addSubview:footerNotesTextView];
+            
+            
+            
+            if (footerNotesTextView.contentSize.height -9>footerContainerView.frame.size.height) {
+                CGRect footerContainerViewFrame=footerContainerView.frame;
+                footerContainerViewFrame.size.height=footerNotesTextView.contentSize.height-6;
+                
+                
+                footerContainerView.frame=footerContainerViewFrame;
+                
+                
+            }
+            CGRect footerNotesTextViewFrame=footerNotesTextView.frame;
+            NSString *footerTotal=(NSString *)objectsSection.footerTotal;
+            
+            if (footerNotesTextView.contentSize.height>footerNotesTextView.frame.size.height) {
+                
+                
+                footerNotesTextViewFrame.size.height=footerNotesTextView.contentSize.height-9;
+                
+                
+                
+                
+                
+                
+            }
+            if (!footerTotal||!footerTotal.length) {
+                footerNotesTextViewFrame.size.width=footerContainerView.frame.size.width-7;
+            }
+            footerNotesTextView.frame=footerNotesTextViewFrame;
+            
+            footerContainerView.backgroundColor=sectionSubFooterView.backgroundColor;
+            if (footerTotal&&footerTotal.length) {
+                
+                
+                UIView *subFooterLabelContainerView=[[UIView alloc]initWithFrame:self.sectionSubFooterLabelContainerView.frame];
+                subFooterLabelContainerView.backgroundColor=self.sectionSubFooterLabelContainerView.backgroundColor;
+                
+                UILabel *footerLabel = [[UILabel alloc] initWithFrame:sectionSubFooterLabel.frame];
+                footerLabel.font=sectionSubFooterLabel.font;
+                
+                footerLabel.backgroundColor = sectionSubFooterLabel.backgroundColor;
+                footerLabel.textColor = sectionSubFooterLabel.textColor;
+                footerLabel.tag=60;
+                
+                footerLabel.text=footerTotal;
+                footerLabel.textAlignment=UITextAlignmentCenter;
+                [subFooterLabelContainerView addSubview:footerLabel];
+                
+                
+                [footerContainerView addSubview:subFooterLabelContainerView];
+                
+            }
+            objectsSection.footerView = footerContainerView;
+            
+        }
+        
+        
+        
+        
+
+    };
+
     //
     
     NSArray *fetchedSupervisionObjects =  [self fetchObjectsFromEntity:(NSString *)@"SupervisionTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"supervisionReceived.startTime",@"supervisionReceived.endTime",@"subTypes.existingHours",@"supervisionReceived.time",@"existingSupervision",nil]];
@@ -705,7 +1219,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         
         
-        supervisionSection.dataFetchOptions=dataFetchOptions;
+//        supervisionSection.dataFetchOptions=dataFetchOptions;
         
         
         supervisionSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
@@ -729,7 +1243,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         
         
-        [supervisionObjectsModel_ addSection:supervisionSection];
+        [supervisionTableViewModel_ addSection:supervisionSection];
         [supervisionType didAccessValueForKey:@"subTypes"];
         
     }

@@ -77,10 +77,9 @@
     };
     
     
-    objectsModel=[[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView];
     
-    [objectsModel addSection:objectsSection];
-    self.tableViewModel=objectsModel;
+   
+    [self.tableViewModel addSection:objectsSection];
     
     
     
@@ -103,8 +102,8 @@
 -(void)didReceiveMemoryWarning{
     
     [super didReceiveMemoryWarning];
-    [objectsModel removeAllSections];
-    objectsModel=nil;
+    [self.tableViewModel removeAllSections];
+    
    
     self.studentName=nil;
     
@@ -116,8 +115,8 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     
-    [objectsModel removeAllSections];
-    objectsModel=nil;
+    [self.tableViewModel removeAllSections];
+    
    
     self.studentName=nil;
 }
@@ -126,14 +125,14 @@
     
     
     
-    CGFloat offset=objectsModel.modeledTableView.contentOffset.y;
-    CGFloat insetBottom=objectsModel.modeledTableView.contentInset.bottom;
-    CGFloat tableViewHeight=objectsModel.modeledTableView.frame.size.height;
+    CGFloat offset=self.tableViewModel.modeledTableView.contentOffset.y;
+    CGFloat insetBottom=self.tableViewModel.modeledTableView.contentInset.bottom;
+    CGFloat tableViewHeight=self.tableViewModel.modeledTableView.frame.size.height;
     if (offset+tableViewHeight<insetBottom) {
         
-        [objectsModel.modeledTableView setContentOffset:CGPointMake(0, offset+tableViewHeight)];
+        [self.tableViewModel.modeledTableView setContentOffset:CGPointMake(0, offset+tableViewHeight)];
         
-        [objectsModel setActiveCell:[objectsModel cellAfterCell:[objectsModel cellAtIndexPath:objectsModel.activeCellIndexPath] rewind:NO]];
+        [self.tableViewModel setActiveCell:[self.tableViewModel cellAfterCell:[self.tableViewModel cellAtIndexPath:self.tableViewModel.activeCellIndexPath] rewind:NO]];
     }
     else {
         

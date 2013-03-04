@@ -108,7 +108,7 @@
                 
                 SCTableViewSection *sectionThree=(SCTableViewSection *)[self.firstDetailTableModel sectionAtIndex:2];
                 SCTableViewCell *cellOne=(SCTableViewCell *)[sectionThree cellAtIndex:0];
-                DLog(@"cell class is  %@",cellOne.class);
+               
                 if ([cellOne isKindOfClass:[SCObjectSelectionCell class]]){
                 
                 
@@ -139,7 +139,7 @@
     
             
                     SCTableViewCell *cellFour=(SCTableViewCell *)[sectionThree cellAtIndex:3];
-            DLog(@"cell class is  %@",cellFour.class);
+           
                     if ([cellFour isKindOfClass:[SCObjectSelectionCell class]]){
                         
                         
@@ -203,7 +203,6 @@
                 
                 SCTableViewSection *sectionThree=(SCTableViewSection *)[self.firstDetailTableModel sectionAtIndex:2];
                 SCTableViewCell *cellThree=(SCTableViewCell *)[sectionThree cellAtIndex:3];
-                DLog(@"cell class is  %@",cellThree.class);
                 if ([cellThree isKindOfClass:[SCObjectSelectionCell class]]){
                     
                     
@@ -274,7 +273,7 @@
                 
                 
                 SCTableViewCell *cellFive=(SCTableViewCell *)[sectionThree cellAtIndex:5];
-                DLog(@"cell class is  %@",cellFive.class);
+                
                 if ([cellFive isKindOfClass:[SCObjectSelectionCell class]]){
                     
                     
@@ -340,7 +339,7 @@
                 
                 SCTableViewSection *sectionThree=(SCTableViewSection *)[self.firstDetailTableModel sectionAtIndex:2];
                 SCTableViewCell *cellOne=(SCTableViewCell *)[sectionThree cellAtIndex:0];
-                DLog(@"cell class is  %@",cellOne.class);
+               
                 if ([cellOne isKindOfClass:[SCObjectSelectionCell class]]){
                     
                     

@@ -10,13 +10,13 @@
 @interface DemographicReportTopCell : SCCustomCell <SCTableViewModelDelegate, SCTableViewControllerDelegate, UITableViewDelegate, SCTableViewModelDataSource>{
     
     
-    SCArrayOfObjectsModel *sexObjectsModel_;
-    SCArrayOfObjectsModel *genderObjectsModel_;
-    SCArrayOfObjectsModel *ethnicitiesObjectsModel_;
-    SCArrayOfObjectsModel *racesObjectsModel_;
-    SCArrayOfObjectsModel *disabilityObjectsModel_;
-    SCArrayOfObjectsModel *educationLevelObjectsModel_;
-    SCArrayOfObjectsModel  *sexualOrientationObjectsModel_;
+    SCTableViewModel *sexTableViewModel_;
+    SCTableViewModel *genderTableViewModel_;
+    SCTableViewModel *ethnicitiesTableViewModel_;
+    SCTableViewModel *racesTableViewModel_;
+    SCTableViewModel *disabilityTableViewModel_;
+    SCTableViewModel *educationLevelTableViewModel_;
+    SCTableViewModel  *sexualOrientationTableViewModel_;
     NSInteger numberOfSupervisors;
     
     
@@ -24,14 +24,14 @@
     
 }
 
-@property (nonatomic,strong)  SCArrayOfObjectsModel *sexObjectsModel;
-@property (nonatomic,strong)  SCArrayOfObjectsModel *genderObjectsModel;
-@property (nonatomic,strong)  SCArrayOfObjectsModel *ethnicitiesObjectsModel;
-@property (nonatomic,strong)  SCArrayOfObjectsModel *racesObjectsModel;
+@property (nonatomic,strong)  SCTableViewModel *sexTableViewModel;
+@property (nonatomic,strong)  SCTableViewModel *genderTableViewModel;
+@property (nonatomic,strong)  SCTableViewModel *ethnicitiesTableViewModel;
+@property (nonatomic,strong)  SCTableViewModel *racesTableViewModel;
 
-@property (nonatomic,strong)  SCArrayOfObjectsModel *disabilityObjectsModel;
-@property (nonatomic,strong)  SCArrayOfObjectsModel *educationLevelObjectsModel;
-@property (nonatomic,strong)  SCArrayOfObjectsModel *sexualOrientationObjectsModel;
+@property (nonatomic,strong)  SCTableViewModel *disabilityTableViewModel;
+@property (nonatomic,strong)  SCTableViewModel *educationLevelTableViewModel;
+@property (nonatomic,strong)  SCTableViewModel *sexualOrientationTableViewModel;
 
 
 

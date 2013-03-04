@@ -14,7 +14,6 @@
 @interface AllTrainingHoursVC : SCViewController <SCTableViewControllerDelegate, SCTableViewModelDelegate>{
     
     
-    SCArrayOfObjectsModel *objectsModel;
     
     
     BOOL doctorateLevel;
