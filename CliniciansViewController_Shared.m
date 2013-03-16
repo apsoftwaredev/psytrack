@@ -108,18 +108,7 @@
     
 }
 
-- (void) didReceiveMemoryWarning 
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    
-    [appDelegate displayMemoryWarning];
-    
-}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -193,6 +182,7 @@
         
         self.clinicianDef.titlePropertyName = @"firstName;lastName";	
         self.clinicianDef.keyPropertyName = @"lastName";
+
     /****************************************************************************************/
     /*	BEGIN Class Definition and attributes for the Degree Entity */
     /****************************************************************************************/ 

@@ -26,7 +26,7 @@
 #import "ClientsSelectionCell.h"
 #import "DisorderEntity.h"
 //@class ClientsDetailViewController_iPad;
-@interface ClientsRootViewController_iPad : SCViewController </*SCTableViewModelDataSource */SCTableViewModelDelegate> {
+@interface ClientsRootViewController_iPad : SCViewController <SCTableViewModelDataSource ,SCTableViewModelDelegate> {
     
     
     
@@ -39,6 +39,8 @@
     DisorderEntity *selectedDisorder;
     
        AdditionalVariableNameEntity *selectedVariableName;
+    
+    UIBarButtonItem *clientsBarButtonItem;
 }
 
 

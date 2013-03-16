@@ -95,6 +95,7 @@
     objectsModel.autoAssignDataSourceForDetailModels=TRUE;
         
    
+
     //     objectsModel.autoSortSections = TRUE;
     //        self.clinicianDef.keyPropertyName=@"firstName";
        
@@ -155,9 +156,16 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
     objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
     {
         [self updateClientsTotalLabel];
+        [self putAddAndClientsButtonsOnDetailViewController];
+
     };
 
       [self updateClientsTotalLabel];
+    
+    clientsBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"Clients" style:UIBarButtonItemStylePlain target:self action:@selector(displayPopover:)];
+    
+    objectsModel.autoSortSections=YES;
+    
     self.tableViewModel = objectsModel;
 //        
 }
@@ -174,6 +182,33 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 {
     return NO;
 }
+
+
+-(void)putAddAndClientsButtonsOnDetailViewController{
+    
+    
+    self.tableViewModel.detailViewController.navigationItem.rightBarButtonItem=objectsModel.addButtonItem;
+    
+    
+    
+    
+    self.tableViewModel.detailViewController.navigationItem.leftBarButtonItem= clientsBarButtonItem;
+    
+    
+    
+}
+
+-(NSArray *)tableViewModel:(SCArrayOfItemsModel *)tableModel customSearchResultForSearchText:(NSString *)searchText autoSearchResults:(NSArray *)autoSearchResults{
+    
+    [tableModel dismissAllDetailViewsWithCommit:YES];
+    
+    [self putAddAndClientsButtonsOnDetailViewController];
+    return autoSearchResults;
+    
+    
+}
+
+
 
 //
 //#pragma mark -
@@ -357,11 +392,28 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
     
 }
 
+-(IBAction)displayPopover:(id)sender{
+    
+    
+    ClientsDetailViewController_iPad *clientsDetailViewController_iPad=(ClientsDetailViewController_iPad *)self.tableViewModel.detailViewController;
+    
+    [clientsDetailViewController_iPad.popoverController presentPopoverFromBarButtonItem:self.splitViewController.navigationItem.leftBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+    
+    
+    
+    
+    
+    
+}
 
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 //    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     
+    
+    
+   
+
     
     if ([SCUtilities is_iPad]) {
                 PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -400,12 +452,20 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
     }
     
     
-    if (tableModel.tag==0 ) {
-        [self.searchBar setSelectedScopeButtonIndex:0];
-        
-        [objectsModel.dataFetchOptions setFilterPredicate:nil];
+//    if (tableModel.tag==0 ) {
+//        [self.searchBar setSelectedScopeButtonIndex:0];
+//        
+//        [objectsModel.dataFetchOptions setFilterPredicate:nil];
+//        
+//    }
+    
+    
+    if (detailTableViewModel.tag==1 && indexPath.row!=NSNotFound) {
+        [self putAddAndClientsButtonsOnDetailViewController];
         
     }
+    
+    
 if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {
     
     SCTableViewSection *section=(SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];
@@ -1916,9 +1976,18 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
     
     
 }
+
+
 - (void)tableViewModel:(SCArrayOfItemsModel *)tableViewModel
 searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
+    
+
+    self.searchBar.text=nil;
+    [tableViewModel dismissAllDetailViewsWithCommit:YES];
+    
+    
+    [self putAddAndClientsButtonsOnDetailViewController];
     
     
     if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])

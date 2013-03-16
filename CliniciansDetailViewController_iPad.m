@@ -55,8 +55,9 @@
     self.navigationItem.leftBarButtonItem = barButtonItem;
 
     self.popoverController = pc;
-}
+    
 
+}
 
 // Called when the view is shown again in the split view, invalidating the button and popover controller.
 - (void)splitViewController: (UISplitViewController*)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem {

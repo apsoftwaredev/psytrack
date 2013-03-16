@@ -63,6 +63,8 @@
 #define kPTTAppSqliteFileName_local @"psyTrack_local.sqlite"
 
 #define kPTTDrugDatabaseSqliteFileName @"drugs.sqlite"
+NSString * const kSCModelDidCommitDataNotification=@"SCModelDidCommitData";
+
 
 @implementation PTTAppDelegate
 
@@ -307,10 +309,7 @@
         clientsSplitViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Clients" image:clientsImage tag:90];
         
         
-               
-        
-        
-        
+       
 
         
         

@@ -23,7 +23,7 @@
 					<key>Title</key>
 					<string>Request Help</string>
 					<key>Action</key>
-					<string>OpenMail|Dan Boice M.S. &lt;support@psyrack.com&gt;|Need Help|I have version $CFBundleVersion of $CFBundleDisplayName. I need help with:</string>
+					<string>OpenMail|Dan Boice M.S. &lt;support@psytrack.com&gt;|Need Help|I have version $CFBundleVersion of $CFBundleDisplayName. I need help with:</string>
 				</dict>
 			</array>
 			<key>Action</key>

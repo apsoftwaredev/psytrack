@@ -15,7 +15,7 @@
 @interface LCYLockSettingsViewController : SCTableViewController  <LCYPassCodeEditorDelegate,SCTableViewModelDelegate>
 {
 	NSArray *sectionTitles_;
-    SCArrayOfObjectsModel *objectsModel;
+   
      NSMutableDictionary *valuesDictionary_;
     NSTimer *clearValuesTimer_;
     NSDate *timeOfLastUserInput;

@@ -175,7 +175,8 @@
         
         objectsModel =  [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView entityDefinition:self.clientsViewController_Shared.clientDef filterPredicate:currentClientsPredicate];
         
-       
+        objectsModel.autoSortSections=YES;
+        
        
         
         //        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
@@ -264,7 +265,6 @@
     
     //    [self.tableModel.modeledTableView reloadData];
     
-    
     self.tableViewModel=objectsModel;
     
     
@@ -297,19 +297,7 @@
     
     
 }
-- (void) didReceiveMemoryWarning 
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    
-    [appDelegate displayMemoryWarning];
-    
-    
-}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -1494,12 +1482,12 @@
         
     }
     
-    if (tableModel.tag==0) {
-        [self.searchBar setSelectedScopeButtonIndex:1];
-        
-        [objectsModel.dataFetchOptions setFilterPredicate:nil];
-       
-    }
+//    if (tableModel.tag==0) {
+//        [self.searchBar setSelectedScopeButtonIndex:1];
+//        
+//        [objectsModel.dataFetchOptions setFilterPredicate:nil];
+//       
+//    }
    
    
    else if (detailTableViewModel.tag==3&& detailTableViewModel.sectionCount>0) {

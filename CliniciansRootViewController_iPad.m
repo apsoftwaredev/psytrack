@@ -92,8 +92,16 @@
     [self.searchBar setScopeBarBackgroundImage:menueBarImage];
     
     
+    cliniciansBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"Clinicians" style:UIBarButtonItemStylePlain target:self action:@selector(displayPopover:)];
     
-    
+   
+    objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
+    {
+        [self putAddAndClinicianButtonsOnDetailViewController];
+        [self updateClinicianTotalLabel];
+    };
+
+
     self.tableViewModel = objectsModel;
     
    
@@ -178,10 +186,10 @@
             }
             
             
-            if (!self.searchBar.selectedScopeButtonIndex==0) {
-                [self.searchBar setSelectedScopeButtonIndex:0];
-                objectsModel.dataFetchOptions.filterPredicate=nil;
-            }
+//            if (!self.searchBar.selectedScopeButtonIndex==0) {
+//                [self.searchBar setSelectedScopeButtonIndex:0];
+//                objectsModel.dataFetchOptions.filterPredicate=nil;
+//            }
             [tableViewModel.masterModel reloadBoundValues];
             [tableViewModel.masterModel.modeledTableView reloadData];
             
@@ -202,10 +210,14 @@
     if (tableModel.tag==0) {
         addingClinician=NO;
     
+       
+       
     }
 
 
 }
+
+
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel didLayoutSubviewsForCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if([cell isKindOfClass:[SCNumericTextFieldCell class]])
@@ -464,6 +476,45 @@
     
 }
 
+-(NSArray *)tableViewModel:(SCArrayOfItemsModel *)tableModel customSearchResultForSearchText:(NSString *)searchText autoSearchResults:(NSArray *)autoSearchResults{
+
+    [tableModel dismissAllDetailViewsWithCommit:YES];
+
+    [self putAddAndClinicianButtonsOnDetailViewController];
+    return autoSearchResults;
+
+
+}
+
+-(void)putAddAndClinicianButtonsOnDetailViewController{
+
+
+    self.tableViewModel.detailViewController.navigationItem.rightBarButtonItem=objectsModel.addButtonItem;
+    
+    
+    
+    
+    self.tableViewModel.detailViewController.navigationItem.leftBarButtonItem= cliniciansBarButtonItem;
+    
+
+
+}
+- (void)tableViewModel:(SCArrayOfItemsModel *)tableViewModel
+searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+{
+
+    self.searchBar.text=nil;
+    [tableViewModel dismissAllDetailViewsWithCommit:YES];
+    
+      [super tableViewModel:tableViewModel searchBarSelectedScopeButtonIndexDidChange:selectedScope];
+
+    [self putAddAndClinicianButtonsOnDetailViewController];
+
+
+}
+
+
+
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {
     
@@ -688,6 +739,13 @@
     
     [super tableViewModel:tableModel detailViewWillPresentForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
  
+   
+    if (detailTableViewModel.tag==1 && indexPath.row!=NSNotFound) {
+        [self putAddAndClinicianButtonsOnDetailViewController];
+        
+    }
+    
+    
     if (tableModel.tag==0 && indexPath.row==NSNotFound) {
         addingClinician=YES;
     }
@@ -705,6 +763,22 @@
 
 //[logoViewController loadView ];
 //[detailTableViewModel.modeledTableView setBackgroundView:logoViewController.view ];
+
+
+}
+
+
+
+-(IBAction)displayPopover:(id)sender{
+
+    
+    CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad=(CliniciansDetailViewController_iPad *)self.tableViewModel.detailViewController;
+    
+    [cliniciansDetailViewController_iPad.popoverController presentPopoverFromBarButtonItem:self.splitViewController.navigationItem.leftBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+    
+
+
+    
 
 
 }

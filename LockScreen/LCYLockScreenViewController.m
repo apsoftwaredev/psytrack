@@ -44,24 +44,7 @@ static int  const PTTUnlockSeed = 8730;//in case user needs to reset
 @synthesize soundFileURLRef;
 @synthesize soundFileObject;
 @synthesize window;
-#pragma mark -
-#pragma mark Memory Management
 
-
-- (void) didReceiveMemoryWarning 
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
-   
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-  
-    [appDelegate displayNotification:@"Memory Warning Received.  Try Closing Some Open Applications that are not needed at this time and restarting the application." forDuration:0 location:kPTTScreenLocationMiddle inView:self.view];
-
-    
-    
-}
 
 #pragma mark -
 #pragma mark View Lifecycle

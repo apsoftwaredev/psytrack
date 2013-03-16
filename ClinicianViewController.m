@@ -228,7 +228,7 @@
         
     objectsModel.sectionIndexTitles = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", nil];
     
-//     objectsModel.autoSortSections = TRUE;
+     objectsModel.autoSortSections = TRUE;
 //        self.clinicianDef.keyPropertyName=@"firstName";
         self.clinicianDef.titlePropertyName = @"firstName;lastName";
     
@@ -256,10 +256,14 @@
     
     
      [self updateClinicianTotalLabel];
-    objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
-    {
-        [self updateClinicianTotalLabel];
-    };
+
+    if (![SCUtilities is_iPad]) {
+            objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
+        {
+            [self updateClinicianTotalLabel];
+        };
+    }
+    
 
    
     //change back button image
@@ -765,17 +769,17 @@
 -(BOOL)tableViewModel:(SCTableViewModel *)tableModel willAddItemForSectionAtIndex:(NSUInteger)index item:(NSObject *)item{
 
         
-    if (tableModel.tag==0 && !tableModel.sectionCount) {
-        [objectsModel.searchBar setSelectedScopeButtonIndex:0];
-         SCDataFetchOptions *dataFetchOptions=(SCDataFetchOptions *)objectsModel.dataFetchOptions;
-        [dataFetchOptions setFilterPredicate:nil];
-       
-        
-        
-        
-        
-        
-    }
+//    if (tableModel.tag==0 && !tableModel.sectionCount) {
+//        [objectsModel.searchBar setSelectedScopeButtonIndex:0];
+//         SCDataFetchOptions *dataFetchOptions=(SCDataFetchOptions *)objectsModel.dataFetchOptions;
+//        [dataFetchOptions setFilterPredicate:nil];
+//       
+//        
+//        
+//        
+//        
+//        
+//    }
 
     return YES;
 
@@ -788,6 +792,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 {
     [self createSelectedCliniciansArray];
     
+ 
     if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
     {
         
@@ -907,12 +912,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
     [super tableViewModel:tableModel detailViewWillPresentForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
     
-    if (tableModel.tag==0 &&objectsModel.searchBar.selectedScopeButtonIndex!=0) {
-        [objectsModel.searchBar setSelectedScopeButtonIndex:0];
-       
-        [objectsModel.dataFetchOptions setFilterPredicate:nil];
-        
-    }
+//    if (tableModel.tag==0 &&objectsModel.searchBar.selectedScopeButtonIndex!=0) {
+//        [objectsModel.searchBar setSelectedScopeButtonIndex:0];
+//       
+//        [objectsModel.dataFetchOptions setFilterPredicate:nil];
+//        
+//    }
     
 }
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didInsertRowAtIndexPath:(NSIndexPath *)indexPath

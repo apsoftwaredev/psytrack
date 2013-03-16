@@ -44,25 +44,6 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
 #pragma mark Memory management
 
 
-- (void) didReceiveMemoryWarning 
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Relinquish ownership any cached data, images, etc. that aren't in use.
-    
-
-        // Release any cached data, images, etc. that aren't in use.
-        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-        
-        
-        [appDelegate displayNotification:@"Memory Warning Received.  Try Closing Some Open Applications that are not needed at this time and restarting the application." forDuration:0 location:kPTTScreenLocationMiddle inView:nil];
-        
-        
-        
-  
-
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -175,16 +156,14 @@ enum {kTokenCellValidationTokenField=500,kTokenCellValidationCurrentPassword,kTo
 //    
         
     
-    // Initialize tableModel
-    objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView];
-
+   
 //    [objectsModel addSection:encryptionStringSection];
 
-
-     [objectsModel addSection:settingsSection];
+    [self.tableViewModel setTableView:self.tableView];
+     [self.tableViewModel addSection:settingsSection];
   
          
-    self.tableViewModel=objectsModel;
+   
 }
 
 
@@ -853,9 +832,9 @@ if(section.headerTitle !=nil)
     
    
                  BOOL passCodeIsOn=[self passCodeLockIsOn];
-    if (objectsModel.sectionCount >1) {
+    if (self.tableViewModel.sectionCount >1) {
        
-        SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:1];
+        SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:1];
         if (section.cellCount) {
             SCSwitchCell *switchCell=(SCSwitchCell *)[section cellAtIndex:0];
             [switchCell.switchControl setOn:passCodeIsOn];
@@ -870,7 +849,7 @@ if(section.headerTitle !=nil)
                                 
                 //                                        
             }
-            [objectsModel.modeledTableView reloadData];
+            [self.tableViewModel.modeledTableView reloadData];
         }
         
     }
@@ -1009,8 +988,8 @@ if(section.headerTitle !=nil)
 
 -(void)clearUserInput{
 
-    if (objectsModel.sectionCount) {
-        SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:0];
+    if (self.tableViewModel.sectionCount) {
+        SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
         if (section.cellCount && [section isKindOfClass:[SCArrayOfObjectsSection class]]) {
             SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
             

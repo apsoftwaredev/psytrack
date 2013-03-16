@@ -31,8 +31,7 @@
 
     SCTableViewCell *currentTableViewCell;
     
-
-    
+    UIBarButtonItem *cliniciansBarButtonItem;
     
     
   //    ABAddressBookRef addressBook;

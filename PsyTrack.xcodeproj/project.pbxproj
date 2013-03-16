@@ -4019,8 +4019,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
+				PROVISIONING_PROFILE = "2E89A7D8-7A10-4872-8045-CCA6EDD9CA72";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2E89A7D8-7A10-4872-8045-CCA6EDD9CA72";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -4057,7 +4057,7 @@
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "12C36593-A78E-4F40-94A6-34119851EA18";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "12C36593-A78E-4F40-94A6-34119851EA18";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../.STV/STV 3.1.7 Pro/Source Code/STV+CoreData/STV+CoreData\" \"$(SRCROOT)/../STV//STV 3.1.7 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\"";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../STV//STV 3.1.7 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\" \"$(SRCROOT)/../.STV/STV 3.1.7 Pro/Source Code/STV+CoreData/STV+CoreData\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -4087,9 +4087,9 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = PsyTrack;
-				PROVISIONING_PROFILE = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3CA79EED-18AA-49FD-97F3-E2865358C39B";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../.STV/STV 3.1.7 Pro/Source Code/STV+CoreData/STV+CoreData\" \"$(SRCROOT)/../STV//STV 3.1.7 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\"";
+				PROVISIONING_PROFILE = "2E89A7D8-7A10-4872-8045-CCA6EDD9CA72";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2E89A7D8-7A10-4872-8045-CCA6EDD9CA72";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../STV//STV 3.1.7 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\" \"$(SRCROOT)/../.STV/STV 3.1.7 Pro/Source Code/STV+CoreData/STV+CoreData\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
