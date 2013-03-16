@@ -23,7 +23,6 @@
 #import "ClinicianEntity.h"
 #import "CliniciansRootViewController_iPad.h"
 #import "ClinicianViewController.h"
-#import "EncryptedSCTextViewCell.h"
 #import "MySource.h"
 #import "PTABGroup.h"
 #import "ClinicianGroupEntity.h"
