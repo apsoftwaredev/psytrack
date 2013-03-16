@@ -11,7 +11,6 @@
 #import "BatteryEntity.h"
 #import "InstrumentEntity.h"
 
-
 @implementation InstrumentPublisherEntity
 
 @dynamic order;
@@ -19,7 +18,5 @@
 @dynamic publisherName;
 @dynamic instrument;
 @dynamic battery;
-
-
 
 @end

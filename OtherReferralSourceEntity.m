@@ -12,7 +12,6 @@
 #import "OtherReferralSourceTypeEntity.h"
 #import "ReferralEntity.h"
 
-
 @implementation OtherReferralSourceEntity
 
 @dynamic order;
@@ -23,7 +22,5 @@
 @dynamic grants;
 @dynamic clients;
 @dynamic referralType;
-
-
 
 @end

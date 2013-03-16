@@ -9,13 +9,10 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DemographicSexualOrientationCounts : NSObject{
-    
-     NSMutableArray *sexualOrientationMutableArray_;
-    
-    
+@interface DemographicSexualOrientationCounts : NSObject {
+    NSMutableArray *sexualOrientationMutableArray_;
 }
 
-@property (nonatomic, strong)NSMutableArray *sexualOrientationMutableArray;
+@property (nonatomic, strong) NSMutableArray *sexualOrientationMutableArray;
 
 @end

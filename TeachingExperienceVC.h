@@ -10,12 +10,9 @@
 #import <SensibleTableView/SensibleTableView.h>
 
 @interface TeachingExperienceVC : SCTableViewController <SCTableViewModelDelegate> {
-    
     SCArrayOfObjectsModel *objectsModel;
-    
-    NSDateFormatter *dateFormatter;
-    
-}
 
+    NSDateFormatter *dateFormatter;
+}
 
 @end

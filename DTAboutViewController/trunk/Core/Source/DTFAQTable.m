@@ -15,102 +15,113 @@
 @synthesize tableView = _tableView;
 @synthesize faqs, useTextViews, rowHeight;
 
-
-- (id)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
+- (id) initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame])
+    {
         // Initialization code
-		
-		_tableView = [[UITableView alloc] initWithFrame:self.bounds];
-		[self addSubview:_tableView];
-		_tableView.dataSource = self;
-		_tableView.delegate = self;
-		_tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth |  UIViewAutoresizingFlexibleHeight;
-		
-		self.backgroundColor = [UIColor clearColor];
-		self.opaque = NO;
-		
-		rowHeight = 44.0; // default
-		
-		_tableView.opaque = NO;
-	}
+
+        _tableView = [[UITableView alloc] initWithFrame:self.bounds];
+        [self addSubview:_tableView];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+        self.backgroundColor = [UIColor clearColor];
+        self.opaque = NO;
+
+        rowHeight = 44.0;         // default
+
+        _tableView.opaque = NO;
+    }
+
     return self;
 }
 
-/*
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
-- (void)dealloc 
+/*
+   - (void)drawRect:(CGRect)rect {
+    // Drawing code
+   }
+ */
+
+- (void) dealloc
 {
-	[faqs release];
-	[navController release];
+    [faqs release];
+    [navController release];
     [super dealloc];
 }
 
+
 - (void) sizeToShowRows:(NSInteger)rows
 {
-	CGFloat heightNeeded = ((CGFloat)rows * rowHeight);  // 1px for seperator
-	CGRect frame = self.bounds;
-	
-	frame.size.height = heightNeeded;
-	self.frame = frame;
+    CGFloat heightNeeded = ( (CGFloat)rows * rowHeight );    // 1px for seperator
+    CGRect frame = self.bounds;
+
+    frame.size.height = heightNeeded;
+    self.frame = frame;
 }
+
 
 #pragma mark table
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [faqs count];
+    return [faqs count];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return rowHeight;
+    return rowHeight;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     static NSString *CellIdentifier = @"Cell";
-    
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
+    if (cell == nil)
+    {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    
-	NSDictionary *rowDict = [faqs objectAtIndex:indexPath.row];
-	
-	
-	cell.textLabel.text = [[rowDict allKeys] lastObject];
-	cell.textLabel.numberOfLines = 0;
-	cell.textLabel.font = [UIFont systemFontOfSize:12.0];
-	cell.backgroundColor = [UIColor whiteColor];
-	cell.opaque = YES;
-	
-	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+    NSDictionary *rowDict = [faqs objectAtIndex:indexPath.row];
+
+    cell.textLabel.text = [[rowDict allKeys] lastObject];
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.font = [UIFont systemFontOfSize:12.0];
+    cell.backgroundColor = [UIColor whiteColor];
+    cell.opaque = YES;
+
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[tableView deselectRowAtIndexPath:indexPath animated:YES];
-	
-	DTSingleQuestionView *question = [[DTSingleQuestionView alloc] init];
-	question.delegate = self;
-	question.currentQuestion = indexPath.row;
-	[navController pushViewController:question animated:YES];
-	[question release];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    DTSingleQuestionView *question = [[DTSingleQuestionView alloc] init];
+    question.delegate = self;
+    question.currentQuestion = indexPath.row;
+    [navController pushViewController:question animated:YES];
+    [question release];
 }
+
 
 #pragma mark DTSingleQuestionView Delegate
 - (NSInteger) numberOfQuestionsInSingleQuestionView:(DTSingleQuestionView *)singleQuestionView
 {
-	return [faqs count];
+    return [faqs count];
 }
-	
+
+
 - (NSDictionary *) singleQuestionView:(DTSingleQuestionView *)singleQuestionView dictionaryForQuestionAtIndex:(NSInteger)index
 {
-	return [faqs objectAtIndex:index];
+    return [faqs objectAtIndex:index];
 }
+
 
 @end

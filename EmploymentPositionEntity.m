@@ -10,7 +10,6 @@
 #import "EmploymentPositionEntity.h"
 #import "EmploymentEntity.h"
 
-
 @implementation EmploymentPositionEntity
 
 @dynamic startedDate;
@@ -20,7 +19,5 @@
 @dynamic department;
 @dynamic jobTitle;
 @dynamic employment;
-
-
 
 @end

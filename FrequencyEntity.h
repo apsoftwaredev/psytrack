@@ -12,19 +12,17 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class AdditionalSymptomEntity, DiagnosisHistoryEntity, MedicationReviewEntity;
 
 @interface FrequencyEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * frequencyUnit;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSNumber * frequencyUnitLength;
-@property (nonatomic, retain) NSNumber * frequencyNumber;
-@property (nonatomic, retain) NSNumber * numberOfTimes;
-@property (nonatomic, retain) NSNumber * timeOfDay;
-@property (nonatomic, retain) NSDate * duration;
+@property (nonatomic, retain) NSString *frequencyUnit;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSNumber *frequencyUnitLength;
+@property (nonatomic, retain) NSNumber *frequencyNumber;
+@property (nonatomic, retain) NSNumber *numberOfTimes;
+@property (nonatomic, retain) NSNumber *timeOfDay;
+@property (nonatomic, retain) NSDate *duration;
 @property (nonatomic, retain) AdditionalSymptomEntity *symptoms;
 @property (nonatomic, retain) MedicationReviewEntity *medicationUse;
 @property (nonatomic, retain) NSManagedObject *substanceUse;
@@ -33,9 +31,9 @@
 
 @interface FrequencyEntity (CoreDataGeneratedAccessors)
 
-- (void)addDiagnosisObject:(DiagnosisHistoryEntity *)value;
-- (void)removeDiagnosisObject:(DiagnosisHistoryEntity *)value;
-- (void)addDiagnosis:(NSSet *)values;
-- (void)removeDiagnosis:(NSSet *)values;
+- (void) addDiagnosisObject:(DiagnosisHistoryEntity *)value;
+- (void) removeDiagnosisObject:(DiagnosisHistoryEntity *)value;
+- (void) addDiagnosis:(NSSet *)values;
+- (void) removeDiagnosis:(NSSet *)values;
 
 @end

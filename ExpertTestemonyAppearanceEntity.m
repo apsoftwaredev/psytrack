@@ -10,7 +10,6 @@
 #import "ExpertTestemonyAppearanceEntity.h"
 #import "ExpertTestemonyEntity.h"
 
-
 @implementation ExpertTestemonyAppearanceEntity
 
 @dynamic dateAppeared;
@@ -18,7 +17,5 @@
 @dynamic notes;
 @dynamic hours;
 @dynamic expertTestemony;
-
-
 
 @end

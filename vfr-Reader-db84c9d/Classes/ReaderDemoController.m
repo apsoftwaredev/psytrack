@@ -40,226 +40,224 @@
 #pragma mark UIViewController methods
 
 /*
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+   - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+   {
+   #ifdef DEBUGX
+        NSLog(@"%s", __FUNCTION__);
+   #endif
 
-	if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
-	{
-		// Custom initialization
-	}
+        if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]))
+        {
+                // Custom initialization
+        }
 
-	return self;
-}
-*/
+        return self;
+   }
+ */
 
 /*
-- (void)loadView
+   - (void)loadView
+   {
+   #ifdef DEBUGX
+        NSLog(@"%s", __FUNCTION__);
+   #endif
+
+        // Implement loadView to create a view hierarchy programmatically, without using a nib.
+   }
+ */
+
+- (void) viewDidLoad
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog( @"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds) );
 #endif
 
-	// Implement loadView to create a view hierarchy programmatically, without using a nib.
+    [super viewDidLoad];
+
+    self.view.backgroundColor = [UIColor clearColor];     // Transparent
+
+    CGSize viewSize = self.view.bounds.size;
+
+    CGRect labelRect = CGRectMake(0.0f, 0.0f, 80.0f, 32.0f);
+
+    UILabel *tapLabel = [[UILabel alloc] initWithFrame:labelRect];
+
+    tapLabel.text = @"Tap";
+    tapLabel.textColor = [UIColor whiteColor];
+    tapLabel.textAlignment = UITextAlignmentCenter;
+    tapLabel.backgroundColor = [UIColor clearColor];
+    tapLabel.font = [UIFont systemFontOfSize:24.0f];
+    tapLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+    tapLabel.autoresizingMask |= UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    tapLabel.center = CGPointMake(viewSize.width / 2.0f, viewSize.height / 2.0f);
+
+    [self.view addSubview:tapLabel];
+
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    //singleTap.numberOfTouchesRequired = 1; singleTap.numberOfTapsRequired = 1; //singleTap.delegate = self;
+    [self.view addGestureRecognizer:singleTap];
 }
-*/
 
-- (void)viewDidLoad
+
+- (void) viewWillAppear:(BOOL)animated
 {
 #ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
+    NSLog( @"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds) );
 #endif
 
-	[super viewDidLoad];
-
-	self.view.backgroundColor = [UIColor clearColor]; // Transparent
-
-	
-	CGSize viewSize = self.view.bounds.size;
-
-	CGRect labelRect = CGRectMake(0.0f, 0.0f, 80.0f, 32.0f);
-
-	UILabel *tapLabel = [[UILabel alloc] initWithFrame:labelRect];
-
-	tapLabel.text = @"Tap";
-	tapLabel.textColor = [UIColor whiteColor];
-	tapLabel.textAlignment = UITextAlignmentCenter;
-	tapLabel.backgroundColor = [UIColor clearColor];
-	tapLabel.font = [UIFont systemFontOfSize:24.0f];
-	tapLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-	tapLabel.autoresizingMask |= UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-	tapLabel.center = CGPointMake(viewSize.width / 2.0f, viewSize.height / 2.0f);
-
-	[self.view addSubview:tapLabel]; 
-
-	UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-	//singleTap.numberOfTouchesRequired = 1; singleTap.numberOfTapsRequired = 1; //singleTap.delegate = self;
-	[self.view addGestureRecognizer:singleTap];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-#ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
-#endif
-
-	[super viewWillAppear:animated];
+    [super viewWillAppear:animated];
 
 #if (DEMO_VIEW_CONTROLLER_PUSH == TRUE)
-
-	[self.navigationController setNavigationBarHidden:NO animated:animated];
-
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 #endif // DEMO_VIEW_CONTROLLER_PUSH
 }
 
-- (void)viewDidAppear:(BOOL)animated
+
+- (void) viewDidAppear:(BOOL)animated
 {
 #ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
+    NSLog( @"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds) );
 #endif
 
-	[super viewDidAppear:animated];
+    [super viewDidAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+
+- (void) viewWillDisappear:(BOOL)animated
 {
 #ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
+    NSLog( @"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds) );
 #endif
 
-	[super viewWillDisappear:animated];
+    [super viewWillDisappear:animated];
 
 #if (DEMO_VIEW_CONTROLLER_PUSH == TRUE)
-
-	[self.navigationController setNavigationBarHidden:YES animated:animated];
-
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
 #endif // DEMO_VIEW_CONTROLLER_PUSH
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+
+- (void) viewDidDisappear:(BOOL)animated
 {
 #ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
+    NSLog( @"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds) );
 #endif
 
-	[super viewDidDisappear:animated];
+    [super viewDidDisappear:animated];
 }
 
-- (void)viewDidUnload
+
+- (void) viewDidUnload
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	[super viewDidUnload];
+    [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 #ifdef DEBUGX
-	NSLog(@"%s (%d)", __FUNCTION__, interfaceOrientation);
+    NSLog(@"%s (%d)", __FUNCTION__, interfaceOrientation);
 #endif
 
-	
-		return YES;
+    return YES;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-#ifdef DEBUGX
-	NSLog(@"%s %@ (%d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), toInterfaceOrientation);
-#endif
-}
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
+- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
 #ifdef DEBUGX
-	NSLog(@"%s %@ (%d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), interfaceOrientation);
+    NSLog(@"%s %@ (%d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), toInterfaceOrientation);
 #endif
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+
+- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
 {
 #ifdef DEBUGX
-	NSLog(@"%s %@ (%d to %d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), fromInterfaceOrientation, self.interfaceOrientation);
+    NSLog(@"%s %@ (%d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), interfaceOrientation);
 #endif
-
-	//if (fromInterfaceOrientation == self.interfaceOrientation) return;
 }
 
-- (void)didReceiveMemoryWarning
+
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s %@ (%d to %d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), fromInterfaceOrientation, self.interfaceOrientation);
 #endif
 
-	[super didReceiveMemoryWarning];
+    //if (fromInterfaceOrientation == self.interfaceOrientation) return;
 }
 
+
+- (void) didReceiveMemoryWarning
+{
+#ifdef DEBUGX
+    NSLog(@"%s", __FUNCTION__);
+#endif
+
+    [super didReceiveMemoryWarning];
+}
 
 
 #pragma mark UIGestureRecognizer methods
 
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
+- (void) handleSingleTap:(UITapGestureRecognizer *)recognizer
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
+    PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 
-	NSString *phrase = nil; // Document password (for unlocking most encrypted PDF files)
+    NSString *phrase = nil;     // Document password (for unlocking most encrypted PDF files)
 
-	NSString *pdfs = [appDelegate.applicationDocumentsDirectory.path stringByAppendingPathComponent:@"test18.pdf"];
-NSLog(@"pdfs %@",pdfs);
+    NSString *pdfs = [appDelegate.applicationDocumentsDirectory.path stringByAppendingPathComponent:@"test18.pdf"];
+    NSLog(@"pdfs %@",pdfs);
     [PDFRenderer drawMonthlyPracticumLogPDF:pdfs month:nil trainingProgram:nil password:nil amended:NO];
-    
-	NSString *filePath = pdfs  ;// Path to last PDF file
 
-	ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:phrase checkArchive:(BOOL)NO];
+    NSString *filePath = pdfs;      // Path to last PDF file
 
-	if (document != nil) // Must have a valid ReaderDocument object in order to proceed with things
-	{
-		ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
+    ReaderDocument *document = [ReaderDocument withDocumentFilePath:filePath password:phrase checkArchive:(BOOL)NO];
 
-		readerViewController.delegate = self; // Set the ReaderViewController delegate to self
+    if (document != nil)     // Must have a valid ReaderDocument object in order to proceed with things
+    {
+        ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
+
+        readerViewController.delegate = self;         // Set the ReaderViewController delegate to self
 
 #if (DEMO_VIEW_CONTROLLER_PUSH == TRUE)
-
-		[self.navigationController pushViewController:readerViewController animated:YES];
+        [self.navigationController pushViewController:readerViewController animated:YES];
 
 #else // present in a modal view controller
+        readerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
 
-		readerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-		readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-
-		[self presentModalViewController:readerViewController animated:YES];
-
+        [self presentModalViewController:readerViewController animated:YES];
 #endif // DEMO_VIEW_CONTROLLER_PUSH
 
-		 // Release the ReaderViewController
-	}
+        // Release the ReaderViewController
+    }
 }
+
 
 #pragma mark ReaderViewControllerDelegate methods
 
-- (void)dismissReaderViewController:(ReaderViewController *)viewController
+- (void) dismissReaderViewController:(ReaderViewController *)viewController
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
 #if (DEMO_VIEW_CONTROLLER_PUSH == TRUE)
-
-	[self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 
 #else // dismiss the modal view controller
-
-	[self dismissModalViewControllerAnimated:YES];
-
+    [self dismissModalViewControllerAnimated:YES];
 #endif // DEMO_VIEW_CONTROLLER_PUSH
 }
+
 
 @end

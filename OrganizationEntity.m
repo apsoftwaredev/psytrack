@@ -13,7 +13,6 @@
 #import "ExpertTestemonyEntity.h"
 #import "LeadershipRoleEntity.h"
 
-
 @implementation OrganizationEntity
 
 @dynamic notes;
@@ -23,7 +22,5 @@
 @dynamic conferences;
 @dynamic leadershipRoles;
 @dynamic consultations;
-
-
 
 @end

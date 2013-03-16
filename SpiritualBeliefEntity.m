@@ -10,15 +10,11 @@
 #import "SpiritualBeliefEntity.h"
 #import "DemographicProfileEntity.h"
 
-
 @implementation SpiritualBeliefEntity
 
 @dynamic beliefName;
 @dynamic order;
 @dynamic notes;
 @dynamic demographics;
-
-
-
 
 @end

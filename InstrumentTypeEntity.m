@@ -10,14 +10,11 @@
 #import "InstrumentTypeEntity.h"
 #import "InstrumentEntity.h"
 
-
 @implementation InstrumentTypeEntity
 
 @dynamic instrumentType;
 @dynamic order;
 @dynamic notes;
 @dynamic testNames;
-
-
 
 @end

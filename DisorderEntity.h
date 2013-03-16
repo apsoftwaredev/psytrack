@@ -12,17 +12,15 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class AdditionalSymptomNameEntity, DiagnosisHistoryEntity, DisorderSpecifierEntity, DisorderSubCategoryEntity, DisorderSystemEntity;
 
 @interface DisorderEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * code;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * disorderName;
-@property (nonatomic, retain) NSString * desc;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *code;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSString *disorderName;
+@property (nonatomic, retain) NSString *desc;
 @property (nonatomic, retain) NSManagedObject *category;
 @property (nonatomic, retain) DisorderSystemEntity *classificationSystem;
 @property (nonatomic, retain) NSSet *symptoms;
@@ -33,19 +31,19 @@
 
 @interface DisorderEntity (CoreDataGeneratedAccessors)
 
-- (void)addSymptomsObject:(AdditionalSymptomNameEntity *)value;
-- (void)removeSymptomsObject:(AdditionalSymptomNameEntity *)value;
-- (void)addSymptoms:(NSSet *)values;
-- (void)removeSymptoms:(NSSet *)values;
+- (void) addSymptomsObject:(AdditionalSymptomNameEntity *)value;
+- (void) removeSymptomsObject:(AdditionalSymptomNameEntity *)value;
+- (void) addSymptoms:(NSSet *)values;
+- (void) removeSymptoms:(NSSet *)values;
 
-- (void)addDiagnosesObject:(DiagnosisHistoryEntity *)value;
-- (void)removeDiagnosesObject:(DiagnosisHistoryEntity *)value;
-- (void)addDiagnoses:(NSSet *)values;
-- (void)removeDiagnoses:(NSSet *)values;
+- (void) addDiagnosesObject:(DiagnosisHistoryEntity *)value;
+- (void) removeDiagnosesObject:(DiagnosisHistoryEntity *)value;
+- (void) addDiagnoses:(NSSet *)values;
+- (void) removeDiagnoses:(NSSet *)values;
 
-- (void)addSpecifiersObject:(DisorderSpecifierEntity *)value;
-- (void)removeSpecifiersObject:(DisorderSpecifierEntity *)value;
-- (void)addSpecifiers:(NSSet *)values;
-- (void)removeSpecifiers:(NSSet *)values;
+- (void) addSpecifiersObject:(DisorderSpecifierEntity *)value;
+- (void) removeSpecifiersObject:(DisorderSpecifierEntity *)value;
+- (void) addSpecifiers:(NSSet *)values;
+- (void) removeSpecifiers:(NSSet *)values;
 
 @end

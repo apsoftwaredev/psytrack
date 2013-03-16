@@ -4,9 +4,9 @@
  *  Version: 1.05
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
  *
  *  Created by Daniel Boice on 11/9/12.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -21,17 +21,16 @@
 
 @interface HeightPickerCell : SCLabelCell <UIPickerViewDataSource, UIPickerViewDelegate>
 {
-     UITextField *pickerField;
-     UIPickerView *picker;
+    UITextField *pickerField;
+    UIPickerView *picker;
     int componentChanged;
     BOOL loadUnitsFromBoundObject;
-     UIView *view;
+    UIView *view;
 }
 
-
-@property (nonatomic, strong ) IBOutlet UIView *view;
-@property (nonatomic, strong ) IBOutlet UIPickerView *picker;
-@property (nonatomic, strong ) IBOutlet UITextField *pickerField;
--(NSInteger) convertToMetersComponentFromInches:(NSInteger )inchesInteger;
--(NSInteger )convertToCentemetersComponentFromInches:(NSInteger )inchesInteger;
+@property (nonatomic, strong) IBOutlet UIView *view;
+@property (nonatomic, strong) IBOutlet UIPickerView *picker;
+@property (nonatomic, strong) IBOutlet UITextField *pickerField;
+- (NSInteger) convertToMetersComponentFromInches:(NSInteger)inchesInteger;
+- (NSInteger) convertToCentemetersComponentFromInches:(NSInteger)inchesInteger;
 @end

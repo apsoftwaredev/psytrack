@@ -10,15 +10,11 @@
 #import "EmploymentStatusEntity.h"
 #import "DemographicProfileEntity.h"
 
-
 @implementation EmploymentStatusEntity
 
 @dynamic order;
 @dynamic notes;
 @dynamic employmentStatus;
 @dynamic demographics;
-
-
-
 
 @end

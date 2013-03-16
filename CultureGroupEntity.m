@@ -10,14 +10,11 @@
 #import "CultureGroupEntity.h"
 #import "DemographicProfileEntity.h"
 
-
 @implementation CultureGroupEntity
 
 @dynamic order;
 @dynamic notes;
 @dynamic cultureName;
 @dynamic demographics;
-
-
 
 @end

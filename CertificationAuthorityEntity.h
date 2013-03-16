@@ -12,15 +12,13 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class CertificationEntity;
 
 @interface CertificationAuthorityEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * certAuthority;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSString *certAuthority;
 @property (nonatomic, retain) CertificationEntity *certifications;
 
 @end

@@ -12,21 +12,19 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClientEntity, FrequencyEntity, SubstanceNameEntity;
 
 @interface SubstanceUseEntity : PTManagedObject
 
-@property (nonatomic, retain) NSDate * lastUse;
-@property (nonatomic, retain) NSNumber * currentTreatmentIssue;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSNumber * ageOfFirstUse;
-@property (nonatomic, retain) NSNumber * historyOfDependence;
-@property (nonatomic, retain) NSNumber * historyOfTreatment;
-@property (nonatomic, retain) NSNumber * currentDrugOfChoice;
-@property (nonatomic, retain) NSNumber * historyOfAbuse;
+@property (nonatomic, retain) NSDate *lastUse;
+@property (nonatomic, retain) NSNumber *currentTreatmentIssue;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSNumber *ageOfFirstUse;
+@property (nonatomic, retain) NSNumber *historyOfDependence;
+@property (nonatomic, retain) NSNumber *historyOfTreatment;
+@property (nonatomic, retain) NSNumber *currentDrugOfChoice;
+@property (nonatomic, retain) NSNumber *historyOfAbuse;
 @property (nonatomic, retain) SubstanceNameEntity *substance;
 @property (nonatomic, retain) NSSet *substanceUseLogs;
 @property (nonatomic, retain) ClientEntity *client;
@@ -35,9 +33,9 @@
 
 @interface SubstanceUseEntity (CoreDataGeneratedAccessors)
 
-- (void)addSubstanceUseLogsObject:(NSManagedObject *)value;
-- (void)removeSubstanceUseLogsObject:(NSManagedObject *)value;
-- (void)addSubstanceUseLogs:(NSSet *)values;
-- (void)removeSubstanceUseLogs:(NSSet *)values;
+- (void) addSubstanceUseLogsObject:(NSManagedObject *)value;
+- (void) removeSubstanceUseLogsObject:(NSManagedObject *)value;
+- (void) addSubstanceUseLogs:(NSSet *)values;
+- (void) removeSubstanceUseLogs:(NSSet *)values;
 
 @end

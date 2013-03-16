@@ -11,7 +11,6 @@
 #import "DemographicProfileEntity.h"
 #import "MilitaryServiceDatesEntity.h"
 
-
 @implementation MilitaryServiceEntity
 
 @dynamic awards;
@@ -24,7 +23,5 @@
 @dynamic highestRank;
 @dynamic demographics;
 @dynamic serviceHistory;
-
-
 
 @end

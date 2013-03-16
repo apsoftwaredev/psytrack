@@ -8,20 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
-
-@interface DTApp : NSObject 
+@interface DTApp : NSObject
 {
-	NSString *name;
-	NSString *iconBasename;
-	NSString *detailURL;
-	NSString *iconURL;
-	NSString *launchURL;
-	
-	UIImage *iconImage;
-	
-	// downloading of image
-	NSURLConnection *iconDownloadConnection;
-	NSMutableData *receivedIconData;
+    NSString *name;
+    NSString *iconBasename;
+    NSString *detailURL;
+    NSString *iconURL;
+    NSString *launchURL;
+
+    UIImage *iconImage;
+
+    // downloading of image
+    NSURLConnection *iconDownloadConnection;
+    NSMutableData *receivedIconData;
 }
 
 @property (nonatomic, retain) NSString *name;
@@ -32,10 +31,9 @@
 
 @property (nonatomic, retain) UIImage *iconImage;
 
+- (UIImage *) iconImage;
+- (BOOL) isInstalled;
 
-- (UIImage *)iconImage;
-- (BOOL)isInstalled;
-
-+ (DTApp *)appFromDictionary:(NSDictionary *)dictionary;
++ (DTApp *) appFromDictionary:(NSDictionary *)dictionary;
 
 @end

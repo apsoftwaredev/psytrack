@@ -14,7 +14,6 @@
 #import "PaymentEntity.h"
 #import "ReferralEntity.h"
 
-
 @implementation ConsultationEntity
 
 @dynamic proBono;
@@ -29,8 +28,5 @@
 @dynamic logs;
 @dynamic fees;
 @dynamic referrals;
-
-
-
 
 @end

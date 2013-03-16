@@ -9,41 +9,40 @@
 #import "AboutAppDelegate.h"
 #import "RootViewController.h"
 
-
 @implementation AboutAppDelegate
 
 @synthesize window;
 @synthesize navigationController;
 
-
 #pragma mark -
 #pragma mark Application lifecycle
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application {    
-    
-    // Override point for customization after app launch    
-	
-	[window addSubview:[navigationController view]];
+- (void) applicationDidFinishLaunching:(UIApplication *)application
+{
+    // Override point for customization after app launch
+
+    [window addSubview:[navigationController view]];
     [window makeKeyAndVisible];
-	
-	navigationController.navigationBar.barStyle = UIBarStyleBlack;
+
+    navigationController.navigationBar.barStyle = UIBarStyleBlack;
 }
 
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-	// Save data if appropriate
+- (void) applicationWillTerminate:(UIApplication *)application
+{
+    // Save data if appropriate
 }
 
 
 #pragma mark -
 #pragma mark Memory management
 
-- (void)dealloc {
-	[navigationController release];
-	[window release];
-	[super dealloc];
+- (void) dealloc
+{
+    [navigationController release];
+    [window release];
+    [super dealloc];
 }
 
 
 @end
-

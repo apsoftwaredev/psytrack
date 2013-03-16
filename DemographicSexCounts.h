@@ -10,13 +10,9 @@
 #import <Foundation/Foundation.h>
 
 @interface DemographicSexCounts : NSObject {
-
-     NSMutableArray *sexMutableArray_;
-
-
+    NSMutableArray *sexMutableArray_;
 }
 
-@property (nonatomic, strong)NSMutableArray *sexMutableArray;
-
+@property (nonatomic, strong) NSMutableArray *sexMutableArray;
 
 @end

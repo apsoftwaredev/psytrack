@@ -10,15 +10,11 @@
 #import "ContinuingEducationTypeEntity.h"
 #import "ContinuingEducationEntity.h"
 
-
 @implementation ContinuingEducationTypeEntity
 
 @dynamic order;
 @dynamic notes;
 @dynamic cEType;
 @dynamic continuingEducation;
-
-
-
 
 @end

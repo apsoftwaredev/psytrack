@@ -11,7 +11,6 @@
 #import "ClinicianEntity.h"
 #import "LogEntity.h"
 
-
 @implementation AdvisingEntity
 
 @dynamic endDate;
@@ -21,8 +20,5 @@
 @dynamic current;
 @dynamic logs;
 @dynamic advisee;
-
-
-
 
 @end

@@ -7,11 +7,8 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-
-
 @interface ConsultationsViewController : SCTableViewController <SCTableViewModelDelegate,SCTableViewModelDataSource>{
-
-     SCArrayOfObjectsModel *objectsModel;
+    SCArrayOfObjectsModel *objectsModel;
     NSDateFormatter *dateFormatter;
 }
 

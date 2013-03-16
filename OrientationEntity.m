@@ -11,7 +11,6 @@
 #import "CommunityServiceEntity.h"
 #import "OrientationHistoryEntity.h"
 
-
 @implementation OrientationEntity
 
 @dynamic orientation;
@@ -19,9 +18,5 @@
 @dynamic desc;
 @dynamic communityService;
 @dynamic orientationHistories;
-
-
-
-
 
 @end

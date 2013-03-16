@@ -10,12 +10,10 @@
 #import <Foundation/Foundation.h>
 
 @interface DemographicRaceCounts : NSObject {
-    
-     NSMutableArray *raceMutableArray_;
-     NSSet *multiRacialOnlySet_;
-    
+    NSMutableArray *raceMutableArray_;
+    NSSet *multiRacialOnlySet_;
 }
 
-@property (nonatomic, strong)NSMutableArray *raceMutableArray;
-@property (nonatomic, strong)NSSet *multiRacialOnlySet;
+@property (nonatomic, strong) NSMutableArray *raceMutableArray;
+@property (nonatomic, strong) NSSet *multiRacialOnlySet;
 @end

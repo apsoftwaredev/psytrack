@@ -12,7 +12,6 @@
 #import "InterventionDeliveredEntity.h"
 #import "InterventionTypeEntity.h"
 
-
 @implementation InterventionTypeSubtypeEntity
 
 @dynamic order;
@@ -21,7 +20,5 @@
 @dynamic interventionType;
 @dynamic interventionsDelivered;
 @dynamic existingInterventions;
-
-
 
 @end

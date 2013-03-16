@@ -12,29 +12,27 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class GrantEntity, SiteEntity;
 
 @interface SiteSettingTypeEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * settingTypeName;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSString *settingTypeName;
 @property (nonatomic, retain) NSSet *site;
 @property (nonatomic, retain) NSSet *grants;
 @end
 
 @interface SiteSettingTypeEntity (CoreDataGeneratedAccessors)
 
-- (void)addSiteObject:(SiteEntity *)value;
-- (void)removeSiteObject:(SiteEntity *)value;
-- (void)addSite:(NSSet *)values;
-- (void)removeSite:(NSSet *)values;
+- (void) addSiteObject:(SiteEntity *)value;
+- (void) removeSiteObject:(SiteEntity *)value;
+- (void) addSite:(NSSet *)values;
+- (void) removeSite:(NSSet *)values;
 
-- (void)addGrantsObject:(GrantEntity *)value;
-- (void)removeGrantsObject:(GrantEntity *)value;
-- (void)addGrants:(NSSet *)values;
-- (void)removeGrants:(NSSet *)values;
+- (void) addGrantsObject:(GrantEntity *)value;
+- (void) removeGrantsObject:(GrantEntity *)value;
+- (void) addGrants:(NSSet *)values;
+- (void) removeGrants:(NSSet *)values;
 
 @end

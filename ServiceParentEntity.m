@@ -10,13 +10,10 @@
 #import "ServiceParentEntity.h"
 #import "ServiceCodeEntity.h"
 
-
 @implementation ServiceParentEntity
 
 @dynamic paperwork;
 @dynamic batteryTask;
 @dynamic serviceCode;
-
-
 
 @end

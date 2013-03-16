@@ -10,7 +10,6 @@
 #import "CertificationEntity.h"
 #import "ClinicianEntity.h"
 
-
 @implementation CertificationEntity
 
 @dynamic completeDate;
@@ -20,7 +19,5 @@
 @dynamic certifiedBy;
 @dynamic clinicians;
 @dynamic certificationName;
-
-
 
 @end

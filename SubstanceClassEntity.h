@@ -12,22 +12,19 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
-
 @interface SubstanceClassEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * substanceClassName;
-@property (nonatomic, retain) NSString * desc;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *substanceClassName;
+@property (nonatomic, retain) NSString *desc;
 @property (nonatomic, retain) NSSet *substanceNames;
 @end
 
 @interface SubstanceClassEntity (CoreDataGeneratedAccessors)
 
-- (void)addSubstanceNamesObject:(NSManagedObject *)value;
-- (void)removeSubstanceNamesObject:(NSManagedObject *)value;
-- (void)addSubstanceNames:(NSSet *)values;
-- (void)removeSubstanceNames:(NSSet *)values;
+- (void) addSubstanceNamesObject:(NSManagedObject *)value;
+- (void) removeSubstanceNamesObject:(NSManagedObject *)value;
+- (void) addSubstanceNames:(NSSet *)values;
+- (void) removeSubstanceNames:(NSSet *)values;
 
 @end

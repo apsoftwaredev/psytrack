@@ -11,33 +11,36 @@
 
 @implementation BigProgressViewWithBlockedView
 
-- (id)initWithFrame:(CGRect)frame blockedView:(UIView *)blockedView
+- (id) initWithFrame:(CGRect)frame blockedView:(UIView *)blockedView
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         // Initialization code
-        
-        sendingViewToBlock=blockedView;
-        
+
+        sendingViewToBlock = blockedView;
     }
+
     return self;
 }
 
+
 /*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
+   // Only override drawRect: if you perform custom drawing.
+   // An empty implementation adversely affects performance during animation.
+   - (void)drawRect:(CGRect)rect
+   {
+   // Drawing code
+   }
  */
 
--(void)startAnimatingProgressInBackground{
-    
-    
-    if (sendingViewToBlock) {
+- (void) startAnimatingProgressInBackground
+{
+    if (sendingViewToBlock)
+    {
         [self startAnimatingOverView:sendingViewToBlock];
     }
-    
-    
-}@end
+}
+
+
+@end

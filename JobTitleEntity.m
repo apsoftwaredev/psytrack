@@ -10,13 +10,10 @@
 #import "JobTitleEntity.h"
 #import "ClinicianEntity.h"
 
-
 @implementation JobTitleEntity
 
 @dynamic jobTitle;
 @dynamic order;
 @dynamic clinicians;
-
-
 
 @end

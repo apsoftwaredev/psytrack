@@ -11,7 +11,6 @@
 #import "FrequencyEntity.h"
 #import "MedicationEntity.h"
 
-
 @implementation AdditionalSymptomEntity
 
 @dynamic onset;
@@ -21,7 +20,5 @@
 @dynamic frequency;
 @dynamic symptomName;
 @dynamic medicationReview;
-
-
 
 @end

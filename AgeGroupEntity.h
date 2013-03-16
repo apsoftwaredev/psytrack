@@ -12,21 +12,18 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
-
 @interface AgeGroupEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * ageGroup;
-@property (nonatomic, retain) NSNumber * order;
+@property (nonatomic, retain) NSString *ageGroup;
+@property (nonatomic, retain) NSNumber *order;
 @property (nonatomic, retain) NSSet *existingAgeGroup;
 @end
 
 @interface AgeGroupEntity (CoreDataGeneratedAccessors)
 
-- (void)addExistingAgeGroupObject:(NSManagedObject *)value;
-- (void)removeExistingAgeGroupObject:(NSManagedObject *)value;
-- (void)addExistingAgeGroup:(NSSet *)values;
-- (void)removeExistingAgeGroup:(NSSet *)values;
+- (void) addExistingAgeGroupObject:(NSManagedObject *)value;
+- (void) removeExistingAgeGroupObject:(NSManagedObject *)value;
+- (void) addExistingAgeGroup:(NSSet *)values;
+- (void) removeExistingAgeGroup:(NSSet *)values;
 
 @end

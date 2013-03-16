@@ -12,22 +12,20 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class OtherReferralSourceEntity;
 
 @interface OtherReferralSourceTypeEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * referralType;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *referralType;
 @property (nonatomic, retain) NSSet *otherReferralSources;
 @end
 
 @interface OtherReferralSourceTypeEntity (CoreDataGeneratedAccessors)
 
-- (void)addOtherReferralSourcesObject:(OtherReferralSourceEntity *)value;
-- (void)removeOtherReferralSourcesObject:(OtherReferralSourceEntity *)value;
-- (void)addOtherReferralSources:(NSSet *)values;
-- (void)removeOtherReferralSources:(NSSet *)values;
+- (void) addOtherReferralSourcesObject:(OtherReferralSourceEntity *)value;
+- (void) removeOtherReferralSourcesObject:(OtherReferralSourceEntity *)value;
+- (void) addOtherReferralSources:(NSSet *)values;
+- (void) removeOtherReferralSources:(NSSet *)values;
 
 @end

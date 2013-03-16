@@ -8,17 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface UIView (Helpers)
 
 // adds a view as parent with the given margins
-- (UIView *)viewByWrappingViewWithMargins:(UIEdgeInsets)margins;
+- (UIView *) viewByWrappingViewWithMargins:(UIEdgeInsets)margins;
 
 // useful for debugging
 - (void) logSubviews;
 
 // set rounded corners
 - (void) setRoundedCornersWithRadius:(CGFloat)radius borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor;
-
 
 @end

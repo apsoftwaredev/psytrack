@@ -11,15 +11,11 @@
 #import "DiagnosisHistoryEntity.h"
 #import "DisorderEntity.h"
 
-
 @implementation DisorderSpecifierEntity
 
 @dynamic order;
 @dynamic specifier;
 @dynamic diagnosisHistory;
 @dynamic disorder;
-
-
-
 
 @end

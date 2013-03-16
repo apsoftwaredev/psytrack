@@ -12,15 +12,13 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ExistingInterventionEntity, InterventionDeliveredEntity, InterventionTypeEntity;
 
 @interface InterventionTypeSubtypeEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * interventionSubType;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSString *interventionSubType;
 @property (nonatomic, retain) InterventionTypeEntity *interventionType;
 @property (nonatomic, retain) NSSet *interventionsDelivered;
 @property (nonatomic, retain) NSSet *existingInterventions;
@@ -28,14 +26,14 @@
 
 @interface InterventionTypeSubtypeEntity (CoreDataGeneratedAccessors)
 
-- (void)addInterventionsDeliveredObject:(InterventionDeliveredEntity *)value;
-- (void)removeInterventionsDeliveredObject:(InterventionDeliveredEntity *)value;
-- (void)addInterventionsDelivered:(NSSet *)values;
-- (void)removeInterventionsDelivered:(NSSet *)values;
+- (void) addInterventionsDeliveredObject:(InterventionDeliveredEntity *)value;
+- (void) removeInterventionsDeliveredObject:(InterventionDeliveredEntity *)value;
+- (void) addInterventionsDelivered:(NSSet *)values;
+- (void) removeInterventionsDelivered:(NSSet *)values;
 
-- (void)addExistingInterventionsObject:(ExistingInterventionEntity *)value;
-- (void)removeExistingInterventionsObject:(ExistingInterventionEntity *)value;
-- (void)addExistingInterventions:(NSSet *)values;
-- (void)removeExistingInterventions:(NSSet *)values;
+- (void) addExistingInterventionsObject:(ExistingInterventionEntity *)value;
+- (void) removeExistingInterventionsObject:(ExistingInterventionEntity *)value;
+- (void) addExistingInterventions:(NSSet *)values;
+- (void) removeExistingInterventions:(NSSet *)values;
 
 @end

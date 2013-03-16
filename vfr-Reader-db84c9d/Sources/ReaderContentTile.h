@@ -28,7 +28,7 @@
 
 @interface ReaderContentTile : CATiledLayer
 {
-@private // Instance variables
+    @private // Instance variables
 }
 
 @end

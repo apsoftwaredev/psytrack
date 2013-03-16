@@ -12,7 +12,6 @@
 #import "DegreeNameEntity.h"
 #import "SchoolEntity.h"
 
-
 @implementation DegreeEntity
 
 @dynamic dateAwarded;
@@ -25,7 +24,5 @@
 @dynamic minors;
 @dynamic courses;
 @dynamic clinician;
-
-
 
 @end

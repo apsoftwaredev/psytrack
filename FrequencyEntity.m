@@ -12,7 +12,6 @@
 #import "DiagnosisHistoryEntity.h"
 #import "MedicationReviewEntity.h"
 
-
 @implementation FrequencyEntity
 
 @dynamic frequencyUnit;
@@ -26,7 +25,5 @@
 @dynamic medicationUse;
 @dynamic substanceUse;
 @dynamic diagnosis;
-
-
 
 @end

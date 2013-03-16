@@ -21,7 +21,7 @@
 @synthesize cliniciansStr,studentNameStr;
 @synthesize practicumSiteNamesStr,numberOfSites;
 
-@synthesize assessmentMonthlyNotes=assessmentMonthlyNotes_,supportMonthlyNotes=supportMonthlyNotes_;
+@synthesize assessmentMonthlyNotes = assessmentMonthlyNotes_,supportMonthlyNotes = supportMonthlyNotes_;
 
 @synthesize interventionTotalWeek1Str;
 @synthesize interventionTotalWeek2Str;
@@ -35,21 +35,17 @@
 @synthesize interventionTotalWeek4TI;
 @synthesize interventionTotalWeek5TI;
 
-
 @synthesize interventionTotalWeekUndefinedStr;
 @synthesize interventionTotalWeekUndefinedTI;
 
 @synthesize interventionTotalForMonthStr;
 @synthesize interventionTotalForMonthTI;
 
-
 @synthesize interventionTotalCummulativeStr;
 @synthesize interventionTotalCummulativeTI;
 
 @synthesize interventionTotalToDateStr;
 @synthesize interventionTotalToDateTI;
-
-
 
 @synthesize assessmentTotalWeek1Str;
 @synthesize assessmentTotalWeek2Str;
@@ -69,13 +65,11 @@
 @synthesize assessmentTotalForMonthStr;
 @synthesize assessmentTotalForMonthTI;
 
-
 @synthesize assessmentTotalCummulativeStr;
 @synthesize assessmentTotalCummulativeTI;
 
 @synthesize assessmentTotalToDateStr;
 @synthesize assessmentTotalToDateTI;
-
 
 @synthesize supportTotalWeek1Str;
 @synthesize supportTotalWeek2Str;
@@ -89,20 +83,17 @@
 @synthesize supportTotalWeek4TI;
 @synthesize supportTotalWeek5TI;
 
-
 @synthesize supportTotalWeekUndefinedStr;
 @synthesize supportTotalWeekUndefinedTI;
 
 @synthesize supportTotalForMonthStr;
 @synthesize supportTotalForMonthTI;
 
-
 @synthesize supportTotalCummulativeStr;
 @synthesize supportTotalCummulativeTI;
 
 @synthesize supportTotalToDateStr;
 @synthesize supportTotalToDateTI;
-
 
 @synthesize supervisionTotalWeek1Str;
 @synthesize supervisionTotalWeek2Str;
@@ -116,21 +107,17 @@
 @synthesize supervisionTotalWeek4TI;
 @synthesize supervisionTotalWeek5TI;
 
-
 @synthesize supervisionTotalWeekUndefinedStr;
 @synthesize supervisionTotalWeekUndefinedTI;
 
 @synthesize supervisionTotalForMonthStr;
 @synthesize supervisionTotalForMonthTI;
 
-
 @synthesize supervisionTotalCummulativeStr;
 @synthesize supervisionTotalCummulativeTI;
 
 @synthesize supervisionTotalToDateStr;
 @synthesize supervisionTotalToDateTI;
-
-
 
 @synthesize directTotalWeek1Str;
 @synthesize directTotalWeek2Str;
@@ -144,7 +131,6 @@
 @synthesize directTotalWeek4TI;
 @synthesize directTotalWeek5TI;
 
-
 @synthesize directTotalWeekUndefinedStr;
 @synthesize directTotalWeekUndefinedTI;
 
@@ -157,7 +143,6 @@
 @synthesize directTotalToDateStr;
 @synthesize directTotalToDateTI;
 
-
 @synthesize overallTotalWeek1Str;
 @synthesize overallTotalWeek2Str;
 @synthesize overallTotalWeek3Str;
@@ -169,7 +154,6 @@
 @synthesize overallTotalWeek3TI;
 @synthesize overallTotalWeek4TI;
 @synthesize overallTotalWeek5TI;
-
 
 @synthesize overallTotalWeekUndefinedStr;
 @synthesize overallTotalWeekUndefinedTI;
@@ -188,1145 +172,1005 @@
 @synthesize trainingProgramsStr;
 
 @synthesize numberOfProgramCourses;
--(id)initWithDoctorateLevel:(BOOL)doctoarateLevelSelected clinician:(ClinicianEntity *)supervisor{
+- (id) initWithDoctorateLevel:(BOOL)doctoarateLevelSelected clinician:(ClinicianEntity *)supervisor
+{
     //override superclass
-   self= [super initWithMonth:nil clinician:supervisor trainingProgram:nil];
-    
-    if (self) {
-        
-        self.doctorateLevel=doctoarateLevelSelected;
-        NSPredicate *predicateForTrackDoctorateLevel=[self predicateForTrackDoctorateLevel];
-        
-        NSPredicate *predicateForExistingHoursDoctorateLevel=[self predicateForExistingHoursDoctorateLevel];
-        NSArray *fetchedInderventionDeliveredArray=[self fetchObjectsFromEntity:kTrackInterventionEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
-        self.interventionsDeliveredArray=[NSSet setWithArray:fetchedInderventionDeliveredArray];
-        
-        NSArray *fetchedAssessmentsDeliveredArray=[self fetchObjectsFromEntity:kTrackAssessmentEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
-       self.assessmentsDeliveredArray=[NSSet setWithArray:fetchedAssessmentsDeliveredArray];
-        
-        NSArray *fetchedSupportActivityDeliveredArray=[self fetchObjectsFromEntity:kTrackSupportEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
-       self.supportActivityDeliveredArray=[NSSet setWithArray:fetchedSupportActivityDeliveredArray];
-        
-        NSArray *fetchedSupervisionArray=[self fetchObjectsFromEntity:kTrackSupervisionReceivedEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
-        self.supervisionReceivedArray=[NSSet setWithArray:fetchedSupervisionArray];
-        
-        self.existingHoursArray=[self fetchObjectsFromEntity:kTrackExistingHoursEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"programCourse" ]];
-                                              
-        self.interventionsDeliveredArray=[self.interventionsDeliveredArray filteredSetUsingPredicate:predicateForTrackDoctorateLevel];
-        
-        
-         
-        
-        
-        self.assessmentsDeliveredArray=[self.assessmentsDeliveredArray filteredSetUsingPredicate:predicateForTrackDoctorateLevel];
-        
-        
-        
-        self.supportActivityDeliveredArray=[self.supportActivityDeliveredArray filteredSetUsingPredicate:predicateForTrackDoctorateLevel];
-        
-        self.supervisionReceivedArray=[self.supervisionReceivedArray filteredSetUsingPredicate:predicateForTrackDoctorateLevel];
-        
-        self.existingHoursArray=[self.existingHoursArray filteredArrayUsingPredicate:predicateForExistingHoursDoctorateLevel];
-        
-        
-        if(clinician_){
-            
-            
-            NSPredicate *clinicianFilter=[self predicateForClincian];
-            self.interventionsDeliveredArray=[self.interventionsDeliveredArray filteredSetUsingPredicate:clinicianFilter];
-            self.assessmentsDeliveredArray=[self.assessmentsDeliveredArray filteredSetUsingPredicate:clinicianFilter];
-            
-            self.supportActivityDeliveredArray=[self.supportActivityDeliveredArray filteredSetUsingPredicate:clinicianFilter];
-            
-            self.supervisionReceivedArray=[self.supervisionReceivedArray filteredSetUsingPredicate:clinicianFilter];
-            
-            self.existingHoursArray=[self.existingHoursArray filteredArrayUsingPredicate:clinicianFilter];
-            
-            
-            
-        }
-        
-        self.overallTotalToDateTI=[self totalOverallHoursTIForOveralCell:kSummaryTotalToDate clinician:nil];
-        
-        
-        self.assessmentMonthlyNotes=[self monthlyLogNotesForMonth:kTrackAssessment];
-        self.supportMonthlyNotes=[self monthlyLogNotesForMonth:kTrackSupport];
+    self = [super initWithMonth:nil clinician:supervisor trainingProgram:nil];
 
-        self.directTotalToDateTI=self.interventionTotalToDateTI+self.assessmentTotalToDateTI;
-        
-        
-       
-        self.directTotalToDateStr=[self timeStrFromTimeInterval: self.directTotalToDateTI];
-        
-        self.studentNameStr=[self getStudentName];
-        self.clinicians=[self supervisorsArray];
-        
-        self.cliniciansStr=[self cliniciansStrFromCliniciansArray:self.clinicians];
-        self.trainingProgramsStr=[self setTrainingProgramString];
-}
+    if (self)
+    {
+        self.doctorateLevel = doctoarateLevelSelected;
+        NSPredicate *predicateForTrackDoctorateLevel = [self predicateForTrackDoctorateLevel];
+
+        NSPredicate *predicateForExistingHoursDoctorateLevel = [self predicateForExistingHoursDoctorateLevel];
+        NSArray *fetchedInderventionDeliveredArray = [self fetchObjectsFromEntity:kTrackInterventionEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+        self.interventionsDeliveredArray = [NSSet setWithArray:fetchedInderventionDeliveredArray];
+
+        NSArray *fetchedAssessmentsDeliveredArray = [self fetchObjectsFromEntity:kTrackAssessmentEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+        self.assessmentsDeliveredArray = [NSSet setWithArray:fetchedAssessmentsDeliveredArray];
+
+        NSArray *fetchedSupportActivityDeliveredArray = [self fetchObjectsFromEntity:kTrackSupportEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+        self.supportActivityDeliveredArray = [NSSet setWithArray:fetchedSupportActivityDeliveredArray];
+
+        NSArray *fetchedSupervisionArray = [self fetchObjectsFromEntity:kTrackSupervisionReceivedEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"trainingProgram"]];
+        self.supervisionReceivedArray = [NSSet setWithArray:fetchedSupervisionArray];
+
+        self.existingHoursArray = [self fetchObjectsFromEntity:kTrackExistingHoursEntityName filterPredicate:nil pathsForPrefetching:[NSArray arrayWithObject:@"programCourse" ]];
+
+        self.interventionsDeliveredArray = [self.interventionsDeliveredArray filteredSetUsingPredicate:predicateForTrackDoctorateLevel];
+
+        self.assessmentsDeliveredArray = [self.assessmentsDeliveredArray filteredSetUsingPredicate:predicateForTrackDoctorateLevel];
+
+        self.supportActivityDeliveredArray = [self.supportActivityDeliveredArray filteredSetUsingPredicate:predicateForTrackDoctorateLevel];
+
+        self.supervisionReceivedArray = [self.supervisionReceivedArray filteredSetUsingPredicate:predicateForTrackDoctorateLevel];
+
+        self.existingHoursArray = [self.existingHoursArray filteredArrayUsingPredicate:predicateForExistingHoursDoctorateLevel];
+
+        if (clinician_)
+        {
+            NSPredicate *clinicianFilter = [self predicateForClincian];
+            self.interventionsDeliveredArray = [self.interventionsDeliveredArray filteredSetUsingPredicate:clinicianFilter];
+            self.assessmentsDeliveredArray = [self.assessmentsDeliveredArray filteredSetUsingPredicate:clinicianFilter];
+
+            self.supportActivityDeliveredArray = [self.supportActivityDeliveredArray filteredSetUsingPredicate:clinicianFilter];
+
+            self.supervisionReceivedArray = [self.supervisionReceivedArray filteredSetUsingPredicate:clinicianFilter];
+
+            self.existingHoursArray = [self.existingHoursArray filteredArrayUsingPredicate:clinicianFilter];
+        }
+
+        self.overallTotalToDateTI = [self totalOverallHoursTIForOveralCell:kSummaryTotalToDate clinician:nil];
+
+        self.assessmentMonthlyNotes = [self monthlyLogNotesForMonth:kTrackAssessment];
+        self.supportMonthlyNotes = [self monthlyLogNotesForMonth:kTrackSupport];
+
+        self.directTotalToDateTI = self.interventionTotalToDateTI + self.assessmentTotalToDateTI;
+
+        self.directTotalToDateStr = [self timeStrFromTimeInterval:self.directTotalToDateTI];
+
+        self.studentNameStr = [self getStudentName];
+        self.clinicians = [self supervisorsArray];
+
+        self.cliniciansStr = [self cliniciansStrFromCliniciansArray:self.clinicians];
+        self.trainingProgramsStr = [self setTrainingProgramString];
+    }
 
     return self;
-
 }
 
--(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven markAmended:(BOOL)markAmendedGiven{
+
+- (id) initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven markAmended:(BOOL)markAmendedGiven
+{
     //override superclass
-    self= [super initWithMonth:date clinician:clinician trainingProgram:trainingProgramGiven];
-    
-    if (self) {
-        
-                
-        
-        self.clinician=clinician;
-        self.markAmended=markAmendedGiven;
-        NSPredicate *predicateForTrackEntities=[self predicateForTrackEntitiesAllBeforeAndEqualToEndDateForMonth];
-        
-        NSArray *tempInterventionsDeliveredArray=[self fetchObjectsFromEntity:kTrackInterventionEntityName filterPredicate:predicateForTrackEntities];
-        
-       NSArray * tempAssessmentsDeliveredArray=[self fetchObjectsFromEntity:kTrackAssessmentEntityName filterPredicate:predicateForTrackEntities];
-        
-        NSArray * tempSupportActivityDeliveredArray=[self fetchObjectsFromEntity:kTrackSupportEntityName filterPredicate:predicateForTrackEntities];
-        
-        NSArray *tempSupervisionReceivedArray=[self fetchObjectsFromEntity:kTrackSupervisionReceivedEntityName filterPredicate:predicateForTrackEntities];
-        
-       NSArray *tempExistingHoursHoursArray=[self fetchObjectsFromEntity:kTrackExistingHoursEntityName filterPredicate:[self predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth]];
-        
-        
-        NSPredicate *predicateForTrackTrainingProgram=[self predicateForTrackTrainingProgram];
-        if (tempInterventionsDeliveredArray&& tempInterventionsDeliveredArray.count) {
-        
-            self.interventionsDeliveredArray=[NSSet setWithArray:[tempInterventionsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram]];
+    self = [super initWithMonth:date clinician:clinician trainingProgram:trainingProgramGiven];
+
+    if (self)
+    {
+        self.clinician = clinician;
+        self.markAmended = markAmendedGiven;
+        NSPredicate *predicateForTrackEntities = [self predicateForTrackEntitiesAllBeforeAndEqualToEndDateForMonth];
+
+        NSArray *tempInterventionsDeliveredArray = [self fetchObjectsFromEntity:kTrackInterventionEntityName filterPredicate:predicateForTrackEntities];
+
+        NSArray *tempAssessmentsDeliveredArray = [self fetchObjectsFromEntity:kTrackAssessmentEntityName filterPredicate:predicateForTrackEntities];
+
+        NSArray *tempSupportActivityDeliveredArray = [self fetchObjectsFromEntity:kTrackSupportEntityName filterPredicate:predicateForTrackEntities];
+
+        NSArray *tempSupervisionReceivedArray = [self fetchObjectsFromEntity:kTrackSupervisionReceivedEntityName filterPredicate:predicateForTrackEntities];
+
+        NSArray *tempExistingHoursHoursArray = [self fetchObjectsFromEntity:kTrackExistingHoursEntityName filterPredicate:[self predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth]];
+
+        NSPredicate *predicateForTrackTrainingProgram = [self predicateForTrackTrainingProgram];
+        if (tempInterventionsDeliveredArray && tempInterventionsDeliveredArray.count)
+        {
+            self.interventionsDeliveredArray = [NSSet setWithArray:[tempInterventionsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram]];
         }
-        if (tempAssessmentsDeliveredArray&& tempAssessmentsDeliveredArray.count) {
-            self.assessmentsDeliveredArray=[NSSet setWithArray:[tempAssessmentsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram]];
+
+        if (tempAssessmentsDeliveredArray && tempAssessmentsDeliveredArray.count)
+        {
+            self.assessmentsDeliveredArray = [NSSet setWithArray:[tempAssessmentsDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram]];
         }
-        if (tempSupportActivityDeliveredArray&& tempSupportActivityDeliveredArray.count) {
-            self.supportActivityDeliveredArray=[NSSet setWithArray:[tempSupportActivityDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram]];
+
+        if (tempSupportActivityDeliveredArray && tempSupportActivityDeliveredArray.count)
+        {
+            self.supportActivityDeliveredArray = [NSSet setWithArray:[tempSupportActivityDeliveredArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram]];
         }
-        if (tempSupervisionReceivedArray&& tempSupervisionReceivedArray.count) {
-            self.supervisionReceivedArray=[NSSet setWithArray:[tempSupervisionReceivedArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram]];
+
+        if (tempSupervisionReceivedArray && tempSupervisionReceivedArray.count)
+        {
+            self.supervisionReceivedArray = [NSSet setWithArray:[tempSupervisionReceivedArray filteredArrayUsingPredicate:predicateForTrackTrainingProgram]];
         }
-        
-        NSPredicate *predicateForExistingHoursProgramCourse=[self predicateForExistingHoursProgramCourse];
-       
-        if (tempExistingHoursHoursArray&& tempExistingHoursHoursArray.count) {
-            self.existingHoursArray=[tempExistingHoursHoursArray filteredArrayUsingPredicate:predicateForExistingHoursProgramCourse];
+
+        NSPredicate *predicateForExistingHoursProgramCourse = [self predicateForExistingHoursProgramCourse];
+
+        if (tempExistingHoursHoursArray && tempExistingHoursHoursArray.count)
+        {
+            self.existingHoursArray = [tempExistingHoursHoursArray filteredArrayUsingPredicate:predicateForExistingHoursProgramCourse];
         }
-            
-           
-        
-        
-        if(clinician_){
-        
-        
-            NSPredicate *clinicianFilter=[self predicateForClincian];
-            self.interventionsDeliveredArray=[self.interventionsDeliveredArray filteredSetUsingPredicate:clinicianFilter];
-            self.assessmentsDeliveredArray=[self.assessmentsDeliveredArray filteredSetUsingPredicate:clinicianFilter];
-            
-            self.supportActivityDeliveredArray=[self.supportActivityDeliveredArray filteredSetUsingPredicate:clinicianFilter];
-            
-            self.supervisionReceivedArray=[self.supervisionReceivedArray filteredSetUsingPredicate:clinicianFilter];
-            
-            self.existingHoursArray=[self.existingHoursArray filteredArrayUsingPredicate:clinicianFilter];
-            
-        
-        
+
+        if (clinician_)
+        {
+            NSPredicate *clinicianFilter = [self predicateForClincian];
+            self.interventionsDeliveredArray = [self.interventionsDeliveredArray filteredSetUsingPredicate:clinicianFilter];
+            self.assessmentsDeliveredArray = [self.assessmentsDeliveredArray filteredSetUsingPredicate:clinicianFilter];
+
+            self.supportActivityDeliveredArray = [self.supportActivityDeliveredArray filteredSetUsingPredicate:clinicianFilter];
+
+            self.supervisionReceivedArray = [self.supervisionReceivedArray filteredSetUsingPredicate:clinicianFilter];
+
+            self.existingHoursArray = [self.existingHoursArray filteredArrayUsingPredicate:clinicianFilter];
         }
-        
-        
-        
-        self.overallTotalWeek1TI=[self totalOverallHoursTIForOveralCell:kSummaryWeekOne clinician:clinician];
-        self.overallTotalWeek2TI=[self totalOverallHoursTIForOveralCell:kSummaryWeekTwo clinician:clinician];
-        self.overallTotalWeek3TI=[self totalOverallHoursTIForOveralCell:kSummaryWeekThree clinician:clinician];
-        self.overallTotalWeek4TI=[self totalOverallHoursTIForOveralCell:kSummaryWeekFour clinician:clinician];
-        self.overallTotalWeek5TI=[self totalOverallHoursTIForOveralCell:kSummaryWeekFive clinician:clinician];
-        self.overallTotalWeekUndefinedTI=[self totalOverallHoursTIForOveralCell:kSummaryWeekUndefined clinician:clinician];
-        
-        
-        self.overallTotalForMonthTI=[self totalOverallHoursTIForOveralCell:kSummaryTotalForMonth clinician:clinician];
-        self.overallTotalCummulativeTI =[self totalOverallHoursTIForOveralCell:kSummaryCummulative clinician:(ClinicianEntity *)clinician];
-        self.overallTotalToDateTI=[self totalOverallHoursTIForOveralCell:kSummaryTotalToDate clinician:clinician];
-        
-        
-        self.assessmentMonthlyNotes=[self monthlyLogNotesForMonth:kTrackAssessment];
-        self.supportMonthlyNotes=[self monthlyLogNotesForMonth:kTrackSupport];
+
+        self.overallTotalWeek1TI = [self totalOverallHoursTIForOveralCell:kSummaryWeekOne clinician:clinician];
+        self.overallTotalWeek2TI = [self totalOverallHoursTIForOveralCell:kSummaryWeekTwo clinician:clinician];
+        self.overallTotalWeek3TI = [self totalOverallHoursTIForOveralCell:kSummaryWeekThree clinician:clinician];
+        self.overallTotalWeek4TI = [self totalOverallHoursTIForOveralCell:kSummaryWeekFour clinician:clinician];
+        self.overallTotalWeek5TI = [self totalOverallHoursTIForOveralCell:kSummaryWeekFive clinician:clinician];
+        self.overallTotalWeekUndefinedTI = [self totalOverallHoursTIForOveralCell:kSummaryWeekUndefined clinician:clinician];
+
+        self.overallTotalForMonthTI = [self totalOverallHoursTIForOveralCell:kSummaryTotalForMonth clinician:clinician];
+        self.overallTotalCummulativeTI = [self totalOverallHoursTIForOveralCell:kSummaryCummulative clinician:(ClinicianEntity *)clinician];
+        self.overallTotalToDateTI = [self totalOverallHoursTIForOveralCell:kSummaryTotalToDate clinician:clinician];
+
+        self.assessmentMonthlyNotes = [self monthlyLogNotesForMonth:kTrackAssessment];
+        self.supportMonthlyNotes = [self monthlyLogNotesForMonth:kTrackSupport];
         [self calculateDirectlHours];
-        
-        
-        self.clinicians=[self supervisorsArray];
-    
-        self.cliniciansStr=[self cliniciansStrFromCliniciansArray:self.clinicians];
-        self.practicumSiteNamesStr=[self practicumSitesStr];
-        self.studentNameStr=[self getStudentName];
-        self.practicumSeminarInstructtor=self.trainingProgram.seminarInstructor.combinedName;
-        self.schoolNameStr=self.trainingProgram.school.schoolName;
+
+        self.clinicians = [self supervisorsArray];
+
+        self.cliniciansStr = [self cliniciansStrFromCliniciansArray:self.clinicians];
+        self.practicumSiteNamesStr = [self practicumSitesStr];
+        self.studentNameStr = [self getStudentName];
+        self.practicumSeminarInstructtor = self.trainingProgram.seminarInstructor.combinedName;
+        self.schoolNameStr = self.trainingProgram.school.schoolName;
         [self setMonthandYearsInParentheses];
-        
-        self.interventionsDeliveredArray=nil;
-        self.assessmentsDeliveredArray=nil;
-        self.supportActivityDeliveredArray=nil;
-        self.supervisionReceivedArray=nil;
-       
+
+        self.interventionsDeliveredArray = nil;
+        self.assessmentsDeliveredArray = nil;
+        self.supportActivityDeliveredArray = nil;
+        self.supervisionReceivedArray = nil;
     }
-    
+
     return self;
-    
-    
 }
--(void)setMonthandYearsInParentheses{
 
-    NSDateFormatter *monthDateFormatter=[[NSDateFormatter alloc]init];
-    
+
+- (void) setMonthandYearsInParentheses
+{
+    NSDateFormatter *monthDateFormatter = [[NSDateFormatter alloc]init];
+
     [monthDateFormatter setDateFormat:@"MMMM yyyy"];
-    
-    NSDateFormatter *yearDateFormatter=[[NSDateFormatter alloc]init];
-    
+
+    NSDateFormatter *yearDateFormatter = [[NSDateFormatter alloc]init];
+
     [yearDateFormatter setDateFormat:@"yyyy"];
-    
-    NSDate *trainingProgramStartDate=self.trainingProgram.startDate;
-    NSDate *trainingProgramEndDate=self.trainingProgram.endDate;
-    
-    NSInteger startDateYear=[[yearDateFormatter stringFromDate:trainingProgramStartDate]integerValue];
-    NSInteger endDateYear=[[yearDateFormatter stringFromDate:trainingProgramEndDate]integerValue];
-    
-    
-    NSString *yearsInParentheses=nil;
-    if ((trainingProgramEndDate &&!trainingProgramEndDate)||(startDateYear==endDateYear&&startDateYear>0)) {
-         yearsInParentheses=[NSString stringWithFormat:@" (%i Year)",startDateYear];
-    }
-    else if(trainingProgramStartDate &&trainingProgramEndDate&&(endDateYear- startDateYear==1)) {
-        yearsInParentheses=[NSString stringWithFormat:@" (%i-%i Year)",startDateYear,endDateYear];
-    }
-    else if (endDateYear-startDateYear>1){
-        yearsInParentheses=[NSString stringWithFormat:@" (%i-%i Years)",startDateYear,endDateYear];
-    }
-   
-    if (self.monthToDisplay) {
-        self.monthAndYearsInParentheses=[NSString stringWithFormat:@"%@%@",[monthDateFormatter stringFromDate:self.monthToDisplay],yearsInParentheses?yearsInParentheses:@""];
-    }
-    
-    monthDateFormatter=nil;
-    
-    yearDateFormatter=nil;
-    
-    
 
+    NSDate *trainingProgramStartDate = self.trainingProgram.startDate;
+    NSDate *trainingProgramEndDate = self.trainingProgram.endDate;
+
+    NSInteger startDateYear = [[yearDateFormatter stringFromDate:trainingProgramStartDate]integerValue];
+    NSInteger endDateYear = [[yearDateFormatter stringFromDate:trainingProgramEndDate]integerValue];
+
+    NSString *yearsInParentheses = nil;
+    if ( (trainingProgramEndDate && !trainingProgramEndDate) || (startDateYear == endDateYear && startDateYear > 0) )
+    {
+        yearsInParentheses = [NSString stringWithFormat:@" (%i Year)",startDateYear];
+    }
+    else if ( trainingProgramStartDate && trainingProgramEndDate && (endDateYear - startDateYear == 1) )
+    {
+        yearsInParentheses = [NSString stringWithFormat:@" (%i-%i Year)",startDateYear,endDateYear];
+    }
+    else if (endDateYear - startDateYear > 1)
+    {
+        yearsInParentheses = [NSString stringWithFormat:@" (%i-%i Years)",startDateYear,endDateYear];
+    }
+
+    if (self.monthToDisplay)
+    {
+        self.monthAndYearsInParentheses = [NSString stringWithFormat:@"%@%@",[monthDateFormatter stringFromDate:self.monthToDisplay],yearsInParentheses ? yearsInParentheses:@""];
+    }
+
+    monthDateFormatter = nil;
+
+    yearDateFormatter = nil;
 }
 
--(NSString *)setTrainingProgramString{
-    
-    NSSet *trainingProgramSet=[self.interventionsDeliveredArray valueForKey:@"trainingProgram"];
-    NSSet *programCourseSet=[self.existingHoursArray valueForKey:@"programCourse"];
 
-    NSMutableSet *combinedSet=[NSMutableSet set];
-    if (trainingProgramSet && programCourseSet &&programCourseSet.count&& trainingProgramSet.count) {
+- (NSString *) setTrainingProgramString
+{
+    NSSet *trainingProgramSet = [self.interventionsDeliveredArray valueForKey:@"trainingProgram"];
+    NSSet *programCourseSet = [self.existingHoursArray valueForKey:@"programCourse"];
+
+    NSMutableSet *combinedSet = [NSMutableSet set];
+    if (trainingProgramSet && programCourseSet && programCourseSet.count && trainingProgramSet.count)
+    {
         [combinedSet addObjectsFromArray:programCourseSet.allObjects];
         [combinedSet addObjectsFromArray:trainingProgramSet.allObjects];
     }
-    else if(programCourseSet&& (!trainingProgramSet||!trainingProgramSet.count)){
-    
+    else if ( programCourseSet && (!trainingProgramSet || !trainingProgramSet.count) )
+    {
         [combinedSet addObjectsFromArray:programCourseSet.allObjects];
-    
-    
-    }else if ((!programCourseSet ||!programCourseSet.count)&&trainingProgramSet&&trainingProgramSet.count){
-    
+    }
+    else if ( (!programCourseSet || !programCourseSet.count) && trainingProgramSet && trainingProgramSet.count )
+    {
         [combinedSet addObjectsFromArray:trainingProgramSet.allObjects];
-    
     }
-    
-    self.numberOfProgramCourses=combinedSet.count;
-    NSString *returnString=nil;
-    for (TrainingProgramEntity *trainingProgram in combinedSet.allObjects) {
-        
-        if (!returnString||!returnString.length) {
-            returnString=[NSString stringWithFormat:@"%@ - %@",trainingProgram.trainingProgram ,trainingProgram.course];
+
+    self.numberOfProgramCourses = combinedSet.count;
+    NSString *returnString = nil;
+    for (TrainingProgramEntity *trainingProgram in combinedSet.allObjects)
+    {
+        if (!returnString || !returnString.length)
+        {
+            returnString = [NSString stringWithFormat:@"%@ - %@",trainingProgram.trainingProgram,trainingProgram.course];
         }
-        else {
-            returnString=[returnString stringByAppendingFormat:@"; %@ - %@",trainingProgram.trainingProgram,trainingProgram.course];
+        else
+        {
+            returnString = [returnString stringByAppendingFormat:@"; %@ - %@",trainingProgram.trainingProgram,trainingProgram.course];
         }
-        
     }
-    
-    return  returnString;
-    
-    
+
+    return returnString;
 }
 
 
+- (NSString *) cliniciansStrFromCliniciansArray:(NSArray *)cliniciansArray
+{
+    NSString *returnString = nil;
 
--(NSString *)cliniciansStrFromCliniciansArray:(NSArray*)cliniciansArray{
-
-    NSString *returnString=nil;
-    
-    for (ClinicianEntity *clinicianInArray in cliniciansArray) {
-        
-        if (!returnString||!returnString.length) {
-            returnString=clinicianInArray.combinedName;
+    for (ClinicianEntity *clinicianInArray in cliniciansArray)
+    {
+        if (!returnString || !returnString.length)
+        {
+            returnString = clinicianInArray.combinedName;
         }
-        else {
-            returnString=[returnString stringByAppendingFormat:@"; %@",clinicianInArray.combinedName];
+        else
+        {
+            returnString = [returnString stringByAppendingFormat:@"; %@",clinicianInArray.combinedName];
         }
-        
     }
 
-    return  returnString;
-
-
+    return returnString;
 }
--(NSString *)getStudentName{
 
-    NSString *studentName=nil;
-    
-    NSArray *cliniciansArrayWithMyInfo=[self fetchObjectsFromEntity:@"ClinicianEntity" filterPredicate:[NSPredicate predicateWithFormat:@"myInformation== %@",[NSNumber numberWithBool:YES]]];
 
-    
-    if (cliniciansArrayWithMyInfo&&cliniciansArrayWithMyInfo.count) {
-       
-        int clinicianCount=cliniciansArrayWithMyInfo.count;
-        
-        if (clinicianCount>1) {
+- (NSString *) getStudentName
+{
+    NSString *studentName = nil;
+
+    NSArray *cliniciansArrayWithMyInfo = [self fetchObjectsFromEntity:@"ClinicianEntity" filterPredicate:[NSPredicate predicateWithFormat:@"myInformation== %@",[NSNumber numberWithBool:YES]]];
+
+    if (cliniciansArrayWithMyInfo && cliniciansArrayWithMyInfo.count)
+    {
+        int clinicianCount = cliniciansArrayWithMyInfo.count;
+
+        if (clinicianCount > 1)
+        {
             //there should only be one
-           
-            
-            for (ClinicianEntity *clinicianInArray in cliniciansArrayWithMyInfo) {
-               
+
+            for (ClinicianEntity *clinicianInArray in cliniciansArrayWithMyInfo)
+            {
                 //try to find the right one
-                if ([clinicianInArray.firstName isEqualToString:@"Enter Your"]) {
-                    studentName=clinicianInArray.combinedName;
+                if ([clinicianInArray.firstName isEqualToString:@"Enter Your"])
+                {
+                    studentName = clinicianInArray.combinedName;
                     break;
                 }
-                
-                
-                
             }
 
-            if ((!studentName ||!studentName.length )&&cliniciansArrayWithMyInfo && cliniciansArrayWithMyInfo.count) {
-                ClinicianEntity *clinicianInArray=[cliniciansArrayWithMyInfo objectAtIndex:0];
-                studentName=clinicianInArray.combinedName;
-                
-                
+            if ( (!studentName || !studentName.length) && cliniciansArrayWithMyInfo && cliniciansArrayWithMyInfo.count )
+            {
+                ClinicianEntity *clinicianInArray = [cliniciansArrayWithMyInfo objectAtIndex:0];
+                studentName = clinicianInArray.combinedName;
             }
-            
-            
-            
         }
-        else if (cliniciansArrayWithMyInfo&& cliniciansArrayWithMyInfo.count) {
-           
-            ClinicianEntity *clinicianInArray=[cliniciansArrayWithMyInfo objectAtIndex:0];
-            studentName=clinicianInArray.combinedName;
+        else if (cliniciansArrayWithMyInfo && cliniciansArrayWithMyInfo.count)
+        {
+            ClinicianEntity *clinicianInArray = [cliniciansArrayWithMyInfo objectAtIndex:0];
+            studentName = clinicianInArray.combinedName;
         }
-        
     }
 
     return studentName;
-
 }
--(NSSet *)cliniciansFromTrackArray:(NSArray *)trackArray{
-    NSPredicate *predicateForTrackEntitiesForMonth=nil;
-    
-    if (monthToDisplay_) {
-         predicateForTrackEntitiesForMonth=[self predicateForTrackCurrentMonth];
-    }
-      
-    
-    NSArray *trackArrayForCurrentMonth=nil;
-    if (trackArray&& [trackArray isKindOfClass:[NSArray class]] &&  trackArray.count &&predicateForTrackEntitiesForMonth) {
-        trackArrayForCurrentMonth=[trackArray filteredArrayUsingPredicate:predicateForTrackEntitiesForMonth];
-        
-    }
-    else{
-    
-        trackArrayForCurrentMonth=trackArray;
-    }
-    
-    NSMutableSet *supervisorsSet=nil;
-    if (trackArrayForCurrentMonth &&trackArrayForCurrentMonth.count) {
-        
-        supervisorsSet=[trackArrayForCurrentMonth mutableSetValueForKey:@"supervisor"];
-                
+
+
+- (NSSet *) cliniciansFromTrackArray:(NSArray *)trackArray
+{
+    NSPredicate *predicateForTrackEntitiesForMonth = nil;
+
+    if (monthToDisplay_)
+    {
+        predicateForTrackEntitiesForMonth = [self predicateForTrackCurrentMonth];
     }
 
-    
-    
+    NSArray *trackArrayForCurrentMonth = nil;
+    if (trackArray && [trackArray isKindOfClass:[NSArray class]] && trackArray.count && predicateForTrackEntitiesForMonth)
+    {
+        trackArrayForCurrentMonth = [trackArray filteredArrayUsingPredicate:predicateForTrackEntitiesForMonth];
+    }
+    else
+    {
+        trackArrayForCurrentMonth = trackArray;
+    }
+
+    NSMutableSet *supervisorsSet = nil;
+    if (trackArrayForCurrentMonth && trackArrayForCurrentMonth.count)
+    {
+        supervisorsSet = [trackArrayForCurrentMonth mutableSetValueForKey:@"supervisor"];
+    }
+
     return supervisorsSet;
-
 }
 
--(NSSet *)cliniciansFromExistingHoursArray:(NSArray *)existingHoursArrayGiven{
-    
-    NSPredicate *predicateForExistingEntitiesForMonth=nil;
-    if (monthToDisplay_) {
-        predicateForExistingEntitiesForMonth=[self predicateForExistingHoursCurrentMonth];
+
+- (NSSet *) cliniciansFromExistingHoursArray:(NSArray *)existingHoursArrayGiven
+{
+    NSPredicate *predicateForExistingEntitiesForMonth = nil;
+    if (monthToDisplay_)
+    {
+        predicateForExistingEntitiesForMonth = [self predicateForExistingHoursCurrentMonth];
     }
- 
-    
-    NSArray *existingArrayForCurrentMonth=nil;
-    if (existingHoursArrayGiven&& [existingHoursArrayGiven isKindOfClass:[NSArray class]] &&  existingHoursArrayGiven.count &&predicateForExistingEntitiesForMonth) {
-        existingArrayForCurrentMonth=[existingHoursArrayGiven filteredArrayUsingPredicate:predicateForExistingEntitiesForMonth];
-        
+
+    NSArray *existingArrayForCurrentMonth = nil;
+    if (existingHoursArrayGiven && [existingHoursArrayGiven isKindOfClass:[NSArray class]] && existingHoursArrayGiven.count && predicateForExistingEntitiesForMonth)
+    {
+        existingArrayForCurrentMonth = [existingHoursArrayGiven filteredArrayUsingPredicate:predicateForExistingEntitiesForMonth];
     }
-    else{
-    
-        existingArrayForCurrentMonth=existingHoursArrayGiven;
+    else
+    {
+        existingArrayForCurrentMonth = existingHoursArrayGiven;
     }
-    
-    
-    
-    NSMutableSet *supervisorsSet=nil;
-    if (existingArrayForCurrentMonth &&existingArrayForCurrentMonth.count) {
-        
-        supervisorsSet=[existingArrayForCurrentMonth mutableSetValueForKey:@"supervisor"];
-        
+
+    NSMutableSet *supervisorsSet = nil;
+    if (existingArrayForCurrentMonth && existingArrayForCurrentMonth.count)
+    {
+        supervisorsSet = [existingArrayForCurrentMonth mutableSetValueForKey:@"supervisor"];
     }
-    
-    
+
     return supervisorsSet;
-    
 }
 
--(NSString *)practicumSitesStr{
 
-    NSString *returnString=nil;
-    NSPredicate *predicateForCurrentMonth=nil;
-    if (monthToDisplay_) {
-       predicateForCurrentMonth=[self predicateForTrackCurrentMonth];
+- (NSString *) practicumSitesStr
+{
+    NSString *returnString = nil;
+    NSPredicate *predicateForCurrentMonth = nil;
+    if (monthToDisplay_)
+    {
+        predicateForCurrentMonth = [self predicateForTrackCurrentMonth];
     }
-    
-    
-    NSArray *trackArray=[self fetchObjectsFromEntity:@"TimeTrackEntity" filterPredicate:predicateForCurrentMonth pathsForPrefetching:[NSArray arrayWithObject:@"site"]];
 
-   
-    
-       NSMutableArray *siteObjectArray=[NSMutableArray array];
-    
-    for (TimeTrackEntity *trackInArray in trackArray) {
-        SiteEntity *site=trackInArray.site;
-        
-        if (site &&  ![siteObjectArray containsObject:site]) {
+    NSArray *trackArray = [self fetchObjectsFromEntity:@"TimeTrackEntity" filterPredicate:predicateForCurrentMonth pathsForPrefetching:[NSArray arrayWithObject:@"site"]];
+
+    NSMutableArray *siteObjectArray = [NSMutableArray array];
+
+    for (TimeTrackEntity *trackInArray in trackArray)
+    {
+        SiteEntity *site = trackInArray.site;
+
+        if (site && ![siteObjectArray containsObject:site])
+        {
             [siteObjectArray addObject:site];
         }
-        
-        
-    }
-    
-    
-    
-    
- NSMutableArray *siteNamesArray=nil;
-    if (siteObjectArray && siteObjectArray.count) {
-        self.numberOfSites=siteObjectArray.count;
-        siteNamesArray=[siteObjectArray mutableArrayValueForKeyPath:@"siteName"];
     }
 
-    
-    if (siteNamesArray&&siteNamesArray.count) {
-        
-               
-        
-        
-        for (NSString *siteName in siteNamesArray) {
-            
-            if (!returnString||!returnString.length) {
-            
-                
-                returnString=siteName;
+    NSMutableArray *siteNamesArray = nil;
+    if (siteObjectArray && siteObjectArray.count)
+    {
+        self.numberOfSites = siteObjectArray.count;
+        siteNamesArray = [siteObjectArray mutableArrayValueForKeyPath:@"siteName"];
+    }
+
+    if (siteNamesArray && siteNamesArray.count)
+    {
+        for (NSString *siteName in siteNamesArray)
+        {
+            if (!returnString || !returnString.length)
+            {
+                returnString = siteName;
             }
-            else {
-                returnString=[returnString stringByAppendingFormat:@"; %@",siteName];
+            else
+            {
+                returnString = [returnString stringByAppendingFormat:@"; %@",siteName];
             }
-            
         }
     }
-    
-    
-    return returnString;
 
+    return returnString;
 }
--(NSArray *)fetchObjectsFromEntity:(NSString *)entityStr filterPredicate:(NSPredicate *)filterPredicate pathsForPrefetching:(NSArray *)pathsForPrefetching {
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    
-    
-    
+
+
+- (NSArray *) fetchObjectsFromEntity:(NSString *)entityStr filterPredicate:(NSPredicate *)filterPredicate pathsForPrefetching:(NSArray *)pathsForPrefetching
+{
+    PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    
-    
-    
+
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityStr inManagedObjectContext:appDelegate.managedObjectContext];
-    
+
     [fetchRequest setEntity:entity];
     [fetchRequest setRelationshipKeyPathsForPrefetching:
      pathsForPrefetching];
-    
-    
-    if (filterPredicate) {
+
+    if (filterPredicate)
+    {
         [fetchRequest setPredicate:filterPredicate];
     }
-   
-  
-    if (![entityStr isEqualToString:@"ExistingHoursEntity"]) {
-       NSSortDescriptor *sortDescriptor = sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order"
-                                                                       ascending:YES];
-        
+
+    if (![entityStr isEqualToString:@"ExistingHoursEntity"])
+    {
+        NSSortDescriptor *sortDescriptor = sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order"
+                                                                                        ascending:YES];
+
         NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
         [fetchRequest setSortDescriptors:sortDescriptors];
-        sortDescriptor=nil;
-        sortDescriptors=nil;
+        sortDescriptor = nil;
+        sortDescriptors = nil;
     }
-   
-   
-    
+
     NSError *error = nil;
     NSArray *fetchedObjects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    fetchRequest=nil;
+    fetchRequest = nil;
 
     return fetchedObjects;
-    
 }
 
 
--(NSArray *)supervisorsArray{
+- (NSArray *) supervisorsArray
+{
+    NSMutableSet *combinedCliniciansMutableSet = [NSMutableSet set];
 
-    
-  
-    
-    NSMutableSet *combinedCliniciansMutableSet=[NSMutableSet set];
-    
-    NSSet *cliniciansSetFromInterventions=[self cliniciansFromTrackArray:self.interventionsDeliveredArray.allObjects];
-    
-    NSSet *clinicianSetFromAssessments=[self cliniciansFromTrackArray:self.assessmentsDeliveredArray.allObjects ];
-    
-    NSSet *clinicianSetFromSupport=[self cliniciansFromTrackArray:self.supportActivityDeliveredArray.allObjects];
-    
-    NSSet *clinicianSetFromSupervision=[self cliniciansFromTrackArray:self.supervisionReceivedArray.allObjects ];
-    
-    NSSet * clinicianSetFromExistingHours=[self cliniciansFromExistingHoursArray:self.existingHoursArray];
-    
-      
+    NSSet *cliniciansSetFromInterventions = [self cliniciansFromTrackArray:self.interventionsDeliveredArray.allObjects];
+
+    NSSet *clinicianSetFromAssessments = [self cliniciansFromTrackArray:self.assessmentsDeliveredArray.allObjects ];
+
+    NSSet *clinicianSetFromSupport = [self cliniciansFromTrackArray:self.supportActivityDeliveredArray.allObjects];
+
+    NSSet *clinicianSetFromSupervision = [self cliniciansFromTrackArray:self.supervisionReceivedArray.allObjects ];
+
+    NSSet *clinicianSetFromExistingHours = [self cliniciansFromExistingHoursArray:self.existingHoursArray];
+
     //to avoid duplicates
-    
-    if (cliniciansSetFromInterventions) {
+
+    if (cliniciansSetFromInterventions)
+    {
         [combinedCliniciansMutableSet addObjectsFromArray:cliniciansSetFromInterventions.allObjects];
     }
-   
-    if (clinicianSetFromAssessments) {
+
+    if (clinicianSetFromAssessments)
+    {
         [combinedCliniciansMutableSet addObjectsFromArray:clinicianSetFromAssessments.allObjects];
     }
-    
-    if (clinicianSetFromSupport) {
 
-
+    if (clinicianSetFromSupport)
+    {
         [combinedCliniciansMutableSet addObjectsFromArray:clinicianSetFromSupport.allObjects];
     }
-    
-    if (clinicianSetFromSupervision) {
-        [combinedCliniciansMutableSet addObjectsFromArray:clinicianSetFromSupervision.allObjects];   
+
+    if (clinicianSetFromSupervision)
+    {
+        [combinedCliniciansMutableSet addObjectsFromArray:clinicianSetFromSupervision.allObjects];
     }
-    if (clinicianSetFromExistingHours) {
-       
+
+    if (clinicianSetFromExistingHours)
+    {
         [combinedCliniciansMutableSet addObjectsFromArray:clinicianSetFromExistingHours.allObjects];
-    
-    } 
-       return combinedCliniciansMutableSet.allObjects;
+    }
 
+    return combinedCliniciansMutableSet.allObjects;
 }
 
 
+- (void) calculateDirectlHours
+{
+    self.directTotalWeek1TI = self.interventionTotalWeek1TI + self.assessmentTotalWeek1TI;
+    self.directTotalWeek2TI = self.interventionTotalWeek2TI + self.assessmentTotalWeek2TI;
+    self.directTotalWeek3TI = self.interventionTotalWeek3TI + self.assessmentTotalWeek3TI;
+    self.directTotalWeek4TI = self.interventionTotalWeek4TI + self.assessmentTotalWeek4TI;
+    self.directTotalWeek5TI = self.interventionTotalWeek5TI + self.assessmentTotalWeek5TI;
+    self.directTotalWeekUndefinedTI = self.interventionTotalWeekUndefinedTI + self.assessmentTotalWeekUndefinedTI;
+    self.directTotalForMonthTI = self.interventionTotalForMonthTI + self.assessmentTotalForMonthTI;
+    self.directTotalCummulativeTI = self.interventionTotalCummulativeTI + self.assessmentTotalCummulativeTI;
+    self.directTotalToDateTI = self.interventionTotalToDateTI + self.assessmentTotalToDateTI;
 
--(void ) calculateDirectlHours{
-
-
-    self.directTotalWeek1TI=self.interventionTotalWeek1TI+self.assessmentTotalWeek1TI;
-    self.directTotalWeek2TI=self.interventionTotalWeek2TI+self.assessmentTotalWeek2TI;
-    self.directTotalWeek3TI=self.interventionTotalWeek3TI+self.assessmentTotalWeek3TI;
-    self.directTotalWeek4TI=self.interventionTotalWeek4TI+self.assessmentTotalWeek4TI;
-    self.directTotalWeek5TI=self.interventionTotalWeek5TI+self.assessmentTotalWeek5TI;
-    self.directTotalWeekUndefinedTI=self.interventionTotalWeekUndefinedTI+self.assessmentTotalWeekUndefinedTI;
-    self.directTotalForMonthTI=self.interventionTotalForMonthTI+self.assessmentTotalForMonthTI;
-    self.directTotalCummulativeTI=self.interventionTotalCummulativeTI+self.assessmentTotalCummulativeTI;
-    self.directTotalToDateTI=self.interventionTotalToDateTI+self.assessmentTotalToDateTI;
-    
-
-    self.directTotalWeek1Str=[self timeStrFromTimeInterval: self.directTotalWeek1TI]; 
-    self.directTotalWeek2Str=[self timeStrFromTimeInterval: self.directTotalWeek2TI]; 
-    self.directTotalWeek3Str=[self timeStrFromTimeInterval: self.directTotalWeek3TI]; 
-    self.directTotalWeek4Str=[self timeStrFromTimeInterval: self.directTotalWeek4TI]; 
-    self.directTotalWeek5Str=[self timeStrFromTimeInterval: self.directTotalWeek5TI]; 
-    self.directTotalWeekUndefinedStr=[self timeStrFromTimeInterval: self.directTotalWeekUndefinedTI]; 
-    self.directTotalForMonthStr =[self timeStrFromTimeInterval: self.directTotalForMonthTI]; 
-    self.directTotalCummulativeStr=[self timeStrFromTimeInterval: self.directTotalCummulativeTI]; 
-    self.directTotalToDateStr=[self timeStrFromTimeInterval: self.directTotalToDateTI]; 
-
-
-
+    self.directTotalWeek1Str = [self timeStrFromTimeInterval:self.directTotalWeek1TI];
+    self.directTotalWeek2Str = [self timeStrFromTimeInterval:self.directTotalWeek2TI];
+    self.directTotalWeek3Str = [self timeStrFromTimeInterval:self.directTotalWeek3TI];
+    self.directTotalWeek4Str = [self timeStrFromTimeInterval:self.directTotalWeek4TI];
+    self.directTotalWeek5Str = [self timeStrFromTimeInterval:self.directTotalWeek5TI];
+    self.directTotalWeekUndefinedStr = [self timeStrFromTimeInterval:self.directTotalWeekUndefinedTI];
+    self.directTotalForMonthStr = [self timeStrFromTimeInterval:self.directTotalForMonthTI];
+    self.directTotalCummulativeStr = [self timeStrFromTimeInterval:self.directTotalCummulativeTI];
+    self.directTotalToDateStr = [self timeStrFromTimeInterval:self.directTotalToDateTI];
 }
 
--(NSTimeInterval ) totalOverallHoursTIForOveralCell:(PTSummaryCell)summaryCell clinician:(ClinicianEntity *)clinician{
-    
-    NSPredicate *trackPredicate=nil;
-    NSPredicate *existingHoursPredicate=nil;
-    
-    switch (summaryCell) {
-        case kSummaryWeekOne:
-        {
-            trackPredicate=[self predicateForTrackWeek:kTrackWeekOne];
-            existingHoursPredicate=[self predicateForExistingHoursWeek:kTrackWeekOne];
-        }
+
+- (NSTimeInterval) totalOverallHoursTIForOveralCell:(PTSummaryCell)summaryCell clinician:(ClinicianEntity *)clinician
+{
+    NSPredicate *trackPredicate = nil;
+    NSPredicate *existingHoursPredicate = nil;
+
+    switch (summaryCell)
+    {
+        case kSummaryWeekOne :
+            {
+                trackPredicate = [self predicateForTrackWeek:kTrackWeekOne];
+                existingHoursPredicate = [self predicateForExistingHoursWeek:kTrackWeekOne];
+            }
             break;
         case kSummaryWeekTwo:
         {
-            trackPredicate=[self predicateForTrackWeek:kTrackWeekTwo];
-            existingHoursPredicate=[self predicateForExistingHoursWeek:kTrackWeekTwo];
+            trackPredicate = [self predicateForTrackWeek:kTrackWeekTwo];
+            existingHoursPredicate = [self predicateForExistingHoursWeek:kTrackWeekTwo];
         }
-            break;
+        break;
         case kSummaryWeekThree:
         {
-            trackPredicate=[self predicateForTrackWeek:kTrackWeekThree];
-            existingHoursPredicate=[self predicateForExistingHoursWeek:kTrackWeekThree];
+            trackPredicate = [self predicateForTrackWeek:kTrackWeekThree];
+            existingHoursPredicate = [self predicateForExistingHoursWeek:kTrackWeekThree];
         }
-            break;
+        break;
         case kSummaryWeekFour:
         {
-            trackPredicate=[self predicateForTrackWeek:kTrackWeekFour];
-            existingHoursPredicate=[self predicateForExistingHoursWeek:kTrackWeekFour];
+            trackPredicate = [self predicateForTrackWeek:kTrackWeekFour];
+            existingHoursPredicate = [self predicateForExistingHoursWeek:kTrackWeekFour];
         }
-            break;
+        break;
         case kSummaryWeekFive:
         {
-            trackPredicate=[self predicateForTrackWeek:kTrackWeekFive];
-            existingHoursPredicate=[self predicateForExistingHoursWeek:kTrackWeekFive];
+            trackPredicate = [self predicateForTrackWeek:kTrackWeekFive];
+            existingHoursPredicate = [self predicateForExistingHoursWeek:kTrackWeekFive];
         }
-            break;
+        break;
         case kSummaryWeekUndefined:
         {
-            
-            existingHoursPredicate=[self predicateForExistingHoursWeekUndefined];
-            
+            existingHoursPredicate = [self predicateForExistingHoursWeekUndefined];
         }
-            break;
+        break;
         case kSummaryTotalForMonth:
         {
-            trackPredicate=[self predicateForTrackCurrentMonth];
-            existingHoursPredicate=[self predicateForExistingHoursCurrentMonth];
+            trackPredicate = [self predicateForTrackCurrentMonth];
+            existingHoursPredicate = [self predicateForExistingHoursCurrentMonth];
         }
-            break;
+        break;
         case kSummaryCummulative:
         {
-             trackPredicate=[self priorMonthsHoursPredicate];
-             existingHoursPredicate=[self predicateForExistingHoursAllBeforeEndDate:monthStartDate_ ];
+            trackPredicate = [self priorMonthsHoursPredicate];
+            existingHoursPredicate = [self predicateForExistingHoursAllBeforeEndDate:monthStartDate_ ];
         }
-            break;
+        break;
         case kSummaryTotalToDate:
         {
-            trackPredicate=nil;
-            existingHoursPredicate=nil;
+            trackPredicate = nil;
+            existingHoursPredicate = nil;
         }
-            break;
-            
+        break;
+
         default:
             break;
-    }
-    
-    
-    NSTimeInterval trackTotalInterventionTimeInterval=0;
-    NSTimeInterval trackTotalAssessmentInterval=0;
-    NSTimeInterval trackTotalSupportTimeInterval=0;
-    NSTimeInterval trackTotalSupervisionReceivedTimeInterval=0;
-    
-     
-  
-    if (summaryCell!= kSummaryWeekUndefined) {
-    
-            trackTotalInterventionTimeInterval=[self totalTimeIntervalForTrackArray:self.interventionsDeliveredArray predicate:trackPredicate];
-            
-                
-            
-            trackTotalAssessmentInterval=[self totalTimeIntervalForTrackArray:self.assessmentsDeliveredArray predicate:trackPredicate];;
-            
-               
-            trackTotalSupportTimeInterval=[self totalTimeIntervalForTrackArray:self.supportActivityDeliveredArray predicate:trackPredicate];
-            
-           
-            
-            trackTotalSupervisionReceivedTimeInterval=[self totalTimeIntervalForTrackArray:self.supervisionReceivedArray predicate:trackPredicate];
-    
-    }
-    
-    
-    NSArray *filteredExistingHoursArray=nil;
-   
-       if (existingHoursPredicate &&existingHoursArray_ &&existingHoursArray_.count) {
-        
-           
-           filteredExistingHoursArray=[existingHoursArray_ filteredArrayUsingPredicate:existingHoursPredicate];
-        
+    } /* switch */
 
-    }
-    else {
-        filteredExistingHoursArray=existingHoursArray_; //unfiltered
-    }
-     
-   
+    NSTimeInterval trackTotalInterventionTimeInterval = 0;
+    NSTimeInterval trackTotalAssessmentInterval = 0;
+    NSTimeInterval trackTotalSupportTimeInterval = 0;
+    NSTimeInterval trackTotalSupervisionReceivedTimeInterval = 0;
 
+    if (summaryCell != kSummaryWeekUndefined)
+    {
+        trackTotalInterventionTimeInterval = [self totalTimeIntervalForTrackArray:self.interventionsDeliveredArray predicate:trackPredicate];
 
-    NSTimeInterval totalExistingInterventionsTI=[self totalTimeIntervalForExistingHoursArray:filteredExistingHoursArray keyPath:kTrackKeyPathForExistingHoursInterventionHours];
-            
-    NSTimeInterval totalExistingAssessmentsTI=[self totalTimeIntervalForExistingHoursArray:filteredExistingHoursArray keyPath:kTrackKeyPathForExistingHoursAssessmentHours];
-    
-    
-    
-    NSTimeInterval totalExistingSupportTI=[self totalTimeIntervalForExistingHoursArray:filteredExistingHoursArray keyPath:kTrackKeyPathForExistingHoursSupportActivityHours];
-    
-    
-    NSTimeInterval totalExistingSupervisionReceivedTI=[self totalTimeIntervalForExistingHoursArray:filteredExistingHoursArray keyPath:kTrackKeyPathForExistingHoursSupervisionReceivedHours];
-    
-    NSTimeInterval overallTotalTI=0;
-    
-    switch (summaryCell) {
+        trackTotalAssessmentInterval = [self totalTimeIntervalForTrackArray:self.assessmentsDeliveredArray predicate:trackPredicate];
+
+        trackTotalSupportTimeInterval = [self totalTimeIntervalForTrackArray:self.supportActivityDeliveredArray predicate:trackPredicate];
+
+        trackTotalSupervisionReceivedTimeInterval = [self totalTimeIntervalForTrackArray:self.supervisionReceivedArray predicate:trackPredicate];
+    }
+
+    NSArray *filteredExistingHoursArray = nil;
+
+    if (existingHoursPredicate && existingHoursArray_ && existingHoursArray_.count)
+    {
+        filteredExistingHoursArray = [existingHoursArray_ filteredArrayUsingPredicate:existingHoursPredicate];
+    }
+    else
+    {
+        filteredExistingHoursArray = existingHoursArray_; //unfiltered
+    }
+
+    NSTimeInterval totalExistingInterventionsTI = [self totalTimeIntervalForExistingHoursArray:filteredExistingHoursArray keyPath:kTrackKeyPathForExistingHoursInterventionHours];
+
+    NSTimeInterval totalExistingAssessmentsTI = [self totalTimeIntervalForExistingHoursArray:filteredExistingHoursArray keyPath:kTrackKeyPathForExistingHoursAssessmentHours];
+
+    NSTimeInterval totalExistingSupportTI = [self totalTimeIntervalForExistingHoursArray:filteredExistingHoursArray keyPath:kTrackKeyPathForExistingHoursSupportActivityHours];
+
+    NSTimeInterval totalExistingSupervisionReceivedTI = [self totalTimeIntervalForExistingHoursArray:filteredExistingHoursArray keyPath:kTrackKeyPathForExistingHoursSupervisionReceivedHours];
+
+    NSTimeInterval overallTotalTI = 0;
+
+    switch (summaryCell)
+    {
         case kSummaryWeekOne:
         {
-            self.interventionTotalWeek1TI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
-            self.assessmentTotalWeek1TI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
-            self.supportTotalWeek1TI=trackTotalSupportTimeInterval+totalExistingSupportTI;
-            self.supervisionTotalWeek1TI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
-            
-            
-            overallTotalTI =self.interventionTotalWeek1TI+self.assessmentTotalWeek1TI+self.supportTotalWeek1TI+self.supervisionTotalWeek1TI;
-            
-            self.interventionTotalWeek1Str=[self totalTimeStr:self.interventionTotalWeek1TI];
-            self.assessmentTotalWeek1Str=[self totalTimeStr:self.assessmentTotalWeek1TI];
-            self.supportTotalWeek1Str=[self totalTimeStr:self.supportTotalWeek1TI];
-            self.supervisionTotalWeek1Str=[self totalTimeStr:self.supervisionTotalWeek1TI];
-            self.overallTotalWeek1Str=[self totalTimeStr:overallTotalTI];
-            
+            self.interventionTotalWeek1TI = trackTotalInterventionTimeInterval + totalExistingInterventionsTI;
+            self.assessmentTotalWeek1TI = trackTotalAssessmentInterval + totalExistingAssessmentsTI;
+            self.supportTotalWeek1TI = trackTotalSupportTimeInterval + totalExistingSupportTI;
+            self.supervisionTotalWeek1TI = trackTotalSupervisionReceivedTimeInterval + totalExistingSupervisionReceivedTI;
 
+            overallTotalTI = self.interventionTotalWeek1TI + self.assessmentTotalWeek1TI + self.supportTotalWeek1TI + self.supervisionTotalWeek1TI;
+
+            self.interventionTotalWeek1Str = [self totalTimeStr:self.interventionTotalWeek1TI];
+            self.assessmentTotalWeek1Str = [self totalTimeStr:self.assessmentTotalWeek1TI];
+            self.supportTotalWeek1Str = [self totalTimeStr:self.supportTotalWeek1TI];
+            self.supervisionTotalWeek1Str = [self totalTimeStr:self.supervisionTotalWeek1TI];
+            self.overallTotalWeek1Str = [self totalTimeStr:overallTotalTI];
         }
-            break;
+        break;
         case kSummaryWeekTwo:
         {
-            self.interventionTotalWeek2TI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
-            self.assessmentTotalWeek2TI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
-            self.supportTotalWeek2TI=trackTotalSupportTimeInterval+totalExistingSupportTI;
-            self.supervisionTotalWeek2TI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
-            
-            
-            overallTotalTI =self.interventionTotalWeek2TI+self.assessmentTotalWeek2TI+self.supportTotalWeek2TI+self.supervisionTotalWeek2TI;
-            
-            self.interventionTotalWeek2Str=[self totalTimeStr:self.interventionTotalWeek2TI];
-            self.assessmentTotalWeek2Str=[self totalTimeStr:self.assessmentTotalWeek2TI];
-            self.supportTotalWeek2Str=[self totalTimeStr:self.supportTotalWeek2TI];
-            self.supervisionTotalWeek2Str=[self totalTimeStr:self.supervisionTotalWeek2TI];
-            self.overallTotalWeek2Str=[self totalTimeStr:overallTotalTI];
-            
-            
+            self.interventionTotalWeek2TI = trackTotalInterventionTimeInterval + totalExistingInterventionsTI;
+            self.assessmentTotalWeek2TI = trackTotalAssessmentInterval + totalExistingAssessmentsTI;
+            self.supportTotalWeek2TI = trackTotalSupportTimeInterval + totalExistingSupportTI;
+            self.supervisionTotalWeek2TI = trackTotalSupervisionReceivedTimeInterval + totalExistingSupervisionReceivedTI;
+
+            overallTotalTI = self.interventionTotalWeek2TI + self.assessmentTotalWeek2TI + self.supportTotalWeek2TI + self.supervisionTotalWeek2TI;
+
+            self.interventionTotalWeek2Str = [self totalTimeStr:self.interventionTotalWeek2TI];
+            self.assessmentTotalWeek2Str = [self totalTimeStr:self.assessmentTotalWeek2TI];
+            self.supportTotalWeek2Str = [self totalTimeStr:self.supportTotalWeek2TI];
+            self.supervisionTotalWeek2Str = [self totalTimeStr:self.supervisionTotalWeek2TI];
+            self.overallTotalWeek2Str = [self totalTimeStr:overallTotalTI];
         }
-            break;
+        break;
         case kSummaryWeekThree:
         {
-            self.interventionTotalWeek3TI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
-            self.assessmentTotalWeek3TI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
-            self.supportTotalWeek3TI=trackTotalSupportTimeInterval+totalExistingSupportTI;
-            self.supervisionTotalWeek3TI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
-            
-            
-            overallTotalTI =self.interventionTotalWeek3TI+self.assessmentTotalWeek3TI+self.supportTotalWeek3TI+self.supervisionTotalWeek3TI;
-            
-            self.interventionTotalWeek3Str=[self totalTimeStr:self.interventionTotalWeek3TI];
-            self.assessmentTotalWeek3Str=[self totalTimeStr:self.assessmentTotalWeek3TI];
-            self.supportTotalWeek3Str=[self totalTimeStr:self.supportTotalWeek3TI];
-            self.supervisionTotalWeek3Str=[self totalTimeStr:self.supervisionTotalWeek3TI];
-            self.overallTotalWeek3Str=[self totalTimeStr:overallTotalTI];
+            self.interventionTotalWeek3TI = trackTotalInterventionTimeInterval + totalExistingInterventionsTI;
+            self.assessmentTotalWeek3TI = trackTotalAssessmentInterval + totalExistingAssessmentsTI;
+            self.supportTotalWeek3TI = trackTotalSupportTimeInterval + totalExistingSupportTI;
+            self.supervisionTotalWeek3TI = trackTotalSupervisionReceivedTimeInterval + totalExistingSupervisionReceivedTI;
+
+            overallTotalTI = self.interventionTotalWeek3TI + self.assessmentTotalWeek3TI + self.supportTotalWeek3TI + self.supervisionTotalWeek3TI;
+
+            self.interventionTotalWeek3Str = [self totalTimeStr:self.interventionTotalWeek3TI];
+            self.assessmentTotalWeek3Str = [self totalTimeStr:self.assessmentTotalWeek3TI];
+            self.supportTotalWeek3Str = [self totalTimeStr:self.supportTotalWeek3TI];
+            self.supervisionTotalWeek3Str = [self totalTimeStr:self.supervisionTotalWeek3TI];
+            self.overallTotalWeek3Str = [self totalTimeStr:overallTotalTI];
         }
-            break;
+        break;
         case kSummaryWeekFour:
         {
-            self.interventionTotalWeek4TI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
-            self.assessmentTotalWeek4TI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
-            self.supportTotalWeek4TI=trackTotalSupportTimeInterval+totalExistingSupportTI;
-            self.supervisionTotalWeek4TI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
-            
-            
-            overallTotalTI =self.interventionTotalWeek4TI+self.assessmentTotalWeek4TI+self.supportTotalWeek4TI+self.supervisionTotalWeek4TI;
+            self.interventionTotalWeek4TI = trackTotalInterventionTimeInterval + totalExistingInterventionsTI;
+            self.assessmentTotalWeek4TI = trackTotalAssessmentInterval + totalExistingAssessmentsTI;
+            self.supportTotalWeek4TI = trackTotalSupportTimeInterval + totalExistingSupportTI;
+            self.supervisionTotalWeek4TI = trackTotalSupervisionReceivedTimeInterval + totalExistingSupervisionReceivedTI;
 
-            self.interventionTotalWeek4Str=[self totalTimeStr:self.interventionTotalWeek4TI];
-            self.assessmentTotalWeek4Str=[self totalTimeStr:self.assessmentTotalWeek4TI];
-            self.supportTotalWeek4Str=[self totalTimeStr:self.supportTotalWeek4TI];
-            self.supervisionTotalWeek4Str=[self totalTimeStr:self.supervisionTotalWeek4TI];
-            self.overallTotalWeek4Str=[self totalTimeStr:overallTotalTI];
+            overallTotalTI = self.interventionTotalWeek4TI + self.assessmentTotalWeek4TI + self.supportTotalWeek4TI + self.supervisionTotalWeek4TI;
+
+            self.interventionTotalWeek4Str = [self totalTimeStr:self.interventionTotalWeek4TI];
+            self.assessmentTotalWeek4Str = [self totalTimeStr:self.assessmentTotalWeek4TI];
+            self.supportTotalWeek4Str = [self totalTimeStr:self.supportTotalWeek4TI];
+            self.supervisionTotalWeek4Str = [self totalTimeStr:self.supervisionTotalWeek4TI];
+            self.overallTotalWeek4Str = [self totalTimeStr:overallTotalTI];
         }
-            break;
+        break;
         case kSummaryWeekFive:
         {
-            self.interventionTotalWeek5TI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
-            self.assessmentTotalWeek5TI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
-            self.supportTotalWeek5TI=trackTotalSupportTimeInterval+totalExistingSupportTI;
-            self.supervisionTotalWeek5TI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
-            
-            
-            overallTotalTI =self.interventionTotalWeek5TI+self.assessmentTotalWeek5TI+self.supportTotalWeek5TI+self.supervisionTotalWeek5TI;
-            
-            self.interventionTotalWeek5Str=[self totalTimeStr:self.interventionTotalWeek5TI];
-            self.assessmentTotalWeek5Str=[self totalTimeStr:self.assessmentTotalWeek5TI];
-            self.supportTotalWeek5Str=[self totalTimeStr:self.supportTotalWeek5TI];
-            self.supervisionTotalWeek5Str=[self totalTimeStr:self.supervisionTotalWeek5TI];
-            self.overallTotalWeek5Str=[self totalTimeStr:overallTotalTI];
-            
+            self.interventionTotalWeek5TI = trackTotalInterventionTimeInterval + totalExistingInterventionsTI;
+            self.assessmentTotalWeek5TI = trackTotalAssessmentInterval + totalExistingAssessmentsTI;
+            self.supportTotalWeek5TI = trackTotalSupportTimeInterval + totalExistingSupportTI;
+            self.supervisionTotalWeek5TI = trackTotalSupervisionReceivedTimeInterval + totalExistingSupervisionReceivedTI;
+
+            overallTotalTI = self.interventionTotalWeek5TI + self.assessmentTotalWeek5TI + self.supportTotalWeek5TI + self.supervisionTotalWeek5TI;
+
+            self.interventionTotalWeek5Str = [self totalTimeStr:self.interventionTotalWeek5TI];
+            self.assessmentTotalWeek5Str = [self totalTimeStr:self.assessmentTotalWeek5TI];
+            self.supportTotalWeek5Str = [self totalTimeStr:self.supportTotalWeek5TI];
+            self.supervisionTotalWeek5Str = [self totalTimeStr:self.supervisionTotalWeek5TI];
+            self.overallTotalWeek5Str = [self totalTimeStr:overallTotalTI];
         }
-            break;
+        break;
         case kSummaryWeekUndefined:
         {
-            self.interventionTotalWeekUndefinedTI=totalExistingInterventionsTI;
-            self.assessmentTotalWeekUndefinedTI=totalExistingAssessmentsTI;
-            
-            
-            self.supportTotalWeekUndefinedTI=totalExistingSupportTI;
-            self.supervisionTotalWeekUndefinedTI=totalExistingSupervisionReceivedTI;
-            
-            
-            overallTotalTI =self.interventionTotalWeekUndefinedTI+self.assessmentTotalWeekUndefinedTI+self.supportTotalWeekUndefinedTI+self.supervisionTotalWeekUndefinedTI;
-            
-            self.interventionTotalWeekUndefinedStr=[self totalTimeStr:self.interventionTotalWeekUndefinedTI];
-            self.assessmentTotalWeekUndefinedStr=[self totalTimeStr:self.assessmentTotalWeekUndefinedTI];
-            self.supportTotalWeekUndefinedStr=[self totalTimeStr:self.supportTotalWeekUndefinedTI];
-            self.supervisionTotalWeekUndefinedStr=[self totalTimeStr:self.supervisionTotalWeekUndefinedTI];
-            self.overallTotalWeekUndefinedStr=[self totalTimeStr:overallTotalTI];
-            
+            self.interventionTotalWeekUndefinedTI = totalExistingInterventionsTI;
+            self.assessmentTotalWeekUndefinedTI = totalExistingAssessmentsTI;
+
+            self.supportTotalWeekUndefinedTI = totalExistingSupportTI;
+            self.supervisionTotalWeekUndefinedTI = totalExistingSupervisionReceivedTI;
+
+            overallTotalTI = self.interventionTotalWeekUndefinedTI + self.assessmentTotalWeekUndefinedTI + self.supportTotalWeekUndefinedTI + self.supervisionTotalWeekUndefinedTI;
+
+            self.interventionTotalWeekUndefinedStr = [self totalTimeStr:self.interventionTotalWeekUndefinedTI];
+            self.assessmentTotalWeekUndefinedStr = [self totalTimeStr:self.assessmentTotalWeekUndefinedTI];
+            self.supportTotalWeekUndefinedStr = [self totalTimeStr:self.supportTotalWeekUndefinedTI];
+            self.supervisionTotalWeekUndefinedStr = [self totalTimeStr:self.supervisionTotalWeekUndefinedTI];
+            self.overallTotalWeekUndefinedStr = [self totalTimeStr:overallTotalTI];
         }
-            break;
+        break;
         case kSummaryTotalForMonth:
         {
-            self.interventionTotalForMonthTI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
-            self.assessmentTotalForMonthTI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
-            self.supportTotalForMonthTI=trackTotalSupportTimeInterval+totalExistingSupportTI;
-            self.supervisionTotalForMonthTI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
-            
-            
-            overallTotalTI =self.interventionTotalForMonthTI+self.assessmentTotalForMonthTI+self.supportTotalForMonthTI+self.supervisionTotalForMonthTI;
-            
-            self.interventionTotalForMonthStr=[self totalTimeStr:self.interventionTotalForMonthTI];
-            self.assessmentTotalForMonthStr=[self totalTimeStr:self.assessmentTotalForMonthTI];
-            self.supportTotalForMonthStr=[self totalTimeStr:self.supportTotalForMonthTI];
-            self.supervisionTotalForMonthStr=[self totalTimeStr:self.supervisionTotalForMonthTI];
-            self.overallTotalForMonthStr=[self totalTimeStr:overallTotalTI];
+            self.interventionTotalForMonthTI = trackTotalInterventionTimeInterval + totalExistingInterventionsTI;
+            self.assessmentTotalForMonthTI = trackTotalAssessmentInterval + totalExistingAssessmentsTI;
+            self.supportTotalForMonthTI = trackTotalSupportTimeInterval + totalExistingSupportTI;
+            self.supervisionTotalForMonthTI = trackTotalSupervisionReceivedTimeInterval + totalExistingSupervisionReceivedTI;
+
+            overallTotalTI = self.interventionTotalForMonthTI + self.assessmentTotalForMonthTI + self.supportTotalForMonthTI + self.supervisionTotalForMonthTI;
+
+            self.interventionTotalForMonthStr = [self totalTimeStr:self.interventionTotalForMonthTI];
+            self.assessmentTotalForMonthStr = [self totalTimeStr:self.assessmentTotalForMonthTI];
+            self.supportTotalForMonthStr = [self totalTimeStr:self.supportTotalForMonthTI];
+            self.supervisionTotalForMonthStr = [self totalTimeStr:self.supervisionTotalForMonthTI];
+            self.overallTotalForMonthStr = [self totalTimeStr:overallTotalTI];
         }
-            break;
+        break;
         case kSummaryCummulative:
         {
-            self.interventionTotalCummulativeTI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
-            self.assessmentTotalCummulativeTI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
-            self.supportTotalCummulativeTI=trackTotalSupportTimeInterval+totalExistingSupportTI;
-            self.supervisionTotalCummulativeTI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
-            
-            
-           overallTotalTI =self.interventionTotalCummulativeTI+self.assessmentTotalCummulativeTI+self.supportTotalCummulativeTI+self.supervisionTotalCummulativeTI;
-            
-            self.interventionTotalCummulativeStr=[self totalTimeStr:self.interventionTotalCummulativeTI];
-            self.assessmentTotalCummulativeStr=[self totalTimeStr:self.assessmentTotalCummulativeTI];
-            self.supportTotalCummulativeStr=[self totalTimeStr:self.supportTotalCummulativeTI];
-            self.supervisionTotalCummulativeStr=[self totalTimeStr:self.supervisionTotalCummulativeTI];
-            self.overallTotalCummulativeStr=[self totalTimeStr:overallTotalTI];
-            
+            self.interventionTotalCummulativeTI = trackTotalInterventionTimeInterval + totalExistingInterventionsTI;
+            self.assessmentTotalCummulativeTI = trackTotalAssessmentInterval + totalExistingAssessmentsTI;
+            self.supportTotalCummulativeTI = trackTotalSupportTimeInterval + totalExistingSupportTI;
+            self.supervisionTotalCummulativeTI = trackTotalSupervisionReceivedTimeInterval + totalExistingSupervisionReceivedTI;
 
+            overallTotalTI = self.interventionTotalCummulativeTI + self.assessmentTotalCummulativeTI + self.supportTotalCummulativeTI + self.supervisionTotalCummulativeTI;
+
+            self.interventionTotalCummulativeStr = [self totalTimeStr:self.interventionTotalCummulativeTI];
+            self.assessmentTotalCummulativeStr = [self totalTimeStr:self.assessmentTotalCummulativeTI];
+            self.supportTotalCummulativeStr = [self totalTimeStr:self.supportTotalCummulativeTI];
+            self.supervisionTotalCummulativeStr = [self totalTimeStr:self.supervisionTotalCummulativeTI];
+            self.overallTotalCummulativeStr = [self totalTimeStr:overallTotalTI];
         }
-            break;
+        break;
         case kSummaryTotalToDate:
         {
-            self.interventionTotalToDateTI=trackTotalInterventionTimeInterval+totalExistingInterventionsTI;
-            self.assessmentTotalToDateTI=trackTotalAssessmentInterval+totalExistingAssessmentsTI;
-            self.supportTotalToDateTI=trackTotalSupportTimeInterval+totalExistingSupportTI;
-            self.supervisionTotalToDateTI=trackTotalSupervisionReceivedTimeInterval+totalExistingSupervisionReceivedTI;
-            
-            
-            overallTotalTI =self.interventionTotalToDateTI+self.assessmentTotalToDateTI+self.supportTotalToDateTI+self.supervisionTotalToDateTI;
-            
-            self.interventionTotalToDateStr=[self totalTimeStr:self.interventionTotalToDateTI];
-            self.assessmentTotalToDateStr=[self totalTimeStr:self.assessmentTotalToDateTI];
-            self.supportTotalToDateStr=[self totalTimeStr:self.supportTotalToDateTI];
-            self.supervisionTotalToDateStr=[self totalTimeStr:self.supervisionTotalToDateTI];
-            self.overallTotalToDateStr=[self totalTimeStr:overallTotalTI];
-            
+            self.interventionTotalToDateTI = trackTotalInterventionTimeInterval + totalExistingInterventionsTI;
+            self.assessmentTotalToDateTI = trackTotalAssessmentInterval + totalExistingAssessmentsTI;
+            self.supportTotalToDateTI = trackTotalSupportTimeInterval + totalExistingSupportTI;
+            self.supervisionTotalToDateTI = trackTotalSupervisionReceivedTimeInterval + totalExistingSupervisionReceivedTI;
 
+            overallTotalTI = self.interventionTotalToDateTI + self.assessmentTotalToDateTI + self.supportTotalToDateTI + self.supervisionTotalToDateTI;
 
+            self.interventionTotalToDateStr = [self totalTimeStr:self.interventionTotalToDateTI];
+            self.assessmentTotalToDateStr = [self totalTimeStr:self.assessmentTotalToDateTI];
+            self.supportTotalToDateStr = [self totalTimeStr:self.supportTotalToDateTI];
+            self.supervisionTotalToDateStr = [self totalTimeStr:self.supervisionTotalToDateTI];
+            self.overallTotalToDateStr = [self totalTimeStr:overallTotalTI];
         }
 
-            
         default:
             break;
-    }
-    
-    
-   
+    } /* switch */
+
     return overallTotalTI;
-
 }
 
 
+- (NSString *) monthlyLogNotesForMonth:(PTrackEntity)ptrackEntityType
+{
+    NSSet *trackDeliveredFilteredForCurrentMonth = nil;
+    NSPredicate *trackPredicateForCurrentMonth = [self predicateForTrackCurrentMonth];
+    NSString *returnString = nil;
 
--(NSString *)monthlyLogNotesForMonth:(PTrackEntity )ptrackEntityType{
-    
-    
-    NSSet *trackDeliveredFilteredForCurrentMonth=nil;
-    NSPredicate *trackPredicateForCurrentMonth=[self predicateForTrackCurrentMonth];
-    NSString *returnString=nil;
-   
-    switch (ptrackEntityType) {
-                    
-            case kTrackAssessment:
-            trackDeliveredFilteredForCurrentMonth=[self.assessmentsDeliveredArray filteredSetUsingPredicate:trackPredicateForCurrentMonth];
-            
-            
+    switch (ptrackEntityType)
+    {
+        case kTrackAssessment:
+            trackDeliveredFilteredForCurrentMonth = [self.assessmentsDeliveredArray filteredSetUsingPredicate:trackPredicateForCurrentMonth];
+
             break;
-            
-            
+
         case kTrackSupport:
-        
-            trackDeliveredFilteredForCurrentMonth=[self.supportActivityDeliveredArray filteredSetUsingPredicate:trackPredicateForCurrentMonth];
-            
-            
-            
-            break;
-            
 
-            
+            trackDeliveredFilteredForCurrentMonth = [self.supportActivityDeliveredArray filteredSetUsingPredicate:trackPredicateForCurrentMonth];
+
+            break;
+
         default:
             break;
     }
-    
- NSArray *filteredExistingHoursArray=nil;
-    if (self.existingHoursArray &&self.existingHoursArray.count) {
-        filteredExistingHoursArray=[self.existingHoursArray filteredArrayUsingPredicate:[self predicateForExistingHoursCurrentMonth]];
+
+    NSArray *filteredExistingHoursArray = nil;
+    if (self.existingHoursArray && self.existingHoursArray.count)
+    {
+        filteredExistingHoursArray = [self.existingHoursArray filteredArrayUsingPredicate:[self predicateForExistingHoursCurrentMonth]];
     }
-    
-    
-    
-    if (trackDeliveredFilteredForCurrentMonth) {
-        
-        int trackDeliveredFilteredForCurrentMonthCount=trackDeliveredFilteredForCurrentMonth.count;
-        if (trackDeliveredFilteredForCurrentMonthCount) {
-            
-            NSMutableSet *monthlyLogNotesArray=[trackDeliveredFilteredForCurrentMonth mutableSetValueForKey:@"monthlyLogNotes"];
-            
-            int monthlyLogNotesArrayCount=monthlyLogNotesArray.count;
-            for ( int i=0;i< monthlyLogNotesArrayCount; i++){
-                
-                id logNotesID=[monthlyLogNotesArray.allObjects objectAtIndex:i];
-                
-                
-                if ([logNotesID isKindOfClass:[NSString class]]) {
-                    NSString *logNotesStr=(NSString *)logNotesID;
-                    if (logNotesStr && logNotesStr.length) {
-                    
-                    if (i==0) {
-                        returnString=logNotesStr;
-                    }
-                    else {
-                        returnString=[returnString stringByAppendingFormat:@"; %@",logNotesStr];
-                    }
-                    }
-                }
-            }
-            
-        }
-    }
-    
-        
-        int filteredExistingHoursArrayCount=filteredExistingHoursArray.count;
-        if (filteredExistingHoursArrayCount) {
-           
-            NSArray *existingTypeArray=nil;
-            
-            NSSet *existingTypeSet=nil;
-            switch (ptrackEntityType) {
-               
-                case kTrackAssessment:
-                    
+
+    if (trackDeliveredFilteredForCurrentMonth)
+    {
+        int trackDeliveredFilteredForCurrentMonthCount = trackDeliveredFilteredForCurrentMonth.count;
+        if (trackDeliveredFilteredForCurrentMonthCount)
+        {
+            NSMutableSet *monthlyLogNotesArray = [trackDeliveredFilteredForCurrentMonth mutableSetValueForKey:@"monthlyLogNotes"];
+
+            int monthlyLogNotesArrayCount = monthlyLogNotesArray.count;
+            for ( int i = 0; i < monthlyLogNotesArrayCount; i++)
+            {
+                id logNotesID = [monthlyLogNotesArray.allObjects objectAtIndex:i];
+
+                if ([logNotesID isKindOfClass:[NSString class]])
                 {
-                   
-                    if (filteredExistingHoursArray&&filteredExistingHoursArray.count) {
-                        existingTypeSet=[filteredExistingHoursArray mutableSetValueForKeyPath:@"assessments.monthlyLogNotes"];
-                    }
-                    
-                    
-                }
-                    break;
-                    
-                case kTrackSupport:
-                {
-                    if (filteredExistingHoursArray &&filteredExistingHoursArray.count) {
-                        existingTypeSet=[filteredExistingHoursArray mutableSetValueForKeyPath:@"supportActivities.monthlyLogNotes"];
-                        
-                    }
-                   
-                }
-                    break;
-                
-                
-                
-                    
-                default:
-                    break;
-            }
-           
-            
-            existingTypeArray=existingTypeSet.allObjects;
-        
-            NSString *logNotesStr=nil;
-            for ( id logNotesID in existingTypeArray){
-                
-                
-               
-                NSMutableArray  *filteredLogNotesMutableArray=nil;
-                
-                if ([logNotesID isKindOfClass:[NSString class]]) {
-                    logNotesStr=(NSString *) logNotesID;
-                }
-                else if ([logNotesID isKindOfClass:[NSSet class]] )
-                {
-                    NSSet *logNotesSet=(NSSet *)logNotesID;
-                                       NSArray *logNotesArray=logNotesSet.allObjects;
-                    
-                    for (int i=0;i<logNotesArray.count ; i++) {
-                        NSString *logNoteInLogNotesArray=[logNotesArray objectAtIndex:i];
-                       
-                        if (logNoteInLogNotesArray &&[logNoteInLogNotesArray isKindOfClass:[NSString class]] &&logNoteInLogNotesArray.length) {
-                            
-//                            BOOL shouldAddToArray=NO;
-                            
-                            if (![filteredLogNotesMutableArray containsObject:logNoteInLogNotesArray]) {
-                                [filteredLogNotesMutableArray addObject:logNoteInLogNotesArray];
-                           
-                            
-                            
-                                if (!logNotesStr ||!logNotesStr.length) {
-                                    logNotesStr=logNoteInLogNotesArray;
-                                }
-                                else {
-                                    logNotesStr=[NSString stringWithFormat:@"%@; %@",logNotesStr,logNoteInLogNotesArray];
-                                }
-                             }
+                    NSString *logNotesStr = (NSString *)logNotesID;
+                    if (logNotesStr && logNotesStr.length)
+                    {
+                        if (i == 0)
+                        {
+                            returnString = logNotesStr;
                         }
-                        
+                        else
+                        {
+                            returnString = [returnString stringByAppendingFormat:@"; %@",logNotesStr];
+                        }
                     }
                 }
-
-                if (!returnString ||!returnString.length) {
-                    returnString=logNotesStr;
-                    
-                }
-                else {
-                
-                    if ([logNotesStr isKindOfClass:[NSString class]]) {
-                        returnString=[returnString stringByAppendingFormat:@"; %@",logNotesStr];
-                    }
-                    
-                }
-                
-               
-                
-                
             }
-            
         }
-    
-
-    if (returnString && ![returnString isKindOfClass:[NSString class]]) {
-        
-        returnString=[NSString string];
-        
     }
-    
+
+    int filteredExistingHoursArrayCount = filteredExistingHoursArray.count;
+    if (filteredExistingHoursArrayCount)
+    {
+        NSArray *existingTypeArray = nil;
+
+        NSSet *existingTypeSet = nil;
+        switch (ptrackEntityType)
+        {
+            case kTrackAssessment:
+
+            {
+                if (filteredExistingHoursArray && filteredExistingHoursArray.count)
+                {
+                    existingTypeSet = [filteredExistingHoursArray mutableSetValueForKeyPath:@"assessments.monthlyLogNotes"];
+                }
+            }
+            break;
+
+            case kTrackSupport:
+            {
+                if (filteredExistingHoursArray && filteredExistingHoursArray.count)
+                {
+                    existingTypeSet = [filteredExistingHoursArray mutableSetValueForKeyPath:@"supportActivities.monthlyLogNotes"];
+                }
+            }
+            break;
+
+            default:
+                break;
+        } /* switch */
+
+        existingTypeArray = existingTypeSet.allObjects;
+
+        NSString *logNotesStr = nil;
+        for ( id logNotesID in existingTypeArray)
+        {
+            NSMutableArray *filteredLogNotesMutableArray = nil;
+
+            if ([logNotesID isKindOfClass:[NSString class]])
+            {
+                logNotesStr = (NSString *)logNotesID;
+            }
+            else if ([logNotesID isKindOfClass:[NSSet class]] )
+            {
+                NSSet *logNotesSet = (NSSet *)logNotesID;
+                NSArray *logNotesArray = logNotesSet.allObjects;
+
+                for (int i = 0; i < logNotesArray.count; i++)
+                {
+                    NSString *logNoteInLogNotesArray = [logNotesArray objectAtIndex:i];
+
+                    if (logNoteInLogNotesArray && [logNoteInLogNotesArray isKindOfClass:[NSString class]] && logNoteInLogNotesArray.length)
+                    {
+//                            BOOL shouldAddToArray=NO;
+
+                        if (![filteredLogNotesMutableArray containsObject:logNoteInLogNotesArray])
+                        {
+                            [filteredLogNotesMutableArray addObject:logNoteInLogNotesArray];
+
+                            if (!logNotesStr || !logNotesStr.length)
+                            {
+                                logNotesStr = logNoteInLogNotesArray;
+                            }
+                            else
+                            {
+                                logNotesStr = [NSString stringWithFormat:@"%@; %@",logNotesStr,logNoteInLogNotesArray];
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (!returnString || !returnString.length)
+            {
+                returnString = logNotesStr;
+            }
+            else
+            {
+                if ([logNotesStr isKindOfClass:[NSString class]])
+                {
+                    returnString = [returnString stringByAppendingFormat:@"; %@",logNotesStr];
+                }
+            }
+        }
+    }
+
+    if (returnString && ![returnString isKindOfClass:[NSString class]])
+    {
+        returnString = [NSString string];
+    }
+
     return returnString;
-    
-    
 }
 
--(NSPredicate *)predicateForExistingHoursProgramCourse{
-    
-    NSPredicate *trainingProgramPredicate=nil;
-    
-    
+
+- (NSPredicate *) predicateForExistingHoursProgramCourse
+{
+    NSPredicate *trainingProgramPredicate = nil;
+
     trainingProgramPredicate = [NSPredicate predicateWithFormat:@"programCourse.objectID == %@", trainingProgram_.objectID];
-    
-    
-    
+
     return trainingProgramPredicate;
-    
 }
 
 
--(NSPredicate *)predicateForExistingHoursDoctorateLevel{
-    
-    NSPredicate *doctorateLevelPredicate=nil;
-    
-    
+- (NSPredicate *) predicateForExistingHoursDoctorateLevel
+{
+    NSPredicate *doctorateLevelPredicate = nil;
+
     doctorateLevelPredicate = [NSPredicate predicateWithFormat:@"programCourse.doctorateLevel == %@", [NSNumber numberWithBool:doctorateLevel_]];
-    
-    
-    
+
     return doctorateLevelPredicate;
-    
 }
 
--(NSPredicate *)predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth{
-    
-    NSPredicate *returnPredicate=nil;
-    
-    if (monthEndDate_) {
-        
+
+- (NSPredicate *) predicateForExistingHoursAllBeforeAndEqualToEndDateForMonth
+{
+    NSPredicate *returnPredicate = nil;
+
+    if (monthEndDate_)
+    {
         returnPredicate = [NSPredicate predicateWithFormat:@" (endDate <= %@)", monthEndDate_];
     }
-    
+
     return returnPredicate;
 }
 
 
--(NSPredicate *)predicateForExistingHoursAllBeforeEndDate:(NSDate *)date;{
-    
-    NSPredicate *returnPredicate=nil;
-    
-    if (date &&[date isKindOfClass:[NSDate class]]) {
-        
+- (NSPredicate *) predicateForExistingHoursAllBeforeEndDate:(NSDate *)date; {
+    NSPredicate *returnPredicate = nil;
+
+    if (date && [date isKindOfClass:[NSDate class]])
+    {
         returnPredicate = [NSPredicate predicateWithFormat:@" (endDate < %@)", date];
-        
     }
-    
+
     return returnPredicate;
 }
 
+- (NSPredicate *) predicateForExistingHoursWeek:(PTrackWeek)week
+{
+    NSPredicate *weekPredicate = nil;
 
--(NSPredicate *)predicateForExistingHoursWeek:(PTrackWeek)week{
-    
-    NSPredicate *weekPredicate=nil;
-    
-    
     weekPredicate = [NSPredicate predicateWithFormat:@" ((startDate >= %@) AND (endDate <= %@))", [self storedStartDateForWeek:week],[self storedEndDateForWeek:week]];
-    
-    
+
     return weekPredicate;
-    
 }
 
 
--(NSPredicate *)predicateForExistingHoursWeekUndefined{
-    
-    NSPredicate *undefinedWeekPredicate=nil;
-    
-    
+- (NSPredicate *) predicateForExistingHoursWeekUndefined
+{
+    NSPredicate *undefinedWeekPredicate = nil;
+
     undefinedWeekPredicate = [NSPredicate predicateWithFormat:@"((startDate >= %@) AND (endDate <= %@)) AND NOT (   ((startDate >= %@) AND (endDate < %@)) OR ((startDate >= %@) AND (endDate < %@)) OR ((startDate >= %@) AND (endDate < %@)) OR ((startDate >= %@) AND (endDate < %@)) OR  ((startDate >= %@) AND (endDate < %@))) ", monthStartDate_,monthEndDate_,week1StartDate_,week1EndDate_,week2StartDate_,week2EndDate_,week3StartDate_,week3EndDate_,week4StartDate_,week4EndDate_,week5StartDate_,week5EndDate_];
-    
-    
-    
+
     return undefinedWeekPredicate;
-    
 }
--(NSPredicate *)predicateForExistingHoursCurrentMonth{
-    
-    NSPredicate *currentMonthPredicate=nil;
-    
-    
+
+
+- (NSPredicate *) predicateForExistingHoursCurrentMonth
+{
+    NSPredicate *currentMonthPredicate = nil;
+
     currentMonthPredicate = [NSPredicate predicateWithFormat:@" (startDate >= %@) AND (endDate <= %@)", monthStartDate_,monthEndDate_];
-    
+
     return currentMonthPredicate;
 }
+
 
 @end

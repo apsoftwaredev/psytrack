@@ -12,15 +12,13 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ExistingDemographicsEntity, ExistingHoursEntity, InterventionModelEntity, InterventionTypeEntity, InterventionTypeSubtypeEntity;
 
 @interface ExistingInterventionEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * monthlyLogNotes;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * hours;
+@property (nonatomic, retain) NSString *monthlyLogNotes;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSDate *hours;
 @property (nonatomic, retain) InterventionTypeEntity *interventionType;
 @property (nonatomic, retain) NSSet *models;
 @property (nonatomic, retain) InterventionTypeSubtypeEntity *interventionSubType;
@@ -30,9 +28,9 @@
 
 @interface ExistingInterventionEntity (CoreDataGeneratedAccessors)
 
-- (void)addModelsObject:(InterventionModelEntity *)value;
-- (void)removeModelsObject:(InterventionModelEntity *)value;
-- (void)addModels:(NSSet *)values;
-- (void)removeModels:(NSSet *)values;
+- (void) addModelsObject:(InterventionModelEntity *)value;
+- (void) removeModelsObject:(InterventionModelEntity *)value;
+- (void) addModels:(NSSet *)values;
+- (void) removeModels:(NSSet *)values;
 
 @end

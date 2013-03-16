@@ -10,13 +10,10 @@
 #import "BreakTimeReasonEntity.h"
 #import "BreakTimeEntity.h"
 
-
 @implementation BreakTimeReasonEntity
 
 @dynamic order;
 @dynamic breakName;
 @dynamic breakTimes;
-
-
 
 @end

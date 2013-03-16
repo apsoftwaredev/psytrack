@@ -11,22 +11,16 @@
 #import "BigProgressViewWithBlockedView.h"
 
 @interface AllTrainingHoursGenerateVC : SCViewController <ReaderViewControllerDelegate,UITextFieldDelegate, UIAlertViewDelegate>{
-    
-    
-    
     BigProgressViewWithBlockedView *prog;
     NSString *fileName;
     BOOL changedDefaultFileName;
 }
-@property (nonatomic, weak)IBOutlet UITextField *pdfFileNameTextField;
-@property (nonatomic, weak)IBOutlet UITextField *pdfPasswordTextField;
+@property (nonatomic, weak) IBOutlet UITextField *pdfFileNameTextField;
+@property (nonatomic, weak) IBOutlet UITextField *pdfPasswordTextField;
 
-
-@property (nonatomic, weak)IBOutlet UIView *containerView;
+@property (nonatomic, weak) IBOutlet UIView *containerView;
 @property (nonatomic, weak) IBOutlet UIButton *generateButton;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *doctorateLevelSegCtrl;
--(IBAction)generateButtonTapped:(id)sender;
-
-
+- (IBAction) generateButtonTapped:(id)sender;
 
 @end

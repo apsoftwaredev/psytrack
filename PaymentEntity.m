@@ -11,7 +11,6 @@
 #import "ClientEntity.h"
 #import "ConsultationEntity.h"
 
-
 @implementation PaymentEntity
 
 @dynamic amount;
@@ -23,7 +22,5 @@
 @dynamic paymentType;
 @dynamic paymentSource;
 @dynamic consultation;
-
-
 
 @end

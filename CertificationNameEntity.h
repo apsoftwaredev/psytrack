@@ -12,23 +12,21 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class CertificationEntity;
 
 @interface CertificationNameEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * certName;
-@property (nonatomic, retain) NSString * desc;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *certName;
+@property (nonatomic, retain) NSString *desc;
 @property (nonatomic, retain) NSSet *certifications;
 @end
 
 @interface CertificationNameEntity (CoreDataGeneratedAccessors)
 
-- (void)addCertificationsObject:(CertificationEntity *)value;
-- (void)removeCertificationsObject:(CertificationEntity *)value;
-- (void)addCertifications:(NSSet *)values;
-- (void)removeCertifications:(NSSet *)values;
+- (void) addCertificationsObject:(CertificationEntity *)value;
+- (void) removeCertificationsObject:(CertificationEntity *)value;
+- (void) addCertifications:(NSSet *)values;
+- (void) removeCertifications:(NSSet *)values;
 
 @end

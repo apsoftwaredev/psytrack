@@ -7,10 +7,7 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-
-
 @interface CECreditsViewController : SCTableViewController <SCTableViewModelDelegate>{
-
     SCArrayOfObjectsModel *objectsModel;
 
     NSDateFormatter *dateFormatter;

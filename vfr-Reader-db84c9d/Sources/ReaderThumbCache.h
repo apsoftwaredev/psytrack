@@ -29,31 +29,31 @@
 
 @interface ReaderThumbCache : NSObject
 {
-@private // Instance variables
+    @private // Instance variables
 
-	NSCache *thumbCache;
+    NSCache *thumbCache;
 }
 
-+ (ReaderThumbCache *)sharedInstance;
++ (ReaderThumbCache *) sharedInstance;
 
-+ (void)touchThumbCacheWithGUID:(NSString *)guid;
++ (void) touchThumbCacheWithGUID:(NSString *)guid;
 
-+ (void)createThumbCacheWithGUID:(NSString *)guid;
++ (void) createThumbCacheWithGUID:(NSString *)guid;
 
-+ (void)removeThumbCacheWithGUID:(NSString *)guid;
++ (void) removeThumbCacheWithGUID:(NSString *)guid;
 
-+ (void)purgeThumbCachesOlderThan:(NSTimeInterval)age;
++ (void) purgeThumbCachesOlderThan:(NSTimeInterval)age;
 
-+ (NSString *)thumbCachePathForGUID:(NSString *)guid;
++ (NSString *) thumbCachePathForGUID:(NSString *)guid;
 
-- (id)thumbRequest:(ReaderThumbRequest *)request priority:(BOOL)priority;
+- (id) thumbRequest:(ReaderThumbRequest *)request priority:(BOOL)priority;
 
-- (void)setObject:(UIImage *)image forKey:(NSString *)key;
+- (void) setObject:(UIImage *)image forKey:(NSString *)key;
 
-- (void)removeObjectForKey:(NSString *)key;
+- (void) removeObjectForKey:(NSString *)key;
 
-- (void)removeNullForKey:(NSString *)key;
+- (void) removeNullForKey:(NSString *)key;
 
-- (void)removeAllObjects;
+- (void) removeAllObjects;
 
 @end

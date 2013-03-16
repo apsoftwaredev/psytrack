@@ -12,15 +12,13 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class DemographicProfileEntity;
 
 @interface DisabilityEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * disabilityName;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSString *disabilityName;
 @property (nonatomic, retain) NSSet *demographics;
 @property (nonatomic, retain) NSSet *existingDisabilities;
 @property (nonatomic, assign) int clientCount;
@@ -29,14 +27,14 @@
 
 @interface DisabilityEntity (CoreDataGeneratedAccessors)
 
-- (void)addDemographicsObject:(DemographicProfileEntity *)value;
-- (void)removeDemographicsObject:(DemographicProfileEntity *)value;
-- (void)addDemographics:(NSSet *)values;
-- (void)removeDemographics:(NSSet *)values;
+- (void) addDemographicsObject:(DemographicProfileEntity *)value;
+- (void) removeDemographicsObject:(DemographicProfileEntity *)value;
+- (void) addDemographics:(NSSet *)values;
+- (void) removeDemographics:(NSSet *)values;
 
-- (void)addExistingDisabilitiesObject:(NSManagedObject *)value;
-- (void)removeExistingDisabilitiesObject:(NSManagedObject *)value;
-- (void)addExistingDisabilities:(NSSet *)values;
-- (void)removeExistingDisabilities:(NSSet *)values;
+- (void) addExistingDisabilitiesObject:(NSManagedObject *)value;
+- (void) removeExistingDisabilitiesObject:(NSManagedObject *)value;
+- (void) addExistingDisabilities:(NSSet *)values;
+- (void) removeExistingDisabilities:(NSSet *)values;
 
 @end

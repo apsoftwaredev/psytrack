@@ -31,11 +31,11 @@
 
 @interface ReaderThumbRender : ReaderThumbOperation
 {
-@private // Instance variables
+    @private // Instance variables
 
-	ReaderThumbRequest *request;
+    ReaderThumbRequest *request;
 }
 
-- (id)initWithRequest:(ReaderThumbRequest *)request;
+- (id) initWithRequest:(ReaderThumbRequest *)request;
 
 @end

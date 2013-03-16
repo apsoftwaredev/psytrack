@@ -4,9 +4,9 @@
  *  Version: 1.0
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
  *
  *  Created by Daniel Boice on 7/7/12.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -20,18 +20,10 @@
 #import "ClinicianEntity.h"
 #import "TotalTimesForMonthlyLog.h"
 
-
-
-
-@interface SupervisorsAndTotalTimesForMonth : TotalTimesForMonthlyLog{
-
+@interface SupervisorsAndTotalTimesForMonth : TotalTimesForMonthlyLog {
     NSString *assessmentMonthlyNotes_;
     NSString *supportMonthlyNotes_;
-
-    
 }
-
-
 
 @property (nonatomic, assign) NSInteger numberOfProgramCourses;
 @property (nonatomic, strong) NSString *trainingProgramsStr;
@@ -57,7 +49,6 @@
 @property (nonatomic, assign) NSTimeInterval interventionTotalWeek4TI;
 @property (nonatomic, assign) NSTimeInterval interventionTotalWeek5TI;
 
-
 @property (nonatomic, strong) NSString *interventionTotalWeekUndefinedStr;
 @property (nonatomic, assign) NSTimeInterval interventionTotalWeekUndefinedTI;
 
@@ -69,8 +60,6 @@
 
 @property (nonatomic, strong) NSString *interventionTotalToDateStr;
 @property (nonatomic, assign) NSTimeInterval interventionTotalToDateTI;
-
-
 
 @property (nonatomic, strong) NSString *assessmentTotalWeek1Str;
 @property (nonatomic, strong) NSString *assessmentTotalWeek2Str;
@@ -96,7 +85,6 @@
 @property (nonatomic, strong) NSString *assessmentTotalToDateStr;
 @property (nonatomic, assign) NSTimeInterval assessmentTotalToDateTI;
 
-
 @property (nonatomic, strong) NSString *supportTotalWeek1Str;
 @property (nonatomic, strong) NSString *supportTotalWeek2Str;
 @property (nonatomic, strong) NSString *supportTotalWeek3Str;
@@ -108,7 +96,6 @@
 @property (nonatomic, assign) NSTimeInterval supportTotalWeek3TI;
 @property (nonatomic, assign) NSTimeInterval supportTotalWeek4TI;
 @property (nonatomic, assign) NSTimeInterval supportTotalWeek5TI;
-
 
 @property (nonatomic, strong) NSString *supportTotalWeekUndefinedStr;
 @property (nonatomic, assign) NSTimeInterval supportTotalWeekUndefinedTI;
@@ -122,7 +109,6 @@
 @property (nonatomic, strong) NSString *supportTotalToDateStr;
 @property (nonatomic, assign) NSTimeInterval supportTotalToDateTI;
 
-
 @property (nonatomic, strong) NSString *supervisionTotalWeek1Str;
 @property (nonatomic, strong) NSString *supervisionTotalWeek2Str;
 @property (nonatomic, strong) NSString *supervisionTotalWeek3Str;
@@ -134,7 +120,6 @@
 @property (nonatomic, assign) NSTimeInterval supervisionTotalWeek3TI;
 @property (nonatomic, assign) NSTimeInterval supervisionTotalWeek4TI;
 @property (nonatomic, assign) NSTimeInterval supervisionTotalWeek5TI;
-
 
 @property (nonatomic, strong) NSString *supervisionTotalWeekUndefinedStr;
 @property (nonatomic, assign) NSTimeInterval supervisionTotalWeekUndefinedTI;
@@ -148,8 +133,6 @@
 @property (nonatomic, strong) NSString *supervisionTotalToDateStr;
 @property (nonatomic, assign) NSTimeInterval supervisionTotalToDateTI;
 
-
-
 @property (nonatomic, strong) NSString *directTotalWeek1Str;
 @property (nonatomic, strong) NSString *directTotalWeek2Str;
 @property (nonatomic, strong) NSString *directTotalWeek3Str;
@@ -161,7 +144,6 @@
 @property (nonatomic, assign) NSTimeInterval directTotalWeek3TI;
 @property (nonatomic, assign) NSTimeInterval directTotalWeek4TI;
 @property (nonatomic, assign) NSTimeInterval directTotalWeek5TI;
-
 
 @property (nonatomic, strong) NSString *directTotalWeekUndefinedStr;
 @property (nonatomic, assign) NSTimeInterval directTotalWeekUndefinedTI;
@@ -175,7 +157,6 @@
 @property (nonatomic, strong) NSString *directTotalToDateStr;
 @property (nonatomic, assign) NSTimeInterval directTotalToDateTI;
 
-
 @property (nonatomic, strong) NSString *overallTotalWeek1Str;
 @property (nonatomic, strong) NSString *overallTotalWeek2Str;
 @property (nonatomic, strong) NSString *overallTotalWeek3Str;
@@ -187,7 +168,6 @@
 @property (nonatomic, assign) NSTimeInterval overallTotalWeek3TI;
 @property (nonatomic, assign) NSTimeInterval overallTotalWeek4TI;
 @property (nonatomic, assign) NSTimeInterval overallTotalWeek5TI;
-
 
 @property (nonatomic, strong) NSString *overallTotalWeekUndefinedStr;
 @property (nonatomic, assign) NSTimeInterval overallTotalWeekUndefinedTI;
@@ -201,19 +181,17 @@
 @property (nonatomic, strong) NSString *overallTotalForMonthStr;
 @property (nonatomic, assign) NSTimeInterval overallTotalForMonthTI;
 
-
 @property (nonatomic, strong) NSString *assessmentMonthlyNotes;
 @property (nonatomic, strong) NSString *supportMonthlyNotes;
 @property (nonatomic, assign) BOOL markAmended;
 
+- (id) initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven markAmended:(BOOL)markAmendedGiven;
 
--(id)initWithMonth:(NSDate *)date clinician:(ClinicianEntity *)clinician trainingProgram:(TrainingProgramEntity *)trainingProgramGiven markAmended:(BOOL)markAmendedGiven;
+- (id) initWithDoctorateLevel:(BOOL)doctoarateLevelSelected clinician:(ClinicianEntity *)supervisor;
 
--(id)initWithDoctorateLevel:(BOOL)doctoarateLevelSelected clinician:(ClinicianEntity *)supervisor;
+- (void) calculateDirectlHours;
 
--(void ) calculateDirectlHours;
+- (NSTimeInterval) totalOverallHoursTIForOveralCell:(PTSummaryCell)overallCell clinician:(ClinicianEntity *)clinician;
 
--(NSTimeInterval ) totalOverallHoursTIForOveralCell:(PTSummaryCell)overallCell clinician:(ClinicianEntity *)clinician;
-
--(NSString *)monthlyLogNotesForMonth:(PTrackEntity )ptrackEntityType;
+- (NSString *) monthlyLogNotesForMonth:(PTrackEntity)ptrackEntityType;
 @end

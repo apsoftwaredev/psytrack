@@ -9,7 +9,6 @@
 
 #import "MediaAppearanceEntity.h"
 
-
 @implementation MediaAppearanceEntity
 
 @dynamic topics;
@@ -22,8 +21,5 @@
 @dynamic showtimes;
 @dynamic network;
 @dynamic dateInterviewed;
-
-
-
 
 @end

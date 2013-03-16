@@ -4,9 +4,9 @@
  *  Version: 1.05
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
  *
  *  Created by Daniel Boice on 9/26/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -23,29 +23,26 @@
 #import "DisorderEntity.h"
 
 @interface ClientsViewController_iPhone : SCViewController <  SCTableViewModelDataSource, SCTableViewModelDelegate, SCTableViewControllerDelegate, UIAlertViewDelegate> {
-    
-
-  	 UISearchBar *searchBar;
-     UILabel *totalClientsLabel;
+    UISearchBar *searchBar;
+    UILabel *totalClientsLabel;
 
     NSManagedObjectContext *managedObjectContext;
     ClientsViewController_Shared *clientsViewController_Shared;
     BOOL isInDetailSubview;
-     ClientsSelectionCell *clientObjectSelectionCell;
+    ClientsSelectionCell *clientObjectSelectionCell;
     BOOL allowMultipleSelection;
-     UIViewController *sendingViewController;
-     NSMutableSet *alreadySelectedClients;
-    
-   
+    UIViewController *sendingViewController;
+    NSMutableSet *alreadySelectedClients;
+
     int searchStringLength;
     BOOL reloadTableView;
     SCArrayOfObjectsModel *objectsModel;
     ClientEntity *currentlySelectedClient;
     NSMutableArray *currentlySelectedClientsArray;
-    
-      DisorderEntity *selectedDisorder;
-    
-       AdditionalVariableNameEntity *selectedVariableName;
+
+    DisorderEntity *selectedDisorder;
+
+    AdditionalVariableNameEntity *selectedVariableName;
 }
 
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
@@ -53,15 +50,14 @@
 @property (nonatomic, strong)  ClientsViewController_Shared *clientsViewController_Shared;
 @property (nonatomic, readwrite) BOOL isInDetailSubview;
 @property (nonatomic,strong) IBOutlet ClientsSelectionCell *clientObjectSelectionCell;
-@property (nonatomic, strong)IBOutlet  UIViewController *sendingViewController;
+@property (nonatomic, strong) IBOutlet UIViewController *sendingViewController;
 @property (nonatomic,strong) IBOutlet NSMutableSet *alreadySelectedClients;
 @property (nonatomic,strong) IBOutlet NSManagedObject *clientCurrentlySelectedInReferringDetailview;
--(void)updateClientsTotalLabel;
+- (void) updateClientsTotalLabel;
 
--(void)addWechlerAgeCellToSection:(SCTableViewSection *)section;
--(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(SCObjectSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController allowMultipleSelection:(BOOL)allowMultiSelect;
--(BOOL)checkStringIsNumber:(NSString *)str;
--(void)refreshData;
+- (void) addWechlerAgeCellToSection:(SCTableViewSection *)section;
+- (id) initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(SCObjectSelectionCell *)objectSelectionCell sendingViewController:(UIViewController *)viewController allowMultipleSelection:(BOOL)allowMultiSelect;
+- (BOOL) checkStringIsNumber:(NSString *)str;
+- (void) refreshData;
 
 @end
-

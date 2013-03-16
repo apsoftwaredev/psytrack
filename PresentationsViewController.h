@@ -7,13 +7,8 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-
-
 @interface PresentationsViewController : SCTableViewController<SCTableViewModelDelegate>{
-
     SCArrayOfObjectsModel *objectsModel;
-
-
 }
 
 @end

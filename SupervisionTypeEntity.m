@@ -13,7 +13,6 @@
 #import "SupervisionReceivedEntity.h"
 #import "SupervisionTypeSubtypeEntity.h"
 
-
 @implementation SupervisionTypeEntity
 
 @dynamic order;
@@ -23,7 +22,5 @@
 @dynamic supervisionRecieved;
 @dynamic supervisionGiven;
 @dynamic subTypes;
-
-
 
 @end

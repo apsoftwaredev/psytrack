@@ -4,9 +4,9 @@
  *  Version: 1.05
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
  *
  *  Created by Daniel Boice on 9/26/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -16,24 +16,18 @@
  *
  */
 
-
-
-@interface ClientsViewController_Shared : NSObject /*<SCTableViewModelDelegate>*/{
-
-NSManagedObjectContext *managedObjectContext;
+@interface ClientsViewController_Shared : NSObject /*<SCTableViewModelDelegate>*/ {
+    NSManagedObjectContext *managedObjectContext;
     SCEntityDefinition *clientDef;
-
 }
 
 @property (strong,nonatomic) SCEntityDefinition *clientDef;
 
+- (id) setupTheClientsViewModelUsingSTV;
 
--(id)setupTheClientsViewModelUsingSTV;
-
--(NSString *)calculateWechslerAgeWithBirthdate:(NSDate *)birthdate;
--(NSString *)calculateActualAgeWithBirthdate:(NSDate *)birthdate;
--(NSString *)calculateWechslerAgeWithBirthdate:(NSDate *)birthdate toDate:(NSDate *)toDate;
--(NSString *)calculateActualAgeWithBirthdate:(NSDate *)birthdate toDate:(NSDate *)toDate;
-
+- (NSString *) calculateWechslerAgeWithBirthdate:(NSDate *)birthdate;
+- (NSString *) calculateActualAgeWithBirthdate:(NSDate *)birthdate;
+- (NSString *) calculateWechslerAgeWithBirthdate:(NSDate *)birthdate toDate:(NSDate *)toDate;
+- (NSString *) calculateActualAgeWithBirthdate:(NSDate *)birthdate toDate:(NSDate *)toDate;
 
 @end

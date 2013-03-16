@@ -11,14 +11,10 @@
 #import "DisabilityEntity.h"
 #import "ExistingDemographicsEntity.h"
 
-
 @implementation ExistingDisabilityEntity
 
 @dynamic numberOfIndividuals;
 @dynamic existingDemographics;
 @dynamic disability;
-
-
-
 
 @end

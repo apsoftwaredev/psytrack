@@ -11,7 +11,6 @@
 #import "BreakTimeReasonEntity.h"
 #import "TimeEntity.h"
 
-
 @implementation BreakTimeEntity
 
 @dynamic endTime;
@@ -21,7 +20,5 @@
 @dynamic breakNotes;
 @dynamic reason;
 @dynamic time;
-
-
 
 @end

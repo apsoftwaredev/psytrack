@@ -14,7 +14,6 @@
 #import "InterventionTypeEntity.h"
 #import "InterventionTypeSubtypeEntity.h"
 
-
 @implementation ExistingInterventionEntity
 
 @dynamic monthlyLogNotes;
@@ -25,7 +24,5 @@
 @dynamic interventionSubType;
 @dynamic demographics;
 @dynamic existingHours;
-
-
 
 @end

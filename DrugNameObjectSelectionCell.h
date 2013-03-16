@@ -12,9 +12,7 @@
 #import "DrugProductEntity.h"
 @interface DrugNameObjectSelectionCell : SCObjectSelectionCell
 
-
 @property (nonatomic, strong) DrugProductEntity *drugProduct;
 
-
--(void)doneButtonTappedInDetailView:(NSManagedObject *)selectedObject withValue:(BOOL)hasValue;
+- (void) doneButtonTappedInDetailView:(NSManagedObject *)selectedObject withValue:(BOOL)hasValue;
 @end

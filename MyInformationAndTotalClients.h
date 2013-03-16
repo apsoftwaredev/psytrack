@@ -11,11 +11,8 @@
 
 @interface MyInformationAndTotalClients : NSObject
 {
-
     NSString *myName_;
     int totalClients_;
-
-
 }
 @property (nonatomic, strong) NSString *myName;
 @property (nonatomic, assign) int totalClients;

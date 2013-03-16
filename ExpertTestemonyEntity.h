@@ -12,19 +12,17 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClientEntity, LogEntity, PublicationEntity;
 
 @interface ExpertTestemonyEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * plantifDefendant;
-@property (nonatomic, retain) NSString * caseName;
-@property (nonatomic, retain) NSDate * hours;
-@property (nonatomic, retain) NSString * attorneys;
-@property (nonatomic, retain) NSString * judge;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * order;
+@property (nonatomic, retain) NSNumber *plantifDefendant;
+@property (nonatomic, retain) NSString *caseName;
+@property (nonatomic, retain) NSDate *hours;
+@property (nonatomic, retain) NSString *attorneys;
+@property (nonatomic, retain) NSString *judge;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *order;
 @property (nonatomic, retain) NSSet *logs;
 @property (nonatomic, retain) NSSet *courtAppearances;
 @property (nonatomic, retain) NSSet *publications;
@@ -34,19 +32,19 @@
 
 @interface ExpertTestemonyEntity (CoreDataGeneratedAccessors)
 
-- (void)addLogsObject:(LogEntity *)value;
-- (void)removeLogsObject:(LogEntity *)value;
-- (void)addLogs:(NSSet *)values;
-- (void)removeLogs:(NSSet *)values;
+- (void) addLogsObject:(LogEntity *)value;
+- (void) removeLogsObject:(LogEntity *)value;
+- (void) addLogs:(NSSet *)values;
+- (void) removeLogs:(NSSet *)values;
 
-- (void)addCourtAppearancesObject:(NSManagedObject *)value;
-- (void)removeCourtAppearancesObject:(NSManagedObject *)value;
-- (void)addCourtAppearances:(NSSet *)values;
-- (void)removeCourtAppearances:(NSSet *)values;
+- (void) addCourtAppearancesObject:(NSManagedObject *)value;
+- (void) removeCourtAppearancesObject:(NSManagedObject *)value;
+- (void) addCourtAppearances:(NSSet *)values;
+- (void) removeCourtAppearances:(NSSet *)values;
 
-- (void)addPublicationsObject:(PublicationEntity *)value;
-- (void)removePublicationsObject:(PublicationEntity *)value;
-- (void)addPublications:(NSSet *)values;
-- (void)removePublications:(NSSet *)values;
+- (void) addPublicationsObject:(PublicationEntity *)value;
+- (void) removePublicationsObject:(PublicationEntity *)value;
+- (void) addPublications:(NSSet *)values;
+- (void) removePublications:(NSSet *)values;
 
 @end

@@ -9,14 +9,11 @@
 
 #import "KeyEntity.h"
 
-
 @implementation KeyEntity
 
 @dynamic keyF;
 @dynamic keyDate;
 @dynamic keyString;
 @dynamic dataF;
-
-
 
 @end

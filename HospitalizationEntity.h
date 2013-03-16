@@ -12,16 +12,14 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClientEntity;
 
 @interface HospitalizationEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * voluntary;
-@property (nonatomic, retain) NSDate * dateDischarged;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * dateAdmitted;
+@property (nonatomic, retain) NSNumber *voluntary;
+@property (nonatomic, retain) NSDate *dateDischarged;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSDate *dateAdmitted;
 @property (nonatomic, retain) ClientEntity *client;
 
 @end

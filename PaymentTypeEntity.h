@@ -12,22 +12,20 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class PaymentEntity;
 
 @interface PaymentTypeEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * paymentType;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *paymentType;
 @property (nonatomic, retain) NSSet *payments;
 @end
 
 @interface PaymentTypeEntity (CoreDataGeneratedAccessors)
 
-- (void)addPaymentsObject:(PaymentEntity *)value;
-- (void)removePaymentsObject:(PaymentEntity *)value;
-- (void)addPayments:(NSSet *)values;
-- (void)removePayments:(NSSet *)values;
+- (void) addPaymentsObject:(PaymentEntity *)value;
+- (void) removePaymentsObject:(PaymentEntity *)value;
+- (void) addPayments:(NSSet *)values;
+- (void) removePayments:(NSSet *)values;
 
 @end

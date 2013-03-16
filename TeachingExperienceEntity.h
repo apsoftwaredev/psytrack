@@ -12,21 +12,19 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClinicianEntity, LogEntity, PublicationEntity, SchoolEntity, TopicEntity;
 
 @interface TeachingExperienceEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * subject;
-@property (nonatomic, retain) NSNumber * credits;
-@property (nonatomic, retain) NSString * classTitle;
-@property (nonatomic, retain) NSNumber * numberOfStudents;
-@property (nonatomic, retain) NSDate * hours;
-@property (nonatomic, retain) NSDate * endDate;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * teachingRole;
-@property (nonatomic, retain) NSDate * startDate;
+@property (nonatomic, retain) NSString *subject;
+@property (nonatomic, retain) NSNumber *credits;
+@property (nonatomic, retain) NSString *classTitle;
+@property (nonatomic, retain) NSNumber *numberOfStudents;
+@property (nonatomic, retain) NSDate *hours;
+@property (nonatomic, retain) NSDate *endDate;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSString *teachingRole;
+@property (nonatomic, retain) NSDate *startDate;
 @property (nonatomic, retain) SchoolEntity *school;
 @property (nonatomic, retain) ClinicianEntity *clinician;
 @property (nonatomic, retain) NSSet *publications;
@@ -36,19 +34,19 @@
 
 @interface TeachingExperienceEntity (CoreDataGeneratedAccessors)
 
-- (void)addPublicationsObject:(PublicationEntity *)value;
-- (void)removePublicationsObject:(PublicationEntity *)value;
-- (void)addPublications:(NSSet *)values;
-- (void)removePublications:(NSSet *)values;
+- (void) addPublicationsObject:(PublicationEntity *)value;
+- (void) removePublicationsObject:(PublicationEntity *)value;
+- (void) addPublications:(NSSet *)values;
+- (void) removePublications:(NSSet *)values;
 
-- (void)addLogsObject:(LogEntity *)value;
-- (void)removeLogsObject:(LogEntity *)value;
-- (void)addLogs:(NSSet *)values;
-- (void)removeLogs:(NSSet *)values;
+- (void) addLogsObject:(LogEntity *)value;
+- (void) removeLogsObject:(LogEntity *)value;
+- (void) addLogs:(NSSet *)values;
+- (void) removeLogs:(NSSet *)values;
 
-- (void)addTopicsObject:(TopicEntity *)value;
-- (void)removeTopicsObject:(TopicEntity *)value;
-- (void)addTopics:(NSSet *)values;
-- (void)removeTopics:(NSSet *)values;
+- (void) addTopicsObject:(TopicEntity *)value;
+- (void) removeTopicsObject:(TopicEntity *)value;
+- (void) addTopics:(NSSet *)values;
+- (void) removeTopics:(NSSet *)values;
 
 @end

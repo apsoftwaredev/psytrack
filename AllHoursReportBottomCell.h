@@ -10,20 +10,14 @@
 #import "ClinicianEntity.h"
 #import "TrackTypeWithTotalTimes.h"
 
-@interface AllHoursReportBottomCell : SCCustomCell{
-    
+@interface AllHoursReportBottomCell : SCCustomCell {
     __weak ClinicianEntity *clinician_;
     __weak TrackTypeWithTotalTimes *trackTypeWithTotalTimesObject_;
 }
 
-
-
 @property (nonatomic, weak)  TrackTypeWithTotalTimes *trackTypeWithTotalTimesObject;
-@property (nonatomic, weak)IBOutlet UIView *cellsContainerView;
-@property (nonatomic, weak)IBOutlet UILabel *cellSubTypeLabel;
-@property (nonatomic, weak)IBOutlet UILabel *hoursTotalHoursLabel;
-
-
-
+@property (nonatomic, weak) IBOutlet UIView *cellsContainerView;
+@property (nonatomic, weak) IBOutlet UILabel *cellSubTypeLabel;
+@property (nonatomic, weak) IBOutlet UILabel *hoursTotalHoursLabel;
 
 @end

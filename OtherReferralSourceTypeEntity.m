@@ -10,12 +10,10 @@
 #import "OtherReferralSourceTypeEntity.h"
 #import "OtherReferralSourceEntity.h"
 
-
 @implementation OtherReferralSourceTypeEntity
 
 @dynamic order;
 @dynamic referralType;
 @dynamic otherReferralSources;
-
 
 @end

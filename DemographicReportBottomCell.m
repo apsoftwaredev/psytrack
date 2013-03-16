@@ -15,56 +15,34 @@
 @synthesize variableLabel;
 @synthesize variableCountLabel;
 @synthesize containerView;
-@synthesize demVariableAndCount=demVariableAndCount_;
+@synthesize demVariableAndCount = demVariableAndCount_;
 
-
-
-
--(void)willDisplay{
-    
+- (void) willDisplay
+{
     [super willDisplay];
-    
-    
-    
-    self.variableLabel.text=self.demVariableAndCount.variableStr;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    self.layer.borderWidth=0;
-    self.accessoryType=UITableViewCellAccessoryNone;
-    
+
+    self.variableLabel.text = self.demVariableAndCount.variableStr;
+
+    self.layer.borderWidth = 0;
+    self.accessoryType = UITableViewCellAccessoryNone;
 }
 
--(void)performInitialization{
-    
-    
-    
-    
+
+- (void) performInitialization
+{
 }
 
--(void)loadBindingsIntoCustomControls{
-    
+
+- (void) loadBindingsIntoCustomControls
+{
     [super loadBindingsIntoCustomControls];
-    
-    
-    self.demVariableAndCount=(DemographicVariableAndCount *) self.boundObject;
-    
-    self.variableLabel.text=demVariableAndCount_.variableStr;
-    
-    self.variableCountLabel.text=demVariableAndCount_.variableCountStr;
-    
-   
-    
-    
+
+    self.demVariableAndCount = (DemographicVariableAndCount *)self.boundObject;
+
+    self.variableLabel.text = demVariableAndCount_.variableStr;
+
+    self.variableCountLabel.text = demVariableAndCount_.variableCountStr;
 }
+
 
 @end

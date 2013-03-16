@@ -10,7 +10,6 @@
 #import "OtherActivityEntity.h"
 #import "LogEntity.h"
 
-
 @implementation OtherActivityEntity
 
 @dynamic activity;
@@ -19,7 +18,5 @@
 @dynamic notes;
 @dynamic order;
 @dynamic logs;
-
-
 
 @end

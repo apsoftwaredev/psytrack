@@ -13,128 +13,136 @@
 
 @synthesize name, iconBasename, detailURL, iconURL, launchURL, iconImage;
 
-+ (DTApp *)appFromDictionary:(NSDictionary *)dictionary
++ (DTApp *) appFromDictionary:(NSDictionary *)dictionary
 {
-	DTApp *tmpApp = [[[DTApp alloc] init] autorelease];
-	[tmpApp setValuesForKeysWithDictionary:dictionary];
-	
-	return tmpApp;
+    DTApp *tmpApp = [[[DTApp alloc] init] autorelease];
+    [tmpApp setValuesForKeysWithDictionary:dictionary];
+
+    return tmpApp;
 }
 
 
 - (void) dealloc
 {
-	[iconDownloadConnection cancel];
-	[iconDownloadConnection release];
-	[receivedIconData release], receivedIconData = nil;
-	
-	[name release];
-	[iconBasename release];
-	[detailURL release];
-	[iconURL release];
-	[launchURL release];
-	
-	[super dealloc];
+    [iconDownloadConnection cancel];
+    [iconDownloadConnection release];
+    [receivedIconData release], receivedIconData = nil;
+
+    [name release];
+    [iconBasename release];
+    [detailURL release];
+    [iconURL release];
+    [launchURL release];
+
+    [super dealloc];
 }
 
-- (NSString*) cachedFileName
+
+- (NSString *) cachedFileName
 {
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-	NSString *cacheDirectory = [paths objectAtIndex:0];
-	return [cacheDirectory stringByAppendingPathComponent:iconBasename];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cacheDirectory = [paths objectAtIndex:0];
+    return [cacheDirectory stringByAppendingPathComponent:iconBasename];
 }
 
-- (UIImage *)iconImage
+
+- (UIImage *) iconImage
 {
-	if (!iconImage)
-	{
-		// try cache
-		NSString *cacheFileName = [self cachedFileName];
-		
-		if ([[NSFileManager defaultManager] fileExistsAtPath:cacheFileName]) 
-		{
-			UIImage *originalImage = [UIImage imageWithContentsOfFile:cacheFileName];
-            
+    if (!iconImage)
+    {
+        // try cache
+        NSString *cacheFileName = [self cachedFileName];
+
+        if ([[NSFileManager defaultManager] fileExistsAtPath:cacheFileName])
+        {
+            UIImage *originalImage = [UIImage imageWithContentsOfFile:cacheFileName];
+
             if (originalImage)
             {
                 self.iconImage = [UIImage imageWithImage:originalImage scaledToSize:CGSizeMake(57.0, 57.0)];
                 return iconImage;
             }
-		}
-		
-		if (!iconDownloadConnection)
-		{
-			NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:iconURL]];
-			iconDownloadConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-		}
-		
-		// fallback: try app bundle
-		UIImage *originalImage = [UIImage imageNamed:iconBasename];
-		if (originalImage)
-		{
-			return [UIImage imageWithImage:originalImage scaledToSize:CGSizeMake(57.0, 57.0)];
-		}
-		else 
-		{
-			return nil;
-		}
-	}
-	
-	return iconImage;
+        }
+
+        if (!iconDownloadConnection)
+        {
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:iconURL]];
+            iconDownloadConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+        }
+
+        // fallback: try app bundle
+        UIImage *originalImage = [UIImage imageNamed:iconBasename];
+        if (originalImage)
+        {
+            return [UIImage imageWithImage:originalImage scaledToSize:CGSizeMake(57.0, 57.0)];
+        }
+        else
+        {
+            return nil;
+        }
+    }
+
+    return iconImage;
 }
+
 
 - (BOOL) isInstalled
 {
-	if ([launchURL length])
-	{
-		NSURL *url = [NSURL URLWithString:[launchURL stringByAppendingString:@"://"]];
-		return [[UIApplication sharedApplication] canOpenURL:url];
-	}
-	else
-	{
-		return NO;
-	}
+    if ([launchURL length])
+    {
+        NSURL *url = [NSURL URLWithString:[launchURL stringByAppendingString:@"://"]];
+        return [[UIApplication sharedApplication] canOpenURL:url];
+    }
+    else
+    {
+        return NO;
+    }
 }
+
 
 #pragma mark NSURLConnection Delegate
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+- (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-	// every forward resets the received data
-	[receivedIconData release], receivedIconData = nil;
+    // every forward resets the received data
+    [receivedIconData release], receivedIconData = nil;
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+
+- (void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-	if (!receivedIconData)
-	{
-		receivedIconData = [[NSMutableData alloc] init];
-	}
-	
-	[receivedIconData appendData:data];
+    if (!receivedIconData)
+    {
+        receivedIconData = [[NSMutableData alloc] init];
+    }
+
+    [receivedIconData appendData:data];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+
+- (void) connectionDidFinishLoading:(NSURLConnection *)connection
 {
-	UIImage *newIcon = [UIImage imageWithData:receivedIconData];
-    
+    UIImage *newIcon = [UIImage imageWithData:receivedIconData];
+
     if (newIcon)
     {
         self.iconImage = newIcon;
         [receivedIconData writeToFile:[self cachedFileName] atomically:NO];
-	}
-    
-	[receivedIconData release], receivedIconData = nil;
-	[iconDownloadConnection release], iconDownloadConnection = nil;
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"DTAppLoadedIcon" object:nil userInfo:[NSDictionary dictionaryWithObject:self forKey:@"App"]];
-}
+    }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-	[receivedIconData release], receivedIconData = nil;
-	[iconDownloadConnection release], iconDownloadConnection = nil;
-    
+    [receivedIconData release], receivedIconData = nil;
+    [iconDownloadConnection release], iconDownloadConnection = nil;
+
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DTAppLoadedIcon" object:nil userInfo:[NSDictionary dictionaryWithObject:self forKey:@"App"]];
 }
+
+
+- (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    [receivedIconData release], receivedIconData = nil;
+    [iconDownloadConnection release], iconDownloadConnection = nil;
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DTAppLoadedIcon" object:nil userInfo:[NSDictionary dictionaryWithObject:self forKey:@"App"]];
+}
+
 
 @end

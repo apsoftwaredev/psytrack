@@ -11,7 +11,6 @@
 #import "ExistingSupportActivityEntity.h"
 #import "SupportActivityDeliveredEntity.h"
 
-
 @implementation SupportActivityTypeEntity
 
 @dynamic order;
@@ -19,7 +18,5 @@
 @dynamic supportActivityType;
 @dynamic supportActivitiesDelivered;
 @dynamic existingSupportActivities;
-
-
 
 @end

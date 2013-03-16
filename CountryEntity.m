@@ -9,13 +9,10 @@
 
 #import "CountryEntity.h"
 
-
 @implementation CountryEntity
 
 @dynamic country;
 @dynamic code;
 @dynamic governingBody;
-
-
 
 @end

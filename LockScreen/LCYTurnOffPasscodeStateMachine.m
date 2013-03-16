@@ -8,22 +8,23 @@
 #import "LCYAppSettings.h"
 #import "PTTEncryption.h"
 
-NSString * NSStringFromLCYTurnOffPasscodeStates (LCYTurnOffPasscodeStates state)
+NSString *NSStringFromLCYTurnOffPasscodeStates(LCYTurnOffPasscodeStates state)
 {
-	NSString *result = nil;
-	switch (state) 
-	{
-		case LCYTurnOffPasscodeStatesConfirmExistingPassword:
-			result = @"confirmExistingPassword";
-			break;
-		case LCYTurnOffPasscodeStatesDone:
-			result = @"done";
-			break;
-		default:
-			result = @"Unknown state";
-			break;
-	}
-	return result;
+    NSString *result = nil;
+    switch (state)
+    {
+        case LCYTurnOffPasscodeStatesConfirmExistingPassword:
+            result = @"confirmExistingPassword";
+            break;
+        case LCYTurnOffPasscodeStatesDone:
+            result = @"done";
+            break;
+        default:
+            result = @"Unknown state";
+            break;
+    }
+
+    return result;
 }
 
 
@@ -34,122 +35,124 @@ NSString * NSStringFromLCYTurnOffPasscodeStates (LCYTurnOffPasscodeStates state)
 
 - (id) init;
 {
-	if ( (self = [super init]) )
-	{
-		state_ = LCYTurnOffPasscodeStatesConfirmExistingPassword;
-	}
-	return self;
-}
+    if ( (self = [super init]) )
+    {
+        state_ = LCYTurnOffPasscodeStatesConfirmExistingPassword;
+    }
 
+    return self;
+}
 
 - (NSString *) description;
 {
-	return [NSString stringWithFormat:@"state: %@ | existingPasscode: %@", 
-			NSStringFromLCYTurnOffPasscodeStates(state_),
-			self.existingPasscode
-			];
+    return [NSString stringWithFormat:@"state: %@ | existingPasscode: %@",
+            NSStringFromLCYTurnOffPasscodeStates(state_),
+            self.existingPasscode
+    ];
 }
 
 - (void) successTransition;
 {
-	currentErrorText_ = nil;
-	switch (state_) 
-	{
-		case LCYTurnOffPasscodeStatesConfirmExistingPassword:
-			state_ = LCYTurnOffPasscodeStatesDone;
-			break;
-		case LCYTurnOffPasscodeStatesDone:
-			break;
-		default:
-			NSAssert(NO, @"Unknown state");
-			break;
-	}	
+    currentErrorText_ = nil;
+    switch (state_)
+    {
+        case LCYTurnOffPasscodeStatesConfirmExistingPassword:
+            state_ = LCYTurnOffPasscodeStatesDone;
+            break;
+        case LCYTurnOffPasscodeStatesDone:
+            break;
+        default:
+            NSAssert(NO, @"Unknown state");
+            break;
+    }
 }
 
 - (void) failTransition;
 {
-	switch (state_) 
-	{
-		case LCYTurnOffPasscodeStatesConfirmExistingPassword:
-			currentErrorText_ = @"Attempt to change passcode failed and the app was locked. Try again or cancel.";
-			break;
-		case LCYTurnOffPasscodeStatesDone:
-			break;
-		default:
-			NSAssert(NO, @"Unknown state");
-			break;
-	}
+    switch (state_)
+    {
+        case LCYTurnOffPasscodeStatesConfirmExistingPassword:
+            currentErrorText_ = @"Attempt to change passcode failed and the app was locked. Try again or cancel.";
+            break;
+        case LCYTurnOffPasscodeStatesDone:
+            break;
+        default:
+            NSAssert(NO, @"Unknown state");
+            break;
+    }
 }
 
-- (void) transitionWithInput:(NSString *) input;
+- (void) transitionWithInput:(NSString *)input;
 {
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    LCYAppSettings *appSettings=[[LCYAppSettings alloc]init];
-    PTTEncryption *encryption=[[PTTEncryption alloc]init];
-    NSString *passcodeToSave = (input) ? [NSString stringWithFormat:@"%@kdieJsi3ea18ki" ,input ] :@"o6fjZ4dhvKIUYVmaqnNJIPCBE2" ;
-	switch (state_) 
-	{
-		case LCYTurnOffPasscodeStatesConfirmExistingPassword:
-			if ([[appSettings passcodeData] isEqualToData:[encryption getHashBytes:[appDelegate convertStringToData: passcodeToSave]]])
-			{
-				[self successTransition];
-			}
-			else 
-			{
+    PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+
+    LCYAppSettings *appSettings = [[LCYAppSettings alloc]init];
+    PTTEncryption *encryption = [[PTTEncryption alloc]init];
+    NSString *passcodeToSave = (input) ? [NSString stringWithFormat:@"%@kdieJsi3ea18ki",input ] : @"o6fjZ4dhvKIUYVmaqnNJIPCBE2";
+    switch (state_)
+    {
+        case LCYTurnOffPasscodeStatesConfirmExistingPassword:
+            if ([[appSettings passcodeData] isEqualToData:[encryption getHashBytes:[appDelegate convertStringToData:passcodeToSave]]])
+            {
+                [self successTransition];
+            }
+            else
+            {
                 [appDelegate lockApplication];
                 [appDelegate displayWrongPassword];
-				[self failTransition];
-                
-			}
-			break;
-						
-		case LCYTurnOffPasscodeStatesDone:
-			break;
-			
-		default:
-			NSAssert(NO, @"Unknown state");
-			break;
-	}	
-    appSettings=nil;
-    encryption=nil;
+                [self failTransition];
+            }
+
+            break;
+
+        case LCYTurnOffPasscodeStatesDone:
+            break;
+
+        default:
+            NSAssert(NO, @"Unknown state");
+            break;
+    } /* switch */
+
+    appSettings = nil;
+    encryption = nil;
 }
 
 - (NSString *) currentPromptText;
 {
-	NSString *result = nil;
-	switch (state_) 
-	{
-		case LCYTurnOffPasscodeStatesConfirmExistingPassword:
-			result = @"Enter existing passcode";
-			break;
-		default:
-			result = @"Unknown state";
-			break;
-	}
-	return result;
+    NSString *result = nil;
+    switch (state_)
+    {
+        case LCYTurnOffPasscodeStatesConfirmExistingPassword:
+            result = @"Enter existing passcode";
+            break;
+        default:
+            result = @"Unknown state";
+            break;
+    }
+
+    return result;
 }
 
 - (BOOL) gotCompletionState;
 {
-	return (state_ == LCYTurnOffPasscodeStatesDone);
+    return (state_ == LCYTurnOffPasscodeStatesDone);
 }
 
 - (NSData *) theNewPasscode;
 {
-	return nil;
+    return nil;
 }
 
-- (void) setTheNewPasscode: (NSString *) nu;
+- (void) setTheNewPasscode:(NSString *)nu;
 {
 }
 
 - (void) reset;
 {
-	state_ = LCYTurnOffPasscodeStatesConfirmExistingPassword;
-	self.theNewPasscode = nil;
-	self.existingPasscode = nil;
-	currentErrorText_ = nil;
+    state_ = LCYTurnOffPasscodeStatesConfirmExistingPassword;
+    self.theNewPasscode = nil;
+    self.existingPasscode = nil;
+    currentErrorText_ = nil;
 }
 
 @end

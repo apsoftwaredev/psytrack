@@ -9,7 +9,6 @@
 
 #import "PresentationDeliveredEntity.h"
 
-
 @implementation PresentationDeliveredEntity
 
 @dynamic date;
@@ -17,7 +16,5 @@
 @dynamic audienceSize;
 @dynamic audience;
 @dynamic presentation;
-
-
 
 @end

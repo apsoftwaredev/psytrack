@@ -33,19 +33,19 @@
 
 @required // Delegate protocols
 
-- (void)tappedInToolbar:(ThumbsMainToolbar *)toolbar doneButton:(UIButton *)button;
+- (void) tappedInToolbar:(ThumbsMainToolbar *)toolbar doneButton:(UIButton *)button;
 
-- (void)tappedInToolbar:(ThumbsMainToolbar *)toolbar showControl:(UISegmentedControl *)control;
+- (void) tappedInToolbar:(ThumbsMainToolbar *)toolbar showControl:(UISegmentedControl *)control;
 
 @end
 
 @interface ThumbsMainToolbar : UIXToolbarView
 {
-@private // Instance variables
+    @private // Instance variables
 }
 
 @property (nonatomic, assign, readwrite) id <ThumbsMainToolbarDelegate> delegate;
 
-- (id)initWithFrame:(CGRect)frame title:(NSString *)title;
+- (id) initWithFrame:(CGRect)frame title:(NSString *)title;
 
 @end

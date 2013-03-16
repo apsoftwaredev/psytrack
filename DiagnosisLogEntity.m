@@ -11,7 +11,6 @@
 #import "AdditionalSymptomNameEntity.h"
 #import "DiagnosisHistoryEntity.h"
 
-
 @implementation DiagnosisLogEntity
 
 @dynamic frequency;
@@ -23,8 +22,5 @@
 @dynamic severity;
 @dynamic symptoms;
 @dynamic diagnosisHistory;
-
-
-
 
 @end

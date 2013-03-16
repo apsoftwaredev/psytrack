@@ -12,22 +12,20 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class PublicationEntity;
 
 @interface PublicationTypeEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * publicationType;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *publicationType;
 @property (nonatomic, retain) NSSet *publication;
 @end
 
 @interface PublicationTypeEntity (CoreDataGeneratedAccessors)
 
-- (void)addPublicationObject:(PublicationEntity *)value;
-- (void)removePublicationObject:(PublicationEntity *)value;
-- (void)addPublication:(NSSet *)values;
-- (void)removePublication:(NSSet *)values;
+- (void) addPublicationObject:(PublicationEntity *)value;
+- (void) removePublicationObject:(PublicationEntity *)value;
+- (void) addPublication:(NSSet *)values;
+- (void) removePublication:(NSSet *)values;
 
 @end

@@ -10,7 +10,6 @@
 #import "MigrationHistoryEntity.h"
 #import "DemographicProfileEntity.h"
 
-
 @implementation MigrationHistoryEntity
 
 @dynamic arrivedDate;
@@ -19,7 +18,5 @@
 @dynamic migratedFrom;
 @dynamic migratedTo;
 @dynamic demographicProfile;
-
-
 
 @end

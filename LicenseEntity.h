@@ -12,17 +12,15 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClinicianEntity, LogEntity;
 
 @interface LicenseEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * status;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * renewDate;
-@property (nonatomic, retain) NSString * licenseNumber;
+@property (nonatomic, retain) NSString *status;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSDate *renewDate;
+@property (nonatomic, retain) NSString *licenseNumber;
 @property (nonatomic, retain) NSManagedObject *governingBody;
 @property (nonatomic, retain) NSSet *logs;
 @property (nonatomic, retain) NSManagedObject *licenseName;
@@ -32,14 +30,14 @@
 
 @interface LicenseEntity (CoreDataGeneratedAccessors)
 
-- (void)addLogsObject:(LogEntity *)value;
-- (void)removeLogsObject:(LogEntity *)value;
-- (void)addLogs:(NSSet *)values;
-- (void)removeLogs:(NSSet *)values;
+- (void) addLogsObject:(LogEntity *)value;
+- (void) removeLogsObject:(LogEntity *)value;
+- (void) addLogs:(NSSet *)values;
+- (void) removeLogs:(NSSet *)values;
 
-- (void)addRenewalsObject:(NSManagedObject *)value;
-- (void)removeRenewalsObject:(NSManagedObject *)value;
-- (void)addRenewals:(NSSet *)values;
-- (void)removeRenewals:(NSSet *)values;
+- (void) addRenewalsObject:(NSManagedObject *)value;
+- (void) removeRenewalsObject:(NSManagedObject *)value;
+- (void) addRenewals:(NSSet *)values;
+- (void) removeRenewals:(NSSet *)values;
 
 @end

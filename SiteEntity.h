@@ -12,19 +12,17 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClinicianEntity, ExistingHoursEntity, TimeTrackEntity;
 
 @interface SiteEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * siteName;
-@property (nonatomic, retain) NSString * location;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * started;
-@property (nonatomic, retain) NSDate * ended;
-@property (nonatomic, retain) NSNumber * defaultSite;
+@property (nonatomic, retain) NSString *siteName;
+@property (nonatomic, retain) NSString *location;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSDate *started;
+@property (nonatomic, retain) NSDate *ended;
+@property (nonatomic, retain) NSNumber *defaultSite;
 @property (nonatomic, retain) NSManagedObject *settingType;
 @property (nonatomic, retain) ClinicianEntity *supervisor;
 @property (nonatomic, retain) NSSet *timeTracks;
@@ -33,14 +31,14 @@
 
 @interface SiteEntity (CoreDataGeneratedAccessors)
 
-- (void)addTimeTracksObject:(TimeTrackEntity *)value;
-- (void)removeTimeTracksObject:(TimeTrackEntity *)value;
-- (void)addTimeTracks:(NSSet *)values;
-- (void)removeTimeTracks:(NSSet *)values;
+- (void) addTimeTracksObject:(TimeTrackEntity *)value;
+- (void) removeTimeTracksObject:(TimeTrackEntity *)value;
+- (void) addTimeTracks:(NSSet *)values;
+- (void) removeTimeTracks:(NSSet *)values;
 
-- (void)addExistingHoursObject:(ExistingHoursEntity *)value;
-- (void)removeExistingHoursObject:(ExistingHoursEntity *)value;
-- (void)addExistingHours:(NSSet *)values;
-- (void)removeExistingHours:(NSSet *)values;
+- (void) addExistingHoursObject:(ExistingHoursEntity *)value;
+- (void) removeExistingHoursObject:(ExistingHoursEntity *)value;
+- (void) addExistingHours:(NSSet *)values;
+- (void) removeExistingHours:(NSSet *)values;
 
 @end

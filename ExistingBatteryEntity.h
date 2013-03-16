@@ -12,16 +12,14 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class BatteryEntity, ExistingAssessmentEntity;
 
 @interface ExistingBatteryEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * numberAdminstered;
-@property (nonatomic, retain) NSNumber * numberOfReportsWritten;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * adminstrationAndReport;
+@property (nonatomic, retain) NSNumber *numberAdminstered;
+@property (nonatomic, retain) NSNumber *numberOfReportsWritten;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *adminstrationAndReport;
 @property (nonatomic, retain) ExistingAssessmentEntity *existingAssessment;
 @property (nonatomic, retain) BatteryEntity *battery;
 

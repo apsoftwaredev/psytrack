@@ -39,43 +39,43 @@
 
 @optional // Delegate protocols
 
-- (void)dismissReaderViewController:(ReaderViewController *)viewController;
-- (void)readerViewDidAppear:(ReaderViewController *)viewController;
+- (void) dismissReaderViewController:(ReaderViewController *)viewController;
+- (void) readerViewDidAppear:(ReaderViewController *)viewController;
 
 @end
 
 @interface ReaderViewController : UIViewController <UIScrollViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate,
-													ReaderMainToolbarDelegate, ReaderMainPagebarDelegate, ReaderContentViewDelegate,
-													ThumbsViewControllerDelegate
-                                                      ,UIDocumentInteractionControllerDelegate  >
+                                                    ReaderMainToolbarDelegate, ReaderMainPagebarDelegate, ReaderContentViewDelegate,
+                                                    ThumbsViewControllerDelegate
+                                                    ,UIDocumentInteractionControllerDelegate  >
 {
-@private // Instance variables
+    @private // Instance variables
 
-	ReaderDocument *document;
+    ReaderDocument *document;
 
-	UIScrollView *theScrollView;
+    UIScrollView *theScrollView;
 
-	ReaderMainToolbar *mainToolbar;
+    ReaderMainToolbar *mainToolbar;
 
-	ReaderMainPagebar *mainPagebar;
+    ReaderMainPagebar *mainPagebar;
 
-	NSMutableDictionary *contentViews;
+    NSMutableDictionary *contentViews;
 
-	UIPrintInteractionController *printInteraction;
+    UIPrintInteractionController *printInteraction;
 
-	NSInteger currentPage;
+    NSInteger currentPage;
 
-	CGSize lastAppearSize;
+    CGSize lastAppearSize;
 
-	NSDate *lastHideTime;
+    NSDate *lastHideTime;
 
-	BOOL isVisible;
-    
+    BOOL isVisible;
+
     UIDocumentInteractionController *documentController;
 }
 
 @property (nonatomic, assign, readwrite) id <ReaderViewControllerDelegate> delegate;
 
-- (id)initWithReaderDocument:(ReaderDocument *)object;
+- (id) initWithReaderDocument:(ReaderDocument *)object;
 
 @end

@@ -14,7 +14,6 @@
 #import "ExistingHoursEntity.h"
 #import "ExistingInstrumentEntity.h"
 
-
 @implementation ExistingAssessmentEntity
 
 @dynamic monthlyLogNotes;
@@ -25,8 +24,5 @@
 @dynamic demographics;
 @dynamic existingHours;
 @dynamic batteries;
-
-
-
 
 @end

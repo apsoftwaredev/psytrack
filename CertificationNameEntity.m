@@ -10,17 +10,11 @@
 #import "CertificationNameEntity.h"
 #import "CertificationEntity.h"
 
-
 @implementation CertificationNameEntity
 
 @dynamic order;
 @dynamic certName;
 @dynamic desc;
 @dynamic certifications;
-
-
-
-
-
 
 @end

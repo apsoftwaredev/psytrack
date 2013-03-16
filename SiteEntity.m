@@ -12,7 +12,6 @@
 #import "ExistingHoursEntity.h"
 #import "TimeTrackEntity.h"
 
-
 @implementation SiteEntity
 
 @dynamic siteName;
@@ -26,7 +25,5 @@
 @dynamic supervisor;
 @dynamic timeTracks;
 @dynamic existingHours;
-
-
 
 @end

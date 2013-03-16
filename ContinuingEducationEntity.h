@@ -12,17 +12,15 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ContinuingEducationProviderEntity, ContinuingEducationTypeEntity;
 
 @interface ContinuingEducationEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * cost;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * dateEarned;
-@property (nonatomic, retain) NSString * cETitle;
-@property (nonatomic, retain) NSNumber * credits;
+@property (nonatomic, retain) NSNumber *cost;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSDate *dateEarned;
+@property (nonatomic, retain) NSString *cETitle;
+@property (nonatomic, retain) NSNumber *credits;
 @property (nonatomic, retain) NSManagedObject *forLicenseRenewal;
 @property (nonatomic, retain) ContinuingEducationProviderEntity *provider;
 @property (nonatomic, retain) NSSet *topics;
@@ -31,9 +29,9 @@
 
 @interface ContinuingEducationEntity (CoreDataGeneratedAccessors)
 
-- (void)addTopicsObject:(NSManagedObject *)value;
-- (void)removeTopicsObject:(NSManagedObject *)value;
-- (void)addTopics:(NSSet *)values;
-- (void)removeTopics:(NSSet *)values;
+- (void) addTopicsObject:(NSManagedObject *)value;
+- (void) removeTopicsObject:(NSManagedObject *)value;
+- (void) addTopics:(NSSet *)values;
+- (void) removeTopics:(NSSet *)values;
 
 @end

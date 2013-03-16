@@ -9,16 +9,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DemographicDisabilityCount : NSObject{
-    
-     NSMutableArray *disabilityMutableArray_;
-     NSSet *multiDisabilityOnlySet_;
-    
+@interface DemographicDisabilityCount : NSObject {
+    NSMutableArray *disabilityMutableArray_;
+    NSSet *multiDisabilityOnlySet_;
 }
 
-@property (nonatomic, strong)NSMutableArray *disabilityMutableArray;
-@property (nonatomic, strong)NSSet *multiDisabilityOnlySet;
+@property (nonatomic, strong) NSMutableArray *disabilityMutableArray;
+@property (nonatomic, strong) NSSet *multiDisabilityOnlySet;
 
-
-;
 @end

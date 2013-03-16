@@ -12,17 +12,15 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class DemographicProfileEntity;
 
 @interface MigrationHistoryEntity : PTManagedObject
 
-@property (nonatomic, retain) NSDate * arrivedDate;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * keyString;
-@property (nonatomic, retain) NSString * migratedFrom;
-@property (nonatomic, retain) NSString * migratedTo;
+@property (nonatomic, retain) NSDate *arrivedDate;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSString *keyString;
+@property (nonatomic, retain) NSString *migratedFrom;
+@property (nonatomic, retain) NSString *migratedTo;
 @property (nonatomic, retain) DemographicProfileEntity *demographicProfile;
 
 @end

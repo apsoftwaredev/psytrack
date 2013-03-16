@@ -10,7 +10,6 @@
 #import "SubstanceUseLogEntity.h"
 #import "SubstanceUseEntity.h"
 
-
 @implementation SubstanceUseLogEntity
 
 @dynamic typicalDose;
@@ -19,8 +18,5 @@
 @dynamic notes;
 @dynamic timesUsedInLastThirtyDays;
 @dynamic substanceUse;
-
-
-
 
 @end

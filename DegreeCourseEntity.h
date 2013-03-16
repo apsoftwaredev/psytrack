@@ -12,18 +12,16 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClinicianEntity, DegreeEntity, LogEntity, SchoolEntity;
 
 @interface DegreeCourseEntity : PTManagedObject
 
-@property (nonatomic, retain) NSDate * endDate;
-@property (nonatomic, retain) NSDate * startDate;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * grade;
-@property (nonatomic, retain) NSNumber * credits;
-@property (nonatomic, retain) NSString * courseName;
+@property (nonatomic, retain) NSDate *endDate;
+@property (nonatomic, retain) NSDate *startDate;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSString *grade;
+@property (nonatomic, retain) NSNumber *credits;
+@property (nonatomic, retain) NSString *courseName;
 @property (nonatomic, retain) SchoolEntity *school;
 @property (nonatomic, retain) DegreeEntity *degree;
 @property (nonatomic, retain) NSSet *logs;
@@ -32,14 +30,14 @@
 
 @interface DegreeCourseEntity (CoreDataGeneratedAccessors)
 
-- (void)addLogsObject:(LogEntity *)value;
-- (void)removeLogsObject:(LogEntity *)value;
-- (void)addLogs:(NSSet *)values;
-- (void)removeLogs:(NSSet *)values;
+- (void) addLogsObject:(LogEntity *)value;
+- (void) removeLogsObject:(LogEntity *)value;
+- (void) addLogs:(NSSet *)values;
+- (void) removeLogs:(NSSet *)values;
 
-- (void)addInstructorsObject:(ClinicianEntity *)value;
-- (void)removeInstructorsObject:(ClinicianEntity *)value;
-- (void)addInstructors:(NSSet *)values;
-- (void)removeInstructors:(NSSet *)values;
+- (void) addInstructorsObject:(ClinicianEntity *)value;
+- (void) removeInstructorsObject:(ClinicianEntity *)value;
+- (void) addInstructors:(NSSet *)values;
+- (void) removeInstructors:(NSSet *)values;
 
 @end

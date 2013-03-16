@@ -12,13 +12,11 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class DisabilityEntity, ExistingDemographicsEntity;
 
 @interface ExistingDisabilityEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * numberOfIndividuals;
+@property (nonatomic, retain) NSNumber *numberOfIndividuals;
 @property (nonatomic, retain) ExistingDemographicsEntity *existingDemographics;
 @property (nonatomic, retain) DisabilityEntity *disability;
 

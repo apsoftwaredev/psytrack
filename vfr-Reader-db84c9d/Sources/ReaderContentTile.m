@@ -38,49 +38,50 @@
 
 #pragma mark ReaderContentTile class methods
 
-+ (CFTimeInterval)fadeDuration
++ (CFTimeInterval) fadeDuration
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	return 0.001; // iOS bug workaround
+    return 0.001;     // iOS bug workaround
 
-	//return 0.0; // No fading wanted
+    //return 0.0; // No fading wanted
 }
+
 
 #pragma mark ReaderContentTile instance methods
 
-- (id)init
+- (id) init
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if ((self = [super init]))
-	{
-		self.levelsOfDetail = LEVELS_OF_DETAIL; // Zoom (?) levels
+    if ( (self = [super init]) )
+    {
+        self.levelsOfDetail = LEVELS_OF_DETAIL;         // Zoom (?) levels
 
-		UIScreen *mainScreen = [UIScreen mainScreen]; // Main screen
+        UIScreen *mainScreen = [UIScreen mainScreen];         // Main screen
 
-		CGFloat screenScale = [mainScreen scale]; // Main screen scale
+        CGFloat screenScale = [mainScreen scale];         // Main screen scale
 
-		self.levelsOfDetailBias = (screenScale > 1.0f) ? 1 : LEVELS_OF_DETAIL_BIAS;
+        self.levelsOfDetailBias = (screenScale > 1.0f) ? 1 : LEVELS_OF_DETAIL_BIAS;
 
-		CGRect screenBounds = [mainScreen bounds]; // Main screen bounds
+        CGRect screenBounds = [mainScreen bounds];         // Main screen bounds
 
-		CGFloat w_pixels = (screenBounds.size.width * screenScale);
+        CGFloat w_pixels = (screenBounds.size.width * screenScale);
 
-		CGFloat h_pixels = (screenBounds.size.height * screenScale);
+        CGFloat h_pixels = (screenBounds.size.height * screenScale);
 
-		CGFloat max = ((w_pixels < h_pixels) ? h_pixels : w_pixels);
+        CGFloat max = ( (w_pixels < h_pixels) ? h_pixels : w_pixels );
 
-		CGFloat sizeOfTiles = ((max < 512.0f) ? 512.0f : 1024.0f);
+        CGFloat sizeOfTiles = ( (max < 512.0f) ? 512.0f : 1024.0f );
 
-		self.tileSize = CGSizeMake(sizeOfTiles, sizeOfTiles);
-	}
+        self.tileSize = CGSizeMake(sizeOfTiles, sizeOfTiles);
+    }
 
-	return self;
+    return self;
 }
 
 

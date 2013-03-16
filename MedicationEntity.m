@@ -13,7 +13,6 @@
 #import "DiagnosisHistoryEntity.h"
 #import "MedicationReviewEntity.h"
 
-
 @implementation MedicationEntity
 
 @dynamic discontinued;
@@ -28,7 +27,5 @@
 @dynamic symptomsTargeted;
 @dynamic diagnoses;
 @dynamic client;
-
-
 
 @end

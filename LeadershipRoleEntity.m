@@ -9,7 +9,6 @@
 
 #import "LeadershipRoleEntity.h"
 
-
 @implementation LeadershipRoleEntity
 
 @dynamic impact;
@@ -22,7 +21,5 @@
 @dynamic challengesFaced;
 @dynamic populationSize;
 @dynamic organization;
-
-
 
 @end

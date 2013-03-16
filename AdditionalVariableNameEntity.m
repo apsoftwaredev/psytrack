@@ -11,7 +11,6 @@
 #import "AdditionalVariableEntity.h"
 #import "AdditionalVariableValueEntity.h"
 
-
 @implementation AdditionalVariableNameEntity
 
 @dynamic order;
@@ -19,7 +18,5 @@
 @dynamic variableName;
 @dynamic aditionalVariables;
 @dynamic variableValues;
-
-
 
 @end

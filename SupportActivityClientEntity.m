@@ -11,7 +11,6 @@
 #import "ClientEntity.h"
 #import "SupportActivityDeliveredEntity.h"
 
-
 @implementation SupportActivityClientEntity
 
 @dynamic proBono;
@@ -20,7 +19,5 @@
 @dynamic hourlyRate;
 @dynamic client;
 @dynamic supportActivityDelivered;
-
-
 
 @end

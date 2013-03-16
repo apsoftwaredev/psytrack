@@ -4,9 +4,9 @@
  *  Version: 1.05
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
  *
  *  Created by Daniel Boice on 9/9/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -29,539 +29,440 @@
 #import "LookupRemoveLinkButtonCell.h"
 #import "AddViewABLinkButtonCell.h"
 @implementation CliniciansRootViewController_iPad
-@synthesize cliniciansBarButtonItem=cliniciansBarButtonItem_;
-
-
-
+@synthesize cliniciansBarButtonItem = cliniciansBarButtonItem_;
 
 #pragma mark -
 #pragma mark View lifecycle and setting up table model
 
-- (void)viewDidLoad {
+- (void) viewDidLoad
+{
     [super viewDidLoad];
     self.navigationBarType = SCNavigationBarTypeEditLeft;
-    
+
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
     managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-   
-    
+
     // Set up the edit and add buttons.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
+    PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 
-      
     [self.tableView setBackgroundView:nil];
     [self.tableView setBackgroundView:[[UIView alloc] init]];
     [self.view setBackgroundColor:appDelegate.window.backgroundColor];
 
-    objectsModel.addButtonItem=objectsModel.detailViewController.navigationItem.rightBarButtonItem;
-    
-    objectsModel.addButtonItem = self.addButton;
-	objectsModel.itemsAccessoryType = UITableViewCellAccessoryNone;
-    objectsModel.detailViewControllerOptions.modalPresentationStyle = UIModalPresentationPageSheet;
-    objectsModel.detailViewController=self.tableViewModel.detailViewController;
-    CliniciansDetailViewController_iPad *clinicianDetailViewController=(CliniciansDetailViewController_iPad *)objectsModel.detailViewController;
-    
-    clinicianDetailViewController.navigationBarType=SCNavigationBarTypeAddRight;
-    
-    objectsModel.addButtonItem=clinicianDetailViewController.navigationItem.rightBarButtonItem;
+    objectsModel.addButtonItem = objectsModel.detailViewController.navigationItem.rightBarButtonItem;
 
-   
-    NSString *imageNameStr=nil;
-    if ([SCUtilities is_iPad]) {
-        imageNameStr=@"ipad-menubar-full.png";
+    objectsModel.addButtonItem = self.addButton;
+    objectsModel.itemsAccessoryType = UITableViewCellAccessoryNone;
+    objectsModel.detailViewControllerOptions.modalPresentationStyle = UIModalPresentationPageSheet;
+    objectsModel.detailViewController = self.tableViewModel.detailViewController;
+    CliniciansDetailViewController_iPad *clinicianDetailViewController = (CliniciansDetailViewController_iPad *)objectsModel.detailViewController;
+
+    clinicianDetailViewController.navigationBarType = SCNavigationBarTypeAddRight;
+
+    objectsModel.addButtonItem = clinicianDetailViewController.navigationItem.rightBarButtonItem;
+
+    NSString *imageNameStr = nil;
+    if ([SCUtilities is_iPad])
+    {
+        imageNameStr = @"ipad-menubar-full.png";
     }
-    else{
-        
-        imageNameStr=@"menubar.png";
+    else
+    {
+        imageNameStr = @"menubar.png";
     }
-    
-    UIImage *menueBarImage=[UIImage imageNamed:imageNameStr];
+
+    UIImage *menueBarImage = [UIImage imageNamed:imageNameStr];
     [self.searchBar setBackgroundImage:menueBarImage];
     [self.searchBar setScopeBarBackgroundImage:menueBarImage];
-    
-    
-    self.cliniciansBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"Clinicians" style:UIBarButtonItemStylePlain target:self action:@selector(displayPopover:)];
-    
-   
+
+    self.cliniciansBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Clinicians" style:UIBarButtonItemStylePlain target:self action:@selector(displayPopover:)];
+
     objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
     {
         [self putAddAndClinicianButtonsOnDetailViewController];
         [self updateClinicianTotalLabel];
     };
 
-
     self.tableViewModel = objectsModel;
-    
-   
-       
-   
 }
 
 
--(void)viewDidUnload{
+- (void) viewDidUnload
+{
     [super viewDidUnload];
-    
-    
-    currentDetailTableViewModel_=nil;
-    
-    if (personVCFromSelectionList) {
-        self.personVCFromSelectionList=nil;
-    }
-    if (personAddNewViewController) {
-        self.personAddNewViewController=nil;
+
+    currentDetailTableViewModel_ = nil;
+
+    if (personVCFromSelectionList)
+    {
+        self.personVCFromSelectionList = nil;
     }
 
-
+    if (personAddNewViewController)
+    {
+        self.personAddNewViewController = nil;
+    }
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-  
-        return YES;
-  
+
+    return YES;
 }
 
 
 #pragma mark -
 #pragma SCTableViewModelDelegate methodds
 
-
--(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void) tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [super tableViewModel:tableViewModel valueChangedForRowAtIndexPath:indexPath];
-       
-        SCTableViewCell *cell=nil;
-        if (indexPath.row !=NSNotFound) {
-           cell =(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-        }  
-        
-    SCTableViewSection *sectionAtIndexPathThatChanged=(SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
-        if (!addingClinician && tableViewModel.tag==1&&((cell&&indexPath.section==0&&![cell isKindOfClass:[SCArrayOfObjectsCell class]]&&![cell isKindOfClass:[SCObjectCell class]]&&![cell isKindOfClass:[SCObjectSelectionCell class]])||(indexPath.section==1 &&sectionAtIndexPathThatChanged.cellCount==3))) {
-            
-            for (NSInteger i=0; i<tableViewModel.sectionCount; i++) {
-                SCTableViewSection *sectionAtIndex=[tableViewModel sectionAtIndex:i];
-                [sectionAtIndex commitCellChanges];
-            }
-            
-            
 
-            [tableViewModel.masterModel reloadBoundValues];
-            [tableViewModel.masterModel.modeledTableView reloadData];
-            
+    SCTableViewCell *cell = nil;
+    if (indexPath.row != NSNotFound)
+    {
+        cell = (SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
+    }
+
+    SCTableViewSection *sectionAtIndexPathThatChanged = (SCTableViewSection *)[tableViewModel sectionAtIndex:indexPath.section];
+    if ( !addingClinician && tableViewModel.tag == 1 && ( (cell && indexPath.section == 0 && ![cell isKindOfClass:[SCArrayOfObjectsCell class]] && ![cell isKindOfClass:[SCObjectCell class]] && ![cell isKindOfClass:[SCObjectSelectionCell class]]) || (indexPath.section == 1 && sectionAtIndexPathThatChanged.cellCount == 3) ) )
+    {
+        for (NSInteger i = 0; i < tableViewModel.sectionCount; i++)
+        {
+            SCTableViewSection *sectionAtIndex = [tableViewModel sectionAtIndex:i];
+            [sectionAtIndex commitCellChanges];
         }
-}
 
-
-
-
--(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    if (tableModel.tag==0) {
-        addingClinician=NO;
-    
-       
-       
+        [tableViewModel.masterModel reloadBoundValues];
+        [tableViewModel.masterModel.modeledTableView reloadData];
     }
-
-
 }
 
 
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didLayoutSubviewsForCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void) tableViewModel:(SCTableViewModel *)tableModel detailViewWillDismissForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if([cell isKindOfClass:[SCNumericTextFieldCell class]])
+    if (tableModel.tag == 0)
     {
-        SCNumericTextFieldCell *numericCell=(SCNumericTextFieldCell *)cell;
-        
-        
+        addingClinician = NO;
+    }
+}
+
+
+- (void) tableViewModel:(SCTableViewModel *)tableViewModel didLayoutSubviewsForCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell isKindOfClass:[SCNumericTextFieldCell class]])
+    {
+        SCNumericTextFieldCell *numericCell = (SCNumericTextFieldCell *)cell;
+
         [numericCell.textLabel sizeToFit];
-        numericCell.textField.textAlignment=UITextAlignmentRight;
-        numericCell.textField.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin ;
-       
+        numericCell.textField.textAlignment = UITextAlignmentRight;
+        numericCell.textField.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     }
 }
 
-- (void)tableViewModel:(SCTableViewModel *) tableViewModel willConfigureCell:(SCTableViewCell *) cell forRowAtIndexPath:(NSIndexPath *) indexPath
+
+- (void) tableViewModel:(SCTableViewModel *)tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-    
-    
-    if (tableViewModel.tag==1||tableViewModel.tag==0) 
-        
-        
+    if (tableViewModel.tag == 1 || tableViewModel.tag == 0)
     {
-        UIView *viewShort =[cell viewWithTag:35];
-        UIView *viewLong =[cell viewWithTag:51];
-        switch (cell.tag) {
+        UIView *viewShort = [cell viewWithTag:35];
+        UIView *viewLong = [cell viewWithTag:51];
+        switch (cell.tag)
+        {
             case 0:
-                if ([viewShort isKindOfClass:[UILabel class]]) 
+                if ([viewShort isKindOfClass:[UILabel class]])
                 {
-                    
-                    UILabel *titleLabel =(UILabel *)viewShort;
-                    titleLabel.text=@"Prefix:";
-                    tableViewModel.tag=1;
-                    
-                    
+                    UILabel *titleLabel = (UILabel *)viewShort;
+                    titleLabel.text = @"Prefix:";
+                    tableViewModel.tag = 1;
                 }
+
                 break;
             case 1:
-                if ([viewLong isKindOfClass:[UILabel class]]) {
-                    
-                    UILabel *firstNameLabel =(UILabel *)viewLong;
-                    firstNameLabel.text=@"First Name:";
-                    cell.commitChangesLive=YES;
-                    
+                if ([viewLong isKindOfClass:[UILabel class]])
+                {
+                    UILabel *firstNameLabel = (UILabel *)viewLong;
+                    firstNameLabel.text = @"First Name:";
+                    cell.commitChangesLive = YES;
                 }
+
                 break;
-                
+
             case 2:
-                if ([viewLong isKindOfClass:[UILabel class]]) {
-                    
-                    UILabel *middleNameLabel =(UILabel *)viewLong;
-                    middleNameLabel.text=@"Middle Name:";
-                } 
+                if ([viewLong isKindOfClass:[UILabel class]])
+                {
+                    UILabel *middleNameLabel = (UILabel *)viewLong;
+                    middleNameLabel.text = @"Middle Name:";
+                }
+
                 break;
-                
+
             case 3:
-                if ([viewLong isKindOfClass:[UILabel class]]) {
-                    
-                    UILabel *lastNameLabel =(UILabel *)viewLong;
-                    lastNameLabel.text=@"Last Name:";
-                    
-                } 
+                if ([viewLong isKindOfClass:[UILabel class]])
+                {
+                    UILabel *lastNameLabel = (UILabel *)viewLong;
+                    lastNameLabel.text = @"Last Name:";
+                }
+
                 break;
             case 4:
-                if ([viewLong isKindOfClass:[UILabel class]]) {
-                    
-                    UILabel *suffixLabel =(UILabel *)viewLong;
-                    suffixLabel.text=@"Suffix:";
-                } 
-                break;
-                
-                
-                
-            case 8:
-                if ([cell  isKindOfClass:[AddViewABLinkButtonCell class]]) 
+                if ([viewLong isKindOfClass:[UILabel class]])
                 {
-                    
-                    
-                    
-                    AddViewABLinkButtonCell *addViewButtonCell=(AddViewABLinkButtonCell *)cell;
-                    
-                    int addressBookRecordIdentifier=(int )[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"]intValue]; 
-                    
-                    ABAddressBookRef addressBook=ABAddressBookCreate();
-                    if (addressBookRecordIdentifier!=-1 && ![self checkIfRecordIDInAddressBook:addressBookRecordIdentifier addressBook:(ABAddressBookRef)addressBook]) {
-                        addressBookRecordIdentifier=-1;
-                        [cell.boundObject setValue:[NSNumber numberWithInt:-1 ]forKey:@"aBRecordIdentifier"];
+                    UILabel *suffixLabel = (UILabel *)viewLong;
+                    suffixLabel.text = @"Suffix:";
+                }
+
+                break;
+
+            case 8:
+                if ([cell isKindOfClass:[AddViewABLinkButtonCell class]])
+                {
+                    AddViewABLinkButtonCell *addViewButtonCell = (AddViewABLinkButtonCell *)cell;
+
+                    int addressBookRecordIdentifier = (int)[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"] intValue];
+
+                    ABAddressBookRef addressBook = ABAddressBookCreate();
+                    if (addressBookRecordIdentifier != -1 && ![self checkIfRecordIDInAddressBook:addressBookRecordIdentifier addressBook:(ABAddressBookRef)addressBook])
+                    {
+                        addressBookRecordIdentifier = -1;
+                        [cell.boundObject setValue:[NSNumber numberWithInt:-1 ] forKey:@"aBRecordIdentifier"];
                     }
+
                     CFRelease(addressBook);
-                    
-                    if (addressBookRecordIdentifier!=-1) {
-                        
+
+                    if (addressBookRecordIdentifier != -1)
+                    {
                         [addViewButtonCell toggleButtonsWithButtonOneHidden:YES];
-                        
                     }
-                    else 
+                    else
                     {
                         [addViewButtonCell toggleButtonsWithButtonOneHidden:NO];
                     }
-                    
-                    
-                    
-                } 
+                }
+
                 break;
-                
-                
+
             case 9:
                 //this is the root table
-                
-                
-            { 
-                if ([cell isKindOfClass:[LookupRemoveLinkButtonCell class]]) {
-                    
-                    int addressBookRecordIdentifier=(int )[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"]intValue]; 
-                    
-                 
-                    LookupRemoveLinkButtonCell *addViewButtonCell=(LookupRemoveLinkButtonCell *)cell;
-                    
-                    
-                    
-                    
-                    if (addressBookRecordIdentifier!=-1) {
-                        
+
+            {
+                if ([cell isKindOfClass:[LookupRemoveLinkButtonCell class]])
+                {
+                    int addressBookRecordIdentifier = (int)[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"] intValue];
+
+                    LookupRemoveLinkButtonCell *addViewButtonCell = (LookupRemoveLinkButtonCell *)cell;
+
+                    if (addressBookRecordIdentifier != -1)
+                    {
                         [addViewButtonCell toggleButtonsWithButtonOneHidden:YES];
-                        
                     }
-                    else 
+                    else
                     {
                         [addViewButtonCell toggleButtonsWithButtonOneHidden:NO];
                     }
-                    
-                    
-                    
-                } 
-                
-                
-            }  
-                
-                break;
-                
-               
+                }
+            }
+
+            break;
+
             default:
                 break;
-        }
-        
+        } /* switch */
     }
-    if (tableViewModel.tag==4) 
-        
-        
-    {
 
+    if (tableViewModel.tag == 4)
+    {
         UIView *sliderView = [cell viewWithTag:14];
         UIView *scaleView = [cell viewWithTag:70];
-        switch (cell.tag) {
-
+        switch (cell.tag)
+        {
             case 1:
-                
-                
-             
-                if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
-                    
-                    UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
-                    fluencyLevelLabel.text=@"Fluency Level:";
-                    
+
+                if ([scaleView isKindOfClass:[UISegmentedControl class]])
+                {
+                    UILabel *fluencyLevelLabel = (UILabel *)[cell viewWithTag:71];
+                    fluencyLevelLabel.text = @"Fluency Level:";
                 }
-                
+
                 break;
-                
-               
-                
+
             case 3:
-                
-                
-                if([sliderView isKindOfClass:[UISlider class]])
+
+                if ([sliderView isKindOfClass:[UISlider class]])
                 {
                     UISlider *sliderOne = (UISlider *)sliderView;
                     UILabel *slabel = (UILabel *)[cell viewWithTag:10];
-                    
+
                     slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
-                    UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                    UIImage *sliderRightTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                    [sliderOne setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
-                    [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
+                    UIImage *sliderLeftTrackImage = [[UIImage imageNamed:@"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth:9 topCapHeight:0];
+                    UIImage *sliderRightTrackImage = [[UIImage imageNamed:@"sliderbackground.png"] stretchableImageWithLeftCapWidth:9 topCapHeight:0];
+                    [sliderOne setMinimumTrackImage:sliderLeftTrackImage forState:UIControlStateNormal];
+                    [sliderOne setMaximumTrackImage:sliderRightTrackImage forState:UIControlStateNormal];
                     [sliderOne setMinimumValue:-1.0];
                     [sliderOne setMaximumValue:0];
-                    
                 }
+
                 break;
             case 4:
-                
-                if([sliderView isKindOfClass:[UISlider class]])
+
+                if ([sliderView isKindOfClass:[UISlider class]])
                 {
-                    
                     UISlider *sliderTwo = (UISlider *)sliderView;
-                    
+
                     UILabel *slabelTwo = (UILabel *)[cell viewWithTag:10];
-                    UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                    UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-                    [sliderTwo setMinimumTrackImage: sliderTwoLeftTrackImage forState: UIControlStateNormal];
-                    [sliderTwo setMaximumTrackImage: sliderTwoRightTrackImage forState: UIControlStateNormal];
-                    
-                    slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];        
+                    UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed:@"sliderbackground.png"] stretchableImageWithLeftCapWidth:9 topCapHeight:0];
+                    UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed:@"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth:9 topCapHeight:0];
+                    [sliderTwo setMinimumTrackImage:sliderTwoLeftTrackImage forState:UIControlStateNormal];
+                    [sliderTwo setMaximumTrackImage:sliderTwoRightTrackImage forState:UIControlStateNormal];
+
+                    slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];
                     [sliderTwo setMinimumValue:0.0];
-                    [sliderTwo setMaximumValue: 1.0];
-                    
+                    [sliderTwo setMaximumValue:1.0];
                 }
-                
-                
+
                 break;
-        }
-        
+        } /* switch */
     }
-    
-    
-    
-    
-    
-    
 }
 
--(NSArray *)tableViewModel:(SCArrayOfItemsModel *)tableModel customSearchResultForSearchText:(NSString *)searchText autoSearchResults:(NSArray *)autoSearchResults{
 
+- (NSArray *) tableViewModel:(SCArrayOfItemsModel *)tableModel customSearchResultForSearchText:(NSString *)searchText autoSearchResults:(NSArray *)autoSearchResults
+{
     [tableModel dismissAllDetailViewsWithCommit:YES];
 
     [self putAddAndClinicianButtonsOnDetailViewController];
     return autoSearchResults;
-
-
 }
 
--(void)putAddAndClinicianButtonsOnDetailViewController{
 
-
-    self.tableViewModel.detailViewController.navigationItem.rightBarButtonItem=objectsModel.addButtonItem;
-    
-    
-    
-    
-    self.tableViewModel.detailViewController.navigationItem.leftBarButtonItem= cliniciansBarButtonItem_;
-    
-
-
-}
-- (void)tableViewModel:(SCArrayOfItemsModel *)tableViewModel
-searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+- (void) putAddAndClinicianButtonsOnDetailViewController
 {
+    self.tableViewModel.detailViewController.navigationItem.rightBarButtonItem = objectsModel.addButtonItem;
 
-    self.searchBar.text=nil;
+    self.tableViewModel.detailViewController.navigationItem.leftBarButtonItem = cliniciansBarButtonItem_;
+}
+
+
+- (void)                        tableViewModel:(SCArrayOfItemsModel *)tableViewModel
+    searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
+{
+    self.searchBar.text = nil;
     [tableViewModel dismissAllDetailViewsWithCommit:YES];
-    
-      [super tableViewModel:tableViewModel searchBarSelectedScopeButtonIndexDidChange:selectedScope];
+
+    [super tableViewModel:tableViewModel searchBarSelectedScopeButtonIndexDidChange:selectedScope];
 
     [self putAddAndClinicianButtonsOnDetailViewController];
-
-
 }
 
 
-
-- (void)tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
+- (void) tableViewModel:(SCTableViewModel *)tableViewModel didAddSectionAtIndex:(NSUInteger)index
 {
-    
     SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
-    
-    
-   
-    
-    if ((tableViewModel.tag==0||tableViewModel.tag==1 )&&[tableViewModel.viewController isKindOfClass:[CliniciansDetailViewController_iPad class]]) 
+
+    if ( (tableViewModel.tag == 0 || tableViewModel.tag == 1) && [tableViewModel.viewController isKindOfClass:[CliniciansDetailViewController_iPad class]] )
     {
-        
-       
-        if (index==0) {
-            currentDetailTableViewModel_=tableViewModel;
-             tableViewModel.tag=1;
+        if (index == 0)
+        {
+            currentDetailTableViewModel_ = tableViewModel;
+            tableViewModel.tag = 1;
         }
-        
-        
     }
+
     [super tableViewModel:tableViewModel didAddSectionAtIndex:index];
-    
 
-    
- [self setSectionHeaderColorWithSection:(SCTableViewSection *)section color:[UIColor whiteColor]]; 
-    
-    
+    [self setSectionHeaderColorWithSection:(SCTableViewSection *)section color:[UIColor whiteColor]];
 }
 
 
-
-
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-    [super tableViewModel:tableViewModel detailModelCreatedForRowAtIndexPath:indexPath detailTableViewModel:detailTableViewModel];
-    if (tableViewModel.tag==0 && ![detailTableViewModel.viewController isKindOfClass:[CliniciansDetailViewController_iPad class]]) {
-        addingClinician=YES;
-    }
-
-}
-
-
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-    
-    
-    if (tableViewModel.tag==0) {
-        addingClinician=YES;
-    }
-    detailTableViewModel.tag=tableViewModel.tag+1;
-    
-    
-  
-}
--(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath  withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-
-    
-    [super tableViewModel:tableModel detailViewWillPresentForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
- 
-   
-    if (detailTableViewModel.tag==1 && indexPath.row!=NSNotFound) {
-        [self putAddAndClinicianButtonsOnDetailViewController];
-        
-    }
-    
-    
-    if (tableModel.tag==0 && indexPath.row==NSNotFound) {
-        addingClinician=YES;
-    }
-   
-
-
-
-}
-
-
-
--(IBAction)displayPopover:(id)sender{
-
-    
-    CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad=(CliniciansDetailViewController_iPad *)self.tableViewModel.detailViewController;
-    
-    [cliniciansDetailViewController_iPad.popoverController presentPopoverFromBarButtonItem:self.splitViewController.navigationItem.leftBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
-    
-
-
-    
-
-
-}
-
-- (NSString *)tableViewModel:(SCArrayOfItemsModel *)tableViewModel sectionHeaderTitleForItem:(NSObject *)item AtIndex:(NSUInteger)index
+- (void) tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel
 {
-	// Cast not technically neccessary, done just for clarity
-	NSManagedObject *managedObject = (NSManagedObject *)item;
-	
-	NSString *objectName = (NSString *)[managedObject valueForKey:@"lastName"];
-	
-	// Return first charcter of objectName
-	return [[objectName substringToIndex:1] uppercaseString];
+   
+    if (tableViewModel.tag == 0 && ![detailTableViewModel.viewController isKindOfClass:[CliniciansDetailViewController_iPad class]])
+    {
+        addingClinician = YES;
+    }
 }
 
 
+- (void) tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel
+{
+    if (tableViewModel.tag == 0)
+    {
+        addingClinician = YES;
+    }
+
+    detailTableViewModel.tag = tableViewModel.tag + 1;
+}
 
 
--(BOOL)checkIfRecordIDInAddressBook:(int)recordID addressBook:(ABAddressBookRef )addressBook{
-    
-    addressBook=nil;
-    if (!addressBook) {
-        addressBook=ABAddressBookCreate();
+- (void) tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
+{
+    [super tableViewModel:tableModel detailViewWillPresentForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
+
+    if (detailTableViewModel.tag == 1 && indexPath.row != NSNotFound)
+    {
+        [self putAddAndClinicianButtonsOnDetailViewController];
     }
-    BOOL exists=NO;
-    if (addressBook) {
-    
-    ABRecordRef person=nil;
-    
-    if (recordID>0) {
-        
-        
-        person=(ABRecordRef ) ABAddressBookGetPersonWithRecordID(addressBook, recordID);
-        if (person) {
-            exists=YES;
-        } 
-        
-        
+
+    if (tableModel.tag == 0 && indexPath.row == NSNotFound)
+    {
+        addingClinician = YES;
     }
-  
-    
-    } 
-    
-    if (addressBook) {
+}
+
+
+- (IBAction) displayPopover:(id)sender
+{
+    CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad = (CliniciansDetailViewController_iPad *)self.tableViewModel.detailViewController;
+
+    [cliniciansDetailViewController_iPad.popoverController presentPopoverFromBarButtonItem:self.splitViewController.navigationItem.leftBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+}
+
+
+- (NSString *) tableViewModel:(SCArrayOfItemsModel *)tableViewModel sectionHeaderTitleForItem:(NSObject *)item AtIndex:(NSUInteger)index
+{
+    // Cast not technically neccessary, done just for clarity
+    NSManagedObject *managedObject = (NSManagedObject *)item;
+
+    NSString *objectName = (NSString *)[managedObject valueForKey:@"lastName"];
+
+    // Return first charcter of objectName
+    return [[objectName substringToIndex:1] uppercaseString];
+}
+
+
+- (BOOL) checkIfRecordIDInAddressBook:(int)recordID addressBook:(ABAddressBookRef)addressBook
+{
+    addressBook = nil;
+    if (!addressBook)
+    {
+        addressBook = ABAddressBookCreate();
+    }
+
+    BOOL exists = NO;
+    if (addressBook)
+    {
+        ABRecordRef person = nil;
+
+        if (recordID > 0)
+        {
+            person = (ABRecordRef)ABAddressBookGetPersonWithRecordID(addressBook, recordID);
+            if (person)
+            {
+                exists = YES;
+            }
+        }
+    }
+
+    if (addressBook)
+    {
         CFRelease(addressBook);
-    } 
-    
+    }
+
     return exists;
-    
 }
 
 

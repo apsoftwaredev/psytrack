@@ -12,7 +12,6 @@
 #import "OrganizationEntity.h"
 #import "PresentationEntity.h"
 
-
 @implementation ConferenceEntity
 
 @dynamic attendenceSize;
@@ -27,8 +26,5 @@
 @dynamic myPresentations;
 @dynamic logs;
 @dynamic hostingOrganizations;
-
-
-
 
 @end

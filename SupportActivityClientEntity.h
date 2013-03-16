@@ -12,15 +12,13 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClientEntity, SupportActivityDeliveredEntity;
 
 @interface SupportActivityClientEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * proBono;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * paid;
+@property (nonatomic, retain) NSNumber *proBono;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *paid;
 @property (nonatomic, retain) NSManagedObject *hourlyRate;
 @property (nonatomic, retain) ClientEntity *client;
 @property (nonatomic, retain) SupportActivityDeliveredEntity *supportActivityDelivered;

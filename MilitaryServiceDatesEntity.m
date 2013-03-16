@@ -9,7 +9,6 @@
 
 #import "MilitaryServiceDatesEntity.h"
 
-
 @implementation MilitaryServiceDatesEntity
 
 @dynamic officerOrEnlisted;
@@ -20,7 +19,5 @@
 @dynamic dateJoined;
 @dynamic dischargeType;
 @dynamic militaryService;
-
-
 
 @end

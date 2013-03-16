@@ -10,14 +10,11 @@
 #import "EmploymentTitleEntity.h"
 #import "EmploymentPositionEntity.h"
 
-
 @implementation EmploymentTitleEntity
 
 @dynamic order;
 @dynamic jobTitle;
 @dynamic desc;
 @dynamic employmentPositions;
-
-
 
 @end

@@ -11,7 +11,6 @@
 #import "ClientInstrumentScoresEntity.h"
 #import "InstrumentScoreNameEntity.h"
 
-
 @implementation InstrumentScoreEntity
 
 @dynamic confidence;
@@ -28,7 +27,5 @@
 @dynamic percentile;
 @dynamic clientInstrumentScore;
 @dynamic scoreName;
-
-
 
 @end

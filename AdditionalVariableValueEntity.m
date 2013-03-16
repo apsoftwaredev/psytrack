@@ -11,7 +11,6 @@
 #import "AdditionalVariableEntity.h"
 #import "AdditionalVariableNameEntity.h"
 
-
 @implementation AdditionalVariableValueEntity
 
 @dynamic variableValue;
@@ -19,7 +18,5 @@
 @dynamic notes;
 @dynamic additionalVariables;
 @dynamic variableName;
-
-
 
 @end

@@ -27,25 +27,25 @@
 
 @interface ReaderContentPage : UIView
 {
-@private // Instance variables
+    @private // Instance variables
 
-	NSMutableArray *_links;
+    NSMutableArray *_links;
 
-	CGPDFDocumentRef _PDFDocRef;
+    CGPDFDocumentRef _PDFDocRef;
 
-	CGPDFPageRef _PDFPageRef;
+    CGPDFPageRef _PDFPageRef;
 
-	NSInteger _pageAngle;
+    NSInteger _pageAngle;
 
-	CGFloat _pageWidth;
-	CGFloat _pageHeight;
-	CGFloat _pageOffsetX;
-	CGFloat _pageOffsetY;
+    CGFloat _pageWidth;
+    CGFloat _pageHeight;
+    CGFloat _pageOffsetX;
+    CGFloat _pageOffsetY;
 }
 
-- (id)initWithURL:(NSURL *)fileURL page:(NSInteger)page password:(NSString *)phrase;
+- (id) initWithURL:(NSURL *)fileURL page:(NSInteger)page password:(NSString *)phrase;
 
-- (id)singleTap:(UITapGestureRecognizer *)recognizer;
+- (id) singleTap:(UITapGestureRecognizer *)recognizer;
 
 @end
 
@@ -57,19 +57,19 @@
 
 @interface ReaderDocumentLink : NSObject
 {
-@private // Instance variables
+    @private // Instance variables
 
-	CGPDFDictionaryRef _dictionary;
+    CGPDFDictionaryRef _dictionary;
 
-	CGRect _rect;
+    CGRect _rect;
 }
 
 @property (nonatomic, assign, readonly) CGRect rect;
 
 @property (nonatomic, assign, readonly) CGPDFDictionaryRef dictionary;
 
-+ (id)withRect:(CGRect)linkRect dictionary:(CGPDFDictionaryRef)linkDictionary;
++ (id) withRect:(CGRect)linkRect dictionary:(CGPDFDictionaryRef)linkDictionary;
 
-- (id)initWithRect:(CGRect)linkRect dictionary:(CGPDFDictionaryRef)linkDictionary;
+- (id) initWithRect:(CGRect)linkRect dictionary:(CGPDFDictionaryRef)linkDictionary;
 
 @end

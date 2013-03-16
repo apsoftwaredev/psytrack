@@ -11,13 +11,10 @@
 #import "CountryEntity.h"
 #import "LicenseEntity.h"
 
-
 @implementation GoverningBodyEntity
 
 @dynamic body;
 @dynamic country;
 @dynamic licenses;
-
-
 
 @end

@@ -10,13 +10,10 @@
 #import "SubjectEntity.h"
 #import "PublicationEntity.h"
 
-
 @implementation SubjectEntity
 
 @dynamic subject;
 @dynamic order;
 @dynamic publications;
-
-
 
 @end

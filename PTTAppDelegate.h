@@ -4,9 +4,9 @@
  *  Version: 1.05
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
  *
  *  Created by Daniel Boice on 9/22/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -16,20 +16,13 @@
  *
  */
 
-
 #import <UIKit/UIKit.h>
 #import "LCYLockScreenViewController.h"
 #import "ColorSwitcher.h"
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 #define addSmtricStr @"iEn8ioesfec3"
-
-
-
-
 
 @class ClientsViewController_iPhone;
 @class ClinicianViewController;
@@ -53,79 +46,72 @@ static NSInteger const kPTTScreenLocationRight = 4;
 static NSInteger const kPTTScreenLocationBottom = 5;
 static NSInteger const kPTTMaximumSaveAttempts = 10;
 
-static NSString * const kSCModelDidCommitData=@"SCModelDidCommitData";
+static NSString *const kSCModelDidCommitData = @"SCModelDidCommitData";
 
-static NSString * const kPTTAddressBookSourceIdentifier=@"address_book_source_identifier";
-static NSString * const kPTTAddressBookGroupIdentifier=@"address_book_group_identifier";
-static NSString * const kPTTAddressBookGroupName=@"address_book_group_name";
-static NSString * const kPTTGloballyUniqueIdentifier=@"globally_unique_identifier";
-static NSString * const kPTAutoAddClinicianToGroup=@"auto_add_clinician_to_group";
-static NSString * const kPTCurrentKeyDictionary=@"current_key_dictonary";
-static NSString * const kPTCurrentKeyDate=@"current_key_date";
-static NSString * const kPTiCloudPreference=@"icloud_preference";
-static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_number";
+static NSString *const kPTTAddressBookSourceIdentifier = @"address_book_source_identifier";
+static NSString *const kPTTAddressBookGroupIdentifier = @"address_book_group_identifier";
+static NSString *const kPTTAddressBookGroupName = @"address_book_group_name";
+static NSString *const kPTTGloballyUniqueIdentifier = @"globally_unique_identifier";
+static NSString *const kPTAutoAddClinicianToGroup = @"auto_add_clinician_to_group";
+static NSString *const kPTCurrentKeyDictionary = @"current_key_dictonary";
+static NSString *const kPTCurrentKeyDate = @"current_key_date";
+static NSString *const kPTiCloudPreference = @"icloud_preference";
+static NSString *const kPTMonthlyPracticumLogNumber = @"monthly_practicum_log_number";
 
-
-
-/****************************************************************************************/
-/*	class PTTAppDelegate	*/
-/****************************************************************************************/ 
+/*
+  **************************************************************************************
+        class PTTAppDelegate	
+  **************************************************************************************
+ */
 /**
- This class is the delegate for the application.
- 
+   This class is the delegate for the application.
 
- 
- Architecture:
- 
+
+
+   Architecture:
+
 
  */
 @interface PTTAppDelegate : UIResponder <UIApplicationDelegate,UITabBarControllerDelegate,LCYLockScreenDelegate,UIAlertViewDelegate>{
-
-    
-     
-     TrainTrackViewController *trainTrackViewController;
-     ClientsViewController_iPhone *clientsViewController_iPhone;
-     ClinicianViewController *clinicianViewController;
-     ReportsRootViewController_iPad *reportsRootViewController_iPad;
-     ReportsDetailViewController_iPad *reportsDetailViewController_iPad;
+    TrainTrackViewController *trainTrackViewController;
+    ClientsViewController_iPhone *clientsViewController_iPhone;
+    ClinicianViewController *clinicianViewController;
+    ReportsRootViewController_iPad *reportsRootViewController_iPad;
+    ReportsDetailViewController_iPad *reportsDetailViewController_iPad;
     ReportsViewController_iPhone *reportsViewController_iPhone;
     int displayDevelopedByAttempt;
-    
-     LCYLockScreenViewController *lockScreenVC_;
-	
-	 LCYAppSettings *appSettings_;
 
-      CasualAlertViewController *casualAlertManager;
-    
-    
-  
-    
+    LCYLockScreenViewController *lockScreenVC_;
+
+    LCYAppSettings *appSettings_;
+
+    CasualAlertViewController *casualAlertManager;
+
     BOOL encryptedLockDictionarySuccess;
-    
+
     BOOL setupDatabase;
     BOOL retrievedEncryptedDataFile;
     BOOL okayToDecryptBool_;
-     PTTEncryption *encryption_;
+    PTTEncryption *encryption_;
     NSString *trustResultFailureString;
     BOOL addedPersistentStoreSuccess;
-    
-    Reachability* hostReach;
-    Reachability* internetReach;
-    Reachability* wifiReach;
-    
-   
+
+    Reachability *hostReach;
+    Reachability *internetReach;
+    Reachability *wifiReach;
+
     NSTimer *checkKeyEntityTimer;
     NSTimer *displayConnectingTimer;
-     BOOL resetDatabase;
+    BOOL resetDatabase;
     BOOL firstRun;
-    
+
     int secondsWaitingForICloud;
 }
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;
 @property (nonatomic, retain) ColorSwitcher *colorSwitcher;
 
-- (void)customizeGlobalTheme;
+- (void) customizeGlobalTheme;
 
 @property (readonly, strong, nonatomic) PTManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
@@ -141,64 +127,64 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
 
 @property (strong, nonatomic) IBOutlet UIView *tabBarView;
 @property (strong, nonatomic) IBOutlet UITabBarController *tabBarController;
-@property (weak, nonatomic)IBOutlet UIView *tabBarControllerContainerView;
-@property (weak, nonatomic)IBOutlet UIView *viewController;
+@property (weak, nonatomic) IBOutlet UIView *tabBarControllerContainerView;
+@property (weak, nonatomic) IBOutlet UIView *viewController;
 @property (nonatomic, retain) KeychainItemWrapper *passwordItem;
 @property (nonatomic, retain) KeychainItemWrapper *passCodeItem;
-@property (nonatomic,assign)BOOL stopScrollingMonthlyPracticumLog;
+@property (nonatomic,assign) BOOL stopScrollingMonthlyPracticumLog;
 @property (nonatomic,assign) BOOL drugViewControllerIsInDetailSubview;
 @property (nonatomic, assign) BOOL usingiCloudStore;
 
--(void)loadDatabaseData:(id)sender;
-- (void)initializeiCloudAccess ;
--(NSURL *)applicationDrugsFileURL;
--(void)resetDrugsModel;
+- (void) loadDatabaseData:(id)sender;
+- (void) initializeiCloudAccess;
+- (NSURL *) applicationDrugsFileURL;
+- (void) resetDrugsModel;
 
 //-(NSURL *)applicationDisordersFileURL;
--(void)resetDisordersModel;
-+ (PTTAppDelegate *)appDelegate ;
-- (NSURL *)applicationPTFileDirectory;
-- (void)saveContext;
-+ (NSString*)retrieveFromUserDefaults:(NSString*)key;
--(void)flashAppTrainAndTitleGraphics;
-- (NSString *)applicationDocumentsDirectoryString;
+- (void) resetDisordersModel;
++ (PTTAppDelegate *) appDelegate;
+- (NSURL *) applicationPTFileDirectory;
+- (void) saveContext;
++ (NSString *) retrieveFromUserDefaults:(NSString *)key;
+- (void) flashAppTrainAndTitleGraphics;
+- (NSString *) applicationDocumentsDirectoryString;
 
--(NSURL *)applicationSupportURL;
--(NSString *)applicationSupportPath;
--(NSString *)setupLockDictionaryResultStr;
--(void)setupMyInfoRecord;
-- (void)saveDrugsContext;
-- (NSNumber *)iCloudPreferenceFromUserDefaults;
+- (NSURL *) applicationSupportURL;
+- (NSString *) applicationSupportPath;
+- (NSString *) setupLockDictionaryResultStr;
+- (void) setupMyInfoRecord;
+- (void) saveDrugsContext;
+- (NSNumber *) iCloudPreferenceFromUserDefaults;
 
--(BOOL)reachable ;
--(void)displayMemoryWarning;
-- (NSURL *)applicationDrugsDirectory;
--(NSString *)applicationDrugsPathString;
+- (BOOL) reachable;
+- (void) displayMemoryWarning;
+- (NSURL *) applicationDrugsDirectory;
+- (NSString *) applicationDrugsPathString;
 
 //-(NSString *)decyptString:(NSString *) str;
 //-(NSString *)decyptString:(NSString *) encryptedString usingKeyString:(NSString *)keyString;
--(NSDictionary *)encryptDataToEncryptedData:(NSData *) unencryptedData withKeyString:(NSString *)keyStringToSet;
--(NSDictionary *)encryptStringToEncryptedData:(NSString *)plainTextStr withKeyString:(NSString *)keyStringToSet;
--(NSString *)convertDataToString:(NSData *)data;
--(NSData *)decryptDataToPlainDataUsingKeyEntityWithString:(NSString *)keyString encryptedData:(NSData *)encryptedData;
+- (NSDictionary *) encryptDataToEncryptedData:(NSData *)unencryptedData withKeyString:(NSString *)keyStringToSet;
+- (NSDictionary *) encryptStringToEncryptedData:(NSString *)plainTextStr withKeyString:(NSString *)keyStringToSet;
+- (NSString *) convertDataToString:(NSData *)data;
+- (NSData *) decryptDataToPlainDataUsingKeyEntityWithString:(NSString *)keyString encryptedData:(NSData *)encryptedData;
 //-(NSData *)decryptDataToPlainData:(NSData *) encryptedData;
--(NSData *)encryptDictionaryToData:(NSDictionary *)unencryptedDictionary;
+- (NSData *) encryptDictionaryToData:(NSDictionary *)unencryptedDictionary;
 //-(NSDictionary *)decryptDataToDictionary:(NSData*)encryptedData;
--(NSString *)generateRandomStringOfLength:(int )length;
--(NSString *)combSmString;
--(NSData *)hashDataFromString:(NSString *)plainString;
--(NSData *)getOldSharedSymetricData;
--(NSDate *)convertDataToDate:(NSData *)data;
--(IBAction)notifyTrustFailure:(id)sender;
--(NSData *)encryptDataToEncryptedData:(NSData *) unencryptedData;
--(NSData *)decryptDataToPlainData:(NSData *)encryptedData usingSymetricKey:(NSData *)symetricData;
--(NSData *)convertStringToData:(NSString *)string;
--(NSData *)getSharedSymetricData;
-- (NSURL *)applicationDocumentsDirectory;
-- (NSURL *)applicationCachesDirectory;
--(NSString *)generateExposedKey;
+- (NSString *) generateRandomStringOfLength:(int)length;
+- (NSString *) combSmString;
+- (NSData *) hashDataFromString:(NSString *)plainString;
+- (NSData *) getOldSharedSymetricData;
+- (NSDate *) convertDataToDate:(NSData *)data;
+- (IBAction) notifyTrustFailure:(id)sender;
+- (NSData *) encryptDataToEncryptedData:(NSData *)unencryptedData;
+- (NSData *) decryptDataToPlainData:(NSData *)encryptedData usingSymetricKey:(NSData *)symetricData;
+- (NSData *) convertStringToData:(NSString *)string;
+- (NSData *) getSharedSymetricData;
+- (NSURL *) applicationDocumentsDirectory;
+- (NSURL *) applicationCachesDirectory;
+- (NSString *) generateExposedKey;
 //-(IBAction)resaveLockDictionarySettings:(id)sender;
-@property (nonatomic,assign)BOOL okayToDecryptBool;
+@property (nonatomic,assign) BOOL okayToDecryptBool;
 
 @property (nonatomic, strong) PTTEncryption *encryption;
 
@@ -212,10 +198,10 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
 @property (nonatomic, strong) IBOutlet UINavigationController *reportsNavigationController_iPhone;
 
 @property (nonatomic, strong) IBOutlet UITabBar *tabBar;
-@property (strong, nonatomic)IBOutlet UIImageView *imageView;
-@property (strong, nonatomic)IBOutlet UILabel *psyTrackLabel;
-@property (strong, nonatomic)IBOutlet UILabel *clinicianToolsLabel;
-@property (strong, nonatomic)IBOutlet UILabel *developedByLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) IBOutlet UILabel *psyTrackLabel;
+@property (strong, nonatomic) IBOutlet UILabel *clinicianToolsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *developedByLabel;
 
 @property (nonatomic, assign) BOOL changedPassword;
 @property (nonatomic, assign) BOOL changedToken;
@@ -224,46 +210,37 @@ static NSString * const kPTMonthlyPracticumLogNumber=@"monthly_practicum_log_num
 @property (weak, nonatomic) IBOutlet UISplitViewController *splitViewControllerReports;
 #define degreesToRadian(x) (M_PI * (x) / 180.0)
 
-
 @property (nonatomic, strong) IBOutlet LCYLockScreenViewController *lockScreenVC;
-@property (nonatomic, strong)IBOutlet CasualAlertViewController *casualAlertManager;
+@property (nonatomic, strong) IBOutlet CasualAlertViewController *casualAlertManager;
 
-- (void) lockScreen: (LCYLockScreenViewController *) lockScreen unlockedApp: (BOOL) unlocked;
--(LCYAppSettings *) appSettings;
+- (void) lockScreen:(LCYLockScreenViewController *)lockScreen unlockedApp:(BOOL)unlocked;
+- (LCYAppSettings *) appSettings;
 
 //+(BOOL)getUseiCloud;
 
-+ (NSString *)GetUUID;
++ (NSString *) GetUUID;
 
--(NSData*)getLocalSymetricData;
-
+- (NSData *) getLocalSymetricData;
 
 @end
-
 
 @interface PTTAppDelegate (AppLock)
 - (BOOL) isAppLocked;
 - (BOOL) isPasscodeOn;
 - (BOOL) isLockedAtStartup;
--(BOOL)isLockedTimerOn;
+- (BOOL) isLockedTimerOn;
 
 - (void) lockApplication;
--(void)displayWrongPassword;
+- (void) displayWrongPassword;
 
-
-
--(NSString *)lockSettingsFilePath;
-
-
+- (NSString *) lockSettingsFilePath;
 
 @end
-
 
 @interface PTTAppDelegate (CasualAlerts)
 
--(void)displayNotification:(NSString *)alertText forDuration:(float)seconds location:(NSInteger )screenLocation inView:(UIView *)viewSuperview;
+- (void) displayNotification:(NSString *)alertText forDuration:(float)seconds location:(NSInteger)screenLocation inView:(UIView *)viewSuperview;
 
--(void)displayNotification:(NSString *)alertText;
+- (void) displayNotification:(NSString *)alertText;
 
 @end
-

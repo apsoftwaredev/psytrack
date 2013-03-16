@@ -12,23 +12,21 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class DiagnosisHistoryEntity, DisorderEntity;
 
 @interface DisorderSpecifierEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * specifier;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *specifier;
 @property (nonatomic, retain) NSSet *diagnosisHistory;
 @property (nonatomic, retain) DisorderEntity *disorder;
 @end
 
 @interface DisorderSpecifierEntity (CoreDataGeneratedAccessors)
 
-- (void)addDiagnosisHistoryObject:(DiagnosisHistoryEntity *)value;
-- (void)removeDiagnosisHistoryObject:(DiagnosisHistoryEntity *)value;
-- (void)addDiagnosisHistory:(NSSet *)values;
-- (void)removeDiagnosisHistory:(NSSet *)values;
+- (void) addDiagnosisHistoryObject:(DiagnosisHistoryEntity *)value;
+- (void) removeDiagnosisHistoryObject:(DiagnosisHistoryEntity *)value;
+- (void) addDiagnosisHistory:(NSSet *)values;
+- (void) removeDiagnosisHistory:(NSSet *)values;
 
 @end

@@ -12,21 +12,19 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClientEntity;
 
 @interface VitalsEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * weight;
-@property (nonatomic, retain) NSNumber * heightTall;
-@property (nonatomic, retain) NSNumber * heartRate;
-@property (nonatomic, retain) NSNumber * diastolicPressure;
-@property (nonatomic, retain) NSNumber * temperature;
-@property (nonatomic, retain) NSString * weightUnit;
-@property (nonatomic, retain) NSString * heightUnit;
-@property (nonatomic, retain) NSNumber * systolicPressure;
-@property (nonatomic, retain) NSDate * dateTaken;
+@property (nonatomic, retain) NSNumber *weight;
+@property (nonatomic, retain) NSNumber *heightTall;
+@property (nonatomic, retain) NSNumber *heartRate;
+@property (nonatomic, retain) NSNumber *diastolicPressure;
+@property (nonatomic, retain) NSNumber *temperature;
+@property (nonatomic, retain) NSString *weightUnit;
+@property (nonatomic, retain) NSString *heightUnit;
+@property (nonatomic, retain) NSNumber *systolicPressure;
+@property (nonatomic, retain) NSDate *dateTaken;
 @property (nonatomic, retain) ClientEntity *client;
 
 @end

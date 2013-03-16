@@ -10,11 +10,8 @@
 #import "ExistingSupervisionReceivedEntity.h"
 #import "ExistingHoursEntity.h"
 
-
 @implementation ExistingSupervisionReceivedEntity
 
 @dynamic existingHours;
-
-
 
 @end

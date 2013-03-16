@@ -10,14 +10,11 @@
 #import "AccomodationEntity.h"
 #import "ClientEntity.h"
 
-
 @implementation AccomodationEntity
 
 @dynamic order;
 @dynamic notes;
 @dynamic accomodation;
 @dynamic client;
-
-
 
 @end

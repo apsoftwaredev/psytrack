@@ -10,7 +10,6 @@
 #import "MembershipEntity.h"
 #import "ClinicianEntity.h"
 
-
 @implementation MembershipEntity
 
 @dynamic memberSince;
@@ -19,7 +18,5 @@
 @dynamic renewDate;
 @dynamic organization;
 @dynamic clinician;
-
-
 
 @end

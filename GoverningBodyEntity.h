@@ -12,22 +12,20 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class CountryEntity, LicenseEntity;
 
 @interface GoverningBodyEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * body;
+@property (nonatomic, retain) NSString *body;
 @property (nonatomic, retain) CountryEntity *country;
 @property (nonatomic, retain) NSSet *licenses;
 @end
 
 @interface GoverningBodyEntity (CoreDataGeneratedAccessors)
 
-- (void)addLicensesObject:(LicenseEntity *)value;
-- (void)removeLicensesObject:(LicenseEntity *)value;
-- (void)addLicenses:(NSSet *)values;
-- (void)removeLicenses:(NSSet *)values;
+- (void) addLicensesObject:(LicenseEntity *)value;
+- (void) removeLicensesObject:(LicenseEntity *)value;
+- (void) addLicenses:(NSSet *)values;
+- (void) removeLicenses:(NSSet *)values;
 
 @end

@@ -10,15 +10,14 @@
 
 @class GrayRoundRectView;
 
-@interface BigProgressView : UIView 
+@interface BigProgressView : UIView
 {
-	UIActivityIndicatorView *actView;
-	GrayRoundRectView *grayView;
-	UIView *backgroundView;
-	
-	UILabel *textLabel;
-	UIProgressView *progressView;
-	
+    UIActivityIndicatorView *actView;
+    GrayRoundRectView *grayView;
+    UIView *backgroundView;
+
+    UILabel *textLabel;
+    UIProgressView *progressView;
 }
 
 @property(nonatomic, retain) UILabel *textLabel;

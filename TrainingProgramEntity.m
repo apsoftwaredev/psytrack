@@ -14,7 +14,6 @@
 #import "SchoolEntity.h"
 #import "TimeTrackEntity.h"
 
-
 @implementation TrainingProgramEntity
 
 @dynamic doctorateLevel;
@@ -30,8 +29,5 @@
 @dynamic timeTracks;
 @dynamic logs;
 @dynamic existingHours;
-
-
-
 
 @end

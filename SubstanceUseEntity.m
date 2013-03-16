@@ -12,7 +12,6 @@
 #import "FrequencyEntity.h"
 #import "SubstanceNameEntity.h"
 
-
 @implementation SubstanceUseEntity
 
 @dynamic lastUse;
@@ -28,8 +27,5 @@
 @dynamic substanceUseLogs;
 @dynamic client;
 @dynamic frequency;
-
-
-
 
 @end

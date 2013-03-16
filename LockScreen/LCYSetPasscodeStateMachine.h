@@ -6,28 +6,26 @@
 #import <Foundation/Foundation.h>
 #import "LCYPasscodeUIStateMachine.h"
 
-typedef enum 
-{ 
-	LCYSetPasscodeStatesGetNewPassword,
-	LCYSetPasscodeStatesConfirmNewPassword,
-	LCYSetPasscodeStatesDone,
+typedef enum {
+    LCYSetPasscodeStatesGetNewPassword,
+    LCYSetPasscodeStatesConfirmNewPassword,
+    LCYSetPasscodeStatesDone,
 } LCYSetPasscodeStates;
 
-@interface LCYSetPasscodeStateMachine : LCYPasscodeUIStateMachine 
+@interface LCYSetPasscodeStateMachine : LCYPasscodeUIStateMachine
 {
-	LCYSetPasscodeStates state_;
-	NSData *theNewPasscode_;	
-	NSString *currentErrorText_;
+    LCYSetPasscodeStates state_;
+    NSData *theNewPasscode_;
+    NSString *currentErrorText_;
 }
 
-
-@property (nonatomic, copy) NSData* theNewPasscode;
+@property (nonatomic, copy) NSData *theNewPasscode;
 
 @property (nonatomic, readonly) NSString *currentErrorText;
 
-NSString* NSStringFromLCYSetPasscodeStates (LCYSetPasscodeStates state);
+NSString *NSStringFromLCYSetPasscodeStates(LCYSetPasscodeStates state);
 
-- (void) transitionWithInput:(NSString *) input;
+- (void) transitionWithInput:(NSString *)input;
 
 - (void) successTransition;
 - (void) failTransition;
@@ -36,7 +34,5 @@ NSString* NSStringFromLCYSetPasscodeStates (LCYSetPasscodeStates state);
 
 - (BOOL) gotCompletionState;
 - (void) reset;
-
-
 
 @end

@@ -11,7 +11,6 @@
 #import "ConsultationEntity.h"
 #import "RateEntity.h"
 
-
 @implementation RateChargeEntity
 
 @dynamic order;
@@ -21,8 +20,5 @@
 @dynamic dateCharged;
 @dynamic consultation;
 @dynamic rate;
-
-
-
 
 @end

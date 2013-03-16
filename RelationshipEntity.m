@@ -10,13 +10,10 @@
 #import "RelationshipEntity.h"
 #import "InterpersonalEntity.h"
 
-
 @implementation RelationshipEntity
 
 @dynamic order;
 @dynamic relationship;
 @dynamic clientRelationship;
-
-
 
 @end

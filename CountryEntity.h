@@ -12,21 +12,18 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
-
 @interface CountryEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * country;
-@property (nonatomic, retain) NSString * code;
+@property (nonatomic, retain) NSString *country;
+@property (nonatomic, retain) NSString *code;
 @property (nonatomic, retain) NSSet *governingBody;
 @end
 
 @interface CountryEntity (CoreDataGeneratedAccessors)
 
-- (void)addGoverningBodyObject:(NSManagedObject *)value;
-- (void)removeGoverningBodyObject:(NSManagedObject *)value;
-- (void)addGoverningBody:(NSSet *)values;
-- (void)removeGoverningBody:(NSSet *)values;
+- (void) addGoverningBodyObject:(NSManagedObject *)value;
+- (void) removeGoverningBodyObject:(NSManagedObject *)value;
+- (void) addGoverningBody:(NSSet *)values;
+- (void) removeGoverningBody:(NSSet *)values;
 
 @end

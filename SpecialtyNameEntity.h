@@ -12,23 +12,21 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class SpecialtyEntity;
 
 @interface SpecialtyNameEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * specialtyName;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * desc;
+@property (nonatomic, retain) NSString *specialtyName;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *desc;
 @property (nonatomic, retain) NSSet *specialties;
 @end
 
 @interface SpecialtyNameEntity (CoreDataGeneratedAccessors)
 
-- (void)addSpecialtiesObject:(SpecialtyEntity *)value;
-- (void)removeSpecialtiesObject:(SpecialtyEntity *)value;
-- (void)addSpecialties:(NSSet *)values;
-- (void)removeSpecialties:(NSSet *)values;
+- (void) addSpecialtiesObject:(SpecialtyEntity *)value;
+- (void) removeSpecialtiesObject:(SpecialtyEntity *)value;
+- (void) addSpecialties:(NSSet *)values;
+- (void) removeSpecialties:(NSSet *)values;
 
 @end

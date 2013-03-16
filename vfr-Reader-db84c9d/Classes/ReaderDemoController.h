@@ -29,7 +29,7 @@
 
 @interface ReaderDemoController : UIViewController <ReaderViewControllerDelegate>
 {
-@private // Instance variables
+    @private // Instance variables
 }
 
 @end

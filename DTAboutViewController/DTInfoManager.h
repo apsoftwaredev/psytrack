@@ -11,25 +11,24 @@
 
 @interface DTInfoManager : NSObject
 {
-	NSOperationQueue *queue;
+    NSOperationQueue *queue;
 
-	NSMutableDictionary *_cachedDictionaries;
-	NSMutableDictionary *_lastRefreshDates;\
-    
+    NSMutableDictionary *_cachedDictionaries;
+    NSMutableDictionary *_lastRefreshDates; \
+
     NSArray *apps;
-    NSURL * appsUpdateURL;
+    NSURL *appsUpdateURL;
     NSDate *appsLastRefreshedDate;
 }
-
 
 @property (nonatomic, strong) NSArray *apps;
 @property (nonatomic, strong) NSURL *appsUpdateURL;
 @property (nonatomic, strong) NSDate *appsLastRefreshedDate;
 
-+ (DTInfoManager *)sharedManager;
++ (DTInfoManager *) sharedManager;
 
-- (NSUInteger)numberOfApps;
-- (DTApp *)appAtIndex:(NSUInteger)index;
+- (NSUInteger) numberOfApps;
+- (DTApp *) appAtIndex:(NSUInteger)index;
 
 - (NSDictionary *) dictionaryFromCachedPropertyListWithName:(NSString *)fileName;
 

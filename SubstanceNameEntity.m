@@ -10,7 +10,6 @@
 #import "SubstanceNameEntity.h"
 #import "SubstanceClassEntity.h"
 
-
 @implementation SubstanceNameEntity
 
 @dynamic substanceName;
@@ -18,7 +17,5 @@
 @dynamic desc;
 @dynamic substanceClass;
 @dynamic substanceUses;
-
-
 
 @end

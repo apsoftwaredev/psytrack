@@ -15,7 +15,6 @@
 #import "SupportActivityDeliveredEntity.h"
 #import "TimeEntity.h"
 
-
 @implementation InterventionDeliveredEntity
 
 @dynamic clientPresentations;
@@ -24,7 +23,5 @@
 @dynamic modelsUsed;
 @dynamic subtype;
 @dynamic time;
-
-
 
 @end

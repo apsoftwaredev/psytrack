@@ -35,35 +35,35 @@
 
 @required // Delegate protocols
 
-- (void)thumbsViewController:(ThumbsViewController *)viewController gotoPage:(NSInteger)page;
+- (void) thumbsViewController:(ThumbsViewController *)viewController gotoPage:(NSInteger)page;
 
-- (void)dismissThumbsViewController:(ThumbsViewController *)viewController;
+- (void) dismissThumbsViewController:(ThumbsViewController *)viewController;
 
 @end
 
 @interface ThumbsViewController : UIViewController <ThumbsMainToolbarDelegate, ReaderThumbsViewDelegate>
 {
-@private // Instance variables
+    @private // Instance variables
 
-	ReaderDocument *document;
+    ReaderDocument *document;
 
-	ThumbsMainToolbar *mainToolbar;
+    ThumbsMainToolbar *mainToolbar;
 
-	ReaderThumbsView *theThumbsView;
+    ReaderThumbsView *theThumbsView;
 
-	NSMutableArray *bookmarked;
+    NSMutableArray *bookmarked;
 
-	BOOL updateBookmarked;
+    BOOL updateBookmarked;
 
-	CGPoint thumbsOffset;
-	CGPoint markedOffset;
+    CGPoint thumbsOffset;
+    CGPoint markedOffset;
 
-	BOOL showBookmarked;
+    BOOL showBookmarked;
 }
 
 @property (nonatomic, assign, readwrite) id <ThumbsViewControllerDelegate> delegate;
 
-- (id)initWithReaderDocument:(ReaderDocument *)object;
+- (id) initWithReaderDocument:(ReaderDocument *)object;
 
 @end
 
@@ -75,25 +75,25 @@
 
 @interface ThumbsPageThumb : ReaderThumbView
 {
-@private // Instance variables
+    @private // Instance variables
 
-	UIView *backView;
+    UIView *backView;
 
-	UIView *maskView;
+    UIView *maskView;
 
-	UILabel *textLabel;
+    UILabel *textLabel;
 
-	UIImageView *bookMark;
+    UIImageView *bookMark;
 
-	CGSize maximumSize;
+    CGSize maximumSize;
 
-	CGRect defaultRect;
+    CGRect defaultRect;
 }
 
-- (CGSize)maximumContentSize;
+- (CGSize) maximumContentSize;
 
-- (void)showText:(NSString *)text;
+- (void) showText:(NSString *)text;
 
-- (void)showBookmark:(BOOL)show;
+- (void) showBookmark:(BOOL)show;
 
 @end

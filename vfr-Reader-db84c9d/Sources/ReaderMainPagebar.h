@@ -36,38 +36,38 @@
 
 @required // Delegate protocols
 
-- (void)pagebar:(ReaderMainPagebar *)pagebar gotoPage:(NSInteger)page;
+- (void) pagebar:(ReaderMainPagebar *)pagebar gotoPage:(NSInteger)page;
 
 @end
 
 @interface ReaderMainPagebar : UIView
 {
-@private // Instance variables
+    @private // Instance variables
 
-	ReaderDocument *document;
+    ReaderDocument *document;
 
-	ReaderTrackControl *trackControl;
+    ReaderTrackControl *trackControl;
 
-	NSMutableDictionary *miniThumbViews;
+    NSMutableDictionary *miniThumbViews;
 
-	ReaderPagebarThumb *pageThumbView;
+    ReaderPagebarThumb *pageThumbView;
 
-	UILabel *pageNumberLabel;
+    UILabel *pageNumberLabel;
 
-	UIView *pageNumberView;
+    UIView *pageNumberView;
 
-	NSTimer *enableTimer;
-	NSTimer *trackTimer;
+    NSTimer *enableTimer;
+    NSTimer *trackTimer;
 }
 
 @property (nonatomic, assign, readwrite) id <ReaderMainPagebarDelegate> delegate;
 
-- (id)initWithFrame:(CGRect)frame document:(ReaderDocument *)object;
+- (id) initWithFrame:(CGRect)frame document:(ReaderDocument *)object;
 
-- (void)updatePagebar;
+- (void) updatePagebar;
 
-- (void)hidePagebar;
-- (void)showPagebar;
+- (void) hidePagebar;
+- (void) showPagebar;
 
 @end
 
@@ -79,9 +79,9 @@
 
 @interface ReaderTrackControl : UIControl
 {
-@private // Instance variables
+    @private // Instance variables
 
-	CGFloat _value;
+    CGFloat _value;
 }
 
 @property (nonatomic, assign, readonly) CGFloat value;
@@ -96,10 +96,10 @@
 
 @interface ReaderPagebarThumb : ReaderThumbView
 {
-@private // Instance variables
+    @private // Instance variables
 }
 
-- (id)initWithFrame:(CGRect)frame small:(BOOL)small;
+- (id) initWithFrame:(CGRect)frame small:(BOOL)small;
 
 @end
 
@@ -111,7 +111,7 @@
 
 @interface ReaderPagebarShadow : UIView
 {
-@private // Instance variables
+    @private // Instance variables
 }
 
 @end

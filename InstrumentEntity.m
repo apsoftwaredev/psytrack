@@ -16,7 +16,6 @@
 #import "InstrumentScoreNameEntity.h"
 #import "InstrumentTypeEntity.h"
 
-
 @implementation InstrumentEntity
 
 @dynamic numberReportsWritten;
@@ -35,9 +34,5 @@
 @dynamic instrumentType;
 @dynamic publisher;
 @dynamic logs;
-
-
-
-
 
 @end

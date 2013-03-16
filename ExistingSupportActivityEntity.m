@@ -11,7 +11,6 @@
 #import "ExistingHoursEntity.h"
 #import "SupportActivityTypeEntity.h"
 
-
 @implementation ExistingSupportActivityEntity
 
 @dynamic hours;
@@ -19,7 +18,5 @@
 @dynamic monthlyLogNotes;
 @dynamic supportActivityType;
 @dynamic existingHours;
-
-
 
 @end

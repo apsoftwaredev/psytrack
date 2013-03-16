@@ -11,10 +11,9 @@
 extern const CGFloat kBannerVIewWidth;
 extern const CGFloat kBannerVIewHeight;
 
-
-@interface LCYBannerView : UIView 
+@interface LCYBannerView : UIView
 {
-	UIColor *bannerColor_;
+    UIColor *bannerColor_;
 }
 
 @property (nonatomic, retain) UIColor *bannerColor;

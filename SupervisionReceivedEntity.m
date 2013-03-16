@@ -12,13 +12,10 @@
 #import "SupervisionTypeSubtypeEntity.h"
 #import "TimeEntity.h"
 
-
 @implementation SupervisionReceivedEntity
 
 @dynamic subType;
 @dynamic time;
 @dynamic supervisionType;
-
-
 
 @end

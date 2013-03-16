@@ -9,14 +9,11 @@
 
 #import "SubstanceClassEntity.h"
 
-
 @implementation SubstanceClassEntity
 
 @dynamic order;
 @dynamic substanceClassName;
 @dynamic desc;
 @dynamic substanceNames;
-
-
 
 @end

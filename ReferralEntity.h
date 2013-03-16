@@ -12,17 +12,15 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClientEntity, ClinicianEntity, ConsultationEntity, OtherReferralSourceEntity;
 
 @interface ReferralEntity : PTManagedObject
 
-@property (nonatomic, retain) NSDate * dateReferred;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * referralInOrOut;
-@property (nonatomic, retain) NSString * keyString;
+@property (nonatomic, retain) NSDate *dateReferred;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *referralInOrOut;
+@property (nonatomic, retain) NSString *keyString;
 @property (nonatomic, retain) ClientEntity *client;
 @property (nonatomic, retain) ConsultationEntity *consultation;
 @property (nonatomic, retain) OtherReferralSourceEntity *otherSource;

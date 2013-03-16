@@ -31,11 +31,11 @@
 
 @interface ReaderThumbFetch : ReaderThumbOperation
 {
-@private // Instance variables
+    @private // Instance variables
 
-	ReaderThumbRequest *request;
+    ReaderThumbRequest *request;
 }
 
-- (id)initWithRequest:(ReaderThumbRequest *)object;
+- (id) initWithRequest:(ReaderThumbRequest *)object;
 
 @end

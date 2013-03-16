@@ -10,32 +10,30 @@
 #import <Foundation/Foundation.h>
 #import "LCYPasscodeUIStateMachine.h"
 
-typedef enum 
-{ 
-	LCYChangePasscodeStatesConfirmExistingPassword,
-	LCYChangePasscodeStatesGetNewPassword,
-	LCYChangePasscodeStatesConfirmNewPassword,
-	LCYChangePasscodeStatesDone,
+typedef enum {
+    LCYChangePasscodeStatesConfirmExistingPassword,
+    LCYChangePasscodeStatesGetNewPassword,
+    LCYChangePasscodeStatesConfirmNewPassword,
+    LCYChangePasscodeStatesDone,
 } LCYChangePasscodeStates;
 
-@interface LCYChangePasscodeStateMachine : LCYPasscodeUIStateMachine 
+@interface LCYChangePasscodeStateMachine : LCYPasscodeUIStateMachine
 {
-	LCYChangePasscodeStates state_;
+    LCYChangePasscodeStates state_;
 
-	NSData *existingPasscode_;
-	NSData *theNewPasscode_;
-	
-	NSString *currentErrorText_;
+    NSData *existingPasscode_;
+    NSData *theNewPasscode_;
+
+    NSString *currentErrorText_;
 }
 
-
-@property (nonatomic, copy) NSData* existingPasscode;
-@property (nonatomic, copy) NSData* theNewPasscode;
+@property (nonatomic, copy) NSData *existingPasscode;
+@property (nonatomic, copy) NSData *theNewPasscode;
 
 @property (nonatomic, readonly) NSString *currentErrorText;
 
-NSString* NSStringFromLCYChangePasscodeStates (LCYChangePasscodeStates state);
-- (void) transitionWithInput:(NSString *) input;
+NSString *NSStringFromLCYChangePasscodeStates(LCYChangePasscodeStates state);
+- (void) transitionWithInput:(NSString *)input;
 
 - (void) successTransition;
 - (void) failTransition;

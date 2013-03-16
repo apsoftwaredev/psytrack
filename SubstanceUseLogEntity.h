@@ -12,17 +12,15 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class SubstanceUseEntity;
 
 @interface SubstanceUseLogEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * typicalDose;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSDate * logDate;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * timesUsedInLastThirtyDays;
+@property (nonatomic, retain) NSString *typicalDose;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSDate *logDate;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *timesUsedInLastThirtyDays;
 @property (nonatomic, retain) SubstanceUseEntity *substanceUse;
 
 @end

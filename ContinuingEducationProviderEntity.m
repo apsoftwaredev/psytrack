@@ -10,14 +10,11 @@
 #import "ContinuingEducationProviderEntity.h"
 #import "ContinuingEducationEntity.h"
 
-
 @implementation ContinuingEducationProviderEntity
 
 @dynamic order;
 @dynamic notes;
 @dynamic providerName;
 @dynamic continuingEducation;
-
-
 
 @end

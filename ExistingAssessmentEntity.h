@@ -12,15 +12,13 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class AssessmentTypeEntity, ExistingBatteryEntity, ExistingDemographicsEntity, ExistingHoursEntity, ExistingInstrumentEntity;
 
 @interface ExistingAssessmentEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * monthlyLogNotes;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * hours;
+@property (nonatomic, retain) NSString *monthlyLogNotes;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSDate *hours;
 @property (nonatomic, retain) NSSet *instruments;
 @property (nonatomic, retain) AssessmentTypeEntity *assessmentType;
 @property (nonatomic, retain) ExistingDemographicsEntity *demographics;
@@ -30,14 +28,14 @@
 
 @interface ExistingAssessmentEntity (CoreDataGeneratedAccessors)
 
-- (void)addInstrumentsObject:(ExistingInstrumentEntity *)value;
-- (void)removeInstrumentsObject:(ExistingInstrumentEntity *)value;
-- (void)addInstruments:(NSSet *)values;
-- (void)removeInstruments:(NSSet *)values;
+- (void) addInstrumentsObject:(ExistingInstrumentEntity *)value;
+- (void) removeInstrumentsObject:(ExistingInstrumentEntity *)value;
+- (void) addInstruments:(NSSet *)values;
+- (void) removeInstruments:(NSSet *)values;
 
-- (void)addBatteriesObject:(ExistingBatteryEntity *)value;
-- (void)removeBatteriesObject:(ExistingBatteryEntity *)value;
-- (void)addBatteries:(NSSet *)values;
-- (void)removeBatteries:(NSSet *)values;
+- (void) addBatteriesObject:(ExistingBatteryEntity *)value;
+- (void) removeBatteriesObject:(ExistingBatteryEntity *)value;
+- (void) addBatteries:(NSSet *)values;
+- (void) removeBatteries:(NSSet *)values;
 
 @end

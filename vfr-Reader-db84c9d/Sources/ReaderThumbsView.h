@@ -33,55 +33,55 @@
 
 @required // Delegate protocols
 
-- (NSUInteger)numberOfThumbsInThumbsView:(ReaderThumbsView *)thumbsView;
+- (NSUInteger) numberOfThumbsInThumbsView:(ReaderThumbsView *)thumbsView;
 
-- (id)thumbsView:(ReaderThumbsView *)thumbsView thumbCellWithFrame:(CGRect)frame;
+- (id) thumbsView:(ReaderThumbsView *)thumbsView thumbCellWithFrame:(CGRect)frame;
 
-- (void)thumbsView:(ReaderThumbsView *)thumbsView updateThumbCell:(id)thumbCell forIndex:(NSInteger)index;
+- (void) thumbsView:(ReaderThumbsView *)thumbsView updateThumbCell:(id)thumbCell forIndex:(NSInteger)index;
 
-- (void)thumbsView:(ReaderThumbsView *)thumbsView didSelectThumbWithIndex:(NSInteger)index;
+- (void) thumbsView:(ReaderThumbsView *)thumbsView didSelectThumbWithIndex:(NSInteger)index;
 
 @optional // Delegate protocols
 
-- (void)thumbsView:(ReaderThumbsView *)thumbsView refreshThumbCell:(id)thumbCell forIndex:(NSInteger)index;
+- (void) thumbsView:(ReaderThumbsView *)thumbsView refreshThumbCell:(id)thumbCell forIndex:(NSInteger)index;
 
-- (void)thumbsView:(ReaderThumbsView *)thumbsView didPressThumbWithIndex:(NSInteger)index;
+- (void) thumbsView:(ReaderThumbsView *)thumbsView didPressThumbWithIndex:(NSInteger)index;
 
 @end
 
 @interface ReaderThumbsView : UIScrollView <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 {
-@private // Instance variables
+    @private // Instance variables
 
-	CGPoint lastContentOffset;
+    CGPoint lastContentOffset;
 
-	ReaderThumbView *touchedCell;
+    ReaderThumbView *touchedCell;
 
-	NSMutableArray *thumbCellsQueue;
+    NSMutableArray *thumbCellsQueue;
 
-	NSMutableArray *thumbCellsVisible;
+    NSMutableArray *thumbCellsVisible;
 
-	NSInteger _thumbsX, _thumbsY, _thumbX;
+    NSInteger _thumbsX, _thumbsY, _thumbX;
 
-	CGSize _thumbSize, _lastViewSize;
+    CGSize _thumbSize, _lastViewSize;
 
-	NSUInteger _thumbCount;
+    NSUInteger _thumbCount;
 
-	BOOL canUpdate;
+    BOOL canUpdate;
 }
 
 @property (nonatomic, assign, readwrite) id <ReaderThumbsViewDelegate> delegate;
 
-- (void)setThumbSize:(CGSize)thumbSize;
+- (void) setThumbSize:(CGSize)thumbSize;
 
-- (void)reloadThumbsCenterOnIndex:(NSInteger)index;
+- (void) reloadThumbsCenterOnIndex:(NSInteger)index;
 
-- (void)reloadThumbsContentOffset:(CGPoint)newContentOffset;
+- (void) reloadThumbsContentOffset:(CGPoint)newContentOffset;
 
-- (void)refreshThumbWithIndex:(NSInteger)index;
+- (void) refreshThumbWithIndex:(NSInteger)index;
 
-- (void)refreshVisibleThumbs;
+- (void) refreshVisibleThumbs;
 
-- (CGPoint)insetContentOffset;
+- (CGPoint) insetContentOffset;
 
 @end

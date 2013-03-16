@@ -12,16 +12,14 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ExpertTestemonyEntity;
 
 @interface ExpertTestemonyAppearanceEntity : PTManagedObject
 
-@property (nonatomic, retain) NSDate * dateAppeared;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * hours;
+@property (nonatomic, retain) NSDate *dateAppeared;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSDate *hours;
 @property (nonatomic, retain) ExpertTestemonyEntity *expertTestemony;
 
 @end

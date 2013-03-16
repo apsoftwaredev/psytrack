@@ -9,14 +9,11 @@
 
 #import "DegreeNameEntity.h"
 
-
 @implementation DegreeNameEntity
 
 @dynamic degreeName;
 @dynamic order;
 @dynamic notes;
 @dynamic degrees;
-
-
 
 @end

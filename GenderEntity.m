@@ -10,7 +10,6 @@
 #import "GenderEntity.h"
 #import "DemographicProfileEntity.h"
 
-
 @implementation GenderEntity
 
 @dynamic order;
@@ -21,26 +20,16 @@
 
 @synthesize clientCountStr;
 
+- (NSString *) clientCountStr
+{
+    int returnInt = 0;
 
--(NSString *)clientCountStr{
-    
-    int returnInt=0;
-    
-    
-    NSMutableSet *clientSet=[self mutableSetValueForKeyPath:@"demographics.client"];
-    
-    
-    returnInt=clientSet.count;
-    
-    
+    NSMutableSet *clientSet = [self mutableSetValueForKeyPath:@"demographics.client"];
+
+    returnInt = clientSet.count;
+
     return [NSString stringWithFormat:@"%i",returnInt];
-    
-    
-    
-    
 }
-
-
 
 
 @end

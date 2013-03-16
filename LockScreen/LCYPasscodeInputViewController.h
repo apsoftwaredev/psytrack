@@ -12,12 +12,12 @@
 
 @interface LCYPasscodeInputViewController : UIViewController <UITextFieldDelegate>
 {
-	__weak LCYLockDigitView *lockDigit_0_;
-	__weak LCYLockDigitView *lockDigit_1_;
-	__weak LCYLockDigitView *lockDigit_2_;
-	__weak LCYLockDigitView *lockDigit_3_;
-	
-	__weak UITextField *passCodeInputField_;	
+    __weak LCYLockDigitView *lockDigit_0_;
+    __weak LCYLockDigitView *lockDigit_1_;
+    __weak LCYLockDigitView *lockDigit_2_;
+    __weak LCYLockDigitView *lockDigit_3_;
+
+    __weak UITextField *passCodeInputField_;
 }
 
 @property (nonatomic, weak) IBOutlet LCYLockDigitView *lockDigit_0;

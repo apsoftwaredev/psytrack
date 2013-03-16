@@ -13,7 +13,6 @@
 #import "LogEntity.h"
 #import "SchoolEntity.h"
 
-
 @implementation DegreeCourseEntity
 
 @dynamic endDate;
@@ -26,8 +25,5 @@
 @dynamic degree;
 @dynamic logs;
 @dynamic instructors;
-
-
-
 
 @end

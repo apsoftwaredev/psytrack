@@ -12,15 +12,13 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ExistingHoursEntity, SupportActivityTypeEntity;
 
 @interface ExistingSupportActivityEntity : PTManagedObject
 
-@property (nonatomic, retain) NSDate * hours;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * monthlyLogNotes;
+@property (nonatomic, retain) NSDate *hours;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSString *monthlyLogNotes;
 @property (nonatomic, retain) SupportActivityTypeEntity *supportActivityType;
 @property (nonatomic, retain) ExistingHoursEntity *existingHours;
 

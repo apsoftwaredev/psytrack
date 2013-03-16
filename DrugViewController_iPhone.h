@@ -4,9 +4,9 @@
  *  Version: 1.05
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
  *
  *  Created by Daniel Boice on  12/19/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -22,41 +22,38 @@
 #import "DrugNameObjectSelectionCell.h"
 #import "DrugProductEntity.h"
 @interface DrugViewController_iPhone : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, UIDownloadBarDelegate,UISearchBarDelegate > {
-    
     SCArrayOfObjectsModel *objectsModel;
-    
-  	 UISearchBar *searchBar;
+
+    UISearchBar *searchBar;
 
     NSString *drugApplNo;
     NSString *drugProductNo;
     BOOL isInDetailSubview;
     DrugNameObjectSelectionCell *drugObjectSelectionCell_;
     UIViewController *sendingViewController;
-  
+
     NSManagedObject *drugCurrentlySelectedInReferringDetailview;
-    
-    
+
     DrugViewController_Shared *drugViewController_Shared;
-    NSManagedObjectContext * drugsManagedObjectContext;
+    NSManagedObjectContext *drugsManagedObjectContext;
     UIDownloadBar *downloadBar_;
-     UILabel *downloadLabel_;
-     UILabel *downloadBytesLabel_;
-     UIButton *downloadButton_;
-     UIButton *downloadStopButton_;
-     UIButton *downloadContinueButton_;
-     UIButton *downloadCheckButton_;
+    UILabel *downloadLabel_;
+    UILabel *downloadBytesLabel_;
+    UIButton *downloadButton_;
+    UIButton *downloadStopButton_;
+    UIButton *downloadContinueButton_;
+    UIButton *downloadCheckButton_;
     NSMutableArray *drugsMutableArray;
     NSTimer *checkingTimer_;
-    
+
     DrugProductEntity *currentlySelectedDrug;
     SCEntityDefinition *drugDef;
-    
-    
-    NSEntityDescription *productEntityDesc;    
-   
+
+    NSEntityDescription *productEntityDesc;
+
     NSFetchRequest *productFetchRequest;
     NSPredicate *filterPredicate;
-    
+
     NSURLRequest *drugFileRequest;
     NSURLConnection *connectionToDrugFile;
 }
@@ -71,20 +68,19 @@
 @property (nonatomic,strong) IBOutlet UIButton *downloadContinueButton;
 @property (nonatomic,strong) IBOutlet UIButton *downloadCheckButton;
 @property (nonatomic, strong) NSTimer *checkingTimer;
-@property (nonatomic, assign)BOOL connectingToFile;
+@property (nonatomic, assign) BOOL connectingToFile;
 
 @property (nonatomic, strong) DrugNameObjectSelectionCell *drugObjectSelectionCell;
 
--(IBAction)downloadButtonTapped:(id)sender;
+- (IBAction) downloadButtonTapped:(id)sender;
 
-- (CGFloat ) getLocalDrugFileSize;
+- (CGFloat) getLocalDrugFileSize;
 - (void) connectToRemoteDrugFile;
--(IBAction)startCheckingForUpdate:(id)sender;
--(IBAction)flashCheckingLabel:(id)sender;
--(IBAction)StopDownloadTapped:(id)sender;
--(IBAction)ContinueDownloadTapped:(id)sender;
--(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(DrugNameObjectSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController applNo:(NSString *)applicationNumber productNo:(NSString *)productNumber;
--(void)myDoneButtonTapped;
--(void)myCancelButtonTapped;
+- (IBAction) startCheckingForUpdate:(id)sender;
+- (IBAction) flashCheckingLabel:(id)sender;
+- (IBAction) StopDownloadTapped:(id)sender;
+- (IBAction) ContinueDownloadTapped:(id)sender;
+- (id) initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(DrugNameObjectSelectionCell *)objectSelectionCell sendingViewController:(UIViewController *)viewController applNo:(NSString *)applicationNumber productNo:(NSString *)productNumber;
+- (void) myDoneButtonTapped;
+- (void) myCancelButtonTapped;
 @end
-

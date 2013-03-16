@@ -10,13 +10,10 @@
 #import "FeeTypeEntity.h"
 #import "FeeEntity.h"
 
-
 @implementation FeeTypeEntity
 
 @dynamic feeType;
 @dynamic order;
 @dynamic fees;
-
-
 
 @end

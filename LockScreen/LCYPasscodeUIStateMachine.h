@@ -7,21 +7,18 @@
 // Edited by Dan Boice 1/20/2012
 #import <Foundation/Foundation.h>
 
-
-@interface LCYPasscodeUIStateMachine : NSObject 
+@interface LCYPasscodeUIStateMachine : NSObject
 {
-
 }
 
-@property (nonatomic, copy) NSData* theNewPasscode;
-@property (nonatomic, copy) NSData* existingPasscode;
+@property (nonatomic, copy) NSData *theNewPasscode;
+@property (nonatomic, copy) NSData *existingPasscode;
 @property (nonatomic, readonly) NSString *currentErrorText;
 
 - (NSString *) currentPromptText;
 
-- (void) transitionWithInput:(NSString *) input;
+- (void) transitionWithInput:(NSString *)input;
 - (BOOL) gotCompletionState;
 - (void) reset;
-
 
 @end

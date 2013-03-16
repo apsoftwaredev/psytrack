@@ -27,25 +27,25 @@
 
 @interface ReaderThumbView : UIView
 {
-@private // Instance variables
+    @private // Instance variables
 
-	NSUInteger _targetTag;
+    NSUInteger _targetTag;
 
 //    NSOperation *_operation;
 
-@protected // Instance variables
+    @protected // Instance variables
 
-	UIImageView *imageView;
+    UIImageView *imageView;
 }
 
 @property (assign, readwrite) NSOperation *operation;
 
 @property (nonatomic, assign, readwrite) NSUInteger targetTag;
 
-- (void)showImage:(UIImage *)image;
+- (void) showImage:(UIImage *)image;
 
-- (void)showTouched:(BOOL)touched;
+- (void) showTouched:(BOOL)touched;
 
-- (void)reuse;
+- (void) reuse;
 
 @end

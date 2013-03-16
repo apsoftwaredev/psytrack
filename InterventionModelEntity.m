@@ -11,7 +11,6 @@
 #import "ExistingInterventionEntity.h"
 #import "InterventionDeliveredEntity.h"
 
-
 @implementation InterventionModelEntity
 
 @dynamic modelName;
@@ -20,7 +19,5 @@
 @dynamic evidenceBased;
 @dynamic interventionDelivered;
 @dynamic existingInterventions;
-
-
 
 @end

@@ -23,7 +23,6 @@
 #import "RaceEntity.h"
 #import "SpiritualBeliefEntity.h"
 
-
 @implementation DemographicProfileEntity
 
 @dynamic vision;
@@ -50,8 +49,5 @@
 @dynamic developmental;
 @dynamic significantLifeEvents;
 @dynamic races;
-
-
-
 
 @end

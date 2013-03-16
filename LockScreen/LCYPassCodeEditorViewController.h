@@ -16,25 +16,25 @@
 @class LCYSetPasscodeStateMachine;
 
 @protocol LCYPassCodeEditorDelegate <NSObject>
-- (void) passcodeEditor: (LCYPassCodeEditorViewController *) passcodeEditor newCode:(NSData *) newCode;
+- (void) passcodeEditor:(LCYPassCodeEditorViewController *)passcodeEditor newCode:(NSData *)newCode;
 @end
 
 @interface LCYPassCodeEditorViewController : LCYPasscodeInputViewController
 {
-	id<LCYPassCodeEditorDelegate> delegate_;
-	
-	__weak UIView *digitsContainerView_;
+    id<LCYPassCodeEditorDelegate> delegate_;
 
-	__weak UILabel *promptLabel_;
-	__weak UILabel *errorLabel_;
-	
-	NSData *passCode_;
-	BOOL acceptInput_;
-	LCYPasscodeUIStateMachine *stateMachine_;
-	
-	LCYChangePasscodeStateMachine  *changePasscodeStateMachine_;
-	LCYTurnOffPasscodeStateMachine *turnOffPasscodeStateMachine_;
-	LCYSetPasscodeStateMachine	*setPasscodeStateMachine_;
+    __weak UIView *digitsContainerView_;
+
+    __weak UILabel *promptLabel_;
+    __weak UILabel *errorLabel_;
+
+    NSData *passCode_;
+    BOOL acceptInput_;
+    LCYPasscodeUIStateMachine *stateMachine_;
+
+    LCYChangePasscodeStateMachine *changePasscodeStateMachine_;
+    LCYTurnOffPasscodeStateMachine *turnOffPasscodeStateMachine_;
+    LCYSetPasscodeStateMachine *setPasscodeStateMachine_;
 }
 
 @property (nonatomic, weak)  id<LCYPassCodeEditorDelegate> delegate;
@@ -43,7 +43,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *promptLabel;
 @property (nonatomic, weak) IBOutlet UILabel *errorLabel;
 
-@property (nonatomic, copy) NSData* passCode;
+@property (nonatomic, copy) NSData *passCode;
 
 - (void) attemptToSetANewPassCode;
 - (void) attemptToDisablePassCode;

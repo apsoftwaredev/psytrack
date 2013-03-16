@@ -4,9 +4,9 @@
  *  Version: 1.05
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
  *
  *  Created by Daniel Boice on 11/8/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -24,17 +24,12 @@
     BOOL suicideMeans;
     BOOL suicideHistory;
     NSTimer *timer;
-    
-    
+
     NSString *historyKeyString;
     NSString *ideationKeyString;
     NSString *planKeyString;
     NSString *meansKeyString;
-    
-    
 }
-
-
 
 @property (weak, nonatomic) IBOutlet UIButton *ideationButton;
 @property (weak, nonatomic) IBOutlet UIButton *planButton;
@@ -46,17 +41,15 @@
 @property (weak, nonatomic) IBOutlet UIButton *historyOnButton;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
--(IBAction)ideationButtonTapped:(id)sender;
--(IBAction)planButtonTapped:(id)sender;
--(IBAction)meansButtonTapped:(id)sender;
--(IBAction)historyButtonTapped:(id)sender;
+- (IBAction) ideationButtonTapped:(id)sender;
+- (IBAction) planButtonTapped:(id)sender;
+- (IBAction) meansButtonTapped:(id)sender;
+- (IBAction) historyButtonTapped:(id)sender;
 
-
-
--(void)toggleButtons:(UIButton *)button;
--(void)checkSuicideRisk;
--(void)flashSuicideWarning;
--(NSString *)getSelectedVariables;
--(void)setHasHistory:(ClientEntity *)clientEntity;
+- (void) toggleButtons:(UIButton *)button;
+- (void) checkSuicideRisk;
+- (void) flashSuicideWarning;
+- (NSString *) getSelectedVariables;
+- (void) setHasHistory:(ClientEntity *)clientEntity;
 
 @end

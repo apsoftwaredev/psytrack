@@ -12,23 +12,21 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClientEntity;
 
 @interface AccomodationEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * accomodation;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSString *accomodation;
 @property (nonatomic, retain) NSSet *client;
 @end
 
 @interface AccomodationEntity (CoreDataGeneratedAccessors)
 
-- (void)addClientObject:(ClientEntity *)value;
-- (void)removeClientObject:(ClientEntity *)value;
-- (void)addClient:(NSSet *)values;
-- (void)removeClient:(NSSet *)values;
+- (void) addClientObject:(ClientEntity *)value;
+- (void) removeClientObject:(ClientEntity *)value;
+- (void) addClient:(NSSet *)values;
+- (void) removeClient:(NSSet *)values;
 
 @end

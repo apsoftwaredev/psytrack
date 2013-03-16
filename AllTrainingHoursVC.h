@@ -12,14 +12,10 @@
 #import "TrainingProgramEntity.h"
 
 @interface AllTrainingHoursVC : SCViewController <SCTableViewControllerDelegate, SCTableViewModelDelegate>{
-    
-    
-    
-    
     BOOL doctorateLevel;
 }
 
 @property(nonatomic, weak) NSString *studentName;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil doctorateLevel:(BOOL)doctorateLevelSelected;
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil doctorateLevel:(BOOL)doctorateLevelSelected;
 @end

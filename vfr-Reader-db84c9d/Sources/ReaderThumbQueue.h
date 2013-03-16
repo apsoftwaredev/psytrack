@@ -27,22 +27,22 @@
 
 @interface ReaderThumbQueue : NSObject
 {
-@private // Instance variables
+    @private // Instance variables
 
-	NSOperationQueue *loadQueue;
+    NSOperationQueue *loadQueue;
 
-	NSOperationQueue *workQueue;
+    NSOperationQueue *workQueue;
 }
 
-+ (ReaderThumbQueue *)sharedInstance;
++ (ReaderThumbQueue *) sharedInstance;
 
-- (void)addLoadOperation:(NSOperation *)operation;
+- (void) addLoadOperation:(NSOperation *)operation;
 
-- (void)addWorkOperation:(NSOperation *)operation;
+- (void) addWorkOperation:(NSOperation *)operation;
 
-- (void)cancelOperationsWithGUID:(NSString *)guid;
+- (void) cancelOperationsWithGUID:(NSString *)guid;
 
-- (void)cancelAllOperations;
+- (void) cancelAllOperations;
 
 @end
 
@@ -54,13 +54,13 @@
 
 @interface ReaderThumbOperation : NSOperation
 {
-@protected // Instance variables
+    @protected // Instance variables
 
-	NSString *_guid;
+    NSString *_guid;
 }
 
 @property (nonatomic, retain, readonly) NSString *guid;
 
-- (id)initWithGUID:(NSString *)guid;
+- (id) initWithGUID:(NSString *)guid;
 
 @end

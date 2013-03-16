@@ -10,7 +10,6 @@
 #import "CommunityServiceEntity.h"
 #import "LogEntity.h"
 
-
 @implementation CommunityServiceEntity
 
 @dynamic order;
@@ -21,7 +20,5 @@
 @dynamic projectName;
 @dynamic logs;
 @dynamic organization;
-
-
 
 @end

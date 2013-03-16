@@ -12,22 +12,20 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class BreakTimeEntity;
 
 @interface BreakTimeReasonEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * breakName;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *breakName;
 @property (nonatomic, retain) NSSet *breakTimes;
 @end
 
 @interface BreakTimeReasonEntity (CoreDataGeneratedAccessors)
 
-- (void)addBreakTimesObject:(BreakTimeEntity *)value;
-- (void)removeBreakTimesObject:(BreakTimeEntity *)value;
-- (void)addBreakTimes:(NSSet *)values;
-- (void)removeBreakTimes:(NSSet *)values;
+- (void) addBreakTimesObject:(BreakTimeEntity *)value;
+- (void) removeBreakTimesObject:(BreakTimeEntity *)value;
+- (void) addBreakTimes:(NSSet *)values;
+- (void) removeBreakTimes:(NSSet *)values;
 
 @end

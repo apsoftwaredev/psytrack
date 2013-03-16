@@ -10,13 +10,10 @@
 #import "ClinicianTypeEntity.h"
 #import "ClinicianEntity.h"
 
-
 @implementation ClinicianTypeEntity
 
 @dynamic order;
 @dynamic clinicianType;
 @dynamic clinician;
-
-
 
 @end

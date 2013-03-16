@@ -12,22 +12,19 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
-
 @interface LanguageEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * language;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSString *language;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
 @property (nonatomic, retain) NSSet *languagesSpoken;
 @end
 
 @interface LanguageEntity (CoreDataGeneratedAccessors)
 
-- (void)addLanguagesSpokenObject:(NSManagedObject *)value;
-- (void)removeLanguagesSpokenObject:(NSManagedObject *)value;
-- (void)addLanguagesSpoken:(NSSet *)values;
-- (void)removeLanguagesSpoken:(NSSet *)values;
+- (void) addLanguagesSpokenObject:(NSManagedObject *)value;
+- (void) removeLanguagesSpokenObject:(NSManagedObject *)value;
+- (void) addLanguagesSpoken:(NSSet *)values;
+- (void) removeLanguagesSpoken:(NSSet *)values;
 
 @end

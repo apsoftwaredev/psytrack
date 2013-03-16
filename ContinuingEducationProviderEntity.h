@@ -12,23 +12,21 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ContinuingEducationEntity;
 
 @interface ContinuingEducationProviderEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * providerName;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSString *providerName;
 @property (nonatomic, retain) NSSet *continuingEducation;
 @end
 
 @interface ContinuingEducationProviderEntity (CoreDataGeneratedAccessors)
 
-- (void)addContinuingEducationObject:(ContinuingEducationEntity *)value;
-- (void)removeContinuingEducationObject:(ContinuingEducationEntity *)value;
-- (void)addContinuingEducation:(NSSet *)values;
-- (void)removeContinuingEducation:(NSSet *)values;
+- (void) addContinuingEducationObject:(ContinuingEducationEntity *)value;
+- (void) removeContinuingEducationObject:(ContinuingEducationEntity *)value;
+- (void) addContinuingEducation:(NSSet *)values;
+- (void) removeContinuingEducation:(NSSet *)values;
 
 @end

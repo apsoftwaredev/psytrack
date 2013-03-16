@@ -13,7 +13,6 @@
 #import "PresentationDeliveredEntity.h"
 #import "PublicationEntity.h"
 
-
 @implementation PresentationEntity
 
 @dynamic length;
@@ -24,7 +23,5 @@
 @dynamic publications;
 @dynamic conferences;
 @dynamic deliveries;
-
-
 
 @end

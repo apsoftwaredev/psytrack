@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 @class DTAppScrollerView, DTApp, DTPageControl;
 
 @protocol DTAppScrollerViewDelegate <NSObject>
@@ -21,28 +20,24 @@
 
 - (void) appScroller:(DTAppScrollerView *)appScroller willDisplayButton:(UIButton *)button forApp:(DTApp *)app;
 
-
 @end
 
-
-
-@interface DTAppScrollerView : UIView <UIScrollViewDelegate> 
+@interface DTAppScrollerView : UIView <UIScrollViewDelegate>
 {
 //	id <DTAppScrollerViewDelegate> delegate;
-	
-	UIScrollView *_scrollView;
-	DTPageControl *_pageControl;
-	
-	// internal
-	NSMutableArray *_apps;
-	NSMutableDictionary *appButtonLookup;
-	BOOL dotUpdating;
-}
 
+    UIScrollView *_scrollView;
+    DTPageControl *_pageControl;
+
+    // internal
+    NSMutableArray *_apps;
+    NSMutableDictionary *appButtonLookup;
+    BOOL dotUpdating;
+}
 
 @property (nonatomic, weak) id <DTAppScrollerViewDelegate> delegate;
 
 // method to reload the app icons from delegate
-- (void)reloadData;
+- (void) reloadData;
 
 @end

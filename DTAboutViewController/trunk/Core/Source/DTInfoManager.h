@@ -11,16 +11,16 @@
 
 @interface DTInfoManager : NSObject
 {
-	NSOperationQueue *queue;
+    NSOperationQueue *queue;
 
-	NSMutableDictionary *_cachedDictionaries;
-	NSMutableDictionary *_lastRefreshDates;
+    NSMutableDictionary *_cachedDictionaries;
+    NSMutableDictionary *_lastRefreshDates;
 }
 
-+ (DTInfoManager *)sharedManager;
++ (DTInfoManager *) sharedManager;
 
-- (NSUInteger)numberOfApps;
-- (DTApp *)appAtIndex:(NSUInteger)index;
+- (NSUInteger) numberOfApps;
+- (DTApp *) appAtIndex:(NSUInteger)index;
 
 //- (NSDictionary *) dictionaryFromCachedPropertyListWithName:(NSString *)fileName;
 

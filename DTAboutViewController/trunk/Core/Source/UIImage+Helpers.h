@@ -8,15 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@interface UIImage (Helpers)
 
-@interface UIImage (Helpers) 
++ (UIImage *) makeRoundCornerImage:(UIImage *)img cornerWidth:(int)cornerWidth cornerHeight:(int)cornerHeight;
 
-+(UIImage *)makeRoundCornerImage:(UIImage*)img cornerWidth:(int) cornerWidth cornerHeight:(int) cornerHeight;
++ (UIImage *) imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 
-+ (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
-	
-- (UIImage*)scaleImageToSize:(CGSize)newSize;
-	
-- (UIImage*) imageByMaskingWithImage:(UIImage *)maskImage; 
+- (UIImage *) scaleImageToSize:(CGSize)newSize;
+
+- (UIImage *) imageByMaskingWithImage:(UIImage *)maskImage;
 
 @end

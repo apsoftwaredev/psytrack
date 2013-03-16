@@ -14,5 +14,4 @@
 @property (nonatomic, strong) NSString *variableStr;
 @property (nonatomic, strong) NSString *variableCountStr;
 
-
 @end

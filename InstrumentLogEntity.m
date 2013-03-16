@@ -11,7 +11,6 @@
 #import "BatteryEntity.h"
 #import "InstrumentEntity.h"
 
-
 @implementation InstrumentLogEntity
 
 @dynamic logDate;
@@ -19,7 +18,5 @@
 @dynamic task;
 @dynamic instrument;
 @dynamic battery;
-
-
 
 @end

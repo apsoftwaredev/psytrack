@@ -1215,7 +1215,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "258"
          endingLineNumber = "258"
-         landmarkName = "-viewDidLoad"
+         landmarkName = "-tableViewModel:sectionHeaderTitleForItem:AtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1800,7 +1800,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "747"
          endingLineNumber = "747"
-         landmarkName = "-flashCheckingLabel:"
+         landmarkName = "-downloadButtonTapped:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1825,9 +1825,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1404"
-         endingLineNumber = "1404"
-         landmarkName = "-tableViewModel:didAddSectionAtIndex:"
-         landmarkType = "5">
+         endingLineNumber = "1404">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1943,7 +1941,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "114"
          endingLineNumber = "114"
-         landmarkName = "-viewDidLoad"
+         landmarkName = "-shouldAutorotateToInterfaceOrientation:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1955,9 +1953,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "326"
-         endingLineNumber = "326"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
+         endingLineNumber = "326">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1968,9 +1964,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "325"
-         endingLineNumber = "325"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
+         endingLineNumber = "325">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1994,9 +1988,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "277"
-         endingLineNumber = "277"
-         landmarkName = "-tableViewModel:customCellForRowAtIndexPath:"
-         landmarkType = "5">
+         endingLineNumber = "277">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -2008,7 +2000,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "518"
          endingLineNumber = "518"
-         landmarkName = "-searchBarCancelButtonClicked:"
+         landmarkName = "-getTheLastModifiedDateLocal"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2073,7 +2065,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "592"
          endingLineNumber = "592"
-         landmarkName = "-searchBar:textDidChange:"
+         landmarkName = "-connectToRemoteDrugFile"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2086,7 +2078,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "694"
          endingLineNumber = "694"
-         landmarkName = "-myDoneButtonTapped"
+         landmarkName = "-connection:didReceiveResponse:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2099,7 +2091,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "693"
          endingLineNumber = "693"
-         landmarkName = "-myDoneButtonTapped"
+         landmarkName = "-connection:didReceiveResponse:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2112,7 +2104,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "508"
          endingLineNumber = "508"
-         landmarkName = "-viewButtonTapped"
+         landmarkName = "-checkingLabelToNormalState"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2125,7 +2117,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "669"
          endingLineNumber = "669"
-         landmarkName = "-myDoneButtonTapped"
+         landmarkName = "-connection:didReceiveResponse:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2138,7 +2130,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "671"
          endingLineNumber = "671"
-         landmarkName = "-myDoneButtonTapped"
+         landmarkName = "-connection:didReceiveResponse:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2151,7 +2143,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "717"
          endingLineNumber = "717"
-         landmarkName = "-myDoneButtonTapped"
+         landmarkName = "-connection:didFailWithError:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2332,9 +2324,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1612"
-         endingLineNumber = "1612"
-         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
-         landmarkType = "5">
+         endingLineNumber = "1612">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -2359,7 +2349,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "124"
          endingLineNumber = "124"
-         landmarkName = "-willMoveToParentViewController:"
+         landmarkName = "-setupToolbarItems"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2762,7 +2752,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "674"
          endingLineNumber = "674"
-         landmarkName = "-setSelectedClinicians"
+         landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2775,7 +2765,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "659"
          endingLineNumber = "659"
-         landmarkName = "-setSelectedClinicians"
+         landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2788,7 +2778,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "494"
          endingLineNumber = "494"
-         landmarkName = "-doneButtonTappedInDetailSubView"
+         landmarkName = "-createSelectedCliniciansArray"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2801,7 +2791,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "493"
          endingLineNumber = "493"
-         landmarkName = "-doneButtonTappedInDetailSubView"
+         landmarkName = "-createSelectedCliniciansArray"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -3698,7 +3688,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3522"
          endingLineNumber = "3522"
-         landmarkName = "-tableViewModel:detailViewWillDismissForRowAtIndexPath:"
+         landmarkName = "-changeABGroupNameTo:addNew:checkExisting:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -3710,9 +3700,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "926"
-         endingLineNumber = "926"
-         landmarkName = "-tableViewModel:didInsertRowAtIndexPath:"
-         landmarkType = "5">
+         endingLineNumber = "926">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -3723,9 +3711,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "793"
-         endingLineNumber = "793"
-         landmarkName = "-tableViewModel:searchBarSelectedScopeButtonIndexDidChange:"
-         landmarkType = "5">
+         endingLineNumber = "793">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -3736,9 +3722,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "957"
-         endingLineNumber = "957"
-         landmarkName = "-tableViewModel:didAddSectionAtIndex:"
-         landmarkType = "5">
+         endingLineNumber = "957">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -3750,7 +3734,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "736"
          endingLineNumber = "736"
-         landmarkName = "-createSelectedCliniciansArray"
+         landmarkName = "-tableViewModel:willRemoveRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -3762,9 +3746,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "971"
-         endingLineNumber = "971"
-         landmarkName = "-tableViewModel:didAddSectionAtIndex:"
-         landmarkType = "5">
+         endingLineNumber = "971">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -4283,7 +4265,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2666"
          endingLineNumber = "2666"
-         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
+         landmarkName = "-evaluateWhichABViewControllerToShow"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4296,7 +4278,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2668"
          endingLineNumber = "2668"
-         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
+         landmarkName = "-evaluateWhichABViewControllerToShow"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4309,7 +4291,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2626"
          endingLineNumber = "2626"
-         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
+         landmarkName = "-evaluateWhichABViewControllerToShow"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4566,9 +4548,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4046"
-         endingLineNumber = "4046"
-         landmarkName = "-lockApplication"
-         landmarkType = "5">
+         endingLineNumber = "4046">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -4579,9 +4559,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4034"
-         endingLineNumber = "4034"
-         landmarkName = "-displayWrongPassword"
-         landmarkType = "5">
+         endingLineNumber = "4034">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -4592,9 +4570,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4019"
-         endingLineNumber = "4019"
-         landmarkName = "-isLockedTimerOn"
-         landmarkType = "5">
+         endingLineNumber = "4019">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -4606,7 +4582,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "712"
          endingLineNumber = "712"
-         landmarkName = "-loadDatabaseData:"
+         landmarkName = "-alertView:didDismissWithButtonIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4619,8 +4595,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "704"
          endingLineNumber = "704"
-         landmarkName = "-loadDatabaseData:"
-         landmarkType = "5">
+         landmarkName = "@implementation PTTAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -4632,7 +4608,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "722"
          endingLineNumber = "722"
-         landmarkName = "-loadDatabaseData:"
+         landmarkName = "-iCloudPreferenceFromUserDefaults"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4645,7 +4621,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1438"
          endingLineNumber = "1438"
-         landmarkName = "-setupLockDictionaryResultStr"
+         landmarkName = "-encryptStringToEncryptedData:withKeyString:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4658,7 +4634,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1462"
          endingLineNumber = "1462"
-         landmarkName = "-setupLockDictionaryResultStr"
+         landmarkName = "-encryptDataToEncryptedData:withKeyString:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4671,7 +4647,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1457"
          endingLineNumber = "1457"
-         landmarkName = "-setupLockDictionaryResultStr"
+         landmarkName = "-encryptDataToEncryptedData:withKeyString:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4684,8 +4660,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1446"
          endingLineNumber = "1446"
-         landmarkName = "-setupLockDictionaryResultStr"
-         landmarkType = "5">
+         landmarkName = "@implementation PTTAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -4697,7 +4673,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1474"
          endingLineNumber = "1474"
-         landmarkName = "-setupLockDictionaryResultStr"
+         landmarkName = "-encryptDataToEncryptedData:withKeyString:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4710,8 +4686,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1493"
          endingLineNumber = "1493"
-         landmarkName = "-setupLockDictionaryResultStr"
-         landmarkType = "5">
+         landmarkName = "@implementation PTTAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -4723,7 +4699,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1506"
          endingLineNumber = "1506"
-         landmarkName = "-encryptDictionaryToData:"
+         landmarkName = "-encryptDataToEncryptedData:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4736,7 +4712,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1367"
          endingLineNumber = "1367"
-         landmarkName = "-setupDefaultLockKeychainSettingsWithReset:"
+         landmarkName = "-convertStringToData:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5529,7 +5505,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2455"
          endingLineNumber = "2455"
-         landmarkName = "-application:willChangeStatusBarOrientation:duration:"
+         landmarkName = "-repairForSaveError:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5542,7 +5518,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2425"
          endingLineNumber = "2425"
-         landmarkName = "-application:willChangeStatusBarOrientation:duration:"
+         landmarkName = "-saveContext"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5555,8 +5531,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "108"
          endingLineNumber = "108"
-         landmarkName = "-viewDidLoad"
-         landmarkType = "5">
+         landmarkName = "@implementation CliniciansRootViewController_iPad"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -5581,7 +5557,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "395"
          endingLineNumber = "395"
-         landmarkName = "-selectMyInformation"
+         landmarkName = "-doneButtonTappedInDetailSubView"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5594,7 +5570,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "386"
          endingLineNumber = "386"
-         landmarkName = "-selectMyInformation"
+         landmarkName = "-doneButtonTappedInDetailSubView"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5607,7 +5583,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "183"
          endingLineNumber = "183"
-         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5620,7 +5596,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "181"
          endingLineNumber = "181"
-         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5632,9 +5608,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "740"
-         endingLineNumber = "740"
-         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
-         landmarkType = "5">
+         endingLineNumber = "740">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -5645,9 +5619,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "719"
-         endingLineNumber = "719"
-         landmarkName = "-tableViewModel:detailModelCreatedForRowAtIndexPath:detailTableViewModel:"
-         landmarkType = "5">
+         endingLineNumber = "719">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -5659,7 +5631,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3615"
          endingLineNumber = "3615"
-         landmarkName = "-checkIfRecordIDInAddressBook:"
+         landmarkName = "-changeABGroupNameTo:addNew:checkExisting:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5672,7 +5644,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3302"
          endingLineNumber = "3302"
-         landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
+         landmarkName = "-selectButtonTappedInABPersonController:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5685,7 +5657,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4017"
          endingLineNumber = "4017"
-         landmarkName = "-evaluateWhichABViewControllerToShow"
+         landmarkName = "-defaultABSourceID"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5698,7 +5670,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3645"
          endingLineNumber = "3645"
-         landmarkName = "-checkIfRecordIDInAddressBook:"
+         landmarkName = "-personWithRecordID:containedInGroupWithID:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5711,7 +5683,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4113"
          endingLineNumber = "4113"
-         landmarkName = "-evaluateWhichABViewControllerToShow"
+         landmarkName = "-defaultABSourceID"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5724,7 +5696,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4022"
          endingLineNumber = "4022"
-         landmarkName = "-evaluateWhichABViewControllerToShow"
+         landmarkName = "-defaultABSourceID"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5737,7 +5709,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4014"
          endingLineNumber = "4014"
-         landmarkName = "-evaluateWhichABViewControllerToShow"
+         landmarkName = "-defaultABSourceID"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5750,7 +5722,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4018"
          endingLineNumber = "4018"
-         landmarkName = "-evaluateWhichABViewControllerToShow"
+         landmarkName = "-defaultABSourceID"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5763,7 +5735,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4031"
          endingLineNumber = "4031"
-         landmarkName = "-evaluateWhichABViewControllerToShow"
+         landmarkName = "-defaultABSourceID"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5776,11 +5748,11 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3378"
          endingLineNumber = "3378"
-         landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
+         landmarkName = "-changeABGroupNameTo:addNew:checkExisting:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "CliniciansViewController_Shared.m"
@@ -5788,9 +5760,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4521"
-         endingLineNumber = "4521"
-         landmarkName = "-peoplePickerNavigationController:shouldContinueAfterSelectingPerson:property:identifier:"
-         landmarkType = "5">
+         endingLineNumber = "4521">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -5801,9 +5771,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4402"
-         endingLineNumber = "4402"
-         landmarkName = "-navigationController:willShowViewController:animated:"
-         landmarkType = "5">
+         endingLineNumber = "4402">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -5814,9 +5782,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4025"
-         endingLineNumber = "4025"
-         landmarkName = "-isLockedTimerOn"
-         landmarkType = "5">
+         endingLineNumber = "4025">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -5827,9 +5793,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4018"
-         endingLineNumber = "4018"
-         landmarkName = "-isLockedTimerOn"
-         landmarkType = "5">
+         endingLineNumber = "4018">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -5840,9 +5804,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4207"
-         endingLineNumber = "4207"
-         landmarkName = "-evaluateWhichABViewControllerToShow"
-         landmarkType = "5">
+         endingLineNumber = "4207">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -5919,8 +5881,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2290"
          endingLineNumber = "2290"
-         landmarkName = "@implementation PTTAppDelegate"
-         landmarkType = "3">
+         landmarkName = "-tabBarController:didSelectViewController:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -5932,7 +5894,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1486"
          endingLineNumber = "1486"
-         landmarkName = "-setupLockDictionaryResultStr"
+         landmarkName = "-encryptDataToEncryptedData:withKeyString:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5945,7 +5907,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1251"
          endingLineNumber = "1251"
-         landmarkName = "-resetDefaultLockKeychainSettingsWithReset:"
+         landmarkName = "-setupMyInfoRecord"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5958,8 +5920,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1253"
          endingLineNumber = "1253"
-         landmarkName = "@implementation PTTAppDelegate"
-         landmarkType = "3">
+         landmarkName = "-setupMyInfoRecord"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -5971,7 +5933,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1256"
          endingLineNumber = "1256"
-         landmarkName = "-setupDefaultLockKeychainSettingsWithReset:"
+         landmarkName = "-setupMyInfoRecord"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5984,7 +5946,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2380"
          endingLineNumber = "2380"
-         landmarkName = "-application:willChangeStatusBarOrientation:duration:"
+         landmarkName = "-displayMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5997,7 +5959,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2391"
          endingLineNumber = "2391"
-         landmarkName = "-application:willChangeStatusBarOrientation:duration:"
+         landmarkName = "-displayMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -6010,7 +5972,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1296"
          endingLineNumber = "1296"
-         landmarkName = "-setupDefaultLockKeychainSettingsWithReset:"
+         landmarkName = "-setupLockDictionaryResultStr"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -6036,7 +5998,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2346"
          endingLineNumber = "2346"
-         landmarkName = "-application:willChangeStatusBarOrientation:duration:"
+         landmarkName = "-applicationWillEnterForeground:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -6049,7 +6011,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2362"
          endingLineNumber = "2362"
-         landmarkName = "-application:willChangeStatusBarOrientation:duration:"
+         landmarkName = "-displayMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -6062,8 +6024,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2361"
          endingLineNumber = "2361"
-         landmarkName = "-application:willChangeStatusBarOrientation:duration:"
-         landmarkType = "5">
+         landmarkName = "@implementation PTTAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -6075,7 +6037,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2423"
          endingLineNumber = "2423"
-         landmarkName = "-application:willChangeStatusBarOrientation:duration:"
+         landmarkName = "-saveContext"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -6088,7 +6050,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2355"
          endingLineNumber = "2355"
-         landmarkName = "-application:willChangeStatusBarOrientation:duration:"
+         landmarkName = "-applicationDidBecomeActive:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -6101,8 +6063,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2039"
          endingLineNumber = "2039"
-         landmarkName = "-decryptDataToPlainDataUsingKeyEntityWithString:encryptedData:"
-         landmarkType = "5">
+         landmarkName = "@implementation PTTAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -6127,8 +6089,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2031"
          endingLineNumber = "2031"
-         landmarkName = "-decryptDataToPlainDataUsingKeyEntityWithString:encryptedData:"
-         landmarkType = "5">
+         landmarkName = "@implementation PTTAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -6283,8 +6245,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2027"
          endingLineNumber = "2027"
-         landmarkName = "-decryptDataToPlainDataUsingKeyEntityWithString:encryptedData:"
-         landmarkType = "5">
+         landmarkName = "@implementation PTTAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -6296,7 +6258,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2376"
          endingLineNumber = "2376"
-         landmarkName = "-application:willChangeStatusBarOrientation:duration:"
+         landmarkName = "-displayMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -6326,7 +6288,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
@@ -6335,7 +6297,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1292"
          endingLineNumber = "1292"
-         landmarkName = "-setupDefaultLockKeychainSettingsWithReset:"
+         landmarkName = "-setupLockDictionaryResultStr"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -6374,7 +6336,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2382"
          endingLineNumber = "2382"
-         landmarkName = "-application:willChangeStatusBarOrientation:duration:"
+         landmarkName = "-displayMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -6607,9 +6569,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "729"
-         endingLineNumber = "729"
-         landmarkName = "-tableViewModel:detailModelCreatedForSectionAtIndex:detailTableViewModel:"
-         landmarkType = "5">
+         endingLineNumber = "729">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7115,7 +7075,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2873"
          endingLineNumber = "2873"
-         landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
+         landmarkName = "-navigationController:willShowViewController:animated:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -7192,9 +7152,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4084"
-         endingLineNumber = "4084"
-         landmarkName = "-lockApplication"
-         landmarkType = "5">
+         endingLineNumber = "4084">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7205,9 +7163,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4061"
-         endingLineNumber = "4061"
-         landmarkName = "-lockApplication"
-         landmarkType = "5">
+         endingLineNumber = "4061">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7218,9 +7174,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4041"
-         endingLineNumber = "4041"
-         landmarkName = "-lockApplication"
-         landmarkType = "5">
+         endingLineNumber = "4041">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7231,9 +7185,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4035"
-         endingLineNumber = "4035"
-         landmarkName = "-lockApplication"
-         landmarkType = "5">
+         endingLineNumber = "4035">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7244,9 +7196,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4036"
-         endingLineNumber = "4036"
-         landmarkName = "-lockApplication"
-         landmarkType = "5">
+         endingLineNumber = "4036">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7257,9 +7207,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3859"
-         endingLineNumber = "3859"
-         landmarkName = "@implementation PTTAppDelegate"
-         landmarkType = "3">
+         endingLineNumber = "3859">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7270,9 +7218,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3914"
-         endingLineNumber = "3914"
-         landmarkName = "-flashAppTrainAndTitleGraphics"
-         landmarkType = "5">
+         endingLineNumber = "3914">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7283,9 +7229,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3908"
-         endingLineNumber = "3908"
-         landmarkName = "-flashAppTrainAndTitleGraphics"
-         landmarkType = "5">
+         endingLineNumber = "3908">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7310,8 +7254,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3127"
          endingLineNumber = "3127"
-         landmarkName = "-drugsPersistentStoreCoordinator"
-         landmarkType = "5">
+         landmarkName = "@implementation PTTAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7427,7 +7371,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1105"
          endingLineNumber = "1105"
-         landmarkName = "-downloadButtonTapped:"
+         landmarkName = "-tableViewModel:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -7440,7 +7384,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1003"
          endingLineNumber = "1003"
-         landmarkName = "-connection:didFailWithError:"
+         landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -7713,7 +7657,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2823"
          endingLineNumber = "2823"
-         landmarkName = "-saveContext"
+         landmarkName = "-combSmString"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -7726,7 +7670,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2830"
          endingLineNumber = "2830"
-         landmarkName = "-saveContext"
+         landmarkName = "-combSmString"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -7739,7 +7683,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2831"
          endingLineNumber = "2831"
-         landmarkName = "-saveContext"
+         landmarkName = "-combSmString"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -7752,8 +7696,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3463"
          endingLineNumber = "3463"
-         landmarkName = "-mergeiCloudChanges:forContext:"
-         landmarkType = "5">
+         landmarkName = "@implementation PTTAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7817,7 +7761,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2086"
          endingLineNumber = "2086"
-         landmarkName = "-application:didRegisterForRemoteNotificationsWithDeviceToken:"
+         landmarkName = "-application:willChangeStatusBarOrientation:duration:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -7830,7 +7774,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2091"
          endingLineNumber = "2091"
-         landmarkName = "-application:didRegisterForRemoteNotificationsWithDeviceToken:"
+         landmarkName = "-application:willChangeStatusBarOrientation:duration:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -7843,7 +7787,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "170"
          endingLineNumber = "170"
-         landmarkName = "-viewDidLoad"
+         landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -7960,7 +7904,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "311"
          endingLineNumber = "311"
-         landmarkName = "-viewDidLoad"
+         landmarkName = "-viewButtonTapped"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -7973,7 +7917,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "310"
          endingLineNumber = "310"
-         landmarkName = "-viewDidLoad"
+         landmarkName = "-viewButtonTapped"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -7999,7 +7943,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "339"
          endingLineNumber = "339"
-         landmarkName = "-viewDidLoad"
+         landmarkName = "-searchBar:textDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -8012,7 +7956,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "530"
          endingLineNumber = "530"
-         landmarkName = "-searchBar:textDidChange:"
+         landmarkName = "-getTheLastModifiedDateLocal"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -8025,7 +7969,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "531"
          endingLineNumber = "531"
-         landmarkName = "-searchBar:textDidChange:"
+         landmarkName = "-getTheLastModifiedDateLocal"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -8037,9 +7981,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1580"
-         endingLineNumber = "1580"
-         landmarkName = "-tableViewModel:didSelectRowAtIndexPath:"
-         landmarkType = "5">
+         endingLineNumber = "1580">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -8050,9 +7992,7 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1573"
-         endingLineNumber = "1573"
-         landmarkName = "-tableViewModel:didSelectRowAtIndexPath:"
-         landmarkType = "5">
+         endingLineNumber = "1573">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -8792,7 +8732,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "214"
          endingLineNumber = "214"
-         landmarkName = "-tableViewModel:detailViewWillDismissForRowAtIndexPath:"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -8805,8 +8745,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "59"
          endingLineNumber = "59"
-         landmarkName = "-splitViewController:willHideViewController:withBarButtonItem:forPopoverController:"
-         landmarkType = "5">
+         landmarkName = "@implementation CliniciansDetailViewController_iPad"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -8818,7 +8758,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "213"
          endingLineNumber = "213"
-         landmarkName = "-tableViewModel:detailViewWillDismissForRowAtIndexPath:"
+         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -8831,8 +8771,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "67"
          endingLineNumber = "67"
-         landmarkName = "-splitViewController:willShowViewController:invalidatingBarButtonItem:"
-         landmarkType = "5">
+         landmarkName = "@implementation CliniciansDetailViewController_iPad"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -8844,8 +8784,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "57"
          endingLineNumber = "57"
-         landmarkName = "-splitViewController:willHideViewController:withBarButtonItem:forPopoverController:"
-         landmarkType = "5">
+         landmarkName = "@implementation CliniciansDetailViewController_iPad"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -8857,7 +8797,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "114"
          endingLineNumber = "114"
-         landmarkName = "-viewDidUnload"
+         landmarkName = "-shouldAutorotateToInterfaceOrientation:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -8976,6 +8916,19 @@
          endingLineNumber = "54"
          landmarkName = "@interface SCTableViewCell"
          landmarkType = "2">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "CliniciansRootViewController_iPad.m"
+         timestampString = "385139183.373045"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "382"
+         endingLineNumber = "382"
+         landmarkName = "-tableViewModel:detailModelCreatedForRowAtIndexPath:detailTableViewModel:"
+         landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>

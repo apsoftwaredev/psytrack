@@ -10,7 +10,6 @@
 #import "EmployerEntity.h"
 #import "EmploymentEntity.h"
 
-
 @implementation EmployerEntity
 
 @dynamic employerName;
@@ -18,8 +17,5 @@
 @dynamic notes;
 @dynamic addressBookRecordIdentifier;
 @dynamic employements;
-
-
-
 
 @end

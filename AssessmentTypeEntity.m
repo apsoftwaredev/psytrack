@@ -11,7 +11,6 @@
 #import "AssessmentEntity.h"
 #import "ExistingAssessmentEntity.h"
 
-
 @implementation AssessmentTypeEntity
 
 @dynamic order;
@@ -19,8 +18,5 @@
 @dynamic assessmentType;
 @dynamic existingAssessments;
 @dynamic assessments;
-
-
-
 
 @end

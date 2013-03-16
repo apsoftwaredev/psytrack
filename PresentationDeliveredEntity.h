@@ -12,15 +12,12 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
-
 @interface PresentationDeliveredEntity : PTManagedObject
 
-@property (nonatomic, retain) NSDate * date;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * audienceSize;
-@property (nonatomic, retain) NSString * audience;
+@property (nonatomic, retain) NSDate *date;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *audienceSize;
+@property (nonatomic, retain) NSString *audience;
 @property (nonatomic, retain) NSManagedObject *presentation;
 
 @end

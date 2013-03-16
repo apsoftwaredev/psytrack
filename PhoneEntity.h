@@ -12,16 +12,14 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClientEntity;
 
 @interface PhoneEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * phoneNumber;
-@property (nonatomic, retain) NSString * phoneName;
-@property (nonatomic, retain) NSString * keyString;
-@property (nonatomic, retain) NSString * extension;
+@property (nonatomic, retain) NSString *phoneNumber;
+@property (nonatomic, retain) NSString *phoneName;
+@property (nonatomic, retain) NSString *keyString;
+@property (nonatomic, retain) NSString *extension;
 @property (nonatomic, retain) ClientEntity *client;
 
 @end

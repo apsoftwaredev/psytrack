@@ -9,14 +9,10 @@
 
 #import "LicenseTypeEntity.h"
 
-
 @implementation LicenseTypeEntity
 
 @dynamic licenseType;
 @dynamic order;
 @dynamic licenseName;
-
-
-
 
 @end

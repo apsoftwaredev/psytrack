@@ -11,7 +11,6 @@
 #import "DemographicProfileEntity.h"
 #import "ExistingRaceEntity.h"
 
-
 @implementation RaceEntity
 
 @dynamic order;
@@ -22,29 +21,19 @@
 
 @synthesize clientCount;
 
--(int)clientCount{
-    
-    int returnInt=0;
-    
-    
-    NSMutableSet *clientSet=[self mutableSetValueForKeyPath:@"demographics.client"];
-    
-    if (clientSet) {
-        
-        
-        returnInt=clientSet.count;
+- (int) clientCount
+{
+    int returnInt = 0;
+
+    NSMutableSet *clientSet = [self mutableSetValueForKeyPath:@"demographics.client"];
+
+    if (clientSet)
+    {
+        returnInt = clientSet.count;
     }
-    
-    
-    
+
     return returnInt;
-    
-    
-    
-    
 }
-
-
 
 
 @end

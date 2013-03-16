@@ -9,22 +9,18 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-
-typedef enum 
-{
-	DTButtonStyleBotBlue = 1,
-	DTButtonStyleBotGray = 2,
-	DTButtonStyleBotGreen = 3,
-	DTButtonStyleBotRed = 4
+typedef enum {
+    DTButtonStyleBotBlue = 1,
+    DTButtonStyleBotGray = 2,
+    DTButtonStyleBotGreen = 3,
+    DTButtonStyleBotRed = 4
 } DTButtonStyle;
-	
 
-
-@interface DTButton : UIButton 
+@interface DTButton : UIButton
 {
-	CAGradientLayer *gradientLayer;
-	
-	DTButtonStyle style;
+    CAGradientLayer *gradientLayer;
+
+    DTButtonStyle style;
 }
 
 @property (nonatomic, assign) DTButtonStyle style;

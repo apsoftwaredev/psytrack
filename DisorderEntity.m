@@ -14,7 +14,6 @@
 #import "DisorderSubCategoryEntity.h"
 #import "DisorderSystemEntity.h"
 
-
 @implementation DisorderEntity
 
 @dynamic order;
@@ -28,8 +27,5 @@
 @dynamic diagnoses;
 @dynamic specifiers;
 @dynamic subCategory;
-
-
-
 
 @end

@@ -12,15 +12,13 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class BatteryEntity, ClientPresentationEntity;
 
 @interface ClientBatteryNotesEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * countAsTrainingBattery;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *countAsTrainingBattery;
 @property (nonatomic, retain) ClientPresentationEntity *clientPresentations;
 @property (nonatomic, retain) BatteryEntity *battery;
 

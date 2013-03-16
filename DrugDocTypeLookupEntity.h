@@ -4,9 +4,9 @@
  *  Version: 1.05
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
  *
  *  Created by Daniel Boice on  12/31/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -22,16 +22,16 @@
 
 @interface DrugDocTypeLookupEntity : NSManagedObject
 
-@property (nonatomic, strong) NSString * docType;
-@property (nonatomic, strong) NSString * docTypeDesc;
+@property (nonatomic, strong) NSString *docType;
+@property (nonatomic, strong) NSString *docTypeDesc;
 @property (nonatomic, strong) NSSet *reglatoryActions;
 @end
 
 @interface DrugDocTypeLookupEntity (CoreDataGeneratedAccessors)
 
-- (void)addReglatoryActionsObject:(DrugRegActionDateEntity *)value;
-- (void)removeReglatoryActionsObject:(DrugRegActionDateEntity *)value;
-- (void)addReglatoryActions:(NSSet *)values;
-- (void)removeReglatoryActions:(NSSet *)values;
+- (void) addReglatoryActionsObject:(DrugRegActionDateEntity *)value;
+- (void) removeReglatoryActionsObject:(DrugRegActionDateEntity *)value;
+- (void) addReglatoryActions:(NSSet *)values;
+- (void) removeReglatoryActions:(NSSet *)values;
 
 @end

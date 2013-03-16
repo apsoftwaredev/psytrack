@@ -12,7 +12,6 @@
 #import "LogEntity.h"
 #import "OtherReferralSourceEntity.h"
 
-
 @implementation GrantEntity
 
 @dynamic submissionDeadline;
@@ -27,7 +26,5 @@
 @dynamic setting;
 @dynamic logs;
 @dynamic otherClinicians;
-
-
 
 @end

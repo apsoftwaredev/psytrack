@@ -12,16 +12,14 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClinicianEntity;
 
 @interface EmploymentEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSDate * dateStarted;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * dateEnded;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSDate *dateStarted;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSDate *dateEnded;
 @property (nonatomic, retain) NSSet *positions;
 @property (nonatomic, retain) NSSet *clinician;
 @property (nonatomic, retain) NSManagedObject *employer;
@@ -29,14 +27,14 @@
 
 @interface EmploymentEntity (CoreDataGeneratedAccessors)
 
-- (void)addPositionsObject:(NSManagedObject *)value;
-- (void)removePositionsObject:(NSManagedObject *)value;
-- (void)addPositions:(NSSet *)values;
-- (void)removePositions:(NSSet *)values;
+- (void) addPositionsObject:(NSManagedObject *)value;
+- (void) removePositionsObject:(NSManagedObject *)value;
+- (void) addPositions:(NSSet *)values;
+- (void) removePositions:(NSSet *)values;
 
-- (void)addClinicianObject:(ClinicianEntity *)value;
-- (void)removeClinicianObject:(ClinicianEntity *)value;
-- (void)addClinician:(NSSet *)values;
-- (void)removeClinician:(NSSet *)values;
+- (void) addClinicianObject:(ClinicianEntity *)value;
+- (void) removeClinicianObject:(ClinicianEntity *)value;
+- (void) addClinician:(NSSet *)values;
+- (void) removeClinician:(NSSet *)values;
 
 @end

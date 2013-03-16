@@ -12,23 +12,21 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class DemographicProfileEntity;
 
 @interface SpiritualBeliefEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * beliefName;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSString *beliefName;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
 @property (nonatomic, retain) NSSet *demographics;
 @end
 
 @interface SpiritualBeliefEntity (CoreDataGeneratedAccessors)
 
-- (void)addDemographicsObject:(DemographicProfileEntity *)value;
-- (void)removeDemographicsObject:(DemographicProfileEntity *)value;
-- (void)addDemographics:(NSSet *)values;
-- (void)removeDemographics:(NSSet *)values;
+- (void) addDemographicsObject:(DemographicProfileEntity *)value;
+- (void) removeDemographicsObject:(DemographicProfileEntity *)value;
+- (void) addDemographics:(NSSet *)values;
+- (void) removeDemographics:(NSSet *)values;
 
 @end

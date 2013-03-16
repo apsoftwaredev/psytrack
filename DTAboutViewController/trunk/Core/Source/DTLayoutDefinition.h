@@ -8,28 +8,24 @@
 
 #import <Foundation/Foundation.h>
 
-
-@interface DTLayoutDefinition : NSObject 
+@interface DTLayoutDefinition : NSObject
 {
-	NSString *_name;
-	NSDictionary *_dictionary;
-	NSDate *_lastModifiedDate;
-	
-	BOOL isRefreshing;
+    NSString *_name;
+    NSDictionary *_dictionary;
+    NSDate *_lastModifiedDate;
+
+    BOOL isRefreshing;
 }
 
-- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (id) initWithDictionary:(NSDictionary *)dictionary;
 
-+ (DTLayoutDefinition *)layoutNamed:(NSString *)name;
++ (DTLayoutDefinition *) layoutNamed:(NSString *)name;
 
-- (NSUInteger)numberOfRows;
-- (NSDictionary *)rowDictionaryAtIndex:(NSUInteger)index;
-
+- (NSUInteger) numberOfRows;
+- (NSDictionary *) rowDictionaryAtIndex:(NSUInteger)index;
 
 @property (nonatomic, retain, readonly) NSString *name;
 @property (nonatomic, retain, readonly) NSDictionary *dictionary;
 @property (nonatomic, retain, readonly) NSDate *lastModifiedDate;
-
-
 
 @end

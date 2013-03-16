@@ -10,7 +10,6 @@
 #import "DisabilityEntity.h"
 #import "DemographicProfileEntity.h"
 
-
 @implementation DisabilityEntity
 
 @dynamic order;
@@ -21,25 +20,16 @@
 
 @synthesize clientCount;
 
--(int)clientCount{
-    
-    int returnInt=0;
-    
-    
-    NSMutableSet *clientSet=[self mutableSetValueForKeyPath:@"demographics.client"];
-    
-    
-    returnInt=clientSet.count;
-    
-    
+- (int) clientCount
+{
+    int returnInt = 0;
+
+    NSMutableSet *clientSet = [self mutableSetValueForKeyPath:@"demographics.client"];
+
+    returnInt = clientSet.count;
+
     return returnInt;
-    
-    
-    
-    
 }
-
-
 
 
 @end

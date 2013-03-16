@@ -13,8 +13,6 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class SupervisionTypeEntity, SupervisionTypeSubtypeEntity, TimeEntity;
 
 @interface SupervisionReceivedEntity : SupervisionParentEntity

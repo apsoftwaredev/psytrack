@@ -11,7 +11,6 @@
 #import "DemographicProfileEntity.h"
 #import "RelationshipEntity.h"
 
-
 @implementation InterpersonalEntity
 
 @dynamic contactFrequencyUnitLength;
@@ -22,8 +21,5 @@
 @dynamic keyString;
 @dynamic demographicProfile;
 @dynamic relationship;
-
-
-
 
 @end

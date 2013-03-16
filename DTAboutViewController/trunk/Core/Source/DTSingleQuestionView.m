@@ -18,196 +18,199 @@
 
 @end
 
-
 @implementation DTSingleQuestionView
 @synthesize question, text, currentQuestion, delegate;
 
-- (id)init
+- (id) init
 {
     // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super init]) 
-	{
-		UIImage *upImage = [UIImage imageNamed:@"DTAboutViewController.bundle/UIButtonBarArrowUpSmall.png"];
-		UIImage *downImage = [UIImage imageNamed:@"DTAboutViewController.bundle/UIButtonBarArrowDownSmall.png"];
-		
-		segmentedControl = [[UISegmentedControl alloc] initWithItems:
-							[NSArray arrayWithObjects:
-							 upImage,
-							 downImage,
-							 nil]];
-		[segmentedControl addTarget:self action:@selector(upDownPushed:) forControlEvents:UIControlEventValueChanged];
-		segmentedControl.frame = CGRectMake(0, 0, 90, 30);
-		segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-		segmentedControl.momentary = YES;
-		
-		UIBarButtonItem *segmentBarItem = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
-		
-		self.navigationItem.rightBarButtonItem = segmentBarItem;
-		[segmentBarItem release];
+    if (self = [super init])
+    {
+        UIImage *upImage = [UIImage imageNamed:@"DTAboutViewController.bundle/UIButtonBarArrowUpSmall.png"];
+        UIImage *downImage = [UIImage imageNamed:@"DTAboutViewController.bundle/UIButtonBarArrowDownSmall.png"];
+
+        segmentedControl = [[UISegmentedControl alloc] initWithItems:
+                            [NSArray arrayWithObjects:
+                             upImage,
+                             downImage,
+                             nil]];
+        [segmentedControl addTarget:self action:@selector(upDownPushed:) forControlEvents:UIControlEventValueChanged];
+        segmentedControl.frame = CGRectMake(0, 0, 90, 30);
+        segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+        segmentedControl.momentary = YES;
+
+        UIBarButtonItem *segmentBarItem = [[UIBarButtonItem alloc] initWithCustomView:segmentedControl];
+
+        self.navigationItem.rightBarButtonItem = segmentBarItem;
+        [segmentBarItem release];
     }
+
     return self;
 }
 
-- (void)dealloc 
+
+- (void) dealloc
 {
-	[segmentedControl release];
-	[question release];
-	[text release];
-	[_questionAnswerView release];
-	
+    [segmentedControl release];
+    [question release];
+    [text release];
+    [_questionAnswerView release];
+
     [super dealloc];
 }
 
 
-- (void)viewDidLoad 
+- (void) viewDidLoad
 {
     [super viewDidLoad];
 }
 
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
+
+- (void) didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
+
+    // Release any cached data, images, etc that aren't in use.
 }
 
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
+
+- (void) viewDidUnload
+{
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
 }
 
-- (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
-    
+
+- (void) animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
+{
     // remove all subviews that are not the QA view
     NSArray *subviews = [self.view subviews];
-    
+
     for (UIView *oneView in subviews)
     {
-        if (oneView!=_questionAnswerView)
+        if (oneView != _questionAnswerView)
         {
             [oneView removeFromSuperview];
         }
     }
-    
+
     // flash indicator if content is larger than view
     SEL selector = @selector(flashScrollIndicatorIfNecessary);
     [NSObject cancelPreviousPerformRequestsWithTarget:_questionAnswerView selector:selector object:nil];
-    
+
     [_questionAnswerView performSelector:selector withObject:nil afterDelay:0.25];
 }
 
-- (void)setCurrentQuestion:(NSUInteger)newQuestion animated:(BOOL)animated
+
+- (void) setCurrentQuestion:(NSUInteger)newQuestion animated:(BOOL)animated
 {
-	BOOL up = newQuestion<currentQuestion;
-	
-	currentQuestion = newQuestion;
-	
-	NSInteger questionCount = [delegate numberOfQuestionsInSingleQuestionView:self];
-	NSDictionary *rowDict = [delegate singleQuestionView:self dictionaryForQuestionAtIndex:currentQuestion];
-	
-	[segmentedControl setEnabled:newQuestion>0 forSegmentAtIndex:0];
-	[segmentedControl setEnabled:newQuestion<(questionCount-1) forSegmentAtIndex:1];
-	
-	self.question = [[rowDict allKeys]lastObject];
-	self.text = [rowDict objectForKey:question];
-	
-	self.title = [NSString stringWithFormat:@"%d of %d", currentQuestion+1, questionCount];
-	
-    
-	if (animated)
-	{
-		DTSingleQuestionContentView *previousView = [[self.questionAnswerView retain] autorelease];
-		
-		// force create a new one
-		self.questionAnswerView = nil;
-				
-		CGFloat screenHeight = self.view.bounds.size.height;
-        
+    BOOL up = newQuestion < currentQuestion;
+
+    currentQuestion = newQuestion;
+
+    NSInteger questionCount = [delegate numberOfQuestionsInSingleQuestionView:self];
+    NSDictionary *rowDict = [delegate singleQuestionView:self dictionaryForQuestionAtIndex:currentQuestion];
+
+    [segmentedControl setEnabled:newQuestion > 0 forSegmentAtIndex:0];
+    [segmentedControl setEnabled:newQuestion < (questionCount - 1) forSegmentAtIndex:1];
+
+    self.question = [[rowDict allKeys]lastObject];
+    self.text = [rowDict objectForKey:question];
+
+    self.title = [NSString stringWithFormat:@"%d of %d", currentQuestion + 1, questionCount];
+
+    if (animated)
+    {
+        DTSingleQuestionContentView *previousView = [[self.questionAnswerView retain] autorelease];
+
+        // force create a new one
+        self.questionAnswerView = nil;
+
+        CGFloat screenHeight = self.view.bounds.size.height;
+
         // setup new QA
-		self.questionAnswerView.answerText = self.text;
-		self.questionAnswerView.questionText = self.question;
-        
+        self.questionAnswerView.answerText = self.text;
+        self.questionAnswerView.questionText = self.question;
+
         if (up)
-		{
-			self.questionAnswerView.transform = CGAffineTransformMakeTranslation(0, -screenHeight);
-		}
-		else
-		{
-			self.questionAnswerView.transform = CGAffineTransformMakeTranslation(0, screenHeight);
-		}
-		
-		
-        
+        {
+            self.questionAnswerView.transform = CGAffineTransformMakeTranslation(0, -screenHeight);
+        }
+        else
+        {
+            self.questionAnswerView.transform = CGAffineTransformMakeTranslation(0, screenHeight);
+        }
+
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.25];
-        
+
         self.questionAnswerView.transform = CGAffineTransformIdentity;
-        
+
         if (up)
-		{
-			previousView.transform = CGAffineTransformMakeTranslation(0, screenHeight);
-		}
-		else
-		{
-			previousView.transform = CGAffineTransformMakeTranslation(0, -screenHeight);
-		}
-        
+        {
+            previousView.transform = CGAffineTransformMakeTranslation(0, screenHeight);
+        }
+        else
+        {
+            previousView.transform = CGAffineTransformMakeTranslation(0, -screenHeight);
+        }
+
         [UIView setAnimationDelegate:self];
-		[UIView commitAnimations];
-        
-	}
-	else
-	{
-		self.questionAnswerView.questionText = self.question;
-		self.questionAnswerView.answerText = self.text;
-	}
+        [UIView commitAnimations];
+    }
+    else
+    {
+        self.questionAnswerView.questionText = self.question;
+        self.questionAnswerView.answerText = self.text;
+    }
 }
 
 
 - (void) setCurrentQuestion:(NSUInteger)newQuestion
 {
-	[self setCurrentQuestion:newQuestion animated:NO];
+    [self setCurrentQuestion:newQuestion animated:NO];
 }
+
 
 #pragma mark Actions
 - (void) upDownPushed:(id)sender
 {
-	NSInteger questionCount = [delegate numberOfQuestionsInSingleQuestionView:self];
-	
-	// cannot use sender for some reason, we get exception when accessing properties
-	
-	if (segmentedControl.selectedSegmentIndex == 0)
-	{
-		if (currentQuestion>0)
-		{
-			[self setCurrentQuestion:currentQuestion-1 animated:YES];
-		}
-	}
-	else
-	{
-		if (currentQuestion<questionCount-1)
-		{
-			[self setCurrentQuestion:currentQuestion+1 animated:YES];
-		}
-	}
+    NSInteger questionCount = [delegate numberOfQuestionsInSingleQuestionView:self];
+
+    // cannot use sender for some reason, we get exception when accessing properties
+
+    if (segmentedControl.selectedSegmentIndex == 0)
+    {
+        if (currentQuestion > 0)
+        {
+            [self setCurrentQuestion:currentQuestion - 1 animated:YES];
+        }
+    }
+    else
+    {
+        if (currentQuestion < questionCount - 1)
+        {
+            [self setCurrentQuestion:currentQuestion + 1 animated:YES];
+        }
+    }
 }
+
 
 #pragma mark Properties
-- (DTSingleQuestionContentView *)questionAnswerView
+- (DTSingleQuestionContentView *) questionAnswerView
 {
-	if (!_questionAnswerView)
-	{
-		_questionAnswerView = [[DTSingleQuestionContentView alloc] initWithFrame:self.view.bounds];
-		_questionAnswerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-		[self.view addSubview:_questionAnswerView];
-	}
-	
-	return _questionAnswerView;
-}
+    if (!_questionAnswerView)
+    {
+        _questionAnswerView = [[DTSingleQuestionContentView alloc] initWithFrame:self.view.bounds];
+        _questionAnswerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [self.view addSubview:_questionAnswerView];
+    }
 
+    return _questionAnswerView;
+}
 
 
 @synthesize questionAnswerView = _questionAnswerView;
 
 @end
-

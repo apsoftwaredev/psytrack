@@ -10,17 +10,16 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-
 @interface DrugProductEntity : NSManagedObject
 
-@property (nonatomic, retain) NSString * activeIngredient;
-@property (nonatomic, retain) NSString * applNo;
-@property (nonatomic, retain) NSString * dosage;
-@property (nonatomic, retain) NSString * drugName;
-@property (nonatomic, retain) NSString * form;
-@property (nonatomic, retain) NSNumber * productMktStatus;
-@property (nonatomic, retain) NSString * productNo;
-@property (nonatomic, retain) NSString * referenceDrug;
-@property (nonatomic, retain) NSString * tECode;
+@property (nonatomic, retain) NSString *activeIngredient;
+@property (nonatomic, retain) NSString *applNo;
+@property (nonatomic, retain) NSString *dosage;
+@property (nonatomic, retain) NSString *drugName;
+@property (nonatomic, retain) NSString *form;
+@property (nonatomic, retain) NSNumber *productMktStatus;
+@property (nonatomic, retain) NSString *productNo;
+@property (nonatomic, retain) NSString *referenceDrug;
+@property (nonatomic, retain) NSString *tECode;
 
 @end

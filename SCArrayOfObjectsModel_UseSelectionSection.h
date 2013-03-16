@@ -7,12 +7,8 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
+#import <STV+CoreData/SCEntityDefinition.h>
 
-
-#import <STV+CoreData/SCEntityDefinition.h> 
-
-
-@interface SCArrayOfObjectsModel_UseSelectionSection: SCArrayOfObjectsModel 
-
+@interface SCArrayOfObjectsModel_UseSelectionSection : SCArrayOfObjectsModel
 
 @end

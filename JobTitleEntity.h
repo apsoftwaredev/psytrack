@@ -12,22 +12,20 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClinicianEntity;
 
 @interface JobTitleEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * jobTitle;
-@property (nonatomic, retain) NSNumber * order;
+@property (nonatomic, retain) NSString *jobTitle;
+@property (nonatomic, retain) NSNumber *order;
 @property (nonatomic, retain) NSSet *clinicians;
 @end
 
 @interface JobTitleEntity (CoreDataGeneratedAccessors)
 
-- (void)addCliniciansObject:(ClinicianEntity *)value;
-- (void)removeCliniciansObject:(ClinicianEntity *)value;
-- (void)addClinicians:(NSSet *)values;
-- (void)removeClinicians:(NSSet *)values;
+- (void) addCliniciansObject:(ClinicianEntity *)value;
+- (void) removeCliniciansObject:(ClinicianEntity *)value;
+- (void) addClinicians:(NSSet *)values;
+- (void) removeClinicians:(NSSet *)values;
 
 @end

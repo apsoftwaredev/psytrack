@@ -6,26 +6,25 @@
 #import <Foundation/Foundation.h>
 #import "LCYPasscodeUIStateMachine.h"
 
-typedef enum 
-{ 
-	LCYTurnOffPasscodeStatesConfirmExistingPassword,
-	LCYTurnOffPasscodeStatesDone,
+typedef enum {
+    LCYTurnOffPasscodeStatesConfirmExistingPassword,
+    LCYTurnOffPasscodeStatesDone,
 } LCYTurnOffPasscodeStates;
 
-@interface LCYTurnOffPasscodeStateMachine : LCYPasscodeUIStateMachine 
+@interface LCYTurnOffPasscodeStateMachine : LCYPasscodeUIStateMachine
 {
-	LCYTurnOffPasscodeStates state_;
+    LCYTurnOffPasscodeStates state_;
 
-	NSData *existingPasscode_;	
-	NSString *currentErrorText_;
+    NSData *existingPasscode_;
+    NSString *currentErrorText_;
 }
 
-@property (nonatomic, copy) NSData* theNewPasscode;
-@property (nonatomic, copy) NSData* existingPasscode;
+@property (nonatomic, copy) NSData *theNewPasscode;
+@property (nonatomic, copy) NSData *existingPasscode;
 @property (nonatomic, readonly) NSString *currentErrorText;
 
-NSString * NSStringFromLCYTurnOffPasscodeStates (LCYTurnOffPasscodeStates state);
-- (void) transitionWithInput:(NSString *) input;
+NSString *NSStringFromLCYTurnOffPasscodeStates(LCYTurnOffPasscodeStates state);
+- (void) transitionWithInput:(NSString *)input;
 
 - (void) successTransition;
 - (void) failTransition;

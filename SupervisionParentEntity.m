@@ -11,13 +11,10 @@
 #import "ClinicianEntity.h"
 #import "SupervisionFeedbackEntity.h"
 
-
 @implementation SupervisionParentEntity
 
 @dynamic studentsPresent;
 @dynamic modelsUsed;
 @dynamic supervisionFeedback;
-
-
 
 @end

@@ -12,29 +12,27 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class CommunityServiceEntity, OrientationHistoryEntity;
 
 @interface OrientationEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * orientation;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * desc;
+@property (nonatomic, retain) NSString *orientation;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *desc;
 @property (nonatomic, retain) NSSet *communityService;
 @property (nonatomic, retain) NSSet *orientationHistories;
 @end
 
 @interface OrientationEntity (CoreDataGeneratedAccessors)
 
-- (void)addCommunityServiceObject:(CommunityServiceEntity *)value;
-- (void)removeCommunityServiceObject:(CommunityServiceEntity *)value;
-- (void)addCommunityService:(NSSet *)values;
-- (void)removeCommunityService:(NSSet *)values;
+- (void) addCommunityServiceObject:(CommunityServiceEntity *)value;
+- (void) removeCommunityServiceObject:(CommunityServiceEntity *)value;
+- (void) addCommunityService:(NSSet *)values;
+- (void) removeCommunityService:(NSSet *)values;
 
-- (void)addOrientationHistoriesObject:(OrientationHistoryEntity *)value;
-- (void)removeOrientationHistoriesObject:(OrientationHistoryEntity *)value;
-- (void)addOrientationHistories:(NSSet *)values;
-- (void)removeOrientationHistories:(NSSet *)values;
+- (void) addOrientationHistoriesObject:(OrientationHistoryEntity *)value;
+- (void) removeOrientationHistoriesObject:(OrientationHistoryEntity *)value;
+- (void) addOrientationHistories:(NSSet *)values;
+- (void) removeOrientationHistories:(NSSet *)values;
 
 @end

@@ -10,14 +10,10 @@
 #import "PaymentTypeEntity.h"
 #import "PaymentEntity.h"
 
-
 @implementation PaymentTypeEntity
 
 @dynamic order;
 @dynamic paymentType;
 @dynamic payments;
-
-
-
 
 @end

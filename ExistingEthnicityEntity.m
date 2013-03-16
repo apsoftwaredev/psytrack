@@ -10,13 +10,10 @@
 #import "ExistingEthnicityEntity.h"
 #import "EthnicityEntity.h"
 
-
 @implementation ExistingEthnicityEntity
 
 @dynamic numberOfIndividuals;
 @dynamic existingDemographics;
 @dynamic ethnicity;
-
-
 
 @end

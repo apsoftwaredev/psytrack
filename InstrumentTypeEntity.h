@@ -12,23 +12,21 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class InstrumentEntity;
 
 @interface InstrumentTypeEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * instrumentType;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSString *instrumentType;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
 @property (nonatomic, retain) NSSet *testNames;
 @end
 
 @interface InstrumentTypeEntity (CoreDataGeneratedAccessors)
 
-- (void)addTestNamesObject:(InstrumentEntity *)value;
-- (void)removeTestNamesObject:(InstrumentEntity *)value;
-- (void)addTestNames:(NSSet *)values;
-- (void)removeTestNames:(NSSet *)values;
+- (void) addTestNamesObject:(InstrumentEntity *)value;
+- (void) removeTestNamesObject:(InstrumentEntity *)value;
+- (void) addTestNames:(NSSet *)values;
+- (void) removeTestNames:(NSSet *)values;
 
 @end

@@ -10,7 +10,6 @@
 #import "OrientationHistoryEntity.h"
 #import "ClinicianEntity.h"
 
-
 @implementation OrientationHistoryEntity
 
 @dynamic order;
@@ -19,8 +18,5 @@
 @dynamic notes;
 @dynamic clinician;
 @dynamic orientation;
-
-
-
 
 @end

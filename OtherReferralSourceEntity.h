@@ -12,16 +12,14 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClientEntity, OtherReferralSourceTypeEntity, ReferralEntity;
 
 @interface OtherReferralSourceEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * sourceName;
-@property (nonatomic, retain) NSNumber * abIdentifier;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSString *sourceName;
+@property (nonatomic, retain) NSNumber *abIdentifier;
 @property (nonatomic, retain) NSSet *referrals;
 @property (nonatomic, retain) NSSet *grants;
 @property (nonatomic, retain) NSSet *clients;
@@ -30,19 +28,19 @@
 
 @interface OtherReferralSourceEntity (CoreDataGeneratedAccessors)
 
-- (void)addReferralsObject:(ReferralEntity *)value;
-- (void)removeReferralsObject:(ReferralEntity *)value;
-- (void)addReferrals:(NSSet *)values;
-- (void)removeReferrals:(NSSet *)values;
+- (void) addReferralsObject:(ReferralEntity *)value;
+- (void) removeReferralsObject:(ReferralEntity *)value;
+- (void) addReferrals:(NSSet *)values;
+- (void) removeReferrals:(NSSet *)values;
 
-- (void)addGrantsObject:(NSManagedObject *)value;
-- (void)removeGrantsObject:(NSManagedObject *)value;
-- (void)addGrants:(NSSet *)values;
-- (void)removeGrants:(NSSet *)values;
+- (void) addGrantsObject:(NSManagedObject *)value;
+- (void) removeGrantsObject:(NSManagedObject *)value;
+- (void) addGrants:(NSSet *)values;
+- (void) removeGrants:(NSSet *)values;
 
-- (void)addClientsObject:(ClientEntity *)value;
-- (void)removeClientsObject:(ClientEntity *)value;
-- (void)addClients:(NSSet *)values;
-- (void)removeClients:(NSSet *)values;
+- (void) addClientsObject:(ClientEntity *)value;
+- (void) removeClientsObject:(ClientEntity *)value;
+- (void) addClients:(NSSet *)values;
+- (void) removeClients:(NSSet *)values;
 
 @end

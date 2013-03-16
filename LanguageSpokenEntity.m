@@ -11,7 +11,6 @@
 #import "DemographicProfileEntity.h"
 #import "LanguageEntity.h"
 
-
 @implementation LanguageSpokenEntity
 
 @dynamic onlyLanguage;
@@ -23,8 +22,5 @@
 @dynamic fluencyLevel;
 @dynamic language;
 @dynamic demographics;
-
-
-
 
 @end

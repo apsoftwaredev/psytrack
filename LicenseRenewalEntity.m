@@ -11,7 +11,6 @@
 #import "ContinuingEducationEntity.h"
 #import "LicenseEntity.h"
 
-
 @implementation LicenseRenewalEntity
 
 @dynamic order;
@@ -19,8 +18,5 @@
 @dynamic renewalDate;
 @dynamic license;
 @dynamic continuingEducation;
-
-
-
 
 @end

@@ -10,15 +10,11 @@
 #import "SignificantLifeEventEntity.h"
 #import "DemographicProfileEntity.h"
 
-
 @implementation SignificantLifeEventEntity
 
 @dynamic order;
 @dynamic eventType;
 @dynamic desc;
 @dynamic demographics;
-
-
-
 
 @end

@@ -12,7 +12,6 @@
 #import "ExistingEthnicityEntity.h"
 #import "ExistingInterventionEntity.h"
 
-
 @implementation ExistingDemographicsEntity
 
 @dynamic otherIntervention;
@@ -23,7 +22,5 @@
 @dynamic genders;
 @dynamic existingAssessment;
 @dynamic ethnicities;
-
-
 
 @end

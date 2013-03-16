@@ -7,19 +7,15 @@
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
 //
 
-
-
-@interface EncryptionTokenCell : SCCustomCell{
-
-
-   __weak UITextField *tokenField_;
+@interface EncryptionTokenCell : SCCustomCell {
+    __weak UITextField *tokenField_;
     __weak UITextField *passwordFieldCurrent_;
     __weak UITextField *passwordFieldNew_;
     __weak UITextField *passwordFieldReenter_;
     __weak UITextField *hintField_;
     UIButton *setKeyButton_;
     UIButton *viewTokenButton_;
-     UIButton *generateNewButton_;
+    UIButton *generateNewButton_;
     UIButton *validateCurrentPasswordButton_;
     UIButton *validateNewPasswordButton_;
     UIButton *validateReenterNewPasswordButton_;

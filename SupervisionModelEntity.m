@@ -10,7 +10,6 @@
 #import "SupervisionModelEntity.h"
 #import "SupervisionParentEntity.h"
 
-
 @implementation SupervisionModelEntity
 
 @dynamic modelName;
@@ -18,8 +17,5 @@
 @dynamic acronym;
 @dynamic notes;
 @dynamic supervisionParents;
-
-
-
 
 @end

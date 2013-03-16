@@ -10,13 +10,10 @@
 #import "PublicationTypeEntity.h"
 #import "PublicationEntity.h"
 
-
 @implementation PublicationTypeEntity
 
 @dynamic order;
 @dynamic publicationType;
 @dynamic publication;
-
-
 
 @end

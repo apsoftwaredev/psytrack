@@ -10,12 +10,9 @@
 #import "SideEffectEntity.h"
 #import "MedicationReviewEntity.h"
 
-
 @implementation SideEffectEntity
 
 @dynamic effect;
 @dynamic medicationReview;
-
-
 
 @end

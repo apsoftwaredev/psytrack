@@ -11,7 +11,6 @@
 #import "ClientEntity.h"
 #import "SupervisionParentEntity.h"
 
-
 @implementation SupervisionFeedbackEntity
 
 @dynamic order;
@@ -19,7 +18,5 @@
 @dynamic topic;
 @dynamic supervisionParent;
 @dynamic clients;
-
-
 
 @end

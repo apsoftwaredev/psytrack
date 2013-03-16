@@ -34,77 +34,77 @@
 
 #pragma mark ReaderThumbView instance methods
 
-- (id)initWithFrame:(CGRect)frame
+- (id) initWithFrame:(CGRect)frame
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if ((self = [super initWithFrame:frame]))
-	{
-		self.autoresizesSubviews = NO;
-		self.userInteractionEnabled = NO;
-		self.contentMode = UIViewContentModeRedraw;
-		self.autoresizingMask = UIViewAutoresizingNone;
-		self.backgroundColor = [UIColor clearColor];
+    if ( (self = [super initWithFrame:frame]) )
+    {
+        self.autoresizesSubviews = NO;
+        self.userInteractionEnabled = NO;
+        self.contentMode = UIViewContentModeRedraw;
+        self.autoresizingMask = UIViewAutoresizingNone;
+        self.backgroundColor = [UIColor clearColor];
 
-		imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+        imageView = [[UIImageView alloc] initWithFrame:self.bounds];
 
-		imageView.autoresizesSubviews = NO;
-		imageView.userInteractionEnabled = NO;
-		imageView.contentMode = UIViewContentModeScaleAspectFit;
-		imageView.autoresizingMask = UIViewAutoresizingNone;
-		//imageView.backgroundColor = [UIColor clearColor];
+        imageView.autoresizesSubviews = NO;
+        imageView.userInteractionEnabled = NO;
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.autoresizingMask = UIViewAutoresizingNone;
+        //imageView.backgroundColor = [UIColor clearColor];
 
-		[self addSubview:imageView];
-	}
+        [self addSubview:imageView];
+    }
 
-	return self;
+    return self;
 }
 
 
-
-- (void)showImage:(UIImage *)image
+- (void) showImage:(UIImage *)image
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	imageView.image = image; // Show image
+    imageView.image = image;     // Show image
 }
 
-- (void)showTouched:(BOOL)touched
+
+- (void) showTouched:(BOOL)touched
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 }
 
-- (void)removeFromSuperview
+
+- (void) removeFromSuperview
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	_targetTag = 0; // Clear target tag
-   
-   
-	[super removeFromSuperview];
-    
-     imageView.image=nil;
+    _targetTag = 0;     // Clear target tag
+
+    [super removeFromSuperview];
+
+    imageView.image = nil;
 }
 
-- (void)reuse
+
+- (void) reuse
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	_targetTag = 0; // Clear target tag
+    _targetTag = 0;     // Clear target tag
 
-
-
-	imageView.image = nil; // Release image
+    imageView.image = nil;     // Release image
 }
+
 
 @end

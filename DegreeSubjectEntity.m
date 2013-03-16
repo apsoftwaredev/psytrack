@@ -10,14 +10,11 @@
 #import "DegreeSubjectEntity.h"
 #import "DegreeEntity.h"
 
-
 @implementation DegreeSubjectEntity
 
 @dynamic subject;
 @dynamic order;
 @dynamic degreeMinor;
 @dynamic degreeMajor;
-
-
 
 @end

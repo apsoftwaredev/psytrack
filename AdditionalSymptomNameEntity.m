@@ -11,7 +11,6 @@
 #import "AdditionalSymptomEntity.h"
 #import "DisorderEntity.h"
 
-
 @implementation AdditionalSymptomNameEntity
 
 @dynamic symptomDescription;
@@ -20,8 +19,5 @@
 @dynamic additionalSypmtoms;
 @dynamic possibleDisorders;
 @dynamic diagnosisLog;
-
-
-
 
 @end

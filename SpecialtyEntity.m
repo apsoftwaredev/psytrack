@@ -10,7 +10,6 @@
 #import "SpecialtyEntity.h"
 #import "ClinicianEntity.h"
 
-
 @implementation SpecialtyEntity
 
 @dynamic updatedTimeStamp;
@@ -19,7 +18,5 @@
 @dynamic startDate;
 @dynamic specialty;
 @dynamic clinicians;
-
-
 
 @end

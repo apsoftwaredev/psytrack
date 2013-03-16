@@ -12,13 +12,10 @@
 #import "ClientPresentationEntity.h"
 #import "TimeEntity.h"
 
-
 @implementation AssessmentEntity
 
 @dynamic clientPresentations;
 @dynamic assessmentType;
 @dynamic time;
-
-
 
 @end

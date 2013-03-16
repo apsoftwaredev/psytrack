@@ -10,14 +10,10 @@
 #import "ClientGroupEntity.h"
 #import "ClientEntity.h"
 
-
 @implementation ClientGroupEntity
 
 @dynamic groupName;
 @dynamic addNewClients;
 @dynamic clients;
-
-
-
 
 @end

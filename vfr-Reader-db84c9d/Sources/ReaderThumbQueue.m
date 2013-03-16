@@ -33,107 +33,119 @@
 
 #pragma mark ReaderThumbQueue class methods
 
-+ (ReaderThumbQueue *)sharedInstance
++ (ReaderThumbQueue *) sharedInstance
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	static dispatch_once_t predicate = 0;
+    static dispatch_once_t predicate = 0;
 
-	static ReaderThumbQueue *object = nil; // Object
+    static ReaderThumbQueue *object = nil;     // Object
 
-	dispatch_once(&predicate, ^{ object = [self new]; });
+    dispatch_once(&predicate, ^{ object = [self new]; }
+                  );
 
-	return object; // ReaderThumbQueue singleton
+    return object;     // ReaderThumbQueue singleton
 }
+
 
 #pragma mark ReaderThumbQueue instance methods
 
-- (id)init
+- (id) init
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if ((self = [super init])) // Initialize
-	{
-		loadQueue = [NSOperationQueue new];
+    if ( (self = [super init]) )   // Initialize
+    {
+        loadQueue = [NSOperationQueue new];
 
-		[loadQueue setName:@"ReaderThumbLoadQueue"];
+        [loadQueue setName:@"ReaderThumbLoadQueue"];
 
-		[loadQueue setMaxConcurrentOperationCount:1];
+        [loadQueue setMaxConcurrentOperationCount:1];
 
-		workQueue = [NSOperationQueue new];
+        workQueue = [NSOperationQueue new];
 
-		[workQueue setName:@"ReaderThumbWorkQueue"];
+        [workQueue setName:@"ReaderThumbWorkQueue"];
 
-		[workQueue setMaxConcurrentOperationCount:1];
-	}
+        [workQueue setMaxConcurrentOperationCount:1];
+    }
 
-	return self;
+    return self;
 }
 
 
-- (void)addLoadOperation:(NSOperation *)operation
+- (void) addLoadOperation:(NSOperation *)operation
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if ([operation isKindOfClass:[ReaderThumbOperation class]])
-	{
-		[loadQueue addOperation:operation]; // Add to load queue
-	}
+    if ([operation isKindOfClass:[ReaderThumbOperation class]])
+    {
+        [loadQueue addOperation:operation];         // Add to load queue
+    }
 }
 
-- (void)addWorkOperation:(NSOperation *)operation
+
+- (void) addWorkOperation:(NSOperation *)operation
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if ([operation isKindOfClass:[ReaderThumbOperation class]])
-	{
-		[workQueue addOperation:operation]; // Add to work queue
-	}
+    if ([operation isKindOfClass:[ReaderThumbOperation class]])
+    {
+        [workQueue addOperation:operation];         // Add to work queue
+    }
 }
 
-- (void)cancelOperationsWithGUID:(NSString *)guid
+
+- (void) cancelOperationsWithGUID:(NSString *)guid
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	[loadQueue setSuspended:YES]; [workQueue setSuspended:YES];
+    [loadQueue setSuspended:YES]; [workQueue setSuspended:YES];
 
-	for (ReaderThumbOperation *operation in loadQueue.operations)
-	{
-		if ([operation isKindOfClass:[ReaderThumbOperation class]])
-		{
-			if ([operation.guid isEqualToString:guid]) [operation cancel];
-		}
-	}
+    for (ReaderThumbOperation *operation in loadQueue.operations)
+    {
+        if ([operation isKindOfClass:[ReaderThumbOperation class]])
+        {
+            if ([operation.guid isEqualToString:guid])
+            {
+                [operation cancel];
+            }
+        }
+    }
 
-	for (ReaderThumbOperation *operation in workQueue.operations)
-	{
-		if ([operation isKindOfClass:[ReaderThumbOperation class]])
-		{
-			if ([operation.guid isEqualToString:guid]) [operation cancel];
-		}
-	}
+    for (ReaderThumbOperation *operation in workQueue.operations)
+    {
+        if ([operation isKindOfClass:[ReaderThumbOperation class]])
+        {
+            if ([operation.guid isEqualToString:guid])
+            {
+                [operation cancel];
+            }
+        }
+    }
 
-	[workQueue setSuspended:NO]; [loadQueue setSuspended:NO];
+    [workQueue setSuspended:NO]; [loadQueue setSuspended:NO];
 }
 
-- (void)cancelAllOperations
+
+- (void) cancelAllOperations
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	[loadQueue cancelAllOperations]; [workQueue cancelAllOperations];
+    [loadQueue cancelAllOperations]; [workQueue cancelAllOperations];
 }
+
 
 @end
 
@@ -149,20 +161,19 @@
 
 #pragma mark ReaderThumbOperation instance methods
 
-- (id)initWithGUID:(NSString *)guid
+- (id) initWithGUID:(NSString *)guid
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if ((self = [super init]))
-	{
-		_guid = guid ;
-	}
+    if ( (self = [super init]) )
+    {
+        _guid = guid;
+    }
 
-	return self;
+    return self;
 }
-
 
 
 @end

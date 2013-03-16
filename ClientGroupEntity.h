@@ -12,22 +12,20 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClientEntity;
 
 @interface ClientGroupEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * groupName;
-@property (nonatomic, retain) NSNumber * addNewClients;
+@property (nonatomic, retain) NSString *groupName;
+@property (nonatomic, retain) NSNumber *addNewClients;
 @property (nonatomic, retain) NSSet *clients;
 @end
 
 @interface ClientGroupEntity (CoreDataGeneratedAccessors)
 
-- (void)addClientsObject:(ClientEntity *)value;
-- (void)removeClientsObject:(ClientEntity *)value;
-- (void)addClients:(NSSet *)values;
-- (void)removeClients:(NSSet *)values;
+- (void) addClientsObject:(ClientEntity *)value;
+- (void) removeClientsObject:(ClientEntity *)value;
+- (void) addClients:(NSSet *)values;
+- (void) removeClients:(NSSet *)values;
 
 @end

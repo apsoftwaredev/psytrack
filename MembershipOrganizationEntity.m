@@ -10,14 +10,11 @@
 #import "MembershipOrganizationEntity.h"
 #import "MembershipEntity.h"
 
-
 @implementation MembershipOrganizationEntity
 
 @dynamic organization;
 @dynamic order;
 @dynamic notes;
 @dynamic memberships;
-
-
 
 @end

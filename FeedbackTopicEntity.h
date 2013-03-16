@@ -12,22 +12,20 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class SupervisionFeedbackEntity;
 
 @interface FeedbackTopicEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * topic;
-@property (nonatomic, retain) NSNumber * order;
+@property (nonatomic, retain) NSString *topic;
+@property (nonatomic, retain) NSNumber *order;
 @property (nonatomic, retain) NSSet *supervisionFeedback;
 @end
 
 @interface FeedbackTopicEntity (CoreDataGeneratedAccessors)
 
-- (void)addSupervisionFeedbackObject:(SupervisionFeedbackEntity *)value;
-- (void)removeSupervisionFeedbackObject:(SupervisionFeedbackEntity *)value;
-- (void)addSupervisionFeedback:(NSSet *)values;
-- (void)removeSupervisionFeedback:(NSSet *)values;
+- (void) addSupervisionFeedbackObject:(SupervisionFeedbackEntity *)value;
+- (void) removeSupervisionFeedbackObject:(SupervisionFeedbackEntity *)value;
+- (void) addSupervisionFeedback:(NSSet *)values;
+- (void) removeSupervisionFeedback:(NSSet *)values;
 
 @end

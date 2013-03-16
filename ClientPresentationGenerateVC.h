@@ -18,33 +18,26 @@ typedef enum {
     kTimeTrackSupervisionGivenSetup,
 } PTimeTrackControllerSetup;
 
-
 @interface ClientPresentationGenerateVC : SCViewController <ReaderViewControllerDelegate,UITextFieldDelegate, UIAlertViewDelegate>{
-    
-    
-    
     BigProgressViewWithBlockedView *prog;
     NSString *fileName;
     BOOL changedDefaultFileName;
 }
-@property (nonatomic, weak)IBOutlet UITextField *pdfFileNameTextField;
-@property (nonatomic, weak)IBOutlet UITextField *pdfPasswordTextField;
+@property (nonatomic, weak) IBOutlet UITextField *pdfFileNameTextField;
+@property (nonatomic, weak) IBOutlet UITextField *pdfPasswordTextField;
 
-
-@property (nonatomic, weak)IBOutlet UIView *containerView;
+@property (nonatomic, weak) IBOutlet UIView *containerView;
 @property (nonatomic, weak) IBOutlet UIButton *generateButton;
 @property (nonatomic,strong) SCArrayOfObjectsModel *presentationTableModel;
 @property (nonatomic, strong) SCArrayOfObjectsModel *firstDetailTableModel;
-@property (nonatomic, strong)NSDate *serviceDate;
+@property (nonatomic, strong) NSDate *serviceDate;
 
 @property (strong, nonatomic) NSDate *timeInDate;
 @property (nonatomic, strong)   NSDate *timeOutDate;
 @property (nonatomic, strong) NSDate *totalTime;
-@property (nonatomic, strong)NSString *serviceDateTimeString;
-@property (nonatomic, assign)PTimeTrackControllerSetup timeTrackControllerSetup;
+@property (nonatomic, strong) NSString *serviceDateTimeString;
+@property (nonatomic, assign) PTimeTrackControllerSetup timeTrackControllerSetup;
 
--(IBAction)generateButtonTapped:(id)sender;
-
-
+- (IBAction) generateButtonTapped:(id)sender;
 
 @end

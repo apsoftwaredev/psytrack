@@ -12,13 +12,13 @@
 @interface PDFHelper : NSObject {
     UITextView *invisibleTextView;
     NSMutableArray *textArray;
-    
+
     BOOL done;
 }
 
-- (void)createPDF:(NSString *)fileName withContent:(NSString *)content forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString*)password;
+- (void) createPDF:(NSString *)fileName withContent:(NSString *)content forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString *)password;
 
-- (NSString *)stringToDraw:(NSString *)font fontSize:(int)fontSize;
+- (NSString *) stringToDraw:(NSString *)font fontSize:(int)fontSize;
 
 @property (nonatomic, retain) UITextView *invisibleTextView;
 @property (nonatomic, retain) NSMutableArray *textArray;

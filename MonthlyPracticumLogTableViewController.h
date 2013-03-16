@@ -11,18 +11,13 @@
 #import "ClinicianEntity.h"
 #import "TrainingProgramEntity.h"
 @interface MonthlyPracticumLogTableViewController : SCViewController <SCTableViewControllerDelegate, SCTableViewModelDelegate>{
-
-
-   
-   
     ClinicianEntity *supervisorObject;
 
     TrainingProgramEntity *trainingProgram_;
     NSDate *monthToDisplay_;
     BOOL markAmended;
 }
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil monthToDisplay:(NSDate *)monthGiven trainingProgram:(TrainingProgramEntity *)trainingProgramGiven markAmended:(BOOL)markAmendedGiven;
-
+- (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil monthToDisplay:(NSDate *)monthGiven trainingProgram:(TrainingProgramEntity *)trainingProgramGiven markAmended:(BOOL)markAmendedGiven;
 
 @property(nonatomic, strong) NSString *studentName;
 @end

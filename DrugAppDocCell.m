@@ -4,9 +4,9 @@
  *  Version: 1.05
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
  *
  *  Created by Daniel Boice on 1/3/12.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -19,53 +19,40 @@
 
 @implementation DrugAppDocCell
 
-
-- (void)performInitialization 
+- (void) performInitialization
 {
-    
     [super performInitialization];
-    
+
     // place any initialization code here
-    
-  
 }
 
 
-
-- (void)willDisplay
+- (void) willDisplay
 {
-       self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 
 
-
-
-
-- (void)loadBindingsIntoCustomControls
+- (void) loadBindingsIntoCustomControls
 {
     [super loadBindingsIntoCustomControls];
-    
+
     NSString *docType = [self.boundObject valueForKey:@"docType"];
     NSDate *docDate = [self.boundObject valueForKey:@"docDate"];
-   
-    
-    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"m/d/yyyy"];
-    self.textLabel.text=docType;
-    self.label.text=[dateFormatter stringFromDate:docDate];
 
-    dateFormatter=nil;
-    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"m/d/yyyy"];
+    self.textLabel.text = docType;
+    self.label.text = [dateFormatter stringFromDate:docDate];
+
+    dateFormatter = nil;
 }
 
 
-
--(void)didSelectCell{
-
- NSString *docURL = [self.boundObject valueForKey:@"docURL"];
-[[UIApplication sharedApplication]  openURL:[NSURL URLWithString:docURL]];
-
-
+- (void) didSelectCell
+{
+    NSString *docURL = [self.boundObject valueForKey:@"docURL"];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:docURL]];
 }
 
 

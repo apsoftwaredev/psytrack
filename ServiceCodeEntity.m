@@ -10,7 +10,6 @@
 #import "ServiceCodeEntity.h"
 #import "ServiceParentEntity.h"
 
-
 @implementation ServiceCodeEntity
 
 @dynamic code;
@@ -18,7 +17,5 @@
 @dynamic notes;
 @dynamic name;
 @dynamic services;
-
-
 
 @end

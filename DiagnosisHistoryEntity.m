@@ -14,7 +14,6 @@
 #import "DisorderSpecifierEntity.h"
 #import "MedicationEntity.h"
 
-
 @implementation DiagnosisHistoryEntity
 
 @dynamic treatmentStarted;
@@ -33,7 +32,5 @@
 @dynamic disorder;
 @dynamic diagnosisLog;
 @dynamic frequency;
-
-
 
 @end

@@ -12,7 +12,6 @@
 #import "LogEntity.h"
 #import "PublicationEntity.h"
 
-
 @implementation ExpertTestemonyEntity
 
 @dynamic plantifDefendant;
@@ -27,7 +26,5 @@
 @dynamic publications;
 @dynamic client;
 @dynamic organization;
-
-
 
 @end

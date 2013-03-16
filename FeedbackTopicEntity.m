@@ -10,13 +10,10 @@
 #import "FeedbackTopicEntity.h"
 #import "SupervisionFeedbackEntity.h"
 
-
 @implementation FeedbackTopicEntity
 
 @dynamic topic;
 @dynamic order;
 @dynamic supervisionFeedback;
-
-
 
 @end

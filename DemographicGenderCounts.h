@@ -9,15 +9,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DemographicGenderCounts : NSObject{
-    
-     NSMutableArray *genderMutableArray_;
-    
-    
+@interface DemographicGenderCounts : NSObject {
+    NSMutableArray *genderMutableArray_;
 }
 
-@property (nonatomic, strong)NSMutableArray *genderMutableArray;
+@property (nonatomic, strong) NSMutableArray *genderMutableArray;
 
-@property (nonatomic, assign)NSUInteger notSelectedCountUInteger;
+@property (nonatomic, assign) NSUInteger notSelectedCountUInteger;
 
 @end

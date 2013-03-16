@@ -9,15 +9,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DemographicEthnicityCounts : NSObject{
-    
-     NSMutableArray *ethnicityMutableArray_;
-     NSSet *multiEthnicityOnlySet_;
-    
+@interface DemographicEthnicityCounts : NSObject {
+    NSMutableArray *ethnicityMutableArray_;
+    NSSet *multiEthnicityOnlySet_;
 }
 
-@property (nonatomic, strong)NSMutableArray *ethnicityMutableArray;
-@property (nonatomic, strong)NSSet *multiEthnicityOnlySet;
-
+@property (nonatomic, strong) NSMutableArray *ethnicityMutableArray;
+@property (nonatomic, strong) NSSet *multiEthnicityOnlySet;
 
 @end

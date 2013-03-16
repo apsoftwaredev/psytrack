@@ -10,7 +10,6 @@
 #import "HospitalizationEntity.h"
 #import "ClientEntity.h"
 
-
 @implementation HospitalizationEntity
 
 @dynamic voluntary;
@@ -18,8 +17,5 @@
 @dynamic notes;
 @dynamic dateAdmitted;
 @dynamic client;
-
-
-
 
 @end

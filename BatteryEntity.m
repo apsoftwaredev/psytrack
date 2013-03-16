@@ -13,7 +13,6 @@
 #import "InstrumentLogEntity.h"
 #import "InstrumentPublisherEntity.h"
 
-
 @implementation BatteryEntity
 
 @dynamic numberReportsWritten;
@@ -30,8 +29,5 @@
 @dynamic instruments;
 @dynamic existingBatteries;
 @dynamic clientBatteryNotes;
-
-
-
 
 @end

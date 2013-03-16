@@ -9,14 +9,11 @@
 
 #import "LanguageEntity.h"
 
-
 @implementation LanguageEntity
 
 @dynamic language;
 @dynamic order;
 @dynamic notes;
 @dynamic languagesSpoken;
-
-
 
 @end

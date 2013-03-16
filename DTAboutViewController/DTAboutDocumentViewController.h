@@ -11,13 +11,13 @@
 
 @interface DTAboutDocumentViewController : UIViewController <TouchyDelegate>
 {
-	__weak TouchyWebView *webView;
-	
-	BigProgressView *prog;
-	
-	NSURL *urlToLoadWhenAppearing;
-	
-	BOOL fullScreenViewing;
+    __weak TouchyWebView *webView;
+
+    BigProgressView *prog;
+
+    NSURL *urlToLoadWhenAppearing;
+
+    BOOL fullScreenViewing;
 }
 
 @property (nonatomic, weak) IBOutlet TouchyWebView *webView;

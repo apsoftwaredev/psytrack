@@ -12,8 +12,6 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ExistingAssessmentEntity, ExistingEthnicityEntity, ExistingInterventionEntity;
 
 @interface ExistingDemographicsEntity : PTManagedObject
@@ -30,34 +28,34 @@
 
 @interface ExistingDemographicsEntity (CoreDataGeneratedAccessors)
 
-- (void)addIndividualsWithDisabilitiesObject:(NSManagedObject *)value;
-- (void)removeIndividualsWithDisabilitiesObject:(NSManagedObject *)value;
-- (void)addIndividualsWithDisabilities:(NSSet *)values;
-- (void)removeIndividualsWithDisabilities:(NSSet *)values;
+- (void) addIndividualsWithDisabilitiesObject:(NSManagedObject *)value;
+- (void) removeIndividualsWithDisabilitiesObject:(NSManagedObject *)value;
+- (void) addIndividualsWithDisabilities:(NSSet *)values;
+- (void) removeIndividualsWithDisabilities:(NSSet *)values;
 
-- (void)addSexualOrientationsObject:(NSManagedObject *)value;
-- (void)removeSexualOrientationsObject:(NSManagedObject *)value;
-- (void)addSexualOrientations:(NSSet *)values;
-- (void)removeSexualOrientations:(NSSet *)values;
+- (void) addSexualOrientationsObject:(NSManagedObject *)value;
+- (void) removeSexualOrientationsObject:(NSManagedObject *)value;
+- (void) addSexualOrientations:(NSSet *)values;
+- (void) removeSexualOrientations:(NSSet *)values;
 
-- (void)addRacesObject:(NSManagedObject *)value;
-- (void)removeRacesObject:(NSManagedObject *)value;
-- (void)addRaces:(NSSet *)values;
-- (void)removeRaces:(NSSet *)values;
+- (void) addRacesObject:(NSManagedObject *)value;
+- (void) removeRacesObject:(NSManagedObject *)value;
+- (void) addRaces:(NSSet *)values;
+- (void) removeRaces:(NSSet *)values;
 
-- (void)addAgeGroupsObject:(NSManagedObject *)value;
-- (void)removeAgeGroupsObject:(NSManagedObject *)value;
-- (void)addAgeGroups:(NSSet *)values;
-- (void)removeAgeGroups:(NSSet *)values;
+- (void) addAgeGroupsObject:(NSManagedObject *)value;
+- (void) removeAgeGroupsObject:(NSManagedObject *)value;
+- (void) addAgeGroups:(NSSet *)values;
+- (void) removeAgeGroups:(NSSet *)values;
 
-- (void)addGendersObject:(NSManagedObject *)value;
-- (void)removeGendersObject:(NSManagedObject *)value;
-- (void)addGenders:(NSSet *)values;
-- (void)removeGenders:(NSSet *)values;
+- (void) addGendersObject:(NSManagedObject *)value;
+- (void) removeGendersObject:(NSManagedObject *)value;
+- (void) addGenders:(NSSet *)values;
+- (void) removeGenders:(NSSet *)values;
 
-- (void)addEthnicitiesObject:(ExistingEthnicityEntity *)value;
-- (void)removeEthnicitiesObject:(ExistingEthnicityEntity *)value;
-- (void)addEthnicities:(NSSet *)values;
-- (void)removeEthnicities:(NSSet *)values;
+- (void) addEthnicitiesObject:(ExistingEthnicityEntity *)value;
+- (void) removeEthnicitiesObject:(ExistingEthnicityEntity *)value;
+- (void) addEthnicities:(NSSet *)values;
+- (void) removeEthnicities:(NSSet *)values;
 
 @end

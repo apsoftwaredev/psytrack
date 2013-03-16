@@ -12,19 +12,17 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @interface MediaAppearanceEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * topics;
-@property (nonatomic, retain) NSString * audience;
-@property (nonatomic, retain) NSString * showName;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSDate * hours;
-@property (nonatomic, retain) NSString * host;
-@property (nonatomic, retain) NSString * showtimes;
-@property (nonatomic, retain) NSString * network;
-@property (nonatomic, retain) NSDate * dateInterviewed;
+@property (nonatomic, retain) NSString *topics;
+@property (nonatomic, retain) NSString *audience;
+@property (nonatomic, retain) NSString *showName;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSDate *hours;
+@property (nonatomic, retain) NSString *host;
+@property (nonatomic, retain) NSString *showtimes;
+@property (nonatomic, retain) NSString *network;
+@property (nonatomic, retain) NSDate *dateInterviewed;
 
 @end

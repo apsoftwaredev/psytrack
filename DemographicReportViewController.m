@@ -15,68 +15,46 @@
 @end
 
 @implementation DemographicReportViewController
-@synthesize clinicianName=clinicianName_;
+@synthesize clinicianName = clinicianName_;
 
-- (void)viewDidLoad
+- (void) viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    
-    
-    SCClassDefinition *myInformationandTotalClientshDef=[SCClassDefinition definitionWithClass:[MyInformationAndTotalClients class] autoGeneratePropertyDefinitions:YES];
-    
-    // Create and add the objects section
-    MyInformationAndTotalClients *myInformationAndTotalClients=[[MyInformationAndTotalClients alloc]init];
-    
-    self.clinicianName=myInformationAndTotalClients.myName;
-    
+    // Do any additional setup after loading the view.
 
-    NSMutableArray *myInformationMutableArray=[NSMutableArray arrayWithObject:myInformationAndTotalClients];
-    
-	SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:myInformationMutableArray itemsDefinition:myInformationandTotalClientshDef];
-    
-    objectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
+    SCClassDefinition *myInformationandTotalClientshDef = [SCClassDefinition definitionWithClass:[MyInformationAndTotalClients class] autoGeneratePropertyDefinitions:YES];
+
+    // Create and add the objects section
+    MyInformationAndTotalClients *myInformationAndTotalClients = [[MyInformationAndTotalClients alloc]init];
+
+    self.clinicianName = myInformationAndTotalClients.myName;
+
+    NSMutableArray *myInformationMutableArray = [NSMutableArray arrayWithObject:myInformationAndTotalClients];
+
+    SCArrayOfObjectsSection *objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil items:myInformationMutableArray itemsDefinition:myInformationandTotalClientshDef];
+
+    objectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell *(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
     {
         // Create & return a custom cell based on the cell in ContactOverviewCell.xib
         //        NSString *bindingsString = @"20:lastName;"; // 1,2,3 are the control tags
-        
-        
-        
-        
-        
-        NSString *topCellNibName=nil;
-        
-        
-        
-        topCellNibName=@"DemographicReportTopCell";
-        
-        
-        
-        
+
+        NSString *topCellNibName = nil;
+
+        topCellNibName = @"DemographicReportTopCell";
+
         DemographicReportTopCell *demographicReportTopCell = [DemographicReportTopCell cellWithText:nil objectBindings:nil nibName:topCellNibName];
-        
-        
+
         return demographicReportTopCell;
     };
-    
-    
-   
-    [self.tableViewModel addSection:objectsSection];;
-    
-    
 
-    
-    
-    
+    [self.tableViewModel addSection:objectsSection];
 }
 
 
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return YES;
+    return YES;
 }
-
 
 
 @end

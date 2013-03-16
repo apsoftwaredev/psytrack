@@ -10,14 +10,11 @@
 #import "SpecialtyNameEntity.h"
 #import "SpecialtyEntity.h"
 
-
 @implementation SpecialtyNameEntity
 
 @dynamic specialtyName;
 @dynamic order;
 @dynamic desc;
 @dynamic specialties;
-
-
 
 @end

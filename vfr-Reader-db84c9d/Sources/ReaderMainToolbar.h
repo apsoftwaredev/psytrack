@@ -34,31 +34,31 @@
 
 @required // Delegate protocols
 
-- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar doneButton:(UIButton *)button;
-- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar thumbsButton:(UIButton *)button;
-- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar printButton:(UIButton *)button;
-- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar emailButton:(UIButton *)button;
-- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar markButton:(UIButton *)button;
-- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar openInButton:(UIButton *)button;
+- (void) tappedInToolbar:(ReaderMainToolbar *)toolbar doneButton:(UIButton *)button;
+- (void) tappedInToolbar:(ReaderMainToolbar *)toolbar thumbsButton:(UIButton *)button;
+- (void) tappedInToolbar:(ReaderMainToolbar *)toolbar printButton:(UIButton *)button;
+- (void) tappedInToolbar:(ReaderMainToolbar *)toolbar emailButton:(UIButton *)button;
+- (void) tappedInToolbar:(ReaderMainToolbar *)toolbar markButton:(UIButton *)button;
+- (void) tappedInToolbar:(ReaderMainToolbar *)toolbar openInButton:(UIButton *)button;
 @end
 
 @interface ReaderMainToolbar : UIXToolbarView
 {
-@private // Instance variables
+    @private // Instance variables
 
-	UIButton *markButton;
+    UIButton *markButton;
 
-	UIImage *markImageN;
-	UIImage *markImageY;
+    UIImage *markImageN;
+    UIImage *markImageY;
 }
 
 @property (nonatomic, assign, readwrite) id <ReaderMainToolbarDelegate> delegate;
 
-- (id)initWithFrame:(CGRect)frame document:(ReaderDocument *)object;
+- (id) initWithFrame:(CGRect)frame document:(ReaderDocument *)object;
 
-- (void)setBookmarkState:(BOOL)state;
+- (void) setBookmarkState:(BOOL)state;
 
-- (void)hideToolbar;
-- (void)showToolbar;
+- (void) hideToolbar;
+- (void) showToolbar;
 
 @end

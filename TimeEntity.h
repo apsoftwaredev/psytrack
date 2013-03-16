@@ -12,24 +12,22 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class AssessmentEntity, BreakTimeEntity, InterventionDeliveredEntity, SupervisionGivenEntity, SupervisionReceivedEntity, SupportActivityDeliveredEntity;
 
 @interface TimeEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * stopwatchRunning;
-@property (nonatomic, retain) NSNumber * stopwatchRestartAfterStop;
-@property (nonatomic, retain) NSDate * addStopwatch;
-@property (nonatomic, retain) NSDate * totalTime;
-@property (nonatomic, retain) NSDate * timeToSubtract;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * pauseInterval;
-@property (nonatomic, retain) NSDate * endTime;
-@property (nonatomic, retain) NSDate * pauseTime;
-@property (nonatomic, retain) NSDate * stopwatchStartTime;
-@property (nonatomic, retain) NSDate * additionalTime;
-@property (nonatomic, retain) NSDate * startTime;
+@property (nonatomic, retain) NSNumber *stopwatchRunning;
+@property (nonatomic, retain) NSNumber *stopwatchRestartAfterStop;
+@property (nonatomic, retain) NSDate *addStopwatch;
+@property (nonatomic, retain) NSDate *totalTime;
+@property (nonatomic, retain) NSDate *timeToSubtract;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *pauseInterval;
+@property (nonatomic, retain) NSDate *endTime;
+@property (nonatomic, retain) NSDate *pauseTime;
+@property (nonatomic, retain) NSDate *stopwatchStartTime;
+@property (nonatomic, retain) NSDate *additionalTime;
+@property (nonatomic, retain) NSDate *startTime;
 @property (nonatomic, retain) SupportActivityDeliveredEntity *indirectSupportDelived;
 @property (nonatomic, retain) InterventionDeliveredEntity *interventionDelivered;
 @property (nonatomic, retain) AssessmentEntity *assessmentTime;
@@ -40,9 +38,9 @@
 
 @interface TimeEntity (CoreDataGeneratedAccessors)
 
-- (void)addBreaksObject:(BreakTimeEntity *)value;
-- (void)removeBreaksObject:(BreakTimeEntity *)value;
-- (void)addBreaks:(NSSet *)values;
-- (void)removeBreaks:(NSSet *)values;
+- (void) addBreaksObject:(BreakTimeEntity *)value;
+- (void) removeBreaksObject:(BreakTimeEntity *)value;
+- (void) addBreaks:(NSSet *)values;
+- (void) removeBreaks:(NSSet *)values;
 
 @end

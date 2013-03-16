@@ -12,17 +12,15 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClientEntity, ConsultationEntity;
 
 @interface PaymentEntity : PTManagedObject
 
-@property (nonatomic, retain) NSDecimalNumber * amount;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * dateCleared;
-@property (nonatomic, retain) NSDate * dateReceived;
+@property (nonatomic, retain) NSDecimalNumber *amount;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSDate *dateCleared;
+@property (nonatomic, retain) NSDate *dateReceived;
 @property (nonatomic, retain) ClientEntity *client;
 @property (nonatomic, retain) NSManagedObject *paymentType;
 @property (nonatomic, retain) NSManagedObject *paymentSource;

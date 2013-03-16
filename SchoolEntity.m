@@ -13,7 +13,6 @@
 #import "TeachingExperienceEntity.h"
 #import "TrainingProgramEntity.h"
 
-
 @implementation SchoolEntity
 
 @dynamic order;
@@ -23,8 +22,5 @@
 @dynamic courses;
 @dynamic trainingProgram;
 @dynamic teachingExperience;
-
-
-
 
 @end

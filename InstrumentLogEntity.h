@@ -12,15 +12,13 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class BatteryEntity, InstrumentEntity;
 
 @interface InstrumentLogEntity : PTManagedObject
 
-@property (nonatomic, retain) NSDate * logDate;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * task;
+@property (nonatomic, retain) NSDate *logDate;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *task;
 @property (nonatomic, retain) InstrumentEntity *instrument;
 @property (nonatomic, retain) BatteryEntity *battery;
 

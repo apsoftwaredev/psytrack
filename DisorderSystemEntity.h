@@ -12,24 +12,22 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class DisorderEntity;
 
 @interface DisorderSystemEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * abbreviatedName;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * classificationSystem;
-@property (nonatomic, retain) NSString * desc;
+@property (nonatomic, retain) NSString *abbreviatedName;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *classificationSystem;
+@property (nonatomic, retain) NSString *desc;
 @property (nonatomic, retain) NSSet *disorders;
 @end
 
 @interface DisorderSystemEntity (CoreDataGeneratedAccessors)
 
-- (void)addDisordersObject:(DisorderEntity *)value;
-- (void)removeDisordersObject:(DisorderEntity *)value;
-- (void)addDisorders:(NSSet *)values;
-- (void)removeDisorders:(NSSet *)values;
+- (void) addDisordersObject:(DisorderEntity *)value;
+- (void) removeDisordersObject:(DisorderEntity *)value;
+- (void) addDisorders:(NSSet *)values;
+- (void) removeDisorders:(NSSet *)values;
 
 @end

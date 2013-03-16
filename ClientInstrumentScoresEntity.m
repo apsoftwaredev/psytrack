@@ -12,7 +12,6 @@
 #import "InstrumentEntity.h"
 #import "InstrumentScoreEntity.h"
 
-
 @implementation ClientInstrumentScoresEntity
 
 @dynamic order;
@@ -20,8 +19,5 @@
 @dynamic instrument;
 @dynamic scores;
 @dynamic clientPresentation;
-
-
-
 
 @end

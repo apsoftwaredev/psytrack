@@ -29,11 +29,11 @@
 
 @interface ReaderBookDelegate : NSObject <UIApplicationDelegate, ReaderViewControllerDelegate>
 {
-@private // Instance variables
+    @private // Instance variables
 
-	UIWindow *mainWindow; // Main App Window
+    UIWindow *mainWindow;     // Main App Window
 
-	ReaderViewController *readerViewController;
+    ReaderViewController *readerViewController;
 }
 
 @end

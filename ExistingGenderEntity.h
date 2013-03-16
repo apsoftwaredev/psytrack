@@ -16,7 +16,7 @@
 
 @interface ExistingGenderEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * numberOfIndividuals;
+@property (nonatomic, retain) NSNumber *numberOfIndividuals;
 @property (nonatomic, retain) ExistingDemographicsEntity *existingDemographics;
 @property (nonatomic, retain) GenderEntity *gender;
 

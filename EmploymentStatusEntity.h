@@ -12,23 +12,21 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class DemographicProfileEntity;
 
 @interface EmploymentStatusEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * employmentStatus;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSString *employmentStatus;
 @property (nonatomic, retain) NSSet *demographics;
 @end
 
 @interface EmploymentStatusEntity (CoreDataGeneratedAccessors)
 
-- (void)addDemographicsObject:(DemographicProfileEntity *)value;
-- (void)removeDemographicsObject:(DemographicProfileEntity *)value;
-- (void)addDemographics:(NSSet *)values;
-- (void)removeDemographics:(NSSet *)values;
+- (void) addDemographicsObject:(DemographicProfileEntity *)value;
+- (void) removeDemographicsObject:(DemographicProfileEntity *)value;
+- (void) addDemographics:(NSSet *)values;
+- (void) removeDemographics:(NSSet *)values;
 
 @end

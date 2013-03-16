@@ -10,7 +10,6 @@
 #import "EmploymentEntity.h"
 #import "ClinicianEntity.h"
 
-
 @implementation EmploymentEntity
 
 @dynamic order;
@@ -20,7 +19,5 @@
 @dynamic positions;
 @dynamic clinician;
 @dynamic employer;
-
-
 
 @end

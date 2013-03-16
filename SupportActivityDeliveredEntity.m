@@ -13,15 +13,11 @@
 #import "SupportActivityTypeEntity.h"
 #import "TimeEntity.h"
 
-
 @implementation SupportActivityDeliveredEntity
 
 @dynamic relatedToIntervention;
 @dynamic supportActivityClients;
 @dynamic time;
 @dynamic supportActivityType;
-
-
-
 
 @end

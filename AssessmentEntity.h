@@ -13,8 +13,6 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class AssessmentTypeEntity, ClientPresentationEntity, TimeEntity;
 
 @interface AssessmentEntity : ServiceParentEntity
@@ -26,9 +24,9 @@
 
 @interface AssessmentEntity (CoreDataGeneratedAccessors)
 
-- (void)addClientPresentationsObject:(ClientPresentationEntity *)value;
-- (void)removeClientPresentationsObject:(ClientPresentationEntity *)value;
-- (void)addClientPresentations:(NSSet *)values;
-- (void)removeClientPresentations:(NSSet *)values;
+- (void) addClientPresentationsObject:(ClientPresentationEntity *)value;
+- (void) removeClientPresentationsObject:(ClientPresentationEntity *)value;
+- (void) addClientPresentations:(NSSet *)values;
+- (void) removeClientPresentations:(NSSet *)values;
 
 @end

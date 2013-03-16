@@ -11,7 +11,6 @@
 #import "BatteryEntity.h"
 #import "ExistingAssessmentEntity.h"
 
-
 @implementation ExistingBatteryEntity
 
 @dynamic numberAdminstered;
@@ -20,7 +19,5 @@
 @dynamic adminstrationAndReport;
 @dynamic existingAssessment;
 @dynamic battery;
-
-
 
 @end

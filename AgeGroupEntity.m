@@ -9,13 +9,10 @@
 
 #import "AgeGroupEntity.h"
 
-
 @implementation AgeGroupEntity
 
 @dynamic ageGroup;
 @dynamic order;
 @dynamic existingAgeGroup;
-
-
 
 @end

@@ -8,27 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-
 @interface NSString (Helpers)
 
 // helper function
-- (NSString *) getValueForNamedColumn:(NSString *)column_name  headerNames:(NSArray *)header_names;
+- (NSString *) getValueForNamedColumn:(NSString *)column_name headerNames:(NSArray *)header_names;
 - (NSDate *) dateFromString;
 - (NSArray *) optionsFromSelect;
-- (NSString *)stringByFindingFormPostURLwithName:(NSString *)formName;
-- (NSArray *)arrayWithHrefDicts;
-- (NSString *)hrefForLinkContainingText:(NSString *)searchText;
+- (NSString *) stringByFindingFormPostURLwithName:(NSString *)formName;
+- (NSArray *) arrayWithHrefDicts;
+- (NSString *) hrefForLinkContainingText:(NSString *)searchText;
 - (NSString *) stringByUrlEncoding;
 
-- (NSComparisonResult)compareDesc:(NSString *)aString;
-
+- (NSComparisonResult) compareDesc:(NSString *)aString;
 
 // md5 maker
-- (NSString * )md5;
+- (NSString *) md5;
 
 // method to get the path for a file in the document directory
 + (NSString *) pathForFileInDocuments:(NSString *)fileName;
-
 
 + (NSString *) pathForLocalizedFileInAppBundle:(NSString *)fileName ofType:(NSString *)type;
 

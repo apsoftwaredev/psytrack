@@ -14,7 +14,6 @@
 #import "SchoolEntity.h"
 #import "TopicEntity.h"
 
-
 @implementation TeachingExperienceEntity
 
 @dynamic subject;
@@ -31,7 +30,5 @@
 @dynamic publications;
 @dynamic logs;
 @dynamic topics;
-
-
 
 @end

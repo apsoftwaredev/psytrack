@@ -12,21 +12,18 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
-
 @interface LicenseTypeEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * licenseType;
-@property (nonatomic, retain) NSNumber * order;
+@property (nonatomic, retain) NSString *licenseType;
+@property (nonatomic, retain) NSNumber *order;
 @property (nonatomic, retain) NSSet *licenseName;
 @end
 
 @interface LicenseTypeEntity (CoreDataGeneratedAccessors)
 
-- (void)addLicenseNameObject:(NSManagedObject *)value;
-- (void)removeLicenseNameObject:(NSManagedObject *)value;
-- (void)addLicenseName:(NSSet *)values;
-- (void)removeLicenseName:(NSSet *)values;
+- (void) addLicenseNameObject:(NSManagedObject *)value;
+- (void) removeLicenseNameObject:(NSManagedObject *)value;
+- (void) addLicenseName:(NSSet *)values;
+- (void) removeLicenseName:(NSSet *)values;
 
 @end

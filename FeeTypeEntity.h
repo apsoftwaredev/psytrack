@@ -12,22 +12,20 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class FeeEntity;
 
 @interface FeeTypeEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * feeType;
-@property (nonatomic, retain) NSNumber * order;
+@property (nonatomic, retain) NSString *feeType;
+@property (nonatomic, retain) NSNumber *order;
 @property (nonatomic, retain) NSSet *fees;
 @end
 
 @interface FeeTypeEntity (CoreDataGeneratedAccessors)
 
-- (void)addFeesObject:(FeeEntity *)value;
-- (void)removeFeesObject:(FeeEntity *)value;
-- (void)addFees:(NSSet *)values;
-- (void)removeFees:(NSSet *)values;
+- (void) addFeesObject:(FeeEntity *)value;
+- (void) removeFeesObject:(FeeEntity *)value;
+- (void) addFees:(NSSet *)values;
+- (void) removeFees:(NSSet *)values;
 
 @end

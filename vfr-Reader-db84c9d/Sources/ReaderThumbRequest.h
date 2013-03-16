@@ -29,27 +29,27 @@
 
 @interface ReaderThumbRequest : NSObject
 {
-@private // Instance variables
+    @private // Instance variables
 
-	NSURL *_fileURL;
+    NSURL *_fileURL;
 
-	NSString *_guid;
+    NSString *_guid;
 
-	NSString *_password;
+    NSString *_password;
 
-	NSString *_cacheKey;
+    NSString *_cacheKey;
 
-	NSString *_thumbName;
+    NSString *_thumbName;
 
-	ReaderThumbView *_thumbView;
+    ReaderThumbView *_thumbView;
 
-	NSUInteger _targetTag;
+    NSUInteger _targetTag;
 
-	NSInteger _thumbPage;
+    NSInteger _thumbPage;
 
-	CGSize _thumbSize;
+    CGSize _thumbSize;
 
-	CGFloat _scale;
+    CGFloat _scale;
 }
 
 @property (nonatomic, retain, readonly) NSURL *fileURL;
@@ -63,8 +63,8 @@
 @property (nonatomic, assign, readonly) CGSize thumbSize;
 @property (nonatomic, assign, readonly) CGFloat scale;
 
-+ (id)forView:(ReaderThumbView *)view fileURL:(NSURL *)url password:(NSString *)phrase guid:(NSString *)guid page:(NSInteger)page size:(CGSize)size;
++ (id) forView:(ReaderThumbView *)view fileURL:(NSURL *)url password:(NSString *)phrase guid:(NSString *)guid page:(NSInteger)page size:(CGSize)size;
 
-- (id)initWithView:(ReaderThumbView *)view fileURL:(NSURL *)url password:(NSString *)phrase guid:(NSString *)guid page:(NSInteger)page size:(CGSize)size;
+- (id) initWithView:(ReaderThumbView *)view fileURL:(NSURL *)url password:(NSString *)phrase guid:(NSString *)guid page:(NSInteger)page size:(CGSize)size;
 
 @end

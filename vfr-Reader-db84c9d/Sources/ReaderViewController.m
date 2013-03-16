@@ -45,1025 +45,1118 @@
 
 #pragma mark Support methods
 
-- (void)updateScrollViewContentSize
+- (void) updateScrollViewContentSize
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	NSInteger count = [document.pageCount integerValue];
+    NSInteger count = [document.pageCount integerValue];
 
-	if (count > PAGING_VIEWS) count = PAGING_VIEWS; // Limit
+    if (count > PAGING_VIEWS)
+    {
+        count = PAGING_VIEWS;                           // Limit
+    }
 
-	CGFloat contentHeight = theScrollView.bounds.size.height;
+    CGFloat contentHeight = theScrollView.bounds.size.height;
 
-	CGFloat contentWidth = (theScrollView.bounds.size.width * count);
+    CGFloat contentWidth = (theScrollView.bounds.size.width * count);
 
-	theScrollView.contentSize = CGSizeMake(contentWidth, contentHeight);
+    theScrollView.contentSize = CGSizeMake(contentWidth, contentHeight);
 }
 
-- (void)updateScrollViewContentViews
+
+- (void) updateScrollViewContentViews
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	[self updateScrollViewContentSize]; // Update the content size
+    [self updateScrollViewContentSize];     // Update the content size
 
-	NSMutableIndexSet *pageSet = [NSMutableIndexSet indexSet]; // Page set
+    NSMutableIndexSet *pageSet = [NSMutableIndexSet indexSet];     // Page set
 
-	[contentViews enumerateKeysAndObjectsUsingBlock: // Enumerate content views
-		^(id key, id object, BOOL *stop)
-		{
-			ReaderContentView *contentView = object; [pageSet addIndex:contentView.tag];
-		}
-	];
+    [contentViews enumerateKeysAndObjectsUsingBlock:     // Enumerate content views
+     ^(id key, id object, BOOL *stop)
+     {
+         ReaderContentView *contentView = object; [pageSet addIndex:contentView.tag];
+     }
 
-	__block CGRect viewRect = CGRectZero; viewRect.size = theScrollView.bounds.size;
 
-	__block CGPoint contentOffset = CGPointZero; NSInteger page = [document.pageNumber integerValue];
+    ];
 
-	[pageSet enumerateIndexesUsingBlock: // Enumerate page number set
-		^(NSUInteger number, BOOL *stop)
-		{
-			NSNumber *key = [NSNumber numberWithInteger:number]; // # key
+    __block CGRect viewRect = CGRectZero; viewRect.size = theScrollView.bounds.size;
 
-			ReaderContentView *contentView = [contentViews objectForKey:key];
+    __block CGPoint contentOffset = CGPointZero; NSInteger page = [document.pageNumber integerValue];
 
-			contentView.frame = viewRect; if (page == number) contentOffset = viewRect.origin;
+    [pageSet enumerateIndexesUsingBlock:     // Enumerate page number set
+     ^(NSUInteger number, BOOL *stop)
+     {
+         NSNumber *key = [NSNumber numberWithInteger:number];                // # key
 
-			viewRect.origin.x += viewRect.size.width; // Next view frame position
-		}
-	];
+         ReaderContentView *contentView = [contentViews objectForKey:key];
 
-	if (CGPointEqualToPoint(theScrollView.contentOffset, contentOffset) == false)
-	{
-		theScrollView.contentOffset = contentOffset; // Update content offset
-	}
+         contentView.frame = viewRect; if (page == number)
+         {
+             contentOffset = viewRect.origin;
+         }
+
+         viewRect.origin.x += viewRect.size.width;                // Next view frame position
+     }
+
+
+    ];
+
+    if (CGPointEqualToPoint(theScrollView.contentOffset, contentOffset) == false)
+    {
+        theScrollView.contentOffset = contentOffset;         // Update content offset
+    }
 }
 
-- (void)updateToolbarBookmarkIcon
+
+- (void) updateToolbarBookmarkIcon
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	NSInteger page = [document.pageNumber integerValue];
+    NSInteger page = [document.pageNumber integerValue];
 
-	BOOL bookmarked = [document.bookmarks containsIndex:page];
+    BOOL bookmarked = [document.bookmarks containsIndex:page];
 
-	[mainToolbar setBookmarkState:bookmarked]; // Update
+    [mainToolbar setBookmarkState:bookmarked];     // Update
 }
 
-- (void)showDocumentPage:(NSInteger)page
+
+- (void) showDocumentPage:(NSInteger)page
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if (page != currentPage) // Only if different
-	{
-		NSInteger minValue; NSInteger maxValue;
-		NSInteger maxPage = [document.pageCount integerValue];
-		NSInteger minPage = 1;
+    if (page != currentPage)     // Only if different
+    {
+        NSInteger minValue; NSInteger maxValue;
+        NSInteger maxPage = [document.pageCount integerValue];
+        NSInteger minPage = 1;
 
-		if ((page < minPage) || (page > maxPage)) return;
+        if ( (page < minPage) || (page > maxPage) )
+        {
+            return;
+        }
 
-		if (maxPage <= PAGING_VIEWS) // Few pages
-		{
-			minValue = minPage;
-			maxValue = maxPage;
-		}
-		else // Handle more pages
-		{
-			minValue = (page - 1);
-			maxValue = (page + 1);
+        if (maxPage <= PAGING_VIEWS)         // Few pages
+        {
+            minValue = minPage;
+            maxValue = maxPage;
+        }
+        else         // Handle more pages
+        {
+            minValue = (page - 1);
+            maxValue = (page + 1);
 
-			if (minValue < minPage)
-				{minValue++; maxValue++;}
-			else
-				if (maxValue > maxPage)
-					{minValue--; maxValue--;}
-		}
+            if (minValue < minPage)
+            {
+                minValue++; maxValue++;
+            }
+            else if (maxValue > maxPage)
+            {
+                minValue--; maxValue--;
+            }
+        }
 
-		NSMutableIndexSet *newPageSet = [NSMutableIndexSet new];
+        NSMutableIndexSet *newPageSet = [NSMutableIndexSet new];
 
-		NSMutableDictionary *unusedViews = [contentViews mutableCopy];
+        NSMutableDictionary *unusedViews = [contentViews mutableCopy];
 
-		CGRect viewRect = CGRectZero; viewRect.size = theScrollView.bounds.size;
+        CGRect viewRect = CGRectZero; viewRect.size = theScrollView.bounds.size;
 
-		for (NSInteger number = minValue; number <= maxValue; number++)
-		{
-			NSNumber *key = [NSNumber numberWithInteger:number]; // # key
+        for (NSInteger number = minValue; number <= maxValue; number++)
+        {
+            NSNumber *key = [NSNumber numberWithInteger:number];             // # key
 
-			ReaderContentView *contentView = [contentViews objectForKey:key];
+            ReaderContentView *contentView = [contentViews objectForKey:key];
 
-			if (contentView == nil) // Create a brand new document content view
-			{
-				NSURL *fileURL = document.fileURL; NSString *phrase = document.password; // Document properties
+            if (contentView == nil)             // Create a brand new document content view
+            {
+                NSURL *fileURL = document.fileURL; NSString *phrase = document.password;                 // Document properties
 
-				contentView = [[ReaderContentView alloc] initWithFrame:viewRect fileURL:fileURL page:number password:phrase];
+                contentView = [[ReaderContentView alloc] initWithFrame:viewRect fileURL:fileURL page:number password:phrase];
 
-				[theScrollView addSubview:contentView]; [contentViews setObject:contentView forKey:key];
+                [theScrollView addSubview:contentView]; [contentViews setObject:contentView forKey:key];
 
-				contentView.message = self;  [newPageSet addIndex:number];
-			}
-			else // Reposition the existing content view
-			{
-				contentView.frame = viewRect; [contentView zoomReset];
+                contentView.message = self;  [newPageSet addIndex:number];
+            }
+            else             // Reposition the existing content view
+            {
+                contentView.frame = viewRect; [contentView zoomReset];
 
-				[unusedViews removeObjectForKey:key];
-			}
+                [unusedViews removeObjectForKey:key];
+            }
 
-			viewRect.origin.x += viewRect.size.width;
-		}
+            viewRect.origin.x += viewRect.size.width;
+        }
 
-		[unusedViews enumerateKeysAndObjectsUsingBlock: // Remove unused views
-			^(id key, id object, BOOL *stop)
-			{
-				[contentViews removeObjectForKey:key];
+        [unusedViews enumerateKeysAndObjectsUsingBlock:         // Remove unused views
+         ^(id key, id object, BOOL *stop)
+         {
+             [contentViews removeObjectForKey:key];
 
-				ReaderContentView *contentView = object;
+             ReaderContentView *contentView = object;
 
-				[contentView removeFromSuperview];
-			}
-		];
+             [contentView removeFromSuperview];
+         }
 
-		 unusedViews = nil; // Release unused views
 
-		CGFloat viewWidthX1 = viewRect.size.width;
-		CGFloat viewWidthX2 = (viewWidthX1 * 2.0f);
+        ];
 
-		CGPoint contentOffset = CGPointZero;
+        unusedViews = nil;          // Release unused views
 
-		if (maxPage >= PAGING_VIEWS)
-		{
-			if (page == maxPage)
-				contentOffset.x = viewWidthX2;
-			else
-				if (page != minPage)
-					contentOffset.x = viewWidthX1;
-		}
-		else
-			if (page == (PAGING_VIEWS - 1))
-				contentOffset.x = viewWidthX1;
+        CGFloat viewWidthX1 = viewRect.size.width;
+        CGFloat viewWidthX2 = (viewWidthX1 * 2.0f);
 
-		if (CGPointEqualToPoint(theScrollView.contentOffset, contentOffset) == false)
-		{
-			theScrollView.contentOffset = contentOffset; // Update content offset
-		}
+        CGPoint contentOffset = CGPointZero;
 
-		if ([document.pageNumber integerValue] != page) // Only if different
-		{
-			document.pageNumber = [NSNumber numberWithInteger:page]; // Update page number
-		}
+        if (maxPage >= PAGING_VIEWS)
+        {
+            if (page == maxPage)
+            {
+                contentOffset.x = viewWidthX2;
+            }
+            else if (page != minPage)
+            {
+                contentOffset.x = viewWidthX1;
+            }
+        }
+        else if ( page == (PAGING_VIEWS - 1) )
+        {
+            contentOffset.x = viewWidthX1;
+        }
 
-		NSURL *fileURL = document.fileURL; NSString *phrase = document.password; NSString *guid = document.guid;
+        if (CGPointEqualToPoint(theScrollView.contentOffset, contentOffset) == false)
+        {
+            theScrollView.contentOffset = contentOffset;             // Update content offset
+        }
 
-		if ([newPageSet containsIndex:page] == YES) // Preview visible page first
-		{
-			NSNumber *key = [NSNumber numberWithInteger:page]; // # key
+        if ([document.pageNumber integerValue] != page)         // Only if different
+        {
+            document.pageNumber = [NSNumber numberWithInteger:page];             // Update page number
+        }
 
-			ReaderContentView *targetView = [contentViews objectForKey:key];
+        NSURL *fileURL = document.fileURL; NSString *phrase = document.password; NSString *guid = document.guid;
 
-			[targetView showPageThumb:fileURL page:page password:phrase guid:guid];
+        if ([newPageSet containsIndex:page] == YES)         // Preview visible page first
+        {
+            NSNumber *key = [NSNumber numberWithInteger:page];             // # key
 
-			[newPageSet removeIndex:page]; // Remove visible page from set
-		}
+            ReaderContentView *targetView = [contentViews objectForKey:key];
 
-		[newPageSet enumerateIndexesWithOptions:NSEnumerationReverse usingBlock: // Show previews
-			^(NSUInteger number, BOOL *stop)
-			{
-				NSNumber *key = [NSNumber numberWithInteger:number]; // # key
+            [targetView showPageThumb:fileURL page:page password:phrase guid:guid];
 
-				ReaderContentView *targetView = [contentViews objectForKey:key];
+            [newPageSet removeIndex:page];             // Remove visible page from set
+        }
 
-				[targetView showPageThumb:fileURL page:number password:phrase guid:guid];
-			}
-		];
+        [newPageSet enumerateIndexesWithOptions:NSEnumerationReverse usingBlock:         // Show previews
+         ^(NSUInteger number, BOOL *stop)
+         {
+             NSNumber *key = [NSNumber numberWithInteger:number];                    // # key
 
-		 newPageSet = nil; // Release new page set
+             ReaderContentView *targetView = [contentViews objectForKey:key];
 
-		[mainPagebar updatePagebar]; // Update the pagebar display
+             [targetView showPageThumb:fileURL page:number password:phrase guid:guid];
+         }
 
-		[self updateToolbarBookmarkIcon]; // Update bookmark
 
-		currentPage = page; // Track current page number
-	}
+        ];
+
+        newPageSet = nil;          // Release new page set
+
+        [mainPagebar updatePagebar];         // Update the pagebar display
+
+        [self updateToolbarBookmarkIcon];         // Update bookmark
+
+        currentPage = page;         // Track current page number
+    }
 }
 
-- (void)showDocument:(id)object
+
+- (void) showDocument:(id)object
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	[self updateScrollViewContentSize]; // Set content size
+    [self updateScrollViewContentSize];     // Set content size
 
-	[self showDocumentPage:[document.pageNumber integerValue]]; // Show
+    [self showDocumentPage:[document.pageNumber integerValue]];     // Show
 
-	document.lastOpen = [NSDate date]; // Update last opened date
+    document.lastOpen = [NSDate date];     // Update last opened date
 
-	isVisible = YES; // iOS present modal bodge
+    isVisible = YES;     // iOS present modal bodge
 }
+
 
 #pragma mark UIViewController methods
 
-- (id)initWithReaderDocument:(ReaderDocument *)object
+- (id) initWithReaderDocument:(ReaderDocument *)object
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	id reader = nil; // ReaderViewController object
+    id reader = nil;     // ReaderViewController object
 
-	if ((object != nil) && ([object isKindOfClass:[ReaderDocument class]]))
-	{
-		if ((self = [super initWithNibName:nil bundle:nil])) // Designated initializer
-		{
-			NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    if ( (object != nil) && ([object isKindOfClass:[ReaderDocument class]]) )
+    {
+        if ( (self = [super initWithNibName:nil bundle:nil]) )       // Designated initializer
+        {
+            NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 
-			[notificationCenter addObserver:self selector:@selector(applicationWill:) name:UIApplicationWillTerminateNotification object:nil];
+            [notificationCenter addObserver:self selector:@selector(applicationWill:) name:UIApplicationWillTerminateNotification object:nil];
 
-            @try {
+            @try
+            {
                 [notificationCenter addObserver:self selector:@selector(applicationWill:) name:UIApplicationWillResignActiveNotification object:nil];
             }
-            @catch (NSException *exception) {
+            @catch (NSException *exception)
+            {
                 //do nothing
             }
-           
 
-			[object updateProperties]; document = object ; // Retain the supplied ReaderDocument object for our use
+            [object updateProperties]; document = object;              // Retain the supplied ReaderDocument object for our use
 
-			[ReaderThumbCache touchThumbCacheWithGUID:object.guid]; // Touch the document thumb cache directory
+            [ReaderThumbCache touchThumbCacheWithGUID:object.guid];             // Touch the document thumb cache directory
 
-			reader = self; // Return an initialized ReaderViewController object
-		}
-	}
+            reader = self;             // Return an initialized ReaderViewController object
+        }
+    }
 
-	return reader;
+    return reader;
 }
+
 
 /*
-- (void)loadView
+   - (void)loadView
+   {
+   #ifdef DEBUGX
+        NSLog(@"%s", __FUNCTION__);
+   #endif
+
+        // Implement loadView to create a view hierarchy programmatically, without using a nib.
+   }
+ */
+
+- (void) viewDidLoad
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog( @"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds) );
 #endif
 
-	// Implement loadView to create a view hierarchy programmatically, without using a nib.
-}
-*/
+    [super viewDidLoad];
 
-- (void)viewDidLoad
-{
-#ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
-#endif
+    NSAssert(!(document == nil), @"ReaderDocument == nil");
 
-	[super viewDidLoad];
+    assert(self.splitViewController == nil);     // Not supported (sorry)
 
-	NSAssert(!(document == nil), @"ReaderDocument == nil");
+    self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
 
-	assert(self.splitViewController == nil); // Not supported (sorry)
+    CGRect viewRect = self.view.bounds;     // View controller's view bounds
 
-	self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
+    theScrollView = [[UIScrollView alloc] initWithFrame:viewRect];     // All
 
-	CGRect viewRect = self.view.bounds; // View controller's view bounds
+    theScrollView.scrollsToTop = NO;
+    theScrollView.pagingEnabled = YES;
+    theScrollView.delaysContentTouches = NO;
+    theScrollView.showsVerticalScrollIndicator = NO;
+    theScrollView.showsHorizontalScrollIndicator = NO;
+    theScrollView.contentMode = UIViewContentModeRedraw;
+    theScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    theScrollView.backgroundColor = [UIColor clearColor];
+    theScrollView.userInteractionEnabled = YES;
+    theScrollView.autoresizesSubviews = NO;
+    theScrollView.delegate = self;
 
-	theScrollView = [[UIScrollView alloc] initWithFrame:viewRect]; // All
+    [self.view addSubview:theScrollView];
 
-	theScrollView.scrollsToTop = NO;
-	theScrollView.pagingEnabled = YES;
-	theScrollView.delaysContentTouches = NO;
-	theScrollView.showsVerticalScrollIndicator = NO;
-	theScrollView.showsHorizontalScrollIndicator = NO;
-	theScrollView.contentMode = UIViewContentModeRedraw;
-	theScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	theScrollView.backgroundColor = [UIColor clearColor];
-	theScrollView.userInteractionEnabled = YES;
-	theScrollView.autoresizesSubviews = NO;
-	theScrollView.delegate = self;
+    CGRect toolbarRect = viewRect;
+    toolbarRect.size.height = TOOLBAR_HEIGHT;
 
-	[self.view addSubview:theScrollView];
+    mainToolbar = [[ReaderMainToolbar alloc] initWithFrame:toolbarRect document:document];     // At top
 
-	CGRect toolbarRect = viewRect;
-	toolbarRect.size.height = TOOLBAR_HEIGHT;
+    mainToolbar.delegate = self;
 
-	mainToolbar = [[ReaderMainToolbar alloc] initWithFrame:toolbarRect document:document]; // At top
+    [self.view addSubview:mainToolbar];
 
-	mainToolbar.delegate = self;
+    CGRect pagebarRect = viewRect;
+    pagebarRect.size.height = PAGEBAR_HEIGHT;
+    pagebarRect.origin.y = (viewRect.size.height - PAGEBAR_HEIGHT);
 
-	[self.view addSubview:mainToolbar];
+    mainPagebar = [[ReaderMainPagebar alloc] initWithFrame:pagebarRect document:document];     // At bottom
 
-	CGRect pagebarRect = viewRect;
-	pagebarRect.size.height = PAGEBAR_HEIGHT;
-	pagebarRect.origin.y = (viewRect.size.height - PAGEBAR_HEIGHT);
+    mainPagebar.delegate = self;
 
-	mainPagebar = [[ReaderMainPagebar alloc] initWithFrame:pagebarRect document:document]; // At bottom
+    [self.view addSubview:mainPagebar];
 
-	mainPagebar.delegate = self;
+    UITapGestureRecognizer *singleTapOne = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    singleTapOne.numberOfTouchesRequired = 1; singleTapOne.numberOfTapsRequired = 1; singleTapOne.delegate = self;
 
-	[self.view addSubview:mainPagebar];
+    UITapGestureRecognizer *doubleTapOne = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    doubleTapOne.numberOfTouchesRequired = 1; doubleTapOne.numberOfTapsRequired = 2; doubleTapOne.delegate = self;
 
-	UITapGestureRecognizer *singleTapOne = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-	singleTapOne.numberOfTouchesRequired = 1; singleTapOne.numberOfTapsRequired = 1; singleTapOne.delegate = self;
+    UITapGestureRecognizer *doubleTapTwo = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    doubleTapTwo.numberOfTouchesRequired = 2; doubleTapTwo.numberOfTapsRequired = 2; doubleTapTwo.delegate = self;
 
-	UITapGestureRecognizer *doubleTapOne = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
-	doubleTapOne.numberOfTouchesRequired = 1; doubleTapOne.numberOfTapsRequired = 2; doubleTapOne.delegate = self;
+    [singleTapOne requireGestureRecognizerToFail:doubleTapOne];     // Single tap requires double tap to fail
 
-	UITapGestureRecognizer *doubleTapTwo = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
-	doubleTapTwo.numberOfTouchesRequired = 2; doubleTapTwo.numberOfTapsRequired = 2; doubleTapTwo.delegate = self;
+    [self.view addGestureRecognizer:singleTapOne];
+    [self.view addGestureRecognizer:doubleTapOne];
+    [self.view addGestureRecognizer:doubleTapTwo];
 
-	[singleTapOne requireGestureRecognizerToFail:doubleTapOne]; // Single tap requires double tap to fail
-
-	[self.view addGestureRecognizer:singleTapOne]; 
-	[self.view addGestureRecognizer:doubleTapOne]; 
-	[self.view addGestureRecognizer:doubleTapTwo]; 
-
-	contentViews = [NSMutableDictionary new]; lastHideTime = [NSDate new];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-#ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
-#endif
-
-	[super viewWillAppear:animated];
-
-	if (CGSizeEqualToSize(lastAppearSize, CGSizeZero) == false)
-	{
-		if (CGSizeEqualToSize(lastAppearSize, self.view.bounds.size) == false)
-		{
-			[self updateScrollViewContentViews]; // Update content views
-		}
-
-		lastAppearSize = CGSizeZero; // Reset view size tracking
-	}
+    contentViews = [NSMutableDictionary new]; lastHideTime = [NSDate new];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+
+- (void) viewWillAppear:(BOOL)animated
 {
 #ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
+    NSLog( @"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds) );
 #endif
 
-	[super viewDidAppear:animated];
+    [super viewWillAppear:animated];
 
-	if (CGSizeEqualToSize(theScrollView.contentSize, CGSizeZero)) // First time
-	{
-		[self performSelector:@selector(showDocument:) withObject:nil afterDelay:0.02];
-	}
+    if (CGSizeEqualToSize(lastAppearSize, CGSizeZero) == false)
+    {
+        if (CGSizeEqualToSize(lastAppearSize, self.view.bounds.size) == false)
+        {
+            [self updateScrollViewContentViews];             // Update content views
+        }
+
+        lastAppearSize = CGSizeZero;         // Reset view size tracking
+    }
+}
+
+
+- (void) viewDidAppear:(BOOL)animated
+{
+#ifdef DEBUGX
+    NSLog( @"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds) );
+#endif
+
+    [super viewDidAppear:animated];
+
+    if ( CGSizeEqualToSize(theScrollView.contentSize, CGSizeZero) )   // First time
+    {
+        [self performSelector:@selector(showDocument:) withObject:nil afterDelay:0.02];
+    }
+
     if ([delegate respondsToSelector:@selector(readerViewDidAppear:)] == YES)
-	{
-		[delegate readerViewDidAppear:self]; // Dismiss the ReaderViewController
-	}
+    {
+        [delegate readerViewDidAppear:self];         // Dismiss the ReaderViewController
+    }
+
 #if (READER_DISABLE_IDLE == TRUE) // Option
-
-	[UIApplication sharedApplication].idleTimerDisabled = YES;
-
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
 #endif // end of READER_DISABLE_IDLE Option
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+
+- (void) viewWillDisappear:(BOOL)animated
 {
 #ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
+    NSLog( @"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds) );
 #endif
 
-	[super viewWillDisappear:animated];
+    [super viewWillDisappear:animated];
 
-	lastAppearSize = self.view.bounds.size; // Track view size
+    lastAppearSize = self.view.bounds.size;     // Track view size
 
 #if (READER_DISABLE_IDLE == TRUE) // Option
-
-	[UIApplication sharedApplication].idleTimerDisabled = NO;
-
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
 #endif // end of READER_DISABLE_IDLE Option
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+
+- (void) viewDidDisappear:(BOOL)animated
 {
 #ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
+    NSLog( @"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds) );
 #endif
 
-	[super viewDidDisappear:animated];
+    [super viewDidDisappear:animated];
 }
 
-- (void)viewDidUnload
+
+- (void) viewDidUnload
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	 mainToolbar = nil;  mainPagebar = nil;
+    mainToolbar = nil;  mainPagebar = nil;
 
-	 theScrollView = nil;  contentViews = nil;
+    theScrollView = nil;  contentViews = nil;
 
-	 lastHideTime = nil; lastAppearSize = CGSizeZero; currentPage = 0;
-    document=nil;
+    lastHideTime = nil; lastAppearSize = CGSizeZero; currentPage = 0;
+    document = nil;
 
-	[super viewDidUnload];
+    [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 #ifdef DEBUGX
-	NSLog(@"%s (%d)", __FUNCTION__, interfaceOrientation);
+    NSLog(@"%s (%d)", __FUNCTION__, interfaceOrientation);
 #endif
 
-	return YES;
+    return YES;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+
+- (void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
 #ifdef DEBUGX
-	NSLog(@"%s %@ (%d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), toInterfaceOrientation);
+    NSLog(@"%s %@ (%d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), toInterfaceOrientation);
 #endif
 
-	if (isVisible == NO) return; // iOS present modal bodge
+    if (isVisible == NO)
+    {
+        return;                      // iOS present modal bodge
+    }
 
-	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
-	{
-		if (printInteraction != nil) [printInteraction dismissAnimated:NO];
-	}
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+    {
+        if (printInteraction != nil)
+        {
+            [printInteraction dismissAnimated:NO];
+        }
+    }
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
+
+- (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
 {
 #ifdef DEBUGX
-	NSLog(@"%s %@ (%d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), interfaceOrientation);
+    NSLog(@"%s %@ (%d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), interfaceOrientation);
 #endif
 
-	if (isVisible == NO) return; // iOS present modal bodge
+    if (isVisible == NO)
+    {
+        return;                      // iOS present modal bodge
+    }
 
-	[self updateScrollViewContentViews]; // Update content views
+    [self updateScrollViewContentViews];     // Update content views
 
-	lastAppearSize = CGSizeZero; // Reset view size tracking
+    lastAppearSize = CGSizeZero;     // Reset view size tracking
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+
+- (void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
 #ifdef DEBUGX
-	NSLog(@"%s %@ (%d to %d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), fromInterfaceOrientation, self.interfaceOrientation);
+    NSLog(@"%s %@ (%d to %d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), fromInterfaceOrientation, self.interfaceOrientation);
 #endif
 
-	//if (isVisible == NO) return; // iOS present modal bodge
+    //if (isVisible == NO) return; // iOS present modal bodge
 
-	//if (fromInterfaceOrientation == self.interfaceOrientation) return;
+    //if (fromInterfaceOrientation == self.interfaceOrientation) return;
 }
 
-- (void)didReceiveMemoryWarning
+
+- (void) didReceiveMemoryWarning
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	[super didReceiveMemoryWarning];
+    [super didReceiveMemoryWarning];
 }
 
 
 #pragma mark UIScrollViewDelegate methods
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+- (void) scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	__block NSInteger page = 0;
+    __block NSInteger page = 0;
 
-	CGFloat contentOffsetX = scrollView.contentOffset.x;
+    CGFloat contentOffsetX = scrollView.contentOffset.x;
 
-	[contentViews enumerateKeysAndObjectsUsingBlock: // Enumerate content views
-		^(id key, id object, BOOL *stop)
-		{
-			ReaderContentView *contentView = object;
+    [contentViews enumerateKeysAndObjectsUsingBlock:     // Enumerate content views
+     ^(id key, id object, BOOL *stop)
+     {
+         ReaderContentView *contentView = object;
 
-			if (contentView.frame.origin.x == contentOffsetX)
-			{
-				page = contentView.tag; *stop = YES;
-			}
-		}
-	];
+         if (contentView.frame.origin.x == contentOffsetX)
+         {
+             page = contentView.tag; *stop = YES;
+         }
+     }
 
-	if (page != 0) [self showDocumentPage:page]; // Show the page
+
+    ];
+
+    if (page != 0)
+    {
+        [self showDocumentPage:page];                // Show the page
+    }
 }
 
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+
+- (void) scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	[self showDocumentPage:theScrollView.tag]; // Show page
+    [self showDocumentPage:theScrollView.tag];     // Show page
 
-	theScrollView.tag = 0; // Clear page number tag
+    theScrollView.tag = 0;     // Clear page number tag
 }
+
 
 #pragma mark UIGestureRecognizerDelegate methods
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)recognizer shouldReceiveTouch:(UITouch *)touch
+- (BOOL) gestureRecognizer:(UIGestureRecognizer *)recognizer shouldReceiveTouch:(UITouch *)touch
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if ([touch.view isKindOfClass:[UIScrollView class]]) return YES;
+    if ([touch.view isKindOfClass:[UIScrollView class]])
+    {
+        return YES;
+    }
 
-	return NO;
+    return NO;
 }
+
 
 #pragma mark UIGestureRecognizer action methods
 
-- (void)decrementPageNumber
+- (void) decrementPageNumber
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if (theScrollView.tag == 0) // Scroll view did end
-	{
-		NSInteger page = [document.pageNumber integerValue];
-		NSInteger maxPage = [document.pageCount integerValue];
-		NSInteger minPage = 1; // Minimum
+    if (theScrollView.tag == 0)     // Scroll view did end
+    {
+        NSInteger page = [document.pageNumber integerValue];
+        NSInteger maxPage = [document.pageCount integerValue];
+        NSInteger minPage = 1;         // Minimum
 
-		if ((maxPage > minPage) && (page != minPage))
-		{
-			CGPoint contentOffset = theScrollView.contentOffset;
+        if ( (maxPage > minPage) && (page != minPage) )
+        {
+            CGPoint contentOffset = theScrollView.contentOffset;
 
-			contentOffset.x -= theScrollView.bounds.size.width; // -= 1
+            contentOffset.x -= theScrollView.bounds.size.width;             // -= 1
 
-			[theScrollView setContentOffset:contentOffset animated:YES];
+            [theScrollView setContentOffset:contentOffset animated:YES];
 
-			theScrollView.tag = (page - 1); // Decrement page number
-		}
-	}
+            theScrollView.tag = (page - 1);             // Decrement page number
+        }
+    }
 }
 
-- (void)incrementPageNumber
+
+- (void) incrementPageNumber
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if (theScrollView.tag == 0) // Scroll view did end
-	{
-		NSInteger page = [document.pageNumber integerValue];
-		NSInteger maxPage = [document.pageCount integerValue];
-		NSInteger minPage = 1; // Minimum
+    if (theScrollView.tag == 0)     // Scroll view did end
+    {
+        NSInteger page = [document.pageNumber integerValue];
+        NSInteger maxPage = [document.pageCount integerValue];
+        NSInteger minPage = 1;         // Minimum
 
-		if ((maxPage > minPage) && (page != maxPage))
-		{
-			CGPoint contentOffset = theScrollView.contentOffset;
+        if ( (maxPage > minPage) && (page != maxPage) )
+        {
+            CGPoint contentOffset = theScrollView.contentOffset;
 
-			contentOffset.x += theScrollView.bounds.size.width; // += 1
+            contentOffset.x += theScrollView.bounds.size.width;             // += 1
 
-			[theScrollView setContentOffset:contentOffset animated:YES];
+            [theScrollView setContentOffset:contentOffset animated:YES];
 
-			theScrollView.tag = (page + 1); // Increment page number
-		}
-	}
+            theScrollView.tag = (page + 1);             // Increment page number
+        }
+    }
 }
 
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
+
+- (void) handleSingleTap:(UITapGestureRecognizer *)recognizer
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if (recognizer.state == UIGestureRecognizerStateRecognized)
-	{
-		CGRect viewRect = recognizer.view.bounds; // View bounds
+    if (recognizer.state == UIGestureRecognizerStateRecognized)
+    {
+        CGRect viewRect = recognizer.view.bounds;         // View bounds
 
-		CGPoint point = [recognizer locationInView:recognizer.view];
+        CGPoint point = [recognizer locationInView:recognizer.view];
 
-		CGRect areaRect = CGRectInset(viewRect, TAP_AREA_SIZE, 0.0f); // Area
+        CGRect areaRect = CGRectInset(viewRect, TAP_AREA_SIZE, 0.0f);         // Area
 
-		if (CGRectContainsPoint(areaRect, point)) // Single tap is inside the area
-		{
-			NSInteger page = [document.pageNumber integerValue]; // Current page #
+        if ( CGRectContainsPoint(areaRect, point) )       // Single tap is inside the area
+        {
+            NSInteger page = [document.pageNumber integerValue];             // Current page #
 
-			NSNumber *key = [NSNumber numberWithInteger:page]; // Page number key
+            NSNumber *key = [NSNumber numberWithInteger:page];             // Page number key
 
-			ReaderContentView *targetView = [contentViews objectForKey:key];
+            ReaderContentView *targetView = [contentViews objectForKey:key];
 
-			id target = [targetView singleTap:recognizer]; // Process tap
+            id target = [targetView singleTap:recognizer];             // Process tap
 
-			if (target != nil) // Handle the returned target object
-			{
-				if ([target isKindOfClass:[NSURL class]]) // Open a URL
-				{
-					NSURL *url = (NSURL *)target; // Cast to a NSURL object
+            if (target != nil)             // Handle the returned target object
+            {
+                if ([target isKindOfClass:[NSURL class]])                 // Open a URL
+                {
+                    NSURL *url = (NSURL *)target;                     // Cast to a NSURL object
 
-					if (url.scheme == nil) // Handle a missing URL scheme
-					{
-						NSString *www = url.absoluteString; // Get URL string
+                    if (url.scheme == nil)                     // Handle a missing URL scheme
+                    {
+                        NSString *www = url.absoluteString;                         // Get URL string
 
-						if ([www hasPrefix:@"www"] == YES) // Check for 'www' prefix
-						{
-							NSString *http = [NSString stringWithFormat:@"http://%@", www];
+                        if ([www hasPrefix:@"www"] == YES)                         // Check for 'www' prefix
+                        {
+                            NSString *http = [NSString stringWithFormat:@"http://%@", www];
 
-							url = [NSURL URLWithString:http]; // Proper http-based URL
-						}
-					}
+                            url = [NSURL URLWithString:http];                             // Proper http-based URL
+                        }
+                    }
 
-					if ([[UIApplication sharedApplication] openURL:url] == NO)
-					{
-						#ifdef DEBUG
-							NSLog(@"%s '%@'", __FUNCTION__, url); // Bad or unknown URL
-						#endif
-					}
-				}
-				else // Not a URL, so check for other possible object type
-				{
-					if ([target isKindOfClass:[NSNumber class]]) // Goto page
-					{
-						NSInteger value = [target integerValue]; // Number
+                    if ([[UIApplication sharedApplication] openURL:url] == NO)
+                    {
+#ifdef DEBUG
+                        NSLog(@"%s '%@'", __FUNCTION__, url);                                 // Bad or unknown URL
+#endif
+                    }
+                }
+                else                 // Not a URL, so check for other possible object type
+                {
+                    if ([target isKindOfClass:[NSNumber class]])                     // Goto page
+                    {
+                        NSInteger value = [target integerValue];                         // Number
 
-						[self showDocumentPage:value]; // Show the page
-					}
-				}
-			}
-			else // Nothing active tapped in the target content view
-			{
-				if ([lastHideTime timeIntervalSinceNow] < -0.75) // Delay since hide
-				{
-					if ((mainToolbar.hidden == YES) || (mainPagebar.hidden == YES))
-					{
-						[mainToolbar showToolbar]; [mainPagebar showPagebar]; // Show
-					}
-				}
-			}
+                        [self showDocumentPage:value];                         // Show the page
+                    }
+                }
+            }
+            else             // Nothing active tapped in the target content view
+            {
+                if ([lastHideTime timeIntervalSinceNow] < -0.75)                 // Delay since hide
+                {
+                    if ( (mainToolbar.hidden == YES) || (mainPagebar.hidden == YES) )
+                    {
+                        [mainToolbar showToolbar]; [mainPagebar showPagebar];                         // Show
+                    }
+                }
+            }
 
-			return;
-		}
+            return;
+        }
 
-		CGRect nextPageRect = viewRect;
-		nextPageRect.size.width = TAP_AREA_SIZE;
-		nextPageRect.origin.x = (viewRect.size.width - TAP_AREA_SIZE);
+        CGRect nextPageRect = viewRect;
+        nextPageRect.size.width = TAP_AREA_SIZE;
+        nextPageRect.origin.x = (viewRect.size.width - TAP_AREA_SIZE);
 
-		if (CGRectContainsPoint(nextPageRect, point)) // page++ area
-		{
-			[self incrementPageNumber]; return;
-		}
+        if ( CGRectContainsPoint(nextPageRect, point) )       // page++ area
+        {
+            [self incrementPageNumber]; return;
+        }
 
-		CGRect prevPageRect = viewRect;
-		prevPageRect.size.width = TAP_AREA_SIZE;
+        CGRect prevPageRect = viewRect;
+        prevPageRect.size.width = TAP_AREA_SIZE;
 
-		if (CGRectContainsPoint(prevPageRect, point)) // page-- area
-		{
-			[self decrementPageNumber]; return;
-		}
-	}
+        if ( CGRectContainsPoint(prevPageRect, point) )       // page-- area
+        {
+            [self decrementPageNumber]; return;
+        }
+    }
 }
 
-- (void)handleDoubleTap:(UITapGestureRecognizer *)recognizer
+
+- (void) handleDoubleTap:(UITapGestureRecognizer *)recognizer
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if (recognizer.state == UIGestureRecognizerStateRecognized)
-	{
-		CGRect viewRect = recognizer.view.bounds; // View bounds
+    if (recognizer.state == UIGestureRecognizerStateRecognized)
+    {
+        CGRect viewRect = recognizer.view.bounds;         // View bounds
 
-		CGPoint point = [recognizer locationInView:recognizer.view];
+        CGPoint point = [recognizer locationInView:recognizer.view];
 
-		CGRect zoomArea = CGRectInset(viewRect, TAP_AREA_SIZE, TAP_AREA_SIZE);
+        CGRect zoomArea = CGRectInset(viewRect, TAP_AREA_SIZE, TAP_AREA_SIZE);
 
-		if (CGRectContainsPoint(zoomArea, point)) // Double tap is in the zoom area
-		{
-			NSInteger page = [document.pageNumber integerValue]; // Current page #
+        if ( CGRectContainsPoint(zoomArea, point) )       // Double tap is in the zoom area
+        {
+            NSInteger page = [document.pageNumber integerValue];             // Current page #
 
-			NSNumber *key = [NSNumber numberWithInteger:page]; // Page number key
+            NSNumber *key = [NSNumber numberWithInteger:page];             // Page number key
 
-			ReaderContentView *targetView = [contentViews objectForKey:key];
+            ReaderContentView *targetView = [contentViews objectForKey:key];
 
-			switch (recognizer.numberOfTouchesRequired) // Touches count
-			{
-				case 1: // One finger double tap: zoom ++
-				{
-					[targetView zoomIncrement]; break;
-				}
+            switch (recognizer.numberOfTouchesRequired)             // Touches count
+            {
+                case 1:                 // One finger double tap: zoom ++
+                {
+                    [targetView zoomIncrement]; break;
+                }
 
-				case 2: // Two finger double tap: zoom --
-				{
-					[targetView zoomDecrement]; break;
-				}
-			}
+                case 2:                 // Two finger double tap: zoom --
+                {
+                    [targetView zoomDecrement]; break;
+                }
+            }
 
-			return;
-		}
+            return;
+        }
 
-		CGRect nextPageRect = viewRect;
-		nextPageRect.size.width = TAP_AREA_SIZE;
-		nextPageRect.origin.x = (viewRect.size.width - TAP_AREA_SIZE);
+        CGRect nextPageRect = viewRect;
+        nextPageRect.size.width = TAP_AREA_SIZE;
+        nextPageRect.origin.x = (viewRect.size.width - TAP_AREA_SIZE);
 
-		if (CGRectContainsPoint(nextPageRect, point)) // page++ area
-		{
-			[self incrementPageNumber]; return;
-		}
+        if ( CGRectContainsPoint(nextPageRect, point) )       // page++ area
+        {
+            [self incrementPageNumber]; return;
+        }
 
-		CGRect prevPageRect = viewRect;
-		prevPageRect.size.width = TAP_AREA_SIZE;
+        CGRect prevPageRect = viewRect;
+        prevPageRect.size.width = TAP_AREA_SIZE;
 
-		if (CGRectContainsPoint(prevPageRect, point)) // page-- area
-		{
-			[self decrementPageNumber]; return;
-		}
-	}
+        if ( CGRectContainsPoint(prevPageRect, point) )       // page-- area
+        {
+            [self decrementPageNumber]; return;
+        }
+    }
 }
+
 
 #pragma mark ReaderContentViewDelegate methods
 
-- (void)contentView:(ReaderContentView *)contentView touchesBegan:(NSSet *)touches
+- (void) contentView:(ReaderContentView *)contentView touchesBegan:(NSSet *)touches
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if ((mainToolbar.hidden == NO) || (mainPagebar.hidden == NO))
-	{
-		if (touches.count == 1) // Single touches only
-		{
-			UITouch *touch = [touches anyObject]; // Touch info
+    if ( (mainToolbar.hidden == NO) || (mainPagebar.hidden == NO) )
+    {
+        if (touches.count == 1)         // Single touches only
+        {
+            UITouch *touch = [touches anyObject];             // Touch info
 
-			CGPoint point = [touch locationInView:self.view]; // Touch location
+            CGPoint point = [touch locationInView:self.view];             // Touch location
 
-			CGRect areaRect = CGRectInset(self.view.bounds, TAP_AREA_SIZE, TAP_AREA_SIZE);
+            CGRect areaRect = CGRectInset(self.view.bounds, TAP_AREA_SIZE, TAP_AREA_SIZE);
 
-			if (CGRectContainsPoint(areaRect, point) == false) return;
-		}
+            if (CGRectContainsPoint(areaRect, point) == false)
+            {
+                return;
+            }
+        }
 
-		[mainToolbar hideToolbar]; [mainPagebar hidePagebar]; // Hide
+        [mainToolbar hideToolbar]; [mainPagebar hidePagebar];         // Hide
 
-	lastHideTime = [NSDate new];
-	}
+        lastHideTime = [NSDate new];
+    }
 }
+
 
 #pragma mark ReaderMainToolbarDelegate methods
 
-- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar doneButton:(UIButton *)button
+- (void) tappedInToolbar:(ReaderMainToolbar *)toolbar doneButton:(UIButton *)button
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
 #if (READER_STANDALONE == FALSE) // Option
+    [document saveReaderDocument];     // Save any ReaderDocument object changes
 
-	[document saveReaderDocument]; // Save any ReaderDocument object changes
+    [[ReaderThumbQueue sharedInstance] cancelOperationsWithGUID:document.guid];
 
-	[[ReaderThumbQueue sharedInstance] cancelOperationsWithGUID:document.guid];
+    [[ReaderThumbCache sharedInstance] removeAllObjects];     // Empty the thumb cache
 
-	[[ReaderThumbCache sharedInstance] removeAllObjects]; // Empty the thumb cache
+    if (printInteraction != nil)
+    {
+        [printInteraction dismissAnimated:NO];                              // Dismiss
+    }
 
-	if (printInteraction != nil) [printInteraction dismissAnimated:NO]; // Dismiss
-
-	if ([delegate respondsToSelector:@selector(dismissReaderViewController:)] == YES)
-	{
-		[delegate dismissReaderViewController:self]; // Dismiss the ReaderViewController
-	}
-	else // We have a "Delegate must respond to -dismissReaderViewController: error"
-	{
-		NSAssert(NO, @"Delegate must respond to -dismissReaderViewController:");
-	}
-
+    if ([delegate respondsToSelector:@selector(dismissReaderViewController:)] == YES)
+    {
+        [delegate dismissReaderViewController:self];         // Dismiss the ReaderViewController
+    }
+    else     // We have a "Delegate must respond to -dismissReaderViewController: error"
+    {
+        NSAssert(NO, @"Delegate must respond to -dismissReaderViewController:");
+    }
 #endif // end of READER_STANDALONE Option
 }
 
-- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar thumbsButton:(UIButton *)button
+
+- (void) tappedInToolbar:(ReaderMainToolbar *)toolbar thumbsButton:(UIButton *)button
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if (printInteraction != nil) [printInteraction dismissAnimated:NO]; // Dismiss
+    if (printInteraction != nil)
+    {
+        [printInteraction dismissAnimated:NO];                              // Dismiss
+    }
 
-	ThumbsViewController *thumbsViewController = [[ThumbsViewController alloc] initWithReaderDocument:document];
+    ThumbsViewController *thumbsViewController = [[ThumbsViewController alloc] initWithReaderDocument:document];
 
-	thumbsViewController.delegate = self; thumbsViewController.title = self.title;
+    thumbsViewController.delegate = self; thumbsViewController.title = self.title;
 
-	thumbsViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-	thumbsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+    thumbsViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    thumbsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
 
-	[self presentModalViewController:thumbsViewController animated:NO];
-
-
+    [self presentModalViewController:thumbsViewController animated:NO];
 }
 
-- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar printButton:(UIButton *)button
+
+- (void) tappedInToolbar:(ReaderMainToolbar *)toolbar printButton:(UIButton *)button
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
 #if (READER_ENABLE_PRINT == TRUE) // Option
+    Class printInteractionController = NSClassFromString(@"UIPrintInteractionController");
 
-	Class printInteractionController = NSClassFromString(@"UIPrintInteractionController");
+    if ( (printInteractionController != nil) && [printInteractionController isPrintingAvailable] )
+    {
+        NSURL *fileURL = document.fileURL;         // Document file URL
 
-	if ((printInteractionController != nil) && [printInteractionController isPrintingAvailable])
-	{
-		NSURL *fileURL = document.fileURL; // Document file URL
+        printInteraction = [printInteractionController sharedPrintController];
 
-		printInteraction = [printInteractionController sharedPrintController];
+        if ([printInteractionController canPrintURL:fileURL] == YES)         // Check first
+        {
+            UIPrintInfo *printInfo = [NSClassFromString(@"UIPrintInfo") printInfo];
 
-		if ([printInteractionController canPrintURL:fileURL] == YES) // Check first
-		{
-			UIPrintInfo *printInfo = [NSClassFromString(@"UIPrintInfo") printInfo];
+            printInfo.duplex = UIPrintInfoDuplexLongEdge;
+            printInfo.outputType = UIPrintInfoOutputGeneral;
+            printInfo.jobName = document.fileName;
 
-			printInfo.duplex = UIPrintInfoDuplexLongEdge;
-			printInfo.outputType = UIPrintInfoOutputGeneral;
-			printInfo.jobName = document.fileName;
+            printInteraction.printInfo = printInfo;
+            printInteraction.printingItem = fileURL;
+            printInteraction.showsPageRange = YES;
 
-			printInteraction.printInfo = printInfo;
-			printInteraction.printingItem = fileURL;
-			printInteraction.showsPageRange = YES;
+            if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+            {
+                [printInteraction presentFromRect:button.bounds inView:button animated:YES completionHandler:
+                 ^(UIPrintInteractionController *pic, BOOL completed, NSError *error)
+                 {
+#  ifdef DEBUG
+                     if ( (completed == NO) && (error != nil) )
+                     {
+                         NSLog(@"%s %@", __FUNCTION__, error);
+                     }
+#  endif
+                 }
 
-			if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
-			{
-				[printInteraction presentFromRect:button.bounds inView:button animated:YES completionHandler:
-					^(UIPrintInteractionController *pic, BOOL completed, NSError *error)
-					{
-						#ifdef DEBUG
-							if ((completed == NO) && (error != nil)) NSLog(@"%s %@", __FUNCTION__, error);
-						#endif
-					}
-				];
-			}
-			else // Presume UIUserInterfaceIdiomPhone
-			{
-				[printInteraction presentAnimated:YES completionHandler:
-					^(UIPrintInteractionController *pic, BOOL completed, NSError *error)
-					{
-						#ifdef DEBUG
-							if ((completed == NO) && (error != nil)) NSLog(@"%s %@", __FUNCTION__, error);
-						#endif
-					}
-				];
-			}
-		}
-	}
 
+                ];
+            }
+            else             // Presume UIUserInterfaceIdiomPhone
+            {
+                [printInteraction presentAnimated:YES completionHandler:
+                 ^(UIPrintInteractionController *pic, BOOL completed, NSError *error)
+                 {
+#  ifdef DEBUG
+                     if ( (completed == NO) && (error != nil) )
+                     {
+                         NSLog(@"%s %@", __FUNCTION__, error);
+                     }
+#  endif
+                 }
+
+
+                ];
+            }
+        }
+    }
 #endif // end of READER_ENABLE_PRINT Option
 }
 
-- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar emailButton:(UIButton *)button
+
+- (void) tappedInToolbar:(ReaderMainToolbar *)toolbar emailButton:(UIButton *)button
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
 #if (READER_ENABLE_MAIL == TRUE) // Option
+    if ([MFMailComposeViewController canSendMail] == NO)
+    {
+        return;
+    }
 
-	if ([MFMailComposeViewController canSendMail] == NO) return;
+    if (printInteraction != nil)
+    {
+        [printInteraction dismissAnimated:YES];
+    }
 
-	if (printInteraction != nil) [printInteraction dismissAnimated:YES];
+    unsigned long long fileSize = [document.fileSize unsignedLongLongValue];
 
-	unsigned long long fileSize = [document.fileSize unsignedLongLongValue];
+    if (fileSize < (unsigned long long)15728640)     // Check attachment size limit (15MB)
+    {
+        NSURL *fileURL = document.fileURL; NSString *fileName = document.fileName;         // Document
 
-	if (fileSize < (unsigned long long)15728640) // Check attachment size limit (15MB)
-	{
-		NSURL *fileURL = document.fileURL; NSString *fileName = document.fileName; // Document
+        NSData *attachment = [NSData dataWithContentsOfURL:fileURL options:(NSDataReadingMapped | NSDataReadingUncached) error:nil];
 
-		NSData *attachment = [NSData dataWithContentsOfURL:fileURL options:(NSDataReadingMapped|NSDataReadingUncached) error:nil];
+        if (attachment != nil)         // Ensure that we have valid document file attachment data
+        {
+            MFMailComposeViewController *mailComposer = [MFMailComposeViewController new];
 
-		if (attachment != nil) // Ensure that we have valid document file attachment data
-		{
-			MFMailComposeViewController *mailComposer = [MFMailComposeViewController new];
+            [mailComposer addAttachmentData:attachment mimeType:@"application/pdf" fileName:fileName];
 
-			[mailComposer addAttachmentData:attachment mimeType:@"application/pdf" fileName:fileName];
+            [mailComposer setSubject:fileName];             // Use the document file name for the subject
 
-			[mailComposer setSubject:fileName]; // Use the document file name for the subject
-
-			mailComposer.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-			mailComposer.modalPresentationStyle = UIModalPresentationFormSheet;
+            mailComposer.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            mailComposer.modalPresentationStyle = UIModalPresentationFormSheet;
             mailComposer.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:UITextAttributeTextColor];
-			mailComposer.mailComposeDelegate = self; // Set the delegate
+            mailComposer.mailComposeDelegate = self;             // Set the delegate
 
-			[self presentModalViewController:mailComposer animated:YES];
-
-			
-		}
-	}
-
+            [self presentModalViewController:mailComposer animated:YES];
+        }
+    }
 #endif // end of READER_ENABLE_MAIL Option
 }
-- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar openInButton:(UIButton *)button
+
+
+- (void) tappedInToolbar:(ReaderMainToolbar *)toolbar openInButton:(UIButton *)button
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
-    
+
 #if (READER_ENABLE_OPEN_IN == TRUE) // Option
     documentController =
-    [UIDocumentInteractionController interactionControllerWithURL:document.fileURL];
+        [UIDocumentInteractionController interactionControllerWithURL:document.fileURL];
     documentController.delegate = self;
-    
+
     documentController.UTI = @"com.adobe.pdf";
-    
- 
-    
-    UIButton *openInButton =[toolbar.subviews objectAtIndex:5];
-    CGRect openInFrame=openInButton.frame;;
-    
-    
-    
-    
+
+    UIButton *openInButton = [toolbar.subviews objectAtIndex:5];
+    CGRect openInFrame = openInButton.frame;
+
     [documentController presentOpenInMenuFromRect:openInFrame inView:self.view animated:YES];
-	    
 #endif // end of READER_ENABLE_MAIL Option
 }
 
 
-- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar markButton:(UIButton *)button
+- (void) tappedInToolbar:(ReaderMainToolbar *)toolbar markButton:(UIButton *)button
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if (printInteraction != nil) [printInteraction dismissAnimated:YES];
+    if (printInteraction != nil)
+    {
+        [printInteraction dismissAnimated:YES];
+    }
 
-	NSInteger page = [document.pageNumber integerValue];
+    NSInteger page = [document.pageNumber integerValue];
 
-	if ([document.bookmarks containsIndex:page])
-	{
-		[mainToolbar setBookmarkState:NO];
+    if ([document.bookmarks containsIndex:page])
+    {
+        [mainToolbar setBookmarkState:NO];
 
-		[document.bookmarks removeIndex:page];
-	}
-	else // Add the bookmarked page index
-	{
-		[mainToolbar setBookmarkState:YES];
+        [document.bookmarks removeIndex:page];
+    }
+    else     // Add the bookmarked page index
+    {
+        [mainToolbar setBookmarkState:YES];
 
-		[document.bookmarks addIndex:page];
-	}
+        [document.bookmarks addIndex:page];
+    }
 }
+
 
 #pragma mark MFMailComposeViewControllerDelegate methods
 
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	#ifdef DEBUG
-		if ((result == MFMailComposeResultFailed) && (error != NULL)) NSLog(@"%@", error);
-	#endif
+#ifdef DEBUG
+    if ( (result == MFMailComposeResultFailed) && (error != NULL) )
+    {
+        NSLog(@"%@", error);
+    }
+#endif
 
-	[self dismissModalViewControllerAnimated:YES]; // Dismiss
+    [self dismissModalViewControllerAnimated:YES];     // Dismiss
 }
+
 
 #pragma mark ThumbsViewControllerDelegate methods
 
-- (void)dismissThumbsViewController:(ThumbsViewController *)viewController
+- (void) dismissThumbsViewController:(ThumbsViewController *)viewController
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	[self updateToolbarBookmarkIcon]; // Update bookmark icon
+    [self updateToolbarBookmarkIcon];     // Update bookmark icon
 
-	[self dismissModalViewControllerAnimated:NO]; // Dismiss
+    [self dismissModalViewControllerAnimated:NO];     // Dismiss
 }
 
-- (void)thumbsViewController:(ThumbsViewController *)viewController gotoPage:(NSInteger)page
+
+- (void) thumbsViewController:(ThumbsViewController *)viewController gotoPage:(NSInteger)page
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	[self showDocumentPage:page]; // Show the page
+    [self showDocumentPage:page];     // Show the page
 }
+
 
 #pragma mark ReaderMainPagebarDelegate methods
 
-- (void)pagebar:(ReaderMainPagebar *)pagebar gotoPage:(NSInteger)page
+- (void) pagebar:(ReaderMainPagebar *)pagebar gotoPage:(NSInteger)page
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	[self showDocumentPage:page]; // Show the page
+    [self showDocumentPage:page];     // Show the page
 }
+
 
 #pragma mark UIApplication notification methods
 
-- (void)applicationWill:(NSNotification *)notification
+- (void) applicationWill:(NSNotification *)notification
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	[document saveReaderDocument]; // Save any ReaderDocument object changes
+    [document saveReaderDocument];     // Save any ReaderDocument object changes
 
-	if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
-	{
-		if (printInteraction != nil) [printInteraction dismissAnimated:NO];
-	}
+    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+    {
+        if (printInteraction != nil)
+        {
+            [printInteraction dismissAnimated:NO];
+        }
+    }
 }
+
 
 @end

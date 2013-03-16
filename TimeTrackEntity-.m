@@ -9,7 +9,6 @@
 #import "TimeTrackEntity.h"
 #import "ClinicianEntity.h"
 
-
 @implementation TimeTrackEntity
 
 @dynamic order;

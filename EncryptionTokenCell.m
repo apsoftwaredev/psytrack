@@ -10,42 +10,35 @@
 #import "EncryptionTokenCell.h"
 
 @implementation EncryptionTokenCell
-@synthesize setKeyButton,tokenField=tokenField_,viewTokenButton,generateNewButton,
+@synthesize setKeyButton,tokenField = tokenField_,viewTokenButton,generateNewButton,
 validateCurrentPasswordButton,validateEncryptionTokenButton,
 validateNewPasswordButton,validateReenterNewPasswordButton,passwordFieldCurrent, passwordFieldNew,passowrdFieldReenter,hintField;
 
-
-- (id)initWithFrame:(CGRect)frame
+- (id) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         // Initialization code
     }
+
     return self;
 }
 
 
-
-
--(void)performInitialization{
-
-
-    
+- (void) performInitialization
+{
     [tokenField_ setFont:[UIFont fontWithName:@"Monaco" size:24]];
-
 }
-
-
-
 
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
+   // Only override drawRect: if you perform custom drawing.
+   // An empty implementation adversely affects performance during animation.
+   - (void)drawRect:(CGRect)rect
+   {
     // Drawing code
-}
-*/
+   }
+ */
 
 @end

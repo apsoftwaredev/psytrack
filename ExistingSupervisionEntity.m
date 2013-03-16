@@ -12,7 +12,6 @@
 #import "SupervisionTypeEntity.h"
 #import "SupervisionTypeSubtypeEntity.h"
 
-
 @implementation ExistingSupervisionEntity
 
 @dynamic hours;
@@ -21,7 +20,5 @@
 @dynamic supervisors;
 @dynamic supervisionType;
 @dynamic subType;
-
-
 
 @end

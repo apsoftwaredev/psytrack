@@ -11,10 +11,9 @@
 
 @interface DemographicSexualOrientation : NSObject
 
-
 @property (nonatomic, strong) NSString *sexualOrientation;
 @property (nonatomic, assign) int count;
 
--(id)initWithSexualOrientation:(NSString *)sexOrientationGiven fromDemographicArray:(NSArray *)demographicArrayGiven;
--(id)initWithSexualOrientation:(NSString *)sexOrientationGiven count:(int)countGiven;
+- (id) initWithSexualOrientation:(NSString *)sexOrientationGiven fromDemographicArray:(NSArray *)demographicArrayGiven;
+- (id) initWithSexualOrientation:(NSString *)sexOrientationGiven count:(int)countGiven;
 @end

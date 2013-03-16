@@ -8,20 +8,16 @@
 //
 
 @interface DemographicReportTopCell : SCCustomCell <SCTableViewModelDelegate, SCTableViewControllerDelegate, UITableViewDelegate, SCTableViewModelDataSource>{
-    
-    
     SCTableViewModel *sexTableViewModel_;
     SCTableViewModel *genderTableViewModel_;
     SCTableViewModel *ethnicitiesTableViewModel_;
     SCTableViewModel *racesTableViewModel_;
     SCTableViewModel *disabilityTableViewModel_;
     SCTableViewModel *educationLevelTableViewModel_;
-    SCTableViewModel  *sexualOrientationTableViewModel_;
+    SCTableViewModel *sexualOrientationTableViewModel_;
     NSInteger numberOfSupervisors;
-    
-    
+
     CGFloat currentOffsetY;
-    
 }
 
 @property (nonatomic,strong)  SCTableViewModel *sexTableViewModel;
@@ -33,22 +29,19 @@
 @property (nonatomic,strong)  SCTableViewModel *educationLevelTableViewModel;
 @property (nonatomic,strong)  SCTableViewModel *sexualOrientationTableViewModel;
 
+@property (nonatomic, weak) IBOutlet UITableView *sexTableView;
+@property (nonatomic, weak) IBOutlet UITableView *genderTableView;
+@property (nonatomic, weak) IBOutlet UITableView *ethnicitiesTableView;
+@property (nonatomic, weak) IBOutlet UITableView *racesTableView;
 
+@property (nonatomic, weak) IBOutlet UITableView *disabilityTableView;
+@property (nonatomic, weak) IBOutlet UITableView *educationTableView;
+@property (nonatomic, weak) IBOutlet UITableView *sexualOrientationTableView;
 
-@property (nonatomic, weak)IBOutlet UITableView *sexTableView;
-@property (nonatomic, weak)IBOutlet UITableView *genderTableView;
-@property (nonatomic, weak)IBOutlet UITableView *ethnicitiesTableView;
-@property (nonatomic, weak)IBOutlet UITableView *racesTableView;
+@property (nonatomic, weak) IBOutlet UILabel *clinicianNameLabel;
 
-@property (nonatomic, weak)IBOutlet UITableView *disabilityTableView;
-@property (nonatomic, weak)IBOutlet UITableView *educationTableView;
-@property (nonatomic, weak)IBOutlet UITableView *sexualOrientationTableView;
+@property (nonatomic, weak) IBOutlet UIScrollView *mainPageScrollView;
 
-
-@property (nonatomic, weak)IBOutlet UILabel *clinicianNameLabel;
-
-@property (nonatomic, weak)IBOutlet UIScrollView *mainPageScrollView;
-
-@property (nonatomic, weak)IBOutlet UIView *tablesContainerView;
+@property (nonatomic, weak) IBOutlet UIView *tablesContainerView;
 @property (nonatomic, weak) IBOutlet UILabel *totalClientsLabel;
 @end

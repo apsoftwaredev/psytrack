@@ -8,13 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-
-@interface DTPageControl : UIPageControl 
+@interface DTPageControl : UIPageControl
 {
-	UIImage *dotImage;
-	UIImage *dotSelectedImage;
+    UIImage *dotImage;
+    UIImage *dotSelectedImage;
 }
-
 
 @property (nonatomic, retain) UIImage *dotImage;
 @property (nonatomic, retain) UIImage *dotSelectedImage;

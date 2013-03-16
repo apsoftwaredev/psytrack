@@ -4,9 +4,9 @@
  *  Version: 1.0
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
  *
  *  Created by Daniel Boice on 10/5/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -21,18 +21,14 @@
 #import "StopwatchCell.h"
 
 @interface Time_Shared : SCViewController <SCViewControllerDelegate, SCTableViewModelDataSource, SCTableViewModelDelegate,UIGestureRecognizerDelegate>{
-
-
-
     NSTimer *timer;
-    
 
-     UITextField *stopwatchTextField;
-     StopwatchCell *stopwatchCell;
+    UITextField *stopwatchTextField;
+    StopwatchCell *stopwatchCell;
     SCTableViewSection *timeSection;
-     UILabel *footerLabel;
-     UILabel *totalTimeHeaderLabel;
-    
+    UILabel *footerLabel;
+    UILabel *totalTimeHeaderLabel;
+
     BOOL viewControllerOpen;
     NSDate *startTime;
     NSDate *endTime;
@@ -44,12 +40,11 @@
     NSDate *addStopwatch;
     UILabel *breakTimeTotalHeaderLabel;
     SCTableViewSection *breakTimeSection;
-    
 }
 
 //@property (strong, nonatomic) IBOutlet SCTableViewModel *detailTableModel;
-@property (strong, nonatomic) IBOutlet  UILabel *totalTimeHeaderLabel;
-@property (strong, nonatomic) IBOutlet  UILabel *footerLabel;
+@property (strong, nonatomic) IBOutlet UILabel *totalTimeHeaderLabel;
+@property (strong, nonatomic) IBOutlet UILabel *footerLabel;
 @property (strong, nonatomic)   NSDate *totalTimeDate;
 
 //@property (readwrite, nonatomic) IBOutlet NSTimeInterval pauseInterval;
@@ -67,12 +62,12 @@
 //@property (strong, nonatomic) IBOutlet  NSManagedObject *managedObject;
 
 @property (strong, nonatomic) IBOutlet SCEntityDefinition *timeDef;
--(id)setupTheTimeViewUsingSTV;
--(void)calculateTime;
--(NSString *)tableViewModel:(SCTableViewModel *)tableViewModel calculateBreakTimeForRowAtIndexPath:(NSIndexPath *)indexPath withBoundValues:(BOOL)useBoundValues;
--(IBAction)stopwatchStop:(id)sender;
--(IBAction)stopwatchReset:(id)sender;
--(void)willDisappear;
--(NSTimeInterval ) totalBreakTimeInterval;
+- (id) setupTheTimeViewUsingSTV;
+- (void) calculateTime;
+- (NSString *) tableViewModel:(SCTableViewModel *)tableViewModel calculateBreakTimeForRowAtIndexPath:(NSIndexPath *)indexPath withBoundValues:(BOOL)useBoundValues;
+- (IBAction) stopwatchStop:(id)sender;
+- (IBAction) stopwatchReset:(id)sender;
+- (void) willDisappear;
+- (NSTimeInterval) totalBreakTimeInterval;
 
 @end

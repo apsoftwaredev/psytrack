@@ -10,7 +10,6 @@
 #import "ClinicianGroupEntity.h"
 #import "ClinicianEntity.h"
 
-
 @implementation ClinicianGroupEntity
 
 @dynamic addressBookSync;
@@ -18,9 +17,5 @@
 @dynamic addNewClinicians;
 @dynamic recordID;
 @dynamic clinician;
-
-
-
-
 
 @end

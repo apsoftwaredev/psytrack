@@ -7,7 +7,6 @@
 //
 
 @interface AboutAppDelegate : NSObject <UIApplicationDelegate> {
-    
     UIWindow *window;
     UINavigationController *navigationController;
 }
@@ -16,4 +15,3 @@
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 
 @end
-

@@ -9,7 +9,6 @@
 
 #import "DrugProductEntity.h"
 
-
 @implementation DrugProductEntity
 
 @dynamic activeIngredient;

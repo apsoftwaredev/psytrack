@@ -10,15 +10,11 @@
 #import "DevelopmentalDescriptorEntity.h"
 #import "DemographicProfileEntity.h"
 
-
 @implementation DevelopmentalDescriptorEntity
 
 @dynamic order;
 @dynamic descriptor;
 @dynamic desc;
 @dynamic demographics;
-
-
-
 
 @end

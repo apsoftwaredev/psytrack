@@ -11,7 +11,6 @@
 #import "ContinuingEducationEntity.h"
 #import "PresentationEntity.h"
 
-
 @implementation TopicEntity
 
 @dynamic order;
@@ -20,6 +19,5 @@
 @dynamic presentations;
 @dynamic cECredits;
 @dynamic teachingExperience;
-
 
 @end

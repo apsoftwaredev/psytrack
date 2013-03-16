@@ -11,7 +11,6 @@
 #import "ClinicianEntity.h"
 #import "LogEntity.h"
 
-
 @implementation LicenseEntity
 
 @dynamic status;
@@ -24,7 +23,5 @@
 @dynamic licenseName;
 @dynamic renewals;
 @dynamic clinician;
-
-
 
 @end

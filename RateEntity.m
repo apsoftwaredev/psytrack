@@ -11,7 +11,6 @@
 #import "ClientPresentationEntity.h"
 #import "SupportActivityClientEntity.h"
 
-
 @implementation RateEntity
 
 @dynamic hourlyRate;
@@ -23,7 +22,5 @@
 @dynamic rateCharges;
 @dynamic supportActivityClient;
 @dynamic clientPresentations;
-
-
 
 @end

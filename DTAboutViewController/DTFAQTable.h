@@ -11,14 +11,14 @@
 
 @interface DTFAQTable : UIView <UITableViewDelegate, UITableViewDataSource, DTSingleQuestionViewDataSource>
 {
-	UITableView *_tableView;
-	
-	NSArray *faqs;
-	
-	UINavigationController *navController;
-	
-	BOOL useTextViews;
-	CGFloat rowHeight;
+    UITableView *_tableView;
+
+    NSArray *faqs;
+
+    UINavigationController *navController;
+
+    BOOL useTextViews;
+    CGFloat rowHeight;
 }
 
 @property (nonatomic, strong) UINavigationController *navController;
@@ -28,6 +28,5 @@
 @property (nonatomic, assign) CGFloat rowHeight;
 
 - (void) sizeToShowRows:(NSInteger)rows;
-
 
 @end

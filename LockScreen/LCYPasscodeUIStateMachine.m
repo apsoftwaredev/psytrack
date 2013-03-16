@@ -8,7 +8,6 @@
 // Edited by Dan Boice 1/20/2012
 #import "LCYPasscodeUIStateMachine.h"
 
-
 @implementation LCYPasscodeUIStateMachine
 
 @dynamic theNewPasscode;
@@ -17,16 +16,16 @@
 
 - (NSString *) currentPromptText;
 {
-	return nil;
+    return nil;
 }
 
-- (void) transitionWithInput:(NSString *) input;
+- (void) transitionWithInput:(NSString *)input;
 {
 }
 
 - (BOOL) gotCompletionState;
 {
-	return NO;
+    return NO;
 }
 
 - (void) reset;

@@ -12,19 +12,19 @@
 @implementation DemographicVariableAndCount
 @synthesize variableCountStr,variableStr;
 
+- (id) initWithVariableStr:(NSString *)variableStrGiven variableCount:(int)variableCountIntGiven
+{
+    self = [super init];
 
--(id)initWithVariableStr:(NSString *)variableStrGiven variableCount:(int)variableCountIntGiven{
+    if (self)
+    {
+        self.variableCountStr = variableStrGiven;
 
-    self=[super init];
-    
-    if (self) {
-        self.variableCountStr=variableStrGiven;
-        
-        self.variableCountStr=[NSString stringWithFormat:@"%i",variableCountIntGiven];
+        self.variableCountStr = [NSString stringWithFormat:@"%i",variableCountIntGiven];
     }
 
     return self;
-
-
 }
+
+
 @end

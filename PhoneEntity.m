@@ -10,7 +10,6 @@
 #import "PhoneEntity.h"
 #import "ClientEntity.h"
 
-
 @implementation PhoneEntity
 
 @dynamic phoneNumber;
@@ -18,7 +17,5 @@
 @dynamic keyString;
 @dynamic extension;
 @dynamic client;
-
-
 
 @end

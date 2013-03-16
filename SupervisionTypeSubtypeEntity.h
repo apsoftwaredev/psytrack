@@ -12,15 +12,13 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ExistingSupervisionEntity, SupervisionGivenEntity, SupervisionReceivedEntity, SupervisionTypeEntity;
 
 @interface SupervisionTypeSubtypeEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * subType;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSString *subType;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
 @property (nonatomic, retain) NSSet *existingSupervision;
 @property (nonatomic, retain) SupervisionTypeEntity *supervisionType;
 @property (nonatomic, retain) NSSet *supervisionReceived;
@@ -29,19 +27,19 @@
 
 @interface SupervisionTypeSubtypeEntity (CoreDataGeneratedAccessors)
 
-- (void)addExistingSupervisionObject:(ExistingSupervisionEntity *)value;
-- (void)removeExistingSupervisionObject:(ExistingSupervisionEntity *)value;
-- (void)addExistingSupervision:(NSSet *)values;
-- (void)removeExistingSupervision:(NSSet *)values;
+- (void) addExistingSupervisionObject:(ExistingSupervisionEntity *)value;
+- (void) removeExistingSupervisionObject:(ExistingSupervisionEntity *)value;
+- (void) addExistingSupervision:(NSSet *)values;
+- (void) removeExistingSupervision:(NSSet *)values;
 
-- (void)addSupervisionReceivedObject:(SupervisionReceivedEntity *)value;
-- (void)removeSupervisionReceivedObject:(SupervisionReceivedEntity *)value;
-- (void)addSupervisionReceived:(NSSet *)values;
-- (void)removeSupervisionReceived:(NSSet *)values;
+- (void) addSupervisionReceivedObject:(SupervisionReceivedEntity *)value;
+- (void) removeSupervisionReceivedObject:(SupervisionReceivedEntity *)value;
+- (void) addSupervisionReceived:(NSSet *)values;
+- (void) removeSupervisionReceived:(NSSet *)values;
 
-- (void)addSupervisionGivenObject:(SupervisionGivenEntity *)value;
-- (void)removeSupervisionGivenObject:(SupervisionGivenEntity *)value;
-- (void)addSupervisionGiven:(NSSet *)values;
-- (void)removeSupervisionGiven:(NSSet *)values;
+- (void) addSupervisionGivenObject:(SupervisionGivenEntity *)value;
+- (void) removeSupervisionGivenObject:(SupervisionGivenEntity *)value;
+- (void) addSupervisionGiven:(NSSet *)values;
+- (void) removeSupervisionGiven:(NSSet *)values;
 
 @end

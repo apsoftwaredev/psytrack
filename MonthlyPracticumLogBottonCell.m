@@ -4,9 +4,9 @@
  *  Version: 1.0
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
  *
  *  Created by Daniel Boice on  6/26/12.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -21,7 +21,6 @@
 #import "MonthlyPracticumLogTopCell.h"
 #import "QuartzCore/QuartzCore.h"
 #import "ClinicianEntity.h"
-
 
 @implementation MonthlyPracticumLogBottonCell
 
@@ -38,71 +37,60 @@
 @synthesize hoursTotalHoursLabel;
 @synthesize cellsContainerView;
 
-
-
--(void)willDisplay{
-    
+- (void) willDisplay
+{
     [super willDisplay];
 
-   
-        
-      self.cellSubTypeLabel.text=trackTypeWithTotalTimesObject_.typeLabelText;
-           
-        
-            
-    
-    self.layer.borderWidth=0;
-    self.accessoryType=UITableViewCellAccessoryNone;
+    self.cellSubTypeLabel.text = trackTypeWithTotalTimesObject_.typeLabelText;
 
+    self.layer.borderWidth = 0;
+    self.accessoryType = UITableViewCellAccessoryNone;
 }
 
--(void)performInitialization{
 
-
-   
-
+- (void) performInitialization
+{
 }
 
--(void)loadBindingsIntoCustomControls{
 
+- (void) loadBindingsIntoCustomControls
+{
     [super loadBindingsIntoCustomControls];
-   
-    
-    trackTypeWithTotalTimesObject_=(TrackTypeWithTotalTimes *) self.boundObject;
 
-    self.cellSubTypeLabel.text=trackTypeWithTotalTimesObject_.typeLabelText;
-    
-    if (!monthToDisplay_||!clinician_) {       
-        monthToDisplay_=(NSDate *)trackTypeWithTotalTimesObject_.monthToDisplay;
-        
+    trackTypeWithTotalTimesObject_ = (TrackTypeWithTotalTimes *)self.boundObject;
+
+    self.cellSubTypeLabel.text = trackTypeWithTotalTimesObject_.typeLabelText;
+
+    if (!monthToDisplay_ || !clinician_)
+    {
+        monthToDisplay_ = (NSDate *)trackTypeWithTotalTimesObject_.monthToDisplay;
     }
-    
 
-    self.hoursWeek1Label.text=trackTypeWithTotalTimesObject_.totalWeek1Str;
-    self.hoursWeek2Label.text=trackTypeWithTotalTimesObject_.totalWeek2Str;
-    self.hoursWeek3Label.text=trackTypeWithTotalTimesObject_.totalWeek3Str;
-    self.hoursWeek4Label.text=trackTypeWithTotalTimesObject_.totalWeek4Str;
-    self.hoursWeek5Label.text=trackTypeWithTotalTimesObject_.totalWeek5Str;
-    
-    if (self.hoursWeekUndefinedLabel) {
-        self.hoursWeekUndefinedLabel.text=trackTypeWithTotalTimesObject_.totalWeekUndefinedStr;
+    self.hoursWeek1Label.text = trackTypeWithTotalTimesObject_.totalWeek1Str;
+    self.hoursWeek2Label.text = trackTypeWithTotalTimesObject_.totalWeek2Str;
+    self.hoursWeek3Label.text = trackTypeWithTotalTimesObject_.totalWeek3Str;
+    self.hoursWeek4Label.text = trackTypeWithTotalTimesObject_.totalWeek4Str;
+    self.hoursWeek5Label.text = trackTypeWithTotalTimesObject_.totalWeek5Str;
+
+    if (self.hoursWeekUndefinedLabel)
+    {
+        self.hoursWeekUndefinedLabel.text = trackTypeWithTotalTimesObject_.totalWeekUndefinedStr;
     }
-    self.hoursMonthTotalLabel.text=trackTypeWithTotalTimesObject_.totalForMonthStr;
-    self.hoursCumulativeLabel.text=trackTypeWithTotalTimesObject_.totalCummulativeStr;
-    self.hoursTotalHoursLabel.text=trackTypeWithTotalTimesObject_.totalToDateStr;
-    
 
-    
-
-    
+    self.hoursMonthTotalLabel.text = trackTypeWithTotalTimesObject_.totalForMonthStr;
+    self.hoursCumulativeLabel.text = trackTypeWithTotalTimesObject_.totalCummulativeStr;
+    self.hoursTotalHoursLabel.text = trackTypeWithTotalTimesObject_.totalToDateStr;
 }
 
-- (id)initWithFrame:(CGRect)frame
+
+- (id) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         // Initialization code
     }
+
     return self;
 }
 

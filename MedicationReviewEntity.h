@@ -12,22 +12,20 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClinicianEntity, FrequencyEntity, MedicationEntity, SideEffectEntity;
 
 @interface MedicationReviewEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * doseChange;
-@property (nonatomic, retain) NSString * adherence;
-@property (nonatomic, retain) NSDate * nextReview;
-@property (nonatomic, retain) NSString * keyString;
-@property (nonatomic, retain) NSString * dosage;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * satisfaction;
-@property (nonatomic, retain) NSDate * logDate;
-@property (nonatomic, retain) NSNumber * sxChange;
-@property (nonatomic, retain) NSDate * lastDose;
+@property (nonatomic, retain) NSNumber *doseChange;
+@property (nonatomic, retain) NSString *adherence;
+@property (nonatomic, retain) NSDate *nextReview;
+@property (nonatomic, retain) NSString *keyString;
+@property (nonatomic, retain) NSString *dosage;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *satisfaction;
+@property (nonatomic, retain) NSDate *logDate;
+@property (nonatomic, retain) NSNumber *sxChange;
+@property (nonatomic, retain) NSDate *lastDose;
 @property (nonatomic, retain) MedicationEntity *medication;
 @property (nonatomic, retain) NSSet *sideEffects;
 @property (nonatomic, retain) ClinicianEntity *prescriber;
@@ -36,9 +34,9 @@
 
 @interface MedicationReviewEntity (CoreDataGeneratedAccessors)
 
-- (void)addSideEffectsObject:(SideEffectEntity *)value;
-- (void)removeSideEffectsObject:(SideEffectEntity *)value;
-- (void)addSideEffects:(NSSet *)values;
-- (void)removeSideEffects:(NSSet *)values;
+- (void) addSideEffectsObject:(SideEffectEntity *)value;
+- (void) removeSideEffectsObject:(SideEffectEntity *)value;
+- (void) addSideEffects:(NSSet *)values;
+- (void) removeSideEffects:(NSSet *)values;
 
 @end

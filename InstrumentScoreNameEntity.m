@@ -11,7 +11,6 @@
 #import "InstrumentEntity.h"
 #import "InstrumentScoreEntity.h"
 
-
 @implementation InstrumentScoreNameEntity
 
 @dynamic abbreviatedName;
@@ -19,7 +18,5 @@
 @dynamic notes;
 @dynamic instrument;
 @dynamic scores;
-
-
 
 @end

@@ -10,16 +10,11 @@
 #import "DisorderCategoryEntity.h"
 #import "DisorderEntity.h"
 
-
 @implementation DisorderCategoryEntity
 
 @dynamic order;
 @dynamic desc;
 @dynamic categoryName;
 @dynamic disorders;
-
-
-
-
 
 @end

@@ -12,15 +12,13 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ConferenceEntity, ConsultationEntity, ExpertTestemonyEntity, LeadershipRoleEntity;
 
 @interface OrganizationEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * size;
-@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *size;
+@property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSSet *expertTestemony;
 @property (nonatomic, retain) NSSet *conferences;
 @property (nonatomic, retain) NSSet *leadershipRoles;
@@ -29,24 +27,24 @@
 
 @interface OrganizationEntity (CoreDataGeneratedAccessors)
 
-- (void)addExpertTestemonyObject:(ExpertTestemonyEntity *)value;
-- (void)removeExpertTestemonyObject:(ExpertTestemonyEntity *)value;
-- (void)addExpertTestemony:(NSSet *)values;
-- (void)removeExpertTestemony:(NSSet *)values;
+- (void) addExpertTestemonyObject:(ExpertTestemonyEntity *)value;
+- (void) removeExpertTestemonyObject:(ExpertTestemonyEntity *)value;
+- (void) addExpertTestemony:(NSSet *)values;
+- (void) removeExpertTestemony:(NSSet *)values;
 
-- (void)addConferencesObject:(ConferenceEntity *)value;
-- (void)removeConferencesObject:(ConferenceEntity *)value;
-- (void)addConferences:(NSSet *)values;
-- (void)removeConferences:(NSSet *)values;
+- (void) addConferencesObject:(ConferenceEntity *)value;
+- (void) removeConferencesObject:(ConferenceEntity *)value;
+- (void) addConferences:(NSSet *)values;
+- (void) removeConferences:(NSSet *)values;
 
-- (void)addLeadershipRolesObject:(LeadershipRoleEntity *)value;
-- (void)removeLeadershipRolesObject:(LeadershipRoleEntity *)value;
-- (void)addLeadershipRoles:(NSSet *)values;
-- (void)removeLeadershipRoles:(NSSet *)values;
+- (void) addLeadershipRolesObject:(LeadershipRoleEntity *)value;
+- (void) removeLeadershipRolesObject:(LeadershipRoleEntity *)value;
+- (void) addLeadershipRoles:(NSSet *)values;
+- (void) removeLeadershipRoles:(NSSet *)values;
 
-- (void)addConsultationsObject:(ConsultationEntity *)value;
-- (void)removeConsultationsObject:(ConsultationEntity *)value;
-- (void)addConsultations:(NSSet *)values;
-- (void)removeConsultations:(NSSet *)values;
+- (void) addConsultationsObject:(ConsultationEntity *)value;
+- (void) removeConsultationsObject:(ConsultationEntity *)value;
+- (void) addConsultations:(NSSet *)values;
+- (void) removeConsultations:(NSSet *)values;
 
 @end

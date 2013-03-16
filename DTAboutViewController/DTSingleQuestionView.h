@@ -17,28 +17,26 @@
 
 @end
 
-@interface DTSingleQuestionView : UIViewController 
+@interface DTSingleQuestionView : UIViewController
 {
-	NSString *question;
-	NSString *text;
-	
-	NSUInteger currentQuestion;
-	
-	UISegmentedControl *segmentedControl;
-	
+    NSString *question;
+    NSString *text;
+
+    NSUInteger currentQuestion;
+
+    UISegmentedControl *segmentedControl;
+
 //	id <DTSingleQuestionViewDataSource> delegate;
-	
-	DTSingleQuestionContentView *_questionAnswerView;
+
+    DTSingleQuestionContentView *_questionAnswerView;
 }
 
 @property (nonatomic, assign) NSUInteger currentQuestion;
 @property (nonatomic, strong, readonly) DTSingleQuestionContentView *questionAnswerView;
 
-
 @property (nonatomic, strong) NSString *question;
 @property (nonatomic, strong) NSString *text;
 
 @property (nonatomic, weak) id <DTSingleQuestionViewDataSource> delegate;
-
 
 @end

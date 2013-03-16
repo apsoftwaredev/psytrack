@@ -11,24 +11,24 @@
 
 @implementation AddViewABLinkButtonCell
 
--(void)performInitialization{
-
-    NSString *buttonOneStr=@"Edit Address Book Record";
+- (void) performInitialization
+{
+    NSString *buttonOneStr = @"Edit Address Book Record";
     NSString *buttonTwoStr = @"Add to Address Book";
 
-
-    self.buttonText=buttonOneStr;
-    self.buttonTwoText=buttonTwoStr;
+    self.buttonText = buttonOneStr;
+    self.buttonTwoText = buttonTwoStr;
     [super performInitialization];
+}
 
-}
+
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
+   // Only override drawRect: if you perform custom drawing.
+   // An empty implementation adversely affects performance during animation.
+   - (void)drawRect:(CGRect)rect
+   {
     // Drawing code
-}
-*/
+   }
+ */
 
 @end

@@ -12,18 +12,15 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
-
 @interface MilitaryServiceDatesEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * officerOrEnlisted;
-@property (nonatomic, retain) NSDate * dateDischarged;
-@property (nonatomic, retain) NSString * branch;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSDate * dateJoined;
-@property (nonatomic, retain) NSString * dischargeType;
+@property (nonatomic, retain) NSNumber *officerOrEnlisted;
+@property (nonatomic, retain) NSDate *dateDischarged;
+@property (nonatomic, retain) NSString *branch;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSDate *dateJoined;
+@property (nonatomic, retain) NSString *dischargeType;
 @property (nonatomic, retain) NSManagedObject *militaryService;
 
 @end

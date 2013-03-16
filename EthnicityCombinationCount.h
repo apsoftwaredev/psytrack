@@ -10,21 +10,15 @@
 #import <Foundation/Foundation.h>
 
 @interface EthnicityCombinationCount : NSObject {
-    
-     NSString *ethnicityCombinationStr_;
-     NSMutableSet *ethnicityCombinationMutableSet_;
+    NSString *ethnicityCombinationStr_;
+    NSMutableSet *ethnicityCombinationMutableSet_;
     int ethnicityCombinationCount_;
-    
-    
-    
 }
 
 @property (nonatomic, strong) NSString *ethnicityCombinationStr;
 @property (nonatomic, strong) NSMutableSet *ethnicityCombinationMutableSet;
 @property (nonatomic, assign) int ethnicityCombinationCount;
 
--(id)initWithEthnicityCombinationStr:(NSString *)ethnicityCombinationStrGiven ethnicityMutableSet:(NSMutableSet *)ethnicityMutableSetGiven;
-
-
+- (id) initWithEthnicityCombinationStr:(NSString *)ethnicityCombinationStrGiven ethnicityMutableSet:(NSMutableSet *)ethnicityMutableSetGiven;
 
 @end

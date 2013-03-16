@@ -12,16 +12,14 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ExistingAssessmentEntity, InstrumentEntity;
 
 @interface ExistingInstrumentEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * numberAdminstered;
-@property (nonatomic, retain) NSNumber * numberOfReportsWritten;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSNumber * administeredScoredAndReport;
+@property (nonatomic, retain) NSNumber *numberAdminstered;
+@property (nonatomic, retain) NSNumber *numberOfReportsWritten;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSNumber *administeredScoredAndReport;
 @property (nonatomic, retain) InstrumentEntity *instrument;
 @property (nonatomic, retain) ExistingAssessmentEntity *existingAssessment;
 

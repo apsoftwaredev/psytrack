@@ -12,22 +12,19 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
-
 @interface DegreeNameEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * degreeName;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSString *degreeName;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
 @property (nonatomic, retain) NSSet *degrees;
 @end
 
 @interface DegreeNameEntity (CoreDataGeneratedAccessors)
 
-- (void)addDegreesObject:(NSManagedObject *)value;
-- (void)removeDegreesObject:(NSManagedObject *)value;
-- (void)addDegrees:(NSSet *)values;
-- (void)removeDegrees:(NSSet *)values;
+- (void) addDegreesObject:(NSManagedObject *)value;
+- (void) removeDegreesObject:(NSManagedObject *)value;
+- (void) addDegrees:(NSSet *)values;
+- (void) removeDegrees:(NSSet *)values;
 
 @end

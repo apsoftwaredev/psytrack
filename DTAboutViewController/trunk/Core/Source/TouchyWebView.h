@@ -8,21 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-
 @protocol TouchyDelegate <NSObject>
 
 @optional
 
 - (void) touchAtPoint:(CGPoint)touchPoint;
 
-
 @end
 
-
-
-@interface TouchyWebView : UIWebView 
+@interface TouchyWebView : UIWebView
 {
-
 }
 
 @end

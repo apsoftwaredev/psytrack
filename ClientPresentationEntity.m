@@ -14,7 +14,6 @@
 #import "ClientInstrumentScoresEntity.h"
 #import "InterventionDeliveredEntity.h"
 
-
 @implementation ClientPresentationEntity
 
 @dynamic paid;
@@ -86,7 +85,5 @@
 @dynamic testSessionDelivered;
 @dynamic client;
 @dynamic batteries;
-
-
 
 @end

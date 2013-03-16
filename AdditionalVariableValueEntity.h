@@ -12,24 +12,22 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class AdditionalVariableEntity, AdditionalVariableNameEntity;
 
 @interface AdditionalVariableValueEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * variableValue;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSString *variableValue;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
 @property (nonatomic, retain) NSSet *additionalVariables;
 @property (nonatomic, retain) AdditionalVariableNameEntity *variableName;
 @end
 
 @interface AdditionalVariableValueEntity (CoreDataGeneratedAccessors)
 
-- (void)addAdditionalVariablesObject:(AdditionalVariableEntity *)value;
-- (void)removeAdditionalVariablesObject:(AdditionalVariableEntity *)value;
-- (void)addAdditionalVariables:(NSSet *)values;
-- (void)removeAdditionalVariables:(NSSet *)values;
+- (void) addAdditionalVariablesObject:(AdditionalVariableEntity *)value;
+- (void) removeAdditionalVariablesObject:(AdditionalVariableEntity *)value;
+- (void) addAdditionalVariables:(NSSet *)values;
+- (void) removeAdditionalVariables:(NSSet *)values;
 
 @end

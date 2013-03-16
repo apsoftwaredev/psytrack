@@ -12,7 +12,6 @@
 #import "ConsultationEntity.h"
 #import "FeeTypeEntity.h"
 
-
 @implementation FeeEntity
 
 @dynamic amount;
@@ -23,7 +22,5 @@
 @dynamic client;
 @dynamic feeType;
 @dynamic consultation;
-
-
 
 @end

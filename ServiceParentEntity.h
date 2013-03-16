@@ -13,14 +13,12 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ServiceCodeEntity;
 
 @interface ServiceParentEntity : TimeTrackEntity
 
-@property (nonatomic, retain) NSNumber * paperwork;
-@property (nonatomic, retain) NSNumber * batteryTask;
+@property (nonatomic, retain) NSNumber *paperwork;
+@property (nonatomic, retain) NSNumber *batteryTask;
 @property (nonatomic, retain) ServiceCodeEntity *serviceCode;
 
 @end

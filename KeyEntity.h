@@ -12,14 +12,11 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
-
 @interface KeyEntity : PTManagedObject
 
-@property (nonatomic, retain) NSData * keyF;
-@property (nonatomic, retain) NSDate * keyDate;
-@property (nonatomic, retain) NSString * keyString;
-@property (nonatomic, retain) NSData * dataF;
+@property (nonatomic, retain) NSData *keyF;
+@property (nonatomic, retain) NSDate *keyDate;
+@property (nonatomic, retain) NSString *keyString;
+@property (nonatomic, retain) NSData *dataF;
 
 @end

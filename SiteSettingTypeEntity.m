@@ -11,7 +11,6 @@
 #import "GrantEntity.h"
 #import "SiteEntity.h"
 
-
 @implementation SiteSettingTypeEntity
 
 @dynamic order;
@@ -19,8 +18,5 @@
 @dynamic settingTypeName;
 @dynamic site;
 @dynamic grants;
-
-
-
 
 @end

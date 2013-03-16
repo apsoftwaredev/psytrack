@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface UILabel (Helpers)
 
-+ (UILabel *)autosizedLabelToFitText:(NSString *)text withFont:(UIFont *)font constrainedToSize:(CGSize)size;
++ (UILabel *) autosizedLabelToFitText:(NSString *)text withFont:(UIFont *)font constrainedToSize:(CGSize)size;
 
 @end

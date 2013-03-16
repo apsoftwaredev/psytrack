@@ -12,23 +12,21 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class MembershipEntity;
 
 @interface MembershipOrganizationEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * organization;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSString *organization;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
 @property (nonatomic, retain) NSSet *memberships;
 @end
 
 @interface MembershipOrganizationEntity (CoreDataGeneratedAccessors)
 
-- (void)addMembershipsObject:(MembershipEntity *)value;
-- (void)removeMembershipsObject:(MembershipEntity *)value;
-- (void)addMemberships:(NSSet *)values;
-- (void)removeMemberships:(NSSet *)values;
+- (void) addMembershipsObject:(MembershipEntity *)value;
+- (void) removeMembershipsObject:(MembershipEntity *)value;
+- (void) addMemberships:(NSSet *)values;
+- (void) removeMemberships:(NSSet *)values;
 
 @end

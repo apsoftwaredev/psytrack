@@ -11,7 +11,6 @@
 #import "ExistingAssessmentEntity.h"
 #import "InstrumentEntity.h"
 
-
 @implementation ExistingInstrumentEntity
 
 @dynamic numberAdminstered;
@@ -20,7 +19,5 @@
 @dynamic administeredScoredAndReport;
 @dynamic instrument;
 @dynamic existingAssessment;
-
-
 
 @end

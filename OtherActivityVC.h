@@ -10,12 +10,7 @@
 #import <SensibleTableView/SensibleTableView.h>
 
 @interface OtherActivityVC : SCTableViewController<SCTableViewModelDelegate> {
-    
     SCArrayOfObjectsModel *objectsModel;
-    
-  
-    
 }
-
 
 @end

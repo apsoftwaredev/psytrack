@@ -13,7 +13,6 @@
 #import "PresentationEntity.h"
 #import "PublicationTypeEntity.h"
 
-
 @implementation PublicationEntity
 
 @dynamic shortT;
@@ -53,7 +52,5 @@
 @dynamic expertTestemony;
 @dynamic presentations;
 @dynamic teachingExperience;
-
-
 
 @end

@@ -12,15 +12,13 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class DemographicProfileEntity;
 
 @interface DevelopmentalDescriptorEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * descriptor;
-@property (nonatomic, retain) NSString * desc;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *descriptor;
+@property (nonatomic, retain) NSString *desc;
 @property (nonatomic, retain) DemographicProfileEntity *demographics;
 
 @end

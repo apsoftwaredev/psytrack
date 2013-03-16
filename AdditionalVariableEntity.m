@@ -13,7 +13,6 @@
 #import "ClientPresentationEntity.h"
 #import "DemographicProfileEntity.h"
 
-
 @implementation AdditionalVariableEntity
 
 @dynamic scale;
@@ -29,8 +28,5 @@
 @dynamic demographics;
 @dynamic clientPresentation;
 @dynamic variableName;
-
-
-
 
 @end

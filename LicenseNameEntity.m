@@ -11,7 +11,6 @@
 #import "LicenseEntity.h"
 #import "LicenseTypeEntity.h"
 
-
 @implementation LicenseNameEntity
 
 @dynamic order;
@@ -19,8 +18,5 @@
 @dynamic title;
 @dynamic licenses;
 @dynamic licenseType;
-
-
-
 
 @end

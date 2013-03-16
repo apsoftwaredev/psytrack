@@ -10,18 +10,18 @@
 
 @interface DTSingleQuestionContentView : UIView
 {
-	UILabel *_questionLabel;
-	UITextView *_answerTextView;
-	
-	NSString *_questionText;
-	NSString *_answerText;
-	
-	BOOL _firstLayoutDone;
+    UILabel *_questionLabel;
+    UITextView *_answerTextView;
+
+    NSString *_questionText;
+    NSString *_answerText;
+
+    BOOL _firstLayoutDone;
 }
 
 @property (nonatomic, copy) NSString *questionText;
 @property (nonatomic, copy) NSString *answerText;
 
-- (void)flashScrollIndicatorIfNecessary;
+- (void) flashScrollIndicatorIfNecessary;
 
 @end

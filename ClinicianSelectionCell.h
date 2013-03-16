@@ -10,20 +10,17 @@
 
 #import "ClinicianEntity.h"
 
-
-@interface ClinicianSelectionCell : SCObjectSelectionCell{
-
+@interface ClinicianSelectionCell : SCObjectSelectionCell {
     ClinicianEntity *clinicianObject_;
     BOOL hasChangedClinicians_;
     BOOL usePrescriber;
     BOOL multiSelect;
     NSMutableArray *cliniciansArray_;
-
 }
 
 @property (nonatomic,strong) NSMutableArray *cliniciansArray;
 @property (nonatomic,strong)  ClinicianEntity *clinicianObject;
 @property (nonatomic, readwrite)  BOOL hasChangedClinicians;
--(void)doneButtonTappedInDetailView:(NSManagedObject *)selectedObject selectedItems:(NSArray *)selectedItems withValue:(BOOL)hasValue;
+- (void) doneButtonTappedInDetailView:(NSManagedObject *)selectedObject selectedItems:(NSArray *)selectedItems withValue:(BOOL)hasValue;
 
 @end

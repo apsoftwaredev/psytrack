@@ -15,7 +15,6 @@
 #import "SupervisionReceivedEntity.h"
 #import "SupportActivityDeliveredEntity.h"
 
-
 @implementation TimeEntity
 
 @dynamic stopwatchRunning;
@@ -36,8 +35,5 @@
 @dynamic breaks;
 @dynamic supervisionReceived;
 @dynamic supervisionGiven;
-
-
-
 
 @end

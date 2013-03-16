@@ -38,106 +38,119 @@
 
 #pragma mark ReaderThumbFetch instance methods
 
-- (id)initWithRequest:(ReaderThumbRequest *)object
+- (id) initWithRequest:(ReaderThumbRequest *)object
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if ((self = [super initWithGUID:object.guid]))
-	{
-		request = object ;
-	}
+    if ( (self = [super initWithGUID:object.guid]) )
+    {
+        request = object;
+    }
 
-	return self;
+    return self;
 }
 
-- (void)cancel
+
+- (void) cancel
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	[[ReaderThumbCache sharedInstance] removeNullForKey:request.cacheKey];
+    [[ReaderThumbCache sharedInstance] removeNullForKey:request.cacheKey];
 
-	[super cancel];
+    [super cancel];
 }
 
-- (NSURL *)thumbFileURL
+
+- (NSURL *) thumbFileURL
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	NSString *cachePath = [ReaderThumbCache thumbCachePathForGUID:request.guid]; // Thumb cache path
+    NSString *cachePath = [ReaderThumbCache thumbCachePathForGUID:request.guid];     // Thumb cache path
 
-	NSString *fileName = [NSString stringWithFormat:@"%@.png", request.thumbName]; // Thumb file name
+    NSString *fileName = [NSString stringWithFormat:@"%@.png", request.thumbName];     // Thumb file name
 
-	return [NSURL fileURLWithPath:[cachePath stringByAppendingPathComponent:fileName]]; // File URL
+    return [NSURL fileURLWithPath:[cachePath stringByAppendingPathComponent:fileName]];     // File URL
 }
 
-- (void)main
+
+- (void) main
 {
 #ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
+    NSLog(@"%s", __FUNCTION__);
 #endif
 
-	if (self.isCancelled == YES) return;
+    if (self.isCancelled == YES)
+    {
+        return;
+    }
 
-	NSURL *thumbURL = [self thumbFileURL]; CGImageRef imageRef = NULL;
+    NSURL *thumbURL = [self thumbFileURL]; CGImageRef imageRef = NULL;
 
-	CGImageSourceRef loadRef = CGImageSourceCreateWithURL((__bridge CFURLRef)thumbURL, NULL);
+    CGImageSourceRef loadRef = CGImageSourceCreateWithURL( (__bridge CFURLRef)thumbURL, NULL );
 
-	if (loadRef != NULL) // Load the existing thumb image
-	{
-		imageRef = CGImageSourceCreateImageAtIndex(loadRef, 0, NULL); // Load it
+    if (loadRef != NULL)     // Load the existing thumb image
+    {
+        imageRef = CGImageSourceCreateImageAtIndex(loadRef, 0, NULL);         // Load it
 
-		CFRelease(loadRef); // Release CGImageSource reference
-	}
-	else // Existing thumb image not found - so create and queue up a thumb render operation on the work queue
-	{
-		ReaderThumbRender *thumbRender = [[ReaderThumbRender alloc] initWithRequest:request]; // Create a thumb render operation
+        CFRelease(loadRef);         // Release CGImageSource reference
+    }
+    else     // Existing thumb image not found - so create and queue up a thumb render operation on the work queue
+    {
+        ReaderThumbRender *thumbRender = [[ReaderThumbRender alloc] initWithRequest:request];         // Create a thumb render operation
 
-		[thumbRender setQueuePriority:self.queuePriority]; [thumbRender setThreadPriority:(self.threadPriority - 0.1)]; // Priority
+        [thumbRender setQueuePriority:self.queuePriority]; [thumbRender setThreadPriority:(self.threadPriority - 0.1)];         // Priority
 
-		if (self.isCancelled == NO) // We're not cancelled - so update things and add the render operation to the work queue
-		{
-			request.thumbView.operation = thumbRender; // Update the thumb view operation property to the new operation
+        if (self.isCancelled == NO)         // We're not cancelled - so update things and add the render operation to the work queue
+        {
+            request.thumbView.operation = thumbRender;             // Update the thumb view operation property to the new operation
 
-			[[ReaderThumbQueue sharedInstance] addWorkOperation:thumbRender]; // Queue the operation
-		}
+            [[ReaderThumbQueue sharedInstance] addWorkOperation:thumbRender];             // Queue the operation
+        }
 
-		 // Release ReaderThumbRender object
-	}
+        // Release ReaderThumbRender object
+    }
 
-	if (imageRef != NULL) // Create UIImage from CGImage and show it
-	{
-		UIImage *image = [UIImage imageWithCGImage:imageRef scale:request.scale orientation:0];
+    if (imageRef != NULL)     // Create UIImage from CGImage and show it
+    {
+        UIImage *image = [UIImage imageWithCGImage:imageRef scale:request.scale orientation:0];
 
-		CGImageRelease(imageRef); // Release the CGImage reference from the above thumb load code
+        CGImageRelease(imageRef);         // Release the CGImage reference from the above thumb load code
 
-		UIGraphicsBeginImageContextWithOptions(image.size, YES, request.scale); // Graphics context
+        UIGraphicsBeginImageContextWithOptions(image.size, YES, request.scale);         // Graphics context
 
-		[image drawAtPoint:CGPointZero]; // Decode and draw the image on this background thread
+        [image drawAtPoint:CGPointZero];         // Decode and draw the image on this background thread
 
-		UIImage *decoded = UIGraphicsGetImageFromCurrentImageContext(); // Newly decoded image
+        UIImage *decoded = UIGraphicsGetImageFromCurrentImageContext();         // Newly decoded image
 
-		UIGraphicsEndImageContext(); // Cleanup after the bitmap-based graphics drawing context
+        UIGraphicsEndImageContext();         // Cleanup after the bitmap-based graphics drawing context
 
-		[[ReaderThumbCache sharedInstance] setObject:decoded forKey:request.cacheKey]; // Update cache
+        [[ReaderThumbCache sharedInstance] setObject:decoded forKey:request.cacheKey];         // Update cache
 
-		if (self.isCancelled == NO) // Show the image in the target thumb view on the main thread
-		{
-			ReaderThumbView *thumbView = request.thumbView; // Target thumb view for image show
+        if (self.isCancelled == NO)         // Show the image in the target thumb view on the main thread
+        {
+            ReaderThumbView *thumbView = request.thumbView;             // Target thumb view for image show
 
-			NSUInteger targetTag = request.targetTag; // Target reference tag for image show
+            NSUInteger targetTag = request.targetTag;             // Target reference tag for image show
 
-			dispatch_async(dispatch_get_main_queue(), // Queue image show on main thread
-			^{
-				if (thumbView.targetTag == targetTag) [thumbView showImage:decoded];
-			});
-		}
-	}
+            dispatch_async(dispatch_get_main_queue(),             // Queue image show on main thread
+                           ^{
+                               if (thumbView.targetTag == targetTag)
+                               {
+                                   [thumbView showImage:decoded];
+                               }
+                           }
+
+
+                           );
+        }
+    }
 }
+
 
 @end

@@ -13,8 +13,6 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ClientPresentationEntity, InterventionModelEntity, InterventionTypeEntity, InterventionTypeSubtypeEntity, SupportActivityDeliveredEntity, TimeEntity;
 
 @interface InterventionDeliveredEntity : ServiceParentEntity
@@ -29,19 +27,19 @@
 
 @interface InterventionDeliveredEntity (CoreDataGeneratedAccessors)
 
-- (void)addClientPresentationsObject:(ClientPresentationEntity *)value;
-- (void)removeClientPresentationsObject:(ClientPresentationEntity *)value;
-- (void)addClientPresentations:(NSSet *)values;
-- (void)removeClientPresentations:(NSSet *)values;
+- (void) addClientPresentationsObject:(ClientPresentationEntity *)value;
+- (void) removeClientPresentationsObject:(ClientPresentationEntity *)value;
+- (void) addClientPresentations:(NSSet *)values;
+- (void) removeClientPresentations:(NSSet *)values;
 
-- (void)addRelatedToIndirectObject:(SupportActivityDeliveredEntity *)value;
-- (void)removeRelatedToIndirectObject:(SupportActivityDeliveredEntity *)value;
-- (void)addRelatedToIndirect:(NSSet *)values;
-- (void)removeRelatedToIndirect:(NSSet *)values;
+- (void) addRelatedToIndirectObject:(SupportActivityDeliveredEntity *)value;
+- (void) removeRelatedToIndirectObject:(SupportActivityDeliveredEntity *)value;
+- (void) addRelatedToIndirect:(NSSet *)values;
+- (void) removeRelatedToIndirect:(NSSet *)values;
 
-- (void)addModelsUsedObject:(InterventionModelEntity *)value;
-- (void)removeModelsUsedObject:(InterventionModelEntity *)value;
-- (void)addModelsUsed:(NSSet *)values;
-- (void)removeModelsUsed:(NSSet *)values;
+- (void) addModelsUsedObject:(InterventionModelEntity *)value;
+- (void) removeModelsUsedObject:(InterventionModelEntity *)value;
+- (void) addModelsUsed:(NSSet *)values;
+- (void) removeModelsUsed:(NSSet *)values;
 
 @end

@@ -11,19 +11,15 @@
 #import <UIKit/UIKit.h>
 
 @interface TwoButtonCell : ButtonCell  {
-
-
     UIButton *buttonTwo_;
     NSString *buttonTwoText;
-
-
 }
 
 @property (nonatomic,strong) NSString *buttonTwoText;
-@property (nonatomic,strong)IBOutlet UIButton *buttonTwo;
+@property (nonatomic,strong) IBOutlet UIButton *buttonTwo;
 
-- (void)initWithOneText:(NSString *)text twoText:(NSString *)twoText;
+- (void) initWithOneText:(NSString *)text twoText:(NSString *)twoText;
 
--(void)toggleButtonsWithButtonOneHidden:(BOOL)buttonOneHidden;
+- (void) toggleButtonsWithButtonOneHidden:(BOOL)buttonOneHidden;
 
 @end

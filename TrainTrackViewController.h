@@ -4,9 +4,9 @@
  *  Version: 1.05
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES 
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR 
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. 
+ *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
+ *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
+ *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
  *
  *  Created by Daniel Boice on 9/28/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -46,69 +46,42 @@
 #import "CommunityServiceVC.h"
 #import "OtherActivityVC.h"
 
-@interface TrainTrackViewController : UITableViewController < UITableViewDataSource, UITableViewDelegate , DTAboutViewControllerDelegate>{
-
-
+@interface TrainTrackViewController : UITableViewController < UITableViewDataSource, UITableViewDelegate, DTAboutViewControllerDelegate>{
     BigProgressViewWithBlockedView *prog;
 
-    
-    TimeTrackViewController *timeTrackViewController ;
+    TimeTrackViewController *timeTrackViewController;
     ExistingHoursViewController *existingHoursViewController;
-    
-        
-    ConsultationsViewController *consultationsViewController ;
-    
-         
-    CECreditsViewController *ceCreditsViewController ;
-    
-    CoursesTakenViewController *coursesTakenViewController ;
-    
-       
-    ConferencesAttendedVC *conferencesAttendedViewController ;
-    
-      
-        
-    TeachingExperienceVC *teachingExperienceVC ;
-    
-      
-        
-    PresentationsViewController *presentationsViewController ;
-    
-       
-    ExpertTestemonyVC *expertTestemonyVC ;
-    
-      
-    MediaAppearanceVC *mediaAppearanceVC ;
-    
-        
-    CommunityServiceVC *communitySerivceVC ;
-    
-      
-        
-    OtherActivityVC *otherActivityVC ;
+
+    ConsultationsViewController *consultationsViewController;
+
+    CECreditsViewController *ceCreditsViewController;
+
+    CoursesTakenViewController *coursesTakenViewController;
+
+    ConferencesAttendedVC *conferencesAttendedViewController;
+
+    TeachingExperienceVC *teachingExperienceVC;
+
+    PresentationsViewController *presentationsViewController;
+
+    ExpertTestemonyVC *expertTestemonyVC;
+
+    MediaAppearanceVC *mediaAppearanceVC;
+
+    CommunityServiceVC *communitySerivceVC;
+
+    OtherActivityVC *otherActivityVC;
     DrugViewController_iPhone *drugViewController_iPhone;
-      
-    ClinicianGroupsViewController *clinicianGroupsViewController ;
-    
-  
-        
-    ClientGroupsViewController *clientGroupsViewController ;
-    
-  
-    LCYLockSettingsViewController *lockSettingsVC ;
- 
-    DTAboutViewController *support ;
-    
-    DTAboutViewController *about ; 
-    
-    
-    
-    
-    
+
+    ClinicianGroupsViewController *clinicianGroupsViewController;
+
+    ClientGroupsViewController *clientGroupsViewController;
+
+    LCYLockSettingsViewController *lockSettingsVC;
+
+    DTAboutViewController *support;
+
+    DTAboutViewController *about;
 }
 
-
 @end
-
-
-

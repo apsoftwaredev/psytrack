@@ -11,7 +11,6 @@
 #import "ContinuingEducationProviderEntity.h"
 #import "ContinuingEducationTypeEntity.h"
 
-
 @implementation ContinuingEducationEntity
 
 @dynamic cost;
@@ -23,7 +22,5 @@
 @dynamic provider;
 @dynamic topics;
 @dynamic type;
-
-
 
 @end

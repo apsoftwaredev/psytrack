@@ -11,7 +11,6 @@
 #import "BatteryEntity.h"
 #import "ClientPresentationEntity.h"
 
-
 @implementation ClientBatteryNotesEntity
 
 @dynamic order;
@@ -19,7 +18,5 @@
 @dynamic countAsTrainingBattery;
 @dynamic clientPresentations;
 @dynamic battery;
-
-
 
 @end

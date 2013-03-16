@@ -10,7 +10,6 @@
 #import "AwardEntity.h"
 #import "ClinicianEntity.h"
 
-
 @implementation AwardEntity
 
 @dynamic awardedBy;
@@ -19,7 +18,5 @@
 @dynamic awardName;
 @dynamic desc;
 @dynamic clinician;
-
-
 
 @end

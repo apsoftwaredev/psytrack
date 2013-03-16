@@ -10,15 +10,11 @@
 #import "InfluenceEntity.h"
 #import "ClinicianEntity.h"
 
-
 @implementation InfluenceEntity
 
 @dynamic order;
 @dynamic notes;
 @dynamic influence;
 @dynamic clinician;
-
-
-
 
 @end

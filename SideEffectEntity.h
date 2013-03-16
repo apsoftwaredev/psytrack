@@ -12,21 +12,19 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class MedicationReviewEntity;
 
 @interface SideEffectEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * effect;
+@property (nonatomic, retain) NSString *effect;
 @property (nonatomic, retain) NSSet *medicationReview;
 @end
 
 @interface SideEffectEntity (CoreDataGeneratedAccessors)
 
-- (void)addMedicationReviewObject:(MedicationReviewEntity *)value;
-- (void)removeMedicationReviewObject:(MedicationReviewEntity *)value;
-- (void)addMedicationReview:(NSSet *)values;
-- (void)removeMedicationReview:(NSSet *)values;
+- (void) addMedicationReviewObject:(MedicationReviewEntity *)value;
+- (void) removeMedicationReviewObject:(MedicationReviewEntity *)value;
+- (void) addMedicationReview:(NSSet *)values;
+- (void) removeMedicationReview:(NSSet *)values;
 
 @end

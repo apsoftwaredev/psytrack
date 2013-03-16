@@ -10,12 +10,7 @@
 #import <SensibleTableView/SensibleTableView.h>
 
 @interface DemographicReportViewController : SCViewController <SCTableViewControllerDelegate, SCTableViewModelDelegate>{
-    
-    
-   
-    
-     NSString *clinicianName_;
-    
+    NSString *clinicianName_;
 }
 
 @property (nonatomic, strong) NSString *clinicianName;

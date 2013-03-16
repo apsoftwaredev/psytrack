@@ -27,27 +27,27 @@
 
 @interface ReaderDocument : NSObject <NSCoding>
 {
-@private // Instance variables
+    @private // Instance variables
 
-	NSString *_guid;
+    NSString *_guid;
 
-	NSDate *_fileDate;
+    NSDate *_fileDate;
 
-	NSDate *_lastOpen;
+    NSDate *_lastOpen;
 
-	NSNumber *_fileSize;
+    NSNumber *_fileSize;
 
-	NSNumber *_pageCount;
+    NSNumber *_pageCount;
 
-	NSNumber *_pageNumber;
+    NSNumber *_pageNumber;
 
-	NSMutableIndexSet *_bookmarks;
+    NSMutableIndexSet *_bookmarks;
 
-	NSString *_fileName;
+    NSString *_fileName;
 
-	NSString *_password;
+    NSString *_password;
 
-	NSURL *_fileURL;
+    NSURL *_fileURL;
 }
 
 @property (nonatomic, retain, readonly) NSString *guid;
@@ -61,14 +61,14 @@
 @property (nonatomic, retain, readonly) NSString *password;
 @property (nonatomic, retain, readonly) NSURL *fileURL;
 
-+ (ReaderDocument *)withDocumentFilePath:(NSString *)filename password:(NSString *)phrase checkArchive:(BOOL)checkArchive;
++ (ReaderDocument *) withDocumentFilePath:(NSString *)filename password:(NSString *)phrase checkArchive:(BOOL)checkArchive;
 
-+ (ReaderDocument *)unarchiveFromFileName:(NSString *)filename password:(NSString *)phrase;
++ (ReaderDocument *) unarchiveFromFileName:(NSString *)filename password:(NSString *)phrase;
 
-- (id)initWithFilePath:(NSString *)fullFilePath password:(NSString *)phrase;
+- (id) initWithFilePath:(NSString *)fullFilePath password:(NSString *)phrase;
 
-- (void)saveReaderDocument;
+- (void) saveReaderDocument;
 
-- (void)updateProperties;
+- (void) updateProperties;
 
 @end

@@ -12,24 +12,22 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class ServiceParentEntity;
 
 @interface ServiceCodeEntity : PTManagedObject
 
-@property (nonatomic, retain) NSString * code;
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * notes;
-@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString *code;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *notes;
+@property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSSet *services;
 @end
 
 @interface ServiceCodeEntity (CoreDataGeneratedAccessors)
 
-- (void)addServicesObject:(ServiceParentEntity *)value;
-- (void)removeServicesObject:(ServiceParentEntity *)value;
-- (void)addServices:(NSSet *)values;
-- (void)removeServices:(NSSet *)values;
+- (void) addServicesObject:(ServiceParentEntity *)value;
+- (void) removeServicesObject:(ServiceParentEntity *)value;
+- (void) addServices:(NSSet *)values;
+- (void) removeServices:(NSSet *)values;
 
 @end

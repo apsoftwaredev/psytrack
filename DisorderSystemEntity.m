@@ -10,7 +10,6 @@
 #import "DisorderSystemEntity.h"
 #import "DisorderEntity.h"
 
-
 @implementation DisorderSystemEntity
 
 @dynamic abbreviatedName;
@@ -18,7 +17,5 @@
 @dynamic classificationSystem;
 @dynamic desc;
 @dynamic disorders;
-
-
 
 @end

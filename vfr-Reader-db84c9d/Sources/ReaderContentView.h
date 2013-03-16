@@ -35,34 +35,34 @@
 
 @required // Delegate protocols
 
-- (void)contentView:(ReaderContentView *)contentView touchesBegan:(NSSet *)touches;
+- (void) contentView:(ReaderContentView *)contentView touchesBegan:(NSSet *)touches;
 
 @end
 
 @interface ReaderContentView : UIScrollView <UIScrollViewDelegate>
 {
-@private // Instance variables
+    @private // Instance variables
 
-	ReaderContentPage *theContentView;
+    ReaderContentPage *theContentView;
 
-	ReaderContentThumb *theThumbView;
+    ReaderContentThumb *theThumbView;
 
-	UIView *theContainerView;
+    UIView *theContainerView;
 
-	CGFloat zoomAmount;
+    CGFloat zoomAmount;
 }
 
 @property (nonatomic, assign, readwrite) id <ReaderContentViewDelegate> message;
 
-- (id)initWithFrame:(CGRect)frame fileURL:(NSURL *)fileURL page:(NSUInteger)page password:(NSString *)phrase;
+- (id) initWithFrame:(CGRect)frame fileURL:(NSURL *)fileURL page:(NSUInteger)page password:(NSString *)phrase;
 
-- (void)showPageThumb:(NSURL *)fileURL page:(NSInteger)page password:(NSString *)phrase guid:(NSString *)guid;
+- (void) showPageThumb:(NSURL *)fileURL page:(NSInteger)page password:(NSString *)phrase guid:(NSString *)guid;
 
-- (id)singleTap:(UITapGestureRecognizer *)recognizer;
+- (id) singleTap:(UITapGestureRecognizer *)recognizer;
 
-- (void)zoomIncrement;
-- (void)zoomDecrement;
-- (void)zoomReset;
+- (void) zoomIncrement;
+- (void) zoomDecrement;
+- (void) zoomReset;
 
 @end
 
@@ -74,7 +74,7 @@
 
 @interface ReaderContentThumb : ReaderThumbView
 {
-@private // Instance variables
+    @private // Instance variables
 }
 
 @end

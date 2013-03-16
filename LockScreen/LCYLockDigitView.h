@@ -11,9 +11,9 @@
 extern const CGFloat kDigitViewWidth;
 extern const CGFloat kDigitViewHeight;
 
-@interface LCYLockDigitView : UIView 
+@interface LCYLockDigitView : UIView
 {
-	BOOL isFilled_;
+    BOOL isFilled_;
 }
 
 @property (nonatomic, assign) BOOL isFilled;

@@ -10,15 +10,11 @@
 #import <Foundation/Foundation.h>
 
 @interface DemographicEducationCounts : NSObject {
-    
-     NSMutableArray *educationMutableArray_;
-    
-    
+    NSMutableArray *educationMutableArray_;
 }
 
-@property (nonatomic, strong)NSMutableArray *educationMutableArray;
+@property (nonatomic, strong) NSMutableArray *educationMutableArray;
 
-@property (nonatomic, assign)NSUInteger notSelectedCountUInteger;
-
+@property (nonatomic, assign) NSUInteger notSelectedCountUInteger;
 
 @end

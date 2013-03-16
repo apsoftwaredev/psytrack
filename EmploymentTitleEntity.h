@@ -12,23 +12,21 @@
 #import "PTManagedObjectContext.h"
 #import "PTManagedObject.h"
 
-
-
 @class EmploymentPositionEntity;
 
 @interface EmploymentTitleEntity : PTManagedObject
 
-@property (nonatomic, retain) NSNumber * order;
-@property (nonatomic, retain) NSString * jobTitle;
-@property (nonatomic, retain) NSString * desc;
+@property (nonatomic, retain) NSNumber *order;
+@property (nonatomic, retain) NSString *jobTitle;
+@property (nonatomic, retain) NSString *desc;
 @property (nonatomic, retain) NSSet *employmentPositions;
 @end
 
 @interface EmploymentTitleEntity (CoreDataGeneratedAccessors)
 
-- (void)addEmploymentPositionsObject:(EmploymentPositionEntity *)value;
-- (void)removeEmploymentPositionsObject:(EmploymentPositionEntity *)value;
-- (void)addEmploymentPositions:(NSSet *)values;
-- (void)removeEmploymentPositions:(NSSet *)values;
+- (void) addEmploymentPositionsObject:(EmploymentPositionEntity *)value;
+- (void) removeEmploymentPositionsObject:(EmploymentPositionEntity *)value;
+- (void) addEmploymentPositions:(NSSet *)values;
+- (void) removeEmploymentPositions:(NSSet *)values;
 
 @end
