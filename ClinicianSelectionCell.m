@@ -62,17 +62,7 @@
 - (void)didSelectCell
 {
     
-//    NSString *clinicianKeyStr=[self.objectBindings valueForKey:@"92"];
-    
-    
-    
-    
-    //    NSManagedObjectContext *managedObjectContext=[(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-    //Create a class definition for the client Entity
-    
-   
-    
-    
+  
     NSString * clinicianViewControllerNibName=@"ClinicianViewController";
    
     
@@ -136,25 +126,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
     }
     
     
-
-//    for ( int i=0;i< self.ownerTableViewModel.viewController.navigationController.viewControllers.count;i++) {
-//        id objectInArray=(id)[self.ownerTableViewModel.viewController.navigationController.viewControllers objectAtIndex:i];
-//        
-//               if ([objectInArray isKindOfClass:[ClinicianViewController class]]) {
-//            
-//            clinicianViewController=objectInArray;
-//            break;
-//        }
-//        
-//    }    
-    
-   
-   
-    
-    
-    
-    
-    
+ 
     
     [self.ownerTableViewModel.viewController.navigationController pushViewController:clinicianViewController animated:YES];
 
@@ -225,31 +197,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
     multiSelect=(BOOL)[(NSNumber *)[self.objectBindings valueForKey:@"93"]boolValue];
     
     self.allowMultipleSelection=multiSelect;
-    //    NSManagedObjectContext *managedObjectContext=(NSManagedObjectContext *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-    //    
-    //    
-    //    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    //    
-    //    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ClientEntity" inManagedObjectContext:managedObjectContext];
-    //    [fetchRequest setEntity:entity];
-    //    
-    //    NSError *error = nil;
-    //    NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    //    if (fetchedObjects == nil) {
-    //        
-    //    }
-    //    NSMutableArray *arrayWithFetchedWithoutAlreadySelected=[NSMutableArray arrayWithArray:fetchedObjects];
-    
-    
-    
-    
-    //    if (!hasChangedClients && [self.boundObject valueForKey:@"client"]) {
-    //               
-    //      
-    //    
-    //      
-    
-    
+
     if (!hasChangedClinicians_) {
         NSString *clinicianKeyStr=[self.objectBindings valueForKey:@"92"];
         if (!multiSelect) 
@@ -305,50 +253,9 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
         }
     }
     
-    //        
-    //    }
-    //           }
-    //   
-    //        if(!hasChangedClients){
-    //        for(id obj in alreadySelectedClients) { 
-    //            if(obj!=clientObject)
-    //                [arrayWithFetchedWithoutAlreadySelected removeObject:obj];
-    //            
-    //        }
-    //    }
-    //    self.items=arrayWithFetchedWithoutAlreadySelected;
-    //    if (!clientObject.isDeleted) {
-    //        self.selectedItemIndex=(NSNumber*)[NSNumber numberWithInteger:[self.items indexOfObject:clientObject]];
-    
-    
-    
-    //    }
-    
-    
+     
 }
-//-(NSString *)clientIDCodeString{
-//
-//    NSString *clientIDCodeString=[NSString string];
-//    NSNumber *selectedIndex;
-//  
-//    
-//    int itemsCount=self.items.count;
-//    int selecteIndexIntValue=[selectedIndex intValue];
-//    selecteIndexIntValue=selecteIndexIntValue+1;
-//    if ((clientObject )&&(selecteIndexIntValue>-1 ) && (itemsCount>=1 )&& (selecteIndexIntValue <= itemsCount)) 
-//    {
-//       
-//       
-//        
-//       clientIDCodeString = (NSString *)[clientObject valueForKey:@"clientIDCode"];
-//        
-//
-//    }
-// 
-//
-//    return clientIDCodeString;
-//
-//}
+
 
 -(void)doneButtonTappedInDetailView:(ClinicianEntity *)selectedObject selectedItems:(NSArray *)selectedItems withValue:(BOOL)hasValue{
     
@@ -362,24 +269,13 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
    
     self.clinicianObject=(ClinicianEntity *) selectedObject;
     self.cliniciansArray=[NSMutableArray arrayWithArray:selectedItems];
- 
-    //    [self.boundObject setValue:selectedObject forKey:@"client"];
-    
-    
-    
     
     if (hasValue) {
         
         
         self.hasChangedClinicians=hasValue;
         
-        
-        
-//        NSIndexPath *myIndexPath=(NSIndexPath *)[self.ownerTableViewModel indexPathForCell:self];
-//        
-//        SCTableViewSection *clinicianSelectionCellOwnerSection=(SCTableViewSection *)[self.ownerTableViewModel sectionAtIndex:(NSInteger )myIndexPath.section ];
-        
-        
+     
         if (multiSelect) 
         {
             
@@ -429,7 +325,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
         else
         {
                 self.label.text=[NSString string];
-                //         self.selectedItemIndex=[NSNumber numberWithInteger:-1];
+ 
         }
         
     }   
@@ -440,14 +336,7 @@ else if (cliniciansArray_ &&cliniciansArray_.count){
 {
 	if(!self.needsCommit)
 		return;
-    
-    
-    //    NSObject *selectedObject = nil;
-    //    int indexInt = [self.selectedItemIndex intValue] ;
-    
-    //    if((indexInt >= 0) &&(indexInt<=self.items.count+1)&&self.items.count>0){
-    //        selectedObject = [self.items objectAtIndex:indexInt];
-    
+   
      NSString *clinicianKeyStr=[self.objectBindings valueForKey:@"92"];
     
     

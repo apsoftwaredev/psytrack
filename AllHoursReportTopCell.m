@@ -165,13 +165,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     shiftIndirectHoursHeaderDown=shiftDirectHoursFooterDown;
     shiftSupportDown=shiftIndirectHoursHeaderDown;
     shiftSupervisionDown=shiftSupportDown+supportMoreNeededHeight;
-//    shiftOverallHoursFooterDown=shiftSupervisionDown+supervisionMoreNeededHeight;
-//    shiftContainerForSignaturesViewAndSupervisorSummariesDownTo=shiftOverallHoursFooterDown+overallHoursFooter.frame.size.height+15;
-    
-    
-    
-    
-    
+  
     self.supervisionReceivedTypesTableView.transform=CGAffineTransformIdentity;
     
     supervisionFrame.origin.y=supervisionFrame.origin.y+shiftSupervisionDown;
@@ -451,7 +445,6 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     self.interventionTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.interventionTypesTableView];
     
-//    interventionTableViewModel_.delegate=self;
     
     interventionTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tableModel, SCTableViewSection *section, NSUInteger sectionIndex)
     {
@@ -580,13 +573,10 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
 
     };
-    //
     
     SCClassDefinition *typesDef=[SCClassDefinition definitionWithClass:[TrackTypeWithTotalTimes class] autoGeneratePropertyDefinitions:YES];
     
     NSArray *fetchedInterventionObjects =  [self fetchObjectsFromEntity:(NSString *)@"InterventionTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"subTypes",@"subTypes.interventionsDelivered.time", @"subTypes.interventionsDelivered.trainingProgram",@"subTypes.existingInterventions",@"subTypes.existingInterventions.programCourse",nil]];
-    //
-//    SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"order" sortAscending:YES filterPredicate:nil];
     
     for (InterventionTypeEntity *interventionType in fetchedInterventionObjects) {
         
@@ -628,19 +618,9 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *interventionsSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:interventionType.interventionType footerNotes:interventionTypeWithTotalTimes.monthlyLogNotes sectionTotalStr: interventionTypeWithTotalTimes.totalToDateStr items:subTypeWithTotalsItemsArray itemsDefinition:typesDef];
         
-        //        NSString *monthlyLogNotes=[interventionType monthlyLogNotesForMonth:self.monthToDisplay clinician:self.clinician];
-        
-        
-        
-//        interventionsSection.dataFetchOptions=dataFetchOptions;
-        
         
         interventionsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
         {
-            // Create & return a custom cell based on the cell in ContactOverviewCell.xib
-            
-            
-            //            NSString *bindingsString = @"20:interventionSubType;21:self.monthToDisplay"; // 1,2,3 are the control tags
             
             NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"interventionSubType", nil] forKeys:[NSArray arrayWithObjects:@"20", nil]];
             
@@ -664,7 +644,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     self.assessmentTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.assessmentTypesTableView];
     
-//    assessmentTableViewModel_.delegate=self;
+
     assessmentTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tableModel, SCTableViewSection *section, NSUInteger sectionIndex)
     {
         
@@ -1004,23 +984,10 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *supportObjectsSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:nil footerNotes:totalsObject.supportMonthlyNotes sectionTotalStr:nil items:supportActivitytTypesWithTotalsItemsArray itemsDefinition:typesDef];
     
-    //        NSString *monthlyLogNotes=[interventionType monthlyLogNotesForMonth:self.monthToDisplay clinician:self.clinician];
-    
-    
-    
-    
-    
-    
-//    supportObjectsSection.dataFetchOptions=dataFetchOptions;
-    
     
     supportObjectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
     {
-        // Create & return a custom cell based on the cell in ContactOverviewCell.xib
-        
-        
-        //            NSString *bindingsString = @"20:interventionSubType;21:self.monthToDisplay"; // 1,2,3 are the control tags
-        
+         
         NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"supportType", nil] forKeys:[NSArray arrayWithObjects:@"20", nil]];
         
         AllHoursReportBottomCell *allHoursBottomCell = [AllHoursReportBottomCell cellWithText:nil objectBindings:bindingsDictionary nibName:bottomCellNibName];
@@ -1039,7 +1006,6 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     self.supervisionTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.supervisionReceivedTypesTableView];
     
-//    supervisionTableViewModel_.delegate=self;
     
     supervisionTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tableModel, SCTableViewSection *section, NSUInteger sectionIndex)
     {
@@ -1215,20 +1181,10 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
         
         SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *supervisionSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:supervisionType.supervisionType footerNotes:supervisionTypeWithTotalTimes.monthlyLogNotes sectionTotalStr: supervisionTypeWithTotalTimes.totalToDateStr items:subTypeWithTotalsItemsArray itemsDefinition:typesDef];
         
-        //        NSString *monthlyLogNotes=[interventionType monthlyLogNotesForMonth:self.monthToDisplay clinician:self.clinician];
-        
-        
-        
-//        supervisionSection.dataFetchOptions=dataFetchOptions;
-        
-        
+       
         supervisionSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
         {
-            // Create & return a custom cell based on the cell in ContactOverviewCell.xib
-            
-            
-            //            NSString *bindingsString = @"20:interventionSubType;21:self.monthToDisplay"; // 1,2,3 are the control tags
-            
+           
             NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"supervisionSubType", nil] forKeys:[NSArray arrayWithObjects:@"20", nil]];
             
             AllHoursReportBottomCell *allHoursBottomCell = [AllHoursReportBottomCell cellWithText:nil objectBindings:bindingsDictionary nibName:bottomCellNibName];
@@ -1252,14 +1208,6 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT=1110;
     
     
     
-    
-    
-    //    self.interventionTypesTableView.autoresizingMask=UIViewAutoresizingFlexibleHeight;
-    
-    
-   
-    
-   
     
     self.interventionHoursTotalHoursLabel.text=totalsObject.interventionTotalToDateStr;
     self.assessmentHoursTotalHoursLabel.text=totalsObject.assessmentTotalToDateStr;

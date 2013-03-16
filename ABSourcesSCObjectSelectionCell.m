@@ -55,17 +55,7 @@
         
  
     
-        
-       
-   
-//    if (self.items.count&&![self.selectedItemIndex isEqualToNumber:[NSNumber numberWithInt:-1]]) {
-//        MySource *ptABSource=[self.items objectAtIndex:[self.selectedItemIndex intValue]];
-//        selectedName=[NSString stringWithFormat:@"%@",ptABSource.name];
-//        
-//    }
-  
-
-        
+      
   
     
     self.label.text=selectedName;
@@ -77,13 +67,5 @@
 }
 
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

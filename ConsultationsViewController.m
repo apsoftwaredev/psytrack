@@ -435,13 +435,7 @@
     //create a property definition for the notes property in the referral class definition
     SCPropertyDefinition *referralNotesPropertyDef = [referralDef propertyDefinitionWithName:@"notes"];
     referralNotesPropertyDef.type=SCPropertyTypeTextView;
-//    referralNotesPropertyDef.type=SCPropertyTypeCustom;
-//    referralNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-//    
-//    NSDictionary *encryReferralNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-//    
-//    
-//    referralNotesPropertyDef.objectBindings=encryReferralNotesTVCellKeyBindingsDic;
+
     referralNotesPropertyDef.title=@"Notes";
 //    referralNotesPropertyDef.autoValidate=NO;
     

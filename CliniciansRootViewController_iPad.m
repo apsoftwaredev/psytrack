@@ -22,14 +22,14 @@
 #import "ButtonCell.h"
 #import "ClinicianEntity.h"
 #import "TrainTrackViewController.h"
-#import "EncryptedSCTextViewCell.h"
+
 #import "CliniciansDetailViewController_iPad.h"
 
 #import "CliniciansViewController_Shared.h"
 #import "LookupRemoveLinkButtonCell.h"
 #import "AddViewABLinkButtonCell.h"
 @implementation CliniciansRootViewController_iPad
-//@synthesize cliniciansDetailViewController_iPad=__cliniciansDetailViewController_iPad;
+@synthesize cliniciansBarButtonItem=cliniciansBarButtonItem_;
 
 
 
@@ -42,7 +42,6 @@
     self.navigationBarType = SCNavigationBarTypeEditLeft;
     
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
-//    [self.popoverController.contentViewController.view setBackgroundColor:];
     managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
    
     
@@ -55,12 +54,6 @@
     [self.tableView setBackgroundView:nil];
     [self.tableView setBackgroundView:[[UIView alloc] init]];
     [self.view setBackgroundColor:appDelegate.window.backgroundColor];
-//      
-//  self.tableViewModel.delegate=self;
-   
-
-
-//    objectsModel.delegate=self;
 
     objectsModel.addButtonItem=objectsModel.detailViewController.navigationItem.rightBarButtonItem;
     
@@ -73,9 +66,6 @@
     clinicianDetailViewController.navigationBarType=SCNavigationBarTypeAddRight;
     
     objectsModel.addButtonItem=clinicianDetailViewController.navigationItem.rightBarButtonItem;
-//    self.tableView.backgroundColor=[UIColor clearColor]; // Make the table view application backgound color (turquose)
-  
-//    self.tableView.backgroundColor=[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]; // Make the table view application backgound color (turquose)
 
    
     NSString *imageNameStr=nil;
@@ -92,7 +82,7 @@
     [self.searchBar setScopeBarBackgroundImage:menueBarImage];
     
     
-    cliniciansBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"Clinicians" style:UIBarButtonItemStylePlain target:self action:@selector(displayPopover:)];
+    self.cliniciansBarButtonItem=[[UIBarButtonItem alloc]initWithTitle:@"Clinicians" style:UIBarButtonItemStylePlain target:self action:@selector(displayPopover:)];
     
    
     objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
@@ -112,16 +102,6 @@
 
 -(void)viewDidUnload{
     [super viewDidUnload];
-    
-//    self.tableModel=nil;
-    
-    
-    
-    
-    
-//    CFRelease(addressBook);
-//    CFRelease(existingPersonRef);
-  
     
     
     currentDetailTableViewModel_=nil;
@@ -151,27 +131,7 @@
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath{
     [super tableViewModel:tableViewModel valueChangedForRowAtIndexPath:indexPath];
-//
-//   
-//    if (tableViewModel.tag==0||tableViewModel.tag==1) {
-////        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-//         
-////        if (cell.tag<) {
-////            UIView *viewLong =[cell viewWithTag:51];
-////            if ([viewLong isKindOfClass:[UILabel class]]) {
-////                
-////                UILabel *lastNameLabel =(UILabel *)viewLong;
-////                if ([lastNameLabel.text isEqualToString:@"Last Name:"]) {
-////                    UITextField *lastNameField=(UITextField *)[cell viewWithTag:50];
-////                    NSString *lastNameStr=lastNameField.text;
-////                    if (lastNameStr.length) {
-////                        
-//                        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:[tableViewModel.masterModel indexPathForCell:currentTableViewCell].section];
-////                        unsigned short lastNameFirstChar=[lastNameStr characterAtIndex:0];
-////                        if ((unsigned short)[section.headerTitle characterAtIndex:0]!=(unsigned short)lastNameFirstChar) {
-//            
-//        
-//        
+       
         SCTableViewCell *cell=nil;
         if (indexPath.row !=NSNotFound) {
            cell =(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
@@ -186,20 +146,11 @@
             }
             
             
-//            if (!self.searchBar.selectedScopeButtonIndex==0) {
-//                [self.searchBar setSelectedScopeButtonIndex:0];
-//                objectsModel.dataFetchOptions.filterPredicate=nil;
-//            }
+
             [tableViewModel.masterModel reloadBoundValues];
             [tableViewModel.masterModel.modeledTableView reloadData];
             
         }
-//
-//                     
-//
-//    }
-//
-//
 }
 
 
@@ -228,10 +179,7 @@
         [numericCell.textLabel sizeToFit];
         numericCell.textField.textAlignment=UITextAlignmentRight;
         numericCell.textField.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin ;
-        //       CGRect textFieldFrame=numericCell.textField.textInputView.frame;
-        //        textFieldFrame.size.width=50;
-        
-        
+       
     }
 }
 
@@ -337,11 +285,7 @@
                     
                     int addressBookRecordIdentifier=(int )[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"]intValue]; 
                     
-                    
-                    
-                    //                NSString *buttonText;
-                    
-                    
+                 
                     LookupRemoveLinkButtonCell *addViewButtonCell=(LookupRemoveLinkButtonCell *)cell;
                     
                     
@@ -376,35 +320,15 @@
         
         
     {
-//        UIView *viewOne = [cell viewWithTag:51];
-//        UIView *viewSendReports =[cell viewWithTag:40];
+
         UIView *sliderView = [cell viewWithTag:14];
         UIView *scaleView = [cell viewWithTag:70];
         switch (cell.tag) {
-//            case 0:
-//                
-//                if([viewOne isKindOfClass:[UILabel class]])
-//                {   
-//                    UILabel *emailDesclabel = (UILabel *)viewOne;
-//                    emailDesclabel.text=@"Email Description";
-//                    
-//                }
-//                break;
+
             case 1:
                 
                 
-//                if ([viewOne isKindOfClass:[UILabel class]]) {
-//                    
-//                    UILabel *emailLabel =(UILabel *)viewOne;
-//                    emailLabel.text=@"Email Address:";
-//                    
-//                    UITextField *emailAddressField =(UITextField *)[cell viewWithTag:3];
-//                    
-//                    emailAddressField.keyboardType=UIKeyboardTypeEmailAddress;
-//                    emailAddressField.autocapitalizationType=UITextAutocapitalizationTypeNone;
-//                    
-//                }
-                
+             
                 if ([scaleView isKindOfClass:[UISegmentedControl class]]) {
                     
                     UILabel *fluencyLevelLabel =(UILabel *)[cell viewWithTag:71];
@@ -414,17 +338,7 @@
                 
                 break;
                 
-//            case 2:
-//                if ([viewSendReports isKindOfClass:[UISwitch class]]) {
-//                    
-//                    UILabel *emailLabel =(UILabel *)[cell viewWithTag:41];
-//                    emailLabel.text=@"Send Reports:";  
-//                    
-//                }
-//                
-//                break;
-//                
-                
+               
                 
             case 3:
                 
@@ -494,7 +408,7 @@
     
     
     
-    self.tableViewModel.detailViewController.navigationItem.leftBarButtonItem= cliniciansBarButtonItem;
+    self.tableViewModel.detailViewController.navigationItem.leftBarButtonItem= cliniciansBarButtonItem_;
     
 
 
@@ -536,180 +450,12 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     }
     [super tableViewModel:tableViewModel didAddSectionAtIndex:index];
     
-//    if (index==6) {
-//        
-//        
-//        
-//        
-//        SCTableViewSection *sectionOne=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-//        SCTableViewCell *sectionOneClicianCell=(SCTableViewCell *)[sectionOne cellAtIndex:0];
-//        NSManagedObject *cellManagedObject=(NSManagedObject *)sectionOneClicianCell.boundObject;
-//        
-//        if ([cellManagedObject isKindOfClass:[ClinicianEntity class]]) {
-//            ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
-//            
-//            
-//            
-//            if ([clinicianObject.myInformation isEqualToNumber:[NSNumber numberWithBool:YES]]) {
-//                
-//                [tableViewModel removeSectionAtIndex:1];
-//                [tableViewModel removeSectionAtIndex:4];
-//                
-//            }
-//            
-//            //                NSArray *addressBookGroupsArray=[NSArray arrayWithArray:[ self addressBookGroupsArray]];
-//            //                
-//            
-//            
-//            
-//            
-//            
-//            self.abGroupObjectSelectionCell=[[ABGroupSelectionCell alloc]initWithClinician:(ClinicianEntity *)clinicianObject];    
-//            
-//            abGroupObjectSelectionCell_.tag=429;
-//            
-//            [sectionOne addCell:abGroupObjectSelectionCell_];
-//        }
-//        
-//        
-//        
-//    }
+
     
  [self setSectionHeaderColorWithSection:(SCTableViewSection *)section color:[UIColor whiteColor]]; 
     
     
 }
-
-//-(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    BOOL valid = TRUE;
-//    
-////    SCTableViewCell *cell = [tableViewModel cellAtIndexPath:indexPath];
-//    
-//    
-//    
-////    if (tableViewModel.tag==4) {
-////        UILabel *emaiLabel=(UILabel *)[cell viewWithTag:51];
-////        if (emaiLabel.text==@"Email Address:")
-////        {
-////            UITextField *emailField=(UITextField *)[cell viewWithTag:50];
-////            
-////            if(emailField.text.length){
-////                valid=[self validateEmail:emailField.text];
-////                
-////                
-////            }
-////            else
-////            {
-////                valid=FALSE;
-////            }
-////        }
-////        
-////        
-////        
-////    }
-//    
-//    
-//    
-//    
-//    if (tableViewModel.tag==1||tableViewModel.tag==0){
-//        
-//        
-//        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
-//        
-//        SCTextFieldCell *lastNameCell =(SCTextFieldCell *)[section cellAtIndex:3];
-//        SCTextFieldCell *firstNameCell =(SCTextFieldCell *)[section cellAtIndex:1];
-//        
-//        UITextField *lastNameField =(UITextField *)[lastNameCell viewWithTag:50];
-//        UITextField *firstNameField =(UITextField *)[firstNameCell viewWithTag:50];
-//        
-//        
-//        
-//        if ( firstNameField.text.length && lastNameField.text.length) {
-//            
-//            valid=TRUE;
-//            
-//            
-//        }
-//        else
-//        {
-//            valid=FALSE;
-//        }
-//    }
-//    
-//    
-//    
-////    SCObjectSection *objectSection = (SCObjectSection *)[tableViewModel sectionAtIndex:0];
-////    SCTextFieldCell *zipFieldCell = (SCTextFieldCell *)[objectSection cellForPropertyName:@"zipCode"];
-//    if (tableViewModel.tag==3&& tableViewModel.sectionCount){
-//        
-//        
-//        
-//        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
-//        
-//        if (section.cellCount>1) {
-//            SCTableViewCell *notesCell =(SCTableViewCell *)[section cellAtIndex:1];
-//            NSManagedObject *notesManagedObject=(NSManagedObject *)notesCell.boundObject;
-//            
-//            
-//            if ( notesManagedObject &&[notesManagedObject respondsToSelector:@selector(entity)]&& [notesManagedObject.entity.name isEqualToString:@"LogEntity"]&&[notesCell isKindOfClass:[EncryptedSCTextViewCell class]]) {
-//                EncryptedSCTextViewCell *encryptedNoteCell=(EncryptedSCTextViewCell *)notesCell;
-//                
-//                if (encryptedNoteCell.textView.text.length) 
-//                {
-//                    valid=TRUE;
-//                }
-//                else 
-//                {
-//                    valid=FALSE;
-//                }
-//                
-//            }
-//            
-//            
-//        }
-//        
-//        
-//    }
-//
-//    if (tableViewModel.tag==4&& tableViewModel.sectionCount){
-//        
-//        
-//        
-//        SCTableViewSection *section=[tableViewModel sectionAtIndex:0];
-//        
-//        if (section.cellCount>3) 
-//        {
-//            SCTableViewCell *cellFrom=(SCTableViewCell *)[section cellAtIndex:0];
-//            SCTableViewCell *cellTo=(SCTableViewCell *)[section cellAtIndex:1];
-//            SCTableViewCell *cellArrivedDate=(SCTableViewCell *)[section cellAtIndex:2];
-//            NSManagedObject *cellManagedObject=(NSManagedObject *)cellFrom.boundObject;
-//              
-//            
-//            if (cellManagedObject &&[cellManagedObject respondsToSelector:@selector(entity)]&&[cellManagedObject.entity.name isEqualToString:@"MigrationHistoryEntity"]&&[cellFrom isKindOfClass:[EncryptedSCTextViewCell class]]) {
-//                
-//                EncryptedSCTextViewCell *encryptedFrom=(EncryptedSCTextViewCell *)cellFrom;
-//                EncryptedSCTextViewCell *encryptedTo=(EncryptedSCTextViewCell *)cellTo;
-//                
-//                
-//                SCDateCell *arrivedDateCell=(SCDateCell *)cellArrivedDate;
-//                
-//                if (encryptedFrom.textView.text.length && encryptedTo.textView.text.length &&arrivedDateCell.label.text.length) {
-//                    valid=YES;
-//                }
-//                else {
-//                    valid=NO;
-//                }
-//                
-//            }
-//        }        
-//    }
-//    
-//
-//   
-//    
-//    return valid;
-//}
 
 
 
@@ -751,18 +497,6 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     }
    
 
-            
-//        UIViewController *logoViewController=[[LogoBackgroundViewController alloc]initWithNibName:@"LogoBackgroundViewController" bundle:[NSBundle mainBundle] ]; 
-        
-        
-
-    
-    
-
-    
-
-//[logoViewController loadView ];
-//[detailTableViewModel.modeledTableView setBackgroundView:logoViewController.view ];
 
 
 }

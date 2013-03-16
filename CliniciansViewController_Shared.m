@@ -34,15 +34,13 @@
 
 
 @implementation CliniciansViewController_Shared
-//@synthesize objectsSection;
+
 @synthesize clinicianDef;
 
 @synthesize personVCFromSelectionList=personVCFromSelectionList_;
 @synthesize personAddNewViewController=personAddNewViewController_;
 
 @synthesize rootViewController=rootViewController_;
-//@synthesize tableModel=tableModel_;
-//@synthesize tableView;
 @synthesize abGroupObjectSelectionCell=abGroupObjectSelectionCell_;
 @synthesize personViewController=personViewController_;
 
@@ -56,18 +54,9 @@
 -(void)viewDidUnload{
        [super viewDidUnload];
    
-//     self.tableModel=nil;
-    
-   
-   currentDetailTableViewModel_=nil;
-   rootNavigationController=nil;
-   rootViewController_=nil;
-  
-    //    ABRecordRef existingPersonRef;
-
-    
-
-   
+    currentDetailTableViewModel_=nil;
+    rootNavigationController=nil;
+    rootViewController_=nil;
    
     if (personViewController_){
     
@@ -102,10 +91,6 @@
         self.personAddNewViewController=nil;
     }
     
-    //    CFRelease(addressBook);
-    //    CFRelease(existingPersonRef);
-    
-    
 }
 
 
@@ -135,23 +120,16 @@
     //set different custom cells nib names for iPhone and iPad
     NSString *shortFieldCellNibName=nil;
     NSString *textFieldAndLableNibName=nil;
-//    NSString *scaleDataCellNibName=nil;
-//    NSString *switchAndLabelCellName=nil;
     if ([SCUtilities is_iPad]) {
         
         textFieldAndLableNibName=@"TextFieldAndLabelCell_iPad";
         shortFieldCellNibName=@"ShortFieldCell_iPad";
-//        scaleDataCellNibName=@"ScaleDataCell_iPad";
-//        switchAndLabelCellName=@"switchAndLabelCell_iPad";
                
     } else
     {
         
         textFieldAndLableNibName=@"TextFieldAndLabelCell_iPhone";
         shortFieldCellNibName=@"ShortFieldCell_iPhone";
-//        scaleDataCellNibName=@"ScaleDataCell_iPhone";
-//        switchAndLabelCellName=@"switchAndLabelCell_iPhone";
-
     }
     
     //define some date formats to be used below using a date formatter
@@ -405,54 +383,7 @@
     SCPropertyDefinition *employmentPositionDepartmentPropertyDef = [employmentPositionDef propertyDefinitionWithName:@"department"];
     employmentPositionDepartmentPropertyDef.type=SCPropertyTypeTextView;
     
-//    SCPropertyGroup *nonClinicalSupNameGroup = [SCPropertyGroup groupWithHeaderTitle:@"clinician of My clinician Name" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"title", @"firstName",@"middleName",@"lastName",@"suffix",@"credentialInitials", nil]];
-//    
-    
-//    SCPropertyGroup *nonClinicalSupDatesGroup = [SCPropertyGroup groupWithHeaderTitle:@"Supervision Dates" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"started",@"ended", nil]];
-    
-//    SCPropertyGroup *nonClinicalSupContactGroup = [SCPropertyGroup groupWithHeaderTitle:@"Contact Information" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"addresses", @"phoneNumbers",@"emailAddresses", nil]];
-    
-//    SCPropertyGroup *nonClinicalSupNotesGroup = [SCPropertyGroup groupWithHeaderTitle:@"Notes" footerTitle:nil propertyNames:[NSArray arrayWithObject:@"notes"]];
-    
-//    SCPropertyGroupArray *nonClinicalSupervisorPropetyGroupArray=[[SCPropertyGroupArray alloc]init];
-//    [nonClinicalSupervisorPropetyGroupArray addGroup:nonClinicalSupNameGroup];
-//    [nonClinicalSupervisorPropetyGroupArray addGroup:nonClinicalSupDatesGroup];
-//    [nonClinicalSupervisorPropetyGroupArray addGroup:nonClinicalSupContactGroup];
-//    [nonClinicalSupervisorPropetyGroupArray addGroup:nonClinicalSupNotesGroup];
-    
-//    SCEntityDefinition *nonClinicalSupervisorDef =[SCEntityDefinition definitionWithEntityName:@"NonClinicalSupervisorEntity" managedObjectContext:managedObjectContext withPropertyGroups:nonClinicalSupervisorPropetyGroupArray];
-    
-    //set the order attributes name defined in the Non Clinical  Entity
-//    nonClinicalSupervisorDef.orderAttributeName=@"order";
-//    nonClinicalSupervisorDef.titlePropertyName=@"title;firstName;lastName;credendialInitials";
-//    SCPropertyDefinition *nonClinicalSupervisorPropertyDef = [employmentPositionDef propertyDefinitionWithName:@"nonClinicalSupervisors"];
-//    
-//    nonClinicalSupervisorPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:nonClinicalSupervisorDef
-//                                                                                                allowAddingItems:TRUE
-//                                                                                              allowDeletingItems:TRUE
-//                                                                                                allowMovingItems:TRUE];
-//    
-    
-    //override the auto title generation for the nonClinicalSupervisor property definition and set it to a custom title
-//    nonClinicalSupervisorPropertyDef.title=@"Supervisors";
-//    SCPropertyDefinition *nonClinicalSupervisorNotesPropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"notes"];
-//    nonClinicalSupervisorNotesPropertyDef.type=SCPropertyTypeTextView;
-//    nonClinicalSupervisorNotesPropertyDef.title=nil;
-//    
-//    
-//    SCPropertyDefinition *nonClinicalSupStartedDatePropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"started"];
-//	nonClinicalSupStartedDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
-//                                                                                     datePickerMode:UIDatePickerModeDate 
-//                                                                      displayDatePickerInDetailView:NO];
-    
-    
-    
-//    SCPropertyDefinition *nonClinicalSupEndedDatePropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"ended"];
-//	nonClinicalSupEndedDatePropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
-//                                                                                   datePickerMode:UIDatePickerModeDate 
-//                                                                    displayDatePickerInDetailView:NO];
-    
-    
+
     
     
     SCPropertyDefinition *employmentTitlePropertyDef = [employmentPositionDef propertyDefinitionWithName:@"jobTitle"];
@@ -1100,15 +1031,9 @@
     //create a property definition for the notes property in the referral class definition
     SCPropertyDefinition *referralNotesPropertyDef = [referralDef propertyDefinitionWithName:@"notes"];
     
-//    referralNotesPropertyDef.type=SCPropertyTypeCustom;
-//    referralNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-//    
-//    NSDictionary *encryReferralNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-//    
-//    
-//    referralNotesPropertyDef.objectBindings=encryReferralNotesTVCellKeyBindingsDic;
+
     referralNotesPropertyDef.title=@"Notes";
-        referralNotesPropertyDef.type=SCPropertyTypeTextView;
+    referralNotesPropertyDef.type=SCPropertyTypeTextView;
 //    referralNotesPropertyDef.autoValidate=NO;
     
     //Create the property definition for the referralInOrOut property in the referralDef class
@@ -1126,47 +1051,10 @@
     referralDef.orderAttributeName=@"order";
     
 
-    //create an object selection for the client relationship in the referral Entity 
-    
-    //create a property definition
-//    SCPropertyDefinition *clientReferredPropertyDef = [referralDef propertyDefinitionWithName:@"client"];
-//    
-    //set the title property name
+
     referralDef.titlePropertyName=@"client.clientIDCode";
     referralDef.keyPropertyName=@"dateReferred";
-//    //set the property definition type to objects selection
-//	clientReferredPropertyDef.type = SCPropertyTypeObjectSelection;
-//    SCObjectSelectionAttributes *clientReferredSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:clientsViewController_Shared.clientDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-//    
-//    //set some addtional attributes                                             
-//    clientReferredSelectionAttribs.allowAddingItems = YES;
-//    clientReferredSelectionAttribs.allowDeletingItems = NO;
-//    clientReferredSelectionAttribs.allowMovingItems = YES;
-//    clientReferredSelectionAttribs.allowEditingItems = YES;
-//
-//    
-// 
-//    //add an "Add New" element to appear when user clicks edit
-//    clientReferredSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New Client"];
-//    
-//    //add the selection attributes to the property definition
-//    clientReferredPropertyDef.attributes = clientReferredSelectionAttribs;
-    
-    /****************************************************************************************/
-    /*	END of Class Definition and attributes for the Referral Entity */
-    /****************************************************************************************/
-       
-    /****************************************************************************************/
-    /*	BEGIN Class Definition and attributes for the Clinician Entity */
-    /****************************************************************************************/ 
-    
-    //Create a class definition for clinician entity
-//	self.clinicianDef = [SCEntityDefinition definitionWithEntityName:@"ClinicianEntity" 
-//                                                         managedObjectContext:managedObjectContext 
-//                                                                propertyNames:[NSArray arrayWithObjects: @"degrees", 
-//                                                                                   @"licenseNumbers", @"certifications",@"specialties",@"publications",@"orientationHistory",@"awards",@"memberships",@"influences",@"employments",
-//                                                                                   @"demographicInfo",@"startedPracticing",@"clinicianType", @"atMyCurrentSite",  @"myCurrentSupervisor",@"myPastSupervisor",@"referrals",@"isPrescriber",@"logs",@"bio",@"notes",@"", nil]];
-	
+
         
    	self.clinicianDef.orderAttributeName = @"order";
     
@@ -1201,15 +1089,7 @@
     
     firstNameDataProperty.autoValidate=FALSE;
         
-//        firstNameDataProperty.cellActions.valueChanged = ^( SCTableViewCell *cell, NSIndexPath *indexPath)
-//        {
-//            if (indexPath.row!=NSNotFound) {
-//           
-//            [cell commitChanges];
-//            [cell.ownerTableViewModel.masterModel reloadBoundValues];
-//            [cell.ownerTableViewModel.masterModel.modeledTableView reloadData];
-//            }
-//        };
+
     [self.clinicianDef insertPropertyDefinition:firstNameDataProperty atIndex:1];
     
     
@@ -1241,12 +1121,6 @@
                                                                                  uiElementNibName:textFieldAndLableNibName 
                                                                                    objectBindings:lastNameDataBindings];
 	
-//        lastNameDataProperty.cellActions.valueChanged = ^(SCTableViewCell *cell, NSIndexPath *indexPath)
-//        {
-//            [cell commitChanges];
-//            [cell.ownerTableViewModel.masterModel reloadBoundValues];
-//            [cell.ownerTableViewModel.masterModel.modeledTableView reloadData];
-//        };
     
     lastNameDataProperty.autoValidate=FALSE;
     
@@ -1266,21 +1140,6 @@
     suffixDataProperty.autoValidate=FALSE;
     [self.clinicianDef insertPropertyDefinition:suffixDataProperty atIndex:4];
     
-    
-//    NSDictionary *credentialInitialsDataBindings = [NSDictionary 
-//                                                    dictionaryWithObjects:[NSArray arrayWithObject:@"credentialInitials"] 
-//                                                    forKeys:[NSArray arrayWithObject:@"50"]]; // 1 & 2 are the control tags
-//	
-//    
-//    SCCustomPropertyDefinition *credentialInitialsDataProperty = [SCCustomPropertyDefinition definitionWithName:@"CredentialInitialsData"
-//                                                                                           uiElementNibName:textFieldAndLableNibName 
-//                                                                                             objectBindings:credentialInitialsDataBindings];
-//	
-//    
-//    
-//    credentialInitialsDataProperty.autoValidate=FALSE;
-//    
-//    [self.clinicianDef insertPropertyDefinition:credentialInitialsDataProperty atIndex:5];
     
     //Create a class definition for the cliniciantypeEntity
     SCEntityDefinition *clinicianTypeDef = [SCEntityDefinition definitionWithEntityName:@"ClinicianTypeEntity" 
@@ -1312,12 +1171,7 @@
     clinicianTypePropertyDef.attributes = clinicianTypeSelectionAttributes; 
     
     clinicianTypeDef.orderAttributeName=@"order";
-//	clinicianTypePropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Licensed Psychologist",@"Licensed Psychiatrist", @"(PCP) Primary Care Physician", @"Other Medical Specialist", @"Nurse Practicioner or Physician's Assistant",@"Other Licenesed (BHP) Behavioral Health Professional", @"Psychology Intern",@"Medical Intern", @"Unlicenced PsyD or PhD",@"Unlicensed M.D. or D.O.",  @"Other Unlicensed Master's Level", @"Practicum Student",@"Paraprofessional",nil] 
-//                                                              allowMultipleSelection:NO
-//                                                                    allowNoSelection:NO
-//                                                               autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
-    //Do some property definition customization for the clinician Class
-    //create an array of objects definition for the referrals to-many relationship that with show up in a different view with a place holder element>.
+
     
     //Create the property definition for the referrals property
  SCPropertyDefinition *clinicianReferralsPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"referrals"];
@@ -1389,251 +1243,12 @@
     
     
     
-    //Begin Contact Information
-    
-    
-    
-    
-    /*
-    
-    //Create the class definitions for contactInformation Entity
-    SCEntityDefinition *contactInformationDef = [SCEntityDefinition definitionWithEntityName:@"ContactInformationEntity" 
-                                                                  managedObjectContext:managedObjectContext
-                                                                         propertyNames:[NSArray arrayWithObjects:@"addresses", @"phoneNumbers",@"emailAddresses", nil]];	
-    
-    
-    //Create link to Addressbook
-    
-    
-    SCCustomPropertyDefinition *linkToAddressBookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"LinkToAddressBookButton" uiElementClass:[ButtonCell class] objectBindings:nil];
-    [contactInformationDef addPropertyDefinition:linkToAddressBookButtonProperty];                                                         
-    
-    
-    SCCustomPropertyDefinition *addOrEditContactInAddressbookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"AddOrEditAddressBookButton" uiElementClass:[ButtonCell class] objectBindings:nil];
-    [contactInformationDef addPropertyDefinition:addOrEditContactInAddressbookButtonProperty];  
-    
-    
-    SCCustomPropertyDefinition *viewPersonABBookButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"ViewPersonABButton" uiElementClass:[ButtonCell class] objectBindings:nil];
-    [contactInformationDef addPropertyDefinition:viewPersonABBookButtonProperty]; 
-    
-    SCPropertyGroup *contactInformationpsyTrackGroup =[SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"addresses", @"phoneNumbers",@"emailAddresses", nil]];
-    
-    SCPropertyGroup *contactInformationAddressbookButtonsGroup =[SCPropertyGroup groupWithHeaderTitle:@"Addressbook Connection" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"LinkToAddressBookButton",@"AddOrEditAddressBookButton",@"ViewPersonABButton", nil ]];
-    
-    [contactInformationDef.propertyGroups addGroup:contactInformationpsyTrackGroup];
-    [contactInformationDef.propertyGroups addGroup:contactInformationAddressbookButtonsGroup];
-    
-    //Create the class definition for Phone Entity
-    SCEntityDefinition *phoneDef = [SCEntityDefinition definitionWithEntityName:@"PhoneEntity" 
-													 managedObjectContext:managedObjectContext
-															propertyNames:[NSArray arrayWithObjects:@"phoneName",@"phoneNumber",
-																			   @"extention",@"privatePhone",
-                                                                               
-                                                                               nil]];	
-    
-    //set the phone order attribute name
-    phoneDef.orderAttributeName=@"order";
-    
-    //Create a class definition for Address entity
-	SCEntityDefinition *addressDef = [SCEntityDefinition definitionWithEntityName:@"AddressEntity" 
-													   managedObjectContext:managedObjectContext															
-                                                              propertyNames:[NSArray arrayWithObjects:@"addressName",@"postOfficeBox",@"streeetAddressOne",@"streetAddressTwo",										 @"city",@"stateOrProvince",@"country",@"zipCode",@"notes",	@"privateAddress",													  nil]];	
-	
-    
-    //set the addressDef order attribute name
-    addressDef.orderAttributeName=@"order";
-    
-    //Create a class definition for Email Entity
-	SCEntityDefinition *emailDef = [SCEntityDefinition definitionWithEntityName:@"EmailEntity" 
-													 managedObjectContext:managedObjectContext
-															propertyNames:[NSArray arrayWithObject:@"privateEmail"]];
-    
-    //set the emailDef order attribute Name
-    emailDef.orderAttributeName=@"order";
-    
-    //set the emailDef title property name to the description and the email address so it shows up in the list of email addresses
-	emailDef.titlePropertyName = @"desc;emailAddress";
-    
-    
-    
-    //Do some property definition customization for the Phone Entity	
-    
-    
-    //create the phone name selection cell
-    SCPropertyDefinition *phoneNamePropertyDef = [phoneDef propertyDefinitionWithName:@"phoneName"];
-	
-    phoneNamePropertyDef.type = SCPropertyTypeSelection;
-	phoneNamePropertyDef.attributes = [SCSelectionAttributes attributesWithItems:[NSArray arrayWithObjects:@"Cabin",@"Cell",@"Home", @"Home2", @"School", @"Work",@"Other",nil] 
-                                                          allowMultipleSelection:NO allowNoSelection:NO autoDismissDetailView:YES hideDetailViewNavigationBar:NO];
-    
-    
-    //do some customizing of the phone number title, change it to "Number" to make it shorter
-    SCPropertyDefinition *phoneNumberPropertyDef = [phoneDef propertyDefinitionWithName:@"phoneNumber"];
-    phoneNumberPropertyDef.title = @"Number";
-    
-    phoneDef.titlePropertyName=@"phoneName;phoneNumber";
-	
-    SCCustomPropertyDefinition *callButtonProperty = [SCCustomPropertyDefinition definitionWithName:@"CallButton" uiElementClass:[ButtonCell class] objectBindings:nil];
-    [phoneDef insertPropertyDefinition:callButtonProperty atIndex:3];
-    SCPropertyGroup *phoneGroup = [SCPropertyGroup groupWithHeaderTitle:@"Phone Number" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"phoneName",@"phoneNumber",@"extention",@"privatePhone", @"CallButton", nil]];
-    
-    // add the phone property group
-    [phoneDef.propertyGroups addGroup:phoneGroup];
-    
-    
-    
-    //Do some property definition customization for the Address Entity
-	
-    
-    SCPropertyDefinition *addressNamePropertyDef = [addressDef propertyDefinitionWithName:@"addressName"];
-	addressNamePropertyDef.type=SCPropertyTypeTextView;
-    
-    SCPropertyDefinition *streeetAddressOnePropertyDef = [addressDef propertyDefinitionWithName:@"streeetAddressOne"];
-    //override the auto title generation for the streeetAddressOne property definition and set it to a custom title
-    streeetAddressOnePropertyDef.title = @"Street 1";
-	streeetAddressOnePropertyDef.type = SCPropertyTypeTextView;	
-	
-   
-    SCPropertyDefinition *streeetAddressTwoPropertyDef = [addressDef propertyDefinitionWithName:@"streetAddressTwo"];
-	 //override the auto title generation for the streetAddressTwo property definition and set it to a custom title
-    streeetAddressTwoPropertyDef.title = @"Street 2";
-	streeetAddressTwoPropertyDef.type = SCPropertyTypeTextView;	
-	
-    SCPropertyDefinition *postOfficeBoxPropertyDef = [addressDef propertyDefinitionWithName:@"postOfficeBox"];
-	
-    //override the auto title generation for the postOfficeBox property definition and set it to a custom title
-    postOfficeBoxPropertyDef.title = @"P.O. Box";
-	
-	SCPropertyDefinition *stateOrProvicePropertyDef = [addressDef propertyDefinitionWithName:@"stateOrProvince"];
-	stateOrProvicePropertyDef.title = @"State/Province";
-	stateOrProvicePropertyDef.type=SCPropertyTypeTextView;
-	SCPropertyDefinition *zipCodePropertyDef = [addressDef propertyDefinitionWithName:@"zipCode"];
-	
-    zipCodePropertyDef.autoValidate=FALSE;
-    
-    SCPropertyDefinition *addressNotesPropertyDef = [addressDef propertyDefinitionWithName:@"notes"];
-    addressNotesPropertyDef.type=SCPropertyTypeTextView;
-    
-    SCPropertyDefinition *addressesPropertyDef = [contactInformationDef propertyDefinitionWithName:@"addresses"];
-	addressesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:addressDef
-																					 allowAddingItems:TRUE
-																				   allowDeletingItems:TRUE
-																					 allowMovingItems:FALSE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Addresses)"] addNewObjectuiElement:nil addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
-	
-    
-    
-    // Add a custom property that represents a custom cells for the email address and description defined TextFieldAndLableCell.xib
-	
-    
-    NSDictionary *emailDescBindings = [NSDictionary 
-                                       dictionaryWithObjects:[NSArray arrayWithObject:@"desc"] 
-                                       forKeys:[NSArray arrayWithObjects:@"50", nil]]; // 1,2,3 are the control tags
-	SCCustomPropertyDefinition *emailDescDataProperty = [SCCustomPropertyDefinition definitionWithName:@"EmailDescData"
-                                                                                  uiElementNibName:textFieldAndLableNibName 
-                                                                                    objectBindings:emailDescBindings];
-	
-    
-    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
-    emailDescDataProperty.autoValidate=FALSE;
-    
-    
-    
-    [emailDef insertPropertyDefinition:emailDescDataProperty atIndex:0];
-    
-    NSDictionary *emailAddressBindings = [NSDictionary 
-                                          dictionaryWithObjects:[NSArray arrayWithObject:@"emailAddress"] 
-                                          forKeys:[NSArray arrayWithObjects:@"50", nil]]; // 1,2,3 are the control tags
-	SCCustomPropertyDefinition *emailAddressDataProperty = [SCCustomPropertyDefinition definitionWithName:@"EmailAddressData"
-                                                                                     uiElementNibName:textFieldAndLableNibName 
-                                                                                       objectBindings:emailAddressBindings];
-	
-    
-    
-    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
-    emailAddressDataProperty.autoValidate=FALSE;
-    
-    [emailDef insertPropertyDefinition:emailAddressDataProperty atIndex:1]; 
-    
-    
-    NSDictionary *emailSendReportsBindings = [NSDictionary 
-                                              dictionaryWithObjects:[NSArray arrayWithObject:@"sendReports"] 
-                                              forKeys:[NSArray arrayWithObjects:@"40", nil]]; // 1,2,3 are the control tags
-	SCCustomPropertyDefinition *emailSendReportsDataProperty = [SCCustomPropertyDefinition definitionWithName:@"EmailSendReportsData"
-                                                                                         uiElementNibName:switchAndLabelCellName 
-                                                                                           objectBindings:emailSendReportsBindings];
-	
-    //set the autovalidate to false to catch the validation event with a custom validation, which is needed for custom cells
-    emailSendReportsDataProperty.autoValidate=FALSE;
-    
-    [emailDef insertPropertyDefinition:emailSendReportsDataProperty atIndex:2]; 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    SCPropertyDefinition *contactInformationPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"contactInformation"];
-    contactInformationPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:contactInformationDef
-                                                                                              allowAddingItems:FALSE
-                                                                                            allowDeletingItems:FALSE
-                                                                                              allowMovingItems:FALSE];
-    
-    
-    
-    
-    
-    
-    //end Contact Information
-   
-    SCPropertyDefinition *employerAddressesPropertyDef = [employerDef propertyDefinitionWithName:@"addresses"];
-    employerAddressesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:addressDef
-                                                                                             allowAddingItems:TRUE
-                                                                                           allowDeletingItems:TRUE
-                                                                                             allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"Tap + To Add Addresses"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
-    
-    SCPropertyDefinition *employerPhoneNumbersPropertyDef = [employerDef propertyDefinitionWithName:@"phoneNumbers"];
-    employerPhoneNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:phoneDef
-                                                                                                allowAddingItems:TRUE
-                                                                                              allowDeletingItems:TRUE
-                                                                                                allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Phone Numbers)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
-    
-    SCPropertyDefinition *nonClinicalSupAddressesPropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"addresses"];
-    nonClinicalSupAddressesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:addressDef
-                                                                                                   allowAddingItems:TRUE
-                                                                                                 allowDeletingItems:TRUE
-                                                                                                   allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Addresses)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
-    
-    SCPropertyDefinition *nonClinialSupPhoneNumbersPropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"phoneNumbers"];
-    nonClinialSupPhoneNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:phoneDef
-                                                                                                     allowAddingItems:TRUE
-                                                                                                   allowDeletingItems:TRUE
-                                                                                                     allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Phone numbers)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
-    
-    
-    
-    SCPropertyDefinition *nonClinialSupEmailsPropertyDef = [nonClinicalSupervisorDef propertyDefinitionWithName:@"emailAddresses"];
-    nonClinialSupEmailsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:emailDef
-                                                                                               allowAddingItems:TRUE
-                                                                                             allowDeletingItems:TRUE
-                                                                                               allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Email addresses)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
-    */
-    SCPropertyDefinition *employmentPositionPropertyDef = [employmentDef propertyDefinitionWithName:@"positions"];
+     SCPropertyDefinition *employmentPositionPropertyDef = [employmentDef propertyDefinitionWithName:@"positions"];
     employmentPositionPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:employmentPositionDef
                                                                                               allowAddingItems:TRUE
                                                                                             allowDeletingItems:TRUE
                                                                                               allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Positions)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];	
-//	SCPropertyDefinition *licensesPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"licenses"];
-//	licensesPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:licenseDef
-//																					allowAddingItems:TRUE
-//																				  allowDeletingItems:TRUE
-//																					allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Licenses)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
+
     SCPropertyDefinition *certificationsPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"certifications"];
 	certificationsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:certificationDef
 																						  allowAddingItems:TRUE
@@ -1650,22 +1265,7 @@
         demographicProfilePropertyDef.title=@"Background Info";
         demographicProfilePropertyDef.attributes = [SCObjectAttributes attributesWithObjectDefinition:demographicDetailViewController_Shared.demographicProfileDef];
 	
-    /*
-	SCPropertyDefinition *phoneNumbersPropertyDef = [contactInformationDef propertyDefinitionWithName:@"phoneNumbers"];
-	phoneNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:phoneDef
-																						allowAddingItems:TRUE
-																					  allowDeletingItems:TRUE
-																						allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Phone Numbers)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
-	
-	SCPropertyDefinition *emailsPropertyDef = [contactInformationDef propertyDefinitionWithName:@"emailAddresses"];
-	emailsPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:emailDef
-																				  allowAddingItems:TRUE
-																				allowDeletingItems:TRUE
-																				  allowMovingItems:TRUE expandContentInCurrentView:FALSE placeholderuiElement:[SCTableViewCell cellWithText:@"(Tap + To Add Email addresses)"] addNewObjectuiElement:FALSE addNewObjectuiElementExistsInNormalMode:FALSE addNewObjectuiElementExistsInEditingMode:FALSE];
-	
-	
-    */
-    //Create a class definition for the logsEntity
+      //Create a class definition for the logsEntity
     SCEntityDefinition *logDef = [SCEntityDefinition definitionWithEntityName:@"LogEntity" 
                                                    managedObjectContext:managedObjectContext
                                                           propertyNames:[NSArray arrayWithObjects:@"dateTime",
@@ -1685,18 +1285,7 @@
     
     logNotesPropertyDef.title = @"Notes";
         logNotesPropertyDef.type=SCPropertyTypeTextView;
-//    
-//    logNotesPropertyDef.type=SCPropertyTypeCustom;
-//    logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-//    
-//    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-//    
-//    
-//    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
-//    //    phoneNumberPropertyDef.title=@"Phone Number";
-//    logNotesPropertyDef.autoValidate=NO;
-    
-    
+
 
 	SCPropertyDefinition *clinicianNotesPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"notes"];
     
@@ -1704,15 +1293,6 @@
     clinicianNotesPropertyDef.title=@"";
         
         clinicianNotesPropertyDef.type=SCPropertyTypeTextView;
-//    clinicianNotesPropertyDef.type=SCPropertyTypeCustom;
-//    clinicianNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-//    
-//    NSDictionary *encryClinicianNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-//    
-//    
-//    clinicianNotesPropertyDef.objectBindings=encryClinicianNotesTVCellKeyBindingsDic;
-//    //    phoneNumberPropertyDef.title=@"Phone Number";
-//    clinicianNotesPropertyDef.autoValidate=NO;
 
 	SCPropertyDefinition *clinicianBioPropertyDef = [self.clinicianDef propertyDefinitionWithName:@"bio"];
     
@@ -1757,24 +1337,7 @@
         
        
         
-////        
-//       abClassDefinition.titlePropertyName=@"groupName";
-//        abClassDefinition.keyPropertyName=@"recordID";
-//        SCPropertyDefinition *abGroupPropertyDef=[self.clinicianDef propertyDefinitionWithName:@"abGroups"];    
-//    
-//      
-//        abGroupPropertyDef.title=@"Address Book Groups";
-//        
-//        abGroupPropertyDef.type=SCPropertyTypeObjectSelection;
-//        
-//        abGroupPropertyDef.uiElementClass=[ABGroupSelectionCell class];
-//      
-//    
-//        SCObjectSelectionAttributes *abGroupSelectionAttribs = [SCObjectSelectionAttributes attributesWithSelectionObjects:nil objectsDefinition:abClassDefinition allowMultipleSelection:YES allowNoSelection:YES];
-//      
-//        
-//        abGroupPropertyDef.attributes=abGroupSelectionAttribs;
-//        
+       
         
     SCPropertyGroup *clinicianListPropertiesGroup=[SCPropertyGroup groupWithHeaderTitle:@"Clinician List Properties" footerTitle:nil propertyNames:[NSArray arrayWithObjects: @"atMyCurrentSite", @"myCurrentSupervisor",@"myPastSupervisor", nil]];
     
@@ -1804,13 +1367,7 @@
     [self.clinicianDef.propertyGroups addGroup:clientInteractionGroup];
     [self.clinicianDef.propertyGroups addGroup:notesGroup];
     [self.clinicianDef.propertyGroups addGroup:logsGroup]; 
-//    // Create and add the objects section
-//	objectsSection = [SCArrayOfObjectsSection sectionWithHeaderTitle:nil
-//																	withEntityClassDefinition:self.clinicianDef];
-//    
-//    
-//    objectsSection.itemsAccessoryType = UITableViewCellAccessoryNone;
-    
+
     existingPersonRecordID=-1;
         
         
@@ -1852,53 +1409,6 @@
 }
 
 
-#pragma mark -
-#pragma SCTableViewModelDelegate methods spcific to traintrack view controller
-
--(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-    
-    
-//    [self tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)indexPath.section detailTableViewModel:(SCTableViewModel *)detailTableViewModel];
-    
-    
-//    if (tableViewModel.tag==1) {
-//        SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-//        
-//        
-//        
-//        
-////        if (cell.tag==429&&[cell isKindOfClass:[SCObjectSelectionCell class]]) {
-////            
-////            
-////            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(abGroupsDoneButtonTapped:)];
-////            
-////            
-////            detailTableViewModel.viewController.navigationItem.rightBarButtonItem = doneButton;
-////            detailTableViewModel.tag=429;
-////            
-////        }
-//        
-//        
-//    }
-    
-    
-}
-
-
-//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:(NSUInteger)index detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-//    
-//    
-//   
-//    if([SCUtilities is_iPad]){
-//        detailTableViewModel.delegate = self;
-//        detailTableViewModel.tag = tableViewModel.tag+1;
-//               
-//         // Make the table view transparent
-//    }
-//    
-//    
-//    
-//}
 
 #pragma mark -
 #pragma SCTableViewModelDelegate methods same as clinicianView Controller
@@ -2017,10 +1527,7 @@
                 int addressBookRecordIdentifier=(int )[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"]intValue]; 
                 
                 
-                
-//                NSString *buttonText;
-                
-            
+           
                 LookupRemoveLinkButtonCell *addViewButtonCell=(LookupRemoveLinkButtonCell *)cell;
                 
                 
@@ -2099,36 +1606,15 @@
     {
         
         
-//        UIView *viewOne = [cell viewWithTag:51];
-//        UIView *viewSendReports =[cell viewWithTag:40];
         UIView *sliderView = [cell viewWithTag:14];
         UIView *scaleView = [cell viewWithTag:70];
         
         switch (cell.tag) 
         {
-//            case 0:
-//                
-//                if([viewOne isKindOfClass:[UILabel class]])
-//                {   
-//                    UILabel *emailDesclabel = (UILabel *)viewOne;
-//                    emailDesclabel.text=@"Email Description";
-//                    
-//                }
-//                break;
+
             case 1:
                 
-//                if ([viewOne isKindOfClass:[UILabel class]]) 
-//                {
-//                    
-//                    UILabel *emailLabel =(UILabel *)viewOne;
-//                    emailLabel.text=@"Email Address:";
-//                    
-//                    UITextField *emailAddressField =(UITextField *)[cell viewWithTag:50];
-//                    
-//                    emailAddressField.keyboardType=UIKeyboardTypeEmailAddress;
-//                    emailAddressField.autocapitalizationType=UITextAutocapitalizationTypeNone;
-//                    
-//                }
+
                 
                 if ([scaleView isKindOfClass:[UISegmentedControl class]]) 
                 {
@@ -2140,18 +1626,7 @@
                 
                 break;
                 
-//            case 2:
-//                if ([viewSendReports isKindOfClass:[UISwitch class]]) 
-//                {
-//                    
-//                    UILabel *emailLabel =(UILabel *)[cell viewWithTag:41];
-//                    emailLabel.text=@"Send Reports:";  
-//                    
-//                }
-//                
-//                break;
-//                
-                
+               
                 
             case 3:
                 
@@ -2162,10 +1637,7 @@
                     UILabel *slabel = (UILabel *)[cell viewWithTag:10];
                     
                     slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
-//                    UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-//                    UIImage *sliderRightTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-//                    [sliderOne setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
-//                    [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
+
                     [sliderOne setMinimumValue:-1.0];
                     [sliderOne setMaximumValue:0];
                     
@@ -2179,11 +1651,7 @@
                     UISlider *sliderTwo = (UISlider *)sliderView;
                     
                     UILabel *slabelTwo = (UILabel *)[cell viewWithTag:10];
-//                    UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-//                    UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-//                    [sliderTwo setMinimumTrackImage: sliderTwoLeftTrackImage forState: UIControlStateNormal];
-//                    [sliderTwo setMaximumTrackImage: sliderTwoRightTrackImage forState: UIControlStateNormal];
-                    
+     
                     slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];        
                     [sliderTwo setMinimumValue:0.0];
                     [sliderTwo setMaximumValue: 1.0];
@@ -2203,147 +1671,6 @@
     
     
 }
-
-
-
-
-
-
-
-//-(NSString *)fullName:(NSString *)fullName tableViewModel:(SCTableViewModel *)tableViewModel cell:(SCTableViewCell *)cell getNameValues:(BOOL)getNameValues{
-//    
-//        
-//    
-//    
-//    if (getNameValues) {
-//       
-//        
-//        if (tableViewModel.tag==0) {
-//           
-//            nameTitle=nil;
-//            firstName=nil;
-//            middleName=nil;
-//            lastName=nil;
-//            suffix=nil;
-//            credentialIntitials=nil;  
-//            NSManagedObject *managedObject = (NSManagedObject *)cell.boundObject;
-//            nameTitle=(NSString *)[managedObject valueForKey:@"prefix"];
-//            firstName=(NSString *)[managedObject valueForKey:@"firstName"];
-//            middleName=(NSString *)[managedObject valueForKey:@"middleName"];
-//            lastName=(NSString *)[managedObject valueForKey:@"lastName"];
-//            suffix=(NSString *)[managedObject valueForKey:@"suffix"];
-//            
-//            credentialIntitials=(NSString *)[managedObject valueForKey:@"credentialInitials"];
-//            addressBookRecordIdentifier=[managedObject valueForKey:@"addressBookIdentifier"];
-//            
-//        }
-//       
-//        
-//        if (tableViewModel.tag==1) {
-//            
-//            nameTitle=nil;
-//            firstName=nil;
-//            middleName=nil;
-//            lastName=nil;
-//            suffix=nil;
-//            credentialIntitials=nil; 
-//            SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-//            SCCustomCell *titleCell=(SCCustomCell *)[section cellAtIndex:0];
-//            SCCustomCell *firstNameCell=(SCCustomCell *)[section cellAtIndex:1];
-//            SCCustomCell *middleNameCell=(SCCustomCell *)[section cellAtIndex:2];
-//            SCCustomCell *lastNameCell=(SCCustomCell *)[section cellAtIndex:3];
-//            SCCustomCell *suffixCell=(SCCustomCell *)[section cellAtIndex:4];
-//            SCCustomCell *credentialInitialsCell=(SCCustomCell *)[section cellAtIndex:5];
-//            
-//            
-//                  
-//            
-//       
-//            
-//            
-//            
-//            UITextField *titleTF=(UITextField *)[titleCell viewWithTag:34];
-//            self.nameTitle=titleTF.text;
-//            
-//            
-//            UITextField *firstNameTF=(UITextField *)[firstNameCell viewWithTag:50];
-//            self.firstName=firstNameTF.text;
-//            
-//            
-//            
-//            UITextField *middleNameTF=(UITextField *)[middleNameCell viewWithTag:50];
-//           self.middleName=middleNameTF.text;
-//            
-//            
-//            UITextField *lastNameTF=(UITextField *)[lastNameCell viewWithTag:50];
-//            self.lastName=lastNameTF.text;
-//            
-//            
-//            UITextField *suffixTF=(UITextField *)[suffixCell viewWithTag:34];
-//            self.suffix=suffixTF.text;
-//            
-//            
-//            UITextField *credentialInitialsTF=(UITextField *)[credentialInitialsCell viewWithTag:50];
-//           self.credentialIntitials=credentialInitialsTF.text;
-//            
-//        }
-//        
-//        
-//    } 
-// 
-//        
-//        
-//
-//    
-//    if (self.nameTitle.length) {
-//        fullName=[self.nameTitle stringByAppendingString:@" "];
-//    } 
-//
-//    if (self.firstName.length) {
-//        fullName=[fullName stringByAppendingString:self.firstName];
-//    }
-//    
-//       
-//    if (self.middleName.length ) 
-//    {
-//        NSString *middleInitial=[self.middleName substringToIndex:1];
-//       
-//        middleInitial=[middleInitial stringByAppendingString:@"."];
-//        
-//        
-//        
-//        fullName=[fullName stringByAppendingFormat:@" %@", middleInitial];
-//        
-//        
-//    }
-//    if (self.lastName.length  && fullName.length ) 
-//    {
-//        
-//      
-//        fullName=[fullName stringByAppendingFormat:@" %@",self.lastName];
-//        
-//    }
-//    if (self.suffix.length  && fullName.length) {
-//        
-//        fullName=[fullName stringByAppendingFormat:@" %@",self.suffix];
-//        
-//    }
-//    
-//    if (self.credentialIntitials.length  && fullName.length) {
-//        
-//        fullName=[fullName stringByAppendingFormat:@", %@", self.credentialIntitials];
-//
-//    }
-//     
-//      
-//    
-//
-//    return fullName;
-//        
-//        
-// 
-//
-//}
 
 
 - (void)tableViewModel:(SCTableViewModel *)tableViewModel 
@@ -2634,7 +1961,6 @@
     }
     
 
-//    detailTableViewModel.delegate=self;
     if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
@@ -2828,31 +2154,7 @@
                     
                 }
                 
-//                NSArray *addressBookGroupsArray=[NSArray arrayWithArray:[ self addressBookGroupsArray]];
-//                
-                
-               
-                
-                
-                
-                
-//                self.abGroupObjectSelectionCell=[[ABGroupSelectionCell alloc]initWithClinician:(ClinicianEntity *)clinicianObject];   
-//                
-//              
-//                SCClassDefinition *abGroupsDef=[SCClassDefinition definitionWithClass:[PTABGroup class] propertyNames:[NSArray arrayWithObjects:@"groupName",@"recordID", nil]];
-//                
-//                [abGroupObjectSelectionCell_ setSelectionItemsStore:[abGroupsDef generateCompatibleDataStore]];
-//                
-//               
-//                
-//                abGroupObjectSelectionCell_.tag=429;
-//               
-//                [sectionOne addCell:abGroupObjectSelectionCell_];
-//            }
-//                }
-//            }
-//            
-//        }
+
     
             }
         }
@@ -2872,30 +2174,6 @@
 {
     BOOL valid = TRUE;
     
-//    SCTableViewCell *cell = [tableViewModel cellAtIndexPath:indexPath];
-    
-    
-//    
-//    if (tableViewModel.tag==4) {
-//        UILabel *emaiLabel=(UILabel *)[cell viewWithTag:51];
-//        if (emaiLabel.text==@"Email Address:")
-//        {
-//            UITextField *emailField=(UITextField *)[cell viewWithTag:50];
-//            
-//            if(emailField.text.length){
-//                valid=[self validateEmail:emailField.text];
-//                
-//                
-//            }
-//            else
-//            {
-//                valid=FALSE;
-//            }
-//        }
-//        
-//        
-//        
-//    }
 
    
     
@@ -3193,49 +2471,7 @@
         
         switch (cell.tag)
         {
-                //            case 0:
-                //            {
-                //                
-                //                
-                //
-                //               
-                //             
-                //                
-                ////                NSManagedObject *managedObject =nil;
-                ////                //DLog(@"the managed object is %@", 
-                ////                      tableModel.items);   
-                //              
-                //                
-                //               
-                //                
-                ////                //DLog(@"the managed object is %@", 
-                //////                    self.presentedViewController.parentViewController );
-                ////                
-                ////                
-                //////                [self showPeoplePickerController];
-                //                
-                //                
-                //
-                //                break;
-                //            }
-                //                
-                //                
-                //            case 1:
-                //            {
-                //                
-                ////                [self showPersonViewController ];   
-                //                break;
-                //            }    
-                //                
-                //            case 2:
-                //            {
-                //                
-                //                
-                ////                [self showNewPersonViewController];
-                //                
-                //                
-                //                break;
-                //            }    
+ 
             case 8:
             {
                 
@@ -3251,44 +2487,8 @@
                         clinician=(ClinicianEntity *) cellManagedObject;
                         
                         
-//                        SCTableViewCell *cellAtOne=(SCTableViewCell *)[section cellAtIndex:1];
-//                        
-//                        UIView *viewLongerTextLabelView =(UIView *)[cellAtOne viewWithTag:51];
-//                        
-//                        if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
-//                        {
-//                            
-//                            
-//                            UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-//                            
-//                            if ([firstNameLabel.text isEqualToString:@"First Name:"]) {
-//                                [cellAtOne commitChanges];
-//                            } 
-//                        }
-//                        
-//                        SCTableViewCell *cellAtThree=(SCTableViewCell *)[section cellAtIndex:3];
-//                        
-//                        UIView *lastNameLabelView =(UIView *)[cellAtThree viewWithTag:51];
-//                        
-//                        if ([lastNameLabelView isKindOfClass:[UILabel class]]) 
-//                        {
-//                            
-//                            
-//                            UILabel *lastNameLabel =(UILabel *)lastNameLabelView;
-//                            
-//                            if ([lastNameLabel.text isEqualToString:@"Last Name:"]) {
-//                                [cellAtThree commitChanges];
-//                            } 
-//                        }
-                        
-                        
-                        
-                        //                        cellManagedObject=(NSManagedObject *)cell.boundObject;
-                        //                        clinician=(ClinicianEntity *) cellManagedObject;
-                        
-                        
-//                        if ([SCUtilities systemVersion]<6) {
-                        
+                 
+                      
                         if ([tableViewModel valuesAreValid]) {
                             int sectionCount=tableViewModel.sectionCount;
                         for (NSInteger i=0; i<sectionCount;i++) {
@@ -3408,89 +2608,9 @@
    
     deletePressedOnce=NO;
     
-    
-    
-    
-    
-
-    
+  
 }
-//-(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel willRemoveRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//    SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-//    
-//    BOOL myInformation=(BOOL)[(NSNumber *)[cell.boundObject valueForKey:@"myInformation"]boolValue];
-//    if (myInformation) {
-//        PTTAppDelegate *appdelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-//        UIView *notificationSuperView;
-//        
-//        
-//        
-//        
-//        
-//        if (!deletePressedOnce) {
-//            
-//            [appdelegate displayNotification:@"Can't Delete Your Own Record. Press Delete again to clear your information." forDuration:3.5 location:kPTTScreenLocationTop inView:notificationSuperView];
-//            
-//            deletePressedOnce=YES;
-//        }
-//        else
-//        {
-//            
-//            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-//            ClinicianEntity *clinicianObject=(ClinicianEntity *)cellManagedObject;
-//            
-//            NSEntityDescription *entityDescription=(NSEntityDescription *) clinicianObject.entity;
-//            
-//            
-//            NSArray *boundObjectKeys=(NSArray *)[entityDescription attributesByName] ;
-//            
-//            for (id attribute in boundObjectKeys){
-//                BOOL setNil=YES;
-//                if ([attribute isEqualToString:@"firstName"]) {
-//                    [clinicianObject setValue:@"Enter Your" forKey:attribute];
-//                    setNil=NO;
-//                }
-//                if ([attribute isEqualToString:@"lastName"]) {
-//                    [clinicianObject setValue:@"Name Here" forKey:attribute];
-//                    setNil=NO;
-//                }
-//                
-//                if (setNil && ![attribute isEqualToString:@"myInformation"]&&![attribute isEqualToString:@"atMyCurrentSite"]&&![attribute isEqualToString:@"order"]) {
-//                    [cellManagedObject setValue:nil forKey:attribute];
-//                    
-//                }
-//                
-//            }
-//            
-//            
-//            NSArray *relationshipsByName=(NSArray *)[entityDescription relationshipsByName] ;
-//            
-//            
-//            for (id relationship in relationshipsByName){
-//                
-//                
-//                
-//                
-//                [clinicianObject setValue:nil forKey:relationship];
-//                
-//                
-//                
-//            }
-//            
-//            
-//            [tableViewModel reloadBoundValues];
-//            [tableViewModel.modeledTableView reloadData];
-//            [appdelegate displayNotification:@"My Personal Information Cleared" forDuration:3.0 location:kPTTScreenLocationTop inView:notificationSuperView];
-//            deletePressedOnce=NO;
-//            
-//        }
-//        
-//        return NO;
-//    }
-//    
-//    return YES;
-//}
+
 
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewDidDismissForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -3529,19 +2649,7 @@
     }
 }
 
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//	// use "buttonIndex" to decide your action
-//	//
-//    
-//    if (alertView.tag==1) {
-//       
-//        if (buttonIndex==1) {
-//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tel:" stringByAppendingString:alertView.message]]];
-//        }
-//    }
-//    
-//}
+
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewDidAppearForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
 
@@ -3568,16 +2676,6 @@
 
     
     
-//    [self tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForSectionAtIndex:indexPath.section detailTableViewModel:(SCTableViewModel*) detailTableViewModel];
-//    
-//
-//    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-//        
-//        [detailTableViewModel.viewController.view setBackgroundColor:[UIColor clearColor]];
-//        [detailTableViewModel.modeledTableView setBackgroundView:nil];
-//        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-//        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-//    }
 
 
 }
@@ -3755,15 +2853,6 @@ return exists;
     [peoplePickerNavigationController_ setPeoplePickerDelegate:self];
     
     
-	// Display only a person's phone, email, and birthdate
-    //	NSArray *displayedItems = [NSArray arrayWithObjects:[NSNumber numberWithInt:kABPersonPhoneProperty], 
-    //                               [NSNumber numberWithInt:kABPersonEmailProperty],
-    //                               [NSNumber numberWithInt:kABPersonBirthdayProperty], nil];
-	
-    
-    
-    //	abToDisplay.peoplePicker.displayedProperties=displayedItems;
-	// Show the picker 
     
     if (currentDetailTableViewModel_) {
         [currentDetailTableViewModel_.viewController.navigationController presentModalViewController:self.peoplePickerNavigationController animated:YES];
@@ -3796,18 +2885,6 @@ return exists;
         
     }
    
-//    
-   
-        
-        
-        //   ABRecordRef existingPersonRef=ABAddressBookGetPersonWithRecordID((ABAddressBookRef )addressBook, clinicianRecordIdentifier);
-        // 
-        //     }
-        //    
-        //    
-        
-        
-
    
 if (!IS_VERSION_6_OR_HIGHER){
     if (existingPersonRecordID==-1) {    
@@ -3867,10 +2944,6 @@ if (!IS_VERSION_6_OR_HIGHER){
                     
                     
                     [alert show];
-                    //            CFRelease(name);
-                    //            CFRelease(peopleWithNameArray);
-                    
-                    //            [self showUnknownPersonViewControllerWithABRecordRef:(ABRecordRef)person.recordRef];
                     
                     
                     name=NULL;
@@ -3957,16 +3030,6 @@ if (!IS_VERSION_6_OR_HIGHER){
                     [personAddNewViewController_ setDisplayedPerson:existingPersonRef];
                     
                     personAddNewViewController_.view.tag=837;
-                    
-                    //           [personAddNewViewController_ setAddressBook:addressBook];
-                    //            personAddNewViewController_=[[ABNewPersonViewController alloc]init];;
-                    //            personAddNewViewController_.parentGroup=group;
-                    //            personAddNewViewController_.newPersonViewDelegate=self;
-                    //            [personAddNewViewController_ setDisplayedPerson:existingPersonRef];
-                    //
-                    //            personAddNewViewController_.view.tag=900;
-                    //            currentDetailTableViewModel.viewController.navigationController.delegate =self ;
-                    
                     
                     
                     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:personAddNewViewController_];
@@ -4075,12 +3138,7 @@ if (!IS_VERSION_6_OR_HIGHER){
                             
                             
                             
-                          
-                            //            CFRelease(name);
-                            //            CFRelease(peopleWithNameArray);
-                            
-                            //            [self showUnknownPersonViewControllerWithABRecordRef:(ABRecordRef)person.recordRef];
-                            [alert show];
+                           [alert show];
                             
                             name=NULL;
                             
@@ -4166,17 +3224,7 @@ if (!IS_VERSION_6_OR_HIGHER){
                             
                             personAddNewViewController_.view.tag=837;
                             
-                            //           [personAddNewViewController_ setAddressBook:addressBook];
-                            //            personAddNewViewController_=[[ABNewPersonViewController alloc]init];;
-                            //            personAddNewViewController_.parentGroup=group;
-                            //            personAddNewViewController_.newPersonViewDelegate=self;
-                            //            [personAddNewViewController_ setDisplayedPerson:existingPersonRef];
-                            //
-                            //            personAddNewViewController_.view.tag=900;
-                            //            currentDetailTableViewModel.viewController.navigationController.delegate =self ;
-                            
-                            
-                            
+                           
                             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:personAddNewViewController_];
                             
                             navController.delegate=self;
@@ -4311,18 +3359,11 @@ else
             
             
         }
-//        [self.personViewController.view setBackgroundColor:[UIColor clearColor]];
         personViewController_.personViewDelegate = self;
 		personViewController_.displayedPerson = existingPerson;
         
         personViewController_.allowsEditing=YES;
-//        if (!self.iPadPersonBackgroundView) {
-//            self.iPadPersonBackgroundView=[[UIView alloc]init];
-//            iPadPersonBackgroundView_.tag=837;
-//            [iPadPersonBackgroundView_ setBackgroundColor:[UIColor clearColor]];
-//        }
-//        self.personViewController.view=self.iPadPersonBackgroundView;
-        if (personViewController_.view) {
+       if (personViewController_.view) {
             self.personViewController.view.tag=837;
 
         }
@@ -4332,12 +3373,7 @@ else
         [currentDetailTableViewModel_.viewController.navigationController pushViewController:personViewController_ animated:YES];
             }
         
-        //        picker.personViewDelegate = self;
-        //		picker.displayedPerson = recordRef;
-        //		// Allow users to edit the person’s information
-        //		picker.allowsEditing = YES;
-        
-        
+       
 	}
 if (addressBookForShowPerson) {
     CFRelease(addressBookForShowPerson);
@@ -4388,10 +3424,7 @@ if (addressBookForShowPerson) {
         viewController.view.tag=789;
     }
     }
-    //    peoplePicker.viewControllers.navigationItem.rightBarButtonItems=buttons;
-    
-    //    [peoplePicker dismissViewControllerAnimated:YES completion:nil];
-    return YES;
+ return YES;
 }
 
 
@@ -4441,44 +3474,12 @@ if (addressBookForShowPerson) {
     }
     
     
-    //    if (viewController.view.tag==900) {
-    //        
-    //        
-    //        if ([viewController isKindOfClass:[ABNewPersonViewController class]]) {
-    //           
-    //            personAddNewViewController_=(ABNewPersonViewController *) viewController;
-    //            viewController.navigationItem.leftBarButtonItem=nil;
-    //            UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc]
-    //                                             initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelAddNewAddressBookPerson:)];
-    //            cancelButton.style = UIBarButtonItemStyleBordered;
-    //            
-    //                        
-    //            viewController.navigationItem.leftBarButtonItem=cancelButton;
-    //            
-    //            
-    //            viewController.navigationItem.rightBarButtonItem=nil;
-    //            
-    //            UIBarButtonItem* doneButton = [[UIBarButtonItem alloc]
-    //                                           initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTappedInABPersonViewController:)];
-    //            doneButton.style = UIBarButtonItemStyleBordered;
-    //
-    //            viewController.navigationItem.rightBarButtonItem=doneButton;
-    //            viewController.view.tag=0;
-    //            
-    //        }
-    //        
-    //        
-    //    }
     
     if ([viewController isKindOfClass:[ABPersonViewController class]]&& viewController.view.tag!=837 ) {
         self.personVCFromSelectionList  = (ABPersonViewController *)viewController;
         
         NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
-        // create a spacer
-        //    UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
-        //                                   initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:nil action:nil];
-        
-        
+  
         
         // create a standard "add" button
         UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc]
@@ -4541,96 +3542,9 @@ if (addressBookForShowPerson) {
 - (void)newPersonViewController:(ABNewPersonViewController *)newPersonViewController didCompleteWithNewPerson:(ABRecordRef)person
 {    
     
-    
-    
-    
-    
+   
     if (person) {
-//        
-//        addressBook=personAddNewViewController_.addressBook;
-//        
-//        BOOL autoAddClinicianToGroup=[[NSUserDefaults standardUserDefaults] boolForKey:kPTAutoAddClinicianToGroup];
-//        bool didSave=NO;
-//        if (autoAddClinicianToGroup||abGroupObjectSelectionCell_.abGroupsArray.count) 
-//        {
-//            
-//            int groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
-//            
-//            if (groupIdentifier==-1) {
-//                
-//                [self changeABGroupNameTo:nil addNew:YES checkExisting:(BOOL)YES];
-//                
-//            }
-//            
-//            groupIdentifier=[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
-//            
-//            
-//            if (groupIdentifier>-1) 
-//            {
-//                
-//                ABRecordRef group= ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, (ABRecordID) groupIdentifier);
-//                
-//                ABGroupAddMember(group, person, nil);
-//                didSave=( bool )  ABAddressBookAddRecord(addressBook, group, nil);
-//                
-//            }
-//            
-//            
-//            
-//            
-//        }
-//        else 
-//        {
-//            
-//            didSave=(bool) ABAddressBookAddRecord(addressBook, person, nil);
-//        }
-//        
-//        
-//        
-//        
-//        
-//        BOOL wantToSaveChanges=YES;
-//        
-//        
-//        
-//         
-//        
-//        
-//        if (ABAddressBookHasUnsavedChanges(addressBook)) {
-//            
-//            if (wantToSaveChanges) {
-//                
-//                didSave = ABAddressBookSave(addressBook, nil);
-//                
-//                if (!didSave) 
-//                {
-//                    /* Handle error here. */
-//                }
-//                
-//            } 
-//            else 
-//            {
-//                
-//                ABAddressBookRevert(addressBook);
-//                
-//            }
-//            
-//        }
-//        
-//        
-//        //        if ([addressBook_ hasUnsavedChanges]) {
-//        //            
-//        //            existingPerson_=[addressBook personWithRecordRef:personAddNewViewController_.displayedPerson];
-//        //            
-//        //            didSave= [addressBook addRecord:(ABRecord *)existingPerson_];
-//        //            
-//        //            didSave= [addressBook save];
-//        //            
-//        //
-//        //        }
-//        
-//        
-//        //    
+   
         
         
         ABRecordRef recordRef=personAddNewViewController_.displayedPerson;             
@@ -4738,11 +3652,6 @@ if (addressBookForShowPerson) {
                     
                     
                     [cell commitChanges];
-//                    NSArray *itemsArray=(NSArray *)abGroupObjectSelectionCell_.abGroupsArray;
-//                    itemsArray=[abGroupObjectSelectionCell_ addressBookGroupsArray];
-//                    
-//                    [abGroupObjectSelectionCell_ addPersonToSelectedGroups];
-//                    abGroupObjectSelectionCell_.synchWithABBeforeLoadBool=YES;
                     if (currentDetailTableViewModel_) {
                     
                     [currentDetailTableViewModel_ reloadBoundValues];
@@ -4797,98 +3706,9 @@ if (addressBookForShowPerson) {
     personAddNewViewController.view=nil;
     [personAddNewViewController_.navigationController dismissViewControllerAnimated:YES completion:nil];
     
-    //    CFRelease(person);
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //    [newPersonViewController dismissViewControllerAnimated:YES completion:nil];
-    //        //DLog(@"person record %@",newPersonViewController.navigationItem.leftBarButtonItem;
-    
-    
-    
-    
-    //        [addressBook addRecord:existingPerson];
-    //        [addressBook save];
-    //        [group addMember:(ABPerson *)existingPerson_];
-    //        
-    //        if ([addressBook hasUnsavedChanges]) {
-    //            [addressBook save];
-    //        }
-    //        
-    //        ABRecordID recordID=(ABRecordID )existingPerson_.recordID;
-    //
-    //        
-    //        
-    //            existingPerson_=(ABPerson *)[addressBook personWithRecordID:recordID];
-    //            [clinician setValue:[NSNumber numberWithInt:recordID] forKey:@"aBRecordIdentifier"];        
-    //            
-    //            SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
-    //            SCTableViewCell *cell =(SCTableViewCell *)[section cellAtIndex:1];
-    //            NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-    //            
-    //            NSEntityDescription *entityDesctipion=[NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext];
-    //            if ([cellManagedObject.entity isKindOfEntity:entityDesctipion]) {
-    //                
-    //                
-    //                
-    //                
-    //                
-    //                UIView *viewLongerTextLabelView =(UIView *)[cell viewWithTag:51];
-    //                
-    //                if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
-    //                {
-    //                    
-    //                    
-    //                    UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-    //                    
-    //                    
-    //                    if (recordID &&[firstNameLabel.text isEqualToString:@"First Name:"]) {
-    //                        
-    //                        
-    //                        [cell.boundObject setValue:[NSNumber numberWithInt:recordID ] forKey:@"aBRecordIdentifier"];
-    //                        [cell commitChanges];
-    //                        [currentDetailTableViewModel reloadBoundValues];
-    //                        [currentDetailTableViewModel.modeledTableView reloadData];
-    //                        
-    //                    } 
-    //                }
-    //                
-    //                
-    //                
-    //                
-    //            }
-    //	[self dismissModalViewControllerAnimated:YES];
+
 }
 
-
-//#pragma mark ABUnknownPersonViewControllerDelegate methods
-//// Dismisses the picker when users are done creating a contact or adding the displayed person properties to an existing contact. 
-//- (void)unknownPersonViewController:(ABUnknownPersonViewController *)unknownPersonView didResolveToPerson:(ABRecordRef)person
-//{
-//	
-//    
-//  [unknownPersonView dismissViewControllerAnimated:YES completion:^{
-//      
-//      [self showPersonViewControllerForABRecordRef:person];
-//  }];
-//   
-//    
-//   
-//}
-
-
-//// Does not allow users to perform default actions such as emailing a contact, when they select a contact property.
-//- (BOOL)unknownPersonViewController:(ABUnknownPersonViewController *)personViewController shouldPerformDefaultActionForPerson:(ABRecordRef)person 
-//						   property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
-//{
-//	return NO;
-//}
 
 #pragma mark -
 #pragma mark - UIAlertViewDelegate
@@ -5012,41 +3832,10 @@ if (addressBookForShowPerson) {
     }
     if (actionSheet.tag==kAlertTagFoundExistingPeopleWithName) {
         switch (buttonIndex) {
-            case 0:
-                
-                // on main thread in delegate method -alertView:clickedButtonAtIndex:
-                // (do something with choosen buttonIndex)
-                
-                
-                
-                break;
+           
             case 1:
             {
-                //                
-                //                ABAddressBook *aBtoFilter=[[ABAddressBook alloc]init];
-                //                
-                //                NSArray *arrayWithAllPeople=[aBtoFilter allPeople];
-                //                
-                //                
-                //                NSArray *arrayWithCompositeName=[aBtoFilter allPeopleWithName:existingPerson.compositeName];
-                //               
-                //                
-                //               
-                //                
-                //                
-                //                for (ABPerson *personInArray in arrayWithAllPeople) {
-                //                    
-                //                     
-                //                    if (![personInArray.firstName isEqualToString:existingPerson.firstName]||![personInArray.lastName isEqualToString:existingPerson.lastName]) {
-                //                     
-                //                         [aBtoFilter removeRecord:(ABRecord *)personInArray];
-                //                        
-                //                    }    
-                //                   
-                //                    
-                //                }
-                //                
-                
+                         
                 [self showPeoplePickerController];
                 
             }
@@ -5100,22 +3889,7 @@ if (addressBookForShowPerson) {
         UIView *viewLongerTextLabelView =(UIView *)[cell viewWithTag:51];
         
         
-        //        UIView *viewOneWithText=(UIView *)[cell viewWithTag:50];
-        //        
-        //        SCTableViewCell *lastNameCell=(SCTableViewCell *)[section cellAtIndex:3];
-        //        UIView *lastNameViewWithText=(UIView *)[cell viewWithTag:50];
-        //        
-        //        if ([lastNameViewWithText isKindOfClass:[UITextField class]]) {
-        //            UITextField *lastNameField =(UITextField *)lastNameViewWithText;
-        //        }
-        //        if ([viewOneWithText isKindOfClass:[UITextField class]]) {
-        //            UITextField *firstNameField =(UITextField *)[firstNameCell viewWithTag:50];
-        //        }
-        //        
-        //        
-        
-        
-        
+ 
         
         if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
         {
@@ -5295,87 +4069,6 @@ if (addressBookForShowPerson) {
     addExistingAfterPromptBool=FALSE;
 }
 
-//-(IBAction)doneButtonTappedInABPersonViewController:(id)sender{
-//    
-//    
-//   
-//
-//    
-//    bool didSave=NO;
-//  
-//    
-//    
-//    existingPerson_=[addressBook_ personWithRecordRef:personAddNewViewController_.displayedPerson];
-//    
-//    didSave= [addressBook_ addRecord:(ABRecord *)existingPerson_];
-//     
-//   didSave= [addressBook_ save];
-//    
-//   
-//  
-//   
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    
-//    ABRecordRef recordRef=personAddNewViewController_.displayedPerson;             
-//    
-//    int aBRecordID=existingPerson_.recordID;
-//    
-//    SCTableViewSection *section=(SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
-//    SCTableViewCell *cell =(SCTableViewCell *)[section cellAtIndex:1];
-//    NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-//    
-//    NSEntityDescription *entityDesctipion=[NSEntityDescription entityForName:@"ClinicianEntity" inManagedObjectContext:managedObjectContext];
-//    if ([cellManagedObject.entity isKindOfEntity:entityDesctipion]) {
-//        
-//        
-//        
-//        
-//        
-//        UIView *viewLongerTextLabelView =(UIView *)[cell viewWithTag:51];
-//        
-//        if ([viewLongerTextLabelView isKindOfClass:[UILabel class]]) 
-//        {
-//            
-//            
-//            UILabel *firstNameLabel =(UILabel *)viewLongerTextLabelView;
-//            
-//            
-//            if (aBRecordID &&[firstNameLabel.text isEqualToString:@"First Name:"]) 
-//            {
-//                
-//                
-//                [cell.boundObject setValue:[NSNumber numberWithInt:aBRecordID ] forKey:@"aBRecordIdentifier"];
-//                [cell commitChanges];
-//                [currentDetailTableViewModel reloadBoundValues];
-//                [currentDetailTableViewModel.modeledTableView reloadData];
-//                
-//            } 
-//        }
-//        
-//        
-//       
-//    }
-//    
-//
-//
-//    
-//    [personAddNewViewController_.navigationController dismissViewControllerAnimated:YES completion:^{
-//        
-//        currentDetailTableViewModel.viewController.navigationController.delegate =nil;
-//        [self resetABVariablesToNil];
-//    }];
-//    
-//    
-//    
-//}
 
 -(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew checkExisting:(BOOL)checkExisting {
      
@@ -5524,13 +4217,7 @@ if (addressBookForShowPerson) {
                         CFGroupNameCheck  = ABRecordCopyValue(groupInCheckNameArray, kABGroupNameProperty);
                         
                         
-                        //            CFComparisonResult result=  (CFComparisonResult) CFStringCompare (
-                        //                                                                              (__bridge CFStringRef)groupName,
-                        //                                                                              (CFStringRef) CFGroupNameCheck,
-                        //                                                                              1
-                        //                                                                              );
-                        
-                        
+                       
                         
                         NSString *checkNameStr=[NSString stringWithFormat:@"%@",(__bridge NSString*) CFGroupNameCheck];
                         
@@ -5555,9 +4242,7 @@ if (addressBookForShowPerson) {
                             } 
                             break;
                         }
-                        //            CFRelease(CFGroupsCheckNameArray); 
-                        //            CFRelease(CFGroupNameCheck);
-                        
+                      
                     }
                    
                     
@@ -5591,16 +4276,8 @@ if (addressBookForShowPerson) {
                 
                 return;
             }
-            //        ABRecordRef CFAddressBookGroupRecord =  ABGroupCreate ();
             
             group=ABGroupCreateInSource(source);
-            
-            //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
-            
-            //        
-            
-            
-            //        
             
             bool didSetGroupName=FALSE;
             didSetGroupName= (bool) ABRecordSetValue (
@@ -5619,9 +4296,7 @@ if (addressBookForShowPerson) {
                     bool didSave=FALSE;
                     didSave = ABAddressBookSave(addressBookToChangOrAddName, nil);
                     
-                    //                if (!didSave) {/* Handle error here. */  }
-                    //                else 
-                    
+                   
                 } 
                 else {
                     
@@ -5631,16 +4306,6 @@ if (addressBookForShowPerson) {
                 
             }
             
-            //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
-            
-            
-            
-            
-            
-            
-            
-            
-            
             groupIdentifier=ABRecordGetRecordID(group);
             
             [[NSUserDefaults standardUserDefaults] setInteger:(int )groupIdentifier forKey:kPTTAddressBookGroupIdentifier];
@@ -5649,7 +4314,7 @@ if (addressBookForShowPerson) {
             
             [[NSUserDefaults standardUserDefaults]synchronize];
             
-            //        CFRelease(group);
+
         } 
         else
             
@@ -5695,7 +4360,6 @@ if (addressBookForShowPerson) {
                 
         
     }
-    //    [[NSUserDefaults standardUserDefaults]  setValue:(NSString *)groupName forKey:kPTTAddressBookGroupName];
     
     } 
     
@@ -5820,22 +4484,7 @@ if (addressBookForShowPerson) {
     int groupCount=CFArrayGetCount(allGroupsInSource);
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        
-    
     if (groupCount) {
-        
-     
-        
-        
         
         
         if (allGroupsInSource) {
@@ -5845,7 +4494,7 @@ if (addressBookForShowPerson) {
             allGroups = [[NSMutableArray alloc] init];
             
             
-            //            CFStringRef CFGroupName ;
+
             for (CFIndex i = 0; i < groupCount; i++) {
                 
                 
@@ -5886,10 +4535,6 @@ if (addressBookForShowPerson) {
 }
 -(void)synchronizeAddressBookGroupsForClinician:(ClinicianEntity *)clinicianToSync {
 
-//    if ( [[[UIDevice currentDevice] systemVersion] intValue] < 6  )
-//    {
-  
-        
         ABRecordRef source=nil;
    
        int sourceID=[self defaultABSourceID];
@@ -6208,307 +4853,6 @@ if (addressBookToSyncronize) {
 } 
 
 
-//-(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew{
-//    
-//    ABAddressBookRef addressBook;
-//    @try 
-//    {
-//        addressBook=nil;
-//        addressBook=ABAddressBookCreate();
-//        
-//        
-//    }
-//    
-//    @catch (NSException *exception) 
-//    {
-//        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-//        
-//        
-//        [appDelegate displayNotification:@"Not able to access address book" forDuration:3.0 location:kPTTScreenLocationTop inView:appDelegate.window];
-//        return;
-//    }
-//    @finally 
-//    {
-//        ABRecordRef source=nil;
-//        int sourceID=[self defaultABSourceID];
-//        source=ABAddressBookGetSourceWithRecordID(addressBook, sourceID);
-//        ABRecordRef group;
-//        int groupIdentifier;
-//        
-//        CFArrayRef allGroupsInSource=ABAddressBookCopyArrayOfAllGroupsInSource(addressBook, source);
-//        int groupCount=CFArrayGetCount(allGroupsInSource);
-//        if (!groupName ||!groupName.length) {
-//            
-//            if ([[NSUserDefaults standardUserDefaults] objectForKey:kPTTAddressBookGroupName]) {
-//                
-//                groupName=(NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupName];  
-//                
-//                //        }
-//                if (!groupName ||!groupName.length) {
-//                    groupName=@"Clinicians";
-//                    if ([[NSUserDefaults standardUserDefaults]objectForKey:kPTTAddressBookGroupName]) {
-//                        
-//                        [[NSUserDefaults standardUserDefaults] setValue:groupName forKeyPath:kPTTAddressBookGroupName];
-//                        [[NSUserDefaults standardUserDefaults] synchronize];
-//                        
-//                    }
-//                }
-//                
-//            }  
-//            
-//            
-//            
-//            if (!addNew) 
-//            {
-//                
-//                if ([[NSUserDefaults standardUserDefaults]objectForKey:kPTTAddressBookGroupIdentifier]) 
-//                {
-//                    groupIdentifier=(NSInteger )[[NSUserDefaults standardUserDefaults] integerForKey:kPTTAddressBookGroupIdentifier];
-//                    
-//                }
-//                
-//                if (!addNew&&groupIdentifier>-1)
-//                {
-//                    group=ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, groupIdentifier);
-//                    
-//                }
-//                
-//                
-//                
-//                
-//                
-//                
-//                
-//                
-//                //should not ad new
-//              
-//                CFStringRef CFGroupNameCheck ;
-//                ABRecordRef groupInCheckNameArray;
-//                if (groupCount) 
-//                {
-//                    
-//                   
-//                    
-//                    
-//                    
-//                    for (CFIndex i = 0; i < groupCount; i++) {
-//                        groupInCheckNameArray = CFArrayGetValueAtIndex(allGroupsInSource, i);
-//                        CFGroupNameCheck  = ABRecordCopyValue(groupInCheckNameArray, kABGroupNameProperty);
-//                        
-//                        
-//                        //            CFComparisonResult result=  (CFComparisonResult) CFStringCompare (
-//                        //                                                                              (__bridge CFStringRef)groupName,
-//                        //                                                                              (CFStringRef) CFGroupNameCheck,
-//                        //                                                                              1
-//                        //                                                                              );
-//                        
-//                        
-//                        
-//                        NSString *checkNameStr=[NSString stringWithFormat:@"%@",(__bridge NSString*) CFGroupNameCheck];
-//                        
-//                        
-//                        
-//                        if ([checkNameStr isEqualToString:groupName]) {
-//                            group=groupInCheckNameArray;
-//                            groupIdentifier=ABRecordGetRecordID(group);
-//                            
-//                            if ([[NSUserDefaults standardUserDefaults] objectForKey:kPTTAddressBookGroupIdentifier]) {
-//                                [[NSUserDefaults standardUserDefaults] setInteger:groupIdentifier forKey:kPTTAddressBookGroupIdentifier];
-//                                [[NSUserDefaults standardUserDefaults]synchronize];
-//                                
-//                            }
-//                            
-//                            if (group) {
-//                                
-//                            }
-//                            
-//                            else {
-//                                
-//                            } 
-//                            break;
-//                        }
-//                        //            CFRelease(CFGroupsCheckNameArray); 
-//                        //            CFRelease(CFGroupNameCheck);
-//                        
-//                    }
-//                    if (allGroupsInSource) {
-//                        CFRelease(allGroupsInSource); 
-//                    }
-//                    
-//                    if (CFGroupNameCheck) {
-//                        CFRelease(CFGroupNameCheck);
-//                    }
-//                }
-//                
-//                
-//            }
-//            
-//        }
-//        
-//        
-//        
-//        
-//        NSNumber *groupIdentifierNumber=(NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTTAddressBookGroupIdentifier];
-//        
-//        if (!addNew && !group && groupIdentifier>0 && groupCount>0 && ![groupIdentifierNumber isEqualToNumber:[NSNumber numberWithInt:(int)-1]]  && ![groupIdentifierNumber isEqualToNumber:[NSNumber numberWithInt:(int)0]]) {
-//            
-//            group=ABAddressBookGetGroupWithRecordID((ABAddressBookRef) addressBook, groupIdentifier);
-//            
-//        }
-//        
-//        if (!group ||addNew) {
-//            
-//            
-//            if (!addressBook) {
-//                
-//                return;
-//            }
-//            //        ABRecordRef CFAddressBookGroupRecord =  ABGroupCreate ();
-//            
-//            group=ABGroupCreateInSource(source);
-//            
-//            //        ABRecord *groupRecord=(ABRecord *)[group getRecordRef];
-//            
-//            //        
-//            
-//            
-//            //        
-//            
-//            bool didSetGroupName=FALSE;
-//            didSetGroupName= (bool) ABRecordSetValue (
-//                                                      group,
-//                                                      (ABPropertyID) kABGroupNameProperty,
-//                                                      (__bridge CFStringRef)groupName  ,
-//                                                      nil
-//                                                      );  
-//            
-//            ABAddressBookAddRecord((ABAddressBookRef) addressBook, (ABRecordRef) group, nil);
-//            
-//            BOOL wantToSaveChanges=TRUE;
-//            if (ABAddressBookHasUnsavedChanges(addressBook)) {
-//                
-//                if (wantToSaveChanges) {
-//                    bool didSave=FALSE;
-//                    didSave = ABAddressBookSave(addressBook, nil);
-//                    
-////                    if (!didSave) {/* Handle error here. */  }
-////                    else 
-//                    
-//                } 
-//                else {
-//                    
-//                    ABAddressBookRevert(addressBook);
-//                    
-//                }
-//                
-//            }
-//            
-//            //        ABRecord *groupRecord=[[ABRecord alloc]initWithABRef:(CFTypeRef)kABGroupType ];
-//            
-//            
-//            
-//            
-//            
-//            
-//            
-//            
-//            
-//            groupIdentifier=ABRecordGetRecordID(group);
-//            
-//            [[NSUserDefaults standardUserDefaults] setInteger:(int )groupIdentifier forKey:kPTTAddressBookGroupIdentifier];
-//            
-//            [[NSUserDefaults standardUserDefaults] setValue:groupName forKey:kPTTAddressBookGroupName];  
-//            
-//            [[NSUserDefaults standardUserDefaults]synchronize];
-//            
-//            if (group) {
-//                CFRelease(group);
-//            }
-//            
-//        } 
-//        else
-//            
-//        {
-//            
-//            BOOL wantToSaveChanges=TRUE;
-//            groupIdentifier=ABRecordGetRecordID(group);
-//            
-//            if (groupIdentifier>0) {
-//                
-//                [[NSUserDefaults standardUserDefaults] setInteger:(int )groupIdentifier forKey:kPTTAddressBookGroupIdentifier];
-//                
-//                [[NSUserDefaults standardUserDefaults]synchronize];
-//                
-//            }
-//            if (ABAddressBookHasUnsavedChanges(addressBook)) {
-//                
-//                if (wantToSaveChanges) {
-//                    bool didSave=FALSE;
-//                    didSave = ABAddressBookSave(addressBook, nil);
-//                    
-//                    if (!didSave) {/* Handle error here. */}
-//                    
-//                } 
-//                else {
-//                    
-//                    ABAddressBookRevert(addressBook);
-//                    
-//                }
-//                
-//                
-//                
-//            }
-//            
-//        }
-//        
-//        
-//               
-//        if (source) {
-//            CFRelease(source);
-//        }
-//    }
-//    //    [[NSUserDefaults standardUserDefaults]  setValue:(NSString *)groupName forKey:kPTTAddressBookGroupName];
-//    
-//    
-//    
-//    
-//    
-//}
-
-//-(IBAction)abGroupsDoneButtonTapped:(id)sender{
-//    
-//    
-//    
-//    //    SCTableViewModel *ownerTableViewModel=(SCTableViewModel *)self.ownerTableViewModel;
-//    
-//    
-//    
-//    if (currentDetailTableViewModel_.tag=429 &&currentDetailTableViewModel_.sectionCount) {
-//        SCObjectSelectionSection *section=(SCObjectSelectionSection *)[currentDetailTableViewModel_ sectionAtIndex:0];
-//        
-//        
-//        
-//        NSMutableSet *mutableSet= (NSMutableSet *) abGroupObjectSelectionCell_.objectSelectionCell.selectedItemsIndexes;
-//        mutableSet=[NSMutableSet setWithSet:section.selectedItemsIndexes ];
-//        
-//       
-//        
-//        
-//    }
-//    if(self.tableViewModel.viewController.navigationController)
-//	{
-//		// check if self is the rootViewController
-//        
-//        [self.tableViewModel.viewController.navigationController popViewControllerAnimated:YES];
-//        
-//        
-//	}
-//	else
-//		[self.tableViewModel.viewController dismissModalViewControllerAnimated:YES];
-//    
-//
-//    
-//}
 
 -(int )defaultABSourceID{
     

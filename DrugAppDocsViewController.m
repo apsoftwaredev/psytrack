@@ -48,34 +48,7 @@
     [super viewDidLoad];
    
 	
-    // Set up the edit and add buttons.
-    
-    //    
-    //    NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
-    //    
-    //    
-    //    
-    //    
-    //    
-    //    // create a spacer
-    //    UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
-    //                                   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
-    //    [buttons addObject:editButton];
-    //    
-    //    [self editButtonItem];
-    //    
-    //    
-    //    // create a standard "add" button
-    //    UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
-    //                                  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
-    //    addButton.style = UIBarButtonItemStyleBordered;
-    //    [buttons addObject:addButton];
-    //    
-    //    // stick the buttons in the toolbar
-    //    self.navigationItem.rightBarButtonItems=buttons;
-    //    
-    
-    
+   
     
     
 	self.tableView.backgroundColor=[UIColor clearColor];
@@ -122,12 +95,7 @@
     SCMemoryStore *memoryStore=[SCMemoryStore storeWithObjectsArray:[NSMutableArray arrayWithArray:fetchedObjectsArray] defaultDefiniton:appDocDef];
     
     objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView dataStore:memoryStore];
-//    objectsModel.delegate=self;
-//    SCArrayOfObjectsSection *section=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Action Documents" entityClassDefinition:appDocDef usingPredicate:applNoPredicate];
-    
-//    SCArrayOfObjectsSection *section =[SCArrayOfObjectsSection sectionWithHeaderTitle:@"Action Documents" items:[NSMutableArray arrayWithArray:fetchedObjectsArray] itemsDefinition:appDocDef];
-//    
-    
+
     objectsModel.allowDeletingItems=FALSE;
     objectsModel.allowEditDetailView=FALSE;
     objectsModel.allowMovingItems=FALSE;
@@ -146,81 +114,7 @@
         
         return actionOverviewCell;
     };
-//    
-    
-//    section.sortItemsSetAscending=FALSE;
-//    [objectsModel addSection:section];
-    
-    //  	tableModel.searchPropertyName = @"drugName;activeIngredient";
-    //    
-    //    
-    //    self.tableModel.allowMovingItems=TRUE;
-    //    
-    //    self.tableModel.autoAssignDelegateForDetailModels=TRUE;
-    //    self.tableModel.autoAssignDataSourceForDetailModels=TRUE;
-    //    
-    //    self.tableModel.delegate=self;
-    //    // Initialize tableModel
-    //    
-    //    //	
-    //    
-    //    // Initialize tableModel
-    //    if (isInDetailSubview) {
-    //        
-    //        
-    //        
-    //        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
-    //        
-    //        
-    //        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped)];
-    //        [buttons addObject:doneButton];
-    //        
-    //        // create a spacer
-    //        UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
-    //                                       initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
-    //        [buttons addObject:editButton];
-    //        
-    //        [self editButtonItem];
-    //        
-    //        
-    //        // create a standard "add" button
-    //        UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
-    //                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
-    //        addButton.style = UIBarButtonItemStyleBordered;
-    //        [buttons addObject:addButton];
-    //        
-    //        
-    //        
-    //        // stick the buttons in the toolbar
-    //        self.navigationItem.rightBarButtonItems=buttons;
-    //        self.tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
-    //        self.tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:2];
-    //        
-    //        UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
-    //        
-    //        self.navigationItem.leftBarButtonItem=cancelButton;
-    //        
-    //        
-    //    }
-    //    else
-    //    {
-    //        if (self.navigationItem.rightBarButtonItems.count>1) {
-    //            
-    //            tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
-    //        }
-    //        
-    //        
-    //        
-    //        if (self.navigationItem.rightBarButtonItems.count >0)
-    //        {
-    //            tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
-    //        }
-    //        
-    //        
-    //        
-    //    }
-    //    
-    
+
     
     if([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6){
        
@@ -237,14 +131,6 @@
     
    
    
-    
-    //    [self updateClientsTotalLabel];
-    
-    //    [(PTTAppDelegate *)[UIApplication sharedApplication].delegate application:[UIApplication sharedApplication]
-    //                                               willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
-    //                                                                     duration:5];
-    //   
-    
     
     self.tableViewModel=objectsModel;
     actionDateFetchRequest=nil;

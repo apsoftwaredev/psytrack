@@ -30,17 +30,7 @@
 
 - (void)createPDF:(NSString *)fileName presentationTableModel:(SCArrayOfObjectsModel *)presentationTableModel trackText:(NSString *)trackText   serviceDateTimeStr:(NSString *)serviceDateTimeStr clinician:(ClinicianEntity*)clinician forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color allowCopy:(BOOL)allowCopy allowPrint:(BOOL)allowPrint password:(NSString*)password reportTitle:(NSString *)reportTitle isSupportActivity:(BOOL)spportActivity{
     isSupportActivity=spportActivity;
-    //create our invisibleTextView
-//    invisibleTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-//    textArray = [[NSMutableArray alloc] init];
-//    NSString *content=[self getContentFromTableModel:presentationTableModel];
-    
-    
-    
-    
-//    [textArray setArray:[content componentsSeparatedByString:@" "]];
-//    [invisibleTextView setText:content];
-    
+ 
     
 	CGContextRef pdfContext;
 	CFStringRef path;
@@ -75,32 +65,12 @@
 	CFDictionarySetValue(myDictionary, kCGPDFContextCreator, (CFStringRef)fileName);
 	if (password != nil) CFDictionarySetValue(myDictionary, kCGPDFContextOwnerPassword, passwordString);
 	if (password != nil) CFDictionarySetValue(myDictionary, kCGPDFContextUserPassword, passwordString);
-	//if (![password isEqualToString:@""]) CFDictionarySetValue(myDictionary, kCGPDFContextEncryptionKeyLength, (CFStringRef)"128");
-	//if (allowCopy) CFDictionarySetValue(myDictionary, kCGPDFContextAllowsCopying, kCFBooleanTrue);
-	if (!allowCopy) CFDictionarySetValue(myDictionary, kCGPDFContextAllowsCopying, kCFBooleanFalse);
-	//if (allowPrint) CFDictionarySetValue(myDictionary, kCGPDFContextAllowsPrinting, kCFBooleanTrue);
-	if (!allowPrint) CFDictionarySetValue(myDictionary, kCGPDFContextAllowsPrinting, kCFBooleanFalse);
-	
-	
-	// Create our PDF Context with the CFURL, the CGRect we provide, and the above defined dictionary
-//	pdfContext = CGPDFContextCreateWithURL (url, &pageRect, myDictionary);
-	
-//      UIGraphicsBeginPDFContextToData(pdfData, aView.bounds, NULL);
-//    CGContextRef pdfContext;
-    
-    //
-    //                        CGRect pageRect = aView.bounds;
-    
-    // Create our PDF Context with the CFURL, the CGRect we provide, and the above defined dictionary
-    
-    
-  
-    
- 
 
-    // Cleanup our mess
-   	
-	//CFRange currentRange = CFRangeMake(0, 0);
+	if (!allowCopy) CFDictionarySetValue(myDictionary, kCGPDFContextAllowsCopying, kCFBooleanFalse);
+
+	if (!allowPrint) CFDictionarySetValue(myDictionary, kCGPDFContextAllowsPrinting, kCFBooleanFalse);
+
+ 
     NSString *clinicianString=nil;
     if (clinician) {
         clinicianString=clinician.combinedName;
@@ -225,20 +195,7 @@
         pageCount++;
 		CGContextBeginPage (pdfContext, &pageRect);
 		
-      
-//		CGContextSaveGState(pdfContext);
-//		UIGraphicsPushContext(pdfContext);
-		
-//		CGContextTranslateCTM(pdfContext, 0, bounds.origin.y);
-//		CGContextScaleCTM(pdfContext, 1, -1);
-//		CGContextTranslateCTM(pdfContext, 0, -(bounds.origin.y + bounds.size.height));
-        
-        // Flip the coordinate system
-//        CGContextSetTextMatrix(pdfContext, CGAffineTransformIdentity);
-//        CGContextTranslateCTM(pdfContext, 0, bounds.size.height);
-//        CGContextScaleCTM(pdfContext, 1.0, -1.0);
-
-        
+    
                CTFrameDraw(frame, pdfContext);
         
         
@@ -349,11 +306,7 @@
         CFRelease(clinicianPath);
         CFRelease(clinicanframesetter);
         }
-        //		if ([invisibleTextView.text length] > 0) [[self stringToDraw:font fontSize:fontSize] drawInRect:bounds withFont:[UIFont fontWithName:font size:fontSize]];
-//		CGContextRestoreGState(pdfContext);
-//		UIGraphicsPopContext();
-        
-        
+         
         //set up context
         UIColor *redColor=[UIColor redColor];
         CGContextSetLineWidth(pdfContext, 0.3);
@@ -401,18 +354,9 @@
         }
         
                
-            
-//            UIGraphicsPushContext(pdfContext);
-//            CGContextSaveGState(pdfContext);
-//            CGContextTranslateCTM(pdfContext, 0, bounds.origin.y);
-//            CGContextScaleCTM(pdfContext, 1, -1);
-//            CGContextTranslateCTM(pdfContext, 0, -(bounds.origin.y + bounds.size.height));
+
             if ([invisibleTextView.text length] > 0)
             {
-               // [[self stringToDraw:font fontSize:12 drawInRect:bounds] drawInRect:bounds withFont:[UIFont fontWithName:@"Times New Roman" size:12.0]];
-                
-                
-//                [@"test" drawInRect:bounds withFont:[UIFont fontWithName:@"Times New Roman" size:12.0]];
                                CGRect bounds = CGRectMake(LEFT_MARGIN,
                                            TOP_MARGIN-normalFont.lineHeight*5-titleLineHeight-10,
                                            DOC_WIDTH - RIGHT_MARGIN - LEFT_MARGIN,
@@ -422,16 +366,11 @@
                 NSMutableAttributedString *textAttStr = [[NSMutableAttributedString alloc] initWithString:[self stringToDraw:font fontSize:12 drawInRect:bounds]];
                 
             
-                
-//                [textAttStr addAttribute:NSFontAttributeName value:normalFont range:NSMakeRange(0, [trackText length])];
-                
-
-                
+               
                 CGMutablePathRef trackTextPath = CGPathCreateMutable();
                 CGPathAddRect(trackTextPath, NULL, bounds );
                 
-//                [textAttStr addAttributes:attributes range:NSMakeRange(0,[textAttStr length])];
-                
+               
                 CTFramesetterRef trackTextframesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)textAttStr);
                 CTFrameRef trackTextframe = CTFramesetterCreateFrame(trackTextframesetter,
                                                                      CFRangeMake(0, [textAttStr length]), trackTextPath, NULL);
@@ -448,9 +387,6 @@
                 done=YES;
             }
 
-//            CGContextRestoreGState(pdfContext);
-//            UIGraphicsPopContext();
-        
 		      
 		if (pageCount>50) {
             //just as a control
@@ -781,82 +717,6 @@
 
 }
 
-//- (void)createPDF:(NSString *)fileName withContent:(NSString *)content forSize:(int)fontSize andFont:(NSString *)font andColor:(UIColor *)color:(BOOL)allowCopy:(BOOL)allowPrint:(NSString*)password {
-//    
-//    //create our invisibleTextView
-//    invisibleTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-//    textArray = [[NSMutableArray alloc] init];
-//    
-//    [textArray setArray:[content componentsSeparatedByString:@" "]];
-//    [invisibleTextView setText:content];
-//    
-//    
-//	CGContextRef pdfContext;
-//	CFStringRef path;
-//	CFURLRef url;
-//	CFStringRef passwordString = (__bridge CFStringRef)password;
-//	CGRect pageRect = CGRectMake(0, 0, DOC_WIDTH, DOC_HEIGHT);
-//	CFMutableDictionaryRef myDictionary = NULL;
-//	const char *filename = [fileName UTF8String];
-//	// Create a CFString from the filename we provide to this method when we call it
-//	path = CFStringCreateWithCString (NULL, filename,
-//									  kCFStringEncodingUTF8);
-//	// Create a CFURL using the CFString we just defined
-//	url = CFURLCreateWithFileSystemPath (NULL, path,
-//										 kCFURLPOSIXPathStyle, 0);
-//	//CFRelease (path);
-//	// This dictionary contains extra options mostly for 'signing' the PDF
-//	myDictionary = CFDictionaryCreateMutable(NULL, 0,
-//											 &kCFTypeDictionaryKeyCallBacks,
-//											 &kCFTypeDictionaryValueCallBacks);
-//	CFDictionarySetValue(myDictionary, kCGPDFContextTitle, (CFStringRef)fileName);
-//	CFDictionarySetValue(myDictionary, kCGPDFContextCreator, (CFStringRef)fileName);
-//	if (password != nil) CFDictionarySetValue(myDictionary, kCGPDFContextOwnerPassword, passwordString);
-//	if (password != nil) CFDictionarySetValue(myDictionary, kCGPDFContextUserPassword, passwordString);
-//	//if (![password isEqualToString:@""]) CFDictionarySetValue(myDictionary, kCGPDFContextEncryptionKeyLength, (CFStringRef)"128");
-//	//if (allowCopy) CFDictionarySetValue(myDictionary, kCGPDFContextAllowsCopying, kCFBooleanTrue);
-//	if (!allowCopy) CFDictionarySetValue(myDictionary, kCGPDFContextAllowsCopying, kCFBooleanFalse);
-//	//if (allowPrint) CFDictionarySetValue(myDictionary, kCGPDFContextAllowsPrinting, kCFBooleanTrue);
-//	if (!allowPrint) CFDictionarySetValue(myDictionary, kCGPDFContextAllowsPrinting, kCFBooleanFalse);
-//	
-//	
-//	// Create our PDF Context with the CFURL, the CGRect we provide, and the above defined dictionary
-//	pdfContext = CGPDFContextCreateWithURL (url, &pageRect, myDictionary);
-//	// Cleanup our mess
-//    
-//	CFRelease(myDictionary);
-//	CFRelease(url);
-//	//CFRelease(passwordString);
-//	
-//	//CFRange currentRange = CFRangeMake(0, 0);
-//	
-//	do {
-//		CGContextBeginPage (pdfContext, &pageRect);
-//		
-//		CGRect bounds = CGRectMake(LEFT_MARGIN,
-//								   TOP_MARGIN,
-//								   DOC_WIDTH - RIGHT_MARGIN - LEFT_MARGIN,
-//								   DOC_HEIGHT - TOP_MARGIN - BOTTOM_MARGIN);
-//		
-//		UIGraphicsPushContext(pdfContext);
-//		CGContextSaveGState(pdfContext);
-//		CGContextTranslateCTM(pdfContext, 0, bounds.origin.y);
-//		CGContextScaleCTM(pdfContext, 1, -1);
-//		CGContextTranslateCTM(pdfContext, 0, -(bounds.origin.y + bounds.size.height));
-//		if ([invisibleTextView.text length] > 0) [[self stringToDraw:font fontSize:fontSize drawInRect:bounds] drawInRect:bounds withFont:[UIFont fontWithName:font size:fontSize]];
-//		CGContextRestoreGState(pdfContext);
-//		UIGraphicsPopContext();
-//		
-//		CGContextEndPage (pdfContext);
-//	}
-//	while (!done);
-//	
-//	// We are done with our context now, so we release it
-//	CGContextRelease (pdfContext);
-//	CFRelease(path);
-//    
-//    
-//}
 
 - (NSString *)stringToDraw:(NSString *)font fontSize:(int)fontSize drawInRect:(CGRect )bounds {
 	CGSize tempSize;

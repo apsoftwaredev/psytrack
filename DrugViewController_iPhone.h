@@ -26,9 +26,7 @@
     SCArrayOfObjectsModel *objectsModel;
     
   	 UISearchBar *searchBar;
-//    UITableView *tableView;
-    
-//	SCArrayOfObjectsModel *tableModel;
+
     NSString *drugApplNo;
     NSString *drugProductNo;
     BOOL isInDetailSubview;
@@ -62,9 +60,9 @@
     NSURLRequest *drugFileRequest;
     NSURLConnection *connectionToDrugFile;
 }
-//@property (nonatomic, strong)  SCArrayOfObjectsModel *tableModel;
+
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
-//@property (nonatomic, strong) IBOutlet UITableView *tableView;
+
 @property (nonatomic, strong) IBOutlet UIDownloadBar *downloadBar;
 @property (nonatomic, strong) IBOutlet UILabel *downloadLabel;
 @property (nonatomic, strong) IBOutlet UILabel *downloadBytesLabel;
@@ -78,7 +76,7 @@
 @property (nonatomic, strong) DrugNameObjectSelectionCell *drugObjectSelectionCell;
 
 -(IBAction)downloadButtonTapped:(id)sender;
-//-(IBAction)CancelDownloadTapped:(id)sender;
+
 - (CGFloat ) getLocalDrugFileSize;
 - (void) connectToRemoteDrugFile;
 -(IBAction)startCheckingForUpdate:(id)sender;

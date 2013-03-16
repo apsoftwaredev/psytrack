@@ -44,63 +44,10 @@
     [super viewDidLoad];
     
 	
-    // Set up the edit and add buttons.
-    
-//    
-//    NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
-//    
-//    
-//    
-//    
-//    
-//    // create a spacer
-//    UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
-//                                   initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
-//    [buttons addObject:editButton];
-//    
-//    [self editButtonItem];
-//    
-//    
-//    // create a standard "add" button
-//    UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
-//                                  initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
-//    addButton.style = UIBarButtonItemStyleBordered;
-//    [buttons addObject:addButton];
-//    
-//    // stick the buttons in the toolbar
-//    self.navigationItem.rightBarButtonItems=buttons;
-//    
-    
+
 	self.tableView.backgroundColor=[UIColor clearColor];
    
-
-
-//    NSPredicate *applNoPredicate=[NSPredicate predicateWithFormat:@"applNo matches %@",applNoString];
- 
-//   
-//   fetchRequest = [[NSFetchRequest alloc] init];
-//NSEntityDescription *entity = [NSEntityDescription entityForName:@"DrugRegActionDateEntity"
-//inManagedObjectContext:managedObjectContext];
-//[fetchRequest setEntity:entity];
-//
-//NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"actionDate"
-//ascending:NO];
-//NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-//[fetchRequest setSortDescriptors:sortDescriptors];
-//
-//    [fetchRequest setPredicate:applNoPredicate];
-   
-    
-//    [fetchRequest setFetchBatchSize:10];
-    
-//NSError *error = nil;
-//NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-//if (fetchedObjects == nil) {
-//    // Handle the error
-//}
-//    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0ul);
-//    dispatch_async(queue, ^{
-        
+  
         
         
         NSManagedObjectContext *drugsManagedObjectContext=(NSManagedObjectContext *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate drugsManagedObjectContext];
@@ -153,12 +100,8 @@
 //    
 
     
-//    SCDataFetchOptions *dataFetchOptions=[SCDataFetchOptions optionsWithSortKey:@"actionDate" sortAscending:NO filterPredicate:applNoPredicate];
-    
     SCEntityDefinition *actionDateDef=[SCEntityDefinition definitionWithEntityName:@"DrugRegActionDateEntity" managedObjectContext:drugsManagedObjectContext propertyNames:[NSArray arrayWithObjects:@"actionDate", @"docType", nil]];
     
-
-//    NSMutableArray *mutableArray=[NSMutableArray arrayWithArray:fetchedObjects];
     
     actionDateDef.keyPropertyName=@"actionDate";
     actionDateDef.titlePropertyName=@"actionDate";
@@ -179,9 +122,7 @@
     objectsModel = [[SCArrayOfObjectsModel alloc]initWithTableView:self.tableView dataStore:memoryStore];
     
 
-    
-//        SCArrayOfObjectsSection *section=[SCArrayOfObjectsSection sectionWithHeaderTitle:@"USFDA Actions" dataStore:memoryStore];
-        //    section.dataFetchOptions=dataFetchOptions;
+
         objectsModel.allowEditDetailView=NO;
         objectsModel.allowDeletingItems=FALSE;
         objectsModel.allowEditDetailView=FALSE;
@@ -215,91 +156,7 @@
             };
         
 
-        
-        // Instantiate the tabel model
-//      objectsModel.modeledTableView.userInteractionEnabled=YES;
-//    [objectsModel addSection:section];
-    
-    
-   
-    
-   //    section.sortItemsSetAscending=FALSE;
-       
      
-   
-        
-//    });
- 
-//  	tableModel.searchPropertyName = @"drugName;activeIngredient";
-    //    
-    //    
-    //    self.tableModel.allowMovingItems=TRUE;
-    //    
-    //    self.tableModel.autoAssignDelegateForDetailModels=TRUE;
-    //    self.tableModel.autoAssignDataSourceForDetailModels=TRUE;
-    //    
-    //    self.tableModel.delegate=self;
-    //    // Initialize tableModel
-    //    
-    //    //	
-    //    
-    //    // Initialize tableModel
-    //    if (isInDetailSubview) {
-    //        
-    //        
-    //        
-    //        NSMutableArray* buttons = [[NSMutableArray alloc] initWithCapacity:2];
-    //        
-    //        
-    //        UIBarButtonItem *doneButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped)];
-    //        [buttons addObject:doneButton];
-    //        
-    //        // create a spacer
-    //        UIBarButtonItem* editButton = [[UIBarButtonItem alloc]
-    //                                       initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:nil action:nil];
-    //        [buttons addObject:editButton];
-    //        
-    //        [self editButtonItem];
-    //        
-    //        
-    //        // create a standard "add" button
-    //        UIBarButtonItem* addButton = [[UIBarButtonItem alloc]
-    //                                      initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:NULL];
-    //        addButton.style = UIBarButtonItemStyleBordered;
-    //        [buttons addObject:addButton];
-    //        
-    //        
-    //        
-    //        // stick the buttons in the toolbar
-    //        self.navigationItem.rightBarButtonItems=buttons;
-    //        self.tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:1];
-    //        self.tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:2];
-    //        
-    //        UIBarButtonItem *cancelButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonTapped)];
-    //        
-    //        self.navigationItem.leftBarButtonItem=cancelButton;
-    //        
-    //        
-    //    }
-    //    else
-    //    {
-    //        if (self.navigationItem.rightBarButtonItems.count>1) {
-    //            
-    //            tableModel.addButtonItem = [self.navigationItem.rightBarButtonItems objectAtIndex:1];
-    //        }
-    //        
-    //        
-    //        
-    //        if (self.navigationItem.rightBarButtonItems.count >0)
-    //        {
-    //            tableModel.editButtonItem=[self.navigationItem.rightBarButtonItems objectAtIndex:0];
-    //        }
-    //        
-    //        
-    //        
-    //    }
-    //    
-    
     
     
     if([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6){
@@ -314,16 +171,11 @@
         
     }
     
-    //    [self updateClientsTotalLabel];
-    
-    //    [(PTTAppDelegate *)[UIApplication sharedApplication].delegate application:[UIApplication sharedApplication]
-    //                                               willChangeStatusBarOrientation:[[UIApplication sharedApplication] statusBarOrientation]
-    //                                                                     duration:5];
-    //
+ 
     objectsModel.allowRowSelection=YES;
     
     self.tableViewModel=objectsModel;
-//    objectsModel.delegate=self;
+
     sortDescriptor=nil;
     sortDescriptors=nil;
     actionDateFetchRequest=nil;

@@ -35,10 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //    // Do any additional setup after loading the view from its nib.
-    
-    //
-    //
+ 
     UIViewController *navtitle=self.navigationController.topViewController;
     
     self.containerView.backgroundColor=[UIColor clearColor];

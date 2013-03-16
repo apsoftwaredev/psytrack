@@ -17,25 +17,7 @@
  */
 #import "TrainTrackViewController.h"
 #import "PTTAppDelegate.h"
-
-//#import "UICasualAlert.h"
-//#import <MessageUI/MessageUI.h>
-//
-//#import "IASKSpecifier.h"
-//#import "IASKSettingsReader.h"
-//
-//#import "CustomViewCell.h"
-
-//#import "InterventionViewController.h"
-//#import "IndirectSupportViewController.h"
-//#import "SupervisionReceivedViewController.h"
-//#import "SupervisionGivenViewController.h"
-
 @implementation TrainTrackViewController
-
-
-//@synthesize cliniciansViewController_Shared=cliniciansViewController_Shared_;
-//@synthesize appSettingsViewController;
 
 
 #pragma mark -
@@ -373,8 +355,7 @@
             if (indexPath.row==1) {
                 [self LoadTimeTrackViewControllerWithSetup:(PTrackControllerSetup)kTrackInterventionSetup];
                 break;
-            }            //interventions
-//            if (indexPath.row==1){};
+            }            
             
             
         }
@@ -570,18 +551,7 @@
             
         case 8:
         {
-            //@"Drug Database"
-           
-            
-//           
-            
-//            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-            
-//           
-//            UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:drugViewController_iPhone];	
-            
-//            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-            
+         
             if (!drugViewController_iPhone) {
                 drugViewController_iPhone = [[DrugViewController_iPhone alloc] initWithNibName:@"DrugViewController_iPhone" bundle:nil];
             }
@@ -846,19 +816,10 @@
     UIImage *lockImage=[UIImage imageNamed:@"lock.png"];
 	UIBarButtonItem *stopButton = [[UIBarButtonItem alloc] initWithImage:lockImage style:UIBarButtonItemStyleDone target:self action:@selector(lockScreen:)];
     self.navigationItem.rightBarButtonItem = stopButton;
-//    self.myTableView = 
-//    [[UITableView alloc] initWithFrame:self.view.bounds
-//                                 style:UITableViewStyleGrouped];
-//    self.myTableView.backgroundColor=[UIColor clearColor];
+
     self.tableView.dataSource = self;
     self.tableView.delegate=self;
-    /* Make sure our table view resizes correctly */
-//    self.tableView.autoresizingMask = 
-//    UIViewAutoresizingFlexibleWidth |
-//    UIViewAutoresizingFlexibleHeight;
-    
-//    [self.view addSubview:self.myTableView];
-//    NSString *menuBarImageNameStr=nil;
+ 
     if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         
         [self.tableView setBackgroundView:nil];
@@ -870,13 +831,7 @@
        
 prog = [[BigProgressViewWithBlockedView alloc] initWithFrame:CGRectMake(0, 64, 320, 367) blockedView:self.view];
     
-//          UIImage *navBarBackgroundImage=[UIImage imageNamed:menuBarImageNameStr];
-    
-//
-//    UINavigationBar *navBar=(UINavigationBar *)self.navigationController.navigationBar;
-    
-//    [navBar setBackgroundImage:navBarBackgroundImage forBarMetrics:UIBarMetricsDefault];
- 
+
 }
 
 

@@ -140,9 +140,6 @@
     
     
     if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
-        //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-        
-        
         UIColor *backgroundColor=nil;
         
         if(indexPath.row==NSNotFound|| tableModel.tag>0)

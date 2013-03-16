@@ -23,31 +23,6 @@
 {
     UIPopoverController *popoverController;
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*<UIPopoverControllerDelegate, UISplitViewControllerDelegate, SCTableViewModelDelegate> */
-    
-//    CliniciansRootViewController_iPad *cliniciansRootViewController_iPad;
-//    UIPopoverController *popoverController;
-//    UITableView *tableView;
-//	UIBarButtonItem *addButtonItem;
-
 }
 
-
-/*
-@property (nonatomic,strong) IBOutlet CliniciansRootViewController_iPad *cliniciansRootViewController_iPad;
-
-@property (nonatomic, strong) UIBarButtonItem *addButtonItem;
-*/
 @end

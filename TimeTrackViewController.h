@@ -35,11 +35,8 @@ static NSString * const kTrackSupervisionReceivedEntityName=@"SupervisionReceive
 {
     ClientPresentations_Shared *clientPresentations_Shared;
     UISearchBar *searchBar;
-//    UITableView *tableView;
     PTManagedObjectContext *managedObjectContext;
     __weak UILabel *totalAdministrationsLabel;
-    
-//    SCArrayOfObjectsModel *tableModel;
     
     PTrackControllerSetup currentControllerSetup;
     BOOL viewControllerOpen;
@@ -100,9 +97,9 @@ static NSString * const kTrackSupervisionReceivedEntityName=@"SupervisionReceive
 
 
 @property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
-//@property (nonatomic, weak) IBOutlet UITableView *tableView;
+
 @property (nonatomic, weak) IBOutlet UILabel *totalAdministrationsLabel;
-//@property (nonatomic, strong) IBOutlet NSManagedObject *managedObject;
+
 @property (nonatomic, weak) IBOutlet UITextField *stopwatchTextField;
 @property (nonatomic,strong)  ClientPresentations_Shared *clientPresentations_Shared;
 
@@ -111,7 +108,7 @@ static NSString * const kTrackSupervisionReceivedEntityName=@"SupervisionReceive
 @property (nonatomic, strong) NSMutableArray *eventsList;
 @property (nonatomic, strong) EKEventEditViewController *eventViewController;
 
-//- (NSArray *) fetchEventsForToday;
+
 - (IBAction) addEvent:(id)sender;
 @property (strong, nonatomic) IBOutlet  UILabel *totalTimeHeaderLabel;
 @property (strong, nonatomic) IBOutlet  UILabel *footerLabel;

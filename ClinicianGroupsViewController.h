@@ -35,11 +35,10 @@
     NSMutableDictionary *dictionaryArrayOfStringsIndexForGroupIdentifierKey;
     NSArray *groupArray;
     NSMutableDictionary *_valuesDictionary;
-//    ABAddressBookRef addressBook;
+
     SCTableViewModel *currentDetailTableViewModel_;
     SCObjectSelectionCell *sourcesObjSelectionCell_;
     
-//    ABAddressBookRef addressBook;
     ABRecordRef source;
     int groupRecordIDToDeleteOrImport;
     UIView *detailViewSuperview;

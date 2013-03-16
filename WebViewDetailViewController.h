@@ -25,7 +25,6 @@
 UIActionSheetDelegate, UIScrollViewDelegate, UIPopoverControllerDelegate, MFMailComposeViewControllerDelegate,UIDocumentInteractionControllerDelegate, UIWebViewDelegate> {
     UIToolbar	  *toolbar;
     UIBarButtonItem *printButton;
-//    UIBarButtonItem *pickerButton;
   
     UIPopoverController *popover_;
     
@@ -41,7 +40,7 @@ UIActionSheetDelegate, UIScrollViewDelegate, UIPopoverControllerDelegate, MFMail
     NSURL *documentWebURL;
  
     NSString *tmpPDF;
-//    NSURL * PDFDocumentOnDeviceURL;
+
     UIPrintInteractionController *pic;
     UIActionSheet *pdfActionSheet;
     PTTAppDelegate *appDelegate;
@@ -52,21 +51,16 @@ UIDocumentInteractionController *documentController;
 
 @property (strong, nonatomic) UIToolbar	      *toolbar;
 @property (strong, nonatomic) UIBarButtonItem *printButton;
-
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) UIPopoverController *popover;
- @property (nonatomic, strong) IBOutlet UILabel *message;
-- (void)printContent ;
-
-
-
+@property (nonatomic, strong) IBOutlet UILabel *message;
 @property (nonatomic, strong) IBOutlet UIWebView *webView;
 
+- (void)printContent ;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil urlString:(NSString *)documentURLString;
 
-//-(IBAction)showPicker:(id)sender;
 -(void)displayComposerSheet;
-//-(void)launchMailAppOnDevice;
+
 
 @end

@@ -151,8 +151,6 @@
     CGFloat shiftSupervisionDown=0;
     CGFloat shiftDirectHoursFooterDown=0;
     CGFloat shiftIndirectHoursHeaderDown=0;
-//    CGFloat shiftOverallHoursFooterDown=0;
-//    CGFloat shiftContainerForSignaturesViewAndSupervisorSummariesDownTo=0;
    
     CGFloat interventionMoreNeededHeight=interventionTVHeight- self.interventionTypesTableView.frame.size.height;
     CGFloat assessmentMoreNeededHeight=assessmentTVHeight-self.assessmentTypesTableView.frame.size.height;
@@ -207,10 +205,6 @@
     shiftIndirectHoursHeaderDown=shiftDirectHoursFooterDown;
     shiftSupportDown=shiftIndirectHoursHeaderDown;
     shiftSupervisionDown=shiftSupportDown+supportMoreNeededHeight;
-//    shiftOverallHoursFooterDown=shiftSupervisionDown+supervisionMoreNeededHeight;
-//    shiftContainerForSignaturesViewAndSupervisorSummariesDownTo=shiftOverallHoursFooterDown+overallHoursFooter.frame.size.height+15;
-    
-    
 
           
    
@@ -440,9 +434,6 @@ UIScrollView *mainScrollView=self.mainPageScrollView;
         
     }       
     
-//    CGRect  mainPageScrollViewFrame=mainPageScrollView.frame;
-//    mainPageScrollViewFrame.size.height=MAX_MAIN_SCROLLVIEW_HEIGHT;
-//    mainScrollView.frame=mainPageScrollViewFrame;
 
 }
 -(void)loadBindingsIntoCustomControls{
@@ -707,20 +698,13 @@ interventionTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tab
         
         SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *interventionsSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:interventionType.interventionType footerNotes:interventionTypeWithTotalTimes.monthlyLogNotes sectionTotalStr: interventionTypeWithTotalTimes.totalToDateStr items:subTypeWithTotalsItemsArray itemsDefinition:typesDef];
         
-//        NSString *monthlyLogNotes=[interventionType monthlyLogNotesForMonth:self.monthToDisplay clinician:self.clinician];
-        
-       
               
         interventionsSection.dataFetchOptions=dataFetchOptions;
         
         
         interventionsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
         {
-            // Create & return a custom cell based on the cell in ContactOverviewCell.xib
-            
-            
-//            NSString *bindingsString = @"20:interventionSubType;21:self.monthToDisplay"; // 1,2,3 are the control tags
-            
+         
             NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"interventionSubType",totalsObject.monthToDisplay, nil] forKeys:[NSArray arrayWithObjects:@"20",@"21", nil]];
             
             MonthlyPracticumLogBottonCell *contactOverviewCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindings:bindingsDictionary nibName:bottomCellNibName];
@@ -743,7 +727,6 @@ interventionTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tab
   
     self.assessmentTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.assessmentTypesTableView];
     
-//    assessmentTableViewModel_.delegate=self;
     
     assessmentTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tableModel, SCTableViewSection *section, NSUInteger sectionIndex)
     {
@@ -901,18 +884,11 @@ interventionTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tab
                  
         SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter *assessmentObjectsSection = [SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter sectionWithHeaderTitle:nil footerNotes:totalsObject.assessmentMonthlyNotes sectionTotalStr:nil items:assessmentTypesWithTotalsItemsArray itemsDefinition:typesDef];
         
-        //        NSString *monthlyLogNotes=[interventionType monthlyLogNotesForMonth:self.monthToDisplay clinician:self.clinician];
-        
-       
         assessmentObjectsSection.dataFetchOptions=dataFetchOptions;
     
         assessmentObjectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
         {
-            // Create & return a custom cell based on the cell in ContactOverviewCell.xib
-            
-        
-            //            NSString *bindingsString = @"20:interventionSubType;21:self.monthToDisplay"; // 1,2,3 are the control tags
-            
+           
             NSDictionary *assessmentBindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"assessmentType",totalsObject.monthToDisplay, nil] forKeys:[NSArray arrayWithObjects:@"20",@"21", nil]];
             
             MonthlyPracticumLogBottonCell *assessmentTypeCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindings:assessmentBindingsDictionary nibName:bottomCellNibName];
@@ -1061,7 +1037,7 @@ interventionTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tab
         
     };
 
-//    supportTableViewModel_.delegate=self;
+
     NSArray *fetchedSupportObjects =  [self fetchObjectsFromEntity:(NSString *)@"SupportActivityTypeEntity" filterPredicate:nil pathsForPrefetching:(NSArray *)[NSArray arrayWithObjects:@"supportActivitiesDelivered.time",@"existingSupportActivities",nil]];
     
     NSMutableArray *supportActivitytTypesWithTotalsItemsArray=[NSMutableArray array];
@@ -1101,10 +1077,7 @@ interventionTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tab
     supportObjectsSection.sectionActions.cellForRowAtIndexPath = ^SCCustomCell*(SCArrayOfItemsSection *itemsSection, NSIndexPath *indexPath)
     {
         // Create & return a custom cell based on the cell in ContactOverviewCell.xib
-        
-    
-        //            NSString *bindingsString = @"20:interventionSubType;21:self.monthToDisplay"; // 1,2,3 are the control tags
-        
+       
         NSDictionary *bindingsDictionary=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"supportType",totalsObject.monthToDisplay, nil] forKeys:[NSArray arrayWithObjects:@"20",@"21", nil]];
         
         MonthlyPracticumLogBottonCell *contactOverviewCell = [MonthlyPracticumLogBottonCell cellWithText:nil objectBindings:bindingsDictionary nibName:bottomCellNibName];
@@ -1124,8 +1097,6 @@ interventionTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tab
 
     self.supervisionTableViewModel=[[SCTableViewModel alloc]initWithTableView:self.supervisionReceivedTypesTableView];
     
-//    supervisionTableViewModel_.delegate=self;
-    //
     supervisionTableViewModel_.modelActions.didAddSection = ^(SCTableViewModel *tableModel, SCTableViewSection *section, NSUInteger sectionIndex)
     {
         

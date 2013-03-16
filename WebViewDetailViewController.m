@@ -30,21 +30,7 @@
 @synthesize webView,toolbar, scrollView, printButton;
 
 @synthesize message;
-//
-//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-//{
-//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-//    if (self) {
-//        // Custom initialization
-//        
-//        
-//               
-//        //Add buttons
-//   
-//        
-//    }
-//    return self;
-//}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil urlString:(NSString *)documentURLString
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -64,12 +50,7 @@
 }
 -(void)dealloc{
 
-
-//    pickerButton=nil;
-//    
-//   popover=nil;
-    
-    
+   
     view=nil;
     
     fileName=nil;
@@ -77,12 +58,11 @@
    documentWebURLString=nil;
     documentWebURL=nil;
     
-//     
+   
     NSFileManager *fileManager=[[NSFileManager alloc]init];
     if([fileManager fileExistsAtPath:tmpPDF]) {
         
-//        
-        
+    
         NSError *error=nil;
         
         if (![fileManager removeItemAtPath:tmpPDF error:&error]) {
@@ -92,10 +72,6 @@
         
     }
    
-
-//    PDFDocumentOnDeviceURL=nil;
-
-
 
 }
 
@@ -112,7 +88,6 @@
     
 	[prog stopAnimating];
 	[webView stopLoading];
-	//self.navigationItem.rightBarButtonItem.enabled = YES; // for reloading when we return
 }
 -(void)willMoveToParentViewController:(UIViewController *)parent{
 
@@ -126,19 +101,7 @@
 
 }
 
-//// Implement loadView to create a view hierarchy programmatically, without using a nib.
-//- (void)loadView {
-//	[super loadView];
-//	
-//	// Create our PDFScrollView and add it to the view controller.
-//	
-//
-//}
 
-
-// Comment out to draw at print time rather than hand the image off to UIKit.
-// When printing single images on a page, using "direct submission" is the preferred 
-// approach unless you need custom placement and scaling of the image. 
 #define DIRECT_SUBMISSION 1   
 
 // Leave this line intact to use an ALAsset object to obtain a screen-size image and use 
@@ -179,7 +142,7 @@
             
             self.navigationItem.rightBarButtonItem = actionButton;
           
-//           toolbarItemsArray= [NSArray arrayWithObjects:  actionButton, nil];
+
         }
     
    
@@ -220,26 +183,7 @@
     webView.backgroundColor = [UIColor blackColor];
    
    
-//    
-    
-//    //DLog(@"new formateted %@",[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
-//           NSASCIIStringEncoding]);
-    
-//    NSURL *targetURL = [NSURL URLWithString:(NSString *)[[(NSString*)[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
-//                                                         NSASCIIStringEncoding] stringByReplacingOccurrencesOfString:@"," withString:formattedComma]stringByReplacingOccurrencesOfString:@"\%22" withString:@""] ];
-//    //DLog(@"target URL string is %@",[(NSString*)[documentWebURLString stringByAddingPercentEscapesUsingEncoding:
-//                                                  NSASCIIStringEncoding] stringByReplacingOccurrencesOfString:@"," withString:formattedComma]);
-//    
-    
-   
-   
 
-//   CGRect pdfViewerFrame = CGRectMake(10.0, 400.0, 300.0, kToolbarHeight);
-//    PDFScrollView *sv = [[PDFScrollView alloc] initWithFrame:pdfViewerFrame];
-//    
-//	
-//    [[self view] addSubview:sv];
-    
     if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad){
     
  
@@ -321,13 +265,7 @@
         ^(UIPrintInteractionController *pic, BOOL completed, NSError *error) {
             
            
-            
-//            if (!completed && error)
-//                
-//                //DLog(@"FAILED! due to error in domain %@ with error code %u",
-//                      
-//                      error.domain, error.code);
-            
+          
         };
         
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -511,11 +449,6 @@ return self.scrollView;
 	[picker setSubject:[NSString stringWithFormat:@"USFDA document %@",fileName]];
 	
     
-	// Set up recipients
-//	NSArray *toRecipients = [NSArray arrayWithObject:@"dbboice@stu.argosy.edu"]; 
-//		
-//	[picker setToRecipients:toRecipients];
-	
 	// Attach an image to the email
 	    NSData *myData = [NSData dataWithContentsOfFile:tmpPDF];
 	
@@ -545,9 +478,6 @@ return self.scrollView;
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error 
 {	
 	message.hidden = NO;
-	// Notifies users about errors associated with the interface
-	
-
    
     NSString *resultString;
     switch (result)
@@ -571,30 +501,6 @@ return self.scrollView;
 	
     [self dismissModalViewControllerAnimated:YES];
     
-    
-//    self.message.text=resultString;
-//    [UIView beginAnimations:nil context:nil];
-//    [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
-//    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-//    [UIView setAnimationDuration:3];
-//    
-//    
-//    
-//   
-//        self.message.alpha=1;
-//        
-//      
-//   
-//    [UIView commitAnimations];
-//    
-//    [UIView beginAnimations:nil context:NULL];
-//    [UIView setAnimationDuration:6];
-//	self.message.alpha=0;
-//       
-//    [UIView commitAnimations];
-    
-//    UICasualAlert *customAlert=[[UICasualAlert alloc]init];
-//     [customAlert displayRegularAlert:resultString forDuration:2.0 inView:nil];
     
     [appDelegate displayNotification:resultString forDuration:2.0 location:kPTTScreenLocationTop inView:nil];
     

@@ -44,17 +44,11 @@
 
 @property (nonatomic, strong) IBOutlet UILabel *totalCliniciansLabel;
 
-
-
-//@property (nonatomic,strong)IBOutlet SCArrayOfObjectsModel *objectsModel;
-
 -(void)updateClinicianTotalLabel;
 -(id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle isInDetailSubView:(BOOL)detailSubview objectSelectionCell:(ClinicianSelectionCell*)objectSelectionCell sendingViewController:(UIViewController *)viewController withPredicate:(NSPredicate *)startPredicate  usePrescriber:(BOOL)usePresciberBool allowMultipleSelection:(BOOL)allowMultiSelect;
 
     
 -(void)selectMyInformation;
-//-(void)cancelButtonTapped;
-    
 -(void)setSelectedClinicians;
 -(void)createSelectedCliniciansArray;
 

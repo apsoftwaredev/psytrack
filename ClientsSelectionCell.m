@@ -35,15 +35,7 @@
     [super performInitialization];
     
     
-   
-//    self.allowAddingItems = YES;
-//    self.allowDeletingItems = NO;
-//    self.allowMovingItems = YES;
-//    self.allowAddingItems = YES;
-//
-//    self.allowMultipleSelection=NO;
-//    self.allowNoSelection=YES;
-//    self.delegate=self;
+ 
 
   }
 - (void)willDisplay
@@ -81,52 +73,14 @@
 - (void)didSelectCell
 {
     
-    //
    
-   
-    
-//    NSManagedObjectContext *managedObjectContext=[(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-    //Create a class definition for the client Entity
-    
     
     ClientsViewController_Shared *clientsViewController_Shared=[[ClientsViewController_Shared alloc]init];
     
     [clientsViewController_Shared setupTheClientsViewModelUsingSTV];
     
     
-    
-//    NSMutableSet *mutableSet=[NSMutableSet setWithArray:self.items];
-    
-    
-    
-//    //
-    
-//    SCObjectSelectionSection *objectSelectionSection=[SCObjectSelectionSection sectionWithHeaderTitle:nil withItemsSet:mutableSet withClassDefinition:clientsViewController_Shared.clientDef];
-//    
-    
-//   NSMutableSet *mutableSet= [self.ownerTableViewModel mutableSetValueForKey:@"testSessionDelivered" ];
-
-//    NSMutableSet *clientsInClientPresentationItems=(NSMutableSet *)[self.ownerTableViewModel mutableSetValueForKey:@"client"];
-    
-  
-//    
-//    
-//    self.selectedItemIndex=[NSNumber numberWithInteger:(NSInteger)[self.items indexOfObject:clientObject]];
-//    
-//   
-////    
-//    
-//    objectSelectionSection.selectedItemIndex=(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:clientObject]];
-//    
-//    objectSelectionSection.allowMultipleSelection = NO;
-//    objectSelectionSection.allowNoSelection = NO;
-//    objectSelectionSection.maximumSelections = 1;
-//    objectSelectionSection.allowAddingItems = YES;
-//    objectSelectionSection.allowDeletingItems = NO;
-//    objectSelectionSection.allowMovingItems = YES;
-//    objectSelectionSection.allowEditDetailView = YES;
-//
-    
+ 
     NSString *clientViewControllerNibName;
     
     if ([SCUtilities is_iPad]) 
@@ -192,33 +146,6 @@
       
         
 
-    
-//    SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionAttributes
-        
-//        if (clientsViewContoller.tableModel.sectionCount) {
-//            [clientsViewContoller.tableModel removeSectionAtIndex:0];
-//        }
-//    
-//        [clientsViewContoller.tableModel addSection:objectSelectionSection];
-//    [clientsViewContoller.tableModel setUseSCObjectsSelectionSection:TRUE];
-//        clientsViewContoller.alreadySelectedClients=alreadySelectedClients;
-//        clientsViewContoller.clientCurrentlySelectedInReferringDetailview=clientObject;
-//        [clientsViewContoller updateClientsTotalLabel];
-  
-
-        
-        
-        //
-        
-        
-           
-    
-
-//    UINavigationController *clientsNavigationController=(UINavigationController *)clientsViewContoller.navigationController;
-//   clientsNavigationController=(UINavigationController *)self.ownerTableViewModel.viewController.navigationController;
-//        
-//        
-
 }
 
 
@@ -236,29 +163,7 @@
     multiSelect=(BOOL)[(NSNumber *)[self.objectBindings valueForKey:@"93"]boolValue];
     
     self.allowMultipleSelection=multiSelect;
-    //    NSManagedObjectContext *managedObjectContext=(NSManagedObjectContext *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
-    //    
-    //    
-    //    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    //    
-    //    NSEntityDescription *entity = [NSEntityDescription entityForName:@"ClientEntity" inManagedObjectContext:managedObjectContext];
-    //    [fetchRequest setEntity:entity];
-    //    
-    //    NSError *error = nil;
-    //    NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    //    if (fetchedObjects == nil) {
-    //        
-    //    }
-    //    NSMutableArray *arrayWithFetchedWithoutAlreadySelected=[NSMutableArray arrayWithArray:fetchedObjects];
-    
-    
-    
-    
-    //    if (!hasChangedClients && [self.boundObject valueForKey:@"client"]) {
-    //               
-    //      
-    //    
-    //      
+ 
     
     
     if (!hasChangedClients) {
@@ -319,29 +224,7 @@
     
 
 }
-//-(NSString *)clientIDCodeString{
-//
-//    NSString *clientIDCodeString=[NSString string];
-//    NSNumber *selectedIndex;
-//  
-//    
-//    int itemsCount=self.items.count;
-//    int selecteIndexIntValue=[selectedIndex intValue];
-//    selecteIndexIntValue=selecteIndexIntValue+1;
-//    if ((clientObject )&&(selecteIndexIntValue>-1 ) && (itemsCount>=1 )&& (selecteIndexIntValue <= itemsCount)) 
-//    {
-//       
-//       
-//        
-//       clientIDCodeString = (NSString *)[clientObject valueForKey:@"clientIDCode"];
-//        //
-//
-//    }
-// 
-//
-//    return clientIDCodeString;
-//
-//}
+
 
 -(void)doneButtonTappedInDetailView:(NSObject *)selectedObject selectedClients:(NSArray *)selectedClients withValue:(BOOL)hasValue{
 
@@ -357,11 +240,8 @@
     self.clientObject=(ClientEntity *) selectedObject;
     self.clientsArray=[NSMutableArray arrayWithArray:selectedClients];
     
-    //    [self.boundObject setValue:selectedObject forKey:@"client"];
-    
+   
     clientObject=(ClientEntity *) selectedObject;
-//    [self.boundObject setValue:selectedObject forKey:@"client"];
-    
    
     if (hasValue) {
         hasChangedClients=hasValue;
@@ -444,12 +324,6 @@
 	if(!self.needsCommit)
 		return;
     
-    
-    //    NSObject *selectedObject = nil;
-    //    int indexInt = [self.selectedItemIndex intValue] ;
-    
-    //    if((indexInt >= 0) &&(indexInt<=self.items.count+1)&&self.items.count>0){
-    //        selectedObject = [self.items objectAtIndex:indexInt];
     
     NSString *clientKeyStr=[self.objectBindings valueForKey:@"92"];
     

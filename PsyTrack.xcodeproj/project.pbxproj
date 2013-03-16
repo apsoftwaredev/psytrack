@@ -414,7 +414,6 @@
 		E7516B7B15085A23005B798A /* PTABGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = E7516B7A15085A23005B798A /* PTABGroup.m */; };
 		E751793715A85BCB00674F88 /* SupervisorsAndTotalTimesForMonth.m in Sources */ = {isa = PBXBuildFile; fileRef = E751793615A85BCA00674F88 /* SupervisorsAndTotalTimesForMonth.m */; };
 		E7577FA9158C1DAF0044D344 /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		E7577FAC158D13B50044D344 /* EncryptionTokenCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7577FAB158D13B50044D344 /* EncryptionTokenCell.m */; };
 		E75A148215A8DB6300F3EBEF /* TotalHoursAndMinutesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E75A148115A8DB6300F3EBEF /* TotalHoursAndMinutesCell.xib */; };
 		E75A148E15ABC9DB00F3EBEF /* MonthlyPracticumLogBottomCellWithUndefined.xib in Resources */ = {isa = PBXBuildFile; fileRef = E75A148D15ABC9DB00F3EBEF /* MonthlyPracticumLogBottomCellWithUndefined.xib */; };
 		E75A149415AC855900F3EBEF /* TrackTypeWithTotalTimes.m in Sources */ = {isa = PBXBuildFile; fileRef = E75A149315AC855800F3EBEF /* TrackTypeWithTotalTimes.m */; };
@@ -508,7 +507,6 @@
 		E7CCB8B3159A9B0100A12908 /* MonthlyPracticumLogBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8B2159A9B0100A12908 /* MonthlyPracticumLogBottomCell.xib */; };
 		E7CCB8D1159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8D0159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib */; };
 		E7CCB8E6159CE2FA00A12908 /* ileopard-keys_128x128.png in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8E5159CE2FA00A12908 /* ileopard-keys_128x128.png */; };
-		E7CCB8E7159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8E9159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib */; };
 		E7D3732F152C4F7E00121918 /* ExistingHoursOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */; };
 		E7D37331152C8BC100121918 /* ExistingHoursViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */; };
 		E7DEECDD15F2EEC6001D5B05 /* CommunityServiceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DEECDB15F2EEC6001D5B05 /* CommunityServiceVC.m */; };
@@ -1294,8 +1292,6 @@
 		E751793615A85BCA00674F88 /* SupervisorsAndTotalTimesForMonth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SupervisorsAndTotalTimesForMonth.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7577FA7158C1DAE0044D344 /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
-		E7577FAA158D13B50044D344 /* EncryptionTokenCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptionTokenCell.h; sourceTree = "<group>"; };
-		E7577FAB158D13B50044D344 /* EncryptionTokenCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptionTokenCell.m; sourceTree = "<group>"; };
 		E75A147E15A8DB2300F3EBEF /* TotalHoursAndMinutesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TotalHoursAndMinutesCell.h; sourceTree = "<group>"; };
 		E75A148115A8DB6300F3EBEF /* TotalHoursAndMinutesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TotalHoursAndMinutesCell.xib; sourceTree = "<group>"; };
 		E75A148D15ABC9DB00F3EBEF /* MonthlyPracticumLogBottomCellWithUndefined.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogBottomCellWithUndefined.xib; sourceTree = "<group>"; };
@@ -1404,7 +1400,6 @@
 		E7CCB8B2159A9B0100A12908 /* MonthlyPracticumLogBottomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogBottomCell.xib; sourceTree = "<group>"; };
 		E7CCB8D0159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogTopCellWithUndefined.xib; sourceTree = "<group>"; };
 		E7CCB8E5159CE2FA00A12908 /* ileopard-keys_128x128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ileopard-keys_128x128.png"; sourceTree = "<group>"; };
-		E7CCB8E8159CEE3200A12908 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EncryptionTokenCell_iPhone.xib; sourceTree = "<group>"; };
 		E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursOverviewCell.xib; sourceTree = "<group>"; };
 		E7D37330152C8BC100121918 /* ExistingHoursViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController_iPad.xib; sourceTree = "<group>"; };
 		E7DEECDA15F2EEC6001D5B05 /* CommunityServiceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityServiceVC.h; sourceTree = "<group>"; };
@@ -1833,7 +1828,6 @@
 				37F7CEB015005C7300AD2C3A /* TrainTrackViewController.h */,
 				E7B3E40615C58B2F00729C88 /* TrainTrackViewController.m */,
 				37F7CEAA15005C5F00AD2C3A /* TrainTrackViewController.xib */,
-				37F7CE971500594E00AD2C3A /* Time */,
 				37F7CE901500591000AD2C3A /* Client Presentations */,
 				37F7CE8F150058D300AD2C3A /* Groups */,
 			);
@@ -1864,13 +1858,6 @@
 				37F7CE941500592900AD2C3A /* ClientPresentations_Shared.m */,
 			);
 			name = "Client Presentations";
-			sourceTree = "<group>";
-		};
-		37F7CE971500594E00AD2C3A /* Time */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Time;
 			sourceTree = "<group>";
 		};
 		37F7CEB315005D0700AD2C3A /* Reports */ = {
@@ -2023,9 +2010,6 @@
 				37F7CF2515005F7E00AD2C3A /* WeightPickerCell.m */,
 				E7E1A6431530C18900C227E8 /* ShortFieldCell.h */,
 				E7E1A6441530C18900C227E8 /* ShortFieldCell.m */,
-				E7577FAA158D13B50044D344 /* EncryptionTokenCell.h */,
-				E7577FAB158D13B50044D344 /* EncryptionTokenCell.m */,
-				E7CCB8E9159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib */,
 				E75A147E15A8DB2300F3EBEF /* TotalHoursAndMinutesCell.h */,
 				E7B3E40515C58B2F00729C88 /* TotalHoursAndMinutesCell.m */,
 				E75A148115A8DB6300F3EBEF /* TotalHoursAndMinutesCell.xib */,
@@ -3116,7 +3100,6 @@
 				E798A1311585593D006B9DBD /* mapper-ipad-full.ptt in Resources */,
 				E76984E115869C2C00D760A6 /* ipad-background-blue-plain-small.png in Resources */,
 				E7619875158946B100C5BB8F /* ClientGroupsViewController.xib in Resources */,
-				E7CCB8E7159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib in Resources */,
 				E74167DF158E28DC00CE1AF4 /* menubar-full.png in Resources */,
 				E74167E0158E28DC00CE1AF4 /* menubar-full@2x.png in Resources */,
 				E7F1CAF21597AF4C006F9E95 /* MonthlyPracticumLogTopCell.xib in Resources */,
@@ -3281,7 +3264,6 @@
 				E798A13A15857D6C006B9DBD /* ColorSwitcher.m in Sources */,
 				E7619874158946B100C5BB8F /* ClientGroupsViewController.m in Sources */,
 				E7577FA9158C1DAF0044D344 /* KeychainItemWrapper.m in Sources */,
-				E7577FAC158D13B50044D344 /* EncryptionTokenCell.m in Sources */,
 				E7F1CAF11597AF4C006F9E95 /* MonthlyPracticumLogTopCell.m in Sources */,
 				E7F1CAF91597D010006F9E95 /* PDFRenderer.m in Sources */,
 				E7F1CB8C1598C024006F9E95 /* CGPDFDocument.m in Sources */,
@@ -3940,14 +3922,6 @@
 				E71955FA15FFADB60070E61D /* en */,
 			);
 			name = DTAboutViewController.strings;
-			sourceTree = "<group>";
-		};
-		E7CCB8E9159CEE3200A12908 /* EncryptionTokenCell_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E7CCB8E8159CEE3200A12908 /* en */,
-			);
-			name = EncryptionTokenCell_iPhone.xib;
 			sourceTree = "<group>";
 		};
 		E7F1CB421598C024006F9E95 /* Localizable.strings */ = {

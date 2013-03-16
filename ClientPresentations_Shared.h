@@ -30,9 +30,6 @@ typedef enum {
 
 @interface ClientPresentations_Shared : NSObject <SCTableViewModelDelegate,SCTableViewModelDataSource, SCTableViewControllerDelegate>{
 
-
-//     SCArrayOfObjectsModel *tableModel;
-
      SCEntityDefinition *clientPresentationDef;
     InstrumentEntity *selectedInstrument;
 
@@ -42,7 +39,6 @@ typedef enum {
 @property (nonatomic, assign) PTTimeTrackControllerSetup sendingControllerSetup;
 
 @property (strong, nonatomic) IBOutlet SCEntityDefinition *clientPresentationDef;
-//@property (strong, nonatomic) IBOutlet SCArrayOfObjectsModel *tableModel;
 
 @property (strong, nonatomic)IBOutlet NSDate *serviceDatePickerDate;
 -(id)setupUsingSTV ;

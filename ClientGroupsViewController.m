@@ -73,26 +73,17 @@
     self.tableViewModel=objectsModel;
    
     
-    
-    // Initialize tableModel
-//    NSString *detailThemeNameStr=nil;
-    if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
-//        detailThemeNameStr=@"mapper-ipad-full.ppt";
+      if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
+
         [self.tableView setBackgroundView:nil];
         [self.tableView setBackgroundView:[[UIView alloc] init]];
     }
     else {
         
         [self.tableView setBackgroundColor:[UIColor clearColor]];
-//        detailThemeNameStr=@"mapper-phone.ptt";
+
     }
-    
-//    SCTheme *theme=[SCTheme themeWithPath:detailThemeNameStr];
-//    objectsModel.theme=theme;
-    
-    
-    
-    
+  
     self.view.backgroundColor=[UIColor clearColor];
     
     

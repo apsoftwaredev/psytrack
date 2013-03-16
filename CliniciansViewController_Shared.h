@@ -32,28 +32,25 @@ static NSInteger const kAlertTagFoundExistingPeopleWithName = 2;
 
 NSManagedObjectContext *managedObjectContext;
  
-//      __weak UITableView *tableView;
+
     BOOL deletePressedOnce;
     SCTableViewModel *currentDetailTableViewModel_;
     UINavigationController *rootNavigationController;
     UIViewController *rootViewController_;
-     int existingPersonRecordID;
-//    ABRecordRef existingPersonRef;
+    int existingPersonRecordID;
     BOOL addExistingAfterPromptBool;
     
-//     SCArrayOfObjectsModel *tableModel_;
-     ABPersonViewController *personVCFromSelectionList;
-     ABNewPersonViewController *personAddNewViewController;
+
+    ABPersonViewController *personVCFromSelectionList;
+    ABNewPersonViewController *personAddNewViewController;
     ABPersonViewController *personViewController_;
     ABPeoplePickerNavigationController *peoplePickerNavigationController_;
     ClinicianEntity *clinician;
-//      ABAddressBookRef addressBook;
-
     ABGroupSelectionCell *abGroupObjectSelectionCell_;
     
     UIView *iPadPersonBackgroundView_;
     BOOL addingClinician;
-  BOOL isInDetailSubview;
+    BOOL isInDetailSubview;
     
    
     AdditionalVariableNameEntity *selectedVariableName;
@@ -74,36 +71,19 @@ NSManagedObjectContext *managedObjectContext;
 
 @property (nonatomic,assign)BOOL selectMyInformationOnLoad;
 
-//@property (nonatomic, strong) IBOutlet SCArrayOfObjectsModel *tableModel;
+
 @property (nonatomic, strong)  UIViewController *rootViewController;
 
 @property (nonatomic, strong)ABGroupSelectionCell *abGroupObjectSelectionCell;
-//@property (strong, nonatomic)IBOutlet SCArrayOfStringsSection *objectsSection;
 
-
-
-
-//-(void)showPersonViewControllerWithRecordIdentifier:(NSString *)recordIdentifier firstName:(NSString *)firstName lastName:(NSString *)lastName;
-
-
-//-(void)showPersonViewControllerForABRecordRef:(ABRecordRef)recordRef;
-//-(void)showUnknownPersonViewControllerWithABRecordRef:(ABRecordRef )recordRef;
 -(void)showPeoplePickerController;
 -(IBAction)cancelAddNewAddressBookPerson:(id)sender;
 -(IBAction)cancelButtonTappedInABPersonViewController:(id)sender;
 -(IBAction)selectButtonTappedInABPersonController:(id)sender;
-//-(IBAction)doneButtonTappedInABPersonViewController:(id)sender;
+
 -(void)resetABVariablesToNil;
 
-
-
-
 -(void)setSectionHeaderColorWithSection:(SCTableViewSection *)section color:(UIColor *)color;
-
-
-//-(IBAction)abGroupsDoneButtonTapped:(id)sender;
-
-
 
 -(int )defaultABSourceID;
 -(void)changeABGroupNameTo:(NSString *)groupName  addNew:(BOOL)addNew checkExisting:(BOOL)checkExisting;

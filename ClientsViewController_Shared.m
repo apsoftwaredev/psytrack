@@ -60,13 +60,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     SCPropertyDefinition *clientIdCodePropertyDef  =[self.clientDef propertyDefinitionWithName:@"clientIDCode"];
     
-//    clientIdCodePropertyDef.type=SCPropertyTypeCustom;
-//    clientIdCodePropertyDef.uiElementClass=[EncryptedSCTextFieldCell class];
-//    
-//    NSDictionary *encryClientIDCodeTFCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"clientIDCode",@"keyString",@"Client ID Code",@"clientIDCode",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-//    
-//
-//    clientIdCodePropertyDef.objectBindings=encryClientIDCodeTFCellKeyBindingsDic;
+
     clientIdCodePropertyDef.type=SCPropertyTypeTextField;
     clientIdCodePropertyDef.title=@"Client ID Code";
     clientIdCodePropertyDef.autoValidate=NO;
@@ -80,13 +74,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     SCPropertyDefinition *initialsPropertyDef  =[self.clientDef propertyDefinitionWithName:@"initials"];
     
-//    initialsPropertyDef.type=SCPropertyTypeCustom;
-//    initialsPropertyDef.uiElementClass=[EncryptedSCTextFieldCell class];
-//    
-//    NSDictionary *encryInitialsTFCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"initials",@"keyString",@"Initials",@"initials",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-//    
-//    
-//    initialsPropertyDef.objectBindings=encryInitialsTFCellKeyBindingsDic;
+
     initialsPropertyDef.type=SCPropertyTypeTextField;
     initialsPropertyDef.title=@"Initials";
     initialsPropertyDef.autoValidate=NO;
@@ -95,14 +83,9 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     
-//     NSDictionary *encryDateOfBirthCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"dateOfBirth",@"keyString",@"Date Of Birth",@"dateOfBirth",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32",@"33",@"34",nil]];
-//////    
-//
+
     SCPropertyDefinition *clientDateOfBirthPropertyDef = [self.clientDef propertyDefinitionWithName:@"dateOfBirth"];
-//    clientDateOfBirthPropertyDef.type=SCPropertyTypeCustom;
-//    clientDateOfBirthPropertyDef.uiElementClass=[EncryptedSCDateCell class];
-//    clientDateOfBirthPropertyDef.objectBindings=encryDateOfBirthCellKeyBindingsDic;
-//    
+  
     clientDateOfBirthPropertyDef.autoValidate=NO;
     clientDateOfBirthPropertyDef.type=SCPropertyTypeDate;
     clientDateOfBirthPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter
@@ -110,12 +93,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                                displayDatePickerInDetailView:NO];
 
     
-//    clientDateOfBirthPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
-//                                                                             datePickerMode:UIDatePickerModeDate 
-//                                                              displayDatePickerInDetailView:NO];
-    
-    
-    
+ 
     SCPropertyDefinition *clientDateAddedPropertyDef = [self.clientDef propertyDefinitionWithName:@"dateAdded"];
 	clientDateAddedPropertyDef.attributes = [SCDateAttributes attributesWithDateFormatter:dateFormatter 
                                                                              datePickerMode:UIDatePickerModeDate 
@@ -129,18 +107,10 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
    demographicProfilePropertyDef.title=@"Background Info";
     demographicProfilePropertyDef.attributes = [SCObjectAttributes attributesWithObjectDefinition:demographicDetailViewController_Shared.demographicProfileDef];
     SCPropertyDefinition *clientNotesPropertyDef = [self.clientDef propertyDefinitionWithName:@"notes"];
-//    clientNotesPropertyDef.type=SCPropertyTypeTextView;
-//    NSDictionary *encryClientNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32",@"33",@"34",nil]];
-//    ////    
-//    //    
-////    SCPropertyDefinition *clientDateOfBirthPropertyDef = [self.clientDef propertyDefinitionWithName:@"dateOfBirth"];
-//    clientNotesPropertyDef.type=SCPropertyTypeCustom;
-    clientNotesPropertyDef.title=@"Notes";
-//    clientNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-//    clientNotesPropertyDef.objectBindings=encryClientNotesTVCellKeyBindingsDic;
-    clientNotesPropertyDef.type=SCPropertyTypeTextView;
-//    clientNotesPropertyDef.autoValidate=NO;
 
+    clientNotesPropertyDef.title=@"Notes";
+
+    clientNotesPropertyDef.type=SCPropertyTypeTextView;
     //Create a class definition for the phone NumberEntity
     SCEntityDefinition *phoneDef = [SCEntityDefinition definitionWithEntityName:@"PhoneEntity" 
                                                         managedObjectContext:managedObjectContext
@@ -148,11 +118,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                                             @"phoneNumber", @"extension", nil]];
                        
     
-    //Do some property definition customization for the phone Entity defined in phoneDef
-    
-    //create an array of objects definition for the phoneNumber to-many relationship that with show up in a different view with a place holder element>.
-    
-    //Create the property definition for the phoneNumbers property
+  
     SCPropertyDefinition *phoneNumbersPropertyDef = [self.clientDef propertyDefinitionWithName:@"phoneNumbers"];
     phoneNumbersPropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:phoneDef allowAddingItems:TRUE
                                                                                       allowDeletingItems:TRUE
@@ -172,14 +138,6 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     phoneNumberPropertyDef.title = @"Number";
     
    
-//    phoneNumberPropertyDef.type=SCPropertyTypeCustom;
-//    phoneNumberPropertyDef.uiElementClass=[EncryptedSCTextFieldCell class];
-//    
-//    NSDictionary *encryPhoneNumberTFCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"phoneNumber",@"keyString",@"Number",@"phoneNumber",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-//    
-//    
-//    phoneNumberPropertyDef.objectBindings=encryPhoneNumberTFCellKeyBindingsDic;
-//    phoneNumberPropertyDef.title=@"Phone Number";
     phoneNumberPropertyDef.autoValidate=NO;
     
     
@@ -192,14 +150,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     [phoneDef insertPropertyDefinition:callButtonProperty atIndex:3];
         
     }
-//    SCPropertyGroup *phoneGroup = [SCPropertyGroup groupWithHeaderTitle:@"Phone Number" footerTitle:nil propertyNames:[NSArray arrayWithObjects:@"phoneName",@"phoneNumber",@"extension" @"CallButton", nil]];
-//    
-//    // add the phone property group
-//    [phoneDef.propertyGroups addGroup:phoneGroup];
-    
-   
-    
-    //Create a class definition for the logsEntity
+
     SCEntityDefinition *logDef = [SCEntityDefinition definitionWithEntityName:@"LogEntity" 
                                                         managedObjectContext:managedObjectContext
                                                           propertyNames:[NSArray arrayWithObjects:@"dateTime",
@@ -220,20 +171,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     logNotesPropertyDef.title = @"Notes";
     logNotesPropertyDef.type=SCPropertyTypeTextView;
     
-//    logNotesPropertyDef.type=SCPropertyTypeCustom;
-//    logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-//    
-//    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-//    
-//    
-//    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
-//   phoneNumberPropertyDef.title=@"Phone Number";
-//    logNotesPropertyDef.autoValidate=NO;
 
-    
-    
-    
-    
     logDef.titlePropertyName=@"dateTime;notes";
     
     //Create the property definition for the dateTime property in the logDef class  definition
@@ -251,23 +189,6 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                     displayDatePickerInDetailView:NO];
     
 
-//    
-//    //Create a class definition for the medication Entity
-//    SCEntityDefinition *diagnosesDef = [SCEntityDefinition definitionWithEntityName:@"DiagnosisHistoryEntity" 
-//                                                          managedObjectContext:managedObjectContext
-//                                                                 propertyNames:[NSArray arrayWithObjects:@"drugName",@"dateStarted",  @"discontinued", @"symptomsTargeted",@"sideEffects",@"medLogs",
-//                                                                                    @"notes",@"applNo", @"productNo",   
-//                                                                                    nil]];
-//
-//    axis
-//    dateDiagnosed
-//    dateRecovered
-//    notes
-//    onset
-//    order
-//    prognosis
-//    severity
-//    status
     
     //Create a class definition for the medication Entity
     SCEntityDefinition *medicationDef = [SCEntityDefinition definitionWithEntityName:@"MedicationEntity" 
@@ -339,17 +260,9 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //do some customizing of the medication notes
     SCPropertyDefinition *medicationNotesPropertyDef = [medicationDef propertyDefinitionWithName:@"notes"];
     
-//    medicationNotesPropertyDef.type=SCPropertyTypeCustom;
-//    medicationNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-//    
-//    NSDictionary *encryMedicationlNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-//    
-    
-//    medicationNotesPropertyDef.objectBindings=encryMedicationlNotesTVCellKeyBindingsDic;
+
     medicationNotesPropertyDef.title=@"Notes";
     medicationNotesPropertyDef.type=SCPropertyTypeTextView;
-//    medicationNotesPropertyDef.autoValidate=NO;
-    
     medicationDef.titlePropertyName=@"drugName";
     medicationDef.keyPropertyName=@"dateStarted";
    
@@ -385,9 +298,6 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
                                                         managedObjectContext:managedObjectContext
                                                                propertyNames:[NSArray arrayWithObjects:@"symptomName",   @"notes",@"onset",nil]];
     
-//    SCEntityDefinition *symptomDef = [SCEntityDefinition definitionWithEntityName:@"AdditionalSymptomEntity" 
-//                                                       managedObjectContext:managedObjectContext
-//                                                autoGeneratePropertyDefinitions:YES];    
     
     
     
@@ -474,15 +384,9 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     SCPropertyDefinition *medicationReviewNotesPropertyDef = [medicationReviewDef propertyDefinitionWithName:@"notes"];
     
     
-//    medicationReviewNotesPropertyDef.type=SCPropertyTypeCustom;
-//    medicationReviewNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-//    
-//    NSDictionary *encryMedicationlReviewNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    
-    
-//    medicationReviewNotesPropertyDef.objectBindings=encryMedicationlReviewNotesTVCellKeyBindingsDic;
+
     medicationReviewNotesPropertyDef.title=@"Notes";
-//    medicationReviewNotesPropertyDef.autoValidate=NO;
+
     medicationReviewNotesPropertyDef.type=SCPropertyTypeTextView;
     medicationReviewDef.keyPropertyName=@"logDate";
     medicationReviewDef.titlePropertyName=@"logDate";
@@ -568,14 +472,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     
     
     
-   
-//    SCPropertyDefinition *prescriberPropertyDef = [medicationReviewDef propertyDefinitionWithName:@"prescriber"];
-    
-    
-   
-    //get the client setup from the clients View Controller Shared
-    // Add a custom property that represents a custom cells for the description defined TextFieldAndLableCell.xib
-	
+ 
     //create the dictionary with the data bindings
     NSDictionary *clinicianDataBindings = [NSDictionary 
                                           dictionaryWithObjects:[NSArray arrayWithObjects:@"prescriber",@"Prescriber",[NSNumber numberWithBool:YES],@"prescriber",[NSNumber numberWithBool:NO],nil] 
@@ -600,28 +497,7 @@ managedObjectContext = [(PTTAppDelegate *)[UIApplication sharedApplication].dele
     //insert the custom property definition into the clientData class at index 
     [medicationReviewDef insertPropertyDefinition:clinicianDataProperty atIndex:1];
     
-//   	prescriberPropertyDef.type = SCPropertyTypeObjectSelection;
-//    
-//    SCEntityDefinition *prescriberDef =[SCEntityDefinition definitionWithEntityName:@"ClinicianEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
-//    prescriberDef.titlePropertyName=@"lastName;firstName";
-//    prescriberDef.titlePropertyNameDelimiter=@", ";
-//    prescriberDef.keyPropertyName=@"lastName";
-//    
-//    SCPropertyGroup *prescriberNameGroup =[SCPropertyGroup groupWithHeaderTitle:@"Prescriber Name" footerTitle:@"Select this prescriber under the Clinician tab to add or view more details." propertyNames:[NSArray arrayWithObjects:@"prefix",@"firstName",@"middleName", @"lastName",@"suffix",@"credentialInitials", nil]];
-//    
-//    SCObjectSelectionAttributes *prescriberSelectionAttribs = [SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:prescriberDef usingPredicate:nil allowMultipleSelection:NO allowNoSelection:NO];
-//    prescriberSelectionAttribs.allowAddingItems = YES;
-//    prescriberSelectionAttribs.allowDeletingItems = YES;
-//    prescriberSelectionAttribs.allowMovingItems = YES;
-//    prescriberSelectionAttribs.allowEditingItems = YES;
-//    prescriberSelectionAttribs.placeholderuiElement = [SCTableViewCell cellWithText:@"(Tap Edit to Add prescribers)"];
-//    prescriberSelectionAttribs.addNewObjectuiElement = [SCTableViewCell cellWithText:@"Add New prescriber"];
-//    prescriberPropertyDef.attributes = prescriberSelectionAttribs;
-//    
-//    
-//    [prescriberDef.propertyGroups addGroup:prescriberNameGroup];
-//    
-    
+
     
     //Create a property definition for the adherence property.
     SCPropertyDefinition *adherencePropertyDef = [medicationReviewDef propertyDefinitionWithName:@"adherence"];

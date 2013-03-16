@@ -27,10 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    // Do any additional setup after loading the view from its nib.
+
     PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-//    
-//
+
      UIViewController *navtitle=self.navigationController.topViewController;
     if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
         
@@ -164,7 +163,7 @@
     objectsModel.autoAssignDelegateForDetailModels=YES;
     
     
-//    objectsModel.al
+
     objectsModel.enablePullToRefresh = TRUE;
     objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
     objectsModel.autoAssignDelegateForDetailModels=YES;

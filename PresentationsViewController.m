@@ -76,18 +76,7 @@
     SCPropertyDefinition *topicNotesPropertyDef=[topicDef propertyDefinitionWithName:@"notes"];
     topicNotesPropertyDef.type=SCPropertyTypeTextView;
     
-    
-//    SCPropertyDefinition *forumHostingOrganizationsPropertyDef=[forumDef propertyDefinitionWithName:@"hostingOrganizations"];
-    
-    
-//    forumHostingOrganizationsPropertyDef.type=SCPropertyTypeObjectSelection;
-//    
-//    forumHostingOrganizationsPropertyDef.attributes=[SCObjectSelectionAttributes attributesWithObjectsEntityDefinition:hostingOrganizationDef usingPredicate:nil allowMultipleSelection:YES allowNoSelection:YES];
-    
-    
-      
-    //end
-    
+ 
     
     SCPropertyDefinition *conferenceHostingOrganizationsPropertyDef=[conferenceDef propertyDefinitionWithName:@"hostingOrganizations"];
     
@@ -291,20 +280,7 @@
     logNotesPropertyDef.title = @"Notes";
     
     logNotesPropertyDef.type=SCPropertyTypeTextView;
-    //    logNotesPropertyDef.type=SCPropertyTypeCustom;
-    //    logNotesPropertyDef.uiElementClass=[EncryptedSCTextViewCell class];
-    //
-    //    NSDictionary *encryLogNotesTVCellKeyBindingsDic=[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"notes",@"keyString",@"Notes",@"notes",nil] forKeys:[NSArray arrayWithObjects:@"1",@"32", @"33",@"34",nil]];
-    //
-    //
-    //    logNotesPropertyDef.objectBindings=encryLogNotesTVCellKeyBindingsDic;
-    //    //    phoneNumberPropertyDef.title=@"Phone Number";
-    //    logNotesPropertyDef.autoValidate=NO;
-    
 
-    
-    
-    
     
     logDef.titlePropertyName=@"dateTime;notes";
     
@@ -396,14 +372,12 @@
     
     
     if ([SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
-        //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-        
         
         UIColor *backgroundColor=nil;
         
         if(indexPath.row==NSNotFound|| tableModel.tag>0)
         {
-            //            backgroundImage=[UIImage imageNamed:@"iPad-background-blue.png"];
+
             backgroundColor=(UIColor *)(UIWindow *)appDelegate.window.backgroundColor;
             
             

@@ -155,15 +155,7 @@
                 [self.navigationController pushViewController:monthlyPracticumLogGenerateViewController animated:YES];
                 
                 
-//                if ([SCUtilities is_iPad]) {
-//                    monthlyPracticumLogNibName=@"MonthlyPracticumLogTableViewController";
-//                }else {
-//                    monthlyPracticumLogNibName=@"MonthlyPracticumLogTableViewController";
-//                }
-//                MonthlyPracticumLogTableViewController *monthlyPracticumLogGenerateViewController = [[MonthlyPracticumLogTableViewController alloc] initWithNibName:monthlyPracticumLogNibName bundle:[NSBundle mainBundle]];
-//                
-//                [self.navigationController pushViewController:monthlyPracticumLogGenerateViewController animated:YES];
-                
+           
                 
                 break;
             }  
@@ -246,14 +238,7 @@
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     
     
-    
-    //          UIImage *navBarBackgroundImage=[UIImage imageNamed:menuBarImageNameStr];
-    
-    //
-    //    UINavigationBar *navBar=(UINavigationBar *)self.navigationController.navigationBar;
-    
-    //    [navBar setBackgroundImage:navBarBackgroundImage forBarMetrics:UIBarMetricsDefault];
-    
+
   
 }
 

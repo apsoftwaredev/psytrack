@@ -87,23 +87,7 @@
 
 
    
-//    
-//   
-//    
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-//        
-//        [self.tableView setBackgroundView:nil];
-//        [self.tableView setBackgroundView:[[UIView alloc] init]];
-//        [self.tableView setBackgroundColor:UIColor.clearColor]; // Make the table view transparent
-//        
-//        
-//    }
-//    
-//    
-//    //    [self.tableView reloadData];
-//    //    [self.tableView reloadData];
-//    
-//}
+
 
 - (void)viewDidLoad {
         [super viewDidLoad];
@@ -118,7 +102,6 @@
     if (isInDetailSubview) {
         objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef];
         objectsModel.tag=0;
-//        objectsModel.delegate=self;
        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
             [self.view setBackgroundColor:appDelegate.window.backgroundColor];
             // Set the view controller's theme
@@ -179,10 +162,6 @@
         self.navigationItem.leftBarButtonItem=cancelButton;
         
         if (filterByPrescriber) {
-//            NSString *scopeTitleAtOne= (NSString *)[self.searchBar.scopeButtonTitles objectAtIndex:1];
-//            
-//            scopeTitleAtOne=@"Prescribers";
-            
             
             self.searchBar.scopeButtonTitles = [NSArray arrayWithObjects:@"All Clinicians",@"Prescribers",@"At Current Site",nil];
         }
@@ -193,12 +172,7 @@
     else
     {
                 
-//        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self
-//                                                 withEntityClassDefinition:self.clinicianDef usingPredicate:nil useSCSelectionSection:FALSE];	
-        
-//        self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView
-//                                                 entityDefinition:self.clinicianDef];
-       objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef ];
+     objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef ];
         if ([SCUtilities is_iPad]) {
             self.navigationBarType = SCNavigationBarTypeEditLeft;
         }
@@ -215,10 +189,6 @@
         if (![SCUtilities is_iPad]||[SCUtilities systemVersion]>=6) {
             
             self.tableView.backgroundColor=[UIColor clearColor];
-//            UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
-//            self.navigationItem.rightBarButtonItem = addButton; 
-        
-            
             objectsModel.addButtonItem=self.navigationItem.rightBarButtonItem;
             
             
@@ -229,7 +199,6 @@
     objectsModel.sectionIndexTitles = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", nil];
     
      objectsModel.autoSortSections = TRUE;
-//        self.clinicianDef.keyPropertyName=@"firstName";
         self.clinicianDef.titlePropertyName = @"firstName;lastName";
     
     }
@@ -246,8 +215,6 @@
     
 	
     
-    // Replace the default model with the new objectsModel
-    //    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"drugName Matches %@",@"a"];
     objectsModel.enablePullToRefresh = TRUE;
     objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
 
@@ -456,13 +423,7 @@
     if (isInDetailSubview &&objectsModel.sectionCount) {
         SCTableViewSection *section=(SCTableViewSection *)[objectsModel sectionAtIndex:0];
         
-//        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-//        
-//        if ([appDelegate managedObjectContext].hasChanges) {
-//            [appDelegate saveContext];
-//        }
-
-        
+       
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
             SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
             
@@ -519,15 +480,6 @@
                 
                 
             }else {
-//                NSIndexPath *cellIndexPath=objectsSelectionSection.selectedCellIndexPath;
-                
-//                if (cellIndexPath.row) {
-//                    <#statements#>
-//                }
-//                SCTableViewCell *cell=(SCTableViewCell *)[self.tableViewModel cellAtIndexPath:cellIndexPath];
-//                
-                
-                
                 
                 
                 
@@ -545,58 +497,13 @@
                 currentlySelectedClinician=nil;
 
             }
-            //            //DLog(@"test valie changed at index with cell index selected %i",[objectsSelectionSection.selectedItemIndex integerValue]) ;
-            //            if (clientObjectSelectionCell) {
-            
-            //                
-            
-            //                if ([objectsSelectionSection.selectedItemIndex integerValue]>=0&&[objectsSelectionSection.selectedItemIndex integerValue]<=objectsSelectionSection.items.count) {
-            //                    
-                           
-                
-                     
-            
-            
-            
-            
-            //            }
-            
-            //                    clientObjectSelectionCell.hasChangedClients=TRUE;
-            //                }
-            //                else{
-            //                
-            //                    [clientObjectSelectionCell doneButtonTappedInDetailView:nil withValue:NO];
-            //                
-            //                }
-            
+    
             
             [self cancelButtonTappedInDetalView];
             
         } 
     }
-    //        else
-    //        {
-    //            clientObjectSelectionCell.items=[NSArray array];
-    //            [clientObjectSelectionCell doneButtonTappedInDetailView:nil withValue:NO];
-    //        }
-    //
-    //        
-    //        if(self.navigationController)
-    //        {
-    //            // check if self is the rootViewController
-    //            if([self.navigationController.viewControllers objectAtIndex:0] == self)
-    //            {
-    //                [self dismissModalViewControllerAnimated:YES];
-    //            }
-    //            else
-    //                [self.navigationController popViewControllerAnimated:YES];
-    //        }
-    //        else
-    //            [self dismissModalViewControllerAnimated:YES];
-    //        
-    //    }
-    //
-    
+
     
 }
 
@@ -612,27 +519,17 @@
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
        
         SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)section;
-        //            int objectSelectionSectionItemsCount=(NSInteger ) objectSelectionSection.cellCount;
-        
-        
         
         if (currentlySelectedClinician&&[cell.boundObject isEqual:currentlySelectedClinician]) {
             
             
             
-            //            [objectSelectionSection setSelectedCellIndexPath:indexPath];
             [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:currentlySelectedClinician]]];
             
             
             
         }
-        //        [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:currentlySelectedClient]]];
-        
-        
-        
-        //            [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:(NSInteger)[objectSelectionSection.items indexOfObject:managedObject]]]; 
       
-        
             
         }
         
@@ -659,11 +556,7 @@
     if (self.tableViewModel.sectionCount&& isInDetailSubview&&currentlySelectedCliniciansArray&&currentlySelectedCliniciansArray.count&&allowMultipleSelection) {
         SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
         
-        //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-        //        
-        //        if ([appDelegate managedObjectContext].hasChanges) {
-        //            [appDelegate saveContext];
-        //        }
+
         
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) 
         {
@@ -705,18 +598,11 @@
     if (isInDetailSubview) {
         SCTableViewSection *section=(SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
         
-        //        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-        //        
-        //        if ([appDelegate managedObjectContext].hasChanges) {
-        //            [appDelegate saveContext];
-        //        }
 
         if ([section isKindOfClass:[SCObjectSelectionSection class]]) 
         {
             
-//            SCObjectSelectionSection *objectsSelectionSection=(SCObjectSelectionSection*)section;
-            
-            
+           
             if (allowMultipleSelection) 
             {
                 if (currentlySelectedCliniciansArray&& currentlySelectedCliniciansArray.count) {
@@ -769,17 +655,7 @@
 -(BOOL)tableViewModel:(SCTableViewModel *)tableModel willAddItemForSectionAtIndex:(NSUInteger)index item:(NSObject *)item{
 
         
-//    if (tableModel.tag==0 && !tableModel.sectionCount) {
-//        [objectsModel.searchBar setSelectedScopeButtonIndex:0];
-//         SCDataFetchOptions *dataFetchOptions=(SCDataFetchOptions *)objectsModel.dataFetchOptions;
-//        [dataFetchOptions setFilterPredicate:nil];
-//       
-//        
-//        
-//        
-//        
-//        
-//    }
+
 
     return YES;
 
@@ -912,12 +788,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
     [super tableViewModel:tableModel detailViewWillPresentForRowAtIndexPath:indexPath withDetailTableViewModel:detailTableViewModel];
     
-//    if (tableModel.tag==0 &&objectsModel.searchBar.selectedScopeButtonIndex!=0) {
-//        [objectsModel.searchBar setSelectedScopeButtonIndex:0];
-//       
-//        [objectsModel.dataFetchOptions setFilterPredicate:nil];
-//        
-//    }
+
     
 }
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel didInsertRowAtIndexPath:(NSIndexPath *)indexPath
@@ -944,10 +815,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         [numericCell.textLabel sizeToFit];
         numericCell.textField.textAlignment=UITextAlignmentRight;
         numericCell.textField.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin ;
-        //       CGRect textFieldFrame=numericCell.textField.textInputView.frame;
-        //        textFieldFrame.size.width=50;
-        
-        
+      
     }
 }
 

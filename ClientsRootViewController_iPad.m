@@ -27,12 +27,8 @@
 
 
 @implementation ClientsRootViewController_iPad
-//@synthesize clientsDetailViewController_iPad=_clientsDetailViewController_iPad;
-
 @synthesize managedObjectContext=_managedObjectContext;
-//@synthesize tableView=_tableView;
 @synthesize searchBar;
-//@synthesize tableModel;
 @synthesize totalClientsLabel;
 
 
@@ -43,9 +39,7 @@
 -(void)viewDidUnload{
 
     [super viewDidUnload];
-    
-//    self.tableModel=nil;
-
+ 
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,12 +50,6 @@
     self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
     managedObjectContext = [appDelegate managedObjectContext];
     
-////    // Set up the edit and add buttons.
-//    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-//    
-//  
-    
-    // Get managedObjectContext from application delegate
     demographicDetailViewController_Shared =[[DemographicDetailViewController_Shared alloc]init];
     
     [demographicDetailViewController_Shared setupTheDemographicView];
@@ -88,24 +76,12 @@
     
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     objectsModel.editButtonItem = self.navigationItem.leftBarButtonItem;
-    //        UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:nil action:nil];
-    //        self.navigationItem.rightBarButtonItem = addButton;
+
     objectsModel.addButtonItem = self.navigationItem.rightBarButtonItem;
     objectsModel.autoAssignDelegateForDetailModels=TRUE;
     objectsModel.autoAssignDataSourceForDetailModels=TRUE;
         
    
-
-    //     objectsModel.autoSortSections = TRUE;
-    //        self.clinicianDef.keyPropertyName=@"firstName";
-       
-
-
-
-// Instantiate the tabel model
-//	self.tableModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView withViewController:self withEntityClassDefinition:self.clinicianDef];	
-//    
-    
     [self.tableView setBackgroundView:nil];
     [self.tableView setBackgroundView:[[UIView alloc] init]];
     
@@ -167,7 +143,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
     objectsModel.autoSortSections=YES;
     
     self.tableViewModel = objectsModel;
-//        
+       
 }
 
 
@@ -210,53 +186,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 
 
 
-//
-//#pragma mark -
-//#pragma mark SCTableViewModelDataSource methods
-//
-//// Return a custom detail model that will be used instead of Sensible TableView's auto generated one
-//- (SCTableViewModel *)tableViewModel:(SCTableViewModel *)tableViewModel
-//customDetailTableViewModelForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//	
-//    
-//    SCArrayOfObjectsModel *detailModel = [SCArrayOfObjectsModel tableViewModelWithTableView:self.clientsDetailViewController_iPad.tableView
-//                                                                         withViewController:self.clientsDetailViewController_iPad];
-//    detailModel.delegate=self;
-//    
-//    
-//   
-//    
-//	return detailModel;
-//}
 
-
-
-
-//-(void)tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-////    
-////    
-//    if (tableViewModel.tag==0) {
-//        
-//        
-//        detailTableViewModel.tag=2;
-//        
-//    }
-//    else{
-//        detailTableViewModel.tag=tableViewModel.tag+1;
-//    }
-//    
-//    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-//        
-//
-//    [detailTableViewModel.modeledTableView setBackgroundView:nil];
-//    [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-//    [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-//    }
-//    detailTableViewModel.delegate=self;
-//    
-//}
-//
 
 
 - (NSString *)tableViewModel:(SCArrayOfItemsModel *)tableViewModel sectionHeaderTitleForItem:(NSObject *)item AtIndex:(NSUInteger)index
@@ -278,37 +208,13 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel detailViewWillPresentForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
     
-//    if(detailTableViewModel.modeledTableView.backgroundView.backgroundColor!=[UIColor clearColor]){
-//        
-//        
-//        [detailTableViewModel.modeledTableView setBackgroundView:nil];
-//        [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
-//        [detailTableViewModel.modeledTableView setBackgroundColor:UIColor.clearColor]; 
-//    }
-    
-    
-    if (tableViewModel.tag==4 ) {
+   if (tableViewModel.tag==4 ) {
         
         //this is so the second section will not appear if it is the second log, because that info does not pertain
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
         
-        
-//        BOOL sectionContainsMedLog=FALSE;
-        
         if (tableViewModel.sectionCount) {
-//            SCTableViewSection *detailSectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0]
-            ;
-//            if (detailSectionZero.cellCount) {
-//                
-//                SCTableViewCell *cellZeroSectionZero=(SCTableViewCell *)[detailSectionZero cellAtIndex:0];
-//                NSManagedObject *cellManagedObject=(NSManagedObject *)cellZeroSectionZero.boundObject;
-////                
-//                if (cellManagedObject&& [cellManagedObject.entity.name isEqualToString:@"MedicationReviewEntity"])
-//                {
-//                    sectionContainsMedLog=TRUE;
-//                }
-//                
-//            }
+
             SCTableViewCell *cell=tableViewModel.activeCell;
             
             
@@ -332,9 +238,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
                     
                     
                 }
-                else {
-//                    [detailTableViewModel.modeledTableView reloadData];
-                }
+                
             }
         }  
     }       
@@ -408,13 +312,7 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
 
 
 -(void)tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel{
-//    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    
-    
    
-
-    
     if ([SCUtilities is_iPad]) {
                 PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
         
@@ -452,12 +350,6 @@ objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blue
     }
     
     
-//    if (tableModel.tag==0 ) {
-//        [self.searchBar setSelectedScopeButtonIndex:0];
-//        
-//        [objectsModel.dataFetchOptions setFilterPredicate:nil];
-//        
-//    }
     
     
     if (detailTableViewModel.tag==1 && indexPath.row!=NSNotFound) {
@@ -632,88 +524,6 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
 
 
 
-//-(void)tableViewModelSearchBarCancelButtonClicked:(SCArrayOfItemsModel *)tableViewModel{
-//    
-//    
-//    if (isInDetailSubview) {
-//        
-//        
-//       
-//        
-//        
-//        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-//        
-//        NSEntityDescription *entity = [NSEntityDescription entityForName:@"ClientEntity" inManagedObjectContext:managedObjectContext];
-//        [fetchRequest setEntity:entity];
-//        
-//        NSError *error = nil;
-//        NSArray *fetchedObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
-//        if (fetchedObjects == nil) {
-//            
-//        }
-//        
-//        
-//        NSMutableSet *mutableSet=[NSMutableSet setWithArray:fetchedObjects];
-//        
-//        
-//        
-//        for(id obj in alreadySelectedClients) { 
-//            if(obj!=clientCurrentlySelectedInReferringDetailview)
-//                [mutableSet removeObject:obj];
-//            
-//        }
-//        
-//        
-//            [tableViewModel removeSectionAtIndex:0];
-//        
-//        SCObjectSelectionSection *objectSelectionSection=[SCObjectSelectionSection sectionWithHeaderTitle:nil withItemsSet:mutableSet withClassDefinition:clientsViewController_Shared.clientDef];
-//        
-//      objectSelectionSection.itemsPredicate = [NSPredicate predicateWithFormat:@"currentClient == %@",[NSNumber numberWithInteger: 0]];
-//    
-//        objectSelectionSection.autoSelectNewItemCell=YES;
-//        objectSelectionSection.allowMultipleSelection = NO;
-//        objectSelectionSection.allowNoSelection = NO;
-//        objectSelectionSection.maximumSelections = 1;
-//        objectSelectionSection.allowAddingItems = YES;
-//        objectSelectionSection.allowDeletingItems = NO;
-//        objectSelectionSection.allowMovingItems = YES;
-//        objectSelectionSection.allowEditDetailView = YES;
-//        
-//        [tableViewModel addSection:objectSelectionSection];
-//        
-//        [self updateClientsTotalLabel];
-//        NSInteger currentlySelectedItemIndex= (NSInteger )[objectSelectionSection.items indexOfObject:clientCurrentlySelectedInReferringDetailview];
-//        if ((currentlySelectedItemIndex>=0)&&(currentlySelectedItemIndex<=(objectSelectionSection.itemsSet.count+1))) {
-//             objectSelectionSection.selectedItemIndex=(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:clientCurrentlySelectedInReferringDetailview]];
-//        }
-//        
-//
-//       
-//       
-//        
-//      
-//        
-//    }
-//    
-//    
-//    
-//    
-//    
-//    
-//}
-
-//- (SCCustomCell *)tableViewModel:(SCTableViewModel *)tableViewModel
-//	  customCellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-//    SCObjectSelectionCell *selectionCell=[[SCObjectSelectionCell alloc]initWithText:cell.textLabel.text withBoundObject:cell.boundObject withSelectedObjectPropertyName:@"propertyName" withItems:nil withItemsClassDefintion:clientsViewController_Shared.clientDef];
-//    
-//
-//    return selectionCell;
-//}
-
-
-
 - (void)tableViewModel:(SCTableViewModel *) tableViewModel willConfigureCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *) indexPath
 {
     
@@ -827,10 +637,6 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                         UILabel *slabel = (UILabel *)[cell viewWithTag:10];
                         
                         slabel.text = [NSString stringWithFormat:@"Slider One (-1 to 0) Value: %.2f", sliderOne.value];
-//                        UIImage *sliderLeftTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-//                        UIImage *sliderRightTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-//                        [sliderOne setMinimumTrackImage: sliderLeftTrackImage forState: UIControlStateNormal];
-//                        [sliderOne setMaximumTrackImage: sliderRightTrackImage forState: UIControlStateNormal];
                         [sliderOne setMinimumValue:-1.0];
                         [sliderOne setMaximumValue:0];
                         break;
@@ -842,11 +648,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
                         UISlider *sliderTwo = (UISlider *)sliderView;
                         
                         UILabel *slabelTwo = (UILabel *)[cell viewWithTag:10];
-//                        UIImage *sliderTwoLeftTrackImage = [[UIImage imageNamed: @"sliderbackground.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-//                        UIImage *sliderTwoRightTrackImage = [[UIImage imageNamed: @"sliderbackground-gray.png"] stretchableImageWithLeftCapWidth: 9 topCapHeight: 0];
-//                        [sliderTwo setMinimumTrackImage: sliderTwoLeftTrackImage forState: UIControlStateNormal];
-//                        [sliderTwo setMaximumTrackImage: sliderTwoRightTrackImage forState: UIControlStateNormal];
-                        
+                  
                         slabelTwo.text = [NSString stringWithFormat:@"Slider Two (0 to 1) Value: %.2f", sliderTwo.value];        
                         [sliderTwo setMinimumValue:0.0];
                         [sliderTwo setMaximumValue: 1.0];
@@ -1940,28 +1742,7 @@ else  if (detailTableViewModel.tag==4 &&detailTableViewModel.sectionCount){
     
     if (tableViewModel.tag==0) {
         
-        //        SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:index];
-        //
-        //        if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
-        //            SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection *)section;
-        //            SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:objectSelectionSection.selectedCellIndexPath];
-        //             NSManagedObject  *object;
-        //            if (cell.boundObject && [cell isSelected]) {
-        //                object =(NSManagedObject *)cell.boundObject;
-        //                [tableViewModel reloadBoundValues];
-        //                [self.tableView reloadData];
-        //
-        //
-        //                [objectSelectionSection setSelectedItemIndex: [NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:object]]];
-        //
-        //            }
-        //
-        //        }
-        //        else
-        //        {
-        //            [tableViewModel reloadBoundValues];
-        //            [self.tableView reloadData];
-        //        }
+
         
         [self updateClientsTotalLabel];
         
@@ -1993,26 +1774,6 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
     if([tableViewModel isKindOfClass:[SCArrayOfObjectsModel class]])
     {
         
-//        if (objectsModel.sectionCount>0) {
-//            SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-//            
-//            if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
-//                SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)section;
-//                
-//                
-//                
-//                SCTableViewCell *cell=(SCTableViewCell *)[objectsModel cellAtIndexPath: objectSelectionSection.selectedCellIndexPath];
-//                
-//                
-//                currentlySelectedClient= (ClientEntity *) cell.boundObject;
-//                
-//                
-//                
-//                
-//                
-//                
-//            }
-//        }
         SCDataFetchOptions *dataFetchOptions=(SCDataFetchOptions *)objectsModel.dataFetchOptions;
         [self.searchBar setSelectedScopeButtonIndex:selectedScope];
         
@@ -2036,29 +1797,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         [objectsModel.modeledTableView reloadData];
         [self updateClientsTotalLabel];
         
-        //         if (objectsModel.sectionCount>0) {
-        //        if (isInDetailSubview) {
-        //        
-        //        if (currentlySelectedClient) {
-        //           SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
-        //            if ([section isKindOfClass:[SCObjectSelectionSection class]]) {
-        //                
-        //            
-        //                SCObjectSelectionSection *objectSelectionSection=(SCObjectSelectionSection*)section;
-        //                
-        //
-        //                
-        //                [objectSelectionSection setSelectedItemIndex:(NSNumber *)[NSNumber numberWithInteger:[objectSelectionSection.items indexOfObject:currentlySelectedClient]]];
-        //                
-        //                
-        //            }
-        //            
-        //        }
-        //        
-        //            
-        //        }
-        
-        //    }
+
     }
 }
 
@@ -2133,45 +1872,7 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
         
         
     }
-    //    if (tableViewModel.tag==0) {
-    //       
-    //        
-    //        
-    //        
-    //        if (searchBar.text.length !=searchStringLength) {
-    //            
-    //            if ([section isKindOfClass:[SCArrayOfObjectsSection class]]) {
-    //                
-    //                
-    //               
-    //                SCArrayOfObjectsSection *arrayOfObjectsSection=(SCArrayOfObjectsSection *)section;
-    //                SCObjectSelectionSection *objectsSelectionSection=[[SCObjectSelectionSection alloc]initWithHeaderTitle:nil withItemsSet:arrayOfObjectsSection.itemsSet withClassDefinition:clientsViewController_Shared.clientDef];
-    //                
-    //                 searchStringLength=searchBar.text.length;
-    //                reloadTableView=TRUE;
-    //                section=nil;
-    //                
-    //                section=(SCObjectSelectionSection*) objectsSelectionSection;
-    //                [tableViewModel addSection:section ];
-    //                tableViewModel.delegate=self;
-    //                
-    //                
-    //                    
-    //            }
-    //               
-    //               
-    //            
-    //            
-    //            
-    //        }
-    //        else if(reloadTableView==TRUE)
-    //                {
-    //                
-    //                    reloadTableView=FALSE;
-    //                
-    //                }
-    //
-    //    }
+
     if (tableModel.tag==3 &&index==0) {
         
         
@@ -2241,112 +1942,6 @@ searchBarSelectedScopeButtonIndexDidChange:(NSInteger)selectedScope
 
 
 
-
-//-(void)tableViewModel:(SCTableViewModel *)tableViewModel didInsertRowAtIndexPath:(NSIndexPath *)indexPath
-//
-//{
-//    
-//    if (tableViewModel.tag==0) {
-//        
-//   
-//       
-//            if(isInDetailSubview)
-//            {
-//                SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
-//                NSManagedObject *cellManagedObject=(NSManagedObject *)cell.boundObject;
-//                NSMutableArray *mutableArray=(NSMutableArray *)[NSMutableArray arrayWithArray:clientObjectSelectionCell.items];
-//                [mutableArray addObject:cellManagedObject];
-//                
-//                clientObjectSelectionCell.items=mutableArray;
-//            }
-//            
-//    }
-//        
-//        
-//        
-//        
-//
-//    
-//}
-//
-
-
-//
-//-(void)tableViewModel:(SCTableViewModel *)tableViewModel didRemoveRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    
-//    if (tableViewModel.tag==0)
-//    {
-//        
-//        if(isInDetailSubview){
-//            SCObjectSelectionSection *section=(SCObjectSelectionSection *)[tableModel sectionAtIndex:0];
-//            if (section.itemsSet.count<1)
-//            {
-//                self.totalClientsLabel.text=@"Tap + To Add Clients";
-//            }
-//            else
-//            {
-//                self.totalClientsLabel.text=[NSString stringWithFormat:@"Clients Available: %i", section.itemsSet.count ];
-//            }
-//            
-//        }
-//        else
-//        {
-//        
-//            NSFetchRequest *totalClients =[NSFetchRequest fetchRequestWithEntityName:@"ClientEntity"];
-//            NSInteger clientCount=(NSInteger )[managedObjectContext countForFetchRequest:totalClients error:nil]-1;
-//            
-//            
-//            if (clientCount<1)
-//            {
-//                self.totalClientsLabel.text=@"Tap + To Add Clients";
-//            }
-//            else
-//            {
-//                self.totalClientsLabel.text=[NSString stringWithFormat:@"Total Clients: %i", clientCount ];
-//            }
-//            
-//            }
-//    }
-//    
-//}
-//
-//
-//
-//-(void)updateClientsTotalLabel{
-//    
-//    if(isInDetailSubview){
-//        SCObjectSelectionSection *section=(SCObjectSelectionSection *)[tableModel sectionAtIndex:0];
-//        if (section.itemsSet.count<1)
-//        {
-//            self.totalClientsLabel.text=@"Tap + To Add Clients";
-//        }
-//        else
-//        {
-//            self.totalClientsLabel.text=[NSString stringWithFormat:@"Clients Available: %i", section.itemsSet.count ];
-//            
-//        }
-//    
-//    }
-//    else
-//    {
-//        NSFetchRequest *totalClients =[NSFetchRequest fetchRequestWithEntityName:@"ClientEntity"];
-//        NSInteger clientCount=(NSInteger )[managedObjectContext countForFetchRequest:totalClients error:nil];
-//        
-//        
-//        if (clientCount<1)
-//        {
-//            self.totalClientsLabel.text=@"Tap + To Add Clients";
-//        }
-//        else
-//        {
-//            self.totalClientsLabel.text=[NSString stringWithFormat:@"Total Clients: %i", clientCount ];
-//        }
-//        
-//    
-//    } 
-//    
-//}
 
 -(BOOL)checkStringIsNumber:(NSString *)str{
     BOOL valid=NO;

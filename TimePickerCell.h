@@ -41,7 +41,6 @@
 }
 
 
-//@property (strong, nonatomic) IBOutlet TimePickerView *timePickerView;
 
 @property (strong, nonatomic) IBOutlet UIView *view;
 

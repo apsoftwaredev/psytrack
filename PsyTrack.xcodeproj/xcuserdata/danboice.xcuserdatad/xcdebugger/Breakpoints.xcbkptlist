@@ -1720,19 +1720,6 @@
          timestampString = "383712428.167073"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "155"
-         endingLineNumber = "155"
-         landmarkName = "-willDisplay"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MonthlyPracticumLogTopCell.m"
-         timestampString = "383712428.167073"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
          startingLineNumber = "356"
          endingLineNumber = "356"
          landmarkName = "-scrollToNextPage"
@@ -2191,19 +2178,6 @@
          startingLineNumber = "4032"
          endingLineNumber = "4032"
          landmarkName = "-eventEditViewController:didCompleteWithAction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TimeTrackViewController.m"
-         timestampString = "385079653.157777"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1585"
-         endingLineNumber = "1585"
-         landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -3904,19 +3878,6 @@
          timestampString = "383939437.610336"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1651"
-         endingLineNumber = "1651"
-         landmarkName = "-monthlyLogNotesForMonth"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TrackTypeWithTotalTimes.m"
-         timestampString = "383939437.610336"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1356"
          endingLineNumber = "1356"
          landmarkName = "-totalOverallHoursTIForOveralCell:clinician:"
@@ -4541,32 +4502,6 @@
          timestampString = "385079653.157777"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1969"
-         endingLineNumber = "1969"
-         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TimeTrackViewController.m"
-         timestampString = "385079653.157777"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1968"
-         endingLineNumber = "1968"
-         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TimeTrackViewController.m"
-         timestampString = "385079653.157777"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3386"
          endingLineNumber = "3386"
          landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
@@ -5036,19 +4971,6 @@
          startingLineNumber = "1863"
          endingLineNumber = "1863"
          landmarkName = "-tableViewModel:didInsertRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "TimeTrackViewController.m"
-         timestampString = "385079653.157777"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2615"
-         endingLineNumber = "2615"
-         landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5787,19 +5709,6 @@
          timestampString = "385079653.157777"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4078"
-         endingLineNumber = "4078"
-         landmarkName = "-evaluateWhichABViewControllerToShow"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CliniciansViewController_Shared.m"
-         timestampString = "385079653.157777"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
          startingLineNumber = "4113"
          endingLineNumber = "4113"
          landmarkName = "-evaluateWhichABViewControllerToShow"
@@ -6277,32 +6186,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "LockScreen/LCYLockSettingsViewController.m"
-         timestampString = "385079653.157777"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "684"
-         endingLineNumber = "684"
-         landmarkName = "-validatePasswordsFromEncrytpionTokenCell:buttonTapped:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "LockScreen/LCYLockSettingsViewController.m"
-         timestampString = "385079653.157777"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "733"
-         endingLineNumber = "733"
-         landmarkName = "-validatePasswordsFromEncrytpionTokenCell:buttonTapped:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "LockScreen/LCYAppSettings.m"
          timestampString = "372478324.286606"
          startingColumnNumber = "9223372036854775807"
@@ -6726,19 +6609,6 @@
          startingLineNumber = "729"
          endingLineNumber = "729"
          landmarkName = "-tableViewModel:detailModelCreatedForSectionAtIndex:detailTableViewModel:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "CliniciansViewController_Shared.m"
-         timestampString = "385079653.157777"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2637"
-         endingLineNumber = "2637"
-         landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -8198,7 +8068,7 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PDFRenderer.m"

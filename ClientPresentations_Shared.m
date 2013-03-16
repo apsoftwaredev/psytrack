@@ -37,12 +37,7 @@
 
      NSManagedObjectContext *managedObjectContext= [(PTTAppDelegate *)[UIApplication sharedApplication].delegate managedObjectContext];
     
-    
-//    //Create a class definition for the ClientPresentationEntity
-//    self.clientPresentationDef = [SCEntityDefinition definitionWithEntityName:@"ClientPresentationEntity" 
-//                                                        managedObjectContext:managedObjectContext
-//                                                               propertyNames:[NSArray arrayWithObjects: @"behavioralObservations",@"medications",   @"clientsDesc",@"appitite", @"assessmentNotes", @"attitudeNotes", @"homicidality", @"improvement", @"interpersonalNotes", @"notableBehaviors", @"notableImagry",  @"orientedToBody", @"orientedToPerson", @"orientedToPlace", @"orientedToTime", @"otherRemarks",  @"plan", @"rapport", @"sensoryNotes", @"sleepHoursNightly", @"sleepQuality",  @"vision"  @"notes",    nil]];
-    
+   
     self.clientPresentationDef = [SCEntityDefinition definitionWithEntityName:@"ClientPresentationEntity" managedObjectContext:managedObjectContext autoGeneratePropertyDefinitions:YES];
    
     
@@ -84,10 +79,7 @@
     // add the notes property group to the clientpresentation class. 
     [self.clientPresentationDef.propertyGroups addGroup:orientationGroup];
     
-  //    
-//    
-//    
-//    
+   
     self.clientPresentationDef.orderAttributeName=@"order";
     
     //create a property definition for the sleep Quality property in the clientPresentations class
@@ -452,9 +444,7 @@
     
     additionalVariableValueDef.orderAttributeName=@"order";
     
-//    SCPropertyDefinition *variableValuesInVariableNamePropertyDef=[SCPropertyDefinition definitionWithName:@"variableValues" title:@"Values" type:SCPropertyTypeArrayOfObjects];
-//    
-//    [additionalVariableNameDef addPropertyDefinition:variableValuesInVariableNamePropertyDef];
+
     SCPropertyDefinition *variableValuesInVariableNamePropertyDef=[additionalVariableNameDef propertyDefinitionWithName:@"variableValues"];
     variableValuesInVariableNamePropertyDef.title=@"Selectable Values";
     variableValuesInVariableNamePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:additionalVariableValueDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new variable value"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
@@ -793,126 +783,7 @@
     //Create a property definition for the psychoMotorNotes property.
    
     
-//    //define a property group
-//    SCPropertyGroup *affectNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"affectNotes"]];
-//    
-//    // add the affectNotes property group to the behavioralObservationsDef class. 
-//    [behavioralObservationsDef.propertyGroups addGroup:affectNotesGroup];
-//    
-//    //define a property group
-//    SCPropertyGroup *appearanceNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"appearanceNotes"]];
-//    
-//    // add the appearanceNotes property group to the behavioralObservationsDef class. 
-//    [behavioralObservationsDef.propertyGroups addGroup:appearanceNotesGroup];
-//    
-//    
-//      //define a property group
-//    SCPropertyGroup *attentionNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"attentionNotes"]];
-//    
-//    // add the attentionNotes property group to the behavioralObservationsDef class. 
-//    [behavioralObservationsDef.propertyGroups addGroup:attentionNotesGroup];
-//    
-//      //define a property group
-//    SCPropertyGroup *attitudeNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"attitudeNotes"]];
-//    
-//    // add the attitudeNotes property group to the behavioralObservationsDef class. 
-//    [behavioralObservationsDef.propertyGroups addGroup:attitudeNotesGroup];
-//    
-//        //define a property group
-//    SCPropertyGroup *interpersonalNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"interpersonalNotes"]];
-//    
-//    // add the interpersonalNotes property group to the behavioralObservationsDef class. 
-//    [behavioralObservationsDef.propertyGroups addGroup:interpersonalNotesGroup];
-//   
-//      //define a property group
-//    SCPropertyGroup *languageNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"languageNotes"]];
-//    
-//    // add the languageNotes property group to the behavioralObservationsDef class. 
-//    [behavioralObservationsDef.propertyGroups addGroup:languageNotesGroup];
-//    
-//       //define a property group
-//    SCPropertyGroup *notableBehaviorsGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"notableBehaviors"]];
-//    
-//    // add the notableBehaviors property group to the behavioralObservationsDef class. 
-//    [behavioralObservationsDef.propertyGroups addGroup:notableBehaviorsGroup];
-//    
-//    
-//      //define a property group
-//    SCPropertyGroup *notableImagryGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"notableImagry"]];
-//   
-//    // add the notableImagry property group to the behavioralObservationsDef class. 
-//    [behavioralObservationsDef.propertyGroups addGroup:notableImagryGroup];
-//        //define a property group
-//    SCPropertyGroup *psychomotorNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"psychomotorNotes"]];
-//    
-//    // add the psychomotorNotes property group to the behavioralObservationsDef class. 
-//    [behavioralObservationsDef.propertyGroups addGroup:psychomotorNotesGroup];
-//   
-//      //define a property group
-//    SCPropertyGroup *sensoryNotesGroup = [SCPropertyGroup groupWithHeaderTitle:nil footerTitle:nil propertyNames:[NSArray arrayWithObject:@"sensoryNotes"]];
-//    
-//    // add the sensoryNotes property group to the behavioralObservationsDef class. 
-//    [behavioralObservationsDef.propertyGroups addGroup:sensoryNotesGroup];
-//
-   
-       
 
-       
-//    //create the dictionary with the data bindings
-//    NSDictionary *pickerDataBindings = [NSDictionary 
-//                                        dictionaryWithObjects:[NSArray arrayWithObjects:@"facialExpressions",@"Facial Expressions",nil] 
-//                                        forKeys:[NSArray arrayWithObjects:@"2", @"3", nil]]; // 1 is the control tags
-//	
-//    
-//    
-//    
-//    SCCustomPropertyDefinition *titleProperty = [SCCustomPropertyDefinition definitionWithName:@"Facial Expressions"uiElementClass:[BehaviorPickerCell class] objectBindings:pickerDataBindings];
-//	[behavioralObservationsDef insertPropertyDefinition:titleProperty atIndex:2];
-	
-    //create the dictionary with the data bindings
-        
-//    [mainGroup addPropertyName:@"Age"];
-//    [mainGroup addPropertyName:@"WechslerAge"];
-    //create the dictionary with the data bindings
-   
-  
-//    stressLevel
-//    appitite
-//    assessmentNotes
-//    attitudeNotes
-//    clientsDesc
-//    comfortLevel
-//    alliance
-//    happinessLevel
-//    energyLevel
-//    hearingLevel
-//    height
-//    homicidality
-//    improvement
-//    interpersonalNotes
-//    notableBehaviors
-//    notableImagry
-//    notes
-//    order
-//    orientatedToBody
-//    orientatedToPerson
-//    orientatedToPlace
-//    orientatedToTime
-//    otherRemarks
-//    painLevel
-//    plan
-//    sexualSatisfaction
-//    rapport
-//    sensoryNotes
-//    sleepHoursNightly
-//    sleepQuality
-//    suicidality
-//    symptomSeverity
-//    copingLevel
-//    vision
-//    depth
-//    weight
-//    weightUnit
     
     
     
@@ -1360,8 +1231,7 @@
     {
         
         
-        //        UIView *viewOne = [cell viewWithTag:51];
-        //        UIView *viewSendReports =[cell viewWithTag:40];
+
         UIView *sliderView = [cell viewWithTag:14];
         
         
@@ -1442,13 +1312,7 @@
         SCTableViewSection *section=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         
         
-        
-        //        SCLabelCell *actualAge=[SCLabelCell cellWithText:@"Age" boundObject:nil withPropertyName:@"Age"];
-        //        SCLabelCell *wechslerAge=[SCLabelCell cellWithText:@"Wechsler Age" boundObject:nil withPropertyName:@"WechslerAge"];
-        //        
-        //        [section addCell:actualAge];
-        //        [section addCell:wechslerAge];
-        //        [section reloadBoundValues];
+
         [self addWechlerAgeCellToSection:(SCTableViewSection *)section];
         
         
@@ -1617,12 +1481,6 @@ else if (tableViewModel.tag==5&&tableViewModel.sectionCount>1&&indexPath.section
 
 SCTableViewSection *section = [tableViewModel sectionAtIndex:index];
 
-//    if (tableViewModel.tag==1 &&index==0) {
-//        [section insertCell:[SCLabelCell cellWithText:@"Age"] atIndex:2];
-//        [section insertCell:[SCLabelCell cellWithText:@"Wechsler Age"] atIndex:3];
-//    }
-
-
 
 
 if(section.headerTitle !=nil)
@@ -1655,7 +1513,6 @@ if(section.headerTitle !=nil)
         UILabel *footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftPad, 20, width, height)];
         footerLabel.backgroundColor = [UIColor clearColor];
         footerLabel.text = section.footerTitle;
-//        [footerLabel sizeToFit];
         footerLabel.textColor = [UIColor whiteColor];
         [footerLabel setNumberOfLines:5];
         [footerLabel setTextAlignment:UITextAlignmentCenter];
@@ -1880,17 +1737,6 @@ if(section.headerTitle !=nil)
 }
 
 
-//- (void)tableViewModel:(SCTableViewModel *)tableViewModel didLayoutSubviewsForCell:(SCTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if([cell isKindOfClass:[SCSelectionCell class]])
-//    {
-//
-//        CGRect frame = cell.textLabel.frame;
-//        frame.size.width = myNewWidth;
-//        cell.textLabel.frame = frame;
-//    }
-//}
-//
 -(void)tableViewModel:(SCTableViewModel *)tableViewModel valueChangedForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     SCTableViewCell *cell=(SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
@@ -2054,10 +1900,10 @@ if(section.headerTitle !=nil)
   else  if (tableViewModel.tag==3) {
         SCTableViewSection *sectionZero=(SCTableViewSection *)[tableViewModel sectionAtIndex:0];
         
-//        if (indexPath.section==0&&cell.tag==0) {
+
             [self addWechlerAgeCellToSection:(SCTableViewSection *)sectionZero];
             
-//        }
+
         
       if (indexPath.section==0&&cell.tag==0&&tableViewModel.sectionCount>1) {
       
@@ -2107,8 +1953,6 @@ if(section.headerTitle !=nil)
 if (section.cellCount>2) {
    SCLabelCell *actualAgeCell=(SCLabelCell*)[section cellAtIndex:1];
 SCLabelCell *wechslerAgeCell=(SCLabelCell*)[section cellAtIndex:2];
-//    SCTableViewCell *clientCell=(SCTableViewCell *)[section cellAtIndex:0];
-//    SCTableViewCell *testDateCell=(SCTableViewCell*)[section cellAtIndex:3];
 ClientsViewController_Shared *clientsViewController_Shared=[[ClientsViewController_Shared alloc]init];
 
 SCTableViewCell *clientCell=(SCTableViewCell *)[section cellAtIndex:0];
@@ -2118,16 +1962,7 @@ if ([clientCell isKindOfClass:[ClientsSelectionCell class]]) {
     ClientsSelectionCell *clientObjectsSelectionCell=(ClientsSelectionCell *)clientCell;
     if (clientObjectsSelectionCell.clientObject) {
    
-    
-    
-//        NSArray *array=[[NSArray alloc]init];
-   
-//        int itemsCount=clientObjectsSelectionCell.items.count;
-//        if (itemsCount>=0&&clientObjectsSelectionCell.clientObject) {
-////            clientDateOfBirth=(NSDate *)[(NSArray *)[clientObjectsSelectionCell.items valueForKey:@"dateOfBirth"]lastObject];
-        
        
-        
         
         NSManagedObject *clientObject=(NSManagedObject *)clientObjectsSelectionCell.clientObject;
         clientDateOfBirth=(NSDate *)[clientObject valueForKey:@"dateOfBirth"];
@@ -2186,8 +2021,7 @@ else
 
 }
 
-//    actualAgeCell.label.text=[clientsViewController_Shared calculateActualAgeWithBirthdate:birthdateCell.datePicker.date];
-//    
+  
 
 }
 -(BOOL)tableViewModel:(SCTableViewModel *)tableViewModel valueIsValidForRowAtIndexPath:(NSIndexPath *)indexPath{

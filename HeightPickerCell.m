@@ -62,14 +62,10 @@
 	[self.contentView addSubview:pickerField];
     
     
-    //    UILabel *hourLabel =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 300, 37)];
-    //    hourLabel.text=@"experiment";
-    //    
-    
-//    [picker reloadInputViews];
+
      loadUnitsFromBoundObject=TRUE;
-    //    
-    //    
+        
+    
 }
 
 
@@ -180,11 +176,7 @@
         heightTall=(firstComponent*100)+thirdComponent;
     }
     
-    
-//    float heightTall=[[NSString stringWithFormat:@"%f", inchesTall]floatValue]; 
-    
- 
-    
+  
 
     [self.boundObject setValue:[NSNumber numberWithInteger:heightTall] forKey:@"heightTall"];
     [self.boundObject setValue:bigUnit forKey:@"heightUnit"];
@@ -401,10 +393,7 @@ else
 {
     NSString *returnStr = @"";
 	
-	// note: custom picker doesn't care about titles, it uses custom views
-	
-    
-    
+ 
 	
     if (component==0||component==2) {
         returnStr = [[NSNumber numberWithInt:row] stringValue];
@@ -553,15 +542,7 @@ else
             
             heighTallFtOrM=feetInteger;
             
-            
-            
-            
-            
-            
-            
-         
-        
-        
+  
         
         }
         
@@ -570,9 +551,7 @@ else
         [picker selectRow:heighTallFtOrM inComponent:0 animated:YES];
         [picker selectRow:heighTallInOrCm inComponent:2 animated:YES];
         
-//        self.label.text = [NSString stringWithFormat:@"%i%@ %i%@",heighTallFtOrM,bigUnit,heighTallInOrCm,littleUnit] ;
-        
-        
+       
     }
         
         [self cellValueChanged];
@@ -633,14 +612,7 @@ else
     
     
     
-    
-//    
-//    heighTallFtOrM=metersInteger;
-//    
-//    centemetersComponent=centemetersInteger;
-//    
-    
-    
+ 
     
     return centemetersInteger;
 

@@ -118,12 +118,7 @@
              
         
 
-        
-//    RaceCombinationCount *nilCount=[[RaceCombinationCount alloc]initWithNilSelectionCount:filteredForNull&&filteredForNull.count?filteredForNull.count:0];
        
-        
-        
-        
         
 NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"raceCombinationStr"
 ascending:YES];

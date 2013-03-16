@@ -17,30 +17,26 @@
  */
 
 
-#import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
 
 #import "ClinicianViewController.h"
 
 #define addSmNr 338
 
-//@class CliniciansDetailViewController_iPad;
+
 @interface CliniciansRootViewController_iPad : ClinicianViewController <SCTableViewModelDataSource, SCTableViewModelDelegate , UINavigationControllerDelegate ,ABPeoplePickerNavigationControllerDelegate, ABPersonViewControllerDelegate, ABNewPersonViewControllerDelegate,UITableViewDelegate > {
 
     
 
     SCTableViewCell *currentTableViewCell;
     
-    UIBarButtonItem *cliniciansBarButtonItem;
+    UIBarButtonItem *cliniciansBarButtonItem_;
     
     
-  //    ABAddressBookRef addressBook;
+
  
 }
 
-
-//@property (nonatomic, strong) IBOutlet CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad;
-
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *cliniciansBarButtonItem;
 
 
 
@@ -48,13 +44,6 @@
 
 
 
-
-
-// Method called by DetailViewController
-//- (void)addButtonTapped;
-
-
-//-(void)showPersonViewControllerWithRecordIdentifier:(NSString *)recordIdentifier firstName:(NSString *)firstName lastName:(NSString *)lastName;
 
 
 @end

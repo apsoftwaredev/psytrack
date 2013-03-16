@@ -34,20 +34,7 @@
 
 
 +(void)drawMonthlyPracticumLogPDF:(NSString*)fileName month:(NSDate *)monthToDisplay trainingProgram:(TrainingProgramEntity *)trainingProgramGiven password:(NSString *) filePassword amended:(BOOL)markAmended {
-// Create the PDF context using the default page size of 612 x 792.
-//UIGraphicsBeginPDFContextToFile(fileName, CGRectZero, nil);
-//// Mark the beginning of a new page.
-//UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, DOC_WIDTH, DOC_HEIGHT), nil);
-
-//    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-//
-//    NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"MonthlyPracticumLogView" owner:nil options:nil];
-//    
-//    UIView* mainView = [objects objectAtIndex:0];
-
    
-    
     
     MonthlyPracticumLogTableViewController *monthlyPracticumLogTVC=[[MonthlyPracticumLogTableViewController alloc]initWithNibName:(NSString *)@"MonthlyPracticumLogTableViewController" bundle:(NSBundle *)[NSBundle mainBundle] monthToDisplay:monthToDisplay trainingProgram:trainingProgramGiven markAmended:markAmended];
     
@@ -55,7 +42,6 @@
     [monthlyPracticumLogTVC loadView];
     [monthlyPracticumLogTVC viewDidLoad];
    
-    // Points the pdf converter to the mutable data object and to the UIView to be converted
   
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
     [dateFormatter setTimeZone:[NSTimeZone defaultTimeZone]];
@@ -69,26 +55,12 @@
     monthlyPracticumLogTVC=nil;
     dateFormatter=nil;
 
-// Close the PDF context and write the contents out.
-//UIGraphicsEndPDFContext();
+
 }
 
 
 +(void)drawAllHoursReportPDF:(NSString*)fileName  password:(NSString *) filePassword doctorateLevel:(BOOL)doctorateLevelSelected {
-    // Create the PDF context using the default page size of 612 x 792.
-    //UIGraphicsBeginPDFContextToFile(fileName, CGRectZero, nil);
-    //// Mark the beginning of a new page.
-    //UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, DOC_WIDTH, DOC_HEIGHT), nil);
-    
-    //    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    //
-    //    NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"MonthlyPracticumLogView" owner:nil options:nil];
-    //
-    //    UIView* mainView = [objects objectAtIndex:0];
-    
-    
-    
+ 
     
     AllTrainingHoursVC *allTrainingHoursVC=[[AllTrainingHoursVC alloc]initWithNibName:(NSString *)@"AllTrainingHoursVC" bundle:(NSBundle *)[NSBundle mainBundle] doctorateLevel:doctorateLevelSelected];
     
@@ -117,27 +89,12 @@
 }
 
 +(void)drawDemographicReportPDF:(NSString*)fileName  password:(NSString *) filePassword {
-    // Create the PDF context using the default page size of 612 x 792.
-    //UIGraphicsBeginPDFContextToFile(fileName, CGRectZero, nil);
-    //// Mark the beginning of a new page.
-    //UIGraphicsBeginPDFPageWithInfo(CGRectMake(0, 0, DOC_WIDTH, DOC_HEIGHT), nil);
-    
-    //    PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    //
-    //    NSArray* objects = [[NSBundle mainBundle] loadNibNamed:@"MonthlyPracticumLogView" owner:nil options:nil];
-    //
-    //    UIView* mainView = [objects objectAtIndex:0];
-    
-    
-    
-    
+   
     DemographicReportViewController *demographicReportVC=[[DemographicReportViewController alloc]initWithNibName:@"DemographicReportViewController" bundle:[NSBundle mainBundle]];
     
     [demographicReportVC loadView];
     [demographicReportVC viewDidLoad];
     
-    // Points the pdf converter to the mutable data object and to the UIView to be converted
     
     NSString *documentTitle=@"Demographic Report";
     
@@ -147,9 +104,7 @@
     [demographicReportVC viewDidUnload];
     demographicReportVC.view=nil;
     demographicReportVC=nil;
-    
-    // Close the PDF context and write the contents out.
-    //UIGraphicsEndPDFContext();
+ 
 }
 
 
@@ -481,10 +436,6 @@
                                     nil];
     
     
-    //	// make the attributed string
-    //	NSAttributedString *stringToDraw = [[NSAttributedString alloc] initWithString:string
-    //                                                                       attributes:attributesDict];
-    //    
     CFAttributedStringRef currentText = CFAttributedStringCreate(NULL, CFAttributedStringGetString(attrStr), (__bridge CFDictionaryRef)attributesDict);
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString(currentText);
     
@@ -612,8 +563,6 @@
                             
 
                             currentPage++;
-                        
-//                            [aView.layer renderInContext:pdfContext];
                             
                             [aView.layer removeAllAnimations];
                             [aView.layer renderInContext:pdfContext];
@@ -639,10 +588,7 @@
                         
                         
                         
-                        // We are done with our context now, so we release it
-//                        CGContextRelease (pdfContext);
-                       
-//                        CGContextEndPage(pdfContext);
+ 
                         
                         }
                     
@@ -732,9 +678,7 @@
     
     
     
-    
-    // instructs the mutable data object to write its context to a file on disk
-//    [pdfData writeToFile:documentDirectoryFilename atomically:YES];
+
     
 }
 
@@ -820,12 +764,7 @@
                         } while (!appDelegate.stopScrollingMonthlyPracticumLog);
                         
                         
-                        
-                        // We are done with our context now, so we release it
-                        //                        CGContextRelease (pdfContext);
-                        
-                        
-                        
+                      
                       
     
     
@@ -979,14 +918,7 @@
     
     
     
-    // We are done with our context now, so we release it
-    //                        CGContextRelease (pdfContext);
-    
-    
-    
-    
-    
-    
+ 
     
     
     // remove PDF rendering context

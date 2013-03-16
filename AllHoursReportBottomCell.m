@@ -31,17 +31,7 @@
     
     self.cellSubTypeLabel.text=self.trackTypeWithTotalTimesObject.typeLabelText;
    
-    
-   
-    
-    
-    
-    
-  
-    
-    
-    
-    
+ 
     self.layer.borderWidth=0;
     self.accessoryType=UITableViewCellAccessoryNone;
     

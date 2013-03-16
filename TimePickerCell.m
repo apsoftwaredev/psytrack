@@ -322,22 +322,6 @@ self.dateLabel.text=@"0:00";
     
    
 }
-//-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-//{
-//    
-//    if ( UIInterfaceOrientationIsPortrait(toInterfaceOrientation) )
-//    {
-//        self.hourLabel.transform=CGAffineTransformTranslate(self.view.transform,130, 0);
-//         self.minLabel.transform=CGAffineTransformTranslate(self.view.transform,130, 0);
-//        //        self.view.superview.frame = CGRectMake(200, 100, 940, 628);
-//    }
-//    else
-//    {
-//        self.hourLabel.transform=CGAffineTransformTranslate(self.view.transform,38, 0);
-//        self.minLabel.transform=CGAffineTransformTranslate(self.view.transform,38, 0);
-//        //        self.view.superview.frame = CGRectMake(100, 200, 600, 350);
-//    }
-//}
 
 
 
