@@ -36,9 +36,10 @@
 
     AdditionalVariableNameEntity *selectedVariableName;
 
-    UIBarButtonItem *clientsBarButtonItem;
+    UIBarButtonItem *clientsBarButtonItem_;
 }
 
+@property (nonatomic, strong) UIBarButtonItem *clientsBarButtonItem;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) IBOutlet UILabel *totalClientsLabel;

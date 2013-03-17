@@ -27,6 +27,7 @@
 
 @implementation ClientsRootViewController_iPad
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize clientsBarButtonItem= clientsBarButtonItem_;
 @synthesize searchBar;
 @synthesize totalClientsLabel;
 
@@ -36,6 +37,8 @@
 - (void) viewDidUnload
 {
     [super viewDidUnload];
+    
+    self.clientsBarButtonItem =nil;
 }
 
 
@@ -120,7 +123,7 @@
 
     [self updateClientsTotalLabel];
 
-    clientsBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Clients" style:UIBarButtonItemStylePlain target:self action:@selector(displayPopover:)];
+    self.clientsBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Clients" style:UIBarButtonItemStylePlain target:self action:@selector(displayPopover:)];
 
     objectsModel.autoSortSections = YES;
 
@@ -145,7 +148,7 @@
 {
     self.tableViewModel.detailViewController.navigationItem.rightBarButtonItem = objectsModel.addButtonItem;
 
-    self.tableViewModel.detailViewController.navigationItem.leftBarButtonItem = clientsBarButtonItem;
+    self.tableViewModel.detailViewController.navigationItem.leftBarButtonItem = clientsBarButtonItem_;
 }
 
 

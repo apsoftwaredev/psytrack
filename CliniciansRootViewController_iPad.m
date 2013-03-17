@@ -92,6 +92,7 @@
 {
     [super viewDidUnload];
 
+    self.cliniciansBarButtonItem =nil;
     currentDetailTableViewModel_ = nil;
 
     if (personVCFromSelectionList)
