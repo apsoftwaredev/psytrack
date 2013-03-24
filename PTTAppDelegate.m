@@ -531,6 +531,969 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
     }
 }
 
+-(BOOL)setUpDrugStore{
+    
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    //    NSUndoManager *undoManager=[[NSUndoManager alloc]init];
+    //    undoManager=(NSUndoManager *)__drugsManagedObjectContext.undoManager;
+    NSURL *drugsStoreURL = [[self applicationDrugsDirectory] URLByAppendingPathComponent:@"drugs.sqlite"];
+    
+    
+    [fileManager removeItemAtURL:drugsStoreURL error:NULL];
+    
+    //    [__drugsManagedObjectContext setUndoManager:nil];
+    NSURL *drugAppDoc = [[NSBundle mainBundle] URLForResource:@"AppDoc" withExtension:@"txt" ];
+    
+    NSURL *drugAppDocType_Lookup = [[NSBundle mainBundle] URLForResource:@"AppDocType_Lookup" withExtension:@"txt" ];
+    
+    NSURL *drugApplication = [[NSBundle mainBundle] URLForResource:@"Application" withExtension:@"txt"];
+    
+    NSURL *drugChemTypeLookup =  [[NSBundle mainBundle] URLForResource:@"ChemTypeLookup" withExtension:@"txt"];
+    
+    NSURL *drugDocType_lookup =  [[NSBundle mainBundle] URLForResource:@"DocType_lookup" withExtension:@"txt"];
+    
+    NSURL *drugProduct_tecode =  [[NSBundle mainBundle] URLForResource:@"Product_tecode" withExtension:@"txt"];
+    NSURL *drugProduct = [[NSBundle mainBundle] URLForResource:@"Product" withExtension:@"txt"];
+    
+    NSURL *drugRegActionDate = [[NSBundle mainBundle] URLForResource:@"RegActionDate" withExtension:@"txt"];
+    
+    NSURL *drugReviewClass_Lookup = [[NSBundle mainBundle] URLForResource:@"ReviewClass_Lookup" withExtension:@"txt"];
+    
+    
+    
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc]init];
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+    
+    if (firstRun||resetDatabase) {
+        
+        
+        if ([fileManager fileExistsAtPath:drugApplication.path]) {
+            
+            if (drugApplication) {
+                
+                
+                TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugApplication encoding:NSASCIIStringEncoding];
+                
+                //
+                
+                
+                NSInteger appCount = [tabFile count];
+                //                NSMutableArray *array =[[NSMutableArray alloc]init];
+                
+                
+                
+                DLog(@"adding drug application ");
+                
+                for (NSInteger z=9; z<=appCount-8; z++) {
+                    
+                    
+                    
+                    NSEntityDescription *entityDesc=[NSEntityDescription entityForName:@"DrugApplicationEntity" inManagedObjectContext:__drugsManagedObjectContext];
+                    DrugApplicationEntity *app=[[DrugApplicationEntity alloc]initWithEntity:entityDesc insertIntoManagedObjectContext:[self drugsManagedObjectContext]];
+                    
+                    
+                    
+                    
+                    app.applNo=[tabFile objectAtIndex:z];
+                    
+                    z++;
+                    
+                    
+                    app.applType=[tabFile objectAtIndex:z];
+                    
+                    z++;
+                    
+                    
+                    app.sponsorApplicant=[tabFile objectAtIndex:z];
+                    
+                    z++;
+                    
+                    
+                    app.mostRecentLabelAvailableFlag=[tabFile objectAtIndex:z];
+                    
+                    z++;
+                    
+                    app.currentPatentFlag=[tabFile objectAtIndex:z];
+                    
+                    z++;
+                    
+                    
+                    app.actionType=[tabFile objectAtIndex:z];
+                    
+                    z++;
+                    
+                    app.chemical_Type=[NSNumber numberWithInteger:(NSInteger )[[tabFile objectAtIndex:z]integerValue] ];
+                    
+                    z++;
+                    
+                    app.ther_Potential=[tabFile objectAtIndex:z];
+                    
+                    z++;
+                    
+                    app.orphan_Code=[tabFile objectAtIndex:z];
+                    
+                    
+                    
+                    
+                    
+                    //
+                    
+                    
+                    
+                    
+                    
+                    //
+                    
+                    
+                    
+                    
+                    if (z>=appCount-1)
+                    {
+                        
+                        
+                        
+                        
+                    }
+                }
+                DLog(@"added drug application ");
+                
+                
+            }
+            
+            
+            
+            
+            
+            
+        }
+        
+        
+        if ([fileManager fileExistsAtPath:drugProduct.path]) {
+            if (drugProduct) {
+                
+                
+                
+                
+                //
+                TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugProduct encoding:NSASCIIStringEncoding];
+                
+                //
+                
+                
+                NSInteger productCount = [tabFile count];
+                //    NSMutableArray *array =[[NSMutableArray alloc]init];
+                
+                
+                
+                
+                
+                NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugProductEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
+                
+                
+                
+                DLog(@"adding drug drug product");
+                
+                for (NSInteger z=9; z<=productCount-8; z++) {
+                    
+                    
+                    
+                    
+                    DrugProductEntity *drug=[[DrugProductEntity alloc]initWithEntity:productEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
+                    
+                    //
+                    drug.applNo=[tabFile objectAtIndex:z];
+                    z++;
+                    
+                    
+                    drug.productNo=[tabFile objectAtIndex:z];
+                    z++;
+                    
+                    
+                    drug.form=[tabFile objectAtIndex:z];
+                    
+                    z++;
+                    
+                    
+                    drug.dosage=(NSString *)[[tabFile objectAtIndex:z]stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+                    z++;
+                    
+                    drug.productMktStatus=[NSNumber numberWithInteger:(NSInteger )[[tabFile objectAtIndex:z]integerValue] ];
+                    z++;
+                    
+                    drug.tECode=[tabFile objectAtIndex:z];
+                    z++;
+                    
+                    drug.referenceDrug=[tabFile objectAtIndex:z];
+                    z++;
+                    
+                    drug.drugName=(NSString *)[[tabFile objectAtIndex:z]stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+                    z++;
+                    
+                    drug.activeIngredient=(NSString *)[[tabFile objectAtIndex:z]stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+                    
+                    
+                    
+                    
+                    if (z>=productCount-1)
+                    {
+                        
+                        
+                        
+                        
+                    }
+                    
+                }
+                DLog(@"added drug product");
+                
+            }
+            
+            
+        }
+        if ([fileManager fileExistsAtPath:drugRegActionDate.path]) {
+            if (drugRegActionDate) {
+                
+                //
+                TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugRegActionDate encoding:NSASCIIStringEncoding];
+                
+                //
+                
+                
+                NSInteger drugRegActionDateCount = [tabFile count];
+                //    NSMutableArray *array =[[NSMutableArray alloc]init];
+                
+                
+                
+                
+                
+                NSEntityDescription *productEntityDesc=[NSEntityDescription entityForName:@"DrugRegActionDateEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
+                
+                
+                DLog(@"adding drug actiondate");
+                
+                for (NSInteger z=6; z<=drugRegActionDateCount-5; z++) {
+                    
+                    
+                    
+                    DrugRegActionDateEntity *drugRegActionDate=[[DrugRegActionDateEntity alloc]initWithEntity:productEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
+                    
+                    //
+                    
+                    
+                    drugRegActionDate.applNo=[tabFile objectAtIndex:z];
+                    z++;
+                    
+                    
+                    drugRegActionDate.actionType=[tabFile objectAtIndex:z];
+                    z++;
+                    
+                    
+                    drugRegActionDate.inDocTypeSeqNo=[tabFile objectAtIndex:z];
+                    
+                    z++;
+                    
+                    drugRegActionDate.duplicateCounter=[tabFile objectAtIndex:z];
+                    z++;
+                    
+                    
+                    
+                    drugRegActionDate.actionDate=(NSDate *)[dateFormatter dateFromString:[tabFile objectAtIndex:z]];
+                    
+                    
+                    z++;
+                    
+                    drugRegActionDate.docType=[tabFile objectAtIndex:z];
+                    
+                    
+                    
+                    
+                    
+                    
+                    if (z>=drugRegActionDateCount-1)
+                    {
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    }
+                    
+                    
+                }
+                DLog(@"added drug actiondate");
+            }
+        }
+        if ([fileManager fileExistsAtPath:drugReviewClass_Lookup.path]) {
+            
+            if (drugReviewClass_Lookup) {
+                
+                //
+                TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugReviewClass_Lookup encoding:NSASCIIStringEncoding];
+                
+                //
+                
+                
+                NSInteger drugReviewClass_LookupCount = [tabFile count];
+                //    NSMutableArray *array =[[NSMutableArray alloc]init];
+                
+                
+                
+                
+                
+                NSEntityDescription *drugReviewClassLookupEntityDesc=[NSEntityDescription entityForName:@"DrugReviewClassLookupEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
+                
+                DLog(@"adding drug review class lookup");
+                for (NSInteger z=4; z<drugReviewClass_LookupCount-3; z++) {
+                    
+                    
+                    
+                    DrugReviewClassLookupEntity *drugReviewClassLookup=[[DrugReviewClassLookupEntity alloc]initWithEntity:drugReviewClassLookupEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
+                    
+                    //
+                    drugReviewClassLookup.reviewClassID=[tabFile objectAtIndex:z];
+                    z++;
+                    
+                    
+                    drugReviewClassLookup.reviewCode=[tabFile objectAtIndex:z];
+                    z++;
+                    
+                    
+                    drugReviewClassLookup.longDesc=[tabFile objectAtIndex:z];
+                    
+                    z++;
+                    
+                    
+                    drugReviewClassLookup.shortDesc=[tabFile objectAtIndex:z];
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    if (z>=drugReviewClass_LookupCount-1)
+                    {
+                        
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+                
+                DLog(@"added drug review class lookup");
+            }
+            
+        }
+        if ([fileManager fileExistsAtPath:drugAppDoc.path]) {
+            if (drugAppDoc) {
+                
+                //
+                TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugAppDoc encoding:NSASCIIStringEncoding];
+                
+                //
+                
+                
+                NSInteger appDocCount = [tabFile count];
+                //    NSMutableArray *array =[[NSMutableArray alloc]init];
+                
+                
+                
+                
+                
+                NSEntityDescription *appDocEntityDesc=[NSEntityDescription entityForName:@"DrugAppDocEntity" inManagedObjectContext:__drugsManagedObjectContext];
+                DLog(@"adding drug app doc");
+                for (NSInteger z=9; z<appDocCount-8; z++) {
+                    
+                    
+                    
+                    
+                    DrugAppDocEntity *appDoc=[[DrugAppDocEntity alloc]initWithEntity:appDocEntityDesc insertIntoManagedObjectContext:[self drugsManagedObjectContext]];
+                    
+                    //
+                    appDoc.appDocID=[NSNumber numberWithInteger:(NSInteger)[[tabFile objectAtIndex:z]integerValue]];
+                    z++;
+                    
+                    
+                    appDoc.applNo=[tabFile objectAtIndex:z];
+                    z++;
+                    
+                    
+                    appDoc.seqNo=[tabFile objectAtIndex:z];
+                    
+                    z++;
+                    
+                    
+                    appDoc.docType=[tabFile objectAtIndex:z];
+                    
+                    z++;
+                    
+                    
+                    appDoc.docTitle=[tabFile objectAtIndex:z];
+                    
+                    z++;
+                    
+                    
+                    appDoc.docUrl=(NSString *)[[tabFile objectAtIndex:z]stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+                    
+                    z++;
+                    
+                    
+                    appDoc.docDate=[dateFormatter dateFromString:[tabFile objectAtIndex:z]];
+                    
+                    z++;
+                    
+                    
+                    appDoc.actionType=[tabFile objectAtIndex:z];
+                    
+                    z++;
+                    
+                    
+                    appDoc.duplicateCounter=[NSNumber numberWithInteger:(NSInteger)[[tabFile objectAtIndex:z]integerValue]];
+                    
+                    
+                    
+                    
+                    
+                    if (z>=appDocCount-1)
+                    {
+                        
+                        
+                        
+                    }
+                    
+                }
+                
+                
+                
+                
+                
+                DLog(@"added drug app doc");
+                
+                
+            }
+        }
+        
+        if ([fileManager fileExistsAtPath:drugAppDocType_Lookup.path]) {
+            if (drugAppDocType_Lookup) {
+                
+                //
+                TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugAppDocType_Lookup encoding:NSASCIIStringEncoding];
+                
+                //
+                
+                
+                NSInteger appDocType_LookupCount = [tabFile count];
+                //    NSMutableArray *array =[[NSMutableArray alloc]init];
+                
+                
+                
+                
+                
+                NSEntityDescription *appDocType_LookupEntityDesc=[NSEntityDescription entityForName:@"DrugAppDocTypeLookupEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
+                
+                DLog(@"adding drug drugAppDocType_Lookup");
+                for (NSInteger z=2; z<appDocType_LookupCount-1; z++) {
+                    
+                    
+                    
+                    DrugAppDocTypeLookupEntity *drugAppDocTypeLookup=[[DrugAppDocTypeLookupEntity alloc]initWithEntity:appDocType_LookupEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
+                    
+                    //
+                    
+                    
+                    drugAppDocTypeLookup.appDocType=[tabFile objectAtIndex:z];
+                    z++;
+                    drugAppDocTypeLookup.sortOrder=[NSNumber numberWithInteger:(NSInteger)[[tabFile objectAtIndex:z]integerValue]];
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    if (z>=appDocType_LookupCount-1)
+                    {
+                        
+                        
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+                
+                
+                
+                
+                
+                
+                DLog(@"added drug drugAppDocType_Lookup");
+                
+                
+            }
+        }
+        
+        if ([fileManager fileExistsAtPath:drugChemTypeLookup.path]) {
+            if (drugChemTypeLookup) {
+                
+                //
+                TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugChemTypeLookup encoding:NSASCIIStringEncoding];
+                
+                //
+                
+                
+                NSInteger drugChemicalTypeLookupCount = [tabFile count];
+                //    NSMutableArray *array =[[NSMutableArray alloc]init];
+                
+                
+                
+                
+                
+                NSEntityDescription *drugChemicalTypeLookupEntityDesc=[NSEntityDescription entityForName:@"DrugChemicalTypeLookupEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
+                
+                DLog(@"adding drug drugChemTypeLookup");
+                for (NSInteger z=3; z<drugChemicalTypeLookupCount-2; z++) {
+                    
+                    
+                    
+                    
+                    
+                    DrugChemicalTypeLookupEntity *drugChemicalTypeLookup=[[DrugChemicalTypeLookupEntity alloc]initWithEntity:drugChemicalTypeLookupEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
+                    
+                    //
+                    
+                    
+                    drugChemicalTypeLookup.chemicalTypeID=[NSNumber numberWithInteger:(NSInteger)[[tabFile objectAtIndex:z]integerValue]];
+                    z++;
+                    drugChemicalTypeLookup.chemicalTypeCode=[NSNumber numberWithInteger:(NSInteger)[[tabFile objectAtIndex:z]integerValue]];
+                    
+                    z++;
+                    drugChemicalTypeLookup.chemicalTypeDescription=[tabFile objectAtIndex:z];
+                    
+                    
+                    
+                    
+                    
+                    
+                    if (z>=drugChemicalTypeLookupCount-1)
+                    {
+                        
+                        
+                        
+                    }
+                    
+                }
+                
+                
+                
+                DLog(@"added drug drugChemTypeLookup");
+                
+            }
+        }
+        if ([fileManager fileExistsAtPath:drugDocType_lookup.path]) {
+            if (drugDocType_lookup) {
+                //
+                TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugDocType_lookup encoding:NSASCIIStringEncoding];
+                
+                //
+                
+                
+                NSInteger docType_lookupCount = [tabFile count];
+                //    NSMutableArray *array =[[NSMutableArray alloc]init];
+                
+                
+                
+                
+                
+                NSEntityDescription *drugDocTypeLookupEntityDesc=[NSEntityDescription entityForName:@"DrugDocTypeLookupEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
+                
+                
+                DLog(@"adding drug drugDocType_lookup");
+                for (NSInteger z=2; z<docType_lookupCount-1; z++) {
+                    
+                    
+                    
+                    
+                    
+                    DrugDocTypeLookupEntity *docTypeLookup=[[DrugDocTypeLookupEntity alloc]initWithEntity:drugDocTypeLookupEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
+                    
+                    //
+                    
+                    
+                    docTypeLookup.docType=[tabFile objectAtIndex:z];
+                    z++;
+                    docTypeLookup.docTypeDesc=[tabFile objectAtIndex:z];
+                    
+                    
+                    
+                    
+                    
+                    if (z>=docType_lookupCount-1)
+                    {
+                        
+                        
+                        
+                        
+                    }
+                }
+                
+                
+                
+                DLog(@"added drug drugDocType_lookup");
+                
+                
+            }
+        }
+        if ([fileManager fileExistsAtPath:drugProduct_tecode.path]) {
+            if (drugProduct_tecode) {
+                
+                TabFile *tabFile=[[TabFile alloc]initWithContentsOfURL:drugProduct_tecode encoding:NSASCIIStringEncoding];
+                
+                //
+                
+                
+                NSInteger product_tecodeCount = [tabFile count];
+                //    NSMutableArray *array =[[NSMutableArray alloc]init];
+                
+                
+                
+                DLog(@"adding drug drugProduct_tecode");
+                
+                NSEntityDescription *drugProductTECodeEntityDesc=[NSEntityDescription entityForName:@"DrugProductTECodeEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
+                
+                for (NSInteger z=5; z<product_tecodeCount-4; z++) {
+                    
+                    
+                    
+                    
+                    
+                    DrugProductTECodeEntity *productTECode=[[DrugProductTECodeEntity alloc]initWithEntity:drugProductTECodeEntityDesc insertIntoManagedObjectContext:__drugsManagedObjectContext];
+                    
+                    //
+                    
+                    
+                    productTECode.applNo=[tabFile objectAtIndex:z];
+                    z++;
+                    productTECode.productNo=[tabFile objectAtIndex:z];
+                    z++;
+                    productTECode.tECode=[tabFile objectAtIndex:z];
+                    z++;
+                    productTECode.tESequence=[NSNumber numberWithInteger:(NSInteger)[[tabFile objectAtIndex:z]integerValue]];
+                    z++;
+                    productTECode.productMktStatus=[tabFile objectAtIndex:z];
+                    
+                    
+                    
+                    
+                    
+                    
+                    if (z>=product_tecodeCount-1)
+                    {
+                        
+                        
+                        
+                    }
+                    
+                }
+                
+                
+                
+                DLog(@"added drug drugProduct_tecode");
+                
+                
+            }
+            
+            
+            
+        }
+        
+        
+        
+        BOOL createRelationships=FALSE;
+        if (createRelationships) {
+            
+            
+            NSFetchRequest *appFetchRequest = [[NSFetchRequest alloc] init];
+            NSEntityDescription *applicationEntity = [NSEntityDescription entityForName:@"DrugApplicationEntity"
+                                                                 inManagedObjectContext:__drugsManagedObjectContext];
+            [appFetchRequest setEntity:applicationEntity];
+            
+            
+            
+            NSError *error = nil;
+            NSArray *appFetchedObjects = [__drugsManagedObjectContext executeFetchRequest:appFetchRequest error:&error];
+            
+            if (appFetchedObjects == nil) {
+                // Handle the error
+                
+                
+            }
+            else
+            {
+                
+                
+                NSFetchRequest *productsFetchRequest = [[NSFetchRequest alloc] init];
+                NSEntityDescription *productsEntity = [NSEntityDescription entityForName:@"DrugProductEntity"
+                                                                  inManagedObjectContext:__drugsManagedObjectContext];
+                [productsFetchRequest setEntity:productsEntity];
+                
+                
+                
+                NSError *error = nil;
+                NSArray *productsFetchedObjects = [__drugsManagedObjectContext executeFetchRequest:productsFetchRequest error:&error];
+                if (productsFetchedObjects == nil) {
+                    // Handle the error
+                }
+                else
+                {
+                    
+                    NSInteger appFetchedObjectsCount=appFetchedObjects.count;
+                    
+                    for (NSInteger i=0; i<appFetchedObjectsCount; i++) {
+                        if (appFetchedObjectsCount) {
+                            
+                            DrugApplicationEntity *app=[appFetchedObjects objectAtIndex:i];
+                            NSMutableSet *applicationProductsSet=(NSMutableSet *)[app mutableSetValueForKey:(NSString *)@"products"];
+                            
+                            NSPredicate *appProductsPredicate=[NSPredicate predicateWithFormat:@"applNo matches %@",app.applNo];
+                            
+                            
+                            NSArray *filteredProductsArray=[productsFetchedObjects filteredArrayUsingPredicate:appProductsPredicate];
+                            
+                            [applicationProductsSet addObjectsFromArray:filteredProductsArray];
+                            
+                            if (i==1||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000) {
+                                
+                                
+                                
+                                
+                            }
+                            
+                        }
+                    }
+                    
+                    
+                    
+                    NSFetchRequest *actionDateFetchRequest = [[NSFetchRequest alloc] init];
+                    NSEntityDescription *actionDateEntity = [NSEntityDescription entityForName:@"DrugRegActionDateEntity"
+                                                                        inManagedObjectContext:__drugsManagedObjectContext];
+                    [actionDateFetchRequest setEntity:actionDateEntity];
+                    
+                    
+                    
+                    NSError *actionDateFetchError = nil;
+                    NSArray *actionDateFetchedObjects = [__drugsManagedObjectContext executeFetchRequest:actionDateFetchRequest error:&actionDateFetchError];
+                    if (actionDateFetchedObjects == nil) {
+                        // Handle the error
+                    }
+                    else
+                    {
+                        
+                        
+                        
+                        for (NSInteger i=0; i<appFetchedObjectsCount; i++) {
+                            
+                            if (appFetchedObjectsCount) {
+                                
+                                DrugApplicationEntity *app=[appFetchedObjects objectAtIndex:i];
+                                NSMutableSet *applicationActionDatesSet=(NSMutableSet *)[app mutableSetValueForKey:(NSString *)@"reglatoryActions"];
+                                
+                                NSPredicate *appActionDatePredicate=[NSPredicate predicateWithFormat:@"applNo matches %@",app.applNo];
+                                
+                                
+                                NSArray *filteredActionDateArray=[actionDateFetchedObjects filteredArrayUsingPredicate:appActionDatePredicate];
+                                
+                                [applicationActionDatesSet addObjectsFromArray:filteredActionDateArray];
+                                
+                                if (i==1||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000) {
+                                    
+                                    
+                                    
+                                    
+                                }
+                                
+                            }
+                            else{
+                                
+                                
+                            }
+                        }
+                    }
+                    
+                    
+                    
+                    NSFetchRequest *appDocsFetchRequest = [[NSFetchRequest alloc] init];
+                    NSEntityDescription *appDocEntity = [NSEntityDescription entityForName:@"DrugAppDocEntity"
+                                                                    inManagedObjectContext:__drugsManagedObjectContext];
+                    [appDocsFetchRequest setEntity:appDocEntity];
+                    
+                    
+                    
+                    NSError *appDocsFetchError = nil;
+                    NSArray *appDocsFetchedObjects = [__drugsManagedObjectContext executeFetchRequest:appDocsFetchRequest error:&appDocsFetchError];
+                    if (appDocsFetchedObjects == nil) {
+                        // Handle the error
+                    }
+                    else
+                    {
+                        
+                        NSInteger actionDateFetchedObjectsCount=actionDateFetchedObjects.count;
+                        
+                        for (NSInteger i=0; i<actionDateFetchedObjectsCount; i++) {
+                            if (actionDateFetchedObjectsCount) {
+                                DrugRegActionDateEntity *action=[actionDateFetchedObjects objectAtIndex:i];
+                                NSMutableSet *actionDateAppDocsSet=(NSMutableSet *)[action mutableSetValueForKey:(NSString *)@"applicationDocuments"];
+                                
+                                NSPredicate *appAppDocsPredicate=[NSPredicate predicateWithFormat:@"applNo matches %@ AND seqNo matches %@",action.applNo,action.inDocTypeSeqNo];
+                                
+                                
+                                NSArray *filteredAppDocArray=[appDocsFetchedObjects filteredArrayUsingPredicate:appAppDocsPredicate];
+                                
+                                [actionDateAppDocsSet addObjectsFromArray:filteredAppDocArray];
+                                
+                                if (i==1||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000||i==30000||i==100000) {
+                                    
+                                    
+                                    
+                                    
+                                }
+                                
+                                
+                            }
+                            else
+                            {
+                                
+                                
+                            }
+                            
+                        }
+                        
+                    }
+                    
+                    
+                    
+                    
+                    NSFetchRequest *appDocTypeLookupFetchRequest = [[NSFetchRequest alloc] init];
+                    NSEntityDescription *appDocTypeLookupEntity = [NSEntityDescription entityForName:@"DrugAppDocTypeLookupEntity"
+                                                                              inManagedObjectContext:__drugsManagedObjectContext];
+                    [appDocTypeLookupFetchRequest setEntity:appDocTypeLookupEntity];
+                    
+                    
+                    
+                    NSError *appDocTypeLookupFetchError = nil;
+                    NSArray *appDocTypeLookupFetchedObjects = [__drugsManagedObjectContext executeFetchRequest:appDocTypeLookupFetchRequest error:&appDocTypeLookupFetchError];
+                    if (appDocTypeLookupFetchedObjects == nil) {
+                        // Handle the error
+                    }
+                    else
+                    {
+                        
+                        NSInteger appDocTypeLookupFetchedObjectsCount=appDocTypeLookupFetchedObjects.count;
+                        
+                        for (NSInteger i=0; i<appDocTypeLookupFetchedObjectsCount; i++) {
+                            //
+                            if (appDocTypeLookupFetchedObjectsCount) {
+                                
+                                
+                                DrugAppDocTypeLookupEntity *appDocTypeObject=(DrugAppDocTypeLookupEntity *)[appDocTypeLookupFetchedObjects objectAtIndex:i];
+                                NSMutableSet *appDocTypeLookupAppDocsSet=[appDocTypeObject mutableSetValueForKey:(NSString *)@"applicationDocuments"];
+                                
+                                NSPredicate *appAppDocsPredicate=[NSPredicate predicateWithFormat:@"docType matches %@",appDocTypeObject.appDocType];
+                                
+                                
+                                NSArray *filteredAppDocArray=[appDocsFetchedObjects filteredArrayUsingPredicate:appAppDocsPredicate];
+                                
+                                [appDocTypeLookupAppDocsSet addObjectsFromArray:filteredAppDocArray];
+                                
+                                if (i==1||i==1000||i==3000||i==5000||i==7500||i==10000||i==12500||i==15000||i==30000) {
+                                    
+                                    
+                                    
+                                    
+                                }
+                                
+                            }
+                            else
+                            {
+                                
+                                
+                            }
+                            
+                            
+                        }
+                    }    
+                    
+                    
+                    
+                }  
+                
+            } 
+            //                        NSMutableSet *appDocSet=[[NSMutableSet alloc]init];
+            //                        NSMutableSet *appDocType_LookupSet=[[NSMutableSet alloc]init];
+            //                        NSMutableSet *chemTypeLookupSet=[[NSMutableSet alloc]init];
+            //                        NSMutableSet *docTypeLookupSet=[[NSMutableSet alloc]init];
+            //                        NSMutableSet *productTcodeSet=[[NSMutableSet alloc]init];
+            //                        
+            //                        NSMutableSet *regActionDateSet=[[NSMutableSet alloc]init];
+            //                        NSMutableSet *reviewClassLookupSet=[[NSMutableSet alloc]init];
+            
+            
+            
+            
+            
+            
+            // 
+            
+            
+            
+            
+            
+        }  
+        
+        
+        [self saveDrugsContext];
+        
+        NSString *symetricString=@"8qfnbyfalVvdjf093uPmsdj30mz98fI6";
+        NSData *symetricData=[symetricString dataUsingEncoding: [NSString defaultCStringEncoding] ];
+        if (!encryption_) {
+            encryption_=[self encryption];
+        }
+        
+        
+        NSData *drugStoreData=[NSData dataWithContentsOfURL:drugsStoreURL];
+        
+        NSData *encryptedData=nil;
+        
+        if (symetricData.length==32) {
+            encryptedData=(NSData *) [encryption_ doCipher:drugStoreData key:symetricData context:kCCEncrypt padding:(CCOptions *) kCCOptionECBMode];;
+        }
+        
+        
+        NSError *writeError = nil;
+        NSString *pathForEncryptedDrugFile=[@"/Users/danboice/Dropbox/Public/pt/" stringByAppendingPathComponent:@"testPtData.zpk"];
+        [encryptedData writeToFile:pathForEncryptedDrugFile options:NSDataWritingAtomic error:&writeError];
+        
+        
+    }
+    
+    //    [__drugsManagedObjectContext setUndoManager:undoManager];
+    
+    return TRUE;
+    
+    
+}
 
 - (void) loadDatabaseData:(id)sender
 {
@@ -3300,6 +4263,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                                               @try
                                               {
                                                   [[NSNotificationCenter defaultCenter] postNotificationName:@"persistentStoreAdded" object:self userInfo:nil];
+                                                  [self setUpDrugStore];
                                               }
                                               @catch (NSException *exception)
                                               {
