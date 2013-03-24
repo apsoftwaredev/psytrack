@@ -609,8 +609,8 @@
                                           else
                                           {
                                               NSTimeInterval timeout = 10.0;
-                                              NSURL *remoteFileURL = [NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"];
-
+//                                              NSURL *remoteFileURL = [NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"];
+                                              NSURL *remoteFileURL=[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/testPtData.zpk"];
                                               drugFileRequest = [[NSURLRequest alloc] initWithURL:remoteFileURL cachePolicy:NSURLRequestReloadRevalidatingCacheData timeoutInterval:timeout];
 
                                               connectionToDrugFile = [NSURLConnection connectionWithRequest:drugFileRequest delegate:self];
@@ -788,9 +788,13 @@
                                               }
                                               else
                                               {
-                                                  self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
+//                                                  self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
+//                                                                                                timeout:15
+//                                                                                               delegate:self];
+                                                  self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/testPtData.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
                                                                                                 timeout:15
                                                                                                delegate:self];
+
 
                                                   [self.view addSubview:self.downloadBar];
                                                   [self.view setNeedsDisplay];
