@@ -591,7 +591,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                     
                     
                     
-                    NSEntityDescription *entityDesc=[NSEntityDescription entityForName:@"DrugApplicationEntity" inManagedObjectContext:__drugsManagedObjectContext];
+                    NSEntityDescription *entityDesc=[NSEntityDescription entityForName:@"DrugApplicationEntity" inManagedObjectContext:[self drugsManagedObjectContext]];
                     DrugApplicationEntity *app=[[DrugApplicationEntity alloc]initWithEntity:entityDesc insertIntoManagedObjectContext:[self drugsManagedObjectContext]];
                     
                     

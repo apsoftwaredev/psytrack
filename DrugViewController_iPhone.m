@@ -669,6 +669,10 @@
 
     NSComparisonResult result = [remoteModifiedDate compare:localModifiedDate ];
 
+    DLog(@"remote modified date %@",remoteModifiedDate);
+    DLog(@"local modified date %@",localModifiedDate);
+    DLog(@"result  %i",result);
+    
     [self fadeCheckingLabel];
     [self checkingLabelToNormalState];
 
