@@ -1,7 +1,7 @@
 /*
  *  CliniciansViewController_Shared.m
  *  psyTrack Clinician Tools
- *  Version: 1.05
+ *  Version: 1.0.6
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES

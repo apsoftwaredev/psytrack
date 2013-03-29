@@ -519,6 +519,10 @@
 		E7E1425A15C1F34B00D0F505 /* PresentationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */; };
 		E7E1A63D152E873500C227E8 /* TimeTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */; };
 		E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A6441530C18900C227E8 /* ShortFieldCell.m */; };
+		E7ECEE3E1700AE1E00920D70 /* drugFileHeaderData.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7ECEE3D1700AE1E00920D70 /* drugFileHeaderData.plist */; };
+		E7ECEE421701091C00920D70 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7ECEE411701091C00920D70 /* AWSiOSSDK.framework */; };
+		E7ECEE4517010B2500920D70 /* AmazonClientManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E7ECEE4317010B2500920D70 /* AmazonClientManager.h */; };
+		E7ECEE4617010B2500920D70 /* AmazonClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ECEE4417010B2500920D70 /* AmazonClientManager.m */; };
 		E7F1CAF11597AF4C006F9E95 /* MonthlyPracticumLogTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1CAEF1597AF4C006F9E95 /* MonthlyPracticumLogTopCell.m */; };
 		E7F1CAF21597AF4C006F9E95 /* MonthlyPracticumLogTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CAF01597AF4C006F9E95 /* MonthlyPracticumLogTopCell.xib */; };
 		E7F1CAF41597CADB006F9E95 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F1CAF31597CADB006F9E95 /* CoreText.framework */; };
@@ -1418,6 +1422,10 @@
 		E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TimeTrackViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7E1A6431530C18900C227E8 /* ShortFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortFieldCell.h; sourceTree = "<group>"; };
 		E7E1A6441530C18900C227E8 /* ShortFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortFieldCell.m; sourceTree = "<group>"; };
+		E7ECEE3D1700AE1E00920D70 /* drugFileHeaderData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = drugFileHeaderData.plist; sourceTree = "<group>"; };
+		E7ECEE411701091C00920D70 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSiOSSDK.framework; path = "../../Downloads/aws-ios-sdk-1.4.6/AWSiOSSDK.framework"; sourceTree = "<group>"; };
+		E7ECEE4317010B2500920D70 /* AmazonClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonClientManager.h; sourceTree = "<group>"; };
+		E7ECEE4417010B2500920D70 /* AmazonClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonClientManager.m; sourceTree = "<group>"; };
 		E7F1CAEE1597AF4C006F9E95 /* MonthlyPracticumLogTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthlyPracticumLogTopCell.h; sourceTree = "<group>"; };
 		E7F1CAEF1597AF4C006F9E95 /* MonthlyPracticumLogTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MonthlyPracticumLogTopCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7F1CAF01597AF4C006F9E95 /* MonthlyPracticumLogTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogTopCell.xib; sourceTree = "<group>"; };
@@ -1503,6 +1511,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7ECEE421701091C00920D70 /* AWSiOSSDK.framework in Frameworks */,
 				E78F088916DC742F0075C78E /* libSensibleTableView.a in Frameworks */,
 				E78C961716D86AC600E8AD09 /* libSTV+CoreData.a in Frameworks */,
 				E7F1CAF41597CADB006F9E95 /* CoreText.framework in Frameworks */,
@@ -2038,6 +2047,7 @@
 				37F7CFCB150060D400AD2C3A /* main.m */,
 				37F7CFCD150060D400AD2C3A /* PsyTrack-Prefix.pch */,
 				37F7CFCE150060D400AD2C3A /* Settings.bundle */,
+				E7ECEE3D1700AE1E00920D70 /* drugFileHeaderData.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2072,6 +2082,8 @@
 				E798A02F15845941006B9DBD /* MapperTheme */,
 				E78A8D191531EDF10099FE5B /* Reachability.h */,
 				E78A8D1A1531EDF10099FE5B /* Reachability.m */,
+				E7ECEE4317010B2500920D70 /* AmazonClientManager.h */,
+				E7ECEE4417010B2500920D70 /* AmazonClientManager.m */,
 				37F7CE3E150051A900AD2C3A /* Download Bar */,
 				378DED4314FE72F000CF4F12 /* DTAboutViewController */,
 				378DEDB014FE73AF00CF4F12 /* LockScreen */,
@@ -2085,6 +2097,7 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
+				E7ECEE411701091C00920D70 /* AWSiOSSDK.framework */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				E724FA1716B1E7D9007508BB /* Encryption-Registration-Number-ERN.pdf */,
 				E7FE8AA1169BAD7900EB6969 /* PsyTrack.entitlements */,
@@ -2874,6 +2887,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7A8B0F516AA4DD600C33267 /* PTTAppDelegate.h in Headers */,
+				E7ECEE4517010B2500920D70 /* AmazonClientManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3176,6 +3190,7 @@
 				E7A8B0FD16AA579F00C33267 /* PTManagedObject.h in Resources */,
 				E7A8B0FE16AA579F00C33267 /* PTManagedObject.m in Resources */,
 				E724FA1816B1E7D9007508BB /* Encryption-Registration-Number-ERN.pdf in Resources */,
+				E7ECEE3E1700AE1E00920D70 /* drugFileHeaderData.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3512,6 +3527,7 @@
 				E7315CB016937F9800964CE7 /* ClientBatteryNotesEntity.m in Sources */,
 				E7315CB316937F9800964CE7 /* ExistingGenderEntity.m in Sources */,
 				E777EF301693A16B000C51E9 /* DrugProductEntity.m in Sources */,
+				E7ECEE4617010B2500920D70 /* AmazonClientManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4011,6 +4027,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../Downloads/aws-ios-sdk-1.4.6\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";
@@ -4046,6 +4063,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../Downloads/aws-ios-sdk-1.4.6\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";

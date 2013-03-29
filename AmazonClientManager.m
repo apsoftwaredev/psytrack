@@ -18,7 +18,6 @@
 #import <AWSiOSSDK/AmazonLogger.h>
 #import <AWSiOSSDK/AmazonEndpoints.h>
 
-#import "Constants.h"
 
 static AmazonS3Client       *s3  = nil;
 static AmazonSimpleDBClient *sdb = nil;
@@ -54,7 +53,8 @@ static AmazonSNSClient      *sns = nil;
 
 +(bool)hasCredentials
 {
-    return (![ACCESS_KEY_ID isEqualToString:@"CHANGE ME"] && ![SECRET_KEY isEqualToString:@"CHANGE ME"]);
+    return  YES;
+//    return (![ACCESS_KEY_ID isEqualToString:@"CHANGE ME"] && ![SECRET_KEY isEqualToString:@"CHANGE ME"]);
 }
 
 +(void)validateCredentials
@@ -78,10 +78,7 @@ static AmazonSNSClient      *sns = nil;
 
 +(void)clearCredentials
 {
-    [s3 release];
-    [sdb release];
-    [sns release];
-    [sqs release];
+ 
 
     s3  = nil;
     sdb = nil;

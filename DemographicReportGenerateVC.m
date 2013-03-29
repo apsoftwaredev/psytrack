@@ -1,7 +1,7 @@
 //
 //  DemographicReportGenerateVC.m
 //  PsyTrack Clinician Tools
-//  Version: 1.05
+//  Version: 1.0.6
 //
 //  Created by Daniel Boice on 9/16/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -157,6 +157,9 @@
 {
     NSString *scrubbed = nil;
 
+    if ([[fileName substringFromIndex:fileName.length-4]isEqualToString:@".pdf"]) {
+        fileName=[fileName substringToIndex:fileName.length-4];
+    }
     if (fileName && [fileName isKindOfClass:[NSString class]])
     {
         NSCharacterSet *invalidFsChars = [NSCharacterSet characterSetWithCharactersInString:@"/\\?%*|\"<>"];
@@ -201,18 +204,33 @@
     NSString *documentsPathWithNewFileName = nil;
 
     NSInteger i = 0;
+    BOOL fileHasPDFExtention=NO;
+    
+    if ([[fileNameGiven substringFromIndex:fileNameGiven.length-4]isEqualToString:@".pdf"]) {
+        fileHasPDFExtention=YES;
+    }
+    
     do
     {
         i++;
-
-        newFileName = [fileNameGiven stringByAppendingFormat:@"%i.pdf",i];
+        if (fileNameGiven && fileHasPDFExtention) {
+            
+            newFileName = [[fileNameGiven substringToIndex:fileNameGiven.length-4 ] stringByAppendingFormat:@"%i",i];
+            
+        }
+        else{
+            
+            newFileName = [fileNameGiven stringByAppendingFormat:@"%i",i];
+            
+        }
         documentsPathWithNewFileName = [documentsPath stringByAppendingPathComponent:newFileName];
     }
-    while ( [fileManager fileExistsAtPath:documentsPathWithNewFileName]);
-
-    fileManager = nil;
-
+    while ( [fileManager fileExistsAtPath:[documentsPathWithNewFileName stringByAppendingString:@".pdf"]]);
+    
+    fileManager=nil;
+    
     return newFileName;
+
 }
 
 

@@ -1,7 +1,7 @@
 /*
  *  DrugViewController_iPhone.m
  *  psyTrack Clinician Tools
- *  Version: 1.05
+ *  Version: 1.0.6
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -22,6 +22,8 @@
 #import "PTTEncryption.h"
 #import "SCArrayOfObjectsModel_UseSelectionSection.h"
 
+
+
 @implementation DrugViewController_iPhone
 @synthesize searchBar;
 
@@ -35,6 +37,15 @@
 @synthesize downloadBytesLabel = downloadBytesLabel_;
 @synthesize drugObjectSelectionCell = drugObjectSelectionCell_;
 @synthesize connectingToFile;
+
+NSString *const kRemoteFileDownloadLinkStr_USStandard = @"https://s3.amazonaws.com/psytrack-for-usstandard-AKIAJQSJKX3M6UKHR3RA/dFile-001.zpk";
+
+NSString *const kBucketName = @"psytrack";
+
+NSString *const kRemoteFileName=@"dFile-001.zpk";
+
+
+
 #pragma mark -
 #pragma mark View lifecycle
 
@@ -577,7 +588,7 @@
 {
     self.connectingToFile = YES;
     // Create a URL Request and set the URL
-    NSURL *url = [NSURL URLWithString:@"https://www.dropbox.com"];
+    NSURL *url = [NSURL URLWithString:kRemoteFileDownloadLinkStr_USStandard];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"HEAD"];
     // Display the network activity indicator
@@ -609,7 +620,7 @@
                                           else
                                           {
                                               NSTimeInterval timeout = 10.0;
-                                              NSURL *remoteFileURL = [NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"];
+                                              NSURL *remoteFileURL = [NSURL URLWithString:kRemoteFileDownloadLinkStr_USStandard];
 
                                               drugFileRequest = [[NSURLRequest alloc] initWithURL:remoteFileURL cachePolicy:NSURLRequestReloadRevalidatingCacheData timeoutInterval:timeout];
 
@@ -632,53 +643,54 @@
 
 - (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    CGFloat remoteSize = [[NSString stringWithFormat:@"%lli",[response expectedContentLength]] floatValue];
     self.downloadCheckButton.enabled = YES;
 
     [checkingTimer_ invalidate];
     checkingTimer_ = nil;
-    CGFloat localFileSize = [self getLocalDrugFileSize];
-
-    /* Try to retrieve last modified date from HTTP header. If found, format
-         date so it matches format of cached image file modification date. */
-
-    NSDate *remoteModifiedDate;
-    NSDate *localModifiedDate = [self getTheLastModifiedDateLocal];
-
+    
+    
+   
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"drugFileHeaderData" ofType:@"plist"];
+    NSString *savedETag=nil;
+    NSDictionary *drugDataDataPlistRootDic=nil;
+    
+    if (path) {
+        drugDataDataPlistRootDic = [[NSDictionary alloc] initWithContentsOfFile:path];
+        if ([drugDataDataPlistRootDic objectForKey:@"eTag"]) {
+            savedETag=[drugDataDataPlistRootDic valueForKey:@"eTag"];
+        }
+        
+    }
+    
+    DLog(@"saved etag is  %@",savedETag);
+    
     if ([response isKindOfClass:[NSHTTPURLResponse self]])
     {
         NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
-        NSString *modified = [headers objectForKey:@"Last-Modified"];
-        if (modified)
-        {
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-
-            /* avoid problem if the user's locale is incompatible with HTTP-style dates */
-            [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
-
-            [dateFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss zzz"];
-            remoteModifiedDate = [dateFormatter dateFromString:modified];
-            dateFormatter = nil;
-        }
-        else
-        {
-            /* default if last modified date doesn't exist (not an error) */
-            remoteModifiedDate = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
-        }
+        remoteFileETag = [headers objectForKey:@"Etag"];
+        
+        DLog(@"header etag object %@",remoteFileETag);
+        DLog(@"headers all keys %@",headers.allKeys);
+        
     }
 
-    NSComparisonResult result = [remoteModifiedDate compare:localModifiedDate ];
-
+   
     [self fadeCheckingLabel];
     [self checkingLabelToNormalState];
-
-    if ( (result == NSOrderedDescending) || ( remoteSize && (localFileSize < remoteSize) ) )
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    
+    if (!savedETag||(remoteFileETag && savedETag && ![savedETag isEqualToString: remoteFileETag]) )
     {
         downloadLabel_.text = @"Update Available.";
         downloadCheckButton_.hidden = YES;
         downloadButton_.hidden = NO;
         downloadStopButton_.hidden = YES;
         downloadContinueButton_.hidden = YES;
+        
+        
+        
+        
     }
     else
     {
@@ -719,6 +731,7 @@
     connectionToDrugFile = nil;
     drugFileRequest = nil;
     self.connectingToFile = NO;
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 
@@ -752,12 +765,13 @@
 
         self.connectingToFile = YES;
         // Create a URL Request and set the URL
-        NSURL *url = [NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"];
+        NSURL *url = [NSURL URLWithString:kRemoteFileDownloadLinkStr_USStandard];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         [request setHTTPMethod:@"HEAD"];
         // Display the network activity indicator
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
+        
         // Perform the request on a new thread so we don't block the UI
         dispatch_queue_t downloadQueue = dispatch_queue_create("Download queue", NULL);
         dispatch_async(downloadQueue, ^{
@@ -767,10 +781,19 @@
                            // Perform the request synchronously on this thread
                            NSData *rspData = [NSURLConnection sendSynchronousRequest:request returningResponse:&rsp error:&err];
 
+            if ([rsp isKindOfClass:[NSHTTPURLResponse self]])
+            {
+                NSDictionary *headers = [(NSHTTPURLResponse *)rsp allHeaderFields];
+                remoteFileETag = [headers objectForKey:@"Etag"];
+                
+                DLog(@"header etag object %@",remoteFileETag);
+                DLog(@"headers all keys %@",headers.allKeys);
+                
+            }
                            // Once a response is received, handle it on the main thread in case we do any UI updates
                            dispatch_async(dispatch_get_main_queue(), ^{
                                               // Hide the network activity indicator
-                                              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
                                               if ( rspData == nil || (err != nil && [err code] != noErr) )
                                               {
@@ -785,20 +808,23 @@
                                                   downloadStopButton_.hidden = YES;
                                                   downloadContinueButton_.hidden = YES;
                                                   downloadCheckButton_.hidden = NO;
+                                                  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+
                                               }
                                               else
                                               {
-                                                  self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
+                                                  self.downloadBar = [[UIDownloadBar alloc] initWithSaveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
                                                                                                 timeout:15
-                                                                                               delegate:self];
+                                                                                               delegate:self bucketNameGiven:(NSString *)kBucketName remoteFileName:(NSString * )kRemoteFileName ];
 
                                                   [self.view addSubview:self.downloadBar];
                                                   [self.view setNeedsDisplay];
-
+                                                  [self.downloadBar start];
                                                   downloadButton_.hidden = YES;
                                                   downloadStopButton_.hidden = NO;
                                                   downloadContinueButton_.hidden = YES;
                                                   downloadCheckButton_.hidden = YES;
+                                                  
                                               }
                                           }
 
@@ -823,6 +849,8 @@
     downloadContinueButton_.hidden = NO;
     downloadCheckButton_.hidden = YES;
     [self.view setNeedsDisplay];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+
 }
 
 
@@ -838,17 +866,22 @@
     downloadStopButton_.hidden = NO;
     downloadContinueButton_.hidden = YES;
     downloadCheckButton_.hidden = YES;
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+
 }
 
 
 - (void) downloadBar:(UIDownloadBar *)downloadBar didFinishWithData:(NSData *)fileData suggestedFilename:(NSString *)filename
 {
     PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-
+   
     [appDelegate displayNotification:@"Drug Database Download Complete." forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
 
-    NSURL *drugsStoreURL = [[appDelegate applicationDrugsDirectory] URLByAppendingPathComponent:@"drugs.sqlite"];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 
+    NSURL *drugsStoreURL = [[appDelegate applicationDrugsDirectory] URLByAppendingPathComponent:@"drugs.sqlite"];
+    
+   
     NSString *symetricString = @"8qfnbyfalVvdjf093uPmsdj30mz98fI6";
     NSData *symetricData = [symetricString dataUsingEncoding:[NSString defaultCStringEncoding] ];
 
@@ -915,6 +948,28 @@
                 {
                     [drugsManagedObjectContext refreshObject:managedObject mergeChanges:NO];
                 }
+                
+            NSString *path = [[NSBundle mainBundle] pathForResource:@"drugFileHeaderData" ofType:@"plist"];
+           
+            NSMutableDictionary *drugDataDataPlistRootDic=nil;
+            
+            if (path) {
+                drugDataDataPlistRootDic = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
+                if (remoteFileETag && [drugDataDataPlistRootDic objectForKey:@"eTag"]) {
+                   DLog(@"remote file etag is  %@",remoteFileETag);
+                    
+                    DLog(@"remote file etag class is  %@",remoteFileETag.class);
+                    [drugDataDataPlistRootDic setValue:remoteFileETag forKey:@"eTag"];
+                
+                   BOOL fileWritten= [drugDataDataPlistRootDic writeToFile:path atomically:YES];
+                
+                    DLog(@"file written is  %i",fileWritten);
+                }
+                
+            }
+
+                
+                
             }
         }
         else
@@ -931,8 +986,9 @@
     }
     else
     {
-        [appDelegate displayNotification:@"Problem with setting up drug database occured.  Please try again later or contact suppor"];
+        [appDelegate displayNotification:@"Problem with setting up drug database occured.  Please try again later or contact support"];
     }
+    
 
     [self searchBar:(UISearchBar *)self.searchBar textDidChange:(NSString *)self.searchBar.text];
 

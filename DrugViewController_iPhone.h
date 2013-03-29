@@ -1,7 +1,7 @@
 /*
  *  DrugViewController_iPhone.h
  *  psyTrack Clinician Tools
- *  Version: 1.05
+ *  Version: 1.0.6
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -56,6 +56,9 @@
 
     NSURLRequest *drugFileRequest;
     NSURLConnection *connectionToDrugFile;
+    
+    NSString *remoteFileETag;
+
 }
 
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;

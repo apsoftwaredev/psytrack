@@ -1197,12 +1197,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "642"
-         endingLineNumber = "642"
-         landmarkName = "-textFieldShouldReturn:"
+         startingLineNumber = "663"
+         endingLineNumber = "663"
+         landmarkName = "-numberOfComponentsInPickerView:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1275,12 +1275,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1074"
-         endingLineNumber = "1074"
-         landmarkName = "-firstDateInTrackOrExisting"
+         startingLineNumber = "1095"
+         endingLineNumber = "1095"
+         landmarkName = "-monthIntegerFromDate:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1288,12 +1288,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1075"
-         endingLineNumber = "1075"
-         landmarkName = "-firstDateInTrackOrExisting"
+         startingLineNumber = "1096"
+         endingLineNumber = "1096"
+         landmarkName = "-monthIntegerFromDate:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1301,12 +1301,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "678"
-         endingLineNumber = "678"
-         landmarkName = "-textFieldShouldBeginEditing:"
+         startingLineNumber = "699"
+         endingLineNumber = "699"
+         landmarkName = "-pickerView:widthForComponent:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1444,12 +1444,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "979"
-         endingLineNumber = "979"
-         landmarkName = "-setMonthtoDisplayToPickerSelection"
+         startingLineNumber = "1000"
+         endingLineNumber = "1000"
+         landmarkName = "-firstDateInTrackOrExisting"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1457,37 +1457,50 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "982"
-         endingLineNumber = "982"
-         landmarkName = "-setMonthtoDisplayToPickerSelection"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "994"
-         endingLineNumber = "994"
-         landmarkName = "-setDatesAndYears"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1003"
          endingLineNumber = "1003"
+         landmarkName = "-firstDateInTrackOrExisting"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MonthlyPracticumLogGenerateViewController.m"
+         timestampString = "386122569.098578"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1015"
+         endingLineNumber = "1015"
+         landmarkName = "-firstDateInTrackOrExisting"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MonthlyPracticumLogGenerateViewController.m"
+         timestampString = "386122569.098578"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1024"
+         endingLineNumber = "1024"
+         landmarkName = "-firstDateInTrackOrExisting"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "MonthlyPracticumLogGenerateViewController.m"
+         timestampString = "386122569.098578"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "896"
+         endingLineNumber = "896"
          landmarkName = "-setDatesAndYears"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1496,12 +1509,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "875"
-         endingLineNumber = "875"
-         landmarkName = "-setMyPickerViewToCurrentMonthAndYear"
+         startingLineNumber = "1048"
+         endingLineNumber = "1048"
+         landmarkName = "-yearIntegerFromDate:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1509,25 +1522,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1027"
-         endingLineNumber = "1027"
-         landmarkName = "-setDatesAndYears"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1030"
-         endingLineNumber = "1030"
-         landmarkName = "-setDatesAndYears"
+         startingLineNumber = "1051"
+         endingLineNumber = "1051"
+         landmarkName = "-yearIntegerFromDate:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1574,12 +1574,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "493"
-         endingLineNumber = "493"
-         landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+         startingLineNumber = "514"
+         endingLineNumber = "514"
+         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1587,12 +1587,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "864"
-         endingLineNumber = "864"
-         landmarkName = "-setMyPickerViewToCurrentMonthAndYear"
+         startingLineNumber = "885"
+         endingLineNumber = "885"
+         landmarkName = "-setMonthtoDisplayToPickerSelection"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1665,12 +1665,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "684"
-         endingLineNumber = "684"
-         landmarkName = "-textField:shouldChangeCharactersInRange:replacementString:"
+         startingLineNumber = "705"
+         endingLineNumber = "705"
+         landmarkName = "-pickerView:widthForComponent:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1743,12 +1743,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "655"
-         endingLineNumber = "655"
-         landmarkName = "-textFieldShouldBeginEditing:"
+         startingLineNumber = "676"
+         endingLineNumber = "676"
+         landmarkName = "-pickerView:numberOfRowsInComponent:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -1795,11 +1795,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938658.646252"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "747"
-         endingLineNumber = "747"
+         startingLineNumber = "753"
+         endingLineNumber = "753"
          landmarkName = "-downloadButtonTapped:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -1821,11 +1821,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385962198.225194"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1404"
-         endingLineNumber = "1404">
+         startingLineNumber = "1453"
+         endingLineNumber = "1453">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -1995,11 +1995,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "518"
-         endingLineNumber = "518"
+         startingLineNumber = "522"
+         endingLineNumber = "522"
          landmarkName = "-getTheLastModifiedDateLocal"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2008,11 +2008,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "380298364.462068"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "76"
-         endingLineNumber = "76"
+         startingLineNumber = "80"
+         endingLineNumber = "80"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2021,11 +2021,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "253"
-         endingLineNumber = "253"
+         startingLineNumber = "257"
+         endingLineNumber = "257"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2034,11 +2034,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "272"
-         endingLineNumber = "272"
+         startingLineNumber = "276"
+         endingLineNumber = "276"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2047,11 +2047,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "293"
-         endingLineNumber = "293"
+         startingLineNumber = "297"
+         endingLineNumber = "297"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2060,11 +2060,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "592"
-         endingLineNumber = "592"
+         startingLineNumber = "596"
+         endingLineNumber = "596"
          landmarkName = "-connectToRemoteDrugFile"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2073,11 +2073,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "694"
-         endingLineNumber = "694"
+         startingLineNumber = "699"
+         endingLineNumber = "699"
          landmarkName = "-connection:didReceiveResponse:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2086,11 +2086,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "693"
-         endingLineNumber = "693"
+         startingLineNumber = "698"
+         endingLineNumber = "698"
          landmarkName = "-connection:didReceiveResponse:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2099,11 +2099,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "508"
-         endingLineNumber = "508"
+         startingLineNumber = "512"
+         endingLineNumber = "512"
          landmarkName = "-checkingLabelToNormalState"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2112,7 +2112,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "669"
@@ -2125,11 +2125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "671"
-         endingLineNumber = "671"
+         startingLineNumber = "670"
+         endingLineNumber = "670"
          landmarkName = "-connection:didReceiveResponse:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2138,11 +2138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "717"
-         endingLineNumber = "717"
+         startingLineNumber = "722"
+         endingLineNumber = "722"
          landmarkName = "-connection:didFailWithError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -2307,24 +2307,22 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1121"
-         endingLineNumber = "1121"
-         landmarkName = "-firstDateInTrackOrExisting"
-         landmarkType = "5">
+         startingLineNumber = "1142"
+         endingLineNumber = "1142">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329186.51841"
+         timestampString = "385962198.225194"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1612"
-         endingLineNumber = "1612">
+         startingLineNumber = "1661"
+         endingLineNumber = "1661">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -2941,12 +2939,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "562"
-         endingLineNumber = "562"
-         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+         startingLineNumber = "583"
+         endingLineNumber = "583"
+         landmarkName = "-textFieldShouldBeginEditing:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2954,12 +2952,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "561"
-         endingLineNumber = "561"
-         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+         startingLineNumber = "582"
+         endingLineNumber = "582"
+         landmarkName = "-textFieldShouldBeginEditing:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2967,12 +2965,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "557"
-         endingLineNumber = "557"
-         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+         startingLineNumber = "578"
+         endingLineNumber = "578"
+         landmarkName = "-textFieldShouldBeginEditing:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2980,12 +2978,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MonthlyPracticumLogGenerateViewController.m"
-         timestampString = "382934503.096891"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "586"
-         endingLineNumber = "586"
-         landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+         startingLineNumber = "607"
+         endingLineNumber = "607"
+         landmarkName = "-doneButtonOnPickerConatainerTapped:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5848,19 +5846,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "UIDownloadBar.m"
-         timestampString = "380301487.045084"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "149"
-         endingLineNumber = "149"
-         landmarkName = "-dealloc"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
          timestampString = "385073899.615104"
          startingColumnNumber = "9223372036854775807"
@@ -5997,8 +5982,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2362"
          endingLineNumber = "2362"
-         landmarkName = "-displayMemoryWarning"
-         landmarkType = "5">
+         landmarkName = "@implementation PTTAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -6343,12 +6328,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientPresentationGenerateVC.m"
-         timestampString = "383936166.502658"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "443"
-         endingLineNumber = "443"
-         landmarkName = "-generateAndViewReportPDF"
+         startingLineNumber = "447"
+         endingLineNumber = "447"
+         landmarkName = "-fileAlreadyExists:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -6382,13 +6367,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "ClientPresentationGenerateVC.m"
-         timestampString = "383936166.502658"
+         timestampString = "386122569.098578"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "740"
-         endingLineNumber = "740"
-         landmarkName = "-fetchObjectsFromEntity:filterPredicate:"
-         landmarkType = "5">
+         startingLineNumber = "758"
+         endingLineNumber = "758">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7232,8 +7215,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3127"
          endingLineNumber = "3127"
-         landmarkName = "@implementation PTTAppDelegate"
-         landmarkType = "3">
+         landmarkName = "-reachable"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7344,11 +7327,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385962198.225194"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1105"
-         endingLineNumber = "1105"
+         startingLineNumber = "1154"
+         endingLineNumber = "1154"
          landmarkName = "-tableViewModel:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7357,11 +7340,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385962198.225194"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1003"
-         endingLineNumber = "1003"
+         startingLineNumber = "1052"
+         endingLineNumber = "1052"
          landmarkName = "-tableViewModel:didAddSectionAtIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7877,11 +7860,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "311"
-         endingLineNumber = "311"
+         startingLineNumber = "315"
+         endingLineNumber = "315"
          landmarkName = "-viewButtonTapped"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7890,11 +7873,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "310"
-         endingLineNumber = "310"
+         startingLineNumber = "314"
+         endingLineNumber = "314"
          landmarkName = "-viewButtonTapped"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7916,11 +7899,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "339"
-         endingLineNumber = "339"
+         startingLineNumber = "343"
+         endingLineNumber = "343"
          landmarkName = "-searchBar:textDidChange:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7929,11 +7912,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "530"
-         endingLineNumber = "530"
+         startingLineNumber = "534"
+         endingLineNumber = "534"
          landmarkName = "-getTheLastModifiedDateLocal"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7942,11 +7925,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329124.392933"
+         timestampString = "385938364.98124"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "531"
-         endingLineNumber = "531"
+         startingLineNumber = "535"
+         endingLineNumber = "535"
          landmarkName = "-getTheLastModifiedDateLocal"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7955,22 +7938,22 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329186.51841"
+         timestampString = "385962198.225194"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1580"
-         endingLineNumber = "1580">
+         startingLineNumber = "1629"
+         endingLineNumber = "1629">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "DrugViewController_iPhone.m"
-         timestampString = "383329132.600775"
+         timestampString = "385962198.225194"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1573"
-         endingLineNumber = "1573">
+         startingLineNumber = "1622"
+         endingLineNumber = "1622">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -8906,6 +8889,45 @@
          startingLineNumber = "383"
          endingLineNumber = "383"
          landmarkName = "-tableViewModel:detailModelCreatedForRowAtIndexPath:detailTableViewModel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "DrugViewController_iPhone.m"
+         timestampString = "385962198.225194"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "951"
+         endingLineNumber = "951"
+         landmarkName = "-downloadBar:didFinishWithData:suggestedFilename:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIDownloadBar.m"
+         timestampString = "386128449.789977"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "236"
+         endingLineNumber = "236"
+         landmarkName = "-request:didReceiveData:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "UIDownloadBar.m"
+         timestampString = "386128449.789977"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "268"
+         endingLineNumber = "268"
+         landmarkName = "-request:didReceiveData:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

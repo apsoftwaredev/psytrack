@@ -19,7 +19,10 @@
 #import <AWSiOSSDK/SimpleDB/AmazonSimpleDBClient.h>
 #import <AWSiOSSDK/SQS/AmazonSQSClient.h>
 #import <AWSiOSSDK/SNS/AmazonSNSClient.h>
-#import "Constants.h"
+
+
+#define ACCESS_KEY_ID                @"AKIAJQSJKX3M6UKHR3RA"
+#define SECRET_KEY                   @"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"
 
 @interface AmazonClientManager:NSObject {
 }
