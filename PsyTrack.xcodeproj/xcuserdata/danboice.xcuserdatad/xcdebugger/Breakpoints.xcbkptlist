@@ -4519,55 +4519,55 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5111"
-         endingLineNumber = "5111">
+         startingLineNumber = "5112"
+         endingLineNumber = "5112">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5010"
-         endingLineNumber = "5010">
+         startingLineNumber = "5011"
+         endingLineNumber = "5011">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4998"
-         endingLineNumber = "4998">
+         startingLineNumber = "4999"
+         endingLineNumber = "4999">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4983"
-         endingLineNumber = "4983">
+         startingLineNumber = "4984"
+         endingLineNumber = "4984">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1675"
-         endingLineNumber = "1675"
+         startingLineNumber = "1676"
+         endingLineNumber = "1676"
          landmarkName = "-alertView:didDismissWithButtonIndex:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4576,11 +4576,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1667"
-         endingLineNumber = "1667"
+         startingLineNumber = "1668"
+         endingLineNumber = "1668"
          landmarkName = "@implementation PTTAppDelegate"
          landmarkType = "3">
       </FileBreakpoint>
@@ -4589,11 +4589,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1685"
-         endingLineNumber = "1685"
+         startingLineNumber = "1686"
+         endingLineNumber = "1686"
          landmarkName = "-iCloudPreferenceFromUserDefaults"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4602,11 +4602,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2401"
-         endingLineNumber = "2401"
+         startingLineNumber = "2402"
+         endingLineNumber = "2402"
          landmarkName = "-encryptStringToEncryptedData:withKeyString:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4615,11 +4615,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2425"
-         endingLineNumber = "2425"
+         startingLineNumber = "2426"
+         endingLineNumber = "2426"
          landmarkName = "-encryptDataToEncryptedData:withKeyString:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4628,11 +4628,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2420"
-         endingLineNumber = "2420"
+         startingLineNumber = "2421"
+         endingLineNumber = "2421"
          landmarkName = "-encryptDataToEncryptedData:withKeyString:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4641,11 +4641,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2409"
-         endingLineNumber = "2409"
+         startingLineNumber = "2410"
+         endingLineNumber = "2410"
          landmarkName = "@implementation PTTAppDelegate"
          landmarkType = "3">
       </FileBreakpoint>
@@ -4654,11 +4654,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2437"
-         endingLineNumber = "2437"
+         startingLineNumber = "2438"
+         endingLineNumber = "2438"
          landmarkName = "-encryptDataToEncryptedData:withKeyString:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4667,11 +4667,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2456"
-         endingLineNumber = "2456"
+         startingLineNumber = "2457"
+         endingLineNumber = "2457"
          landmarkName = "@implementation PTTAppDelegate"
          landmarkType = "3">
       </FileBreakpoint>
@@ -4680,11 +4680,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2469"
-         endingLineNumber = "2469"
+         startingLineNumber = "2470"
+         endingLineNumber = "2470"
          landmarkName = "-encryptDataToEncryptedData:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -4693,11 +4693,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2330"
-         endingLineNumber = "2330"
+         startingLineNumber = "2331"
+         endingLineNumber = "2331"
          landmarkName = "-convertStringToData:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5486,11 +5486,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3418"
-         endingLineNumber = "3418"
+         startingLineNumber = "3419"
+         endingLineNumber = "3419"
          landmarkName = "-repairForSaveError:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5499,11 +5499,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3388"
-         endingLineNumber = "3388"
+         startingLineNumber = "3389"
+         endingLineNumber = "3389"
          landmarkName = "-saveContext"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5764,22 +5764,22 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4989"
-         endingLineNumber = "4989">
+         startingLineNumber = "4990"
+         endingLineNumber = "4990">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4982"
-         endingLineNumber = "4982">
+         startingLineNumber = "4983"
+         endingLineNumber = "4983">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -5862,11 +5862,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3253"
-         endingLineNumber = "3253"
+         startingLineNumber = "3254"
+         endingLineNumber = "3254"
          landmarkName = "-tabBarController:didSelectViewController:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5875,11 +5875,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2449"
-         endingLineNumber = "2449"
+         startingLineNumber = "2450"
+         endingLineNumber = "2450"
          landmarkName = "-encryptDataToEncryptedData:withKeyString:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5888,11 +5888,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2214"
-         endingLineNumber = "2214"
+         startingLineNumber = "2215"
+         endingLineNumber = "2215"
          landmarkName = "-setupMyInfoRecord"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5901,11 +5901,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2216"
-         endingLineNumber = "2216"
+         startingLineNumber = "2217"
+         endingLineNumber = "2217"
          landmarkName = "-setupMyInfoRecord"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5914,11 +5914,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2219"
-         endingLineNumber = "2219"
+         startingLineNumber = "2220"
+         endingLineNumber = "2220"
          landmarkName = "-setupMyInfoRecord"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5927,11 +5927,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3343"
-         endingLineNumber = "3343"
+         startingLineNumber = "3344"
+         endingLineNumber = "3344"
          landmarkName = "-displayMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5940,11 +5940,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3354"
-         endingLineNumber = "3354"
+         startingLineNumber = "3355"
+         endingLineNumber = "3355"
          landmarkName = "-displayMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5953,11 +5953,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2259"
-         endingLineNumber = "2259"
+         startingLineNumber = "2260"
+         endingLineNumber = "2260"
          landmarkName = "-setupLockDictionaryResultStr"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5979,11 +5979,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3309"
-         endingLineNumber = "3309"
+         startingLineNumber = "3310"
+         endingLineNumber = "3310"
          landmarkName = "-applicationWillEnterForeground:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -5992,7 +5992,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "3326"
+         endingLineNumber = "3326"
+         landmarkName = "@implementation PTTAppDelegate"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PTTAppDelegate.m"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3325"
@@ -6005,24 +6018,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3324"
-         endingLineNumber = "3324"
-         landmarkName = "@implementation PTTAppDelegate"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3386"
-         endingLineNumber = "3386"
+         startingLineNumber = "3387"
+         endingLineNumber = "3387"
          landmarkName = "-saveContext"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6031,11 +6031,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3318"
-         endingLineNumber = "3318"
+         startingLineNumber = "3319"
+         endingLineNumber = "3319"
          landmarkName = "-applicationDidBecomeActive:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6044,11 +6044,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3002"
-         endingLineNumber = "3002"
+         startingLineNumber = "3003"
+         endingLineNumber = "3003"
          landmarkName = "@implementation PTTAppDelegate"
          landmarkType = "3">
       </FileBreakpoint>
@@ -6070,11 +6070,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2994"
-         endingLineNumber = "2994"
+         startingLineNumber = "2995"
+         endingLineNumber = "2995"
          landmarkName = "@implementation PTTAppDelegate"
          landmarkType = "3">
       </FileBreakpoint>
@@ -6226,11 +6226,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2990"
-         endingLineNumber = "2990"
+         startingLineNumber = "2991"
+         endingLineNumber = "2991"
          landmarkName = "@implementation PTTAppDelegate"
          landmarkType = "3">
       </FileBreakpoint>
@@ -6239,11 +6239,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3339"
-         endingLineNumber = "3339"
+         startingLineNumber = "3340"
+         endingLineNumber = "3340"
          landmarkName = "-displayMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6278,11 +6278,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2255"
-         endingLineNumber = "2255"
+         startingLineNumber = "2256"
+         endingLineNumber = "2256"
          landmarkName = "-setupLockDictionaryResultStr"
          landmarkType = "5">
       </FileBreakpoint>
@@ -6317,11 +6317,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3345"
-         endingLineNumber = "3345"
+         startingLineNumber = "3346"
+         endingLineNumber = "3346"
          landmarkName = "-displayMemoryWarning"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7126,51 +7126,40 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5048"
-         endingLineNumber = "5048">
+         startingLineNumber = "5049"
+         endingLineNumber = "5049">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5025"
-         endingLineNumber = "5025">
+         startingLineNumber = "5026"
+         endingLineNumber = "5026">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "5005"
-         endingLineNumber = "5005">
+         startingLineNumber = "5006"
+         endingLineNumber = "5006">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4999"
-         endingLineNumber = "4999">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "5000"
@@ -7181,33 +7170,44 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4823"
-         endingLineNumber = "4823">
+         startingLineNumber = "5001"
+         endingLineNumber = "5001">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4878"
-         endingLineNumber = "4878">
+         startingLineNumber = "4824"
+         endingLineNumber = "4824">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4872"
-         endingLineNumber = "4872">
+         startingLineNumber = "4879"
+         endingLineNumber = "4879">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PTTAppDelegate.m"
+         timestampString = "387149027.282258"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "4873"
+         endingLineNumber = "4873">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7227,11 +7227,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4090"
-         endingLineNumber = "4090"
+         startingLineNumber = "4091"
+         endingLineNumber = "4091"
          landmarkName = "-reachable"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7630,11 +7630,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3786"
-         endingLineNumber = "3786"
+         startingLineNumber = "3787"
+         endingLineNumber = "3787"
          landmarkName = "-combSmString"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7643,20 +7643,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3793"
-         endingLineNumber = "3793"
-         landmarkName = "-combSmString"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3794"
@@ -7669,11 +7656,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "4427"
-         endingLineNumber = "4427"
+         startingLineNumber = "3795"
+         endingLineNumber = "3795"
+         landmarkName = "-combSmString"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PTTAppDelegate.m"
+         timestampString = "387149027.282258"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "4428"
+         endingLineNumber = "4428"
          landmarkName = "@implementation PTTAppDelegate"
          landmarkType = "3">
       </FileBreakpoint>
@@ -7734,11 +7734,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3049"
-         endingLineNumber = "3049"
+         startingLineNumber = "3050"
+         endingLineNumber = "3050"
          landmarkName = "-application:willChangeStatusBarOrientation:duration:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -7747,11 +7747,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385847419.901148"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "3054"
-         endingLineNumber = "3054"
+         startingLineNumber = "3055"
+         endingLineNumber = "3055"
          landmarkName = "-application:willChangeStatusBarOrientation:duration:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -8913,11 +8913,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385851813.321893"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "595"
-         endingLineNumber = "595"
+         startingLineNumber = "596"
+         endingLineNumber = "596"
          landmarkName = "-setUpDrugStore"
          landmarkType = "5">
       </FileBreakpoint>
@@ -8926,11 +8926,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PTTAppDelegate.m"
-         timestampString = "385852222.666484"
+         timestampString = "387149027.282258"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "594"
-         endingLineNumber = "594"
+         startingLineNumber = "595"
+         endingLineNumber = "595"
          landmarkName = "-setUpDrugStore"
          landmarkType = "5">
       </FileBreakpoint>

@@ -569,8 +569,9 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
     
     if (firstRun||resetDatabase) {
         
+        BOOL addApplication=YES;
         
-        if ([fileManager fileExistsAtPath:drugApplication.path]) {
+        if (addApplication&&[fileManager fileExistsAtPath:drugApplication.path]) {
             
             if (drugApplication) {
                 
