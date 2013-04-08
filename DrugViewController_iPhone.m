@@ -226,7 +226,7 @@ NSString *const kRemoteFileName = @"dFile-001.zpk";
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
                            {
                                NSString *activeIngredientStr = (NSString *)[cell.boundObject valueForKey:@"activeIngredient"];
-                              
+
                                [self.searchBar setText:activeIngredientStr];
                                [self searchBar:self.searchBar textDidChange:activeIngredientStr];
                                self.searchBar.userInteractionEnabled = YES;
@@ -683,8 +683,6 @@ NSString *const kRemoteFileName = @"dFile-001.zpk";
 
     [self didChangeValueForKey:@"isExecuting"];
     [self didChangeValueForKey:@"isFinished"];
-    
-    
 }
 
 
@@ -697,44 +695,36 @@ NSString *const kRemoteFileName = @"dFile-001.zpk";
     /********************************************/
 
     awsConnection = [self getAWSConnection];
-    S3GetObjectMetadataResponse *getMetadataResponse=nil;
-    if (awsConnection ) {
+    S3GetObjectMetadataResponse *getMetadataResponse = nil;
+    if (awsConnection )
+    {
         S3GetObjectMetadataRequest *getMetadataRequest = [[S3GetObjectMetadataRequest alloc] initWithKey:kRemoteFileName withBucket:kBucketName];
-        
-      
-        
-        NSArray *objectsInBucket=[awsConnection listObjectsInBucket:kBucketName];
-        BOOL objExistsInBucket=NO;
-        for (id obj in objectsInBucket) {
-           
-            
-            if ([obj isKindOfClass:[S3ObjectSummary class]]) {
-               
-                S3ObjectSummary *objSummary=(S3ObjectSummary *)obj;
-                
-               
-                NSString *objectStr=(NSString *)objSummary.key;
-                
-                if (objectStr&&kRemoteFileName&&[objectStr isEqualToString:kRemoteFileName]) {
-                    objExistsInBucket=YES;
+
+        NSArray *objectsInBucket = [awsConnection listObjectsInBucket:kBucketName];
+        BOOL objExistsInBucket = NO;
+        for (id obj in objectsInBucket)
+        {
+            if ([obj isKindOfClass:[S3ObjectSummary class]])
+            {
+                S3ObjectSummary *objSummary = (S3ObjectSummary *)obj;
+
+                NSString *objectStr = (NSString *)objSummary.key;
+
+                if (objectStr && kRemoteFileName && [objectStr isEqualToString:kRemoteFileName])
+                {
+                    objExistsInBucket = YES;
                     break;
                 }
-                
-                
-                
             }
-            
-            
         }
-        
-        if (objExistsInBucket) {
-            getMetadataResponse = [awsConnection getObjectMetadata:getMetadataRequest];
-            
-        }
-      
 
+        if (objExistsInBucket)
+        {
+            getMetadataResponse = [awsConnection getObjectMetadata:getMetadataRequest];
+        }
     }
-        return getMetadataResponse;
+
+    return getMetadataResponse;
 }
 
 
@@ -942,13 +932,11 @@ NSString *const kRemoteFileName = @"dFile-001.zpk";
     downloadStopButton_.hidden = NO;
     downloadContinueButton_.hidden = YES;
     downloadCheckButton_.hidden = YES;
-    
+
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
     [self.downloadBar forceContinue];
-
-   
-  }
+}
 
 
 - (void) downloadBar:(UIDownloadBar *)downloadBar didFinishWithData:(NSData *)fileData suggestedFilename:(NSString *)filename
@@ -1101,8 +1089,7 @@ NSString *const kRemoteFileName = @"dFile-001.zpk";
     [UIView setAnimationDuration:20.0];
     self.downloadLabel.alpha = (CGFloat)0;
     [UIView commitAnimations];
-     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 

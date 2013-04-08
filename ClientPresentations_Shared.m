@@ -1243,7 +1243,6 @@
         selectedInstrument = nil;
     }
 
-   
     if (selectedVariableName && tableModel.tag == 4)
     {
         selectedVariableName = nil;
@@ -1253,8 +1252,6 @@
 
 - (void) tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
 {
-   
-
     if (detailTableViewModel.tag == 5 && detailTableViewModel.sectionCount)
     {
         SCTableViewSection *section = (SCTableViewSection *)[detailTableViewModel sectionAtIndex:0];

@@ -38,46 +38,39 @@ bytesReceived = bytesReceived_;
     awsConnection = [self getAWSConnection];
 
     objectRequest = [self getObjectRequest];
-     BOOL objExistsInBucket=NO;
-    if (awsConnection) {
-   
-    NSArray *objectsInBucket=[awsConnection listObjectsInBucket:bucketName];
-   
-    for (id obj in objectsInBucket) {
-        
-        
-        if ([obj isKindOfClass:[S3ObjectSummary class]]) {
-            
-            S3ObjectSummary *objSummary=(S3ObjectSummary *)obj;
-            
-            
-            NSString *objectStr=(NSString *)objSummary.key;
-            
-            if (objectStr&&keyName&&[objectStr isEqualToString:keyName]) {
-                objExistsInBucket=YES;
-                break;
+    BOOL objExistsInBucket = NO;
+    if (awsConnection)
+    {
+        NSArray *objectsInBucket = [awsConnection listObjectsInBucket:bucketName];
+
+        for (id obj in objectsInBucket)
+        {
+            if ([obj isKindOfClass:[S3ObjectSummary class]])
+            {
+                S3ObjectSummary *objSummary = (S3ObjectSummary *)obj;
+
+                NSString *objectStr = (NSString *)objSummary.key;
+
+                if (objectStr && keyName && [objectStr isEqualToString:keyName])
+                {
+                    objExistsInBucket = YES;
+                    break;
+                }
             }
-            
-            
-            
         }
-        
-        
     }
 
-    }
-    
-    if (!objExistsInBucket) {
+    if (!objExistsInBucket)
+    {
         [self request:(AmazonServiceRequest *)objectRequest didFailWithError:nil];
         return;
     }
-    else
-    if (objectRequest && awsConnection) {
+    else if (objectRequest && awsConnection)
+    {
         [objectRequest setRangeStart:bytesReceived_ rangeEnd:expectedBytes];
-         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         [awsConnection getObject:objectRequest];
     }
-   
 }
 
 
@@ -140,17 +133,13 @@ bytesReceived = bytesReceived_;
 
     // Puts the file as an object in the bucket.
 
-    
-
     S3GetObjectRequest *downloadRequest = [self getObjectRequest];
 
-     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    if (downloadRequest) {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    if (downloadRequest)
+    {
         [awsConnection getObject:downloadRequest];
-
     }
-
-    
 }
 
 
@@ -172,41 +161,32 @@ bytesReceived = bytesReceived_;
 
 - (S3GetObjectRequest *) getObjectRequest
 {
-   
     if (!objectRequest)
     {
-        
-        NSArray *objectsInBucket=[awsConnection listObjectsInBucket:bucketName];
-        BOOL objExistsInBucket=NO;
-        for (id obj in objectsInBucket) {
-            
-            
-            if ([obj isKindOfClass:[S3ObjectSummary class]]) {
-                
-                S3ObjectSummary *objSummary=(S3ObjectSummary *)obj;
-                
-                
-                NSString *objectStr=(NSString *)objSummary.key;
-                
-                if (objectStr&&keyName&&[objectStr isEqualToString:keyName]) {
-                    objExistsInBucket=YES;
+        NSArray *objectsInBucket = [awsConnection listObjectsInBucket:bucketName];
+        BOOL objExistsInBucket = NO;
+        for (id obj in objectsInBucket)
+        {
+            if ([obj isKindOfClass:[S3ObjectSummary class]])
+            {
+                S3ObjectSummary *objSummary = (S3ObjectSummary *)obj;
+
+                NSString *objectStr = (NSString *)objSummary.key;
+
+                if (objectStr && keyName && [objectStr isEqualToString:keyName])
+                {
+                    objExistsInBucket = YES;
                     break;
                 }
-                
-                
-                
             }
-            
-            
         }
 
-        
-        if (objExistsInBucket) {
+        if (objExistsInBucket)
+        {
             objectRequest = [[S3GetObjectRequest alloc] initWithKey:keyName withBucket:bucketName];
             objectRequest.endpoint = @"https://s3.amazonaws.com";
             [objectRequest setDelegate:self];
         }
-       
     }
 
     return objectRequest;
@@ -260,10 +240,10 @@ bytesReceived = bytesReceived_;
         {
             NSString *contentRange = [headers objectForKey:@"Content-Range"];
             //NSLog(@"Content-Range: %@", contentRange);
-           
+
             NSRange range = [contentRange rangeOfString:@"/"];
-            if (range.location!=NSNotFound) {
-            
+            if (range.location != NSNotFound)
+            {
                 NSString *totalBytesCount = [contentRange substringFromIndex:range.location + 1];
                 expectedBytes = [totalBytesCount floatValue];
             }
@@ -332,7 +312,7 @@ bytesReceived = bytesReceived_;
     operationFailed = YES;
 
     [self finish];
-     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 
@@ -342,8 +322,7 @@ bytesReceived = bytesReceived_;
 
     [self.delegate downloadBar:self didFailWithError:nil];
     [self finish];
-    
-    }
+}
 
 
 #pragma mark - Helper Methods
@@ -359,8 +338,6 @@ bytesReceived = bytesReceived_;
     [self didChangeValueForKey:@"isExecuting"];
     [self didChangeValueForKey:@"isFinished"];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-
-    
 }
 
 

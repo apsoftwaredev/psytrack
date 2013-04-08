@@ -332,7 +332,7 @@
 {
     NSString *scrubbed = nil;
 
-    if (fileName && fileName.length>3 && [[fileName substringFromIndex:fileName.length - 4]isEqualToString:@".pdf"])
+    if (fileName && fileName.length > 3 && [[fileName substringFromIndex:fileName.length - 4]isEqualToString:@".pdf"])
     {
         fileName = [fileName substringToIndex:fileName.length - 4];
     }
@@ -385,7 +385,7 @@
 
     BOOL fileHasPDFExtention = NO;
 
-    if (fileNameGiven && fileNameGiven.length>3 &&[[fileNameGiven substringFromIndex:fileNameGiven.length - 4]isEqualToString:@".pdf"])
+    if (fileNameGiven && fileNameGiven.length > 3 && [[fileNameGiven substringFromIndex:fileNameGiven.length - 4]isEqualToString:@".pdf"])
     {
         fileHasPDFExtention = YES;
     }

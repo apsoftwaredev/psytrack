@@ -1391,9 +1391,9 @@
             }
         }
 
-        NSString *cellTitleLastCharacter = cell.textLabel.text?[cell.textLabel.text substringFromIndex:cell.textLabel.text.length - 1 ]:nil;
+        NSString *cellTitleLastCharacter = cell.textLabel.text ? [cell.textLabel.text substringFromIndex:cell.textLabel.text.length - 1 ] : nil;
 
-        if ([cell isKindOfClass:[SCObjectSelectionCell class]] && cellTitleLastCharacter&&[cellTitleLastCharacter isEqualToString:@"*" ])
+        if ([cell isKindOfClass:[SCObjectSelectionCell class]] && cellTitleLastCharacter && [cellTitleLastCharacter isEqualToString:@"*" ])
         {
             SCObjectSelectionCell *objectSelectionCell = (SCObjectSelectionCell *)cell;
 
