@@ -1,7 +1,7 @@
 //
 //  ExpertTestemonyVC.m
 //  PsyTrack Clinician Tools
-//  Version: 1.0.6
+//  Version: 1.5.1
 //
 //  Created by Daniel Boice on 9/1/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -167,9 +167,9 @@
     clientDataProperty.autoValidate = FALSE;
 
     /*
-      **************************************************************************************
+     **************************************************************************************
         END of Class Definition and attributes for the Client Entity
-      **************************************************************************************
+     **************************************************************************************
      */
 
     //insert the custom property definition into the clientData class at index

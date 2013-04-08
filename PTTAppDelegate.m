@@ -1,7 +1,7 @@
 /*
  *  PTTAppDelegate.m
  *  psyTrack Clinician Tools
- *  Version: 1.0.6
+ *  Version: 1.5.1
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -1806,7 +1806,6 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                                                                                                                           withString:@""]stringByReplacingOccurrencesOfString:@" "withString:@""];
 
     NSString *savedDevToken = (NSString *)[[NSUserDefaults standardUserDefaults] valueForKey:@"devtoken"];
-    
 
     if ( savedDevToken == nil || (savedDevToken && deviceToken && [savedDevToken isKindOfClass:[NSString class]] && ![devToken isEqualToString:savedDevToken]) )
     {

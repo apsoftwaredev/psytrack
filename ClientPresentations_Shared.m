@@ -1,7 +1,7 @@
 /*
  *  ClientPresentations_Shared.m
  *  psyTrack Clinician Tools
- *  Version: 1.0.6
+ *  Version: 1.5.1
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -463,9 +463,9 @@
     additionalVariableDef.titlePropertyName = @"variableName.variableName";
 
     /*
-      **************************************************************************************
+     **************************************************************************************
         BEGIN Class Definition and attributes for the Client Entity
-      **************************************************************************************
+     **************************************************************************************
      */
 
     //get the client setup from the clients View Controller Shared
@@ -487,10 +487,10 @@
     [self.clientPresentationDef insertPropertyDefinition:clientDataProperty atIndex:0];
 
     /*
-      **************************************************************************************
+     **************************************************************************************
         END of Class Definition and attributes for the Client Entity
-      **************************************************************************************
-      the client def will be used in the joined clientPresentations table
+     **************************************************************************************
+       the client def will be used in the joined clientPresentations table
      */
 
     //Do some property definition customization for the ClientPresentation Entity defined in clientPresentationDef
@@ -1243,7 +1243,7 @@
         selectedInstrument = nil;
     }
 
-    DLog(@"tabel model tag is  %i",tableModel.tag);
+   
     if (selectedVariableName && tableModel.tag == 4)
     {
         selectedVariableName = nil;
@@ -1253,7 +1253,7 @@
 
 - (void) tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
 {
-    DLog(@"tablemodel tag is  %i",tableModel.tag);
+   
 
     if (detailTableViewModel.tag == 5 && detailTableViewModel.sectionCount)
     {

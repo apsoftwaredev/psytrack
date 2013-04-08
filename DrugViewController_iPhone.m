@@ -1,7 +1,7 @@
 /*
  *  DrugViewController_iPhone.m
  *  psyTrack Clinician Tools
- *  Version: 1.0.6
+ *  Version: 1.5.1
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -22,8 +22,6 @@
 #import "PTTEncryption.h"
 #import "SCArrayOfObjectsModel_UseSelectionSection.h"
 
-
-
 @implementation DrugViewController_iPhone
 @synthesize searchBar;
 
@@ -42,9 +40,7 @@ NSString *const kRemoteFileDownloadLinkStr_USStandard = @"https://s3.amazonaws.c
 
 NSString *const kBucketName = @"psytrack";
 
-NSString *const kRemoteFileName=@"dFile-001.zpk";
-
-
+NSString *const kRemoteFileName = @"dFile-001.zpk";
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -230,7 +226,7 @@ NSString *const kRemoteFileName=@"dFile-001.zpk";
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
                            {
                                NSString *activeIngredientStr = (NSString *)[cell.boundObject valueForKey:@"activeIngredient"];
-                               DLog(@"%@",activeIngredientStr);
+                              
                                [self.searchBar setText:activeIngredientStr];
                                [self searchBar:self.searchBar textDidChange:activeIngredientStr];
                                self.searchBar.userInteractionEnabled = YES;
@@ -584,137 +580,65 @@ NSString *const kRemoteFileName=@"dFile-001.zpk";
 }
 
 
-- (void) connectToRemoteDrugFile
+- (AmazonS3Client *) getAWSConnection
 {
-    self.connectingToFile = YES;
-    // Create a URL Request and set the URL
-    NSURL *url = [NSURL URLWithString:kRemoteFileDownloadLinkStr_USStandard];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPMethod:@"HEAD"];
-    // Display the network activity indicator
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    if (!credentials)
+    {
+        credentials = [[AmazonCredentials alloc] initWithAccessKey:ACCESS_KEY_ID withSecretKey:SECRET_KEY];
+    }
 
-    // Perform the request on a new thread so we don't block the UI
-    dispatch_queue_t downloadQueue = dispatch_queue_create("Download queue", NULL);
-    dispatch_async(downloadQueue, ^{
-                       NSError *err = nil;
-                       NSHTTPURLResponse *rsp = nil;
+    if (!awsConnection)
+    {
+        awsConnection = [[AmazonS3Client alloc] initWithCredentials:credentials];
+    }
 
-                       // Perform the request synchronously on this thread
-                       NSData *rspData = [NSURLConnection sendSynchronousRequest:request returningResponse:&rsp error:&err];
-
-                       // Once a response is received, handle it on the main thread in case we do any UI updates
-                       dispatch_async(dispatch_get_main_queue(), ^{
-                                          // Hide the network activity indicator
-                                          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-
-                                          if ( rspData == nil || (err != nil && [err code] != noErr) )
-                                          {
-                                              // If there was a no data received, or an error...
-                                              self.downloadLabel.text = @"Not Reachable";
-                                              [checkingTimer_ invalidate];
-                                              checkingTimer_ = nil;
-                                              self.connectingToFile = NO;
-                                              [self checkingLabelToNormalState];
-                                          }
-                                          else
-                                          {
-                                              NSTimeInterval timeout = 10.0;
-                                              NSURL *remoteFileURL = [NSURL URLWithString:kRemoteFileDownloadLinkStr_USStandard];
-
-                                              drugFileRequest = [[NSURLRequest alloc] initWithURL:remoteFileURL cachePolicy:NSURLRequestReloadRevalidatingCacheData timeoutInterval:timeout];
-
-                                              connectionToDrugFile = [NSURLConnection connectionWithRequest:drugFileRequest delegate:self];
-
-                                              [connectionToDrugFile start];
-                                              [self checkingLabelToNormalState];
-                                              // Do whatever else you want with the data...
-                                          }
-                                      }
-
-
-                                      );
-                   }
-
-
-                   );
+    return awsConnection;
 }
 
 
-- (void) connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+- (S3GetObjectRequest *) getObjectRequest
 {
-    self.downloadCheckButton.enabled = YES;
-
-    [checkingTimer_ invalidate];
-    checkingTimer_ = nil;
-    
-    
-   
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"drugFileHeaderData" ofType:@"plist"];
-    NSString *savedETag=nil;
-    NSDictionary *drugDataDataPlistRootDic=nil;
-    
-    if (path) {
-        drugDataDataPlistRootDic = [[NSDictionary alloc] initWithContentsOfFile:path];
-        if ([drugDataDataPlistRootDic objectForKey:@"eTag"]) {
-            savedETag=[drugDataDataPlistRootDic valueForKey:@"eTag"];
-        }
-        
-    }
-    
-    DLog(@"saved etag is  %@",savedETag);
-    
-    if ([response isKindOfClass:[NSHTTPURLResponse self]])
+    if (!objectRequest)
     {
-        NSDictionary *headers = [(NSHTTPURLResponse *)response allHeaderFields];
-        remoteFileETag = [headers objectForKey:@"Etag"];
-        
-        DLog(@"header etag object %@",remoteFileETag);
-        DLog(@"headers all keys %@",headers.allKeys);
-        
+        objectRequest = [[S3GetObjectRequest alloc] initWithKey:keyName withBucket:bucketName];
+        objectRequest.endpoint = @"https://s3.amazonaws.com";
+        [objectRequest setDelegate:self];
     }
 
-   
-    [self fadeCheckingLabel];
-    [self checkingLabelToNormalState];
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    
-    if (!savedETag||(remoteFileETag && savedETag && ![savedETag isEqualToString: remoteFileETag]) )
-    {
-        downloadLabel_.text = @"Update Available.";
-        downloadCheckButton_.hidden = YES;
-        downloadButton_.hidden = NO;
-        downloadStopButton_.hidden = YES;
-        downloadContinueButton_.hidden = YES;
-        
-        
-        
-        
-    }
-    else
-    {
-        downloadLabel_.text = @"Current Version";
-        downloadCheckButton_.hidden = NO;
-        downloadButton_.hidden = YES;
-        downloadStopButton_.hidden = YES;
-        downloadContinueButton_.hidden = YES;
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:20.0];
-        self.downloadLabel.alpha = (CGFloat)0;
-        [UIView commitAnimations];
-    }
-
-    [checkingTimer_ invalidate];
-    [connection cancel];
-    connectionToDrugFile = nil;
-    drugFileRequest = nil;
-
-    self.connectingToFile = NO;
+    return objectRequest;
 }
 
 
-- (void) connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+- (BOOL) isConcurrent
+{
+    return YES;
+}
+
+
+- (BOOL) isExecuting
+{
+    return isExecuting;
+}
+
+
+- (BOOL) isFinished
+{
+    return isFinished;
+}
+
+
+#pragma mark - AmazonServiceRequestDelegate Implementations
+
+- (void) request:(AmazonServiceRequest *)request didCompleteWithResponse:(AmazonServiceResponse *)response
+{
+    operationFinished = YES;
+    //NSLog(@"Connection did finish loading...%@",localFilename);
+
+    [self finish];
+}
+
+
+- (void) request:(AmazonServiceRequest *)request didFailWithError:(NSError *)error
 {
     self.downloadCheckButton.enabled = YES;
     downloadCheckButton_.hidden = NO;
@@ -732,6 +656,186 @@ NSString *const kRemoteFileName=@"dFile-001.zpk";
     drugFileRequest = nil;
     self.connectingToFile = NO;
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+
+    operationFailed = YES;
+
+    [self finish];
+}
+
+
+- (void) request:(AmazonServiceRequest *)request didFailWithServiceException:(NSException *)exception
+{
+    DLog(@"logging exception%@", exception);
+
+    [self finish];
+}
+
+
+#pragma mark - Helper Methods
+
+- (void) finish
+{
+    [self willChangeValueForKey:@"isExecuting"];
+    [self willChangeValueForKey:@"isFinished"];
+
+    isExecuting = NO;
+    isFinished = YES;
+
+    [self didChangeValueForKey:@"isExecuting"];
+    [self didChangeValueForKey:@"isFinished"];
+    
+    
+}
+
+
+- (S3GetObjectMetadataResponse *) getObjectMetadata
+{
+    [self willChangeValueForKey:@"isExecuting"];
+    isExecuting = YES;
+    [self didChangeValueForKey:@"isExecuting"];
+
+    /********************************************/
+
+    awsConnection = [self getAWSConnection];
+    S3GetObjectMetadataResponse *getMetadataResponse=nil;
+    if (awsConnection ) {
+        S3GetObjectMetadataRequest *getMetadataRequest = [[S3GetObjectMetadataRequest alloc] initWithKey:kRemoteFileName withBucket:kBucketName];
+        
+      
+        
+        NSArray *objectsInBucket=[awsConnection listObjectsInBucket:kBucketName];
+        BOOL objExistsInBucket=NO;
+        for (id obj in objectsInBucket) {
+           
+            
+            if ([obj isKindOfClass:[S3ObjectSummary class]]) {
+               
+                S3ObjectSummary *objSummary=(S3ObjectSummary *)obj;
+                
+               
+                NSString *objectStr=(NSString *)objSummary.key;
+                
+                if (objectStr&&kRemoteFileName&&[objectStr isEqualToString:kRemoteFileName]) {
+                    objExistsInBucket=YES;
+                    break;
+                }
+                
+                
+                
+            }
+            
+            
+        }
+        
+        if (objExistsInBucket) {
+            getMetadataResponse = [awsConnection getObjectMetadata:getMetadataRequest];
+            
+        }
+      
+
+    }
+        return getMetadataResponse;
+}
+
+
+- (void) connectToRemoteDrugFile
+{
+    self.connectingToFile = YES;
+    // Create a URL Request and set the URL
+
+    // Display the network activity indicator
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+
+    // Perform the request on a new thread so we don't block the UI
+    dispatch_queue_t downloadQueue = dispatch_queue_create("Download queue", NULL);
+    dispatch_async(downloadQueue, ^{
+                       S3GetObjectMetadataResponse *rsp = [self getObjectMetadata];
+
+                       // Once a response is received, handle it on the main thread in case we do any UI updates
+                       dispatch_async(dispatch_get_main_queue(), ^{
+                                          // Hide the network activity indicator
+                                          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+
+                                          if ( rsp.body == nil || (rsp.error != nil && [rsp.error code] != noErr) )
+                                          {
+                                              // If there was a no data received, or an error...
+                                              self.downloadLabel.text = @"Not Reachable";
+                                              [checkingTimer_ invalidate];
+                                              checkingTimer_ = nil;
+                                              self.connectingToFile = NO;
+                                              [self checkingLabelToNormalState];
+                                          }
+                                          else
+                                          {
+                                              self.downloadCheckButton.enabled = YES;
+
+                                              [checkingTimer_ invalidate];
+                                              checkingTimer_ = nil;
+
+                                              NSFileManager *fileManager = [[NSFileManager alloc]init];
+
+                                              PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+
+                                              NSString *savedDrugHeaderPlist = [[appDelegate applicationDrugsDirectory].path stringByAppendingPathComponent:@"drugFileHeaderData.plist" ];
+                                              BOOL plistDictionaryExists = [fileManager fileExistsAtPath:savedDrugHeaderPlist];
+
+                                              NSString *savedETag = nil;
+                                              NSDictionary *drugDataDataPlistRootDic = nil;
+
+                                              if (plistDictionaryExists)
+                                              {
+                                                  drugDataDataPlistRootDic = [[NSDictionary alloc] initWithContentsOfFile:savedDrugHeaderPlist];
+                                                  if ([drugDataDataPlistRootDic objectForKey:@"eTag"])
+                                                  {
+                                                      savedETag = [drugDataDataPlistRootDic valueForKey:@"eTag"];
+                                                  }
+                                              }
+
+                                              remoteFileETag = rsp.etag;
+
+                                              [self fadeCheckingLabel];
+                                              [self checkingLabelToNormalState];
+
+                                              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+
+                                              if (!savedETag || (remoteFileETag && savedETag && ![savedETag isEqualToString:remoteFileETag]) || [self getLocalDrugFileSize] < 1048576)
+                                              {
+                                                  downloadLabel_.text = @"Update Available.";
+                                                  downloadCheckButton_.hidden = YES;
+                                                  downloadButton_.hidden = NO;
+                                                  downloadStopButton_.hidden = YES;
+                                                  downloadContinueButton_.hidden = YES;
+                                              }
+                                              else
+                                              {
+                                                  downloadLabel_.text = @"Current Version";
+                                                  downloadCheckButton_.hidden = NO;
+                                                  downloadButton_.hidden = YES;
+                                                  downloadStopButton_.hidden = YES;
+                                                  downloadContinueButton_.hidden = YES;
+                                                  [UIView beginAnimations:nil context:nil];
+                                                  [UIView setAnimationDuration:20.0];
+                                                  self.downloadLabel.alpha = (CGFloat)0;
+                                                  [UIView commitAnimations];
+                                              }
+
+                                              [checkingTimer_ invalidate];
+
+                                              connectionToDrugFile = nil;
+                                              drugFileRequest = nil;
+
+                                              self.connectingToFile = NO;
+                                              [self checkingLabelToNormalState];
+                                              // Do whatever else you want with the data...
+                                          }
+                                      }
+
+
+                                      );
+                   }
+
+
+                   );
 }
 
 
@@ -765,37 +869,21 @@ NSString *const kRemoteFileName=@"dFile-001.zpk";
 
         self.connectingToFile = YES;
         // Create a URL Request and set the URL
-        NSURL *url = [NSURL URLWithString:kRemoteFileDownloadLinkStr_USStandard];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        [request setHTTPMethod:@"HEAD"];
+
         // Display the network activity indicator
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
-        
         // Perform the request on a new thread so we don't block the UI
         dispatch_queue_t downloadQueue = dispatch_queue_create("Download queue", NULL);
         dispatch_async(downloadQueue, ^{
-                           NSError *err = nil;
-                           NSHTTPURLResponse *rsp = nil;
+                           S3GetObjectMetadataResponse *rsp = [self getObjectMetadata];
 
-                           // Perform the request synchronously on this thread
-                           NSData *rspData = [NSURLConnection sendSynchronousRequest:request returningResponse:&rsp error:&err];
-
-            if ([rsp isKindOfClass:[NSHTTPURLResponse self]])
-            {
-                NSDictionary *headers = [(NSHTTPURLResponse *)rsp allHeaderFields];
-                remoteFileETag = [headers objectForKey:@"Etag"];
-                
-                DLog(@"header etag object %@",remoteFileETag);
-                DLog(@"headers all keys %@",headers.allKeys);
-                
-            }
                            // Once a response is received, handle it on the main thread in case we do any UI updates
                            dispatch_async(dispatch_get_main_queue(), ^{
                                               // Hide the network activity indicator
-                            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+                                              [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 
-                                              if ( rspData == nil || (err != nil && [err code] != noErr) )
+                                              if ( rsp.body == nil || (rsp.error != nil && [rsp.error code] != noErr) )
                                               {
                                                   // If there was a no data received, or an error...
                                                   self.downloadLabel.text = @"Not Reachable";
@@ -803,19 +891,12 @@ NSString *const kRemoteFileName=@"dFile-001.zpk";
                                                   checkingTimer_ = nil;
                                                   self.connectingToFile = NO;
                                                   [self checkingLabelToNormalState];
-
-                                                  downloadButton_.hidden = YES;
-                                                  downloadStopButton_.hidden = YES;
-                                                  downloadContinueButton_.hidden = YES;
-                                                  downloadCheckButton_.hidden = NO;
-                                                  [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-
                                               }
                                               else
                                               {
                                                   self.downloadBar = [[UIDownloadBar alloc] initWithSaveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
-                                                                                                timeout:15
-                                                                                               delegate:self bucketNameGiven:(NSString *)kBucketName remoteFileName:(NSString * )kRemoteFileName ];
+                                                                                                             timeout:15
+                                                                                                            delegate:self bucketNameGiven:(NSString *)kBucketName remoteFileName:(NSString *)kRemoteFileName ];
 
                                                   [self.view addSubview:self.downloadBar];
                                                   [self.view setNeedsDisplay];
@@ -824,7 +905,6 @@ NSString *const kRemoteFileName=@"dFile-001.zpk";
                                                   downloadStopButton_.hidden = NO;
                                                   downloadContinueButton_.hidden = YES;
                                                   downloadCheckButton_.hidden = YES;
-                                                  
                                               }
                                           }
 
@@ -850,7 +930,6 @@ NSString *const kRemoteFileName=@"dFile-001.zpk";
     downloadCheckButton_.hidden = YES;
     [self.view setNeedsDisplay];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-
 }
 
 
@@ -859,29 +938,29 @@ NSString *const kRemoteFileName=@"dFile-001.zpk";
     objectsModel.enablePullToRefresh = NO;
     objectsModel.tableView.userInteractionEnabled = NO;
     self.searchBar.userInteractionEnabled = NO;
-
-    [self.downloadBar forceContinue];
-
     downloadButton_.hidden = YES;
     downloadStopButton_.hidden = NO;
     downloadContinueButton_.hidden = YES;
     downloadCheckButton_.hidden = YES;
+    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 
-}
+    [self.downloadBar forceContinue];
+
+   
+  }
 
 
 - (void) downloadBar:(UIDownloadBar *)downloadBar didFinishWithData:(NSData *)fileData suggestedFilename:(NSString *)filename
 {
     PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-   
+
     [appDelegate displayNotification:@"Drug Database Download Complete." forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
 
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 
     NSURL *drugsStoreURL = [[appDelegate applicationDrugsDirectory] URLByAppendingPathComponent:@"drugs.sqlite"];
-    
-   
+
     NSString *symetricString = @"8qfnbyfalVvdjf093uPmsdj30mz98fI6";
     NSData *symetricData = [symetricString dataUsingEncoding:[NSString defaultCStringEncoding] ];
 
@@ -948,28 +1027,15 @@ NSString *const kRemoteFileName=@"dFile-001.zpk";
                 {
                     [drugsManagedObjectContext refreshObject:managedObject mergeChanges:NO];
                 }
-                
-            NSString *path = [[NSBundle mainBundle] pathForResource:@"drugFileHeaderData" ofType:@"plist"];
-           
-            NSMutableDictionary *drugDataDataPlistRootDic=nil;
-            
-            if (path) {
-                drugDataDataPlistRootDic = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
-                if (remoteFileETag && [drugDataDataPlistRootDic objectForKey:@"eTag"]) {
-                   DLog(@"remote file etag is  %@",remoteFileETag);
-                    
-                    DLog(@"remote file etag class is  %@",remoteFileETag.class);
-                    [drugDataDataPlistRootDic setValue:remoteFileETag forKey:@"eTag"];
-                
-                   BOOL fileWritten= [drugDataDataPlistRootDic writeToFile:path atomically:YES];
-                
-                    DLog(@"file written is  %i",fileWritten);
-                }
-                
-            }
 
-                
-                
+                if (remoteFileETag)
+                {
+                    NSMutableDictionary *drugDataDataPlistRootDic = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObject:remoteFileETag] forKeys:[NSArray arrayWithObject:@"eTag"]];
+
+                    [drugDataDataPlistRootDic setValue:remoteFileETag forKey:@"eTag"];
+
+                    [drugDataDataPlistRootDic writeToFile:[[appDelegate applicationDrugsDirectory].path stringByAppendingPathComponent:@"drugFileHeaderData.plist" ] atomically:YES];
+                }
             }
         }
         else
@@ -988,7 +1054,6 @@ NSString *const kRemoteFileName=@"dFile-001.zpk";
     {
         [appDelegate displayNotification:@"Problem with setting up drug database occured.  Please try again later or contact support"];
     }
-    
 
     [self searchBar:(UISearchBar *)self.searchBar textDidChange:(NSString *)self.searchBar.text];
 
@@ -1036,6 +1101,8 @@ NSString *const kRemoteFileName=@"dFile-001.zpk";
     [UIView setAnimationDuration:20.0];
     self.downloadLabel.alpha = (CGFloat)0;
     [UIView commitAnimations];
+     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    
 }
 
 

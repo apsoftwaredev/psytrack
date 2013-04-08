@@ -1,7 +1,7 @@
 //
 //  AllTrainingHoursGenerateVC.m
 //  PsyTrack Clinician Tools
-//  Version: 1.0.6
+//  Version: 1.5.1
 //
 //  Created by Daniel Boice on 9/4/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -162,9 +162,11 @@
 {
     NSString *scrubbed = nil;
 
-    if ([[fileName substringFromIndex:fileName.length-4]isEqualToString:@".pdf"]) {
-        fileName=[fileName substringToIndex:fileName.length-4];
+    if (fileName && fileName.length>3 && [[fileName substringFromIndex:fileName.length - 4]isEqualToString:@".pdf"])
+    {
+        fileName = [fileName substringToIndex:fileName.length - 4];
     }
+
     if (fileName && [fileName isKindOfClass:[NSString class]])
     {
         NSCharacterSet *invalidFsChars = [NSCharacterSet characterSetWithCharactersInString:@"/\\?%*|\"<>"];
@@ -222,26 +224,26 @@
     NSString *documentsPathWithNewFileName = nil;
 
     NSInteger i = 0;
-    
-    BOOL fileHasPDFExtention=NO;
-    
-    if ([[fileNameGiven substringFromIndex:fileNameGiven.length-4]isEqualToString:@".pdf"]) {
-        fileHasPDFExtention=YES;
+
+    BOOL fileHasPDFExtention = NO;
+
+    if (fileNameGiven && fileNameGiven.length>3 && [[fileNameGiven substringFromIndex:fileNameGiven.length - 4]isEqualToString:@".pdf"])
+    {
+        fileHasPDFExtention = YES;
     }
-    
+
     do
     {
         i++;
-        if (fileNameGiven && fileHasPDFExtention) {
-            
-            newFileName = [[fileNameGiven substringToIndex:fileNameGiven.length-4 ] stringByAppendingFormat:@"%i",i];
-
+        if (fileNameGiven && fileHasPDFExtention)
+        {
+            newFileName = [[fileNameGiven substringToIndex:fileNameGiven.length - 4 ] stringByAppendingFormat:@"%i",i];
         }
-        else{
-        
+        else
+        {
             newFileName = [fileNameGiven stringByAppendingFormat:@"%i",i];
-        
         }
+
         documentsPathWithNewFileName = [documentsPath stringByAppendingPathComponent:newFileName];
     }
     while ( [fileManager fileExistsAtPath:[documentsPathWithNewFileName stringByAppendingString:@".pdf"]]);

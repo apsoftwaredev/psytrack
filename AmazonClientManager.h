@@ -20,20 +20,19 @@
 #import <AWSiOSSDK/SQS/AmazonSQSClient.h>
 #import <AWSiOSSDK/SNS/AmazonSNSClient.h>
 
-
 #define ACCESS_KEY_ID                @"AKIAJQSJKX3M6UKHR3RA"
 #define SECRET_KEY                   @"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"
 
-@interface AmazonClientManager:NSObject {
+@interface AmazonClientManager : NSObject {
 }
 
-+(AmazonS3Client *)s3;
-+(AmazonSimpleDBClient *)sdb;
-+(AmazonSQSClient *)sqs;
-+(AmazonSNSClient *)sns;
++ (AmazonS3Client *) s3;
++ (AmazonSimpleDBClient *) sdb;
++ (AmazonSQSClient *) sqs;
++ (AmazonSNSClient *) sns;
 
-+(bool)hasCredentials;
-+(void)validateCredentials;
-+(void)clearCredentials;
++ (bool) hasCredentials;
++ (void) validateCredentials;
++ (void) clearCredentials;
 
 @end

@@ -13,15 +13,13 @@
 #import <AWSiOSSDK/AmazonServiceRequest.h>
 #import "AmazonClientManager.h"
 
-
 @class UIProgressView;
 @protocol UIDownloadBarDelegate;
 
 @interface UIDownloadBar : UIProgressView <AmazonServiceRequestDelegate>{
-    
     NSMutableData *receivedData;
     NSString *localFilename;
-   
+
     float bytesReceived_;
     long long expectedBytes;
 
@@ -33,19 +31,19 @@
     NSString *possibleFilename;
 
     float percentComplete;
-    
-    BOOL           isExecuting;
-    BOOL           isFinished;
-    
+
+    BOOL isExecuting;
+    BOOL isFinished;
+
     NSString *bucketName;
     NSString *keyName;
     S3GetObjectRequest *objectRequest;
-    
+
     AmazonS3Client *awsConnection;
     AmazonCredentials *credentials;
 }
 
-- (UIDownloadBar *) initWithSaveToFolderPath:(NSString *)localFolderPath progressBarFrame:(CGRect)frame timeout:(NSInteger)timeout delegate:(id)theDelegate  bucketNameGiven:(NSString *)bucketNameGiven remoteFileName:(NSString * )remoteFileName;
+- (UIDownloadBar *) initWithSaveToFolderPath:(NSString *)localFolderPath progressBarFrame:(CGRect)frame timeout:(NSInteger)timeout delegate:(id)theDelegate bucketNameGiven:(NSString *)bucketNameGiven remoteFileName:(NSString *)remoteFileName;
 
 @property (assign) BOOL operationIsOK;
 @property (assign) BOOL appendIfExist;
@@ -63,11 +61,10 @@
 
 - (void) forceContinue;
 
--(void)start;
+- (void) start;
 
--(AmazonS3Client *)getAWSConnection;
--(S3GetObjectRequest* )getObjectRequest;
-
+- (AmazonS3Client *) getAWSConnection;
+- (S3GetObjectRequest *) getObjectRequest;
 
 @end
 

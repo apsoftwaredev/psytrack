@@ -1,7 +1,7 @@
 /*
  *  CliniciansViewController_Shared.m
  *  psyTrack Clinician Tools
- *  Version: 1.0.6
+ *  Version: 1.5.1
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -148,9 +148,9 @@
         self.clinicianDef.keyPropertyName = @"lastName";
 
         /*
-          **************************************************************************************
+         **************************************************************************************
                 BEGIN Class Definition and attributes for the Degree Entity
-          **************************************************************************************
+         **************************************************************************************
          */
 
         SCEntityDefinition *degreeDef = [SCEntityDefinition definitionWithEntityName:@"DegreeEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"degree",@"majors", @"minors",
@@ -174,16 +174,16 @@
                                                                   displayDatePickerInDetailView:YES];
 
         /*
-          **************************************************************************************
+         **************************************************************************************
                 END of Class Definition and attributes for the Degree Entity
-          **************************************************************************************
+         **************************************************************************************
             will be used with degree name class.
          */
 
         /*
-          **************************************************************************************
+         **************************************************************************************
                 BEGIN Class Definition and attributes for the Degree Name Entity
-          **************************************************************************************
+         **************************************************************************************
          */
 
         SCEntityDefinition *degreeNameDef = [SCEntityDefinition definitionWithEntityName:@"DegreeNameEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"degreeName", @"notes",nil]];
@@ -214,12 +214,12 @@
         degreeNameNotesPropertyDef.type = SCPropertyTypeTextView;
 
         /*
-          **************************************************************************************
+         **************************************************************************************
                 END of Class Definition and attributes for the Degree Name Entity
-          **************************************************************************************
-          **************************************************************************************
+         **************************************************************************************
+         **************************************************************************************
                 BEGIN Class Definition and attributes for the Degree Majors Entity
-          **************************************************************************************
+         **************************************************************************************
          */
 
         SCEntityDefinition *degreeMajorDef = [SCEntityDefinition definitionWithEntityName:@"DegreeSubjectEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObject:@"subject"]];
@@ -247,12 +247,12 @@
 //
 //
         /*
-          **************************************************************************************
+         **************************************************************************************
                 END Class Definition and attributes for the Degree Majors Entity
-          **************************************************************************************
-          **************************************************************************************
+         **************************************************************************************
+         **************************************************************************************
                 BEGIN Class Definition and attributes for the Degree Minors Entity
-          **************************************************************************************
+         **************************************************************************************
          */
 
         SCEntityDefinition *degreeMinorDef = [SCEntityDefinition definitionWithEntityName:@"DegreeSubjectEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObject:@"subject"]];
@@ -278,12 +278,12 @@
         degreeMinorPropertyDef.type = SCPropertyTypeTextView;
 
         /*
-          **************************************************************************************
+         **************************************************************************************
                 END Class Definition and attributes for the Degree Minors Entity
-          **************************************************************************************
-          **************************************************************************************
+         **************************************************************************************
+         **************************************************************************************
                 BEGIN Class Definition and attributes for the School Entity
-          **************************************************************************************
+         **************************************************************************************
          */
 
         SCEntityDefinition *schoolNameDef = [SCEntityDefinition definitionWithEntityName:@"SchoolEntity" managedObjectContext:managedObjectContext propertyNames:[NSArray arrayWithObjects:@"schoolName", nil]];
@@ -873,9 +873,9 @@
 //    /*the client def will be used in the joined referral table */
 
         /*
-          **************************************************************************************
+         **************************************************************************************
                 Begin Class Definition and attributes for the Referral Entity
-          **************************************************************************************
+         **************************************************************************************
            one clinician can have many client referrals
          */
 
@@ -890,9 +890,9 @@
         [referralDef removePropertyDefinitionAtIndex:indexOfClientProperty];
 
         /*
-          **************************************************************************************
+         **************************************************************************************
                 BEGIN Class Definition and attributes for the Client Entity
-          **************************************************************************************
+         **************************************************************************************
          */
 
         //get the client setup from the clients View Controller Shared
@@ -910,9 +910,9 @@
         clientDataProperty.autoValidate = FALSE;
 
         /*
-          **************************************************************************************
+         **************************************************************************************
                 END of Class Definition and attributes for the Client Entity
-          **************************************************************************************
+         **************************************************************************************
          */
 
         //insert the custom property definition into the clientData class at index

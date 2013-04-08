@@ -1,7 +1,7 @@
 /*
  *  ClinicianRootViewController_iPad.m
  *  psyTrack Clinician Tools
- *  Version: 1.0.6
+ *  Version: 1.5.1
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -92,7 +92,7 @@
 {
     [super viewDidUnload];
 
-    self.cliniciansBarButtonItem =nil;
+    self.cliniciansBarButtonItem = nil;
     currentDetailTableViewModel_ = nil;
 
     if (personVCFromSelectionList)
@@ -380,7 +380,6 @@
 
 - (void) tableViewModel:(SCTableViewModel *)tableViewModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel
 {
-   
     if (tableViewModel.tag == 0 && ![detailTableViewModel.viewController isKindOfClass:[CliniciansDetailViewController_iPad class]])
     {
         addingClinician = YES;

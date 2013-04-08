@@ -1,7 +1,7 @@
 //
 //  ExistingHoursViewController.m
 //  PsyTrack Clinician Tools
-//  Version: 1.0.6
+//  Version: 1.5.1
 //
 //  Created by Daniel Boice on 3/29/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -1391,9 +1391,9 @@
             }
         }
 
-        NSString *cellTitleLastCharacter = [cell.textLabel.text substringFromIndex:cell.textLabel.text.length - 1 ];
+        NSString *cellTitleLastCharacter = cell.textLabel.text?[cell.textLabel.text substringFromIndex:cell.textLabel.text.length - 1 ]:nil;
 
-        if ([cell isKindOfClass:[SCObjectSelectionCell class]] && [cellTitleLastCharacter isEqualToString:@"*" ])
+        if ([cell isKindOfClass:[SCObjectSelectionCell class]] && cellTitleLastCharacter&&[cellTitleLastCharacter isEqualToString:@"*" ])
         {
             SCObjectSelectionCell *objectSelectionCell = (SCObjectSelectionCell *)cell;
 

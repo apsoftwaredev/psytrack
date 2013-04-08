@@ -12,7 +12,6 @@
 #import "PTTAppDelegate.h"
 #import <AWSiOSSDK/AmazonEndpoints.h>
 
-
 @implementation UIDownloadBar
 
 @synthesize receivedData,
@@ -35,22 +34,54 @@ bytesReceived = bytesReceived_;
     operationBreaked = NO;
 
     // Puts the file as an object in the bucket.
-    
+
     awsConnection = [self getAWSConnection];
 
-    objectRequest=[self getObjectRequest];
-    [objectRequest setRangeStart:bytesReceived_ rangeEnd:expectedBytes];
-    
-    
-    
-    
-   [awsConnection getObject: objectRequest];
+    objectRequest = [self getObjectRequest];
+     BOOL objExistsInBucket=NO;
+    if (awsConnection) {
+   
+    NSArray *objectsInBucket=[awsConnection listObjectsInBucket:bucketName];
+   
+    for (id obj in objectsInBucket) {
+        
+        
+        if ([obj isKindOfClass:[S3ObjectSummary class]]) {
+            
+            S3ObjectSummary *objSummary=(S3ObjectSummary *)obj;
+            
+            
+            NSString *objectStr=(NSString *)objSummary.key;
+            
+            if (objectStr&&keyName&&[objectStr isEqualToString:keyName]) {
+                objExistsInBucket=YES;
+                break;
+            }
+            
+            
+            
+        }
+        
+        
+    }
 
-
+    }
+    
+    if (!objExistsInBucket) {
+        [self request:(AmazonServiceRequest *)objectRequest didFailWithError:nil];
+        return;
+    }
+    else
+    if (objectRequest && awsConnection) {
+        [objectRequest setRangeStart:bytesReceived_ rangeEnd:expectedBytes];
+         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+        [awsConnection getObject:objectRequest];
+    }
+   
 }
 
 
-- (UIDownloadBar *) initWithSaveToFolderPath:(NSString *)localFolderPath progressBarFrame:(CGRect)frame timeout:(NSInteger)timeout delegate:(id)theDelegate  bucketNameGiven:(NSString *)bucketNameGiven remoteFileName:(NSString * )remoteFileName
+- (UIDownloadBar *) initWithSaveToFolderPath:(NSString *)localFolderPath progressBarFrame:(CGRect)frame timeout:(NSInteger)timeout delegate:(id)theDelegate bucketNameGiven:(NSString *)bucketNameGiven remoteFileName:(NSString *)remoteFileName
 {
     self = [super initWithFrame:frame];
     if (self)
@@ -58,12 +89,11 @@ bytesReceived = bytesReceived_;
         self.delegate = theDelegate;
         fileUrlPath = localFolderPath;
         isExecuting = NO;
-        isFinished  = NO;
-        
-        bucketName=bucketNameGiven;
-        keyName=remoteFileName;
-        
-        
+        isFinished = NO;
+
+        bucketName = bucketNameGiven;
+        keyName = remoteFileName;
+
         self.bytesReceived = percentComplete = 0;
 //        localFilename = [[[fileURL absoluteString] lastPathComponent] copy];
         receivedData = [[NSMutableData alloc] initWithLength:0];
@@ -76,23 +106,20 @@ bytesReceived = bytesReceived_;
 //        {
 //            [self.delegate downloadBar:self didFailWithError:[NSError errorWithDomain:@"UIDownloadBar Error" code:1 userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"NSURLConnection Failed", NSLocalizedDescriptionKey, nil]]];
 //        }
-        
-       
-    
-    
     }
 
     return self;
 }
--(void)initialize
+
+
+- (void) initialize
 {
-    self.hidden   = NO;
+    self.hidden = NO;
     self.progress = 0.0;
-    
-    
 }
 
--(void)start
+
+- (void) start
 {
     // Makes sure that start method always runs on the main thread.
     if (![NSThread isMainThread])
@@ -100,74 +127,105 @@ bytesReceived = bytesReceived_;
         [self performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:NO];
         return;
     }
-    
+
     [self willChangeValueForKey:@"isExecuting"];
     isExecuting = YES;
     [self didChangeValueForKey:@"isExecuting"];
-    
+
     [self performSelectorOnMainThread:@selector(initialize) withObject:nil waitUntilDone:NO];
-    
-   
+
     /********************************************/
-    
+
     awsConnection = [self getAWSConnection];
-    
-       
-       
+
     // Puts the file as an object in the bucket.
-   
-    DLog(@"aws connection list objects %@",awsConnection.listBuckets);
-  
+
     
-    
-    S3GetObjectRequest *downloadRequest = [[S3GetObjectRequest alloc] initWithKey:keyName withBucket: bucketName];
-    
-    downloadRequest.endpoint = @"https://s3.amazonaws.com";
-    
-    [downloadRequest setDelegate: self]; /* only needed for delegate (see below) */
-    S3GetObjectResponse *downloadResponse = [awsConnection getObject: downloadRequest];
-    
-    DLog(@"download response %i",downloadResponse.httpStatusCode);
-    
+
+    S3GetObjectRequest *downloadRequest = [self getObjectRequest];
+
+     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    if (downloadRequest) {
+        [awsConnection getObject:downloadRequest];
+
+    }
+
     
 }
--(AmazonS3Client *)getAWSConnection{
 
-    if (!credentials) {
-        
-        credentials = [[AmazonCredentials alloc] initWithAccessKey: ACCESS_KEY_ID withSecretKey: SECRET_KEY];
-    }
-    if (!awsConnection) {
-        awsConnection = [[AmazonS3Client alloc] initWithCredentials: credentials];
 
+- (AmazonS3Client *) getAWSConnection
+{
+    if (!credentials)
+    {
+        credentials = [[AmazonCredentials alloc] initWithAccessKey:ACCESS_KEY_ID withSecretKey:SECRET_KEY];
     }
-    
+
+    if (!awsConnection)
+    {
+        awsConnection = [[AmazonS3Client alloc] initWithCredentials:credentials];
+    }
+
     return awsConnection;
-
 }
 
--(S3GetObjectRequest* )getObjectRequest{
 
+- (S3GetObjectRequest *) getObjectRequest
+{
+   
+    if (!objectRequest)
+    {
+        
+        NSArray *objectsInBucket=[awsConnection listObjectsInBucket:bucketName];
+        BOOL objExistsInBucket=NO;
+        for (id obj in objectsInBucket) {
+            
+            
+            if ([obj isKindOfClass:[S3ObjectSummary class]]) {
+                
+                S3ObjectSummary *objSummary=(S3ObjectSummary *)obj;
+                
+                
+                NSString *objectStr=(NSString *)objSummary.key;
+                
+                if (objectStr&&keyName&&[objectStr isEqualToString:keyName]) {
+                    objExistsInBucket=YES;
+                    break;
+                }
+                
+                
+                
+            }
+            
+            
+        }
 
-    if (!objectRequest) {
-        objectRequest= [[S3GetObjectRequest alloc] initWithKey:keyName withBucket: bucketName];
-        objectRequest.endpoint = @"https://s3.amazonaws.com";
-        [objectRequest setDelegate: self];
+        
+        if (objExistsInBucket) {
+            objectRequest = [[S3GetObjectRequest alloc] initWithKey:keyName withBucket:bucketName];
+            objectRequest.endpoint = @"https://s3.amazonaws.com";
+            [objectRequest setDelegate:self];
+        }
+       
     }
-    
+
     return objectRequest;
 }
--(BOOL)isConcurrent
+
+
+- (BOOL) isConcurrent
 {
     return YES;
 }
 
--(BOOL)isExecuting
+
+- (BOOL) isExecuting
 {
     return isExecuting;
 }
 
--(BOOL)isFinished
+
+- (BOOL) isFinished
 {
     return isFinished;
 }
@@ -175,18 +233,16 @@ bytesReceived = bytesReceived_;
 
 #pragma mark - AmazonServiceRequestDelegate Implementations
 
--(void)request:(AmazonServiceRequest *)request didCompleteWithResponse:(AmazonServiceResponse *)response
+- (void) request:(AmazonServiceRequest *)request didCompleteWithResponse:(AmazonServiceResponse *)response
 {
-    
     [self.delegate downloadBar:self didFinishWithData:self.receivedData suggestedFilename:localFilename];
     operationFinished = YES;
     //NSLog(@"Connection did finish loading...%@",localFilename);
-    
-   
 
-    
     [self finish];
 }
+
+
 - (void) request:(AmazonServiceRequest *)request didReceiveResponse:(NSURLResponse *)response
 {
     //NSLog(@"[DO::didReceiveData] %d operation", (int)self);
@@ -194,7 +250,7 @@ bytesReceived = bytesReceived_;
     //		  (float)bytesReceived_,
     //		  (float)expectedBytes,
     //		  (float)bytesReceived_ / (float)expectedBytes);
-    
+
     NSHTTPURLResponse *r = (NSHTTPURLResponse *)response;
     NSDictionary *headers = [r allHeaderFields];
     //NSLog(@"[DO::didReceiveResponse] response headers: %@", headers);
@@ -204,9 +260,13 @@ bytesReceived = bytesReceived_;
         {
             NSString *contentRange = [headers objectForKey:@"Content-Range"];
             //NSLog(@"Content-Range: %@", contentRange);
+           
             NSRange range = [contentRange rangeOfString:@"/"];
-            NSString *totalBytesCount = [contentRange substringFromIndex:range.location + 1];
-            expectedBytes = [totalBytesCount floatValue];
+            if (range.location!=NSNotFound) {
+            
+                NSString *totalBytesCount = [contentRange substringFromIndex:range.location + 1];
+                expectedBytes = [totalBytesCount floatValue];
+            }
         }
         else if ([headers objectForKey:@"Content-Length"])
         {
@@ -217,7 +277,7 @@ bytesReceived = bytesReceived_;
         {
             expectedBytes = -1;
         }
-        
+
         if ([@"Identity" isEqualToString :[headers objectForKey:@"Transfer-Encoding"]])
         {
             expectedBytes = bytesReceived_;
@@ -227,39 +287,33 @@ bytesReceived = bytesReceived_;
 }
 
 
-
--(void)request:(AmazonServiceRequest *)request didReceiveData:(NSData *)data
+- (void) request:(AmazonServiceRequest *)request didReceiveData:(NSData *)data
 {
     // The progress bar for downlaod is just an estimate. In order to accurately reflect the progress bar, you need to first retrieve the file size.
     if (!operationBreaked)
     {
         [self.receivedData appendData:data];
-        
+
         float receivedLen = [data length];
         self.bytesReceived = (bytesReceived_ + receivedLen);
-        
+
         if (expectedBytes != NSURLResponseUnknownLength)
         {
-        
-             dispatch_async(dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
 //                 [self updateProgressView:[NSNumber numberWithFloat:(float)[data length] / 150 / 1024] ];
 
-                 self.progress=( (bytesReceived_ / (float)expectedBytes) * 100 ) / 100;
-                
-                 percentComplete = self.progress  *100;
-                 
-            
-                  [self.delegate downloadBarUpdated:self]; 
-             });
-            
-            
-            
-            
+                               self.progress = ( (bytesReceived_ / (float)expectedBytes) * 100 ) / 100;
+
+                               percentComplete = self.progress * 100;
+
+                               [self.delegate downloadBarUpdated:self];
+                           }
+
+
+                           );
         }
-        
+
         ////NSLog(@" Data receiving... Percent complete: %f", percentComplete);
-        
-       
     }
     else
     {
@@ -269,55 +323,58 @@ bytesReceived = bytesReceived_;
         //
         //        [appDelegate displayNotification: @"Download stopped" forDuration:3.0 location:kPTTScreenLocationTop inView:nil];
     }
-
 }
 
--(void)request:(AmazonServiceRequest *)request didFailWithError:(NSError *)error
+
+- (void) request:(AmazonServiceRequest *)request didFailWithError:(NSError *)error
 {
     [self.delegate downloadBar:self didFailWithError:error];
     operationFailed = YES;
-    
+
     [self finish];
+     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
--(void)request:(AmazonServiceRequest *)request didFailWithServiceException:(NSException *)exception
+
+- (void) request:(AmazonServiceRequest *)request didFailWithServiceException:(NSException *)exception
 {
-    NSLog(@"%@", exception);
-    
+    DLog(@"%@", exception);
+
+    [self.delegate downloadBar:self didFailWithError:nil];
     [self finish];
-}
+    
+    }
+
 
 #pragma mark - Helper Methods
 
--(void)finish
+- (void) finish
 {
     [self willChangeValueForKey:@"isExecuting"];
     [self willChangeValueForKey:@"isFinished"];
-    
+
     isExecuting = NO;
-    isFinished  = YES;
-    
+    isFinished = YES;
+
     [self didChangeValueForKey:@"isExecuting"];
     [self didChangeValueForKey:@"isFinished"];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+
+    
 }
 
 
-
--(void)hideProgressView
+- (void) hideProgressView
 {
     self.hidden = YES;
 }
 
 
-
-
-
 - (void) dealloc
 {
-   
     receivedData = nil;
     localFilename = nil;
-   
+
     fileUrlPath = nil;
     possibleFilename = nil;
 }

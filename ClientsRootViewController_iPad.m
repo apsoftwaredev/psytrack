@@ -1,7 +1,7 @@
 /*
  *  ClientRootViewController_iPad.m
  *  psyTrack Clinician Tools
- *  Version: 1.0.6
+ *  Version: 1.5.1
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -27,7 +27,7 @@
 
 @implementation ClientsRootViewController_iPad
 @synthesize managedObjectContext = _managedObjectContext;
-@synthesize clientsBarButtonItem= clientsBarButtonItem_;
+@synthesize clientsBarButtonItem = clientsBarButtonItem_;
 @synthesize searchBar;
 @synthesize totalClientsLabel;
 
@@ -37,8 +37,8 @@
 - (void) viewDidUnload
 {
     [super viewDidUnload];
-    
-    self.clientsBarButtonItem =nil;
+
+    self.clientsBarButtonItem = nil;
 }
 
 

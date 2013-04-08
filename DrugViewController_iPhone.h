@@ -1,7 +1,7 @@
 /*
  *  DrugViewController_iPhone.h
  *  psyTrack Clinician Tools
- *  Version: 1.0.6
+ *  Version: 1.5.1
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -21,7 +21,9 @@
 #import "UIDownloadBar.h"
 #import "DrugNameObjectSelectionCell.h"
 #import "DrugProductEntity.h"
-@interface DrugViewController_iPhone : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, UIDownloadBarDelegate,UISearchBarDelegate > {
+#import <AWSiOSSDK/AmazonServiceRequest.h>
+
+@interface DrugViewController_iPhone : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, UIDownloadBarDelegate,UISearchBarDelegate,AmazonServiceRequestDelegate> {
     SCArrayOfObjectsModel *objectsModel;
 
     UISearchBar *searchBar;
@@ -56,9 +58,18 @@
 
     NSURLRequest *drugFileRequest;
     NSURLConnection *connectionToDrugFile;
-    
+
     NSString *remoteFileETag;
 
+    BOOL isExecuting;
+    BOOL isFinished;
+    BOOL operationFinished, operationFailed, operationBreaked;
+    NSString *bucketName;
+    NSString *keyName;
+    S3GetObjectRequest *objectRequest;
+
+    AmazonS3Client *awsConnection;
+    AmazonCredentials *credentials;
 }
 
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;

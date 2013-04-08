@@ -1,7 +1,7 @@
 //
 //  ServicesViewController_Shared.m
 //  PsyTrack Clinician Tools
-//  Version: 1.0.6
+//  Version: 1.5.1
 //
 //  Created by Daniel Boice on 4/5/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -524,9 +524,9 @@
     [timeTrackEntityDef insertPropertyDefinition:clinicianDataProperty atIndex:1];
 
     /*
-      **************************************************************************************
+     **************************************************************************************
         END of Class Definition and attributes for the Client Entity
-      **************************************************************************************
+     **************************************************************************************
      */
 
     SCPropertyDefinition *clientsPropertyDef = [timeTrackEntityDef propertyDefinitionWithName:@"clients"];
@@ -630,9 +630,9 @@
 
             [clientsEntityDefinition removePropertyDefinitionWithName:@"supportActivityDelivered"];
             /*
-              **************************************************************************************
+             **************************************************************************************
                 BEGIN Class Definition and attributes for the Client Entity
-              **************************************************************************************
+             **************************************************************************************
              */
 
             //get the client setup from the clients View Controller Shared
@@ -654,10 +654,10 @@
             [clientsEntityDefinition insertPropertyDefinition:clientDataProperty atIndex:0];
 
             /*
-              **************************************************************************************
+             **************************************************************************************
                 END of Class Definition and attributes for the Client Entity
-              **************************************************************************************
-              the client def will be used in the joined clientPresentations table
+             **************************************************************************************
+               the client def will be used in the joined clientPresentations table
              */
 
             //Create the property definition for the notes property in the clientPresentation class
@@ -1521,22 +1521,22 @@
                             @try
                             {
                                 [[NSNotificationCenter defaultCenter]
-                             addObserver:self
-                                selector:@selector(stopwatchUpdated:)
-                                    name:@"addStopwatchChanged"
-                                  object:nil];
+                                 addObserver:self
+                                    selector:@selector(stopwatchUpdated:)
+                                        name:@"addStopwatchChanged"
+                                      object:nil];
 
                                 [[NSNotificationCenter defaultCenter]
-                             addObserver:self
-                                selector:@selector(stopwatchReset:)
-                                    name:@"stopwatchResetButtonTapped"
-                                  object:nil];
+                                 addObserver:self
+                                    selector:@selector(stopwatchReset:)
+                                        name:@"stopwatchResetButtonTapped"
+                                      object:nil];
 
                                 [[NSNotificationCenter defaultCenter]
-                             addObserver:self
-                                selector:@selector(stopwatchStop:)
-                                    name:@"stopwatchStopButtonTapped"
-                                  object:nil];
+                                 addObserver:self
+                                    selector:@selector(stopwatchStop:)
+                                        name:@"stopwatchStopButtonTapped"
+                                      object:nil];
                             }
                             @catch (NSException *exception)
                             {

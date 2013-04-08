@@ -18,53 +18,57 @@
 #import <AWSiOSSDK/AmazonLogger.h>
 #import <AWSiOSSDK/AmazonEndpoints.h>
 
-
-static AmazonS3Client       *s3  = nil;
+static AmazonS3Client *s3 = nil;
 static AmazonSimpleDBClient *sdb = nil;
-static AmazonSQSClient      *sqs = nil;
-static AmazonSNSClient      *sns = nil;
+static AmazonSQSClient *sqs = nil;
+static AmazonSNSClient *sns = nil;
 
 @implementation AmazonClientManager
 
-
-+(AmazonS3Client *)s3
++ (AmazonS3Client *) s3
 {
     [AmazonClientManager validateCredentials];
     return s3;
 }
 
-+(AmazonSimpleDBClient *)sdb
+
++ (AmazonSimpleDBClient *) sdb
 {
     [AmazonClientManager validateCredentials];
     return sdb;
 }
 
-+(AmazonSQSClient *)sqs
+
++ (AmazonSQSClient *) sqs
 {
     [AmazonClientManager validateCredentials];
     return sqs;
 }
 
-+(AmazonSNSClient *)sns
+
++ (AmazonSNSClient *) sns
 {
     [AmazonClientManager validateCredentials];
     return sns;
 }
 
-+(bool)hasCredentials
+
++ (bool) hasCredentials
 {
-    return  YES;
+    return YES;
 //    return (![ACCESS_KEY_ID isEqualToString:@"CHANGE ME"] && ![SECRET_KEY isEqualToString:@"CHANGE ME"]);
 }
 
-+(void)validateCredentials
+
++ (void) validateCredentials
 {
-    if ((sdb == nil) || (s3 == nil) || (sqs == nil) || (sns == nil)) {
+    if ( (sdb == nil) || (s3 == nil) || (sqs == nil) || (sns == nil) )
+    {
         [AmazonClientManager clearCredentials];
 
-        s3  = [[AmazonS3Client alloc] initWithAccessKey:ACCESS_KEY_ID withSecretKey:SECRET_KEY];
+        s3 = [[AmazonS3Client alloc] initWithAccessKey:ACCESS_KEY_ID withSecretKey:SECRET_KEY];
         s3.endpoint = [AmazonEndpoints s3Endpoint:US_WEST_2];
-        
+
         sdb = [[AmazonSimpleDBClient alloc] initWithAccessKey:ACCESS_KEY_ID withSecretKey:SECRET_KEY];
         sdb.endpoint = [AmazonEndpoints sdbEndpoint:US_WEST_2];
 
@@ -76,11 +80,10 @@ static AmazonSNSClient      *sns = nil;
     }
 }
 
-+(void)clearCredentials
-{
- 
 
-    s3  = nil;
++ (void) clearCredentials
+{
+    s3 = nil;
     sdb = nil;
     sqs = nil;
     sns = nil;
