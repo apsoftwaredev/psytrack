@@ -18,6 +18,7 @@
 
     BOOL markAmended;
     CGFloat currentOffsetY;
+    NSInteger pageNumber;
 }
 
 @property (nonatomic,strong)  SCTableViewModel *interventionTableViewModel;

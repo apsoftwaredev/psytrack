@@ -233,7 +233,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
 - (void) scrollToNextPage
 {
     UIScrollView *mainScrollView = self.mainPageScrollView;
-
+    pageNumber++;
     if ( (self.containerForSignaturesAndSupervisorSummaries.frame.origin.y + self.containerForSignaturesAndSupervisorSummaries.frame.size.height) <= (MAX_MAIN_SCROLLVIEW_HEIGHT + currentOffsetY) )
     {
         @try
@@ -253,7 +253,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
     else
     {
         CGRect mainScrollViewFrame = self.mainPageScrollView.frame;
-
+        
         if (mainScrollViewFrame.size.height < currentOffsetY + MAX_MAIN_SCROLLVIEW_HEIGHT)
         {
             CGFloat mainScrollVieFrameHeightPlusY = MAX_MAIN_SCROLLVIEW_HEIGHT - self.mainPageScrollView.frame.size.height;
@@ -291,7 +291,8 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
             [self.mainPageScrollView setContentOffset:CGPointMake(0, mainScrollView.frame.size.height + currentOffsetY )];
             currentOffsetY = currentOffsetY + mainScrollView.frame.size.height;
         }
-
+        if (pageNumber==1) {
+       
         if (self.overallHoursFooter.frame.size.height + self.overallHoursFooter.frame.origin.y > MAX_MAIN_SCROLLVIEW_HEIGHT + currentOffsetY && self.overallHoursFooter.frame.origin.y < MAX_MAIN_SCROLLVIEW_HEIGHT + currentOffsetY)
         {
             CGRect overallHoursFooterFrame = self.overallHoursFooter.frame;
@@ -302,7 +303,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
             containerForSignaturesAndSupervisiorSummariesFrame.origin.y = overallHoursFooterFrame.origin.y + overallHoursFooterFrame.size.height + 10;
             self.containerForSignaturesAndSupervisorSummaries.frame = containerForSignaturesAndSupervisiorSummariesFrame;
         }
-
+        else  {
         CGFloat paddAdditonalY = 0;
 
         for (NSInteger i = 0; i < self.containerForSignaturesAndSupervisorSummaries.subviews.count; i++)
@@ -317,28 +318,51 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
                 contatinerForTableViewsFrame.size.height = contatinerForTableViewsFrame.size.height + paddAdditonalY * (self.containerForSignaturesAndSupervisorSummaries.subviews.count);
                 self.subTablesContainerView.transform = CGAffineTransformIdentity;
                 self.subTablesContainerView.frame = contatinerForTableViewsFrame;
-
                 CGRect containerForSignaturesAndSupervisorSummariesFrame = self.containerForSignaturesAndSupervisorSummaries.frame;
-
+                
                 self.containerForSignaturesAndSupervisorSummaries.transform = CGAffineTransformIdentity;
-
+                
                 containerForSignaturesAndSupervisorSummariesFrame.size.height = containerForSignaturesAndSupervisorSummariesFrame.size.height + paddAdditonalY;
-
+                
                 self.containerForSignaturesAndSupervisorSummaries.frame = containerForSignaturesAndSupervisorSummariesFrame;
+                
                 subviewFrame.origin.y = subviewFrame.origin.y + paddAdditonalY;
                 subview.transform = CGAffineTransformIdentity;
                 subview.frame = subviewFrame;
-
-                for (NSInteger p = i + 1; p < self.containerForSignaturesAndSupervisorSummaries.subviews.count; p++)
+                CGFloat subviewHeight=subviewFrame.size.height;
+                UIView *firstSubview = [self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:0];
+                int p=0;
+                for ( UIView *nextSubview in self.containerForSignaturesAndSupervisorSummaries.subviews )
                 {
-                    UIView *nextSubview = [self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:p];
+                    
+                    if (p!=0) {
+                        
+                        
 
                     CGRect nextSubviewFrame = nextSubview.frame;
-                    nextSubviewFrame.origin.y = nextSubviewFrame.origin.y + paddAdditonalY;
+                    nextSubviewFrame.origin.y = firstSubview.frame.origin.y +(subviewHeight*p);
                     nextSubview.transform = CGAffineTransformIdentity;
                     nextSubview.frame = nextSubviewFrame;
-                    paddAdditonalY = paddAdditonalY + nextSubviewFrame.origin.y + nextSubviewFrame.size.height;
+                    
+                        if (p==self.containerForSignaturesAndSupervisorSummaries.subviews.count-2) {
+                            
+                            CGRect signaturesFrame = self.signaturesView.frame;
+                            signaturesFrame.origin.y = firstSubview.frame.origin.y +(subviewHeight*(p+1));
+                            self.signaturesView.transform = CGAffineTransformIdentity;
+                            self.signaturesView.frame = signaturesFrame;
+                            
+                                                    }
+                    
+                    }
+                    
+                    
+                    
+
+                p++;
                 }
+            
+                
+                
             }
         }
 
@@ -355,19 +379,91 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
 
         supportTableViewFrame.size.height = supportTVSize.height;
         self.supportActivitieTypesTableView.frame = supportTableViewFrame;
-
-        CGRect signaturesViewFrame = self.signaturesView.frame;
-        signaturesViewFrame.origin.y = self.containerForSignaturesAndSupervisorSummaries.frame.size.height - signaturesViewFrame.size.height;
-
-        self.signaturesView.frame = signaturesViewFrame;
+        }
+//        CGRect signaturesViewFrame = self.signaturesView.frame;
+//        signaturesViewFrame.origin.y = self.containerForSignaturesAndSupervisorSummaries.frame.size.height - signaturesViewFrame.size.height;
+//
+//        self.signaturesView.frame = signaturesViewFrame;
     }
-
+    }
     //    CGRect  mainPageScrollViewFrame=mainPageScrollView.frame;
     //    mainPageScrollViewFrame.size.height=MAX_MAIN_SCROLLVIEW_HEIGHT;
     //    mainScrollView.frame=mainPageScrollViewFrame;
 }
 
+-(void)arrangeViewsToFitOnPages{
 
+
+    CGRect interventionTableViewFrame = self.interventionTypesTableView.frame;
+    
+    CGSize interventionTVSize = [self interventionTableViewContentSize];
+    
+    interventionTableViewFrame.size.height = interventionTVSize.height;
+    
+    
+    
+    CGRect assessmentsTableViewFrame = self.assessmentTypesTableView.frame;
+    
+    CGSize assessmentsTVSize = [self assessmentTypesTableViewContentSize];
+    
+    assessmentsTableViewFrame.size.height = assessmentsTVSize.height;
+    
+    
+    CGRect supervisionTableViewFrame = self.supervisionReceivedTypesTableView.frame;
+    
+    CGSize supervisionTVSize = [self supervisionTypesTableViewContentSize];
+    
+    supervisionTableViewFrame.size.height = supervisionTVSize.height;
+    
+    
+    CGRect supportTableViewFrame = self.supportActivitieTypesTableView.frame;
+    
+    CGSize supportTVSize = [self supportTypesTableViewContentSize];
+    
+    supportTableViewFrame.size.height = supportTVSize.height;
+   
+    CGRect indirectHoursHeaderFrame = self.indirectHoursHeader.frame;
+    CGRect directHoursFooterFrame = self.directHoursFooter.frame;
+    CGRect overallHoursFooterFrame = self.overallHoursFooter.frame;
+    CGRect containerForSummariesAndSignaturesFrame = self.containerForSignaturesAndSupervisorSummaries.frame;
+    CGRect mainScrolviewFrame=self.mainPageScrollView.frame;
+   
+    CGFloat heightOfContainerForSupSumAndSig=0;
+    if (self.containerForSignaturesAndSupervisorSummaries.subviews.count) {
+        for (UIView *subview in self.containerForSignaturesAndSupervisorSummaries.subviews) {
+            heightOfContainerForSupSumAndSig=heightOfContainerForSupSumAndSig+subview.frame.size.height;
+            heightOfContainerForSupSumAndSig=heightOfContainerForSupSumAndSig+5;
+        }
+    
+    }
+    containerForSummariesAndSignaturesFrame.size.height=heightOfContainerForSupSumAndSig;
+    
+    
+    
+    CGFloat maxH=MAX_MAIN_SCROLLVIEW_HEIGHT;
+    
+    CGFloat totalPageElementHeight=0;
+    NSMutableArray *elementsArray=[NSArray arrayWithObjects:self.interventionTypesTableView, self.assessmentTypesTableView, self.directHoursFooter ,self.supportActivitieTypesTableView, self.supervisionReceivedTypesTableView, self.overallHoursFooter, self.containerForSignaturesAndSupervisorSummaries, nil];
+    
+    
+    
+    
+    
+    
+    
+    self.overallHoursFooter.frame=overallHoursFooterFrame;
+    self.containerForSignaturesAndSupervisorSummaries.frame=containerForSummariesAndSignaturesFrame;
+    self.directHoursFooter.frame=directHoursFooterFrame;
+    self.interventionTypesTableView.frame = interventionTableViewFrame;
+    self.assessmentTypesTableView.frame = assessmentsTableViewFrame;
+    self.supervisionReceivedTypesTableView.frame = supervisionTableViewFrame;
+    self.supportActivitieTypesTableView.frame = supportTableViewFrame;
+
+
+
+
+
+}
 - (void) loadBindingsIntoCustomControls
 {
     [super loadBindingsIntoCustomControls];

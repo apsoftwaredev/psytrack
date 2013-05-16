@@ -3083,7 +3083,9 @@
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1379"
-         endingLineNumber = "1379">
+         endingLineNumber = "1379"
+         landmarkName = "-assessmentTypesTableViewContentSize"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -8873,7 +8875,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "466"
          endingLineNumber = "466"
-         landmarkName = "-loadBindingsIntoCustomControls"
+         landmarkName = "-arrangeViewsToFitOnPages"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
