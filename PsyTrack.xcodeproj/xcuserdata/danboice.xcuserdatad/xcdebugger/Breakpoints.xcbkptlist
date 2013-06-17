@@ -3180,8 +3180,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1274"
          endingLineNumber = "1274"
-         landmarkName = "-loadBindingsIntoCustomControls"
-         landmarkType = "5">
+         landmarkName = "@implementation AllHoursReportTopCell"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

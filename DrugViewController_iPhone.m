@@ -756,7 +756,7 @@
 
         self.connectingToFile = YES;
         // Create a URL Request and set the URL
-        NSURL *url = [NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"];
+        NSURL *url = [NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/96148802/pt/testPtData.zpk"];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         [request setHTTPMethod:@"HEAD"];
         // Display the network activity indicator
@@ -795,7 +795,7 @@
 //                                                  self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/dFile-001.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
 //                                                                                                timeout:15
 //                                                                                               delegate:self];
-                                                  self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"http://dl.dropbox.com/u/96148802/pt/testPtData.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
+                                                  self.downloadBar = [[UIDownloadBar alloc] initWithURL:[NSURL URLWithString:@"https://dl.dropboxusercontent.com/u/96148802/pt/testPtData.zpk"] saveToFolderPath:[appDelegate applicationDrugsPathString] progressBarFrame:frame
                                                                                                 timeout:15
                                                                                                delegate:self];
 

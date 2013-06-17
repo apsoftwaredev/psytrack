@@ -169,6 +169,15 @@
 		B7F877BC14C9A38900F00C0D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877BA14C9A38900F00C0D /* EventKitUI.framework */; };
 		E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */; };
 		E70FACEE1697154C00E14F03 /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E70FACED1697154C00E14F03 /* psyTrack.sqlite */; };
+		E7143DD2176E84F900545E0F /* AppDoc.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7143DC9176E84F900545E0F /* AppDoc.txt */; };
+		E7143DD3176E84F900545E0F /* AppDocType_Lookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7143DCA176E84F900545E0F /* AppDocType_Lookup.txt */; };
+		E7143DD4176E84F900545E0F /* application.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7143DCB176E84F900545E0F /* application.txt */; };
+		E7143DD5176E84F900545E0F /* ChemTypeLookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7143DCC176E84F900545E0F /* ChemTypeLookup.txt */; };
+		E7143DD6176E84F900545E0F /* DocType_lookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7143DCD176E84F900545E0F /* DocType_lookup.txt */; };
+		E7143DD7176E84F900545E0F /* Product.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7143DCE176E84F900545E0F /* Product.txt */; };
+		E7143DD8176E84F900545E0F /* Product_tecode.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7143DCF176E84F900545E0F /* Product_tecode.txt */; };
+		E7143DD9176E84F900545E0F /* RegActionDate.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7143DD0176E84F900545E0F /* RegActionDate.txt */; };
+		E7143DDA176E84F900545E0F /* ReviewClass_Lookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7143DD1176E84F900545E0F /* ReviewClass_Lookup.txt */; };
 		E719562515FFADB60070E61D /* DTAboutViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = E71955F715FFADB60070E61D /* DTAboutViewController.strings */; };
 		E719562615FFADB60070E61D /* DTAboutViewController-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E71955F915FFADB60070E61D /* DTAboutViewController-Info.plist */; };
 		E719562715FFADB60070E61D /* UIButtonBarArrowDownSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = E71955FB15FFADB60070E61D /* UIButtonBarArrowDownSmall.png */; };
@@ -505,15 +514,6 @@
 		E7C6871E15D613C600637BCE /* CoursesTakenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7C6871C15D613C600637BCE /* CoursesTakenViewController.xib */; };
 		E7C829A416FF8FA6004EEC0C /* TabFile.h in Headers */ = {isa = PBXBuildFile; fileRef = E7C829A216FF8FA6004EEC0C /* TabFile.h */; };
 		E7C829A516FF8FA6004EEC0C /* TabFile.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C829A316FF8FA6004EEC0C /* TabFile.m */; };
-		E7CA8B1317136C6C00134283 /* AppDoc.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7CA8B0A17136C6B00134283 /* AppDoc.txt */; };
-		E7CA8B1417136C6C00134283 /* AppDocType_Lookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7CA8B0B17136C6B00134283 /* AppDocType_Lookup.txt */; };
-		E7CA8B1617136C6C00134283 /* ChemTypeLookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7CA8B0D17136C6B00134283 /* ChemTypeLookup.txt */; };
-		E7CA8B1717136C6C00134283 /* DocType_lookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7CA8B0E17136C6B00134283 /* DocType_lookup.txt */; };
-		E7CA8B1817136C6C00134283 /* Product.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7CA8B0F17136C6C00134283 /* Product.txt */; };
-		E7CA8B1917136C6C00134283 /* Product_tecode.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7CA8B1017136C6C00134283 /* Product_tecode.txt */; };
-		E7CA8B1A17136C6C00134283 /* RegActionDate.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7CA8B1117136C6C00134283 /* RegActionDate.txt */; };
-		E7CA8B1B17136C6C00134283 /* ReviewClass_Lookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7CA8B1217136C6C00134283 /* ReviewClass_Lookup.txt */; };
-		E7CA8B1D17136C9E00134283 /* Application.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7CA8B1C17136C9E00134283 /* Application.txt */; };
 		E7CCB8B1159A9AD200A12908 /* MonthlyPracticumLogBottonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CCB8B0159A9AD200A12908 /* MonthlyPracticumLogBottonCell.m */; };
 		E7CCB8B3159A9B0100A12908 /* MonthlyPracticumLogBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8B2159A9B0100A12908 /* MonthlyPracticumLogBottomCell.xib */; };
 		E7CCB8D1159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7CCB8D0159B945300A12908 /* MonthlyPracticumLogTopCellWithUndefined.xib */; };
@@ -842,6 +842,15 @@
 		E70B9EFD15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSourcesSCObjectSelectionCell.h; sourceTree = "<group>"; };
 		E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSourcesSCObjectSelectionCell.m; sourceTree = "<group>"; };
 		E70FACED1697154C00E14F03 /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = psyTrack.sqlite; path = ../../Desktop/psyTrack.sqlite; sourceTree = "<group>"; };
+		E7143DC9176E84F900545E0F /* AppDoc.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = AppDoc.txt; path = "../../Downloads/drugsatfda-1 2/processed/AppDoc.txt"; sourceTree = "<group>"; };
+		E7143DCA176E84F900545E0F /* AppDocType_Lookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = AppDocType_Lookup.txt; path = "../../Downloads/drugsatfda-1 2/processed/AppDocType_Lookup.txt"; sourceTree = "<group>"; };
+		E7143DCB176E84F900545E0F /* application.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = application.txt; path = "../../Downloads/drugsatfda-1 2/processed/application.txt"; sourceTree = "<group>"; };
+		E7143DCC176E84F900545E0F /* ChemTypeLookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ChemTypeLookup.txt; path = "../../Downloads/drugsatfda-1 2/processed/ChemTypeLookup.txt"; sourceTree = "<group>"; };
+		E7143DCD176E84F900545E0F /* DocType_lookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = DocType_lookup.txt; path = "../../Downloads/drugsatfda-1 2/processed/DocType_lookup.txt"; sourceTree = "<group>"; };
+		E7143DCE176E84F900545E0F /* Product.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Product.txt; path = "../../Downloads/drugsatfda-1 2/processed/Product.txt"; sourceTree = "<group>"; };
+		E7143DCF176E84F900545E0F /* Product_tecode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Product_tecode.txt; path = "../../Downloads/drugsatfda-1 2/processed/Product_tecode.txt"; sourceTree = "<group>"; };
+		E7143DD0176E84F900545E0F /* RegActionDate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = RegActionDate.txt; path = "../../Downloads/drugsatfda-1 2/processed/RegActionDate.txt"; sourceTree = "<group>"; };
+		E7143DD1176E84F900545E0F /* ReviewClass_Lookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ReviewClass_Lookup.txt; path = "../../Downloads/drugsatfda-1 2/processed/ReviewClass_Lookup.txt"; sourceTree = "<group>"; };
 		E71955F515FFADB60070E61D /* DTAboutViewController-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTAboutViewController-Prefix.pch"; sourceTree = "<group>"; };
 		E71955F815FFADB60070E61D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/DTAboutViewController.strings; sourceTree = "<group>"; };
 		E71955F915FFADB60070E61D /* DTAboutViewController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DTAboutViewController-Info.plist"; sourceTree = "<group>"; };
@@ -1408,15 +1417,6 @@
 		E7C6871C15D613C600637BCE /* CoursesTakenViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoursesTakenViewController.xib; sourceTree = "<group>"; };
 		E7C829A216FF8FA6004EEC0C /* TabFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabFile.h; sourceTree = "<group>"; };
 		E7C829A316FF8FA6004EEC0C /* TabFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabFile.m; sourceTree = "<group>"; };
-		E7CA8B0A17136C6B00134283 /* AppDoc.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = AppDoc.txt; path = "../../Downloads/drugsatfda-3/processed/AppDoc.txt"; sourceTree = "<group>"; };
-		E7CA8B0B17136C6B00134283 /* AppDocType_Lookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = AppDocType_Lookup.txt; path = "../../Downloads/drugsatfda-3/processed/AppDocType_Lookup.txt"; sourceTree = "<group>"; };
-		E7CA8B0D17136C6B00134283 /* ChemTypeLookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ChemTypeLookup.txt; path = "../../Downloads/drugsatfda-3/processed/ChemTypeLookup.txt"; sourceTree = "<group>"; };
-		E7CA8B0E17136C6B00134283 /* DocType_lookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = DocType_lookup.txt; path = "../../Downloads/drugsatfda-3/processed/DocType_lookup.txt"; sourceTree = "<group>"; };
-		E7CA8B0F17136C6C00134283 /* Product.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Product.txt; path = "../../Downloads/drugsatfda-3/processed/Product.txt"; sourceTree = "<group>"; };
-		E7CA8B1017136C6C00134283 /* Product_tecode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Product_tecode.txt; path = "../../Downloads/drugsatfda-3/processed/Product_tecode.txt"; sourceTree = "<group>"; };
-		E7CA8B1117136C6C00134283 /* RegActionDate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = RegActionDate.txt; path = "../../Downloads/drugsatfda-3/processed/RegActionDate.txt"; sourceTree = "<group>"; };
-		E7CA8B1217136C6C00134283 /* ReviewClass_Lookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ReviewClass_Lookup.txt; path = "../../Downloads/drugsatfda-3/processed/ReviewClass_Lookup.txt"; sourceTree = "<group>"; };
-		E7CA8B1C17136C9E00134283 /* Application.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Application.txt; path = "../../Downloads/drugsatfda-3/processed/Application.txt"; sourceTree = "<group>"; };
 		E7CCB8AF159A9AD100A12908 /* MonthlyPracticumLogBottonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthlyPracticumLogBottonCell.h; sourceTree = "<group>"; };
 		E7CCB8B0159A9AD200A12908 /* MonthlyPracticumLogBottonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MonthlyPracticumLogBottonCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7CCB8B2159A9B0100A12908 /* MonthlyPracticumLogBottomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogBottomCell.xib; sourceTree = "<group>"; };
@@ -2107,15 +2107,15 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				E7CA8B1C17136C9E00134283 /* Application.txt */,
-				E7CA8B0A17136C6B00134283 /* AppDoc.txt */,
-				E7CA8B0B17136C6B00134283 /* AppDocType_Lookup.txt */,
-				E7CA8B0D17136C6B00134283 /* ChemTypeLookup.txt */,
-				E7CA8B0E17136C6B00134283 /* DocType_lookup.txt */,
-				E7CA8B0F17136C6C00134283 /* Product.txt */,
-				E7CA8B1017136C6C00134283 /* Product_tecode.txt */,
-				E7CA8B1117136C6C00134283 /* RegActionDate.txt */,
-				E7CA8B1217136C6C00134283 /* ReviewClass_Lookup.txt */,
+				E7143DC9176E84F900545E0F /* AppDoc.txt */,
+				E7143DCA176E84F900545E0F /* AppDocType_Lookup.txt */,
+				E7143DCB176E84F900545E0F /* application.txt */,
+				E7143DCC176E84F900545E0F /* ChemTypeLookup.txt */,
+				E7143DCD176E84F900545E0F /* DocType_lookup.txt */,
+				E7143DCE176E84F900545E0F /* Product.txt */,
+				E7143DCF176E84F900545E0F /* Product_tecode.txt */,
+				E7143DD0176E84F900545E0F /* RegActionDate.txt */,
+				E7143DD1176E84F900545E0F /* ReviewClass_Lookup.txt */,
 				E7C829A216FF8FA6004EEC0C /* TabFile.h */,
 				E7C829A316FF8FA6004EEC0C /* TabFile.m */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
@@ -3210,15 +3210,15 @@
 				E7A8B0FD16AA579F00C33267 /* PTManagedObject.h in Resources */,
 				E7A8B0FE16AA579F00C33267 /* PTManagedObject.m in Resources */,
 				E724FA1816B1E7D9007508BB /* Encryption-Registration-Number-ERN.pdf in Resources */,
-				E7CA8B1317136C6C00134283 /* AppDoc.txt in Resources */,
-				E7CA8B1417136C6C00134283 /* AppDocType_Lookup.txt in Resources */,
-				E7CA8B1617136C6C00134283 /* ChemTypeLookup.txt in Resources */,
-				E7CA8B1717136C6C00134283 /* DocType_lookup.txt in Resources */,
-				E7CA8B1817136C6C00134283 /* Product.txt in Resources */,
-				E7CA8B1917136C6C00134283 /* Product_tecode.txt in Resources */,
-				E7CA8B1A17136C6C00134283 /* RegActionDate.txt in Resources */,
-				E7CA8B1B17136C6C00134283 /* ReviewClass_Lookup.txt in Resources */,
-				E7CA8B1D17136C9E00134283 /* Application.txt in Resources */,
+				E7143DD2176E84F900545E0F /* AppDoc.txt in Resources */,
+				E7143DD3176E84F900545E0F /* AppDocType_Lookup.txt in Resources */,
+				E7143DD4176E84F900545E0F /* application.txt in Resources */,
+				E7143DD5176E84F900545E0F /* ChemTypeLookup.txt in Resources */,
+				E7143DD6176E84F900545E0F /* DocType_lookup.txt in Resources */,
+				E7143DD7176E84F900545E0F /* Product.txt in Resources */,
+				E7143DD8176E84F900545E0F /* Product_tecode.txt in Resources */,
+				E7143DD9176E84F900545E0F /* RegActionDate.txt in Resources */,
+				E7143DDA176E84F900545E0F /* ReviewClass_Lookup.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
