@@ -1,7 +1,7 @@
 //
 //  RaceCombinationCount.h
 //  PsyTrack Clinician Tools
-//  Version: 1.5.1
+//  Version: 1.5.2
 //
 //  Created by Daniel Boice on 9/16/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.

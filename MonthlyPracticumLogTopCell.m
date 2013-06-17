@@ -1,7 +1,7 @@
 //
 //  MonthlyPracticumLogTopCell.m
 //  PsyTrack Clinician Tools
-//  Version: 1.5.1
+//  Version: 1.5.2
 //
 //  Created by Daniel Boice on 6/24/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -358,51 +358,112 @@
             containerForSignaturesAndSupervisiorSummariesFrame.origin.y = overallHoursFooterFrame.origin.y + overallHoursFooterFrame.size.height + 10;
             self.containerForSignaturesAndSupervisorSummaries.frame = containerForSignaturesAndSupervisiorSummariesFrame;
         }
-
-        CGFloat paddAdditonalY = 0;
-
-        for (NSInteger i = 0; i < self.containerForSignaturesAndSupervisorSummaries.subviews.count; i++)
-        {
-            UIView *subview = [self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:i];
-            CGRect subviewFrame = subview.frame;
-            if (subview.frame.origin.y + self.containerForSignaturesAndSupervisorSummaries.frame.origin.y < currentOffsetY + MAX_MAIN_SCROLLVIEW_HEIGHT && subview.frame.origin.y + subview.frame.size.height + self.containerForSignaturesAndSupervisorSummaries.frame.origin.y > currentOffsetY + MAX_MAIN_SCROLLVIEW_HEIGHT)
+        else  {
+            CGFloat paddAdditonalY = 0;
+            
+            for (NSInteger i = 0; i < self.containerForSignaturesAndSupervisorSummaries.subviews.count; i++)
             {
-                paddAdditonalY = (currentOffsetY + MAX_MAIN_SCROLLVIEW_HEIGHT) - (subviewFrame.origin.y + self.containerForSignaturesAndSupervisorSummaries.frame.origin.y) + 5;
-
-                CGRect contatinerForTableViewsFrame = self.subTablesContainerView.frame;
-                contatinerForTableViewsFrame.size.height = contatinerForTableViewsFrame.size.height + paddAdditonalY * (self.containerForSignaturesAndSupervisorSummaries.subviews.count);
-                self.subTablesContainerView.transform = CGAffineTransformIdentity;
-                self.subTablesContainerView.frame = contatinerForTableViewsFrame;
-
-                CGRect containerForSignaturesAndSupervisorSummariesFrame = self.containerForSignaturesAndSupervisorSummaries.frame;
-
-                self.containerForSignaturesAndSupervisorSummaries.transform = CGAffineTransformIdentity;
-
-                containerForSignaturesAndSupervisorSummariesFrame.size.height = containerForSignaturesAndSupervisorSummariesFrame.size.height + paddAdditonalY;
-
-                self.containerForSignaturesAndSupervisorSummaries.frame = containerForSignaturesAndSupervisorSummariesFrame;
-                subviewFrame.origin.y = subviewFrame.origin.y + paddAdditonalY;
-                subview.transform = CGAffineTransformIdentity;
-                subview.frame = subviewFrame;
-
-                for (NSInteger p = i + 1; p < self.containerForSignaturesAndSupervisorSummaries.subviews.count; p++)
+                UIView *subview = [self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:i];
+                CGRect subviewFrame = subview.frame;
+                CGFloat subviewHeight=subviewFrame.size.height;
+                
+                if ((subview.frame.origin.y + self.containerForSignaturesAndSupervisorSummaries.frame.origin.y > currentOffsetY+5 && subview.frame.origin.y + self.containerForSignaturesAndSupervisorSummaries.frame.origin.y < currentOffsetY + MAX_MAIN_SCROLLVIEW_HEIGHT) && i > 0)
                 {
-                    UIView *nextSubview = [self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:p];
-
-                    CGRect nextSubviewFrame = nextSubview.frame;
-                    nextSubviewFrame.origin.y = nextSubviewFrame.origin.y + paddAdditonalY;
-                    nextSubview.transform = CGAffineTransformIdentity;
-                    nextSubview.frame = nextSubviewFrame;
-                    paddAdditonalY = paddAdditonalY + nextSubviewFrame.origin.y + nextSubviewFrame.size.height;
+                    UIView *previousSubview=[self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:i-1];
+                    subview.transform = CGAffineTransformIdentity;
+                    subviewFrame.origin.y=previousSubview.frame.origin.y+previousSubview.frame.size.height+5;
+                    subview.frame = subviewFrame;
+                }
+                
+                if (subview.frame.origin.y + self.containerForSignaturesAndSupervisorSummaries.frame.origin.y < currentOffsetY + MAX_MAIN_SCROLLVIEW_HEIGHT && subview.frame.origin.y + subview.frame.size.height + self.containerForSignaturesAndSupervisorSummaries.frame.origin.y > currentOffsetY + MAX_MAIN_SCROLLVIEW_HEIGHT)
+                {
+                    paddAdditonalY = (currentOffsetY + MAX_MAIN_SCROLLVIEW_HEIGHT) - (subviewFrame.origin.y + self.containerForSignaturesAndSupervisorSummaries.frame.origin.y) + 5;
+                    
+                    CGRect contatinerForTableViewsFrame = self.subTablesContainerView.frame;
+                    contatinerForTableViewsFrame.size.height = contatinerForTableViewsFrame.size.height + paddAdditonalY * (self.containerForSignaturesAndSupervisorSummaries.subviews.count);
+                    self.subTablesContainerView.transform = CGAffineTransformIdentity;
+                    self.subTablesContainerView.frame = contatinerForTableViewsFrame;
+                    CGRect containerForSignaturesAndSupervisorSummariesFrame = self.containerForSignaturesAndSupervisorSummaries.frame;
+                    
+                    self.containerForSignaturesAndSupervisorSummaries.transform = CGAffineTransformIdentity;
+                    
+                    containerForSignaturesAndSupervisorSummariesFrame.size.height = containerForSignaturesAndSupervisorSummariesFrame.size.height + paddAdditonalY+signaturesView.frame.size.height;
+                    
+                    self.containerForSignaturesAndSupervisorSummaries.frame = containerForSignaturesAndSupervisorSummariesFrame;
+                    
+                    subviewFrame.origin.y = subviewFrame.origin.y + paddAdditonalY;
+                    subview.transform = CGAffineTransformIdentity;
+                    subview.frame = subviewFrame;
+                    
+                    UIView *firstSubview = [self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:0];
+                    for ( int p= i+1 ; p < self.containerForSignaturesAndSupervisorSummaries.subviews.count; p++  )
+                    {
+                        UIView *nextSubview=[self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:p];
+                        
+                        
+                        
+                        
+                        CGRect nextSubviewFrame = nextSubview.frame;
+                        nextSubviewFrame.origin.y = firstSubview.frame.origin.y +(subviewHeight*p)+5+paddAdditonalY;
+                        nextSubview.transform = CGAffineTransformIdentity;
+                        nextSubview.frame = nextSubviewFrame;
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
                 }
             }
+            
+            CGRect supervisionTableViewFrame = self.supervisionReceivedTypesTableView.frame;
+            
+            CGSize supervisionTVSize = [self supervisionTypesTableViewContentSize];
+            
+            supervisionTableViewFrame.size.height = supervisionTVSize.height;
+            self.supervisionReceivedTypesTableView.frame = supervisionTableViewFrame;
+            
+            CGRect supportTableViewFrame = self.supportActivitieTypesTableView.frame;
+            
+            CGSize supportTVSize = [self supportTypesTableViewContentSize];
+            
+            supportTableViewFrame.size.height = supportTVSize.height;
+            self.supportActivitieTypesTableView.frame = supportTableViewFrame;
+            
+            
         }
-
-        CGRect signaturesViewFrame = self.signaturesView.frame;
-        signaturesViewFrame.origin.y = self.containerForSignaturesAndSupervisorSummaries.frame.size.height - signaturesViewFrame.size.height;
-
-        self.signaturesView.frame = signaturesViewFrame;
+        
+        
+        if (self.containerForSignaturesAndSupervisorSummaries.subviews.count-2>0) {
+            
+            UIView * lastSupervisorSummaryContainerView=[self.containerForSignaturesAndSupervisorSummaries.subviews objectAtIndex:self.containerForSignaturesAndSupervisorSummaries.subviews.count-2];
+            
+            
+            
+            
+            CGRect signaturesViewFrame = self.signaturesView.frame;
+            signaturesViewFrame.origin.y = lastSupervisorSummaryContainerView.frame.origin.y+ lastSupervisorSummaryContainerView.frame.size.height +5;
+            
+            self.signaturesView.frame = signaturesViewFrame;
+            
+            CGRect containerForSignaturesAndSupervisorSummariesFrame = self.containerForSignaturesAndSupervisorSummaries.frame;
+            
+            self.containerForSignaturesAndSupervisorSummaries.transform = CGAffineTransformIdentity;
+            
+            containerForSignaturesAndSupervisorSummariesFrame.size.height = self.signaturesView.frame.origin.y+self.signaturesView.frame.size.height+2;
+            
+            self.containerForSignaturesAndSupervisorSummaries.frame = containerForSignaturesAndSupervisorSummariesFrame;
+        }
     }
+    
+
 }
 
 

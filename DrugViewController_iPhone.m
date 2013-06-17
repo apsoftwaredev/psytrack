@@ -1,7 +1,7 @@
 /*
  *  DrugViewController_iPhone.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.1
+ *  Version: 1.5.2
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -1021,8 +1021,13 @@ NSString *const kRemoteFileName = @"dFile-001.zpk";
                     NSMutableDictionary *drugDataDataPlistRootDic = [[NSMutableDictionary alloc] initWithObjects:[NSArray arrayWithObject:remoteFileETag] forKeys:[NSArray arrayWithObject:@"eTag"]];
 
                     [drugDataDataPlistRootDic setValue:remoteFileETag forKey:@"eTag"];
-
-                    [drugDataDataPlistRootDic writeToFile:[[appDelegate applicationDrugsDirectory].path stringByAppendingPathComponent:@"drugFileHeaderData.plist" ] atomically:YES];
+                    NSURL *drugFileDataPlistURL=[[appDelegate applicationDrugsDirectory] URLByAppendingPathComponent:@"drugFileHeaderData.plist" ];
+                    
+                    [drugDataDataPlistRootDic writeToURL:drugFileDataPlistURL atomically:YES];
+                    
+                    [appDelegate addSkipBackupAttributeToItemAtURL:drugFileDataPlistURL];
+                    
+                    
                 }
             }
         }

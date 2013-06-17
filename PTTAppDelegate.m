@@ -1,7 +1,7 @@
 /*
  *  PTTAppDelegate.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.1
+ *  Version: 1.5.2
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -3172,6 +3172,9 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                                    NSString *displaymessage = [NSString stringWithFormat:@"Configuring database for iCloud. One moment Please. %@",statusMessage];
                                    [self displayNotification:displaymessage];
                                    resetDatabase = YES;
+//#if !TARGET_IPHONE_SIMULATOR
+//                                   [self deleteTransactionLogs];
+//#endif
                                }
                                else
                                {
@@ -3322,6 +3325,32 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
     return persistentStoreCoordinator__;
 }
 
+//- (NSURL *)transactionLogsURL {
+//	NSFileManager *fileManager		= [NSFileManager defaultManager];
+//	NSURL *cloudURL					= [fileManager URLForUbiquityContainerIdentifier:nil];
+//	NSString* coreDataCloudContent	= [[cloudURL path] stringByAppendingPathComponent:@"psyTrack"];
+//    
+//    NSLog(@"cloud url content folder %@ and %@" ,cloudURL, [fileManager contentsOfDirectoryAtPath:cloudURL.path error:nil]);
+//	return [NSURL fileURLWithPath:coreDataCloudContent];
+//}
+//
+//- (NSURL *)transactionLogsURLForUUID:(NSString *)uuid {
+//	return [[self transactionLogsURL] URLByAppendingPathComponent:uuid isDirectory:YES];
+//}
+//
+//- (void)deleteTransactionLogs {
+//    NSError *error = nil;
+//    NSURL *url = [self transactionLogsURL];
+//    NSFileManager *fileManager	= [NSFileManager defaultManager];
+//    
+//	                            
+//							[fileManager removeItemAtURL:url error:&error];
+//							if (error)
+//								[self displayNotification:@"Error occured removing old transaction logs."];
+//						
+//	if (error)
+//		[self displayNotification:@"Error occured removing old transaction logs."];
+//}
 
 //
 //-(void)migrateCloudStoreToLocalVersion

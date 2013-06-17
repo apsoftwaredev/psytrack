@@ -1,7 +1,7 @@
 /*
  *  PTTAppDelegate.h
  *  psyTrack Clinician Tools
- *  Version: 1.5.1
+ *  Version: 1.5.2
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -183,6 +183,9 @@ static NSString *const kPTMonthlyPracticumLogNumber = @"monthly_practicum_log_nu
 - (NSURL *) applicationDocumentsDirectory;
 - (NSURL *) applicationCachesDirectory;
 - (NSString *) generateExposedKey;
+
+- (BOOL) addSkipBackupAttributeToItemAtURL:(NSURL *)URL;
+
 //-(IBAction)resaveLockDictionarySettings:(id)sender;
 @property (nonatomic,assign) BOOL okayToDecryptBool;
 
