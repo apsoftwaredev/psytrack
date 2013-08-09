@@ -167,6 +167,12 @@
 		B7D097F514BAC43E00C6065F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D097F414BAC43E00C6065F /* MessageUI.framework */; };
 		B7F877BB14C9A38900F00C0D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877B914C9A38900F00C0D /* EventKit.framework */; };
 		B7F877BC14C9A38900F00C0D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877BA14C9A38900F00C0D /* EventKitUI.framework */; };
+		E705B44D1784E1AE001FAF2E /* EBPWebsitesTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E705B44A1784E1AE001FAF2E /* EBPWebsitesTableViewController.h */; };
+		E705B44E1784E1AE001FAF2E /* EBPWebsitesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E705B44B1784E1AE001FAF2E /* EBPWebsitesTableViewController.m */; };
+		E705B44F1784E1AE001FAF2E /* EBPWebsitesTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E705B44C1784E1AE001FAF2E /* EBPWebsitesTableViewController.xib */; };
+		E705B4551784E3AF001FAF2E /* EBPWebViewViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E705B4521784E3AF001FAF2E /* EBPWebViewViewController.h */; };
+		E705B4561784E3AF001FAF2E /* EBPWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E705B4531784E3AF001FAF2E /* EBPWebViewViewController.m */; };
+		E705B4571784E3AF001FAF2E /* EBPWebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E705B4541784E3AF001FAF2E /* EBPWebViewViewController.xib */; };
 		E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */; };
 		E70FACEE1697154C00E14F03 /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E70FACED1697154C00E14F03 /* psyTrack.sqlite */; };
 		E719562515FFADB60070E61D /* DTAboutViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = E71955F715FFADB60070E61D /* DTAboutViewController.strings */; };
@@ -832,6 +838,12 @@
 		B7D097F414BAC43E00C6065F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B7F877B914C9A38900F00C0D /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		B7F877BA14C9A38900F00C0D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		E705B44A1784E1AE001FAF2E /* EBPWebsitesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBPWebsitesTableViewController.h; sourceTree = "<group>"; };
+		E705B44B1784E1AE001FAF2E /* EBPWebsitesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBPWebsitesTableViewController.m; sourceTree = "<group>"; };
+		E705B44C1784E1AE001FAF2E /* EBPWebsitesTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EBPWebsitesTableViewController.xib; sourceTree = "<group>"; };
+		E705B4521784E3AF001FAF2E /* EBPWebViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBPWebViewViewController.h; sourceTree = "<group>"; };
+		E705B4531784E3AF001FAF2E /* EBPWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBPWebViewViewController.m; sourceTree = "<group>"; };
+		E705B4541784E3AF001FAF2E /* EBPWebViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EBPWebViewViewController.xib; sourceTree = "<group>"; };
 		E70B9EFD15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSourcesSCObjectSelectionCell.h; sourceTree = "<group>"; };
 		E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSourcesSCObjectSelectionCell.m; sourceTree = "<group>"; };
 		E70FACED1697154C00E14F03 /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = psyTrack.sqlite; path = ../../Desktop/psyTrack.sqlite; sourceTree = "<group>"; };
@@ -1711,6 +1723,7 @@
 				37F7CE481500546300AD2C3A /* Demographic Info */,
 				37F7CE4C150054CE00AD2C3A /* Clients */,
 				37F7CE6D1500570500AD2C3A /* Clinicians */,
+				E782A41C1784BFCF00A4B4B6 /* EBP Websites */,
 				37F7CDDA1500312300AD2C3A /* Drugs */,
 				E7B3E3FB15C58A5800729C88 /* Education */,
 				E7E1425515C1EA7500D0F505 /* Teaching */,
@@ -2232,6 +2245,19 @@
 				E7388B6D1652C0EB00E04639 /* PDFGenerator.m */,
 			);
 			name = "Client Presentation";
+			sourceTree = "<group>";
+		};
+		E782A41C1784BFCF00A4B4B6 /* EBP Websites */ = {
+			isa = PBXGroup;
+			children = (
+				E705B44A1784E1AE001FAF2E /* EBPWebsitesTableViewController.h */,
+				E705B44B1784E1AE001FAF2E /* EBPWebsitesTableViewController.m */,
+				E705B4521784E3AF001FAF2E /* EBPWebViewViewController.h */,
+				E705B4531784E3AF001FAF2E /* EBPWebViewViewController.m */,
+				E705B4541784E3AF001FAF2E /* EBPWebViewViewController.xib */,
+				E705B44C1784E1AE001FAF2E /* EBPWebsitesTableViewController.xib */,
+			);
+			name = "EBP Websites";
 			sourceTree = "<group>";
 		};
 		E78C960C16D86A7800E8AD09 /* Products */ = {
@@ -2888,6 +2914,8 @@
 			files = (
 				E7A8B0F516AA4DD600C33267 /* PTTAppDelegate.h in Headers */,
 				E7ECEE4517010B2500920D70 /* AmazonClientManager.h in Headers */,
+				E705B44D1784E1AE001FAF2E /* EBPWebsitesTableViewController.h in Headers */,
+				E705B4551784E3AF001FAF2E /* EBPWebViewViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2920,7 +2948,7 @@
 		B79F488F142BEF0C0085D47B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "PsycheWeb LLC";
 			};
 			buildConfigurationList = B79F4892142BEF0C0085D47B /* Build configuration list for PBXProject "PsyTrack" */;
@@ -3191,6 +3219,8 @@
 				E7A8B0FE16AA579F00C33267 /* PTManagedObject.m in Resources */,
 				E724FA1816B1E7D9007508BB /* Encryption-Registration-Number-ERN.pdf in Resources */,
 				E74342A4176EE45A00AB0062 /* Icon-120.png in Resources */,
+				E705B44F1784E1AE001FAF2E /* EBPWebsitesTableViewController.xib in Resources */,
+				E705B4571784E3AF001FAF2E /* EBPWebViewViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3528,6 +3558,8 @@
 				E7315CB316937F9800964CE7 /* ExistingGenderEntity.m in Sources */,
 				E777EF301693A16B000C51E9 /* DrugProductEntity.m in Sources */,
 				E7ECEE4617010B2500920D70 /* AmazonClientManager.m in Sources */,
+				E705B44E1784E1AE001FAF2E /* EBPWebsitesTableViewController.m in Sources */,
+				E705B4561784E3AF001FAF2E /* EBPWebViewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3956,9 +3988,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -3977,9 +4010,12 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "3E8465FE-19B8-44B4-A63C-33D179CE7AB7";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3E8465FE-19B8-44B4-A63C-33D179CE7AB7";
 				SDKROOT = iphoneos;
@@ -3991,9 +4027,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -4005,7 +4042,9 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";

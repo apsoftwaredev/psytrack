@@ -19,6 +19,7 @@
 
 @interface DrugAppDocsViewController : SCTableViewController <SCTableViewModelDataSource, SCTableViewModelDelegate>{
     SCArrayOfObjectsModel *objectsModel;
+
 }
 
 @property (nonatomic,strong) IBOutlet NSString *applNoString;

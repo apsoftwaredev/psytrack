@@ -100,6 +100,12 @@
 
             break;
         }
+        case 12:
+        {
+            result = 1;
+            
+            break;
+        }
         default:
             break;
     } /* switch */
@@ -127,7 +133,7 @@
     if (result == nil)
     {
         result = [[UITableViewCell alloc]
-                  initWithStyle:UITableViewCellStyleDefault
+                  initWithStyle:UITableViewCellStyleSubtitle
                   reuseIdentifier:TableViewCellIdentifier];
     }
 
@@ -289,6 +295,16 @@
                 result.textLabel.text = @"About";
             }
         }
+            break;
+            
+        case 12:
+        {
+            if (indexPath.row == 0)
+            {
+                result.textLabel.text = @"Evidence Based Practice Websites";
+            }
+        }
+            break;
         default:
             break;
     } /* switch */
@@ -634,6 +650,23 @@
                 [self.navigationController pushViewController:about animated:YES];
             }
         }
+            break;
+        case 12:
+        {
+            //@"Lock Screen Settings"
+            if (indexPath.row == 0)
+            {
+                if (!ebpWebsitesVC)
+                {
+                    ebpWebsitesVC = [[EBPWebsitesTableViewController alloc] initWithNibName:@"EBPWebsitesTableViewController" bundle:nil];
+                }
+                
+                [[self navigationController] pushViewController:ebpWebsitesVC animated:YES];
+                break;
+            }
+        }
+            break;
+
         default:
             break;
     } /* switch */
@@ -876,6 +909,9 @@
             headerTitle = @"Support and About Track";
             break;
 
+        case 12:
+            headerTitle = @"EBP Websites Track";
+            break;
         default:
             break;
     } /* switch */

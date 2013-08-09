@@ -360,6 +360,8 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 
 - (void) customizeGlobalTheme
 {
+    
+    if ([SCUtilities systemVersion] <7){
     NSString *menuBarImageName = nil;
 
     NSString *sliderFillImageName = nil;
@@ -419,6 +421,14 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 
     [[UISearchBar appearance] setBackgroundImage:navBarImage ];
     [[UISearchBar appearance]setScopeBarBackgroundImage:navBarImage];
+    }
+    else{
+        [[UISearchBar appearance] setBackgroundImage:nil ];
+        [[UISearchBar appearance]setScopeBarBackgroundImage:nil];
+        [[UISearchBar appearance]setBackgroundColor:[UIColor clearColor]];
+    
+    }
+  
 }
 
 
@@ -3437,7 +3447,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
     }
 
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+//    [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     [UIView setAnimationDuration:1];
 

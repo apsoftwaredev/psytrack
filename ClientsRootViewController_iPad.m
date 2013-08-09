@@ -101,20 +101,22 @@
     objectsModel.addButtonItem = clientDetailViewController.navigationItem.rightBarButtonItem;
 
     [self.view setBackgroundColor:(UIColor *)appDelegate.window.backgroundColor];
-    NSString *imageNameStr = nil;
-    if ([SCUtilities is_iPad])
+    if ([SCUtilities systemVersion] < 7)
     {
-        imageNameStr = @"ipad-menubar-right.png";
-    }
-    else
-    {
-        imageNameStr = @"menubar.png";
-    }
+        NSString *imageNameStr = nil;
+        if ([SCUtilities is_iPad])
+        {
+            imageNameStr = @"ipad-menubar-right.png";
+        }
+        else
+        {
+            imageNameStr = @"menubar.png";
+        }
 
-    UIImage *menueBarImage = [UIImage imageNamed:imageNameStr];
-    [self.searchBar setBackgroundImage:menueBarImage];
-    [self.searchBar setScopeBarBackgroundImage:menueBarImage];
-
+        UIImage *menueBarImage = [UIImage imageNamed:imageNameStr];
+        [self.searchBar setBackgroundImage:menueBarImage];
+        [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+    }
     objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
     {
         [self updateClientsTotalLabel];

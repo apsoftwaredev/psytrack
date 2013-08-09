@@ -38,6 +38,7 @@ static NSInteger const kAlertTagFoundExistingPeopleWithName = 2;
     ABNewPersonViewController *personAddNewViewController;
     ABPersonViewController *personViewController_;
     ABPeoplePickerNavigationController *peoplePickerNavigationController_;
+    ABRecordRef selectedRecordInPeoplePicker_;
     ClinicianEntity *clinician;
     ABGroupSelectionCell *abGroupObjectSelectionCell_;
 

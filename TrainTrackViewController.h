@@ -45,6 +45,7 @@
 #import "MediaAppearanceVC.h"
 #import "CommunityServiceVC.h"
 #import "OtherActivityVC.h"
+#import "EBPWebsitesTableViewController.h"
 
 @interface TrainTrackViewController : UITableViewController < UITableViewDataSource, UITableViewDelegate, DTAboutViewControllerDelegate>{
     BigProgressViewWithBlockedView *prog;
@@ -82,6 +83,8 @@
     DTAboutViewController *support;
 
     DTAboutViewController *about;
+    
+    EBPWebsitesTableViewController *ebpWebsitesVC;
 }
 
 @end

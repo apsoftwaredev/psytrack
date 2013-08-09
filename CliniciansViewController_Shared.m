@@ -1690,7 +1690,7 @@
         PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 
         UIColor *backgroundColor = nil;
-        if (indexPath.row == NSNotFound || tableModel.tag > 0 || isInDetailSubview)
+        if ((indexPath.row == NSNotFound || tableModel.tag > 0 || isInDetailSubview)&&[SCUtilities systemVersion]<7)
         {
             backgroundColor = (UIColor *)appDelegate.window.backgroundColor;
             NSString *imageNameStr = nil;
@@ -2355,6 +2355,7 @@
         peoplePickerNavigationController_.displayedProperties = displayedItems;
         // Show the picker
 
+
         [peoplePickerNavigationController_ setPeoplePickerDelegate:self];
 
         if (currentDetailTableViewModel_)
@@ -2816,7 +2817,7 @@
             viewController.view.tag = 789;
         }
     }
-
+    selectedRecordInPeoplePicker_=person;
     return YES;
 }
 
@@ -2831,8 +2832,9 @@
 
         if ([SCUtilities is_iPad] || [SCUtilities systemVersion] >= 6)
         {
-            [personViewTableView setBackgroundView:nil];
-            [personViewTableView setBackgroundView:self.iPadPersonBackgroundView];
+            [personViewTableView setBackgroundColor:[UIColor clearColor]];
+//            [personViewTableView setBackgroundView:nil];
+//            [personViewTableView setBackgroundView:self.iPadPersonBackgroundView];
         }
 
         if (addingClinician || isInDetailSubview)
@@ -2845,13 +2847,17 @@
         }
 
         //
-
-        personViewTableView.backgroundView.tag = 837;
-
+        if ([SCUtilities systemVersion]>=7) {
+             personViewTableView.superview.tag=837;
+        }
+        else
+        {
+          personViewTableView.backgroundView.tag = 837;
+        }
         [viewController.navigationController setDelegate:nil];
     }
 
-    if ([viewController isKindOfClass:[ABPersonViewController class]] && viewController.view.tag != 837 )
+    if ([viewController.parentViewController isKindOfClass:[ABPeoplePickerNavigationController class]] && viewController.view.tag != 837 )
     {
         self.personVCFromSelectionList = (ABPersonViewController *)viewController;
 
@@ -3201,7 +3207,12 @@
         {
             UILabel *firstNameLabel = (UILabel *)viewLongerTextLabelView;
 
-            ABRecordRef recordRef = personVCFromSelectionList_.displayedPerson;
+            ABRecordRef recordRef = nil;
+            
+            if ([SCUtilities systemVersion]>=7){recordRef= selectedRecordInPeoplePicker_;}
+            else
+                recordRef=personVCFromSelectionList_.displayedPerson;
+            
             int aBRecordID = ABRecordGetRecordID( (ABRecordRef)recordRef );
             if (aBRecordID && [firstNameLabel.text isEqualToString:@"First Name:"])
             {

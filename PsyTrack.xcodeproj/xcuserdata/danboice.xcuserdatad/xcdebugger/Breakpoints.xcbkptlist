@@ -1209,7 +1209,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "258"
          endingLineNumber = "258"
-         landmarkName = "-tableViewModel:sectionHeaderTitleForItem:AtIndex:"
+         landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2623,7 +2623,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "674"
          endingLineNumber = "674"
-         landmarkName = "-tableViewModel:didAddSectionAtIndex:"
+         landmarkName = "-tableViewModel:didLayoutSubviewsForCell:forRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2636,7 +2636,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "659"
          endingLineNumber = "659"
-         landmarkName = "-tableViewModel:didAddSectionAtIndex:"
+         landmarkName = "-tableViewModel:didInsertRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2649,7 +2649,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "494"
          endingLineNumber = "494"
-         landmarkName = "-createSelectedCliniciansArray"
+         landmarkName = "-setSelectedClinicians"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -2662,7 +2662,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "493"
          endingLineNumber = "493"
-         landmarkName = "-createSelectedCliniciansArray"
+         landmarkName = "-setSelectedClinicians"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5584,7 +5584,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "694"
          endingLineNumber = "694"
-         landmarkName = "-viewDidAppear:"
+         landmarkName = "-setviewControllersToNil"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -7627,8 +7627,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "315"
          endingLineNumber = "315"
-         landmarkName = "-viewButtonTapped"
-         landmarkType = "5">
+         landmarkName = "@implementation DrugViewController_iPhone"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7640,8 +7640,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "314"
          endingLineNumber = "314"
-         landmarkName = "-viewButtonTapped"
-         landmarkType = "5">
+         landmarkName = "@implementation DrugViewController_iPhone"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"

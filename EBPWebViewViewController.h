@@ -9,5 +9,16 @@
 #import <SensibleTableView/SensibleTableView.h>
 
 @interface EBPWebViewViewController : SCViewController
+{
+
+    __weak UIWebView *myWebView_;
+    NSURL *url_;
+    
+}
+@property (nonatomic, weak)IBOutlet UIWebView *myWebView;
+@property (nonatomic, strong)NSURL *url;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil webURL:(NSString *)link;
+
 
 @end

@@ -63,19 +63,21 @@
     objectsModel.addButtonItem = clinicianDetailViewController.navigationItem.rightBarButtonItem;
 
     NSString *imageNameStr = nil;
-    if ([SCUtilities is_iPad])
+    if ([SCUtilities systemVersion] < 7)
     {
-        imageNameStr = @"ipad-menubar-full.png";
-    }
-    else
-    {
-        imageNameStr = @"menubar.png";
-    }
+        if ([SCUtilities is_iPad])
+        {
+            imageNameStr = @"ipad-menubar-full.png";
+        }
+        else
+        {
+            imageNameStr = @"menubar.png";
+        }
 
-    UIImage *menueBarImage = [UIImage imageNamed:imageNameStr];
-    [self.searchBar setBackgroundImage:menueBarImage];
-    [self.searchBar setScopeBarBackgroundImage:menueBarImage];
-
+        UIImage *menueBarImage = [UIImage imageNamed:imageNameStr];
+        [self.searchBar setBackgroundImage:menueBarImage];
+        [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+    }
     self.cliniciansBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"Clinicians" style:UIBarButtonItemStylePlain target:self action:@selector(displayPopover:)];
 
     objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)

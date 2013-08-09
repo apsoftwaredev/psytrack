@@ -14,12 +14,16 @@
 
 @implementation EBPWebViewViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+@synthesize myWebView=myWebView_, url=url_;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil webURL:(NSString *)link
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-    }
+        self.url=[NSURL URLWithString:link];
+        
+           }
     return self;
 }
 
@@ -27,6 +31,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self.myWebView loadHTMLString:nil baseURL:url_];
 }
 
 - (void)didReceiveMemoryWarning

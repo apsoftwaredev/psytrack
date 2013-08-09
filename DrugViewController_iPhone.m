@@ -291,20 +291,22 @@ NSString *const kRemoteFileName = @"dFile-001.zpk";
 
     navigationItem.title = [NSString stringWithFormat:@"Drugs %0.1f MB", localDbBytes / 1048576];
 
-    NSString *imageNameStr = nil;
-    if ([SCUtilities is_iPad] || [SCUtilities systemVersion] >= 6)
+    if ([SCUtilities systemVersion] > 7)
     {
-        imageNameStr = @"ipad-menubar-full.png";
-    }
-    else
-    {
-        imageNameStr = @"menubar.png";
-    }
+        NSString *imageNameStr = nil;
+        if ([SCUtilities is_iPad] || [SCUtilities systemVersion] >= 6)
+        {
+            imageNameStr = @"ipad-menubar-full.png";
+        }
+        else
+        {
+            imageNameStr = @"menubar.png";
+        }
 
-    UIImage *menueBarImage = [UIImage imageNamed:imageNameStr];
-    [self.searchBar setBackgroundImage:menueBarImage];
-    [self.searchBar setScopeBarBackgroundImage:menueBarImage];
-
+        UIImage *menueBarImage = [UIImage imageNamed:imageNameStr];
+        [self.searchBar setBackgroundImage:menueBarImage];
+        [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+    }
     productFetchRequest = nil;
     sortDescriptor = nil;
     sortDescriptors = nil;

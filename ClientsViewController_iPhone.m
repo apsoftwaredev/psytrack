@@ -186,19 +186,23 @@
     self.tableViewModel = objectsModel;
 
     NSString *imageNameStr = nil;
-    if ([SCUtilities is_iPad] || [SCUtilities systemVersion] >= 6)
+    if ([SCUtilities systemVersion] < 7)
     {
-        imageNameStr = @"ipad-menubar-full.png";
-    }
-    else
-    {
-        imageNameStr = @"menubar.png";
-    }
+    
+        if ([SCUtilities is_iPad] || [SCUtilities systemVersion] >= 6)
+        {
+            imageNameStr = @"ipad-menubar-full.png";
+        }
+        else
+        {
+            imageNameStr = @"menubar.png";
+        }
 
-    UIImage *menueBarImage = [UIImage imageNamed:imageNameStr];
-    [self.searchBar setBackgroundImage:menueBarImage];
-    [self.searchBar setScopeBarBackgroundImage:menueBarImage];
-
+        UIImage *menueBarImage = [UIImage imageNamed:imageNameStr];
+        [self.searchBar setBackgroundImage:menueBarImage];
+        [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+    }
+    
     UIViewController *navtitle = self.navigationController.topViewController;
 
     navtitle.title = @"Clients";

@@ -81,11 +81,13 @@
 
     navtitle.title = @"Clinicians";
 
-    if (isInDetailSubview)
+        if (isInDetailSubview)
     {
         objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef];
         objectsModel.tag = 0;
         PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+        
         [self.view setBackgroundColor:appDelegate.window.backgroundColor];
         // Set the view controller's theme
 
@@ -191,25 +193,46 @@
     }
 
     //change back button image
-    UIImage *menueBarImage = [UIImage imageNamed:@"iPad-menubar-full.png"];
-
-    if (![SCUtilities is_iPad])
+   
+    if ([SCUtilities systemVersion] < 7)
     {
-        objectsModel.theme = [SCTheme themeWithPath:@"mapper-iPhone.ptt"];
-        self.tableViewModel = objectsModel;
+        UIImage *menueBarImage = [UIImage imageNamed:@"iPad-menubar-full.png"];
 
-        [self.searchBar setBackgroundImage:menueBarImage];
-        [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+        if (![SCUtilities is_iPad])
+        {
+            objectsModel.theme = [SCTheme themeWithPath:@"mapper-iPhone.ptt"];
+            self.tableViewModel = objectsModel;
+
+            [self.searchBar setBackgroundImage:menueBarImage];
+            [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+        }
+        else if (isInDetailSubview)
+        {
+            objectsModel.theme = [SCTheme themeWithPath:@"mapper-ipad-full.ptt"];
+            self.tableViewModel = objectsModel;
+
+            [self.searchBar setBackgroundImage:menueBarImage];
+            [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+        }
     }
-    else if (isInDetailSubview)
-    {
-        objectsModel.theme = [SCTheme themeWithPath:@"mapper-ipad-full.ptt"];
-        self.tableViewModel = objectsModel;
+    else{
+    
+        if ([SCUtilities systemVersion]>=7) {
+            
+            
+//            [self.searchBar setBackgroundImage:nil];
+            
+//            [self.searchBar setBarTintColor:[UIColor clearColor]];
+            
+            DLog(@"color %@",[self.searchBar backgroundColor]);
+            
+            [self.searchBar setBackgroundColor:[UIColor colorWithRed:0.217586 green:0.523853 blue:0.67796 alpha:1.0]];
+            
+        }
 
-        [self.searchBar setBackgroundImage:menueBarImage];
-        [self.searchBar setScopeBarBackgroundImage:menueBarImage];
+    
+    
     }
-
     [(PTTAppDelegate *)[UIApplication sharedApplication].delegate application :[UIApplication sharedApplication]
      willChangeStatusBarOrientation :[[UIApplication sharedApplication] statusBarOrientation]
      duration : 5];
