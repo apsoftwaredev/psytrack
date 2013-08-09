@@ -25,7 +25,7 @@ enum {kTokenCellValidationTokenField = 500,kTokenCellValidationCurrentPassword,k
 @end
 
 @implementation LCYLockSettingsViewController
-@synthesize clearValuesTimer = clearValuesTimer_;
+//@synthesize clearValuesTimer = clearValuesTimer_;
 
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -120,16 +120,16 @@ enum {kTokenCellValidationTokenField = 500,kTokenCellValidationCurrentPassword,k
 {
     timeOfLastUserInput = [NSDate date];
 
-    if (!clearValuesTimer_)
-    {
-        NSTimeInterval clearUserInputInSeconds = 600.0;
-
-        self.clearValuesTimer = [NSTimer scheduledTimerWithTimeInterval:clearUserInputInSeconds
-                                                                 target:self
-                                                               selector:@selector(clearUserInput)
-                                                               userInfo:NULL
-                                                                repeats:YES];
-    }
+//    if (!clearValuesTimer_)
+//    {
+//        NSTimeInterval clearUserInputInSeconds = 600.0;
+//
+//        self.clearValuesTimer = [NSTimer scheduledTimerWithTimeInterval:clearUserInputInSeconds
+//                                                                 target:self
+//                                                               selector:@selector(clearUserInput)
+//                                                               userInfo:NULL
+//                                                                repeats:YES];
+//    }
 
     SCTableViewCell *cell = (SCTableViewCell *)[tableViewModel cellAtIndexPath:indexPath];
 
