@@ -40,7 +40,7 @@ static NSInteger const kAlertTagFoundExistingPeopleWithName = 2;
     ABPeoplePickerNavigationController *peoplePickerNavigationController_;
     ABRecordRef selectedRecordInPeoplePicker_;
     ClinicianEntity *clinician;
-    ABGroupSelectionCell *abGroupObjectSelectionCell_;
+//    ABGroupSelectionCell *abGroupObjectSelectionCell_;
 
     UIView *iPadPersonBackgroundView_;
     BOOL addingClinician;
@@ -62,7 +62,7 @@ static NSInteger const kAlertTagFoundExistingPeopleWithName = 2;
 
 @property (nonatomic, strong)  UIViewController *rootViewController;
 
-@property (nonatomic, strong) ABGroupSelectionCell *abGroupObjectSelectionCell;
+//@property (nonatomic, strong) ABGroupSelectionCell *abGroupObjectSelectionCell;
 
 - (void) showPeoplePickerController;
 - (IBAction) cancelAddNewAddressBookPerson:(id)sender;

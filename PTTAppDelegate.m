@@ -1327,23 +1327,23 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 }
 
 
-- (NSData *) encryptDictionaryToData:(NSDictionary *)unencryptedDictionary
-{
-//    if (!encryption_) {
-//        self.encryption=[[PTTEncryption alloc]init];
-//    }
-//    BOOL success=FALSE;
-//    NSDictionary *symetricDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:nil];
-//    NSData *symetricData=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:nil];
-//    NSData * keyedArchiveData = [NSKeyedArchiver archivedDataWithRootObject:lockValuesDictionary_];
+//- (NSData *) encryptDictionaryToData:(NSDictionary *)unencryptedDictionary
+//{
+////    if (!encryption_) {
+////        self.encryption=[[PTTEncryption alloc]init];
+////    }
+////    BOOL success=FALSE;
+////    NSDictionary *symetricDictionary=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:nil];
+////    NSData *symetricData=[self unwrapAndCreateKeyDataFromKeyEntitywithKeyDate:nil];
+////    NSData * keyedArchiveData = [NSKeyedArchiver archivedDataWithRootObject:lockValuesDictionary_];
+////
+////    NSData *encryptedArchivedLockData =(NSData *)[encryption_ doCipher:keyedArchiveData key:symetricData context:kCCEncrypt padding:(CCOptions *)kCCOptionPKCS7Padding];
+////
+////
+////
 //
-//    NSData *encryptedArchivedLockData =(NSData *)[encryption_ doCipher:keyedArchiveData key:symetricData context:kCCEncrypt padding:(CCOptions *)kCCOptionPKCS7Padding];
-//
-//
-//
-
-    return [NSDictionary dictionary];
-}
+//    return [NSDictionary dictionary];
+//}
 
 
 //-(NSDictionary *)decryptDataToDictionary:(NSData*)encryptedData{}

@@ -168,7 +168,7 @@ static NSString *const kPTMonthlyPracticumLogNumber = @"monthly_practicum_log_nu
 - (NSString *) convertDataToString:(NSData *)data;
 - (NSData *) decryptDataToPlainDataUsingKeyEntityWithString:(NSString *)keyString encryptedData:(NSData *)encryptedData;
 //-(NSData *)decryptDataToPlainData:(NSData *) encryptedData;
-- (NSData *) encryptDictionaryToData:(NSDictionary *)unencryptedDictionary;
+//- (NSData *) encryptDictionaryToData:(NSDictionary *)unencryptedDictionary;
 //-(NSDictionary *)decryptDataToDictionary:(NSData*)encryptedData;
 - (NSString *) generateRandomStringOfLength:(int)length;
 - (NSString *) combSmString;

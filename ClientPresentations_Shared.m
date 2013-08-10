@@ -1227,8 +1227,10 @@
         footerLabel.text = section.footerTitle;
         footerLabel.textColor = [UIColor whiteColor];
         [footerLabel setNumberOfLines:5];
-        [footerLabel setTextAlignment:UITextAlignmentCenter];
-        [footerLabel setLineBreakMode:UILineBreakModeWordWrap];
+        
+            [footerLabel setTextAlignment:NSTextAlignmentCenter];
+            [footerLabel setLineBreakMode:NSLineBreakByWordWrapping];
+               
         footerLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
         [containerView addSubview:footerLabel];
         section.footerView = containerView;

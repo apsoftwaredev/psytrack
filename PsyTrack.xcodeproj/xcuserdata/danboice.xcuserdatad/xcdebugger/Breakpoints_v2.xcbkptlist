@@ -2726,11 +2726,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientPresentations_Shared.m"
-            timestampString = "383941194.549385"
+            timestampString = "397786270.784028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1855"
-            endingLineNumber = "1855">
+            startingLineNumber = "1857"
+            endingLineNumber = "1857">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3906,11 +3906,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientPresentations_Shared.m"
-            timestampString = "383941194.549385"
+            timestampString = "397786270.784028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2158"
-            endingLineNumber = "2158">
+            startingLineNumber = "2160"
+            endingLineNumber = "2160">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3920,11 +3920,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientPresentations_Shared.m"
-            timestampString = "378349802.20221"
+            timestampString = "397786270.784028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1452"
-            endingLineNumber = "1452"
+            startingLineNumber = "1454"
+            endingLineNumber = "1454"
             landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4021,38 +4021,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "290"
             endingLineNumber = "290"
-            landmarkName = "-removePersonFromGroupWithID:"
+            landmarkName = "-addressBookGroupsArray"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ABGroupSelectionCell addressBookGroupsArray]"
-                  moduleName = "PsyTrack"
-                  urlString = "file://localhost/Users/danboice/iPhoneProjects/psytrack/ABGroupSelectionCell.m"
-                  timestampString = "394561822.502871"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "293"
-                  endingLineNumber = "293"
-                  offsetFromSymbolStart = "79">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ABGroupSelectionCell addressBookGroupsArray]"
-                  moduleName = "PsyTrack"
-                  urlString = "file://localhost/Users/danboice/iPhoneProjects/psytrack/ABGroupSelectionCell.m"
-                  timestampString = "394561822.503174"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "293"
-                  endingLineNumber = "293"
-                  offsetFromSymbolStart = "976">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6302,11 +6272,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientPresentations_Shared.m"
-            timestampString = "383941194.549385"
+            timestampString = "397786270.784028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1899"
-            endingLineNumber = "1899">
+            startingLineNumber = "1901"
+            endingLineNumber = "1901">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6316,11 +6286,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientPresentations_Shared.m"
-            timestampString = "378349802.20221"
+            timestampString = "397786270.784028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1681"
-            endingLineNumber = "1681">
+            startingLineNumber = "1683"
+            endingLineNumber = "1683">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6330,11 +6300,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientPresentations_Shared.m"
-            timestampString = "378349802.20221"
+            timestampString = "397786270.784028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1680"
-            endingLineNumber = "1680">
+            startingLineNumber = "1682"
+            endingLineNumber = "1682">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6344,11 +6314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientPresentations_Shared.m"
-            timestampString = "378349802.20221"
+            timestampString = "397786270.784028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1689"
-            endingLineNumber = "1689">
+            startingLineNumber = "1691"
+            endingLineNumber = "1691">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6358,11 +6328,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientPresentations_Shared.m"
-            timestampString = "378349802.20221"
+            timestampString = "397786270.784028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1692"
-            endingLineNumber = "1692">
+            startingLineNumber = "1694"
+            endingLineNumber = "1694">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -7962,39 +7932,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientPresentations_Shared.m"
-            timestampString = "378349802.20221"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1462"
-            endingLineNumber = "1462"
-            landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ClientPresentations_Shared.m"
-            timestampString = "378349802.20221"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1456"
-            endingLineNumber = "1456"
-            landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ClientPresentations_Shared.m"
-            timestampString = "378349802.20221"
+            timestampString = "397786270.784028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1464"
@@ -8010,11 +7948,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientPresentations_Shared.m"
-            timestampString = "378349802.20221"
+            timestampString = "397786270.784028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1504"
-            endingLineNumber = "1504"
+            startingLineNumber = "1458"
+            endingLineNumber = "1458"
             landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8026,11 +7964,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientPresentations_Shared.m"
-            timestampString = "383941194.549385"
+            timestampString = "397786270.784028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1974"
-            endingLineNumber = "1974">
+            startingLineNumber = "1466"
+            endingLineNumber = "1466"
+            landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ClientPresentations_Shared.m"
+            timestampString = "397786270.784028"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1506"
+            endingLineNumber = "1506"
+            landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ClientPresentations_Shared.m"
+            timestampString = "397786270.784028"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1976"
+            endingLineNumber = "1976">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8390,11 +8360,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientPresentations_Shared.m"
-            timestampString = "378350230.115207"
+            timestampString = "397786270.784028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1440"
-            endingLineNumber = "1440"
+            startingLineNumber = "1442"
+            endingLineNumber = "1442"
             landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8406,11 +8376,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClientPresentations_Shared.m"
-            timestampString = "383941194.549385"
+            timestampString = "397786270.784028"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2117"
-            endingLineNumber = "2117">
+            startingLineNumber = "2119"
+            endingLineNumber = "2119">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

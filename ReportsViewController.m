@@ -79,7 +79,7 @@
     if (result == nil)
     {
         result = [[UITableViewCell alloc]
-                  initWithStyle:UITableViewCellStyleDefault
+                  initWithStyle:UITableViewCellStyleSubtitle
                   reuseIdentifier:TableViewCellIdentifier];
     }
 

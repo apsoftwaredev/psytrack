@@ -39,7 +39,7 @@
 @synthesize personAddNewViewController = personAddNewViewController_;
 
 @synthesize rootViewController = rootViewController_;
-@synthesize abGroupObjectSelectionCell = abGroupObjectSelectionCell_;
+//@synthesize abGroupObjectSelectionCell = abGroupObjectSelectionCell_;
 @synthesize personViewController = personViewController_;
 
 @synthesize iPadPersonBackgroundView = iPadPersonBackgroundView_;
@@ -71,10 +71,10 @@
     clinician = nil;
     //      ABAddressBookRef addressBook;
 
-    if (abGroupObjectSelectionCell_)
-    {
-        self.abGroupObjectSelectionCell = nil;
-    }
+//    if (abGroupObjectSelectionCell_)
+//    {
+//        self.abGroupObjectSelectionCell = nil;
+//    }
 
     if (self.iPadPersonBackgroundView)
     {
@@ -1342,16 +1342,16 @@
                 }
 
                 break;
-                case 10:
-                {
-                    if ([cell isKindOfClass:[ABGroupSelectionCell class]])
-                    {
-                        ABGroupSelectionCell *abGroupSelectionCell = (ABGroupSelectionCell *)cell;
-
-                        abGroupSelectionCell.clinician = clinician;
-                    }
-                }
-                break;
+//                case 10:
+//                {
+//                    if ([cell isKindOfClass:[ABGroupSelectionCell class]])
+//                    {
+//                        ABGroupSelectionCell *abGroupSelectionCell = (ABGroupSelectionCell *)cell;
+//
+//                        abGroupSelectionCell.clinician = clinician;
+//                    }
+//                }
+//                break;
                 default:
                     break;
             } /* switch */
@@ -3111,7 +3111,7 @@
                             {
                                 [cell.boundObject setValue:[NSNumber numberWithInt:existingPersonRecordID ] forKey:@"aBRecordIdentifier"];
                                 [cell commitChanges];
-                                abGroupObjectSelectionCell_.synchWithABBeforeLoadBool = YES;
+//                                abGroupObjectSelectionCell_.synchWithABBeforeLoadBool = YES;
                                 [currentDetailTableViewModel_ reloadBoundValues];
                                 [currentDetailTableViewModel_.modeledTableView reloadData];
                             }

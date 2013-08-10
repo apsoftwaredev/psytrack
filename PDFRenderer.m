@@ -432,7 +432,7 @@
 
     CGSize maxSize = CGSizeMake(2244, 264);
 
-    CGSize pageStringSize = [pageString sizeWithFont:theFont constrainedToSize:maxSize lineBreakMode:UILineBreakModeClip];
+    CGSize pageStringSize = [pageString sizeWithFont:theFont constrainedToSize:maxSize lineBreakMode:NSLineBreakByClipping];
 
     CGRect stringRect = CGRectMake( ( (2244 - pageStringSize.width) / 2.0 ), 1586 + ( (670 - pageStringSize.height) ), pageStringSize.width, pageStringSize.height );
 
