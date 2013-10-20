@@ -1,7 +1,7 @@
 //
 //  SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m
 //  PsyTrack Clinician Tools
-//  Version: 1.5.2
+//  Version: 1.5.3
 //
 //  Created by Daniel Boice on 7/12/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.

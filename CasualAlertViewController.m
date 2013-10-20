@@ -1,7 +1,7 @@
 /*
  *  CasualAlertViewController.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -488,9 +488,9 @@ NSInteger intSort(id num1, id num2, void *context)
     [UIView animateWithDuration:2.5 delay:0.0 options:option
                      animations: ^{
          self.view.frame = CGRectMake(destination.x,destination.y, self.view.frame.size.width, self.view.frame.size.height);
-     }
+     
 
-
+                     }
                      completion: ^(BOOL finished){
          [self startFadeout];
      }

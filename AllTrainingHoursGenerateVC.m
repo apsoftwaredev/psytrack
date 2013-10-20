@@ -1,7 +1,7 @@
 //
 //  AllTrainingHoursGenerateVC.m
 //  PsyTrack Clinician Tools
-//  Version: 1.5.2
+//  Version: 1.5.3
 //
 //  Created by Daniel Boice on 9/4/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -99,7 +99,7 @@
         readerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
 
-        [self presentModalViewController:readerViewController animated:YES];
+        [self presentViewController:readerViewController animated:YES completion:nil];
 #endif // DEMO_VIEW_CONTROLLER_PUSH
 
         // Release the ReaderViewController
@@ -110,7 +110,8 @@
 - (IBAction) generateButtonTapped:(id)sender
 {
     PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-
+    
+    if ([appDelegate validateRequiredFields]) {
     fileName = pdfFileNameTextField.text;
     fileName = [self sanitizeFileName];
     NSString *pdfs = [appDelegate.applicationDocumentsDirectory.path stringByAppendingPathComponent:fileName];
@@ -126,6 +127,7 @@
     else
     {
         [self generateAndViewReportPDF];
+    }
     }
 }
 
@@ -272,7 +274,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 
 #else // dismiss the modal view controller
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 #endif // DEMO_VIEW_CONTROLLER_PUSH
 }
 

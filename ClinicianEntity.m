@@ -1,7 +1,7 @@
 //
 //  ClinicianEntity.m
 //  PsyTrack Clinician Tools
-//  Version: 1.5.2
+//  Version: 1.5.3
 //
 //  Created by Daniel Boice on 1/1/13.
 //  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
@@ -120,7 +120,7 @@
     combinedName = [NSString string];
 
     [self willAccessValueForKey:@"prefix"];
-    if (self.prefix.length)
+    if (self.prefix&&self.prefix.length)
     {
         combinedName = [self.prefix stringByAppendingString:@" "];
     }
@@ -128,7 +128,7 @@
     [self didAccessValueForKey:@"prefix"];
 
     [self willAccessValueForKey:@"firstName"];
-    if (self.firstName.length)
+    if (self.firstName && self.firstName.length)
     {
         combinedName = [combinedName stringByAppendingString:self.firstName];
     }
@@ -136,7 +136,7 @@
     [self didAccessValueForKey:@"firstName"];
 
     [self willAccessValueForKey:@"middleName"];
-    if (self.middleName.length )
+    if (self.middleName&&self.middleName.length )
     {
         NSString *middleInitial = [self.middleName substringToIndex:1];
 
@@ -148,14 +148,14 @@
     [self didAccessValueForKey:@"middleName"];
     [self willAccessValueForKey:@"lastName"];
 
-    if (self.lastName.length && combinedName.length )
+    if (self.lastName && self.lastName.length && combinedName.length )
     {
         combinedName = [combinedName stringByAppendingFormat:@" %@",self.lastName];
     }
 
     [self didAccessValueForKey:@"lastName"];
     [self willAccessValueForKey:@"suffix"];
-    if (self.suffix.length && combinedName.length)
+    if (self.suffix&&self.suffix.length && combinedName.length)
     {
         combinedName = [combinedName stringByAppendingFormat:@", %@",self.suffix];
     }
@@ -165,5 +165,37 @@
     return combinedName;
 }
 
+-(BOOL)hasSupervisedTime{
+
+    BOOL hasInterventions=NO;
+    
+     [self willAccessValueForKey:@"supervisedTime"];
+   
+    if (self.supervisedTime.count) {
+        hasInterventions=YES;
+    }
+     [self didAccessValueForKey:@"supervisedTime"];
+   
+    
+    [self willAccessValueForKey:@"existingHours"];
+    
+    if (self.existingHours.count) {
+        hasInterventions=YES;
+    }
+    [self didAccessValueForKey:@"existingHours"];
+    
+    [self willAccessValueForKey:@"existingSupervisionGiven"];
+    
+    if (self.existingSupervisionGiven.count) {
+        hasInterventions=YES;
+    }
+    [self didAccessValueForKey:@"existingSupervisionGiven"];
+    
+
+    return hasInterventions;
+
+
+
+}
 
 @end

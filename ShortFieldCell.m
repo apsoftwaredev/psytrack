@@ -1,7 +1,7 @@
 //
 //  ShortFieldCell.m
 //  PsyTrack Clinician Tools
-//  Version: 1.5.2
+//  Version: 1.5.3
 //
 //  Created by Daniel Boice on 4/7/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -282,7 +282,7 @@
     label.text = [self titleForRow:row];
 
     label.font = [UIFont boldSystemFontOfSize:(CGFloat)20];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
     label.backgroundColor = [UIColor clearColor];
 
     return label;

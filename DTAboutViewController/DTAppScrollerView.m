@@ -132,7 +132,7 @@
         frame.size.height = 16.0;
 
         UILabel *appTitleLabel = [[UILabel alloc] initWithFrame:frame];
-        appTitleLabel.textAlignment = UITextAlignmentCenter;
+        appTitleLabel.textAlignment = NSTextAlignmentCenter;
         appTitleLabel.font = [UIFont boldSystemFontOfSize:11.0];
         appTitleLabel.textColor = [UIColor lightGrayColor];
         appTitleLabel.text = oneApp.name;

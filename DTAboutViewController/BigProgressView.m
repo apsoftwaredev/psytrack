@@ -57,7 +57,7 @@
         textLabel.shadowOffset = CGSizeMake(1, 1);
         textLabel.font = [UIFont systemFontOfSize:10.0];
         textLabel.backgroundColor = [UIColor clearColor];
-        textLabel.textAlignment = UITextAlignmentCenter;
+        textLabel.textAlignment = NSTextAlignmentCenter;
 
         self.opaque = NO;
         self.backgroundColor = [UIColor clearColor];

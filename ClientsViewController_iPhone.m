@@ -1,7 +1,7 @@
 /*
  *  ClientsViewController_iPhone.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -93,6 +93,22 @@
         objectsModel.allowDeletingItems = FALSE;
         objectsModel.autoSelectNewItemCell = TRUE;
 
+        if ([SCUtilities systemVersion]>=7) {
+            
+            CGRect tableViewFrame=objectsModel.modeledTableView.frame;
+            
+            float tableviewY=objectsModel.modeledTableView.frame.origin.y+30;
+            tableViewFrame.origin.y=tableviewY;
+            objectsModel.modeledTableView.transform = CGAffineTransformIdentity;
+            objectsModel.modeledTableView.frame = tableViewFrame;
+            
+            CGRect searchBarFrame=self.searchBar.frame;
+            
+            float searchBarY=self.searchBar.frame.origin.y+60;
+            searchBarFrame.origin.y=searchBarY;
+            self.searchBar.transform = CGAffineTransformIdentity;
+            self.searchBar.frame = searchBarFrame;
+        }
         NSMutableArray *buttons = [[NSMutableArray alloc] initWithCapacity:3];
 
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTappedInDetailView)];
@@ -172,7 +188,20 @@
         [self.view setBackgroundColor:[UIColor clearColor]];
     }
 
-    [self updateClientsTotalLabel];
+    objectsModel.modelActions.didFetchItemsFromStore = ^(SCArrayOfItemsModel *itemsModel, NSMutableArray *items)
+    {
+        
+        if (items.count == 0)
+        {
+            self.totalClientsLabel.text = @"Tap + To Add Clients";
+        }
+        else
+        {
+            self.totalClientsLabel.text = [NSString stringWithFormat:@"Total Clients: %i", items.count];
+        }
+        
+        
+    };
 
     objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
     {
@@ -231,7 +260,7 @@
         // check if self is the rootViewController
         if ([self.navigationController.viewControllers objectAtIndex:0] == self)
         {
-            [self dismissModalViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
         else
         {
@@ -240,7 +269,7 @@
     }
     else
     {
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
@@ -272,7 +301,7 @@
             [objectsSelectionSection commitCellChanges];
             if (allowMultipleSelection)
             {
-                NSInteger sectionCount = self.tableViewModel.sectionCount;
+                NSInteger sectionCount =objectsModel.sectionCount;
 
                 if (sectionCount && !currentlySelectedClientsArray)
                 {
@@ -285,7 +314,7 @@
 
                 for (NSInteger i = 0; i < sectionCount; i++ )
                 {
-                    SCObjectSelectionSection *sectionAtIndex = (SCObjectSelectionSection *)[self.tableViewModel sectionAtIndex:i];
+                    SCObjectSelectionSection *sectionAtIndex = (SCObjectSelectionSection *)[objectsModel sectionAtIndex:i];
 
                     NSEnumerator *enumerator = [sectionAtIndex.selectedItemsIndexes objectEnumerator];
                     id setObject;
@@ -332,13 +361,13 @@
 {
     if (isInDetailSubview)
     {
-        SCTableViewSection *section = (SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
+        SCTableViewSection *section = (SCTableViewSection *)[objectsModel sectionAtIndex:0];
 
         if ([section isKindOfClass:[SCObjectSelectionSection class]])
         {
-            for (int i = 0; i < self.tableViewModel.sectionCount; i++)
+            for (int i = 0; i < objectsModel.sectionCount; i++)
             {
-                SCObjectSelectionSection *objectSelectionSection = (SCObjectSelectionSection *)[self.tableViewModel sectionAtIndex:i];
+                SCObjectSelectionSection *objectSelectionSection = (SCObjectSelectionSection *)[objectsModel sectionAtIndex:i];
 
                 if (allowMultipleSelection)
                 {
@@ -368,7 +397,7 @@
 {
     if (isInDetailSubview)
     {
-        SCTableViewSection *section = (SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
+        SCTableViewSection *section = (SCTableViewSection *)[objectsModel sectionAtIndex:0];
 
         if ([section isKindOfClass:[SCObjectSelectionSection class]])
         {
@@ -383,11 +412,11 @@
                     currentlySelectedClientsArray = [NSMutableArray array];
                 }
 
-                NSInteger sectionCount = self.tableViewModel.sectionCount;
+                NSInteger sectionCount = objectsModel.sectionCount;
 
                 for (NSInteger p = 0; p < sectionCount; p++ )
                 {
-                    SCObjectSelectionSection *sectionAtIndex = (SCObjectSelectionSection *)[self.tableViewModel sectionAtIndex:p];
+                    SCObjectSelectionSection *sectionAtIndex = (SCObjectSelectionSection *)[objectsModel sectionAtIndex:p];
                     NSEnumerator *enumerator = [sectionAtIndex.selectedItemsIndexes objectEnumerator];
                     id setObject;
                     while ( (setObject = [enumerator nextObject]) != nil )
@@ -461,7 +490,7 @@
             if ([cell isKindOfClass:[SCNumericTextFieldCell class]] || [cell isKindOfClass:[SCTextFieldCell class]])
             {
                 SCNumericTextFieldCell *numericTextField = (SCNumericTextFieldCell *)cell;
-                numericTextField.textField.textAlignment = UITextAlignmentRight;
+                numericTextField.textField.textAlignment = NSTextAlignmentRight;
                 numericTextField.textField.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
             }
         }
@@ -2054,12 +2083,12 @@
         UILabel *footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 100)];
         footerLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
         footerLabel.numberOfLines = 6;
-        footerLabel.lineBreakMode = UILineBreakModeWordWrap;
+        footerLabel.lineBreakMode = NSLineBreakByWordWrapping;
         footerLabel.backgroundColor = [UIColor clearColor];
         footerLabel.textColor = [UIColor whiteColor];
         footerLabel.tag = 60;
         footerLabel.text = section.footerTitle;
-        footerLabel.textAlignment = UITextAlignmentCenter;
+        footerLabel.textAlignment = NSTextAlignmentCenter;
         section.footerHeight = (CGFloat)100;
         [containerView addSubview:footerLabel];
         //        [footerLabel sizeToFit];

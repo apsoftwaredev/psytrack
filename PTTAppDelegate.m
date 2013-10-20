@@ -1,7 +1,7 @@
 /*
  *  PTTAppDelegate.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -57,6 +57,8 @@
 
 #import <Security/Security.h>
 
+#import "ValidateMOC.h"
+
 #define kPTTAppSqliteFileName @"psyTrack.sqlite"
 #define kPTTAppSqliteFileName_local @"psyTrack_local.sqlite"
 
@@ -108,11 +110,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-#if !__has_feature(objc_arc)
-    UIAlertView *anAlert = [[UIAlertView alloc] initWithTitle:@"Incompatable iOS Version" message:@"This App Requires iOS 5.0 or higher, please upgrade in iTunes" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-    anAlert.tag = 1;
-    [anAlert show];
-#endif
+
 
 //
 
@@ -286,6 +284,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 
         backgroundPattern = [UIImage imageNamed:@"ipad-background-blue-plain-small.png"];
         tabBarImageNameStr = @"tabbar.png";
+        
     }
 
     clinicianToolsLabel.text = NSLocalizedStringWithDefaultValue(@"Clinician Tools", @"Root", [NSBundle mainBundle], @"Clinician Tools", @"subname for the application");
@@ -426,6 +425,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
         [[UISearchBar appearance] setBackgroundImage:nil ];
         [[UISearchBar appearance]setScopeBarBackgroundImage:nil];
         [[UISearchBar appearance]setBackgroundColor:[UIColor clearColor]];
+        [[UIPickerView appearance]setTintAdjustmentMode:UIViewTintAdjustmentModeAutomatic];
     
     }
   
@@ -716,7 +716,11 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 {
     switch (alertView.tag)
     {
+           
+        case 21:
+            break;
         case 38:
+            break;
         case 1:
         {
             exit(0);
@@ -2421,7 +2425,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 {
     // Saves changes in the application's managed object context before the application terminates.
 
-    [self saveContext];
+//    [self saveContext];
 }
 
 
@@ -2434,6 +2438,22 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
         {
             NSUInteger attempts = 0;
             NSError *error = nil;
+
+//            if (![managedObjectContext save:&error]  )
+//                
+//            {
+//                NSString *  alertMessage = [NSString stringWithFormat:@"An error while saving the database.  The app will now terminate. If problem persists contact support@psytrack.com"];
+//                
+//                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error Setting up the database." message:alertMessage
+//                                                                delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+//                
+//                alert.tag = kAlertTagErrorExitApp;
+//                
+//                [alert show];
+//
+////                [self repairForSaveError:error];
+//            }
+            
             while ( ![managedObjectContext save:&error] && ++attempts <= kPTTMaximumSaveAttempts )
             {
                 [self repairForSaveError:error];
@@ -2503,6 +2523,157 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
         }
     }
 }
+
+-(BOOL)validateRequiredFields{
+    
+    BOOL valid=YES;
+    
+    ValidateMOC *validationObj=[[ValidateMOC alloc]init];
+    
+    BOOL supervisorsValid=validationObj.supervisorsAllPresent;
+    
+    DLog(@"checking supervisors...");
+    if (!supervisorsValid) {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Missing Supervisor Field"
+                              message: @"There are one or more records with missing supervisor. Connot proceed until all required fields are present."
+                              delegate: self
+                              cancelButtonTitle: @"Ok"
+                              otherButtonTitles:  nil];
+        alert.tag =21; // should use a different define (e.g. to 1) each time you use an alertview in a class, as each will call the same clickedButtonAtIndex selector.
+        [alert show];
+        valid=supervisorsValid;
+    }
+    else
+    {
+        DLog(@"checking sites...");
+        BOOL sitesValid=validationObj.siteAllPresent;
+        
+        
+        if (!sitesValid) {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle: @"Missing Supervisor Field"
+                                  message: @"There are one or more records with missing site fields. Connot proceed until all required fields are present."
+                                  delegate: self
+                                  cancelButtonTitle: @"Ok"
+                                  otherButtonTitles:  nil];
+            alert.tag =21; // should use a different define (e.g. to 1) each time you use an alertview in a class, as each will call the same clickedButtonAtIndex selector.
+            [alert show];
+            valid=sitesValid;
+        }
+        
+        else
+        {
+            
+            DLog(@"checking dates of service...");
+            BOOL dosValid=validationObj.dateOfServiceAllPresent;
+            
+            
+            if (!dosValid) {
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle: @"Missing Supervisor Field"
+                                      message: @"There are one or more records with missing date fields. Connot proceed until all required fields are present."
+                                      delegate: self
+                                      cancelButtonTitle: @"Ok"
+                                      otherButtonTitles:  nil];
+                alert.tag =21; // should use a different define (e.g. to 1) each time you use an alertview in a class, as each will call the same clickedButtonAtIndex selector.
+                [alert show];
+                valid=dosValid;
+            }
+            
+            else{
+                
+                DLog(@"checking training program...");
+                BOOL trainingProgramValid=validationObj.trainingProgramAllPresent;
+                
+                
+                if (!trainingProgramValid) {
+                    UIAlertView *alert = [[UIAlertView alloc]
+                                          initWithTitle: @"Missing Supervisor Field"
+                                          message: @"There are one or more records with missing training program fields. Connot proceed until all required fields are present."
+                                          delegate: self
+                                          cancelButtonTitle: @"Ok"
+                                          otherButtonTitles:  nil];
+                    alert.tag =21; // should use a different define (e.g. to 1) each time you use an alertview in a class, as each will call the same clickedButtonAtIndex selector.
+                    [alert show];
+                    valid=trainingProgramValid;
+                    
+                    
+                    
+                }
+                else{
+                    DLog(@"checking interventions...");
+                    BOOL interventionValid=validationObj.interventionTypeAllPresent;
+                    
+                    
+                    if (!interventionValid) {
+                        UIAlertView *alert = [[UIAlertView alloc]
+                                              initWithTitle: @"Missing Supervisor Field"
+                                              message: @"There are one or more records with missing intervention type or subtype fields. Connot proceed until all required fields are present."
+                                              delegate: self
+                                              cancelButtonTitle: @"Ok"
+                                              otherButtonTitles:  nil];
+                        alert.tag =21; // should use a different define (e.g. to 1) each time you use an alertview in a class, as each will call the same clickedButtonAtIndex selector.
+                        [alert show];
+                        valid=interventionValid;
+                        
+                        
+                        
+                    }
+                    else{
+                        DLog(@"checking assessments...");
+                        BOOL assessmentValid=validationObj.assessmentTypeAllPresent;
+                        
+                        
+                        if (!assessmentValid) {
+                            UIAlertView *alert = [[UIAlertView alloc]
+                                                  initWithTitle: @"Missing Supervisor Field"
+                                                  message: @"There are one or more records with missing assessment type fields. Connot proceed until all required fields are present."
+                                                  delegate: self
+                                                  cancelButtonTitle: @"Ok"
+                                                  otherButtonTitles:  nil];
+                            alert.tag =21; // should use a different define (e.g. to 1) each time you use an alertview in a class, as each will call the same clickedButtonAtIndex selector.
+                            [alert show];
+                            valid=assessmentValid;
+                            
+                            
+                            
+                        }
+                        
+                        else
+                        {
+                            
+                            DLog(@"checking supervision...");
+                            BOOL supervisionValid=validationObj.supervisionTypeAllPresent;
+                            
+                            
+                            if (!supervisionValid) {
+                                UIAlertView *alert = [[UIAlertView alloc]
+                                                      initWithTitle: @"Missing Supervisor Field"
+                                                      message: @"There are one or more records with missing supervision type or subtype fields. Connot proceed until all required fields are present."
+                                                      delegate: self
+                                                      cancelButtonTitle: @"Ok"
+                                                      otherButtonTitles:  nil];
+                                alert.tag =21; // should use a different define (e.g. to 1) each time you use an alertview in a class, as each will call the same clickedButtonAtIndex selector.
+                                [alert show];
+                                valid=supervisionValid;
+                                
+                                
+                                
+                            }
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        }}}}}}
+    
+    
+    return valid;
+}
+
 
 
 #pragma mark - Core Data stack
@@ -3044,7 +3215,17 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
     [moc mergeChangesFromContextDidSaveNotification:note];
     [self displayNotification:@"Merged Changes from iCloud"];
 }
+-(void)storesWillChange:(NSNotification *)n {
 
+    NSError *error=nil;
+
+    if ([managedObjectContext__ hasChanges]) {
+        [managedObjectContext__ save:&error];
+    }
+    
+    [managedObjectContext__ reset];
+
+}
 
 /**
    Returns the managed object context for the application.
@@ -3071,7 +3252,22 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
              [moc setPersistentStoreCoordinator:coordinator];
              @try
              {
+                 
+                 if ([SCUtilities systemVersion] <7){
+                 
                  [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mergeChangesFrom_iCloud:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:coordinator];
+                     
+                 }
+                 else{
+                 
+                     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(storesWillChange:) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:coordinator];
+                     
+                      
+                
+                     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(saveContext) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:coordinator];
+                 
+                 
+                 }
              }
              @catch (NSException *exception)
              {
@@ -3158,7 +3354,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
     NSString *storePath = [[self applicationPTTDirectory].path stringByAppendingPathComponent:kPTTAppSqliteFileName];
 //
 
-    NSString *storePath_local = [[self applicationPTTDirectory].path stringByAppendingPathComponent:kPTTAppSqliteFileName_local];
+//    NSString *storePath_local = [[self applicationPTTDirectory].path stringByAppendingPathComponent:kPTTAppSqliteFileName_local];
 
     // do this asynchronously since if this is the first time this particular device is syncing with preexisting
     // iCloud content it may take a long long time to download
@@ -3173,8 +3369,9 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                            NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
                            if (defaultStorePath && [fileManager fileExistsAtPath:defaultStorePath])
                            {
+                               
                                [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
-                               [fileManager copyItemAtPath:defaultStorePath toPath:storePath_local error:NULL];
+                               
 
                                NSString *statusMessage = [self resetDefaultLockKeychainSettingsWithReset:YES];
                                if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."])
@@ -3226,12 +3423,25 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 
                        NSDictionary *options;
 
-                       if (!firstRun && !resetDatabase && [coreDataCloudContent length] != 0 && [self reachable])
+                       if ([SCUtilities systemVersion]>=7) {
+                       
+                           options =[NSDictionary dictionaryWithObjectsAndKeys:@"PsyTrack-Clinician-Tools", NSPersistentStoreUbiquitousContentNameKey,nil];
+                           
+                           
+                           
+                           
+                           
+                       }
+                       else if (!firstRun && !resetDatabase && [coreDataCloudContent length] != 0 && [self reachable])
                        {
                            // iCloud is available
                            cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
 
-                           options = [NSDictionary dictionaryWithObjectsAndKeys:@"SL2GGUR9DM.com.psychewebLLC.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];
+                           
+                               options = [NSDictionary dictionaryWithObjectsAndKeys:@"SL2GGUR9DM.com.psychewebLLC.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];
+                           
+                           
+        
                        }
                        else
                        {
@@ -3251,20 +3461,26 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 
                        [psc lock];
 
+        
+      
                        if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error] )
                        {
-                           if (cloudURL)
-                           {
-//                NSError *removeError=nil;
-//                [[NSFileManager defaultManager] removeItemAtURL:cloudURL error:&removeError];
+                           
+                          NSString *  alertMessage = [NSString stringWithFormat:@"An error occured setting up the database.  The app will now terminate. If problem persists contact support@psytrack.com"];
+                           
+                          UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error Setting up the database." message:alertMessage
+                                                                          delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                           
+                           alert.tag = kAlertTagErrorExitApp;
+                           
+                           [alert show];
 
-                               [self displayNotification:@"An unresolved error occured possibly while setting up iCloud.  Try restarting and checking your internet connection. If it persists, consider disabling or reseting the app iCloud access or internet for a while in the device settings and restarting. Check http://www.apple.com/support/systemstatus/ for iCloud availability." forDuration:0 location:kPTTScreenLocationMiddle inView:self.window];
-                           }
-                           else
-                           {
-                               [self displayNotification:@"App was unable to load database at this time." forDuration:0 location:kPTTScreenLocationTop inView:self.window];
-                           }
-
+                           
+                           
+                           
+                           
+                           
+                           
                            /*
                               Replace this implementation with code to handle the error appropriately.
 
@@ -3280,6 +3496,10 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                        }
                        else
                        {
+                           
+                           
+                           
+                           
                            [psc unlock];
 
                            NSError *errorSettingAttributes = nil;
@@ -3318,7 +3538,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                                                   [self displayNotification:@"Error setting up database. App will now close." forDuration:10.0 location:kPTTScreenLocationTop inView:self.window];
 
                                                   sleep(10);
-                                                  abort();
+                                                  exit(0);
                                               }
 
 //            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData" object:self userInfo:nil];

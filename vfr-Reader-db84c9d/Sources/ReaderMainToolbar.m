@@ -34,7 +34,9 @@
 #pragma mark Constants
 
 #define BUTTON_X 8.0f
+
 #define BUTTON_Y 8.0f
+#define BUTTON_YIOS7ORGREATER 28.0f
 #define BUTTON_SPACE 8.0f
 #define BUTTON_HEIGHT 30.0f
 
@@ -69,7 +71,11 @@
 #endif
 
     assert(object != nil);     // Check
-
+    float buttonYValue=BUTTON_Y;
+    if ([[[UIDevice currentDevice] systemVersion] doubleValue]>=7) {
+        buttonYValue=BUTTON_YIOS7ORGREATER;
+    }
+    
     if ( (self = [super initWithFrame:frame]) )
     {
         CGFloat viewWidth = self.bounds.size.width;
@@ -87,7 +93,8 @@
 #if (READER_STANDALONE == FALSE) // Option
         UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
 
-        doneButton.frame = CGRectMake(leftButtonX, BUTTON_Y, DONE_BUTTON_WIDTH, BUTTON_HEIGHT);
+        
+        doneButton.frame = CGRectMake(leftButtonX, buttonYValue, DONE_BUTTON_WIDTH, BUTTON_HEIGHT);
         [doneButton setTitle:NSLocalizedString(@"Done", @"button") forState:UIControlStateNormal];
         [doneButton setTitleColor:[UIColor colorWithWhite:0.0f alpha:1.0f] forState:UIControlStateNormal];
         [doneButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:1.0f] forState:UIControlStateHighlighted];
@@ -105,7 +112,7 @@
 #if (READER_ENABLE_THUMBS == TRUE) // Option
         UIButton *thumbsButton = [UIButton buttonWithType:UIButtonTypeCustom];
 
-        thumbsButton.frame = CGRectMake(leftButtonX, BUTTON_Y, THUMBS_BUTTON_WIDTH, BUTTON_HEIGHT);
+        thumbsButton.frame = CGRectMake(leftButtonX, buttonYValue, THUMBS_BUTTON_WIDTH, BUTTON_HEIGHT);
         [thumbsButton setImage:[UIImage imageNamed:@"Reader-Thumbs.png"] forState:UIControlStateNormal];
         [thumbsButton addTarget:self action:@selector(thumbsButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [thumbsButton setBackgroundImage:buttonH forState:UIControlStateHighlighted];
@@ -124,7 +131,7 @@
 
         UIButton *flagButton = [UIButton buttonWithType:UIButtonTypeCustom];
 
-        flagButton.frame = CGRectMake(rightButtonX, BUTTON_Y, MARK_BUTTON_WIDTH, BUTTON_HEIGHT);
+        flagButton.frame = CGRectMake(rightButtonX, buttonYValue, MARK_BUTTON_WIDTH, BUTTON_HEIGHT);
         //[flagButton setImage:[UIImage imageNamed:@"Reader-Mark-N.png"] forState:UIControlStateNormal];
         [flagButton addTarget:self action:@selector(markButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [flagButton setBackgroundImage:buttonH forState:UIControlStateHighlighted];
@@ -150,7 +157,7 @@
 
                 UIButton *emailButton = [UIButton buttonWithType:UIButtonTypeCustom];
 
-                emailButton.frame = CGRectMake(rightButtonX, BUTTON_Y, EMAIL_BUTTON_WIDTH, BUTTON_HEIGHT);
+                emailButton.frame = CGRectMake(rightButtonX, buttonYValue, EMAIL_BUTTON_WIDTH, BUTTON_HEIGHT);
                 [emailButton setImage:[UIImage imageNamed:@"Reader-Email.png"] forState:UIControlStateNormal];
                 [emailButton addTarget:self action:@selector(emailButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
                 [emailButton setBackgroundImage:buttonH forState:UIControlStateHighlighted];
@@ -166,7 +173,7 @@
 
         UIButton *emailButton = [UIButton buttonWithType:UIButtonTypeCustom];
 
-        emailButton.frame = CGRectMake(rightButtonX, BUTTON_Y, EMAIL_BUTTON_WIDTH, BUTTON_HEIGHT);
+        emailButton.frame = CGRectMake(rightButtonX, buttonYValue, EMAIL_BUTTON_WIDTH, BUTTON_HEIGHT);
         [emailButton setImage:[UIImage imageNamed:@"ActionButton.png"] forState:UIControlStateNormal];
         [emailButton addTarget:self action:@selector(openInButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [emailButton setBackgroundImage:buttonH forState:UIControlStateHighlighted];
@@ -187,7 +194,7 @@
 
                 UIButton *printButton = [UIButton buttonWithType:UIButtonTypeCustom];
 
-                printButton.frame = CGRectMake(rightButtonX, BUTTON_Y, PRINT_BUTTON_WIDTH, BUTTON_HEIGHT);
+                printButton.frame = CGRectMake(rightButtonX, buttonYValue, PRINT_BUTTON_WIDTH, BUTTON_HEIGHT);
                 [printButton setImage:[UIImage imageNamed:@"Reader-Print.png"] forState:UIControlStateNormal];
                 [printButton addTarget:self action:@selector(printButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
                 [printButton setBackgroundImage:buttonH forState:UIControlStateHighlighted];
@@ -201,11 +208,11 @@
 
         if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
         {
-            CGRect titleRect = CGRectMake(titleX, BUTTON_Y, titleWidth, TITLE_HEIGHT);
+            CGRect titleRect = CGRectMake(titleX, buttonYValue, titleWidth, TITLE_HEIGHT);
 
             UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleRect];
 
-            titleLabel.textAlignment = UITextAlignmentCenter;
+            titleLabel.textAlignment = NSTextAlignmentCenter;
             titleLabel.font = [UIFont systemFontOfSize:19.0f];             // 19 pt
             titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
             titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
@@ -214,7 +221,7 @@
             titleLabel.backgroundColor = [UIColor clearColor];
             titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
             titleLabel.adjustsFontSizeToFitWidth = YES;
-            titleLabel.minimumFontSize = 14.0f;
+            titleLabel.minimumScaleFactor = 14.0f;
             titleLabel.text = [object.fileName stringByDeletingPathExtension];
 
             [self addSubview:titleLabel];

@@ -1,7 +1,7 @@
 //
 //  PTManagedObject.m
 //  PsyTrack Clinician Tools
-//  Version: 1.5.2
+//  Version: 1.5.3
 //
 //  Created by Daniel Boice on 1/1/13.
 //  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
@@ -36,6 +36,13 @@
     if ( [self.class deletesInvalidObjectsAfterFailedSave] )
     {
         [self.managedObjectContext deleteObject:self];
+    }
+    else
+    {
+    
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    
+    
     }
 }
 

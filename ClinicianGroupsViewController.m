@@ -1,7 +1,7 @@
 /*
  *  ClinicianGroupsViewController.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -137,111 +137,111 @@
 }
 
 
-#pragma mark -
-#pragma mark calander settings
-
-// Set the calendar edited by EKEventEditViewController to our chosen calendar - the default calendar.
-- (EKCalendar *) defaultCalendarName
-{
-    // Get the default calendar from store.
-    //    settingsDictionary=(NSDictionary *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate settingsPlistDictionary];
-    NSString *defaultCalendarIdentifier = [[NSUserDefaults standardUserDefaults] valueForKey:@"defaultCalendarIdentifier"];
-
-    // find local source
-    EKSource *mySource = nil;
-
-//    BOOL iCloudEnabled=(BOOL)[[NSUserDefaults standardUserDefaults] valueForKey:@"icloud_preference"];
-
-    for (EKSource *sourceInSources in eventStore.sources)
-    {
-        if ([sourceInSources.title isEqualToString:@"iCloud"])
-        {
-            mySource = sourceInSources;
+//#pragma mark -
+//#pragma mark calander settings
 //
-
-            break;
-        }
-    }
-
-    if (!mySource)
-    {
-        for (EKSource *sourceInSources in eventStore.sources)
-        {
-            if (sourceInSources.sourceType == EKSourceTypeLocal)
-            {
-                mySource = sourceInSources;
-
-                break;
-            }
-        }
-    }
-
-    if (mySource)
-    {
-        NSString *defaultCalendarName = [[NSUserDefaults standardUserDefaults] valueForKey:@"calendar_name"];
-        //        NSSet *calendars=(NSSet *)[localSource calendars];
-        if (defaultCalendarIdentifier.length)
-        {
-            self.psyTrackCalendar = [self.eventStore calendarWithIdentifier:defaultCalendarIdentifier];
-            mySource = psyTrackCalendar.source;
-        }
-
-        if (!self.psyTrackCalendar)
-        {
-            for (EKCalendar *calanderInStore in eventStore.calendars)
-            {
-                if ([calanderInStore.title isEqualToString:@"Client Appointments"])
-                {
-                    self.psyTrackCalendar = calanderInStore;
-                    break;
-                }
-            }
-
-            //try again
-            if (!self.psyTrackCalendar)
-            {
-                self.psyTrackCalendar = [EKCalendar calendarWithEventStore:self.eventStore];
-
-                [[NSUserDefaults standardUserDefaults] setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                self.psyTrackCalendar.source = mySource;
-            }
-        }
-
-        if (defaultCalendarName.length)
-        {
-            self.psyTrackCalendar.title = defaultCalendarName;
-        }
-        else
-        {
-            self.psyTrackCalendar.title = @"Client Appointments";
-        }
-    }
-
-    NSError *error;
-
-    if (![self.eventStore saveCalendar:self.psyTrackCalendar commit:YES error:&error ])
-    {
-    }
-    else
-    {
-        [[NSUserDefaults standardUserDefaults]setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
-    }
-
-    if (self.psyTrackCalendar)
-    {
-    }
-
-    return self.psyTrackCalendar;
-}
-
+//// Set the calendar edited by EKEventEditViewController to our chosen calendar - the default calendar.
+//- (EKCalendar *) defaultCalendarName
+//{
+//    // Get the default calendar from store.
+//    //    settingsDictionary=(NSDictionary *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate settingsPlistDictionary];
+//    NSString *defaultCalendarIdentifier = [[NSUserDefaults standardUserDefaults] valueForKey:@"defaultCalendarIdentifier"];
+//
+//    // find local source
+//    EKSource *mySource = nil;
+//
+////    BOOL iCloudEnabled=(BOOL)[[NSUserDefaults standardUserDefaults] valueForKey:@"icloud_preference"];
+//
+//    for (EKSource *sourceInSources in eventStore.sources)
+//    {
+//        if ([sourceInSources.title isEqualToString:@"iCloud"])
+//        {
+//            mySource = sourceInSources;
+////
+//
+//            break;
+//        }
+//    }
+//
+//    if (!mySource)
+//    {
+//        for (EKSource *sourceInSources in eventStore.sources)
+//        {
+//            if (sourceInSources.sourceType == EKSourceTypeLocal)
+//            {
+//                mySource = sourceInSources;
+//
+//                break;
+//            }
+//        }
+//    }
+//
+//    if (mySource)
+//    {
+//        NSString *defaultCalendarName = [[NSUserDefaults standardUserDefaults] valueForKey:@"calendar_name"];
+//        //        NSSet *calendars=(NSSet *)[localSource calendars];
+//        if (defaultCalendarIdentifier.length)
+//        {
+//            self.psyTrackCalendar = [self.eventStore calendarWithIdentifier:defaultCalendarIdentifier];
+//            mySource = psyTrackCalendar.source;
+//        }
+//
+//        if (!self.psyTrackCalendar)
+//        {
+//            for (EKCalendar *calanderInStore in eventStore.calendars)
+//            {
+//                if ([calanderInStore.title isEqualToString:@"Client Appointments"])
+//                {
+//                    self.psyTrackCalendar = calanderInStore;
+//                    break;
+//                }
+//            }
+//
+//            //try again
+//            if (!self.psyTrackCalendar)
+//            {
+//                self.psyTrackCalendar = [EKCalendar calendarWithEventStore:self.eventStore];
+//
+//                [[NSUserDefaults standardUserDefaults] setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+//                self.psyTrackCalendar.source = mySource;
+//            }
+//        }
+//
+//        if (defaultCalendarName.length)
+//        {
+//            self.psyTrackCalendar.title = defaultCalendarName;
+//        }
+//        else
+//        {
+//            self.psyTrackCalendar.title = @"Client Appointments";
+//        }
+//    }
+//
+//    NSError *error;
+//
+//    if (![self.eventStore saveCalendar:self.psyTrackCalendar commit:YES error:&error ])
+//    {
+//    }
+//    else
+//    {
+//        [[NSUserDefaults standardUserDefaults]setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
+//    }
+//
+//    if (self.psyTrackCalendar)
+//    {
+//    }
+//
+//    return self.psyTrackCalendar;
+//}
+//
 
 #pragma mark -
 #pragma mark EKCalendarChooserDelegate methods
 
 - (void) calendarChooserDidCancel:(EKCalendarChooser *)calendarChooser
 {
-    [calendarChooser dismissModalViewControllerAnimated:YES];
+    [calendarChooser dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -279,7 +279,7 @@
         }
     }
 
-    [calendarChooser dismissModalViewControllerAnimated:YES];
+    [calendarChooser dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -511,12 +511,12 @@
         UILabel *footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 300, 100)];
         footerLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
         footerLabel.numberOfLines = 6;
-        footerLabel.lineBreakMode = UILineBreakModeWordWrap;
+        footerLabel.lineBreakMode = NSLineBreakByWordWrapping;
         footerLabel.backgroundColor = [UIColor clearColor];
         footerLabel.textColor = [UIColor whiteColor];
         footerLabel.tag = 60;
         footerLabel.text = section.footerTitle;
-        footerLabel.textAlignment = UITextAlignmentCenter;
+        footerLabel.textAlignment = NSTextAlignmentCenter;
         section.footerHeight = (CGFloat)100;
         [containerView addSubview:footerLabel];
 //        [footerLabel sizeToFit];
@@ -969,12 +969,15 @@
                     peoplePicker.displayedProperties = displayedItems;
                     // Show the picker
 
-                    [peoplePicker shouldAutorotateToInterfaceOrientation:YES];
+                    if ([SCUtilities systemVersion]<7) {
+                          [peoplePicker shouldAutorotateToInterfaceOrientation:YES];
+                    }
+                  
                     [peoplePicker setEditing:YES];
 
                     [peoplePicker setPeoplePickerDelegate:self];
 
-                    [tableViewModel.viewController.navigationController presentModalViewController:peoplePicker animated:YES];
+                    [tableViewModel.viewController.navigationController presentViewController:peoplePicker animated:YES completion:nil];
                 }
 
                 break;
@@ -1540,7 +1543,7 @@
     }
     else
     {
-        [sourcesObjSelectionCell_.ownerTableViewModel.viewController dismissModalViewControllerAnimated:YES];
+        [sourcesObjSelectionCell_.ownerTableViewModel.viewController dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

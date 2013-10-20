@@ -10,4 +10,18 @@
 
 @interface ValidateMOC : NSObject
 
+-(BOOL)supervisorsAllPresent;
+-(BOOL)siteAllPresent;
+
+-(BOOL)dateOfServiceAllPresent;
+-(BOOL)trainingProgramAllPresent;
+
+-(BOOL)interventionTypeAllPresent;
+
+-(BOOL)assessmentTypeAllPresent;
+
+-(BOOL)supervisionTypeAllPresent;
+
+
+
 @end

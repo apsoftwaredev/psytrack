@@ -1,7 +1,7 @@
 //
 //  PDFRenderer.m
 //  PsyTrack Clinician Tools
-//  Version: 1.5.2
+//  Version: 1.5.3
 //
 //  Created by Daniel Boice on 6/24/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -43,7 +43,7 @@
 
     NSString *documentTitle = [NSString stringWithFormat:@"%@Monthly Clinical Practicum Log for %@", markAmended ? @"Amended ":@"",[dateFormatter stringFromDate:monthToDisplay]];
     [self createPDFfromUIView:monthlyPracticumLogTVC.view saveToDocumentsWithFileName:fileName viewController:(MonthlyPracticumLogTableViewController *)monthlyPracticumLogTVC password:filePassword documentTitle:(NSString *)documentTitle];
-    [monthlyPracticumLogTVC viewDidUnload];
+//    [monthlyPracticumLogTVC viewDidUnload];
     monthlyPracticumLogTVC.view = nil;
     monthlyPracticumLogTVC = nil;
     dateFormatter = nil;
@@ -70,7 +70,7 @@
     }
 
     [self createAllHoursReportPDFfromUIView:allTrainingHoursVC.view saveToDocumentsWithFileName:fileName viewController:(AllTrainingHoursVC *)allTrainingHoursVC password:filePassword documentTitle:(NSString *)documentTitle];
-    [allTrainingHoursVC viewDidUnload];
+//    [allTrainingHoursVC viewDidUnload];
     allTrainingHoursVC.view = nil;
     allTrainingHoursVC = nil;
     // Close the PDF context and write the contents out.
@@ -88,7 +88,7 @@
     NSString *documentTitle = @"Demographic Report";
 
     [self createDemographicReportPDFfromUIView:(UIView *)demographicReportVC.view saveToDocumentsWithFileName:(NSString *)fileName viewController:(DemographicReportViewController *)demographicReportVC password:(NSString *)filePassword documentTitle:(NSString *)documentTitle];
-    [demographicReportVC viewDidUnload];
+//    [demographicReportVC viewDidUnload];
     demographicReportVC.view = nil;
     demographicReportVC = nil;
 }
@@ -360,7 +360,7 @@
     //    create paragraph style and assign text alignment to it
     CTTextAlignment alignment = kCTJustifiedTextAlignment;
 
-    if (label.textAlignment == UITextAlignmentCenter)
+    if (label.textAlignment == NSTextAlignmentCenter)
     {
         alignment = kCTCenterTextAlignment;
     }

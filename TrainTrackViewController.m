@@ -1,7 +1,7 @@
 /*
  *  TrainTrackViewController.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -24,8 +24,14 @@
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSInteger result = 12;
-
+    
+    NSInteger result=12;
+    
+    if ([SCUtilities is_iPad])
+    {
+          result = 11;
+    }
+    
     return result;
 }
 
@@ -39,22 +45,22 @@
     {
         case 0:
         {
-            result = 1;
+            result = 2;
             break;
         }
         case 1:
         {
-            result = 2;
+            result = 1;
             break;
         }
         case 2:
         {
-            result = 1;
+            result = 2;
             break;
         }
         case 3:
         {
-            result = 2;
+            result = 1;
             break;
         }
         case 4:
@@ -64,48 +70,43 @@
         }
         case 5:
         {
-            result = 1;
+            result = 3;
             break;
         }
         case 6:
         {
-            result = 3;
+            result = 6;
             break;
         }
         case 7:
         {
-            result = 6;
+            result = 1;
             break;
         }
 
         case 8:
         {
-            result = 1;
+            result = 2;
             break;
         }
         case 9:
         {
-            result = 2;
+            result = 1;
             break;
         }
         case 10:
         {
-            result = 1;
+            result = 2;
             break;
         }
 
         case 11:
         {
-            result = 2;
+            result = 1;
 
             break;
         }
-        case 12:
-        {
-            result = 1;
-            
-            break;
-        }
+        
         default:
             break;
     } /* switch */
@@ -139,20 +140,9 @@
 
     switch (indexPath.section)
     {
-        case 0:
-        {
-            if ( indexPath.row == 0 && [SCUtilities is_iPad])
-            {
-                result.textLabel.text = @"My Information (Select your name under Clinicians tab)";
-            }
-            else if (indexPath.row == 0)
-            {
-                result.textLabel.text = @"My Information";
-            }
-        }
-        break;
+      
 
-        case 1:
+        case 0:
         {
             if (indexPath.row == 0)
             {
@@ -165,7 +155,7 @@
             }
         }
         break;
-        case 2:
+        case 1:
         {
             if (indexPath.row == 0)
             {
@@ -173,7 +163,7 @@
             }
         }
         break;
-        case 3:
+        case 2:
         {
             if (indexPath.row == 0)
             {
@@ -186,7 +176,7 @@
             }
         }
         break;
-        case 4:
+        case 3:
         {
             if (indexPath.row == 0)
             {
@@ -194,7 +184,7 @@
             }
         }
         break;
-        case 5:
+        case 4:
         {
             if (indexPath.row == 0)
             {
@@ -203,7 +193,7 @@
         }
         break;
 
-        case 6:
+        case 5:
         {
             if (indexPath.row == 0)
             {
@@ -222,7 +212,7 @@
         }
         break;
 
-        case 7:
+        case 6:
         {
             if (indexPath.row == 0)
             {
@@ -256,13 +246,13 @@
         }
         break;
 
-        case 8:
+        case 7:
         {
             result.textLabel.text = @"Drug Database";
         }
         break;
 
-        case 9:
+        case 8:
         {
             if (indexPath.row == 0)
             {
@@ -275,7 +265,7 @@
             }
         }
         break;
-        case 10:
+        case 9:
         {
             if (indexPath.row == 0)
             {
@@ -283,7 +273,7 @@
             }
         }
         break;
-        case 11:
+        case 10:
         {
             if (indexPath.row == 0)
             {
@@ -297,7 +287,7 @@
         }
             break;
             
-        case 12:
+        case 11:
         {
             if (indexPath.row == 0)
             {
@@ -317,71 +307,71 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 && indexPath.row == 0)
-    {
-        //@"My Information"
-
-        PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-
-        if (![SCUtilities is_iPad])
-        {
-            UINavigationController *navController = nil;
-
-            for (navController in appDelegate.tabBarController.viewControllers)
-            {
-                if ([navController.title isEqualToString:@"Clinicians"])
-                {
-                    [appDelegate.clinicianViewController setSelectMyInformationOnLoad:YES];
-
-                    [appDelegate.tabBarController setSelectedViewController:navController];
-
-                    break;
-                }
-            }
-        }
-        else
-        {
-            UISplitViewController *splitView = nil;
-            CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad = nil;
-            CliniciansRootViewController_iPad *cliniciansRootViewController_iPad = nil;
-            UIPopoverController *popoverController = nil;
-            for (splitView in appDelegate.tabBarController.viewControllers)
-            {
-                if ([splitView.title isEqualToString:@"Clinicians"])
-                {
-                    for (UINavigationController *navController in splitView.viewControllers)
-                    {
-                        if ([navController.title isEqualToString:@"ClinicianRoot"])
-                        {
-                            cliniciansRootViewController_iPad = (CliniciansRootViewController_iPad *)[navController.viewControllers objectAtIndex:0];
-
-                            [cliniciansRootViewController_iPad setSelectMyInformationOnLoad:YES];
-                        }
-                        else if ([navController.title isEqualToString:@"ClinicianDetail"])
-                        {
-                            cliniciansDetailViewController_iPad = (CliniciansDetailViewController_iPad *)[navController.viewControllers objectAtIndex:0];
-
-                            if (cliniciansDetailViewController_iPad.popoverController)
-                            {
-                                popoverController = cliniciansDetailViewController_iPad.popoverController;
-                            }
-                        }
-                    }
-
-                    [appDelegate.clinicianViewController setSelectMyInformationOnLoad:YES];
-                    [appDelegate.tabBarController setSelectedViewController:splitView];
-
+//    if (indexPath.section == 0 && indexPath.row == 0)
+//    {
+//        //@"My Information"
 //
-
-                    break;
-                }
-            }
-        }
-    }
+//        PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//
+//        if (![SCUtilities is_iPad])
+//        {
+//            UINavigationController *navController = nil;
+//
+//            for (navController in appDelegate.tabBarController.viewControllers)
+//            {
+//                if ([navController.title isEqualToString:@"Clinicians"])
+//                {
+//                    [appDelegate.clinicianViewController setSelectMyInformationOnLoad:YES];
+//
+//                    [appDelegate.tabBarController setSelectedViewController:navController];
+//
+//                    break;
+//                }
+//            }
+//        }
+//        else
+//        {
+//            UISplitViewController *splitView = nil;
+//            CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad = nil;
+//            CliniciansRootViewController_iPad *cliniciansRootViewController_iPad = nil;
+//            UIPopoverController *popoverController = nil;
+//            for (splitView in appDelegate.tabBarController.viewControllers)
+//            {
+//                if ([splitView.title isEqualToString:@"Clinicians"])
+//                {
+//                    for (UINavigationController *navController in splitView.viewControllers)
+//                    {
+//                        if ([navController.title isEqualToString:@"ClinicianRoot"])
+//                        {
+//                            cliniciansRootViewController_iPad = (CliniciansRootViewController_iPad *)[navController.viewControllers objectAtIndex:0];
+//
+//                            [cliniciansRootViewController_iPad setSelectMyInformationOnLoad:YES];
+//                        }
+//                        else if ([navController.title isEqualToString:@"ClinicianDetail"])
+//                        {
+//                            cliniciansDetailViewController_iPad = (CliniciansDetailViewController_iPad *)[navController.viewControllers objectAtIndex:0];
+//
+//                            if (cliniciansDetailViewController_iPad.popoverController)
+//                            {
+//                                popoverController = cliniciansDetailViewController_iPad.popoverController;
+//                            }
+//                        }
+//                    }
+//
+//                    [appDelegate.clinicianViewController setSelectMyInformationOnLoad:YES];
+//                    [appDelegate.tabBarController setSelectedViewController:splitView];
+//
+////
+//
+//                    break;
+//                }
+//            }
+//        }
+//    }
 
     switch (indexPath.section)
     {
-        case 1:
+        case 0:
         {
             //@"Assessments "
             if (indexPath.row == 0)
@@ -397,7 +387,7 @@
             }
         }
         break;
-        case 2:
+        case 1:
         {
             //@"Support Activities"
             //            if (indexPath.row==0){
@@ -405,7 +395,7 @@
             break;
         }
         break;
-        case 3:
+        case 2:
         {
             //@"Supervision Received"
             if (indexPath.row == 0)
@@ -420,7 +410,7 @@
             }
         }
         break;
-        case 4:
+        case 3:
         {
             //@"Existing Hours"
             if (indexPath.row == 0)
@@ -445,7 +435,7 @@
             }
         }
         break;
-        case 5:
+        case 4:
         {
             //@"Consultations"
 
@@ -462,7 +452,7 @@
         }
         break;
 
-        case 6:
+        case 5:
         {
             //@"Continuing Education Credits"
             if (indexPath.row == 0)
@@ -497,7 +487,7 @@
         }
         break;
 
-        case 7:
+        case 6:
         {
             if (indexPath.row == 0)
             {
@@ -566,7 +556,7 @@
         }
         break;
 
-        case 8:
+        case 7:
         {
             if (!drugViewController_iPhone)
             {
@@ -577,7 +567,7 @@
         }
         break;
 
-        case 9:
+        case 8:
         {
             //@"Clinician Groups"
 
@@ -606,7 +596,7 @@
             }
         }
         break;
-        case 10:
+        case 9:
         {
             //@"Lock Screen Settings"
             if (indexPath.row == 0)
@@ -622,7 +612,7 @@
         }
         break;
 
-        case 11:
+        case 10:
         {
             //@"Support"
             if (indexPath.row == 0)
@@ -651,12 +641,12 @@
             }
         }
             break;
-        case 12:
+        case 11:
         {
             //@"Lock Screen Settings"
             if (indexPath.row == 0)
             {
-                if (!ebpWebsitesVC)
+                if (!ebpWebsitesVC &&![SCUtilities is_iPad])
                 {
                     ebpWebsitesVC = [[EBPWebsitesTableViewController alloc] initWithNibName:@"EBPWebsitesTableViewController" bundle:nil];
                 }
@@ -683,91 +673,88 @@
 {
     if (timeTrackViewController)
     {
-        [timeTrackViewController viewDidUnload];
+        
         timeTrackViewController.view = nil;
         timeTrackViewController = nil;
     }
 
     if (existingHoursViewController)
     {
-        [existingHoursViewController viewDidUnload];
+        
         existingHoursViewController.view = nil;
         existingHoursViewController = nil;
     }
 
     if (consultationsViewController)
     {
-        [consultationsViewController viewDidUnload];
+       
         consultationsViewController.view = nil;
         consultationsViewController = nil;
     }
 
     if (ceCreditsViewController)
     {
-        [ceCreditsViewController viewDidUnload];
+        
         ceCreditsViewController.view = nil;
         ceCreditsViewController = nil;
     }
 
     if (coursesTakenViewController)
     {
-        [coursesTakenViewController viewDidUnload];
+       
         coursesTakenViewController.view = nil;
         coursesTakenViewController = nil;
     }
 
     if (conferencesAttendedViewController)
     {
-        [conferencesAttendedViewController viewDidUnload];
+
         conferencesAttendedViewController.view = nil;
         conferencesAttendedViewController = nil;
     }
 
     if (teachingExperienceVC)
     {
-        [teachingExperienceVC viewDidUnload];
-        teachingExperienceVC.view = nil;
+               teachingExperienceVC.view = nil;
         teachingExperienceVC = nil;
     }
 
     if (presentationsViewController)
     {
-        [presentationsViewController viewDidUnload];
+       
         presentationsViewController.view = nil;
         presentationsViewController = nil;
     }
 
     if (expertTestemonyVC)
     {
-        [expertTestemonyVC viewDidUnload];
-        expertTestemonyVC.view = nil;
+               expertTestemonyVC.view = nil;
         expertTestemonyVC = nil;
     }
 
     if (mediaAppearanceVC)
     {
-        [mediaAppearanceVC viewDidUnload];
+       
         mediaAppearanceVC.view = nil;
         mediaAppearanceVC = nil;
     }
 
     if (communitySerivceVC)
     {
-        [communitySerivceVC viewDidUnload];
-        communitySerivceVC.view = nil;
+               communitySerivceVC.view = nil;
         communitySerivceVC = nil;
     }
 
     if (otherActivityVC)
     {
-        [otherActivityVC viewDidUnload];
+       
         otherActivityVC.view = nil;
         otherActivityVC = nil;
     }
 
     if (drugViewController_iPhone)
     {
-        [drugViewController_iPhone viewDidUnload];
+       
         drugViewController_iPhone.view = nil;
 
         drugViewController_iPhone = nil;
@@ -775,35 +762,35 @@
 
     if (clinicianGroupsViewController)
     {
-        [clinicianGroupsViewController viewDidUnload];
+       
         clinicianGroupsViewController.view = nil;
         clinicianGroupsViewController = nil;
     }
 
     if (clinicianGroupsViewController)
     {
-        [clientGroupsViewController viewDidUnload];
+       
         clientGroupsViewController.view = nil;
         clientGroupsViewController = nil;
     }
 
     if (lockSettingsVC)
     {
-        [lockSettingsVC viewDidUnload];
+       
         lockSettingsVC.view = nil;
         lockSettingsVC = nil;
     }
 
     if (support)
     {
-        [support viewDidUnload];
+       
         support.view = nil;
         support = nil;
     }
 
     if (about)
     {
-        [about viewDidUnload];
+       
         about.view = nil;
 
         about = nil;
@@ -870,46 +857,43 @@
     switch (section)
     {
         case 0:
-            headerTitle = @"My Information";
-            break;
-        case 1:
             headerTitle = @"Direct Intervention Track";
             break;
-        case 2:
+        case 1:
             headerTitle = @"Indirect Support Activities Track";
             break;
-        case 3:
+        case 2:
             headerTitle = @"Direct Supervision Track";
             break;
-        case 4:
+        case 3:
             headerTitle = @"Existing Hours Track";
             break;
-        case 5:
+        case 4:
             headerTitle = @"Consultations Track";
             break;
-        case 6:
+        case 5:
             headerTitle = @"Education Track";
             break;
-        case 7:
+        case 6:
             headerTitle = @"Teaching and Involvement Track";
             break;
 
-        case 8:
+        case 7:
             headerTitle = @"Drug Database Track";
             break;
 
-        case 9:
+        case 8:
             headerTitle = @"Groups Track";
 
             break;
-        case 10:
+        case 9:
             headerTitle = @"Security Track";
             break;
-        case 11:
+        case 10:
             headerTitle = @"Support and About Track";
             break;
 
-        case 12:
+        case 11:
             headerTitle = @"EBP Websites Track";
             break;
         default:

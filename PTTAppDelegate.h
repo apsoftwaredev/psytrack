@@ -1,7 +1,7 @@
 /*
  *  PTTAppDelegate.h
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -57,6 +57,8 @@ static NSString *const kPTCurrentKeyDictionary = @"current_key_dictonary";
 static NSString *const kPTCurrentKeyDate = @"current_key_date";
 static NSString *const kPTiCloudPreference = @"icloud_preference";
 static NSString *const kPTMonthlyPracticumLogNumber = @"monthly_practicum_log_number";
+
+static NSInteger const kAlertTagErrorExitApp = 1;
 
 /*
  **************************************************************************************
@@ -160,7 +162,7 @@ static NSString *const kPTMonthlyPracticumLogNumber = @"monthly_practicum_log_nu
 - (void) displayMemoryWarning;
 - (NSURL *) applicationDrugsDirectory;
 - (NSString *) applicationDrugsPathString;
-
+-(BOOL)validateRequiredFields;
 //-(NSString *)decyptString:(NSString *) str;
 //-(NSString *)decyptString:(NSString *) encryptedString usingKeyString:(NSString *)keyString;
 - (NSDictionary *) encryptDataToEncryptedData:(NSData *)unencryptedData withKeyString:(NSString *)keyStringToSet;

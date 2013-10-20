@@ -1,7 +1,7 @@
 /*
  *  PTTEncryption.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -147,7 +147,7 @@ NSString *trustResultDescribe( SecTrustResultType result )
     }
     else
     {
-        return [NSString stringWithFormat:@"(Unknown trust result %lu)", result];
+        return [NSString stringWithFormat:@"(Unknown trust result %u)", result];
     }
 }
 

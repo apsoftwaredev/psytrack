@@ -220,7 +220,7 @@
         }
 
         UILabel *label = [UILabel autosizedLabelToFitText:[NSLocalizedString(title, @"DTAboutViewController") stringBySubstitutingInfoTokens] withFont:usedFont constrainedToSize:CGSizeMake(maxWidth, 480.0)];
-        label.textAlignment = UITextAlignmentCenter;
+        label.textAlignment = NSTextAlignmentCenter;
 
         if (delegate && [delegate respondsToSelector:@selector(aboutViewController:didSetupLabel:forTextStyle:)])
         {
@@ -758,7 +758,7 @@
 
     mailView.mailComposeDelegate = self;
 
-    [self presentModalViewController:mailView animated:YES];
+    [self presentViewController:mailView animated:YES completion:nil];
 }
 
 
@@ -813,7 +813,7 @@
             break;
     } /* switch */
 
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
     PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
     [appDelegate displayNotification:message forDuration:2.0 location:kPTTScreenLocationTop inView:nil];
 }

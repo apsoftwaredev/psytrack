@@ -1,7 +1,7 @@
 /*
  *  ClientsDetailViewController_iPad.h
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -30,8 +30,20 @@
     [super viewDidLoad];
 
     // Set the view controller's theme
-    self.tableViewModel.theme = [SCTheme themeWithPath:@"mapper-ipad-detail.ptt"];
-}
+    if ([SCUtilities systemVersion]<7) {
+        self.tableViewModel.theme = [SCTheme themeWithPath:@"mapper-ipad-detail.ptt"];
+
+    }
+    else{
+        
+        [self.navigationController.navigationBar setTranslucent: YES];
+        [self.navigationController.navigationBar setTintColor:[UIColor blueColor]];
+        
+        [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
+        [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:0.317586 green:0.623853 blue:0.77796 alpha:1.0]];
+    
+    }
+   }
 
 
 - (void) viewDidUnload

@@ -1,7 +1,7 @@
 //
 //  MonthlyPracticumLogGenerateViewController.m
 //  PsyTrack Clinician Tools
-//  Version: 1.5.2
+//  Version: 1.5.3
 //
 //  Created by Daniel Boice on 7/17/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -14,6 +14,7 @@
 #import "TimeTrackEntity.h"
 #import "ExistingHoursEntity.h"
 #import "ClinicianSelectionCell.h"
+
 
 @interface MonthlyPracticumLogGenerateViewController ()
 - (NSString *) sanitizeFileName:(NSString *)fileName;
@@ -175,6 +176,9 @@
 
 - (void) generateAndViewReportPDFWithFileName:(NSString *)fileName
 {
+    
+        
+   
     PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 
     NSString *phrase = self.pdfPasswordTextField.text; // Document password (for unlocking most encrypted PDF files)
@@ -239,7 +243,7 @@
             readerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
 
-            [self presentModalViewController:readerViewController animated:YES];
+            [self presentViewController:readerViewController animated:YES completion:nil];
 #endif // DEMO_VIEW_CONTROLLER_PUSH
 
             // Release the ReaderViewController
@@ -256,27 +260,36 @@
             [appDelegate displayNotification:@"Please select a month and year"];
         }
     }
+    
+   
+    
+    
+    
+    
 }
-
 
 - (IBAction) generateButtonTapped:(id)sender
 {
     PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+    if ([appDelegate validateRequiredFields]) {
+  
+        
 
-    NSString *fileName = [self sanitizeFileName:pdfFileNameTextField.text];
-    NSString *pdfs = [appDelegate.applicationDocumentsDirectory.path stringByAppendingPathComponent:fileName];
+        NSString *fileName = [self sanitizeFileName:pdfFileNameTextField.text];
+        NSString *pdfs = [appDelegate.applicationDocumentsDirectory.path stringByAppendingPathComponent:fileName];
 
-    if ([self fileAlreadyExists:pdfs])
-    {
-        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"File %@.pdf Already Exists in the Documents Folder",fileName]  message:@"Would you like to overwrite the existing file?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes",@"No, incriment", nil];
+        if ([self fileAlreadyExists:pdfs])
+        {
+            UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:[NSString stringWithFormat:@"File %@.pdf Already Exists in the Documents Folder",fileName]  message:@"Would you like to overwrite the existing file?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes",@"No, incriment", nil];
 
-        alertView.tag = 50;
+            alertView.tag = 50;
 
-        [alertView show];
-    }
-    else
-    {
-        [self generateAndViewReportPDFWithFileName:[fileName stringByAppendingPathExtension:@"pdf"]];
+            [alertView show];
+        }
+        else
+        {
+            [self generateAndViewReportPDFWithFileName:[fileName stringByAppendingPathExtension:@"pdf"]];
+        }
     }
 }
 
@@ -308,6 +321,7 @@
             break;
         } /* switch */
     }
+    
 }
 
 
@@ -533,7 +547,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 
 #else // dismiss the modal view controller
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 #endif // DEMO_VIEW_CONTROLLER_PUSH
 
     if (viewController.view)
@@ -756,7 +770,7 @@
 
     label.font = [UIFont boldSystemFontOfSize:21];
     label.backgroundColor = [UIColor clearColor];
-    label.textAlignment = UITextAlignmentCenter;
+    label.textAlignment = NSTextAlignmentCenter;
 
     return label;
 }

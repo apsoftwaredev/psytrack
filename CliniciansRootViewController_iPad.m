@@ -1,7 +1,7 @@
 /*
  *  ClinicianRootViewController_iPad.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -55,7 +55,7 @@
     objectsModel.addButtonItem = self.addButton;
     objectsModel.itemsAccessoryType = UITableViewCellAccessoryNone;
     objectsModel.detailViewControllerOptions.modalPresentationStyle = UIModalPresentationPageSheet;
-    objectsModel.detailViewController = self.tableViewModel.detailViewController;
+    self.tableViewModel.detailViewController =objectsModel.detailViewController;
     CliniciansDetailViewController_iPad *clinicianDetailViewController = (CliniciansDetailViewController_iPad *)objectsModel.detailViewController;
 
     clinicianDetailViewController.navigationBarType = SCNavigationBarTypeAddRight;
@@ -161,7 +161,7 @@
         SCNumericTextFieldCell *numericCell = (SCNumericTextFieldCell *)cell;
 
         [numericCell.textLabel sizeToFit];
-        numericCell.textField.textAlignment = UITextAlignmentRight;
+        numericCell.textField.textAlignment = NSTextAlignmentRight;
         numericCell.textField.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     }
 }
@@ -181,6 +181,10 @@
                     UILabel *titleLabel = (UILabel *)viewShort;
                     titleLabel.text = @"Prefix:";
                     tableViewModel.tag = 1;
+                    
+                    if ([SCUtilities systemVersion]>=7) {
+                        titleLabel.textColor=[UIColor blueColor];
+                    }
                 }
 
                 break;
@@ -190,6 +194,10 @@
                     UILabel *firstNameLabel = (UILabel *)viewLong;
                     firstNameLabel.text = @"First Name:";
                     cell.commitChangesLive = YES;
+                    
+                    if ([SCUtilities systemVersion]>=7) {
+                        firstNameLabel.textColor=[UIColor blueColor];
+                    }
                 }
 
                 break;
@@ -199,6 +207,9 @@
                 {
                     UILabel *middleNameLabel = (UILabel *)viewLong;
                     middleNameLabel.text = @"Middle Name:";
+                    if ([SCUtilities systemVersion]>=7) {
+                        middleNameLabel.textColor=[UIColor blueColor];
+                    }
                 }
 
                 break;
@@ -208,6 +219,9 @@
                 {
                     UILabel *lastNameLabel = (UILabel *)viewLong;
                     lastNameLabel.text = @"Last Name:";
+                    if ([SCUtilities systemVersion]>=7) {
+                        lastNameLabel.textColor=[UIColor blueColor];
+                    }
                 }
 
                 break;
@@ -216,6 +230,9 @@
                 {
                     UILabel *suffixLabel = (UILabel *)viewLong;
                     suffixLabel.text = @"Suffix:";
+                    if ([SCUtilities systemVersion]>=7) {
+                        suffixLabel.textColor=[UIColor blueColor];
+                    }
                 }
 
                 break;
@@ -343,9 +360,9 @@
 
 - (void) putAddAndClinicianButtonsOnDetailViewController
 {
-    self.tableViewModel.detailViewController.navigationItem.rightBarButtonItem = objectsModel.addButtonItem;
+objectsModel.detailViewController.navigationItem.rightBarButtonItem = objectsModel.addButtonItem;
 
-    self.tableViewModel.detailViewController.navigationItem.leftBarButtonItem = cliniciansBarButtonItem_;
+    objectsModel.detailViewController.navigationItem.leftBarButtonItem = cliniciansBarButtonItem_;
 }
 
 
@@ -418,7 +435,7 @@
 
 - (IBAction) displayPopover:(id)sender
 {
-    CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad = (CliniciansDetailViewController_iPad *)self.tableViewModel.detailViewController;
+    CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad = (CliniciansDetailViewController_iPad *)objectsModel.detailViewController;
 
     [cliniciansDetailViewController_iPad.popoverController presentPopoverFromBarButtonItem:self.splitViewController.navigationItem.leftBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 }

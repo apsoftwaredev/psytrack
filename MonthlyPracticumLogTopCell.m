@@ -1,7 +1,7 @@
 //
 //  MonthlyPracticumLogTopCell.m
 //  PsyTrack Clinician Tools
-//  Version: 1.5.2
+//  Version: 1.5.3
 //
 //  Created by Daniel Boice on 6/24/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -575,7 +575,7 @@
             headerLabel.textColor = sectionSubHeaderLabel.textColor;
             headerLabel.tag = 60;
             headerLabel.text = objectsSection.headerTitle;
-            headerLabel.textAlignment = UITextAlignmentCenter;
+            headerLabel.textAlignment = NSTextAlignmentCenter;
             [containerView addSubview:headerLabel];
 
             objectsSection.headerView = containerView;
@@ -589,7 +589,7 @@
             footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
             footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
 
-            footerNotesTextView.textAlignment = UITextAlignmentLeft;
+            footerNotesTextView.textAlignment = NSTextAlignmentLeft;
             footerNotesTextView.tag = 61;
 
             if (objectsSection.footerNotes.length)
@@ -644,7 +644,7 @@
                 footerLabel.tag = 60;
 
                 footerLabel.text = footerTotal;
-                footerLabel.textAlignment = UITextAlignmentCenter;
+                footerLabel.textAlignment = NSTextAlignmentCenter;
                 [subFooterLabelContainerView addSubview:footerLabel];
 
                 [footerContainerView addSubview:subFooterLabelContainerView];
@@ -728,7 +728,7 @@
             headerLabel.textColor = sectionSubHeaderLabel.textColor;
             headerLabel.tag = 60;
             headerLabel.text = objectsSection.headerTitle;
-            headerLabel.textAlignment = UITextAlignmentCenter;
+            headerLabel.textAlignment = NSTextAlignmentCenter;
             [containerView addSubview:headerLabel];
 
             objectsSection.headerView = containerView;
@@ -742,7 +742,7 @@
             footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
             footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
 
-            footerNotesTextView.textAlignment = UITextAlignmentLeft;
+            footerNotesTextView.textAlignment = NSTextAlignmentLeft;
             footerNotesTextView.tag = 61;
 
             if (objectsSection.footerNotes.length)
@@ -797,7 +797,7 @@
                 footerLabel.tag = 60;
 
                 footerLabel.text = footerTotal;
-                footerLabel.textAlignment = UITextAlignmentCenter;
+                footerLabel.textAlignment = NSTextAlignmentCenter;
                 [subFooterLabelContainerView addSubview:footerLabel];
 
                 [footerContainerView addSubview:subFooterLabelContainerView];
@@ -853,7 +853,7 @@
             headerLabel.textColor = sectionSubHeaderLabel.textColor;
             headerLabel.tag = 60;
             headerLabel.text = objectsSection.headerTitle;
-            headerLabel.textAlignment = UITextAlignmentCenter;
+            headerLabel.textAlignment = NSTextAlignmentCenter;
             [containerView addSubview:headerLabel];
 
             objectsSection.headerView = containerView;
@@ -867,7 +867,7 @@
             footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
             footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
 
-            footerNotesTextView.textAlignment = UITextAlignmentLeft;
+            footerNotesTextView.textAlignment = NSTextAlignmentLeft;
             footerNotesTextView.tag = 61;
 
             if (objectsSection.footerNotes.length)
@@ -922,7 +922,7 @@
                 footerLabel.tag = 60;
 
                 footerLabel.text = footerTotal;
-                footerLabel.textAlignment = UITextAlignmentCenter;
+                footerLabel.textAlignment = NSTextAlignmentCenter;
                 [subFooterLabelContainerView addSubview:footerLabel];
 
                 [footerContainerView addSubview:subFooterLabelContainerView];
@@ -983,7 +983,7 @@
             headerLabel.textColor = sectionSubHeaderLabel.textColor;
             headerLabel.tag = 60;
             headerLabel.text = objectsSection.headerTitle;
-            headerLabel.textAlignment = UITextAlignmentCenter;
+            headerLabel.textAlignment = NSTextAlignmentRight;
             [containerView addSubview:headerLabel];
 
             objectsSection.headerView = containerView;
@@ -997,7 +997,7 @@
             footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
             footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
 
-            footerNotesTextView.textAlignment = UITextAlignmentLeft;
+            footerNotesTextView.textAlignment = NSTextAlignmentLeft;
             footerNotesTextView.tag = 61;
 
             if (objectsSection.footerNotes.length)
@@ -1052,7 +1052,7 @@
                 footerLabel.tag = 60;
 
                 footerLabel.text = footerTotal;
-                footerLabel.textAlignment = UITextAlignmentCenter;
+                footerLabel.textAlignment = NSTextAlignmentRight;
                 [subFooterLabelContainerView addSubview:footerLabel];
 
                 [footerContainerView addSubview:subFooterLabelContainerView];
@@ -1243,7 +1243,7 @@
                 interventionHeaderLabel.font = nibSupervisorSummaryInterventionHeader.font;
                 interventionHeaderLabel.textAlignment = nibSupervisorSummaryInterventionHeader.textAlignment;
                 interventionHeaderLabel.text = nibSupervisorSummaryInterventionHeader.text;
-                interventionHeaderLabel.lineBreakMode = UILineBreakModeWordWrap;
+                interventionHeaderLabel.lineBreakMode = NSLineBreakByWordWrapping;
                 interventionHeaderLabel.numberOfLines = 2;
 
                 UILabel *nibSupervisorSummaryAssessmentHeader = self.supervisorSummaryMonthAssessmentHeaderLabel;
@@ -1252,7 +1252,7 @@
                 assessmentHeaderLabel.font = nibSupervisorSummaryAssessmentHeader.font;
                 assessmentHeaderLabel.textAlignment = nibSupervisorSummaryAssessmentHeader.textAlignment;
                 assessmentHeaderLabel.text = nibSupervisorSummaryAssessmentHeader.text;
-                assessmentHeaderLabel.lineBreakMode = UILineBreakModeWordWrap;
+                assessmentHeaderLabel.lineBreakMode = NSLineBreakByWordWrapping;
                 assessmentHeaderLabel.numberOfLines = 2;
 
                 UILabel *nibSupervisorSummarySupportHeader = self.supervisorSummaryMonthSupportHeaderLabel;
@@ -1261,7 +1261,7 @@
                 supportHeaderLabel.font = nibSupervisorSummarySupportHeader.font;
                 supportHeaderLabel.textAlignment = nibSupervisorSummarySupportHeader.textAlignment;
                 supportHeaderLabel.text = nibSupervisorSummarySupportHeader.text;
-                supportHeaderLabel.lineBreakMode = UILineBreakModeWordWrap;
+                supportHeaderLabel.lineBreakMode = NSLineBreakByWordWrapping;
                 supportHeaderLabel.numberOfLines = 2;
 
                 UILabel *nibSupervisorSummarySupervisionHeader = self.supervisorSummaryMonthSupervisionHeaderLabel;
@@ -1270,7 +1270,7 @@
                 supervisionHeaderLabel.font = nibSupervisorSummarySupervisionHeader.font;
                 supervisionHeaderLabel.textAlignment = nibSupervisorSummarySupervisionHeader.textAlignment;
                 supervisionHeaderLabel.text = nibSupervisorSummarySupervisionHeader.text;
-                supervisionHeaderLabel.lineBreakMode = UILineBreakModeWordWrap;
+                supervisionHeaderLabel.lineBreakMode = NSLineBreakByWordWrapping;
                 supervisionHeaderLabel.numberOfLines = 2;
 
                 UILabel *nibSupervisorSummaryInterventionHours = self.supervisorSummaryMonthInterventionHoursLabel;
@@ -1395,7 +1395,7 @@
         headerLabel.textColor = sectionSubHeaderLabel.textColor;
         headerLabel.tag = 60;
         headerLabel.text = objectsSection.headerTitle;
-        headerLabel.textAlignment = UITextAlignmentCenter;
+        headerLabel.textAlignment = NSTextAlignmentRight;
         [containerView addSubview:headerLabel];
 
         objectsSection.headerView = containerView;
@@ -1409,7 +1409,7 @@
         footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
         footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
 
-        footerNotesTextView.textAlignment = UITextAlignmentLeft;
+        footerNotesTextView.textAlignment = NSTextAlignmentLeft;
         footerNotesTextView.tag = 61;
 
         if (objectsSection.footerNotes.length)
@@ -1464,7 +1464,7 @@
             footerLabel.tag = 60;
 
             footerLabel.text = footerTotal;
-            footerLabel.textAlignment = UITextAlignmentCenter;
+            footerLabel.textAlignment = NSTextAlignmentRight;
             [subFooterLabelContainerView addSubview:footerLabel];
 
             [footerContainerView addSubview:subFooterLabelContainerView];

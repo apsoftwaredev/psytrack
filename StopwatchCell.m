@@ -1,7 +1,7 @@
 /*
  *  StopwatchCell.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -124,10 +124,12 @@
     if (startButton.hidden)
     {
         startButton.hidden = FALSE;
+        stopButton.hidden=YES;
     }
     else
     {
         startButton.hidden = TRUE;
+        stopButton.hidden=NO;
     }
 }
 

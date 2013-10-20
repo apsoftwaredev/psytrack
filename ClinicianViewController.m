@@ -1,7 +1,7 @@
 /*
  *  ClinicianViewController.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -21,6 +21,7 @@
 #import "CliniciansViewController_Shared.h"
 
 #import "SCArrayOfObjectsModel_UseSelectionSection.h"
+#import "ValidateMOC.h"
 
 @implementation ClinicianViewController
 
@@ -68,7 +69,7 @@
 
 - (IBAction) reloadTableViewData:(id)sender
 {
-    [self.tableViewModel reloadBoundValues ];
+    [objectsModel reloadBoundValues ];
     [self.tableView reloadData];
 }
 
@@ -86,7 +87,24 @@
         objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef];
         objectsModel.tag = 0;
         PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+       
         
+        if ([SCUtilities systemVersion]>=7) {
+            
+             CGRect tableViewFrame=objectsModel.modeledTableView.frame;
+            
+           float tableviewY=objectsModel.modeledTableView.frame.origin.y+30;
+            tableViewFrame.origin.y=tableviewY;
+            objectsModel.modeledTableView.transform = CGAffineTransformIdentity;
+            objectsModel.modeledTableView.frame = tableViewFrame;
+            
+            CGRect searchBarFrame=self.searchBar.frame;
+            
+            float searchBarY=self.searchBar.frame.origin.y+60;
+            searchBarFrame.origin.y=searchBarY;
+            self.searchBar.transform = CGAffineTransformIdentity;
+            self.searchBar.frame = searchBarFrame;
+        }
         
         [self.view setBackgroundColor:appDelegate.window.backgroundColor];
         // Set the view controller's theme
@@ -181,8 +199,22 @@
 
     objectsModel.enablePullToRefresh = TRUE;
     objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
+    objectsModel.modelActions.didFetchItemsFromStore = ^(SCArrayOfItemsModel *itemsModel, NSMutableArray *items)
+    {
+        
+        if (items.count == 0)
+        {
+            self.totalCliniciansLabel.text = @"Tap + To Add Clinicians";
+        }
+        else
+        {
+            self.totalCliniciansLabel.text = [NSString stringWithFormat:@"Total Clinicians: %i", items.count];
+        }
 
-    [self updateClinicianTotalLabel];
+       
+    };
+
+   
 
     if (![SCUtilities is_iPad])
     {
@@ -238,8 +270,8 @@
      duration : 5];
     if (isInDetailSubview)
     {
-        [self.tableViewModel reloadBoundValues];
-        [self.tableViewModel.modeledTableView reloadData];
+        [objectsModel reloadBoundValues];
+        [objectsModel.modeledTableView reloadData];
         [self setSelectedClinicians];
     }
 
@@ -294,11 +326,11 @@
 
 - (void) selectMyInformation
 {
-    NSInteger sectionCount = self.tableViewModel.sectionCount;
+    NSInteger sectionCount = objectsModel.sectionCount;
 
     for (int i = 0; i < sectionCount; i++)
     {
-        SCTableViewSection *section = (SCTableViewSection *)[self.tableViewModel sectionAtIndex:i];
+        SCTableViewSection *section = (SCTableViewSection *)[objectsModel sectionAtIndex:i];
         BOOL foundMyInformation = NO;
         if ([section isKindOfClass:[SCArrayOfObjectsSection class]])
         {
@@ -316,10 +348,10 @@
 
                     if (myInformation)
                     {
-                        [self.tableViewModel setActiveCell:cell];
+                        [objectsModel setActiveCell:cell];
                         if (![SCUtilities is_iPad])
                         {
-                            [arrayOfObjectsSection dispatchEventSelectRowAtIndexPath:[self.tableViewModel indexPathForCell:cell]];
+                            [arrayOfObjectsSection dispatchEventSelectRowAtIndexPath:[objectsModel indexPathForCell:cell]];
                         }
 
                         foundMyInformation = YES;
@@ -344,7 +376,7 @@
         // check if self is the rootViewController
         if ([self.navigationController.viewControllers objectAtIndex:0] == self)
         {
-            [self dismissModalViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
         else
         {
@@ -353,10 +385,9 @@
     }
     else
     {
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 
-    [self viewDidUnload];
 }
 
 
@@ -373,7 +404,7 @@
             [objectsSelectionSection commitCellChanges];
             if (allowMultipleSelection)
             {
-                NSInteger sectionCount = self.tableViewModel.sectionCount;
+                NSInteger sectionCount = objectsModel.sectionCount;
 
                 if (sectionCount && !currentlySelectedCliniciansArray)
                 {
@@ -387,7 +418,7 @@
 
                 for (NSInteger i = 0; i < sectionCount; i++ )
                 {
-                    SCObjectSelectionSection *sectionAtIndex = (SCObjectSelectionSection *)[self.tableViewModel sectionAtIndex:i];
+                    SCObjectSelectionSection *sectionAtIndex = (SCObjectSelectionSection *)[objectsModel sectionAtIndex:i];
 
                     NSEnumerator *enumerator = [sectionAtIndex.selectedItemsIndexes objectEnumerator];
                     id setObject;
@@ -462,15 +493,15 @@
 
 - (void) setSelectedClinicians
 {
-    if (self.tableViewModel.sectionCount && isInDetailSubview && currentlySelectedCliniciansArray && currentlySelectedCliniciansArray.count && allowMultipleSelection)
+    if (objectsModel.sectionCount && isInDetailSubview && currentlySelectedCliniciansArray && currentlySelectedCliniciansArray.count && allowMultipleSelection)
     {
-        SCTableViewSection *section = (SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
+        SCTableViewSection *section = (SCTableViewSection *)[objectsModel sectionAtIndex:0];
 
         if ([section isKindOfClass:[SCObjectSelectionSection class]])
         {
-            for (int i = 0; i < self.tableViewModel.sectionCount; i++)
+            for (int i = 0; i < objectsModel.sectionCount; i++)
             {
-                SCObjectSelectionSection *objectSelectionSection = (SCObjectSelectionSection *)[self.tableViewModel sectionAtIndex:i];
+                SCObjectSelectionSection *objectSelectionSection = (SCObjectSelectionSection *)[objectsModel sectionAtIndex:i];
 
                 NSMutableSet *selectedIndexesSet = objectSelectionSection.selectedItemsIndexes;
                 NSMutableArray *takeOutClinicians = [NSMutableArray array];
@@ -501,7 +532,7 @@
 {
     if (isInDetailSubview)
     {
-        SCTableViewSection *section = (SCTableViewSection *)[self.tableViewModel sectionAtIndex:0];
+        SCTableViewSection *section = (SCTableViewSection *)[objectsModel sectionAtIndex:0];
 
         if ([section isKindOfClass:[SCObjectSelectionSection class]])
         {
@@ -516,11 +547,11 @@
                     currentlySelectedCliniciansArray = [NSMutableArray array];
                 }
 
-                NSInteger sectionCount = self.tableViewModel.sectionCount;
+                NSInteger sectionCount = objectsModel.sectionCount;
 
                 for (NSInteger p = 0; p < sectionCount; p++ )
                 {
-                    SCObjectSelectionSection *sectionAtIndex = (SCObjectSelectionSection *)[self.tableViewModel sectionAtIndex:p];
+                    SCObjectSelectionSection *sectionAtIndex = (SCObjectSelectionSection *)[objectsModel sectionAtIndex:p];
                     NSEnumerator *enumerator = [sectionAtIndex.selectedItemsIndexes objectEnumerator];
                     id setObject;
                     while ( (setObject = [enumerator nextObject]) != nil )
@@ -626,7 +657,7 @@
                 if ([section isKindOfClass:[SCArrayOfObjectsSection class]])
                 {
                     SCArrayOfObjectsSection *arrayOfObjectsSection = (SCArrayOfObjectsSection *)section;
-                    cellCount = arrayOfObjectsSection.items.count;
+                    cellCount = cellCount+ arrayOfObjectsSection.items.count;
                 }
                 else
                 {
@@ -671,7 +702,7 @@
         SCNumericTextFieldCell *numericCell = (SCNumericTextFieldCell *)cell;
 
         [numericCell.textLabel sizeToFit];
-        numericCell.textField.textAlignment = UITextAlignmentRight;
+        numericCell.textField.textAlignment = NSTextAlignmentRight;
         numericCell.textField.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     }
 }
@@ -707,15 +738,23 @@
         ClinicianEntity *clinicianObject = (ClinicianEntity *)cellManagedObject;
         if ([cellManagedObject respondsToSelector:@selector(entity)] && [cellManagedObject.entity.name isEqualToString:@"ClinicianEntity"])
         {
+            
+            PTTAppDelegate *appdelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+            UIView *notificationSuperView;
+            
+            if (clinicianObject.hasSupervisedTime) {
+                [appdelegate displayNotification:@"Delete associated Assessments, Interventions, or Supervision records before deleting this clinician." forDuration:3.5 location:kPTTScreenLocationTop inView:notificationSuperView];
+                return NO;
+            }
+            
             BOOL myInformation = (BOOL)[(NSNumber *)[cell.boundObject valueForKey:@"myInformation"] boolValue];
             if (myInformation)
             {
-                PTTAppDelegate *appdelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-                UIView *notificationSuperView;
-
+                
+                
                 if (!deletePressedOnce)
                 {
-                    [appdelegate displayNotification:@"Can't Delete Your Own Record. Press Delete again to clear your information." forDuration:3.5 location:kPTTScreenLocationTop inView:notificationSuperView];
+                    [appdelegate displayNotification:@"Can't Delete Your Own Clinician Record. Press Delete again to clear your information." forDuration:3.5 location:kPTTScreenLocationTop inView:notificationSuperView];
 
                     deletePressedOnce = YES;
                 }

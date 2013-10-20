@@ -1,7 +1,7 @@
 /*
  *  WebViewDetailViewController.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -411,7 +411,7 @@
 
     [picker setMessageBody:emailBody isHTML:NO];
 
-    [self presentModalViewController:picker animated:YES];
+    [self presentViewController:picker animated:YES completion:nil];
 }
 
 
@@ -440,7 +440,7 @@
             break;
     } /* switch */
 
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 
     [appDelegate displayNotification:resultString forDuration:2.0 location:kPTTScreenLocationTop inView:nil];
 }

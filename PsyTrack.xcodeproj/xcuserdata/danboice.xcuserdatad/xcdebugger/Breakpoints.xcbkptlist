@@ -4360,7 +4360,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "712"
          endingLineNumber = "712"
-         landmarkName = "-alertView:didDismissWithButtonIndex:"
+         landmarkName = "-notifyTrustFailure:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4373,8 +4373,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "704"
          endingLineNumber = "704"
-         landmarkName = "@implementation PTTAppDelegate"
-         landmarkType = "3">
+         landmarkName = "-notifyTrustFailure:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -4386,7 +4386,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "722"
          endingLineNumber = "722"
-         landmarkName = "-iCloudPreferenceFromUserDefaults"
+         landmarkName = "-alertView:didDismissWithButtonIndex:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -4425,8 +4425,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1457"
          endingLineNumber = "1457"
-         landmarkName = "-encryptDataToEncryptedData:withKeyString:"
-         landmarkType = "5">
+         landmarkName = "@implementation PTTAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -4438,8 +4438,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1446"
          endingLineNumber = "1446"
-         landmarkName = "@implementation PTTAppDelegate"
-         landmarkType = "3">
+         landmarkName = "-encryptStringToEncryptedData:withKeyString:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -4464,8 +4464,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1493"
          endingLineNumber = "1493"
-         landmarkName = "@implementation PTTAppDelegate"
-         landmarkType = "3">
+         landmarkName = "-encryptDataToEncryptedData:withKeyString:"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -4490,7 +4490,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1367"
          endingLineNumber = "1367"
-         landmarkName = "-convertStringToData:"
+         landmarkName = "-convertDataToString:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5286,7 +5286,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2425"
          endingLineNumber = "2425"
-         landmarkName = "-saveContext"
+         landmarkName = "-applicationWillTerminate:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5753,7 +5753,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2346"
          endingLineNumber = "2346"
-         landmarkName = "-applicationWillEnterForeground:"
+         landmarkName = "-applicationDidEnterBackground:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5766,8 +5766,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2362"
          endingLineNumber = "2362"
-         landmarkName = "-displayMemoryWarning"
-         landmarkType = "5">
+         landmarkName = "@implementation PTTAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -5792,7 +5792,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2423"
          endingLineNumber = "2423"
-         landmarkName = "-saveContext"
+         landmarkName = "-applicationWillTerminate:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -5805,7 +5805,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2355"
          endingLineNumber = "2355"
-         landmarkName = "-applicationDidBecomeActive:"
+         landmarkName = "-applicationWillEnterForeground:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -6052,8 +6052,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "1292"
          endingLineNumber = "1292"
-         landmarkName = "-setupLockDictionaryResultStr"
-         landmarkType = "5">
+         landmarkName = "@implementation PTTAppDelegate"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
@@ -6977,8 +6977,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3127"
          endingLineNumber = "3127"
-         landmarkName = "@implementation PTTAppDelegate"
-         landmarkType = "3">
+         landmarkName = "-reachable"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -7419,8 +7419,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "3492"
          endingLineNumber = "3492"
-         landmarkName = "@implementation PTTAppDelegate"
-         landmarkType = "3">
+         landmarkName = "-flashAppTrainAndTitleGraphics"
+         landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -8781,6 +8781,19 @@
          startingLineNumber = "905"
          endingLineNumber = "905"
          landmarkName = "-downloadButtonTapped:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "EBPWebViewViewController.m"
+         timestampString = "397869900.270826"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "67"
+         endingLineNumber = "67"
+         landmarkName = "-webViewDidStartLoad:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

@@ -1,7 +1,7 @@
 /*
  *  CliniciansViewController_Shared.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -1454,6 +1454,15 @@
                 ClinicianEntity *clinicianObject = (ClinicianEntity *)cellManagedObject;
 
                 cell.textLabel.text = clinicianObject.combinedName;
+                
+                if ([clinicianObject.myInformation boolValue]) {
+                    cell.backgroundColor=[UIColor yellowColor];
+                    if (![clinicianObject.firstName isEqualToString:@"Enter Your"]) {
+                        cell.textLabel.text=[@"(ME) "stringByAppendingString:cell.textLabel.text];
+                    }
+                    
+                }
+                
             }
         }
 
@@ -1690,7 +1699,7 @@
         PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
 
         UIColor *backgroundColor = nil;
-        if ((indexPath.row == NSNotFound || tableModel.tag > 0 || isInDetailSubview)&&[SCUtilities systemVersion]<7)
+        if ((indexPath.row == NSNotFound || tableModel.tag > 0 || isInDetailSubview))
         {
             backgroundColor = (UIColor *)appDelegate.window.backgroundColor;
             NSString *imageNameStr = nil;
@@ -1702,9 +1711,13 @@
             {
                 imageNameStr = @"menubar.png";
             }
-
+            if ([SCUtilities systemVersion]<7) {
+           
             UIImage *menueBarImage = [UIImage imageNamed:imageNameStr];
             [detailTableViewModel.viewController.navigationController.navigationBar setBackgroundImage:menueBarImage forBarMetrics:UIBarMetricsDefault];
+                
+            
+            }
         }
         else
         {
@@ -2360,7 +2373,7 @@
 
         if (currentDetailTableViewModel_)
         {
-            [currentDetailTableViewModel_.viewController.navigationController presentModalViewController:self.peoplePickerNavigationController animated:YES];
+            [currentDetailTableViewModel_.viewController.navigationController presentViewController:self.peoplePickerNavigationController animated:YES completion:nil];
         }
     }
 }
@@ -2501,7 +2514,7 @@
                         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:personAddNewViewController_];
 
                         navController.delegate = self;
-                        [[currentDetailTableViewModel_.viewController navigationController] presentModalViewController:navController animated:YES];
+                        [[currentDetailTableViewModel_.viewController navigationController] presentViewController:navController animated:YES completion:nil];
 
                         addExistingAfterPromptBool = FALSE;
 
@@ -2658,7 +2671,7 @@
                             UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:personAddNewViewController_];
 
                             navController.delegate = self;
-                            [[currentDetailTableViewModel_.viewController navigationController] presentModalViewController:navController animated:YES];
+                            [[currentDetailTableViewModel_.viewController navigationController] presentViewController:navController animated:YES completion:nil];
 
                             addExistingAfterPromptBool = FALSE;
 
@@ -2829,7 +2842,8 @@
     if (viewController.view.tag == 837 && viewController.view.subviews.count)
     {
         UITableView *personViewTableView = (UITableView *)[viewController.view.subviews objectAtIndex:0];
-
+        if ([SCUtilities systemVersion]<7) {
+       
         if ([SCUtilities is_iPad] || [SCUtilities systemVersion] >= 6)
         {
             [personViewTableView setBackgroundColor:[UIColor clearColor]];
@@ -2845,7 +2859,7 @@
         {
             [personViewTableView setBackgroundColor:UIColor.clearColor];
         }
-
+        }
         //
         if ([SCUtilities systemVersion]>=7) {
              personViewTableView.superview.tag=837;
@@ -2899,7 +2913,13 @@
 - (BOOL) peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person
                                  property:(ABPropertyID)property identifier:(ABMultiValueIdentifier)identifier
 {
-    return YES;
+    if ([SCUtilities systemVersion]<7) {
+         return YES;
+    }
+    else{
+        return NO;
+    }
+   
 }
 
 

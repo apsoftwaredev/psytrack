@@ -1,7 +1,7 @@
 /*
  *  DrugViewController_iPhone.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -433,7 +433,7 @@ NSString *const kRemoteFileName = @"dFile-001.zpk";
         // check if self is the rootViewController
         if ([self.navigationController.viewControllers objectAtIndex:0] == self)
         {
-            [self dismissModalViewControllerAnimated:YES];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
         else
         {
@@ -442,7 +442,7 @@ NSString *const kRemoteFileName = @"dFile-001.zpk";
     }
     else
     {
-        [self dismissModalViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
@@ -847,7 +847,7 @@ NSString *const kRemoteFileName = @"dFile-001.zpk";
         }
         else
         {
-            frame = CGRectMake(0, 12, 115, 20);
+            frame = CGRectMake(0, 67, 115, 20);
         }
 
 //        NSURL *drugsDirectory=(NSURL*)[appDelegate applicationDrugsDirectory];

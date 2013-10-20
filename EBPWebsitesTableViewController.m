@@ -34,18 +34,29 @@
     
     SCTableViewCell *nreppCell=[SCTableViewCell cellWithText:@"SAMHSA NREPP Website"];
     
+    
+    NSString *nibName=nil;
+    if ([SCUtilities is_iPad]) {
+        nibName=@"EBPWebViewViewController";
+    }
+    else
+    {
+        nibName=@"EBPWebViewViewController_iPhone";
+
+    }
     apaCell.cellActions.didSelect = ^(SCTableViewCell *cell, NSIndexPath *indexPath)
     {
-        EBPWebViewViewController *ebpWebViewViewController=[[EBPWebViewViewController alloc]initWithNibName:@"EBPWebViewViewController" bundle:[NSBundle mainBundle] webURL:@"http://google.com"];
+        EBPWebViewViewController *ebpWebViewViewController=[[EBPWebViewViewController alloc]initWithNibName:nibName bundle:[NSBundle mainBundle] webURL:@"http://www.psychologicaltreatments.org"];
         
-        [self.navigationController presentModalViewController:ebpWebViewViewController animated:YES];
+        [self.navigationController pushViewController:ebpWebViewViewController animated:YES ];
     };
     
     nreppCell.cellActions.didSelect = ^(SCTableViewCell *cell, NSIndexPath *indexPath)
     {
-        EBPWebViewViewController *ebpWebViewViewController=[[EBPWebViewViewController alloc]initWithNibName:@"EBPWebViewViewController" bundle:[NSBundle mainBundle] webURL:@"http://google.com"];
+        EBPWebViewViewController *ebpWebViewViewController=[[EBPWebViewViewController alloc]initWithNibName:nibName bundle:[NSBundle mainBundle] webURL:@"http://www.nrepp.samhsa.gov/ViewAll.aspx"];
         
-        [self.navigationController presentModalViewController:ebpWebViewViewController animated:YES];
+        
+        [self.navigationController pushViewController:ebpWebViewViewController animated:YES ];
     };
 
     

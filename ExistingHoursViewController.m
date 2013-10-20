@@ -1,7 +1,7 @@
 //
 //  ExistingHoursViewController.m
 //  PsyTrack Clinician Tools
-//  Version: 1.5.2
+//  Version: 1.5.3
 //
 //  Created by Daniel Boice on 3/29/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -15,6 +15,10 @@
 #import "ExistingHoursEntity.h"
 #import "TrainingProgramEntity.h"
 #import "SiteEntity.h"
+#import "AssessmentTypeEntity.h"
+#import "SupportActivityTypeEntity.h"
+#import "InterventionTypeSubtypeEntity.h"
+#import "SupervisionTypeSubtypeEntity.h"
 
 @interface ExistingHoursViewController ()
 
@@ -1279,23 +1283,24 @@
     //Do some property definition customization for the <#name#> Entity defined in <#classDef#>
 
     objectsModel = [[SCArrayOfObjectsModel alloc] initWithTableView:self.tableView entityDefinition:existingHoursDef ];
+    if ([SCUtilities systemVersion]<7) {
+    
+        if (![SCUtilities is_iPad])
+        {
+            objectsModel.theme = [SCTheme themeWithPath:@"mapper-iPhone.ptt"];
+        }
+        else
+        {
+            objectsModel.theme = [SCTheme themeWithPath:@"mapper-ipad-full.ptt"];
+        }
 
-    if (![SCUtilities is_iPad])
-    {
-        objectsModel.theme = [SCTheme themeWithPath:@"mapper-iPhone.ptt"];
+        if ([SCUtilities is_iPad] || [SCUtilities systemVersion] >= 6)
+        {
+            self.tableView.backgroundView = nil;
+            UIView *newView = [[UIView alloc]init];
+            [self.tableView setBackgroundView:newView];
+        }
     }
-    else
-    {
-        objectsModel.theme = [SCTheme themeWithPath:@"mapper-ipad-full.ptt"];
-    }
-
-    if ([SCUtilities is_iPad] || [SCUtilities systemVersion] >= 6)
-    {
-        self.tableView.backgroundView = nil;
-        UIView *newView = [[UIView alloc]init];
-        [self.tableView setBackgroundView:newView];
-    }
-
     [self setNavigationBarType:SCNavigationBarTypeAddEditRight];
 
     objectsModel.editButtonItem = self.editButton;
@@ -1573,7 +1578,7 @@
         SCNumericTextFieldCell *numericCell = (SCNumericTextFieldCell *)cell;
 
         [numericCell.textLabel sizeToFit];
-        numericCell.textField.textAlignment = UITextAlignmentRight;
+        numericCell.textField.textAlignment = NSTextAlignmentRight;
         numericCell.textField.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
 //       CGRect textFieldFrame=numericCell.textField.textInputView.frame;
 //        textFieldFrame.size.width=50;
@@ -1761,6 +1766,182 @@
                 cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@ - %@",type,subType,hoursStr];
             }
         }
+    }
+}
+- (void) tableViewModel:(SCTableViewModel *)tableModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel
+{
+   
+    
+    DLog(@"table model tag create item cell entity name is %i", tableModel.tag);
+    if (tableModel.tag==1||tableModel.tag==3) {
+        
+        detailTableViewModel.sectionActions.willDeleteItem = ^BOOL(SCArrayOfItemsSection *itemsSection, NSObject *item, NSIndexPath *indexPath)
+        {
+            SCTableViewCell *cellatIndexPath=(SCTableViewCell *)[detailTableViewModel cellAtIndexPath:indexPath];
+            
+            NSManagedObject *cellManagedObject=(NSManagedObject *)cellatIndexPath.boundObject;
+            
+            
+            
+            
+            
+            PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+            
+            
+            
+            
+            BOOL deleteItem=YES;
+            
+            if ([cellManagedObject isKindOfClass:[InterventionTypeEntity class]]) {
+                InterventionTypeEntity *interventionTypeEntity=(InterventionTypeEntity*)item;
+                
+                if(interventionTypeEntity.associatedWithTimeRecords){
+                    
+                    
+                    
+                    
+                    [appDelegate displayNotification:@"Delete associated Intervention records before deleting this intervention type." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                    
+                    deleteItem = NO;
+                    
+                    
+                    
+                }
+                
+            }
+            
+            
+            
+            
+            else if ([cellManagedObject isKindOfClass:[SupportActivityTypeEntity class]]) {
+                SupportActivityTypeEntity *supportActivityTypeEntity=(SupportActivityTypeEntity*)item;
+                
+                if(supportActivityTypeEntity.associatedWithTimeRecords){
+                    
+                    
+                    
+                    [appDelegate displayNotification:@"Delete associated support activities records before deleting this support activity type." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                    
+                    deleteItem = NO;
+                    
+                    
+                    
+                }
+                
+            }
+            
+            
+            else if ([cellManagedObject isKindOfClass:[AssessmentTypeEntity class]]) {
+                AssessmentTypeEntity *assessmentTypeEntity=(AssessmentTypeEntity*)item;
+                
+                if(assessmentTypeEntity.associatedWithTimeRecords){
+                    
+                    
+                    
+                    [appDelegate displayNotification:@"Delete associated assessment records before deleting this assessment type." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                    
+                    deleteItem = NO;
+                    
+                    
+                    
+                }
+                
+            }
+            
+            
+            
+            
+            else if ([cellManagedObject isKindOfClass:[SupervisionTypeEntity class]]) {
+                SupervisionTypeEntity *supervisionTypeEntity=(SupervisionTypeEntity*)item;
+                
+                if(supervisionTypeEntity.associatedWithTimeRecords){
+                    
+                    
+                    
+                    [appDelegate displayNotification:@"Delete associated supervision records before deleting this supervision type." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                    
+                    deleteItem = NO;
+                    
+                    
+                    
+                }
+                
+            }
+            
+            
+            else  if ([cellManagedObject isKindOfClass:[SupervisionTypeSubtypeEntity class]]) {
+                SupervisionTypeSubtypeEntity *supervisionSubTypeEntity=(SupervisionTypeSubtypeEntity*)item;
+                
+                if(supervisionSubTypeEntity.associatedWithTimeRecords){
+                    
+                    
+                    
+                    [appDelegate displayNotification:@"Delete associated Supervison records before deleting this supervision subtype." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                    
+                    deleteItem = NO;
+                    
+                    
+                    
+                }
+                
+            }
+            
+            
+            else  if ([cellManagedObject isKindOfClass:[InterventionTypeSubtypeEntity class]]) {
+                InterventionTypeSubtypeEntity *interventionSubTypeEntity=(InterventionTypeSubtypeEntity*)item;
+                
+                if(interventionSubTypeEntity.associatedWithTimeRecords){
+                    
+                    
+                    
+                    [appDelegate displayNotification:@"Delete associated Intervention records before deleting this intervention subtype." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                    
+                    deleteItem = NO;
+                    
+                    
+                    
+                }
+                
+            }
+            
+            else  if ([cellManagedObject isKindOfClass:[SiteEntity class]]) {
+                SiteEntity *siteEntity=(SiteEntity*)item;
+                
+                if(siteEntity.associatedWithTimeRecords){
+                    
+                    
+                    
+                    [appDelegate displayNotification:@"Delete associated assessments, intervention, or support activity records before deleting this site." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                    
+                    deleteItem = NO;
+                    
+                    
+                    
+                }
+                
+            }
+            else  if ([cellManagedObject isKindOfClass:[TrainingProgramEntity class]]) {
+                TrainingProgramEntity *trainingProgramEntity=(TrainingProgramEntity*)item;
+                
+                if(trainingProgramEntity.associatedWithTimeRecords){
+                    
+                    
+                    
+                    [appDelegate displayNotification:@"Delete associated assessments, intervention, or support activity records before deleting this training program." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                    
+                    deleteItem = NO;
+                    
+                    
+                    
+                }
+                
+            }
+            
+            return deleteItem;
+            
+            
+            
+        };
     }
 }
 

@@ -1,7 +1,7 @@
 /*
  *  ClientRootViewController_iPad.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.2
+ *  Version: 1.5.3
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -117,6 +117,8 @@
         [self.searchBar setBackgroundImage:menueBarImage];
         [self.searchBar setScopeBarBackgroundImage:menueBarImage];
     }
+    
+    
     objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
     {
         [self updateClientsTotalLabel];
@@ -405,7 +407,7 @@
 
     detailTableViewModel.delegate = self;
 
-    if (detailTableViewModel.modeledTableView.backgroundView.backgroundColor != [UIColor clearColor])
+    if (detailTableViewModel.modeledTableView.backgroundView.backgroundColor != [UIColor clearColor]&&[SCUtilities systemVersion]<7)
     {
         [detailTableViewModel.modeledTableView setBackgroundView:nil];
         [detailTableViewModel.modeledTableView setBackgroundView:[[UIView alloc] init]];
@@ -645,7 +647,7 @@
             if ([cell isKindOfClass:[SCNumericTextFieldCell class]] || [cell isKindOfClass:[SCTextFieldCell class]])
             {
                 SCNumericTextFieldCell *numericTextField = (SCNumericTextFieldCell *)cell;
-                numericTextField.textField.textAlignment = UITextAlignmentRight;
+                numericTextField.textField.textAlignment = NSTextAlignmentRight;
                 numericTextField.textField.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
             }
         }
@@ -1555,12 +1557,12 @@
         UILabel *footerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 550, 100)];
         footerLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
         footerLabel.numberOfLines = 6;
-        footerLabel.lineBreakMode = UILineBreakModeWordWrap;
+        footerLabel.lineBreakMode = NSLineBreakByWordWrapping;
         footerLabel.backgroundColor = [UIColor clearColor];
         footerLabel.textColor = [UIColor whiteColor];
         footerLabel.tag = 60;
         footerLabel.text = section.footerTitle;
-        footerLabel.textAlignment = UITextAlignmentCenter;
+        footerLabel.textAlignment = NSTextAlignmentCenter;
         section.footerHeight = (CGFloat)100;
         [containerView addSubview:footerLabel];
         //        [footerLabel sizeToFit];

@@ -1,7 +1,7 @@
 //
 //  AllHoursReportTopCell.m
 //  PsyTrack Clinician Tools
-//  Version: 1.5.2
+//  Version: 1.5.3
 //
 //  Created by Daniel Boice on 9/5/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -457,14 +457,14 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
 
             UILabel *headerLabel = [[UILabel alloc] initWithFrame:sectionSubHeaderLabel.frame];
             headerLabel.adjustsFontSizeToFitWidth = YES;
-            headerLabel.minimumFontSize = sectionSubHeaderLabel.minimumFontSize;
+            headerLabel.minimumScaleFactor = sectionSubHeaderLabel.minimumScaleFactor;
             headerLabel.font = sectionSubHeaderLabel.font;
             containerView.backgroundColor = sectionSubHeaderView.backgroundColor;
             headerLabel.backgroundColor = sectionSubHeaderLabel.backgroundColor;
             headerLabel.textColor = sectionSubHeaderLabel.textColor;
             headerLabel.tag = 60;
             headerLabel.text = objectsSection.headerTitle;
-            headerLabel.textAlignment = UITextAlignmentCenter;
+            headerLabel.textAlignment = NSTextAlignmentCenter;
             [containerView addSubview:headerLabel];
 
             objectsSection.headerView = containerView;
@@ -478,7 +478,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
             footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
             footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
 
-            footerNotesTextView.textAlignment = UITextAlignmentLeft;
+            footerNotesTextView.textAlignment = NSTextAlignmentLeft;
             footerNotesTextView.tag = 61;
 
             footerNotesTextView.hidden = YES;
@@ -526,7 +526,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
                 footerLabel.tag = 60;
 
                 footerLabel.text = footerTotal;
-                footerLabel.textAlignment = UITextAlignmentCenter;
+                footerLabel.textAlignment = NSTextAlignmentCenter;
                 [subFooterLabelContainerView addSubview:footerLabel];
 
                 [footerContainerView addSubview:subFooterLabelContainerView];
@@ -601,14 +601,14 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
 
             UILabel *headerLabel = [[UILabel alloc] initWithFrame:sectionSubHeaderLabel.frame];
             headerLabel.adjustsFontSizeToFitWidth = YES;
-            headerLabel.minimumFontSize = sectionSubHeaderLabel.minimumFontSize;
+            headerLabel.minimumScaleFactor = sectionSubHeaderLabel.minimumScaleFactor;
             headerLabel.font = sectionSubHeaderLabel.font;
             containerView.backgroundColor = sectionSubHeaderView.backgroundColor;
             headerLabel.backgroundColor = sectionSubHeaderLabel.backgroundColor;
             headerLabel.textColor = sectionSubHeaderLabel.textColor;
             headerLabel.tag = 60;
             headerLabel.text = objectsSection.headerTitle;
-            headerLabel.textAlignment = UITextAlignmentCenter;
+            headerLabel.textAlignment = NSTextAlignmentRight;
             [containerView addSubview:headerLabel];
 
             objectsSection.headerView = containerView;
@@ -622,7 +622,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
             footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
             footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
 
-            footerNotesTextView.textAlignment = UITextAlignmentLeft;
+            footerNotesTextView.textAlignment = NSTextAlignmentLeft;
             footerNotesTextView.tag = 61;
 
             footerNotesTextView.hidden = YES;
@@ -670,7 +670,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
                 footerLabel.tag = 60;
 
                 footerLabel.text = footerTotal;
-                footerLabel.textAlignment = UITextAlignmentCenter;
+                footerLabel.textAlignment = NSTextAlignmentCenter;
                 [subFooterLabelContainerView addSubview:footerLabel];
 
                 [footerContainerView addSubview:subFooterLabelContainerView];
@@ -729,14 +729,14 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
 
             UILabel *headerLabel = [[UILabel alloc] initWithFrame:sectionSubHeaderLabel.frame];
             headerLabel.adjustsFontSizeToFitWidth = YES;
-            headerLabel.minimumFontSize = sectionSubHeaderLabel.minimumFontSize;
+            headerLabel.minimumScaleFactor = sectionSubHeaderLabel.minimumScaleFactor;
             headerLabel.font = sectionSubHeaderLabel.font;
             containerView.backgroundColor = sectionSubHeaderView.backgroundColor;
             headerLabel.backgroundColor = sectionSubHeaderLabel.backgroundColor;
             headerLabel.textColor = sectionSubHeaderLabel.textColor;
             headerLabel.tag = 60;
             headerLabel.text = objectsSection.headerTitle;
-            headerLabel.textAlignment = UITextAlignmentCenter;
+            headerLabel.textAlignment = NSTextAlignmentRight;
             [containerView addSubview:headerLabel];
 
             objectsSection.headerView = containerView;
@@ -750,7 +750,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
             footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
             footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
 
-            footerNotesTextView.textAlignment = UITextAlignmentLeft;
+            footerNotesTextView.textAlignment = NSTextAlignmentLeft;
             footerNotesTextView.tag = 61;
 
             footerNotesTextView.hidden = YES;
@@ -798,7 +798,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
                 footerLabel.tag = 60;
 
                 footerLabel.text = footerTotal;
-                footerLabel.textAlignment = UITextAlignmentCenter;
+                footerLabel.textAlignment = NSTextAlignmentCenter;
                 [subFooterLabelContainerView addSubview:footerLabel];
 
                 [footerContainerView addSubview:subFooterLabelContainerView];
@@ -848,14 +848,14 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
 
             UILabel *headerLabel = [[UILabel alloc] initWithFrame:sectionSubHeaderLabel.frame];
             headerLabel.adjustsFontSizeToFitWidth = YES;
-            headerLabel.minimumFontSize = sectionSubHeaderLabel.minimumFontSize;
+            headerLabel.minimumScaleFactor = sectionSubHeaderLabel.minimumScaleFactor;
             headerLabel.font = sectionSubHeaderLabel.font;
             containerView.backgroundColor = sectionSubHeaderView.backgroundColor;
             headerLabel.backgroundColor = sectionSubHeaderLabel.backgroundColor;
             headerLabel.textColor = sectionSubHeaderLabel.textColor;
             headerLabel.tag = 60;
             headerLabel.text = objectsSection.headerTitle;
-            headerLabel.textAlignment = UITextAlignmentCenter;
+            headerLabel.textAlignment = NSTextAlignmentRight;
             [containerView addSubview:headerLabel];
 
             objectsSection.headerView = containerView;
@@ -869,7 +869,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
             footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
             footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
 
-            footerNotesTextView.textAlignment = UITextAlignmentLeft;
+            footerNotesTextView.textAlignment = NSTextAlignmentLeft;
             footerNotesTextView.tag = 61;
 
             footerNotesTextView.hidden = YES;
@@ -917,7 +917,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
                 footerLabel.tag = 60;
 
                 footerLabel.text = footerTotal;
-                footerLabel.textAlignment = UITextAlignmentCenter;
+                footerLabel.textAlignment = NSTextAlignmentCenter;
                 [subFooterLabelContainerView addSubview:footerLabel];
 
                 [footerContainerView addSubview:subFooterLabelContainerView];
@@ -1039,7 +1039,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
                 interventionHeaderLabel.font = nibSupervisorSummaryInterventionHeader.font;
                 interventionHeaderLabel.textAlignment = nibSupervisorSummaryInterventionHeader.textAlignment;
                 interventionHeaderLabel.text = nibSupervisorSummaryInterventionHeader.text;
-                interventionHeaderLabel.lineBreakMode = UILineBreakModeWordWrap;
+                interventionHeaderLabel.lineBreakMode = NSLineBreakByWordWrapping;
                 interventionHeaderLabel.numberOfLines = 2;
 
                 UILabel *nibSupervisorSummaryAssessmentHeader = self.supervisorSummaryTotalAssessmentHeaderLabel;
@@ -1048,7 +1048,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
                 assessmentHeaderLabel.font = nibSupervisorSummaryAssessmentHeader.font;
                 assessmentHeaderLabel.textAlignment = nibSupervisorSummaryAssessmentHeader.textAlignment;
                 assessmentHeaderLabel.text = nibSupervisorSummaryAssessmentHeader.text;
-                assessmentHeaderLabel.lineBreakMode = UILineBreakModeWordWrap;
+                assessmentHeaderLabel.lineBreakMode = NSLineBreakByWordWrapping;
                 assessmentHeaderLabel.numberOfLines = 2;
 
                 UILabel *nibSupervisorSummarySupportHeader = self.supervisorSummaryTotalSupportHeaderLabel;
@@ -1057,7 +1057,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
                 supportHeaderLabel.font = nibSupervisorSummarySupportHeader.font;
                 supportHeaderLabel.textAlignment = nibSupervisorSummarySupportHeader.textAlignment;
                 supportHeaderLabel.text = nibSupervisorSummarySupportHeader.text;
-                supportHeaderLabel.lineBreakMode = UILineBreakModeWordWrap;
+                supportHeaderLabel.lineBreakMode = NSLineBreakByWordWrapping;
                 supportHeaderLabel.numberOfLines = 2;
 
                 UILabel *nibSupervisorSummarySupervisionHeader = self.supervisorSummaryTotalSupervisionHeaderLabel;
@@ -1066,7 +1066,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
                 supervisionHeaderLabel.font = nibSupervisorSummarySupervisionHeader.font;
                 supervisionHeaderLabel.textAlignment = nibSupervisorSummarySupervisionHeader.textAlignment;
                 supervisionHeaderLabel.text = nibSupervisorSummarySupervisionHeader.text;
-                supervisionHeaderLabel.lineBreakMode = UILineBreakModeWordWrap;
+                supervisionHeaderLabel.lineBreakMode = NSLineBreakByWordWrapping;
                 supervisionHeaderLabel.numberOfLines = 2;
 
                 UILabel *nibSupervisorSummaryInterventionHours = self.supervisorSummaryTotalInterventionHoursLabel;
@@ -1188,14 +1188,14 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
 
         UILabel *headerLabel = [[UILabel alloc] initWithFrame:sectionSubHeaderLabel.frame];
         headerLabel.adjustsFontSizeToFitWidth = YES;
-        headerLabel.minimumFontSize = sectionSubHeaderLabel.minimumFontSize;
+        headerLabel.minimumScaleFactor = sectionSubHeaderLabel.minimumScaleFactor;
         headerLabel.font = sectionSubHeaderLabel.font;
         containerView.backgroundColor = sectionSubHeaderView.backgroundColor;
         headerLabel.backgroundColor = sectionSubHeaderLabel.backgroundColor;
         headerLabel.textColor = sectionSubHeaderLabel.textColor;
         headerLabel.tag = 60;
         headerLabel.text = objectsSection.headerTitle;
-        headerLabel.textAlignment = UITextAlignmentCenter;
+        headerLabel.textAlignment = NSTextAlignmentCenter;
         [containerView addSubview:headerLabel];
 
         objectsSection.headerView = containerView;
@@ -1209,7 +1209,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
         footerNotesTextView.backgroundColor = sectionSubFooterNotesTextView.backgroundColor;
         footerNotesTextView.textColor = sectionSubFooterNotesTextView.textColor;
 
-        footerNotesTextView.textAlignment = UITextAlignmentLeft;
+        footerNotesTextView.textAlignment = NSTextAlignmentLeft;
         footerNotesTextView.tag = 61;
 
         footerNotesTextView.hidden = YES;
@@ -1257,7 +1257,7 @@ static float const MAX_MAIN_SCROLLVIEW_HEIGHT = 1110;
             footerLabel.tag = 60;
 
             footerLabel.text = footerTotal;
-            footerLabel.textAlignment = UITextAlignmentCenter;
+            footerLabel.textAlignment = NSTextAlignmentCenter;
             [subFooterLabelContainerView addSubview:footerLabel];
 
             [footerContainerView addSubview:subFooterLabelContainerView];

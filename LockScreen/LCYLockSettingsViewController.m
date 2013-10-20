@@ -791,7 +791,7 @@ enum {kTokenCellValidationTokenField = 500,kTokenCellValidationCurrentPassword,k
 
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:passCodeEditor];
 
-    [[self navigationController] presentModalViewController:navController animated:YES];
+    [[self navigationController] presentViewController:navController animated:YES completion:nil];
     @try
     {
         [[NSNotificationCenter defaultCenter]
@@ -864,7 +864,7 @@ enum {kTokenCellValidationTokenField = 500,kTokenCellValidationCurrentPassword,k
 #pragma mark LCYPassCodeEditorDelegate protocol implementation...
 - (void) passcodeEditor:(LCYPassCodeEditorViewController *)passcodeEditor newCode:(NSData *)newCode;
 {
-    [self.navigationController dismissModalViewControllerAnimated:YES];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     [self updatePasscodeSettings:newCode];
     [self.tableView reloadData];
 }

@@ -1,7 +1,7 @@
 //
 //  ServicesViewController_Shared.m
 //  PsyTrack Clinician Tools
-//  Version: 1.5.2
+//  Version: 1.5.3
 //
 //  Created by Daniel Boice on 4/5/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -18,7 +18,10 @@
 #import "TimePickerCell.h"
 
 #import "ClinicianSelectionCell.h"
+#import "SupportActivityTypeEntity.h"
+#import "AssessmentTypeEntity.h"
 #import "InterventionTypeSubtypeEntity.h"
+#import "SupervisionTypeSubtypeEntity.h"
 #import "TrainingProgramEntity.h"
 #import "SiteEntity.h"
 #import "RateEntity.h"
@@ -511,7 +514,7 @@
 
     //create the dictionary with the data bindings
     NSDictionary *clinicianDataBindings = [NSDictionary
-                                           dictionaryWithObjects:[NSArray arrayWithObjects:@"supervisor",@"Supervisor",[NSNumber numberWithBool:NO],@"supervisor",[NSNumber numberWithBool:NO],nil]
+                                           dictionaryWithObjects:[NSArray arrayWithObjects:@"supervisor",@"Supervisor *",[NSNumber numberWithBool:NO],@"supervisor",[NSNumber numberWithBool:NO],nil]
                                                          forKeys:[NSArray arrayWithObjects:@"1",@"90",@"91",@"92",@"93",nil ]]; // 1 are the control tags
 
     //create the custom property definition
@@ -1038,6 +1041,8 @@
     SCPropertyDefinition *trackTypeNotesPropertyDef = [trackTypeDef propertyDefinitionWithName:@"notes"];
     trackTypeNotesPropertyDef.type = SCPropertyTypeTextView;
 
+    
+    
     if (currentControllerSetup == kTrackInterventionSetup)
     {
         NSString *subTypePropertyNameString = @"interventionSubType";
@@ -1128,21 +1133,24 @@
 
     objectsModel.enablePullToRefresh = TRUE;
     objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
-
-    if (![SCUtilities is_iPad] || [SCUtilities systemVersion] >= 6)
-    {
-        objectsModel.theme = [SCTheme themeWithPath:@"mapper-iPhone.ptt"];
+    if ([SCUtilities systemVersion]<7) {
+   
+        if (![SCUtilities is_iPad] || [SCUtilities systemVersion] >= 6)
+        {
+            objectsModel.theme = [SCTheme themeWithPath:@"mapper-iPhone.ptt"];
+        }
+        else
+        {
+            objectsModel.theme = [SCTheme themeWithPath:@"mapper-ipad-full.ptt"];
+        }
     }
-    else
-    {
-        objectsModel.theme = [SCTheme themeWithPath:@"mapper-ipad-full.ptt"];
-    }
-
     objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
     {
         [self updateAdministrationTotalLabel:tableModel];
     };
-
+    
+    
+    
     self.tableViewModel = objectsModel;
     [self updateAdministrationTotalLabel:self.tableViewModel];
 
@@ -1426,7 +1434,7 @@
                         totalTimeLabel.tag = 28;
                         totalTimeLabel.text = [NSString stringWithFormat:@"00:00:00"];
                         totalTimeLabel.backgroundColor = [UIColor clearColor];
-                        totalTimeLabel.textAlignment = UITextAlignmentRight;
+                        totalTimeLabel.textAlignment = NSTextAlignmentRight;
                         totalTimeLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
                         [totalTimeLabel setFont:[UIFont fontWithName:@"Arial Rounded MT Bold" size:18]];
                         totalTimeLabel.textColor = [UIColor colorWithRed:50.0f / 255 green:69.0f / 255 blue:133.0f / 255 alpha:1.0];
@@ -1580,7 +1588,7 @@
                     totalBreakTimeLabel.tag = 28;
                     totalBreakTimeLabel.text = [NSString stringWithFormat:@"00:00:00"];
                     totalBreakTimeLabel.backgroundColor = [UIColor clearColor];
-                    totalBreakTimeLabel.textAlignment = UITextAlignmentRight;
+                    totalBreakTimeLabel.textAlignment = NSTextAlignmentRight;
                     totalBreakTimeLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
                     [totalBreakTimeLabel setFont:[UIFont fontWithName:@"Arial Rounded MT Bold" size:18]];
                     totalBreakTimeLabel.textColor = [UIColor colorWithRed:50.0f / 255 green:69.0f / 255 blue:133.0f / 255 alpha:1.0];
@@ -1741,20 +1749,190 @@
 }
 
 
-- (void) tableViewModel:(SCTableViewModel *)tableViewModel detailViewDidAppearForSectionAtIndex:(NSUInteger)index withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
-{
-    self.eventViewController = nil;
-}
+
 
 
 - (void) tableViewModel:(SCTableViewModel *)tableModel detailModelCreatedForRowAtIndexPath:(NSIndexPath *)indexPath detailTableViewModel:(SCTableViewModel *)detailTableViewModel
 {
     currentDetailTableViewModel = detailTableViewModel;
+    
+     DLog(@"table model tag create item cell entity name is %i", tableModel.tag);
+    if (tableModel.tag==1||tableModel.tag==3) {
+   
+    detailTableViewModel.sectionActions.willDeleteItem = ^BOOL(SCArrayOfItemsSection *itemsSection, NSObject *item, NSIndexPath *indexPath)
+    {
+        SCTableViewCell *cellatIndexPath=(SCTableViewCell *)[detailTableViewModel cellAtIndexPath:indexPath];
+        
+        NSManagedObject *cellManagedObject=(NSManagedObject *)cellatIndexPath.boundObject;
+        
+        
+       
+    
+       
+        PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+        
+
+
+            
+            BOOL deleteItem=YES;
+                
+                if ([cellManagedObject isKindOfClass:[InterventionTypeEntity class]]) {
+                    InterventionTypeEntity *interventionTypeEntity=(InterventionTypeEntity*)item;
+                    
+                    if(interventionTypeEntity.associatedWithTimeRecords){
+                        
+                       
+                        
+                        
+                        [appDelegate displayNotification:@"Delete associated Intervention records before deleting this intervention type." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                        
+                        deleteItem = NO;
+                        
+                        
+                        
+                    }
+                    
+                }
+                
+        
+                
+        
+                else if ([cellManagedObject isKindOfClass:[SupportActivityTypeEntity class]]) {
+                    SupportActivityTypeEntity *supportActivityTypeEntity=(SupportActivityTypeEntity*)item;
+                    
+                    if(supportActivityTypeEntity.associatedWithTimeRecords){
+                        
+                        
+                        
+                        [appDelegate displayNotification:@"Delete associated support activities records before deleting this support activity type." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                        
+                        deleteItem = NO;
+                        
+                        
+                        
+                    }
+                    
+                }
+        
+        
+               else if ([cellManagedObject isKindOfClass:[AssessmentTypeEntity class]]) {
+                    AssessmentTypeEntity *assessmentTypeEntity=(AssessmentTypeEntity*)item;
+                    
+                    if(assessmentTypeEntity.associatedWithTimeRecords){
+                        
+                        
+                        
+                        [appDelegate displayNotification:@"Delete associated assessment records before deleting this assessment type." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                        
+                        deleteItem = NO;
+                        
+                        
+                        
+                    }
+                    
+                }
+                
+        
+
+                
+               else if ([cellManagedObject isKindOfClass:[SupervisionTypeEntity class]]) {
+                    SupervisionTypeEntity *supervisionTypeEntity=(SupervisionTypeEntity*)item;
+                    
+                    if(supervisionTypeEntity.associatedWithTimeRecords){
+                        
+                        
+                        
+                        [appDelegate displayNotification:@"Delete associated supervision records before deleting this supervision type." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                        
+                        deleteItem = NO;
+                        
+                        
+                        
+                    }
+                    
+                }
+                
+
+              else  if ([cellManagedObject isKindOfClass:[SupervisionTypeSubtypeEntity class]]) {
+                    SupervisionTypeSubtypeEntity *supervisionSubTypeEntity=(SupervisionTypeSubtypeEntity*)item;
+                    
+                    if(supervisionSubTypeEntity.associatedWithTimeRecords){
+                        
+                        
+                        
+                        [appDelegate displayNotification:@"Delete associated Supervison records before deleting this supervision subtype." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                        
+                        deleteItem = NO;
+                        
+                        
+                        
+                    }
+                    
+                }
+                
+
+              else  if ([cellManagedObject isKindOfClass:[InterventionTypeSubtypeEntity class]]) {
+                    InterventionTypeSubtypeEntity *interventionSubTypeEntity=(InterventionTypeSubtypeEntity*)item;
+                    
+                    if(interventionSubTypeEntity.associatedWithTimeRecords){
+                        
+                       
+                        
+                        [appDelegate displayNotification:@"Delete associated Intervention records before deleting this intervention subtype." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                        
+                        deleteItem = NO;
+                        
+                        
+                        
+                    }
+                    
+                }
+        
+              else  if ([cellManagedObject isKindOfClass:[SiteEntity class]]) {
+                  SiteEntity *siteEntity=(SiteEntity*)item;
+                  
+                  if(siteEntity.associatedWithTimeRecords){
+                      
+                      
+                      
+                      [appDelegate displayNotification:@"Delete associated assessments, intervention, or support activity records before deleting this site." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                      
+                      deleteItem = NO;
+                      
+                      
+                      
+                  }
+                  
+              }
+              else  if ([cellManagedObject isKindOfClass:[TrainingProgramEntity class]]) {
+                  TrainingProgramEntity *trainingProgramEntity=(TrainingProgramEntity*)item;
+                  
+                  if(trainingProgramEntity.associatedWithTimeRecords){
+                      
+                      
+                      
+                      [appDelegate displayNotification:@"Delete associated assessments, intervention, or support activity records before deleting this training program." forDuration:5.0 location:kPTTScreenLocationTop inView:detailTableViewModel.viewController.view];
+                      
+                      deleteItem = NO;
+                      
+                      
+                      
+                  }
+                  
+              }
+        
+                return deleteItem;
+                
+
+        
+    };
+    }
 }
 
 
 - (void) tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForRowAtIndexPath:(NSIndexPath *)indexPath withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel
 {
+   
     [self tableViewModel:(SCTableViewModel *)tableModel detailViewWillPresentForSectionAtIndex:(NSUInteger)indexPath.section withDetailTableViewModel:(SCTableViewModel *)detailTableViewModel];
 
     if (tableModel.tag == 0 || tableModel.tag == 1)
@@ -1795,7 +1973,10 @@
     }
 
     //start
-
+     SCObjectSelectionSection *sectionzero = (SCObjectSelectionSection *)[detailTableViewModel sectionAtIndex:0];
+    NSManagedObject *sectonzeroManagedObject=(NSManagedObject *)sectionzero.boundObject;
+    
+   
     if ( (currentControllerSetup == kTrackInterventionSetup || currentControllerSetup == kTrackSupervisionGivenSetup || currentControllerSetup == kTrackSupervisionReceivedSetup) && detailTableViewModel.tag == 1 && detailTableViewModel.sectionCount > 2 )
     {
         SCTableViewSection *section = (SCTableViewSection *)[detailTableViewModel sectionAtIndex:2];
@@ -2026,7 +2207,7 @@
     {
         [section editingModeDidChange];
     }
-
+    
     if ( (tableViewModel.tag == 2 && index == 0 && sectionManagedObject && [sectionManagedObject.entity.name isEqualToString:@"TimeEntity"]) || (tableViewModel.tag == 3 && index == 0 && sectionManagedObject && [sectionManagedObject.entity.name isEqualToString:@"BreakTimeEntity"]) )
     {
         UIView *containerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 40)];
@@ -2041,7 +2222,7 @@
         headerLabel.font = [UIFont fontWithName:@"Arial Rounded MT Bold" size:30];
 
         [containerView addSubview:headerLabel];
-        headerLabel.textAlignment = UITextAlignmentCenter;
+        headerLabel.textAlignment = NSTextAlignmentCenter;
         section.headerView = containerView;
 
         switch (tableViewModel.tag)
@@ -2058,8 +2239,11 @@
                 break;
         }
     }
-
-    if (tableViewModel.tag == 3 && tableViewModel.sectionCount && index == 1)
+    
+    
+    
+    
+else if (tableViewModel.tag == 3 && tableViewModel.sectionCount && index == 1)
     {
         SCTableViewSection *sectionOne = (SCTableViewSection *)[tableViewModel sectionAtIndex:0];
 
@@ -2793,7 +2977,7 @@
                         //
                     }
 
-                    [currentDetailTableViewModel.viewController.navigationController presentModalViewController:eventViewController animated:YES];
+                    [currentDetailTableViewModel.viewController.navigationController presentViewController:eventViewController animated:YES completion:nil];
                     eventViewController.editViewDelegate = self;
                 }
                 else
@@ -2993,7 +3177,7 @@
 
 //                currentTableModelViewController.navigationController.delegate=self;
 
-                    [currentTableModelViewController.navigationController presentModalViewController:addController animated:YES];
+                    [currentTableModelViewController.navigationController presentViewController:addController animated:YES completion:nil];
                 }
             }
         }
@@ -3081,7 +3265,7 @@
             break;
     } /* switch */
 
-    [controller dismissModalViewControllerAnimated:YES];
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -3131,10 +3315,13 @@
             }
             else
             {
-                self.psyTrackCalendar = [EKCalendar calendarWithEventStore:self.eventStore];
-
-                [[NSUserDefaults standardUserDefaults] setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
+                if ([SCUtilities systemVersion]<7) {
+                    self.psyTrackCalendar = [EKCalendar calendarWithEventStore:self.eventStore];
+                    
+                    [[NSUserDefaults standardUserDefaults] setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+              
             }
 
             if (defaultCalendarName.length)
