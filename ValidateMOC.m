@@ -50,6 +50,9 @@ NSEntityDescription *entityTime = [NSEntityDescription entityForName:@"TimeTrack
     if (countTime> 0) {
         
         DLog(@"count %i",countTime);
+        NSArray *fetchedObjects=(NSArray *)[managedObjectContext executeFetchRequest:requestTime error:&error];
+        
+        DLog(@"fetched objects %@",fetchedObjects);
         supervisorsAllPresent=NO;
     }
     

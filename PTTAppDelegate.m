@@ -3366,11 +3366,8 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 
                        if (![fileManager fileExistsAtPath:storePath])
                        {
-                           NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"psyTrack" ofType:@"sqlite"];
-                           if (defaultStorePath && [fileManager fileExistsAtPath:defaultStorePath])
-                           {
-                               
-                               [fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
+                           
+                              
                                
 
                                NSString *statusMessage = [self resetDefaultLockKeychainSettingsWithReset:YES];
@@ -3387,7 +3384,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                                {
                                    firstRun = YES;
                                }
-                           }
+                           
                        }
 
 //        if (![fileManager fileExistsAtPath:storePath]) {

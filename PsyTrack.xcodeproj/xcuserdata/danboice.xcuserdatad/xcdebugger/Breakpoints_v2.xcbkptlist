@@ -5294,11 +5294,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4373"
-            endingLineNumber = "4373">
+            startingLineNumber = "4370"
+            endingLineNumber = "4370">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5308,11 +5308,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4272"
-            endingLineNumber = "4272">
+            startingLineNumber = "4269"
+            endingLineNumber = "4269">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5322,11 +5322,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4260"
-            endingLineNumber = "4260">
+            startingLineNumber = "4257"
+            endingLineNumber = "4257">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5336,11 +5336,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4245"
-            endingLineNumber = "4245">
+            startingLineNumber = "4242"
+            endingLineNumber = "4242">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6802,11 +6802,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4251"
-            endingLineNumber = "4251">
+            startingLineNumber = "4248"
+            endingLineNumber = "4248">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6816,11 +6816,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4244"
-            endingLineNumber = "4244">
+            startingLineNumber = "4241"
+            endingLineNumber = "4241">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8442,11 +8442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4310"
-            endingLineNumber = "4310">
+            startingLineNumber = "4307"
+            endingLineNumber = "4307">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8456,11 +8456,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4287"
-            endingLineNumber = "4287">
+            startingLineNumber = "4284"
+            endingLineNumber = "4284">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8470,11 +8470,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4267"
-            endingLineNumber = "4267">
+            startingLineNumber = "4264"
+            endingLineNumber = "4264">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8484,11 +8484,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4261"
-            endingLineNumber = "4261">
+            startingLineNumber = "4258"
+            endingLineNumber = "4258">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8498,11 +8498,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4262"
-            endingLineNumber = "4262">
+            startingLineNumber = "4259"
+            endingLineNumber = "4259">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8512,11 +8512,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4085"
-            endingLineNumber = "4085">
+            startingLineNumber = "4082"
+            endingLineNumber = "4082">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8526,11 +8526,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4140"
-            endingLineNumber = "4140">
+            startingLineNumber = "4137"
+            endingLineNumber = "4137">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8540,11 +8540,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4134"
-            endingLineNumber = "4134">
+            startingLineNumber = "4131"
+            endingLineNumber = "4131">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -9114,11 +9114,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3689"
-            endingLineNumber = "3689"
+            startingLineNumber = "3686"
+            endingLineNumber = "3686"
             landmarkName = "-flashAppTrainAndTitleGraphics"
             landmarkType = "5">
          </BreakpointContent>
@@ -11104,7 +11104,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
@@ -11120,7 +11120,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
@@ -11140,11 +11140,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ValidateMOC.m"
-            timestampString = "403895917.455323"
+            timestampString = "403965303.840801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "-supervisorsAllPresent"
             landmarkType = "5">
          </BreakpointContent>
@@ -11284,11 +11284,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934431.728098"
+            timestampString = "403937138.545413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3908"
-            endingLineNumber = "3908"
+            startingLineNumber = "3905"
+            endingLineNumber = "3905"
             landmarkName = "-displayNotification:forDuration:location:inView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -11544,6 +11544,38 @@
             startingLineNumber = "3368"
             endingLineNumber = "3368"
             landmarkName = "-persistentStoreCoordinator"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PTTAppDelegate.m"
+            timestampString = "403937138.545413"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3370"
+            endingLineNumber = "3370"
+            landmarkName = "-persistentStoreCoordinator"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ValidateMOC.m"
+            timestampString = "403965303.840801"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "-supervisorsAllPresent"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

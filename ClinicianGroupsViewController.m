@@ -969,7 +969,7 @@
                     peoplePicker.displayedProperties = displayedItems;
                     // Show the picker
 
-                    if ([SCUtilities systemVersion]<7) {
+                    if ([SCUtilities systemVersion]<6) {
                           [peoplePicker shouldAutorotateToInterfaceOrientation:YES];
                     }
                   
