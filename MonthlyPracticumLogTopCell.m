@@ -983,7 +983,7 @@
             headerLabel.textColor = sectionSubHeaderLabel.textColor;
             headerLabel.tag = 60;
             headerLabel.text = objectsSection.headerTitle;
-            headerLabel.textAlignment = NSTextAlignmentRight;
+            headerLabel.textAlignment = NSTextAlignmentCenter;
             [containerView addSubview:headerLabel];
 
             objectsSection.headerView = containerView;
@@ -1464,7 +1464,7 @@
             footerLabel.tag = 60;
 
             footerLabel.text = footerTotal;
-            footerLabel.textAlignment = NSTextAlignmentRight;
+            footerLabel.textAlignment = NSTextAlignmentCenter;
             [subFooterLabelContainerView addSubview:footerLabel];
 
             [footerContainerView addSubview:subFooterLabelContainerView];

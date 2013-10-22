@@ -38,4 +38,5 @@
 - (void) addDemographics:(NSSet *)values;
 - (void) removeDemographics:(NSSet *)values;
 
+-(BOOL)associatedWithTimeRecords;
 @end

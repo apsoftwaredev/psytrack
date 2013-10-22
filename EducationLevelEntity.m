@@ -29,5 +29,32 @@
     return [NSString stringWithFormat:@"%i",returnInt];
 }
 
+-(BOOL)associatedWithTimeRecords{
+    
+    
+    
+    BOOL associatedRecords=NO;
+    
+    [self willAccessValueForKey:@"demographics"];
+    
+    if (self.demographics.count) {
+        associatedRecords=YES;
+    }
+    [self didAccessValueForKey:@"demographics"];
+    
+    
+    
+    
+    return associatedRecords;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
 
 @end

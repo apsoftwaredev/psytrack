@@ -33,7 +33,7 @@
 
 @implementation TimeTrackViewController
 
-@synthesize tableView = _tableView;
+
 @synthesize searchBar = _searchBar;
 @synthesize totalAdministrationsLabel;
 @synthesize stopwatchTextField;
@@ -1973,8 +1973,6 @@
     }
 
     //start
-     SCObjectSelectionSection *sectionzero = (SCObjectSelectionSection *)[detailTableViewModel sectionAtIndex:0];
-    NSManagedObject *sectonzeroManagedObject=(NSManagedObject *)sectionzero.boundObject;
     
    
     if ( (currentControllerSetup == kTrackInterventionSetup || currentControllerSetup == kTrackSupervisionGivenSetup || currentControllerSetup == kTrackSupervisionReceivedSetup) && detailTableViewModel.tag == 1 && detailTableViewModel.sectionCount > 2 )

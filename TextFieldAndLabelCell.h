@@ -9,5 +9,16 @@
 #import <SensibleTableView/SensibleTableView.h>
 
 @interface TextFieldAndLabelCell : SCCustomCell
+{
+
+    __weak UITextField *textField_;
+    __weak UILabel *label_;
+   
+}
+
+@property (nonatomic, weak) IBOutlet UITextField *textField;
+@property (nonatomic, weak) IBOutlet UILabel *label;
+
+
 
 @end

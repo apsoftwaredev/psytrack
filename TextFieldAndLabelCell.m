@@ -9,15 +9,43 @@
 #import "TextFieldAndLabelCell.h"
 
 @implementation TextFieldAndLabelCell
+@synthesize textField = textField_,label = label_;
+-(void)performInitialization{
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+
+    if ([SCUtilities systemVersion]>=7) {
+        self.backgroundView.backgroundColor=[UIColor colorWithRed:0.217586 green:0.523853 blue:0.67796 alpha:1.0];;
     }
-    return self;
+
 }
+
+- (void) commitChanges
+{
+    if (!needsCommit)
+    {
+        return;
+    }
+    
+    [super commitChanges];
+    
+    if ([label_.text isEqualToString:@"First Name:"]) {
+         [self.boundObject setValue:self.textField.text forKey:@"firstName"];
+    }
+    if ([label_.text isEqualToString:@"Middle Name:"]) {
+        [self.boundObject setValue:self.textField.text forKey:@"middleName"];
+    }
+    if ([label_.text isEqualToString:@"Last Name:"]) {
+        [self.boundObject setValue:self.textField.text forKey:@"lastName"];
+    }
+    if ([label_.text isEqualToString:@"Suffix:"]) {
+        [self.boundObject setValue:self.textField.text forKey:@"suffix"];
+    }
+    
+    
+    
+    needsCommit = FALSE;
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

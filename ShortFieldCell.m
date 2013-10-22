@@ -23,6 +23,9 @@
 {
     [super performInitialization];
 
+    if ([SCUtilities systemVersion]>=7) {
+        self.backgroundView.backgroundColor=[UIColor colorWithRed:0.217586 green:0.523853 blue:0.67796 alpha:1.0];;
+    }
     // place any initialization code here
 }
 
@@ -57,14 +60,7 @@
 
     self.prefixPickerView.frame = pickerFrame;
 
-    if ([SCUtilities is_iPad])
-    {
-        self.view.backgroundColor = [UIColor colorWithRed:32.0f / 255 green:35.0f / 255 blue:42.0f / 255 alpha:1];
-    }
-    else
-    {
-        self.view.backgroundColor = [UIColor colorWithRed:41.0f / 255 green:42.0f / 255 blue:57.0f / 255 alpha:1];
-    }
+    
 
     [prefixPickerView_ setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
     [prefixPickerView_ setAutoresizesSubviews:YES];
@@ -118,6 +114,9 @@
     if (useTitlePicker)
     {
         self.label.text = @"Prefix";
+        if ([SCUtilities is_iPad]&&[SCUtilities systemVersion]>=7) {
+            self.textField.textColor=[UIColor blueColor];
+        }
     }
 }
 

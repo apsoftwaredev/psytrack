@@ -28,4 +28,6 @@
 - (void) addClientRelationship:(NSSet *)values;
 - (void) removeClientRelationship:(NSSet *)values;
 
+-(BOOL)associatedWithTimeRecords;
+
 @end

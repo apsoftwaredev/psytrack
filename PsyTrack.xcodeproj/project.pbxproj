@@ -171,7 +171,6 @@
 		E705B4561784E3AF001FAF2E /* EBPWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E705B4531784E3AF001FAF2E /* EBPWebViewViewController.m */; };
 		E705B4571784E3AF001FAF2E /* EBPWebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E705B4541784E3AF001FAF2E /* EBPWebViewViewController.xib */; };
 		E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */; };
-		E70FACEE1697154C00E14F03 /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E70FACED1697154C00E14F03 /* psyTrack.sqlite */; };
 		E719562515FFADB60070E61D /* DTAboutViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = E71955F715FFADB60070E61D /* DTAboutViewController.strings */; };
 		E719562615FFADB60070E61D /* DTAboutViewController-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E71955F915FFADB60070E61D /* DTAboutViewController-Info.plist */; };
 		E719562715FFADB60070E61D /* UIButtonBarArrowDownSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = E71955FB15FFADB60070E61D /* UIButtonBarArrowDownSmall.png */; };
@@ -446,13 +445,11 @@
 		E78769A117B6FAA50082703E /* EBPWebViewViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78769A017B6FAA50082703E /* EBPWebViewViewController_iPhone.xib */; };
 		E78A8D1B1531EDF10099FE5B /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E78A8D1A1531EDF10099FE5B /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */; };
-		E78C961716D86AC600E8AD09 /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E78C961116D86A7900E8AD09 /* libSTV+CoreData.a */; };
 		E78C96D115EE8CB100EDB0FF /* ActionButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E78C96D015EE8CB100EDB0FF /* ActionButton.png */; };
 		E78DA690151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA68F151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m */; };
 		E78DA69F15227EA9004ABF29 /* ClinicianSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA69E15227EA9004ABF29 /* ClinicianSelectionCell.m */; };
 		E78DA6A415252579004ABF29 /* ExistingHoursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E78DA6A215252579004ABF29 /* ExistingHoursViewController.m */; };
 		E78DA6A515252579004ABF29 /* ExistingHoursViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E78DA6A315252579004ABF29 /* ExistingHoursViewController.xib */; };
-		E78F088916DC742F0075C78E /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E78F088616DC74190075C78E /* libSensibleTableView.a */; };
 		E7919B281547001F001161A9 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7919B271547001F001161A9 /* Icon-72@2x.png */; };
 		E798A02515843B9D006B9DBD /* MasterViewControllerTheme.ptt in Resources */ = {isa = PBXBuildFile; fileRef = E798A02415843B9D006B9DBD /* MasterViewControllerTheme.ptt */; };
 		E798A09215845941006B9DBD /* mapper-ipad-detail.ptt in Resources */ = {isa = PBXBuildFile; fileRef = E798A03015845941006B9DBD /* mapper-ipad-detail.ptt */; };
@@ -542,6 +539,12 @@
 		E7ECEE421701091C00920D70 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7ECEE411701091C00920D70 /* AWSiOSSDK.framework */; };
 		E7ECEE4517010B2500920D70 /* AmazonClientManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E7ECEE4317010B2500920D70 /* AmazonClientManager.h */; };
 		E7ECEE4617010B2500920D70 /* AmazonClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ECEE4417010B2500920D70 /* AmazonClientManager.m */; };
+		E7F06B7818140A2A00E5D128 /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F06B70181409D000E5D128 /* libSensibleTableView.a */; };
+		E7F06B7B18140A4300E5D128 /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F06B77181409F300E5D128 /* libSTV+CoreData.a */; };
+		E7F06B8018141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.h in Headers */ = {isa = PBXBuildFile; fileRef = E7F06B7E18141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.h */; };
+		E7F06B8118141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F06B7F18141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.m */; };
+		E7F06B84181421BB00E5D128 /* TextFieldAndLabelCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E7F06B82181421BB00E5D128 /* TextFieldAndLabelCell.h */; };
+		E7F06B85181421BB00E5D128 /* TextFieldAndLabelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F06B83181421BB00E5D128 /* TextFieldAndLabelCell.m */; };
 		E7F1CAF11597AF4C006F9E95 /* MonthlyPracticumLogTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1CAEF1597AF4C006F9E95 /* MonthlyPracticumLogTopCell.m */; };
 		E7F1CAF21597AF4C006F9E95 /* MonthlyPracticumLogTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CAF01597AF4C006F9E95 /* MonthlyPracticumLogTopCell.xib */; };
 		E7F1CAF41597CADB006F9E95 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F1CAF31597CADB006F9E95 /* CoreText.framework */; };
@@ -596,33 +599,33 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E78C961016D86A7900E8AD09 /* PBXContainerItemProxy */ = {
+		E7F06B6F181409D000E5D128 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E78C960B16D86A7800E8AD09 /* STV+CoreData.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DBE737C414FC66D40076D2B6;
-			remoteInfo = "STV+CoreData";
-		};
-		E78C961416D86AB100E8AD09 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E78C960B16D86A7800E8AD09 /* STV+CoreData.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
-			remoteInfo = "STV+CoreData";
-		};
-		E78F088516DC74190075C78E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E78F088016DC74180075C78E /* SensibleTableView.xcodeproj */;
+			containerPortal = E7F06B6A181409D000E5D128 /* SensibleTableView.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DBE7373014F99E580076D2B6;
 			remoteInfo = SensibleTableView;
 		};
-		E78F088716DC74240075C78E /* PBXContainerItemProxy */ = {
+		E7F06B76181409F300E5D128 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E78F088016DC74180075C78E /* SensibleTableView.xcodeproj */;
+			containerPortal = E7F06B71181409F300E5D128 /* STV+CoreData.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DBE737C414FC66D40076D2B6;
+			remoteInfo = "STV+CoreData";
+		};
+		E7F06B7918140A3900E5D128 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7F06B6A181409D000E5D128 /* SensibleTableView.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = DBE7372F14F99E580076D2B6;
 			remoteInfo = SensibleTableView;
+		};
+		E7F06B7C18140A4900E5D128 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7F06B71181409F300E5D128 /* STV+CoreData.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
+			remoteInfo = "STV+CoreData";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -856,7 +859,6 @@
 		E705B4541784E3AF001FAF2E /* EBPWebViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EBPWebViewViewController.xib; sourceTree = "<group>"; };
 		E70B9EFD15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSourcesSCObjectSelectionCell.h; sourceTree = "<group>"; };
 		E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSourcesSCObjectSelectionCell.m; sourceTree = "<group>"; };
-		E70FACED1697154C00E14F03 /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = psyTrack.sqlite; path = ../../Desktop/psyTrack.sqlite; sourceTree = "<group>"; };
 		E71955F515FFADB60070E61D /* DTAboutViewController-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTAboutViewController-Prefix.pch"; sourceTree = "<group>"; };
 		E71955F815FFADB60070E61D /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/DTAboutViewController.strings; sourceTree = "<group>"; };
 		E71955F915FFADB60070E61D /* DTAboutViewController-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DTAboutViewController-Info.plist"; sourceTree = "<group>"; };
@@ -1352,7 +1354,6 @@
 		E78A8D191531EDF10099FE5B /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		E78A8D1A1531EDF10099FE5B /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Reachability.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E78A8D1C1531EF1F0099FE5B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		E78C960B16D86A7800E8AD09 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../STV/STV 3.1.7 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E78C96D015EE8CB100EDB0FF /* ActionButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ActionButton.png; sourceTree = "<group>"; };
 		E78DA68E151FAC8A004ABF29 /* DrugNameObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugNameObjectSelectionCell.h; sourceTree = "<group>"; };
 		E78DA68F151FAC8A004ABF29 /* DrugNameObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugNameObjectSelectionCell.m; sourceTree = "<group>"; };
@@ -1361,7 +1362,6 @@
 		E78DA6A115252579004ABF29 /* ExistingHoursViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExistingHoursViewController.h; sourceTree = "<group>"; };
 		E78DA6A215252579004ABF29 /* ExistingHoursViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ExistingHoursViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E78DA6A315252579004ABF29 /* ExistingHoursViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExistingHoursViewController.xib; sourceTree = "<group>"; };
-		E78F088016DC74180075C78E /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../STV/STV 3.1.7 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
 		E7919B271547001F001161A9 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		E798A02415843B9D006B9DBD /* MasterViewControllerTheme.ptt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MasterViewControllerTheme.ptt; sourceTree = "<group>"; };
 		E798A03015845941006B9DBD /* mapper-ipad-detail.ptt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "mapper-ipad-detail.ptt"; sourceTree = "<group>"; };
@@ -1463,6 +1463,12 @@
 		E7ECEE411701091C00920D70 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSiOSSDK.framework; path = "../../Downloads/aws-ios-sdk-1.4.6/AWSiOSSDK.framework"; sourceTree = "<group>"; };
 		E7ECEE4317010B2500920D70 /* AmazonClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonClientManager.h; sourceTree = "<group>"; };
 		E7ECEE4417010B2500920D70 /* AmazonClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonClientManager.m; sourceTree = "<group>"; };
+		E7F06B6A181409D000E5D128 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.3.0 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
+		E7F06B71181409F300E5D128 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3.3.0 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
+		E7F06B7E18141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrepopulateAndRemoveDuplicates.h; sourceTree = "<group>"; };
+		E7F06B7F18141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrepopulateAndRemoveDuplicates.m; sourceTree = "<group>"; };
+		E7F06B82181421BB00E5D128 /* TextFieldAndLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldAndLabelCell.h; sourceTree = "<group>"; };
+		E7F06B83181421BB00E5D128 /* TextFieldAndLabelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextFieldAndLabelCell.m; sourceTree = "<group>"; };
 		E7F1CAEE1597AF4C006F9E95 /* MonthlyPracticumLogTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthlyPracticumLogTopCell.h; sourceTree = "<group>"; };
 		E7F1CAEF1597AF4C006F9E95 /* MonthlyPracticumLogTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = MonthlyPracticumLogTopCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7F1CAF01597AF4C006F9E95 /* MonthlyPracticumLogTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogTopCell.xib; sourceTree = "<group>"; };
@@ -1548,9 +1554,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7F06B7818140A2A00E5D128 /* libSensibleTableView.a in Frameworks */,
+				E7F06B7B18140A4300E5D128 /* libSTV+CoreData.a in Frameworks */,
 				E7ECEE421701091C00920D70 /* AWSiOSSDK.framework in Frameworks */,
-				E78F088916DC742F0075C78E /* libSensibleTableView.a in Frameworks */,
-				E78C961716D86AC600E8AD09 /* libSTV+CoreData.a in Frameworks */,
 				E7F1CAF41597CADB006F9E95 /* CoreText.framework in Frameworks */,
 				E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */,
 				E7F1CBA31598C787006F9E95 /* ImageIO.framework in Frameworks */,
@@ -1778,6 +1784,8 @@
 				E7A2136F155B34CD005CF154 /* LogoBackgroundViewController.xib */,
 				E71E26C5156AA1A00004A793 /* SCArrayOfObjectsModel_UseSelectionSection.h */,
 				E71E26C6156AA1A00004A793 /* SCArrayOfObjectsModel_UseSelectionSection.m */,
+				E7F06B7E18141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.h */,
+				E7F06B7F18141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -2072,6 +2080,8 @@
 				E75A147E15A8DB2300F3EBEF /* TotalHoursAndMinutesCell.h */,
 				E7B3E40515C58B2F00729C88 /* TotalHoursAndMinutesCell.m */,
 				E75A148115A8DB6300F3EBEF /* TotalHoursAndMinutesCell.xib */,
+				E7F06B82181421BB00E5D128 /* TextFieldAndLabelCell.h */,
+				E7F06B83181421BB00E5D128 /* TextFieldAndLabelCell.m */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -2091,7 +2101,6 @@
 		37F7CFCA1500602900AD2C3A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E70FACED1697154C00E14F03 /* psyTrack.sqlite */,
 				E74167E5158E739300CE1AF4 /* Monaco.dfont */,
 				3767981815006A8100D0639D /* InfoPlist.strings */,
 				37F7CFCB150060D400AD2C3A /* main.m */,
@@ -2123,8 +2132,8 @@
 		B771C54314DAF3E4002D430E /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
-				E78F088016DC74180075C78E /* SensibleTableView.xcodeproj */,
-				E78C960B16D86A7800E8AD09 /* STV+CoreData.xcodeproj */,
+				E7F06B6A181409D000E5D128 /* SensibleTableView.xcodeproj */,
+				E7F06B71181409F300E5D128 /* STV+CoreData.xcodeproj */,
 				E7F1CB1E1598C024006F9E95 /* vfr-Reader-db84c9d */,
 				E7577FA7158C1DAE0044D344 /* KeychainItemWrapper.h */,
 				E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */,
@@ -2297,14 +2306,6 @@
 			name = "EBP Websites";
 			sourceTree = "<group>";
 		};
-		E78C960C16D86A7800E8AD09 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E78C961116D86A7900E8AD09 /* libSTV+CoreData.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		E78DA6A015252511004ABF29 /* Existing Hours */ = {
 			isa = PBXGroup;
 			children = (
@@ -2315,14 +2316,6 @@
 				E7D3732E152C4F7E00121918 /* ExistingHoursOverviewCell.xib */,
 			);
 			name = "Existing Hours";
-			sourceTree = "<group>";
-		};
-		E78F088116DC74180075C78E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E78F088616DC74190075C78E /* libSensibleTableView.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		E798A02F15845941006B9DBD /* MapperTheme */ = {
@@ -2812,6 +2805,22 @@
 			name = "Time Track View Controller";
 			sourceTree = "<group>";
 		};
+		E7F06B6B181409D000E5D128 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7F06B70181409D000E5D128 /* libSensibleTableView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7F06B72181409F300E5D128 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7F06B77181409F300E5D128 /* libSTV+CoreData.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E7F1CAEB1597A780006F9E95 /* Monthly Practicum Log */ = {
 			isa = PBXGroup;
 			children = (
@@ -2952,7 +2961,9 @@
 				E7A8B0F516AA4DD600C33267 /* PTTAppDelegate.h in Headers */,
 				E73A227C1812F22B0003CD06 /* ValidateMOC.h in Headers */,
 				E7ECEE4517010B2500920D70 /* AmazonClientManager.h in Headers */,
+				E7F06B84181421BB00E5D128 /* TextFieldAndLabelCell.h in Headers */,
 				E705B44D1784E1AE001FAF2E /* EBPWebsitesTableViewController.h in Headers */,
+				E7F06B8018141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.h in Headers */,
 				E705B4551784E3AF001FAF2E /* EBPWebViewViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2972,8 +2983,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				E78F088816DC74240075C78E /* PBXTargetDependency */,
-				E78C961516D86AB100E8AD09 /* PBXTargetDependency */,
+				E7F06B7A18140A3900E5D128 /* PBXTargetDependency */,
+				E7F06B7D18140A4900E5D128 /* PBXTargetDependency */,
 			);
 			name = PsyTrack;
 			productName = psyTrainTrack;
@@ -3002,12 +3013,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = E78F088116DC74180075C78E /* Products */;
-					ProjectRef = E78F088016DC74180075C78E /* SensibleTableView.xcodeproj */;
+					ProductGroup = E7F06B6B181409D000E5D128 /* Products */;
+					ProjectRef = E7F06B6A181409D000E5D128 /* SensibleTableView.xcodeproj */;
 				},
 				{
-					ProductGroup = E78C960C16D86A7800E8AD09 /* Products */;
-					ProjectRef = E78C960B16D86A7800E8AD09 /* STV+CoreData.xcodeproj */;
+					ProductGroup = E7F06B72181409F300E5D128 /* Products */;
+					ProjectRef = E7F06B71181409F300E5D128 /* STV+CoreData.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -3018,18 +3029,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E78C961116D86A7900E8AD09 /* libSTV+CoreData.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libSTV+CoreData.a";
-			remoteRef = E78C961016D86A7900E8AD09 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E78F088616DC74190075C78E /* libSensibleTableView.a */ = {
+		E7F06B70181409D000E5D128 /* libSensibleTableView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSensibleTableView.a;
-			remoteRef = E78F088516DC74190075C78E /* PBXContainerItemProxy */;
+			remoteRef = E7F06B6F181409D000E5D128 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E7F06B77181409F300E5D128 /* libSTV+CoreData.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libSTV+CoreData.a";
+			remoteRef = E7F06B76181409F300E5D128 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -3263,7 +3274,6 @@
 				E7388B691652B7E600E04639 /* ClientPresentationGenerateVC.xib in Resources */,
 				E7B5D97F168D31BB000CA5B5 /* ClientPresentationGenerateVC_iPhone.xib in Resources */,
 				E7B5D994168DB670000CA5B5 /* Default.png in Resources */,
-				E70FACEE1697154C00E14F03 /* psyTrack.sqlite in Resources */,
 				E7A8B0FD16AA579F00C33267 /* PTManagedObject.h in Resources */,
 				E7A8B0FE16AA579F00C33267 /* PTManagedObject.m in Resources */,
 				E724FA1816B1E7D9007508BB /* Encryption-Registration-Number-ERN.pdf in Resources */,
@@ -3308,6 +3318,7 @@
 				37F7CE181500326600AD2C3A /* DrugProductTECodeEntity.m in Sources */,
 				37F7CE191500326600AD2C3A /* DrugRegActionDateEntity.m in Sources */,
 				37F7CE1A1500326600AD2C3A /* DrugReviewClassLookupEntity.m in Sources */,
+				E7F06B85181421BB00E5D128 /* TextFieldAndLabelCell.m in Sources */,
 				37F7CE241500334800AD2C3A /* PTTAppDelegate.m in Sources */,
 				37F7CE41150051C900AD2C3A /* UIDownloadBar.m in Sources */,
 				37F7CE44150051EA00AD2C3A /* WebViewDetailViewController.m in Sources */,
@@ -3421,6 +3432,7 @@
 				E719568315FFAFB60070E61D /* DTSingleQuestionView.m in Sources */,
 				E719568415FFAFB60070E61D /* GrayRoundRectView.m in Sources */,
 				E719568515FFAFB60070E61D /* NSString+Helpers.m in Sources */,
+				E7F06B8118141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.m in Sources */,
 				E719568615FFAFB60070E61D /* TouchyWebView.m in Sources */,
 				E719568715FFAFB60070E61D /* UILabel+Helpers.m in Sources */,
 				E719568815FFAFB60070E61D /* UIView+Helpers.m in Sources */,
@@ -3616,15 +3628,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E78C961516D86AB100E8AD09 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "STV+CoreData";
-			targetProxy = E78C961416D86AB100E8AD09 /* PBXContainerItemProxy */;
-		};
-		E78F088816DC74240075C78E /* PBXTargetDependency */ = {
+		E7F06B7A18140A3900E5D128 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SensibleTableView;
-			targetProxy = E78F088716DC74240075C78E /* PBXContainerItemProxy */;
+			targetProxy = E7F06B7918140A3900E5D128 /* PBXContainerItemProxy */;
+		};
+		E7F06B7D18140A4900E5D128 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "STV+CoreData";
+			targetProxy = E7F06B7C18140A4900E5D128 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -4137,7 +4149,7 @@
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "3E8465FE-19B8-44B4-A63C-33D179CE7AB7";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3E8465FE-19B8-44B4-A63C-33D179CE7AB7";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../STV//STV 3.1.7 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\" \"$(SRCROOT)/../.STV/STV 3.1.7 Pro/Source Code/STV+CoreData/STV+CoreData\"";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../Downloads/STV 3.3.0 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\" \"$(SRCROOT)/../Downloads/STV 3.3.0 Pro/Source Code/STV+CoreData/STV+CoreData\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -4170,7 +4182,7 @@
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "42F58184-29F0-4909-8DD1-EA8881BB6EC6";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "42F58184-29F0-4909-8DD1-EA8881BB6EC6";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../STV//STV 3.1.7 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\" \"$(SRCROOT)/../.STV/STV 3.1.7 Pro/Source Code/STV+CoreData/STV+CoreData\"";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../Downloads/STV 3.3.0 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\" \"$(SRCROOT)/../Downloads/STV 3.3.0 Pro/Source Code/STV+CoreData/STV+CoreData\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

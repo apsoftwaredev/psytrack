@@ -57,6 +57,7 @@ static NSString *const kPTCurrentKeyDictionary = @"current_key_dictonary";
 static NSString *const kPTCurrentKeyDate = @"current_key_date";
 static NSString *const kPTiCloudPreference = @"icloud_preference";
 static NSString *const kPTMonthlyPracticumLogNumber = @"monthly_practicum_log_number";
+static NSString *const kPTHasPrepopulated = @"hasPrepopulated";
 
 static NSInteger const kAlertTagErrorExitApp = 1;
 
@@ -97,7 +98,7 @@ static NSInteger const kAlertTagErrorExitApp = 1;
     PTTEncryption *encryption_;
     NSString *trustResultFailureString;
     BOOL addedPersistentStoreSuccess;
-
+    BOOL addedPrepopulatedData;
     Reachability *hostReach;
     Reachability *internetReach;
     Reachability *wifiReach;

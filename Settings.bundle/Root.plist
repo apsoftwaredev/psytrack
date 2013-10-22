@@ -44,5 +44,7 @@
 	<true/>
 	<key>monthly_practicum_log_number</key>
 	<integer>0</integer>
+	<key>hasPrepopulated</key>
+	<false/>
 </dict>
 </plist>

@@ -16,4 +16,33 @@
 @dynamic relationship;
 @dynamic clientRelationship;
 
+
+-(BOOL)associatedWithTimeRecords{
+    
+    
+    
+    BOOL associatedRecords=NO;
+    
+    [self willAccessValueForKey:@"clientRelationship"];
+    
+    if (self.clientRelationship.count) {
+        associatedRecords=YES;
+    }
+    [self didAccessValueForKey:@"clientRelationship"];
+    
+    
+    
+    
+    return associatedRecords;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
 @end

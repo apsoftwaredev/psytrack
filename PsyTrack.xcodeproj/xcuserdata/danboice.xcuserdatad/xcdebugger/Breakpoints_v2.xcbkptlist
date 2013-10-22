@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
+            timestampString = "404006206.198855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88">
+            startingLineNumber = "89"
+            endingLineNumber = "89">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
+            timestampString = "404006206.198855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253">
+            startingLineNumber = "254"
+            endingLineNumber = "254">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -38,11 +38,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
+            timestampString = "404006206.198855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224">
+            startingLineNumber = "225"
+            endingLineNumber = "225">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
+            timestampString = "404006206.198855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97">
+            startingLineNumber = "98"
+            endingLineNumber = "98">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -66,11 +66,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
+            timestampString = "404006206.198855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106">
+            startingLineNumber = "107"
+            endingLineNumber = "107">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -80,11 +80,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
+            timestampString = "404006206.198855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113">
+            startingLineNumber = "114"
+            endingLineNumber = "114">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -94,11 +94,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
+            timestampString = "404006206.198855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118">
+            startingLineNumber = "119"
+            endingLineNumber = "119">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -108,11 +108,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
+            timestampString = "404006206.198855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91">
+            startingLineNumber = "92"
+            endingLineNumber = "92">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
+            timestampString = "404006206.198855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59">
+            startingLineNumber = "60"
+            endingLineNumber = "60">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -136,63 +136,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
+            timestampString = "404006206.198855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "129"
@@ -206,11 +150,67 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "InterventionTypeSubtypeEntity.m"
-            timestampString = "403909964.488799"
+            timestampString = "404006206.198855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "InterventionTypeSubtypeEntity.m"
+            timestampString = "404006206.198855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "InterventionTypeSubtypeEntity.m"
+            timestampString = "404006206.198855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "InterventionTypeSubtypeEntity.m"
+            timestampString = "404006206.198855"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "130"
             endingLineNumber = "130">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "InterventionTypeSubtypeEntity.m"
+            timestampString = "404006206.198855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -996,11 +996,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2855"
-            endingLineNumber = "2855"
+            startingLineNumber = "2853"
+            endingLineNumber = "2853"
             landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1012,11 +1012,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3485"
-            endingLineNumber = "3485"
+            startingLineNumber = "3483"
+            endingLineNumber = "3483"
             landmarkName = "-calculateTime"
             landmarkType = "5">
          </BreakpointContent>
@@ -1028,11 +1028,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3502"
-            endingLineNumber = "3502"
+            startingLineNumber = "3500"
+            endingLineNumber = "3500"
             landmarkName = "-calculateTime"
             landmarkType = "5">
          </BreakpointContent>
@@ -1044,11 +1044,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3506"
-            endingLineNumber = "3506"
+            startingLineNumber = "3504"
+            endingLineNumber = "3504"
             landmarkName = "-stopwatchUpdated:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1060,11 +1060,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3507"
-            endingLineNumber = "3507"
+            startingLineNumber = "3505"
+            endingLineNumber = "3505"
             landmarkName = "-stopwatchUpdated:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1076,11 +1076,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3520"
-            endingLineNumber = "3520"
+            startingLineNumber = "3518"
+            endingLineNumber = "3518"
             landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1092,11 +1092,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3491"
-            endingLineNumber = "3491"
+            startingLineNumber = "3489"
+            endingLineNumber = "3489"
             landmarkName = "-calculateTime"
             landmarkType = "5">
          </BreakpointContent>
@@ -1108,11 +1108,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3510"
-            endingLineNumber = "3510"
+            startingLineNumber = "3508"
+            endingLineNumber = "3508"
             landmarkName = "@implementation TimeTrackViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1170,11 +1170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3798"
-            endingLineNumber = "3798"
+            startingLineNumber = "3796"
+            endingLineNumber = "3796"
             landmarkName = "-tableViewModel:itemAddedForSectionAtIndexPath:item:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1186,11 +1186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3802"
-            endingLineNumber = "3802"
+            startingLineNumber = "3800"
+            endingLineNumber = "3800"
             landmarkName = "-tableViewModel:itemAddedForSectionAtIndexPath:item:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1202,11 +1202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3835"
-            endingLineNumber = "3835"
+            startingLineNumber = "3833"
+            endingLineNumber = "3833"
             landmarkName = "-tableViewModel:itemEditedForSectionAtIndexPath:item:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1316,11 +1316,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3645"
-            endingLineNumber = "3645"
+            startingLineNumber = "3643"
+            endingLineNumber = "3643"
             landmarkName = "-totalBreakTimeInterval"
             landmarkType = "5">
          </BreakpointContent>
@@ -1332,11 +1332,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3639"
-            endingLineNumber = "3639"
+            startingLineNumber = "3637"
+            endingLineNumber = "3637"
             landmarkName = "-totalBreakTimeInterval"
             landmarkType = "5">
          </BreakpointContent>
@@ -1348,11 +1348,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3652"
-            endingLineNumber = "3652"
+            startingLineNumber = "3650"
+            endingLineNumber = "3650"
             landmarkName = "-totalBreakTimeInterval"
             landmarkType = "5">
          </BreakpointContent>
@@ -1945,7 +1945,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "129"
             endingLineNumber = "129"
-            landmarkName = "-totalTimeIntervalForTotalTimeArray:"
+            landmarkName = "-monthStartDateForDate:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2490,11 +2490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4224"
-            endingLineNumber = "4224">
+            startingLineNumber = "4222"
+            endingLineNumber = "4222">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2504,11 +2504,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4219"
-            endingLineNumber = "4219">
+            startingLineNumber = "4217"
+            endingLineNumber = "4217">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3424,11 +3424,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3799"
-            endingLineNumber = "3799"
+            startingLineNumber = "3797"
+            endingLineNumber = "3797"
             landmarkName = "-tableViewModel:itemAddedForSectionAtIndexPath:item:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3792,9 +3792,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "702"
-            endingLineNumber = "702"
-            landmarkName = "@implementation TotalTimesForMonthlyLog"
-            landmarkType = "3">
+            endingLineNumber = "702">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3808,9 +3806,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "688"
-            endingLineNumber = "688"
-            landmarkName = "-predicateForTrackDoctorateLevel"
-            landmarkType = "5">
+            endingLineNumber = "688">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3841,7 +3837,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "275"
             endingLineNumber = "275"
-            landmarkName = "-weekEndDate:"
+            landmarkName = "-storedEndDateForWeek:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4446,11 +4442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3530"
-            endingLineNumber = "3530"
+            startingLineNumber = "3528"
+            endingLineNumber = "3528"
             landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4462,11 +4458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3534"
-            endingLineNumber = "3534"
+            startingLineNumber = "3532"
+            endingLineNumber = "3532"
             landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4478,11 +4474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3533"
-            endingLineNumber = "3533"
+            startingLineNumber = "3531"
+            endingLineNumber = "3531"
             landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4937,7 +4933,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "489"
             endingLineNumber = "489"
-            landmarkName = "-totalTimeIntervalForExistingHoursArray:keyPath:"
+            landmarkName = "-predicateForExistingHoursCurrentMonth"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4953,7 +4949,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "490"
             endingLineNumber = "490"
-            landmarkName = "-totalTimeIntervalForExistingHoursArray:keyPath:"
+            landmarkName = "-predicateForExistingHoursCurrentMonth"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5107,7 +5103,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "448"
             endingLineNumber = "448"
-            landmarkName = "-totalTimeIntervalForTrackArray:predicate:"
+            landmarkName = "-totalTimeIntervalForExistingHoursArray:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5139,7 +5135,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "143"
             endingLineNumber = "143"
-            landmarkName = "-totalTimeIntervalForTotalTimeArray:"
+            landmarkName = "-monthEndDate:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5166,11 +5162,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3707"
-            endingLineNumber = "3707"
+            startingLineNumber = "3705"
+            endingLineNumber = "3705"
             landmarkName = "-tableViewModel:calculateBreakTimeForRowAtIndexPath:withBoundValues:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5182,11 +5178,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2161"
-            endingLineNumber = "2161"
+            startingLineNumber = "2159"
+            endingLineNumber = "2159"
             landmarkName = "-tableViewModel:didAddSectionAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5198,11 +5194,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2140"
-            endingLineNumber = "2140"
+            startingLineNumber = "2138"
+            endingLineNumber = "2138"
             landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5214,11 +5210,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2141"
-            endingLineNumber = "2141"
+            startingLineNumber = "2139"
+            endingLineNumber = "2139"
             landmarkName = "@implementation TimeTrackViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -5230,11 +5226,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3573"
-            endingLineNumber = "3573"
+            startingLineNumber = "3571"
+            endingLineNumber = "3571"
             landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5294,11 +5290,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4370"
-            endingLineNumber = "4370">
+            startingLineNumber = "4392"
+            endingLineNumber = "4392">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5308,11 +5304,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4269"
-            endingLineNumber = "4269">
+            startingLineNumber = "4291"
+            endingLineNumber = "4291">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5322,11 +5318,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4257"
-            endingLineNumber = "4257">
+            startingLineNumber = "4279"
+            endingLineNumber = "4279">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5336,11 +5332,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4242"
-            endingLineNumber = "4242">
+            startingLineNumber = "4264"
+            endingLineNumber = "4264">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5350,11 +5346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "730"
-            endingLineNumber = "730"
+            startingLineNumber = "731"
+            endingLineNumber = "731"
             landmarkName = "-alertView:didDismissWithButtonIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5366,11 +5362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "719"
-            endingLineNumber = "719"
+            startingLineNumber = "720"
+            endingLineNumber = "720"
             landmarkName = "-alertView:didDismissWithButtonIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5382,11 +5378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "740"
-            endingLineNumber = "740"
+            startingLineNumber = "741"
+            endingLineNumber = "741"
             landmarkName = "-iCloudPreferenceFromUserDefaults"
             landmarkType = "5">
          </BreakpointContent>
@@ -5398,11 +5394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1456"
-            endingLineNumber = "1456"
+            startingLineNumber = "1457"
+            endingLineNumber = "1457"
             landmarkName = "-encryptStringToEncryptedData:withKeyString:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5414,11 +5410,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1480"
-            endingLineNumber = "1480"
+            startingLineNumber = "1481"
+            endingLineNumber = "1481"
             landmarkName = "-encryptDataToEncryptedData:withKeyString:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5430,11 +5426,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1475"
-            endingLineNumber = "1475"
+            startingLineNumber = "1476"
+            endingLineNumber = "1476"
             landmarkName = "-encryptDataToEncryptedData:withKeyString:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5446,11 +5442,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1464"
-            endingLineNumber = "1464"
+            startingLineNumber = "1465"
+            endingLineNumber = "1465"
             landmarkName = "-encryptDataToEncryptedData:withKeyString:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5462,11 +5458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1492"
-            endingLineNumber = "1492"
+            startingLineNumber = "1493"
+            endingLineNumber = "1493"
             landmarkName = "-encryptDataToEncryptedData:withKeyString:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5478,11 +5474,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1511"
-            endingLineNumber = "1511"
+            startingLineNumber = "1512"
+            endingLineNumber = "1512"
             landmarkName = "-encryptDataToEncryptedData:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5494,11 +5490,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1524"
-            endingLineNumber = "1524"
+            startingLineNumber = "1525"
+            endingLineNumber = "1525"
             landmarkName = "-encryptDataToEncryptedData:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5510,11 +5506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1385"
-            endingLineNumber = "1385"
+            startingLineNumber = "1386"
+            endingLineNumber = "1386"
             landmarkName = "-convertStringToData:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5526,11 +5522,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2196"
-            endingLineNumber = "2196"
+            startingLineNumber = "2194"
+            endingLineNumber = "2194"
             landmarkName = "-tableViewModel:didAddSectionAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5675,7 +5671,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "111"
             endingLineNumber = "111"
-            landmarkName = "-initWithMonth:clinician:trainingProgram:"
+            landmarkName = "-totalTimeIntervalForTotalTimeArray:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5780,11 +5776,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2358"
-            endingLineNumber = "2358"
+            startingLineNumber = "2356"
+            endingLineNumber = "2356"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5796,11 +5792,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2044"
-            endingLineNumber = "2044"
+            startingLineNumber = "2042"
+            endingLineNumber = "2042"
             landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5812,11 +5808,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3486"
-            endingLineNumber = "3486"
+            startingLineNumber = "3484"
+            endingLineNumber = "3484"
             landmarkName = "-calculateTime"
             landmarkType = "5">
          </BreakpointContent>
@@ -5844,11 +5840,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3524"
-            endingLineNumber = "3524"
+            startingLineNumber = "3522"
+            endingLineNumber = "3522"
             landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -6228,11 +6224,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2523"
-            endingLineNumber = "2523"
+            startingLineNumber = "2521"
+            endingLineNumber = "2521"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -6362,11 +6358,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2246"
-            endingLineNumber = "2246"
+            startingLineNumber = "2244"
+            endingLineNumber = "2244"
             landmarkName = "-tableViewModel:didAddSectionAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -6378,11 +6374,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2239"
-            endingLineNumber = "2239"
+            startingLineNumber = "2237"
+            endingLineNumber = "2237"
             landmarkName = "-tableViewModel:didAddSectionAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -6394,11 +6390,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2236"
-            endingLineNumber = "2236"
+            startingLineNumber = "2234"
+            endingLineNumber = "2234"
             landmarkName = "-tableViewModel:didAddSectionAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -6410,11 +6406,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2177"
-            endingLineNumber = "2177"
+            startingLineNumber = "2175"
+            endingLineNumber = "2175"
             landmarkName = "-tableViewModel:didAddSectionAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -6426,11 +6422,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2144"
-            endingLineNumber = "2144"
+            startingLineNumber = "2142"
+            endingLineNumber = "2142"
             landmarkName = "-tableViewModel:didAddSectionAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -6442,11 +6438,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2138"
-            endingLineNumber = "2138"
+            startingLineNumber = "2136"
+            endingLineNumber = "2136"
             landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -6458,11 +6454,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2062"
-            endingLineNumber = "2062"
+            startingLineNumber = "2060"
+            endingLineNumber = "2060"
             landmarkName = "-tableViewModel:detailViewWillPresentForRowAtIndexPath:withDetailTableViewModel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -6474,11 +6470,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403997192.760665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2481"
-            endingLineNumber = "2481"
+            startingLineNumber = "2489"
+            endingLineNumber = "2489"
             landmarkName = "-repairForSaveError:"
             landmarkType = "5">
          </BreakpointContent>
@@ -6554,23 +6550,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CliniciansRootViewController_iPad.m"
-            timestampString = "402971166.666394"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CliniciansRootViewController_iPad.m"
-            timestampString = "402971166.666394"
+            timestampString = "403973280.224076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "188"
@@ -6586,11 +6566,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CliniciansRootViewController_iPad.m"
-            timestampString = "402971166.666394"
+            timestampString = "403973280.224076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "760"
-            endingLineNumber = "760">
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6600,11 +6582,25 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CliniciansRootViewController_iPad.m"
-            timestampString = "402971166.666394"
+            timestampString = "403973280.224076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "739"
-            endingLineNumber = "739">
+            startingLineNumber = "750"
+            endingLineNumber = "750">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CliniciansRootViewController_iPad.m"
+            timestampString = "403973280.224076"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "729"
+            endingLineNumber = "729">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6802,11 +6798,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4248"
-            endingLineNumber = "4248">
+            startingLineNumber = "4270"
+            endingLineNumber = "4270">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6816,11 +6812,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4241"
-            endingLineNumber = "4241">
+            startingLineNumber = "4263"
+            endingLineNumber = "4263">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6908,11 +6904,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2308"
-            endingLineNumber = "2308"
+            startingLineNumber = "2309"
+            endingLineNumber = "2309"
             landmarkName = "-tabBarController:didSelectViewController:"
             landmarkType = "5">
          </BreakpointContent>
@@ -6924,11 +6920,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1504"
-            endingLineNumber = "1504"
+            startingLineNumber = "1505"
+            endingLineNumber = "1505"
             landmarkName = "-encryptDataToEncryptedData:withKeyString:"
             landmarkType = "5">
          </BreakpointContent>
@@ -6940,11 +6936,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1269"
-            endingLineNumber = "1269"
+            startingLineNumber = "1270"
+            endingLineNumber = "1270"
             landmarkName = "-setupMyInfoRecord"
             landmarkType = "5">
          </BreakpointContent>
@@ -6956,11 +6952,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1271"
-            endingLineNumber = "1271"
+            startingLineNumber = "1272"
+            endingLineNumber = "1272"
             landmarkName = "-setupMyInfoRecord"
             landmarkType = "5">
          </BreakpointContent>
@@ -6972,11 +6968,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1274"
-            endingLineNumber = "1274"
+            startingLineNumber = "1275"
+            endingLineNumber = "1275"
             landmarkName = "-setupMyInfoRecord"
             landmarkType = "5">
          </BreakpointContent>
@@ -6988,11 +6984,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2398"
-            endingLineNumber = "2398"
+            startingLineNumber = "2399"
+            endingLineNumber = "2399"
             landmarkName = "-displayMemoryWarning"
             landmarkType = "5">
          </BreakpointContent>
@@ -7004,11 +7000,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2409"
-            endingLineNumber = "2409"
+            startingLineNumber = "2410"
+            endingLineNumber = "2410"
             landmarkName = "-displayMemoryWarning"
             landmarkType = "5">
          </BreakpointContent>
@@ -7020,11 +7016,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1314"
-            endingLineNumber = "1314"
+            startingLineNumber = "1315"
+            endingLineNumber = "1315"
             landmarkName = "-setupLockDictionaryResultStr"
             landmarkType = "5">
          </BreakpointContent>
@@ -7052,11 +7048,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2364"
-            endingLineNumber = "2364"
+            startingLineNumber = "2365"
+            endingLineNumber = "2365"
             landmarkName = "-applicationWillEnterForeground:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7068,7 +7064,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2381"
+            endingLineNumber = "2381"
+            landmarkName = "-displayMemoryWarning"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PTTAppDelegate.m"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2380"
@@ -7084,23 +7096,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2379"
-            endingLineNumber = "2379"
-            landmarkName = "-displayMemoryWarning"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403997192.760665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2441"
@@ -7116,11 +7112,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2373"
-            endingLineNumber = "2373"
+            startingLineNumber = "2374"
+            endingLineNumber = "2374"
             landmarkName = "-applicationDidBecomeActive:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7132,11 +7128,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2057"
-            endingLineNumber = "2057"
+            startingLineNumber = "2058"
+            endingLineNumber = "2058"
             landmarkName = "@implementation PTTAppDelegate"
             landmarkType = "3">
          </BreakpointContent>
@@ -7164,11 +7160,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2049"
-            endingLineNumber = "2049"
+            startingLineNumber = "2050"
+            endingLineNumber = "2050"
             landmarkName = "@implementation PTTAppDelegate"
             landmarkType = "3">
          </BreakpointContent>
@@ -7356,11 +7352,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2045"
-            endingLineNumber = "2045"
+            startingLineNumber = "2046"
+            endingLineNumber = "2046"
             landmarkName = "@implementation PTTAppDelegate"
             landmarkType = "3">
          </BreakpointContent>
@@ -7372,11 +7368,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2394"
-            endingLineNumber = "2394"
+            startingLineNumber = "2395"
+            endingLineNumber = "2395"
             landmarkName = "-displayMemoryWarning"
             landmarkType = "5">
          </BreakpointContent>
@@ -7420,11 +7416,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1310"
-            endingLineNumber = "1310"
+            startingLineNumber = "1311"
+            endingLineNumber = "1311"
             landmarkName = "-setupLockDictionaryResultStr"
             landmarkType = "5">
          </BreakpointContent>
@@ -7468,11 +7464,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2400"
-            endingLineNumber = "2400"
+            startingLineNumber = "2401"
+            endingLineNumber = "2401"
             landmarkName = "-displayMemoryWarning"
             landmarkType = "5">
          </BreakpointContent>
@@ -7562,11 +7558,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3526"
-            endingLineNumber = "3526"
+            startingLineNumber = "3524"
+            endingLineNumber = "3524"
             landmarkName = "-tableViewModel:customButtonTapped:forRowWithIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7578,11 +7574,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2510"
-            endingLineNumber = "2510"
+            startingLineNumber = "2508"
+            endingLineNumber = "2508"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7594,11 +7590,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2433"
-            endingLineNumber = "2433"
+            startingLineNumber = "2431"
+            endingLineNumber = "2431"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7610,11 +7606,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2437"
-            endingLineNumber = "2437"
+            startingLineNumber = "2435"
+            endingLineNumber = "2435"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7626,11 +7622,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2440"
-            endingLineNumber = "2440"
+            startingLineNumber = "2438"
+            endingLineNumber = "2438"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7642,7 +7638,39 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2684"
+            endingLineNumber = "2684"
+            landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeTrackViewController.m"
+            timestampString = "403968888.881657"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2710"
+            endingLineNumber = "2710"
+            landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeTrackViewController.m"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2686"
@@ -7658,55 +7686,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2712"
-            endingLineNumber = "2712"
-            landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2688"
-            endingLineNumber = "2688"
-            landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2691"
-            endingLineNumber = "2691"
-            landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2689"
@@ -7722,7 +7702,39 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2687"
+            endingLineNumber = "2687"
+            landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeTrackViewController.m"
+            timestampString = "403968888.881657"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2721"
+            endingLineNumber = "2721"
+            landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeTrackViewController.m"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2723"
@@ -7737,28 +7749,12 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2725"
-            endingLineNumber = "2725"
-            landmarkName = "-tableViewModel:valueChangedForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "CliniciansRootViewController_iPad.m"
-            timestampString = "402971166.666394"
+            timestampString = "403973280.224076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "749"
-            endingLineNumber = "749">
+            startingLineNumber = "739"
+            endingLineNumber = "739">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8078,11 +8074,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2519"
-            endingLineNumber = "2519"
+            startingLineNumber = "2517"
+            endingLineNumber = "2517"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8442,11 +8438,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4307"
-            endingLineNumber = "4307">
+            startingLineNumber = "4329"
+            endingLineNumber = "4329">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8456,11 +8452,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4284"
-            endingLineNumber = "4284">
+            startingLineNumber = "4306"
+            endingLineNumber = "4306">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8470,11 +8466,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4264"
-            endingLineNumber = "4264">
+            startingLineNumber = "4286"
+            endingLineNumber = "4286">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8484,11 +8480,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4258"
-            endingLineNumber = "4258">
+            startingLineNumber = "4280"
+            endingLineNumber = "4280">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8498,11 +8494,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4259"
-            endingLineNumber = "4259">
+            startingLineNumber = "4281"
+            endingLineNumber = "4281">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8512,11 +8508,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4082"
-            endingLineNumber = "4082">
+            startingLineNumber = "4104"
+            endingLineNumber = "4104">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8526,11 +8522,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4137"
-            endingLineNumber = "4137">
+            startingLineNumber = "4159"
+            endingLineNumber = "4159">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8540,11 +8536,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "4131"
-            endingLineNumber = "4131">
+            startingLineNumber = "4153"
+            endingLineNumber = "4153">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -8570,11 +8566,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403997192.760665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3304"
-            endingLineNumber = "3304"
+            startingLineNumber = "3311"
+            endingLineNumber = "3311"
             landmarkName = "@implementation PTTAppDelegate"
             landmarkType = "3">
          </BreakpointContent>
@@ -8746,11 +8742,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8762,11 +8758,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8778,11 +8774,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8794,11 +8790,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8810,11 +8806,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8826,11 +8822,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8842,11 +8838,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8858,11 +8854,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8879,7 +8875,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "428"
             endingLineNumber = "428"
-            landmarkName = "-totalTimeIntervalForTrackArray:predicate:"
+            landmarkName = "-totalTimeIntervalForExistingHoursArray:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -8895,7 +8891,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "430"
             endingLineNumber = "430"
-            landmarkName = "-totalTimeIntervalForTrackArray:predicate:"
+            landmarkName = "-totalTimeIntervalForExistingHoursArray:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -9066,23 +9062,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3000"
-            endingLineNumber = "3000"
-            landmarkName = "-combSmString"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403997192.760665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "3007"
@@ -9098,11 +9078,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403997192.760665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3008"
-            endingLineNumber = "3008"
+            startingLineNumber = "3014"
+            endingLineNumber = "3014"
             landmarkName = "-combSmString"
             landmarkType = "5">
          </BreakpointContent>
@@ -9114,11 +9094,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "403997192.760665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3686"
-            endingLineNumber = "3686"
+            startingLineNumber = "3015"
+            endingLineNumber = "3015"
+            landmarkName = "-combSmString"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PTTAppDelegate.m"
+            timestampString = "404015073.461185"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3708"
+            endingLineNumber = "3708"
             landmarkName = "-flashAppTrainAndTitleGraphics"
             landmarkType = "5">
          </BreakpointContent>
@@ -9192,11 +9188,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2104"
-            endingLineNumber = "2104"
+            startingLineNumber = "2105"
+            endingLineNumber = "2105"
             landmarkName = "-application:willChangeStatusBarOrientation:duration:"
             landmarkType = "5">
          </BreakpointContent>
@@ -9208,11 +9204,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2109"
-            endingLineNumber = "2109"
+            startingLineNumber = "2110"
+            endingLineNumber = "2110"
             landmarkName = "-application:willChangeStatusBarOrientation:duration:"
             landmarkType = "5">
          </BreakpointContent>
@@ -10196,11 +10192,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2511"
-            endingLineNumber = "2511"
+            startingLineNumber = "2509"
+            endingLineNumber = "2509"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -10212,11 +10208,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2512"
-            endingLineNumber = "2512"
+            startingLineNumber = "2510"
+            endingLineNumber = "2510"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -10228,11 +10224,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2527"
-            endingLineNumber = "2527"
+            startingLineNumber = "2525"
+            endingLineNumber = "2525"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -10244,7 +10240,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2564"
+            endingLineNumber = "2564"
+            landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TimeTrackViewController.m"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2566"
@@ -10260,11 +10272,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2568"
-            endingLineNumber = "2568"
+            startingLineNumber = "2570"
+            endingLineNumber = "2570"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -10276,11 +10288,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2572"
-            endingLineNumber = "2572"
+            startingLineNumber = "2580"
+            endingLineNumber = "2580"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -10292,11 +10304,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2582"
-            endingLineNumber = "2582"
+            startingLineNumber = "2590"
+            endingLineNumber = "2590"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -10308,11 +10320,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2592"
-            endingLineNumber = "2592"
+            startingLineNumber = "2583"
+            endingLineNumber = "2583"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -10324,27 +10336,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2585"
-            endingLineNumber = "2585"
-            landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2617"
-            endingLineNumber = "2617"
+            startingLineNumber = "2615"
+            endingLineNumber = "2615"
             landmarkName = "-tableViewModel:willDisplayCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -10388,11 +10384,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CliniciansRootViewController_iPad.m"
-            timestampString = "402971166.666394"
+            timestampString = "403973280.224076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
             landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -10420,11 +10416,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CliniciansRootViewController_iPad.m"
-            timestampString = "402971166.666394"
+            timestampString = "403973280.224076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
             landmarkName = "-tableViewModel:willConfigureCell:forRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -10628,11 +10624,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CliniciansRootViewController_iPad.m"
-            timestampString = "402971166.666394"
+            timestampString = "403973280.224076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
             landmarkName = "-tableViewModel:detailModelCreatedForRowAtIndexPath:detailTableViewModel:"
             landmarkType = "5">
          </BreakpointContent>
@@ -10804,11 +10800,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "363"
-            endingLineNumber = "363"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
             landmarkName = "-customizeGlobalTheme"
             landmarkType = "5">
          </BreakpointContent>
@@ -10996,11 +10992,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "424"
-            endingLineNumber = "424"
+            startingLineNumber = "425"
+            endingLineNumber = "425"
             landmarkName = "-customizeGlobalTheme"
             landmarkType = "5">
          </BreakpointContent>
@@ -11028,11 +11024,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "726"
-            endingLineNumber = "726"
+            startingLineNumber = "727"
+            endingLineNumber = "727"
             landmarkName = "-alertView:didDismissWithButtonIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -11044,11 +11040,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "724"
-            endingLineNumber = "724"
+            startingLineNumber = "725"
+            endingLineNumber = "725"
             landmarkName = "-alertView:didDismissWithButtonIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -11092,11 +11088,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2437"
-            endingLineNumber = "2437"
+            startingLineNumber = "2438"
+            endingLineNumber = "2438"
             landmarkName = "-saveContext"
             landmarkType = "5">
          </BreakpointContent>
@@ -11108,11 +11104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403980497.124444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2459"
-            endingLineNumber = "2459"
+            startingLineNumber = "2452"
+            endingLineNumber = "2452"
             landmarkName = "-saveContext"
             landmarkType = "5">
          </BreakpointContent>
@@ -11124,11 +11120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403905299.659052"
+            timestampString = "403997192.760665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2457"
-            endingLineNumber = "2457"
+            startingLineNumber = "2449"
+            endingLineNumber = "2449"
             landmarkName = "-saveContext"
             landmarkType = "5">
          </BreakpointContent>
@@ -11156,11 +11152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2647"
-            endingLineNumber = "2647"
+            startingLineNumber = "2645"
+            endingLineNumber = "2645"
             landmarkName = "-tableViewModel:valueIsValidForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -11188,11 +11184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TimeTrackViewController.m"
-            timestampString = "403918375.30665"
+            timestampString = "403968888.881657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2244"
-            endingLineNumber = "2244"
+            startingLineNumber = "2242"
+            endingLineNumber = "2242"
             landmarkName = "-tableViewModel:didAddSectionAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
@@ -11284,11 +11280,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "404015073.461185"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3905"
-            endingLineNumber = "3905"
+            startingLineNumber = "3927"
+            endingLineNumber = "3927"
             landmarkName = "-displayNotification:forDuration:location:inView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -11534,15 +11530,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403934736.743631"
+            timestampString = "403997192.760665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3368"
-            endingLineNumber = "3368"
+            startingLineNumber = "3375"
+            endingLineNumber = "3375"
             landmarkName = "-persistentStoreCoordinator"
             landmarkType = "5">
          </BreakpointContent>
@@ -11550,15 +11546,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PTTAppDelegate.m"
-            timestampString = "403937138.545413"
+            timestampString = "403997192.760665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3370"
-            endingLineNumber = "3370"
+            startingLineNumber = "3377"
+            endingLineNumber = "3377"
             landmarkName = "-persistentStoreCoordinator"
             landmarkType = "5">
          </BreakpointContent>
@@ -11576,6 +11572,626 @@
             startingLineNumber = "73"
             endingLineNumber = "73"
             landmarkName = "-supervisorsAllPresent"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404011096.945876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "589"
+            endingLineNumber = "589"
+            landmarkName = "-checkEntityStr:checkFieldNameStr:checkTextStr:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404011096.945876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "600"
+            endingLineNumber = "600"
+            landmarkName = "-checkEntityStr:checkFieldNameStr:checkTextStr:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[PrepopulateAndRemoveDuplicates checkEntityStr:checkFieldNameStr:checkTextStr:]"
+                  moduleName = "PsyTrack"
+                  urlString = "file://localhost/Users/danboice/iPhoneProjects/psytrack/PrepopulateAndRemoveDuplicates.m"
+                  timestampString = "404011199.403301"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "600"
+                  endingLineNumber = "600"
+                  offsetFromSymbolStart = "1200">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[PrepopulateAndRemoveDuplicates checkEntityStr:checkFieldNameStr:checkTextStr:]"
+                  moduleName = "PsyTrack"
+                  urlString = "file://localhost/Users/danboice/iPhoneProjects/psytrack/PrepopulateAndRemoveDuplicates.m"
+                  timestampString = "404011199.403502"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "600"
+                  endingLineNumber = "600"
+                  offsetFromSymbolStart = "4552">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404077357.191255"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "791"
+            endingLineNumber = "791"
+            landmarkName = "-checkEntityStr:checkFieldNameStr:checkTextStr:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404077357.191255"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "796"
+            endingLineNumber = "796"
+            landmarkName = "-checkEntityStr:checkFieldNameStr:checkTextStr:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[PrepopulateAndRemoveDuplicates checkEntityStr:checkFieldNameStr:checkTextStr:]"
+                  moduleName = "PsyTrack"
+                  urlString = "file://localhost/Users/danboice/iPhoneProjects/psytrack/PrepopulateAndRemoveDuplicates.m"
+                  timestampString = "404010323.867941"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "782"
+                  endingLineNumber = "782"
+                  offsetFromSymbolStart = "4684">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[PrepopulateAndRemoveDuplicates checkEntityStr:checkFieldNameStr:checkTextStr:]"
+                  moduleName = "PsyTrack"
+                  urlString = "file://localhost/Users/danboice/iPhoneProjects/psytrack/PrepopulateAndRemoveDuplicates.m"
+                  timestampString = "404010323.868133"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "782"
+                  endingLineNumber = "782"
+                  offsetFromSymbolStart = "18232">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404077357.191255"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1598"
+            endingLineNumber = "1598"
+            landmarkName = "-checkEntityStr:checkFieldNameStr:checkTextStr:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404000960.950608"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "-prepopulate"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404000960.950608"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
+            landmarkName = "-prepopulate"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404006206.198855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
+            landmarkName = "-prepopulate"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404006206.198855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "350"
+            endingLineNumber = "350"
+            landmarkName = "-prepopulate"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404006206.198855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
+            landmarkName = "-prepopulate"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404006206.198855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
+            landmarkName = "-prepopulate"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404006206.198855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "402"
+            endingLineNumber = "402"
+            landmarkName = "-prepopulate"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404006206.198855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "401"
+            endingLineNumber = "401"
+            landmarkName = "-prepopulate"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404006206.198855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
+            landmarkName = "-prepopulate"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404006206.198855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "455"
+            endingLineNumber = "455"
+            landmarkName = "-removeDuplicatePrepopulatedData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404006206.198855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "463"
+            endingLineNumber = "463"
+            landmarkName = "-removeDuplicatePrepopulatedData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404006206.198855"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "471"
+            endingLineNumber = "471"
+            landmarkName = "-removeDuplicatePrepopulatedData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404011096.945876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "483"
+            endingLineNumber = "483"
+            landmarkName = "-removeDuplicatePrepopulatedData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404011096.945876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "491"
+            endingLineNumber = "491"
+            landmarkName = "-removeDuplicatePrepopulatedData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404011096.945876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "499"
+            endingLineNumber = "499"
+            landmarkName = "-removeDuplicatePrepopulatedData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404011096.945876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "507"
+            endingLineNumber = "507"
+            landmarkName = "-removeDuplicatePrepopulatedData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404011096.945876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "517"
+            endingLineNumber = "517"
+            landmarkName = "-removeDuplicatePrepopulatedData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404011096.945876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "526"
+            endingLineNumber = "526"
+            landmarkName = "-removeDuplicatePrepopulatedData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404011096.945876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "535"
+            endingLineNumber = "535"
+            landmarkName = "-removeDuplicatePrepopulatedData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PTTAppDelegate.m"
+            timestampString = "403998162.161582"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2470"
+            endingLineNumber = "2470"
+            landmarkName = "-saveContext"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404077357.191255"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "798"
+            endingLineNumber = "798"
+            landmarkName = "-checkEntityStr:checkFieldNameStr:checkTextStr:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404077357.191255"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1606"
+            endingLineNumber = "1606"
+            landmarkName = "-checkEntityStr:checkFieldNameStr:checkTextStr:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404011096.945876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "487"
+            endingLineNumber = "487"
+            landmarkName = "-removeDuplicatePrepopulatedData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SupervisionTypeEntity.m"
+            timestampString = "404010872.662803"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "-associatedWithTimeRecords"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SupervisionTypeEntity.m"
+            timestampString = "404010897.265946"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "-associatedWithTimeRecords"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SupervisionTypeEntity.m"
+            timestampString = "404010899.04357"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "-associatedWithTimeRecords"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SupervisionTypeEntity.m"
+            timestampString = "404010901.181357"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "-associatedWithTimeRecords"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404011032.226336"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "481"
+            endingLineNumber = "481"
+            landmarkName = "-removeDuplicatePrepopulatedData"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SupervisionTypeEntity.m"
+            timestampString = "404011539.335881"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "-associatedWithTimeRecords"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrepopulateAndRemoveDuplicates.m"
+            timestampString = "404077357.191255"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1403"
+            endingLineNumber = "1403"
+            landmarkName = "-checkEntityStr:checkFieldNameStr:checkTextStr:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

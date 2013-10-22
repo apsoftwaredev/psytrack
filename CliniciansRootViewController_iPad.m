@@ -55,7 +55,7 @@
     objectsModel.addButtonItem = self.addButton;
     objectsModel.itemsAccessoryType = UITableViewCellAccessoryNone;
     objectsModel.detailViewControllerOptions.modalPresentationStyle = UIModalPresentationPageSheet;
-    self.tableViewModel.detailViewController =objectsModel.detailViewController;
+    objectsModel.detailViewController =self.tableViewModel.detailViewController;
     CliniciansDetailViewController_iPad *clinicianDetailViewController = (CliniciansDetailViewController_iPad *)objectsModel.detailViewController;
 
     clinicianDetailViewController.navigationBarType = SCNavigationBarTypeAddRight;
@@ -182,9 +182,7 @@
                     titleLabel.text = @"Prefix:";
                     tableViewModel.tag = 1;
                     
-                    if ([SCUtilities systemVersion]>=7) {
-                        titleLabel.textColor=[UIColor blueColor];
-                    }
+                   
                 }
 
                 break;
@@ -195,9 +193,7 @@
                     firstNameLabel.text = @"First Name:";
                     cell.commitChangesLive = YES;
                     
-                    if ([SCUtilities systemVersion]>=7) {
-                        firstNameLabel.textColor=[UIColor blueColor];
-                    }
+                    
                 }
 
                 break;
@@ -207,9 +203,7 @@
                 {
                     UILabel *middleNameLabel = (UILabel *)viewLong;
                     middleNameLabel.text = @"Middle Name:";
-                    if ([SCUtilities systemVersion]>=7) {
-                        middleNameLabel.textColor=[UIColor blueColor];
-                    }
+                    
                 }
 
                 break;
@@ -219,9 +213,7 @@
                 {
                     UILabel *lastNameLabel = (UILabel *)viewLong;
                     lastNameLabel.text = @"Last Name:";
-                    if ([SCUtilities systemVersion]>=7) {
-                        lastNameLabel.textColor=[UIColor blueColor];
-                    }
+                    
                 }
 
                 break;
@@ -230,9 +222,7 @@
                 {
                     UILabel *suffixLabel = (UILabel *)viewLong;
                     suffixLabel.text = @"Suffix:";
-                    if ([SCUtilities systemVersion]>=7) {
-                        suffixLabel.textColor=[UIColor blueColor];
-                    }
+                    
                 }
 
                 break;
@@ -360,9 +350,9 @@
 
 - (void) putAddAndClinicianButtonsOnDetailViewController
 {
-objectsModel.detailViewController.navigationItem.rightBarButtonItem = objectsModel.addButtonItem;
+self.tableViewModel.detailViewController.navigationItem.rightBarButtonItem = objectsModel.addButtonItem;
 
-    objectsModel.detailViewController.navigationItem.leftBarButtonItem = cliniciansBarButtonItem_;
+    self.tableViewModel.detailViewController.navigationItem.leftBarButtonItem = cliniciansBarButtonItem_;
 }
 
 
@@ -435,7 +425,7 @@ objectsModel.detailViewController.navigationItem.rightBarButtonItem = objectsMod
 
 - (IBAction) displayPopover:(id)sender
 {
-    CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad = (CliniciansDetailViewController_iPad *)objectsModel.detailViewController;
+    CliniciansDetailViewController_iPad *cliniciansDetailViewController_iPad = (CliniciansDetailViewController_iPad *)self.tableViewModel.detailViewController;
 
     [cliniciansDetailViewController_iPad.popoverController presentPopoverFromBarButtonItem:self.splitViewController.navigationItem.leftBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 }

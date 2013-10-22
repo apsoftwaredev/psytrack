@@ -16,4 +16,31 @@
 @dynamic clinicianType;
 @dynamic clinician;
 
+-(BOOL)associatedWithTimeRecords{
+    
+    
+    
+    BOOL associatedRecords=NO;
+    
+    [self willAccessValueForKey:@"clinician"];
+    
+    if (self.clinician.count) {
+        associatedRecords=YES;
+    }
+    [self didAccessValueForKey:@"clinician"];
+    
+    
+    
+    
+    return associatedRecords;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+}
 @end

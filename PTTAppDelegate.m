@@ -58,6 +58,7 @@
 #import <Security/Security.h>
 
 #import "ValidateMOC.h"
+#import "PrepopulateAndRemoveDuplicates.h"
 
 #define kPTTAppSqliteFileName @"psyTrack.sqlite"
 #define kPTTAppSqliteFileName_local @"psyTrack_local.sqlite"
@@ -2436,35 +2437,42 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
     {
         if ( managedObjectContext.hasChanges )
         {
-            NSUInteger attempts = 0;
             NSError *error = nil;
 
 //            if (![managedObjectContext save:&error]  )
 //                
 //            {
-//                NSString *  alertMessage = [NSString stringWithFormat:@"An error while saving the database.  The app will now terminate. If problem persists contact support@psytrack.com"];
-//                
-//                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error Setting up the database." message:alertMessage
-//                                                                delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-//                
-//                alert.tag = kAlertTagErrorExitApp;
-//                
-//                [alert show];
 //
 ////                [self repairForSaveError:error];
 //            }
             
-            while ( ![managedObjectContext save:&error] && ++attempts <= kPTTMaximumSaveAttempts )
+            if (![managedObjectContext save:&error])
             {
-                [self repairForSaveError:error];
+                if ([self validateRequiredFields]) {
+                    NSString *  alertMessage = [NSString stringWithFormat:@"An error while saving the database.  The app will now terminate. If problem persists contact support@psytrack.com"];
+                    
+                    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error Setting up the database." message:alertMessage
+                                                                    delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                    
+                    alert.tag = kAlertTagErrorExitApp;
+                    
+                    [alert show];
+
+                }
+                
             }
 
-            if ( attempts > kPTTMaximumSaveAttempts )
-            {
-                NSString *question = NSLocalizedString(@"A problem arose. Could not save changes.", @"Save fail \n");
-                NSString *info = NSLocalizedString(@"You should quit as soon as possible, "
-                                                   @"because continuing could cause other problems.", @"");
-                [self displayNotification:[question stringByAppendingFormat:@"\n %@",info]  forDuration:7.0 location:kPTTScreenLocationMiddle inView:self.window];
+            
+            else if (addedPrepopulatedData){
+            
+                
+            
+                [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:addedPrepopulatedData] forKey:kPTHasPrepopulated];
+                
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            
+            
             }
         }
     }
@@ -2673,7 +2681,6 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
     
     return valid;
 }
-
 
 
 #pragma mark - Core Data stack
@@ -3510,8 +3517,23 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                            if (![self addSkipBackupAttributeToItemAtURL:storeUrl])
                            {
                                [self displayNotification:@"Error occured while setting setting file attribute."];
+
                            }
 
+                           
+                           
+                           
+                           NSNumber *prepopulatedNum = (NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTHasPrepopulated];
+                           PrepopulateAndRemoveDuplicates *prepopulate=[[PrepopulateAndRemoveDuplicates alloc]init];
+                                                     
+                           if (![prepopulatedNum boolValue]) {
+                               
+                               [prepopulate prepopulate];
+                               
+                               addedPrepopulatedData=YES;
+                           }
+                           [prepopulate removeDuplicatePrepopulatedData];
+                           
                            // tell the UI on the main thread we finally added the store and then
                            // post a custom notification to make your views do whatever they need to such as tell their
                            // NSFetchedResultsController to -performFetch again now there is a real store

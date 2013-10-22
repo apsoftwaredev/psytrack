@@ -28,4 +28,5 @@
 - (void) addClinician:(NSSet *)values;
 - (void) removeClinician:(NSSet *)values;
 
+-(BOOL)associatedWithTimeRecords;
 @end
