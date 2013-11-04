@@ -29,6 +29,8 @@
 #import "DemographicProfileEntity.h"
 #import "InterpersonalEntity.h"
 #import "ExistingSupervisionEntity.h"
+#import "ExistingInterventionEntity.h"
+
 @implementation PrepopulateAndRemoveDuplicates
 
 
@@ -776,15 +778,17 @@ NSError *error = nil;
                 
                 
             }
-             NSMutableArray *deleteSubtypesArray=[NSMutableArray array];
+            
              NSMutableArray *deleteExtrasContainingSet=[NSMutableArray array];
-            DLog(@"objects associated without time records %@",objectsWithoutAssociatedTimeRecords);
-            DLog(@"objects with associated tie records %@",objsWithAssociatedTimeRecords);
-            NSArray *withoutArray=objectsWithoutAssociatedTimeRecords;
+           
+            NSArray *withoutArray=[NSArray arrayWithArray: objectsWithoutAssociatedTimeRecords];
             if (objectsWithoutAssociatedTimeRecords.count && objsWithAssociatedTimeRecords.count) {
                 
                 for (id objInObjectsWithoutAssociatedTimeRecords in withoutArray ) {
-                    [managedObjectContext deleteObject:objInObjectsWithoutAssociatedTimeRecords];
+                    if (![objInObjectsWithoutAssociatedTimeRecords isKindOfClass:[SupervisionTypeSubtypeEntity class]]&&![objInObjectsWithoutAssociatedTimeRecords isKindOfClass:[InterventionTypeSubtypeEntity class]]) {
+                         [managedObjectContext deleteObject:objInObjectsWithoutAssociatedTimeRecords];
+                    }
+                   
                 }
                 
             }
@@ -799,16 +803,15 @@ NSError *error = nil;
                     
                     id objectInArray = [objsWithAssociatedTimeRecords objectAtIndex:i];
                     if (i>0) {
-                    
-                    DLog(@"object in array %@",objectInArray);
-                        if ([objectInArray isKindOfClass:[AssessmentTypeEntity class]]) {
+                            if ([objectInArray isKindOfClass:[AssessmentTypeEntity class]]) {
                             AssessmentTypeEntity *assessmentType=(AssessmentTypeEntity*)objectInArray;
                             
                             [assessmentType willAccessValueForKey:@"assessments"];
                             
                             NSSet *assessmentSet= assessmentType.assessments;
-                            DLog(@"assessment set %@",assessmentSet);
-                            for (id item in assessmentSet) {
+                           
+                            NSArray *assessmentArray=assessmentSet.allObjects;
+                            for (id item in assessmentArray) {
                                 if ([item isKindOfClass:[AssessmentEntity class]]) {
                                     AssessmentEntity *assessmentEntity=(AssessmentEntity *)item;
                                     
@@ -823,72 +826,199 @@ NSError *error = nil;
                              [assessmentType didAccessValueForKey:@"assessments"];
                         }
 
+                       
+                        
                         else if ([objectInArray isKindOfClass:[InterventionTypeEntity class]]) {
                             InterventionTypeEntity *type=(InterventionTypeEntity*)objectInArray;
                             
+                            [type willAccessValueForKey:@"interventionType"];
+                            
+                            [deleteExtrasContainingSet addObject:type.interventionType];
+                            
                             [type willAccessValueForKey:@"interventionsDelivered"];
+                            [type willAccessValueForKey:@"existingInterventions"];
                             
                             NSSet *typeSet= type.interventionsDelivered;
                            
-                            for (id item in typeSet) {
+                            
+                            NSArray *typeArray=typeSet.allObjects;
+                            for (id item in typeArray) {
+                                
                                 if ([item isKindOfClass:[InterventionDeliveredEntity class]]) {
+                                    
                                     InterventionDeliveredEntity *interventionDeliveredEntity=(InterventionDeliveredEntity *)item;
                                     
-                                    [interventionDeliveredEntity willChangeValueForKey:@"interventionType"];
-                                    interventionDeliveredEntity.interventionType=objToKeep;
-                                    [interventionDeliveredEntity didChangeValueForKey:@"interventionType"];
+                                    [interventionDeliveredEntity willAccessValueForKey:@"interventionType"];
+                                    [interventionDeliveredEntity willAccessValueForKey:@"subtype"];
                                     
-                                    [managedObjectContext deleteObject:objectInArray];
-                                }
-                            }
-                            
-                            [type didAccessValueForKey:@"interventionsDelivered"];
-                        }
-                        
-                        else if ([objectInArray isKindOfClass:[InterventionTypeSubtypeEntity class]]) {
-                            InterventionTypeSubtypeEntity *type=(InterventionTypeSubtypeEntity*)objectInArray;
-                            
-                            [type willAccessValueForKey:@"interventionsDelivered"];
-                            
-                            NSSet *typeSet= type.interventionsDelivered;
-                            InterventionTypeEntity *interventionTypeInSubtype=type.interventionType;
-                            
-                            InterventionTypeSubtypeEntity *interventionTypeOfObjToKeep=nil;
-                            
-                            if ([objToKeep isKindOfClass:[InterventionTypeSubtypeEntity class]]) {
-                                interventionTypeOfObjToKeep=(InterventionTypeSubtypeEntity*)objToKeep;
-                            }
-                            
-                           
-                            for (id item in typeSet) {
-                                if ([item isKindOfClass:[InterventionDeliveredEntity class]] &&[interventionTypeOfObjToKeep.interventionType isEqual:interventionTypeInSubtype]) {
-                                    InterventionDeliveredEntity *interventionDeliveredEntity=(InterventionDeliveredEntity *)item;
+                                    [interventionDeliveredEntity.subtype willAccessValueForKey:@"interventionSubType"];
                                     
-                                    [interventionDeliveredEntity willChangeValueForKey:@"subtype"];
-                                    interventionDeliveredEntity.subtype=objToKeep;
-                                    [interventionDeliveredEntity didChangeValueForKey:@"subtype"];
                                     
-                                    [managedObjectContext deleteObject:objectInArray];
-                                }
-                            }
-                            
-                            [type didAccessValueForKey:@"interventionsDelivered"];
-                            
-                           
-                            
-                            
-                            
-                            
-                            
-                            
-                        }
+                                    
+                                    NSString *interventionTypeSubtypStr=interventionDeliveredEntity.subtype.interventionSubType.copy;
+                                    
+                                    
+                                    
+                                    
+                                    NSPredicate *filterSubtypes=[NSPredicate predicateWithFormat:@"self.interventionSubType == %@",interventionTypeSubtypStr];
+                                    
+                                    
+                                    
+                                    
+                                    [type willAccessValueForKey:@"subTypes"];
+                                    NSSet *typeSubtypes=type.subTypes;
+                                    
+                                    InterventionTypeEntity *objToKeepInterventionType=(InterventionTypeEntity *)objToKeep;
+                                    [objToKeepInterventionType willAccessValueForKey:@"subTypes"];
+                                    NSSet *objToKeepSubtypes=objToKeepInterventionType.subTypes;
+                                    
+                                    
+                                    
+                                    for (InterventionTypeSubtypeEntity *intvSubType in typeSubtypes) {
+                                        
+                                        
+                                        NSSet *objectToKeepSubtypeEquivalents=[objToKeepSubtypes filteredSetUsingPredicate:filterSubtypes];
+                                        
+                                        if (objectToKeepSubtypeEquivalents.count) {
+                                            InterventionTypeSubtypeEntity *firstEquivalent=[objectToKeepSubtypeEquivalents.allObjects objectAtIndex:0];
+                                            [intvSubType willAccessValueForKey:@"interventionsDelivered"];
+                                            NSSet *intvSubTypeInterventionDeliveredSet=intvSubType.interventionsDelivered;
+                                            NSArray *intvSubTypeInterventionDeliveredArray=intvSubTypeInterventionDeliveredSet.allObjects;
+                                            
+                                            
+                                            for (InterventionDeliveredEntity *interventionDvrd in intvSubTypeInterventionDeliveredArray) {
+                                                
+                                                if ([interventionDvrd.subtype.interventionSubType isEqualToString:firstEquivalent.interventionSubType]) {
+                                                    
+                                                    [interventionDvrd willAccessValueForKey:@"interventionType"];
+                                                    [interventionDvrd willAccessValueForKey:@"subtype"];
+                                                    
+                                                    InterventionTypeEntity *potentialDelete=nil;
+                                                    if ([fetchedObjects containsObject:interventionDvrd.interventionType]) {
+                                                        potentialDelete=(InterventionTypeEntity*)[fetchedObjects objectAtIndex: [fetchedObjects indexOfObject: interventionDvrd.interventionType]];
+                                                        
+                                                        [potentialDelete willAccessValueForKey:@"interventionType"];
+                                                        
+                                                        [deleteExtrasContainingSet addObject:potentialDelete.interventionType];
+                                                        
+                                                    }
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    [interventionDvrd willChangeValueForKey:@"subtype"];
+                                                    interventionDvrd.subtype=firstEquivalent;
+                                                    [interventionDvrd didChangeValueForKey:@"subtype"];
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    [interventionDvrd willChangeValueForKey:@"interventionType"];
+                                                    interventionDvrd.interventionType=objToKeepInterventionType;
+                                                    [interventionDvrd didChangeValueForKey:@"interventionType"];
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    [potentialDelete willAccessValueForKey:@"interventionDelivered"];
+                                                    
+                                                    
+                                                    [potentialDelete willAccessValueForKey:@"existingInterventions"];
+                                                
+                                                    
+                                                    
+                                                    
+                                                    if (potentialDelete && !potentialDelete.interventionsDelivered.count &&!potentialDelete.existingInterventions.count ) {
+                                                        
+                                                        [managedObjectContext deleteObject:potentialDelete];
+                                                    }
+                                                    
+                                                    
+                                                    
+                                                }
+                                            }
+                                            [intvSubType willAccessValueForKey:@"existingInterventions"];
+                                            NSSet *intvSubTypeExistingInterventionsSet=intvSubType.existingInterventions;
+                                            NSArray *intvSubTypeExistingInterventionsArray=intvSubTypeExistingInterventionsSet.allObjects;
+                                            
+                                            
+                                            for (ExistingInterventionEntity *existingItvs in intvSubTypeExistingInterventionsArray) {
+                                                
+                                                if ([existingItvs.interventionSubType.interventionSubType isEqualToString:firstEquivalent.interventionSubType]) {
+                                                    
+                                                    [existingItvs willAccessValueForKey:@"interventionType"];
+                                                    [existingItvs willAccessValueForKey:@"interventionSubType"];
+                                                    
+                                                    InterventionTypeEntity *potentialDelete=nil;
+                                                    if ([fetchedObjects containsObject:existingItvs.interventionType]) {
+                                                        potentialDelete=(InterventionTypeEntity*)[fetchedObjects objectAtIndex: [fetchedObjects indexOfObject: existingItvs.interventionType]];
+                                                        
+                                                        [potentialDelete willAccessValueForKey:@"interventionType"];
+                                                        
+                                                        [deleteExtrasContainingSet addObject:potentialDelete.interventionType];
+                                                        
+                                                    }
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    [existingItvs willChangeValueForKey:@"interventionSubType"];
+                                                    existingItvs.interventionSubType=firstEquivalent;
+                                                    [existingItvs didChangeValueForKey:@"interventionSubType"];
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    [existingItvs willChangeValueForKey:@"interventionType"];
+                                                    existingItvs.interventionType=objToKeepInterventionType;
+                                                    [existingItvs didChangeValueForKey:@"interventionType"];
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    [potentialDelete willAccessValueForKey:@"interventionDelivered"];
+                                                    
+                                                    
+                                                    [potentialDelete willAccessValueForKey:@"existingInterventions"];
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    if (potentialDelete && !potentialDelete.interventionsDelivered.count &&!potentialDelete.existingInterventions.count ) {
+                                                        
+                                                        [managedObjectContext deleteObject:potentialDelete];
+                                                    }
+                                                    
+                                                    
+                                                    
+                                                }
+                                            }
+                                            
+
+                                            
+                                            
+                                        }
+                                        
+                                        
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                    
+                                }}}
+
                        else if ([objectInArray isKindOfClass:[SupportActivityTypeEntity class]]) {
                             SupportActivityTypeEntity *type=(SupportActivityTypeEntity*)objectInArray;
                             
                             [type willAccessValueForKey:@"supportActivitiesDelivered"];
                             
                             NSSet *typeSet= type.supportActivitiesDelivered;
-                            for (id item in typeSet) {
+                           
+                           NSArray *typeArray=typeSet.allObjects;
+                           for (id item in typeArray) {
+
+                            
                                 if ([item isKindOfClass:[SupportActivityDeliveredEntity class]]) {
                                     SupportActivityDeliveredEntity *supportActivityDeliveredEntity=(SupportActivityDeliveredEntity *)item;
                                     
@@ -906,7 +1036,7 @@ NSError *error = nil;
                             SupervisionTypeEntity *type=(SupervisionTypeEntity*)objectInArray;
                             
                             [type willAccessValueForKey:@"supervisionType"];
-                            DLog(@" adding supervisont type to delete extras array %@",type.supervisionType);
+                           
                             [deleteExtrasContainingSet addObject:type.supervisionType];
                            
                             [type willAccessValueForKey:@"supervisionRecieved"];
@@ -914,7 +1044,9 @@ NSError *error = nil;
                             
                             NSSet *typeSet= type.supervisionRecieved;
                            
-                            for (id item in typeSet) {
+                            NSArray *typeArray=typeSet.allObjects;
+                            for (id item in typeArray) {
+
                                 if ([item isKindOfClass:[SupervisionReceivedEntity class]]) {
                                     
                                     SupervisionReceivedEntity *supervisionRecievedEntity=(SupervisionReceivedEntity *)item;
@@ -952,10 +1084,13 @@ NSError *error = nil;
                                         
                                         if (objectToKeepSubtypeEquivalents.count) {
                                             SupervisionTypeSubtypeEntity *firstEquivalent=[objectToKeepSubtypeEquivalents.allObjects objectAtIndex:0];
+                                            
                                             [supSubType willAccessValueForKey:@"supervisionReceived"];
                                             NSSet *supSubTypeSupervisionReceivedSet=supSubType.supervisionReceived;
+                                            NSArray *supSubTypeSupervisionReceivedArray=supSubTypeSupervisionReceivedSet.allObjects;
                                             
-                                                for (SupervisionReceivedEntity *supervisionRcvd in supSubTypeSupervisionReceivedSet) {
+
+                                                for (SupervisionReceivedEntity *supervisionRcvd in supSubTypeSupervisionReceivedArray) {
                                                     
                                                     if ([supervisionRcvd.subType.subType isEqualToString:firstEquivalent.subType]) {
                                                        
@@ -968,36 +1103,13 @@ NSError *error = nil;
                                                             
                                                             [potentialDelete willAccessValueForKey:@"supervisionType"];
                                                             
-                                                            [deleteExtrasContainingSet addObject:potentialDelete.supervisionType.copy];
+                                                            [deleteExtrasContainingSet addObject:potentialDelete.supervisionType];
                                                           
                                                         }
                                                         
-                                                        SupervisionTypeSubtypeEntity *potentialSubtypeDelete=nil;
-                                                        
-                                                        NSFetchRequest *fetchRequestSubtypes = [[NSFetchRequest alloc] init];
-                                                        
-                                                        [fetchRequestSubtypes setPredicate:filterSubtypes];
-                                                        
-                                                        NSEntityDescription *entitySubtypes = [NSEntityDescription entityForName:@"SupervisionTypeSubtypeEntity" inManagedObjectContext:managedObjectContext];
-                                                        [fetchRequestSubtypes setEntity:entitySubtypes];
+                                                       
                                                         
                                                         
-                                                        
-                                                        
-                                                        NSError *errorSubtypes = nil;
-                                                        int countOfSubtypes=[managedObjectContext countForFetchRequest:fetchRequest error:&errorSubtypes];
-                                                        
-                                                        if (countOfSubtypes>1){
-                                                            
-                                                            NSArray *fetchedSubtypeObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&errorSubtypes];
-                                                            if (!errorSubtypes && fetchedSubtypeObjects.count && supervisionRcvd.subType) {
-                                                                 if ([fetchedSubtypeObjects containsObject:supervisionRcvd.subType]) {
-                                                                potentialSubtypeDelete=[fetchedSubtypeObjects objectAtIndex:[fetchedSubtypeObjects indexOfObject:supervisionRcvd.subType]];
-                                                                 }
-                                                            }
-                                                            
-                                                        }
-
                                                         [supervisionRcvd willChangeValueForKey:@"subType"];
                                                         supervisionRcvd.subType=firstEquivalent;
                                                         [supervisionRcvd didChangeValueForKey:@"subType"];
@@ -1021,25 +1133,21 @@ NSError *error = nil;
                                                         
                                                         
                                                         if (potentialDelete && !potentialDelete.supervisionRecieved.count &&!potentialDelete.supervisionGiven.count && !potentialDelete.existingSupervision.count) {
+                                                            
                                                             [managedObjectContext deleteObject:potentialDelete];
                                                         }
                                                         
-                                                        [potentialSubtypeDelete willAccessValueForKey:@"supervisionRecieved"];
-                                                        [potentialSubtypeDelete willAccessValueForKey:@"supervisionGiven"];
                                                         
-                                                        [potentialSubtypeDelete willAccessValueForKey:@"existingSupervision"];
-                                                        
-                                                        if (potentialSubtypeDelete&&!potentialSubtypeDelete.supervisionReceived.count &&!potentialSubtypeDelete.supervisionGiven.count && !potentialSubtypeDelete.existingSupervision.count) {
-                                                            [managedObjectContext deleteObject:potentialSubtypeDelete];
-                                                        }
-
 
                                                     }
                                                 }
                                             [supSubType willAccessValueForKey:@"supervisonGiven"];
                                             NSSet *supSubTypeSupervisionGivenSet=supSubType.supervisionGiven;
                                             
-                                            for (SupervisionGivenEntity *supervisionGvn in supSubTypeSupervisionGivenSet) {
+                                            NSArray *supSubTypeSupervisionGivenArray=supSubTypeSupervisionGivenSet.allObjects;
+                                           
+
+                                            for (SupervisionGivenEntity *supervisionGvn in supSubTypeSupervisionGivenArray) {
                                                 
                                                 if ([supervisionGvn.subType.subType isEqualToString:firstEquivalent.subType]) {
                                                     
@@ -1052,36 +1160,10 @@ NSError *error = nil;
                                                     
                                                         
                                                         [potentialDelete willAccessValueForKey:@"supervisionType"];
-                                                        [deleteExtrasContainingSet addObject:potentialDelete.supervisionType.copy];
+                                                        [deleteExtrasContainingSet addObject:potentialDelete.supervisionType];
                                                     }
                                                     
-                                                    SupervisionTypeSubtypeEntity *potentialSubtypeDelete=nil;
-                                                    
-                                                    NSFetchRequest *fetchRequestSubtypes = [[NSFetchRequest alloc] init];
-                                                    
-                                                    [fetchRequestSubtypes setPredicate:filterSubtypes];
-                                                    
-                                                    NSEntityDescription *entitySubtypes = [NSEntityDescription entityForName:@"SupervisionTypeSubtypeEntity" inManagedObjectContext:managedObjectContext];
-                                                    [fetchRequestSubtypes setEntity:entitySubtypes];
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    NSError *errorSubtypes = nil;
-                                                    int countOfSubtypes=[managedObjectContext countForFetchRequest:fetchRequest error:&errorSubtypes];
-                                                    
-                                                    if (countOfSubtypes>1){
-                                                        
-                                                        NSArray *fetchedSubtypeObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&errorSubtypes];
-                                                        if (!errorSubtypes && fetchedObjects.count && supervisionGvn.subType) {
-                                                            if ([fetchedSubtypeObjects containsObject:supervisionGvn.subType]) {
-                                                                potentialSubtypeDelete=[fetchedSubtypeObjects objectAtIndex:[fetchedSubtypeObjects indexOfObject:supervisionGvn.subType]];
-                                                            }
-                                                            
-                                                        }
-                                                        
-                                                    }
-
+                                                   
 
                                                     [supervisionGvn willChangeValueForKey:@"subType"];
                                                     supervisionGvn.subType=firstEquivalent;
@@ -1107,19 +1189,69 @@ NSError *error = nil;
                                                     
                                                     
                                                     if (!potentialDelete.supervisionRecieved.count &&!potentialDelete.supervisionGiven.count && !potentialDelete.existingSupervision.count) {
+                                                        DLog(@"deleting supsubtype %@",potentialDelete);
                                                         [managedObjectContext deleteObject:potentialDelete];
                                                     }
                                                     
-                                                    [potentialSubtypeDelete willAccessValueForKey:@"supervisionRecieved"];
-                                                    [potentialSubtypeDelete willAccessValueForKey:@"supervisionGiven"];
-                                                    
-                                                    [potentialSubtypeDelete willAccessValueForKey:@"existingSupervision"];
-                                                    
-                                                    if (!potentialSubtypeDelete.supervisionReceived.count &&!potentialSubtypeDelete.supervisionGiven.count && !potentialSubtypeDelete.existingSupervision.count) {
-                                                        [managedObjectContext deleteObject:potentialSubtypeDelete];
-                                                    }
                                                     
 
+                                                }
+                                            }
+                                            
+                                            [supSubType willAccessValueForKey:@"existingSupervision"];
+                                            NSSet *supSubTypeExistingSupervisionSet=supSubType.existingSupervision;
+                                            NSArray *supSubTypeExistingSupervisionArray=supSubTypeExistingSupervisionSet.allObjects;
+                                            
+                                            
+                                            for (SupervisionReceivedEntity *existingSpv in supSubTypeExistingSupervisionArray) {
+                                                
+                                                if ([existingSpv.subType.subType isEqualToString:firstEquivalent.subType]) {
+                                                    
+                                                    [existingSpv willAccessValueForKey:@"supervisionType"];
+                                                    [existingSpv willAccessValueForKey:@"subType"];
+                                                    
+                                                    SupervisionTypeEntity *potentialDelete=nil;
+                                                    if ([fetchedObjects containsObject:existingSpv.supervisionType]) {
+                                                        potentialDelete=(SupervisionTypeEntity*)[fetchedObjects objectAtIndex: [fetchedObjects indexOfObject: existingSpv.supervisionType]];
+                                                        
+                                                        [potentialDelete willAccessValueForKey:@"supervisionType"];
+                                                        
+                                                        [deleteExtrasContainingSet addObject:potentialDelete.supervisionType];
+                                                        
+                                                    }
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    [existingSpv willChangeValueForKey:@"subType"];
+                                                    existingSpv.subType=firstEquivalent;
+                                                    [existingSpv didChangeValueForKey:@"subType"];
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    [existingSpv willChangeValueForKey:@"supervisionType"];
+                                                    existingSpv.supervisionType=objToKeepSupervisionType;
+                                                    [existingSpv didChangeValueForKey:@"supervisionType"];
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    [potentialDelete willAccessValueForKey:@"supervisionRecieved"];
+                                                    [potentialDelete willAccessValueForKey:@"supervisionGiven"];
+                                                    
+                                                    [potentialDelete willAccessValueForKey:@"existingSupervision"];
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    if (potentialDelete && !potentialDelete.supervisionRecieved.count &&!potentialDelete.supervisionGiven.count && !potentialDelete.existingSupervision.count) {
+                                                        
+                                                        [managedObjectContext deleteObject:potentialDelete];
+                                                    }
+                                                    
+                                                    
+                                                    
                                                 }
                                             }
 
@@ -1136,8 +1268,8 @@ NSError *error = nil;
                                     
                                 }
                                 NSSet *typeSetGiven= type.supervisionGiven;
-                                
-                                for (id item in typeSetGiven) {
+                                NSArray *typeArrayGiven=typeSetGiven.allObjects;
+                                for (id item in typeArrayGiven) {
                                     if ([item isKindOfClass:[SupervisionGivenEntity class]]) {
                                         
                                         SupervisionGivenEntity *supervisionGivenEntity=(SupervisionGivenEntity *)item;
@@ -1167,8 +1299,10 @@ NSError *error = nil;
                                         NSSet *objToKeepSubtypes=objToKeepSupervisionType.subTypes;
                                         
                                         
+                                        NSArray *typeSubtypesArray=typeSubtypes.allObjects;
                                         
-                                        for (SupervisionTypeSubtypeEntity *supSubType in typeSubtypes) {
+                                        
+                                        for (SupervisionTypeSubtypeEntity *supSubType in typeSubtypesArray) {
                                             
                                             
                                             NSSet *objectToKeepSubtypeEquivalents=[objToKeepSubtypes filteredSetUsingPredicate:filterSubtypes];
@@ -1178,7 +1312,8 @@ NSError *error = nil;
                                                 [supSubType willAccessValueForKey:@"supervisionReceived"];
                                                 NSSet *supSubTypeSupervisionReceivedSet=supSubType.supervisionReceived;
                                                 
-                                                for (SupervisionReceivedEntity *supervisionRcvd in supSubTypeSupervisionReceivedSet) {
+                                                NSArray *supSubTypeSupervisionReceivedArray=supSubTypeSupervisionReceivedSet.allObjects;
+                                                for (SupervisionReceivedEntity *supervisionRcvd in supSubTypeSupervisionReceivedArray) {
                                                     
                                                     if ([supervisionRcvd.subType.subType isEqualToString:firstEquivalent.subType]) {
                                                         
@@ -1190,34 +1325,9 @@ NSError *error = nil;
                                                             potentialDelete=[fetchedObjects objectAtIndex: [fetchedObjects indexOfObject: supervisionRcvd.supervisionType]];
                                                         
                                                             [potentialDelete willAccessValueForKey:@"supervisionType"];
-                                                            [deleteExtrasContainingSet addObject:potentialDelete.supervisionType.copy];
+                                                            [deleteExtrasContainingSet addObject:potentialDelete.supervisionType];
                                                         }
                                                         
-                                                        SupervisionTypeSubtypeEntity *potentialSubtypeDelete=nil;
-                                                        
-                                                        NSFetchRequest *fetchRequestSubtypes = [[NSFetchRequest alloc] init];
-                                                        
-                                                        [fetchRequestSubtypes setPredicate:filterSubtypes];
-                                                        
-                                                        NSEntityDescription *entitySubtypes = [NSEntityDescription entityForName:@"SupervisionTypeSubtypeEntity" inManagedObjectContext:managedObjectContext];
-                                                        [fetchRequestSubtypes setEntity:entitySubtypes];
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        NSError *errorSubtypes = nil;
-                                                        int countOfSubtypes=[managedObjectContext countForFetchRequest:fetchRequest error:&errorSubtypes];
-                                                        
-                                                        if (countOfSubtypes>1){
-                                                            
-                                                            NSArray *fetchedSubtypeObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&errorSubtypes];
-                                                            if (!errorSubtypes && fetchedSubtypeObjects.count && supervisionRcvd.subType) {
-                                                                if ([fetchedSubtypeObjects containsObject:supervisionRcvd.subType]) {
-                                                                    potentialSubtypeDelete=[fetchedSubtypeObjects objectAtIndex:[fetchedSubtypeObjects indexOfObject:supervisionRcvd.subType]];
-                                                                }
-                                                            }
-                                                            
-                                                        }
                                                         
                                                         [supervisionRcvd willChangeValueForKey:@"subType"];
                                                         supervisionRcvd.subType=firstEquivalent;
@@ -1242,16 +1352,8 @@ NSError *error = nil;
                                                         
                                                         
                                                         if (potentialDelete && !potentialDelete.supervisionRecieved.count &&!potentialDelete.supervisionGiven.count && !potentialDelete.existingSupervision.count) {
+                                                            
                                                             [managedObjectContext deleteObject:potentialDelete];
-                                                        }
-                                                        
-                                                        [potentialSubtypeDelete willAccessValueForKey:@"supervisionRecieved"];
-                                                        [potentialSubtypeDelete willAccessValueForKey:@"supervisionGiven"];
-                                                        
-                                                        [potentialSubtypeDelete willAccessValueForKey:@"existingSupervision"];
-                                                        
-                                                        if (potentialSubtypeDelete&&!potentialSubtypeDelete.supervisionReceived.count &&!potentialSubtypeDelete.supervisionGiven.count && !potentialSubtypeDelete.existingSupervision.count) {
-                                                            [managedObjectContext deleteObject:potentialSubtypeDelete];
                                                         }
                                                         
                                                         
@@ -1259,8 +1361,8 @@ NSError *error = nil;
                                                 }
                                                 [supSubType willAccessValueForKey:@"supervisonGiven"];
                                                 NSSet *supSubTypeSupervisionGivenSet=supSubType.supervisionGiven;
-                                                
-                                                for (SupervisionGivenEntity *supervisionGvn in supSubTypeSupervisionGivenSet) {
+                                                NSArray *supSubTypeSupervisionGivenArray=supSubTypeSupervisionGivenSet.allObjects;
+                                                for (SupervisionGivenEntity *supervisionGvn in supSubTypeSupervisionGivenArray) {
                                                     
                                                     if ([supervisionGvn.subType.subType isEqualToString:firstEquivalent.subType]) {
                                                         
@@ -1271,35 +1373,9 @@ NSError *error = nil;
                                                         if ([fetchedObjects containsObject:supervisionGvn.supervisionType]) {
                                                             potentialDelete=[fetchedObjects objectAtIndex: [fetchedObjects indexOfObject: supervisionGvn.supervisionType]];
                                                             [potentialDelete willAccessValueForKey:@"supervisionType"];
-                                                            [deleteExtrasContainingSet addObject:potentialDelete.supervisionType.copy];
+                                                            [deleteExtrasContainingSet addObject:potentialDelete.supervisionType];
                                                         }
                                                         
-                                                        SupervisionTypeSubtypeEntity *potentialSubtypeDelete=nil;
-                                                        
-                                                        NSFetchRequest *fetchRequestSubtypes = [[NSFetchRequest alloc] init];
-                                                        
-                                                        [fetchRequestSubtypes setPredicate:filterSubtypes];
-                                                        
-                                                        NSEntityDescription *entitySubtypes = [NSEntityDescription entityForName:@"SupervisionTypeSubtypeEntity" inManagedObjectContext:managedObjectContext];
-                                                        [fetchRequestSubtypes setEntity:entitySubtypes];
-                                                        
-                                                        
-                                                        
-                                                        
-                                                        NSError *errorSubtypes = nil;
-                                                        int countOfSubtypes=[managedObjectContext countForFetchRequest:fetchRequest error:&errorSubtypes];
-                                                        
-                                                        if (countOfSubtypes>1){
-                                                            
-                                                            NSArray *fetchedSubtypeObjects = [managedObjectContext executeFetchRequest:fetchRequest error:&errorSubtypes];
-                                                            if (!errorSubtypes && fetchedObjects.count && supervisionGvn.subType) {
-                                                                if ([fetchedSubtypeObjects containsObject:supervisionGvn.subType]) {
-                                                                    potentialSubtypeDelete=[fetchedSubtypeObjects objectAtIndex:[fetchedSubtypeObjects indexOfObject:supervisionGvn.subType]];
-                                                                }
-                                                                
-                                                            }
-                                                            
-                                                        }
                                                         
                                                         
                                                         [supervisionGvn willChangeValueForKey:@"subType"];
@@ -1326,22 +1402,71 @@ NSError *error = nil;
                                                         
                                                         
                                                         if (!potentialDelete.supervisionRecieved.count &&!potentialDelete.supervisionGiven.count && !potentialDelete.existingSupervision.count) {
+                                                           
                                                             [managedObjectContext deleteObject:potentialDelete];
-                                                        }
-                                                        
-                                                        [potentialSubtypeDelete willAccessValueForKey:@"supervisionRecieved"];
-                                                        [potentialSubtypeDelete willAccessValueForKey:@"supervisionGiven"];
-                                                        
-                                                        [potentialSubtypeDelete willAccessValueForKey:@"existingSupervision"];
-                                                        
-                                                        if (!potentialSubtypeDelete.supervisionReceived.count &&!potentialSubtypeDelete.supervisionGiven.count && !potentialSubtypeDelete.existingSupervision.count) {
-                                                            [managedObjectContext deleteObject:potentialSubtypeDelete];
                                                         }
                                                         
                                                         
                                                     }
                                                 }
+                                                [supSubType willAccessValueForKey:@"existingSupervision"];
+                                                NSSet *supSubTypeExistingSupervisionSet=supSubType.existingSupervision;
+                                                NSArray *supSubTypeExistingSupervisionArray=supSubTypeExistingSupervisionSet.allObjects;
                                                 
+                                                
+                                                for (SupervisionReceivedEntity *existingSpv in supSubTypeExistingSupervisionArray) {
+                                                    
+                                                    if ([existingSpv.subType.subType isEqualToString:firstEquivalent.subType]) {
+                                                        
+                                                        [existingSpv willAccessValueForKey:@"supervisionType"];
+                                                        [existingSpv willAccessValueForKey:@"subType"];
+                                                        
+                                                        SupervisionTypeEntity *potentialDelete=nil;
+                                                        if ([fetchedObjects containsObject:existingSpv.supervisionType]) {
+                                                            potentialDelete=(SupervisionTypeEntity*)[fetchedObjects objectAtIndex: [fetchedObjects indexOfObject: existingSpv.supervisionType]];
+                                                            
+                                                            [potentialDelete willAccessValueForKey:@"supervisionType"];
+                                                            
+                                                            [deleteExtrasContainingSet addObject:potentialDelete.supervisionType];
+                                                            
+                                                        }
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        [existingSpv willChangeValueForKey:@"subType"];
+                                                        existingSpv.subType=firstEquivalent;
+                                                        [existingSpv didChangeValueForKey:@"subType"];
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        [existingSpv willChangeValueForKey:@"supervisionType"];
+                                                        existingSpv.supervisionType=objToKeepSupervisionType;
+                                                        [existingSpv didChangeValueForKey:@"supervisionType"];
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        [potentialDelete willAccessValueForKey:@"supervisionRecieved"];
+                                                        [potentialDelete willAccessValueForKey:@"supervisionGiven"];
+                                                        
+                                                        [potentialDelete willAccessValueForKey:@"existingSupervision"];
+                                                        
+                                                        
+                                                        
+                                                        
+                                                        if (potentialDelete && !potentialDelete.supervisionRecieved.count &&!potentialDelete.supervisionGiven.count && !potentialDelete.existingSupervision.count) {
+                                                            
+                                                            [managedObjectContext deleteObject:potentialDelete];
+                                                        }
+                                                        
+                                                        
+                                                        
+                                                    }
+                                                }
+                                                
+
                                                 
                                                 
                                             }
@@ -1363,63 +1488,6 @@ NSError *error = nil;
                             
                                 
                         
-                        else if ([objectInArray isKindOfClass:[SupervisionTypeSubtypeEntity class]]) {
-                            SupervisionTypeSubtypeEntity *type=(SupervisionTypeSubtypeEntity*)objectInArray;
-                            
-                            [type willAccessValueForKey:@"supervisionGiven"];
-                            
-                            NSSet *typeSet= type.supervisionGiven;
-                          
-                            
-                            SupervisionTypeSubtypeEntity *supervisionTypeOfObjToKeep=nil;
-                            
-                            if ([objToKeep isKindOfClass:[SupervisionTypeSubtypeEntity class]]) {
-                                supervisionTypeOfObjToKeep=(SupervisionTypeSubtypeEntity*)objToKeep;
-                            }
-                            
-                            
-                            for (id item in typeSet) {
-                                if ([item isKindOfClass:[SupervisionGivenEntity class]] ) {
-                                    SupervisionGivenEntity *supervisionGivenEntity=(SupervisionGivenEntity *)item;
-                                    
-                                    [supervisionGivenEntity willChangeValueForKey:@"subType"];
-                                    supervisionGivenEntity.subType=objToKeep;
-                                    [supervisionGivenEntity didChangeValueForKey:@"subType"];
-                                    
-                                    [managedObjectContext deleteObject:objectInArray];
-                                }
-                            }
-                            
-                            [type didAccessValueForKey:@"supervisionGiven"];
-                            
-                            
-                            [type willAccessValueForKey:@"supervisionReceived"];
-                            
-                            NSSet *typeSetReceived= type.supervisionReceived;
-                            
-                            
-                            for (id item in typeSetReceived) {
-                                if ([item isKindOfClass:[SupervisionReceivedEntity class]] ) {
-                                    SupervisionReceivedEntity *supervisionReceivedEntity=(SupervisionReceivedEntity *)item;
-                                    
-                                    [supervisionReceivedEntity willChangeValueForKey:@"subType"];
-                                    supervisionReceivedEntity.subType=objToKeep;
-                                    [supervisionReceivedEntity didChangeValueForKey:@"subType"];
-                                    
-                                    [managedObjectContext deleteObject:objectInArray];
-                                }
-                            }
-                            
-                            [type didAccessValueForKey:@"supervisionGiven"];
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                        }
                         
                        else if ([objectInArray isKindOfClass:[GenderEntity class]]) {
                             GenderEntity *type=(GenderEntity*)objectInArray;
@@ -1427,8 +1495,8 @@ NSError *error = nil;
                             [type willAccessValueForKey:@"demographics"];
                             
                             NSSet *typeSet= type.demographics;
-                           
-                            for (id item in typeSet) {
+                           NSArray *typeArray=typeSet.allObjects;
+                            for (id item in typeArray) {
                                 if ([item isKindOfClass:[DemographicProfileEntity class]]) {
                                     DemographicProfileEntity *demographicProfileEntity=(DemographicProfileEntity *)item;
                                     
@@ -1448,8 +1516,8 @@ NSError *error = nil;
                             [type willAccessValueForKey:@"demographics"];
                             
                             NSSet *typeSet= type.demographics;
-                            
-                            for (id item in typeSet) {
+                           NSArray *typeArray=typeSet.allObjects;
+                           for (id item in typeArray) {
                                 if ([item isKindOfClass:[DemographicProfileEntity class]]) {
                                     DemographicProfileEntity *demographicProfileEntity=(DemographicProfileEntity *)item;
                                     
@@ -1469,8 +1537,8 @@ NSError *error = nil;
                             [type willAccessValueForKey:@"demographics"];
                             
                             NSSet *typeSet= type.demographics;
-                            
-                            for (id item in typeSet) {
+                           NSArray *typeArray=typeSet.allObjects;
+                           for (id item in typeArray) {
                                 if ([item isKindOfClass:[DemographicProfileEntity class]]) {
                                     DemographicProfileEntity *demographicProfileEntity=(DemographicProfileEntity *)item;
                                     
@@ -1491,7 +1559,8 @@ NSError *error = nil;
                             
                             NSSet *typeSet= type.clientRelationship;
                             
-                            for (id item in typeSet) {
+                          NSArray *typeArray=typeSet.allObjects;
+                          for (id item in typeArray) {
                                 if ([item isKindOfClass:[InterpersonalEntity class]]) {
                                     InterpersonalEntity *interpersonalEntity=(InterpersonalEntity *)item;
                                     
@@ -1511,8 +1580,8 @@ NSError *error = nil;
                             [type willAccessValueForKey:@"clinician"];
                             
                             NSSet *typeSet= type.clinician;
-                            
-                            for (id item in typeSet) {
+                           NSArray *typeArray=typeSet.allObjects;
+                           for (id item in typeArray) {
                                 if ([item isKindOfClass:[ClinicianEntity class]]) {
                                     ClinicianEntity *clinicianEntity=(ClinicianEntity *)item;
                                     
@@ -1545,72 +1614,81 @@ NSError *error = nil;
                 
                  
                 NSMutableSet *supervisionTypesUsedArray=[NSMutableSet set];
-                 DLog(@" delete list before adding to superivisn types used array %@",deleteExtrasContainingSet);
+                 
                  [supervisionTypesUsedArray addObjectsFromArray:deleteExtrasContainingSet];
                  [interventionTypesUsedArray addObjectsFromArray:deleteExtrasContainingSet];
                 
                 
                 for (id objectInArray in objectsWithoutAssociatedTimeRecords) {
                     
-                    if ([objectInArray isKindOfClass:[InterventionTypeSubtypeEntity class]]) {
-                        InterventionTypeSubtypeEntity *interventionSubtypeEntity=(InterventionTypeSubtypeEntity *)objectInArray;
+                    if ([objectInArray isKindOfClass:[SupervisionTypeEntity class]]) {
+                        SupervisionTypeEntity *supervisionTypeEntity=(SupervisionTypeEntity *)objectInArray;
                         
-                        [interventionSubtypeEntity willAccessValueForKey:@"interventionType"];
-                        if (![interventionTypesUsedArray containsObject:interventionSubtypeEntity.interventionType.interventionType]) {
-                            [interventionTypesUsedArray addObject:interventionSubtypeEntity.interventionType.interventionType];
+                        [supervisionTypeEntity willAccessValueForKey:@"supervisionType"];
+                        if (![supervisionTypesUsedArray containsObject:supervisionTypeEntity.supervisionType]) {
+                            [supervisionTypesUsedArray addObject:supervisionTypeEntity.supervisionType];
                             
                         }
                         else
                         {
-                            [deleteSubtypesArray addObject:objectInArray];
+                            
+                            
+                            
+                            [managedObjectContext deleteObject:objectInArray];
+                            
+                           
+                            
+                          
                         
                         }
                        
-                        [interventionSubtypeEntity didAccessValueForKey:@"interventionType"];
+                        [supervisionTypeEntity didAccessValueForKey:@"supervisionType"];
                         
                         
                         
                     }
-                    
-                    else if ([objectInArray isKindOfClass:[SupervisionTypeSubtypeEntity class]]) {
-                        SupervisionTypeSubtypeEntity *supervisionTypeSubtypeEntity=(SupervisionTypeSubtypeEntity *)objectInArray;
+                    if ([objectInArray isKindOfClass:[InterventionTypeEntity class]]) {
+                        InterventionTypeEntity *interventionTypeEntity=(InterventionTypeEntity *)objectInArray;
                         
-                        [supervisionTypeSubtypeEntity willAccessValueForKey:@"supervisionType"];
-                        if (![supervisionTypesUsedArray containsObject:supervisionTypeSubtypeEntity.supervisionType.supervisionType]) {
-                           
-                            [supervisionTypesUsedArray addObject:supervisionTypeSubtypeEntity.supervisionType.supervisionType];
+                        [interventionTypeEntity willAccessValueForKey:@"interventionType"];
+                        if (![interventionTypesUsedArray containsObject:interventionTypeEntity.interventionType]) {
+                            [interventionTypesUsedArray addObject:interventionTypeEntity.interventionType];
                             
                         }
                         else
                         {
-                            [deleteSubtypesArray addObject:objectInArray];
+                            
+                            
+                            
+                            [managedObjectContext deleteObject:objectInArray];
+                            
+                            
+                            
+                            
                             
                         }
                         
-                        [supervisionTypeSubtypeEntity didAccessValueForKey:@"supervisionType"];
+                        [interventionTypeEntity didAccessValueForKey:@"interventionType"];
+                        
                         
                         
                     }
+
+                    else if ([objectInArray isKindOfClass:[SupervisionTypeSubtypeEntity class]]||[objectInArray isKindOfClass:[InterventionTypeSubtypeEntity class]] ) {
+                       
+                        break;
+                        
+                    }
                    else if (countWithout>1 || deleteExtrasContainingSet.count) {
-                       DLog(@"deleting  %@",objectInArray);
-                       DLog(@"list of not deletes %@",supervisionTypesUsedArray);
-                        [deleteSubtypesArray addObject:objectInArray];
+                       
+                        [managedObjectContext deleteObject:objectInArray];
                         countWithout=countWithout-1;
                     }
                     
                     
                     
                 }
-                int countOfDeleteSubtypesArray=deleteSubtypesArray.count;
                 
-                DLog(@"supervisionTypesUsedArray %@",supervisionTypesUsedArray);
-                if (countOfDeleteSubtypesArray>0) {
-                    DLog(@"deleted objects array %@",deleteSubtypesArray);
-                    for (id objt in deleteSubtypesArray) {
-                        [managedObjectContext deleteObject:objt];
-                    }
-                }
-
             }
             
             

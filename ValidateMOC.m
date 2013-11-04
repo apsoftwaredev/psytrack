@@ -47,12 +47,8 @@ NSEntityDescription *entityTime = [NSEntityDescription entityForName:@"TimeTrack
     
     NSUInteger countTime = [managedObjectContext countForFetchRequest:requestTime error:&error];
 
-    if (countTime> 0) {
+    if (countTime > 0) {
         
-        DLog(@"count %i",countTime);
-        NSArray *fetchedObjects=(NSArray *)[managedObjectContext executeFetchRequest:requestTime error:&error];
-        
-        DLog(@"fetched objects %@",fetchedObjects);
         supervisorsAllPresent=NO;
     }
     
@@ -69,7 +65,7 @@ NSEntityDescription *entityTime = [NSEntityDescription entityForName:@"TimeTrack
         
         if (countExisting> 0) {
             
-            DLog(@"count %i",countExisting);
+           
             supervisorsAllPresent=NO;
         }
     }
@@ -162,7 +158,7 @@ NSEntityDescription *entityTime = [NSEntityDescription entityForName:@"TimeTrack
     
     if (countTime> 0) {
         
-        DLog(@"count %i",countTime);
+       \
         dosAllPresent=NO;
     }
     
@@ -183,7 +179,7 @@ NSEntityDescription *entityTime = [NSEntityDescription entityForName:@"TimeTrack
         
         if (countExisting> 0) {
             
-            DLog(@"count %i",countExisting);
+           
             dosAllPresent=NO;
         }
     }
@@ -220,7 +216,7 @@ NSEntityDescription *entityTime = [NSEntityDescription entityForName:@"TimeTrack
     
     if (countTime> 0) {
         
-        DLog(@"count %i",countTime);
+        
         dosAllPresent=NO;
     }
     

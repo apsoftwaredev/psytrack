@@ -19,6 +19,26 @@
 
 }
 
+
+- (void) loadBindingsIntoCustomControls
+{
+    [super loadBindingsIntoCustomControls];
+    
+    
+    if ([label_.text isEqualToString:@"First Name:"]) {
+        self.textField.text =[self.boundObject valueForKey:@"firstName"];
+    }
+    if ([label_.text isEqualToString:@"Middle Name:"]) {
+        self.textField.text =[self.boundObject valueForKey:@"middleName"];
+    }
+    if ([label_.text isEqualToString:@"Last Name:"]) {
+        self.textField.text =[self.boundObject valueForKey:@"lastName"];
+    }
+    if ([label_.text isEqualToString:@"Suffix:"]) {
+        self.textField.text =[self.boundObject valueForKey:@"suffix"];
+    }
+}
+
 - (void) commitChanges
 {
     if (!needsCommit)

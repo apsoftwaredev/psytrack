@@ -1,7 +1,7 @@
 //
 //  ExistingHoursViewController.m
 //  PsyTrack Clinician Tools
-//  Version: 1.5.3
+//  Version: 1.5.4
 //
 //  Created by Daniel Boice on 3/29/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -724,7 +724,7 @@
 //
 //         [supervisionTypeDef addPropertyDefinition:supervisionTypeSubtypePropertyDef];
         SCPropertyDefinition *supervisionTypeSubtypePropertyDef = [supervisionTypeDef propertyDefinitionWithName:@"subTypes"];
-        supervisionSubTypePropertyDef.type = SCPropertyTypeArrayOfObjects;
+        supervisionTypeSubtypePropertyDef.type = SCPropertyTypeArrayOfObjects;
 
         supervisionTypeSubtypePropertyDef.attributes = [SCArrayOfObjectsAttributes attributesWithObjectDefinition:supervisionSubTypeDef allowAddingItems:YES allowDeletingItems:YES allowMovingItems:YES expandContentInCurrentView:NO placeholderuiElement:nil addNewObjectuiElement:[SCTableViewCell cellWithText:@"Add new supervision subtype"] addNewObjectuiElementExistsInNormalMode:YES addNewObjectuiElementExistsInEditingMode:YES];
     }
@@ -2005,8 +2005,7 @@
 
                         if (selectedInterventionType.interventionType.length)
                         {
-                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                                      @"interventionType.interventionType like %@",[NSString stringWithString:(NSString *)selectedInterventionType.interventionType]];
+                             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(interventionType == %@)",selectedInterventionType];
 
                             SCDataFetchOptions *dataFetchOptions = [SCDataFetchOptions optionsWithSortKey:@"interventionSubType" sortAscending:YES filterPredicate:predicate];
 
@@ -2045,8 +2044,8 @@
 
                         if (selectedSupervisionType.supervisionType.length)
                         {
-                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                                      @"supervisionType.supervisionType like %@",[NSString stringWithString:(NSString *)selectedSupervisionType.supervisionType]];
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(supervisionType == %@)",selectedSupervisionType];
+                            
 
                             SCDataFetchOptions *dataFetchOptions = [SCDataFetchOptions optionsWithSortKey:@"subType" sortAscending:YES filterPredicate:predicate];
 
@@ -2105,8 +2104,7 @@
                             if (selectedInterventionType.interventionType.length)
                             {
                                 subytypeObjectSelectionCell.userInteractionEnabled = YES;
-                                NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                                          @"interventionType.interventionType like %@",[NSString stringWithString:(NSString *)selectedInterventionType.interventionType]];
+                                 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(interventionType == %@)",selectedInterventionType];
 
                                 SCDataFetchOptions *dataFetchOptions = [SCDataFetchOptions optionsWithSortKey:@"interventionSubType" sortAscending:YES filterPredicate:predicate];
 
@@ -2136,6 +2134,7 @@
 
                         SCTableViewCell *subtypeCell = (SCTableViewCell *)[tableModel cellAfterCell:objectSelectionCell rewind:NO];
 
+                       
                         if ([subtypeCell isKindOfClass:[SCObjectSelectionCell class]])
                         {
                             SCObjectSelectionCell *subytypeObjectSelectionCell = (SCObjectSelectionCell *)subtypeCell;
@@ -2143,8 +2142,8 @@
                             if (selectedSupervisionType.supervisionType.length)
                             {
                                 subytypeObjectSelectionCell.userInteractionEnabled = YES;
-                                NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                                          @"supervisionType.supervisionType like %@",[NSString stringWithString:(NSString *)selectedSupervisionType.supervisionType]];
+                                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(supervisionType == %@)",selectedSupervisionType];
+                                
 
                                 SCDataFetchOptions *dataFetchOptions = [SCDataFetchOptions optionsWithSortKey:@"subType" sortAscending:YES filterPredicate:predicate];
 

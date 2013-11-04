@@ -1,7 +1,7 @@
 /*
  *  TimePickerCell.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.3
+ *  Version: 1.5.4
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -58,6 +58,7 @@
     // Center the picker in the detailViewController
     CGRect pickerFrame = self.picker.frame;
     pickerFrame.origin.x = (self.view.frame.size.width - pickerFrame.size.width) / 2;
+   
 
     self.picker.frame = pickerFrame;
 
@@ -73,7 +74,7 @@
     UIColor *blueTextColor = [UIColor colorWithRed:50.0f / 255 green:79.0f / 255 blue:133.0f / 255 alpha:1];
     hourLabel.textColor = blueTextColor;
     minLabel.textColor = blueTextColor;
-    dateLabel.textColor = blueTextColor;
+    dateLabel.textColor = [UIColor blueColor];
 
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 

@@ -2,7 +2,7 @@
 /*
  *  DrugViewController_Shared.h
  *  psyTrack Clinician Tools
- *  Version: 1.5.3
+ *  Version: 1.5.4
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES

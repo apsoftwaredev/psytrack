@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		376798051500665D00D0639D /* ClinicianGroupsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376797F81500665D00D0639D /* ClinicianGroupsViewController.xib */; };
 		376798071500665D00D0639D /* LongTimePickerCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376797FC1500665D00D0639D /* LongTimePickerCell_iPhone.xib */; };
 		376798081500665D00D0639D /* MyPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376797FE1500665D00D0639D /* MyPickerView.xib */; };
 		3767980A1500665D00D0639D /* WebViewDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 376798021500665D00D0639D /* WebViewDetailViewController.xib */; };
@@ -75,7 +74,6 @@
 		37F7CE80150057C300AD2C3A /* CliniciansRootViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CE7D150057C300AD2C3A /* CliniciansRootViewController_iPad.xib */; };
 		37F7CE84150057FC00AD2C3A /* ClinicianViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37F7CE82150057FC00AD2C3A /* ClinicianViewController.xib */; };
 		37F7CE871500582600AD2C3A /* ClinicianViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE861500582600AD2C3A /* ClinicianViewController.m */; };
-		37F7CE8C1500588900AD2C3A /* ClinicianGroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE891500588900AD2C3A /* ClinicianGroupsViewController.m */; };
 		37F7CE8D1500588900AD2C3A /* MySource.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE8B1500588900AD2C3A /* MySource.m */; };
 		37F7CE951500592900AD2C3A /* Age.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE921500592900AD2C3A /* Age.m */; };
 		37F7CE961500592900AD2C3A /* ClientPresentations_Shared.m in Sources */ = {isa = PBXBuildFile; fileRef = 37F7CE941500592900AD2C3A /* ClientPresentations_Shared.m */; };
@@ -220,7 +218,6 @@
 		E71EAD7A15D86C7E00204389 /* ConferencesAttendedVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71EAD7815D86C7E00204389 /* ConferencesAttendedVC.xib */; };
 		E71EAD8115D88E5100204389 /* TeachingExperienceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E71EAD7F15D88E5100204389 /* TeachingExperienceVC.m */; };
 		E71EAD8215D88E5100204389 /* TeachingExperienceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E71EAD8015D88E5100204389 /* TeachingExperienceVC.xib */; };
-		E71F250E1692964E004D6753 /* PTManagedObjectContext.m in Sources */ = {isa = PBXBuildFile; fileRef = E71F250D1692964E004D6753 /* PTManagedObjectContext.m */; };
 		E724FA1816B1E7D9007508BB /* Encryption-Registration-Number-ERN.pdf in Resources */ = {isa = PBXBuildFile; fileRef = E724FA1716B1E7D9007508BB /* Encryption-Registration-Number-ERN.pdf */; };
 		E7294C9B1604C1AB00C153CE /* DemographicSexCounts.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294C9A1604C1AB00C153CE /* DemographicSexCounts.m */; };
 		E7294C9E1604C48500C153CE /* DemographicSex.m in Sources */ = {isa = PBXBuildFile; fileRef = E7294C9D1604C48400C153CE /* DemographicSex.m */; };
@@ -499,9 +496,6 @@
 		E7A21371155B34CD005CF154 /* LogoBackgroundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7A2136F155B34CD005CF154 /* LogoBackgroundViewController.xib */; };
 		E7A5D7081559EB26000F248F /* DetailViewControllerTheme.ptt in Resources */ = {isa = PBXBuildFile; fileRef = E7A5D7071559EB26000F248F /* DetailViewControllerTheme.ptt */; };
 		E7A8B0F516AA4DD600C33267 /* PTTAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 37F7CE201500334800AD2C3A /* PTTAppDelegate.h */; };
-		E7A8B0FD16AA579F00C33267 /* PTManagedObject.h in Resources */ = {isa = PBXBuildFile; fileRef = E7A8B0FB16AA579F00C33267 /* PTManagedObject.h */; };
-		E7A8B0FE16AA579F00C33267 /* PTManagedObject.m in Resources */ = {isa = PBXBuildFile; fileRef = E7A8B0FC16AA579F00C33267 /* PTManagedObject.m */; };
-		E7A8B0FF16AA583900C33267 /* PTManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E7A8B0FC16AA579F00C33267 /* PTManagedObject.m */; };
 		E7A9249315485E6C0080B35D /* blueArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = E7A9249215485E6C0080B35D /* blueArrow.png */; };
 		E7AFB2B215C329A4005E2722 /* ConsultationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AFB2B015C329A4005E2722 /* ConsultationsViewController.xib */; };
 		E7B3E40715C58B2F00729C88 /* CECreditsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B3E3FD15C58B2F00729C88 /* CECreditsViewController.m */; };
@@ -513,6 +507,8 @@
 		E7B5D97F168D31BB000CA5B5 /* ClientPresentationGenerateVC_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7B5D97E168D31BB000CA5B5 /* ClientPresentationGenerateVC_iPhone.xib */; };
 		E7B5D994168DB670000CA5B5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B2254A150285E30015D955 /* Default.png */; };
 		E7B7957A16124528008D3E8F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7B7957916124528008D3E8F /* Default-568h@2x.png */; };
+		E7BFEFED182702D80049D18C /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BFEFE81827028B0049D18C /* libSTV+CoreData.a */; };
+		E7BFEFEE182702DE0049D18C /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BFEFE1182702700049D18C /* libSensibleTableView.a */; };
 		E7C02D9F15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */; };
 		E7C02DBA15B4C24E0072F97C /* UILabel_VerticalAlignmentExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DB915B4C24E0072F97C /* UILabel_VerticalAlignmentExtention.m */; };
 		E7C02DC315B6003E0072F97C /* MonthlyPracticumLogGenerateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C02DC115B6003C0072F97C /* MonthlyPracticumLogGenerateViewController.m */; };
@@ -532,15 +528,17 @@
 		E7DEECE315F2FAE1001D5B05 /* OtherActivityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7DEECE115F2FAE1001D5B05 /* OtherActivityVC.xib */; };
 		E7DEED0A15F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DEED0815F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.m */; };
 		E7DEED0B15F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7DEED0915F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.xib */; };
+		E7E0F3B518201F4B000AB858 /* AWSS3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E0F3B418201F4B000AB858 /* AWSS3.framework */; };
+		E7E0F3B718201FCE000AB858 /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E0F3B618201FCE000AB858 /* AWSRuntime.framework */; };
+		E7E0F3B918202175000AB858 /* AWSSimpleDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E0F3B818202175000AB858 /* AWSSimpleDB.framework */; };
+		E7E0F3BC182021AC000AB858 /* AWSSNS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E0F3BA182021AB000AB858 /* AWSSNS.framework */; };
+		E7E0F3BD182021AC000AB858 /* AWSSQS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E0F3BB182021AB000AB858 /* AWSSQS.framework */; };
 		E7E1425915C1F34B00D0F505 /* PresentationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */; };
 		E7E1425A15C1F34B00D0F505 /* PresentationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */; };
 		E7E1A63D152E873500C227E8 /* TimeTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */; };
 		E7E1A6451530C18A00C227E8 /* ShortFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7E1A6441530C18900C227E8 /* ShortFieldCell.m */; };
-		E7ECEE421701091C00920D70 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7ECEE411701091C00920D70 /* AWSiOSSDK.framework */; };
 		E7ECEE4517010B2500920D70 /* AmazonClientManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E7ECEE4317010B2500920D70 /* AmazonClientManager.h */; };
 		E7ECEE4617010B2500920D70 /* AmazonClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7ECEE4417010B2500920D70 /* AmazonClientManager.m */; };
-		E7F06B7818140A2A00E5D128 /* libSensibleTableView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F06B70181409D000E5D128 /* libSensibleTableView.a */; };
-		E7F06B7B18140A4300E5D128 /* libSTV+CoreData.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F06B77181409F300E5D128 /* libSTV+CoreData.a */; };
 		E7F06B8018141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.h in Headers */ = {isa = PBXBuildFile; fileRef = E7F06B7E18141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.h */; };
 		E7F06B8118141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F06B7F18141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.m */; };
 		E7F06B84181421BB00E5D128 /* TextFieldAndLabelCell.h in Headers */ = {isa = PBXBuildFile; fileRef = E7F06B82181421BB00E5D128 /* TextFieldAndLabelCell.h */; };
@@ -599,30 +597,30 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E7F06B6F181409D000E5D128 /* PBXContainerItemProxy */ = {
+		E7BFEFE0182702700049D18C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E7F06B6A181409D000E5D128 /* SensibleTableView.xcodeproj */;
+			containerPortal = E7BFEFDB182702700049D18C /* SensibleTableView.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DBE7373014F99E580076D2B6;
 			remoteInfo = SensibleTableView;
 		};
-		E7F06B76181409F300E5D128 /* PBXContainerItemProxy */ = {
+		E7BFEFE71827028B0049D18C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E7F06B71181409F300E5D128 /* STV+CoreData.xcodeproj */;
+			containerPortal = E7BFEFE21827028B0049D18C /* STV+CoreData.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = DBE737C414FC66D40076D2B6;
 			remoteInfo = "STV+CoreData";
 		};
-		E7F06B7918140A3900E5D128 /* PBXContainerItemProxy */ = {
+		E7BFEFE9182702C40049D18C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E7F06B6A181409D000E5D128 /* SensibleTableView.xcodeproj */;
+			containerPortal = E7BFEFDB182702700049D18C /* SensibleTableView.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = DBE7372F14F99E580076D2B6;
 			remoteInfo = SensibleTableView;
 		};
-		E7F06B7C18140A4900E5D128 /* PBXContainerItemProxy */ = {
+		E7BFEFEB182702CA0049D18C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E7F06B71181409F300E5D128 /* STV+CoreData.xcodeproj */;
+			containerPortal = E7BFEFE21827028B0049D18C /* STV+CoreData.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = DBE737C314FC66D40076D2B6;
 			remoteInfo = "STV+CoreData";
@@ -630,7 +628,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		376797F91500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ClinicianGroupsViewController.xib; sourceTree = "<group>"; };
 		376797FD1500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LongTimePickerCell_iPhone.xib; sourceTree = "<group>"; };
 		376797FF1500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MyPickerView.xib; sourceTree = "<group>"; };
 		376798031500665D00D0639D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/WebViewDetailViewController.xib; sourceTree = "<group>"; };
@@ -738,8 +735,6 @@
 		37F7CE83150057FC00AD2C3A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ClinicianViewController.xib; sourceTree = "<group>"; };
 		37F7CE851500582600AD2C3A /* ClinicianViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianViewController.h; sourceTree = "<group>"; };
 		37F7CE861500582600AD2C3A /* ClinicianViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicianViewController.m; sourceTree = "<group>"; };
-		37F7CE881500588900AD2C3A /* ClinicianGroupsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClinicianGroupsViewController.h; sourceTree = "<group>"; };
-		37F7CE891500588900AD2C3A /* ClinicianGroupsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClinicianGroupsViewController.m; sourceTree = "<group>"; };
 		37F7CE8A1500588900AD2C3A /* MySource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySource.h; sourceTree = "<group>"; };
 		37F7CE8B1500588900AD2C3A /* MySource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySource.m; sourceTree = "<group>"; };
 		37F7CE911500592900AD2C3A /* Age.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Age.h; sourceTree = "<group>"; };
@@ -939,8 +934,6 @@
 		E71EAD7E15D88E5100204389 /* TeachingExperienceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachingExperienceVC.h; sourceTree = "<group>"; };
 		E71EAD7F15D88E5100204389 /* TeachingExperienceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachingExperienceVC.m; sourceTree = "<group>"; };
 		E71EAD8015D88E5100204389 /* TeachingExperienceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeachingExperienceVC.xib; sourceTree = "<group>"; };
-		E71F250C1692964E004D6753 /* PTManagedObjectContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTManagedObjectContext.h; sourceTree = "<group>"; };
-		E71F250D1692964E004D6753 /* PTManagedObjectContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTManagedObjectContext.m; sourceTree = "<group>"; };
 		E724FA1716B1E7D9007508BB /* Encryption-Registration-Number-ERN.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = "Encryption-Registration-Number-ERN.pdf"; path = "../Encryption-Registration-Number-ERN.pdf"; sourceTree = "<group>"; };
 		E7294C991604C1AB00C153CE /* DemographicSexCounts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemographicSexCounts.h; sourceTree = "<group>"; };
 		E7294C9A1604C1AB00C153CE /* DemographicSexCounts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemographicSexCounts.m; sourceTree = "<group>"; };
@@ -1412,8 +1405,6 @@
 		E7A2136E155B34CD005CF154 /* LogoBackgroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoBackgroundViewController.m; sourceTree = "<group>"; };
 		E7A2136F155B34CD005CF154 /* LogoBackgroundViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogoBackgroundViewController.xib; sourceTree = "<group>"; };
 		E7A5D7071559EB26000F248F /* DetailViewControllerTheme.ptt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DetailViewControllerTheme.ptt; sourceTree = "<group>"; };
-		E7A8B0FB16AA579F00C33267 /* PTManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTManagedObject.h; sourceTree = "<group>"; };
-		E7A8B0FC16AA579F00C33267 /* PTManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTManagedObject.m; sourceTree = "<group>"; };
 		E7A9249215485E6C0080B35D /* blueArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueArrow.png; sourceTree = "<group>"; };
 		E7AFB2AE15C329A3005E2722 /* ConsultationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsultationsViewController.h; sourceTree = "<group>"; };
 		E7AFB2B015C329A4005E2722 /* ConsultationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConsultationsViewController.xib; sourceTree = "<group>"; };
@@ -1426,6 +1417,8 @@
 		E7B3E40615C58B2F00729C88 /* TrainTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TrainTrackViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7B5D97E168D31BB000CA5B5 /* ClientPresentationGenerateVC_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClientPresentationGenerateVC_iPhone.xib; sourceTree = "<group>"; };
 		E7B7957916124528008D3E8F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		E7BFEFDB182702700049D18C /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../STV/STV 3.3.0 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
+		E7BFEFE21827028B0049D18C /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../STV/STV 3.3.0 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E7C02D9D15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.h; sourceTree = "<group>"; };
 		E7C02D9E15AF37200072F97C /* SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCArrayOfObjectsSectionWithTotalAndNotesViewInFooter.m; sourceTree = "<group>"; };
 		E7C02DB815B4C24E0072F97C /* UILabel_VerticalAlignmentExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILabel_VerticalAlignmentExtention.h; sourceTree = "<group>"; };
@@ -1453,6 +1446,11 @@
 		E7DEED0715F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllTrainingHoursGenerateVC.h; sourceTree = "<group>"; };
 		E7DEED0815F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AllTrainingHoursGenerateVC.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7DEED0915F6C1A4001D5B05 /* AllTrainingHoursGenerateVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllTrainingHoursGenerateVC.xib; sourceTree = "<group>"; };
+		E7E0F3B418201F4B000AB858 /* AWSS3.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSS3.framework; path = "../../Downloads/aws-ios-sdk-1.7.0/AWSS3.framework"; sourceTree = "<group>"; };
+		E7E0F3B618201FCE000AB858 /* AWSRuntime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSRuntime.framework; path = "../../Downloads/aws-ios-sdk-1.7.0/AWSRuntime.framework"; sourceTree = "<group>"; };
+		E7E0F3B818202175000AB858 /* AWSSimpleDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSimpleDB.framework; path = "../../Downloads/aws-ios-sdk-1.7.0/AWSSimpleDB.framework"; sourceTree = "<group>"; };
+		E7E0F3BA182021AB000AB858 /* AWSSNS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSNS.framework; path = "../../Downloads/aws-ios-sdk-1.7.0/AWSSNS.framework"; sourceTree = "<group>"; };
+		E7E0F3BB182021AB000AB858 /* AWSSQS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSQS.framework; path = "../../Downloads/aws-ios-sdk-1.7.0/AWSSQS.framework"; sourceTree = "<group>"; };
 		E7E1425615C1F34B00D0F505 /* PresentationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationsViewController.h; sourceTree = "<group>"; };
 		E7E1425715C1F34B00D0F505 /* PresentationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentationsViewController.m; sourceTree = "<group>"; };
 		E7E1425815C1F34B00D0F505 /* PresentationsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PresentationsViewController.xib; sourceTree = "<group>"; };
@@ -1460,11 +1458,8 @@
 		E7E1A63B152E873500C227E8 /* TimeTrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TimeTrackViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		E7E1A6431530C18900C227E8 /* ShortFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShortFieldCell.h; sourceTree = "<group>"; };
 		E7E1A6441530C18900C227E8 /* ShortFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShortFieldCell.m; sourceTree = "<group>"; };
-		E7ECEE411701091C00920D70 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSiOSSDK.framework; path = "../../Downloads/aws-ios-sdk-1.4.6/AWSiOSSDK.framework"; sourceTree = "<group>"; };
 		E7ECEE4317010B2500920D70 /* AmazonClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonClientManager.h; sourceTree = "<group>"; };
 		E7ECEE4417010B2500920D70 /* AmazonClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonClientManager.m; sourceTree = "<group>"; };
-		E7F06B6A181409D000E5D128 /* SensibleTableView.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SensibleTableView.xcodeproj; path = "../../Downloads/STV 3.3.0 Pro/Source Code/SensibleTableView/SensibleTableView.xcodeproj"; sourceTree = "<group>"; };
-		E7F06B71181409F300E5D128 /* STV+CoreData.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "STV+CoreData.xcodeproj"; path = "../../Downloads/STV 3.3.0 Pro/Source Code/STV+CoreData/STV+CoreData.xcodeproj"; sourceTree = "<group>"; };
 		E7F06B7E18141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrepopulateAndRemoveDuplicates.h; sourceTree = "<group>"; };
 		E7F06B7F18141AFB00E5D128 /* PrepopulateAndRemoveDuplicates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrepopulateAndRemoveDuplicates.m; sourceTree = "<group>"; };
 		E7F06B82181421BB00E5D128 /* TextFieldAndLabelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldAndLabelCell.h; sourceTree = "<group>"; };
@@ -1554,9 +1549,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7F06B7818140A2A00E5D128 /* libSensibleTableView.a in Frameworks */,
-				E7F06B7B18140A4300E5D128 /* libSTV+CoreData.a in Frameworks */,
-				E7ECEE421701091C00920D70 /* AWSiOSSDK.framework in Frameworks */,
+				E7BFEFEE182702DE0049D18C /* libSensibleTableView.a in Frameworks */,
+				E7BFEFED182702D80049D18C /* libSTV+CoreData.a in Frameworks */,
+				E7E0F3B718201FCE000AB858 /* AWSRuntime.framework in Frameworks */,
+				E7E0F3BC182021AC000AB858 /* AWSSNS.framework in Frameworks */,
+				E7E0F3BD182021AC000AB858 /* AWSSQS.framework in Frameworks */,
+				E7E0F3B918202175000AB858 /* AWSSimpleDB.framework in Frameworks */,
+				E7E0F3B518201F4B000AB858 /* AWSS3.framework in Frameworks */,
 				E7F1CAF41597CADB006F9E95 /* CoreText.framework in Frameworks */,
 				E78A8D1D1531EF1F0099FE5B /* SystemConfiguration.framework in Frameworks */,
 				E7F1CBA31598C787006F9E95 /* ImageIO.framework in Frameworks */,
@@ -1895,9 +1894,6 @@
 		37F7CE8F150058D300AD2C3A /* Groups */ = {
 			isa = PBXGroup;
 			children = (
-				376797F81500665D00D0639D /* ClinicianGroupsViewController.xib */,
-				37F7CE881500588900AD2C3A /* ClinicianGroupsViewController.h */,
-				37F7CE891500588900AD2C3A /* ClinicianGroupsViewController.m */,
 				37F7CE8A1500588900AD2C3A /* MySource.h */,
 				37F7CE8B1500588900AD2C3A /* MySource.m */,
 				E7619871158946B100C5BB8F /* ClientGroupsViewController.h */,
@@ -1937,13 +1933,9 @@
 		37F7CEC615005E3400AD2C3A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E7A8B0FB16AA579F00C33267 /* PTManagedObject.h */,
-				E7A8B0FC16AA579F00C33267 /* PTManagedObject.m */,
 				E7B49C1A1607E53A0073AA30 /* NSManagedObject Subclasses */,
 				E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */,
 				37F7CEC715005E7100AD2C3A /* drugs.xcdatamodeld */,
-				E71F250C1692964E004D6753 /* PTManagedObjectContext.h */,
-				E71F250D1692964E004D6753 /* PTManagedObjectContext.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -2132,8 +2124,8 @@
 		B771C54314DAF3E4002D430E /* Third Party */ = {
 			isa = PBXGroup;
 			children = (
-				E7F06B6A181409D000E5D128 /* SensibleTableView.xcodeproj */,
-				E7F06B71181409F300E5D128 /* STV+CoreData.xcodeproj */,
+				E7BFEFDB182702700049D18C /* SensibleTableView.xcodeproj */,
+				E7BFEFE21827028B0049D18C /* STV+CoreData.xcodeproj */,
 				E7F1CB1E1598C024006F9E95 /* vfr-Reader-db84c9d */,
 				E7577FA7158C1DAE0044D344 /* KeychainItemWrapper.h */,
 				E7577FA8158C1DAE0044D344 /* KeychainItemWrapper.m */,
@@ -2176,7 +2168,11 @@
 		B79F489B142BEF0D0085D47B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E7ECEE411701091C00920D70 /* AWSiOSSDK.framework */,
+				E7E0F3BA182021AB000AB858 /* AWSSNS.framework */,
+				E7E0F3BB182021AB000AB858 /* AWSSQS.framework */,
+				E7E0F3B818202175000AB858 /* AWSSimpleDB.framework */,
+				E7E0F3B618201FCE000AB858 /* AWSRuntime.framework */,
+				E7E0F3B418201F4B000AB858 /* AWSS3.framework */,
 				E7F1CBA21598C786006F9E95 /* ImageIO.framework */,
 				E7F1CAF31597CADB006F9E95 /* CoreText.framework */,
 				E798A13B15857E2F006B9DBD /* CoreImage.framework */,
@@ -2739,6 +2735,22 @@
 			name = "NSManagedObject Subclasses";
 			sourceTree = "<group>";
 		};
+		E7BFEFDC182702700049D18C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7BFEFE1182702700049D18C /* libSensibleTableView.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7BFEFE31827028B0049D18C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7BFEFE81827028B0049D18C /* libSTV+CoreData.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E7C6871915D6137B00637BCE /* Courses Taken */ = {
 			isa = PBXGroup;
 			children = (
@@ -2803,22 +2815,6 @@
 				37F7CEA3150059D900AD2C3A /* TimeTrackViewController.xib */,
 			);
 			name = "Time Track View Controller";
-			sourceTree = "<group>";
-		};
-		E7F06B6B181409D000E5D128 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E7F06B70181409D000E5D128 /* libSensibleTableView.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E7F06B72181409F300E5D128 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E7F06B77181409F300E5D128 /* libSTV+CoreData.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		E7F1CAEB1597A780006F9E95 /* Monthly Practicum Log */ = {
@@ -2983,8 +2979,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				E7F06B7A18140A3900E5D128 /* PBXTargetDependency */,
-				E7F06B7D18140A4900E5D128 /* PBXTargetDependency */,
+				E7BFEFEA182702C40049D18C /* PBXTargetDependency */,
+				E7BFEFEC182702CA0049D18C /* PBXTargetDependency */,
 			);
 			name = PsyTrack;
 			productName = psyTrainTrack;
@@ -3013,12 +3009,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = E7F06B6B181409D000E5D128 /* Products */;
-					ProjectRef = E7F06B6A181409D000E5D128 /* SensibleTableView.xcodeproj */;
+					ProductGroup = E7BFEFDC182702700049D18C /* Products */;
+					ProjectRef = E7BFEFDB182702700049D18C /* SensibleTableView.xcodeproj */;
 				},
 				{
-					ProductGroup = E7F06B72181409F300E5D128 /* Products */;
-					ProjectRef = E7F06B71181409F300E5D128 /* STV+CoreData.xcodeproj */;
+					ProductGroup = E7BFEFE31827028B0049D18C /* Products */;
+					ProjectRef = E7BFEFE21827028B0049D18C /* STV+CoreData.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -3029,18 +3025,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E7F06B70181409D000E5D128 /* libSensibleTableView.a */ = {
+		E7BFEFE1182702700049D18C /* libSensibleTableView.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSensibleTableView.a;
-			remoteRef = E7F06B6F181409D000E5D128 /* PBXContainerItemProxy */;
+			remoteRef = E7BFEFE0182702700049D18C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E7F06B77181409F300E5D128 /* libSTV+CoreData.a */ = {
+		E7BFEFE81827028B0049D18C /* libSTV+CoreData.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libSTV+CoreData.a";
-			remoteRef = E7F06B76181409F300E5D128 /* PBXContainerItemProxy */;
+			remoteRef = E7BFEFE71827028B0049D18C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -3132,7 +3128,6 @@
 				37F7CFC915005FFC00AD2C3A /* padlock_click.m4a in Resources */,
 				37F7CFD1150060D400AD2C3A /* Settings.bundle in Resources */,
 				37F7CFDD1500624000AD2C3A /* CasualAlertViewController.xib in Resources */,
-				376798051500665D00D0639D /* ClinicianGroupsViewController.xib in Resources */,
 				376798071500665D00D0639D /* LongTimePickerCell_iPhone.xib in Resources */,
 				376798081500665D00D0639D /* MyPickerView.xib in Resources */,
 				3767980A1500665D00D0639D /* WebViewDetailViewController.xib in Resources */,
@@ -3274,8 +3269,6 @@
 				E7388B691652B7E600E04639 /* ClientPresentationGenerateVC.xib in Resources */,
 				E7B5D97F168D31BB000CA5B5 /* ClientPresentationGenerateVC_iPhone.xib in Resources */,
 				E7B5D994168DB670000CA5B5 /* Default.png in Resources */,
-				E7A8B0FD16AA579F00C33267 /* PTManagedObject.h in Resources */,
-				E7A8B0FE16AA579F00C33267 /* PTManagedObject.m in Resources */,
 				E724FA1816B1E7D9007508BB /* Encryption-Registration-Number-ERN.pdf in Resources */,
 				E74342A4176EE45A00AB0062 /* Icon-120.png in Resources */,
 				E705B44F1784E1AE001FAF2E /* EBPWebsitesTableViewController.xib in Resources */,
@@ -3291,7 +3284,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7A8B0FF16AA583900C33267 /* PTManagedObject.m in Sources */,
 				B703DBB914EBF66600A921F2 /* PTTEncryption.m in Sources */,
 				37BF64F514F2917D0065C607 /* NSDictionaryHelpers.m in Sources */,
 				378DEDD214FE73AF00CF4F12 /* LCYAppSettings.m in Sources */,
@@ -3331,7 +3323,6 @@
 				37F7CE791500578B00AD2C3A /* CliniciansDetailViewController_iPad.m in Sources */,
 				37F7CE7A1500578B00AD2C3A /* CliniciansRootViewController_iPad.m in Sources */,
 				37F7CE871500582600AD2C3A /* ClinicianViewController.m in Sources */,
-				37F7CE8C1500588900AD2C3A /* ClinicianGroupsViewController.m in Sources */,
 				37F7CE8D1500588900AD2C3A /* MySource.m in Sources */,
 				37F7CE951500592900AD2C3A /* Age.m in Sources */,
 				37F7CE961500592900AD2C3A /* ClientPresentations_Shared.m in Sources */,
@@ -3456,7 +3447,6 @@
 				E7294CE4160685DC00C153CE /* DemographicReportGenerateVC.m in Sources */,
 				E7388B681652B7E600E04639 /* ClientPresentationGenerateVC.m in Sources */,
 				E7388B6E1652C0EB00E04639 /* PDFGenerator.m in Sources */,
-				E71F250E1692964E004D6753 /* PTManagedObjectContext.m in Sources */,
 				E7315AD316937F8400964CE7 /* PhoneEntity.m in Sources */,
 				E7315AD616937F8500964CE7 /* FeeTypeEntity.m in Sources */,
 				E7315AD916937F8500964CE7 /* SupportActivityClientEntity.m in Sources */,
@@ -3628,27 +3618,19 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E7F06B7A18140A3900E5D128 /* PBXTargetDependency */ = {
+		E7BFEFEA182702C40049D18C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SensibleTableView;
-			targetProxy = E7F06B7918140A3900E5D128 /* PBXContainerItemProxy */;
+			targetProxy = E7BFEFE9182702C40049D18C /* PBXContainerItemProxy */;
 		};
-		E7F06B7D18140A4900E5D128 /* PBXTargetDependency */ = {
+		E7BFEFEC182702CA0049D18C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "STV+CoreData";
-			targetProxy = E7F06B7C18140A4900E5D128 /* PBXContainerItemProxy */;
+			targetProxy = E7BFEFEB182702CA0049D18C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		376797F81500665D00D0639D /* ClinicianGroupsViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				376797F91500665D00D0639D /* en */,
-			);
-			name = ClinicianGroupsViewController.xib;
-			sourceTree = "<group>";
-		};
 		376797FC1500665D00D0639D /* LongTimePickerCell_iPhone.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -4121,14 +4103,20 @@
 		B79F48C8142BEF0E0085D47B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = PsyTrack.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Boice (49D3389L6J)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Boice (49D3389L6J)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/../../Downloads/aws-ios-sdk-1.4.6\"",
+					"$(SRCROOT)",
+					"/Users/danboice/Downloads/aws-ios-sdk-1.7.0",
+					"/Users/danboice/Downloads/aws-ios-sdk-1.7.0/src/Amazon.Runtime",
+					"/Users/danboice/Downloads/aws-ios-sdk-1.7.0/src/Amazon.S3",
+					"/Users/danboice/Downloads/aws-ios-sdk-1.7.0/src/Amazon.SimpleDB",
+					"/Users/danboice/Downloads/aws-ios-sdk-1.7.0/src/Amazon.SNS",
+					"/Users/danboice/Downloads/aws-ios-sdk-1.7.0/src/Amazon.SQS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";
@@ -4149,7 +4137,7 @@
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "3E8465FE-19B8-44B4-A63C-33D179CE7AB7";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3E8465FE-19B8-44B4-A63C-33D179CE7AB7";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../Downloads/STV 3.3.0 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\" \"$(SRCROOT)/../Downloads/STV 3.3.0 Pro/Source Code/STV+CoreData/STV+CoreData\"";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" /Users/danboice/iPhoneProjects/STV/STV 3.3.0 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core/ \"$(SRCROOT)/../STV/STV 3.3.0 Pro/Source Code/STV+CoreData/STV+CoreData\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -4157,14 +4145,20 @@
 		B79F48C9142BEF0E0085D47B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = PsyTrack.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Daniel Boice";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Daniel Boice";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/../../Downloads/aws-ios-sdk-1.4.6\"",
+					"$(SRCROOT)",
+					"/Users/danboice/Downloads/aws-ios-sdk-1.7.0",
+					"/Users/danboice/Downloads/aws-ios-sdk-1.7.0/src/Amazon.Runtime",
+					"/Users/danboice/Downloads/aws-ios-sdk-1.7.0/src/Amazon.S3",
+					"/Users/danboice/Downloads/aws-ios-sdk-1.7.0/src/Amazon.SimpleDB",
+					"/Users/danboice/Downloads/aws-ios-sdk-1.7.0/src/Amazon.SNS",
+					"/Users/danboice/Downloads/aws-ios-sdk-1.7.0/src/Amazon.SQS",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PsyTrack-Prefix.pch";
@@ -4182,7 +4176,7 @@
 				PRODUCT_NAME = PsyTrack;
 				PROVISIONING_PROFILE = "42F58184-29F0-4909-8DD1-EA8881BB6EC6";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "42F58184-29F0-4909-8DD1-EA8881BB6EC6";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../Downloads/STV 3.3.0 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\" \"$(SRCROOT)/../Downloads/STV 3.3.0 Pro/Source Code/STV+CoreData/STV+CoreData\"";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" /Users/danboice/iPhoneProjects/STV/STV 3.3.0 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core/ \"$(SRCROOT)/../STV/STV 3.3.0 Pro/Source Code/STV+CoreData/STV+CoreData\"";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

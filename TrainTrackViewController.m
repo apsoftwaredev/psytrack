@@ -1,7 +1,7 @@
 /*
  *  TrainTrackViewController.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.3
+ *  Version: 1.5.4
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -86,7 +86,7 @@
 
         case 8:
         {
-            result = 2;
+            result = 1;
             break;
         }
         case 9:
@@ -254,12 +254,9 @@
 
         case 8:
         {
-            if (indexPath.row == 0)
-            {
-                result.textLabel.text = @"Clinician Groups";
-            }
+            
 
-            if (indexPath.row == 1)
+            if (indexPath.row == 0)
             {
                 result.textLabel.text = @"Client Groups";
             }
@@ -571,21 +568,11 @@
         {
             //@"Clinician Groups"
 
-            if (indexPath.row == 0)
-            {
-                if (!clinicianGroupsViewController)
-                {
-                    clinicianGroupsViewController = [[ClinicianGroupsViewController alloc] initWithNibName:@"ClinicianGroupsViewController" bundle:[NSBundle mainBundle] ];
-                }
-
-                [self.navigationController pushViewController:clinicianGroupsViewController animated:YES];
-
-                clinicianGroupsViewController.rootNavController = self.navigationController;
-            }
+            
 
             //@"Clinician Groups"
 
-            if (indexPath.row == 1)
+            if (indexPath.row == 0)
             {
                 if (!clientGroupsViewController)
                 {

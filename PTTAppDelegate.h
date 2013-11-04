@@ -1,7 +1,7 @@
 /*
  *  PTTAppDelegate.h
  *  psyTrack Clinician Tools
- *  Version: 1.5.3
+ *  Version: 1.5.4
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -19,8 +19,6 @@
 #import <UIKit/UIKit.h>
 #import "LCYLockScreenViewController.h"
 #import "ColorSwitcher.h"
-#import "PTManagedObjectContext.h"
-#import "PTManagedObject.h"
 
 #define addSmtricStr @"iEn8ioesfec3"
 
@@ -116,7 +114,7 @@ static NSInteger const kAlertTagErrorExitApp = 1;
 
 - (void) customizeGlobalTheme;
 
-@property (readonly, strong, nonatomic) PTManagedObjectContext *managedObjectContext;
+@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 

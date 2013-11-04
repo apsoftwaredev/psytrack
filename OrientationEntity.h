@@ -1,7 +1,7 @@
 //
 //  OrientationEntity.h
 //  PsyTrack Clinician Tools
-//  Version: 1.5.3
+//  Version: 1.5.4
 //
 //  Created by Daniel Boice on 1/1/13.
 //  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
@@ -9,12 +9,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "PTManagedObjectContext.h"
-#import "PTManagedObject.h"
 
 @class CommunityServiceEntity, OrientationHistoryEntity;
 
-@interface OrientationEntity : PTManagedObject
+@interface OrientationEntity : NSManagedObject
 
 @property (nonatomic, retain) NSString *orientation;
 @property (nonatomic, retain) NSNumber *order;

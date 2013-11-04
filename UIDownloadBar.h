@@ -10,7 +10,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <AWSiOSSDK/AmazonServiceRequest.h>
+#import <AWSRuntime/AWSRuntime.h>
+#import <AWSRuntime/AmazonServiceRequest.h>
+#import <AWSS3/AWSS3.h>
 #import "AmazonClientManager.h"
 
 @class UIProgressView;

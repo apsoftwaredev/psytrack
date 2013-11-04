@@ -1,7 +1,7 @@
 //
 //  ServicesViewController_Shared.m
 //  PsyTrack Clinician Tools
-//  Version: 1.5.3
+//  Version: 1.5.4
 //
 //  Created by Daniel Boice on 4/5/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -1174,11 +1174,11 @@
     referenceDate = [NSDate dateWithTimeIntervalSince1970:0];
 
     // Initialize an event store object with the init method. Initilize the array for events.
-    self.eventStore = [[EKEventStore alloc] init];
-
-    self.eventsList = [[NSMutableArray alloc] initWithArray:0];
-
-    self.psyTrackCalendar = [ self eventEditViewControllerDefaultCalendarForNewEvents:nil];
+//    self.eventStore = [[EKEventStore alloc] init];
+//
+//    self.eventsList = [[NSMutableArray alloc] initWithArray:0];
+//
+//    self.psyTrackCalendar = [ self eventEditViewControllerDefaultCalendarForNewEvents:nil];
 }
 
 
@@ -1444,32 +1444,32 @@
             }
             break;
 
-            case 3:
-            {
-                if ([cell isKindOfClass:[ButtonCell class]])
-                {
-                    NSString *eventIdentifier = [cell.boundObject valueForKey:@"eventIdentifier"];
-
-                    NSString *buttonText;
-                    if (eventIdentifier.length)
-                    {
-                        buttonText = @"Edit This Calendar Event";
-                    }
-                    else
-                    {
-                        buttonText = @"Add Event to Calendar";
-                    }
-
-                    ButtonCell *buttonCell = (ButtonCell *)cell;
-                    UIButton *button = buttonCell.button;
-                    [button setTitle:buttonText forState:UIControlStateNormal];
-                    [button addTarget:self action:@selector(addEvent:) forControlEvents:UIControlEventTouchUpInside];
-
-                    [buttonCell setNeedsDisplay];
-                    [buttonCell setNeedsLayout];
-                    [buttonCell reloadInputViews];
-                }
-            }
+//            case 3:
+//            {
+//                if ([cell isKindOfClass:[ButtonCell class]])
+//                {
+//                    NSString *eventIdentifier = [cell.boundObject valueForKey:@"eventIdentifier"];
+//
+//                    NSString *buttonText;
+//                    if (eventIdentifier.length)
+//                    {
+//                        buttonText = @"Edit This Calendar Event";
+//                    }
+//                    else
+//                    {
+//                        buttonText = @"Add Event to Calendar";
+//                    }
+//
+//                    ButtonCell *buttonCell = (ButtonCell *)cell;
+//                    UIButton *button = buttonCell.button;
+//                    [button setTitle:buttonText forState:UIControlStateNormal];
+//                    [button addTarget:self action:@selector(addEvent:) forControlEvents:UIControlEventTouchUpInside];
+//
+//                    [buttonCell setNeedsDisplay];
+//                    [buttonCell setNeedsLayout];
+//                    [buttonCell reloadInputViews];
+//                }
+//            }
             break;
 
             default:
@@ -1564,10 +1564,11 @@
                             if (![button.titleLabel.text isEqualToString:@"Clear Times"])
                             {
                                 [button setTitle:@"Clear Times" forState:UIControlStateNormal];
+                                
                             }
 
                             button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-                            cell.backgroundColor = [UIColor clearColor];
+                            cell.backgroundColor = [UIColor whiteColor];
                         }
                     }
                     break;
@@ -1611,7 +1612,7 @@
                     UIButton *button = (UIButton *)[cell viewWithTag:300];
                     [button setTitle:@"Clear Times" forState:UIControlStateNormal];
                     button.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-                    cell.backgroundColor = [UIColor clearColor];
+                    cell.backgroundColor = [UIColor whiteColor];
                 }
             }
         }
@@ -2003,8 +2004,7 @@
 
                         if (selectedInterventionType.interventionType.length)
                         {
-                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                                      @"interventionType.interventionType like %@",[NSString stringWithString:(NSString *)selectedInterventionType.interventionType]];
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(interventionType == %@)",selectedInterventionType];
 
                             SCDataFetchOptions *dataFetchOptions = [SCDataFetchOptions optionsWithSortKey:@"interventionSubType" sortAscending:YES filterPredicate:predicate];
                             dataFetchOptions.sortKey = @"order";
@@ -2047,8 +2047,10 @@
 
                         if (selectedSupervisionType.supervisionType.length)
                         {
-                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                                      @"supervisionType.supervisionType like %@",[NSString stringWithString:(NSString *)selectedSupervisionType.supervisionType]];
+                            [selectedSupervisionType willAccessValueForKey:@"subTypes"];
+                            
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(supervisionType == %@)",selectedSupervisionType];
+                                
 
                             SCDataFetchOptions *dataFetchOptions = [SCDataFetchOptions optionsWithSortKey:@"subType" sortAscending:YES filterPredicate:predicate];
 
@@ -2744,8 +2746,7 @@ else if (tableViewModel.tag == 3 && tableViewModel.sectionCount && index == 1)
 
                         if (selectedInterventionType.interventionType.length)
                         {
-                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                                      @"interventionType.interventionType like %@",[NSString stringWithString:(NSString *)selectedInterventionType.interventionType]];
+                            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(interventionType == %@)",selectedInterventionType];
 
                             SCDataFetchOptions *dataFetchOptions = [SCDataFetchOptions optionsWithSortKey:@"interventionSubType" sortAscending:YES filterPredicate:predicate];
 
@@ -2776,8 +2777,7 @@ else if (tableViewModel.tag == 3 && tableViewModel.sectionCount && index == 1)
 
                         if (selectedSupervisionType.supervisionType.length)
                         {
-                            NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                                      @"supervisionType.supervisionType like %@",[NSString stringWithString:(NSString *)selectedSupervisionType.supervisionType]];
+                             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(supervisionType == %@)",selectedSupervisionType];
 
                             SCDataFetchOptions *dataFetchOptions = [SCDataFetchOptions optionsWithSortKey:@"subType" sortAscending:YES filterPredicate:predicate];
 
@@ -2945,417 +2945,417 @@ else if (tableViewModel.tag == 3 && tableViewModel.sectionCount && index == 1)
 // If event is nil, a new event is created and added to the specified event store. New events are
 // added to the default calendar. An exception is raised if set to an event that is not in the
 // specified event store.
-- (void) addEvent:(id)sender
-{
-    if ([SCUtilities systemVersion] < 6)
-    {
-        EKEvent *thisEvent;
-
-        if ([[sender class] isSubclassOfClass:[UIButton class]])
-        {
-            UIButton *button = (UIButton *)sender;
-            UIView *buttonView = (UIView *)button.superview;
-
-            if ([buttonView.superview isKindOfClass:[ButtonCell class]])
-            {
-                ButtonCell *buttonCell = (ButtonCell *)buttonView.superview;
-
-                NSManagedObject *buttonManagedObject = (NSManagedObject *)buttonCell.boundObject;
-                NSString *eventIdentifier = (NSString *)[buttonManagedObject valueForKey:@"eventIdentifier"];
-
-                if (eventIdentifier.length && [self.eventStore eventWithIdentifier:eventIdentifier])
-                {
-                    if (!eventViewController)
-                    {
-                        thisEvent = (EKEvent *)[self.eventStore eventWithIdentifier:eventIdentifier];
-
-                        self.eventViewController = [[EKEventEditViewController alloc]initWithNibName:nil bundle:nil];
-                        [eventViewController setEvent:thisEvent];
-
-                        //
-                    }
-
-                    [currentDetailTableViewModel.viewController.navigationController presentViewController:eventViewController animated:YES completion:nil];
-                    eventViewController.editViewDelegate = self;
-                }
-                else
-                {
-                    // When add button is pushed, create an EKEventEditViewController to display the event.
-                    EKEventEditViewController *addController = [[EKEventEditViewController alloc] initWithNibName:@"MyEKEventEditViewController" bundle:nil];
-                    //                UIView *addControllerView=(UIView *) addController.view;
-
-                    //
-                    // set the addController's event store to the current event store.
-                    addController.eventStore = self.eventStore;
-                    thisEvent = (EKEvent *)addController.event;
-
-                    if (!self.psyTrackCalendar)
-                    {
-                        [thisEvent setCalendar:[self eventEditViewControllerDefaultCalendarForNewEvents:addController]];
-                    }
-                    else
-                    {
-                        [thisEvent setCalendar:self.psyTrackCalendar];
-                    }
-
-                    [buttonCell commitDetailModelChanges:currentDetailTableViewModel];
-
-                    [currentDetailTableViewModel.modeledTableView reloadData];
-
-                    NSManagedObject *buttonCellManagedObject = (NSManagedObject *)buttonCell.boundObject;
-
-                    TimeEntity *timeEntity = (TimeEntity *)[buttonCellManagedObject valueForKey:@"time"];
-
-                    NSDate *testDate = (NSDate *)[buttonCellManagedObject valueForKey:@"dateOfService"];
-
-                    NSDate *calanderStartTime = (NSDate *)[timeEntity valueForKey:@"startTime"];
-
-                    NSDate *calanderEndTime = (NSDate *)[timeEntity valueForKey:@"endTime"];
-
-                    NSDateFormatter *dateFormatterTime = [[NSDateFormatter alloc]init];
-
-                    [dateFormatterTime setTimeZone:[NSTimeZone defaultTimeZone]];
-
-                    NSDateFormatter *dateFormatterDate = [[NSDateFormatter alloc]init];
-
-                    [dateFormatterDate setTimeZone:[NSTimeZone defaultTimeZone]];
-
-                    [dateFormatterDate setDateFormat:@"MM/d/yyyy"];
-
-                    [dateFormatterTime setDateFormat:@"H:m"];
-
-                    NSDateFormatter *dateFormatterCombined = [[NSDateFormatter alloc]init];
-
-                    [dateFormatterCombined setTimeZone:[NSTimeZone defaultTimeZone]];
-
-                    [dateFormatterCombined setDateFormat:@"H:m MM/d/yyyy"];
-
-                    if (calanderStartTime && testDate)
-                    {
-                        NSString *startDateString = [NSString stringWithFormat:@"%@ %@",[dateFormatterTime stringFromDate:startTime],[dateFormatterDate stringFromDate:testDate]];
-
-                        startTime = [dateFormatterCombined dateFromString:startDateString];
-                    }
-
-                    if (calanderEndTime && testDate)
-                    {
-                        NSString *endDateString = [NSString stringWithFormat:@"%@ %@",[dateFormatterTime stringFromDate:endTime],[dateFormatterDate stringFromDate:testDate]];
-
-                        endTime = [dateFormatterCombined dateFromString:endDateString];
-                    }
-
-                    if (calanderStartTime && calanderEndTime)
-                    {
-                        thisEvent.startDate = calanderStartTime;
-                        thisEvent.endDate = calanderEndTime;
-                    }
-                    else
-                    {
-                        thisEvent.startDate = [NSDate date];
-                        thisEvent.endDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60];
-                    }
-
-                    switch (currentControllerSetup)
-                    {
-                        case kTrackAssessmentSetup:
-                            eventTitleString = @"Test Administration:";
-                            break;
-                        case kTrackInterventionSetup:
-                            eventTitleString = @"Intervention:";
-                            break;
-                        case kTrackSupportSetup:
-                            eventTitleString = @"Indirect Support:";
-                            break;
-                        case kTrackSupervisionGivenSetup:
-                            eventTitleString = @"Supervision Given to";
-                            break;
-                        case kTrackSupervisionReceivedSetup:
-                            eventTitleString = @"Supervision from";
-                            break;
-
-                        default:
-                            break;
-                    } /* switch */
-
-                    if (currentControllerSetup == kTrackAssessmentSetup || currentControllerSetup == kTrackInterventionSetup || currentControllerSetup == kTrackSupportSetup)
-                    {
-                        NSMutableSet *clientSet = [buttonCellManagedObject mutableSetValueForKeyPath:@"clientPresentations.client.clientIDCode"];
-                        for (NSString *idCode in clientSet)
-                        {
-                            eventTitleString = [eventTitleString stringByAppendingFormat:@" %@,",idCode];
-                        }
-
-                        eventTitleString = [eventTitleString substringToIndex:[eventTitleString length] - 1];
-                    }
-                    else
-                    {
-                        SCTableViewModel *tableModel = buttonCell.ownerTableViewModel;
-
-                        switch (currentControllerSetup)
-                        {
-                            case kTrackSupervisionReceivedSetup:
-                            {
-                                SCTableViewSection *section = [tableModel sectionAtIndex:1];
-
-                                if ([section isKindOfClass:[SCObjectSection class]])
-                                {
-                                    SCObjectSection *objectSection = (SCObjectSection *)section;
-
-                                    [objectSection commitCellChanges];
-                                }
-
-                                ClinicianEntity *supervisor = (ClinicianEntity *)[buttonCellManagedObject valueForKey:@"supervisor"];
-
-                                if (supervisor)
-                                {
-                                    eventTitleString = [eventTitleString stringByAppendingFormat:@" %@",supervisor.combinedName];
-                                }
-                            }
-                            break;
-                            case kTrackSupervisionGivenSetup:
-                            {
-                                SCTableViewSection *section = [tableModel sectionAtIndex:2];
-
-                                if ([section isKindOfClass:[SCObjectSection class]])
-                                {
-                                    SCObjectSection *objectSection = (SCObjectSection *)section;
-
-                                    [objectSection commitCellChanges];
-                                }
-
-                                NSMutableSet *studentsSet = [buttonCellManagedObject mutableSetValueForKey:@"studentsPresent"];
-                                NSString *superviseesString = [NSString string];
-                                if ([studentsSet count])
-                                {
-                                    for (id obj in studentsSet)
-                                    {
-                                        if ([obj isKindOfClass:[ClinicianEntity class]])
-                                        {
-                                            ClinicianEntity *student = (ClinicianEntity *)obj;
-
-                                            superviseesString = [superviseesString stringByAppendingFormat:@" %@,",student.combinedName];
-                                        }
-                                    }
-
-                                    superviseesString = [superviseesString substringToIndex:[superviseesString length] - 1];
-                                    if ( [superviseesString length] > 1)
-                                    {
-                                        if (eventTitleString.length)
-                                        {
-                                            eventTitleString = [eventTitleString stringByAppendingFormat:@":%@ ",superviseesString];
-                                        }
-
-                                        thisEvent.notes = [NSString stringWithFormat:@"Supervision given to: %@", superviseesString];
-                                    }
-                                }
-                            }
-                            break;
-                            default:
-                                break;
-                        } /* switch */
-
-                        dateFormatterCombined = nil;
-                        dateFormatterDate = nil;
-                        dateFormatterTime = nil;
-                    }
-
-                    if ( [eventTitleString length] > 0)
-                    {
-                        thisEvent.title = (NSString *)eventTitleString;
-                    }
-
-                    UIViewController *currentTableModelViewController = (UIViewController *)currentDetailTableViewModel.viewController;
-
-                    addController.editViewDelegate = self;
-                    addController.view.tag = 837;
-//                addController.modalViewController.navigationController.delegate=self;
-                    //                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-                    //
-                    //                UITabBarController *tabBarController=[appDelegate tabBarController];
-
-//                currentTableModelViewController.navigationController.delegate=self;
-
-                    [currentTableModelViewController.navigationController presentViewController:addController animated:YES completion:nil];
-                }
-            }
-        }
-    }
-}
-
+//- (void) addEvent:(id)sender
+//{
+//    if ([SCUtilities systemVersion] < 6)
+//    {
+//        EKEvent *thisEvent;
+//
+//        if ([[sender class] isSubclassOfClass:[UIButton class]])
+//        {
+//            UIButton *button = (UIButton *)sender;
+//            UIView *buttonView = (UIView *)button.superview;
+//
+//            if ([buttonView.superview isKindOfClass:[ButtonCell class]])
+//            {
+//                ButtonCell *buttonCell = (ButtonCell *)buttonView.superview;
+//
+//                NSManagedObject *buttonManagedObject = (NSManagedObject *)buttonCell.boundObject;
+//                NSString *eventIdentifier = (NSString *)[buttonManagedObject valueForKey:@"eventIdentifier"];
+//
+//                if (eventIdentifier.length && [self.eventStore eventWithIdentifier:eventIdentifier])
+//                {
+//                    if (!eventViewController)
+//                    {
+//                        thisEvent = (EKEvent *)[self.eventStore eventWithIdentifier:eventIdentifier];
+//
+//                        self.eventViewController = [[EKEventEditViewController alloc]initWithNibName:nil bundle:nil];
+//                        [eventViewController setEvent:thisEvent];
+//
+//                        //
+//                    }
+//
+//                    [currentDetailTableViewModel.viewController.navigationController presentViewController:eventViewController animated:YES completion:nil];
+//                    eventViewController.editViewDelegate = self;
+//                }
+//                else
+//                {
+//                    // When add button is pushed, create an EKEventEditViewController to display the event.
+//                    EKEventEditViewController *addController = [[EKEventEditViewController alloc] initWithNibName:@"MyEKEventEditViewController" bundle:nil];
+//                    //                UIView *addControllerView=(UIView *) addController.view;
+//
+//                    //
+//                    // set the addController's event store to the current event store.
+//                    addController.eventStore = self.eventStore;
+//                    thisEvent = (EKEvent *)addController.event;
+//
+//                    if (!self.psyTrackCalendar)
+//                    {
+//                        [thisEvent setCalendar:[self eventEditViewControllerDefaultCalendarForNewEvents:addController]];
+//                    }
+//                    else
+//                    {
+//                        [thisEvent setCalendar:self.psyTrackCalendar];
+//                    }
+//
+//                    [buttonCell commitDetailModelChanges:currentDetailTableViewModel];
+//
+//                    [currentDetailTableViewModel.modeledTableView reloadData];
+//
+//                    NSManagedObject *buttonCellManagedObject = (NSManagedObject *)buttonCell.boundObject;
+//
+//                    TimeEntity *timeEntity = (TimeEntity *)[buttonCellManagedObject valueForKey:@"time"];
+//
+//                    NSDate *testDate = (NSDate *)[buttonCellManagedObject valueForKey:@"dateOfService"];
+//
+//                    NSDate *calanderStartTime = (NSDate *)[timeEntity valueForKey:@"startTime"];
+//
+//                    NSDate *calanderEndTime = (NSDate *)[timeEntity valueForKey:@"endTime"];
+//
+//                    NSDateFormatter *dateFormatterTime = [[NSDateFormatter alloc]init];
+//
+//                    [dateFormatterTime setTimeZone:[NSTimeZone defaultTimeZone]];
+//
+//                    NSDateFormatter *dateFormatterDate = [[NSDateFormatter alloc]init];
+//
+//                    [dateFormatterDate setTimeZone:[NSTimeZone defaultTimeZone]];
+//
+//                    [dateFormatterDate setDateFormat:@"MM/d/yyyy"];
+//
+//                    [dateFormatterTime setDateFormat:@"H:m"];
+//
+//                    NSDateFormatter *dateFormatterCombined = [[NSDateFormatter alloc]init];
+//
+//                    [dateFormatterCombined setTimeZone:[NSTimeZone defaultTimeZone]];
+//
+//                    [dateFormatterCombined setDateFormat:@"H:m MM/d/yyyy"];
+//
+//                    if (calanderStartTime && testDate)
+//                    {
+//                        NSString *startDateString = [NSString stringWithFormat:@"%@ %@",[dateFormatterTime stringFromDate:startTime],[dateFormatterDate stringFromDate:testDate]];
+//
+//                        startTime = [dateFormatterCombined dateFromString:startDateString];
+//                    }
+//
+//                    if (calanderEndTime && testDate)
+//                    {
+//                        NSString *endDateString = [NSString stringWithFormat:@"%@ %@",[dateFormatterTime stringFromDate:endTime],[dateFormatterDate stringFromDate:testDate]];
+//
+//                        endTime = [dateFormatterCombined dateFromString:endDateString];
+//                    }
+//
+//                    if (calanderStartTime && calanderEndTime)
+//                    {
+//                        thisEvent.startDate = calanderStartTime;
+//                        thisEvent.endDate = calanderEndTime;
+//                    }
+//                    else
+//                    {
+//                        thisEvent.startDate = [NSDate date];
+//                        thisEvent.endDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60];
+//                    }
+//
+//                    switch (currentControllerSetup)
+//                    {
+//                        case kTrackAssessmentSetup:
+//                            eventTitleString = @"Test Administration:";
+//                            break;
+//                        case kTrackInterventionSetup:
+//                            eventTitleString = @"Intervention:";
+//                            break;
+//                        case kTrackSupportSetup:
+//                            eventTitleString = @"Indirect Support:";
+//                            break;
+//                        case kTrackSupervisionGivenSetup:
+//                            eventTitleString = @"Supervision Given to";
+//                            break;
+//                        case kTrackSupervisionReceivedSetup:
+//                            eventTitleString = @"Supervision from";
+//                            break;
+//
+//                        default:
+//                            break;
+//                    } /* switch */
+//
+//                    if (currentControllerSetup == kTrackAssessmentSetup || currentControllerSetup == kTrackInterventionSetup || currentControllerSetup == kTrackSupportSetup)
+//                    {
+//                        NSMutableSet *clientSet = [buttonCellManagedObject mutableSetValueForKeyPath:@"clientPresentations.client.clientIDCode"];
+//                        for (NSString *idCode in clientSet)
+//                        {
+//                            eventTitleString = [eventTitleString stringByAppendingFormat:@" %@,",idCode];
+//                        }
+//
+//                        eventTitleString = [eventTitleString substringToIndex:[eventTitleString length] - 1];
+//                    }
+//                    else
+//                    {
+//                        SCTableViewModel *tableModel = buttonCell.ownerTableViewModel;
+//
+//                        switch (currentControllerSetup)
+//                        {
+//                            case kTrackSupervisionReceivedSetup:
+//                            {
+//                                SCTableViewSection *section = [tableModel sectionAtIndex:1];
+//
+//                                if ([section isKindOfClass:[SCObjectSection class]])
+//                                {
+//                                    SCObjectSection *objectSection = (SCObjectSection *)section;
+//
+//                                    [objectSection commitCellChanges];
+//                                }
+//
+//                                ClinicianEntity *supervisor = (ClinicianEntity *)[buttonCellManagedObject valueForKey:@"supervisor"];
+//
+//                                if (supervisor)
+//                                {
+//                                    eventTitleString = [eventTitleString stringByAppendingFormat:@" %@",supervisor.combinedName];
+//                                }
+//                            }
+//                            break;
+//                            case kTrackSupervisionGivenSetup:
+//                            {
+//                                SCTableViewSection *section = [tableModel sectionAtIndex:2];
+//
+//                                if ([section isKindOfClass:[SCObjectSection class]])
+//                                {
+//                                    SCObjectSection *objectSection = (SCObjectSection *)section;
+//
+//                                    [objectSection commitCellChanges];
+//                                }
+//
+//                                NSMutableSet *studentsSet = [buttonCellManagedObject mutableSetValueForKey:@"studentsPresent"];
+//                                NSString *superviseesString = [NSString string];
+//                                if ([studentsSet count])
+//                                {
+//                                    for (id obj in studentsSet)
+//                                    {
+//                                        if ([obj isKindOfClass:[ClinicianEntity class]])
+//                                        {
+//                                            ClinicianEntity *student = (ClinicianEntity *)obj;
+//
+//                                            superviseesString = [superviseesString stringByAppendingFormat:@" %@,",student.combinedName];
+//                                        }
+//                                    }
+//
+//                                    superviseesString = [superviseesString substringToIndex:[superviseesString length] - 1];
+//                                    if ( [superviseesString length] > 1)
+//                                    {
+//                                        if (eventTitleString.length)
+//                                        {
+//                                            eventTitleString = [eventTitleString stringByAppendingFormat:@":%@ ",superviseesString];
+//                                        }
+//
+//                                        thisEvent.notes = [NSString stringWithFormat:@"Supervision given to: %@", superviseesString];
+//                                    }
+//                                }
+//                            }
+//                            break;
+//                            default:
+//                                break;
+//                        } /* switch */
+//
+//                        dateFormatterCombined = nil;
+//                        dateFormatterDate = nil;
+//                        dateFormatterTime = nil;
+//                    }
+//
+//                    if ( [eventTitleString length] > 0)
+//                    {
+//                        thisEvent.title = (NSString *)eventTitleString;
+//                    }
+//
+//                    UIViewController *currentTableModelViewController = (UIViewController *)currentDetailTableViewModel.viewController;
+//
+//                    addController.editViewDelegate = self;
+//                    addController.view.tag = 837;
+////                addController.modalViewController.navigationController.delegate=self;
+//                    //                PTTAppDelegate *appDelegate=(PTTAppDelegate *)[UIApplication sharedApplication].delegate;
+//                    //
+//                    //                UITabBarController *tabBarController=[appDelegate tabBarController];
+//
+////                currentTableModelViewController.navigationController.delegate=self;
+//
+//                    [currentTableModelViewController.navigationController presentViewController:addController animated:YES completion:nil];
+//                }
+//            }
+//        }
+//    }
+//}
+//
 
 #pragma mark -
 #pragma mark EKEventEditViewDelegate
 
-// Overriding EKEventEditViewDelegate method to update event store according to user actions.
-- (void) eventEditViewController:(EKEventEditViewController *)controller
-           didCompleteWithAction:(EKEventEditViewAction)action
-{
-    NSError *error = nil;
-    EKEvent *thisEvent = controller.event;
-    SCTableViewSection *section = (SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
-    SCTableViewCell *cell = (SCTableViewCell *)[section cellAtIndex:3];
-
-    switch (action)
-    {
-        case EKEventEditViewActionCanceled:
-            // Edit action canceled, do nothing.
-        {
-        }
-        break;
-
-        case EKEventEditViewActionSaved:
-        {
-            // When user hit "Done" button, save the newly created event to the event store,
-            // and reload table view.
-            // If the new event is being added to the default calendar, then update its
-            // eventsList.
-
-            if (self.psyTrackCalendar == thisEvent.calendar)
-            {
-                [self.eventsList addObject:thisEvent];
-            }
-
-            [controller.eventStore saveEvent:controller.event span:EKSpanThisEvent error:&error];
-
-            [cell.boundObject setValue:[controller.event eventIdentifier] forKey:@"eventIdentifier"];
-
-            [cell commitChanges];
-            [cell reloadBoundValue];
-
-            if ([cell isKindOfClass:[ButtonCell class]])
-            {
-                ButtonCell *buttonCell = (ButtonCell *)cell;
-                UIButton *button = (UIButton *)buttonCell.button;
-
-                [button setTitle:@"Edit Calendar Event" forState:UIControlStateNormal];
-            }
-        }
-
-        break;
-
-        case EKEventEditViewActionDeleted:
-            // When deleting an event, remove the event from the event store,
-            // and reload table view.
-            // If deleting an event from the currenly default calendar, then update its
-            // eventsList.
-
-            if (self.psyTrackCalendar == thisEvent.calendar)
-            {
-                [self.eventsList removeObject:thisEvent];
-            }
-
-            [controller.eventStore removeEvent:thisEvent span:EKSpanThisEvent error:&error];
-            [cell.boundObject setNilValueForKey:@"eventIdentifier"];
-
-            [cell commitChanges];
-            [cell reloadBoundValue];
-            if ([cell isKindOfClass:[ButtonCell class]])
-            {
-                ButtonCell *buttonCell = (ButtonCell *)cell;
-                UIButton *button = (UIButton *)buttonCell.button;
-
-                [button setTitle:@"Add Event To Calendar" forState:UIControlStateNormal];
-            }
-
-            break;
-
-        default:
-            break;
-    } /* switch */
-
-    [controller dismissViewControllerAnimated:YES completion:nil];
-}
-
-
-// Set the calendar edited by EKEventEditViewController to our chosen calendar - the default calendar.
-- (EKCalendar *) eventEditViewControllerDefaultCalendarForNewEvents:(EKEventEditViewController *)controller
-{
-    if ([SCUtilities systemVersion] < 6)
-    {
-        // Get the default calendar from store.
-        //    settingsDictionary=(NSDictionary *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate settingsPlistDictionary];
-        NSString *defaultCalendarIdentifier = [[NSUserDefaults standardUserDefaults] valueForKey:@"defaultCalendarIdentifier"];
-
-        EKSource *mySource = nil;
-
-        for (EKSource *source in eventStore.sources)
-        {
-            if ([source.title isEqualToString:@"iCloud"])
-            {
-                mySource = source;
-                //
-
-                break;
-            }
-        }
-
-        if (!mySource)
-        {
-            for (EKSource *source in eventStore.sources)
-            {
-                if (source.sourceType == EKSourceTypeLocal)
-                {
-                    mySource = source;
-
-                    break;
-                }
-            }
-        }
-
-        if (mySource)
-        {
-            NSString *defaultCalendarName = [[NSUserDefaults standardUserDefaults] valueForKey:@"calendar_name"];
-            //        NSSet *calendars=(NSSet *)[localSource calendars];
-            if (defaultCalendarIdentifier.length)
-            {
-                self.psyTrackCalendar = [self.eventStore calendarWithIdentifier:defaultCalendarIdentifier];
-                mySource = psyTrackCalendar.source;
-            }
-            else
-            {
-                if ([SCUtilities systemVersion]<7) {
-                    self.psyTrackCalendar = [EKCalendar calendarWithEventStore:self.eventStore];
-                    
-                    [[NSUserDefaults standardUserDefaults] setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                }
-              
-            }
-
-            if (defaultCalendarName.length)
-            {
-                self.psyTrackCalendar.title = defaultCalendarName;
-            }
-            else
-            {
-                self.psyTrackCalendar.title = @"Client Appointments";
-            }
-
-            self.psyTrackCalendar.source = mySource;
-        }
-
-        NSError *error;
-
-        if (![self.eventStore saveCalendar:self.psyTrackCalendar commit:YES error:&error ])
-        {
-        }
-        else
-        {
-            [[NSUserDefaults standardUserDefaults]setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
-        }
-
-        if (self.psyTrackCalendar)
-        {
-        }
-
-        EKCalendar *calendarForEdit = self.psyTrackCalendar;
-        return calendarForEdit;
-    }
-    else
-    {
-        return nil;
-    }
-}
+//// Overriding EKEventEditViewDelegate method to update event store according to user actions.
+//- (void) eventEditViewController:(EKEventEditViewController *)controller
+//           didCompleteWithAction:(EKEventEditViewAction)action
+//{
+//    NSError *error = nil;
+//    EKEvent *thisEvent = controller.event;
+//    SCTableViewSection *section = (SCTableViewSection *)[currentDetailTableViewModel sectionAtIndex:0];
+//    SCTableViewCell *cell = (SCTableViewCell *)[section cellAtIndex:3];
+//
+//    switch (action)
+//    {
+//        case EKEventEditViewActionCanceled:
+//            // Edit action canceled, do nothing.
+//        {
+//        }
+//        break;
+//
+//        case EKEventEditViewActionSaved:
+//        {
+//            // When user hit "Done" button, save the newly created event to the event store,
+//            // and reload table view.
+//            // If the new event is being added to the default calendar, then update its
+//            // eventsList.
+//
+//            if (self.psyTrackCalendar == thisEvent.calendar)
+//            {
+//                [self.eventsList addObject:thisEvent];
+//            }
+//
+//            [controller.eventStore saveEvent:controller.event span:EKSpanThisEvent error:&error];
+//
+//            [cell.boundObject setValue:[controller.event eventIdentifier] forKey:@"eventIdentifier"];
+//
+//            [cell commitChanges];
+//            [cell reloadBoundValue];
+//
+//            if ([cell isKindOfClass:[ButtonCell class]])
+//            {
+//                ButtonCell *buttonCell = (ButtonCell *)cell;
+//                UIButton *button = (UIButton *)buttonCell.button;
+//
+//                [button setTitle:@"Edit Calendar Event" forState:UIControlStateNormal];
+//            }
+//        }
+//
+//        break;
+//
+//        case EKEventEditViewActionDeleted:
+//            // When deleting an event, remove the event from the event store,
+//            // and reload table view.
+//            // If deleting an event from the currenly default calendar, then update its
+//            // eventsList.
+//
+//            if (self.psyTrackCalendar == thisEvent.calendar)
+//            {
+//                [self.eventsList removeObject:thisEvent];
+//            }
+//
+//            [controller.eventStore removeEvent:thisEvent span:EKSpanThisEvent error:&error];
+//            [cell.boundObject setNilValueForKey:@"eventIdentifier"];
+//
+//            [cell commitChanges];
+//            [cell reloadBoundValue];
+//            if ([cell isKindOfClass:[ButtonCell class]])
+//            {
+//                ButtonCell *buttonCell = (ButtonCell *)cell;
+//                UIButton *button = (UIButton *)buttonCell.button;
+//
+//                [button setTitle:@"Add Event To Calendar" forState:UIControlStateNormal];
+//            }
+//
+//            break;
+//
+//        default:
+//            break;
+//    } /* switch */
+//
+//    [controller dismissViewControllerAnimated:YES completion:nil];
+//}
+//
+//
+//// Set the calendar edited by EKEventEditViewController to our chosen calendar - the default calendar.
+//- (EKCalendar *) eventEditViewControllerDefaultCalendarForNewEvents:(EKEventEditViewController *)controller
+//{
+//    if ([SCUtilities systemVersion] < 6)
+//    {
+//        // Get the default calendar from store.
+//        //    settingsDictionary=(NSDictionary *)[(PTTAppDelegate *)[UIApplication sharedApplication].delegate settingsPlistDictionary];
+//        NSString *defaultCalendarIdentifier = [[NSUserDefaults standardUserDefaults] valueForKey:@"defaultCalendarIdentifier"];
+//
+//        EKSource *mySource = nil;
+//
+//        for (EKSource *source in eventStore.sources)
+//        {
+//            if ([source.title isEqualToString:@"iCloud"])
+//            {
+//                mySource = source;
+//                //
+//
+//                break;
+//            }
+//        }
+//
+//        if (!mySource)
+//        {
+//            for (EKSource *source in eventStore.sources)
+//            {
+//                if (source.sourceType == EKSourceTypeLocal)
+//                {
+//                    mySource = source;
+//
+//                    break;
+//                }
+//            }
+//        }
+//
+//        if (mySource)
+//        {
+//            NSString *defaultCalendarName = [[NSUserDefaults standardUserDefaults] valueForKey:@"calendar_name"];
+//            //        NSSet *calendars=(NSSet *)[localSource calendars];
+//            if (defaultCalendarIdentifier.length)
+//            {
+//                self.psyTrackCalendar = [self.eventStore calendarWithIdentifier:defaultCalendarIdentifier];
+//                mySource = psyTrackCalendar.source;
+//            }
+//            else
+//            {
+//                if ([SCUtilities systemVersion]<7) {
+//                    self.psyTrackCalendar = [EKCalendar calendarWithEventStore:self.eventStore];
+//                    
+//                    [[NSUserDefaults standardUserDefaults] setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
+//                    [[NSUserDefaults standardUserDefaults] synchronize];
+//                }
+//              
+//            }
+//
+//            if (defaultCalendarName.length)
+//            {
+//                self.psyTrackCalendar.title = defaultCalendarName;
+//            }
+//            else
+//            {
+//                self.psyTrackCalendar.title = @"Client Appointments";
+//            }
+//
+//            self.psyTrackCalendar.source = mySource;
+//        }
+//
+//        NSError *error;
+//
+//        if (![self.eventStore saveCalendar:self.psyTrackCalendar commit:YES error:&error ])
+//        {
+//        }
+//        else
+//        {
+//            [[NSUserDefaults standardUserDefaults]setValue:psyTrackCalendar.calendarIdentifier forKey:@"defaultCalendarIdentifier"];
+//        }
+//
+//        if (self.psyTrackCalendar)
+//        {
+//        }
+//
+//        EKCalendar *calendarForEdit = self.psyTrackCalendar;
+//        return calendarForEdit;
+//    }
+//    else
+//    {
+//        return nil;
+//    }
+//}
 
 
 #pragma mark -

@@ -1,7 +1,7 @@
 /*
  *  PTTAppDelegate.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.3
+ *  Version: 1.5.4
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -2432,7 +2432,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 
 - (void) saveContext
 {
-    PTManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
     if (managedObjectContext != nil && persistentStoreCoordinator__ != nil)
     {
         if ( managedObjectContext.hasChanges )
@@ -2479,35 +2479,35 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 }
 
 
-- (void) repairForSaveError:(NSError *)error
-{
-    [managedObjectContext__ processPendingChanges];
-    [managedObjectContext__.undoManager disableUndoRegistration];
-
-    if ( error.code != NSValidationMultipleErrorsError )
-    {
-        NSObject *object = [error.userInfo objectForKey:@"NSValidationErrorObject"];
-
-        if ([object.class isSubclassOfClass:[PTManagedObject class]])
-        {
-            PTManagedObject *ptManagedObject = (PTManagedObject *)object;
-            [ptManagedObject repairForError:error];
-        }
-    }
-    else
-    {
-        NSArray *detailedErrors = [[error userInfo] objectForKey:NSDetailedErrorsKey];
-        for ( NSError *error in detailedErrors )
-        {
-            NSDictionary *detailedInfo = error.userInfo;
-            id object = [detailedInfo objectForKey:@"NSValidationErrorObject"];
-            [object repairForError:error];
-        }
-    }
-
-    [managedObjectContext__ processPendingChanges];
-    [managedObjectContext__.undoManager enableUndoRegistration];
-}
+//- (void) repairForSaveError:(NSError *)error
+//{
+//    [managedObjectContext__ processPendingChanges];
+//    [managedObjectContext__.undoManager disableUndoRegistration];
+//
+//    if ( error.code != NSValidationMultipleErrorsError )
+//    {
+//        NSObject *object = [error.userInfo objectForKey:@"NSValidationErrorObject"];
+//
+//        if ([object.class isSubclassOfClass:[PTManagedObject class]])
+//        {
+//            PTManagedObject *ptManagedObject = (PTManagedObject *)object;
+//            [ptManagedObject repairForError:error];
+//        }
+//    }
+//    else
+//    {
+//        NSArray *detailedErrors = [[error userInfo] objectForKey:NSDetailedErrorsKey];
+//        for ( NSError *error in detailedErrors )
+//        {
+//            NSDictionary *detailedInfo = error.userInfo;
+//            id object = [detailedInfo objectForKey:@"NSValidationErrorObject"];
+//            [object repairForError:error];
+//        }
+//    }
+//
+//    [managedObjectContext__ processPendingChanges];
+//    [managedObjectContext__.undoManager enableUndoRegistration];
+//}
 
 
 - (void) saveDrugsContext
@@ -3238,7 +3238,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
    Returns the managed object context for the application.
    If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
  */
-- (PTManagedObjectContext *) managedObjectContext
+- (NSManagedObjectContext *) managedObjectContext
 {
     if (managedObjectContext__ != nil)
     {
@@ -3252,7 +3252,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
         // Make life easier by adopting the new NSManagedObjectContext concurrency API
         // the NSMainQueueConcurrencyType is good for interacting with views and controllers since
         // they are all bound to the main thread anyway
-        PTManagedObjectContext *moc = [[PTManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
 
         [moc performBlockAndWait: ^{
              // even the post initialization needs to be done within the Block
@@ -3365,13 +3365,15 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 
     // do this asynchronously since if this is the first time this particular device is syncing with preexisting
     // iCloud content it may take a long long time to download
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(globalQueue, ^{
                        NSFileManager *fileManager = [NSFileManager defaultManager];
 //
 //
                        // If the expected store doesn't exist, copy the default store.
-
-                       if (![fileManager fileExistsAtPath:storePath])
+                NSNumber *prepopulatedNum = (NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTHasPrepopulated];
+        
+                if (![prepopulatedNum boolValue])
                        {
                            
                               
@@ -3523,7 +3525,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                            
                            
                            
-                           NSNumber *prepopulatedNum = (NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTHasPrepopulated];
+                          
                            PrepopulateAndRemoveDuplicates *prepopulate=[[PrepopulateAndRemoveDuplicates alloc]init];
                                                      
                            if (![prepopulatedNum boolValue]) {

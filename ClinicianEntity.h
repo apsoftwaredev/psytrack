@@ -1,7 +1,7 @@
 //
 //  ClinicianEntity.h
 //  PsyTrack Clinician Tools
-//  Version: 1.5.3
+//  Version: 1.5.4
 //
 //  Created by Daniel Boice on 1/1/13.
 //  Copyright (c) 2013 PsycheWeb LLC. All rights reserved.
@@ -9,12 +9,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "PTManagedObjectContext.h"
-#import "PTManagedObject.h"
 
 @class AwardEntity, CertificationEntity, ClinicianGroupEntity, ClinicianTypeEntity, DegreeEntity, DemographicProfileEntity, DiagnosisHistoryEntity, EmploymentEntity, ExistingHoursEntity, ExistingSupervisionGivenEntity, GrantEntity, JobTitleEntity, LicenseEntity, LogEntity, MedicationReviewEntity, MembershipEntity, PublicationEntity, ReferralEntity, SiteEntity, SpecialtyEntity, SupervisionParentEntity, TeachingExperienceEntity, TimeTrackEntity, TrainingProgramEntity;
 
-@interface ClinicianEntity : PTManagedObject
+@interface ClinicianEntity : NSManagedObject
 
 @property (nonatomic, retain) NSString *lastName;
 @property (nonatomic, retain) NSNumber *aBRecordIdentifier;

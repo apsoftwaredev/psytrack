@@ -1,7 +1,7 @@
 /*
  *  ClinicianRootViewController_iPad.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.3
+ *  Version: 1.5.4
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -231,18 +231,15 @@
                 if ([cell isKindOfClass:[AddViewABLinkButtonCell class]])
                 {
                     AddViewABLinkButtonCell *addViewButtonCell = (AddViewABLinkButtonCell *)cell;
-
+                    
                     int addressBookRecordIdentifier = (int)[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"] intValue];
-
-                    ABAddressBookRef addressBook = ABAddressBookCreate();
-                    if (addressBookRecordIdentifier != -1 && ![self checkIfRecordIDInAddressBook:addressBookRecordIdentifier addressBook:(ABAddressBookRef)addressBook])
+                    
+                    if (addressBookRecordIdentifier != -1 && ![self checkIfRecordIDInAddressBook:addressBookRecordIdentifier])
                     {
                         addressBookRecordIdentifier = -1;
                         [cell.boundObject setValue:[NSNumber numberWithInt:-1 ] forKey:@"aBRecordIdentifier"];
                     }
-
-                    CFRelease(addressBook);
-
+                    
                     if (addressBookRecordIdentifier != -1)
                     {
                         [addViewButtonCell toggleButtonsWithButtonOneHidden:YES];
@@ -443,34 +440,32 @@ self.tableViewModel.detailViewController.navigationItem.rightBarButtonItem = obj
 }
 
 
-- (BOOL) checkIfRecordIDInAddressBook:(int)recordID addressBook:(ABAddressBookRef)addressBook
+- (BOOL) checkIfRecordIDInAddressBook:(int)recordID
 {
-    addressBook = nil;
-    if (!addressBook)
+    bool exists = NO;
+    ABAddressBookRef addressBookCheck = NULL;
+    
+    // Do any additional setup after loading the view
+    CFErrorRef myError = NULL;
+    addressBookCheck = ABAddressBookCreateWithOptions(NULL, &myError);
+    ABAuthorizationStatus authorizationStatus = (ABAuthorizationStatus)ABAddressBookGetAuthorizationStatus();
+    
+    if (authorizationStatus == kABAuthorizationStatusAuthorized && recordID > -1 && addressBookCheck)
     {
-        addressBook = ABAddressBookCreate();
-    }
-
-    BOOL exists = NO;
-    if (addressBook)
-    {
-        ABRecordRef person = nil;
-
-        if (recordID > 0)
+        ABRecordRef person = (ABRecordRef)ABAddressBookGetPersonWithRecordID(addressBookCheck, recordID);
+        
+        if (person)
         {
-            person = (ABRecordRef)ABAddressBookGetPersonWithRecordID(addressBook, recordID);
-            if (person)
-            {
-                exists = YES;
-            }
+            exists = YES;
         }
     }
-
-    if (addressBook)
+    
+    
+    if (addressBookCheck)
     {
-        CFRelease(addressBook);
+        CFRelease(addressBookCheck);
     }
-
+    
     return exists;
 }
 

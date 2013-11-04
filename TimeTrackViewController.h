@@ -1,7 +1,7 @@
 //
 //  TimeTrackViewController.h
 //  PsyTrack Clinician Tools
-//  Version: 1.5.3
+//  Version: 1.5.4
 //
 //  Created by Daniel Boice on 4/5/12.
 //  Copyright (c) 2012 PsycheWeb LLC. All rights reserved.
@@ -14,7 +14,7 @@
 #import <EventKitUI/EventKitUI.h>
 #import "InterventionTypeEntity.h"
 #import "SupervisionTypeEntity.h"
-#import "PTManagedObjectContext.h"
+
 
 typedef enum {
     kTrackAssessmentSetup,
@@ -30,11 +30,11 @@ static NSString *const kTrackSupportEntityName = @"SupportActivityDeliveredEntit
 static NSString *const kTrackSupervisionGivenEntityName = @"SupervisionGivenEntity";
 static NSString *const kTrackSupervisionReceivedEntityName = @"SupervisionReceivedEntity";
 
-@interface TimeTrackViewController : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, EKEventEditViewDelegate, UINavigationControllerDelegate>
+@interface TimeTrackViewController : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate,  UINavigationControllerDelegate>
 {
     ClientPresentations_Shared *clientPresentations_Shared;
     UISearchBar *searchBar;
-    PTManagedObjectContext *managedObjectContext;
+    NSManagedObjectContext *managedObjectContext;
     __weak UILabel *totalAdministrationsLabel;
 
     PTrackControllerSetup currentControllerSetup;
@@ -99,7 +99,7 @@ static NSString *const kTrackSupervisionReceivedEntityName = @"SupervisionReceiv
 @property (nonatomic, strong) NSMutableArray *eventsList;
 @property (nonatomic, strong) EKEventEditViewController *eventViewController;
 
-- (IBAction) addEvent:(id)sender;
+//- (IBAction) addEvent:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *totalTimeHeaderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *footerLabel;
 @property (strong, nonatomic)   NSDate *totalTimeDate;

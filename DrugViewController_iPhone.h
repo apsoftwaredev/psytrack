@@ -1,7 +1,7 @@
 /*
  *  DrugViewController_iPhone.h
  *  psyTrack Clinician Tools
- *  Version: 1.5.3
+ *  Version: 1.5.4
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
@@ -21,7 +21,8 @@
 #import "UIDownloadBar.h"
 #import "DrugNameObjectSelectionCell.h"
 #import "DrugProductEntity.h"
-#import <AWSiOSSDK/AmazonServiceRequest.h>
+#import <AWSRuntime/AWSRuntime.h>
+#import <AWSRuntime/AmazonServiceRequest.h>
 
 @interface DrugViewController_iPhone : SCViewController <SCTableViewModelDataSource, SCTableViewModelDelegate, UIDownloadBarDelegate,UISearchBarDelegate,AmazonServiceRequestDelegate> {
     SCArrayOfObjectsModel *objectsModel;

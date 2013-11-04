@@ -15,8 +15,8 @@
 
 #import "AmazonClientManager.h"
 
-#import <AWSiOSSDK/AmazonLogger.h>
-#import <AWSiOSSDK/AmazonEndpoints.h>
+#import <AWSRuntime/AmazonLogger.h>
+#import <AWSRuntime/AmazonEndpoints.h>
 
 static AmazonS3Client *s3 = nil;
 static AmazonSimpleDBClient *sdb = nil;

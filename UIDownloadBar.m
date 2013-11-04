@@ -10,8 +10,8 @@
 
 #import "UIDownloadBar.h"
 #import "PTTAppDelegate.h"
-#import <AWSiOSSDK/AmazonEndpoints.h>
-
+#import <AWSRuntime/AmazonEndpoints.h>
+#import <AWSS3/AWSS3.h>
 @implementation UIDownloadBar
 
 @synthesize receivedData,
