@@ -1,7 +1,7 @@
 /*
  *  DrugDocTypeLookupEntity.m
  *  psyTrack Clinician Tools
- *  Version: 1.5.4
+ *  Version: 1.5.5
  *
  *
  *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
