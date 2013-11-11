@@ -167,6 +167,15 @@
 		B7D097F514BAC43E00C6065F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7D097F414BAC43E00C6065F /* MessageUI.framework */; };
 		B7F877BB14C9A38900F00C0D /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877B914C9A38900F00C0D /* EventKit.framework */; };
 		B7F877BC14C9A38900F00C0D /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F877BA14C9A38900F00C0D /* EventKitUI.framework */; };
+		E706280A183125B300424B85 /* AppDoc.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7062801183125B200424B85 /* AppDoc.txt */; };
+		E706280B183125B300424B85 /* AppDocType_Lookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7062802183125B200424B85 /* AppDocType_Lookup.txt */; };
+		E706280C183125B300424B85 /* application.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7062803183125B300424B85 /* application.txt */; };
+		E706280D183125B300424B85 /* ChemTypeLookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7062804183125B300424B85 /* ChemTypeLookup.txt */; };
+		E706280E183125B300424B85 /* DocType_lookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7062805183125B300424B85 /* DocType_lookup.txt */; };
+		E706280F183125B300424B85 /* Product.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7062806183125B300424B85 /* Product.txt */; };
+		E7062810183125B300424B85 /* Product_tecode.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7062807183125B300424B85 /* Product_tecode.txt */; };
+		E7062811183125B300424B85 /* RegActionDate.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7062808183125B300424B85 /* RegActionDate.txt */; };
+		E7062812183125B300424B85 /* ReviewClass_Lookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7062809183125B300424B85 /* ReviewClass_Lookup.txt */; };
 		E70B9EFF15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */; };
 		E70FACEE1697154C00E14F03 /* psyTrack.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = E70FACED1697154C00E14F03 /* psyTrack.sqlite */; };
 		E719562515FFADB60070E61D /* DTAboutViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = E71955F715FFADB60070E61D /* DTAboutViewController.strings */; };
@@ -569,15 +578,6 @@
 		E7F1CBB0159A389F006F9E95 /* MonthlyPracticumLogTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F1CBAE159A389E006F9E95 /* MonthlyPracticumLogTableViewController.m */; };
 		E7F1CBB1159A389F006F9E95 /* MonthlyPracticumLogTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F1CBAF159A389E006F9E95 /* MonthlyPracticumLogTableViewController.xib */; };
 		E7FA340415C580EF0025B18B /* psyTrainTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7FA340215C580EF0025B18B /* psyTrainTrack.xcdatamodeld */; };
-		E7FABAEE17B5A44900FAF874 /* AppDoc.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7FABAE517B5A44800FAF874 /* AppDoc.txt */; };
-		E7FABAEF17B5A44900FAF874 /* AppDocType_Lookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7FABAE617B5A44800FAF874 /* AppDocType_Lookup.txt */; };
-		E7FABAF017B5A44900FAF874 /* application.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7FABAE717B5A44800FAF874 /* application.txt */; };
-		E7FABAF117B5A44900FAF874 /* ChemTypeLookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7FABAE817B5A44900FAF874 /* ChemTypeLookup.txt */; };
-		E7FABAF217B5A44900FAF874 /* DocType_lookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7FABAE917B5A44900FAF874 /* DocType_lookup.txt */; };
-		E7FABAF317B5A44900FAF874 /* Product.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7FABAEA17B5A44900FAF874 /* Product.txt */; };
-		E7FABAF417B5A44900FAF874 /* Product_tecode.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7FABAEB17B5A44900FAF874 /* Product_tecode.txt */; };
-		E7FABAF517B5A44900FAF874 /* RegActionDate.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7FABAEC17B5A44900FAF874 /* RegActionDate.txt */; };
-		E7FABAF617B5A44900FAF874 /* ReviewClass_Lookup.txt in Resources */ = {isa = PBXBuildFile; fileRef = E7FABAED17B5A44900FAF874 /* ReviewClass_Lookup.txt */; };
 		E7FB3AAD1562A4E4000A6782 /* TwoButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */; };
 		E7FB3AB31562C867000A6782 /* AddViewABLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB21562C867000A6782 /* AddViewABLinkButtonCell.m */; };
 		E7FB3AB61562C888000A6782 /* LookupRemoveLinkButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FB3AB51562C888000A6782 /* LookupRemoveLinkButtonCell.m */; };
@@ -839,6 +839,15 @@
 		B7D097F414BAC43E00C6065F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		B7F877B914C9A38900F00C0D /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		B7F877BA14C9A38900F00C0D /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		E7062801183125B200424B85 /* AppDoc.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = AppDoc.txt; path = "../../Downloads/drugsatfda 2/modified/AppDoc.txt"; sourceTree = "<group>"; };
+		E7062802183125B200424B85 /* AppDocType_Lookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = AppDocType_Lookup.txt; path = "../../Downloads/drugsatfda 2/modified/AppDocType_Lookup.txt"; sourceTree = "<group>"; };
+		E7062803183125B300424B85 /* application.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = application.txt; path = "../../Downloads/drugsatfda 2/modified/application.txt"; sourceTree = "<group>"; };
+		E7062804183125B300424B85 /* ChemTypeLookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ChemTypeLookup.txt; path = "../../Downloads/drugsatfda 2/modified/ChemTypeLookup.txt"; sourceTree = "<group>"; };
+		E7062805183125B300424B85 /* DocType_lookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = DocType_lookup.txt; path = "../../Downloads/drugsatfda 2/modified/DocType_lookup.txt"; sourceTree = "<group>"; };
+		E7062806183125B300424B85 /* Product.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Product.txt; path = "../../Downloads/drugsatfda 2/modified/Product.txt"; sourceTree = "<group>"; };
+		E7062807183125B300424B85 /* Product_tecode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Product_tecode.txt; path = "../../Downloads/drugsatfda 2/modified/Product_tecode.txt"; sourceTree = "<group>"; };
+		E7062808183125B300424B85 /* RegActionDate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = RegActionDate.txt; path = "../../Downloads/drugsatfda 2/modified/RegActionDate.txt"; sourceTree = "<group>"; };
+		E7062809183125B300424B85 /* ReviewClass_Lookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ReviewClass_Lookup.txt; path = "../../Downloads/drugsatfda 2/modified/ReviewClass_Lookup.txt"; sourceTree = "<group>"; };
 		E70B9EFD15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSourcesSCObjectSelectionCell.h; sourceTree = "<group>"; };
 		E70B9EFE15153C7900492FF7 /* ABSourcesSCObjectSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ABSourcesSCObjectSelectionCell.m; sourceTree = "<group>"; };
 		E70FACED1697154C00E14F03 /* psyTrack.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = psyTrack.sqlite; path = ../../Desktop/psyTrack.sqlite; sourceTree = "<group>"; };
@@ -1502,15 +1511,6 @@
 		E7F1CBAE159A389E006F9E95 /* MonthlyPracticumLogTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthlyPracticumLogTableViewController.m; sourceTree = "<group>"; };
 		E7F1CBAF159A389E006F9E95 /* MonthlyPracticumLogTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MonthlyPracticumLogTableViewController.xib; sourceTree = "<group>"; };
 		E7FA340315C580EF0025B18B /* psyTrainTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = psyTrainTrack.xcdatamodel; sourceTree = "<group>"; };
-		E7FABAE517B5A44800FAF874 /* AppDoc.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = AppDoc.txt; path = "../../Downloads/drugsatfda-2 2/processed/AppDoc.txt"; sourceTree = "<group>"; };
-		E7FABAE617B5A44800FAF874 /* AppDocType_Lookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = AppDocType_Lookup.txt; path = "../../Downloads/drugsatfda-2 2/processed/AppDocType_Lookup.txt"; sourceTree = "<group>"; };
-		E7FABAE717B5A44800FAF874 /* application.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = application.txt; path = "../../Downloads/drugsatfda-2 2/processed/application.txt"; sourceTree = "<group>"; };
-		E7FABAE817B5A44900FAF874 /* ChemTypeLookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ChemTypeLookup.txt; path = "../../Downloads/drugsatfda-2 2/processed/ChemTypeLookup.txt"; sourceTree = "<group>"; };
-		E7FABAE917B5A44900FAF874 /* DocType_lookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = DocType_lookup.txt; path = "../../Downloads/drugsatfda-2 2/processed/DocType_lookup.txt"; sourceTree = "<group>"; };
-		E7FABAEA17B5A44900FAF874 /* Product.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Product.txt; path = "../../Downloads/drugsatfda-2 2/processed/Product.txt"; sourceTree = "<group>"; };
-		E7FABAEB17B5A44900FAF874 /* Product_tecode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Product_tecode.txt; path = "../../Downloads/drugsatfda-2 2/processed/Product_tecode.txt"; sourceTree = "<group>"; };
-		E7FABAEC17B5A44900FAF874 /* RegActionDate.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = RegActionDate.txt; path = "../../Downloads/drugsatfda-2 2/processed/RegActionDate.txt"; sourceTree = "<group>"; };
-		E7FABAED17B5A44900FAF874 /* ReviewClass_Lookup.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ReviewClass_Lookup.txt; path = "../../Downloads/drugsatfda-2 2/processed/ReviewClass_Lookup.txt"; sourceTree = "<group>"; };
 		E7FB3AAB1562A4E3000A6782 /* TwoButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoButtonCell.h; sourceTree = "<group>"; };
 		E7FB3AAC1562A4E4000A6782 /* TwoButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoButtonCell.m; sourceTree = "<group>"; };
 		E7FB3AB11562C867000A6782 /* AddViewABLinkButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddViewABLinkButtonCell.h; sourceTree = "<group>"; };
@@ -2107,16 +2107,16 @@
 		B79F488D142BEF0C0085D47B = {
 			isa = PBXGroup;
 			children = (
-				E7FABAE517B5A44800FAF874 /* AppDoc.txt */,
-				E7FABAE617B5A44800FAF874 /* AppDocType_Lookup.txt */,
-				E7FABAE717B5A44800FAF874 /* application.txt */,
-				E7FABAE817B5A44900FAF874 /* ChemTypeLookup.txt */,
-				E7FABAE917B5A44900FAF874 /* DocType_lookup.txt */,
-				E7FABAEA17B5A44900FAF874 /* Product.txt */,
-				E7FABAEB17B5A44900FAF874 /* Product_tecode.txt */,
-				E7FABAEC17B5A44900FAF874 /* RegActionDate.txt */,
-				E7FABAED17B5A44900FAF874 /* ReviewClass_Lookup.txt */,
 				E7C829A216FF8FA6004EEC0C /* TabFile.h */,
+				E7062801183125B200424B85 /* AppDoc.txt */,
+				E7062802183125B200424B85 /* AppDocType_Lookup.txt */,
+				E7062803183125B300424B85 /* application.txt */,
+				E7062804183125B300424B85 /* ChemTypeLookup.txt */,
+				E7062805183125B300424B85 /* DocType_lookup.txt */,
+				E7062806183125B300424B85 /* Product.txt */,
+				E7062807183125B300424B85 /* Product_tecode.txt */,
+				E7062808183125B300424B85 /* RegActionDate.txt */,
+				E7062809183125B300424B85 /* ReviewClass_Lookup.txt */,
 				E7C829A316FF8FA6004EEC0C /* TabFile.m */,
 				37F7CDD114FEC3EB00AD2C3A /* README */,
 				E724FA1716B1E7D9007508BB /* Encryption-Registration-Number-ERN.pdf */,
@@ -3000,7 +3000,7 @@
 				378DEDDD14FE73AF00CF4F12 /* LCYPassCodeEditorViewController_iPad.xib in Resources */,
 				378DEDDE14FE73AF00CF4F12 /* LCYPassCodeEditorViewController_iPhone.xib in Resources */,
 				378DEDE314FE73AF00CF4F12 /* LICENSE.txt in Resources */,
-				E7FABAF217B5A44900FAF874 /* DocType_lookup.txt in Resources */,
+				E706280E183125B300424B85 /* DocType_lookup.txt in Resources */,
 				378DEDE514FE73AF00CF4F12 /* README.markdown in Resources */,
 				37F7CDD214FEC3EB00AD2C3A /* README in Resources */,
 				37F7CE221500334800AD2C3A /* PTTMasterViewController_iPad.xib in Resources */,
@@ -3044,7 +3044,7 @@
 				37F7CF4215005F7E00AD2C3A /* TimePickerView.xib in Resources */,
 				37F7CF4315005F7E00AD2C3A /* WeightPickerCell_iPad.xib in Resources */,
 				37F7CF4415005F7E00AD2C3A /* WeightPickerCell_iPhone.xib in Resources */,
-				E7FABAF117B5A44900FAF874 /* ChemTypeLookup.txt in Resources */,
+				E706280D183125B300424B85 /* ChemTypeLookup.txt in Resources */,
 				37F7CF9015005FDB00AD2C3A /* BannerBackgroundBlue320x88.opacity in Resources */,
 				37F7CF9115005FDB00AD2C3A /* BannerBackgroundBlueWithShadow320x95.opacity in Resources */,
 				37F7CF9215005FDB00AD2C3A /* PasscodeDigitBlank80x80.opacity in Resources */,
@@ -3055,7 +3055,7 @@
 				37F7CF9D15005FDB00AD2C3A /* cliniciansTab.png in Resources */,
 				37F7CF9E15005FDB00AD2C3A /* cliniciansTab@2x.png in Resources */,
 				37F7CF9F15005FDB00AD2C3A /* colorTrain300.png in Resources */,
-				E7FABAF517B5A44900FAF874 /* RegActionDate.txt in Resources */,
+				E7062811183125B300424B85 /* RegActionDate.txt in Resources */,
 				37F7CFA015005FDB00AD2C3A /* colorTrain300@2x.png in Resources */,
 				37F7CFA515005FDB00AD2C3A /* Icon-72.png in Resources */,
 				37F7CFA615005FDB00AD2C3A /* Icon-Small-50.png in Resources */,
@@ -3066,7 +3066,7 @@
 				37F7CFAB15005FDB00AD2C3A /* iTunesArtwork.png in Resources */,
 				37F7CFB715005FDB00AD2C3A /* lock-big.png in Resources */,
 				37F7CFB815005FDB00AD2C3A /* lock.png in Resources */,
-				E7FABAF617B5A44900FAF874 /* ReviewClass_Lookup.txt in Resources */,
+				E7062812183125B300424B85 /* ReviewClass_Lookup.txt in Resources */,
 				37F7CFBD15005FDB00AD2C3A /* psychewebandpsytraintrack.png in Resources */,
 				37F7CFBF15005FDB00AD2C3A /* PsycheWebICC14a-A09aT00a-Zclear-background.png in Resources */,
 				37F7CFC015005FDB00AD2C3A /* reportTab.png in Resources */,
@@ -3111,7 +3111,7 @@
 				E798A0CE15845941006B9DBD /* ipad-slider-fill.png in Resources */,
 				E798A0CF15845941006B9DBD /* ipad-slider-fill@2x.png in Resources */,
 				E798A0D015845941006B9DBD /* ipad-slider-handle.png in Resources */,
-				E7FABAF417B5A44900FAF874 /* Product_tecode.txt in Resources */,
+				E7062810183125B300424B85 /* Product_tecode.txt in Resources */,
 				E798A0D115845941006B9DBD /* ipad-slider-handle@2x.png in Resources */,
 				E798A0D215845941006B9DBD /* ipad-slider-track.png in Resources */,
 				E798A0D315845941006B9DBD /* ipad-slider-track@2x.png in Resources */,
@@ -3128,14 +3128,14 @@
 				E798A0EA15845941006B9DBD /* slider-track.png in Resources */,
 				E798A0EB15845941006B9DBD /* slider-track@2x.png in Resources */,
 				E798A0EC15845941006B9DBD /* switch-off.png in Resources */,
-				E7FABAEF17B5A44900FAF874 /* AppDocType_Lookup.txt in Resources */,
+				E706280B183125B300424B85 /* AppDocType_Lookup.txt in Resources */,
 				E798A0ED15845941006B9DBD /* switch-off@2x.png in Resources */,
 				E798A0EE15845941006B9DBD /* switch-on.png in Resources */,
 				E798A0EF15845941006B9DBD /* switch-on@2x.png in Resources */,
 				E798A0F015845941006B9DBD /* tabbar.png in Resources */,
 				E798A0F115845941006B9DBD /* tabbar@2x.png in Resources */,
 				E798A103158507EF006B9DBD /* mapper-ipad-master.ptt in Resources */,
-				E7FABAF017B5A44900FAF874 /* application.txt in Resources */,
+				E706280C183125B300424B85 /* application.txt in Resources */,
 				E798A126158539A7006B9DBD /* ipad-menubar-full.png in Resources */,
 				E798A127158539A7006B9DBD /* ipad-menubar-full@2x.png in Resources */,
 				E798A1311585593D006B9DBD /* mapper-ipad-full.ptt in Resources */,
@@ -3153,7 +3153,7 @@
 				E7F1CB7A1598C024006F9E95 /* Reader-Button-N.png in Resources */,
 				E7F1CB7B1598C024006F9E95 /* Reader-Button-N@2x.png in Resources */,
 				E7F1CB7C1598C024006F9E95 /* Reader-Email.png in Resources */,
-				E7FABAF317B5A44900FAF874 /* Product.txt in Resources */,
+				E706280F183125B300424B85 /* Product.txt in Resources */,
 				E7F1CB7D1598C024006F9E95 /* Reader-Email@2x.png in Resources */,
 				E7F1CB7E1598C024006F9E95 /* Reader-Mark-N.png in Resources */,
 				E7F1CB7F1598C024006F9E95 /* Reader-Mark-N@2x.png in Resources */,
@@ -3208,7 +3208,7 @@
 				E7294CCF160655E700C153CE /* DemographicReportTopCell.xib in Resources */,
 				E7294CD41606622300C153CE /* DemographicReportBottomCell.xib in Resources */,
 				E7294CE5160685DC00C153CE /* DemographicReportGenerateVC.xib in Resources */,
-				E7FABAEE17B5A44900FAF874 /* AppDoc.txt in Resources */,
+				E706280A183125B300424B85 /* AppDoc.txt in Resources */,
 				E7294CE716069C5000C153CE /* DemographicReportGenerateVC_iPhone.xib in Resources */,
 				E7B7957A16124528008D3E8F /* Default-568h@2x.png in Resources */,
 				E74AD6AA1618ECD200B596FC /* ipad-background-blue-plain-small@2x.png in Resources */,
@@ -4008,8 +4008,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "12C36593-A78E-4F40-94A6-34119851EA18";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "12C36593-A78E-4F40-94A6-34119851EA18";
+				PROVISIONING_PROFILE = "3E8465FE-19B8-44B4-A63C-33D179CE7AB7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3E8465FE-19B8-44B4-A63C-33D179CE7AB7";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4073,8 +4073,8 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = PsyTrack;
-				PROVISIONING_PROFILE = "12C36593-A78E-4F40-94A6-34119851EA18";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "12C36593-A78E-4F40-94A6-34119851EA18";
+				PROVISIONING_PROFILE = "3E8465FE-19B8-44B4-A63C-33D179CE7AB7";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3E8465FE-19B8-44B4-A63C-33D179CE7AB7";
 				USER_HEADER_SEARCH_PATHS = "$(inherited) \"$(SDKROOT)/usr/lib/system\" \"$(SRCROOT)/../STV//STV 3.1.7 Pro/Source Code/SensibleTableView/SensibleTableView/STV-Core\" \"$(SRCROOT)/../.STV/STV 3.1.7 Pro/Source Code/STV+CoreData/STV+CoreData\"";
 				WRAPPER_EXTENSION = app;
 			};
