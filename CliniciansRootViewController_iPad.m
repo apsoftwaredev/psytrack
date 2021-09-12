@@ -4,9 +4,16 @@
  *  Version: 1.5.4
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
+ The MIT License (MIT)
+ Copyright © 2011- 2021 Daniel Boice
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *  Created by Daniel Boice on 9/9/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -181,8 +188,8 @@
                     UILabel *titleLabel = (UILabel *)viewShort;
                     titleLabel.text = @"Prefix:";
                     tableViewModel.tag = 1;
-                    
-                   
+
+
                 }
 
                 break;
@@ -192,8 +199,8 @@
                     UILabel *firstNameLabel = (UILabel *)viewLong;
                     firstNameLabel.text = @"First Name:";
                     cell.commitChangesLive = YES;
-                    
-                    
+
+
                 }
 
                 break;
@@ -203,7 +210,7 @@
                 {
                     UILabel *middleNameLabel = (UILabel *)viewLong;
                     middleNameLabel.text = @"Middle Name:";
-                    
+
                 }
 
                 break;
@@ -213,7 +220,7 @@
                 {
                     UILabel *lastNameLabel = (UILabel *)viewLong;
                     lastNameLabel.text = @"Last Name:";
-                    
+
                 }
 
                 break;
@@ -222,7 +229,7 @@
                 {
                     UILabel *suffixLabel = (UILabel *)viewLong;
                     suffixLabel.text = @"Suffix:";
-                    
+
                 }
 
                 break;
@@ -231,15 +238,15 @@
                 if ([cell isKindOfClass:[AddViewABLinkButtonCell class]])
                 {
                     AddViewABLinkButtonCell *addViewButtonCell = (AddViewABLinkButtonCell *)cell;
-                    
+
                     int addressBookRecordIdentifier = (int)[(NSNumber *)[cell.boundObject valueForKey:@"aBRecordIdentifier"] intValue];
-                    
+
                     if (addressBookRecordIdentifier != -1 && ![self checkIfRecordIDInAddressBook:addressBookRecordIdentifier])
                     {
                         addressBookRecordIdentifier = -1;
                         [cell.boundObject setValue:[NSNumber numberWithInt:-1 ] forKey:@"aBRecordIdentifier"];
                     }
-                    
+
                     if (addressBookRecordIdentifier != -1)
                     {
                         [addViewButtonCell toggleButtonsWithButtonOneHidden:YES];
@@ -444,28 +451,28 @@ self.tableViewModel.detailViewController.navigationItem.rightBarButtonItem = obj
 {
     bool exists = NO;
     ABAddressBookRef addressBookCheck = NULL;
-    
+
     // Do any additional setup after loading the view
     CFErrorRef myError = NULL;
     addressBookCheck = ABAddressBookCreateWithOptions(NULL, &myError);
     ABAuthorizationStatus authorizationStatus = (ABAuthorizationStatus)ABAddressBookGetAuthorizationStatus();
-    
+
     if (authorizationStatus == kABAuthorizationStatusAuthorized && recordID > -1 && addressBookCheck)
     {
         ABRecordRef person = (ABRecordRef)ABAddressBookGetPersonWithRecordID(addressBookCheck, recordID);
-        
+
         if (person)
         {
             exists = YES;
         }
     }
-    
-    
+
+
     if (addressBookCheck)
     {
         CFRelease(addressBookCheck);
     }
-    
+
     return exists;
 }
 

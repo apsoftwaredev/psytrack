@@ -4,9 +4,16 @@
  *  Version: 1.5.4
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
+ The MIT License (MIT)
+ Copyright © 2011- 2021 Daniel Boice
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *  Created by Daniel Boice on 9/26/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -94,16 +101,16 @@
         objectsModel.autoSelectNewItemCell = TRUE;
 
         if ([SCUtilities systemVersion]>=7) {
-            
+
             CGRect tableViewFrame=objectsModel.modeledTableView.frame;
-            
+
             float tableviewY=objectsModel.modeledTableView.frame.origin.y+30;
             tableViewFrame.origin.y=tableviewY;
             objectsModel.modeledTableView.transform = CGAffineTransformIdentity;
             objectsModel.modeledTableView.frame = tableViewFrame;
-            
+
             CGRect searchBarFrame=self.searchBar.frame;
-            
+
             float searchBarY=self.searchBar.frame.origin.y+60;
             searchBarFrame.origin.y=searchBarY;
             self.searchBar.transform = CGAffineTransformIdentity;
@@ -190,7 +197,7 @@
 
     objectsModel.modelActions.didFetchItemsFromStore = ^(SCArrayOfItemsModel *itemsModel, NSMutableArray *items)
     {
-        
+
         if (items.count == 0)
         {
             self.totalClientsLabel.text = @"Tap + To Add Clients";
@@ -199,8 +206,8 @@
         {
             self.totalClientsLabel.text = [NSString stringWithFormat:@"Total Clients: %i", items.count];
         }
-        
-        
+
+
     };
 
     objectsModel.modelActions.didRefresh = ^(SCTableViewModel *tableModel)
@@ -217,7 +224,7 @@
     NSString *imageNameStr = nil;
     if ([SCUtilities systemVersion] < 7)
     {
-    
+
         if ([SCUtilities is_iPad] || [SCUtilities systemVersion] >= 6)
         {
             imageNameStr = @"ipad-menubar-full.png";
@@ -231,7 +238,7 @@
         [self.searchBar setBackgroundImage:menueBarImage];
         [self.searchBar setScopeBarBackgroundImage:menueBarImage];
     }
-    
+
     UIViewController *navtitle = self.navigationController.topViewController;
 
     navtitle.title = @"Clients";

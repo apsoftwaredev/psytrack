@@ -4,9 +4,16 @@
  *  Version: 1.5.4
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
+ The MIT License (MIT)
+ Copyright © 2011- 2021 Daniel Boice
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *  Created by Daniel Boice on 9/28/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -24,14 +31,14 @@
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    
+
     NSInteger result=12;
-    
+
     if ([SCUtilities is_iPad])
     {
           result = 11;
     }
-    
+
     return result;
 }
 
@@ -106,7 +113,7 @@
 
             break;
         }
-        
+
         default:
             break;
     } /* switch */
@@ -140,7 +147,7 @@
 
     switch (indexPath.section)
     {
-      
+
 
         case 0:
         {
@@ -254,7 +261,7 @@
 
         case 8:
         {
-            
+
 
             if (indexPath.row == 0)
             {
@@ -283,7 +290,7 @@
             }
         }
             break;
-            
+
         case 11:
         {
             if (indexPath.row == 0)
@@ -568,7 +575,7 @@
         {
             //@"Clinician Groups"
 
-            
+
 
             //@"Clinician Groups"
 
@@ -637,7 +644,7 @@
                 {
                     ebpWebsitesVC = [[EBPWebsitesTableViewController alloc] initWithNibName:@"EBPWebsitesTableViewController" bundle:nil];
                 }
-                
+
                 [[self navigationController] pushViewController:ebpWebsitesVC animated:YES];
                 break;
             }
@@ -660,35 +667,35 @@
 {
     if (timeTrackViewController)
     {
-        
+
         timeTrackViewController.view = nil;
         timeTrackViewController = nil;
     }
 
     if (existingHoursViewController)
     {
-        
+
         existingHoursViewController.view = nil;
         existingHoursViewController = nil;
     }
 
     if (consultationsViewController)
     {
-       
+
         consultationsViewController.view = nil;
         consultationsViewController = nil;
     }
 
     if (ceCreditsViewController)
     {
-        
+
         ceCreditsViewController.view = nil;
         ceCreditsViewController = nil;
     }
 
     if (coursesTakenViewController)
     {
-       
+
         coursesTakenViewController.view = nil;
         coursesTakenViewController = nil;
     }
@@ -708,7 +715,7 @@
 
     if (presentationsViewController)
     {
-       
+
         presentationsViewController.view = nil;
         presentationsViewController = nil;
     }
@@ -721,7 +728,7 @@
 
     if (mediaAppearanceVC)
     {
-       
+
         mediaAppearanceVC.view = nil;
         mediaAppearanceVC = nil;
     }
@@ -734,14 +741,14 @@
 
     if (otherActivityVC)
     {
-       
+
         otherActivityVC.view = nil;
         otherActivityVC = nil;
     }
 
     if (drugViewController_iPhone)
     {
-       
+
         drugViewController_iPhone.view = nil;
 
         drugViewController_iPhone = nil;
@@ -749,35 +756,35 @@
 
     if (clinicianGroupsViewController)
     {
-       
+
         clinicianGroupsViewController.view = nil;
         clinicianGroupsViewController = nil;
     }
 
     if (clinicianGroupsViewController)
     {
-       
+
         clientGroupsViewController.view = nil;
         clientGroupsViewController = nil;
     }
 
     if (lockSettingsVC)
     {
-       
+
         lockSettingsVC.view = nil;
         lockSettingsVC = nil;
     }
 
     if (support)
     {
-       
+
         support.view = nil;
         support = nil;
     }
 
     if (about)
     {
-       
+
         about.view = nil;
 
         about = nil;

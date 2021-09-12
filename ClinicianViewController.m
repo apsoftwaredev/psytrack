@@ -4,9 +4,16 @@
  *  Version: 1.5.4
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
+ The MIT License (MIT)
+ Copyright © 2011- 2021 Daniel Boice
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *  Created by Daniel Boice on 6/19/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -87,25 +94,25 @@
         objectsModel = [[SCArrayOfObjectsModel_UseSelectionSection alloc] initWithTableView:self.tableView entityDefinition:self.clinicianDef];
         objectsModel.tag = 0;
         PTTAppDelegate *appDelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
-       
-        
+
+
         if ([SCUtilities systemVersion]>=7) {
-            
+
              CGRect tableViewFrame=objectsModel.modeledTableView.frame;
-            
+
            float tableviewY=objectsModel.modeledTableView.frame.origin.y+30;
             tableViewFrame.origin.y=tableviewY;
             objectsModel.modeledTableView.transform = CGAffineTransformIdentity;
             objectsModel.modeledTableView.frame = tableViewFrame;
-            
+
             CGRect searchBarFrame=self.searchBar.frame;
-            
+
             float searchBarY=self.searchBar.frame.origin.y+60;
             searchBarFrame.origin.y=searchBarY;
             self.searchBar.transform = CGAffineTransformIdentity;
             self.searchBar.frame = searchBarFrame;
         }
-        
+
         [self.view setBackgroundColor:appDelegate.window.backgroundColor];
         // Set the view controller's theme
 
@@ -201,7 +208,7 @@
     objectsModel.pullToRefreshView.arrowImageView.image = [UIImage imageNamed:@"blueArrow.png"];
     objectsModel.modelActions.didFetchItemsFromStore = ^(SCArrayOfItemsModel *itemsModel, NSMutableArray *items)
     {
-        
+
         if (items.count == 0)
         {
             self.totalCliniciansLabel.text = @"Tap + To Add Clinicians";
@@ -211,10 +218,10 @@
             self.totalCliniciansLabel.text = [NSString stringWithFormat:@"Total Clinicians: %i", items.count];
         }
 
-       
+
     };
 
-   
+
 
     if (![SCUtilities is_iPad])
     {
@@ -225,7 +232,7 @@
     }
 
     //change back button image
-   
+
     if ([SCUtilities systemVersion] < 7)
     {
         UIImage *menueBarImage = [UIImage imageNamed:@"iPad-menubar-full.png"];
@@ -248,22 +255,22 @@
         }
     }
     else{
-    
+
         if ([SCUtilities systemVersion]>=7) {
-            
-            
+
+
 //            [self.searchBar setBackgroundImage:nil];
-            
+
 //            [self.searchBar setBarTintColor:[UIColor clearColor]];
-            
+
             DLog(@"color %@",[self.searchBar backgroundColor]);
-            
+
             [self.searchBar setBackgroundColor:[UIColor colorWithRed:0.217586 green:0.523853 blue:0.67796 alpha:1.0]];
-            
+
         }
 
-    
-    
+
+
     }
     [(PTTAppDelegate *)[UIApplication sharedApplication].delegate application :[UIApplication sharedApplication]
      willChangeStatusBarOrientation :[[UIApplication sharedApplication] statusBarOrientation]
@@ -738,20 +745,20 @@
         ClinicianEntity *clinicianObject = (ClinicianEntity *)cellManagedObject;
         if ([cellManagedObject respondsToSelector:@selector(entity)] && [cellManagedObject.entity.name isEqualToString:@"ClinicianEntity"])
         {
-            
+
             PTTAppDelegate *appdelegate = (PTTAppDelegate *)[UIApplication sharedApplication].delegate;
             UIView *notificationSuperView;
-            
+
             if (clinicianObject.hasSupervisedTime) {
                 [appdelegate displayNotification:@"Delete associated Assessments, Interventions, or Supervision records before deleting this clinician." forDuration:3.5 location:kPTTScreenLocationTop inView:notificationSuperView];
                 return NO;
             }
-            
+
             BOOL myInformation = (BOOL)[(NSNumber *)[cell.boundObject valueForKey:@"myInformation"] boolValue];
             if (myInformation)
             {
-                
-                
+
+
                 if (!deletePressedOnce)
                 {
                     [appdelegate displayNotification:@"Can't Delete Your Own Clinician Record. Press Delete again to clear your information." forDuration:3.5 location:kPTTScreenLocationTop inView:notificationSuperView];

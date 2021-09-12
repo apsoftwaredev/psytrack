@@ -4,9 +4,16 @@
  *  Version: 1.5.4
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
+ The MIT License (MIT)
+ Copyright © 2011- 2021 Daniel Boice
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *  Created by Daniel Boice on 9/21/2011.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -285,7 +292,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 
         backgroundPattern = [UIImage imageNamed:@"ipad-background-blue-plain-small.png"];
         tabBarImageNameStr = @"tabbar.png";
-        
+
     }
 
     clinicianToolsLabel.text = NSLocalizedStringWithDefaultValue(@"Clinician Tools", @"Root", [NSBundle mainBundle], @"Clinician Tools", @"subname for the application");
@@ -360,7 +367,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 
 - (void) customizeGlobalTheme
 {
-    
+
     if ([SCUtilities systemVersion] <7){
     NSString *menuBarImageName = nil;
 
@@ -427,9 +434,9 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
         [[UISearchBar appearance]setScopeBarBackgroundImage:nil];
         [[UISearchBar appearance]setBackgroundColor:[UIColor clearColor]];
         [[UIPickerView appearance]setTintAdjustmentMode:UIViewTintAdjustmentModeAutomatic];
-    
+
     }
-  
+
 }
 
 
@@ -717,7 +724,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 {
     switch (alertView.tag)
     {
-           
+
         case 21:
             break;
         case 38:
@@ -2440,39 +2447,39 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
             NSError *error = nil;
 
 //            if (![managedObjectContext save:&error]  )
-//                
+//
 //            {
 //
 ////                [self repairForSaveError:error];
 //            }
-            
+
             if (![managedObjectContext save:&error])
             {
                 if ([self validateRequiredFields]) {
                     NSString *  alertMessage = [NSString stringWithFormat:@"An error while saving the database.  The app will now terminate. If problem persists contact support@psytrack.com"];
-                    
+
                     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error Setting up the database." message:alertMessage
                                                                     delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-                    
+
                     alert.tag = kAlertTagErrorExitApp;
-                    
+
                     [alert show];
 
                 }
-                
+
             }
 
-            
+
             else if (addedPrepopulatedData){
-            
-                
-            
+
+
+
                 [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithBool:addedPrepopulatedData] forKey:kPTHasPrepopulated];
-                
+
                 [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            
-            
+
+
+
             }
         }
     }
@@ -2533,13 +2540,13 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 }
 
 -(BOOL)validateRequiredFields{
-    
+
     BOOL valid=YES;
-    
+
     ValidateMOC *validationObj=[[ValidateMOC alloc]init];
-    
+
     BOOL supervisorsValid=validationObj.supervisorsAllPresent;
-    
+
     DLog(@"checking supervisors...");
     if (!supervisorsValid) {
         UIAlertView *alert = [[UIAlertView alloc]
@@ -2556,8 +2563,8 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
     {
         DLog(@"checking sites...");
         BOOL sitesValid=validationObj.siteAllPresent;
-        
-        
+
+
         if (!sitesValid) {
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle: @"Missing Supervisor Field"
@@ -2569,14 +2576,14 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
             [alert show];
             valid=sitesValid;
         }
-        
+
         else
         {
-            
+
             DLog(@"checking dates of service...");
             BOOL dosValid=validationObj.dateOfServiceAllPresent;
-            
-            
+
+
             if (!dosValid) {
                 UIAlertView *alert = [[UIAlertView alloc]
                                       initWithTitle: @"Missing Supervisor Field"
@@ -2588,13 +2595,13 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                 [alert show];
                 valid=dosValid;
             }
-            
+
             else{
-                
+
                 DLog(@"checking training program...");
                 BOOL trainingProgramValid=validationObj.trainingProgramAllPresent;
-                
-                
+
+
                 if (!trainingProgramValid) {
                     UIAlertView *alert = [[UIAlertView alloc]
                                           initWithTitle: @"Missing Supervisor Field"
@@ -2605,15 +2612,15 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                     alert.tag =21; // should use a different define (e.g. to 1) each time you use an alertview in a class, as each will call the same clickedButtonAtIndex selector.
                     [alert show];
                     valid=trainingProgramValid;
-                    
-                    
-                    
+
+
+
                 }
                 else{
                     DLog(@"checking interventions...");
                     BOOL interventionValid=validationObj.interventionTypeAllPresent;
-                    
-                    
+
+
                     if (!interventionValid) {
                         UIAlertView *alert = [[UIAlertView alloc]
                                               initWithTitle: @"Missing Supervisor Field"
@@ -2624,15 +2631,15 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                         alert.tag =21; // should use a different define (e.g. to 1) each time you use an alertview in a class, as each will call the same clickedButtonAtIndex selector.
                         [alert show];
                         valid=interventionValid;
-                        
-                        
-                        
+
+
+
                     }
                     else{
                         DLog(@"checking assessments...");
                         BOOL assessmentValid=validationObj.assessmentTypeAllPresent;
-                        
-                        
+
+
                         if (!assessmentValid) {
                             UIAlertView *alert = [[UIAlertView alloc]
                                                   initWithTitle: @"Missing Supervisor Field"
@@ -2643,18 +2650,18 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                             alert.tag =21; // should use a different define (e.g. to 1) each time you use an alertview in a class, as each will call the same clickedButtonAtIndex selector.
                             [alert show];
                             valid=assessmentValid;
-                            
-                            
-                            
+
+
+
                         }
-                        
+
                         else
                         {
-                            
+
                             DLog(@"checking supervision...");
                             BOOL supervisionValid=validationObj.supervisionTypeAllPresent;
-                            
-                            
+
+
                             if (!supervisionValid) {
                                 UIAlertView *alert = [[UIAlertView alloc]
                                                       initWithTitle: @"Missing Supervisor Field"
@@ -2665,20 +2672,20 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                                 alert.tag =21; // should use a different define (e.g. to 1) each time you use an alertview in a class, as each will call the same clickedButtonAtIndex selector.
                                 [alert show];
                                 valid=supervisionValid;
-                                
-                                
-                                
+
+
+
                             }
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+
+
+
+
+
+
+
                         }}}}}}
-    
-    
+
+
     return valid;
 }
 
@@ -3229,7 +3236,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
     if ([managedObjectContext__ hasChanges]) {
         [managedObjectContext__ save:&error];
     }
-    
+
     [managedObjectContext__ reset];
 
 }
@@ -3259,21 +3266,21 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
              [moc setPersistentStoreCoordinator:coordinator];
              @try
              {
-                 
+
                  if ([SCUtilities systemVersion] <7){
-                 
+
                  [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(mergeChangesFrom_iCloud:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:coordinator];
-                     
+
                  }
                  else{
-                 
+
                      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(storesWillChange:) name:NSPersistentStoreCoordinatorStoresWillChangeNotification object:coordinator];
-                     
-                      
-                
+
+
+
                      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(saveContext) name:NSPersistentStoreCoordinatorStoresDidChangeNotification object:coordinator];
-                 
-                 
+
+
                  }
              }
              @catch (NSException *exception)
@@ -3372,12 +3379,12 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 //
                        // If the expected store doesn't exist, copy the default store.
                 NSNumber *prepopulatedNum = (NSNumber *)[[NSUserDefaults standardUserDefaults] valueForKey:kPTHasPrepopulated];
-        
+
                 if (![prepopulatedNum boolValue])
                        {
-                           
-                              
-                               
+
+
+
 
                                NSString *statusMessage = [self resetDefaultLockKeychainSettingsWithReset:YES];
                                if (![statusMessage isEqualToString:@"Welcome to PsyTrack Clinician Tools.  Thank you for your purchase."])
@@ -3393,7 +3400,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                                {
                                    firstRun = YES;
                                }
-                           
+
                        }
 
 //        if (![fileManager fileExistsAtPath:storePath]) {
@@ -3430,24 +3437,24 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                        NSDictionary *options;
 
                        if ([SCUtilities systemVersion]>=7) {
-                       
+
                            options =[NSDictionary dictionaryWithObjectsAndKeys:@"PsyTrack-Clinician-Tools", NSPersistentStoreUbiquitousContentNameKey,nil];
-                           
-                           
-                           
-                           
-                           
+
+
+
+
+
                        }
                        else if (!firstRun && !resetDatabase && [coreDataCloudContent length] != 0 && [self reachable])
                        {
                            // iCloud is available
                            cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
 
-                           
+
                                options = [NSDictionary dictionaryWithObjectsAndKeys:@"SL2GGUR9DM.com.psychewebLLC.psytrack.cliniciantools", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];
-                           
-                           
-        
+
+
+
                        }
                        else
                        {
@@ -3467,26 +3474,26 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 
                        [psc lock];
 
-        
-      
+
+
                        if (![psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error] )
                        {
-                           
+
                           NSString *  alertMessage = [NSString stringWithFormat:@"An error occured setting up the database.  The app will now terminate. If problem persists contact support@psytrack.com"];
-                           
+
                           UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error Setting up the database." message:alertMessage
                                                                           delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-                           
+
                            alert.tag = kAlertTagErrorExitApp;
-                           
+
                            [alert show];
 
-                           
-                           
-                           
-                           
-                           
-                           
+
+
+
+
+
+
                            /*
                               Replace this implementation with code to handle the error appropriately.
 
@@ -3502,10 +3509,10 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
                        }
                        else
                        {
-                           
-                           
-                           
-                           
+
+
+
+
                            [psc unlock];
 
                            NSError *errorSettingAttributes = nil;
@@ -3522,20 +3529,20 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 
                            }
 
-                           
-                           
-                           
-                          
+
+
+
+
                            PrepopulateAndRemoveDuplicates *prepopulate=[[PrepopulateAndRemoveDuplicates alloc]init];
-                                                     
+
                            if (![prepopulatedNum boolValue]) {
-                               
+
                                [prepopulate prepopulate];
-                               
+
                                addedPrepopulatedData=YES;
                            }
                            [prepopulate removeDuplicatePrepopulatedData];
-                           
+
                            // tell the UI on the main thread we finally added the store and then
                            // post a custom notification to make your views do whatever they need to such as tell their
                            // NSFetchedResultsController to -performFetch again now there is a real store
@@ -3580,7 +3587,7 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 //	NSFileManager *fileManager		= [NSFileManager defaultManager];
 //	NSURL *cloudURL					= [fileManager URLForUbiquityContainerIdentifier:nil];
 //	NSString* coreDataCloudContent	= [[cloudURL path] stringByAppendingPathComponent:@"psyTrack"];
-//    
+//
 //    NSLog(@"cloud url content folder %@ and %@" ,cloudURL, [fileManager contentsOfDirectoryAtPath:cloudURL.path error:nil]);
 //	return [NSURL fileURLWithPath:coreDataCloudContent];
 //}
@@ -3593,12 +3600,12 @@ NSString *const kSCModelDidCommitDataNotification = @"SCModelDidCommitData";
 //    NSError *error = nil;
 //    NSURL *url = [self transactionLogsURL];
 //    NSFileManager *fileManager	= [NSFileManager defaultManager];
-//    
-//	                            
+//
+//
 //							[fileManager removeItemAtURL:url error:&error];
 //							if (error)
 //								[self displayNotification:@"Error occured removing old transaction logs."];
-//						
+//
 //	if (error)
 //		[self displayNotification:@"Error occured removing old transaction logs."];
 //}

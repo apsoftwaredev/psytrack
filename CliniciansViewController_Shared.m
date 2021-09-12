@@ -4,9 +4,16 @@
  *  Version: 1.5.4
  *
  *
- *	THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY UNITED STATES
- *	INTELLECTUAL PROPERTY LAW AND INTERNATIONAL TREATIES. UNAUTHORIZED REPRODUCTION OR
- *	DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
+ The MIT License (MIT)
+ Copyright © 2011- 2021 Daniel Boice
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *  Created by Daniel Boice on 9/23/11.
  *  Copyright (c) 2011 PsycheWeb LLC. All rights reserved.
@@ -1454,15 +1461,15 @@
                 ClinicianEntity *clinicianObject = (ClinicianEntity *)cellManagedObject;
 
                 cell.textLabel.text = clinicianObject.combinedName;
-                
+
                 if ([clinicianObject.myInformation boolValue]) {
                     cell.backgroundColor=[UIColor yellowColor];
                     if (![clinicianObject.firstName isEqualToString:@"Enter Your"]) {
                         cell.textLabel.text=[@"(ME) "stringByAppendingString:cell.textLabel.text];
                     }
-                    
+
                 }
-                
+
             }
         }
 
@@ -1712,11 +1719,11 @@
                 imageNameStr = @"menubar.png";
             }
             if ([SCUtilities systemVersion]<7) {
-           
+
             UIImage *menueBarImage = [UIImage imageNamed:imageNameStr];
             [detailTableViewModel.viewController.navigationController.navigationBar setBackgroundImage:menueBarImage forBarMetrics:UIBarMetricsDefault];
-                
-            
+
+
             }
         }
         else
@@ -2268,7 +2275,7 @@
                 exists = YES;
             }
         }
-    
+
 
     if (addressBookCheck)
     {
@@ -2289,7 +2296,7 @@
 
     ABAddressBookRef addressBookForPeoplePickerController = NULL;
 
-   
+
         if (ABAddressBookGetAuthorizationStatus() != kABAuthorizationStatusAuthorized)
         {
             CFErrorRef myError = NULL;
@@ -2318,7 +2325,7 @@
             [appDelegate displayNotification:@"Enable PsyTrack contacts access under the device restrictions settings to use this feature." forDuration:10.0 location:kPTTScreenLocationTop inView:nil];
             return;
         }
-    
+
 
     if (proceed)
     {
@@ -2369,7 +2376,7 @@
         existingPersonRecordID = -1;
     }
 
-   
+
         if (existingPersonRecordID == -1)
         {
             CFErrorRef myError = NULL;
@@ -2536,7 +2543,7 @@
         {
             [self showPersonViewControllerForRecordID:(int)existingPersonRecordID];
         }
-    
+
 }
 
 
@@ -2547,7 +2554,7 @@
     ABAddressBookRef addressBookForShowPerson;
 
     BOOL proceed = NO;
-   
+
         CFErrorRef myError = NULL;
         addressBookForShowPerson = ABAddressBookCreateWithOptions(NULL, &myError);
 
@@ -2573,7 +2580,7 @@
 
             return;
         }
-    
+
 
     if (proceed && addressBookForShowPerson)
     {
@@ -2667,7 +2674,7 @@
     {
         UITableView *personViewTableView = (UITableView *)[viewController.view.subviews objectAtIndex:0];
         if ([SCUtilities systemVersion]<7) {
-       
+
         if ([SCUtilities is_iPad] || [SCUtilities systemVersion] >= 6)
         {
             [personViewTableView setBackgroundColor:[UIColor clearColor]];
@@ -2743,7 +2750,7 @@
     else{
         return NO;
     }
-   
+
 }
 
 
@@ -3052,11 +3059,11 @@
             UILabel *firstNameLabel = (UILabel *)viewLongerTextLabelView;
 
             ABRecordRef recordRef = nil;
-            
+
             if ([SCUtilities systemVersion]>=7){recordRef= selectedRecordInPeoplePicker_;}
             else
                 recordRef=personVCFromSelectionList_.displayedPerson;
-            
+
             int aBRecordID = ABRecordGetRecordID( (ABRecordRef)recordRef );
             if (aBRecordID && [firstNameLabel.text isEqualToString:@"First Name:"])
             {
@@ -3240,7 +3247,7 @@
     @try
     {
         BOOL proceed = NO;
-        
+
             if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
             {
                 CFErrorRef myError = NULL;
@@ -3252,7 +3259,7 @@
             {
                 return;
             }
-        
+
 
         if (proceed && addressBookToChangOrAddName && !source)
         {
@@ -3476,7 +3483,7 @@
     ABAddressBookRef addressBookToCheckPerson = nil;
 
     BOOL proceed = NO;
-   
+
         if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
         {
             CFErrorRef myError = NULL;
@@ -3488,7 +3495,7 @@
         {
             return NO;
         }
-    
+
 
     BOOL personExistsInGroup = NO;
     if (proceed && addressBookToCheckPerson)
@@ -3592,7 +3599,7 @@
     ABAddressBookRef addressBookToSyncronize = NULL;
 
     BOOL proceed = NO;
-    
+
         if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
         {
             CFErrorRef myError = NULL;
@@ -3604,7 +3611,7 @@
         {
             return;
         }
-    
+
 
     if (proceed && addressBookToSyncronize)
     {
@@ -3678,7 +3685,7 @@
     ABAddressBookRef addressBookToAddNewPerson = nil;
 
     BOOL proceed = NO;
-    
+
         if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
         {
             CFErrorRef myError = NULL;
@@ -3690,7 +3697,7 @@
         {
             return;
         }
-    
+
 
     if (proceed && addressBookToAddNewPerson)
     {
@@ -3754,7 +3761,7 @@
     ABAddressBookRef addressBookToRemovePerson = nil;
 
     BOOL proceed = NO;
-    
+
         if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
         {
             CFErrorRef myError = NULL;
@@ -3766,7 +3773,7 @@
         {
             return;
         }
-    
+
 
     if (proceed && addressBookToRemovePerson)
     {
@@ -3829,7 +3836,7 @@
     ABAddressBookRef addressBookToGetSource;
 
     BOOL proceed = NO;
-    
+
         if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
         {
             CFErrorRef myError = NULL;
@@ -3841,7 +3848,7 @@
         {
             return -1;
         }
-    
+
 
     BOOL iCloudEnabled = (BOOL)[[NSUserDefaults standardUserDefaults] valueForKey : @"icloud_preference"];
 
