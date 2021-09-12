@@ -2,7 +2,9 @@ psyTrack Clinician Tools
 Developed by Dan Boice, M.S. Copyright (c) 2011-2012
 
 
-[![Psytrack Clinician Tools Preview Video](https://img.youtube.com/vi/rW-pZBB_bKk/maxresdefault.jpg)](https://youtu.be/rW-pZBB_bKk)
+[![Alt text](https://img.youtube.com/vi/rW-pZBB_bKk/0.jpg)](https://www.youtube.com/watch?v=rW-pZBB_bKk)
+
+[Psytrack Clinician Tools Preview Video](https://youtu.be/rW-pZBB_bKk)
 
 The MIT License (MIT)
 Copyright © 2011- 2021 Daniel Boice
